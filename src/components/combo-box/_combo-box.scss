@@ -10,8 +10,26 @@
 @import '../../globals/scss/theme';
 @import '../list-box/list-box';
 
-@include exports('combo-box') {
+@mixin combo-box {
   .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
     padding: 0;
+  }
+}
+
+@mixin combo-box--x {
+  .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box {
+    border-bottom: none;
+  }
+}
+
+@include exports('combo-box') {
+  @if feature-flag-enabled('components-x') {
+    @include combo-box--x;
+  } @else {
+    @include combo-box;
   }
 }
