@@ -145,7 +145,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {
-    .bx--overflow-menu-options__btn {
+    .#{$prefix}--overflow-menu-options__btn {
       &:hover,
       &:focus {
         color: $inverse-01;
