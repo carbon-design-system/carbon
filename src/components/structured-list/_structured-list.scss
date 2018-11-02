@@ -301,17 +301,26 @@
   }
 
   // Skeleton State
-  .#{$prefix}--structured-list.#{$prefix}--skeleton .#{$prefix}--structured-list-th {
-    &:first-child {
-      width: 8%;
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        width: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
     }
 
-    &:nth-child(3n + 2) {
-      width: 30%;
-    }
-
-    &:nth-child(3n + 3) {
-      width: 15%;
+    .#{$prefix}--structured-list-th span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
     }
   }
 

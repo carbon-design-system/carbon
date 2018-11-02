@@ -257,7 +257,7 @@
     }
   }
 
-  .#{$prefix}--select-input:disabled ~ .bx--select__arrow {
+  .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
     fill: $disabled;
   }
 
@@ -346,7 +346,7 @@
     @include focus-outline('invalid');
   }
 
-  .#{$prefix}--select--inline .bx--select-input:disabled {
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     color: $disabled;
     cursor: not-allowed;
 
@@ -369,7 +369,7 @@
     }
   }
 
-  .#{$prefix}--select--inline .bx--select-input:disabled {
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     cursor: not-allowed;
     // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
     background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23bebebe'%3e%3cpath d='M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z'/%3e%3c/svg%3e");
@@ -377,7 +377,7 @@
     background-position: calc(100% - 8px) 50%;
   }
 
-  .#{$prefix}--select--inline .bx--select-input:disabled ~ .#{$prefix}--select__arrow {
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
     display: none;
   }
 
