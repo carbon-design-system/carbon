@@ -65,7 +65,6 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
       ...
     }
   }
-
 }
 ```
 
