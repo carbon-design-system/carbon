@@ -21,11 +21,28 @@ const pollForBrowserSync = callback => {
   }
 };
 
+/**
+ * Normalize Fractal Component instance data so the data structure can be shared with non-Fractal environment.
+ * @param {Object} data The Fractal Component instance data
+ * @param {string} [data.notes] The notes of the component.
+ * @param {Object[]} [data.variants] The variants of the component.
+ * @returns {Object} The normalized version of the Fractal Component instance data.
+ */
+const normalizeComponentItem = ({ notes, variants, items = [], ...other }) => ({
+  ...other,
+  notes,
+  items: (!variants || !variants.items ? items : variants.items).map(subItem => ({
+    ...subItem,
+    // Avoid using notes copied from component to variant
+    notes: notes === subItem.notes ? undefined : subItem.notes,
+  })),
+});
+
 pollForBrowserSync(() => {
   const renderRoot = document.querySelector('[data-renderroot]');
   if (renderRoot) {
     const props = {
-      componentItems: window.componentItems,
+      componentItems: window.componentItems.map(normalizeComponentItem),
       docItems: window.docItems,
       portSassBuild: window.portSassBuild,
       routeWithQueryArgs: window.routeWithQueryArgs,

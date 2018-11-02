@@ -291,7 +291,7 @@
     outline-offset: -1px;
   }
 
-  .#{$prefix}--tile--is-selected .bx--tile__checkmark {
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
     opacity: 1;
   }
 

@@ -7,13 +7,14 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-@include exports('inline-notifications') {
+@mixin inline-notifications {
   .#{$prefix}--inline-notification {
     @include reset;
     @include font-family;
@@ -100,5 +101,113 @@
     position: absolute;
     top: 3px;
     right: 1px;
+  }
+}
+
+@mixin inline-notifications--x {
+  .#{$prefix}--inline-notification {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include typescale('zeta');
+    display: flex;
+    height: auto;
+    min-height: rem(48px);
+    min-width: rem(288px);
+    max-width: rem(288px);
+    color: $text-01;
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-md;
+
+    @include breakpoint(md) {
+      max-width: rem(608px);
+    }
+
+    @include breakpoint(lg) {
+      max-width: rem(736px);
+    }
+
+    @include breakpoint(max) {
+      max-width: rem(832px);
+    }
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include notification--experimental($support-01, $notification-error-background-color);
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include notification--experimental($support-02, $notification-success-background-color);
+  }
+
+  .#{$prefix}--inline-notification--info {
+    @include notification--experimental($support-04, $notification-info-background-color);
+  }
+
+  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
+    display: none;
+  }
+
+  .#{$prefix}--inline-notification--warning {
+    @include notification--experimental($support-03, $notification-warning-background-color);
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    margin: 0 $spacing-md;
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    height: rem(20px);
+    width: rem(20px);
+    min-height: rem(20px);
+    min-width: rem(20px);
+    margin-right: $spacing-md;
+    margin-top: rem(14px);
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $spacing-sm 0;
+    max-width: 75%;
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include typescale('zeta');
+    font-weight: 600;
+    margin: 0 $spacing-2xs 0 0;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include typescale('zeta');
+    word-break: break-word;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('reset');
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+}
+
+@include exports('inline-notifications') {
+  @if feature-flag-enabled('components-x') {
+    @include inline-notifications--x;
+  } @else {
+    @include inline-notifications;
   }
 }

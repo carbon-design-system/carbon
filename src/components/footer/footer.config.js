@@ -12,6 +12,9 @@ const items = [
 ];
 
 module.exports = {
+  meta: {
+    useIframe: true,
+  },
   variants: [
     {
       name: 'default',

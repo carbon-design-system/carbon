@@ -45,6 +45,29 @@ Follow BEM naming convention for classes. Again, the only thing we do differentl
 .#{$prefix}--block--modifier
 ```
 
+Avoid nesting selectors, this will make it easier to maintain in the future.
+
+```scss
+<-- Don't do this -->
+.#{$prefix}--inline-notification {
+  .#{$prefix}--btn {
+    &:hover {
+      svg {
+        ...
+      }
+    }
+  }
+}
+
+<!-- Do this instead -->
+.#{$prefix}--inline-notification .#{$prefix}--btn {
+    &:hover svg {
+      ...
+    }
+  }
+}
+```
+
 ### Start a new `block` or `element`?
 
 A nested element can use a new block name as long as the styles are independent of the parent.
@@ -108,6 +131,11 @@ Supported [properties in `.config.js`](https://fractal.build/guide/components/co
   - `context`: The data used for rendering `.hbs`
   - `view`: The basename of the `.hbs` file for variant markup (Unlike [default Fractal environment](https://fractal.build/guide/components/configuration#view), this property should point to the basename of a `.hbs` file under `demo` directory or `src` directory, _without_ its path)
   - `preview`: The basename of the `.hbs` file for the markup that lays out the variant markup, in "full render" mode (Unlike [default Fractal environment](https://fractal.build/guide/components/configuration#preview), this property should point to the basename of a `.hbs` file under `demo` directory or `src` directory, _without_ `@` symbol)
+  - `meta`: Some metadata. Carbon vanilla development environment reads the following ones specifically:
+    - `linkOnly`: Only full-page demo is allowed
+    - `useIframe`: Use of `<iframe>` for non full-page demo
+    - `xVersionOnly`: Supports "experimental" theme only
+    - `xVersionNotSupported`: "Experimental" theme is not supported
 
 What `.hbs` file is used for rendering a variant is determined by searching for `.hbs` files in `demo` or `src` directory and find one whose basename matches one of the following (the priority is the following order):
 
