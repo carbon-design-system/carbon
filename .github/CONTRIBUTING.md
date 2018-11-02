@@ -58,7 +58,7 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 }
 
 <!-- Do this instead -->
-.#{$prefix}--inline-notification svg {
+.#{$prefix}--inline-notification:hover svg {
   ...
 }
 ```
