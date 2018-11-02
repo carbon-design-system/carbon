@@ -124,9 +124,9 @@
   $field-01: $ibm-colors__gray--10 !default !global;
   $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
   $support-01: $ibm-colors__red--60 !default !global;
-  $support-02: $ibm-colors__green--50 !default !global;
+  $support-02: $ibm-colors__green--60 !default !global;
   $support-03: $ibm-colors__yellow--20 !default !global;
-  $support-04: $ibm-colors__blue--50 !default !global;
+  $support-04: $ibm-colors__blue--70 !default !global;
 
   // TODO: Define for experimental
   $nav-01: $color__navy-gray-1 !default !global;
@@ -208,6 +208,12 @@
   // Modal
   $modal-border-top: $brand-01 4px solid !default !global;
   $modal-footer-background-color: $ui-03 !default !global;
+
+  // Notification
+  $notification-info-background-color: $ibm-colors__blue--10 !default !global;
+  $notification-error-background-color: $ibm-colors__red--10 !default !global;
+  $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
+  $notification-success-background-color: $ibm-colors__green--10 !default !global;
 
   // Progress Indicator
   $progress-indicator-bar-width: 1px inset transparent !default !global;
