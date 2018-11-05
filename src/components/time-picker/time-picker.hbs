@@ -8,7 +8,7 @@
         Invalid time.
       </div>
     </div>
-    <div class="bx--time-picker__select bx--select bx--select--inline">
+    <div class="bx--time-picker__select bx--select {{#if componentsX}}{{else}}bx--select--inline{{/if}}">
       <label for="select-id-1" class="bx--label bx--visually-hidden">Select AM/PM</label>
       <select id="select-id-1" class="bx--select-input">
         <option class="bx--select-option" value="AM">AM</option>
@@ -18,7 +18,7 @@
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
     </div>
-    <div class="bx--time-picker__select bx--select bx--select--inline">
+    <div class="bx--time-picker__select bx--select {{#if componentsX}}{{else}}bx--select--inline{{/if}}">
       <label for="select-id-2" class="bx--label bx--visually-hidden">Select time zone</label>
       <select id="select-id-2" class="bx--select-input">
         <option class="bx--select-option" value="option-1">Time zone 1</option>
