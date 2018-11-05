@@ -207,21 +207,21 @@
     }
   }
 
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+    background-color: $ui-01;
+    transition: none;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+
   .#{$prefix}--overflow-menu__icon {
     height: rem(16px);
     width: rem(16px);
     fill: $ui-05;
   }
 
-  .#{$prefix}--overflow-menu--open {
-    @include layer('overlay');
-    background-color: $ui-01;
-    z-index: z('floating');
-  }
-
   .#{$prefix}--overflow-menu-options {
     @include reset;
-    @include layer('overlay');
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
     display: none;
     flex-direction: column;
     align-items: flex-start;
@@ -232,6 +232,42 @@
     list-style: none;
     left: 100px;
     top: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      background-color: $ui-01;
+      transition: background-color $transition--base;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    top: rem(-3px);
+    left: 0;
+    width: rem(32px);
+    height: rem(3px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
+    bottom: rem(-6px);
+    left: 0;
+    width: rem(32px);
+    height: rem(6px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
+    right: rem(-6px);
+    top: 0;
+    height: rem(32px);
+    width: rem(6px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
+    top: 0;
+    left: rem(-6px);
+    height: rem(32px);
+    width: rem(6px);
   }
 
   .#{$prefix}--overflow-menu-options--open {
@@ -244,6 +280,7 @@
     background-color: transparent;
     align-items: center;
     width: 100%;
+    height: rem(32px);
     padding: 0;
     transition: background-color $transition--base;
   }
@@ -264,24 +301,17 @@
     display: inline-block;
     background-color: transparent;
     text-align: left;
-    padding: $spacing-xs $spacing-md;
+    padding: 0 $spacing-md;
     cursor: pointer;
     color: $text-01;
     max-width: 11.25rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: outline $transition--base;
+    transition: outline $transition--base, background-color $transition--base, color $transition--base;
 
     &:focus {
       @include focus-outline('outline');
-    }
-
-    .#{$prefix}--overflow-menu-options__option--danger & {
-      &:focus {
-        outline: 1px solid transparent;
-        text-decoration: underline;
-      }
     }
   }
 
@@ -293,35 +323,26 @@
     border-top: 1px solid $ui-03;
   }
 
-  .#{$prefix}--overflow-menu-options__option--danger {
-    .#{$prefix}--overflow-menu-options__btn {
-      &:hover,
-      &:focus {
-        color: $inverse-01;
-        background-color: $support-01;
-      }
-    }
+  .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:hover,
+  .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:focus {
+    color: $inverse-01;
+    background-color: $support-01;
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled:hover {
     background-color: $ui-01;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
-    color: $text-01;
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
+    color: $disabled;
+    pointer-events: none;
 
-  .#{$prefix}--overflow-menu-options__option--disabled:hover .#{$prefix}--overflow-menu-options__btn {
-    color: $text-01;
-    opacity: 0.5;
-    background-color: $ui-01;
-
+    &:hover,
     &:active,
     &:focus {
+      @include focus-outline('reset');
       background-color: $ui-01;
-      pointer-events: none;
     }
   }
 
