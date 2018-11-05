@@ -97,6 +97,14 @@ describe('NumberInput', () => {
         expect(wrapper.props().light).toEqual(true);
       });
 
+      it('should hide label as expected', () => {
+        expect(numberInput.prop('min')).toEqual(0);
+        wrapper.setProps({ hideLabel: true });
+        expect(wrapper.find('label').hasClass('bx--visually-hidden')).toEqual(
+          true
+        );
+      });
+
       describe('initial rendering', () => {
         const getWrapper = (min, max, value) =>
           mount(
