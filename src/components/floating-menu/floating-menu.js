@@ -64,19 +64,19 @@ export const getFloatingPosition = ({
     return {
       [DIRECTION_LEFT]: {
         left: refLeft - width + scrollX - left,
-        top: refTop - 4 + scrollY + top,
+        top: refTop + scrollY + top,
       },
       [DIRECTION_TOP]: {
         left: refCenterHorizontal + scrollX + left - 16,
-        top: refTop - height + scrollY - top - 4,
+        top: refTop - height + scrollY - top,
       },
       [DIRECTION_RIGHT]: {
         left: refRight + scrollX + left,
-        top: refTop - 4 + scrollY + top,
+        top: refTop + scrollY + top,
       },
       [DIRECTION_BOTTOM]: {
         left: refCenterHorizontal + scrollX + left - 16,
-        top: refBottom + scrollY + top - 4,
+        top: refBottom + scrollY + top,
       },
     }[direction];
   }

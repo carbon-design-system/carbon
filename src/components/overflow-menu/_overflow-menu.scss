@@ -230,8 +230,6 @@
     background-color: $inverse-01;
     width: 11.25rem;
     list-style: none;
-    margin-top: $spacing-2xs;
-    padding: 0 0 $spacing-xs;
     left: 100px;
     top: 0;
   }
@@ -247,6 +245,7 @@
     align-items: center;
     width: 100%;
     padding: 0;
+    transition: background-color $transition--base;
   }
 
   .#{$prefix}--overflow-menu--divider {
@@ -257,6 +256,7 @@
     @include reset;
     @include typescale('zeta');
     @include font-family;
+    @include focus-outline('reset');
     font-weight: 400;
     width: 100%;
     height: 100%;
@@ -271,12 +271,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: outline $transition--base;
 
     &:focus {
-      outline: 1px solid transparent;
-      text-decoration: underline;
-      background-color: $hover-row;
-      text-decoration: underline;
+      @include focus-outline('outline');
     }
 
     .#{$prefix}--overflow-menu-options__option--danger & {
@@ -288,13 +286,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $hover-row;
-  }
-
-  .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
-    text-decoration: none;
-    background-color: $hover-row;
-    text-decoration: none;
+    background-color: $hover-field;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {

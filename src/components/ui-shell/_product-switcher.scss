@@ -133,41 +133,11 @@
     color: $shell-header-text-02;
   }
 
-<<<<<<< HEAD
-  .#{$prefix}--overflow-menu {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    width: mini-units(5);
-  }
-
-  .#{$prefix}--overflow-menu > svg {
-    fill: $shell-header-text-02;
-  }
-
-  .#{$prefix}--overflow-menu:hover {
-    background: $shell-header-bg-04;
-  }
-
-  .#{$prefix}--overflow-menu:hover > svg {
-    fill: $shell-header-text-02;
-  }
-
-  .#{$prefix}--overflow-menu:focus {
-    display: flex;
-    outline: none;
-    box-shadow: inset 0 0 0 3px $shell-header-link;
-  }
-
-  .#{$prefix}--overflow-menu-options__option:hover {
-    background: $shell-header-bg-03;
-  }
-=======
   // .#{$prefix}--overflow-menu {
   //   display: none;
   //   justify-content: center;
   //   align-items: center;
-  //   width: units(5);
+  //   width: mini-units(5);
   // }
 
   // .#{$prefix}--overflow-menu > svg {
@@ -191,7 +161,6 @@
   // .#{$prefix}--overflow-menu-options__option:hover {
   //   background: $shell-header-bg-03;
   // }
->>>>>>> feat(overflow-menu): start work on experimental overflow menu
 
   .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
     display: flex;
