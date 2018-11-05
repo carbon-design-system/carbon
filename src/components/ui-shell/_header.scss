@@ -8,7 +8,7 @@
 @import 'theme';
 @import 'functions';
 
-@mixin header {
+@mixin carbon-header {
   .#{$prefix}--header {
     display: flex;
     align-items: center;
@@ -215,8 +215,8 @@
   }
 }
 
-@include exports('header') {
+@include exports('carbon-header') {
   @if feature-flag-enabled('ui-shell') {
-    @include header;
+    @include carbon-header;
   }
 }

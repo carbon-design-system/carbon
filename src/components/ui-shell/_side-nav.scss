@@ -60,7 +60,7 @@
   }
 }
 
-@mixin side-nav {
+@mixin carbon-side-nav {
   //----------------------------------------------------------------------------
   // Side-nav > Panel
   //----------------------------------------------------------------------------
@@ -388,8 +388,8 @@
   }
 }
 
-@include exports('side-nav') {
+@include exports('carbon-side-nav') {
   @if feature-flag-enabled('ui-shell') {
-    @include side-nav;
+    @include carbon-side-nav;
   }
 }
