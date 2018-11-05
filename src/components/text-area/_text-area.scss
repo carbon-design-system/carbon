@@ -178,6 +178,36 @@
     // THIS SHOULD BE MOVED TO AN INLINE SVG IN THE HTML IN NEXT MAJOR RELEASE
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--warning--filled' fill='%23da1e28'%3e%3cpath d='M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2zm-1 6h2v11h-2zm1 17a1.5 1.5 0 1 1 1.5-1.5A1.5 1.5 0 0 1 16 25z'/%3e%3c/svg%3e ");
   }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
 }
 
 @include exports('text-area') {
