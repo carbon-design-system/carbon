@@ -329,6 +329,7 @@
     }
   }
 
+  //SELECTED TAB
   .#{$prefix}--tabs__nav-item--selected {
     border: none;
 
@@ -336,10 +337,13 @@
       border-bottom: 2px solid $brand-01;
 
       .#{$prefix}--tabs__nav-link {
-        color: $brand-01;
+        color: $text-01;
 
         &:focus {
-          color: $brand-01;
+          color: $text-01;
+
+          @include focus-outline('outline') {
+          }
         }
       }
     }
