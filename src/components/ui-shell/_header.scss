@@ -8,55 +8,55 @@
 @import 'theme';
 @import 'functions';
 
-@mixin platform-header {
-  .#{$prefix}--platform-header {
+@mixin carbon-header {
+  .#{$prefix}--header {
     display: flex;
     align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: units(6);
+    height: mini-units(6);
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
   }
 
-  .#{$prefix}--platform-header__action {
+  .#{$prefix}--header__action {
     @include button-reset();
-    width: units(6);
-    height: units(6);
-    border: units(0.5) solid transparent;
+    width: mini-units(6);
+    height: mini-units(6);
+    border: mini-units(0.5) solid transparent;
   }
 
-  .#{$prefix}--platform-header__action:hover {
+  .#{$prefix}--header__action:hover {
     background-color: $shell-ui-02;
   }
 
-  .#{$prefix}--platform-header__action--active,
-  .#{$prefix}--platform-header__action--active:hover,
-  .#{$prefix}--platform-header__action:active {
+  .#{$prefix}--header__action--active,
+  .#{$prefix}--header__action--active:hover,
+  .#{$prefix}--header__action:active {
     background-color: $shell-brand-01;
   }
 
-  .#{$prefix}--platform-header__action--active,
-  .#{$prefix}--platform-header__action:focus {
+  .#{$prefix}--header__action--active,
+  .#{$prefix}--header__action:focus {
     border-color: $shell-brand-01;
     outline: none;
   }
 
-  .#{$prefix}--platform-header__action > svg {
+  .#{$prefix}--header__action > svg {
     fill: $shell-header-icon-01;
   }
 
   //--------------------------------------------------------------------------
-  // Platform Header - Name
+  // Header - Name
   //--------------------------------------------------------------------------
-  a.#{$prefix}--platform-header__name {
+  a.#{$prefix}--header__name {
     @include typescale('zeta');
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 units(2);
+    padding: 0 mini-units(2);
     text-decoration: none;
     font-weight: 400;
     letter-spacing: 0.1px;
@@ -64,38 +64,38 @@
     user-select: none;
   }
 
-  .#{$prefix}--platform-header__platform-name {
+  .#{$prefix}--header__name {
     font-weight: 600;
   }
 
-  a.#{$prefix}--platform-header__name,
-  a.#{$prefix}--platform-header__name:hover {
+  a.#{$prefix}--header__name,
+  a.#{$prefix}--header__name:hover {
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--platform-header__name:focus {
+  a.#{$prefix}--header__name:focus {
     outline: none;
     box-shadow: inset 0 0 0 4px $shell-brand-01;
   }
 
   //--------------------------------------------------------------------------
-  // Platform Header - Navigation
+  // Header - Navigation
   //--------------------------------------------------------------------------
-  .#{$prefix}--platform-header__nav {
+  .#{$prefix}--header__nav {
     height: 100%;
   }
 
-  .#{$prefix}--platform-header__menu-bar[role='menubar'] {
+  .#{$prefix}--header__menu-bar[role='menubar'] {
     display: flex;
-    margin-left: units(1);
+    margin-left: mini-units(1);
     height: 100%;
   }
 
-  a.#{$prefix}--platform-header__menu-item[role='menuitem'] {
+  a.#{$prefix}--header__menu-item[role='menuitem'] {
     display: flex;
     align-items: center;
     color: $shell-header-text-01;
-    padding: 0 units(2);
+    padding: 0 mini-units(2);
     // Used for links that are directly in the menubar to span the full height
     height: 100%;
     // Text styles
@@ -110,48 +110,48 @@
     border: 4px solid transparent;
   }
 
-  a.#{$prefix}--platform-header__menu-item[role='menuitem']:hover {
+  a.#{$prefix}--header__menu-item[role='menuitem']:hover {
     background-color: #333333;
   }
 
-  a.#{$prefix}--platform-header__menu-item[role='menuitem']:active {
+  a.#{$prefix}--header__menu-item[role='menuitem']:active {
     background-color: $ibm-colors__gray--80;
   }
 
-  a.#{$prefix}--platform-header__menu-item[role='menuitem']:focus {
+  a.#{$prefix}--header__menu-item[role='menuitem']:focus {
     border-color: $ibm-colors__blue--60;
     outline: none;
   }
 
-  .#{$prefix}--platform-header__submenu {
+  .#{$prefix}--header__submenu {
     position: relative;
   }
 
-  .#{$prefix}--platform-header__menu-title[role='menuitem'][aria-haspopup='true'] {
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-haspopup='true'] {
     position: relative;
   }
 
-  .#{$prefix}--platform-header__menu-title[role='menuitem'][aria-expanded='true'] {
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
     background-color: $ibm-colors__gray--80;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
     z-index: #{z('header') + 1};
   }
 
-  .#{$prefix}--platform-header__menu-title[role='menuitem'][aria-expanded='true'] > .#{$prefix}--platform-header__menu-arrow {
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] > .#{$prefix}--header__menu-arrow {
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--platform-header__menu[role='menu'] {
+  .#{$prefix}--header__menu[role='menu'] {
     display: none;
   }
 
-  .#{$prefix}--platform-header__menu-title[role='menuitem'][aria-expanded='true'] + .#{$prefix}--platform-header__menu {
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] + .#{$prefix}--header__menu {
     position: absolute;
     bottom: 0;
     left: 0;
     display: flex;
-    width: units(25);
+    width: mini-units(25);
     flex-direction: column;
     transform: translateY(100%);
     background-color: $ibm-colors__gray--80;
@@ -159,32 +159,64 @@
     z-index: z('header');
   }
 
-  .#{$prefix}--platform-header__menu .#{$prefix}--platform-header__menu-item[role='menuitem'] {
-    height: units(6);
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem'] {
+    height: mini-units(6);
   }
 
-  .#{$prefix}--platform-header__menu .#{$prefix}--platform-header__menu-item[role='menuitem']:hover {
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem']:hover {
     background-color: #4c4c4c;
   }
 
-  .#{$prefix}--platform-header__menu-arrow {
+  .#{$prefix}--header__menu-arrow {
     fill: $ibm-colors__gray--10;
-    margin-left: units(1);
+    margin-left: mini-units(1);
   }
 
   //--------------------------------------------------------------------------
-  // Platform Header - Global
+  // Header - Global
   //--------------------------------------------------------------------------
-  .#{$prefix}--platform-header__global {
+  .#{$prefix}--header__global {
     display: flex;
     justify-content: flex-end;
     flex: 1 1 0%;
     height: 100%;
   }
+
+  //--------------------------------------------------------------------------
+  // Header - Skip to content
+  //--------------------------------------------------------------------------
+  .#{$prefix}--skip-to-content {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    visibility: visible;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--skip-to-content:focus {
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 3rem;
+    clip: auto;
+    border: 4px solid $ibm-colors__blue--60;
+    z-index: 9999;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    outline: none;
+    padding: 0 1rem;
+  }
 }
 
-@include exports('platform-header') {
+@include exports('carbon-header') {
   @if feature-flag-enabled('ui-shell') {
-    @include platform-header;
+    @include carbon-header;
   }
 }
