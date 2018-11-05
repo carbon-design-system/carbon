@@ -1,4 +1,8 @@
-{{> platform-header }}
-{{> platform-side-nav }}
+{{> header }}
+{{#if sidenav.state.fixed}}
+{{> side-nav-fixed }}
+{{else}}
+{{> side-nav }}
+{{/if}}
 {{> product-switcher }}
-{{> platform-nav }}
+{{> nav }}

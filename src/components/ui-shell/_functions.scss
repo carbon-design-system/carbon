@@ -1,9 +1,8 @@
 @import 'variables';
 
-@function units($count) {
-  @return $unit * $count;
-}
-
-@function get-fixed-size($count) {
+/// Get a `rem` value based for a number of mini-units.
+/// @param {number} $count
+/// @returns {rem}
+@function mini-units($count) {
   @return $unit * $count;
 }

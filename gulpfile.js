@@ -460,7 +460,7 @@ gulp.task('watch', () => {
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
+  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev', 'sass:source']);
 });
 
 gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);
