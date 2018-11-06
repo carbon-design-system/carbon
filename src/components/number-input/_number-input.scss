@@ -156,12 +156,12 @@
   }
 
   .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
-    top: unset;
+    top: auto;
     bottom: 0.625rem;
   }
 
   .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
-    top: unset;
+    top: auto;
     bottom: 2rem;
   }
 
@@ -318,12 +318,12 @@
   }
 
   .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
-    top: unset;
+    top: auto;
     bottom: 0.375rem;
   }
 
   .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
-    top: unset;
+    top: auto;
     bottom: 1.75rem;
   }
 
