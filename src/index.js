@@ -137,3 +137,4 @@ export TextInputSkeleton from './components/TextInput/TextInput.Skeleton';
 export ToggleSkeleton from './components/Toggle/Toggle.Skeleton';
 export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
+export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
