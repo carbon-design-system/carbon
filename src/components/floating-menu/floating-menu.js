@@ -4,7 +4,6 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
-import componentsX from '../../globals/js/feature-flags';
 
 /**
  * The structure for the position of floating menu.
@@ -59,27 +58,6 @@ export const getFloatingPosition = ({
   const { top = 0, left = 0 } = offset;
   const refCenterHorizontal = (refLeft + refRight) / 2;
   const refCenterVertical = (refTop + refBottom) / 2;
-
-  if (componentsX) {
-    return {
-      [DIRECTION_LEFT]: {
-        left: refLeft - width + scrollX - left,
-        top: refTop + scrollY + top,
-      },
-      [DIRECTION_TOP]: {
-        left: refCenterHorizontal + scrollX + left - 16,
-        top: refTop - height + scrollY - top,
-      },
-      [DIRECTION_RIGHT]: {
-        left: refRight + scrollX + left,
-        top: refTop + scrollY + top,
-      },
-      [DIRECTION_BOTTOM]: {
-        left: refCenterHorizontal + scrollX + left - 16,
-        top: refBottom + scrollY + top,
-      },
-    }[direction];
-  }
 
   return {
     [DIRECTION_LEFT]: {

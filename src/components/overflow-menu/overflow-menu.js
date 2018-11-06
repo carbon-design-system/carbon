@@ -7,6 +7,7 @@ import handles from '../../globals/js/mixins/handles';
 import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
+import componentsX from '../../globals/js/feature-flags';
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
@@ -38,6 +39,7 @@ export const getMenuOffset = (menuBody, direction) => {
   if (!triggerButtonPositionProp || !triggerButtonPositionFactor) {
     console.warn('Wrong floating menu direction:', direction); // eslint-disable-line no-console
   }
+
   const menuWidth = menuBody.offsetWidth;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
   const values = [triggerButtonPositionProp, 'left', 'width', 'height', 'border-top-width'].reduce(
@@ -54,6 +56,46 @@ export const getMenuOffset = (menuBody, direction) => {
       top: Math.sqrt(borderTopWidth ** 2 * 2) + triggerButtonPositionFactor * values[triggerButtonPositionProp],
     };
   }
+
+  // if (componentsX) {
+  //   return {
+  //     [DIRECTION_LEFT]: {
+  //       left: refLeft - width + scrollX - left,
+  //       top: refTop + scrollY + top,
+  //     },
+  //     [DIRECTION_TOP]: {
+  //       left: refCenterHorizontal + scrollX + left - 16,
+  //       top: refTop - height + scrollY - top,
+  //     },
+  //     [DIRECTION_RIGHT]: {
+  //       left: refRight + scrollX + left,
+  //       top: refTop + scrollY + top,
+  //     },
+  //     [DIRECTION_BOTTOM]: {
+  //       left: refCenterHorizontal + scrollX + left - 16,
+  //       top: refBottom + scrollY + top,
+  //     },
+  //   }[direction];
+  // }
+
+  console.log(menuWidth / 2);
+
+  if (componentsX) {
+    if (triggerButtonPositionProp === 'top') {
+      return {
+        left: menuWidth / 2 - 16,
+        top: 0,
+      };
+    }
+
+    if (triggerButtonPositionProp === 'bottom') {
+      return {
+        left: menuWidth / 2 - 16,
+        top: 0,
+      };
+    }
+  }
+
   return undefined;
 };
 
