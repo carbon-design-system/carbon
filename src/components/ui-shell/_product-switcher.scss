@@ -133,34 +133,34 @@
     color: $shell-header-text-02;
   }
 
-  // .#{$prefix}--overflow-menu {
-  //   display: none;
-  //   justify-content: center;
-  //   align-items: center;
-  //   width: mini-units(5);
-  // }
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: mini-units(5);
+  }
 
-  // .#{$prefix}--overflow-menu > svg {
-  //   fill: $shell-header-text-02;
-  // }
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu > svg {
+    fill: $shell-header-text-02;
+  }
 
-  // .#{$prefix}--overflow-menu:hover {
-  //   background: $shell-header-bg-04;
-  // }
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover {
+    background: $shell-header-bg-04;
+  }
 
-  // .#{$prefix}--overflow-menu:hover > svg {
-  //   fill: $shell-header-text-02;
-  // }
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover > svg {
+    fill: $shell-header-text-02;
+  }
 
-  // .#{$prefix}--overflow-menu:focus {
-  //   display: flex;
-  //   outline: none;
-  //   box-shadow: inset 0 0 0 3px $shell-header-link;
-  // }
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:focus {
+    display: flex;
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
 
-  // .#{$prefix}--overflow-menu-options__option:hover {
-  //   background: $shell-header-bg-03;
-  // }
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu-options__option:hover {
+    background: $shell-header-bg-03;
+  }
 
   .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
     display: flex;

@@ -4,10 +4,10 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
+import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM, DIRECTION_LEFT, DIRECTION_RIGHT } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
-import componentsX from '../../globals/js/feature-flags';
+import { componentsX } from '../../globals/js/feature-flags';
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
@@ -16,6 +16,8 @@ import componentsX from '../../globals/js/feature-flags';
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
   [DIRECTION_BOTTOM]: 'top',
+  [DIRECTION_LEFT]: 'left',
+  [DIRECTION_RIGHT]: 'right',
 };
 
 /**
@@ -25,6 +27,8 @@ const triggerButtonPositionProps = {
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,
   [DIRECTION_BOTTOM]: -1,
+  [DIRECTION_LEFT]: -2,
+  [DIRECTION_RIGHT]: -1,
 };
 
 /**
@@ -41,6 +45,7 @@ export const getMenuOffset = (menuBody, direction) => {
   }
 
   const menuWidth = menuBody.offsetWidth;
+  const menuHeight = menuBody.offsetHeight;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
   const values = [triggerButtonPositionProp, 'left', 'width', 'height', 'border-top-width'].reduce(
     (o, name) => ({
@@ -57,41 +62,18 @@ export const getMenuOffset = (menuBody, direction) => {
     };
   }
 
-  // if (componentsX) {
-  //   return {
-  //     [DIRECTION_LEFT]: {
-  //       left: refLeft - width + scrollX - left,
-  //       top: refTop + scrollY + top,
-  //     },
-  //     [DIRECTION_TOP]: {
-  //       left: refCenterHorizontal + scrollX + left - 16,
-  //       top: refTop - height + scrollY - top,
-  //     },
-  //     [DIRECTION_RIGHT]: {
-  //       left: refRight + scrollX + left,
-  //       top: refTop + scrollY + top,
-  //     },
-  //     [DIRECTION_BOTTOM]: {
-  //       left: refCenterHorizontal + scrollX + left - 16,
-  //       top: refBottom + scrollY + top,
-  //     },
-  //   }[direction];
-  // }
-
-  console.log(menuWidth / 2);
-
   if (componentsX) {
-    if (triggerButtonPositionProp === 'top') {
+    if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
       return {
         left: menuWidth / 2 - 16,
         top: 0,
       };
     }
 
-    if (triggerButtonPositionProp === 'bottom') {
+    if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
       return {
-        left: menuWidth / 2 - 16,
-        top: 0,
+        left: 0,
+        top: menuHeight / 2 - 16,
       };
     }
   }
