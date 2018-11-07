@@ -128,6 +128,8 @@
   $support-03: $ibm-colors__yellow--20 !default !global;
   $support-04: $ibm-colors__blue--70 !default !global;
 
+  $active-01: $ibm-colors__gray--30 !default !global;
+
   // TODO: Define for experimental
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
@@ -203,7 +205,6 @@
 
   // Date Picker
   $date-picker-in-range-background-color: $ibm-colors__blue--20 !default !global;
-  $date-picker-next-month-color: $ibm-colors__gray--60 !default !global;
 
   // Modal
   $modal-border-top: $brand-01 4px solid !default !global;
