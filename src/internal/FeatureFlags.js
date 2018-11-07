@@ -10,4 +10,12 @@
  * const MyComponent = props => (<div {...props}>{aFeatureFlag ? 'foo' : 'bar'}</div>);
  */
 
+/**
+ * Next gen of Carbon component design.
+ */
 export const componentsX = false;
+
+/**
+ * Support for prop -> state sync of `<Slider>` value.
+ */
+export const sliderValuePropSync = false;
