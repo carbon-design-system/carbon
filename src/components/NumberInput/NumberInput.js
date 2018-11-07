@@ -147,6 +147,7 @@ export default class NumberInput extends Component {
 
     const numberInputClasses = classNames('bx--number', className, {
       'bx--number--light': light,
+      'bx--number--helpertext': helperText,
     });
 
     const props = {
