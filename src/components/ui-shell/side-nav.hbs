@@ -1,7 +1,7 @@
 {{#if sidenav.state.expanded}}
-<aside class="bx--side-nav bx--side-nav--expanded">
+<aside class="bx--side-nav bx--side-nav--expanded" data-side-nav>
 {{else}}
-<aside class="bx--side-nav">
+<aside class="bx--side-nav" data-side-nav>
 {{/if}}
   <nav class="bx--side-nav__navigation" role="navigation" aria-label="Side navigation">
     {{> side-nav-header sidenav=sidenav }}
