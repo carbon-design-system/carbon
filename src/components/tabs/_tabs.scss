@@ -210,20 +210,17 @@
   }
 }
 
-@mixin tabs--experimental {
+@mixin tabs--x {
   .#{$prefix}--tabs {
     @include typescale('zeta');
-    @include font-smoothing;
     @include font-family;
     color: $text-01;
-    font-weight: 600;
     height: auto;
     width: 100%;
     position: relative;
-
     @include breakpoint(bp--sm--major) {
       background: none;
-      min-height: rem(49px);
+      min-height: rem(48px);
     }
   }
 
@@ -236,21 +233,20 @@
     cursor: pointer;
     background-color: $field-01;
     box-shadow: 0 1px 0 0 $ui-05;
-
-    svg {
-      width: rem(10px);
-      height: rem(5px);
-      fill: $brand-01;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 2px 0 0 $brand-01;
-    }
-
     @include breakpoint(bp--sm--major) {
       display: none;
     }
+  }
+
+  .#{$prefix}--tabs-trigger:focus {
+    outline: none;
+    box-shadow: 0 2px 0 0 $brand-01;
+  }
+
+  .#{$prefix}--tabs-trigger svg {
+    width: rem(10px);
+    height: rem(5px);
+    fill: $brand-01;
   }
 
   // There is only a difference in tab color when in mobile/dropdown view
@@ -260,12 +256,11 @@
 
   .#{$prefix}--tabs-trigger-text {
     text-decoration: none;
-    font-weight: 600;
     color: $text-01;
+  }
 
-    &:focus {
-      @include focus-outline('border');
-    }
+  .#{$prefix}--tabs-trigger-text:focus {
+    @include focus-outline('border');
   }
 
   .#{$prefix}--tabs__nav {
@@ -279,7 +274,6 @@
     flex-direction: column;
     z-index: z('dropdown');
     background: $ui-01;
-
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
@@ -289,7 +283,6 @@
       box-shadow: none;
       z-index: auto;
     }
-
     @include breakpoint(bp--lg--major) {
       margin-left: 0;
     }
@@ -297,7 +290,6 @@
 
   .#{$prefix}--tabs__nav--hidden {
     display: none;
-
     @include breakpoint(bp--sm--major) {
       display: flex;
     }
@@ -308,88 +300,115 @@
     background-color: $ui-01;
     padding: 0;
     cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background-color: $hover-row;
-
-      @include breakpoint(bp--sm--major) {
-        outline: 1px solid transparent;
-        background: transparent;
-      }
-    }
-
+    border-bottom: $tab-underline-color;
+    width: 100%;
     @include breakpoint(bp--sm--major) {
       background: transparent;
-      padding: $spacing-sm 0 $spacing-sm;
-
       & + & {
-        margin-left: rem(48px);
+        margin-left: rem(1px);
       }
     }
   }
 
-  //SELECTED TAB
-  .#{$prefix}--tabs__nav-item--selected {
-    border: none;
+  //-----------------------------
+  // Item - Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+    border-bottom: $tab-underline-color-hover;
+    @include breakpoint(bp--sm--major) {
+      outline: 1px solid transparent;
+      background: transparent;
+    }
+  }
 
+  //---------------------------------------------
+  // Item - Disabled
+  //---------------------------------------------
+  .#{$prefix}--tabs__nav-item[disabled],
+  .#{$prefix}--tabs__nav-item[disabled]:hover {
+    border-bottom: $tab-underline-disabled;
+    cursor: not-allowed;
+  }
+
+  //-----------------------------
+  // Item - Selected
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--selected:not([disabled]) {
+    border: none;
     @include breakpoint(bp--sm--major) {
       border-bottom: 2px solid $brand-01;
 
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
-
-        &:focus {
-          color: $text-01;
-
-          @include focus-outline('outline') {
-          }
-        }
+        font-weight: 600;
       }
-    }
-  }
 
-  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
-    color: $text-01;
-
-    @include breakpoint(bp--sm--major) {
-      color: $hover-secondary;
+      .#{$prefix}--tabs__nav-link:focus {
+        color: $text-01;
+        font-weight: 600;
+      }
     }
   }
 
   .#{$prefix}--tabs__nav-link {
     display: inline-block;
-    color: $text-01;
+    color: $text-02;
     text-decoration: none;
-    padding: $spacing-md;
-    width: 100%;
+    font-weight: 400;
+    padding: $spacing-xs $spacing-md;
+    width: rem(160px);
     white-space: nowrap;
     text-overflow: ellipsis;
-
-    &:focus {
-      outline: 1px solid transparent;
-      background-color: $brand-01;
-      color: $inverse-01;
-    }
-
     @include breakpoint(bp--sm--major) {
-      padding: 0 $spacing-3xs;
-      width: auto;
-
+      padding: $spacing-xs $spacing-md;
       &:hover {
-        color: $brand-01;
-      }
-
-      &:focus {
-        background-color: transparent;
         color: $text-01;
-        outline: 1px solid transparent;
-        box-shadow: 0 0 0 1px $brand-01;
+      }
+      &:focus {
+        outline: 2px solid $brand-01;
       }
     }
   }
 
+  //-----------------------------
+  // Link - Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not([disabled]) .#{$prefix}--tabs__nav-link {
+    color: $text-01;
+    @include breakpoint(bp--sm--major) {
+      color: $text-01;
+    }
+  }
+
+  //-----------------------------
+  // Link - Disabled
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link {
+    color: $tab-text-disabled;
+  }
+
+  //-----------------------------
+  // Link - Disabled Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item[disabled]:hover .#{$prefix}--tabs__nav-link {
+    cursor: no-drop;
+  }
+
+  //-----------------------------
+  // Link - Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-link:focus {
+    font-weight: 400;
+    color: $text-01;
+  }
+
+  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link:focus {
+    outline: none;
+  }
+
+  //-----------------------------
   // Skeleton state
+  //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
     pointer-events: none;
     cursor: default;
@@ -413,7 +432,7 @@
 
 @include exports('tabs') {
   @if feature-flag-enabled('components-x') {
-    @include tabs--experimental;
+    @include tabs--x;
   } @else {
     @include tabs;
   }
