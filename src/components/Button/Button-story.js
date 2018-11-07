@@ -1,16 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 
 const icons = {
-  none: 'None',
-  iconAddSolid: 'Add with filled circle (iconAddSolid from `carbon-icons`)',
-  iconSearch: 'Search (iconSearch from `carbon-icons`)',
+  None: 'None',
+  'Add with filled circle (iconAddSolid from `carbon-icons`)': 'iconAddSolid',
+  'Search (iconSearch from `carbon-icons`)': 'iconSearch',
 };
 
 const iconMap = {
@@ -19,11 +18,11 @@ const iconMap = {
 };
 
 const kinds = {
-  primary: 'Primary button (primary)',
-  secondary: 'Secondary button (secondary)',
-  danger: 'Danger button (danger)',
-  'danger--primary': 'Danger primary button (danger--primary)',
-  ghost: 'Ghost button (ghost)',
+  'Primary button (primary)': 'primary',
+  'Secondary button (secondary)': 'secondary',
+  'Danger button (danger)': 'danger',
+  'Danger primary button (danger--primary)': 'danger--primary',
+  'Ghost button (ghost)': 'ghost',
 };
 
 const props = {
@@ -50,30 +49,7 @@ storiesOf('Buttons', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    withInfo({
-      text: `
-        Buttons are used to initialize an action, either in the background or
-        foreground of an experience.
-
-        There are several kinds of buttons.
-
-        Primary buttons should be used for the principle call to action
-        on the page.
-
-        Secondary buttons should be used for secondary actions on each page.
-
-        Danger buttons should be used for a negative action (such as Delete) on the page.
-
-        Modify the behavior of the button by changing its event properties.
-
-        Small buttons may be used when there is not enough space for a
-        regular sized button. This issue is most found in tables. Small button should have three words
-        or less.
-
-        When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
-        always paired with text.
-      `,
-    })(() => {
+    () => {
       const regularProps = props.regular();
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -87,15 +63,37 @@ storiesOf('Buttons', module)
           &nbsp;
         </div>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+          Buttons are used to initialize an action, either in the background or
+          foreground of an experience.
+  
+          There are several kinds of buttons.
+  
+          Primary buttons should be used for the principle call to action
+          on the page.
+  
+          Secondary buttons should be used for secondary actions on each page.
+  
+          Danger buttons should be used for a negative action (such as Delete) on the page.
+  
+          Modify the behavior of the button by changing its event properties.
+  
+          Small buttons may be used when there is not enough space for a
+          regular sized button. This issue is most found in tables. Small button should have three words
+          or less.
+  
+          When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
+          always paired with text.
+        `,
+      },
+    }
   )
   .add(
     'Sets of Buttons',
-    withInfo({
-      text: `
-        When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
-      `,
-    })(() => {
+    () => {
       const setProps = props.set();
       return (
         <div>
@@ -107,15 +105,18 @@ storiesOf('Buttons', module)
           </Button>
         </div>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+          When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
+        `,
+      },
+    }
   )
   .add(
     'skeleton',
-    withInfo({
-      text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-    })(() => (
+    () => (
       <div>
         <ButtonSkeleton />
         &nbsp;
@@ -123,5 +124,12 @@ storiesOf('Buttons', module)
         &nbsp;
         <ButtonSkeleton small />
       </div>
-    ))
+    ),
+    {
+      info: {
+        text: `
+          Placeholder skeleton state to use when content is loading.
+        `,
+      },
+    }
   );

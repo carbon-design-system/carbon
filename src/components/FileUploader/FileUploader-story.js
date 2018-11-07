@@ -3,7 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import {
   withKnobs,
   array,
@@ -17,18 +17,18 @@ import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import Button from '../Button';
 
 const buttonKinds = {
-  primary: 'Primary (primary)',
-  secondary: 'Secondary (secondary)',
-  danger: 'Danger (danger)',
-  ghost: 'Ghost (ghost)',
-  'danger--primary': 'Danger Primary (danger--primary)',
-  tertiary: 'Tertiary (tertiary)',
+  'Primary (primary)': 'primary',
+  'Secondary (secondary)': 'secondary',
+  'Danger (danger)': 'danger',
+  'Ghost (ghost)': 'ghost',
+  'Danger Primary (danger--primary)': 'danger--primary',
+  'Tertiary (tertiary)': 'tertiary',
 };
 
 const filenameStatuses = {
-  edit: 'Edit (edit)',
-  complete: 'Complete (complete)',
-  uploading: 'Uploading (uploading)',
+  'Edit (edit)': 'edit',
+  'Complete (complete)': 'complete',
+  'Uploading (uploading)': 'uploading',
 };
 
 const props = {
@@ -71,19 +71,18 @@ storiesOf('FileUploader', module)
   .addDecorator(withKnobs)
   .add(
     'FileUploaderButton',
-    withInfo({
-      text: `
-        The FileUploaderButton can be used as a standalone component if you do not need the extra UI that comes with FileUploader. The FileUploaderButton is used in FileUploader.
-      `,
-    })(() => <FileUploaderButton {...props.fileUploaderButton()} />)
+    () => <FileUploaderButton {...props.fileUploaderButton()} />,
+    {
+      info: {
+        text: `
+            The FileUploaderButton can be used as a standalone component if you do not need the extra UI that comes with FileUploader. The FileUploaderButton is used in FileUploader.
+          `,
+      },
+    }
   )
   .add(
     'FileUploader',
-    withInfo({
-      text: `
-        The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
-      `,
-    })(() => {
+    () => {
       let fileUploader;
       return (
         <div className="bx--file__container">
@@ -102,17 +101,27 @@ storiesOf('FileUploader', module)
           </Button>
         </div>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
+          `,
+      },
+    }
   )
   .add(
     'skeleton',
-    withInfo({
-      text: `
-Placeholder skeleton state to use when content is loading.
-`,
-    })(() => (
+    () => (
       <div style={{ width: '500px' }}>
         <FileUploaderSkeleton />
       </div>
-    ))
+    ),
+    {
+      info: {
+        text: `
+    Placeholder skeleton state to use when content is loading.
+    `,
+      },
+    }
   );

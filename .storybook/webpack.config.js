@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const useExperimentalFeatures =
   process.env.CARBON_USE_EXPERIMENTAL_FEATURES === 'true';
@@ -45,8 +45,6 @@ const styleLoaders = [
         );
       `,
       sourceMap: useStyleSourceMap,
-      // Ref: webpack-contrib/sass-loader#272
-      outputStyle: useStyleSourceMap ? 'compressed' : 'expanded',
     },
   },
 ];
@@ -86,18 +84,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        sideEffects: true,
         use: !useExternalCss
           ? [{ loader: 'style-loader' }, ...styleLoaders]
-          : ExtractTextPlugin.extract({
-              use: styleLoaders,
-            }),
+          : [{ loader: MiniCssExtractPlugin.loader }, ...styleLoaders],
       },
     ],
   },
+  devtool: !useStyleSourceMap ? '' : 'source-map',
   plugins: !useExternalCss
     ? []
     : [
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
           filename: '[name].[contenthash].css',
         }),
       ],

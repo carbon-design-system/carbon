@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
@@ -40,17 +40,7 @@ storiesOf('RadioButtonGroup', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    withInfo({
-      text: `
-        The example below shows a Radio Button Group component with a default selected Radio Button.
-        Although you can set the checked prop on the Radio Button, when using the Radio Button component
-        as a child of the Radio Button Group, either set the defaultSelected or valueSelected which will
-        automatically set the selected prop on the corresponding Radio Button component.
-
-        Use defaultSelected when you want a radio button to be selected initially, but don't need to set it
-        at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
-      `,
-    })(() => {
+    () => {
       const radioProps = props.radio();
       return (
         <FormGroup legendText="Radio Button heading">
@@ -68,5 +58,18 @@ storiesOf('RadioButtonGroup', module)
           </RadioButtonGroup>
         </FormGroup>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            The example below shows a Radio Button Group component with a default selected Radio Button.
+            Although you can set the checked prop on the Radio Button, when using the Radio Button component
+            as a child of the Radio Button Group, either set the defaultSelected or valueSelected which will
+            automatically set the selected prop on the corresponding Radio Button component.
+    
+            Use defaultSelected when you want a radio button to be selected initially, but don't need to set it
+            at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
+          `,
+      },
+    }
   );

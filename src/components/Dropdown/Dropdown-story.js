@@ -3,7 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import {
   withKnobs,
   boolean,
@@ -15,16 +15,16 @@ import Dropdown from '../Dropdown';
 import DropdownItem from '../DropdownItem';
 
 const values = {
-  none: 'None ()',
-  option1: 'Option 1 (option1)',
-  option2: 'Option 2 (option2)',
-  option3: 'Option 3 (option3)',
-  option4: 'Option 4 (option4)',
-  option5: 'Option 5 (option5)',
+  'None ()': 'none',
+  'Option 1 (option1)': 'option1',
+  'Option 2 (option2)': 'option2',
+  'Option 3 (option3)': 'option3',
+  'Option 4 (option4)': 'option4',
+  'Option 5 (option5)': 'option5',
 };
 
 const texts = {
-  none: 'None ()',
+  'None ()': 'none',
   'Option 1': 'Option 1',
   'Option 2': 'Option 2',
   'Option 3': 'Option 3',
@@ -75,12 +75,7 @@ storiesOf('Dropdown', module)
   .addDecorator(story => <div style={{ minWidth: '20em' }}>{story()}</div>)
   .add(
     'Default',
-    withInfo({
-      text: `
-        The Dropdown component is used for navigating or filtering existing content.
-        Create Dropdown Item components for each option in the dropdown menu.
-      `,
-    })(() => {
+    () => {
       const dropdownItemProps = props.dropdownItem();
       return (
         <Dropdown {...props.dropdown()}>
@@ -111,5 +106,13 @@ storiesOf('Dropdown', module)
           />
         </Dropdown>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            The Dropdown component is used for navigating or filtering existing content.
+            Create Dropdown Item components for each option in the dropdown menu.
+          `,
+      },
+    }
   );

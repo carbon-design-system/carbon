@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import {
   withKnobs,
   array,
@@ -39,32 +39,33 @@ const props = () => ({
 storiesOf('Pagination', module)
   .addDecorator(withKnobs)
   .addDecorator(story => <div style={{ width: '800px' }}>{story()}</div>)
-  .add(
-    'v2',
-    withInfo({
+  .add('v2', () => <PaginationV2 {...props()} />, {
+    info: {
       text: `
-        V2 version of the Pagination
-      `,
-    })(() => <PaginationV2 {...props()} />)
-  )
-  .add(
-    'v1',
-    withInfo({
+            V2 version of the Pagination
+          `,
+    },
+  })
+  .add('v1', () => <Pagination {...props()} />, {
+    info: {
       text: `
-        The pagination component is used to paginate through items.
-      `,
-    })(() => <Pagination {...props()} />)
-  )
+            The pagination component is used to paginate through items.
+          `,
+    },
+  })
   .add(
     'multipe pagination components',
-    withInfo({
-      text: `Showcasing unique ids for each pagination component`,
-    })(() => {
+    () => {
       return (
         <div>
           <Pagination {...props()} />
           <Pagination {...props()} />
         </div>
       );
-    })
+    },
+    {
+      info: {
+        text: `Showcasing unique ids for each pagination component`,
+      },
+    }
   );

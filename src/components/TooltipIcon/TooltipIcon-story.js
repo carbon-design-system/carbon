@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
+
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
 
 const directions = {
-  bottom: 'Bottom (bottom)',
-  top: 'Top (top)',
+  'Bottom (bottom)': 'bottom',
+  'Top (top)': 'top',
 };
 
 const props = () => ({
@@ -18,11 +18,7 @@ storiesOf('TooltipIcon', module)
   .addDecorator(withKnobs)
   .add(
     'default',
-    withInfo({
-      text: `
-        Tooltip Icon
-      `,
-    })(() => (
+    () => (
       <TooltipIcon {...props()}>
         <svg width="16" height="12" viewBox="0 0 16 12">
           <g fillRule="nonzero">
@@ -30,5 +26,12 @@ storiesOf('TooltipIcon', module)
           </g>
         </svg>
       </TooltipIcon>
-    ))
+    ),
+    {
+      info: {
+        text: `
+            Tooltip Icon
+          `,
+      },
+    }
   );

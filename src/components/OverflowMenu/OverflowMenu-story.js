@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAdd } from 'carbon-icons';
 import OverflowMenu from '../OverflowMenu';
@@ -9,8 +9,8 @@ import OverflowMenuItem from '../OverflowMenuItem';
 import Icon from '../Icon';
 
 const directions = {
-  bottom: 'Bottom of the trigger button (bottom)',
-  top: 'Top of the trigger button (top)',
+  'Bottom of the trigger button (bottom)': 'bottom',
+  'Top of the trigger button (top)': 'top',
 };
 
 const props = {
@@ -44,12 +44,7 @@ storiesOf('OverflowMenu', module)
   .addDecorator(withKnobs)
   .add(
     'basic',
-    withInfo({
-      text: `
-        Overflow Menu is used when additional options are available to the user and there is a space constraint.
-        Create Overflow Menu Item components for each option on the menu.
-      `,
-    })(() => {
+    () => {
       const overflowMenuItemProps = props.menuItem();
       return (
         <OverflowMenu {...props.menu()}>
@@ -85,15 +80,19 @@ storiesOf('OverflowMenu', module)
           />
         </OverflowMenu>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            Overflow Menu is used when additional options are available to the user and there is a space constraint.
+            Create Overflow Menu Item components for each option on the menu.
+          `,
+      },
+    }
   )
   .add(
     'custom trigger',
-    withInfo({
-      text: `
-        Sometimes you just want to render something other than an icon
-      `,
-    })(() => {
+    () => {
       const overflowMenuItemProps = props.menuItem();
       return (
         <OverflowMenu
@@ -112,5 +111,12 @@ storiesOf('OverflowMenu', module)
           />
         </OverflowMenu>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            Sometimes you just want to render something other than an icon
+          `,
+      },
+    }
   );

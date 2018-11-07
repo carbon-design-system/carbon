@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action, decorateAction } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
@@ -15,8 +15,8 @@ const datePickerOnChangeActions = decorateAction([
 ]);
 
 const patterns = {
-  'd{1,2}/d{4}': 'Short (d{1,2}/d{4})',
-  'd{1,2}/d{1,2}/d{4}': 'Regular (d{1,2}/d{1,2}/d{4})',
+  'Short (d{1,2}/d{4})': 'd{1,2}/d{4}',
+  'Regular (d{1,2}/d{1,2}/d{4})': 'd{1,2}/d{1,2}/d{4}',
 };
 
 const props = {
@@ -59,24 +59,24 @@ storiesOf('DatePicker', module)
   .addDecorator(withKnobs)
   .add(
     'simple',
-    withInfo({
-      text: 'A simple Date Picker consists of an input field and no calendar.',
-    })(() => (
+    () => (
       <DatePicker
         {...props.datePicker()}
         short={boolean('Use shorter width (short in <DatePicker>)', false)}
         datePickerType="simple">
         <DatePickerInput {...props.datePickerInput()} />
       </DatePicker>
-    ))
+    ),
+    {
+      info: {
+        text:
+          'A simple Date Picker consists of an input field and no calendar.',
+      },
+    }
   )
   .add(
     'single with calendar',
-    withInfo({
-      text: `
-        A single Date Picker consists of an input field and a calendar.
-      `,
-    })(() => (
+    () => (
       <DatePicker
         {...props.datePicker()}
         datePickerType="single"
@@ -92,15 +92,18 @@ storiesOf('DatePicker', module)
           )}
         />
       </DatePicker>
-    ))
+    ),
+    {
+      info: {
+        text: `
+            A single Date Picker consists of an input field and a calendar.
+          `,
+      },
+    }
   )
   .add(
     'range with calendar',
-    withInfo({
-      text: `
-        A range Date Picker consists of two input fields and a calendar.
-      `,
-    })(() => {
+    () => {
       const datePickerInputProps = props.datePickerInput();
       return (
         <DatePicker
@@ -124,15 +127,18 @@ storiesOf('DatePicker', module)
           />
         </DatePicker>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            A range Date Picker consists of two input fields and a calendar.
+          `,
+      },
+    }
   )
   .add(
     'range with calendar and min/max dates',
-    withInfo({
-      text: `
-        A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
-      `,
-    })(() => {
+    () => {
       const datePickerInputProps = props.datePicker();
       return (
         <DatePicker
@@ -151,16 +157,18 @@ storiesOf('DatePicker', module)
           />
         </DatePicker>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
+          `,
+      },
+    }
   )
   .add(
     'fully controlled',
-    withInfo({
-      text: `
-        If your application needs to control the value of the date picker and
-        be notified of any changes.
-      `,
-    })(() => (
+    () => (
       <WithState initialState={{ date: '' }}>
         {({ state, setState }) => (
           <>
@@ -185,13 +193,20 @@ storiesOf('DatePicker', module)
           </>
         )}
       </WithState>
-    ))
+    ),
+    {
+      info: {
+        text: `
+            If your application needs to control the value of the date picker and
+            be notified of any changes.
+          `,
+      },
+    }
   )
-  .add(
-    'skeleton',
-    withInfo({
+  .add('skeleton', () => <DatePickerSkeleton range />, {
+    info: {
       text: `
-        Placeholder skeleton state to use when content is loading.
-        `,
-    })(() => <DatePickerSkeleton range />)
-  );
+            Placeholder skeleton state to use when content is loading.
+            `,
+    },
+  });
