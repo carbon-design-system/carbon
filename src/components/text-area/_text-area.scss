@@ -88,29 +88,9 @@
       color: transparent;
     }
   }
-
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
 }
 
-@mixin text-area--experimental {
+@mixin text-area--x {
   .#{$prefix}--text-area {
     @include reset;
     @include typescale('zeta');
@@ -192,7 +172,7 @@
 
 @include exports('text-area') {
   @if feature-flag-enabled('components-x') {
-    @include text-area--experimental;
+    @include text-area--x;
   } @else {
     @include text-area;
   }
