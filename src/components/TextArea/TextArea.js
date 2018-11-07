@@ -29,6 +29,7 @@ const TextArea = ({
     },
   };
 
+  const errorId = id + '-error-msg';
   const textareaClasses = classNames('bx--text-area', className, {
     'bx--text-area--light': light,
   });
@@ -43,13 +44,17 @@ const TextArea = ({
   ) : null;
 
   const error = invalid ? (
-    <div className="bx--form-requirement">{invalidText}</div>
+    <div className="bx--form-requirement" id={errorId}>
+      {invalidText}
+    </div>
   ) : null;
 
   const input = invalid ? (
     <textarea
       {...other}
       {...textareaProps}
+      aria-invalid
+      aria-describedby={errorId}
       className={textareaClasses}
       data-invalid
     />
