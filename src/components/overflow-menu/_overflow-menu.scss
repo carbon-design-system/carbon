@@ -313,6 +313,10 @@
     &:focus {
       @include focus-outline('outline');
     }
+
+    &::-moz-focus-inner {
+      border: none;
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
