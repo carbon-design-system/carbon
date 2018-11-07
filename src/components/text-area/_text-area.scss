@@ -188,26 +188,6 @@
       color: transparent;
     }
   }
-
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
 }
 
 @include exports('text-area') {
