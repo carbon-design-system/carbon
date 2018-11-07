@@ -64,7 +64,8 @@ $grid-gutter-breakpoints: (
 
   @for $i from 1 through $columns {
     .#{$prefix}--col-xs-#{$i} {
-      flex-basis: (100% * $i / $columns);
+      flex-basis: auto;
+      width: (100% * $i / $columns);
     }
 
     .#{$prefix}--offset-xs-#{$i} {
@@ -81,7 +82,8 @@ $grid-gutter-breakpoints: (
 
       @for $i from 1 through $columns {
         .#{$prefix}--col-#{$breakpoint}-#{$i} {
-          flex-basis: (100% * $i / $columns);
+          flex-basis: auto;
+          width: (100% * $i / $columns);
         }
 
         .#{$prefix}--offset-#{$breakpoint}-#{$i} {
@@ -131,6 +133,7 @@ $grid-gutter-breakpoints: (
 }
 
 @mixin column-size($col-num) {
-  flex-basis: (100% * $col-num / $columns);
+  flex-basis: auto;
+  width: (100% * $col-num / $columns);
   max-width: (100% * $col-num / $columns);
 }
