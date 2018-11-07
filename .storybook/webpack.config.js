@@ -41,7 +41,7 @@ const styleLoaders = [
         $feature-flags: (
           components-x: ${useExperimentalFeatures},
           grid: ${useExperimentalFeatures},
-          ui-shell: ${useExperimentalFeatures},
+          ui-shell: true,
         );
       `,
       sourceMap: useStyleSourceMap,
