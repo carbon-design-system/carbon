@@ -127,9 +127,9 @@
   .#{$prefix}--text-area[data-invalid],
   .#{$prefix}--text-area:invalid,
   .#{$prefix}--text-area[data-loading] {
-    padding-right: rem(40px);
+    padding-left: rem(40px);
     background-repeat: no-repeat;
-    background-position: right 8px bottom 50%;
+    background-position: left 15px top 20%;
   }
 
   //-----------------------------
