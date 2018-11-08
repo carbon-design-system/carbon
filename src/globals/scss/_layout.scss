@@ -46,6 +46,18 @@ $padding: (
   }
 }
 
+@mixin max-breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media screen and (max-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $size) {
+      @content;
+    }
+  }
+}
+
 //-------------------------------------
 // @mixin: grid-container
 //-------------------------------------
