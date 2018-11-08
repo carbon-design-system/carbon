@@ -261,7 +261,7 @@
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > {Menu,Submenu}
   //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav__submenu[aria-haspopup='true'][role='button'] {
+  .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
     @include button-reset($width: true);
 
     display: flex;
@@ -291,6 +291,14 @@
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true'] .#{$prefix}--side-nav__submenu-chevron > svg {
     transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu'] {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true'] + .#{$prefix}--side-nav__menu[role='menu'] {
+    display: block;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[role='menuitem'] {
@@ -379,7 +387,7 @@
   // Variants - Fixed
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
-  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu[role='button'][aria-haspopup='true'] {
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
     padding-left: mini-units(2);
   }
 
