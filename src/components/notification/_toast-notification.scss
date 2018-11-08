@@ -65,6 +65,7 @@
     }
   }
 
+  .#{$prefix}--toast-notification__close-icon,
   .#{$prefix}--toast-notification__icon {
     height: 10px;
     width: 10px;
@@ -164,6 +165,12 @@
 
     &:focus {
       @include focus-outline('outline');
+    }
+
+    .#{$prefix}--toast-notification__close-icon {
+      height: rem(10px);
+      width: rem(10px);
+      fill: $ui-05;
     }
   }
 
