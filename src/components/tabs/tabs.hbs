@@ -7,13 +7,10 @@
   </div>
   <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
     {{#each items}}
-      <li class="bx--tabs__nav-item{{#if selected}} bx--tabs__nav-item--selected{{/if}}" data-target=".{{panelClass}}" role="presentation">
+      <li class="bx--tabs__nav-item{{#if selected}} bx--tabs__nav-item--selected{{/if}}" data-target=".{{panelClass}}" role="presentation" {{#if disabled}} disabled {{/if}}>
         <a id="{{linkId}}" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}"{{#if selected}} aria-selected="true"{{/if}}>{{label}}</a>
       </li>
     {{/each}}
-      <li class="bx--tabs__nav-item" data-target=".tab-6" role="presentation" disabled>
-        <a id="5" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}">Tab label 6</a>
-      </li>
   </ul>
 </nav>
 <!-- The markup below is for demonstration purposes only -->
