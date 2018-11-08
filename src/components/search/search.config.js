@@ -1,5 +1,7 @@
 'use strict';
 
+const { componentsX } = require('../../globals/js/feature-flags');
+
 module.exports = {
   default: 'large',
   variants: [
@@ -13,6 +15,7 @@ module.exports = {
       `,
       context: {
         suffix: 'lg',
+        componentsX,
       },
     },
     {
@@ -26,6 +29,7 @@ module.exports = {
       `,
       context: {
         suffix: 'sm',
+        componentsX,
       },
     },
     {
@@ -39,6 +43,7 @@ module.exports = {
       context: {
         suffix: 'lg',
         light: true,
+        componentsX,
       },
     },
     {
@@ -53,6 +58,7 @@ module.exports = {
       context: {
         suffix: 'sm',
         light: true,
+        componentsX,
       },
     },
   ],
