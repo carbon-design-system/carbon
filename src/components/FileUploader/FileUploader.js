@@ -130,7 +130,8 @@ export class FileUploaderButton extends Component {
       ...other
     } = this.props;
     const classes = classNames({
-      'bx--file': true,
+      'bx--btn': true,
+      [`bx--btn--${buttonKind}`]: true,
       [className]: className,
     });
 
@@ -139,19 +140,14 @@ export class FileUploaderButton extends Component {
     return (
       <div
         role="button"
-        tabIndex="0"
+        tabIndex={tabIndex || 0}
         className={classes}
         onKeyDown={evt => {
           if (evt.which === 13 || evt.which === 32) {
             this.input.click();
           }
         }}>
-        <label
-          className={`bx--btn bx--btn--${buttonKind}`}
-          tabIndex={tabIndex}
-          htmlFor={this.uid}
-          role={role}
-          {...other}>
+        <label htmlFor={this.uid} role={role} {...other}>
           {this.state.labelText}
         </label>
         <input

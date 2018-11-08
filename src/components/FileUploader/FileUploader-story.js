@@ -45,7 +45,7 @@ const props = {
         false
       ),
       role: text('ARIA role of the button (role)', ''),
-      tabIndex: number('Tab index (tabIndex)', -1),
+      tabIndex: number('Tab index (tabIndex)', 0),
       onChange: action('onChange'),
     };
   },
