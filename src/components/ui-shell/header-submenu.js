@@ -12,6 +12,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   constructor(element, options) {
     super(element, options);
     this.manage(on(this.element.ownerDocument, 'click', this._handleClick));
+    this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
   /**
    * The map associating DOM element and HeaderSubmenu instance.
@@ -44,30 +45,67 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   /**
    * Closes the menu if this component loses focus.
    */
-  handleBlur() {
+  handleBlur = () => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (trigger) {
       trigger.setAttribute(this.options.attribExpanded, false);
     }
-  }
+  };
+
+  /**
+   * @returns {Element} Currently highlighted element.
+   */
+  getCurrentNavigation = () => {
+    const focused = this.element.ownerDocument.activeElement;
+    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+  };
+
+  /**
+   * Moves the focus up/down.
+   * @param {number} direction The direction of navigating.
+   */
+  navigate = direction => {
+    const items = [...this.element.querySelectorAll(this.options.selectorItem)];
+    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const getNextItem = old => {
+      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+
+      // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+      const index = Math.max(items.indexOf(old) + direction, -1);
+      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+    };
+    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+      if (
+        !current.matches(this.options.selectorItemHidden) &&
+        !current.parentNode.matches(this.options.selectorItemHidden) &&
+        !current.matches(this.options.selectorItemSelected)
+      ) {
+        current.focus();
+        break;
+      }
+    }
+  };
 
   /**
    * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
-  _handleKeyDown(event) {
-    const isOpen = this.element.classList.contains(this.options.classOpen);
+  _handleKeyDown = event => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    if (!trigger) {
+      return;
+    }
+    const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
       40: this.constructor.NAVIGATE.FORWARD,
     }[event.which];
-    if (isOpen && direction !== undefined) {
+    if (expanded && direction !== undefined) {
       this.navigate(direction);
       event.preventDefault(); // Prevents up/down keys from scrolling container
-    } else {
-      this._toggle(event);
     }
-  }
+  };
 
   /**
    * The component options.
@@ -89,4 +127,17 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
       attribExpanded: 'aria-expanded',
     };
   }
+
+  /**
+   * Enum for navigating backward/forward.
+   * @readonly
+   * @member Dropdown.NAVIGATE
+   * @type {Object}
+   * @property {number} BACKWARD Navigating backward.
+   * @property {number} FORWARD Navigating forward.
+   */
+  static NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1,
+  };
 }
