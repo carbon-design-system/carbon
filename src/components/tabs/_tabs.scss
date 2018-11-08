@@ -229,24 +229,29 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-md;
-    height: rem(40px);
+    height: rem(32px);
     cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
     background-color: $field-01;
-    box-shadow: 0 1px 0 0 $ui-05;
+    box-shadow: 0 1px 0 0 $ui-04;
     @include breakpoint(bp--sm--major) {
       display: none;
     }
   }
 
   .#{$prefix}--tabs-trigger:focus {
-    outline: none;
-    box-shadow: 0 2px 0 0 $brand-01;
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tabs-trigger:hover {
+    background-color: $ui-03;
   }
 
   .#{$prefix}--tabs-trigger svg {
     width: rem(10px);
     height: rem(5px);
-    fill: $brand-01;
+    fill: $ui-05;
   }
 
   // There is only a difference in tab color when in mobile/dropdown view
@@ -257,10 +262,15 @@
   .#{$prefix}--tabs-trigger-text {
     text-decoration: none;
     color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--tabs-trigger-text:hover {
+    color: $text-01;
   }
 
   .#{$prefix}--tabs-trigger-text:focus {
-    @include focus-outline('border');
+    outline: none;
   }
 
   .#{$prefix}--tabs__nav {
@@ -308,16 +318,29 @@
         margin-left: rem(1px);
       }
     }
+    @include max-breakpoint(bp--sm--major) {
+      height: rem(33px);
+      border-bottom: 1px solid $ui-03;
+      &:last-of-type {
+        border: none;
+      }
+    }
   }
 
   //-----------------------------
   // Item - Hover
   //-----------------------------
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
-    border-bottom: $tab-underline-color-hover;
     @include breakpoint(bp--sm--major) {
+      border-bottom: $tab-underline-color-hover;
       outline: 1px solid transparent;
       background: transparent;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover:not([disabled]) {
+    @include max-breakpoint(bp--sm--major) {
+      background-color: $ui-03;
     }
   }
 
@@ -348,6 +371,11 @@
         font-weight: 600;
       }
     }
+    @include max-breakpoint(bp--sm--major) {
+      // border-bottom: 1px solid $ui-03;
+      // background-color: $ui-03;
+      display: none;
+    }
   }
 
   .#{$prefix}--tabs__nav-link {
@@ -364,6 +392,15 @@
       &:hover {
         color: $text-01;
       }
+      &:focus {
+        outline: 2px solid $brand-01;
+      }
+    }
+    @include max-breakpoint(bp--sm--major) {
+      width: 100%;
+      color: $text-01;
+      text-overflow: ellipsis;
+      overflow: hidden;
       &:focus {
         outline: 2px solid $brand-01;
       }
