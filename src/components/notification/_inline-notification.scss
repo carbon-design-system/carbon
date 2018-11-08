@@ -201,6 +201,12 @@
     &:focus {
       @include focus-outline('outline');
     }
+
+    .#{$prefix}--inline-notification__close-icon {
+      height: rem(10px);
+      width: rem(10px);
+      fill: $ui-05;
+    }
   }
 }
 
