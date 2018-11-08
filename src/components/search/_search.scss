@@ -196,10 +196,6 @@
       @include focus-outline('outline');
     }
 
-    &:hover {
-      background-color: $hover-field;
-    }
-
     &::placeholder {
       color: $text-03;
       font-weight: 400;
@@ -208,6 +204,22 @@
     &::-ms-clear {
       display: none;
     }
+  }
+
+  .#{$prefix}--search-input[disabled] {
+    color: $disabled;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: $disabled;
+      font-weight: 400;
+    }
+  }
+
+  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
+    fill: $disabled;
   }
 
   .#{$prefix}--search--light .#{$prefix}--search-input {
@@ -250,10 +262,6 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    border-bottom: 1px solid transparent;
-
-    &:hover {
-    }
   }
 
   .#{$prefix}--search-close:focus {
@@ -271,7 +279,6 @@
     background-color: $ui-01;
     position: relative;
     padding: 0;
-    outline: 1px solid transparent;
     order: 2;
   }
 
