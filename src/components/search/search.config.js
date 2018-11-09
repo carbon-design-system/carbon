@@ -1,7 +1,12 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 module.exports = {
   default: 'large',
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'large',

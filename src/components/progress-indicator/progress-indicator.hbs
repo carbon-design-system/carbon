@@ -1,6 +1,6 @@
-<ul data-progress data-progress-current class="bx--progress">
+<ul data-progress data-progress-current class="{{@root.prefix}}--progress">
   {{#each steps}}
-    <li class="bx--progress-step bx--progress-step--{{state}}">
+    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}}">
       {{#is state "complete"}}
         <svg width="16" height="16" viewBox="0 0 16 16">
           <g fill-rule="nonzero">
@@ -20,8 +20,8 @@
           <circle cx="12" cy="12" r="12"></circle>
         </svg>
       {{/is}}
-      <p class="bx--progress-label">{{label}}</p>
-      <span class="bx--progress-line"></span>
+      <p class="{{@root.prefix}}--progress-label">{{label}}</p>
+      <span class="{{@root.prefix}}--progress-line"></span>
     </li>
   {{/each}}
 </ul>

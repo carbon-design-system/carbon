@@ -1,5 +1,7 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 const items = [
   {
     title: 'Need Help?',
@@ -14,6 +16,9 @@ const items = [
 module.exports = {
   meta: {
     useIframe: true,
+  },
+  context: {
+    prefix,
   },
   variants: [
     {

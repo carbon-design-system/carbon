@@ -9,34 +9,34 @@
   Most noticeably, the first menuitem in a submenu should receive a tabindex of
   "0", while the rest should get "-1"
 -->
-<nav class="bx--header__nav" aria-label="Platform Name">
-  <ul class="bx--header__menu-bar" role="menubar" aria-label="Platform Name">
+<nav class="{{@root.prefix}}--header__nav" aria-label="Platform Name">
+  <ul class="{{@root.prefix}}--header__menu-bar" role="menubar" aria-label="Platform Name">
     {{#each header.navLinks}}
       {{#if href}}
         <li>
-          <a class="bx--header__menu-item" href="javascript:void(0)" role="menuitem" tabindex="0">
+          <a class="{{@root.prefix}}--header__menu-item" href="javascript:void(0)" role="menuitem" tabindex="0">
             {{this.title}}
           </a>
         </li>
       {{else}}
-        <li class="bx--header__submenu">
+        <li class="{{@root.prefix}}--header__submenu">
           <a
-            class="bx--header__menu-item bx--header__menu-title"
+            class="{{@root.prefix}}--header__menu-item {{@root.prefix}}--header__menu-title"
             role="menuitem"
             aria-haspopup="true"
             aria-expanded="{{this.state.expanded}}"
             href="javascript:void(0)"
             tabindex="0">
             {{this.title}}
-            <svg class="bx--header__menu-arrow" width="12" height="7" aria-hidden="true">
+            <svg class="{{@root.prefix}}--header__menu-arrow" width="12" height="7" aria-hidden="true">
               <path d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"/>
             </svg>
           </a>
-          <ul class="bx--header__menu" role="menu" aria-label="{{this.title}}">
+          <ul class="{{@root.prefix}}--header__menu" role="menu" aria-label="{{this.title}}">
             {{#each this.items}}
               <li role="none">
-                <a class="bx--header__menu-item" role="menuitem" href="{{this.href}}" tabindex="-1">
-                  <span class="bx--text-truncate--end">
+                <a class="{{@root.prefix}}--header__menu-item" role="menuitem" href="{{this.href}}" tabindex="-1">
+                  <span class="{{@root.prefix}}--text-truncate--end">
                     {{this.title}}
                   </span>
                 </a>

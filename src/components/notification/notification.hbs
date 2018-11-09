@@ -1,19 +1,19 @@
 {{#each items}}
-<div data-notification class="bx--{{../variant}}-notification bx--{{../variant}}-notification--{{type}}" role="alert">
+<div data-notification class="{{@root.prefix}}--{{../variant}}-notification {{@root.prefix}}--{{../variant}}-notification--{{type}}" role="alert">
   {{#is ../variant "toast"}}
   {{#if ../componentsX}}
   {{#is type "error"}}
-  <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z" fill-rule="evenodd" />
   </svg>
   {{/is}}
   {{#is type "success"}}
-  <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"></path>
   </svg>
   {{/is}}
   {{#is type "warning"}}
-  <svg class="bx--{{../variant}}-notification__icon" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+  <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <path d="M18.05 15.95L9.925.95a.625.625 0 0 0-1.1 0L.7 15.95a.625.625 0 0 0 0 .625.625.625 0 0 0 .55.3H17.5a.625.625 0 0 0 .55-.925z"
         id="a" />
@@ -32,26 +32,26 @@
   {{/is}}
   {{/if}}
   {{/is}}
-  <div class="bx--{{../variant}}-notification__details">
+  <div class="{{@root.prefix}}--{{../variant}}-notification__details">
     {{#is ../variant "inline"}}
     {{#is type "error"}}
-    <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z" fill-rule="evenodd" />
     </svg>
     {{/is}}
     {{#is type "info"}}
-    <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm1-3V7H7v6h2zM8 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
     </svg>
     {{/is}}
     {{#is type "success"}}
-    <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"></path>
     </svg>
     {{/is}}
     {{#is type "warning"}}
     {{#if ../componentsX}}
-    <svg class="bx--{{../variant}}-notification__icon" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+    <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <path d="M18.05 15.95L9.925.95a.625.625 0 0 0-1.1 0L.7 15.95a.625.625 0 0 0 0 .625.625.625 0 0 0 .55.3H17.5a.625.625 0 0 0 .55-.925z"
           id="a" />
@@ -68,24 +68,24 @@
       </g>
     </svg>
     {{else}}
-    <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <path d="M.75 16a.75.75 0 0 1-.67-1.085L7.33.415a.75.75 0 0 1 1.34 0l7.25 14.5A.75.75 0 0 1 15.25 16H.75zm6.5-10v5h1.5V6h-1.5zM8 13.5A.75.75 0 1 0 8 12a.75.75 0 0 0 0 1.5z"></path>
     </svg>
     {{/if}}
     {{/is}}
-    <div class="bx--{{../variant}}-notification__text-wrapper">
-      <p class="bx--{{../variant}}-notification__title">{{title}}</p>
-      <p class="bx--{{../variant}}-notification__subtitle">{{subtitle}}</p>
+    <div class="{{@root.prefix}}--{{../variant}}-notification__text-wrapper">
+      <p class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</p>
+      <p class="{{@root.prefix}}--{{../variant}}-notification__subtitle">{{subtitle}}</p>
     </div>
     {{/is}}
     {{#is ../variant "toast"}}
-    <h3 class="bx--{{../variant}}-notification__title">{{title}}</h3>
-    <p class="bx--{{../variant}}-notification__subtitle">{{subtitle}}</p>
-    <p class="bx--{{../variant}}-notification__caption">{{timestamp}}</p>
+    <h3 class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</h3>
+    <p class="{{@root.prefix}}--{{../variant}}-notification__subtitle">{{subtitle}}</p>
+    <p class="{{@root.prefix}}--{{../variant}}-notification__caption">{{timestamp}}</p>
     {{/is}}
   </div>
-  <button data-notification-btn class="bx--{{../variant}}-notification__close-button" type="button" aria-label="close">
-    <svg aria-hidden="true" class="bx--{{../variant}}-notification__close-icon" width="10" height="10" viewBox="0 0 10 10"
+  <button data-notification-btn class="{{@root.prefix}}--{{../variant}}-notification__close-button" type="button" aria-label="close">
+    <svg aria-hidden="true" class="{{@root.prefix}}--{{../variant}}-notification__close-icon" width="10" height="10" viewBox="0 0 10 10"
       xmlns="http://www.w3.org/2000/svg">
       <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
         fill-rule="nonzero" />
