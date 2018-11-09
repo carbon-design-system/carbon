@@ -35,6 +35,24 @@ const { iconHelper } = require('@carbon/icons-handlebars');
 handlebars.registerHelper('carbon-icon', iconHelper);
 ```
 
+## Usage
+
+You can use the `carbon-icon` helper by passing in the name of the icon you'd
+like to render. For example:
+
+```hbs
+{{ carbon-icon "Accessibility32" }}
+```
+
+This will output the default `<svg>` markup for the `Accessibility` icon at
+32x32. You can pass in additional properties like `aria-label` by doing:
+
+```hbs
+{{ carbon-icon "Accessibility32" aria-label="Accessibility label" }}
+```
+
+These attributes will be applied to the top-level `<svg>` node.
+
 ## 🤲 Contributing
 
 Looking to contribute? You should start [here](../../.github/CONTRIBUTING.md)!
