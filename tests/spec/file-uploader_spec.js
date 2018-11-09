@@ -1,8 +1,15 @@
 import FileUploader from '../../src/components/file-uploader/file-uploader';
+import addKeyboardNavigation from '../../src/components/file-uploader/addKeyboardNavigation';
 import HTML from '../../html/file-uploader/file-uploader.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('File Uploader', function() {
+  describe('addKeyboardNavigation', () => {
+    expect(function() {
+      addKeyboardNavigation();
+    }).not.toThrow();
+  });
+
   describe('Constructor', function() {
     let instance;
     let element;
