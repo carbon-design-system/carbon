@@ -252,7 +252,6 @@
       height: rem(24px);
       width: rem(48px);
       border-radius: rem(15px);
-      border: 1px solid $ui-04;
       top: 0;
     }
 
@@ -343,11 +342,17 @@
   //----------------------------------------------
   // Focus
   // ---------------------------------------------
+  .#{$prefix}--toggle + .#{$prefix}--toggle__label,
+  .#{$prefix}--toggle + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      transition: box-shadow $transition--base;
+      box-shadow: 0 0 0 2px transparent;
+    }
+  }
   .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
       box-shadow: 0 0 0 2px $focus;
-      border-color: $focus;
     }
   }
 
