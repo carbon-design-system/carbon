@@ -341,17 +341,22 @@
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
-    height: rem(56px);
-    padding: 0 $spacing-2xl 0 $spacing-md;
+    border: none;
+    // border: 1px solid gold; //REMOVE THIS!!!!!==================
+    max-width: rem(760px);
+    min-width: rem(320px);
+    height: rem(32px);
+    padding: 0 $spacing-3xl 0 $spacing-md;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
     display: flex;
     align-items: center;
-    height: 130%;
+    height: rem(32px);
     overflow-x: scroll;
     position: relative;
-    padding-bottom: $spacing-md;
+    // border: 1px solid red; //REMOVE THIS!!!!!=====================
+    padding: 0;
   }
 
   .#{$prefix}--snippet--single pre {
@@ -381,9 +386,10 @@
   }
 
   .#{$prefix}--snippet__icon {
-    fill: $brand-01;
-    height: rem(24px);
-    width: rem(18px);
+    fill: $text-02;
+    height: rem(16px);
+    width: rem(16px);
+    // bottom: 50%;
     transition: all $transition--base $carbon--standard-easing;
 
     &:hover {
@@ -395,9 +401,10 @@
     @include reset;
     cursor: pointer;
     position: absolute;
-    top: 0.675rem;
-    right: 0.5rem;
+    top: 0;
+    right: 0;
     border: none;
+    // border: 1px solid green; //REMOVE THIS!!!!!==================
     background-color: transparent;
     outline: none;
     padding: 0;
