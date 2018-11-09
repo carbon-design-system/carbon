@@ -16,11 +16,11 @@ const DataTableSkeleton = ({
     'bx--data-table-v2--compact': compact,
   });
 
-  const rows = [];
   const rowRepeat = rowCount - 1;
-  const columnsArray = Array.from(Array(columnCount).keys()); // [0,1,2...columnCount-1]
-  for (var i = 0; i < rowRepeat; i++) {
-    rows.push(<tr key={i}>{columnsArray.map(j => <td key={j} />)}</tr>);
+  const rows = Array(rowRepeat);
+  const columnsArray = Array.from({ length: columnCount }, (_, index) => index);
+  for (let i = 0; i < rowRepeat; i++) {
+    rows[i] = <tr key={i}>{columnsArray.map(j => <td key={j} />)}</tr>;
   }
 
   return (

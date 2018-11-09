@@ -582,6 +582,16 @@
         "test",
         "doc"
       ]
+    },
+    {
+      "login": "slaytanic",
+      "name": "Carlos Eduardo Monti",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/890?v=4",
+      "profile": "http://www.gfxnstuff.com.ar",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "repoType": "github"
