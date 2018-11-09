@@ -70,43 +70,48 @@ describe('Header Submenu', function() {
       document.body.removeChild(element);
     });
   });
-});
 
-describe('Handle blur', function() {
-  let headerSubmenu;
-  let element;
-  let triggerNode;
-  let input;
+  describe('Handle blur', function() {
+    let headerSubmenu;
+    let element;
+    let triggerNode;
+    let input;
 
-  beforeAll(function() {
-    triggerNode = document.createElement('a');
-    element = document.createElement('li');
-    input = document.createElement('input');
-    triggerNode.className = 'bx--header__menu-title';
-    element.appendChild(triggerNode);
-    document.body.appendChild(element);
-    headerSubmenu = new HeaderSubmenu(element);
-    input.type = 'text';
-    document.body.appendChild(input);
-  });
+    beforeAll(function() {
+      triggerNode = document.createElement('a');
+      element = document.createElement('li');
+      input = document.createElement('input');
+      triggerNode.className = 'bx--header__menu-title';
+      element.appendChild(triggerNode);
+      document.body.appendChild(element);
+      headerSubmenu = new HeaderSubmenu(element);
+      input.type = 'text';
+      document.body.appendChild(input);
+    });
 
-  beforeEach(function() {
-    triggerNode.setAttribute('aria-expanded', 'true');
-    triggerNode.focus();
-  });
+    beforeEach(function() {
+      triggerNode.setAttribute('aria-expanded', 'true');
+      triggerNode.focus();
+    });
 
-  it('should close menu when another element is focused', function() {
-    input.focus();
-    expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
-  });
+    it('should close menu when another element is focused', function() {
+      input.focus();
+      expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+    });
 
-  afterEach(function() {
-    triggerNode.setAttribute('aria-expanded', 'false');
-  });
+    it('should always close menu when document is clicked', function() {
+      document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+    });
 
-  afterAll(function() {
-    headerSubmenu.release();
-    document.body.removeChild(element);
-    document.body.removeChild(input);
+    afterEach(function() {
+      triggerNode.setAttribute('aria-expanded', 'false');
+    });
+
+    afterAll(function() {
+      headerSubmenu.release();
+      document.body.removeChild(element);
+      document.body.removeChild(input);
+    });
   });
 });
