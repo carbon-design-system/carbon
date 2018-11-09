@@ -119,9 +119,11 @@ describe('Header Submenu', function() {
     let headerSubmenu;
     let element;
     let triggerNode;
-    let itemLinkNode;
     let itemsContainerNode;
-    let itemNode;
+    let itemNode1;
+    let itemNode2;
+    let itemLinkNode1;
+    let itemLinkNode2;
 
     beforeAll(function() {
       element = document.createElement('li');
@@ -130,14 +132,70 @@ describe('Header Submenu', function() {
       element.appendChild(triggerNode);
       itemsContainerNode = document.createElement('bx--header__menu');
       itemsContainerNode.className = 'bx--header__menu';
-      itemNode = document.createElement('li');
-      itemLinkNode = document.createElement('a');
-      itemLinkNode.className = 'bx--header__menu-item';
-      itemNode.appendChild(itemLinkNode);
-      itemsContainerNode.appendChild(itemNode);
+      itemNode1 = document.createElement('li');
+      itemNode2 = document.createElement('li');
+      itemLinkNode1 = document.createElement('a');
+      itemLinkNode1.className = 'bx--header__menu-item';
+      itemLinkNode2 = document.createElement('a');
+      itemLinkNode2.className = 'bx--header__menu-item';
+      itemNode1.appendChild(itemLinkNode1);
+      itemNode2.appendChild(itemLinkNode2);
+      itemsContainerNode.appendChild(itemNode1);
+      itemsContainerNode.appendChild(itemNode2);
       element.appendChild(itemsContainerNode);
       headerSubmenu = new HeaderSubmenu(element);
       document.body.appendChild(element);
+    });
+
+    describe('Arrow keys', function() {
+      const upArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(upArrowKeydown, 'which', { value: 38, writable: true });
+      const downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
+
+      it('should move focus from currently focused item to previous menu item', function() {
+        spyOn(itemLinkNode2, 'focus');
+        triggerNode.setAttribute('aria-expanded', 'true');
+        triggerNode.dispatchEvent(upArrowKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+        expect(itemLinkNode2.focus).toHaveBeenCalled();
+        expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should wrap focus from first menu item to last menu item', function() {
+        spyOn(itemLinkNode1, 'focus');
+        spyOn(itemLinkNode2, 'focus');
+        triggerNode.setAttribute('aria-expanded', 'true');
+        triggerNode.dispatchEvent(downArrowKeydown);
+        triggerNode.dispatchEvent(upArrowKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+        expect(itemLinkNode1.focus).toHaveBeenCalledTimes(1);
+        expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should open menu when menu is focused', function() {
+        triggerNode.dispatchEvent(downArrowKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+      });
+
+      it('should move focus from currently focused item to next menu item', function() {
+        spyOn(itemLinkNode2, 'focus');
+        triggerNode.setAttribute('aria-expanded', 'true');
+        triggerNode.dispatchEvent(downArrowKeydown);
+        triggerNode.dispatchEvent(downArrowKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+        expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should wrap focus from last menu item to first menu item', function() {
+        spyOn(itemLinkNode1, 'focus');
+        triggerNode.setAttribute('aria-expanded', 'true');
+        triggerNode.dispatchEvent(downArrowKeydown);
+        triggerNode.dispatchEvent(downArrowKeydown);
+        triggerNode.dispatchEvent(downArrowKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+        expect(itemLinkNode1.focus).toHaveBeenCalledTimes(2);
+      });
     });
 
     describe('Esc key', function() {
@@ -152,7 +210,7 @@ describe('Header Submenu', function() {
 
       it('should close menu with ESC key when an item is focused', function() {
         triggerNode.setAttribute('aria-expanded', 'true');
-        itemNode.dispatchEvent(escKeydown);
+        itemNode1.dispatchEvent(escKeydown);
         expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
       });
 
@@ -178,7 +236,7 @@ describe('Header Submenu', function() {
       });
 
       it('should not close menu with space key on an item', function() {
-        itemNode.dispatchEvent(spaceBarDown);
+        itemNode1.dispatchEvent(spaceBarDown);
         expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
       });
     });
