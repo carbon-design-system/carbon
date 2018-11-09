@@ -1,7 +1,9 @@
 import React from 'react';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from '../CodeSnippet/CodeSnippet.Skeleton';
-import { shallow } from 'enzyme';
+import Copy from '../Copy';
+import CopyButton from '../CopyButton';
+import { shallow, mount } from 'enzyme';
 
 describe('Code Snippet', () => {
   describe('Renders as expected', () => {
@@ -22,6 +24,24 @@ describe('Code Snippet', () => {
 
     it('should all for custom classes to be applied', () => {
       expect(snippet.hasClass('some-class')).toEqual(true);
+    });
+  });
+
+  describe('Triggers appropriate events', () => {
+    it('should call the click handler', () => {
+      const onClick = jest.fn();
+      const clickWrapper = mount(<CodeSnippet onClick={onClick} />);
+      clickWrapper.find(CopyButton).simulate('click');
+      expect(onClick).toBeCalled();
+    });
+
+    it('should call the click handler with type="inline"', () => {
+      const onClick = jest.fn();
+      const clickWrapper = mount(
+        <CodeSnippet type={'inline'} onClick={onClick} />
+      );
+      clickWrapper.find(Copy).simulate('click');
+      expect(onClick).toBeCalled();
     });
   });
 });
