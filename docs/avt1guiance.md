@@ -6,7 +6,7 @@ AVT1 testing is done with a browser extension developed by IBM called the Dynami
 
 ## Installing DAP🔧
 
-1. Grab the plugin while connected to IBM's W3 [from here](https:/aat.w3ibm.mybluemix.net/auth/tools/dap.html).
+1. Grab the plugin while connected to IBM's W3 [from here](https://ibm.biz/BdYkWF).
 
    _Be Warned: Make sure you only download the latest plugin from the specific link above which should be version >1.7. The IBM DAP plugin available to the public in the Chrome extension marketplace is unmaintained and will not support the latest rulesets._
 
