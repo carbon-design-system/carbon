@@ -1,13 +1,14 @@
 <div class="bx--form-item">
   <strong class="bx--label">Account photo</strong>
   <p class="bx--label-description">only .jpg and .png files. 500kb max file size.</p>
-  <div class="bx--file" data-file>
+  <form class="bx--file" data-file>
     <label
-      for="your-file-importer-id-here"
-      class="bx--file-btn bx--btn bx--btn--secondary"
-      role="button"
-      tabindex="0">Add files</label>
+      for="your-file-importer-id-here" 
+      id="input-button"
+      tabindex="0"
+      class="bx--file-btn bx--btn bx--btn--secondary">Add files</label>
     <input
+      tabindex="-1"
       type="file"
       class="bx--file-input"
       id="your-file-importer-id-here"
@@ -15,6 +16,6 @@
       data-target="[data-file-container]"
       multiple
     />
-    <div data-file-container class="bx--file-container"></div>
-  </div>
+    <div id="dog" data-file-container class="bx--file-container"></div>
+  </form>
 </div>
