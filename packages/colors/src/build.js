@@ -101,9 +101,13 @@ function getPartsFromKey(key) {
     // We hit this branch when we have a name that is camelCase. For example,
     // the `G` in `warmGray`
     if (character === character.toUpperCase()) {
-      parts.push(currentPart);
-      currentPart = character.toLowerCase();
-      prevCharacter = character.toLowerCase();
+      if (prevCharacter !== prevCharacter.toUpperCase()) {
+        parts.push(currentPart);
+        currentPart = character.toLowerCase();
+      } else {
+        currentPart += character.toLowerCase();
+      }
+      prevCharacter = character;
       continue;
     }
 
