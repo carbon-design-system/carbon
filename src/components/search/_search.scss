@@ -236,6 +236,12 @@
     height: rem(40px);
   }
 
+  .#{$prefix}--search--xl .#{$prefix}--search-input {
+    @include typescale('epsilon');
+    height: rem(48px);
+    padding: 0 rem(64px) 0 rem(48px);
+  }
+
   .#{$prefix}--search-magnifier {
     left: 0.75rem;
     z-index: 2;
@@ -245,7 +251,14 @@
     top: 50%;
     transform: translateY(-50%);
     // Ensure clear icon is rendered in Firefox (#1127)
-    fill: $ui-05;
+    fill: $text-02;
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
+    height: rem(20px);
+    width: rem(20px);
+    left: rem(24px);
+    transform: translate(-50%, -50%);
   }
 
   .#{$prefix}--search-close {
@@ -264,54 +277,23 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--search--sm .#{$prefix}--search-close {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-close {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
   .#{$prefix}--search-close:focus {
     @include focus-outline('outline');
-  }
-
-  .#{$prefix}--search-button {
-    @include reset;
-    border: 0;
-    transition: $transition--base;
-    height: rem(40px);
-    width: rem(40px);
-    min-width: rem(40px);
-    margin-left: $spacing-2xs;
-    background-color: $ui-01;
-    position: relative;
-    padding: 0;
-    order: 2;
-  }
-
-  .#{$prefix}--search-button svg {
-    position: relative;
-    top: -1px;
-    box-sizing: border-box;
-    vertical-align: middle;
-    transition: $transition--base;
-    fill: $hover-primary;
-    height: 1rem;
-    width: 1rem;
-  }
-
-  .#{$prefix}--search-button:hover,
-  .#{$prefix}--search-button:focus {
-    cursor: pointer;
-    background-color: $brand-01;
-    outline: 1px solid transparent;
-  }
-
-  .#{$prefix}--search-button:hover svg,
-  .#{$prefix}--search-button:focus svg {
-    fill: $ui-01;
   }
 
   .#{$prefix}--search-close--hidden {
     visibility: hidden;
     opacity: 0;
-  }
-
-  .#{$prefix}--search-view--hidden {
-    display: none;
   }
 
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
