@@ -140,6 +140,27 @@ describe('Header Submenu', function() {
       document.body.appendChild(element);
     });
 
+    describe('Space bar', function() {
+      const spaceBarDown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(spaceBarDown, 'which', { value: 32, writable: true });
+
+      it('should open menu with space bar', function() {
+        triggerNode.dispatchEvent(spaceBarDown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+      });
+
+      it('should close menu with space key', function() {
+        triggerNode.setAttribute('aria-expanded', 'true');
+        triggerNode.dispatchEvent(spaceBarDown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+      });
+
+      it('should not close menu with space key on an item', function() {
+        itemNode.dispatchEvent(spaceBarDown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+      });
+    });
+
     afterEach(function() {
       triggerNode.setAttribute('aria-expanded', 'false');
     });
