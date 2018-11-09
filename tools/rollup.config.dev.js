@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const commonjs = require('rollup-plugin-commonjs');
 const resolve = require('rollup-plugin-node-resolve');
 const babel = require('rollup-plugin-babel');
@@ -19,6 +20,9 @@ module.exports = {
             }
           `;
         }
+        if (id === path.resolve(__dirname, '../src/globals/js/feature-flags.js')) {
+          return `export * from ${JSON.stringify('../../../demo/feature-flags')}`;
+        }
         return undefined;
       },
     },
@@ -27,7 +31,7 @@ module.exports = {
       main: true,
     }),
     commonjs({
-      include: ['node_modules/**', 'src/globals/js/feature-flags.js'],
+      include: ['node_modules/**', 'demo/feature-flags.js'],
       sourceMap: true,
       namedExports: {
         'node_modules/react/index.js': [
