@@ -114,4 +114,39 @@ describe('Header Submenu', function() {
       document.body.removeChild(input);
     });
   });
+
+  describe('Handle keydown', function() {
+    let headerSubmenu;
+    let element;
+    let triggerNode;
+    let itemLinkNode;
+    let itemsContainerNode;
+    let itemNode;
+
+    beforeAll(function() {
+      element = document.createElement('li');
+      triggerNode = document.createElement('a');
+      triggerNode.className = 'bx--header__menu-title';
+      element.appendChild(triggerNode);
+      itemsContainerNode = document.createElement('bx--header__menu');
+      itemsContainerNode.className = 'bx--header__menu';
+      itemNode = document.createElement('li');
+      itemLinkNode = document.createElement('a');
+      itemLinkNode.className = 'bx--header__menu-item';
+      itemNode.appendChild(itemLinkNode);
+      itemsContainerNode.appendChild(itemNode);
+      element.appendChild(itemsContainerNode);
+      headerSubmenu = new HeaderSubmenu(element);
+      document.body.appendChild(element);
+    });
+
+    afterEach(function() {
+      triggerNode.setAttribute('aria-expanded', 'false');
+    });
+
+    afterAll(function() {
+      headerSubmenu.release();
+      document.body.removeChild(element);
+    });
+  });
 });
