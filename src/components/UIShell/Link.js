@@ -1,0 +1,33 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+
+/**
+ * Link is a custom component that allows us to supporting rendering elements
+ * other than `a` in our markup. The goal is to allow users to support passing
+ * in their own components to support use-cases like `react-router` or
+ * `@reach/router`
+ */
+const Link = ({ element, ...rest }) => {
+  return React.createElement(element, rest);
+};
+
+const LinkPropTypes = {
+  /**
+   * The base element to use to build the link. Defaults to `a`, can also accept
+   * alternative tag names or custom components like `Link` from `react-router`.
+   */
+  element: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+    PropTypes.func,
+  ]),
+};
+
+Link.propTypes = LinkPropTypes;
+
+Link.defaultProps = {
+  element: 'a',
+};
+
+export { LinkPropTypes };
+export default Link;

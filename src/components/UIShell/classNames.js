@@ -1,37 +1,47 @@
 export const header = {
-  header: 'bx--platform-header',
+  header: 'bx--header',
 };
 
 export const action = {
-  action: 'bx--platform-header__action',
+  action: 'bx--header__action',
   state: {
-    active: 'bx--platform-header__action--active',
+    active: 'bx--header__action--active',
   },
 };
 
 export const button = {
-  button: 'bx--platform-header__menu-trigger',
+  button: 'bx--header__menu-trigger',
 };
 
 export const navigation = {
-  navigation: 'bx--platform-header__nav',
-  menu: 'bx--platform-header__menu',
-  menubar: 'bx--platform-header__menu-bar',
-  menuitem: 'bx--platform-header__menu-item',
-  menutitle: 'bx--platform-header__menu-title',
-  submenu: 'bx--platform-header__submenu',
-  menuarrow: 'bx--platform-header__menu-arrow',
+  navigation: 'bx--header__nav',
+  menu: 'bx--header__menu',
+  menubar: 'bx--header__menu-bar',
+  menuitem: 'bx--header__menu-item',
+  menutitle: 'bx--header__menu-title',
+  submenu: 'bx--header__submenu',
+  menuarrow: 'bx--header__menu-arrow',
 };
 
 export const name = {
-  name: 'bx--platform-header__name',
-  platform: 'bx--platform-header__platform-name',
+  name: 'bx--header__name',
+  platform: 'bx--header__platform-name',
 };
 
 export const global = {
-  global: 'bx--platform-header__global',
+  global: 'bx--header__global',
 };
 
 export const truncate = {
   end: 'bx--text-truncate--end',
+};
+
+export const sidenav = {
+  sidenav: 'bx--side-nav',
+  state: {
+    expanded: 'bx--side-nav--expanded',
+  },
+  variants: {
+    fixed: 'bx--side-nav--fixed',
+  },
 };

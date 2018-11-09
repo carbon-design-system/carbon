@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavLink should render 1`] = `
+<SideNavLink
+  className="custom-classname"
+  element="a"
+  icon={
+    <div>
+      icon
+    </div>
+  }
+  isActive={false}
+>
+  <SideNavItem>
+    <li
+      className="bx--side-nav__item"
+    >
+      <Link
+        className="bx--side-nav__link custom-classname"
+        element="a"
+      >
+        <a
+          className="bx--side-nav__link custom-classname"
+        >
+          <SideNavIcon
+            small={true}
+          >
+            <div
+              className="bx--side-nav__icon bx--side-nav__icon--small"
+            >
+              <div>
+                icon
+              </div>
+            </div>
+          </SideNavIcon>
+          <SideNavLinkText>
+            <span
+              className="bx--side-nav__link-text"
+            >
+              link
+            </span>
+          </SideNavLinkText>
+        </a>
+      </Link>
+    </li>
+  </SideNavItem>
+</SideNavLink>
+`;
+
+exports[`SideNavLink should render 2`] = `
+<SideNavLink
+  className="custom-classname"
+  element="a"
+  icon={
+    <div>
+      icon
+    </div>
+  }
+  isActive={true}
+>
+  <SideNavItem>
+    <li
+      className="bx--side-nav__item"
+    >
+      <Link
+        className="bx--side-nav__link bx--side-nav__link--current custom-classname"
+        element="a"
+      >
+        <a
+          className="bx--side-nav__link bx--side-nav__link--current custom-classname"
+        >
+          <SideNavIcon
+            small={true}
+          >
+            <div
+              className="bx--side-nav__icon bx--side-nav__icon--small"
+            >
+              <div>
+                icon
+              </div>
+            </div>
+          </SideNavIcon>
+          <SideNavLinkText>
+            <span
+              className="bx--side-nav__link-text"
+            >
+              link
+            </span>
+          </SideNavLinkText>
+        </a>
+      </Link>
+    </li>
+  </SideNavItem>
+</SideNavLink>
+`;

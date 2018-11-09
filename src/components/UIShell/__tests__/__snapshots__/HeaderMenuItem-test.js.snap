@@ -15,7 +15,7 @@ exports[`HeaderMenuItem should render 1`] = `
       role="none"
     >
       <a
-        className="bx--platform-header__menu-item"
+        className="bx--header__menu-item"
         role="menuitem"
       >
         <span

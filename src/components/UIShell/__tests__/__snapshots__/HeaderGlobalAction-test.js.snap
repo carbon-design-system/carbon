@@ -9,7 +9,7 @@ exports[`HeaderGlobalAction should render 1`] = `
 >
   <button
     aria-label="Accessibility label"
-    className="bx--platform-header__action custom-class"
+    className="bx--header__action custom-class"
     onClick={[MockFunction]}
     type="button"
   >

@@ -2,6 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { name } from './classNames';
+import Link from './Link';
 
 const HeaderName = ({
   children,
@@ -12,10 +13,10 @@ const HeaderName = ({
 }) => {
   const className = cx(name.name, customClassName);
   return (
-    <a {...rest} className={className} href={href}>
+    <Link {...rest} className={className} href={href}>
       {prefix && <>{prefix}&nbsp;</>}
       <span className={name.platform}>{children}</span>
-    </a>
+    </Link>
   );
 };
 

@@ -13,7 +13,7 @@ exports[`HeaderMenu should render 1`] = `
     tabIndex={-1}
   >
     <li
-      className="bx--platform-header__submenu custom-class"
+      className="bx--header__submenu custom-class"
       onBlur={[Function]}
       onKeyDown={[Function]}
       onMouseLeave={[Function]}
@@ -22,7 +22,7 @@ exports[`HeaderMenu should render 1`] = `
       <a
         aria-expanded={false}
         aria-haspopup="menu"
-        className="bx--platform-header__menu-item bx--platform-header__menu-title"
+        className="bx--header__menu-item bx--header__menu-title"
         href="javascript:void(0)"
         onKeyDown={[Function]}
         role="menuitem"
@@ -30,11 +30,11 @@ exports[`HeaderMenu should render 1`] = `
       >
         Accessibility label
         <ChevronDownGlyph
-          className="bx--platform-header__menu-arrow"
+          className="bx--header__menu-arrow"
         >
           <svg
             aria-hidden={true}
-            className="bx--platform-header__menu-arrow"
+            className="bx--header__menu-arrow"
             height={7}
             viewBox="0 0 12 7"
             width={12}
@@ -47,7 +47,7 @@ exports[`HeaderMenu should render 1`] = `
       </a>
       <ul
         aria-label="Accessibility label"
-        className="bx--platform-header__menu"
+        className="bx--header__menu"
         role="menu"
       >
         <ForwardRef
@@ -66,7 +66,7 @@ exports[`HeaderMenu should render 1`] = `
               role="none"
             >
               <a
-                className="bx--platform-header__menu-item"
+                className="bx--header__menu-item"
                 href="/a"
                 role="menuitem"
                 tabIndex={0}
@@ -96,7 +96,7 @@ exports[`HeaderMenu should render 1`] = `
               role="none"
             >
               <a
-                className="bx--platform-header__menu-item"
+                className="bx--header__menu-item"
                 href="/b"
                 role="menuitem"
                 tabIndex={-1}
@@ -126,7 +126,7 @@ exports[`HeaderMenu should render 1`] = `
               role="none"
             >
               <a
-                className="bx--platform-header__menu-item"
+                className="bx--header__menu-item"
                 href="/c"
                 role="menuitem"
                 tabIndex={-1}

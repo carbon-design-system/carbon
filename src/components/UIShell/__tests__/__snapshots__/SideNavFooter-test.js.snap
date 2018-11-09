@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavFooter should render 1`] = `
+<SideNavFooter
+  assistiveText="open"
+  isExpanded={false}
+  onToggle={[MockFunction]}
+>
+  <footer
+    className="bx--side-nav__footer"
+  >
+    <button
+      className="bx--side-nav__toggle"
+      onClick={[MockFunction]}
+      title="open"
+      type="button"
+    >
+      <div
+        className="bx--side-nav__icon"
+      >
+        <ChevronRight>
+          <svg
+            aria-hidden="true"
+            height="20"
+            viewBox="0 0 32 32"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22 16L12 26l-1.414-1.414L19.172 16l-8.586-8.586L12 6l10 10z"
+            />
+          </svg>
+        </ChevronRight>
+      </div>
+      <span
+        className="bx--assistive-text"
+      >
+        open
+      </span>
+    </button>
+  </footer>
+</SideNavFooter>
+`;
+
+exports[`SideNavFooter should render 2`] = `
+<SideNavFooter
+  assistiveText="close"
+  isExpanded={true}
+  onToggle={[MockFunction]}
+>
+  <footer
+    className="bx--side-nav__footer"
+  >
+    <button
+      className="bx--side-nav__toggle"
+      onClick={[MockFunction]}
+      title="close"
+      type="button"
+    >
+      <div
+        className="bx--side-nav__icon"
+      >
+        <Close>
+          <svg
+            aria-hidden="true"
+            height="20"
+            viewBox="0 0 32 32"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.414 16L24 9.414 22.586 8 16 14.586 9.414 8 8 9.414 14.586 16 8 22.586 9.414 24 16 17.414 22.586 24 24 22.586 17.414 16z"
+            />
+          </svg>
+        </Close>
+      </div>
+      <span
+        className="bx--assistive-text"
+      >
+        close
+      </span>
+    </button>
+  </footer>
+</SideNavFooter>
+`;

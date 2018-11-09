@@ -6,17 +6,23 @@ exports[`HeaderName should render 1`] = `
   href="/"
   prefix="IBM"
 >
-  <a
-    className="bx--platform-header__name custom-class"
+  <Link
+    className="bx--header__name custom-class"
+    element="a"
     href="/"
   >
-    IBM
-     
-    <span
-      className="bx--platform-header__platform-name"
+    <a
+      className="bx--header__name custom-class"
+      href="/"
     >
-      Name
-    </span>
-  </a>
+      IBM
+       
+      <span
+        className="bx--header__platform-name"
+      >
+        Name
+      </span>
+    </a>
+  </Link>
 </HeaderName>
 `;

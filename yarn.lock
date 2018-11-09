@@ -986,9 +986,9 @@
     to-fast-properties "^2.0.0"
 
 "@carbon/colors@^0.0.1-alpha.0":
-  version "0.0.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.0.tgz#8c53ef65f864106a63cfc412d8ff083a8a04905f"
-  integrity sha512-/v5d1iw5MuHQgBgArItzHF04VgqeE5u/oSXwx/FDrZOZiJQ2IAlq3ocCglAq0P2xd8Wkzy2jKKIcL7LOGQYfww==
+  version "0.0.1-alpha.2"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.2.tgz#bfe50a0f8b1ba6cb916b4c96145896f1b72209ea"
+  integrity sha512-+mZdSgb/4CCH/8CFuCi3kHave3405UwHjBHDeBJ5boTCfLrDDObpcXSuBrdKj/1wF3nuiJiZzlJE4qkNriYoFA==
 
 "@carbon/icons-react@^0.0.1-alpha.2":
   version "0.0.1-alpha.2"
@@ -3239,10 +3239,10 @@ caniuse-lite@^1.0.30000898, caniuse-lite@^1.0.30000899:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000900.tgz#015cfe37897a3386a3075a914498800c29afe77e"
   integrity sha512-xDVs8pBFr6bzq9pXUkLKpGQQnzsF/l6/yX38UnCkTcUcwC0rDl1NGZGildcJVTU+uGBxfsyniK/ZWagPNn1Oqw==
 
-carbon-components@^9.36.0:
-  version "9.36.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.36.0.tgz#17ff739cbb46b48245b7f4b0622278662514d11e"
-  integrity sha512-89xvSgVwV5ACIYJ+GNaRqizqKiTQxI5XV5swVhUCsmhbvEDvEEswNro8WojyjnIaMgnPp/2tzD+MkwcADSAdaQ==
+carbon-components@^9.48.0:
+  version "9.48.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.48.0.tgz#2044d3fd637be2a5507a60e9c069abde44589114"
+  integrity sha512-yK7dzHzKR0GW7yBgHe/4ueGsuWvj/QvviKTR9UcuoGeJyBuwUVdT0d/Pcz01UDq1kvpAMYEVzN5WzfcLkmtluw==
   dependencies:
     "@carbon/colors" "^0.0.1-alpha.0"
     carbon-icons "^7.0.7"

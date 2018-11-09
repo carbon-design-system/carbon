@@ -5,7 +5,7 @@ exports[`Header should render 1`] = `
   className="custom-class"
 >
   <header
-    className="bx--platform-header custom-class"
+    className="bx--header custom-class"
   />
 </Header>
 `;
