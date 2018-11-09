@@ -140,6 +140,28 @@ describe('Header Submenu', function() {
       document.body.appendChild(element);
     });
 
+    describe('Esc key', function() {
+      const escKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(escKeydown, 'which', { value: 27, writable: true });
+
+      it('should close menu with ESC key when menu is focused', function() {
+        triggerNode.setAttribute('aria-expanded', 'true');
+        triggerNode.dispatchEvent(escKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+      });
+
+      it('should close menu with ESC key when an item is focused', function() {
+        triggerNode.setAttribute('aria-expanded', 'true');
+        itemNode.dispatchEvent(escKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+      });
+
+      it('should not open menu with ESC key', function() {
+        triggerNode.dispatchEvent(escKeydown);
+        expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+      });
+    });
+
     describe('Space bar', function() {
       const spaceBarDown = new KeyboardEvent('keydown', { bubbles: true });
       Object.defineProperty(spaceBarDown, 'which', { value: 32, writable: true });
