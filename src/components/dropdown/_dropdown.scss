@@ -315,12 +315,16 @@
   }
 
   .#{$prefix}--dropdown-item {
-    transition: opacity $transition--expansion cubic-bezier(0, 0, 0.38, 0.9);
+    transition: opacity $transition--expansion cubic-bezier(0, 0, 0.38, 0.9), background-color $transition--base;
     opacity: 0;
     margin-top: -1px;
 
     &:hover {
-      background-color: $ui-03;
+      background-color: $hover-field;
+    }
+
+    &:active {
+      background-color: $active-01;
     }
 
     &:first-of-type {
