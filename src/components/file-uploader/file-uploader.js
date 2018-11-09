@@ -17,14 +17,16 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     const uploadLabel = document.getElementById('input-button');
     const uploadInput = document.getElementById('your-file-importer-id-here');
-    uploadLabel.addEventListener('keydown', event => {
-      // Stop propagation of the event so we don't throw open the dialog more than once.
-      event.stopPropagation();
-      // if the user presses the enter key or the spacebar click the upload button.
-      if (event.keyCode === 32 || event.keyCode === 13) {
-        uploadInput.click();
-      }
-    });
+    if (uploadLabel != null) {
+      uploadLabel.addEventListener('keydown', event => {
+        // Stop propagation of the event so we don't throw open the dialog more than once.
+        event.stopPropagation();
+        // if the user presses the enter key or the spacebar click the upload button.
+        if (event.keyCode === 32 || event.keyCode === 13) {
+          uploadInput.click();
+        }
+      });
+    }
   });
 }
 
