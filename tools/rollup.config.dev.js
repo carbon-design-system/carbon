@@ -27,7 +27,7 @@ module.exports = {
       main: true,
     }),
     commonjs({
-      include: 'node_modules/**',
+      include: ['node_modules/**', 'src/globals/js/feature-flags.js'],
       sourceMap: true,
       namedExports: {
         'node_modules/react/index.js': [
