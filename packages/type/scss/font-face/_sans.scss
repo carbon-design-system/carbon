@@ -1,4 +1,4 @@
-@import '@carbon/scss-helpers/import-once';
+@import '@carbon/import-once/scss/import-once';
 
 @include exports('font-face-sans') {
   // .woff support for IE11

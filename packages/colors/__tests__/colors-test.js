@@ -4,8 +4,12 @@
 
 'use strict';
 
-const { colors } = require('../src');
+const { colors, tokens } = require('../src');
 
 test('colors', () => {
   expect(colors).toMatchSnapshot();
+});
+
+test('tokens', () => {
+  expect(tokens).toMatchSnapshot();
 });

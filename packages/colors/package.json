@@ -15,13 +15,14 @@
     "build": "node tasks/build.js"
   },
   "devDependencies": {
+    "@carbon/cli-reporter": "0.0.1-alpha.2",
     "fs-extra": "^7.0.0",
     "node-sass": "^4.9.4",
     "prettier": "^1.14.3"
   },
   "eyeglass": {
     "exports": false,
-    "name": "carbon-colors",
+    "name": "@carbon/colors",
     "sassDir": "scss",
     "needs": "^1.3.0"
   }
