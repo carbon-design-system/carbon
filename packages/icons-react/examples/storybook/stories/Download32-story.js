@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Download32 from '../../../lib/download/32';
+import Download32 from '../../../lib/Download/32';
 
 storiesOf('Download32', module)
   .add('default', () => <Download32 />)

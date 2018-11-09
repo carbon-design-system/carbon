@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Hdr32 from '../../../lib/HDR/32';
+import Hdr32 from '../../../lib/Hdr/32';
 
 storiesOf('Hdr32', module)
   .add('default', () => <Hdr32 />)

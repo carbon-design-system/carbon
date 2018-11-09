@@ -17,6 +17,22 @@ instead:
 yarn add @carbon/grid
 ```
 
+## How it works
+
+- Talk about flexbox and call out to how it works
+  - Also mention CSS Grid implementation?
+  - Talk about grid structure
+    - `.grid` > `.row` > `.col`
+- Talk about grid options/parameters in a table
+- Responsive classes
+- Nesting
+- Helpers
+  - Columns that auto-fill
+  - Alignment
+  - Ordering
+- SCSS documentation
+- Customizing the grid?
+
 ## 🤲 Contributing
 
 To learn more about how to contribute, look [here](/.github/CONTRIBUTING.md)!

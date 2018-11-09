@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OverflowVerticalGlyph from '../../../lib/overflow--vertical/glyph';
+import OverflowVerticalGlyph from '../../../lib/OverflowVertical/glyph';
 
 storiesOf('OverflowVerticalGlyph', module)
   .add('default', () => <OverflowVerticalGlyph />)

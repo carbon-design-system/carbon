@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Analytics32 from '../../../lib/analytics/32';
+import Analytics32 from '../../../lib/Analytics/32';
 
 storiesOf('Analytics32', module)
   .add('default', () => <Analytics32 />)

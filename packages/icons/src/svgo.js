@@ -26,6 +26,14 @@ const plugins = [
           return !item;
         }
 
+        if (
+          item.isElem('rect') &&
+          item.attr('width', '16') &&
+          item.attr('height', '16')
+        ) {
+          return !item;
+        }
+
         return item;
       },
     },

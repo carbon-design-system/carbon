@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChevronDownGlyph from '../../../lib/chevron--down/glyph';
+import ChevronDownGlyph from '../../../lib/ChevronDown/glyph';
 
 storiesOf('ChevronDownGlyph', module)
   .add('default', () => <ChevronDownGlyph />)

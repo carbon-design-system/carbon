@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CopyGlyph16 from '../../../lib/copy--glyph/16';
+import CopyGlyph16 from '../../../lib/CopyGlyph/16';
 
 storiesOf('CopyGlyph16', module)
   .add('default', () => <CopyGlyph16 />)

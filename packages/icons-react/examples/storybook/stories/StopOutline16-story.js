@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StopOutline16 from '../../../lib/stop--outline/16';
+import StopOutline16 from '../../../lib/StopOutline/16';
 
 storiesOf('StopOutline16', module)
   .add('default', () => <StopOutline16 />)

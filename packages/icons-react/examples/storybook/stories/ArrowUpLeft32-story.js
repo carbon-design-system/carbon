@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ArrowUpLeft32 from '../../../lib/arrow--up-left/32';
+import ArrowUpLeft32 from '../../../lib/ArrowUpLeft/32';
 
 storiesOf('ArrowUpLeft32', module)
   .add('default', () => <ArrowUpLeft32 />)

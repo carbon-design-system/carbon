@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import DownToBottomGlyph from '../../../lib/down-to-bottom/glyph';
+import DownToBottomGlyph from '../../../lib/DownToBottom/glyph';
 
 storiesOf('DownToBottomGlyph', module)
   .add('default', () => <DownToBottomGlyph />)

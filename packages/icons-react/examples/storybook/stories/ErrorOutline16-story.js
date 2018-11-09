@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ErrorOutline16 from '../../../lib/error--outline/16';
+import ErrorOutline16 from '../../../lib/ErrorOutline/16';
 
 storiesOf('ErrorOutline16', module)
   .add('default', () => <ErrorOutline16 />)

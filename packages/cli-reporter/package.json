@@ -1,0 +1,14 @@
+{
+  "name": "@carbon/cli-reporter",
+  "version": "0.0.1-alpha.2",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/cli-reporter",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1"
+  }
+}

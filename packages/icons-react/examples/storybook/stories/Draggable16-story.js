@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Draggable16 from '../../../lib/draggable/16';
+import Draggable16 from '../../../lib/Draggable/16';
 
 storiesOf('Draggable16', module)
   .add('default', () => <Draggable16 />)

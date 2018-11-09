@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StarSolid16 from '../../../lib/star--solid/16';
+import StarSolid16 from '../../../lib/StarSolid/16';
 
 storiesOf('StarSolid16', module)
   .add('default', () => <StarSolid16 />)

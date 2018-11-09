@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-const SVG_DIR = path.resolve(__dirname, '../src/svg');
+const SVG_DIR = path.join(__dirname, 'svg');
 const BUILD_CJS_DIR = path.resolve(__dirname, '../lib');
 const BUILD_ES_DIR = path.resolve(__dirname, '../es');
 const BUILD_SVG_DIR = path.resolve(__dirname, '../svg');

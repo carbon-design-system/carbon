@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Hotel32 from '../../../lib/hotel/32';
+import Hotel32 from '../../../lib/Hotel/32';
 
 storiesOf('Hotel32', module)
   .add('default', () => <Hotel32 />)

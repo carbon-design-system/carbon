@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import QResearchCU332 from '../../../lib/Q-research--cU3/32';
+import QResearchCu332 from '../../../lib/QResearchCU3/32';
 
-storiesOf('QResearchCU332', module)
-  .add('default', () => <QResearchCU332 />)
+storiesOf('QResearchCu332', module)
+  .add('default', () => <QResearchCu332 />)
   .add('with accessibility label', () => (
-    <QResearchCU332 aria-label="Accessibility label" />
+    <QResearchCu332 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <QResearchCU332 focusable>
+    <QResearchCu332 focusable>
       <title>Icon title</title>
-    </QResearchCU332>
+    </QResearchCu332>
   ));

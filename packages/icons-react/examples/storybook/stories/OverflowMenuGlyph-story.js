@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OverflowMenuGlyph from '../../../lib/overflow-menu/glyph';
+import OverflowMenuGlyph from '../../../lib/OverflowMenu/glyph';
 
 storiesOf('OverflowMenuGlyph', module)
   .add('default', () => <OverflowMenuGlyph />)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Cut32 from '../../../lib/cut/32';
+import Cut32 from '../../../lib/Cut/32';
 
 storiesOf('Cut32', module)
   .add('default', () => <Cut32 />)

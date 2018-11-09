@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Cloud32 from '../../../lib/cloud/32';
+import Cloud32 from '../../../lib/Cloud/32';
 
 storiesOf('Cloud32', module)
   .add('default', () => <Cloud32 />)

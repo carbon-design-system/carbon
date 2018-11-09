@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CloseGlyph from '../../../lib/close/glyph';
+import CloseGlyph from '../../../lib/Close/glyph';
 
 storiesOf('CloseGlyph', module)
   .add('default', () => <CloseGlyph />)

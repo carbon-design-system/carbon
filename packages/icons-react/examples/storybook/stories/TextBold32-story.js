@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TextBold32 from '../../../lib/text-bold/32';
+import TextBold32 from '../../../lib/TextBold/32';
 
 storiesOf('TextBold32', module)
   .add('default', () => <TextBold32 />)

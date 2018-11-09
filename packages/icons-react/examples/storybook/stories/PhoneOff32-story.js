@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PhoneOff32 from '../../../lib/phone--off/32';
+import PhoneOff32 from '../../../lib/PhoneOff/32';
 
 storiesOf('PhoneOff32', module)
   .add('default', () => <PhoneOff32 />)

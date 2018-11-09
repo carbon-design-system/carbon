@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import QResearchH32 from '../../../lib/Q-research--H/32';
+import QResearchH32 from '../../../lib/QResearchH/32';
 
 storiesOf('QResearchH32', module)
   .add('default', () => <QResearchH32 />)

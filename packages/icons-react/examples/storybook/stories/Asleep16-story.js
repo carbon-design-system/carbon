@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Asleep16 from '../../../lib/asleep/16';
+import Asleep16 from '../../../lib/Asleep/16';
 
 storiesOf('Asleep16', module)
   .add('default', () => <Asleep16 />)

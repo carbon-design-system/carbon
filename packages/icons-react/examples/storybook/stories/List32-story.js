@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import List32 from '../../../lib/list/32';
+import List32 from '../../../lib/List/32';
 
 storiesOf('List32', module)
   .add('default', () => <List32 />)

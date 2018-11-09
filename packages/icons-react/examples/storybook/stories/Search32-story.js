@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Search32 from '../../../lib/search/32';
+import Search32 from '../../../lib/Search/32';
 
 storiesOf('Search32', module)
   .add('default', () => <Search32 />)

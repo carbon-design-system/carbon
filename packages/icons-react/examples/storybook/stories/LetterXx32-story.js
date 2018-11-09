@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LetterXx32 from '../../../lib/letter--Xx/32';
+import LetterXx32 from '../../../lib/LetterXx/32';
 
 storiesOf('LetterXx32', module)
   .add('default', () => <LetterXx32 />)

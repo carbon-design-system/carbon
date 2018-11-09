@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PaintBrush32 from '../../../lib/paint-brush/32';
+import PaintBrush32 from '../../../lib/PaintBrush/32';
 
 storiesOf('PaintBrush32', module)
   .add('default', () => <PaintBrush32 />)

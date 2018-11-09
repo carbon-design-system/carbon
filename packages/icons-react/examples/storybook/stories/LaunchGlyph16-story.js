@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LaunchGlyph16 from '../../../lib/launch--glyph/16';
+import LaunchGlyph16 from '../../../lib/LaunchGlyph/16';
 
 storiesOf('LaunchGlyph16', module)
   .add('default', () => <LaunchGlyph16 />)

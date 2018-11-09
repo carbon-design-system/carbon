@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CaretDownGlyph from '../../../lib/caret--down/glyph';
+import CaretDownGlyph from '../../../lib/CaretDown/glyph';
 
 storiesOf('CaretDownGlyph', module)
   .add('default', () => <CaretDownGlyph />)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import DraggableGlyph from '../../../lib/draggable/glyph';
+import DraggableGlyph from '../../../lib/Draggable/glyph';
 
 storiesOf('DraggableGlyph', module)
   .add('default', () => <DraggableGlyph />)
