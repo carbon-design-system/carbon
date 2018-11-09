@@ -342,7 +342,6 @@
   .#{$prefix}--snippet--single {
     @include bx--snippet;
     border: none;
-    // border: 1px solid gold; //REMOVE THIS!!!!!==================
     max-width: rem(760px);
     min-width: rem(320px);
     height: rem(32px);
@@ -355,7 +354,6 @@
     height: rem(32px);
     overflow-x: scroll;
     position: relative;
-    // border: 1px solid red; //REMOVE THIS!!!!!=====================
     padding: 0;
   }
 
@@ -389,12 +387,7 @@
     fill: $text-02;
     height: rem(16px);
     width: rem(16px);
-    // bottom: 50%;
     transition: all $transition--base $carbon--standard-easing;
-
-    &:hover {
-      fill: $hover-primary;
-    }
   }
 
   .#{$prefix}--snippet-button {
@@ -404,7 +397,6 @@
     top: 0;
     right: 0;
     border: none;
-    // border: 1px solid green; //REMOVE THIS!!!!!==================
     background-color: transparent;
     outline: none;
     padding: 0;
@@ -413,8 +405,16 @@
     overflow: visible;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('outline');
     }
+  }
+
+  .#{$prefix}--snippet-button:hover {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--snippet-button:active {
+    background: $copy-active;
   }
 
   .#{$prefix}--snippet .#{$prefix}--btn--copy__feedback {
