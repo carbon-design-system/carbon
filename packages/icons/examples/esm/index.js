@@ -19,10 +19,12 @@ const App = ({ icons }) => (
         .sort()
         .map(key => {
           const icon = icons[key];
-          const { attrs, glyph } = icon;
+          const { attrs, size } = icon;
           const { width, height } = attrs;
-          const variant = glyph ? 'glyph' : width;
-          const svg = js2svg(icon);
+          const svg = js2svg({
+            ...icon,
+            elem: 'svg',
+          });
           const id = `${icon.name}-${width}x${height}`;
           return (
             <tr key={id} id={id}>
@@ -31,7 +33,7 @@ const App = ({ icons }) => (
               </td>
               <td className="icon-size">{`${width}x${height}`}</td>
               <td className="icon-preview-container">
-                <div className={`icon-preview icon-preview--${variant}`}>
+                <div className={`icon-preview icon-preview--${size}`}>
                   {svg}
                 </div>
               </td>
