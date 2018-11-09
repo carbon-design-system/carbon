@@ -97,13 +97,35 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
       return;
     }
     const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
-    const direction = {
-      38: this.constructor.NAVIGATE.BACKWARD,
-      40: this.constructor.NAVIGATE.FORWARD,
-    }[event.which];
-    if (expanded && direction !== undefined) {
-      this.navigate(direction);
-      event.preventDefault(); // Prevents up/down keys from scrolling container
+    if (expanded) {
+      const direction = {
+        38: this.constructor.NAVIGATE.BACKWARD,
+        40: this.constructor.NAVIGATE.FORWARD,
+      }[event.which];
+      switch (event.which) {
+        case 38: // up arrow
+        case 40: // down arrow
+          this.navigate(direction);
+          event.preventDefault(); // Prevents up/down keys from scrolling container
+          break;
+        case 27: // Esc
+          this.handleBlur();
+          break;
+        case 32: // space bar
+          this._handleClick(event);
+          break;
+        default:
+          break;
+      }
+      return;
+    }
+    switch (event.which) {
+      case 32: // space bar
+      case 40: // down arrow
+        this._handleClick(event);
+        break;
+      default:
+        break;
     }
   };
 
