@@ -758,7 +758,7 @@
 
   .#{$prefix}--date-picker__days .nextMonthDay,
   .#{$prefix}--date-picker__days .prevMonthDay {
-    color: $date-picker-next-month-color;
+    color: $text-02;
   }
 
   .#{$prefix}--date-picker__day.today,
