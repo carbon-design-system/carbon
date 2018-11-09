@@ -2,9 +2,9 @@
   <div class="bx--pagination__left">
     <div class="bx--select{{#is version "v2"}} bx--select--inline{{/is}}">
       {{#is version "v2"}}
-        <label for="select-id-pagination" class="bx--pagination__text">Items per page: </label>
+        <label for="items-per-page" class="bx--pagination__text">Items per page: </label>
       {{/is}}
-      <select id="select-id-pagination" class="bx--select-input" data-items-per-page>
+      <select id="items-per-page" aria-label="select number of items per page" class="bx--select-input" data-items-per-page>
         {{#each itemsPerPageChoices}}
           <option class="bx--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
         {{/each}}
@@ -32,9 +32,9 @@
         <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"/>
       </svg>
     </button>
-    <label for="page-number-input" class="bx--visually-hidden">Page number input</label>
+    <label id="page-number-input-label" class="bx--visually-hidden">Page number input</label>
     {{#isnt version "v2"}}
-      <input id="page-number-input" type="text" class="bx--text-input" placeholder="0" value="1" data-page-number-input>
+      <input aria-labelledby="page-number-input-label" type="text" class="bx--text-input" placeholder="0" value="1" data-page-number-input>
     {{else}}
       <div class="bx--select bx--select--inline">
         <label for="select-id-pagination" class="bx--visually-hidden">Page number</label>
