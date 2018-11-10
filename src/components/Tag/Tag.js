@@ -1,18 +1,32 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { componentsX } from '../../internal/FeatureFlags';
 
-const TYPES = {
-  beta: 'Beta',
-  community: 'Community',
-  custom: 'Custom',
-  dedicated: 'Dedicated',
-  experimental: 'Experimental',
-  ibm: 'IBM',
-  local: 'Local',
-  private: 'Private',
-  'third-party': 'Third-Party',
-};
+const TYPES = componentsX
+  ? {
+      basic: 'Component',
+      red: 'Red',
+      magenta: 'Magenta',
+      purple: 'Purple',
+      blue: 'Blue',
+      cyan: 'Cyan',
+      teal: 'Teal',
+      green: 'Green',
+      'cool-gray': 'Cool-Gray',
+      'warm-gray': 'Warm-Gray',
+    }
+  : {
+      beta: 'Beta',
+      community: 'Community',
+      custom: 'Custom',
+      dedicated: 'Dedicated',
+      experimental: 'Experimental',
+      ibm: 'IBM',
+      local: 'Local',
+      private: 'Private',
+      'third-party': 'Third-Party',
+    };
 
 const Tag = ({ children, className, type, ...other }) => {
   const tagClass = `bx--tag--${type}`;

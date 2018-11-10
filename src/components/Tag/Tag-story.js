@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-
-import { withKnobs, select, text } from '@storybook/addon-knobs';
+import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const types = typesList.reduce(
   (o, type) => ({
@@ -21,8 +21,13 @@ storiesOf('Tag', module)
       <div>
         <Tag
           className="some-class"
-          type={select('Tag type (type)', types, 'experimental')}>
-          {text('Content (children)', '')}
+          type={select(
+            'Tag type (type)',
+            types,
+            componentsX ? 'basic' : 'experimental'
+          )}
+          disabled={boolean('Disabled (disabled)', false)}>
+          {text('Content (children)', 'This is not a tag')}
         </Tag>
       </div>
     ),
