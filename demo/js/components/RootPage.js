@@ -199,7 +199,8 @@ class RootPage extends Component {
 
   componentDidMount() {
     const { componentItems } = this.props;
-    if (!this.state.selectedNavItemId && componentItems) {
+    const { selectedNavItemId } = this.state;
+    if (!selectedNavItemId && componentItems) {
       const { search } = location;
       const nameInQueryArg =
         search &&
@@ -259,8 +260,77 @@ class RootPage extends Component {
    * @returns The component data that is currently selected.
    */
   getCurrentComponentItem() {
-    const { componentItems } = this.state;
-    return componentItems && componentItems.find(item => item.id === this.state.selectedNavItemId);
+    const { componentItems, selectedNavItemId } = this.state;
+    return componentItems && componentItems.find(item => item.id === selectedNavItemId);
+  }
+
+  /**
+   * Handles an event from BrowserSync.
+   * @param {Object} evt The event.
+   * @private
+   */
+  _handleBrowserSyncEvent = evt => {
+    if (evt.basename === 'demo.css') {
+      this._inspectLinkTag();
+    }
+  };
+
+  /**
+   * Toggles usage of experimental CSS upon user event.
+   * @param {Object} evt The event.
+   * @private
+   */
+  _switchExperimental = evt => {
+    const { portSassBuild } = this.props;
+    fetch(`http://localhost:${portSassBuild}/${evt.target.checked ? 'experimental' : 'classic'}`);
+  };
+
+  /**
+   * Inspects `<link>` tag to see if experimental version of demo CSS is loaded there.
+   */
+  _inspectLinkTag() {
+    if (this.hStyleLoad) {
+      this.hStyleLoad = this.hStyleLoad.release();
+    }
+    if (this.hStyleInspectionTimeout) {
+      clearTimeout(this.hStyleInspectionTimeout);
+      this.hStyleInspectionTimeout = null;
+    }
+    this.hStyleInspectionTimeout = setTimeout(() => {
+      const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
+        /\/demo\.css/i.test(link.getAttribute('href'))
+      );
+      const lastLink = links[links.length - 1];
+      if (lastLink.sheet) {
+        this._detectComponentsX(lastLink);
+      } else {
+        this.hStyleLoad = on(lastLink, 'load', () => {
+          this._detectComponentsX(lastLink);
+        });
+      }
+    }, 0);
+  }
+
+  /**
+   * Populates the content of current selection.
+   */
+  _populateCurrent() {
+    const { componentItems, selectedNavItemId } = this.state;
+    const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
+    const subItems = metadata.items || [];
+    const hasRenderedContent =
+      !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
+    if (!hasRenderedContent) {
+      fetch(`/code/${metadata.name}`)
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(responseContent => {
+          // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
+          this.setState(({ componentItems: prevComponentItems }) => ({
+            componentItems: applyContent(prevComponentItems, selectedNavItemId, responseContent),
+          }));
+        });
+    }
   }
 
   /**
@@ -306,72 +376,6 @@ class RootPage extends Component {
   }
 
   /**
-   * Handles an event from BrowserSync.
-   * @param {Object} evt The event.
-   * @private
-   */
-  _handleBrowserSyncEvent = evt => {
-    if (evt.basename === 'demo.css') {
-      this._inspectLinkTag();
-    }
-  };
-
-  /**
-   * Inspects `<link>` tag to see if experimental version of demo CSS is loaded there.
-   */
-  _inspectLinkTag() {
-    if (this.hStyleLoad) {
-      this.hStyleLoad = this.hStyleLoad.release();
-    }
-    if (this.hStyleInspectionTimeout) {
-      clearTimeout(this.hStyleInspectionTimeout);
-      this.hStyleInspectionTimeout = null;
-    }
-    this.hStyleInspectionTimeout = setTimeout(() => {
-      const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
-        /\/demo\.css/i.test(link.getAttribute('href'))
-      );
-      const lastLink = links[links.length - 1];
-      if (lastLink.sheet) {
-        this._detectComponentsX(lastLink);
-      } else {
-        this.hStyleLoad = on(lastLink, 'load', () => {
-          this._detectComponentsX(lastLink);
-        });
-      }
-    }, 0);
-  }
-
-  /**
-   * Populates the content of current selection.
-   */
-  _populateCurrent() {
-    const { componentItems, selectedNavItemId } = this.state;
-    const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
-    const subItems = metadata.items || [];
-    const hasRenderedContent =
-      !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
-    if (!hasRenderedContent) {
-      fetch(`/code/${metadata.name}`)
-        .then(checkStatus)
-        .then(response => response.json())
-        .then(responseContent => {
-          // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
-          this.setState({ componentItems: applyContent(this.state.componentItems, selectedNavItemId, responseContent) });
-        });
-    }
-  }
-
-  /**
-   * Toggles usage of experimental CSS upon user event.
-   * @param {Object} evt The event.
-   * @private
-   */
-  _switchExperimental = evt => {
-    fetch(`http://localhost:${this.props.portSassBuild}/${evt.target.checked ? 'experimental' : 'classic'}`);
-  };
-
-  /**
    * Switches the selected component.
    * @param {string} selectedNavItemId The ID of the newly selected component.
    */
@@ -390,11 +394,11 @@ class RootPage extends Component {
 
   render() {
     const { portSassBuild, useStaticFullRenderPage } = this.props;
-    const { componentItems, isComponentsX } = this.state;
+    const { componentItems, isComponentsX, navClosed } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
     const classNames = classnames({
-      'bx--interior-left-nav--collapsed': this.state.navClosed,
+      'bx--interior-left-nav--collapsed': navClosed,
     });
     return !metadata ? null : (
       <Fragment>
