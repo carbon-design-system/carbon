@@ -174,13 +174,12 @@
 
   .#{$prefix}--form__helper-text {
     @include typescale('omega');
+    font-style: italic;
     color: $text-02;
-    order: 1;
     line-height: 1.5;
     z-index: 0;
-    max-height: 3rem;
     opacity: 1;
-    margin-top: $spacing-2xs;
+    max-width: 75%;
     margin-bottom: $spacing-xs;
   }
 }

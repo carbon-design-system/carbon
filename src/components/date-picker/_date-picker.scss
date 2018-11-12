@@ -507,7 +507,7 @@
     font-family: $font-family-mono;
     display: block;
     position: relative;
-    height: rem(32px);
+    height: rem(40px);
     max-width: rem(288px);
     padding: 0 $spacing-md;
     background-color: $field-01;
@@ -519,11 +519,6 @@
     &:focus,
     &.#{$prefix}--focused {
       @include focus-outline('outline');
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: $hover-field;
     }
 
     &[data-invalid],
@@ -573,11 +568,11 @@
   }
 
   .#{$prefix}--date-picker--single .#{$prefix}--date-picker__icon {
-    top: 2rem;
+    top: 2.25rem;
   }
 
   .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
-    top: rem(8px);
+    top: rem(12px);
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
