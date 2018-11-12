@@ -67,11 +67,12 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   // Handle Enter or Space keydown events for selecting <label> rows
   _handleKeydownChecked(evt) {
+    evt.preventDefault(); // prevent spacebar from scrolling page
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
-      const input = this.element.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for')));
+      const input = selectedRow.querySelector('input');
       input.checked = true;
     }
   }
