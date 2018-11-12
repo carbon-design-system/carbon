@@ -19,7 +19,7 @@ $typescale-map: (
   'omega': 0.75rem,
   'caption': 0.75rem,
   'legal': 0.6875rem,
-  'p': 1rem
+  'p': 1rem,
 );
 
 @mixin typescale($size) {
@@ -81,7 +81,7 @@ $font-size-map: (
   '16': 1rem,
   '14': 0.875rem,
   '12': 0.75rem,
-  '11': 0.6875rem
+  '11': 0.6875rem,
 );
 
 @mixin font-size($size) {
