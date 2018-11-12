@@ -21,7 +21,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     super(element, options);
     this.manage(
       on(this.element, 'keydown', evt => {
-        if (evt.which === 38 || evt.which === 40) {
+        if (evt.which === 37 || evt.which === 38 || evt.which === 39 || evt.which === 40) {
           this._handleKeydownArrow(evt);
         }
         if (evt.which === 13 || evt.which === 32) {
@@ -38,7 +38,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _direction(evt) {
     return {
+      37: -1, // backward
       38: -1, // backward
+      39: 1, // forward
       40: 1, // forward
     }[evt.which];
   }
