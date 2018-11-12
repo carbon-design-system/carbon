@@ -105,10 +105,21 @@
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: $transition--base all;
-  }
 
-  .#{$prefix}--text-area:hover {
-    background-color: $hover-field;
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
   }
 
   .#{$prefix}--text-area:focus,
@@ -121,24 +132,10 @@
   }
 
   //-----------------------------
-  // Disabled & Error icon spacing
-  //-----------------------------
-  .#{$prefix}--text-area:disabled,
-  .#{$prefix}--text-area[data-invalid],
-  .#{$prefix}--text-area:invalid,
-  .#{$prefix}--text-area[data-loading] {
-    padding-left: rem(40px);
-    background-repeat: no-repeat;
-    background-position: left 15px top 20%;
-  }
-
-  //-----------------------------
   // Disabled
   //-----------------------------
   .#{$prefix}--text-area:disabled {
     cursor: not-allowed;
-    // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
-    background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23bebebe'%3e%3cpath d='M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z'/%3e%3c/svg%3e");
     outline: none;
     background-color: $disabled-background-color;
     border-bottom: 1px solid transparent;
@@ -155,8 +152,6 @@
   .#{$prefix}--text-area:invalid {
     @include focus-outline('invalid');
     box-shadow: none;
-    // THIS SHOULD BE MOVED TO AN INLINE SVG IN THE HTML IN NEXT MAJOR RELEASE
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--warning--filled' fill='%23da1e28'%3e%3cpath d='M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2zm-1 6h2v11h-2zm1 17a1.5 1.5 0 1 1 1.5-1.5A1.5 1.5 0 0 1 16 25z'/%3e%3c/svg%3e ");
   }
 
   // Skeleton State
