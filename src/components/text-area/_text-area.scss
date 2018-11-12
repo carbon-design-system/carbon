@@ -93,21 +93,31 @@
 @mixin text-area--x {
   .#{$prefix}--text-area {
     @include reset;
+    @include font-family;
     @include typescale('zeta');
     @include focus-outline('reset');
     background-color: $field-01;
     width: 100%;
+    margin-top: rem(8px);
     min-width: 10rem;
     padding: $spacing-md;
     color: $text-01;
-    order: 2;
+    order: 4;
     resize: vertical;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: $transition--base all;
 
     & ~ .#{$prefix}--label {
-      order: 1;
+      // order: 1;
+      margin: 0;
+      border: 1px solid green;
+    }
+
+    & ~ .#{$prefix}--form__helper-text {
+      margin-bottom: 0;
+      // margin-top: rem(8px);
+      order: 2;
     }
 
     & ~ .#{$prefix}--form-requirement {
@@ -129,6 +139,7 @@
 
   .#{$prefix}--text-area::-webkit-input-placeholder {
     @include placeholder-colors;
+    @include font-family;
   }
 
   //-----------------------------
