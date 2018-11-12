@@ -75,6 +75,7 @@
     @include line-height('body');
     margin: $accordion-title-margin;
     font-weight: 400;
+    text-align: left;
   }
 
   .#{$prefix}--accordion__content {
@@ -152,16 +153,6 @@
     border-top: 1px solid $ui-03;
     overflow: hidden;
 
-    &:focus {
-      outline: none;
-
-      .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
-        overflow: visible; // safari fix
-        outline-offset: -0.5px; // safari fix
-      }
-    }
-
     &:last-child {
       border-bottom: 1px solid $ui-03;
     }
@@ -177,23 +168,26 @@
     padding: rem(7px) 0;
     flex-direction: $accordion-flex-direction;
     width: 100%;
-    margin: 0; // safari fix
+    margin: 0;
+    transition: background-color $transition--base;
+
+    &:hover {
+      background-color: $hover-field;
+    }
 
     &:focus {
       outline: none;
 
       .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
-        overflow: visible; // safari fix
-        outline-offset: -0.5px; // safari fix
+        @include focus-outline('outline');
+        outline-offset: 0px;
       }
-    }
-    &:hover {
-      background-color: $field-01;
     }
   }
 
   .#{$prefix}--accordion__arrow {
+    @include focus-outline('reset');
+    outline-offset: 0px;
     transition: all $transition--base $carbon--standard-easing;
     height: 1.25rem;
     width: 1.25rem;
@@ -215,19 +209,18 @@
   .#{$prefix}--accordion__content {
     transition: all $transition--expansion $carbon--ease-out;
     padding-left: $spacing-md;
+    padding-right: 25%;
     height: 0;
     visibility: hidden;
     opacity: 0;
 
     p {
       @include typescale('zeta');
-      padding-right: 20%;
     }
   }
 
   .#{$prefix}--accordion__item--active {
     overflow: visible;
-    border-top: 1px solid transparent;
 
     .#{$prefix}--accordion__content {
       padding-bottom: $spacing-lg;
