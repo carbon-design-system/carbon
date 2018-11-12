@@ -220,10 +220,10 @@
     &:hover:disabled,
     &:focus:disabled {
       background: transparent;
-      color: $ibm-colors__gray--30;
+      color: $disabled;
 
       & > .#{$prefix}--btn__icon {
-        fill: $ibm-colors__gray--30;
+        fill: $disabled;
       }
     }
 
@@ -245,7 +245,7 @@
     }
 
     &:active {
-      background-color: $ibm-colors__gray--30;
+      background-color: $active-01;
     }
 
     .#{$prefix}--btn__icon {
@@ -255,12 +255,12 @@
     &:disabled,
     &:hover:disabled,
     &:focus:disabled {
-      color: $ibm-colors__gray--30;
+      color: $disabled;
       background: transparent;
       border-color: transparent;
 
       .#{$prefix}--btn__icon {
-        fill: $ibm-colors__gray--30;
+        fill: $disabled;
       }
     }
   }
@@ -284,7 +284,7 @@
     &:hover:disabled,
     &:focus:disabled {
       color: $ui-04;
-      border: $button-border-width solid $ibm-colors__gray--30;
+      border: $button-border-width solid $disabled;
     }
   }
 
