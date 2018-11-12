@@ -50,7 +50,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   }
 
   _handleInputChecked(index) {
-    const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
+    const rows = this.element.querySelectorAll(this.options.selectorRow);
     const input = rows[index].querySelector('input');
     input.checked = true;
   }
