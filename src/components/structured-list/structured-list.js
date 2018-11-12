@@ -47,13 +47,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     return array.indexOf(arrayItem) + direction; // returns -1, 0, 1, 2, 3, 4...
   }
 
-  _getInput(index) {
-    const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
-    return this.element.ownerDocument.querySelector(this.options.selectorListInput(rows[index].getAttribute('for')));
-  }
-
   _handleInputChecked(index) {
-    const input = this._getInput(index);
+    const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
+    const input = rows[index].querySelector('input');
     input.checked = true;
   }
 
@@ -79,6 +75,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   // Handle up and down keydown events for selecting <label> rows
   _handleKeydownArrow(evt) {
+    evt.preventDefault(); // prevent arrow keys from scrolling
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = this._direction(evt);
 
@@ -88,24 +85,20 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
       const firstIndex = 0;
       const nextIndex = this._nextIndex(rows, selectedRow, direction);
       const lastIndex = rows.length - 1;
-
-      switch (nextIndex) {
-        case -1:
-          rows[lastIndex].classList.add(this.options.classActive);
-          rows[lastIndex].focus();
-          this._handleInputChecked(lastIndex);
-          break;
-        case rows.length:
-          rows[firstIndex].classList.add(this.options.classActive);
-          rows[firstIndex].focus();
-          this._handleInputChecked(firstIndex);
-          break;
-        default:
-          rows[nextIndex].classList.add(this.options.classActive);
-          rows[nextIndex].focus();
-          this._handleInputChecked(nextIndex);
-          break;
-      }
+      const getIndex = () => {
+        switch (nextIndex) {
+          case -1:
+            return lastIndex;
+          case rows.length:
+            return firstIndex;
+          default:
+            return nextIndex;
+        }
+      };
+      const selectedIndex = getIndex();
+      rows[selectedIndex].classList.add(this.options.classActive);
+      rows[selectedIndex].focus();
+      this._handleInputChecked(selectedIndex);
     }
   }
 
