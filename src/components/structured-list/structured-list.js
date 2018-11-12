@@ -87,7 +87,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
       const firstIndex = 0;
       const nextIndex = this._nextIndex(rows, selectedRow, direction);
       const lastIndex = rows.length - 1;
-      const getIndex = () => {
+      const getSelectedIndex = () => {
         switch (nextIndex) {
           case -1:
             return lastIndex;
@@ -97,7 +97,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
             return nextIndex;
         }
       };
-      const selectedIndex = getIndex();
+      const selectedIndex = getSelectedIndex();
       rows[selectedIndex].classList.add(this.options.classActive);
       rows[selectedIndex].focus();
       this._handleInputChecked(selectedIndex);
