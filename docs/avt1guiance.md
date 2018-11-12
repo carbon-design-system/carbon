@@ -34,7 +34,7 @@ On the main frame (the one open by default) there's a detailed list of all viola
 
 Whenever any new UI code is introduced or existing code is changed or updated we should run DAP on the new code so we can make sure it meets or exceeds IBM's accessibility standards.
 
-DAP is actually mega thorough and can catch a lot of obvious errors in your markup, but it comes with a caveat. **A mountain of false positives**. Typically we're not auditing a webpage or a website as a whole, but a single component in isolation -- sadly this was not DAP's intended purpose and so it throws a lot of false positive violations that you'll first need to sift through and ignore if we're going to be keeping and recording this audit. If you're just testing while you develop or before you push a PR, feel free to just disregard them.
+DAP is always evolving its rulesets but unfortunately it can report false positives when testing exclusively on a component. Typically we're not auditing a webpage or a website as a whole, but a single component in isolation -- sadly this was not DAP's intended purpose and so it throws a lot of false positive violations that you'll first need to sift through and ignore if we're going to be keeping and recording this audit. If you're just testing while you develop or before you push a PR, feel free to just disregard them.
 
 If the component fails or has a violation an issue should be made so that someone can fix the problem. Feel free to include in the issue any relevant information you think would helpful, but make sure to at least include these points:
 
