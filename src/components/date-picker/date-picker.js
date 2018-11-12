@@ -21,31 +21,6 @@ function flattenOptions(options) {
   return o;
 }
 
-/**
- * Augments Flatpickr instance so that event objects Flatpickr fires is marked as non-user-triggered events.
- * @param {Flatpickr} calendar The Flatpickr instance.
- * @returns {Flatpickr} The augmented Flatpickr instance.
- * @private
- */
-function augmentFlatpickr(calendar) {
-  const container = calendar._;
-  if (container) {
-    if (container.changeEvent) {
-      container._changeEvent = container.changeEvent; // eslint-disable-line no-underscore-dangle
-    }
-    Object.defineProperty(container, 'changeEvent', {
-      get() {
-        return this._changeEvent;
-      },
-      set(value) {
-        value.detail = Object.assign(value.detail || {}, { fromFlatpickr: true });
-        this._changeEvent = value;
-      },
-    });
-  }
-  return calendar;
-}
-
 // Weekdays shorthand for english locale
 Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   const currentDay = Flatpickr.l10ns.en.weekdays.shorthand;
@@ -133,19 +108,6 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       this.manage(
         on(this.element.querySelector(this.options.selectorDatePickerIcon), focusoutEventName, this._handleBlur, !hasFocusout)
       );
-
-      // An attempt to disable Flatpickr's focus tracking system,
-      // which has adverse effect with our old set up with two `<input>`s or our latest setup with a hidden `<input>`
-      this.manage(
-        on(doc, 'mousedown', () => {
-          if (this.calendar.isOpen) {
-            this.calendar.config.inline = true;
-            setTimeout(() => {
-              this.calendar.config.inline = false;
-            }, 0);
-          }
-        })
-      );
     }
     const self = this;
     const date = type === 'range' ? this._rangeInput : this.element.querySelector(this.options.selectorDatePickerInput);
@@ -157,6 +119,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
         mode: type,
         positionElement: type === 'range' && this.element.querySelector(this.options.selectorDatePickerInputFrom),
         onClose(selectedDates, ...remainder) {
+          // An attempt to disable Flatpickr's focus tracking system,
+          // which has adverse effect with our old set up with two `<input>`s or our latest setup with a hidden `<input>`
+          if (self.shouldForceOpen) {
+            self.calendar.calendarContainer.classList.add('open');
+            self.calendar.isOpen = true;
+          }
           if (!onClose || onClose.call(this, selectedDates, ...remainder) !== false) {
             self._updateClassNames(calendar);
             self._updateInputFields(selectedDates, type);
@@ -185,6 +153,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
           }
         },
         onOpen(...args) {
+          // An attempt to disable Flatpickr's focus tracking system,
+          // which has adverse effect with our old set up with two `<input>`s or our latest setup with a hidden `<input>`
+          self.shouldForceOpen = true;
+          setTimeout(() => {
+            self.shouldForceOpen = false;
+          }, 0);
           if (!onOpen || onOpen.call(this, ...args) !== false) {
             self._updateClassNames(calendar);
           }
@@ -211,7 +185,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
     if (type !== 'range') {
       this._addInputLogic(date);
     }
-    return augmentFlatpickr(calendar);
+    return calendar;
   };
 
   _rightArrowHTML() {
@@ -235,7 +209,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
     const inputField = input;
     this.manage(
       on(inputField, 'change', evt => {
-        if (!evt.detail || !evt.detail.fromFlatpickr) {
+        if (evt.isTrusted || (evt.detail && evt.detail.isNotFromFlatpickr)) {
           const inputDate = this.calendar.parseDate(inputField.value);
           if (inputDate && !isNaN(inputDate.valueOf())) {
             if (isNaN(index)) {
