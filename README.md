@@ -1,6 +1,6 @@
 # Carbon Components React
 
-[![Build Status](https://travis-ci.org/IBM/carbon-components-react.svg?branch=master)](https://travis-ci.org/IBM/carbon-components-react)
+[![CircleCI](https://circleci.com/gh/IBM/carbon-components-react.svg?style=shield)](https://circleci.com/gh/IBM/carbon-components-react)
 [![All Contributors](https://img.shields.io/badge/all_contributors-64-orange.svg?style=flat-square)](#contributors)
 [![Greenkeeper badge](https://badges.greenkeeper.io/IBM/carbon-components-react.svg)](https://greenkeeper.io/)
 
