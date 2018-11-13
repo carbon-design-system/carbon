@@ -148,7 +148,7 @@ describe('DataTable', () => {
       expect(wrapper.state('rowIds')).toEqual(['a', 'b', 'c']);
     });
 
-    it('should reset to DESC ordering when another header is clicked', () => {
+    it('should reset to ASC ordering when another header is clicked', () => {
       const wrapper = mount(<DataTable {...mockProps} />);
       const firstHeader = getHeaderAt(wrapper, 0);
       const secondHeader = getHeaderAt(wrapper, 1);
@@ -158,10 +158,10 @@ describe('DataTable', () => {
 
       firstHeader.simulate('click');
       expect(wrapper.state('rowIds')).toEqual(['c', 'b', 'a']);
-      expect(wrapper.state('sortDirection')).toBe(sortStates.ASC);
+      expect(wrapper.state('sortDirection')).toBe(sortStates.DESC);
 
       secondHeader.simulate('click');
-      expect(wrapper.state('sortDirection')).toBe(sortStates.DESC);
+      expect(wrapper.state('sortDirection')).toBe(sortStates.ASC);
     });
   });
 

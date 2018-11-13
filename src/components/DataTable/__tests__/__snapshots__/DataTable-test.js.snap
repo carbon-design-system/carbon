@@ -167,6 +167,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     <th
+                      aria-sort="none"
                       scope="col"
                     >
                       <button
@@ -180,7 +181,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         </span>
                         <Icon
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in descending order"
+                          description="Sort rows by this header in ascending order"
                           fillRule="evenodd"
                           icon={
                             Object {
@@ -208,8 +209,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                           role="img"
                         >
                           <svg
-                            alt="Sort rows by this header in descending order"
-                            aria-label="Sort rows by this header in descending order"
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
                             fillRule="evenodd"
                             height="5"
@@ -218,7 +219,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                             width="10"
                           >
                             <title>
-                              Sort rows by this header in descending order
+                              Sort rows by this header in ascending order
                             </title>
                             <path
                               d="M0 5L5 .002 10 5z"
@@ -239,6 +240,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     translateWithId={[Function]}
                   >
                     <th
+                      aria-sort="none"
                       scope="col"
                     >
                       <button
@@ -252,7 +254,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         </span>
                         <Icon
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in descending order"
+                          description="Sort rows by this header in ascending order"
                           fillRule="evenodd"
                           icon={
                             Object {
@@ -280,8 +282,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                           role="img"
                         >
                           <svg
-                            alt="Sort rows by this header in descending order"
-                            aria-label="Sort rows by this header in descending order"
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
                             fillRule="evenodd"
                             height="5"
@@ -290,7 +292,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                             width="10"
                           >
                             <title>
-                              Sort rows by this header in descending order
+                              Sort rows by this header in ascending order
                             </title>
                             <path
                               d="M0 5L5 .002 10 5z"
@@ -634,6 +636,7 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     <th
+                      aria-sort="none"
                       scope="col"
                     >
                       <button
@@ -647,7 +650,7 @@ exports[`DataTable selection should render 1`] = `
                         </span>
                         <Icon
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in descending order"
+                          description="Sort rows by this header in ascending order"
                           fillRule="evenodd"
                           icon={
                             Object {
@@ -675,8 +678,8 @@ exports[`DataTable selection should render 1`] = `
                           role="img"
                         >
                           <svg
-                            alt="Sort rows by this header in descending order"
-                            aria-label="Sort rows by this header in descending order"
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
                             fillRule="evenodd"
                             height="5"
@@ -685,7 +688,7 @@ exports[`DataTable selection should render 1`] = `
                             width="10"
                           >
                             <title>
-                              Sort rows by this header in descending order
+                              Sort rows by this header in ascending order
                             </title>
                             <path
                               d="M0 5L5 .002 10 5z"
@@ -706,6 +709,7 @@ exports[`DataTable selection should render 1`] = `
                     translateWithId={[Function]}
                   >
                     <th
+                      aria-sort="none"
                       scope="col"
                     >
                       <button
@@ -719,7 +723,7 @@ exports[`DataTable selection should render 1`] = `
                         </span>
                         <Icon
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in descending order"
+                          description="Sort rows by this header in ascending order"
                           fillRule="evenodd"
                           icon={
                             Object {
@@ -747,8 +751,8 @@ exports[`DataTable selection should render 1`] = `
                           role="img"
                         >
                           <svg
-                            alt="Sort rows by this header in descending order"
-                            aria-label="Sort rows by this header in descending order"
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
                             fillRule="evenodd"
                             height="5"
@@ -757,7 +761,7 @@ exports[`DataTable selection should render 1`] = `
                             width="10"
                           >
                             <title>
-                              Sort rows by this header in descending order
+                              Sort rows by this header in ascending order
                             </title>
                             <path
                               d="M0 5L5 .002 10 5z"
@@ -1723,6 +1727,7 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     <th
+                      aria-sort="none"
                       scope="col"
                     >
                       <button
@@ -1736,7 +1741,7 @@ exports[`DataTable should render 1`] = `
                         </span>
                         <Icon
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in descending order"
+                          description="Sort rows by this header in ascending order"
                           fillRule="evenodd"
                           icon={
                             Object {
@@ -1764,8 +1769,8 @@ exports[`DataTable should render 1`] = `
                           role="img"
                         >
                           <svg
-                            alt="Sort rows by this header in descending order"
-                            aria-label="Sort rows by this header in descending order"
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
                             fillRule="evenodd"
                             height="5"
@@ -1774,7 +1779,7 @@ exports[`DataTable should render 1`] = `
                             width="10"
                           >
                             <title>
-                              Sort rows by this header in descending order
+                              Sort rows by this header in ascending order
                             </title>
                             <path
                               d="M0 5L5 .002 10 5z"
@@ -1795,6 +1800,7 @@ exports[`DataTable should render 1`] = `
                     translateWithId={[Function]}
                   >
                     <th
+                      aria-sort="none"
                       scope="col"
                     >
                       <button
@@ -1808,7 +1814,7 @@ exports[`DataTable should render 1`] = `
                         </span>
                         <Icon
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in descending order"
+                          description="Sort rows by this header in ascending order"
                           fillRule="evenodd"
                           icon={
                             Object {
@@ -1836,8 +1842,8 @@ exports[`DataTable should render 1`] = `
                           role="img"
                         >
                           <svg
-                            alt="Sort rows by this header in descending order"
-                            aria-label="Sort rows by this header in descending order"
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
                             fillRule="evenodd"
                             height="5"
@@ -1846,7 +1852,7 @@ exports[`DataTable should render 1`] = `
                             width="10"
                           >
                             <title>
-                              Sort rows by this header in descending order
+                              Sort rows by this header in ascending order
                             </title>
                             <path
                               d="M0 5L5 .002 10 5z"

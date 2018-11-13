@@ -61,7 +61,7 @@ describe('getDerivedStateFromProps', () => {
       expect(initialState.rowIds).toEqual(['1', '2', '0']);
       const prevState = {
         sortHeaderKey: 'sortField',
-        sortDirection: 'DESC',
+        sortDirection: 'ASC',
       };
       const nextState = getDerivedStateFromProps(mockProps, prevState);
       expect(nextState.rowIds).toEqual(['0', '1', '2']);

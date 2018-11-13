@@ -81,8 +81,8 @@ export const defaultSortRow = (
   { sortDirection, sortStates, locale }
 ) => {
   if (sortDirection === sortStates.ASC) {
-    return compare(cellB, cellA, locale);
+    return compare(cellA, cellB, locale);
   }
 
-  return compare(cellA, cellB, locale);
+  return compare(cellB, cellA, locale);
 };

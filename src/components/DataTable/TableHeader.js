@@ -12,14 +12,27 @@ const translationKeys = {
 const translateWithId = (key, { sortDirection, isSortHeader, sortStates }) => {
   if (key === translationKeys.iconDescription) {
     if (isSortHeader) {
-      const order =
-        sortDirection === sortStates.DESC ? 'descending' : 'ascending';
-      return `Sort rows by this header in ${order} order`;
+      // When transitioning, we know that the sequence of states is as follows:
+      // NONE -> ASC -> DESC -> NONE
+      if (sortDirection === sortStates.NONE) {
+        return 'Sort rows by this header in ascending order';
+      }
+      if (sortDirection === sortStates.ASC) {
+        return 'Sort rows by this header in descending order';
+      }
+
+      return 'Unsort rows by this header';
     }
-    return `Sort rows by this header in descending order`;
+    return 'Sort rows by this header in ascending order';
   }
 
   return '';
+};
+
+const sortDirections = {
+  [sortStates.NONE]: 'none',
+  [sortStates.ASC]: 'ascending',
+  [sortStates.DESC]: 'descending',
 };
 
 const TableHeader = ({
@@ -46,11 +59,12 @@ const TableHeader = ({
     'bx--table-sort-v2--active':
       isSortHeader && sortDirection !== sortStates.NONE,
     'bx--table-sort-v2--ascending':
-      isSortHeader && sortDirection === sortStates.ASC,
+      isSortHeader && sortDirection === sortStates.DESC,
   });
+  const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
 
   return (
-    <th scope={scope} className={headerClassName}>
+    <th scope={scope} className={headerClassName} aria-sort={ariaSort}>
       <button className={className} onClick={onClick} {...rest}>
         <span className="bx--table-header-label">{children}</span>
         <Icon
