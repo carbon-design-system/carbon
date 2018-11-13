@@ -298,8 +298,8 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box {
     position: relative;
     width: $list-box-width;
-    height: rem(32px);
-    max-height: rem(32px);
+    height: rem(40px);
+    max-height: rem(40px);
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
@@ -403,7 +403,7 @@ $list-box-menu-width: rem(300px);
     position: relative;
     display: inline-flex;
     align-items: center;
-    height: rem(32px);
+    height: rem(40px);
     padding: 0 1rem;
     cursor: pointer;
   }
@@ -510,7 +510,7 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     left: 0;
     right: 0;
-    top: rem(32px);
+    top: rem(40px);
     width: $list-box-width;
     background-color: $ui-01;
     max-height: rem(120px);
@@ -524,7 +524,7 @@ $list-box-menu-width: rem(300px);
 
     display: flex;
     align-items: center;
-    height: rem(32px);
+    height: rem(40px);
     margin-top: -1px;
     padding: 0 1rem;
     cursor: pointer;
