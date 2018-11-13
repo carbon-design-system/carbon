@@ -230,26 +230,22 @@
     @include reset;
     @include font-family;
     @include typescale('zeta');
+    @include focus-outline('reset');
     position: relative;
     list-style: none;
     display: block;
     background-color: $field-01;
     border: none;
-    box-shadow: 0 1px 0 0 $ui-04;
-    order: 1;
+    border-bottom: 1px solid $ui-04;
     width: 100%;
-    height: rem(32px);
+    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
     transition: $transition--base all;
 
     &:focus {
-      outline: 2px solid $brand-01;
-    }
-
-    &:hover {
-      background-color: $ui-03;
+      @include focus-outline('outline');
     }
   }
 
@@ -274,7 +270,7 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    top: rem(13px);
+    top: rem(17px);
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
@@ -287,15 +283,14 @@
   }
 
   .#{$prefix}--dropdown-text {
-    height: rem(32px);
-    padding-top: rem(9px);
-    padding-bottom: rem(9px);
+    height: rem(40px);
+    padding-top: rem(12px);
+    padding-bottom: rem(12px);
     padding-left: rem(15px);
     padding-right: $spacing-2xl;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border: $input-border;
   }
 
   .#{$prefix}--dropdown-list {
@@ -338,12 +333,13 @@
   }
 
   .#{$prefix}--dropdown-link {
+    @include focus-outline('reset');
     display: block;
     color: currentColor;
     text-decoration: none;
     font-weight: normal;
     line-height: rem(16px);
-    padding: $spacing-xs 0;
+    padding: rem(11px) 0;
     margin: 0 rem(16px);
     border: 1px solid transparent;
     border-bottom: 1px solid $ui-03;
@@ -351,14 +347,18 @@
     overflow: hidden;
 
     &:focus {
-      outline: 2px solid $brand-01;
+      @include focus-outline('outline');
       margin: 0 rem(2px);
-      padding: $spacing-xs rem(14px);
+      padding: rem(11px) rem(14px);
     }
 
     &:hover {
       color: $text-01;
     }
+  }
+
+  .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
+    border-bottom-color: $hover-field;
   }
 
   .#{$prefix}--dropdown--selected {

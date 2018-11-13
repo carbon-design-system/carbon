@@ -42,6 +42,9 @@
 
 <div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper">
   <label for="text-input-5" class="bx--label">Text Input label</label>
+  <div class="bx--form__helper-text">
+    Optional helper text goes here
+  </div>
   {{#unless password}}
   <input id="text-input-5" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Placeholder text">
   {{else}}
@@ -57,13 +60,13 @@
     </svg>
   </button>
   {{/unless}}
-  <div class="bx--form__helper-text">
-    Optional helper text goes here
-  </div>
 </div>
 
 <div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper" style="width: 320px">
   <label for="text-input-6" class="bx--label">Text Input label</label>
+  <div class="bx--form__helper-text">
+    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+  </div>
   {{#unless password}}
   <input id="text-input-6" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Placeholder text">
   {{else}}
@@ -79,9 +82,6 @@
     </svg>
   </button>
   {{/unless}}
-  <div class="bx--form__helper-text">
-    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
-  </div>
 </div>
 
 <div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper">
