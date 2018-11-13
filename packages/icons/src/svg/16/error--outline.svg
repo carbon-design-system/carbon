@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>error--outline</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="error--outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M2.75109925,4.16531281 C1.96443363,5.2402665 1.5,6.5658961 1.5,8 C1.5,11.5898509 4.41014913,14.5 8,14.5 C9.4341039,14.5 10.7597335,14.0355664 11.8346872,13.2489008 L2.75109925,4.16531281 Z M4.16531281,2.75109925 L13.2489008,11.8346872 C14.0355664,10.7597335 14.5,9.4341039 14.5,8 C14.5,4.41014913 11.5898509,1.5 8,1.5 C6.5658961,1.5 5.2402665,1.96443363 4.16531281,2.75109925 Z M8,16 C3.581722,16 -8.8817842e-16,12.418278 -8.8817842e-16,8 C-8.8817842e-16,3.581722 3.581722,0 8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 Z" id="error" fill="#000000" fill-rule="nonzero"></path>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>checkmark</title>
+<path d="M8,1C4.1,1,1,4.1,1,8s3.1,7,7,7s7-3.1,7-7S11.9,1,8,1z M8,14c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6S11.3,14,8,14z"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
+<rect x="7.4" y="3.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3137 8)" width="1.1" height="8.8"/>
 </svg>

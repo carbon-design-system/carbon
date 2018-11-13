@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>awake</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="awake" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" points="7.5 6.31088724e-30 8.5 6.31088724e-30 8.5 3 7.5 3"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" points="7.5 13 8.5 13 8.5 16 7.5 16"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" transform="translate(14.500000, 8.000000) rotate(90.000000) translate(-14.500000, -8.000000) " points="14 6.5 15 6.5 15 9.5 14 9.5"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" transform="translate(1.500000, 8.000000) rotate(90.000000) translate(-1.500000, -8.000000) " points="1 6.5 2 6.5 2 9.5 1 9.5"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" transform="translate(3.403806, 3.403806) rotate(-45.000000) translate(-3.403806, -3.403806) " points="2.90380592 1.90380592 3.90380592 1.90380592 3.90380592 4.90380592 2.90380592 4.90380592"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" transform="translate(12.596194, 12.596194) rotate(-45.000000) translate(-12.596194, -12.596194) " points="12.0961941 11.0961941 13.0961941 11.0961941 13.0961941 14.0961941 12.0961941 14.0961941"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" transform="translate(12.596194, 3.403806) rotate(45.000000) translate(-12.596194, -3.403806) " points="12.0961941 1.90380592 13.0961941 1.90380592 13.0961941 4.90380592 12.0961941 4.90380592"></polygon>
-        <polygon id="Path-54" fill="#000000" fill-rule="nonzero" transform="translate(3.403806, 12.596194) rotate(45.000000) translate(-3.403806, -12.596194) " points="2.90380592 11.0961941 3.90380592 11.0961941 3.90380592 14.0961941 2.90380592 14.0961941"></polygon>
-        <path d="M8,10.5 C9.38071187,10.5 10.5,9.38071187 10.5,8 C10.5,6.61928813 9.38071187,5.5 8,5.5 C6.61928813,5.5 5.5,6.61928813 5.5,8 C5.5,9.38071187 6.61928813,10.5 8,10.5 Z M8,11.5 C6.06700338,11.5 4.5,9.93299662 4.5,8 C4.5,6.06700338 6.06700338,4.5 8,4.5 C9.93299662,4.5 11.5,6.06700338 11.5,8 C11.5,9.93299662 9.93299662,11.5 8,11.5 Z" id="Oval-6" fill="#000000" fill-rule="nonzero"></path>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>light</title>
+<rect x="7.5" y="1" width="1" height="2.5"/>
+<rect x="10.8" y="3.4" transform="matrix(0.7071 -0.7071 0.7071 0.7071 0.763 9.6862)" width="2.5" height="1"/>
+<rect x="12.5" y="7.5" width="2.5" height="1"/>
+<rect x="11.6" y="10.8" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.0012 12.0762)" width="1" height="2.5"/>
+<rect x="7.5" y="12.5" width="1" height="2.5"/>
+<rect x="2.7" y="11.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -7.3897 6.3156)" width="2.5" height="1"/>
+<rect x="1" y="7.5" width="2.5" height="1"/>
+<rect x="3.4" y="2.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -1.6256 3.9256)" width="1" height="2.5"/>
+<path d="M8,6c1.1,0,2,0.9,2,2s-0.9,2-2,2S6,9.1,6,8S6.9,6,8,6 M8,5C6.3,5,5,6.3,5,8s1.3,3,3,3s3-1.3,3-3S9.7,5,8,5z"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
 </svg>

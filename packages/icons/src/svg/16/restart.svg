@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
 <title>restart</title>
-<path d="M14,9v0.5c0,3-2.5,5.5-5.5,5.5S3,12.5,3,9.5S5.5,4,8.5,4h3.8L10,6.3L10.7,7l3.5-3.5L10.7,0L10,0.7L12.3,3H8.5
-	C4.9,3,2,5.9,2,9.5S4.9,16,8.5,16c3.6,0,6.5-2.9,6.5-6.5V9H14z"/>
+<path d="M13,9c0,2.8-2.2,5-5,5s-5-2.2-5-5s2.2-5,5-5h3.1L9.3,5.8L10,6.5l3-3l-3-3L9.3,1.2L11.1,3H8C4.7,3,2,5.7,2,9s2.7,6,6,6
+	s6-2.7,6-6H13z"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
 </svg>

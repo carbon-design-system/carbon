@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="15px" height="16px" viewBox="0 0 15 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>power</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="power" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle-12" fill="#000000" x="7" y="0" width="1" height="8"></rect>
-        <path d="M0.469115276,11.1182797 C0.165782692,10.303584 0,9.42193492 0,8.50156518 C0,4.35942955 3.35786438,1.00156518 7.5,1.00156518 C11.6421356,1.00156518 15,4.35942955 15,8.50156518 C15,12.6437008 11.6421356,16.0015652 7.5,16.0015652 C6.62874378,16.0015652 5.51050043,15.7301333 5.0277752,15.5582881 L5.36314786,14.6162026 C5.90052942,14.8075048 6.8754263,15.0015652 7.5,15.0015652 C11.0898509,15.0015652 14,12.091416 14,8.50156518 C14,4.9117143 11.0898509,2.00156518 7.5,2.00156518 C3.91014913,2.00156518 1,4.9117143 1,8.50156518 C1,9.28644506 1.13870817,10.0507437 1.40626567,10.7693541 L0.469115276,11.1182797 Z" id="Oval-14" fill="#000000" fill-rule="nonzero" transform="translate(7.500000, 8.501565) rotate(136.000000) translate(-7.500000, -8.501565) "></path>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>power</title>
+<path d="M11.2,2.9l-0.5,0.9c2.6,1.5,3.5,4.9,2,7.5s-4.9,3.5-7.5,2s-3.5-4.9-2-7.5c0.5-0.8,1.2-1.5,2-2L4.8,2.9
+	c-3.1,1.8-4.2,5.8-2.4,8.9s5.8,4.2,8.9,2.4s4.2-5.8,2.4-8.9C13.1,4.3,12.2,3.4,11.2,2.9z"/>
+<rect x="7.5" y="1" width="1" height="7"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
 </svg>

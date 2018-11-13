@@ -1,1 +1,13 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>edit</title><rect y="15" width="16" height="1"/><path d="M13.71,2.41,11.59.29a1,1,0,0,0-1.42,0L1,9.46V13H4.54l9.17-9.17A1,1,0,0,0,13.71,2.41ZM4.12,12H2V9.88L8.09,3.79l2.12,2.12Zm6.79-6.79L8.79,3.09,10.88,1,13,3.12Z" transform="translate(0 0)"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>edit</title>
+<rect x="1" y="13" width="14" height="1"/>
+<path d="M12.7,4.5c0.4-0.4,0.4-1,0-1.4c0,0,0,0,0,0l-1.8-1.8c-0.4-0.4-1-0.4-1.4,0c0,0,0,0,0,0L2,8.8V12h3.2L12.7,4.5z M10.2,2
+	L12,3.8l-1.5,1.5L8.7,3.5L10.2,2z M3,11V9.2l5-5L9.8,6l-5,5H3z"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
+</svg>

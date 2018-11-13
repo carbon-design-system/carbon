@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="11px" height="16px" viewBox="0 0 11 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>back-to-top</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="back-to-top" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Path-14" fill="#000000" fill-rule="nonzero" points="0 1 0 0 11 0 11 1"></polygon>
-        <path d="M5.00080234,4.98391773 L0.861439051,9.35716295 L0.135178738,8.66974316 L5.50170303,3 L10.8648213,8.67285481 L10.1381549,9.35984535 L6.00080234,4.98354794 L6.00080234,16 L5.00080234,16 L5.00080234,4.98391773 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>up-to-top</title>
+<polygon points="8,7 3,12 3.7,12.7 8,8.4 12.3,12.7 13,12 "/>
+<rect x="2" y="4" width="12" height="1"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
 </svg>

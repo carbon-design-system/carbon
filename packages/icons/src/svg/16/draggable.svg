@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="6px" height="14px" viewBox="0 0 6 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>draggable</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="draggable" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="square" fill="#000000" x="0" y="0" width="2" height="2"></rect>
-        <rect id="square" fill="#000000" x="4" y="-5.68434189e-14" width="2" height="2"></rect>
-        <rect id="square" fill="#000000" x="0" y="6" width="2" height="2"></rect>
-        <rect id="square" fill="#000000" x="4" y="6" width="2" height="2"></rect>
-        <rect id="square" fill="#000000" x="0" y="12" width="2" height="2"></rect>
-        <rect id="square" fill="#000000" x="4" y="12" width="2" height="2"></rect>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>draggable</title>
+<rect x="5" y="3" width="2" height="2"/>
+<rect x="9" y="3" width="2" height="2"/>
+<rect x="5" y="7" width="2" height="2"/>
+<rect x="9" y="7" width="2" height="2"/>
+<rect x="5" y="11" width="2" height="2"/>
+<rect x="9" y="11" width="2" height="2"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
 </svg>

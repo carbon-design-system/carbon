@@ -1,1 +1,12 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>copy</title><path d="M1,10H0V1A1,1,0,0,1,1,0h9V1H1Z" transform="translate(0)"/><path d="M15,4V15H4V4H15m0-1H4A1,1,0,0,0,3,4V15a1,1,0,0,0,1,1H15a1,1,0,0,0,1-1V4a1,1,0,0,0-1-1Z" transform="translate(0)"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>copy</title>
+<path d="M3,9H2V3c0-0.6,0.4-1,1-1h6v1H3V9z"/>
+<path d="M14,6v8H6V6H14 M14,5H6C5.4,5,5,5.4,5,6v8c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V6C15,5.4,14.6,5,14,5z"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
+</svg>
