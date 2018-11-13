@@ -42,7 +42,7 @@ describe('NotificationButton', () => {
 
       it('icon should have correct className by default', () => {
         const icon = wrapper.find('Icon');
-        expect(icon.hasClass('bx--toast-notification__icon')).toBe(true);
+        expect(icon.hasClass('bx--toast-notification__close-icon')).toBe(true);
       });
     });
 
@@ -198,14 +198,22 @@ describe('InlineNotification', () => {
       expect(inline.find(Icon).some({ icon: iconErrorSolid })).toBe(true);
     });
 
+    // removed because of a11y warning icon workaround, depending on TODO: for @carbon/icons-react
+    // it('renders warning notification with matching kind and <icon name=""> values', () => {
+    //   inline.setProps({ kind: 'warning' });
+    //   expect(inline.find(Icon).some({ icon: iconWarningSolid })).toBe(true);
+    // });
+
     it('renders warning notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'warning' });
-      expect(inline.find(Icon).some({ icon: iconWarningSolid })).toBe(true);
+      expect(
+        inline.children('.bx--inline-notification__details').exists()
+      ).toBe(true);
     });
 
-    it('renders info notification with matching kind and <icon name=""> values', () => {
+    it('renders info notification with matching kind value but without <icon name="">', () => {
       inline.setProps({ kind: 'info' });
-      expect(inline.find(Icon).some({ icon: iconInfoSolid })).toBe(true);
+      expect(inline.find(Icon).some({ icon: iconInfoSolid })).toBe(false);
     });
 
     it('renders HTML for inline notifications when caption does not exist', () => {

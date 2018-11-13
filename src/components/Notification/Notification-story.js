@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Notification, {
   ToastNotification,
@@ -14,9 +13,8 @@ const kinds = {
   'Success (success)': 'success',
   'Warning (warning)': 'warning',
 };
-
 const notificationProps = () => ({
-  kind: select('The notification kind (kind)', kinds, 'error'),
+  kind: select('The notification kind (kind)', kinds, 'info'),
   role: text('ARIA role (role)', 'alert'),
   title: text('Title (title)', 'Notification title'),
   subtitle: text('Subtitle (subtitle)', 'Subtitle text goes here.'),

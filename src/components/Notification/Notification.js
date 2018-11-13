@@ -9,6 +9,8 @@ import {
   iconWarningSolid,
 } from 'carbon-icons';
 import Icon from '../Icon';
+// temporary workaround for a11y warning icon. TODO: for @carbon/icons-react
+import a11yIconWarningSolid from './a11yIconWarningSolid';
 
 export class NotificationButton extends Component {
   static propTypes = {
@@ -52,7 +54,7 @@ export class NotificationButton extends Component {
     );
 
     const iconClasses = classNames({
-      'bx--toast-notification__icon': notificationType === 'toast',
+      'bx--toast-notification__close-icon': notificationType === 'toast',
       'bx--inline-notification__close-icon': notificationType === 'inline',
     });
 
@@ -87,7 +89,6 @@ export class NotificationTextDetails extends Component {
 
   render() {
     const { title, subtitle, caption, notificationType, ...other } = this.props;
-
     if (notificationType === 'toast') {
       return (
         <div {...other} className="bx--toast-notification__details">
@@ -158,7 +159,6 @@ export class ToastNotification extends Component {
   useIcon = kindProp =>
     ({
       error: iconErrorSolid,
-      info: iconInfoSolid,
       success: iconCheckmarkSolid,
       warning: iconWarningSolid,
     }[kindProp]);
@@ -187,9 +187,27 @@ export class ToastNotification extends Component {
       { [`bx--toast-notification--${this.props.kind}`]: this.props.kind },
       className
     );
+    const NotificationIcon = kind => {
+      switch (kind) {
+        case 'info':
+          return null;
+        case 'warning':
+          return a11yIconWarningSolid(notificationType);
+        default:
+          return (
+            <Icon
+              description={this.props.iconDescription}
+              className="bx--toast-notification__icon"
+              aria-label="close"
+              icon={this.useIcon(kind)}
+            />
+          );
+      }
+    };
 
     return (
       <div {...other} role={role} kind={kind} className={classes}>
+        {NotificationIcon(kind)}
         <NotificationTextDetails
           title={title}
           subtitle={subtitle}
@@ -242,7 +260,6 @@ export class InlineNotification extends Component {
   useIcon = kindProp =>
     ({
       error: iconErrorSolid,
-      info: iconInfoSolid,
       success: iconCheckmarkSolid,
       warning: iconWarningSolid,
     }[kindProp]);
@@ -271,15 +288,28 @@ export class InlineNotification extends Component {
       className
     );
 
+    const NotificationIcon = kind => {
+      switch (kind) {
+        case 'info':
+          return null;
+        case 'warning':
+          return a11yIconWarningSolid(notificationType);
+        default:
+          return (
+            <Icon
+              description={this.props.iconDescription}
+              className="bx--inline-notification__icon"
+              aria-label="close"
+              icon={this.useIcon(kind)}
+            />
+          );
+      }
+    };
+
     return (
       <div {...other} role={role} kind={kind} className={classes}>
         <div className="bx--inline-notification__details">
-          <Icon
-            description={this.props.iconDescription}
-            className="bx--inline-notification__icon"
-            aria-label="close"
-            icon={this.useIcon(kind)}
-          />
+          {NotificationIcon(kind)}
           <NotificationTextDetails
             title={title}
             subtitle={subtitle}
@@ -288,6 +318,7 @@ export class InlineNotification extends Component {
         </div>
         {!hideCloseButton && (
           <NotificationButton
+            iconDescription={iconDescription}
             notificationType={notificationType}
             onClick={this.handleCloseButtonClick}
           />
