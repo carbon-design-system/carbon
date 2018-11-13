@@ -116,8 +116,10 @@ class Tab extends ContentSwitcher {
    */
   _updateMenuState(force) {
     const menu = this.element.querySelector(this.options.selectorMenu);
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (menu) {
       menu.classList.toggle(this.options.classHidden, typeof force === 'undefined' ? force : !force);
+      trigger.classList.toggle(this.options.classOpen);
     }
   }
 
@@ -173,6 +175,7 @@ class Tab extends ContentSwitcher {
       selectorLink: `.${prefix}--tabs__nav-link`,
       classActive: `${prefix}--tabs__nav-item--selected`,
       classHidden: `${prefix}--tabs__nav--hidden`,
+      classOpen: `${prefix}--tabs-trigger--open`,
       eventBeforeSelected: 'tab-beingselected',
       eventAfterSelected: 'tab-selected',
     });
