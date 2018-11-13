@@ -49,9 +49,14 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     return array.indexOf(arrayItem) + direction; // returns -1, 0, 1, 2, 3, 4...
   }
 
+  _getInput(index) {
+    const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
+    return this.element.ownerDocument.querySelector(this.options.selectorListInput(rows[index].getAttribute('for')));
+  }
+
   _handleInputChecked(index) {
     const rows = this.element.querySelectorAll(this.options.selectorRow);
-    const input = rows[index].querySelector('input');
+    const input = this.getInput(index) || rows[index].querySelector('input');
     input.checked = true;
   }
 
@@ -70,7 +75,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
-      const input = selectedRow.querySelector('input');
+      const input =
+        selectedRow.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for'))) ||
+        selectedRow.querySelector('input');
       input.checked = true;
     }
   }
