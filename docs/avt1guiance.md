@@ -48,6 +48,6 @@ If running DAP produces no violations (that's awesome🎉) we still want to reco
 1. Click the hamburger menu in the top right of the DAP panel and select Download Report.
 2. In the modal select JSON and five your report a helpful name in this format `componentname_subtype.html` and then download.
 
-   _Be warned: Occasional clicking the Download Report button wont work. This can be a serious pain if the dev has already gone through and ignored false positives. I've had a 100% success rate with Download Report if after I open the DAP panel in my dev tools I then reload the page with the panel open. 😞 -- D.A._
+   _Be warned: Occasionally clicking the Download Report button won't work. This can be a serious pain if the dev has already gone through and ignored false positives. I've had a 100% success rate with Download Report if after I open the DAP panel in my dev tools I then reload the page with the panel open. 😞 -- D.A._
 
 3. [Follow this link](https://ibm.biz/BdYkMA) and select the folder that corresponds with the ruleset the component was tested against and drop the JSON file in there.
