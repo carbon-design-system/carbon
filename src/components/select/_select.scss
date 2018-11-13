@@ -209,7 +209,7 @@
     @include font-family;
     @include typescale('zeta');
     @include focus-outline('reset');
-    height: rem(32px);
+    height: rem(40px);
     appearance: none;
     display: block;
     width: rem(224px);
@@ -229,12 +229,13 @@
       display: none;
     }
 
-    &:focus {
-      @include focus-outline('outline');
+    // Select text renders a little high on Firefox
+    @-moz-document url-prefix() {
+      padding-top: rem(4px);
     }
 
-    &:hover {
-      background-color: $hover-field;
+    &:focus {
+      @include focus-outline('outline');
     }
 
     &[data-invalid],
@@ -269,14 +270,14 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    bottom: 0.75rem;
+    bottom: 1rem;
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
   }
 
   &[data-invalid] ~ .#{$prefix}--select__arrow {
-    bottom: 2.125rem;
+    bottom: 2.5rem;
   }
 
   .#{$prefix}--select-optgroup,
@@ -327,6 +328,10 @@
     padding-left: $spacing-xs;
     padding-right: $spacing-lg;
 
+    @-moz-document url-prefix() {
+      padding-top: 0;
+    }
+
     &:hover {
       background-color: $ui-01;
     }
@@ -338,7 +343,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
-    top: 0.875rem;
+    top: 1.125rem;
     right: $spacing-xs;
   }
 

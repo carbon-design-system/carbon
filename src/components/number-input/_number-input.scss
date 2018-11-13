@@ -155,8 +155,14 @@
     top: 2.25rem;
   }
 
-  .#{$prefix}--number--helpertext:not(.#{$prefix}--number--nolabel) .#{$prefix}--number__controls {
-    top: 3.625rem;
+  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 2rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {
@@ -194,7 +200,7 @@
     padding-left: $spacing-md;
     padding-right: $spacing-xl;
     font-weight: 300;
-    height: rem(32px);
+    height: rem(40px);
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -209,10 +215,6 @@
 
     &:focus {
       @include focus-outline('outline');
-    }
-
-    &:hover {
-      background-color: $hover-field;
     }
 
     &:disabled {
@@ -265,8 +267,8 @@
     justify-content: center;
     align-items: center;
     left: auto;
-    right: 0.25rem;
-    top: 2rem;
+    right: 0.4rem;
+    top: 2.125rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -308,11 +310,17 @@
   }
 
   .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
-    top: 2.25rem;
+    top: 1.75rem;
   }
 
-  .#{$prefix}--number--helpertext:not(.#{$prefix}--number--nolabel) .#{$prefix}--number__controls {
-    top: 3.625rem;
+  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 1.75rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {

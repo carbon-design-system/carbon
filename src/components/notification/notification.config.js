@@ -1,12 +1,8 @@
 'use strict';
 
+const { componentsX } = require('../../globals/js/feature-flags');
+
 const items = [
-  {
-    type: 'error',
-    title: 'Notification title',
-    subtitle: 'Subtitle text goes here.',
-    timestamp: 'Time stamp [00:00:00]',
-  },
   {
     type: 'info',
     title: 'Notification title',
@@ -14,9 +10,16 @@ const items = [
     timestamp: 'Time stamp [00:00:00]',
   },
   {
-    type: 'success',
+    type: 'error',
     title: 'Notification title',
     subtitle: 'Subtitle text goes here.',
+    timestamp: 'Time stamp [00:00:00]',
+  },
+  {
+    type: 'success',
+    title: 'Notification title',
+    subtitle:
+      'Our goal is to become better at our craft and raise our collective knowledge by sharing experiences, best practices, what we have recently learned or what we are working on.',
     timestamp: 'Time stamp [00:00:00]',
   },
   {
@@ -35,6 +38,7 @@ module.exports = {
       context: {
         variant: 'inline',
         items,
+        componentsX,
       },
     },
     {
@@ -47,6 +51,7 @@ module.exports = {
       context: {
         variant: 'toast',
         items,
+        componentsX,
       },
     },
   ],
