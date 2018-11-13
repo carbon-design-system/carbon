@@ -229,12 +229,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-md;
-    height: rem(32px);
+    height: rem(40px);
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
+    border-bottom: 1px solid $ui-04;
     background-color: $field-01;
-    box-shadow: 0 1px 0 0 $ui-04;
     @include breakpoint(bp--sm--major) {
       display: none;
     }
@@ -242,10 +242,6 @@
 
   .#{$prefix}--tabs-trigger:focus {
     @include focus-outline('outline');
-  }
-
-  .#{$prefix}--tabs-trigger:hover {
-    background-color: $ui-03;
   }
 
   .#{$prefix}--tabs-trigger svg {
@@ -305,12 +301,14 @@
     }
   }
 
+  //-----------------------------
+  // Item
+  //-----------------------------
   .#{$prefix}--tabs__nav-item {
     @include typescale('zeta');
     background-color: $ui-01;
     padding: 0;
     cursor: pointer;
-    border-bottom: $tab-underline-color;
     width: 100%;
     @include breakpoint(bp--sm--major) {
       background: transparent;
@@ -320,6 +318,7 @@
     }
     @include max-breakpoint(bp--sm--major) {
       height: rem(33px);
+      // border: 1px solid pink; //REMOVE THIS <====================
       border-bottom: 1px solid $ui-03;
       &:last-of-type {
         border: none;
@@ -328,12 +327,10 @@
   }
 
   //-----------------------------
-  // Item - Hover
+  // Item Hover
   //-----------------------------
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
     @include breakpoint(bp--sm--major) {
-      border-bottom: $tab-underline-color-hover;
-      outline: 1px solid transparent;
       background: transparent;
     }
   }
@@ -345,25 +342,23 @@
   }
 
   //---------------------------------------------
-  // Item - Disabled
+  // Item Disabled
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item[disabled],
   .#{$prefix}--tabs__nav-item[disabled]:hover {
-    border-bottom: $tab-underline-disabled;
     cursor: not-allowed;
   }
 
   //-----------------------------
-  // Item - Selected
+  // Item Selected
   //-----------------------------
   .#{$prefix}--tabs__nav-item--selected:not([disabled]) {
     border: none;
     @include breakpoint(bp--sm--major) {
-      border-bottom: 2px solid $brand-01;
-
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         font-weight: 600;
+        border-bottom: 2px solid $brand-01;
       }
 
       .#{$prefix}--tabs__nav-link:focus {
@@ -372,12 +367,13 @@
       }
     }
     @include max-breakpoint(bp--sm--major) {
-      // border-bottom: 1px solid $ui-03;
-      // background-color: $ui-03;
       display: none;
     }
   }
 
+  //-----------------------------
+  // Link
+  //-----------------------------
   .#{$prefix}--tabs__nav-link {
     display: inline-block;
     color: $text-02;
@@ -388,59 +384,67 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     @include breakpoint(bp--sm--major) {
+      border-bottom: $tab-underline-color;
       padding: $spacing-xs $spacing-md;
-      &:hover {
-        color: $text-01;
-      }
-      &:focus {
-        outline: 2px solid $brand-01;
-      }
     }
     @include max-breakpoint(bp--sm--major) {
+      // margin: 0 $spacing-md;
       width: 100%;
-      color: $text-01;
+      color: $text-02;
       text-overflow: ellipsis;
       overflow: hidden;
+      // border: 1px solid green; //REMOVE THIS <===============
       &:focus {
         outline: 2px solid $brand-01;
+      }
+      &:hover {
+        color: $text-01;
       }
     }
   }
 
   //-----------------------------
-  // Link - Hover
+  //  Link Hover
   //-----------------------------
   .#{$prefix}--tabs__nav-item:hover:not([disabled]) .#{$prefix}--tabs__nav-link {
     color: $text-01;
     @include breakpoint(bp--sm--major) {
       color: $text-01;
+      border-bottom: $tab-underline-color-hover;
     }
   }
 
   //-----------------------------
-  // Link - Disabled
+  //  Link Disabled
   //-----------------------------
   .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
+    border-bottom: $tab-underline-disabled;
   }
 
-  //-----------------------------
-  // Link - Disabled Hover
-  //-----------------------------
   .#{$prefix}--tabs__nav-item[disabled]:hover .#{$prefix}--tabs__nav-link {
     cursor: no-drop;
-  }
-
-  //-----------------------------
-  // Link - Focus
-  //-----------------------------
-  .#{$prefix}--tabs__nav-link:focus {
-    font-weight: 400;
-    color: $text-01;
+    border-bottom: $tab-underline-disabled;
   }
 
   .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link:focus {
     outline: none;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  //-----------------------------
+  //  Link Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) .#{$prefix}--tabs__nav-link:focus {
+    color: $text-02;
+  }
+
+  .#{$prefix}--tabs__nav-link:focus {
+    outline: 2px solid $brand-01;
+
+    @include breakpoint(bp--sm--major) {
+      outline-offset: -2px;
+    }
   }
 
   //-----------------------------
