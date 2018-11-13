@@ -248,13 +248,15 @@
     width: rem(10px);
     height: rem(5px);
     fill: $ui-05;
-    // @include rotate(-180deg, $transition--expansion, 50% 45%);
+    transition: transform $transition--expansion $carbon--standard-easing;
   }
 
-  @if .#{$prefix}--tabs__nav: not(.#{$prefix}--tabs__nav--hidden) {
-    .#{$prefix}--tabs-trigger svg {
-      @include rotate(-180deg, $transition--expansion, 50% 45%);
-    }
+  .#{$prefix}--tabs-trigger--open:focus {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--tabs-trigger--open svg {
+    @include rotate(-180deg, $transition--expansion, 50% 45%);
   }
 
   // There is only a difference in tab color when in mobile/dropdown view
@@ -288,6 +290,8 @@
     flex-direction: column;
     z-index: z('dropdown');
     background: $ui-01;
+    transition: max-height $transition--expansion $carbon--standard-easing;
+    max-height: 600px;
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
@@ -327,6 +331,8 @@
     }
     @include max-breakpoint(bp--sm--major) {
       height: rem(34px);
+      transition: opacity $transition--expansion $carbon--standard-easing, background-color $transition--base;
+      opacity: 1;
     }
   }
 
