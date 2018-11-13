@@ -409,7 +409,11 @@
       text-overflow: ellipsis;
       overflow: hidden;
       &:focus {
+        width: 100%;
+        margin: 0;
+        padding-left: 16px;
         outline: 2px solid $brand-01;
+        outline-offset: -2px;
       }
       &:hover {
         color: $text-01;
@@ -454,9 +458,8 @@
   }
 
   .#{$prefix}--tabs__nav-link:focus {
-    outline: 2px solid $brand-01;
-
     @include breakpoint(bp--sm--major) {
+      outline: 2px solid $brand-01;
       outline-offset: -2px;
     }
   }
