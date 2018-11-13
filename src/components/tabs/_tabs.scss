@@ -248,6 +248,13 @@
     width: rem(10px);
     height: rem(5px);
     fill: $ui-05;
+    // @include rotate(-180deg, $transition--expansion, 50% 45%);
+  }
+
+  @if .#{$prefix}--tabs__nav: not(.#{$prefix}--tabs__nav--hidden) {
+    .#{$prefix}--tabs-trigger svg {
+      @include rotate(-180deg, $transition--expansion, 50% 45%);
+    }
   }
 
   // There is only a difference in tab color when in mobile/dropdown view
@@ -257,6 +264,7 @@
 
   .#{$prefix}--tabs-trigger-text {
     text-decoration: none;
+    padding-top: 2px;
     color: $text-01;
     font-weight: 400;
   }
@@ -296,6 +304,7 @@
 
   .#{$prefix}--tabs__nav--hidden {
     display: none;
+
     @include breakpoint(bp--sm--major) {
       display: flex;
     }
@@ -317,12 +326,7 @@
       }
     }
     @include max-breakpoint(bp--sm--major) {
-      height: rem(33px);
-      // border: 1px solid pink; //REMOVE THIS <====================
-      border-bottom: 1px solid $ui-03;
-      &:last-of-type {
-        border: none;
-      }
+      height: rem(34px);
     }
   }
 
@@ -338,6 +342,7 @@
   .#{$prefix}--tabs__nav-item:hover:not([disabled]) {
     @include max-breakpoint(bp--sm--major) {
       background-color: $ui-03;
+      box-shadow: 0 -1px 0 $ui-03;
     }
   }
 
@@ -388,12 +393,15 @@
       padding: $spacing-xs $spacing-md;
     }
     @include max-breakpoint(bp--sm--major) {
-      // margin: 0 $spacing-md;
-      width: 100%;
+      height: rem(34px);
+      width: calc(100% - 32px);
+      margin: 0 $spacing-md;
+      padding: $spacing-xs 0;
+      line-height: rem(16px);
       color: $text-02;
+      border-bottom: 1px solid $ui-03;
       text-overflow: ellipsis;
       overflow: hidden;
-      // border: 1px solid green; //REMOVE THIS <===============
       &:focus {
         outline: 2px solid $brand-01;
       }
