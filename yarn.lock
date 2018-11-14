@@ -28,6 +28,18 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.0.tgz#8c53ef65f864106a63cfc412d8ff083a8a04905f"
   integrity sha512-/v5d1iw5MuHQgBgArItzHF04VgqeE5u/oSXwx/FDrZOZiJQ2IAlq3ocCglAq0P2xd8Wkzy2jKKIcL7LOGQYfww==
 
+"@carbon/icons-handlebars@^0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.7.tgz#139fb9d6277cbdcf52530c1e011756d29ef47ca5"
+  integrity sha512-vbec6Q87nUR17e8kFUElro5yQJmQin5LxVv++Nyy2M6WgRPA1SImCGgUhNHZFijrnf4rkaW/wrcFKNX0m8Q7jQ==
+  dependencies:
+    "@carbon/icons" "0.0.1-alpha.7"
+
+"@carbon/icons@0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.7.tgz#f53e190df230081ecd682c8dfceb83b8428cf922"
+  integrity sha512-Xu+iDQpzBqmx4cHZdHaDQ8Tmq0OKU/KngPHDFPKlp7XU7t/bpr/Ut0v2f2rUbUBZkadX7wD/xelswmRoRaNdQw==
+
 "@commitlint/cli@^7.0.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.1.2.tgz#9ad1b4703679e18e3b1972c4abf0441255219e78"
@@ -6162,7 +6174,7 @@ handlebars-utils@^1.0.2, handlebars-utils@^1.0.4, handlebars-utils@^1.0.6:
     kind-of "^6.0.0"
     typeof-article "^0.1.1"
 
-handlebars@^4.0.1, handlebars@^4.0.11, handlebars@^4.0.2, handlebars@^4.0.3, handlebars@^4.0.5:
+handlebars@^4.0.1, handlebars@^4.0.11, handlebars@^4.0.12, handlebars@^4.0.2, handlebars@^4.0.3, handlebars@^4.0.5:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.12.tgz#2c15c8a96d46da5e266700518ba8cb8d919d5bc5"
   integrity sha512-RhmTekP+FZL+XNhwS1Wf+bTTZpdLougwt5pcgA1tuz6Jcx0fpH/7z0qd71RKnZHBCxIRBHfBOnio4gViPemNzA==
