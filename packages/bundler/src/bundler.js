@@ -1,8 +1,10 @@
 'use strict';
 
 const program = require('commander');
+const path = require('path');
 const packageJson = require('../package.json');
 const { ConsoleReporter } = require('./reporter');
+const bundle = require('./commands/bundle');
 const check = require('./commands/check');
 const measure = require('./commands/measure');
 
@@ -39,6 +41,15 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
         cwd,
         ignore: cmd.ignore,
         output: cmd.output,
+      })
+    );
+
+  program
+    .command('bundle <entrypoint>')
+    .description('bundle the given .js entrypoint')
+    .action(entrypoint =>
+      bundle(path.join(cwd, entrypoint), {
+        cwd,
       })
     );
 

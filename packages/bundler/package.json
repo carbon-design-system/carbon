@@ -19,6 +19,7 @@
     "fs-extra": "^7.0.0",
     "glob": "^7.1.3",
     "gzip-size": "^5.0.0",
-    "node-sass": "^4.9.4"
+    "node-sass": "^4.9.4",
+    "rollup": "^0.67.1"
   }
 }
