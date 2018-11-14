@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 'use strict';
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
@@ -69,7 +71,7 @@ module.exports = function(config) {
         rules: [
           {
             test: /\.js?$/,
-            exclude: /node_modules/,
+            exclude: [/node_modules/, /settings\.js$/],
             loader: 'babel-loader',
             query: {
               presets: [
@@ -97,6 +99,39 @@ module.exports = function(config) {
                       ]
                 )
                 .concat(['rewire']),
+            },
+          },
+          {
+            test: /settings\.js?$/,
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                [
+                  'env',
+                  {
+                    modules: false,
+                    targets: {
+                      browsers: ['last 1 version', 'ie >= 11'],
+                    },
+                  },
+                ],
+              ],
+              plugins: [
+                'transform-class-properties',
+                'transform-object-rest-spread',
+                ['transform-runtime', { polyfill: false }],
+              ].concat(
+                cloptions.debug
+                  ? []
+                  : [
+                      [
+                        'istanbul',
+                        {
+                          include: ['src/{components,globals}/**/*.js'],
+                        },
+                      ],
+                    ]
+              ),
             },
           },
           {

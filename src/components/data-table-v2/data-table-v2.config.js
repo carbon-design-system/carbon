@@ -1,13 +1,15 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 const iconAddSolid = `
-  <svg class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
     <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
   </svg>
 `;
 
 const iconDownload = `
-  <svg class="bx--toolbar-action__icon" fill-rule="evenodd" height="16" name="download" role="img" viewBox="0 0 14 16" width="14"
+  <svg class="${prefix}--toolbar-action__icon" fill-rule="evenodd" height="16" name="download" role="img" viewBox="0 0 14 16" width="14"
     aria-label="Download" alt="Download">
     <title>Download</title>
     <path d="M7.506 11.03l4.137-4.376.727.687-5.363 5.672-5.367-5.67.726-.687 4.14 4.374V0h1v11.03z"></path>
@@ -16,7 +18,7 @@ const iconDownload = `
 `;
 
 const iconEdit = `
-  <svg class="bx--toolbar-action__icon" fill-rule="evenodd" height="16" name="edit" role="img" viewBox="0 0 16 16" width="16"
+  <svg class="${prefix}--toolbar-action__icon" fill-rule="evenodd" height="16" name="edit" role="img" viewBox="0 0 16 16" width="16"
     aria-label="Edit" alt="Edit">
     <title>Edit</title>
     <path d="M7.926 3.38L1.002 9.72V12h2.304l6.926-6.316L7.926 3.38zm.738-.675l2.308 2.304 1.451-1.324-2.308-2.309-1.451 1.329zM.002 9.28L9.439.639a1 1 0 0 1 1.383.03l2.309 2.309a1 1 0 0 1-.034 1.446L3.694 13H.002V9.28zM0 16.013v-1h16v1z"></path>
@@ -24,7 +26,7 @@ const iconEdit = `
 `;
 
 const iconSettings = `
-  <svg class="bx--toolbar-action__icon" fill-rule="evenodd" height="16" name="settings" role="img" viewBox="0 0 15 16" width="15"
+  <svg class="${prefix}--toolbar-action__icon" fill-rule="evenodd" height="16" name="settings" role="img" viewBox="0 0 15 16" width="15"
     aria-label="Settings" alt="Settings">
     <title>Settings</title>
     <path d="M7.53 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 1a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"></path>
@@ -84,7 +86,7 @@ const columns = [
     name: 'select',
     title: 'Label name',
     checkbox: true,
-    checkboxId: 'bx--checkbox-20',
+    checkboxId: `${prefix}--checkbox-20`,
     checkboxName: 'checkbox-20',
     checkboxValue: 'green',
   },
@@ -176,7 +178,7 @@ const rows = [
   {
     id: 'row-id-13',
     select: {
-      id: 'bx--checkbox-13',
+      id: `${prefix}--checkbox-13`,
       name: 'checkbox-13',
       value: 'green',
       label: 'Label name',
@@ -196,7 +198,7 @@ const rows = [
   {
     id: 'row-id-14',
     select: {
-      id: 'bx--checkbox-14',
+      id: `${prefix}--checkbox-14`,
       name: 'checkbox-14',
       value: 'green',
       label: 'Label name',
@@ -216,7 +218,7 @@ const rows = [
   {
     id: 'row-id-15',
     select: {
-      id: 'bx--checkbox-15',
+      id: `${prefix}--checkbox-15`,
       name: 'checkbox-15',
       value: 'green',
       label: 'Label name',
@@ -236,7 +238,7 @@ const rows = [
   {
     id: 'row-id-11',
     select: {
-      id: 'bx--checkbox-11',
+      id: `${prefix}--checkbox-11`,
       name: 'checkbox-11',
       value: 'green',
       label: 'Label name',
@@ -256,7 +258,7 @@ const rows = [
   {
     id: 'row-id-12',
     select: {
-      id: 'bx--checkbox-12',
+      id: `${prefix}--checkbox-12`,
       name: 'checkbox-12',
       value: 'green',
       label: 'Label name',
@@ -351,6 +353,9 @@ const rowsEditable = [
 
 module.exports = {
   label: 'Data Table V2',
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

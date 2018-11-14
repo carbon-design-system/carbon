@@ -1,5 +1,6 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
 const { componentsX } = require('../../globals/js/feature-flags');
 
 const tags = !componentsX
@@ -85,6 +86,9 @@ const tags = !componentsX
     ];
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

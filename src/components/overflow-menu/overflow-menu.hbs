@@ -1,38 +1,38 @@
-<div data-overflow-menu tabindex="0" aria-label="Overflow" class="bx--overflow-menu" role="button" aria-haspopup="true"
+<div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button" aria-haspopup="true"
   aria-expanded="false">
-  <svg aria-hidden="true" class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+  <svg aria-hidden="true" class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
     <g fill-rule="evenodd">
       <circle cx="1.5" cy="1.5" r="1.5" />
       <circle cx="1.5" cy="7.5" r="1.5" />
       <circle cx="1.5" cy="13.5" r="1.5" />
     </g>
   </svg>
-  <ul class="bx--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
+  <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
     {{#each items}}
-    <li class="bx--overflow-menu-options__option{{#if disabled}} bx--overflow-menu-options__option--disabled{{/if}}{{#if danger}} bx--overflow-menu-options__option--danger{{/if}}"
+    <li class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}"
       role="presentation">
-      <button class="bx--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}" {{/if}}
+      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}" {{/if}}
         {{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}{{#if disabled}} tabindex="-1" {{/if}}>{{label}}</button>
     </li>
     {{/each}}
   </ul>
 </div>
 
-<div data-overflow-menu tabindex="0" aria-label="Overflow" class="bx--overflow-menu" role="button" aria-haspopup="true"
+<div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button" aria-haspopup="true"
   aria-expanded="false">
-  <svg aria-hidden="true" class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+  <svg aria-hidden="true" class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
     <g fill-rule="evenodd">
       <circle cx="1.5" cy="1.5" r="1.5" />
       <circle cx="1.5" cy="7.5" r="1.5" />
       <circle cx="1.5" cy="13.5" r="1.5" />
     </g>
   </svg>
-  <ul class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="{{direction}}"
+  <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="{{direction}}"
     role="menu" aria-label="Overflow">
     {{#each items}}
-    <li class="bx--overflow-menu-options__option{{#if disabled}} bx--overflow-menu-options__option--disabled{{/if}}{{#if danger}} bx--overflow-menu-options__option--danger{{/if}}"
+    <li class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}"
       role="presentation">
-      <button class="bx--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}" {{/if}}
+      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}" {{/if}}
         {{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}{{#if disabled}} tabindex="-1" {{/if}}>{{label}}</button>
     </li>
     {{/each}}
