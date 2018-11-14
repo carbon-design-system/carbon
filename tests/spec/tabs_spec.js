@@ -17,6 +17,7 @@ describe('Test tabs', function() {
         selectorLink: '.bx--tabs__nav-link',
         classActive: 'bx--tabs__nav-item--selected',
         classHidden: 'bx--tabs__nav--hidden',
+        classOpen: 'bx--tabs-trigger--open',
         eventBeforeSelected: 'tab-beingselected',
         eventAfterSelected: 'tab-selected',
       });
