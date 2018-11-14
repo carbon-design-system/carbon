@@ -39,9 +39,9 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@carbon/colors": "^0.0.1-alpha.5",
-    "@carbon/layout": "^0.0.1-alpha.5",
-    "@carbon/motion": "^0.0.1-alpha.5",
+    "@carbon/colors": "^0.0.1-alpha.7",
+    "@carbon/layout": "^0.0.1-alpha.7",
+    "@carbon/motion": "^0.0.1-alpha.7",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@frctl/fractal": "^1.1.0",
