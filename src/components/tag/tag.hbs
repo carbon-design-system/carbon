@@ -1,6 +1,6 @@
 {{#each tags}}
-<span class="bx--tag bx--tag--{{type}}">{{label}}</span>
+<span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}">{{label}}</span>
 {{/each}}
 {{#if componentsX}}
-<span class="bx--tag bx--tag--basic" disabled>Component</span>
+<span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--basic" disabled>Component</span>
 {{/if}}

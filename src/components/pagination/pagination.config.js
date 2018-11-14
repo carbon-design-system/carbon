@@ -1,5 +1,7 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 const itemsPerPageChoices = [
   {
     value: '10',
@@ -49,6 +51,9 @@ const pageNumberChoices = [
 ];
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

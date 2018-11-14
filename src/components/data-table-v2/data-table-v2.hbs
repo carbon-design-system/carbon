@@ -1,33 +1,33 @@
 {{#if hasToolbar}}
-<div class="bx--data-table-v2-container" data-table-v2>
-  <h4 class="bx--data-table-v2-header">{{title}}</h4>
-  <section class="bx--table-toolbar">
+<div class="{{@root.prefix}}--data-table-v2-container" data-table-v2>
+  <h4 class="{{@root.prefix}}--data-table-v2-header">{{title}}</h4>
+  <section class="{{@root.prefix}}--table-toolbar">
     {{#if batchActions}}
-      <div class="bx--batch-actions" aria-label="Table Action Bar">
-        <div class="bx--action-list">
+      <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
+        <div class="{{@root.prefix}}--action-list">
           {{#each batchActions}}
-            <button class="bx--btn bx--btn--sm bx--btn--ghost" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--ghost" type="button">
               {{label}}
               {{{icon}}}
             </button>
           {{/each}}
         </div>
-        <div class="bx--batch-summary">
-          <p class="bx--batch-summary__para">{{{selectedItemsCounterLabel}}}</p>
-          <button data-event="action-bar-cancel" class="bx--batch-summary__cancel">{{cancelLabel}}</button>
+        <div class="{{@root.prefix}}--batch-summary">
+          <p class="{{@root.prefix}}--batch-summary__para">{{{selectedItemsCounterLabel}}}</p>
+          <button data-event="action-bar-cancel" class="{{@root.prefix}}--batch-summary__cancel">{{cancelLabel}}</button>
         </div>
       </div>
     {{/if}}
 
-    <div class="bx--toolbar-search-container">
-      <div data-search class="bx--search bx--search--sm bx--search--light" role="search">
-        <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
+    <div class="{{@root.prefix}}--toolbar-search-container">
+      <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
+        <svg class="{{@root.prefix}}--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
           <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
             fill-rule="nonzero" />
         </svg>
-        <label id="{{searchLabelId}}" class="bx--label" for="{{searchInputId}}">{{searchLabel}}</label>
-        <input class="bx--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
-        <button class="bx--search-close bx--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
+        <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
+        <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
+        <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
           <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
               fill-rule="evenodd" />
@@ -37,32 +37,32 @@
     </div>
 
     {{#if toolbarActions}}
-      <div class="bx--toolbar-content">
+      <div class="{{@root.prefix}}--toolbar-content">
         {{#each toolbarActions}}
-          <button class="bx--toolbar-action">
+          <button class="{{@root.prefix}}--toolbar-action">
             {{{icon}}}
           </button>
         {{/each}}
 
-        <button class="bx--btn bx--btn--sm bx--btn--primary">{{addNewLabel}}</button>
+        <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">{{addNewLabel}}</button>
       </div>
     {{/if}}
   </section>
 {{/if}}
 
-<table class="bx--data-table-v2{{#if zebra}} bx--data-table-v2--zebra{{/if}}{{#if small}} bx--data-table-v2--compact{{/if}}">
+<table class="{{@root.prefix}}--data-table-v2{{#if zebra}} {{@root.prefix}}--data-table-v2--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table-v2--compact{{/if}}">
   <thead>
     <tr>
       {{#each columns}}
         <th>
           {{#if checkbox}}
-            <input data-event="select-all" id="{{checkboxId}}" class="bx--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
-            <label for="{{checkboxId}}" class="bx--checkbox-label" aria-label="{{title}}"></label>
+            <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
+            <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}"></label>
           {{else if (not menu)}}
             {{#if sortable}}
-              <button class="bx--table-sort-v2" data-event="sort">
-                <span class="bx--table-header-label">{{title}}</span>
-                <svg class="bx--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="{{../sortLabel}}" alt="{{../sortLabel}}">
+              <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
+                <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
+                <svg class="{{@root.prefix}}--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="{{../sortLabel}}" alt="{{../sortLabel}}">
                   <title>{{../sortLabel}}</title>
                   <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
                 </svg>
@@ -70,7 +70,7 @@
             {{else if small}}
               {{title}}
             {{else}}
-              <span class="bx--table-header-label">{{title}}</span>
+              <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
             {{/if}}
           {{/if}}
         </th>
@@ -79,54 +79,54 @@
   </thead>
   <tbody>
     {{#each rows as |row|}}
-      <tr{{#if row.sectionContent}} class="bx--parent-row-v2" data-parent-row{{/if}}>
+      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row{{/if}}>
         {{#each ../columns as |column|}}
           {{#with (lookup row column.name) as |data|}}
             {{#if column.section}}
-              <td class="bx--table-expand-v2" data-event="expand">
-                <button class="bx--table-expand-v2__button">
-                  <svg class="bx--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
+              <td class="{{@root.prefix}}--table-expand-v2" data-event="expand">
+                <button class="{{@root.prefix}}--table-expand-v2__button">
+                  <svg class="{{@root.prefix}}--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
                     <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
                   </svg>
                 </button>
               </td>
             {{else if column.checkbox}}
               <td>
-                <input data-event="select" id="{{data.id}}" class="bx--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}">
-                <label for="{{data.id}}" class="bx--checkbox-label" aria-label="{{data.label}}"></label>
+                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}">
+                <label for="{{data.id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}"></label>
               </td>
             {{else if column.menu}}
-              <td class="bx--table-overflow">
-                <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="bx--overflow-menu">
-                  <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+              <td class="{{@root.prefix}}--table-overflow">
+                <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
+                  <svg class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
                     <g fill-rule="evenodd">
                       <circle cx="1.5" cy="1.5" r="1.5" />
                       <circle cx="1.5" cy="7.5" r="1.5" />
                       <circle cx="1.5" cy="13.5" r="1.5" />
                     </g>
                   </svg>
-                  <ul class="bx--overflow-menu-options{{#if data.flip}} bx--overflow-menu--flip{{/if}}">
+                  <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
-                      <li class="bx--overflow-menu-options__option{{#if danger}} bx--overflow-menu-options__option--danger{{/if}}">
-                        <button class="bx--overflow-menu-options__btn">{{label}}</button>
+                      <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn">{{label}}</button>
                       </li>
                     {{/each}}
                   </ul>
                 </div>
               </td>
             {{else if (and row.editable column.editing)}}
-              <td class="bx--data-table-cell--editable bx--data-table-cell--editing">
-                <div class="bx--data-table__edit-field">
-                  <label class="bx--label" for="edit-cell:{{row.id}}:{{column.name}}">Edit Name: {{data}}</label>
-                  <input type="text" class="bx--text-input" id="edit-cell:{{row.id}}:{{column.name}}" value="{{data}}">
+              <td class="{{@root.prefix}}--data-table-cell--editable {{@root.prefix}}--data-table-cell--editing">
+                <div class="{{@root.prefix}}--data-table__edit-field">
+                  <label class="{{@root.prefix}}--label" for="edit-cell:{{row.id}}:{{column.name}}">Edit Name: {{data}}</label>
+                  <input type="text" class="{{@root.prefix}}--text-input" id="edit-cell:{{row.id}}:{{column.name}}" value="{{data}}">
                 </div>
-                <div class="bx--data-table__edit-actions">
-                  <button class="bx--btn bx--btn--secondary bx--btn--sm">{{../../../cancelLabel}}</button>
-                  <button class="bx--btn bx--btn--primary bx--btn--sm">{{../../../saveLabel}}</button>
+                <div class="{{@root.prefix}}--data-table__edit-actions">
+                  <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--secondary {{@root.prefix}}--btn--sm">{{../../../cancelLabel}}</button>
+                  <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--sm">{{../../../saveLabel}}</button>
                 </div>
               </td>
             {{else if column.editable}}
-              <td class="bx--data-table-cell--editable"><span class="bx--data-table-cell__content">{{data}}</span></td>
+              <td class="{{@root.prefix}}--data-table-cell--editable"><span class="{{@root.prefix}}--data-table-cell__content">{{data}}</span></td>
             {{else}}
               <td>{{data}}</td>
             {{/if}}
@@ -134,7 +134,7 @@
         {{/each}}
       </tr>
       {{#if row.sectionContent}}
-        <tr class="bx--expandable-row-v2 bx--expandable-row--hidden-v2" data-child-row>
+        <tr class="{{@root.prefix}}--expandable-row-v2 {{@root.prefix}}--expandable-row--hidden-v2" data-child-row>
           <td colspan="{{../columns.length}}">
             {{{row.sectionContent}}}
           </td>
@@ -146,52 +146,52 @@
 
 {{#if (not small)}}</div>{{/if}}
 {{#if hasPager}}
-  <div class="bx--pagination" data-pagination>
-    <div class="bx--pagination__left">
-      <span class="bx--pagination__text">Items per page:</span>
-      <div class="bx--select bx--select--inline">
-        <label for="select-id-pagination" class="bx--visually-hidden">Number of items per page</label>
-        <select id="select-id-pagination" class="bx--select-input" data-items-per-page>
-          <option class="bx--select-option" value="10" selected>10</option>
-          <option class="bx--select-option" value="20">20</option>
-          <option class="bx--select-option" value="30">30</option>
-          <option class="bx--select-option" value="40">40</option>
-          <option class="bx--select-option" value="50">50</option>
+  <div class="{{@root.prefix}}--pagination" data-pagination>
+    <div class="{{@root.prefix}}--pagination__left">
+      <span class="{{@root.prefix}}--pagination__text">Items per page:</span>
+      <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline">
+        <label for="select-id-pagination" class="{{@root.prefix}}--visually-hidden">Number of items per page</label>
+        <select id="select-id-pagination" class="{{@root.prefix}}--select-input" data-items-per-page>
+          <option class="{{@root.prefix}}--select-option" value="10" selected>10</option>
+          <option class="{{@root.prefix}}--select-option" value="20">20</option>
+          <option class="{{@root.prefix}}--select-option" value="30">30</option>
+          <option class="{{@root.prefix}}--select-option" value="40">40</option>
+          <option class="{{@root.prefix}}--select-option" value="50">50</option>
         </select>
-        <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
           <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
         </svg>
       </div>
-      <span class="bx--pagination__text">
+      <span class="{{@root.prefix}}--pagination__text">
         <span>|&nbsp;</span>
         <span data-displayed-item-range>1-10</span> of
         <span data-total-items>40</span> items</span>
     </div>
-    <div class="bx--pagination__right bx--pagination--inline">
-      <span class="bx--pagination__text">
+    <div class="{{@root.prefix}}--pagination__right {{@root.prefix}}--pagination--inline">
+      <span class="{{@root.prefix}}--pagination__text">
         <span data-displayed-page-number>1</span> of
         <span data-total-pages>4</span> pages</span>
-      <button class="bx--pagination__button bx--pagination__button--backward" data-page-backward aria-label="Backward button">
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" data-page-backward aria-label="Backward button">
+        <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z" />
         </svg>
       </button>
-      <label for="page-number-input" class="bx--visually-hidden">Page number input</label>
-      <div class="bx--select bx--select--inline">
-        <label for="select-id-pagination" class="bx--visually-hidden">Number of items per page</label>
-        <select id="select-id-pagination" class="bx--select-input" data-page-number-input>
-          <option class="bx--select-option" value="1" selected>1</option>
-          <option class="bx--select-option" value="2">2</option>
-          <option class="bx--select-option" value="3">3</option>
-          <option class="bx--select-option" value="4">4</option>
-          <option class="bx--select-option" value="5">5</option>
+      <label for="page-number-input" class="{{@root.prefix}}--visually-hidden">Page number input</label>
+      <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline">
+        <label for="select-id-pagination" class="{{@root.prefix}}--visually-hidden">Number of items per page</label>
+        <select id="select-id-pagination" class="{{@root.prefix}}--select-input" data-page-number-input>
+          <option class="{{@root.prefix}}--select-option" value="1" selected>1</option>
+          <option class="{{@root.prefix}}--select-option" value="2">2</option>
+          <option class="{{@root.prefix}}--select-option" value="3">3</option>
+          <option class="{{@root.prefix}}--select-option" value="4">4</option>
+          <option class="{{@root.prefix}}--select-option" value="5">5</option>
         </select>
-        <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
           <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
         </svg>
       </div>
-      <button class="bx--pagination__button bx--pagination__button--forward" data-page-forward aria-label="Forward button">
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" data-page-forward aria-label="Forward button">
+        <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
         </svg>
       </button>

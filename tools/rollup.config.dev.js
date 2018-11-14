@@ -31,7 +31,7 @@ module.exports = {
       main: true,
     }),
     commonjs({
-      include: ['node_modules/**', 'demo/feature-flags.js'],
+      include: ['node_modules/**', 'src/globals/js/settings.js', 'demo/feature-flags.js'],
       sourceMap: true,
       namedExports: {
         'node_modules/react/index.js': [
