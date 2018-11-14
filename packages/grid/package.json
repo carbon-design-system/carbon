@@ -1,6 +1,6 @@
 {
   "name": "@carbon/grid",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.7",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/grid",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
@@ -8,6 +8,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@carbon/layout": "0.0.1-alpha.5"
+    "@carbon/layout": "0.0.1-alpha.7"
   }
 }

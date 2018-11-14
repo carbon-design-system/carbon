@@ -1,6 +1,6 @@
 {
   "name": "@carbon/type",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.7",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/type",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
@@ -11,8 +11,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@carbon/import-once": "0.0.1-alpha.5",
-    "@carbon/layout": "0.0.1-alpha.5"
+    "@carbon/import-once": "0.0.1-alpha.7",
+    "@carbon/layout": "0.0.1-alpha.7"
   },
   "eyeglass": {
     "exports": false,
