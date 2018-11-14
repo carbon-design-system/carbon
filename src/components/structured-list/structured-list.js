@@ -21,7 +21,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     super(element, options);
     this.manage(
       on(this.element, 'keydown', evt => {
-        if (evt.which === 38 || evt.which === 40) {
+        if (evt.which === 37 || evt.which === 38 || evt.which === 39 || evt.which === 40) {
           this._handleKeydownArrow(evt);
         }
         if (evt.which === 13 || evt.which === 32) {
@@ -38,7 +38,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _direction(evt) {
     return {
+      37: -1, // backward
       38: -1, // backward
+      39: 1, // forward
       40: 1, // forward
     }[evt.which];
   }
@@ -53,7 +55,8 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   }
 
   _handleInputChecked(index) {
-    const input = this._getInput(index);
+    const rows = this.element.querySelectorAll(this.options.selectorRow);
+    const input = this.getInput(index) || rows[index].querySelector('input');
     input.checked = true;
   }
 
@@ -67,17 +70,21 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   // Handle Enter or Space keydown events for selecting <label> rows
   _handleKeydownChecked(evt) {
+    evt.preventDefault(); // prevent spacebar from scrolling page
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
-      const input = this.element.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for')));
+      const input =
+        selectedRow.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for'))) ||
+        selectedRow.querySelector('input');
       input.checked = true;
     }
   }
 
   // Handle up and down keydown events for selecting <label> rows
   _handleKeydownArrow(evt) {
+    evt.preventDefault(); // prevent arrow keys from scrolling
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = this._direction(evt);
 
@@ -87,24 +94,20 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
       const firstIndex = 0;
       const nextIndex = this._nextIndex(rows, selectedRow, direction);
       const lastIndex = rows.length - 1;
-
-      switch (nextIndex) {
-        case -1:
-          rows[lastIndex].classList.add(this.options.classActive);
-          rows[lastIndex].focus();
-          this._handleInputChecked(lastIndex);
-          break;
-        case rows.length:
-          rows[firstIndex].classList.add(this.options.classActive);
-          rows[firstIndex].focus();
-          this._handleInputChecked(firstIndex);
-          break;
-        default:
-          rows[nextIndex].classList.add(this.options.classActive);
-          rows[nextIndex].focus();
-          this._handleInputChecked(nextIndex);
-          break;
-      }
+      const getSelectedIndex = () => {
+        switch (nextIndex) {
+          case -1:
+            return lastIndex;
+          case rows.length:
+            return firstIndex;
+          default:
+            return nextIndex;
+        }
+      };
+      const selectedIndex = getSelectedIndex();
+      rows[selectedIndex].classList.add(this.options.classActive);
+      rows[selectedIndex].focus();
+      this._handleInputChecked(selectedIndex);
     }
   }
 
