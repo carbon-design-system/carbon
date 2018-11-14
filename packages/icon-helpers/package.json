@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icon-helpers",
   "private": true,
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "main": "index.js",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icon-helpers",
