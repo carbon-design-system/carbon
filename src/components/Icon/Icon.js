@@ -107,6 +107,7 @@ export function isPrefixed(name) {
 
 const Icon = ({
   className,
+  iconTitle,
   description,
   fill,
   fillRule,
@@ -137,7 +138,9 @@ const Icon = ({
 
   return (
     <svg {...props} aria-label={description} alt={description}>
-      <title>{description}</title>
+      <title>
+        {typeof iconTitle === 'undefined' ? description : iconTitle}
+      </title>
       {svgContent}
     </svg>
   );
@@ -148,6 +151,11 @@ Icon.propTypes = {
    * The CSS class name.
    */
   className: PropTypes.string,
+
+  /**
+   * The icon title.
+   */
+  iconTitle: PropTypes.string,
 
   /**
    * The icon description.

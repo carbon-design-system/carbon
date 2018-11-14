@@ -42,9 +42,10 @@ const props = () => {
     width: text('The SVG `width` attribute (width)', ''),
     height: text('The SVG `height` attribute (height)', ''),
     description: text(
-      'The content in <title> in SVG (description)',
+      'The a11y text (description)',
       'This is a description of the icon and what it does in context'
     ),
+    iconTitle: text('The content in <title> in SVG (iconTitle)', ''),
     className: 'extra-class',
   };
 };

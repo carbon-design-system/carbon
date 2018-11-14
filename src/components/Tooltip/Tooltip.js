@@ -171,9 +171,14 @@ export default class Tooltip extends Component {
     iconName: PropTypes.string,
 
     /**
-     * The description of the default tooltip icon, to be put in its SVG `<title>` element.
+     * The description of the default tooltip icon, to be put in its SVG 'aria-label' and 'alt' .
      */
     iconDescription: PropTypes.string,
+
+    /**
+     * The title of the default tooltip icon, to be put in its SVG `<title>` element.
+     */
+    iconTitle: PropTypes.string,
 
     /**
      * `true` if opening tooltip should be triggered by clicking the trigger button.
@@ -186,6 +191,7 @@ export default class Tooltip extends Component {
     direction: DIRECTION_BOTTOM,
     showIcon: true,
     iconDescription: 'tooltip',
+    iconTitle: '',
     triggerText: 'Provide triggerText',
     menuOffset: getMenuOffset,
   };
@@ -331,6 +337,7 @@ export default class Tooltip extends Component {
       showIcon,
       icon,
       iconName,
+      iconTitle,
       iconDescription,
       menuOffset,
       // Exclude `clickToOpen` from `other` to avoid passing it along to `<div>`
@@ -377,6 +384,7 @@ export default class Tooltip extends Component {
                   icon={!icon && !iconName ? iconInfoGlyph : icon}
                   name={iconName}
                   description={iconDescription}
+                  iconTitle={iconTitle}
                   iconRef={node => {
                     this.triggerEl = node;
                   }}

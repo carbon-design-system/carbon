@@ -30,6 +30,7 @@ describe('Tooltip', () => {
         const icon = trigger.find(Icon);
         expect(icon.length).toBe(1);
         expect(icon.props().icon).toBe(iconInfoGlyph);
+        expect(icon.props().iconTitle).toBe('');
       });
     });
   });

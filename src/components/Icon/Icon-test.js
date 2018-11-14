@@ -11,6 +11,7 @@ describe('Icon', () => {
       width: '20',
       height: '20',
       description: 'close the thing',
+      iconTitle: 'title',
       style: {
         transition: '2s',
       },
@@ -20,6 +21,10 @@ describe('Icon', () => {
 
     it('Renders `description` as expected', () => {
       expect(wrapper.props().description).toEqual('close the thing');
+    });
+
+    it('Renders `title` as expected', () => {
+      expect(wrapper.props().iconTitle).toEqual('title');
     });
 
     it('should have a default role prop', () => {
@@ -54,6 +59,7 @@ describe('Icon', () => {
       width: '20',
       height: '20',
       description: 'close the thing',
+      iconTitle: 'title',
       style: {
         transition: '2s',
       },
@@ -63,6 +69,10 @@ describe('Icon', () => {
 
     it('Renders `description` as expected', () => {
       expect(wrapper.props().description).toEqual('close the thing');
+    });
+
+    it('Renders `title` as expected', () => {
+      expect(wrapper.props().iconTitle).toEqual('title');
     });
 
     it('should have expected viewBox on <svg>', () => {
