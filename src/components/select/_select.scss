@@ -209,7 +209,7 @@
     @include font-family;
     @include typescale('zeta');
     @include focus-outline('reset');
-    height: rem(32px);
+    height: rem(40px);
     appearance: none;
     display: block;
     width: rem(224px);
@@ -236,10 +236,6 @@
 
     &:focus {
       @include focus-outline('outline');
-    }
-
-    &:hover {
-      background-color: $hover-field;
     }
 
     &[data-invalid],
@@ -274,14 +270,14 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    bottom: 0.75rem;
+    bottom: 1rem;
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
   }
 
   &[data-invalid] ~ .#{$prefix}--select__arrow {
-    bottom: 2.125rem;
+    bottom: 2.5rem;
   }
 
   .#{$prefix}--select-optgroup,
@@ -347,7 +343,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
-    top: 0.875rem;
+    top: 1.125rem;
     right: $spacing-xs;
   }
 

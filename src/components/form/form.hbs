@@ -1,32 +1,32 @@
-<div class="bx--form-item">
-  <input id="text-input-3" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text">
-  <label for="text-input-3" class="bx--label">Text Input label</label>
+<div class="{{@root.prefix}}--form-item">
+  <input id="text-input-3" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Optional placeholder text">
+  <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
 </div>
-<div class="bx--form-item">
-  <textarea id="text-area-2" class="bx--text-area{{#if light}} bx--text-area--light{{/if}}" rows="4" cols="50" placeholder="Placeholder text."></textarea>
-  <label for="text-area-2" class="bx--label">Text Area label</label>
+<div class="{{@root.prefix}}--form-item">
+  <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}" rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
 </div>
-<div class="bx--form-item">
-  <div class="bx--select{{#if light}} bx--select--light{{/if}}">
-    <select id="select-id" class="bx--select-input">
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--select{{#if light}} {{@root.prefix}}--select--light{{/if}}">
+    <select id="select-id" class="{{@root.prefix}}--select-input">
       {{#each selectItems}}
         {{#if items}}
-          <optgroup class="bx--select-optgroup" label="{{label}}">
+          <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
             {{#each items}}
-              <option class="bx--select-option" value="{{value}}"{{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}</option>
+              <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}</option>
             {{/each}}
           </optgroup>
         {{else}}
-          <option class="bx--select-option" value="{{value}}"{{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}</option>
+          <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}</option>
         {{/if}}
       {{/each}}
     </select>
-    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
-    <label for="select-id" class="bx--label">Select label</label>
+    <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
   </div>
 </div>
-<div class="bx--form-item">
-  <button class="bx--btn bx--btn--primary" type="button">Submit</button>
+<div class="{{@root.prefix}}--form-item">
+  <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">Submit</button>
 </div>

@@ -75,6 +75,7 @@
     @include line-height('body');
     margin: $accordion-title-margin;
     font-weight: 400;
+    text-align: left;
   }
 
   .#{$prefix}--accordion__content {
