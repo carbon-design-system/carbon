@@ -165,7 +165,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    &:focus {
+    &:focus,
+    &:active {
       outline: 1px solid transparent;
       background-color: $brand-01;
       color: $inverse-01;
@@ -179,7 +180,8 @@
         color: $brand-01;
       }
 
-      &:focus {
+      &:focus,
+      &:active {
         background-color: transparent;
         color: $text-01;
         outline: 1px solid transparent;
@@ -385,7 +387,7 @@
   //-----------------------------
   // Link
   //-----------------------------
-  .#{$prefix}--tabs__nav-link {
+  a.#{$prefix}--tabs__nav-link {
     display: inline-block;
     color: $text-02;
     text-decoration: none;
@@ -408,15 +410,16 @@
       border-bottom: 1px solid $ui-03;
       text-overflow: ellipsis;
       overflow: hidden;
-      &:focus {
+      &:hover {
+        color: $text-01;
+      }
+      &:focus,
+      &:active {
         width: 100%;
         margin: 0;
         padding-left: 16px;
         outline: 2px solid $brand-01;
         outline-offset: -2px;
-      }
-      &:hover {
-        color: $text-01;
       }
     }
   }
@@ -445,7 +448,8 @@
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link:focus {
+  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item[disabled] a.#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
   }
@@ -453,11 +457,13 @@
   //-----------------------------
   //  Link Focus
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) .#{$prefix}--tabs__nav-link:focus {
+  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
   }
 
-  .#{$prefix}--tabs__nav-link:focus {
+  .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-link:active {
     @include breakpoint(bp--sm--major) {
       outline: 2px solid $brand-01;
       outline-offset: -2px;
