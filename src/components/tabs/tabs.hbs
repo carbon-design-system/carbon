@@ -1,14 +1,14 @@
-<nav data-tabs class="bx--tabs" role="navigation">
-  <div class="bx--tabs-trigger" tabindex="0">
-    <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+<nav data-tabs class="{{@root.prefix}}--tabs" role="navigation">
+  <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
+    <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
     <svg width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
   </div>
-  <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+  <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">
     {{#each items}}
-      <li class="bx--tabs__nav-item{{#if selected}} bx--tabs__nav-item--selected{{/if}}" data-target=".{{panelClass}}" role="presentation">
-        <a id="{{linkId}}" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}"{{#if selected}} aria-selected="true"{{/if}}>{{label}}</a>
+      <li class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}}" data-target=".{{panelClass}}" role="presentation">
+        <a id="{{linkId}}" class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}"{{#if selected}} aria-selected="true"{{/if}}>{{label}}</a>
       </li>
     {{/each}}
   </ul>

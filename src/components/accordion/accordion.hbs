@@ -1,13 +1,13 @@
-<ul data-accordion class="bx--accordion">
+<ul data-accordion class="{{@root.prefix}}--accordion">
   {{#each sections}}
-    <li data-accordion-item class="bx--accordion__item">
-      <button class="bx--accordion__heading" aria-expanded="false" aria-controls="{{paneId}}">
-        <svg class="bx--accordion__arrow" width="7" height="12" viewBox="0 0 7 12">
+    <li data-accordion-item class="{{@root.prefix}}--accordion__item">
+      <button class="{{@root.prefix}}--accordion__heading" aria-expanded="false" aria-controls="{{paneId}}">
+        <svg class="{{@root.prefix}}--accordion__arrow" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
         </svg>
-        <div class="bx--accordion__title">{{title}}</div>
+        <div class="{{@root.prefix}}--accordion__title">{{title}}</div>
       </button>
-      <div id="{{paneId}}" class="bx--accordion__content">
+      <div id="{{paneId}}" class="{{@root.prefix}}--accordion__content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>

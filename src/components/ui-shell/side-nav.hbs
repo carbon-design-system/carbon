@@ -1,14 +1,14 @@
 {{#if sidenav.state.expanded}}
-<aside class="bx--side-nav bx--side-nav--expanded" data-side-nav>
+<aside class="{{@root.prefix}}--side-nav {{@root.prefix}}--side-nav--expanded" data-side-nav>
 {{else}}
-<aside class="bx--side-nav" data-side-nav>
+<aside class="{{@root.prefix}}--side-nav" data-side-nav>
 {{/if}}
-  <nav class="bx--side-nav__navigation" role="navigation" aria-label="Side navigation">
+  <nav class="{{@root.prefix}}--side-nav__navigation" role="navigation" aria-label="Side navigation">
     {{> side-nav-header sidenav=sidenav }}
-    <ul class="bx--side-nav__items">
-      <li class="bx--side-nav__item">
-        <a class="bx--side-nav__link" href="javascript:void(0)">
-          <div class="bx--side-nav__icon bx--side-nav__icon--small">
+    <ul class="{{@root.prefix}}--side-nav__items">
+      <li class="{{@root.prefix}}--side-nav__item">
+        <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)">
+          <div class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small">
             <svg
               width="20"
               height="20"
@@ -18,12 +18,12 @@
               <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
             </svg>
           </div>
-          <span class="bx--side-nav__link-text">Link</span>
+          <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
         </a>
       </li>
-      <li class="bx--side-nav__item bx--side-nav__item--active">
-        <a class="bx--side-nav__link" href="javascript:void(0)" aria-current="page">
-          <div class="bx--side-nav__icon bx--side-nav__icon--small">
+      <li class="{{@root.prefix}}--side-nav__item {{@root.prefix}}--side-nav__item--active">
+        <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" aria-current="page">
+          <div class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small">
             <svg
               width="20"
               height="20"
@@ -33,12 +33,12 @@
               <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
             </svg>
           </div>
-          <span class="bx--side-nav__link-text">Link - active</span>
+          <span class="{{@root.prefix}}--side-nav__link-text">Link - active</span>
         </a>
       </li>
-      <li class="bx--side-nav__item">
-        <a class="bx--side-nav__link" href="javascript:void(0)">
-          <div class="bx--side-nav__icon bx--side-nav__icon--small">
+      <li class="{{@root.prefix}}--side-nav__item">
+        <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)">
+          <div class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small">
             <svg
               width="20"
               height="20"
@@ -48,17 +48,17 @@
               <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
             </svg>
           </div>
-          <span class="bx--side-nav__link-text">
+          <span class="{{@root.prefix}}--side-nav__link-text">
             Link with really long text that should wrap
           </span>
         </a>
       </li>
-      <li class="bx--side-nav__item bx--side-nav__item--active">
+      <li class="{{@root.prefix}}--side-nav__item {{@root.prefix}}--side-nav__item--active">
         <a
-          class="bx--side-nav__link bx--side-nav__link--current"
+          class="{{@root.prefix}}--side-nav__link {{@root.prefix}}--side-nav__link--current"
           href="javascript:void(0)"
           aria-current="page">
-          <div class="bx--side-nav__icon bx--side-nav__icon--small">
+          <div class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small">
             <svg
               width="20"
               height="20"
@@ -68,18 +68,18 @@
               <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
             </svg>
           </div>
-          <span class="bx--side-nav__link-text">
+          <span class="{{@root.prefix}}--side-nav__link-text">
             Link with really long text that should wrap - active
           </span>
         </a>
       </li>
-      <li class="bx--side-nav__item">
+      <li class="{{@root.prefix}}--side-nav__item">
         <button
-          class="bx--side-nav__submenu"
+          class="{{@root.prefix}}--side-nav__submenu"
           type="button"
           aria-haspopup="true"
           aria-expanded="false">
-          <div class="bx--side-nav__icon">
+          <div class="{{@root.prefix}}--side-nav__icon">
             <svg
               width="20"
               height="20"
@@ -89,10 +89,10 @@
               <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
             </svg>
           </div>
-          <span class="bx--side-nav__submenu-title">
+          <span class="{{@root.prefix}}--side-nav__submenu-title">
             Category title that is really long and probably should overflow
           </span>
-          <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+          <div class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small {{@root.prefix}}--side-nav__submenu-chevron">
             <svg
               aria-hidden="true"
               width="20"
@@ -103,31 +103,31 @@
             </svg>
           </div>
         </button>
-        <ul class="bx--side-nav__menu" role="menu" hidden="">
-          <li class="bx--side-nav__menu-item" role="none">
-            <a class="bx--side-nav__link" href="javascript:void(0)" role="menuitem">
+        <ul class="{{@root.prefix}}--side-nav__menu" role="menu" hidden="">
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
+            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
               Link
             </a>
           </li>
-          <li class="bx--side-nav__menu-item" role="none">
-            <a class="bx--side-nav__link" href="javascript:void(0)" role="menuitem">
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
+            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
               Link
             </a>
           </li>
-          <li class="bx--side-nav__menu-item" role="menuitem">
-            <a class="bx--side-nav__link" href="javascript:void(0)">
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="menuitem">
+            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)">
               Link
             </a>
           </li>
         </ul>
       </li>
-      <li class="bx--side-nav__item bx--side-nav__item--active">
+      <li class="{{@root.prefix}}--side-nav__item {{@root.prefix}}--side-nav__item--active">
         <button
-          class="bx--side-nav__submenu"
+          class="{{@root.prefix}}--side-nav__submenu"
           type="button"
           aria-haspopup="true"
           aria-expanded="true">
-          <div class="bx--side-nav__icon">
+          <div class="{{@root.prefix}}--side-nav__icon">
             <svg
               width="20"
               height="20"
@@ -137,10 +137,10 @@
               <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
             </svg>
           </div>
-          <span class="bx--side-nav__submenu-title">
+          <span class="{{@root.prefix}}--side-nav__submenu-title">
             Category title that is really long and probably should overflow
           </span>
-          <div class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron">
+          <div class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small {{@root.prefix}}--side-nav__submenu-chevron">
             <svg
               aria-hidden="true"
               width="20"
@@ -151,37 +151,37 @@
             </svg>
           </div>
         </button>
-        <ul class="bx--side-nav__menu" role="menu">
-          <li class="bx--side-nav__menu-item" role="none">
-            <a class="bx--side-nav__link" href="javascript:void(0)" role="menuitem">
-              <span class="bx--side-nav__link-text">
+        <ul class="{{@root.prefix}}--side-nav__menu" role="menu">
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
+            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
+              <span class="{{@root.prefix}}--side-nav__link-text">
                 Link with really long text that probably should be truncated
               </span>
             </a>
           </li>
-          <li class="bx--side-nav__menu-item" role="none">
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a
-              class="bx--side-nav__link"
+              class="{{@root.prefix}}--side-nav__link"
               href="javascript:void(0)"
               role="menuitem"
               aria-current="page">
-              <span class="bx--side-nav__link-text">
+              <span class="{{@root.prefix}}--side-nav__link-text">
                 Link with really long text that probably should be truncated
               </span>
             </a>
           </li>
-          <li class="bx--side-nav__menu-item" role="none">
-            <a class="bx--side-nav__link" href="javascript:void(0)" role="menuitem">
-              <span class="bx--side-nav__link-text">Link</span>
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
+            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
+              <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
             </a>
           </li>
-          <li class="bx--side-nav__menu-item" role="none">
+          <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a
-              class="bx--side-nav__link"
+              class="{{@root.prefix}}--side-nav__link"
               href="javascript:void(0)"
               role="menuitem"
               aria-current="page">
-              <span class="bx--side-nav__link-text">Link</span>
+              <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
             </a>
           </li>
         </ul>

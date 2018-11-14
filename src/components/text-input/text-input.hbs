@@ -1,11 +1,11 @@
-<div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper">
-  <label for="text-input-3" class="bx--label">Text Input label</label>
+<div {{#if password}} data-text-input {{/if}} class="{{@root.prefix}}--form-item {{@root.prefix}}--text-input-wrapper">
+  <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
   {{#unless password}}
-  <input id="text-input-3" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Placeholder text">
+  <input id="text-input-3" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
   {{else}}
-  <input id="text-input-3" type="password" class="bx--text-input {{#if light}} bx--text-input--light{{/if}}"
+  <input id="text-input-3" type="password" class="{{@root.prefix}}--text-input {{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Placeholder text" data-toggle-password-visibility>
-  <button class="bx--text-input--password__visibility bx--tooltip__trigger bx--tooltip--icon__bottom" aria-label="Show password">
+  <button class="{{@root.prefix}}--text-input--password__visibility {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom" aria-label="Show password">
     <svg class="icon--visibility-off" hidden="true" width="16" height="16" viewBox="0 0 16 16">
       <path d="M11.846 3.45L15.293.007 16 .714l-3.284 3.281c1.261.902 2.377 2.212 3.347 3.93C14.02 11.642 11.333 13.5 8 13.5c-1.392 0-2.667-.324-3.822-.973L.703 16l-.706-.708 3.323-3.32C2.071 11.042.976 9.694.035 7.924 2.012 4.308 4.667 2.5 8 2.5c1.395 0 2.677.317 3.846.95zm-6.928 8.338c.944.477 1.97.712 3.082.712 2.795 0 5.076-1.483 6.907-4.568-.866-1.417-1.833-2.486-2.91-3.219l-1.55 1.55a3 3 0 0 1-4.185 4.182l-1.344 1.343zm-.882-.533l1.518-1.517A3 3 0 0 1 9.74 5.556l1.364-1.363A7.02 7.02 0 0 0 8 3.5c-2.798 0-5.047 1.439-6.819 4.432.842 1.465 1.792 2.568 2.855 3.323zm2.948-1.532a2 2 0 0 0 2.74-2.738l-2.74 2.738zm-.707-.707l2.74-2.738a2 2 0 0 0-2.74 2.738z"></path>
     </svg>
@@ -17,15 +17,15 @@
   {{/unless}}
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper">
-  <label for="text-input-4" class="bx--label">Text Input label</label>
+<div {{#if password}} data-text-input {{/if}} class="{{@root.prefix}}--form-item {{@root.prefix}}--text-input-wrapper">
+  <label for="text-input-4" class="{{@root.prefix}}--label">Text Input label</label>
   {{#unless password}}
-  <input data-invalid id="text-input-4" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}"
+  <input data-invalid id="text-input-4" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Placeholder text">
   {{else}}
-  <input data-invalid id="text-input-4" type="password" class="bx--text-input {{#if light}} bx--text-input--light{{/if}}"
+  <input data-invalid id="text-input-4" type="password" class="{{@root.prefix}}--text-input {{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Placeholder text" data-toggle-password-visibility>
-  <button class="bx--text-input--password__visibility bx--tooltip__trigger bx--tooltip--icon__bottom" aria-label="Show password">
+  <button class="{{@root.prefix}}--text-input--password__visibility {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom" aria-label="Show password">
     <svg class="icon--visibility-off" hidden="true" width="16" height="16" viewBox="0 0 16 16">
       <path d="M11.846 3.45L15.293.007 16 .714l-3.284 3.281c1.261.902 2.377 2.212 3.347 3.93C14.02 11.642 11.333 13.5 8 13.5c-1.392 0-2.667-.324-3.822-.973L.703 16l-.706-.708 3.323-3.32C2.071 11.042.976 9.694.035 7.924 2.012 4.308 4.667 2.5 8 2.5c1.395 0 2.677.317 3.846.95zm-6.928 8.338c.944.477 1.97.712 3.082.712 2.795 0 5.076-1.483 6.907-4.568-.866-1.417-1.833-2.486-2.91-3.219l-1.55 1.55a3 3 0 0 1-4.185 4.182l-1.344 1.343zm-.882-.533l1.518-1.517A3 3 0 0 1 9.74 5.556l1.364-1.363A7.02 7.02 0 0 0 8 3.5c-2.798 0-5.047 1.439-6.819 4.432.842 1.465 1.792 2.568 2.855 3.323zm2.948-1.532a2 2 0 0 0 2.74-2.738l-2.74 2.738zm-.707-.707l2.74-2.738a2 2 0 0 0-2.74 2.738z"></path>
     </svg>
@@ -35,22 +35,22 @@
     </svg>
   </button>
   {{/unless}}
-  <div class="bx--form-requirement">
+  <div class="{{@root.prefix}}--form-requirement">
     Validation message here
   </div>
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper">
-  <label for="text-input-5" class="bx--label">Text Input label</label>
-  <div class="bx--form__helper-text">
+<div {{#if password}} data-text-input {{/if}} class="{{@root.prefix}}--form-item {{@root.prefix}}--text-input-wrapper">
+  <label for="text-input-5" class="{{@root.prefix}}--label">Text Input label</label>
+  <div class="{{@root.prefix}}--form__helper-text">
     Optional helper text goes here
   </div>
   {{#unless password}}
-  <input id="text-input-5" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Placeholder text">
+  <input id="text-input-5" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
   {{else}}
-  <input id="text-input-5" type="password" class="bx--text-input {{#if light}} bx--text-input--light{{/if}}"
+  <input id="text-input-5" type="password" class="{{@root.prefix}}--text-input {{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Placeholder text" data-toggle-password-visibility>
-  <button class="bx--text-input--password__visibility bx--tooltip__trigger bx--tooltip--icon__bottom" aria-label="Show password">
+  <button class="{{@root.prefix}}--text-input--password__visibility {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom" aria-label="Show password">
     <svg class="icon--visibility-off" hidden="true" width="16" height="16" viewBox="0 0 16 16">
       <path d="M11.846 3.45L15.293.007 16 .714l-3.284 3.281c1.261.902 2.377 2.212 3.347 3.93C14.02 11.642 11.333 13.5 8 13.5c-1.392 0-2.667-.324-3.822-.973L.703 16l-.706-.708 3.323-3.32C2.071 11.042.976 9.694.035 7.924 2.012 4.308 4.667 2.5 8 2.5c1.395 0 2.677.317 3.846.95zm-6.928 8.338c.944.477 1.97.712 3.082.712 2.795 0 5.076-1.483 6.907-4.568-.866-1.417-1.833-2.486-2.91-3.219l-1.55 1.55a3 3 0 0 1-4.185 4.182l-1.344 1.343zm-.882-.533l1.518-1.517A3 3 0 0 1 9.74 5.556l1.364-1.363A7.02 7.02 0 0 0 8 3.5c-2.798 0-5.047 1.439-6.819 4.432.842 1.465 1.792 2.568 2.855 3.323zm2.948-1.532a2 2 0 0 0 2.74-2.738l-2.74 2.738zm-.707-.707l2.74-2.738a2 2 0 0 0-2.74 2.738z"></path>
     </svg>
@@ -62,17 +62,17 @@
   {{/unless}}
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper" style="width: 320px">
-  <label for="text-input-6" class="bx--label">Text Input label</label>
-  <div class="bx--form__helper-text">
+<div {{#if password}} data-text-input {{/if}} class="{{@root.prefix}}--form-item {{@root.prefix}}--text-input-wrapper" style="width: 320px">
+  <label for="text-input-6" class="{{@root.prefix}}--label">Text Input label</label>
+  <div class="{{@root.prefix}}--form__helper-text">
     Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
   </div>
   {{#unless password}}
-  <input id="text-input-6" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Placeholder text">
+  <input id="text-input-6" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
   {{else}}
-  <input id="text-input-6" type="password" class="bx--text-input {{#if light}} bx--text-input--light{{/if}}"
+  <input id="text-input-6" type="password" class="{{@root.prefix}}--text-input {{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Placeholder text" data-toggle-password-visibility>
-  <button class="bx--text-input--password__visibility bx--tooltip__trigger bx--tooltip--icon__bottom" aria-label="Show password">
+  <button class="{{@root.prefix}}--text-input--password__visibility {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom" aria-label="Show password">
     <svg class="icon--visibility-off" hidden="true" width="16" height="16" viewBox="0 0 16 16">
       <path d="M11.846 3.45L15.293.007 16 .714l-3.284 3.281c1.261.902 2.377 2.212 3.347 3.93C14.02 11.642 11.333 13.5 8 13.5c-1.392 0-2.667-.324-3.822-.973L.703 16l-.706-.708 3.323-3.32C2.071 11.042.976 9.694.035 7.924 2.012 4.308 4.667 2.5 8 2.5c1.395 0 2.677.317 3.846.95zm-6.928 8.338c.944.477 1.97.712 3.082.712 2.795 0 5.076-1.483 6.907-4.568-.866-1.417-1.833-2.486-2.91-3.219l-1.55 1.55a3 3 0 0 1-4.185 4.182l-1.344 1.343zm-.882-.533l1.518-1.517A3 3 0 0 1 9.74 5.556l1.364-1.363A7.02 7.02 0 0 0 8 3.5c-2.798 0-5.047 1.439-6.819 4.432.842 1.465 1.792 2.568 2.855 3.323zm2.948-1.532a2 2 0 0 0 2.74-2.738l-2.74 2.738zm-.707-.707l2.74-2.738a2 2 0 0 0-2.74 2.738z"></path>
     </svg>
@@ -84,15 +84,15 @@
   {{/unless}}
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="bx--form-item bx--text-input-wrapper">
-  <label for="text-input-7" class="bx--label bx--label--disabled">Text Input label</label>
+<div {{#if password}} data-text-input {{/if}} class="{{@root.prefix}}--form-item {{@root.prefix}}--text-input-wrapper">
+  <label for="text-input-7" class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">Text Input label</label>
   {{#unless password}}
-  <input id="text-input-7" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Placeholder text"
+  <input id="text-input-7" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
     disabled>
   {{else}}
-  <input id="text-input-7" type="password" class="bx--text-input {{#if light}} bx--text-input--light{{/if}}"
+  <input id="text-input-7" type="password" class="{{@root.prefix}}--text-input {{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Placeholder text" data-toggle-password-visibility disabled>
-  <button class="bx--text-input--password__visibility bx--tooltip__trigger bx--tooltip--icon__bottom" aria-label="Show password">
+  <button class="{{@root.prefix}}--text-input--password__visibility {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom" aria-label="Show password">
     <svg class="icon--visibility-off" hidden="true" width="16" height="16" viewBox="0 0 16 16">
       <path d="M11.846 3.45L15.293.007 16 .714l-3.284 3.281c1.261.902 2.377 2.212 3.347 3.93C14.02 11.642 11.333 13.5 8 13.5c-1.392 0-2.667-.324-3.822-.973L.703 16l-.706-.708 3.323-3.32C2.071 11.042.976 9.694.035 7.924 2.012 4.308 4.667 2.5 8 2.5c1.395 0 2.677.317 3.846.95zm-6.928 8.338c.944.477 1.97.712 3.082.712 2.795 0 5.076-1.483 6.907-4.568-.866-1.417-1.833-2.486-2.91-3.219l-1.55 1.55a3 3 0 0 1-4.185 4.182l-1.344 1.343zm-.882-.533l1.518-1.517A3 3 0 0 1 9.74 5.556l1.364-1.363A7.02 7.02 0 0 0 8 3.5c-2.798 0-5.047 1.439-6.819 4.432.842 1.465 1.792 2.568 2.855 3.323zm2.948-1.532a2 2 0 0 0 2.74-2.738l-2.74 2.738zm-.707-.707l2.74-2.738a2 2 0 0 0-2.74 2.738z"></path>
     </svg>
