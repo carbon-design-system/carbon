@@ -1,5 +1,6 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
 const { componentsX } = require('../../globals/js/feature-flags');
 
 const columns = [
@@ -67,6 +68,9 @@ const rows = [
 /* eslint-enable max-len */
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

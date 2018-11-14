@@ -1,6 +1,6 @@
-{{#if overlay}}<div class="bx--loading-overlay">{{/if}}
-<div data-loading class="bx--loading{{#if small}} bx--loading--small{{/if}}">
-  <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+{{#if overlay}}<div class="{{@root.prefix}}--loading-overlay">{{/if}}
+<div data-loading class="{{@root.prefix}}--loading{{#if small}} {{@root.prefix}}--loading--small{{/if}}">
+  <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
     <title>Loading</title>
     {{#if small}}<circle class="bx--loading__background" cx="0" cy="0" r="37.5" />{{/if}}
     <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />

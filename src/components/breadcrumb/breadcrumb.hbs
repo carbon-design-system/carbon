@@ -1,8 +1,8 @@
-<nav class="bx--breadcrumb bx--breadcrumb--no-trailing-slash" aria-label="breadcrumb">
+<nav class="{{@root.prefix}}--breadcrumb {{@root.prefix}}--breadcrumb--no-trailing-slash" aria-label="breadcrumb">
   {{#each items}}
-    <div class="bx--breadcrumb-item">
+    <div class="{{@root.prefix}}--breadcrumb-item">
       {{#if label}}
-        <a href="#" class="bx--link">{{label}}</a>
+        <a href="#" class="{{@root.prefix}}--link">{{label}}</a>
       {{/if}}
     </div>
   {{/each}}

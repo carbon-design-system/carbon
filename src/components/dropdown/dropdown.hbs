@@ -1,23 +1,23 @@
-<ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value class="bx--dropdown{{#if up}} bx--dropdown--up{{/if}}{{#if light}} bx--dropdown--light{{/if}}{{#if inline}} bx--dropdown--inline{{/if}}"
+<ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
   tabindex="0">
-  <li class="bx--dropdown-text">
+  <li class="{{@root.prefix}}--dropdown-text">
     {{#unless inline}} Dropdown label {{else}}
-    <span class="bx--dropdown-text__inner">Inline Dropdown label</span>
-    <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+    <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
+    <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
       <path d="M10 0L5 5 0 0z"></path>
     </svg>
     {{/unless}}
   </li>
   {{#unless inline}}
-  <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+  <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
     <path d="M10 0L5 5 0 0z"></path>
   </svg>
   {{/unless}}
   <li>
-    <ul class="bx--dropdown-list">
+    <ul class="{{@root.prefix}}--dropdown-list">
       {{#each items}}
-        <li data-option data-value="{{value}}" class="bx--dropdown-item">
-          <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+          <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
         </li>
       {{/each}}
     </ul>
