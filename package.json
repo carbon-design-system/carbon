@@ -215,6 +215,7 @@
     "semantic-release": "^15.0.0",
     "storybook-readme": "^4.0.2",
     "string-replace-loader": "^2.1.0",
+    "terser-webpack-plugin": "^1.1.0",
     "validate-commit-msg": "^2.10.1",
     "webpack": "^4.25.1",
     "whatwg-fetch": "^2.0.3"
