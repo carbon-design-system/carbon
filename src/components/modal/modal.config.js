@@ -1,6 +1,11 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',
@@ -13,8 +18,8 @@ module.exports = {
           .toString(36)
           .substr(2),
         hasFooter: true,
-        classPrimaryButton: 'bx--btn--primary',
-        classCloseButton: 'bx--btn--secondary',
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
     {
@@ -26,8 +31,8 @@ module.exports = {
           .toString(36)
           .substr(2),
         hasFooter: false,
-        classPrimaryButton: 'bx--btn--primary',
-        classCloseButton: 'bx--btn--secondary',
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
     {
@@ -39,9 +44,9 @@ module.exports = {
           .substr(2),
         hasFooter: true,
         labelPrimaryButton: 'Danger',
-        classModalSupplemental: 'bx--modal--danger',
-        classPrimaryButton: 'bx--btn--danger--primary',
-        classCloseButton: 'bx--btn--tertiary',
+        classModalSupplemental: `${prefix}--modal--danger`,
+        classPrimaryButton: `${prefix}--btn--danger--primary`,
+        classCloseButton: `${prefix}--btn--tertiary`,
       },
     },
     {
@@ -53,8 +58,8 @@ module.exports = {
           .substr(2),
         hasInput: true,
         hasFooter: true,
-        classPrimaryButton: 'bx--btn--primary',
-        classCloseButton: 'bx--btn--secondary',
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
   ],

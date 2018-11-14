@@ -1,14 +1,14 @@
-<div data-tile="expandable" class="bx--tile bx--tile--expandable" tabindex="0">
-  <button aria-label="expand menu" class="bx--tile__chevron">
+<div data-tile="expandable" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--expandable" tabindex="0">
+  <button aria-label="expand menu" class="{{@root.prefix}}--tile__chevron">
     <svg width="12" height="7" viewBox="0 0 12 7">
       <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
     </svg>
   </button>
-  <div class="bx--tile-content">
-    <span data-tile-atf class="bx--tile-content__above-the-fold">
+  <div class="{{@root.prefix}}--tile-content">
+    <span data-tile-atf class="{{@root.prefix}}--tile-content__above-the-fold">
       <!-- Above the fold content here -->
     </span>
-    <span class="bx--tile-content__below-the-fold">
+    <span class="{{@root.prefix}}--tile-content__below-the-fold">
       <!-- Rest of the content here -->
     </span>
   </div>
