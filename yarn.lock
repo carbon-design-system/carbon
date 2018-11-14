@@ -23,10 +23,20 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@carbon/colors@^0.0.1-alpha.0":
-  version "0.0.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.0.tgz#8c53ef65f864106a63cfc412d8ff083a8a04905f"
-  integrity sha512-/v5d1iw5MuHQgBgArItzHF04VgqeE5u/oSXwx/FDrZOZiJQ2IAlq3ocCglAq0P2xd8Wkzy2jKKIcL7LOGQYfww==
+"@carbon/colors@^0.0.1-alpha.5":
+  version "0.0.1-alpha.5"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.5.tgz#2644f4b5708299293b413fbbe632c7bc373886da"
+  integrity sha512-6WmKbR1LvrO9nj2GJR+HWafzjOwuux0/eFSL6AVkankA3Tuo/DC54v+7l/cWSdebqp8/pUwgB8bdBvm5SB2QMw==
+
+"@carbon/layout@^0.0.1-alpha.5":
+  version "0.0.1-alpha.5"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.5.tgz#fd724e59a771b16b65b20597ada59b17fd4d6ac2"
+  integrity sha512-Qc9rcsvzdorejcZ+IZbg1bAMvWwJzdVhGFTfqUuonI0KXr40YVEOCVpaXMlGu9q4GPAbN6rZgFftVjREyPDkGA==
+
+"@carbon/motion@^0.0.1-alpha.5":
+  version "0.0.1-alpha.5"
+  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.5.tgz#3f7271ff352f4cff1458ea742f7491eba717d581"
+  integrity sha512-73sLooCHFDjy0d2HnyL+efCqMaDTHuAEJokHdbaFXcPysxMHyQNnpNipoqoIl1thVZczoV7byQniSv8DySa+6A==
 
 "@commitlint/cli@^7.0.0":
   version "7.1.2"

@@ -1,0 +1,16 @@
+// Default, Use with em() and rem() functions
+$base-font-size: 16px !default;
+
+/// Convert a given px unit to a rem unit
+/// @param {px} $px
+/// @return {rem}
+@function rem($px) {
+  @return ($px / $base-font-size) * 1rem;
+}
+
+/// Convert a given px unit to a em unit
+/// @param {px} $px
+/// @return {em}
+@function em($px) {
+  @return ($px / $base-font-size) * 1em;
+}
