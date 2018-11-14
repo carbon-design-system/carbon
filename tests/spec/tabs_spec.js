@@ -82,11 +82,13 @@ describe('Test tabs', function() {
       menuNode.classList.add('bx--tabs__nav--hidden');
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).toBe(false);
+      expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(true);
     });
 
     it('Should hide drop down upon hitting trigger button', function() {
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).toBe(true);
+      expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(false);
     });
 
     afterEach(function() {
