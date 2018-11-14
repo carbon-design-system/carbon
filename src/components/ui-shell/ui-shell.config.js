@@ -1,3 +1,5 @@
+const { prefix } = require('../../globals/js/settings');
+
 const header = {
   company: 'IBM',
   platform: '[Platform]',
@@ -224,6 +226,7 @@ module.exports = {
     linkOnly: true,
   },
   context: {
+    prefix,
     header,
     nav,
     sidenav,

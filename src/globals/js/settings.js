@@ -15,4 +15,4 @@
 const settings = {
   prefix: 'bx',
 };
-export default settings;
+module.exports = settings;
