@@ -115,7 +115,7 @@ async function main() {
       '\n' +
       `<section>
   <header>
-    <h2><pre><code>@carbon/${pkg.name}</code></pre> examples</h2>
+    <h2><pre style="display:inline;"><code>@carbon/${pkg.name}</code></pre></h2>
   </header>
   <ul>
     ${links}
