@@ -1,5 +1,7 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 const menuItems = [
   {
     label: 'Stop app',
@@ -29,7 +31,7 @@ const columns = [
     name: 'select',
     title: 'Label name',
     checkbox: true,
-    checkboxId: 'bx--checkbox-1',
+    checkboxId: `${prefix}--checkbox-1`,
     checkboxName: 'checkbox-1',
     checkboxValue: 'green',
   },
@@ -97,14 +99,14 @@ const rows = [
   },
   {
     sectionContent: `
-      <table class="bx--responsive-table bx--responsive-table--static-size">
+      <table class="${prefix}--responsive-table ${prefix}--responsive-table--static-size">
         <thead>
-          <tr class="bx--table-row">
-            <th class="bx--table-header">First Name</th>
-            <th class="bx--table-header">Last Name</th>
-            <th class="bx--table-header">House</th>
-            <th class="bx--table-header">Hello</th>
-            <th class="bx--table-header">Column</th>
+          <tr class="${prefix}--table-row">
+            <th class="${prefix}--table-header">First Name</th>
+            <th class="${prefix}--table-header">Last Name</th>
+            <th class="${prefix}--table-header">House</th>
+            <th class="${prefix}--table-header">Hello</th>
+            <th class="${prefix}--table-header">Column</th>
           </tr>
         </thead>
         <tbody>
@@ -250,6 +252,9 @@ const rows = [
 ];
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

@@ -125,7 +125,7 @@
   $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
   $support-01: $ibm-colors__red--60 !default !global;
   $support-02: $ibm-colors__green--60 !default !global;
-  $support-03: $ibm-colors__yellow--20 !default !global;
+  $support-03: $ibm-colors__yellow !default !global;
   $support-04: $ibm-colors__blue--70 !default !global;
 
   $active-01: $ibm-colors__gray--30 !default !global;
@@ -229,6 +229,12 @@
   $structured-list-text-transform: none !default !global;
 
   // Slider
+
+  //Tab
+  $tab-underline-color: 2px solid $ibm-colors__gray--30 !default !global;
+  $tab-underline-color-hover: 2px solid $ibm-colors__gray--60 !default !global;
+  $tab-text-disabled: $ibm-colors__gray--30 !default !global;
+  $tab-underline-disabled: 2px solid $ibm-colors__gray--10 !default !global;
 
   // Toggle
   $toggle-background-color: $ibm-colors__green--50 !default !global;
