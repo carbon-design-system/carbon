@@ -1,0 +1,11 @@
+@import 'convert';
+
+// Default mini-unit value
+$mini-unit-size: 8px !default;
+
+/// Get the value of the corresponding number of units
+/// @param {number} $count the number of units to get the value for
+/// @return rem
+@function mini-units($count) {
+  @return rem($mini-unit-size * $count);
+}
