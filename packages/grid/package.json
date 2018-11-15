@@ -8,6 +8,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@carbon/import-once": "0.0.1-alpha.7",
     "@carbon/layout": "0.0.1-alpha.7"
   }
 }

@@ -1,0 +1,19 @@
+@import '@carbon/layout/scss/breakpoint';
+
+$breakpoints: map-merge(
+  (
+    lg: (
+      columns: 12,
+    ),
+    xlg: (
+      columns: 12,
+    ),
+    max: (
+      columns: 12,
+    ),
+  ),
+  $breakpoints
+);
+
+@import 'prefix';
+@import 'core';
