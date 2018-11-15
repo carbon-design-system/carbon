@@ -13,7 +13,7 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 
-@include exports('search') {
+@mixin search {
   .#{$prefix}--search {
     display: flex;
     position: relative;
@@ -163,5 +163,154 @@
     &::placeholder {
       color: transparent;
     }
+  }
+}
+
+@mixin search--x {
+  .#{$prefix}--search {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--search .#{$prefix}--label {
+    @include hidden;
+  }
+
+  .#{$prefix}--search-input {
+    @include reset;
+    @include font-family;
+    @include focus-outline('reset');
+    appearance: none;
+    border: none;
+    background-color: $field-01;
+    color: $text-01;
+    padding: 0 $spacing-2xl;
+    text-overflow: ellipsis;
+    width: 100%;
+    order: 1;
+    transition: background-color $transition--base, outline $transition--base;
+    border-bottom: 1px solid $ui-04;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &::placeholder {
+      color: $text-03;
+      font-weight: 400;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--search-input[disabled] {
+    color: $disabled;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: $disabled;
+      font-weight: 400;
+    }
+  }
+
+  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
+    fill: $disabled;
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search--sm .#{$prefix}--search-input {
+    @include typescale('zeta');
+    height: rem(32px);
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
+    @include typescale('epsilon');
+    height: rem(40px);
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-input {
+    @include typescale('epsilon');
+    height: rem(48px);
+    padding: 0 rem(64px) 0 rem(48px);
+  }
+
+  .#{$prefix}--search-magnifier {
+    left: 0.75rem;
+    z-index: 2;
+    position: absolute;
+    height: rem(16px);
+    width: rem(16px);
+    top: 50%;
+    transform: translateY(-50%);
+    // Ensure clear icon is rendered in Firefox (#1127)
+    fill: $text-02;
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
+    height: rem(20px);
+    width: rem(20px);
+    left: rem(24px);
+    transform: translate(-50%, -50%);
+  }
+
+  .#{$prefix}--search-close {
+    @include button-reset(false);
+    @include focus-outline('reset');
+    transition: opacity $transition--base, outline $transition--base, background-color $transition--base,
+      border-color $transition--base;
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    height: rem(40px);
+    width: rem(40px);
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--search--sm .#{$prefix}--search-close {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-close {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--search-close:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--search-close--hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
+  .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
+    @include skeleton;
+    width: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+@include exports('search') {
+  @if feature-flag-enabled('components-x') {
+    @include search--x;
+  } @else {
+    @include search;
   }
 }
