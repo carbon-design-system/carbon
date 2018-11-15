@@ -1,13 +1,13 @@
-<label for="tile-id" aria-label="tile" class="bx--tile bx--tile--selectable" data-tile="selectable" tabindex="0">
-  <input tabindex="-1" data-tile-input id="tile-id" class="bx--tile-input" value="tile" type="checkbox" name="tiles" title="tile"
+<label for="tile-id" aria-label="tile" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--selectable" data-tile="selectable" tabindex="0">
+  <input tabindex="-1" data-tile-input id="tile-id" class="{{@root.prefix}}--tile-input" value="tile" type="checkbox" name="tiles" title="tile"
   />
-  <div class="bx--tile__checkmark">
+  <div class="{{@root.prefix}}--tile__checkmark">
     <svg width="16" height="16" viewBox="0 0 16 16">
       <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
         fill-rule="evenodd" />
     </svg>
   </div>
-  <div class="bx--tile-content">
+  <div class="{{@root.prefix}}--tile-content">
     <!-- Tile content here -->
   </div>
 </label>
