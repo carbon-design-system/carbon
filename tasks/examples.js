@@ -106,7 +106,7 @@ async function main() {
 
   const links = packagesWithExamples.reduce((html, pkg) => {
     const links = pkg.examples.reduce((acc, example) => {
-      const href = `./${pkg.name}/examples/${example.name}/index.html`;
+      const href = `./${pkg.name}/examples/${example.name}/`;
       return acc + `<li><a href="${href}">${example.name}</a></li>`;
     }, '');
 
