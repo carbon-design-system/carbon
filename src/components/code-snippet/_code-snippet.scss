@@ -442,7 +442,7 @@
     color: $text-01;
   }
 
-  .#{$prefix}--snippet-btn--expand--hide .#{$prefix}--snippet-btn--expand {
+  .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
     display: none;
   }
 
