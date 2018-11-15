@@ -356,7 +356,8 @@
     height: rem(32px);
     overflow-x: scroll;
     position: relative;
-    padding: 0;
+    padding: 0 0 16px 0;
+    height: rem(48px);
   }
 
   .#{$prefix}--snippet--single pre {
