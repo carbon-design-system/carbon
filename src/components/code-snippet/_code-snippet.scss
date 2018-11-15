@@ -383,6 +383,7 @@
     white-space: pre-wrap;
   }
 
+  //Copy Button
   .#{$prefix}--snippet__icon {
     fill: $text-02;
     height: rem(16px);
@@ -426,6 +427,44 @@
     right: 1.25rem;
   }
 
+  // Show more / less button
+  .#{$prefix}--snippet-btn--expand {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: rem(8px);
+    padding-left: rem(16px);
+    color: $text-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand--hide .#{$prefix}--snippet-btn--expand {
+    display: none;
+  }
+
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    fill: $text-01;
+    margin-left: $spacing-2xs;
+    transform: rotate(0deg);
+    transition: $transition--base;
+  }
+
+  .#{$prefix}--snippet-btn--expand:hover {
+    background: $hover-field;
+    color: $text-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--snippet-btn--expand:active {
+    background: $copy-active;
+  }
+
+  .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    transform: rotate(180deg);
+  }
+
   // Skeleton State
   .#{$prefix}--snippet--code.#{$prefix}--skeleton {
     height: rem(98px);
@@ -456,35 +495,6 @@
     right: auto;
     left: 50%;
   }
-
-  // Show more / less button
-  .#{$prefix}--snippet-btn--expand {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-
-  .#{$prefix}--snippet-btn--expand--hide .#{$prefix}--snippet-btn--expand {
-    display: none;
-  }
-
-  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    fill: $brand-01;
-    margin-left: $spacing-2xs;
-    transform: rotate(0deg);
-    transition: $transition--base;
-  }
-
-  .#{$prefix}--snippet-btn--expand:hover .#{$prefix}--icon-chevron--down,
-  .#{$prefix}--snippet-btn--expand:focus .#{$prefix}--icon-chevron--down {
-    fill: $inverse-01;
-  }
-
-  .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    transform: rotate(180deg);
-  }
-
-  // Skeleton
 
   #{$prefix}--snippet--multi.#{$prefix}--skeleton {
     height: rem(98px);
