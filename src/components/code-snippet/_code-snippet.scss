@@ -430,6 +430,7 @@
     left: inherit;
     top: 0.75rem;
     right: 1.25rem;
+    background: #3d3d3d;
   }
 
   // Show more / less button
@@ -443,6 +444,7 @@
   }
 
   .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
+    //if you add a space between classes, button disappears?
     display: none;
   }
 
