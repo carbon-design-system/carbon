@@ -95,6 +95,11 @@ export default class DataTable extends React.Component {
      * Optional boolean to create a short data table.
      */
     short: PropTypes.bool,
+
+    /**
+     * Optional boolean to remove borders from data table.
+     */
+    shouldShowBorder: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -103,6 +108,7 @@ export default class DataTable extends React.Component {
     locale: 'en',
     translateWithId,
     short: false,
+    shouldShowBorder: true,
   };
 
   static translationKeys = Object.values(translationKeys);
@@ -249,9 +255,10 @@ export default class DataTable extends React.Component {
    * Helper utility to get the Table Props.
    */
   getTableProps = () => {
-    const { short } = this.props;
+    const { short, shouldShowBorder } = this.props;
     return {
       short,
+      shouldShowBorder,
     };
   };
 

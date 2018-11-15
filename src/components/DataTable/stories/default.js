@@ -21,11 +21,12 @@ import DataTable, {
 } from '../../DataTable';
 import { batchActionClick, initialRows, headers } from './shared';
 
-export default ({ short }) => (
+export default ({ short, shouldShowBorder }) => (
   <DataTable
     rows={initialRows}
     headers={headers}
     short={short}
+    shouldShowBorder={shouldShowBorder}
     render={({
       rows,
       headers,

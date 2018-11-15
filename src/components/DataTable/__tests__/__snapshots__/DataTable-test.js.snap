@@ -54,6 +54,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           >
             <Table
               short={false}
+              shouldShowBorder={true}
               zebra={true}
             >
               <TableHead>
@@ -97,6 +98,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
   }
   rows={Array []}
   short={false}
+  shouldShowBorder={true}
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -113,6 +115,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       </h4>
       <Table
         short={false}
+        shouldShowBorder={true}
         zebra={true}
       >
         <table
@@ -459,6 +462,7 @@ exports[`DataTable selection should render 1`] = `
           >
             <Table
               short={false}
+              shouldShowBorder={true}
               zebra={true}
             >
               <TableHead>
@@ -566,6 +570,7 @@ exports[`DataTable selection should render 1`] = `
     ]
   }
   short={false}
+  shouldShowBorder={true}
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -582,6 +587,7 @@ exports[`DataTable selection should render 1`] = `
       </h4>
       <Table
         short={false}
+        shouldShowBorder={true}
         zebra={true}
       >
         <table
@@ -1187,6 +1193,7 @@ exports[`DataTable should render 1`] = `
             </TableToolbar>
             <Table
               short={false}
+              shouldShowBorder={true}
               zebra={true}
             >
               <TableHead>
@@ -1265,6 +1272,7 @@ exports[`DataTable should render 1`] = `
     ]
   }
   short={false}
+  shouldShowBorder={true}
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1708,6 +1716,7 @@ exports[`DataTable should render 1`] = `
       </TableToolbar>
       <Table
         short={false}
+        shouldShowBorder={true}
         zebra={true}
       >
         <table

@@ -7,6 +7,7 @@ const readmeURL = 'https://goo.gl/dq6CEK';
 
 const props = () => ({
   short: boolean('Short variant (short)', false),
+  shouldShowBorder: boolean('Table Border variant (shouldShowBorder)', true),
 });
 
 storiesOf('DataTable', module)
@@ -36,7 +37,7 @@ storiesOf('DataTable', module)
       info: {
         text: `
           DataTable with toolbar and filtering.
-  
+
           You can find more detailed information surrounding usage of this component
           at the following url: ${readmeURL}
         `,
@@ -50,7 +51,7 @@ storiesOf('DataTable', module)
       info: {
         text: `
           DataTable with sorting
-  
+
           You can find more detailed information surrounding usage of this component
           at the following url: ${readmeURL}
         `,
@@ -64,7 +65,7 @@ storiesOf('DataTable', module)
       info: {
         text: `
           DataTable with selection
-  
+
           You can find more detailed information surrounding usage of this component
           at the following url: ${readmeURL}
         `,
@@ -78,7 +79,7 @@ storiesOf('DataTable', module)
       info: {
         text: `
             DataTable with expansion
-    
+
             You can find more detailed information surrounding usage of this component
             at the following url: ${readmeURL}
           `,
@@ -94,15 +95,15 @@ storiesOf('DataTable', module)
             Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
             to create the toolbar and placeholder for where the batch action menu will
             be displayed.
-    
+
             You can use the \`getBatchActionProps\` prop getter on the
             <TableBatchActions> component to have it wire up the ghost menu for you.
-    
+
             Individual <TableBatchAction> components take in any kind of event handler
             prop that you would expect to use, like \`onClick\`. You can use these
             alongside the \`selectedRows\` property in your \`render\` prop function
             to pass along this info to your batch action handler.
-    
+
             You can find more detailed information surrounding usage of this component
             at the following url: ${readmeURL}
           `,
