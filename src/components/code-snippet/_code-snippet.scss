@@ -364,7 +364,10 @@
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
-    padding: $spacing-md $spacing-3xl $spacing-xl $spacing-lg;
+    border: none;
+    padding: $spacing-md;
+    min-width: rem(320px);
+    max-width: 100%;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
