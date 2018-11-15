@@ -1,39 +1,39 @@
-<div class="bx--type-omega">Carousel Title</div>
-<div class="bx--carousel" data-carousel>
-  <button class="bx--carousel__btn" data-scroll-left>
-    <svg class="bx--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+<div class="{{@root.prefix}}--type-omega">Carousel Title</div>
+<div class="{{@root.prefix}}--carousel" data-carousel>
+  <button class="{{@root.prefix}}--carousel__btn" data-scroll-left>
+    <svg class="{{@root.prefix}}--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
       <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
     </svg>
   </button>
-  <div class="bx--carousel-container">
-    <div class="bx--filmstrip" tabindex="-1">
+  <div class="{{@root.prefix}}--carousel-container">
+    <div class="{{@root.prefix}}--filmstrip" tabindex="-1">
       {{#each items}}
-        <button class="bx--carousel__item" data-modal-target="#carousel-lightbox" data-carousel-item-index="{{@index}}">
+        <button class="{{@root.prefix}}--carousel__item" data-modal-target="#carousel-lightbox" data-carousel-item-index="{{@index}}">
           <img src="{{filmstripImageUrl}}">
         </button>
       {{/each}}
     </div>
   </div>
-  <button class="bx--carousel__btn" data-scroll-right>
-    <svg class="bx--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+  <button class="{{@root.prefix}}--carousel__btn" data-scroll-right>
+    <svg class="{{@root.prefix}}--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
       <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
     </svg>
   </button>
 </div>
 
-<div id="carousel-lightbox" class="bx--modal" data-modal>
-  <div class="bx--lightbox" data-lightbox data-lightbox-index="0">
-    <div class="bx--lightbox__main">
-      <button class="bx--lightbox__btn" data-scroll-left>
-        <svg class="bx--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+<div id="carousel-lightbox" class="{{@root.prefix}}--modal" data-modal>
+  <div class="{{@root.prefix}}--lightbox" data-lightbox data-lightbox-index="0">
+    <div class="{{@root.prefix}}--lightbox__main">
+      <button class="{{@root.prefix}}--lightbox__btn" data-scroll-left>
+        <svg class="{{@root.prefix}}--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
           <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
         </svg>
       </button>
       {{#each items}}
-        <img src="{{lightboxImageUrl}}" class="bx--lightbox__item">
+        <img src="{{lightboxImageUrl}}" class="{{@root.prefix}}--lightbox__item">
       {{/each}}
-      <button class="bx--lightbox__btn" data-scroll-right>
-        <svg class="bx--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+      <button class="{{@root.prefix}}--lightbox__btn" data-scroll-right>
+        <svg class="{{@root.prefix}}--pagination__button-icon" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
           <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
         </svg>
       </button>

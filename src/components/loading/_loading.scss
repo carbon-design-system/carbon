@@ -7,7 +7,7 @@
 @import 'mixins';
 @import 'vars';
 
-@include exports('loading') {
+@mixin loading {
   .#{$prefix}--loading {
     @include reset;
     @include animation__loading--spin;
@@ -54,5 +54,74 @@
 
   .#{$prefix}--loading-overlay--stop {
     display: none;
+  }
+}
+
+@mixin loading--x {
+  .#{$prefix}--loading {
+    @include reset;
+    @include animation__loading--spin;
+    width: $loading__size;
+    height: $loading__size;
+  }
+
+  // Animation (Spin by default)
+  .#{$prefix}--loading__svg {
+    fill: transparent;
+  }
+
+  .#{$prefix}--loading__svg circle {
+    stroke-width: 8;
+    stroke-linecap: butt;
+    stroke-dasharray: 240;
+  }
+
+  .#{$prefix}--loading__stroke {
+    stroke: $brand-01;
+    stroke-dashoffset: $loading__gap;
+  }
+
+  .#{$prefix}--loading--stop {
+    @include animation__loading--stop;
+  }
+
+  .#{$prefix}--loading--small {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .#{$prefix}--loading--small .#{$prefix}--loading__svg {
+    stroke: $brand-01;
+  }
+
+  .#{$prefix}--loading__background {
+    stroke: $ui-03;
+    stroke-dashoffset: 0;
+  }
+
+  .#{$prefix}--loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($ui-02, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 2000ms $carbon--standard-easing;
+    z-index: z('overlay');
+  }
+
+  .#{$prefix}--loading-overlay--stop {
+    display: none;
+  }
+}
+
+@include exports('loading') {
+  @if feature-flag-enabled('components-x') {
+    @include loading--x;
+  } @else {
+    @include loading;
   }
 }
