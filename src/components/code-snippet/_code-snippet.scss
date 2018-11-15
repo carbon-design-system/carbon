@@ -423,13 +423,17 @@
     background: $copy-active;
   }
 
-  .#{$prefix}--snippet .#{$prefix}--btn--copy__feedback {
+  .#{$prefix}--btn--copy__feedback {
     @include font-family;
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
     top: 0.75rem;
     right: 1.25rem;
+  }
+
+  .#{$prefix}--btn--copy__feedback:before,
+  .#{$prefix}--btn--copy__feedback:after {
     background: #3d3d3d;
   }
 
