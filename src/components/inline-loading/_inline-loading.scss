@@ -75,6 +75,7 @@
 
   .#{$prefix}--inline-loading__text {
     @include typescale('zeta');
+    color: $text-02;
   }
 
   .#{$prefix}--inline-loading__animation {
