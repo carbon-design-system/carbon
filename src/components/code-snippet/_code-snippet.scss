@@ -306,28 +306,30 @@
     position: relative;
     display: inline;
     padding: 0;
-    background: transparent;
     font-size: inherit;
     border: 1px solid transparent;
     border-radius: 4px;
-    background-color: $field-01;
+    background-color: $ui-01;
     color: $text-01;
     font-size: 85%;
     cursor: pointer;
 
     &:hover {
-      background-color: darken($field-01, 10%);
+      background-color: $ui-03;
     }
 
     &:focus {
-      @include focus-outline;
       outline: none;
-      border: 1px solid $brand-01;
+      border: 2px solid $brand-01;
+    }
+
+    &:active {
+      background: $copy-active;
     }
   }
 
   .#{$prefix}--snippet--inline code {
-    padding: rem(1px) $spacing-xs;
+    padding: 0 $spacing-xs;
   }
 
   .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
