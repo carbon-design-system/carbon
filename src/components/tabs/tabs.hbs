@@ -7,8 +7,8 @@
   </div>
   <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">
     {{#each items}}
-      <li class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}}" data-target=".{{panelClass}}" role="presentation">
-        <a id="{{linkId}}" class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}"{{#if selected}} aria-selected="true"{{/if}}>{{label}}</a>
+      <li class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}}" data-target=".{{panelClass}}" role="presentation" {{#if disabled}} disabled {{/if}}>
+        <a tabindex="0" id="{{linkId}}" class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}"{{#if selected}} aria-selected="true"{{/if}}>{{label}}</a>
       </li>
     {{/each}}
   </ul>
