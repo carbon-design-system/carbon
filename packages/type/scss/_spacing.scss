@@ -5,7 +5,9 @@ $type-tokens: (
   margin-01: rem(16px),
   margin-02: rem(24px),
   margin-03: rem(32px),
-  layout-01: rem(64px),
+  layout-01: rem(48px),
+  layout-02: rem(64px),
+  layout-03: rem(80px),
 );
 
 /// Get the value for a given type spacing token

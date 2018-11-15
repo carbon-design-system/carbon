@@ -4,7 +4,7 @@
 
 'use strict';
 
-const { colors, tokens } = require('../src');
+import { colors, tokens } from '../src';
 
 test('colors', () => {
   expect(colors).toMatchSnapshot();

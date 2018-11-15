@@ -47,9 +47,11 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
   program
     .command('bundle <entrypoint>')
     .description('bundle the given .js entrypoint')
-    .action(entrypoint =>
+    .option('-n, --name <name>', 'name the module for the UMD build')
+    .action((entrypoint, cmd) =>
       bundle(path.join(cwd, entrypoint), {
         cwd,
+        name: cmd.name,
       })
     );
 
