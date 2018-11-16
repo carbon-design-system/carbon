@@ -1,20 +1,20 @@
-<div class="bx--form-item">
-  <strong class="bx--label">Account photo</strong>
-  <p class="bx--label-description">only .jpg and .png files. 500kb max file size.</p>
-  <div class="bx--file" data-file>
+<div class="{{@root.prefix}}--form-item">
+  <strong class="{{@root.prefix}}--label">Account photo</strong>
+  <p class="{{@root.prefix}}--label-description">only .jpg and .png files. 500kb max file size.</p>
+  <div class="{{@root.prefix}}--file" data-file>
     <label
       for="your-file-importer-id-here"
-      class="bx--file-btn bx--btn bx--btn--secondary"
+      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--secondary"
       role="button"
       tabindex="0">Add files</label>
     <input
       type="file"
-      class="bx--file-input"
+      class="{{@root.prefix}}--file-input"
       id="your-file-importer-id-here"
       data-file-uploader
       data-target="[data-file-container]"
       multiple
     />
-    <div data-file-container class="bx--file-container"></div>
+    <div data-file-container class="{{@root.prefix}}--file-container"></div>
   </div>
 </div>

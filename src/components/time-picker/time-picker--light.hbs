@@ -1,31 +1,31 @@
-<div class="bx--form-item">
-  <div class="bx--time-picker bx--time-picker--light">
-    <div class="bx--time-picker__input">
-      <input id="time-picker-1" type="text" class="bx--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)"
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--time-picker {{@root.prefix}}--time-picker--light">
+    <div class="{{@root.prefix}}--time-picker__input">
+      <input id="time-picker-1" type="text" class="{{@root.prefix}}--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)"
         placeholder="hh:mm" maxlength="5" />
-      <div class="bx--form-requirement">
+      <div class="{{@root.prefix}}--form-requirement">
         Invalid time.
       </div>
-      <label for="time-picker-1" class="bx--label">Select a time</label>
+      <label for="time-picker-1" class="{{@root.prefix}}--label">Select a time</label>
     </div>
-    <div class="bx--time-picker__select bx--select {{#if componentsX}}{{else}}bx--select--inline{{/if}}">
-      <label for="select-id-1" class="bx--label bx--visually-hidden">Select AM/PM</label>
-      <select id="select-id-1" class="bx--select-input">
-        <option class="bx--select-option" value="AM">AM</option>
-        <option class="bx--select-option" value="PM">PM</option>
+    <div class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
+      <label for="select-id-1" class="{{@root.prefix}}--label {{@root.prefix}}--visually-hidden">Select AM/PM</label>
+      <select id="select-id-1" class="{{@root.prefix}}--select-input">
+        <option class="{{@root.prefix}}--select-option" value="AM">AM</option>
+        <option class="{{@root.prefix}}--select-option" value="PM">PM</option>
       </select>
-      <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+      <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
     </div>
-    <div class="bx--time-picker__select bx--select {{#if componentsX}}{{else}}bx--select--inline{{/if}}">
-      <label for="select-id-2" class="bx--label bx--visually-hidden">Select time zone</label>
-      <select id="select-id-2" class="bx--select-input">
-        <option class="bx--select-option" value="option-1">Time zone 1</option>
-        <option class="bx--select-option" value="option-2">Time zone 2</option>
-        <option class="bx--select-option" value="option-3">Time zone 3</option>
+    <div class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
+      <label for="select-id-2" class="{{@root.prefix}}--label {{@root.prefix}}--visually-hidden">Select time zone</label>
+      <select id="select-id-2" class="{{@root.prefix}}--select-input">
+        <option class="{{@root.prefix}}--select-option" value="option-1">Time zone 1</option>
+        <option class="{{@root.prefix}}--select-option" value="option-2">Time zone 2</option>
+        <option class="{{@root.prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
-      <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+      <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
     </div>

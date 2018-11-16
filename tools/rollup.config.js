@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     resolve(),
     commonjs({
-      include: ['node_modules/**', 'src/globals/js/feature-flags.js'],
+      include: ['node_modules/**', 'src/globals/js/settings.js', 'src/globals/js/feature-flags.js'],
       sourceMap: false,
     }),
     babel({
