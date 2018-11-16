@@ -346,18 +346,17 @@
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
-    height: rem(32px);
-    padding: 0 $spacing-3xl 0 $spacing-md;
+    height: $spacing-2xl;
+    padding: 0 56px 0 $spacing-md;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
     display: flex;
     align-items: center;
-    height: rem(32px);
     overflow-x: scroll;
     position: relative;
     padding: 0 0 $spacing-md 0;
-    height: rem(48px);
+    height: rem(56px);
   }
 
   .#{$prefix}--snippet--single pre {
@@ -391,7 +390,7 @@
 
   //Copy Button
   .#{$prefix}--snippet__icon {
-    fill: $text-02;
+    fill: $icon-01;
     height: rem(16px);
     width: rem(16px);
     transition: all $transition--base $carbon--standard-easing;
@@ -407,13 +406,20 @@
     background-color: transparent;
     outline: none;
     padding: 0;
-    height: rem(32px);
-    width: rem(32px);
+    height: $spacing-2xl;
+    width: $spacing-2xl;
     overflow: visible;
 
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
+    height: $spacing-xl;
+    width: $spacing-xl;
+    top: $spacing-xs;
+    right: $spacing-xs;
   }
 
   .#{$prefix}--snippet-button:hover {
@@ -441,8 +447,8 @@
   // Show more / less button
   .#{$prefix}--snippet-btn--expand {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: $spacing-xs;
+    bottom: $spacing-xs;
     padding: $spacing-xs;
     padding-left: $spacing-md;
     color: $text-01;
@@ -455,6 +461,7 @@
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $text-01;
     margin-left: $spacing-2xs;
+    margin-bottom: rem(1px);
     transform: rotate(0deg);
     transition: $transition--base;
   }
