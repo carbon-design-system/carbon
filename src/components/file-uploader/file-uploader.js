@@ -1,3 +1,4 @@
+import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -52,11 +53,20 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   }
 
   _closeButtonHTML() {
+    if (componentsX) {
+      return `
+      <button class="${this.options.classFileClose}" type="button" aria-label="close">
+        <svg aria-hidden="true" viewBox="0 0 10 10" fill-rule="evenodd" width="10" height="10">
+          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+            fill-rule="nonzero" />
+        </svg>
+      </button>`;
+    }
     return `
-      <svg class="${this.options.classFileClose}" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
-        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
-          9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
-      </svg>`;
+    <svg class="${this.options.classFileClose}" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
+      <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
+        9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
+    </svg>`;
   }
 
   _checkmarkHTML() {
