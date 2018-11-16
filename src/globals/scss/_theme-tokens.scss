@@ -230,6 +230,12 @@
 
   // Slider
 
+  //Tab
+  $tab-underline-color: 2px solid $ibm-colors__gray--30 !default !global;
+  $tab-underline-color-hover: 2px solid $ibm-colors__gray--60 !default !global;
+  $tab-text-disabled: $ibm-colors__gray--30 !default !global;
+  $tab-underline-disabled: 2px solid $ibm-colors__gray--10 !default !global;
+
   // Toggle
   $toggle-background-color: $ibm-colors__green--50 !default !global;
 
