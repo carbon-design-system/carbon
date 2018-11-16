@@ -460,7 +460,7 @@
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $text-01;
-    margin-left: $spacing-2xs;
+    margin-left: $spacing-xs;
     margin-bottom: rem(1px);
     transform: rotate(0deg);
     transition: $transition--base;
