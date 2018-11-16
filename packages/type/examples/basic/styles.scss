@@ -39,11 +39,28 @@
 //------------------------------------------------------------------------------
 // Type styles
 //------------------------------------------------------------------------------
+// Components
+@for $i from 1 through 2 {
+  .type-component-0#{$i} {
+    @include type-style($name: 'component-0#{$i}');
+  }
+
+  .type-component-body-0#{$i} {
+    @include type-style($name: 'component-body-0#{$i}');
+  }
+
+  @if $i == 1 {
+    .type-component-header-0#{$i} {
+      @include type-style($name: 'component-header-0#{$i}');
+    }
+  }
+}
+
 // Headings
-@for $i from 1 through 6 {
+@for $i from 1 through 3 {
   .type-heading-0#{$i} {
     // Includes responsive styles, off by default
-    @include type-style($name: 'heading-0#{$i}', $responsive: true);
+    @include type-style($name: 'heading-0#{$i}');
   }
 }
 
@@ -59,4 +76,30 @@
   .type-code-0#{$i} {
     @include type-style('code-0#{$i}');
   }
+}
+
+//------------------------------------------------------------------------------
+// Spacing
+//------------------------------------------------------------------------------
+.type-margin-01 {
+  @include type-spacing(margin-01);
+}
+
+.type-margin-02 {
+  @include type-spacing(margin-02);
+}
+
+.type-margin-03 {
+  @include type-spacing(margin-03);
+}
+
+.type-layout-01 {
+  @include type-spacing(layout-01, top);
+}
+
+//------------------------------------------------------------------------------
+// Demo-specific
+//------------------------------------------------------------------------------
+.samples {
+  max-width: 560px;
 }

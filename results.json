@@ -6,46 +6,58 @@
     "gzip": 20
   },
   {
+    "filename": "tokens.scss",
+    "package": "@carbon/colors",
+    "size": 0,
+    "gzip": 20
+  },
+  {
     "filename": "_core.scss",
     "package": "@carbon/grid",
-    "size": 7832,
-    "gzip": 1079
+    "size": 48169,
+    "gzip": 2658
   },
   {
-    "filename": "_gutter.scss",
-    "package": "@carbon/grid",
-    "size": 6536,
-    "gzip": 363
-  },
-  {
-    "filename": "_helpers.scss",
-    "package": "@carbon/grid",
-    "size": 332,
-    "gzip": 159
-  },
-  {
-    "filename": "_padding.scss",
-    "package": "@carbon/grid",
-    "size": 10887,
-    "gzip": 571
-  },
-  {
-    "filename": "_utilities.scss",
+    "filename": "_prefix.scss",
     "package": "@carbon/grid",
     "size": 0,
     "gzip": 20
   },
   {
-    "filename": "_variables.scss",
+    "filename": "12.scss",
     "package": "@carbon/grid",
-    "size": 0,
-    "gzip": 20
+    "size": 48169,
+    "gzip": 2657
+  },
+  {
+    "filename": "alignment.scss",
+    "package": "@carbon/grid",
+    "size": 5216,
+    "gzip": 509
+  },
+  {
+    "filename": "aspect-ratio.scss",
+    "package": "@carbon/grid",
+    "size": 361,
+    "gzip": 178
   },
   {
     "filename": "grid.scss",
     "package": "@carbon/grid",
-    "size": 25923,
-    "gzip": 1941
+    "size": 48169,
+    "gzip": 2658
+  },
+  {
+    "filename": "order.scss",
+    "package": "@carbon/grid",
+    "size": 2607,
+    "gzip": 347
+  },
+  {
+    "filename": "import-once.scss",
+    "package": "@carbon/import-once",
+    "size": 0,
+    "gzip": 20
   },
   {
     "filename": "_breakpoint.scss",
@@ -86,12 +98,6 @@
   {
     "filename": "layout.scss",
     "package": "@carbon/layout",
-    "size": 0,
-    "gzip": 20
-  },
-  {
-    "filename": "import-once.scss",
-    "package": "@carbon/scss-helpers",
     "size": 0,
     "gzip": 20
   },

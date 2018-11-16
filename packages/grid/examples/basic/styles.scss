@@ -1,8 +1,9 @@
 @import '@carbon/layout/scss/breakpoint';
 @import '@carbon/layout/scss/utilities';
-// @import '@carbon/layout/scss/key-height';
-// @import '@carbon/layout/scss/spacing';
-// @import '../../scss/grid';
+@import '../../scss/grid';
+@import '../../scss/alignment';
+@import '../../scss/aspect-ratio';
+@import '../../scss/order';
 
 *,
 *::before,
@@ -30,176 +31,40 @@ h6 {
   margin: 0;
 }
 
-$default-margin: map-deep-get($breakpoints, sm, margin);
-$default-gutter: map-deep-get($breakpoints, sm, gutter);
-
-.grid {
-  width: 100%;
-  max-width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.row {
-  margin-right: $default-margin;
-  margin-left: $default-margin;
-  display: flex;
-  flex-wrap: wrap;
-  // margin-right: $default-gutter * -1;
-  // margin-left: $default-gutter * -1;
-  @each $name, $values in $breakpoints {
-    @include breakpoint($name) {
-      $margin: map-get($values, margin);
-      $gutter: map-get($values, gutter);
-      margin-right: #{$margin};
-      margin-left: #{$margin};
-    }
-  }
-}
-
-// .grid {
-// width: 100%;
-// max-width: 100%;
-// margin-right: auto;
-// margin-left: auto;
-// // padding-right: #{$default-margin + $default-gutter};
-// // padding-left: #{$default-margin + $default-gutter};
-// }
-
-// .grid.grid--no-gutter {
-// // padding-right: $default-gutter;
-// // padding-left: $default-gutter;
-// }
-
-// // Optimization check for breakpoints would be to see if previous one has a
-// // different value or not. We should only generate code if it has a different
-// // value.
-// @each $name, $values in $breakpoints {
-// @include breakpoint($name) {
-// $margin: map-get($values, margin);
-// $gutter: map-get($values, gutter);
-// .grid {
-// // padding-right: #{$margin + $gutter};
-// // padding-left: #{$margin + $gutter};
-// }
-// }
-// }
-
-// .row {
-// display: flex;
-// flex-wrap: wrap;
-// margin-right: $default-gutter * -1;
-// margin-left: $default-gutter * -1;
-// }
-
-// .col {
-// position: relative;
-// width: 100%;
-// padding-right: $default-gutter;
-// padding-left: $default-gutter;
-
-// flex-basis: 0;
-// flex-grow: 1;
-// max-width: 100%;
-// }
-
-// .no-gutters {
-// margin-right: 0;
-// margin-left: 0;
-// }
-
-// .no-gutters > .col,
-// .no-gutters > [class*='col-'] {
-// padding-right: 0;
-// padding-left: 0;
-// }
-
-@mixin make-column-ready($breakpoint) {
-  // $gutter: map-get($breakpoint, gutter);
-  // $padding: map-get($breakpoint, padding);
-
-  position: relative;
-  width: 100%;
-  // padding-right: $gutter;
-  // padding-left: $gutter;
-  padding-right: 1rem;
-  padding-left: 1rem;
-}
-
-@each $name, $values in $breakpoints {
-  $columns: map-get($values, columns);
-  $gutter: map-get($values, gutter);
-
-  .col-#{$name},
-  .col-#{$name}-auto {
-    @include make-column-ready($values);
-  }
-
-  @for $i from 1 through $columns {
-    // Flag to enable ?
-    .col-#{$name}-#{$i} {
-      @include make-column-ready($values);
-    }
-
-    .row--padding-all > .col-#{$name}-#{$i} {
-      padding: #{$gutter + $cell-padding};
-    }
-
-    .row--padding-horizontal > .col-#{$name}-#{$i} {
-      padding-right: #{$gutter + $cell-padding};
-      padding-left: #{$gutter + $cell-padding};
-    }
-    .row--padding-vertical > .col-#{$name}-#{$i} {
-      padding-top: #{$gutter + $cell-padding};
-      padding-bottom: #{$gutter + $cell-padding};
-    }
-
-    .row--no-gutter > .col-#{$name},
-    .row--no-gutter > .col-#{$name}-auto,
-    .row--no-gutter > .col-#{$name}-#{$i} {
-      padding: $cell-padding;
-    }
-
-    @include breakpoint($name) {
-      .col-#{$name}-#{$i} {
-        flex: 0 0 percentage($i / $columns);
-        max-width: percentage($i / $columns);
-      }
-    }
-  }
-}
-
-// // Cosmetic
-// [class*='col'] {
-// // background-color: #dbeaff;
-// outline: 1px solid #97c1ff;
-// }
-
-.content {
-  // background-color: #edf4ff;
+.outside {
+  background-color: #dbeaff;
+  outline: 1px solid #97c1ff;
   height: 80px;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
-// .row + .row {
-// margin-top: 1rem;
-// }
-
-// .grid--no-gutter [class*='col'] {
-// background-color: #edf4ff;
-// }
+.inside {
+  background-color: #edf4ff;
+  height: 100%;
+}
 
 [class*='col'] {
-  background-color: #edf4ff;
-  outline: 1px solid #97c1ff;
+  outline: 1px dashed #97c1ff;
 }
 
-// .row--no-gutter > [class*='col'] {
-// // background-color: #edf4ff;
-// }
+.bx--grid {
+  outline: 1px dashed #97c1ff;
+}
 
-// // .row--padding-all [class*='col'] {
-// // outline: 1rem solid white;
-// // outline-offset: -17px;
-// // }
+.bx--grid.bx--grid--condensed {
+  background: #000000;
+  color: white;
+  outline: none;
+}
+
+.bx--grid.bx--grid--condensed [class*='col'] {
+  outline: none;
+}
+
+.bx--grid--condensed .outside {
+  background: #282828;
+  outline: none;
+}
+
+.bx--grid--condensed .inside {
+  background: #3d3d3d;
+}

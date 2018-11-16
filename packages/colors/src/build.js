@@ -4,7 +4,7 @@ const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
-const { colors, tokens } = require('./');
+const { colors, tokens } = require('../lib');
 
 const SCSS_DIR = path.resolve(__dirname, '../scss');
 const SCSS_ENTRYPOINT = path.join(SCSS_DIR, 'colors.scss');

@@ -106,7 +106,7 @@ async function main() {
 
   const links = packagesWithExamples.reduce((html, pkg) => {
     const links = pkg.examples.reduce((acc, example) => {
-      const href = `./${pkg.name}/examples/${example.name}/index.html`;
+      const href = `./${pkg.name}/examples/${example.name}/`;
       return acc + `<li><a href="${href}">${example.name}</a></li>`;
     }, '');
 
@@ -115,7 +115,7 @@ async function main() {
       '\n' +
       `<section>
   <header>
-    <h2><pre><code>@carbon/${pkg.name}</code></pre> examples</h2>
+    <h2><pre style="display:inline;"><code>@carbon/${pkg.name}</code></pre></h2>
   </header>
   <ul>
     ${links}

@@ -1,6 +1,4 @@
-'use strict';
-
-const colors = {
+export const colors = {
   black: '#000000',
   white: '#ffffff',
   yellow: '#fdd13a',
@@ -116,7 +114,7 @@ const colors = {
   warmGray100: '#1a1717',
 };
 
-const tokens = {
+export const tokens = {
   brand01: colors.blue60,
   brand02: colors.blue60,
   brand03: colors.blue60,
@@ -167,9 +165,4 @@ const tokens = {
   hoverSecondary: '#2c2c2c',
   overlay01: 'rgba(255, 255, 255, 0.6)',
   overlay02: 'rgba(243, 243, 243, 0.7)',
-};
-
-module.exports = {
-  colors,
-  tokens,
 };

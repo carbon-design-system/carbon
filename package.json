@@ -16,7 +16,7 @@
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "toolkit format:diff && bundler check --ignore '**/@(node_modules|examples)/**' 'packages/**/*.scss' && toolkit test --ci --reporters=default --reporters=jest-junit",
-    "clean": "lerna clean --yes && rimraf node_modules",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "examples": "yarn build && node tasks/examples.js",
     "format": "toolkit format",
     "format:diff": "toolkit format:diff",
