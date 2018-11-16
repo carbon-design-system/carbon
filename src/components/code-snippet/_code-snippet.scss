@@ -307,7 +307,7 @@
     display: inline;
     padding: 0;
     font-size: inherit;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 4px;
     background-color: $ui-01;
     color: $text-01;
@@ -356,7 +356,7 @@
     height: rem(32px);
     overflow-x: scroll;
     position: relative;
-    padding: 0 0 16px 0;
+    padding: 0 0 $spacing-md 0;
     height: rem(48px);
   }
 
@@ -435,7 +435,7 @@
 
   .#{$prefix}--btn--copy__feedback:before,
   .#{$prefix}--btn--copy__feedback:after {
-    background: #3d3d3d;
+    background: $copy-btn-feedback;
   }
 
   // Show more / less button
@@ -443,13 +443,12 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    padding: rem(8px);
-    padding-left: rem(16px);
+    padding: rem($spacing-xs);
+    padding-left: rem($spacing-md);
     color: $text-01;
   }
 
   .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
-    //if you add a space between classes, button disappears?
     display: none;
   }
 
@@ -542,47 +541,6 @@
 
   .#{$prefix}--snippet--single.#{$prefix}--skeleton .#{$prefix}--snippet-container {
     padding-bottom: 0;
-  }
-
-  /*
-    Deprecated class names will be removed in v10.x
-  */
-
-  .#{$prefix}--snippet--terminal {
-    @include bx--snippet;
-    height: rem(56px);
-    padding: 0 $spacing-2xl 0 $spacing-md;
-  }
-
-  .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {
-    display: flex;
-    align-items: center;
-    height: 130%;
-    white-space: nowrap;
-    overflow-x: scroll;
-    position: relative;
-    padding-bottom: $spacing-md;
-  }
-
-  .#{$prefix}--snippet--code {
-    @include bx--snippet;
-    padding: $spacing-md $spacing-3xl $spacing-md $spacing-lg;
-  }
-
-  .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
-    overflow: hidden;
-    position: relative;
-    max-height: rem(254px);
-    min-height: rem(56px);
-    transition: all $transition--base $carbon--standard-easing;
-  }
-
-  .#{$prefix}--snippet--expand.#{$prefix}--snippet--code .#{$prefix}--snippet-container {
-    max-height: rem(1500px);
-  }
-
-  .#{$prefix}--snippet--code .#{$prefix}--snippet-container pre {
-    white-space: pre-wrap;
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
