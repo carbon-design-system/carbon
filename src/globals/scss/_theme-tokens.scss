@@ -118,6 +118,7 @@
   $ui-03: $ibm-colors__gray--20 !default !global;
   $ui-04: $ibm-colors__gray--50 !default !global;
   $ui-05: $ibm-colors__gray--100 !default !global;
+  $icon-01: $ibm-colors__gray--100 !default !global;
   $text-01: $ibm-colors__gray--100 !default !global;
   $text-02: $ibm-colors__gray--70 !default !global;
   $text-03: $ibm-colors__gray--50 !default !global;
@@ -220,6 +221,10 @@
   $progress-indicator-bar-width: 1px inset transparent !default !global;
   $progress-indicator-stroke-width: 5 !default !global;
   $progress-indicator-line-offset: 0.625rem !default !global;
+
+  //Code Snippet
+  $copy-active: $ibm-colors__gray--30 !default !global;
+  $copy-btn-feedback: $ibm-colors__gray--80 !default !global;
 
   // Radio Button
   $radio-border-width: 1px !default !global;
