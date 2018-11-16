@@ -443,8 +443,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    padding: rem($spacing-xs);
-    padding-left: rem($spacing-md);
+    padding: $spacing-xs;
+    padding-left: $spacing-md;
     color: $text-01;
   }
 
