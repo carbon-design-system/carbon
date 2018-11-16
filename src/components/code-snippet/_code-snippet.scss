@@ -444,6 +444,10 @@
     background: $copy-btn-feedback;
   }
 
+  .#{$prefix}--btn--copy__feedback:after {
+    border: none;
+  }
+
   // Show more / less button
   .#{$prefix}--snippet-btn--expand {
     position: absolute;
