@@ -231,6 +231,7 @@ module.exports = {
     nav,
     sidenav,
     switcher,
+    content: Array.from({ length: 10 }),
   },
   variants: [
     {
