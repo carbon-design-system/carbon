@@ -5,7 +5,8 @@ const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
   context: {
-    featureFlags,
+    visibilityOffIcon: () => featureFlags.componentsX ? 'carbon-icon-view-off' : 'carbon-icon-visibility-off',
+    visibilityOnIcon: () => featureFlags.componentsX ? 'carbon-icon-view' : 'carbon-icon-visibility-on',
     prefix,
   },
   variants: [

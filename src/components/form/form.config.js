@@ -46,6 +46,7 @@ module.exports = {
   context: {
     prefix,
     componentsX,
+    downIcon: componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down',
   },
   variants: [
     {

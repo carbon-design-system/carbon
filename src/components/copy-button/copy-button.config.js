@@ -5,7 +5,7 @@ const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
   context: {
-    featureFlags,
+    addIcon: () => featureFlags.componentsX ? 'carbon-icon-add-filled' : 'carbon-icon-add-solid',
     prefix,
   },
 };

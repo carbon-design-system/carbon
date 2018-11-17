@@ -6,7 +6,6 @@ const { componentsX } = require('../../globals/js/feature-flags');
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
   variants: [

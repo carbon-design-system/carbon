@@ -21,17 +21,11 @@
 
     <div class="{{@root.prefix}}--toolbar-search-container">
       <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-        <svg class="{{@root.prefix}}--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
-          <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
-            fill-rule="nonzero" />
-        </svg>
+        {{> carbon-icon-search newContext class=(add @root.prefix "--search-magnifier") }}
         <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
         <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
         <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
-          <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-              fill-rule="evenodd" />
-          </svg>
+          {{> carbon-icon-close-solid newContext }}
         </button>
       </div>
     </div>
@@ -62,10 +56,7 @@
             {{#if sortable}}
               <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
                 <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
-                <svg class="{{@root.prefix}}--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="{{../sortLabel}}" alt="{{../sortLabel}}">
-                  <title>{{../sortLabel}}</title>
-                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-                </svg>
+                {{> carbon-icon-caret-down newContext class=(add @root.prefix "--table-sort-v2__icon") description=../sortLabel }}
               </button>
             {{else if small}}
               {{title}}
@@ -85,9 +76,7 @@
             {{#if column.section}}
               <td class="{{@root.prefix}}--table-expand-v2" data-event="expand">
                 <button class="{{@root.prefix}}--table-expand-v2__button">
-                  <svg class="{{@root.prefix}}--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
-                    <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
-                  </svg>
+                  {{> carbon-icon-chevron-right newContext class=(add @root.prefix "--table-expand-v2__svg") }}
                 </button>
               </td>
             {{else if column.checkbox}}
@@ -98,13 +87,7 @@
             {{else if column.menu}}
               <td class="{{@root.prefix}}--table-overflow">
                 <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
-                  <svg class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
-                    <g fill-rule="evenodd">
-                      <circle cx="1.5" cy="1.5" r="1.5" />
-                      <circle cx="1.5" cy="7.5" r="1.5" />
-                      <circle cx="1.5" cy="13.5" r="1.5" />
-                    </g>
-                  </svg>
+                  {{> carbon-icon-overflow-menu newContext class=(add @root.prefix "--overflow-menu__icon") }}
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
                       <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
@@ -158,9 +141,7 @@
           <option class="{{@root.prefix}}--select-option" value="40">40</option>
           <option class="{{@root.prefix}}--select-option" value="50">50</option>
         </select>
-        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+        {{> carbon-icon-caret-down newContext class=(add @root.prefix "--select__arrow") }}
       </div>
       <span class="{{@root.prefix}}--pagination__text">
         <span>|&nbsp;</span>
@@ -186,14 +167,10 @@
           <option class="{{@root.prefix}}--select-option" value="4">4</option>
           <option class="{{@root.prefix}}--select-option" value="5">5</option>
         </select>
-        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+        {{> carbon-icon-caret-down newContext class=(add @root.prefix "--select__arrow") }}
       </div>
       <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" data-page-forward aria-label="Forward button">
-        <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-          <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
-        </svg>
+        {{> carbon-icon-chevron-right newContext class=(add @root.prefix "--pagination__button-icon") }}
       </button>
     </div>
   </div>

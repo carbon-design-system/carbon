@@ -93,6 +93,7 @@ const variants = [
 module.exports = {
   context: {
     featureFlags,
+    downIcon: () => featureFlags.componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down',
     prefix,
     pageNumberChoices,
   },

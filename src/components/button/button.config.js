@@ -6,7 +6,7 @@ const featureFlags = require('../../globals/js/feature-flags');
 module.exports = {
   default: 'primary',
   context: {
-    featureFlags,
+    addIcon: () => featureFlags.componentsX ? 'carbon-icon-add' : 'carbon-icon-add-solid',
     prefix,
   },
   variants: [

@@ -4,9 +4,7 @@
     {{#if featureFlags.componentsX}}
       {{ carbon-icon 'ChevronDownGlyph' }}
     {{else}}
-      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
+      {{> carbon-icon-caret-down newContext }}
     {{/if}}
   </div>
   <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">

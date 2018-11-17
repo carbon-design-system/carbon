@@ -6,6 +6,7 @@ const { componentsX } = require('../../globals/js/feature-flags');
 module.exports = {
   context: {
     componentsX,
+    downIcon: () => componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down',
     prefix,
   },
   variants: [

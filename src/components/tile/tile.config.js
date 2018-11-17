@@ -5,7 +5,6 @@ const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
 };

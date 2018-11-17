@@ -8,9 +8,7 @@
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
               <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}">
                 <span class="{{@root.prefix}}--checkbox-appearance">
-                  <svg class="{{@root.prefix}}--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-                    <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-                  </svg>
+                  {{> carbon-icon-checkmark newContext class=(add @root.prefix "--checkbox-checkmark") }}
                 </span>
               </label>
             {{else}}
@@ -18,9 +16,7 @@
                 <span>{{title}}</span>
               {{/if}}
               {{#if sortable}}
-                <svg class="{{@root.prefix}}--table-sort__svg" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-                  <path d="M10 0L5 5 0 0z"></path>
-                </svg>
+                {{> carbon-icon-caret-down newContext class=(add @root.prefix "--table-sort__svg") }}
               {{/if}}
             {{/if}}
           </th>
@@ -34,29 +30,21 @@
             {{#with (lookup row column.name) as |data|}}
               {{#if column.section}}
                 <td tabindex="0" class="{{@root.prefix}}--table-expand" data-event="expand">
-                  <svg class="{{@root.prefix}}--table-expand__svg" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
-                    <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
-                  </svg>
+                  {{> carbon-icon-chevron-right newContext class=(add @root.prefix "--table-expand__svg") }}
                 </td>
               {{else if column.checkbox}}
                 <td class="{{@root.prefix}}--table-select">
                   <input id="{{@root.prefix}}--checkbox-2" class="{{@root.prefix}}--checkbox" type="checkbox" value="green" name="{{data.id}}">
                   <label for="{{@root.prefix}}--{{id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}">
                     <span class="{{@root.prefix}}--checkbox-appearance">
-                      <svg class="{{@root.prefix}}--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-                        <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-                      </svg>
+                      {{> carbon-icon-checkmark newContext class=(add @root.prefix "--checkbox-checkmark") }}
                     </span>
                   </label>
                 </td>
               {{else if column.menu}}
                 <td class="{{@root.prefix}}--table-overflow">
                   <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
-                    <svg class="{{@root.prefix}}--overflow-menu__icon" width="4" height="20" viewBox="0 0 4 20" fill-rule="evenodd">
-                      <circle cx="2" cy="2" r="2"></circle>
-                      <circle cx="2" cy="10" r="2"></circle>
-                      <circle cx="2" cy="18" r="2"></circle>
-                    </svg>
+                    {{> carbon-icon-overflow-menu newContext class=(add @root.prefix "--overflow-menu__icon") }}
                     <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}" tabindex="-1">
                       {{#each data.items}}
                         <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">

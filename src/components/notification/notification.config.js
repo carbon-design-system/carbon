@@ -34,6 +34,10 @@ const items = [
 module.exports = {
   context: {
     featureFlags,
+    checkmarkIcon: () => featureFlags.componentsX ? 'carbon-icon-checkmark-filled' : 'carbon-icon-checkmark-solid',
+    infoIcon: () => featureFlags.componentsX ? 'carbon-icon-information' : 'carbon-icon-info-solid',
+    warningIcon: () => featureFlags.componentsX ? 'carbon-icon-warning-alt-filled' : 'carbon-icon-warning-solid',
+    errorIcon: () => featureFlags.componentsX ? 'carbon-icon-error-filled' : 'carbon-icon-error-solid',
     prefix,
   },
   variants: [
