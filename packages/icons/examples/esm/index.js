@@ -14,12 +14,20 @@ const App = ({ meta }) => (
         <th>Preview</th>
         <th>Download</th>
         <th>GitHub</th>
-        <th>Report Issue</th>
+        <th>Issues</th>
+        <th>Module</th>
       </tr>
     </thead>
     <tbody>
       {meta.map(info => {
-        const { basename, descriptor, filename, prefix, size } = info;
+        const {
+          basename,
+          descriptor,
+          filename,
+          moduleName,
+          prefix,
+          size,
+        } = info;
         const { attrs } = descriptor;
         const svg = js2svg(descriptor);
         const downsized = size === 20 || size === 24;
@@ -55,9 +63,10 @@ const App = ({ meta }) => (
                 href={getBugTemplate(info, source)}
                 rel="noopener noreferrer"
                 target="_blank">
-                Issue Template
+                Template
               </a>
             </td>
+            <td>{moduleName}</td>
           </tr>
         );
       })}
