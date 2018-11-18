@@ -8,6 +8,9 @@
 - [Installing dependencies](#installing-dependencies)
 - [Packages](#packages)
 - [Common tasks](#common-tasks)
+- [Bundler](#bundler)
+  - [Check](#check)
+  - [Measure](#measure)
 - [FAQ](#faq)
     - [CircleCI is failing saying that it cannot find a dependency in offline mode](#circleci-is-failing-saying-that-it-cannot-find-a-dependency-in-offline-mode)
 
@@ -66,14 +69,14 @@ assist in building those packages.
 
 For the IBM Design Language, we output the following packages:
 
-| Name             | Descripton                                                                                                                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@carbon/colors` | Provides the JavaScript and SCSS assets for IDL colors and tokens                                                                                               |
-| `@carbon/grid`   | Provides a Flexbox-based set of classes to be used for building using the IDL grid                                                                              |
-| `@carbon/icons`  | Provides optimized SVG assets and JavaScript assets for using icons in Vanilla JS, or to build a [framework icon package](/docs/icons.md#build-an-icon-library) |
-| `@carbon/layout` | Provides utilities and helpers in SCSS and JavaScript for construting layouts based on the IDL                                                                  |
-| `@carbon/motion` | Provides utilities and helpers for implementing motion following the IDL                                                                                        |
-| `@carbon/type`   | Provides utilities and helpers for typography following the IDL                                                                                                 |
+| Name             | Descripton                                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@carbon/colors` | Provides the JavaScript and SCSS assets for IDL colors and tokens                                                                                                   |
+| `@carbon/grid`   | Provides a Flexbox-based set of classes to be used for building using the IDL grid                                                                                  |
+| `@carbon/icons`  | Provides optimized SVG assets and JavaScript assets for using icons in Vanilla JS, or to build a [framework icon package](/docs/guides/building-an-icon-library.md) |
+| `@carbon/layout` | Provides utilities and helpers in SCSS and JavaScript for construting layouts based on the IDL                                                                      |
+| `@carbon/motion` | Provides utilities and helpers for implementing motion following the IDL                                                                                            |
+| `@carbon/type`   | Provides utilities and helpers for typography following the IDL                                                                                                     |
 
 In addition, we also include some packages that either use these IDL-based
 packages or are used to help build these packages. These include:

@@ -2,10 +2,7 @@
 
 > Guidelines for how to install dependencies in this project
 
-## Table of Contents
-
-<!-- To run doctoc, you can use `npx doctoc docs`! -->
-
+<!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
@@ -16,6 +13,7 @@
   - [How do I install a dependency?](#how-do-i-install-a-dependency)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
 
 # Overview
 

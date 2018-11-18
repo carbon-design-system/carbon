@@ -23,6 +23,7 @@
     "format:diff": "toolkit format:diff",
     "lint": "toolkit lint .",
     "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
+    "sync": "node tasks/sync.js",
     "test": "toolkit test"
   },
   "devDependencies": {
