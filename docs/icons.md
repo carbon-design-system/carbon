@@ -76,6 +76,62 @@ that we keep track of these prefixes and size information so that we can
 optimize the paths to make it easier for developers to import and use these
 assets.
 
+## Understanding `meta.json`
+
+The `@carbon/icons` package exposes a `meta.json` file that is helpful for
+library authors to use when generating component icon libraries. For a full
+guide for building icon libraries, check out [this
+guide](/docs/guides/building-an-icon-library.md).
+
+The `meta.json` file contains an array of all of the icons built from the source
+files available in `@carbon/icons`. Each entry contains the following metadata
+that you can use:
+
+```json5
+{
+  // The source filename
+  filename: 'add--outline.svg',
+  basename: 'add--outline',
+
+  // Optional size attribute if under a `16` directory
+  size: 16,
+
+  // Prefix represents each directory in the path to the source file.
+  // Useful for output paths in the icon library
+  prefix: [
+    // Means that the icon is available at `/16/add--outline.svg`
+    '16',
+  ],
+
+  // An icon "descriptor" which represents all the information about the icon
+  // syntax tree in an object. Each level has `elem`, `attrs`, and `content`.
+  descriptor: {
+    elem: 'svg',
+    attrs: {
+      '...': '...',
+    },
+    content: [
+      {
+        elem: 'path',
+        attrs: {
+          d: '...',
+        },
+      },
+    ],
+  },
+
+  // JavaScript-safe module name for the icon. Used to stay consistent across
+  // libraries
+  moduleName: 'AddOutline16',
+
+  // Represents the output options of the file in `@carbon/icons`. Useful for
+  // mirroring the output path in each icon library
+  outputOptions: {
+    file: 'es/add--outline/16.js',
+  },
+}
+```
+
 ## FAQ
 
 #### Will there be an `iconfont` package for IBM Design Language icons?
