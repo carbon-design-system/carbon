@@ -1,6 +1,6 @@
 {
   "name": "@carbon/layout",
-  "version": "0.0.1-alpha.11",
+  "version": "0.0.1-alpha.12",
   "main": "lib/index.js",
   "module": "es/index.js",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "0.0.1-alpha.11",
+    "@carbon/bundler": "0.0.1-alpha.12",
     "rimraf": "^2.6.2"
   }
 }
