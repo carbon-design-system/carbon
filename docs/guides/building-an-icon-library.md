@@ -111,8 +111,7 @@ Most icon libraries should have the following scripts available in their
   "...": "...",
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd",
-    "prepublishOnly": "yarn build"
+    "clean": "rimraf es lib umd"
   }
 }
 ```
