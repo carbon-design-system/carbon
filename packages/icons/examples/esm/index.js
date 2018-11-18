@@ -1,78 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import meta from '../../meta.json';
 
 const GITHUB_ICON_URL =
   'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';
 
-const App = ({ meta }) => (
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Preview</th>
-        <th>Download</th>
-        <th>GitHub</th>
-        <th>Issues</th>
-        <th>Module</th>
-      </tr>
-    </thead>
-    <tbody>
-      {meta.map(info => {
-        const {
-          basename,
-          descriptor,
-          filename,
-          moduleName,
-          prefix,
-          size,
-        } = info;
-        const { attrs } = descriptor;
-        const svg = js2svg(descriptor);
-        const downsized = size === 20 || size === 24;
-        const name = downsized
-          ? prefix.join('/') + '/' + basename + ` (Downsized to ${size})`
-          : prefix.join('/') + '/' + basename;
-        const id = window.encodeURIComponent(name);
+const MODES = {
+  expanded: 'expanded',
+  minimal: 'minimal',
+  standard: 'standard',
+};
 
-        const download = ['..', '..', 'svg', ...prefix, filename].join('/');
-        const source = [GITHUB_ICON_URL, ...prefix, filename].join('/');
+function App({ meta }) {
+  const [mode, setMode] = useState(MODES.standard);
+  const headers = [
+    'Name',
+    'Size',
+    'Preview',
+    mode !== MODES.minimal && 'Download',
+    mode !== MODES.minimal && 'GitHub',
+    mode !== MODES.minimal && 'Issues',
+    mode === MODES.expanded && 'Module',
+    mode === MODES.expanded && 'Relative',
+  ].filter(Boolean);
 
-        return (
-          <tr key={id} id={id}>
-            <td className="icon-name">
-              <a href={`#${id}`}>{name}</a>
-            </td>
-            <td className="icon-size">{`${attrs.width}x${attrs.height}`}</td>
-            <td className="icon-preview-container">
-              <div className="icon-preview">{svg}</div>
-            </td>
-            <td>
-              <a href={download} download>
-                Download
-              </a>
-            </td>
-            <td>
-              <a href={source} rel="noopener noreferrer" target="_blank">
-                Source
-              </a>
-            </td>
-            <td>
-              <a
-                href={getBugTemplate(info, source)}
-                rel="noopener noreferrer"
-                target="_blank">
-                Template
-              </a>
-            </td>
-            <td>{moduleName}</td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </table>
-);
+  return (
+    <React.Fragment>
+      <div>
+        {`Viewing mode: ${mode}`}
+        <div>
+          <button onClick={() => setMode(MODES.minimal)}>Minimal</button>
+          <button onClick={() => setMode(MODES.standard)}>Standard</button>
+          <button onClick={() => setMode(MODES.expanded)}>Expanded</button>
+        </div>
+      </div>
+      <Table headers={headers}>
+        {meta.map(info => {
+          const {
+            basename,
+            descriptor,
+            filename,
+            moduleName,
+            outputOptions,
+            prefix,
+            size,
+          } = info;
+          const { attrs } = descriptor;
+          const svg = js2svg(descriptor);
+          const downsized = size === 20 || size === 24;
+          const name = downsized
+            ? prefix.join('/') + '/' + basename + ` (Downsized to ${size})`
+            : prefix.join('/') + '/' + basename;
+          const id = window.encodeURIComponent(name);
+
+          const download = ['..', '..', 'svg', ...prefix, filename].join('/');
+          const source = [GITHUB_ICON_URL, ...prefix, filename].join('/');
+
+          return (
+            <tr key={id} id={id}>
+              <td className="icon-name">
+                <a href={`#${id}`}>{name}</a>
+              </td>
+              <td className="icon-size">{`${attrs.width}x${attrs.height}`}</td>
+              <td className="icon-preview-container">
+                <div className="icon-preview">{svg}</div>
+              </td>
+              {!(mode === MODES.minimal) && (
+                <React.Fragment>
+                  <td>
+                    <a href={download} download>
+                      Download
+                    </a>
+                  </td>
+                  <td>
+                    <a href={source} rel="noopener noreferrer" target="_blank">
+                      Source
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      href={getBugTemplate(info, source)}
+                      rel="noopener noreferrer"
+                      target="_blank">
+                      Template
+                    </a>
+                  </td>
+                </React.Fragment>
+              )}
+              {mode === MODES.expanded && (
+                <React.Fragment>
+                  <td>{moduleName}</td>
+                  <td>{outputOptions.file}</td>
+                </React.Fragment>
+              )}
+            </tr>
+          );
+        })}
+      </Table>
+    </React.Fragment>
+  );
+}
+
+function Table({ children, headers }) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          {headers.map(header => (
+            <th key={header}>{header}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>{children}</tbody>
+    </table>
+  );
+}
 
 function render() {
   ReactDOM.render(<App meta={meta} />, document.getElementById('root'));
