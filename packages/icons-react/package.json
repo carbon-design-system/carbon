@@ -19,6 +19,7 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
+    "@carbon/icon-helpers": "0.0.1-alpha.10",
     "prop-types": "^15.6.2"
   },
   "devDependencies": {
