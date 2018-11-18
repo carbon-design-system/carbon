@@ -1,45 +1,17 @@
 'use strict';
 
-const { SafeString } = require('handlebars');
 const CarbonIcons = require('@carbon/icons');
+const { getAttributes } = require('@carbon/icon-helpers');
+const { SafeString } = require('handlebars');
 
 function iconHelper(name, { hash = {} } = {}) {
   const icon = CarbonIcons[name];
   if (!icon) {
-    throw new Error(`Cannot find icon for name: ${name}`);
+    throw new Error(`Unable to find the icon: \`${name}\``);
   }
   const content = icon.content.map(js2svg);
-  const attributes = {
-    focusable: false,
-    ...icon.attrs,
-    ...hash,
-  };
-
-  if (
-    attributes['aria-label'] ||
-    attributes['aria-labelledby'] ||
-    attributes.focusable
-  ) {
-    attributes.role = 'img';
-    attributes.focusable = true;
-  }
-
-  // If no accessibility-related property is passed in, set `aria-hidden` to
-  // true because it is a non-interactive element. `focusable` is a special
-  // case here in that we need to allow users to specify it if supplying a
-  // title in children.
-  if (
-    !(
-      attributes['aria-label'] ||
-      attributes['aria-labelledby'] ||
-      attributes.focusable
-    )
-  ) {
-    attributes['aria-hidden'] = true;
-  }
-
   return new SafeString(
-    `<svg ${formatAttributes(attributes)}>${content.join('')}</svg>`
+    `<svg ${getAttributes(hash)}>${content.join('')}</svg>`
   );
 }
 
@@ -52,8 +24,12 @@ function js2svg(descriptor) {
 }
 
 function formatAttributes(attrs) {
-  return Object.keys(attrs).reduce((acc, key) => {
-    return (acc + ' ' + `${key}="${attrs[key]}"`).trim();
+  return Object.keys(attrs).reduce((acc, key, index) => {
+    const attribute = `${key}="${attrs[key]}"`;
+    if (index === 0) {
+      return attribute;
+    }
+    return acc + ' ' + attribute;
   }, '');
 }
 

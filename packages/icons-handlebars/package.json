@@ -12,7 +12,8 @@
     "handlebars": "^4.0.12"
   },
   "dependencies": {
-    "@carbon/icons": "0.0.1-alpha.11"
+    "@carbon/icons": "0.0.1-alpha.11",
+    "@carbon/icon-helpers": "0.0.1-alpha.11"
   },
   "devDependencies": {
     "handlebars": "^4.0.12"
