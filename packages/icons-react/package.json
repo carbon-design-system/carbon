@@ -16,8 +16,7 @@
   ],
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd",
-    "prepublishOnly": "yarn build"
+    "clean": "rimraf es lib umd"
   },
   "dependencies": {
     "prop-types": "^15.6.2"
