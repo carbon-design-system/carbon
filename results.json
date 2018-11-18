@@ -1,21 +1,9 @@
 [
   {
-    "filename": "colors.scss",
-    "package": "@carbon/colors",
-    "size": 0,
-    "gzip": 20
-  },
-  {
-    "filename": "tokens.scss",
-    "package": "@carbon/colors",
-    "size": 0,
-    "gzip": 20
-  },
-  {
     "filename": "_core.scss",
     "package": "@carbon/grid",
-    "size": 48169,
-    "gzip": 2658
+    "size": 48162,
+    "gzip": 2644
   },
   {
     "filename": "_prefix.scss",
@@ -26,8 +14,8 @@
   {
     "filename": "12.scss",
     "package": "@carbon/grid",
-    "size": 48169,
-    "gzip": 2657
+    "size": 48102,
+    "gzip": 2689
   },
   {
     "filename": "alignment.scss",
@@ -44,8 +32,8 @@
   {
     "filename": "grid.scss",
     "package": "@carbon/grid",
-    "size": 48169,
-    "gzip": 2658
+    "size": 48162,
+    "gzip": 2644
   },
   {
     "filename": "order.scss",
@@ -102,6 +90,12 @@
     "gzip": 20
   },
   {
+    "filename": "motion.scss",
+    "package": "@carbon/motion",
+    "size": 0,
+    "gzip": 20
+  },
+  {
     "filename": "_font-family.scss",
     "package": "@carbon/type",
     "size": 0,
@@ -115,6 +109,12 @@
   },
   {
     "filename": "_scale.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_spacing.scss",
     "package": "@carbon/type",
     "size": 0,
     "gzip": 20

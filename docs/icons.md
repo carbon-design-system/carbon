@@ -1,5 +1,20 @@
 # Icons
 
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Building an Icon Library](#building-an-icon-library)
+- [Software design notes](#software-design-notes)
+- [FAQ](#faq)
+    - [Why aren't we distributing an iconfont package?](#why-arent-we-distributing-an-iconfont-package)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+
+## Building an Icon Library
+
 ## Software design notes
 
 - Fan-out pattern is strongly encouraged given the number of icons
