@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthCobbAngle32 from '../../../lib/WatsonHealthCobbAngle/32';
+import WatsonHealthCobbAngle32 from '../../../es/watson-health/cobb-angle/32.js';
 
 storiesOf('WatsonHealthCobbAngle32', module)
   .add('default', () => <WatsonHealthCobbAngle32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthCobbAngle32', module)
     <WatsonHealthCobbAngle32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthCobbAngle32 focusable>
+    <WatsonHealthCobbAngle32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthCobbAngle32>
   ));

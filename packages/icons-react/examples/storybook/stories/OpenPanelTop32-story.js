@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OpenPanelTop32 from '../../../lib/OpenPanelTop/32';
+import OpenPanelTop32 from '../../../es/open-panel--top/32.js';
 
 storiesOf('OpenPanelTop32', module)
   .add('default', () => <OpenPanelTop32 />)
@@ -8,7 +8,7 @@ storiesOf('OpenPanelTop32', module)
     <OpenPanelTop32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <OpenPanelTop32 focusable>
+    <OpenPanelTop32 aria-label="Icon label">
       <title>Icon title</title>
     </OpenPanelTop32>
   ));

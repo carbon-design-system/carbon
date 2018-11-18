@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Workspace32 from '../../../lib/Workspace/32';
+import Workspace32 from '../../../es/workspace/32.js';
 
 storiesOf('Workspace32', module)
   .add('default', () => <Workspace32 />)
@@ -8,7 +8,7 @@ storiesOf('Workspace32', module)
     <Workspace32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Workspace32 focusable>
+    <Workspace32 aria-label="Icon label">
       <title>Icon title</title>
     </Workspace32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TextColor32 from '../../../lib/TextColor/32';
+import TextColor32 from '../../../es/text-color/32.js';
 
 storiesOf('TextColor32', module)
   .add('default', () => <TextColor32 />)
@@ -8,7 +8,7 @@ storiesOf('TextColor32', module)
     <TextColor32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <TextColor32 focusable>
+    <TextColor32 aria-label="Icon label">
       <title>Icon title</title>
     </TextColor32>
   ));

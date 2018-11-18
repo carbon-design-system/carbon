@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import DataUnstructured32 from '../../../lib/DataUnstructured/32';
+import DataUnstructured32 from '../../../es/data--unstructured/32.js';
 
 storiesOf('DataUnstructured32', module)
   .add('default', () => <DataUnstructured32 />)
@@ -8,7 +8,7 @@ storiesOf('DataUnstructured32', module)
     <DataUnstructured32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <DataUnstructured32 focusable>
+    <DataUnstructured32 aria-label="Icon label">
       <title>Icon title</title>
     </DataUnstructured32>
   ));

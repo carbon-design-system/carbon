@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CheckmarkOutline16 from '../../../lib/CheckmarkOutline/16';
+import CheckmarkOutline16 from '../../../es/checkmark--outline/16.js';
 
 storiesOf('CheckmarkOutline16', module)
   .add('default', () => <CheckmarkOutline16 />)
@@ -8,7 +8,7 @@ storiesOf('CheckmarkOutline16', module)
     <CheckmarkOutline16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CheckmarkOutline16 focusable>
+    <CheckmarkOutline16 aria-label="Icon label">
       <title>Icon title</title>
     </CheckmarkOutline16>
   ));

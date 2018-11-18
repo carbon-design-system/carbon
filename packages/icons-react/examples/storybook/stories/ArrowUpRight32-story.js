@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ArrowUpRight32 from '../../../lib/ArrowUpRight/32';
+import ArrowUpRight32 from '../../../es/arrow--up-right/32.js';
 
 storiesOf('ArrowUpRight32', module)
   .add('default', () => <ArrowUpRight32 />)
@@ -8,7 +8,7 @@ storiesOf('ArrowUpRight32', module)
     <ArrowUpRight32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ArrowUpRight32 focusable>
+    <ArrowUpRight32 aria-label="Icon label">
       <title>Icon title</title>
     </ArrowUpRight32>
   ));

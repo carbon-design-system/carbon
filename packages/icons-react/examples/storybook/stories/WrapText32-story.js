@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WrapText32 from '../../../lib/WrapText/32';
+import WrapText32 from '../../../es/wrap-text/32.js';
 
 storiesOf('WrapText32', module)
   .add('default', () => <WrapText32 />)
@@ -8,7 +8,7 @@ storiesOf('WrapText32', module)
     <WrapText32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WrapText32 focusable>
+    <WrapText32 aria-label="Icon label">
       <title>Icon title</title>
     </WrapText32>
   ));

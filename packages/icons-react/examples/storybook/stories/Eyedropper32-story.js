@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Eyedropper32 from '../../../lib/Eyedropper/32';
+import Eyedropper32 from '../../../es/eyedropper/32.js';
 
 storiesOf('Eyedropper32', module)
   .add('default', () => <Eyedropper32 />)
@@ -8,7 +8,7 @@ storiesOf('Eyedropper32', module)
     <Eyedropper32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Eyedropper32 focusable>
+    <Eyedropper32 aria-label="Icon label">
       <title>Icon title</title>
     </Eyedropper32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Delete16 from '../../../lib/Delete/16';
+import Delete16 from '../../../es/delete/16.js';
 
 storiesOf('Delete16', module)
   .add('default', () => <Delete16 />)
@@ -8,7 +8,7 @@ storiesOf('Delete16', module)
     <Delete16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Delete16 focusable>
+    <Delete16 aria-label="Icon label">
       <title>Icon title</title>
     </Delete16>
   ));

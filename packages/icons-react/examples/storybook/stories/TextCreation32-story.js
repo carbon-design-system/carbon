@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TextCreation32 from '../../../lib/TextCreation/32';
+import TextCreation32 from '../../../es/text-creation/32.js';
 
 storiesOf('TextCreation32', module)
   .add('default', () => <TextCreation32 />)
@@ -8,7 +8,7 @@ storiesOf('TextCreation32', module)
     <TextCreation32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <TextCreation32 focusable>
+    <TextCreation32 aria-label="Icon label">
       <title>Icon title</title>
     </TextCreation32>
   ));

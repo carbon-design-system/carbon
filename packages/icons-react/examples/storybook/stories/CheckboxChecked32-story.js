@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CheckboxChecked32 from '../../../lib/CheckboxChecked/32';
+import CheckboxChecked32 from '../../../es/checkbox--checked/32.js';
 
 storiesOf('CheckboxChecked32', module)
   .add('default', () => <CheckboxChecked32 />)
@@ -8,7 +8,7 @@ storiesOf('CheckboxChecked32', module)
     <CheckboxChecked32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CheckboxChecked32 focusable>
+    <CheckboxChecked32 aria-label="Icon label">
       <title>Icon title</title>
     </CheckboxChecked32>
   ));

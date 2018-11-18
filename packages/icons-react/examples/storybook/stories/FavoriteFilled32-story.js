@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FavoriteFilled32 from '../../../lib/FavoriteFilled/32';
+import FavoriteFilled32 from '../../../es/favorite--filled/32.js';
 
 storiesOf('FavoriteFilled32', module)
   .add('default', () => <FavoriteFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('FavoriteFilled32', module)
     <FavoriteFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <FavoriteFilled32 focusable>
+    <FavoriteFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </FavoriteFilled32>
   ));

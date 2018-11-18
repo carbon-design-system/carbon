@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Crop32 from '../../../lib/Crop/32';
+import Crop32 from '../../../es/crop/32.js';
 
 storiesOf('Crop32', module)
   .add('default', () => <Crop32 />)
@@ -8,7 +8,7 @@ storiesOf('Crop32', module)
     <Crop32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Crop32 focusable>
+    <Crop32 aria-label="Icon label">
       <title>Icon title</title>
     </Crop32>
   ));

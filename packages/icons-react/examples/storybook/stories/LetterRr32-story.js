@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LetterRr32 from '../../../lib/LetterRr/32';
+import LetterRr32 from '../../../es/letter--Rr/32.js';
 
 storiesOf('LetterRr32', module)
   .add('default', () => <LetterRr32 />)
@@ -8,7 +8,7 @@ storiesOf('LetterRr32', module)
     <LetterRr32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LetterRr32 focusable>
+    <LetterRr32 aria-label="Icon label">
       <title>Icon title</title>
     </LetterRr32>
   ));

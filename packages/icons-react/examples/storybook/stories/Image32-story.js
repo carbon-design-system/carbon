@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Image32 from '../../../lib/Image/32';
+import Image32 from '../../../es/image/32.js';
 
 storiesOf('Image32', module)
   .add('default', () => <Image32 />)
@@ -8,7 +8,7 @@ storiesOf('Image32', module)
     <Image32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Image32 focusable>
+    <Image32 aria-label="Icon label">
       <title>Icon title</title>
     </Image32>
   ));

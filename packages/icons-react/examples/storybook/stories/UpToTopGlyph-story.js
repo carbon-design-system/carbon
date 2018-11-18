@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import UpToTopGlyph from '../../../lib/UpToTop/glyph';
+import UpToTopGlyph from '../../../es/up-to-top/index.js';
 
 storiesOf('UpToTopGlyph', module)
   .add('default', () => <UpToTopGlyph />)
@@ -8,7 +8,7 @@ storiesOf('UpToTopGlyph', module)
     <UpToTopGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <UpToTopGlyph focusable>
+    <UpToTopGlyph aria-label="Icon label">
       <title>Icon title</title>
     </UpToTopGlyph>
   ));

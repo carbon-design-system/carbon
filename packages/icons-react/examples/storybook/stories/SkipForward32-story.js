@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import SkipForward32 from '../../../lib/SkipForward/32';
+import SkipForward32 from '../../../es/skip--forward/32.js';
 
 storiesOf('SkipForward32', module)
   .add('default', () => <SkipForward32 />)
@@ -8,7 +8,7 @@ storiesOf('SkipForward32', module)
     <SkipForward32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <SkipForward32 focusable>
+    <SkipForward32 aria-label="Icon label">
       <title>Icon title</title>
     </SkipForward32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Password32 from '../../../lib/Password/32';
+import Password32 from '../../../es/password/32.js';
 
 storiesOf('Password32', module)
   .add('default', () => <Password32 />)
@@ -8,7 +8,7 @@ storiesOf('Password32', module)
     <Password32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Password32 focusable>
+    <Password32 aria-label="Icon label">
       <title>Icon title</title>
     </Password32>
   ));

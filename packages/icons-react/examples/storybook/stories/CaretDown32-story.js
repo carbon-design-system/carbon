@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CaretDown32 from '../../../lib/CaretDown/32';
+import CaretDown32 from '../../../es/caret--down/32.js';
 
 storiesOf('CaretDown32', module)
   .add('default', () => <CaretDown32 />)
@@ -8,7 +8,7 @@ storiesOf('CaretDown32', module)
     <CaretDown32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CaretDown32 focusable>
+    <CaretDown32 aria-label="Icon label">
       <title>Icon title</title>
     </CaretDown32>
   ));

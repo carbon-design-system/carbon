@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Vpn32 from '../../../lib/Vpn/32';
+import Vpn32 from '../../../es/VPN/32.js';
 
 storiesOf('Vpn32', module)
   .add('default', () => <Vpn32 />)
@@ -8,7 +8,7 @@ storiesOf('Vpn32', module)
     <Vpn32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Vpn32 focusable>
+    <Vpn32 aria-label="Icon label">
       <title>Icon title</title>
     </Vpn32>
   ));

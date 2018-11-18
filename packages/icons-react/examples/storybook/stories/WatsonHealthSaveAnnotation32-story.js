@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthSaveAnnotation32 from '../../../lib/WatsonHealthSaveAnnotation/32';
+import WatsonHealthSaveAnnotation32 from '../../../es/watson-health/save--annotation/32.js';
 
 storiesOf('WatsonHealthSaveAnnotation32', module)
   .add('default', () => <WatsonHealthSaveAnnotation32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthSaveAnnotation32', module)
     <WatsonHealthSaveAnnotation32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthSaveAnnotation32 focusable>
+    <WatsonHealthSaveAnnotation32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthSaveAnnotation32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Launch32 from '../../../lib/Launch/32';
+import Launch32 from '../../../es/launch/32.js';
 
 storiesOf('Launch32', module)
   .add('default', () => <Launch32 />)
@@ -8,7 +8,7 @@ storiesOf('Launch32', module)
     <Launch32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Launch32 focusable>
+    <Launch32 aria-label="Icon label">
       <title>Icon title</title>
     </Launch32>
   ));

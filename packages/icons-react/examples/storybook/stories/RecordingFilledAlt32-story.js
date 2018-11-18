@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import RecordingFilledAlt32 from '../../../lib/RecordingFilledAlt/32';
+import RecordingFilledAlt32 from '../../../es/recording--filled--alt/32.js';
 
 storiesOf('RecordingFilledAlt32', module)
   .add('default', () => <RecordingFilledAlt32 />)
@@ -8,7 +8,7 @@ storiesOf('RecordingFilledAlt32', module)
     <RecordingFilledAlt32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <RecordingFilledAlt32 focusable>
+    <RecordingFilledAlt32 aria-label="Icon label">
       <title>Icon title</title>
     </RecordingFilledAlt32>
   ));

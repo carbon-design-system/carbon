@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Notification16 from '../../../lib/Notification/16';
+import Notification16 from '../../../es/notification/16.js';
 
 storiesOf('Notification16', module)
   .add('default', () => <Notification16 />)
@@ -8,7 +8,7 @@ storiesOf('Notification16', module)
     <Notification16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Notification16 focusable>
+    <Notification16 aria-label="Icon label">
       <title>Icon title</title>
     </Notification16>
   ));

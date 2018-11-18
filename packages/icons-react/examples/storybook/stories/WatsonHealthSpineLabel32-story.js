@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthSpineLabel32 from '../../../lib/WatsonHealthSpineLabel/32';
+import WatsonHealthSpineLabel32 from '../../../es/watson-health/spine-label/32.js';
 
 storiesOf('WatsonHealthSpineLabel32', module)
   .add('default', () => <WatsonHealthSpineLabel32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthSpineLabel32', module)
     <WatsonHealthSpineLabel32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthSpineLabel32 focusable>
+    <WatsonHealthSpineLabel32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthSpineLabel32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import UserAvatar32 from '../../../lib/UserAvatar/32';
+import UserAvatar32 from '../../../es/user--avatar/32.js';
 
 storiesOf('UserAvatar32', module)
   .add('default', () => <UserAvatar32 />)
@@ -8,7 +8,7 @@ storiesOf('UserAvatar32', module)
     <UserAvatar32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <UserAvatar32 focusable>
+    <UserAvatar32 aria-label="Icon label">
       <title>Icon title</title>
     </UserAvatar32>
   ));

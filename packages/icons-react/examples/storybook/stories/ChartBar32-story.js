@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChartBar32 from '../../../lib/ChartBar/32';
+import ChartBar32 from '../../../es/chart--bar/32.js';
 
 storiesOf('ChartBar32', module)
   .add('default', () => <ChartBar32 />)
@@ -8,7 +8,7 @@ storiesOf('ChartBar32', module)
     <ChartBar32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ChartBar32 focusable>
+    <ChartBar32 aria-label="Icon label">
       <title>Icon title</title>
     </ChartBar32>
   ));

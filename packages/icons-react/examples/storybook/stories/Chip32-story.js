@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Chip32 from '../../../lib/Chip/32';
+import Chip32 from '../../../es/chip/32.js';
 
 storiesOf('Chip32', module)
   .add('default', () => <Chip32 />)
@@ -8,7 +8,7 @@ storiesOf('Chip32', module)
     <Chip32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Chip32 focusable>
+    <Chip32 aria-label="Icon label">
       <title>Icon title</title>
     </Chip32>
   ));

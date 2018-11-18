@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Debug32 from '../../../lib/Debug/32';
+import Debug32 from '../../../es/debug/32.js';
 
 storiesOf('Debug32', module)
   .add('default', () => <Debug32 />)
@@ -8,7 +8,7 @@ storiesOf('Debug32', module)
     <Debug32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Debug32 focusable>
+    <Debug32 aria-label="Icon label">
       <title>Icon title</title>
     </Debug32>
   ));

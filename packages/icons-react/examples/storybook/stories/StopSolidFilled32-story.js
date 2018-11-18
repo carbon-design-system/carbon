@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StopSolidFilled32 from '../../../lib/StopSolidFilled/32';
+import StopSolidFilled32 from '../../../es/stop--solid--filled/32.js';
 
 storiesOf('StopSolidFilled32', module)
   .add('default', () => <StopSolidFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('StopSolidFilled32', module)
     <StopSolidFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <StopSolidFilled32 focusable>
+    <StopSolidFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </StopSolidFilled32>
   ));

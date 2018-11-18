@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ZoomOut32 from '../../../lib/ZoomOut/32';
+import ZoomOut32 from '../../../es/zoom--out/32.js';
 
 storiesOf('ZoomOut32', module)
   .add('default', () => <ZoomOut32 />)
@@ -8,7 +8,7 @@ storiesOf('ZoomOut32', module)
     <ZoomOut32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ZoomOut32 focusable>
+    <ZoomOut32 aria-label="Icon label">
       <title>Icon title</title>
     </ZoomOut32>
   ));

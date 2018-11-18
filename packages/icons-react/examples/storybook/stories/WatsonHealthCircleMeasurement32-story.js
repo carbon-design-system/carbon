@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthCircleMeasurement32 from '../../../lib/WatsonHealthCircleMeasurement/32';
+import WatsonHealthCircleMeasurement32 from '../../../es/watson-health/circle-measurement/32.js';
 
 storiesOf('WatsonHealthCircleMeasurement32', module)
   .add('default', () => <WatsonHealthCircleMeasurement32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthCircleMeasurement32', module)
     <WatsonHealthCircleMeasurement32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthCircleMeasurement32 focusable>
+    <WatsonHealthCircleMeasurement32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthCircleMeasurement32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Attachment32 from '../../../lib/Attachment/32';
+import Attachment32 from '../../../es/attachment/32.js';
 
 storiesOf('Attachment32', module)
   .add('default', () => <Attachment32 />)
@@ -8,7 +8,7 @@ storiesOf('Attachment32', module)
     <Attachment32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Attachment32 focusable>
+    <Attachment32 aria-label="Icon label">
       <title>Icon title</title>
     </Attachment32>
   ));

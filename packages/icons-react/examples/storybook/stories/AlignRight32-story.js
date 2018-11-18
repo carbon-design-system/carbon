@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import AlignRight32 from '../../../lib/AlignRight/32';
+import AlignRight32 from '../../../es/align--right/32.js';
 
 storiesOf('AlignRight32', module)
   .add('default', () => <AlignRight32 />)
@@ -8,7 +8,7 @@ storiesOf('AlignRight32', module)
     <AlignRight32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <AlignRight32 focusable>
+    <AlignRight32 aria-label="Icon label">
       <title>Icon title</title>
     </AlignRight32>
   ));

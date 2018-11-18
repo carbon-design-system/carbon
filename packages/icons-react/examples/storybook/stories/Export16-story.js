@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Export16 from '../../../lib/Export/16';
+import Export16 from '../../../es/export/16.js';
 
 storiesOf('Export16', module)
   .add('default', () => <Export16 />)
@@ -8,7 +8,7 @@ storiesOf('Export16', module)
     <Export16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Export16 focusable>
+    <Export16 aria-label="Icon label">
       <title>Icon title</title>
     </Export16>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Ruler32 from '../../../lib/Ruler/32';
+import Ruler32 from '../../../es/ruler/32.js';
 
 storiesOf('Ruler32', module)
   .add('default', () => <Ruler32 />)
@@ -8,7 +8,7 @@ storiesOf('Ruler32', module)
     <Ruler32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Ruler32 focusable>
+    <Ruler32 aria-label="Icon label">
       <title>Icon title</title>
     </Ruler32>
   ));

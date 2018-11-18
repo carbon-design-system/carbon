@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Play32 from '../../../lib/Play/32';
+import Play32 from '../../../es/play/32.js';
 
 storiesOf('Play32', module)
   .add('default', () => <Play32 />)
@@ -8,7 +8,7 @@ storiesOf('Play32', module)
     <Play32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Play32 focusable>
+    <Play32 aria-label="Icon label">
       <title>Icon title</title>
     </Play32>
   ));

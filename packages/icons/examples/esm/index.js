@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as CarbonIcons from '../../es';
+import meta from '../../meta.json';
 
-const App = ({ icons }) => (
+const GITHUB_ICON_URL =
+  'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';
+
+const App = ({ meta }) => (
   <table>
     <thead>
       <tr>
@@ -15,58 +18,55 @@ const App = ({ icons }) => (
       </tr>
     </thead>
     <tbody>
-      {Object.keys(icons)
-        .sort()
-        .map(key => {
-          const icon = icons[key];
-          const { attrs, size } = icon;
-          const { width, height } = attrs;
-          const svg = js2svg({
-            ...icon,
-            elem: 'svg',
-          });
-          const id = `${icon.name}-${width}x${height}`;
-          return (
-            <tr key={id} id={id}>
-              <td className="icon-name">
-                <a href={`#${id}`}>{icon.name}</a>
-              </td>
-              <td className="icon-size">{`${width}x${height}`}</td>
-              <td className="icon-preview-container">
-                <div className={`icon-preview icon-preview--${size}`}>
-                  {svg}
-                </div>
-              </td>
-              <td>
-                <a href={`../../svg/${icon.name}-${icon.size}.svg`} download>
-                  Download
-                </a>
-              </td>
-              <td>
-                <a
-                  href={getLink(icon)}
-                  rel="noopener noreferrer"
-                  target="_blank">
-                  Source
-                </a>
-              </td>
-              <td>
-                <a
-                  href={getBugTemplate(icon)}
-                  rel="noopener noreferrer"
-                  target="_blank">
-                  Issue Template
-                </a>
-              </td>
-            </tr>
-          );
-        })}
+      {meta.map(info => {
+        const { basename, descriptor, filename, prefix, size } = info;
+        const { attrs } = descriptor;
+        const svg = js2svg(descriptor);
+        const downsized = size === 20 || size === 24;
+        const name = downsized
+          ? prefix.join('/') + '/' + basename + ` (Downsized to ${size})`
+          : prefix.join('/') + '/' + basename;
+        const id = window.encodeURIComponent(name);
+
+        const download = ['..', '..', 'svg', ...prefix, filename].join('/');
+        const source = [GITHUB_ICON_URL, ...prefix, filename].join('/');
+
+        return (
+          <tr key={id} id={id}>
+            <td className="icon-name">
+              <a href={`#${id}`}>{name}</a>
+            </td>
+            <td className="icon-size">{`${attrs.width}x${attrs.height}`}</td>
+            <td className="icon-preview-container">
+              <div className="icon-preview">{svg}</div>
+            </td>
+            <td>
+              <a href={download} download>
+                Download
+              </a>
+            </td>
+            <td>
+              <a href={source} rel="noopener noreferrer" target="_blank">
+                Source
+              </a>
+            </td>
+            <td>
+              <a
+                href={getBugTemplate(info, source)}
+                rel="noopener noreferrer"
+                target="_blank">
+                Issue Template
+              </a>
+            </td>
+          </tr>
+        );
+      })}
     </tbody>
   </table>
 );
 
 function render() {
-  ReactDOM.render(<App icons={CarbonIcons} />, document.getElementById('root'));
+  ReactDOM.render(<App meta={meta} />, document.getElementById('root'));
 }
 
 function js2svg(descriptor) {
@@ -82,25 +82,19 @@ function format(attrs) {
   };
 }
 
-function getLink(icon) {
-  const baseUrl =
-    'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';
-  return `${baseUrl}/${icon.size}/${icon.name}.svg`;
-}
-
-function getBugTemplate(icon) {
+function getBugTemplate(info, source) {
   const url = new URL('https://github.com/IBM/carbon-elements/issues/new');
   const params = new URLSearchParams();
-  params.append('title', `🔍 Visual bug for the \`${icon.name}\` icon`);
+  params.append('title', `🔍 Visual bug for the \`${info.filename}\` icon`);
   params.append(
     'body',
     `<!-- Feel free to remove sections that aren't relevant. -->
 
-There is an issue for the ${
-      icon.name
-    } icon when viewing [the elements demo](https://ibm.github.io/carbon-elements/icons/examples/esm/index.html).
+There is an issue for the \`${
+      info.basename
+    }\` icon when viewing [the elements demo](https://ibm.github.io/carbon-elements/icons/examples/esm/index.html).
 
-The source for this icon is available [here](${getLink(icon)}).
+The source for this icon is available [here](${source}).
 
 ## Detailed description
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Upload16 from '../../../lib/Upload/16';
+import Upload16 from '../../../es/upload/16.js';
 
 storiesOf('Upload16', module)
   .add('default', () => <Upload16 />)
@@ -8,7 +8,7 @@ storiesOf('Upload16', module)
     <Upload16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Upload16 focusable>
+    <Upload16 aria-label="Icon label">
       <title>Icon title</title>
     </Upload16>
   ));

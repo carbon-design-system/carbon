@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Binoculars32 from '../../../lib/Binoculars/32';
+import Binoculars32 from '../../../es/binoculars/32.js';
 
 storiesOf('Binoculars32', module)
   .add('default', () => <Binoculars32 />)
@@ -8,7 +8,7 @@ storiesOf('Binoculars32', module)
     <Binoculars32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Binoculars32 focusable>
+    <Binoculars32 aria-label="Icon label">
       <title>Icon title</title>
     </Binoculars32>
   ));

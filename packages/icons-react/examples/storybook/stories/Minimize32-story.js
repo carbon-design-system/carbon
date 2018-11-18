@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Minimize32 from '../../../lib/Minimize/32';
+import Minimize32 from '../../../es/minimize/32.js';
 
 storiesOf('Minimize32', module)
   .add('default', () => <Minimize32 />)
@@ -8,7 +8,7 @@ storiesOf('Minimize32', module)
     <Minimize32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Minimize32 focusable>
+    <Minimize32 aria-label="Icon label">
       <title>Icon title</title>
     </Minimize32>
   ));

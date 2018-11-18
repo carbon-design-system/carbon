@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OverflowHorizontalGlyph from '../../../lib/OverflowHorizontal/glyph';
+import OverflowHorizontalGlyph from '../../../es/overflow--horizontal/index.js';
 
 storiesOf('OverflowHorizontalGlyph', module)
   .add('default', () => <OverflowHorizontalGlyph />)
@@ -8,7 +8,7 @@ storiesOf('OverflowHorizontalGlyph', module)
     <OverflowHorizontalGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <OverflowHorizontalGlyph focusable>
+    <OverflowHorizontalGlyph aria-label="Icon label">
       <title>Icon title</title>
     </OverflowHorizontalGlyph>
   ));

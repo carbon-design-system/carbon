@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoDigg32 from '../../../lib/LogoDigg/32';
+import LogoDigg32 from '../../../es/logo--digg/32.js';
 
 storiesOf('LogoDigg32', module)
   .add('default', () => <LogoDigg32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoDigg32', module)
     <LogoDigg32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoDigg32 focusable>
+    <LogoDigg32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoDigg32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LetterHh32 from '../../../lib/LetterHh/32';
+import LetterHh32 from '../../../es/letter--Hh/32.js';
 
 storiesOf('LetterHh32', module)
   .add('default', () => <LetterHh32 />)
@@ -8,7 +8,7 @@ storiesOf('LetterHh32', module)
     <LetterHh32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LetterHh32 focusable>
+    <LetterHh32 aria-label="Icon label">
       <title>Icon title</title>
     </LetterHh32>
   ));

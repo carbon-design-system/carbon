@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CloudUpload32 from '../../../lib/CloudUpload/32';
+import CloudUpload32 from '../../../es/cloud--upload/32.js';
 
 storiesOf('CloudUpload32', module)
   .add('default', () => <CloudUpload32 />)
@@ -8,7 +8,7 @@ storiesOf('CloudUpload32', module)
     <CloudUpload32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CloudUpload32 focusable>
+    <CloudUpload32 aria-label="Icon label">
       <title>Icon title</title>
     </CloudUpload32>
   ));

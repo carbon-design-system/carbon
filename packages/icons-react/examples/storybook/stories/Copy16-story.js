@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Copy16 from '../../../lib/Copy/16';
+import Copy16 from '../../../es/copy/16.js';
 
 storiesOf('Copy16', module)
   .add('default', () => <Copy16 />)
@@ -8,7 +8,7 @@ storiesOf('Copy16', module)
     <Copy16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Copy16 focusable>
+    <Copy16 aria-label="Icon label">
       <title>Icon title</title>
     </Copy16>
   ));

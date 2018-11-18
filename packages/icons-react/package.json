@@ -15,20 +15,22 @@
     "umd"
   ],
   "scripts": {
-    "build": "node tasks/build.js",
+    "build": "yarn clean && node tasks/build.js",
+    "clean": "rimraf es lib umd",
     "prepublishOnly": "yarn build"
   },
+  "dependencies": {
+    "prop-types": "^15.6.2"
+  },
   "devDependencies": {
+    "@carbon/cli-reporter": "0.0.1-alpha.7",
     "@carbon/icons": "0.0.1-alpha.7",
     "change-case": "^3.0.2",
-    "del": "^3.0.0",
     "fs-extra": "^7.0.0",
     "prettier": "^1.14.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "rimraf": "^2.6.2",
     "rollup": "^0.66.6"
-  },
-  "dependencies": {
-    "prop-types": "^15.6.2"
   }
 }

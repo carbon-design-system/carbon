@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PageLast32 from '../../../lib/PageLast/32';
+import PageLast32 from '../../../es/page--last/32.js';
 
 storiesOf('PageLast32', module)
   .add('default', () => <PageLast32 />)
@@ -8,7 +8,7 @@ storiesOf('PageLast32', module)
     <PageLast32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <PageLast32 focusable>
+    <PageLast32 aria-label="Icon label">
       <title>Icon title</title>
     </PageLast32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import RecentlyViewed32 from '../../../lib/RecentlyViewed/32';
+import RecentlyViewed32 from '../../../es/recently-viewed/32.js';
 
 storiesOf('RecentlyViewed32', module)
   .add('default', () => <RecentlyViewed32 />)
@@ -8,7 +8,7 @@ storiesOf('RecentlyViewed32', module)
     <RecentlyViewed32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <RecentlyViewed32 focusable>
+    <RecentlyViewed32 aria-label="Icon label">
       <title>Icon title</title>
     </RecentlyViewed32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Bluetooth32 from '../../../lib/Bluetooth/32';
+import Bluetooth32 from '../../../es/bluetooth/32.js';
 
 storiesOf('Bluetooth32', module)
   .add('default', () => <Bluetooth32 />)
@@ -8,7 +8,7 @@ storiesOf('Bluetooth32', module)
     <Bluetooth32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Bluetooth32 focusable>
+    <Bluetooth32 aria-label="Icon label">
       <title>Icon title</title>
     </Bluetooth32>
   ));

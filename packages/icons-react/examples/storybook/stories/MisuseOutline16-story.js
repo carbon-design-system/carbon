@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import MisuseOutline16 from '../../../lib/MisuseOutline/16';
+import MisuseOutline16 from '../../../es/misuse--outline/16.js';
 
 storiesOf('MisuseOutline16', module)
   .add('default', () => <MisuseOutline16 />)
@@ -8,7 +8,7 @@ storiesOf('MisuseOutline16', module)
     <MisuseOutline16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <MisuseOutline16 focusable>
+    <MisuseOutline16 aria-label="Icon label">
       <title>Icon title</title>
     </MisuseOutline16>
   ));

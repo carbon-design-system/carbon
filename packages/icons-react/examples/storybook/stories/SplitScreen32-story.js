@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import SplitScreen32 from '../../../lib/SplitScreen/32';
+import SplitScreen32 from '../../../es/split-screen/32.js';
 
 storiesOf('SplitScreen32', module)
   .add('default', () => <SplitScreen32 />)
@@ -8,7 +8,7 @@ storiesOf('SplitScreen32', module)
     <SplitScreen32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <SplitScreen32 focusable>
+    <SplitScreen32 aria-label="Icon label">
       <title>Icon title</title>
     </SplitScreen32>
   ));

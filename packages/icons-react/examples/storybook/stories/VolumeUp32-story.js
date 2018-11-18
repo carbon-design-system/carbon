@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import VolumeUp32 from '../../../lib/VolumeUp/32';
+import VolumeUp32 from '../../../es/volume--up/32.js';
 
 storiesOf('VolumeUp32', module)
   .add('default', () => <VolumeUp32 />)
@@ -8,7 +8,7 @@ storiesOf('VolumeUp32', module)
     <VolumeUp32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <VolumeUp32 focusable>
+    <VolumeUp32 aria-label="Icon label">
       <title>Icon title</title>
     </VolumeUp32>
   ));

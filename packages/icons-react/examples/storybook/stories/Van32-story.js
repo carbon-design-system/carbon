@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Van32 from '../../../lib/Van/32';
+import Van32 from '../../../es/van/32.js';
 
 storiesOf('Van32', module)
   .add('default', () => <Van32 />)
@@ -8,7 +8,7 @@ storiesOf('Van32', module)
     <Van32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Van32 focusable>
+    <Van32 aria-label="Icon label">
       <title>Icon title</title>
     </Van32>
   ));

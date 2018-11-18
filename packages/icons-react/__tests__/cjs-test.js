@@ -36,27 +36,4 @@ describe('CommonJS', () => {
     },
     60 * 1000
   );
-
-  it(
-    'should export icons that can be rendered',
-    async () => {
-      const icons = (await fs.readdir(BUILD_CJS_DIR)).filter(
-        name => name !== 'tools.js' && name !== 'index.js'
-      );
-
-      for (const icon of icons) {
-        const folder = path.join(BUILD_CJS_DIR, icon);
-        const sizes = await fs.readdir(folder);
-
-        for (const size of sizes) {
-          const filename = path.join(folder, size);
-          expect(() => {
-            const Icon = require(filename);
-            renderToStaticMarkup(React.createElement(Icon));
-          }).not.toThrow();
-        }
-      }
-    },
-    60 * 1000
-  );
 });

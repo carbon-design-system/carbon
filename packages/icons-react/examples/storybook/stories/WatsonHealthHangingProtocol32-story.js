@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthHangingProtocol32 from '../../../lib/WatsonHealthHangingProtocol/32';
+import WatsonHealthHangingProtocol32 from '../../../es/watson-health/hanging-protocol/32.js';
 
 storiesOf('WatsonHealthHangingProtocol32', module)
   .add('default', () => <WatsonHealthHangingProtocol32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthHangingProtocol32', module)
     <WatsonHealthHangingProtocol32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthHangingProtocol32 focusable>
+    <WatsonHealthHangingProtocol32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthHangingProtocol32>
   ));

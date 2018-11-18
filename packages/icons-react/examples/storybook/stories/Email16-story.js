@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Email16 from '../../../lib/Email/16';
+import Email16 from '../../../es/email/16.js';
 
 storiesOf('Email16', module)
   .add('default', () => <Email16 />)
@@ -8,7 +8,7 @@ storiesOf('Email16', module)
     <Email16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Email16 focusable>
+    <Email16 aria-label="Icon label">
       <title>Icon title</title>
     </Email16>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Plane32 from '../../../lib/Plane/32';
+import Plane32 from '../../../es/plane/32.js';
 
 storiesOf('Plane32', module)
   .add('default', () => <Plane32 />)
@@ -8,7 +8,7 @@ storiesOf('Plane32', module)
     <Plane32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Plane32 focusable>
+    <Plane32 aria-label="Icon label">
       <title>Icon title</title>
     </Plane32>
   ));

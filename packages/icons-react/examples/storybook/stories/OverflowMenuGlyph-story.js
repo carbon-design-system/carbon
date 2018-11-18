@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OverflowMenuGlyph from '../../../lib/OverflowMenu/glyph';
+import OverflowMenuGlyph from '../../../es/overflow-menu/index.js';
 
 storiesOf('OverflowMenuGlyph', module)
   .add('default', () => <OverflowMenuGlyph />)
@@ -8,7 +8,7 @@ storiesOf('OverflowMenuGlyph', module)
     <OverflowMenuGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <OverflowMenuGlyph focusable>
+    <OverflowMenuGlyph aria-label="Icon label">
       <title>Icon title</title>
     </OverflowMenuGlyph>
   ));

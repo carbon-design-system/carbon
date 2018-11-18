@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StarHalf16 from '../../../lib/StarHalf/16';
+import StarHalf16 from '../../../es/star--half/16.js';
 
 storiesOf('StarHalf16', module)
   .add('default', () => <StarHalf16 />)
@@ -8,7 +8,7 @@ storiesOf('StarHalf16', module)
     <StarHalf16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <StarHalf16 focusable>
+    <StarHalf16 aria-label="Icon label">
       <title>Icon title</title>
     </StarHalf16>
   ));

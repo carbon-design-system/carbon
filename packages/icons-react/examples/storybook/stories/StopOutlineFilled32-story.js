@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StopOutlineFilled32 from '../../../lib/StopOutlineFilled/32';
+import StopOutlineFilled32 from '../../../es/stop--outline--filled/32.js';
 
 storiesOf('StopOutlineFilled32', module)
   .add('default', () => <StopOutlineFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('StopOutlineFilled32', module)
     <StopOutlineFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <StopOutlineFilled32 focusable>
+    <StopOutlineFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </StopOutlineFilled32>
   ));

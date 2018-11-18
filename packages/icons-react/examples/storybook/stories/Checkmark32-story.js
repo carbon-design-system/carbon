@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Checkmark32 from '../../../lib/Checkmark/32';
+import Checkmark32 from '../../../es/checkmark/32.js';
 
 storiesOf('Checkmark32', module)
   .add('default', () => <Checkmark32 />)
@@ -8,7 +8,7 @@ storiesOf('Checkmark32', module)
     <Checkmark32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Checkmark32 focusable>
+    <Checkmark32 aria-label="Icon label">
       <title>Icon title</title>
     </Checkmark32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Wikis32 from '../../../lib/Wikis/32';
+import Wikis32 from '../../../es/wikis/32.js';
 
 storiesOf('Wikis32', module)
   .add('default', () => <Wikis32 />)
@@ -8,7 +8,7 @@ storiesOf('Wikis32', module)
     <Wikis32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Wikis32 focusable>
+    <Wikis32 aria-label="Icon label">
       <title>Icon title</title>
     </Wikis32>
   ));

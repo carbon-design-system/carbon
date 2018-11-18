@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Maximize16 from '../../../lib/Maximize/16';
+import Maximize16 from '../../../es/maximize/16.js';
 
 storiesOf('Maximize16', module)
   .add('default', () => <Maximize16 />)
@@ -8,7 +8,7 @@ storiesOf('Maximize16', module)
     <Maximize16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Maximize16 focusable>
+    <Maximize16 aria-label="Icon label">
       <title>Icon title</title>
     </Maximize16>
   ));

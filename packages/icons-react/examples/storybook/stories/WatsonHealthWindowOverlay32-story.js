@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthWindowOverlay32 from '../../../lib/WatsonHealthWindowOverlay/32';
+import WatsonHealthWindowOverlay32 from '../../../es/watson-health/window--overlay/32.js';
 
 storiesOf('WatsonHealthWindowOverlay32', module)
   .add('default', () => <WatsonHealthWindowOverlay32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthWindowOverlay32', module)
     <WatsonHealthWindowOverlay32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthWindowOverlay32 focusable>
+    <WatsonHealthWindowOverlay32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthWindowOverlay32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ArrowUp16 from '../../../lib/ArrowUp/16';
+import ArrowUp16 from '../../../es/arrow--up/16.js';
 
 storiesOf('ArrowUp16', module)
   .add('default', () => <ArrowUp16 />)
@@ -8,7 +8,7 @@ storiesOf('ArrowUp16', module)
     <ArrowUp16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ArrowUp16 focusable>
+    <ArrowUp16 aria-label="Icon label">
       <title>Icon title</title>
     </ArrowUp16>
   ));

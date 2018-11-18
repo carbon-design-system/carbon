@@ -1,7 +1,8 @@
 'use strict';
 
+const path = require('path');
 const build = require('../src/build');
 
-build().catch(error => {
+build({ cwd: path.resolve(__dirname, '../') }).catch(error => {
   console.error(error);
 });

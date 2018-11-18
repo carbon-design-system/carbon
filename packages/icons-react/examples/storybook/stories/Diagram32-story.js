@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Diagram32 from '../../../lib/Diagram/32';
+import Diagram32 from '../../../es/diagram/32.js';
 
 storiesOf('Diagram32', module)
   .add('default', () => <Diagram32 />)
@@ -8,7 +8,7 @@ storiesOf('Diagram32', module)
     <Diagram32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Diagram32 focusable>
+    <Diagram32 aria-label="Icon label">
       <title>Icon title</title>
     </Diagram32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Movement32 from '../../../lib/Movement/32';
+import Movement32 from '../../../es/movement/32.js';
 
 storiesOf('Movement32', module)
   .add('default', () => <Movement32 />)
@@ -8,7 +8,7 @@ storiesOf('Movement32', module)
     <Movement32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Movement32 focusable>
+    <Movement32 aria-label="Icon label">
       <title>Icon title</title>
     </Movement32>
   ));

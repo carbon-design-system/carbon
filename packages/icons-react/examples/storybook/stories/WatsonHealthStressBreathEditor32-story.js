@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthStressBreathEditor32 from '../../../lib/WatsonHealthStressBreathEditor/32';
+import WatsonHealthStressBreathEditor32 from '../../../es/watson-health/stress-breath-editor/32.js';
 
 storiesOf('WatsonHealthStressBreathEditor32', module)
   .add('default', () => <WatsonHealthStressBreathEditor32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthStressBreathEditor32', module)
     <WatsonHealthStressBreathEditor32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthStressBreathEditor32 focusable>
+    <WatsonHealthStressBreathEditor32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthStressBreathEditor32>
   ));

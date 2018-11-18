@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChevronUpGlyph from '../../../lib/ChevronUp/glyph';
+import ChevronUpGlyph from '../../../es/chevron--up/index.js';
 
 storiesOf('ChevronUpGlyph', module)
   .add('default', () => <ChevronUpGlyph />)
@@ -8,7 +8,7 @@ storiesOf('ChevronUpGlyph', module)
     <ChevronUpGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ChevronUpGlyph focusable>
+    <ChevronUpGlyph aria-label="Icon label">
       <title>Icon title</title>
     </ChevronUpGlyph>
   ));

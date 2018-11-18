@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Translate32 from '../../../lib/Translate/32';
+import Translate32 from '../../../es/translate/32.js';
 
 storiesOf('Translate32', module)
   .add('default', () => <Translate32 />)
@@ -8,7 +8,7 @@ storiesOf('Translate32', module)
     <Translate32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Translate32 focusable>
+    <Translate32 aria-label="Icon label">
       <title>Icon title</title>
     </Translate32>
   ));

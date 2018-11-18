@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthLaunchStudy_332 from '../../../lib/WatsonHealthLaunchStudy_3/32';
+import WatsonHealthLaunchStudy_332 from '../../../es/watson-health/launch-study--3/32.js';
 
 storiesOf('WatsonHealthLaunchStudy_332', module)
   .add('default', () => <WatsonHealthLaunchStudy_332 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthLaunchStudy_332', module)
     <WatsonHealthLaunchStudy_332 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthLaunchStudy_332 focusable>
+    <WatsonHealthLaunchStudy_332 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthLaunchStudy_332>
   ));

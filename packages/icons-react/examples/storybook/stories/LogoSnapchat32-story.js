@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoSnapchat32 from '../../../lib/LogoSnapchat/32';
+import LogoSnapchat32 from '../../../es/logo--snapchat/32.js';
 
 storiesOf('LogoSnapchat32', module)
   .add('default', () => <LogoSnapchat32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoSnapchat32', module)
     <LogoSnapchat32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoSnapchat32 focusable>
+    <LogoSnapchat32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoSnapchat32>
   ));

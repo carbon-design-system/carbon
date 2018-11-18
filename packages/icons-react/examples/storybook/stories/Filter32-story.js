@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Filter32 from '../../../lib/Filter/32';
+import Filter32 from '../../../es/filter/32.js';
 
 storiesOf('Filter32', module)
   .add('default', () => <Filter32 />)
@@ -8,7 +8,7 @@ storiesOf('Filter32', module)
     <Filter32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Filter32 focusable>
+    <Filter32 aria-label="Icon label">
       <title>Icon title</title>
     </Filter32>
   ));

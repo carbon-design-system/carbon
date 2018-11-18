@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FaceNeutral32 from '../../../lib/FaceNeutral/32';
+import FaceNeutral32 from '../../../es/face--neutral/32.js';
 
 storiesOf('FaceNeutral32', module)
   .add('default', () => <FaceNeutral32 />)
@@ -8,7 +8,7 @@ storiesOf('FaceNeutral32', module)
     <FaceNeutral32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <FaceNeutral32 focusable>
+    <FaceNeutral32 aria-label="Icon label">
       <title>Icon title</title>
     </FaceNeutral32>
   ));

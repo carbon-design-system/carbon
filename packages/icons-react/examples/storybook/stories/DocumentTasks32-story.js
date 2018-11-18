@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import DocumentTasks32 from '../../../lib/DocumentTasks/32';
+import DocumentTasks32 from '../../../es/document--tasks/32.js';
 
 storiesOf('DocumentTasks32', module)
   .add('default', () => <DocumentTasks32 />)
@@ -8,7 +8,7 @@ storiesOf('DocumentTasks32', module)
     <DocumentTasks32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <DocumentTasks32 focusable>
+    <DocumentTasks32 aria-label="Icon label">
       <title>Icon title</title>
     </DocumentTasks32>
   ));

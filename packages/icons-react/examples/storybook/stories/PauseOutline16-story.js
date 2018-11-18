@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PauseOutline16 from '../../../lib/PauseOutline/16';
+import PauseOutline16 from '../../../es/pause--outline/16.js';
 
 storiesOf('PauseOutline16', module)
   .add('default', () => <PauseOutline16 />)
@@ -8,7 +8,7 @@ storiesOf('PauseOutline16', module)
     <PauseOutline16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <PauseOutline16 focusable>
+    <PauseOutline16 aria-label="Icon label">
       <title>Icon title</title>
     </PauseOutline16>
   ));

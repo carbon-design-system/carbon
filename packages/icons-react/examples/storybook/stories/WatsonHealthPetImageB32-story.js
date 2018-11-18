@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthPetImageB32 from '../../../lib/WatsonHealthPetImageB/32';
+import WatsonHealthPetImageB32 from '../../../es/watson-health/pet-image--B/32.js';
 
 storiesOf('WatsonHealthPetImageB32', module)
   .add('default', () => <WatsonHealthPetImageB32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthPetImageB32', module)
     <WatsonHealthPetImageB32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthPetImageB32 focusable>
+    <WatsonHealthPetImageB32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthPetImageB32>
   ));

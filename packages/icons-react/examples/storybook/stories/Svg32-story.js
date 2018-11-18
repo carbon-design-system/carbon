@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Svg32 from '../../../lib/Svg/32';
+import Svg32 from '../../../es/SVG/32.js';
 
 storiesOf('Svg32', module)
   .add('default', () => <Svg32 />)
@@ -8,7 +8,7 @@ storiesOf('Svg32', module)
     <Svg32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Svg32 focusable>
+    <Svg32 aria-label="Icon label">
       <title>Icon title</title>
     </Svg32>
   ));

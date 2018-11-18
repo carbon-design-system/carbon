@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ListChecked32 from '../../../lib/ListChecked/32';
+import ListChecked32 from '../../../es/list--checked/32.js';
 
 storiesOf('ListChecked32', module)
   .add('default', () => <ListChecked32 />)
@@ -8,7 +8,7 @@ storiesOf('ListChecked32', module)
     <ListChecked32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ListChecked32 focusable>
+    <ListChecked32 aria-label="Icon label">
       <title>Icon title</title>
     </ListChecked32>
   ));

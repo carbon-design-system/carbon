@@ -11,8 +11,7 @@ const { flatMapAsync } = require('./tools');
 const { parse } = require('./svgo');
 const optimize = require('./optimize');
 
-const blacklist = new Set(['.DS_Store']);
-
+const SCALED_SIZES = [24, 20];
 const prettierOptions = {
   parser: 'babylon',
   printWidth: 80,
@@ -32,87 +31,81 @@ async function build(source, { cwd } = {}) {
     umd: umdEntrypoint = 'umd/index.js',
   } = packageJson;
   const esmFolder = path.dirname(esmEntrypoint);
-  const bundles = [
+  const BUNDLE_FORMATS = [
     {
-      type: 'cjs',
+      format: 'cjs',
       directory: path.join(cwd, path.dirname(commonjsEntrypoint)),
     },
     {
-      type: 'umd',
+      format: 'umd',
       directory: path.join(cwd, path.dirname(umdEntrypoint)),
     },
   ];
 
   reporter.info(
-    `Building bundle types: [${bundles.map(b => b.type).join(', ')}] ` +
-      `under: [${bundles.map(b => b.directory).join(', ')}]`
+    `Building bundle types: [es, ${BUNDLE_FORMATS.map(b => b.format).join(
+      ', '
+    )}] ` + `under: [${BUNDLE_FORMATS.map(b => b.directory).join(', ')}]`
   );
 
-  reporter.info('Cleaning up build directories...');
-  await del(bundles.map(b => b.directory).concat(esmFolder));
-
   reporter.info('Building module source...');
-  const files = optimized.map(icon => {
-    const { filename, info, size } = icon;
-    const { attrs, content } = info;
-    const name = formatIconName(path.basename(icon.filename, '.svg'));
-    const descriptor = {
-      name,
-      size,
-      attrs: {
-        ...attrs,
-      },
-      content,
-    };
 
-    if (size === 'glyph') {
-      const [width, height] = info.attrs.viewBox.split(' ').slice(2);
-      descriptor.attrs.width = width;
-      descriptor.attrs.height = height;
-    } else {
-      descriptor.attrs.width = size;
-      descriptor.attrs.height = size;
-      descriptor.attrs.viewBox = `0 0 ${size} ${size}`;
+  const files = await flatMapAsync(optimized, async file => {
+    const { size } = file;
+    if (size === 32) {
+      const defaultIcon = await createDescriptorFromFile(file);
+      const scaledIcons = await Promise.all(
+        SCALED_SIZES.map(size =>
+          createDescriptorFromFile({
+            ...file,
+            size,
+            original: 32,
+          })
+        )
+      );
+      return [defaultIcon, ...scaledIcons];
     }
-
-    return {
-      icon,
-      descriptor,
-      source: prettier.format(
-        `export default ${JSON.stringify(descriptor)};`,
-        prettierOptions
-      ),
-      moduleName: getModuleName(name, size),
-    };
+    return Object.assign({}, file, await createDescriptorFromFile(file));
   });
 
   reporter.info('Building JavaScript modules...');
-  await Promise.all(
-    files.map(async file => {
-      const { descriptor, moduleName, source } = file;
-      const { name, size } = descriptor;
-      const moduleFolder = path.join(esmFolder, name);
-      const jsFilepath = path.join(moduleFolder, `${size}.js`);
 
-      await fs.ensureDir(moduleFolder);
-      await fs.writeFile(jsFilepath, source);
-      await Promise.all(
-        bundles.map(async ({ type, directory }) => {
-          const bundle = await rollup({
-            input: jsFilepath,
-          });
-          const outputOptions = {
-            format: type,
-            file: jsFilepath.replace(/es/, directory),
-          };
-          if (type === 'umd') {
-            outputOptions.name = moduleName;
-          }
-          return bundle.write(outputOptions);
-        })
-      );
-    })
-  );
+  const output = await flatMapAsync(files, async file => {
+    const { basename, descriptor, moduleName, prefix, size, source } = file;
+    const formattedPrefix = prefix.filter(step => isNaN(step));
+    const moduleFolder = path.join(esmFolder, ...formattedPrefix, basename);
+    const jsFilepath = path.join(
+      moduleFolder,
+      size ? `${size}.js` : 'index.js'
+    );
+
+    await fs.ensureDir(moduleFolder);
+    await fs.writeFile(jsFilepath, source);
+
+    const esm = {
+      ...file,
+      outputOptions: {
+        format: 'esm',
+        file: jsFilepath,
+      },
+    };
+    await Promise.all(
+      BUNDLE_FORMATS.map(async ({ format, directory }) => {
+        const bundle = await rollup({
+          input: jsFilepath,
+        });
+        const outputOptions = {
+          format,
+          file: jsFilepath.replace(/es/, directory),
+        };
+        if (format === 'umd') {
+          outputOptions.name = moduleName;
+        }
+        await bundle.write(outputOptions);
+      })
+    );
+    return esm;
+  });
 
   reporter.info('Building module entrypoints...');
   const moduleNames = files.map(file => file.moduleName);
@@ -131,31 +124,110 @@ async function build(source, { cwd } = {}) {
     input: esmEntrypoint,
   });
   await Promise.all(
-    bundles.map(({ type, directory }) => {
+    BUNDLE_FORMATS.map(({ format, directory }) => {
       const outputOptions = {
-        format: type,
+        format,
         file: esmEntrypoint.replace(/es/, directory),
       };
-      if (type === 'umd') {
+      if (format === 'umd') {
         outputOptions.name = 'CarbonIcons';
       }
       return entrypointBundle.write(outputOptions);
     })
   );
 
+  const formattedOutput = output.map(icon => {
+    const {
+      filename,
+      basename,
+      size,
+      prefix,
+      descriptor,
+      moduleName,
+      outputOptions,
+    } = icon;
+    return {
+      filename,
+      basename,
+      size,
+      prefix,
+      descriptor,
+      moduleName,
+      outputOptions,
+    };
+  });
+
+  await fs.writeJson(path.resolve(__dirname, '../meta.json'), formattedOutput, {
+    spaces: 2,
+  });
+
   reporter.success('Done! 🎉');
 }
 
-function formatIconName(name) {
-  return pascal(name);
+function getModuleName(name, size, prefixParts) {
+  const prefix = prefixParts
+    .filter(size => isNaN(size))
+    .map(pascal)
+    .join('');
+
+  if (prefix !== '') {
+    if (!size) {
+      return prefix + pascal(name) + 'Glyph';
+    }
+    return prefix + pascal(name) + size;
+  }
+
+  if (!size) {
+    return pascal(name) + 'Glyph';
+  }
+
+  if (isNaN(name[0])) {
+    return pascal(name) + size;
+  }
+
+  return '_' + pascal(name) + size;
 }
 
-function getModuleName(name, size) {
-  const basename = name + size[0].toUpperCase() + size.slice(1);
-  if (isNaN(basename[0])) {
-    return pascal(basename);
+function createIconSource(file, descriptor) {
+  const { basename, prefix, size } = file;
+  return {
+    source: prettier.format(
+      `export default ${JSON.stringify(descriptor)};`,
+      prettierOptions
+    ),
+    moduleName: getModuleName(basename, size, prefix),
+  };
+}
+
+async function createDescriptorFromFile(file) {
+  const { basename, size, optimized, original, prefix } = file;
+  const info = await parse(optimized.data, basename);
+  const descriptor = {
+    ...info,
+    name: basename,
+  };
+
+  if (size) {
+    descriptor.size = size;
+    descriptor.attrs.width = size;
+    descriptor.attrs.height = size;
+    descriptor.attrs.viewBox = original
+      ? `0 0 ${original} ${original}`
+      : `0 0 ${size} ${size}`;
+  } else {
+    const [width, height] = info.attrs.viewBox.split(' ').slice(2);
+    descriptor.attrs.width = width;
+    descriptor.attrs.height = height;
   }
-  return '_' + pascal(basename);
+
+  const { source, moduleName } = createIconSource(file, descriptor);
+
+  return {
+    ...file,
+    descriptor,
+    source,
+    moduleName,
+  };
 }
 
 async function findPackageJsonFor(filepath) {

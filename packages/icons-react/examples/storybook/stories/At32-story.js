@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import At32 from '../../../lib/At/32';
+import At32 from '../../../es/at/32.js';
 
 storiesOf('At32', module)
   .add('default', () => <At32 />)
@@ -8,7 +8,7 @@ storiesOf('At32', module)
     <At32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <At32 focusable>
+    <At32 aria-label="Icon label">
       <title>Icon title</title>
     </At32>
   ));

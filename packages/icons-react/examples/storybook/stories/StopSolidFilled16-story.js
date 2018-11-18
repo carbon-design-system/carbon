@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StopSolidFilled16 from '../../../lib/StopSolidFilled/16';
+import StopSolidFilled16 from '../../../es/stop--solid--filled/16.js';
 
 storiesOf('StopSolidFilled16', module)
   .add('default', () => <StopSolidFilled16 />)
@@ -8,7 +8,7 @@ storiesOf('StopSolidFilled16', module)
     <StopSolidFilled16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <StopSolidFilled16 focusable>
+    <StopSolidFilled16 aria-label="Icon label">
       <title>Icon title</title>
     </StopSolidFilled16>
   ));

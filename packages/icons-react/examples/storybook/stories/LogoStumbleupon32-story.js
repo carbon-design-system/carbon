@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoStumbleupon32 from '../../../lib/LogoStumbleupon/32';
+import LogoStumbleupon32 from '../../../es/logo--stumbleupon/32.js';
 
 storiesOf('LogoStumbleupon32', module)
   .add('default', () => <LogoStumbleupon32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoStumbleupon32', module)
     <LogoStumbleupon32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoStumbleupon32 focusable>
+    <LogoStumbleupon32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoStumbleupon32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Power32 from '../../../lib/Power/32';
+import Power32 from '../../../es/power/32.js';
 
 storiesOf('Power32', module)
   .add('default', () => <Power32 />)
@@ -8,7 +8,7 @@ storiesOf('Power32', module)
     <Power32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Power32 focusable>
+    <Power32 aria-label="Icon label">
       <title>Icon title</title>
     </Power32>
   ));

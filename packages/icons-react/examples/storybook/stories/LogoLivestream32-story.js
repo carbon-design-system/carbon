@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoLivestream32 from '../../../lib/LogoLivestream/32';
+import LogoLivestream32 from '../../../es/logo--livestream/32.js';
 
 storiesOf('LogoLivestream32', module)
   .add('default', () => <LogoLivestream32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoLivestream32', module)
     <LogoLivestream32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoLivestream32 focusable>
+    <LogoLivestream32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoLivestream32>
   ));

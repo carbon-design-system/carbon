@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import RequestQuote32 from '../../../lib/RequestQuote/32';
+import RequestQuote32 from '../../../es/request-quote/32.js';
 
 storiesOf('RequestQuote32', module)
   .add('default', () => <RequestQuote32 />)
@@ -8,7 +8,7 @@ storiesOf('RequestQuote32', module)
     <RequestQuote32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <RequestQuote32 focusable>
+    <RequestQuote32 aria-label="Icon label">
       <title>Icon title</title>
     </RequestQuote32>
   ));

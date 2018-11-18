@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ErrorOutline16 from '../../../lib/ErrorOutline/16';
+import ErrorOutline16 from '../../../es/error--outline/16.js';
 
 storiesOf('ErrorOutline16', module)
   .add('default', () => <ErrorOutline16 />)
@@ -8,7 +8,7 @@ storiesOf('ErrorOutline16', module)
     <ErrorOutline16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ErrorOutline16 focusable>
+    <ErrorOutline16 aria-label="Icon label">
       <title>Icon title</title>
     </ErrorOutline16>
   ));

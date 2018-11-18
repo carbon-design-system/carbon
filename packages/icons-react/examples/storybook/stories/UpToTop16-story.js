@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import UpToTop16 from '../../../lib/UpToTop/16';
+import UpToTop16 from '../../../es/up-to-top/16.js';
 
 storiesOf('UpToTop16', module)
   .add('default', () => <UpToTop16 />)
@@ -8,7 +8,7 @@ storiesOf('UpToTop16', module)
     <UpToTop16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <UpToTop16 focusable>
+    <UpToTop16 aria-label="Icon label">
       <title>Icon title</title>
     </UpToTop16>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ViewFilled32 from '../../../lib/ViewFilled/32';
+import ViewFilled32 from '../../../es/view--filled/32.js';
 
 storiesOf('ViewFilled32', module)
   .add('default', () => <ViewFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('ViewFilled32', module)
     <ViewFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ViewFilled32 focusable>
+    <ViewFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </ViewFilled32>
   ));

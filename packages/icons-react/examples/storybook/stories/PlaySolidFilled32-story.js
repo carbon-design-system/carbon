@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PlaySolidFilled32 from '../../../lib/PlaySolidFilled/32';
+import PlaySolidFilled32 from '../../../es/play--solid--filled/32.js';
 
 storiesOf('PlaySolidFilled32', module)
   .add('default', () => <PlaySolidFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('PlaySolidFilled32', module)
     <PlaySolidFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <PlaySolidFilled32 focusable>
+    <PlaySolidFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </PlaySolidFilled32>
   ));

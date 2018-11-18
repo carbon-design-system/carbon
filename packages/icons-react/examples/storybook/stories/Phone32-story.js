@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Phone32 from '../../../lib/Phone/32';
+import Phone32 from '../../../es/phone/32.js';
 
 storiesOf('Phone32', module)
   .add('default', () => <Phone32 />)
@@ -8,7 +8,7 @@ storiesOf('Phone32', module)
     <Phone32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Phone32 focusable>
+    <Phone32 aria-label="Icon label">
       <title>Icon title</title>
     </Phone32>
   ));

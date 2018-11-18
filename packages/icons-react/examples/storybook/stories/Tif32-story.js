@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Tif32 from '../../../lib/Tif/32';
+import Tif32 from '../../../es/TIF/32.js';
 
 storiesOf('Tif32', module)
   .add('default', () => <Tif32 />)
@@ -8,7 +8,7 @@ storiesOf('Tif32', module)
     <Tif32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Tif32 focusable>
+    <Tif32 aria-label="Icon label">
       <title>Icon title</title>
     </Tif32>
   ));

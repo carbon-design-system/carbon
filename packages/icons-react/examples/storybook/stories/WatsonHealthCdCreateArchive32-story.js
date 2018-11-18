@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthCdCreateArchive32 from '../../../lib/WatsonHealthCdCreateArchive/32';
+import WatsonHealthCdCreateArchive32 from '../../../es/watson-health/cd--create-archive/32.js';
 
 storiesOf('WatsonHealthCdCreateArchive32', module)
   .add('default', () => <WatsonHealthCdCreateArchive32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthCdCreateArchive32', module)
     <WatsonHealthCdCreateArchive32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthCdCreateArchive32 focusable>
+    <WatsonHealthCdCreateArchive32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthCdCreateArchive32>
   ));

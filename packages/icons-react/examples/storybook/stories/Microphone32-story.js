@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Microphone32 from '../../../lib/Microphone/32';
+import Microphone32 from '../../../es/microphone/32.js';
 
 storiesOf('Microphone32', module)
   .add('default', () => <Microphone32 />)
@@ -8,7 +8,7 @@ storiesOf('Microphone32', module)
     <Microphone32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Microphone32 focusable>
+    <Microphone32 aria-label="Icon label">
       <title>Icon title</title>
     </Microphone32>
   ));

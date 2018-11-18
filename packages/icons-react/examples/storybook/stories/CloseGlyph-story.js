@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CloseGlyph from '../../../lib/Close/glyph';
+import CloseGlyph from '../../../es/close/index.js';
 
 storiesOf('CloseGlyph', module)
   .add('default', () => <CloseGlyph />)
@@ -8,7 +8,7 @@ storiesOf('CloseGlyph', module)
     <CloseGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CloseGlyph focusable>
+    <CloseGlyph aria-label="Icon label">
       <title>Icon title</title>
     </CloseGlyph>
   ));

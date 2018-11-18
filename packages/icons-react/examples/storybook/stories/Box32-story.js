@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Box32 from '../../../lib/Box/32';
+import Box32 from '../../../es/box/32.js';
 
 storiesOf('Box32', module)
   .add('default', () => <Box32 />)
@@ -8,7 +8,7 @@ storiesOf('Box32', module)
     <Box32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Box32 focusable>
+    <Box32 aria-label="Icon label">
       <title>Icon title</title>
     </Box32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ListBulleted16 from '../../../lib/ListBulleted/16';
+import ListBulleted16 from '../../../es/list--bulleted/16.js';
 
 storiesOf('ListBulleted16', module)
   .add('default', () => <ListBulleted16 />)
@@ -8,7 +8,7 @@ storiesOf('ListBulleted16', module)
     <ListBulleted16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ListBulleted16 focusable>
+    <ListBulleted16 aria-label="Icon label">
       <title>Icon title</title>
     </ListBulleted16>
   ));

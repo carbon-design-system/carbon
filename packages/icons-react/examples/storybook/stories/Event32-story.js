@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Event32 from '../../../lib/Event/32';
+import Event32 from '../../../es/event/32.js';
 
 storiesOf('Event32', module)
   .add('default', () => <Event32 />)
@@ -8,7 +8,7 @@ storiesOf('Event32', module)
     <Event32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Event32 focusable>
+    <Event32 aria-label="Icon label">
       <title>Icon title</title>
     </Event32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FaceAdd32 from '../../../lib/FaceAdd/32';
+import FaceAdd32 from '../../../es/face--add/32.js';
 
 storiesOf('FaceAdd32', module)
   .add('default', () => <FaceAdd32 />)
@@ -8,7 +8,7 @@ storiesOf('FaceAdd32', module)
     <FaceAdd32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <FaceAdd32 focusable>
+    <FaceAdd32 aria-label="Icon label">
       <title>Icon title</title>
     </FaceAdd32>
   ));

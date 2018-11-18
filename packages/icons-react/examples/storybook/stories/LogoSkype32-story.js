@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoSkype32 from '../../../lib/LogoSkype/32';
+import LogoSkype32 from '../../../es/logo--skype/32.js';
 
 storiesOf('LogoSkype32', module)
   .add('default', () => <LogoSkype32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoSkype32', module)
     <LogoSkype32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoSkype32 focusable>
+    <LogoSkype32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoSkype32>
   ));

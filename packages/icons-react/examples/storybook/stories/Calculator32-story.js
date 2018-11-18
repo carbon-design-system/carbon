@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Calculator32 from '../../../lib/Calculator/32';
+import Calculator32 from '../../../es/calculator/32.js';
 
 storiesOf('Calculator32', module)
   .add('default', () => <Calculator32 />)
@@ -8,7 +8,7 @@ storiesOf('Calculator32', module)
     <Calculator32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Calculator32 focusable>
+    <Calculator32 aria-label="Icon label">
       <title>Icon title</title>
     </Calculator32>
   ));

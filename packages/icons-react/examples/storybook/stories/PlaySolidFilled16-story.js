@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PlaySolidFilled16 from '../../../lib/PlaySolidFilled/16';
+import PlaySolidFilled16 from '../../../es/play--solid--filled/16.js';
 
 storiesOf('PlaySolidFilled16', module)
   .add('default', () => <PlaySolidFilled16 />)
@@ -8,7 +8,7 @@ storiesOf('PlaySolidFilled16', module)
     <PlaySolidFilled16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <PlaySolidFilled16 focusable>
+    <PlaySolidFilled16 aria-label="Icon label">
       <title>Icon title</title>
     </PlaySolidFilled16>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WarningAlt32 from '../../../lib/WarningAlt/32';
+import WarningAlt32 from '../../../es/warning--alt/32.js';
 
 storiesOf('WarningAlt32', module)
   .add('default', () => <WarningAlt32 />)
@@ -8,7 +8,7 @@ storiesOf('WarningAlt32', module)
     <WarningAlt32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WarningAlt32 focusable>
+    <WarningAlt32 aria-label="Icon label">
       <title>Icon title</title>
     </WarningAlt32>
   ));

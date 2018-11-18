@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoDelicious32 from '../../../lib/LogoDelicious/32';
+import LogoDelicious32 from '../../../es/logo--delicious/32.js';
 
 storiesOf('LogoDelicious32', module)
   .add('default', () => <LogoDelicious32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoDelicious32', module)
     <LogoDelicious32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoDelicious32 focusable>
+    <LogoDelicious32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoDelicious32>
   ));

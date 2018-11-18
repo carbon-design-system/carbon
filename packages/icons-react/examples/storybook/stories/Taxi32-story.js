@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Taxi32 from '../../../lib/Taxi/32';
+import Taxi32 from '../../../es/taxi/32.js';
 
 storiesOf('Taxi32', module)
   .add('default', () => <Taxi32 />)
@@ -8,7 +8,7 @@ storiesOf('Taxi32', module)
     <Taxi32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Taxi32 focusable>
+    <Taxi32 aria-label="Icon label">
       <title>Icon title</title>
     </Taxi32>
   ));

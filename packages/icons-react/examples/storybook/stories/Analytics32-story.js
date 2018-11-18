@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Analytics32 from '../../../lib/Analytics/32';
+import Analytics32 from '../../../es/analytics/32.js';
 
 storiesOf('Analytics32', module)
   .add('default', () => <Analytics32 />)
@@ -8,7 +8,7 @@ storiesOf('Analytics32', module)
     <Analytics32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Analytics32 focusable>
+    <Analytics32 aria-label="Icon label">
       <title>Icon title</title>
     </Analytics32>
   ));

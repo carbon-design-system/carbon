@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Restart32 from '../../../lib/Restart/32';
+import Restart32 from '../../../es/restart/32.js';
 
 storiesOf('Restart32', module)
   .add('default', () => <Restart32 />)
@@ -8,7 +8,7 @@ storiesOf('Restart32', module)
     <Restart32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Restart32 focusable>
+    <Restart32 aria-label="Icon label">
       <title>Icon title</title>
     </Restart32>
   ));

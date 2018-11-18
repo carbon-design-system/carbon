@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LightFilled32 from '../../../lib/LightFilled/32';
+import LightFilled32 from '../../../es/light--filled/32.js';
 
 storiesOf('LightFilled32', module)
   .add('default', () => <LightFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('LightFilled32', module)
     <LightFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LightFilled32 focusable>
+    <LightFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </LightFilled32>
   ));

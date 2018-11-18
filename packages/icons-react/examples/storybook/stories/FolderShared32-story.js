@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FolderShared32 from '../../../lib/FolderShared/32';
+import FolderShared32 from '../../../es/folder--shared/32.js';
 
 storiesOf('FolderShared32', module)
   .add('default', () => <FolderShared32 />)
@@ -8,7 +8,7 @@ storiesOf('FolderShared32', module)
     <FolderShared32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <FolderShared32 focusable>
+    <FolderShared32 aria-label="Icon label">
       <title>Icon title</title>
     </FolderShared32>
   ));

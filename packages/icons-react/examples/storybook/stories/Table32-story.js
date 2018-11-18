@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Table32 from '../../../lib/Table/32';
+import Table32 from '../../../es/table/32.js';
 
 storiesOf('Table32', module)
   .add('default', () => <Table32 />)
@@ -8,7 +8,7 @@ storiesOf('Table32', module)
     <Table32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Table32 focusable>
+    <Table32 aria-label="Icon label">
       <title>Icon title</title>
     </Table32>
   ));

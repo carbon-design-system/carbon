@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Shuttle32 from '../../../lib/Shuttle/32';
+import Shuttle32 from '../../../es/shuttle/32.js';
 
 storiesOf('Shuttle32', module)
   .add('default', () => <Shuttle32 />)
@@ -8,7 +8,7 @@ storiesOf('Shuttle32', module)
     <Shuttle32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Shuttle32 focusable>
+    <Shuttle32 aria-label="Icon label">
       <title>Icon title</title>
     </Shuttle32>
   ));

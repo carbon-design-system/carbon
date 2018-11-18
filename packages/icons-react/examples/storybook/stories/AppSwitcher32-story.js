@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import AppSwitcher32 from '../../../lib/AppSwitcher/32';
+import AppSwitcher32 from '../../../es/app-switcher/32.js';
 
 storiesOf('AppSwitcher32', module)
   .add('default', () => <AppSwitcher32 />)
@@ -8,7 +8,7 @@ storiesOf('AppSwitcher32', module)
     <AppSwitcher32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <AppSwitcher32 focusable>
+    <AppSwitcher32 aria-label="Icon label">
       <title>Icon title</title>
     </AppSwitcher32>
   ));

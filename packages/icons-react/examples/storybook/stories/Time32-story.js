@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Time32 from '../../../lib/Time/32';
+import Time32 from '../../../es/time/32.js';
 
 storiesOf('Time32', module)
   .add('default', () => <Time32 />)
@@ -8,7 +8,7 @@ storiesOf('Time32', module)
     <Time32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Time32 focusable>
+    <Time32 aria-label="Icon label">
       <title>Icon title</title>
     </Time32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CaretRightGlyph from '../../../lib/CaretRight/glyph';
+import CaretRightGlyph from '../../../es/caret--right/index.js';
 
 storiesOf('CaretRightGlyph', module)
   .add('default', () => <CaretRightGlyph />)
@@ -8,7 +8,7 @@ storiesOf('CaretRightGlyph', module)
     <CaretRightGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CaretRightGlyph focusable>
+    <CaretRightGlyph aria-label="Icon label">
       <title>Icon title</title>
     </CaretRightGlyph>
   ));

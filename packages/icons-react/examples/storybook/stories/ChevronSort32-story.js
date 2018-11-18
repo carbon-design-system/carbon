@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChevronSort32 from '../../../lib/ChevronSort/32';
+import ChevronSort32 from '../../../es/chevron--sort/32.js';
 
 storiesOf('ChevronSort32', module)
   .add('default', () => <ChevronSort32 />)
@@ -8,7 +8,7 @@ storiesOf('ChevronSort32', module)
     <ChevronSort32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ChevronSort32 focusable>
+    <ChevronSort32 aria-label="Icon label">
       <title>Icon title</title>
     </ChevronSort32>
   ));

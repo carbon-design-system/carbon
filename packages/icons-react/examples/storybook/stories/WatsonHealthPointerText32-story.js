@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthPointerText32 from '../../../lib/WatsonHealthPointerText/32';
+import WatsonHealthPointerText32 from '../../../es/watson-health/pointer-text/32.js';
 
 storiesOf('WatsonHealthPointerText32', module)
   .add('default', () => <WatsonHealthPointerText32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthPointerText32', module)
     <WatsonHealthPointerText32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthPointerText32 focusable>
+    <WatsonHealthPointerText32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthPointerText32>
   ));

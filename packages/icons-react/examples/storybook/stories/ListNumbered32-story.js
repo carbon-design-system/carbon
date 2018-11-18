@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ListNumbered32 from '../../../lib/ListNumbered/32';
+import ListNumbered32 from '../../../es/list--numbered/32.js';
 
 storiesOf('ListNumbered32', module)
   .add('default', () => <ListNumbered32 />)
@@ -8,7 +8,7 @@ storiesOf('ListNumbered32', module)
     <ListNumbered32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ListNumbered32 focusable>
+    <ListNumbered32 aria-label="Icon label">
       <title>Icon title</title>
     </ListNumbered32>
   ));

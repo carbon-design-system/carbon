@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import VolumeMute32 from '../../../lib/VolumeMute/32';
+import VolumeMute32 from '../../../es/volume--mute/32.js';
 
 storiesOf('VolumeMute32', module)
   .add('default', () => <VolumeMute32 />)
@@ -8,7 +8,7 @@ storiesOf('VolumeMute32', module)
     <VolumeMute32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <VolumeMute32 focusable>
+    <VolumeMute32 aria-label="Icon label">
       <title>Icon title</title>
     </VolumeMute32>
   ));

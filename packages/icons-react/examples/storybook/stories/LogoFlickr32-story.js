@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoFlickr32 from '../../../lib/LogoFlickr/32';
+import LogoFlickr32 from '../../../es/logo--flickr/32.js';
 
 storiesOf('LogoFlickr32', module)
   .add('default', () => <LogoFlickr32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoFlickr32', module)
     <LogoFlickr32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoFlickr32 focusable>
+    <LogoFlickr32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoFlickr32>
   ));

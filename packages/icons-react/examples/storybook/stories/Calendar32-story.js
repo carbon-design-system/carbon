@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Calendar32 from '../../../lib/Calendar/32';
+import Calendar32 from '../../../es/calendar/32.js';
 
 storiesOf('Calendar32', module)
   .add('default', () => <Calendar32 />)
@@ -8,7 +8,7 @@ storiesOf('Calendar32', module)
     <Calendar32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Calendar32 focusable>
+    <Calendar32 aria-label="Icon label">
       <title>Icon title</title>
     </Calendar32>
   ));

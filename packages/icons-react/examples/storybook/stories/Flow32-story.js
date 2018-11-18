@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Flow32 from '../../../lib/Flow/32';
+import Flow32 from '../../../es/flow/32.js';
 
 storiesOf('Flow32', module)
   .add('default', () => <Flow32 />)
@@ -8,7 +8,7 @@ storiesOf('Flow32', module)
     <Flow32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Flow32 focusable>
+    <Flow32 aria-label="Icon label">
       <title>Icon title</title>
     </Flow32>
   ));

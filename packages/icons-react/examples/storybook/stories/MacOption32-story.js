@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import MacOption32 from '../../../lib/MacOption/32';
+import MacOption32 from '../../../es/mac--option/32.js';
 
 storiesOf('MacOption32', module)
   .add('default', () => <MacOption32 />)
@@ -8,7 +8,7 @@ storiesOf('MacOption32', module)
     <MacOption32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <MacOption32 focusable>
+    <MacOption32 aria-label="Icon label">
       <title>Icon title</title>
     </MacOption32>
   ));

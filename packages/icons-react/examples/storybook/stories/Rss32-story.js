@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Rss32 from '../../../lib/Rss/32';
+import Rss32 from '../../../es/rss/32.js';
 
 storiesOf('Rss32', module)
   .add('default', () => <Rss32 />)
@@ -8,7 +8,7 @@ storiesOf('Rss32', module)
     <Rss32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Rss32 focusable>
+    <Rss32 aria-label="Icon label">
       <title>Icon title</title>
     </Rss32>
   ));

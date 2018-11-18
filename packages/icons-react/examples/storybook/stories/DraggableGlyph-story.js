@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import DraggableGlyph from '../../../lib/Draggable/glyph';
+import DraggableGlyph from '../../../es/draggable/index.js';
 
 storiesOf('DraggableGlyph', module)
   .add('default', () => <DraggableGlyph />)
@@ -8,7 +8,7 @@ storiesOf('DraggableGlyph', module)
     <DraggableGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <DraggableGlyph focusable>
+    <DraggableGlyph aria-label="Icon label">
       <title>Icon title</title>
     </DraggableGlyph>
   ));

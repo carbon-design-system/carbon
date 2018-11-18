@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CloseSolid16 from '../../../lib/CloseSolid/16';
+import CloseSolid16 from '../../../es/close--solid/16.js';
 
 storiesOf('CloseSolid16', module)
   .add('default', () => <CloseSolid16 />)
@@ -8,7 +8,7 @@ storiesOf('CloseSolid16', module)
     <CloseSolid16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CloseSolid16 focusable>
+    <CloseSolid16 aria-label="Icon label">
       <title>Icon title</title>
     </CloseSolid16>
   ));

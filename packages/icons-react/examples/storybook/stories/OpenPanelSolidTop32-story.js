@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OpenPanelSolidTop32 from '../../../lib/OpenPanelSolidTop/32';
+import OpenPanelSolidTop32 from '../../../es/open-panel--solid--top/32.js';
 
 storiesOf('OpenPanelSolidTop32', module)
   .add('default', () => <OpenPanelSolidTop32 />)
@@ -8,7 +8,7 @@ storiesOf('OpenPanelSolidTop32', module)
     <OpenPanelSolidTop32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <OpenPanelSolidTop32 focusable>
+    <OpenPanelSolidTop32 aria-label="Icon label">
       <title>Icon title</title>
     </OpenPanelSolidTop32>
   ));

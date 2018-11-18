@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CloseOutline16 from '../../../lib/CloseOutline/16';
+import CloseOutline16 from '../../../es/close--outline/16.js';
 
 storiesOf('CloseOutline16', module)
   .add('default', () => <CloseOutline16 />)
@@ -8,7 +8,7 @@ storiesOf('CloseOutline16', module)
     <CloseOutline16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CloseOutline16 focusable>
+    <CloseOutline16 aria-label="Icon label">
       <title>Icon title</title>
     </CloseOutline16>
   ));

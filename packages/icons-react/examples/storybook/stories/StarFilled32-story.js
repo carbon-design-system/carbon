@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import StarFilled32 from '../../../lib/StarFilled/32';
+import StarFilled32 from '../../../es/star--filled/32.js';
 
 storiesOf('StarFilled32', module)
   .add('default', () => <StarFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('StarFilled32', module)
     <StarFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <StarFilled32 focusable>
+    <StarFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </StarFilled32>
   ));

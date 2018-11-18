@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Copy32 from '../../../lib/Copy/32';
+import Copy32 from '../../../es/copy/32.js';
 
 storiesOf('Copy32', module)
   .add('default', () => <Copy32 />)
@@ -8,7 +8,7 @@ storiesOf('Copy32', module)
     <Copy32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Copy32 focusable>
+    <Copy32 aria-label="Icon label">
       <title>Icon title</title>
     </Copy32>
   ));

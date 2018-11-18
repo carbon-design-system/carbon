@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Cloud32 from '../../../lib/Cloud/32';
+import Cloud32 from '../../../es/cloud/32.js';
 
 storiesOf('Cloud32', module)
   .add('default', () => <Cloud32 />)
@@ -8,7 +8,7 @@ storiesOf('Cloud32', module)
     <Cloud32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Cloud32 focusable>
+    <Cloud32 aria-label="Icon label">
       <title>Icon title</title>
     </Cloud32>
   ));

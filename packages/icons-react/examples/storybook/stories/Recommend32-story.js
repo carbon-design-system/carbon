@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Recommend32 from '../../../lib/Recommend/32';
+import Recommend32 from '../../../es/recommend/32.js';
 
 storiesOf('Recommend32', module)
   .add('default', () => <Recommend32 />)
@@ -8,7 +8,7 @@ storiesOf('Recommend32', module)
     <Recommend32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Recommend32 focusable>
+    <Recommend32 aria-label="Icon label">
       <title>Icon title</title>
     </Recommend32>
   ));

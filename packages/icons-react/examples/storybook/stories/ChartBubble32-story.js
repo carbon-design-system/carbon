@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChartBubble32 from '../../../lib/ChartBubble/32';
+import ChartBubble32 from '../../../es/chart--bubble/32.js';
 
 storiesOf('ChartBubble32', module)
   .add('default', () => <ChartBubble32 />)
@@ -8,7 +8,7 @@ storiesOf('ChartBubble32', module)
     <ChartBubble32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ChartBubble32 focusable>
+    <ChartBubble32 aria-label="Icon label">
       <title>Icon title</title>
     </ChartBubble32>
   ));

@@ -3,6 +3,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const rollup = require('rollup').rollup;
+const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
 
@@ -31,6 +32,21 @@ async function bundle(entrypoint, { cwd, name } = {}) {
   const bundle = await rollup({
     input: entrypoint,
     plugins: [
+      babel({
+        exclude: 'node_modules/**',
+        babelrc: false,
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              modules: false,
+              targets: {
+                browsers: ['last 1 version', 'ie >= 11', 'Firefox ESR'],
+              },
+            },
+          ],
+        ],
+      }),
       nodeResolve({
         jsnext: true,
         main: true,

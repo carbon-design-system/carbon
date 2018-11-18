@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ColorPalette32 from '../../../lib/ColorPalette/32';
+import ColorPalette32 from '../../../es/color-palette/32.js';
 
 storiesOf('ColorPalette32', module)
   .add('default', () => <ColorPalette32 />)
@@ -8,7 +8,7 @@ storiesOf('ColorPalette32', module)
     <ColorPalette32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ColorPalette32 focusable>
+    <ColorPalette32 aria-label="Icon label">
       <title>Icon title</title>
     </ColorPalette32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import UserRole32 from '../../../lib/UserRole/32';
+import UserRole32 from '../../../es/user--role/32.js';
 
 storiesOf('UserRole32', module)
   .add('default', () => <UserRole32 />)
@@ -8,7 +8,7 @@ storiesOf('UserRole32', module)
     <UserRole32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <UserRole32 focusable>
+    <UserRole32 aria-label="Icon label">
       <title>Icon title</title>
     </UserRole32>
   ));

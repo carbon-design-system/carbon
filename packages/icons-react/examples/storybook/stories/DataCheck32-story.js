@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import DataCheck32 from '../../../lib/DataCheck/32';
+import DataCheck32 from '../../../es/data--check/32.js';
 
 storiesOf('DataCheck32', module)
   .add('default', () => <DataCheck32 />)
@@ -8,7 +8,7 @@ storiesOf('DataCheck32', module)
     <DataCheck32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <DataCheck32 focusable>
+    <DataCheck32 aria-label="Icon label">
       <title>Icon title</title>
     </DataCheck32>
   ));

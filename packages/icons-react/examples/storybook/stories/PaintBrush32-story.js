@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PaintBrush32 from '../../../lib/PaintBrush/32';
+import PaintBrush32 from '../../../es/paint-brush/32.js';
 
 storiesOf('PaintBrush32', module)
   .add('default', () => <PaintBrush32 />)
@@ -8,7 +8,7 @@ storiesOf('PaintBrush32', module)
     <PaintBrush32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <PaintBrush32 focusable>
+    <PaintBrush32 aria-label="Icon label">
       <title>Icon title</title>
     </PaintBrush32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WarningAltFilled16 from '../../../lib/WarningAltFilled/16';
+import WarningAltFilled16 from '../../../es/warning--alt--filled/16.js';
 
 storiesOf('WarningAltFilled16', module)
   .add('default', () => <WarningAltFilled16 />)
@@ -8,7 +8,7 @@ storiesOf('WarningAltFilled16', module)
     <WarningAltFilled16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WarningAltFilled16 focusable>
+    <WarningAltFilled16 aria-label="Icon label">
       <title>Icon title</title>
     </WarningAltFilled16>
   ));

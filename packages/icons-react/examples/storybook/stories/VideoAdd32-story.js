@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import VideoAdd32 from '../../../lib/VideoAdd/32';
+import VideoAdd32 from '../../../es/video--add/32.js';
 
 storiesOf('VideoAdd32', module)
   .add('default', () => <VideoAdd32 />)
@@ -8,7 +8,7 @@ storiesOf('VideoAdd32', module)
     <VideoAdd32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <VideoAdd32 focusable>
+    <VideoAdd32 aria-label="Icon label">
       <title>Icon title</title>
     </VideoAdd32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import OverflowMenuVertical32 from '../../../lib/OverflowMenuVertical/32';
+import OverflowMenuVertical32 from '../../../es/overflow-menu--vertical/32.js';
 
 storiesOf('OverflowMenuVertical32', module)
   .add('default', () => <OverflowMenuVertical32 />)
@@ -8,7 +8,7 @@ storiesOf('OverflowMenuVertical32', module)
     <OverflowMenuVertical32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <OverflowMenuVertical32 focusable>
+    <OverflowMenuVertical32 aria-label="Icon label">
       <title>Icon title</title>
     </OverflowMenuVertical32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Subtract32 from '../../../lib/Subtract/32';
+import Subtract32 from '../../../es/subtract/32.js';
 
 storiesOf('Subtract32', module)
   .add('default', () => <Subtract32 />)
@@ -8,7 +8,7 @@ storiesOf('Subtract32', module)
     <Subtract32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Subtract32 focusable>
+    <Subtract32 aria-label="Icon label">
       <title>Icon title</title>
     </Subtract32>
   ));

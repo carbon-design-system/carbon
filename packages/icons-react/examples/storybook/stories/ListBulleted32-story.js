@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ListBulleted32 from '../../../lib/ListBulleted/32';
+import ListBulleted32 from '../../../es/list--bulleted/32.js';
 
 storiesOf('ListBulleted32', module)
   .add('default', () => <ListBulleted32 />)
@@ -8,7 +8,7 @@ storiesOf('ListBulleted32', module)
     <ListBulleted32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ListBulleted32 focusable>
+    <ListBulleted32 aria-label="Icon label">
       <title>Icon title</title>
     </ListBulleted32>
   ));

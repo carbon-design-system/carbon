@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Playlist32 from '../../../lib/Playlist/32';
+import Playlist32 from '../../../es/playlist/32.js';
 
 storiesOf('Playlist32', module)
   .add('default', () => <Playlist32 />)
@@ -8,7 +8,7 @@ storiesOf('Playlist32', module)
     <Playlist32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Playlist32 focusable>
+    <Playlist32 aria-label="Icon label">
       <title>Icon title</title>
     </Playlist32>
   ));

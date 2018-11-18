@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Map32 from '../../../lib/Map/32';
+import Map32 from '../../../es/map/32.js';
 
 storiesOf('Map32', module)
   .add('default', () => <Map32 />)
@@ -8,7 +8,7 @@ storiesOf('Map32', module)
     <Map32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Map32 focusable>
+    <Map32 aria-label="Icon label">
       <title>Icon title</title>
     </Map32>
   ));

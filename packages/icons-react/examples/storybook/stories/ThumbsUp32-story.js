@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ThumbsUp32 from '../../../lib/ThumbsUp/32';
+import ThumbsUp32 from '../../../es/thumbs-up/32.js';
 
 storiesOf('ThumbsUp32', module)
   .add('default', () => <ThumbsUp32 />)
@@ -8,7 +8,7 @@ storiesOf('ThumbsUp32', module)
     <ThumbsUp32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ThumbsUp32 focusable>
+    <ThumbsUp32 aria-label="Icon label">
       <title>Icon title</title>
     </ThumbsUp32>
   ));

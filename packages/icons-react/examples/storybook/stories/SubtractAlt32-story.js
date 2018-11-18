@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import SubtractAlt32 from '../../../lib/SubtractAlt/32';
+import SubtractAlt32 from '../../../es/subtract--alt/32.js';
 
 storiesOf('SubtractAlt32', module)
   .add('default', () => <SubtractAlt32 />)
@@ -8,7 +8,7 @@ storiesOf('SubtractAlt32', module)
     <SubtractAlt32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <SubtractAlt32 focusable>
+    <SubtractAlt32 aria-label="Icon label">
       <title>Icon title</title>
     </SubtractAlt32>
   ));

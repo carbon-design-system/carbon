@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import InformationFilled32 from '../../../lib/InformationFilled/32';
+import InformationFilled32 from '../../../es/information--filled/32.js';
 
 storiesOf('InformationFilled32', module)
   .add('default', () => <InformationFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('InformationFilled32', module)
     <InformationFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <InformationFilled32 focusable>
+    <InformationFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </InformationFilled32>
   ));

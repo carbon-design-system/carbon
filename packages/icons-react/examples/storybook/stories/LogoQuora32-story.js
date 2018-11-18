@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoQuora32 from '../../../lib/LogoQuora/32';
+import LogoQuora32 from '../../../es/logo--quora/32.js';
 
 storiesOf('LogoQuora32', module)
   .add('default', () => <LogoQuora32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoQuora32', module)
     <LogoQuora32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoQuora32 focusable>
+    <LogoQuora32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoQuora32>
   ));

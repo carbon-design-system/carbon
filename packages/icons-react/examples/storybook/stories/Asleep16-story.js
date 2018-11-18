@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Asleep16 from '../../../lib/Asleep/16';
+import Asleep16 from '../../../es/asleep/16.js';
 
 storiesOf('Asleep16', module)
   .add('default', () => <Asleep16 />)
@@ -8,7 +8,7 @@ storiesOf('Asleep16', module)
     <Asleep16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Asleep16 focusable>
+    <Asleep16 aria-label="Icon label">
       <title>Icon title</title>
     </Asleep16>
   ));

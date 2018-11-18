@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TextHighlight32 from '../../../lib/TextHighlight/32';
+import TextHighlight32 from '../../../es/text-highlight/32.js';
 
 storiesOf('TextHighlight32', module)
   .add('default', () => <TextHighlight32 />)
@@ -8,7 +8,7 @@ storiesOf('TextHighlight32', module)
     <TextHighlight32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <TextHighlight32 focusable>
+    <TextHighlight32 aria-label="Icon label">
       <title>Icon title</title>
     </TextHighlight32>
   ));

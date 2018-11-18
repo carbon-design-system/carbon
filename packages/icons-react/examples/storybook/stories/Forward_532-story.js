@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Forward_532 from '../../../lib/Forward_5/32';
+import Forward_532 from '../../../es/forward--5/32.js';
 
 storiesOf('Forward_532', module)
   .add('default', () => <Forward_532 />)
@@ -8,7 +8,7 @@ storiesOf('Forward_532', module)
     <Forward_532 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Forward_532 focusable>
+    <Forward_532 aria-label="Icon label">
       <title>Icon title</title>
     </Forward_532>
   ));

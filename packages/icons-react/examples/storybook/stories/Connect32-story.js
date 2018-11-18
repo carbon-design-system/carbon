@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Connect32 from '../../../lib/Connect/32';
+import Connect32 from '../../../es/connect/32.js';
 
 storiesOf('Connect32', module)
   .add('default', () => <Connect32 />)
@@ -8,7 +8,7 @@ storiesOf('Connect32', module)
     <Connect32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Connect32 focusable>
+    <Connect32 aria-label="Icon label">
       <title>Icon title</title>
     </Connect32>
   ));

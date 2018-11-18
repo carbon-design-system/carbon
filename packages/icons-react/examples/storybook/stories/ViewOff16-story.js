@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ViewOff16 from '../../../lib/ViewOff/16';
+import ViewOff16 from '../../../es/view--off/16.js';
 
 storiesOf('ViewOff16', module)
   .add('default', () => <ViewOff16 />)
@@ -8,7 +8,7 @@ storiesOf('ViewOff16', module)
     <ViewOff16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ViewOff16 focusable>
+    <ViewOff16 aria-label="Icon label">
       <title>Icon title</title>
     </ViewOff16>
   ));

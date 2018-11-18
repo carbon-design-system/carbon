@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FacePendingFilled32 from '../../../lib/FacePendingFilled/32';
+import FacePendingFilled32 from '../../../es/face--pending--filled/32.js';
 
 storiesOf('FacePendingFilled32', module)
   .add('default', () => <FacePendingFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('FacePendingFilled32', module)
     <FacePendingFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <FacePendingFilled32 focusable>
+    <FacePendingFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </FacePendingFilled32>
   ));

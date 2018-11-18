@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TextFill32 from '../../../lib/TextFill/32';
+import TextFill32 from '../../../es/text-fill/32.js';
 
 storiesOf('TextFill32', module)
   .add('default', () => <TextFill32 />)
@@ -8,7 +8,7 @@ storiesOf('TextFill32', module)
     <TextFill32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <TextFill32 focusable>
+    <TextFill32 aria-label="Icon label">
       <title>Icon title</title>
     </TextFill32>
   ));

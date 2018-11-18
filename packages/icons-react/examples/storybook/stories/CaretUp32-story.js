@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CaretUp32 from '../../../lib/CaretUp/32';
+import CaretUp32 from '../../../es/caret--up/32.js';
 
 storiesOf('CaretUp32', module)
   .add('default', () => <CaretUp32 />)
@@ -8,7 +8,7 @@ storiesOf('CaretUp32', module)
     <CaretUp32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CaretUp32 focusable>
+    <CaretUp32 aria-label="Icon label">
       <title>Icon title</title>
     </CaretUp32>
   ));

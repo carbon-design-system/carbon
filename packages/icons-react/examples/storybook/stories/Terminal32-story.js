@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Terminal32 from '../../../lib/Terminal/32';
+import Terminal32 from '../../../es/terminal/32.js';
 
 storiesOf('Terminal32', module)
   .add('default', () => <Terminal32 />)
@@ -8,7 +8,7 @@ storiesOf('Terminal32', module)
     <Terminal32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Terminal32 focusable>
+    <Terminal32 aria-label="Icon label">
       <title>Icon title</title>
     </Terminal32>
   ));

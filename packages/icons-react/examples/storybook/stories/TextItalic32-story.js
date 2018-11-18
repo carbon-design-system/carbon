@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TextItalic32 from '../../../lib/TextItalic/32';
+import TextItalic32 from '../../../es/text-italic/32.js';
 
 storiesOf('TextItalic32', module)
   .add('default', () => <TextItalic32 />)
@@ -8,7 +8,7 @@ storiesOf('TextItalic32', module)
     <TextItalic32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <TextItalic32 focusable>
+    <TextItalic32 aria-label="Icon label">
       <title>Icon title</title>
     </TextItalic32>
   ));

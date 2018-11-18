@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Png32 from '../../../lib/Png/32';
+import Png32 from '../../../es/PNG/32.js';
 
 storiesOf('Png32', module)
   .add('default', () => <Png32 />)
@@ -8,7 +8,7 @@ storiesOf('Png32', module)
     <Png32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Png32 focusable>
+    <Png32 aria-label="Icon label">
       <title>Icon title</title>
     </Png32>
   ));

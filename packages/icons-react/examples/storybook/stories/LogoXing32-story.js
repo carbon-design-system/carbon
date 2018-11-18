@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoXing32 from '../../../lib/LogoXing/32';
+import LogoXing32 from '../../../es/logo--xing/32.js';
 
 storiesOf('LogoXing32', module)
   .add('default', () => <LogoXing32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoXing32', module)
     <LogoXing32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoXing32 focusable>
+    <LogoXing32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoXing32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TableSplit32 from '../../../lib/TableSplit/32';
+import TableSplit32 from '../../../es/table--split/32.js';
 
 storiesOf('TableSplit32', module)
   .add('default', () => <TableSplit32 />)
@@ -8,7 +8,7 @@ storiesOf('TableSplit32', module)
     <TableSplit32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <TableSplit32 focusable>
+    <TableSplit32 aria-label="Icon label">
       <title>Icon title</title>
     </TableSplit32>
   ));

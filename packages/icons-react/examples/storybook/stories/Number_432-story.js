@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Number_432 from '../../../lib/Number_4/32';
+import Number_432 from '../../../es/number--4/32.js';
 
 storiesOf('Number_432', module)
   .add('default', () => <Number_432 />)
@@ -8,7 +8,7 @@ storiesOf('Number_432', module)
     <Number_432 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Number_432 focusable>
+    <Number_432 aria-label="Icon label">
       <title>Icon title</title>
     </Number_432>
   ));

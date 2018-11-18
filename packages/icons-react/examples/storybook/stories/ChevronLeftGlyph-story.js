@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChevronLeftGlyph from '../../../lib/ChevronLeft/glyph';
+import ChevronLeftGlyph from '../../../es/chevron--left/index.js';
 
 storiesOf('ChevronLeftGlyph', module)
   .add('default', () => <ChevronLeftGlyph />)
@@ -8,7 +8,7 @@ storiesOf('ChevronLeftGlyph', module)
     <ChevronLeftGlyph aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ChevronLeftGlyph focusable>
+    <ChevronLeftGlyph aria-label="Icon label">
       <title>Icon title</title>
     </ChevronLeftGlyph>
   ));

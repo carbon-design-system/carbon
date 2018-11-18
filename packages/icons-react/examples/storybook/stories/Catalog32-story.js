@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Catalog32 from '../../../lib/Catalog/32';
+import Catalog32 from '../../../es/catalog/32.js';
 
 storiesOf('Catalog32', module)
   .add('default', () => <Catalog32 />)
@@ -8,7 +8,7 @@ storiesOf('Catalog32', module)
     <Catalog32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Catalog32 focusable>
+    <Catalog32 aria-label="Icon label">
       <title>Icon title</title>
     </Catalog32>
   ));

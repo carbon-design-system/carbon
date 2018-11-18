@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthZoomPan32 from '../../../lib/WatsonHealthZoomPan/32';
+import WatsonHealthZoomPan32 from '../../../es/watson-health/zoom-pan/32.js';
 
 storiesOf('WatsonHealthZoomPan32', module)
   .add('default', () => <WatsonHealthZoomPan32 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthZoomPan32', module)
     <WatsonHealthZoomPan32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthZoomPan32 focusable>
+    <WatsonHealthZoomPan32 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthZoomPan32>
   ));

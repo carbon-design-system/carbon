@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ArrowsVertical32 from '../../../lib/ArrowsVertical/32';
+import ArrowsVertical32 from '../../../es/arrows--vertical/32.js';
 
 storiesOf('ArrowsVertical32', module)
   .add('default', () => <ArrowsVertical32 />)
@@ -8,7 +8,7 @@ storiesOf('ArrowsVertical32', module)
     <ArrowsVertical32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ArrowsVertical32 focusable>
+    <ArrowsVertical32 aria-label="Icon label">
       <title>Icon title</title>
     </ArrowsVertical32>
   ));

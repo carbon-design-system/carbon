@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LogoFacebook32 from '../../../lib/LogoFacebook/32';
+import LogoFacebook32 from '../../../es/logo--facebook/32.js';
 
 storiesOf('LogoFacebook32', module)
   .add('default', () => <LogoFacebook32 />)
@@ -8,7 +8,7 @@ storiesOf('LogoFacebook32', module)
     <LogoFacebook32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <LogoFacebook32 focusable>
+    <LogoFacebook32 aria-label="Icon label">
       <title>Icon title</title>
     </LogoFacebook32>
   ));

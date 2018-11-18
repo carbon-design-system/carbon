@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Launch16 from '../../../lib/Launch/16';
+import Launch16 from '../../../es/launch/16.js';
 
 storiesOf('Launch16', module)
   .add('default', () => <Launch16 />)
@@ -8,7 +8,7 @@ storiesOf('Launch16', module)
     <Launch16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Launch16 focusable>
+    <Launch16 aria-label="Icon label">
       <title>Icon title</title>
     </Launch16>
   ));

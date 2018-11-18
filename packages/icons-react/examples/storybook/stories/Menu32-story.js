@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Menu32 from '../../../lib/Menu/32';
+import Menu32 from '../../../es/menu/32.js';
 
 storiesOf('Menu32', module)
   .add('default', () => <Menu32 />)
@@ -8,7 +8,7 @@ storiesOf('Menu32', module)
     <Menu32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Menu32 focusable>
+    <Menu32 aria-label="Icon label">
       <title>Icon title</title>
     </Menu32>
   ));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Forum32 from '../../../lib/Forum/32';
+import Forum32 from '../../../es/forum/32.js';
 
 storiesOf('Forum32', module)
   .add('default', () => <Forum32 />)
@@ -8,7 +8,7 @@ storiesOf('Forum32', module)
     <Forum32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Forum32 focusable>
+    <Forum32 aria-label="Icon label">
       <title>Icon title</title>
     </Forum32>
   ));

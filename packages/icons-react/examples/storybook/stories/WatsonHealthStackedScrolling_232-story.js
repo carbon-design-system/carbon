@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import WatsonHealthStackedScrolling_232 from '../../../lib/WatsonHealthStackedScrolling_2/32';
+import WatsonHealthStackedScrolling_232 from '../../../es/watson-health/stacked-scrolling--2/32.js';
 
 storiesOf('WatsonHealthStackedScrolling_232', module)
   .add('default', () => <WatsonHealthStackedScrolling_232 />)
@@ -8,7 +8,7 @@ storiesOf('WatsonHealthStackedScrolling_232', module)
     <WatsonHealthStackedScrolling_232 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <WatsonHealthStackedScrolling_232 focusable>
+    <WatsonHealthStackedScrolling_232 aria-label="Icon label">
       <title>Icon title</title>
     </WatsonHealthStackedScrolling_232>
   ));

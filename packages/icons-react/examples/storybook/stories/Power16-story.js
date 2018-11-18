@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Power16 from '../../../lib/Power/16';
+import Power16 from '../../../es/power/16.js';
 
 storiesOf('Power16', module)
   .add('default', () => <Power16 />)
@@ -8,7 +8,7 @@ storiesOf('Power16', module)
     <Power16 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <Power16 focusable>
+    <Power16 aria-label="Icon label">
       <title>Icon title</title>
     </Power16>
   ));

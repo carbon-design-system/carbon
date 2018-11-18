@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ChevronDown32 from '../../../lib/ChevronDown/32';
+import ChevronDown32 from '../../../es/chevron--down/32.js';
 
 storiesOf('ChevronDown32', module)
   .add('default', () => <ChevronDown32 />)
@@ -8,7 +8,7 @@ storiesOf('ChevronDown32', module)
     <ChevronDown32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <ChevronDown32 focusable>
+    <ChevronDown32 aria-label="Icon label">
       <title>Icon title</title>
     </ChevronDown32>
   ));

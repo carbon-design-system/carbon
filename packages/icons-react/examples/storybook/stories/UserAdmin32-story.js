@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import UserAdmin32 from '../../../lib/UserAdmin/32';
+import UserAdmin32 from '../../../es/user--admin/32.js';
 
 storiesOf('UserAdmin32', module)
   .add('default', () => <UserAdmin32 />)
@@ -8,7 +8,7 @@ storiesOf('UserAdmin32', module)
     <UserAdmin32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <UserAdmin32 focusable>
+    <UserAdmin32 aria-label="Icon label">
       <title>Icon title</title>
     </UserAdmin32>
   ));

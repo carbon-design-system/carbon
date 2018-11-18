@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import CheckboxUndeterminateFilled32 from '../../../lib/CheckboxUndeterminateFilled/32';
+import CheckboxUndeterminateFilled32 from '../../../es/checkbox--undeterminate--filled/32.js';
 
 storiesOf('CheckboxUndeterminateFilled32', module)
   .add('default', () => <CheckboxUndeterminateFilled32 />)
@@ -8,7 +8,7 @@ storiesOf('CheckboxUndeterminateFilled32', module)
     <CheckboxUndeterminateFilled32 aria-label="Accessibility label" />
   ))
   .add('with title', () => (
-    <CheckboxUndeterminateFilled32 focusable>
+    <CheckboxUndeterminateFilled32 aria-label="Icon label">
       <title>Icon title</title>
     </CheckboxUndeterminateFilled32>
   ));
