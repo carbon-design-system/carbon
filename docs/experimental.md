@@ -21,7 +21,7 @@
 ### Introduction
 
 When using iconography in experimental components, we'll want to try and use
-what is available through the [Carbon Elements](https://github.com/IBM/carbon-elements) project. Specifically, `@carbon/icons`. In order to do so, we can use the `@carbon/icons-handlbears` and its accompanying helper.
+what is available through the [Carbon Elements](https://github.com/IBM/carbon-elements) project. Specifically, `@carbon/icons`. In order to do so, we can use the `@carbon/icons-handlebars` and its accompanying helper.
 
 This helper is registered under `tools/templates.js`, specifically by doing:
 
@@ -42,7 +42,7 @@ in the corresponding position where the mixin is called.
 
 ### FAQ
 
-##### How do I know the name of an icon to use in the `carbon-icon` helper?
+#### How do I know the name of an icon to use in the `carbon-icon` helper?
 
 You can view all of the icons from `@carbon/icons` inside of [this demo](https://ibm.github.io/carbon-elements/icons/examples/esm/). In the future, this information will live at https://www.carbondesignsystem.com.
 
@@ -52,7 +52,7 @@ For now, you can click the "expanded" viewing mode option and see the module nam
 {{ carbon-icon 'ChevronDownGlyph' }}
 ```
 
-##### How do I add a class to an icon?
+#### How do I add a class to an icon?
 
 You can add in a class by passing in `class='your-class-name'` at the end of the partial. For
 example, in our dropdown we could do:
@@ -65,7 +65,7 @@ This also includes support for `@root.prefix`, as well, so that you can prefix
 each custom class name. Anything that you set inside of the string to `class`
 will be set as the class name for the `<svg>` container.
 
-##### How do I add attributes to an icon?
+#### How do I add attributes to an icon?
 
 You can pass in any attributes, especially things like `aria-label` as a
 `key='value'` pair to the `carbon-icon` helper. For example, if we wanted to set
@@ -75,7 +75,7 @@ You can pass in any attributes, especially things like `aria-label` as a
 {{ carbon-icon 'ChevronDownGlyph' aria-label='Aria label for icon' }}
 ```
 
-##### How do I only use `carbon-icon` for experimental components?
+#### How do I only use `carbon-icon` for experimental components?
 
 There are a couple of steps in order to make incorporate the `carbon-icon` only
 for experimental markup. These include:
