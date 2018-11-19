@@ -248,8 +248,8 @@
   }
 
   .#{$prefix}--tabs-trigger svg {
-    width: rem(10px);
-    height: rem(5px);
+    width: rem(12px);
+    height: rem(7px);
     fill: $ui-05;
     transition: transform $transition--expansion $carbon--standard-easing;
   }
@@ -311,7 +311,6 @@
     @include max-breakpoint(bp--sm--major) {
       transition: max-height $transition--expansion $carbon--standard-easing;
       max-height: 600px;
-      margin-top: rem(1px);
     }
   }
 
