@@ -257,6 +257,10 @@
   .#{$prefix}--tabs-trigger--open:focus,
   .#{$prefix}--tabs-trigger--open:active {
     @include focus-outline('reset');
+    transition: outline $transition--expansion $carbon--standard-easing;
+  }
+
+  .#{$prefix}--tabs-trigger--open {
     background: $ui-03;
   }
 
@@ -342,6 +346,9 @@
     }
     @include max-breakpoint(bp--sm--major) {
       height: rem(40px);
+      &:first-of-type {
+        margin-top: rem(1px);
+      }
     }
   }
 
