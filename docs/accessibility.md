@@ -1,7 +1,5 @@
 # Automated Verification Testing (AVT) stage 1
 
-## Introduction👋
-
 AVT1 testing is done with a browser extension developed by IBM called the Dynamic Assessment Plugin (DAP). It's a great first step to locking down and ensuring inclusivity and accessibility in your websites and components.
 
 ## Installing DAP🔧
@@ -51,3 +49,24 @@ If running DAP produces no violations (that's awesome🎉) we still want to reco
    _Be warned: Occasionally clicking the Download Report button won't work. This can be a serious pain if the dev has already gone through and ignored false positives. I've had a 100% success rate with Download Report if after I open the DAP panel in my dev tools I then reload the page with the panel open. 😞 -- D.A._
 
 3. [Follow this link](https://ibm.biz/BdYkMA) and select the folder that corresponds with the ruleset the component was tested against and drop the JSON file in there.
+
+# Automated Verification Testing stage 2
+
+["Keyboard accessibility is one of the most important aspects of web accessibility."](https://webaim.org/techniques/keyboard/) and it's the focus of AVT testing stage 2!
+
+Here's what we're looking for during our AVT2 audit:
+
+1. All functionality should be available from a keyboard without exception.
+2. Keyboard navigation uses standardized keystrokes:
+
+   - TAB to move forward through the various focusable elements.
+   - SHIFT+TAB to move backward through previous focusable elements.
+   - ENTER or SPACE to activate, select, or otherwise interact with focusable elements.
+   - Escape to close popups, toasts, or modals and return focus to main page content.
+
+     _Any variance on these standardized keystrokes should be outlined clearly to the user beforehand_
+
+3. If an element can receive keyboard focus it should reflect that in it's styling with a focused state.
+4. If you can move focus to an element with the keyboard you should be able to move focus away from that element with a keyboard.
+5. Navigating through the pages tabbable elements makes sense in terms of their order.
+6. Long or burdensome lists, links, or navigation should provide a "skip to main content" link.
