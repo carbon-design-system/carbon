@@ -93,7 +93,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       const rangeInput = doc.createElement('input');
       rangeInput.className = this.options.classVisuallyHidden;
       rangeInput.setAttribute('aria-hidden', 'true');
-      doc.body.appendChild(rangeInput);
+      this.element.appendChild(rangeInput);
       this._rangeInput = rangeInput;
 
       // An attempt to open the date picker dropdown when this component gets focus,
