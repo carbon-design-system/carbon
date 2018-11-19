@@ -257,6 +257,7 @@
   .#{$prefix}--tabs-trigger--open:focus,
   .#{$prefix}--tabs-trigger--open:active {
     @include focus-outline('reset');
+    background: $ui-03;
   }
 
   .#{$prefix}--tabs-trigger--open svg {
@@ -310,6 +311,7 @@
     @include max-breakpoint(bp--sm--major) {
       transition: max-height $transition--expansion $carbon--standard-easing;
       max-height: 600px;
+      margin-top: rem(1px);
     }
   }
 
@@ -340,7 +342,7 @@
       }
     }
     @include max-breakpoint(bp--sm--major) {
-      height: rem(34px);
+      height: rem(40px);
     }
   }
 
@@ -355,8 +357,8 @@
 
   .#{$prefix}--tabs__nav-item:hover:not([disabled]) {
     @include max-breakpoint(bp--sm--major) {
-      background-color: $ui-03;
-      box-shadow: 0 -1px 0 $ui-03;
+      background-color: $hover-field;
+      box-shadow: 0 -1px 0 $hover-field;
     }
   }
 
@@ -408,10 +410,10 @@
       padding: $spacing-xs $spacing-md;
     }
     @include max-breakpoint(bp--sm--major) {
-      height: rem(34px);
+      height: rem(40px);
       width: calc(100% - 32px);
       margin: 0 $spacing-md;
-      padding: $spacing-xs 0;
+      padding: $spacing-sm 0;
       line-height: rem(16px);
       color: $text-02;
       border-bottom: 1px solid $ui-03;
@@ -419,6 +421,7 @@
       overflow: hidden;
       &:hover {
         color: $text-01;
+        border-bottom: 1px solid transparent;
       }
       &:focus,
       &:active {
