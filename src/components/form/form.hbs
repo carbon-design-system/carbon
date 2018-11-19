@@ -34,7 +34,7 @@
         {{/if}}
       {{/each}}
     </select>
-    {{> (downIcon) newContext class=(add @root.prefix "--select__arrow") }}
+    {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
     {{#unless componentsX}}
       <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
     {{/unless}}

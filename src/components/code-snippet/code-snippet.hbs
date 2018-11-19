@@ -35,13 +35,13 @@
     </pre>
   </div>
   <button data-copy-btn class="{{@root.prefix}}--snippet-button" aria-label="Copy code" tabindex="0">
-    {{> carbon-icon-copy newContext class=(add @root.prefix "--snippet__icon" )}}
+    {{> carbon-icon-copy attr-class="{{@root.prefix}}--snippet__icon"}}
     <div class="{{@root.prefix}}--btn--copy__feedback" data-feedback="Copied!"></div>
   </button>
   {{#is variant "multi"}}
   <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--ghost {{@root.prefix}}--btn--sm {{@root.prefix}}--snippet-btn--expand" type="button">
     <span class="{{@root.prefix}}--snippet-btn--text" data-show-more-text="Show more" data-show-less-text="Show less">Show more</span>
-    {{> carbon-icon-chevron-down newContext class=(add @root.prefix "--icon-chevron--down") description="Show more icon" }}
+    {{> carbon-icon-chevron-down attr-class="{{@root.prefix}}--icon-chevron--down" description="Show more icon" }}
   </button>
   {{/is}}
 </div>

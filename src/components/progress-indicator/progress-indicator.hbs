@@ -2,7 +2,7 @@
   {{#each steps}}
     <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}}" {{#if disabled}} disabled {{/if}} {{#if invalid}} data-invalid {{/if}}>
       {{#is state "complete"}}
-        {{carbon-icon 'CheckmarkOutline16'}}
+        {{> carbon-icon-checkmark-outline }}
       {{/is}}
       {{#is state "current"}}
         <svg>
@@ -17,7 +17,7 @@
       {{#is state "incomplete"}}
         {{#if ../componentsX}}
           {{#if invalid}}
-            {{carbon-icon 'Warning16' class=(add @root.prefix '--progress__warning')}}
+            {{> carbon-icon-warning attr-class=(add @root.prefix '--progress__warning')}}
           {{else}}
             <svg>
               <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path>

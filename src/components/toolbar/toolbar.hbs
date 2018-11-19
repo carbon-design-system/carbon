@@ -3,7 +3,7 @@
     <label for="search__input" class="{{@root.prefix}}--label">Search</label>
     <input type="text" class="{{@root.prefix}}--search-input" id="search__input" placeholder="Search">
     <button class="{{@root.prefix}}--toolbar-search__btn" aria-label="Toolbar search">
-      {{> carbon-icon-search newContext class=(add @root.prefix "--search-magnifier") }}
+      {{> carbon-icon-search attr-class="{{@root.prefix}}--search-magnifier" }}
     </button>
     <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="Clear search
         input" aria-label="Clear search input">
@@ -18,7 +18,7 @@
     </button>
   </div>
   <div data-overflow-menu class="{{@root.prefix}}--overflow-menu" tabindex="0" aria-label="List of options">
-    {{> carbon-icon-filter newContext class=(add (add @root.prefix "--overflow-menu__icon") (add " " (add @root.prefix "--toolbar-filter-icon"))) }}
+    {{> carbon-icon-filter attr-class="{{@root.prefix}}--overflow-menu__icon {{@root.prefix}}--toolbar-filter-icon" }}
     <ul class="{{@root.prefix}}--overflow-menu-options">
       <li class="{{@root.prefix}}--toolbar-menu__title">FILTER BY</li>
       {{#each filterOptions}}
@@ -26,7 +26,7 @@
           <input id="{{id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{value}}" name="checkbox">
           <label for="{{id}}" class="{{@root.prefix}}--checkbox-label">
             <span class="{{@root.prefix}}--checkbox-appearance">
-              {{> carbon-icon-checkmark newContext class=(add @root.prefix "--checkbox-checkmark") }}
+              {{> carbon-icon-checkmark attr-class="{{@root.prefix}}--checkbox-checkmark" }}
             </span>
             {{label}}
           </label>
@@ -35,7 +35,7 @@
     </ul>
   </div>
   <div data-overflow-menu class="{{@root.prefix}}--overflow-menu" tabindex="0" aria-label="List of options">
-    {{> (overflowMenuIcon) newContext class=(add @root.prefix "--overflow-menu__icon") }}
+    {{> (overflowMenuIcon) attr-class=(add @root.prefix "--overflow-menu__icon") }}
     <ul class="{{@root.prefix}}--overflow-menu-options">
       <li class="{{@root.prefix}}--overflow-menu-options__option">
         <button type="button" class="{{@root.prefix}}--overflow-menu-options__btn">Refresh table</button>

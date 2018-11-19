@@ -3,10 +3,10 @@
   {{#is ../variant "toast"}}
   {{#if ../componentsX}}
   {{#is type "error"}}
-  {{> (../errorIcon) newContext class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
+  {{> (../errorIcon) attr-class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
   {{/is}}
   {{#is type "success"}}
-  {{> (../checkmarkIcon) newContext class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
+  {{> (../checkmarkIcon) attr-class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
   {{/is}}
   {{#is type "warning"}}
     {{#if @root.featureFlags.componentsX}}
@@ -35,16 +35,16 @@
   <div class="{{@root.prefix}}--{{../variant}}-notification__details">
     {{#is ../variant "inline"}}
     {{#is type "error"}}
-    {{> (../errorIcon) newContext class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
+    {{> (../errorIcon) attr-class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
     {{/is}}
     {{#is type "info"}}
-    {{> (../infoIcon) newContext class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
+    {{> (../infoIcon) attr-class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
     {{/is}}
     {{#is type "success"}}
-    {{> (../checkmarkIcon) newContext class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
+    {{> (../checkmarkIcon) attr-class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
     {{/is}}
     {{#is type "warning"}}
-    {{> (../warningIcon) newContext class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
+    {{> (../warningIcon) attr-class=(add @root.prefix (add "--" (add ../variant "-notification__icon"))) }}
     {{/is}}
     <div class="{{@root.prefix}}--{{../variant}}-notification__text-wrapper">
       <p class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</p>
@@ -58,7 +58,7 @@
     {{/is}}
   </div>
   <button data-notification-btn class="{{@root.prefix}}--{{../variant}}-notification__close-button" type="button" aria-label="close">
-    {{> carbon-icon-close newContext class=(add @root.prefix (add "--" (add ../variant "-notification__close-icon"))) }}
+    {{> carbon-icon-close attr-class=(add "{{@root.prefix}}--" (add ../variant "-notification__close-icon")) }}
   </button>
 </div>
 {{/each}}

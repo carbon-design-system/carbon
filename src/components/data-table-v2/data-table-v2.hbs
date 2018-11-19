@@ -21,11 +21,11 @@
 
     <div class="{{@root.prefix}}--toolbar-search-container">
       <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-        {{> carbon-icon-search newContext class=(add @root.prefix "--search-magnifier") }}
+        {{> carbon-icon-search attr-class="{{@root.prefix}}--search-magnifier" }}
         <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
         <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
         <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
-          {{> carbon-icon-close-solid newContext }}
+          {{> carbon-icon-close-solid }}
         </button>
       </div>
     </div>
@@ -56,7 +56,7 @@
             {{#if sortable}}
               <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
                 <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
-                {{> carbon-icon-caret-down newContext class=(add @root.prefix "--table-sort-v2__icon") description=../sortLabel }}
+                {{> carbon-icon-caret-down attr-class="{{@root.prefix}}--table-sort-v2__icon" description=../sortLabel }}
               </button>
             {{else if small}}
               {{title}}
@@ -76,7 +76,7 @@
             {{#if column.section}}
               <td class="{{@root.prefix}}--table-expand-v2" data-event="expand">
                 <button class="{{@root.prefix}}--table-expand-v2__button">
-                  {{> carbon-icon-chevron-right newContext class=(add @root.prefix "--table-expand-v2__svg") }}
+                  {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--table-expand-v2__svg" }}
                 </button>
               </td>
             {{else if column.checkbox}}
@@ -87,7 +87,7 @@
             {{else if column.menu}}
               <td class="{{@root.prefix}}--table-overflow">
                 <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
-                  {{> carbon-icon-overflow-menu newContext class=(add @root.prefix "--overflow-menu__icon") }}
+                  {{> carbon-icon-overflow-menu attr-class="{{@root.prefix}}--overflow-menu__icon" }}
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
                       <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
@@ -141,7 +141,7 @@
           <option class="{{@root.prefix}}--select-option" value="40">40</option>
           <option class="{{@root.prefix}}--select-option" value="50">50</option>
         </select>
-        {{> carbon-icon-caret-down newContext class=(add @root.prefix "--select__arrow") }}
+        {{> carbon-icon-caret-down attr-class="{{@root.prefix}}--select__arrow" }}
       </div>
       <span class="{{@root.prefix}}--pagination__text">
         <span>|&nbsp;</span>
@@ -167,10 +167,10 @@
           <option class="{{@root.prefix}}--select-option" value="4">4</option>
           <option class="{{@root.prefix}}--select-option" value="5">5</option>
         </select>
-        {{> carbon-icon-caret-down newContext class=(add @root.prefix "--select__arrow") }}
+        {{> carbon-icon-caret-down attr-class="{{@root.prefix}}--select__arrow" }}
       </div>
       <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" data-page-forward aria-label="Forward button">
-        {{> carbon-icon-chevron-right newContext class=(add @root.prefix "--pagination__button-icon") }}
+        {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--pagination__button-icon" }}
       </button>
     </div>
   </div>

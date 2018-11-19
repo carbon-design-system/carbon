@@ -1,6 +1,6 @@
 <div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button" aria-haspopup="true"
   aria-expanded="false">
-  {{> (overflowMenuIcon) newContext class=(add @root.prefix "--overflow-menu__icon") }}
+  {{> (overflowMenuIcon) attr-class=(add @root.prefix "--overflow-menu__icon") }}
   <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
     {{#each items}}
     <li class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}"
@@ -14,7 +14,7 @@
 
 <div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button" aria-haspopup="true"
   aria-expanded="false">
-  {{> (overflowMenuIcon) newContext class=(add @root.prefix "--overflow-menu__icon") }}
+  {{> (overflowMenuIcon) attr-class=(add @root.prefix "--overflow-menu__icon") }}
   <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="{{direction}}"
     role="menu" aria-label="Overflow">
     {{#each items}}

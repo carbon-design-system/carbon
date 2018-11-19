@@ -2,7 +2,7 @@
 <div class="{{@root.prefix}}--form-item">
   <div data-date-picker data-date-picker-type="single" class="{{@root.prefix}}--date-picker {{@root.prefix}}--date-picker--single {{@root.prefix}}--date-picker--nolabel">
     <div class="{{@root.prefix}}--date-picker-container">
-      {{> carbon-icon-calendar newContext data-date-picker-icon="" class=(add @root.prefix "--date-picker__icon") }}
+      {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class="{{@root.prefix}}--date-picker__icon" }}
       <input type="text" id="date-picker-3" class="{{@root.prefix}}--date-picker__input" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="mm/dd/yyyy"
         data-date-picker-input />
     </div>
@@ -13,7 +13,7 @@
 <div class="{{@root.prefix}}--form-item">
   <div data-date-picker data-date-picker-type="single" class="{{@root.prefix}}--date-picker {{@root.prefix}}--date-picker--single {{@root.prefix}}--date-picker--nolabel">
     <div class="{{@root.prefix}}--date-picker-container">
-      {{> carbon-icon-calendar newContext data-date-picker-icon="" class=(add @root.prefix "--date-picker__icon") }}
+      {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class="{{@root.prefix}}--date-picker__icon" }}
       <input data-invalid type="text" id="date-picker-3" class="{{@root.prefix}}--date-picker__input" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="mm/dd/yyyy"
         data-date-picker-input />
       <div class="{{@root.prefix}}--form-requirement">

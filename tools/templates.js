@@ -10,6 +10,7 @@ const helpers = require('handlebars-helpers');
 const Fractal = require('@frctl/fractal');
 const icons = require('carbon-icons');
 const iconsElements = require('@carbon/icons');
+const { toString: iconHelpersToString } = require('@carbon/icon-helpers');
 
 const origResolveFilename = Module._resolveFilename;
 Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
@@ -45,34 +46,37 @@ try {
 }
 
 /**
+ * @param {string} s A hyphnated string.
+ * @returns {string} The camelcase string from the given hyphnated string, e.g. `fooBar` from `foo-bar`.
+ * @private
+ */
+function camelCaseFromHyphnated(s) {
+  return s.replace(/-+([A-z])/g, (match, token) => token.toUpperCase());
+}
+
+/**
  * @param {string} s A string in camel case.
  * @returns {string} The string converted to hyphnated format.
  */
 const hyphnatedFromCamelCase = s => s.replace(/([A-Z])/g, (match, token) => `-${token.toLowerCase()}`).replace(/^-+/, '');
 
 /**
- * @param {Object} The key/value pair of attributes.
- * @returns {string} The attributes formatted as a string.
- */
-const formatAttributes = attrs => Object.keys(attrs).reduce((acc, key) => `${acc} ${key}="${attrs[key]}"`.trim(), '');
-
-/**
  * @param {Object} toplevelDescriptor The icon descriptor.
+ * @param {string} prefix The CSS class prefix.
  * @returns {string} The Handlebars partial string.
  */
-const js2partial = toplevelDescriptor => {
-  const convert = descriptor => {
-    const { elem = 'svg', attrs = [], formattedAttrs = '', formattedContent = '', content = [] } = descriptor;
-    return `<${elem} ${formatAttributes(attrs)}${formattedAttrs}>${formattedContent}${content.map(convert).join('')}</${elem}>`;
-  };
-  const formattedAttrsFromParams =
-    ' {{#each this}} {{#if (is @key "description")}}aria-label{{else}}{{@key}}{{/if}}="{{this}}"{{/each}}';
-  const formattedAriaLabelAttr = '{{#if description}} aria-label="{{description}}"{{/if}}';
-  return convert({
-    ...toplevelDescriptor,
-    formattedAttrs: formattedAttrsFromParams + formattedAriaLabelAttr,
-    formattedContent: '{{#if description}}<title>{{description}}</title>{{/if}}',
-  });
+const js2partial = (toplevelDescriptor, prefix) => {
+  const formattedAttrs = [
+    '{{#if description}} aria-label="{{description}}"{{/if}}',
+    '{{#each this}}',
+    '{{#startsWith "attr-" @key}}',
+    ` {{removeFirst @key "attr-"}}="{{replace this "{{@root.prefix}}" "${prefix}"}}"`,
+    '{{/startsWith}}',
+    '{{/each}}',
+  ].join('');
+  return iconHelpersToString(toplevelDescriptor)
+    .replace(/^\s*(<svg)/, `$1${formattedAttrs}`)
+    .replace(/(<\/svg>)\s*$/, '{{#if description}}<title>{{description}}</title>{{/if}}$1');
 };
 
 /**
@@ -101,28 +105,29 @@ const normalizeDescriptor = ({ svgData, width, height, viewBox }) => {
 };
 
 /**
+ * @param {string} prefix The CSS class prefix.
  * @param {boolean} useElements `true` to use one from `carbon-elements`.
  * @returns {Map<string, string>} A set of icons contents, keyed by hyphnated icon name.
  */
-const getIconsPartials = useElements => {
+const getIconsPartials = (prefix, useElements) => {
   const contents = new Map();
   const iconsInUse = !useElements ? icons : iconsElements;
   const names = new Set();
   Object.keys(iconsInUse)
     .filter(isNaN)
     .forEach(name => {
-      names.add(name.replace(/(16|32|Glyph)$/, ''));
+      // `carbon-icons` has hyphnated name here, whereas `@carbon/icons` has pascal case
+      names.add(camelCaseFromHyphnated(iconsInUse[name].name));
     });
   names.forEach(name => {
+    const nameInIcons = !useElements ? name : name[0].toUpperCase() + name.substr(1);
     const normalizedName = hyphnatedFromCamelCase(name.replace(/^icon/, ''));
     const suffixPriority = !useElements ? ['', 'Glyph'] : ['Glyph', '16', '32'];
-    const suffix = suffixPriority.find(item => iconsInUse[name + item]);
-    if (typeof suffix === 'undefined') {
-      console.warn('Icon data could not be found:', name); // eslint-disable-line no-console
-    } else {
-      const keyInIcons = name + suffix;
+    const suffix = suffixPriority.find(item => iconsInUse[nameInIcons + item]);
+    if (typeof suffix !== 'undefined') {
+      const keyInIcons = nameInIcons + suffix;
       const descriptor = !useElements ? normalizeDescriptor(icons[keyInIcons]) : iconsElements[keyInIcons];
-      contents.set(`carbon-icon-${normalizedName}`, js2partial(descriptor));
+      contents.set(`carbon-icon-${normalizedName}`, js2partial(descriptor, prefix));
     }
   });
   return contents;
@@ -138,10 +143,13 @@ const getContents = glob =>
       return undefined;
     }
     const contents = new Map();
+    // Obtain the latest CSS class prefix
+    // eslint-disable-next-line global-require
+    const { prefix } = require('../src/globals/js/settings');
     // Obtain the latest state of feature flags
     // eslint-disable-next-line global-require
     const { componentsX } = require('../src/globals/js/feature-flags');
-    const partials = [getIconsPartials(true), getIconsPartials()];
+    const partials = [getIconsPartials(prefix, true), getIconsPartials(prefix)];
     if (componentsX) {
       partials.reverse();
     }
@@ -201,6 +209,8 @@ const cache = {
    * Clears the content cache.
    */
   clear() {
+    // When we clear template cache upon theme switcher UI, below modules get stale
+    delete require.cache[require.resolve('../src/globals/js/settings.js')];
     delete require.cache[require.resolve('../demo/feature-flags.js')];
     this.promiseCache = undefined;
   },

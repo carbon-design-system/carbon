@@ -2,7 +2,7 @@
   {{#each items}}
     <button class="{{@root.prefix}}--content-switcher-btn{{#if selected}} {{@root.prefix}}--content-switcher--selected{{/if}}" data-target="{{target}}" role="tab"{{#if selected}} aria-selected="true"{{/if}}>
       {{#if ../hasIcon}}
-        {{> (addIcon) newContext class=(add @root.prefix "--content-switcher__icon") }}
+        {{> (addIcon) attr-class="{{@root.prefix}}--content-switcher__icon" }}
       {{/if}}
       {{#if label}}<span>{{label}}</span>{{/if}}
     </button>

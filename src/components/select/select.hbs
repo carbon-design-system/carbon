@@ -9,7 +9,7 @@
         <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if
           hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}} <option class="{{@root.prefix}}--select-option"
           value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}
-          </option> {{/if}} {{/each}} </select> {{> (downIcon) newContext class=(add @root.prefix "--select__arrow") }}
+          </option> {{/if}} {{/each}} </select> {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
           {{#if invalid}}
           <div class="{{@root.prefix}}--form-requirement">
             Validation message here

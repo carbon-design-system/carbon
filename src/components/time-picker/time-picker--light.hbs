@@ -14,7 +14,7 @@
         <option class="{{@root.prefix}}--select-option" value="AM">AM</option>
         <option class="{{@root.prefix}}--select-option" value="PM">PM</option>
       </select>
-      {{> (downIcon) newContext class=(add @root.prefix "--select__arrow") }}
+      {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
     </div>
     <div class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
       <label for="select-id-2" class="{{@root.prefix}}--label {{@root.prefix}}--visually-hidden">Select time zone</label>
@@ -23,7 +23,7 @@
         <option class="{{@root.prefix}}--select-option" value="option-2">Time zone 2</option>
         <option class="{{@root.prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
-      {{> (downIcon) newContext class=(add @root.prefix "--select__arrow") }}
+      {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
     </div>
   </div>
 </div>
