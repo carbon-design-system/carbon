@@ -201,10 +201,6 @@
     cursor: pointer;
     padding: 0;
   }
-
-  // .#{$prefix}--file-close svg {
-  //   padding: 2px;
-  // }
 }
 
 @include exports('file-uploader') {
