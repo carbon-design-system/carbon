@@ -1,6 +1,6 @@
 {
   "name": "@carbon/colors",
-  "version": "0.0.1-alpha.12",
+  "version": "0.0.1-alpha.13",
   "main": "lib/index.js",
   "module": "es/index.js",
   "license": "Apache-2.0",
@@ -17,8 +17,8 @@
     "clean": "rimraf es lib umd scss"
   },
   "devDependencies": {
-    "@carbon/bundler": "0.0.1-alpha.12",
-    "@carbon/cli-reporter": "0.0.1-alpha.12",
+    "@carbon/bundler": "0.0.1-alpha.13",
+    "@carbon/cli-reporter": "0.0.1-alpha.13",
     "fs-extra": "^7.0.0",
     "node-sass": "^4.9.4",
     "prettier": "^1.14.3",
