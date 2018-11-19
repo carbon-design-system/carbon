@@ -9,7 +9,7 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
-@include exports('snippet') {
+@mixin snippet {
   .#{$prefix}--snippet code {
     font-family: $font-family-mono;
   }
@@ -292,5 +292,297 @@
     width: 100%;
     height: 1rem;
     display: block;
+  }
+}
+
+@mixin snippet--x {
+  .#{$prefix}--snippet code {
+    font-family: $font-family-mono;
+  }
+
+  // Inline Code Snippet
+  .#{$prefix}--snippet--inline {
+    @include reset;
+    position: relative;
+    display: inline;
+    padding: 0;
+    font-size: inherit;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: $ui-01;
+    color: $text-01;
+    font-size: 85%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $ui-03;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid $brand-01;
+    }
+
+    &:active {
+      background: $copy-active;
+    }
+  }
+
+  .#{$prefix}--snippet--inline code {
+    padding: 0 $spacing-xs;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: rgba($brand-02, 0.1);
+    }
+  }
+
+  // Single Line Snippet
+  .#{$prefix}--snippet--single {
+    @include bx--snippet;
+    border: none;
+    max-width: rem(760px);
+    min-width: rem(320px);
+    height: $spacing-2xl;
+    padding: 0 56px 0 $spacing-md;
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    position: relative;
+    padding: 0 0 $spacing-md 0;
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet--single pre {
+    white-space: nowrap;
+  }
+
+  // Multi Line Snippet
+  .#{$prefix}--snippet--multi {
+    @include bx--snippet;
+    border: none;
+    padding: $spacing-md;
+    min-width: rem(320px);
+    max-width: 100%;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    overflow: hidden;
+    position: relative;
+    max-height: rem(238px);
+    min-height: rem(56px);
+    transition: all $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
+    white-space: pre-wrap;
+  }
+
+  //Copy Button
+  .#{$prefix}--snippet__icon {
+    fill: $icon-01;
+    height: rem(16px);
+    width: rem(16px);
+    transition: all $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--snippet-button {
+    @include reset;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0;
+    height: $spacing-2xl;
+    width: $spacing-2xl;
+    overflow: visible;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
+    height: $spacing-xl;
+    width: $spacing-xl;
+    top: $spacing-xs;
+    right: $spacing-xs;
+  }
+
+  .#{$prefix}--snippet-button:hover {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--snippet-button:active {
+    background: $copy-active;
+  }
+
+  .#{$prefix}--btn--copy__feedback {
+    @include font-family;
+    z-index: z('overlay');
+    font-weight: 400;
+    left: inherit;
+    top: 0.75rem;
+    right: 1.25rem;
+  }
+
+  .#{$prefix}--btn--copy__feedback:before,
+  .#{$prefix}--btn--copy__feedback:after {
+    background: $copy-btn-feedback;
+  }
+
+  .#{$prefix}--btn--copy__feedback:after {
+    border: none;
+  }
+
+  // Show more / less button
+  .#{$prefix}--snippet-btn--expand {
+    position: absolute;
+    right: $spacing-xs;
+    bottom: $spacing-xs;
+    padding: $spacing-xs;
+    padding-left: $spacing-md;
+    color: $text-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
+    display: none;
+  }
+
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    fill: $text-01;
+    margin-left: $spacing-xs;
+    margin-bottom: rem(1px);
+    transform: rotate(0deg);
+    transition: $transition--base;
+  }
+
+  .#{$prefix}--snippet-btn--expand:hover {
+    background: $hover-field;
+    color: $text-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--snippet-btn--expand:active {
+    background: $copy-active;
+  }
+
+  .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    transform: rotate(180deg);
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+
+  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
+    top: rem(25px);
+    left: 1rem;
+    right: auto;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+    left: 50%;
+  }
+
+  #{$prefix}--snippet--multi.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton span {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:nth-child(2) {
+      width: 85%;
+    }
+
+    &:nth-child(3) {
+      width: 95%;
+    }
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+}
+
+@include exports('snippet') {
+  @if feature-flag-enabled('components-x') {
+    @include snippet--x;
+  } @else {
+    @include snippet;
   }
 }

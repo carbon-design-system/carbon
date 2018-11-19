@@ -3,7 +3,10 @@
   <div class="{{@root.prefix}}--inline-loading__animation">
     <div data-inline-loading-spinner class="{{@root.prefix}}--loading {{@root.prefix}}--loading--small">
       <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
-        <circle cx="0" cy="0" r="37.5"></circle>
+        {{#if componentsX}}
+        <circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="37.5" />
+        {{/if}}
+        <circle {{#if componentsX}}class="{{@root.prefix}}--loading__stroke"{{/if}} cx="0" cy="0" r="37.5" />
       </svg>
     </div>
     <svg data-inline-loading-finished hidden class="{{@root.prefix}}--inline-loading__checkmark-container {{@root.prefix}}--inline-loading__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
