@@ -16,19 +16,19 @@
       title="{{ sidenav.title.text }}">
       {{ sidenav.title.text }}
     </h2>
-    {{#if sidenav.title.subMenu }}
     <div class="{{@root.prefix}}--side-nav__switcher">
       <label for="side-nav-switcher" class="{{@root.prefix}}--assistive-text">
-        {{ sidenav.title.subMenu.label }}
+        Switcher
       </label>
-      <select id="side-nav-switcher" class="{{@root.prefix}}--side-nav__select" name="Switcher">
+      <select id="carbon-side-nav-switcher" class="{{@root.prefix}}--side-nav__select">
         <option
           class="{{@root.prefix}}--side-nav__option"
           disabled=""
           hidden=""
           value=""
-          selected="">
-          {{ sidenav.title.subMenu.label }}
+          selected=""
+        >
+          Switcher
         </option>
         <option class="{{@root.prefix}}--side-nav__option" value="Option 1">
           Option 1
@@ -46,12 +46,12 @@
           width="20"
           height="20"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 32 32">
+          viewBox="0 0 32 32"
+        >
           <path d="M16 22L6 12l1.414-1.414L16 19.172l8.586-8.586L26 12 16 22z" />
         </svg>
       </div>
     </div>
-    {{/if}}
   </div>
 </header>
 {{/if}}

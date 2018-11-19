@@ -2,6 +2,7 @@
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/vars';
 @import 'functions';
 @import 'theme';
@@ -84,6 +85,7 @@
     overflow: hidden;
     // Separates out the panel from the header of the same color
     border-top: 1px solid $ibm-colors__gray--80;
+    z-index: z('header');
   }
 
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
@@ -117,7 +119,12 @@
     display: flex;
     border-bottom: 1px solid $ibm-colors__gray--80;
     width: 100%;
+    height: mini-units(6);
     max-width: 100%;
+
+    @include expanded() {
+      height: auto;
+    }
   }
 
   //----------------------------------------------------------------------------
