@@ -115,22 +115,19 @@
   }
 
   .#{$prefix}--data-table-v2--no-border {
-    tr {
-      &:last-of-type {
-        td {
-          border-bottom-color: transparent;
-        }
-      }
+    & {
+      border-bottom-color: transparent;
+    }
+
+    thead,
+    tbody {
+      border-right-color: transparent;
     }
 
     th,
     td {
       &:first-of-type {
         border-left-color: transparent;
-      }
-
-      &:last-of-type {
-        border-right-color: $ui-03;
       }
     }
   }

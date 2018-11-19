@@ -1,0 +1,79 @@
+@import 'breakpoint';
+@import 'utilities';
+
+/// Get the column width for a given breakpoint. Useful for figuring out key
+/// heights
+/// @param {string} $breakpoint
+/// @return rem
+@function get-column-width($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $width: map-deep-get($breakpoints, $breakpoint, width);
+    $margin: map-deep-get($breakpoints, $breakpoint, margin);
+    $columns: map-deep-get($breakpoints, $breakpoint, columns);
+
+    @return ($width - (2 * $margin)) / $columns;
+  } @else {
+    @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';
+  }
+}
+
+$key-height-scales: (
+  sm: (
+    get-column-width(sm),
+    get-column-width(sm) * 2,
+    get-column-width(sm) * 3,
+    get-column-width(sm) * 4,
+    get-column-width(sm) * 5,
+    get-column-width(sm) * 6,
+  ),
+  md: (
+    get-column-width(md),
+    get-column-width(md) * 2,
+    get-column-width(md) * 3,
+    get-column-width(md) * 4,
+    get-column-width(md) * 5,
+    get-column-width(md) * 6,
+  ),
+  lg: (
+    get-column-width(lg),
+    get-column-width(lg) * 2,
+    get-column-width(lg) * 3,
+    get-column-width(lg) * 4,
+    get-column-width(lg) * 5,
+    get-column-width(lg) * 6,
+    get-column-width(lg) * 7,
+    get-column-width(lg) * 8,
+  ),
+  xlg: (
+    get-column-width(xlg),
+    get-column-width(xlg) * 2,
+    get-column-width(xlg) * 3,
+    get-column-width(xlg) * 4,
+    get-column-width(xlg) * 5,
+    get-column-width(xlg) * 6,
+    get-column-width(xlg) * 7,
+    get-column-width(xlg) * 8,
+  ),
+  max: (
+    get-column-width(max),
+    get-column-width(max) * 2,
+    get-column-width(max) * 3,
+    get-column-width(max) * 4,
+    get-column-width(max) * 5,
+    get-column-width(max) * 6,
+    get-column-width(max) * 7,
+    get-column-width(max) * 8,
+  ),
+);
+
+/// Get the value of a key height step at a given breakpoint
+/// @param {string} $breakpoint
+/// @param {number} $step
+/// @return rem
+@function key-height($breakpoint, $step) {
+  @if map-has-key($key-height-scales, $breakpoint) {
+    @return nth(map-get($key-height-scales, $breakpoint), $step);
+  } @else {
+    @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';
+  }
+}

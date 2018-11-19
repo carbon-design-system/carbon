@@ -39,6 +39,14 @@ const items = [
     label: 'Tab label 5',
     panelContent: 'Content for fifth tab goes here.',
   },
+  {
+    linkId: 'tab-link-6',
+    panelId: 'tab-panel-6',
+    panelClass: 'tab-6',
+    label: 'Tab label 6',
+    panelContent: 'Disabled tab should not display content.',
+    disabled: true,
+  },
 ];
 
 module.exports = {

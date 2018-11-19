@@ -1,0 +1,29 @@
+@import '../../globals/scss/functions';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vars';
+@import 'functions';
+
+@mixin carbon-content {
+  .#{$prefix}--content {
+    transform: translate3d(0, 0, 0);
+    will-change: margin-left;
+  }
+
+  .#{$prefix}--header ~ .#{$prefix}--content {
+    margin-top: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav ~ .#{$prefix}--content {
+    margin-left: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    margin-left: mini-units(32);
+  }
+}
+
+@include exports('carbon-content') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-content;
+  }
+}

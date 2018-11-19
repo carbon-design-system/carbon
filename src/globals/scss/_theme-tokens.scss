@@ -118,6 +118,7 @@
   $ui-03: $ibm-colors__gray--20 !default !global;
   $ui-04: $ibm-colors__gray--50 !default !global;
   $ui-05: $ibm-colors__gray--100 !default !global;
+  $icon-01: $ibm-colors__gray--100 !default !global;
   $text-01: $ibm-colors__gray--100 !default !global;
   $text-02: $ibm-colors__gray--70 !default !global;
   $text-03: $ibm-colors__gray--50 !default !global;
@@ -125,7 +126,7 @@
   $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
   $support-01: $ibm-colors__red--60 !default !global;
   $support-02: $ibm-colors__green--60 !default !global;
-  $support-03: $ibm-colors__yellow--20 !default !global;
+  $support-03: $ibm-colors__yellow !default !global;
   $support-04: $ibm-colors__blue--70 !default !global;
 
   $active-01: $ibm-colors__gray--30 !default !global;
@@ -221,6 +222,10 @@
   $progress-indicator-stroke-width: 5 !default !global;
   $progress-indicator-line-offset: 0.625rem !default !global;
 
+  //Code Snippet
+  $copy-active: $ibm-colors__gray--30 !default !global;
+  $copy-btn-feedback: $ibm-colors__gray--80 !default !global;
+
   // Radio Button
   $radio-border-width: 1px !default !global;
 
@@ -229,6 +234,12 @@
   $structured-list-text-transform: none !default !global;
 
   // Slider
+
+  //Tab
+  $tab-underline-color: 2px solid $ibm-colors__gray--30 !default !global;
+  $tab-underline-color-hover: 2px solid $ibm-colors__gray--60 !default !global;
+  $tab-text-disabled: $ibm-colors__gray--30 !default !global;
+  $tab-underline-disabled: 2px solid $ibm-colors__gray--10 !default !global;
 
   // Toggle
   $toggle-background-color: $ibm-colors__green--50 !default !global;

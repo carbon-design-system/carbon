@@ -2,9 +2,9 @@
   <div class="{{@root.prefix}}--pagination__left">
     <div class="{{@root.prefix}}--select{{#is version "v2"}} {{@root.prefix}}--select--inline{{/is}}">
       {{#is version "v2"}}
-        <label for="select-id-pagination" class="{{@root.prefix}}--pagination__text">Items per page: </label>
+        <label for="select-id-pagination" id="select-id-pagination-label" class="{{@root.prefix}}--pagination__text">Items per page: </label>
       {{/is}}
-      <select id="select-id-pagination" class="{{@root.prefix}}--select-input" data-items-per-page>
+      <select id="select-id-pagination" aria-label="select number of items per page" class="{{@root.prefix}}--select-input" data-items-per-page>
         {{#each itemsPerPageChoices}}
           <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
         {{/each}}

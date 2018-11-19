@@ -33,14 +33,16 @@
     "node": ">=6.x"
   },
   "dependencies": {
-    "@carbon/colors": "^0.0.1-alpha.0",
     "carbon-icons": "^7.0.7",
     "flatpickr": "4.5.2",
     "lodash.debounce": "^4.0.8",
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@carbon/icons-handlebars": "^0.0.1-alpha.7",
+    "@carbon/icons-handlebars": "^0.0.1-alpha.12",
+    "@carbon/colors": "^0.0.1-alpha.7",
+    "@carbon/layout": "^0.0.1-alpha.7",
+    "@carbon/motion": "^0.0.1-alpha.7",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@frctl/fractal": "^1.1.0",
@@ -148,6 +150,7 @@
     "semantic-release": "^15.5.0",
     "serve-static": "^1.13.0",
     "style-loader": "^0.20.0",
+    "through2": "^3.0.0",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.0",
