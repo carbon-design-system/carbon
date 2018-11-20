@@ -39,6 +39,7 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@carbon/icons-handlebars": "^0.0.1-alpha.13",
     "@carbon/colors": "^0.0.1-alpha.7",
     "@carbon/layout": "^0.0.1-alpha.7",
     "@carbon/motion": "^0.0.1-alpha.7",
@@ -100,6 +101,7 @@
     "gulp-sourcemaps": "~1.6.0",
     "gulp-uglify": "^2.1.2",
     "gulp-util": "~3.0.7",
+    "handlebars": "^4.0.12",
     "handlebars-helpers": "^0.10.0",
     "html-loader": "^0.5.0",
     "husky": "^0.14.3",

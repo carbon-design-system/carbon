@@ -3,15 +3,23 @@
   <li class="{{@root.prefix}}--dropdown-text">
     {{#unless inline}} Dropdown label {{else}}
     <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
-    <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-      <path d="M10 0L5 5 0 0z"></path>
-    </svg>
+    {{#if featureFlags.componentsX}}
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+    {{else}}
+      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+        <path d="M10 0L5 5 0 0z"></path>
+      </svg>
+    {{/if}}
     {{/unless}}
   </li>
   {{#unless inline}}
-  <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-    <path d="M10 0L5 5 0 0z"></path>
-  </svg>
+  {{#if featureFlags.componentsX}}
+    {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+  {{else}}
+    <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+      <path d="M10 0L5 5 0 0z"></path>
+    </svg>
+  {{/if}}
   {{/unless}}
   <li>
     <ul class="{{@root.prefix}}--dropdown-list">
