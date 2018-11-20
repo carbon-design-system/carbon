@@ -127,7 +127,7 @@
   .#{$prefix}--progress-step {
     position: relative;
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1;
     min-width: 7rem;
     transition: $transition--base all $carbon--standard-easing;
@@ -136,65 +136,62 @@
 
   .#{$prefix}--progress-line {
     position: absolute;
-    top: $progress-indicator-line-offset;
-    right: 100%;
     height: 1px;
-    width: calc(100% - 24px);
+    width: rem(128px);
     border: $progress-indicator-bar-width;
-
-    .#{$prefix}--progress-step:first-child & {
-      display: none;
-    }
   }
 
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: $spacing-md;
+    height: $spacing-md;
     border-radius: 50%;
-    margin-bottom: $spacing-xs;
+    margin: $spacing-xs $spacing-xs 0 0;
     fill: $brand-01;
   }
 
   .#{$prefix}--progress-label {
     line-height: 1;
-    width: 75%;
+    max-width: rem(88px);
+    margin: $spacing-xs 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
+  .#{$prefix}--progress-label:hover {
+    color: $brand-01;
+    cursor: pointer;
+    border-bottom: 1px solid $brand-01;
+  }
+
+  //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     circle:first-child {
       stroke: $brand-01;
-      stroke-width: $progress-indicator-stroke-width;
-      fill: transparent;
+      fill: $brand-01;
     }
 
-    .#{$prefix}--progress-label {
-      @include font-smoothing;
-      color: $brand-01;
-      font-weight: 600;
-    }
     .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
   }
 
+  //INCOMPLETE STYLING
   .#{$prefix}--progress-step--incomplete {
     circle {
-      stroke: $ui-04;
-      stroke-width: $progress-indicator-stroke-width;
+      stroke: $ui-05;
+      stroke-width: 2;
       fill: transparent;
     }
 
-    .#{$prefix}--progress-label {
-      color: $text-02;
-    }
-
     .#{$prefix}--progress-line {
-      background-color: $ui-04;
+      background-color: $ui-03;
     }
   }
 
+  //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     circle {
       stroke: $brand-01;
@@ -206,13 +203,30 @@
       fill: $brand-01;
     }
 
-    .#{$prefix}--progress-label {
-      @include font-smoothing;
-      color: $brand-01;
-      font-weight: 600;
-    }
     .#{$prefix}--progress-line {
       background-color: $brand-01;
+    }
+  }
+
+  //DISABLED STYLING
+  .#{$prefix}--progress-step[disabled] {
+    cursor: not-allowed;
+
+    circle {
+      stroke: $disabled;
+      stroke-width: 2;
+      fill: transparent;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label,
+    .#{$prefix}--progress-label:hover {
+      color: $disabled;
+      cursor: not-allowed;
+      border-bottom: none;
+    }
+    .#{$prefix}--progress-line {
+      cursor: not-allowed;
     }
   }
 
