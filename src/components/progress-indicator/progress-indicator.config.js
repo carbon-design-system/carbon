@@ -1,6 +1,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const steps = [
   {
@@ -18,12 +19,14 @@ const steps = [
   {
     state: 'incomplete',
     label: 'Fourth step',
+    disabled: true,
   },
 ];
 
 module.exports = {
   context: {
     prefix,
+    componentsX,
   },
   variants: [
     {
