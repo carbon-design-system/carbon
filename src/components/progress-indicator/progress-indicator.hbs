@@ -1,6 +1,6 @@
 <ul data-progress data-progress-current class="{{@root.prefix}}--progress">
   {{#each steps}}
-    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}}" {{#if disabled}} disabled {{/if}}>
+    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}}" {{#if disabled}} disabled {{/if}} {{#if invalid}} data-invalid {{/if}}>
       {{#is state "complete"}}
         <svg width="16" height="16" viewBox="0 0 16 16">
           <g fill-rule="nonzero">
@@ -18,10 +18,18 @@
         </svg>
       {{/is}}
       {{#is state "incomplete"}}
-        <svg>
-          <circle cx="8" cy="8" r="8"></circle>
-          <!-- <circle {{#if componentsX}} cx="8" cy="8" r="8" {{else}} cx="12" cy="12" r="12" {{/if}}></circle> -->
-        </svg>
+        {{#if invalid}}
+          <svg width="16px" height="16px" viewBox="0 0 16 16">
+            <g id="error--outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M2.75109925,4.16531281 C1.96443363,5.2402665 1.5,6.5658961 1.5,8 C1.5,11.5898509 4.41014913,14.5 8,14.5 C9.4341039,14.5 10.7597335,14.0355664 11.8346872,13.2489008 L2.75109925,4.16531281 Z M4.16531281,2.75109925 L13.2489008,11.8346872 C14.0355664,10.7597335 14.5,9.4341039 14.5,8 C14.5,4.41014913 11.5898509,1.5 8,1.5 C6.5658961,1.5 5.2402665,1.96443363 4.16531281,2.75109925 Z M8,16 C3.581722,16 -8.8817842e-16,12.418278 -8.8817842e-16,8 C-8.8817842e-16,3.581722 3.581722,0 8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 Z" id="error" fill="#e0182d" fill-rule="nonzero"></path>
+            </g>
+          </svg>
+        {{else}}
+          <svg>
+            <circle cx="8" cy="8" r="8"></circle>
+            <!-- <circle {{#if componentsX}} cx="8" cy="8" r="8" {{else}} cx="12" cy="12" r="12" {{/if}}></circle> -->
+          </svg>
+        {{/if}}
       {{/is}}
       <p tabindex="0" class="{{@root.prefix}}--progress-label">{{label}}</p>
       <span class="{{@root.prefix}}--progress-line"></span>
