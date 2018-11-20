@@ -315,6 +315,7 @@
     @include max-breakpoint(bp--sm--major) {
       transition: max-height $transition--expansion $carbon--standard-easing;
       max-height: 600px;
+      padding-top: $spacing-4xs;
     }
   }
 
@@ -346,9 +347,6 @@
     }
     @include max-breakpoint(bp--sm--major) {
       height: rem(40px);
-      &:first-of-type {
-        margin-top: rem(1px);
-      }
     }
   }
 
