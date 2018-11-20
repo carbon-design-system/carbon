@@ -8,7 +8,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
-@include exports('progress-indicator') {
+@mixin progress-indicator {
   .#{$prefix}--progress {
     @include reset;
     @include font-family;
@@ -113,5 +113,121 @@
     @include skeleton;
     height: rem(12px);
     width: rem(40px);
+  }
+}
+
+@mixin progress-indicator--x {
+  .#{$prefix}--progress {
+    @include reset;
+    @include font-family;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--progress-step {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 7rem;
+    transition: $transition--base all $carbon--standard-easing;
+    overflow: visible;
+  }
+
+  .#{$prefix}--progress-line {
+    position: absolute;
+    top: $progress-indicator-line-offset;
+    right: 100%;
+    height: 1px;
+    width: calc(100% - 24px);
+    border: $progress-indicator-bar-width;
+
+    .#{$prefix}--progress-step:first-child & {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    margin-bottom: $spacing-xs;
+    fill: $brand-01;
+  }
+
+  .#{$prefix}--progress-label {
+    line-height: 1;
+    width: 75%;
+  }
+
+  .#{$prefix}--progress-step--current {
+    circle:first-child {
+      stroke: $brand-01;
+      stroke-width: $progress-indicator-stroke-width;
+      fill: transparent;
+    }
+
+    .#{$prefix}--progress-label {
+      @include font-smoothing;
+      color: $brand-01;
+      font-weight: 600;
+    }
+    .#{$prefix}--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--progress-step--incomplete {
+    circle {
+      stroke: $ui-04;
+      stroke-width: $progress-indicator-stroke-width;
+      fill: transparent;
+    }
+
+    .#{$prefix}--progress-label {
+      color: $text-02;
+    }
+
+    .#{$prefix}--progress-line {
+      background-color: $ui-04;
+    }
+  }
+
+  .#{$prefix}--progress-step--complete {
+    circle {
+      stroke: $brand-01;
+      stroke-width: $progress-indicator-stroke-width;
+      fill: transparent;
+    }
+
+    polygon {
+      fill: $brand-01;
+    }
+
+    .#{$prefix}--progress-label {
+      @include font-smoothing;
+      color: $brand-01;
+      font-weight: 600;
+    }
+    .#{$prefix}--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
+  }
+}
+
+@include exports('progress-indicator') {
+  @if feature-flag-enabled('components-x') {
+    @include progress-indicator--x;
+  } @else {
+    @include progress-indicator;
   }
 }
