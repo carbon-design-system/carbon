@@ -9,16 +9,21 @@ const steps = [
     label: 'First step',
   },
   {
-    state: 'current',
+    state: 'incomplete',
     label: 'Second step',
+    invalid: true,
   },
   {
-    state: 'incomplete',
+    state: 'current',
     label: 'Third step',
   },
   {
     state: 'incomplete',
     label: 'Fourth step',
+  },
+  {
+    state: 'incomplete',
+    label: 'Fifth step',
     disabled: true,
   },
 ];
