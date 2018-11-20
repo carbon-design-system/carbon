@@ -6,7 +6,8 @@
 	.st0{fill:none;}
 </style>
 <title>copy</title>
-<path d="M3,9H2V3c0-0.6,0.4-1,1-1h6v1H3V9z"/>
-<path d="M14,6v8H6V6H14 M14,5H6C5.4,5,5,5.4,5,6v8c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V6C15,5.4,14.6,5,14,5z"/>
+<path d="M3,9H2V2c0-0.6,0.4-1,1-1h6v1H3V9z"/>
+<path d="M12.7,6.3l-3-3.1C9.5,3.1,9.3,3,9,3H5C4.5,3,4,3.5,4,4v10.1C4,14.6,4.4,15,5,15H12c0.5,0,1-0.4,1-1V7
+	C13,6.8,12.9,6.5,12.7,6.3z M9,4l3,3H9V4z M5,14V4h3v3c0,0.6,0.4,1,1,1h3v6H5z"/>
 <rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
 </svg>
