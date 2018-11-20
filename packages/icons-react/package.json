@@ -6,14 +6,21 @@
   "module": "es/index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-react",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "es",
     "lib",
     "umd"
   ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib umd"

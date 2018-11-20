@@ -5,7 +5,12 @@
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/import-once",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
   "keywords": [
-    "eyeglass-module"
+    "eyeglass-module",
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
   ],
   "publishConfig": {
     "access": "public"
