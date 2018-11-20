@@ -163,11 +163,15 @@
   .#{$prefix}--progress-label:hover {
     color: $brand-01;
     cursor: pointer;
-    border-bottom: 1px solid $brand-01;
+    box-shadow: 0 1px $brand-01;
   }
 
   .#{$prefix}--progress-label:focus {
     outline: 2px solid $brand-01;
+  }
+
+  .#{$prefix}--progress-label:active {
+    box-shadow: 0 1px $ui-05;
   }
 
   //CURRENT STYLING
@@ -227,8 +231,15 @@
     .#{$prefix}--progress-label:hover {
       color: $disabled;
       cursor: not-allowed;
-      border-bottom: none;
+      box-shadow: none;
     }
+
+    .#{$prefix}--progress-label:focus,
+    .#{$prefix}--progress-label:active {
+      outline: none;
+      box-shadow: none;
+    }
+
     .#{$prefix}--progress-line {
       cursor: not-allowed;
     }
