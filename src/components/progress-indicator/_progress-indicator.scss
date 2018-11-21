@@ -175,6 +175,21 @@
     box-shadow: 0 1px $ui-05;
   }
 
+  .progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+    display: block;
+  }
+
+  .#{$prefix}--progress-step .#{$prefix}--tooltip--definition {
+    margin-left: rem(22px);
+    position: absolute;
+  }
+
+  .#{$prefix}--progress-step .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+    max-width: rem(173px);
+    min-width: rem(128px);
+    margin-top: rem(38px);
+  }
+
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     circle:first-child {
@@ -243,6 +258,10 @@
 
     .#{$prefix}--progress-line {
       cursor: not-allowed;
+    }
+
+    .progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+      display: none;
     }
   }
 
