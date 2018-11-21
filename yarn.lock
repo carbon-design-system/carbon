@@ -23,51 +23,38 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@carbon/colors@^0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.15.tgz#ab6500235a4c4beb9dc947885f04c6b0d160d135"
-  integrity sha512-NIZrzLerSnbE5nKPW16tDyo/SvgjTv08hbgJ57Txg03ZfNort6nIOeEPaXcs7ByLI+/oandgGYqLj3pZNC1nMw==
+"@carbon/colors@^0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.16.tgz#31a183ed9a7bde293e3d3db89897b27d42dc1bc7"
+  integrity sha512-7i2Oes8UB6efnElkT4ArLlGkMBnWJckVIzF9EidkNQ+N86/QTkRGlRedKI5Az9mrw6pEY6q6ncgrdnNYcTxOpw==
 
-"@carbon/icon-helpers@0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.15.tgz#380aa474905eef719481b6fb972e3ae51e84d1b9"
-  integrity sha512-l9EPExsJu19IPPkY+/9JtJb5J9DvgMghp/k0lbvrXtBna20ZrMSNsVvuedc/u0f2eM0uXv5q4xWzI0SqLeWo0w==
+"@carbon/icon-helpers@0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.16.tgz#4b3800a2885761c9d2918a74b687bf4bfd9d191a"
+  integrity sha512-ACaJpEnx/8vvqlnWX9QMotAdbrmJWSv/LmVd89ptJCBq/jzM28L0hp2tClVohOJ/ZMSBQtQHPhOl5qzlNIln5A==
 
-"@carbon/icons-handlebars@^0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.15.tgz#aac5f4424365dc319e8a707e74c70aa6becaa7fa"
-  integrity sha512-tmZd2FYsxlCxTw+63uKNv+g5A6RlgYc1zgIfYDEKkKnnSg0KfEneraWnFGzG9zo5mlTKnVeVbL5l9GzFpEoXEg==
+"@carbon/icons-handlebars@^0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.16.tgz#089308c1d55ccc8f47961f15d8ea67230c9e2de9"
+  integrity sha512-lW7cuSsyypDphe8su1p6Rwc3TET3qFZ1RYIHFPdt5AR18nzNYCHOuw9yottfEk5KYOOwfczois69OiZAw8zptg==
   dependencies:
-    "@carbon/icon-helpers" "0.0.1-alpha.15"
-    "@carbon/icons" "0.0.1-alpha.15"
+    "@carbon/icon-helpers" "0.0.1-alpha.16"
+    "@carbon/icons" "0.0.1-alpha.16"
 
-"@carbon/icons@0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.15.tgz#991ff7e03ffc0ef84d90b381437c43e1491d4ae1"
-  integrity sha512-Z48DXYO6E+2KevwI2EKW7o94tI7M+scLPh6kW8rKRWh/zEVf9eaY1sCuyz+PsfxKo3vRRtQElhm3ZYHel6eSJA==
+"@carbon/icons@0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.16.tgz#52b12d7d8f85f589615a3153aa68a8beed0e1e19"
+  integrity sha512-vRVYwi+UVt2fP8GYHy2wKKp+XbQKxTiIJ7bjW9pO49rFtIY3bkXOXPaQ0nVZsIN5mWtid1Wl+jHODyjDUD7SmQ==
 
-"@carbon/import-once@0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-0.0.1-alpha.15.tgz#6fdbb7b61fbce523a136391923dc3c40e70f6504"
-  integrity sha512-eRfAi0vvEwo1hTFuTZ5QB+YwMs848SiJ+rk9dczaPNcizCRUcMP7DujopQalgS5F0W3V5pDVM15VRe7VkNXUbA==
+"@carbon/layout@^0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.16.tgz#e31bd09843b1b7dcb8ffcb56c2567fcbdfa78c0a"
+  integrity sha512-URqff84tEEztQj51AIgBF8MjR2zwE9bKTZzfRy8a//OAWumSWYDq1owEx8+tE5O3gLh8QjQzAarlsKv6BDtfCg==
 
-"@carbon/layout@0.0.1-alpha.15", "@carbon/layout@^0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.15.tgz#abec035325826adda7a162da52386546c0106ff6"
-  integrity sha512-1YiRZsQnIWK53A1HRHr3Y/UXGerTN+1OyRv5KnZwbWvTH/Nu96T3+BxZJbrjgF9oLqL8e0yWjSZ4Arp6nSC+lA==
-
-"@carbon/motion@^0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.15.tgz#4d17291b295bc174b85a0b3ae74997945d1c5c50"
-  integrity sha512-roqJORUZPXYzuNzEvIszCInF+UFF4TKrA4z9kFSz8JBwZ+jIyUzJBd30dAb+LDs2KjF4XwUru+sHk/xQsaijRw==
-
-"@carbon/type@^0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@carbon/type/-/type-0.0.1-alpha.15.tgz#47d2a786127119992d056a95712a73fca96625c6"
-  integrity sha512-66IV8GB2ecnI3Pyceh5LWVnhpyGS4MO/ufj+HH8qbpND1NFjRJ5hTEksbgyshtObmKQPDhayXF7/+dj47dD+Ug==
-  dependencies:
-    "@carbon/import-once" "0.0.1-alpha.15"
-    "@carbon/layout" "0.0.1-alpha.15"
+"@carbon/motion@^0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.16.tgz#e7a3ba19c34ce7bc589cf5804a8aed4cdb6a94c6"
+  integrity sha512-gggWpgksJTjli0c5ZLaNcAEKDX/cAE8VHm32dL6Bb0z6w7jo/YyhE/bt7868t5H2ypsyqJ5Iivjk8ANrYjXh2A==
 
 "@commitlint/cli@^7.0.0":
   version "7.1.2"
