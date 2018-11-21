@@ -5,13 +5,13 @@ import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
 import trackBlur from '../../globals/js/mixins/track-blur';
+import eventMatches from '../../globals/js/misc/event-matches';
 
 const forEach = Array.prototype.forEach;
 
 export default class HeaderSubmenu extends mixin(createComponent, initComponentBySearch, handles, trackBlur) {
   constructor(element, options) {
     super(element, options);
-    this.manage(on(this.element.ownerDocument, 'click', this._handleClick));
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
   /**
@@ -22,21 +22,70 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   static components = new WeakMap();
 
   /**
-   * Opens submenu on user click.
-   * @param {Event} event The event triggering this method.
+   * Enum for header submenu actions.
+   * @readonly
+   * @enum {string}
    */
-  _handleClick = event => {
-    const trigger = this.element.querySelector(this.options.selectorTrigger);
-    if (!trigger) {
-      return;
-    }
-    const isOfSelf = this.element.contains(event.target);
-    const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
-    const shouldBeExpanded = isOfSelf && !expanded;
-    if (Boolean(expanded) !== Boolean(shouldBeExpanded)) {
-      trigger.setAttribute(this.options.attribExpanded, shouldBeExpanded);
-    }
+  static actions = {
+    CLOSE_SUBMENU: 'CLOSE_SUBMENU',
+    OPEN_SUBMENU: 'OPEN_SUBMENU',
+    TOGGLE_SUBMENU: 'TOGGLE_SUBMENU',
+    DELEGATE_TO_FLYOUT_MENU: 'DELEGATE_TO_FLYOUT_MENU',
+  };
 
+  /**
+   * @returns {actions | null}
+   */
+  _getAction = event => {
+    const isFlyoutMenu = eventMatches(event, this.options.selectorFlyoutMenu);
+    if (isFlyoutMenu) {
+      return this.constructor.actions.DELEGATE_TO_FLYOUT_MENU;
+    }
+    switch (event.type) {
+      case 'keydown':
+        return {
+          32: this.constructor.actions.TOGGLE_SUBMENU, // space bar
+          13: this.constructor.actions.TOGGLE_SUBMENU, // enter
+          27: this.constructor.actions.CLOSE_SUBMENU, // esc
+          // possible arrow keys
+        }[event.which];
+      case 'click': {
+        const isOfSelf = this.element.contains(event.target);
+        return isOfSelf ? this.constructor.actions.TOGGLE_SUBMENU : this.constructor.actions.CLOSE_SUBMENU;
+      }
+      case 'focus':
+        return this.constructor.actions.OPEN_SUBMENU;
+
+      default:
+        return null;
+    }
+  };
+
+  /**
+   * @param {action} action
+   * @returns {boolean} new header submenu state
+   */
+  _getNewState = action => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    const isExpanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
+    switch (action) {
+      case this.constructor.actions.CLOSE_SUBMENU:
+        return false;
+      case this.constructor.actions.OPEN_SUBMENU:
+        return true;
+      case this.constructor.actions.TOGGLE_SUBMENU:
+        return !isExpanded;
+      default:
+        return isExpanded;
+    }
+  };
+
+  /**
+   * @returns {void}
+   */
+  _setState = shouldBeExpanded => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    trigger.setAttribute(this.options.attribExpanded, shouldBeExpanded);
     forEach.call(this.element.querySelectorAll(this.options.selectorItem), item => {
       item.tabIndex = shouldBeExpanded ? 0 : -1;
     });
@@ -96,36 +145,43 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     if (!trigger) {
       return;
     }
-    const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
-    if (expanded) {
-      const direction = {
-        38: this.constructor.NAVIGATE.BACKWARD,
-        40: this.constructor.NAVIGATE.FORWARD,
-      }[event.which];
-      switch (event.which) {
-        case 38: // up arrow
-        case 40: // down arrow
-          this.navigate(direction);
-          event.preventDefault(); // Prevents up/down keys from scrolling container
-          break;
-        case 27: // Esc
-          this.handleBlur();
-          break;
-        case 32: // space bar
-          this._handleClick(event);
-          break;
-        default:
-          break;
-      }
-      return;
+    const action = this._getAction(event);
+
+    if (event.which === 32) {
+      event.preventDefault();
     }
-    switch (event.which) {
-      case 32: // space bar
-      case 40: // down arrow
-        this._handleClick(event);
+
+    switch (action) {
+      case this.constructor.actions.DELEGATE_TO_FLYOUT_MENU:
+        // handleFlyoutMenu
         break;
-      default:
+      case this.constructor.actions.OPEN_SUBMENU:
+      case this.constructor.actions.CLOSE_SUBMENU:
+      case this.constructor.actions.TOGGLE_SUBMENU: {
+        const newState = this._getNewState(action);
+        this._setState(newState);
         break;
+      }
+
+      default: {
+        const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
+        if (expanded) {
+          const direction = {
+            38: this.constructor.NAVIGATE.BACKWARD,
+            40: this.constructor.NAVIGATE.FORWARD,
+          }[event.which];
+          switch (event.which) {
+            case 38: // up arrow
+            case 40: // down arrow
+              this.navigate(direction);
+              event.preventDefault(); // Prevents up/down keys from scrolling container
+              break;
+            default:
+              break;
+          }
+        }
+        break;
+      }
     }
   };
 
@@ -153,7 +209,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   /**
    * Enum for navigating backward/forward.
    * @readonly
-   * @member Dropdown.NAVIGATE
+   * @member HeaderSubmenu.NAVIGATE
    * @type {Object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
