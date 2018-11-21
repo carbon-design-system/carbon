@@ -19,8 +19,9 @@
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
     "examples": "yarn build && node tasks/examples.js",
-    "format": "toolkit format",
-    "format:diff": "toolkit format:diff",
+    "format": "prettier --write \"**/*.{css,js,md,scss,ts}\"",
+    "format:diff": "prettier --list-different \"**/*.{css,js,md,scss,ts}\"",
+    "format:staged": "prettier --write",
     "lint": "toolkit lint .",
     "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
     "sync": "node tasks/sync.js",
@@ -31,7 +32,6 @@
     "@carbon/cli-plugin-eslint": "^0.0.23",
     "@carbon/cli-plugin-github-files": "^0.0.23",
     "@carbon/cli-plugin-jest": "^0.0.23",
-    "@carbon/cli-plugin-prettier": "^0.0.23",
     "@carbon/cli-plugin-stylelint": "^0.0.23",
     "@carbon/toolkit": "^0.0.23",
     "@commitlint/cli": "^7.2.1",
@@ -49,11 +49,11 @@
     "lerna": "^2.11.0",
     "lint-staged": "^7.3.0",
     "node-sass": "^4.10.0",
+    "prettier": "^1.15.2",
     "rimraf": "^2.6.2"
   },
   "toolkit": {
     "plugins": [
-      "@carbon/cli-plugin-prettier",
       "@carbon/cli-plugin-eslint",
       "@carbon/cli-plugin-stylelint",
       [
@@ -83,15 +83,15 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn format",
+      "yarn format:staged",
       "git add"
     ],
     "*.{scss,css}": [
-      "yarn format",
+      "yarn format:staged",
       "git add"
     ],
     "*.md": [
-      "yarn format",
+      "yarn format:staged",
       "git add"
     ]
   },

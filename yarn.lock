@@ -1470,16 +1470,6 @@
     promise "^8.0.1"
     whatwg-fetch "^2.0.4"
 
-"@carbon/cli-plugin-prettier@^0.0.23":
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-prettier/-/cli-plugin-prettier-0.0.23.tgz#2dfd22c7300617cb318225d5b427c5b915eed621"
-  integrity sha512-TGLo6tAoy7TkScn/F1jIk2UU9y+Kt0Z4Qu+RJvBuhGYrxPbkWweB9DUc7lIY3r/6XYEe6mIKCbgIc2H12y+IMg==
-  dependencies:
-    "@carbon/cli-tools" "0.0.23"
-    chalk "^2.4.1"
-    npm-which "^3.0.1"
-    prettier "^1.14.2"
-
 "@carbon/cli-plugin-stylelint@^0.0.23":
   version "0.0.23"
   resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-stylelint/-/cli-plugin-stylelint-0.0.23.tgz#82ebb20750d436ab301a1f6d68027b1788b8f54c"
@@ -7496,15 +7486,15 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier@^1.14.2:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
-  integrity sha512-McHPg0n1pIke+A/4VcaS2en+pTNjy4xF+Uuq86u/5dyDO59/TtFZtQ708QIRkEZ3qwKz3GVkVa6mpxK/CpB8Rg==
-
 prettier@^1.14.3:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.3.tgz#90238dd4c0684b7edce5f83b0fb7328e48bd0895"
   integrity sha512-qZDVnCrnpsRJJq5nSsiHCE3BYMED2OtsI+cmzIzF1QIfqm5ALf8tEJcO27zV1gKNKRPdhjO0dNWnrzssDQ1tFg==
+
+prettier@^1.15.2:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.2.tgz#d31abe22afa4351efa14c7f8b94b58bb7452205e"
+  integrity sha512-YgPLFFA0CdKL4Eg2IHtUSjzj/BWgszDHiNQAe0VAIBse34148whfdzLagRL+QiKS+YfK5ftB6X4v/MBw8yCoug==
 
 pretty-format@^23.5.0:
   version "23.5.0"
