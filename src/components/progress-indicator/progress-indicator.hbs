@@ -11,36 +11,46 @@
       {{/is}}
       {{#is state "current"}}
         <svg>
-          <circle cx="8" cy="8" r="8"></circle>
-          <circle cx="8" cy="8" r="4"></circle>
-          <!-- <circle {{#if componentsX}} cx="8" cy="8" r="8" {{else}} cx="12" cy="12" r="12" {{/if}}></circle> -->
-          <!-- <circle {{#if componentsX}} cx="8" cy="8" r="4" {{else}} cx="12" cy="12" r="6" {{/if}}></circle> -->
+          {{#if ../componentsX}}
+            <circle cx="8" cy="8" r="8"></circle>
+            <circle cx="8" cy="8" r="4"></circle>
+          {{else}}
+            <circle cx="12" cy="12" r="12"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+          {{/if}}
         </svg>
       {{/is}}
       {{#is state "incomplete"}}
-        {{#if invalid}}
-          <svg width="16" height="16" viewBox="0 0 16 16" >
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <rect x="7.5" y="4" width="1" height="5" fill="#e0182d"/>
-              <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill="#e0182d"/>
-              <path d="M8,10.2c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8c0.4,0,0.8-0.3,0.8-0.8S8.4,10.2,8,10.2z" fill="#e0182d"/>
-              <rect class="st0" width="16" height="16"/>
-            </g>
-          </svg>
+        {{#if ../componentsX}}
+          {{#if invalid}}
+            <svg width="16" height="16" viewBox="0 0 16 16" >
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <rect x="7.5" y="4" width="1" height="5" fill="#e0182d"/>
+                <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill="#e0182d"/>
+                <path d="M8,10.2c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8c0.4,0,0.8-0.3,0.8-0.8S8.4,10.2,8,10.2z" fill="#e0182d"/>
+                <rect class="st0" width="16" height="16"/>
+              </g>
+            </svg>
+          {{else}}
+            <svg>
+              <circle  cx="8" cy="8" r="8"></circle>
+            </svg>
+          {{/if}}
         {{else}}
           <svg>
-            <circle cx="8" cy="8" r="8"></circle>
-            <!-- <circle {{#if componentsX}} cx="8" cy="8" r="8" {{else}} cx="12" cy="12" r="12" {{/if}}></circle> -->
+            <circle cx="12" cy="12" r="12"></circle>
           </svg>
         {{/if}}
       {{/is}}
       <p tabindex="0" class="{{@root.prefix}}--progress-label progress-label-overflow" aria-describedby="label-tooltip">{{label}}</p>
-      <div class="{{@root.prefix}}--tooltip--definition">
-        <div id="label-tooltip" role="tooltip" class="{{@root.prefix}}--tooltip--definition__bottom">
-          <span class="{{@root.prefix}}--tooltip__caret"></span>
-          <p>{{label}}</p>
+      {{#if ../componentsX}}
+        <div class="{{@root.prefix}}--tooltip--definition">
+          <div id="label-tooltip" role="tooltip" class="{{@root.prefix}}--tooltip--definition__bottom">
+            <span class="{{@root.prefix}}--tooltip__caret"></span>
+            <p>{{label}}</p>
+          </div>
         </div>
-      </div>
+      {{/if}}
       <span class="{{@root.prefix}}--progress-line"></span>
     </li>
   {{/each}}
