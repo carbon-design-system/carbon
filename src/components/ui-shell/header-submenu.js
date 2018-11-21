@@ -29,7 +29,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   static actions = {
     CLOSE_SUBMENU: 'CLOSE_SUBMENU',
     OPEN_SUBMENU: 'OPEN_SUBMENU',
-    TOGGLE_SUBMENU: 'TOGGLE_SUBMENU',
+    TOGGLE_SUBMENU_WITH_FOCUS: 'TOGGLE_SUBMENU_WITH_FOCUS',
     DELEGATE_TO_FLYOUT_MENU: 'DELEGATE_TO_FLYOUT_MENU',
   };
 
@@ -44,15 +44,13 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     switch (event.type) {
       case 'keydown':
         return {
-          32: this.constructor.actions.TOGGLE_SUBMENU, // space bar
-          13: this.constructor.actions.TOGGLE_SUBMENU, // enter
+          32: this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS, // space bar
+          13: this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS, // enter
           27: this.constructor.actions.CLOSE_SUBMENU, // esc
           // possible arrow keys
         }[event.which];
-      case 'click': {
-        const isOfSelf = this.element.contains(event.target);
-        return isOfSelf ? this.constructor.actions.TOGGLE_SUBMENU : this.constructor.actions.CLOSE_SUBMENU;
-      }
+      case 'click':
+        return eventMatches(event.target, this.options.selectorItem) ? this.constructor.actions.CLOSE_SUBMENU : null;
       case 'focus':
         return this.constructor.actions.OPEN_SUBMENU;
 
@@ -73,7 +71,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
         return false;
       case this.constructor.actions.OPEN_SUBMENU:
         return true;
-      case this.constructor.actions.TOGGLE_SUBMENU:
+      case this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS:
         return !isExpanded;
       default:
         return isExpanded;
@@ -83,12 +81,16 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   /**
    * @returns {void}
    */
-  _setState = shouldBeExpanded => {
+  _setState = ({ shouldBeExpanded, shouldFocusOnOpen }) => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     trigger.setAttribute(this.options.attribExpanded, shouldBeExpanded);
     forEach.call(this.element.querySelectorAll(this.options.selectorItem), item => {
       item.tabIndex = shouldBeExpanded ? 0 : -1;
     });
+    // focus first submenu item
+    if (shouldBeExpanded && shouldFocusOnOpen) {
+      this.element.querySelector(this.options.selectorItem).focus();
+    }
   };
 
   /**
@@ -156,10 +158,15 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
         // handleFlyoutMenu
         break;
       case this.constructor.actions.OPEN_SUBMENU:
-      case this.constructor.actions.CLOSE_SUBMENU:
-      case this.constructor.actions.TOGGLE_SUBMENU: {
+      case this.constructor.actions.CLOSE_SUBMENU: {
         const newState = this._getNewState(action);
-        this._setState(newState);
+        this._setState({ shouldBeExpanded: newState });
+        break;
+      }
+
+      case this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS: {
+        const newState = this._getNewState(action);
+        this._setState({ shouldBeExpanded: newState, shouldFocusOnOpen: true });
         break;
       }
 
