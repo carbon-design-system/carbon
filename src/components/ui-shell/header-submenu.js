@@ -12,6 +12,8 @@ const forEach = Array.prototype.forEach;
 export default class HeaderSubmenu extends mixin(createComponent, initComponentBySearch, handles, trackBlur) {
   constructor(element, options) {
     super(element, options);
+    this.manage(on(this.element, 'mouseenter', this._handleHover));
+    this.manage(on(this.element, 'mouseleave', this._handleHover));
     this.manage(on(this.element, 'click', this._handleClick));
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
@@ -53,8 +55,10 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
       case 'click':
         return eventMatches(event, this.options.selectorItem) ? this.constructor.actions.CLOSE_SUBMENU : null;
       case 'focus':
+      case 'mouseenter':
         return this.constructor.actions.OPEN_SUBMENU;
-
+      case 'mouseleave':
+        return this.constructor.actions.CLOSE_SUBMENU;
       default:
         return null;
     }
@@ -129,6 +133,18 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
         current.focus();
         break;
       }
+    }
+  };
+
+  _handleHover = event => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    if (!trigger) {
+      return;
+    }
+    const action = this._getAction(event);
+    if (action) {
+      const shouldBeExpanded = this._getNewState(action);
+      this._setState({ shouldBeExpanded });
     }
   };
 
