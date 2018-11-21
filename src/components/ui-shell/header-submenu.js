@@ -61,6 +61,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   };
 
   /**
+   * Determines whether or not the submenu should be expanded or collapsed
    * @param {action} action
    * @returns {boolean} new header submenu state
    */
@@ -80,6 +81,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   };
 
   /**
+   * Expands or collapses a submenu
    * @returns {void}
    */
   _setState = ({ shouldBeExpanded, shouldFocusOnOpen }) => {
@@ -95,6 +97,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   };
 
   /**
+   * Provides the element to move focus from
    * @returns {Element} Currently highlighted element.
    */
   getCurrentNavigation = () => {
