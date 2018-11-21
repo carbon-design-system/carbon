@@ -31,7 +31,6 @@ const steps = [
 module.exports = {
   context: {
     prefix,
-    componentsX,
   },
   variants: [
     {
@@ -39,6 +38,7 @@ module.exports = {
       label: 'Progress Indicator',
       context: {
         steps,
+        componentsX,
       },
     },
   ],
