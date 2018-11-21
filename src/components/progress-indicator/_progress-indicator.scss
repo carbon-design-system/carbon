@@ -175,7 +175,7 @@
     box-shadow: 0 1px $ui-05;
   }
 
-  .progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+  .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
     display: block;
   }
 
@@ -187,7 +187,15 @@
   .#{$prefix}--progress-step .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
     max-width: rem(173px);
     min-width: rem(128px);
-    margin-top: rem(38px);
+    margin-top: rem(40px);
+  }
+
+  .#{$prefix}--progress-optional {
+    position: absolute;
+    margin-left: $spacing-lg;
+    margin-top: rem(26px);
+    @include font-size('12');
+    color: $text-02;
   }
 
   //CURRENT STYLING
