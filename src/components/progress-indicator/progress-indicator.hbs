@@ -19,9 +19,12 @@
       {{/is}}
       {{#is state "incomplete"}}
         {{#if invalid}}
-          <svg width="16px" height="16px" viewBox="0 0 16 16">
-            <g id="error--outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path d="M2.75109925,4.16531281 C1.96443363,5.2402665 1.5,6.5658961 1.5,8 C1.5,11.5898509 4.41014913,14.5 8,14.5 C9.4341039,14.5 10.7597335,14.0355664 11.8346872,13.2489008 L2.75109925,4.16531281 Z M4.16531281,2.75109925 L13.2489008,11.8346872 C14.0355664,10.7597335 14.5,9.4341039 14.5,8 C14.5,4.41014913 11.5898509,1.5 8,1.5 C6.5658961,1.5 5.2402665,1.96443363 4.16531281,2.75109925 Z M8,16 C3.581722,16 -8.8817842e-16,12.418278 -8.8817842e-16,8 C-8.8817842e-16,3.581722 3.581722,0 8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 Z" id="error" fill="#e0182d" fill-rule="nonzero"></path>
+          <svg width="16" height="16" viewBox="0 0 16 16" >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <rect x="7.5" y="4" width="1" height="5" fill="#e0182d"/>
+              <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill="#e0182d"/>
+              <path d="M8,10.2c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8c0.4,0,0.8-0.3,0.8-0.8S8.4,10.2,8,10.2z" fill="#e0182d"/>
+              <rect class="st0" width="16" height="16"/>
             </g>
           </svg>
         {{else}}
@@ -31,7 +34,13 @@
           </svg>
         {{/if}}
       {{/is}}
-      <p tabindex="0" class="{{@root.prefix}}--progress-label">{{label}}</p>
+      <p tabindex="0" class="{{@root.prefix}}--progress-label progress-label-overflow" aria-describedby="label-tooltip">{{label}}</p>
+      <div class="{{@root.prefix}}--tooltip--definition">
+        <div id="label-tooltip" role="tooltip" class="{{@root.prefix}}--tooltip--definition__bottom">
+          <span class="{{@root.prefix}}--tooltip__caret"></span>
+          <p>{{label}}</p>
+        </div>
+      </div>
       <span class="{{@root.prefix}}--progress-line"></span>
     </li>
   {{/each}}
