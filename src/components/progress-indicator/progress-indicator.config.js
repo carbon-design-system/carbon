@@ -7,6 +7,8 @@ const steps = [
   {
     state: 'complete',
     label: 'First step',
+    optional: true,
+    optionalLabel: 'Optional',
   },
   {
     state: 'current',
