@@ -28,6 +28,24 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.7.tgz#2fc1f9716c9e3e770d577d7760bf83398ab6472b"
   integrity sha512-syodOso1Vy8k3lPXvB491Vyd7wgCB1Xn2DP7IQ1kYoT2eXj3+zhVYmzEWqyMELIOsOJVbqbb1y1pJHETxvM+KA==
 
+"@carbon/icon-helpers@0.0.1-alpha.13":
+  version "0.0.1-alpha.13"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.13.tgz#602ec704941f5637b08e0c404781cfe4cbb05e9b"
+  integrity sha512-U+EnFT/rkn/GAGYvhA6vJek9tCd/z8IPGYGLMu69aEJuXmLaec1AywXLCbVXhByBaZzJV/9+mjVRPrHkLHoaNg==
+
+"@carbon/icons-handlebars@^0.0.1-alpha.13":
+  version "0.0.1-alpha.13"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.13.tgz#abe3c51ccb330e7497524d0a9355219c59f89eba"
+  integrity sha512-LkK1PfKL1iWJnjBP3hVvK53J8zI/Q9dOqrDtZFJXAgBbLCiDvdQOTZdF4wKgve3+01MnUG7LkYPuWHrCe3CVQA==
+  dependencies:
+    "@carbon/icon-helpers" "0.0.1-alpha.13"
+    "@carbon/icons" "0.0.1-alpha.13"
+
+"@carbon/icons@0.0.1-alpha.13":
+  version "0.0.1-alpha.13"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.13.tgz#8c89e944236bbcb88e1061a2bd98c2b669dc7028"
+  integrity sha512-dQaRua4IZdP2z0EQiKPXSz3rS4FGHAdoV3E8L0zN8sEyLqQ+KRsNUS/c/zVqDd/S9J1X+WRDZpWAh0JhyGe1+w==
+
 "@carbon/layout@^0.0.1-alpha.7":
   version "0.0.1-alpha.7"
   resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.7.tgz#e53008c77dde16a96910e6b6bd6d9fd22ad02240"
@@ -6172,7 +6190,7 @@ handlebars-utils@^1.0.2, handlebars-utils@^1.0.4, handlebars-utils@^1.0.6:
     kind-of "^6.0.0"
     typeof-article "^0.1.1"
 
-handlebars@^4.0.1, handlebars@^4.0.11, handlebars@^4.0.2, handlebars@^4.0.3, handlebars@^4.0.5:
+handlebars@^4.0.1, handlebars@^4.0.11, handlebars@^4.0.12, handlebars@^4.0.2, handlebars@^4.0.3, handlebars@^4.0.5:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.12.tgz#2c15c8a96d46da5e266700518ba8cb8d919d5bc5"
   integrity sha512-RhmTekP+FZL+XNhwS1Wf+bTTZpdLougwt5pcgA1tuz6Jcx0fpH/7z0qd71RKnZHBCxIRBHfBOnio4gViPemNzA==
