@@ -1,0 +1,174 @@
+@import '../../globals/scss/functions';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import 'theme';
+@import 'functions';
+
+@mixin product-switcher {
+  //--------------------------------------------------------------------------
+  // Global Panel
+  //--------------------------------------------------------------------------
+  .#{$prefix}--panel--overlay {
+    position: fixed;
+    top: mini-units(6);
+    right: 0;
+    bottom: 0;
+    width: mini-units(32);
+    will-change: transform;
+    transform: translate3d(100%, 0, 0);
+    padding: 1rem 0;
+    overflow-y: auto;
+    z-index: 1000;
+    background-color: $shell-header-bg-02;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .#{$prefix}--panel--expanded {
+    box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Search
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-switcher__search {
+    padding: 0 mini-units(2);
+    margin-bottom: mini-units(3);
+  }
+
+  .#{$prefix}--search--shell input {
+    background-color: $shell-header-bg-05;
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Buttons
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-switcher__subheader,
+  .#{$prefix}--product-switcher__all-btn {
+    @include typescale('omega');
+    padding: mini-units(1);
+    color: $shell-header-text-03;
+  }
+
+  .#{$prefix}--product-switcher__subheader {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--product-switcher__all-btn {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--product-switcher__all-btn,
+  .#{$prefix}--product-switcher__back-btn {
+    display: inline-block;
+    background: transparent;
+    width: 100%;
+    border: none;
+    color: $shell-header-link;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .#{$prefix}--product-switcher__all-btn:hover,
+  .#{$prefix}--product-switcher__back-btn:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--product-switcher__all-btn:focus,
+  .#{$prefix}--product-switcher__back-btn:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__back-btn {
+    display: flex;
+    align-items: center;
+    @include typescale('omega');
+    padding: mini-units(1) mini-units(2);
+  }
+
+  .#{$prefix}--product-switcher__back-arrow {
+    fill: $shell-header-link;
+    margin-right: mini-units(2);
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Product List
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-list__item {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--product-list__item:hover {
+    background: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--product-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: mini-units(1) mini-units(2);
+    text-decoration: none;
+  }
+
+  .#{$prefix}--product-link:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__icon {
+    margin-right: mini-units(2);
+  }
+
+  .#{$prefix}--product-link__name {
+    @include typescale('zeta');
+    margin-left: 0.25rem;
+    font-weight: 400;
+    color: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: mini-units(5);
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu > svg {
+    fill: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover {
+    background: $shell-header-bg-04;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover > svg {
+    fill: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:focus {
+    display: flex;
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu-options__option:hover {
+    background: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
+    display: flex;
+  }
+}
+
+@include exports('product-switcher') {
+  @if feature-flag-enabled('ui-shell') {
+    @include product-switcher;
+  }
+}

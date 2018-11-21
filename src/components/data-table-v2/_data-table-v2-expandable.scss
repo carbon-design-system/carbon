@@ -1,6 +1,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 
 @include exports('data-table-v2-expandable') {
   tr.#{$prefix}--expandable-row-v2 {
@@ -66,6 +67,10 @@
     > td:last-of-type {
       border-right: 1px solid $brand-01;
     }
+  }
+
+  .#{$prefix}--table-expand-v2 {
+    width: 2.5rem;
   }
 
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {

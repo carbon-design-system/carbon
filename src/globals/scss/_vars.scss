@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'spacing';
+@import 'theme-tokens';
 
 $prefix: 'bx' !default;
 
@@ -19,98 +20,3 @@ $bx--standard-easing: $carbon--standard-easing;
 
 $transition--base: 250ms;
 $transition--expansion: 300ms;
-
-// Color Theme Variables
-$brand-01: $color__blue-51 !default;
-$brand-02: $color__blue-40 !default;
-$brand-03: $color__teal-20 !default;
-$inverse-01: $color__white !default;
-$inverse-02: #272d33 !default;
-$ui-01: $color__white !default;
-$ui-02: #f4f7fb !default;
-$ui-03: $color__gray-1 !default;
-$ui-04: #8897a2 !default;
-$ui-05: $color__navy-gray-6 !default;
-$text-01: $color__blue-90 !default;
-$text-02: $color__navy-gray-6 !default;
-$text-03: #cdd1d4 !default;
-$field-01: #f4f7fb !default;
-$field-02: $color__white !default;
-$support-01: #e0182d !default;
-$support-02: $color__green-40 !default;
-$support-03: $color__yellow-30 !default;
-$support-04: $color__blue-30 !default;
-$nav-01: $color__navy-gray-1 !default;
-$nav-02: $color__blue-90 !default;
-$nav-03: $color__purple-30 !default;
-$nav-04: $color__purple-60 !default;
-$nav-05: $color__teal-40 !default;
-$nav-06: $color__teal-50 !default;
-$nav-07: $color__blue-30 !default;
-$nav-08: $color__blue-51 !default;
-
-$hover-primary: darken($brand-01, 10%) !default;
-$hover-primary-text: darken($brand-01, 15%) !default;
-$hover-danger: darken($support-01, 10%) !default;
-$hover-secondary: $brand-01 !default;
-$hover-row: rgba($brand-02, 0.1) !default;
-
-// Global
-$input-border: 1px solid transparent !default;
-$input-label-weight: 600 !default;
-
-// Button Theme Variables
-$button-font-weight: 600 !default;
-$button-font-size: 0.875rem !default;
-$button-border-radius: 0 !default;
-$button-height: 40px !default;
-$button-padding: 0 $spacing-md !default;
-$button-padding-sm: 0 $spacing-xs !default;
-$button-border-width: 2px !default;
-
-// Accordion (Reverse)
-$accordion-flex-direction: row !default;
-$accordion-justify-content: flex-start !default;
-$accordion-arrow-margin: 0 0 0 $spacing-2xs !default;
-$accordion-title-margin: 0 0 0 $spacing-md !default;
-$accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default;
-
-// Card
-$card-text-align: center !default;
-$card-flex-align: center !default;
-
-// Checkbox
-$checkbox-border-width: 2px !default;
-
-// Code Snippet
-$snippet-background-color: $ui-01 !default;
-$snippet-border-color: $ui-03 !default;
-
-// Content Switcher
-$content-switcher-border-radius: 8px !default;
-$content-switcher-option-border: 1px solid $brand-01 !default;
-
-// Data Table
-$data-table-heading-transform: uppercase !default;
-$data-table-heading-border-bottom: 1px solid $brand-01 !default;
-$data-table-row-height: 2rem !default;
-
-// Modal
-$modal-border-top: $brand-01 4px solid !default;
-$modal-footer-background-color: $ui-02 !default;
-
-// Progress Indicator
-$progress-indicator-bar-width: 1px inset transparent !default;
-$progress-indicator-stroke-width: 5 !default;
-$progress-indicator-line-offset: 0.625rem !default;
-
-// Radio Button
-$radio-border-width: 2px !default;
-
-// Structured Theme Variables
-$structured-list-padding: 2rem !default;
-$structured-list-text-transform: none !default;
-
-// Skeleton Loading
-
-$skeleton: rgba($color__blue-51, 0.1) !default; //old $field-01

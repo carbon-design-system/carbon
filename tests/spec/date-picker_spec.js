@@ -52,15 +52,22 @@ describe('Test date picker', function() {
     });
 
     it('Should hide the calendar on click outside the date picker', function() {
-      datePicker.calendar.close();
-      container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      // Avoid using open() API as we force it open during the event loop where open() is called
+      datePicker.calendar.calendarContainer.classList.add('open');
+      datePicker.calendar.isOpen = true;
+      container.dispatchEvent(Object.assign(new CustomEvent('mousedown', { bubbles: true }), { which: 1 }));
       expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(false);
     });
 
     it('Should update the selected date in the calendar when input changes', function() {
       datePickerInput.value = '10/10/2017';
-      datePickerInput.dispatchEvent(new CustomEvent('change', { bubbles: true }));
+      datePickerInput.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { isNotFromFlatpickr: true } }));
       expect(datePicker.calendar.selectedDates[0].valueOf()).toBe(datePicker.calendar.parseDate(datePickerInput.value).valueOf());
+    });
+
+    afterEach(function() {
+      // Quick way to get ready for next test before we set false to shouldForceOpen upon the timer
+      datePicker.shouldForceOpen = false;
     });
 
     afterAll(function() {
@@ -111,17 +118,24 @@ describe('Test date picker', function() {
     });
 
     it('Should hide the calendar on click outside the date picker', function() {
-      datePicker.calendar.close();
-      container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      // Avoid using open() API as we force it open during the event loop where open() is called
+      datePicker.calendar.calendarContainer.classList.add('open');
+      datePicker.calendar.isOpen = true;
+      container.dispatchEvent(Object.assign(new CustomEvent('mousedown', { bubbles: true }), { which: 1 }));
       expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(false);
     });
 
     it('Should update the selected date in the calendar when input changes', function() {
       datePickerInputFrom.value = '10/10/2017';
-      datePickerInputFrom.dispatchEvent(new CustomEvent('change', { bubbles: true }));
+      datePickerInputFrom.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { isNotFromFlatpickr: true } }));
       expect(datePicker.calendar.selectedDates[0].valueOf()).toBe(
         datePicker.calendar.parseDate(datePickerInputFrom.value).valueOf()
       );
+    });
+
+    afterEach(function() {
+      // Quick way to get ready for next test before we set false to shouldForceOpen upon the timer
+      datePicker.shouldForceOpen = false;
     });
 
     afterAll(function() {

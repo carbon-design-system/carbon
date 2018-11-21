@@ -1,4 +1,5 @@
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
@@ -7,7 +8,7 @@
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
-@include exports('button') {
+@mixin button {
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
     display: inline-block;
@@ -168,5 +169,147 @@
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
     width: rem(150px);
+  }
+}
+
+@mixin button--x {
+  // <button> elements cannot be used as flex containers
+  button.#{$prefix}--btn {
+    display: inline-block;
+  }
+
+  // Reset intrisic padding in Firefox (see #731)
+  button.#{$prefix}--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  .#{$prefix}--btn {
+    @include button-base--x;
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme--x($brand-01, transparent, $inverse-01, #0353e9, $ui-01, $brand-02);
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme--x(
+      $ibm-colors__gray--80,
+      $ibm-colors__gray--80,
+      $inverse-01,
+      $ibm-colors__gray--70,
+      $inverse-01,
+      $ibm-colors__gray--60
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme--x(transparent, $brand-01, $brand-01, #0353e9, $brand-01, $brand-02);
+    position: relative;
+
+    &:hover {
+      color: $inverse-01;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled {
+      background: transparent;
+      color: $disabled;
+
+      & > .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &:hover > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme--x(transparent, transparent, $brand-01, $ibm-colors__gray--10, $brand-01, $ibm-colors__blue--70);
+
+    &:hover,
+    &:active {
+      color: $ibm-colors__blue--70;
+
+      .#{$prefix}--btn__icon {
+        fill: $ibm-colors__blue--70;
+      }
+    }
+
+    &:active {
+      background-color: $active-01;
+    }
+
+    .#{$prefix}--btn__icon {
+      margin-left: $spacing-xs;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $disabled;
+      background: transparent;
+      border-color: transparent;
+
+      .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red--80);
+
+    &:hover {
+      color: $inverse-01;
+      border: $button-border-width solid transparent;
+    }
+
+    &:hover > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--danger--primary {
+    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red--80);
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-04;
+      border: $button-border-width solid $disabled;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    @include letter-spacing;
+    height: auto;
+    padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
+    margin-left: $spacing-md;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
+  }
+}
+
+@include exports('button') {
+  @if feature-flag-enabled('components-x') {
+    @include button--x;
+  } @else {
+    @include button;
   }
 }

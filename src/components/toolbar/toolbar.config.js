@@ -1,5 +1,7 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 const filterOptions = [
   {
     id: 'filter-option-1',
@@ -33,6 +35,9 @@ const rowHeightOptions = [
 ];
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

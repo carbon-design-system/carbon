@@ -15,12 +15,12 @@
         overflow: hidden;
       }
     </style>
-    <link rel="stylesheet" type="text/css" href="/demo/demo.css">
+    <link rel="stylesheet" type="text/css" href="/demo.css">
   </head>
 
   <body class="bx--body demo--container" data-floating-menu-container>
     <div class="demo--container__panel" data-card-list>
-      {{{body}}}
+      {{{yield}}}
     </div>
 
     <!-- Pseudo element to demonstrate focus-wrap behavior (focus trap) -->
@@ -28,7 +28,7 @@
 
     <!-- Scripts -->
     <!-- <script src="/carbon-components.min.js"></script> -->
-    <script src="/demo/demo.js"></script>
+    <script src="/demo.js"></script>
     <!-- Disable Auto Init with this flag -->
     <!-- true = JavaScript will not initialize automatically -->
     <!-- false = JavaScript will initialize automatically -->

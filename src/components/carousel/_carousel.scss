@@ -1,4 +1,5 @@
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -7,79 +8,81 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('carousel') {
-  .#{$prefix}--carousel {
-    display: flex;
-    align-items: center;
-  }
-  .#{$prefix}--carousel-container {
-    max-width: rem(810px);
-    overflow: hidden;
-    padding: 0 1px;
-  }
-  .#{$prefix}--filmstrip {
-    display: flex;
-    justify-content: space-between;
-    transition: transform 100ms $carbon--ease-in;
-    padding: rem(24px) 0;
-    width: auto;
-  }
-  .#{$prefix}--filmstrip-btn {
-    @include button-reset;
-    height: rem(20px);
-    width: rem(20px);
-    margin-bottom: 1rem;
-    margin-right: rem(3px);
-    margin-left: rem(3px);
+  @include deprecate('`carousel` component in `carbon-components` has been deprecated.') {
+    .#{$prefix}--carousel {
+      display: flex;
+      align-items: center;
+    }
+    .#{$prefix}--carousel-container {
+      max-width: rem(810px);
+      overflow: hidden;
+      padding: 0 1px;
+    }
+    .#{$prefix}--filmstrip {
+      display: flex;
+      justify-content: space-between;
+      transition: transform 100ms $carbon--ease-in;
+      padding: rem(24px) 0;
+      width: auto;
+    }
+    .#{$prefix}--filmstrip-btn {
+      @include button-reset;
+      height: rem(20px);
+      width: rem(20px);
+      margin-bottom: 1rem;
+      margin-right: rem(3px);
+      margin-left: rem(3px);
 
-    &:hover {
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        @include focus-outline;
+      }
+    }
+
+    .#{$prefix}--carousel__btn {
+      @include button-reset(false);
       cursor: pointer;
-    }
+      padding: 0;
 
-    &:focus {
+      &:first-child {
+        margin-right: 1.25rem;
+      }
+
+      &:last-child {
+        margin-left: 1.25rem;
+      }
+
+      &:focus {
+        @include focus-outline;
+      }
+
+      &:last-of-type {
+        transform: rotate(180deg);
+      }
+
+      svg {
+        height: rem(24px);
+        width: rem(16px);
+        fill: $brand-01;
+      }
+    }
+    .#{$prefix}--carousel__item {
+      @include button-reset;
+      padding: 0;
+      line-height: 0;
+      margin-right: rem(20px);
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        @include focus-outline;
+      }
+    }
+    .#{$prefix}--carousel__item--active {
       @include focus-outline;
     }
-  }
-
-  .#{$prefix}--carousel__btn {
-    @include button-reset(false);
-    cursor: pointer;
-    padding: 0;
-
-    &:first-child {
-      margin-right: 1.25rem;
-    }
-
-    &:last-child {
-      margin-left: 1.25rem;
-    }
-
-    &:focus {
-      @include focus-outline;
-    }
-
-    &:last-of-type {
-      transform: rotate(180deg);
-    }
-
-    svg {
-      height: rem(24px);
-      width: rem(16px);
-      fill: $brand-01;
-    }
-  }
-  .#{$prefix}--carousel__item {
-    @include button-reset;
-    padding: 0;
-    line-height: 0;
-    margin-right: rem(20px);
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      @include focus-outline;
-    }
-  }
-  .#{$prefix}--carousel__item--active {
-    @include focus-outline;
   }
 }

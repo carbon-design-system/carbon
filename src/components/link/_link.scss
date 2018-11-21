@@ -4,13 +4,15 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 
-@include exports('link') {
+@mixin link {
   .#{$prefix}--link {
     @include reset;
     @include font-family;
@@ -39,5 +41,57 @@
       opacity: 0.5;
       pointer-events: none;
     }
+  }
+}
+
+@mixin link--x {
+  .#{$prefix}--link {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+
+    color: $brand-01;
+    font-weight: 400;
+
+    // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
+    // effect.
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: $brand-01;
+      box-shadow: 0 1px currentColor;
+    }
+
+    &:active,
+    &:active:visited {
+      color: $text-01;
+      box-shadow: 0 1px currentColor;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 3px currentColor;
+    }
+
+    &[aria-disabled='true'][tabindex='-1'] {
+      color: $disabled;
+      cursor: not-allowed;
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    &:visited {
+      color: $brand-01;
+    }
+  }
+}
+
+@include exports('link') {
+  @if feature-flag-enabled('components-x') {
+    @include link--x;
+  } @else {
+    @include link;
   }
 }

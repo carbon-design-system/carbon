@@ -1,4 +1,5 @@
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
@@ -7,7 +8,7 @@
 @import '../../globals/scss/css--reset';
 @import '../form/form';
 
-@include exports('number-input') {
+@mixin number-input {
   .#{$prefix}--number {
     @include reset;
     display: flex;
@@ -94,7 +95,7 @@
     align-items: center;
     left: auto;
     right: 0.5rem;
-    bottom: 0.625rem;
+    top: 2rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -144,10 +145,24 @@
     input[type='number']:focus ~ .#{$prefix}--label {
       color: $support-01;
     }
+  }
 
-    .#{$prefix}--number__controls {
-      bottom: 2rem;
-    }
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 2rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {
@@ -163,5 +178,171 @@
     input[type='number'] {
       display: none;
     }
+  }
+}
+
+@mixin number-input--x {
+  .#{$prefix}--number {
+    @include reset;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .#{$prefix}--number input[type='number'] {
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    font-family: $font-family-mono;
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    min-width: 9.375rem;
+    padding-left: $spacing-md;
+    padding-right: $spacing-xl;
+    font-weight: 300;
+    height: rem(40px);
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    order: 2;
+    border-radius: 0;
+    border-bottom: 1px solid $ui-04;
+    transition: all $transition--base;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled;
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls svg {
+      fill: $disabled;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--number input[type='number'] {
+    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+
+    &::-ms-clear {
+      display: none; // IE: Hide "clear-field" `x` button on input field
+    }
+
+    &::-webkit-inner-spin-button {
+      appearance: none; // Safari: Hide number spinner
+    }
+  }
+
+  .#{$prefix}--number__controls {
+    @include reset;
+    position: absolute;
+    display: block;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: auto;
+    right: 0.4rem;
+    top: 2.125rem;
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include button-reset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: rem(20px);
+    height: rem(10px);
+
+    &:focus {
+      @include focus-outline;
+      fill: $brand-01;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover svg {
+      fill: $ui-05;
+    }
+  }
+
+  .#{$prefix}--number[data-invalid] {
+    .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+    }
+
+    input[type='number'] {
+      @include focus-outline('invalid');
+    }
+  }
+
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 1.75rem;
+  }
+
+  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 1.75rem;
+  }
+
+  .#{$prefix}--number--light input[type='number'] {
+    background: $field-02;
+  }
+
+  // Skeleton State
+  .#{$prefix}--number.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+
+    input[type='number'] {
+      display: none;
+    }
+  }
+}
+
+@include exports('number-input') {
+  @if feature-flag-enabled('components-x') {
+    @include number-input--x;
+  } @else {
+    @include number-input;
   }
 }

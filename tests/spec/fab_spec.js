@@ -97,11 +97,14 @@ describe('Test floating action button', function() {
     let initContext;
 
     beforeAll(function() {
-      initContext = FabButton.init();
       element = document.createElement('a');
       element.dataset.fab = '';
       element.dataset.state = 'open';
       document.body.appendChild(element);
+    });
+
+    beforeEach(function() {
+      initContext = FabButton.init();
     });
 
     it('Should create an instance upon clicking', function() {
@@ -110,6 +113,7 @@ describe('Test floating action button', function() {
     });
 
     it('Should not create a new instance upon clicking if one has been there already', function() {
+      FabButton.create(element);
       spyOn(FabButton.components, 'set').and.callThrough();
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.dataset.state).toBe('closed');
@@ -140,13 +144,17 @@ describe('Test floating action button', function() {
 
     afterEach(function() {
       element.dataset.state = 'open';
-    });
-
-    afterAll(function() {
       const fab = FabButton.components.get(element);
       if (fab) {
         fab.release();
       }
+      if (initContext) {
+        initContext.release();
+        initContext = null;
+      }
+    });
+
+    afterAll(function() {
       document.body.removeChild(element);
       if (initContext) {
         initContext.release();

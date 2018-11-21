@@ -4,9 +4,21 @@ const globby = require('globby');
 const { promisify } = require('bluebird');
 const fs = require('fs');
 const path = require('path');
+const Module = require('module');
 const expressHandlebars = require('express-handlebars');
 const helpers = require('handlebars-helpers');
 const Fractal = require('@frctl/fractal');
+const iconHelper = require('@carbon/icons-handlebars');
+
+const origResolveFilename = Module._resolveFilename;
+Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
+  const devFeatureFlags = path.resolve(__dirname, '../demo/feature-flags.js');
+  const newRequest =
+    !/feature-flags$/i.test(request) || !fs.existsSync(devFeatureFlags)
+      ? request
+      : path.relative(path.dirname(parentModule.id), devFeatureFlags);
+  return origResolveFilename.call(this, newRequest, parentModule, ...other);
+};
 
 const handlebars = expressHandlebars.create({
   defaultLayout: 'demo-nav',
@@ -16,8 +28,21 @@ const handlebars = expressHandlebars.create({
 
 const Handlebars = handlebars.handlebars;
 helpers();
+iconHelper({ handlebars: Handlebars });
 
 const readFile = promisify(fs.readFile);
+
+try {
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  const logger = require(path.resolve(path.dirname(require.resolve('@frctl/fractal')), 'core/log'));
+  ['log', 'error', 'warn'].forEach(name => {
+    logger.on(name, evt => {
+      console[name](`Fractal ${name}:`, evt); // eslint-disable-line no-console
+    });
+  });
+} catch (err) {
+  console.error('Failed to hook Fractal logger', err.stack); // eslint-disable-line no-console
+}
 
 /**
  * @param {string} glob A glob.
@@ -32,7 +57,7 @@ const getContents = glob =>
     return Promise.all(
       filePaths.map(filePath =>
         readFile(filePath, { encoding: 'utf8' }).then(content => {
-          contents.set(path.basename(filePath, '.hbs'), content);
+          contents.set(path.basename(filePath, path.extname(filePath)), content);
         })
       )
     ).then(() => contents);
@@ -86,7 +111,7 @@ const cache = {
 
 /**
  * @param {Object} [options] The options.
- * @param {string} [options.layout] The Handlebars template name to lay out stuffs.
+ * @param {string} [options.layout] The default Handlebars template name to lay out stuffs. `false` to force empty layout.
  * @param {boolean} [options.concat] Setting `true` here returns rendered contents all concatenated, instead of returning a map.
  * @param {string} [handle]
  *   The internal component name seen in Fractal.
@@ -97,17 +122,23 @@ const cache = {
 const renderComponent = ({ layout, concat } = {}, handle) =>
   cache.get().then(({ componentSource, contents }) => {
     const renderedItems = new Map();
+    if (!componentSource) {
+      throw new TypeError(
+        'Fractal configuration (`*.config.js`) could not be harvested. ' +
+          'The most typical cause is a JavaScript error in one of the `*.config.js` files.'
+      );
+    }
     componentSource.forEach(metadata => {
       const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
       if (items) {
         const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
           const { handle: itemHandle, baseHandle, context } = item;
-          const template = contents.get(item.preview) || contents.get(itemHandle) || contents.get(baseHandle);
+          const template = contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle);
           if (template) {
             const body = template(context);
-            const layoutTemplate = contents.get(layout);
-            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
+            const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
+            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ yield: body }, context)));
           }
         });
       }

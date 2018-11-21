@@ -1,0 +1,110 @@
+@import 'convert';
+
+$cell-padding: 1rem;
+
+// Initial map of our breakpoints and their values
+$breakpoints: (
+  sm: (
+    width: rem(320px),
+    columns: 4,
+    gutter: rem(16px),
+    margin: 0,
+  ),
+  md: (
+    width: rem(672px),
+    columns: 8,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+  lg: (
+    width: rem(1056px),
+    columns: 16,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+  xlg: (
+    width: rem(1312px),
+    columns: 16,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+  max: (
+    width: rem(1584px),
+    columns: 16,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+) !default;
+
+@function breakpoint-min($name) {
+  @return $name == sm;
+}
+
+/// Generate a media query up to the width of the given breakpoint name
+/// @param {string} $name
+/// @content
+@mixin breakpoint-up($name) {
+  @if map-has-key($breakpoints, $name) {
+    @if $name == sm {
+      @content;
+    } @else {
+      @media (min-width: map-deep-get($breakpoints, $name, width)) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
+  }
+}
+
+/// Generate a media query for the maximum width of the given styles
+/// @param {string} $name
+/// @content
+@mixin breakpoint-down($name) {
+  @if map-has-key($breakpoints, $name) {
+    @if $name == sm {
+      @content;
+    } @else {
+      @media (max-width: map-deep-get($breakpoints, $name, width)) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map-keys($breakpoints)})';
+  }
+}
+
+/// Generate a media query for the range between the lower and upper
+/// breakpoints.
+/// @param {string} $lower
+/// @param {string} $upper
+/// @content
+@mixin breakpoint-between($lower, $upper) {
+  $min: map-get($breakpoints, $lower);
+  $max: map-get($breakpoints, $upper);
+
+  @if $min and $max {
+    @media (min-width: map-get($min, width)) and (max-width: map-get($map, width)) {
+      @content;
+    }
+  } @else if $min != null and $max == null {
+    @include breakpoint-up($lower) {
+      @content;
+    }
+  } @else if $min == null and $max != null {
+    @include breakpoint-down($upper) {
+      @content;
+    }
+  } @else {
+    @error 'Unable to find a breakpoint to satisfy: (#{$lower},#{$upper}). Expected both to be one of (#{map-keys($breakpoints)}).';
+  }
+}
+
+/// Generate a media query for a given breakpoint
+/// @param {string} $breakpoint
+/// @content
+@mixin breakpoint($name) {
+  @include breakpoint-up($name) {
+    @content;
+  }
+}

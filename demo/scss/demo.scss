@@ -60,6 +60,12 @@
   padding-left: 0;
 }
 
+.demo--theme-switcher {
+  position: absolute;
+  top: rem(16px);
+  right: rem(16px);
+}
+
 .bx--tile-container {
   width: 100%;
 
@@ -183,4 +189,8 @@
 
 .indigo {
   background-color: rgba(indigo, 0.2);
+}
+
+.component-example__live .bx--form-item {
+  margin-bottom: 2rem;
 }

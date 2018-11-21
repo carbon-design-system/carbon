@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -48,8 +49,8 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
       this.element.checked = true;
 
       // nested checkboxes inside labels
-      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
+      if (this.element.parentElement.classList.contains(this.options.classLabel)) {
+        this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'true');
       }
     } else if (this.element.checked === false) {
       this.element.removeAttribute('checked');
@@ -57,21 +58,21 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
       this.element.checked = false;
 
       // nested checkboxes inside labels
-      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.setAttribute('data-contained-checkbox-state', 'false');
+      if (this.element.parentElement.classList.contains(this.options.classLabel)) {
+        this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'false');
       }
     }
   }
 
   _handleFocus() {
-    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-      this.element.parentElement.classList.add('bx--checkbox-label__focus');
+    if (this.element.parentElement.classList.contains(this.options.classLabel)) {
+      this.element.parentElement.classList.add(this.options.classLabelFocused);
     }
   }
 
   _handleBlur() {
-    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-      this.element.parentElement.classList.remove('bx--checkbox-label__focus');
+    if (this.element.parentElement.classList.contains(this.options.classLabel)) {
+      this.element.parentElement.classList.remove(this.options.classLabelFocused);
     }
   }
 
@@ -90,9 +91,9 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     this.element.indeterminate = state === stateChangeTypes.mixed;
     this.element.checked = state === stateChangeTypes.true;
 
-    const container = this.element.closest('[data-contained-checkbox-state]');
+    const container = this.element.closest(this.options.selectorContainedCheckboxState);
     if (container) {
-      container.setAttribute('data-contained-checkbox-state', state);
+      container.setAttribute(this.options.attribContainedCheckboxState, state);
     }
   }
 
@@ -105,9 +106,9 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     } else if (value === false) {
       this.element.removeAttribute('disabled');
     }
-    const container = this.element.closest('[data-contained-checkbox-disabled]');
+    const container = this.element.closest(this.options.selectorContainedCheckboxDisabled);
     if (container) {
-      container.setAttribute('data-contained-checkbox-disabled', value);
+      container.setAttribute(this.options.attribContainedCheckboxDisabled, value);
     }
   }
 
@@ -118,8 +119,8 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     if (this.element.indeterminate === true) {
       this.element.setAttribute('aria-checked', 'mixed');
     }
-    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.indeterminate === true) {
-      this.element.parentElement.setAttribute('data-contained-checkbox-state', 'mixed');
+    if (this.element.parentElement.classList.contains(this.options.classLabel) && this.element.indeterminate === true) {
+      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'mixed');
     }
   }
 
@@ -127,14 +128,14 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     if (this.element.checked === true) {
       this.element.setAttribute('aria-checked', 'true');
     }
-    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.checked) {
-      this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
+    if (this.element.parentElement.classList.contains(this.options.classLabel) && this.element.checked) {
+      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'true');
     }
-    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', 'false');
+    if (this.element.parentElement.classList.contains(this.options.classLabel)) {
+      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxDisabled, 'false');
     }
-    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.disabled) {
-      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', 'true');
+    if (this.element.parentElement.classList.contains(this.options.classLabel) && this.element.disabled) {
+      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxDisabled, 'true');
     }
   }
 
@@ -152,10 +153,26 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
    * @member Checkbox.options
    * @type {Object}
    * @property {string} selectorInit The data attribute to find copy button UIs.
+   * @property {string} selectorContainedCheckboxState The CSS selector to find a container of checkbox preserving checked state.
+   * @property {string} selectorContainedCheckboxDisabled
+   *   The CSS selector to find a container of checkbox preserving disabled state.
+   * @property {string} classLabel The CSS class for the label.
+   * @property {string} classLabelFocused The CSS class for the focused label.
+   * @property {string} attribContainedCheckboxState The attribute name for the checked state of contained checkbox.
+   * @property {string} attribContainedCheckboxDisabled The attribute name for the disabled state of contained checkbox.
    */
-  static options = {
-    selectorInit: '.bx--checkbox',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: `.${prefix}--checkbox`,
+      selectorContainedCheckboxState: '[data-contained-checkbox-state]',
+      selectorContainedCheckboxDisabled: '[data-contained-checkbox-disabled]',
+      classLabel: `${prefix}--checkbox-label`,
+      classLabelFocused: `${prefix}--checkbox-label__focus`,
+      attribContainedCheckboxState: 'data-contained-checkbox-state',
+      attribContainedCheckboxDisabled: 'data-contained-checkbox-disabled',
+    };
+  }
 
   static stateChangeTypes = stateChangeTypes;
 }

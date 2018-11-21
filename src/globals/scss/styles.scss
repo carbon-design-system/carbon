@@ -15,8 +15,9 @@ $css--use-experimental-grid: false !default;
 $css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
-@import 'colors';
 @import 'vars';
+@import 'colors';
+@import 'theme';
 @import 'mixins';
 @import 'layout';
 @import 'layer';
@@ -98,6 +99,11 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../../components/carousel/carousel';
 @import '../../components/skeleton/skeleton';
 @import '../../components/inline-loading/inline-loading';
+
+//-------------------------------------
+// 🔬 Experimental
+//-------------------------------------
+@import '../../components/ui-shell/ui-shell';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)

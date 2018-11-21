@@ -3,13 +3,14 @@
 //-----------------------------
 
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
-@include exports('lists') {
+@mixin lists {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
@@ -52,5 +53,72 @@
   .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
     content: '-';
     padding-right: $spacing-2xs;
+  }
+}
+
+@mixin lists--x {
+  .#{$prefix}--list--nested,
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    @include font-smoothing;
+    counter-reset: list-item;
+  }
+
+  .#{$prefix}--list__item {
+    font-weight: 400;
+    color: $text-01;
+    list-style-type: none;
+    counter-increment: list-item;
+    line-height: rem(18px);
+  }
+
+  .#{$prefix}--list--nested {
+    margin-bottom: rem(4px);
+    margin-left: $spacing-xl;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    display: inline-block;
+    margin-right: $spacing-xs;
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    margin-right: $spacing-xs;
+    display: inline-block;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
+    content: '\002013';
+  }
+
+  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    content: '\0025AA';
+  }
+
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    content: counter(list-item) '.';
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    counter-increment: sub-list-item;
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    content: counter(sub-list-item, lower-alpha) '.';
+    width: 0.6rem;
+  }
+}
+
+@include exports('lists') {
+  @if feature-flag-enabled('components-x') {
+    @include lists--x;
+  } @else {
+    @include lists;
   }
 }

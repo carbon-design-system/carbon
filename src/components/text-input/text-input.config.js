@@ -1,6 +1,11 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',
@@ -16,6 +21,21 @@ module.exports = {
       label: 'Text Input (Light)',
       context: {
         light: true,
+      },
+    },
+    {
+      name: 'password',
+      label: 'Password Input',
+      context: {
+        password: true,
+      },
+    },
+    {
+      name: 'password--light',
+      label: 'Password Input (Light)',
+      context: {
+        light: true,
+        password: true,
       },
     },
   ],

@@ -1,6 +1,7 @@
 $css--helpers: true;
 
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
@@ -129,7 +130,7 @@ $css--helpers: true;
       }
     }
 
-    .#{$prefix}--select--inline .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
+    .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
       right: 0.3rem;
       top: 0.625rem;
     }

@@ -1,6 +1,7 @@
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 
 @include exports('data-table-v2-core') {
   .#{$prefix}--data-table-v2-container {
@@ -20,11 +21,13 @@
       @include typescale('zeta');
       background-color: $ui-02;
       font-weight: 700;
+      border-right: 1px solid $ui-03;
     }
 
     tbody {
       @include typescale('zeta');
       background-color: $ui-01;
+      border-right: 1px solid $ui-03;
     }
 
     tr {
@@ -71,7 +74,6 @@
 
       &:last-of-type {
         padding-right: $spacing-lg;
-        border-right: 1px solid $ui-03;
       }
     }
 
@@ -113,22 +115,19 @@
   }
 
   .#{$prefix}--data-table-v2--no-border {
-    tr {
-      &:last-of-type {
-        td {
-          border-bottom-color: transparent;
-        }
-      }
+    & {
+      border-bottom-color: transparent;
+    }
+
+    thead,
+    tbody {
+      border-right-color: transparent;
     }
 
     th,
     td {
       &:first-of-type {
         border-left-color: transparent;
-      }
-
-      &:last-of-type {
-        border-right-color: $ui-03;
       }
     }
   }

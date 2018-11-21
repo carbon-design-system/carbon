@@ -1,5 +1,7 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+
 const items = [
   {
     label: 'Choose an option',
@@ -40,6 +42,9 @@ const items = [
 ];
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',

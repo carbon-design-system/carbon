@@ -3,6 +3,7 @@
 //-----------------------------
 
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
@@ -11,7 +12,7 @@
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
-@include exports('select') {
+@mixin select {
   .#{$prefix}--select {
     @include reset;
     position: relative;
@@ -193,5 +194,214 @@
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
     display: none;
+  }
+}
+
+@mixin select--x {
+  .#{$prefix}--select {
+    @include reset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--select-input {
+    @include font-family;
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    height: rem(40px);
+    appearance: none;
+    display: block;
+    width: rem(224px);
+    min-width: rem(128px);
+    max-width: rem(448px);
+    padding: 0 $spacing-2xl 0 $spacing-md;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    border-radius: 0;
+    cursor: pointer;
+    transition: outline $transition--base, background-color $transition--base;
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    // Select text renders a little high on Firefox
+    @-moz-document url-prefix() {
+      padding-top: rem(4px);
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      @include focus-outline('invalid');
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: $disabled-background-color;
+      color: $disabled;
+      border-bottom: 1px solid $disabled-background-color;
+    }
+
+    ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+    }
+  }
+
+  .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
+    fill: $disabled;
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--select__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: rem(10px);
+    height: rem(5px);
+    pointer-events: none;
+  }
+
+  &[data-invalid] ~ .#{$prefix}--select__arrow {
+    bottom: 2.5rem;
+  }
+
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Override some Firefox user-agent styles
+  @-moz-document url-prefix() {
+    .#{$prefix}--select-option {
+      background-color: $ui-01;
+      color: $text-01;
+    }
+
+    .#{$prefix}--select-optgroup {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    // Targets IE10+ browsers: Display grid auto not supported
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--label {
+    @include typescale('zeta');
+    white-space: nowrap;
+    margin: 0 $spacing-xs 0 0;
+    align-self: center;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input {
+    background-color: transparent;
+    color: $text-01;
+    border-bottom: none;
+    padding-left: $spacing-xs;
+    padding-right: $spacing-lg;
+
+    @-moz-document url-prefix() {
+      padding-top: 0;
+    }
+
+    &:hover {
+      background-color: $ui-01;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select__arrow {
+    bottom: auto;
+    top: 1.125rem;
+    right: $spacing-xs;
+  }
+
+  .#{$prefix}--select--inline[data-invalid] {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    color: $disabled;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    & ~ * {
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--form-requirement {
+    grid-column-start: 2;
+
+    // Targets IE10+ browsers: Display grid auto not supported
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      position: absolute;
+      bottom: -1.5rem;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    cursor: not-allowed;
+    // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
+    background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23bebebe'%3e%3cpath d='M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px) 50%;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
+    display: none;
+  }
+
+  //Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+}
+
+@include exports('select') {
+  @if feature-flag-enabled('components-x') {
+    @include select--x;
+  } @else {
+    @include select;
   }
 }

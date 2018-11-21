@@ -1,4 +1,5 @@
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -8,48 +9,50 @@
 @import '../../globals/scss/layer';
 
 @include exports('lightbox') {
-  .#{$prefix}--lightbox {
-    width: rem(1056px);
-    @include layer('pop-out');
-  }
-  .#{$prefix}--lightbox__main {
-    position: relative;
-  }
-  .#{$prefix}--lightbox__btn {
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
+  @include deprecate('`lightbox` component in `carbon-components` has been deprecated.') {
+    .#{$prefix}--lightbox {
+      width: rem(1056px);
+      @include layer('pop-out');
+    }
+    .#{$prefix}--lightbox__main {
+      position: relative;
+    }
+    .#{$prefix}--lightbox__btn {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
 
-    &:first-of-type {
-      left: rem(-32px);
+      &:first-of-type {
+        left: rem(-32px);
+      }
+
+      &:last-of-type {
+        right: rem(-32px);
+        transform: rotate(180deg);
+      }
+
+      &:focus {
+        @include focus-outline;
+      }
+
+      svg {
+        height: rem(24px);
+        fill: $ui-05;
+      }
+    }
+    .#{$prefix}--lightbox__item {
+      display: none;
+      width: 100%;
+    }
+    .#{$prefix}--lightbox__item--shown {
+      display: block;
     }
 
-    &:last-of-type {
-      right: rem(-32px);
-      transform: rotate(180deg);
+    .#{$prefix}--lightbox__footer {
+      background: $ui-01;
+      overflow: hidden;
     }
-
-    &:focus {
-      @include focus-outline;
-    }
-
-    svg {
-      height: rem(24px);
-      fill: $ui-05;
-    }
-  }
-  .#{$prefix}--lightbox__item {
-    display: none;
-    width: 100%;
-  }
-  .#{$prefix}--lightbox__item--shown {
-    display: block;
-  }
-
-  .#{$prefix}--lightbox__footer {
-    background: $ui-01;
-    overflow: hidden;
   }
 }

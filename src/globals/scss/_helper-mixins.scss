@@ -51,8 +51,23 @@
   }
 
   @if ($type == 'blurred') {
-    box-shadow: 0 0 0 3px $color__blue-20;
+    box-shadow: 0 0 0 3px $focus;
     outline: 1px solid transparent;
+  }
+
+  @if ($type == 'outline') {
+    outline: 2px solid $brand-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'invalid') {
+    outline: 2px solid $support-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'reset') {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
   }
 }
 
@@ -193,18 +208,6 @@
       right: auto;
       opacity: 0.3;
     }
-  }
-}
-
-@mixin experimental($feature) {
-  @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == true {
-    @content;
-  }
-}
-
-@mixin stable($feature) {
-  @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == false {
-    @content;
   }
 }
 

@@ -1,4 +1,5 @@
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
@@ -6,7 +7,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 
-@include exports('content-switcher') {
+@mixin content-switcher {
   .#{$prefix}--content-switcher {
     @include font-family;
     display: flex;
@@ -109,5 +110,97 @@
       border-color: $hover-primary;
       background-color: $hover-primary;
     }
+  }
+}
+
+@mixin content-switcher--x {
+  .#{$prefix}--content-switcher {
+    @include font-family;
+    display: flex;
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher-btn {
+    @include reset;
+    @include font-smoothing;
+    @include typescale('zeta');
+    @include font-family;
+    @include focus-outline('reset');
+    background-color: $ui-01;
+    display: flex;
+    align-items: center;
+    padding: $spacing-xs $spacing-xl;
+    margin: 0;
+    text-decoration: none;
+    border: none;
+    color: $text-02;
+    transition: all $transition--base $carbon--standard-easing;
+    position: relative;
+
+    &:focus {
+      @include focus-outline('outline');
+      color: $text-01;
+      z-index: 3;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $hover-field;
+      color: $text-01;
+      z-index: 3;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:last-of-type)::after {
+    content: '';
+    display: block;
+    height: rem(16px);
+    width: rem(1px);
+    background-color: $content-switcher-divider;
+    position: absolute;
+    z-index: 2;
+    right: rem(-1px);
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::after,
+  .#{$prefix}--content-switcher-btn:focus::after,
+  .#{$prefix}--content-switcher-btn:hover::after {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher__icon {
+    fill: $text-02;
+    transition: fill $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--content-switcher__icon + span {
+    margin-left: $spacing-xs;
+  }
+
+  .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
+  .#{$prefix}--content-switcher-btn:focus .#{$prefix}--content-switcher__icon {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    background-color: $ui-05;
+    color: $inverse-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected .#{$prefix}--content-switcher__icon {
+    fill: $inverse-01;
+  }
+}
+
+@include exports('content-switcher') {
+  @if feature-flag-enabled('components-x') {
+    @include content-switcher--x;
+  } @else {
+    @include content-switcher;
   }
 }

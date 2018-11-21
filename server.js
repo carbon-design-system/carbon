@@ -23,64 +23,38 @@ const compiler = devMode && webpack(config);
 const hotMiddleware = devMode && webpackHotMiddleware(compiler);
 
 let dummyHashSeq = 0;
+let templateOrConfigChanged = false;
 const watchCallback = debounce(() => {
+  const featureFlagCacheKey = Object.keys(require.cache).find(key => /feature-flags\.js$/i.test(key));
+  if (featureFlagCacheKey) {
+    require.cache[featureFlagCacheKey] = undefined;
+  }
   templates.cache.clear();
-  hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+  if (templateOrConfigChanged) {
+    templateOrConfigChanged = false;
+    hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+  }
 }, 500);
+
+const invokeWatchCallback = name => {
+  if (!/feature-flags\.js$/i.test(name)) {
+    templateOrConfigChanged = true;
+  }
+  watchCallback();
+};
 
 if (devMode) {
   chokidar
-    .watch(['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
-    .on('add', watchCallback)
-    .on('change', watchCallback)
-    .on('unlink', watchCallback);
+    .watch(['demo/feature-flags.js', 'demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
+    .on('add', invokeWatchCallback)
+    .on('change', invokeWatchCallback)
+    .on('unlink', invokeWatchCallback);
 }
 
 const reComponentPath = pathRegexp('/component/:component');
 const reDemoComponentPath = pathRegexp('/demo/:component');
 const reCodePath = pathRegexp('/code/:component');
 const demoStaticRoute = serveStatic('demo');
-
-/**
- * @param {ComponentCollection|Component} metadata The component data.
- * @returns {Promise<ComponentCollection|Component>}
- *   The normalized component data,
- *   esp. with README.md content assigned to `.notes` property for component with variants (`ComponentCollection`).
- *   Fractal automatically populate `.notes` for component without variants (`Component`).
- */
-const normalizeMetadata = metadata => {
-  const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
-  const visibleItems = items && items.filter(item => !item.isHidden);
-  const metadataJSON = typeof metadata.toJSON !== 'function' ? metadata : metadata.toJSON();
-  if (!metadata.isCollection && visibleItems && visibleItems.size === 1) {
-    const firstVariant = visibleItems.first();
-    return Object.assign(metadataJSON, {
-      context: firstVariant.context,
-      notes: firstVariant.notes,
-      preview: firstVariant.preview,
-      variants: undefined,
-    });
-  }
-  return Object.assign(metadataJSON, {
-    items: !items || items.size <= 1 ? undefined : items.map(normalizeMetadata).toJSON().items,
-    variants: undefined,
-  });
-};
-
-/**
- * @returns {Promise<(ComponentCollection|Component)[]>} The promise resolved with the list of nav items.
- */
-const getNavItems = () =>
-  templates.cache
-    .get()
-    .then(({ componentSource, docSource, contents }) =>
-      Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items(), contents])
-    )
-    .then(([componentItems, docItems, contents]) => ({
-      componentItems,
-      docItems,
-      contents,
-    }));
 
 function noopRoute(req, res, next) {
   next();
@@ -94,14 +68,16 @@ function navRoute(req, res, next) {
   } else if (name !== '/' && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
-    getNavItems()
-      .then(({ componentItems, docItems, contents }) => {
+    templates.cache
+      .get()
+      .then(({ componentSource, docSource, contents }) => {
         res.setHeader('Content-Type', 'text/html');
         res.end(
           contents.get('demo-nav')({
-            body: contents.get('demo-nav-data')({
-              componentItems,
-              docItems,
+            yield: contents.get('demo-nav-data')({
+              componentSource,
+              docSource,
+              portSassBuild: process.env.PORT_SASS_DEV_BUILD,
             }),
           })
         );
@@ -150,7 +126,7 @@ function codeRoute(req, res, next) {
     res.end();
   } else {
     templates
-      .render({}, name)
+      .render({ layout: false }, name)
       .then(renderedItems => {
         const o = {};
         renderedItems.forEach((rendered, item) => {
@@ -168,7 +144,7 @@ function codeRoute(req, res, next) {
 }
 
 function demoRoute(req, res, next) {
-  if (!/^\/demo/i.test(req.url)) {
+  if (!/^\/demo\.(css|js)$/i.test(req.url)) {
     next();
   } else {
     demoStaticRoute(req, res, next);
@@ -176,12 +152,12 @@ function demoRoute(req, res, next) {
 }
 
 browserSync({
-  baseDir: 'demo',
   files: ['demo/demo.css'],
   open: false,
   port: process.env.PORT || 8080,
 
   server: {
+    baseDir: 'demo',
     middleware: [
       !devMode
         ? noopRoute

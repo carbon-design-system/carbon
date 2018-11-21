@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 'use strict';
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
@@ -11,6 +13,7 @@ const cloptions = commander
   .option('-b, --browser [browser]', 'Browser to test with (ChromeHeadless or Chrome)', collect, [])
   .option('-d, --debug', 'Disables collection of code coverage, useful for runinng debugger against specs or sources')
   .option('-f, --file [file]', 'Spec files to run', collect, defaultFiles)
+  .option('-r, --random', 'Enable random execution order of tests')
   .option('-v, --verbose', 'Enables verbose output')
   .parse(process.argv);
 const isFilesDefault =
@@ -37,6 +40,12 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
+    client: {
+      jasmine: {
+        random: !!cloptions.random,
+      },
+    },
+
     files: [
       ...cloptions.file,
       ...(isFilesDefault
@@ -62,7 +71,7 @@ module.exports = function(config) {
         rules: [
           {
             test: /\.js?$/,
-            exclude: /node_modules/,
+            exclude: [/node_modules/, /settings\.js$/],
             loader: 'babel-loader',
             query: {
               presets: [
@@ -90,6 +99,39 @@ module.exports = function(config) {
                       ]
                 )
                 .concat(['rewire']),
+            },
+          },
+          {
+            test: /settings\.js?$/,
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                [
+                  'env',
+                  {
+                    modules: false,
+                    targets: {
+                      browsers: ['last 1 version', 'ie >= 11'],
+                    },
+                  },
+                ],
+              ],
+              plugins: [
+                'transform-class-properties',
+                'transform-object-rest-spread',
+                ['transform-runtime', { polyfill: false }],
+              ].concat(
+                cloptions.debug
+                  ? []
+                  : [
+                      [
+                        'istanbul',
+                        {
+                          include: ['src/{components,globals}/**/*.js'],
+                        },
+                      ],
+                    ]
+              ),
             },
           },
           {

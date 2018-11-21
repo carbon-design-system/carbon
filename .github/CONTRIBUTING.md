@@ -45,6 +45,29 @@ Follow BEM naming convention for classes. Again, the only thing we do differentl
 .#{$prefix}--block--modifier
 ```
 
+Avoid nesting selectors, this will make it easier to maintain in the future.
+
+```scss
+<-- Don't do this -->
+.#{$prefix}--inline-notification {
+  .#{$prefix}--btn {
+    &:hover {
+      svg {
+        ...
+      }
+    }
+  }
+}
+
+<!-- Do this instead -->
+.#{$prefix}--inline-notification .#{$prefix}--btn {
+    &:hover svg {
+      ...
+    }
+  }
+}
+```
+
 ### Start a new `block` or `element`?
 
 A nested element can use a new block name as long as the styles are independent of the parent.
@@ -83,19 +106,42 @@ button
 Also note that all variants of a component can live in a single HBS, SCSS and JS file respectively.
 For example, while there are many button variants (primary, secondary, etc.), they're all contained in those single source files in the button folder.
 
-Component variants can be specified by either:
+## Defining markups for components and their variants
 
-- Adding an item to `variants` in `.config.js` file (In this case, a `.hbs` file whose basename is exactly the same as the component name should be defined)
-- Adding a `.hbs` file to component directory (Note: If there is a `.hbs` file whose basename is exactly the same as the component name, other `.hbs` files has to be in `componentname--variantname.hbs` format)
-- `.hbs` files are rendered with the data given via `variants[n].context` property (see below)
-- Supported properties in `.config.js` are the following:
-  - [`default`](https://fractal.build/guide/components/configuration#default)
-  - [`variants`](https://fractal.build/guide/components/configuration#variant-properties) - An array of objects with the following properties:
-    - `name`
-    - `label`
-    - `notes`
-    - `context`
-    - (`preview` - Unlike [Fractal](https://fractal.build/guide/components/configuration#preview), this property should point to a `.hbs` file under `demo` directory or `src` directory, _without_ `@` symbol)
+There are two ways to define markups for components and their variants:
+
+1. Defining markup with no conditional or data interpolations
+2. Defining markup with conditionals or data interpolations
+
+### Defining markup with no conditional or data interpolations
+
+Defining markup with no conditional or data interpolation is as easy as adding a `.hbs` file to the component directory. No `.config.js` file in the component directory is required in this case. One thing to note is that If there is a `.hbs` file whose basename is exactly the same as the component name, other `.hbs` files has to be in `componentname--variantname.hbs` format.
+
+### Defining markup with conditionals or data interpolations
+
+Defining markup with conditionals or data interpolations requires creating `.config.js` file, which is a [JavaScript module format of Fractal configuration](https://fractal.build/guide/core-concepts/configuration-files.html#configuration-file-formats), in component directory. `.hbs` files are rendered with the data given via `context` property in `variants[n]` (below).
+
+Supported [properties in `.config.js`](https://fractal.build/guide/components/configuration-reference.html#component-properties) are the following:
+
+- [`default`](https://fractal.build/guide/components/configuration#default): The default variant name
+- [`variants`](https://fractal.build/guide/components/configuration#variant-properties) - An array of objects, supporitng the following properties:
+  - `name`: The variant name
+  - `label`: The variant name shown in dev env UI
+  - `notes`: A short explainer the variant shown in dev env UI
+  - `context`: The data used for rendering `.hbs`
+  - `view`: The basename of the `.hbs` file for variant markup (Unlike [default Fractal environment](https://fractal.build/guide/components/configuration#view), this property should point to the basename of a `.hbs` file under `demo` directory or `src` directory, _without_ its path)
+  - `preview`: The basename of the `.hbs` file for the markup that lays out the variant markup, in "full render" mode (Unlike [default Fractal environment](https://fractal.build/guide/components/configuration#preview), this property should point to the basename of a `.hbs` file under `demo` directory or `src` directory, _without_ `@` symbol)
+  - `meta`: Some metadata. Carbon vanilla development environment reads the following ones specifically:
+    - `linkOnly`: Only full-page demo is allowed
+    - `useIframe`: Use of `<iframe>` for non full-page demo
+    - `xVersionOnly`: Supports "experimental" theme only
+    - `xVersionNotSupported`: "Experimental" theme is not supported
+
+What `.hbs` file is used for rendering a variant is determined by searching for `.hbs` files in `demo` or `src` directory and find one whose basename matches one of the following (the priority is the following order):
+
+1. `view` property in `variants[n]`
+2. Variant handle, which takes a format of `componentname--variantname` format
+3. Component handle, which is `componentname`
 
 ## Start Contributing
 

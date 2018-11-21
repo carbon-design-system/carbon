@@ -1,0 +1,410 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vars';
+@import 'functions';
+@import 'theme';
+
+/// Adds experimental focus styles to a particular selector.
+/// @example
+///    .my-custom-selector:focus {
+///      @include experimental-focus();
+///    }
+@mixin experimental-focus() {
+  outline: 4px solid $shell-side-nav-accent-01;
+  outline-offset: -4px;
+}
+
+/// Helper to add in text overflow styles to a particular node. Useful if we
+/// don't want to have display-inline: block from the text helper classes
+/// @example
+///    .my-custom-selector {
+///      @include text-overflow();
+///    }
+@mixin text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// Helper for handling selectors for the expansion state of the side-nav.
+/// This helper makes it easier to write code for children that need to respond
+/// to whether the side-nav is open, or closed. For convenience, we also
+/// optionally set properties for opacity and visibility to help with the
+/// transition animation.
+/// @param {boolean} $opacity
+/// @param {boolean} $visibility
+/// @content
+@mixin expanded($opacity: false, $visibility: false) {
+  @if $opacity == true {
+    opacity: 0;
+  }
+
+  @if $visibility == true {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--side-nav:hover &,
+  // Include the fixed variant here so components can render in both expandable
+  // and fixed side navs
+  .#{$prefix}--side-nav--fixed &,
+  .#{$prefix}--side-nav--expanded & {
+    @if $visibility == true {
+      visibility: visible;
+    }
+    @if $opacity == true {
+      opacity: 1;
+    }
+    @content;
+  }
+}
+
+@mixin carbon-side-nav {
+  //----------------------------------------------------------------------------
+  // Side-nav > Panel
+  //----------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on hover. When expanded, it
+  // should have the same dimensions as when expanded on hover.
+  .#{$prefix}--side-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: mini-units(6);
+    max-width: mini-units(32);
+    color: $shell-side-nav-text-01;
+    background-color: $shell-side-nav-bg-01;
+    will-change: width;
+    // TODO: sync with motion work
+    transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    // Useful to toggle this property to see what's going on when not expanded
+    overflow: hidden;
+    // Separates out the panel from the header of the same color
+    border-top: 1px solid $ibm-colors__gray--80;
+    z-index: z('header');
+  }
+
+  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav--expanded {
+    width: mini-units(32);
+  }
+
+  // When used alongside the header, we update the `top` positioning so that we
+  // can fit both widgets on the same page without overlapping.
+  .#{$prefix}--header ~ .#{$prefix}--side-nav {
+    top: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav--fixed {
+    width: mini-units(26);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__navigation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__header {
+    display: flex;
+    border-bottom: 1px solid $ibm-colors__gray--80;
+    width: 100%;
+    height: mini-units(6);
+    max-width: 100%;
+
+    @include expanded() {
+      height: auto;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header > Details
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__details {
+    display: flex;
+    flex-direction: column;
+    padding-right: mini-units(2);
+    // Necessary for text truncation in title
+    // https://css-tricks.com/flexbox-truncated-text/#article-header-id-3
+    flex: 1;
+    min-width: 0;
+
+    @include expanded($opacity: true, $visibility: true);
+  }
+
+  .#{$prefix}--side-nav__title {
+    @include text-overflow();
+
+    // TODO: sync with type styles
+    font-size: rem(14px);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    margin-top: mini-units(2);
+    user-select: none;
+  }
+
+  // Sync up between our title and select field to get position logic for
+  // text
+  .#{$prefix}--side-nav__title,
+  .#{$prefix}--side-nav__select {
+    padding-left: mini-units(1);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header > Switcher
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--side-nav__switcher-chevron {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: mini-units(1);
+    bottom: 0;
+    fill: $shell-side-nav-icon-01;
+  }
+
+  .#{$prefix}--side-nav__select {
+    @include font-family();
+    appearance: none;
+    flex: 1 1 0%;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: rem(12px);
+    height: mini-units(4);
+    // Flex bug, used to have the select node respect the width if a child has a
+    // value that is longer than the width of the select
+    min-width: 0;
+    // Buffer the right hand side of select so text doesn't overlay the chevron
+    padding-right: mini-units(4);
+  }
+
+  .#{$prefix}--side-nav__select:focus {
+    @include experimental-focus();
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Footer
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__footer {
+    flex: 0 0 rem(48px);
+    width: 100%;
+    background-color: $shell-side-nav-bg-02;
+  }
+
+  .#{$prefix}--side-nav__toggle {
+    @include button-reset($width: true);
+    height: 100%;
+    text-align: left;
+  }
+
+  .#{$prefix}--side-nav__toggle:hover {
+    background-color: $shell-side-nav-bg-03;
+  }
+
+  .#{$prefix}--side-nav__toggle:focus {
+    @include experimental-focus();
+  }
+
+  .#{$prefix}--side-nav__toggle:active {
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Item(s)
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__items {
+    flex: 1 1 0%;
+    overflow: hidden;
+
+    @include expanded() {
+      overflow-y: auto;
+    }
+  }
+
+  // Force all of our side navigation items to be the same dimensions. When our
+  // menu expands, we can unset these values.
+  .#{$prefix}--side-nav__item {
+    width: mini-units(6);
+    height: mini-units(6);
+    overflow: hidden;
+
+    @include expanded() {
+      width: unset;
+      height: unset;
+    }
+  }
+
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover {
+    // TODO: sync color
+    background-color: #333333;
+  }
+
+  .#{$prefix}--side-nav__item--active {
+    // TODO: sync color
+    background-color: #3d3d3d;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > {Menu,Submenu}
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+    @include button-reset($width: true);
+
+    display: flex;
+    align-items: center;
+    color: $shell-side-nav-text-01;
+    // TODO: sync type
+    font-size: rem(14px);
+    line-height: rem(20px);
+    height: mini-units(6);
+    user-select: none;
+  }
+
+  .#{$prefix}--side-nav__submenu:focus {
+    @include experimental-focus();
+  }
+
+  .#{$prefix}--side-nav__submenu-title {
+    @include text-overflow();
+  }
+
+  .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true'] .#{$prefix}--side-nav__submenu-chevron > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu'] {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true'] + .#{$prefix}--side-nav__menu[role='menu'] {
+    display: block;
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[role='menuitem'] {
+    height: mini-units(4);
+    min-height: mini-units(4);
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
+    // TODO: sync with color
+    background-color: #4c4c4c;
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[aria-current='page'] {
+    background-color: $ibm-colors__gray--70;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--side-nav__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    min-height: mini-units(6);
+    padding-right: mini-units(2);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--side-nav__submenu > .#{$prefix}--side-nav__icon,
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__icon {
+    margin-right: mini-units(1);
+  }
+
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text {
+    @include text-overflow();
+    color: $shell-side-nav-text-01;
+    font-size: rem(14px);
+    letter-spacing: 0.1px;
+    line-height: rem(20px);
+    user-select: none;
+  }
+
+  a.#{$prefix}--side-nav__link:focus {
+    @include experimental-focus();
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']::before,
+  a.#{$prefix}--side-nav__link--current::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Icons
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: mini-units(6);
+    height: mini-units(6);
+    // Helpful in flex containers so the icon does not have less than the
+    // expected width
+    flex: 0 0 mini-units(6);
+  }
+
+  .#{$prefix}--side-nav__icon > svg {
+    fill: $shell-side-nav-icon-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Fixed
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+    padding-left: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link {
+    padding-left: mini-units(4);
+  }
+}
+
+@include exports('carbon-side-nav') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-side-nav;
+  }
+}

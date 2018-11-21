@@ -7,32 +7,26 @@ import ComponentExample from '../ComponentExample/ComponentExample';
 /**
  * The page to show the component demo, its code as well as its README.
  */
-const CodePage = ({ metadata, hideViewFullRender }) => {
+const CodePage = ({ metadata, hideViewFullRender, useStaticFullRenderPage }) => {
   const md = new Markdown({ html: true });
-  const subItems = (metadata.items || []).filter(item => !item.isHidden);
+  const subItems = metadata.items || [];
+  const useSingleVariant = !metadata.isCollection && subItems.length <= 1;
   /* eslint-disable react/no-danger */
-  const componentContent =
-    !metadata.isCollection && subItems.length <= 1 ? (
+  const componentContent = subItems.filter(item => !item.isHidden).map(item => (
+    <div key={item.id} className="component-variation">
+      {!useSingleVariant && <h2 className="component-variation__name">{item.label}</h2>}
+      {!useSingleVariant && item.notes && <p>{item.notes}</p>}
       <ComponentExample
-        hideViewFullRender={hideViewFullRender}
+        variant={item.handle.replace(/--default$/, '')}
         component={metadata.name}
-        htmlFile={metadata.renderedContent}
-        useIframe={metadata.useIframe}
+        htmlFile={item.renderedContent}
+        hideViewFullRender={hideViewFullRender}
+        linkOnly={metadata.meta.linkOnly}
+        useIframe={metadata.meta.useIframe}
+        useStaticFullRenderPage={useStaticFullRenderPage}
       />
-    ) : (
-      subItems.map(item => (
-        <div key={item.id} className="component-variation">
-          <h2 className="component-variation__name">{item.label}</h2>
-          {item.notes && metadata.notes !== item.notes && <p>{item.notes}</p>}
-          <ComponentExample
-            variant={item.handle.replace(/--default$/, '')}
-            component={metadata.name}
-            htmlFile={item.renderedContent}
-            useIframe={metadata.useIframe}
-          />
-        </div>
-      ))
-    );
+    </div>
+  ));
 
   return (
     <div className="page code-page test">
@@ -53,6 +47,11 @@ CodePage.propTypes = {
    * `true` to hide "full render" link.
    */
   hideViewFullRender: PropTypes.bool,
+
+  /**
+   * `true` to use static full render page.
+   */
+  useStaticFullRenderPage: PropTypes.bool,
 };
 
 export default CodePage;

@@ -40,7 +40,7 @@ class SideNav extends Component {
     const { activeName } = activeItem || {};
     return (
       <InteriorLeftNav className={className} activeHref={activeName ? `/demo/${activeName}` : ''}>
-        {items.map(item => {
+        {items.filter(item => !item.isHidden).map(item => {
           const { id, name, label } = item;
           return (
             <InteriorLeftNavItem key={id} href={`/demo/${name}`}>
