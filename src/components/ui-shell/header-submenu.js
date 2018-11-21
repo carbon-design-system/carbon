@@ -12,6 +12,7 @@ const forEach = Array.prototype.forEach;
 export default class HeaderSubmenu extends mixin(createComponent, initComponentBySearch, handles, trackBlur) {
   constructor(element, options) {
     super(element, options);
+    this.manage(on(this.element, 'click', this._handleClick));
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
   /**
@@ -50,7 +51,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
           // possible arrow keys
         }[event.which];
       case 'click':
-        return eventMatches(event.target, this.options.selectorItem) ? this.constructor.actions.CLOSE_SUBMENU : null;
+        return eventMatches(event, this.options.selectorItem) ? this.constructor.actions.CLOSE_SUBMENU : null;
       case 'focus':
         return this.constructor.actions.OPEN_SUBMENU;
 
@@ -139,6 +140,22 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   };
 
   /**
+   * @param {Event} event The event triggering this method.
+   * @returns {void}
+   */
+  _handleClick = event => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    if (!trigger) {
+      return;
+    }
+    const action = this._getAction(event); // null | close
+    if (action) {
+      const shouldBeExpanded = this._getNewState(action);
+      this._setState({ shouldBeExpanded });
+    }
+  };
+
+  /**
    * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
@@ -159,14 +176,14 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
         break;
       case this.constructor.actions.OPEN_SUBMENU:
       case this.constructor.actions.CLOSE_SUBMENU: {
-        const newState = this._getNewState(action);
-        this._setState({ shouldBeExpanded: newState });
+        const shouldBeExpanded = this._getNewState(action);
+        this._setState({ shouldBeExpanded });
         break;
       }
 
       case this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS: {
-        const newState = this._getNewState(action);
-        this._setState({ shouldBeExpanded: newState, shouldFocusOnOpen: true });
+        const shouldBeExpanded = this._getNewState(action);
+        this._setState({ shouldBeExpanded, shouldFocusOnOpen: true });
         break;
       }
 
