@@ -9,7 +9,7 @@
   Most noticeably, the first menuitem in a submenu should receive a tabindex of
   "0", while the rest should get "-1"
 -->
-<nav class="{{@root.prefix}}--header__nav" aria-label="Platform Name">
+<nav class="{{@root.prefix}}--header__nav" aria-label="Platform Name" data-header-nav>
   <ul class="{{@root.prefix}}--header__menu-bar" role="menubar" aria-label="Platform Name">
     {{#each header.navLinks}}
     {{#if href}}
