@@ -95,16 +95,6 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   };
 
   /**
-   * Closes the menu if this component loses focus.
-   */
-  handleBlur = () => {
-    const trigger = this.element.querySelector(this.options.selectorTrigger);
-    if (trigger) {
-      trigger.setAttribute(this.options.attribExpanded, false);
-    }
-  };
-
-  /**
    * @returns {Element} Currently highlighted element.
    */
   getCurrentNavigation = () => {
@@ -136,6 +126,16 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
         current.focus();
         break;
       }
+    }
+  };
+
+  /**
+   * Closes the menu if this component loses focus.
+   */
+  handleBlur = () => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    if (trigger) {
+      trigger.setAttribute(this.options.attribExpanded, false);
     }
   };
 
