@@ -24,7 +24,8 @@ describe('Header Submenu', function() {
     beforeAll(function() {
       element = document.createElement('li');
       triggerNode = document.createElement('a');
-      triggerNode.className = 'bx--header__menu-title';
+      triggerNode.classList.add('bx--header__menu-title');
+      triggerNode.classList.add('bx--header__menu-item');
       element.appendChild(triggerNode);
       const itemsContainerNode = document.createElement('bx--header__menu');
       itemsContainerNode.className = 'bx--header__menu';
@@ -38,20 +39,9 @@ describe('Header Submenu', function() {
       document.body.appendChild(element);
     });
 
-    it('should open the menu on click', function() {
+    it('should do nothing on menu title click', function() {
+      triggerNode.setAttribute('aria-expanded', 'false');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
-    });
-
-    it('should close an open menu on click', function() {
-      triggerNode.setAttribute('aria-expanded', 'true');
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
-    });
-
-    it('should close menu when clicking document', function() {
-      triggerNode.setAttribute('aria-expanded', 'true');
-      document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
     });
 
@@ -91,6 +81,8 @@ describe('Header Submenu', function() {
 
     beforeEach(function() {
       triggerNode.setAttribute('aria-expanded', 'true');
+      // TODO: investigate
+      triggerNode.setAttribute('tabindex', '0');
       triggerNode.focus();
     });
 
@@ -100,7 +92,7 @@ describe('Header Submenu', function() {
     });
 
     it('should always close menu when document is clicked', function() {
-      document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      input.focus();
       expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
     });
 
@@ -117,20 +109,22 @@ describe('Header Submenu', function() {
 
   describe('Handle keydown', function() {
     let headerSubmenu;
-    let element;
+    let element1;
     let triggerNode;
     let itemsContainerNode;
     let itemNode1;
     let itemNode2;
     let itemLinkNode1;
     let itemLinkNode2;
+    let element2;
 
     beforeAll(function() {
-      element = document.createElement('li');
+      element1 = document.createElement('li');
+      element1.classList.add('bx--header__submenu');
       triggerNode = document.createElement('a');
       triggerNode.className = 'bx--header__menu-title';
-      element.appendChild(triggerNode);
-      itemsContainerNode = document.createElement('bx--header__menu');
+      element1.appendChild(triggerNode);
+      itemsContainerNode = document.createElement('ul');
       itemsContainerNode.className = 'bx--header__menu';
       itemNode1 = document.createElement('li');
       itemNode2 = document.createElement('li');
@@ -142,9 +136,11 @@ describe('Header Submenu', function() {
       itemNode2.appendChild(itemLinkNode2);
       itemsContainerNode.appendChild(itemNode1);
       itemsContainerNode.appendChild(itemNode2);
-      element.appendChild(itemsContainerNode);
-      headerSubmenu = new HeaderSubmenu(element);
-      document.body.appendChild(element);
+      element1.appendChild(itemsContainerNode);
+      element2 = element1.cloneNode(true);
+      headerSubmenu = new HeaderSubmenu(element1);
+      document.body.appendChild(element1);
+      document.body.appendChild(element2);
     });
 
     describe('Arrow keys', function() {
@@ -153,48 +149,53 @@ describe('Header Submenu', function() {
       const downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
       Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
 
-      it('should move focus from currently focused item to previous menu item', function() {
-        spyOn(itemLinkNode2, 'focus');
-        triggerNode.setAttribute('aria-expanded', 'true');
-        triggerNode.dispatchEvent(upArrowKeydown);
-        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
-        expect(itemLinkNode2.focus).toHaveBeenCalled();
-        expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
-      });
+      describe('Up/Down arrow keys', function() {
+        it('should move focus from currently focused item to previous menu item', function() {
+          spyOn(itemLinkNode2, 'focus');
+          triggerNode.setAttribute('aria-expanded', 'true');
+          triggerNode.dispatchEvent(upArrowKeydown);
+          expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+          expect(itemLinkNode2.focus).toHaveBeenCalled();
+          expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
+        });
 
-      it('should wrap focus from first menu item to last menu item', function() {
-        spyOn(itemLinkNode1, 'focus');
-        spyOn(itemLinkNode2, 'focus');
-        triggerNode.setAttribute('aria-expanded', 'true');
-        triggerNode.dispatchEvent(downArrowKeydown);
-        triggerNode.dispatchEvent(upArrowKeydown);
-        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
-        expect(itemLinkNode1.focus).toHaveBeenCalledTimes(1);
-        expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
-      });
+        it('should wrap focus from first menu item to last menu item', function() {
+          spyOn(itemLinkNode1, 'focus');
+          spyOn(itemLinkNode2, 'focus');
+          triggerNode.setAttribute('aria-expanded', 'true');
+          triggerNode.dispatchEvent(downArrowKeydown);
+          triggerNode.dispatchEvent(upArrowKeydown);
+          expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+          expect(itemLinkNode1.focus).toHaveBeenCalledTimes(1);
+          expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
+        });
 
-      it('should open menu when menu is focused', function() {
-        triggerNode.dispatchEvent(downArrowKeydown);
-        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
-      });
+        it('should not open menu when menu is focused', function() {
+          triggerNode.dispatchEvent(downArrowKeydown);
+          expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
+        });
 
-      it('should move focus from currently focused item to next menu item', function() {
-        spyOn(itemLinkNode2, 'focus');
-        triggerNode.setAttribute('aria-expanded', 'true');
-        triggerNode.dispatchEvent(downArrowKeydown);
-        triggerNode.dispatchEvent(downArrowKeydown);
-        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
-        expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
-      });
+        it('should move focus from currently focused item to next menu item', function() {
+          // TODO: figure out why we need to set tabindex
+          itemLinkNode1.setAttribute('tabindex', 0);
+          spyOn(itemLinkNode2, 'focus');
+          triggerNode.setAttribute('aria-expanded', 'true');
+          itemLinkNode1.focus();
+          triggerNode.dispatchEvent(downArrowKeydown);
+          expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+          expect(itemLinkNode2.focus).toHaveBeenCalledTimes(1);
+        });
 
-      it('should wrap focus from last menu item to first menu item', function() {
-        spyOn(itemLinkNode1, 'focus');
-        triggerNode.setAttribute('aria-expanded', 'true');
-        triggerNode.dispatchEvent(downArrowKeydown);
-        triggerNode.dispatchEvent(downArrowKeydown);
-        triggerNode.dispatchEvent(downArrowKeydown);
-        expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
-        expect(itemLinkNode1.focus).toHaveBeenCalledTimes(2);
+        it('should wrap focus from last menu item to first menu item', function() {
+          // TODO: figure out why we need to set tabindex
+          itemLinkNode2.setAttribute('tabindex', 0);
+          spyOn(itemLinkNode1, 'focus');
+          triggerNode.setAttribute('aria-expanded', 'true');
+          itemLinkNode2.focus();
+          triggerNode.dispatchEvent(downArrowKeydown);
+          expect(triggerNode.getAttribute('aria-expanded')).toBe('true');
+          expect(itemLinkNode1.focus).toHaveBeenCalledTimes(1);
+        });
       });
     });
 
@@ -247,7 +248,7 @@ describe('Header Submenu', function() {
 
     afterAll(function() {
       headerSubmenu.release();
-      document.body.removeChild(element);
+      document.body.removeChild(element1);
     });
   });
 });
