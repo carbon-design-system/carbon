@@ -170,21 +170,21 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
 
     switch (action) {
       case this.constructor.actions.DELEGATE_TO_FLYOUT_MENU:
+        // currently we do not have a scenario that handles flyout menu
         // handleFlyoutMenu
         break;
-      case this.constructor.actions.OPEN_SUBMENU:
+      // currently we do not have a scenario that opens a submenu on keydown
+      // case this.constructor.actions.OPEN_SUBMENU:
       case this.constructor.actions.CLOSE_SUBMENU: {
         const shouldBeExpanded = this._getNewState(action);
         this._setState({ shouldBeExpanded });
         break;
       }
-
       case this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS: {
         const shouldBeExpanded = this._getNewState(action);
         this._setState({ shouldBeExpanded, shouldFocusOnOpen: true });
         break;
       }
-
       default: {
         const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
         if (expanded) {
