@@ -12,10 +12,10 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   constructor(element, options) {
     super(element, options);
     const hasFocusOut = 'onfocusout' in window;
-    this.manage(on(this.element, hasFocusOut ? 'focusout' : 'blur', this._handleBlur, !hasFocusOut));
-    this.manage(on(this.element, 'mouseenter', this._handleHover));
-    this.manage(on(this.element, 'mouseleave', this._handleHover));
-    this.manage(on(this.element, 'click', this._handleClick));
+    this.manage(on(this.element, hasFocusOut ? 'focusout' : 'blur', this._handleEvent, !hasFocusOut));
+    this.manage(on(this.element, 'mouseenter', this._handleEvent));
+    this.manage(on(this.element, 'mouseleave', this._handleEvent));
+    this.manage(on(this.element, 'click', this._handleEvent));
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
   /**
@@ -141,43 +141,12 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     }
   };
 
-  _handleHover = event => {
+  _handleEvent = event => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (!trigger) {
       return;
     }
     const action = this._getAction(event);
-    if (action) {
-      const shouldBeExpanded = this._getNewState(action);
-      this._setState({ shouldBeExpanded });
-    }
-  };
-
-  /**
-   * Closes the menu if this component loses focus.
-   */
-  _handleBlur = event => {
-    const trigger = this.element.querySelector(this.options.selectorTrigger);
-    if (!trigger) {
-      return;
-    }
-    const action = this._getAction(event);
-    if (action) {
-      const shouldBeExpanded = this._getNewState(action);
-      this._setState({ shouldBeExpanded });
-    }
-  };
-
-  /**
-   * @param {Event} event The event triggering this method.
-   * @returns {void}
-   */
-  _handleClick = event => {
-    const trigger = this.element.querySelector(this.options.selectorTrigger);
-    if (!trigger) {
-      return;
-    }
-    const action = this._getAction(event); // null | close
     if (action) {
       const shouldBeExpanded = this._getNewState(action);
       this._setState({ shouldBeExpanded });
