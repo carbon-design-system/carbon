@@ -74,7 +74,7 @@ For the IBM Design Language, we output the following packages:
 | `@carbon/colors` | Provides the JavaScript and SCSS assets for IDL colors and tokens                                                                                                   |
 | `@carbon/grid`   | Provides a Flexbox-based set of classes to be used for building using the IDL grid                                                                                  |
 | `@carbon/icons`  | Provides optimized SVG assets and JavaScript assets for using icons in Vanilla JS, or to build a [framework icon package](/docs/guides/building-an-icon-library.md) |
-| `@carbon/layout` | Provides utilities and helpers in SCSS and JavaScript for construting layouts based on the IDL                                                                      |
+| `@carbon/layout` | Provides utilities and helpers in SCSS and JavaScript for constructing layouts based on the IDL                                                                      |
 | `@carbon/motion` | Provides utilities and helpers for implementing motion following the IDL                                                                                            |
 | `@carbon/type`   | Provides utilities and helpers for typography following the IDL                                                                                                     |
 
