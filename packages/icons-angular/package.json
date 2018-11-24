@@ -1,0 +1,43 @@
+{
+  "name": "@carbon/icons-angular",
+  "description": "Carbon icons in Angular",
+  "version": "0.0.1-alpha.16",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-angular",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "files": [
+    "lib",
+    "umd"
+  ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node tasks/build.js",
+    "clean": "node tasks/clean.js"
+  },
+  "peerDependencies": {
+    "@angular/compiler": "^6.0.0",
+    "@angular/core": "^6.0.0"
+  },
+  "devDependencies": {
+    "@angular/compiler": "6.1.10",
+    "@angular/compiler-cli": "6.1.10",
+    "@angular/core": "6.1.10",
+    "@carbon/cli-reporter": "0.0.1-alpha.16",
+    "@carbon/icon-helpers": "0.0.1-alpha.16",
+    "@carbon/icons": "0.0.1-alpha.16",
+    "change-case": "3.0.2",
+    "fs-extra": "7.0.1",
+    "rollup": "^0.66.6",
+    "typescript": "2.9.2"
+  }
+}
