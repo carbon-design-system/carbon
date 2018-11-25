@@ -70,3 +70,7 @@ Here's what we're looking for during our AVT2 audit:
 4. If you can move focus to an element with the keyboard you should be able to move focus away from that element with a keyboard.
 5. Navigating through the pages tabbable elements makes sense in terms of their order.
 6. Long or burdensome lists, links, or navigation should provide a "skip to main content" link.
+
+# How do we test
+
+Essentially open the component or web page you're auditing. Then make a note of all the elements on the page that are interactible with a mouse in any way. Finally moving through the list above attempt to interact with those elements using only your keyboard.
