@@ -1,6 +1,6 @@
 {
   "name": "@carbon/icons-handlebars",
-  "version": "0.0.1-alpha.16",
+  "version": "0.0.1-alpha.17",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-handlebars",
@@ -19,8 +19,8 @@
     "handlebars": "^4.0.12"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "0.0.1-alpha.16",
-    "@carbon/icons": "0.0.1-alpha.16"
+    "@carbon/icon-helpers": "0.0.1-alpha.17",
+    "@carbon/icons": "0.0.1-alpha.17"
   },
   "devDependencies": {
     "handlebars": "^4.0.12"

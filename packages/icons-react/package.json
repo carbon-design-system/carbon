@@ -1,6 +1,6 @@
 {
   "name": "@carbon/icons-react",
-  "version": "0.0.1-alpha.16",
+  "version": "0.0.1-alpha.17",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -26,12 +26,12 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "0.0.1-alpha.16",
+    "@carbon/icon-helpers": "0.0.1-alpha.17",
     "prop-types": "^15.6.2"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "0.0.1-alpha.16",
-    "@carbon/icons": "0.0.1-alpha.16",
+    "@carbon/cli-reporter": "0.0.1-alpha.17",
+    "@carbon/icons": "0.0.1-alpha.17",
     "change-case": "^3.0.2",
     "fs-extra": "^7.0.0",
     "prettier": "^1.14.3",
