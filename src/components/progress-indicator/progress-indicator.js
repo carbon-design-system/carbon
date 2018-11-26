@@ -51,6 +51,16 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
     }));
   }
 
+  _addOverflowTooltip() {
+    const stepLabels = [...this.element.querySelectorAll(this.options.selectorLabel)];
+
+    stepLabels.forEach(step => {
+      if (step.scrollWidth > step.offsetWidth) {
+        step.classList.add(this.options.classOverflowLabel);
+      }
+    });
+  }
+
   /**
    * Returns current step; gives detail about element and index.
    */
@@ -178,10 +188,12 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       selectorCurrent: `.${prefix}--progress-step--current`,
       selectorIncomplete: `.${prefix}--progress-step--incomplete`,
       selectorComplete: `.${prefix}--progress-step--complete`,
+      selectorLabel: `.${prefix}--progress-label`,
       classStep: `${prefix}--progress-step`,
       classComplete: `${prefix}--progress-step--complete`,
       classCurrent: `${prefix}--progress-step--current`,
       classIncomplete: `${prefix}--progress-step--incomplete`,
+      classOverflowLabel: `${prefix}--progress-label-overflow`,
     };
   }
 }
