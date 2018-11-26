@@ -268,7 +268,7 @@
       cursor: not-allowed;
     }
 
-    .progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+    .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
       display: none;
     }
   }
