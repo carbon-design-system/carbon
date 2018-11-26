@@ -148,7 +148,7 @@
   }
 
   &:focus::after {
-    border-color: $brand-01;
+    border-color: $focus;
   }
 
   &:disabled:hover,
