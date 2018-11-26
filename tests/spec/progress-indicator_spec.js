@@ -35,10 +35,13 @@ describe('ProgressIndicator', function() {
         selectorCurrent: '.bx--progress-step--current',
         selectorIncomplete: '.bx--progress-step--incomplete',
         selectorComplete: '.bx--progress-step--complete',
+        selectorLabel: '.bx--progress-label',
         classStep: 'bx--progress-step',
         classComplete: 'bx--progress-step--complete',
         classCurrent: 'bx--progress-step--current',
         classIncomplete: 'bx--progress-step--incomplete',
+        classOverflowLabel: 'bx--progress-label-overflow',
+        minWidth: 87,
       });
     });
 
