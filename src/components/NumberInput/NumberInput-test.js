@@ -103,6 +103,9 @@ describe('NumberInput', () => {
         expect(wrapper.find('label').hasClass('bx--visually-hidden')).toEqual(
           true
         );
+        expect(
+          wrapper.find('.bx--number').hasClass('bx--number--nolabel')
+        ).toEqual(true);
       });
 
       describe('initial rendering', () => {
