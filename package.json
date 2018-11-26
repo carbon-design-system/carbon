@@ -39,10 +39,10 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@carbon/icons-handlebars": "^0.0.1-alpha.13",
-    "@carbon/colors": "^0.0.1-alpha.7",
-    "@carbon/layout": "^0.0.1-alpha.7",
-    "@carbon/motion": "^0.0.1-alpha.7",
+    "@carbon/colors": "^0.0.1-alpha.16",
+    "@carbon/icons-handlebars": "^0.0.1-alpha.16",
+    "@carbon/layout": "^0.0.1-alpha.16",
+    "@carbon/motion": "^0.0.1-alpha.16",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@frctl/fractal": "^1.1.0",
