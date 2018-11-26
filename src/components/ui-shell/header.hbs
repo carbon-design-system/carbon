@@ -10,7 +10,11 @@
   {{/if}}
   </button>
   <a class="{{@root.prefix}}--header__name" href="#" title="{{header.name}}">
-    {{header.company}} <span class="{{@root.prefix}}--header__name">{{header.platform}}</span>
+    <span class="bx--header__name--prefix">
+      {{header.company}}
+      &nbsp;
+    </span>
+    {{header.platform}}
   </a>
   {{> header-nav }}
   <div class="{{@root.prefix}}--header__global">

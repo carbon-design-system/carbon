@@ -19,6 +19,7 @@
     height: mini-units(6);
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
+    z-index: z('header');
   }
 
   .#{$prefix}--header__action {
@@ -58,14 +59,14 @@
     height: 100%;
     padding: 0 mini-units(2);
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 0.1px;
     line-height: 20px;
     user-select: none;
   }
 
-  .#{$prefix}--header__name {
-    font-weight: 600;
+  .#{$prefix}--header__name--prefix {
+    font-weight: 400;
   }
 
   a.#{$prefix}--header__name,

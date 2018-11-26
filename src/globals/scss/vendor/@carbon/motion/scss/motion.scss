@@ -1,0 +1,41 @@
+/// Common easings for components in the Carbon Design System
+$easings: (
+  standard: (
+    productive: cubic-bezier(0.2, 0, 0.38, 0.9),
+    expressive: cubic-bezier(0.4, 0.14, 0.3, 1),
+  ),
+  entrance: (
+    productive: cubic-bezier(0, 0, 0.38, 0.9),
+    expressive: cubic-bezier(0, 0, 0.3, 1),
+  ),
+  exit: (
+    productive: cubic-bezier(0.2, 0, 1, 0.9),
+    expressive: cubic-bezier(0.4, 0.14, 1, 1),
+  ),
+);
+
+/// Get the transition property for a given easing and motion mode. Easings that
+/// are currently supported include: standard, entrance, and exit. We also offer
+/// two modes: productive and expressive.
+/// @param {String} $name - the name of the easing curve to apply
+/// @param {String} $mode - the mode for the easing curve to use
+/// @return {cubic-bezier}
+@function motion($name, $mode: productive) {
+  @if map-has-key($easings, $name) {
+    $easing: map-get($easings, $name);
+    @if map-has-key($easing, $mode) {
+      @return map-get($easing, $mode);
+    } @else {
+      @error 'Unable to find a mode for the easing #{$easing} called: #{$mode}.';
+    }
+  } @else {
+    @error 'Unable to find an easing named #{$easing} in our supported easings.';
+  }
+}
+
+/// Set the transition-property for a given easing and motion mode.
+/// @param {String} $name - the name of the easing curve to apply
+/// @param {String} $mode - the mode for the easing curve to use
+@mixin motion($name, $mode) {
+  transition-property: motion($name, $mode);
+}

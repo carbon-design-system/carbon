@@ -27,9 +27,11 @@ const sourcemaps = require('gulp-sourcemaps');
 const gutil = require('gulp-util');
 const header = require('gulp-header');
 const jsdoc = require('gulp-jsdoc3');
+const through = require('through2');
 
 // Rollup
 const rollup = require('rollup');
+const commonjs = require('rollup-plugin-commonjs');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
@@ -208,10 +210,36 @@ gulp.task('scripts:es', () => {
     ],
     plugins: ['transform-class-properties'],
   };
-
+  const pathsToConvertToESM = new Set([
+    path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
+    path.resolve(__dirname, 'src/globals/js/settings.js'),
+  ]);
+  const cjsPlugin = commonjs();
+  cjsPlugin.options({ entry: '' });
   return gulp
     .src(srcFiles)
     .pipe(babel(babelOpts))
+    .pipe(
+      through.obj((file, enc, callback) => {
+        if (!pathsToConvertToESM.has(file.path)) {
+          callback(null, file);
+        } else {
+          Promise.resolve(cjsPlugin.transform(file.contents.toString(), file.path)).then(
+            result => {
+              if (!result) {
+                callback(null, file);
+              } else {
+                file.contents = Buffer.from(result.code);
+                callback(null, file);
+              }
+            },
+            err => {
+              callback(err);
+            }
+          );
+        }
+      })
+    )
     .pipe(gulp.dest('es/'));
 });
 
