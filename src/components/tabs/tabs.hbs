@@ -1,9 +1,15 @@
 <nav data-tabs class="{{@root.prefix}}--tabs" role="navigation">
   <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
     <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
-    <svg width="10" height="5" viewBox="0 0 10 5">
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
+    {{#if featureFlags.componentsX}}
+      <svg width="12" height="7" viewBox="0 0 12 7">
+        <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+      </svg>
+    {{else}}
+      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+        <path d="M10 0L5 5 0 0z"></path>
+      </svg>
+    {{/if}}
   </div>
   <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">
     {{#each items}}
