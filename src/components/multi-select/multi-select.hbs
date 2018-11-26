@@ -21,17 +21,18 @@
       </svg>
     </div>
   </div>
-  <div class="{{@root.prefix}}--list-box__menu">
+  <fieldset class="{{@root.prefix}}--list-box__menu">
+    <legend class="{{@root.prefix}}--assistive-text">Description of form elements within the fieldset</legend>
     {{#each items}}
-    <div class="{{@root.prefix}}--list-box__menu-item" id="{{id}}">
+    <div class="{{@root.prefix}}--list-box__menu-item">
       <div class="{{@root.prefix}}--form-item {{@root.prefix}}--checkbox-wrapper">
-        <label for="{{id}}" title="{{label}}" class="{{@root.prefix}}--checkbox-label">
-          <input type="checkbox" name="Option 1" readonly="" tabindex="-1" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on">
+        <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
+          <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on">
           <span class="{{@root.prefix}}--checkbox-appearance"></span>
           <span class="{{@root.prefix}}--checkbox-label-text">{{label}}</span>
         </label>
       </div>
     </div>
     {{/each}}
-  </div>
+  </fieldset>
 </div>
