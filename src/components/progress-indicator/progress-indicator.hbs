@@ -42,7 +42,7 @@
           </svg>
         {{/if}}
       {{/is}}
-      <p tabindex="0" class="{{@root.prefix}}--progress-label {{@root.prefix}}--progress-label-overflow" aria-describedby="label-tooltip">{{label}}</p>
+      <p tabindex="0" class="{{@root.prefix}}--progress-label" {{#if ../componentsX}} aria-describedby="label-tooltip" {{/if}}>{{label}}</p>
       {{#if ../componentsX}}
         <div class="{{@root.prefix}}--tooltip--definition">
           <div id="label-tooltip" role="tooltip" class="{{@root.prefix}}--tooltip--definition__bottom">
