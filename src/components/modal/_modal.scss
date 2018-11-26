@@ -16,7 +16,7 @@
 
 @import '../button/button';
 
-@include exports('modal') {
+@mixin modal {
   .#{$prefix}--modal {
     @include reset;
     @include font-family;
@@ -146,4 +146,8 @@
   .#{$prefix}--modal-close__icon {
     fill: $ui-05;
   }
+}
+
+@include exports('modal') {
+  @include modal;
 }
