@@ -124,7 +124,9 @@
 
   .#{$prefix}--file-btn {
     display: inline-flex;
+    width: rem(95px);
     margin: 0;
+    padding-right: 1rem;
   }
 
   .#{$prefix}--label-description {
@@ -148,7 +150,7 @@
     justify-content: space-between;
     min-height: rem(30px);
     background-color: $inverse-01;
-    padding: 0 $spacing-sm 0 $spacing-md;
+    padding: 0 $spacing-xs 0 $spacing-md;
     margin-bottom: $spacing-sm;
 
     &:last-child {
@@ -200,6 +202,8 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    width: 1rem;
+    height: 1rem;
   }
 }
 
