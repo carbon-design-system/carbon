@@ -42,6 +42,10 @@ export default class InlineCheckbox extends React.Component {
      * Provide a handler that is invoked on the key down event for the control
      */
     onKeyDown: PropTypes.func,
+    /**
+     * Provide an optional tooltip for the InlineCheckbox
+     */
+    title: PropTypes.string,
   };
 
   componentDidMount() {
@@ -68,6 +72,7 @@ export default class InlineCheckbox extends React.Component {
       name,
       onClick,
       onKeyDown,
+      title = undefined,
     } = this.props;
     const inputProps = {
       id,
@@ -99,6 +104,7 @@ export default class InlineCheckbox extends React.Component {
             htmlFor={id}
             className="bx--checkbox-label"
             aria-label={ariaLabel}
+            title={title}
           />
         }
       </>
