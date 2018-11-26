@@ -406,7 +406,8 @@ export default class Tooltip extends Component {
               onBlur={evt => this.handleMouse(evt)}
               aria-haspopup="true"
               aria-expanded={open}
-              {...ariaOwnsProps}>
+              {...ariaOwnsProps}
+              role="tooltip">
               {triggerText}
             </div>
           )}
