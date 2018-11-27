@@ -12,11 +12,11 @@ const steps = [
   },
   {
     state: 'current',
-    label: 'Long Second step',
+    label: 'Overflow Ex. 1',
   },
   {
     state: 'incomplete',
-    label: 'Really Long Multi Line Third step',
+    label: 'Overflow Ex. 2 Multi Line',
   },
   {
     state: 'incomplete',
