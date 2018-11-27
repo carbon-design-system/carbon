@@ -1,5 +1,6 @@
 'use strict';
 
+const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 const itemsPerPageChoices = [
@@ -52,6 +53,7 @@ const pageNumberChoices = [
 
 module.exports = {
   context: {
+    featureFlags,
     prefix,
   },
   variants: [
