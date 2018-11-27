@@ -1,7 +1,5 @@
 # Automated Verification Testing (AVT) stage 1
 
-## Introduction👋
-
 AVT1 testing is done with a browser extension developed by IBM called the Dynamic Assessment Plugin (DAP). It's a great first step to locking down and ensuring inclusivity and accessibility in your websites and components.
 
 ## Installing DAP🔧
@@ -51,3 +49,52 @@ If running DAP produces no violations (that's awesome🎉) we still want to reco
    _Be warned: Occasionally clicking the Download Report button won't work. This can be a serious pain if the dev has already gone through and ignored false positives. I've had a 100% success rate with Download Report if after I open the DAP panel in my dev tools I then reload the page with the panel open. 😞 -- D.A._
 
 3. [Follow this link](https://ibm.biz/BdYkMA) and select the folder that corresponds with the ruleset the component was tested against and drop the JSON file in there.
+
+# Automated Verification Testing stage 2
+
+["Keyboard accessibility is one of the most important aspects of web accessibility."](https://webaim.org/techniques/keyboard/) and it's the focus of part 1 of our AVT2 testing!
+
+Here's what we're looking for during our AVT2 audit. Therea are two main parts:
+
+## Keyboard accessibility testing⌨️
+
+1. All functionality should be available from a keyboard without exception.
+2. Keyboard navigation uses standardized keystrokes:
+
+   - TAB to move forward through the various focusable elements.
+   - SHIFT+TAB to move backward through previous focusable elements.
+   - ENTER or SPACE to activate, select, or otherwise interact with focusable elements.
+   - Escape to close popups, toasts, or modals and return focus to main page content.
+
+     _Any variance on these standardized keystrokes should be outlined clearly to the user beforehand_
+
+3. If an element can receive keyboard focus it should reflect that in it's styling with a focused state.
+4. If you can move focus to an element with the keyboard you should be able to move focus away from that element with a keyboard.
+5. Navigating through the pages tabbable elements makes sense in terms of their order.
+6. Long or burdensome lists, links, or navigation should provide a "skip to main content" link.
+
+### How to test
+
+Essentially open the component or web page you're auditing. Then make a note of all the elements on the page that are interactible with a mouse in any way. Finally moving through the list above attempt to interact with those elements using only your keyboard in the manner described. Integrating this test throughout each stage of development will save you the pain of retro-fitting a component with the necessary keyboard functionality.
+
+## Screen Magnifier testing🔎
+
+(Credit to Frederick Creemers [excellent article](https://dev.to/_bigblind/how-to-make-your-website-accessible-to-people-who-use-a-screen-magnifier) talking about his experience as a visually impaired screen magnification user on the web.)
+
+A user with a screen magnifier views web content on a component by component basis through a 2x, 4x, or 8x (etc) zoomed in box. Two things become very important when using a screen magnifier -- context and component permanence. We can dig into those points further:
+
+1. Tooltips, toasts and popups should be shown to the user adjacent to where they were triggered.
+
+   It is a common pattern on the web to have the user perform a task and have that task's confirmation displayed elsewhere in the user interface (like a toast assuring the user their work was saved, or a small number in the top corner indicating something's in your shopping cart). This can leave screen magnifier users wondering if their actions had any result at all. Instead keep confirmation, dialogues, tooltips and toasts adjacent to the actions that triggered them.
+
+2. Tooltips or any word bubble type notifications or information areas should not depend on a mouse hover.
+
+   Depending on hover as a mouse action to trigger a dialogue or tooltip isn't accessible. Commonly a screen magnifier shows a zoomed in view of the page relative to the cursor position. This means that unless then tooltip or dialogue is quite small the user can't trigger the component _and_ scroll it's content into view.
+
+3. Don't obscure content on mouse hover
+
+   Obscuring all or some of the page on mouse hover with an overlay or blur is a problem for user of screen magnifiers. Maintain required contrast ration and instead signal to your users with some other visual dinstinction.
+
+### How to test
+
+Keyboard accessibility is generally more familiar to developers than magnification tools, but Take this opportunity to familiarize yourself with macOS Zoom Windows Magnifier, or your OS's native low vision accessibility tools as they are relied on by millions of people with temporary or permanent vision impairment every day.
