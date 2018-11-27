@@ -141,6 +141,10 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     }
   };
 
+  /**
+   * generic event handler for getting and setting new state
+   * @param {Event} event The event triggering this method
+   */
   _handleEvent = event => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (!trigger) {
