@@ -31,3 +31,5 @@ export { default as Lightbox } from '../../components/lightbox/lightbox';
 export { default as CodeSnippet } from '../../components/code-snippet/code-snippet';
 export { default as TextInput } from '../../components/text-input/text-input';
 export { default as SideNav } from '../../components/ui-shell/side-nav';
+export { default as HeaderSubmenu } from '../../components/ui-shell/header-submenu';
+export { default as HeaderNav } from '../../components/ui-shell/header-nav';

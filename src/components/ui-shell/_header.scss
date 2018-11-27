@@ -30,12 +30,11 @@
   }
 
   .#{$prefix}--header__action:hover {
-    background-color: $shell-ui-02;
+    background-color: #333333;
   }
 
   .#{$prefix}--header__action--active,
-  .#{$prefix}--header__action--active:hover,
-  .#{$prefix}--header__action:active {
+  .#{$prefix}--header__action--active:hover {
     background-color: $shell-brand-01;
   }
 
@@ -115,6 +114,7 @@
     background-color: #333333;
   }
 
+  .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item[role='menuitem']:active {
     background-color: $ibm-colors__gray--80;
   }
@@ -166,6 +166,7 @@
 
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem']:hover {
     background-color: #4c4c4c;
+    color: #fff;
   }
 
   .#{$prefix}--header__menu-arrow {
