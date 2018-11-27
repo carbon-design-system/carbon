@@ -52,8 +52,9 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
       37: this.constructor.NAVIGATE.BACKWARD, // left arrow
       39: this.constructor.NAVIGATE.FORWARD, // right arrow
     };
-    if (keyCodes[event.which]) {
-      this.navigate(keyCodes[event.which]);
+    const keyCodeMatches = keyCodes[event.which];
+    if (keyCodeMatches) {
+      this.navigate(keyCodeMatches);
     }
   };
 
