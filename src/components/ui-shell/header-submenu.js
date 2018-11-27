@@ -193,10 +193,29 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
             40: this.constructor.NAVIGATE.FORWARD,
           }[event.which];
           switch (event.which) {
+            case 35: {
+              // end key
+              event.preventDefault(); // prevents key from scrolling page
+              const menuItems = this.element.querySelectorAll(this.options.selectorItem);
+              const lastMenuItem = menuItems[menuItems.length - 1];
+              if (lastMenuItem) {
+                lastMenuItem.focus();
+              }
+              break;
+            }
+            case 36: {
+              // home key
+              event.preventDefault(); // prevents key from scrolling page
+              const [firstMenuItem] = this.element.querySelectorAll(this.options.selectorItem);
+              if (firstMenuItem) {
+                firstMenuItem.focus();
+              }
+              break;
+            }
             case 38: // up arrow
             case 40: // down arrow
               this.navigate(direction);
-              event.preventDefault(); // Prevents up/down keys from scrolling container
+              event.preventDefault(); // prevents keys from scrolling page
               break;
             default:
               break;
