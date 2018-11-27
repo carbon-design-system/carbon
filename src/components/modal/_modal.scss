@@ -163,7 +163,7 @@
     justify-content: center;
     content: '';
     opacity: 0;
-    background-color: rgba($ui-03, 0.5);
+    background-color: rgba($ui-05, 0.7);
     transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
     visibility: hidden;
 
@@ -186,45 +186,47 @@
     display: flex;
     flex-direction: column;
     background-color: $ui-01;
-    border-top: $modal-border-top;
-    min-width: 100%;
+    width: 100%;
     max-height: 100%;
     height: 100%;
-    padding: $spacing-xl 3% 0rem 3%;
 
-    @media (min-width: 600px) {
+    @include breakpoint(md) {
       height: auto;
       min-width: 500px;
-      max-width: 75%;
+      max-width: 50%;
       max-height: 90%;
-      padding: $spacing-2xl $spacing-3xl 0 $spacing-3xl;
     }
 
-    @media (min-width: 1024px) {
-      max-width: 50%;
+    @include breakpoint(lg) {
       max-height: 80%;
     }
   }
 
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content {
+    width: 75%;
+    padding-left: 1rem;
+  }
+
   .#{$prefix}--modal-header {
-    margin-bottom: $spacing-lg;
+    padding-top: 1rem;
+    margin-bottom: $spacing-xs;
   }
 
   .#{$prefix}--modal-header__label {
     @include reset;
-    @include typescale('omega');
+    @include typescale('epsilon');
     @include letter-spacing;
-    color: $text-01;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: $spacing-xs;
+    color: $text-02;
+    font-weight: 500;
+    margin-bottom: $spacing-2xs;
   }
 
   .#{$prefix}--modal-header__heading {
     @include reset;
     @include typescale('beta');
     font-weight: 300;
-    color: $text-02;
+    color: $text-01;
   }
 
   .#{$prefix}--modal-content {
@@ -239,39 +241,46 @@
   }
 
   .#{$prefix}--modal-footer {
-    margin-top: auto;
     display: flex;
-    justify-content: flex-end;
+    margin-top: auto;
+    height: 4rem;
     background-color: $modal-footer-background-color;
-    margin-left: rem(-24px);
-    margin-right: rem(-24px);
-    padding: $spacing-xl $spacing-xl;
 
-    @media (min-width: 600px) {
-      margin-left: rem(-48px);
-      margin-right: rem(-48px);
-      padding: $spacing-xl $spacing-3xl;
+    button.#{$prefix}--btn {
+      max-width: none;
+      width: 50%;
+      margin: 0;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
     }
   }
 
   .#{$prefix}--modal-close {
     position: absolute;
-    top: rem(16px);
-    right: rem(16px);
-    padding: 0;
+    top: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
     overflow: hidden;
     cursor: pointer;
     background-color: transparent;
-    border: none;
-    padding: 0.25rem 0.25rem 0.125rem;
+
+    &:hover {
+      background-color: $hover-field;
+    }
 
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      border-color: $brand-01;
     }
   }
 
   .#{$prefix}--modal-close__icon {
-    fill: $ui-05;
+    fill: $icon-01;
+    height: rem(20px);
+    width: rem(20px);
   }
 }
 

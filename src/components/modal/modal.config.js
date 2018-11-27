@@ -46,7 +46,7 @@ module.exports = {
         labelPrimaryButton: 'Danger',
         classModalSupplemental: `${prefix}--modal--danger`,
         classPrimaryButton: `${prefix}--btn--danger--primary`,
-        classCloseButton: `${prefix}--btn--tertiary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
     {
