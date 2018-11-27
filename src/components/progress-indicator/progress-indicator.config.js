@@ -16,7 +16,7 @@ const steps = [
   },
   {
     state: 'incomplete',
-    label: 'Third step',
+    label: 'Really Long Multi Line Third step',
   },
   {
     state: 'incomplete',
