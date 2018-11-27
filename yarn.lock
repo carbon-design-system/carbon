@@ -3259,14 +3259,14 @@ caniuse-lite@^1.0.30000898, caniuse-lite@^1.0.30000899:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000900.tgz#015cfe37897a3386a3075a914498800c29afe77e"
   integrity sha512-xDVs8pBFr6bzq9pXUkLKpGQQnzsF/l6/yX38UnCkTcUcwC0rDl1NGZGildcJVTU+uGBxfsyniK/ZWagPNn1Oqw==
 
-carbon-components@^9.48.0:
-  version "9.48.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.48.0.tgz#2044d3fd637be2a5507a60e9c069abde44589114"
-  integrity sha512-yK7dzHzKR0GW7yBgHe/4ueGsuWvj/QvviKTR9UcuoGeJyBuwUVdT0d/Pcz01UDq1kvpAMYEVzN5WzfcLkmtluw==
+carbon-components@^9.48.2:
+  version "9.48.2"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.48.2.tgz#128c1af5f3f36a277d305325e78f60e3101418e6"
+  integrity sha512-GF/aJoiK1os2icGJuZie4nHQyN/GQJENMDXpygGG8oTI2rHozBR12bJf1pozw//JvlR49vpYuv+hQfhfnyGn9g==
   dependencies:
     "@carbon/colors" "^0.0.1-alpha.0"
     carbon-icons "^7.0.7"
-    flatpickr "2.6.3"
+    flatpickr "4.5.2"
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
 
@@ -5416,15 +5416,15 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-flatpickr@2.6.3:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-2.6.3.tgz#457357532deb135f3da64b425bf4435737961564"
-  integrity sha1-RXNXUy3rE189pktCW/RDVzeWFWQ=
-
 flatpickr@4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.1.tgz#f65eaf54c07538f87d6f68a67b03cf816d7fb82f"
   integrity sha512-dsLTFmRg6mlqYfJ35A7gLlbq+8fOqRty3cWncl6rwU4pMe//i0WKxKLVyBbSYAZry93Lg+yqsOph9haltcxCqQ==
+
+flatpickr@4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.2.tgz#47c8ad472a096e5fb7e74b809b0703535383f20d"
+  integrity sha512-jDy4QYGpmiy7+Qk8QvKJ4spjDdxcx9cxMydmq1x427HkKWBw0qizLYeYM2F6tMcvvqGjU5VpJS55j4LnsaBblA==
 
 flush-write-stream@^1.0.0:
   version "1.0.2"

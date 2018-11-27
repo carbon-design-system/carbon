@@ -2,7 +2,10 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+
+const { prefix } = settings;
 
 const defaultItemToString = item => {
   if (typeof item === 'string') {
@@ -221,7 +224,7 @@ export default class ComboBox extends React.Component {
       onInputChange, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
-    const className = cx('bx--combo-box', containerClassName);
+    const className = cx(`${prefix}--combo-box`, containerClassName);
 
     return (
       <Downshift
@@ -254,7 +257,7 @@ export default class ComboBox extends React.Component {
                 onClick: this.onToggleClick(isOpen),
               })}>
               <input
-                className="bx--text-input"
+                className={`${prefix}--text-input`}
                 aria-label={ariaLabel}
                 ref={this.textInput}
                 {...rest}

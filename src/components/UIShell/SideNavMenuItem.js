@@ -1,15 +1,18 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
 import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 
+const { prefix } = settings;
+
 const SideNavMenuItem = React.forwardRef((props, ref) => {
   const { children, className: customClassName, isActive, ...rest } = props;
-  const className = cx('bx--side-nav__menu-item', customClassName);
+  const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
   const linkClassName = cx({
-    'bx--side-nav__link': true,
-    'bx--side-nav__link--current': isActive,
+    [`${prefix}--side-nav__link`]: true,
+    [`${prefix}--side-nav__link--current`]: isActive,
   });
 
   return (

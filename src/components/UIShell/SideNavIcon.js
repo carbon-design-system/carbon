@@ -1,11 +1,14 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const SideNavIcon = ({ children, className: customClassName, small }) => {
   const className = cx({
-    'bx--side-nav__icon': true,
-    'bx--side-nav__icon--small': small,
+    [`${prefix}--side-nav__icon`]: true,
+    [`${prefix}--side-nav__icon--small`]: small,
     [customClassName]: !!customClassName,
   });
   return <div className={className}>{children}</div>;

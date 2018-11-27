@@ -1,8 +1,8 @@
 import React from 'react';
 
-const a11yWarningIcon = notificationType => (
+const a11yWarningIcon = (prefix, notificationType) => (
   <svg
-    class={`bx--${notificationType}-notification__icon`}
+    class={`${prefix}--${notificationType}-notification__icon`}
     width="20"
     height="20"
     xmlns="http://www.w3.org/2000/svg">

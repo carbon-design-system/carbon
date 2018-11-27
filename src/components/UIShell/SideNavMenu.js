@@ -2,6 +2,9 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 // TODO: sync with @carbon/icons-react
 const ChevronDown = () => (
@@ -78,8 +81,8 @@ export class SideNavMenu extends React.Component {
     } = this.props;
     const { isExpanded } = this.state;
     const className = cx({
-      'bx--side-nav__item': true,
-      'bx--side-nav__item--active': isActive,
+      [`${prefix}--side-nav__item`]: true,
+      [`${prefix}--side-nav__item--active`]: isActive,
       [customClassName]: !!customClassName,
     });
     return (
@@ -87,17 +90,17 @@ export class SideNavMenu extends React.Component {
         <button
           aria-haspopup="true"
           aria-expanded={isExpanded}
-          className="bx--side-nav__submenu"
+          className={`${prefix}--side-nav__submenu`}
           onClick={this.handleToggleExpand}
           ref={buttonRef}
           type="button">
           <SideNavIcon>{icon}</SideNavIcon>
-          <span className="bx--side-nav__submenu-title">{title}</span>
-          <SideNavIcon className="bx--side-nav__submenu-chevron" small>
+          <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
+          <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
             <ChevronDown />
           </SideNavIcon>
         </button>
-        <ul className="bx--side-nav__menu" role="menu">
+        <ul className={`${prefix}--side-nav__menu`} role="menu">
           {children}
         </ul>
       </li>

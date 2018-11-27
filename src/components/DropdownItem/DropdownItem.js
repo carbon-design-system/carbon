@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 let didWarnAboutDeprecation = false;
 
@@ -27,7 +30,7 @@ const DropdownItem = ({
   }
 
   const dropdownItemClasses = classNames({
-    'bx--dropdown-item': true,
+    [`${prefix}--dropdown-item`]: true,
     [className]: className,
   });
 
@@ -61,7 +64,7 @@ const DropdownItem = ({
         tabIndex={isDropdownOpen ? 0 : -1}
         href={href}
         onClick={/* istanbul ignore next */ evt => evt.preventDefault()}
-        className="bx--dropdown-link">
+        className={`${prefix}--dropdown-link`}>
         {itemText}
       </a>
     </li>
@@ -69,12 +72,40 @@ const DropdownItem = ({
 };
 
 DropdownItem.propTypes = {
+  /**
+   * Specify the value of the <DropdownItem>
+   */
   value: PropTypes.string.isRequired,
+
+  /**
+   * Specify the content of the <DropdownItem>
+   */
   itemText: PropTypes.string.isRequired,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
   className: PropTypes.string,
+
+  /**
+   * Provide an optional function to be called when the container node is
+   * clicked
+   */
   onClick: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when a key is pressed on the <DropdownItem>
+   */
   onKeyPress: PropTypes.func,
+
+  /**
+   * Optional string representing the link location for the <DropdownItem>
+   */
   href: PropTypes.string,
+
+  /**
+   * Specify whether the <DropdownItem> is selected
+   */
   selected: PropTypes.bool,
 };
 

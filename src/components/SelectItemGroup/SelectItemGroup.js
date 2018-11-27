@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const SelectItemGroup = ({
   children,
@@ -9,7 +12,7 @@ const SelectItemGroup = ({
   label,
   ...other
 }) => {
-  const classNames = classnames('bx--select-optgroup', className);
+  const classNames = classnames(`${prefix}--select-optgroup`, className);
   return (
     <optgroup
       className={classNames}
@@ -22,9 +25,24 @@ const SelectItemGroup = ({
 };
 
 SelectItemGroup.propTypes = {
+  /**
+   * Provide the contents of your <SelectItemGroup>
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the node
+   */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the <SelectItemGroup> should be disabled
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify the label to be displayed
+   */
   label: PropTypes.string.isRequired,
 };
 

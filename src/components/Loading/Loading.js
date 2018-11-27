@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export default class Loading extends React.Component {
   static propTypes = {
@@ -34,13 +37,13 @@ export default class Loading extends React.Component {
   render() {
     const { active, className, withOverlay, small, ...other } = this.props;
 
-    const loadingClasses = classNames('bx--loading', className, {
-      'bx--loading--small': small,
-      'bx--loading--stop': !active,
+    const loadingClasses = classNames(`${prefix}--loading`, className, {
+      [`${prefix}--loading--small`]: small,
+      [`${prefix}--loading--stop`]: !active,
     });
 
-    const overlayClasses = classNames('bx--loading-overlay', {
-      'bx--loading-overlay--stop': !active,
+    const overlayClasses = classNames(`${prefix}--loading-overlay`, {
+      [`${prefix}--loading-overlay--stop`]: !active,
     });
 
     const loading = (
@@ -48,7 +51,7 @@ export default class Loading extends React.Component {
         {...other}
         aria-live={active ? 'assertive' : 'off'}
         className={loadingClasses}>
-        <svg className="bx--loading__svg" viewBox="-75 -75 150 150">
+        <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
           <circle cx="0" cy="0" r="37.5" />
         </svg>
       </div>

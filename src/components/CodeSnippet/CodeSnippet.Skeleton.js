@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export default class CodeSnippetSkeleton extends Component {
   static propTypes = {
@@ -9,6 +12,10 @@ export default class CodeSnippetSkeleton extends Component {
      * can be single or multi
      */
     type: PropTypes.oneOf(['single', 'multi']),
+
+    /**
+     * Specify an optional className to be applied to the container node
+     */
     className: PropTypes.string,
   };
 
@@ -20,16 +27,16 @@ export default class CodeSnippetSkeleton extends Component {
     const { className, type, ...other } = this.props;
 
     const codeSnippetClasses = classNames(className, {
-      'bx--snippet': true,
-      'bx--skeleton': true,
-      'bx--snippet--single': type === 'single',
-      'bx--snippet--multi': type === 'multi',
+      [`${prefix}--snippet`]: true,
+      [`${prefix}--skeleton`]: true,
+      [`${prefix}--snippet--single`]: type === 'single',
+      [`${prefix}--snippet--multi`]: type === 'multi',
     });
 
     if (type === 'single') {
       return (
         <div className={codeSnippetClasses} {...other}>
-          <div className="bx--snippet-container">
+          <div className={`${prefix}--snippet-container`}>
             <span />
           </div>
         </div>
@@ -39,7 +46,7 @@ export default class CodeSnippetSkeleton extends Component {
     if (type === 'multi') {
       return (
         <div className={codeSnippetClasses} {...other}>
-          <div className="bx--snippet-container">
+          <div className={`${prefix}--snippet-container`}>
             <span />
             <span />
             <span />

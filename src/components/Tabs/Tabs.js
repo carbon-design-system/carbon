@@ -2,8 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { iconCaretDown } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import TabContent from '../TabContent';
+
+const { prefix } = settings;
 
 export default class Tabs extends React.Component {
   static propTypes = {
@@ -212,9 +215,9 @@ export default class Tabs extends React.Component {
     });
 
     const classes = {
-      tabs: classNames('bx--tabs', className),
-      tablist: classNames('bx--tabs__nav', {
-        'bx--tabs__nav--hidden': this.state.dropdownHidden,
+      tabs: classNames(`${prefix}--tabs`, className),
+      tablist: classNames(`${prefix}--tabs__nav`, {
+        [`${prefix}--tabs__nav--hidden`]: this.state.dropdownHidden,
       }),
     };
 
@@ -228,12 +231,12 @@ export default class Tabs extends React.Component {
             role="listbox"
             aria-label={ariaLabel}
             tabIndex={0}
-            className="bx--tabs-trigger"
+            className={`${prefix}--tabs-trigger`}
             onClick={this.handleDropdownClick}
             onKeyPress={this.handleDropdownClick}>
             <a
               tabIndex={-1}
-              className="bx--tabs-trigger-text"
+              className={`${prefix}--tabs-trigger-text`}
               href={triggerHref}
               onClick={this.handleDropdownClick}>
               {selectedLabel}

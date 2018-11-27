@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const OrderedList = ({ children, className, nested, ...other }) => {
-  const classNames = classnames('bx--list--ordered', className, {
-    'bx--list--nested': nested,
+  const classNames = classnames(`${prefix}--list--ordered`, className, {
+    [`${prefix}--list--nested`]: nested,
   });
   return (
     <ol className={classNames} {...other}>

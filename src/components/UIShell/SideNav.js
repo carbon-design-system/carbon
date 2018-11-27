@@ -1,8 +1,11 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { settings } from 'carbon-components';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 import SideNavFooter from './SideNavFooter';
+
+const { prefix } = settings;
 
 const translations = {
   'carbon.sidenav.state.open': 'Close',
@@ -66,15 +69,15 @@ export default class SideNav extends React.Component {
       ? t('carbon.sidenav.state.open')
       : t('carbon.sidenav.state.closed');
     const className = cx({
-      'bx--side-nav': true,
-      'bx--side-nav--expanded': isExpanded,
+      [`${prefix}--side-nav`]: true,
+      [`${prefix}--side-nav--expanded`]: isExpanded,
       [customClassName]: !!customClassName,
     });
 
     return (
       <aside className={className}>
         <nav
-          className="bx--side-nav__navigation"
+          className={`${prefix}--side-nav__navigation`}
           role="navigation"
           {...accessibilityLabel}>
           {children}

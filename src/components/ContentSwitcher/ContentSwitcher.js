@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
+
+const { prefix } = settings;
 
 export default class ContentSwitcher extends React.Component {
   state = {};
@@ -75,7 +78,7 @@ export default class ContentSwitcher extends React.Component {
       ...other
     } = this.props;
 
-    const classes = classNames('bx--content-switcher', className);
+    const classes = classNames(`${prefix}--content-switcher`, className);
 
     return (
       <div {...other} className={classes}>

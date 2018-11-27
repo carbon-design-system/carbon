@@ -4,6 +4,9 @@ import { iconClose } from 'carbon-icons';
 import Button from '../Button';
 import Icon from '../Icon';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export default class ComposedModal extends Component {
   state = {};
@@ -86,13 +89,13 @@ export default class ComposedModal extends Component {
     const { className, containerClassName, children, ...other } = this.props;
 
     const modalClass = classNames({
-      'bx--modal': true,
+      [`${prefix}--modal`]: true,
       'is-visible': open,
       [className]: className,
     });
 
     const containerClass = classNames({
-      'bx--modal-container': true,
+      [`${prefix}--modal-container`]: true,
       [containerClassName]: containerClassName,
     });
 
@@ -210,27 +213,27 @@ export class ModalHeader extends Component {
     } = this.props;
 
     const headerClass = classNames({
-      'bx--modal-header': true,
+      [`${prefix}--modal-header`]: true,
       [className]: className,
     });
 
     const labelClass = classNames({
-      'bx--modal-header__label bx--type-delta': true,
+      [`${prefix}--modal-header__label ${prefix}--type-delta`]: true,
       [labelClassName]: labelClassName,
     });
 
     const titleClass = classNames({
-      'bx--modal-header__heading bx--type-beta': true,
+      [`${prefix}--modal-header__heading ${prefix}--type-beta`]: true,
       [titleClassName]: titleClassName,
     });
 
     const closeClass = classNames({
-      'bx--modal-close': true,
+      [`${prefix}--modal-close`]: true,
       [closeClassName]: closeClassName,
     });
 
     const closeIconClass = classNames({
-      'bx--modal-close__icon': true,
+      [`${prefix}--modal-close__icon`]: true,
       [closeIconClassName]: closeIconClassName,
     });
 
@@ -269,7 +272,7 @@ export class ModalBody extends Component {
     const { className, children, ...other } = this.props;
 
     const contentClass = classNames({
-      'bx--modal-content': true,
+      [`${prefix}--modal-content`]: true,
       [className]: className,
     });
 
@@ -362,7 +365,7 @@ export class ModalFooter extends Component {
     } = this.props;
 
     const footerClass = classNames({
-      'bx--modal-footer': true,
+      [`${prefix}--modal-footer`]: true,
       [className]: className,
     });
 

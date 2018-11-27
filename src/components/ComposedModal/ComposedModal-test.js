@@ -121,6 +121,11 @@ describe('<ModalFooter />', () => {
 });
 
 describe('<ComposedModal />', () => {
+  it('renders', () => {
+    const wrapper = mount(<ComposedModal open />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('changes the open state upon change in props', () => {
     const wrapper = shallow(<ComposedModal open />);
     expect(wrapper.state().open).toEqual(true);

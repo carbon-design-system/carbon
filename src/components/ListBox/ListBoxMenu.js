@@ -1,6 +1,9 @@
 import React from 'react';
+import { settings } from 'carbon-components';
 import ListBoxMenuItem from './ListBoxMenuItem';
 import childrenOfType from '../../prop-types/childrenOfType';
+
+const { prefix } = settings;
 
 /**
  * `ListBoxMenu` is a simple container node that isolates the `list-box__menu`
@@ -9,13 +12,16 @@ import childrenOfType from '../../prop-types/childrenOfType';
  */
 const ListBoxMenu = ({ children, ...rest }) => {
   return (
-    <div className="bx--list-box__menu" {...rest}>
+    <div className={`${prefix}--list-box__menu`} {...rest}>
       {children}
     </div>
   );
 };
 
 ListBoxMenu.propTypes = {
+  /**
+   * Provide the contents of your ListBoxMenu
+   */
   children: childrenOfType(ListBoxMenuItem),
 };
 

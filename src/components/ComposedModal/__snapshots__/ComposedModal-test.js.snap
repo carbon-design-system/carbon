@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ComposedModal /> renders 1`] = `
+<ComposedModal
+  onKeyDown={[Function]}
+  open={true}
+>
+  <div
+    className="bx--modal is-visible"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    open={true}
+    role="presentation"
+    tabIndex={-1}
+  >
+    <div
+      className="bx--modal-container"
+    />
+  </div>
+</ComposedModal>
+`;

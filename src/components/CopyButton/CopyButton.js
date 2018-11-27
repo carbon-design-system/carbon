@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
 import { iconCopy } from 'carbon-icons';
 import Icon from '../Icon';
+
+const { prefix } = settings;
 
 export default class CopyButton extends Component {
   static propTypes = {
@@ -72,9 +75,9 @@ export default class CopyButton extends Component {
       onClick, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
-    const classNames = classnames('bx--snippet-button', className);
-    const feedbackClassNames = classnames('bx--btn--copy__feedback', {
-      'bx--btn--copy__feedback--displayed': this.state.showFeedback,
+    const classNames = classnames(`${prefix}--snippet-button`, className);
+    const feedbackClassNames = classnames(`${prefix}--btn--copy__feedback`, {
+      [`${prefix}--btn--copy__feedback--displayed`]: this.state.showFeedback,
     });
 
     return (
@@ -84,7 +87,7 @@ export default class CopyButton extends Component {
         onClick={this.handleClick}
         {...other}>
         <Icon
-          className="bx--snippet__icon"
+          className={`${prefix}--snippet__icon`}
           icon={iconCopy}
           description={iconDescription}
         />

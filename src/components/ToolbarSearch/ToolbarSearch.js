@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { iconSearch } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import ClickListener from '../../internal/ClickListener';
+
+const { prefix } = settings;
 
 export default class ToolbarSearch extends Component {
   static propTypes = {
@@ -87,21 +90,21 @@ export default class ToolbarSearch extends Component {
     } = this.props;
 
     const searchClasses = classNames({
-      'bx--search bx--search--sm bx--toolbar-search': true,
-      'bx--toolbar-search--active': this.state.expanded,
+      [`${prefix}--search ${prefix}--search--sm ${prefix}--toolbar-search`]: true,
+      [`${prefix}--toolbar-search--active`]: this.state.expanded,
       [className]: className,
     });
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div className={searchClasses} role={role}>
-          <label htmlFor={id} className="bx--label">
+          <label htmlFor={id} className={`${prefix}--label`}>
             {labelText}
           </label>
           <input
             {...other}
             type={type}
-            className="bx--search-input"
+            className={`${prefix}--search-input`}
             id={id}
             placeholder={placeHolderText}
             ref={input => {
@@ -109,12 +112,12 @@ export default class ToolbarSearch extends Component {
             }}
           />
           <button
-            className="bx--toolbar-search__btn"
+            className={`${prefix}--toolbar-search__btn`}
             onClick={this.expandSearch}>
             <Icon
               icon={iconSearch}
               description={iconDescription}
-              className="bx--search-magnifier"
+              className={`${prefix}--search-magnifier`}
             />
           </button>
         </div>

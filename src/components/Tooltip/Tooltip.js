@@ -4,6 +4,7 @@ import debounce from 'lodash.debounce';
 import Icon from '../Icon';
 import classNames from 'classnames';
 import { iconInfoGlyph } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import FloatingMenu, {
   DIRECTION_LEFT,
   DIRECTION_TOP,
@@ -11,6 +12,8 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
+
+const { prefix } = settings;
 
 const matchesFuncName =
   typeof Element !== 'undefined' &&
@@ -349,12 +352,15 @@ export default class Tooltip extends Component {
     const { open } = this.state;
 
     const tooltipClasses = classNames(
-      'bx--tooltip',
-      { 'bx--tooltip--shown': open },
+      `${prefix}--tooltip`,
+      { [`${prefix}--tooltip--shown`]: open },
       className
     );
 
-    const triggerClasses = classNames('bx--tooltip__trigger', triggerClassName);
+    const triggerClasses = classNames(
+      `${prefix}--tooltip__trigger`,
+      triggerClassName
+    );
     const ariaOwnsProps = !open
       ? {}
       : {
@@ -432,7 +438,7 @@ export default class Tooltip extends Component {
               onFocus={evt => this.handleMouse(evt)}
               onBlur={evt => this.handleMouse(evt)}
               onContextMenu={evt => this.handleMouse(evt)}>
-              <span className="bx--tooltip__caret" />
+              <span className={`${prefix}--tooltip__caret`} />
               {children}
             </div>
           </FloatingMenu>

@@ -1,6 +1,9 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 // TODO: replace with @carbon/icons-react
 const Close = () => (
@@ -37,18 +40,18 @@ const SideNavFooter = ({
   isExpanded,
   onToggle,
 }) => {
-  const className = cx('bx--side-nav__footer', customClassName);
+  const className = cx(`${prefix}--side-nav__footer`, customClassName);
   return (
     <footer className={className}>
       <button
-        className="bx--side-nav__toggle"
+        className={`${prefix}--side-nav__toggle`}
         type="button"
         onClick={onToggle}
         title={assistiveText}>
-        <div className="bx--side-nav__icon">
+        <div className={`${prefix}--side-nav__icon`}>
           {isExpanded ? <Close /> : <ChevronRight />}
         </div>
-        <span className="bx--assistive-text">{assistiveText}</span>
+        <span className={`${prefix}--assistive-text`}>{assistiveText}</span>
       </button>
     </footer>
   );

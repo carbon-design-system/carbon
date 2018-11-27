@@ -1,47 +1,51 @@
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
+
 export const header = {
-  header: 'bx--header',
+  header: `${prefix}--header`,
 };
 
 export const action = {
-  action: 'bx--header__action',
+  action: `${prefix}--header__action`,
   state: {
-    active: 'bx--header__action--active',
+    active: `${prefix}--header__action--active`,
   },
 };
 
 export const button = {
-  button: 'bx--header__menu-trigger',
+  button: `${prefix}--header__menu-trigger`,
 };
 
 export const navigation = {
-  navigation: 'bx--header__nav',
-  menu: 'bx--header__menu',
-  menubar: 'bx--header__menu-bar',
-  menuitem: 'bx--header__menu-item',
-  menutitle: 'bx--header__menu-title',
-  submenu: 'bx--header__submenu',
-  menuarrow: 'bx--header__menu-arrow',
+  navigation: `${prefix}--header__nav`,
+  menu: `${prefix}--header__menu`,
+  menubar: `${prefix}--header__menu-bar`,
+  menuitem: `${prefix}--header__menu-item`,
+  menutitle: `${prefix}--header__menu-title`,
+  submenu: `${prefix}--header__submenu`,
+  menuarrow: `${prefix}--header__menu-arrow`,
 };
 
 export const name = {
-  name: 'bx--header__name',
-  platform: 'bx--header__platform-name',
+  name: `${prefix}--header__name`,
+  platform: `${prefix}--header__platform-name`,
 };
 
 export const global = {
-  global: 'bx--header__global',
+  global: `${prefix}--header__global`,
 };
 
 export const truncate = {
-  end: 'bx--text-truncate--end',
+  end: `${prefix}--text-truncate--end`,
 };
 
 export const sidenav = {
-  sidenav: 'bx--side-nav',
+  sidenav: `${prefix}--side-nav`,
   state: {
-    expanded: 'bx--side-nav--expanded',
+    expanded: `${prefix}--side-nav--expanded`,
   },
   variants: {
-    fixed: 'bx--side-nav--fixed',
+    fixed: `${prefix}--side-nav--fixed`,
   },
 };

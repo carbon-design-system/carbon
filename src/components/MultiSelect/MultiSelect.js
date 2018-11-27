@@ -3,12 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
+import { settings } from 'carbon-components';
 import ListBox from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+
+const { prefix } = settings;
 
 export default class MultiSelect extends React.Component {
   static propTypes = {
@@ -55,6 +58,7 @@ export default class MultiSelect extends React.Component {
      * consuming component what kind of internal state changes are occuring.
      */
     onChange: PropTypes.func,
+
     /**
      * Specify 'inline' to create an inline multi-select.
      */
@@ -69,10 +73,12 @@ export default class MultiSelect extends React.Component {
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
     /**
      * Is the current selection invalid?
      */
     invalid: PropTypes.bool,
+
     /**
      * If invalid, what is the error?
      */
@@ -162,8 +168,8 @@ export default class MultiSelect extends React.Component {
       invalidText,
       useTitleInItem,
     } = this.props;
-    const className = cx('bx--multi-select', containerClassName, {
-      'bx--list-box--light': light,
+    const className = cx(`${prefix}--multi-select`, containerClassName, {
+      [`${prefix}--list-box--light`]: light,
     });
     return (
       <Selection
@@ -201,7 +207,7 @@ export default class MultiSelect extends React.Component {
                       selectionCount={selectedItem.length}
                     />
                   )}
-                  <span className="bx--list-box__label">{label}</span>
+                  <span className={`${prefix}--list-box__label`}>{label}</span>
                   <ListBox.MenuIcon isOpen={isOpen} />
                 </ListBox.Field>
                 {isOpen && (

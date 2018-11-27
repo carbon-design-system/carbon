@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export const Table = ({
   zebra,
@@ -10,10 +13,10 @@ export const Table = ({
   shouldShowBorder,
   ...other
 }) => {
-  const componentClass = cx('bx--data-table-v2', className, {
-    'bx--data-table-v2--zebra': zebra,
-    'bx--data-table-v2--short': short,
-    'bx--data-table-v2--no-border': !shouldShowBorder,
+  const componentClass = cx(`${prefix}--data-table-v2`, className, {
+    [`${prefix}--data-table-v2--zebra`]: zebra,
+    [`${prefix}--data-table-v2--short`]: short,
+    [`${prefix}--data-table-v2--no-border`]: !shouldShowBorder,
   });
   return (
     <table {...other} className={componentClass}>

@@ -2,8 +2,11 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { iconCaretUp } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import { sortStates } from './state/sorting';
+
+const { prefix } = settings;
 
 const translationKeys = {
   iconDescription: 'carbon.table.header.icon.description',
@@ -55,10 +58,10 @@ const TableHeader = ({
   }
 
   const className = cx(headerClassName, {
-    'bx--table-sort-v2': true,
-    'bx--table-sort-v2--active':
+    [`${prefix}--table-sort-v2`]: true,
+    [`${prefix}--table-sort-v2--active`]:
       isSortHeader && sortDirection !== sortStates.NONE,
-    'bx--table-sort-v2--ascending':
+    [`${prefix}--table-sort-v2--ascending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
@@ -66,9 +69,9 @@ const TableHeader = ({
   return (
     <th scope={scope} className={headerClassName} aria-sort={ariaSort}>
       <button className={className} onClick={onClick} {...rest}>
-        <span className="bx--table-header-label">{children}</span>
+        <span className={`${prefix}--table-header-label`}>{children}</span>
         <Icon
-          className="bx--table-sort-v2__icon"
+          className={`${prefix}--table-sort-v2__icon`}
           icon={iconCaretUp}
           description={t('carbon.table.header.icon.description', {
             header: children,

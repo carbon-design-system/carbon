@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const Link = ({ children, className, href, ...other }) => {
-  const classNames = classnames('bx--link', className);
+  const classNames = classnames(`${prefix}--link`, className);
   return (
     <a href={href} className={classNames} {...other}>
       {children}

@@ -1,8 +1,11 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
+
+const { prefix } = settings;
 
 const getInstanceId = setupGetInstanceId();
 const translationKeys = {
@@ -26,7 +29,7 @@ const TableToolbarSearch = ({
 }) => {
   const searchContainerClasses = cx(
     searchContainerClass,
-    'bx--toolbar-search-container'
+    `${prefix}--toolbar-search-container`
   );
   return (
     <div className={searchContainerClasses}>

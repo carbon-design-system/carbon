@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
 import { componentsX } from '../../internal/FeatureFlags';
+
+const { prefix } = settings;
 
 const TYPES = componentsX
   ? {
@@ -29,8 +32,8 @@ const TYPES = componentsX
     };
 
 const Tag = ({ children, className, type, ...other }) => {
-  const tagClass = `bx--tag--${type}`;
-  const tagClasses = classNames('bx--tag', tagClass, className);
+  const tagClass = `${prefix}--tag--${type}`;
+  const tagClasses = classNames(`${prefix}--tag`, tagClass, className);
   return (
     <span className={tagClasses} {...other}>
       {children || TYPES[type]}

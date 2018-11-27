@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const FormLabel = ({ className, children, id, ...other }) => {
-  const classNames = classnames('bx--label', className);
+  const classNames = classnames(`${prefix}--label`, className);
 
   return (
     <label htmlFor={id} className={classNames} {...other}>

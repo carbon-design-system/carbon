@@ -77,13 +77,6 @@ exports[`ModalWrapper should render 1`] = `
       primaryButtonText="Save"
       secondaryButtonText="Cancel"
       selectorPrimaryFocus="[data-modal-primary-focus]"
-      selectorsFloatingMenus={
-        Array [
-          ".bx--overflow-menu-options",
-          ".bx--tooltip",
-          ".flatpickr-calendar",
-        ]
-      }
     >
       <div
         className="bx--modal bx--modal-tall"

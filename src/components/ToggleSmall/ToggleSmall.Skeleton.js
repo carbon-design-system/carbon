@@ -1,20 +1,25 @@
 import React from 'react';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export default class ToggleSmallSkeleton extends React.Component {
   render() {
     const { id } = this.props;
     return (
-      <div className="bx--form-item">
+      <div className={`${prefix}--form-item`}>
         <input
           type="checkbox"
           id={id}
-          className="bx--toggle bx--toggle--small bx--skeleton"
+          className={`${prefix}--toggle ${prefix}--toggle--small ${prefix}--skeleton`}
         />
 
-        <label className="bx--toggle__label bx--skeleton" htmlFor={id}>
-          <span className="bx--toggle__appearance">
+        <label
+          className={`${prefix}--toggle__label ${prefix}--skeleton`}
+          htmlFor={id}>
+          <span className={`${prefix}--toggle__appearance`}>
             <svg
-              className="bx--toggle__check"
+              className={`${prefix}--toggle__check`}
               width="6px"
               height="5px"
               viewBox="0 0 6 5">

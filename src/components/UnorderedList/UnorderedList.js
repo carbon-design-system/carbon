@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const UnorderedList = ({ children, className, nested, ...other }) => {
-  const classNames = classnames('bx--list--unordered', className, {
-    'bx--list--nested': nested,
+  const classNames = classnames(`${prefix}--list--unordered`, className, {
+    [`${prefix}--list--nested`]: nested,
   });
   return (
     <ul className={classNames} {...other}>

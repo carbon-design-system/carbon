@@ -1,9 +1,12 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const SideNavLinkText = ({ className: customClassName, children, ...rest }) => {
-  const className = cx('bx--side-nav__link-text', customClassName);
+  const className = cx(`${prefix}--side-nav__link-text`, customClassName);
   return (
     <span {...rest} className={className}>
       {children}

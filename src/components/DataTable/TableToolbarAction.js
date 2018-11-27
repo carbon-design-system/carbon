@@ -1,8 +1,11 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+
+const { prefix } = settings;
 
 const TableToolbarAction = ({
   className,
@@ -11,11 +14,11 @@ const TableToolbarAction = ({
   iconDescription,
   ...rest
 }) => {
-  const toolbarActionClasses = cx(className, 'bx--toolbar-action');
+  const toolbarActionClasses = cx(className, `${prefix}--toolbar-action`);
   return (
     <button className={toolbarActionClasses} {...rest}>
       <Icon
-        className="bx--toolbar-action__icon"
+        className={`${prefix}--toolbar-action__icon`}
         icon={icon}
         name={iconName}
         description={iconDescription}

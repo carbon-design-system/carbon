@@ -3,17 +3,56 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 import { iconCaretDown } from 'carbon-icons';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export default class TimePickerSelect extends Component {
   static propTypes = {
+    /**
+     * Provide the contents of your TimePickerSelect
+     */
     children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the node containing the label and the select box
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify a custom `id` for the `<select>`
+     */
     id: PropTypes.string.isRequired,
+
+    /**
+     * Specify whether you want the inline version of this control
+     */
     inline: PropTypes.bool,
+
+    /**
+     * Specify whether the control is disabled
+     */
     disabled: PropTypes.bool,
+
+    /**
+     * Optionally provide the default value of the `<select>`
+     */
     defaultValue: PropTypes.any,
+
+    /**
+     * Provide a description for the twistie icon that can be read by screen readers
+     */
     iconDescription: PropTypes.string.isRequired,
+
+    /**
+     * Specify whether the label should be hidden, or not
+     */
     hideLabel: PropTypes.bool,
+
+    /**
+     * Provide label text to be read by screen readers when interacting with the
+     * control
+     */
     labelText: PropTypes.node.isRequired,
   };
 
@@ -38,14 +77,14 @@ export default class TimePickerSelect extends Component {
     } = this.props;
 
     const selectClasses = classNames({
-      'bx--select': true,
-      'bx--time-picker__select': true,
-      'bx--select--inline': true,
+      [`${prefix}--select`]: true,
+      [`${prefix}--time-picker__select`]: true,
+      [`${prefix}--select--inline`]: true,
       [className]: className,
     });
 
-    const labelClasses = classNames('bx--label', {
-      'bx--visually-hidden': hideLabel,
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
 
     const label = labelText ? (
@@ -60,13 +99,13 @@ export default class TimePickerSelect extends Component {
         <select
           {...other}
           id={id}
-          className="bx--select-input"
+          className={`${prefix}--select-input`}
           disabled={disabled}>
           {children}
         </select>
         <Icon
           icon={iconCaretDown}
-          className="bx--select__arrow"
+          className={`${prefix}--select__arrow`}
           description={iconDescription}
         />
       </div>

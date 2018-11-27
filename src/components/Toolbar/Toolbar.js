@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ToolbarSearch from '../ToolbarSearch';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const Toolbar = ({ children, className, ...other }) => {
-  const wrapperClasses = classNames('bx--toolbar', className);
+  const wrapperClasses = classNames(`${prefix}--toolbar`, className);
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -59,7 +62,7 @@ ToolbarItem.defaultProps = {
 };
 
 export const ToolbarTitle = ({ title }) => (
-  <li className="bx--toolbar-menu__title">{title}</li>
+  <li className={`${prefix}--toolbar-menu__title`}>{title}</li>
 );
 
 ToolbarTitle.propTypes = {
@@ -70,7 +73,7 @@ ToolbarTitle.propTypes = {
 };
 
 export const ToolbarOption = ({ children }) => (
-  <li className="bx--toolbar-menu__option">{children}</li>
+  <li className={`${prefix}--toolbar-menu__option`}>{children}</li>
 );
 
 ToolbarOption.propTypes = {
@@ -81,7 +84,7 @@ ToolbarOption.propTypes = {
 };
 
 export const ToolbarDivider = () => (
-  <hr className="bx--toolbar-menu__divider" />
+  <hr className={`${prefix}--toolbar-menu__divider`} />
 );
 
 export default Toolbar;

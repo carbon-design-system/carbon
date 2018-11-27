@@ -1,12 +1,18 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const TableContainer = ({ className, children, title, ...rest }) => {
-  const tableContainerClasses = cx(className, 'bx--data-table-v2-container');
+  const tableContainerClasses = cx(
+    className,
+    `${prefix}--data-table-v2-container`
+  );
   return (
     <div {...rest} className={tableContainerClasses}>
-      {title && <h4 className="bx--data-table-v2-header">{title}</h4>}
+      {title && <h4 className={`${prefix}--data-table-v2-header`}>{title}</h4>}
       {children}
     </div>
   );

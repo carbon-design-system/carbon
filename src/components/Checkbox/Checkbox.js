@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const Checkbox = ({
   className,
@@ -14,13 +17,13 @@ const Checkbox = ({
   ...other
 }) => {
   let input;
-  const labelClasses = classNames('bx--checkbox-label', className);
+  const labelClasses = classNames(`${prefix}--checkbox-label`, className);
   const innerLabelClasses = classNames({
-    'bx--visually-hidden': hideLabel,
+    [`${prefix}--visually-hidden`]: hideLabel,
   });
   const wrapperClasses = classNames(
-    'bx--form-item',
-    'bx--checkbox-wrapper',
+    `${prefix}--form-item`,
+    `${prefix}--checkbox-wrapper`,
     wrapperClassName
   );
 
@@ -32,7 +35,7 @@ const Checkbox = ({
         onChange={evt => {
           onChange(input.checked, id, evt);
         }}
-        className="bx--checkbox"
+        className={`${prefix}--checkbox`}
         id={id}
         ref={el => {
           input = el;

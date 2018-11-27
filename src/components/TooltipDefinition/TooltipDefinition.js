@@ -1,7 +1,10 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const { prefix } = settings;
 
 const getInstanceId = setupGetInstanceId();
 
@@ -16,15 +19,17 @@ const TooltipDefinition = ({
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
   const definitionClassName = cx({
     [className]: !!className,
-    'bx--tooltip--definition': true,
+    [`${prefix}--tooltip--definition`]: true,
   });
   const directionClassName = cx({
-    'bx--tooltip--definition__bottom': direction === 'bottom',
-    'bx--tooltip--definition__top': direction === 'top',
+    [`${prefix}--tooltip--definition__bottom`]: direction === 'bottom',
+    [`${prefix}--tooltip--definition__top`]: direction === 'top',
   });
   return (
     <div {...rest} className={definitionClassName}>
-      <button className="bx--tooltip__trigger" aria-describedby={tooltipId}>
+      <button
+        className={`${prefix}--tooltip__trigger`}
+        aria-describedby={tooltipId}>
         {children}
       </button>
       <div
@@ -32,7 +37,7 @@ const TooltipDefinition = ({
         className={directionClassName}
         role="tooltip"
         aria-label={tooltipText}>
-        <span className="bx--tooltip__caret" />
+        <span className={`${prefix}--tooltip__caret`} />
         <p>{tooltipText}</p>
       </div>
     </div>

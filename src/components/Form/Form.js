@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const Form = ({ className, children, ...other }) => {
-  const classNames = classnames('bx--form', className);
+  const classNames = classnames(`${prefix}--form`, className);
 
   return (
     <form className={classNames} {...other}>

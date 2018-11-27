@@ -1,14 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
 import uid from '../../tools/uniqueId';
+
+const { prefix } = settings;
 
 export class StructuredListWrapper extends Component {
   static propTypes = {
+    /**
+     * Provide the contents of your StructuredListWrapper
+     */
     children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the container node
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify whether a border should be added to your StructuredListWrapper
+     */
     border: PropTypes.bool,
+
+    /**
+     * Specify whether your StructuredListWrapper should have selections
+     */
     selection: PropTypes.bool,
+
+    /**
+     * Specify a label to be read by screen readers on the container node
+     */
     ariaLabel: PropTypes.string,
   };
 
@@ -28,9 +50,9 @@ export class StructuredListWrapper extends Component {
       ...other
     } = this.props;
 
-    const classes = classNames('bx--structured-list', className, {
-      'bx--structured-list--border': border,
-      'bx--structured-list--selection': selection,
+    const classes = classNames(`${prefix}--structured-list`, className, {
+      [`${prefix}--structured-list--border`]: border,
+      [`${prefix}--structured-list--selection`]: selection,
     });
 
     return (
@@ -43,14 +65,21 @@ export class StructuredListWrapper extends Component {
 
 export class StructuredListHead extends Component {
   static propTypes = {
+    /**
+     * Provide the contents of your StructuredListHead
+     */
     children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the node
+     */
     className: PropTypes.string,
   };
 
   render() {
     const { children, className, ...other } = this.props;
 
-    const classes = classNames('bx--structured-list-thead', className);
+    const classes = classNames(`${prefix}--structured-list-thead`, className);
     return (
       <div className={classes} {...other}>
         {children}
@@ -61,12 +90,39 @@ export class StructuredListHead extends Component {
 
 export class StructuredListInput extends Component {
   static propTypes = {
+    /**
+     * Specify an optional className to be applied to the input
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify a custom `id` for the input
+     */
     id: PropTypes.string,
+
+    /**
+     * Specify the value of the input
+     */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+
+    /**
+     * Provide a `name` for the input
+     */
     name: PropTypes.string,
+
+    /**
+     * Provide a `title` for the input
+     */
     title: PropTypes.string,
+
+    /**
+     * Specify whether the underlying input should be checked by default
+     */
     defaultChecked: PropTypes.bool,
+
+    /**
+     * Provide an optional hook that is called each time the input is updated
+     */
     onChange: PropTypes.func,
   };
 
@@ -82,7 +138,7 @@ export class StructuredListInput extends Component {
 
   render() {
     const { className, value, name, title, ...other } = this.props;
-    const classes = classNames('bx--structured-list-input', className);
+    const classes = classNames(`${prefix}--structured-list-input`, className);
     return (
       <input
         {...other}
@@ -100,11 +156,35 @@ export class StructuredListInput extends Component {
 
 export class StructuredListRow extends Component {
   static propTypes = {
+    /**
+     * Provide the contents of your StructuredListRow
+     */
     children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the container node
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify whether your StructuredListRow should be used as a header row
+     */
     head: PropTypes.bool,
+
+    /**
+     * Specify whether a `<label>` should be used
+     */
     label: PropTypes.bool,
+
+    /**
+     * Specify the tab index of the container node, if `<label>` is in use
+     */
     tabIndex: PropTypes.number,
+
+    /**
+     * Provide a handler that is invoked on the key down event for the control,
+     * if `<label>` is in use
+     */
     onKeyDown: PropTypes.func,
   };
 
@@ -126,8 +206,8 @@ export class StructuredListRow extends Component {
       ...other
     } = this.props;
 
-    const classes = classNames('bx--structured-list-row', className, {
-      'bx--structured-list-row--header-row': head,
+    const classes = classNames(`${prefix}--structured-list-row`, className, {
+      [`${prefix}--structured-list-row--header-row`]: head,
     });
 
     return label ? (
@@ -150,9 +230,21 @@ export class StructuredListRow extends Component {
 
 export class StructuredListBody extends Component {
   static propTypes = {
+    /**
+     * Provide the contents of your StructuredListBody
+     */
     children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the container node
+     */
     className: PropTypes.string,
+
     head: PropTypes.bool,
+
+    /**
+     * Provide a handler that is invoked on the key down event for the control
+     */
     onKeyDown: PropTypes.func,
   };
 
@@ -167,7 +259,7 @@ export class StructuredListBody extends Component {
 
   render() {
     const { children, className, ...other } = this.props;
-    const classes = classNames('bx--structured-list-tbody', className);
+    const classes = classNames(`${prefix}--structured-list-tbody`, className);
     return (
       <div className={classes} {...other}>
         {children}
@@ -178,9 +270,24 @@ export class StructuredListBody extends Component {
 
 export class StructuredListCell extends Component {
   static propTypes = {
+    /**
+     * Provide the contents of your StructuredListCell
+     */
     children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the container node
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify whether your StructuredListCell should be used as a header cell
+     */
     head: PropTypes.bool,
+
+    /**
+     * Specify whether your StructuredListCell should have text wrapping
+     */
     noWrap: PropTypes.bool,
   };
 
@@ -193,9 +300,9 @@ export class StructuredListCell extends Component {
     const { children, className, head, noWrap, ...other } = this.props;
 
     const classes = classNames(className, {
-      'bx--structured-list-th': head,
-      'bx--structured-list-td': !head,
-      'bx--structured-list-content--nowrap': noWrap,
+      [`${prefix}--structured-list-th`]: head,
+      [`${prefix}--structured-list-td`]: !head,
+      [`${prefix}--structured-list-content--nowrap`]: noWrap,
     });
 
     return (

@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const SkeletonText = ({
   paragraph,
@@ -11,8 +14,8 @@ const SkeletonText = ({
   ...other
 }) => {
   const skeletonTextClasses = classNames({
-    'bx--skeleton__text': true,
-    'bx--skeleton__heading': heading,
+    [`${prefix}--skeleton__text`]: true,
+    [`${prefix}--skeleton__heading`]: heading,
     [className]: className,
   });
 
@@ -79,6 +82,9 @@ SkeletonText.propTypes = {
    * generates skeleton text at a larger size
    */
   heading: PropTypes.bool,
+  /**
+   * Specify an optional className to be applied to the container node
+   */
   className: PropTypes.string,
 };
 

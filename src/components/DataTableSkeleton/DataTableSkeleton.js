@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const DataTableSkeleton = ({
   rowCount,
@@ -10,10 +13,10 @@ const DataTableSkeleton = ({
   ...other
 }) => {
   const dataTableSkeletonClasses = classNames({
-    'bx--skeleton': true,
-    'bx--data-table-v2': true,
-    'bx--data-table-v2--zebra': zebra,
-    'bx--data-table-v2--compact': compact,
+    [`${prefix}--skeleton`]: true,
+    [`${prefix}--data-table-v2`]: true,
+    [`${prefix}--data-table-v2--zebra`]: zebra,
+    [`${prefix}--data-table-v2--compact`]: compact,
   });
 
   const rowRepeat = rowCount - 1;

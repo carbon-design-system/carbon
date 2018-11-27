@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { iconList, iconGrid } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
+
+const { prefix } = settings;
 
 /**
  * The layout button for `<Search>`.
@@ -70,24 +73,24 @@ class SearchLayoutButton extends Component {
     const { labelText, iconDescriptionList, iconDescriptionGrid } = this.props;
     return (
       <button
-        className="bx--search-button"
+        className={`${prefix}--search-button`}
         type="button"
         onClick={this.toggleLayout}
         aria-label={labelText}>
         {this.state.format === 'list' ? (
-          <div className="bx--search__toggle-layout__container">
+          <div className={`${prefix}--search__toggle-layout__container`}>
             <Icon
               icon={iconList}
               description={iconDescriptionList}
-              className="bx--search-view"
+              className={`${prefix}--search-view`}
             />
           </div>
         ) : (
-          <div className="bx--search__toggle-layout__container">
+          <div className={`${prefix}--search__toggle-layout__container`}>
             <Icon
               icon={iconGrid}
               description={iconDescriptionGrid}
-              className="bx--search-view"
+              className={`${prefix}--search-view`}
             />
           </div>
         )}

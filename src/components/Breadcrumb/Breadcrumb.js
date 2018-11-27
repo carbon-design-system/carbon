@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const Breadcrumb = ({ children, className, noTrailingSlash, ...other }) => {
   const classNames = classnames(className, {
-    'bx--breadcrumb': true,
-    'bx--breadcrumb--no-trailing-slash': noTrailingSlash,
+    [`${prefix}--breadcrumb`]: true,
+    [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
   });
   return (
     <div className={classNames} {...other}>

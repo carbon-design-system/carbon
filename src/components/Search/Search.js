@@ -2,17 +2,48 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { iconSearch, iconCloseSolid } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
+
+const { prefix } = settings;
 
 export default class Search extends Component {
   static propTypes = {
+    /**
+     * Specify an optional className to be applied to the container node
+     */
     className: PropTypes.string,
+
+    /**
+     * Optional prop to specify the type of the `<input>`
+     */
     type: PropTypes.string,
+
+    /**
+     * Specify whether the Search should be a small variant
+     */
     small: PropTypes.bool,
+
+    /**
+     * Provide an optional placeholder text for the Search
+     */
     placeHolderText: PropTypes.string,
+
+    /**
+     * Provide an optional label text for the Search icon
+     */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify a custom `id` for the input
+     */
     id: PropTypes.string,
+
+    /**
+     * Specify a label to be read by screen readers on the "close" button
+     */
     closeButtonLabelText: PropTypes.string,
+
     /**
      * `true` to use the light version.
      */
@@ -86,16 +117,16 @@ export default class Search extends Component {
     const { hasContent } = this.state;
 
     const searchClasses = classNames({
-      'bx--search': true,
-      'bx--search--lg': !small,
-      'bx--search--sm': small,
-      'bx--search--light': light,
+      [`${prefix}--search`]: true,
+      [`${prefix}--search--lg`]: !small,
+      [`${prefix}--search--sm`]: small,
+      [`${prefix}--search--light`]: light,
       [className]: className,
     });
 
     const clearClasses = classNames({
-      'bx--search-close': true,
-      'bx--search-close--hidden': !hasContent,
+      [`${prefix}--search-close`]: true,
+      [`${prefix}--search-close--hidden`]: !hasContent,
     });
 
     return (
@@ -106,15 +137,15 @@ export default class Search extends Component {
         <Icon
           icon={iconSearch}
           description={labelText}
-          className="bx--search-magnifier"
+          className={`${prefix}--search-magnifier`}
         />
-        <label id={`${id}-label`} htmlFor={id} className="bx--label">
+        <label id={`${id}-label`} htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
         <input
           {...other}
           type={type}
-          className="bx--search-input"
+          className={`${prefix}--search-input`}
           id={id}
           placeholder={placeHolderText}
           onChange={this.handleChange}

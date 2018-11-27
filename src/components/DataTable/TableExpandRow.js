@@ -2,8 +2,11 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { iconChevronRight } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import TableCell from './TableCell';
+
+const { prefix } = settings;
 
 const TableExpandRow = ({
   ariaLabel,
@@ -17,9 +20,9 @@ const TableExpandRow = ({
 }) => {
   const className = cx(
     {
-      'bx--parent-row-v2': true,
-      'bx--expandable-row-v2': isExpanded,
-      'bx--data-table-v2--selected': isSelected,
+      [`${prefix}--parent-row-v2`]: true,
+      [`${prefix}--expandable-row-v2`]: isExpanded,
+      [`${prefix}--data-table-v2--selected`]: isSelected,
     },
     rowClassName
   );
@@ -28,14 +31,14 @@ const TableExpandRow = ({
   return (
     <tr {...rest} className={className} data-parent-row>
       <TableCell
-        className="bx--table-expand-v2"
+        className={`${prefix}--table-expand-v2`}
         data-previous-value={previousValue}>
         <button
-          className="bx--table-expand-v2__button"
+          className={`${prefix}--table-expand-v2__button`}
           onClick={onExpand}
           aria-label={ariaLabel}>
           <Icon
-            className="bx--table-expand-v2__svg"
+            className={`${prefix}--table-expand-v2__svg`}
             icon={iconChevronRight}
             description={expandIconDescription}
           />

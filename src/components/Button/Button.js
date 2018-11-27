@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from '../Icon';
 import classNames from 'classnames';
+import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
+
+const { prefix } = settings;
 
 const Button = ({
   children,
@@ -18,14 +21,14 @@ const Button = ({
   ...other
 }) => {
   const buttonClasses = classNames(className, {
-    'bx--btn': true,
-    'bx--btn--sm': small,
-    'bx--btn--primary': kind === 'primary',
-    'bx--btn--danger': kind === 'danger',
-    'bx--btn--secondary': kind === 'secondary',
-    'bx--btn--ghost': kind === 'ghost',
-    'bx--btn--danger--primary': kind === 'danger--primary',
-    'bx--btn--tertiary': kind === 'tertiary',
+    [`${prefix}--btn`]: true,
+    [`${prefix}--btn--sm`]: small,
+    [`${prefix}--btn--primary`]: kind === 'primary',
+    [`${prefix}--btn--danger`]: kind === 'danger',
+    [`${prefix}--btn--secondary`]: kind === 'secondary',
+    [`${prefix}--btn--ghost`]: kind === 'ghost',
+    [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
+    [`${prefix}--btn--tertiary`]: kind === 'tertiary',
   });
 
   const commonProps = {
@@ -38,7 +41,7 @@ const Button = ({
       icon={Object(icon) === icon ? icon : undefined}
       name={Object(icon) !== icon ? icon : undefined}
       description={iconDescription}
-      className="bx--btn__icon"
+      className={`${prefix}--btn__icon`}
     />
   ) : null;
 

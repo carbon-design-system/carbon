@@ -5,6 +5,9 @@ import Link, { LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const SideNavLink = ({
   className: customClassName,
@@ -14,8 +17,8 @@ const SideNavLink = ({
   ...rest
 }) => {
   const className = cx({
-    'bx--side-nav__link': true,
-    'bx--side-nav__link--current': isActive,
+    [`${prefix}--side-nav__link`]: true,
+    [`${prefix}--side-nav__link--current`]: isActive,
     [customClassName]: !!customClassName,
   });
 

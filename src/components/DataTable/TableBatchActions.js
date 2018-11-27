@@ -1,6 +1,9 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const translationKeys = {
   'carbon.table.batch.cancel': 'Cancel',
@@ -26,8 +29,8 @@ const TableBatchActions = ({
 }) => {
   const batchActionsClasses = cx(
     {
-      'bx--batch-actions': true,
-      'bx--batch-actions--active': shouldShowBatchActions,
+      [`${prefix}--batch-actions`]: true,
+      [`${prefix}--batch-actions--active`]: shouldShowBatchActions,
     },
     className
   );
@@ -35,15 +38,17 @@ const TableBatchActions = ({
   return (
     <div {...rest} className={batchActionsClasses}>
       {children}
-      <div className="bx--batch-summary">
-        <p className="bx--batch-summary__para">
+      <div className={`${prefix}--batch-summary`}>
+        <p className={`${prefix}--batch-summary__para`}>
           <span>
             {totalSelected > 1
               ? t('carbon.table.batch.items.selected', { totalSelected })
               : t('carbon.table.batch.item.selected', { totalSelected })}
           </span>
         </p>
-        <button className="bx--batch-summary__cancel" onClick={onCancel}>
+        <button
+          className={`${prefix}--batch-summary__cancel`}
+          onClick={onCancel}>
           {t('carbon.table.batch.cancel')}
         </button>
       </div>

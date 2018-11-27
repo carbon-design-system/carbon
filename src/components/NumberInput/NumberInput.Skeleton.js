@@ -1,21 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const NumberInputSkeleton = ({ hideLabel, id }) => {
   const label = hideLabel ? null : (
     // eslint-disable-next-line jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control
-    <label className="bx--label bx--skeleton" htmlFor={id} />
+    <label className={`${prefix}--label ${prefix}--skeleton`} htmlFor={id} />
   );
 
   return (
-    <div className="bx--form-item">
+    <div className={`${prefix}--form-item`}>
       {label}
-      <div className="bx--number bx--skeleton" />
+      <div className={`${prefix}--number ${prefix}--skeleton`} />
     </div>
   );
 };
 
 NumberInputSkeleton.propTypes = {
+  /**
+   * Specify whether the label should be hidden, or not
+   */
   hideLabel: PropTypes.bool,
 };
 

@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export default class Copy extends Component {
   static propTypes = {
@@ -68,8 +71,8 @@ export default class Copy extends Component {
       onClick, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
-    const feedbackClassNames = classnames('bx--btn--copy__feedback', {
-      'bx--btn--copy__feedback--displayed': this.state.showFeedback,
+    const feedbackClassNames = classnames(`${prefix}--btn--copy__feedback`, {
+      [`${prefix}--btn--copy__feedback--displayed`]: this.state.showFeedback,
     });
 
     return (

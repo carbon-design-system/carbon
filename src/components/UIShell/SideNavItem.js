@@ -1,9 +1,12 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const SideNavItem = ({ className: customClassName, children }) => {
-  const className = cx('bx--side-nav__item', customClassName);
+  const className = cx(`${prefix}--side-nav__item`, customClassName);
   return <li className={className}>{children}</li>;
 };
 

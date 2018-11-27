@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { iconChevronRight } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
+
+const { prefix } = settings;
 
 const TableData = props => {
   const {
@@ -16,7 +19,7 @@ const TableData = props => {
 
   const tableDataClasses = classNames(className);
 
-  const iconClasses = classNames(iconClassName, 'bx--table-expand__svg');
+  const iconClasses = classNames(iconClassName, `${prefix}--table-expand__svg`);
 
   const style = expanded
     ? {
@@ -47,7 +50,14 @@ const TableData = props => {
 };
 
 TableData.propTypes = {
+  /**
+   * Provide the contents of your TableData.
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to your TableData.
+   */
   className: PropTypes.string,
 
   /**

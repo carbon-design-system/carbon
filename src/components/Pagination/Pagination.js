@@ -4,37 +4,128 @@ import classnames from 'classnames';
 import debounce from 'lodash.debounce';
 import warning from 'warning';
 import { iconChevronLeft, iconChevronRight } from 'carbon-icons';
+import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import { equals } from '../../tools/array';
 
+const { prefix } = settings;
+
 let didWarnAboutDeprecation = false;
 
 export default class Pagination extends Component {
   static propTypes = {
+    /**
+     * The description for the backward icon.
+     */
     backwardText: PropTypes.string,
+
+    /**
+     * The CSS class names.
+     */
     className: PropTypes.string,
+
+    /**
+     * The function returning a translatable text showing where the current page is,
+     * in a manner of the range of items.
+     */
     itemRangeText: PropTypes.func,
+
+    /**
+     * The description for the forward icon.
+     */
     forwardText: PropTypes.string,
+
+    /**
+     * The unique ID of this component instance.
+     */
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * The translatable text indicating the number of items per page.
+     */
     itemsPerPageText: PropTypes.string,
+
+    /**
+     * A variant of `itemRangeText`, used if the total number of items is unknown.
+     */
     itemText: PropTypes.func,
+
+    /**
+     * The callback function called when the current page changes.
+     */
     onChange: PropTypes.func,
+
+    /**
+     * The label to be read by screen readers on input box showing the current page number
+     */
     pageNumberText: PropTypes.string,
+
+    /**
+     * A function returning PII showing where the current page is.
+     */
     pageRangeText: PropTypes.func,
+
+    /**
+     * The translatable text showing the current page.
+     */
     pageText: PropTypes.func,
+
+    /**
+     * The choices for `pageSize`.
+     */
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+
+    /**
+     * The total number of items.
+     */
     totalItems: PropTypes.number,
+
+    /**
+     * `true` if the backward/forward buttons should be disabled.
+     */
     disabled: PropTypes.bool,
+
+    /**
+     * The current page.
+     */
     page: PropTypes.number,
+
+    /**
+     * The number dictating how many items a page contains.
+     */
     pageSize: PropTypes.number,
+
+    /**
+     * `true` if the total number of items is unknown.
+     */
     pagesUnknown: PropTypes.bool,
+
+    /**
+     * `true` if the current page should be the last page.
+     */
     isLastPage: PropTypes.bool,
+
+    /**
+     * `true` if the select box to change the page should be disabled.
+     */
     pageInputDisabled: PropTypes.bool,
+
+    /**
+     * The duration of debouncing `onChange` event.
+     */
     onChangeInterval: PropTypes.number,
+
+    /**
+     * A function returning PII showing how many pages there are.
+     */
     defaultPageText: PropTypes.func,
+
+    /**
+     * A function returning PII showing how many items there are.
+     */
     defaultItemText: PropTypes.func,
   };
 
@@ -210,14 +301,14 @@ export default class Pagination extends Component {
     const statePage = this.state.page;
     const statePageSize = this.state.pageSize;
     const totalPages = Math.max(Math.ceil(totalItems / statePageSize), 1);
-    const classNames = classnames('bx--pagination', className);
+    const classNames = classnames(`${prefix}--pagination`, className);
     const inputId = id || this.uniqueId;
 
     return (
       <div className={classNames} {...other}>
-        <div className="bx--pagination__left">
+        <div className={`${prefix}--pagination__left`}>
           <Select
-            id={`bx-pagination-select-${inputId}`}
+            id={`${prefix}-pagination-select-${inputId}`}
             labelText={itemsPerPageText}
             hideLabel
             onChange={this.handleSizeChange}
@@ -226,26 +317,32 @@ export default class Pagination extends Component {
               <SelectItem key={size} value={size} text={String(size)} />
             ))}
           </Select>
-          <span className="bx--pagination__text">{itemsPerPageText}</span>
-          <span className="bx--pagination__text">{this.getItemsText()}</span>
+          <span className={`${prefix}--pagination__text`}>
+            {itemsPerPageText}
+          </span>
+          <span className={`${prefix}--pagination__text`}>
+            {this.getItemsText()}
+          </span>
         </div>
-        <div className="bx--pagination__right">
-          <span className="bx--pagination__text">{this.getPagesText()}</span>
+        <div className={`${prefix}--pagination__right`}>
+          <span className={`${prefix}--pagination__text`}>
+            {this.getPagesText()}
+          </span>
           <button
-            className="bx--pagination__button bx--pagination__button--backward"
+            className={`${prefix}--pagination__button ${prefix}--pagination__button--backward`}
             onClick={this.decrementPage}
             disabled={this.props.disabled || statePage === 1}>
             <Icon
-              className="bx--pagination__button-icon"
+              className={`${prefix}--pagination__button-icon`}
               icon={iconChevronLeft}
               description={backwardText}
             />
           </button>
           {pageInputDisabled ? (
-            <span className="bx--pagination__text">|</span>
+            <span className={`${prefix}--pagination__text`}>|</span>
           ) : (
             <TextInput
-              id={`bx-pagination-input-${inputId}`}
+              id={`${prefix}-pagination-input-${inputId}`}
               value={statePage > 0 ? statePage : ''}
               onChange={this.handlePageInputChange}
               labelText={pageNumberText}
@@ -253,13 +350,13 @@ export default class Pagination extends Component {
             />
           )}
           <button
-            className="bx--pagination__button bx--pagination__button--forward"
+            className={`${prefix}--pagination__button ${prefix}--pagination__button--forward`}
             onClick={this.incrementPage}
             disabled={
               this.props.disabled || statePage === totalPages || isLastPage
             }>
             <Icon
-              className="bx--pagination__button-icon"
+              className={`${prefix}--pagination__button-icon`}
               icon={iconChevronRight}
               description={forwardText}
             />
