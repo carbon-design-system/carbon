@@ -13,11 +13,13 @@ const steps = [
   {
     state: 'current',
     label: 'Second Step',
+    overflow: true,
     overflowLabel: 'Overflow Ex. 1',
   },
   {
     state: 'incomplete',
     label: 'Third Step',
+    overflow: true,
     overflowLabel: 'Overflow Ex. 2 Multi Line',
   },
   {
