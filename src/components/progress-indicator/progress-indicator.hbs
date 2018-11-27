@@ -44,12 +44,12 @@
       {{/is}}
       <p tabindex="0" class="{{@root.prefix}}--progress-label" {{#if ../componentsX}} aria-describedby="label-tooltip" {{/if}}>{{label}}</p>
       {{#if ../componentsX}}
-        <div class="{{@root.prefix}}--tooltip--definition">
-          <div id="label-tooltip" role="tooltip" class="{{@root.prefix}}--tooltip--definition__bottom">
+        <!-- <div class="{{@root.prefix}}--tooltip--definition"> -->
+          <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip {{@root.prefix}}--tooltip_multi" data-avoid-focus-on-open>
             <span class="{{@root.prefix}}--tooltip__caret"></span>
-            <p>{{label}}</p>
+            <p class="{{@root.prefix}}--tooltip__text">{{label}}</p>
           </div>
-        </div>
+        <!-- </div> -->
         {{#if optional}}
           <p class="{{@root.prefix}}--progress-optional">{{optionalLabel}}</p>
         {{/if}}
