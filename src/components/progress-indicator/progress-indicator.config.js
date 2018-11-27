@@ -12,7 +12,7 @@ const steps = [
   },
   {
     state: 'current',
-    label: 'Second step',
+    label: 'Long Second step',
   },
   {
     state: 'incomplete',
