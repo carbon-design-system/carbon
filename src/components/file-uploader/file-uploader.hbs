@@ -1,12 +1,12 @@
 <div class="{{@root.prefix}}--form-item">
-  <strong class="{{@root.prefix}}--label">Account photo</strong>
+  <strong class="{{#if componentsX}}{{@root.prefix}}--file--label{{else}}{{@root.prefix}}--label{{/if}}">Account photo</strong>
   <p class="{{@root.prefix}}--label-description">only .jpg and .png files. 500kb max file size.</p>
   <div class="{{@root.prefix}}--file" data-file>
     <label
       for="your-file-importer-id-here"
-      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--secondary"
+      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--sm"
       role="button"
-      tabindex="0">Add files</label>
+      tabindex="0">Add file</label>
     <input
       type="file"
       class="{{@root.prefix}}--file-input"
