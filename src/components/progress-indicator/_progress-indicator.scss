@@ -182,7 +182,7 @@
 
   //OVERFLOW STYLING
   .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip {
-    display: block;
+    visibility: visible;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
@@ -192,20 +192,19 @@
   .#{$prefix}--tooltip__text {
     padding: 0;
     margin: 0;
-    // width: rem(83px);
-    display: block;
-    overflow: hidden;
   }
 
   //single line tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip {
     min-width: rem(115px);
-    width: rem(115px);
+    width: rem(125px);
     min-height: $spacing-lg;
     height: $spacing-lg;
     margin-left: rem(22px);
     margin-top: rem(40px);
     padding: 3px $spacing-md;
+    display: block;
+    visibility: hidden;
   }
 
   //multiline tooltip
