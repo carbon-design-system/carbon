@@ -11,7 +11,7 @@
 @import '../form/form';
 @import '../loading/loading';
 
-@include exports('file-uploader') {
+@mixin file-uploader {
   .#{$prefix}--file {
     width: 100%;
   }
@@ -101,5 +101,116 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
     fill: $support-02;
+  }
+}
+
+@mixin file-uploader--x {
+  .#{$prefix}--file {
+    width: 100%;
+  }
+
+  // TODO: sync with type
+  .#{$prefix}--file--label {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    color: $text-01;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--file-input {
+    @include hidden;
+  }
+
+  .#{$prefix}--file-btn {
+    display: inline-flex;
+    width: rem(95px);
+    margin: 0;
+    padding-right: 1rem;
+  }
+
+  .#{$prefix}--label-description {
+    @include reset;
+    @include typescale('zeta');
+    @include line-height('body');
+    color: $text-02;
+    margin-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--file-container {
+    display: block;
+    width: 100%;
+    margin-top: $spacing-md;
+  }
+
+  .#{$prefix}--file__selected-file {
+    @include text-overflow(300px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: rem(30px);
+    background-color: $inverse-01;
+    padding: 0 $spacing-xs 0 $spacing-md;
+    margin-bottom: $spacing-sm;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$prefix}--file-filename {
+    @include typescale('omega');
+    @include text-overflow(100%);
+    display: inline-flex;
+    align-items: center;
+    color: $text-01;
+    margin-right: $spacing-md;
+    height: 1.875rem;
+    /*rtl:ignore*/
+    direction: ltr;
+    justify-content: flex-start; /*rtl:{flex-end}*/
+  }
+
+  .#{$prefix}--file__state-container {
+    display: flex;
+    align-items: center;
+
+    .#{$prefix}--loading {
+      width: 1rem;
+      height: 1rem;
+      margin-right: $spacing-xs;
+    }
+
+    .#{$prefix}--loading__svg {
+      stroke: $ui-05;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    width: 1rem;
+    height: 1rem;
+    fill: $text-01;
+    cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@include exports('file-uploader') {
+  @if feature-flag-enabled('components-x') {
+    @include file-uploader--x;
+  } @else {
+    @include file-uploader;
   }
 }
