@@ -118,9 +118,37 @@
     background-color: $hover-bg-color;
   }
 
-  &:focus {
-    border: $button-border-width solid $ui-02;
-    outline: $button-outline-width solid $brand-01;
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    position: absolute;
+    content: '';
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
+  }
+
+  &::before {
+    top: calc(-#{$button-border-width} + #{$button-outline-width});
+    left: -$button-border-width + $button-outline-width;
+    width: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
+    height: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
+    border: 1px solid transparent;
+  }
+
+  &:focus::before {
+    border-color: $ui-02;
+  }
+
+  &::after {
+    top: -#{$button-border-width};
+    left: -#{$button-border-width};
+    height: calc(100% + 2 * #{$button-border-width});
+    width: calc(100% + 2 * #{$button-border-width});
+    border: $button-outline-width solid transparent;
+  }
+
+  &:focus::after {
+    border-color: $focus;
   }
 
   &:disabled:hover,
