@@ -75,7 +75,7 @@ Here's what we're looking for during our AVT2 audit. Therea are two main parts:
 
 ### How to test
 
-Essentially open the component or web page you're auditing. Then make a note of all the elements on the page that are interactible with a mouse in any way. Finally moving through the list above attempt to interact with those elements using only your keyboard in the manner described. Integrating this test throughout each stage of development will save you the pain of retro-fitting a component with the necessary keyboard functionality.
+Essentially open the component or web page you're auditing. Then make a note of all the elements on the page that are interactable with a mouse in any way. Finally moving through the list above attempt to interact with those elements using only your keyboard in the manner described. Integrating this test throughout each stage of development will save you the pain of retro-fitting a component with the necessary keyboard functionality.
 
 ## Screen Magnifier testing🔎
 
