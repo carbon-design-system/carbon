@@ -191,7 +191,6 @@
     height: 100%;
 
     @include breakpoint(md) {
-      height: auto;
       min-width: 500px;
       max-width: 50%;
       max-height: 90%;
@@ -230,6 +229,7 @@
   }
 
   .#{$prefix}--modal-content {
+    max-height: 83%;
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
     color: $text-01;
