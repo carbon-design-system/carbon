@@ -270,6 +270,18 @@
     width: rem(6px);
   }
 
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    left: auto;
+    right: 0;
+  }
+
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
+    top: auto;
+    bottom: 0;
+  }
+
   .#{$prefix}--overflow-menu-options--open {
     display: flex;
   }
