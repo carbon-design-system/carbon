@@ -52,7 +52,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
       return;
     }
     const isExpanded = !this.element.hasAttribute('hidden');
-    if (event.keyCode === 27 && isExpanded) {
+    if (event.which === 27 && isExpanded) {
       this.changeState('collapsed');
       this.triggerButton.focus();
     }
