@@ -57,10 +57,23 @@ function iconToString(descriptor) {
 
 function createComponentFromInfo({ descriptor, moduleName }) {
   const source = `
-function ${moduleName}({ children, ...rest }) {
+function ${moduleName}({ className, children, tabIndex, ...rest }) {
+  const { tabindex, ...props } = getAttributes({
+    ...rest,
+    tabindex: tabIndex,
+  });
+
+  if (className) {
+    props.className = className;
+  }
+
+  if (tabindex !== undefined && tabindex !== null) {
+    props.tabIndex = tabindex;
+  }
+
   return React.createElement(
     'svg',
-    getAttributes(rest),
+    props,
     children,
     ${descriptor.content.map(iconToString).join(', ')}
   );
@@ -71,10 +84,12 @@ ${moduleName}.propTypes = {
   'aria-hidden': PropTypes.bool,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.node,
   focusable: PropTypes.bool,
   height: PropTypes.number,
   preserveAspectRatio: PropTypes.string,
+  tabIndex: PropTypes.string,
   title: PropTypes.string,
   viewBox: PropTypes.string,
   width: PropTypes.number,
@@ -84,7 +99,7 @@ ${moduleName}.defaultProps = {
   width: ${descriptor.attrs.width},
   height: ${descriptor.attrs.height},
   viewBox: '${descriptor.attrs.viewBox}',
-  xmlns: '${descriptor.attrs.xmlns}',
+  xmlns: 'http://www.w3.org/2000/svg',
   // Reference:
   // https://github.com/IBM/carbon-components-react/issues/1392
   // https://github.com/PolymerElements/iron-iconset-svg/pull/47
