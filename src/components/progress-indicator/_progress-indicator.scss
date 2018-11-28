@@ -181,7 +181,8 @@
   }
 
   //OVERFLOW STYLING
-  .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip {
+  .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
+  .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
     visibility: visible;
   }
 
