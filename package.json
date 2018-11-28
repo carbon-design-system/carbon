@@ -125,7 +125,7 @@
     "minimatch": "^3.0.0",
     "mkdirp": "^0.5.0",
     "mock-raf": "^1.0.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.10.0",
     "nodemon": "1.9.1",
     "path-to-regexp": "^2.2.0",
     "portscanner": "^2.2.0",
