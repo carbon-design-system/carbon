@@ -227,13 +227,17 @@
 
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
-    svg {
-      fill: $brand-01;
-    }
-
     .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
+  }
+
+  .#{$prefix}--progress-step--current svg {
+    width: 14px;
+    height: 14px;
+    fill: $brand-01;
+    stroke: $brand-01;
+    margin-top: rem(9.5px);
   }
 
   //INCOMPLETE STYLING
