@@ -154,7 +154,7 @@ const plugins = [
   {
     // Remove any ids or data attributes that are included in SVG source files.
     removeAttrs: {
-      attrs: ['class', 'data-name', 'id'],
+      attrs: ['class', 'data-name', 'fill', 'id'],
     },
   },
 ];
