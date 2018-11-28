@@ -100,15 +100,13 @@ export default class FilterableMultiSelect extends React.Component {
   handleOnOuterClick = () => {
     this.setState({
       isOpen: false,
+      inputValue: '',
     });
   };
 
   handleOnStateChange = changes => {
     const { type } = changes;
     switch (type) {
-      case Downshift.stateChangeTypes.changeInput:
-        this.setState({ inputValue: changes.inputValue });
-        break;
       case Downshift.stateChangeTypes.keyDownArrowDown:
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.itemMouseEnter:
@@ -144,17 +142,18 @@ export default class FilterableMultiSelect extends React.Component {
     event.stopPropagation();
   };
 
-  handleOnInputValueChange = inputValue => {
-    this.setState(() => {
-      if (Array.isArray(inputValue)) {
+  handleOnInputValueChange = (inputValue, { type }) => {
+    if (type === Downshift.stateChangeTypes.changeInput)
+      this.setState(() => {
+        if (Array.isArray(inputValue)) {
+          return {
+            inputValue: '',
+          };
+        }
         return {
-          inputValue: '',
+          inputValue: inputValue || '',
         };
-      }
-      return {
-        inputValue: inputValue || '',
-      };
-    });
+      });
   };
 
   clearInputValue = event => {

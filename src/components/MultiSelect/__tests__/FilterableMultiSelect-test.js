@@ -106,4 +106,17 @@ describe('MultiSelect.Filterable', () => {
       selectedItems: [],
     });
   });
+
+  it('should not clear input value after a user makes a selection', () => {
+    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const inputValue = 'Item';
+    openMenu(wrapper);
+    wrapper.setState({ inputValue });
+    wrapper
+      .find(listItemName)
+      .at(0)
+      .simulate('click');
+
+    expect(wrapper.state('inputValue')).toEqual(inputValue);
+  });
 });
