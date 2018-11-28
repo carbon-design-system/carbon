@@ -153,9 +153,9 @@
   }
 
   .#{$prefix}--progress-label {
-    line-height: 1;
+    line-height: 1.45;
     max-width: rem(88px);
-    margin: 9px 0 0 0;
+    margin: $spacing-xs 0 0 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -192,6 +192,7 @@
   .#{$prefix}--tooltip__text {
     padding: 0;
     margin: 0;
+    font-weight: normal;
   }
 
   //single line tooltip
@@ -219,7 +220,7 @@
   .#{$prefix}--progress-optional {
     position: absolute;
     margin-left: $spacing-lg;
-    margin-top: rem(26px);
+    margin-top: rem(28px);
     @include font-size('12');
     color: $text-02;
   }
