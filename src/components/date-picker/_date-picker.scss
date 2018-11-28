@@ -148,8 +148,7 @@
     width: 7.075rem;
   }
 
-  .#{$prefix}--date-picker__calendar,
-  .flatpickr-calendar.open {
+  .#{$prefix}--date-picker__calendar.flatpickr-calendar.open {
     @include layer('pop-out');
     background-color: $ui-01;
     display: flex;
@@ -611,6 +610,7 @@
     justify-content: center;
     padding: $spacing-2xs $spacing-2xs $spacing-xs $spacing-2xs;
     width: rem(288px) !important;
+    height: rem(336px);
     border-radius: 0;
     border: none;
     overflow: hidden;
@@ -839,11 +839,13 @@
   .dayContainer {
     width: 100%;
     min-width: 100%;
+    height: rem(246px);
   }
 
   .flatpickr-innerContainer,
   .flatpickr-rContainer {
     width: 100%;
+    height: rem(336px);
   }
 
   .#{$prefix}--date-picker__weekdays,
@@ -871,7 +873,7 @@
 
   .flatpickr-prev-month,
   .flatpickr-next-month {
-    padding-top: 5px;
+    padding-top: 12px;
   }
 
   .flatpickr-prev-month:hover svg,

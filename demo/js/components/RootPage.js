@@ -51,26 +51,24 @@ const applyContent = (componentItems, id, content) => {
           }
         : {
             ...item,
-            items: item.items.map(
-              subItem =>
-                !content[subItem.handle]
-                  ? subItem
-                  : {
-                      ...subItem,
-                      renderedContent: content[subItem.handle],
-                    }
+            items: item.items.map(subItem =>
+              !content[subItem.handle]
+                ? subItem
+                : {
+                    ...subItem,
+                    renderedContent: content[subItem.handle],
+                  }
             ),
           };
     });
   }
-  return componentItems.map(
-    item =>
-      item.id !== id
-        ? item
-        : {
-            ...item,
-            renderedContent: content,
-          }
+  return componentItems.map(item =>
+    item.id !== id
+      ? item
+      : {
+          ...item,
+          renderedContent: content,
+        }
   );
 };
 
