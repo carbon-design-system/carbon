@@ -22,7 +22,7 @@ describe('FileUploaderButton', () => {
 
   describe('Renders as expected with default props', () => {
     it('renders with expected className', () => {
-      expect(mountWrapper.children().hasClass('bx--btn')).toBe(true);
+      expect(mountWrapper.find('label').hasClass('bx--btn')).toBe(true);
     });
 
     it('renders with given className', () => {

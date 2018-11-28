@@ -141,16 +141,19 @@ export class FileUploaderButton extends Component {
     this.uid = this.props.id || uid();
 
     return (
-      <div
-        role="button"
-        tabIndex={tabIndex || 0}
-        className={classes}
-        onKeyDown={evt => {
-          if (evt.which === 13 || evt.which === 32) {
-            this.input.click();
-          }
-        }}>
-        <label htmlFor={this.uid} role={role} {...other}>
+      <>
+        <label
+          role="button"
+          tabIndex={tabIndex || 0}
+          className={classes}
+          onKeyDown={evt => {
+            if (evt.which === 13 || evt.which === 32) {
+              this.input.click();
+            }
+          }}
+          htmlFor={this.uid}
+          role={role}
+          {...other}>
           {this.state.labelText}
         </label>
         <input
@@ -167,7 +170,7 @@ export class FileUploaderButton extends Component {
             evt.target.value = null;
           }}
         />
-      </div>
+      </>
     );
   }
 }
