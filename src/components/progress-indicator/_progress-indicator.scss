@@ -226,8 +226,7 @@
 
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
-    circle:first-child {
-      stroke: $brand-01;
+    svg {
       fill: $brand-01;
     }
 
@@ -238,10 +237,8 @@
 
   //INCOMPLETE STYLING
   .#{$prefix}--progress-step--incomplete {
-    circle {
-      stroke: $ui-05;
-      stroke-width: 2;
-      fill: transparent;
+    svg {
+      fill: $ui-05;
     }
 
     .#{$prefix}--progress-line {
@@ -251,16 +248,6 @@
 
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
-    circle {
-      stroke: $brand-01;
-      stroke-width: $progress-indicator-stroke-width;
-      fill: transparent;
-    }
-
-    polygon {
-      fill: $brand-01;
-    }
-
     .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
@@ -270,10 +257,8 @@
   .#{$prefix}--progress-step[disabled] {
     cursor: not-allowed;
 
-    circle {
-      stroke: $disabled;
-      stroke-width: 2;
-      fill: transparent;
+    svg {
+      fill: $disabled;
       cursor: not-allowed;
     }
 
@@ -297,6 +282,11 @@
     .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
       display: none;
     }
+  }
+
+  //ERROR STYLING
+  .#{$prefix}--progress__warning > path {
+    fill: $support-01;
   }
 
   // Skeleton State
