@@ -39,6 +39,7 @@ const props = {
       labelText: text('Label text (labelText)', 'Add files'),
       name: text('Form item name: (name)', ''),
       multiple: boolean('Supports multiple files (multiple)', true),
+      disabled: boolean('Disabled (disabled)', false),
       buttonKind: buttonKind || 'primary',
       disableLabelChanges: boolean(
         'Prevent the label from being replaced with file selected file (disableLabelChanges)',
