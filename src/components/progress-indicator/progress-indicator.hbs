@@ -2,18 +2,13 @@
   {{#each steps}}
     <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}}" {{#if disabled}} disabled {{/if}} {{#if invalid}} data-invalid {{/if}}>
       {{#is state "complete"}}
-        <svg width="16" height="16" viewBox="0 0 16 16">
-          <g fill-rule="nonzero">
-            <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
-            <path d="M11.646 5.146l.708.708-5.604 5.603-3.104-3.103.708-.708 2.396 2.397z"/>
-          </g>
-        </svg>
+        {{carbon-icon 'CheckmarkOutline16'}}
       {{/is}}
       {{#is state "current"}}
         <svg>
           {{#if ../componentsX}}
-            <circle cx="8" cy="8" r="8"></circle>
-            <circle cx="8" cy="8" r="4"></circle>
+          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" ></path>
+            <!-- <circle cx="7" cy="7" r="7"></circle> -->
           {{else}}
             <circle cx="12" cy="12" r="12"></circle>
             <circle cx="12" cy="12" r="6"></circle>
@@ -23,17 +18,10 @@
       {{#is state "incomplete"}}
         {{#if ../componentsX}}
           {{#if invalid}}
-            <svg width="16" height="16" viewBox="0 0 16 16" >
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <rect x="7.5" y="4" width="1" height="5" fill="#e0182d"/>
-                <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill="#e0182d"/>
-                <path d="M8,10.2c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8c0.4,0,0.8-0.3,0.8-0.8S8.4,10.2,8,10.2z" fill="#e0182d"/>
-                <rect class="st0" width="16" height="16"/>
-              </g>
-            </svg>
+            {{carbon-icon 'Warning16' class=(add @root.prefix '--progress__warning')}}
           {{else}}
             <svg>
-              <circle  cx="8" cy="8" r="8"></circle>
+              <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path>
             </svg>
           {{/if}}
         {{else}}
