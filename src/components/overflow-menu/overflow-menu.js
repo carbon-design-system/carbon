@@ -64,7 +64,12 @@ export const getMenuOffset = (menuBody, direction, trigger) => {
   }
 
   if (componentsX) {
-    const flip = menuBody.classList.contains(`${settings.prefix}--overflow-menu--flip`);
+    // eslint-disable-next-line no-use-before-define
+    const menu = OverflowMenu.components.get(trigger);
+    if (!menu) {
+      throw new TypeError('Overflow menu instance cannot be found.');
+    }
+    const flip = menuBody.classList.contains(menu.options.classMenuFlip);
 
     if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
       const triggerWidth = trigger.offsetWidth;
