@@ -75,7 +75,7 @@ Here's what we're looking for during our AVT2 audit. Therea are two main parts:
 
 ### How to test
 
-Essentially open the component or web page you're auditing. Then make a note of all the elements on the page that are interactible with a mouse in any way. Finally moving through the list above attempt to interact with those elements using only your keyboard in the manner described. Integrating this test throughout each stage of development will save you the pain of retro-fitting a component with the necessary keyboard functionality.
+Essentially open the component or web page you're auditing. Then make a note of all the elements on the page that are interactable with a mouse in any way. Finally moving through the list above attempt to interact with those elements using only your keyboard in the manner described. Integrating this test throughout each stage of development will save you the pain of retro-fitting a component with the necessary keyboard functionality.
 
 ## Screen Magnifier testing🔎
 
@@ -93,8 +93,12 @@ A user with a screen magnifier views web content on a component by component bas
 
 3. Don't obscure content on mouse hover
 
-   Obscuring all or some of the page on mouse hover with an overlay or blur is a problem for user of screen magnifiers. Maintain required contrast ration and instead signal to your users with some other visual dinstinction.
+   Obscuring all or some of the page on mouse hover with an overlay or blur is a problem for user of screen magnifiers. Maintain required contrast ration and instead signal to your users with some other visual distinction.
 
 ### How to test
 
 Keyboard accessibility is generally more familiar to developers than magnification tools, but Take this opportunity to familiarize yourself with macOS Zoom Windows Magnifier, or your OS's native low vision accessibility tools as they are relied on by millions of people with temporary or permanent vision impairment every day.
+
+Simply _use_ each component in the manner it was intended while zoomed in to 2x, 4x, and finally 8x magnification while taking into consideration the points mentioned above. Along with the three points mentioned above keep in mind more broad accessibility rules that are in question given this new context.
+
+For example: a hover animation indicating an element has received focus might be great and well within expected parameters, but zoomed into 4x magnification it may be difficult for a user to see.
