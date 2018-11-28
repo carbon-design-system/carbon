@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="7px" height="12px" viewBox="0 0 7 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>chevron--left</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="chevron--left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="chevron" fill="#000000" fill-rule="nonzero" transform="translate(3.500000, 5.998096) rotate(-90.000000) translate(-3.500000, -5.998096) " points="3.49598515 3.94781865 -1.77163429 9.49781153 -2.49809598 8.81289061 3.49541351 2.49809598 9.49809598 8.81260617 8.77217466 9.49809598"></polygon>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="6px" height="10px" viewBox="0 0 6 10" style="enable-background:new 0 0 6 10;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<polygon points="0,5 5,0 5.7,0.7 1.4,5 5.7,9.3 5,10 "/>
+<rect id="_x3C_Transparent_Rectangle_x3E_" class="st0" width="6" height="10"/>
 </svg>
