@@ -101,11 +101,9 @@ class ComponentExample extends Component {
       const componentClasses = Object.keys(components)
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function');
-      componentClasses
-        .filter(Clz => !Clz.forLazyInit)
-        .forEach(Clz => {
-          Clz.init(container);
-        });
+      componentClasses.filter(Clz => !Clz.forLazyInit).forEach(Clz => {
+        Clz.init(container);
+      });
     }
   };
 
