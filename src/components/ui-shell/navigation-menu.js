@@ -7,7 +7,6 @@ export default class NavigationMenu extends NavigationMenuPanel {
   /**
    * A navigation menu
    * @extends NavigationMenuPanel
-   * @extends TrackBlur
    * @param {HTMLElement} element The element working as a selector.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorInit]
@@ -35,7 +34,11 @@ export default class NavigationMenu extends NavigationMenuPanel {
     this.manage(on(element, 'keydown', this._handleKeyDown));
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
-        if (!this.element.hasAttribute('hidden') && event.delegateTarget !== this.triggerButton) {
+        if (
+          !this.element.hasAttribute('hidden') &&
+          !this.triggerButton.contains(event.target) &&
+          !this.element.contains(event.target)
+        ) {
           this.changeState('collapsed');
         }
       })
