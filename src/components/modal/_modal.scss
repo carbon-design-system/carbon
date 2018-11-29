@@ -213,6 +213,11 @@
     margin-bottom: $spacing-xs;
   }
 
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-footer {
+    flex-shrink: 0;
+  }
+
   .#{$prefix}--modal-header__label {
     @include reset;
     @include typescale('omega');
@@ -231,7 +236,6 @@
 
   .#{$prefix}--modal-content {
     @include typescale('zeta');
-    max-height: 83%;
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
     color: $text-01;
