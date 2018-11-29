@@ -1,5 +1,6 @@
 'use strict';
 
+const env = process.env.NODE_ENV || 'development';
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
@@ -25,6 +26,7 @@ class FeatureFlagProxyPlugin {
 }
 
 module.exports = {
+  mode: env,
   devtool: 'source-maps',
   entry: ['webpack-hot-middleware/client?reload=true', path.resolve(__dirname, '../demo/index')],
   output: {
@@ -37,7 +39,7 @@ module.exports = {
     libraryTarget: 'var',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,

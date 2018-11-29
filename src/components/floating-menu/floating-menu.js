@@ -153,7 +153,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     return getFloatingPosition({
       menuSize: element.getBoundingClientRect(),
       refPosition: refNode.getBoundingClientRect(),
-      offset: typeof offset !== 'function' ? offset : offset(element, direction),
+      offset: typeof offset !== 'function' ? offset : offset(element, direction, refNode),
       direction,
       scrollX: refNode.ownerDocument.defaultView.pageXOffset,
       scrollY: refNode.ownerDocument.defaultView.pageYOffset,
