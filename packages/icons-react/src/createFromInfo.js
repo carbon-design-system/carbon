@@ -86,7 +86,6 @@ ${moduleName}.propTypes = {
   'aria-labelledby': PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
-  focusable: PropTypes.bool,
   height: PropTypes.number,
   preserveAspectRatio: PropTypes.string,
   tabIndex: PropTypes.string,
@@ -100,10 +99,6 @@ ${moduleName}.defaultProps = {
   height: ${descriptor.attrs.height},
   viewBox: '${descriptor.attrs.viewBox}',
   xmlns: 'http://www.w3.org/2000/svg',
-  // Reference:
-  // https://github.com/IBM/carbon-components-react/issues/1392
-  // https://github.com/PolymerElements/iron-iconset-svg/pull/47
-  focusable: false,
   preserveAspectRatio: 'xMidYMid meet',
 };`;
   return prettier.format(source, prettierOptions);
