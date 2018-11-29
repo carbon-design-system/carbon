@@ -8,7 +8,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
-@include exports('progress-indicator') {
+@mixin progress-indicator {
   .#{$prefix}--progress {
     @include reset;
     @include font-family;
@@ -113,5 +113,199 @@
     @include skeleton;
     height: rem(12px);
     width: rem(40px);
+  }
+}
+
+@mixin progress-indicator--x {
+  .#{$prefix}--progress {
+    @include reset;
+    @include font-family;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--progress-step {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    flex: 1;
+    min-width: 7rem;
+    width: rem(128px);
+    transition: $transition--base all $carbon--standard-easing;
+    overflow: visible;
+  }
+
+  .#{$prefix}--progress-line {
+    position: absolute;
+    height: 1px;
+    width: rem(128px);
+    border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: $spacing-md;
+    height: $spacing-md;
+    border-radius: 50%;
+    margin: 9px $spacing-xs 0 0;
+    fill: $brand-01;
+  }
+
+  .#{$prefix}--progress-label {
+    line-height: 1.45;
+    max-width: rem(88px);
+    margin: $spacing-xs 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @include font-size('14');
+    &:before {
+      content: '';
+      display: block;
+    }
+  }
+
+  .#{$prefix}--progress-label:hover {
+    color: $brand-01;
+    cursor: pointer;
+    box-shadow: 0 1px $brand-01;
+  }
+
+  .#{$prefix}--progress-label:focus {
+    outline: 2px solid $brand-01;
+  }
+
+  .#{$prefix}--progress-label:active {
+    box-shadow: 0 1px $ui-05;
+  }
+
+  //OVERFLOW STYLING
+  .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
+  .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
+    visibility: visible;
+  }
+
+  .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
+    margin-left: rem(10px);
+  }
+
+  .#{$prefix}--tooltip__text {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  //single line tooltip
+  .#{$prefix}--progress-step .#{$prefix}--tooltip {
+    min-width: rem(115px);
+    width: rem(125px);
+    min-height: $spacing-lg;
+    height: $spacing-lg;
+    margin-left: rem(22px);
+    margin-top: rem(40px);
+    padding: 3px $spacing-md;
+    display: block;
+    visibility: hidden;
+  }
+
+  //multiline tooltip
+  .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
+    width: rem(150px);
+    height: auto;
+    padding: $spacing-md;
+    padding-bottom: $spacing-lg;
+  }
+
+  //OPTIONAL HELPER TEXT STYLING
+  .#{$prefix}--progress-optional {
+    position: absolute;
+    margin-left: $spacing-lg;
+    margin-top: rem(28px);
+    @include font-size('12');
+    color: $text-02;
+  }
+
+  //CURRENT STYLING
+  .#{$prefix}--progress-step--current {
+    .#{$prefix}--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--progress-step--current svg {
+    width: 14px;
+    height: 14px;
+    fill: $brand-01;
+    margin-top: rem(9.5px);
+  }
+
+  //INCOMPLETE STYLING
+  .#{$prefix}--progress-step--incomplete {
+    svg {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--progress-line {
+      background-color: $ui-03;
+    }
+  }
+
+  //COMPLETED STYLING
+  .#{$prefix}--progress-step--complete {
+    .#{$prefix}--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  //DISABLED STYLING
+  .#{$prefix}--progress-step[disabled] {
+    cursor: not-allowed;
+
+    svg {
+      fill: $disabled;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label,
+    .#{$prefix}--progress-label:hover {
+      color: $disabled;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--progress-label:focus,
+    .#{$prefix}--progress-label:active {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--progress-line {
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+      display: none;
+    }
+  }
+
+  //ERROR STYLING
+  .#{$prefix}--progress__warning > path {
+    fill: $support-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
+  }
+}
+
+@include exports('progress-indicator') {
+  @if feature-flag-enabled('components-x') {
+    @include progress-indicator--x;
+  } @else {
+    @include progress-indicator;
   }
 }

@@ -34,10 +34,11 @@ const triggerButtonPositionFactors = {
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @param {string} direction The floating menu direction.
+ * @param {Element} trigger The trigger button.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
-export const getMenuOffset = (menuBody, direction) => {
+export const getMenuOffset = (menuBody, direction, trigger) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
   if (!triggerButtonPositionProp || !triggerButtonPositionFactor) {
@@ -63,17 +64,26 @@ export const getMenuOffset = (menuBody, direction) => {
   }
 
   if (componentsX) {
+    // eslint-disable-next-line no-use-before-define
+    const menu = OverflowMenu.components.get(trigger);
+    if (!menu) {
+      throw new TypeError('Overflow menu instance cannot be found.');
+    }
+    const flip = menuBody.classList.contains(menu.options.classMenuFlip);
+
     if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
+      const triggerWidth = trigger.offsetWidth;
       return {
-        left: menuWidth / 2 - 16,
+        left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
         top: 0,
       };
     }
 
     if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
+      const triggerHeight = trigger.offsetHeight;
       return {
         left: 0,
-        top: menuHeight / 2 - 16,
+        top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
       };
     }
   }
