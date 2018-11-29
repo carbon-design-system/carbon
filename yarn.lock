@@ -985,15 +985,18 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/colors@^0.0.1-alpha.0":
-  version "0.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.2.tgz#bfe50a0f8b1ba6cb916b4c96145896f1b72209ea"
-  integrity sha512-+mZdSgb/4CCH/8CFuCi3kHave3405UwHjBHDeBJ5boTCfLrDDObpcXSuBrdKj/1wF3nuiJiZzlJE4qkNriYoFA==
+"@carbon/icon-helpers@0.0.1-alpha.20":
+  version "0.0.1-alpha.20"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.20.tgz#3e9ceb79996bf3161984de1941c329d6d210802c"
+  integrity sha512-Gt2O+A1FgK643+Udl9S/q1wxyVlXSifgRmkyGMZwiTtfGg+EN3gNBan3KFF5B8Y36ltj4Uk8X4SerIbbueWOig==
 
-"@carbon/icons-react@^0.0.1-alpha.2":
-  version "0.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-0.0.1-alpha.2.tgz#d46a8bcb1986a7d57d10894c02db6b56040d5699"
-  integrity sha512-G8LeOXztzi5l+GcdA2HecCKeheFSLP81pqDvDnu5Eah7zeU8yLYN6iII/P8xUFdKRfYD+j/mfc9wACRbmw/zVg==
+"@carbon/icons-react@^0.0.1-alpha.20":
+  version "0.0.1-alpha.20"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-0.0.1-alpha.20.tgz#8a0ba94bd76d35d6955cb712f824b119de7b58bd"
+  integrity sha512-0eVZ+fKElfbND32enwVcHWvXdQ/hFH0v7v2/tUPr+JP7RAakjbaV2mdlWNw0Twk+OdhYpCdJVp1xEEfnxgLQbw==
+  dependencies:
+    "@carbon/icon-helpers" "0.0.1-alpha.20"
+    prop-types "^15.6.2"
 
 "@emotion/cache@^0.8.8":
   version "0.8.8"
@@ -3259,12 +3262,11 @@ caniuse-lite@^1.0.30000898, caniuse-lite@^1.0.30000899:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000900.tgz#015cfe37897a3386a3075a914498800c29afe77e"
   integrity sha512-xDVs8pBFr6bzq9pXUkLKpGQQnzsF/l6/yX38UnCkTcUcwC0rDl1NGZGildcJVTU+uGBxfsyniK/ZWagPNn1Oqw==
 
-carbon-components@^9.48.2:
-  version "9.48.2"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.48.2.tgz#128c1af5f3f36a277d305325e78f60e3101418e6"
-  integrity sha512-GF/aJoiK1os2icGJuZie4nHQyN/GQJENMDXpygGG8oTI2rHozBR12bJf1pozw//JvlR49vpYuv+hQfhfnyGn9g==
+carbon-components@^9.56.2:
+  version "9.56.2"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.56.2.tgz#0e0222f0c5c390653f88a232df44eb621a31d461"
+  integrity sha512-cEpSbD6bk/vQjZsgcz+/3eXdJpr+AW0OHrEfvIotdO6J3RCf+2TCinWFvFSpUtA9Jb/G2o3MI0l0dW7nakg0mw==
   dependencies:
-    "@carbon/colors" "^0.0.1-alpha.0"
     carbon-icons "^7.0.7"
     flatpickr "4.5.2"
     lodash.debounce "^4.0.8"
@@ -8017,14 +8019,14 @@ longest@^1.0.1:
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
   integrity sha1-MKCy2jj3N3DoKUoNIuZiXtd9AJc=
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.1.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   integrity sha1-0aitM/qc4OcT1l/dCsi3SNR4yEg=
   dependencies:
     js-tokens "^3.0.0"
 
-loose-envify@^1.4.0:
+loose-envify@^1.3.1, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==

@@ -122,7 +122,7 @@
     "react-dom": "^16.4.0"
   },
   "dependencies": {
-    "@carbon/icons-react": "^0.0.1-alpha.2",
+    "@carbon/icons-react": "^0.0.1-alpha.20",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.5.1",
@@ -172,7 +172,7 @@
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-react-docgen": "^2.0.0",
     "bowser": "^1.6.1",
-    "carbon-components": "^9.48.2",
+    "carbon-components": "^9.56.2",
     "carbon-icons": "^7.0.5",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",

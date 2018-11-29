@@ -2,10 +2,13 @@
 
 exports[`Header should render 1`] = `
 <Header
+  aria-label="label"
   className="custom-class"
 >
   <header
+    aria-label="label"
     className="bx--header custom-class"
+    role="banner"
   />
 </Header>
 `;

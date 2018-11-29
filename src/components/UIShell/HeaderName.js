@@ -1,8 +1,10 @@
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { name } from './classNames';
-import Link from './Link';
+import Link, { LinkPropTypes } from './Link';
+
+const { prefix: selectorPrefix } = settings;
 
 const HeaderName = ({
   children,
@@ -11,16 +13,29 @@ const HeaderName = ({
   href,
   ...rest
 }) => {
-  const className = cx(name.name, customClassName);
+  const className = cx(`${selectorPrefix}--header__name`, customClassName);
   return (
     <Link {...rest} className={className} href={href}>
-      {prefix && <>{prefix}&nbsp;</>}
-      <span className={name.platform}>{children}</span>
+      {prefix && (
+        <>
+          <span className={`${selectorPrefix}--header__name--prefix`}>
+            {prefix}
+          </span>
+          &nbsp;
+        </>
+      )}
+      {children}
     </Link>
   );
 };
 
 HeaderName.propTypes = {
+  /**
+   * Pass in a valid `element` to replace the underlying `<a>` tag with a
+   * custom `Link` element
+   */
+  ...LinkPropTypes,
+
   /**
    * Pass in children that are either a string or can be read as a string by
    * screen readers

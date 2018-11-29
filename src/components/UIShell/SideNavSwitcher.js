@@ -1,21 +1,10 @@
+import { ChevronDown20 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
-
-// TODO: sync with @carbon/icons-react
-const ChevronDown = () => (
-  <svg
-    aria-hidden="true"
-    width="20"
-    height="20"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32">
-    <path d="M16 22L6 12l1.414-1.414L16 19.172l8.586-8.586L26 12 16 22z" />
-  </svg>
-);
 
 const SideNavSwitcher = React.forwardRef((props, ref) => {
   const { className: customClassName, labelText, onChange, options } = props;
@@ -52,7 +41,7 @@ const SideNavSwitcher = React.forwardRef((props, ref) => {
         ))}
       </select>
       <div className={`${prefix}--side-nav__switcher-chevron`}>
-        <ChevronDown />
+        <ChevronDown20 />
       </div>
     </div>
   );

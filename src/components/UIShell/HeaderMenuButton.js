@@ -1,9 +1,11 @@
-import { Fade32 } from '@carbon/icons-react';
+import { Close20, Fade20 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { action, button } from './classNames';
-import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+
+const { prefix } = settings;
 
 const HeaderMenuButton = ({
   'aria-label': ariaLabel,
@@ -15,9 +17,9 @@ const HeaderMenuButton = ({
 }) => {
   const className = cx({
     [customClassName]: !!customClassName,
-    [action.action]: true,
-    [button.button]: true,
-    [action.state.active]: isActive,
+    [`${prefix}--header__action`]: true,
+    [`${prefix}--header__menu-trigger`]: true,
+    [`${prefix}--header__action--active`]: isActive,
   });
   const accessibilityLabel = {
     'aria-label': ariaLabel,
@@ -31,23 +33,16 @@ const HeaderMenuButton = ({
       title={ariaLabel}
       type="button"
       onClick={onClick}>
-      {isActive ? (
-        <Fade32 width={16} height={16} />
-      ) : (
-        <Fade32 width={16} height={16} />
-      )}
+      {isActive ? <Close20 /> : <Fade20 />}
     </button>
   );
 };
 
 HeaderMenuButton.propTypes = {
   /**
-   * Required props for accessibility label on the underlying menu
+   * Required props for accessibility label on the underlying menu button
    */
-  ...isRequiredOneOf({
-    'aria-label': PropTypes.string,
-    'aria-labelledby': PropTypes.string,
-  }),
+  ...AriaLabelPropType,
 
   /**
    * Optionally provide a custom class name that is applied to the underlying

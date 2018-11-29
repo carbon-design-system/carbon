@@ -1,3 +1,4 @@
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -5,7 +6,6 @@ import Link, { LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 

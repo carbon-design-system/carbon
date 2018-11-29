@@ -1,6 +1,8 @@
+import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { navigation, truncate } from './classNames';
+
+const { prefix } = settings;
 
 const HeaderMenuItem = props => {
   const { className, children, role, innerRef, ...rest } = props;
@@ -8,10 +10,10 @@ const HeaderMenuItem = props => {
     <li className={className} role={role}>
       <a
         {...rest}
-        className={navigation.menuitem}
+        className={`${prefix}--header__menu-item`}
         ref={innerRef}
         role="menuitem">
-        <span className={truncate.end}>{children}</span>
+        <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </a>
     </li>
   );

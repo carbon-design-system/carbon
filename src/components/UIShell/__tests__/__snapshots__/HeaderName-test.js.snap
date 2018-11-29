@@ -15,13 +15,13 @@ exports[`HeaderName should render 1`] = `
       className="bx--header__name custom-class"
       href="/"
     >
-      IBM
-       
       <span
-        className="bx--header__platform-name"
+        className="bx--header__name--prefix"
       >
-        Name
+        IBM
       </span>
+       
+      Name
     </a>
   </Link>
 </HeaderName>

@@ -1,11 +1,13 @@
+import { settings } from 'carbon-components';
 import wrapComponent from '../../tools/wrapComponent';
-import { global } from './classNames';
+
+const { prefix } = settings;
 
 /**
  * Generic container for `HeaderGlobalAction` components
  */
 export default wrapComponent({
   name: 'HeaderGlobalBar',
-  className: global.global,
+  className: `${prefix}--header__global`,
   type: 'div',
 });

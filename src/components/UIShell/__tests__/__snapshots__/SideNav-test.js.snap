@@ -33,19 +33,27 @@ exports[`SideNav should render 1`] = `
             <div
               className="bx--side-nav__icon"
             >
-              <Close>
+              <Close20
+                height={20}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={20}
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <svg
-                  aria-hidden="true"
-                  height="20"
+                  aria-hidden={true}
+                  focusable="false"
+                  height={20}
+                  preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 32 32"
-                  width="20"
+                  width={20}
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M17.414 16L24 9.414 22.586 8 16 14.586 9.414 8 8 9.414 14.586 16 8 22.586 9.414 24 16 17.414 22.586 24 24 22.586 17.414 16z"
+                    d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
                   />
                 </svg>
-              </Close>
+              </Close20>
             </div>
             <span
               className="bx--assistive-text"
@@ -93,19 +101,27 @@ exports[`SideNav should toggle the menu expansion state when clicking on the foo
             <div
               className="bx--side-nav__icon"
             >
-              <ChevronRight>
+              <ChevronRight20
+                height={20}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={20}
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <svg
-                  aria-hidden="true"
-                  height="20"
+                  aria-hidden={true}
+                  focusable="false"
+                  height={20}
+                  preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 32 32"
-                  width="20"
+                  width={20}
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M22 16L12 26l-1.414-1.414L19.172 16l-8.586-8.586L12 6l10 10z"
+                    d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
                   />
                 </svg>
-              </ChevronRight>
+              </ChevronRight20>
             </div>
             <span
               className="bx--assistive-text"

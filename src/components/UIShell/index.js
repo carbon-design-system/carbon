@@ -1,3 +1,5 @@
+export Content from './Content';
+
 export Header from './Header';
 export HeaderGlobalAction from './HeaderGlobalAction';
 export HeaderGlobalBar from './HeaderGlobalBar';

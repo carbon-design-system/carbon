@@ -1,10 +1,12 @@
 import { ChevronDownGlyph } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { navigation } from './classNames';
 import { keys, match, matches } from '../../tools/key';
-import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+
+const { prefix } = settings;
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -15,12 +17,9 @@ import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 class HeaderMenu extends React.Component {
   static propTypes = {
     /**
-     * Required props for accessibility label on the underlying menu
+     * Required props for the accessibility label of the menu
      */
-    ...isRequiredOneOf({
-      'aria-label': PropTypes.string,
-      'aria-labelledby': PropTypes.string,
-    }),
+    ...AriaLabelPropType,
 
     /**
      * Provide a custom ref handler for the menu button
@@ -204,7 +203,7 @@ class HeaderMenu extends React.Component {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
     };
-    const className = cx(navigation.submenu, customClassName);
+    const className = cx(`${prefix}--header__submenu`, customClassName);
     // Notes on eslint comments and based on the examples in:
     // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#
     // - The focus is handled by the <a> menuitem, onMouseOver is for mouse
@@ -222,16 +221,22 @@ class HeaderMenu extends React.Component {
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
-          className={cx(navigation.menuitem, navigation.menutitle)}
+          className={cx(
+            `${prefix}--header__menu-item`,
+            `${prefix}--header__menu-title`
+          )}
           href="javascript:void(0)"
           ref={this.handleMenuButtonRef}
           role="menuitem"
           tabIndex={tabIndex}
           onKeyDown={this.handleMenuButtonKeyDown}>
           {ariaLabel}
-          <ChevronDownGlyph className={navigation.menuarrow} />
+          <ChevronDownGlyph className={`${prefix}--header__menu-arrow`} />
         </a>
-        <ul {...accessibilityLabel} className={navigation.menu} role="menu">
+        <ul
+          {...accessibilityLabel}
+          className={`${prefix}--header__menu`}
+          role="menu">
           {React.Children.map(children, this._renderMenuItem)}
         </ul>
       </li>

@@ -1,22 +1,11 @@
+import { ChevronDown20 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
-
-// TODO: sync with @carbon/icons-react
-const ChevronDown = () => (
-  <svg
-    aria-hidden="true"
-    width="20"
-    height="20"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32">
-    <path d="M16 22L6 12l1.414-1.414L16 19.172l8.586-8.586L26 12 16 22z" />
-  </svg>
-);
 
 export class SideNavMenu extends React.Component {
   static propTypes = {
@@ -97,7 +86,7 @@ export class SideNavMenu extends React.Component {
           <SideNavIcon>{icon}</SideNavIcon>
           <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
           <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
-            <ChevronDown />
+            <ChevronDown20 />
           </SideNavIcon>
         </button>
         <ul className={`${prefix}--side-nav__menu`} role="menu">

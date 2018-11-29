@@ -62,19 +62,27 @@ exports[`SideNavSwitcher should render 1`] = `
     <div
       className="bx--side-nav__switcher-chevron"
     >
-      <ChevronDown>
+      <ChevronDown20
+        height={20}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <svg
-          aria-hidden="true"
-          height="20"
+          aria-hidden={true}
+          focusable="false"
+          height={20}
+          preserveAspectRatio="xMidYMid meet"
           viewBox="0 0 32 32"
-          width="20"
+          width={20}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M16 22L6 12l1.414-1.414L16 19.172l8.586-8.586L26 12 16 22z"
+            d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"
           />
         </svg>
-      </ChevronDown>
+      </ChevronDown20>
     </div>
   </div>
 </ForwardRef>

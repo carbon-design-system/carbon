@@ -1,8 +1,8 @@
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
-import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import SideNavFooter from './SideNavFooter';
 
 const { prefix } = settings;
@@ -21,10 +21,7 @@ export default class SideNav extends React.Component {
     /**
      * Required props for accessibility label on the underlying menu
      */
-    ...isRequiredOneOf({
-      'aria-label': PropTypes.string,
-      'aria-labelledby': PropTypes.string,
-    }),
+    ...AriaLabelPropType,
 
     /**
      * Optionally provide a custom class to apply to the underlying <li> node

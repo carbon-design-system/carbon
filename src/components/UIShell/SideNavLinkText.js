@@ -1,7 +1,7 @@
-import cx from 'classnames';
-import React from 'react';
-import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const { prefix } = settings;
 
