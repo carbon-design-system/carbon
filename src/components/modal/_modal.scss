@@ -191,6 +191,7 @@
     height: 100%;
 
     @include breakpoint(md) {
+      height: auto;
       min-width: 500px;
       max-width: 50%;
       max-height: 90%;
@@ -214,7 +215,7 @@
 
   .#{$prefix}--modal-header__label {
     @include reset;
-    @include typescale('epsilon');
+    @include typescale('omega');
     @include letter-spacing;
     color: $text-02;
     font-weight: 500;
@@ -223,12 +224,13 @@
 
   .#{$prefix}--modal-header__heading {
     @include reset;
-    @include typescale('beta');
-    font-weight: 300;
+    @include typescale('gamma');
+    font-weight: 400;
     color: $text-01;
   }
 
   .#{$prefix}--modal-content {
+    @include typescale('zeta');
     max-height: 83%;
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
