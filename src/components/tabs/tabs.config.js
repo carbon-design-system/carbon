@@ -31,7 +31,7 @@ const items = [
     panelId: 'tab-panel-4',
     panelClass: 'tab-4',
     label: 'Tab label 4',
-    panelContent: 'Disabled tab should not display content.',
+    panelContent: 'Content for fourth tab goes here.',
     disabled: true,
   },
 ];
