@@ -99,6 +99,46 @@ describe('ProgressIndicator', function() {
     });
   });
 
+  describe('_addOverflowTooltip', function() {
+    let element;
+    let instance;
+    let stepLabel;
+    let tooltipDiv;
+    let tooltipText;
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = HTML;
+
+    beforeEach(function() {
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-progress]');
+      stepLabel = element.querySelector('.bx--progress-label');
+      stepLabel.style.display = 'inline-block';
+      tooltipDiv = document.createElement('div');
+      tooltipText = document.createElement('div');
+      tooltipDiv.appendChild(tooltipText);
+      element.appendChild(tooltipDiv);
+    });
+
+    // fit('should not have overflow class', function() {
+    it('should not have overflow class', function() {
+      stepLabel.textContent = 'Step';
+      instance = new ProgressIndicator(element);
+      expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(false);
+    });
+
+    // fit('test', function() {
+    it('test', function() {
+      stepLabel.textContent = 'Overflow Ex. 1';
+      instance = new ProgressIndicator(element);
+      expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(true);
+    });
+
+    afterEach(function() {
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
   describe('getSteps', function() {
     let element;
     let instance;
