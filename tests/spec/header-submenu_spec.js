@@ -27,7 +27,7 @@ describe('Header Submenu', function() {
       triggerNode.classList.add('bx--header__menu-title');
       triggerNode.classList.add('bx--header__menu-item');
       element.appendChild(triggerNode);
-      const itemsContainerNode = document.createElement('bx--header__menu');
+      const itemsContainerNode = document.createElement('ul');
       itemsContainerNode.className = 'bx--header__menu';
       const itemNode = document.createElement('li');
       itemLinkNode = document.createElement('a');
@@ -66,33 +66,42 @@ describe('Header Submenu', function() {
     let element;
     let triggerNode;
     let input;
+    let itemLinkNode;
 
     beforeAll(function() {
-      triggerNode = document.createElement('a');
       element = document.createElement('li');
-      input = document.createElement('input');
-      triggerNode.className = 'bx--header__menu-title';
+      triggerNode = document.createElement('a');
+      triggerNode.setAttribute('href', '#');
+      triggerNode.classList.add('bx--header__menu-title');
+      triggerNode.classList.add('bx--header__menu-item');
+      triggerNode.textContent = 'menu header';
       element.appendChild(triggerNode);
-      document.body.appendChild(element);
-      headerSubmenu = new HeaderSubmenu(element);
+      input = document.createElement('input');
       input.type = 'text';
+      const itemsContainerNode = document.createElement('ul');
+      itemsContainerNode.className = 'bx--header__menu';
+      const itemNode = document.createElement('li');
+      itemLinkNode = document.createElement('a');
+      itemLinkNode.className = 'bx--header__menu-item';
+      itemLinkNode.setAttribute('href', '#');
+      itemLinkNode.textContent = 'menu item';
+      itemNode.appendChild(itemLinkNode);
+      itemsContainerNode.appendChild(itemNode);
+      element.appendChild(itemsContainerNode);
+      headerSubmenu = new HeaderSubmenu(element);
+      document.body.appendChild(element);
       document.body.appendChild(input);
     });
 
     beforeEach(function() {
       triggerNode.setAttribute('aria-expanded', 'true');
-      // TODO: investigate
-      triggerNode.setAttribute('tabindex', '0');
-      triggerNode.focus();
     });
 
-    it('should close menu when another element is focused', function() {
-      input.focus();
-      expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
-    });
-
-    it('should always close menu when document is clicked', function() {
-      input.focus();
+    it('should close menu when another element is focused or when document is clicked', function() {
+      // TODO: mock CustomEvent for IE
+      const customEvent = new CustomEvent('blur', { bubbles: true });
+      Object.defineProperty(customEvent, 'relatedTarget', { value: input, writable: true });
+      itemLinkNode.dispatchEvent(customEvent);
       expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
     });
 
