@@ -18,6 +18,12 @@ const plugins = [
           return item.content;
         }
 
+        if (item.hasAttr('id')) {
+          if (item.attr('id').value.includes('Transparent_Rectangle')) {
+            return !item;
+          }
+        }
+
         if (
           item.isElem('rect') &&
           item.attr('width', '32') &&
