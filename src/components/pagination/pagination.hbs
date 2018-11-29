@@ -10,7 +10,7 @@
         {{/each}}
       </select>
       {{#if @root.featureFlags.componentsX}}
-        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
       {{else}}
         <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
           <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>
