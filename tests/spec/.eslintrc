@@ -9,9 +9,6 @@
     "browser": true,
     "es6": true
   },
-  "ecmaFeatures": {
-    "modules": true
-  },
   "extends": [
     "carbon-base"
   ],
