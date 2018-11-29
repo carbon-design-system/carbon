@@ -314,6 +314,7 @@
     @include max-breakpoint(bp--sm--major) {
       transition: max-height $transition--expansion $carbon--standard-easing;
       max-height: 600px;
+      width: 100%;
       padding-top: $spacing-4xs;
     }
   }
