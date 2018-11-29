@@ -1,4 +1,4 @@
-import { Close20, Fade20 } from '@carbon/icons-react';
+import { Close20, Menu20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
@@ -33,7 +33,7 @@ const HeaderMenuButton = ({
       title={ariaLabel}
       type="button"
       onClick={onClick}>
-      {isActive ? <Close20 /> : <Fade20 />}
+      {isActive ? <Close20 /> : <Menu20 />}
     </button>
   );
 };
