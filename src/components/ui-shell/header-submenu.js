@@ -168,7 +168,13 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     }
     const action = this._getAction(event);
 
-    if (event.which === 32) {
+    if (event.which === 32 || event.which === 13) {
+      /**
+       * prevent default for space bar will prevent the page from scrolling.
+       * prevent default for enter will prevent Firefox from calling a click
+       *   event on the trigger button (because we move focus on keydown from
+       *   the trigger button to the first submenu item).
+       */
       event.preventDefault();
     }
 
