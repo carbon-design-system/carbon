@@ -39,6 +39,8 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
        */
       totalSteps: this.getSteps().length,
     };
+
+    this._addOverflowTooltip();
   }
 
   /**
@@ -151,6 +153,24 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       </svg>`;
   }
 
+  _addOverflowTooltip() {
+    const stepLabels = [...this.element.querySelectorAll(this.options.selectorLabel)];
+    const tooltips = [...this.element.querySelectorAll(this.options.selectorTooltip)];
+
+    stepLabels.forEach(step => {
+      if (step.scrollWidth > this.options.minWidth) {
+        step.classList.add(this.options.classOverflowLabel);
+      }
+    });
+
+    tooltips.forEach(tooltip => {
+      const childText = tooltip.querySelector(this.options.selectorTooltipText);
+      if (childText.scrollHeight > this.options.tooltipMinHeight) {
+        tooltip.classList.add(this.options.classTooltipMulti);
+      }
+    });
+  }
+
   static components = new WeakMap();
 
   /**
@@ -178,10 +198,17 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       selectorCurrent: `.${prefix}--progress-step--current`,
       selectorIncomplete: `.${prefix}--progress-step--incomplete`,
       selectorComplete: `.${prefix}--progress-step--complete`,
+      selectorLabel: `.${prefix}--progress-label`,
+      selectorTooltip: `.${prefix}--tooltip`,
+      selectorTooltipText: `.${prefix}--tooltip__text`,
       classStep: `${prefix}--progress-step`,
       classComplete: `${prefix}--progress-step--complete`,
       classCurrent: `${prefix}--progress-step--current`,
       classIncomplete: `${prefix}--progress-step--incomplete`,
+      classOverflowLabel: `${prefix}--progress-label-overflow`,
+      classTooltipMulti: `${prefix}--tooltip_multi`,
+      minWidth: 87,
+      tooltipMinHeight: 21,
     };
   }
 }
