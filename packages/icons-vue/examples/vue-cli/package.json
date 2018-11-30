@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "export PUBLIC_URL=\"/carbon-elements/icons-vue/examples/vue-cli\" && vue-cli-service build --dest build --modern",
+    "build": "export PUBLIC_URL=\"/icons-vue/examples/vue-cli\" && vue-cli-service build --dest build --modern",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
