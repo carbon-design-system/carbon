@@ -44,8 +44,8 @@ describe('ProgressIndicator', function() {
         classIncomplete: 'bx--progress-step--incomplete',
         classOverflowLabel: 'bx--progress-label-overflow',
         classTooltipMulti: 'bx--tooltip_multi',
-        minWidth: 87,
-        tooltipMinHeight: 21,
+        maxWidth: 87,
+        tooltipMaxHeight: 21,
       });
     });
 
