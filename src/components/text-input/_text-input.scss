@@ -120,6 +120,7 @@
   }
 }
 
+// TODO update font styles to element tokens
 @mixin text-input--x {
   .#{$prefix}--text-input {
     @include reset;
