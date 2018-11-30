@@ -70,13 +70,20 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   };
 
   /**
+   * @returns {boolean} boolean describing if submenu is expanded
+   */
+  getCurrentState = () => {
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
+    return trigger && trigger.getAttribute(this.options.attribExpanded) === 'true';
+  };
+
+  /**
    * Determines whether or not the submenu should be expanded or collapsed
    * @param {action} action
    * @returns {boolean} new header submenu state
    */
   _getNewState = action => {
-    const trigger = this.element.querySelector(this.options.selectorTrigger);
-    const isExpanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
+    const isExpanded = this.getCurrentState();
     switch (action) {
       case this.constructor.actions.CLOSE_SUBMENU:
         return false;
@@ -93,7 +100,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * Expands or collapses a submenu
    * @returns {void}
    */
-  _setState = ({ shouldBeExpanded, shouldFocusOnOpen }) => {
+  setState = ({ shouldBeExpanded, shouldFocusOnOpen }) => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     trigger.setAttribute(this.options.attribExpanded, shouldBeExpanded);
     forEach.call(this.element.querySelectorAll(this.options.selectorItem), item => {
@@ -153,7 +160,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     const action = this._getAction(event);
     if (action) {
       const shouldBeExpanded = this._getNewState(action);
-      this._setState({ shouldBeExpanded });
+      this.setState({ shouldBeExpanded });
     }
   };
 
@@ -187,12 +194,12 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
       // case this.constructor.actions.OPEN_SUBMENU:
       case this.constructor.actions.CLOSE_SUBMENU: {
         const shouldBeExpanded = this._getNewState(action);
-        this._setState({ shouldBeExpanded });
+        this.setState({ shouldBeExpanded });
         break;
       }
       case this.constructor.actions.TOGGLE_SUBMENU_WITH_FOCUS: {
         const shouldBeExpanded = this._getNewState(action);
-        this._setState({ shouldBeExpanded, shouldFocusOnOpen: true });
+        this.setState({ shouldBeExpanded, shouldFocusOnOpen: true });
         break;
       }
       default: {
