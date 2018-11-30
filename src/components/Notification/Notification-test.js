@@ -213,7 +213,7 @@ describe('InlineNotification', () => {
 
     it('renders info notification with matching kind value but without <icon name="">', () => {
       inline.setProps({ kind: 'info' });
-      expect(inline.find(Icon).some({ icon: iconInfoSolid })).toBe(false);
+      expect(inline.find(Icon).some({ icon: iconInfoSolid })).toBe(true);
     });
 
     it('renders HTML for inline notifications when caption does not exist', () => {

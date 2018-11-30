@@ -35,12 +35,12 @@ Once those steps are complete, you should be able to follow our [contribution gu
 
 Each markdown file will tend to take on the following initial structure:
 
-* Component name heading
-* Brief description of the component
-* A table of contents block
-* Steps around installing and using the component
-* Details around any special cases with component prop types
-* Details around common use-cases for the components, either with embedded code
+- Component name heading
+- Brief description of the component
+- A table of contents block
+- Steps around installing and using the component
+- Details around any special cases with component prop types
+- Details around common use-cases for the components, either with embedded code
   or links to [codesandbox.io](http://codesandbox.io) playgrounds
 
 You can use the template available [here](/docs/component-template.md) to help

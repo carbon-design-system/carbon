@@ -2,13 +2,13 @@
 
 Want to contribute to this repository? Please read below first:
 
-* [Issues and Bugs](#issues-and-bugs)
-* [Feature Requests](#feature-requests)
-* [Doc Fixes](#doc-fixes)
-* [Submission Guidelines](#submission-guidelines)
-* [Coding Standards](#coding-standards)
-* [Commit Message Guidelines](#commit-message-guidelines)
-* [Testing](#testing)
+- [Issues and Bugs](#issues-and-bugs)
+- [Feature Requests](#feature-requests)
+- [Doc Fixes](#doc-fixes)
+- [Submission Guidelines](#submission-guidelines)
+- [Coding Standards](#coding-standards)
+- [Commit Message Guidelines](#commit-message-guidelines)
+- [Testing](#testing)
 
 ## Issues and Bugs
 
@@ -125,8 +125,8 @@ We use commit message guidelines based on the [Angular Commit Conventions](https
 
 Please stick to the following format: `git commit -m "<type>(<scope>): <message>"`
 
-* Replace `<type>` with one of following: feat, fix, docs, style, refactor, perf, test, chore, revert.
-* The `(<scope>)` is optional and could be anything specifying the place of the commit change.
+- Replace `<type>` with one of following: feat, fix, docs, style, refactor, perf, test, chore, revert.
+- The `(<scope>)` is optional and could be anything specifying the place of the commit change.
 
 After the commit message has been submitted, it is checked by [`husky`](https://www.npmjs.com/package/husky) and [`validate-commit-msg`](https://www.npmjs.com/package/validate-commit-msg) to ensure it is syntactically correct.
 
@@ -136,31 +136,31 @@ If you add any features to our code, make sure to add tests so that your changes
 
 Test your changes by running our test commands:
 
-* Run linting:
+- Run linting:
 
   ```
   yarn lint
   ```
 
-* Run unit tests:
+- Run unit tests:
 
   ```
   yarn test
   ```
 
-* Run both linting and unit tests:
+- Run both linting and unit tests:
 
   ```
   yarn ci-check
   ```
 
-* Watching unit tests:
+- Watching unit tests:
 
   ```
   yarn test --watch
   ```
 
-* Generate code coverage report (stored in `.gh-pages/coverage` folder):
+- Generate code coverage report (stored in `.gh-pages/coverage` folder):
 
   ```
   yarn test --coverage

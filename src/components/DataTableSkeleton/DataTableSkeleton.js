@@ -23,13 +23,23 @@ const DataTableSkeleton = ({
   const rows = Array(rowRepeat);
   const columnsArray = Array.from({ length: columnCount }, (_, index) => index);
   for (let i = 0; i < rowRepeat; i++) {
-    rows[i] = <tr key={i}>{columnsArray.map(j => <td key={j} />)}</tr>;
+    rows[i] = (
+      <tr key={i}>
+        {columnsArray.map(j => (
+          <td key={j} />
+        ))}
+      </tr>
+    );
   }
 
   return (
     <table className={dataTableSkeletonClasses} {...other}>
       <thead>
-        <tr>{columnsArray.map(i => <th key={i} />)}</tr>
+        <tr>
+          {columnsArray.map(i => (
+            <th key={i} />
+          ))}
+        </tr>
       </thead>
       <tbody>
         <tr>

@@ -11,30 +11,30 @@
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Props](#props)
-  * [`rows`](#rows)
-  * [`headers`](#headers)
-  * [`sortRow`](#sortrow)
-  * [`filterRows`](#filterrows)
-  * [`locale`](#locale)
-* [Render Prop Function](#render-prop-function)
-  * [Prop Getters](#prop-getters)
-  * [Actions](#actions)
-  * [State](#state)
-  * [Props](#props-1)
-* [Use-cases](#use-cases)
-  * [Sorting](#sorting)
-    * [Programmatic sorting](#programmatic-sorting)
-    * [Custom sorting](#custom-sorting)
-  * [Expansion](#expansion)
-    * [Programmatic expansion](#programmatic-expansion)
-  * [Selection](#selection)
-    * [Programmatic selection](#programmatic-selection)
-  * [Filtering](#filtering)
-  * [Batch Actions](#batch-actions)
-* [Attribution](#attribution)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Props](#props)
+  - [`rows`](#rows)
+  - [`headers`](#headers)
+  - [`sortRow`](#sortrow)
+  - [`filterRows`](#filterrows)
+  - [`locale`](#locale)
+- [Render Prop Function](#render-prop-function)
+  - [Prop Getters](#prop-getters)
+  - [Actions](#actions)
+  - [State](#state)
+  - [Props](#props-1)
+- [Use-cases](#use-cases)
+  - [Sorting](#sorting)
+    - [Programmatic sorting](#programmatic-sorting)
+    - [Custom sorting](#custom-sorting)
+  - [Expansion](#expansion)
+    - [Programmatic expansion](#programmatic-expansion)
+  - [Selection](#selection)
+    - [Programmatic selection](#programmatic-selection)
+  - [Filtering](#filtering)
+  - [Batch Actions](#batch-actions)
+- [Attribution](#attribution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -121,9 +121,9 @@ function App() {
 
 In the example above, we can see that the `render` prop is just a function that has the following arguments:
 
-* `rows` which are the rows to be rendered inside of `TableBody`
-* `headers` which are the headers to be rendered inside of `TableHead`
-* `getHeaderProps` which is our first `prop` getter. This is used for adding in the hooks for `TableHeader` to properly sort your table
+- `rows` which are the rows to be rendered inside of `TableBody`
+- `headers` which are the headers to be rendered inside of `TableHead`
+- `getHeaderProps` which is our first `prop` getter. This is used for adding in the hooks for `TableHeader` to properly sort your table
 
 For a full list of what is available in this `render` prop, check out the [Render Prop Function](#render-prop-function) section.
 
@@ -262,10 +262,10 @@ const renderProp = ({ rows, headers, getHeaderProps }) => (
 
 The types of arguments that this function has are as follows:
 
-* [Prop Getters](#prop-getters)
-* [Actions](#actions)
-* [State](#state)
-* [Props](#props)
+- [Prop Getters](#prop-getters)
+- [Actions](#actions)
+- [State](#state)
+- [Props](#props)
 
 ### Prop Getters
 
@@ -383,9 +383,9 @@ const customSortRow = (cellA, cellB, { sortDirection, sortStates, locale }) => {
 
 `DataTable` introduces the following components to help out with doing row expansion:
 
-* `TableExpandHeader`: generic component that you place in your `TableHead`. Acts as a column placeholder
-* `TableExpandRow`: generic component used for a row that you want to be expandable
-* `TableExpandedRow`: generic component used for the expanded part of a row. Anything you place in this component will appear when the row is expanded
+- `TableExpandHeader`: generic component that you place in your `TableHead`. Acts as a column placeholder
+- `TableExpandRow`: generic component used for a row that you want to be expandable
+- `TableExpandedRow`: generic component used for the expanded part of a row. Anything you place in this component will appear when the row is expanded
 
 In practice, the combination of these components looks like the following:
 
@@ -436,11 +436,11 @@ In practice, the combination of these components looks like the following:
 
 Some things to note:
 
-* `TableExpandHeader` is placed before all other headers as a placeholder/blank column
-* `TableExpandRow` is what you use instead of `TableRow` for the content of your row. We make sure to add `getRowProps` so that it has the right props
-* `row.isExpanded` is the field available on `row` to know if the `row` is expanded or not
-* `TableExpandedRow` is used as a wrapper for any content you want to appear in the expanded row
-  * Tip: the `colSpan` attribute on the `TableCell` should be `headers.length + 1` in order to span the whole table
+- `TableExpandHeader` is placed before all other headers as a placeholder/blank column
+- `TableExpandRow` is what you use instead of `TableRow` for the content of your row. We make sure to add `getRowProps` so that it has the right props
+- `row.isExpanded` is the field available on `row` to know if the `row` is expanded or not
+- `TableExpandedRow` is used as a wrapper for any content you want to appear in the expanded row
+  - Tip: the `colSpan` attribute on the `TableCell` should be `headers.length + 1` in order to span the whole table
 
 #### Programmatic expansion
 
@@ -450,8 +450,8 @@ You can use the `expandRow` action made available through your `render` prop fun
 
 Selection in a `DataTable` has two parts:
 
-* `TableSelectAll`: component used in the header of the table to select all rows
-* `TableSelectRow`: component used to render the selection checkbox in a `TableRow`
+- `TableSelectAll`: component used in the header of the table to select all rows
+- `TableSelectRow`: component used to render the selection checkbox in a `TableRow`
 
 In practice, it looks like the following in a `DataTable`:
 
@@ -488,8 +488,8 @@ In practice, it looks like the following in a `DataTable`:
 
 Some items to note:
 
-* `TableSelectAll` is placed before all other headers. It also uses `getSelectionProps` to wire up all the necessary actions
-* `TableSelectRow` is placed before all the cells in a row. It also uses `getSelectionProps`, but it also passes in the specific `row` in order to get selection information about the given row.
+- `TableSelectAll` is placed before all other headers. It also uses `getSelectionProps` to wire up all the necessary actions
+- `TableSelectRow` is placed before all the cells in a row. It also uses `getSelectionProps`, but it also passes in the specific `row` in order to get selection information about the given row.
 
 You can access all the selected rows through the `selectedRows` property passed into your `render` prop function.
 
@@ -497,8 +497,8 @@ You can access all the selected rows through the `selectedRows` property passed 
 
 You can use either of the following actions from your `render` prop function to update the selection status of a row:
 
-* `selectAll`: invoking this will toggle the selection of all rows, either by making all selected or de-selecting all rows
-* `selectRow`: invoking this will toggle the selection of a specific row. Takes in a valid row id as an argument
+- `selectAll`: invoking this will toggle the selection of all rows, either by making all selected or de-selecting all rows
+- `selectRow`: invoking this will toggle the selection of a specific row. Takes in a valid row id as an argument
 
 ### Filtering
 
@@ -567,12 +567,12 @@ All you need to do to make sure filtering is hooked up is provide the `onInputCh
 
 Batch actions are typically used when you want to the user to select multiple rows in your table and then allow them to perform a single action on the selected rows. To orchestrate this behavior, you'll need to include both the Table components for selection and for batch actions, which include:
 
-* `TableToolbar`
-* `TableToolbarAction`
-* `TableBatchActions`
-* `TableBatchAction`
-* `TableSelectAll`
-* `TableSelectRow`
+- `TableToolbar`
+- `TableToolbarAction`
+- `TableBatchActions`
+- `TableBatchAction`
+- `TableSelectAll`
+- `TableSelectRow`
 
 In practice, this looks like the following:
 
@@ -656,9 +656,9 @@ In practice, this looks like the following:
 
 The import aspects of this example are:
 
-* That we are including the relevant markup for the Table Toolbar
-* We are wiring up the Batch Actions component with `getBatchActionProps`. This handles toggling the batch action menu for you
-* We are reading the `selectedItems` from the `render` prop function in our Batch Action click handlers
+- That we are including the relevant markup for the Table Toolbar
+- We are wiring up the Batch Actions component with `getBatchActionProps`. This handles toggling the batch action menu for you
+- We are reading the `selectedItems` from the `render` prop function in our Batch Action click handlers
 
 ## Attribution
 

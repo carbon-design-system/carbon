@@ -160,7 +160,9 @@ export default class PaginationV2 extends Component {
           page: pageSizesChanged ? 1 : pageChanged ? page : currentPage,
           pageSize: pageSizesChanged
             ? pageSizes[0]
-            : pageSizeChanged ? pageSize : currentPageSize,
+            : pageSizeChanged
+            ? pageSize
+            : currentPageSize,
           prevPageSizes: pageSizes,
           prevPage: page,
           prevPageSize: pageSize,

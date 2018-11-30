@@ -10,10 +10,10 @@
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-* [Overview](#overview)
-* [Continuous Integration](#continuous-integration)
-* [FAQ](#faq)
-  * [How do I install a dependency?](#how-do-i-install-a-dependency)
+- [Overview](#overview)
+- [Continuous Integration](#continuous-integration)
+- [FAQ](#faq)
+  - [How do I install a dependency?](#how-do-i-install-a-dependency)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

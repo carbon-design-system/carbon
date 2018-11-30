@@ -40,5 +40,5 @@ link in addition to the steps to reproduce. Thanks so much!
 
 ## Additional information
 
-* Screenshots or code
-* Notes
+- Screenshots or code
+- Notes

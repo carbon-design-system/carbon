@@ -41,7 +41,9 @@ describe('Selection', () => {
           <div>
             <button onClick={() => onItemChange(1)} />
             <ul>
-              {selectedItems.map((item, index) => <li key={index}>{item}</li>)}
+              {selectedItems.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
             </ul>
           </div>
         )}

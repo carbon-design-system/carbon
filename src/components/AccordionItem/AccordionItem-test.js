@@ -77,8 +77,7 @@ describe('AccordionItem', () => {
   describe('Renders a node title as expected', () => {
     const titleNode = shallow(
       <h2 className="TitleClass">
-        <img src="some_image.png" alt="Something" />
-        A heading
+        <img src="some_image.png" alt="Something" />A heading
       </h2>
     );
     const wrapper = shallow(

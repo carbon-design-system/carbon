@@ -46,19 +46,19 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 1. (Optional) Set environment variables:
 
-   * `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental features:
+   - `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental features:
 
      ```
      $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
      ```
 
-   * `true` to `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS` environment variable to use external CSS, making style source link usable in DOM inspector:
+   - `true` to `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS` environment variable to use external CSS, making style source link usable in DOM inspector:
 
      ```
      $ export CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true
      ```
 
-   * `true` to `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP` environment variable to use Sass source map, making style source link point to the original Sass code:
+   - `true` to `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP` environment variable to use Sass source map, making style source link point to the original Sass code:
 
      ```
      $ export CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true
@@ -66,8 +66,8 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 Caveats:
 
-* `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true` and `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true` make WebPack builds slightly slower.
-* With `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true`, the source map (hitting style source link in DOM inspector) sometimes leads you to a mix-in, instead of a style rule calling the mix-in, which may get you lost.
+- `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true` and `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true` make WebPack builds slightly slower.
+- With `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true`, the source map (hitting style source link in DOM inspector) sometimes leads you to a mix-in, instead of a style rule calling the mix-in, which may get you lost.
 
 2. Start the server:
 

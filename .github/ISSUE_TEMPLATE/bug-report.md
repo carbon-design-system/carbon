@@ -35,5 +35,5 @@ about: Create a report to help us improve
 
 ## Additional information
 
-* Screenshots or code
-* Notes
+- Screenshots or code
+- Notes

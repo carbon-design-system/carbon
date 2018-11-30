@@ -268,6 +268,7 @@ export class ToastNotification extends Component {
       error: iconErrorSolid,
       success: iconCheckmarkSolid,
       warning: iconWarningSolid,
+      info: iconInfoSolid,
     }[kindProp]);
 
   render() {
@@ -298,8 +299,6 @@ export class ToastNotification extends Component {
     );
     const NotificationIcon = kind => {
       switch (kind) {
-        case 'info':
-          return null;
         case 'warning':
           return a11yIconWarningSolid(prefix, notificationType);
         default:
@@ -409,6 +408,7 @@ export class InlineNotification extends Component {
       error: iconErrorSolid,
       success: iconCheckmarkSolid,
       warning: iconWarningSolid,
+      info: iconInfoSolid,
     }[kindProp]);
 
   render() {
@@ -439,8 +439,6 @@ export class InlineNotification extends Component {
 
     const NotificationIcon = kind => {
       switch (kind) {
-        case 'info':
-          return null;
         case 'warning':
           return a11yIconWarningSolid(prefix, notificationType);
         default:

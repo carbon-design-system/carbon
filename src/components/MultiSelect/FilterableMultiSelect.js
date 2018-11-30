@@ -231,12 +231,9 @@ export default class FilterableMultiSelect extends React.Component {
                       onKeyDown: this.handleOnInputKeyDown,
                     })}
                   />
-                  {inputValue &&
-                    isOpen && (
-                      <ListBox.Selection
-                        clearSelection={this.clearInputValue}
-                      />
-                    )}
+                  {inputValue && isOpen && (
+                    <ListBox.Selection clearSelection={this.clearInputValue} />
+                  )}
                   <ListBox.MenuIcon isOpen={isOpen} />
                 </ListBox.Field>
                 {isOpen && (

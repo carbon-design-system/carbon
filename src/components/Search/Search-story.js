@@ -57,7 +57,8 @@ storiesOf('Search', module)
     'skeleton',
     () => (
       <div style={{ width: '200px' }}>
-        <SearchSkeleton />&nbsp;
+        <SearchSkeleton />
+        &nbsp;
         <SearchSkeleton small />
       </div>
     ),
