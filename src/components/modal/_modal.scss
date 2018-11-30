@@ -238,6 +238,10 @@
     font-weight: 400;
   }
 
+  .#{$prefix}--modal-content > * {
+    @include typescale('zeta');
+  }
+
   .#{$prefix}--modal-footer {
     display: flex;
     margin-top: auto;
