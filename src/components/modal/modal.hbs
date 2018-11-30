@@ -8,7 +8,7 @@
       <p class="{{@root.prefix}}--modal-header__label {{@root.prefix}}--type-delta" id="modal-{{idSuffix}}-label">Optional label</p>
       <p class="{{@root.prefix}}--modal-header__heading {{@root.prefix}}--type-beta" id="modal-{{idSuffix}}-heading">Modal heading</p>
       <button class="{{@root.prefix}}--modal-close" type="button" data-modal-close aria-label="close modal" {{#unless hasFooter}} data-modal-primary-focus{{/unless}}>
-        {{> carbon-icon-close attr-class="{{@root.prefix}}--modal-close__icon" description="Close Modal" }}
+        {{> carbon-icon-close attr-class=(add @root.prefix "--modal-close__icon") attr-aria-label="Close Modal" }}
       </button>
     </div>
 

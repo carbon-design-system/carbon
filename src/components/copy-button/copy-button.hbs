@@ -1,5 +1,5 @@
 <button data-copy-btn class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--copy {{@root.prefix}}--btn--sm">
   Copy button
-  {{> (addIcon) attr-class="{{@root.prefix}}--btn__icon"}}
+  {{> (addFilledIcon) attr-class=(add @root.prefix "--btn__icon" )}}
   <div class="{{@root.prefix}}--btn--copy__feedback" data-feedback="Copied!"></div>
 </button>

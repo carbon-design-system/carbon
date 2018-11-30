@@ -8,9 +8,8 @@ const Module = require('module');
 const expressHandlebars = require('express-handlebars');
 const helpers = require('handlebars-helpers');
 const Fractal = require('@frctl/fractal');
-const icons = require('carbon-icons');
-const iconsElements = require('@carbon/icons');
-const { toString: iconHelpersToString } = require('@carbon/icon-helpers');
+const { getIconsPartials, getIconsPartialsElements } = require('./partials/build');
+const registerPartial = require('./partials/register');
 
 const origResolveFilename = Module._resolveFilename;
 Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
@@ -46,94 +45,6 @@ try {
 }
 
 /**
- * @param {string} s A hyphnated string.
- * @returns {string} The camelcase string from the given hyphnated string, e.g. `fooBar` from `foo-bar`.
- * @private
- */
-function camelCaseFromHyphnated(s) {
-  return s.replace(/-+([A-z])/g, (match, token) => token.toUpperCase());
-}
-
-/**
- * @param {string} s A string in camel case.
- * @returns {string} The string converted to hyphnated format.
- */
-const hyphnatedFromCamelCase = s => s.replace(/([A-Z])/g, (match, token) => `-${token.toLowerCase()}`).replace(/^-+/, '');
-
-/**
- * @param {Object} toplevelDescriptor The icon descriptor.
- * @param {string} prefix The CSS class prefix.
- * @returns {string} The Handlebars partial string.
- */
-const js2partial = (toplevelDescriptor, prefix) => {
-  const formattedAttrs = [
-    '{{#if description}} aria-label="{{description}}"{{/if}}',
-    '{{#each this}}',
-    '{{#startsWith "attr-" @key}}',
-    ` {{removeFirst @key "attr-"}}="{{replace this "{{@root.prefix}}" "${prefix}"}}"`,
-    '{{/startsWith}}',
-    '{{/each}}',
-  ].join('');
-  return iconHelpersToString(toplevelDescriptor)
-    .replace(/^\s*(<svg)/, `$1${formattedAttrs}`)
-    .replace(/(<\/svg>)\s*$/, '{{#if description}}<title>{{description}}</title>{{/if}}$1');
-};
-
-/**
- * @param {Object} descriptor The icon descriptor from `carbon-icons` library.
- * @returns {Object} The icon descriptor in `@carbon/icons` format.
- */
-const normalizeDescriptor = ({ svgData, width, height, viewBox }) => {
-  const attrs = { width, height, viewBox };
-  return {
-    attrs: Object.keys(attrs)
-      .filter(key => attrs[key])
-      .reduce((o, key) => ({ ...o, [key]: attrs[key] }), {}),
-    content: Object.keys(svgData)
-      .filter(elem => svgData[elem])
-      .reduce(
-        (a, elem) => [
-          ...a,
-          ...svgData[elem].map(data => ({
-            elem: elem.replace(/s$/, ''),
-            attrs: data,
-          })),
-        ],
-        []
-      ),
-  };
-};
-
-/**
- * @param {string} prefix The CSS class prefix.
- * @param {boolean} useElements `true` to use one from `carbon-elements`.
- * @returns {Map<string, string>} A set of icons contents, keyed by hyphnated icon name.
- */
-const getIconsPartials = (prefix, useElements) => {
-  const contents = new Map();
-  const iconsInUse = !useElements ? icons : iconsElements;
-  const names = new Set();
-  Object.keys(iconsInUse)
-    .filter(isNaN)
-    .forEach(name => {
-      // `carbon-icons` has hyphnated name here, whereas `@carbon/icons` has pascal case
-      names.add(camelCaseFromHyphnated(iconsInUse[name].name));
-    });
-  names.forEach(name => {
-    const nameInIcons = !useElements ? name : name[0].toUpperCase() + name.substr(1);
-    const normalizedName = hyphnatedFromCamelCase(name.replace(/^icon/, ''));
-    const suffixPriority = !useElements ? ['', 'Glyph'] : ['Glyph', '16', '32'];
-    const suffix = suffixPriority.find(item => iconsInUse[nameInIcons + item]);
-    if (typeof suffix !== 'undefined') {
-      const keyInIcons = nameInIcons + suffix;
-      const descriptor = !useElements ? normalizeDescriptor(icons[keyInIcons]) : iconsElements[keyInIcons];
-      contents.set(`carbon-icon-${normalizedName}`, js2partial(descriptor, prefix));
-    }
-  });
-  return contents;
-};
-
-/**
  * @param {string} glob A glob.
  * @returns {Map<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
  */
@@ -143,21 +54,6 @@ const getContents = glob =>
       return undefined;
     }
     const contents = new Map();
-    // Obtain the latest CSS class prefix
-    // eslint-disable-next-line global-require
-    const { prefix } = require('../src/globals/js/settings');
-    // Obtain the latest state of feature flags
-    // eslint-disable-next-line global-require
-    const { componentsX } = require('../src/globals/js/feature-flags');
-    const partials = [getIconsPartials(prefix, true), getIconsPartials(prefix)];
-    if (componentsX) {
-      partials.reverse();
-    }
-    partials.forEach(item => {
-      item.forEach((value, key) => {
-        contents.set(key, value);
-      });
-    });
     return Promise.all(
       filePaths.map(filePath =>
         readFile(filePath, { encoding: 'utf8' }).then(content => {
@@ -191,6 +87,11 @@ const cache = {
       fractal.components.set('path', path.join(__dirname, '../src/components'));
       fractal.components.set('ext', '.hbs');
       fractal.docs.set('path', path.join(__dirname, '../docs'));
+      // Obtain the latest state of feature flags
+      // eslint-disable-next-line global-require
+      const { componentsX } = require('../src/globals/js/feature-flags');
+      const partials = !componentsX ? getIconsPartials() : getIconsPartialsElements();
+      registerPartial(Handlebars, partials);
       this.promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs'))]).then(
         ([sources, contents]) => {
           const [componentSource, docSource] = sources;

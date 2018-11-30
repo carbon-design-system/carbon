@@ -73,6 +73,7 @@ module.exports = {
       componentsX,
     },
     prefix,
+    checkmarkFilledIcon: () => (componentsX ? 'carbon-icon-checkmark-filled' : 'carbon-icon-checkmark-solid-classic'),
   },
   variants: [
     {

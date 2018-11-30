@@ -88,7 +88,7 @@ gulp.task('dev-server', ['sass:dev', 'scripts:dev:feature-flags'], cb => {
       const options = {
         script: './server.js',
         ext: 'js',
-        watch: ['server.js', 'tools/templates.js'],
+        watch: ['server.js', 'tools/templates.js', 'tools/partials/*.js'],
         env: {
           PORT: cloptions.port,
           PORT_SASS_DEV_BUILD: portSassDevBuild,

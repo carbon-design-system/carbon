@@ -1,6 +1,7 @@
 <!-- Ranged -->
 <div class="{{@root.prefix}}--form-item">
   <div data-date-picker data-date-picker-type="range" class="{{@root.prefix}}--date-picker {{@root.prefix}}--date-picker--range {{@root.prefix}}--date-picker--light">
+    {{> date-picker--arrow-icons }}
     <div class="{{@root.prefix}}--date-picker-container">
       <label for="date-picker-1" class="{{@root.prefix}}--label">Start date label</label>
       <input type="text" id="date-picker-1" class="{{@root.prefix}}--date-picker__input" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="mm/dd/yyyy"
@@ -11,6 +12,6 @@
       <input type="text" id="date-picker-2" class="{{@root.prefix}}--date-picker__input" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="mm/dd/yyyy"
         data-date-picker-input-to />
     </div>
-    {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class="{{@root.prefix}}--date-picker__icon" }}
+    {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class=(add @root.prefix "--date-picker__icon") }}
   </div>
 </div>

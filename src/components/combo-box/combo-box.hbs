@@ -3,7 +3,7 @@
     {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
     aria-expanded="false" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." {{#if disabled}}
     disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon">
-    {{> (downIcon) newContext description="Open menu" }}
+    {{> (downIcon) attr-aria-label="Open menu" }}
   </div>
 </div>
 </div>
@@ -12,7 +12,7 @@
     {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
     aria-expanded="true" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..."
     aria-activedescendant="downshift-1-item-2" {{#if disabled}} disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-    {{> (downIcon) newContext description="Close menu" }}
+    {{> (downIcon) attr-aria-label="Close menu" }}
   </div>
 </div>
 <div class="{{@root.prefix}}--list-box__menu">

@@ -1,11 +1,7 @@
 <nav data-tabs class="{{@root.prefix}}--tabs" role="navigation">
   <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
     <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
-    {{#if featureFlags.componentsX}}
-      {{ carbon-icon 'ChevronDownGlyph' }}
-    {{else}}
-      {{> carbon-icon-caret-down }}
-    {{/if}}
+    {{> (downIcon) }}
   </div>
   <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">
     {{#each items}}

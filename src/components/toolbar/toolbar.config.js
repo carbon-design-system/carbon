@@ -38,8 +38,10 @@ const rowHeightOptions = [
 module.exports = {
   context: {
     featureFlags,
-    overflowMenuIcon: () => featureFlags.componentsX ? 'carbon-icon-overflow-menu-vertical' : 'carbon-icon-overflow-menu',
     prefix,
+    overflowMenuIcon: () => featureFlags.componentsX ? 'carbon-icon-overflow-menu-vertical' : 'carbon-icon-overflow-menu',
+    checkmarkIcon: () => (featureFlags.componentsX ? 'carbon-icon-checkmark' : 'carbon-icon-checkmark-classic'),
+    overflowMenuIcon: () => (featureFlags.componentsX ? 'carbon-icon-overflow-menu-vertical' : 'carbon-icon-overflow-menu'),
   },
   variants: [
     {

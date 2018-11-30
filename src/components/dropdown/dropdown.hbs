@@ -3,11 +3,11 @@
   <li class="{{@root.prefix}}--dropdown-text">
     {{#unless inline}} Dropdown label {{else}}
     <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
-    {{> (lookup . "downIcon") attr-class=(add @root.prefix "--dropdown__arrow") }}
+    {{> (downIcon) attr-class=(add @root.prefix "--dropdown__arrow") }}
     {{/unless}}
   </li>
   {{#unless inline}}
-  {{> (lookup . "downIcon") attr-class=(add @root.prefix "--dropdown__arrow") }}
+  {{> (downIcon) attr-class=(add @root.prefix "--dropdown__arrow") }}
   {{/unless}}
   <li>
     <ul class="{{@root.prefix}}--dropdown-list">

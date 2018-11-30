@@ -34,7 +34,7 @@
         {{/if}}
       {{/each}}
     </select>
-    {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
+    {{> carbon-icon-caret-down attr-class=(add @root.prefix "--select__arrow") }}
     {{#unless componentsX}}
       <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
     {{/unless}}

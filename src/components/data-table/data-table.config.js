@@ -2,6 +2,7 @@
 
 const { prefix } = require('../../globals/js/settings');
 const { breakingChangesX } = require('../../globals/js/feature-flags');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const menuItems = [
   {
@@ -259,6 +260,7 @@ module.exports = {
   },
   context: {
     prefix,
+    overflowMenuIcon: () => (componentsX ? 'carbon-icon-overflow-menu-vertical' : 'carbon-icon-overflow-menu'),
   },
   variants: [
     {

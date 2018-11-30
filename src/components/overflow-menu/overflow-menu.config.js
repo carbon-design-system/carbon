@@ -30,8 +30,8 @@ const items = [
 
 module.exports = {
   context: {
-    overflowMenuIcon: () => featureFlags.componentsX ? 'carbon-icon-overflow-menu-vertical' : 'carbon-icon-overflow-menu',
     prefix,
+    overflowMenuIcon: () => (featureFlags.componentsX ? 'carbon-icon-overflow-menu-vertical' : 'carbon-icon-overflow-menu'),
   },
   variants: [
     {

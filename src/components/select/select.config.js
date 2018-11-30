@@ -1,7 +1,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
-const { componentsX } = require('../../globals/js/feature-flags');
+const featureFlags = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -45,8 +45,7 @@ const items = [
 module.exports = {
   context: {
     prefix,
-    componentsX,
-    downIcon: componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down',
+    downIcon: () => (featureFlags.componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down'),
   },
   variants: [
     {

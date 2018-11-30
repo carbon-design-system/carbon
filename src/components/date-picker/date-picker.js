@@ -199,17 +199,25 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   };
 
   _rightArrowHTML() {
-    return `
+    const rightArrowIcon = this.element.querySelector(this.options.selectorDatePickerRightArrowIcon);
+    return (
+      (rightArrowIcon && rightArrowIcon.innerHTML) ||
+      `
       <svg width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
         <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
-      </svg>`;
+      </svg>`
+    );
   }
 
   _leftArrowHTML() {
-    return `
+    const leftArrowIcon = this.element.querySelector(this.options.selectorDatePickerLeftArrowIcon);
+    return (
+      (leftArrowIcon && leftArrowIcon.innerHTML) ||
+      `
       <svg width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
         <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
-      </svg>`;
+      </svg>`
+    );
   }
 
   _addInputLogic = (input, index) => {
@@ -314,6 +322,8 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       selectorDatePickerInputFrom: '[data-date-picker-input-from]',
       selectorDatePickerInputTo: '[data-date-picker-input-to]',
       selectorDatePickerIcon: '[data-date-picker-icon]',
+      selectorDatePickerLeftArrowIcon: '[data-date-picker-left-arrow-icon]',
+      selectorDatePickerRightArrowIcon: '[data-date-picker-right-arrow-icon]',
       classCalendarContainer: `${prefix}--date-picker__calendar`,
       classMonth: `${prefix}--date-picker__month`,
       classWeekdays: `${prefix}--date-picker__weekdays`,

@@ -3,7 +3,7 @@
     aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon">
-      {{> (downIcon) description="Open menu" }}
+      {{> (downIcon) attr-aria-label="Open menu" }}
     </div>
   </div>
 </div>
@@ -12,7 +12,7 @@
     aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-      {{> (downIcon) description="Close menu" }}
+      {{> (downIcon) attr-aria-label="Close menu" }}
     </div>
   </div>
   <fieldset class="{{@root.prefix}}--list-box__menu">

@@ -6,10 +6,8 @@ const { prefix } = require('../../globals/js/settings');
 module.exports = {
   default: 'large',
   context: {
-    featureFlags: {
-      componentsX,
-    },
     prefix,
+    closeIcon: () => (componentsX ? 'carbon-icon-close' : 'carbon-icon-close-solid'),
   },
   variants: [
     {

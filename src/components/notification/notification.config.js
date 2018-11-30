@@ -34,11 +34,11 @@ const items = [
 module.exports = {
   context: {
     featureFlags,
-    checkmarkIcon: () => featureFlags.componentsX ? 'carbon-icon-checkmark-filled' : 'carbon-icon-checkmark-solid',
-    infoIcon: () => featureFlags.componentsX ? 'carbon-icon-information' : 'carbon-icon-info-solid',
-    warningIcon: () => featureFlags.componentsX ? 'carbon-icon-warning-alt-filled' : 'carbon-icon-warning-solid',
-    errorIcon: () => featureFlags.componentsX ? 'carbon-icon-error-filled' : 'carbon-icon-error-solid',
     prefix,
+    checkmarkFilledIcon: () => (featureFlags.componentsX ? 'carbon-icon-checkmark-filled' : 'carbon-icon-checkmark-solid'),
+    informationFilledIcon: () => (featureFlags.componentsX ? 'carbon-icon-information-filled' : 'carbon-icon-info-solid'),
+    warningFilledIcon: () => (featureFlags.componentsX ? 'carbon-icon-warning-alt-filled' : 'carbon-icon-warning-solid'),
+    errorFilledIcon: () => (featureFlags.componentsX ? 'carbon-icon-error-filled' : 'carbon-icon-error-solid'),
   },
   variants: [
     {

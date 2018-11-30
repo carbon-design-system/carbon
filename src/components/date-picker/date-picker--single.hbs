@@ -1,8 +1,9 @@
 <!-- Basic with calendar -->
 <div class="{{@root.prefix}}--form-item">
   <div data-date-picker data-date-picker-type="single" class="{{@root.prefix}}--date-picker {{@root.prefix}}--date-picker--single">
+    {{> date-picker--arrow-icons }}
     <div class="{{@root.prefix}}--date-picker-container">
-      {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class="{{@root.prefix}}--date-picker__icon" }}
+      {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class=(add @root.prefix "--date-picker__icon") }}
       <label for="date-picker-3" class="{{@root.prefix}}--label">Date Picker label</label>
       <input type="text" id="date-picker-3" class="{{@root.prefix}}--date-picker__input" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="mm/dd/yyyy"
         data-date-picker-input />
@@ -13,8 +14,9 @@
 <!-- Basic with calendar -->
 <div class="{{@root.prefix}}--form-item">
   <div data-date-picker data-date-picker-type="single" class="{{@root.prefix}}--date-picker {{@root.prefix}}--date-picker--single">
+    {{> date-picker--arrow-icons }}
     <div class="{{@root.prefix}}--date-picker-container">
-      {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class="{{@root.prefix}}--date-picker__icon" }}
+      {{> carbon-icon-calendar attr-data-date-picker-icon="" attr-class=(add @root.prefix "--date-picker__icon") }}
       <label for="date-picker-3" class="{{@root.prefix}}--label">Date Picker label</label>
       <input data-invalid type="text" id="date-picker-3" class="{{@root.prefix}}--date-picker__input" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="mm/dd/yyyy"
         data-date-picker-input />

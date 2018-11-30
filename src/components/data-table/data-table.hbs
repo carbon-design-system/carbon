@@ -8,7 +8,7 @@
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
               <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}">
                 <span class="{{@root.prefix}}--checkbox-appearance">
-                  {{> carbon-icon-checkmark attr-class="{{@root.prefix}}--checkbox-checkmark" }}
+                  {{> carbon-icon-checkmark-classic attr-class=(add @root.prefix "--checkbox-checkmark") }}
                 </span>
               </label>
             {{else}}
@@ -16,7 +16,7 @@
                 <span>{{title}}</span>
               {{/if}}
               {{#if sortable}}
-                {{> carbon-icon-caret-down attr-class="{{@root.prefix}}--table-sort__svg" }}
+                {{> carbon-icon-caret-down attr-class=(add @root.prefix "--table-sort__svg") }}
               {{/if}}
             {{/if}}
           </th>
@@ -30,21 +30,21 @@
             {{#with (lookup row column.name) as |data|}}
               {{#if column.section}}
                 <td tabindex="0" class="{{@root.prefix}}--table-expand" data-event="expand">
-                  {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--table-expand__svg" }}
+                  {{> carbon-icon-chevron-right attr-class=(add @root.prefix "--table-expand__svg") }}
                 </td>
               {{else if column.checkbox}}
                 <td class="{{@root.prefix}}--table-select">
                   <input id="{{@root.prefix}}--checkbox-2" class="{{@root.prefix}}--checkbox" type="checkbox" value="green" name="{{data.id}}">
                   <label for="{{@root.prefix}}--{{id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}">
                     <span class="{{@root.prefix}}--checkbox-appearance">
-                      {{> carbon-icon-checkmark attr-class="{{@root.prefix}}--checkbox-checkmark" }}
+                      {{> carbon-icon-checkmark attr-class=(add @root.prefix "--checkbox-checkmark") }}
                     </span>
                   </label>
                 </td>
               {{else if column.menu}}
                 <td class="{{@root.prefix}}--table-overflow">
                   <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
-                    {{> carbon-icon-overflow-menu attr-class="{{@root.prefix}}--overflow-menu__icon" }}
+                    {{> (../../../overflowMenuIcon) attr-class=(add @root.prefix "--overflow-menu__icon") }}
                     <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}" tabindex="-1">
                       {{#each data.items}}
                         <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">

@@ -21,8 +21,8 @@ const items = [
 
 module.exports = {
   context: {
-    addIcon: () => featureFlags.componentsX ? 'carbon-icon-add-filled' : 'carbon-icon-add-solid',
     prefix,
+    addFilledIcon: () => (featureFlags.componentsX ? 'carbon-icon-add-filled' : 'carbon-icon-add-solid'),
   },
   variants: [
     {

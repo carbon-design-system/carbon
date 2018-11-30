@@ -1,7 +1,7 @@
 <div class="{{@root.prefix}}--type-omega">Carousel Title</div>
 <div class="{{@root.prefix}}--carousel" data-carousel>
   <button class="{{@root.prefix}}--carousel__btn" data-scroll-left>
-    {{> carbon-icon-chevron-left attr-class="{{@root.prefix}}--pagination__button-icon" }}
+    {{> carbon-icon-chevron-left-classic attr-class=(add @root.prefix "--pagination__button-icon") }}
   </button>
   <div class="{{@root.prefix}}--carousel-container">
     <div class="{{@root.prefix}}--filmstrip" tabindex="-1">
@@ -13,7 +13,7 @@
     </div>
   </div>
   <button class="{{@root.prefix}}--carousel__btn" data-scroll-right>
-    {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--pagination__button-icon" }}
+    {{> carbon-icon-chevron-right-classic attr-class=(add @root.prefix "--pagination__button-icon") }}
   </button>
 </div>
 
@@ -21,13 +21,13 @@
   <div class="{{@root.prefix}}--lightbox" data-lightbox data-lightbox-index="0">
     <div class="{{@root.prefix}}--lightbox__main">
       <button class="{{@root.prefix}}--lightbox__btn" data-scroll-left>
-        {{> carbon-icon-chevron-left attr-class="{{@root.prefix}}--pagination__button-icon" }}
+        {{> carbon-icon-chevron-left-classic attr-class=(add @root.prefix "--pagination__button-icon") }}
       </button>
       {{#each items}}
         <img src="{{lightboxImageUrl}}" class="{{@root.prefix}}--lightbox__item">
       {{/each}}
       <button class="{{@root.prefix}}--lightbox__btn" data-scroll-right>
-        {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--pagination__button-icon" }}
+        {{> carbon-icon-chevron-right-classic attr-class=(add @root.prefix "--pagination__button-icon") }}
       </button>
     </div>
   </div>

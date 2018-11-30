@@ -3,8 +3,6 @@
 const { prefix } = require('../../globals/js/settings');
 const featureFlags = require('../../globals/js/feature-flags');
 
-const { componentsX } = featureFlags;
-
 const items = [
   {
     label: 'Option 1',
@@ -31,8 +29,7 @@ const items = [
 module.exports = {
   context: {
     prefix,
-    featureFlags,
-    downIcon: componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down',
+    downIcon: () => (featureFlags.componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down'),
   },
   variants: [
     {

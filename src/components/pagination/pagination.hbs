@@ -10,7 +10,7 @@
             {{label}} {{#if selected}} items per page{{/if}}
           </option> {{/each}}
         </select>
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+        {{> carbon-icon-chevron-down attr-class=(add @root.prefix '--select__arrow')}}
       </div>
       <div class="{{@root.prefix}}--pagination__text">
         <span data-displayed-item-range>1-10</span> of
@@ -27,14 +27,14 @@
             </option>
           {{/each}}
         </select>
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+        {{> carbon-icon-chevron-down attr-class=(add @root.prefix '--select__arrow')}}
       </div>
 
       <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" tabindex="0" data-page-backward aria-label="Backward button">
-        {{ carbon-icon 'CaretLeft24' class=(add @root.prefix '--pagination__nav-arrow')}}
+        {{> carbon-icon-caret-left-24 attr-class=(add @root.prefix '--pagination__nav-arrow')}}
       </button>
       <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" tabindex="0" data-page-forward aria-label="Forward button">
-        {{ carbon-icon 'CaretRight24' class=(add @root.prefix '--pagination__nav-arrow')}}
+        {{> carbon-icon-caret-right-24 attr-class=(add @root.prefix '--pagination__nav-arrow')}}
       </button>
     </div>
 
@@ -51,7 +51,7 @@
           <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
         {{/each}}
       </select>
-      {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
+      {{> carbon-icon-caret-down attr-class=(add @root.prefix "--select__arrow") }}
     </div>
     {{#isnt version "v2"}}
       <span class="{{@root.prefix}}--pagination__text">Items per page&nbsp;&nbsp;|&nbsp;&nbsp;</span>
@@ -68,7 +68,7 @@
       <span data-displayed-page-number>1</span> of
       <span data-total-pages>4</span> pages</span>
     <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" data-page-backward aria-label="Backward button">
-      {{> carbon-icon-chevron-left attr-class="{{@root.prefix}}--pagination__button-icon" }}
+      {{> carbon-icon-chevron-left attr-class=(add @root.prefix "--pagination__button-icon") }}
     </button>
     <label for="page-number-input" class="{{@root.prefix}}--visually-hidden">Page number input</label>
     {{#isnt version "v2"}}
@@ -81,11 +81,11 @@
             <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
           {{/each}}
         </select>
-        {{> (downIcon) attr-class=(add @root.prefix "--select__arrow") }}
+        {{> carbon-icon-caret-down attr-class=(add @root.prefix "--select__arrow") }}
       </div>
     {{/isnt}}
     <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" data-page-forward aria-label="Forward button">
-      {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--pagination__button-icon" }}
+      {{> carbon-icon-chevron-right attr-class=(add @root.prefix "--pagination__button-icon") }}
     </button>
   </div>
 </div>

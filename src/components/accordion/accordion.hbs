@@ -2,7 +2,7 @@
   {{#each sections}}
     <li data-accordion-item class="{{@root.prefix}}--accordion__item">
       <button class="{{@root.prefix}}--accordion__heading" aria-expanded="false" aria-controls="{{paneId}}">
-        {{> carbon-icon-chevron-right attr-class="{{@root.prefix}}--accordion__arrow" }}
+        {{> carbon-icon-chevron-right attr-class=(add @root.prefix "--accordion__arrow") }}
         <div class="{{@root.prefix}}--accordion__title">{{title}}</div>
       </button>
       <div id="{{paneId}}" class="{{@root.prefix}}--accordion__content">

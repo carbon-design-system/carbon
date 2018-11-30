@@ -25,7 +25,7 @@ const items = [
 
 module.exports = {
   context: {
-    downIcon: () => featureFlags.componentsX ? 'chevron-down' : 'caret-down',
+    downIcon: () => (featureFlags.componentsX ? 'carbon-icon-chevron-down' : 'carbon-icon-caret-down'),
     prefix,
   },
   variants: [
