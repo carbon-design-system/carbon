@@ -40,9 +40,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
       const index = Math.max(items.indexOf(old) + direction, -1);
       return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
     };
-    const pressEnter = new KeyboardEvent('keydown', { bubbles: true });
-    Object.defineProperty(pressEnter, 'which', { value: 13, writable: true });
-    getNextItem(start).dispatchEvent(pressEnter);
+    getNextItem(start).focus();
   };
 
   /**
