@@ -114,23 +114,37 @@ describe('ProgressIndicator', function() {
       stepLabel = element.querySelector('.bx--progress-label');
       stepLabel.style.display = 'inline-block';
       tooltipDiv = document.createElement('div');
+      tooltipDiv.classList.add('bx--tooltip');
       tooltipText = document.createElement('div');
+      tooltipText.classList.add('bx--tooltip__text');
       tooltipDiv.appendChild(tooltipText);
       element.appendChild(tooltipDiv);
     });
 
-    // fit('should not have overflow class', function() {
     it('should not have overflow class', function() {
       stepLabel.textContent = 'Step';
       instance = new ProgressIndicator(element);
       expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(false);
     });
 
-    // fit('test', function() {
-    it('test', function() {
+    it('should have an overflow class', function() {
       stepLabel.textContent = 'Overflow Ex. 1';
       instance = new ProgressIndicator(element);
       expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(true);
+    });
+
+    it('multi line tooltip should have multi line class', function() {
+      stepLabel.textContent = 'Overflow Ex. 2 Multi Line';
+      tooltipText.style.height = '24px';
+      instance = new ProgressIndicator(element);
+      expect(tooltipDiv.classList.contains('bx--tooltip_multi')).toBe(true);
+    });
+
+    it('single line tooltip should not have multi line class', function() {
+      stepLabel.textContent = 'Overflow Ex. 1';
+      tooltipText.style.height = '20px';
+      instance = new ProgressIndicator(element);
+      expect(tooltipDiv.classList.contains('bx--tooltip_multi')).toBe(false);
     });
 
     afterEach(function() {
