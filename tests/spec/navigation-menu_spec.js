@@ -25,12 +25,13 @@ describe('Popup Nav', function() {
   });
 
   describe('Init Component by Launch functionality', function() {
+    let range;
     let button;
     let navigationMenu;
     let context;
 
     beforeAll(function() {
-      const range = document.createRange();
+      range = document.createRange();
       button = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu-target]');
       navigationMenu = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
       document.body.appendChild(button);
@@ -64,29 +65,31 @@ describe('Popup Nav', function() {
   });
 
   describe('Keydown handler', function() {
-    let element;
-    let navigationMenu;
+    let range;
+    let navigationMenuNode;
+    let navigationMenuClass;
     let button;
     let context;
+    let escKeydown;
 
     beforeAll(function() {
-      const range = document.createRange();
-      element = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
-      button = element.querySelector('.bx--navigation__category-toggle');
-      [...element.querySelectorAll('.bx--navigation-link')].forEach(link => {
+      range = document.createRange();
+      navigationMenuNode = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
+      button = navigationMenuNode.querySelector('.bx--navigation__category-toggle');
+      [...navigationMenuNode.querySelectorAll('.bx--navigation-link')].forEach(link => {
         link.textContent = 'link';
       });
-      navigationMenu = new NavigationMenu(element);
+      escKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(escKeydown, 'which', { value: 27, writable: true });
+      navigationMenuClass = new NavigationMenu(navigationMenuNode);
       context = NavigationMenu.init();
-      document.body.append(element);
+      document.body.append(navigationMenuNode);
     });
 
     it('should close navigation menu on Esc', function() {
-      element.removeAttribute('hidden');
-      const escKeydown = new KeyboardEvent('keydown', { bubbles: true });
-      Object.defineProperty(escKeydown, 'which', { value: 27, writable: true });
-      element.dispatchEvent(escKeydown);
-      expect(!element.hasAttribute('hidden'));
+      navigationMenuNode.removeAttribute('hidden');
+      navigationMenuNode.dispatchEvent(escKeydown);
+      expect(navigationMenuNode.hasAttribute('hidden'));
     });
 
     describe('Up arrow navigation', function() {
@@ -96,7 +99,7 @@ describe('Popup Nav', function() {
       let lastNavItem;
       let upArrowKeydown;
       beforeAll(function() {
-        navItems = element.querySelectorAll(`
+        navItems = navigationMenuNode.querySelectorAll(`
         .bx--navigation__category-toggle,
         .bx--navigation-item > .bx--navigation-link,
         .bx--navigation-link[tabindex="0"]
@@ -108,7 +111,7 @@ describe('Popup Nav', function() {
       });
 
       beforeEach(function() {
-        element.removeAttribute('hidden');
+        navigationMenuNode.removeAttribute('hidden');
       });
 
       it('should navigate backwards on up arrow', async function() {
@@ -137,7 +140,7 @@ describe('Popup Nav', function() {
       });
 
       afterEach(function() {
-        element.setAttribute('hidden', '');
+        navigationMenuNode.setAttribute('hidden', '');
       });
     });
 
@@ -147,20 +150,23 @@ describe('Popup Nav', function() {
       let secondNavItem;
       let lastNavItem;
       let downArrowKeydown;
+      let firstNestedMenuItem;
+
       beforeAll(function() {
-        navItems = element.querySelectorAll(`
+        navItems = navigationMenuNode.querySelectorAll(`
         .bx--navigation__category-toggle,
         .bx--navigation-item > .bx--navigation-link,
         .bx--navigation-link[tabindex="0"]
       `);
         [firstNavItem, secondNavItem] = navItems;
         lastNavItem = navItems[navItems.length - 1];
+        firstNestedMenuItem = lastNavItem.closest('.bx--navigation__category').querySelector('.bx--navigation-link');
         downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
         Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
       });
 
       beforeEach(function() {
-        element.removeAttribute('hidden');
+        navigationMenuNode.removeAttribute('hidden');
       });
 
       it('should navigate forwards on down arrow', async function() {
@@ -180,58 +186,60 @@ describe('Popup Nav', function() {
       });
 
       it('should navigate into submenu', function() {
-        const firstNestedMenuItem = lastNavItem.closest('.bx--navigation__category').querySelector('.bx--navigation-link');
-        navigationMenu.changeNavSubmenuState({ matchesNavSubmenu: button, shouldBeCollapsed: false });
+        navigationMenuClass.changeNavSubmenuState({ matchesNavSubmenu: button, shouldBeCollapsed: false });
         spyOn(firstNestedMenuItem, 'focus');
         button.dispatchEvent(downArrowKeydown);
         expect(firstNestedMenuItem.focus).toHaveBeenCalled();
       });
 
       afterEach(function() {
-        element.setAttribute('hidden', '');
+        navigationMenuNode.setAttribute('hidden', '');
       });
     });
 
     afterAll(function() {
       button.setAttribute('aria-expanded', 'false');
-      navigationMenu.release();
-      context.release();
+      navigationMenuClass.release();
+      if (context) {
+        context.release();
+        context = null;
+      }
     });
   });
 
   describe('Click handler', function() {
+    let range;
     let element;
     let navigationMenu;
+    let wrapper;
+    let button;
+    let anchors;
 
     beforeAll(function() {
-      const range = document.createRange();
+      range = document.createRange();
       element = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
       navigationMenu = new NavigationMenu(element);
+      wrapper = element.querySelector('.bx--navigation__category');
+      button = element.querySelector('.bx--navigation__category-toggle');
+      anchors = element.querySelectorAll('.bx--navigation-link');
     });
 
     describe('Submenu', function() {
       it('should open submenu', function() {
-        const wrapper = element.querySelector('.bx--navigation__category');
-        const button = element.querySelector('.bx--navigation__category-toggle');
         button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(wrapper.classList.contains('bx--navigation__category--expanded')).toBe(true);
         expect(button.getAttribute('aria-expanded')).toBe('true');
       });
 
-      // it('should close an open submenu', function() {
-      //   const wrapper = element.querySelector('.bx--navigation__category');
-      //   const button = element.querySelector('.bx--navigation__category-toggle');
-      //   wrapper.classList.add('bx--navigation__category--expanded');
-      //   button.setAttribute('aria-expanded', 'true');
-      //   button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      //   expect(wrapper.classList.contains('bx--navigation__category--expanded')).toBe(false);
-      //   expect(button.getAttribute('aria-expanded')).toBe('false');
-      // });
+      it('should close an open submenu', function() {
+        wrapper.classList.add('bx--navigation__category--expanded');
+        button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(wrapper.classList.contains('bx--navigation__category--expanded')).toBe(false);
+      });
     });
 
     describe('Link', function() {
       it('should attach active link CSS classes on click', function() {
-        const anchors = element.querySelectorAll('.bx--navigation-link');
         anchors[0].dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(anchors[0].classList.contains('bx--navigation-item--active')).toBe(true);
         [...anchors].slice(1).forEach(a => {
