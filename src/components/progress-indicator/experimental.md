@@ -88,17 +88,22 @@ progressIndicatorInstance.setCurrent(1);
 
 #### Adding or removing Progress steps
 
-Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically accommodate for any number of steps. A Progress step in HTML looks like this:
+Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically accommodate for any number of steps. A Progress step with an overflow tooltip and optional helper text in HTML looks like this:
 
 ```html
-<li class="bx--progress-step bx--progress-step--complete">
-  <svg width="24px" height="24px" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="12"></circle>
-    <polygon points="10.3 13.6 7.7 11 6.3 12.4 10.3 16.4 17.8 9 16.4 7.6"></polygon>
+<li class="bx--progress-step bx--progress-step--complete"  >
+  <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path>
+    <path d="M7 10.8L4.5 8.3l.8-.8L7 9.2l3.7-3.7.8.8z"></path>
   </svg>
-  <p class="bx--progress-label">Label 1</p>
+  <p tabindex="0" class="bx--progress-label bx--progress-label-overflow"  aria-describedby="label-tooltip">Overflow Example First step</p>
+  <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="bx--tooltip bx--tooltip_multi" data-avoid-focus-on-open>
+    <span class="bx--tooltip__caret"></span>
+    <p class="bx--tooltip__text">Overflow Example First Step</p>
+  </div>
+  <p class="bx--progress-optional">Optional Helper Text</p>
   <span class="bx--progress-line"></span>
-</li>
+    </li>
 ```
 
 Note that each progress step will need a modifier class. In the example above, it is `bx--progress-step--complete`, but the JavaScript will set this to the appropriate modifier class relative to the current step as indicated by `bx--progress-step--incomplete`.
