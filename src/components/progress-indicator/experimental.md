@@ -103,7 +103,7 @@ Once `ProgressIndicator` instance is initialized, simply add or remove Progress 
   </div>
   <p class="bx--progress-optional">Optional Helper Text</p>
   <span class="bx--progress-line"></span>
-    </li>
+</li>
 ```
 
 Note that each progress step will need a modifier class. In the example above, it is `bx--progress-step--complete`, but the JavaScript will set this to the appropriate modifier class relative to the current step as indicated by `bx--progress-step--incomplete`.
