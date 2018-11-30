@@ -104,10 +104,8 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
     const { prefix } = settings;
     return {
       selectorInit: '[data-header-nav]',
-      selectorNavKind: '[data-header-nav-kind]',
       selectorSubmenu: `.${prefix}--header__submenu`,
       selectorSubmenuLink: `.${prefix}--header__menu-title`,
-      selectorSubmenuItem: `.${prefix}--header__menu-title > .${prefix}--header__menu-item`,
       selectorNavAnchor: `.${prefix}--header__menu-item`,
       selectorTopLevelNavAnchor: `.${prefix}--header__menu-bar > li > .${prefix}--header__menu-item`,
     };
