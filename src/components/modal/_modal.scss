@@ -78,6 +78,11 @@
     margin-bottom: $spacing-lg;
   }
 
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-footer {
+    flex-shrink: 0;
+  }
+
   .#{$prefix}--modal-header__label {
     @include reset;
     @include typescale('omega');
