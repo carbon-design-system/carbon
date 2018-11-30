@@ -11,20 +11,20 @@ describe('HeaderNav', function() {
   let a4;
   let li3;
   let li4;
-  // let nestedLi3Anchor;
+  let nestedLi3Anchor;
   let nestedLi4Anchor;
   let li3HeaderSubmenuClass;
-  // let li4HeaderSubmenuClass;
+  let li4HeaderSubmenuClass;
 
   beforeAll(function() {
     const range = document.createRange();
     headerNavNode = range.createContextualFragment(UiShellHtml).querySelector('[data-header-nav]');
     [a1, a2, a3, a4] = headerNavNode.querySelectorAll('.bx--header__menu-bar > li > .bx--header__menu-item');
     [li3, li4] = headerNavNode.querySelectorAll('.bx--header__submenu');
-    // nestedLi3Anchor = li3.querySelector('.bx--header__menu  .bx--header__menu-item');
+    nestedLi3Anchor = li3.querySelector('.bx--header__menu  .bx--header__menu-item');
     nestedLi4Anchor = li4.querySelector('.bx--header__menu  .bx--header__menu-item');
     li3HeaderSubmenuClass = HeaderSubMenu.create(li3);
-    // li4HeaderSubmenuClass = HeaderSubMenu.create(li4);
+    li4HeaderSubmenuClass = HeaderSubMenu.create(li4);
     headerNavClass = new HeaderNav(headerNavNode);
     document.body.appendChild(headerNavNode);
   });
@@ -59,6 +59,30 @@ describe('HeaderNav', function() {
         spyOn(nestedLi4Anchor, 'focus');
         a3.dispatchEvent(rightArrowKeydown);
         expect(nestedLi4Anchor.focus).toHaveBeenCalled();
+      });
+    });
+
+    describe('left arrow keydown', function() {
+      it('should move to previous submenu with left arrow key', function() {
+        a2.focus();
+        spyOn(a1, 'focus');
+        a2.dispatchEvent(leftArrowKeydown);
+        expect(a1.focus).toHaveBeenCalled();
+      });
+
+      it('should wrap to last submenu when navigating from start of list', function() {
+        a1.focus();
+        spyOn(a4, 'focus');
+        a1.dispatchEvent(leftArrowKeydown);
+        expect(a4.focus).toHaveBeenCalled();
+      });
+
+      it('should maintain submenu expanded state', function() {
+        li4HeaderSubmenuClass.setState({ shouldBeExpanded: true, shouldFocusOnOpen: true });
+        a4.focus();
+        spyOn(nestedLi3Anchor, 'focus');
+        a4.dispatchEvent(leftArrowKeydown);
+        expect(nestedLi3Anchor.focus).toHaveBeenCalled();
       });
     });
   });
