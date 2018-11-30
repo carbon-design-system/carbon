@@ -8,9 +8,6 @@
     "node": true,
     "es6": true
   },
-  "ecmaFeatures": {
-    "modules": false
-  },
   "extends": [
     "carbon-base"
   ],

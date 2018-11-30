@@ -32,20 +32,6 @@ const items = [
     panelClass: 'tab-4',
     label: 'Tab label 4',
     panelContent: 'Content for fourth tab goes here.',
-  },
-  {
-    linkId: 'tab-link-5',
-    panelId: 'tab-panel-5',
-    panelClass: 'tab-5',
-    label: 'Tab label 5',
-    panelContent: 'Content for fifth tab goes here.',
-  },
-  {
-    linkId: 'tab-link-6',
-    panelId: 'tab-panel-6',
-    panelClass: 'tab-6',
-    label: 'Tab label 6',
-    panelContent: 'Disabled tab should not display content.',
     disabled: true,
   },
 ];
