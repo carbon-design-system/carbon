@@ -1,38 +1,35 @@
 import HeaderNav from '../../src/components/ui-shell/header-nav';
+import HeaderSubMenu from '../../src/components/ui-shell/header-submenu';
+import UiShellHtml from '../../html/ui-shell/ui-shell.html';
 
 describe('HeaderNav', function() {
-  let headerNav;
-  let nav;
-  let ul;
-  let li1;
-  let li2;
+  let headerNavNode;
+  let headerNavClass;
   let a1;
   let a2;
+  let a3;
+  let a4;
+  let li3;
+  let li4;
+  // let nestedLi3Anchor;
+  let nestedLi4Anchor;
+  let li3HeaderSubmenuClass;
+  // let li4HeaderSubmenuClass;
 
   beforeAll(function() {
-    nav = document.createElement('nav');
-    nav.className = 'bx--header__nav';
-    ul = document.createElement('ul');
-    li1 = document.createElement('li');
-    li1.classList.add('bx--header__submenu');
-    li2 = document.createElement('li');
-    li2.classList.add('bx--header__submenu');
-    a1 = document.createElement('a');
-    a1.classList.add('bx--header__menu-item', 'bx--header__menu-title');
-    li1.appendChild(a1);
-    a2 = document.createElement('a');
-    a2.classList.add('bx--header__menu-item', 'bx--header__menu-title');
-    li2.appendChild(a2);
-    ul.appendChild(li1);
-    ul.appendChild(li2);
-    nav.appendChild(ul);
-    headerNav = new HeaderNav(nav);
-    document.body.appendChild(nav);
+    const range = document.createRange();
+    headerNavNode = range.createContextualFragment(UiShellHtml).querySelector('[data-header-nav]');
+    [a1, a2, a3, a4] = headerNavNode.querySelectorAll('.bx--header__menu-bar > li > .bx--header__menu-item');
+    [li3, li4] = headerNavNode.querySelectorAll('.bx--header__submenu');
+    // nestedLi3Anchor = li3.querySelector('.bx--header__menu  .bx--header__menu-item');
+    nestedLi4Anchor = li4.querySelector('.bx--header__menu  .bx--header__menu-item');
+    li3HeaderSubmenuClass = HeaderSubMenu.create(li3);
+    // li4HeaderSubmenuClass = HeaderSubMenu.create(li4);
+    headerNavClass = new HeaderNav(headerNavNode);
+    document.body.appendChild(headerNavNode);
   });
 
   beforeEach(function() {
-    // TODO: investigate
-    a1.setAttribute('tabindex', 0);
     a1.focus();
   });
 
@@ -50,35 +47,24 @@ describe('HeaderNav', function() {
       });
 
       it('should wrap to first submenu when navigating from end of list', function() {
-        // TODO: investigate
-        a2.setAttribute('tabindex', 0);
-        a2.focus();
+        a4.focus();
         spyOn(a1, 'focus');
-        a2.dispatchEvent(rightArrowKeydown);
-        expect(a1.focus).toHaveBeenCalled();
-      });
-    });
-
-    describe('left arrow keydown', function() {
-      it('should move to previous submenu with left arrow key', function() {
-        // TODO: investigate
-        a2.setAttribute('tabindex', 0);
-        a2.focus();
-        spyOn(a1, 'focus');
-        a2.dispatchEvent(rightArrowKeydown);
+        a4.dispatchEvent(rightArrowKeydown);
         expect(a1.focus).toHaveBeenCalled();
       });
 
-      it('should wrap to last submenu when navigating from start of list', function() {
-        spyOn(a2, 'focus');
-        a1.dispatchEvent(rightArrowKeydown);
-        expect(a2.focus).toHaveBeenCalled();
+      it('should maintain submenu expanded state', function() {
+        li3HeaderSubmenuClass.setState({ shouldBeExpanded: true, shouldFocusOnOpen: true });
+        a3.focus();
+        spyOn(nestedLi4Anchor, 'focus');
+        a3.dispatchEvent(rightArrowKeydown);
+        expect(nestedLi4Anchor.focus).toHaveBeenCalled();
       });
     });
   });
 
   afterAll(function() {
-    headerNav.release();
-    document.body.removeChild(nav);
+    headerNavClass.release();
+    document.body.removeChild(headerNavNode);
   });
 });
