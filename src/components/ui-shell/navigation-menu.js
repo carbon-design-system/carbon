@@ -9,8 +9,10 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @extends NavigationMenuPanel
    * @param {HTMLElement} element The element working as a selector.
    * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit]
-   * @param {string} [options.attribInitTarget]
+   * @param {string} [options.selectorInit] The CSS class to find navigation
+   * menus.
+   * @param {string} [options.attribInitTarget] The attribute name in the
+   * launcher buttons to find target navigation menu.
    * @param {string} [options.selectorShellNavSubmenu] The CSS selector for a
    * nav submenu
    * @param {string} [options.selectorShellNavLink] The CSS selector for a nav
@@ -43,6 +45,8 @@ export default class NavigationMenu extends NavigationMenuPanel {
         }
       })
     );
+    const hasFocusOut = 'onfocusout' in window;
+    this.manage(on(this.element, hasFocusOut ? 'focusout' : 'blur', this._handleFocusOut, !hasFocusOut));
   }
 
   /**
@@ -75,6 +79,14 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @param {Event} event The event triggering this method.
    */
   _handleKeyDown = event => {
+    // handle Esc
+    const isExpanded = !this.element.hasAttribute('hidden');
+    if (event.which === 27 && isExpanded) {
+      this.changeState('collapsed');
+      this.triggerButton.focus();
+      return;
+    }
+    // handle up/down arrow keys
     const matchesNavSubmenu = eventMatches(event, this.options.selectorShellNavSubmenu);
     const matchesShellNavLink = eventMatches(event, this.options.selectorShellNavLink);
     if (!matchesNavSubmenu && !matchesShellNavLink) {
@@ -88,10 +100,16 @@ export default class NavigationMenu extends NavigationMenuPanel {
     if (navigationKeyCodeMatches) {
       event.preventDefault(); // prevent arrow keys from scrolling
       this.navigate(navigationKeyCodeMatches);
-      return;
     }
-    const isExpanded = !this.element.hasAttribute('hidden');
-    if (event.which === 27 && isExpanded) {
+  };
+
+  /**
+   * @param {Event} event The event triggering this method
+   */
+  _handleFocusOut = event => {
+    const nextTargetIsOfSelf = this.element.contains(event.relatedTarget);
+    const oldTargetIsOfSelf = this.element.contains(event.target);
+    if (oldTargetIsOfSelf && !nextTargetIsOfSelf) {
       this.changeState('collapsed');
       this.triggerButton.focus();
     }
@@ -148,9 +166,9 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * how {@linkcode NavigationMenu.init .init()} works.
    * @member NavigationMenu.options
    * @type {Object}
-   * @property {string} selectorInit The CSS class to find popup navs.
+   * @property {string} selectorInit The CSS class to find navigation menus.
    * @property {string} attribInitTarget The attribute name in the
-   * launcher buttons to find target popup nav.
+   * launcher buttons to find target navigation menu.
    * @property {string[]} initEventNames The events that the component
    * will handles
    */
