@@ -40,7 +40,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       totalSteps: this.getSteps().length,
     };
 
-    this._addOverflowTooltip();
+    this.addOverflowTooltip();
   }
 
   /**
@@ -153,7 +153,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       </svg>`;
   }
 
-  _addOverflowTooltip() {
+  addOverflowTooltip() {
     const stepLabels = [...this.element.querySelectorAll(this.options.selectorLabel)];
     const tooltips = [...this.element.querySelectorAll(this.options.selectorTooltip)];
 
