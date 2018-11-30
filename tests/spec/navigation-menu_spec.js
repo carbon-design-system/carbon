@@ -63,6 +63,145 @@ describe('Popup Nav', function() {
     });
   });
 
+  describe('Keydown handler', function() {
+    let element;
+    let navigationMenu;
+    let wrapper;
+    let button;
+    let context;
+
+    beforeAll(function() {
+      const range = document.createRange();
+      element = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
+      wrapper = element.querySelector('.bx--navigation__category');
+      button = element.querySelector('.bx--navigation__category-toggle');
+      [...element.querySelectorAll('.bx--navigation-link')].forEach(link => {
+        link.textContent = 'link';
+      });
+      navigationMenu = new NavigationMenu(element);
+      context = NavigationMenu.init();
+      document.body.append(element);
+    });
+
+    it('should close navigation menu on Esc', function() {
+      element.removeAttribute('hidden');
+      const escKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(escKeydown, 'which', { value: 27, writable: true });
+      element.dispatchEvent(escKeydown);
+      expect(!element.hasAttribute('hidden'));
+    });
+
+    describe('Up arrow navigation', function() {
+      let navItems;
+      let firstNavItem;
+      let secondNavItem;
+      let lastNavItem;
+      let upArrowKeydown;
+      beforeAll(function() {
+        navItems = element.querySelectorAll(`
+        .bx--navigation__category-toggle,
+        .bx--navigation-item > .bx--navigation-link,
+        .bx--navigation-link[tabindex="0"]
+      `);
+        [firstNavItem, secondNavItem] = navItems;
+        lastNavItem = navItems[navItems.length - 1];
+        upArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+        Object.defineProperty(upArrowKeydown, 'which', { value: 38, writable: true });
+      });
+
+      beforeEach(function() {
+        element.removeAttribute('hidden');
+      });
+
+      it('should navigate backwards on up arrow', async function() {
+        spyOn(firstNavItem, 'focus');
+        secondNavItem.focus();
+        secondNavItem.dispatchEvent(upArrowKeydown);
+        expect(firstNavItem.focus).toHaveBeenCalled();
+        expect(firstNavItem.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should wrap navigation from first to last item', function() {
+        spyOn(lastNavItem, 'focus');
+        firstNavItem.focus();
+        firstNavItem.dispatchEvent(upArrowKeydown);
+        expect(lastNavItem.focus).toHaveBeenCalled();
+        expect(lastNavItem.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should navigate out of submenus', function() {
+        spyOn(button, 'focus');
+        button.setAttribute('aria-expanded', 'true');
+        firstNavItem.focus();
+        firstNavItem.dispatchEvent(upArrowKeydown);
+        expect(button.focus).toHaveBeenCalled();
+        expect(button.focus).toHaveBeenCalledTimes(1);
+      });
+
+      afterEach(function() {
+        element.setAttribute('hidden', '');
+      });
+    });
+
+    describe('Down arrow navigation', function() {
+      let navItems;
+      let firstNavItem;
+      let secondNavItem;
+      let lastNavItem;
+      let downArrowKeydown;
+      beforeAll(function() {
+        navItems = element.querySelectorAll(`
+        .bx--navigation__category-toggle,
+        .bx--navigation-item > .bx--navigation-link,
+        .bx--navigation-link[tabindex="0"]
+      `);
+        [firstNavItem, secondNavItem] = navItems;
+        lastNavItem = navItems[navItems.length - 1];
+        downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+        Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
+      });
+
+      beforeEach(function() {
+        element.removeAttribute('hidden');
+      });
+
+      it('should navigate forwards on down arrow', async function() {
+        spyOn(secondNavItem, 'focus');
+        firstNavItem.focus();
+        firstNavItem.dispatchEvent(downArrowKeydown);
+        expect(secondNavItem.focus).toHaveBeenCalled();
+        expect(secondNavItem.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should wrap navigation from last to first item', function() {
+        spyOn(firstNavItem, 'focus');
+        lastNavItem.focus();
+        lastNavItem.dispatchEvent(downArrowKeydown);
+        expect(firstNavItem.focus).toHaveBeenCalled();
+        expect(firstNavItem.focus).toHaveBeenCalledTimes(1);
+      });
+
+      it('should navigate into submenu', function() {
+        const firstNestedMenuItem = lastNavItem.closest('.bx--navigation__category').querySelector('.bx--navigation-link');
+        navigationMenu.changeNavSubmenuState({ matchesNavSubmenu: button, shouldBeCollapsed: false });
+        spyOn(firstNestedMenuItem, 'focus');
+        button.dispatchEvent(downArrowKeydown);
+        expect(firstNestedMenuItem.focus).toHaveBeenCalled();
+      });
+
+      afterEach(function() {
+        element.setAttribute('hidden', '');
+      });
+    });
+
+    afterAll(function() {
+      button.setAttribute('aria-expanded', 'false');
+      navigationMenu.release();
+      context.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
   describe('Click handler', function() {
     let element;
     let navigationMenu;

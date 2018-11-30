@@ -45,10 +45,49 @@ export default class NavigationMenu extends NavigationMenuPanel {
     );
   }
 
+  /**
+   * @returns {Element} Currently highlighted element.
+   */
+  getCurrentNavigation = () => this.element.ownerDocument.activeElement;
+
+  /**
+   * Moves the focus up/down.
+   * @param {number} direction The direction of navigating.
+   */
+  navigate = direction => {
+    const items = [...this.element.querySelectorAll(this.options.selectorFocusableNavItems)];
+    const start = this.getCurrentNavigation();
+    const getNextItem = old => {
+      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+
+      // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+      const index = Math.max(items.indexOf(old) + direction, -1);
+      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+    };
+    getNextItem(start).focus();
+  };
+
+  /**
+   * Handle keydown event
+   * Up/down arrow keys navigate in the menu
+   * Esc closes the menu
+   * @param {Event} event The event triggering this method.
+   */
   _handleKeyDown = event => {
     const matchesNavSubmenu = eventMatches(event, this.options.selectorShellNavSubmenu);
     const matchesShellNavLink = eventMatches(event, this.options.selectorShellNavLink);
     if (!matchesNavSubmenu && !matchesShellNavLink) {
+      return;
+    }
+    const navigationKeyCodes = {
+      38: this.constructor.NAVIGATE.BACKWARD, // up arrow
+      40: this.constructor.NAVIGATE.FORWARD, // down arrow
+    };
+    const navigationKeyCodeMatches = navigationKeyCodes[event.which];
+    if (navigationKeyCodeMatches) {
+      event.preventDefault(); // prevent arrow keys from scrolling
+      this.navigate(navigationKeyCodeMatches);
       return;
     }
     const isExpanded = !this.element.hasAttribute('hidden');
@@ -56,6 +95,18 @@ export default class NavigationMenu extends NavigationMenuPanel {
       this.changeState('collapsed');
       this.triggerButton.focus();
     }
+  };
+
+  changeNavSubmenuState = ({ matchesNavSubmenu, shouldBeCollapsed }) => {
+    const shellNavCategory = matchesNavSubmenu.closest(this.options.selectorShellNavCategory);
+    if (!shellNavCategory) {
+      return;
+    }
+    matchesNavSubmenu.setAttribute('aria-expanded', !shouldBeCollapsed);
+    shellNavCategory.classList.toggle(this.options.classShellNavCategoryExpanded);
+    Array.prototype.forEach.call(shellNavCategory.querySelectorAll(this.options.selectorShellNavLink), item => {
+      item.tabIndex = !shouldBeCollapsed ? 0 : -1;
+    });
   };
 
   /**
@@ -69,13 +120,8 @@ export default class NavigationMenu extends NavigationMenuPanel {
       return;
     }
     if (matchesNavSubmenu) {
-      const shellNavCategory = matchesNavSubmenu.closest(this.options.selectorShellNavCategory);
-      if (!shellNavCategory) {
-        return;
-      }
       const isExpanded = matchesNavSubmenu.getAttribute('aria-expanded') === 'true';
-      matchesNavSubmenu.setAttribute('aria-expanded', !isExpanded);
-      shellNavCategory.classList.toggle(this.options.classShellNavCategoryExpanded);
+      this.changeNavSubmenuState({ matchesNavSubmenu, isExpanded });
       return;
     }
     if (matchesShellNavLink) {
@@ -116,6 +162,11 @@ export default class NavigationMenu extends NavigationMenuPanel {
       selectorShellNavSubmenu: `.${prefix}--navigation__category-toggle`,
       selectorShellNavLink: `.${prefix}--navigation-link`,
       selectorShellNavLinkCurrent: `.${prefix}--navigation-item--active,.${prefix}--navigation__category-item--active`,
+      selectorFocusableNavItems: `
+        .${prefix}--navigation__category-toggle,
+        .${prefix}--navigation-item > .${prefix}--navigation-link,
+        .${prefix}--navigation-link[tabindex="0"]
+      `,
       selectorShellNavItem: `.${prefix}--navigation-item`,
       selectorShellNavCategory: `.${prefix}--navigation__category`,
       classShellNavItemActive: `${prefix}--navigation-item--active`,
@@ -123,4 +174,17 @@ export default class NavigationMenu extends NavigationMenuPanel {
       classShellNavCategoryExpanded: `${prefix}--navigation__category--expanded`,
     });
   }
+
+  /**
+   * Enum for navigating backward/forward.
+   * @readonly
+   * @member NavigationMenuPanl.NAVIGATE
+   * @type {Object}
+   * @property {number} BACKWARD Navigating backward.
+   * @property {number} FORWARD Navigating forward.
+   */
+  static NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1,
+  };
 }
