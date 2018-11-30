@@ -4,6 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
+import HeaderSubmenu from './header-submenu';
 
 export default class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
@@ -21,26 +22,35 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @returns {Element} Currently highlighted element.
    */
   getCurrentNavigation = () => {
-    const focused = this.element.ownerDocument.activeElement.closest(this.options.selectorSubmenu);
-    return focused && focused.nodeType === Node.ELEMENT_NODE ? focused.querySelector(this.options.selectorSubmenuLink) : null;
+    const activeElement = this.element.ownerDocument.activeElement;
+    if (!activeElement) {
+      return null;
+    }
+    const focused = activeElement.closest(this.options.selectorSubmenu);
+    if (activeElement.matches(this.options.selectorNavAnchor) && !focused) {
+      return activeElement;
+    }
+    if (focused && focused.nodeType === Node.ELEMENT_NODE) {
+      return focused.querySelector(this.options.selectorSubmenuLink);
+    }
+    return null;
   };
 
   /**
-   * Moves the focus up/down.
-   * @param {number} direction The direction of navigating.
+   * Gets the next focusable element
+   * @param {Object} options
+   * @param {Element} options.start The element from which focus is moving away
+   * @param {number} options.direction The direction of navigating.
+   * @returns {Element} The element to which focus is moving
    */
-  navigate = direction => {
-    const items = [...this.element.querySelectorAll(this.options.selectorSubmenuLink)];
-    const start = this.getCurrentNavigation();
-    const getNextItem = old => {
-      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
-      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+  getNextFocusTarget = ({ start, direction }) => {
+    const items = [...this.element.querySelectorAll(this.options.selectorTopLevelNavAnchor)];
+    const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
+    const handleOverflow = (index, length) => index - (index < length ? 0 : length);
 
-      // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
-      const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
-    };
-    getNextItem(start).focus();
+    // `items.indexOf(start)` may be -1 (Scenario of no previous focus)
+    const index = Math.max(items.indexOf(start) + direction, -1);
+    return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
   };
 
   /**
@@ -53,9 +63,30 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
       39: this.constructor.NAVIGATE.FORWARD, // right arrow
     };
     const keyCodeMatches = keyCodes[event.which];
-    if (keyCodeMatches) {
-      this.navigate(keyCodeMatches);
+    if (!keyCodeMatches) {
+      return;
     }
+    const start = this.getCurrentNavigation();
+
+    const nextFocusTarget = this.getNextFocusTarget({ start, direction: keyCodeMatches });
+    const nextHeaderSubmenuDOMNode = nextFocusTarget.closest('[data-header-submenu]');
+    if (!nextHeaderSubmenuDOMNode) {
+      nextFocusTarget.focus();
+      return;
+    }
+    const startHeaderSubmenuDOMNode = start.closest('[data-header-submenu]');
+    if (!startHeaderSubmenuDOMNode) {
+      nextFocusTarget.focus();
+      return;
+    }
+    const startHeaderSubmenuClass = HeaderSubmenu.create(startHeaderSubmenuDOMNode);
+    const menuPreviouslyOpen = startHeaderSubmenuClass.getCurrentState();
+    if (!menuPreviouslyOpen) {
+      nextFocusTarget.focus();
+      return;
+    }
+    const nextHeaderSubmenuClass = HeaderSubmenu.create(nextHeaderSubmenuDOMNode);
+    nextHeaderSubmenuClass.setState({ shouldBeExpanded: true, shouldFocusOnOpen: true });
   };
 
   /**
@@ -77,6 +108,8 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
       selectorSubmenu: `.${prefix}--header__submenu`,
       selectorSubmenuLink: `.${prefix}--header__menu-title`,
       selectorSubmenuItem: `.${prefix}--header__menu-title > .${prefix}--header__menu-item`,
+      selectorNavAnchor: `.${prefix}--header__menu-item`,
+      selectorTopLevelNavAnchor: `.${prefix}--header__menu-bar > li > .${prefix}--header__menu-item`,
     };
   }
 
