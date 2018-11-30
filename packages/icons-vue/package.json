@@ -1,16 +1,11 @@
 {
-  "name": "@carbon/icons-react",
+  "name": "@carbon/icons-vue",
   "version": "0.0.1-alpha.20",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-react",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-vue",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
-  "files": [
-    "es",
-    "lib",
-    "umd"
-  ],
   "keywords": [
     "ibm",
     "elements",
@@ -25,21 +20,14 @@
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib umd"
   },
-  "dependencies": {
-    "@carbon/icon-helpers": "0.0.1-alpha.20",
-    "prop-types": "^15.6.2"
-  },
   "devDependencies": {
     "@carbon/cli-reporter": "0.0.1-alpha.20",
+    "@carbon/icon-helpers": "0.0.1-alpha.20",
     "@carbon/icons": "0.0.1-alpha.20",
-    "change-case": "^3.0.2",
-    "fs-extra": "^7.0.0",
-    "prettier": "^1.14.3",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "fs-extra": "^7.0.1",
+    "prettier": "^1.15.2",
     "rimraf": "^2.6.2",
-    "rollup": "^0.66.6",
-    "rollup-plugin-virtual": "^1.0.1"
+    "rollup": "^0.67.3"
   },
   "sideEffects": false
 }

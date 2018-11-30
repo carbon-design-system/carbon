@@ -42,5 +42,6 @@
     "fs-extra": "7.0.1",
     "rollup": "^0.66.6",
     "typescript": "2.9.2"
-  }
+  },
+  "sideEffects": false
 }

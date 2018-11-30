@@ -48,7 +48,9 @@ class ConsoleReporter {
   }
 
   _logCategory(category, color, message) {
-    const block = this.format[color](` ${category.toUpperCase()} `);
+    const block = this.format[color](
+      ` ${chalk.black(category.toUpperCase())} `
+    );
     this.log(`${block} ${message}`);
   }
 }

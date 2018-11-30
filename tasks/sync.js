@@ -26,6 +26,7 @@ const DEFAULT_KEYWORDS = [
 // for the value from `packageJsonFields` and comparing it with the other value.
 const packageJsonFields = [
   'name',
+  'private',
   'description',
   'version',
   'license',
@@ -40,6 +41,7 @@ const packageJsonFields = [
   'peerDependencies',
   'dependencies',
   'devDependencies',
+  'sideEffects',
   'eyeglass',
 ].reduce(
   (acc, key, index) => ({
