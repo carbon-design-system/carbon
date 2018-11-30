@@ -2,9 +2,7 @@
   <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
     <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
     {{#if featureFlags.componentsX}}
-      <svg width="12" height="7" viewBox="0 0 12 7">
-        <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
-      </svg>
+      {{ carbon-icon 'ChevronDownGlyph' }}
     {{else}}
       <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
         <path d="M10 0L5 5 0 0z"></path>
