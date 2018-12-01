@@ -219,7 +219,7 @@
 }
 
 @include exports('left-nav-trigger') {
-  @if not(feature-flag-enabled('features-x')) {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
     @include left-nav-trigger;
   }
 }

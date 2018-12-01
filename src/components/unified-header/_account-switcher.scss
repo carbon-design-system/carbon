@@ -299,7 +299,7 @@
 }
 
 @include exports('account-switcher') {
-  @if not(feature-flag-enabled('features-x')) {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
     @include account-switcher;
   }
 }

@@ -234,7 +234,7 @@
 }
 
 @include exports('global-header') {
-  @if not(feature-flag-enabled('features-x')) {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
     @include global-header;
   }
 }

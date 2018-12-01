@@ -425,7 +425,7 @@
 }
 
 @include exports('topnav') {
-  @if not(feature-flag-enabled('features-x')) {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
     @include topnav;
   }
 }

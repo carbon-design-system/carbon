@@ -247,7 +247,7 @@
 }
 
 @include exports('data-table') {
-  @if not(feature-flag-enabled('features-x')) {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
     @include data-table;
   }
 }

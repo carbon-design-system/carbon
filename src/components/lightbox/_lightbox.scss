@@ -60,7 +60,7 @@
 }
 
 @include exports('lightbox') {
-  @if not(feature-flag-enabled('features-x')) {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
     @include lightbox;
   }
 }

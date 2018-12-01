@@ -8,7 +8,7 @@ $feature-flags: () !default;
 // Default feature flag values
 $default-feature-flags: (
   components-x: false,
-  features-x: false,
+  breaking-changes-x: false,
   ui-shell: false,
 );
 
