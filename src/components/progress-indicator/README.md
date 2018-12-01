@@ -5,7 +5,7 @@
 Use these modifiers with `.bx--progress` class.
 
 | Selector                       | Description                                    |
-|--------------------------------|------------------------------------------------|
+| ------------------------------ | ---------------------------------------------- |
 | .bx--progress-step--current    | Applies styles for the current progress-step   |
 | .bx--progress-step--incomplete | Applies styles for an incomplete progress-step |
 | .bx--progress-step--complete   | Applies styles for a complete progress-step    |
@@ -36,7 +36,7 @@ ProgressIndicator.create(document.getElementById('my-progress'));
 #### Public Methods
 
 | Name       | Params                   | Description                                                                                                                                                                                                                                                    |
-|------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | getSteps   |                          | Returns Array of Objects with `element` and `order` key/value pairs. The `element` key contains a step element. The `order` key is what order the step element is, order starts counting from 1 (the first step element) to whatever the last step element is. |
 | getCurrent |                          | Returns an Object with data of the current step (`element` and `order` key/value pairs)                                                                                                                                                                        |
 | setCurrent | newCurrentStep: `Number` | Changes the current step with the given `index` number. (ex. `setCurrent(0)` sets the first step as the current step)                                                                                                                                          |
@@ -56,7 +56,7 @@ progressIndicatorInstance.setCurrent(1);
 #### Options
 
 | Option                | Default Selector                 | Description                                         |
-|-----------------------|----------------------------------|-----------------------------------------------------|
+| --------------------- | -------------------------------- | --------------------------------------------------- |
 | `selectorInit`        | `[data-progress]`                | The selector to find the ProgressIndicator element. |
 | `selectorStepElement` | `.bx--progress-step`             | The selector to find the step element.              |
 | `selectorCurrent`     | `.bx--progress-step--current`    | The selector to find the step current step element. |
@@ -69,18 +69,18 @@ progressIndicatorInstance.setCurrent(1);
 
 #### Classes
 
-| Name                             | Description                                         |
-|----------------------------------|-----------------------------------------------------|
-| `bx--progress-step`              | The class for a step element                        |
-| `bx--progress-step--complete`    | The class for a complete step element               |
-| `bx--progress-step--incomplete`  | The class for an incomplete step element            |
-| `bx--progress-step--current`     | The class for a current step element                |
+| Name                            | Description                              |
+| ------------------------------- | ---------------------------------------- |
+| `bx--progress-step`             | The class for a step element             |
+| `bx--progress-step--complete`   | The class for a complete step element    |
+| `bx--progress-step--incomplete` | The class for an incomplete step element |
+| `bx--progress-step--current`    | The class for a current step element     |
 
 ### FAQ
 
 #### Adding or removing Progress steps
 
-Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically acommodate for any number of steps. A Progress step in HTML looks like this:
+Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically accommodate for any number of steps. A Progress step in HTML looks like this:
 
 ```html
 <li class="bx--progress-step bx--progress-step--complete">
