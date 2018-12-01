@@ -14,7 +14,7 @@ export default class TabsSkeleton extends React.Component {
       <nav className={`${prefix}--tabs ${prefix}--skeleton`}>
         <div className={`${prefix}--tabs-trigger`}>
           <div className={`${prefix}--tabs-trigger-text`}>&nbsp;</div>
-          <svg width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+          <svg width="10" height="5" viewBox="0 0 10 5" fillRule="evenodd">
             <path d="M10 0L5 5 0 0z" />
           </svg>
         </div>
