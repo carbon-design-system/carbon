@@ -9,7 +9,6 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import DropdownV2 from '../DropdownV2';
-import DropdownItem from '../DropdownItem';
 import DropdownSkeleton from '../DropdownV2/Dropdown.Skeleton';
 
 describe('DropdownV2', () => {
@@ -38,24 +37,6 @@ describe('DropdownV2', () => {
     const wrapper = mount(<DropdownV2 {...mockProps} />);
     openMenu(wrapper);
     assertMenuOpen(wrapper, mockProps);
-  });
-
-  it('should render custom item components', () => {
-    const wrapper = mount(<DropdownV2 {...mockProps} />);
-    wrapper.setProps({
-      itemToElement: item => <div className="mock-item">{item.label}</div>,
-    });
-    openMenu(wrapper);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render DropdownItem components', () => {
-    const wrapper = mount(<DropdownV2 {...mockProps} />);
-    wrapper.setProps({
-      itemToElement: DropdownItem,
-    });
-    openMenu(wrapper);
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('should specify light version as expected', () => {
