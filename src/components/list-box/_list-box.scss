@@ -219,6 +219,10 @@ $list-box-menu-width: rem(300px);
     outline: none;
   }
 
+  .#{$prefix}--list-box__selection--disabled:hover {
+    cursor: not-allowed;
+  }
+
   // Descendant of a `list-box` that displays a list of options to select
   .#{$prefix}--list-box__menu {
     @include box-shadow();
