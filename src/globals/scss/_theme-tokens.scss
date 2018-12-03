@@ -45,6 +45,10 @@
   $input-label-weight: 600 !default !global;
   $focus: $color__blue-20 !default !global;
 
+  @if not feature-flag-enabled('breaking-changes-x') {
+    @include theme--v9;
+  }
+
   // Button Theme Variables
   $button-font-weight: 600 !default !global;
   $button-font-size: 0.875rem !default !global;
@@ -61,6 +65,9 @@
   $accordion-arrow-margin: 0 0 0 $spacing-2xs !default !global;
   $accordion-title-margin: 0 0 0 $spacing-md !default !global;
   $accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default !global;
+  $accordion-disabled: rgba($text-01, 0.5) !default !global;
+  $accordion-border: $ui-04 !default !global;
+  $accordion-border-disabled: rgba($ui-04, 0.5) !default !global;
 
   // Card
   $card-text-align: center !default !global;
@@ -100,6 +107,12 @@
 
   // Skeleton Loading
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01
+}
+
+@mixin theme--v9() {
+  $accordion-disabled: $text-01 !default !global;
+  $accordion-border: $ui-03 !default !global;
+  $accordion-border-disabled: $ui-03 !default !global;
 }
 
 // Light Experimental Theme

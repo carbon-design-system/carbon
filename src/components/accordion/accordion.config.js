@@ -16,6 +16,7 @@ module.exports = {
           {
             title: 'Section 1 title',
             paneId: 'pane1',
+            disabled: true,
           },
           {
             title: 'Section 2 title',
@@ -28,6 +29,7 @@ module.exports = {
           {
             title: 'Section 4 title',
             paneId: 'pane4',
+            disabled: true,
           },
         ],
       },
