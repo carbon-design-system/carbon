@@ -119,7 +119,11 @@ class Tab extends ContentSwitcher {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (menu) {
       menu.classList.toggle(this.options.classHidden, typeof force === 'undefined' ? force : !force);
-      trigger.classList.toggle(this.options.classOpen);
+      if (menu.classList.contains(this.options.classHidden)) {
+        trigger.classList.remove(this.options.classOpen);
+      } else {
+        trigger.classList.add(this.options.classOpen);
+      }
     }
   }
 

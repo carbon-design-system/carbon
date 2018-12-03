@@ -1,13 +1,26 @@
 <div class="{{@root.prefix}}--form-item">
-  <input id="text-input-3" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Optional placeholder text">
-  <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
+  {{#if componentsX}}
+    <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
+    <input id="text-input-3" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Optional placeholder text">
+  {{else}}
+    <input id="text-input-3" type="text" class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="Optional placeholder text">
+    <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
+  {{/if}}
 </div>
 <div class="{{@root.prefix}}--form-item">
-  <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}" rows="4" cols="50" placeholder="Placeholder text."></textarea>
-  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+  {{#if componentsX}}
+    <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+    <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}" rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  {{else}}
+    <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}" rows="4" cols="50" placeholder="Placeholder text."></textarea>
+    <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+  {{/if}}
 </div>
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--select{{#if light}} {{@root.prefix}}--select--light{{/if}}">
+    {{#if componentsX}}
+      <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{/if}}
     <select id="select-id" class="{{@root.prefix}}--select-input">
       {{#each selectItems}}
         {{#if items}}
@@ -21,10 +34,16 @@
         {{/if}}
       {{/each}}
     </select>
-    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
-    <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{#if componentsX}}
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+    {{else}}
+      <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+      </svg>
+    {{/if}}
+    {{#unless componentsX}}
+      <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{/unless}}
   </div>
 </div>
 <div class="{{@root.prefix}}--form-item">
