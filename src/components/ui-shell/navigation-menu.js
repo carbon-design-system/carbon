@@ -196,7 +196,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
   /**
    * Enum for navigating backward/forward.
    * @readonly
-   * @member NavigationMenuPanl.NAVIGATE
+   * @member NavigationMenuPanel.NAVIGATE
    * @type {Object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
