@@ -97,7 +97,7 @@
   }
 }
 
-@mixin form--experimental {
+@mixin form--x {
   .#{$prefix}--fieldset {
     @include reset;
     margin-bottom: $spacing-xl;
@@ -186,7 +186,7 @@
 
 @include exports('form') {
   @if feature-flag-enabled('components-x') {
-    @include form--experimental;
+    @include form--x;
   } @else {
     @include form;
   }
