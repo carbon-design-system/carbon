@@ -12,6 +12,7 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 
 const { prefix } = settings;
+const noop = () => undefined;
 
 export default class MultiSelect extends React.Component {
   static propTypes = {
@@ -203,7 +204,7 @@ export default class MultiSelect extends React.Component {
                 <ListBox.Field {...getButtonProps({ disabled })}>
                   {selectedItem.length > 0 && (
                     <ListBox.Selection
-                      clearSelection={clearSelection}
+                      clearSelection={!disabled ? clearSelection : noop}
                       selectionCount={selectedItem.length}
                     />
                   )}
