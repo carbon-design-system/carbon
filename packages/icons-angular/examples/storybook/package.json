@@ -1,5 +1,6 @@
 {
-  "name": "storybook",
+  "name": "@carbon/icons-angular-examples-storybook",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
