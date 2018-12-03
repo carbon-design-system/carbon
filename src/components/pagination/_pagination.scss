@@ -12,7 +12,7 @@ $css--helpers: true;
 @import '../select/select';
 @import '../text-input/text-input';
 
-@include exports('pagination') {
+@mixin pagination {
   .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
     border-top: 0;
   }
@@ -130,6 +130,10 @@ $css--helpers: true;
       }
     }
 
+    .#{$prefix}--select-input:focus .#{$prefix}--select-option-label {
+      display: none;
+    }
+
     .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
       right: 0.3rem;
       top: 0.625rem;
@@ -187,5 +191,203 @@ $css--helpers: true;
   .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
     margin-right: 1rem;
     margin-bottom: 0;
+  }
+}
+
+@mixin pagination--x {
+  .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
+    border-top: 0;
+  }
+
+  .#{$prefix}--pagination {
+    @include reset;
+    @include font-family;
+    width: 100%;
+    background-color: $ui-01;
+    display: flex;
+    align-items: center;
+    border: 1px solid $ui-03;
+    height: rem(48px);
+
+    .#{$prefix}--form-item {
+      flex: auto;
+    }
+  }
+
+  .#{$prefix}--pagination__left {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--pagination__right {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .#{$prefix}--pagination__text {
+    @include typescale('zeta');
+    color: $text-02;
+    display: none;
+    padding-right: $spacing-2xs;
+    padding-top: 1px;
+
+    @include breakpoint('530px') {
+      display: inline-block;
+    }
+  }
+
+  .#{$prefix}--pagination__button-icon {
+    height: rem(12px);
+    width: rem(12px);
+    fill: $ui-05;
+    pointer-events: none;
+    transition: $transition--base;
+    margin-top: $spacing-3xs;
+  }
+
+  .#{$prefix}--pagination__button {
+    @include reset;
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+    padding: 0 14px;
+    border-left: 1px solid $ui-03;
+
+    &:hover {
+      .#{$prefix}--pagination__button-icon {
+        fill: $hover-secondary;
+      }
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled:hover {
+      cursor: default;
+
+      .#{$prefix}--pagination__button-icon {
+        fill: $ui-05;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination__button--no-index {
+    border-right: 0;
+    margin-right: 1px;
+  }
+
+  .#{$prefix}--pagination {
+    .#{$prefix}--select {
+      height: 100%;
+    }
+
+    .#{$prefix}--select--inline {
+      margin-right: 0;
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .#{$prefix}--select-input {
+      box-sizing: border-box;
+      display: block;
+      height: 100%;
+      width: auto;
+      padding: 0 rem(44px) 0 $spacing-md;
+      margin: 0;
+      text-align-last: center;
+      box-shadow: none;
+      border: none;
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
+      top: 1.25rem;
+      width: auto;
+      height: auto;
+    }
+
+    .#{$prefix}--select__item-count {
+      border-right: 1px solid $ui-03;
+      margin-right: $spacing-md;
+    }
+    .#{$prefix}--select__item-count .#{$prefix}--select-input {
+      font-weight: 600;
+    }
+
+    .#{$prefix}--select__page-number {
+      border-left: 1px solid $ui-03;
+    }
+
+    .#{$prefix}--text-input {
+      background-color: $field-01;
+      height: rem(24px);
+      min-width: rem(24px);
+      width: rem(24px);
+      padding: 0;
+      margin: 0;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: none;
+      order: 0;
+
+      &:focus {
+        @include focus-outline('border');
+      }
+    }
+  }
+
+  .#{$prefix}--pagination--inline {
+    height: 42px;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    margin-right: -1rem;
+
+    .#{$prefix}--pagination__button {
+      height: rem(40px);
+      border-left: 1px solid $ui-03;
+      border-right: 1px solid $ui-03;
+      margin: 0;
+    }
+
+    .#{$prefix}--pagination__button--forward {
+      border-right: 0;
+      padding: 0 $spacing-md;
+      margin-left: $spacing-md;
+    }
+
+    .#{$prefix}--pagination__button--backward {
+      margin: 0 $spacing-md;
+      padding: 0 $spacing-md;
+    }
+
+    .#{$prefix}--select__arrow {
+      right: 0;
+      top: 0.6rem;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+@include exports('pagination') {
+  @if feature-flag-enabled('components-x') {
+    @include pagination--x;
+  } @else {
+    @include pagination;
   }
 }
