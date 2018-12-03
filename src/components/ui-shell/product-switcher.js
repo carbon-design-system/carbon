@@ -1,7 +1,26 @@
 import NavigationMenuPanel from './navigation-menu-panel';
+import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
+import onFocusOutByKeyboard from '../../globals/js/misc/on-focus-by-keyboard';
 
 export default class ProductSwitcher extends NavigationMenuPanel {
+  /**
+   * A navigation menu
+   * @extends NavigationMenuPanel
+   * @param {HTMLElement} element The element working as a selector.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS class to find product
+   * switchers
+   * @param {string} [options.attribInitTarget] The attribute name in the
+   * launcher buttons to find target product switcher
+   * @param {string} [options.classProductSwitcherExpanded] The CSS class
+   * for an expanded product switcher
+   */
+  constructor(element, options) {
+    super(element, options);
+    this.manage(on(element, 'keydown', this._handleKeyDown));
+    this.manage(onFocusOutByKeyboard(element, 'blur', this._handleFocusOut));
+  }
   /**
    * id of currently active trigger button
    * @type {string}
@@ -17,6 +36,33 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * @type {Set}
    */
   triggerButtonIds = new Set();
+
+  /**
+   * When losing focus of the element via keyboard, place focus back on
+   * trigger button
+   * @param {Event} event The event triggering this method
+   */
+  _handleFocusOut = event => {
+    if (this.element.contains(event.relatedTarget)) {
+      return;
+    }
+    const currentTriggerButton = this.element.ownerDocument.getElementById(this.current);
+    if (currentTriggerButton) {
+      currentTriggerButton.focus();
+    }
+  };
+
+  /**
+   * @param {Event} event The event triggering this method
+   */
+  _handleKeyDown = event => {
+    const isExpanded = !this.element.hasAttribute('hidden');
+    if (event.which === 27 && isExpanded) {
+      const triggerButton = this.current;
+      this.changeState(this.constructor.SELECT_NONE);
+      this.element.ownerDocument.getElementById(triggerButton).focus();
+    }
+  };
 
   createdByLauncher = event => {
     const isExpanded = this.element.classList.contains(this.options.classProductSwitcherExpanded);
@@ -66,6 +112,13 @@ export default class ProductSwitcher extends NavigationMenuPanel {
       currentTriggerButton.classList.toggle(this.options.classNavigationMenuPanelHeaderActionActive);
       currentTriggerButton.setAttribute('aria-label', label);
       currentTriggerButton.setAttribute('title', label);
+    }
+
+    if (state !== this.constructor.SELECT_NONE) {
+      this.element.setAttribute('tabindex', '0');
+      this.element.focus();
+    } else {
+      this.element.setAttribute('tabindex', '-1');
     }
 
     callback();
