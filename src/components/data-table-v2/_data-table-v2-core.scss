@@ -259,10 +259,23 @@
   }
 
   // Options
-
   .#{$prefix}--data-table-v2-header {
     margin-bottom: $spacing-xs;
+    background: $ui-01;
+    height: rem(88px);
     color: $text-01;
+    @include font-size('20');
+    font-weight: 300;
+    padding: 22px 0 0 $spacing-md;
+  }
+
+  .#{$prefix}--data-table-v2-optional {
+    //THIS IS NOT WORKING
+    position: relative;
+    left: rem(17px);
+    top: rem(-50px);
+    @include font-size('14');
+    color: $text-02;
   }
 
   .#{$prefix}--data-table-v2--zebra {
