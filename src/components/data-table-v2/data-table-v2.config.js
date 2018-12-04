@@ -96,7 +96,22 @@ const toolbarActionsX = [
   },
   {
     icon: iconSettings,
+  },
+];
+
+const toolbarActionsXDisabled = [
+  {
+    icon: iconSearch,
+  },
+  {
+    icon: iconSettings,
     disabled: true,
+  },
+];
+
+const toolbarActionsXNoSearch = [
+  {
+    icon: iconSettings,
   },
 ];
 
@@ -386,6 +401,7 @@ module.exports = {
       `,
       context: {
         title: 'Table title',
+        state: 'default',
         optionalHelper: 'Optional Helper Text',
         batchActions,
         toolbarActions,
@@ -440,10 +456,11 @@ module.exports = {
         title: 'Table title',
         small: true,
         hasToolbar: true,
+        state: 'disabled',
         columns: columnsSmall,
         batchActions,
         toolbarActions,
-        toolbarActionsX,
+        toolbarActionsXDisabled,
         rows,
       },
     },
@@ -452,10 +469,11 @@ module.exports = {
       label: 'Pagination',
       context: {
         hasPager: true,
+        state: 'persistent-search',
         title: 'Table title',
         batchActions,
         toolbarActions,
-        toolbarActionsX,
+        toolbarActionsXNoSearch,
         columns,
         rows,
         selectedItemsCounterLabel: `
