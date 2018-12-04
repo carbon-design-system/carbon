@@ -10,26 +10,20 @@
 > collection of packages for different elements of this language. We'll be
 > introducing additional elements over the next several months.
 
-## Quick Start
+## About
 
-To get started with one of the element packages, you can run one of the
-following commands:
+The `carbon-elements` package is currently an experimental effort from the
+Carbon Design System. All work in this project represents pre-release work and is
+not intended for production.
 
-Run the following command using [npm](https://www.npmjs.com/):
+## Contributors
 
-```bash
-npm install -S @carbon/icons
-```
+The design for elements in the IBM Design Language could not have been
+possible without the incredible work done by the following individuals:
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
-instead:
-
-```bash
-yarn add @carbon/icons
-```
-
-In this case, `icons` is the elements package name that you could install from
-this project.
+Mike Abbink, In-Hee Bae, Sadek Bazaraa, Chiu-Ping Chiu, Conrad Ennis,
+Peter Garvin, Hayley Hughes, Ryan Mellody, Erica Raymond, Denise Shaw, Wonil Suh,
+and Shixie Trofimov.
 
 ## 🤲 Contributing
 
