@@ -1,65 +1,93 @@
+// https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_breakpoints.scss
 @import 'convert';
 
-$cell-padding: 1rem;
+$grid-cell-padding: rem(16px);
+$grid-gutter: rem(32px);
 
 // Initial map of our breakpoints and their values
-$breakpoints: (
+$grid-breakpoints: (
   sm: (
-    width: rem(320px),
     columns: 4,
-    gutter: rem(16px),
     margin: 0,
+    width: rem(320px),
   ),
   md: (
-    width: rem(672px),
     columns: 8,
-    gutter: rem(16px),
     margin: rem(16px),
+    width: rem(672px),
   ),
   lg: (
-    width: rem(1056px),
     columns: 16,
-    gutter: rem(16px),
     margin: rem(16px),
+    width: rem(1056px),
   ),
   xlg: (
-    width: rem(1312px),
     columns: 16,
-    gutter: rem(16px),
     margin: rem(16px),
+    width: rem(1312px),
   ),
   max: (
-    width: rem(1584px),
     columns: 16,
-    gutter: rem(16px),
     margin: rem(16px),
+    width: rem(1584px),
   ),
 ) !default;
 
-$smallest-breakpoint: nth(map-keys($breakpoints), 1);
-
-@function breakpoint-min($name) {
-  @return $name == $smallest-breakpoint;
+/// Get the value of the next breakpoint, or null for the last breakpoint.
+/// @param {String} $name - the name of the brekapoint
+/// @param {Map} $breakpoints - a map of breakpoints where the key is the name
+/// of the breakpoint and the value is the values for the breakpoint
+/// @param {List} $breakpoint-names - a list of names from the $breakpoints map
+/// @returns {String}
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+  @if $n != null and $n < length($breakpoint-names) {
+    @return nth($breakpoint-names, $n + 1);
+  }
+  @return null;
 }
 
-@function get-min-breakpoint() {
-  @return map-merge(
-    (
-      name: sm,
-    ),
-    map-get($breakpoints, sm)
-  );
+@function breakpoint-prev(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+  @if $n != null and $n > 1 {
+    @return nth($breakpoint-names, $n - 1);
+  }
+  @return null;
+}
+
+/// Check to see if the given breakpoint name
+@function is-smallest-breakpoint($name, $breakpoints: $grid-breakpoints) {
+  @return index(map-keys($breakpoints), $name) == 1;
+}
+
+/// Get the infix for a given breakpoint in a list of breakpoints. Usesful for
+/// generate the size part in a selector, for example: `.prefix--col-sm-2`
+/// @param {String} $name - the name of the breakpoint
+/// @returns {String}
+@function breakpoint-infix($name) {
+  @return '-#{$name}';
 }
 
 /// Generate a media query up to the width of the given breakpoint name
 /// @param {string} $name
 /// @content
-@mixin breakpoint-up($name) {
+@mixin breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $breakpoint: map-get($breakpoints, $name);
+  $width: map-get($breakpoint, width);
+
   @if map-has-key($breakpoints, $name) {
-    @if $name == $smallest-breakpoint {
+    @if is-smallest-breakpoint($name, $breakpoints) {
       @content;
     } @else {
-      @media (min-width: map-deep-get($breakpoints, $name, width)) {
+      @media (min-width: $width) {
         @content;
       }
     }
@@ -71,12 +99,14 @@ $smallest-breakpoint: nth(map-keys($breakpoints), 1);
 /// Generate a media query for the maximum width of the given styles
 /// @param {string} $name
 /// @content
-@mixin breakpoint-down($name) {
+@mixin breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $breakpoint: map-get($breakpoints, $name);
+  $width: map-get($breakpoint, width);
   @if map-has-key($breakpoints, $name) {
-    @if $name == $smallest-breakpoint {
+    @if is-smallest-breakpoint($name, $breakpoints) {
       @content;
     } @else {
-      @media (max-width: map-deep-get($breakpoints, $name, width)) {
+      @media (max-width: $width) {
         @content;
       }
     }
@@ -90,7 +120,7 @@ $smallest-breakpoint: nth(map-keys($breakpoints), 1);
 /// @param {string} $lower
 /// @param {string} $upper
 /// @content
-@mixin breakpoint-between($lower, $upper) {
+@mixin breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
   $min: map-get($breakpoints, $lower);
   $max: map-get($breakpoints, $upper);
 
@@ -114,8 +144,8 @@ $smallest-breakpoint: nth(map-keys($breakpoints), 1);
 /// Generate a media query for a given breakpoint
 /// @param {string} $breakpoint
 /// @content
-@mixin breakpoint($name) {
-  @include breakpoint-up($name) {
+@mixin breakpoint($name, $breakpoints: $grid-breakpoints) {
+  @include breakpoint-up($name, $breakpoints) {
     @content;
   }
 }

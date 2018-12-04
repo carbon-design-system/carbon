@@ -12,10 +12,16 @@
     "gzip": 20
   },
   {
-    "filename": "_core.scss",
+    "filename": "_col.scss",
     "package": "@carbon/grid",
-    "size": 48169,
-    "gzip": 2658
+    "size": 168,
+    "gzip": 150
+  },
+  {
+    "filename": "_container.scss",
+    "package": "@carbon/grid",
+    "size": 171,
+    "gzip": 152
   },
   {
     "filename": "_prefix.scss",
@@ -24,16 +30,16 @@
     "gzip": 20
   },
   {
-    "filename": "12.scss",
+    "filename": "_row.scss",
     "package": "@carbon/grid",
-    "size": 48169,
-    "gzip": 2657
+    "size": 165,
+    "gzip": 148
   },
   {
-    "filename": "alignment.scss",
+    "filename": "12.scss",
     "package": "@carbon/grid",
-    "size": 5216,
-    "gzip": 509
+    "size": 43187,
+    "gzip": 2730
   },
   {
     "filename": "aspect-ratio.scss",
@@ -44,14 +50,8 @@
   {
     "filename": "grid.scss",
     "package": "@carbon/grid",
-    "size": 48169,
-    "gzip": 2658
-  },
-  {
-    "filename": "order.scss",
-    "package": "@carbon/grid",
-    "size": 2607,
-    "gzip": 347
+    "size": 43187,
+    "gzip": 2730
   },
   {
     "filename": "import-once.scss",
@@ -102,6 +102,12 @@
     "gzip": 20
   },
   {
+    "filename": "motion.scss",
+    "package": "@carbon/motion",
+    "size": 0,
+    "gzip": 20
+  },
+  {
     "filename": "_font-family.scss",
     "package": "@carbon/type",
     "size": 0,
@@ -115,6 +121,12 @@
   },
   {
     "filename": "_scale.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_spacing.scss",
     "package": "@carbon/type",
     "size": 0,
     "gzip": 20

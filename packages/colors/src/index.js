@@ -124,8 +124,8 @@ export const tokens = {
 
   ui01: colors.gray10,
   ui02: colors.white,
-  ui03: colors.gray30,
-  ui04: colors.gray40,
+  ui03: colors.gray20,
+  ui04: colors.gray50,
   ui05: colors.gray100,
 
   text01: colors.gray100,
@@ -148,21 +148,27 @@ export const tokens = {
 
   // Interaction states
   focus: colors.blue60,
+
   activePrimary: colors.blue80,
-  activeSecondary: colors.blue80,
-  hoverPrimaryText: colors.blue70,
-  activeSecondary: colors.gray80,
+  activeSecondary: colors.gray60,
   activeUI: colors.gray30,
   activeDanger: colors.red80,
-  visitedLink: colors.purple60,
+
   disabled01: colors.gray10,
   disabled02: colors.gray30,
   disabled03: colors.gray50,
 
   hoverUI: '#e5e5e5',
   hoverDanger: '#ba1b23',
-  hoverPrimary: '#1a73ff',
-  hoverSecondary: '#2c2c2c',
+  hoverPrimary: '#0353e9',
+  hoverPrimaryText: colors.blue70,
+  hoverSecondary: '#4c4c4c',
+  hoverRow: '#e5e5e5',
+
+  selectedUI: colors.gray20,
+
   overlay01: 'rgba(255, 255, 255, 0.6)',
   overlay02: 'rgba(243, 243, 243, 0.7)',
+
+  visitedLink: colors.purple60,
 };

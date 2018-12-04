@@ -98,4 +98,7 @@ If your issue appears to be a bug, and hasn't been reported, open a new issue. H
 
     Once all revisions to your pull request are complete, a maintainer will squash and merge your commits for you.
 
+For all details related to development, make sure to check out our [development
+guide](/docs/developing.md)!
+
 **That's it! Thank you for your contribution!**

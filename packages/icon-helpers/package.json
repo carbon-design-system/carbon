@@ -1,12 +1,33 @@
 {
   "name": "@carbon/icon-helpers",
-  "private": true,
-  "version": "0.0.1-alpha.7",
-  "main": "index.js",
+  "version": "0.0.1-alpha.21",
   "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icon-helpers",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "files": [
+    "es",
+    "lib",
+    "umd"
+  ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "scripts": {
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonIconHelpers",
+    "clean": "rimraf es lib umd"
+  },
+  "devDependencies": {
+    "@carbon/bundler": "0.0.1-alpha.21",
+    "rimraf": "^2.6.2"
+  },
+  "sideEffects": false
 }

@@ -1,15 +1,12 @@
-@import '@carbon/layout/scss/breakpoint';
-@import '@carbon/layout/scss/utilities';
 @import '../../scss/grid';
-@import '../../scss/alignment';
 @import '../../scss/aspect-ratio';
-@import '../../scss/order';
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 html,
 body {
   width: 100%;
@@ -67,4 +64,9 @@ h6 {
 
 .bx--grid--condensed .inside {
   background: #3d3d3d;
+}
+
+.full-bleed-example {
+  background-color: #3d3d3d;
+  color: white;
 }

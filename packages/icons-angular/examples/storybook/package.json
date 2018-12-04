@@ -1,0 +1,29 @@
+{
+  "name": "@carbon/icons-angular-examples-storybook",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "build-storybook -o build",
+    "develop": "start-storybook -p 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular-devkit/core": "^0.6.1",
+    "@angular/common": "6",
+    "@angular/compiler": "6",
+    "@angular/core": "6",
+    "@angular/forms": "6",
+    "@angular/platform-browser": "6",
+    "@angular/platform-browser-dynamic": "6",
+    "@babel/core": "7",
+    "@storybook/angular": "^4.0.7",
+    "babel-loader": "7",
+    "rxjs": "6",
+    "tslint": "4",
+    "typescript": "2.9.2",
+    "zone.js": "~0.8.26"
+  }
+}

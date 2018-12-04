@@ -1,0 +1,14 @@
+/**
+ * Row helpers for @carbon/grid. Heavily inspired by, or derived from,
+ * bootstrap:
+ * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
+ */
+@import '@carbon/layout/scss/breakpoint';
+
+/// Used to build a row inside of a grid
+@mixin make-row() {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -1 * $grid-gutter / 2;
+  margin-left: -1 * $grid-gutter / 2;
+}

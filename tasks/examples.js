@@ -1,13 +1,12 @@
 'use strict';
 
+const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const path = require('path');
-const ghpages = require('gh-pages');
 const spawn = require('cross-spawn');
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const BUILD_DIR = path.resolve(__dirname, '../build');
-const GH_REMOTE = process.env.GH_REMOTE || 'origin';
 
 /**
  * The goal here is to create a top-level `build` folder with content to be
@@ -16,6 +15,8 @@ const GH_REMOTE = process.env.GH_REMOTE || 'origin';
  * the `build` folder at: `build/<package-name>/examples/<example-name>`.
  */
 async function main() {
+  reporter.info('Building examples...');
+
   await fs.remove(BUILD_DIR);
   await fs.ensureDir(BUILD_DIR);
 
@@ -59,50 +60,65 @@ async function main() {
 
   const packagesWithExamples = packages.filter(pkg => !!pkg.examples);
 
-  for (const pkg of packagesWithExamples) {
-    const { examples, filepath, name } = pkg;
-    const packageDir = path.join(BUILD_DIR, name, 'examples');
+  await Promise.all(
+    packagesWithExamples.map(async pkg => {
+      reporter.info(`Building examples in package \`${pkg.name}\``);
 
-    await fs.ensureDir(packageDir);
+      const { examples, filepath, name } = pkg;
+      const packageDir = path.join(BUILD_DIR, name, 'examples');
 
-    for (const example of examples) {
-      const exampleDir = path.join(packageDir, example.name);
-      const exampleBuildDir = path.join(example.filepath, 'build');
-      const packageJsonPath = path.join(example.filepath, 'package.json');
-      const packageJson = await fs.readJson(packageJsonPath);
+      await fs.ensureDir(packageDir);
 
-      await fs.ensureDir(exampleDir);
+      await Promise.all(
+        examples.map(async example => {
+          reporter.info(
+            `Building example \`${example.name}\` in package \`${pkg.name}\``
+          );
 
-      if (packageJson.scripts.build) {
-        spawn.sync('yarn', ['install'], {
-          stdio: 'inherit',
-          cwd: example.filepath,
-        });
-        spawn.sync('yarn', ['build'], {
-          stdio: 'inherit',
-          cwd: example.filepath,
-        });
-      }
+          const exampleDir = path.join(packageDir, example.name);
+          const exampleBuildDir = path.join(example.filepath, 'build');
+          const packageJsonPath = path.join(example.filepath, 'package.json');
+          const packageJson = await fs.readJson(packageJsonPath);
 
-      if (await fs.pathExists(exampleBuildDir)) {
-        await fs.copy(exampleBuildDir, exampleDir);
-        continue;
-      }
+          await fs.ensureDir(exampleDir);
 
-      await fs.copy(example.filepath, exampleDir, {
-        filter(src, dest) {
-          const relativePath = path.relative(example.filepath, src);
-          if (relativePath.includes('node_modules')) {
-            return false;
+          if (packageJson.scripts.build) {
+            spawn.sync('yarn', ['install'], {
+              stdio: 'ignore',
+              cwd: example.filepath,
+            });
+            spawn.sync('yarn', ['build'], {
+              stdio: 'ignore',
+              cwd: example.filepath,
+            });
           }
-          if (relativePath[0] === '.') {
-            return false;
+
+          if (await fs.pathExists(exampleBuildDir)) {
+            await fs.copy(exampleBuildDir, exampleDir);
+            return;
           }
-          return true;
-        },
-      });
-    }
-  }
+
+          await fs.copy(example.filepath, exampleDir, {
+            filter(src, dest) {
+              const relativePath = path.relative(example.filepath, src);
+              if (relativePath.includes('node_modules')) {
+                return false;
+              }
+              if (relativePath[0] === '.') {
+                return false;
+              }
+              return true;
+            },
+          });
+          reporter.success(
+            `Built example \`${example.name}\` in package \`${pkg.name}\``
+          );
+        })
+      );
+
+      reporter.success(`Built examples in package \`${pkg.name}\``);
+    })
+  );
 
   const links = packagesWithExamples.reduce((html, pkg) => {
     const links = pkg.examples.reduce((acc, example) => {
@@ -144,21 +160,6 @@ async function main() {
     path.resolve(__dirname, '../packages/icons/svg'),
     path.join(BUILD_DIR, 'icons/svg')
   );
-
-  const publishOptions = {
-    remote: GH_REMOTE,
-    message: 'Auto-generated commit',
-  };
-
-  ghpages.publish(BUILD_DIR, publishOptions, error => {
-    if (error) {
-      console.log(error);
-      process.exit(1);
-      return;
-    }
-
-    console.log('Done!');
-  });
 }
 
 main().catch(error => {

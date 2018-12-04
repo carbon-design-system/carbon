@@ -4,3 +4,6 @@ es
 umd
 build
 dist
+
+# Storybook examples
+**/storybook/stories/**

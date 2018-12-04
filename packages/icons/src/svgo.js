@@ -18,6 +18,12 @@ const plugins = [
           return item.content;
         }
 
+        if (item.hasAttr('id')) {
+          if (item.attr('id').value.includes('Transparent_Rectangle')) {
+            return !item;
+          }
+        }
+
         if (
           item.isElem('rect') &&
           item.attr('width', '32') &&
@@ -154,7 +160,7 @@ const plugins = [
   {
     // Remove any ids or data attributes that are included in SVG source files.
     removeAttrs: {
-      attrs: ['class', 'data-name', 'id'],
+      attrs: ['class', 'data-name', 'fill', 'id'],
     },
   },
 ];

@@ -1,30 +1,40 @@
 {
   "name": "@carbon/icons",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.1-alpha.21",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "es",
     "lib",
     "svg",
     "umd"
   ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "node tasks/build.js",
+    "build": "yarn clean && node tasks/build.js",
+    "clean": "rimraf es lib svg umd meta.json",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "0.0.1-alpha.7",
+    "@carbon/cli-reporter": "0.0.1-alpha.21",
     "change-case": "^3.0.2",
     "del": "^3.0.0",
     "klaw-sync": "^6.0.0",
+    "memfs": "^2.14.0",
     "prettier": "^1.14.3",
+    "rimraf": "^2.6.2",
     "rollup": "^0.66.6",
     "svgo": "^1.1.1"
   }

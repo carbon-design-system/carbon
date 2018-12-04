@@ -1,13 +1,18 @@
 {
   "name": "@carbon/type",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.1-alpha.21",
+  "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/type",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
   "keywords": [
-    "eyeglass-module"
+    "eyeglass-module",
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
   ],
   "publishConfig": {
     "access": "public"
@@ -17,11 +22,11 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/import-once": "0.0.1-alpha.7",
-    "@carbon/layout": "0.0.1-alpha.7"
+    "@carbon/import-once": "0.0.1-alpha.21",
+    "@carbon/layout": "0.0.1-alpha.21"
   },
   "devDependencies": {
-    "@carbon/bundler": "0.0.1-alpha.7",
+    "@carbon/bundler": "0.0.1-alpha.21",
     "rimraf": "^2.6.2"
   },
   "eyeglass": {

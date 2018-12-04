@@ -43,7 +43,7 @@ export default function ExamplesPage() {
                 <Link to={`${PATH_PREFIX}/aspect-ratio`}>Aspect Ratio</Link>
               </li>
               <li>
-                <Link to={`${PATH_PREFIX}/nested`}>Nested</Link>
+                <Link to={`${PATH_PREFIX}/full-bleed`}>Full bleed</Link>
               </li>
             </ul>
           </Column>

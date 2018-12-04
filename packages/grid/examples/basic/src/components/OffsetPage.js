@@ -24,6 +24,18 @@ export default function OffsetPage() {
             <p>This example shows how to leverage offset classes.</p>
           </Column>
         </Row>
+        <Row>
+          <div className="bx--col">
+            <div className="outside">
+              <div className="inside">1</div>
+            </div>
+          </div>
+          <div className="bx--col">
+            <div className="outside">
+              <div className="inside">2</div>
+            </div>
+          </div>
+        </Row>
         {Array.from({ length: total - 1 }, (_, i) => (
           <Row key={i}>
             {createOffset({
