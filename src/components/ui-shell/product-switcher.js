@@ -47,7 +47,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
       return;
     }
     const currentTriggerButton = this.element.ownerDocument.getElementById(this.current);
-    if (currentTriggerButton && !event.relatedTarget.matches(this.options.selectorFloatingMenus)) {
+    if (currentTriggerButton && event.relatedTarget && !event.relatedTarget.matches(this.options.selectorFloatingMenus)) {
       currentTriggerButton.focus();
     }
   };
