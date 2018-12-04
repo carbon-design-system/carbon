@@ -7,7 +7,7 @@
         data-items-per-page>
         {{#each itemsPerPageChoices}}
           <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if selected}} selected{{/if}}>
-            {{label}} {{#if selected}} Items per page{{/if}} 
+            {{label}} {{#if selected}} items per page{{/if}} 
           </option> {{/each}} 
         </select>
         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
@@ -23,7 +23,7 @@
         <select id="select-id-pagination-page" aria-label="select page number to view" class="{{@root.prefix}}--select-input" data-page-number-input>
           {{#each pageNumberChoices}}
             <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if selected}} selected{{/if}}>
-              {{label}} {{#if selected}} of {{totalPages}} {{/if}} 
+              {{label}} {{#if selected}} of {{totalPages}} pages{{/if}} 
             </option> 
           {{/each}} 
         </select>
