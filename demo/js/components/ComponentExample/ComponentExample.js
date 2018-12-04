@@ -55,6 +55,13 @@ class ComponentExample extends Component {
     useStaticFullRenderPage: PropTypes.bool,
   };
 
+  /**
+   * The container where the live demo HTML code should be put into.
+   * @type {HTMLElement}
+   * @private
+   */
+  _container = null;
+
   componentDidMount() {
     this._instantiateComponents();
   }
@@ -76,13 +83,6 @@ class ComponentExample extends Component {
   componentWillUnmount() {
     this._releaseComponents();
   }
-
-  /**
-   * The container where the live demo HTML code should be put into.
-   * @type {HTMLElement}
-   * @private
-   */
-  _container = null;
 
   /**
    * Instantiate/release Carbon components as the container for the live demo HTML code is mounted/unmounted.
@@ -176,6 +176,7 @@ class ComponentExample extends Component {
         <iframe
           className={classNames}
           data-role="window"
+          title="Component Example"
           src={componentLink}
           sandbox="allow-same-origin allow-scripts allow-forms"
           marginWidth="0"
