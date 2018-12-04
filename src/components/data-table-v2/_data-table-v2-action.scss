@@ -211,6 +211,19 @@
       width: rem(160px);
       overflow: hidden;
     }
+
+    .#{$prefix}--toolbar-search-container {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-close {
+      height: rem(32px);
+      width: rem(32px);
+    }
   }
 
   .#{$prefix}--toolbar-content {
@@ -361,10 +374,45 @@
     }
   }
 
-  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container,
-  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
+  .#{$prefix}--toolbar-search-container {
+    width: 100%;
+    height: rem(48px);
+    position: relative;
+    top: rem(-8px);
     opacity: 1;
     transition: opacity $transition--base;
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search {
+    position: initial;
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-magnifier {
+    left: $spacing-md;
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input {
+    height: rem(48px);
+    padding-left: $spacing-3xl;
+    border: none;
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:focus:not([disabled]) {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:hover:not([disabled]) {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:active:not([disabled]),
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:not(:placeholder-shown) {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-close {
+    height: rem(48px);
+    width: rem(48px);
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
