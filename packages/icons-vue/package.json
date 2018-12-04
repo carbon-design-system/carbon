@@ -20,9 +20,11 @@
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib umd"
   },
+  "dependencies": {
+    "@carbon/icon-helpers": "0.0.1-alpha.21"
+  },
   "devDependencies": {
     "@carbon/cli-reporter": "0.0.1-alpha.21",
-    "@carbon/icon-helpers": "0.0.1-alpha.21",
     "@carbon/icons": "0.0.1-alpha.21",
     "fs-extra": "^7.0.1",
     "prettier": "^1.15.2",
