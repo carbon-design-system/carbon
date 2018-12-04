@@ -252,6 +252,7 @@ const rows = [
 ];
 
 module.exports = {
+  hidden: true,
   context: {
     prefix,
   },

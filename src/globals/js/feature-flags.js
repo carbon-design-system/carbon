@@ -53,3 +53,4 @@
  */
 
 exports.componentsX = false;
+exports.breakingChangesX = false;
