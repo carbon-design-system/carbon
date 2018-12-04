@@ -264,7 +264,7 @@
     height: rem(88px);
     color: $text-01;
     @include font-size('20');
-    font-weight: 300;
+    font-weight: 400;
     padding: 22px 0 0 $spacing-md;
     position: relative;
     top: rem(21px);
@@ -273,7 +273,7 @@
   .#{$prefix}--data-table-v2-optional {
     position: relative;
     left: rem(17px);
-    top: rem(-21px);
+    top: rem(-20px);
     @include font-size('14');
     color: $text-02;
   }
