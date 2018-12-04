@@ -50,6 +50,19 @@ like to use. In our application, we can then use them by doing:
 </template>
 ```
 
+If you would rather not register icons globally, you can also import them into individual components.
+
+```js
+import { Bee32 } from '@carbon/icons-vue';
+
+export default {
+  name: 'MyComponent',
+  component: {
+    Bee32
+  }
+};
+```
+
 You can pass in props to any icon component for things like accessibility
 labels, custom classes, event handlers, and more. For example:
 
