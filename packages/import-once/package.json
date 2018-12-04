@@ -1,6 +1,6 @@
 {
   "name": "@carbon/import-once",
-  "version": "0.0.1-alpha.20",
+  "version": "0.0.1-alpha.21",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/import-once",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
