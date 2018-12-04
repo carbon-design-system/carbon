@@ -99,7 +99,7 @@ describe('ProgressIndicator', function() {
     });
   });
 
-  describe('_addOverflowTooltip', function() {
+  describe('addOverflowTooltip', function() {
     let element;
     let instance;
     let stepLabel;
