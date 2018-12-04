@@ -1,6 +1,9 @@
 {{#if hasToolbar}}
 <div class="{{@root.prefix}}--data-table-v2-container" data-table-v2>
-  <h4 class="{{@root.prefix}}--data-table-v2-header">{{title}}</h4>
+    <h4 class="{{@root.prefix}}--data-table-v2-header">{{title}}</h4>
+    {{#if componentsX}}
+      <p class="{{@root.prefix}}--data-table-v2-optional">{{optionalHelper}}</p>
+    {{/if}}
   <section class="{{@root.prefix}}--table-toolbar">
     {{#if batchActions}}
       <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
