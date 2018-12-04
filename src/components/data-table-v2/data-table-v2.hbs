@@ -4,7 +4,7 @@
     {{#if componentsX}}
       <p class="{{@root.prefix}}--data-table-v2-optional">{{optionalHelper}}</p>
     {{/if}}
-  <section class="{{@root.prefix}}--table-toolbar">
+  <section class="{{@root.prefix}}--table-toolbar {{#if small}} {{@root.prefix}}--table-toolbar--small {{/if}}">
     {{#if batchActions}}
       <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
         <div class="{{@root.prefix}}--action-list">
@@ -22,6 +22,8 @@
       </div>
     {{/if}}
 
+    {{#if componentsX}}
+    {{else}}
     <div class="{{@root.prefix}}--toolbar-search-container">
       <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
         <svg class="{{@root.prefix}}--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
@@ -38,16 +40,28 @@
         </button>
       </div>
     </div>
+    {{/if}}
 
     {{#if toolbarActions}}
       <div class="{{@root.prefix}}--toolbar-content">
-        {{#each toolbarActions}}
-          <button class="{{@root.prefix}}--toolbar-action">
-            {{{icon}}}
+        {{#if componentsX}}
+          {{#each toolbarActionsX}}
+            <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
+              {{{icon}}}
+            </button>
+          {{/each}}
+          <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
+            {{#if small }} Primary {{else}} Primary Button {{/if}}
+            {{ carbon-icon 'Add20' class=(add @root.prefix '--btn__icon') }}
           </button>
-        {{/each}}
-
-        <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">{{addNewLabel}}</button>
+        {{else}}
+          {{#each toolbarActions}}
+            <button class="{{@root.prefix}}--toolbar-action">
+              {{{icon}}}
+            </button>
+          {{/each}}
+          <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">{{addNewLabel}}</button>
+        {{/if}}
       </div>
     {{/if}}
   </section>

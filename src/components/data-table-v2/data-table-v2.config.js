@@ -35,6 +35,14 @@ const iconSettings = `
   </svg>
 `;
 
+const iconSearch = `
+  <svg class="${prefix}--toolbar-action__icon" fill-rule="evenodd" width="16" height="16" role="img" name="search" viewBox="0 0 16 16" aria-label="Search" alt="Search">
+  <title>Search</title>
+    <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
+      fill-rule="nonzero" />
+  </svg>
+`;
+
 const menuItems = [
   {
     label: 'Stop app',
@@ -79,6 +87,16 @@ const toolbarActions = [
   },
   {
     icon: iconSettings,
+  },
+];
+
+const toolbarActionsX = [
+  {
+    icon: iconSearch,
+  },
+  {
+    icon: iconSettings,
+    disabled: true,
   },
 ];
 
@@ -371,6 +389,7 @@ module.exports = {
         optionalHelper: 'Optional Helper Text',
         batchActions,
         toolbarActions,
+        toolbarActionsX,
         columns,
         rows,
         selectedItemsCounterLabel: `
@@ -418,8 +437,13 @@ module.exports = {
       name: 'small',
       label: 'Small',
       context: {
+        title: 'Table title',
         small: true,
+        hasToolbar: true,
         columns: columnsSmall,
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
         rows,
       },
     },
@@ -431,6 +455,7 @@ module.exports = {
         title: 'Table title',
         batchActions,
         toolbarActions,
+        toolbarActionsX,
         columns,
         rows,
         selectedItemsCounterLabel: `
