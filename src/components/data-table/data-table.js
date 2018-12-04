@@ -1,3 +1,5 @@
+import warning from 'warning';
+import { breakingChangesX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -6,6 +8,9 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import removedComponent from '../removed-component';
+
+let didWarnAboutDeprecation;
 
 class DataTable extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -26,6 +31,15 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
    */
   constructor(element, options) {
     super(element, options);
+
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `DataTable` component in `carbon-components` has been deprecated. It will be removed in the next major release. ' +
+          'If you still need this component, please use the `DataTableV2` component.'
+      );
+      didWarnAboutDeprecation = true;
+    }
 
     this.container = element.parentNode; // requires the immediate parent to be the container
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
@@ -232,4 +246,4 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   }
 }
 
-export default DataTable;
+export default (!breakingChangesX ? DataTable : removedComponent('DataTable'));
