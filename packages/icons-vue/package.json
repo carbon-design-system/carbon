@@ -1,6 +1,6 @@
 {
   "name": "@carbon/icons-vue",
-  "version": "0.0.1-alpha.21",
+  "version": "0.0.1-alpha.22",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -21,11 +21,11 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "0.0.1-alpha.21"
+    "@carbon/icon-helpers": "0.0.1-alpha.22"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "0.0.1-alpha.21",
-    "@carbon/icons": "0.0.1-alpha.21",
+    "@carbon/cli-reporter": "0.0.1-alpha.22",
+    "@carbon/icons": "0.0.1-alpha.22",
     "fs-extra": "^7.0.1",
     "prettier": "^1.15.2",
     "rimraf": "^2.6.2",

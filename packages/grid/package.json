@@ -1,6 +1,6 @@
 {
   "name": "@carbon/grid",
-  "version": "0.0.1-alpha.21",
+  "version": "0.0.1-alpha.22",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/grid",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
@@ -19,8 +19,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@carbon/import-once": "0.0.1-alpha.21",
-    "@carbon/layout": "0.0.1-alpha.21"
+    "@carbon/import-once": "0.0.1-alpha.22",
+    "@carbon/layout": "0.0.1-alpha.22"
   },
   "eyeglass": {
     "exports": false,
