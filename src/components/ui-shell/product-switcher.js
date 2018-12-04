@@ -47,7 +47,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
       return;
     }
     const currentTriggerButton = this.element.ownerDocument.getElementById(this.current);
-    if (currentTriggerButton) {
+    if (currentTriggerButton && !event.relatedTarget.matches(this.options.selectorFloatingMenus)) {
       currentTriggerButton.focus();
     }
   };
@@ -155,6 +155,14 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     const { prefix } = settings;
     return Object.assign(Object.create(NavigationMenuPanel.options), {
       selectorInit: '[data-product-switcher]',
+      selectorFloatingMenus: `
+        .${prefix}--overflow-menu-options,
+        .${prefix}--overflow-menu-options *,
+        .${prefix}--tooltip,
+        .${prefix}--tooltip *,
+        .flatpicker-calendar,
+        .flatpicker-calendar *
+        `,
       attribInitTarget: 'data-product-switcher-target',
       classProductSwitcherExpanded: `${prefix}--panel--expanded`,
     });
