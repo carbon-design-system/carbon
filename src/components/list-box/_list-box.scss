@@ -219,10 +219,6 @@ $list-box-menu-width: rem(300px);
     outline: none;
   }
 
-  .#{$prefix}--list-box__selection--disabled:hover {
-    cursor: not-allowed;
-  }
-
   // Descendant of a `list-box` that displays a list of options to select
   .#{$prefix}--list-box__menu {
     @include box-shadow();
@@ -362,6 +358,10 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
     background-color: transparent;
     text-decoration: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:hover {
+    cursor: not-allowed;
   }
 
   // Inline variant for a `list-box`
