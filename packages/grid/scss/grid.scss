@@ -1,2 +1,23 @@
+@import '@carbon/layout/scss/breakpoint';
 @import 'prefix';
-@import 'core';
+@import 'container';
+@import 'row';
+@import 'col';
+
+// Default container class for a grid. Includes max-width for each breakpoint
+.#{$prefix}--grid {
+  @include make-container();
+  @include make-container-max-widths();
+}
+
+// Fluid variant of the grid. Will not set max-width for breakpoints and will
+// full-bleed across the page.
+.#{$prefix}--fluid-grid {
+  @include make-container();
+}
+
+.#{$prefix}--row {
+  @include make-row();
+}
+
+@include make-grid-columns($grid-breakpoints, $grid-gutter);

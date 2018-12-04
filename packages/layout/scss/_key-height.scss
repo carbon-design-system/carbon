@@ -5,7 +5,7 @@
 /// heights
 /// @param {string} $breakpoint
 /// @return rem
-@function get-column-width($breakpoint) {
+@function get-column-width($breakpoint, $breakpoints: $grid-breakpoints) {
   @if map-has-key($breakpoints, $breakpoint) {
     $width: map-deep-get($breakpoints, $breakpoint, width);
     $margin: map-deep-get($breakpoints, $breakpoint, margin);
