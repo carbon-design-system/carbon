@@ -611,7 +611,6 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.16.tgz#31a183ed9a7bde293e3d3db89897b27d42dc1bc7"
   integrity sha512-7i2Oes8UB6efnElkT4ArLlGkMBnWJckVIzF9EidkNQ+N86/QTkRGlRedKI5Az9mrw6pEY6q6ncgrdnNYcTxOpw==
 
-"@carbon/icon-helpers@0.0.1-alpha.26":
   version "0.0.1-alpha.26"
   resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.26.tgz#0cb7574cce3e51b90a5cc31170865141366373b2"
   integrity sha512-0WCMQIZrM9PDD7UACEgBoZ0ocrgiF7l0KoGP7Pec7GOJKCfQNuq4XCnd/3uogwQtf58c9CJhcljre2uBeYAC1w==
@@ -629,25 +628,6 @@
   resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.26.tgz#fc302310c213aaca8f5f94fc997c70927b39bd1d"
   integrity sha512-AiVS1kcURQHmGOM1FfZZuLsRFVGTR9s8qxtz3Np+TFw1Sf0qO21b3nUmLYcySi6D2euNZkrMzMsr7v7BIC0j+Q==
 
-"@carbon/layout@^0.0.1-alpha.16":
-  version "0.0.1-alpha.16"
-  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.16.tgz#e31bd09843b1b7dcb8ffcb56c2567fcbdfa78c0a"
-  integrity sha512-URqff84tEEztQj51AIgBF8MjR2zwE9bKTZzfRy8a//OAWumSWYDq1owEx8+tE5O3gLh8QjQzAarlsKv6BDtfCg==
-
-"@carbon/motion@^0.0.1-alpha.16":
-  version "0.0.1-alpha.16"
-  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.16.tgz#e7a3ba19c34ce7bc589cf5804a8aed4cdb6a94c6"
-  integrity sha512-gggWpgksJTjli0c5ZLaNcAEKDX/cAE8VHm32dL6Bb0z6w7jo/YyhE/bt7868t5H2ypsyqJ5Iivjk8ANrYjXh2A==
-
-"@commitlint/cli@^7.0.0":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.1.2.tgz#9ad1b4703679e18e3b1972c4abf0441255219e78"
-  integrity sha512-Dck7MqJCzrATYm4UqIKPdJvLVUuVZcpFw9KicrLw+a9YNIjsaXG9XojgPomTxFBNJZabAYBqKWkqNoFLrFA77w==
-  dependencies:
-    "@commitlint/format" "^7.1.2"
-    "@commitlint/lint" "^7.1.2"
-    "@commitlint/load" "^7.1.2"
-    "@commitlint/read" "^7.1.2"
     babel-polyfill "6.26.0"
     chalk "2.3.1"
     get-stdin "5.0.1"
