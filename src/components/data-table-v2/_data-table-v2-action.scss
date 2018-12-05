@@ -231,6 +231,48 @@
     margin-left: auto;
   }
 
+  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-input {
+    border-bottom: none;
+    height: rem(48px);
+    @include font-size('14');
+    padding-left: $spacing-3xl;
+  }
+
+  .#{$prefix}--toolbar-search-container-hidden {
+    position: relative;
+    top: rem(-8px);
+    height: rem(48px);
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-input:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-input:active,
+  .#{$prefix}--toolbar-content
+    .#{$prefix}--toolbar-search-container-hidden
+    .#{$prefix}--search
+    .#{$prefix}--search-input:not(:placeholder-shown) {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-magnifier {
+    height: rem(48px);
+    width: rem(48px);
+    padding: $spacing-md;
+    left: 0;
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-close {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--search-close:active,
+  .#{$prefix}--search-close:focus {
+    @include focus-outline('reset');
+  }
+
   .#{$prefix}--toolbar-action {
     @include button-reset;
     cursor: pointer;
