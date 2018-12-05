@@ -32,9 +32,9 @@ yarn add carbon-components-react carbon-components carbon-icons
 
 3. For older browsers (e.g. IE11), polyfills listed in [`carbon-components-react/.storybook/polyfills.js` file](./.storybook/polyfills.js) is required.
 
-If you just want to try out `carbon-components-react`, you can also use [CodeSandbox](https://codesandbox.io).
+If you just want to try out `carbon-components-react`, you can also use [CodeSandbox](https://codesandbox.io/s/github/IBM/carbon-components-react/tree/master/examples/codesandbox).
 
-[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/x2mjypo6pp)
+[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/IBM/carbon-components-react/tree/master/examples/codesandbox)
 
 ## Development
 
