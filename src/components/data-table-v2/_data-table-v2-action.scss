@@ -250,14 +250,6 @@
       height: rem(48px);
       width: rem(48px);
     }
-
-    & > .#{$prefix}--search .#{$prefix}--search-close:focus,
-    & > .#{$prefix}--search .#{$prefix}--search-close:active {
-      // @include focus-outline('reset');
-      & > svg {
-        fill: $brand-01;
-      }
-    }
   }
 
   //================================================

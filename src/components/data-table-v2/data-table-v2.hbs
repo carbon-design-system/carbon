@@ -60,9 +60,9 @@
     <div class="{{@root.prefix}}--toolbar-content">
       {{#if componentsX}}
         {{#is state "default"}}
-          <div class="{{@root.prefix}}--toolbar-search-container-hidden">
+          <div class="{{@root.prefix}}--toolbar-search-container-hidden {{@root.prefix}}--toolbar-search-container-active">
             <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-              <div class="{{@root.prefix}}--search-magnifier">
+              <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
                 {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
               </div>
               <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
@@ -79,9 +79,9 @@
           {{/each}}
         {{/is}}
         {{#is state "disabled"}}
-          <div class="{{@root.prefix}}--toolbar-search-container-hidden">
+          <div class="{{@root.prefix}}--toolbar-search-container-hidden {{@root.prefix}}--toolbar-search-container-active">
             <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-              <div class="{{@root.prefix}}--search-magnifier">
+              <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
                 {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
               </div>
               <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
