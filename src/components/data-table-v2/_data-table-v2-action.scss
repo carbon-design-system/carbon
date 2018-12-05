@@ -213,6 +213,7 @@
     top: rem(-8px);
     height: rem(48px);
     width: rem(48px);
+    transition: all 175ms $carbon--standard-easing;
 
     & > .#{$prefix}--search .#{$prefix}--search-input {
       border-bottom: none;
@@ -220,15 +221,6 @@
       @include font-size('14');
       padding-left: $spacing-3xl;
       visibility: hidden;
-    }
-
-    & > .#{$prefix}--search .#{$prefix}--search-input:focus {
-      @include focus-outline('outline');
-    }
-
-    & > .#{$prefix}--search .#{$prefix}--search-input:active,
-    & > .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
-      background: $hover-field;
     }
 
     & > .#{$prefix}--search .#{$prefix}--search-magnifier {
@@ -249,6 +241,7 @@
     & > .#{$prefix}--search .#{$prefix}--search-close {
       height: rem(48px);
       width: rem(48px);
+      visibility: hidden;
     }
   }
 
@@ -257,9 +250,20 @@
   //================================================
   .#{$prefix}--toolbar-search-container-active {
     width: auto;
+    transition: all 175ms $carbon--standard-easing;
 
     & > .#{$prefix}--search .#{$prefix}--search-input {
       visibility: visible;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-input:focus {
+      @include focus-outline('outline');
+      background: $hover-field;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-input:active,
+    & > .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+      background: $hover-field;
     }
 
     & > .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
@@ -267,6 +271,10 @@
     & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
       @include focus-outline('reset');
       background: transparent;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-close {
+      visibility: visible;
     }
   }
 
