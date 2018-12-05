@@ -79,13 +79,13 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
       nextFocusTarget.focus();
       return;
     }
-    const startHeaderSubmenuClass = HeaderSubmenu.create(startHeaderSubmenuDOMNode);
+    const startHeaderSubmenuClass = HeaderSubmenu.components.get(startHeaderSubmenuDOMNode);
     const menuPreviouslyOpen = startHeaderSubmenuClass.getCurrentState();
     if (!menuPreviouslyOpen) {
       nextFocusTarget.focus();
       return;
     }
-    const nextHeaderSubmenuClass = HeaderSubmenu.create(nextHeaderSubmenuDOMNode);
+    const nextHeaderSubmenuClass = HeaderSubmenu.components.get(nextHeaderSubmenuDOMNode);
     nextHeaderSubmenuClass.setState({ shouldBeExpanded: true, shouldFocusOnOpen: true });
   };
 
