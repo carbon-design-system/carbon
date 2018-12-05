@@ -178,6 +178,9 @@
 }
 
 @mixin data-table-v2-action--x {
+  //================================================
+  //TOOLBAR
+  //================================================
   .#{$prefix}--table-toolbar {
     display: flex;
     padding-top: $spacing-xs;
@@ -197,82 +200,95 @@
     }
   }
 
-  .#{$prefix}--table-toolbar--small {
-    height: rem(32px);
-
-    .#{$prefix}--toolbar-action {
-      height: rem(32px);
-      width: rem(32px);
-      padding: $spacing-xs;
-    }
-
-    .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
-      height: rem(32px);
-      width: rem(160px);
-      overflow: hidden;
-    }
-
-    .#{$prefix}--toolbar-search-container {
-      height: rem(32px);
-    }
-
-    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input {
-      height: rem(32px);
-    }
-
-    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-close {
-      height: rem(32px);
-      width: rem(32px);
-    }
-  }
-
   .#{$prefix}--toolbar-content {
     display: flex;
     margin-left: auto;
   }
 
-  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-input {
-    border-bottom: none;
-    height: rem(48px);
-    @include font-size('14');
-    padding-left: $spacing-3xl;
-  }
-
+  //================================================
+  //HIDDEN SEARCH - DEFAULT TOOLBAR
+  //================================================
   .#{$prefix}--toolbar-search-container-hidden {
     position: relative;
     top: rem(-8px);
     height: rem(48px);
-  }
-
-  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-input:focus {
-    @include focus-outline('outline');
-  }
-
-  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-input:active,
-  .#{$prefix}--toolbar-content
-    .#{$prefix}--toolbar-search-container-hidden
-    .#{$prefix}--search
-    .#{$prefix}--search-input:not(:placeholder-shown) {
-    background: $hover-field;
-  }
-
-  .#{$prefix}--toolbar-content .#{$prefix}--toolbar-search-container-hidden .#{$prefix}--search .#{$prefix}--search-magnifier {
-    height: rem(48px);
     width: rem(48px);
-    padding: $spacing-md;
-    left: 0;
+
+    & > .#{$prefix}--search .#{$prefix}--search-input {
+      border-bottom: none;
+      height: rem(48px);
+      @include font-size('14');
+      padding-left: $spacing-3xl;
+      visibility: hidden;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-input:focus {
+      @include focus-outline('outline');
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-input:active,
+    & > .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+      background: $hover-field;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-magnifier {
+      height: rem(48px);
+      width: rem(48px);
+      padding: $spacing-md;
+      left: 0;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
+      @include focus-outline('outline');
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+      background: $hover-field;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-close {
+      height: rem(48px);
+      width: rem(48px);
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-close:focus,
+    & > .#{$prefix}--search .#{$prefix}--search-close:active {
+      // @include focus-outline('reset');
+      & > svg {
+        fill: $brand-01;
+      }
+    }
   }
 
-  .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-close {
-    height: rem(48px);
-    width: rem(48px);
+  //================================================
+  //ACTIVE SEARCH - DEFAULT TOOLBAR
+  //================================================
+  .#{$prefix}--toolbar-search-container-active {
+    width: auto;
+
+    & > .#{$prefix}--search .#{$prefix}--search-input {
+      visibility: visible;
+    }
+
+    & > .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
+    & > .#{$prefix}--search .#{$prefix}--search-magnifier:active,
+    & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+      @include focus-outline('reset');
+      background: transparent;
+    }
   }
 
+  //================================================
+  //SEARCH CLOSE BUTTON
+  //================================================
   .#{$prefix}--search-close:active,
   .#{$prefix}--search-close:focus {
     @include focus-outline('reset');
   }
 
+  //================================================
+  //TOOLBAR BUTTONS
+  //================================================
   .#{$prefix}--toolbar-action {
     @include button-reset;
     cursor: pointer;
@@ -312,6 +328,9 @@
     }
   }
 
+  //================================================
+  //TOOLBAR BUTTON ICONS
+  //================================================
   .#{$prefix}--toolbar-action__icon {
     height: rem(16px);
     width: auto;
@@ -425,6 +444,9 @@
     transition: opacity $transition--base;
   }
 
+  //================================================
+  //PERSISTENT SEARCH - OPTIONAL TOOLBAR
+  //================================================
   .#{$prefix}--toolbar-search-container > .#{$prefix}--search {
     position: initial;
   }
@@ -460,6 +482,38 @@
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
     opacity: 0;
+  }
+
+  //================================================
+  //SMALL TOOLBAR
+  //================================================
+  .#{$prefix}--table-toolbar--small {
+    height: rem(32px);
+
+    .#{$prefix}--toolbar-action {
+      height: rem(32px);
+      width: rem(32px);
+      padding: $spacing-xs;
+    }
+
+    .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
+      height: rem(32px);
+      width: rem(160px);
+      overflow: hidden;
+    }
+
+    .#{$prefix}--toolbar-search-container {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-close {
+      height: rem(32px);
+      width: rem(32px);
+    }
   }
 }
 
