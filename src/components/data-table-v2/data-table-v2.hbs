@@ -1,100 +1,98 @@
 {{#if hasToolbar}}
 <div class="{{@root.prefix}}--data-table-v2-container" data-table-v2>
-    <h4 class="{{@root.prefix}}--data-table-v2-header">{{title}}</h4>
-    {{#if componentsX}}
-      <p class="{{@root.prefix}}--data-table-v2-optional">{{optionalHelper}}</p>
-    {{/if}}
+  <h4 class="{{@root.prefix}}--data-table-v2-header">{{title}}</h4>
+  {{#if componentsX}}
+  <p class="{{@root.prefix}}--data-table-v2-optional">{{optionalHelper}}</p>
+  {{/if}}
   <section class="{{@root.prefix}}--table-toolbar {{#if small}} {{@root.prefix}}--table-toolbar--small {{/if}}">
     {{#if batchActions}}
-      <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
-        <div class="{{@root.prefix}}--action-list">
-          {{#each batchActions}}
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--ghost" type="button">
-              {{label}}
-              {{{icon}}}
-            </button>
-          {{/each}}
-        </div>
-        <div class="{{@root.prefix}}--batch-summary">
-          <p class="{{@root.prefix}}--batch-summary__para">{{{selectedItemsCounterLabel}}}</p>
-          <button data-event="action-bar-cancel" class="{{@root.prefix}}--batch-summary__cancel">{{cancelLabel}}</button>
-        </div>
+    <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
+      <div class="{{@root.prefix}}--action-list">
+        {{#each batchActions}}
+        <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--ghost" type="button">
+          {{label}}
+          {{{icon}}}
+        </button>
+        {{/each}}
       </div>
+      <div class="{{@root.prefix}}--batch-summary">
+        <p class="{{@root.prefix}}--batch-summary__para">{{{selectedItemsCounterLabel}}}</p>
+        <button data-event="action-bar-cancel" class="{{@root.prefix}}--batch-summary__cancel">{{cancelLabel}}</button>
+      </div>
+    </div>
     {{/if}}
 
     {{#if componentsX}}
-      {{#is state "persistent-search"}}
-      <div class="{{@root.prefix}}--toolbar-search-container">
-        <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-          <div class="{{@root.prefix}}--search-magnifier">
-            {{ carbon-icon 'Search16'}}
-          </div>
-          <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
-          <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
-          <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
-            {{ carbon-icon 'Close16'}}
-          </button>
+    {{#is state "persistent-search"}}
+    <div class="{{@root.prefix}}--toolbar-search-container">
+      <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
+        <div class="{{@root.prefix}}--search-magnifier">
+          {{ carbon-icon 'Search16'}}
         </div>
+        <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
+        <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
+        <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
+          {{ carbon-icon 'Close16'}}
+        </button>
       </div>
-      {{/is}}
+    </div>
+    {{/is}}
     {{else}}
-      <div class="{{@root.prefix}}--toolbar-search-container">
-        <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-          <svg class="{{@root.prefix}}--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
-            <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
-              fill-rule="nonzero" />
+    <div class="{{@root.prefix}}--toolbar-search-container">
+      <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
+        <svg class="{{@root.prefix}}--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
+            fill-rule="nonzero" />
+        </svg>
+        <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
+        <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
+        <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
+          <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+              fill-rule="evenodd" />
           </svg>
-          <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
-          <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
-          <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
-            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-                fill-rule="evenodd" />
-            </svg>
-          </button>
-        </div>
+        </button>
       </div>
+    </div>
     {{/if}}
 
     {{#if toolbarActions}}
-      <div class="{{@root.prefix}}--toolbar-content">
-        {{#if componentsX}}
-          {{#is state "default"}}
-            {{#each toolbarActionsX}}
-              <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
-                {{{icon}}}
-              </button>
-            {{/each}}
-          {{/is}}
-          {{#is state "disabled"}}
-            {{#each toolbarActionsXDisabled}}
-              <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
-                {{{icon}}}
-              </button>
-            {{/each}}
-          {{/is}}
-          {{#is state "persistent-search"}}
-            {{#each toolbarActionsXNoSearch}}
-              <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
-                {{{icon}}}
-              </button>
-            {{/each}}
-          {{/is}}
-          <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
-            {{#if small }} Primary {{else}} Primary Button {{/if}}
-            {{ carbon-icon 'Add20' class=(add @root.prefix '--btn__icon') }}
+    <div class="{{@root.prefix}}--toolbar-content">
+      {{#if componentsX}}
+        {{#is state "default"}}
+          {{#each toolbarActionsX}}
+          <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
+            {{{icon}}}
           </button>
-        {{else}}
-          {{#if (not small)}}
-            {{#each toolbarActions}}
-              <button class="{{@root.prefix}}--toolbar-action">
-                {{{icon}}}
-              </button>
-            {{/each}}
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">{{addNewLabel}}</button>
-          {{/if}}
-        {{/if}}
-      </div>
+          {{/each}}
+        {{/is}}
+        {{#is state "disabled"}}
+          {{#each toolbarActionsXDisabled}}
+          <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
+            {{{icon}}}
+          </button>
+          {{/each}}
+        {{/is}}
+        {{#is state "persistent-search"}}
+          {{#each toolbarActionsXNoSearch}}
+          <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
+            {{{icon}}}
+          </button>
+          {{/each}}
+        {{/is}}
+        <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
+          {{#if small }} Primary {{else}} Primary Button {{/if}}
+          {{ carbon-icon 'Add20' class=(add @root.prefix '--btn__icon') }}
+        </button>
+      {{else}}
+        {{#each toolbarActions}}
+        <button class="{{@root.prefix}}--toolbar-action">
+          {{{icon}}}
+        </button>
+        {{/each}}
+        <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">{{addNewLabel}}</button>
+      {{/if}}
+    </div>
     {{/if}}
   </section>
 {{/if}}
