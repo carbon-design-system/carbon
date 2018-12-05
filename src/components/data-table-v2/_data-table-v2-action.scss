@@ -241,7 +241,6 @@
     & > .#{$prefix}--search .#{$prefix}--search-close {
       height: rem(48px);
       width: rem(48px);
-      visibility: hidden;
     }
   }
 
@@ -271,10 +270,6 @@
     & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
       @include focus-outline('reset');
       background: transparent;
-    }
-
-    & > .#{$prefix}--search .#{$prefix}--search-close {
-      visibility: visible;
     }
   }
 
