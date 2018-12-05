@@ -31,6 +31,9 @@ about: Something isn't working as expected? Here is the right place to report.
 3. Step three
 4. etc.
 
+> Please create a reduced test case in CodeSandbox
+> https://codesandbox.io/s/github/IBM/carbon-components/tree/master/examples/codesandbox
+
 ## Additional information
 
 - Screenshots or code
