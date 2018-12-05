@@ -20,6 +20,17 @@ Describe in detail the issue you're having. Is this a feature request (new compo
 
 ## Steps to reproduce the issue
 
+<!--
+Please try to re-create the issue using our CodeSandbox template available here:
+https://codesandbox.io/s/github/IBM/carbon-components/tree/master/examples/codesandbox
+
+This helps reduce the issue to an isolated case that helps us out when debugging.
+If you're able to reproduce using the CodeSandbox link above, please include the
+link in addition to the steps to reproduce. Thanks so much!
+-->
+
+<!-- [CodeSandbox](<url>) -->
+
 1.  Step one
 2.  Step two
 3.  Step three

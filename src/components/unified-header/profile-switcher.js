@@ -1,3 +1,5 @@
+import warning from 'warning';
+import { breakingChangesX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -5,6 +7,9 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import removedComponent from '../removed-component';
+
+let didWarnAboutDeprecation;
 
 class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -30,6 +35,15 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    */
   constructor(element, options) {
     super(element, options);
+
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `ProfileSwitcher` component in `carbon-components` has been deprecated. ' +
+          'It will be removed in the next major release.'
+      );
+      didWarnAboutDeprecation = true;
+    }
 
     this.manage(
       on(this.element.ownerDocument, 'click', evt => {
@@ -301,4 +315,4 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
   static components = new WeakMap();
 }
 
-export default ProfileSwitcher;
+export default (!breakingChangesX ? ProfileSwitcher : removedComponent('ProfileSwitcher'));
