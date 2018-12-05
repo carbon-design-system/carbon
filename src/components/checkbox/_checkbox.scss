@@ -318,6 +318,12 @@
   // Disabled
   // ---------------------------------------------
 
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label {
+    [disabled] ~ _ {
+      font-size: inherit;
+    }
+  }
+    
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
     cursor: not-allowed;
