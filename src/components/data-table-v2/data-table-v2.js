@@ -50,6 +50,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       if (eventElement) {
         this._toggleState(eventElement, evt);
       }
+      this._handleDocumentClick(evt);
     });
 
     this.element.addEventListener('keydown', this._keydownHandler);
@@ -57,6 +58,43 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state = {
       checkboxCount: 0,
     };
+  }
+
+  _handleDocumentClick(evt) {
+    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchTrigger = searchContainer.querySelector(this.options.selectorSearchMagnifier);
+    const input = searchContainer.querySelector(this.options.selectorSearchInput);
+    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
+    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+
+    if (searchContainer && searchEvent) {
+      this.activateSearch(searchContainer, input);
+    }
+
+    if (activeSearch) {
+      this.deactivateSearch(searchContainer, evt, input, searchTrigger);
+    }
+  }
+
+  activateSearch(container, input) {
+    container.classList.add(this.options.classToolbarSearchActive);
+    input.focus();
+  }
+
+  deactivateSearch(container, evt, input, trigger) {
+    const svg = trigger.querySelector('svg');
+    const closeButton = container.querySelector('button');
+    const closeSvg = closeButton.querySelector('svg');
+    if (
+      evt.target !== input &&
+      evt.target !== trigger &&
+      evt.target !== svg &&
+      evt.target !== closeButton &&
+      evt.target !== closeSvg
+    ) {
+      container.classList.remove(this.options.classToolbarSearchActive);
+      input.focus();
+    }
   }
 
   _sortToggle = detail => {
@@ -280,6 +318,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorTableBody: 'tbody',
       selectorTableSort: `.${prefix}--table-sort-v2`,
       selectorTableSelected: `.${prefix}--data-table-v2--selected`,
+      selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-hidden`,
+      selectorSearchMagnifier: `.${prefix}--search-magnifier`,
+      selectorSearchInput: `.${prefix}--search-input`,
       classExpandableRow: `${prefix}--expandable-row-v2`,
       classExpandableRowHidden: `${prefix}--expandable-row--hidden-v2`,
       classExpandableRowHover: `${prefix}--expandable-row--hover-v2`,
@@ -287,6 +328,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       classTableSortActive: `${prefix}--table-sort-v2--active`,
       classActionBarActive: `${prefix}--batch-actions--active`,
       classTableSelected: `${prefix}--data-table-v2--selected`,
+      classToolbarSearchActive: `${prefix}--toolbar-search-container-active`,
       eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
       eventAfterExpand: 'data-table-v2-aftertoggleexpand',
       eventBeforeSort: 'data-table-v2-beforetogglesort',
