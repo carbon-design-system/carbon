@@ -134,6 +134,12 @@
   // Disabled
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+    [disabled] ~ _ {
+      font-size: inherit;
+    }
+  }
+
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
     color: $disabled;
     cursor: not-allowed;
   }
