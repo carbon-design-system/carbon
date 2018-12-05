@@ -1,598 +1,611 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/theme';
 
-@include exports('left-nav') {
-  .#{$prefix}--global-header__left-nav {
-    @include layer('temporary-nav');
-    @include reset;
-    position: fixed;
-    z-index: 9000;
-    width: rem(250px);
-    top: rem(36px);
-    left: 0;
-    height: 100%;
-    transform: translate3d(-100%, 0, 0);
-    transition: 300ms $carbon--standard-easing;
-    box-shadow: none;
-    visibility: hidden;
-  }
-
-  .#{$prefix}--global-header__left-nav.#{$prefix}--left-nav--active {
-    transform: translate3d(0, 0, 0);
-    box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, 0.1);
-    visibility: visible;
-  }
-
-  .#{$prefix}--left-nav {
-    @include reset;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: $ui-01;
-    padding: 0 0 4rem 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .#{$prefix}--left-nav__close-row {
-    @include reset;
-    height: rem(50px);
-    width: 100%;
-    background-color: $ui-01;
-  }
-
-  .#{$prefix}--left-nav__header {
-    @include reset;
-    align-items: center;
-    height: rem(50px);
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    background-color: $nav-01;
-    justify-content: space-between;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.125rem rem(20px);
-
-    &[data-left-nav-current-section='apps'] {
-      background-color: $nav-06;
+@mixin left-nav {
+  @include deprecate(
+    'The `unified-header` component in `carbon-components` has been deprecated. ' +
+      'It will be removed in the next major release.'
+  ) {
+    .#{$prefix}--global-header__left-nav {
+      @include layer('temporary-nav');
+      @include reset;
+      position: fixed;
+      z-index: 9000;
+      width: rem(250px);
+      top: rem(36px);
+      left: 0;
+      height: 100%;
+      transform: translate3d(-100%, 0, 0);
+      transition: 300ms $carbon--standard-easing;
+      box-shadow: none;
+      visibility: hidden;
     }
 
-    &[data-left-nav-current-section='infrastructure'] {
-      background-color: $nav-08;
+    .#{$prefix}--global-header__left-nav.#{$prefix}--left-nav--active {
+      transform: translate3d(0, 0, 0);
+      box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, 0.1);
+      visibility: visible;
     }
 
-    &[data-left-nav-current-section='services'] {
-      background-color: $nav-04;
+    .#{$prefix}--left-nav {
+      @include reset;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: $ui-01;
+      padding: 0 0 4rem 0;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
-  }
 
-  .#{$prefix}--left-nav__header--title {
-    @include typescale('epsilon');
-    @include font-smoothing;
-    color: $inverse-01;
-    font-weight: 600;
-    margin-right: auto;
-  }
+    .#{$prefix}--left-nav__close-row {
+      @include reset;
+      height: rem(50px);
+      width: 100%;
+      background-color: $ui-01;
+    }
 
-  .#{$prefix}--left-nav__header--taxonomy-icon {
-    width: rem(24px);
-    height: rem(24px);
-    fill: $inverse-01;
-    margin-right: 1rem;
-  }
+    .#{$prefix}--left-nav__header {
+      @include reset;
+      align-items: center;
+      height: rem(50px);
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      background-color: $nav-01;
+      justify-content: space-between;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.125rem rem(20px);
 
-  .#{$prefix}--left-nav__header--close-icon {
-    width: rem(14px);
-    height: rem(14px);
-    display: block;
-    fill: $inverse-01;
-  }
+      &[data-left-nav-current-section='apps'] {
+        background-color: $nav-06;
+      }
 
-  .#{$prefix}--left-nav__sections {
-    @include reset;
-    list-style: none;
-    padding: 0 0 1rem;
-    width: 100%;
-    z-index: 8000;
-    position: relative;
-    border-bottom: 1px solid $ui-04;
-    background-color: $color__white;
-  }
+      &[data-left-nav-current-section='infrastructure'] {
+        background-color: $nav-08;
+      }
 
-  .#{$prefix}--left-nav__section {
-    @include reset;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: $transition--base $carbon--standard-easing;
-    background-color: $ui-01;
+      &[data-left-nav-current-section='services'] {
+        background-color: $nav-04;
+      }
+    }
 
-    &:hover {
+    .#{$prefix}--left-nav__header--title {
+      @include typescale('epsilon');
+      @include font-smoothing;
+      color: $inverse-01;
+      font-weight: 600;
+      margin-right: auto;
+    }
+
+    .#{$prefix}--left-nav__header--taxonomy-icon {
+      width: rem(24px);
+      height: rem(24px);
+      fill: $inverse-01;
+      margin-right: 1rem;
+    }
+
+    .#{$prefix}--left-nav__header--close-icon {
+      width: rem(14px);
+      height: rem(14px);
+      display: block;
+      fill: $inverse-01;
+    }
+
+    .#{$prefix}--left-nav__sections {
+      @include reset;
+      list-style: none;
+      padding: 0 0 1rem;
+      width: 100%;
+      z-index: 8000;
+      position: relative;
+      border-bottom: 1px solid $ui-04;
+      background-color: $color__white;
+    }
+
+    .#{$prefix}--left-nav__section {
+      @include reset;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: $transition--base $carbon--standard-easing;
+      background-color: $ui-01;
+
+      &:hover {
+        &[data-left-nav-section='apps'] {
+          background-color: $nav-06;
+        }
+
+        &[data-left-nav-section='services'] {
+          background-color: $nav-04;
+        }
+
+        &[data-left-nav-section='infrastructure'] {
+          background-color: $color__blue-50;
+        }
+
+        .#{$prefix}--left-nav__section--link {
+          @include font-smoothing;
+          font-weight: 600;
+          color: $inverse-01;
+        }
+
+        .#{$prefix}--left-nav__section--taxonomy-icon {
+          fill: $inverse-01;
+        }
+      }
+    }
+
+    .#{$prefix}--left-nav__section--active {
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      background-color: $ui-01;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.8rem 0;
+
       &[data-left-nav-section='apps'] {
         background-color: $nav-06;
+      }
+
+      &[data-left-nav-section='infrastructure'] {
+        background-color: $nav-08;
       }
 
       &[data-left-nav-section='services'] {
         background-color: $nav-04;
       }
+    }
 
-      &[data-left-nav-section='infrastructure'] {
-        background-color: $color__blue-50;
+    .#{$prefix}--left-nav__section--transition {
+      @extend .#{$prefix}--left-nav__section--active;
+      position: absolute;
+      z-index: 9999;
+      transition: all 0.3s $carbon--ease-out;
+
+      &--50 {
+        transform: translateY(100px);
       }
 
-      .#{$prefix}--left-nav__section--link {
-        @include font-smoothing;
-        font-weight: 600;
-        color: $inverse-01;
+      &--100 {
+        transform: translateY(150px);
+      }
+
+      &--0 {
+        transform: translateY(50px);
       }
 
       .#{$prefix}--left-nav__section--taxonomy-icon {
         fill: $inverse-01;
       }
     }
-  }
-
-  .#{$prefix}--left-nav__section--active {
-    justify-content: flex-start;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    background-color: $ui-01;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.8rem 0;
-
-    &[data-left-nav-section='apps'] {
-      background-color: $nav-06;
-    }
-
-    &[data-left-nav-section='infrastructure'] {
-      background-color: $nav-08;
-    }
-
-    &[data-left-nav-section='services'] {
-      background-color: $nav-04;
-    }
-  }
-
-  .#{$prefix}--left-nav__section--transition {
-    @extend .#{$prefix}--left-nav__section--active;
-    position: absolute;
-    z-index: 9999;
-    transition: all 0.3s $carbon--ease-out;
-
-    &--50 {
-      transform: translateY(100px);
-    }
-
-    &--100 {
-      transform: translateY(150px);
-    }
-
-    &--0 {
-      transform: translateY(50px);
-    }
 
     .#{$prefix}--left-nav__section--taxonomy-icon {
-      fill: $inverse-01;
-    }
-  }
-
-  .#{$prefix}--left-nav__section--taxonomy-icon {
-    width: rem(24px);
-    height: rem(24px);
-    fill: $text-01;
-    margin-right: 1rem;
-  }
-
-  .#{$prefix}--left-nav__section--anchor {
-    @include reset;
-    display: flex;
-    width: 100%;
-    padding: 0 1.25rem;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  .#{$prefix}--left-nav__section--link {
-    @include reset;
-    @include typescale('epsilon');
-    display: flex;
-    align-items: center;
-    color: $text-01;
-    height: rem(50px);
-  }
-
-  // MAIN NAV
-  .#{$prefix}--left-nav__main-nav {
-    @include reset;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5rem;
-    margin-top: 0;
-    transition: all 250ms $carbon--ease-out;
-    padding-top: 1rem;
-    background-color: $inverse-01;
-  }
-
-  .#{$prefix}--left-nav__main-nav--hidden {
-    display: none;
-  }
-
-  .#{$prefix}--left-nav__main-nav--top {
-    margin-top: -100vh;
-  }
-
-  .#{$prefix}--main-nav__parent-item {
-    @include reset;
-    opacity: 1;
-    transition: opacity 200ms $carbon--standard-easing;
-    cursor: pointer;
-    width: 100%;
-    padding: 0;
-    margin-bottom: 0.25rem;
-    background-color: $ui-01;
-  }
-
-  .#{$prefix}--main-nav__parent-item--fade {
-    opacity: 0;
-  }
-
-  .#{$prefix}--main-nav__parent-item--hidden {
-    display: none;
-  }
-
-  .#{$prefix}--main-nav__parent-item--expanded {
-    .#{$prefix}--parent-item__link--down-icon svg {
-      transform: rotate(180deg);
-    }
-  }
-
-  .#{$prefix}--parent-item__link {
-    @include reset;
-    @include typescale('zeta');
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    text-decoration: none;
-    padding: 0.5rem rem(20px);
-    transition: background-color $transition--base $carbon--standard-easing;
-    color: $text-01;
-
-    .#{$prefix}--parent-item__link--taxonomy-icon {
       width: rem(24px);
       height: rem(24px);
-      transition: $transition--base $carbon--standard-easing;
-      margin-right: 1rem;
       fill: $text-01;
+      margin-right: 1rem;
     }
 
-    .#{$prefix}--parent-item__link--down-icon {
+    .#{$prefix}--left-nav__section--anchor {
+      @include reset;
       display: flex;
-      margin-left: auto;
+      width: 100%;
+      padding: 0 1.25rem;
+      align-items: center;
+      text-decoration: none;
+    }
 
-      svg {
-        width: rem(10px);
-        height: rem(10px);
+    .#{$prefix}--left-nav__section--link {
+      @include reset;
+      @include typescale('epsilon');
+      display: flex;
+      align-items: center;
+      color: $text-01;
+      height: rem(50px);
+    }
+
+    // MAIN NAV
+    .#{$prefix}--left-nav__main-nav {
+      @include reset;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 5rem;
+      margin-top: 0;
+      transition: all 250ms $carbon--ease-out;
+      padding-top: 1rem;
+      background-color: $inverse-01;
+    }
+
+    .#{$prefix}--left-nav__main-nav--hidden {
+      display: none;
+    }
+
+    .#{$prefix}--left-nav__main-nav--top {
+      margin-top: -100vh;
+    }
+
+    .#{$prefix}--main-nav__parent-item {
+      @include reset;
+      opacity: 1;
+      transition: opacity 200ms $carbon--standard-easing;
+      cursor: pointer;
+      width: 100%;
+      padding: 0;
+      margin-bottom: 0.25rem;
+      background-color: $ui-01;
+    }
+
+    .#{$prefix}--main-nav__parent-item--fade {
+      opacity: 0;
+    }
+
+    .#{$prefix}--main-nav__parent-item--hidden {
+      display: none;
+    }
+
+    .#{$prefix}--main-nav__parent-item--expanded {
+      .#{$prefix}--parent-item__link--down-icon svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .#{$prefix}--parent-item__link {
+      @include reset;
+      @include typescale('zeta');
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-decoration: none;
+      padding: 0.5rem rem(20px);
+      transition: background-color $transition--base $carbon--standard-easing;
+      color: $text-01;
+
+      .#{$prefix}--parent-item__link--taxonomy-icon {
+        width: rem(24px);
+        height: rem(24px);
         transition: $transition--base $carbon--standard-easing;
+        margin-right: 1rem;
         fill: $text-01;
       }
-    }
 
-    &:hover {
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
-        color: $nav-06;
+      .#{$prefix}--parent-item__link--down-icon {
+        display: flex;
+        margin-left: auto;
 
-        .#{$prefix}--parent-item__link--taxonomy-icon,
-        .#{$prefix}--parent-item__link--down-icon svg {
-          fill: $nav-06;
+        svg {
+          width: rem(10px);
+          height: rem(10px);
+          transition: $transition--base $carbon--standard-easing;
+          fill: $text-01;
         }
       }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
-        color: $nav-04;
-
-        .#{$prefix}--parent-item__link--taxonomy-icon,
-        .#{$prefix}--parent-item__link--down-icon svg {
-          fill: $nav-04;
-        }
-      }
-
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
-        color: $nav-08;
-
-        .#{$prefix}--parent-item__link--taxonomy-icon,
-        .#{$prefix}--parent-item__link--down-icon svg {
-          fill: $nav-08;
-        }
-      }
-    }
-  }
-
-  .#{$prefix}--main-nav__parent-item.#{$prefix}--active-list-item {
-    .#{$prefix}--parent-item__link {
-      color: $inverse-01;
-
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
-        background-color: $nav-06;
-
-        &:hover {
-          color: $inverse-01;
+      &:hover {
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+          color: $nav-06;
 
           .#{$prefix}--parent-item__link--taxonomy-icon,
           .#{$prefix}--parent-item__link--down-icon svg {
-            fill: $inverse-01;
+            fill: $nav-06;
           }
         }
-      }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
-        background-color: $nav-04;
-
-        &:hover {
-          color: $inverse-01;
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+          color: $nav-04;
 
           .#{$prefix}--parent-item__link--taxonomy-icon,
           .#{$prefix}--parent-item__link--down-icon svg {
-            fill: $inverse-01;
+            fill: $nav-04;
           }
         }
-      }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
-        background-color: $nav-08;
-
-        &:hover {
-          color: $inverse-01;
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+          color: $nav-08;
 
           .#{$prefix}--parent-item__link--taxonomy-icon,
           .#{$prefix}--parent-item__link--down-icon svg {
-            fill: $inverse-01;
+            fill: $nav-08;
           }
         }
       }
     }
 
-    .#{$prefix}--parent-item__link--taxonomy-icon {
-      fill: $inverse-01;
+    .#{$prefix}--main-nav__parent-item.#{$prefix}--active-list-item {
+      .#{$prefix}--parent-item__link {
+        color: $inverse-01;
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+          background-color: $nav-06;
+
+          &:hover {
+            color: $inverse-01;
+
+            .#{$prefix}--parent-item__link--taxonomy-icon,
+            .#{$prefix}--parent-item__link--down-icon svg {
+              fill: $inverse-01;
+            }
+          }
+        }
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+          background-color: $nav-04;
+
+          &:hover {
+            color: $inverse-01;
+
+            .#{$prefix}--parent-item__link--taxonomy-icon,
+            .#{$prefix}--parent-item__link--down-icon svg {
+              fill: $inverse-01;
+            }
+          }
+        }
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+          background-color: $nav-08;
+
+          &:hover {
+            color: $inverse-01;
+
+            .#{$prefix}--parent-item__link--taxonomy-icon,
+            .#{$prefix}--parent-item__link--down-icon svg {
+              fill: $inverse-01;
+            }
+          }
+        }
+      }
+
+      .#{$prefix}--parent-item__link--taxonomy-icon {
+        fill: $inverse-01;
+      }
+
+      .#{$prefix}--parent-item__link--down-icon svg {
+        fill: $inverse-01;
+      }
+
+      &:hover {
+        color: $inverse-01;
+      }
     }
 
-    .#{$prefix}--parent-item__link--down-icon svg {
-      fill: $inverse-01;
+    .#{$prefix}--main-nav__nested-list {
+      @include reset;
+      @include list;
+      list-style: none;
+      max-height: 0;
+      transition: 300ms $carbon--standard-easing;
+      padding: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-bottom: 0;
     }
 
-    &:hover {
-      color: $inverse-01;
+    .#{$prefix}--main-nav__parent-item--expanded .#{$prefix}--main-nav__nested-list {
+      max-height: 20rem;
+      transition: 300ms $carbon--standard-easing;
+      opacity: 1;
+      margin-top: 0.5rem;
+      overflow: visible;
+
+      .#{$prefix}--nested-list__item {
+        opacity: 1;
+      }
     }
-  }
-
-  .#{$prefix}--main-nav__nested-list {
-    @include reset;
-    @include list;
-    list-style: none;
-    max-height: 0;
-    transition: 300ms $carbon--standard-easing;
-    padding: 0;
-    opacity: 0;
-    overflow: hidden;
-    margin-bottom: 0;
-  }
-
-  .#{$prefix}--main-nav__parent-item--expanded .#{$prefix}--main-nav__nested-list {
-    max-height: 20rem;
-    transition: 300ms $carbon--standard-easing;
-    opacity: 1;
-    margin-top: 0.5rem;
-    overflow: visible;
 
     .#{$prefix}--nested-list__item {
-      opacity: 1;
+      width: 100%;
+      position: static;
+      margin-bottom: 0.25rem;
+      padding: 0;
+      transition: $transition--base;
+      opacity: 0;
     }
-  }
 
-  .#{$prefix}--nested-list__item {
-    width: 100%;
-    position: static;
-    margin-bottom: 0.25rem;
-    padding: 0;
-    transition: $transition--base;
-    opacity: 0;
-  }
-
-  .#{$prefix}--nested-list__item--link {
-    @include typescale('zeta');
-    color: $text-01;
-    padding: 0.5rem 1.35rem 0.5rem 2rem;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-    position: relative;
-    margin-right: auto;
-
-    &:hover {
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
-        color: $nav-06;
-
-        .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
-          fill: $nav-06;
-        }
-      }
-
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
-        color: $nav-04;
-
-        .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
-          fill: $nav-04;
-        }
-      }
-
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
-        color: $nav-08;
-
-        .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
-          fill: $nav-08;
-        }
-      }
-    }
-  }
-
-  .#{$prefix}--nested-list__item--icon svg {
-    width: rem(10px);
-    height: rem(10px);
-    fill: $text-01;
-  }
-
-  .#{$prefix}--nested-list__item.#{$prefix}--active-list-item {
     .#{$prefix}--nested-list__item--link {
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
-        background-color: $nav-06;
+      @include typescale('zeta');
+      color: $text-01;
+      padding: 0.5rem 1.35rem 0.5rem 2rem;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      position: relative;
+      margin-right: auto;
 
-        &:hover {
-          color: $inverse-01;
+      &:hover {
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+          color: $nav-06;
 
-          .#{$prefix}--parent-item__link--taxonomy-icon {
-            fill: $inverse-01;
+          .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
+            fill: $nav-06;
           }
         }
-      }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
-        background-color: $nav-04;
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+          color: $nav-04;
 
-        &:hover {
-          color: $inverse-01;
-
-          .#{$prefix}--parent-item__link--taxonomy-icon {
-            fill: $inverse-01;
+          .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
+            fill: $nav-04;
           }
         }
-      }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
-        background-color: $nav-08;
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+          color: $nav-08;
 
-        &:hover {
-          color: $inverse-01;
-
-          .#{$prefix}--parent-item__link--taxonomy-icon {
-            fill: $inverse-01;
+          .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
+            fill: $nav-08;
           }
         }
       }
     }
 
     .#{$prefix}--nested-list__item--icon svg {
+      width: rem(10px);
+      height: rem(10px);
       fill: $text-01;
     }
-  }
 
-  .#{$prefix}--nested-list__flyout-menu {
-    @include layer('overlay');
-    display: none;
-    min-width: auto;
-    white-space: nowrap;
-    outline: none;
-    position: absolute;
-    z-index: 9999;
-    color: $inverse-01;
+    .#{$prefix}--nested-list__item.#{$prefix}--active-list-item {
+      .#{$prefix}--nested-list__item--link {
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+          background-color: $nav-06;
 
-    &:before {
-      content: '';
-      display: block;
+          &:hover {
+            color: $inverse-01;
+
+            .#{$prefix}--parent-item__link--taxonomy-icon {
+              fill: $inverse-01;
+            }
+          }
+        }
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+          background-color: $nav-04;
+
+          &:hover {
+            color: $inverse-01;
+
+            .#{$prefix}--parent-item__link--taxonomy-icon {
+              fill: $inverse-01;
+            }
+          }
+        }
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+          background-color: $nav-08;
+
+          &:hover {
+            color: $inverse-01;
+
+            .#{$prefix}--parent-item__link--taxonomy-icon {
+              fill: $inverse-01;
+            }
+          }
+        }
+      }
+
+      .#{$prefix}--nested-list__item--icon svg {
+        fill: $text-01;
+      }
+    }
+
+    .#{$prefix}--nested-list__flyout-menu {
+      @include layer('overlay');
+      display: none;
+      min-width: auto;
+      white-space: nowrap;
+      outline: none;
       position: absolute;
-      width: 120%;
-      height: 120%;
-      top: -3rem;
-      left: 0;
-      padding: 2rem;
-      z-index: -1;
-    }
-  }
+      z-index: 9999;
+      color: $inverse-01;
 
-  .#{$prefix}--nested-list__flyout-menu--displayed {
-    @include reset;
-    display: block;
-    border-left: 1px solid $ui-04;
-  }
-
-  .#{$prefix}--flyout-menu__item--link {
-    @include typescale('zeta');
-    padding: 0 1.75rem 0 1rem;
-    color: $text-01;
-    text-decoration: none;
-  }
-
-  .#{$prefix}--flyout-menu__item {
-    @include reset;
-    background-color: $ui-01;
-    margin: 0;
-    height: rem(37px);
-    display: flex;
-    align-items: center;
-
-    &:hover {
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & .#{$prefix}--flyout-menu__item--link {
-        color: $nav-06;
-      }
-
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & .#{$prefix}--flyout-menu__item--link {
-        color: $nav-04;
-      }
-
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & .#{$prefix}--flyout-menu__item--link {
-        color: $nav-08;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        top: -3rem;
+        left: 0;
+        padding: 2rem;
+        z-index: -1;
       }
     }
-  }
 
-  .#{$prefix}--flyout-menu__item.#{$prefix}--active-list-item {
-    .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
-      background-color: $nav-06;
+    .#{$prefix}--nested-list__flyout-menu--displayed {
+      @include reset;
+      display: block;
+      border-left: 1px solid $ui-04;
+    }
 
-      & .#{$prefix}--flyout-menu__item--link {
-        color: $inverse-01;
+    .#{$prefix}--flyout-menu__item--link {
+      @include typescale('zeta');
+      padding: 0 1.75rem 0 1rem;
+      color: $text-01;
+      text-decoration: none;
+    }
 
-        &:hover {
-          color: $inverse-01;
+    .#{$prefix}--flyout-menu__item {
+      @include reset;
+      background-color: $ui-01;
+      margin: 0;
+      height: rem(37px);
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & .#{$prefix}--flyout-menu__item--link {
+          color: $nav-06;
+        }
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & .#{$prefix}--flyout-menu__item--link {
+          color: $nav-04;
+        }
+
+        .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & .#{$prefix}--flyout-menu__item--link {
+          color: $nav-08;
         }
       }
     }
 
-    .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
-      background-color: $nav-04;
+    .#{$prefix}--flyout-menu__item.#{$prefix}--active-list-item {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+        background-color: $nav-06;
 
-      & .#{$prefix}--flyout-menu__item--link {
-        color: $inverse-01;
-
-        &:hover {
+        & .#{$prefix}--flyout-menu__item--link {
           color: $inverse-01;
+
+          &:hover {
+            color: $inverse-01;
+          }
+        }
+      }
+
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+        background-color: $nav-04;
+
+        & .#{$prefix}--flyout-menu__item--link {
+          color: $inverse-01;
+
+          &:hover {
+            color: $inverse-01;
+          }
+        }
+      }
+
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+        background-color: $nav-08;
+
+        & .#{$prefix}--flyout-menu__item--link {
+          color: $inverse-01;
+
+          &:hover {
+            color: $inverse-01;
+          }
         }
       }
     }
+  }
+}
 
-    .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
-      background-color: $nav-08;
-
-      & .#{$prefix}--flyout-menu__item--link {
-        color: $inverse-01;
-
-        &:hover {
-          color: $inverse-01;
-        }
-      }
-    }
+@include exports('left-nav') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include left-nav;
   }
 }

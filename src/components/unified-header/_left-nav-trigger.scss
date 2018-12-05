@@ -3,211 +3,223 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/mixins';
+@import '../../globals/scss/functions';
 
-@include exports('left-nav-trigger') {
-  .#{$prefix}--left-nav__trigger {
-    @include reset;
-    width: rem(60px);
-    height: rem(50px);
-    position: relative;
-    transition: $transition--base $carbon--standard-easing;
-    cursor: pointer;
-    z-index: 9999;
+@mixin left-nav-trigger {
+  @include deprecate(
+    'The `unified-header` component in `carbon-components` has been deprecated. ' +
+      'It will be removed in the next major release.'
+  ) {
+    .#{$prefix}--left-nav__trigger {
+      @include reset;
+      width: rem(60px);
+      height: rem(50px);
+      position: relative;
+      transition: $transition--base $carbon--standard-easing;
+      cursor: pointer;
+      z-index: 9999;
 
-    &:focus {
-      outline: 0;
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $color__blue-30;
+
+        span,
+        span:before,
+        span:after {
+          background: $color__white;
+        }
+      }
     }
 
-    &:hover,
-    &:focus {
-      background-color: $color__blue-30;
+    .#{$prefix}--left-nav__trigger--btn {
+      @include reset;
+      position: absolute;
+      top: 1.5rem;
+      left: rem(20px);
+      width: 100%;
+      transition: $transition--base $carbon--standard-easing;
+      display: flex;
 
       span,
       span:before,
       span:after {
-        background: $color__white;
-      }
-    }
-  }
-
-  .#{$prefix}--left-nav__trigger--btn {
-    @include reset;
-    position: absolute;
-    top: 1.5rem;
-    left: rem(20px);
-    width: 100%;
-    transition: $transition--base $carbon--standard-easing;
-    display: flex;
-
-    span,
-    span:before,
-    span:after {
-      @include reset;
-      height: rem(2px);
-      width: rem(20px);
-      cursor: pointer;
-      position: absolute;
-      display: block;
-      content: '';
-      transition: all $transition--base ease;
-    }
-
-    span:before {
-      top: rem(-6px);
-    }
-
-    span:after {
-      bottom: rem(-6px);
-    }
-
-    .#{$prefix}--left-nav__trigger--active & {
-      left: rem(18px);
-
-      span:before,
-      span:after {
-        top: 0;
-        width: rem(25.46px);
+        @include reset;
+        height: rem(2px);
+        width: rem(20px);
+        cursor: pointer;
+        position: absolute;
+        display: block;
+        content: '';
+        transition: all $transition--base ease;
       }
 
       span:before {
-        transform: rotate(45deg);
+        top: rem(-6px);
       }
 
       span:after {
-        transform: rotate(-45deg);
+        bottom: rem(-6px);
+      }
+
+      .#{$prefix}--left-nav__trigger--active & {
+        left: rem(18px);
+
+        span:before,
+        span:after {
+          top: 0;
+          width: rem(25.46px);
+        }
+
+        span:before {
+          transform: rotate(45deg);
+        }
+
+        span:after {
+          transform: rotate(-45deg);
+        }
       }
     }
-  }
 
-  .#{$prefix}--left-nav__trigger--apps {
-    span,
-    span:before,
-    span:after {
-      background: $nav-05;
-    }
-
-    &:focus {
-      outline: 0;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $nav-06;
-
+    .#{$prefix}--left-nav__trigger--apps {
       span,
       span:before,
       span:after {
-        background: $color__white;
+        background: $nav-05;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $nav-06;
+
+        span,
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
-  }
 
-  .#{$prefix}--left-nav__trigger--apps.#{$prefix}--left-nav__trigger--active {
-    span {
-      background: transparent;
-    }
-
-    span:before,
-    span:after {
-      background: $nav-06;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $nav-06;
+    .#{$prefix}--left-nav__trigger--apps.#{$prefix}--left-nav__trigger--active {
+      span {
+        background: transparent;
+      }
 
       span:before,
       span:after {
-        background: $color__white;
+        background: $nav-06;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $nav-06;
+
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
-  }
 
-  .#{$prefix}--left-nav__trigger--services {
-    span,
-    span:before,
-    span:after {
-      background: $nav-03;
-    }
-
-    &:focus {
-      outline: 0;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $nav-04;
-
+    .#{$prefix}--left-nav__trigger--services {
       span,
       span:before,
       span:after {
-        background: $color__white;
+        background: $nav-03;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $nav-04;
+
+        span,
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
-  }
 
-  .#{$prefix}--left-nav__trigger--services.#{$prefix}--left-nav__trigger--active {
-    span {
-      background: transparent;
-    }
-
-    span:before,
-    span:after {
-      background: $nav-04;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $nav-04;
+    .#{$prefix}--left-nav__trigger--services.#{$prefix}--left-nav__trigger--active {
+      span {
+        background: transparent;
+      }
 
       span:before,
       span:after {
-        background: $color__white;
+        background: $nav-04;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $nav-04;
+
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
-  }
 
-  .#{$prefix}--left-nav__trigger--infrastructure {
-    span,
-    span:before,
-    span:after {
-      background: $nav-07;
-    }
-
-    &:focus {
-      outline: 0;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $nav-08;
-
+    .#{$prefix}--left-nav__trigger--infrastructure {
       span,
       span:before,
       span:after {
-        background: $color__white;
+        background: $nav-07;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $nav-08;
+
+        span,
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
-  }
 
-  .#{$prefix}--left-nav__trigger--infrastructure.#{$prefix}--left-nav__trigger--active {
-    span {
-      background: transparent;
-    }
-
-    span:before,
-    span:after {
-      background: $nav-08;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $nav-08;
+    .#{$prefix}--left-nav__trigger--infrastructure.#{$prefix}--left-nav__trigger--active {
+      span {
+        background: transparent;
+      }
 
       span:before,
       span:after {
-        background: $color__white;
+        background: $nav-08;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $nav-08;
+
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
+  }
+}
+
+@include exports('left-nav-trigger') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include left-nav-trigger;
   }
 }

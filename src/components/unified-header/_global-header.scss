@@ -4,224 +4,237 @@
 @import '../../globals/scss/theme';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/css--typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 
-@include exports('global-header') {
-  .#{$prefix}--global-header {
-    @include layer('sticky-nav');
-    @include font-family;
-    width: 100%;
-    position: fixed;
-    top: rem(36px);
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    height: rem(50px);
-    line-height: 1.5;
-    background-color: $nav-02;
-    z-index: 9000;
-  }
+@mixin global-header {
+  @include deprecate(
+    'The `unified-header` component in `carbon-components` has been deprecated. ' +
+      'It will be removed in the next major release.'
+  ) {
+    .#{$prefix}--global-header {
+      @include layer('sticky-nav');
+      @include font-family;
+      width: 100%;
+      position: fixed;
+      top: rem(36px);
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      height: rem(50px);
+      line-height: 1.5;
+      background-color: $nav-02;
+      z-index: 9000;
+    }
 
-  .#{$prefix}--global-header__title {
-    display: flex;
-    align-items: center;
-  }
+    .#{$prefix}--global-header__title {
+      display: flex;
+      align-items: center;
+    }
 
-  .#{$prefix}--global-header__title--logo {
-    display: flex;
-    align-items: center;
-    padding: 0 rem(8px);
-    text-decoration: none;
-    color: $color__white; // anna
-    position: relative;
+    .#{$prefix}--global-header__title--logo {
+      display: flex;
+      align-items: center;
+      padding: 0 rem(8px);
+      text-decoration: none;
+      color: $color__white; // anna
+      position: relative;
 
-    &:hover,
-    &:focus {
-      .#{$prefix}--logo__text {
-        color: $color__blue-20; // anna
+      &:hover,
+      &:focus {
+        .#{$prefix}--logo__text {
+          color: $color__blue-20; // anna
+        }
       }
     }
-  }
 
-  .#{$prefix}--global-header__title--current-page {
-    @include font-smoothing;
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: inherit;
-    color: $color__blue-30; // anna
-
-    .#{$prefix}--unified-header--apps & {
-      color: $nav-05;
-    }
-
-    .#{$prefix}--unified-header--infrastructure & {
-      color: $nav-07;
-    }
-
-    .#{$prefix}--unified-header--services & {
-      color: $nav-03;
-    }
-  }
-
-  .#{$prefix}--global-header .#{$prefix}--logo__image {
-    cursor: pointer;
-    position: relative;
-    margin-right: 1.125rem;
-  }
-
-  .#{$prefix}--global-header .#{$prefix}--logo__text {
-    @include typescale('delta');
-    @include font-smoothing;
-    font-weight: 400;
-    cursor: pointer;
-    text-decoration: none;
-    color: $color__white; // anna
-
-    &--bold {
-      font-weight: 600;
-    }
-  }
-
-  .#{$prefix}--global-header__left-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .#{$prefix}--global-header__right-container {
-    display: flex;
-    align-items: center;
-    padding-right: 1%;
-    background-color: $nav-02;
-  }
-
-  .#{$prefix}--global-header__menu {
-    @include reset;
-    list-style: none;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .#{$prefix}--global-header__menu__item {
-    @include reset;
-    width: 100%;
-    flex: 0 1 100px;
-
-    &:focus {
-      outline: 0;
-      background-color: $color__navy-gray-3; // anna
+    .#{$prefix}--global-header__title--current-page {
+      @include font-smoothing;
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: inherit;
       color: $color__blue-30; // anna
-    }
 
-    &:last-child {
-      & .#{$prefix}--dropdown-list {
-        right: 0;
+      .#{$prefix}--unified-header--apps & {
+        color: $nav-05;
+      }
+
+      .#{$prefix}--unified-header--infrastructure & {
+        color: $nav-07;
+      }
+
+      .#{$prefix}--unified-header--services & {
+        color: $nav-03;
       }
     }
-  }
 
-  .#{$prefix}--global-header__menu__item--link {
-    @include reset;
-    @include font-smoothing;
-    @include typescale('zeta');
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: rem(50px);
-    text-decoration: none;
-    background-color: $nav-02;
-    color: $color__white; // anna
-    padding: 0 1rem;
-
-    &:hover {
-      color: $color__blue-30; // anna
+    .#{$prefix}--global-header .#{$prefix}--logo__image {
+      cursor: pointer;
+      position: relative;
+      margin-right: 1.125rem;
     }
 
-    &:focus {
-      outline: 0;
-      background-color: $color__navy-gray-3; // anna
-      color: $color__blue-30; // anna
+    .#{$prefix}--global-header .#{$prefix}--logo__text {
+      @include typescale('delta');
+      @include font-smoothing;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      color: $color__white; // anna
+
+      &--bold {
+        font-weight: 600;
+      }
     }
-  }
 
-  .#{$prefix}--global-header__menu__item .#{$prefix}--dropdown {
-    height: rem(50px);
-    background-color: transparent;
+    .#{$prefix}--global-header__left-container {
+      display: flex;
+      align-items: center;
+    }
 
-    &:focus {
-      outline: 0;
-      background-color: $color__navy-gray-3; // anna
+    .#{$prefix}--global-header__right-container {
+      display: flex;
+      align-items: center;
+      padding-right: 1%;
+      background-color: $nav-02;
+    }
 
-      .#{$prefix}--dropdown__menu-text {
+    .#{$prefix}--global-header__menu {
+      @include reset;
+      list-style: none;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .#{$prefix}--global-header__menu__item {
+      @include reset;
+      width: 100%;
+      flex: 0 1 100px;
+
+      &:focus {
+        outline: 0;
+        background-color: $color__navy-gray-3; // anna
         color: $color__blue-30; // anna
       }
 
-      .#{$prefix}--dropdown__menu-text,
-      .#{$prefix}--dropdown__list {
+      &:last-child {
+        & .#{$prefix}--dropdown-list {
+          right: 0;
+        }
+      }
+    }
+
+    .#{$prefix}--global-header__menu__item--link {
+      @include reset;
+      @include font-smoothing;
+      @include typescale('zeta');
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: rem(50px);
+      text-decoration: none;
+      background-color: $nav-02;
+      color: $color__white; // anna
+      padding: 0 1rem;
+
+      &:hover {
+        color: $color__blue-30; // anna
+      }
+
+      &:focus {
         outline: 0;
+        background-color: $color__navy-gray-3; // anna
+        color: $color__blue-30; // anna
+      }
+    }
+
+    .#{$prefix}--global-header__menu__item .#{$prefix}--dropdown {
+      height: rem(50px);
+      background-color: transparent;
+
+      &:focus {
+        outline: 0;
+        background-color: $color__navy-gray-3; // anna
+
+        .#{$prefix}--dropdown__menu-text {
+          color: $color__blue-30; // anna
+        }
+
+        .#{$prefix}--dropdown__menu-text,
+        .#{$prefix}--dropdown__list {
+          outline: 0;
+        }
+      }
+    }
+
+    .#{$prefix}--global-header__menu .#{$prefix}--dropdown-text {
+      @include font-smoothing;
+      display: flex;
+      justify-content: center;
+      padding-top: 0;
+      padding-right: 1rem;
+      padding-bottom: 0;
+      align-items: center;
+      height: 100%;
+      z-index: 1000;
+      color: $color__white; // anna
+
+      &:hover {
+        color: $color__blue-30; // anna
+      }
+    }
+
+    .#{$prefix}--global-header__menu .#{$prefix}--dropdown-list {
+      transition: $transition--base all $carbon--standard-easing;
+      transform: translateY(-150%);
+      opacity: 0;
+      visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      width: auto;
+      z-index: -1;
+      padding-bottom: 0.5rem;
+    }
+
+    .#{$prefix}--global-header__menu .#{$prefix}--dropdown-item {
+      min-width: 200px;
+      width: 100%;
+    }
+
+    .#{$prefix}--global-header__menu .#{$prefix}--dropdown-link {
+      padding: 0.5rem 0.75rem;
+      color: $color__white; // anna
+
+      &:hover {
+        color: $color__blue-90; // anna
+        background-color: $color__blue-30; // anna
+      }
+    }
+
+    .#{$prefix}--global-header__menu .#{$prefix}--dropdown--open {
+      .#{$prefix}--dropdown-text {
+        background-color: $color__navy-gray-3; // anna
+        color: $color__blue-30; // anna
+      }
+
+      .#{$prefix}--dropdown-list {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        background-color: $color__navy-gray-3; // anna
       }
     }
   }
+}
 
-  .#{$prefix}--global-header__menu .#{$prefix}--dropdown-text {
-    @include font-smoothing;
-    display: flex;
-    justify-content: center;
-    padding-top: 0;
-    padding-right: 1rem;
-    padding-bottom: 0;
-    align-items: center;
-    height: 100%;
-    z-index: 1000;
-    color: $color__white; // anna
-
-    &:hover {
-      color: $color__blue-30; // anna
-    }
-  }
-
-  .#{$prefix}--global-header__menu .#{$prefix}--dropdown-list {
-    transition: $transition--base all $carbon--standard-easing;
-    transform: translateY(-150%);
-    opacity: 0;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    width: auto;
-    z-index: -1;
-    padding-bottom: 0.5rem;
-  }
-
-  .#{$prefix}--global-header__menu .#{$prefix}--dropdown-item {
-    min-width: 200px;
-    width: 100%;
-  }
-
-  .#{$prefix}--global-header__menu .#{$prefix}--dropdown-link {
-    padding: 0.5rem 0.75rem;
-    color: $color__white; // anna
-
-    &:hover {
-      color: $color__blue-90; // anna
-      background-color: $color__blue-30; // anna
-    }
-  }
-
-  .#{$prefix}--global-header__menu .#{$prefix}--dropdown--open {
-    .#{$prefix}--dropdown-text {
-      background-color: $color__navy-gray-3; // anna
-      color: $color__blue-30; // anna
-    }
-
-    .#{$prefix}--dropdown-list {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-      background-color: $color__navy-gray-3; // anna
-    }
+@include exports('global-header') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include global-header;
   }
 }
