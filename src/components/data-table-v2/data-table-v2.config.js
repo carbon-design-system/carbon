@@ -92,26 +92,14 @@ const toolbarActions = [
 
 const toolbarActionsX = [
   {
-    icon: iconSearch,
-  },
-  {
     icon: iconSettings,
   },
 ];
 
 const toolbarActionsXDisabled = [
   {
-    icon: iconSearch,
-  },
-  {
     icon: iconSettings,
     disabled: true,
-  },
-];
-
-const toolbarActionsXNoSearch = [
-  {
-    icon: iconSettings,
   },
 ];
 
@@ -468,7 +456,7 @@ module.exports = {
         columns: columnsSmall,
         batchActions,
         toolbarActions,
-        toolbarActionsXNoSearch,
+        toolbarActionsX,
         rows,
       },
     },
@@ -481,7 +469,7 @@ module.exports = {
         title: 'Table title',
         batchActions,
         toolbarActions,
-        toolbarActionsXNoSearch,
+        toolbarActionsX,
         columns,
         rows,
         selectedItemsCounterLabel: `
