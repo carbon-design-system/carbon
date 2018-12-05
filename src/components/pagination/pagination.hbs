@@ -3,7 +3,7 @@
 
     <div class="{{@root.prefix}}--pagination__left">
       <div class="{{@root.prefix}}--select {{@root.prefix}}--select__item-count">
-        <select id="select-id-pagination-count" aria-label="select number of items per page" class="{{@root.prefix}}--select-input"
+        <select id="select-id-pagination-count" aria-label="select number of items per page" tabindex="0" class="{{@root.prefix}}--select-input"
         data-items-per-page>
         {{#each itemsPerPageChoices}}
           <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if selected}} selected{{/if}}>
@@ -20,7 +20,7 @@
 
     <div class="{{@root.prefix}}--pagination__right">
       <div class="{{@root.prefix}}--select {{@root.prefix}}--select__page-number">
-        <select id="select-id-pagination-page" aria-label="select page number to view" class="{{@root.prefix}}--select-input" data-page-number-input>
+        <select id="select-id-pagination-page" aria-label="select page number to view" tabindex="0" class="{{@root.prefix}}--select-input" data-page-number-input>
           {{#each pageNumberChoices}}
             <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if selected}} selected{{/if}}>
               {{label}} {{#if selected}} of {{totalPages}} pages{{/if}} 
@@ -30,11 +30,10 @@
         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
       </div>
 
-      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" data-page-backward aria-label="Backward button">
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" tabindex="0" data-page-backward aria-label="Backward button">
         {{ carbon-icon 'CaretLeft24' class=(add @root.prefix '--pagination__nav-arrow')}}
       </button>
-      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward"
-        data-page-forward aria-label="Forward button">
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" tabindex="0" data-page-forward aria-label="Forward button">
         {{ carbon-icon 'CaretRight24' class=(add @root.prefix '--pagination__nav-arrow')}}
       </button>
     </div>

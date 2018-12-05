@@ -130,10 +130,6 @@ $css--helpers: true;
       }
     }
 
-    .#{$prefix}--select-input:focus .#{$prefix}--select-option-label {
-      display: none;
-    }
-
     .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
       right: 0.3rem;
       top: 0.625rem;
@@ -259,6 +255,7 @@ $css--helpers: true;
     border-left: 1px solid $ui-03;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     &:hover {
       .#{$prefix}--pagination__button-icon {
@@ -316,6 +313,10 @@ $css--helpers: true;
       top: 1.25rem;
       width: auto;
       height: auto;
+    }
+
+    .#{$prefix}--select-input:focus .#{$prefix}--select-option-label {
+      display: none;
     }
 
     .#{$prefix}--select__item-count {
