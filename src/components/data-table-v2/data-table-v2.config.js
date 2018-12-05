@@ -449,7 +449,7 @@ module.exports = {
         title: 'Table title',
         small: true,
         hasToolbar: true,
-        state: 'persistent-search',
+        state: 'default',
         searchLabel: 'Search',
         clearSearchLabel: 'Clear search input',
         addNewLabel: 'Add new',
