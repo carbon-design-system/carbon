@@ -311,8 +311,6 @@ $css--helpers: true;
 
     .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
       top: 1.25rem;
-      width: auto;
-      height: auto;
     }
 
     .#{$prefix}--select-input:focus .#{$prefix}--select-option-label {
@@ -366,11 +364,6 @@ $css--helpers: true;
     .#{$prefix}--pagination__button--backward {
       margin: 0 $spacing-md;
       padding: 0 $spacing-md;
-    }
-
-    .#{$prefix}--select__arrow {
-      right: 0;
-      top: 0.6rem;
     }
   }
 
