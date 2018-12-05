@@ -62,26 +62,27 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _handleDocumentClick(evt) {
     const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
-    const searchTrigger = searchContainer.querySelector(this.options.selectorSearchMagnifier);
-    const input = searchContainer.querySelector(this.options.selectorSearchInput);
     const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
     const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
 
     if (searchContainer && searchEvent) {
-      this.activateSearch(searchContainer, input);
+      this.activateSearch(searchContainer);
     }
 
     if (activeSearch) {
-      this.deactivateSearch(searchContainer, evt, input, searchTrigger);
+      this.deactivateSearch(searchContainer, evt);
     }
   }
 
-  activateSearch(container, input) {
+  activateSearch(container) {
+    const input = container.querySelector(this.options.selectorSearchInput);
     container.classList.add(this.options.classToolbarSearchActive);
     input.focus();
   }
 
-  deactivateSearch(container, evt, input, trigger) {
+  deactivateSearch(container, evt) {
+    const trigger = container.querySelector(this.options.selectorSearchMagnifier);
+    const input = container.querySelector(this.options.selectorSearchInput);
     const svg = trigger.querySelector('svg');
     const closeButton = container.querySelector('button');
     const closeSvg = closeButton.querySelector('svg');
