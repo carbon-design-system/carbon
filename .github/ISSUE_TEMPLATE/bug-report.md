@@ -30,8 +30,8 @@ about: Create a report to help us improve
 3. Step three
 4. etc.
 
-> Please create a reduced test case in code sandbox
-> https://codesandbox.io/s/r4zxq9pvq
+> Please create a reduced test case in CodeSandbox
+> https://codesandbox.io/s/github/IBM/carbon-components-react/tree/master/examples/codesandbox
 
 ## Additional information
 
