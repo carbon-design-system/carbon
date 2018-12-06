@@ -1,6 +1,6 @@
 {
   "name": "@carbon/type",
-  "version": "0.0.1-alpha.22",
+  "version": "0.0.1-alpha.23",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -22,11 +22,11 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/import-once": "0.0.1-alpha.22",
-    "@carbon/layout": "0.0.1-alpha.22"
+    "@carbon/import-once": "0.0.1-alpha.23",
+    "@carbon/layout": "0.0.1-alpha.23"
   },
   "devDependencies": {
-    "@carbon/bundler": "0.0.1-alpha.22",
+    "@carbon/bundler": "0.0.1-alpha.23",
     "rimraf": "^2.6.2"
   },
   "eyeglass": {
