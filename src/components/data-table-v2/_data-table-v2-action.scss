@@ -297,6 +297,10 @@
       background: $hover-field;
     }
 
+    &:hover[aria-expanded='true'] {
+      background: $ui-01;
+    }
+
     &:disabled {
       cursor: no-drop;
       > .#{$prefix}--toolbar-action__icon {
