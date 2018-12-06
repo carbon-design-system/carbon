@@ -78,7 +78,7 @@
             {{{icon}}}
             <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
               {{#each toolbar.overflowItems}}
-              <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
+              <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
                 <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
                   {{label}}
                 </button>
@@ -114,7 +114,7 @@
             {{{icon}}}
             <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
               {{#each toolbar.overflowItems}}
-              <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
+              <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
                 <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
                   {{label}}
                 </button>
