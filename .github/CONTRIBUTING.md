@@ -201,6 +201,11 @@ yarn dev
 
 Once it's done building, you can start editing source code or creating new components. The system is set up to automatically bundle your changes/additions. Visit http://localhost:3000 to see the changes happen on the fly.
 
+Options:
+
+- `-b`: Enable breaking changes for the next release
+- `-e`: Enable experimental features
+
 ### 6. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running our test commands:

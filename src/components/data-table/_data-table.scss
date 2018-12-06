@@ -3,238 +3,251 @@
 @import '../../globals/scss/theme';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/css--typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../checkbox/checkbox';
 @import '../../globals/scss/import-once';
 @import '../../components/overflow-menu/overflow-menu';
 
-@include exports('data-table') {
-  .#{$prefix}--responsive-table-container {
-    @include reset;
-    @include font-family;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 99.9%;
-  }
-
-  .#{$prefix}--responsive-table {
-    @include reset;
-    background-color: $ui-01;
-    width: 100%;
-    min-width: 500px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    border: 2px solid $ui-03;
-
-    td {
+@mixin data-table {
+  @include deprecate(
+    'The `data-table` component in `carbon-components` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'If you still need this component, please use the `data-table-v2` component.'
+  ) {
+    .#{$prefix}--responsive-table-container {
       @include reset;
-      @include typescale('zeta');
-      padding: 0 rem(6px);
-      vertical-align: middle;
-      color: $text-01;
+      @include font-family;
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 99.9%;
     }
 
-    td p {
-      @include typescale('zeta');
+    .#{$prefix}--responsive-table {
+      @include reset;
+      background-color: $ui-01;
+      width: 100%;
+      min-width: 500px;
+      border-collapse: collapse;
+      border-spacing: 0;
+      border: 2px solid $ui-03;
+
+      td {
+        @include reset;
+        @include typescale('zeta');
+        padding: 0 rem(6px);
+        vertical-align: middle;
+        color: $text-01;
+      }
+
+      td p {
+        @include typescale('zeta');
+      }
+
+      th {
+        @include reset;
+        @include typescale('omega');
+        padding: rem(9px) rem(6px);
+        vertical-align: middle;
+        font-weight: 600;
+        color: $text-01;
+
+        &:focus {
+          outline: 1px solid transparent;
+
+          span {
+            @include focus-outline('border');
+          }
+        }
+      }
+
+      table {
+        @include reset;
+      }
+
+      &--tall {
+        td,
+        th {
+          padding-top: rem(15px);
+          padding-bottom: rem(15px);
+        }
+      }
+
+      &--static-size {
+        @include reset;
+        border-collapse: collapse;
+        width: auto;
+        border: 2px solid $ui-03;
+
+        tr td:first-child,
+        tr th:first-child {
+          padding-left: 1.5rem;
+        }
+      }
     }
 
-    th {
+    .#{$prefix}--responsive-table--tall {
+      td,
+      th {
+        padding-top: rem(10px);
+        padding-bottom: rem(10px);
+      }
+    }
+
+    .#{$prefix}--table-row {
+      @include reset;
+      height: $data-table-row-height;
+      padding-left: 1rem;
+    }
+
+    .#{$prefix}--table-head .#{$prefix}--table-row {
+      border-bottom: $data-table-heading-border-bottom;
+      height: rem(32px);
+    }
+
+    .#{$prefix}--table-header {
       @include reset;
       @include typescale('omega');
-      padding: rem(9px) rem(6px);
-      vertical-align: middle;
       font-weight: 600;
-      color: $text-01;
+      text-align: left;
+      text-transform: $data-table-heading-transform;
+      height: rem(40px);
+    }
+
+    // zebra stripes
+    .#{$prefix}--table-body {
+      > .#{$prefix}--parent-row,
+      > .#{$prefix}--parent-row {
+        background-color: $ui-01;
+
+        & + .#{$prefix}--expandable-row {
+          background-color: $ui-01;
+        }
+
+        &--even {
+          background-color: $ui-02;
+
+          & + .#{$prefix}--expandable-row {
+            background-color: $ui-02;
+          }
+        }
+      }
+    }
+
+    .#{$prefix}--table-body .#{$prefix}--table-row {
+      border: 1px solid transparent;
+
+      &:first-child:hover,
+      &:first-child:focus {
+        border-left: 2px solid $brand-02;
+        outline: 1px solid $brand-02;
+      }
+
+      &:not(:first-child):hover,
+      &:not(:first-child):focus {
+        border-left: 2px solid $brand-02;
+        outline: 1px solid $brand-02;
+      }
+    }
+
+    // expandable styles
+    .#{$prefix}--expandable-row {
+      > td {
+        border-left: 4px solid $brand-01;
+        padding: 2rem;
+      }
+
+      &--hidden {
+        visibility: hidden;
+      }
+    }
+
+    // actions
+    .#{$prefix}--table-expand {
+      padding-left: rem(8px);
+      padding-right: rem(12px);
+      text-align: center;
+      width: rem(20px);
+      cursor: pointer;
 
       &:focus {
         outline: 1px solid transparent;
 
-        span {
+        svg {
           @include focus-outline('border');
         }
       }
     }
 
-    table {
-      @include reset;
-    }
-
-    &--tall {
-      td,
-      th {
-        padding-top: rem(15px);
-        padding-bottom: rem(15px);
-      }
-    }
-
-    &--static-size {
-      @include reset;
-      border-collapse: collapse;
-      width: auto;
-      border: 2px solid $ui-03;
-
-      tr td:first-child,
-      tr th:first-child {
-        padding-left: 1.5rem;
-      }
-    }
-  }
-
-  .#{$prefix}--responsive-table--tall {
-    td,
-    th {
-      padding-top: rem(10px);
-      padding-bottom: rem(10px);
-    }
-  }
-
-  .#{$prefix}--table-row {
-    @include reset;
-    height: $data-table-row-height;
-    padding-left: 1rem;
-  }
-
-  .#{$prefix}--table-head .#{$prefix}--table-row {
-    border-bottom: $data-table-heading-border-bottom;
-    height: rem(32px);
-  }
-
-  .#{$prefix}--table-header {
-    @include reset;
-    @include typescale('omega');
-    font-weight: 600;
-    text-align: left;
-    text-transform: $data-table-heading-transform;
-    height: rem(40px);
-  }
-
-  // zebra stripes
-  .#{$prefix}--table-body {
-    > .#{$prefix}--parent-row,
-    > .#{$prefix}--parent-row {
-      background-color: $ui-01;
-
-      & + .#{$prefix}--expandable-row {
-        background-color: $ui-01;
-      }
-
-      &--even {
-        background-color: $ui-02;
-
-        & + .#{$prefix}--expandable-row {
-          background-color: $ui-02;
-        }
-      }
-    }
-  }
-
-  .#{$prefix}--table-body .#{$prefix}--table-row {
-    border: 1px solid transparent;
-
-    &:first-child:hover,
-    &:first-child:focus {
-      border-left: 2px solid $brand-02;
-      outline: 1px solid $brand-02;
-    }
-
-    &:not(:first-child):hover,
-    &:not(:first-child):focus {
-      border-left: 2px solid $brand-02;
-      outline: 1px solid $brand-02;
-    }
-  }
-
-  // expandable styles
-  .#{$prefix}--expandable-row {
-    > td {
-      border-left: 4px solid $brand-01;
-      padding: 2rem;
-    }
-
-    &--hidden {
-      visibility: hidden;
-    }
-  }
-
-  // actions
-  .#{$prefix}--table-expand {
-    padding-left: rem(8px);
-    padding-right: rem(12px);
-    text-align: center;
-    width: rem(20px);
-    cursor: pointer;
-
-    &:focus {
-      outline: 1px solid transparent;
-
-      svg {
-        @include focus-outline('border');
-      }
-    }
-  }
-
-  .#{$prefix}--table-expand__svg {
-    fill: $ui-05;
-    transform: rotate(0deg);
-    transition: transform 200ms $carbon--standard-easing;
-    width: 12px;
-    height: 12px;
-    margin-left: rem(7px);
-    margin-right: rem(2px);
-
-    @media all and (min--moz-device-pixel-ratio: 0) and (min-resolution: 3e1dpcm) {
-      margin-top: 2px;
-    }
-  }
-
-  .#{$prefix}--table-expand[data-previous-value='collapsed'] .#{$prefix}--table-expand__svg {
-    transform: rotate(90deg);
-    transition: transform 200ms $carbon--standard-easing;
-  }
-
-  [data-event='sort'] {
-    cursor: pointer;
-  }
-
-  .#{$prefix}--table-sort__svg {
-    fill: $ui-05;
-    width: 8px;
-    height: 8px;
-    transform: rotate(0deg);
-    transition: transform 200ms $carbon--standard-easing;
-  }
-
-  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__svg {
-    transform: rotate(180deg);
-    transition: transform 200ms $carbon--standard-easing;
-  }
-
-  .#{$prefix}--table-select {
-    @include reset;
-    width: rem(30px);
-    text-align: center;
-    padding-left: 0;
-    padding-right: 0;
-
-    .#{$prefix}--checkbox-label {
-      display: inline-flex;
-      margin: 0;
+    .#{$prefix}--table-expand__svg {
+      fill: $ui-05;
+      transform: rotate(0deg);
+      transition: transform 200ms $carbon--standard-easing;
+      width: 12px;
+      height: 12px;
+      margin-left: rem(7px);
+      margin-right: rem(2px);
 
       @media all and (min--moz-device-pixel-ratio: 0) and (min-resolution: 3e1dpcm) {
         margin-top: 2px;
       }
     }
 
-    .#{$prefix}--checkbox-appearance {
-      margin: 0;
+    .#{$prefix}--table-expand[data-previous-value='collapsed'] .#{$prefix}--table-expand__svg {
+      transform: rotate(90deg);
+      transition: transform 200ms $carbon--standard-easing;
+    }
+
+    [data-event='sort'] {
+      cursor: pointer;
+    }
+
+    .#{$prefix}--table-sort__svg {
+      fill: $ui-05;
+      width: 8px;
+      height: 8px;
+      transform: rotate(0deg);
+      transition: transform 200ms $carbon--standard-easing;
+    }
+
+    .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__svg {
+      transform: rotate(180deg);
+      transition: transform 200ms $carbon--standard-easing;
+    }
+
+    .#{$prefix}--table-select {
+      @include reset;
+      width: rem(30px);
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+
+      .#{$prefix}--checkbox-label {
+        display: inline-flex;
+        margin: 0;
+
+        @media all and (min--moz-device-pixel-ratio: 0) and (min-resolution: 3e1dpcm) {
+          margin-top: 2px;
+        }
+      }
+
+      .#{$prefix}--checkbox-appearance {
+        margin: 0;
+      }
+    }
+
+    .#{$prefix}--table-overflow {
+      width: rem(40px);
+      text-align: center;
+
+      .#{$prefix}--overflow-menu {
+        padding: 0;
+      }
     }
   }
+}
 
-  .#{$prefix}--table-overflow {
-    width: rem(40px);
-    text-align: center;
-
-    .#{$prefix}--overflow-menu {
-      padding: 0;
-    }
+@include exports('data-table') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include data-table;
   }
 }
