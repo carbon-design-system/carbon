@@ -1,7 +1,6 @@
 ---
 name: "Bug Report \U0001F41B"
 about: Something isn't working as expected? Here is the right place to report.
-
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
