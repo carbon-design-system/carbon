@@ -1,7 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  select,
+  text,
+  number,
+} from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
 
 const directions = {
@@ -16,11 +22,13 @@ const props = {
     clickToOpen: boolean('Click to open (clickToOpen)', false),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
+    tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
   }),
   withoutIcon: () => ({
     showIcon: false,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
+    tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
   }),
 };
 
