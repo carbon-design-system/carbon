@@ -107,7 +107,8 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @param {Event} event The event triggering this method
    */
   _handleFocusOut = event => {
-    const nextTargetIsOfSelf = this.element.contains(event.relatedTarget) || event.relatedTarget === this.triggerButton;
+    const nextTargetIsOfSelf =
+      this.element.contains(event.relatedTarget) || event.relatedTarget === this.triggerButton || !event.relatedTarget;
     const oldTargetIsOfSelf = this.element.contains(event.target);
     if (oldTargetIsOfSelf && !nextTargetIsOfSelf) {
       this.changeState('collapsed');
