@@ -73,9 +73,7 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 A nested element can use a new block name as long as the styles are independent of the parent.
 
 ```html
-<div class="bx--component">
-  <button class="bx--component-button">Button</button>
-</div>
+<div class="bx--component"><button class="bx--component-button">Button</button></div>
 ```
 
 :point_up: The `#{$prefix}--component-button` class implies that this button has independent styles from its parent.
@@ -200,6 +198,11 @@ yarn dev
 ```
 
 Once it's done building, you can start editing source code or creating new components. The system is set up to automatically bundle your changes/additions. Visit http://localhost:3000 to see the changes happen on the fly.
+
+Options:
+
+- `-b`: Enable breaking changes for the next release
+- `-e`: Enable experimental features
 
 ### 6. Test your JavaScript code
 

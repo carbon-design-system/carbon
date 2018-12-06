@@ -2,26 +2,24 @@
 
 #### Mixins
 
-Mixins specific to button are located in [src/components/button/_mixins.scss]().
+Mixins specific to button are located in [src/components/button/\_mixins.scss]().
 
 | Name         | Params                                                         | Description                                                                            |
-|--------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| ------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | button-base  |                                                                | Base styles used in every button. Used in `@mixin button-theme` by default             |
 | button-theme | bg-color, border-color, font-color, hover-bg-color, icon-color | Used to create variant styles for a button (Variations like, primary, secondary, etc.) |
-
 
 #### Modifiers
 
 Use these modifiers with `.bx--btn` class.
 
 | Selector            | Description                                   |
-|---------------------|-----------------------------------------------|
+| ------------------- | --------------------------------------------- |
 | .bx--btn--primary   | Selector for applying primary button styles   |
 | .bx--btn--secondary | Selector for applying secondary button styles |
 | .bx--btn--tertiary  | Selector for applying tertiary button styles  |
 | .bx--btn--danger    | Selector for applying danger button styles    |
 | .bx--btn--sm        | Selector for applying small button styles     |
-
 
 ### FAQ
 
