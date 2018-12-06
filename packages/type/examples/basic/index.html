@@ -6,8 +6,6 @@
   <link href="./styles.scss" rel="stylesheet">
 </head>
 <body>
-  <h1>Type package basic examples</h1>
-
   <article>
     <header>
       <h2>Font Faces</h2>
@@ -17,8 +15,8 @@
       <caption>IBM Plex Sans</caption>
       <thead>
         <tr>
-          <td></td>
-          <td></td>
+          <td>Weight</td>
+          <td>Sample</td>
         </tr>
       </thead>
       <tbody>
@@ -31,8 +29,35 @@
           <td class="type-sans">Regular</td>
         </tr>
         <tr>
+          <td>Regular Italic</td>
+          <td class="type-sans type-style-italic">Regular</td>
+        </tr>
+        <tr>
           <td>Semibold</td>
           <td class="type-sans type-weight-semibold">Semibold</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>IBM Plex Serif</caption>
+      <thead>
+        <tr>
+          <td>Weight</td>
+          <td>Sample</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Light</td>
+          <td class="type-serif type-weight-light">Light</td>
+        </tr>
+        <tr>
+          <td>Regular</td>
+          <td class="type-serif">Regular</td>
+        </tr>
+        <tr>
+          <td>Semibold</td>
+          <td class="type-serif type-weight-semibold">Semibold</td>
         </tr>
       </tbody>
     </table>
@@ -205,115 +230,102 @@
       <h2>Type styles</h2>
     </header>
     <p>Used for applying styles to a text element.</p>
-    <article>
-      <h3>Components</h3>
-      <table>
-        <thead>
-          <tr>
-            <td>Token</td>
-            <td>Sample</td>
-          </tr>
-        </thead>
+    <table>
+      <thead>
         <tr>
-          <td><pre><code>component-01</code></pre></td>
-          <td class="type-component-01">Component</td>
+          <td>Token</td>
+          <td>Sample</td>
         </tr>
-        <tr>
-          <td><pre><code>component-body-01</code></pre></td>
-          <td class="type-component-body-01">Component</td>
-        </tr>
-        <tr>
-          <td><pre><code>component-header-01</code></pre></td>
-          <td class="type-component-header-01">Component</td>
-        </tr>
-        <tr>
-          <td><pre><code>component-02</code></pre></td>
-          <td class="type-component-02">Component</td>
-        </tr>
-        <tr>
-          <td><pre><code>component-body-02</code></pre></td>
-          <td class="type-component-body-02">Component</td>
-        </tr>
-      </table>
-    </article>
-
-    <article>
-      <h3>Headings</h3>
-      <table>
-        <thead>
-          <tr>
-            <td>Token</td>
-            <td>Sample</td>
-          </tr>
-        </thead>
-        <tr>
-          <td><pre><code>heading-01</code></pre></td>
-          <td class="type-heading-01">Heading</td>
-        </tr>
-        <tr>
-          <td><pre><code>heading-02</code></pre></td>
-          <td class="type-heading-02">Heading</td>
-        </tr>
-        <tr>
-          <td><pre><code>heading-03</code></pre></td>
-          <td class="type-heading-03">Heading</td>
-        </tr>
-      </table>
-    </article>
-
-    <article>
-      <h3>Body</h3>
-      <table>
-        <thead>
-          <tr>
-            <td>Token</td>
-            <td>Sample</td>
-          </tr>
-        </thead>
-        <tr>
-          <td><pre><code>body-01</code></pre></td>
-          <td class="type-body-01">
-            Sit in deserunt quibusdam beatae fugiat? Consectetur vel quo ullam ratione ducimus. Nisi cumque provident nihil error dolore aliquid in. Corporis doloremque numquam accusantium quibusdam libero! Quidem cum repellendus sed?
-          </td>
-        </tr>
-        <tr>
-          <td><pre><code>body-02</code></pre></td>
-          <td class="type-body-02">
-            Sit in deserunt quibusdam beatae fugiat? Consectetur vel quo ullam ratione ducimus. Nisi cumque provident nihil error dolore aliquid in. Corporis doloremque numquam accusantium quibusdam libero! Quidem cum repellendus sed?
-          </td>
-        </tr>
-        <tr>
-          <td><pre><code>body-03</code></pre></td>
-          <td class="type-body-03">
-            Sit in deserunt quibusdam beatae fugiat? Consectetur vel quo ullam ratione ducimus. Nisi cumque provident nihil error dolore aliquid in. Corporis doloremque numquam accusantium quibusdam libero! Quidem cum repellendus sed?
-          </td>
-        </tr>
-      </table>
-    </article>
-
-    <article>
-      <h3>Code</h3>
-      <table>
-        <thead>
-          <tr>
-            <td>Token</td>
-            <td>Sample</td>
-          </tr>
-        </thead>
-        <tr>
-          <td><pre><code>code-01</code></pre></td>
-          <td class="type-code-01">
-            <pre><code>console.log('code snippet')</code></pre>
-          </td>
-        </tr>
-        <tr>
-          <td><pre><code>code-02</code></pre></td>
-          <td class="type-code-02">
-            <pre><code>console.log('code snippet')</code></pre>
-          </td>
-        </tr>
-      </table>
-    </article>
+      </thead>
+      <tr>
+        <td><pre><code>caption-01</code></pre></td>
+        <td class="type-caption-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>label-01</code></pre></td>
+        <td class="type-label-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>helper-text-01</code></pre></td>
+        <td class="type-helper-text-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>body-short-01</code></pre></td>
+        <td class="type-body-short-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>body-short-02</code></pre></td>
+        <td class="type-body-short-02">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>body-long-01</code></pre></td>
+        <td class="type-body-long-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>body-long-02</code></pre></td>
+        <td class="type-body-long-02">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>code-01</code></pre></td>
+        <td class="type-code-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>code-02</code></pre></td>
+        <td class="type-code-02">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>heading-01</code></pre></td>
+        <td class="type-heading-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>heading-02</code></pre></td>
+        <td class="type-heading-02">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>heading-03</code></pre></td>
+        <td class="type-heading-03">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>productive-heading-04</code></pre></td>
+        <td class="type-productive-heading-04">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>productive-heading-05</code></pre></td>
+        <td class="type-productive-heading-05">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>expressive-heading-04</code></pre></td>
+        <td class="type-expressive-heading-04">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>expressive-heading-05</code></pre></td>
+        <td class="type-expressive-heading-05">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>quotation-01</code></pre></td>
+        <td class="type-quotation-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>quotation-02</code></pre></td>
+        <td class="type-quotation-02">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>display-01</code></pre></td>
+        <td class="type-display-01">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>display-02</code></pre></td>
+        <td class="type-display-02">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>display-03</code></pre></td>
+        <td class="type-display-03">Component</td>
+      </tr>
+      <tr>
+        <td><pre><code>display-04</code></pre></td>
+        <td class="type-display-04">Component</td>
+      </tr>
+    </table>
   </article>
 
   <article>
@@ -323,17 +335,17 @@
     <article class="samples">
       <h2 class="type-heading-03 type-margin-03 type-layout-01">Top-level Heading</h2>
       <h2 class="type-heading-02 type-margin-02">Sub-heading</h2>
-      <p class="type-body-03 type-margin-01">
+      <p class="type-body-long-02 type-margin-01">
         Sit inventore sed adipisci quo commodi. Itaque vitae voluptates perferendis commodi fuga Reprehenderit perspiciatis natus quo aperiam iste nisi Perferendis sequi dolores nemo sapiente neque Beatae dolorum iste voluptates explicabo?
       </p>
-      <p class="type-body-03 type-margin-03">
+      <p class="type-body-long-02 type-margin-03">
         Sit inventore sed adipisci quo commodi. Itaque vitae voluptates perferendis commodi fuga Reprehenderit perspiciatis natus quo aperiam iste nisi Perferendis sequi dolores nemo sapiente neque Beatae dolorum iste voluptates explicabo?
       </p>
       <h2 class="type-heading-02 type-margin-02">Sub-heading</h2>
-      <p class="type-body-03 type-margin-03">
+      <p class="type-body-long-02 type-margin-03">
         Sit inventore sed adipisci quo commodi. Itaque vitae voluptates perferendis commodi fuga Reprehenderit perspiciatis natus quo aperiam iste nisi Perferendis sequi dolores nemo sapiente neque Beatae dolorum iste voluptates explicabo?
       </p>
-      <p class="type-body-03">
+      <p class="type-body-long-02">
         Sit inventore sed adipisci quo commodi. Itaque vitae voluptates perferendis commodi fuga Reprehenderit perspiciatis natus quo aperiam iste nisi Perferendis sequi dolores nemo sapiente neque Beatae dolorum iste voluptates explicabo?
       </p>
     </article>

@@ -2,45 +2,13 @@
 @import 'font-family';
 @import 'scale';
 
-$component-01: (
+$caption-01: (
   font-family: font-family('sans'),
-  font-size: type-scale(2),
+  font-size: type-scale(1),
   font-weight: font-weight('regular'),
-  line-height: rem(18px),
-  letter-spacing: 0.16px,
-);
-
-$component-body-01: (
-  font-family: font-family('sans'),
-  font-size: type-scale(2),
-  font-weight: font-weight('regular'),
-  line-height: rem(20px),
-  letter-spacing: 0.16px,
-);
-
-$component-header-01: (
-  font-family: font-family('sans'),
-  font-size: type-scale(2),
-  font-weight: font-weight('semibold'),
-  line-height: rem(18px),
-  letter-spacing: 0.16px,
-);
-
-$component-02: (
-  font-family: font-family('sans'),
-  font-size: type-scale(3),
-  font-weight: font-weight('regular'),
-  line-height: rem(22px),
-  letter-spacing: 0,
-);
-
-$component-body-02: (
-  font-family: font-family('sans'),
-  font-size: type-scale(3),
-  font-weight: font-weight('regular'),
-  line-height: rem(24px),
-  letter-spacing: 0,
-);
+  line-height: rem(16px),
+  letter-spacing: 0.32px,
+) !default;
 
 $label-01: (
   font-family: font-family('sans'),
@@ -48,34 +16,81 @@ $label-01: (
   font-weight: font-weight('regular'),
   line-height: rem(16px),
   letter-spacing: 0.32px,
-);
+) !default;
 
 $helper-text-01: (
   font-family: font-family('sans'),
   font-size: type-scale(1),
-  font-weight: font-weight('regular'),
   font-style: italic,
   line-height: rem(16px),
   letter-spacing: 0.32px,
-);
+) !default;
+
+$body-short-01: (
+  font-family: font-family('sans'),
+  font-size: type-scale(2),
+  font-weight: font-weight('regular'),
+  line-height: rem(18px),
+  letter-spacing: 0.16px,
+) !default;
+
+$body-long-01: (
+  font-family: font-family('sans'),
+  font-size: type-scale(2),
+  font-weight: font-weight('regular'),
+  line-height: rem(20px),
+  letter-spacing: 0.16px,
+) !default;
+
+$body-short-02: (
+  font-family: font-family('sans'),
+  font-size: type-scale(3),
+  font-weight: font-weight('regular'),
+  line-height: rem(22px),
+  letter-spacing: 0,
+) !default;
+
+$body-long-02: (
+  font-family: font-family('sans'),
+  font-size: type-scale(3),
+  font-weight: font-weight('regular'),
+  line-height: rem(24px),
+  letter-spacing: 0,
+) !default;
 
 $code-01: (
   font-family: font-family('mono'),
-  font-weight: font-weight('regular'),
   font-size: type-scale(1),
+  font-weight: font-weight('regular'),
   line-height: rem(16px),
   letter-spacing: 0.32px,
 ) !default;
 
 $code-02: (
   font-family: font-family('mono'),
-  font-weight: font-weight('regular'),
   font-size: type-scale(2),
+  font-weight: font-weight('regular'),
   line-height: rem(20px),
   letter-spacing: 0.32px,
 ) !default;
 
 $heading-01: (
+  font-family: font-family('sans'),
+  font-size: type-scale(2),
+  font-weight: font-weight('semibold'),
+  line-height: rem(18px),
+  letter-spacing: 0.16px,
+) !default;
+
+$heading-02: (
+  font-family: font-family('sans'),
+  font-size: type-scale(3),
+  font-weight: font-weight('semibold'),
+  line-height: rem(22px),
+  letter-spacing: 0,
+) !default;
+
+$heading-03: (
   font-family: font-family('sans'),
   font-size: type-scale(5),
   font-weight: font-weight('regular'),
@@ -83,7 +98,7 @@ $heading-01: (
   letter-spacing: 0,
 ) !default;
 
-$heading-02: (
+$productive-heading-04: (
   font-family: font-family('sans'),
   font-size: type-scale(6),
   font-weight: font-weight('regular'),
@@ -91,7 +106,7 @@ $heading-02: (
   letter-spacing: 0,
 ) !default;
 
-$heading-03: (
+$productive-heading-05: (
   font-family: font-family('sans'),
   font-size: type-scale(8),
   font-weight: font-weight('regular'),
@@ -99,52 +114,250 @@ $heading-03: (
   letter-spacing: 0,
 ) !default;
 
-$body-01: (
+$expressive-heading-04: (
   font-family: font-family('sans'),
+  font-size: type-scale(5),
   font-weight: font-weight('regular'),
-  font-size: type-scale(1),
-  line-height: rem(16px),
-  letter-spacing: 0.02rem,
-);
-
-$body-02: (
-  font-family: font-family('sans'),
-  font-weight: font-weight('regular'),
-  font-size: type-scale(2),
-  line-height: rem(20px),
-  letter-spacing: 0.01rem,
-);
-
-$body-03: (
-  font-family: font-family('sans'),
-  font-weight: font-weight('regular'),
-  font-size: type-scale(3),
-  line-height: rem(24px),
+  line-height: 130%,
   letter-spacing: 0,
-);
+  breakpoints: (
+    md: (
+      font-size: type-scale(5),
+    ),
+    lg: (
+      font-size: type-scale(6),
+      line-height: 125%,
+    ),
+    xlg: (
+      font-size: type-scale(7),
+      line-height: 129%,
+    ),
+    max: (
+      font-size: type-scale(8),
+      line-height: 125%,
+    ),
+  ),
+) !default;
+
+$expressive-heading-05: (
+  font-family: font-family('sans'),
+  font-size: type-scale(7),
+  font-weight: font-weight('light'),
+  line-height: 129%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: type-scale(9),
+      line-height: 122%,
+    ),
+    lg: (
+      font-size: type-scale(10),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: type-scale(11),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: type-scale(13),
+    ),
+  ),
+) !default;
+
+$quotation-01: (
+  font-family: font-family('serif'),
+  font-size: type-scale(5),
+  font-weight: font-weight('regular'),
+  line-height: 130%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: type-scale(5),
+    ),
+    lg: (
+      font-size: type-scale(6),
+      line-height: 125%,
+    ),
+    xlg: (
+      font-size: type-scale(7),
+      line-height: 129%,
+    ),
+    max: (
+      font-size: type-scale(8),
+      line-height: 125%,
+    ),
+  ),
+) !default;
+
+$quotation-02: (
+  font-family: font-family('serif'),
+  font-size: type-scale(7),
+  font-weight: font-weight('light'),
+  line-height: 129%,
+  letter-spacing: 0rem,
+  breakpoints: (
+    md: (
+      font-size: type-scale(9),
+      line-height: 122%,
+    ),
+    lg: (
+      font-size: type-scale(10),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: type-scale(11),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: type-scale(13),
+    ),
+  ),
+) !default;
+
+$display-01: (
+  font-family: font-family('sans'),
+  font-size: type-scale(10),
+  font-weight: font-weight('light'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: type-scale(10),
+    ),
+    lg: (
+      font-size: type-scale(12),
+    ),
+    xlg: (
+      font-size: type-scale(13),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: type-scale(15),
+      line-height: 113%,
+    ),
+  ),
+) !default;
+
+$display-02: (
+  font-family: font-family('sans'),
+  font-size: type-scale(10),
+  font-weight: font-weight('semibold'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: type-scale(10),
+      line-height: rem(50px),
+    ),
+    lg: (
+      font-size: type-scale(12),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: type-scale(13),
+      line-height: 116%,
+    ),
+    max: (
+      font-size: type-scale(15),
+      line-height: 113%,
+    ),
+  ),
+) !default;
+
+$display-03: (
+  font-family: font-family('sans'),
+  font-size: type-scale(10),
+  font-weight: font-weight('light'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: type-scale(14),
+      line-height: 115%,
+    ),
+    lg: (
+      font-size: type-scale(17),
+      line-height: 111%,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: type-scale(20),
+      line-height: 107%,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: type-scale(23),
+      line-height: 105%,
+      letter-spacing: -0.96px,
+    ),
+  ),
+) !default;
+
+$display-04: (
+  font-family: font-family('sans'),
+  font-size: type-scale(10),
+  font-weight: font-weight('semibold'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: type-scale(14),
+      line-height: 115%,
+    ),
+    lg: (
+      font-size: type-scale(17),
+      line-height: 111%,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: type-scale(20),
+      line-height: 107%,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: type-scale(23),
+      line-height: 105%,
+      letter-spacing: -0.96px,
+    ),
+  ),
+) !default;
 
 // prettier-ignore
 $tokens: (
-  component-01: $component-01,
-  component-body-01: $component-body-01,
-  component-header-01: $component-header-01,
+  // Universal tokens
+  caption-01: $caption-01,
+  label-01: $label-01,
 
-  component-02: $component-02,
-  component-body-02: $component-body-02,
+  helper-text-01: $helper-text-01,
 
-  // Code styles
+  body-short-01: $body-short-01,
+  body-short-02: $body-short-02,
+
+  body-long-01: $body-long-01,
+  body-long-02: $body-long-02,
+
   code-01: $code-01,
   code-02: $code-02,
 
-  // Heading styles
   heading-01: $heading-01,
   heading-02: $heading-02,
   heading-03: $heading-03,
 
-  // Body styles
-  body-01: $body-01,
-  body-02: $body-02,
-  body-03: $body-03,
+  // Product layout, fixed
+  productive-heading-04: $productive-heading-04,
+  productive-heading-05: $productive-heading-05,
+
+  // Editorial layout, fluid
+  expressive-heading-04: $expressive-heading-04,
+  expressive-heading-05: $expressive-heading-05,
+
+  quotation-01: $quotation-01,
+  quotation-02: $quotation-02,
+
+  display-01: $display-01,
+  display-02: $display-02,
+  display-03: $display-03,
+  display-04: $display-04,
 );
 
 @mixin properties($map) {
@@ -153,24 +366,146 @@ $tokens: (
   }
 }
 
-@mixin type-style($name, $responsive: false) {
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+/// This helper includes fluid type styles for the given token value. Fluid type
+/// means that the `font-size` is computed using `calc()` in order to be
+/// determined by the screen size instead of a breakpoint. As a result, fluid
+/// styles should be used with caution in fixed width contexts.
+///
+/// In addition, we make use of %-based line-heights so that the line-height of
+/// each type style is computed correctly due to the dynamic nature of the
+/// `font-size`.
+///
+/// Most of the logic for this work comes from CSS Tricks:
+/// https://css-tricks.com/snippets/css/fluid-typography/
+///
+/// @param {Map} $type-styles - the value of a given type token
+/// @param {?Map} $breakpoints - custom breakpoints to use
+@mixin fluid-type($type-styles, $breakpoints: $grid-breakpoints) {
+  & {
+    // Include the initial styles for the given token by default without any
+    // media query guard. This includes `font-size` as a fallback in the case
+    // that a browser does not support `calc()`
+    @include properties(map-remove($type-styles, breakpoints));
+    // We also need to include the `sm` styles by default since they don't
+    // appear in the fluid styles for tokens
+    @include fluid-type-size($type-styles, sm, $breakpoints);
+
+    // Finally, we need to go through all the breakpoints defined in the type
+    // token and apply the properties and fluid type size for that given
+    // breakpoint
+    @each $name, $values in map-get($type-styles, breakpoints) {
+      @include breakpoint($name) {
+        @include properties($values);
+        @include fluid-type-size($type-styles, $name, $breakpoints);
+      }
+    }
+  }
+}
+
+/// Computes the fluid `font-size` for a given type style and breakpoint
+/// @param {Map} $type-styles - the styles for a given token
+/// @param {String} $name - the name of the breakpoint to which we apply the fluid
+/// styles
+/// @param {?Map} $breakpoints - the breakpoints for the grid system
+@mixin fluid-type-size($type-styles, $name, $breakpoints: $grid-breakpoints) {
+  // Get the information about the breakpoint we're currently working in. Useful
+  // for getting initial width information
+  $breakpoint: map-get($breakpoints, $name);
+
+  // Our fluid styles are captured under the 'breakpoints' property in our type
+  // styles map. These define what values to treat as `max-` variables below
+  $fluid-sizes: map-get($type-styles, breakpoints);
+  $fluid-breakpoint: ();
+  // Special case for `sm` because the styles for small are on the type style
+  // directly
+  @if $name == sm {
+    $fluid-breakpoint: map-remove($type-styles, breakpoints);
+  } @else {
+    $fluid-breakpoint: map-get($fluid-sizes, $name);
+  }
+
+  // Initialize our font-sizes to the default size for the type style
+  $max-font-size: map-get($type-styles, font-size);
+  $min-font-size: map-get($type-styles, font-size);
+  @if map-has-key($fluid-breakpoint, font-size) {
+    $min-font-size: map-get($fluid-breakpoint, font-size);
+  }
+
+  // Initialize our min and max width to the width of the current breakpoint
+  $max-vw: map-get($breakpoint, width);
+  $min-vw: map-get($breakpoint, width);
+
+  // We can use `breakpoint-next` to see if there is another breakpoint we can
+  // use to update `max-font-size` and `max-vw` with larger values
+  $next-breakpoint-available: breakpoint-next($name, $breakpoints);
+  $next-fluid-breakpoint-name: null;
+
+  // We need to figure out what the next available fluid breakpoint is for our
+  // given $type-styles. In this loop we try and iterate through breakpoints
+  // until we either manually set $next-breakpoint-available to null or
+  // `breakpoint-next` returns null.
+  @while $next-breakpoint-available {
+    @if map-has-key($fluid-sizes, $next-breakpoint-available) {
+      $next-fluid-breakpoint-name: $next-breakpoint-available;
+      $next-breakpoint-available: null;
+    } @else {
+      $next-breakpoint-available: breakpoint-next(
+        $next-breakpoint-available,
+        $breakpoints
+      );
+    }
+  }
+
+  // If we have found the next available fluid breakpoint name, then we know
+  // that we have values that we can use to set max-font-size and max-vw as both
+  // values derive from the next breakpoint
+  @if $next-fluid-breakpoint-name {
+    $next-fluid-breakpoint: map-get($breakpoints, $next-fluid-breakpoint-name);
+    $max-font-size: map-get(
+      map-get($fluid-sizes, $next-fluid-breakpoint-name),
+      font-size
+    );
+    $max-vw: map-get($next-fluid-breakpoint, width);
+
+    // prettier-ignore
+    font-size: calc(#{$min-font-size} +
+      #{strip-unit($max-font-size - $min-font-size)} *
+      ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+    );
+  } @else {
+    // Otherwise, just default to setting the font size found from the type
+    // style or the given fluid breakpoint in the type style
+    font-size: $min-font-size;
+  }
+}
+
+/// Helper mixin to include the styles for a given token in any selector in your
+/// project. Also includes an optional fluid option that will enable fluid
+/// styles for the token if they are defined. Fluid styles will cause the
+/// token's font-size to be computed based on the viewport size. As a result, use
+/// with caution in fixed contexts.
+/// @param {String} $name - the name of the token to get the styles for
+/// @param {?Boolean} $fluid - specify whether to include fluid styles for the
+/// @param {?Map} $breakpoints - provide a custom breakpoint map to use
+/// token
+@mixin type-style($name, $fluid: false, $breakpoints: $grid-breakpoints) {
   @if not map-has-key($tokens, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }
 
   $token: map-get($tokens, $name);
-  $default-values: map-remove($token, 'breakpoints');
 
-  @include properties($default-values);
-
-  @if $responsive == true {
-    @if map-has-key($token, 'breakpoints') {
-      $breakpoints: map-get($token, 'breakpoints');
-      @each $name, $value in $breakpoints {
-        @include breakpoint($name) {
-          @include properties($value);
-        }
-      }
-    }
+  // If $fluid is set to true and the token has breakpoints defined for fluid
+  // styles, delegate to the fluid-type helper for the given token
+  @if $fluid == true and map-has-key($token, 'breakpoints') {
+    @include fluid-type($token, $breakpoints);
+  } @else {
+    // Otherwise, we just include all the property declarations directly on the
+    // selector
+    @include properties(map-remove($token, 'breakpoints'));
   }
 }

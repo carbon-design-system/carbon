@@ -1,9 +1,13 @@
 @import '../../scss/type';
+@import '../../scss/font-face/sans';
+@import '../../scss/font-face/serif';
+@import '../../scss/font-face/mono';
 
 //------------------------------------------------------------------------------
 // Font-face
 //------------------------------------------------------------------------------
 .type-sans,
+.type-serif,
 .type-mono {
   @include font-weight('regular');
   @include type-scale(8);
@@ -11,6 +15,10 @@
 
 .type-sans {
   @include font-family('sans');
+}
+
+.type-serif {
+  @include font-family('serif');
 }
 
 .type-mono {
@@ -23,6 +31,10 @@
 
 .type-weight-semibold {
   @include font-weight('semibold');
+}
+
+.type-style-italic {
+  font-style: italic;
 }
 
 //------------------------------------------------------------------------------
@@ -39,42 +51,9 @@
 //------------------------------------------------------------------------------
 // Type styles
 //------------------------------------------------------------------------------
-// Components
-@for $i from 1 through 2 {
-  .type-component-0#{$i} {
-    @include type-style($name: 'component-0#{$i}');
-  }
-
-  .type-component-body-0#{$i} {
-    @include type-style($name: 'component-body-0#{$i}');
-  }
-
-  @if $i == 1 {
-    .type-component-header-0#{$i} {
-      @include type-style($name: 'component-header-0#{$i}');
-    }
-  }
-}
-
-// Headings
-@for $i from 1 through 3 {
-  .type-heading-0#{$i} {
-    // Includes responsive styles, off by default
-    @include type-style($name: 'heading-0#{$i}');
-  }
-}
-
-// Body
-@for $i from 1 through 3 {
-  .type-body-0#{$i} {
-    @include type-style('body-0#{$i}');
-  }
-}
-
-// Code
-@for $i from 1 through 2 {
-  .type-code-0#{$i} {
-    @include type-style('code-0#{$i}');
+@each $name, $value in $tokens {
+  .type-#{$name} {
+    @include type-style($name, map-has-key($value, breakpoints));
   }
 }
 
