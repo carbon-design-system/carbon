@@ -133,7 +133,7 @@
 
   // Disabled
 
-  // Bugfix: https://github.com/IBM/carbon-components/issues/1536
+  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
   [disabled] ~ _ {
     font-size: inherit;
   }
