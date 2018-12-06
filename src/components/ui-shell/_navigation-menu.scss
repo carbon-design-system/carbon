@@ -81,8 +81,8 @@
   }
 
   a.#{$prefix}--navigation-link:hover {
-    background-color: $ibm-colors__gray--80;
-    color: $ibm-colors__gray--10;
+    background-color: #333333;
+    color: $ibm-colors__white;
   }
 
   a.#{$prefix}--navigation-link:focus {
@@ -109,7 +109,7 @@
   }
 
   .#{$prefix}--navigation__category-toggle:hover {
-    background-color: $ibm-colors__gray--80;
+    background-color: #333333;
   }
 
   .#{$prefix}--navigation__category-toggle:focus {
