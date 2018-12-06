@@ -93,6 +93,18 @@ const toolbarActions = [
 const toolbarActionsX = [
   {
     icon: iconSettings,
+    overflowItems: [
+      {
+        label: 'Option 1',
+        primaryFocus: true,
+      },
+      {
+        label: 'Option 2',
+      },
+      {
+        label: 'Option 3',
+      },
+    ],
   },
 ];
 
