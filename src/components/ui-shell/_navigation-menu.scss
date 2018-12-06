@@ -86,8 +86,8 @@
   }
 
   a.#{$prefix}--navigation-link:focus {
-    outline: mini-units(0.5) solid $ibm-colors__blue--60;
-    outline-offset: mini-units(-0.5);
+    outline: rem(3px) solid $ibm-colors__blue--60;
+    outline-offset: rem(-3px);
   }
 
   .#{$prefix}--navigation-item--icon > a.#{$prefix}--navigation-link {
@@ -113,8 +113,8 @@
   }
 
   .#{$prefix}--navigation__category-toggle:focus {
-    outline: mini-units(0.5) solid $ibm-colors__blue--60;
-    outline-offset: mini-units(-0.5);
+    outline: rem(3px) solid $ibm-colors__blue--60;
+    outline-offset: rem(-3px);
   }
 
   .#{$prefix}--navigation__category-title {

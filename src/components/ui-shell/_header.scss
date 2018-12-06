@@ -26,7 +26,7 @@
     @include button-reset();
     width: mini-units(6);
     height: mini-units(6);
-    border: mini-units(0.5) solid transparent;
+    border: rem(3px) solid transparent;
   }
 
   .#{$prefix}--header__action > svg[data-navigation-menu-panel-collapse-icon],
