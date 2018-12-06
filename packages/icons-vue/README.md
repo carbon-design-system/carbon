@@ -26,11 +26,11 @@ You can install these components from `@carbon/icons-vue` through two ways. The
 first is to install them when you're initializing your Vue app. For example:
 
 ```js
-import { CarbonComponentsVue, Bee32 } from '@carbon/icons-vue';
+import { CarbonIconsVue, Bee32 } from '@carbon/icons-vue';
 import Vue from 'vue';
 import App from './App.vue';
 
-Vue.use(CarbonComponentsVue, {
+Vue.use(CarbonIconsVue, {
   components: {
     Bee32,
   },
@@ -58,8 +58,8 @@ import { Bee32 } from '@carbon/icons-vue';
 export default {
   name: 'MyComponent',
   component: {
-    Bee32
-  }
+    Bee32,
+  },
 };
 ```
 

@@ -14,7 +14,7 @@ import { getAttributes } from '@carbon/icon-helpers';
 `;
 
 function createEntrypointFromMeta(meta) {
-  const install = `export const CarbonComponentsVue = {
+  const install = `export const CarbonIconsVue = {
   install(Vue, options) {
     const { components } = options;
     Object.keys(components).forEach(key => {
