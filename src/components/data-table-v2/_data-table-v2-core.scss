@@ -202,10 +202,6 @@
     }
   }
 
-  th {
-    background-color: $ui-03;
-  }
-
   th,
   td {
     @include typescale('zeta');
