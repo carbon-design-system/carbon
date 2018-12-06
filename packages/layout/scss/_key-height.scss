@@ -7,9 +7,10 @@
 /// @return rem
 @function get-column-width($breakpoint, $breakpoints: $grid-breakpoints) {
   @if map-has-key($breakpoints, $breakpoint) {
-    $width: map-deep-get($breakpoints, $breakpoint, width);
-    $margin: map-deep-get($breakpoints, $breakpoint, margin);
-    $columns: map-deep-get($breakpoints, $breakpoint, columns);
+    $values: map-get($breakpoints, $breakpoint);
+    $width: map-get($values, width);
+    $margin: map-get($values, margin);
+    $columns: map-get($values, columns);
 
     @return ($width - (2 * $margin)) / $columns;
   } @else {
