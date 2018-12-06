@@ -13,6 +13,7 @@ const props = {
   composedModal: () => ({
     open: boolean('Open (open in <ComposedModal>)', true),
     onKeyDown: action('onKeyDown'),
+    danger: boolean('Danger mode (danger)', false),
   }),
   modalHeader: () => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
@@ -61,9 +62,9 @@ storiesOf('ComposedModal', module)
       info: {
         text: `
             Composed Modal allows you to create your own modal with just the parts you need. The ComposedModal element provides the state management for open/close, as well as passes the ModalHeader a prop to close the modal (with the close button).
-        
+
             The interior components - ModalHeader / ModalBody / ModalFooter - are all container elements that will render any children you add in, wrapped in the appropriate CSS classes.
-        
+
             The Modal Header / Modal Footer come with some built in props to let you accelerate towards standard Carbon modal UI. If there are customizations you need to do, see the next example of just using the interior components as containers.
           `,
       },
@@ -83,8 +84,14 @@ storiesOf('ComposedModal', module)
           </p>
         </ModalBody>
         <ModalFooter>
-          <Button kind="secondary">Cancel</Button>
-          <Button kind="primary">Save</Button>
+          <Button
+            kind={props.composedModal().danger ? 'tertiary' : 'secondary'}>
+            Cancel
+          </Button>
+          <Button
+            kind={props.composedModal().danger ? 'danger--primary' : 'primary'}>
+            Save
+          </Button>
         </ModalFooter>
       </ComposedModal>
     ),

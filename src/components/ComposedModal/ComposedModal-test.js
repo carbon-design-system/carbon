@@ -118,6 +118,27 @@ describe('<ModalFooter />', () => {
       expect(buttonComponent.props().kind).toBe('secondary');
     });
   });
+
+  describe('Should render the appropriate buttons when `danger` prop is true', () => {
+    const primaryWrapper = shallow(
+      <ModalFooter primaryButtonText="test" danger />
+    );
+    const secondaryWrapper = shallow(
+      <ModalFooter secondaryButtonText="test" danger />
+    );
+
+    it('renders danger--primary button if primary text && danger', () => {
+      const buttonComponent = primaryWrapper.find('Button');
+      expect(buttonComponent.exists()).toBe(true);
+      expect(buttonComponent.props().kind).toBe('danger--primary');
+    });
+
+    it('renders tertiary button if secondary text && danger', () => {
+      const buttonComponent = secondaryWrapper.find('Button');
+      expect(buttonComponent.exists()).toBe(true);
+      expect(buttonComponent.props().kind).toBe('tertiary');
+    });
+  });
 });
 
 describe('<ComposedModal />', () => {

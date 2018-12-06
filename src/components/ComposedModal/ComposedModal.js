@@ -86,12 +86,19 @@ export default class ComposedModal extends Component {
 
   render() {
     const { open } = this.state;
-    const { className, containerClassName, children, ...other } = this.props;
+    const {
+      className,
+      containerClassName,
+      children,
+      danger,
+      ...other
+    } = this.props;
 
     const modalClass = classNames({
       [`${prefix}--modal`]: true,
       'is-visible': open,
       [className]: className,
+      [`${prefix}--modal--danger`]: danger,
     });
 
     const containerClass = classNames({
@@ -361,6 +368,7 @@ export class ModalFooter extends Component {
       onRequestClose, // eslint-disable-line
       onRequestSubmit, // eslint-disable-line
       children,
+      danger,
       ...other
     } = this.props;
 
@@ -383,7 +391,7 @@ export class ModalFooter extends Component {
           <Button
             className={secondaryClass}
             onClick={this.handleRequestClose}
-            kind="secondary">
+            kind={danger ? 'tertiary' : 'secondary'}>
             {secondaryButtonText}
           </Button>
         )}
@@ -393,7 +401,7 @@ export class ModalFooter extends Component {
             onClick={onRequestSubmit}
             className={primaryClass}
             disabled={primaryButtonDisabled}
-            kind="primary">
+            kind={danger ? 'danger--primary' : 'primary'}>
             {primaryButtonText}
           </Button>
         )}
