@@ -167,9 +167,8 @@ gulp.task('scripts:dev:feature-flags', () => {
     .then(contents =>
       contents
         .toString()
-        .replace(
-          /(exports\.([\w-_]+)\s*=\s*)(true|false)/g,
-          (match, definition, name) => (!(name in replaceTable) ? match : `${definition}${replaceTable[name]}`)
+        .replace(/(exports\.([\w-_]+)\s*=\s*)(true|false)/g, (match, definition, name) =>
+          !(name in replaceTable) ? match : `${definition}${replaceTable[name]}`
         )
     )
     .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));

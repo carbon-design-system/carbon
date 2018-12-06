@@ -4,6 +4,7 @@ The `form` component has been simplified. `.bx--form` has been removed since it 
 The `.bx--form__row` and `.bx--form__row--column` classes for form layout have been removed. Form styles will no longer dictate default layouts. See HTML docs for more details
 
 The form component supplies 3 classes.
+
 - `.bx--form-item`
 - `.bx--label`
 - `.bx--form-requirement`
@@ -16,23 +17,25 @@ For full usage guidelines of the new HTML see the component README file.
 
 The `_form.scss` file is now located at `src/components/form/_form.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/form/form';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/form/form';
 ```
 
 Quite a few class names have changed. See table below.
 
-| Old Class              | New Class            | Note    |
-|------------------------|----------------------|---------|
-| bx--form__row-item     | bx--form-item        | Changed |
-| bx--form__label        | bx--label            | Changed |
-| bx--form__requirements | bx--form-requirement | Changed |
-| bx--form__row          | N/A                  | Removed |
-| bx--form__row--column  | N/A                  | Removed |
-|                        | bx--fieldset         | Added   |
+| Old Class                | New Class            | Note    |
+| ------------------------ | -------------------- | ------- |
+| bx--form\_\_row-item     | bx--form-item        | Changed |
+| bx--form\_\_label        | bx--label            | Changed |
+| bx--form\_\_requirements | bx--form-requirement | Changed |
+| bx--form\_\_row          | N/A                  | Removed |
+| bx--form\_\_row--column  | N/A                  | Removed |
+|                          | bx--fieldset         | Added   |

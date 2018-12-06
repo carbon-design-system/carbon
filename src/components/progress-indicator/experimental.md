@@ -91,13 +91,29 @@ progressIndicatorInstance.setCurrent(1);
 Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically accommodate for any number of steps. A Progress step with an overflow tooltip and optional helper text in HTML looks like this:
 
 ```html
-<li class="bx--progress-step bx--progress-step--complete"  >
-  <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+<li class="bx--progress-step bx--progress-step--complete">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+  >
     <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path>
     <path d="M7 10.8L4.5 8.3l.8-.8L7 9.2l3.7-3.7.8.8z"></path>
   </svg>
-  <p tabindex="0" class="bx--progress-label bx--progress-label-overflow"  aria-describedby="label-tooltip">Overflow Example First step</p>
-  <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="bx--tooltip bx--tooltip_multi" data-avoid-focus-on-open>
+  <p tabindex="0" class="bx--progress-label bx--progress-label-overflow" aria-describedby="label-tooltip">
+    Overflow Example First step
+  </p>
+  <div
+    id="label-tooltip"
+    role="tooltip"
+    data-floating-menu-direction="bottom"
+    class="bx--tooltip bx--tooltip_multi"
+    data-avoid-focus-on-open
+  >
     <span class="bx--tooltip__caret"></span>
     <p class="bx--tooltip__text">Overflow Example First Step</p>
   </div>

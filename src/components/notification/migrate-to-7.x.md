@@ -10,26 +10,28 @@ The majority of the class names have changed along with some structural changes.
 
 The `_notification.scss` is now split in to two files. They are located at `src/components/notification/_inline-notification.scss` and `src/components/notification/_toast-notification.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/notification/_toast-notification.scss';
 @import 'path_to_node_modules/carbon-components/src/components/notification/_inline-notification.scss';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/notification/notification';
 ```
 
 Quite a few class names have changed. See table below.
 
-| Old Class                      | New Class: Inline                     | New Class: Toast                     |
-|--------------------------------|---------------------------------------|--------------------------------------|
-| bx--notification__title        | bx--inline-notification__title        | bx--toast-notification__title        |
-| bx--notification__subtitle     | bx--inline-notification__subtitle     | bx--toast-notification__subtitle     |
-| bx--notification__caption      | N/A                                   | bx--toast-notification__caption      |
-| bx--notification__close-button | bx--inline-notification__close-button | bx--toast-notification__close-button |
-| bx--notification__icon         | bx--inline-notification__icon         | bx--toast-notification__icon         |
+| Old Class                        | New Class: Inline                       | New Class: Toast                       |
+| -------------------------------- | --------------------------------------- | -------------------------------------- |
+| bx--notification\_\_title        | bx--inline-notification\_\_title        | bx--toast-notification\_\_title        |
+| bx--notification\_\_subtitle     | bx--inline-notification\_\_subtitle     | bx--toast-notification\_\_subtitle     |
+| bx--notification\_\_caption      | N/A                                     | bx--toast-notification\_\_caption      |
+| bx--notification\_\_close-button | bx--inline-notification\_\_close-button | bx--toast-notification\_\_close-button |
+| bx--notification\_\_icon         | bx--inline-notification\_\_icon         | bx--toast-notification\_\_icon         |
 
 To specify the type of notification you'll add a modifier class.
 
@@ -42,7 +44,7 @@ Previously this was all handled by one class.
 Here are the possible modifiers.
 
 | bx--inline-notification          | bx--toast-notification          |
-|----------------------------------|---------------------------------|
+| -------------------------------- | ------------------------------- |
 | bx--inline-notification--error   | bx--toast-notification--error   |
 | bx--inline-notification--success | bx--toast-notification--success |
 | bx--inline-notification--info    | bx--toast-notification--info    |

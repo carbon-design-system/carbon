@@ -73,9 +73,7 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 A nested element can use a new block name as long as the styles are independent of the parent.
 
 ```html
-<div class="bx--component">
-  <button class="bx--component-button">Button</button>
-</div>
+<div class="bx--component"><button class="bx--component-button">Button</button></div>
 ```
 
 :point_up: The `#{$prefix}--component-button` class implies that this button has independent styles from its parent.

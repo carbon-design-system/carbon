@@ -6,8 +6,8 @@ Modifiers are used with various classes for Tabs.
 
 | Name                            | Description                                                              |
 | ------------------------------- | ------------------------------------------------------------------------ |
-| .bx--tabs__nav--hidden        | Applies specific styles to hide the narrow tab menu options              |
-| .bx--tabs__nav-item--selected | Applies specific styles to the currently selected tab item               |
+| .bx--tabs\_\_nav--hidden        | Applies specific styles to hide the narrow tab menu options              |
+| .bx--tabs\_\_nav-item--selected | Applies specific styles to the currently selected tab item               |
 | .bx--tabs--light                | Selector for applying light dropdown styles when tabs are in mobile view |
 
 ### JavaScript
@@ -54,15 +54,15 @@ tabsInstance.setActive(document.getElementById('my-tab-item-1'));
 | Option                 | Default Selector                      | Description                                                                            |
 | ---------------------- | ------------------------------------- | -------------------------------------------------------------------------------------- |
 | selectorInit           | [data-tabs]                           | The CSS selector to find tab containers                                                |
-| selectorMenu           | .bx--tabs__nav                      | The CSS selector to find the drop down menu used in narrow mode                        |
+| selectorMenu           | .bx--tabs\_\_nav                      | The CSS selector to find the drop down menu used in narrow mode                        |
 | selectorTrigger        | .bx--tabs-trigger                     | The CSS selector to find the button to open the drop down menu used in narrow mode     |
 | selectorTriggerText    | .bx--tabs-trigger-text                | The CSS selector to find the element used in narrow mode showing the selected tab item |
-| selectorButton         | .bx--tabs__nav-item                 | The CSS selector to find tab containers                                                |
-| selectorButtonEnabled  | .bx--tabs__nav-item:not([disabled]) | The CSS selector to find tab containers that are not disabled                          |
-| selectorButtonSelected | .bx--tabs__nav-item--selected       | The CSS selector to find the selected tab                                              |
-| selectorLink           | .bx--tabs__nav-link                 | The CSS selector to find the links in tabs                                             |
-| classActive            | bx--tabs__nav-item--selected        | The CSS class for tab's selected state                                                 |
-| classHidden            | bx--tabs__nav--hidden               | The CSS class for the drop down menu's hidden state used in narrow mode                |
+| selectorButton         | .bx--tabs\_\_nav-item                 | The CSS selector to find tab containers                                                |
+| selectorButtonEnabled  | .bx--tabs\_\_nav-item:not([disabled]) | The CSS selector to find tab containers that are not disabled                          |
+| selectorButtonSelected | .bx--tabs\_\_nav-item--selected       | The CSS selector to find the selected tab                                              |
+| selectorLink           | .bx--tabs\_\_nav-link                 | The CSS selector to find the links in tabs                                             |
+| classActive            | bx--tabs\_\_nav-item--selected        | The CSS class for tab's selected state                                                 |
+| classHidden            | bx--tabs\_\_nav--hidden               | The CSS class for the drop down menu's hidden state used in narrow mode                |
 | classOpen              | bx--tabs-trigger--open                | The CSS class for the drop down menu motion on open and close                          |
 | eventBeforeSelected    | tab-beingselected                     | The name of the custom event fired before a tab is selected                            |
 | eventAfterSelected     | tab-selected                          | The name of the custom event fired after a tab is selected                             |
