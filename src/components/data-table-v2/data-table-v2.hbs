@@ -76,7 +76,7 @@
           <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
             aria-expanded="false" {{#if disabled}} disabled {{/if}}>
             {{{icon}}}
-            <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
+            <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
               {{#each toolbar.overflowItems}}
               <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
                 <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
@@ -112,7 +112,7 @@
           <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
             aria-expanded="false" {{#if disabled}} disabled {{/if}}>
             {{{icon}}}
-            <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
+            <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
               {{#each toolbar.overflowItems}}
               <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
                 <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
