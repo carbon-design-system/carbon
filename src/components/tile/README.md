@@ -4,23 +4,24 @@
 
 Use these modifiers with `.bx--tile` class.
 
-| Selector                 | Description                                                         |
-|--------------------------|---------------------------------------------------------------------|
-| .bx--tile--clickable    | Adds specific styles and custom focus/hover states for a clickable tile |
-| .bx--tile--expandable    | Adds specific styles and custom focus/hover states for a expandable tile |
-| .bx--tile--selectable    | Adds specific styles and custom focus/hover states for a selectable tile |
+| Selector              | Description                                                              |
+| --------------------- | ------------------------------------------------------------------------ |
+| .bx--tile--clickable  | Adds specific styles and custom focus/hover states for a clickable tile  |
+| .bx--tile--expandable | Adds specific styles and custom focus/hover states for a expandable tile |
+| .bx--tile--selectable | Adds specific styles and custom focus/hover states for a selectable tile |
 
-### Javascript                                                                                                                                 
+### Javascript
+
 #### Options
 
-| Option                         | Default Selector             | Description                                                               |
-|--------------------------------|------------------------------|---------------------------------------------------------------------------|
-| `selectorInit`                 | `[data-tile]`              | The selector to find the Tile element.                                  |
-| `selectorAboveTheFold`         | `[data-tile-atf]`         | The selector to find the above the fold content for a expandable Tile element. |
-| `selectorTileInput`            | `[data-tile-input]`  | The selector to find the input field in a selectable Tile element.                |
-| `classExpandedTile`            | `.bx--tile--is-expanded`     | The CSS modifier class triggered when a tile is expanded                       |
-| `classClickableTile`            | `.bx--tile--is-clicked`     | The CSS modifier class triggered when a tile is clicked                       |
-| `classSelectableTile`            | `.bx--tile--is-selected`     | The CSS modifier class triggered when a tile is selected                       |
+| Option                 | Default Selector         | Description                                                                    |
+| ---------------------- | ------------------------ | ------------------------------------------------------------------------------ |
+| `selectorInit`         | `[data-tile]`            | The selector to find the Tile element.                                         |
+| `selectorAboveTheFold` | `[data-tile-atf]`        | The selector to find the above the fold content for a expandable Tile element. |
+| `selectorTileInput`    | `[data-tile-input]`      | The selector to find the input field in a selectable Tile element.             |
+| `classExpandedTile`    | `.bx--tile--is-expanded` | The CSS modifier class triggered when a tile is expanded                       |
+| `classClickableTile`   | `.bx--tile--is-clicked`  | The CSS modifier class triggered when a tile is clicked                        |
+| `classSelectableTile`  | `.bx--tile--is-selected` | The CSS modifier class triggered when a tile is selected                       |
 
 ### Tile types
 
@@ -36,12 +37,8 @@ The expandable tile consists of two content container, one for the above the fol
     </svg>
   </button>
   <div class="bx--tile-content">
-    <span data-tile-atf class="bx--tile-content__above-the-fold">
-      <!-- Above the fold content here -->
-    </span>
-    <span class="bx--tile-content__below-the-fold">
-      <!-- Rest of the content here -->
-    </span>
+    <span data-tile-atf class="bx--tile-content__above-the-fold"> <!-- Above the fold content here --> </span>
+    <span class="bx--tile-content__below-the-fold"> <!-- Rest of the content here --> </span>
   </div>
 </div>
 ```

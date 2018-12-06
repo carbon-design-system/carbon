@@ -8,27 +8,27 @@ SVGs representing incomplete, complete and current steps now rely on inline SVGs
 
 The `_progress-indicator.scss` file is now located at `src/components/progress-indicator/_progress-indicator.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/progress-indicator/progress-indicator';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/progress-indicator/progress-indicator';
 ```
 
-| Old Class                              | New Class                     | Note      |
-|----------------------------------------|-------------------------------|-----------|
-| bx--progress-indicator                 | bx--progress                  | Changed   |
-| bx--progress-indicator__step           |                               | Unchanged |
-| bx--progress-indicator__step--complete | bx--progress-step--complete   | Changed   |
-|                                        | bx--progress-step--incomplete | Added     |
-| bx--progress-indicator__step--active   | bx--progress-step--current    | Changed   |
-| bx--progress-indicator__icon           |                               | Removed   |
-| bx--progress-indicator__label          | bx--progress-label            | Changed   |
-
-
+| Old Class                                | New Class                     | Note      |
+| ---------------------------------------- | ----------------------------- | --------- |
+| bx--progress-indicator                   | bx--progress                  | Changed   |
+| bx--progress-indicator\_\_step           |                               | Unchanged |
+| bx--progress-indicator\_\_step--complete | bx--progress-step--complete   | Changed   |
+|                                          | bx--progress-step--incomplete | Added     |
+| bx--progress-indicator\_\_step--active   | bx--progress-step--current    | Changed   |
+| bx--progress-indicator\_\_icon           |                               | Removed   |
+| bx--progress-indicator\_\_label          | bx--progress-label            | Changed   |
 
 ### JavaScript
 

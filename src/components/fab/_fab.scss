@@ -3,11 +3,14 @@
 @import '../../globals/scss/theme';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/import-once';
 
-@include exports('fab') {
-  @include deprecate('`fab` component in `carbon-components` has been deprecated.') {
+@mixin fab {
+  @include deprecate(
+    'The `fab` component in `carbon-components` has been deprecated. ' + 'It will be removed in the next major release.'
+  ) {
     .#{$prefix}--fab {
       @include reset;
       @include rotate(0, $transition--base);
@@ -51,5 +54,11 @@
         }
       }
     }
+  }
+}
+
+@include exports('fab') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include fab;
   }
 }

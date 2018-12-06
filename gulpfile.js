@@ -62,6 +62,7 @@ const templates = require('./tools/templates');
 
 const assign = v => v;
 const cloptions = commander
+  .option('-b, --use-breaking-changes', 'Build with breaking changes turned on (For dev build only)')
   .option('-e, --use-experimental-features', 'Build with experimental features turned on (For dev build only)')
   .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
@@ -135,6 +136,7 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
+const useBreakingChanges = !!cloptions.useBreakingChanges;
 let useExperimentalFeatures = !!cloptions.useExperimentalFeatures;
 
 gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
@@ -158,15 +160,15 @@ gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
 
 gulp.task('scripts:dev:feature-flags', () => {
   const replaceTable = {
+    breakingChangesX: useBreakingChanges,
     componentsX: useExperimentalFeatures,
   };
   return readFile(path.resolve(__dirname, 'src/globals/js/feature-flags.js'))
     .then(contents =>
       contents
         .toString()
-        .replace(
-          /(exports\.([\w-_]+)\s*=\s*)(true|false)/g,
-          (match, definition, name) => (!(name in replaceTable) ? match : `${definition}${replaceTable[name]}`)
+        .replace(/(exports\.([\w-_]+)\s*=\s*)(true|false)/g, (match, definition, name) =>
+          !(name in replaceTable) ? match : `${definition}${replaceTable[name]}`
         )
     )
     .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));
@@ -302,6 +304,7 @@ gulp.task('sass:dev', () =>
       header(`
         $feature-flags: (
           components-x: ${useExperimentalFeatures},
+          breaking-changes-x: ${useBreakingChanges},
           grid: ${useExperimentalFeatures},
           ui-shell: ${useExperimentalFeatures},
         );
@@ -309,6 +312,12 @@ gulp.task('sass:dev', () =>
     )
     .pipe(
       sass({
+        includePaths: ['node_modules'],
+        importer: (url, prev, done) => {
+          done({
+            file: url.replace(/^carbon-components\/scss\//, `${path.resolve(__dirname, 'src')}/`),
+          });
+        },
         outputStyle: 'expanded',
       }).on('error', sass.logError)
     )

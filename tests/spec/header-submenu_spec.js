@@ -345,10 +345,12 @@ describe('Header Submenu', function() {
       headerSubmenu = new HeaderSubmenu(element);
       document.body.appendChild(element);
       unknownEvent = new CustomEvent('unknown', { bubbles: true });
+      Object.defineProperty(unknownEvent, 'target', { value: {}, writable: true });
+      Object.defineProperty(unknownEvent, 'currentTarget', { value: {}, writable: true });
     });
 
     beforeEach(function() {
-      triggerNode.dispatchEvent(unknownEvent);
+      triggerNode.setAttribute('aria-expanded', 'false');
     });
 
     it('should gracefully ignore unknown events', function() {

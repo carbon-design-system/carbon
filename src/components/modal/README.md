@@ -69,17 +69,30 @@ modalInstance.show();
 ##### Example - Putting focus on text box when modal gets open
 
 ```html
-<div data-modal id="my-modal" class="bx--modal " role="dialog" aria-modal="true" aria-labelledby="my-modal-label" aria-describedby="my-modal-heading" tabindex="-1">
+<div
+  data-modal
+  id="my-modal"
+  class="bx--modal "
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="my-modal-label"
+  aria-describedby="my-modal-heading"
+  tabindex="-1"
+>
   <div class="bx--modal-container">
     <div class="bx--modal-header">
       <p class="bx--modal-header__heading bx--type-beta" id="my-modal-heading">Modal heading</p>
-      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
-        (The close button image)
-      </button>
+      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal">(The close button image)</button>
     </div>
     <div class="bx--modal-content">
       <label for="my-text-input" class="bx--label">Text Input label</label>
-      <input id="my-text-input" type="text" class="bx--text-input" placeholder="Optional placeholder text" data-modal-primary-focus>
+      <input
+        id="my-text-input"
+        type="text"
+        class="bx--text-input"
+        placeholder="Optional placeholder text"
+        data-modal-primary-focus
+      />
     </div>
   </div>
 </div>
