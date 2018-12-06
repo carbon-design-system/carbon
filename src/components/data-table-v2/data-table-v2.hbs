@@ -72,10 +72,20 @@
               </button>
             </div>
           </div>
-          {{#each toolbarActionsX}}
-          <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
+          {{#each toolbarActionsX as |toolbar|}}
+          <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
+            aria-expanded="false" {{#if disabled}} disabled {{/if}}>
             {{{icon}}}
-          </button>
+            <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
+              {{#each toolbar.overflowItems}}
+              <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
+                <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
+                  {{label}}
+                </button>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
           {{/each}}
         {{/is}}
         {{#is state "disabled"}}
@@ -98,10 +108,20 @@
           {{/each}}
         {{/is}}
         {{#is state "persistent-search"}}
-          {{#each toolbarActionsX}}
-          <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
+          {{#each toolbarActionsX as |toolbar|}}
+          <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
+            aria-expanded="false" {{#if disabled}} disabled {{/if}}>
             {{{icon}}}
-          </button>
+            <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
+              {{#each toolbar.overflowItems}}
+              <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
+                <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
+                  {{label}}
+                </button>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
           {{/each}}
         {{/is}}
         <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
