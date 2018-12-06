@@ -7,7 +7,8 @@ $temp-text: $color__blue-90;
   position: relative;
   max-width: 100%;
 
-  code[class*="language-"], pre[class*="language-"] {
+  code[class*="language-"],
+  pre[class*="language-"] {
     background-color: #fff;
   }
 
@@ -21,8 +22,8 @@ $temp-text: $color__blue-90;
 .code-example__copy-btn {
   height: 2.5rem;
   position: absolute;
-  top: .75rem;
-  right: .75rem;
+  top: 0.75rem;
+  right: 0.75rem;
   color: transparent;
   background-color: #fff;
   cursor: pointer;
@@ -38,14 +39,14 @@ $temp-text: $color__blue-90;
 
   svg {
     position: absolute;
-    top: .5rem;
-    left: .5rem;
+    top: 0.5rem;
+    left: 0.5rem;
   }
 }
 
 .code-example__raw-html {
   background-color: #fff;
-  border: 2px solid #F5F7FA;
+  border: 2px solid #f5f7fa;
   padding: 1rem 0;
   max-height: 12rem;
   min-height: 7rem;
@@ -77,7 +78,7 @@ $temp-text: $color__blue-90;
   }
 
   &--icon {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     fill: $temp-text;
     transition: $transition--base;
 

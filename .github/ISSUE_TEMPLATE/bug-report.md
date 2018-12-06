@@ -1,7 +1,6 @@
 ---
 name: "Bug Report \U0001F41B"
 about: Something isn't working as expected? Here is the right place to report.
-
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
@@ -30,6 +29,9 @@ about: Something isn't working as expected? Here is the right place to report.
 2. Step two
 3. Step three
 4. etc.
+
+> Please create a reduced test case in CodeSandbox
+> https://codesandbox.io/s/github/IBM/carbon-components/tree/master/examples/codesandbox
 
 ## Additional information
 

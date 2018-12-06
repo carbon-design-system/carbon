@@ -8,7 +8,7 @@
 
   & > .primary-button button,
   & > .secondary-button button {
-    margin: .5rem;
+    margin: 0.5rem;
   }
 
   & > .detail-page-header--no-tabs > .bx--detail-page-header--no-tabs {
@@ -73,7 +73,7 @@
   position: relative;
 
   .button button {
-    margin: .5rem;
+    margin: 0.5rem;
   }
 
   .data-table > div {
@@ -126,14 +126,12 @@
     }
 
     & li:not(.bx--tabs__nav-item--selected) {
-
       .bx--tabs__nav-link {
         color: $text-01;
       }
     }
 
     & .bx--tabs__nav-item:hover {
-
       .bx--tabs__nav-link {
         color: $brand-01 !important;
       }

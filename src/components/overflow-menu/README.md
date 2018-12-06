@@ -4,10 +4,10 @@
 
 Use these modifiers with .bx--overflow-menu-options class.
 
-| Selector                         | Description                        |
-|----------------------------------|------------------------------------|
-| .bx--overflow-menu--flip  | Reverse the direction of the overflow menu. |
-| .bx--overflow-menu-options--open | Displays the overflow menu options. |
+| Selector                         | Description                                 |
+| -------------------------------- | ------------------------------------------- |
+| .bx--overflow-menu--flip         | Reverse the direction of the overflow menu. |
+| .bx--overflow-menu-options--open | Displays the overflow menu options.         |
 
 ### JavaScript
 
@@ -35,19 +35,19 @@ OverflowMenu.create(document.getElementById('my-overflow-menu'));
 #### Public Methods
 
 | Name                 | Params          | Description                                                        |
-|----------------------|-----------------|--------------------------------------------------------------------|
+| -------------------- | --------------- | ------------------------------------------------------------------ |
 | shouldStateBeChanged | state: `String` | Return true if the given state is different from the current state |
 | release              |                 | Deletes the instance and removes document event listeners          |
 
 #### Options
 
-| Option                   | Default Selector                | Description                                                                            |
-|--------------------------|---------------------------------|----------------------------------------------------------------------------------------|
-| `selectorInit`           | `[data-overflow-menu]`                   | The CSS selector to find menu
-| `selectorPlacementScope`           | `body`                | The CSS selector to find the element you wish the append the menu contents to
-| `selectorOptionMenu`        | `.bx--overflow-menu-options`             | The CSS selector to find the contents of the menu
-| `objMenuOffset`    | `{ top: 3, left: 61`        | An object containing the top and left offset values in px
-| `objMenuOffsetFlip`    | `{ top: 3, left: -61`        | An object containing the top and left offset values in px for the "flipped" state
+| Option                   | Default Selector             | Description                                                                       |
+| ------------------------ | ---------------------------- | --------------------------------------------------------------------------------- |
+| `selectorInit`           | `[data-overflow-menu]`       | The CSS selector to find menu                                                     |
+| `selectorPlacementScope` | `body`                       | The CSS selector to find the element you wish the append the menu contents to     |
+| `selectorOptionMenu`     | `.bx--overflow-menu-options` | The CSS selector to find the contents of the menu                                 |
+| `objMenuOffset`          | `{ top: 3, left: 61 }`       | An object containing the top and left offset values in px                         |
+| `objMenuOffsetFlip`      | `{ top: 3, left: -61 }`      | An object containing the top and left offset values in px for the "flipped" state |
 
 ##### Example - Changing menu position by 8 pixels vertically
 
@@ -56,8 +56,7 @@ OverflowMenu.create(document.getElementById('my-overflow-menu'));
 OverflowMenu.create(document.getElementById('my-overflow-menu'), {
   objMenuOffset(menuBody, direction) {
     const { objMenuOffset: offset } = OverflowMenu.options;
-    const { top, left } = typeof offset !== 'function' ? offset:
-      offset(menuBody, direction);
+    const { top, left } = typeof offset !== 'function' ? offset : offset(menuBody, direction);
     return {
       top: top + 8,
       left,
@@ -69,7 +68,7 @@ OverflowMenu.create(document.getElementById('my-overflow-menu'), {
 #### Events
 
 | Event Name                  | Description                                         |
-|-----------------------------|-----------------------------------------------------|
+| --------------------------- | --------------------------------------------------- |
 | 'floating-menu-beingshown'  | The custom event fired before the menu gets open.   |
 | 'floating-menu-shown'       | The custom event fired after the menu gets open.    |
 | 'floating-menu-beinghidden' | The custom event fired before the menu gets closed. |
@@ -78,7 +77,7 @@ OverflowMenu.create(document.getElementById('my-overflow-menu'), {
 ##### Example - Preventing menu from being closed in a certain condition
 
 ```javascript
-document.addEventListener('floating-menu-beinghidden', function (evt) {
+document.addEventListener('floating-menu-beinghidden', function(evt) {
   if (myApplication.shouldMenuKeptOpen(evt.target)) {
     evt.preventDefault();
   }
@@ -88,7 +87,7 @@ document.addEventListener('floating-menu-beinghidden', function (evt) {
 ##### Example - Notifying events of all overflow menus being closed to an analytics library
 
 ```javascript
-document.addEventListener('floating-menu-hidden', function (evt) {
+document.addEventListener('floating-menu-hidden', function(evt) {
   myAnalyticsLibrary.send({
     action: 'Overflow menu closed',
     id: evt.target.id,

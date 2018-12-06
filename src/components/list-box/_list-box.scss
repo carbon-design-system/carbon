@@ -360,6 +360,10 @@ $list-box-menu-width: rem(300px);
     text-decoration: none;
   }
 
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:hover {
+    cursor: not-allowed;
+  }
+
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
     background-color: inherit;

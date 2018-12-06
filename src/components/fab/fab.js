@@ -1,8 +1,13 @@
+import warning from 'warning';
+import { breakingChangesX } from '../../globals/js/feature-flags';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import removedComponent from '../removed-component';
+
+let didWarnAboutDeprecation;
 
 class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
   /**
@@ -14,6 +19,13 @@ class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
    */
   constructor(element) {
     super(element);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `FabButton` component in `carbon-components` has been deprecated. It will be removed in the next major release.'
+      );
+      didWarnAboutDeprecation = true;
+    }
     this.manage(
       on(element, 'click', event => {
         this.toggle(event);
@@ -74,4 +86,4 @@ class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
   };
 }
 
-export default FabButton;
+export default (!breakingChangesX ? FabButton : removedComponent('FabButton'));

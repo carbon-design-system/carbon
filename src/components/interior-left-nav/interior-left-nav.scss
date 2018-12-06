@@ -6,16 +6,18 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-@include exports('interior-left-nav') {
+@mixin interior-left-nav {
   @include deprecate(
-    'Accessing the `interior-left-nav` component from the `carbon-components` ' +
-      'package is deprecated. Use the `carbon-addons-cloud` package instead.'
+    'The `interior-left-nav` component in `carbon-components` has been deprecated. ' +
+      'It will be removed in the next major release. ' +
+      'If you still need this component, please use the `carbon-addons-cloud` package.'
   ) {
     .#{$prefix}--interior-left-nav {
       @include reset;
@@ -371,5 +373,11 @@
         transition: transform 300ms $carbon--standard-easing;
       }
     }
+  }
+}
+
+@include exports('interior-left-nav') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include interior-left-nav;
   }
 }
