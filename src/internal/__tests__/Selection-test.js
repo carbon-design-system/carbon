@@ -72,4 +72,19 @@ describe('Selection', () => {
     wrapper.find('#clear-selection').simulate('click');
     expect(wrapper.state('selectedItems')).toEqual([]);
   });
+
+  it('should disallow selection when disabled', () => {
+    const wrapper = mount(
+      <Selection
+        {...mockProps}
+        render={({ onItemChange }) => (
+          <button onClick={() => onItemChange(1)} />
+        )}
+        disabled
+      />
+    );
+    expect(wrapper.state('selectedItems').length).toBe(0);
+    wrapper.find('button').simulate('click');
+    expect(wrapper.state('selectedItems').length).toBe(0);
+  });
 });

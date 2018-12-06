@@ -43,6 +43,7 @@ exports[`MultiSelect should render 1`] = `
   type="default"
 >
   <Selection
+    disabled={false}
     initialSelectedItems={Array []}
     onChange={[Function]}
     render={[Function]}

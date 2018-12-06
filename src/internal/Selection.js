@@ -29,6 +29,9 @@ export default class Selection extends React.Component {
     });
 
   handleClearSelection = () => {
+    if (this.props.disabled) {
+      return;
+    }
     this.internalSetState({
       selectedItems: [],
     });
@@ -46,6 +49,9 @@ export default class Selection extends React.Component {
     }));
   };
   handleOnItemChange = item => {
+    if (this.props.disabled) {
+      return;
+    }
     const { selectedItems } = this.state;
 
     let selectedIndex;

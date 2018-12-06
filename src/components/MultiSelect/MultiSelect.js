@@ -174,6 +174,7 @@ export default class MultiSelect extends React.Component {
     });
     return (
       <Selection
+        disabled={disabled}
         onChange={this.handleOnChange}
         initialSelectedItems={initialSelectedItems}
         render={({ selectedItems, onItemChange, clearSelection }) => (
@@ -235,6 +236,7 @@ export default class MultiSelect extends React.Component {
                             title={useTitleInItem ? itemText : null}
                             name={itemText}
                             checked={isChecked}
+                            disabled={disabled}
                             readOnly={true}
                             tabIndex="-1"
                             labelText={itemText}
