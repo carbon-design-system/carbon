@@ -51,7 +51,7 @@
 
   .#{$prefix}--navigation-item--active > a.#{$prefix}--navigation-link {
     color: $ibm-colors__white;
-    font-weight: bold;
+    font-weight: 600;
   }
 
   .#{$prefix}--navigation-item--active::after {
