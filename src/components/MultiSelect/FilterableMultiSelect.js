@@ -63,6 +63,16 @@ export default class FilterableMultiSelect extends React.Component {
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * Is the current selection invalid?
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * If invalid, what is the error?
+     */
+    invalidText: PropTypes.string,
   };
 
   static defaultProps = {
@@ -177,6 +187,8 @@ export default class FilterableMultiSelect extends React.Component {
       sortItems,
       compareItems,
       light,
+      invalid,
+      invalidText,
     } = this.props;
     const className = cx(
       `${prefix}--multi-select`,
@@ -213,6 +225,8 @@ export default class FilterableMultiSelect extends React.Component {
               <ListBox
                 className={className}
                 disabled={disabled}
+                invalid={invalid}
+                invalidText={invalidText}
                 {...getRootProps({ refKey: 'innerRef' })}>
                 <ListBox.Field {...getButtonProps({ disabled })}>
                   {selectedItem.length > 0 && (
