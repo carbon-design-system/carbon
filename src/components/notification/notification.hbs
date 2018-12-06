@@ -22,7 +22,7 @@
   {{/is}}
   {{#is type "warning"}}
     {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+      {{ carbon-icon 'WarningAltFilled16' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
     {{else}}
       <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
         <defs>
