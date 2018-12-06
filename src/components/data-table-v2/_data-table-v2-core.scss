@@ -172,90 +172,79 @@
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border-bottom: 1px solid $ui-03;
 
     thead {
       @include typescale('zeta');
-      background-color: $ui-02;
+      background-color: $ui-03;
       font-weight: 700;
-      border-right: 1px solid $ui-03;
     }
 
     tbody {
       @include typescale('zeta');
       background-color: $ui-01;
-      border-right: 1px solid $ui-03;
+      border-bottom: 1px solid $ui-03;
+
+      & > tr {
+        background: $ui-01;
+        border-bottom: $ui-03;
+        &:hover {
+          background: $hover-field;
+        }
+      }
     }
 
     tr {
       height: rem(48px);
 
-      &:hover {
-        td {
-          background-color: rgba($brand-02, 0.1);
-          border-top: 1px solid $brand-01;
-          border-bottom: 1px solid $brand-01;
-
-          &:first-of-type {
-            border-left: 1px solid $brand-01;
-          }
-
-          &:last-of-type {
-            border-right: 1px solid $brand-01;
-          }
-        }
-
-        .#{$prefix}--overflow-menu {
-          opacity: 1;
-        }
-      }
-    }
-
-    th {
-      border-top: 1px solid $ui-03;
-    }
-
-    th,
-    td {
-      @include typescale('zeta');
-      border-top: 1px solid $ui-03;
-      padding-left: $spacing-sm;
-      vertical-align: middle;
-      text-align: left;
-      color: $text-01;
-
-      &:first-of-type {
-        padding-left: rem(24px);
-        border-left: 1px solid $ui-03;
-      }
-
-      &:last-of-type {
-        padding-right: $spacing-lg;
-      }
-    }
-
-    // Overrrides
-    .#{$prefix}--checkbox-label {
-      padding-left: rem(28px);
-    }
-
-    .#{$prefix}--overflow-menu {
-      opacity: 0;
-
-      &:focus {
-        outline: 0;
+      .#{$prefix}--overflow-menu {
         opacity: 1;
-        box-shadow: none;
-
-        .#{$prefix}--overflow-menu__icon {
-          box-shadow: inset 0px 0px 0px 1px $brand-01;
-        }
       }
     }
+  }
 
-    .#{$prefix}--overflow-menu__icon {
-      transform: rotate(90deg);
+  th {
+    background-color: $ui-03;
+  }
+
+  th,
+  td {
+    @include typescale('zeta');
+    border-top: 1px solid $ui-03;
+    padding-left: $spacing-sm;
+    vertical-align: middle;
+    text-align: left;
+    color: $text-01;
+
+    &:first-of-type {
+      padding-left: rem(24px);
     }
+
+    &:last-of-type {
+      padding-right: $spacing-lg;
+    }
+  }
+
+  // Overrides
+  .#{$prefix}--checkbox-label {
+    padding-left: rem(28px);
+  }
+
+  .#{$prefix}--overflow-menu {
+    opacity: 1;
+
+    &:focus {
+      outline: 0;
+      opacity: 1;
+      box-shadow: none;
+
+      .#{$prefix}--overflow-menu__icon {
+        box-shadow: inset 0px 0px 0px 1px $brand-01;
+      }
+    }
+  }
+
+  .#{$prefix}--overflow-menu__icon {
+    transform: rotate(90deg);
   }
 
   // Options
@@ -280,25 +269,23 @@
 
   .#{$prefix}--data-table-v2--zebra {
     tbody tr:nth-child(even) {
-      background-color: $ui-02;
+      background-color: $data-table-zebra-color;
+      border: 1px solid transparent;
+    }
+
+    tbody tr:nth-child(even):hover {
+      background-color: $hover-field;
     }
   }
 
   .#{$prefix}--data-table-v2--no-border {
-    & {
-      border-bottom-color: transparent;
-    }
-
+    &,
     thead,
-    tbody {
-      border-right-color: transparent;
-    }
-
+    tbody,
+    tr,
     th,
     td {
-      &:first-of-type {
-        border-left-color: transparent;
-      }
+      border: 1px solid transparent;
     }
   }
 
