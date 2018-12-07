@@ -33,7 +33,7 @@
     color: $color__navy-gray-6;
     font-size: 0.75rem;
     padding: 0.5rem 1rem;
-    z-index: 9999;
+    z-index: z('overlay');
   }
 
   &__view-full-render--link-only {

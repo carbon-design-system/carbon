@@ -69,6 +69,7 @@ const cloptions = commander
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
   .option('--port-sass-dev-build [port]', 'Uses the given port for Sass dev build server', assign, 5000)
   .option('-r, --rollup', 'Uses Rollup for dev env')
+  .option('-s, --sass-source', 'Force building Sass source')
   .parse(process.argv);
 
 // Axe A11y Test
@@ -497,7 +498,7 @@ gulp.task('watch', () => {
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev', 'sass:source']);
+  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], !cloptions.sassSource ? ['sass:dev'] : ['sass:dev', 'sass:source']);
 });
 
 gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);
