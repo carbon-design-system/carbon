@@ -48,14 +48,29 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
     .command('bundle <entrypoint>')
     .description('bundle the given .js entrypoint')
     .option('-n, --name <name>', 'name the module for the UMD build')
+    .option('-g, --globals <options>', 'global module names')
     .action((entrypoint, cmd) =>
       bundle(path.join(cwd, entrypoint), {
         cwd,
+        globals: cmd.globals ? formatGlobals(cmd.globals) : {},
         name: cmd.name,
       })
     );
 
   program.parse(argv);
+}
+
+function formatGlobals(string) {
+  const mappings = string.split(',').map(mapping => {
+    return mapping.split('=');
+  });
+  return mappings.reduce(
+    (acc, [pkg, global]) => ({
+      ...acc,
+      [pkg]: global,
+    }),
+    {}
+  );
 }
 
 module.exports = bundler;

@@ -21,6 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
+    "babel-plugin-macros": "^2.4.2",
     "chalk": "^2.4.1",
     "cli-table": "^0.3.1",
     "commander": "^2.19.0",

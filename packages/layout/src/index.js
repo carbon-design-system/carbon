@@ -30,85 +30,36 @@ export const breakpoints = {
   sm: {
     width: rem(320),
     columns: 4,
-    gutter: rem(16),
     margin: 0,
   },
   md: {
     width: rem(672),
     columns: 8,
-    gutter: rem(16),
     margin: rem(16),
   },
   lg: {
     width: rem(1056),
     columns: 16,
-    gutter: rem(16),
     margin: rem(16),
   },
   xlg: {
     width: rem(1312),
     columns: 16,
-    gutter: rem(16),
     margin: rem(16),
   },
   max: {
     width: rem(1584),
     columns: 16,
-    gutter: rem(16),
     margin: rem(16),
   },
 };
 
-export const smallestBreakpoint = Object.keys(breakpoints)[0];
-
-export function isSmallestBreakpoint(name) {
-  return name === smallestBreakpoint;
+export function breakpointUp(name) {
+  return `@media (min-width: ${breakpoints[name].width})`;
 }
 
-/**
- * Generate a media query up to the width of the given breakpoint name
- * @param {string} name
- * @param {Object} styles
- * @return {Object}
- */
-export function breakpointUp(name, styles = {}) {
-  if (!breakpoints[name]) {
-    throw new Error(
-      `Unable to find breakpoint \`${name}\`. Expected one of: ` +
-        `[${Object.keys(breakpoints).join(', ')}]`
-    );
-  }
-
-  if (isSmallestBreakpoint(name)) {
-    return styles;
-  }
-
-  return {
-    [`@media (min-width: ${breakpoints[name].width})`]: styles,
-  };
-}
-
-/**
- * Generate a media query for the maximum width of the given styles
- * @param {string} name
- * @param {Object} styles
- * @return {Object}
- */
-export function breakpointDown(name, styles = {}) {
-  if (!breakpoints[name]) {
-    throw new Error(
-      `Unable to find breakpoint \`${name}\`. Expected one of: ` +
-        `[${Object.keys(breakpoints).join(', ')}]`
-    );
-  }
-
-  if (isSmallestBreakpoint(name)) {
-    return styles;
-  }
-
-  return {
-    [`@media (max-width: ${breakpoints[name].width})`]: styles,
-  };
+export function breakpointDown(name) {
+  return `@media (max-width: ${breakpoints[name].width})`;
 }
 
 export function breakpoint(...args) {

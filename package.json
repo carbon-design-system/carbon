@@ -18,7 +18,7 @@
     "ci-check": "toolkit format:diff && bundler check --ignore '**/@(node_modules|examples)/**' 'packages/**/*.scss' && toolkit test --ci --reporters=default --reporters=jest-junit",
     "clean": "lerna run clean && lerna clean --yes && rimraf build && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
-    "examples": "yarn build && node tasks/examples.js",
+    "examples": "rimraf build && yarn build && node tasks/examples.js",
     "format": "prettier --write \"**/*.{css,js,md,scss,ts}\"",
     "format:diff": "prettier --list-different \"**/*.{css,js,md,scss,ts}\"",
     "format:staged": "prettier --write",
@@ -61,6 +61,9 @@
           "reporters": [
             "default",
             "jest-junit"
+          ],
+          "testPathIgnorePatterns": [
+            "examples"
           ],
           "testRunner": "jest-circus/runner"
         }
