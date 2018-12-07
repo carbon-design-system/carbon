@@ -24,22 +24,24 @@ pixels. These sizes refer to the width and height of the icon. You can use an
 icon component into your project by doing the following:
 
 In your module:
+
 ```ts
-import { IconModule } from "@carbon/icons-angular";
+import { IconModule } from '@carbon/icons-angular';
 
 @NgModule({
   // ...
   imports: [
     // ...
-    IconModule
+    IconModule,
     // ...
-  ]
+  ],
   // ...
 })
 export class MyModule {}
 ```
 
 In your component template:
+
 ```html
 <!-- ... -->
 <ibm-icon-add32></ibm-icon-add32>

@@ -7,6 +7,7 @@
 
 - [Introduction](#introduction)
   - [Prefixes](#prefixes)
+- [Understanding `meta.json`](#understanding-metajson)
 - [FAQ](#faq)
     - [Will there be an `iconfont` package for IBM Design Language icons?](#will-there-be-an-iconfont-package-for-ibm-design-language-icons)
 
