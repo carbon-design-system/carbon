@@ -1,0 +1,32 @@
+@import '@carbon/import-once/scss/import-once';
+@import 'prefix';
+@import 'styles';
+@import 'font-family';
+
+@include exports('@carbon/type/scss/_classes.scss') {
+  // Font families
+  @each $name, $value in $font-families {
+    .#{$prefix}--type-#{$name} {
+      font-family: $value;
+    }
+  }
+
+  // Font weights
+  @each $name, $value in $font-weights {
+    .#{$prefix}--type-#{$name} {
+      font-weight: $value;
+    }
+  }
+
+  // Font styles
+  .#{$prefix}--type-italic {
+    font-style: italic;
+  }
+
+  // Type styles
+  @each $name, $value in $tokens {
+    .#{$prefix}--type-#{$name} {
+      @include type-style($name, map-has-key($value, breakpoints));
+    }
+  }
+}

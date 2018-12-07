@@ -2,39 +2,15 @@
 @import '../../scss/font-face/sans';
 @import '../../scss/font-face/serif';
 @import '../../scss/font-face/mono';
+@import '../../scss/classes';
 
 //------------------------------------------------------------------------------
 // Font-face
 //------------------------------------------------------------------------------
-.type-sans,
-.type-serif,
-.type-mono {
-  @include font-weight('regular');
+.bx--type-sans,
+.bx--type-serif,
+.bx--type-mono {
   @include type-scale(8);
-}
-
-.type-sans {
-  @include font-family('sans');
-}
-
-.type-serif {
-  @include font-family('serif');
-}
-
-.type-mono {
-  @include font-family('mono');
-}
-
-.type-weight-light {
-  @include font-weight('light');
-}
-
-.type-weight-semibold {
-  @include font-weight('semibold');
-}
-
-.type-style-italic {
-  font-style: italic;
 }
 
 //------------------------------------------------------------------------------
@@ -45,15 +21,6 @@
 
   .type-scale-#{$step} {
     @include type-scale($step);
-  }
-}
-
-//------------------------------------------------------------------------------
-// Type styles
-//------------------------------------------------------------------------------
-@each $name, $value in $tokens {
-  .type-#{$name} {
-    @include type-style($name, map-has-key($value, breakpoints));
   }
 }
 
