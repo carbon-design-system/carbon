@@ -2,10 +2,10 @@
 
 #### Mixins
 
-Mixins specific to tag are located in [src/components/tag/_mixins.scss]().
+Mixins specific to tag are located in [src/components/tag/\_mixins.scss]().
 
 | Name      | Params                 | Description                                |
-|-----------|------------------------|--------------------------------------------|
+| --------- | ---------------------- | ------------------------------------------ |
 | tag-theme | $bg-color, $text-color | Adds given background-color and text color |
 
 #### Modifiers
@@ -13,7 +13,7 @@ Mixins specific to tag are located in [src/components/tag/_mixins.scss]().
 Use these modifiers with `.bx--tag` class.
 
 | Selector               | Description                                          |
-|------------------------|------------------------------------------------------|
+| ---------------------- | ---------------------------------------------------- |
 | .bx--tag--ibm          | Apply the colors for an IBM branded service tag.     |
 | .bx--tag--beta         | Apply the colors for a beta service tag.             |
 | .bx--tag--third-party  | Apply the colors for a third-party vendor tag.       |

@@ -8,8 +8,10 @@
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/layer';
 
-@include exports('lightbox') {
-  @include deprecate('`lightbox` component in `carbon-components` has been deprecated.') {
+@mixin lightbox {
+  @include deprecate(
+    'The `lightbox` component in `carbon-components` has been deprecated. ' + 'It will be removed in the next major release.'
+  ) {
     .#{$prefix}--lightbox {
       width: rem(1056px);
       @include layer('pop-out');
@@ -54,5 +56,11 @@
       background: $ui-01;
       overflow: hidden;
     }
+  }
+}
+
+@include exports('lightbox') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include lightbox;
   }
 }

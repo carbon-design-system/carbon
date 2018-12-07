@@ -16,7 +16,7 @@
 
 @import '../button/button';
 
-@include exports('modal') {
+@mixin modal {
   .#{$prefix}--modal {
     @include reset;
     @include font-family;
@@ -145,5 +145,152 @@
 
   .#{$prefix}--modal-close__icon {
     fill: $ui-05;
+  }
+}
+
+@mixin modal--x {
+  .#{$prefix}--modal {
+    @include font-family;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: z('hidden');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    opacity: 0;
+    background-color: rgba($ui-05, 0.7);
+    transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
+    visibility: hidden;
+
+    &.is-visible {
+      z-index: z('modal');
+      opacity: 1;
+      transition: opacity 200ms;
+      visibility: visible;
+    }
+  }
+
+  .#{$prefix}--modal--danger {
+    @include modal--color($support-01);
+  }
+
+  .#{$prefix}--modal-container {
+    @include layer('pop-out');
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $ui-01;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+
+    @include breakpoint(md) {
+      height: auto;
+      min-width: 500px;
+      max-width: 50%;
+      max-height: 90%;
+    }
+
+    @include breakpoint(lg) {
+      max-height: 80%;
+    }
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content {
+    width: 75%;
+    padding-left: 1rem;
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-footer {
+    flex-shrink: 0;
+  }
+
+  .#{$prefix}--modal-header {
+    padding-top: 1rem;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include typescale('omega');
+    @include letter-spacing;
+    color: $text-02;
+    font-weight: 500;
+    margin-bottom: $spacing-2xs;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include typescale('gamma');
+    font-weight: 400;
+    color: $text-01;
+  }
+
+  .#{$prefix}--modal-content {
+    @include typescale('zeta');
+    overflow-y: auto;
+    margin-bottom: $spacing-3xl;
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--modal-content > * {
+    @include typescale('zeta');
+  }
+
+  .#{$prefix}--modal-footer {
+    display: flex;
+    margin-top: auto;
+    height: 4rem;
+    background-color: $modal-footer-background-color;
+
+    button.#{$prefix}--btn {
+      max-width: none;
+      width: 50%;
+      height: 4rem;
+      margin: 0;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  .#{$prefix}--modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $hover-field;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--modal-close__icon {
+    fill: $icon-01;
+    height: rem(20px);
+    width: rem(20px);
+  }
+}
+
+@include exports('modal') {
+  @if feature-flag-enabled('components-x') {
+    @include modal--x;
+  } @else {
+    @include modal;
   }
 }

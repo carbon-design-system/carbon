@@ -6,12 +6,14 @@ Main changes to HTML are for changes to Overflow Menu, Checkbox and icons that a
 
 The `_data-table.scss` file is now located at `src/components/data-table/_data-table.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/data-table/data-table';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/data-table/data-table';
 ```
@@ -27,11 +29,10 @@ The following methods have been removed:
 - `initOverflowMenus`
 - `placeOverflow`
 
-The following methods have been renamed to become private methods: 
+The following methods have been renamed to become private methods:
 
 - `toggleState` => `_toggleState`
 - `toggleSelectAll` => `_toggleSelectAll`
 - `toggleSort` => `_toggleSort`
 - `zebraStripe` => `_zebraStripe`
 - `initExpandableRows` => `_initExpandableRows`
-

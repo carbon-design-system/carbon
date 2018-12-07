@@ -2,6 +2,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
@@ -15,10 +16,21 @@
 @import 'left-nav';
 @import 'account-switcher';
 
+@mixin unified-header {
+  @include deprecate(
+    'The `unified-header` component in `carbon-components` has been deprecated. ' +
+      'It will be removed in the next major release.'
+  ) {
+    .#{$prefix}--unified-header {
+      @include reset;
+      position: fixed;
+      z-index: z('header');
+    }
+  }
+}
+
 @include exports('unified-header') {
-  .#{$prefix}--unified-header {
-    @include reset;
-    position: fixed;
-    z-index: z('header');
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include unified-header;
   }
 }
