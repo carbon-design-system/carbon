@@ -52,19 +52,48 @@ const pageNumberChoices = [
   },
 ];
 
+const variants = [
+  {
+    name: 'default',
+    label: 'V1',
+    context: {
+      itemsPerPageChoices,
+      version: 'v1',
+    },
+    notes: `
+        Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
+      `,
+  },
+  {
+    name: 'v2',
+    label: 'V2',
+    context: {
+      version: 'v2',
+      itemsPerPageChoices,
+    },
+  },
+]
+  .filter(variant => {
+    if (componentsX) {
+      return variant.context.version !== 'v2';
+    }
+    return variant;
+  })
+  .map((variant, index) => {
+    if (index === 0) {
+      return {
+        ...variant,
+        name: 'default',
+      };
+    }
+    return variant;
+  });
+
 module.exports = {
   context: {
-    prefix,
     componentsX,
+    prefix,
+    pageNumberChoices,
   },
-  variants: [
-    {
-      name: 'default',
-      label: 'Pagination',
-      context: {
-        itemsPerPageChoices,
-        pageNumberChoices,
-      },
-    },
-  ],
+  variants,
 };
