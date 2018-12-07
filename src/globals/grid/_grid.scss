@@ -1,12 +1,40 @@
 @import '../scss/feature-flags';
 @import '../scss/functions';
 @import '../scss/mixins';
-@import './classic/classic';
 @import './experimental/experimental';
 @import './experimental/fallback';
 
+//----------------------------------------------------------------------------------
+// EXPERIMENTAL GRID
+// NOTE: Need to ensure no conflicting functions/mixins/variables, until v10 release
+//----------------------------------------------------------------------------------
+@import '../scss/vendor/@carbon/grid/scss/container';
+@import '../scss/vendor/@carbon/grid/scss/row';
+@import '../scss/vendor/@carbon/grid/scss/col';
+
+// Placing after `@carbon/grid` imports as the variable does not have `!default` in Classic mode
+@import './classic/classic';
+
 @include exports('grid') {
-  @if feature-flag-enabled('grid') {
+  @if feature-flag-enabled('breaking-changes-x') {
+    // Default container class for a grid. Includes max-width for each breakpoint
+    .#{$prefix}--grid {
+      @include make-container();
+      @include make-container-max-widths();
+    }
+
+    // Fluid variant of the grid. Will not set max-width for breakpoints and will
+    // full-bleed across the page.
+    .#{$prefix}--fluid-grid {
+      @include make-container();
+    }
+
+    .#{$prefix}--row {
+      @include make-row();
+    }
+
+    @include make-grid-columns($grid-breakpoints, $grid-gutter);
+  } @else if feature-flag-enabled('grid') {
     @if feature-flag-enabled('grid--fallback') {
       @include grid-experimental-fallback;
     }

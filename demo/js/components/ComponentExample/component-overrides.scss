@@ -1,3 +1,5 @@
+@import '../../../../src/globals/scss/functions';
+
 .svg--sprite {
   @include hidden;
 }
@@ -207,4 +209,29 @@
 
 .bx--overflow-menu-options {
   z-index: 7000;
+}
+
+@mixin carbon-grid-override {
+  .outside {
+    background-color: #dbeaff;
+    outline: 1px solid #97c1ff;
+    height: 80px;
+  }
+
+  .inside {
+    background-color: #edf4ff;
+    height: 100%;
+  }
+
+  [class*='col'] {
+    outline: 1px dashed #97c1ff;
+  }
+
+  .bx--grid {
+    outline: 1px dashed #97c1ff;
+  }
+}
+
+@if feature-flag-enabled('breaking-changes-x') {
+  @include carbon-grid-override;
 }

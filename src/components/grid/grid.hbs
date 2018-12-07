@@ -1,26 +1,246 @@
-<div class="{{@root.prefix}}--grid">
-  <div class="{{@root.prefix}}--row">
-    <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 indigo">
-      <div class="{{@root.prefix}}--row">
-        <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6">
-          <div class="col-example">
-            <p>Content space for {{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6</p>
-          </div>
-        </div>
-        <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 green">
-          <p>Full space for {{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 (columns naturally have padding on them, adding a background color to
-            the column directly will effect the entire column, as opposed to using a child element in the example to the
-            left). </p>
-        </div>
+{{#if breakingChangesX}}
+  <div class="bx--grid">
+    <div class="bx--row">
+      <div class="bx--col bx--col--auto">
+        <h2>Small <span style="font-size: 14px;">(4 columns @ 320px)</span></h2>
       </div>
-
-      <p>Columns also expand to match the vertical size of the rest of the row (see red column)</p>
     </div>
-    <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 red">
-      <p>Background color over entire column, not just content space</p>
+    <div class="bx--row">
+      <div class="bx--col-sm-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-sm-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-sm-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-sm-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
     </div>
-    <div class="{{@root.prefix}}--row">
-      <div class="{{@root.prefix}}--offset-xs-2 {{@root.prefix}}--col-xs-10">This content is offset. Offset adds a left-margin for x columns.</div>
+    <div class="bx--row">
+      <div class="bx--col bx--col--auto">
+        <h2>Medium <span style="font-size: 14px;">(8 columns @ 672px)</span></h2>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-md-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col bx--col--auto">
+        <h2>Large <span style="font-size: 14px;">(16 columns @ 1056px)</span></h2>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-lg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col bx--col--auto">
+        <h2>X-Large <span style="font-size: 14px;">(16 columns @ 1312px)</span></h2>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-xlg-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col bx--col--auto">
+        <h2>Max <span style="font-size: 14px;">(16 columns @ 1584px)</span></h2>
+      </div>
+    </div>
+    <div class="bx--row">
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
+      <div class="bx--col-max-1">
+        <div class="outside"><div class="inside">1</div></div>
+      </div>
     </div>
   </div>
-</div>
+{{else}}
+  <div class="{{@root.prefix}}--grid">
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 indigo">
+        <div class="{{@root.prefix}}--row">
+          <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6">
+            <div class="col-example">
+              <p>Content space for {{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6</p>
+            </div>
+          </div>
+          <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 green">
+            <p>Full space for {{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 (columns naturally have padding on them, adding a background color to
+              the column directly will effect the entire column, as opposed to using a child element in the example to the
+              left). </p>
+          </div>
+        </div>
+
+        <p>Columns also expand to match the vertical size of the rest of the row (see red column)</p>
+      </div>
+      <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 red">
+        <p>Background color over entire column, not just content space</p>
+      </div>
+      <div class="{{@root.prefix}}--row">
+        <div class="{{@root.prefix}}--offset-xs-2 {{@root.prefix}}--col-xs-10">This content is offset. Offset adds a left-margin for x columns.</div>
+      </div>
+    </div>
+  </div>
+{{/if}}

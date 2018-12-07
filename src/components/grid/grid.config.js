@@ -1,6 +1,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { breakingChangesX } = require('../../globals/js/feature-flags');
 
 module.exports = {
   meta: {
@@ -8,6 +9,7 @@ module.exports = {
   },
   context: {
     prefix,
+    breakingChangesX,
   },
   variants: [
     {
