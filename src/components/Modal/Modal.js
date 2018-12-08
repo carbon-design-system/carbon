@@ -208,8 +208,8 @@ export default class Modal extends Component {
     }
   };
 
-  focusButton = evt => {
-    const primaryFocusElement = evt.currentTarget.querySelector(
+  focusButton = focusContainerElement => {
+    const primaryFocusElement = focusContainerElement.querySelector(
       this.props.selectorPrimaryFocus
     );
     if (primaryFocusElement) {
@@ -221,13 +221,20 @@ export default class Modal extends Component {
     }
   };
 
+  componentDidMount() {
+    if (!this.props.open) {
+      return;
+    }
+    this.focusButton(this.innerModal.current);
+  }
+
   handleTransitionEnd = evt => {
     if (
       this.outerModal.current.offsetWidth &&
       this.outerModal.current.offsetHeight &&
       this.beingOpen
     ) {
-      this.focusButton(evt);
+      this.focusButton(evt.currentTarget);
       this.beingOpen = false;
     }
   };
