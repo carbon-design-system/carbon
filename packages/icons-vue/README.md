@@ -1,17 +1,19 @@
-# `@carbon/icons-vue`
+# @carbon/icons-vue
 
-> Vue components for icons in digital and software products using the Carbon
-> Design System.
+> Vue components for icons in digital and software products using the
+> Carbon Design System
 
-## Getting Started
+## Getting started
 
-Run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/icons-vue` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icons-vue
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following
+command instead:
 
 ```bash
 yarn add @carbon/icons-vue
@@ -19,11 +21,13 @@ yarn add @carbon/icons-vue
 
 ## Usage
 
-Icons in this package support the following sizes: `16`, `20`, `24`, and `32`
-pixels. These sizes refer to the width and height of the icon.
+Icons in this package support the following sizes: `16`, `20`, `24`,
+and `32` pixels. These sizes refer to the width and height of the
+icon.
 
-You can install these components from `@carbon/icons-vue` through two ways. The
-first is to install them when you're initializing your Vue app. For example:
+You can install these components from `@carbon/icons-vue` through two
+ways. The first is to install them when you're initializing your Vue
+app. For example:
 
 ```js
 import { CarbonIconsVue, Bee32 } from '@carbon/icons-vue';
@@ -41,8 +45,9 @@ new Vue({
 }).$mount('#app');
 ```
 
-Using `CarbonComponentsVue` we can pass in any of the icon components that we'd
-like to use. In our application, we can then use them by doing:
+Using `CarbonIconsVue` we can pass in any of the icon components
+that we'd like to use. In our application, we can then use them by
+doing:
 
 ```vue
 <template>
@@ -50,7 +55,8 @@ like to use. In our application, we can then use them by doing:
 </template>
 ```
 
-If you would rather not register icons globally, you can also import them into individual components.
+If you would rather not register icons globally, you can also import
+them into individual components.
 
 ```js
 import { Bee32 } from '@carbon/icons-vue';
@@ -63,8 +69,9 @@ export default {
 };
 ```
 
-You can pass in props to any icon component for things like accessibility
-labels, custom classes, event handlers, and more. For example:
+You can pass in props to any icon component for things like
+accessibility labels, custom classes, event handlers, and more. For
+example:
 
 ```vue
 <template>
@@ -72,6 +79,21 @@ labels, custom classes, event handlers, and more. For example:
 </template>
 ```
 
-## 🤲 Contributing
+## 📚 Examples
 
-Looking to contribute? You should start [here](../../.github/CONTRIBUTING.md)!
+If you're looking for more examples on how to use `@carbon/icons-vue`,
+we have some examples that you can check out:
+
+- [Storybook](./examples/storybook)
+- [Vue-cli](./examples/vue-cli)
+
+## 🙌 Contributing
+
+We're always looking for contributors to help us fix bugs, build new
+features, or help us improve the project documentation. If you're
+interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)
+! 👀
+
+## 📝 License
+
+Licensed under the [Apache 2.0 License](/LICENSE).

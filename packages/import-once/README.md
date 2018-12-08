@@ -1,22 +1,31 @@
-# `@carbon/import-once`
+# @carbon/import-once
 
-> Sass helper for importing files only once. Used in the Carbon Design System.
+> Sass helper for importing files only once. Used in the Carbon Design
+> System
 
-## Getting Started
+## Getting started
 
-Run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/import-once` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/import-once
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
-instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following
+command instead:
 
 ```bash
 yarn add @carbon/import-once
 ```
 
-## 🤲 Contributing
+## 🙌 Contributing
 
-To learn more about how to contribute, look [here](/.github/CONTRIBUTING.md)!
+We're always looking for contributors to help us fix bugs, build new
+features, or help us improve the project documentation. If you're
+interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)
+! 👀
+
+## 📝 License
+
+Licensed under the [Apache 2.0 License](/LICENSE).

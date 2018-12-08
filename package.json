@@ -49,6 +49,8 @@
     "lint-staged": "^7.3.0",
     "node-sass": "^4.10.0",
     "prettier": "^1.15.2",
+    "remark": "^10.0.1",
+    "remark-word-wrap": "^2.0.2",
     "rimraf": "^2.6.2"
   },
   "toolkit": {

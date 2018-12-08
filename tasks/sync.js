@@ -1,7 +1,9 @@
 'use strict';
 
 const fs = require('fs-extra');
+const monorepo = require('./remark/remark-monorepo');
 const path = require('path');
+const remark = require('remark');
 const lerna = require('../lerna.json');
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
@@ -58,20 +60,20 @@ function sortFields(a, b) {
 }
 
 async function sync() {
-  const packages = await fs.readdir(PACKAGES_DIR);
-  const packageJsons = await Promise.all(
-    packages.map(async pkg => {
+  const packagePaths = await Promise.all(
+    (await fs.readdir(PACKAGES_DIR)).map(async pkg => {
       const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
       return {
         basename: pkg,
         filepath: packageJsonPath,
         file: await fs.readJson(packageJsonPath),
+        packagePath: path.join(PACKAGES_DIR, pkg),
       };
     })
   );
 
-  await Promise.all(
-    packageJsons.map(async ({ basename, filepath, file }) => {
+  const packages = await Promise.all(
+    packagePaths.map(async ({ basename, filepath, file, ...rest }) => {
       file.version = lerna.version;
       file.repository = `${REPO_URL_BASE}/${basename}`;
       file.bugs = 'https://github.com/IBM/carbon-elements/issues';
@@ -102,9 +104,49 @@ async function sync() {
           {}
         );
 
-      return fs.writeJson(filepath, packageJson, { spaces: 2 });
+      await fs.writeJson(filepath, packageJson, { spaces: 2 });
+      return {
+        ...rest,
+        basename,
+        filepath,
+        packageJson,
+      };
     })
   );
+
+  await Promise.all(
+    packages.map(async ({ packageJson, packagePath }) => {
+      const README_PATH = path.join(packagePath, 'README.md');
+      if (!(await fs.pathExists(README_PATH))) {
+        return;
+      }
+
+      const readme = await fs.readFile(README_PATH, 'utf8');
+      const file = await process(packagePath, readme);
+      await fs.writeFile(README_PATH, String(file));
+    })
+  );
+}
+
+let _remark;
+
+function process(cwd, contents) {
+  if (!_remark) {
+    _remark = remark()
+      .use(monorepo, {
+        root: path.resolve(__dirname, '../'),
+      })
+      .use(require('remark-word-wrap'));
+  }
+  return new Promise((resolve, reject) => {
+    _remark.process({ cwd, contents }, (error, file) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(file);
+    });
+  });
 }
 
 // eslint-disable-next-line no-console
