@@ -2,6 +2,7 @@
 
 const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 module.exports = {
   context: {
@@ -48,7 +49,7 @@ module.exports = {
         labelPrimaryButton: 'Danger',
         classModalSupplemental: `${prefix}--modal--danger`,
         classPrimaryButton: `${prefix}--btn--danger--primary`,
-        classCloseButton: `${prefix}--btn--tertiary`,
+        classCloseButton: componentsX ? `${prefix}--btn--secondary` : `${prefix}--btn--tertiary`,
       },
     },
     {
