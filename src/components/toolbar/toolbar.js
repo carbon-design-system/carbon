@@ -102,7 +102,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * The map associating DOM element and Toolbar UI instance.
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

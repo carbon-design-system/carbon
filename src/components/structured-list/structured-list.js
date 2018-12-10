@@ -117,7 +117,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     }
   }
 
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;

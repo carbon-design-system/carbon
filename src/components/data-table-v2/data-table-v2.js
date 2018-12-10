@@ -255,10 +255,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.parentRows = newParentRows;
   };
 
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   // UI Events
-  static eventHandlers /* #__PURE__ */ = {
+  static eventHandlers /* #__PURE_CLASS_PROPERTY__ */ = {
     expand: '_rowExpandToggle',
     sort: '_sortToggle',
     select: '_selectToggle',

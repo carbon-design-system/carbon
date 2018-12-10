@@ -77,7 +77,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
    * @type {WeakMap}
    */
 
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default (!breakingChangesX ? Lightbox : removedComponent('Lightbox'));

@@ -145,7 +145,7 @@ class Tab extends ContentSwitcher {
    * @member Tab.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -195,7 +195,7 @@ class Tab extends ContentSwitcher {
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE /* #__PURE__ */ = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

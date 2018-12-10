@@ -331,7 +331,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
    * The map associating DOM element and date picker UI instance.
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default DatePicker;

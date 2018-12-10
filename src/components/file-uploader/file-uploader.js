@@ -173,7 +173,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    * @member FileUploader.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;

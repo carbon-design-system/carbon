@@ -195,7 +195,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @member Dropdown.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -244,7 +244,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE /* #__PURE__ */ = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

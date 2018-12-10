@@ -1,6 +1,7 @@
 'use strict';
 
 const regexPure = /^\s*[#@]__PURE__\s*$/;
+const regexPureClassProperty = /^\s*[#@]__PURE_CLASS_PROPERTY__\s*$/;
 
 /**
  * @param {Map} map The `Map` instanve.
@@ -27,7 +28,7 @@ function mapGetOrCreate(map, key, createFn) {
 //   function TheClass() {}
 //   return TheClass;
 // }();
-// MyClass.prop /* #__PURE__ */ = value;
+// MyClass.prop /* #__PURE_CLASS_PROPERTY__ */ = value;
 // ```
 //
 // Out:
@@ -47,7 +48,7 @@ module.exports = function convertPureAssignment(babel) {
       const { expression } = path.node;
       if (expression.type === 'AssignmentExpression' && expression.operator === '=') {
         const { left, computed, optional } = expression;
-        const comment = left.trailingComments && left.trailingComments.find(item => regexPure.test(item.value));
+        const comment = left.trailingComments && left.trailingComments.find(item => regexPureClassProperty.test(item.value));
         if (!computed && !optional && left && left.type === 'MemberExpression' && left.object.type === 'Identifier' && comment) {
           const binding = path.scope.getBinding(left.object.name);
           const { init } = binding.path.node;
@@ -89,8 +90,8 @@ module.exports = function convertPureAssignment(babel) {
               const clone = t.cloneDeep(node);
               const { left, right } = clone.expression;
               left.object = t.cloneDeep(argument);
-              left.trailingComments = left.trailingComments.filter(item => !regexPure.test(item.value));
-              right.leadingComments = right.leadingComments.filter(item => !regexPure.test(item.value));
+              left.trailingComments = left.trailingComments.filter(item => !regexPureClassProperty.test(item.value));
+              right.leadingComments = right.leadingComments.filter(item => !regexPureClassProperty.test(item.value));
               return clone;
             });
             body.splice(index, 0, ...assignmentsToInsert);

@@ -118,7 +118,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @member Search.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default Search;

@@ -24,14 +24,14 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * @member HeaderSubmenu.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * Enum for header submenu actions.
    * @readonly
    * @enum {string}
    */
-  static actions /* #__PURE__ */ = {
+  static actions /* #__PURE_CLASS_PROPERTY__ */ = {
     CLOSE_SUBMENU: 'CLOSE_SUBMENU',
     OPEN_SUBMENU: 'OPEN_SUBMENU',
     TOGGLE_SUBMENU_WITH_FOCUS: 'TOGGLE_SUBMENU_WITH_FOCUS',
@@ -256,7 +256,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE /* #__PURE__ */ = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

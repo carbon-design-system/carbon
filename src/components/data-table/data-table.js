@@ -213,9 +213,9 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     this.parentRows = newParentRows;
   };
 
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
-  static eventHandlers /* #__PURE__ */ = {
+  static eventHandlers /* #__PURE_CLASS_PROPERTY__ */ = {
     expand: '_toggleRowExpand',
     sort: '_toggleSort',
     'select-all': '_toggleSelectAll',

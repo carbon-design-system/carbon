@@ -17,7 +17,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @member HeaderNav.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * @returns {Element} Currently highlighted element.
@@ -90,7 +90,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE /* #__PURE__ */ = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

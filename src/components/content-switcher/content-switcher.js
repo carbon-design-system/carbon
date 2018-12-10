@@ -128,7 +128,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @member ContentSwitcher.components
    * @type {WeakMap}
    */
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

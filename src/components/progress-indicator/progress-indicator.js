@@ -173,7 +173,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
     });
   }
 
-  static components /* #__PURE__ */ = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
