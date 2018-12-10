@@ -13,8 +13,10 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "lint": "eslint src",
+    "lint:staged": "eslint",
     "prepublish": "yarn build",
     "prettier": "prettier --write \"**/*.{scss,css,js,md}\"",
+    "prettier:staged": "prettier",
     "prettier:diff": "prettier --list-different \"**/*.{scss,css,js,md}\"",
     "semantic-release": "semantic-release",
     "start": "yarn storybook",
@@ -274,12 +276,12 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn prettier",
-      "yarn lint",
+      "yarn prettier:staged",
+      "yarn lint:staged",
       "git add"
     ],
     "*.{css,md,scss}": [
-      "yarn prettier",
+      "yarn prettier:staged",
       "git add"
     ]
   },
