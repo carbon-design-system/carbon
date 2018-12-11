@@ -212,6 +212,7 @@ describe('Popup Nav', function() {
     let element;
     let navigationMenu;
     let wrapper;
+    let li;
     let button;
     let anchors;
 
@@ -220,6 +221,7 @@ describe('Popup Nav', function() {
       element = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
       navigationMenu = new NavigationMenu(element);
       wrapper = element.querySelector('.bx--navigation__category');
+      li = element.querySelector('.bx--navigation-item');
       button = element.querySelector('.bx--navigation__category-toggle');
       anchors = element.querySelectorAll('.bx--navigation-link');
     });
@@ -241,10 +243,7 @@ describe('Popup Nav', function() {
     describe('Link', function() {
       it('should attach active link CSS classes on click', function() {
         anchors[0].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(anchors[0].classList.contains('bx--navigation-item--active')).toBe(true);
-        [...anchors].slice(1).forEach(a => {
-          expect(a.classList.contains('bx--navigation-item--active')).toBe(false);
-        });
+        expect(li.classList.contains('bx--navigation-item--active')).toBe(true);
       });
     });
 

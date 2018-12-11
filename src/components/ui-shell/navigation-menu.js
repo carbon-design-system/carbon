@@ -83,7 +83,9 @@ export default class NavigationMenu extends NavigationMenuPanel {
     const isExpanded = !this.element.hasAttribute('hidden');
     if (event.which === 27 && isExpanded) {
       this.changeState('collapsed');
-      this.triggerButton.focus();
+      if (this.triggerButton) {
+        this.triggerButton.focus();
+      }
       return;
     }
     // handle up/down arrow keys
@@ -135,7 +137,17 @@ export default class NavigationMenu extends NavigationMenuPanel {
   _handleClick = event => {
     const matchesNavSubmenu = eventMatches(event, this.options.selectorShellNavSubmenu);
     const matchesShellNavLink = eventMatches(event, this.options.selectorShellNavLink);
+    const matchesNestedShellNavLink = eventMatches(event, this.options.selectorShellNestedNavLink);
     if (!matchesNavSubmenu && !matchesShellNavLink) {
+      return;
+    }
+    if (matchesNestedShellNavLink) {
+      [...this.element.querySelectorAll(this.options.selectorShellNavLinkCurrent)].forEach(el => {
+        el.classList.remove(this.options.classShellNavItemActive, this.options.classShellNavLinkCurrent);
+      });
+      matchesNestedShellNavLink
+        .closest(this.options.selectorShellNavNestedCategory)
+        .classList.add(this.options.classShellNavItemActive);
       return;
     }
     if (matchesNavSubmenu) {
@@ -147,7 +159,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
       [...this.element.querySelectorAll(this.options.selectorShellNavLinkCurrent)].forEach(el => {
         el.classList.remove(this.options.classShellNavItemActive, this.options.classShellNavLinkCurrent);
       });
-      matchesShellNavLink.classList.add(this.options.classShellNavItemActive);
+      matchesShellNavLink.closest(this.options.selectorShellNavItem).classList.add(this.options.classShellNavItemActive);
     }
   };
 
@@ -180,6 +192,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
       attribInitTarget: 'data-navigation-menu-target',
       selectorShellNavSubmenu: `.${prefix}--navigation__category-toggle`,
       selectorShellNavLink: `.${prefix}--navigation-link`,
+      selectorShellNestedNavLink: `.${prefix}--navigation__category-item > a.${prefix}--navigation-link`,
       selectorShellNavLinkCurrent: `.${prefix}--navigation-item--active,.${prefix}--navigation__category-item--active`,
       selectorFocusableNavItems: `
         .${prefix}--navigation__category-toggle,
@@ -188,6 +201,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
       `,
       selectorShellNavItem: `.${prefix}--navigation-item`,
       selectorShellNavCategory: `.${prefix}--navigation__category`,
+      selectorShellNavNestedCategory: `.${prefix}--navigation__category-item`,
       classShellNavItemActive: `${prefix}--navigation-item--active`,
       classShellNavLinkCurrent: `${prefix}--navigation__category-item--active`,
       classShellNavCategoryExpanded: `${prefix}--navigation__category--expanded`,
