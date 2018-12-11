@@ -42,14 +42,14 @@ function App({ meta }) {
             descriptor,
             filename,
             moduleName,
+            original,
             outputOptions,
             prefix,
             size,
           } = info;
           const { attrs } = descriptor;
           const svg = js2svg(descriptor);
-          const downsized = size === 20 || size === 24;
-          const name = downsized
+          const name = original
             ? prefix.join('/') + '/' + basename + ` (Downsized to ${size})`
             : prefix.join('/') + '/' + basename;
           const id = window.encodeURIComponent(name);
