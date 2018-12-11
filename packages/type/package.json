@@ -1,7 +1,7 @@
 {
   "name": "@carbon/type",
   "description": "Typography for digital and software products using the Carbon Design System",
-  "version": "0.0.1-alpha.24",
+  "version": "0.0.1-alpha.25",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,11 +23,11 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/import-once": "0.0.1-alpha.24",
-    "@carbon/layout": "0.0.1-alpha.24"
+    "@carbon/import-once": "0.0.1-alpha.25",
+    "@carbon/layout": "0.0.1-alpha.25"
   },
   "devDependencies": {
-    "@carbon/bundler": "0.0.1-alpha.24",
+    "@carbon/bundler": "0.0.1-alpha.25",
     "rimraf": "^2.6.2"
   },
   "eyeglass": {
