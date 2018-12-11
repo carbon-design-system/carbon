@@ -1,5 +1,8 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+const featureFlags = require('../../globals/js/feature-flags');
+
 const items = [
   {
     linkId: 'tab-link-1',
@@ -29,17 +32,15 @@ const items = [
     panelClass: 'tab-4',
     label: 'Tab label 4',
     panelContent: 'Content for fourth tab goes here.',
-  },
-  {
-    linkId: 'tab-link-5',
-    panelId: 'tab-panel-5',
-    panelClass: 'tab-5',
-    label: 'Tab label 5',
-    panelContent: 'Content for fifth tab goes here.',
+    disabled: true,
   },
 ];
 
 module.exports = {
+  context: {
+    prefix,
+    featureFlags,
+  },
   variants: [
     {
       name: 'default',

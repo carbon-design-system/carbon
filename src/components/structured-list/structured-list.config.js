@@ -1,5 +1,8 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
+
 const columns = [
   {
     name: 'column1',
@@ -65,6 +68,9 @@ const rows = [
 /* eslint-enable max-len */
 
 module.exports = {
+  context: {
+    prefix,
+  },
   variants: [
     {
       name: 'default',
@@ -78,6 +84,7 @@ module.exports = {
       name: 'selection',
       label: 'With selection',
       context: {
+        componentsX,
         columns,
         rows,
         hasBorder: true,

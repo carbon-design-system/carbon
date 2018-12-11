@@ -1,5 +1,5 @@
 // Used for sidebar in dev environment
-@import '../../src/components/interior-left-nav/interior-left-nav';
+@import 'carbon-addons-cloud/scss/components/InteriorLeftNav/interior-left-nav';
 @import '../../src/globals/scss/styles';
 @import './_vars.scss';
 @import './_mixins.scss';
@@ -189,4 +189,8 @@
 
 .indigo {
   background-color: rgba(indigo, 0.2);
+}
+
+.component-example__live .bx--form-item {
+  margin-bottom: 2rem;
 }

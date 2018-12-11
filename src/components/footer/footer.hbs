@@ -1,13 +1,13 @@
-<footer class="bx--footer bx--footer--bottom-fixed" role="contentinfo">
-  <div class="bx--footer-info">
+<footer class="{{@root.prefix}}--footer {{@root.prefix}}--footer--bottom-fixed" role="contentinfo">
+  <div class="{{@root.prefix}}--footer-info">
     {{#each items}}
-      <div class="bx--footer-info__item">
-        <p class="bx--footer-label">{{title}}</p>
-        <a class="bx--link" href="#">{{label}}Contact Bluemix Sales</a>
+      <div class="{{@root.prefix}}--footer-info__item">
+        <p class="{{@root.prefix}}--footer-label">{{title}}</p>
+        <a class="{{@root.prefix}}--link" href="#">{{label}}Contact Bluemix Sales</a>
       </div>
     {{/each}}
   </div>
-  <div class="bx--footer-cta">
-    <button class="bx--btn bx--btn--primary" type="submit">Create</button>
+  <div class="{{@root.prefix}}--footer-cta">
+    <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="submit">Create</button>
   </div>
 </footer>

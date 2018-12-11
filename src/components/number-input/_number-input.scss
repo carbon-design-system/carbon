@@ -95,7 +95,7 @@
     align-items: center;
     left: auto;
     right: 0.5rem;
-    bottom: 0.625rem;
+    top: 2rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -145,10 +145,24 @@
     input[type='number']:focus ~ .#{$prefix}--label {
       color: $support-01;
     }
+  }
 
-    .#{$prefix}--number__controls {
-      bottom: 2rem;
-    }
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 2rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {
@@ -177,6 +191,7 @@
 
   .#{$prefix}--number input[type='number'] {
     @include typescale('zeta');
+    @include focus-outline('reset');
     font-family: $font-family-mono;
     box-sizing: border-box;
     display: inline-flex;
@@ -192,19 +207,14 @@
     order: 2;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
-    transition: background $transition--base;
+    transition: all $transition--base;
 
     & ~ .#{$prefix}--label {
       order: 1;
     }
 
     &:focus {
-      outline: 2px solid $brand-01;
-      outline-offset: -2px;
-    }
-
-    &:hover {
-      background-color: $hover-field;
+      @include focus-outline('outline');
     }
 
     &:disabled {
@@ -257,8 +267,8 @@
     justify-content: center;
     align-items: center;
     left: auto;
-    right: 0.5rem;
-    bottom: 0.625rem;
+    right: 0.4rem;
+    top: 2.125rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -291,13 +301,26 @@
     }
 
     input[type='number'] {
-      outline: 2px solid $support-01;
-      outline-offset: -2px;
+      @include focus-outline('invalid');
     }
+  }
 
-    .#{$prefix}--number__controls {
-      bottom: 2rem;
-    }
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 1.75rem;
+  }
+
+  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 1.75rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {

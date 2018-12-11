@@ -1,22 +1,6 @@
 <script>
-  var needIframe = [
-    'detail-page-header',
-    'footer',
-    'grid',
-    'unified-header'
-  ];
-  var linkOnly = [
-    'ui-shell'
-  ];
-  var componentItems = {{{JSONstringify componentItems}}}.map(function (item) {
-    if (linkOnly.indexOf(item.name) >= 0) {
-      item.linkOnly = true;
-    } else if (needIframe.indexOf(item.name) >= 0) {
-      item.useIframe = true;
-    }
-    return item;
-  });
-  var docItems = {{{JSONstringify docItems}}};
+  var componentItems = {{{JSONstringify componentSource}}}.items;
+  var docItems = {{{JSONstringify docSource}}}.items;
   {{#if portSassBuild}}
     var portSassBuild = {{portSassBuild}}
   {{/if}}

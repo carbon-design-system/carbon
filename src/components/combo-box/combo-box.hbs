@@ -1,8 +1,8 @@
-<div class="bx--form-item bx--combo-box bx--list-box{{#if disabled}} bx--list-box--disabled{{/if}}">
-  <div role="button" class="bx--list-box__field" aria-label="open menu" aria-expanded="false" aria-haspopup="true"
-    {{#if disabled}} disabled{{/if}}> <input class="bx--text-input" role="combobox" aria-autocomplete="list"
+<div class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
+  <div role="button" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false" aria-haspopup="true"
+    {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
     aria-expanded="false" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." {{#if disabled}}
-    disabled{{/if}}> <div class="bx--list-box__menu-icon">
+    disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon">
     <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Open menu" name="caret--down" role="img">
       <title>Close menu</title>
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
@@ -10,20 +10,20 @@
   </div>
 </div>
 </div>
-<div class="bx--form-item bx--combo-box bx--list-box{{#if disabled}} bx--list-box--disabled{{/if}}">
-  <div role="button" class="bx--list-box__field" aria-label="close menu" aria-expanded="true" aria-haspopup="true"
-    {{#if disabled}} disabled{{/if}}> <input class="bx--text-input" role="combobox" aria-autocomplete="list"
+<div class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
+  <div role="button" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true" aria-haspopup="true"
+    {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
     aria-expanded="true" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..."
-    aria-activedescendant="downshift-1-item-2" {{#if disabled}} disabled{{/if}}> <div class="bx--list-box__menu-icon bx--list-box__menu-icon--open">
+    aria-activedescendant="downshift-1-item-2" {{#if disabled}} disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
     <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Open menu" name="caret--down" role="img">
       <title>Close menu</title>
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
   </div>
 </div>
-<div class="bx--list-box__menu">
+<div class="{{@root.prefix}}--list-box__menu">
   {{#each items}}
-  <div class="bx--list-box__menu-item{{#if selected}} bx--list-box__menu-item--highlighted{{/if}}" id="{{id}}">{{label}}</div>
+  <div class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}" id="{{id}}">{{label}}</div>
   {{/each}}
 </div>
 </div>

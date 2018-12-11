@@ -1,3 +1,5 @@
+const { prefix } = require('../../globals/js/settings');
+
 const header = {
   company: 'IBM',
   platform: '[Platform]',
@@ -221,12 +223,15 @@ module.exports = {
   preview: 'ui-shell-preview',
   meta: {
     xVersionOnly: true,
+    linkOnly: true,
   },
   context: {
+    prefix,
     header,
     nav,
     sidenav,
     switcher,
+    content: Array.from({ length: 10 }),
   },
   variants: [
     {
@@ -253,61 +258,7 @@ module.exports = {
       },
     },
     {
-      name: 'Side-nav with no title bar',
-      context: {
-        sidenav: {
-          state: {
-            expanded: true,
-          },
-          title: false,
-        },
-      },
-    },
-    {
-      name: 'Side-nav with title bar',
-      context: {
-        sidenav: {
-          state: {
-            expanded: true,
-          },
-          title: {
-            text: 'Section title',
-          },
-        },
-      },
-    },
-    {
-      name: 'Side-nav with title bar and sub-menu',
-      context: {
-        sidenav: {
-          state: {
-            expanded: true,
-          },
-          title: {
-            text: 'Section title',
-            subMenu: {
-              label: 'Inline select',
-              options: [
-                {
-                  text: 'Option 1',
-                  value: 'option1',
-                },
-                {
-                  text: 'Option 2',
-                  value: 'option2',
-                },
-                {
-                  text: 'Option 3',
-                  value: 'option3',
-                },
-              ],
-            },
-          },
-        },
-      },
-    },
-    {
-      name: 'Platform nav expanded',
+      name: 'Navigation expanded',
       context: {
         nav: {
           state: {
@@ -317,7 +268,7 @@ module.exports = {
       },
     },
     {
-      name: 'Platform nav category expanded',
+      name: 'Navigation category expanded',
       context: {
         nav: {
           state: {
@@ -350,7 +301,7 @@ module.exports = {
       },
     },
     {
-      name: 'Platform nav with no icons',
+      name: 'Navigation with no icons',
       context: {
         nav: {
           state: {

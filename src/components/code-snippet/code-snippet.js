@@ -41,7 +41,6 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
 
     if (this.element.offsetHeight < this.options.minHeight) {
       this.element.classList.add(this.options.classHideExpand);
-      this.element.classList.add(this.options.classExpanded);
     }
   }
 
@@ -50,7 +49,7 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
    * @member CodeSnippet.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

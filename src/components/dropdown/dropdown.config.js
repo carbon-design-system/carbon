@@ -1,5 +1,8 @@
 'use strict';
 
+const { prefix } = require('../../globals/js/settings');
+const featureFlags = require('../../globals/js/feature-flags');
+
 const items = [
   {
     label: 'Option 1',
@@ -24,6 +27,10 @@ const items = [
 ];
 
 module.exports = {
+  context: {
+    prefix,
+    featureFlags,
+  },
   variants: [
     {
       name: 'default',

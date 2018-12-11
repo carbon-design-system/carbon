@@ -144,7 +144,7 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
    * @member Checkbox.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -174,7 +174,7 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     };
   }
 
-  static stateChangeTypes = stateChangeTypes;
+  static stateChangeTypes /* #__PURE_CLASS_PROPERTY__ */ = stateChangeTypes;
 }
 
 export default Checkbox;

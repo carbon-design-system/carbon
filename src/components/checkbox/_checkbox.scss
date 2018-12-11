@@ -302,7 +302,7 @@
   // Checked
   .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before,
-  // Indeterminate 
+  // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
     // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
@@ -317,7 +317,12 @@
   //----------------------------------------------
   // Disabled
   // ---------------------------------------------
-
+  
+  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
+  [disabled] ~ _ {
+    font-size: inherit;
+  }
+  
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
     cursor: not-allowed;

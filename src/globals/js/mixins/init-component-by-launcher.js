@@ -11,7 +11,7 @@ export default function(ToMix) {
      * `true` suggests that this component is lazily initialized upon an action/event, etc.
      * @type {boolean}
      */
-    static forLazyInit = true;
+    static forLazyInit /* #__PURE_CLASS_PROPERTY__ */ = true;
 
     /**
      * Instantiates this component in the given element.

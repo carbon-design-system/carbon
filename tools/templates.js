@@ -8,6 +8,7 @@ const Module = require('module');
 const expressHandlebars = require('express-handlebars');
 const helpers = require('handlebars-helpers');
 const Fractal = require('@frctl/fractal');
+const iconHelper = require('@carbon/icons-handlebars');
 
 const origResolveFilename = Module._resolveFilename;
 Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
@@ -27,6 +28,7 @@ const handlebars = expressHandlebars.create({
 
 const Handlebars = handlebars.handlebars;
 helpers();
+iconHelper({ handlebars: Handlebars });
 
 const readFile = promisify(fs.readFile);
 
@@ -55,7 +57,7 @@ const getContents = glob =>
     return Promise.all(
       filePaths.map(filePath =>
         readFile(filePath, { encoding: 'utf8' }).then(content => {
-          contents.set(path.basename(filePath, '.hbs'), content);
+          contents.set(path.basename(filePath, path.extname(filePath)), content);
         })
       )
     ).then(() => contents);
@@ -127,16 +129,18 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
       );
     }
     componentSource.forEach(metadata => {
-      const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
+      const items = metadata.isCollection
+        ? metadata
+        : !metadata.meta.removed && !metadata.isCollated && metadata.variants && metadata.variants();
       if (items) {
         const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
-          const { handle: itemHandle, baseHandle, context } = item;
-          const template = contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle);
+          const { handle: itemHandle, baseHandle, context, meta } = item;
+          const template = !meta.removed && (contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle));
           if (template) {
             const body = template(context);
             const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
-            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
+            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ yield: body }, context)));
           }
         });
       }

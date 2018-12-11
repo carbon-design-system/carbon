@@ -12,7 +12,7 @@
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
-@include exports('text-area') {
+@mixin text-area {
   .#{$prefix}--text-area {
     @include reset;
     @include font-family;
@@ -88,15 +88,74 @@
       color: transparent;
     }
   }
+}
 
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
+@mixin text-area--x {
+  .#{$prefix}--text-area {
+    @include reset;
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    background-color: $field-01;
+    width: 100%;
+    min-width: 10rem;
+    min-height: rem(40px);
+    padding: rem(11px) $spacing-md;
+    color: $text-01;
+    order: 3;
+    resize: vertical;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    transition: $transition--base all;
 
-    &::-webkit-input-placeholder {
-      color: transparent;
+    & ~ .#{$prefix}--form__helper-text {
+      margin-top: 0;
+      order: 2;
+      font-style: italic;
     }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 4;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-area::-webkit-input-placeholder {
+    @include placeholder-colors;
+    @include font-family;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-area:disabled {
+    cursor: not-allowed;
+    outline: none;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--text-area:disabled::-webkit-input-placeholder {
+    color: $disabled;
+  }
+
+  //-----------------------------
+  // Error
+  //-----------------------------
+  .#{$prefix}--text-area[data-invalid],
+  .#{$prefix}--text-area:invalid {
+    @include focus-outline('invalid');
+    box-shadow: none;
   }
 
   // Skeleton State
@@ -107,5 +166,13 @@
     &::-webkit-input-placeholder {
       color: transparent;
     }
+  }
+}
+
+@include exports('text-area') {
+  @if feature-flag-enabled('components-x') {
+    @include text-area--x;
+  } @else {
+    @include text-area;
   }
 }

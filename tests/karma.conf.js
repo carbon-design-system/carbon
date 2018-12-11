@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 'use strict';
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
@@ -64,17 +66,18 @@ module.exports = function(config) {
     },
 
     webpack: {
+      mode: 'development',
       devtool: 'inline-source-maps',
       module: {
         rules: [
           {
             test: /\.js?$/,
-            exclude: /node_modules/,
+            exclude: [/node_modules/, /settings\.js$/],
             loader: 'babel-loader',
             query: {
               presets: [
                 [
-                  'env',
+                  '@babel/preset-env',
                   {
                     modules: false,
                     targets: {
@@ -83,7 +86,12 @@ module.exports = function(config) {
                   },
                 ],
               ],
-              plugins: ['transform-class-properties', 'transform-object-rest-spread', ['transform-runtime', { polyfill: false }]]
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-transform-runtime',
+                'dev-expression',
+              ]
                 .concat(
                   cloptions.debug
                     ? []
@@ -97,6 +105,39 @@ module.exports = function(config) {
                       ]
                 )
                 .concat(['rewire']),
+            },
+          },
+          {
+            test: /settings\.js?$/,
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    modules: false,
+                    targets: {
+                      browsers: ['last 1 version', 'ie >= 11'],
+                    },
+                  },
+                ],
+              ],
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-transform-runtime',
+              ].concat(
+                cloptions.debug
+                  ? []
+                  : [
+                      [
+                        'istanbul',
+                        {
+                          include: ['src/{components,globals}/**/*.js'],
+                        },
+                      ],
+                    ]
+              ),
             },
           },
           {
@@ -150,6 +191,7 @@ module.exports = function(config) {
                   // - Not meeting the code coverage standard set here, which shouldn't have happened
                   // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
                   // That said, new files should never be added, except for misc code that is very broser-specific
+                  'src/components/removed-component.js',
                   'src/components/code-snippet/code-snippet.js',
                   'src/components/copy-button/copy-button.js',
                   'src/components/detail-page-header/detail-page-header.js',

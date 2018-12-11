@@ -4,12 +4,17 @@ $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
   bp--md--major: 992px,
-  bp--lg--major: 1200px
+  bp--lg--major: 1200px,
+  sm: 320px,
+  md: 672px,
+  lg: 1056px,
+  xlg: 1312px,
+  max: 1584px,
 );
 
 $padding: (
   'mobile': 3%,
-  'xs': 5%
+  'xs': 5%,
 );
 
 @function padding($value) {
@@ -36,6 +41,18 @@ $padding: (
     }
   } @else {
     @media (min-width: $size) {
+      @content;
+    }
+  }
+}
+
+@mixin max-breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media screen and (max-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $size) {
       @content;
     }
   }
@@ -69,7 +86,7 @@ $z-indexes: (
   footer: 5000,
   hidden: - 1,
   overflowHidden: - 1,
-  floating: 10000
+  floating: 10000,
 );
 
 //-------------------------------------

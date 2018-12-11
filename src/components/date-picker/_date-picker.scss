@@ -10,7 +10,7 @@
 @import '../form/form';
 @import 'flatpickr.scss';
 
-@include exports('date-picker') {
+@mixin date-picker {
   .#{$prefix}--date-picker {
     display: flex;
     align-items: flex-start;
@@ -148,8 +148,7 @@
     width: 7.075rem;
   }
 
-  .#{$prefix}--date-picker__calendar,
-  .flatpickr-calendar.open {
+  .#{$prefix}--date-picker__calendar.flatpickr-calendar.open {
     @include layer('pop-out');
     background-color: $ui-01;
     display: flex;
@@ -459,5 +458,466 @@
     @include skeleton;
     width: rem(75px);
     height: rem(14px);
+  }
+}
+
+@mixin date-picker--x {
+  .#{$prefix}--date-picker {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--date-picker ~ .#{$prefix}--label {
+    order: 1;
+  }
+
+  .#{$prefix}--date-picker-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
+    .#{$prefix}--date-picker__input {
+      width: 7.25rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
+    .#{$prefix}--date-picker__input {
+      width: 5.7rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
+    .#{$prefix}--date-picker__input {
+      width: rem(288px);
+    }
+  }
+
+  .#{$prefix}--date-picker__input {
+    @include reset;
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    font-family: $font-family-mono;
+    display: block;
+    position: relative;
+    height: rem(40px);
+    max-width: rem(288px);
+    padding: 0 $spacing-md;
+    background-color: $field-01;
+    border: none;
+    color: $text-01;
+    border-bottom: 1px solid $ui-04;
+    transition: $transition--base all;
+
+    &:focus,
+    &.#{$prefix}--focused {
+      @include focus-outline('outline');
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      @include focus-outline('invalid');
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &:disabled {
+      color: $disabled;
+      background-color: $disabled-background-color;
+      border-bottom: 1px solid transparent;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border-bottom: 1px solid transparent;
+    }
+
+    &::placeholder {
+      @include placeholder-colors;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon {
+    position: absolute;
+    top: 1.75rem;
+    right: 1rem;
+    fill: $ui-05;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+      fill: $hover-primary;
+    }
+  }
+
+  .#{$prefix}--date-picker--single .#{$prefix}--date-picker__icon {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
+    top: rem(12px);
+  }
+
+  .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
+    padding-right: $spacing-3xl;
+  }
+
+  .#{$prefix}--date-picker--range {
+    display: flex;
+    position: relative;
+  }
+
+  .#{$prefix}--date-picker--range > .#{$prefix}--date-picker-container:first-child {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__icon {
+    display: none;
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
+    width: rem(143.5px);
+
+    // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
+    background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 16' width='14' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23171717'%3e%3cpath d='M0 5h14v1H0V5zm3-5h1v4H3V0zm7 0h1v4h-1V0zM0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14.5v-12zm1 0v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5z' fill-rule='nonzero' /%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 1rem) 50%;
+  }
+
+  .#{$prefix}--date-picker__calendar,
+  .flatpickr-calendar.open {
+    @include layer('pop-out');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-2xs $spacing-2xs $spacing-xs $spacing-2xs;
+    width: rem(288px) !important;
+    height: rem(336px);
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    margin-top: -2px;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month,
+  .flatpickr-month {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: rem(40px);
+    margin-bottom: $spacing-2xs;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-prev-month,
+  .#{$prefix}--date-picker__month .flatpickr-next-month,
+  .flatpickr-month .flatpickr-prev-month,
+  .flatpickr-month .flatpickr-next-month {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: rem(40px);
+    width: rem(40px);
+    padding: 0;
+    fill: $text-01;
+    transition: background-color $transition--base;
+
+    &:hover {
+      background-color: $hover-field;
+    }
+  }
+
+  .flatpickr-current-month .numInputWrapper {
+    width: 7ch;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month,
+  .flatpickr-month .flatpickr-current-month {
+    @include typescale('zeta');
+    padding: 0;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month svg,
+  .flatpickr-month .flatpickr-current-month svg {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
+  .flatpickr-month .flatpickr-current-month .cur-month {
+    margin-right: $spacing-2xs;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper .numInput,
+  .flatpickr-month .numInputWrapper .numInput {
+    font-weight: 600;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    padding: $spacing-2xs;
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    left: 2.6rem;
+    border: none;
+    width: rem(12px);
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $brand-02;
+        border-top-color: $brand-02;
+      }
+    }
+
+    &:after {
+      border-bottom-color: $brand-01;
+      border-top-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowUp {
+    top: 4px;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    top: 11px;
+  }
+
+  span.#{$prefix}--date-picker__weekday,
+  span.flatpickr-weekday {
+    @include typescale('zeta');
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--date-picker__day,
+  .flatpickr-day {
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    height: rem(40px);
+    width: rem(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-01;
+    border-radius: 0;
+    border: none;
+    transition: all $transition--base;
+
+    &:hover {
+      background: $hover-field;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--date-picker__days .nextMonthDay,
+  .#{$prefix}--date-picker__days .prevMonthDay {
+    color: $text-02;
+  }
+
+  .#{$prefix}--date-picker__day.today,
+  .flatpickr-day.today {
+    position: relative;
+    color: $brand-01;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: rem(7px);
+      left: 50%;
+      transform: translateX(-50%);
+      height: rem(4px);
+      width: rem(4px);
+      background: $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.today.no-border,
+  .flatpickr-day.today.no-border {
+    border: none;
+  }
+
+  .#{$prefix}--date-picker__day.today.selected {
+    border: 2px solid $brand-01;
+    &::after {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.disabled,
+  .flatpickr-day.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: $ui-05;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.inRange,
+  .flatpickr-day.inRange {
+    background: $date-picker-in-range-background-color;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__day.selected,
+  .flatpickr-day.selected {
+    color: $inverse-01;
+    background: $brand-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.selected,
+  .flatpickr-day.startRange.selected {
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange,
+  .flatpickr-day.endRange.inRange {
+    @include focus-outline('outline');
+    background: $ui-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange.selected,
+  .flatpickr-day.endRange.inRange.selected {
+    color: $inverse-01;
+    background: $brand-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
+  .flatpickr-day.startRange.inRange:not(.selected) {
+    @include focus-outline('outline');
+    background: $ui-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__days,
+  .dayContainer {
+    width: 100%;
+    min-width: 100%;
+    height: rem(246px);
+  }
+
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer {
+    width: 100%;
+    height: rem(336px);
+  }
+
+  .#{$prefix}--date-picker__weekdays,
+  .flatpickr-weekdays,
+  .flatpickr-weekdaycontainer {
+    width: 100%;
+  }
+
+  .flatpickr-weekdays {
+    height: rem(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flatpickr-weekdaycontainer {
+    display: flex;
+  }
+
+  .flatpickr-months {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    padding-top: 12px;
+  }
+
+  .flatpickr-prev-month:hover svg,
+  .flatpickr-next-month:hover svg {
+    fill: $text-01;
+  }
+
+  .flatpickr-next-month.disabled,
+  .flatpickr-prev-month.disabled {
+    svg {
+      fill: $ui-05;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      svg {
+        fill: $ui-05;
+      }
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--date-picker.#{$prefix}--skeleton input,
+  .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+}
+
+@include exports('date-picker') {
+  @if feature-flag-enabled('components-x') {
+    @include date-picker--x;
+  } @else {
+    @include date-picker;
   }
 }

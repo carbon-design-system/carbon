@@ -56,47 +56,6 @@ const reDemoComponentPath = pathRegexp('/demo/:component');
 const reCodePath = pathRegexp('/code/:component');
 const demoStaticRoute = serveStatic('demo');
 
-/**
- * @param {ComponentCollection|Component} metadata The component data.
- * @returns {Promise<ComponentCollection|Component>}
- *   The normalized component data,
- *   esp. with README.md content assigned to `.notes` property for component with variants (`ComponentCollection`).
- *   Fractal automatically populate `.notes` for component without variants (`Component`).
- */
-const normalizeMetadata = metadata => {
-  const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
-  const visibleItems = items && items.filter(item => !item.isHidden);
-  const metadataJSON = typeof metadata.toJSON !== 'function' ? metadata : metadata.toJSON();
-  if (!metadata.isCollection && visibleItems && visibleItems.size === 1) {
-    const firstVariant = visibleItems.first();
-    return Object.assign(metadataJSON, {
-      context: firstVariant.context,
-      notes: firstVariant.notes,
-      preview: firstVariant.preview,
-      variants: undefined,
-    });
-  }
-  return Object.assign(metadataJSON, {
-    items: !items || items.size <= 1 ? undefined : items.map(normalizeMetadata).toJSON().items,
-    variants: undefined,
-  });
-};
-
-/**
- * @returns {Promise<(ComponentCollection|Component)[]>} The promise resolved with the list of nav items.
- */
-const getNavItems = () =>
-  templates.cache
-    .get()
-    .then(({ componentSource, docSource, contents }) =>
-      Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items(), contents])
-    )
-    .then(([componentItems, docItems, contents]) => ({
-      componentItems,
-      docItems,
-      contents,
-    }));
-
 function noopRoute(req, res, next) {
   next();
 }
@@ -109,14 +68,15 @@ function navRoute(req, res, next) {
   } else if (name !== '/' && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
-    getNavItems()
-      .then(({ componentItems, docItems, contents }) => {
+    templates.cache
+      .get()
+      .then(({ componentSource, docSource, contents }) => {
         res.setHeader('Content-Type', 'text/html');
         res.end(
           contents.get('demo-nav')({
-            body: contents.get('demo-nav-data')({
-              componentItems,
-              docItems,
+            yield: contents.get('demo-nav-data')({
+              componentSource,
+              docSource,
               portSassBuild: process.env.PORT_SASS_DEV_BUILD,
             }),
           })
@@ -145,9 +105,10 @@ function componentRoute(req, res, next) {
         if (rendered == null) {
           res.writeHead(404);
           res.end();
+        } else {
+          res.setHeader('Content-Type', 'text/html');
+          res.end(rendered);
         }
-        res.setHeader('Content-Type', 'text/html');
-        res.end(rendered);
       })
       .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console

@@ -4,9 +4,10 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
+import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM, DIRECTION_LEFT, DIRECTION_RIGHT } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
+import { componentsX } from '../../globals/js/feature-flags';
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
@@ -15,6 +16,8 @@ import on from '../../globals/js/misc/on';
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
   [DIRECTION_BOTTOM]: 'top',
+  [DIRECTION_LEFT]: 'left',
+  [DIRECTION_RIGHT]: 'right',
 };
 
 /**
@@ -24,21 +27,26 @@ const triggerButtonPositionProps = {
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,
   [DIRECTION_BOTTOM]: -1,
+  [DIRECTION_LEFT]: -2,
+  [DIRECTION_RIGHT]: -1,
 };
 
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @param {string} direction The floating menu direction.
+ * @param {Element} trigger The trigger button.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
-export const getMenuOffset = (menuBody, direction) => {
+export const getMenuOffset = (menuBody, direction, trigger) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
   if (!triggerButtonPositionProp || !triggerButtonPositionFactor) {
     console.warn('Wrong floating menu direction:', direction); // eslint-disable-line no-console
   }
+
   const menuWidth = menuBody.offsetWidth;
+  const menuHeight = menuBody.offsetHeight;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
   const values = [triggerButtonPositionProp, 'left', 'width', 'height', 'border-top-width'].reduce(
     (o, name) => ({
@@ -54,6 +62,32 @@ export const getMenuOffset = (menuBody, direction) => {
       top: Math.sqrt(borderTopWidth ** 2 * 2) + triggerButtonPositionFactor * values[triggerButtonPositionProp],
     };
   }
+
+  if (componentsX) {
+    // eslint-disable-next-line no-use-before-define
+    const menu = OverflowMenu.components.get(trigger);
+    if (!menu) {
+      throw new TypeError('Overflow menu instance cannot be found.');
+    }
+    const flip = menuBody.classList.contains(menu.options.classMenuFlip);
+
+    if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
+      const triggerWidth = trigger.offsetWidth;
+      return {
+        left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
+        top: 0,
+      };
+    }
+
+    if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
+      const triggerHeight = trigger.offsetHeight;
+      return {
+        left: 0,
+        top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
+      };
+    }
+  }
+
   return undefined;
 };
 
@@ -203,7 +237,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     }
   }
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;
