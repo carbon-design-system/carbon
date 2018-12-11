@@ -253,7 +253,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     super.release();
   }
 
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorContainer: '[data-floating-menu-container]',
     selectorPrimaryFocus: '[data-floating-menu-primary-focus]',
     attribDirection: 'data-floating-menu-direction',
@@ -271,7 +271,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     },
   };
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default FloatingMenu;

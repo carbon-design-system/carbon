@@ -6,6 +6,8 @@ import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
    * A selector with drop downs.
@@ -94,7 +96,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
           this.element.focus();
         }
       });
-      const listItems = [...this.element.querySelectorAll(this.options.selectorItem)];
+      const listItems = toArray(this.element.querySelectorAll(this.options.selectorItem));
       listItems.forEach(item => {
         if (this.element.classList.contains(this.options.classOpen)) {
           item.tabIndex = 0;
@@ -118,7 +120,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {number} direction The direction of navigating.
    */
   navigate(direction) {
-    const items = [...this.element.querySelectorAll(this.options.selectorItem)];
+    const items = toArray(this.element.querySelectorAll(this.options.selectorItem));
     const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
     const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
@@ -165,7 +167,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
-      [...this.element.querySelectorAll(this.options.selectorItemSelected)].forEach(item => {
+      toArray(this.element.querySelectorAll(this.options.selectorItemSelected)).forEach(item => {
         if (itemToSelect !== item) {
           item.classList.remove(this.options.classSelected);
         }
@@ -193,7 +195,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @member Dropdown.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -242,7 +244,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

@@ -5,6 +5,8 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Data Table
@@ -62,7 +64,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _sortToggle = detail => {
     const { element, previousValue } = detail;
 
-    [...this.tableHeaders].forEach(header => {
+    toArray(this.tableHeaders).forEach(header => {
       const sortEl = header.querySelector(this.options.selectorTableSort);
 
       if (sortEl !== null && sortEl !== element) {
@@ -101,7 +103,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _selectAllToggle = detail => {
     const checked = detail.element.checked;
 
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
 
     this.state.checkboxCount = checked ? inputs.length - 1 : 0;
 
@@ -124,8 +126,8 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _actionBarCancel = () => {
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
-    const row = [...this.element.querySelectorAll(this.options.selectorTableSelected)];
+    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
+    const row = toArray(this.element.querySelectorAll(this.options.selectorTableSelected));
 
     row.forEach(item => {
       item.classList.remove(this.options.classTableSelected);
@@ -229,9 +231,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   }
 
   refreshRows = () => {
-    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
-    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
-    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
+    const newExpandCells = toArray(this.element.querySelectorAll(this.options.selectorExpandCells));
+    const newExpandableRows = toArray(this.element.querySelectorAll(this.options.selectorExpandableRows));
+    const newParentRows = toArray(this.element.querySelectorAll(this.options.selectorParentRows));
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
@@ -240,7 +242,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
-        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
+        const mergedExpandableRows = [...toArray(this.expandableRows), ...toArray(diffExpandableRows)];
         this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
@@ -253,10 +255,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.parentRows = newParentRows;
   };
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   // UI Events
-  static eventHandlers = {
+  static eventHandlers /* #__PURE_CLASS_PROPERTY__ */ = {
     expand: '_rowExpandToggle',
     sort: '_sortToggle',
     select: '_selectToggle',
