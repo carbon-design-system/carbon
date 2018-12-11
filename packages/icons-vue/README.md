@@ -45,9 +45,8 @@ new Vue({
 }).$mount('#app');
 ```
 
-Using `CarbonIconsVue` we can pass in any of the icon components
-that we'd like to use. In our application, we can then use them by
-doing:
+Using `CarbonIconsVue` we can pass in any of the icon components that
+we'd like to use. In our application, we can then use them by doing:
 
 ```vue
 <template>
@@ -84,7 +83,6 @@ example:
 If you're looking for more examples on how to use `@carbon/icons-vue`,
 we have some examples that you can check out:
 
-- [Storybook](./examples/storybook)
 - [Vue-cli](./examples/vue-cli)
 
 ## 🙌 Contributing

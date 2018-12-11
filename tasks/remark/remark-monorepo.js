@@ -187,10 +187,16 @@ async function createExamples(name, examplesDir) {
   if (!(await fs.pathExists(examplesDir))) {
     return [];
   }
+
   const examples = (await fs.readdir(examplesDir)).filter(name => {
-    // Ignore dotfiles and special case `codesandbox`
-    return name[0] !== '.' || name === 'codesandbox' || name === 'storybook';
+    // Ignore dotfiles and special cases `codesandbox` and `storybook`
+    return !(name[0] === '.' || name === 'codesandbox' || name === 'storybook');
   });
+
+  if (examples.length === 0) {
+    return [];
+  }
+
   return [
     {
       type: 'heading',

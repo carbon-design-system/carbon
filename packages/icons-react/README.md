@@ -45,13 +45,6 @@ To import using CommonJS, you can do the following:
 const Add24 = require('@carbon/icons-react/lib/Add/24');
 ```
 
-## 📚 Examples
-
-If you're looking for more examples on how to use `@carbon/icons-react`
-, we have some examples that you can check out:
-
-- [Storybook](./examples/storybook)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new

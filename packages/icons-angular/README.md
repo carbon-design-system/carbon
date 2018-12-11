@@ -51,12 +51,6 @@ In your component template:
 <!-- ... -->
 ```
 
-## 📚 Examples
-
-If you're looking for more examples on how to use `@carbon/icons-angular`, we have some examples that you can check out:
-
-- [Storybook](./examples/storybook)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new
