@@ -1,15 +1,22 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "modules": false,
         "targets": {
-          "browsers": ["last 1 version", "ie >= 11"]
+          "browsers": [
+            "last 1 version",
+            "ie >= 11"
+          ]
         }
       }
     ],
-    "react"
+    "@babel/preset-react"
   ],
-  "plugins": ["transform-class-properties", "transform-object-rest-spread", "dev-expression"]
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "dev-expression"
+  ]
 }

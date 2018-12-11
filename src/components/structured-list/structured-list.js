@@ -6,6 +6,8 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class StructuredList extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * StructuredList
@@ -50,7 +52,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   }
 
   _getInput(index) {
-    const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
+    const rows = toArray(this.element.querySelectorAll(this.options.selectorRow));
     return this.element.ownerDocument.querySelector(this.options.selectorListInput(rows[index].getAttribute('for')));
   }
 
@@ -62,7 +64,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _handleClick(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
+    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(row =>
+      row.classList.remove(this.options.classActive)
+    );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
     }
@@ -72,7 +76,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   _handleKeydownChecked(evt) {
     evt.preventDefault(); // prevent spacebar from scrolling page
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
+    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(row =>
+      row.classList.remove(this.options.classActive)
+    );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
       const input =
@@ -89,7 +95,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     const direction = this._direction(evt);
 
     if (direction && selectedRow !== undefined) {
-      const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
+      const rows = toArray(this.element.querySelectorAll(this.options.selectorRow));
       rows.forEach(row => row.classList.remove(this.options.classActive));
       const firstIndex = 0;
       const nextIndex = this._nextIndex(rows, selectedRow, direction);
@@ -111,7 +117,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     }
   }
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;

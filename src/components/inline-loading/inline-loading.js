@@ -66,7 +66,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
    * The list of states.
    * @type {Object<string, string>}
    */
-  static states = {
+  static states /* #__PURE_CLASS_PROPERTY__ */ = {
     INACTIVE: 'inactive',
     ACTIVE: 'active',
     FINISHED: 'finished',
@@ -77,7 +77,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
    * @member InlineLoading.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

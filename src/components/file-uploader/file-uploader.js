@@ -8,6 +8,8 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class FileUploader extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * File uploader.
@@ -85,7 +87,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   };
 
   _getStateContainers() {
-    const stateContainers = [...this.element.querySelectorAll(`[data-for=${this.inputId}]`)];
+    const stateContainers = toArray(this.element.querySelectorAll(`[data-for=${this.inputId}]`));
 
     if (stateContainers.length === 0) {
       throw new TypeError('State container elements not found; invoke _displayFilenames() first');
@@ -103,7 +105,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    */
   _displayFilenames() {
     const container = this.element.querySelector(this.options.selectorContainer);
-    const HTMLString = [...this.input.files].map(file => this._filenamesHTML(file.name, this.inputId)).join('');
+    const HTMLString = toArray(this.input.files)
+      .map(file => this._filenamesHTML(file.name, this.inputId))
+      .join('');
 
     container.insertAdjacentHTML('afterbegin', HTMLString);
   }
@@ -169,7 +173,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    * @member FileUploader.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;

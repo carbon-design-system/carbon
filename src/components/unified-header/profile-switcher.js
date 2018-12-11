@@ -312,7 +312,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    * @member ProfileSwitcher.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default (!breakingChangesX ? ProfileSwitcher : removedComponent('ProfileSwitcher'));

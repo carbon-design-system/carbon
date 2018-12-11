@@ -180,7 +180,7 @@ gulp.task('scripts:umd', () => {
   const babelOpts = {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
           targets: {
             browsers: ['last 1 version', 'ie >= 11'],
@@ -188,12 +188,18 @@ gulp.task('scripts:umd', () => {
         },
       ],
     ],
-    plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
+    plugins: ['@babel/plugin-transform-modules-umd', ['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
 
   return gulp
     .src(srcFiles)
     .pipe(babel(babelOpts))
+    .pipe(
+      babel({
+        plugins: [require('./tools/babel-plugin-pure-assignment')], // eslint-disable-line global-require
+        babelrc: false,
+      })
+    )
     .pipe(gulp.dest('umd/'));
 });
 
@@ -202,7 +208,7 @@ gulp.task('scripts:es', () => {
   const babelOpts = {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
           modules: false,
           targets: {
@@ -211,7 +217,7 @@ gulp.task('scripts:es', () => {
         },
       ],
     ],
-    plugins: ['transform-class-properties'],
+    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
   const pathsToConvertToESM = new Set([
     path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
@@ -222,6 +228,12 @@ gulp.task('scripts:es', () => {
   return gulp
     .src(srcFiles)
     .pipe(babel(babelOpts))
+    .pipe(
+      babel({
+        plugins: [require('./tools/babel-plugin-pure-assignment')], // eslint-disable-line global-require
+        babelrc: false,
+      })
+    )
     .pipe(
       through.obj((file, enc, callback) => {
         if (!pathsToConvertToESM.has(file.path)) {
@@ -428,7 +440,7 @@ gulp.task('jsdoc', cb => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: ['transform-class-properties', 'transform-object-rest-spread'],
+        plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-object-rest-spread'],
         babelrc: false,
       })
     )
