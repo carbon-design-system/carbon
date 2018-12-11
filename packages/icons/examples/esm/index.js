@@ -1,3 +1,4 @@
+import { getAttributes } from '@carbon/icon-helpers';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import meta from '../../meta.json';
@@ -122,7 +123,33 @@ function render() {
 
 function js2svg(descriptor) {
   const { elem, attrs = {}, content = [] } = descriptor;
-  return React.createElement(elem, format(attrs), ...content.map(js2svg));
+  let attributes = attrs;
+
+  if (elem === 'svg') {
+    const { style, ...iconAttributes } = getAttributes(attrs);
+    attributes = {
+      ...iconAttributes,
+      style: style
+        .split(';')
+        .map(declaration => {
+          const [property, value] = declaration
+            .split(':')
+            .map(string => string.trim());
+          return {
+            [property]: value,
+          };
+        })
+        .reduce(
+          (acc, declaration) => ({
+            ...acc,
+            ...declaration,
+          }),
+          {}
+        ),
+    };
+  }
+
+  return React.createElement(elem, format(attributes), ...content.map(js2svg));
 }
 
 function format(attrs) {

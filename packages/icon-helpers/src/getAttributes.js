@@ -1,10 +1,13 @@
-const defaultAttributes = {
+export const defaultAttributes = {
   // Reference:
   // https://github.com/IBM/carbon-components-react/issues/1392
   // https://github.com/PolymerElements/iron-iconset-svg/pull/47
   // `focusable` is a string attribute which is why we do not use a boolean here
   focusable: 'false',
   preserveAspectRatio: 'xMidYMid meet',
+  // Reference:
+  // https://github.com/ckeditor/ckeditor5/issues/668#issuecomment-344844027
+  style: 'transform: translate3d(0, 0, 0);',
 };
 
 /**
