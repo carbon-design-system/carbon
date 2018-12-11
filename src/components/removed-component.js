@@ -22,8 +22,8 @@ const removedComponent = name => {
     static init() {
       warn();
     }
-    static components = new WeakMap();
-    static options = {};
+    static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
+    static options /* #__PURE_CLASS_PROPERTY__ */ = {};
   };
 };
 

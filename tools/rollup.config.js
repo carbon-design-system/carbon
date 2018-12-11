@@ -17,7 +17,6 @@ module.exports = {
     }),
     babel({
       exclude: ['node_modules/**'], // only transpile our source code
-      plugins: ['external-helpers'],
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),
