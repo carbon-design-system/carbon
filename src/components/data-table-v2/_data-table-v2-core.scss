@@ -18,7 +18,7 @@
     width: 100%;
     border-bottom: 1px solid $ui-03;
 
-    @if feature-flag-enabled('components-x') {
+    @if feature-flag-enabled('breaking-changes-x') {
       min-width: rem(500px);
     }
 
