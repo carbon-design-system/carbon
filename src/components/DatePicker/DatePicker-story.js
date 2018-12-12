@@ -139,7 +139,7 @@ storiesOf('DatePicker', module)
   .add(
     'range with calendar and min/max dates',
     () => {
-      const datePickerInputProps = props.datePicker();
+      const datePickerInputProps = props.datePickerInput();
       return (
         <DatePicker
           {...props.datePicker()}
