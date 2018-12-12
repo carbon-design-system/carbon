@@ -1,4 +1,5 @@
 @import '../../globals/scss/css--typography';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
@@ -16,6 +17,10 @@
     border-spacing: 0;
     width: 100%;
     border-bottom: 1px solid $ui-03;
+
+    @if feature-flag-enabled('breaking-changes-x') {
+      min-width: rem(500px);
+    }
 
     thead {
       @include typescale('zeta');
