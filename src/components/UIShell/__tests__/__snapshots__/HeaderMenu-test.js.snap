@@ -73,18 +73,26 @@ exports[`HeaderMenu should render 1`] = `
             <li
               role="none"
             >
-              <a
+              <Link
                 className="bx--header__menu-item"
+                element="a"
                 href="/a"
                 role="menuitem"
                 tabIndex={0}
               >
-                <span
-                  className="bx--text-truncate--end"
+                <a
+                  className="bx--header__menu-item"
+                  href="/a"
+                  role="menuitem"
+                  tabIndex={0}
                 >
-                  A
-                </span>
-              </a>
+                  <span
+                    className="bx--text-truncate--end"
+                  >
+                    A
+                  </span>
+                </a>
+              </Link>
             </li>
           </HeaderMenuItem>
         </ForwardRef>
@@ -103,18 +111,26 @@ exports[`HeaderMenu should render 1`] = `
             <li
               role="none"
             >
-              <a
+              <Link
                 className="bx--header__menu-item"
+                element="a"
                 href="/b"
                 role="menuitem"
                 tabIndex={-1}
               >
-                <span
-                  className="bx--text-truncate--end"
+                <a
+                  className="bx--header__menu-item"
+                  href="/b"
+                  role="menuitem"
+                  tabIndex={-1}
                 >
-                  B
-                </span>
-              </a>
+                  <span
+                    className="bx--text-truncate--end"
+                  >
+                    B
+                  </span>
+                </a>
+              </Link>
             </li>
           </HeaderMenuItem>
         </ForwardRef>
@@ -133,18 +149,26 @@ exports[`HeaderMenu should render 1`] = `
             <li
               role="none"
             >
-              <a
+              <Link
                 className="bx--header__menu-item"
+                element="a"
                 href="/c"
                 role="menuitem"
                 tabIndex={-1}
               >
-                <span
-                  className="bx--text-truncate--end"
+                <a
+                  className="bx--header__menu-item"
+                  href="/c"
+                  role="menuitem"
+                  tabIndex={-1}
                 >
-                  C
-                </span>
-              </a>
+                  <span
+                    className="bx--text-truncate--end"
+                  >
+                    C
+                  </span>
+                </a>
+              </Link>
             </li>
           </HeaderMenuItem>
         </ForwardRef>

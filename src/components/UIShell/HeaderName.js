@@ -56,7 +56,7 @@ HeaderName.propTypes = {
   /**
    * Provide an href for the name to link to
    */
-  href: PropTypes.string.isRequired,
+  href: PropTypes.string,
 };
 
 HeaderName.defaultProps = {

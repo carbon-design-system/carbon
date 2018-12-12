@@ -1,6 +1,7 @@
 import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Link, { LinkPropTypes } from './Link';
 
 const { prefix } = settings;
 
@@ -8,18 +9,24 @@ const HeaderMenuItem = props => {
   const { className, children, role, innerRef, ...rest } = props;
   return (
     <li className={className} role={role}>
-      <a
+      <Link
         {...rest}
         className={`${prefix}--header__menu-item`}
         ref={innerRef}
         role="menuitem">
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
-      </a>
+      </Link>
     </li>
   );
 };
 
 HeaderMenuItem.propTypes = {
+  /**
+   * Pass in a valid `element` to replace the underlying `<a>` tag with a
+   * custom `Link` element
+   */
+  ...LinkPropTypes,
+
   /**
    * Optionally provide a custom class to apply to the underlying <li> node
    */
