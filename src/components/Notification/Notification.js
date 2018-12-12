@@ -297,25 +297,9 @@ export class ToastNotification extends Component {
       },
       className
     );
-    const NotificationIcon = kind => {
-      switch (kind) {
-        case 'warning':
-          return a11yIconWarningSolid(prefix, notificationType);
-        default:
-          return (
-            <Icon
-              description={this.props.iconDescription}
-              className={`${prefix}--toast-notification__icon`}
-              aria-label="close"
-              icon={this.useIcon(kind)}
-            />
-          );
-      }
-    };
 
     return (
       <div {...other} role={role} kind={kind} className={classes}>
-        {NotificationIcon(kind)}
         <NotificationTextDetails
           title={title}
           subtitle={subtitle}
