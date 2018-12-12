@@ -38,5 +38,14 @@ describe('OverflowMenuItem', () => {
 
       expect(wrapper.hasClass('bx--overflow-menu--divider')).toEqual(true);
     });
+
+    it('renders an anchor when passed href', () => {
+      const wrapper = shallowRender({
+        itemText: 'testing',
+        href: 'testing',
+      });
+
+      expect(wrapper.find('a').length).toBe(1);
+    });
   });
 });

@@ -91,6 +91,59 @@ storiesOf('OverflowMenu', module)
     }
   )
   .add(
+    'with links',
+    () => {
+      const overflowMenuItemProps = {
+        ...props.menuItem(),
+        href: 'https://www.ibm.com',
+      };
+      return (
+        <OverflowMenu {...props.menu()}>
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Option 1"
+            primaryFocus={true}
+          />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Option 2 is an example of a really long string and how we recommend handling this"
+            requireTitle
+          />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText={
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}>
+                Add <Icon icon={iconAdd} style={{ height: '12px' }} />
+              </div>
+            }
+          />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Danger option"
+            hasDivider
+            isDelete
+          />
+        </OverflowMenu>
+      );
+    },
+    {
+      info: {
+        text: `
+            Overflow Menu is used when additional options are available to the user and there is a space constraint.
+            Create Overflow Menu Item components for each option on the menu.
+
+            When given \`href\` props, menu items render as <a> tags to facilitate usability.
+          `,
+      },
+    }
+  )
+  .add(
     'custom trigger',
     () => {
       const overflowMenuItemProps = props.menuItem();

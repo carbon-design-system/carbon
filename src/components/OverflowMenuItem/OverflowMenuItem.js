@@ -6,6 +6,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const OverflowMenuItem = ({
+  href,
   className,
   itemText,
   hasDivider,
@@ -39,31 +40,30 @@ const OverflowMenuItem = ({
     closeMenu();
   };
 
-  const primaryFocusProp = (({ primaryFocus, floatingMenu }) => {
-    if (!primaryFocus) {
-      return {};
-    }
-    return floatingMenu
-      ? { 'data-floating-menu-primary-focus': true }
-      : { 'data-overflow-menu-primary-focus': true };
-  })({ primaryFocus, floatingMenu });
+  let primaryFocusProp = {};
+  if (primaryFocus && floatingMenu) {
+    primaryFocusProp = { 'data-floating-menu-primary-focus': true };
+  } else if (primaryFocus) {
+    primaryFocusProp = { 'data-overflow-menu-primary-focus': true };
+  }
 
-  const item = (
+  const TagToUse = href ? 'a' : 'button';
+
+  return (
     <li className={overflowMenuItemClasses} role="menuitem">
-      <button
+      <TagToUse
         {...other}
         {...primaryFocusProp}
+        href={href}
         className={overflowMenuBtnClasses}
         disabled={disabled}
         onClick={handleClick}
         title={requireTitle ? itemText : null}
         tabIndex={disabled ? -1 : 0}>
         {itemText}
-      </button>
+      </TagToUse>
     </li>
   );
-
-  return item;
 };
 
 OverflowMenuItem.propTypes = {
@@ -81,6 +81,11 @@ OverflowMenuItem.propTypes = {
    * The text in the menu item.
    */
   itemText: PropTypes.node.isRequired,
+
+  /**
+   * If given, overflow item will render as a link with the given href
+   */
+  href: PropTypes.string,
 
   /**
    * `true` to make this menu item a divider.
