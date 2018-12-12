@@ -14,7 +14,7 @@ export const defaultAttributes = {
   preserveAspectRatio: 'xMidYMid meet',
   // Reference:
   // https://github.com/ckeditor/ckeditor5/issues/668#issuecomment-344844027
-  style: 'transform: translate3d(0, 0, 0);',
+  style: 'will-change: transform;',
 };
 
 /**
