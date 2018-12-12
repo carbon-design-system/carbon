@@ -3,6 +3,7 @@
 exports[`colors 1`] = `
 Object {
   "black": "#000000",
+  "black100": "#000000",
   "blue10": "#edf4ff",
   "blue100": "#051243",
   "blue20": "#c9deff",
@@ -63,6 +64,7 @@ Object {
   "magenta70": "#a11950",
   "magenta80": "#760a3a",
   "magenta90": "#57002b",
+  "orange40": "#fc7b1e",
   "purple10": "#f7f1ff",
   "purple100": "#1e1033",
   "purple20": "#e6d6ff",
@@ -104,7 +106,9 @@ Object {
   "warmGray80": "#403c3c",
   "warmGray90": "#2b2828",
   "white": "#ffffff",
+  "white0": "#ffffff",
   "yellow": "#fdd13a",
+  "yellow20": "#fdd13a",
 }
 `;
 
