@@ -1,3 +1,5 @@
+import 'url-polyfill';
+
 import { getAttributes } from '@carbon/icon-helpers';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
