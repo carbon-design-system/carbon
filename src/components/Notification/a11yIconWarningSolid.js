@@ -2,7 +2,7 @@ import React from 'react';
 
 const a11yWarningIcon = (prefix, notificationType) => (
   <svg
-    class={`${prefix}--${notificationType}-notification__icon`}
+    className={`${prefix}--${notificationType}-notification__icon`}
     width="20"
     height="20"
     xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@ const a11yWarningIcon = (prefix, notificationType) => (
         id="b"
       />
     </defs>
-    <g fill="none" fill-rule="evenodd">
+    <g fill="none" fillRule="evenodd">
       <path
         d="M18.675 16.575l-8.125-15a.625.625 0 0 0-1.1 0l-8.125 15a.625.625 0 0 0 0 .625.625.625 0 0 0 .55.3h16.25a.625.625 0 0 0 .55-.925z"
         fill="#FDD13A"
@@ -25,7 +25,7 @@ const a11yWarningIcon = (prefix, notificationType) => (
         <path
           d="M9.3 6.881h1.406v5H9.3v-5zM10 15a.938.938 0 1 1 0-1.875A.938.938 0 0 1 10 15z"
           fill="#171717"
-          fill-rule="nonzero"
+          fillRule="nonzero"
         />
       </g>
       <path d="M0 0h20v20H0z" />
