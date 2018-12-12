@@ -6,7 +6,8 @@
 @import './experimental/fallback';
 
 @include exports('grid') {
-  @if feature-flag-enabled('grid') {
+  @if feature-flag-enabled('breaking-changes-x') {
+  } @else if feature-flag-enabled('grid') {
     @if feature-flag-enabled('grid--fallback') {
       @include grid-experimental-fallback;
     }

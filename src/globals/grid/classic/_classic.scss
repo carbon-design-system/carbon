@@ -1,15 +1,19 @@
+@import '../../scss/functions';
 @import '../../scss/vars';
 
 $max-width: 1600px;
 $columns: 12;
 
-$grid-breakpoints: (
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1600px,
-);
+$grid-breakpoints: () !default;
+@if not feature-flag-enabled('breaking-changes-x') {
+  $grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1600px,
+  );
+}
 $gutter-breakpoints: (
   xs: 5px,
   sm: 10px,

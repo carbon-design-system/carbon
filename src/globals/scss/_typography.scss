@@ -1,9 +1,10 @@
+@import 'functions';
 @import 'vars';
 
-$font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
-$font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
-$font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
-$font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
+@import './vendor/@carbon/type/scss/scale';
+@import './vendor/@carbon/type/scss/styles';
+@import 'breakpoints';
+@import 'font-family';
 
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
@@ -42,14 +43,6 @@ $typescale-map: (
   font-family: $font-family-helvetica;
 }
 
-@mixin font-family {
-  @if global-variable-exists('css--plex') and $css--plex == true {
-    font-family: $font-family-sans-serif;
-  } @else {
-    font-family: $font-family-helvetica;
-  }
-}
-
 // There are two line heights to choose from. One for headings and one for body text
 @mixin line-height($el) {
   @if $el == 'heading' {
@@ -85,7 +78,9 @@ $font-size-map: (
 );
 
 @mixin font-size($size) {
-  @if map-has-key($font-size-map, $size) {
+  @if feature-flag-enabled('breaking-changes-x') {
+    @include type-scale($size);
+  } @else if map-has-key($font-size-map, $size) {
     font-size: map-get($font-size-map, $size);
   } @else {
     @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';

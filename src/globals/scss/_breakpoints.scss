@@ -1,0 +1,51 @@
+@import 'functions';
+@import './vendor/@carbon/layout/scss/breakpoint';
+
+$breakpoints: (
+  bp--xs--major: 500px,
+  bp--sm--major: 768px,
+  bp--md--major: 992px,
+  bp--lg--major: 1200px,
+  sm: 320px,
+  md: 672px,
+  lg: 1056px,
+  xlg: 1312px,
+  max: 1584px,
+);
+
+//-------------------------------------
+// @mixin: breakpoint($size)
+//-------------------------------------
+// usage:
+// @include breakpoint(bp--md--major) {
+//    - styles here --
+// }
+//-------------------------------------
+
+@mixin breakpoint($size, $given-breakpoints: $grid-breakpoints) {
+  @if map-has-key($given-breakpoints, $size) and feature-flag-enabled('breaking-changes-x') {
+    @include breakpoint-up($size, $given-breakpoints) {
+      @content;
+    }
+  } @else if map-has-key($breakpoints, $size) {
+    @media screen and (min-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}
+
+@mixin max-breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media screen and (max-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $size) {
+      @content;
+    }
+  }
+}

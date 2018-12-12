@@ -159,7 +159,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    @include font-size('14');
+    @if feature-flag-enabled('breaking-changes-x') {
+      @include font-size(2);
+    } @else {
+      @include font-size('14');
+    }
     &:before {
       content: '';
       display: block;
@@ -222,7 +226,11 @@
     position: absolute;
     margin-left: $spacing-lg;
     margin-top: rem(28px);
-    @include font-size('12');
+    @if feature-flag-enabled('breaking-changes-x') {
+      @include font-size(1);
+    } @else {
+      @include font-size('12');
+    }
     color: $text-02;
   }
 

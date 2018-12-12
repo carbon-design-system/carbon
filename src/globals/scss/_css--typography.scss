@@ -6,6 +6,15 @@
 @import 'css--reset';
 @import 'import-once';
 
+$type--css-classes: false;
+$type--reset: false;
+
+@import './vendor/@carbon/type/scss/classes';
+@import './vendor/@carbon/type/scss/reset';
+@import './vendor/@carbon/type/scss/scale';
+@import 'breakpoints';
+@import 'font-family';
+
 @mixin typography {
   // really big
   .#{$prefix}--type-giga {
@@ -122,6 +131,10 @@
 
 @include exports('css--typography') {
   @if global-variable-exists('css--typography') == false or $css--typography == true {
+    @if feature-flag-enabled('breaking-changes-x') {
+      @include type--css-classes;
+      @include type-reset;
+    }
     @include typography;
   }
 }
