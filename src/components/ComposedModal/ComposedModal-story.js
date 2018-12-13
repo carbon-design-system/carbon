@@ -10,10 +10,14 @@ import ComposedModal, {
 import Button from '../Button';
 
 const props = {
-  composedModal: () => ({
-    open: boolean('Open (open in <ComposedModal>)', true),
+  composedModal: (includeOpen = true) => ({
+    open: includeOpen ? boolean('Open (open in <ComposedModal>)', true) : null,
     onKeyDown: action('onKeyDown'),
     danger: boolean('Danger mode (danger)', false),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      '[data-modal-primary-focus]'
+    ),
   }),
   modalHeader: () => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
@@ -99,6 +103,46 @@ storiesOf('ComposedModal', module)
       info: {
         text: `
             Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
+          `,
+      },
+    }
+  )
+  .add(
+    'Example usage with trigger button',
+    () => {
+      class ComposedModalExample extends React.Component {
+        state = { open: false };
+        toggleModal = open => this.setState({ open });
+        render() {
+          const { open } = this.state;
+          return (
+            <>
+              <Button onClick={() => this.toggleModal(true)}>
+                Launch composed modal
+              </Button>
+              <ComposedModal
+                {...props.composedModal()}
+                open={open}
+                onClose={() => this.toggleModal(false)}>
+                <ModalHeader {...props.modalHeader()} />
+                <ModalBody>
+                  <p className="bx--modal-content__text">
+                    Please see ModalWrapper for more examples and demo of the
+                    functionality.
+                  </p>
+                </ModalBody>
+                <ModalFooter {...props.modalFooter()} />
+              </ComposedModal>
+            </>
+          );
+        }
+      }
+      return <ComposedModalExample />;
+    },
+    {
+      info: {
+        text: `
+            An example ComposedModal with a trigger button
           `,
       },
     }

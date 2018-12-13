@@ -4,11 +4,14 @@ exports[`<ComposedModal /> renders 1`] = `
 <ComposedModal
   onKeyDown={[Function]}
   open={true}
+  selectorPrimaryFocus="[data-modal-primary-focus]"
 >
   <div
     className="bx--modal is-visible"
+    onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
     open={true}
     role="presentation"
     tabIndex={-1}

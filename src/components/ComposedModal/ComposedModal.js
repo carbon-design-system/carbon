@@ -7,16 +7,23 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
+const matchesFuncName =
+  typeof Element !== 'undefined' &&
+  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
+    name => typeof Element.prototype[name] === 'function'
+  )[0];
 
 export default class ComposedModal extends Component {
   state = {};
 
   static defaultProps = {
     onKeyDown: () => {},
+    selectorPrimaryFocus: '[data-modal-primary-focus]',
   };
 
   outerModal = React.createRef();
   innerModal = React.createRef();
+  button = React.createRef();
 
   static propTypes = {
     /**
@@ -40,21 +47,18 @@ export default class ComposedModal extends Component {
      * `onKeyDown` events that do not close the modal
      */
     onKeyDown: PropTypes.func,
+
+    /**
+     * Specify whether the Modal is currently open
+     */
+    open: PropTypes.bool,
+
+    /**
+     * Specify a CSS selector that matches the DOM element that should be
+     * focused when the Modal opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
   };
-
-  handleKeyDown = evt => {
-    if (evt.which === 27) {
-      this.closeModal();
-    }
-
-    this.props.onKeyDown(evt);
-  };
-
-  componentDidMount() {
-    if (this.outerModal.current) {
-      this.outerModal.current.focus();
-    }
-  }
 
   static getDerivedStateFromProps({ open }, state) {
     const { prevOpen } = state;
@@ -66,13 +70,41 @@ export default class ComposedModal extends Component {
         };
   }
 
-  closeModal = () => {
-    const { onClose } = this.props;
-    if (!onClose || onClose() !== false) {
-      this.setState({
-        open: false,
-      });
+  elementOrParentIsFloatingMenu = target => {
+    const {
+      selectorsFloatingMenus = [
+        `.${prefix}--overflow-menu-options`,
+        `.${prefix}--tooltip`,
+        '.flatpickr-calendar',
+      ],
+    } = this.props;
+    if (target && typeof target.closest === 'function') {
+      return selectorsFloatingMenus.some(selector => target.closest(selector));
     }
+
+    // Alternative if closest does not exist.
+    while (target) {
+      if (typeof target[matchesFuncName] === 'function') {
+        if (
+          selectorsFloatingMenus.some(selector =>
+            target[matchesFuncName](selector)
+          )
+        ) {
+          return true;
+        }
+      }
+      target = target.parentNode;
+    }
+    return false;
+  };
+
+  handleKeyDown = evt => {
+    // Esc key
+    if (evt.which === 27) {
+      this.closeModal();
+    }
+
+    this.props.onKeyDown(evt);
   };
 
   handleClick = evt => {
@@ -84,6 +116,73 @@ export default class ComposedModal extends Component {
     }
   };
 
+  focusModal = () => {
+    if (this.outerModal.current) {
+      this.outerModal.current.focus();
+    }
+  };
+
+  handleBlur = evt => {
+    // Keyboard trap
+    if (
+      this.innerModal.current &&
+      this.props.open &&
+      evt.relatedTarget &&
+      !this.innerModal.current.contains(evt.relatedTarget) &&
+      !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
+    ) {
+      this.focusModal();
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.open && this.props.open) {
+      this.beingOpen = true;
+    } else if (prevProps.open && !this.props.open) {
+      this.beingOpen = false;
+    }
+  }
+
+  focusButton = focusContainerElement => {
+    const primaryFocusElement = focusContainerElement.querySelector(
+      this.props.selectorPrimaryFocus
+    );
+    if (primaryFocusElement) {
+      primaryFocusElement.focus();
+      return;
+    }
+    if (this.button.current) {
+      this.button.current.focus();
+    }
+  };
+
+  componentDidMount() {
+    if (!this.props.open) {
+      return;
+    }
+    this.focusButton(this.innerModal.current);
+  }
+
+  handleTransitionEnd = evt => {
+    if (
+      this.outerModal.current.offsetWidth &&
+      this.outerModal.current.offsetHeight &&
+      this.beingOpen
+    ) {
+      this.focusButton(evt.currentTarget);
+      this.beingOpen = false;
+    }
+  };
+
+  closeModal = () => {
+    const { onClose } = this.props;
+    if (!onClose || onClose() !== false) {
+      this.setState({
+        open: false,
+      });
+    }
+  };
+
   render() {
     const { open } = this.state;
     const {
@@ -91,6 +190,7 @@ export default class ComposedModal extends Component {
       containerClassName,
       children,
       danger,
+      selectorPrimaryFocus, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -107,13 +207,19 @@ export default class ComposedModal extends Component {
     });
 
     const childrenWithProps = React.Children.toArray(children).map(child => {
-      if (child.type === ModalHeader || child.type === ModalFooter) {
-        return React.cloneElement(child, {
-          closeModal: this.closeModal,
-        });
+      switch (child.type) {
+        case ModalHeader:
+          return React.cloneElement(child, {
+            closeModal: this.closeModal,
+          });
+        case ModalFooter:
+          return React.cloneElement(child, {
+            closeModal: this.closeModal,
+            inputref: this.button,
+          });
+        default:
+          return child;
       }
-
-      return child;
     });
 
     return (
@@ -121,8 +227,10 @@ export default class ComposedModal extends Component {
         {...other}
         role="presentation"
         ref={this.outerModal}
+        onBlur={this.handleBlur}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
+        onTransitionEnd={open ? this.handleTransitionEnd : undefined}
         className={modalClass}
         tabIndex={-1}>
         <div ref={this.innerModal} className={containerClass}>
@@ -401,7 +509,8 @@ export class ModalFooter extends Component {
             onClick={onRequestSubmit}
             className={primaryClass}
             disabled={primaryButtonDisabled}
-            kind={danger ? 'danger--primary' : 'primary'}>
+            kind={danger ? 'danger--primary' : 'primary'}
+            inputref={this.props.inputref}>
             {primaryButtonText}
           </Button>
         )}

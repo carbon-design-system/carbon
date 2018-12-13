@@ -112,8 +112,8 @@ export default class Modal extends Component {
     selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
 
     /**
-     * Specify a CSS selector that matches the DOM element that should be focused
-     * when the Modal becomes open
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Modal opens
      */
     selectorPrimaryFocus: PropTypes.string,
   };
@@ -181,6 +181,12 @@ export default class Modal extends Component {
     }
   };
 
+  focusModal = () => {
+    if (this.outerModal.current) {
+      this.outerModal.current.focus();
+    }
+  };
+
   handleBlur = evt => {
     // Keyboard trap
     if (
@@ -201,12 +207,6 @@ export default class Modal extends Component {
       this.beingOpen = false;
     }
   }
-
-  focusModal = () => {
-    if (this.outerModal.current) {
-      this.outerModal.current.focus();
-    }
-  };
 
   focusButton = focusContainerElement => {
     const primaryFocusElement = focusContainerElement.querySelector(

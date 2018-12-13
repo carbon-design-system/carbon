@@ -148,7 +148,7 @@ describe('<ComposedModal />', () => {
   });
 
   it('changes the open state upon change in props', () => {
-    const wrapper = shallow(<ComposedModal open />);
+    const wrapper = mount(<ComposedModal open />);
     expect(wrapper.state().open).toEqual(true);
     wrapper.setProps({ open: false });
     expect(wrapper.state().open).toEqual(false);
@@ -185,5 +185,28 @@ describe('<ComposedModal />', () => {
     const button = wrapper.find('.bx--modal-close').first();
     button.simulate('click');
     expect(wrapper.state().open).toEqual(true);
+  });
+
+  it('should focus on the primary actionable button in ModalFooter by default', () => {
+    mount(
+      <ComposedModal open>
+        <ModalFooter primaryButtonText="Save" />
+      </ComposedModal>
+    );
+    expect(
+      document.activeElement.classList.contains('bx--btn--primary')
+    ).toEqual(true);
+  });
+
+  it('should focus on the element that matches selectorPrimaryFocus', () => {
+    mount(
+      <ComposedModal open selectorPrimaryFocus=".bx--modal-close">
+        <ModalHeader label="Optional Label" title="Example" />
+        <ModalFooter primaryButtonText="Save" />
+      </ComposedModal>
+    );
+    expect(
+      document.activeElement.classList.contains('bx--modal-close')
+    ).toEqual(true);
   });
 });
