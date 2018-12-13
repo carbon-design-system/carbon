@@ -12,7 +12,7 @@ export const baseFontSize = 16;
 /**
  * Convert a given px unit to a rem unit
  * @param {number} px
- * @return {string}
+ * @returns {string}
  */
 export function rem(px) {
   return `${px / baseFontSize}rem`;
@@ -21,7 +21,7 @@ export function rem(px) {
 /**
  * Convert a given px unit to a em unit
  * @param {number} px
- * @return {string}
+ * @returns {string}
  */
 export function em(px) {
   return `${px / baseFontSize}em`;
