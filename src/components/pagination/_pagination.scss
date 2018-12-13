@@ -202,7 +202,7 @@ $css--helpers: true;
     background-color: $ui-01;
     display: flex;
     align-items: center;
-    border: 1px solid $ui-03;
+    border: $spacing-4xs solid $ui-03;
     height: rem(48px);
 
     .#{$prefix}--form-item {
@@ -228,7 +228,7 @@ $css--helpers: true;
     color: $text-02;
     display: none;
     padding-right: $spacing-2xs;
-    padding-top: 1px;
+    padding-top: $spacing-4xs;
 
     @include breakpoint('530px') {
       display: inline-block;
@@ -251,8 +251,8 @@ $css--helpers: true;
     cursor: pointer;
     height: 100%;
     margin: 0;
-    padding: 0 14px;
-    border-left: 1px solid $ui-03;
+    padding: 0 rem(14px);
+    border-left: $spacing-4xs solid $ui-03;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -278,7 +278,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__button--no-index {
     border-right: 0;
-    margin-right: 1px;
+    margin-right: $spacing-4xs;
   }
 
   .#{$prefix}--pagination {
@@ -318,12 +318,12 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select__item-count {
-      border-right: 1px solid $ui-03;
+      border-right: $spacing-4xs solid $ui-03;
       margin-right: $spacing-md;
     }
 
     .#{$prefix}--select__page-number {
-      border-left: 1px solid $ui-03;
+      border-left: $spacing-4xs solid $ui-03;
     }
 
     .#{$prefix}--text-input {
@@ -343,15 +343,15 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination--inline {
-    height: 42px;
+    height: rem(42px);
     margin-top: -0.5rem;
     margin-bottom: -0.5rem;
     margin-right: -1rem;
 
     .#{$prefix}--pagination__button {
       height: rem(40px);
-      border-left: 1px solid $ui-03;
-      border-right: 1px solid $ui-03;
+      border-left: $spacing-4xs solid $ui-03;
+      border-right: $spacing-4xs solid $ui-03;
       margin: 0;
     }
 
