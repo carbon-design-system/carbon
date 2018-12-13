@@ -75,7 +75,7 @@ async function build() {
   });
 
   // Format the entire color map.
-  const formattedColorMap = `$ibm-color-map: (` + colorMap + `)`;
+  const formattedColorMap = `$${PREFIX}-colors-map: (` + colorMap + `)`;
 
   await fs.ensureDir(SCSS_DIR);
   await fs.writeFile(
