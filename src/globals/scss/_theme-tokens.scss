@@ -1,3 +1,5 @@
+@import './vendor/@carbon/colors/scss/colors-mixin';
+
 @import 'feature-flags';
 @import 'import-once';
 @import 'functions';
@@ -107,30 +109,6 @@
   $edited: true !default !global;
   $use-layer: true !default !global;
 
-  // Color Theme Variables
-  $brand-01: $ibm-colors__blue--60 !default !global;
-  $brand-02: $ibm-colors__blue--80 !default !global;
-  $brand-03: $ibm-colors__blue--60 !default !global;
-  $inverse-01: $ibm-colors__gray--10 !default !global;
-  $inverse-02: $ibm-colors__white !default !global; // TODO: Define for experimental
-  $ui-01: $ibm-colors__gray--10 !default !global;
-  $ui-02: $ibm-colors__white !default !global;
-  $ui-03: $ibm-colors__gray--20 !default !global;
-  $ui-04: $ibm-colors__gray--50 !default !global;
-  $ui-05: $ibm-colors__gray--100 !default !global;
-  $icon-01: $ibm-colors__gray--100 !default !global;
-  $text-01: $ibm-colors__gray--100 !default !global;
-  $text-02: $ibm-colors__gray--70 !default !global;
-  $text-03: $ibm-colors__gray--50 !default !global;
-  $field-01: $ibm-colors__gray--10 !default !global;
-  $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
-  $support-01: $ibm-colors__red--60 !default !global;
-  $support-02: $ibm-colors__green--60 !default !global;
-  $support-03: $ibm-colors__yellow !default !global;
-  $support-04: $ibm-colors__blue--70 !default !global;
-
-  $active-01: $ibm-colors__gray--30 !default !global;
-
   // TODO: Define for experimental
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
@@ -140,14 +118,6 @@
   $nav-06: $color__teal-50 !default !global;
   $nav-07: $color__blue-30 !default !global;
   $nav-08: $color__blue-51 !default !global;
-
-  // TODO: Define for experimental
-  $hover-primary: darken($brand-01, 10%) !default !global;
-  $hover-primary-text: darken($brand-01, 15%) !default !global;
-  $hover-danger: darken($support-01, 10%) !default !global;
-  $hover-secondary: $brand-01 !default !global;
-  $hover-row: rgba($brand-02, 0.1) !default !global;
-  $hover-field: #e5e5e5 !default !global;
 
   // Global
   $input-border: 1px solid transparent !default !global;
@@ -250,6 +220,7 @@
 
 @include exports('theme') {
   @if feature-flag-enabled('components-x') {
+    @include theme--base--experimental();
     @include theme--experimental;
   } @else {
     @include theme;

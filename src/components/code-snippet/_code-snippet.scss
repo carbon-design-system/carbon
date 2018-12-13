@@ -423,7 +423,7 @@
   }
 
   .#{$prefix}--snippet-button:hover {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   .#{$prefix}--snippet-button:active {
@@ -473,7 +473,7 @@
   }
 
   .#{$prefix}--snippet-btn--expand:hover {
-    background: $hover-field;
+    background: $hover-ui;
     color: $text-01;
   }
 
