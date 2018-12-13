@@ -182,6 +182,12 @@
       font-weight: 700;
     }
 
+    th:hover {
+      background: $data-table-column-hover;
+      outline: 1px solid $data-table-column-hover-border;
+      outline-offset: -1px;
+    }
+
     tbody {
       @include typescale('zeta');
       background-color: $ui-01;
@@ -242,6 +248,10 @@
     width: rem(56px);
     min-width: rem(56px);
     padding-right: 0;
+  }
+
+  .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+    background: $ui-03;
   }
 
   // Overrides
