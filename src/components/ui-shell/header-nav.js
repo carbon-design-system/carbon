@@ -5,6 +5,8 @@ import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 export default class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
     super(element, options);
@@ -15,7 +17,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @member HeaderNav.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * @returns {Element} Currently highlighted element.
@@ -30,7 +32,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = [...this.element.querySelectorAll(this.options.selectorSubmenuLink)];
+    const items = toArray(this.element.querySelectorAll(this.options.selectorSubmenuLink));
     const start = this.getCurrentNavigation();
     const getNextItem = old => {
       const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
@@ -88,7 +90,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

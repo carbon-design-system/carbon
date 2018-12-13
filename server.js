@@ -105,9 +105,10 @@ function componentRoute(req, res, next) {
         if (rendered == null) {
           res.writeHead(404);
           res.end();
+        } else {
+          res.setHeader('Content-Type', 'text/html');
+          res.end(rendered);
         }
-        res.setHeader('Content-Type', 'text/html');
-        res.end(rendered);
       })
       .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console

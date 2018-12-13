@@ -80,8 +80,7 @@
 
       .line,
       .line:nth-child(1),
-      .line:nth-child(3)
-       {
+      .line:nth-child(3) {
         transform: translateY(0) rotate(0);
         transition: all $transition--base ease-in-out;
       }

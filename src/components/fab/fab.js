@@ -70,7 +70,7 @@ class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
    * @member FabButton.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -80,7 +80,7 @@ class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find floating action buttons.
    */
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-fab]',
     initEventNames: ['click'],
   };

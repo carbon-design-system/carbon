@@ -6,14 +6,16 @@ Structure stays the same but some class names have been changed. See below.
 
 The `_overflow-menu.scss` file is now located at `src/components/overflow-menu/_overflow-menu.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/overflow-menu/overflow-menu';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
-@import 'path_to_node_modules/@console/bluemix-components/src/components/overflow-menu/overflow-menu;
+@import 'path_to_node_modules/@console/bluemix-components/src/components/overflow-menu/overflow-menu';
 ```
 
 `.bx--overflow-menu__options` is now `.bx--overflow-menu-options`

@@ -29,10 +29,8 @@ With `input` and `label` as siblings
 
 ```html
 <div class="bx--form-item">
-  <input id="bx--checkbox" class="bx--checkbox" type="checkbox" value="green" name="checkbox">
-  <label for="bx--checkbox" class="bx--checkbox-label">
-    Checkbox (input + label)
-  </label>
+  <input id="bx--checkbox" class="bx--checkbox" type="checkbox" value="green" name="checkbox" />
+  <label for="bx--checkbox" class="bx--checkbox-label"> Checkbox (input + label) </label>
 </div>
 ```
 
@@ -41,8 +39,7 @@ With `label` wrapping `input`
 ```html
 <div class="bx--form-item">
   <label class="bx--checkbox-label">
-    <input class="bx--checkbox" type="checkbox" value="yellow" name="checkbox">
-    Checkbox (label > input)
+    <input class="bx--checkbox" type="checkbox" value="yellow" name="checkbox" /> Checkbox (label > input)
   </label>
 </div>
 ```

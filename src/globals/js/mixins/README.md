@@ -79,7 +79,7 @@ Carbon component mixins, based on [Subclass Factory Pattern](https://github.com/
 
 [Static `.create(element)` method](https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L44-L46) covers the creation part. It first checks if there is an instance of the same component class with by looking up static `components` property for one associated with the given `element`, and simply returns it if there is one. Otherwise, a new instance of the component is created by calling the constructor with the given `element` and returns the new instance.
 
-A Carbon component works with the given `element` and its descendants to hook event handlers on, change DOM properties of, mangle styles of, and so on. We call it the *root element* of the component.
+A Carbon component works with the given `element` and its descendants to hook event handlers on, change DOM properties of, mangle styles of, and so on. We call it the _root element_ of the component.
 
 ```javascript
 import mixin from 'carbon-components/src/globals/js/misc/mixin.js';
@@ -102,11 +102,11 @@ const myClassInstance = MyClass.create(div, options);
 
 The constructor in `create-component.js` mixin sets the following properties:
 
-| Name       | Description
-|------------|------------
-| `element`  | The root element of the component (see above).
-| `options`  | The component options.
-| `children` | The array of Carbon component instances that has to be released along with this component. An exanple is with [overflow menu](http://www.carbondesignsystem.com/components/overflow-menu/code) component which creates another Carbon component called [floating menu](../../../components/floating-menu/floating-menu.js), and the floating menu has to be released along with the overflow menu.
+| Name       | Description                                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `element`  | The root element of the component (see above).                                                                                                                                                                                                                                                                                                                                                     |
+| `options`  | The component options.                                                                                                                                                                                                                                                                                                                                                                             |
+| `children` | The array of Carbon component instances that has to be released along with this component. An exanple is with [overflow menu](http://www.carbondesignsystem.com/components/overflow-menu/code) component which creates another Carbon component called [floating menu](../../../components/floating-menu/floating-menu.js), and the floating menu has to be released along with the overflow menu. |
 
 The `.options` property inherits static `.options` property and merges in the 2nd argument of static `.create()` method. In above example, `.options` will be equal to `{ foo: 'foo1', bar: 'bar0', baz: 'baz1' }`.
 
@@ -214,10 +214,7 @@ Changing `initEventNames` option above allows you to hook more/different event t
 
 ```html
 <main>
-  <button class="bx--btn bx--btn--secondary" type="button"
-    data-my-component-target="#id-of-my-component">
-    Launch
-  </button>
+  <button class="bx--btn bx--btn--secondary" type="button" data-my-component-target="#id-of-my-component">Launch</button>
   <div data-my-component id="id-of-my-component">The content of my component</div>
 </main>
 ```
