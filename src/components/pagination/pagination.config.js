@@ -2,6 +2,7 @@
 
 const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const itemsPerPageChoices = [
   {
@@ -32,6 +33,7 @@ const pageNumberChoices = [
     value: '1',
     label: '1',
     selected: true,
+    totalPages: 5,
   },
   {
     value: '2',
@@ -51,30 +53,48 @@ const pageNumberChoices = [
   },
 ];
 
+const variants = [
+  {
+    name: 'default',
+    label: 'V1',
+    context: {
+      itemsPerPageChoices,
+      version: 'v1',
+    },
+    notes: `
+        Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
+      `,
+  },
+  {
+    name: 'v2',
+    label: 'V2',
+    context: {
+      version: 'v2',
+      itemsPerPageChoices,
+    },
+  },
+]
+  .filter(variant => {
+    if (componentsX) {
+      return variant.context.version !== 'v2';
+    }
+    return variant;
+  })
+  .map((variant, index) => {
+    if (index === 0) {
+      return {
+        ...variant,
+        name: 'default',
+      };
+    }
+    return variant;
+  });
+
 module.exports = {
   context: {
     featureFlags,
     prefix,
+    pageNumberChoices,
   },
-  variants: [
-    {
-      name: 'default',
-      label: 'V1',
-      context: {
-        itemsPerPageChoices,
-      },
-      notes: `
-        Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
-      `,
-    },
-    {
-      name: 'v2',
-      label: 'V2',
-      context: {
-        version: 'v2',
-        itemsPerPageChoices,
-        pageNumberChoices,
-      },
-    },
-  ],
+  variants,
 };
