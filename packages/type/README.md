@@ -19,6 +19,22 @@ command instead:
 yarn add @carbon/type
 ```
 
+## Usage
+
+`@carbon/type` provides a variety of ways to work with typography from
+the IBM Design Language. You can use all of these features either in
+JavaScript or Sass. These features include:
+
+| Feature      | Description                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------ |
+| Font face    | Include IBM Plex™ font faces in your application. Uses Google fonts                                          |
+| Type classes | Helpers to use type styles directly. Not included by default                                                 |
+| Font family  | Defines the font stack for IBM Plex™ in your application, provides helpers for working with font definitions |
+| Reset        | Provides a high-level CSS Reset to use in your project                                                       |
+| Scale        | Provides the type scale. Can access the size at any given step                                               |
+| Spacing      | Provides a high-level spacing scale to be used when laying out type                                          |
+| Styles       | Provides type styles for your application                                                                    |
+
 ## 📚 Examples
 
 If you're looking for more examples on how to use `@carbon/type`, we
