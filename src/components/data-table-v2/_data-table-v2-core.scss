@@ -162,10 +162,13 @@
 
 @mixin data-table-v2-core--x {
   .#{$prefix}--data-table-v2-container {
-    width: 100%;
     min-width: rem(500px);
-    overflow-x: auto;
     padding-top: $spacing-3xs; // allow space for focus styles
+  }
+
+  .#{$prefix}--data-table-v2_inner-container {
+    min-width: rem(500px);
+    overflow-x: scroll;
   }
 
   .#{$prefix}--data-table-v2 {
@@ -183,10 +186,12 @@
       @include typescale('zeta');
       background-color: $ui-01;
       border-bottom: 1px solid $ui-03;
+      width: 100%;
 
       & > tr {
         background: $ui-01;
-        border-bottom: $ui-03;
+        border-bottom: 1px solid $ui-03;
+
         &:hover {
           background: $hover-field;
         }
@@ -195,6 +200,7 @@
 
     tr {
       height: rem(48px);
+      width: 100%;
 
       .#{$prefix}--overflow-menu {
         opacity: 1;
@@ -212,12 +218,30 @@
     color: $text-01;
 
     &:first-of-type {
-      padding-left: rem(24px);
+      padding-left: $spacing-lg;
     }
 
-    &:last-of-type {
+    &:last-of-type:not(.#{$prefix}--table-column-menu) {
       padding-right: $spacing-lg;
     }
+  }
+
+  //min width for all columns that aren't actions
+  td:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu) {
+    min-width: rem(100px);
+  }
+
+  //min width for checkbox columns
+  .#{$prefix}--table-column-checkbox {
+    width: rem(64px);
+    min-width: rem(64px);
+  }
+
+  //min width for overflow menu columns
+  .#{$prefix}--table-column-menu {
+    width: rem(56px);
+    min-width: rem(56px);
+    padding-right: 0;
   }
 
   // Overrides
@@ -226,21 +250,11 @@
   }
 
   .#{$prefix}--overflow-menu {
-    opacity: 1;
-
     &:focus {
       outline: 0;
       opacity: 1;
       box-shadow: none;
-
-      .#{$prefix}--overflow-menu__icon {
-        box-shadow: inset 0px 0px 0px 1px $brand-01;
-      }
     }
-  }
-
-  .#{$prefix}--overflow-menu__icon {
-    transform: rotate(90deg);
   }
 
   // Options
@@ -309,7 +323,17 @@
 
   .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
-    background-color: rgba($brand-02, 0.1);
+    background-color: $ui-03;
+    border-bottom: 1px solid $active-01;
+
+    &:first-of-type {
+      border-bottom: 1px solid $active-01;
+      border-top: 1px solid $active-01;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid transparent;
+    }
   }
 }
 
