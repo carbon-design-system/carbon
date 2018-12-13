@@ -11,7 +11,7 @@
 
 /// Include a type reset that individuals can use in their projects for
 /// consistent rendering
-@include exports('type-reset') {
+@mixin type-reset {
   html {
     font-size: $base-font-size;
   }
@@ -23,5 +23,11 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@include exports('type-reset') {
+  @if global-variable-exists('type--reset') == false or $type--reset == true {
+    @include type-reset;
   }
 }
