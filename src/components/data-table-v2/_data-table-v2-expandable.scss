@@ -110,60 +110,49 @@
 
     > td:first-of-type {
       position: relative;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 2px;
-        background-color: $brand-01;
-      }
+      border-bottom: 1px solid transparent;
     }
 
     + tr[data-child-row] {
       td {
         border-top: 0;
+        width: auto;
         padding-bottom: $spacing-xs;
+        padding-left: $spacing-3xl;
       }
     }
 
     &:hover {
       > td {
-        background-color: $hover-row;
+        background-color: $hover-field;
       }
 
       > td:first-of-type {
-        border-left: 1px solid transparent;
+        border-bottom: 1px solid $hover-field;
       }
 
       > td:last-of-type {
-        border-right: 1px solid $brand-01;
-      }
-
-      &[data-parent-row] > td {
-        border-bottom: 0;
+        border-right: 1px solid transparent;
       }
 
       + tr[data-child-row] {
         > td {
-          background-color: $hover-row;
-          border-bottom: 1px solid $brand-01;
-          border-right: 1px solid $brand-01;
+          background-color: $hover-field;
+          border-right: 1px solid transparent;
         }
       }
     }
   }
 
   tr.#{$prefix}--expandable-row--hover-v2 {
+    background-color: $hover-field;
+
     > td {
-      background-color: $hover-row;
-      border-top: 1px solid $brand-01;
+      background-color: $hover-field;
     }
 
-    > td:last-of-type {
-      border-right: 1px solid $brand-01;
+    > td:first-of-type {
+      border-bottom: 1px solid transparent;
     }
   }
 
@@ -173,7 +162,7 @@
   }
 
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
-    transform: rotate(90deg);
+    transform: rotate(270deg);
     transition: transform 200ms $carbon--standard-easing;
   }
 
@@ -191,7 +180,7 @@
 
   .#{$prefix}--table-expand-v2__svg {
     fill: $ui-05;
-    transform: rotate(0deg);
+    transform: rotate(90deg);
     transition: transform 200ms $carbon--standard-easing;
     height: 16px;
     width: auto;
