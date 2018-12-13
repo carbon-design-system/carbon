@@ -8,9 +8,21 @@
 'use strict';
 
 const { defaultAttributes } = require('@carbon/icon-helpers');
+const babel = require('@babel/core');
 const { camelCase } = require('change-case');
 const prettier = require('prettier');
 
+const babelOptions = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+        targets: ['last 1 version', 'ie >= 11', 'Firefox ESR'],
+      },
+    ],
+  ],
+};
 const prettierOptions = {
   parser: 'babylon',
   printWidth: 80,
@@ -36,7 +48,7 @@ function createEntrypointFromMeta(meta) {
   const source = `${MODULE_IMPORTS}
 ${components.join('\n')}`;
 
-  return prettier.format(source, prettierOptions);
+  return babel.transformSync(source, babelOptions);
 }
 
 function createModuleFromInfo(info) {
@@ -47,7 +59,7 @@ ${createComponentFromInfo(info)}
 
 export default ${info.moduleName};
 `;
-  return prettier.format(source, prettierOptions);
+  return babel.transformSync(source, babelOptions);
 }
 
 function iconToString(descriptor) {
@@ -130,7 +142,7 @@ function transformStyleIntoObject(string) {
     const [property, value] = declaration.split(':').map(s => s.trim());
     return {
       ...acc,
-      [property]: value,
+      [camelCase(property)]: value,
     };
   }, {});
 }

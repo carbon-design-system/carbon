@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
-    "ci-check": "toolkit format:diff && bundler check --ignore '**/@(node_modules|examples)/**' 'packages/**/*.scss' && toolkit test --ci --reporters=default --reporters=jest-junit",
+    "ci-check": "toolkit format:diff && bundler check --ignore '**/@(node_modules|examples)/**' 'packages/**/*.scss' && jest --ci --reporters=default --reporters=jest-junit",
     "clean": "lerna run clean && lerna clean --yes && rimraf build && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
     "examples": "rimraf build && yarn build && node tasks/examples.js",
@@ -25,24 +25,31 @@
     "lint": "toolkit lint .",
     "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
     "sync": "node tasks/sync.js",
-    "test": "toolkit test"
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
     "@carbon/cli-plugin-editorconfig": "^0.0.23",
     "@carbon/cli-plugin-eslint": "^0.0.23",
     "@carbon/cli-plugin-github-files": "^0.0.23",
-    "@carbon/cli-plugin-jest": "^0.0.23",
     "@carbon/cli-plugin-stylelint": "^0.0.23",
     "@carbon/toolkit": "^0.0.23",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
+    "babel-core": "^7.0.0-bridge",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.3.1",
     "eslint-plugin-import": "^2.14.0",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.3",
     "husky": "^1.1.2",
+    "jest": "^23.6.0",
     "jest-circus": "^23.6.0",
     "jest-junit": "^5.2.0",
     "lerna": "^2.11.0",
@@ -57,19 +64,6 @@
     "plugins": [
       "@carbon/cli-plugin-eslint",
       "@carbon/cli-plugin-stylelint",
-      [
-        "@carbon/cli-plugin-jest",
-        {
-          "reporters": [
-            "default",
-            "jest-junit"
-          ],
-          "testPathIgnorePatterns": [
-            "examples"
-          ],
-          "testRunner": "jest-circus/runner"
-        }
-      ],
       "@carbon/cli-plugin-github-files",
       "@carbon/cli-plugin-editorconfig"
     ]
@@ -113,6 +107,43 @@
   "stylelint": {
     "extends": [
       "stylelint-config-toolkit"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "packages/**/*.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "setupFiles": [
+      "./tasks/jest/setup.js"
+    ],
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js?(x)",
+      "<rootDir>/**/?(*.)(spec|test).js?(x)",
+      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "./tasks/jest/jsTransform.js",
+      "^.+\\.css$": "./tasks/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "./tasks/jest/fileTransform.js"
+    },
+    "testRunner": "jest-circus/runner",
+    "testPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/lib/",
+      "/examples/"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
     ]
   }
 }
