@@ -1,7 +1,7 @@
 {
   "name": "@carbon/motion",
   "description": "Motion helpers for digital and software products using the Carbon Design System",
-  "version": "0.0.1-alpha.25",
+  "version": "0.0.1-alpha.26",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,7 +23,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "0.0.1-alpha.25",
+    "@carbon/bundler": "0.0.1-alpha.26",
     "rimraf": "^2.6.2"
   },
   "eyeglass": {
