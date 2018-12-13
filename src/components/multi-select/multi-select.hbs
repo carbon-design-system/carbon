@@ -3,10 +3,14 @@
     aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon">
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronDownGlyph' aria-label='Open menu' }}
+      {{else}}
       <svg width="10" height="5" name="caret--down" role="img" viewBox="0 0 10 5" aria-label="Open menu">
         <title>Open menu</title>
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -15,10 +19,14 @@
     aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronDownGlyph' aria-label='Close menu' }}
+      {{else}}
       <svg width="10" height="5" name="caret--down" role="img" viewBox="0 0 10 5" aria-label="Close menu">
         <title>Close menu</title>
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
+      {{/if}}
     </div>
   </div>
   <fieldset class="{{@root.prefix}}--list-box__menu">
