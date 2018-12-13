@@ -31,6 +31,7 @@ export default class ModalWrapper extends React.Component {
     secondaryButtonText: 'Cancel',
     triggerButtonKind: 'primary',
     disabled: false,
+    selectorPrimaryFocus: '[data-modal-primary-focus]',
     onKeyDown: () => {},
   };
 
@@ -69,11 +70,13 @@ export default class ModalWrapper extends React.Component {
       disabled,
       handleSubmit, // eslint-disable-line no-unused-vars
       shouldCloseAfterSubmit, // eslint-disable-line no-unused-vars
+      selectorPrimaryFocus,
       ...other
     } = this.props;
 
     const props = {
       ...other,
+      selectorPrimaryFocus,
       open: this.state.isOpen,
       onRequestClose: this.handleClose,
       onRequestSubmit: this.handleOnRequestSubmit,

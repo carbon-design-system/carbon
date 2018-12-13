@@ -20,6 +20,10 @@ const props = () => ({
   ),
   modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
   modalHeading: text('The modal heading (modalHeading)', 'Modal'),
+  selectorPrimaryFocus: text(
+    'Primary focus element selector (selectorPrimaryFocus)',
+    '[data-modal-primary-focus]'
+  ),
   primaryButtonText: text(
     'The text in the primary button (primaryButtonText)',
     'Save'
@@ -106,8 +110,7 @@ storiesOf('ModalWrapper', module)
         <TextInput
           id="test2"
           placeholder="Hint text here"
-          label="Text Input:"
-          data-modal-primary-focus
+          labelText="Text Input:"
         />
         <br />
         <Select id="select-1" labelText="Select">
