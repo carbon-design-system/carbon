@@ -156,10 +156,14 @@
             {{#if sortable}}
               <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
                 <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
-                <svg class="{{@root.prefix}}--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="{{../sortLabel}}" alt="{{../sortLabel}}">
-                  <title>{{../sortLabel}}</title>
-                  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-                </svg>
+                {{#if ../componentsX}}
+                  {{carbon-icon 'ArrowDown16' class=(add @root.prefix '--table-sort-v2__icon')}}
+                {{else}}
+                  <svg class="{{@root.prefix}}--table-sort-v2__icon" width="10" height="5" viewBox="0 0 10 5" aria-label="{{../sortLabel}}" alt="{{../sortLabel}}">
+                    <title>{{../sortLabel}}</title>
+                    <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+                  </svg>
+                {{/if}}
               </button>
             {{else if small}}
               {{title}}
