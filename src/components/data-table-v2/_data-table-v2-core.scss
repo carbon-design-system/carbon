@@ -342,7 +342,7 @@
       & > td {
         border-bottom: 1px solid $active-01;
         box-shadow: 0 -0.75px $active-01;
-        //adds top border to first row td bc border-top wasnt showing up
+        //adds top box-shadow to first row td bc border-top wasnt showing up for zebra
       }
     }
 
@@ -354,6 +354,15 @@
 
     &:hover {
       background: $hover-selected-ui;
+    }
+  }
+
+  tbody tr.#{$prefix}--data-table-v2--selected {
+    &:first-of-type {
+      & > td {
+        border-top: 1px solid $active-01;
+        box-shadow: none;
+      }
     }
   }
 }
