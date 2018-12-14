@@ -232,6 +232,14 @@
     }
   }
 
+  .#{$prefix}--table-header-label {
+    // height: rem(64px);
+    max-width: calc(100% - 15px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   //min width for all columns that aren't actions
   td:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu) {
     min-width: rem(100px);
