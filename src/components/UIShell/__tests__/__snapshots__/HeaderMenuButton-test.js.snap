@@ -17,7 +17,7 @@ exports[`HeaderMenuButton should render 1`] = `
     <Menu20
       height={20}
       preserveAspectRatio="xMidYMid meet"
-      viewBox="0 0 32 32"
+      viewBox="0 0 20 20"
       width={20}
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -26,12 +26,17 @@ exports[`HeaderMenuButton should render 1`] = `
         focusable="false"
         height={20}
         preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 32 32"
+        style={
+          Object {
+            "willChange": "transform",
+          }
+        }
+        viewBox="0 0 20 20"
         width={20}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M4 6h24v2H4zm0 18h24v2H4zm0-9h24v2H4z"
+          d="M2 15h16v1.2H2zm0-3.8h16v1.2H2zm0-3.7h16v1.2H2zm0-3.7h16V5H2z"
         />
       </svg>
     </Menu20>
