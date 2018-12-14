@@ -1,7 +1,7 @@
 'use strict';
 
+const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
-const { componentsX } = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -33,6 +33,7 @@ const items = [
 
 module.exports = {
   context: {
+    featureFlags,
     prefix,
   },
   variants: [
@@ -42,7 +43,7 @@ module.exports = {
       context: {
         variant: 'inline',
         items,
-        componentsX,
+        componentsX: featureFlags.componentsX,
       },
     },
     {
@@ -55,7 +56,7 @@ module.exports = {
       context: {
         variant: 'toast',
         items,
-        componentsX,
+        componentsX: featureFlags.componentsX,
       },
     },
   ],

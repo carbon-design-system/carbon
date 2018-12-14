@@ -4,14 +4,22 @@
     <input id="number-input" type="number" min="0" max="100" value="1">
     <div class="{{@root.prefix}}--number__controls">
       <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretUpGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
       <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretDownGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
     </div>
   </div>
@@ -23,14 +31,22 @@
     <input id="number-input" type="number" min="0" max="100" value="1">
     <div class="{{@root.prefix}}--number__controls">
       <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretUpGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
       <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretDownGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
     </div>
     <div class="{{@root.prefix}}--form-requirement">
@@ -44,14 +60,22 @@
     <input id="number-input" type="number" min="0" max="100" value="1">
     <div class="{{@root.prefix}}--number__controls">
       <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretUpGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
       <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretDownGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
     </div>
     <div class="{{@root.prefix}}--form-requirement">
@@ -66,14 +90,22 @@
     <input id="number-input" type="number" min="0" max="100" value="1">
     <div class="{{@root.prefix}}--number__controls">
       <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretUpGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
       <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretDownGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
       </button>
     </div>
     <div class="{{@root.prefix}}--form__helper-text">

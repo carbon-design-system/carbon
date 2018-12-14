@@ -1,4 +1,4 @@
-{{#if componentsX}}
+{{#if @root.featureFlags.componentsX}}
   <div class="{{@root.prefix}}--pagination" data-pagination>
 
     <div class="{{@root.prefix}}--pagination__left">
@@ -7,8 +7,8 @@
         data-items-per-page>
         {{#each itemsPerPageChoices}}
           <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if selected}} selected{{/if}}>
-            {{label}} {{#if selected}} items per page{{/if}} 
-          </option> {{/each}} 
+            {{label}} {{#if selected}} items per page{{/if}}
+          </option> {{/each}}
         </select>
         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
       </div>
@@ -23,9 +23,9 @@
         <select id="select-id-pagination-page" aria-label="select page number to view" tabindex="0" class="{{@root.prefix}}--select-input" data-page-number-input>
           {{#each pageNumberChoices}}
             <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if selected}} selected{{/if}}>
-              {{label}} {{#if selected}} of {{totalPages}} pages{{/if}} 
-            </option> 
-          {{/each}} 
+              {{label}} {{#if selected}} of {{totalPages}} pages{{/if}}
+            </option>
+          {{/each}}
         </select>
         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
       </div>
@@ -51,9 +51,13 @@
           <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
         {{/each}}
       </select>
-      <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>
-      </svg>
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+      {{else}}
+        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>
+        </svg>
+      {{/if}}
     </div>
     {{#isnt version "v2"}}
       <span class="{{@root.prefix}}--pagination__text">Items per page&nbsp;&nbsp;|&nbsp;&nbsp;</span>
@@ -70,9 +74,13 @@
       <span data-displayed-page-number>1</span> of
       <span data-total-pages>4</span> pages</span>
     <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" data-page-backward aria-label="Backward button">
-      <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-        <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"/>
-      </svg>
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronLeft16' class=(add @root.prefix '--pagination__button-icon') }}
+      {{else}}
+        <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+          <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"/>
+        </svg>
+      {{/if}}
     </button>
     <label for="page-number-input" class="{{@root.prefix}}--visually-hidden">Page number input</label>
     {{#isnt version "v2"}}
@@ -85,15 +93,23 @@
             <option class="{{@root.prefix}}--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
           {{/each}}
         </select>
-        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>
-        </svg>
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--select__arrow') }}
+        {{else}}
+          <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>
+          </svg>
+        {{/if}}
       </div>
     {{/isnt}}
     <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" data-page-forward aria-label="Forward button">
-      <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-        <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"/>
-      </svg>
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--pagination__button-icon') }}
+      {{else}}
+        <svg class="{{@root.prefix}}--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+          <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"/>
+        </svg>
+      {{/if}}
     </button>
   </div>
 </div>
