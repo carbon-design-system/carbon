@@ -123,16 +123,16 @@ $productive-heading-05: (
 
 $expressive-heading-04: (
   font-family: font-family('sans'),
-  font-size: type-scale(5),
+  font-size: type-scale(6),
   font-weight: font-weight('regular'),
   line-height: 130%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(5),
+      font-size: type-scale(6),
     ),
     lg: (
-      font-size: type-scale(6),
+      font-size: type-scale(7),
       line-height: 125%,
     ),
     xlg: (

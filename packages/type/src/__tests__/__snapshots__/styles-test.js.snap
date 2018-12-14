@@ -283,14 +283,14 @@ exports[`styles expressiveHeading04 should be printable 1`] = `
 Object {
   "@media (min-width: 42rem)": Object {
     "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
-    "fontSize": "calc(1.25rem + 0.25 * ((100vw - 42rem) / 24))",
+    "fontSize": "calc(1.5rem + 0.25 * ((100vw - 42rem) / 24))",
     "fontWeight": 400,
     "letterSpacing": 0,
     "lineHeight": "1.625rem",
   },
   "@media (min-width: 66rem)": Object {
     "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
-    "fontSize": "calc(1.5rem + 0.25 * ((100vw - 66rem) / 16))",
+    "fontSize": "calc(1.75rem + 0 * ((100vw - 66rem) / 16))",
     "fontWeight": 400,
     "letterSpacing": 0,
     "lineHeight": "125%",
@@ -310,7 +310,7 @@ Object {
     "lineHeight": "125%",
   },
   "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
-  "fontSize": "calc(1.25rem + 0 * ((100vw - 20rem) / 22))",
+  "fontSize": "calc(1.5rem + 0 * ((100vw - 20rem) / 22))",
   "fontWeight": 400,
   "letterSpacing": 0,
   "lineHeight": "130%",
@@ -319,7 +319,7 @@ Object {
 
 exports[`styles expressiveHeading04 should be printable 2`] = `
 "font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 22));
+font-size: calc(1.5rem + 0 * ((100vw - 20rem) / 22));
 font-weight: 400;
 line-height: 130%;
 letter-spacing: 0;

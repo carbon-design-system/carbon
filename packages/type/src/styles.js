@@ -125,20 +125,20 @@ export const productiveHeading05 = {
 
 export const expressiveHeading04 = fluid({
   fontFamily: fontFamilies.sans,
-  fontSize: rem(scale[4]),
+  fontSize: rem(scale[5]),
   fontWeight: fontWeights.regular,
   lineHeight: '130%',
   letterSpacing: 0,
   breakpoints: {
     md: {
-      fontSize: rem(scale[4]),
+      fontSize: rem(scale[5]),
       fontFamily: fontFamilies.sans,
       fontWeight: fontWeights.regular,
       lineHeight: rem(26),
       letterSpacing: 0,
     },
     lg: {
-      fontSize: rem(scale[5]),
+      fontSize: rem(scale[6]),
       fontFamily: fontFamilies.sans,
       fontWeight: fontWeights.regular,
       lineHeight: '125%',
