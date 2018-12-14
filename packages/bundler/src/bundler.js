@@ -31,9 +31,11 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
     .command('check <glob>')
     .description('check that each file can be compiled')
     .option('-i, --ignore <glob>', 'pass in a glob of files to ignore')
+    .option('-l, --list', 'list all the files that were compiled')
     .action((pattern, cmd) =>
       check(pattern, {
         cwd,
+        list: cmd.list || false,
         ignore: cmd.ignore || [],
       })
     );

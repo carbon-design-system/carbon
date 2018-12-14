@@ -2,9 +2,6 @@
   "name": "@carbon/bundler",
   "private": true,
   "version": "0.0.1-alpha.26",
-  "bin": {
-    "bundler": "./bin/bundler.js"
-  },
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/bundler",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
@@ -34,5 +31,11 @@
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0"
+  },
+  "devDependencies": {
+    "change-case": "^3.0.2"
+  },
+  "bin": {
+    "bundler": "./bin/bundler.js"
   }
 }

@@ -7,6 +7,7 @@
 
 'use strict';
 
+const { pascalCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const rollup = require('rollup').rollup;
@@ -87,12 +88,31 @@ async function bundle(entrypoint, { cwd, globals, name } = {}) {
 
         if (format === 'umd') {
           outputOptions.name = name;
-          outputOptions.globals = globals;
+          outputOptions.globals = {
+            ...formatDependenciesIntoGlobals(dependencies),
+            ...globals,
+          };
         }
 
         return bundle.write(outputOptions);
       })
   );
+}
+
+function formatDependenciesIntoGlobals(dependencies) {
+  return Object.keys(dependencies).reduce((acc, key) => {
+    const parts = key.split('/').map((identifier, i) => {
+      if (i === 0) {
+        return identifier.replace(/@/, '');
+      }
+      return identifier;
+    });
+
+    return {
+      ...acc,
+      [key]: pascalCase(parts.join(' ')),
+    };
+  }, {});
 }
 
 module.exports = bundle;
