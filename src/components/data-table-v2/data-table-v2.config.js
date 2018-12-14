@@ -418,7 +418,6 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
       },
     },
