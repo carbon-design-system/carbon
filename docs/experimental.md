@@ -31,7 +31,6 @@ Steps:
 - The output of running `git diff` at this point should give the following:
 
 ```
-modified:   docs/experimental.md
 modified:   package.json
 modified:   src/globals/js/feature-flags.js
 modified:   src/globals/scss/_feature-flags.scss
