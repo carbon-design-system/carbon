@@ -54,7 +54,6 @@
   .#{$prefix}--inline-notification__icon {
     height: 16px;
     width: 16px;
-    min-width: 22px;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
@@ -158,10 +157,10 @@
   }
 
   .#{$prefix}--inline-notification__icon {
-    height: rem(20px);
-    width: rem(20px);
-    min-height: rem(20px);
-    min-width: rem(20px);
+    height: 1rem;
+    width: 1rem;
+    min-height: 1rem;
+    min-width: 1rem;
     margin-right: $spacing-md;
     margin-top: rem(14px);
   }
@@ -203,8 +202,8 @@
     }
 
     .#{$prefix}--inline-notification__close-icon {
-      height: rem(10px);
-      width: rem(10px);
+      height: 1rem;
+      width: 1rem;
       fill: $ui-05;
     }
   }
