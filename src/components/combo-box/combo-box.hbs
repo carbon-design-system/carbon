@@ -3,10 +3,14 @@
     {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
     aria-expanded="false" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." {{#if disabled}}
     disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon">
-    <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Open menu" name="caret--down" role="img">
-      <title>Close menu</title>
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
+    {{#if @root.featureFlags.componentsX}}
+      {{ carbon-icon 'ChevronDownGlyph' aria-label='Open menu' }}
+    {{else}}
+      <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Open menu" name="caret--down" role="img">
+        <title>Close menu</title>
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+      </svg>
+    {{/if}}
   </div>
 </div>
 </div>
@@ -15,10 +19,14 @@
     {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
     aria-expanded="true" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..."
     aria-activedescendant="downshift-1-item-2" {{#if disabled}} disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-    <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Open menu" name="caret--down" role="img">
-      <title>Close menu</title>
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
+    {{#if @root.featureFlags.componentsX}}
+      {{ carbon-icon 'ChevronDownGlyph' aria-label='Close menu' }}
+    {{else}}
+      <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Close menu" name="caret--down" role="img">
+        <title>Close menu</title>
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+      </svg>
+    {{/if}}
   </div>
 </div>
 <div class="{{@root.prefix}}--list-box__menu">

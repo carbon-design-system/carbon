@@ -611,23 +611,23 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.16.tgz#31a183ed9a7bde293e3d3db89897b27d42dc1bc7"
   integrity sha512-7i2Oes8UB6efnElkT4ArLlGkMBnWJckVIzF9EidkNQ+N86/QTkRGlRedKI5Az9mrw6pEY6q6ncgrdnNYcTxOpw==
 
-"@carbon/icon-helpers@0.0.1-alpha.16":
-  version "0.0.1-alpha.16"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.16.tgz#4b3800a2885761c9d2918a74b687bf4bfd9d191a"
-  integrity sha512-ACaJpEnx/8vvqlnWX9QMotAdbrmJWSv/LmVd89ptJCBq/jzM28L0hp2tClVohOJ/ZMSBQtQHPhOl5qzlNIln5A==
+"@carbon/icon-helpers@0.0.1-alpha.26":
+  version "0.0.1-alpha.26"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.26.tgz#0cb7574cce3e51b90a5cc31170865141366373b2"
+  integrity sha512-0WCMQIZrM9PDD7UACEgBoZ0ocrgiF7l0KoGP7Pec7GOJKCfQNuq4XCnd/3uogwQtf58c9CJhcljre2uBeYAC1w==
 
-"@carbon/icons-handlebars@^0.0.1-alpha.16":
-  version "0.0.1-alpha.16"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.16.tgz#089308c1d55ccc8f47961f15d8ea67230c9e2de9"
-  integrity sha512-lW7cuSsyypDphe8su1p6Rwc3TET3qFZ1RYIHFPdt5AR18nzNYCHOuw9yottfEk5KYOOwfczois69OiZAw8zptg==
+"@carbon/icons-handlebars@^0.0.1-alpha.26":
+  version "0.0.1-alpha.26"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.26.tgz#bda2f565e6641e75aeced6ba46c4a558fda18c42"
+  integrity sha512-vq+/+3pEppsLrkGzovs99QjPzsBW4Es/sxcbjbzDWIU9aboIE6x4O2Aluoy72vH1p89srPH0TuqWWdwnNAYSCA==
   dependencies:
-    "@carbon/icon-helpers" "0.0.1-alpha.16"
-    "@carbon/icons" "0.0.1-alpha.16"
+    "@carbon/icon-helpers" "0.0.1-alpha.26"
+    "@carbon/icons" "0.0.1-alpha.26"
 
-"@carbon/icons@0.0.1-alpha.16":
-  version "0.0.1-alpha.16"
-  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.16.tgz#52b12d7d8f85f589615a3153aa68a8beed0e1e19"
-  integrity sha512-vRVYwi+UVt2fP8GYHy2wKKp+XbQKxTiIJ7bjW9pO49rFtIY3bkXOXPaQ0nVZsIN5mWtid1Wl+jHODyjDUD7SmQ==
+"@carbon/icons@0.0.1-alpha.26":
+  version "0.0.1-alpha.26"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.26.tgz#fc302310c213aaca8f5f94fc997c70927b39bd1d"
+  integrity sha512-AiVS1kcURQHmGOM1FfZZuLsRFVGTR9s8qxtz3Np+TFw1Sf0qO21b3nUmLYcySi6D2euNZkrMzMsr7v7BIC0j+Q==
 
 "@carbon/layout@^0.0.1-alpha.16":
   version "0.0.1-alpha.16"

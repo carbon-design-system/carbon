@@ -6,6 +6,9 @@ const { prefix } = require('../../globals/js/settings');
 module.exports = {
   default: 'large',
   context: {
+    featureFlags: {
+      componentsX,
+    },
     prefix,
   },
   variants: [

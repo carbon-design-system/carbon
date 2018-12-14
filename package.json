@@ -48,7 +48,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "@carbon/colors": "^0.0.1-alpha.16",
-    "@carbon/icons-handlebars": "^0.0.1-alpha.16",
+    "@carbon/icons-handlebars": "^0.0.1-alpha.26",
     "@carbon/layout": "^0.0.1-alpha.16",
     "@carbon/motion": "^0.0.1-alpha.16",
     "@commitlint/cli": "^7.0.0",
