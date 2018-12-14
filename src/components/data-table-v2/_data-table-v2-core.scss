@@ -180,10 +180,6 @@
       @include typescale('zeta');
       background-color: $ui-03;
       font-weight: 700;
-
-      & > tr {
-        border-right: 2px solid $ui-03;
-      }
     }
 
     th:hover {
@@ -200,12 +196,10 @@
 
       & > tr {
         background: $ui-01;
-        border-right: 2px solid $ui-01;
         border-bottom: 1px solid $ui-03;
 
         &:hover {
           background: $hover-field;
-          border-right: 2px solid $hover-field;
         }
       }
     }
@@ -233,7 +227,7 @@
       padding-left: $spacing-lg;
     }
 
-    &:last-of-type:not(.#{$prefix}--table-column-menu) {
+    &:last-of-type {
       padding-right: 0;
     }
   }
@@ -253,7 +247,6 @@
   .#{$prefix}--table-column-menu {
     width: rem(56px);
     min-width: rem(56px);
-    padding-right: 0;
   }
 
   .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
@@ -297,12 +290,10 @@
     tbody tr:nth-child(even) {
       background-color: $data-table-zebra-color;
       border: 1px solid transparent;
-      border-right: 2px solid $data-table-zebra-color;
     }
 
     tbody tr:nth-child(even):hover {
       background-color: $hover-field;
-      border-right: 2px solid $hover-field;
     }
   }
 
@@ -313,7 +304,7 @@
     tr,
     th,
     td {
-      border: 1px solid transparent;
+      border-bottom: 1px solid transparent;
     }
   }
 
@@ -342,21 +333,27 @@
   .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
     background-color: $ui-03;
-    border-right: 2px solid $ui-03;
-    border-bottom: 1px solid $active-01;
+
+    & > td {
+      border-bottom: 1px solid $active-01;
+    }
 
     &:first-of-type {
-      border-bottom: 1px solid $active-01;
-      border-top: 1px solid $active-01;
+      & > td {
+        border-bottom: 1px solid $active-01;
+        box-shadow: 0 -0.75px $active-01;
+        //adds top border to first row td bc border-top wasnt showing up
+      }
     }
 
     &:last-of-type {
-      border-bottom: 1px solid transparent;
+      & > td {
+        border-bottom: 1px solid transparent;
+      }
     }
 
     &:hover {
       background: $hover-selected-ui;
-      border-right: 2px solid $hover-selected-ui;
     }
   }
 }
