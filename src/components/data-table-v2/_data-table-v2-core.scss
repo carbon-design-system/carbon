@@ -180,6 +180,10 @@
       @include typescale('zeta');
       background-color: $ui-03;
       font-weight: 700;
+
+      & > tr {
+        border-right: 2px solid $ui-03;
+      }
     }
 
     th:hover {
@@ -196,10 +200,12 @@
 
       & > tr {
         background: $ui-01;
+        border-right: 2px solid $ui-01;
         border-bottom: 1px solid $ui-03;
 
         &:hover {
           background: $hover-field;
+          border-right: 2px solid $hover-field;
         }
       }
     }
@@ -228,7 +234,7 @@
     }
 
     &:last-of-type:not(.#{$prefix}--table-column-menu) {
-      padding-right: $spacing-lg;
+      padding-right: 0;
     }
   }
 
@@ -291,10 +297,12 @@
     tbody tr:nth-child(even) {
       background-color: $data-table-zebra-color;
       border: 1px solid transparent;
+      border-right: 2px solid $data-table-zebra-color;
     }
 
     tbody tr:nth-child(even):hover {
       background-color: $hover-field;
+      border-right: 2px solid $hover-field;
     }
   }
 
@@ -334,6 +342,7 @@
   .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
     background-color: $ui-03;
+    border-right: 2px solid $ui-03;
     border-bottom: 1px solid $active-01;
 
     &:first-of-type {
@@ -347,6 +356,7 @@
 
     &:hover {
       background: $hover-selected-ui;
+      border-right: 2px solid $hover-selected-ui;
     }
   }
 }
