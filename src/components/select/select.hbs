@@ -9,9 +9,9 @@
         <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if
           hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}} <option class="{{@root.prefix}}--select-option"
           value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}
-          </option> {{/if}} {{/each}} </select> 
-          {{#if componentsX}}
-            {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+          </option> {{/if}} {{/each}} </select>
+          {{#if @root.featureFlags.componentsX}}
+            {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
           {{else}}
             <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
               <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />

@@ -187,14 +187,16 @@
 
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
-    outline-offset: 0px;
-    transition: all $transition--base $carbon--standard-easing;
-    height: 1.25rem;
-    width: 1.25rem;
-    padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
+    // Without flex basis and flex shrink being set here, our icon width can go
+    // <16px and cause the icon to render in the incorrect artboard size
+    flex: 0 0 1rem;
+    width: 1rem;
+    height: 1rem;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
-    transform: rotate(90deg) /*rtl:rotate(180deg)*/;
+    // TODO: RTL rotate(180deg);
+    transform: rotate(90deg);
+    transition: all $transition--base $carbon--standard-easing;
   }
 
   .#{$prefix}--accordion__title {

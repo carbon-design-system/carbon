@@ -1,12 +1,16 @@
 <div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button" aria-haspopup="true"
   aria-expanded="false">
-  <svg aria-hidden="true" class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
-    <g fill-rule="evenodd">
-      <circle cx="1.5" cy="1.5" r="1.5" />
-      <circle cx="1.5" cy="7.5" r="1.5" />
-      <circle cx="1.5" cy="13.5" r="1.5" />
-    </g>
-  </svg>
+  {{#if @root.featureFlags.componentsX}}
+    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
+  {{else}}
+    <svg aria-hidden="true" class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+      <g fill-rule="evenodd">
+        <circle cx="1.5" cy="1.5" r="1.5" />
+        <circle cx="1.5" cy="7.5" r="1.5" />
+        <circle cx="1.5" cy="13.5" r="1.5" />
+      </g>
+    </svg>
+  {{/if}}
   <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="{{direction}}">
     {{#each items}}
     <li class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}"
@@ -20,13 +24,17 @@
 
 <div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button" aria-haspopup="true"
   aria-expanded="false">
-  <svg aria-hidden="true" class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
-    <g fill-rule="evenodd">
-      <circle cx="1.5" cy="1.5" r="1.5" />
-      <circle cx="1.5" cy="7.5" r="1.5" />
-      <circle cx="1.5" cy="13.5" r="1.5" />
-    </g>
-  </svg>
+  {{#if @root.featureFlags.componentsX}}
+    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
+  {{else}}
+    <svg aria-hidden="true" class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+      <g fill-rule="evenodd">
+        <circle cx="1.5" cy="1.5" r="1.5" />
+        <circle cx="1.5" cy="7.5" r="1.5" />
+        <circle cx="1.5" cy="13.5" r="1.5" />
+      </g>
+    </svg>
+  {{/if}}
   <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="{{direction}}"
     role="menu" aria-label="Overflow">
     {{#each items}}

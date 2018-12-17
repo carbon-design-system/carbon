@@ -7,6 +7,7 @@ import settings from '../../globals/js/settings';
 import eventMatches from '../../globals/js/misc/event-matches';
 
 const forEach = Array.prototype.forEach;
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 export default class HeaderSubmenu extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
@@ -23,14 +24,14 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * @member HeaderSubmenu.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * Enum for header submenu actions.
    * @readonly
    * @enum {string}
    */
-  static actions = {
+  static actions /* #__PURE_CLASS_PROPERTY__ */ = {
     CLOSE_SUBMENU: 'CLOSE_SUBMENU',
     OPEN_SUBMENU: 'OPEN_SUBMENU',
     TOGGLE_SUBMENU_WITH_FOCUS: 'TOGGLE_SUBMENU_WITH_FOCUS',
@@ -119,7 +120,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = [...this.element.querySelectorAll(this.options.selectorItem)];
+    const items = toArray(this.element.querySelectorAll(this.options.selectorItem));
     const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
     const getNextItem = old => {
       const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
@@ -255,7 +256,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

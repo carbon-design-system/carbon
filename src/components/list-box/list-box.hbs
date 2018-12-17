@@ -2,10 +2,14 @@
   <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu" aria-expanded="false" aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon">
-      <svg fill-rule="evenodd" height="5" name="caret--down" role="img" viewBox="0 0 10 5" width="10" aria-label="Open menu">
-        <title>Open menu</title>
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronDownGlyph' aria-label='Open menu' }}
+      {{else}}
+        <svg fill-rule="evenodd" height="5" name="caret--down" role="img" viewBox="0 0 10 5" width="10" aria-label="Open menu">
+          <title>Open menu</title>
+          <path d="M10 0L5 5 0 0z"></path>
+        </svg>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -13,10 +17,14 @@
   <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu" aria-expanded="true" aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronDownGlyph' aria-label='Close menu' }}
+      {{else}}
       <svg fill-rule="evenodd" height="5" name="caret--down" role="img" viewBox="0 0 10 5" width="10" aria-label="Close menu">
         <title>Close menu</title>
         <path d="M10 0L5 5 0 0z"></path>
       </svg>
+      {{/if}}
     </div>
   </div>
   <div class="{{@root.prefix}}--list-box__menu">

@@ -3,6 +3,8 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
   /**
    * ProgressIndicator.
@@ -47,7 +49,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * Returns all steps with details about element and index.
    */
   getSteps() {
-    return [...this.element.querySelectorAll(this.options.selectorStepElement)].map((element, index) => ({
+    return toArray(this.element.querySelectorAll(this.options.selectorStepElement)).map((element, index) => ({
       element,
       index,
     }));
@@ -154,8 +156,8 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
   }
 
   addOverflowTooltip() {
-    const stepLabels = [...this.element.querySelectorAll(this.options.selectorLabel)];
-    const tooltips = [...this.element.querySelectorAll(this.options.selectorTooltip)];
+    const stepLabels = toArray(this.element.querySelectorAll(this.options.selectorLabel));
+    const tooltips = toArray(this.element.querySelectorAll(this.options.selectorTooltip));
 
     stepLabels.forEach(step => {
       if (step.scrollWidth > this.options.maxWidth) {
@@ -171,7 +173,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
     });
   }
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

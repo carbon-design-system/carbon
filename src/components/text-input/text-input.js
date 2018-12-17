@@ -98,5 +98,5 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
    * The map associating DOM element and text input UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }

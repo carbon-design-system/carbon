@@ -8,7 +8,7 @@ class SideNav extends mixin(createComponent, initComponentBySearch) {
    * @member SideNav.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -18,7 +18,7 @@ class SideNav extends mixin(createComponent, initComponentBySearch) {
    * @type {Object}
    * @property {string} selectorInit The data attribute to find side navs.
    */
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-side-nav]',
   };
 }

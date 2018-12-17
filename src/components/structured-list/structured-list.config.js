@@ -69,6 +69,9 @@ const rows = [
 
 module.exports = {
   context: {
+    featureFlags: {
+      componentsX,
+    },
     prefix,
   },
   variants: [
