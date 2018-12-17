@@ -270,11 +270,7 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    // 17px comes from the select height (39px) minus the chevron height (5px)
-    // divided by 2. e.g. (39 - 5) / 2 == 17px
-    bottom: rem(17px);
-    width: rem(10px);
-    height: rem(6px);
+    bottom: 1rem;
     pointer-events: none;
   }
 
