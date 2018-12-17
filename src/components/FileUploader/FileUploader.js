@@ -7,6 +7,7 @@ import Icon from '../Icon';
 import uid from '../../tools/uniqueId';
 import { ButtonTypes } from '../../prop-types/types';
 import { iconCloseSolid, iconCheckmarkSolid } from 'carbon-icons';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -142,6 +143,7 @@ export class FileUploaderButton extends Component {
     const classes = classNames({
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${buttonKind}`]: true,
+      [`${prefix}--btn--sm`]: componentsX,
       [className]: className,
     });
 
@@ -381,7 +383,12 @@ export default class FileUploader extends Component {
 
     return (
       <div className={classes} {...other}>
-        <strong className={`${prefix}--label`}>{labelTitle}</strong>
+        <strong
+          className={
+            componentsX ? `${prefix}--file--label` : `${prefix}--label`
+          }>
+          {labelTitle}
+        </strong>
         <p className={`${prefix}--label-description`}>{labelDescription}</p>
         <FileUploaderButton
           labelText={buttonLabel}
