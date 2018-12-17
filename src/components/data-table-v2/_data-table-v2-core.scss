@@ -233,25 +233,41 @@
   }
 
   .#{$prefix}--table-header-label {
-    // height: rem(64px);
-    max-width: calc(100% - 15px);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    @include max-breakpoint('bp--sm--major') {
+      max-width: rem(100px);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    @include max-breakpoint('bp--xs--major') {
+      max-width: rem(70px);
+    }
   }
 
-  //min width for all columns that aren't actions
-  td:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu) {
-    min-width: rem(100px);
+  //fluid up until tablet size, then it truncates text
+  .#{$prefix}--table-cell-content {
+    display: block;
+
+    @include max-breakpoint('bp--sm--major') {
+      max-width: rem(100px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @include max-breakpoint('bp--xs--major') {
+      max-width: rem(70px);
+    }
   }
 
-  //min width for checkbox columns
+  //width for checkbox columns
   .#{$prefix}--table-column-checkbox {
     width: rem(64px);
-    min-width: rem(64px);
+    min-width: (64px);
   }
 
-  //min width for overflow menu columns
+  //width for overflow menu columns
   .#{$prefix}--table-column-menu {
     width: rem(56px);
     min-width: rem(56px);
