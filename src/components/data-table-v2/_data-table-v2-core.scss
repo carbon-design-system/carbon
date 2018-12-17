@@ -162,6 +162,7 @@
 
 @mixin data-table-v2-core--x {
   .#{$prefix}--data-table-v2-container {
+    width: 100%;
     min-width: rem(500px);
     padding-top: $spacing-3xs; // allow space for focus styles
   }
@@ -250,6 +251,7 @@
     display: block;
 
     @include max-breakpoint('bp--sm--major') {
+      //768px screen width
       max-width: rem(100px);
       white-space: nowrap;
       overflow: hidden;
@@ -257,6 +259,7 @@
     }
 
     @include max-breakpoint('bp--xs--major') {
+      //500px screen width
       max-width: rem(70px);
     }
   }
