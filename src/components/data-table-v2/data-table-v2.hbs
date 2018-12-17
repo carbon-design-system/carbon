@@ -226,7 +226,13 @@
             {{else if column.editable}}
               <td class="{{@root.prefix}}--data-table-cell--editable"><span class="{{@root.prefix}}--data-table-cell__content">{{data}}</span></td>
             {{else}}
-              <td>{{data}}</td>
+              <td>
+                {{#if ../../../componentsX}}
+                  <span class="{{@root.prefix}}--table-header-label">{{data}}</span>
+                {{else}}
+                  {{data}}
+                {{/if}}
+              </td>
             {{/if}}
           {{/with}}
         {{/each}}
