@@ -29,12 +29,12 @@
     border: rem(3px) solid transparent;
   }
 
-  .#{$prefix}--header__action > svg[data-navigation-menu-panel-collapse-icon],
-  .#{$prefix}--header__action--active > svg[data-navigation-menu-panel-expand-icon] {
+  .#{$prefix}--header__action > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active > svg.#{$prefix}--navigation-menu-panel-expand-icon {
     display: none;
   }
 
-  .#{$prefix}--header__action--active > svg[data-navigation-menu-panel-collapse-icon] {
+  .#{$prefix}--header__action--active > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
     display: inline;
   }
 
