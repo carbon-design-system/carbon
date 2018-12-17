@@ -97,13 +97,15 @@
 
     &:focus {
       outline: 0;
-      // @include focus-outline('outline');
 
       svg {
         opacity: 1;
-        // outline: 1px solid $brand-01;
-        // fill: $brand-01;
-        // outline-offset: -0.5px; // safari fix
+      }
+    }
+
+    &:hover {
+      svg {
+        opacity: 1;
       }
     }
   }
