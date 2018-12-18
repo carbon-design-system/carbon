@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;}
-</style>
-<path d="M29.5,8.1c-0.3-0.2-0.7-0.2-1,0L23,11.3v-0.9l7-7L28.6,2L2,28.6L3.4,30l4-4H21c1.1,0,2-0.9,2-2v-3.3l5.5,3.1
-	c0.3,0.2,0.7,0.2,1,0c0.3-0.2,0.5-0.5,0.5-0.9V9C30,8.6,29.8,8.3,29.5,8.1z M28,21.3l-5.5-3.1c-0.3-0.2-0.7-0.2-1,0
-	C21.2,18.3,21,18.6,21,19v5H9.4L21,12.4V13c0,0.4,0.2,0.7,0.5,0.9c0.3,0.2,0.7,0.2,1,0l5.5-3.1V21.3z"/>
-<path d="M4,24V8h16V6H4C2.9,6,2,6.9,2,8v16H4z"/>
-<rect id="_Transparent_Rectangle_" class="st0" width="32" height="32"/>
-</svg>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>video--off</title><path d="M29.46,8.11a1,1,0,0,0-1,.08L23,12.06V10.44l7-7L28.56,2,2,28.56,3.44,30l4-4H21a2,2,0,0,0,2-2V19.94l5.42,3.87A1,1,0,0,0,30,23V9A1,1,0,0,0,29.46,8.11ZM28,21.06l-5.42-3.87A1,1,0,0,0,21,18v6H9.44L21,12.44V14a1,1,0,0,0,1.58.81L28,10.94Z"/><path d="M4,24V8H20V6H4A2,2,0,0,0,2,8V24Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
