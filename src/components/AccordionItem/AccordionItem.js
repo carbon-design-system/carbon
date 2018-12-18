@@ -121,13 +121,14 @@ export default class AccordionItem extends Component {
         {...other}>
         <Expando
           type="button"
+          aria-expanded={this.state.open}
           className={`${prefix}--accordion__heading`}
-          role="tab"
           onClick={this.handleHeadingClick}>
           <Icon
             className={`${prefix}--accordion__arrow`}
             icon={iconChevronRight}
             description={iconDescription}
+            role={null} // eslint-disable-line jsx-a11y/aria-role
           />
           <div className={`${prefix}--accordion__title`}>{title}</div>
         </Expando>
