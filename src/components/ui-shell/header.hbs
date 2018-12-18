@@ -3,14 +3,12 @@
   <button class="{{@root.prefix}}--header__menu-trigger {{@root.prefix}}--header__action" aria-label="Open menu" title="Open menu"
     data-navigation-menu-panel-label-expand="Open menu" data-navigation-menu-panel-label-collapse="Close menu"
     data-navigation-menu-target="#navigation-menu-{{navigationMenu.idSuffix}}">
-    <svg aria-hidden="true" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-      data-navigation-menu-panel-expand-icon>
-      <path d="M4 6h24v2H4zm0 18h24v2H4zm0-9h24v2H4z" /></svg>
-    <svg aria-hidden="true" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-      data-navigation-menu-panel-collapse-icon>
-      <path d="M17.414 16L24 9.414 22.586 8 16 14.586 9.414 8 8 9.414 14.586 16 8 22.586 9.414 24 16 17.414 22.586 24 24 22.586 17.414 16z"
-        / hidden>
-    </svg>
+    {{carbon-icon 'Close20'
+    class=(add @root.prefix '--navigation-menu-panel-collapse-icon')
+    aria-hidden="true"}}
+    {{carbon-icon 'Menu20'
+    class=(add @root.prefix '--navigation-menu-panel-expand-icon')
+    aria-hidden="true"}}
   </button>
   <a class="{{@root.prefix}}--header__name" href="javascript:void(0)" title="{{header.name}}">
     <span class="bx--header__name--prefix">
