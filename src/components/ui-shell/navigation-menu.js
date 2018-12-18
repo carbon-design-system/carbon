@@ -168,7 +168,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @member NavigationMenu.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -216,7 +216,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

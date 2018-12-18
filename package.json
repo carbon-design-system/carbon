@@ -147,6 +147,7 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^3.0.0",
+    "rollup-plugin-virtual": "^1.0.0",
     "sass-loader": "^6.0.0",
     "scss-to-json": "1.1.0",
     "semantic-release": "^15.5.0",

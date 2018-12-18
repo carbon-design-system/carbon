@@ -28,7 +28,7 @@ export default class SideNav extends mixin(createComponent, initComponentBySearc
    * @property {string} EXPANDED Opening/visible
    * @property {string} COLLAPSED Closing/hidden
    */
-  static state = {
+  static state /* #__PURE_CLASS_PROPERTY__ */ = {
     EXPANDED: 'expanded',
     COLLAPSED: 'collapsed',
   };
