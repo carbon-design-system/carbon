@@ -82,7 +82,7 @@
       @include typescale('zeta');
     }
 
-    div {
+    .#{$prefix}--tooltip__footer {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
