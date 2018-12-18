@@ -127,7 +127,7 @@
     "@carbon/icons-react": "^0.0.1-alpha.26",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
-    "flatpickr": "4.5.1",
+    "flatpickr": "4.5.2",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
@@ -174,7 +174,7 @@
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-react-docgen": "^2.0.0",
     "bowser": "^1.6.1",
-    "carbon-components": "^9.56.2",
+    "carbon-components": "^9.61.4",
     "carbon-icons": "^7.0.5",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
@@ -354,5 +354,5 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "bundleSizeThreshold": 81000
+  "bundleSizeThreshold": 82000
 }

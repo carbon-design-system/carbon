@@ -86,7 +86,9 @@ module.exports = {
     }),
     ...prodSettings,
   ],
-  external: peerDependencies,
+  external: peerDependencies.filter(
+    dependency => dependency !== 'carbon-components'
+  ),
   output: {
     name: 'CarbonComponentsReact',
     format: 'umd',

@@ -3102,10 +3102,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@^9.56.2:
-  version "9.58.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.58.0.tgz#debbbcfbe20779311bcbdc6695a099ac408734f9"
-  integrity sha512-ElgXgXzQPPTeaD7D4qgd7aE+D3f259OdEyRdWxhPejpOWc/K/nGeNHGyjhdoVMpf8Nhn+pjzNAhm4caN36QWZQ==
+carbon-components@^9.61.4:
+  version "9.61.4"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.61.4.tgz#a687a6015a4526e4c38d850c86b864eaa93bb96d"
+  integrity sha512-Gvgf5EyKDdjjF8rLY7/CQ1MK2/oqKrCKH5XNpIGFTo/4oxkKBSTtxAe0EHfhzdB8E0/TDLeu+m8/HRnS7KhTmQ==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.2"
@@ -5306,11 +5306,6 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     rimraf "~2.6.2"
     write "^0.2.1"
-
-flatpickr@4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.1.tgz#f65eaf54c07538f87d6f68a67b03cf816d7fb82f"
-  integrity sha512-dsLTFmRg6mlqYfJ35A7gLlbq+8fOqRty3cWncl6rwU4pMe//i0WKxKLVyBbSYAZry93Lg+yqsOph9haltcxCqQ==
 
 flatpickr@4.5.2:
   version "4.5.2"
