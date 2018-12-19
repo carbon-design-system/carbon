@@ -81,6 +81,25 @@ module.exports = {
       },
     },
     {
+      name: 'helperText',
+      label: 'Select (helper text)',
+      notes: 'Example with an optional helper text group',
+      context: {
+        items,
+        helperText: true,
+      },
+    },
+    {
+      name: 'helperTextInline',
+      label: 'Select (inline witbh helper text)',
+      notes: 'Example with an optional helper text group with an inline select',
+      context: {
+        items,
+        helperText: true,
+        inline: true,
+      },
+    },
+    {
       name: 'invalid',
       label: 'Select (Invalid)',
       context: {
