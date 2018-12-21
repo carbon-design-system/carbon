@@ -135,6 +135,10 @@
     @include font-family;
   }
 
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
+  }
+
   //-----------------------------
   // Disabled
   //-----------------------------
