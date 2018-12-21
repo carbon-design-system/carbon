@@ -449,7 +449,9 @@
   }
 
   // Show more / less button
-  .#{$prefix}--snippet-btn--expand {
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    display: inline-flex;
+    align-items: center;
     position: absolute;
     right: $spacing-xs;
     bottom: $spacing-xs;
