@@ -22,6 +22,8 @@ export default class ModalWrapper extends React.Component {
     secondaryButtonText: PropTypes.string,
     handleSubmit: PropTypes.func,
     disabled: PropTypes.bool,
+    triggerButtonIcon: PropTypes.string,
+    triggerButtonIconDescription: PropTypes.string,
     triggerButtonKind: ButtonTypes.buttonKind,
     shouldCloseAfterSubmit: PropTypes.bool,
   };
@@ -29,6 +31,7 @@ export default class ModalWrapper extends React.Component {
   static defaultProps = {
     primaryButtonText: 'Save',
     secondaryButtonText: 'Cancel',
+    triggerButtonIconDescription: 'Provide icon description if icon is used',
     triggerButtonKind: 'primary',
     disabled: false,
     selectorPrimaryFocus: '[data-modal-primary-focus]',
@@ -66,6 +69,8 @@ export default class ModalWrapper extends React.Component {
       onKeyDown,
       buttonTriggerText,
       buttonTriggerClassName,
+      triggerButtonIcon,
+      triggerButtonIconDescription,
       triggerButtonKind,
       disabled,
       handleSubmit, // eslint-disable-line no-unused-vars
@@ -95,6 +100,8 @@ export default class ModalWrapper extends React.Component {
           className={buttonTriggerClassName}
           disabled={disabled}
           kind={triggerButtonKind}
+          icon={triggerButtonIcon}
+          iconDescription={triggerButtonIconDescription}
           onClick={this.handleOpen}
           inputref={this.triggerButton}>
           {buttonTriggerText}

@@ -14,6 +14,7 @@ exports[`ModalWrapper should render 1`] = `
   secondaryButtonText="Cancel"
   selectorPrimaryFocus="[data-modal-primary-focus]"
   shouldCloseAfterSubmit={true}
+  triggerButtonIconDescription="Provide icon description if icon is used"
   triggerButtonKind="primary"
 >
   <div
