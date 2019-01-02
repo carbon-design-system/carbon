@@ -54,6 +54,7 @@
   .#{$prefix}--inline-notification__icon {
     height: 16px;
     width: 16px;
+    min-width: 22px;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {

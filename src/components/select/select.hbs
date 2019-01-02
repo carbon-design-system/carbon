@@ -1,21 +1,30 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}">
     <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{#unless inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/unless}}
     <select {{#if invalid}} data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
         {{#each items}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if
-          hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}} <option class="{{@root.prefix}}--select-option"
-          value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}
-          </option> {{/if}} {{/each}} </select>
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
           {{#if @root.featureFlags.componentsX}}
-            {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
-          {{else}}
-            <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-              <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-            </svg>
+          {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }} {{else}} <svg class="{{@root.prefix}}--select__arrow"
+          width="10" height="5" viewBox="0 0 10 5">
+          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+          </svg>
+          {{/if}}
+          {{#if inline}}
+          {{#if helperText}}
+          <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+          {{/if}}
           {{/if}}
           {{#if invalid}}
           <div class="{{@root.prefix}}--form-requirement">

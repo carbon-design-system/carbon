@@ -5,16 +5,41 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
+- [Publishing](#publishing)
 - [Iconography](#iconography)
   - [Introduction](#introduction)
   - [FAQ](#faq)
-      - [How do I know the name of an icon to use in the `carbon-icon` helper?](#how-do-i-know-the-name-of-an-icon-to-use-in-the-carbon-icon-helper)
-      - [How do I add a class to an icon?](#how-do-i-add-a-class-to-an-icon)
-      - [How do I add attributes to an icon?](#how-do-i-add-attributes-to-an-icon)
-      - [How do I only use `carbon-icon` for experimental components?](#how-do-i-only-use-carbon-icon-for-experimental-components)
+    - [How do I know the name of an icon to use in the `carbon-icon` helper?](#how-do-i-know-the-name-of-an-icon-to-use-in-the-carbon-icon-helper)
+    - [How do I add a class to an icon?](#how-do-i-add-a-class-to-an-icon)
+    - [How do I add attributes to an icon?](#how-do-i-add-attributes-to-an-icon)
+    - [How do I only use `carbon-icon` for experimental components?](#how-do-i-only-use-carbon-icon-for-experimental-components)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
+
+## Publishing
+
+Steps:
+
+- Pull latest from `master` with `git pull upstream master`
+- Update version field in `package.json` should be `v10.0.0-alpha.X` where X is
+  the current number + 1
+  - You can find the current alpha version number by visiting
+    https://www.npmjs.com/package/carbon-components, under the Versions tab you
+    should see the latest alpha version next to the `alpha` tag.
+- Update feature flags in `_feature-flags.scss` and `feature-flags.js`.
+- The output of running `git diff` at this point should give the following:
+
+```
+modified:   package.json
+modified:   src/globals/js/feature-flags.js
+modified:   src/globals/scss/_feature-flags.scss
+```
+
+- Run `npm publish . --tag alpha --dry-run` to verify the package builds
+- Inspect build folders to verify feature flags are set to true
+- Run `npm publish . --tag alpha`
+- Run `git checkout -- src/globals package.json` to unstage changes
 
 ## Iconography
 
