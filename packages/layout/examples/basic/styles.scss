@@ -33,12 +33,24 @@ body {
   padding: 0;
 }
 
-@each $step in $spacing-scale {
-  $index: index($spacing-scale, $step) - 1;
+@each $step in $fixed-spacing-scale {
+  $index: index($fixed-spacing-scale, $step) - 1;
 
-  .spacing-scale-#{$index} {
+  .fixed-spacing-scale-#{$index} {
     width: spacing($index);
     height: spacing($index);
+    background-color: black;
+    margin-right: mini-units(3);
+    margin-bottom: mini-units(3);
+  }
+}
+
+@each $step in $fluid-spacing-scale {
+  $index: index($fluid-spacing-scale, $step) - 1;
+
+  .fluid-spacing-scale-#{$index} {
+    width: spacing($index, true);
+    height: spacing($index, true);
     background-color: black;
     margin-right: mini-units(3);
     margin-bottom: mini-units(3);
