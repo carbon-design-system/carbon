@@ -5,6 +5,9 @@ import { iconClose } from 'carbon-icons';
 import Icon from '../Icon';
 import Button from '../Button';
 import { settings } from 'carbon-components';
+// TODO: import { Close20 } from '@carbon/icons-react';
+import Close20 from '@carbon/icons-react/lib/close/20';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -278,11 +281,19 @@ export default class Modal extends Component {
         type="button"
         onClick={onRequestClose}
         ref={this.button}>
-        <Icon
-          icon={iconClose}
-          className={`${prefix}--modal-close__icon`}
-          description={iconDescription}
-        />
+        {componentsX ? (
+          <Close20
+            alt={iconDescription}
+            aria-label={iconDescription}
+            className={`${prefix}--modal-close__icon`}
+          />
+        ) : (
+          <Icon
+            icon={iconClose}
+            className={`${prefix}--modal-close__icon`}
+            description={iconDescription}
+          />
+        )}
       </button>
     );
 
@@ -295,28 +306,26 @@ export default class Modal extends Component {
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
-            <h4 className={`${prefix}--modal-header__label`}>{modalLabel}</h4>
+            <p className={`${prefix}--modal-header__label`}>{modalLabel}</p>
           )}
-          <h2 className={`${prefix}--modal-header__heading`}>{modalHeading}</h2>
+          <p className={`${prefix}--modal-header__heading`}>{modalHeading}</p>
           {!passiveModal && modalButton}
         </div>
         <div className={`${prefix}--modal-content`}>{this.props.children}</div>
         {!passiveModal && (
           <div className={`${prefix}--modal-footer`}>
-            <div className={`${prefix}--modal__buttons-container`}>
-              <Button
-                kind={danger ? 'tertiary' : 'secondary'}
-                onClick={onSecondaryButtonClick}>
-                {secondaryButtonText}
-              </Button>
-              <Button
-                kind={danger ? 'danger--primary' : 'primary'}
-                disabled={primaryButtonDisabled}
-                onClick={onRequestSubmit}
-                inputref={this.button}>
-                {primaryButtonText}
-              </Button>
-            </div>
+            <Button
+              kind={danger ? 'tertiary' : 'secondary'}
+              onClick={onSecondaryButtonClick}>
+              {secondaryButtonText}
+            </Button>
+            <Button
+              kind={danger ? 'danger--primary' : 'primary'}
+              disabled={primaryButtonDisabled}
+              onClick={onRequestSubmit}
+              inputref={this.button}>
+              {primaryButtonText}
+            </Button>
           </div>
         )}
       </div>

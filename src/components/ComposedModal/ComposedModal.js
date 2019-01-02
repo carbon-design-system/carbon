@@ -5,6 +5,9 @@ import Button from '../Button';
 import Icon from '../Icon';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+// TODO: import { Close20 } from '@carbon/icons-react';
+import Close20 from '@carbon/icons-react/lib/close/20';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 const matchesFuncName =
@@ -364,11 +367,19 @@ export class ModalHeader extends Component {
           onClick={this.handleCloseButtonClick}
           className={closeClass}
           type="button">
-          <Icon
-            icon={iconClose}
-            className={closeIconClass}
-            description={iconDescription}
-          />
+          {componentsX ? (
+            <Close20
+              alt={iconDescription}
+              aria-label={iconDescription}
+              className={closeIconClass}
+            />
+          ) : (
+            <Icon
+              icon={iconClose}
+              className={closeIconClass}
+              description={iconDescription}
+            />
+          )}
         </button>
       </div>
     );
