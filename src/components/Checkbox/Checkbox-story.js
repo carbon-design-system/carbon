@@ -25,7 +25,7 @@ storiesOf('Checkbox', module)
         <fieldset className="bx--fieldset">
           <legend className="bx--label">Checkbox heading</legend>
           <Checkbox defaultChecked {...checkboxProps} id="checkbox-label-1" />
-          <Checkbox defaultChecked {...checkboxProps} id="checkbox-label-1" />
+          <Checkbox defaultChecked {...checkboxProps} id="checkbox-label-2" />
         </fieldset>
       );
     },
