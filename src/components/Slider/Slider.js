@@ -35,6 +35,11 @@ export default class Slider extends PureComponent {
     onChange: PropTypes.func,
 
     /**
+     * The callback to get notified of value on handle release.
+     */
+    onRelease: PropTypes.func,
+
+    /**
      * The value.
      */
     value: PropTypes.number.isRequired,
@@ -125,6 +130,7 @@ export default class Slider extends PureComponent {
 
   state = {
     dragging: false,
+    holding: false,
     value: this.props.value,
     left: 0,
   };
@@ -172,8 +178,9 @@ export default class Slider extends PureComponent {
     if (this.state.dragging) {
       return;
     }
-
     this.setState({ dragging: true });
+
+    this.handleDrag();
 
     requestAnimationFrame(() => {
       this.setState((prevState, props) => {
@@ -261,6 +268,10 @@ export default class Slider extends PureComponent {
   };
 
   handleMouseStart = () => {
+    this.setState({
+      holding: true,
+    });
+
     this.element.ownerDocument.addEventListener(
       'mousemove',
       this.updatePosition
@@ -269,6 +280,13 @@ export default class Slider extends PureComponent {
   };
 
   handleMouseEnd = () => {
+    this.setState(
+      {
+        holding: false,
+      },
+      this.updatePosition
+    );
+
     this.element.ownerDocument.removeEventListener(
       'mousemove',
       this.updatePosition
@@ -280,6 +298,9 @@ export default class Slider extends PureComponent {
   };
 
   handleTouchStart = () => {
+    this.setState({
+      holding: true,
+    });
     this.element.ownerDocument.addEventListener(
       'touchmove',
       this.updatePosition
@@ -296,6 +317,13 @@ export default class Slider extends PureComponent {
   };
 
   handleTouchEnd = () => {
+    this.setState(
+      {
+        holding: false,
+      },
+      this.updatePosition
+    );
+
     this.element.ownerDocument.removeEventListener(
       'touchmove',
       this.updatePosition
@@ -317,6 +345,16 @@ export default class Slider extends PureComponent {
   handleChange = evt => {
     this.setState({ value: evt.target.value });
     this.updatePosition(evt);
+  };
+
+  handleDrag = () => {
+    if (
+      typeof this.props.onRelease === 'function' &&
+      !this.props.disabled &&
+      !this.state.holding
+    ) {
+      this.props.onRelease({ value: this.state.value });
+    }
   };
 
   render() {
@@ -344,6 +382,8 @@ export default class Slider extends PureComponent {
       light,
       ...other
     } = this.props;
+
+    delete other.onRelease;
 
     const { value, left } = this.state;
 
