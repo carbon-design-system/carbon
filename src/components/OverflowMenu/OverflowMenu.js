@@ -537,7 +537,7 @@ export default class OverflowMenu extends Component {
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
           {...other}
-          role="button"
+          role="menu"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
