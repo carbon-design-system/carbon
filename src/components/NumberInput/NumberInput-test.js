@@ -42,7 +42,9 @@ describe('NumberInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(container.hasClass('bx--number')).toEqual(true);
+        expect(container.hasClass('bx--number bx--number--helpertext')).toEqual(
+          true
+        );
       });
 
       it('has renders with form-item wrapper', () => {
