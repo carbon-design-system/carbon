@@ -25,7 +25,7 @@
     "lint": "toolkit lint .",
     "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
     "sync": "node tasks/sync.js",
-    "test": "jest --testPathIgnorePatterns='packages/icons-*"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",

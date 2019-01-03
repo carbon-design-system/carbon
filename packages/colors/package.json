@@ -25,12 +25,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js && bundler check 'scss/*.scss'",
     "clean": "rimraf es lib umd scss"
   },
   "devDependencies": {
     "@carbon/bundler": "0.0.1-alpha.26",
     "@carbon/cli-reporter": "0.0.1-alpha.26",
+    "change-case": "^3.0.2",
     "fs-extra": "^7.0.0",
     "node-sass": "^4.9.4",
     "prettier": "^1.14.3",

@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Carbon Elements Technical Preview](#carbon-elements-technical-preview)
+  - [Why Carbon Elements](#why-carbon-elements)
+  - [What to expect](#what-to-expect)
+  - [Feedback](#feedback)
+  - [What's next](#whats-next)
+  - [Contributing](#contributing)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Carbon Elements Technical Preview
 
 Today, we're excited to introduce a new project to the Carbon Design System called Carbon Elements! <span aria-label="celebrate" role="img">🎉</span>
