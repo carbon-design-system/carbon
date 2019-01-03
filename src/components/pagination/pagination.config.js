@@ -57,6 +57,10 @@ const variants = [
   {
     name: 'default',
     label: 'V1',
+    meta: {
+      removed: componentsX,
+      xVersionNotSupported: true,
+    },
     context: {
       itemsPerPageChoices,
       version: 'v1',
@@ -73,22 +77,7 @@ const variants = [
       itemsPerPageChoices,
     },
   },
-]
-  .filter(variant => {
-    if (componentsX) {
-      return variant.context.version !== 'v2';
-    }
-    return variant;
-  })
-  .map((variant, index) => {
-    if (index === 0) {
-      return {
-        ...variant,
-        name: 'default',
-      };
-    }
-    return variant;
-  });
+];
 
 module.exports = {
   context: {
