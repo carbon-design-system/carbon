@@ -4,6 +4,7 @@ import Icon from '../Icon';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -35,15 +36,22 @@ const Button = ({
     tabIndex,
     className: buttonClasses,
   };
-
-  const buttonImage = icon ? (
-    <Icon
-      icon={Object(icon) === icon ? icon : undefined}
-      name={Object(icon) !== icon ? icon : undefined}
-      description={iconDescription}
-      className={`${prefix}--btn__icon`}
-    />
-  ) : null;
+  const buttonImage = (() => {
+    if (componentsX && icon && React.isValidElement(icon)) {
+      return icon;
+    }
+    if (!componentsX && icon) {
+      return (
+        <Icon
+          icon={Object(icon) === icon ? icon : undefined}
+          name={Object(icon) !== icon ? icon : undefined}
+          description={iconDescription}
+          className={`${prefix}--btn__icon`}
+        />
+      );
+    }
+    return null;
+  })();
 
   const button = (
     <button

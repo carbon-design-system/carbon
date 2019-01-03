@@ -3,18 +3,29 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
+import { AddFilled16, Search16 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
+import { componentsX } from '../../internal/FeatureFlags';
+
+const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  'Add with filled circle (iconAddSolid from `carbon-icons`)': 'iconAddSolid',
-  'Search (iconSearch from `carbon-icons`)': 'iconSearch',
+  'Add with filled circle (iconAddSolid from `carbon-icons`)': componentsX
+    ? 'AddFilled16'
+    : 'iconAddSolid',
+  'Search (iconSearch from `carbon-icons`)': componentsX
+    ? 'Search16'
+    : 'iconSearch',
 };
 
 const iconMap = {
   iconAddSolid,
   iconSearch,
+  AddFilled16: <AddFilled16 className={`${prefix}--btn__icon`} />,
+  Search16: <Search16 className={`${prefix}--btn__icon`} />,
 };
 
 const kinds = {
@@ -69,22 +80,22 @@ storiesOf('Buttons', module)
         text: `
           Buttons are used to initialize an action, either in the background or
           foreground of an experience.
-  
+
           There are several kinds of buttons.
-  
+
           Primary buttons should be used for the principle call to action
           on the page.
-  
+
           Secondary buttons should be used for secondary actions on each page.
-  
+
           Danger buttons should be used for a negative action (such as Delete) on the page.
-  
+
           Modify the behavior of the button by changing its event properties.
-  
+
           Small buttons may be used when there is not enough space for a
           regular sized button. This issue is most found in tables. Small button should have three words
           or less.
-  
+
           When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
           always paired with text.
         `,
