@@ -6,7 +6,7 @@ export default function FullBleedPage() {
   return (
     <Main>
       <div className="full-bleed-example">
-        <div className="bx--fluid-grid">
+        <div className="bx--fluid-grid bx--grid--full-width">
           <Row>
             <Column breakpoint="lg" span={10}>
               <div

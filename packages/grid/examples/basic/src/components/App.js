@@ -9,6 +9,8 @@ import CondensedPage from './CondensedPage';
 import HangPage from './HangPage';
 import AspectRatioPage from './AspectRatioPage';
 import FullBleedPage from './FullBleedPage';
+import Fluid from './Fluid';
+import FullWidth from './FullWidth';
 import NotFound from './NotFound';
 
 const { PATH_PREFIX = '' } = process.env;
@@ -18,6 +20,8 @@ export default function App() {
     <Router>
       <ExamplesPage path={PATH_PREFIX === '' ? '/' : PATH_PREFIX} />
       <BasicUsagePage path={`${PATH_PREFIX}/basic`} />
+      <Fluid path={`${PATH_PREFIX}/fluid`} />
+      <FullWidth path={`${PATH_PREFIX}/full-width`} />
       <OffsetPage path={`${PATH_PREFIX}/offset`} />
       <PaddingPage path={`${PATH_PREFIX}/padding`} />
       <BleedPage path={`${PATH_PREFIX}/bleed`} />

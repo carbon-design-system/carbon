@@ -11,16 +11,23 @@
 @import 'row';
 @import 'col';
 
-// Default container class for a grid. Includes max-width for each breakpoint
+@debug $grid-breakpoints;
+
+// Fluid variant of the grid.
+.#{$prefix}--fluid-grid {
+  @include make-container();
+}
+
+// Default container class for a grid. Includes max-width for all breakpoints
 .#{$prefix}--grid {
   @include make-container();
   @include make-container-max-widths();
-}
 
-// Fluid variant of the grid. Will not set max-width for breakpoints and will
-// full-bleed across the page.
-.#{$prefix}--fluid-grid {
-  @include make-container();
+  &--full-width {
+    @include largest-breakpoint() {
+      max-width: 100%;
+    }
+  }
 }
 
 .#{$prefix}--row {

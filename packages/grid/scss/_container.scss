@@ -11,13 +11,15 @@
  * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
  */
 @import '@carbon/layout/scss/breakpoint';
+@import '@carbon/layout/scss/utilities';
 
 /// Create the container for a grid. Will cause full-bleed for the grid unless
 /// max-width properties are added with `make-container-max-widths`
 @mixin make-container($breakpoints: $grid-breakpoints) {
-  width: 100%;
   margin-right: auto;
   margin-left: auto;
+
+  @include set-largest-breakpoint();
 
   @each $name, $value in $breakpoints {
     $prev-breakpoint: map-get($breakpoints, breakpoint-prev($name));
@@ -38,6 +40,12 @@
       }
     }
   }
+}
+
+// gets the last breakpoint width, and sets it to a max-width
+@mixin set-largest-breakpoint($breakpoints: $grid-breakpoints) {
+  $largest-breakpoint: last-map-item($breakpoints);
+  max-width: map-get($largest-breakpoint, 'width');
 }
 
 /// Add in the max-widths for each breakpoint to the container

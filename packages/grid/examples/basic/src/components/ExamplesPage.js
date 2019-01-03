@@ -25,6 +25,12 @@ export default function ExamplesPage() {
                 <Link to={`${PATH_PREFIX}/basic`}>Basic Usage</Link>
               </li>
               <li>
+                <Link to={`${PATH_PREFIX}/fluid`}>Fluid</Link>
+              </li>
+              <li>
+                <Link to={`${PATH_PREFIX}/full-width`}>Full Width</Link>
+              </li>
+              <li>
                 <Link to={`${PATH_PREFIX}/offset`}>Offsets</Link>
               </li>
               <li>

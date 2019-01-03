@@ -7,6 +7,7 @@
 
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_breakpoints.scss
 @import 'convert';
+@import 'utilities';
 
 $grid-cell-padding: rem(16px);
 $grid-gutter: rem(32px);
@@ -73,6 +74,14 @@ $grid-breakpoints: (
 /// Check to see if the given breakpoint name
 @function is-smallest-breakpoint($name, $breakpoints: $grid-breakpoints) {
   @return index(map-keys($breakpoints), $name) == 1;
+}
+
+/// returns the largest breakpoint name
+/// @param {string} $breakpoint
+/// @content
+@function largest-breakpoint-name($breakpoints: $grid-breakpoints) {
+  $total-breakpoints: length($breakpoints);
+  @return key-by-index($breakpoints, $total-breakpoints);
 }
 
 /// Get the infix for a given breakpoint in a list of breakpoints. Usesful for
@@ -145,6 +154,15 @@ $grid-breakpoints: (
     }
   } @else {
     @error 'Unable to find a breakpoint to satisfy: (#{$lower},#{$upper}). Expected both to be one of (#{map-keys($breakpoints)}).';
+  }
+}
+
+/// generate media query for the largest breakpoint
+/// @param {string} $breakpoint
+/// @content
+@mixin largest-breakpoint($breakpoints: $grid-breakpoints) {
+  @include breakpoint(largest-breakpoint-name()) {
+    @content;
   }
 }
 
