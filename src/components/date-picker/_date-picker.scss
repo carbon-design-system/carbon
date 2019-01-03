@@ -173,6 +173,43 @@
     }
   }
 
+  .#{$prefix}--date-picker__calendar.open.showTimeInput,
+  .flatpickr-calendar.open.showTimeInput {
+    height: rem(303px);
+  }
+
+  .#{$prefix}--date-picker__calendar .numInputWrapper span.arrowUp,
+  .#{$prefix}--date-picker__calendar .numInputWrapper span.arrowDown,
+  .flatpickr-time .numInputWrapper span.arrowUp,
+  .flatpickr-time .numInputWrapper span.arrowDown {
+    border: none;
+    width: rem(18px);
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $brand-02;
+        border-top-color: $brand-02;
+      }
+    }
+
+    &:after {
+      border-bottom-color: $brand-01;
+      border-top-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__calendar .numInputWrapper,
+  .#{$prefix}--date-picker__calendar .flatpickr-am-pm,
+  .flatpickr-time .numInputWrapper,
+  .flatpickr-time .flatpickr-am-pm {
+    color: $text-01;
+    &:hover {
+      background: $hover-row;
+    }
+  }
+
   .#{$prefix}--date-picker__month,
   .flatpickr-month {
     width: 100%;
