@@ -116,7 +116,7 @@ $productive-heading-04: (
 $productive-heading-05: (
   font-family: font-family('sans'),
   font-size: type-scale(8),
-  font-weight: font-weight('regular'),
+  font-weight: font-weight('light'),
   line-height: rem(40px),
   letter-spacing: 0,
 ) !default;
@@ -133,14 +133,17 @@ $expressive-heading-04: (
     ),
     lg: (
       font-size: type-scale(7),
+      font-weight: font-weight('light'),
       line-height: 125%,
     ),
     xlg: (
       font-size: type-scale(7),
+      font-weight: font-weight('light'),
       line-height: 129%,
     ),
     max: (
       font-size: type-scale(8),
+      font-weight: font-weight('light'),
       line-height: 125%,
     ),
   ),
