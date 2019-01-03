@@ -74,7 +74,8 @@ storiesOf('Tile', module)
   .add(
     'Clickable',
     () => (
-      <ClickableTile href={text('Href for clicable UI (href)', '#')}>
+      <ClickableTile
+        href={text('Href for clicable UI (href)', 'javascript:void(0)')}>
         Clickable Tile
       </ClickableTile>
     ),
@@ -108,7 +109,7 @@ storiesOf('Tile', module)
       info: {
         text: `
             Selectable tile
-    
+
             Use this to select multiple tiles.
           `,
       },
@@ -154,10 +155,10 @@ storiesOf('Tile', module)
              Although you can set the checked prop on the Tile, when using the RadioTile component
              as a child of the Tile Group, either set the defaultSelected or valueSelected which will
              automatically set the selected prop on the corresponding RadioTile component.
-    
+
              Use defaultSelected when you want a tile to be selected initially, but don't need to set it
              at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
-    
+
              Use this to select one tile at a time.
           `,
       },

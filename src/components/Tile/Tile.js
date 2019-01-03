@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { iconCheckmarkSolid, iconChevronDown } from 'carbon-icons';
 import { settings } from 'carbon-components';
+// TODO: import { CheckmarkFilled16 } from '@carbon/icons-react';
+import CheckmarkFilled from '@carbon/icons-react/lib/checkmark--filled/16';
+// TODO: import { ChevronDown16 } from '@carbon/icons-react';
+import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
+import { componentsX } from '../../internal/FeatureFlags';
 import Icon from '../Icon';
+import { keys, matches } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -24,7 +30,6 @@ export class Tile extends Component {
   render() {
     const { children, className, ...other } = this.props;
     const tileClasses = classNames(`${prefix}--tile`, className);
-
     return (
       <div className={tileClasses} {...other}>
         {children}
@@ -76,7 +81,7 @@ export class ClickableTile extends Component {
   };
 
   handleKeyDown = evt => {
-    if (evt.which === 13 || evt.which === 32) {
+    if (matches(evt, [keys.ENTER, keys.SPACE])) {
       this.setState(
         {
           clicked: !this.state.clicked,
@@ -178,6 +183,11 @@ export class SelectableTile extends Component {
      * The description of the checkmark icon.
      */
     iconDescription: PropTypes.string,
+
+    /**
+     * Specify the tab index of the wrapper element
+     */
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
@@ -187,6 +197,7 @@ export class SelectableTile extends Component {
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
+    tabIndex: 0,
   };
 
   handleClick = evt => {
@@ -207,8 +218,8 @@ export class SelectableTile extends Component {
   };
 
   handleKeyDown = evt => {
-    evt.preventDefault();
-    if (evt.which === 13 || evt.which === 32) {
+    if (matches(evt, [keys.ENTER, keys.SPACE])) {
+      evt.preventDefault();
       this.setState(
         {
           selected: !this.state.selected,
@@ -250,6 +261,9 @@ export class SelectableTile extends Component {
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--selectable`,
+      {
+        [`${prefix}--tile--is-selected`]: this.state.selected,
+      },
       className
     );
 
@@ -276,7 +290,15 @@ export class SelectableTile extends Component {
           checked={this.state.selected}
         />
         <div className={`${prefix}--tile__checkmark`}>
-          <Icon icon={iconCheckmarkSolid} description={iconDescription} />
+          {componentsX ? (
+            <CheckmarkFilled
+              aria-label={iconDescription}
+              alt={iconDescription}
+              description={iconDescription}
+            />
+          ) : (
+            <Icon icon={iconCheckmarkSolid} description={iconDescription} />
+          )}
         </div>
         <div className={`${prefix}--tile-content`}>{children}</div>
       </label>
@@ -434,14 +456,37 @@ export class ExpandableTile extends Component {
         style={tileStyle}
         className={classes}
         {...other}
-        onClick={this.handleClick}>
-        <button className={`${prefix}--tile__chevron`} tabIndex={tabIndex}>
-          <Icon
-            icon={iconChevronDown}
-            description={
-              this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-          />
+        onClick={this.handleClick}
+        tabIndex={tabIndex}>
+        <button className={`${prefix}--tile__chevron`}>
+          {componentsX ? (
+            <ChevronDown16
+              aria-label={
+                this.state.expanded
+                  ? tileExpandedIconText
+                  : tileCollapsedIconText
+              }
+              alt={
+                this.state.expanded
+                  ? tileExpandedIconText
+                  : tileCollapsedIconText
+              }
+              description={
+                this.state.expanded
+                  ? tileExpandedIconText
+                  : tileCollapsedIconText
+              }
+            />
+          ) : (
+            <Icon
+              icon={iconChevronDown}
+              description={
+                this.state.expanded
+                  ? tileExpandedIconText
+                  : tileCollapsedIconText
+              }
+            />
+          )}
         </button>
         <div
           ref={tileContent => {
