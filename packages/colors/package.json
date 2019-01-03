@@ -8,6 +8,7 @@
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/colors",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
   "files": [
+    "css",
     "es",
     "lib",
     "scss",
@@ -25,8 +26,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js && bundler check 'scss/*.scss'",
-    "clean": "rimraf es lib umd scss"
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js && bundler check 'scss/*.scss' && bundler bundle:scss scss/bundle.scss -n colors",
+    "clean": "rimraf css es lib umd scss"
   },
   "devDependencies": {
     "@carbon/bundler": "0.0.1-alpha.26",

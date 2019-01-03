@@ -18,9 +18,17 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "scss",
+    "src",
+    "umd"
+  ],
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonType --globals @carbon/layout=CarbonLayout",
-    "clean": "rimraf es lib umd"
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler bundle:scss scss/bundle.scss -n type",
+    "clean": "rimraf css es lib umd"
   },
   "dependencies": {
     "@carbon/import-once": "0.0.1-alpha.26",

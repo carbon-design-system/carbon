@@ -11,8 +11,6 @@
 @import 'row';
 @import 'col';
 
-@debug $grid-breakpoints;
-
 // Fluid variant of the grid.
 .#{$prefix}--fluid-grid {
   @include make-container();
