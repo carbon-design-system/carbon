@@ -390,6 +390,7 @@ export default class Tooltip extends Component {
                 onFocus={evt => this.handleMouse(evt)}
                 onBlur={evt => this.handleMouse(evt)}
                 aria-haspopup="true"
+                aria-label={iconDescription}
                 aria-expanded={open}
                 {...ariaOwnsProps}>
                 <Icon
