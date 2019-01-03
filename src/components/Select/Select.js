@@ -4,6 +4,9 @@ import classNames from 'classnames';
 import { iconCaretDown } from 'carbon-icons';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
+import { componentsX } from '../../internal/FeatureFlags';
+// TODO: import { ChevronDownGlyph } from '@carbon/icons-react';
+import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 
 const { prefix } = settings;
 
@@ -50,6 +53,7 @@ const Select = ({
         <label htmlFor={id} className={labelClasses}>
           {labelText}
         </label>
+        {componentsX && !inline && helper}
         <select
           {...other}
           {...ariaProps}
@@ -60,12 +64,23 @@ const Select = ({
           aria-invalid={invalid || undefined}>
           {children}
         </select>
-        <Icon
-          icon={iconCaretDown}
-          className={`${prefix}--select__arrow`}
-          description={iconDescription}
-        />
-        {helper}
+        {componentsX ? (
+          <ChevronDownGlyph
+            aria-hidden={true}
+            aria-label={iconDescription}
+            alt={iconDescription}
+            className={`${prefix}--select__arrow`}
+            name="chevron--down"
+          />
+        ) : (
+          <Icon
+            icon={iconCaretDown}
+            className={`${prefix}--select__arrow`}
+            description={iconDescription}
+          />
+        )}
+        {!componentsX && helper}
+        {componentsX && inline && helper}
         {error}
       </div>
     </div>
