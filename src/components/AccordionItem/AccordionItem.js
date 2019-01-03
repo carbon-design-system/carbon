@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { iconChevronRight } from 'carbon-icons';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
+import { match, keys } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -84,11 +85,12 @@ export default class AccordionItem extends Component {
     this.props.onHeadingClick({ isOpen: open, event: evt });
   };
 
-  handleKeyPress = evt => {
-    const isKeyPressTarget = evt.target === evt.currentTarget;
-    const isValidKeyPress = [13, 32].indexOf(evt.which) !== -1;
-
-    if (isKeyPressTarget && isValidKeyPress) {
+  handleKeyDown = evt => {
+    if (
+      match(evt.which, keys.ESC) &&
+      this.state.open &&
+      evt.target.classList.contains(`${prefix}--accordion__heading`)
+    ) {
       this.handleHeadingClick(evt);
     }
   };
@@ -116,7 +118,7 @@ export default class AccordionItem extends Component {
       <li
         className={classNames}
         onClick={this.handleClick}
-        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyDown}
         role="presentation"
         {...other}>
         <Expando
