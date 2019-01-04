@@ -58,6 +58,7 @@
     "autoprefixer": "^8.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^7.0.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-istanbul": "^3.0.0",
@@ -70,6 +71,7 @@
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
     "core-js": "^2.4.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.0",
     "custom-event": "^1.0.0",
     "del": "~2.0.2",
@@ -187,7 +189,7 @@
     "format:staged": "prettier --write",
     "start": "node server.js",
     "test": "gulp test",
-    "test:styles": "jest",
+    "test:build": "cross-env BABEL_ENV=test jest",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
@@ -206,18 +208,7 @@
   },
   "babel": {
     "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": false,
-          "targets": {
-            "browsers": [
-              "last 1 version",
-              "ie >= 11"
-            ]
-          }
-        }
-      ]
+      "./tools/env"
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
