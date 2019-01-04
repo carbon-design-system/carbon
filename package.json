@@ -141,10 +141,15 @@
       "/dist/",
       "/es/",
       "/lib/",
-      "/examples/"
+      "examples",
+      "icons"
     ],
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "watchPathIgnorePatterns": [
+      "examples",
+      "icons"
     ]
   }
 }
