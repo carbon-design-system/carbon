@@ -81,59 +81,69 @@ function iconToString(descriptor) {
 
 function createComponentFromInfo({ descriptor, moduleName }) {
   const source = `
-function ${moduleName}({ className, children, style, tabIndex, ...rest }) {
-  const { tabindex, ...props } = getAttributes({
-    ...rest,
-    tabindex: tabIndex,
-  });
+    const ${moduleName} = React.forwardRef(({
+      className,
+      children,
+      style,
+      tabIndex,
+      ...rest,
+    }, ref) => {
+      const { tabindex, ...props } = getAttributes({
+        ...rest,
+        tabindex: tabIndex,
+      });
 
-  if (className) {
-    props.className = className;
-  }
+      if (className) {
+        props.className = className;
+      }
 
-  if (tabindex !== undefined && tabindex !== null) {
-    props.tabIndex = tabindex;
-  }
+      if (tabindex !== undefined && tabindex !== null) {
+        props.tabIndex = tabindex;
+      }
 
-  if (typeof style === 'object') {
-    props.style = {
-      ...defaultStyle,
-      ...style,
+      if (typeof style === 'object') {
+        props.style = {
+          ...defaultStyle,
+          ...style,
+        };
+      } else {
+        props.style = defaultStyle;
+      }
+
+      if (ref) {
+        props.ref = ref;
+      }
+
+      return React.createElement(
+        'svg',
+        props,
+        children,
+        ${descriptor.content.map(iconToString).join(', ')}
+      );
+    });
+    ${moduleName}.displayName = '${moduleName}';
+    ${moduleName}.propTypes = {
+      'aria-hidden': PropTypes.bool,
+      'aria-label': PropTypes.string,
+      'aria-labelledby': PropTypes.string,
+      className: PropTypes.string,
+      children: PropTypes.node,
+      height: PropTypes.number,
+      preserveAspectRatio: PropTypes.string,
+      tabIndex: PropTypes.string,
+      title: PropTypes.string,
+      viewBox: PropTypes.string,
+      width: PropTypes.number,
+      xmlns: PropTypes.string,
     };
-  } else {
-    props.style = defaultStyle;
-  }
-
-  return React.createElement(
-    'svg',
-    props,
-    children,
-    ${descriptor.content.map(iconToString).join(', ')}
-  );
-}
-
-${moduleName}.displayName = '${moduleName}';
-${moduleName}.propTypes = {
-  'aria-hidden': PropTypes.bool,
-  'aria-label': PropTypes.string,
-  'aria-labelledby': PropTypes.string,
-  className: PropTypes.string,
-  children: PropTypes.node,
-  height: PropTypes.number,
-  preserveAspectRatio: PropTypes.string,
-  tabIndex: PropTypes.string,
-  title: PropTypes.string,
-  viewBox: PropTypes.string,
-  width: PropTypes.number,
-  xmlns: PropTypes.string,
-};
-${moduleName}.defaultProps = {
-  width: ${descriptor.attrs.width},
-  height: ${descriptor.attrs.height},
-  viewBox: '${descriptor.attrs.viewBox}',
-  xmlns: 'http://www.w3.org/2000/svg',
-  preserveAspectRatio: 'xMidYMid meet',
-};`;
+    ${moduleName}.defaultProps = {
+      width: ${descriptor.attrs.width},
+      height: ${descriptor.attrs.height},
+      viewBox: '${descriptor.attrs.viewBox}',
+      xmlns: 'http://www.w3.org/2000/svg',
+      preserveAspectRatio: 'xMidYMid meet',
+    };
+  `;
   return prettier.format(source, prettierOptions);
 }
 
