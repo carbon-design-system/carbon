@@ -133,17 +133,17 @@ $expressive-heading-04: (
     ),
     lg: (
       font-size: type-scale(7),
-      font-weight: font-weight('light'),
+      font-weight: font-weight('regular'),
       line-height: 125%,
     ),
     xlg: (
       font-size: type-scale(7),
-      font-weight: font-weight('light'),
+      font-weight: font-weight('regular'),
       line-height: 129%,
     ),
     max: (
       font-size: type-scale(8),
-      font-weight: font-weight('light'),
+      font-weight: font-weight('regular'),
       line-height: 125%,
     ),
   ),
@@ -152,7 +152,7 @@ $expressive-heading-04: (
 $expressive-heading-05: (
   font-family: font-family('sans'),
   font-size: type-scale(7),
-  font-weight: font-weight('light'),
+  font-weight: font-weight('regular'),
   line-height: 129%,
   letter-spacing: 0,
   breakpoints: (
