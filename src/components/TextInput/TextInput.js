@@ -76,8 +76,8 @@ const TextInput = ({
   return (
     <div className={`${prefix}--form-item`}>
       {label}
-      {input}
       {helper}
+      {input}
       {error}
     </div>
   );
