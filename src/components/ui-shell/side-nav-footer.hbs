@@ -1,14 +1,18 @@
 <footer class="{{@root.prefix}}--side-nav__footer">
-  <button
-    class="{{@root.prefix}}--side-nav__toggle"
-    role="button"
-    title="Close the side navigation menu">
+  <button class="{{@root.prefix}}--side-nav__toggle" role="button" title="Close the side navigation menu">
     <div class="{{@root.prefix}}--side-nav__icon">
-      {{#if expanded}}
-      <svg aria-hidden="true"width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M17.414 16L24 9.414 22.586 8 16 14.586 9.414 8 8 9.414 14.586 16 8 22.586 9.414 24 16 17.414 22.586 24 24 22.586 17.414 16z"/></svg>
-      {{else}}
-      <svg aria-hidden="true"width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22 16L12 26l-1.414-1.414L19.172 16l-8.586-8.586L12 6l10 10z"/></svg>
-      {{/if}}
+      {{carbon-icon 'Close20'
+      class=(add
+      (add @root.prefix '--side-nav__icon--collapse')
+      (add ' ' (add @root.prefix '--side-nav-collapse-icon'))
+      )
+      aria-hidden="true"}}
+      {{carbon-icon 'ChevronRight20'
+      class=(add
+      (add @root.prefix '--side-nav__icon--expand')
+      (add ' ' (add @root.prefix '--side-nav-expand-icon'))
+      )
+      aria-hidden="true"}}
     </div>
     <span class="{{@root.prefix}}--assistive-text">
       Toggle the expansion state of the navigation
