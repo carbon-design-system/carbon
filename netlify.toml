@@ -1,0 +1,14 @@
+[build]
+  publish = "demo"
+  command = "yarn build-dev-rollup"
+
+[build.environment]
+  YARN_VERSION = "1.12.3"
+
+[context.stable]
+  command = "yarn build-dev-rollup"
+  publish = "demo1"
+
+[context.experimental]
+  command = "yarn build-dev-rollup-experimental"
+  publish = "demo2"
