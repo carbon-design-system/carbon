@@ -3,6 +3,8 @@ import eventMatches from '../../globals/js/misc/event-matches';
 import ContentSwitcher from '../content-switcher/content-switcher';
 import on from '../../globals/js/misc/on';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class Tab extends ContentSwitcher {
   /**
    * Container of tabs.
@@ -93,7 +95,7 @@ class Tab extends ContentSwitcher {
     }[event.which];
 
     if (direction) {
-      const buttons = [...this.element.querySelectorAll(this.options.selectorButtonEnabled)];
+      const buttons = toArray(this.element.querySelectorAll(this.options.selectorButtonEnabled));
       const button = this.element.querySelector(this.options.selectorButtonSelected);
       const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
       const nextIndexLooped =
@@ -119,7 +121,11 @@ class Tab extends ContentSwitcher {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (menu) {
       menu.classList.toggle(this.options.classHidden, typeof force === 'undefined' ? force : !force);
-      trigger.classList.toggle(this.options.classOpen);
+      if (menu.classList.contains(this.options.classHidden)) {
+        trigger.classList.remove(this.options.classOpen);
+      } else {
+        trigger.classList.add(this.options.classOpen);
+      }
     }
   }
 
@@ -139,7 +145,7 @@ class Tab extends ContentSwitcher {
    * @member Tab.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -189,7 +195,7 @@ class Tab extends ContentSwitcher {
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

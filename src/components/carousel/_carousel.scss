@@ -3,12 +3,15 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-@include exports('carousel') {
-  @include deprecate('`carousel` component in `carbon-components` has been deprecated.') {
+@mixin carousel {
+  @include deprecate(
+    'The `carousel` component in `carbon-components` has been deprecated. ' + 'It will be removed in the next major release.'
+  ) {
     .#{$prefix}--carousel {
       display: flex;
       align-items: center;
@@ -84,5 +87,11 @@
     .#{$prefix}--carousel__item--active {
       @include focus-outline;
     }
+  }
+}
+
+@include exports('carousel') {
+  @if not(feature-flag-enabled('breaking-changes-x')) {
+    @include carousel;
   }
 }

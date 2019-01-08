@@ -1,6 +1,8 @@
 'use strict';
 
+const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -43,7 +45,9 @@ const items = [
 
 module.exports = {
   context: {
+    featureFlags,
     prefix,
+    componentsX,
   },
   variants: [
     {
@@ -74,6 +78,25 @@ module.exports = {
       context: {
         light: true,
         items,
+      },
+    },
+    {
+      name: 'helperText',
+      label: 'Select (helper text)',
+      notes: 'Example with an optional helper text group',
+      context: {
+        items,
+        helperText: true,
+      },
+    },
+    {
+      name: 'helperTextInline',
+      label: 'Select (inline witbh helper text)',
+      notes: 'Example with an optional helper text group with an inline select',
+      context: {
+        items,
+        helperText: true,
+        inline: true,
       },
     },
     {

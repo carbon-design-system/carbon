@@ -62,12 +62,14 @@ const templates = require('./tools/templates');
 
 const assign = v => v;
 const cloptions = commander
+  .option('-b, --use-breaking-changes', 'Build with breaking changes turned on (For dev build only)')
   .option('-e, --use-experimental-features', 'Build with experimental features turned on (For dev build only)')
   .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
   .option('--port-sass-dev-build [port]', 'Uses the given port for Sass dev build server', assign, 5000)
   .option('-r, --rollup', 'Uses Rollup for dev env')
+  .option('-s, --sass-source', 'Force building Sass source')
   .parse(process.argv);
 
 // Axe A11y Test
@@ -135,6 +137,7 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
+const useBreakingChanges = !!cloptions.useBreakingChanges;
 let useExperimentalFeatures = !!cloptions.useExperimentalFeatures;
 
 gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
@@ -158,15 +161,15 @@ gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
 
 gulp.task('scripts:dev:feature-flags', () => {
   const replaceTable = {
+    breakingChangesX: useBreakingChanges,
     componentsX: useExperimentalFeatures,
   };
   return readFile(path.resolve(__dirname, 'src/globals/js/feature-flags.js'))
     .then(contents =>
       contents
         .toString()
-        .replace(
-          /(exports\.([\w-_]+)\s*=\s*)(true|false)/g,
-          (match, definition, name) => (!(name in replaceTable) ? match : `${definition}${replaceTable[name]}`)
+        .replace(/(exports\.([\w-_]+)\s*=\s*)(true|false)/g, (match, definition, name) =>
+          !(name in replaceTable) ? match : `${definition}${replaceTable[name]}`
         )
     )
     .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));
@@ -177,7 +180,7 @@ gulp.task('scripts:umd', () => {
   const babelOpts = {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
           targets: {
             browsers: ['last 1 version', 'ie >= 11'],
@@ -185,12 +188,18 @@ gulp.task('scripts:umd', () => {
         },
       ],
     ],
-    plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
+    plugins: ['@babel/plugin-transform-modules-umd', ['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
 
   return gulp
     .src(srcFiles)
     .pipe(babel(babelOpts))
+    .pipe(
+      babel({
+        plugins: [require('./tools/babel-plugin-pure-assignment')], // eslint-disable-line global-require
+        babelrc: false,
+      })
+    )
     .pipe(gulp.dest('umd/'));
 });
 
@@ -199,7 +208,7 @@ gulp.task('scripts:es', () => {
   const babelOpts = {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
           modules: false,
           targets: {
@@ -208,7 +217,7 @@ gulp.task('scripts:es', () => {
         },
       ],
     ],
-    plugins: ['transform-class-properties'],
+    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
   const pathsToConvertToESM = new Set([
     path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
@@ -219,6 +228,12 @@ gulp.task('scripts:es', () => {
   return gulp
     .src(srcFiles)
     .pipe(babel(babelOpts))
+    .pipe(
+      babel({
+        plugins: [require('./tools/babel-plugin-pure-assignment')], // eslint-disable-line global-require
+        babelrc: false,
+      })
+    )
     .pipe(
       through.obj((file, enc, callback) => {
         if (!pathsToConvertToESM.has(file.path)) {
@@ -302,6 +317,7 @@ gulp.task('sass:dev', () =>
       header(`
         $feature-flags: (
           components-x: ${useExperimentalFeatures},
+          breaking-changes-x: ${useBreakingChanges},
           grid: ${useExperimentalFeatures},
           ui-shell: ${useExperimentalFeatures},
         );
@@ -309,6 +325,12 @@ gulp.task('sass:dev', () =>
     )
     .pipe(
       sass({
+        includePaths: ['node_modules'],
+        importer: (url, prev, done) => {
+          done({
+            file: url.replace(/^carbon-components\/scss\//, `${path.resolve(__dirname, 'src')}/`),
+          });
+        },
         outputStyle: 'expanded',
       }).on('error', sass.logError)
     )
@@ -418,7 +440,7 @@ gulp.task('jsdoc', cb => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: ['transform-class-properties', 'transform-object-rest-spread'],
+        plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-object-rest-spread'],
         babelrc: false,
       })
     )
@@ -488,7 +510,7 @@ gulp.task('watch', () => {
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev', 'sass:source']);
+  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], !cloptions.sassSource ? ['sass:dev'] : ['sass:dev', 'sass:source']);
 });
 
 gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);

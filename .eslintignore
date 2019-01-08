@@ -5,6 +5,7 @@ demo/js/prism.js
 demo/hot
 !demo/index.js
 dist
+examples/codesandbox
 tests/a11y-results
 tests/coverage
 /es
@@ -18,3 +19,6 @@ node_modules
 
 # TODO: Upgrade to ESLint4 so we can apply a specific rule (one for CJS code) for below files
 src/**/*.config.js
+
+# TODO: Use more granular ESLint configuration
+tests/es-test.js

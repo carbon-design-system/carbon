@@ -129,12 +129,14 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
       );
     }
     componentSource.forEach(metadata => {
-      const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
+      const items = metadata.isCollection
+        ? metadata
+        : !metadata.meta.removed && !metadata.isCollated && metadata.variants && metadata.variants();
       if (items) {
         const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
-          const { handle: itemHandle, baseHandle, context } = item;
-          const template = contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle);
+          const { handle: itemHandle, baseHandle, context, meta } = item;
+          const template = !meta.removed && (contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle));
           if (template) {
             const body = template(context);
             const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));

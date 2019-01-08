@@ -55,6 +55,13 @@ class ComponentExample extends Component {
     useStaticFullRenderPage: PropTypes.bool,
   };
 
+  /**
+   * The container where the live demo HTML code should be put into.
+   * @type {HTMLElement}
+   * @private
+   */
+  _container = null;
+
   componentDidMount() {
     this._instantiateComponents();
   }
@@ -78,13 +85,6 @@ class ComponentExample extends Component {
   }
 
   /**
-   * The container where the live demo HTML code should be put into.
-   * @type {HTMLElement}
-   * @private
-   */
-  _container = null;
-
-  /**
    * Instantiate/release Carbon components as the container for the live demo HTML code is mounted/unmounted.
    * @param {HTMLElement} container The container where the live demo HTML code should be put into.
    */
@@ -101,9 +101,11 @@ class ComponentExample extends Component {
       const componentClasses = Object.keys(components)
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function');
-      componentClasses.filter(Clz => !Clz.forLazyInit).forEach(Clz => {
-        Clz.init(container);
-      });
+      componentClasses
+        .filter(Clz => !Clz.forLazyInit)
+        .forEach(Clz => {
+          Clz.init(container);
+        });
     }
   };
 
@@ -176,6 +178,7 @@ class ComponentExample extends Component {
         <iframe
           className={classNames}
           data-role="window"
+          title="Component Example"
           src={componentLink}
           sandbox="allow-same-origin allow-scripts allow-forms"
           marginWidth="0"

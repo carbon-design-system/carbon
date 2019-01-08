@@ -48,11 +48,9 @@ module.exports = {
     }),
     babel({
       exclude: ['node_modules/**'],
-      plugins: ['external-helpers'],
     }),
     babel({
       include: ['node_modules/markdown-it/**'],
-      plugins: ['external-helpers'],
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('development'),

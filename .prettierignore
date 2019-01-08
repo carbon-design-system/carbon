@@ -6,6 +6,7 @@ demo/scss/_prism.scss
 demo/hot
 !demo/index.js
 dist
+examples/codesandbox
 tests/a11y-results
 tests/coverage
 /es
