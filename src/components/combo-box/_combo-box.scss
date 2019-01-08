@@ -17,6 +17,11 @@
 }
 
 @mixin combo-box--x {
+  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon--open {
+    display: none;
+  }
+
   .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
     padding: 0;
   }

@@ -410,6 +410,7 @@ $list-box-menu-width: rem(300px);
     height: rem(40px);
     padding: 0 1rem;
     cursor: pointer;
+    outline: none;
   }
 
   .#{$prefix}--list-box__field:focus,
