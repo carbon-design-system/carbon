@@ -190,9 +190,36 @@ gulp.task('scripts:umd', () => {
     ],
     plugins: ['@babel/plugin-transform-modules-umd', ['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
+  const pathsToConvertToESM = new Set([
+    path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
+    path.resolve(__dirname, 'src/globals/js/settings.js'),
+  ]);
+  const cjsPlugin = commonjs();
+  cjsPlugin.options({ entry: '' });
 
   return gulp
     .src(srcFiles)
+    .pipe(
+      through.obj((file, enc, callback) => {
+        if (!pathsToConvertToESM.has(file.path)) {
+          callback(null, file);
+        } else {
+          Promise.resolve(cjsPlugin.transform(file.contents.toString(), file.path)).then(
+            result => {
+              if (!result) {
+                callback(null, file);
+              } else {
+                file.contents = Buffer.from(result.code);
+                callback(null, file);
+              }
+            },
+            err => {
+              callback(err);
+            }
+          );
+        }
+      })
+    )
     .pipe(babel(babelOpts))
     .pipe(
       babel({
