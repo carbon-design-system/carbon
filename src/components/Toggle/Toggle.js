@@ -12,6 +12,7 @@ const Toggle = ({
   onChange,
   onToggle,
   id,
+  labelText,
   labelA,
   labelB,
   ...other
@@ -30,7 +31,7 @@ const Toggle = ({
     checkedProps.defaultChecked = defaultToggled;
   }
 
-  return (
+  const ToggleBody = () => (
     <div className={wrapperClasses}>
       <input
         {...other}
@@ -53,6 +54,15 @@ const Toggle = ({
         <span className={`${prefix}--toggle__text--right`}>{labelB}</span>
       </label>
     </div>
+  );
+
+  return labelText ? (
+    <fieldset className={`${prefix}--fieldset`}>
+      <legend className={`${prefix}--label`}>{labelText}</legend>
+      <ToggleBody />
+    </fieldset>
+  ) : (
+    <ToggleBody />
   );
 };
 
@@ -95,6 +105,7 @@ Toggle.propTypes = {
 
 Toggle.defaultProps = {
   defaultToggled: false,
+  label: '',
   labelA: 'Off',
   labelB: 'On',
   onToggle: () => {},

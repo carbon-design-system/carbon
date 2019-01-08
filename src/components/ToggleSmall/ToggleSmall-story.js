@@ -8,6 +8,8 @@ import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 const toggleProps = () => ({
   className: 'some-class',
   ariaLabel: text('ARIA label (ariaLabel)', 'Label Name'),
+  labelA: text('Label for untoggled state (labelA)', 'Off'),
+  labelB: text('Label for toggled state (labelB)', 'On'),
   onChange: action('onChange'),
   onToggle: action('onToggle'),
 });
