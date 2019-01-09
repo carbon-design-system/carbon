@@ -12,7 +12,7 @@ describe('Test tabs', function() {
         selectorTrigger: '.bx--tabs-trigger',
         selectorTriggerText: '.bx--tabs-trigger-text',
         selectorButton: '.bx--tabs__nav-item',
-        selectorButtonEnabled: '.bx--tabs__nav-item:not([disabled])',
+        selectorButtonEnabled: '.bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled)',
         selectorButtonSelected: '.bx--tabs__nav-item--selected',
         selectorLink: '.bx--tabs__nav-link',
         classActive: 'bx--tabs__nav-item--selected',
@@ -131,7 +131,7 @@ describe('Test tabs', function() {
 
     beforeEach(function() {
       buttonNodes.forEach((buttonNode, i) => {
-        buttonNode.removeAttribute('disabled');
+        buttonNode.classList.remove('bx--tabs__nav-item--disabled');
         buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs__nav-item--selected');
       });
     });
@@ -144,7 +144,7 @@ describe('Test tabs', function() {
     });
 
     it('Should skip disabled tab upon right key', function() {
-      buttonNodes[1].setAttribute('disabled', '');
+      buttonNodes[1].classList.add('bx--tabs__nav-item--disabled');
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       expect(defaultPrevented).toBe(true);
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
