@@ -199,6 +199,7 @@
     color: $inverse-01;
     z-index: 3;
 
+    // TODO: replace with new disabled color token when finalized
     &:disabled {
       background-color: $ibm-colors__gray--30;
     }
