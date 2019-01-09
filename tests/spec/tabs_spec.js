@@ -18,6 +18,7 @@ describe('Test tabs', function() {
         classActive: 'bx--tabs__nav-item--selected',
         classHidden: 'bx--tabs__nav--hidden',
         classOpen: 'bx--tabs-trigger--open',
+        classButtonDisabled: `bx--tabs__nav-item--disabled`,
         eventBeforeSelected: 'tab-beingselected',
         eventAfterSelected: 'tab-selected',
       });
@@ -153,7 +154,7 @@ describe('Test tabs', function() {
     });
 
     it('Should avoid activating disabled tab on click', function() {
-      buttonNodes[1].setAttribute('disabled', '');
+      buttonNodes[1].classList.add('bx--tabs__nav-item--disabled');
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
