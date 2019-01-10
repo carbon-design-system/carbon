@@ -12,14 +12,7 @@ const { paramCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
-const {
-  colors,
-  tokens,
-  white0,
-  black100,
-  yellow20,
-  orange40,
-} = require('../lib');
+const { colors } = require('../lib');
 
 const SCSS_DIR = path.resolve(__dirname, '../scss');
 const COLORS_ENTRYPOINT = path.join(SCSS_DIR, 'colors.scss');
@@ -33,37 +26,21 @@ const prettierOptions = {
   singleQuote: true,
 };
 
-const colorsToMap = {
-  ...colors,
-  black: {
-    100: black100,
-  },
-  orange: {
-    40: orange40,
-  },
-  white: {
-    0: white0,
-  },
-  yellow: {
-    20: yellow20,
-  },
-};
-
 async function build() {
   reporter.info('Building scss files for colors...');
 
-  const colorVariables = Object.keys(colorsToMap).reduce((acc, key) => {
+  const colorVariables = Object.keys(colors).reduce((acc, key) => {
     const swatch = paramCase(key);
-    const values = Object.keys(colorsToMap[key]).reduce((acc, grade) => {
+    const values = Object.keys(colors[key]).reduce((acc, grade) => {
       const name = `${swatch}-${grade}`;
-      const value = colorsToMap[key][grade];
+      const value = colors[key][grade];
       return acc.concat(createVariable(`${PREFIX}-colors__${name}`, value));
     }, []);
 
     // Create shorthand for swatches of one value
-    if (Object.keys(colorsToMap[key]).length === 1) {
-      const grade = Object.keys(colorsToMap[key])[0];
-      const value = colorsToMap[key][grade];
+    if (Object.keys(colors[key]).length === 1) {
+      const grade = Object.keys(colors[key])[0];
+      const value = colors[key][grade];
       return acc.concat(
         ...values,
         createVariable(`${PREFIX}-colors__${swatch}`, value)

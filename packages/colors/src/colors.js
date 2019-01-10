@@ -248,14 +248,26 @@ export const warmGray = {
 };
 
 export const colors = {
+  black: {
+    100: black,
+  },
   blue,
   coolGray,
   cyan,
   gray,
   green,
   magenta,
+  orange: {
+    40: orange40,
+  },
   purple,
   red,
   teal,
   warmGray,
+  white: {
+    0: white,
+  },
+  yellow: {
+    20: yellow20,
+  },
 };
