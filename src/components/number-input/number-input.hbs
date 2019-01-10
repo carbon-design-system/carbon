@@ -29,6 +29,9 @@
   <div data-invalid data-numberinput class="{{@root.prefix}}--number{{#if light}} {{@root.prefix}}--number--light{{/if}}">
     <label for="number-input" class="{{@root.prefix}}--label">Number Input label</label>
     <input id="number-input" type="number" min="0" max="100" value="1">
+    {{#if @root.featureFlags.componentsX}}
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
+    {{/if}}
     <div class="{{@root.prefix}}--number__controls">
       <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
         {{#if @root.featureFlags.componentsX}}
@@ -58,6 +61,9 @@
 <div class="{{@root.prefix}}--form-item">
   <div data-invalid data-numberinput class="{{@root.prefix}}--number{{#if light}} {{@root.prefix}}--number--light{{/if}} {{@root.prefix}}--number--nolabel">
     <input id="number-input" type="number" min="0" max="100" value="1">
+    {{#if @root.featureFlags.componentsX}}
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
+    {{/if}}
     <div class="{{@root.prefix}}--number__controls">
       <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
         {{#if @root.featureFlags.componentsX}}

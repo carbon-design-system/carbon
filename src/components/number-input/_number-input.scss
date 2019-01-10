@@ -305,6 +305,17 @@
     }
   }
 
+  .#{$prefix}--number__invalid {
+    position: absolute;
+    top: 2.25rem;
+    right: 2rem;
+    fill: $support-01;
+  }
+
+  .#{$prefix}--number--nolabel .#{$prefix}--number__invalid {
+    top: 0.75rem;
+  }
+
   .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
     top: 0.625rem;
   }
