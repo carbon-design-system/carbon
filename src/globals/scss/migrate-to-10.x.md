@@ -8,4 +8,4 @@ The following color tokens are being renamed for upcoming `v10`:
 | `$hover-field` | `$hover-ui`       | Hover variant of `$ui-01` and `$ui-02`. Transparent background hover.             |
 | `$brand-01`    | `$interactive-01` | Primary interactive color, interactive text, selected elements, featured elements |
 | `$brand-02`    | `$interactive-02` | Secondary interactive color, loading                                              |
-| `$brand-03`    | `$interactive-03` |                                                                                   |
+| `$brand-03`    | `$interactive-03` | Tertiary interactive color                                                        |

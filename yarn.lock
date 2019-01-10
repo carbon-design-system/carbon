@@ -605,9 +605,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/colors@^0.0.1-alpha.26":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.26.tgz#d3a30b905a222fbf86466d0611127e87154b1e90"
+"@carbon/colors@0.0.1-alpha.27", "@carbon/colors@^0.0.1-alpha.27":
+  version "0.0.1-alpha.27"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.27.tgz#31d4d0b6d52db369e52e3bcb4d2cb5e1259d4be0"
+  integrity sha512-D098VJvfY79oNICwmHP+AckJAWuE+PxpjB3vyglOhbUfNNyUIHYRjcJ/Ll/I98Fltm5vx4ASdkGbIrcCqLXYng==
 
 "@carbon/icon-helpers@0.0.1-alpha.26":
   version "0.0.1-alpha.26"
@@ -631,6 +632,13 @@
 "@carbon/motion@^0.0.1-alpha.16":
   version "0.0.1-alpha.26"
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.26.tgz#d838f8b19de88d32ce6ee6b43d4e0a1ed57d13da"
+
+"@carbon/themes@^0.0.1-alpha.27":
+  version "0.0.1-alpha.27"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-0.0.1-alpha.27.tgz#b5e62e437b905621bc91a56e498444a6e8a44a18"
+  integrity sha512-4I/4Eie7LYtEuGgSydziqJ/z7O9m81pNSrp4htwFH5oXkOS/SW9dH1MA6A0PHK/bQXilzdRYSI4bcXUbHY6q5A==
+  dependencies:
+    "@carbon/colors" "0.0.1-alpha.27"
 
 "@commitlint/cli@^7.0.0":
   version "7.2.1"
