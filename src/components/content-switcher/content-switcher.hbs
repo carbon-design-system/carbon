@@ -1,16 +1,15 @@
 <div data-content-switcher class="{{@root.prefix}}--content-switcher" role="tablist" aria-label="Demo switch content">
   {{#each items}}
-    <button class="{{@root.prefix}}--content-switcher-btn{{#if selected}} {{@root.prefix}}--content-switcher--selected{{/if}}" data-target="{{target}}" role="tab"{{#if selected}} aria-selected="true"{{/if}}>
-      {{#if ../hasIcon}}
-        {{#if @root.featureFlags.componentsX}}
-          {{ carbon-icon 'AddFilled16' class=(add @root.prefix '--content-switcher__icon') }}
-        {{else}}
-          <svg class="{{@root.prefix}}--content-switcher__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
-          </svg>
-        {{/if}}
-      {{/if}}
-      {{#if label}}<span>{{label}}</span>{{/if}}
-    </button>
+  <button class="{{@root.prefix}}--content-switcher-btn{{#if selected}} {{@root.prefix}}--content-switcher--selected{{/if}}"
+    data-target="{{target}}" role="tab" {{#if selected}} aria-selected="true" {{/if}} {{#if disabled}} disabled {{/if}}>
+    {{#if ../hasIcon}} {{#if @root.featureFlags.componentsX}}
+    {{ carbon-icon 'AddFilled16' class=(add @root.prefix '--content-switcher__icon') }} {{else}} <svg class="{{@root.prefix}}--content-switcher__icon"
+      width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+    </svg>
+    {{/if}}
+    {{/if}}
+    {{#if label}}<span>{{label}}</span>{{/if}}
+  </button>
   {{/each}}
 </div>
