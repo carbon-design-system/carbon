@@ -1,0 +1,34 @@
+{
+  "name": "@carbon/themes",
+  "description": "Themes for applying color in the Carbon Design System",
+  "version": "0.0.1-alpha.26",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/themes",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf css es lib umd scss",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check 'scss/*.scss'"
+  },
+  "dependencies": {
+    "@carbon/colors": "0.0.1-alpha.26"
+  },
+  "devDependencies": {
+    "@carbon/cli-reporter": "0.0.1-alpha.26",
+    "change-case": "^3.0.2",
+    "fs-extra": "^7.0.1",
+    "prettier": "^1.15.3",
+    "rimraf": "^2.6.3"
+  }
+}

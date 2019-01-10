@@ -197,7 +197,12 @@ async function createExamples(name, examplesDir) {
 
   const examples = (await fs.readdir(examplesDir)).filter(name => {
     // Ignore dotfiles and special cases `codesandbox` and `storybook`
-    return !(name[0] === '.' || name === 'codesandbox' || name === 'storybook');
+    return !(
+      name[0] === '.' ||
+      name === 'codesandbox' ||
+      name === 'storybook' ||
+      name === 'preview'
+    );
   });
 
   if (examples.length === 0) {

@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.1-alpha.26",
   "license": "Apache-2.0",
+  "bin": {
+    "bundler": "./bin/bundler.js"
+  },
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/bundler",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
   "keywords": [
@@ -39,8 +42,5 @@
   },
   "devDependencies": {
     "change-case": "^3.0.2"
-  },
-  "bin": {
-    "bundler": "./bin/bundler.js"
   }
 }

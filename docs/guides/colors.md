@@ -8,7 +8,9 @@
 - [Contributing](#contributing)
   - [Colors](#colors)
     - [Gotchas](#gotchas)
-  - [Tokens](#tokens)
+  - [Themes](#themes)
+    - [Using another theme](#using-another-theme)
+    - [`rgba` values](#rgba-values)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -58,12 +60,15 @@ otherwise the JavaScript program will not run.
   - For example, `export const red10 = '#fff0f1;` would not compile without the
     ending `'` quote.
 
-### Tokens
+### Themes
 
 When working with token names and values, you will be working in the
-[`tokens.js`](/packages/colors/src/tokens.js) file. This file is written in
-JavaScript and exports all the tokens that developers could use when working in
-the Carbon Design System.
+[`themes`](/packages/themes/src) folder. This folder will have files that are
+named for each theme we currently support. The [`white`](/packages/themes/src/white.js) theme is considered the default theme.
+
+Each file in this directly (outside of `index.js`) will have all of the theme
+tokens defined inside of them. These files are written in JavaScript exports all
+the tokens that developers could use when working in the Carbon Design System.
 
 A token is exported by writing the following:
 
@@ -87,7 +92,7 @@ import {
   blue80,
 
   // ...
-} from './colors';
+} from '@carbon/colors';
 ```
 
 In the above code snippet, we can see that several blue values have been
@@ -103,7 +108,7 @@ import {
   blue80,
 
   // ...
-} from './colors';
+} from '@carbon/colors';
 ```
 
 Afterwards, we could use `blue20` as the value in any of our tokens 🎉
@@ -115,3 +120,53 @@ from `blue60` to `blue20` we would need to do the following:
 ```js
 export const interactive01 = blue20;
 ```
+
+#### Using another theme
+
+If a theme that you are currently editing relies on another theme value, you can
+re-export that token at the end of the file. As an example, let's
+say we are working in the `gray10`, or `g10`, theme. This theme has a token,
+`hoverSelectedUI`, that is the same value as the `white` theme.
+
+Following our examples above, we would normally write a token value like:
+
+```js
+export const hoverSelectedUI = 'some-value';
+```
+
+However, since this token relies on the `white` theme, we can re-export this
+value at the bottom of the file. We can do this by writing the following:
+
+```js
+export { hoverSelectedUI } from './white';
+```
+
+Writing the line above will allow us to get the `hoverSelectedUI` value from the
+`white` theme and include it as part of the `g10` theme.
+
+#### `rgba` values
+
+When working with values that have opacity, you can import and use the `rgba` helper to get the proper representation of the value in code.
+
+We can use this helper by including the following at the top of the file in our
+imports:
+
+```js
+import {
+  blue60,
+  blue80,
+  blue100,
+  // ...
+
+  // Include the `rgba` helper
+  rgba,
+} from '@carbon/colors';
+
+// ...
+
+export const overlay01 = rgba(gray100, 0.5);
+```
+
+In this example, we have included the `rgba` helper and called in for the token
+`overlay01`. This helper takes in a color, in this case `gray100`, and the
+decimal value for the opacity.

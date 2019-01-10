@@ -5,5 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './colors';
-export * from './rgb';
+table {
+  text-align: left;
+  vertical-align: middle;
+}
+
+table,
+tr,
+td,
+th {
+  border: 1px solid black;
+}
+
+td,
+th {
+  padding: 1rem;
+}

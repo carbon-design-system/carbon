@@ -7,6 +7,14 @@
   "module": "es/index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/type",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "scss",
+    "src",
+    "umd"
+  ],
   "keywords": [
     "eyeglass-module",
     "ibm",
@@ -18,14 +26,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "scss",
-    "src",
-    "umd"
-  ],
   "scripts": {
     "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler bundle:scss scss/bundle.scss -n type",
     "clean": "rimraf css es lib umd"
