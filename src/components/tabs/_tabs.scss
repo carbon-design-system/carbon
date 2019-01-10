@@ -359,7 +359,7 @@
     }
   }
 
-  .#{$prefix}--tabs__nav-item:hover:not([disabled]) {
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include max-breakpoint(bp--sm--major) {
       background-color: $hover-field;
       box-shadow: 0 -1px 0 $hover-field;
@@ -369,15 +369,15 @@
   //---------------------------------------------
   // Item Disabled
   //---------------------------------------------
-  .#{$prefix}--tabs__nav-item[disabled],
-  .#{$prefix}--tabs__nav-item[disabled]:hover {
+  .#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs__nav-item--disabled:hover {
     cursor: not-allowed;
   }
 
   //-----------------------------
   // Item Selected
   //-----------------------------
-  .#{$prefix}--tabs__nav-item--selected:not([disabled]) {
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
     border: none;
     @include breakpoint(bp--sm--major) {
       .#{$prefix}--tabs__nav-link {
@@ -441,7 +441,8 @@
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover:not([disabled]) .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled))
+    .#{$prefix}--tabs__nav-link {
     color: $text-01;
     @include breakpoint(bp--sm--major) {
       color: $text-01;
@@ -452,18 +453,18 @@
   //-----------------------------
   //  Link Disabled
   //-----------------------------
-  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs__nav-item[disabled]:hover .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
     cursor: no-drop;
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item[disabled] a.#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
   }
@@ -471,8 +472,10 @@
   //-----------------------------
   //  Link Focus
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) a.#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+    .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
   }
 

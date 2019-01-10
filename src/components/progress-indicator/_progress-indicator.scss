@@ -259,7 +259,7 @@
   }
 
   //DISABLED STYLING
-  .#{$prefix}--progress-step[disabled] {
+  .#{$prefix}--progress-step--disabled {
     cursor: not-allowed;
 
     svg {

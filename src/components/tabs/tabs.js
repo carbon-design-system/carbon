@@ -65,7 +65,7 @@ class Tab extends ContentSwitcher {
   _handleClick(event) {
     const button = eventMatches(event, this.options.selectorButton);
     const trigger = eventMatches(event, this.options.selectorTrigger);
-    if (button && !button.hasAttribute('disabled')) {
+    if (button && !button.classList.contains(this.options.classButtonDisabled)) {
       super._handleClick(event);
       this._updateMenuState(false);
     }
@@ -176,12 +176,13 @@ class Tab extends ContentSwitcher {
       selectorTrigger: `.${prefix}--tabs-trigger`,
       selectorTriggerText: `.${prefix}--tabs-trigger-text`,
       selectorButton: `.${prefix}--tabs__nav-item`,
-      selectorButtonEnabled: `.${prefix}--tabs__nav-item:not([disabled])`,
+      selectorButtonEnabled: `.${prefix}--tabs__nav-item:not(.${prefix}--tabs__nav-item--disabled)`,
       selectorButtonSelected: `.${prefix}--tabs__nav-item--selected`,
       selectorLink: `.${prefix}--tabs__nav-link`,
       classActive: `${prefix}--tabs__nav-item--selected`,
       classHidden: `${prefix}--tabs__nav--hidden`,
       classOpen: `${prefix}--tabs-trigger--open`,
+      classButtonDisabled: `${prefix}--tabs__nav-item--disabled`,
       eventBeforeSelected: 'tab-beingselected',
       eventAfterSelected: 'tab-selected',
     });
