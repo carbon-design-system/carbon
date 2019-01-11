@@ -668,13 +668,13 @@
   version "0.0.1-alpha.26"
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.26.tgz#d3a30b905a222fbf86466d0611127e87154b1e90"
 
-"@carbon/grid@^0.0.1-alpha.23":
-  version "0.0.1-alpha.23"
-  resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-0.0.1-alpha.23.tgz#a394252ec361d5532236dd72c6f3145a0c66d663"
-  integrity sha512-IpuQhZCkPTHlVLbzCHl715rwkfPuWNpYu2zyb4HRd/2ROYiSYfqcQOsJJXZ6fo0OTPkQGn0C76U1TqSrJZc+Mw==
+"@carbon/grid@^0.0.1-alpha.27":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-0.0.1-alpha.28.tgz#23eac901611f77bda8d277c05ef307bd1f3f3398"
+  integrity sha512-1xAuHikV0XWTBY8yHq1nLXeSOu66aTN7/4HmfGyXIaJJAwWwA0pniyiTwcWk1XO8UOw/kHpZmCuWKICcA/WiVw==
   dependencies:
-    "@carbon/import-once" "0.0.1-alpha.23"
-    "@carbon/layout" "0.0.1-alpha.23"
+    "@carbon/import-once" "0.0.1-alpha.28"
+    "@carbon/layout" "0.0.1-alpha.28"
 
 "@carbon/icon-helpers@0.0.1-alpha.26":
   version "0.0.1-alpha.26"
@@ -691,15 +691,15 @@
   version "0.0.1-alpha.26"
   resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.26.tgz#fc302310c213aaca8f5f94fc997c70927b39bd1d"
 
-"@carbon/import-once@0.0.1-alpha.23":
-  version "0.0.1-alpha.23"
-  resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-0.0.1-alpha.23.tgz#b7417c5cc894923e285f9d736e81889b3a7fa8e3"
-  integrity sha512-XiA6iHUp1VaOgB+aP1PaA9GxtBsxrUxkoOkaSy/vxkrUlADrtSC0S7DqFDHdZcZqmrJ7OEZ9s68d6Yhb0X//Uw==
+"@carbon/import-once@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-0.0.1-alpha.28.tgz#5fa77dff4ecf6fb29327aea70116901ac1ed1c7d"
+  integrity sha512-j22S6H7uopivU5pzkhE/zTIzzkydtxOFvyFAQRb/9Q7LJZwJSpwgxowBiL90tn0ZZK2sMZ9CgvNo3VcoP8CT/A==
 
-"@carbon/layout@0.0.1-alpha.23", "@carbon/layout@^0.0.1-alpha.23":
-  version "0.0.1-alpha.23"
-  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.23.tgz#f8e037d154f6a1922835fb8880f69c1ce7993e75"
-  integrity sha512-Aj6Kg7XxGHb6dsPghcWmL0Kf4WW3Hn4GwVO0iHI+bymBbLoEIjvliJTl/vI8bNoz25J4R2Ut6VKUZ8CR+sV6+A==
+"@carbon/layout@0.0.1-alpha.28", "@carbon/layout@^0.0.1-alpha.27":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.28.tgz#c3fbd98e671de35e82b1e54ee5ae2422427e2290"
+  integrity sha512-dCarCaQhnKXRcXNOYbyNgD72EoNX3+rqSShZ91F1fTYT4UOdarRdU/BYZhSVBpiCBUFLtO4Ucd7duvyp9Bx0pw==
 
 "@carbon/motion@^0.0.1-alpha.16":
   version "0.0.1-alpha.26"

@@ -1,14 +1,17 @@
 /**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
  * Column helpers for @carbon/grid. Heavily inspired by, or derived from,
  * bootstrap:
  * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
  */
-// Use relative file until v10 release
-// @import '@carbon/layout/scss/breakpoint';
 @import '../../layout/scss/breakpoint';
-// Reuse stable variable Sass file, until v10 release
-// @import 'prefix';
-@import '../../../../vars';
+@import 'prefix';
 
 @mixin make-col-ready($gutter: $grid-gutter) {
   // Prevent columns from becoming too narrow when at smaller grid tiers by
