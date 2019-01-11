@@ -10,13 +10,6 @@ describe('Tag', () => {
       expect(tag.hasClass('bx--tag')).toEqual(true);
       expect(tag.hasClass('bx--tag--beta')).toEqual(true);
     });
-
-    it('should provide a default label based on the type', () => {
-      const tag = shallow(<Tag type="beta" />);
-      expect(tag.text()).toEqual('Beta');
-      tag.setProps({ type: 'ibm' });
-      expect(tag.text()).toEqual('IBM');
-    });
   });
 
   it('should allow for a custom label', () => {

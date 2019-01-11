@@ -36,7 +36,7 @@ const Tag = ({ children, className, type, ...other }) => {
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className);
   return (
     <span className={tagClasses} {...other}>
-      {children || TYPES[type]}
+      {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
   );
 };

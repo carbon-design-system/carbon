@@ -18,18 +18,16 @@ storiesOf('Tag', module)
   .add(
     'Default',
     () => (
-      <div>
-        <Tag
-          className="some-class"
-          type={select(
-            'Tag type (type)',
-            types,
-            componentsX ? 'basic' : 'experimental'
-          )}
-          disabled={boolean('Disabled (disabled)', false)}>
-          {text('Content (children)', 'This is not a tag')}
-        </Tag>
-      </div>
+      <Tag
+        className="some-class"
+        type={select(
+          'Tag type (type)',
+          types,
+          componentsX ? 'basic' : 'experimental'
+        )}
+        disabled={boolean('Disabled (disabled)', false)}>
+        {text('Content (children)', 'This is not a tag')}
+      </Tag>
     ),
     {
       info: {
