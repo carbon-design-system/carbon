@@ -12,7 +12,7 @@ import * as g100 from './g100';
 import * as white from './white';
 import * as g90 from './g90';
 
-export { g10, g100, white };
+export { g10, g90, g100, white };
 export const themes = {
   white,
   g10,
