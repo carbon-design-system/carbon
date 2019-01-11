@@ -119,3 +119,39 @@
     </div>
   </div>
 </div>
+
+<div class="{{@root.prefix}}--form-item">
+  <div data-invalid data-numberinput class="{{@root.prefix}}--number {{#if light}}{{@root.prefix}}--number--light{{/if}} {{@root.prefix}}--number--helpertext">
+  <label for="number-input" class="{{@root.prefix}}--label">Number Input label</label>
+    <input id="number-input" type="number" min="0" max="100" value="1">
+    {{#if @root.featureFlags.componentsX}}
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
+    {{/if}}
+    <div class="{{@root.prefix}}--number__controls">
+      <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretUpGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
+      </button>
+      <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+        {{#if @root.featureFlags.componentsX}}
+          {{ carbon-icon 'CaretDownGlyph' }}
+        {{else}}
+          <svg width="10" height="5" viewBox="0 0 10 5">
+            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+          </svg>
+        {{/if}}
+      </button>
+    </div>
+    <div class="{{@root.prefix}}--form-requirement">
+      Invalid number
+    </div>
+    <div class="{{@root.prefix}}--form__helper-text">
+      Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+    </div>
+  </div>
+</div>
