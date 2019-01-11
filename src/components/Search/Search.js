@@ -2,8 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { iconSearch, iconCloseSolid } from 'carbon-icons';
+// TODO: import Search16 from '@carbon/icons-react';
+import Search16 from '@carbon/icons-react/lib/search/16';
+// TODO: import Close16 from '@carbon/icons-react';
+import Close16 from '@carbon/icons-react/lib/close/16';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -134,11 +139,19 @@ export default class Search extends Component {
         className={searchClasses}
         role="search"
         aria-labelledby={`${id}-label`}>
-        <Icon
-          icon={iconSearch}
-          description={labelText}
-          className={`${prefix}--search-magnifier`}
-        />
+        {componentsX ? (
+          <Search16
+            className={`${prefix}--search-magnifier`}
+            aria-label={labelText}
+            role="img"
+          />
+        ) : (
+          <Icon
+            icon={iconSearch}
+            description={labelText}
+            className={`${prefix}--search-magnifier`}
+          />
+        )}
         <label id={`${id}-label`} htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
@@ -158,7 +171,11 @@ export default class Search extends Component {
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <Icon icon={iconCloseSolid} description={closeButtonLabelText} />
+          {componentsX ? (
+            <Close16 aria-label={closeButtonLabelText} role="img" />
+          ) : (
+            <Icon icon={iconCloseSolid} description={closeButtonLabelText} />
+          )}
         </button>
       </div>
     );
