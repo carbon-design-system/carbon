@@ -9,6 +9,9 @@
   "scripts": {
     "build": "node scripts/build.js",
     "build-storybook": "build-storybook",
+    "build-storybook:preview": "yarn build-storybook:preview:stable && yarn build-storybook:preview:experimental",
+    "build-storybook:preview:stable": "cross-env CARBON_USE_EXPERIMENTAL_FEATURES=false build-storybook -o storybook-static-preview/stable",
+    "build-storybook:preview:experimental": "cross-env CARBON_USE_EXPERIMENTAL_FEATURES=true build-storybook -o storybook-static-preview/experimental",
     "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test-ssr",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
@@ -179,6 +182,7 @@
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
     "commitizen": "^2.9.5",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "cz-conventional-changelog-components": "^1.0.0",
     "enzyme": "^3.7.0",

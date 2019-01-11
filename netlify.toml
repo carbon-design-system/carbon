@@ -1,0 +1,7 @@
+[build]
+  publish = "storybook-static-preview"
+  command = "yarn build-storybook:preview"
+
+[build.environment]
+  YARN_FLAGS = "--offline"
+  YARN_VERSION = "1.12.3"
