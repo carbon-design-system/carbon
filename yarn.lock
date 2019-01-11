@@ -605,10 +605,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/colors@0.0.1-alpha.27", "@carbon/colors@^0.0.1-alpha.27":
-  version "0.0.1-alpha.27"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.27.tgz#31d4d0b6d52db369e52e3bcb4d2cb5e1259d4be0"
-  integrity sha512-D098VJvfY79oNICwmHP+AckJAWuE+PxpjB3vyglOhbUfNNyUIHYRjcJ/Ll/I98Fltm5vx4ASdkGbIrcCqLXYng==
+"@carbon/colors@0.0.1-alpha.28", "@carbon/colors@^0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.28.tgz#00198c3a455a32dc5883d9ae01ff5fb275f9fbd8"
+  integrity sha512-Z2TpJ2jPXAX9fiN2kpvF34lIKimaUDIBVzBsLwVsWXGjr1MFr4+W1l9BQ0FfxhNuCASFGPsueK4e/gIfnuW7Lw==
 
 "@carbon/icon-helpers@0.0.1-alpha.26":
   version "0.0.1-alpha.26"
@@ -633,12 +633,12 @@
   version "0.0.1-alpha.26"
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.26.tgz#d838f8b19de88d32ce6ee6b43d4e0a1ed57d13da"
 
-"@carbon/themes@^0.0.1-alpha.27":
-  version "0.0.1-alpha.27"
-  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-0.0.1-alpha.27.tgz#b5e62e437b905621bc91a56e498444a6e8a44a18"
-  integrity sha512-4I/4Eie7LYtEuGgSydziqJ/z7O9m81pNSrp4htwFH5oXkOS/SW9dH1MA6A0PHK/bQXilzdRYSI4bcXUbHY6q5A==
+"@carbon/themes@^0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-0.0.1-alpha.28.tgz#b5d58ea83ba64cf61738e95d9bebfdaea1f9cd65"
+  integrity sha512-1d9/co1nbhGny0mcnV0iqGTuwy1YN6yjKh7cPJODv4pKG2I0wIhLVP5jNyejJFJXDzBmH9jcET3W3SgVM0rJ2g==
   dependencies:
-    "@carbon/colors" "0.0.1-alpha.27"
+    "@carbon/colors" "0.0.1-alpha.28"
 
 "@commitlint/cli@^7.0.0":
   version "7.2.1"

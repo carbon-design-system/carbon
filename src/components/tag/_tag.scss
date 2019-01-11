@@ -83,48 +83,48 @@
     }
 
     &[disabled] {
-      @include tag-theme--x($ibm-colors__gray--10, $ibm-colors__gray--30);
+      @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-30);
     }
   }
 
   .#{$prefix}--tag--basic {
-    @include tag-theme--x($ibm-colors__gray--10, $ibm-colors__gray--100);
+    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-100);
   }
 
   .#{$prefix}--tag--red {
-    @include tag-theme--x($ibm-colors__red--10, $ibm-colors__red--60);
+    @include tag-theme--x($ibm-colors__red-10, $ibm-colors__red-60);
   }
 
   .#{$prefix}--tag--magenta {
-    @include tag-theme--x($ibm-colors__magenta--10, $ibm-colors__magenta--60);
+    @include tag-theme--x($ibm-colors__magenta-10, $ibm-colors__magenta-60);
   }
 
   .#{$prefix}--tag--purple {
-    @include tag-theme--x($ibm-colors__purple--10, $ibm-colors__purple--60);
+    @include tag-theme--x($ibm-colors__purple-10, $ibm-colors__purple-60);
   }
 
   .#{$prefix}--tag--blue {
-    @include tag-theme--x($ibm-colors__blue--10, $ibm-colors__blue--60);
+    @include tag-theme--x($ibm-colors__blue-10, $ibm-colors__blue-60);
   }
 
   .#{$prefix}--tag--cyan {
-    @include tag-theme--x($ibm-colors__cyan--10, $ibm-colors__cyan--60);
+    @include tag-theme--x($ibm-colors__cyan-10, $ibm-colors__cyan-60);
   }
 
   .#{$prefix}--tag--teal {
-    @include tag-theme--x($ibm-colors__teal--10, $ibm-colors__teal--60);
+    @include tag-theme--x($ibm-colors__teal-10, $ibm-colors__teal-60);
   }
 
   .#{$prefix}--tag--green {
-    @include tag-theme--x($ibm-colors__green--10, $ibm-colors__green--60);
+    @include tag-theme--x($ibm-colors__green-10, $ibm-colors__green-60);
   }
 
   .#{$prefix}--tag--cool-gray {
-    @include tag-theme--x($ibm-colors__cool-gray--10, $ibm-colors__cool-gray--100);
+    @include tag-theme--x($ibm-colors__cool-gray-10, $ibm-colors__cool-gray-100);
   }
 
   .#{$prefix}--tag--warm-gray {
-    @include tag-theme--x($ibm-colors__warm-gray--10, $ibm-colors__warm-gray--100);
+    @include tag-theme--x($ibm-colors__warm-gray-10, $ibm-colors__warm-gray-100);
   }
 
   // Skeleton state

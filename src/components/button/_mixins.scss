@@ -90,8 +90,8 @@
   &:disabled {
     cursor: not-allowed;
     color: $ui-04;
-    background: $ibm-colors__gray--30;
-    border-color: $ibm-colors__gray--30;
+    background: $ibm-colors__gray-30;
+    border-color: $ibm-colors__gray-30;
   }
 
   .#{$prefix}--btn__icon {
@@ -153,8 +153,8 @@
   &:disabled:hover,
   &:disabled:focus {
     color: $ui-04;
-    background: $ibm-colors__gray--30;
-    border-color: $ibm-colors__gray--30;
+    background: $ibm-colors__gray-30;
+    border-color: $ibm-colors__gray-30;
     text-decoration: none;
   }
 
