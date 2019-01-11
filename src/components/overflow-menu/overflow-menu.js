@@ -13,23 +13,23 @@ import { componentsX } from '../../globals/js/feature-flags';
  * The CSS property names of the arrow keyed by the floating menu direction.
  * @type {Object<string, string>}
  */
-const triggerButtonPositionProps = {
+const triggerButtonPositionProps = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: 'bottom',
   [DIRECTION_BOTTOM]: 'top',
   [DIRECTION_LEFT]: 'left',
   [DIRECTION_RIGHT]: 'right',
-};
+}))();
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
  * @type {Object<string, number>}
  */
-const triggerButtonPositionFactors = {
+const triggerButtonPositionFactors = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: -2,
   [DIRECTION_BOTTOM]: -1,
   [DIRECTION_LEFT]: -2,
   [DIRECTION_RIGHT]: -1,
-};
+}))();
 
 /**
  * @param {Element} menuBody The menu body with the menu arrow.

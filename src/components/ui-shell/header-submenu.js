@@ -6,7 +6,7 @@ import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-const forEach = Array.prototype.forEach;
+const forEach = /* #__PURE__ */ (() => Array.prototype.forEach)();
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 export default class HeaderSubmenu extends mixin(createComponent, initComponentBySearch, handles) {
