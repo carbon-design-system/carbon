@@ -30,7 +30,7 @@ function iconHelper(name, { hash = {} } = {}) {
   );
 }
 
-module.exports = function register({ handlebars }) {
+module.exports = exports = function register({ handlebars }) {
   return handlebars.registerHelper('carbon-icon', iconHelper);
 };
 exports.iconHelper = iconHelper;
