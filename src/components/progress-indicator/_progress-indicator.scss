@@ -133,6 +133,10 @@
     width: rem(128px);
     transition: $transition--base all $carbon--standard-easing;
     overflow: visible;
+
+    > .#{$prefix}--tooltip__label {
+      display: block;
+    }
   }
 
   .#{$prefix}--progress-line {
@@ -160,7 +164,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     @include font-size('14');
-    &:before {
+
+    &::before {
       content: '';
       display: block;
     }
