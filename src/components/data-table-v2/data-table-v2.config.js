@@ -221,7 +221,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: "Maureen's VM Groups Testing a really long name here",
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -328,7 +328,7 @@ const rowsExpandable = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: "Maureen's VM Groups Testing a really long name here",
     status: 'Active',
   },
   {
@@ -419,6 +419,8 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
+        // fixed: true,
+        horizontal: true,
       },
     },
     {
@@ -438,6 +440,7 @@ module.exports = {
         clearSearchLabel: 'Clear search input',
         addNewLabel: 'Add new',
         hasToolbar: true,
+        truncate: true,
       },
     },
     {
