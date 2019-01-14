@@ -361,8 +361,8 @@
 
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include max-breakpoint(bp--sm--major) {
-      background-color: $hover-field;
-      box-shadow: 0 -1px 0 $hover-field;
+      background-color: $hover-ui;
+      box-shadow: 0 -1px 0 $hover-ui;
     }
   }
 

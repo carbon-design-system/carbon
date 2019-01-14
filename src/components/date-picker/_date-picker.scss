@@ -649,7 +649,7 @@
     transition: background-color $transition--base;
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
   }
 
@@ -743,7 +743,7 @@
     transition: all $transition--base;
 
     &:hover {
-      background: $hover-field;
+      background: $hover-ui;
     }
 
     &:focus {

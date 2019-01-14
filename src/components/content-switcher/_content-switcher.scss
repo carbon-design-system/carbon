@@ -30,7 +30,6 @@
 
     &:focus {
       outline: 1px solid transparent;
-      // box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       background-color: $hover-primary;
       z-index: 2;
       border-color: $hover-primary;
@@ -80,7 +79,6 @@
     }
 
     &:focus {
-      // box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -94,7 +92,6 @@
     }
 
     &:focus {
-      // box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -149,7 +146,7 @@
 
     &:hover,
     &:active {
-      background-color: $hover-field;
+      background-color: $hover-ui;
       color: $text-01;
       z-index: 3;
     }
@@ -201,7 +198,7 @@
 
     // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-colors__gray--30;
+      background-color: $ibm-colors__gray-30;
     }
   }
 

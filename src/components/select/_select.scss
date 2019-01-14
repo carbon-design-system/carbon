@@ -2,6 +2,8 @@
 // Select
 //-----------------------------
 
+@import '../../globals/scss/feature-flags';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
@@ -146,7 +148,11 @@
       box-shadow: none;
 
       &:hover {
-        background-color: $color__white;
+        @if feature-flag-enabled('components-x') {
+          background-color: $ibm-color__white;
+        } @else {
+          background-color: $color__white;
+        }
       }
 
       &:focus {

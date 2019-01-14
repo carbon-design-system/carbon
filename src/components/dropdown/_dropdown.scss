@@ -315,11 +315,11 @@
     margin-top: -1px;
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
 
     &:active {
-      background-color: $active-01;
+      background-color: $active-ui;
     }
 
     &:first-of-type {
@@ -358,7 +358,7 @@
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
-    border-bottom-color: $hover-field;
+    border-bottom-color: $hover-ui;
   }
 
   .#{$prefix}--dropdown--selected {
