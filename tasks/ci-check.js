@@ -44,4 +44,5 @@ main().catch(error => {
   if (error.stderr !== '') {
     console.error(error.stderr);
   }
+  process.exit(1);
 });

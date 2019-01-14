@@ -370,7 +370,6 @@ Object {
   "lineHeight": "125%",
   "max": Object {
     "fontSize": "2rem",
-    "fontWeight": 300,
     "lineHeight": "125%",
   },
 }
@@ -498,7 +497,7 @@ exports[`styles productiveHeading05 should be printable 1`] = `
 Object {
   "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "2rem",
-  "fontWeight": 300,
+  "fontWeight": 400,
   "letterSpacing": 0,
   "lineHeight": "2.5rem",
 }
@@ -507,7 +506,7 @@ Object {
 exports[`styles productiveHeading05 should be printable 2`] = `
 "font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 font-size: 2rem;
-font-weight: 300;
+font-weight: 400;
 line-height: 2.5rem;
 letter-spacing: 0;"
 `;
