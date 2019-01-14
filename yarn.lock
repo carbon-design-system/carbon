@@ -605,32 +605,79 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/colors@^0.0.1-alpha.16":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.26.tgz#d3a30b905a222fbf86466d0611127e87154b1e90"
+"@carbon/colors@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.28.tgz#00198c3a455a32dc5883d9ae01ff5fb275f9fbd8"
+  integrity sha512-Z2TpJ2jPXAX9fiN2kpvF34lIKimaUDIBVzBsLwVsWXGjr1MFr4+W1l9BQ0FfxhNuCASFGPsueK4e/gIfnuW7Lw==
 
-"@carbon/icon-helpers@0.0.1-alpha.26":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.26.tgz#0cb7574cce3e51b90a5cc31170865141366373b2"
-
-"@carbon/icons-handlebars@^0.0.1-alpha.26":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.26.tgz#bda2f565e6641e75aeced6ba46c4a558fda18c42"
+"@carbon/elements@^0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/elements/-/elements-0.0.1-alpha.28.tgz#436623b807bbf7e482bcbe298b7f5077c3e51181"
+  integrity sha512-SFDhsw4VeAl8Gczo/09bLC4/YstKnXrYbybVr2UETGY500ISkdFIPi4NzFoMVTnl7IrYxy4R2Z9DBewGj8zf6w==
   dependencies:
-    "@carbon/icon-helpers" "0.0.1-alpha.26"
-    "@carbon/icons" "0.0.1-alpha.26"
+    "@carbon/colors" "0.0.1-alpha.28"
+    "@carbon/grid" "0.0.1-alpha.28"
+    "@carbon/import-once" "0.0.1-alpha.28"
+    "@carbon/layout" "0.0.1-alpha.28"
+    "@carbon/motion" "0.0.1-alpha.28"
+    "@carbon/themes" "0.0.1-alpha.28"
+    "@carbon/type" "0.0.1-alpha.28"
 
-"@carbon/icons@0.0.1-alpha.26":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.26.tgz#fc302310c213aaca8f5f94fc997c70927b39bd1d"
+"@carbon/grid@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-0.0.1-alpha.28.tgz#23eac901611f77bda8d277c05ef307bd1f3f3398"
+  integrity sha512-1xAuHikV0XWTBY8yHq1nLXeSOu66aTN7/4HmfGyXIaJJAwWwA0pniyiTwcWk1XO8UOw/kHpZmCuWKICcA/WiVw==
+  dependencies:
+    "@carbon/import-once" "0.0.1-alpha.28"
+    "@carbon/layout" "0.0.1-alpha.28"
 
-"@carbon/layout@^0.0.1-alpha.16":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.26.tgz#7951539b98db49464b212c1f74e77924110fd93b"
+"@carbon/icon-helpers@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.28.tgz#06b0e42c44e2fac0c3bb1be26e1c739974929121"
+  integrity sha512-J5PEu/Y/Jm/CvDeTVOjf1+xkuRbHwn7CnYnhR+Fh/oNXLP6+DeXigeES+Gei72rUckGJTVLce7NOg8/VPtDVpg==
 
-"@carbon/motion@^0.0.1-alpha.16":
-  version "0.0.1-alpha.26"
-  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.26.tgz#d838f8b19de88d32ce6ee6b43d4e0a1ed57d13da"
+"@carbon/icons-handlebars@^0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-handlebars/-/icons-handlebars-0.0.1-alpha.28.tgz#b33c7dbb0412b6fe7b5016abd71910a82e7e4c81"
+  integrity sha512-gcpzGGdzK8HCpk7p7M5g4eIrtcLpSd/Gz1HdjO/vxLucZskBElyTon4D5QmKFtH2rqpFLQvLiDdXCzw7a8Yu7Q==
+  dependencies:
+    "@carbon/icon-helpers" "0.0.1-alpha.28"
+    "@carbon/icons" "0.0.1-alpha.28"
+
+"@carbon/icons@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-alpha.28.tgz#ad7ac8dd3db5f2c3083b6666ad6d7d46847c5593"
+  integrity sha512-PsFzXlHKrTRL3SqVMuJVt/Qjq7W4OAPmbd+mqYuGeUeLQhYbC1P5Y/iWAexLqVFyU2rIXYPQ3RtrmL4xL/bxdw==
+
+"@carbon/import-once@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-0.0.1-alpha.28.tgz#5fa77dff4ecf6fb29327aea70116901ac1ed1c7d"
+  integrity sha512-j22S6H7uopivU5pzkhE/zTIzzkydtxOFvyFAQRb/9Q7LJZwJSpwgxowBiL90tn0ZZK2sMZ9CgvNo3VcoP8CT/A==
+
+"@carbon/layout@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.28.tgz#c3fbd98e671de35e82b1e54ee5ae2422427e2290"
+  integrity sha512-dCarCaQhnKXRcXNOYbyNgD72EoNX3+rqSShZ91F1fTYT4UOdarRdU/BYZhSVBpiCBUFLtO4Ucd7duvyp9Bx0pw==
+
+"@carbon/motion@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-0.0.1-alpha.28.tgz#8e7a5f175370e64a53d6339d8aab7aefc667e724"
+  integrity sha512-4JkosGDYHe0/D79+5nNqQFI/WgZ9mxjIi9wszCtWAWpBU2wRpOzmI1kUZlRpBtnPIbPrWwfIT8VkzBAEUA4tRQ==
+
+"@carbon/themes@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-0.0.1-alpha.28.tgz#b5d58ea83ba64cf61738e95d9bebfdaea1f9cd65"
+  integrity sha512-1d9/co1nbhGny0mcnV0iqGTuwy1YN6yjKh7cPJODv4pKG2I0wIhLVP5jNyejJFJXDzBmH9jcET3W3SgVM0rJ2g==
+  dependencies:
+    "@carbon/colors" "0.0.1-alpha.28"
+
+"@carbon/type@0.0.1-alpha.28":
+  version "0.0.1-alpha.28"
+  resolved "https://registry.yarnpkg.com/@carbon/type/-/type-0.0.1-alpha.28.tgz#fb538243f006dac14f9f78cd2f6dfe5baba885e5"
+  integrity sha512-JUgfjVkdSD2NozpA9HiEo8Fckuxlty8tE1qytq/f80Q84lSV4uctwy3INK7G2CjjXFXV2YslM0Q5AjwGjzlfNg==
+  dependencies:
+    "@carbon/import-once" "0.0.1-alpha.28"
+    "@carbon/layout" "0.0.1-alpha.28"
 
 "@commitlint/cli@^7.0.0":
   version "7.2.1"
