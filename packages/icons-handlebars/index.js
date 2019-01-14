@@ -15,7 +15,7 @@ const {
 } = require('@carbon/icon-helpers');
 const { SafeString } = require('handlebars');
 
-function iconHelper(name, { hash = {} } = {}) {
+function iconHelper(name, attributes = {}, options = {}) {
   const icon = CarbonIcons[name];
   if (!icon) {
     throw new Error(`Unable to find the icon: \`${name}\``);
@@ -23,7 +23,7 @@ function iconHelper(name, { hash = {} } = {}) {
   const content = icon.content.map(toString);
   const attrs = {
     ...icon.attrs,
-    ...hash,
+    ...Object.assign({}, attributes.hash || attributes, options.hash),
   };
   return new SafeString(
     `<svg ${formatAttributes(getAttributes(attrs))}>${content.join('')}</svg>`
