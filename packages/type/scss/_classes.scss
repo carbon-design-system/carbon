@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@import '@carbon/import-once/scss/import-once';
 @import 'prefix';
 @import 'styles';
 @import 'font-family';
 
-@include exports('@carbon/type/scss/_classes.scss') {
+@mixin type-classes {
   // Font families
   @each $name, $value in $font-families {
     .#{$prefix}--type-#{$name} {

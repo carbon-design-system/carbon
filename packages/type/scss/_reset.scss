@@ -6,7 +6,6 @@
  */
 
 @import '@carbon/layout/scss/convert';
-@import '@carbon/import-once/scss/import-once';
 @import 'font-family';
 
 /// Include a type reset that individuals can use in their projects for
@@ -23,11 +22,5 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-@include exports('type-reset') {
-  @if global-variable-exists('type--reset') == false or $type--reset == true {
-    @include type-reset;
   }
 }
