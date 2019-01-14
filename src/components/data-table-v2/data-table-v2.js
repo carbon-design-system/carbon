@@ -1,3 +1,4 @@
+// import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -199,25 +200,31 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     }
   };
 
-  _expandableRowsInit = expandableRows => {
-    expandableRows.forEach(item => {
-      item.classList.remove(this.options.classExpandableRowHidden);
-      this.tableBody.removeChild(item);
-    });
-  };
+  // _expandableRowsInit = expandableRows => {
+  // expandableRows.forEach(item => {
+  // if(!componentsX) {
+  //   item.classList.remove(this.options.classExpandableRowHidden);
+  //   this.tableBody.removeChild(item);
+  // }
+  // });
+  // };
 
   _rowExpandToggle = detail => {
     const element = detail.element;
     const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
 
-    const index = this.expandCells.indexOf(element);
+    // const index = this.expandCells.indexOf(element);
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
-      this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
+      // if(!componentsX) {
+      //   this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
+      // }
     } else {
       parent.classList.remove(this.options.classExpandableRow);
-      this.tableBody.removeChild(parent.nextElementSibling);
+      // if(!componentsX) {
+      //   this.tableBody.removeChild(parent.nextElementSibling);
+      // }
       element.dataset.previousValue = 'expanded';
     }
   };

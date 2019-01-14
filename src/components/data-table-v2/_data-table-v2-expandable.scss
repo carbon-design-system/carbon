@@ -4,12 +4,21 @@
 @import '../../globals/scss/theme';
 
 @mixin data-table-v2-expandable {
-  tr.#{$prefix}--expandable-row-v2 {
-    // hide on init
-    &.#{$prefix}--expandable-row--hidden-v2 {
+  tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2) {
+    + tr[data-child-row] {
       display: none;
+      td {
+        border-top: 0;
+        padding-bottom: $spacing-xs;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: all $transition--expansion $carbon--standard-easing;
+      }
     }
+  }
 
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 {
     > td:first-of-type {
       position: relative;
 
@@ -25,19 +34,34 @@
     }
 
     + tr[data-child-row] {
+      display: table-row;
       td {
         border-top: 0;
         padding-bottom: $spacing-xs;
+        max-height: 100%;
+        opacity: 1;
+        transition: all $transition--expansion $carbon--standard-easing;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 2px;
+          background-color: $brand-01;
+        }
       }
     }
 
     &:hover {
       > td {
         background-color: $hover-row;
+        transition: all 200ms $carbon--standard-easing;
       }
 
       > td:first-of-type {
-        border-left: 1px solid transparent;
+        border-left: 1px solid $brand-01;
       }
 
       > td:last-of-type {
@@ -53,19 +77,30 @@
           background-color: $hover-row;
           border-bottom: 1px solid $brand-01;
           border-right: 1px solid $brand-01;
+          border-left: 1px solid $brand-01;
+          transition: all 200ms $carbon--standard-easing;
         }
       }
     }
   }
 
   tr.#{$prefix}--expandable-row--hover-v2 {
+    > td:first-of-type {
+      border-left: 1px solid $brand-01;
+    }
+
     > td {
       background-color: $hover-row;
       border-top: 1px solid $brand-01;
+      transition: all 200ms $carbon--standard-easing;
     }
 
     > td:last-of-type {
       border-right: 1px solid $brand-01;
+    }
+
+    > td {
+      transition: all 200ms $carbon--standard-easing;
     }
   }
 
@@ -79,7 +114,7 @@
   }
 
   .#{$prefix}--table-expand-v2__button {
-    @include button-reset(false);
+    @include button-reset('false');
 
     &:focus {
       outline: 1px solid transparent;
@@ -102,26 +137,45 @@
 }
 
 @mixin data-table-v2-expandable--x {
-  tr.#{$prefix}--expandable-row-v2 {
-    // hide on init
-    &.#{$prefix}--expandable-row--hidden-v2 {
-      display: none;
-    }
+  //child row > td general styles
+  .#{$prefix}--expandable-row--hidden-v2 td {
+    border-top: 0;
+    width: auto;
+    padding: $spacing-sm;
+    padding-left: $spacing-3xl;
+  }
 
+  //parent row collapsed
+  tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2) {
+    //child row hidden / td hidden
+    + tr[data-child-row] {
+      visibility: collapse;
+      td {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: all $transition--expansion $carbon--standard-easing;
+      }
+    }
+  }
+
+  //parent row expanded
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 {
     > td:first-of-type {
-      position: relative;
       border-bottom: 1px solid transparent;
     }
 
+    //child row visible / td visible
     + tr[data-child-row] {
+      visibility: visible;
       td {
-        border-top: 0;
-        width: auto;
-        padding-bottom: $spacing-xs;
-        padding-left: $spacing-3xl;
+        max-height: 100%;
+        opacity: 1;
+        transition: all $transition--expansion $carbon--standard-easing;
       }
     }
 
+    //when hovering on parent row - on expansion
     &:hover {
       > td {
         background-color: $hover-field;
@@ -144,6 +198,7 @@
     }
   }
 
+  //class added to parent row when hovering on expanded child row
   tr.#{$prefix}--expandable-row--hover-v2 {
     background-color: $hover-field;
 
@@ -167,7 +222,7 @@
   }
 
   .#{$prefix}--table-expand-v2__button {
-    @include button-reset(false);
+    @include button-reset('false');
 
     &:focus {
       outline: 1px solid transparent;
