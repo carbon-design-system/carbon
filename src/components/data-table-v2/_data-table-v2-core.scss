@@ -74,6 +74,7 @@
 
       &:last-of-type {
         padding-right: $spacing-lg;
+        border-right: 1px solid $ui-03;
       }
     }
 
@@ -129,6 +130,9 @@
       &:first-of-type {
         border-left-color: transparent;
       }
+      &:last-of-type {
+        border-right-color: transparent;
+      }
     }
   }
 
@@ -161,17 +165,70 @@
 }
 
 @mixin data-table-v2-core--x {
+  /*
+TREE OVERVIEW OF COMPONENT
+
+|- Main dt container
+  |- Title
+  |- Secondary title text
+  |- Toolbar
+  |- Inner dt container (optional - allows for overflow-x scroll only on dt and not toolbar)
+    |- Table
+      |- thead
+      |- tbody
+|- Pagination (optional)
+
+
+DATA TABLE VARIATIONS
+    - zebra
+    - selected
+    - no border
+    - fixed header
+    - text truncation
+    - size variations
+*/
+
+  //================================================
+  //MAIN CONTAINER
+  //================================================
   .#{$prefix}--data-table-v2-container {
-    width: 100%;
     min-width: rem(500px);
     padding-top: $spacing-3xs; // allow space for focus styles
   }
 
+  //================================================
+  //TABLE HEADER
+  //================================================
+  .#{$prefix}--data-table-v2-header {
+    background: $ui-01;
+    height: rem(88px);
+    color: $text-01;
+    @include font-size('20');
+    font-weight: 400;
+    padding: 22px 0 0 $spacing-md;
+    position: relative;
+    top: rem(21px);
+  }
+
+  .#{$prefix}--data-table-v2-optional {
+    position: relative;
+    left: rem(17px);
+    top: rem(-20px);
+    @include font-size('14');
+    color: $text-02;
+  }
+
+  //================================================
+  //INNER CONTAINER
+  //================================================
   .#{$prefix}--data-table-v2_inner-container {
     min-width: rem(500px);
     overflow-x: scroll;
   }
 
+  //================================================
+  //DATA TABLE - DEFAULT STYLES
+  //================================================
   .#{$prefix}--data-table-v2 {
     border-collapse: collapse;
     border-spacing: 0;
@@ -234,40 +291,19 @@
   }
 
   .#{$prefix}--table-header-label {
-    @include max-breakpoint('bp--sm--major') {
-      max-width: rem(100px);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    @include max-breakpoint('bp--xs--major') {
-      max-width: rem(70px);
-    }
+    display: block;
+    padding: rem(17px) 0;
   }
 
-  //fluid up until tablet size, then it truncates text
   .#{$prefix}--table-cell-content {
     display: block;
-
-    @include max-breakpoint('bp--sm--major') {
-      //768px screen width
-      max-width: rem(100px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    @include max-breakpoint('bp--xs--major') {
-      //500px screen width
-      max-width: rem(70px);
-    }
+    padding: rem(17px) 0;
   }
 
   //width for checkbox columns
   .#{$prefix}--table-column-checkbox {
     width: rem(64px);
-    min-width: (64px);
+    min-width: rem(64px);
   }
 
   //width for overflow menu columns
@@ -293,26 +329,23 @@
     }
   }
 
-  // Options
-  .#{$prefix}--data-table-v2-header {
-    background: $ui-01;
-    height: rem(88px);
-    color: $text-01;
-    @include font-size('20');
-    font-weight: 400;
-    padding: 22px 0 0 $spacing-md;
-    position: relative;
-    top: rem(21px);
+  //================================================
+  //FIXED TOOLBAR + HORIZONTAL SCROLLING TABLE
+  //================================================
+  .#{$prefix}--data-table-v2--overflow-scroll {
+    width: 100%;
   }
 
-  .#{$prefix}--data-table-v2-optional {
-    position: relative;
-    left: rem(17px);
-    top: rem(-20px);
-    @include font-size('14');
-    color: $text-02;
+  .#{$prefix}--data-table-v2--fixed-toolbar {
+    th,
+    td {
+      min-width: rem(90px);
+    }
   }
 
+  //================================================
+  //ZEBRA
+  //================================================
   .#{$prefix}--data-table-v2--zebra {
     tbody tr:nth-child(even) {
       background-color: $data-table-zebra-color;
@@ -324,39 +357,9 @@
     }
   }
 
-  .#{$prefix}--data-table-v2--no-border {
-    &,
-    thead,
-    tbody,
-    tr,
-    th,
-    td {
-      border-bottom: 1px solid transparent;
-    }
-  }
-
-  .#{$prefix}--data-table-v2--compact {
-    tbody tr {
-      height: rem(24px);
-    }
-  }
-
-  .#{$prefix}--data-table-v2--short {
-    tbody tr {
-      height: rem(32px);
-    }
-  }
-
-  .#{$prefix}--data-table-v2--tall {
-    tbody tr {
-      height: rem(64px);
-    }
-  }
-
-  .#{$prefix}--data-table-v2--static {
-    width: auto;
-  }
-
+  //================================================
+  //SELECTED
+  //================================================
   .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
     background-color: $ui-03;
@@ -369,7 +372,7 @@
       & > td {
         border-bottom: 1px solid $active-01;
         box-shadow: 0 -0.75px $active-01;
-        //adds top box-shadow to first row td bc border-top wasnt showing up for zebra
+        //adds top box-shadow to first row td's bc border-top wasnt showing up for zebra
       }
     }
 
@@ -391,6 +394,158 @@
         box-shadow: none;
       }
     }
+  }
+
+  //================================================
+  //NO BORDER
+  //================================================
+  .#{$prefix}--data-table-v2--no-border {
+    &,
+    tbody,
+    tr,
+    th,
+    td {
+      border-bottom: 1px solid transparent;
+    }
+  }
+
+  //================================================
+  //TEXT TRUNCATION
+  //================================================
+
+  .#{$prefix}--data-table-v2--overflow-truncate {
+    .#{$prefix}--table-header-label {
+      max-width: calc(100% - 10px);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      @include max-breakpoint('bp--sm--major') {
+        max-width: rem(100px);
+      }
+
+      @include max-breakpoint('bp--xs--major') {
+        max-width: rem(70px);
+      }
+    }
+
+    .#{$prefix}--table-cell-content {
+      display: block;
+      max-width: calc(100% - 10px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @include max-breakpoint('bp--sm--major') {
+        //768px screen width
+        max-width: rem(100px);
+      }
+
+      @include max-breakpoint('bp--xs--major') {
+        //500px screen width
+        max-width: rem(70px);
+      }
+    }
+
+    //width for actionable columns (icons)
+    .#{$prefix}--table-column-checkbox {
+      width: rem(64px);
+      min-width: (64px);
+    }
+
+    .#{$prefix}--table-column-menu {
+      width: rem(56px);
+      min-width: rem(56px);
+    }
+  }
+
+  //================================================
+  //FIXED HEADER
+  //================================================
+  .#{$prefix}--data-table-v2--fixed-header {
+    & thead {
+      display: block;
+      width: 100%;
+    }
+
+    & thead tr {
+      background: $ui-03;
+    }
+
+    th {
+      height: rem(48px);
+    }
+
+    & tbody {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      max-height: rem(200px);
+    }
+
+    & tbody tr:last-of-type {
+      border-bottom: 0;
+    }
+
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2) {
+      width: 100%;
+    }
+  }
+
+  //================================================
+  //SIZE VARIATIONS
+  //================================================
+  .#{$prefix}--data-table-v2--compact {
+    tbody tr {
+      height: rem(24px);
+    }
+
+    .#{$prefix}--table-header-label {
+      display: block;
+      padding: rem(5px) 0;
+    }
+
+    .#{$prefix}--table-cell-content {
+      display: block;
+      padding: rem(5px) 0;
+    }
+  }
+
+  .#{$prefix}--data-table-v2--short {
+    tbody tr {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--table-header-label {
+      display: block;
+      padding: rem(9px) 0;
+    }
+
+    .#{$prefix}--table-cell-content {
+      display: block;
+      padding: rem(9px) 0;
+    }
+  }
+
+  .#{$prefix}--data-table-v2--tall {
+    tbody tr {
+      height: rem(25px);
+    }
+
+    .#{$prefix}--table-header-label {
+      display: block;
+      padding: rem(25px) 0;
+    }
+
+    .#{$prefix}--table-cell-content {
+      display: block;
+      padding: rem(17px) 0;
+    }
+  }
+
+  .#{$prefix}--data-table-v2--static {
+    width: auto;
   }
 }
 
