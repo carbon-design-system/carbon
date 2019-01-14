@@ -74,6 +74,13 @@ const tokens = new Set([
   'disabled01',
   'disabled02',
   'disabled03',
+
+  // Deprecated
+  'brand01',
+  'brand02',
+  'brand03',
+  'active01',
+  'hoverField',
 ]);
 
 describe('themes', () => {

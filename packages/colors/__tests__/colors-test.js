@@ -9,12 +9,8 @@
 
 'use strict';
 
-import { colors, tokens } from '../src';
+import { colors } from '../src';
 
 test('colors', () => {
   expect(colors).toMatchSnapshot();
-});
-
-test('tokens', () => {
-  expect(tokens).toMatchSnapshot();
 });

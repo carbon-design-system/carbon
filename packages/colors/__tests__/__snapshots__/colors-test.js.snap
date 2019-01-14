@@ -2,6 +2,9 @@
 
 exports[`colors 1`] = `
 Object {
+  "black": Object {
+    "100": "#000000",
+  },
   "blue": Object {
     "10": "#edf4ff",
     "100": "#051243",
@@ -74,6 +77,9 @@ Object {
     "80": "#760a3a",
     "90": "#57002b",
   },
+  "orange": Object {
+    "40": "#fc7b1e",
+  },
   "purple": Object {
     "10": "#f7f1ff",
     "100": "#1e1033",
@@ -122,51 +128,11 @@ Object {
     "80": "#403c3c",
     "90": "#2b2828",
   },
-}
-`;
-
-exports[`tokens 1`] = `
-Object {
-  "activeDanger": "#750e13",
-  "activePrimary": "#0530ad",
-  "activeSecondary": "#6f6f6f",
-  "activeUI": "#bebebe",
-  "brand01": "#0062ff",
-  "brand02": "#0062ff",
-  "brand03": "#0062ff",
-  "disabled01": "#f3f3f3",
-  "disabled02": "#bebebe",
-  "disabled03": "#8c8c8c",
-  "field01": "#f3f3f3",
-  "field02": "#ffffff",
-  "focus": "#0062ff",
-  "hoverDanger": "#ba1b23",
-  "hoverPrimary": "#0353e9",
-  "hoverPrimaryText": "#054ada",
-  "hoverRow": "#e5e5e5",
-  "hoverSecondary": "#4c4c4c",
-  "hoverUI": "#e5e5e5",
-  "icon01": "#171717",
-  "icon02": "#565656",
-  "interactive01": "#0062ff",
-  "interactive02": "#0062ff",
-  "inverse01": "#ffffff",
-  "inverse02": "#3d3d3d",
-  "overlay01": "rgba(255, 255, 255, 0.6)",
-  "overlay02": "rgba(243, 243, 243, 0.7)",
-  "selectedUI": "#dcdcdc",
-  "support01": "#da1e28",
-  "support02": "#198038",
-  "support03": "#fdd13a",
-  "support04": "#054ada",
-  "text01": "#171717",
-  "text02": "#565656",
-  "text03": "#8c8c8c",
-  "ui01": "#f3f3f3",
-  "ui02": "#ffffff",
-  "ui03": "#dcdcdc",
-  "ui04": "#8c8c8c",
-  "ui05": "#171717",
-  "visitedLink": "#8a3ffc",
+  "white": Object {
+    "0": "#ffffff",
+  },
+  "yellow": Object {
+    "20": "#fdd13a",
+  },
 }
 `;

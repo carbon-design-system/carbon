@@ -104,3 +104,5 @@ export const disabled03 = gray50;
 export const brand01 = interactive01;
 export const brand02 = interactive02;
 export const brand03 = interactive03;
+export const active01 = activeUI;
+export const hoverField = hoverUI;
