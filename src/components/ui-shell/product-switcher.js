@@ -30,7 +30,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * A magic string indicting that no product switcher should be selected.
    * @type {string}
    */
-  static SELECT_NONE = '__carbon-product-switcher-launcher-NONE';
+  static SELECT_NONE /* #__PURE_CLASS_PROPERTY__ */ = '__carbon-product-switcher-launcher-NONE';
   /**
    * The list of the IDs of the trigger buttons that have been used.
    * @type {Set}
@@ -134,7 +134,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * @member ProductSwitcher.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
