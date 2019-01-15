@@ -470,7 +470,6 @@ module.exports = {
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
         fixed: true,
-        horizontal: true,
       },
     },
     {
