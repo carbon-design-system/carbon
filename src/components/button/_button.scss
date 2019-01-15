@@ -189,7 +189,7 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($brand-01, transparent, $inverse-01, #0353e9, $ui-01, $brand-02);
+    @include button-theme--x($interaction-01, transparent, $inverse-01, #0353e9, $ui-01, $interaction-02);
   }
 
   .#{$prefix}--btn--secondary {
@@ -209,7 +209,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $brand-01, $brand-01, #0353e9, $brand-01, $brand-02);
+    @include button-theme--x(transparent, $interaction-01, $interaction-01, #0353e9, $interaction-01, $interaction-02);
     position: relative;
 
     &:hover {
@@ -233,7 +233,14 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $brand-01, $ibm-colors__gray-10, $brand-01, $ibm-colors__blue-70);
+    @include button-theme--x(
+      transparent,
+      transparent,
+      $interaction-01,
+      $ibm-colors__gray-10,
+      $interaction-01,
+      $ibm-colors__blue-70
+    );
 
     &:hover,
     &:active {

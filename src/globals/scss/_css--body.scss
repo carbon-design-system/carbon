@@ -9,7 +9,11 @@
 @mixin css-body {
   body {
     @include reset;
-    @include font-family;
+    @if feature-flag-enabled('components-x') {
+      @include font-family('sans');
+    } @else {
+      @include font-family;
+    }
     color: $text-01;
     background-color: $ui-02;
     line-height: 1;

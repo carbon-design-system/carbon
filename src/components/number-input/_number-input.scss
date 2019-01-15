@@ -282,7 +282,7 @@
 
     &:focus {
       @include focus-outline;
-      fill: $brand-01;
+      fill: $interaction-01;
     }
 
     &:hover {

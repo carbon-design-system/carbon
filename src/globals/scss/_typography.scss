@@ -1,93 +1,114 @@
-@import 'vars';
+@import './vars';
+@import './feature-flags';
+@import './functions';
+@import './helper-mixins';
+@import './vendor/@carbon/type/scss/font-family';
 
-$font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
-$font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
-$font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
-$font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
+// font-family-* -> font-families map
+// base-font-size -> base-font-size in @carbon/layout/scss/convert
+// rem, em, etc -> @carbon/layout/scss/convert
+// typescale -> ???
 
-$base-font-size: 16px !default; // Default, Use with em() and rem() functions
+@if feature-flag-enabled('components-x') == false {
+  $font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
+  $font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
+  $font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
+  $font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
 
-$typescale-map: (
-  'giga': 4.75rem,
-  'mega': 3.375rem,
-  'alpha': 2.25rem,
-  'beta': 1.75rem,
-  'gamma': 1.25rem,
-  'delta': 1.125rem,
-  'epsilon': 1rem,
-  'zeta': 0.875rem,
-  'omega': 0.75rem,
-  'caption': 0.75rem,
-  'legal': 0.6875rem,
-  'p': 1rem,
-);
+  $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
-@mixin typescale($size) {
-  @if map-has-key($typescale-map, $size) {
-    font-size: map-get($typescale-map, $size);
-  } @else {
-    @warn 'This is not a step of the Carbon Type Scale!';
+  $typescale-map: (
+    'giga': 4.75rem,
+    'mega': 3.375rem,
+    'alpha': 2.25rem,
+    'beta': 1.75rem,
+    'gamma': 1.25rem,
+    'delta': 1.125rem,
+    'epsilon': 1rem,
+    'zeta': 0.875rem,
+    'omega': 0.75rem,
+    'caption': 0.75rem,
+    'legal': 0.6875rem,
+    'p': 1rem,
+  );
+
+  @mixin typescale($size) {
+    @if map-has-key($typescale-map, $size) {
+      font-size: map-get($typescale-map, $size);
+    } @else {
+      @warn 'This is not a step of the Carbon Type Scale!';
+    }
   }
-}
 
-@function rem($px) {
-  @return ($px / $base-font-size) * 1rem;
-}
-
-@function em($px) {
-  @return ($px / $base-font-size) * 1em;
-}
-
-@mixin helvetica {
-  font-family: $font-family-helvetica;
-}
-
-@mixin font-family {
-  @if global-variable-exists('css--plex') and $css--plex == true {
-    font-family: $font-family-sans-serif;
-  } @else {
-    font-family: $font-family-helvetica;
+  @function rem($px) {
+    @return ($px / $base-font-size) * 1rem;
   }
-}
 
-// There are two line heights to choose from. One for headings and one for body text
-@mixin line-height($el) {
-  @if $el == 'heading' {
-    line-height: 1.25;
-  } @else if $el == 'body' {
-    line-height: 1.5;
-  } @else {
-    @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
+  @function em($px) {
+    @return ($px / $base-font-size) * 1em;
   }
-}
 
-// Only applied to bold weight text
-@mixin font-smoothing {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  @mixin helvetica {
+    @include deprecate(
+      'The helvetica mixin in `carbon-components` has been deprecated. ' +
+        'It will be removed in the next major release of the package.'
+    ) {
+      font-family: $font-family-helvetica;
+    }
+  }
 
-@mixin letter-spacing {
-  letter-spacing: 0;
-}
+  @mixin font-family {
+    @if global-variable-exists('css--plex') and $css--plex == true {
+      font-family: $font-family-sans-serif;
+    } @else {
+      font-family: $font-family-helvetica;
+    }
+  }
 
-$font-size-map: (
-  '76': 4.75rem,
-  '54': 3.375rem,
-  '36': 2.25rem,
-  '28': 1.75rem,
-  '20': 1.25rem,
-  '18': 1.125rem,
-  '16': 1rem,
-  '14': 0.875rem,
-  '12': 0.75rem,
-  '11': 0.6875rem,
-);
+  // There are two line heights to choose from. One for headings and one for body text
+  @mixin line-height($el) {
+    @include deprecate(
+      'The line-height mixin in `carbon-components` has been deprecated. ' +
+        'It will be removed in the next major release of the package.'
+    ) {
+      @if $el == 'heading' {
+        line-height: 1.25;
+      } @else if $el == 'body' {
+        line-height: 1.5;
+      } @else {
+        @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
+      }
+    }
+  }
 
-@mixin font-size($size) {
-  @if map-has-key($font-size-map, $size) {
-    font-size: map-get($font-size-map, $size);
-  } @else {
-    @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
+  // Only applied to bold weight text
+  @mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @mixin letter-spacing {
+    letter-spacing: 0;
+  }
+
+  $font-size-map: (
+    '76': 4.75rem,
+    '54': 3.375rem,
+    '36': 2.25rem,
+    '28': 1.75rem,
+    '20': 1.25rem,
+    '18': 1.125rem,
+    '16': 1rem,
+    '14': 0.875rem,
+    '12': 0.75rem,
+    '11': 0.6875rem,
+  );
+
+  @mixin font-size($size) {
+    @if map-has-key($font-size-map, $size) {
+      font-size: map-get($font-size-map, $size);
+    } @else {
+      @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
+    }
   }
 }
