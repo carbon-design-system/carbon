@@ -390,6 +390,18 @@
     fill: $shell-side-nav-icon-01;
   }
 
+  .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
+    display: block;
+  }
+
   //----------------------------------------------------------------------------
   // Variants - Fixed
   //----------------------------------------------------------------------------

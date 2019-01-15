@@ -11,6 +11,8 @@ import removedComponent from '../removed-component';
 
 let didWarnAboutDeprecation;
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Left Navigation.
@@ -124,8 +126,8 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
       `${this.options.selectorLeftNavList}:not(${this.options.selectorLeftNavMainNavHidden})`
     );
     const newLeftNavList = this.element.querySelector(`[data-left-nav-list=${selectedNavTitle}]`);
-    const currentLeftNavItems = [...currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)].reverse();
-    const newLeftNavItems = [...newLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)];
+    const currentLeftNavItems = toArray(currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)).reverse();
+    const newLeftNavItems = toArray(newLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem));
 
     const fadeOutTime = 300;
     let counter = 0;
@@ -227,7 +229,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * Adds event listeners to list items
    */
   hookListItemsEvents() {
-    const leftNavList = [...this.element.querySelectorAll(this.options.selectorLeftNavList)];
+    const leftNavList = toArray(this.element.querySelectorAll(this.options.selectorLeftNavList));
     leftNavList.forEach(list => {
       this.manage(
         on(list, 'click', evt => {
@@ -287,7 +289,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
         })
       );
     });
-    const flyouts = [...this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
+    const flyouts = toArray(this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout));
     flyouts.forEach(flyout => {
       this.manage(
         on(flyout, 'mouseenter', () => {
@@ -314,7 +316,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * Hides all flyout menus.
    */
   hideAllFlyoutMenus() {
-    const flyoutMenus = [...this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
+    const flyoutMenus = toArray(this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu));
     flyoutMenus.forEach(menu => {
       menu.setAttribute('aria-hidden', 'true');
       menu.classList.remove(this.options.classFlyoutDisplayed);
@@ -326,7 +328,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * @param {Object} item The active list item.
    */
   addActiveListItem(item) {
-    [...this.element.querySelectorAll(this.options.selectorLeftNavAllListItems)].forEach(currentItem => {
+    toArray(this.element.querySelectorAll(this.options.selectorLeftNavAllListItems)).forEach(currentItem => {
       if (!(item === currentItem)) {
         if (!currentItem.contains(item)) {
           currentItem.classList.remove(this.options.classActiveLeftNavListItem);
@@ -335,7 +337,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
         }
       }
     });
-    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
+    toArray(this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)).forEach(currentItem => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
@@ -385,7 +387,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
     this.hideAllFlyoutMenus();
     listItem.classList.toggle(this.options.classExpandedLeftNavListItem, !isOpen);
-    const listItems = [...listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+    const listItems = toArray(listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem));
     listItems.forEach(item => {
       if (isOpen) {
         listItem.querySelector(this.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'true');
@@ -546,7 +548,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * @member LeftNav.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default (!breakingChangesX ? LeftNav : removedComponent('LeftNav'));

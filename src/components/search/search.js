@@ -7,6 +7,8 @@ import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class Search extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Search with Options.
@@ -64,7 +66,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @param {HTMLElement} element The element contining the layout toggle.
    */
   toggleLayout(element) {
-    [...element.querySelectorAll(this.options.selectorSearchView)].forEach(item => {
+    toArray(element.querySelectorAll(this.options.selectorSearchView)).forEach(item => {
       item.classList.toggle(this.options.classLayoutHidden);
     });
   }
@@ -116,7 +118,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @member Search.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default Search;

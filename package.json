@@ -39,8 +39,16 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-umd": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
     "@carbon/colors": "^0.0.1-alpha.16",
-    "@carbon/icons-handlebars": "^0.0.1-alpha.16",
+    "@carbon/icons-handlebars": "^0.0.1-alpha.26",
     "@carbon/layout": "^0.0.1-alpha.16",
     "@carbon/motion": "^0.0.1-alpha.16",
     "@commitlint/cli": "^7.0.0",
@@ -48,20 +56,13 @@
     "@frctl/fractal": "^1.1.0",
     "adaro": "1.0.4",
     "autoprefixer": "^8.2.0",
-    "babel-core": "^6.22.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^7.0.0",
-    "babel-loader": "^7.1.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.0",
     "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^3.0.0",
     "babel-plugin-rewire": "^1.1.0",
-    "babel-plugin-transform-class-properties": "^6.22.0",
-    "babel-plugin-transform-es2015-modules-umd": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-env": "^1.0.0",
-    "babel-preset-react": "^6.24.0",
-    "babel-runtime": "^6.22.0",
     "bluebird": "~3.1.1",
     "browser-sync": "^2.26.3",
     "carbon-addons-cloud": "^1.8.0",
@@ -70,6 +71,7 @@
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
     "core-js": "^2.4.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.0",
     "custom-event": "^1.0.0",
     "del": "~2.0.2",
@@ -91,7 +93,7 @@
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
     "gulp-axe-webdriver": "^1.4.0",
-    "gulp-babel": "^6.1.2",
+    "gulp-babel": "^8.0.0",
     "gulp-header": "^2.0.0",
     "gulp-jsdoc3": "^0.2.1",
     "gulp-nodemon": "^2.4.2",
@@ -113,7 +115,7 @@
     "karma-firefox-launcher": "^1.0.0",
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^1.1.0",
+    "karma-jasmine": "^2.0.1",
     "karma-safari-launcher": "^1.0.0",
     "karma-sourcemap-loader": "~0.3.7",
     "karma-spec-reporter": "0.0.32",
@@ -138,13 +140,14 @@
     "react-copy-to-clipboard": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.0",
-    "rollup": "^0.49.0",
-    "rollup-plugin-babel": "^3.0.0",
-    "rollup-plugin-commonjs": "^8.2.0",
+    "rollup": "^0.57.0",
+    "rollup-plugin-babel": "^4.0.0",
+    "rollup-plugin-commonjs": "^8.0.0",
     "rollup-plugin-filesize": "^1.2.1",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^2.0.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "rollup-plugin-virtual": "^1.0.0",
     "sass-loader": "^6.0.0",
     "scss-to-json": "1.1.0",
     "semantic-release": "^15.5.0",
@@ -158,6 +161,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "resolutions": {
+    "babel-core": "7.0.0-bridge.0",
     "freshy": ">= 1.0.3"
   },
   "files": [
@@ -186,7 +190,7 @@
     "format:staged": "prettier --write",
     "start": "node server.js",
     "test": "gulp test",
-    "test:styles": "jest",
+    "test:build": "cross-env BABEL_ENV=test jest",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
@@ -205,22 +209,11 @@
   },
   "babel": {
     "presets": [
-      [
-        "env",
-        {
-          "modules": false,
-          "targets": {
-            "browsers": [
-              "last 1 version",
-              "ie >= 11"
-            ]
-          }
-        }
-      ]
+      "./tools/env"
     ],
     "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
       "dev-expression"
     ]
   },

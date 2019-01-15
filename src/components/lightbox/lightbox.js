@@ -7,6 +7,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import removedComponent from '../removed-component';
 
 let didWarnAboutDeprecation;
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class Lightbox extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
@@ -52,7 +53,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
   };
 
   updateSlide = () => {
-    const items = [...this.element.querySelectorAll(this.options.selectorLightboxItem)];
+    const items = toArray(this.element.querySelectorAll(this.options.selectorLightboxItem));
     if (this.activeIndex < 0 || this.activeIndex >= items.length) {
       throw new RangeError('carouselItemIndex data attribute must be in range of lightbox items length');
     }
@@ -76,7 +77,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
    * @type {WeakMap}
    */
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default (!breakingChangesX ? Lightbox : removedComponent('Lightbox'));

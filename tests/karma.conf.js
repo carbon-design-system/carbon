@@ -77,7 +77,7 @@ module.exports = function(config) {
             query: {
               presets: [
                 [
-                  'env',
+                  '@babel/preset-env',
                   {
                     modules: false,
                     targets: {
@@ -87,9 +87,9 @@ module.exports = function(config) {
                 ],
               ],
               plugins: [
-                'transform-class-properties',
-                'transform-object-rest-spread',
-                ['transform-runtime', { polyfill: false }],
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-transform-runtime',
                 'dev-expression',
               ]
                 .concat(
@@ -113,7 +113,7 @@ module.exports = function(config) {
             query: {
               presets: [
                 [
-                  'env',
+                  '@babel/preset-env',
                   {
                     modules: false,
                     targets: {
@@ -123,9 +123,9 @@ module.exports = function(config) {
                 ],
               ],
               plugins: [
-                'transform-class-properties',
-                'transform-object-rest-spread',
-                ['transform-runtime', { polyfill: false }],
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-transform-runtime',
               ].concat(
                 cloptions.debug
                   ? []

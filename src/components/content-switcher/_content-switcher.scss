@@ -153,6 +153,14 @@
       color: $text-01;
       z-index: 3;
     }
+
+    &:disabled {
+      color: $ui-03;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
   }
 
   .#{$prefix}--content-switcher-btn:not(:last-of-type)::after {
@@ -190,6 +198,11 @@
     background-color: $ui-05;
     color: $inverse-01;
     z-index: 3;
+
+    // TODO: replace with new disabled color token when finalized
+    &:disabled {
+      background-color: $ibm-colors__gray--30;
+    }
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected .#{$prefix}--content-switcher__icon {

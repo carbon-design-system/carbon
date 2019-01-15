@@ -1,6 +1,6 @@
 <ul data-progress data-progress-current class="{{@root.prefix}}--progress">
   {{#each steps}}
-    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}}" {{#if disabled}} disabled {{/if}} {{#if invalid}} data-invalid {{/if}}>
+    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}} {{#if disabled}} {{@root.prefix}}--progress-step--disabled {{/if}}" {{#if invalid}} data-invalid {{/if}}>
       {{#is state "complete"}}
         {{carbon-icon 'CheckmarkOutline16'}}
       {{/is}}

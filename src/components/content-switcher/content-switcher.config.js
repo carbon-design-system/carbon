@@ -1,5 +1,6 @@
 'use strict';
 
+const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 const items = [
@@ -20,6 +21,7 @@ const items = [
 
 module.exports = {
   context: {
+    featureFlags,
     prefix,
   },
   variants: [
@@ -40,6 +42,13 @@ module.exports = {
       context: {
         hasIcon: true,
         items,
+      },
+    },
+    {
+      name: 'disabled',
+      label: 'Disabled',
+      context: {
+        items: items.map(item => ({ ...item, disabled: true })),
       },
     },
   ],

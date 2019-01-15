@@ -170,7 +170,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     }
   }
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;

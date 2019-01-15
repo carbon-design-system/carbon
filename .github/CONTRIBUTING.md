@@ -240,25 +240,16 @@ Other options for testing are:
 
 If you're contributing to our HTML/CSS code, a11y compliance of your code should be tested.
 
-To do so - First, (if you haven't done already) set up an auth token for a11y rules, by:
-
-1.  Create AAT token, by:
-1.  Go to https://aat.mybluemix.net/auth/
-1.  Enter IBM ID/password as you log into Bluemix
-1.  Accept user agreement
-1.  Hit Copy Authentication Token button
-1.  `> sed -e "s|\${NPM_TOKEN}|(The token obtained in above step)|g" < .aat.yml.src > .aat.yml`
-
-Then you can test your changes by running our test commands:
+To do so, you can test your changes by running our test commands:
 
 ```sh
 gulp test:a11y
 ```
 
-If you are very sure that your change affects a specific set of components, you can use `-f` option, like:
+If you are very sure that your change affects a specific set of components, you can use `--name` option, like:
 
 ```sh
-gulp test:a11y -f consumables/html/components/fab/fab.html
+gulp test:a11y --name dropdown
 ```
 
 The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/IBM/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
