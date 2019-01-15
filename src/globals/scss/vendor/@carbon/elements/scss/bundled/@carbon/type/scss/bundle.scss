@@ -6,8 +6,6 @@
  */
 
 @import 'reset';
-@include type-reset();
-
 @import 'font-family';
 @import 'scale';
 @import 'spacing';
@@ -15,3 +13,6 @@
 @import 'font-face/mono';
 @import 'font-face/sans';
 @import 'classes';
+
+@include type-reset();
+@include type-classes();

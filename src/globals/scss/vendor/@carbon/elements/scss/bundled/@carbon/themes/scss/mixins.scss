@@ -47,6 +47,8 @@
   $brand-01: #0062ff !default !global;
   $brand-02: #171717 !default !global;
   $brand-03: #0062ff !default !global;
+  $active-01: #bebebe !default !global;
+  $hover-field: #e5e5e5 !default !global;
 }
 @mixin theme-g10 {
   $interactive-01: #0062ff !default !global;
@@ -95,6 +97,8 @@
   $brand-01: #0062ff !default !global;
   $brand-02: #171717 !default !global;
   $brand-03: #0062ff !default !global;
+  $active-01: #bebebe !default !global;
+  $hover-field: #e5e5e5 !default !global;
 }
 @mixin theme-g90 {
   $interactive-01: #0062ff !default !global;
@@ -143,6 +147,8 @@
   $brand-01: #0062ff !default !global;
   $brand-02: #6f6f6f !default !global;
   $brand-03: #ffffff !default !global;
+  $active-01: #6f6f6f !default !global;
+  $hover-field: #353535 !default !global;
 }
 @mixin theme-g100 {
   $interactive-01: #0062ff !default !global;
@@ -191,4 +197,6 @@
   $brand-01: #0062ff !default !global;
   $brand-02: #6f6f6f !default !global;
   $brand-03: #ffffff !default !global;
+  $active-01: #565656 !default !global;
+  $hover-field: #353535 !default !global;
 }

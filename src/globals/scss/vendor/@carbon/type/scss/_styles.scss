@@ -107,43 +107,33 @@ $heading-03: (
 
 $productive-heading-04: (
   font-family: font-family('sans'),
-  font-size: type-scale(6),
+  font-size: type-scale(7),
   font-weight: font-weight('regular'),
-  line-height: rem(30px),
+  line-height: rem(36px),
   letter-spacing: 0,
 ) !default;
 
 $productive-heading-05: (
   font-family: font-family('sans'),
   font-size: type-scale(8),
-  font-weight: font-weight('light'),
+  font-weight: font-weight('regular'),
   line-height: rem(40px),
   letter-spacing: 0,
 ) !default;
 
 $expressive-heading-04: (
   font-family: font-family('sans'),
-  font-size: type-scale(6),
+  font-size: type-scale(7),
   font-weight: font-weight('regular'),
-  line-height: 130%,
+  line-height: 107%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(6),
-    ),
-    lg: (
       font-size: type-scale(7),
-      font-weight: font-weight('regular'),
-      line-height: 125%,
-    ),
-    xlg: (
-      font-size: type-scale(7),
-      font-weight: font-weight('regular'),
       line-height: 129%,
     ),
-    max: (
+    xlg: (
       font-size: type-scale(8),
-      font-weight: font-weight('regular'),
       line-height: 125%,
     ),
   ),
@@ -151,9 +141,9 @@ $expressive-heading-04: (
 
 $expressive-heading-05: (
   font-family: font-family('sans'),
-  font-size: type-scale(7),
+  font-size: type-scale(8),
   font-weight: font-weight('regular'),
-  line-height: 129%,
+  line-height: 125%,
   letter-spacing: 0,
   breakpoints: (
     md: (
@@ -173,6 +163,24 @@ $expressive-heading-05: (
     ),
   ),
 ) !default;
+
+$expressive-paragraph-01: (
+  font-family: font-family('sans'),
+  font-size: type-scale(6),
+  font-weight: font-weight('regular'),
+  line-height: 125%,
+  letter-spacing: 0,
+  breakpoints: (
+    lg: (
+      font-size: type-scale(7),
+      line-height: 129%,
+    ),
+    max: (
+      font-size: type-scale(8),
+      line-height: 125%,
+    ),
+  ),
+);
 
 $quotation-01: (
   font-family: font-family('serif'),
@@ -201,9 +209,9 @@ $quotation-01: (
 
 $quotation-02: (
   font-family: font-family('serif'),
-  font-size: type-scale(7),
+  font-size: type-scale(8),
   font-weight: font-weight('light'),
-  line-height: 129%,
+  line-height: 125%,
   letter-spacing: 0rem,
   breakpoints: (
     md: (
@@ -356,6 +364,7 @@ $tokens: (
   productive-heading-05: $productive-heading-05,
 
   // Editorial layout, fluid
+  expressive-paragraph-01: $expressive-paragraph-01,
   expressive-heading-04: $expressive-heading-04,
   expressive-heading-05: $expressive-heading-05,
 
