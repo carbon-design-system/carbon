@@ -460,6 +460,28 @@ DATA TABLE VARIATIONS
       width: rem(56px);
       min-width: rem(56px);
     }
+
+    thead tr th .#{$prefix}--tooltip,
+    tbody tr td .#{$prefix}--tooltip {
+      display: block;
+      min-width: rem(150px);
+      max-width: rem(200px);
+      top: rem(40px);
+      visibility: hidden;
+
+      & .#{$prefix}--tooltip__text {
+        text-align: left;
+      }
+
+      & .#{$prefix}--tooltip__caret {
+        right: auto;
+        left: rem(16px);
+      }
+    }
+  }
+
+  .#{$prefix}--data-table-v2--tooltip {
+    visibility: visible;
   }
 
   //================================================
