@@ -211,6 +211,8 @@
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
 
   // ☠️ Deprecated
+  $hover-field: $hover-ui !default !global;
+  $active-01: $active-ui !default !global;
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
   $nav-03: $color__purple-30 !default !global;
