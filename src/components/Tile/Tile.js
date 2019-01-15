@@ -442,7 +442,9 @@ export class ExpandableTile extends Component {
     );
 
     const tileStyle = {
-      maxHeight: this.state.tileMaxHeight + this.state.tilePadding,
+      maxHeight: this.state.expanded
+        ? null
+        : this.state.tileMaxHeight + this.state.tilePadding,
     };
     const content = this.getChildren().map((child, index) => {
       return React.cloneElement(child, { ref: index });
