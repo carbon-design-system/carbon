@@ -202,15 +202,16 @@
 
   .#{$prefix}--toolbar-content {
     display: flex;
-    margin-left: auto;
+    height: rem(48px);
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   //================================================
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //================================================
   .#{$prefix}--toolbar-search-container-hidden {
-    position: relative;
-    top: rem(-8px);
     height: rem(48px);
     width: rem(48px);
     transition: width 175ms $carbon--standard-easing;
@@ -287,8 +288,6 @@
   .#{$prefix}--toolbar-action {
     @include button-reset;
     cursor: pointer;
-    position: relative;
-    top: rem(-8px);
     height: rem(48px);
     width: rem(48px);
     padding: $spacing-md;
@@ -321,8 +320,6 @@
     ~ .#{$prefix}--btn {
       margin: 0;
       height: rem(48px);
-      position: relative;
-      top: rem(-8px);
       width: rem(192px);
     }
   }
@@ -342,6 +339,9 @@
     transition: $transition--base;
   }
 
+  //================================================
+  //BATCH ACTIONS
+  //================================================
   .#{$prefix}--batch-actions {
     display: flex;
     align-items: center;
@@ -369,24 +369,15 @@
 
     .#{$prefix}--btn__icon {
       fill: $ui-01;
-    }
-
-    .#{$prefix}--btn--ghost {
-      &:hover,
-      &:focus {
-        background-color: $ui-01;
-        color: $brand-01;
-
-        .#{$prefix}--btn__icon {
-          fill: $brand-01;
-        }
-      }
-
-      &:focus {
-        border: 2px solid $brand-01;
-        outline: 2px solid $ui-02;
+      & .st0 {
+        fill: none;
       }
     }
+  }
+
+  .#{$prefix}--batch-download {
+    //makes it smaller to match other icons
+    padding: rem(1px);
   }
 
   .#{$prefix}--batch-actions--active {
@@ -397,22 +388,10 @@
     opacity: 1;
   }
 
-  .#{$prefix}--action-list {
-    margin-left: -0.5rem;
-  }
-
-  .#{$prefix}--action-icons {
-    margin-left: auto;
-    svg {
-      padding: 0 $spacing-sm;
-      fill: $ui-01;
-      height: rem(16px);
-      width: auto;
-    }
-  }
-
   .#{$prefix}--batch-summary {
-    margin-left: auto;
+    position: absolute;
+    left: 0;
+    margin-left: rem(16px);
     display: flex;
     align-items: center;
     color: $ui-01;
@@ -420,64 +399,106 @@
 
   .#{$prefix}--batch-summary__para {
     @include typescale('zeta');
-    margin-right: $spacing-lg;
   }
 
-  .#{$prefix}--batch-summary__cancel {
-    @include button-reset(auto);
-    @include typescale('zeta');
-    color: $ui-01;
-    border-bottom: 1px solid transparent;
-    font-weight: 600;
-    cursor: pointer;
-    transition: border $transition--base $carbon--standard-easing;
+  .#{$prefix}--action-list {
+    position: absolute;
+    right: 0;
+    display: flex;
 
-    &:hover,
-    &:focus {
-      border-bottom: 1px solid $ui-01;
+    //override primary btn focus styles
+    & .#{$prefix}--btn--primary:focus::before,
+    & .#{$prefix}--btn--primary:focus::before,
+    & .#{$prefix}--btn--primary::before,
+    & .#{$prefix}--btn--primary::before,
+    & .#{$prefix}--btn--primary:focus::after,
+    & .#{$prefix}--btn--primary:focus::after,
+    & .#{$prefix}--btn--primary::after,
+    & .#{$prefix}--btn--primary::after {
+      display: none;
     }
   }
 
-  .#{$prefix}--toolbar-search-container {
-    width: 100%;
-    height: rem(48px);
-    position: relative;
-    top: rem(-8px);
+  //override primary btn focus styles
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
+    outline: 2px solid $ui-01;
+    outline-offset: -2px;
+  }
+
+  //override spacing between btn text and icon
+  .#{$prefix}--btn:not(.#{$prefix}--batch-summary__cancel) {
+    padding-right: rem(42px);
+    min-width: 0;
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+    display: block;
+    position: absolute;
     opacity: 1;
-    transition: opacity $transition--base;
+    top: rem(16px);
+    left: 0;
+    height: rem(16px);
+    width: rem(1px);
+    content: '';
+    background-color: $ui-01;
+    border: none;
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
+    opacity: 0;
+    transition: opacity 200ms $carbon--standard-easing;
+  }
+
+  .#{$prefix}--batch-summary__cancel {
+    padding-right: rem(16px);
+    position: relative;
   }
 
   //================================================
   //PERSISTENT SEARCH - OPTIONAL TOOLBAR
   //================================================
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search {
+  .#{$prefix}--toolbar-search-container {
+    width: 100%;
+    height: rem(48px);
+    opacity: 1;
+    position: relative;
+    top: rem(-8px);
+    transition: opacity $transition--base;
+  }
+
+  .#{$prefix}--toolbar-search-container + .#{$prefix}--toolbar-content {
+    position: relative;
+    top: rem(-8px);
+  }
+
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search {
     position: initial;
   }
 
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-magnifier {
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-magnifier {
     left: $spacing-md;
   }
 
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input {
     height: rem(48px);
     padding-left: $spacing-3xl;
     border: none;
   }
 
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:focus:not([disabled]) {
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:focus:not([disabled]) {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:hover:not([disabled]) {
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:hover:not([disabled]) {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:active:not([disabled]),
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input:not(:placeholder-shown) {
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:active:not([disabled]),
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-close {
+  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-close {
     height: rem(48px);
     width: rem(48px);
   }
