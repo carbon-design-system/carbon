@@ -461,7 +461,7 @@ DATA TABLE VARIATIONS
       min-width: rem(56px);
     }
 
-    thead tr th .#{$prefix}--tooltip,
+    thead tr th button .#{$prefix}--tooltip,
     tbody tr td .#{$prefix}--tooltip {
       display: block;
       min-width: rem(150px);
@@ -478,10 +478,23 @@ DATA TABLE VARIATIONS
         left: rem(16px);
       }
     }
-  }
 
-  .#{$prefix}--data-table-v2--tooltip {
-    visibility: visible;
+    thead tr th.#{$prefix}--data-table-v2--truncated {
+      &:hover button .#{$prefix}--tooltip {
+        visibility: visible;
+      }
+    }
+
+    tbody tr td.#{$prefix}--data-table-v2--truncated {
+      &:focus {
+        @include focus-outline('outline');
+      }
+
+      &:focus .#{$prefix}--tooltip,
+      &:hover .#{$prefix}--tooltip {
+        visibility: visible;
+      }
+    }
   }
 
   //================================================

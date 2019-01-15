@@ -37,6 +37,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.parentRows = [];
 
     this.refreshRows();
+    this._addOverflowTooltip();
 
     this.element.addEventListener('mouseover', evt => {
       const eventElement = eventMatches(evt, this.options.selectorChildRow);
@@ -200,6 +201,28 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     }
   };
 
+  _addOverflowTooltip() {
+    const truncatedTable = this.element.querySelector(this.options.selectorTableTruncated);
+    const headerThs = [...truncatedTable.querySelectorAll('th')];
+    const tbodyTds = [...truncatedTable.querySelectorAll('td')];
+
+    headerThs.forEach(th => {
+      const span = th.querySelector(this.options.selectorHeaderLabels);
+      if (span.scrollWidth > span.offsetWidth) {
+        th.classList.add(this.options.classTooltipActive);
+        th.tabIndex = 0;
+      }
+    });
+
+    tbodyTds.forEach(td => {
+      const span = td.querySelector(this.options.selectorTableCellContent);
+      if (span !== null && span.scrollWidth > span.offsetWidth) {
+        td.classList.add(this.options.classTooltipActive);
+        td.tabIndex = 0;
+      }
+    });
+  }
+
   // _expandableRowsInit = expandableRows => {
   // expandableRows.forEach(item => {
   // if(!componentsX) {
@@ -319,6 +342,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorTableSort: `.${prefix}--table-sort-v2`,
       selectorTableSelected: `.${prefix}--data-table-v2--selected`,
       selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-hidden`,
+      selectorTableTruncated: `.${prefix}--data-table-v2--overflow-truncate`,
+      selectorHeaderLabels: `.${prefix}--table-header-label`,
+      selectorTableCellContent: `.${prefix}--table-cell-content`,
       selectorSearchMagnifier: `.${prefix}--search-magnifier`,
       selectorSearchInput: `.${prefix}--search-input`,
       classExpandableRow: `${prefix}--expandable-row-v2`,
@@ -329,6 +355,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       classActionBarActive: `${prefix}--batch-actions--active`,
       classTableSelected: `${prefix}--data-table-v2--selected`,
       classToolbarSearchActive: `${prefix}--toolbar-search-container-active`,
+      classTooltipActive: `${prefix}--data-table-v2--truncated`,
       eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
       eventAfterExpand: 'data-table-v2-aftertoggleexpand',
       eventBeforeSort: 'data-table-v2-beforetogglesort',
