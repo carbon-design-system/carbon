@@ -145,6 +145,10 @@
     justify-content: center;
     align-items: center;
     width: mini-units(5);
+
+    &.#{$prefix}--overflow-menu--open {
+      display: flex;
+    }
   }
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu > svg {
