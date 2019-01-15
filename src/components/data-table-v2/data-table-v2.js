@@ -279,11 +279,11 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
         const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
-        this._expandableRowsInit(diffExpandableRows);
+        // this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
     } else if (newExpandableRows.length > 0) {
-      this._expandableRowsInit(newExpandableRows);
+      // this._expandableRowsInit(newExpandableRows);
       this.expandableRows = newExpandableRows;
     }
 
