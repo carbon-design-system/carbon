@@ -163,9 +163,9 @@ Legend:
 
 | v9                 | v10                          |
 | ------------------ | ---------------------------- |
-| brand-01           | replaced with interaction-01 |
-| brand-02           | replaced with interaction-02 |
-| brand-03           | replaced with interaction-03 |
+| brand-01           | replaced with interactive-01 |
+| brand-02           | replaced with interactive-02 |
+| brand-03           | replaced with interactive-03 |
 | ui-01              | No change                    |
 | ui-02              | No change                    |
 | ui-03              | No change                    |

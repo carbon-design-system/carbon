@@ -189,7 +189,7 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interaction-01, transparent, $inverse-01, #0353e9, $ui-01, $interaction-02);
+    @include button-theme--x($interactive-01, transparent, $inverse-01, #0353e9, $ui-01, $interactive-02);
   }
 
   .#{$prefix}--btn--secondary {
@@ -209,7 +209,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $interaction-01, $interaction-01, #0353e9, $interaction-01, $interaction-02);
+    @include button-theme--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
     position: relative;
 
     &:hover {
@@ -236,9 +236,9 @@
     @include button-theme--x(
       transparent,
       transparent,
-      $interaction-01,
+      $interactive-01,
       $ibm-colors__gray-10,
-      $interaction-01,
+      $interactive-01,
       $ibm-colors__blue-70
     );
 

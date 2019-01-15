@@ -209,6 +209,16 @@
 
   // Skeleton Loading
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
+
+  // ☠️ Deprecated
+  $nav-01: $color__navy-gray-1 !default !global;
+  $nav-02: $color__blue-90 !default !global;
+  $nav-03: $color__purple-30 !default !global;
+  $nav-04: $color__purple-60 !default !global;
+  $nav-05: $color__teal-40 !default !global;
+  $nav-06: $color__teal-50 !default !global;
+  $nav-07: $color__blue-30 !default !global;
+  $nav-08: $color__blue-51 !default !global;
 }
 
 @include exports('theme') {
