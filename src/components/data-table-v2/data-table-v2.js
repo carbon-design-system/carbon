@@ -203,24 +203,26 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _addOverflowTooltip() {
     const truncatedTable = this.element.querySelector(this.options.selectorTableTruncated);
-    const headerThs = [...truncatedTable.querySelectorAll('th')];
-    const tbodyTds = [...truncatedTable.querySelectorAll('td')];
+    if (truncatedTable) {
+      const headerThs = [...truncatedTable.querySelectorAll('th')];
+      const tbodyTds = [...truncatedTable.querySelectorAll('td')];
 
-    headerThs.forEach(th => {
-      const span = th.querySelector(this.options.selectorHeaderLabels);
-      if (span.scrollWidth > span.offsetWidth) {
-        th.classList.add(this.options.classTooltipActive);
-        th.tabIndex = 0;
-      }
-    });
+      headerThs.forEach(th => {
+        const span = th.querySelector(this.options.selectorHeaderLabels);
+        if (span.scrollWidth > span.offsetWidth) {
+          th.classList.add(this.options.classTooltipActive);
+          th.tabIndex = 0;
+        }
+      });
 
-    tbodyTds.forEach(td => {
-      const span = td.querySelector(this.options.selectorTableCellContent);
-      if (span !== null && span.scrollWidth > span.offsetWidth) {
-        td.classList.add(this.options.classTooltipActive);
-        td.tabIndex = 0;
-      }
-    });
+      tbodyTds.forEach(td => {
+        const span = td.querySelector(this.options.selectorTableCellContent);
+        if (span !== null && span.scrollWidth > span.offsetWidth) {
+          td.classList.add(this.options.classTooltipActive);
+          td.tabIndex = 0;
+        }
+      });
+    }
   }
 
   // _expandableRowsInit = expandableRows => {
