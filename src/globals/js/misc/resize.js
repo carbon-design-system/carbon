@@ -1,6 +1,6 @@
 // mdn resize function
 
-const optimizedResize = (function optimizedResize() {
+const optimizedResize = /* #__PURE__ */ (function optimizedResize() {
   const callbacks = [];
   let running = false;
 

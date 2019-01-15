@@ -1,7 +1,11 @@
 <button data-copy-btn class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--copy {{@root.prefix}}--btn--sm">
   Copy button
-  <svg class="{{@root.prefix}}--btn__icon" width="16" height="16" viewBox="0 0 16 16">
-    <path d="M7.5 7.5H4v1h3.5V12h1V8.5H12v-1H8.5V4h-1v3.5zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
-  </svg>
+  {{#if @root.featureFlags.componentsX}}
+    {{ carbon-icon 'AddFilled16' class=(add @root.prefix '--btn__icon') }}
+  {{else}}
+    <svg class="{{@root.prefix}}--btn__icon" width="16" height="16" viewBox="0 0 16 16">
+      <path d="M7.5 7.5H4v1h3.5V12h1V8.5H12v-1H8.5V4h-1v3.5zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+    </svg>
+  {{/if}}
   <div class="{{@root.prefix}}--btn--copy__feedback" data-feedback="Copied!"></div>
 </button>

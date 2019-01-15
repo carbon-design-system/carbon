@@ -6,6 +6,8 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Toolbar.
@@ -28,7 +30,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
             this._handleRowHeightChange(event, boundTable);
           })
         );
-        // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
+        // toArray(this.element.querySelectorAll(this.options.selectorRowHeight)).forEach((item) => {
         //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
         // });
       }
@@ -63,7 +65,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
     }
 
     const targetComponentElement = eventMatches(event, this.options.selectorInit);
-    [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach(item => {
+    toArray(this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)).forEach(item => {
       if (!targetComponentElement || !targetComponentElement.contains(item)) {
         item.classList.remove(this.options.classSearchActive);
       }
@@ -100,7 +102,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * The map associating DOM element and Toolbar UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

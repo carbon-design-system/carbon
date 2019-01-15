@@ -43,14 +43,14 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
    * The map associating DOM element and accordion UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
    * @property {string} selectorInit The CSS selector to find InlineNotification.
    * @property {string} selectorButton The CSS selector to find close button.
    */
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-notification]',
     selectorButton: '[data-notification-btn]',
     eventBeforeDeleteNotification: 'notification-before-delete',

@@ -73,7 +73,7 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
    * The map associating DOM element and accordion UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default (!breakingChangesX ? Carousel : removedComponent('Carousel'));

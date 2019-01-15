@@ -31,6 +31,8 @@ Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+
 class DatePicker extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * DatePicker.
@@ -252,12 +254,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       calendarContainer.querySelector('.flatpickr-month').classList.add(this.options.classMonth);
       calendarContainer.querySelector('.flatpickr-weekdays').classList.add(this.options.classWeekdays);
       calendarContainer.querySelector('.flatpickr-days').classList.add(this.options.classDays);
-      [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(item => {
+      toArray(calendarContainer.querySelectorAll('.flatpickr-weekday')).forEach(item => {
         const currentItem = item;
         currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
         currentItem.classList.add(this.options.classWeekday);
       });
-      [...calendarContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
+      toArray(calendarContainer.querySelectorAll('.flatpickr-day')).forEach(item => {
         item.classList.add(this.options.classDay);
         if (item.classList.contains('today') && calendar.selectedDates.length > 0) {
           item.classList.add('no-border');
@@ -329,7 +331,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
    * The map associating DOM element and date picker UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default DatePicker;

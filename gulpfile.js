@@ -69,6 +69,7 @@ const cloptions = commander
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
   .option('--port-sass-dev-build [port]', 'Uses the given port for Sass dev build server', assign, 5000)
   .option('-r, --rollup', 'Uses Rollup for dev env')
+  .option('-s, --sass-source', 'Force building Sass source')
   .parse(process.argv);
 
 // Axe A11y Test
@@ -179,7 +180,7 @@ gulp.task('scripts:umd', () => {
   const babelOpts = {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
           targets: {
             browsers: ['last 1 version', 'ie >= 11'],
@@ -187,12 +188,45 @@ gulp.task('scripts:umd', () => {
         },
       ],
     ],
-    plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
+    plugins: ['@babel/plugin-transform-modules-umd', ['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
+  const pathsToConvertToESM = new Set([
+    path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
+    path.resolve(__dirname, 'src/globals/js/settings.js'),
+  ]);
+  const cjsPlugin = commonjs();
+  cjsPlugin.options({ entry: '' });
 
   return gulp
     .src(srcFiles)
+    .pipe(
+      through.obj((file, enc, callback) => {
+        if (!pathsToConvertToESM.has(file.path)) {
+          callback(null, file);
+        } else {
+          Promise.resolve(cjsPlugin.transform(file.contents.toString(), file.path)).then(
+            result => {
+              if (!result) {
+                callback(null, file);
+              } else {
+                file.contents = Buffer.from(result.code);
+                callback(null, file);
+              }
+            },
+            err => {
+              callback(err);
+            }
+          );
+        }
+      })
+    )
     .pipe(babel(babelOpts))
+    .pipe(
+      babel({
+        plugins: [require('./tools/babel-plugin-pure-assignment')], // eslint-disable-line global-require
+        babelrc: false,
+      })
+    )
     .pipe(gulp.dest('umd/'));
 });
 
@@ -201,7 +235,7 @@ gulp.task('scripts:es', () => {
   const babelOpts = {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
           modules: false,
           targets: {
@@ -210,7 +244,7 @@ gulp.task('scripts:es', () => {
         },
       ],
     ],
-    plugins: ['transform-class-properties'],
+    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
   const pathsToConvertToESM = new Set([
     path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
@@ -221,6 +255,12 @@ gulp.task('scripts:es', () => {
   return gulp
     .src(srcFiles)
     .pipe(babel(babelOpts))
+    .pipe(
+      babel({
+        plugins: [require('./tools/babel-plugin-pure-assignment')], // eslint-disable-line global-require
+        babelrc: false,
+      })
+    )
     .pipe(
       through.obj((file, enc, callback) => {
         if (!pathsToConvertToESM.has(file.path)) {
@@ -427,7 +467,7 @@ gulp.task('jsdoc', cb => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: ['transform-class-properties', 'transform-object-rest-spread'],
+        plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-object-rest-spread'],
         babelrc: false,
       })
     )
@@ -497,7 +537,7 @@ gulp.task('watch', () => {
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev', 'sass:source']);
+  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], !cloptions.sassSource ? ['sass:dev'] : ['sass:dev', 'sass:source']);
 });
 
 gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);

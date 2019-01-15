@@ -199,7 +199,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
    * The map associating DOM element and Slider UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

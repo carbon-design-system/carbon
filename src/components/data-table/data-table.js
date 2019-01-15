@@ -11,6 +11,7 @@ import on from '../../globals/js/misc/on';
 import removedComponent from '../removed-component';
 
 let didWarnAboutDeprecation;
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class DataTable extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -164,7 +165,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
    */
   _toggleSelectAll = detail => {
     const { element, previousValue } = detail;
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
     if (!previousValue || previousValue === 'toggled') {
       inputs.forEach(item => {
         item.checked = true; // eslint-disable-line no-param-reassign
@@ -182,9 +183,9 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
    * On fire, create the parent child rows + striping
    */
   refreshRows = () => {
-    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
-    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
-    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
+    const newExpandCells = toArray(this.element.querySelectorAll(this.options.selectorExpandCells));
+    const newExpandableRows = toArray(this.element.querySelectorAll(this.options.selectorExpandableRows));
+    const newParentRows = toArray(this.element.querySelectorAll(this.options.selectorParentRows));
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
@@ -193,7 +194,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
-        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
+        const mergedExpandableRows = toArray(this.expandableRows, ...diffExpandableRows);
         this._initExpandableRows(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
@@ -212,9 +213,9 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     this.parentRows = newParentRows;
   };
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
-  static eventHandlers = {
+  static eventHandlers /* #__PURE_CLASS_PROPERTY__ */ = {
     expand: '_toggleRowExpand',
     sort: '_toggleSort',
     'select-all': '_toggleSelectAll',

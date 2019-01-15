@@ -317,7 +317,12 @@
   //----------------------------------------------
   // Disabled
   // ---------------------------------------------
-
+  
+  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
+  [disabled] ~ _ {
+    font-size: inherit;
+  }
+  
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
     cursor: not-allowed;

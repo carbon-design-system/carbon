@@ -1,6 +1,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { breakingChangesX } = require('../../globals/js/feature-flags');
 
 const menuItems = [
   {
@@ -253,6 +254,9 @@ const rows = [
 
 module.exports = {
   hidden: true,
+  meta: {
+    removed: breakingChangesX,
+  },
   context: {
     prefix,
   },

@@ -158,7 +158,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @member Modal.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

@@ -67,6 +67,8 @@
 
   .#{$prefix}--toast-notification__close-icon,
   .#{$prefix}--toast-notification__icon {
+    height: 1rem;
+    width: 1rem;
     height: 10px;
     width: 10px;
     fill: $ui-05;
@@ -138,10 +140,10 @@
   }
 
   .#{$prefix}--toast-notification__icon {
-    height: rem(20px);
-    width: rem(20px);
-    min-height: rem(20px);
-    min-width: rem(20px);
+    height: 1rem;
+    width: 1rem;
+    min-height: 1rem;
+    min-width: 1rem;
     margin-right: $spacing-md;
     margin-top: $spacing-md;
   }
@@ -168,8 +170,8 @@
     }
 
     .#{$prefix}--toast-notification__close-icon {
-      height: rem(10px);
-      width: rem(10px);
+      height: 1rem;
+      width: 1rem;
       fill: $ui-05;
     }
   }
