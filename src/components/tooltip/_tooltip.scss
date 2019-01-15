@@ -330,7 +330,7 @@
   }
 }
 
-@mixin tooltip--experimental {
+@mixin tooltip--x {
   .#{$prefix}--tooltip--icon {
     display: flex;
     align-items: center;
@@ -688,7 +688,7 @@
 
 @include exports('tooltip') {
   @if feature-flag-enabled('components-x') {
-    @include tooltip--experimental;
+    @include tooltip--x;
   } @else {
     @include tooltip;
   }
