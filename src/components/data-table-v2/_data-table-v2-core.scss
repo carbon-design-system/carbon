@@ -180,11 +180,13 @@ TREE OVERVIEW OF COMPONENT
 
 
 DATA TABLE VARIATIONS
+    - horizontal scroll
     - zebra
     - selected
     - no border
     - fixed header
     - text truncation
+    - numerical column right align
     - size variations
 */
 
@@ -277,6 +279,7 @@ DATA TABLE VARIATIONS
     @include typescale('zeta');
     border-top: 1px solid $ui-03;
     padding-left: $spacing-sm;
+    padding-right: $spacing-sm;
     vertical-align: middle;
     text-align: left;
     color: $text-01;
@@ -284,10 +287,10 @@ DATA TABLE VARIATIONS
     &:first-of-type {
       padding-left: $spacing-lg;
     }
+  }
 
-    &:last-of-type {
-      padding-right: 0;
-    }
+  td:last-of-type:not(.#{$prefix}--table-column-menu) {
+    padding-right: $spacing-lg;
   }
 
   .#{$prefix}--table-header-label {
@@ -330,7 +333,7 @@ DATA TABLE VARIATIONS
   }
 
   //================================================
-  //FIXED TOOLBAR + HORIZONTAL SCROLLING TABLE
+  //HORIZONTAL SCROLLING TABLE - toolbar and header dont scroll on overflow-x
   //================================================
   .#{$prefix}--data-table-v2--overflow-scroll {
     width: 100%;
@@ -464,8 +467,8 @@ DATA TABLE VARIATIONS
   //================================================
   .#{$prefix}--data-table-v2--fixed-header {
     & thead {
-      display: block;
-      width: 100%;
+      // display: block;
+      // width: 100%;
     }
 
     & thead tr {
@@ -477,7 +480,7 @@ DATA TABLE VARIATIONS
     }
 
     & tbody {
-      display: block;
+      // display: block;
       width: 100%;
       overflow: auto;
       max-height: rem(200px);
@@ -487,16 +490,23 @@ DATA TABLE VARIATIONS
       border-bottom: 0;
     }
 
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2),
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2) {
-      width: 100%;
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2) {
+      //not working!
+      // width: 100%;
     }
+  }
+  //================================================
+  //NUMERICAL COLUMN
+  //================================================
+  .#{$prefix}--data-table-v2--numerical-cell {
+    text-align: right;
   }
 
   //================================================
   //SIZE VARIATIONS
   //================================================
   .#{$prefix}--data-table-v2--compact {
+    thead tr,
     tbody tr {
       height: rem(24px);
     }
@@ -513,6 +523,7 @@ DATA TABLE VARIATIONS
   }
 
   .#{$prefix}--data-table-v2--short {
+    thead tr,
     tbody tr {
       height: rem(32px);
     }
@@ -529,6 +540,7 @@ DATA TABLE VARIATIONS
   }
 
   .#{$prefix}--data-table-v2--tall {
+    thead tr,
     tbody tr {
       height: rem(25px);
     }
@@ -546,6 +558,32 @@ DATA TABLE VARIATIONS
 
   .#{$prefix}--data-table-v2--static {
     width: auto;
+  }
+
+  //================================================
+  //DISABLED
+  //================================================
+  tbody tr[disabled] {
+    cursor: no-drop;
+
+    & td,
+    & td:hover {
+      color: $disabled;
+      background: $disabled-background-color;
+      cursor: no-drop;
+    }
+
+    & .#{$prefix}--table-expand-v2 button svg,
+    & .#{$prefix}--table-column-menu div svg {
+      fill: $disabled;
+      cursor: no-drop;
+    }
+
+    & .#{$prefix}--table-column-menu div,
+    & .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
+      background: $disabled-background-color;
+      cursor: no-drop;
+    }
   }
 }
 
