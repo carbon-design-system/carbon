@@ -220,6 +220,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
       headerThs.forEach(th => {
         const span = th.querySelector(this.options.selectorHeaderLabels);
+        if (th.classList.contains(this.options.classTooltipActive)) {
+          th.classList.remove(this.options.classTooltipActive);
+        }
+
         if (span.scrollWidth > span.offsetWidth) {
           th.classList.add(this.options.classTooltipActive);
           th.tabIndex = 0;
@@ -228,6 +232,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
       tbodyTds.forEach(td => {
         const span = td.querySelector(this.options.selectorTableCellContent);
+        if (td.classList.contains(this.options.classTooltipActive)) {
+          td.classList.remove(this.options.classTooltipActive);
+        }
+
         if (span !== null && span.scrollWidth > span.offsetWidth) {
           td.classList.add(this.options.classTooltipActive);
           td.tabIndex = 0;
