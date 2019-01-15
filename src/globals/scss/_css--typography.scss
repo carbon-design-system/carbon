@@ -5,9 +5,6 @@
 @import 'typography';
 @import 'css--reset';
 @import 'import-once';
-@import 'feature-flags';
-@import 'functions';
-@import './vendor/@carbon/type/scss/classes';
 
 @mixin typography {
   // really big
@@ -125,10 +122,6 @@
 
 @include exports('css--typography') {
   @if global-variable-exists('css--typography') == false or $css--typography == true {
-    @if feature-flag-enabled('components-x') {
-      @include type-classes();
-    } @else {
-      @include typography;
-    }
+    @include typography;
   }
 }
