@@ -60,6 +60,17 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state = {
       checkboxCount: 0,
     };
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      // ignore resize events as long as an _addOverflowTooltip() execution is in the queue
+      if (!resizeTimeout) {
+        resizeTimeout = setTimeout(() => {
+          resizeTimeout = null;
+          this._addOverflowTooltip(); // _addOverflowTooltip() will execute at a rate of 15fps
+        }, 66);
+      }
+    });
   }
 
   _handleDocumentClick(evt) {
