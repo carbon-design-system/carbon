@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@import '@carbon/import-once/scss/import-once';
+@import '../../../@carbon/import-once/scss/import-once';
 @import 'prefix';
 
 // Inspired by:
 // https://github.com/tachyons-css/tachyons-aspect-ratios/blob/fdccef8d0d534a7faddde4cb5754ffb6d1c36b16/src/tachyons-aspect-ratios.css#L11-L22
-@include exports('@carbon/grid/aspect-ratio.scss') {
+@include exports('../../../@carbon/grid/aspect-ratio.scss') {
   .#{$prefix}--aspect-ratio {
     height: 0;
     position: relative;

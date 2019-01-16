@@ -6,12 +6,12 @@
  */
 
 /**
- * Container helpers for @carbon/grid. Heavily inspired by, or derived from,
+ * Container helpers for ../../../@carbon/grid. Heavily inspired by, or derived from,
  * bootstrap:
  * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
  */
-@import '../../layout/scss/breakpoint';
-@import '../../layout/scss/utilities';
+@import '../../../@carbon/layout/scss/breakpoint';
+@import '../../../@carbon/layout/scss/utilities';
 
 /// Create the container for a grid. Will cause full-bleed for the grid unless
 /// max-width properties are added with `make-container-max-widths`

@@ -8,9 +8,9 @@
 // EXPERIMENTAL GRID
 // NOTE: Need to ensure no conflicting functions/mixins/variables, until v10 release
 //----------------------------------------------------------------------------------
-@import '../scss/vendor/@carbon/grid/scss/container';
-@import '../scss/vendor/@carbon/grid/scss/row';
-@import '../scss/vendor/@carbon/grid/scss/col';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/grid/scss/container';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/grid/scss/row';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/grid/scss/col';
 
 // Placing after `@carbon/grid` imports as the variable does not have `!default` in Classic mode
 @import './classic/classic';
