@@ -3,8 +3,6 @@
 const { prefix } = require('../../globals/js/settings');
 const featureFlags = require('../../globals/js/feature-flags');
 
-console.log(featureFlags);
-
 module.exports = {
   meta: {
     useIframe: true,
