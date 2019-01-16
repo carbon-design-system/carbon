@@ -148,11 +148,7 @@
       box-shadow: none;
 
       &:hover {
-        @if feature-flag-enabled('components-x') {
-          background-color: $ibm-color__white;
-        } @else {
-          background-color: $color__white;
-        }
+        background-color: $color__white;
       }
 
       &:focus {
