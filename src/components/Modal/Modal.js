@@ -302,7 +302,8 @@ export default class Modal extends Component {
         ref={this.innerModal}
         role="dialog"
         className={`${prefix}--modal-container`}
-        aria-label={modalAriaLabel}>
+        aria-label={modalAriaLabel}
+        aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
