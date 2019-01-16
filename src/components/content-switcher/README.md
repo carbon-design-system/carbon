@@ -62,7 +62,9 @@ contentSwitcherInstance.setActive(document.getElementById('my-content-switcher-b
 | content-switcher-beingselected | Custom event fired before a button is selected in content-switcher |
 | content-switcher-selected      | Custom event fired after a button is selected in content-switcher  |
 
-##### Example - Preventing a content switcher item from being selected in a certain condition
+##### Example 
+
+Preventing a content switcher item from being selected in a certain condition
 
 ```javascript
 document.addEventListener('content-switcher-beingselected', function(evt) {
@@ -72,7 +74,9 @@ document.addEventListener('content-switcher-beingselected', function(evt) {
 });
 ```
 
-##### Example - Notifying events of all content switcher items being selected to an analytics library
+##### Example 
+
+Notifying events of all content switcher items being selected to an analytics library
 
 ```javascript
 document.addEventListener('content-switcher-selected', function(evt) {
