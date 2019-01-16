@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { iconCaretUp, iconCaretDown } from 'carbon-icons';
+import Icon from '../Icon';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-// TODO: import { WarningFilled16 } from '@carbon/icons-react';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
-import Icon from '../Icon';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -260,22 +257,6 @@ export default class NumberInput extends Component {
     return (
       <div className={`${prefix}--form-item`}>
         <div className={numberInputClasses} {...inputWrapperProps}>
-          {componentsX && labelText}
-          {componentsX && (
-            <input
-              type="number"
-              pattern="[0-9]*"
-              {...other}
-              {...props}
-              ref={this._handleInputRef}
-            />
-          )}
-          {componentsX && invalid ? (
-            <WarningFilled16
-              className={`${prefix}--number__invalid`}
-              role="img"
-            />
-          ) : null}
           <div className={`${prefix}--number__controls`}>
             <button
               className={`${prefix}--number__control-btn up-icon`}
@@ -300,16 +281,14 @@ export default class NumberInput extends Component {
               />
             </button>
           </div>
-          {!componentsX && labelText}
-          {!componentsX && (
-            <input
-              type="number"
-              pattern="[0-9]*"
-              {...other}
-              {...props}
-              ref={this._handleInputRef}
-            />
-          )}
+          {labelText}
+          <input
+            type="number"
+            pattern="[0-9]*"
+            {...other}
+            {...props}
+            ref={this._handleInputRef}
+          />
           {error}
           {helper}
         </div>
