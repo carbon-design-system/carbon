@@ -26,11 +26,7 @@
   }
 
   .#{$prefix}--tag--ibm {
-    @if feature-flag-enabled('components-x') {
-      @include tag-theme($ibm-color__blue-10, $ibm-color__blue-60);
-    } @else {
-      @include tag-theme($color__blue-10, $color__blue-60);
-    }
+    @include tag-theme($color__blue-10, $color__blue-60);
   }
 
   .#{$prefix}--tag--beta {
