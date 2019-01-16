@@ -1,3 +1,23 @@
+{{#if @root.featureFlags.grid}}
+<div class="{{@root.prefix}}--grid">
+  {{#each @root.rows as |row|}}
+    <div class="{{@root.prefix}}--row">
+      <div class="bx--col bx--col--auto">
+        <p>{{row.title}}</p>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      {{#each row.columns}}
+        <div class="{{@root.prefix}}--col-{{row.breakpoint}}-1">
+          <div class="outside">
+            <div class="inside">1</div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>
+{{else}}
 <div class="{{@root.prefix}}--grid">
   <div class="{{@root.prefix}}--row">
     <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 indigo">
@@ -24,3 +44,4 @@
     </div>
   </div>
 </div>
+{{/if}}

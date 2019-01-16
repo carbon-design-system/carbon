@@ -10,6 +10,8 @@ $default-feature-flags: (
   components-x: false,
   breaking-changes-x: false,
   ui-shell: false,
+  grid: false,
+  grid--fallback: false,
 );
 
 $did-warn-diverged-feature-flags: false !default !global;
@@ -42,43 +44,25 @@ $did-warn-diverged-feature-flags: false !default !global;
 
 $feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
 
-// We supported a flag for experimental grid in the past that we want to keep
-// supporting till our next major release. These two @if statements will assign
-// these values over into the map if they are defined.
-@if global-variable-exists(css--use-experimental-grid) == true {
-  $feature-flags: map-merge(
-    $feature-flags,
-    (
-      grid: $css--use-experimental-grid,
-    )
-  );
-}
+@if map-get($feature-flags, grid) != true {
+  // We supported a flag for experimental grid in the past that we want to keep
+  // supporting till our next major release. These two @if statements will assign
+  // these values over into the map if they are defined.
+  @if global-variable-exists(css--use-experimental-grid) == true {
+    $feature-flags: map-merge(
+      $feature-flags,
+      (
+        grid: $css--use-experimental-grid,
+      )
+    );
+  }
 
-@if global-variable-exists(css--use-experimental-grid-fallback) == true {
-  $feature-flags: map-merge(
-    $feature-flags,
-    (
-      grid--fallback: $css--use-experimental-grid-fallback,
-    )
-  );
-}
-
-// However, if we don't have those flags available let's go ahead and add in
-// some defaults for the grid and grid--fallback
-@if map-has-key($feature-flags, grid) == false {
-  $feature-flags: map-merge(
-    $feature-flags,
-    (
-      grid: false,
-    )
-  );
-}
-
-@if map-has-key($feature-flags, grid--fallback) == false {
-  $feature-flags: map-merge(
-    $feature-flags,
-    (
-      grid--fallback: false,
-    )
-  );
+  @if global-variable-exists(css--use-experimental-grid-fallback) == true {
+    $feature-flags: map-merge(
+      $feature-flags,
+      (
+        grid--fallback: $css--use-experimental-grid-fallback,
+      )
+    );
+  }
 }

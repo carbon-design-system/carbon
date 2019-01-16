@@ -163,6 +163,7 @@ gulp.task('scripts:dev:feature-flags', () => {
   const replaceTable = {
     breakingChangesX: useBreakingChanges,
     componentsX: useExperimentalFeatures,
+    grid: useExperimentalFeatures,
   };
   return readFile(path.resolve(__dirname, 'src/globals/js/feature-flags.js'))
     .then(contents =>
