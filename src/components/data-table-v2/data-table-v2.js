@@ -1,4 +1,5 @@
 // import { componentsX } from '../../globals/js/feature-flags';
+import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -63,16 +64,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       checkboxCount: 0,
     };
 
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      // ignore resize events as long as an _addOverflowTooltip() execution is in the queue
-      if (!resizeTimeout) {
-        resizeTimeout = setTimeout(() => {
-          resizeTimeout = null;
-          this._addOverflowTooltip(); // _addOverflowTooltip() will execute at a rate of 15fps
-        }, 66);
-      }
-    });
+    this.element.ownerDocument.defaultView.addEventListener('resize', debounce(this._addOverflowTooltip, 200));
   }
 
   _handleDocumentClick(evt) {
