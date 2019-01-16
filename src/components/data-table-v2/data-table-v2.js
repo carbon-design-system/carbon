@@ -38,6 +38,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.expandCells = [];
     this.expandableRows = [];
     this.parentRows = [];
+    this._handleDebouncedResize = debounce(this._addOverflowTooltip, 200);
 
     this.refreshRows();
     this._addOverflowTooltip();
@@ -66,8 +67,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.element.ownerDocument.defaultView.addEventListener('resize', this._handleDebouncedResize);
   }
-
-  _handleDebouncedResize = debounce(this._addOverflowTooltip, 200);
 
   _handleDocumentClick(evt) {
     const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
@@ -208,7 +207,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     }
   };
 
-  _addOverflowTooltip() {
+  _addOverflowTooltip = () => {
     const truncatedTable = this.element.querySelector(this.options.selectorTableTruncated);
     if (truncatedTable) {
       const headerThs = [...truncatedTable.querySelectorAll('th')];
@@ -238,7 +237,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
         }
       });
     }
-  }
+  };
 
   // _expandableRowsInit = expandableRows => {
   // expandableRows.forEach(item => {
