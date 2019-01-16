@@ -71,6 +71,14 @@
     display: flex;
     width: 100%;
     align-items: center;
+
+    .#{$prefix}--loading__svg circle {
+      stroke-width: 10;
+    }
+
+    .#{$prefix}--loading__stroke {
+      stroke-dashoffset: 75;
+    }
   }
 
   .#{$prefix}--inline-loading__text {
