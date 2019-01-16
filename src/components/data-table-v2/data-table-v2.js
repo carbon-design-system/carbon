@@ -64,8 +64,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       checkboxCount: 0,
     };
 
-    this.element.ownerDocument.defaultView.addEventListener('resize', debounce(this._addOverflowTooltip, 200));
+    this.element.ownerDocument.defaultView.addEventListener('resize', this._handleDebouncedResize);
   }
+
+  _handleDebouncedResize = debounce(this._addOverflowTooltip, 200);
 
   _handleDocumentClick(evt) {
     const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
