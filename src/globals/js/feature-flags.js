@@ -52,5 +52,6 @@
  * }
  */
 
-exports.componentsX = false;
 exports.breakingChangesX = false;
+exports.componentsX = false;
+exports.grid = false;
