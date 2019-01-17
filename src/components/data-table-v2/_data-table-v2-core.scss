@@ -241,6 +241,10 @@ DATA TABLE VARIATIONS
     border-spacing: 0;
     width: 100%;
 
+    [class*='col'] {
+      outline: none;
+    }
+
     thead {
       @include typescale('zeta');
       background-color: $ui-03;
