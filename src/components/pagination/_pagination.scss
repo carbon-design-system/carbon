@@ -191,7 +191,7 @@ $css--helpers: true;
 }
 
 @mixin pagination--x {
-  .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
+  .#{$prefix}--data-table-v2-container .#{$prefix}--pagination {
     position: relative;
     top: rem(-1px);
   }
