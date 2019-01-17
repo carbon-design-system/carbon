@@ -302,6 +302,10 @@ DATA TABLE VARIATIONS
     }
   }
 
+  th {
+    color: $text-01;
+  }
+
   td:last-of-type:not(.#{$prefix}--table-column-menu) {
     padding-right: $spacing-lg;
   }
