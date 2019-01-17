@@ -47,6 +47,8 @@ If you want to help improve the docs, it's a good idea to let others know what y
    $ git remote add upstream git@github.com:IBM/carbon-elements.git
    $ git remote -v
    ```
+   
+4. Switch to our version of Node. If you are using (nvm [Node Version Manager)](https://github.com/creationix/nvm), you can run `nvm use` to quicky switch Node versions. If you are aren't using nvm, you can still check the `.nvmrc` dotfile in the root of this project to find the major stable version of Node we are using, and then you can switch manually.
 
 ### Submitting an Issue
 
