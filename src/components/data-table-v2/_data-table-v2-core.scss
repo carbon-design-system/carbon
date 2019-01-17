@@ -416,6 +416,10 @@ DATA TABLE VARIATIONS
     }
   }
 
+  tbody tr.#{$prefix}--data-table-v2--selected .#{$prefix}--overflow-menu svg {
+    opacity: 1;
+  }
+
   //================================================
   //NO BORDER
   //================================================
