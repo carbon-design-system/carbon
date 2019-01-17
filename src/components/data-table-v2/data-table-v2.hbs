@@ -291,6 +291,49 @@
 
 {{#if (not small)}}</div>{{/if}}
 {{#if hasPager}}
+  {{#if componentsX}}
+  <div class="{{@root.prefix}}--pagination" data-pagination>
+
+    <div class="{{@root.prefix}}--pagination__left">
+      <div class="{{@root.prefix}}--select {{@root.prefix}}--select__item-count">
+        <select id="select-id-pagination-count" aria-label="select number of items per page" tabindex="0" class="{{@root.prefix}}--select-input"
+        data-items-per-page>
+          <option class="{{@root.prefix}}--select-option" value="10" selected>10</option>
+          <option class="{{@root.prefix}}--select-option" value="20">20</option>
+          <option class="{{@root.prefix}}--select-option" value="30">30</option>
+          <option class="{{@root.prefix}}--select-option" value="40">40</option>
+          <option class="{{@root.prefix}}--select-option" value="50">50</option>
+        </select>
+        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+      </div>
+      <div class="{{@root.prefix}}--pagination__text">
+        <span data-displayed-item-range>1-10</span> of
+        <span data-total-items>40</span> items
+      </div>
+    </div>
+
+    <div class="{{@root.prefix}}--pagination__right">
+      <div class="{{@root.prefix}}--select {{@root.prefix}}--select__page-number">
+        <select id="select-id-pagination-page" aria-label="select page number to view" tabindex="0" class="{{@root.prefix}}--select-input" data-page-number-input>
+          <option class="{{@root.prefix}}--select-option" value="1" selected>1</option>
+          <option class="{{@root.prefix}}--select-option" value="2">2</option>
+          <option class="{{@root.prefix}}--select-option" value="3">3</option>
+          <option class="{{@root.prefix}}--select-option" value="4">4</option>
+          <option class="{{@root.prefix}}--select-option" value="5">5</option>
+        </select>
+        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+      </div>
+
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" tabindex="0" data-page-backward aria-label="Backward button">
+        {{ carbon-icon 'CaretLeft24' class=(add @root.prefix '--pagination__nav-arrow')}}
+      </button>
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" tabindex="0" data-page-forward aria-label="Forward button">
+        {{ carbon-icon 'CaretRight24' class=(add @root.prefix '--pagination__nav-arrow')}}
+      </button>
+    </div>
+
+  </div>
+  {{else}}
   <div class="{{@root.prefix}}--pagination" data-pagination>
     <div class="{{@root.prefix}}--pagination__left">
       <span class="{{@root.prefix}}--pagination__text">Items per page:</span>
@@ -342,4 +385,5 @@
       </button>
     </div>
   </div>
+  {{/if}}
 {{/if}}
