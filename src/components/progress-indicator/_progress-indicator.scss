@@ -149,7 +149,7 @@
     height: $spacing-md;
     border-radius: 50%;
     margin: 9px $spacing-xs 0 0;
-    fill: $brand-01;
+    fill: $interactive-01;
   }
 
   .#{$prefix}--progress-label {
@@ -167,13 +167,13 @@
   }
 
   .#{$prefix}--progress-label:hover {
-    color: $brand-01;
+    color: $interactive-01;
     cursor: pointer;
-    box-shadow: 0 1px $brand-01;
+    box-shadow: 0 1px $interactive-01;
   }
 
   .#{$prefix}--progress-label:focus {
-    outline: 2px solid $brand-01;
+    outline: 2px solid $interactive-01;
   }
 
   .#{$prefix}--progress-label:active {
@@ -229,14 +229,14 @@
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $brand-01;
+      background-color: $interactive-01;
     }
   }
 
   .#{$prefix}--progress-step--current svg {
     width: 14px;
     height: 14px;
-    fill: $brand-01;
+    fill: $interactive-01;
     margin-top: rem(9.5px);
   }
 
@@ -254,7 +254,7 @@
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $brand-01;
+      background-color: $interactive-01;
     }
   }
 

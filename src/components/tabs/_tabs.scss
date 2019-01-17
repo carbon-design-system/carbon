@@ -361,8 +361,8 @@
 
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include max-breakpoint(bp--sm--major) {
-      background-color: $hover-field;
-      box-shadow: 0 -1px 0 $hover-field;
+      background-color: $hover-ui;
+      box-shadow: 0 -1px 0 $hover-ui;
     }
   }
 
@@ -383,7 +383,7 @@
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         font-weight: 600;
-        border-bottom: 2px solid $brand-01;
+        border-bottom: 2px solid $interactive-01;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -432,7 +432,7 @@
         width: 100%;
         margin: 0;
         padding-left: 16px;
-        outline: 2px solid $brand-01;
+        outline: 2px solid $interactive-01;
         outline-offset: -2px;
       }
     }
@@ -482,7 +482,7 @@
   .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-link:active {
     @include breakpoint(bp--sm--major) {
-      outline: 2px solid $brand-01;
+      outline: 2px solid $interactive-01;
       outline-offset: -2px;
     }
   }
