@@ -1,0 +1,45 @@
+/**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../../@carbon/import-once/scss/import-once';
+@import 'prefix';
+
+// Inspired by:
+// https://github.com/tachyons-css/tachyons-aspect-ratios/blob/fdccef8d0d534a7faddde4cb5754ffb6d1c36b16/src/tachyons-aspect-ratios.css#L11-L22
+@include exports('../../../@carbon/grid/aspect-ratio.scss') {
+  .#{$prefix}--aspect-ratio {
+    height: 0;
+    position: relative;
+  }
+
+  .#{$prefix}--aspect-ratio--object {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+  }
+
+  .#{$prefix}--aspect-ratio--16x9 {
+    padding-bottom: 56.25%;
+  }
+
+  .#{$prefix}--aspect-ratio--2x1 {
+    padding-bottom: 50%;
+  }
+
+  .#{$prefix}--aspect-ratio--4x3 {
+    padding-bottom: 75%;
+  }
+
+  .#{$prefix}--aspect-ratio--1x1 {
+    padding-bottom: 100%;
+  }
+}

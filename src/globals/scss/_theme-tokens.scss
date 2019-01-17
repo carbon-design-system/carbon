@@ -3,6 +3,7 @@
 @import 'functions';
 @import 'colors';
 @import 'spacing';
+@import './vendor/@carbon/themes/scss/mixins';
 
 @mixin theme() {
   // Color Theme Variables
@@ -104,60 +105,22 @@
 
 // Light Experimental Theme
 @mixin theme--experimental() {
+  // Can include various themes here from `@carbon/themes`, including: white,
+  // g10, g90, and g100
+  @include theme-white;
+
   $edited: true !default !global;
   $use-layer: true !default !global;
-
-  // Color Theme Variables
-  $brand-01: $ibm-colors__blue--60 !default !global;
-  $brand-02: $ibm-colors__blue--80 !default !global;
-  $brand-03: $ibm-colors__blue--60 !default !global;
-  $inverse-01: $ibm-colors__gray--10 !default !global;
-  $inverse-02: $ibm-colors__white !default !global; // TODO: Define for experimental
-  $ui-01: $ibm-colors__gray--10 !default !global;
-  $ui-02: $ibm-colors__white !default !global;
-  $ui-03: $ibm-colors__gray--20 !default !global;
-  $ui-04: $ibm-colors__gray--50 !default !global;
-  $ui-05: $ibm-colors__gray--100 !default !global;
-  $icon-01: $ibm-colors__gray--100 !default !global;
-  $text-01: $ibm-colors__gray--100 !default !global;
-  $text-02: $ibm-colors__gray--70 !default !global;
-  $text-03: $ibm-colors__gray--50 !default !global;
-  $field-01: $ibm-colors__gray--10 !default !global;
-  $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
-  $support-01: $ibm-colors__red--60 !default !global;
-  $support-02: $ibm-colors__green--60 !default !global;
-  $support-03: $ibm-colors__yellow !default !global;
-  $support-04: $ibm-colors__blue--70 !default !global;
-
-  $active-01: $ibm-colors__gray--30 !default !global;
-
-  // TODO: Define for experimental
-  $nav-01: $color__navy-gray-1 !default !global;
-  $nav-02: $color__blue-90 !default !global;
-  $nav-03: $color__purple-30 !default !global;
-  $nav-04: $color__purple-60 !default !global;
-  $nav-05: $color__teal-40 !default !global;
-  $nav-06: $color__teal-50 !default !global;
-  $nav-07: $color__blue-30 !default !global;
-  $nav-08: $color__blue-51 !default !global;
-
-  // TODO: Define for experimental
-  $hover-primary: darken($brand-01, 10%) !default !global;
-  $hover-primary-text: darken($brand-01, 15%) !default !global;
-  $hover-danger: darken($support-01, 10%) !default !global;
-  $hover-secondary: $brand-01 !default !global;
-  $hover-row: rgba($brand-02, 0.1) !default !global;
-  $hover-field: #e5e5e5 !default !global;
 
   // Global
   $input-border: 1px solid transparent !default !global;
   $input-label-weight: 400 !default !global;
-  $disabled: $ibm-colors__gray--30 !default !global;
-  $disabled-background-color: $ibm-colors__gray--10 !default !global;
-  $focus: $ibm-colors__blue--60 !default !global;
+  $disabled: $ibm-colors__gray-30 !default !global;
+  $disabled-background-color: $ibm-colors__gray-10 !default !global;
+  $focus: $ibm-colors__blue-60 !default !global;
 
   // Link
-  $link-visited: $ibm-colors__purple--60 !default !global;
+  $link-visited: $ibm-colors__purple-60 !default !global;
   $link-inverse-color: #6ea6ff !default !global;
 
   // Tooltip
@@ -197,7 +160,7 @@
   // Content Switcher
   $content-switcher-border-radius: 0px !default !global;
   $content-switcher-option-border: 1px solid $brand-01 !default !global;
-  $content-switcher-divider: $ibm-colors__gray--30 !default !global;
+  $content-switcher-divider: $ibm-colors__gray-30 !default !global;
 
   // Data Table
   $data-table-heading-transform: uppercase !default !global;
@@ -205,17 +168,17 @@
   $data-table-row-height: 2rem !default !global;
 
   // Date Picker
-  $date-picker-in-range-background-color: $ibm-colors__blue--20 !default !global;
+  $date-picker-in-range-background-color: $ibm-colors__blue-20 !default !global;
 
   // Modal
   $modal-border-top: $brand-01 4px solid !default !global;
   $modal-footer-background-color: $ui-03 !default !global;
 
   // Notification
-  $notification-info-background-color: $ibm-colors__blue--10 !default !global;
-  $notification-error-background-color: $ibm-colors__red--10 !default !global;
+  $notification-info-background-color: $ibm-colors__blue-10 !default !global;
+  $notification-error-background-color: $ibm-colors__red-10 !default !global;
   $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
-  $notification-success-background-color: $ibm-colors__green--10 !default !global;
+  $notification-success-background-color: $ibm-colors__green-10 !default !global;
 
   // Progress Indicator
   $progress-indicator-bar-width: 1px inset transparent !default !global;
@@ -223,8 +186,8 @@
   $progress-indicator-line-offset: 0.625rem !default !global;
 
   //Code Snippet
-  $copy-active: $ibm-colors__gray--30 !default !global;
-  $copy-btn-feedback: $ibm-colors__gray--80 !default !global;
+  $copy-active: $ibm-colors__gray-30 !default !global;
+  $copy-btn-feedback: $ibm-colors__gray-80 !default !global;
 
   // Radio Button
   $radio-border-width: 1px !default !global;
@@ -236,16 +199,28 @@
   // Slider
 
   //Tab
-  $tab-underline-color: 2px solid $ibm-colors__gray--30 !default !global;
-  $tab-underline-color-hover: 2px solid $ibm-colors__gray--60 !default !global;
-  $tab-text-disabled: $ibm-colors__gray--30 !default !global;
-  $tab-underline-disabled: 2px solid $ibm-colors__gray--10 !default !global;
+  $tab-underline-color: 2px solid $ibm-colors__gray-30 !default !global;
+  $tab-underline-color-hover: 2px solid $ibm-colors__gray-60 !default !global;
+  $tab-text-disabled: $ibm-colors__gray-30 !default !global;
+  $tab-underline-disabled: 2px solid $ibm-colors__gray-10 !default !global;
 
   // Toggle
-  $toggle-background-color: $ibm-colors__green--50 !default !global;
+  $toggle-background-color: $ibm-colors__green-50 !default !global;
 
   // Skeleton Loading
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
+
+  // ☠️ Deprecated
+  $hover-field: $hover-ui !default !global;
+  $active-01: $active-ui !default !global;
+  $nav-01: $color__navy-gray-1 !default !global;
+  $nav-02: $color__blue-90 !default !global;
+  $nav-03: $color__purple-30 !default !global;
+  $nav-04: $color__purple-60 !default !global;
+  $nav-05: $color__teal-40 !default !global;
+  $nav-06: $color__teal-50 !default !global;
+  $nav-07: $color__blue-30 !default !global;
+  $nav-08: $color__blue-51 !default !global;
 }
 
 @include exports('theme') {

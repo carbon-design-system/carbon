@@ -391,7 +391,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
-    outline: 1px solid $brand-01;
+    outline: 1px solid $interactive-01;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
@@ -474,7 +474,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection:focus {
-    outline: 1px solid $brand-01;
+    outline: 1px solid $interactive-01;
   }
 
   // Modifier for a selection to show that multiple selections have been made
@@ -486,7 +486,7 @@ $list-box-menu-width: rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: 0;
-    background-color: $brand-01;
+    background-color: $interactive-01;
     height: rem(24px);
     width: rem(42px);
     color: white;

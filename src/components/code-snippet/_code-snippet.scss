@@ -320,7 +320,7 @@
 
     &:focus {
       outline: none;
-      border: 2px solid $brand-01;
+      border: 2px solid $interactive-01;
     }
 
     &:active {
@@ -336,7 +336,7 @@
     background-color: $field-02;
 
     &:hover {
-      background-color: rgba($brand-02, 0.1);
+      background-color: rgba($interactive-02, 0.1);
     }
   }
 
@@ -423,7 +423,7 @@
   }
 
   .#{$prefix}--snippet-button:hover {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   .#{$prefix}--snippet-button:active {
@@ -473,7 +473,7 @@
   }
 
   .#{$prefix}--snippet-btn--expand:hover {
-    background: $hover-field;
+    background: $hover-ui;
     color: $text-01;
   }
 
