@@ -177,22 +177,34 @@ TREE OVERVIEW OF COMPONENT
   |- Title
   |- Secondary title text
   |- Toolbar
-  |- Inner dt container (optional - allows for overflow-x scroll only on dt and not toolbar)
+  |- Table
+    |- thead
+    |- tbody
+  |- Pagination (optional)
+
+|- Main dt container
+  |- Title
+  |- Secondary title text
+  |- Toolbar
+  |- Inner table container (optional - scrolls just the table and not the toolbar on horizontal overflow)
     |- Table
       |- thead
       |- tbody
-|- Pagination (optional)
-
+  |- Pagination (optional)
 
 DATA TABLE VARIATIONS
-    - horizontal scroll
     - zebra
     - selected
+    - expand
     - no border
+    - size variations
+    - pagination
     - fixed header
+    - horizontal scroll
     - text truncation
     - numerical column right align
-    - size variations
+    - secondary text options for Tall table
+    - disabled row
 */
 
   //================================================
@@ -201,6 +213,10 @@ DATA TABLE VARIATIONS
   .#{$prefix}--data-table-v2-container {
     min-width: rem(600px);
     padding-top: $spacing-3xs; // allow space for focus styles
+
+    .#{$prefix}--search-input {
+      background-color: transparent;
+    }
   }
 
   //================================================

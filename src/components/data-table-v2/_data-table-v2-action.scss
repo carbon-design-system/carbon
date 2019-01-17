@@ -206,6 +206,8 @@
     position: absolute;
     top: 0;
     right: 0;
+    width: 100%;
+    justify-content: flex-end;
   }
 
   //================================================
@@ -249,7 +251,7 @@
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //================================================
   .#{$prefix}--toolbar-search-container-active {
-    width: auto;
+    width: 100%;
     transition: width 175ms $carbon--standard-easing;
 
     & > .#{$prefix}--search .#{$prefix}--search-input {
@@ -311,10 +313,6 @@
     &:focus:not([disabled]),
     &:active:not([disabled]) {
       @include focus-outline('outline');
-    }
-
-    &:last-of-type {
-      padding-right: 0;
     }
 
     ~ .#{$prefix}--btn {
@@ -464,15 +462,12 @@
     position: relative;
     top: rem(-8px);
     transition: opacity $transition--base;
-
-    .#{$prefix}--search-input {
-      background-color: transparent;
-    }
   }
 
   .#{$prefix}--toolbar-search-container + .#{$prefix}--toolbar-content {
     position: relative;
     top: rem(-8px);
+    width: auto;
   }
 
   .#{$prefix}--toolbar-search-container .#{$prefix}--search {
