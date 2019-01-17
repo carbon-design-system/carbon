@@ -235,15 +235,6 @@ $css--helpers: true;
     }
   }
 
-  .#{$prefix}--pagination__button-icon {
-    height: rem(12px);
-    width: rem(12px);
-    fill: $ui-05;
-    pointer-events: none;
-    transition: $transition--base;
-    margin-top: $spacing-3xs;
-  }
-
   .#{$prefix}--pagination__button {
     @include reset;
     border: none;
@@ -274,11 +265,6 @@ $css--helpers: true;
         fill: $ui-05;
       }
     }
-  }
-
-  .#{$prefix}--pagination__button--no-index {
-    border-right: 0;
-    margin-right: $spacing-4xs;
   }
 
   .#{$prefix}--pagination {
