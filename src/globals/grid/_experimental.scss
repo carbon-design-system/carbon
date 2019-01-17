@@ -1,7 +1,7 @@
-@import '../scss/vendor/@carbon/layout/scss/breakpoint';
-@import '../scss/vendor/@carbon/grid/scss/container';
-@import '../scss/vendor/@carbon/grid/scss/row';
-@import '../scss/vendor/@carbon/grid/scss/col';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/layout/scss/breakpoint';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/grid/scss/container';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/grid/scss/row';
+@import '../scss/vendor/@carbon/elements/scss/bundled/@carbon/grid/scss/col';
 
 // TODO: replace with mixin from @carbon/grid
 // https://github.com/IBM/carbon-elements/issues/274
