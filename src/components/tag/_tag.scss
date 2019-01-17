@@ -133,7 +133,7 @@
   .#{$prefix}--tag.#{$prefix}--skeleton {
     // TODO: replace hexcode with gray 10 hover hover token
     // from @carbon/elements
-    @include tag-theme--x(#e5e5e5, $ibm-color__gray-30);
+    @include tag-theme--x(#e5e5e5, $ibm-colors__gray-30);
     width: rem(60px);
 
     &:after {
