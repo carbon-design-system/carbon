@@ -384,11 +384,9 @@ DATA TABLE VARIATIONS
   //================================================
   .#{$prefix}--data-table-v2--overflow-scroll {
     width: 100%;
-  }
 
-  .#{$prefix}--data-table-v2--fixed-toolbar {
-    th,
-    td {
+    th:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu),
+    td:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu) {
       min-width: rem(90px);
     }
   }
