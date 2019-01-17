@@ -622,7 +622,7 @@
     }
 
     &:focus {
-      outline: 1px solid $brand-01;
+      outline: 1px solid $interactive-01;
     }
   }
 
@@ -649,7 +649,7 @@
     transition: background-color $transition--base;
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
   }
 
@@ -684,7 +684,7 @@
     padding: $spacing-2xs;
 
     &:focus {
-      outline: 1px solid $brand-01;
+      outline: 1px solid $interactive-01;
     }
   }
 
@@ -700,14 +700,14 @@
       background: none;
 
       &:after {
-        border-bottom-color: $brand-02;
-        border-top-color: $brand-02;
+        border-bottom-color: $interactive-02;
+        border-top-color: $interactive-02;
       }
     }
 
     &:after {
-      border-bottom-color: $brand-01;
-      border-top-color: $brand-01;
+      border-bottom-color: $interactive-01;
+      border-top-color: $interactive-01;
     }
   }
 
@@ -743,7 +743,7 @@
     transition: all $transition--base;
 
     &:hover {
-      background: $hover-field;
+      background: $hover-ui;
     }
 
     &:focus {
@@ -759,7 +759,7 @@
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
-    color: $brand-01;
+    color: $interactive-01;
 
     &::after {
       content: '';
@@ -770,7 +770,7 @@
       transform: translateX(-50%);
       height: rem(4px);
       width: rem(4px);
-      background: $brand-01;
+      background: $interactive-01;
     }
   }
 
@@ -780,7 +780,7 @@
   }
 
   .#{$prefix}--date-picker__day.today.selected {
-    border: 2px solid $brand-01;
+    border: 2px solid $interactive-01;
     &::after {
       display: none;
     }
@@ -806,7 +806,7 @@
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
     color: $inverse-01;
-    background: $brand-01;
+    background: $interactive-01;
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
@@ -825,7 +825,7 @@
   .#{$prefix}--date-picker__day.endRange.inRange.selected,
   .flatpickr-day.endRange.inRange.selected {
     color: $inverse-01;
-    background: $brand-01;
+    background: $interactive-01;
   }
 
   .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),

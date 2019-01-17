@@ -315,11 +315,11 @@
     margin-top: -1px;
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
 
     &:active {
-      background-color: $active-01;
+      background-color: $active-ui;
     }
 
     &:first-of-type {
@@ -358,7 +358,7 @@
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
-    border-bottom-color: $hover-field;
+    border-bottom-color: $hover-ui;
   }
 
   .#{$prefix}--dropdown--selected {
@@ -411,7 +411,7 @@
   }
 
   .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
-    outline: 2px solid $brand-01;
+    outline: 2px solid $interactive-01;
   }
 
   .#{$prefix}--dropdown--inline[data-value=''] .#{$prefix}--dropdown-text {
