@@ -263,8 +263,12 @@ DATA TABLE VARIATIONS
         background: $ui-01;
         border-bottom: 1px solid $ui-03;
 
-        &:hover {
+        &:hover:not([disabled]) {
           background: $hover-field;
+
+          & td {
+            color: $text-01;
+          }
         }
       }
     }
@@ -287,7 +291,7 @@ DATA TABLE VARIATIONS
     padding-right: $spacing-sm;
     vertical-align: middle;
     text-align: left;
-    color: $text-01;
+    color: $text-02;
 
     &:first-of-type {
       padding-left: $spacing-lg;
@@ -598,7 +602,7 @@ DATA TABLE VARIATIONS
   .#{$prefix}--data-table-v2--tall {
     thead tr,
     tbody tr {
-      height: rem(25px);
+      height: rem(64px);
     }
 
     .#{$prefix}--table-header-label {
@@ -608,7 +612,7 @@ DATA TABLE VARIATIONS
 
     .#{$prefix}--table-cell-content {
       display: block;
-      padding: rem(17px) 0;
+      padding: rem(25px) 0;
     }
   }
 
@@ -644,6 +648,14 @@ DATA TABLE VARIATIONS
 
   tbody tr[disabled] .#{$prefix}--overflow-menu {
     display: none;
+  }
+
+  //================================================
+  //SECONDARY TEXT / ICON CELL VARIANTS
+  //================================================
+  .#{$prefix}--data-table-v2--cell-secondary-text {
+    padding-top: rem(9px);
+    @include font-size('12');
   }
 }
 

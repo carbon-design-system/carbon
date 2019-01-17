@@ -174,6 +174,7 @@ const columns = [
     name: 'name',
     title: 'Name',
     sortable: true,
+    secondary: true,
   },
   {
     name: 'protocol',
@@ -280,6 +281,7 @@ const rows = [
   },
   {
     id: 'row-id-14',
+    secondaryText: 'Secondary Text',
     select: {
       id: `${prefix}--checkbox-14`,
       name: 'checkbox-14',
@@ -300,6 +302,7 @@ const rows = [
   },
   {
     id: 'row-id-15',
+    secondaryText: 'Secondary Text',
     select: {
       id: `${prefix}--checkbox-15`,
       name: 'checkbox-15',
@@ -511,7 +514,8 @@ module.exports = {
       label: 'Small',
       context: {
         title: 'Table title',
-        small: true,
+        // small: true,
+        tall: true,
         hasToolbar: true,
         state: 'default',
         searchLabel: 'Search',
