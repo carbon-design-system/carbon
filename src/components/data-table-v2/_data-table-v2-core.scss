@@ -330,11 +330,23 @@ DATA TABLE VARIATIONS
   }
 
   .#{$prefix}--overflow-menu {
+    & svg {
+      opacity: 0;
+    }
+
+    &:hover svg,
+    &:focus svg {
+      opacity: 1;
+    }
+
     &:focus {
       outline: 0;
-      opacity: 1;
-      box-shadow: none;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
     }
+  }
+
+  tr:hover .#{$prefix}--overflow-menu svg {
+    opacity: 1;
   }
 
   //================================================
@@ -624,6 +636,10 @@ DATA TABLE VARIATIONS
       background: $disabled-background-color;
       cursor: no-drop;
     }
+  }
+
+  tbody tr[disabled] .#{$prefix}--overflow-menu {
+    display: none;
   }
 }
 

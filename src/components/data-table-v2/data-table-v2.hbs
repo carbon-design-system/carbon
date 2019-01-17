@@ -218,19 +218,23 @@
               </td>
             {{else if column.checkbox}}
               <td class="{{@root.prefix}}--table-column-checkbox">
-                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if row.disabled}} disabled {{/if}}>
+                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if (and ../../../componentsX row.disabled)}} disabled {{/if}}>
                 <label for="{{data.id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}"></label>
               </td>
             {{else if column.menu}}
               <td class="{{@root.prefix}}--table-column-menu">
                 <div data-overflow-menu tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
-                  <svg class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
-                    <g fill-rule="evenodd">
-                      <circle cx="1.5" cy="1.5" r="1.5" />
-                      <circle cx="1.5" cy="7.5" r="1.5" />
-                      <circle cx="1.5" cy="13.5" r="1.5" />
-                    </g>
-                  </svg>
+                  {{#if ../../../componentsX}}
+                    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
+                  {{else}}
+                    <svg class="{{@root.prefix}}--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+                      <g fill-rule="evenodd">
+                        <circle cx="1.5" cy="1.5" r="1.5" />
+                        <circle cx="1.5" cy="7.5" r="1.5" />
+                        <circle cx="1.5" cy="13.5" r="1.5" />
+                      </g>
+                    </svg>
+                  {{/if}}
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
                       <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
