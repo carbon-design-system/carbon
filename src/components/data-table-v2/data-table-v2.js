@@ -210,31 +210,43 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _addOverflowTooltip = () => {
     const truncatedTable = this.element.querySelector(this.options.selectorTableTruncated);
     if (truncatedTable) {
-      const headerThs = [...truncatedTable.querySelectorAll('th')];
-      const tbodyTds = [...truncatedTable.querySelectorAll('td')];
+      const headerThs = toArray(truncatedTable.querySelectorAll('th'));
+      const tbodyTds = toArray(truncatedTable.querySelectorAll('td'));
+      const allCells = headerThs.concat(tbodyTds);
 
-      headerThs.forEach(th => {
+      const truncatedCells = allCells.filter(cell => cell.classList.contains(this.options.classTooltipActive));
+
+      const thsToAddClass = headerThs.filter(th => {
         const span = th.querySelector(this.options.selectorHeaderLabels);
-        if (th.classList.contains(this.options.classTooltipActive)) {
-          th.classList.remove(this.options.classTooltipActive);
+        if (span) {
+          return span.scrollWidth > span.offsetWidth;
         }
-
-        if (span.scrollWidth > span.offsetWidth) {
-          th.classList.add(this.options.classTooltipActive);
-          th.tabIndex = 0;
-        }
+        return null;
       });
 
-      tbodyTds.forEach(td => {
+      const tdsToAddClass = tbodyTds.filter(td => {
         const span = td.querySelector(this.options.selectorTableCellContent);
-        if (td.classList.contains(this.options.classTooltipActive)) {
-          td.classList.remove(this.options.classTooltipActive);
+        if (span) {
+          return span.scrollWidth > span.offsetWidth;
         }
+        return null;
+      });
 
-        if (span !== null && span.scrollWidth > span.offsetWidth) {
+      requestAnimationFrame(() => {
+        truncatedCells.forEach(cell => {
+          cell.classList.remove(this.options.classTooltipActive);
+          cell.removeAttribute('tabindex');
+        });
+
+        thsToAddClass.forEach(th => {
+          th.classList.add(this.options.classTooltipActive);
+          th.tabIndex = 0;
+        });
+
+        tdsToAddClass.forEach(td => {
           td.classList.add(this.options.classTooltipActive);
           td.tabIndex = 0;
-        }
+        });
       });
     }
   };
