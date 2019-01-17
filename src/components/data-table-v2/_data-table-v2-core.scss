@@ -293,7 +293,7 @@ DATA TABLE VARIATIONS
     border-top: 1px solid $ui-03;
     padding-left: $spacing-sm;
     padding-right: $spacing-sm;
-    vertical-align: middle;
+    vertical-align: top;
     text-align: left;
     color: $text-02;
 
@@ -324,12 +324,14 @@ DATA TABLE VARIATIONS
   .#{$prefix}--table-column-checkbox {
     width: rem(64px);
     min-width: rem(64px);
+    vertical-align: middle;
   }
 
   //width for overflow menu columns
   .#{$prefix}--table-column-menu {
     width: rem(56px);
     min-width: rem(56px);
+    vertical-align: middle;
   }
 
   .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
