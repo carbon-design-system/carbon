@@ -464,6 +464,10 @@
     position: relative;
     top: rem(-8px);
     transition: opacity $transition--base;
+
+    .#{$prefix}--search-input {
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--toolbar-search-container + .#{$prefix}--toolbar-content {

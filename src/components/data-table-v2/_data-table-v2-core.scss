@@ -337,7 +337,7 @@ DATA TABLE VARIATIONS
     padding-left: rem(28px);
   }
 
-  .#{$prefix}--overflow-menu {
+  td .#{$prefix}--overflow-menu {
     & svg {
       opacity: 0;
     }
