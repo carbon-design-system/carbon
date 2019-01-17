@@ -231,7 +231,11 @@ export default class ComboBox extends React.Component {
       onInputChange, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
-    const className = cx(`${prefix}--combo-box`, containerClassName);
+    const className = cx(
+      `${prefix}--form-item`,
+      `${prefix}--combo-box`,
+      containerClassName
+    );
 
     return (
       <Downshift
