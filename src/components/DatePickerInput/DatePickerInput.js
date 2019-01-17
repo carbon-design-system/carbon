@@ -9,7 +9,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+// TODO: import { Calendar16 } from '@carbon/icons-react/';
+import Calendar16 from '@carbon/icons-react/lib/calendar/16';
 import Icon from '../Icon';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -75,17 +78,29 @@ export default class DatePickerInput extends Component {
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
-    const datePickerIcon =
-      datePickerType === 'single' ? (
+    const datePickerIcon = (() => {
+      if (datePickerType !== 'single') {
+        return;
+      }
+      if (componentsX) {
+        return (
+          <Calendar16
+            className={`${prefix}--date-picker__icon`}
+            aria-label={iconDescription}
+            onClick={openCalendar}
+            role="img"
+          />
+        );
+      }
+      return (
         <Icon
           name="calendar"
           className={`${prefix}--date-picker__icon`}
           description={iconDescription}
           onClick={openCalendar}
         />
-      ) : (
-        ''
       );
+    })();
 
     const label = labelText ? (
       <label htmlFor={id} className={labelClasses}>

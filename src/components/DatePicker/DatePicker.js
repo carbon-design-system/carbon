@@ -14,6 +14,7 @@ import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
 import Icon from '../Icon';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -443,16 +444,14 @@ export default class DatePicker extends Component {
     });
 
     const datePickerIcon =
-      datePickerType === 'range' ? (
+      !componentsX && datePickerType === 'range' ? (
         <Icon
           name="calendar"
           className={`${prefix}--date-picker__icon`}
           description={iconDescription}
           onClick={this.openCalendar}
         />
-      ) : (
-        ''
-      );
+      ) : null;
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {
