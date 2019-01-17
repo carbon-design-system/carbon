@@ -595,6 +595,10 @@ DATA TABLE VARIATIONS
       height: rem(24px);
     }
 
+    .#{$prefix}--action-list {
+      height: rem(32px);
+    }
+
     .#{$prefix}--table-header-label {
       display: block;
       padding: rem(5px) 0;
@@ -603,6 +607,21 @@ DATA TABLE VARIATIONS
     .#{$prefix}--table-cell-content {
       display: block;
       padding: rem(5px) 0;
+    }
+
+    .#{$prefix}--overflow-menu {
+      width: rem(24px);
+      height: rem(24px);
+    }
+
+    .#{$prefix}--table-column-checkbox {
+      width: rem(32px);
+      min-width: (32px);
+    }
+
+    .#{$prefix}--table-column-menu {
+      width: rem(28px);
+      min-width: rem(28px);
     }
   }
 

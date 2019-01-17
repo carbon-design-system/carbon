@@ -513,10 +513,22 @@
   .#{$prefix}--table-toolbar--small {
     height: rem(32px);
 
+    .#{$prefix}--action-list {
+      height: rem(32px);
+    }
+
     .#{$prefix}--toolbar-action {
       height: rem(32px);
       width: rem(32px);
       padding: $spacing-xs;
+    }
+
+    .#{$prefix}--btn--primary {
+      padding-top: rem(6px);
+    }
+
+    .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+      top: rem(8px);
     }
 
     .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
