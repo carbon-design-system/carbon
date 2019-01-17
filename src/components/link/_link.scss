@@ -50,7 +50,7 @@
     @include font-family;
     @include font-smoothing;
 
-    color: $brand-01;
+    color: $interactive-01;
     font-weight: 400;
 
     // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
@@ -59,7 +59,7 @@
 
     &:hover,
     &:focus {
-      color: $brand-01;
+      color: $interactive-01;
       box-shadow: 0 1px currentColor;
     }
 
@@ -83,7 +83,7 @@
     }
 
     &:visited {
-      color: $brand-01;
+      color: $interactive-01;
     }
   }
 }

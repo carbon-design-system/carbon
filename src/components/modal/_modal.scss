@@ -271,12 +271,12 @@
     background-color: transparent;
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
 
     &:focus {
       outline: none;
-      border-color: $brand-01;
+      border-color: $interactive-01;
     }
   }
 

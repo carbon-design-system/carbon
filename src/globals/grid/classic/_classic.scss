@@ -1,25 +1,25 @@
 @import '../../scss/vars';
 
-$max-width: 1600px;
-$columns: 12;
-
-$grid-breakpoints: (
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1600px,
-);
-$gutter-breakpoints: (
-  xs: 5px,
-  sm: 10px,
-);
-$grid-gutter-breakpoints: (
-  xs: 3%,
-  sm: 5%,
-);
-
 @mixin grid {
+  $max-width: 1600px !global;
+  $columns: 12 !global;
+
+  $grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1600px,
+  ) !global;
+  $gutter-breakpoints: (
+    xs: 5px,
+    sm: 10px,
+  ) !global;
+  $grid-gutter-breakpoints: (
+    xs: 3%,
+    sm: 5%,
+  ) !global;
+
   .#{$prefix}--grid {
     margin-left: grid-gutter('xs');
     margin-right: grid-gutter('xs');

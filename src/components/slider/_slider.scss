@@ -270,13 +270,13 @@
     &:focus {
       // 20px / 14px = 1.4285714286
       transform: translate(-50%, -50%) scale(1.4285714286);
-      box-shadow: inset 0 0 0 2px $brand-01, inset 0 0 0 3px $ui-01;
-      background-color: $brand-01;
+      box-shadow: inset 0 0 0 2px $interactive-01, inset 0 0 0 3px $ui-01;
+      background-color: $interactive-01;
     }
 
     &:active {
       transform: translate(-50%, -50%) scale(1.4285714286);
-      box-shadow: inset 0 0 0 2px $brand-01;
+      box-shadow: inset 0 0 0 2px $interactive-01;
     }
   }
 
@@ -299,7 +299,7 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $brand-01;
+    background-color: $interactive-01;
   }
 
   // Skeleton state

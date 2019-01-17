@@ -183,7 +183,7 @@
   }
 }
 
-@mixin checkbox--experimental {
+@mixin checkbox--x {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: rem(6px);
@@ -306,7 +306,7 @@
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
     // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
-    border-color: $brand-01;
+    border-color: $interactive-01;
     border-width: 3px;
     width: rem(20px);
     height: rem(20px);
@@ -317,12 +317,12 @@
   //----------------------------------------------
   // Disabled
   // ---------------------------------------------
-  
+
   // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
   [disabled] ~ _ {
     font-size: inherit;
   }
-  
+
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
     cursor: not-allowed;
@@ -337,7 +337,7 @@
 
 @include exports('checkbox') {
   @if feature-flag-enabled('components-x') {
-    @include checkbox--experimental;
+    @include checkbox--x;
   } @else {
     @include checkbox;
   }

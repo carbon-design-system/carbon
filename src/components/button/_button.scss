@@ -189,17 +189,17 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($brand-01, transparent, $inverse-01, #0353e9, $ui-01, $brand-02);
+    @include button-theme--x($interactive-01, transparent, $inverse-01, #0353e9, $ui-01, $interactive-02);
   }
 
   .#{$prefix}--btn--secondary {
     @include button-theme--x(
-      $ibm-colors__gray--80,
-      $ibm-colors__gray--80,
+      $ibm-colors__gray-80,
+      $ibm-colors__gray-80,
       $inverse-01,
-      $ibm-colors__gray--70,
+      $ibm-colors__gray-70,
       $inverse-01,
-      $ibm-colors__gray--60
+      $ibm-colors__gray-60
     );
 
     &:hover,
@@ -209,7 +209,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $brand-01, $brand-01, #0353e9, $brand-01, $brand-02);
+    @include button-theme--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
     position: relative;
 
     &:hover {
@@ -233,19 +233,26 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $brand-01, $ibm-colors__gray--10, $brand-01, $ibm-colors__blue--70);
+    @include button-theme--x(
+      transparent,
+      transparent,
+      $interactive-01,
+      $ibm-colors__gray-10,
+      $interactive-01,
+      $ibm-colors__blue-70
+    );
 
     &:hover,
     &:active {
-      color: $ibm-colors__blue--70;
+      color: $ibm-colors__blue-70;
 
       .#{$prefix}--btn__icon {
-        fill: $ibm-colors__blue--70;
+        fill: $ibm-colors__blue-70;
       }
     }
 
     &:active {
-      background-color: $active-01;
+      background-color: $active-ui;
     }
 
     .#{$prefix}--btn__icon {
@@ -266,7 +273,7 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red--80);
+    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red-80);
 
     &:hover {
       color: $inverse-01;
@@ -279,7 +286,7 @@
   }
 
   .#{$prefix}--btn--danger--primary {
-    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red--80);
+    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red-80);
 
     &:hover:disabled,
     &:focus:disabled {
