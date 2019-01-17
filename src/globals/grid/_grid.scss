@@ -1,5 +1,5 @@
 @import '../scss/functions';
-@import './classic';
+@import './classic/classic';
 @import './experimental';
 
 @include exports('grid') {
