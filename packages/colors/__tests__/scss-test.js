@@ -58,7 +58,7 @@ describe('colors.scss', () => {
 
 $map: test($ibm-colors);
 $swatch: test(map-get($ibm-colors, 'black'));
-$value: test(map-get(map-get($ibm-colors, 'black'), '100'));
+$value: test(map-get(map-get($ibm-colors, 'black'), 100));
 $null: test(map-get($ibm-colors, black));
 `);
 
@@ -92,5 +92,17 @@ $map: test($ibm-color-map);
 `);
 
     expect(calls[0]).toBeInstanceOf(types.Map);
+  });
+
+  it('should provide grades as a number from a map', async () => {
+    const [calls] = await testSassString(`
+@import './colors.scss';
+
+$valid: test(map-get(map-get($ibm-color-map, 'gray'), 10));
+$invalid: test(map-get(map-get($ibm-color-map, 'gray'), '10'));
+`);
+
+    expect(calls[0]).toBeInstanceOf(types.Color);
+    expect(calls[1]).toBeInstanceOf(types.Null);
   });
 });

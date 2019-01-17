@@ -54,7 +54,7 @@ async function build() {
     return {
       swatch,
       value: Object.keys(colors[swatch]).reduce((acc, grade, index) => {
-        const property = `'${grade}': ${colors[swatch][grade]},`;
+        const property = `${grade}: ${colors[swatch][grade]},`;
         if (index === 0) {
           return property;
         }
