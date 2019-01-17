@@ -1,4 +1,11 @@
 /**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
  * Counterpart to `normalize` for a collection of rows. This method unravels the
  * normalization step that we use to build the given parameters in order to
  * return a natural interface to working with rows for a consumer.
