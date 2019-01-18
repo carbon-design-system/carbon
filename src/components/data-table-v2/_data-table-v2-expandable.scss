@@ -154,7 +154,7 @@
         overflow: hidden;
         max-height: 0;
         opacity: 0;
-        transition: all $transition--expansion $carbon--standard-easing;
+        transition: opacity $transition--expansion $carbon--standard-easing;
       }
     }
   }
@@ -171,7 +171,7 @@
       td {
         max-height: 100%;
         opacity: 1;
-        transition: all $transition--expansion $carbon--standard-easing;
+        transition: opacity $transition--expansion $carbon--standard-easing;
       }
     }
 
@@ -193,6 +193,7 @@
         > td {
           background-color: $hover-field;
           border-right: 1px solid transparent;
+          color: $text-01;
         }
       }
     }
@@ -243,6 +244,31 @@
     width: auto;
     max-width: 16px;
     padding: $spacing-3xs;
+  }
+
+  //expand + select
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected {
+    &:first-of-type td {
+      border-bottom: none;
+    }
+
+    & td {
+      border-bottom: none;
+    }
+
+    + tr[data-child-row] {
+      background-color: $hover-field;
+    }
+
+    &:hover td {
+      background: $hover-selected-ui;
+    }
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 {
+    td {
+      background: $hover-selected-ui;
+    }
   }
 }
 

@@ -210,6 +210,14 @@ const columns = [
 
 const columnsExpandable = [
   {
+    name: 'select',
+    title: 'Label name',
+    checkbox: true,
+    checkboxId: `${prefix}--checkbox-20`,
+    checkboxName: 'checkbox-20',
+    checkboxValue: 'green',
+  },
+  {
     name: 'section',
     section: true,
   },
@@ -375,6 +383,12 @@ const rowsExpandable = [
         him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
         as they tried to protect him, shortly before attacking Harry.</p>
     `,
+    select: {
+      id: `${prefix}--checkbox-12`,
+      name: 'checkbox-12',
+      value: 'green',
+      label: 'Label name',
+    },
     section: true,
     name: 'Load Balancer 1',
     protocol: 'HTTP',
@@ -394,6 +408,12 @@ const rowsExpandable = [
         him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
         as they tried to protect him, shortly before attacking Harry.</p>
     `,
+    select: {
+      id: `${prefix}--checkbox-13`,
+      name: 'checkbox-13',
+      value: 'green',
+      label: 'Label name',
+    },
     section: true,
     name: 'Load Balancer 1',
     protocol: 'HTTP',
@@ -513,11 +533,15 @@ module.exports = {
         toolbarActions,
         toolbarActionsX,
         rows: rowsExpandable,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
         searchInputId: 'search__input-2',
         searchLabelId: 'search-input-label-1',
         searchLabel: 'Search',
         clearSearchLabel: 'Clear search input',
         addNewLabel: 'Add new',
+        sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
         truncate: true,
       },
