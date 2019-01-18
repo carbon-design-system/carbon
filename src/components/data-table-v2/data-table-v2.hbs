@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -212,7 +212,7 @@
   </thead>
   <tbody>
     {{#each rows as |row|}}
-      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if row.disabled}} disabled {{/if}}>
+      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if (and ../componentsX row.disabled)}} disabled {{/if}}>
         {{#each ../columns as |column|}}
           {{#with (lookup row column.name) as |data|}}
             {{#if column.section}}
