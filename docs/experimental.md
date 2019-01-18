@@ -6,6 +6,7 @@
 ## Table of Contents
 
 - [Publishing](#publishing)
+- [Application usage](#application-usage)
 - [Iconography](#iconography)
   - [Introduction](#introduction)
   - [FAQ](#faq)
@@ -40,6 +41,62 @@ modified:   src/globals/scss/_feature-flags.scss
 - Inspect build folders to verify feature flags are set to true
 - Run `npm publish . --tag alpha`
 - Run `git checkout -- src/globals package.json` to unstage changes
+
+## Application usage
+
+An alternate way for applications to try out `v10` design is building our latest `v9` release with feature flags changed. e.g. in `webpack.config.js`:
+
+```javascript
+const replaceTable = {
+  breakingChangesX: true,
+  componentsX: true,
+  grid: true,
+};
+
+...
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.scss$/,
+        use: [
+          ...
+          {
+            loader: 'sass-loader',
+            options: {
+              ...
+              data: `
+                $feature-flags: (
+                  components-x: true,
+                  breaking-changes-x: true,
+                  grid: true,
+                  ui-shell: true,
+                );
+              `,
+            },
+          },
+        ],
+      },
+      {
+        test: /(\/|\\)feature-flags\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          multiple: Object.keys(replaceTable).map(key => ({
+            search: `exports\.${key}\\s*=\\s*false`,
+            replace: `exports.${key} = ${replaceTable[key]}`,
+            flags: 'i',
+          })),
+        },
+      },
+    ],
+    ...
+  },
+};
+
+```
 
 ## Iconography
 
