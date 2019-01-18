@@ -548,6 +548,7 @@ module.exports = {
         searchLabel: 'Search',
         clearSearchLabel: 'Clear search input',
         addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
         truncate: true,

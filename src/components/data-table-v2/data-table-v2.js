@@ -66,7 +66,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       this._handleDocumentClick(evt);
     });
 
-    this.element.addEventListener('keydown', this._keydownHandler);
+    this.element.addEventListener('keydown', evt => {
+      this._keydownHandler(evt);
+    });
 
     this.state = {
       checkboxCount: 0,
@@ -314,8 +316,20 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _keydownHandler = evt => {
+    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
+    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+
     if (evt.which === 27) {
       this._actionBarCancel();
+    }
+
+    if (searchContainer && searchEvent && evt.which === 13) {
+      this.activateSearch(searchContainer);
+    }
+
+    if (activeSearch && evt.which === 27) {
+      this.deactivateSearch(searchContainer, evt);
     }
   };
 
