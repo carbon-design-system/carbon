@@ -1,6 +1,7 @@
 // Used for sidebar in dev environment
 @import 'carbon-addons-cloud/scss/components/InteriorLeftNav/interior-left-nav';
 @import '../../src/globals/scss/styles';
+@import '../../src/globals/scss/functions';
 @import './_vars.scss';
 @import './_mixins.scss';
 @import './_layout.scss';
@@ -161,34 +162,59 @@
   z-index: 8000;
 }
 
-.bx--row {
-  min-height: 50px;
-}
-
-[class*='bx--col'] {
-  background-color: $color__gray-1;
-
-  p {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+//--------------------------------------------------------------------------
+// Grid
+//--------------------------------------------------------------------------
+// Custom styling for the grid demo
+@if feature-flag-enabled('grid') {
+  .outside {
+    background-color: #dbeaff;
+    outline: 1px solid #97c1ff;
+    height: 80px;
   }
-}
 
-.col-example {
-  background-color: rgba(blue, 0.2);
-  height: 100%;
-}
+  .inside {
+    background-color: #edf4ff;
+    height: 100%;
+  }
 
-.red {
-  background-color: rgba(red, 0.2);
-}
+  [class*='col'] {
+    outline: 1px dashed #97c1ff;
+  }
 
-.green {
-  background-color: rgba(green, 0.2);
-}
+  .#{$prefix}--grid {
+    outline: 1px dashed #97c1ff;
+  }
+} @else {
+  .bx--row {
+    min-height: 50px;
+  }
 
-.indigo {
-  background-color: rgba(indigo, 0.2);
+  [class*='bx--col'] {
+    background-color: $color__gray-1;
+
+    p {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  .col-example {
+    background-color: rgba(blue, 0.2);
+    height: 100%;
+  }
+
+  .red {
+    background-color: rgba(red, 0.2);
+  }
+
+  .green {
+    background-color: rgba(green, 0.2);
+  }
+
+  .indigo {
+    background-color: rgba(indigo, 0.2);
+  }
 }
 
 .component-example__live .bx--form-item {

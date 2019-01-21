@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
@@ -13,11 +20,11 @@
     top: mini-units(6);
     bottom: 0;
     left: 0;
-    background-color: $ibm-colors__gray--90;
+    background-color: $ibm-colors__gray-90;
     width: mini-units(32);
     z-index: z('dropdown');
     box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
-    color: $ibm-colors__gray--10;
+    color: $ibm-colors__gray-10;
   }
 
   .#{$prefix}--navigation--right {
@@ -26,7 +33,7 @@
   }
 
   .#{$prefix}--navigation svg {
-    fill: $ibm-colors__gray--10;
+    fill: $ibm-colors__gray-10;
   }
 
   //----------------------------------------------------------------------------
@@ -36,7 +43,7 @@
     display: block;
     content: '';
     height: 1px;
-    background-color: $ibm-colors__gray--80;
+    background-color: $ibm-colors__gray-80;
     margin: 0 mini-units(2);
   }
 
@@ -62,7 +69,7 @@
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: $ibm-colors__blue--60;
+    background-color: $ibm-colors__blue-60;
   }
 
   //----------------------------------------------------------------------------
@@ -71,7 +78,7 @@
   a.#{$prefix}--navigation-link {
     display: flex;
     align-items: center;
-    color: $ibm-colors__gray--10;
+    color: $ibm-colors__gray-10;
     text-decoration: none;
     font-size: rem(14px);
     font-weight: 400;
@@ -86,7 +93,7 @@
   }
 
   a.#{$prefix}--navigation-link:focus {
-    outline: rem(3px) solid $ibm-colors__blue--60;
+    outline: rem(3px) solid $ibm-colors__blue-60;
     outline-offset: rem(-3px);
   }
 
@@ -113,7 +120,7 @@
   }
 
   .#{$prefix}--navigation__category-toggle:focus {
-    outline: rem(3px) solid $ibm-colors__blue--60;
+    outline: rem(3px) solid $ibm-colors__blue-60;
     outline-offset: rem(-3px);
   }
 
@@ -123,7 +130,7 @@
     justify-content: space-between;
     padding-right: mini-units(2);
     width: 100%;
-    color: $ibm-colors__gray--10;
+    color: $ibm-colors__gray-10;
     font-size: rem(14px);
     font-weight: 400;
     min-height: mini-units(5);
@@ -162,7 +169,7 @@
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: $ibm-colors__blue--60;
+    background-color: $ibm-colors__blue-60;
   }
 
   .#{$prefix}--navigation__category-item--active > a.#{$prefix}--navigation-link {

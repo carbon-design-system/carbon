@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export { default as Checkbox } from '../../components/checkbox/checkbox';
 export { default as FileUploader } from '../../components/file-uploader/file-uploader';
 export { default as FabButton } from '../../components/fab/fab';
