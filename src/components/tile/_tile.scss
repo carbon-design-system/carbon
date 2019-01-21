@@ -312,7 +312,9 @@
   }
 
   .#{$prefix}--tile-input {
-    display: none;
+    float: left;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
