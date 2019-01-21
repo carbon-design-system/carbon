@@ -1,0 +1,103 @@
+@import 'functions';
+@import 'mixins';
+@import 'variables';
+
+@mixin grid-experimental {
+  body {
+    font-size: map-get($grid-values, 'rem') * 1px;
+    margin: 0;
+  }
+
+  .#{$prefix}-container {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: #{map-get($last, breakpoint)}rem;
+    width: 100vw;
+    @if $includeFlexFallback {
+      overflow-x: hidden;
+    }
+  }
+
+  @if $includeFlexFallback {
+    @supports (display: grid) {
+      .#{$prefix}-container {
+        overflow-x: initial;
+      }
+    }
+  }
+
+  .#{$prefix}-container--left {
+    margin-left: 0;
+  }
+
+  .#{$prefix}-container--right {
+    margin-right: 0;
+  }
+
+  .#{$prefix}-grid {
+    align-items: flex-start;
+    box-sizing: border-box;
+    @if $includeFlexFallback {
+      display: flex;
+    }
+    display: grid;
+    flex-wrap: wrap;
+    position: relative;
+
+    > * {
+      box-sizing: border-box;
+      height: 100%;
+
+      :last-child,
+      :last-child > :last-child,
+      :last-child > :last-child > :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  [class*='#{$prefix}-padding'] {
+    box-sizing: border-box;
+  }
+
+  @if $includeFlexFallback {
+    .#{$prefix}-grid > * {
+      width: 100%;
+    }
+
+    @supports (display: grid) {
+      .#{$prefix}-grid {
+        align-items: unset;
+      }
+
+      .#{$prefix}-grid > * {
+        width: initial;
+      }
+    }
+  }
+
+  @each $name, $breakpoint in $allBreakpoints {
+    @include gridBreakpointWrapper($breakpoint, $first) {
+      @if $includeFlexFallback {
+        @include gridLegacyZeros($breakpoint, $allBreakpoints, $name);
+        @include gridLegacyColumns($breakpoint, $first, $last, $name, $allBreakpoints);
+        @if isSameBreakpoint($breakpoint, $last) == false {
+          @include gridLegacyHeights($name, $rows, $rowHeight);
+        }
+      }
+
+      @if (map-has-key($allBreakpoints, $name)) {
+        @include gridMargin($breakpoint, $last);
+        @include gridPadding($breakpoint);
+        @include gridLegacyWrapper($includeFlexFallback) {
+          @include gridColumns($breakpoint, $first, $last) {
+            display: grid;
+            grid-auto-rows: minmax($rowHeight * 1rem, min-content);
+          }
+          @include gridVariables($breakpoint, $first, $rows, $rowHeight);
+        }
+      }
+    }
+  }
+}

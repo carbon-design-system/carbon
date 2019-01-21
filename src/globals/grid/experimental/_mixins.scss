@@ -1,0 +1,263 @@
+// Enclose content in appropiate media query
+@mixin gridBreakpointWrapper($breakpoint, $first) {
+  @if isSameBreakpoint($breakpoint, $first) {
+    @content;
+  } @else {
+    @media (min-width: map-get($breakpoint, breakpoint) * 1rem) {
+      @content;
+    }
+  }
+}
+
+// Set the width of a grid’s column
+@mixin gridColumns($breakpoint, $first, $last) {
+  @if (map-get($breakpoint, columns) != null) {
+    $columnQuantity: map-get($breakpoint, columns);
+    $columnSize: 100vw / $columnQuantity;
+    $gridWidth: null;
+    $totalMargin: 0;
+
+    @if map-get($breakpoint, margin) != 0 and map-get($breakpoint, margin) != null {
+      $totalMargin: map-get($breakpoint, margin) * 2;
+    }
+
+    @if isSameBreakpoint($breakpoint, $last) and map-get($last, margin) != null {
+      $totalMargin: map-get($last, margin) * 2;
+    }
+
+    @if isSameBreakpoint($breakpoint, $last) and $totalMargin != 0 {
+      $columnSize: calc((#{map-get($breakpoint, breakpoint) * 1rem} - #{$totalMargin}) / #{$columnQuantity});
+    } @else if isSameBreakpoint($breakpoint, $last) {
+      $columnSize: calc(#{map-get($breakpoint, breakpoint) * 1rem} / #{$columnQuantity});
+    } @else if $totalMargin != 0 {
+      $columnSize: calc(#{$columnSize} - #{$totalMargin / $columnQuantity});
+    }
+
+    .#{$prefix}-grid {
+      @if isSameBreakpoint($breakpoint, $first) {
+        @content;
+      }
+      grid-template-columns: repeat(auto-fill, $columnSize);
+
+      &.#{$prefix}-grid--fixed-columns {
+        grid-template-columns: repeat(auto-fill, map-get($breakpoint, breakpoint) * 1rem / map-get($breakpoint, columns));
+      }
+
+      &.#{$prefix}-grid--fluid-rows {
+        grid-auto-rows: $columnSize;
+      }
+    }
+  }
+}
+
+// Generate variables for commonly used rows
+@mixin gridHeightsFixed($rows, $rowHeight) {
+  @for $i from 1 to $rows {
+    --#{$prefix}-height-#{$i}: $i * $rowHeight * 1rem;
+  }
+}
+
+// Set the width of a grid’s column for legacy grid
+@mixin gridLegacyColumns($breakpoint, $first, $last, $name, $breakpoints) {
+  $columnValue: null;
+  $columnSize: null;
+  $totalMargin: 0;
+
+  @if map-get($breakpoint, margin) {
+    $totalMargin: #{map-get($breakpoint, margin)} * 2;
+  }
+
+  // Do not make class if last media query
+  @if isSameBreakpoint($breakpoint, $last) == false {
+    // Loop each breakpoint to insert previous breakpoint classes inside this breakpoint’s media query
+    // Ex: Make sure .yourPrefix-grid__col--sm--2 has correct sizes in the lg media query
+    @each $currentName, $currentBreakpoint in $breakpoints {
+      // Check if current breakpoint is not bigger than current media query
+      @if map-get($breakpoint, breakpoint) >= map-get($currentBreakpoint, breakpoint) {
+        $columnAmount: map-get($currentBreakpoint, columns);
+
+        // Loop each column in current breakpoint for new class
+        // Ex: .yourPrefix-grid__col--sm--1, .yourPrefix-grid__col--sm--2, etc.
+        @for $i from 1 through map-get($currentBreakpoint, columns) {
+          $columnSize: columnWidth($breakpoint, $first, $last, $i, $columnAmount);
+
+          $isSecondToLast: isSameBreakpoint($breakpoint, nth(nth($breakpoints, length($breakpoints) - 1), 2));
+
+          $maxColumnSize: calc(#{map-get($last, breakpoint)}rem / #{map-get($currentBreakpoint, columns)} * #{$i});
+
+          @if map-get($last, margin) > 0 {
+            $maxColumnSize: calc(
+              (#{map-get($last, breakpoint)}rem - #{map-get($last, margin)} * 2) / #{map-get($currentBreakpoint, columns)} * #{$i}
+            );
+          }
+
+          .#{$prefix}-grid__col--#{$currentName}--#{$i} {
+            // If second-to-last media query, apply max-width instead of remaking classes in last media query
+            @if $isSecondToLast {
+              max-width: $maxColumnSize;
+            }
+            min-width: $columnSize;
+            width: $columnSize;
+          }
+
+          .#{$prefix}-grid__height-fluid--#{$currentName}--#{$i} {
+            height: $columnSize;
+            // If second-to-last media query, apply max-height instead of remaking classes in last media query
+            @if $isSecondToLast {
+              max-height: $maxColumnSize;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @if isSameBreakpoint($breakpoint, $last) {
+    [class*='#{$prefix}-grid__col--'] {
+      min-width: 0;
+    }
+  }
+}
+
+// Set the height of an item for legacy grid
+@mixin gridLegacyHeights($name, $rows, $rowHeight) {
+  .#{$prefix}-grid__height--#{$name}--0 {
+    height: 0;
+  }
+  @for $i from 1 to $rows {
+    .#{$prefix}-grid__height-fixed--#{$name}--#{$i} {
+      height: $i * $rowHeight * 1rem;
+    }
+  }
+}
+
+// If we need legacy grid, wrap this content in support tag
+@mixin gridLegacyWrapper($includeFlexFallback) {
+  @if $includeFlexFallback {
+    @supports (display: grid) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Generate all classes for 0 and 0-only displaying, including custom breakpoints if they exist
+@mixin gridLegacyZeros($breakpoint, $breakpoints, $name) {
+  // Undo previous breakpoint’s 0--only class
+  $onlyCorrectionFound: false;
+  @for $i from length($breakpoints) * -1 through -1 {
+    $currentBreakpoint: nth($breakpoints, $i);
+    @if map-get(nth($currentBreakpoint, 2), breakpoint) < map-get($breakpoint, breakpoint) and $onlyCorrectionFound == false {
+      .#{$prefix}-grid__col--#{nth($currentBreakpoint, 1)}--0--only {
+        display: flex;
+      }
+
+      $onlyCorrectionFound: true;
+    }
+  }
+
+  [class*='#{$prefix}-grid__col--#{$name}--'] {
+    display: flex;
+  }
+
+  .#{$prefix}-grid__col--#{$name}--0,
+  .#{$prefix}-grid__col--#{$name}--0--only {
+    display: none;
+  }
+}
+
+// Set the width of a grid’s margin
+// and allow for a child to break out of the grid’s margin
+@mixin gridMargin($breakpoint, $last) {
+  @if map-get($breakpoint, margin) != null and map-get($breakpoint, margin) > 0 {
+    $margin: #{map-get($breakpoint, margin)};
+
+    .#{$prefix}-container {
+      padding-left: $margin;
+      padding-right: $margin;
+    }
+
+    .#{$prefix}-grid.#{$prefix}-grid--bleed {
+      @if isSameBreakpoint($breakpoint, $last) {
+        $maxBleed: '(100vw - #{map-get($breakpoint, breakpoint) * 1rem}) / -2';
+        margin-left: calc(#{$maxBleed} - #{$margin});
+        margin-right: calc(#{$maxBleed} - #{$margin});
+        padding-left: calc(#{$maxBleed} * -1 + #{$margin});
+        padding-right: calc(#{$maxBleed} * -1 + #{$margin});
+      } @else {
+        margin-left: -$margin;
+        margin-right: -$margin;
+        padding-left: $margin;
+        padding-right: $margin;
+      }
+      width: 100vw;
+    }
+
+    .#{$prefix}-grid--bleed--left {
+      padding-left: $margin;
+      margin-left: -$margin;
+    }
+
+    .#{$prefix}-grid--bleed--right {
+      padding-right: $margin;
+      margin-right: -$margin;
+    }
+
+    @include gridLegacyWrapper($includeFlexFallback) {
+      .#{$prefix}-grid__break--left {
+        margin-left: -$margin;
+      }
+
+      .#{$prefix}-grid__break--right {
+        margin-right: -$margin;
+      }
+    }
+  }
+}
+
+// Classnames for different padding options
+@mixin gridPadding($breakpoint) {
+  @if (map-get($breakpoint, padding) != null) {
+    $padding: map-get($breakpoint, padding);
+
+    .#{$prefix}-padding {
+      padding: $padding;
+    }
+
+    .#{$prefix}-padding--bottom {
+      padding-bottom: $padding;
+    }
+
+    .#{$prefix}-padding--left {
+      padding-left: $padding;
+    }
+
+    .#{$prefix}-padding--right {
+      padding-right: $padding;
+    }
+
+    .#{$prefix}-padding--top {
+      padding-top: $padding;
+    }
+
+    .#{$prefix}-padding--horizontal {
+      padding-left: $padding;
+      padding-right: $padding;
+    }
+
+    .#{$prefix}-padding--vertical {
+      padding-bottom: $padding;
+      padding-top: $padding;
+    }
+  }
+}
+
+// Use all CSS Variable mixins
+@mixin gridVariables($breakpoint, $first, $rows, $rowHeight) {
+  @if isSameBreakpoint($breakpoint, $first) {
+    :root {
+      @include gridHeightsFixed($rows, $rowHeight);
+    }
+  }
+}

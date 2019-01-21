@@ -1,0 +1,146 @@
+///                                                                  _
+///                                                                 | |
+///  ___  __ _ ___ ___ ______ _ __ ___   __ _ _ __  ___ ______ _ __ | |_   _ ___
+/// / __|/ _` / __/ __|______| '_ ` _ \ / _` | '_ \/ __|______| '_ \| | | | / __|
+/// \__ \ (_| \__ \__ \      | | | | | | (_| | |_) \__ \      | |_) | | |_| \__ \
+/// |___/\__,_|___/___/      |_| |_| |_|\__,_| .__/|___/      | .__/|_|\__,_|___/
+///                                          | |              | |
+///                                          |_|              |_|
+///  Sass Maps Plus 0.9.2
+///  Advanced map and list-map manipulation for all versions of Sass
+///  MIT License
+///  @author Lu Nelson
+
+/// Global sort direction: either `asc` or `desc`
+/// @access public
+/// @group map-lists/map-maps
+$maps-sort-dir: 'asc';
+
+/// get value at nested or 'deep' key, per $keys list
+/// @access public
+/// @group maps
+/// @param {Map} $map - map
+/// @param {Arglist} $keys - nested keys
+/// @return {*}
+@function map-get-nested($map, $keys...) {
+  @if length($map) == 0 {
+    @return null;
+  }
+  @each $key in $keys {
+    @if type-of($map) != 'map' {
+      @return $map;
+    }
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+/// Sort a list-of-maps or map-of-maps, based on value at key(s) in maps
+/// @access public
+/// @group map-lists/map-maps
+/// @param {Map|List} $maps - Map of maps, or List of maps, to sort
+/// @param {Arglist} $keys - Chain of keys to the value that will be sorted for
+/// @return {Map|List}
+/// @require {function} map-get-nested
+@function maps-sort($maps, $keys...) {
+  @if length($keys) == 0 {
+    @return $maps;
+  }
+
+  @if length($maps) > 1 {
+    $less: ();
+    $equal: ();
+    $greater: ();
+
+    $map-of-maps: type-of($maps) == 'map';
+
+    @if $map-of-maps {
+      $seed-map: nth(nth($maps, ceil(length($maps) / 2)), 2);
+
+      $seed-value: map-get-nested($seed-map, $keys...);
+
+      // TODO: add code to handle case of non-number values (warn and return $maps)
+
+      @each $key, $map in $maps {
+        $curr-value: map-get-nested($map, $keys...);
+
+        @if $curr-value == $seed-value {
+          $equal: map-merge(
+            $equal,
+            (
+              $key: $map,
+            )
+          );
+        } @else if $curr-value < $seed-value {
+          @if $maps-sort-dir == 'asc' {
+            $less: map-merge(
+              $less,
+              (
+                $key: $map,
+              )
+            );
+          } @else {
+            $greater: map-merge(
+              $greater,
+              (
+                $key: $map,
+              )
+            );
+          }
+        } @else {
+          @if $maps-sort-dir == 'asc' {
+            $greater: map-merge(
+              $greater,
+              (
+                $key: $map,
+              )
+            );
+          } @else {
+            $less: map-merge(
+              $less,
+              (
+                $key: $map,
+              )
+            );
+          }
+        }
+      }
+
+      $less: maps-sort($less, $keys...);
+      $greater: maps-sort($greater, $keys...);
+
+      @return map-merge(map-merge($less, $equal), $greater);
+    } @else {
+      $seed-map: nth($maps, ceil(length($maps) / 2));
+
+      $seed-value: map-get-nested($seed-map, $keys...);
+
+      @each $map in $maps {
+        $curr-value: map-get-nested($map, $keys...);
+
+        @if $curr-value == $seed-value {
+          $equal: append($equal, $map);
+        } @else if $curr-value < $seed-value {
+          @if $maps-sort-dir == 'asc' {
+            $less: append($less, $map);
+          } @else {
+            $greater: append($greater, $map);
+          }
+        } @else {
+          @if $maps-sort-dir == 'asc' {
+            $greater: append($greater, $map);
+          } @else {
+            $less: append($less, $map);
+          }
+        }
+      }
+
+      $less: maps-sort($less, $keys...);
+      $greater: maps-sort($greater, $keys...);
+
+      @return join(join($less, $equal), $greater);
+    }
+  }
+
+  @return $maps;
+}
