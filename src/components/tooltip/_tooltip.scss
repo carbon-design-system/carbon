@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
@@ -330,7 +337,7 @@
   }
 }
 
-@mixin tooltip--experimental {
+@mixin tooltip--x {
   .#{$prefix}--tooltip--icon {
     display: flex;
     align-items: center;
@@ -490,7 +497,7 @@
       @include typescale('zeta');
       display: inline-flex;
       position: relative;
-      border-bottom: 1px dotted $brand-01;
+      border-bottom: 1px dotted $interactive-01;
       color: $text-01;
 
       &:hover {
@@ -688,7 +695,7 @@
 
 @include exports('tooltip') {
   @if feature-flag-enabled('components-x') {
-    @include tooltip--experimental;
+    @include tooltip--x;
   } @else {
     @include tooltip;
   }

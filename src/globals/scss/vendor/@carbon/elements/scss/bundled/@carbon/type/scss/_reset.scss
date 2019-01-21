@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../../@carbon/layout/scss/convert';
+@import 'font-family';
+
+/// Include a type reset that individuals can use in their projects for
+/// consistent rendering
+@mixin type-reset {
+  html {
+    font-size: $base-font-size;
+  }
+
+  body {
+    @include font-family('sans');
+    @include font-weight('regular');
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

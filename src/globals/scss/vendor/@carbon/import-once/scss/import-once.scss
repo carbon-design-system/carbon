@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Used from carbon-components:
+// https://github.com/IBM/carbon-components/blob/7fd0895c2061db5a90ff6c8a933a20dd83d6d790/src/globals/scss/_import-once.scss#L1-L16
+$imported-modules: () !default;
+
+/// Module export mixin
+/// This mixin helps making sure a module is imported once and only once.
+/// @access public
+/// @param {String} $name - Name of exported module
+/// @param {Bool} $error [false] - Error when a module has been already imported
+/// @require $imported-modules
+@mixin exports($name, $error: false) {
+  @if (index($imported-modules, $name) == null) {
+    $imported-modules: append($imported-modules, $name) !global;
+    @content;
+  } @else if $error == true {
+    @error 'Module `#{$name}` has already been imported.';
+  }
+}

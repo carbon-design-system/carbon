@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
@@ -84,7 +91,7 @@
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
     // Separates out the panel from the header of the same color
-    border-top: 1px solid $ibm-colors__gray--80;
+    border-top: 1px solid $ibm-colors__gray-80;
     z-index: z('header');
   }
 
@@ -117,7 +124,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__header {
     display: flex;
-    border-bottom: 1px solid $ibm-colors__gray--80;
+    border-bottom: 1px solid $ibm-colors__gray-80;
     width: 100%;
     height: mini-units(6);
     max-width: 100%;
@@ -322,7 +329,7 @@
 
   .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link--current,
   .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[aria-current='page'] {
-    background-color: $ibm-colors__gray--70;
+    background-color: $ibm-colors__gray-70;
   }
 
   //----------------------------------------------------------------------------
