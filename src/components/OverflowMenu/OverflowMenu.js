@@ -354,12 +354,19 @@ export default class OverflowMenu extends Component {
 
   handleKeyPress = evt => {
     // only respond to key events when the menu is closed, so that menu items still respond to key events
+    const key = evt.key || evt.which;
     if (!this.state.open) {
-      const key = evt.key || evt.which;
-
       if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
         this.setState({ open: true });
       }
+    }
+
+    // Close the overflow menu on escape
+    if (key === 'Escape' || key === 'Esc' || key === 27) {
+      this.closeMenu();
+      // Stop the esc keypress from bubbling out and closing something it shouldn't
+      evt.stopPropagation();
+      evt.preventDefault();
     }
   };
 
