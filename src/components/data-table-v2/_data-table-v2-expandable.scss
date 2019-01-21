@@ -192,16 +192,23 @@
         border-bottom: 1px solid $hover-field;
       }
 
-      > td:last-of-type {
-        border-right: 1px solid transparent;
-      }
-
       + tr[data-child-row] {
         > td {
           background-color: $hover-field;
-          border-right: 1px solid transparent;
           color: $text-01;
         }
+      }
+    }
+
+    //focus on expanded parent row
+    &:focus {
+      outline: none;
+      border: 2px solid $brand-01;
+      border-bottom: none;
+
+      + tr[data-child-row] {
+        border: 2px solid $brand-01;
+        border-top: none;
       }
     }
   }
@@ -216,7 +223,7 @@
     }
 
     > td:first-of-type {
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid $hover-field;
     }
   }
 
@@ -253,7 +260,7 @@
     padding: $spacing-3xs;
   }
 
-  //expand + select
+  //expand + select row styles
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected {
     &:first-of-type td {
       border-bottom: none;
@@ -269,6 +276,10 @@
 
     &:hover td {
       background: $hover-selected-ui;
+    }
+
+    &:focus {
+      outline-offset: 0;
     }
   }
 
