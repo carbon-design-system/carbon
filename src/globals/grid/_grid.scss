@@ -6,8 +6,8 @@
 //
 
 @import '../scss/functions';
-@import './classic/classic';
 @import './experimental';
+@import './classic/classic';
 
 @include exports('grid') {
   @if feature-flag-enabled('grid') {
