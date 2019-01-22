@@ -9,9 +9,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { iconCaretDown } from 'carbon-icons';
+// TODO: import { ChevronDownGlyph } from '@carbon/icons-react';
+import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import TabContent from '../TabContent';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -263,7 +266,11 @@ export default class Tabs extends React.Component {
               onClick={this.handleDropdownClick}>
               {selectedLabel}
             </a>
-            <Icon description={iconDescription} icon={iconCaretDown} />
+            {componentsX ? (
+              <ChevronDownGlyph aria-hidden />
+            ) : (
+              <Icon description={iconDescription} icon={iconCaretDown} />
+            )}
           </div>
           <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}
