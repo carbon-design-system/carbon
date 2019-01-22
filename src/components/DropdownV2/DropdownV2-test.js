@@ -62,6 +62,61 @@ describe('DropdownV2', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('title', () => {
+    const wrapper = mount(
+      <DropdownV2 titleText="Email Input" {...mockProps} />
+    );
+    const renderedLabel = wrapper.find('label');
+
+    it('renders a title', () => {
+      expect(renderedLabel.length).toBe(1);
+    });
+
+    it('has the expected classes', () => {
+      expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+    });
+
+    it('should set title as expected', () => {
+      expect(renderedLabel.text()).toEqual('Email Input');
+    });
+  });
+
+  describe('helper', () => {
+    it('renders a helper', () => {
+      const wrapper = mount(
+        <DropdownV2 helperText="Email Input" {...mockProps} />
+      );
+      const renderedHelper = wrapper.find('.bx--form__helper-text');
+      expect(renderedHelper.length).toEqual(1);
+    });
+
+    it('renders children as expected', () => {
+      const wrapper = mount(
+        <DropdownV2
+          helperText={
+            <span>
+              This helper text has <a href="/">a link</a>.
+            </span>
+          }
+          {...mockProps}
+        />
+      );
+      const renderedHelper = wrapper.find('.bx--form__helper-text');
+      expect(renderedHelper.props().children).toEqual(
+        <span>
+          This helper text has <a href="/">a link</a>.
+        </span>
+      );
+    });
+
+    it('should set helper text as expected', () => {
+      const wrapper = mount(<DropdownV2 {...mockProps} />);
+      wrapper.setProps({ helperText: 'Helper text' });
+      const renderedHelper = wrapper.find('.bx--form__helper-text');
+      expect(renderedHelper.text()).toEqual('Helper text');
+    });
+  });
+
   it('should render DropdownItem components', () => {
     const wrapper = mount(<DropdownV2 {...mockProps} />);
     wrapper.setProps({

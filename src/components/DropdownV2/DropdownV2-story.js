@@ -51,6 +51,8 @@ const props = () => ({
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
+  titleText: text('Title (titleText)', 'This is not a dropdown title.'),
+  helperText: text('Helper text (helperText)', 'This is not some helper text.'),
 });
 
 const itemToElement = item => {

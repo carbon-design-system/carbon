@@ -88,6 +88,18 @@ export default class DropdownV2 extends React.Component {
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * Provide the title text that will be read by a screen reader when
+     * visiting this control
+     */
+    titleText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+
+    /**
+     * Provide helper text that is used alongside the control label for
+     * additional help
+     */
+    helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   };
 
   static defaultProps = {
@@ -96,6 +108,8 @@ export default class DropdownV2 extends React.Component {
     itemToString: defaultItemToString,
     itemToElement: null,
     light: false,
+    titleText: '',
+    helperText: '',
   };
 
   handleOnChange = selectedItem => {
@@ -118,13 +132,24 @@ export default class DropdownV2 extends React.Component {
       selectedItem,
       light,
       id,
+      titleText,
+      helperText,
     } = this.props;
     const className = cx(`${prefix}--dropdown`, containerClassName, {
       [`${prefix}--dropdown--light`]: light,
     });
+    const title = titleText ? (
+      <label htmlFor={id} className={`${prefix}--label`}>
+        {titleText}
+      </label>
+    ) : null;
+    const helper = helperText ? (
+      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+    ) : null;
+
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    return (
+    const Dropdown = (
       <Downshift
         id={id}
         onChange={this.handleOnChange}
@@ -175,6 +200,15 @@ export default class DropdownV2 extends React.Component {
           </ListBox>
         )}
       </Downshift>
+    );
+    return title || helper ? (
+      <>
+        {title}
+        {helper}
+        {Dropdown}
+      </>
+    ) : (
+      Dropdown
     );
   }
 }
