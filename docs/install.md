@@ -23,7 +23,7 @@ In light of some of the recent `npm` security issues [[1]](https://blog.npmjs.or
 
 # Continuous Integration
 
-We specify a `.yanrc` file in this project that sets the path for Yarn's offline mirror to the folder `.yarn-offline-mirror`. This folder contains all the tarballs for the packages that the project uses. What this allows us to do is run `yarn install --offline` in our Continuous Integration environment so that we don't have to fetch from the live registry in our builds.
+We specify a `.yarnrc` file in this project that sets the path for Yarn's offline mirror to the folder `.yarn-offline-mirror`. This folder contains all the tarballs for the packages that the project uses. What this allows us to do is run `yarn install --offline` in our Continuous Integration environment so that we don't have to fetch from the live registry in our builds.
 
 # FAQ
 

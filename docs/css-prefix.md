@@ -34,7 +34,7 @@ An example project can be found at [`custom-css-prefix` in our example directory
 
 # Building Sass code from `carbon-components` with custom CSS prefix
 
-Custom CSS perfix in `carbon-components` Sass code can be used by setting `$prefix` Sass variable, like:
+Custom CSS prefix in `carbon-components` Sass code can be used by setting `$prefix` Sass variable, like:
 
 ```scss
 $prefix: 'your-brand';
@@ -43,7 +43,7 @@ $prefix: 'your-brand';
 
 # Building `carbon-components-react` code with custom CSS prefix
 
-Custom CSS perfix in `carbon-components-react` code can be used by changing `prefix` property in [`settings` module in `carbon-components`](https://github.com/IBM/carbon-components/blob/v9.0.0/src/globals/js/settings.js#L16) on-the-fly. This can be done in either of two ways:
+Custom CSS prefix in `carbon-components-react` code can be used by changing `prefix` property in [`settings` module in `carbon-components`](https://github.com/IBM/carbon-components/blob/v9.0.0/src/globals/js/settings.js#L16) on-the-fly. This can be done in either of two ways:
 
 1. Dependency injection
 2. On-the-fly module editing
