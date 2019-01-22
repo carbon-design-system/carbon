@@ -172,7 +172,7 @@
     align-items: center;
     justify-content: $accordion-justify-content;
     cursor: pointer;
-    padding: rem(7px) 0;
+    padding: rem(6px) 0;
     flex-direction: $accordion-flex-direction;
     width: 100%;
     margin: 0;
@@ -184,11 +184,7 @@
 
     &:focus {
       outline: none;
-
-      .#{$prefix}--accordion__arrow {
-        @include focus-outline('outline');
-        outline-offset: 0px;
-      }
+      @include focus-outline('outline');
     }
   }
 
