@@ -246,7 +246,6 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     switch (key) {
       // Esc
       case 27:
-        this.element.removeAttribute('aria-expanded');
         this.changeState('hidden', getLaunchingDetails(event), () => {
           if (isOfMenu) {
             element.focus();
