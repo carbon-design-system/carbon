@@ -30,7 +30,7 @@
       left: 0;
       height: 100%;
       transform: translate3d(-100%, 0, 0);
-      transition: $transition--expansion $carbon--standard-easing;
+      transition: 300ms $carbon--standard-easing;
       box-shadow: none;
       visibility: hidden;
     }
@@ -395,7 +395,7 @@
       @include list;
       list-style: none;
       max-height: 0;
-      transition: $transition--expansion $carbon--standard-easing;
+      transition: 300ms $carbon--standard-easing;
       padding: 0;
       opacity: 0;
       overflow: hidden;
@@ -404,7 +404,7 @@
 
     .#{$prefix}--main-nav__parent-item--expanded .#{$prefix}--main-nav__nested-list {
       max-height: 20rem;
-      transition: $transition--expansion $carbon--standard-easing;
+      transition: 300ms $carbon--standard-easing;
       opacity: 1;
       margin-top: 0.5rem;
       overflow: visible;
