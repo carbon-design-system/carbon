@@ -241,7 +241,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     const key = event.which;
     const { element, optionMenu, options } = this;
     const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
-    const isExpanded = this.element.getAttribute('aria-expanded') === 'true';
+    const isExpanded = this.element.classList.contains(this.options.classShown);
 
     switch (key) {
       // Esc
