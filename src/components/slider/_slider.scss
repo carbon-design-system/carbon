@@ -172,15 +172,6 @@
     margin: 0 $spacing-md;
     max-width: rem(640px);
     min-width: rem(200px);
-    order: 1;
-  }
-
-  .#{$prefix}--slider__range-label:first-of-type {
-    order: 0;
-  }
-
-  .#{$prefix}--slider-text-input {
-    order: 3;
   }
 
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider__range-label {
@@ -218,7 +209,6 @@
 
     &:last-of-type {
       margin-right: $spacing-md;
-      order: 2;
     }
   }
 
