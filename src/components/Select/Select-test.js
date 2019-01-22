@@ -28,7 +28,8 @@ describe('Select', () => {
 
     const selectContainer = wrapper.find('.bx--form-item > div');
     const label = wrapper.find('label');
-    const select = wrapper.find('select');
+    const selectWrapper = () => wrapper.find('Select');
+    const select = () => wrapper.find('select');
     const helper = wrapper.find('.bx--form__helper-text');
 
     describe('selectContainer', () => {
@@ -54,7 +55,9 @@ describe('Select', () => {
       });
 
       it('has the expected default iconDescription', () => {
-        expect(wrapper.props().iconDescription).toEqual('open list of options');
+        expect(selectWrapper().props().iconDescription).toEqual(
+          'open list of options'
+        );
       });
 
       it('adds new iconDescription when passed via props', () => {
@@ -70,38 +73,38 @@ describe('Select', () => {
       });
 
       it('should specify light select as expected', () => {
-        expect(wrapper.props().light).toEqual(false);
+        expect(selectWrapper().props().light).toEqual(false);
         wrapper.setProps({ light: true });
-        expect(wrapper.props().light).toEqual(true);
+        expect(selectWrapper().props().light).toEqual(true);
       });
     });
 
     describe('select', () => {
       it('renders a select', () => {
-        expect(select.length).toEqual(1);
+        expect(selectWrapper().length).toEqual(1);
       });
 
       it('has the expected classes', () => {
-        expect(select.hasClass('bx--select-input')).toEqual(true);
+        expect(select().hasClass('bx--select-input')).toEqual(true);
       });
 
       it('has the expected id', () => {
-        expect(select.props().id).toEqual('testing');
+        expect(selectWrapper().props().id).toEqual('testing');
       });
 
       it('should set defaultValue as expected', () => {
         wrapper.setProps({ defaultValue: 'select-1' });
-        expect(wrapper.find('select').props().defaultValue).toEqual('select-1');
+        expect(select().props().defaultValue).toEqual('select-1');
       });
 
       it('should set disabled as expected', () => {
-        expect(select.props().disabled).toEqual(undefined);
+        expect(selectWrapper().props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(wrapper.find('select').props().disabled).toEqual(true);
+        expect(selectWrapper().props().disabled).toEqual(true);
       });
 
       it('renders children as expected', () => {
-        expect(select.props().children.length).toEqual(2);
+        expect(selectWrapper().props().children.length).toEqual(2);
       });
     });
 
@@ -163,6 +166,28 @@ describe('Select', () => {
     it('has the expected classes', () => {
       expect(selectContainer.hasClass('bx--select--inline')).toEqual(true);
     });
+  });
+});
+
+describe('refs', () => {
+  it('should accept refs', () => {
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+        this.focus = this.focus.bind(this);
+      }
+      focus() {
+        this.myRef.current.focus();
+      }
+      render() {
+        return <Select id="test" labelText="testlabel" ref={this.myRef} />;
+      }
+    }
+    const wrapper = mount(<MyComponent />);
+    expect(document.activeElement.type).toBeUndefined();
+    wrapper.instance().focus();
+    expect(document.activeElement.type).toEqual('select-one');
   });
 });
 

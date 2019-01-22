@@ -106,6 +106,35 @@ describe('Checkbox', () => {
   });
 });
 
+describe('refs', () => {
+  it('should accept refs', () => {
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+        this.focus = this.focus.bind(this);
+      }
+      focus() {
+        this.myRef.current.focus();
+      }
+      render() {
+        return (
+          <Checkbox
+            id="test"
+            labelText="testlabel"
+            hideLabel
+            ref={this.myRef}
+          />
+        );
+      }
+    }
+    const wrapper = mount(<MyComponent />);
+    expect(document.activeElement.type).toBeUndefined();
+    wrapper.instance().focus();
+    expect(document.activeElement.type).toEqual('checkbox');
+  });
+});
+
 describe('CheckboxSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(<CheckboxSkeleton />);

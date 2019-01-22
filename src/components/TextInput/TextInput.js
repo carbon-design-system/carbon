@@ -25,6 +25,7 @@ const TextInput = ({
   invalidText,
   helperText,
   light,
+  forwardRef: ref,
   ...other
 }) => {
   const textInputProps = {
@@ -41,6 +42,7 @@ const TextInput = ({
     },
     placeholder,
     type,
+    ref,
   };
 
   const errorId = id + '-error-msg';
@@ -181,4 +183,6 @@ TextInput.defaultProps = {
   light: false,
 };
 
-export default TextInput;
+export default React.forwardRef((props, ref) => (
+  <TextInput {...props} forwardRef={ref} />
+));
