@@ -14,7 +14,7 @@ const replace = require('replace-in-file');
 const packageJson = require('../package.json');
 
 const WORKSPACE_NODE_MODULES = path.resolve(__dirname, '../../../node_modules');
-const BUNDLE_DIR = path.resolve(__dirname, '../scss/bundled');
+const BUNDLE_DIR = path.resolve(__dirname, '../scss');
 const dependencies = Object.keys(packageJson.dependencies).map(key => {
   return [key, path.join(WORKSPACE_NODE_MODULES, key)];
 });
@@ -27,26 +27,47 @@ async function build() {
       if (!(await fs.pathExists(scssFolder))) {
         return;
       }
-
-      await fs.copy(scssFolder, path.join(BUNDLE_DIR, dependency, 'scss'));
+      await fs.copy(
+        scssFolder,
+        path.join(BUNDLE_DIR, path.basename(dependencyPath))
+      );
     })
   );
 
   // Replace `@carbon` imports with relative paths
   const paths = klaw(BUNDLE_DIR, {
     nodir: true,
+    filter(item) {
+      const paths = item.path.split('/');
+      const filename = paths[paths.length - 1];
+      const folder = paths[paths.length - 3];
+
+      if (folder === 'elements') {
+        if (filename === 'index.scss' || filename === 'elements.scss') {
+          return false;
+        }
+      }
+
+      return true;
+    },
   });
 
   await Promise.all(
     paths.map(async file => {
       const relativeImportPath = path.relative(
-        file.path,
-        path.join(BUNDLE_DIR, '@carbon')
+        path.dirname(file.path),
+        BUNDLE_DIR
       );
       await replace({
         files: file.path,
-        from: /\@carbon/g,
-        to: `${relativeImportPath}/@carbon`,
+        // Regex should match the following package patterns:
+        // @carbon/packagename
+        // @carbon/package-name
+        // Where the package name is the captured group in `match`
+        from: /\@carbon\/(\w+[-\w]*)\/scss/g,
+        to(_, match) {
+          return `${relativeImportPath}/${match}`;
+        },
       });
     })
   );

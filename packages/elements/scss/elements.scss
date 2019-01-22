@@ -1,7 +1,9 @@
-@import '@carbon/import-once/scss/import-once';
-@import '@carbon/colors/scss/colors';
-@import '@carbon/themes/scss/themes';
-@import '@carbon/layout/scss/layout';
-@import '@carbon/grid/scss/grid';
-@import '@carbon/type/scss/type';
-@import '@carbon/motion/scss/motion';
+// The files below are generated using the `yarn build` stage for this
+// package
+@import './import-once/import-once';
+@import './colors/colors';
+@import './themes/themes';
+@import './layout/layout';
+@import './grid/grid';
+@import './type/type';
+@import './motion/motion';
