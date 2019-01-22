@@ -360,7 +360,7 @@ exports[`styles expressiveParagraph01 should be printable 1`] = `
 Object {
   "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1.5rem",
-  "fontWeight": 400,
+  "fontWeight": 300,
   "letterSpacing": 0,
   "lg": Object {
     "fontSize": "1.75rem",
@@ -377,7 +377,7 @@ Object {
 exports[`styles expressiveParagraph01 should be printable 2`] = `
 "font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 font-size: 1.5rem;
-font-weight: 400;
+font-weight: 300;
 line-height: 125%;
 letter-spacing: 0;
 lg: [object Object];

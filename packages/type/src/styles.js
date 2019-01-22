@@ -181,7 +181,7 @@ export const expressiveHeading05 = fluid({
 export const expressiveParagraph01 = fluid({
   fontFamily: fontFamilies.sans,
   fontSize: rem(scale[5]),
-  fontWeight: fontWeights.regular,
+  fontWeight: fontWeights.light,
   lineHeight: '125%',
   letterSpacing: 0,
   lg: {
