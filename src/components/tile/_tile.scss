@@ -312,7 +312,9 @@
   }
 
   .#{$prefix}--tile-input {
-    display: none;
+    @include hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
