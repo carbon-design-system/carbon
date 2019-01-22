@@ -281,16 +281,15 @@ letter-spacing: 0;
 
 exports[`styles expressiveHeading04 should be printable 1`] = `
 Object {
-  "@media (min-width: 42rem)": Object {
-    "fontSize": "calc(calc(1.75rem + NaN * ((100vw - 20rem) / 22)) + NaN * ((100vw - 42rem) / 40))",
-    "lineHeight": "129%",
-  },
   "@media (min-width: 82rem)": Object {
-    "fontSize": "2rem",
+    "fontSize": "calc(1.75rem + 0.25 * ((100vw - 82rem) / 17))",
     "lineHeight": "125%",
   },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "2rem",
+  },
   "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
-  "fontSize": "calc(1.75rem + NaN * ((100vw - 20rem) / 22))",
+  "fontSize": "calc(1.75rem + 0 * ((100vw - 20rem) / 62))",
   "fontWeight": 400,
   "letterSpacing": 0,
   "lineHeight": "107%",
@@ -299,12 +298,12 @@ Object {
 
 exports[`styles expressiveHeading04 should be printable 2`] = `
 "font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(1.75rem + NaN * ((100vw - 20rem) / 22));
+font-size: calc(1.75rem + 0 * ((100vw - 20rem) / 62));
 font-weight: 400;
 line-height: 107%;
 letter-spacing: 0;
--@media- -(min--width-:- -4-2rem-): [object Object];
--@media- -(min--width-:- -8-2rem-): [object Object];"
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
 `;
 
 exports[`styles expressiveHeading05 should be printable 1`] = `

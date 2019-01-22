@@ -130,12 +130,12 @@ export const expressiveHeading04 = fluid({
   lineHeight: '107%',
   letterSpacing: 0,
   breakpoints: {
-    md: {
-      lineHeight: '129%',
-    },
     xlg: {
-      fontSize: rem(scale[7]),
+      fontSize: rem(scale[6]),
       lineHeight: '125%',
+    },
+    max: {
+      fontSize: rem(scale[7]),
     },
   },
 });

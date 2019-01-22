@@ -128,13 +128,12 @@ $expressive-heading-04: (
   line-height: 107%,
   letter-spacing: 0,
   breakpoints: (
-    md: (
-      font-size: type-scale(7),
-      line-height: 129%,
-    ),
     xlg: (
-      font-size: type-scale(8),
+      font-size: type-scale(7),
       line-height: 125%,
+    ),
+    max: (
+      font-size: type-scale(8),
     ),
   ),
 ) !default;
