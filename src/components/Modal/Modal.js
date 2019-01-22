@@ -219,9 +219,9 @@ export default class Modal extends Component {
   }
 
   focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
+    const primaryFocusElement = focusContainerElement
+      ? focusContainerElement.querySelector(this.props.selectorPrimaryFocus)
+      : null;
     if (primaryFocusElement) {
       primaryFocusElement.focus();
       return;
