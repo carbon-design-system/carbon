@@ -210,7 +210,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = [...document.querySelectorAll(this.options.selectorItem)];
+    const items = [...this.element.ownerDocument.querySelectorAll(this.options.selectorItem)];
     const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
     const getNextItem = old => {
       const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
@@ -256,7 +256,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       // Enter || Space bar
       case 13:
       case 32: {
-        if (!isExpanded && document.activeElement !== this.element) {
+        if (!isExpanded && this.element.ownerDocument.activeElement !== this.element) {
           return;
         }
         event.preventDefault(); // prevent scrolling
