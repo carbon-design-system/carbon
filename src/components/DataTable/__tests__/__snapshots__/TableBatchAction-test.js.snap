@@ -44,6 +44,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       type="button"
     >
       <Icon
+        aria-hidden="true"
         className="bx--btn__icon"
         description="Add"
         fillRule="evenodd"
@@ -74,6 +75,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       >
         <svg
           alt="Add"
+          aria-hidden="true"
           aria-label="Add"
           className="bx--btn__icon"
           fillRule="evenodd"

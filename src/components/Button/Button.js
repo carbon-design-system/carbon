@@ -54,6 +54,7 @@ const Button = ({
           name={Object(icon) !== icon ? icon : undefined}
           description={iconDescription}
           className={`${prefix}--btn__icon`}
+          aria-hidden="true"
         />
       );
     }
@@ -145,6 +146,7 @@ Button.propTypes = {
       svgData: PropTypes.object.isRequired,
     }),
     PropTypes.string,
+    PropTypes.node,
   ]),
 
   /**
