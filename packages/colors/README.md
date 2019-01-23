@@ -31,26 +31,19 @@ following in your code:
 
 ```js
 // ESM
-import { colors, tokens } from '@carbon/colors';
+import { black, blue, warmGray } from '@carbon/colors';
 
 // CommonJS
-const { colors, tokens } = require('@carbon/colors');
+const { black, blue, warmGray } = require('@carbon/colors');
 ```
 
-Each color swatch is exported on the `colors` object and can be called
-by specifying the name and grade, for example:
+Each color swatch is exported as a variable, and each color name is also exported as an object that can be called
+by specifying grade, for example:
 
 ```js
-colors.black;
-colors.blue50;
-colors.warmGray100;
-```
-
-Similary, you can access tokens on the `tokens` object, for example:
-
-```js
-tokens.brand01;
-tokens.activePrimary;
+black;
+blue[50]; // Using the `blue` object.
+warmGray100; // Using the `warmGray100` variable.
 ```
 
 ### Sass
@@ -59,15 +52,14 @@ In Sass, you can import the files individual by doing:
 
 ```scss
 @import '@carbon/colors/scss/colors';
-@import '@carbon/colors/scss/tokens';
 ```
 
 This will make all the colors and token variables available to you in
-your file. They are named with the following structure: `$ibm-color__swatch--grade`, for example:
+your file. They are named with the following structure: `$ibm-color__swatch-grade`, for example:
 
 ```scss
-$ibm-color__blue--50;
-$ibm-color__warm-gray--100;
+$ibm-colors__blue-50;
+$ibm-colors__warm-gray-100;
 ```
 
 Similarly, you can access the `tokens` variables after including them.
