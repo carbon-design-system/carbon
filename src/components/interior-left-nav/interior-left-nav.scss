@@ -370,7 +370,7 @@
       hr,
       .#{$prefix}--interior-left-nav-collapse__target {
         opacity: 1;
-        transition: opacity 300ms $carbon--standard-easing;
+        transition: opacity $transition--expansion $carbon--standard-easing;
         overflow: hidden;
         white-space: nowrap;
       }
