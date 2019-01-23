@@ -1,0 +1,69 @@
+{
+  "name": "carbon-upgrade",
+  "version": "0.0.0",
+  "repository": "git@github.com:carbon-design-system/carbon-upgrade.git",
+  "license": "Apache-2.0",
+  "bin": {
+    "carbon-upgrade": "./bin/carbon-upgrade.js"
+  },
+  "scripts": {
+    "ci-check": "yarn format:diff && yarn test --ci --reporters=default --reporters=jest-junit",
+    "format": "prettier --write \"**/*.{css,js,md,scss}\"",
+    "format:diff": "prettier --list-different \"**/*.{css,js,md,scss}\"",
+    "format:staged": "prettier --write",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.3.2",
+    "@commitlint/config-conventional": "^7.3.1",
+    "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "jest-circus": "^23.6.0",
+    "jest-junit": "^6.0.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.16.1"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn format:staged",
+      "git add"
+    ],
+    "*.{scss,css}": [
+      "yarn format:staged",
+      "git add"
+    ],
+    "*.md": [
+      "yarn format:staged",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "testRunner": "jest-circus/runner",
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js?(x)",
+      "<rootDir>/**/?(*.)(spec|test).js?(x)",
+      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+    ]
+  }
+}
