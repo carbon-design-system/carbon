@@ -44,7 +44,9 @@ modified:   src/globals/scss/_feature-flags.scss
 
 ## Application usage
 
-An alternate way for applications to try out `v10` design is building our latest `v9` release with feature flags changed. e.g. in `webpack.config.js`:
+An alternate way for applications to try out `v10` design is building our latest `v9` release with feature flags changed. (Note: Given this involves build process, below technique is _not_ applied to pre-built bundles, e.g. `carbon-components.css`)
+
+One way to do it is via build toolchain, e.g. in `webpack.config.js`:
 
 ```javascript
 const replaceTable = {
@@ -96,6 +98,18 @@ module.exports = {
   },
 };
 
+```
+
+Another way, which is applicable only to our Sass code, is defining feature flags before importing `carbon-components` Sass code, e.g.:
+
+```scss
+$feature-flags: (
+  components-x: true,
+  breaking-changes-x: true,
+  grid: true,
+  ui-shell: true,
+);
+@import '~carbon-components/scss/globals/scss/styles';
 ```
 
 ## Iconography
