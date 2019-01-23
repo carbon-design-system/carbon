@@ -8,14 +8,26 @@
 <div class="{{@root.prefix}}--form-item">
   <label class="{{@root.prefix}}--label">Slider label</label>
   <div class="{{@root.prefix}}--slider-container">
-    <div class="{{@root.prefix}}--slider" data-slider data-slider-input-box="#{{inputId}}">
-      <div class="{{@root.prefix}}--slider__thumb" tabindex="0"></div>
-      <div class="{{@root.prefix}}--slider__track"></div>
-      <div class="{{@root.prefix}}--slider__filled-track"></div>
-      <input aria-label="slider" id="slider" class="{{@root.prefix}}--slider__input" type="range" step="1" min="0" max="100" value="0">
-    </div>
-    <label id="{{inputId}}_bottom-range-label" class="{{@root.prefix}}--slider__range-label">0</label>
-    <label id="{{inputId}}_top-range-label" class="{{@root.prefix}}--slider__range-label">100</label>
-    <input id="{{inputId}}" aria-labelledby="{{inputId}}_bottom-range-label {{inputId}}_top-range-label" type="number" class="{{@root.prefix}}--text-input {{@root.prefix}}--slider-text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="0">
+    {{#if componentsX}}
+      <label id="{{inputId}}_bottom-range-label" class="{{@root.prefix}}--slider__range-label">0</label>
+      <div class="{{@root.prefix}}--slider" data-slider data-slider-input-box="#{{inputId}}">
+        <div class="{{@root.prefix}}--slider__thumb" tabindex="0"></div>
+        <div class="{{@root.prefix}}--slider__track"></div>
+        <div class="{{@root.prefix}}--slider__filled-track"></div>
+        <input aria-label="slider" id="slider" class="{{@root.prefix}}--slider__input" type="range" step="1" min="0" max="100" value="0">
+      </div>
+      <label id="{{inputId}}_top-range-label" class="{{@root.prefix}}--slider__range-label">100</label>
+      <input id="{{inputId}}" aria-labelledby="{{inputId}}_bottom-range-label {{inputId}}_top-range-label" type="number" class="{{@root.prefix}}--text-input {{@root.prefix}}--slider-text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="0">
+    {{else}}
+      <div class="{{@root.prefix}}--slider" data-slider data-slider-input-box="#{{inputId}}">
+        <div class="{{@root.prefix}}--slider__thumb" tabindex="0"></div>
+        <div class="{{@root.prefix}}--slider__track"></div>
+        <div class="{{@root.prefix}}--slider__filled-track"></div>
+        <input aria-label="slider" id="slider" class="{{@root.prefix}}--slider__input" type="range" step="1" min="0" max="100" value="0">
+      </div>
+      <label id="{{inputId}}_bottom-range-label" class="{{@root.prefix}}--slider__range-label">0</label>
+      <label id="{{inputId}}_top-range-label" class="{{@root.prefix}}--slider__range-label">100</label>
+      <input id="{{inputId}}" aria-labelledby="{{inputId}}_bottom-range-label {{inputId}}_top-range-label" type="number" class="{{@root.prefix}}--text-input {{@root.prefix}}--slider-text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}" placeholder="0">
+    {{/if}}
   </div>
 </div>

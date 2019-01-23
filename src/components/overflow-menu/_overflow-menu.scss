@@ -317,7 +317,8 @@
     width: 100%;
     height: 100%;
     border: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: transparent;
     text-align: left;
     padding: 0 $spacing-md;
