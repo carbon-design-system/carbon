@@ -199,7 +199,7 @@
       flex-direction: column;
       width: rem(200px);
       padding-top: rem(20px);
-      transition: background-color $transition--expansion $carbon--standard-easing, width $transition--expansion $carbon--standard-easing;
+      transition: background-color 300ms $carbon--standard-easing, width 300ms $carbon--standard-easing;
 
       ul,
       li,
@@ -312,7 +312,7 @@
     .#{$prefix}--interior-left-nav--collapsing,
     .#{$prefix}--interior-left-nav--collapsed {
       width: rem(48px);
-      transition: background-color $transition--expansion $carbon--standard-easing, width $transition--expansion $carbon--standard-easing;
+      transition: background-color 300ms $carbon--standard-easing, width 300ms $carbon--standard-easing;
       cursor: pointer;
       background-color: rgba($color__blue-51, 0.1);
 
@@ -326,7 +326,7 @@
       hr,
       .#{$prefix}--interior-left-nav-collapse__target {
         opacity: 0;
-        transition: opacity $transition--expansion $carbon--standard-easing;
+        transition: opacity 300ms $carbon--standard-easing;
         overflow: hidden;
         white-space: nowrap;
       }
@@ -341,7 +341,7 @@
 
       .#{$prefix}--interior-left-nav-collapse__arrow {
         transform: rotate(180deg);
-        transition: transform $transition--expansion $carbon--standard-easing;
+        transition: transform 300ms $carbon--standard-easing;
       }
     }
 
@@ -362,7 +362,7 @@
 
     .#{$prefix}--interior-left-nav--expanding {
       width: rem(200px);
-      transition: width $transition--expansion $carbon--standard-easing;
+      transition: width 300ms $carbon--standard-easing;
       background-color: #fff;
 
       ul,
@@ -377,7 +377,7 @@
 
       .#{$prefix}--interior-left-nav-collapse__arrow {
         transform: rotate(0deg);
-        transition: transform $transition--expansion $carbon--standard-easing;
+        transition: transform 300ms $carbon--standard-easing;
       }
     }
   }
