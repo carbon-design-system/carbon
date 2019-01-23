@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -7,8 +7,7 @@
 
 <div class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
   <div role="button" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false" aria-haspopup="true"
-    {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list"
-    aria-expanded="false" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." {{#if disabled}}
+    {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." {{#if disabled}}
     disabled{{/if}}> <div class="{{@root.prefix}}--list-box__menu-icon">
     {{#if @root.featureFlags.componentsX}}
       {{ carbon-icon 'ChevronDownGlyph' aria-label='Open menu' }}

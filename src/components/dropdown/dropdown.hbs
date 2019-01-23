@@ -1,12 +1,11 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
 
-<ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
-  tabindex="0">
+<ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}">
   <li class="{{@root.prefix}}--dropdown-text">
     {{#unless inline}} Dropdown label {{else}}
     <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
@@ -29,7 +28,7 @@
   {{/if}}
   {{/unless}}
   <li>
-    <ul class="{{@root.prefix}}--dropdown-list">
+    <ul class="{{@root.prefix}}--dropdown-list" tabindex="1">
       {{#each items}}
         <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
           <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
