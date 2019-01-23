@@ -9,6 +9,8 @@
 @import 'spacing';
 @import 'theme-tokens';
 
+@import 'functions';
+
 $prefix: 'bx' !default;
 
 $carbon--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
@@ -27,3 +29,13 @@ $bx--standard-easing: $carbon--standard-easing;
 
 $transition--base: 250ms;
 $transition--expansion: 300ms;
+
+@if feature-flag-enabled('components-x') {
+  $carbon--ease-in: cubic-bezier(0.2, 0, 1, 0.9); // Used primarily for removing elements from the screen.
+  $carbon--ease-out: cubic-bezier(0, 0, 0.38, 0.9); // Used for adding elements to the screen or changing on-screen states at a users's input.
+  $carbon--standard-easing: cubic-bezier(0.2, 0.2, 0.38, 0.9); // Used for the majority of animations.
+
+  $transition--base: 100ms;
+  $transition--expansion: 150ms;
+
+}
