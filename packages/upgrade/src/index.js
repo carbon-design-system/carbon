@@ -7,8 +7,43 @@
 
 'use strict';
 
-async function main() {
-  console.log('Hello world');
+const program = require('commander');
+const packageJson = require('../package.json');
+const { reporter } = require('./reporter');
+
+async function main({ argv, cwd }) {
+  program
+    .name(packageJson.name)
+    .version(packageJson.version)
+    .usage('[options]')
+    .option(
+      '-d, --dry',
+      'view the result of running this command without changing any files',
+      false
+    )
+    .option(
+      '--verbose',
+      'display the full output while running this command',
+      false
+    )
+    .action(async cmd => {
+      const { dry = false, verbose = false } = cmd;
+      if (verbose) {
+        reporter.setLogLevel('verbose');
+      }
+
+      try {
+        console.log('Hello world');
+      } catch (error) {
+        console.log(
+          'Yikes, looks like something went wrong running this command'
+        );
+        console.log('Please make an issue with the following info:');
+        console.log(error);
+        process.exit(1);
+      }
+    })
+    .parse(argv);
 }
 
 module.exports = main;
