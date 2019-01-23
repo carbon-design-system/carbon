@@ -85,6 +85,7 @@ describe('Test Overflow menu', function() {
       let items;
 
       beforeEach(() => {
+        element.classList.add('bx--overflow-menu--open');
         optionsElement.classList.add('bx--overflow-menu-options--open');
         items = document.querySelectorAll(`
           .bx--overflow-menu-options--open >
@@ -125,6 +126,7 @@ describe('Test Overflow menu', function() {
       });
 
       afterEach(() => {
+        element.classList.remove('bx--overflow-menu--open');
         optionsElement.classList.remove('bx--overflow-menu-options--open');
       });
     });
