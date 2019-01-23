@@ -2,8 +2,6 @@
 
 const BABEL_ENV = process.env.BABEL_ENV;
 
-console.log('BABEL_ENV:', BABEL_ENV);
-
 module.exports = () => ({
   presets: [
     [
