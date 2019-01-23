@@ -8,6 +8,7 @@
 'use strict';
 
 const fs = require('fs-extra');
+const inquirer = require('inquirer');
 const { findPackageJson } = require('./project');
 const { reporter } = require('./reporter');
 const safeAsync = require('./tools/safeAsync');
@@ -49,7 +50,7 @@ async function run({ cwd, dry }) {
         for (const migration of packageMigrations) {
           for (const { migrate, version } of migration.from) {
             if (version === dependency.version) {
-              return [dependency, migrate, version];
+              return [dependency, migrate, migration.version];
             }
           }
         }
@@ -58,14 +59,45 @@ async function run({ cwd, dry }) {
     })
     .filter(Boolean);
 
-  await Promise.all(
-    dependenciesToMigrate.map(([dependency, migrate]) => {
-      // TODO update package.json, making sure to respect dry option
-      return migrate(dependency, cwd);
-    })
-  );
+  if (dependenciesToMigrate.length === 0) {
+    reporter.info(
+      `No migrations found for dependencies in ${packageJsonPath}.`
+    );
+  } else {
+    const answers = await inquirer.prompt({
+      type: 'checkbox',
+      name: 'dependencies',
+      message: 'Select the migrations you would like us to run:',
+      choices: dependenciesToMigrate.map(([dependency, _, version]) => {
+        return {
+          name: createChoiceFrom(dependency, version),
+          short: dependency.name,
+          checked: true,
+        };
+      }),
+    });
+
+    if (answers.dependencies.length > 0) {
+      await Promise.all(
+        dependenciesToMigrate
+          .filter(([dependency, _, version]) => {
+            return answers.dependencies.includes(
+              createChoiceFrom(dependency, version)
+            );
+          })
+          .map(([dependency, migrate]) => {
+            // TODO update package.json, making sure to respect dry option
+            return migrate(dependency, cwd);
+          })
+      );
+    }
+  }
 
   reporter.success('Done! ✨');
+}
+
+function createChoiceFrom(dependency, version) {
+  return `${dependency.name} from ${dependency.version} to ${version}`;
 }
 
 module.exports = run;
