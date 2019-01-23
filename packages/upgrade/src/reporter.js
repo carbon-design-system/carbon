@@ -33,7 +33,7 @@ class ConsoleReporter {
   }
 
   info(message) {
-    this._logCategory('info', 'blue', chalk.gray(message));
+    this._logCategory('info', 'blue', chalk.white(message));
   }
 
   log(message = '') {
