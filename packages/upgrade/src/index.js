@@ -10,6 +10,7 @@
 const program = require('commander');
 const packageJson = require('../package.json');
 const { reporter } = require('./reporter');
+const run = require('./run');
 
 async function main({ argv, cwd }) {
   program
@@ -33,7 +34,7 @@ async function main({ argv, cwd }) {
       }
 
       try {
-        console.log('Hello world');
+        await run({ cwd: cwd(), dry, verbose });
       } catch (error) {
         console.log(
           'Yikes, looks like something went wrong running this command'
