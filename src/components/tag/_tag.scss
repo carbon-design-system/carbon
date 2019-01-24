@@ -90,10 +90,6 @@
     &:not(:first-child) {
       margin-left: 0;
     }
-
-    &[disabled] {
-      @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-30);
-    }
   }
 
   .#{$prefix}--tag--basic {
@@ -134,6 +130,14 @@
 
   .#{$prefix}--tag--warm-gray {
     @include tag-theme--x($ibm-colors__warm-gray-10, $ibm-colors__warm-gray-100);
+  }
+
+  .#{$prefix}--tag--disabled {
+    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-30);
+
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 
   // Skeleton state
