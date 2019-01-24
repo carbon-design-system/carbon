@@ -5,9 +5,13 @@
   LICENSE file in the root directory of this source tree.
 -->
 
+{{#if @root.featureFlags.componentsX}}
+  <input tabindex="-1" data-tile-input id="tile-id" class="{{@root.prefix}}--tile-input" value="tile" type="checkbox" name="tiles" title="tile" />
+{{/if}}
 <label for="tile-id" aria-label="tile" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--selectable" data-tile="selectable" tabindex="0">
-  <input tabindex="-1" data-tile-input id="tile-id" class="{{@root.prefix}}--tile-input" value="tile" type="checkbox" name="tiles" title="tile"
-  />
+  {{#unless @root.featureFlags.componentsX}}
+    <input tabindex="-1" data-tile-input id="tile-id" class="{{@root.prefix}}--tile-input" value="tile" type="checkbox" name="tiles" title="tile" />
+  {{/unless}}
   <div class="{{@root.prefix}}--tile__checkmark">
     {{#if @root.featureFlags.componentsX}}
       {{ carbon-icon 'CheckmarkFilled16' }}
