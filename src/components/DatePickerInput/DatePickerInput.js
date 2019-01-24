@@ -98,6 +98,7 @@ export default class DatePickerInput extends Component {
           className={`${prefix}--date-picker__icon`}
           description={iconDescription}
           onClick={openCalendar}
+          focusable="false"
         />
       );
     })();

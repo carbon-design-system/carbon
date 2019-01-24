@@ -46,6 +46,7 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
           icon={iconCaretDown}
           description={description}
           alt={description}
+          focusable="false"
         />
       )}
     </div>

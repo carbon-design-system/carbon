@@ -450,6 +450,7 @@ export default class DatePicker extends Component {
           className={`${prefix}--date-picker__icon`}
           description={iconDescription}
           onClick={this.openCalendar}
+          focusable="false"
         />
       ) : null;
 

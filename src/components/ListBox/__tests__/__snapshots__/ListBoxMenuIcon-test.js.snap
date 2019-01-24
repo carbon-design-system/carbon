@@ -12,6 +12,7 @@ exports[`ListBoxMenuIcon should render 1`] = `
       alt="Close menu"
       description="Close menu"
       fillRule="evenodd"
+      focusable="false"
       icon={
         Object {
           "height": "5",
@@ -41,6 +42,7 @@ exports[`ListBoxMenuIcon should render 1`] = `
         alt="Close menu"
         aria-label="Close menu"
         fillRule="evenodd"
+        focusable="false"
         height="5"
         role="img"
         viewBox="0 0 10 5"
@@ -71,6 +73,7 @@ exports[`ListBoxMenuIcon should render 2`] = `
       alt="Open menu"
       description="Open menu"
       fillRule="evenodd"
+      focusable="false"
       icon={
         Object {
           "height": "5",
@@ -100,6 +103,7 @@ exports[`ListBoxMenuIcon should render 2`] = `
         alt="Open menu"
         aria-label="Open menu"
         fillRule="evenodd"
+        focusable="false"
         height="5"
         role="img"
         viewBox="0 0 10 5"
