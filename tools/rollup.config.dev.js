@@ -8,6 +8,8 @@ const replace = require('rollup-plugin-replace');
 
 module.exports = {
   input: 'demo/index.js',
+  format: 'iife',
+  name: 'CarbonComponents',
   plugins: [
     {
       load(id) {
@@ -19,10 +21,7 @@ module.exports = {
           `;
         }
         if (id === path.resolve(__dirname, '../src/globals/js/feature-flags.js')) {
-          return `
-            export * from ${JSON.stringify('../../../demo/feature-flags')};
-            export { default } from ${JSON.stringify('../../../demo/feature-flags')};
-          `;
+          return `export * from ${JSON.stringify('../../../demo/feature-flags')}`;
         }
         return undefined;
       },
@@ -57,4 +56,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
   ],
+  file: 'demo/demo.js',
+  sourcemap: 'inline',
 };
