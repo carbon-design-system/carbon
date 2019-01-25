@@ -210,7 +210,7 @@ $css--helpers: true;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: $spacing-4xs solid $ui-03;
+    border-top: $spacing-4xs solid $ui-03;
     height: rem(48px);
 
     .#{$prefix}--select {
