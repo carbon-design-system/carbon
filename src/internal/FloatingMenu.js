@@ -192,7 +192,7 @@ class FloatingMenu extends React.Component {
   };
 
   /**
-   * The cached refernce to the menu container.
+   * The cached reference to the menu container.
    * Only used if React portal API is not available.
    * @type {Element}
    * @private
@@ -249,10 +249,11 @@ class FloatingMenu extends React.Component {
       oldMenuDirection !== menuDirection
     ) {
       const menuSize = menuBody.getBoundingClientRect();
+      const { menuEl, flipped } = this.props;
       const offset =
         typeof menuOffset !== 'function'
           ? menuOffset
-          : menuOffset(menuBody, menuDirection);
+          : menuOffset(menuBody, menuDirection, menuEl, flipped);
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)

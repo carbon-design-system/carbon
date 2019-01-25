@@ -30,6 +30,7 @@ const props = {
     ),
     ariaLabel: text('ARIA label (ariaLabel)', ''),
     iconDescription: text('Icon description (iconDescription)', ''),
+    flipped: boolean('Flipped (flipped)', false),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),

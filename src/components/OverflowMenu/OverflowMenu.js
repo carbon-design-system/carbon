@@ -19,6 +19,9 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import Icon from '../Icon';
+// TODO: import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -92,7 +95,7 @@ const triggerButtonPositionFactors = {
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
-export const getMenuOffset = (menuBody, direction) => {
+export const getMenuOffset = (menuBody, direction, trigger, flip) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
   if (__DEV__) {
@@ -102,7 +105,7 @@ export const getMenuOffset = (menuBody, direction) => {
       direction
     );
   }
-  const menuWidth = menuBody.offsetWidth;
+  const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(
     menuBody,
     ':before'
@@ -130,6 +133,30 @@ export const getMenuOffset = (menuBody, direction) => {
         Math.sqrt(borderTopWidth ** 2 * 2) +
         triggerButtonPositionFactor * values[triggerButtonPositionProp],
     };
+  }
+
+  if (componentsX) {
+    switch (triggerButtonPositionProp) {
+      case 'top':
+      case 'bottom': {
+        const triggerWidth = trigger.offsetWidth;
+        return {
+          left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
+          top: 0,
+        };
+      }
+      case 'left':
+      case 'right': {
+        const triggerHeight = trigger.offsetHeight;
+        return {
+          left: 0,
+          top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
+        };
+      }
+
+      default:
+        break;
+    }
   }
 };
 
@@ -530,6 +557,8 @@ export default class OverflowMenu extends Component {
           menuDirection={direction}
           menuOffset={flipped ? menuOffsetFlip : menuOffset}
           menuRef={this._bindMenuBody}
+          menuEl={this.menuEl}
+          flipped={this.props.flipped}
           target={this._getTarget}
           onPlace={this._handlePlace}>
           {React.cloneElement(menuBody, {
@@ -547,6 +576,22 @@ export default class OverflowMenu extends Component {
       focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
+    const overflowMenuIcon = (() => {
+      if (renderIcon) {
+        return renderIcon(iconProps);
+      }
+      if (!componentsX) {
+        return (
+          <Icon
+            {...iconProps}
+            icon={!icon && !iconName ? iconOverflowMenu : icon}
+            name={iconName}
+          />
+        );
+      }
+      return <OverflowMenuVertical16 />;
+    })();
+
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
@@ -556,19 +601,12 @@ export default class OverflowMenu extends Component {
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
+          onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
           ref={this.bindMenuEl}>
-          {renderIcon ? (
-            renderIcon(iconProps)
-          ) : (
-            <Icon
-              {...iconProps}
-              icon={!icon && !iconName ? iconOverflowMenu : icon}
-              name={iconName}
-            />
-          )}
+          {overflowMenuIcon}
           {open && wrappedMenuBody}
         </div>
       </ClickListener>
