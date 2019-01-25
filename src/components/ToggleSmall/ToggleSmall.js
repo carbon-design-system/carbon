@@ -67,6 +67,7 @@ const ToggleSmall = ({
             </svg>
           )}
         </span>
+        <span class={`${prefix}--assistive-text`}>{ariaLabel}</span>
       </label>
     </div>
   );
