@@ -1,11 +1,23 @@
 {
   "name": "carbon-upgrade",
   "version": "0.0.1",
-  "repository": "git@github.com:carbon-design-system/carbon-upgrade.git",
   "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon-upgrade",
+  "bugs": "https://github.com/carbon-design-system/carbon-upgrade/issues",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
   },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "keywords": [
+    "carbon",
+    "carbon-addons",
+    "carbon-components",
+    "carbon-components-react",
+    "carbon-design-system"
+  ],
   "scripts": {
     "ci-check": "yarn format:diff && yarn test --ci --reporters=default --reporters=jest-junit",
     "format": "prettier --write \"**/*.{css,js,md,scss}\"",
