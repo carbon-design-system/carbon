@@ -133,7 +133,7 @@ async function runInDirectory(options) {
   if (options.dry) {
     reporter.info('Your package.json file will change to:');
     console.log();
-    console.log(diff(packageJson, nextPackageJson, { expand: false }));
+    console.log(diff(nextPackageJson, packageJson, { expand: false }));
     console.log();
   } else {
     await fs.writeFile(packageJsonPath, nextPackageJson);
