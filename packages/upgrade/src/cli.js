@@ -84,9 +84,8 @@ async function runCommand(makePromise, options) {
   }
 
   try {
-    const start = Date.now();
     await makePromise();
-    console.log(`✨ Done in ${Date.now() - start}ms`);
+    console.log('Done! ✨');
   } catch (error) {
     if (error instanceof UpgradeError) {
       reporter.error(error.message);
