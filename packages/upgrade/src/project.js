@@ -9,6 +9,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const { UpgradeError } = require('./error');
 
 async function findPackageJson(folder) {
   let currentDirectory = folder;
@@ -22,7 +23,9 @@ async function findPackageJson(folder) {
   }
 
   if (path.dirname(currentDirectory) === '/' && currentDirectory === '/') {
-    throw new Error('Unable to find package.json');
+    throw new UpgradeError(
+      `Unable to find a \`package.json\` file in ${folder}`
+    );
   }
 
   return path.join(currentDirectory, 'package.json');

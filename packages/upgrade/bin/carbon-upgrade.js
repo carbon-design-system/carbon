@@ -37,7 +37,7 @@ if (major < 8) {
   process.exit(1);
 }
 
-var main = require('../src');
+var main = require('../src/cli');
 
 main(process).catch(error => {
   console.error(error);
