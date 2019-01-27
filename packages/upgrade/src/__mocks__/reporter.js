@@ -7,9 +7,15 @@
 
 'use strict';
 
-const migrations = new Set([require('./0.0.1-alpha.31')]);
-
 module.exports = {
-  name: '@carbon/colors',
-  migrations,
+  reporter: {
+    error: jest.fn(),
+    header: jest.fn(),
+    info: jest.fn(),
+    log: jest.fn(),
+    setLogLevel: jest.fn(),
+    stack: jest.fn(),
+    success: jest.fn(),
+    verbose: jest.fn(),
+  },
 };

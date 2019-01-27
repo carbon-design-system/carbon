@@ -10,6 +10,6 @@
 const migrations = new Set([require('./0.0.1-alpha.31')]);
 
 module.exports = {
-  name: '@carbon/colors',
+  name: '@carbon/type',
   migrations,
 };
