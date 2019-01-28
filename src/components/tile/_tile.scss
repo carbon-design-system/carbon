@@ -302,7 +302,7 @@
     opacity: 1;
   }
 
-  .#{$prefix}--tile-input:checked + .#{$prefix}--tile__checkmark svg {
+  .#{$prefix}--tile-input:checked + .#{$prefix}--tile > .#{$prefix}--tile__checkmark svg {
     fill: $ui-05;
   }
 
@@ -312,7 +312,7 @@
   }
 
   .#{$prefix}--tile-input {
-    display: none;
+    @include hidden;
   }
 }
 

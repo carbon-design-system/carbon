@@ -238,4 +238,9 @@ No change
 
 ## `_vars.scss`
 
+| v9                                  | v10                            |
+| ----------------------------------- | ------------------------------ |
+| `$bx--ease-*` (Deprecated)          | Removed (Or defined as `null`) |
+| `$bx--standard-easing` (Deprecated) | Removed (Or defined as `null`) |
+
 TODO motion table
