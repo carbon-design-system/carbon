@@ -179,18 +179,24 @@
     margin: 0;
     transition: background-color $transition--base;
 
-    &:hover:before {
+    &:hover:before, &:focus:before {
       content: '';
       position: absolute;
       top: -1px;
       left: 0;
       width: 100%;
       height: calc(100% + 2px);
+    }
+
+    &:hover:before {
       background-color: $hover-ui;
     }
 
     &:focus {
       outline: none;
+    }
+
+    &:focus:before {
       @include focus-outline('outline');
     }
   }

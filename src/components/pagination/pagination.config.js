@@ -15,7 +15,6 @@ const itemsPerPageChoices = [
   {
     value: '10',
     label: '10',
-    selected: true,
   },
   {
     value: '20',
@@ -39,8 +38,6 @@ const pageNumberChoices = [
   {
     value: '1',
     label: '1',
-    selected: true,
-    totalPages: 5,
   },
   {
     value: '2',
@@ -82,6 +79,7 @@ const variants = [
     context: {
       version: 'v2',
       itemsPerPageChoices,
+      totalPages: 5,
     },
   },
 ];
