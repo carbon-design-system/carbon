@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "0.0.1-alpha.30",
+  "version": "0.0.1-alpha.31",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,7 +29,7 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "0.0.1-alpha.30",
+    "@carbon/cli-reporter": "0.0.1-alpha.31",
     "change-case": "^3.0.2",
     "del": "^3.0.0",
     "klaw-sync": "^6.0.0",
