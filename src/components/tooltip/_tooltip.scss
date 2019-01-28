@@ -400,7 +400,7 @@
     // Need to add new UI color -- IBM Color Gray 80
     background: $tooltip-background-color;
     margin-top: $spacing-2xs;
-    padding: rem(16px) rem(16px) rem(24px) rem(16px);
+    padding: 1rem;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
@@ -452,7 +452,6 @@
       align-items: center;
       justify-content: space-between;
       margin-top: 1rem;
-      margin-bottom: rem(-16px);
     }
 
     &[data-floating-menu-direction='left'] {
