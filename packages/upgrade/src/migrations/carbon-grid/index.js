@@ -7,7 +7,7 @@
 
 'use strict';
 
-const migrations = new Set([require('./0.0.1-alpha.31')]);
+const migrations = new Set([require('./0.0.1-alpha.32')]);
 
 module.exports = {
   name: '@carbon/grid',
