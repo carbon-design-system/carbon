@@ -13,23 +13,26 @@
 
 // Fluid variant of the grid.
 .#{$prefix}--fluid-grid {
-  @include make-container();
+  @include carbon--make-container();
 }
 
 // Default container class for a grid. Includes max-width for all breakpoints
 .#{$prefix}--grid {
-  @include make-container();
-  @include make-container-max-widths();
+  @include carbon--make-container();
+  @include carbon--make-container-max-widths();
 
   &--full-width {
-    @include largest-breakpoint() {
+    @include carbon--largest-breakpoint() {
       max-width: 100%;
     }
   }
 }
 
 .#{$prefix}--row {
-  @include make-row();
+  @include carbon--make-row();
 }
 
-@include make-grid-columns($grid-breakpoints, $grid-gutter);
+@include carbon--make-grid-columns(
+  $carbon--grid-breakpoints,
+  $carbon--grid-gutter
+);

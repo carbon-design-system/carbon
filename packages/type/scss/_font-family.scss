@@ -8,7 +8,7 @@
 /// Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
 /// Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
 /// @type {Map}
-$font-families: (
+$carbon--font-families: (
   'mono':
     unquote(
       "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"
@@ -26,18 +26,18 @@ $font-families: (
 /// Get the font-family for an IBM Plex font.
 /// @param {String} $name
 /// @return {String}
-@function font-family($name) {
-  @return map-get($font-families, $name);
+@function carbon--font-family($name) {
+  @return map-get($carbon--font-families, $name);
 }
 
 /// Include the `font-family` definition for the given name in your selector.
 /// @param {String} $name
-@mixin font-family($name) {
-  font-family: font-family($name);
+@mixin carbon--font-family($name) {
+  font-family: carbon--font-family($name);
 }
 
 /// Suggested font weights to be used in product.
-$font-weights: (
+$carbon--font-weights: (
   'light': 300,
   'regular': 400,
   'semibold': 600,
@@ -46,12 +46,12 @@ $font-weights: (
 /// Retrieve the font-weight value for a given name
 /// @param {String} $weight
 /// @return {Number}
-@function font-weight($weight) {
-  @return map-get($font-weights, $weight);
+@function carbon--font-weight($weight) {
+  @return map-get($carbon--font-weights, $weight);
 }
 
 /// Set the `font-weight` property with the value for a given name
 /// @param {String} $weight
-@mixin font-weight($weight) {
-  font-weight: font-weight($weight);
+@mixin carbon--font-weight($weight) {
+  font-weight: carbon--font-weight($weight);
 }

@@ -8,34 +8,34 @@
 @import '@carbon/layout/scss/convert';
 
 /// Tokens used for spacing typography
-$type-tokens: (
-  margin-01: rem(16px),
-  margin-02: rem(24px),
-  margin-03: rem(32px),
-  layout-01: rem(48px),
-  layout-02: rem(64px),
-  layout-03: rem(80px),
+$carbon--type-tokens: (
+  margin-01: carbon--rem(16px),
+  margin-02: carbon--rem(24px),
+  margin-03: carbon--rem(32px),
+  layout-01: carbon--rem(48px),
+  layout-02: carbon--rem(64px),
+  layout-03: carbon--rem(80px),
 );
 
 /// Get the value for a given type spacing token
 /// @param {String} $token
 /// @return {rem}
-@function type-spacing($token) {
-  @if not(map-has-key($type-tokens, $token)) {
+@function carbon--type-spacing($token) {
+  @if not(map-has-key($carbon--type-tokens, $token)) {
     @error 'Unable to find a value for token `#{$token}`';
   }
-  @return map-get($type-tokens, $token);
+  @return map-get($carbon--type-tokens, $token);
 }
 
 /// Get the margin value for a given type spacing token
 /// @param {String} $token
 /// @return {rem}
-@mixin type-spacing($token, $direction: 'bottom') {
-  $value: type-spacing($token);
+@mixin carbon--type-spacing($token, $direction: 'bottom') {
+  $value: carbon--type-spacing($token);
 
   @if $direction == 'bottom' {
     margin-bottom: $value;
   } @else if $direction == 'top' {
-    margin-top: type-spacing($token);
+    margin-top: carbon--type-spacing($token);
   }
 }

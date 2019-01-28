@@ -15,11 +15,11 @@ $imported-modules: () !default;
 /// @param {String} $name - Name of exported module
 /// @param {Bool} $error [false] - Error when a module has been already imported
 /// @require $imported-modules
-@mixin exports($name, $error: false) {
+@mixin exports($name, $warn: false) {
   @if (index($imported-modules, $name) == null) {
     $imported-modules: append($imported-modules, $name) !global;
     @content;
-  } @else if $error == true {
-    @error 'Module `#{$name}` has already been imported.';
+  } @else if $warn == true {
+    @warn 'Module `#{$name}` has already been imported.';
   }
 }

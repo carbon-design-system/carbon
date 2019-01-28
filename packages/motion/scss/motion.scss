@@ -6,7 +6,7 @@
 //
 
 /// Common easings for components in the Carbon Design System
-$easings: (
+$carbon--easings: (
   standard: (
     productive: cubic-bezier(0.2, 0, 0.38, 0.9),
     expressive: cubic-bezier(0.4, 0.14, 0.3, 1),
@@ -27,7 +27,7 @@ $easings: (
 /// @param {String} $name - the name of the easing curve to apply
 /// @param {String} $mode - the mode for the easing curve to use
 /// @return {cubic-bezier}
-@function motion($name, $mode: productive) {
+@function carbon--motion($name, $mode: productive, $easings: $carbon--easings) {
   @if map-has-key($easings, $name) {
     $easing: map-get($easings, $name);
     @if map-has-key($easing, $mode) {
@@ -36,13 +36,13 @@ $easings: (
       @error 'Unable to find a mode for the easing #{$easing} called: #{$mode}.';
     }
   } @else {
-    @error 'Unable to find an easing named #{$easing} in our supported easings.';
+    @error 'Unable to find an easing named #{$name} in our supported easings.';
   }
 }
 
 /// Set the transition-property for a given easing and motion mode.
 /// @param {String} $name - the name of the easing curve to apply
 /// @param {String} $mode - the mode for the easing curve to use
-@mixin motion($name, $mode) {
-  transition-property: motion($name, $mode);
+@mixin carbon--motion($name, $mode) {
+  transition-property: carbon--motion($name, $mode);
 }

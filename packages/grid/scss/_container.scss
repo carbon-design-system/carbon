@@ -15,43 +15,45 @@
 
 /// Create the container for a grid. Will cause full-bleed for the grid unless
 /// max-width properties are added with `make-container-max-widths`
-@mixin make-container($breakpoints: $grid-breakpoints) {
+@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
   margin-right: auto;
   margin-left: auto;
 
-  @include set-largest-breakpoint();
+  @include carbon--set-largest-breakpoint();
 
   @each $name, $value in $breakpoints {
-    $prev-breakpoint: map-get($breakpoints, breakpoint-prev($name));
+    $prev-breakpoint: map-get($breakpoints, carbon--breakpoint-prev($name));
     $margin: map-get($value, margin);
 
     @if $prev-breakpoint {
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
-        @include breakpoint($name) {
-          padding-left: #{($grid-gutter / 2) + $margin};
-          padding-right: #{($grid-gutter / 2) + $margin};
+        @include carbon--breakpoint($name) {
+          padding-left: #{($carbon--grid-gutter / 2) + $margin};
+          padding-right: #{($carbon--grid-gutter / 2) + $margin};
         }
       }
     } @else {
-      @include breakpoint($name) {
-        padding-left: #{($grid-gutter / 2) + $margin};
-        padding-right: #{($grid-gutter / 2) + $margin};
+      @include carbon--breakpoint($name) {
+        padding-left: #{($carbon--grid-gutter / 2) + $margin};
+        padding-right: #{($carbon--grid-gutter / 2) + $margin};
       }
     }
   }
 }
 
 // gets the last breakpoint width, and sets it to a max-width
-@mixin set-largest-breakpoint($breakpoints: $grid-breakpoints) {
+@mixin carbon--set-largest-breakpoint($breakpoints: $carbon--grid-breakpoints) {
   $largest-breakpoint: last-map-item($breakpoints);
   max-width: map-get($largest-breakpoint, 'width');
 }
 
 /// Add in the max-widths for each breakpoint to the container
-@mixin make-container-max-widths($breakpoints: $grid-breakpoints) {
+@mixin carbon--make-container-max-widths(
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @each $name, $value in $breakpoints {
-    @include breakpoint($name) {
+    @include carbon--breakpoint($name) {
       max-width: map-get($value, width);
     }
   }

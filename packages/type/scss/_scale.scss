@@ -10,26 +10,29 @@
 /// Compute the type size for the given type scale step
 /// @param {Number} $step
 /// @return {px}
-@function get-type-size($step) {
+@function carbon--get-type-size($step) {
   @if $step == 1 {
     @return 12px;
   }
   // Yn = Yn-1 + {INT[(n-2)/4] + 1} * 2
-  @return get-type-size($step - 1) + (floor(($step - 2) / 4) + 1) * 2;
+  @return carbon--get-type-size($step - 1) + (floor(($step - 2) / 4) + 1) * 2;
 }
 
 /// Our type scale. Follows a custom formula for determining each step size.
 /// Supports sizes from 12px to 92px.
-$type-scale: ();
+$carbon--type-scale: ();
 @for $i from 1 through 23 {
-  $type-scale: append($type-scale, rem(get-type-size($i)));
+  $carbon--type-scale: append(
+    $carbon--type-scale,
+    carbon--rem(carbon--get-type-size($i))
+  );
 }
 
 /// Get the value of a specific step in the typescale
 /// @param {Number} $step
 /// @return {rem}
 @function type-scale($step) {
-  @return nth($type-scale, $step);
+  @return nth($carbon--type-scale, $step);
 }
 
 /// Set the font-size value of a selector with the value at the given $step
@@ -40,6 +43,6 @@ $type-scale: ();
 
 /// Alias of `type-scale` mixin.
 /// @param {Number} $step
-@mixin font-size($step) {
+@mixin carbon--font-size($step) {
   font-size: type-scale($step);
 }

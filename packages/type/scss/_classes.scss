@@ -9,16 +9,16 @@
 @import 'styles';
 @import 'font-family';
 
-@mixin type-classes {
+@mixin carbon--type-classes {
   // Font families
-  @each $name, $value in $font-families {
+  @each $name, $value in $carbon--font-families {
     .#{$prefix}--type-#{$name} {
       font-family: $value;
     }
   }
 
   // Font weights
-  @each $name, $value in $font-weights {
+  @each $name, $value in $carbon--font-weights {
     .#{$prefix}--type-#{$name} {
       font-weight: $value;
     }
@@ -32,7 +32,7 @@
   // Type styles
   @each $name, $value in $tokens {
     .#{$prefix}--type-#{$name} {
-      @include type-style($name, map-has-key($value, breakpoints));
+      @include carbon--type-style($name, map-has-key($value, breakpoints));
     }
   }
 }

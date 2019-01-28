@@ -13,7 +13,7 @@
 @import '@carbon/layout/scss/breakpoint';
 @import 'prefix';
 
-@mixin make-col-ready($gutter: $grid-gutter) {
+@mixin carbon--make-col-ready($gutter: $carbon--grid-gutter) {
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
@@ -24,7 +24,7 @@
   // Support the padding use-case for each columns. Idea is that each child in a
   // cell selector should have the default padding applied.
   .#{$prefix}--grid--padding & > * {
-    padding: $grid-cell-padding;
+    padding: $carbon--grid-cell-padding;
   }
 
   // When in a bleed grid, we collapse all gutters so each column is flat with
@@ -51,7 +51,7 @@
   }
 }
 
-@mixin make-col($span, $columns) {
+@mixin carbon--make-col($span, $columns) {
   flex: 0 0 percentage($span / $columns);
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
@@ -59,7 +59,7 @@
   max-width: percentage($span / $columns);
 }
 
-@mixin make-col-offset($span, $columns) {
+@mixin carbon--make-col-offset($span, $columns) {
   $offset: $span / $columns;
   @if $offset == 0 {
     margin-left: 0;
@@ -68,31 +68,31 @@
   }
 }
 
-@mixin make-grid-columns(
-  $breakpoints: $grid-breakpoints,
-  $gutter: $grid-gutter
+@mixin carbon--make-grid-columns(
+  $breakpoints: $carbon--grid-breakpoints,
+  $gutter: $carbon--grid-gutter
 ) {
   .#{$prefix}--col {
-    @include make-col-ready();
+    @include carbon--make-col-ready();
   }
 
   @each $breakpoint in map-keys($breakpoints) {
-    $infix: breakpoint-infix($breakpoint);
+    $infix: carbon--breakpoint-infix($breakpoint);
     $columns: map-get(map-get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
     @for $i from 1 through $columns {
       .#{$prefix}--col#{$infix}-#{$i} {
-        @include make-col-ready();
+        @include carbon--make-col-ready();
       }
     }
 
     .#{$prefix}--col#{$infix},
     .#{$prefix}--col#{$infix}--auto {
-      @include make-col-ready();
+      @include carbon--make-col-ready();
     }
 
-    @include breakpoint($breakpoint, $breakpoints) {
+    @include carbon--breakpoint($breakpoint, $breakpoints) {
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .#{$prefix}--col,
       .#{$prefix}--col#{$infix} {
@@ -111,14 +111,14 @@
 
       @for $i from 1 through $columns {
         .#{$prefix}--col#{$infix}-#{$i} {
-          @include make-col($i, $columns);
+          @include carbon--make-col($i, $columns);
         }
       }
 
       @for $i from 0 through ($columns - 1) {
         @if not($infix == '') {
           .#{$prefix}--offset#{$infix}-#{$i} {
-            @include make-col-offset($i, $columns);
+            @include carbon--make-col-offset($i, $columns);
           }
         }
       }

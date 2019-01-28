@@ -12,7 +12,10 @@
 /// heights
 /// @param {string} $breakpoint
 /// @return rem
-@function get-column-width($breakpoint, $breakpoints: $grid-breakpoints) {
+@function carbon--get-column-width(
+  $breakpoint,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @if map-has-key($breakpoints, $breakpoint) {
     $values: map-get($breakpoints, $breakpoint);
     $width: map-get($values, width);
@@ -25,52 +28,52 @@
   }
 }
 
-$key-height-scales: (
+$carbon--key-height-scales: (
   sm: (
-    get-column-width(sm),
-    get-column-width(sm) * 2,
-    get-column-width(sm) * 3,
-    get-column-width(sm) * 4,
-    get-column-width(sm) * 5,
-    get-column-width(sm) * 6,
+    carbon--get-column-width(sm),
+    carbon--get-column-width(sm) * 2,
+    carbon--get-column-width(sm) * 3,
+    carbon--get-column-width(sm) * 4,
+    carbon--get-column-width(sm) * 5,
+    carbon--get-column-width(sm) * 6,
   ),
   md: (
-    get-column-width(md),
-    get-column-width(md) * 2,
-    get-column-width(md) * 3,
-    get-column-width(md) * 4,
-    get-column-width(md) * 5,
-    get-column-width(md) * 6,
+    carbon--get-column-width(md),
+    carbon--get-column-width(md) * 2,
+    carbon--get-column-width(md) * 3,
+    carbon--get-column-width(md) * 4,
+    carbon--get-column-width(md) * 5,
+    carbon--get-column-width(md) * 6,
   ),
   lg: (
-    get-column-width(lg),
-    get-column-width(lg) * 2,
-    get-column-width(lg) * 3,
-    get-column-width(lg) * 4,
-    get-column-width(lg) * 5,
-    get-column-width(lg) * 6,
-    get-column-width(lg) * 7,
-    get-column-width(lg) * 8,
+    carbon--get-column-width(lg),
+    carbon--get-column-width(lg) * 2,
+    carbon--get-column-width(lg) * 3,
+    carbon--get-column-width(lg) * 4,
+    carbon--get-column-width(lg) * 5,
+    carbon--get-column-width(lg) * 6,
+    carbon--get-column-width(lg) * 7,
+    carbon--get-column-width(lg) * 8,
   ),
   xlg: (
-    get-column-width(xlg),
-    get-column-width(xlg) * 2,
-    get-column-width(xlg) * 3,
-    get-column-width(xlg) * 4,
-    get-column-width(xlg) * 5,
-    get-column-width(xlg) * 6,
-    get-column-width(xlg) * 7,
-    get-column-width(xlg) * 8,
+    carbon--get-column-width(xlg),
+    carbon--get-column-width(xlg) * 2,
+    carbon--get-column-width(xlg) * 3,
+    carbon--get-column-width(xlg) * 4,
+    carbon--get-column-width(xlg) * 5,
+    carbon--get-column-width(xlg) * 6,
+    carbon--get-column-width(xlg) * 7,
+    carbon--get-column-width(xlg) * 8,
   ),
   max: (
-    get-column-width(max),
-    get-column-width(max) * 2,
-    get-column-width(max) * 3,
-    get-column-width(max) * 4,
-    get-column-width(max) * 5,
-    get-column-width(max) * 6,
-    get-column-width(max) * 7,
-    get-column-width(max) * 8,
+    carbon--get-column-width(max),
+    carbon--get-column-width(max) * 2,
+    carbon--get-column-width(max) * 3,
+    carbon--get-column-width(max) * 4,
+    carbon--get-column-width(max) * 5,
+    carbon--get-column-width(max) * 6,
+    carbon--get-column-width(max) * 7,
+    carbon--get-column-width(max) * 8,
   ),
 );
 
@@ -78,9 +81,9 @@ $key-height-scales: (
 /// @param {string} $breakpoint
 /// @param {number} $step
 /// @return rem
-@function key-height($breakpoint, $step) {
-  @if map-has-key($key-height-scales, $breakpoint) {
-    @return nth(map-get($key-height-scales, $breakpoint), $step);
+@function carbon--key-height($breakpoint, $step) {
+  @if map-has-key($carbon--key-height-scales, $breakpoint) {
+    @return nth(map-get($carbon--key-height-scales, $breakpoint), $step);
   } @else {
     @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';
   }

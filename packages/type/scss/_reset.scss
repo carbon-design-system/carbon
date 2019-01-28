@@ -10,14 +10,14 @@
 
 /// Include a type reset that individuals can use in their projects for
 /// consistent rendering
-@mixin type-reset {
+@mixin carbon--type-reset() {
   html {
-    font-size: $base-font-size;
+    font-size: $carbon--base-font-size;
   }
 
   body {
-    @include font-family('sans');
-    @include font-weight('regular');
+    @include carbon--font-family('sans');
+    @include carbon--font-weight('regular');
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

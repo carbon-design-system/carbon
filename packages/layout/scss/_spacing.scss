@@ -9,23 +9,23 @@
 
 // fixed spacing
 // Supports 0, 2px, 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 80px, 96px
-$fixed-spacing-scale: (
+$carbon--fixed-spacing-scale: (
   0,
-  mini-units(0.25),
-  mini-units(0.5),
-  mini-units(1),
-  mini-units(1.5),
-  mini-units(2),
-  mini-units(3),
-  mini-units(4),
-  mini-units(6),
-  mini-units(8),
-  mini-units(10),
-  mini-units(12)
+  carbon--mini-units(0.25),
+  carbon--mini-units(0.5),
+  carbon--mini-units(1),
+  carbon--mini-units(1.5),
+  carbon--mini-units(2),
+  carbon--mini-units(3),
+  carbon--mini-units(4),
+  carbon--mini-units(6),
+  carbon--mini-units(8),
+  carbon--mini-units(10),
+  carbon--mini-units(12)
 );
 
 // fluid spacing
-$fluid-spacing-scale: (0, 2vw, 5vw, 10vw);
+$carbon--fluid-spacing-scale: (0, 2vw, 5vw, 10vw);
 
 /// Get the value of the spacing scale at the given step. The first step is
 /// surprisingly 0, even though lists in sass start at 1. This is because we
@@ -33,7 +33,11 @@ $fluid-spacing-scale: (0, 2vw, 5vw, 10vw);
 /// how this would be called in other programming languages
 //  $step: integer
 //  $fluid: boolean
-@function spacing($step, $fluid: false) {
-  $scale: if($fluid, $fluid-spacing-scale, $fixed-spacing-scale);
+@function carbon--spacing($step, $fluid: false) {
+  $scale: if(
+    $fluid,
+    $carbon--fluid-spacing-scale,
+    $carbon--fixed-spacing-scale
+  );
   @return nth($scale, $step + 1);
 }

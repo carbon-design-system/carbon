@@ -14,5 +14,5 @@
 @import 'font-face/sans';
 @import 'classes';
 
-@include type-reset();
-@include type-classes();
+@include carbon--type-reset();
+@include carbon--type-classes();

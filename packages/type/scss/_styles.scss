@@ -10,121 +10,121 @@
 @import 'scale';
 
 $caption-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(1),
-  font-weight: font-weight('regular'),
-  line-height: rem(16px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 ) !default;
 
 $label-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(1),
-  font-weight: font-weight('regular'),
-  line-height: rem(16px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 ) !default;
 
 $helper-text-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(1),
   font-style: italic,
-  line-height: rem(16px),
+  line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 ) !default;
 
 $body-short-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(2),
-  font-weight: font-weight('regular'),
-  line-height: rem(18px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(18px),
   letter-spacing: 0.16px,
 ) !default;
 
 $body-long-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(2),
-  font-weight: font-weight('regular'),
-  line-height: rem(20px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(20px),
   letter-spacing: 0.16px,
 ) !default;
 
 $body-short-02: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(3),
-  font-weight: font-weight('regular'),
-  line-height: rem(22px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(22px),
   letter-spacing: 0,
 ) !default;
 
 $body-long-02: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(3),
-  font-weight: font-weight('regular'),
-  line-height: rem(24px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(24px),
   letter-spacing: 0,
 ) !default;
 
 $code-01: (
-  font-family: font-family('mono'),
+  font-family: carbon--font-family('mono'),
   font-size: type-scale(1),
-  font-weight: font-weight('regular'),
-  line-height: rem(16px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
 ) !default;
 
 $code-02: (
-  font-family: font-family('mono'),
+  font-family: carbon--font-family('mono'),
   font-size: type-scale(2),
-  font-weight: font-weight('regular'),
-  line-height: rem(20px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(20px),
   letter-spacing: 0.32px,
 ) !default;
 
 $heading-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(2),
-  font-weight: font-weight('semibold'),
-  line-height: rem(18px),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: carbon--rem(18px),
   letter-spacing: 0.16px,
 ) !default;
 
 $heading-02: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(3),
-  font-weight: font-weight('semibold'),
-  line-height: rem(22px),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: carbon--rem(22px),
   letter-spacing: 0,
 ) !default;
 
 $heading-03: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(5),
-  font-weight: font-weight('regular'),
-  line-height: rem(26px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(26px),
   letter-spacing: 0,
 ) !default;
 
 $productive-heading-04: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(7),
-  font-weight: font-weight('regular'),
-  line-height: rem(36px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(36px),
   letter-spacing: 0,
 ) !default;
 
 $productive-heading-05: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(8),
-  font-weight: font-weight('regular'),
-  line-height: rem(40px),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(40px),
   letter-spacing: 0,
 ) !default;
 
 $expressive-heading-04: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(7),
-  font-weight: font-weight('regular'),
+  font-weight: carbon--font-weight('regular'),
   line-height: 107%,
   letter-spacing: 0,
   breakpoints: (
@@ -139,9 +139,9 @@ $expressive-heading-04: (
 ) !default;
 
 $expressive-heading-05: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(8),
-  font-weight: font-weight('regular'),
+  font-weight: carbon--font-weight('regular'),
   line-height: 125%,
   letter-spacing: 0,
   breakpoints: (
@@ -164,9 +164,9 @@ $expressive-heading-05: (
 ) !default;
 
 $expressive-paragraph-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(6),
-  font-weight: font-weight('light'),
+  font-weight: carbon--font-weight('light'),
   line-height: 125%,
   letter-spacing: 0,
   breakpoints: (
@@ -182,9 +182,9 @@ $expressive-paragraph-01: (
 );
 
 $quotation-01: (
-  font-family: font-family('serif'),
+  font-family: carbon--font-family('serif'),
   font-size: type-scale(5),
-  font-weight: font-weight('regular'),
+  font-weight: carbon--font-weight('regular'),
   line-height: 130%,
   letter-spacing: 0,
   breakpoints: (
@@ -207,9 +207,9 @@ $quotation-01: (
 ) !default;
 
 $quotation-02: (
-  font-family: font-family('serif'),
+  font-family: carbon--font-family('serif'),
   font-size: type-scale(8),
-  font-weight: font-weight('light'),
+  font-weight: carbon--font-weight('light'),
   line-height: 125%,
   letter-spacing: 0rem,
   breakpoints: (
@@ -232,9 +232,9 @@ $quotation-02: (
 ) !default;
 
 $display-01: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(10),
-  font-weight: font-weight('light'),
+  font-weight: carbon--font-weight('light'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
@@ -256,9 +256,9 @@ $display-01: (
 ) !default;
 
 $display-02: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(10),
-  font-weight: font-weight('semibold'),
+  font-weight: carbon--font-weight('semibold'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
@@ -280,9 +280,9 @@ $display-02: (
 ) !default;
 
 $display-03: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(10),
-  font-weight: font-weight('light'),
+  font-weight: carbon--font-weight('light'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
@@ -309,9 +309,9 @@ $display-03: (
 ) !default;
 
 $display-04: (
-  font-family: font-family('sans'),
+  font-family: carbon--font-family('sans'),
   font-size: type-scale(10),
-  font-weight: font-weight('semibold'),
+  font-weight: carbon--font-weight('semibold'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
@@ -400,7 +400,7 @@ $tokens: (
 ///
 /// @param {Map} $type-styles - the value of a given type token
 /// @param {?Map} $breakpoints - custom breakpoints to use
-@mixin fluid-type($type-styles, $breakpoints: $grid-breakpoints) {
+@mixin fluid-type($type-styles, $breakpoints: $carbon--grid-breakpoints) {
   & {
     // Include the initial styles for the given token by default without any
     // media query guard. This includes `font-size` as a fallback in the case
@@ -414,7 +414,7 @@ $tokens: (
     // token and apply the properties and fluid type size for that given
     // breakpoint
     @each $name, $values in map-get($type-styles, breakpoints) {
-      @include breakpoint($name) {
+      @include carbon--breakpoint($name) {
         @include properties($values);
         @include fluid-type-size($type-styles, $name, $breakpoints);
       }
@@ -427,7 +427,11 @@ $tokens: (
 /// @param {String} $name - the name of the breakpoint to which we apply the fluid
 /// styles
 /// @param {?Map} $breakpoints - the breakpoints for the grid system
-@mixin fluid-type-size($type-styles, $name, $breakpoints: $grid-breakpoints) {
+@mixin fluid-type-size(
+  $type-styles,
+  $name,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   // Get the information about the breakpoint we're currently working in. Useful
   // for getting initial width information
   $breakpoint: map-get($breakpoints, $name);
@@ -457,7 +461,7 @@ $tokens: (
 
   // We can use `breakpoint-next` to see if there is another breakpoint we can
   // use to update `max-font-size` and `max-vw` with larger values
-  $next-breakpoint-available: breakpoint-next($name, $breakpoints);
+  $next-breakpoint-available: carbon--breakpoint-next($name, $breakpoints);
   $next-fluid-breakpoint-name: null;
 
   // We need to figure out what the next available fluid breakpoint is for our
@@ -469,7 +473,7 @@ $tokens: (
       $next-fluid-breakpoint-name: $next-breakpoint-available;
       $next-breakpoint-available: null;
     } @else {
-      $next-breakpoint-available: breakpoint-next(
+      $next-breakpoint-available: carbon--breakpoint-next(
         $next-breakpoint-available,
         $breakpoints
       );
@@ -508,7 +512,11 @@ $tokens: (
 /// @param {?Boolean} $fluid - specify whether to include fluid styles for the
 /// @param {?Map} $breakpoints - provide a custom breakpoint map to use
 /// token
-@mixin type-style($name, $fluid: false, $breakpoints: $grid-breakpoints) {
+@mixin carbon--type-style(
+  $name,
+  $fluid: false,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @if not map-has-key($tokens, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }
