@@ -131,7 +131,6 @@ function createComponentFromInfo({ descriptor, moduleName }) {
       height: PropTypes.number,
       preserveAspectRatio: PropTypes.string,
       tabIndex: PropTypes.string,
-      title: PropTypes.string,
       viewBox: PropTypes.string,
       width: PropTypes.number,
       xmlns: PropTypes.string,
