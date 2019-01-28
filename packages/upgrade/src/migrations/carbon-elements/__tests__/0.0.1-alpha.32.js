@@ -13,7 +13,7 @@ const { defineInlineTest } = require('../../../tools/testing');
 
 // Sanity check that at least one of our packages are working
 defineInlineTest(
-  require.resolve('../0.0.1-alpha.31.js'),
+  require.resolve('../0.0.1-alpha.32.js'),
   '0.0.1-alpha.30',
   `
 $ibm-colors__blue--50;

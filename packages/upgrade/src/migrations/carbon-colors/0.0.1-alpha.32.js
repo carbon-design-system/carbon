@@ -10,7 +10,7 @@
 const { reporter } = require('../../reporter');
 const { replace } = require('../../tools/replace');
 
-const TARGET_VERSION = '0.0.1-alpha.31';
+const TARGET_VERSION = '0.0.1-alpha.32';
 
 module.exports = {
   version: TARGET_VERSION,

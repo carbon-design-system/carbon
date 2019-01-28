@@ -8,12 +8,12 @@
 'use strict';
 
 const { reporter } = require('../../reporter');
-const colors = require('../carbon-colors/0.0.1-alpha.31');
-const grid = require('../carbon-grid/0.0.1-alpha.31');
-const layout = require('../carbon-layout/0.0.1-alpha.31');
-const motion = require('../carbon-motion/0.0.1-alpha.31');
+const colors = require('../carbon-colors/0.0.1-alpha.32');
+const grid = require('../carbon-grid/0.0.1-alpha.32');
+const layout = require('../carbon-layout/0.0.1-alpha.32');
+const motion = require('../carbon-motion/0.0.1-alpha.32');
 
-const TARGET_VERSION = '0.0.1-alpha.31';
+const TARGET_VERSION = '0.0.1-alpha.32';
 
 module.exports = {
   version: TARGET_VERSION,

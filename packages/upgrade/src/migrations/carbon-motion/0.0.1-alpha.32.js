@@ -14,7 +14,7 @@ const {
   createVariableRegex,
 } = require('../../tools/regex');
 
-const TARGET_VERSION = '0.0.1-alpha.31';
+const TARGET_VERSION = '0.0.1-alpha.32';
 
 module.exports = {
   version: TARGET_VERSION,
