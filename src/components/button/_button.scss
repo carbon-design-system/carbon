@@ -183,6 +183,10 @@
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
     display: inline-block;
+
+    &:disabled > .#{$prefix}--btn__icon {
+      fill: $ui-04;
+    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
