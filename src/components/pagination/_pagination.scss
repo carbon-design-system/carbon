@@ -323,6 +323,11 @@ $css--helpers: true;
         fill: $ui-05;
       }
     }
+
+    &--no-index {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   .#{$prefix}--pagination--inline {
