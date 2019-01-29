@@ -20,7 +20,10 @@ const props = {
       'Regular expression for the value (pattern in <TimePicker>)',
       '(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)'
     ),
-    placeholder: text('Plceholder text (placeholder in <TimePicker>)', 'hh:mm'),
+    placeholder: text(
+      'Placeholder text (placeholder in <TimePicker>)',
+      'hh:mm'
+    ),
     disabled: boolean('Disabled (disabled in <TimePicker>)', false),
     light: boolean('Light variant (light in <TimePicker>)', false),
     hideLabel: boolean('No label (hideLabel in <TimePicker>)', false),
