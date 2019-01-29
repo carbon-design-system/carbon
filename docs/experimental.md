@@ -6,6 +6,7 @@
 ## Table of Contents
 
 - [Publishing](#publishing)
+- [Application usage](#application-usage)
 - [Iconography](#iconography)
   - [Introduction](#introduction)
   - [FAQ](#faq)
@@ -40,6 +41,76 @@ modified:   src/globals/scss/_feature-flags.scss
 - Inspect build folders to verify feature flags are set to true
 - Run `npm publish . --tag alpha`
 - Run `git checkout -- src/globals package.json` to unstage changes
+
+## Application usage
+
+An alternate way for applications to try out `v10` design is building our latest `v9` release with feature flags changed. (Note: Given this involves build process, below technique is _not_ applied to pre-built bundles, e.g. `carbon-components.css`)
+
+One way to do it is via build toolchain, e.g. in `webpack.config.js`:
+
+```javascript
+const replaceTable = {
+  breakingChangesX: true,
+  componentsX: true,
+  grid: true,
+};
+
+...
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.scss$/,
+        use: [
+          ...
+          {
+            loader: 'sass-loader',
+            options: {
+              ...
+              data: `
+                $feature-flags: (
+                  components-x: true,
+                  breaking-changes-x: true,
+                  grid: true,
+                  ui-shell: true,
+                );
+              `,
+            },
+          },
+        ],
+      },
+      {
+        test: /(\/|\\)feature-flags\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          multiple: Object.keys(replaceTable).map(key => ({
+            search: `exports\.${key}\\s*=\\s*false`,
+            replace: `exports.${key} = ${replaceTable[key]}`,
+            flags: 'i',
+          })),
+        },
+      },
+    ],
+    ...
+  },
+};
+
+```
+
+Another way, which is applicable only to our Sass code, is defining feature flags before importing `carbon-components` Sass code, e.g.:
+
+```scss
+$feature-flags: (
+  components-x: true,
+  breaking-changes-x: true,
+  grid: true,
+  ui-shell: true,
+);
+@import '~carbon-components/scss/globals/scss/styles';
+```
 
 ## Iconography
 
