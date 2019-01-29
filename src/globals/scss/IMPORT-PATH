@@ -1,0 +1,16 @@
+replace: theme with helper-mixins (vars covers everything but helper-mixins)
+remove: functions (vars covers this)
+remove: colors (vars covers this)
+remove: spacing (vars covers this)
+
+remove: typography after helper-mixins (helper-mixins covers this)
+remove: css--reset after helper-mixins (helper-mixins covers this)
+remove: import-once after helper-mixins (helper-mixins covers this)
+remove: import-once after css--helpers (css--helpers covers this)
+remove: vars after helper-mixins (helper-mixins covers this)
+remove: vars right before helper-mixins (helper-mixins covers this)
+remove: vars right before typography (typography covers this)
+remove: vars after css--helpers (css--helpers covers this)
+
+remove: helper-mixins after mixins (mixins covers this)
+remove: helper-mixins after css--helpers (css--helpers covers this)

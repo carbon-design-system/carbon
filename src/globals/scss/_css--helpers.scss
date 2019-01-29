@@ -5,11 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'vars';
-@import 'theme';
-@import 'css--reset';
-@import 'typography';
-@import 'import-once';
+@import 'helper-mixins';
 
 @mixin css-helpers {
   .#{$prefix}--assistive-text,

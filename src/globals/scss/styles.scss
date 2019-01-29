@@ -22,16 +22,9 @@ $css--use-experimental-grid: false !default;
 $css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
-@import 'vars';
-@import 'colors';
-@import 'theme';
 @import 'mixins';
 @import 'layout';
 @import 'layer';
-@import 'spacing';
-@import 'typography';
-@import 'import-once';
-@import 'css--reset';
 @import 'css--font-face';
 @import 'css--helpers';
 @import 'css--body';

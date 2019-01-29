@@ -9,13 +9,7 @@
 // Time Picker
 //-----------------------------
 
-@import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/css--reset';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/helper-mixins';
 
 @mixin time-picker {
   .#{$prefix}--time-picker {

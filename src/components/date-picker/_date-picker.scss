@@ -5,14 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
 @import '../../globals/scss/layer';
 @import '../form/form';
 @import 'flatpickr.scss';

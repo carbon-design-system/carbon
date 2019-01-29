@@ -9,14 +9,7 @@
 // Text area
 //-----------------------------
 
-@import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
 @import '../form/form';
 
 @mixin text-area {

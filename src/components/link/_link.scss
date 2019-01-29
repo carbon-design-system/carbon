@@ -9,15 +9,9 @@
 // Link
 //-----------------------------
 
-@import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/functions';
-@import '../../globals/scss/import-once';
-@import '../../globals/scss/css--reset';
 
 @mixin link {
   .#{$prefix}--link {
