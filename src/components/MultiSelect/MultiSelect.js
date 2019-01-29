@@ -239,7 +239,7 @@ export default class MultiSelect extends React.Component {
                           isHighlighted={highlightedIndex === index}
                           {...itemProps}>
                           <Checkbox
-                            id={itemProps.id}
+                            id={`${itemProps.id}__checkbox`}
                             title={useTitleInItem ? itemText : null}
                             name={itemText}
                             checked={isChecked}
