@@ -63,7 +63,7 @@ const Switch = props => {
     return (
       <button {...other} {...commonProps}>
         {btnIcon}
-        {text}
+        <span>{text}</span>
       </button>
     );
   }
@@ -71,7 +71,7 @@ const Switch = props => {
   return (
     <a href={href} {...other} {...commonProps}>
       {btnIcon}
-      {text}
+      <span>{text}</span>
     </a>
   );
 };
