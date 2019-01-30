@@ -4,8 +4,8 @@
 @import '../../scss/font-face/mono';
 @import '../../scss/classes';
 
-@include type-reset();
-@include type-classes();
+@include carbon--type-reset();
+@include carbon--type-classes();
 
 //------------------------------------------------------------------------------
 // Font-face
@@ -13,17 +13,17 @@
 .bx--type-sans,
 .bx--type-serif,
 .bx--type-mono {
-  @include type-scale(8);
+  @include carbon--font-size(8);
 }
 
 //------------------------------------------------------------------------------
 // Type-scale
 //------------------------------------------------------------------------------
-@each $value in $type-scale {
-  $step: index($type-scale, $value);
+@each $value in $carbon--type-scale {
+  $step: index($carbon--type-scale, $value);
 
   .type-scale-#{$step} {
-    @include type-scale($step);
+    @include carbon--font-size($step);
   }
 }
 
@@ -31,19 +31,19 @@
 // Spacing
 //------------------------------------------------------------------------------
 .type-margin-01 {
-  @include type-spacing(margin-01);
+  @include carbon--type-spacing(margin-01);
 }
 
 .type-margin-02 {
-  @include type-spacing(margin-02);
+  @include carbon--type-spacing(margin-02);
 }
 
 .type-margin-03 {
-  @include type-spacing(margin-03);
+  @include carbon--type-spacing(margin-03);
 }
 
 .type-layout-01 {
-  @include type-spacing(layout-01, top);
+  @include carbon--type-spacing(layout-01, top);
 }
 
 //------------------------------------------------------------------------------
