@@ -7,10 +7,9 @@
 
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/functions';
+@import 'mixins';
 
 @mixin left-nav-trigger {
   @include deprecate(
