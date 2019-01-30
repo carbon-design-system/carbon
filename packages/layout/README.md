@@ -47,7 +47,6 @@ feel free to file an issue proposing the new addition!
 If you're looking for more examples on how to use `@carbon/layout`, we
 have some examples that you can check out:
 
-- [Basic](./examples/basic)
 - [Styled-components](./examples/styled-components)
 
 ## 🙌 Contributing

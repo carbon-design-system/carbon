@@ -37,8 +37,9 @@ import { black, blue, warmGray } from '@carbon/colors';
 const { black, blue, warmGray } = require('@carbon/colors');
 ```
 
-Each color swatch is exported as a variable, and each color name is also exported as an object that can be called
-by specifying grade, for example:
+Each color swatch is exported as a variable, and each color name is
+also exported as an object that can be called by specifying grade, for
+example:
 
 ```js
 black;

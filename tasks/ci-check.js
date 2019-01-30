@@ -10,7 +10,7 @@ async function main() {
     cwd: process.cwd(),
   };
   const tasks = [
-    'yarn toolkit format:diff',
+    'yarn format:diff',
     `yarn bundler check --ignore '**/@(node_modules|examples)/**' 'packages/**/*.scss'`,
     `yarn test --ci --reporters=default --reporters=jest-junit --testPathIgnorePatterns='examples'`,
   ];

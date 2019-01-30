@@ -27,10 +27,10 @@ curves using either Sass or JavaScript.
 
 ### Sass
 
-`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin that
-you can use to access the value of a motion curve or include that
-curve as the `transition-property` for a selector. To use these
-helpers, you can do the following in your project:
+`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin that you can use to access the value of a motion
+curve or include that curve as the `transition-property` for a
+selector. To use these helpers, you can do the following in your
+project:
 
 ```scss
 @import '@carbon/motion/scss/motion.scss';

@@ -18,13 +18,6 @@ command instead:
 yarn add @carbon/icons
 ```
 
-## 📚 Examples
-
-If you're looking for more examples on how to use `@carbon/icons`, we
-have some examples that you can check out:
-
-- [Esm](./examples/esm)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new
