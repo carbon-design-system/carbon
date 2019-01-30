@@ -37,7 +37,7 @@ export const breakpoints = {
   sm: {
     width: rem(320),
     columns: 4,
-    margin: 0,
+    margin: '0',
   },
   md: {
     width: rem(672),
