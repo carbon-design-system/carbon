@@ -1,6 +1,6 @@
 {
   "name": "@carbon/cli-reporter",
-  "private": true,
+  "description": "Reporter for CLI-based tools in the Carbon Design System",
   "version": "0.0.1-alpha.31",
   "license": "Apache-2.0",
   "main": "index.js",
