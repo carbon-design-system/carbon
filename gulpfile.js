@@ -28,6 +28,7 @@ const gutil = require('gulp-util');
 const header = require('gulp-header');
 const jsdoc = require('gulp-jsdoc3');
 const through = require('through2');
+const merge = require('merge-stream');
 
 // Rollup
 const { rollup } = require('rollup');
@@ -329,8 +330,10 @@ gulp.task('sass:compiled', () => {
       .pipe(browserSync.stream({ match: '**/*.css' }));
   }
 
-  buildStyles(); // Expanded CSS
-  buildStyles(true); // Minified CSS
+  return merge(
+    buildStyles(), // Expanded CSS
+    buildStyles(true) // Minified CSS
+  );
 });
 
 gulp.task('sass:dev', () =>
