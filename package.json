@@ -258,7 +258,7 @@
   "jest": {
     "testMatch": [
       "<rootDir>/**/__tests__/**/*.js?(x)",
-      "<rootDir>/**/es-test.js?(x)"
+      "<rootDir>/**/?(*-)(spec|test).js?(x)"
     ]
   }
 }
