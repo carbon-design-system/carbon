@@ -63,7 +63,14 @@ $ibm-colors__blue-50;
 $ibm-colors__warm-gray-100;
 ```
 
-Similarly, you can access the `tokens` variables after including them.
+If you would like a mixin to conditionally include these variables, you can
+include the mixin by using:
+
+```scss
+@import '@carbon/colors/scss/mixins';
+
+@include ibm--colors();
+```
 
 ## 🙌 Contributing
 

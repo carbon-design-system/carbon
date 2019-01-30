@@ -76,7 +76,7 @@ $ibm-color-map: $ibm-colors !default !global;
 `;
 
   const mixins = `${GENERATED_COMMENT}
-@mixin ibm-colors {
+@mixin ${PREFIX}--colors {
   ${colorMap}
   ${colorVariables.map(variable => '' + variable).join('\n  ')}
 }`;
@@ -91,7 +91,7 @@ $ibm-color-map: $ibm-colors !default !global;
 
 @import './mixins';
 
-@include ibm-colors();
+@include ${PREFIX}--colors();
 `;
 
   await fs.writeFile(
