@@ -1,6 +1,6 @@
 {
   "name": "@carbon/bundler",
-  "private": true,
+  "description": "Bundler used for libraries in the Carbon Design System",
   "version": "0.0.1-alpha.31",
   "license": "Apache-2.0",
   "bin": {

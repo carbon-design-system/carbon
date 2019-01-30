@@ -128,6 +128,7 @@ async function sync() {
     })
   );
 
+  // Sync README.md files
   await Promise.all(
     packages.map(async ({ packageJson, packagePath }) => {
       const README_PATH = path.join(packagePath, 'README.md');
@@ -141,6 +142,31 @@ async function sync() {
         README_PATH,
         prettier.format(String(file), prettierOptions)
       );
+    })
+  );
+
+  // Sync `.npmignore` files
+  const defaultIgnorePatterns = [
+    '**/__mocks__/**',
+    '**/__tests__/**',
+    '**/examples/**',
+    '**/tasks/**',
+  ];
+  await Promise.all(
+    packages.map(async ({ packageJson, packagePath }) => {
+      const ignorePath = path.join(packagePath, '.npmignore');
+      const ignorePatterns = [...defaultIgnorePatterns];
+
+      if (await fs.pathExists(ignorePath)) {
+        const ignoreFile = await fs.readFile(ignorePath, 'utf8');
+        const localIgnorePatterns = ignoreFile.split('\n').filter(pattern => {
+          return ignorePatterns.indexOf(pattern) === -1;
+        });
+
+        ignorePatterns.push(...localIgnorePatterns);
+      }
+
+      await fs.writeFile(ignorePath, ignorePatterns.join('\n'));
     })
   );
 }

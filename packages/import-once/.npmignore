@@ -1,3 +1,4 @@
-__tests__
-examples
-tasks
+**/__mocks__/**
+**/__tests__/**
+**/examples/**
+**/tasks/**
