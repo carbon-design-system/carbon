@@ -8,8 +8,8 @@ body {
 // Conversion
 //------------------------------------------------------------------------------
 .convert-box {
-  width: rem(48px);
-  height: em(48px);
+  width: carbon--rem(48px);
+  height: carbon--em(48px);
   background-color: black;
 }
 
@@ -17,8 +17,8 @@ body {
 // Mini unit
 //------------------------------------------------------------------------------
 .mini-unit-box {
-  width: mini-units(6);
-  height: mini-units(6);
+  width: carbon--mini-units(6);
+  height: carbon--mini-units(6);
   background-color: black;
 }
 
@@ -33,27 +33,27 @@ body {
   padding: 0;
 }
 
-@each $step in $fixed-spacing-scale {
-  $index: index($fixed-spacing-scale, $step) - 1;
+@each $step in $carbon--fixed-spacing-scale {
+  $index: index($carbon--fixed-spacing-scale, $step) - 1;
 
   .fixed-spacing-scale-#{$index} {
-    width: spacing($index);
-    height: spacing($index);
+    width: carbon--spacing($index);
+    height: carbon--spacing($index);
     background-color: black;
-    margin-right: mini-units(3);
-    margin-bottom: mini-units(3);
+    margin-right: carbon--mini-units(3);
+    margin-bottom: carbon--mini-units(3);
   }
 }
 
-@each $step in $fluid-spacing-scale {
-  $index: index($fluid-spacing-scale, $step) - 1;
+@each $step in $carbon--fluid-spacing-scale {
+  $index: index($carbon--fluid-spacing-scale, $step) - 1;
 
   .fluid-spacing-scale-#{$index} {
-    width: spacing($index, true);
-    height: spacing($index, true);
+    width: carbon--spacing($index, true);
+    height: carbon--spacing($index, true);
     background-color: black;
-    margin-right: mini-units(3);
-    margin-bottom: mini-units(3);
+    margin-right: carbon--mini-units(3);
+    margin-bottom: carbon--mini-units(3);
   }
 }
 
@@ -69,8 +69,8 @@ body {
   flex-wrap: wrap;
 }
 
-@each $breakpoint, $scale in $key-height-scales {
-  @include breakpoint($breakpoint) {
+@each $breakpoint, $scale in $carbon--key-height-scales {
+  @include carbon--breakpoint($breakpoint) {
     @each $value in $scale {
       $index: index($scale, $value);
 
@@ -78,8 +78,8 @@ body {
         width: $value;
         height: $value;
         background-color: black;
-        margin-right: mini-units(3);
-        margin-bottom: mini-units(3);
+        margin-right: carbon--mini-units(3);
+        margin-bottom: carbon--mini-units(3);
       }
     }
   }
