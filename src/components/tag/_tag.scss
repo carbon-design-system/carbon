@@ -93,47 +93,47 @@
   }
 
   .#{$prefix}--tag--basic {
-    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-100);
+    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-100);
   }
 
   .#{$prefix}--tag--red {
-    @include tag-theme--x($ibm-colors__red-10, $ibm-colors__red-60);
+    @include tag-theme--x($ibm-colors__red-20, $ibm-colors__red-70);
   }
 
   .#{$prefix}--tag--magenta {
-    @include tag-theme--x($ibm-colors__magenta-10, $ibm-colors__magenta-60);
+    @include tag-theme--x($ibm-colors__magenta-20, $ibm-colors__magenta-70);
   }
 
   .#{$prefix}--tag--purple {
-    @include tag-theme--x($ibm-colors__purple-10, $ibm-colors__purple-60);
+    @include tag-theme--x($ibm-colors__purple-20, $ibm-colors__purple-70);
   }
 
   .#{$prefix}--tag--blue {
-    @include tag-theme--x($ibm-colors__blue-10, $ibm-colors__blue-60);
+    @include tag-theme--x($ibm-colors__blue-20, $ibm-colors__blue-70);
   }
 
   .#{$prefix}--tag--cyan {
-    @include tag-theme--x($ibm-colors__cyan-10, $ibm-colors__cyan-60);
+    @include tag-theme--x($ibm-colors__cyan-20, $ibm-colors__cyan-70);
   }
 
   .#{$prefix}--tag--teal {
-    @include tag-theme--x($ibm-colors__teal-10, $ibm-colors__teal-60);
+    @include tag-theme--x($ibm-colors__teal-20, $ibm-colors__teal-70);
   }
 
   .#{$prefix}--tag--green {
-    @include tag-theme--x($ibm-colors__green-10, $ibm-colors__green-60);
+    @include tag-theme--x($ibm-colors__green-20, $ibm-colors__green-70);
   }
 
   .#{$prefix}--tag--cool-gray {
-    @include tag-theme--x($ibm-colors__cool-gray-10, $ibm-colors__cool-gray-100);
+    @include tag-theme--x($ibm-colors__cool-gray-20, $ibm-colors__cool-gray-100);
   }
 
   .#{$prefix}--tag--warm-gray {
-    @include tag-theme--x($ibm-colors__warm-gray-10, $ibm-colors__warm-gray-100);
+    @include tag-theme--x($ibm-colors__warm-gray-20, $ibm-colors__warm-gray-100);
   }
 
   .#{$prefix}--tag--disabled {
-    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-30);
+    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-30);
 
     &:hover {
       cursor: not-allowed;
