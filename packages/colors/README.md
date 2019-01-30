@@ -24,29 +24,6 @@ yarn add @carbon/colors
 You can use the `@carbon/colors` module in your JavaScript, in
 addition to your Sass.
 
-### JavaScript
-
-For JavaScript, you can import and use this module by doing the
-following in your code:
-
-```js
-// ESM
-import { black, blue, warmGray } from '@carbon/colors';
-
-// CommonJS
-const { black, blue, warmGray } = require('@carbon/colors');
-```
-
-Each color swatch is exported as a variable, and each color name is
-also exported as an object that can be called by specifying grade, for
-example:
-
-```js
-black;
-blue[50]; // Using the `blue` object.
-warmGray100; // Using the `warmGray100` variable.
-```
-
 ### Sass
 
 In Sass, you can import the files individual by doing:
@@ -70,6 +47,29 @@ include the mixin by using:
 @import '@carbon/colors/scss/mixins';
 
 @include ibm--colors();
+```
+
+### JavaScript
+
+For JavaScript, you can import and use this module by doing the
+following in your code:
+
+```js
+// ESM
+import { black, blue, warmGray } from '@carbon/colors';
+
+// CommonJS
+const { black, blue, warmGray } = require('@carbon/colors');
+```
+
+Each color swatch is exported as a variable, and each color name is
+also exported as an object that can be called by specifying grade, for
+example:
+
+```js
+black;
+blue[50]; // Using the `blue` object.
+warmGray100; // Using the `warmGray100` variable.
 ```
 
 ## 🙌 Contributing

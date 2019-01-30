@@ -8,7 +8,6 @@
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/colors",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
   "files": [
-    "css",
     "es",
     "lib",
     "scss",
