@@ -14,7 +14,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const glob = require('../glob');
 const gzipSize = require('gzip-size');
-const { reporter } = require('../reporter');
+const { reporter } = require('@carbon/cli-reporter');
 const compile = require('../tools/compile');
 
 async function measure(

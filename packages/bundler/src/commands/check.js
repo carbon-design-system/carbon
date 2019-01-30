@@ -10,7 +10,7 @@
 const path = require('path');
 const chalk = require('chalk');
 const glob = require('../glob');
-const { reporter } = require('../reporter');
+const { reporter } = require('@carbon/cli-reporter');
 const compile = require('../tools/compile');
 
 async function check(pattern, { ignore, cwd, list } = {}) {
