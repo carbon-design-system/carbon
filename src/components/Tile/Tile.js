@@ -275,14 +275,7 @@ export class SelectableTile extends Component {
     );
 
     return (
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-      <label
-        htmlFor={id}
-        className={classes}
-        tabIndex={tabIndex}
-        {...other}
-        onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}>
+      <>
         <input
           ref={input => {
             this.input = input;
@@ -296,19 +289,27 @@ export class SelectableTile extends Component {
           title={title}
           checked={this.state.selected}
         />
-        <div className={`${prefix}--tile__checkmark`}>
-          {componentsX ? (
-            <CheckmarkFilled
-              aria-label={iconDescription}
-              alt={iconDescription}
-              description={iconDescription}
-            />
-          ) : (
-            <Icon icon={iconCheckmarkSolid} description={iconDescription} />
-          )}
-        </div>
-        <div className={`${prefix}--tile-content`}>{children}</div>
-      </label>
+        <label
+          htmlFor={id}
+          className={classes}
+          tabIndex={tabIndex}
+          {...other}
+          onClick={this.handleClick}
+          onKeyDown={this.handleKeyDown}>
+          <div className={`${prefix}--tile__checkmark`}>
+            {componentsX ? (
+              <CheckmarkFilled
+                aria-label={iconDescription}
+                alt={iconDescription}
+                description={iconDescription}
+              />
+            ) : (
+              <Icon icon={iconCheckmarkSolid} description={iconDescription} />
+            )}
+          </div>
+          <div className={`${prefix}--tile-content`}>{children}</div>
+        </label>
+      </>
     );
   }
 }
