@@ -326,7 +326,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__button--no-index {
-    opacity: 0.5;
+    fill: $disabled-02;
     cursor: not-allowed;
   }
 
