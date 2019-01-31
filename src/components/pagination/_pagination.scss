@@ -322,6 +322,11 @@ $css--helpers: true;
     }
   }
 
+  .#{$prefix}--pagination__button--no-index {
+    fill: $disabled-02;
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--pagination--inline {
     height: rem(42px);
     margin-top: -0.5rem;

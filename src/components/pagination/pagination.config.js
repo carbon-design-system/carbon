@@ -67,6 +67,7 @@ const variants = [
     },
     context: {
       itemsPerPageChoices,
+      pageNumberChoices,
       version: 'v1',
     },
     notes: `
@@ -79,8 +80,21 @@ const variants = [
     context: {
       version: 'v2',
       itemsPerPageChoices,
+      pageNumberChoices,
       totalPages: 5,
     },
+  },
+  {
+    name: 'v2 Disabled Pagination Buttons',
+    label: 'V2 Disabled Pagination Buttons',
+    context: {
+      version: 'v2',
+      itemsPerPageChoices: [itemsPerPageChoices[0]],
+      totalPages: 1,
+      pageNumberChoices: [pageNumberChoices[0]],
+      disabledPaginationButton: true,
+    },
+    notes: `Notify the user of their position in the page range by disabling the appropriate pagination buttons at the start or end of the range.`,
   },
 ];
 
@@ -88,7 +102,6 @@ module.exports = {
   context: {
     featureFlags,
     prefix,
-    pageNumberChoices,
   },
   variants,
 };
