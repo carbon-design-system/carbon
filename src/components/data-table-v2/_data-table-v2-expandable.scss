@@ -8,7 +8,6 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
 
 @include exports('data-table-v2-expandable') {
   tr.#{$prefix}--expandable-row-v2 {
