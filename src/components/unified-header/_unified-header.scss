@@ -5,17 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/functions';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/layout';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/css--typography';
 @import 'mixins';
 @import 'left-nav-trigger';
 @import 'global-header';

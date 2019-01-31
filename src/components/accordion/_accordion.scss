@@ -6,10 +6,6 @@
 //
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
@@ -179,7 +175,8 @@
     margin: 0;
     transition: background-color $transition--base;
 
-    &:hover:before, &:focus:before {
+    &:hover:before,
+    &:focus:before {
       content: '';
       position: absolute;
       top: -1px;
