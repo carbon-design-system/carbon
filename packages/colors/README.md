@@ -40,8 +40,8 @@ $ibm-colors__blue-50;
 $ibm-colors__warm-gray-100;
 ```
 
-If you would like a mixin to conditionally include these variables, you can
-include the mixin by using:
+If you would like a mixin to conditionally include these variables,
+you can include the mixin by using:
 
 ```scss
 @import '@carbon/colors/scss/mixins';

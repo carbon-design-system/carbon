@@ -42,13 +42,6 @@ package.
 JavaScript. If you're looking for support in a different language,
 feel free to file an issue proposing the new addition!
 
-## 📚 Examples
-
-If you're looking for more examples on how to use `@carbon/layout`, we
-have some examples that you can check out:
-
-- [Styled-components](./examples/styled-components)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new
