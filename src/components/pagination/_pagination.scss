@@ -256,6 +256,11 @@ $css--helpers: true;
     align-items: center;
   }
 
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
+
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
     margin-right: rem(1px);
   }
