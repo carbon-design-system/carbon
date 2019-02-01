@@ -14,6 +14,7 @@ const { prefix } = settings;
 
 const HeaderMenuItem = props => {
   const { className, children, role, innerRef, ...rest } = props;
+
   return (
     <li className={className} role={role}>
       <Link

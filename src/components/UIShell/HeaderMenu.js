@@ -75,21 +75,6 @@ class HeaderMenu extends React.Component {
 
       return;
     }
-
-    // Handle ESC keydown for closing the expanded menu.
-    if (matches(event, [keys.ESC]) && this.state.expanded) {
-      event.stopPropagation();
-      event.preventDefault();
-
-      this.setState(() => ({
-        expanded: false,
-        selectedIndex: null,
-      }));
-
-      // Return focus to menu button when the user hits ESC.
-      this.menuButtonRef.focus();
-      return;
-    }
   };
 
   /**
@@ -129,6 +114,23 @@ class HeaderMenu extends React.Component {
     this.items[index] = node;
   };
 
+  handleMenuClose = event => {
+    // Handle ESC keydown for closing the expanded menu.
+    if (matches(event, [keys.ESC]) && this.state.expanded) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      this.setState(() => ({
+        expanded: false,
+        selectedIndex: null,
+      }));
+
+      // Return focus to menu button when the user hits ESC.
+      this.menuButtonRef.focus();
+      return;
+    }
+  };
+
   render() {
     const {
       'aria-label': ariaLabel,
@@ -151,7 +153,7 @@ class HeaderMenu extends React.Component {
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
         className={className}
-        onKeyDown={this.handleOnKeyDown}
+        onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}
         onBlur={this.handleOnBlur}>
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
@@ -162,6 +164,7 @@ class HeaderMenu extends React.Component {
             `${prefix}--header__menu-title`
           )}
           href="javascript:void(0)"
+          onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
           role="menuitem"
           tabIndex={0}>

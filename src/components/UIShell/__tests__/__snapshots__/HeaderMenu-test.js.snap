@@ -23,6 +23,7 @@ exports[`HeaderMenu should render 1`] = `
         aria-haspopup="menu"
         className="bx--header__menu-item bx--header__menu-title"
         href="javascript:void(0)"
+        onKeyDown={[Function]}
         role="menuitem"
         tabIndex={0}
       >
