@@ -230,7 +230,6 @@ export default class Tabs extends React.Component {
 
       return (
         <TabContent
-          className="tab-content"
           aria-hidden={!selected}
           hidden={!selected}
           selected={selected}>
