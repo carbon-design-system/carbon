@@ -121,6 +121,41 @@
     height: rem(12px);
     width: rem(40px);
   }
+
+  .#{$prefix}--progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    display: list-item;
+    min-height: 3rem;
+
+    svg {
+      display: inline-block;
+    }
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+    margin-top: 0.26rem;
+    margin-left: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    top: 22px;
+    left: 0.69rem;
+    height: calc(100% - 22px);
+    width: 1px;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step:first-child .#{$prefix}--progress-line {
+    display: block;
+  }
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step:last-child .#{$prefix}--progress-line {
+    display: none;
+  }
 }
 
 @mixin progress-indicator--x {

@@ -54,5 +54,17 @@ module.exports = {
         componentsX,
       },
     },
+    {
+      name: 'vertical',
+      label: 'Vertical',
+      context: {
+        vertical: true,
+        steps,
+        componentsX,
+      },
+      meta: {
+        xVersionNotSupported: true,
+      },
+    },
   ],
 };
