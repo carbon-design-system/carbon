@@ -8,9 +8,16 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { iconCaretUp, iconCaretDown } from 'carbon-icons';
-import Icon from '../Icon';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+// TODO: import { WarningFilled16 } from '@carbon/icons-react';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+// TODO: import { CaretDownGlyph } from '@carbon/icons-react';
+import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
+// TODO: import { CaretUpGlyph } from '@carbon/icons-react';
+import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
+import Icon from '../Icon';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -264,40 +271,78 @@ export default class NumberInput extends Component {
     return (
       <div className={`${prefix}--form-item`}>
         <div className={numberInputClasses} {...inputWrapperProps}>
-          <div className={`${prefix}--number__controls`}>
-            <button
-              className={`${prefix}--number__control-btn up-icon`}
-              {...buttonProps}
-              onClick={evt => this.handleArrowClick(evt, 'up')}>
-              <Icon
-                className="up-icon"
-                icon={iconCaretUp}
-                description={this.props.iconDescription}
-                viewBox="0 0 10 5"
+          {componentsX ? (
+            <>
+              {labelText}
+              {helper}
+              <div className={`${prefix}--number__input-wrapper`}>
+                <input
+                  type="number"
+                  pattern="[0-9]*"
+                  {...other}
+                  {...props}
+                  ref={this._handleInputRef}
+                />
+                {invalid && (
+                  <WarningFilled16
+                    className={`${prefix}--number__invalid`}
+                    role="img"
+                  />
+                )}
+                <div className={`${prefix}--number__controls`}>
+                  <button
+                    className={`${prefix}--number__control-btn up-icon`}
+                    {...buttonProps}
+                    onClick={evt => this.handleArrowClick(evt, 'up')}>
+                    <CaretUpGlyph className="up-icon" />
+                  </button>
+                  <button
+                    className={`${prefix}--number__control-btn down-icon`}
+                    {...buttonProps}
+                    onClick={evt => this.handleArrowClick(evt, 'down')}>
+                    <CaretDownGlyph className="down-icon" />
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={`${prefix}--number__controls`}>
+                <button
+                  className={`${prefix}--number__control-btn up-icon`}
+                  {...buttonProps}
+                  onClick={evt => this.handleArrowClick(evt, 'up')}>
+                  <Icon
+                    className="up-icon"
+                    icon={iconCaretUp}
+                    description={this.props.iconDescription}
+                    viewBox="0 0 10 5"
+                  />
+                </button>
+                <button
+                  className={`${prefix}--number__control-btn down-icon`}
+                  {...buttonProps}
+                  onClick={evt => this.handleArrowClick(evt, 'down')}>
+                  <Icon
+                    className="down-icon"
+                    icon={iconCaretDown}
+                    viewBox="0 0 10 5"
+                    description={this.props.iconDescription}
+                  />
+                </button>
+              </div>
+              {labelText}
+              <input
+                type="number"
+                pattern="[0-9]*"
+                {...other}
+                {...props}
+                ref={this._handleInputRef}
               />
-            </button>
-            <button
-              className={`${prefix}--number__control-btn down-icon`}
-              {...buttonProps}
-              onClick={evt => this.handleArrowClick(evt, 'down')}>
-              <Icon
-                className="down-icon"
-                icon={iconCaretDown}
-                viewBox="0 0 10 5"
-                description={this.props.iconDescription}
-              />
-            </button>
-          </div>
-          {labelText}
-          <input
-            type="number"
-            pattern="[0-9]*"
-            {...other}
-            {...props}
-            ref={this._handleInputRef}
-          />
+            </>
+          )}
           {error}
-          {helper}
+          {!componentsX && helper}
         </div>
       </div>
     );
