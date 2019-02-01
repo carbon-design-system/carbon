@@ -10,7 +10,13 @@
 
 ### List of Available Components
 
-View available React Components [here](http://react.carbondesignsystem.com). Usage information is available when you click the blue **?** icon in the top right corner of the selected component.
+View available React Components [here](http://react.carbondesignsystem.com). You can see usage information in several ways:
+
+1. Clicking the blue **Show Info** icon in the top right corner of the selected component. You can see the list of available React props
+2. Clicking the **STORY** tab at the bottom. This tab contains the code that shows how the component is being used
+3. Clicking the **KNOBS** tab at the bottom and changing values there. Most knobs are shown as something like `Button kind (kind)`, where `kind` is the name of React prop
+4. Clicking the **ACTION LOGGER** tab at the bottom and interacting with the selected component. You may see something like `onClick` which typically indicates that the event handler (React prop) with the same name is called. You can also expand the twistie to see the details of the event
+5. Clicking the **README** tab at the bottom. You can see some more document for some components
 
 ### Getting Started
 

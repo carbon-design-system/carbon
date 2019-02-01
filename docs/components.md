@@ -23,11 +23,12 @@ We're actively looking to improve our Component documentation through generating
 add documentation around installing and using our components, in addition to
 covering common use-cases for each component with code examples.
 
-If you would like to help out, there are two components of contributing
+If you would like to help out, there are several options to contribute
 component-specific documentation to `carbon-components-react`:
 
-1. Create a `README.md` file using [this file structure](#file-structure)
-2. Add the `README.md` file to the component's story using [these steps](#storybook-readme)
+1. Create a `README.md` file using [this file structure](#file-structure), and add it to the component's story using [these steps](#storybook-readme)
+2. Ensure props of components are covered by [Storybook knobs](https://github.com/storybooks/storybook/tree/master/addons/knobs)
+3. Ensure event handlers of components are covered by [Storybook action logger](https://github.com/storybooks/storybook/tree/master/addons/actions)
 
 Once those steps are complete, you should be able to follow our [contribution guidelines](/.github/CONTRIBUTING.md) to finish making a Pull Request for your work!
 
