@@ -1,6 +1,5 @@
 /**
  * Copyright IBM Corp. 2019, 2019
- *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
@@ -136,7 +135,9 @@ async function runInDirectory(options) {
     console.log(diff(nextPackageJson, packageJson, { expand: false }));
     console.log();
   } else {
-    await fs.writeFile(packageJsonPath, nextPackageJson);
+    await fs.writeJson(packageJsonPath, nextPackageJson, {
+      spaces: 2,
+    });
   }
 
   reporter.info(
