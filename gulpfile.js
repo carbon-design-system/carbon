@@ -353,11 +353,6 @@ gulp.task('sass:dev', () =>
     .pipe(
       sass({
         includePaths: ['node_modules'],
-        importer: (url, prev, done) => {
-          done({
-            file: url.replace(/^carbon-components\/scss\//, `${path.resolve(__dirname, 'src')}/`),
-          });
-        },
         outputStyle: 'expanded',
       }).on('error', sass.logError)
     )
