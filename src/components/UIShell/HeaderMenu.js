@@ -10,7 +10,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keys, match, matches } from '../../tools/key';
+import { keys, matches } from '../../tools/key';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
@@ -52,112 +52,43 @@ class HeaderMenu extends React.Component {
   }
 
   /**
-   * Handle expansion state
+   * Toggle the expanded state of the menu on click.
    */
-  handleOnMouseOver = () => {
-    this.setState({ expanded: true });
+  handleOnClick = () => {
+    this.setState(prevState => ({
+      expanded: !prevState.expanded,
+    }));
   };
 
   /**
-   * Handle collapse state. The `mouseleave` event is used here instead of
-   * `mouseout` because `mouseout` will fire if we move our mouse over
-   * menuitems.
-   */
-  handleOnMouseLeave = () => {
-    this.setState({ expanded: false });
-  };
-
-  /**
-   * Keyboard event handler for the entire menu. Handles the behavior as
-   * described in:
-   * https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#kbd2_label
+   * Keyboard event handler for the entire menu.
    */
   handleOnKeyDown = event => {
-    // If we recieve a RIGHT or LEFT key event we should close our menu and
-    // allow the event to propagate to the corresponding parent menubar or menu
-    if (matches(event, [keys.RIGHT, keys.LEFT])) {
-      this.setState({ expanded: false, selectedIndex: null });
-      return;
-    }
-
-    // If we receive an ESC key event we want to close the menu and restore
-    // focus to the menu button
-    if (match(event, keys.ESC)) {
+    // Handle enter or space key for toggling the expanded state of the menu.
+    if (matches(event, [keys.ENTER, keys.SPACE])) {
       event.stopPropagation();
-      this.setState({ expanded: false, selectedIndex: null }, () => {
-        this.menuButtonRef.focus();
-      });
-      return;
-    }
-
-    // If we recieve a HOME or END keyboard event we want to prevent the default
-    // behavior (which is to scroll to the beginning or end of the document) and
-    // also stop the event from propagating.
-    //
-    // We also want to update the selectedIndex value accordingly and then focus
-    // the corresponding menuitem.
-    //
-    // Our final check on selectedIndex is to make sure that we don't cancel the
-    // HOME or END events for the menubar. We should propagate these events if
-    // our menu is not open.
-    if (
-      matches(event, [keys.HOME, keys.END]) &&
-      this.state.selectedIndex !== null
-    ) {
       event.preventDefault();
-      event.stopPropagation();
-      const selectedIndex = match(event, keys.HOME) ? 0 : this.items.length - 1;
-      this.setState({ selectedIndex }, () => {
-        this.items[this.state.selectedIndex].focus();
-      });
+
+      this.setState(prevState => ({
+        expanded: !prevState.expanded,
+      }));
+
       return;
     }
 
-    if (matches(event, [keys.DOWN, keys.UP])) {
+    // Handle ESC keydown for closing the expanded menu.
+    if (matches(event, [keys.ESC]) && this.state.expanded) {
       event.stopPropagation();
-      const { which } = event;
-      this.setState(
-        state => {
-          // We use the modulo (%) operator here to implement a circular
-          // buffer so that when we hit the end of the list it wraps to the
-          // beginning, and when it hits the beginning of a list it wraps to the
-          // end.
-          const selectedIndex = match(which, keys.DOWN)
-            ? (state.selectedIndex + 1) % this.items.length
-            : (state.selectedIndex + this.items.length - 1) % this.items.length;
-          return {
-            selectedIndex,
-          };
-        },
-        () => {
-          this.items[this.state.selectedIndex].focus();
-        }
-      );
-    }
-  };
+      event.preventDefault();
 
-  /**
-   * Handles keyboard events on the menu button. Only needs to support ArrowUp
-   * and ArrowDown and should set the focus position accordingly on the child
-   * item.
-   *
-   * We stop this event from propagating because a parent menubar or menu does
-   * not need this event.
-   */
-  handleMenuButtonKeyDown = event => {
-    if (matches(event, [keys.DOWN, keys.UP])) {
-      event.stopPropagation();
-      const selectedIndex =
-        event.which === keys.DOWN ? 0 : this.items.length - 1;
-      this.setState(
-        {
-          expanded: true,
-          selectedIndex,
-        },
-        () => {
-          this.items[this.state.selectedIndex].focus();
-        }
-      );
+      this.setState(() => ({
+        expanded: false,
+        selectedIndex: null,
+      }));
+
+      // Return focus to menu button when the user hits ESC.
+      this.menuButtonRef.focus();
+      return;
     }
   };
 
@@ -204,7 +135,6 @@ class HeaderMenu extends React.Component {
       'aria-labelledby': ariaLabelledBy,
       className: customClassName,
       children,
-      tabIndex,
     } = this.props;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -222,8 +152,7 @@ class HeaderMenu extends React.Component {
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
         className={className}
         onKeyDown={this.handleOnKeyDown}
-        onMouseOver={this.handleOnMouseOver}
-        onMouseLeave={this.handleOnMouseLeave}
+        onClick={this.handleOnClick}
         onBlur={this.handleOnBlur}>
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
@@ -235,8 +164,7 @@ class HeaderMenu extends React.Component {
           href="javascript:void(0)"
           ref={this.handleMenuButtonRef}
           role="menuitem"
-          tabIndex={tabIndex}
-          onKeyDown={this.handleMenuButtonKeyDown}>
+          tabIndex={0}>
           {ariaLabel}
           <ChevronDownGlyph className={`${prefix}--header__menu-arrow`} />
         </a>
@@ -264,7 +192,6 @@ class HeaderMenu extends React.Component {
     return React.cloneElement(item, {
       ref: this.handleItemRef(index),
       role: 'none',
-      tabIndex: index !== 0 ? -1 : 0,
     });
   };
 }

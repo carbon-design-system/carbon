@@ -18,10 +18,12 @@ exports[`HeaderMenuItem should render 1`] = `
         className="bx--header__menu-item"
         element="a"
         role="menuitem"
+        tabIndex={0}
       >
         <a
           className="bx--header__menu-item"
           role="menuitem"
+          tabIndex={0}
         >
           <span
             className="bx--text-truncate--end"

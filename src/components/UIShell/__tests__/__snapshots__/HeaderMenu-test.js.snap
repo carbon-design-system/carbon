@@ -15,18 +15,16 @@ exports[`HeaderMenu should render 1`] = `
     <li
       className="bx--header__submenu custom-class"
       onBlur={[Function]}
+      onClick={[Function]}
       onKeyDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseOver={[Function]}
     >
       <a
         aria-expanded={false}
         aria-haspopup="menu"
         className="bx--header__menu-item bx--header__menu-title"
         href="javascript:void(0)"
-        onKeyDown={[Function]}
         role="menuitem"
-        tabIndex={-1}
+        tabIndex={0}
       >
         Accessibility label
         <ChevronDownGlyph
@@ -67,13 +65,11 @@ exports[`HeaderMenu should render 1`] = `
           href="/a"
           key=".0"
           role="none"
-          tabIndex={0}
         >
           <HeaderMenuItem
             href="/a"
             innerRef={[Function]}
             role="none"
-            tabIndex={0}
           >
             <li
               role="none"
@@ -105,13 +101,11 @@ exports[`HeaderMenu should render 1`] = `
           href="/b"
           key=".1"
           role="none"
-          tabIndex={-1}
         >
           <HeaderMenuItem
             href="/b"
             innerRef={[Function]}
             role="none"
-            tabIndex={-1}
           >
             <li
               role="none"
@@ -121,13 +115,13 @@ exports[`HeaderMenu should render 1`] = `
                 element="a"
                 href="/b"
                 role="menuitem"
-                tabIndex={-1}
+                tabIndex={0}
               >
                 <a
                   className="bx--header__menu-item"
                   href="/b"
                   role="menuitem"
-                  tabIndex={-1}
+                  tabIndex={0}
                 >
                   <span
                     className="bx--text-truncate--end"
@@ -143,13 +137,11 @@ exports[`HeaderMenu should render 1`] = `
           href="/c"
           key=".2"
           role="none"
-          tabIndex={-1}
         >
           <HeaderMenuItem
             href="/c"
             innerRef={[Function]}
             role="none"
-            tabIndex={-1}
           >
             <li
               role="none"
@@ -159,13 +151,13 @@ exports[`HeaderMenu should render 1`] = `
                 element="a"
                 href="/c"
                 role="menuitem"
-                tabIndex={-1}
+                tabIndex={0}
               >
                 <a
                   className="bx--header__menu-item"
                   href="/c"
                   role="menuitem"
-                  tabIndex={-1}
+                  tabIndex={0}
                 >
                   <span
                     className="bx--text-truncate--end"

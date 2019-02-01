@@ -20,7 +20,8 @@ const HeaderMenuItem = props => {
         {...rest}
         className={`${prefix}--header__menu-item`}
         ref={innerRef}
-        role="menuitem">
+        role="menuitem"
+        tabIndex={0}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </Link>
     </li>
