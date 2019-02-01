@@ -122,6 +122,7 @@
     width: rem(40px);
   }
 
+  // Vertical variant
   .#{$prefix}--progress--vertical {
     display: block;
   }
@@ -346,6 +347,51 @@
     @include skeleton;
     height: rem(12px);
     width: rem(40px);
+  }
+
+  .#{$prefix}--progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    display: list-item;
+    min-height: 3rem;
+    width: initial;
+    min-width: initial;
+
+    svg {
+      display: inline-block;
+      margin: 0.1rem 0.5rem;
+    }
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
+    margin-left: 0.563rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: initial;
+    max-width: none;
+    vertical-align: top;
+    margin: 0;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
+    margin-top: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
+    margin-top: initial;
+    position: initial;
+    margin-left: 2.25rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
   }
 }
 

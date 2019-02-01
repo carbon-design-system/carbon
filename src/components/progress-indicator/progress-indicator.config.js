@@ -62,9 +62,6 @@ module.exports = {
         steps,
         componentsX,
       },
-      meta: {
-        xVersionNotSupported: true,
-      },
     },
   ],
 };

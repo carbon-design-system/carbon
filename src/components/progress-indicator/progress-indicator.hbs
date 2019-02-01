@@ -39,7 +39,11 @@
       <p tabindex="0" class="{{@root.prefix}}--progress-label" {{#if ../componentsX}} aria-describedby="label-tooltip" {{/if}}>
         {{#if ../componentsX}}
           {{#if overflow}}
-            {{overflowLabel}}
+            {{#if ../vertical}}
+              {{label}}
+            {{else}}
+              {{overflowLabel}}
+            {{/if}}
           {{else}}
             {{label}}
           {{/if}}
