@@ -142,4 +142,24 @@ describe('RadioButtonGroup', () => {
       expect(wrapper.state().selected).toEqual('male');
     });
   });
+
+  describe('Custom class name should stay with original class name', () => {
+    const wrapper = shallow(
+      <RadioButtonGroup
+        className="my-radio-group"
+        valueSelected="male"
+        defaultSelected="female"
+        name="gender">
+        <RadioButton labelText="Male" value="male" />
+        <RadioButton labelText="Female" value="female" />
+      </RadioButtonGroup>
+    );
+
+    it('should found the provided class along with the base class', () => {
+      expect(wrapper.exists('.my-radio-group')).toBe(true);
+      expect(wrapper.exists('.bx--radio-button-group.my-radio-group')).toBe(
+        true
+      );
+    });
+  });
 });

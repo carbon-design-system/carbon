@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 import RadioButton from '../RadioButton';
 import warning from 'warning';
 import { settings } from 'carbon-components';
@@ -103,14 +104,16 @@ export default class RadioButtonGroup extends React.Component {
   };
 
   render() {
-    const {
-      disabled,
-      className = `${prefix}--radio-button-group`,
-    } = this.props;
+    const { disabled, className } = this.props;
+
+    const wrapperClasses = classNames(
+      `${prefix}--radio-button-group`,
+      className
+    );
 
     return (
       <div className={`${prefix}--form-item`}>
-        <div className={className} disabled={disabled}>
+        <div className={wrapperClasses} disabled={disabled}>
           {this.getRadioButtons()}
         </div>
       </div>
