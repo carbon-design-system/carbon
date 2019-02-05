@@ -27,6 +27,10 @@
     min-width: 7rem;
     transition: $transition--base all $carbon--standard-easing;
     overflow: visible;
+
+    &:first-child .#{$prefix}--progress-line {
+      display: none;
+    }
   }
 
   .#{$prefix}--progress-line {
@@ -36,10 +40,6 @@
     height: 1px;
     width: calc(100% - 24px);
     border: $progress-indicator-bar-width;
-
-    .#{$prefix}--progress-step:first-child & {
-      display: none;
-    }
   }
 
   .#{$prefix}--progress-step svg {
