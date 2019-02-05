@@ -1,11 +1,11 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
 
-<ul data-progress data-progress-current class="{{@root.prefix}}--progress">
+<ul data-progress data-progress-current class="{{@root.prefix}}--progress {{#if vertical}}{{@root.prefix}}--progress--vertical{{/if}}">
   {{#each steps}}
     <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}} {{#if disabled}} {{@root.prefix}}--progress-step--disabled {{/if}}" {{#if invalid}} data-invalid {{/if}}>
       {{#is state "complete"}}
@@ -39,7 +39,11 @@
       <p tabindex="0" class="{{@root.prefix}}--progress-label" {{#if ../componentsX}} aria-describedby="label-tooltip" {{/if}}>
         {{#if ../componentsX}}
           {{#if overflow}}
-            {{overflowLabel}}
+            {{#if ../vertical}}
+              {{label}}
+            {{else}}
+              {{overflowLabel}}
+            {{/if}}
           {{else}}
             {{label}}
           {{/if}}
