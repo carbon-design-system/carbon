@@ -129,7 +129,7 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
     display: list-item;
-    min-height: 3rem;
+    min-height: 6rem;
 
     svg {
       display: inline-block;
@@ -355,7 +355,7 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
     display: list-item;
-    min-height: 3rem;
+    min-height: 6rem;
     width: initial;
     min-width: initial;
 

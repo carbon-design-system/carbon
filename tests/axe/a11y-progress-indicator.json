@@ -530,7 +530,7 @@
         ]
       }
     ],
-    "timestamp": 1549037654536,
+    "timestamp": 1549396215286,
     "url": "http://localhost:3000/component/progress-indicator/",
     "violations": [
       {
@@ -564,7 +564,7 @@
         ]
       }
     ],
-    "time": 250,
+    "time": 257,
     "status": 200
   }
 ]
