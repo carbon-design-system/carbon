@@ -11,6 +11,7 @@ import {
   blue60,
   blue70,
   blue80,
+  blue90,
 
   // Gray
   gray10,
@@ -99,6 +100,8 @@ export const visitedLink = purple40;
 export const disabled01 = gray80;
 export const disabled02 = gray70;
 export const disabled03 = gray50;
+
+export const highlight = blue90;
 
 // Deprecated ☠️
 export const brand01 = interactive01;
