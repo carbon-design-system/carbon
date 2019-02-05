@@ -9,7 +9,7 @@
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/theme';
+@import '../../globals/scss/vars';
 
 @mixin assistive-text {
   position: absolute;

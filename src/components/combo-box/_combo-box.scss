@@ -9,12 +9,9 @@
 // ComboBox
 //-----------------------------
 
-@import '../../globals/scss/colors';
-@import '../../globals/scss/css--helpers';
-@import '../../globals/scss/layout';
-@import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
+@import '../../globals/scss/functions';
+@import '../../globals/scss/import-once';
 @import '../list-box/list-box';
 
 @mixin combo-box {
