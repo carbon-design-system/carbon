@@ -197,16 +197,16 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interactive-01, transparent, $inverse-01, #0353e9, $ui-01, $interactive-02);
+    @include button-theme--x($interactive-01, transparent, $text-04, #0353e9, $text-04, $interactive-02);
   }
 
   .#{$prefix}--btn--secondary {
     @include button-theme--x(
       $ibm-colors__gray-80,
       $ibm-colors__gray-80,
-      $inverse-01,
+      $text-04,
       $ibm-colors__gray-70,
-      $inverse-01,
+      $text-04,
       $ibm-colors__gray-60
     );
 

@@ -459,55 +459,9 @@
       }
     ],
     "incomplete": [],
-    "timestamp": 1538076704912,
+    "timestamp": 1549037585897,
     "url": "http://localhost:3000",
     "violations": [
-      {
-        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
-        "help": "Elements must have sufficient color contrast",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/color-contrast?application=webdriverjs",
-        "id": "color-contrast",
-        "impact": "serious",
-        "nodes": [
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "bgColor": "#4285f4",
-                  "contrastRatio": 3.56,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#ffffff",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.56 (foreground color: #ffffff, background color: #4285f4, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-                "relatedNodes": [
-                  {
-                    "html": "<button id=\"reload-button\" class=\"blue-button text-button\" onclick=\"trackClick(this.trackingId);\n                     reloadButtonClick(this.url);\" jsselect=\"reloadButton\" jsvalues=\".url:reloadUrl; .trackingId:reloadTrackingId\" jscontent=\"msg\" jstcache=\"8\">Reload</button>",
-                    "target": [
-                      "#reload-button"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "html": "<button id=\"reload-button\" class=\"blue-button text-button\" onclick=\"trackClick(this.trackingId);\n                     reloadButtonClick(this.url);\" jsselect=\"reloadButton\" jsvalues=\".url:reloadUrl; .trackingId:reloadTrackingId\" jscontent=\"msg\" jstcache=\"8\">Reload</button>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              "#reload-button"
-            ]
-          }
-        ],
-        "tags": [
-          "cat.color",
-          "wcag2aa",
-          "wcag143"
-        ]
-      },
       {
         "description": "Ensures a navigation point to the primary content of the page. If the page contains iframes, each iframe should contain either no main landmarks or just one.",
         "help": "Page must contain one main landmark.",
@@ -571,7 +525,7 @@
         ]
       }
     ],
-    "time": 8052,
+    "time": 264,
     "status": 404
   }
 ]
