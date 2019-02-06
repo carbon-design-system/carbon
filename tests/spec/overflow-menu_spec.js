@@ -77,6 +77,60 @@ describe('Test Overflow menu', function() {
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').toBe(false);
     });
 
+    describe('Arrow key navigation', function() {
+      const upArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(upArrowKeydown, 'which', { value: 38, writable: true });
+      const downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
+      let items;
+
+      beforeEach(() => {
+        element.classList.add('bx--overflow-menu--open');
+        optionsElement.classList.add('bx--overflow-menu-options--open');
+        items = document.querySelectorAll(`
+          .bx--overflow-menu-options--open >
+          .bx--overflow-menu-options__option:not(.bx--overflow-menu-options__option--disabled)
+          > .bx--overflow-menu-options__btn
+        `);
+        items[0].focus();
+      });
+
+      describe('Up/Down arrow keys', function() {
+        it('should move focus from currently focused item to previous menu item', function() {
+          spyOn(items[0], 'focus');
+          items[1].focus();
+          element.dispatchEvent(upArrowKeydown);
+          expect(items[0].focus).toHaveBeenCalled();
+          expect(items[0].focus).toHaveBeenCalledTimes(1);
+        });
+
+        it('should wrap focus from first menu item to last menu item', function() {
+          spyOn(items[items.length - 1], 'focus');
+          element.dispatchEvent(upArrowKeydown);
+          expect(items[items.length - 1].focus).toHaveBeenCalled();
+          expect(items[items.length - 1].focus).toHaveBeenCalledTimes(1);
+        });
+
+        it('should move focus from currently focused item to next menu item', function() {
+          spyOn(items[1], 'focus');
+          optionsElement.dispatchEvent(downArrowKeydown);
+          expect(items[1].focus).toHaveBeenCalledTimes(1);
+        });
+
+        it('should wrap focus from last menu item to first menu item', function() {
+          spyOn(items[0], 'focus');
+          items[items.length - 1].focus();
+          optionsElement.dispatchEvent(downArrowKeydown);
+          expect(items[0].focus).toHaveBeenCalledTimes(1);
+        });
+      });
+
+      afterEach(() => {
+        element.classList.remove('bx--overflow-menu--open');
+        optionsElement.classList.remove('bx--overflow-menu-options--open');
+      });
+    });
+
     it('Should emit an event after showing', function() {
       const spyOverflowEvent = jasmine.createSpy();
       events.on(document, 'floating-menu-shown', spyOverflowEvent);

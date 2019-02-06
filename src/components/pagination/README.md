@@ -8,6 +8,7 @@ Use these modifiers with `.bx--pagination__button` class.
 | ----------------------------------- | ---------------------------------- |
 | .bx--pagination\_\_button--backward | Applies styles for backward button |
 | .bx--pagination\_\_button--forward  | Applies styles for forward button  |
+| .bx--pagination\_\_button--no-index | Applies styles for disabled button |
 
 ### JavaScript
 

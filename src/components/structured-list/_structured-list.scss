@@ -5,16 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
+@import 'mixins';
 
 @mixin structured-list {
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,

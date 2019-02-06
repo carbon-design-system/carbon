@@ -6,11 +6,10 @@
 //
 
 @import '../../globals/scss/import-once';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/functions';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/theme';
+@import '../../globals/scss/helper-mixins';
+@import 'mixins';
 
 @mixin topnav {
   @include deprecate(
