@@ -391,9 +391,9 @@ export default class Tooltip extends Component {
             <div className={triggerClasses}>
               {triggerText}
               <div
+                role="button"
                 id={triggerId}
                 className={componentsX ? `${prefix}--tooltip__trigger` : null}
-                role="button"
                 tabIndex={tabIndex}
                 onClick={this.handleMouse}
                 onKeyDown={this.handleKeyPress}
@@ -429,6 +429,7 @@ export default class Tooltip extends Component {
             </div>
           ) : (
             <div
+              role="button"
               tabIndex={tabIndex}
               id={triggerId}
               className={triggerClasses}
@@ -441,8 +442,7 @@ export default class Tooltip extends Component {
               onBlur={this.handleMouse}
               aria-haspopup="true"
               aria-expanded={open}
-              {...ariaOwnsProps}
-              role="tooltip">
+              {...ariaOwnsProps}>
               {triggerText}
             </div>
           )}
@@ -466,7 +466,8 @@ export default class Tooltip extends Component {
               onMouseOut={this.handleMouse}
               onFocus={this.handleMouse}
               onBlur={this.handleMouse}
-              onContextMenu={this.handleMouse}>
+              onContextMenu={this.handleMouse}
+              role="tooltip">
               <span className={`${prefix}--tooltip__caret`} />
               {children}
             </div>
