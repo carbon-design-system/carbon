@@ -180,8 +180,6 @@ export class NotificationTextDetails extends Component {
 
 export class ToastNotification extends Component {
   static propTypes = {
-    children: PropTypes.node,
-
     /**
      * Specify an optional className to be applied to the notification box
      */
@@ -327,8 +325,6 @@ export class ToastNotification extends Component {
 
 export class InlineNotification extends Component {
   static propTypes = {
-    children: PropTypes.node,
-
     /**
      * Specify an optional className to be applied to the notification box
      */
