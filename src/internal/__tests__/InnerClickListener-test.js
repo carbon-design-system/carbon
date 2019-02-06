@@ -84,4 +84,26 @@ describe('InnerClickListener', () => {
     document.dispatchEvent(new MouseEvent('click'));
     expect(onClickOutside).toHaveBeenCalledTimes(2);
   });
+
+  it('should not call `onClickOutside` if click target disappears', () => {
+    const rootNode2 = document.createElement('div');
+    rootNode2.setAttribute('id', 'root2');
+
+    document.body.appendChild(rootNode2);
+
+    mount(
+      <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
+        <InnerChild />
+      </InnerClickListener>,
+      {
+        attachTo: rootNode2,
+      }
+    );
+
+    document.getElementById('1').addEventListener('click', function() {
+      this.parentNode.removeChild(this);
+    });
+    document.getElementById('1').click();
+    expect(onClickOutside).not.toHaveBeenCalled();
+  });
 });
