@@ -65,18 +65,43 @@ $maps-sort-dir: 'asc';
         $curr-value: map-get-nested($map, $keys...);
 
         @if $curr-value == $seed-value {
-          $equal: map-merge($equal,  ($key: $map));
+          $equal: map-merge(
+            $equal,
+            (
+              $key: $map,
+            )
+          );
         } @else if $curr-value < $seed-value {
           @if $maps-sort-dir == 'asc' {
-            $less: map-merge($less,  ($key: $map));
+            $less: map-merge(
+              $less,
+              (
+                $key: $map,
+              )
+            );
           } @else {
-            $greater: map-merge($greater,  ($key: $map));
+            $greater: map-merge(
+              $greater,
+              (
+                $key: $map,
+              )
+            );
           }
         } @else {
           @if $maps-sort-dir == 'asc' {
-            $greater: map-merge($greater,  ($key: $map));
+            $greater: map-merge(
+              $greater,
+              (
+                $key: $map,
+              )
+            );
           } @else {
-            $less: map-merge($less,  ($key: $map));
+            $less: map-merge(
+              $less,
+              (
+                $key: $map,
+              )
+            );
           }
         }
       }

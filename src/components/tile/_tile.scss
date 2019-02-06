@@ -1,13 +1,17 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Tiles
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
@@ -194,7 +198,7 @@
     cursor: pointer;
 
     &:hover {
-      background: $hover-field;
+      background: $hover-ui;
     }
 
     &:hover,
@@ -295,7 +299,7 @@
     opacity: 1;
   }
 
-  .#{$prefix}--tile-input:checked + .#{$prefix}--tile__checkmark svg {
+  .#{$prefix}--tile-input:checked + .#{$prefix}--tile > .#{$prefix}--tile__checkmark svg {
     fill: $ui-05;
   }
 
@@ -305,7 +309,7 @@
   }
 
   .#{$prefix}--tile-input {
-    display: none;
+    @include hidden;
   }
 }
 

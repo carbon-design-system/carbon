@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -13,23 +20,23 @@ import { componentsX } from '../../globals/js/feature-flags';
  * The CSS property names of the arrow keyed by the floating menu direction.
  * @type {Object<string, string>}
  */
-const triggerButtonPositionProps = {
+const triggerButtonPositionProps = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: 'bottom',
   [DIRECTION_BOTTOM]: 'top',
   [DIRECTION_LEFT]: 'left',
   [DIRECTION_RIGHT]: 'right',
-};
+}))();
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
  * @type {Object<string, number>}
  */
-const triggerButtonPositionFactors = {
+const triggerButtonPositionFactors = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: -2,
   [DIRECTION_BOTTOM]: -1,
   [DIRECTION_LEFT]: -2,
   [DIRECTION_RIGHT]: -1,
-};
+}))();
 
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
@@ -116,16 +123,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     );
     this.manage(
       on(this.element.ownerDocument, 'keydown', event => {
-        if (event.which === 27) {
-          this._handleKeyPress(event);
-        }
-      })
-    );
-    this.manage(
-      on(this.element.ownerDocument, 'keypress', event => {
-        if (event.which !== 27) {
-          this._handleKeyPress(event);
-        }
+        this._handleKeyPress(event);
       })
     );
     this.manage(
@@ -199,6 +197,42 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   }
 
   /**
+   * Provides the element to move focus from
+   * @returns {Element} Currently highlighted element.
+   */
+  getCurrentNavigation = () => {
+    const focused = this.element.ownerDocument.activeElement;
+    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+  };
+
+  /**
+   * Moves the focus up/down.
+   * @param {number} direction The direction of navigating.
+   */
+  navigate = direction => {
+    const items = [...this.element.ownerDocument.querySelectorAll(this.options.selectorItem)];
+    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const getNextItem = old => {
+      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+
+      // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+      const index = Math.max(items.indexOf(old) + direction, -1);
+      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+    };
+    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+      if (
+        !current.matches(this.options.selectorItemHidden) &&
+        !current.parentNode.matches(this.options.selectorItemHidden) &&
+        !current.matches(this.options.selectorItemSelected)
+      ) {
+        current.focus();
+        break;
+      }
+    }
+  };
+
+  /**
    * Handles key press on document.
    * @param {Event} event The triggering event.
    * @private
@@ -207,33 +241,55 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     const key = event.which;
     const { element, optionMenu, options } = this;
     const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
+    const isExpanded = this.element.classList.contains(this.options.classShown);
 
-    if (key === 27) {
-      this.changeState('hidden', getLaunchingDetails(event), () => {
-        if (isOfMenu) {
-          element.focus();
+    switch (key) {
+      // Esc
+      case 27:
+        this.changeState('hidden', getLaunchingDetails(event), () => {
+          if (isOfMenu) {
+            element.focus();
+          }
+        });
+        break;
+      // Enter || Space bar
+      case 13:
+      case 32: {
+        if (!isExpanded && this.element.ownerDocument.activeElement !== this.element) {
+          return;
         }
-      });
-    }
+        event.preventDefault(); // prevent scrolling
+        const isOfSelf = element.contains(event.target);
+        const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
+        const state = shouldBeOpen ? 'shown' : 'hidden';
 
-    if (key === 13 || key === 32) {
-      const isOfSelf = element.contains(event.target);
-      const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
-      const state = shouldBeOpen ? 'shown' : 'hidden';
-
-      if (isOfSelf) {
-        // 32 is to prevent screen from jumping when menu is opened with spacebar
-        if (element.tagName === 'A' || key === 32) {
-          event.preventDefault();
+        if (isOfSelf) {
+          event.delegateTarget = element; // eslint-disable-line no-param-reassign
         }
-        event.delegateTarget = element; // eslint-disable-line no-param-reassign
+
+        this.changeState(state, getLaunchingDetails(event), () => {
+          if (state === 'hidden' && isOfMenu) {
+            element.focus();
+          }
+        });
+        break;
       }
-
-      this.changeState(state, getLaunchingDetails(event), () => {
-        if (state === 'hidden' && isOfMenu) {
-          element.focus();
+      case 38: // up arrow
+      case 40: // down arrow
+        {
+          if (!isExpanded) {
+            return;
+          }
+          event.preventDefault(); // prevent scrolling
+          const direction = {
+            38: -1,
+            40: 1,
+          }[event.which];
+          this.navigate(direction);
         }
-      });
+        break;
+      default:
+        break;
     }
   }
 
@@ -244,6 +300,11 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     return {
       selectorInit: '[data-overflow-menu]',
       selectorOptionMenu: `.${prefix}--overflow-menu-options`,
+      selectorItem: `
+        .${prefix}--overflow-menu-options--open >
+        .${prefix}--overflow-menu-options__option:not(.${prefix}--overflow-menu-options__option--disabled) >
+        .${prefix}--overflow-menu-options__btn
+      `,
       classShown: `${prefix}--overflow-menu--open`,
       classMenuShown: `${prefix}--overflow-menu-options--open`,
       classMenuFlip: `${prefix}--overflow-menu--flip`,

@@ -1,6 +1,11 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/import-once';
@@ -71,6 +76,14 @@
     display: flex;
     width: 100%;
     align-items: center;
+
+    .#{$prefix}--loading__svg circle {
+      stroke-width: 10;
+    }
+
+    .#{$prefix}--loading__stroke {
+      stroke-dashoffset: 75;
+    }
   }
 
   .#{$prefix}--inline-loading__text {
@@ -99,7 +112,7 @@
 
   .#{$prefix}--inline-loading__checkmark {
     fill: none;
-    stroke: $brand-01;
+    stroke: $interactive-01;
     transform-origin: 50% 50%;
     stroke-width: 2.1;
     stroke-dasharray: 12;
@@ -110,7 +123,7 @@
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $brand-01;
+    stroke: $interactive-01;
   }
   /* If IE11 Don't show check animation */
   @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {

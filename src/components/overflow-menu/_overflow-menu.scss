@@ -1,11 +1,15 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Overflow Menu
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
@@ -203,7 +207,7 @@
     }
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
   }
 
@@ -230,8 +234,8 @@
     background-color: $inverse-01;
     width: 11.25rem;
     list-style: none;
-    left: 100px;
-    top: 0;
+    top: 32px;
+    left: 0;
 
     &::after {
       content: '';
@@ -310,7 +314,8 @@
     width: 100%;
     height: 100%;
     border: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: transparent;
     text-align: left;
     padding: 0 $spacing-md;
@@ -332,7 +337,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $hover-field;
+    background-color: $hover-ui;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {

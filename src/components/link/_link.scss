@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Link
 //-----------------------------
@@ -5,7 +12,6 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
-@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/functions';
@@ -50,7 +56,7 @@
     @include font-family;
     @include font-smoothing;
 
-    color: $brand-01;
+    color: $interactive-01;
     font-weight: 400;
 
     // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
@@ -59,7 +65,7 @@
 
     &:hover,
     &:focus {
-      color: $brand-01;
+      color: $interactive-01;
       box-shadow: 0 1px currentColor;
     }
 
@@ -83,7 +89,7 @@
     }
 
     &:visited {
-      color: $brand-01;
+      color: $interactive-01;
     }
   }
 }

@@ -1,12 +1,16 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Text area
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
@@ -133,6 +137,10 @@
   .#{$prefix}--text-area::-webkit-input-placeholder {
     @include placeholder-colors;
     @include font-family;
+  }
+
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
   }
 
   //-----------------------------

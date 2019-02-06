@@ -1,14 +1,17 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Tabs
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--typography';
@@ -359,31 +362,31 @@
     }
   }
 
-  .#{$prefix}--tabs__nav-item:hover:not([disabled]) {
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include max-breakpoint(bp--sm--major) {
-      background-color: $hover-field;
-      box-shadow: 0 -1px 0 $hover-field;
+      background-color: $hover-ui;
+      box-shadow: 0 -1px 0 $hover-ui;
     }
   }
 
   //---------------------------------------------
   // Item Disabled
   //---------------------------------------------
-  .#{$prefix}--tabs__nav-item[disabled],
-  .#{$prefix}--tabs__nav-item[disabled]:hover {
+  .#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs__nav-item--disabled:hover {
     cursor: not-allowed;
   }
 
   //-----------------------------
   // Item Selected
   //-----------------------------
-  .#{$prefix}--tabs__nav-item--selected:not([disabled]) {
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
     border: none;
     @include breakpoint(bp--sm--major) {
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         font-weight: 600;
-        border-bottom: 2px solid $brand-01;
+        border-bottom: 2px solid $interactive-01;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -432,7 +435,7 @@
         width: 100%;
         margin: 0;
         padding-left: 16px;
-        outline: 2px solid $brand-01;
+        outline: 2px solid $interactive-01;
         outline-offset: -2px;
       }
     }
@@ -441,7 +444,8 @@
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover:not([disabled]) .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled))
+    .#{$prefix}--tabs__nav-link {
     color: $text-01;
     @include breakpoint(bp--sm--major) {
       color: $text-01;
@@ -452,18 +456,18 @@
   //-----------------------------
   //  Link Disabled
   //-----------------------------
-  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs__nav-item[disabled]:hover .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
     cursor: no-drop;
     border-bottom: $tab-underline-disabled;
   }
 
-  .#{$prefix}--tabs__nav-item[disabled] .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item[disabled] a.#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     outline: none;
     border-bottom: $tab-underline-disabled;
   }
@@ -471,15 +475,17 @@
   //-----------------------------
   //  Link Focus
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item:not([disabled]):not(.#{$prefix}--tabs__nav-item--selected) a.#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+    .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
   }
 
   .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-link:active {
     @include breakpoint(bp--sm--major) {
-      outline: 2px solid $brand-01;
+      outline: 2px solid $interactive-01;
       outline-offset: -2px;
     }
   }

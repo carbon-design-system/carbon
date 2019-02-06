@@ -1,8 +1,12 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
@@ -87,13 +91,11 @@
   .#{$prefix}--number__controls {
     @include reset;
     position: absolute;
-    display: block;
     left: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    left: auto;
     right: 0.5rem;
     top: 2rem;
   }
@@ -204,14 +206,9 @@
     color: $text-01;
     background-color: $field-01;
     border: none;
-    order: 2;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
     transition: all $transition--base;
-
-    & ~ .#{$prefix}--label {
-      order: 1;
-    }
 
     &:focus {
       @include focus-outline('outline');
@@ -231,18 +228,6 @@
     &:disabled ~ .#{$prefix}--number__controls svg {
       fill: $disabled;
     }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-      overflow: visible;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -257,18 +242,30 @@
     }
   }
 
+  .#{$prefix}--number__input-wrapper {
+    display: flex;
+    align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
   .#{$prefix}--number__controls {
     @include reset;
     position: absolute;
-    display: block;
-    left: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    left: auto;
     right: 0.4rem;
-    top: 2.125rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -282,7 +279,7 @@
 
     &:focus {
       @include focus-outline;
-      fill: $brand-01;
+      fill: $interactive-01;
     }
 
     &:hover {
@@ -305,22 +302,10 @@
     }
   }
 
-  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
-    top: 0.625rem;
-  }
-
-  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
-    top: 1.75rem;
-  }
-
-  .#{$prefix}--number--helpertext:not([data-invalid]) .#{$prefix}--number__controls {
-    top: auto;
-    bottom: 0.625rem;
-  }
-
-  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
-    top: auto;
-    bottom: 2rem;
+  .#{$prefix}--number__invalid {
+    position: absolute;
+    right: 2rem;
+    fill: $support-01;
   }
 
   .#{$prefix}--number--light input[type='number'] {
