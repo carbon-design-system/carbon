@@ -11,7 +11,7 @@ const autoprefixer = require('gulp-autoprefixer');
 
 // Javascript deps
 const babel = require('gulp-babel');
-const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const pump = require('pump');
 const { promisify } = require('bluebird');
 const debounce = require('lodash.debounce');
@@ -28,9 +28,10 @@ const gutil = require('gulp-util');
 const header = require('gulp-header');
 const jsdoc = require('gulp-jsdoc3');
 const through = require('through2');
+const merge = require('merge-stream');
 
 // Rollup
-const rollup = require('rollup');
+const { rollup } = require('rollup');
 const commonjs = require('rollup-plugin-commonjs');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
@@ -142,9 +143,15 @@ let useExperimentalFeatures = !!cloptions.useExperimentalFeatures;
 
 gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
   if (cloptions.rollup) {
-    return rollup
-      .rollup(rollupConfigDev)
-      .then(bundle => bundle.write(rollupConfigDev))
+    return rollup(rollupConfigDev)
+      .then(bundle =>
+        bundle.write({
+          format: 'iife',
+          name: 'CarbonComponents',
+          file: 'demo/demo.js',
+          sourcemap: 'inline',
+        })
+      )
       .then(() => {
         browserSync.reload();
       });
@@ -176,6 +183,40 @@ gulp.task('scripts:dev:feature-flags', () => {
     .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));
 });
 
+const pathsToConvertToESM = new Set([
+  path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
+  path.resolve(__dirname, 'src/globals/js/settings.js'),
+]);
+
+const convertToESMGulpPlugin = () =>
+  through.obj((file, enc, callback) => {
+    if (!pathsToConvertToESM.has(file.path)) {
+      callback(null, file);
+    } else {
+      rollup({
+        input: file.path,
+        plugins: [
+          commonjs({
+            sourceMap: false,
+          }),
+        ],
+        onwarn: (warning, handle) => {
+          if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+        },
+      })
+        .then(bundle => bundle.generate({ format: 'esm' }))
+        .then(
+          ({ output }) => {
+            file.contents = Buffer.from(output.map(({ code }) => code).join('\n'));
+            callback(null, file);
+          },
+          err => {
+            callback(err);
+          }
+        );
+    }
+  });
+
 gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
   const babelOpts = {
@@ -191,36 +232,10 @@ gulp.task('scripts:umd', () => {
     ],
     plugins: ['@babel/plugin-transform-modules-umd', ['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
-  const pathsToConvertToESM = new Set([
-    path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
-    path.resolve(__dirname, 'src/globals/js/settings.js'),
-  ]);
-  const cjsPlugin = commonjs();
-  cjsPlugin.options({ entry: '' });
 
   return gulp
     .src(srcFiles)
-    .pipe(
-      through.obj((file, enc, callback) => {
-        if (!pathsToConvertToESM.has(file.path)) {
-          callback(null, file);
-        } else {
-          Promise.resolve(cjsPlugin.transform(file.contents.toString(), file.path)).then(
-            result => {
-              if (!result) {
-                callback(null, file);
-              } else {
-                file.contents = Buffer.from(result.code);
-                callback(null, file);
-              }
-            },
-            err => {
-              callback(err);
-            }
-          );
-        }
-      })
-    )
+    .pipe(convertToESMGulpPlugin())
     .pipe(babel(babelOpts))
     .pipe(
       babel({
@@ -247,14 +262,9 @@ gulp.task('scripts:es', () => {
     ],
     plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
   };
-  const pathsToConvertToESM = new Set([
-    path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
-    path.resolve(__dirname, 'src/globals/js/settings.js'),
-  ]);
-  const cjsPlugin = commonjs();
-  cjsPlugin.options({ entry: '' });
   return gulp
     .src(srcFiles)
+    .pipe(convertToESMGulpPlugin())
     .pipe(babel(babelOpts))
     .pipe(
       babel({
@@ -262,36 +272,23 @@ gulp.task('scripts:es', () => {
         babelrc: false,
       })
     )
-    .pipe(
-      through.obj((file, enc, callback) => {
-        if (!pathsToConvertToESM.has(file.path)) {
-          callback(null, file);
-        } else {
-          Promise.resolve(cjsPlugin.transform(file.contents.toString(), file.path)).then(
-            result => {
-              if (!result) {
-                callback(null, file);
-              } else {
-                file.contents = Buffer.from(result.code);
-                callback(null, file);
-              }
-            },
-            err => {
-              callback(err);
-            }
-          );
-        }
-      })
-    )
     .pipe(gulp.dest('es/'));
 });
 
-gulp.task('scripts:rollup', () => rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd)));
+gulp.task('scripts:rollup', () =>
+  rollup(rollupConfigProd).then(bundle =>
+    bundle.write({
+      format: 'iife',
+      name: 'CarbonComponents',
+      file: 'scripts/carbon-components.js',
+    })
+  )
+);
 
 gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
 
-  pump([gulp.src(srcFile), uglify(), rename('carbon-components.min.js'), gulp.dest('scripts')], cb);
+  pump([gulp.src(srcFile), terser(), rename('carbon-components.min.js'), gulp.dest('scripts')], cb);
 });
 
 /**
@@ -333,8 +330,10 @@ gulp.task('sass:compiled', () => {
       .pipe(browserSync.stream({ match: '**/*.css' }));
   }
 
-  buildStyles(); // Expanded CSS
-  buildStyles(true); // Minified CSS
+  return merge(
+    buildStyles(), // Expanded CSS
+    buildStyles(true) // Minified CSS
+  );
 });
 
 gulp.task('sass:dev', () =>
@@ -354,11 +353,6 @@ gulp.task('sass:dev', () =>
     .pipe(
       sass({
         includePaths: ['node_modules'],
-        importer: (url, prev, done) => {
-          done({
-            file: url.replace(/^carbon-components\/scss\//, `${path.resolve(__dirname, 'src')}/`),
-          });
-        },
         outputStyle: 'expanded',
       }).on('error', sass.logError)
     )

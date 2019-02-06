@@ -13,7 +13,7 @@ const { rollup } = require('rollup');
 const commonjs = require('rollup-plugin-commonjs');
 const resolve = require('rollup-plugin-node-resolve');
 const replace = require('rollup-plugin-replace');
-const uglify = require('rollup-plugin-uglify');
+const terser = require('rollup-plugin-terser');
 const virtual = require('rollup-plugin-virtual');
 
 const cwd = path.resolve(__dirname, '../es');
@@ -33,52 +33,31 @@ const files = glob.sync('**/*.js', {
 
 describe('ES modules', () => {
   let lodashOutput;
-  let emptyOutput;
   const entry = '__entry_module__';
 
   beforeAll(async () => {
-    const [lodashBundle, emptyBundle] = await Promise.all([
-      rollup({
-        input: entry,
-        plugins: [
-          virtual({
-            [entry]: `
-              import debounce from 'lodash.debounce';
-              /*#__PURE__*/
-              (function () { console.log(debounce); })();
-            `,
-          }),
-          commonjs({
-            include: 'node_modules/**',
-            sourceMap: false,
-          }),
-          resolve(),
-          uglify(),
-        ],
-        onwarn: (warning, handle) => {
-          if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
-        },
-      }),
-      rollup({
-        input: entry,
-        plugins: [
-          virtual({
-            [entry]: `
-              /*#__PURE__*/
-              (function () { console.log(0); })();
-            `,
-          }),
-          uglify(),
-        ],
-        onwarn: (warning, handle) => {
-          if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
-        },
-      }),
-    ]);
-    [lodashOutput, emptyOutput] = await Promise.all([
-      lodashBundle.generate({ format: 'iife' }),
-      emptyBundle.generate({ format: 'iife' }),
-    ]);
+    const lodashBundle = await rollup({
+      input: entry,
+      plugins: [
+        virtual({
+          [entry]: `
+            import debounce from 'lodash.debounce';
+            /*#__PURE__*/
+            (function () { console.log(debounce); })();
+          `,
+        }),
+        commonjs({
+          include: 'node_modules/**',
+          sourceMap: false,
+        }),
+        resolve(),
+        terser.terser(),
+      ],
+      onwarn: (warning, handle) => {
+        if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+      },
+    });
+    lodashOutput = (await lodashBundle.generate({ format: 'iife' })).output;
   });
 
   it.each(files)('%s should be tree-shakable', async relativeFilePath => {
@@ -97,18 +76,26 @@ describe('ES modules', () => {
         replace({
           'process.env.NODE_ENV': JSON.stringify('production'),
         }),
-        uglify(),
+        terser.terser(),
       ],
       onwarn: (warning, handle) => {
         if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
       },
     });
-    const output = await bundle.generate({ format: 'iife' });
+    const { output } = await bundle.generate({ format: 'iife' });
     // lo-dash seems to remain small chunk of code after tree-shaken
-    const code = output.code
+    const code = output
+      .map(item => item.code)
+      .join('')
       .trim()
-      .replace(lodashOutput.code.trim(), '')
-      .replace(emptyOutput.code.trim(), '');
+      .replace(
+        lodashOutput
+          .map(item => item.code)
+          .join('')
+          .trim(),
+        ''
+      )
+      .replace('!function(){"use strict"}();', '');
     expect(code).toBe('');
   });
 });
