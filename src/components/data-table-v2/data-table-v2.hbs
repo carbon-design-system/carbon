@@ -167,7 +167,7 @@
   <thead>
     <tr>
       {{#each columns}}
-        <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if menu}}class="{{@root.prefix}}--table-column-menu"{{/if}} {{#if section}}class="{{@root.prefix}}--table-expand-v2"{{/if}}>
+        <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if menu}}class="{{@root.prefix}}--table-column-menu"{{/if}} {{#if section}}class="{{@root.prefix}}--table-expand-v2"{{/if}} {{#if (and ../componentsX additionalIcons)}}class="{{@root.prefix}}--table-column-icon"{{/if}}>
           {{#if checkbox}}
             <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
             <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}"></label>
@@ -189,12 +189,14 @@
                 {{/if}}
               </button>
             {{else if small}}
-              {{title}}
               {{#if ../componentsX}}
+                <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
                 <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip" data-avoid-focus-on-open>
                   <span class="{{@root.prefix}}--tooltip__caret"></span>
                   <p class="{{@root.prefix}}--tooltip__text">{{title}}</p>
                 </div>
+              {{else}}
+                {{title}}
               {{/if}}
             {{else}}
               <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
@@ -212,7 +214,7 @@
   </thead>
   <tbody>
     {{#each rows as |row|}}
-      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if (and ../componentsX row.disabled)}} disabled {{/if}} {{#if ../componentsX}} tabindex="0" {{/if}}>
+      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if (and ../componentsX row.disabled)}} disabled {{/if}} {{#if ../componentsX}}{{#if (not row.disabled)}} tabindex="0" {{/if}}{{/if}}>
         {{#each ../columns as |column|}}
           {{#with (lookup row column.name) as |data|}}
             {{#if column.section}}
@@ -227,6 +229,12 @@
               <td class="{{@root.prefix}}--table-column-checkbox">
                 <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if (and ../../../componentsX row.disabled)}} disabled {{/if}}>
                 <label for="{{data.id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}"></label>
+              </td>
+            {{else if (and ../../../componentsX column.additionalIcons)}}
+              <td class="{{@root.prefix}}--table-column-icon">
+                <button {{#if row.disabled}} disabled {{/if}}>
+                  {{{data.svg}}}
+                </button>
               </td>
             {{else if column.menu}}
               <td class="{{@root.prefix}}--table-column-menu">

@@ -256,6 +256,14 @@ const columns = [
     sortable: true,
   },
   {
+    name: 'edit',
+    additionalIcons: true,
+  },
+  {
+    name: 'delete',
+    additionalIcons: true,
+  },
+  {
     name: 'menu',
     menu: true,
   },
@@ -334,6 +342,12 @@ const rows = [
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups Testing a really long name here",
     status: 'Active',
+    edit: {
+      svg: iconEdit,
+    },
+    delete: {
+      svg: iconBatchDelete,
+    },
     menu: {
       label: 'Overflow menu description',
       items: menuItems,
@@ -355,6 +369,12 @@ const rows = [
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups",
     status: 'Active',
+    edit: {
+      svg: iconEdit,
+    },
+    delete: {
+      svg: iconBatchDelete,
+    },
     menu: {
       label: 'Overflow menu description',
       items: menuItems,
@@ -376,6 +396,12 @@ const rows = [
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups",
     status: 'Active',
+    edit: {
+      svg: iconEdit,
+    },
+    delete: {
+      svg: iconBatchDelete,
+    },
     menu: {
       label: 'Overflow menu description',
       items: menuItems,
@@ -396,6 +422,12 @@ const rows = [
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups",
     status: 'Active',
+    edit: {
+      svg: iconEdit,
+    },
+    delete: {
+      svg: iconBatchDelete,
+    },
     menu: {
       label: 'Overflow menu description',
       items: menuItems,
@@ -416,6 +448,12 @@ const rows = [
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups",
     status: 'Active',
+    edit: {
+      svg: iconEdit,
+    },
+    delete: {
+      svg: iconBatchDelete,
+    },
     menu: {
       label: 'Overflow menu description',
       items: menuItems,
@@ -676,7 +714,6 @@ module.exports = {
         sortLabel: 'Sort rows by this header in descending order',
         zebra: true,
         hasToolbar: true,
-        horizontal: true,
       },
     },
   ],

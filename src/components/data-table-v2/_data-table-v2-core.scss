@@ -365,6 +365,32 @@ DATA TABLE VARIATIONS
     background: $ui-03;
   }
 
+  //width for additional icon columns
+  .#{$prefix}--table-column-icon {
+    width: rem(24px);
+    min-width: rem(24px);
+    vertical-align: middle;
+    justify-content: center;
+    padding-right: 0;
+
+    & button {
+      width: rem(32px);
+      height: rem(32px);
+      vertical-align: middle;
+      background: transparent;
+      border: none;
+      outline: none;
+
+      &:focus:not([disabled]) {
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+      }
+
+      &:hover:not([disabled]) {
+        background: $ui-03;
+      }
+    }
+  }
+
   // Overrides
   .#{$prefix}--checkbox-label {
     padding-left: rem(28px);
@@ -643,6 +669,12 @@ DATA TABLE VARIATIONS
       width: rem(28px);
       min-width: rem(28px);
     }
+
+    .#{$prefix}--table-column-icon button {
+      width: rem(24px);
+      height: rem(24px);
+      justify-content: center;
+    }
   }
 
   .#{$prefix}--data-table-v2--short {
@@ -706,6 +738,10 @@ DATA TABLE VARIATIONS
     & .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
       background: $disabled-background-color;
       cursor: no-drop;
+    }
+
+    & .#{$prefix}--table-column-icon svg {
+      fill: $disabled;
     }
   }
 
