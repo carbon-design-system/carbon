@@ -18,6 +18,7 @@ import {
 } from '@storybook/addon-knobs';
 import Pagination from '../Pagination';
 import PaginationV2 from '../PaginationV2';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const props = () => ({
   disabled: boolean('Disable backward/forward buttons (disabled)', false),
@@ -25,7 +26,9 @@ const props = () => ({
   totalItems: number('Total number of items (totalItems)', 103),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
   pageInputDisabled: boolean('Disable page input (pageInputDisabled)', false),
-  isLastPage: boolean('At the last page (isLastPage)', false),
+  isLastPage: componentsX
+    ? null
+    : boolean('At the last page (isLastPage)', false),
   backwardText: text(
     'The description for the backward icon (backwardText)',
     'Backward'
