@@ -143,6 +143,35 @@
     &:active {
       @include focus-outline('outline');
     }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+
+    &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+      top: rem(-28px);
+      right: rem(12px);
+      display: flex;
+      justify-content: center;
+      align-self: flex-end;
+      align-items: center;
+      height: rem(16px);
+      width: rem(16px);
+      padding: 0;
+      margin-bottom: -1rem;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      outline: inherit;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
+      }
+    }
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -159,6 +188,18 @@
     padding-right: rem(40px);
     background-repeat: no-repeat;
     background-position: right 8px bottom 50%;
+  }
+
+  .#{$prefix}--text-input:disabled + .#{$prefix}--text-input--password__visibility svg {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--text-input:disabled[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility,
+  .#{$prefix}--text-input[data-invalid][data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility,
+  .#{$prefix}--text-input:invalid[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility,
+  .#{$prefix}--text-input[data-loading][data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+    right: rem(32px);
   }
 
   //-----------------------------
