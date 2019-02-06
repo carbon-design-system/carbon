@@ -292,7 +292,7 @@ Object {
   "fontSize": "calc(1.75rem + 0 * ((100vw - 20rem) / 62))",
   "fontWeight": 400,
   "letterSpacing": 0,
-  "lineHeight": "107%",
+  "lineHeight": "129%",
 }
 `;
 
@@ -300,7 +300,7 @@ exports[`styles expressiveHeading04 should be printable 2`] = `
 "font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 font-size: calc(1.75rem + 0 * ((100vw - 20rem) / 62));
 font-weight: 400;
-line-height: 107%;
+line-height: 129%;
 letter-spacing: 0;
 -@media- -(min--width-:- -8-2rem-): [object Object];
 -@media- -(min--width-:- -9-9rem-): [object Object];"

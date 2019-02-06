@@ -127,7 +127,7 @@ export const expressiveHeading04 = fluid({
   fontFamily: fontFamilies.sans,
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: '107%',
+  lineHeight: '129%',
   letterSpacing: 0,
   breakpoints: {
     xlg: {
