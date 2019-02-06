@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from '../Icon';
 import SkeletonText from '../SkeletonText';
@@ -13,21 +14,21 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-export default class AccordionSkeleton extends React.Component {
-  render() {
-    const item = (
-      <li className={`${prefix}--accordion__item`}>
-        <button type="button" className={`${prefix}--accordion__heading`}>
-          <Icon
-            className={`${prefix}--accordion__arrow`}
-            icon={iconChevronRight}
-          />
-          <SkeletonText className={`${prefix}--accordion__title`} />
-        </button>
-      </li>
-    );
-    return (
-      <ul className={`${prefix}--accordion ${prefix}--skeleton`}>
+export default function AccordionSkeleton(props) {
+  const Item = () => (
+    <li className={`${prefix}--accordion__item`}>
+      <button type="button" className={`${prefix}--accordion__heading`}>
+        <Icon
+          className={`${prefix}--accordion__arrow`}
+          icon={iconChevronRight}
+        />
+        <SkeletonText className={`${prefix}--accordion__title`} />
+      </button>
+    </li>
+  );
+  return (
+    <ul className={`${prefix}--accordion ${prefix}--skeleton`}>
+      {props.open ? (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <button type="button" className={`${prefix}--accordion__heading`}>
@@ -43,10 +44,39 @@ export default class AccordionSkeleton extends React.Component {
             <SkeletonText width="95%" />
           </div>
         </li>
-        {item}
-        {item}
-        {item}
-      </ul>
-    );
-  }
+      ) : (
+        <Item />
+      )}
+      {Array.from({
+        length: props.count
+          ? props.count - 1
+          : AccordionSkeleton.defaultProps.count,
+      }).map((v, i) => (
+        <Item key={`skeleton-accordion-item-${props.uid}-${i}`} />
+      ))}
+    </ul>
+  );
 }
+
+AccordionSkeleton.propTypes = {
+  /**
+   * `false` to not display the first item opened
+   */
+  open: PropTypes.bool,
+
+  /**
+   * Set number of items to render
+   */
+  count: PropTypes.number,
+
+  /**
+   * Set unique identifier to generate unique item keys
+   */
+  uid: PropTypes.any,
+};
+
+AccordionSkeleton.defaultProps = {
+  open: true,
+  count: 4,
+  uid: '',
+};

@@ -8,7 +8,8 @@
 import React from 'react';
 import Accordion from '../Accordion';
 import AccordionSkeleton from '../Accordion/Accordion.Skeleton';
-import { shallow } from 'enzyme';
+import SkeletonText from '../SkeletonText';
+import { shallow, mount } from 'enzyme';
 
 describe('Accordion', () => {
   describe('Renders as expected', () => {
@@ -39,6 +40,27 @@ describe('AccordionSkeleton', () => {
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
       expect(wrapper.hasClass('bx--accordion')).toEqual(true);
+    });
+
+    it('Renders first item as expected', () => {
+      expect(wrapper.contains(<SkeletonText width="90%" />)).toEqual(true);
+    });
+
+    it('Renders without opened item', () => {
+      const noOpenedItem = shallow(<AccordionSkeleton open={false} />);
+      expect(noOpenedItem.contains(<SkeletonText width="90%" />)).toEqual(
+        false
+      );
+    });
+
+    it('Renders number of items as expected', () => {
+      const fullWrapper = mount(<AccordionSkeleton />);
+      expect(fullWrapper.find('.bx--accordion__item')).toHaveLength(4);
+    });
+
+    it('Renders custom number of items', () => {
+      const fullWrapper = mount(<AccordionSkeleton count={8} />);
+      expect(fullWrapper.find('.bx--accordion__item')).toHaveLength(8);
     });
   });
 });
