@@ -9,7 +9,7 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "carbon-components": "^9.59.0"
+    "carbon-components": "latest"
   },
   "devDependencies": {
     "parcel-bundler": "^1.10.0"
