@@ -51,12 +51,12 @@ async function generateComponents() {
     }
   }
   // write out the module
-  try {
-    await fs.writeFile(join(paths.TS, 'IconModule.ts'), moduleTemplate(icons));
-    await fs.writeFile(join(paths.TS, 'index.ts'), indexTemplate());
-  } catch (err) {
-    reporter.log(err);
-  }
+  // try {
+  // await fs.writeFile(join(paths.TS, 'IconModule.ts'), moduleTemplate(icons));
+  // await fs.writeFile(join(paths.TS, 'index.ts'), indexTemplate());
+  // } catch (err) {
+  // reporter.log(err);
+  // }
 }
 
 async function buildUMD() {

@@ -27,13 +27,7 @@ icon. You can import an icon component into your project by doing one
 of the following:
 
 ```jsx
-// Do this if your bundler supports tree-shaking, otherwise prefer the full-path
-// import since importing the main bundle will cause you to distribute the full
-// 600kb bundle
-import { Add24 } from '@carbon/icons-react';
-
-// If you want to guarantee that you're only importing the exact icon
-import Add24 from '@carbon/icons-react/lib/Add/24';
+import Add24 from '@carbon/icons-react/es/add/16';
 ```
 
 We also provide CommonJS and UMD files in the `lib` and `umd`

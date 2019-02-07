@@ -25,7 +25,8 @@
     "lint": "toolkit lint .",
     "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
     "sync": "node tasks/sync.js",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns=examples"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
@@ -141,15 +142,14 @@
       "/dist/",
       "/es/",
       "/lib/",
-      "examples",
-      "icons"
+      "e2e",
+      "examples"
     ],
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
     ],
     "watchPathIgnorePatterns": [
-      "examples",
-      "icons"
+      "examples"
     ]
   }
 }

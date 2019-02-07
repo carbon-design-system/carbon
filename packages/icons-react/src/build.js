@@ -76,37 +76,6 @@ async function build({ cwd }) {
     })
   );
 
-  reporter.info('Building ESM and bundle entrypoints...');
-  const entrypoint = createEntrypointFromMeta(meta);
-  const entrypointPath = path.join(ESM_DIR, 'index.js');
-  const entrypointBundle = await rollup({
-    input: '__entrypoint__',
-    external: ['@carbon/icon-helpers', 'prop-types', 'react'],
-    plugins: [
-      virtual({
-        __entrypoint__: entrypoint,
-      }),
-    ],
-  });
-
-  await Promise.all(
-    BUNDLE_FORMATS.map(async ({ format, directory }) => {
-      const outputOptions = {
-        format,
-        file: entrypointPath.replace(/\/es\//, `/${directory}/`),
-      };
-      if (format === 'umd') {
-        outputOptions.name = 'CarbonIconsReact';
-        outputOptions.globals = {
-          '@carbon/icon-helpers': 'CarbonIconHelpers',
-          'prop-types': 'PropTypes',
-          react: 'React',
-        };
-      }
-      await entrypointBundle.write(outputOptions);
-    })
-  );
-
   reporter.info('Generating Storybook stories...');
   await fs.remove(STORYBOOK_DIR);
   await fs.ensureDir(STORYBOOK_DIR);

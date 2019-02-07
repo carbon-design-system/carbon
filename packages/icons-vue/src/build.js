@@ -66,7 +66,14 @@ async function build({ cwd }) {
   );
 
   reporter.info('Building ESM and bundle entrypoints...');
-  const entrypoint = createEntrypointFromMeta(meta);
+  const entrypoint = `export const CarbonIconsVue = {
+  install(Vue, options) {
+    const { components } = options;
+    Object.keys(components).forEach(key => {
+      Vue.component(key, components[key]);
+    });
+  },
+}`;
   const entrypointPath = path.join(ESM_DIR, 'index.js');
 
   await fs.ensureDir(ESM_DIR);
@@ -76,7 +83,7 @@ async function build({ cwd }) {
     BUNDLE_FORMATS.map(async ({ format, directory }) => {
       const bundle = await rollup({
         input: entrypointPath,
-        external: ['@carbon/icon-helpers'],
+        external: [],
       });
       const outputOptions = {
         format,
@@ -84,9 +91,6 @@ async function build({ cwd }) {
       };
       if (format === 'umd') {
         outputOptions.name = 'CarbonIconsVue';
-        outputOptions.globals = {
-          '@carbon/icon-helpers': 'CarbonIconHelpers',
-        };
       }
       await bundle.write(outputOptions);
     })
