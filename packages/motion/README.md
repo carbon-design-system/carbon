@@ -28,7 +28,7 @@ curves using either Sass or JavaScript.
 ### Sass
 
 `@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin that you can use to access the value of a motion
-curve or include that curve as the `transition-property` for a
+curve or include that curve as the `transition-timing-function` for a
 selector. To use these helpers, you can do the following in your
 project:
 
@@ -37,12 +37,12 @@ project:
 
 .my-custom-selector {
   // Supplies the standard easing curve, using the productive mode by default
-  transition-property: carbon--motion(standard);
+  transition-timing-function: carbon--motion(standard);
 }
 
 .my-custom-selector-v2 {
   // Supplies the standard easing curve, but with the expressive mode, on the
-  // transition-property property for this selector
+  // transition-timing-function property for this selector
   @include carbon--motion(standard, expressive);
 }
 ```

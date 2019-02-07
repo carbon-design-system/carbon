@@ -21,9 +21,9 @@ $carbon--easings: (
   ),
 );
 
-/// Get the transition property for a given easing and motion mode. Easings that
-/// are currently supported include: standard, entrance, and exit. We also offer
-/// two modes: productive and expressive.
+/// Get the transition-timing-function for a given easing and motion mode.
+/// Easings that are currently supported include: standard, entrance, and exit.
+/// We also offer two modes: productive and expressive.
 /// @param {String} $name - the name of the easing curve to apply
 /// @param {String} $mode - the mode for the easing curve to use
 /// @return {cubic-bezier}
@@ -40,9 +40,9 @@ $carbon--easings: (
   }
 }
 
-/// Set the transition-property for a given easing and motion mode.
+/// Set the transition-timing-function for a given easing and motion mode.
 /// @param {String} $name - the name of the easing curve to apply
 /// @param {String} $mode - the mode for the easing curve to use
 @mixin carbon--motion($name, $mode) {
-  transition-property: carbon--motion($name, $mode);
+  transition-timing-function: carbon--motion($name, $mode);
 }
