@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:8
     working_directory: ~/repo
@@ -25,3 +25,9 @@ jobs:
           path: reports
       - store_artifacts:
           path: reports
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - test
