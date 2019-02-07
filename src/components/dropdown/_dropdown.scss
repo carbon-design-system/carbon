@@ -304,6 +304,8 @@
   }
 
   .#{$prefix}--dropdown-text {
+    display: flex;
+    align-items: center;
     height: rem(40px);
     padding-top: rem(12px);
     padding-bottom: rem(12px);
