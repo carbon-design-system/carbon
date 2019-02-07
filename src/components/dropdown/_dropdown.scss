@@ -265,7 +265,7 @@
   .#{$prefix}--dropdown__invalid {
     position: absolute;
     top: 50%;
-    right: 2rem;
+    right: rem(34px);
     fill: $support-01;
     transform: translateY(-50%);
   }
