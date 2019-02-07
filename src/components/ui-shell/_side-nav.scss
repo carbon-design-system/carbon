@@ -4,7 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
+$count: 0;
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
@@ -92,6 +92,7 @@
     // Separates out the panel from the header of the same color
     border-top: 1px solid $ibm-colors__gray-80;
     z-index: z('header');
+    counter-reset: child-count;
   }
 
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
@@ -306,16 +307,24 @@
     transform: rotate(180deg);
   }
 
+  .#{$prefix}--side-nav__submenu
+    + .#{$prefix}--side-nav__menu[role='menu']
+    .#{$prefix}--side-nav__menu-item
+    > .#{$prefix}--side-nav__link {
+    transition-delay: $transition--expansion;
+  }
+
   .#{$prefix}--side-nav__menu[role='menu'] {
     display: block;
     transition: $transition--expansion max-height $carbon--ease-out;
     max-height: 0;
 
     .bx--side-nav__link {
+      transform: translateY(-25px);
       opacity: 0;
-      transition: $transition--expansion opacity $carbon--standard-easing,
-        $transition--expansion visibility $carbon--standard-easing;
       visibility: hidden;
+      transition: $transition--expansion opacity $carbon--standard-easing,
+        $transition--expansion visibility $carbon--standard-easing, $transition--expansion transform $carbon--standard-easing;
     }
   }
 
@@ -324,8 +333,18 @@
     max-height: 2000px;
 
     .bx--side-nav__link {
+      transform: translateY(0);
       opacity: 1;
       visibility: visible;
+    }
+  }
+
+  @for $i from 1 through 33 {
+    .#{$prefix}--side-nav__submenu[aria-expanded='true']
+      + .#{$prefix}--side-nav__menu[role='menu']
+      .#{$prefix}--side-nav__menu-item:nth-child(#{$i})
+      .bx--side-nav__link {
+      transition-delay: $i * 10ms;
     }
   }
 
