@@ -305,7 +305,7 @@
 
   .#{$prefix}--btn--sm {
     @include letter-spacing;
-    height: auto;
+    height: rem(32px);
     padding: $button-padding-sm;
   }
 

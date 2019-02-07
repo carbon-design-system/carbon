@@ -81,7 +81,7 @@
   flex-shrink: 0;
   font-size: $button-font-size;
   font-weight: $button-font-weight;
-  height: auto;
+  height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: left;

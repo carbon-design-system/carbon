@@ -26,6 +26,11 @@
 
   .#{$prefix}--structured-list-input {
     display: none;
+
+    &:checked + .#{$prefix}--structured-list-row .#{$prefix}--structured-list-svg,
+    &:checked + .#{$prefix}--structured-list-td .#{$prefix}--structured-list-svg {
+      fill: $brand-02;
+    }
   }
 
   .#{$prefix}--structured-list {
@@ -57,11 +62,6 @@
     border-bottom: 1px solid $ui-03;
     transition: $transition--base $carbon--standard-easing;
 
-    .#{$prefix}--structured-list--selection &:hover:not(.#{$prefix}--structured-list-row--header-row) {
-      background-color: $hover-row;
-      cursor: pointer;
-    }
-
     // Deprecated
     [data-structured-list] &:hover:not(.#{$prefix}--structured-list-row--header-row) {
       background-color: $hover-row;
@@ -80,6 +80,16 @@
     &:focus:not(.#{$prefix}--structured-list-row--header-row) {
       @include focus-outline('border');
     }
+
+    &:hover .#{$prefix}--structured-list-svg {
+      fill: $hover-row;
+    }
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row) {
+    background-color: $hover-row;
+    cursor: pointer;
   }
 
   .#{$prefix}--structured-list-thead {
@@ -127,15 +137,6 @@
     fill: transparent;
     vertical-align: middle;
     transition: $transition--base $carbon--standard-easing;
-
-    .#{$prefix}--structured-list-row:hover & {
-      fill: $hover-row;
-    }
-
-    .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row &,
-    .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-td & {
-      fill: $brand-02;
-    }
   }
 
   // Skeleton State
