@@ -59,6 +59,7 @@ export const text04 = white;
 
 export const icon01 = gray100;
 export const icon02 = gray70;
+export const icon03 = white;
 
 export const field01 = gray10;
 export const field02 = white;
