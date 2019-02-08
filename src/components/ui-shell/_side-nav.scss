@@ -308,25 +308,15 @@
 
   .#{$prefix}--side-nav__menu[role='menu'] {
     display: block;
-    transform: translateY(-20px);
-    opacity: 0;
     visibility: hidden;
     max-height: 0;
-    transition: $transition--expansion max-height $carbon--ease-out $transition--expansion / 5,
-      $transition--expansion opacity $carbon--standard-easing,
-      $transition--expansion transform $carbon--standard-easing $transition--expansion / 5,
-      $transition--expansion visibility $carbon--standard-easing;
+    transition: $transition--expansion max-height $carbon--ease-out, $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true'] + .#{$prefix}--side-nav__menu[role='menu'] {
-    max-height: 2000px;
-    transform: translateY(0);
-    opacity: 1;
+    max-height: 1500px;
     visibility: inherit;
-    transition: $transition--expansion max-height $carbon--ease-in,
-      $transition--expansion opacity $carbon--standard-easing $transition--expansion / 5,
-      $transition--expansion transform $carbon--standard-easing,
-      $transition--expansion visibility $carbon--standard-easing $transition--expansion / 5;
+    transition: $transition--expansion max-height $carbon--ease-in, $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[role='menuitem'] {
