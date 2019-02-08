@@ -11,6 +11,7 @@ const { reporter } = require('../../reporter');
 const { replace } = require('../../tools/replace');
 const {
   createFunctionRegex,
+  createMixinRegex,
   createVariableRegex,
 } = require('../../tools/regex');
 
@@ -20,7 +21,7 @@ module.exports = {
   version: TARGET_VERSION,
   from: [
     {
-      version: '<=0.0.1-alpha.30',
+      version: '<=0.0.1-alpha.31',
       async migrate(options) {
         const changes = [
           // Classes
@@ -28,6 +29,23 @@ module.exports = {
             filename: '_classes.scss',
             from: createFunctionRegex('type-classes'),
             to: 'carbon--type-classes',
+          },
+
+          // Font face
+          {
+            filename: 'font-face/_mono.scss',
+            from: createMixinRegex('font-face-mono'),
+            to: 'carbon--font-face-mono',
+          },
+          {
+            filename: 'font-face/_sans.scss',
+            from: createMixinRegex('font-face-sans'),
+            to: 'carbon--font-face-sans',
+          },
+          {
+            filename: 'font-face/_serif.scss',
+            from: createMixinRegex('font-face-serif'),
+            to: 'carbon--font-face-serif',
           },
 
           // Font family
