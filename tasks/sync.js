@@ -130,19 +130,21 @@ async function sync() {
 
   // Sync README.md files
   await Promise.all(
-    packages.map(async ({ packageJson, packagePath }) => {
-      const README_PATH = path.join(packagePath, 'README.md');
-      if (!(await fs.pathExists(README_PATH))) {
-        return;
-      }
+    packages
+      .filter(pkg => pkg.basename !== 'app-icons')
+      .map(async ({ packageJson, packagePath }) => {
+        const README_PATH = path.join(packagePath, 'README.md');
+        if (!(await fs.pathExists(README_PATH))) {
+          return;
+        }
 
-      const readme = await fs.readFile(README_PATH, 'utf8');
-      const file = await process(packagePath, readme);
-      await fs.writeFile(
-        README_PATH,
-        prettier.format(String(file), prettierOptions)
-      );
-    })
+        const readme = await fs.readFile(README_PATH, 'utf8');
+        const file = await process(packagePath, readme);
+        await fs.writeFile(
+          README_PATH,
+          prettier.format(String(file), prettierOptions)
+        );
+      })
   );
 
   // Sync `.npmignore` files
