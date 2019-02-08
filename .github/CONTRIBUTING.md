@@ -141,6 +141,20 @@ What `.hbs` file is used for rendering a variant is determined by searching for 
 2. Variant handle, which takes a format of `componentname--variantname` format
 3. Component handle, which is `componentname`
 
+## Working on JavaScript-framework-specific styles
+
+JavaScript-framework-specific is _not_ recommended as we strive to create styles that is framework-neutral. However, there are some rare cases where framework-specific cannot be avoided, and some of those make sense to be in maintained by core style library here.
+
+To work on framework-specific style, you can temporary point `node_modules/carbon-components/scss` directory in your framework variant repository to our Sass source code. For example:
+
+```sh
+> cd /path/to/carbon-components-angular/node_modules/carbon-components
+> mv scss scss.orig
+> ln -s /path/to/carbon-components/src scss
+```
+
+Then edits of `.scss` files in `/path/to/carbon-components/src` will be reflected to the development environment of your framework variant repository.
+
 ## Start Contributing
 
 ### 1. Fork The Repo:
