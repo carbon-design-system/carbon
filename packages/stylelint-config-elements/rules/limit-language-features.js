@@ -81,7 +81,10 @@ module.exports = {
     },
     // Specify a blacklist of disallowed property and value pairs within
     // declarations.
-    'declaration-property-value-blacklist': OFF,
+    'declaration-property-value-blacklist': {
+      // Disallow unset as it is unsupported in IE11
+      '/.*/': ['unset'],
+    },
     // Specify a whitelist of allowed property and value pairs within
     // declarations.
     'declaration-property-value-whitelist': OFF,

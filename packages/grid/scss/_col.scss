@@ -47,7 +47,7 @@
 
   [dir='rtl'] .#{$prefix}--grid--padding.#{$prefix}--grid--hang & {
     padding-right: 0;
-    padding-left: unset;
+    padding-left: initial;
   }
 }
 
