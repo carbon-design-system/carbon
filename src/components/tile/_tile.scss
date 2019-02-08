@@ -154,6 +154,14 @@
     outline: none;
   }
 
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
+    opacity: 1;
+
+    svg {
+      fill: $brand-01;
+    }
+  }
+
   .#{$prefix}--tile-input:checked {
     & + .#{$prefix}--tile__checkmark {
       opacity: 1;
