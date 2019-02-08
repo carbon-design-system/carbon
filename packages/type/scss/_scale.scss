@@ -31,18 +31,18 @@ $carbon--type-scale: ();
 /// Get the value of a specific step in the typescale
 /// @param {Number} $step
 /// @return {rem}
-@function type-scale($step) {
+@function carbon--type-scale($step) {
   @return nth($carbon--type-scale, $step);
 }
 
 /// Set the font-size value of a selector with the value at the given $step
 /// @param {Number} $step
-@mixin type-scale($step) {
-  font-size: type-scale($step);
+@mixin carbon--type-scale($step) {
+  font-size: carbon--type-scale($step);
 }
 
 /// Alias of `type-scale` mixin.
 /// @param {Number} $step
 @mixin carbon--font-size($step) {
-  font-size: type-scale($step);
+  font-size: carbon--type-scale($step);
 }

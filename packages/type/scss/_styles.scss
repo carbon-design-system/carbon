@@ -11,7 +11,7 @@
 
 $caption-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(1),
+  font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
@@ -19,7 +19,7 @@ $caption-01: (
 
 $label-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(1),
+  font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
@@ -27,7 +27,7 @@ $label-01: (
 
 $helper-text-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(1),
+  font-size: carbon--type-scale(1),
   font-style: italic,
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
@@ -35,7 +35,7 @@ $helper-text-01: (
 
 $body-short-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(2),
+  font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(18px),
   letter-spacing: 0.16px,
@@ -43,7 +43,7 @@ $body-short-01: (
 
 $body-long-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(2),
+  font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
   letter-spacing: 0.16px,
@@ -51,7 +51,7 @@ $body-long-01: (
 
 $body-short-02: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(3),
+  font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(22px),
   letter-spacing: 0,
@@ -59,7 +59,7 @@ $body-short-02: (
 
 $body-long-02: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(3),
+  font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(24px),
   letter-spacing: 0,
@@ -67,7 +67,7 @@ $body-long-02: (
 
 $code-01: (
   font-family: carbon--font-family('mono'),
-  font-size: type-scale(1),
+  font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(16px),
   letter-spacing: 0.32px,
@@ -75,7 +75,7 @@ $code-01: (
 
 $code-02: (
   font-family: carbon--font-family('mono'),
-  font-size: type-scale(2),
+  font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(20px),
   letter-spacing: 0.32px,
@@ -83,7 +83,7 @@ $code-02: (
 
 $heading-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(2),
+  font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('semibold'),
   line-height: carbon--rem(18px),
   letter-spacing: 0.16px,
@@ -91,7 +91,7 @@ $heading-01: (
 
 $heading-02: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(3),
+  font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('semibold'),
   line-height: carbon--rem(22px),
   letter-spacing: 0,
@@ -99,7 +99,7 @@ $heading-02: (
 
 $heading-03: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(5),
+  font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(26px),
   letter-spacing: 0,
@@ -107,7 +107,7 @@ $heading-03: (
 
 $productive-heading-04: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(7),
+  font-size: carbon--type-scale(7),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(36px),
   letter-spacing: 0,
@@ -115,7 +115,7 @@ $productive-heading-04: (
 
 $productive-heading-05: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(8),
+  font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(40px),
   letter-spacing: 0,
@@ -123,59 +123,59 @@ $productive-heading-05: (
 
 $expressive-heading-04: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(7),
+  font-size: carbon--type-scale(7),
   font-weight: carbon--font-weight('regular'),
   line-height: 129%,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
-      font-size: type-scale(7),
+      font-size: carbon--type-scale(7),
       line-height: 125%,
     ),
     max: (
-      font-size: type-scale(8),
+      font-size: carbon--type-scale(8),
     ),
   ),
 ) !default;
 
 $expressive-heading-05: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(8),
+  font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
   line-height: 125%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(9),
+      font-size: carbon--type-scale(9),
       line-height: 122%,
     ),
     lg: (
-      font-size: type-scale(10),
+      font-size: carbon--type-scale(10),
       line-height: 119%,
     ),
     xlg: (
-      font-size: type-scale(11),
+      font-size: carbon--type-scale(11),
       line-height: 117%,
     ),
     max: (
-      font-size: type-scale(13),
+      font-size: carbon--type-scale(13),
     ),
   ),
 ) !default;
 
 $expressive-paragraph-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(6),
+  font-size: carbon--type-scale(6),
   font-weight: carbon--font-weight('light'),
   line-height: 125%,
   letter-spacing: 0,
   breakpoints: (
     lg: (
-      font-size: type-scale(7),
+      font-size: carbon--type-scale(7),
       line-height: 129%,
     ),
     max: (
-      font-size: type-scale(8),
+      font-size: carbon--type-scale(8),
       line-height: 125%,
     ),
   ),
@@ -183,24 +183,24 @@ $expressive-paragraph-01: (
 
 $quotation-01: (
   font-family: carbon--font-family('serif'),
-  font-size: type-scale(5),
+  font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
   line-height: 130%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(5),
+      font-size: carbon--type-scale(5),
     ),
     lg: (
-      font-size: type-scale(6),
+      font-size: carbon--type-scale(6),
       line-height: 125%,
     ),
     xlg: (
-      font-size: type-scale(7),
+      font-size: carbon--type-scale(7),
       line-height: 129%,
     ),
     max: (
-      font-size: type-scale(8),
+      font-size: carbon--type-scale(8),
       line-height: 125%,
     ),
   ),
@@ -208,48 +208,48 @@ $quotation-01: (
 
 $quotation-02: (
   font-family: carbon--font-family('serif'),
-  font-size: type-scale(8),
+  font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('light'),
   line-height: 125%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(9),
+      font-size: carbon--type-scale(9),
       line-height: 122%,
     ),
     lg: (
-      font-size: type-scale(10),
+      font-size: carbon--type-scale(10),
       line-height: 119%,
     ),
     xlg: (
-      font-size: type-scale(11),
+      font-size: carbon--type-scale(11),
       line-height: 117%,
     ),
     max: (
-      font-size: type-scale(13),
+      font-size: carbon--type-scale(13),
     ),
   ),
 ) !default;
 
 $display-01: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(10),
+  font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(10),
+      font-size: carbon--type-scale(10),
     ),
     lg: (
-      font-size: type-scale(12),
+      font-size: carbon--type-scale(12),
     ),
     xlg: (
-      font-size: type-scale(13),
+      font-size: carbon--type-scale(13),
       line-height: 117%,
     ),
     max: (
-      font-size: type-scale(15),
+      font-size: carbon--type-scale(15),
       line-height: 113%,
     ),
   ),
@@ -257,23 +257,23 @@ $display-01: (
 
 $display-02: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(10),
+  font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('semibold'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(10),
+      font-size: carbon--type-scale(10),
     ),
     lg: (
-      font-size: type-scale(12),
+      font-size: carbon--type-scale(12),
     ),
     xlg: (
-      font-size: type-scale(13),
+      font-size: carbon--type-scale(13),
       line-height: 116%,
     ),
     max: (
-      font-size: type-scale(15),
+      font-size: carbon--type-scale(15),
       line-height: 113%,
     ),
   ),
@@ -281,27 +281,27 @@ $display-02: (
 
 $display-03: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(10),
+  font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(14),
+      font-size: carbon--type-scale(14),
       line-height: 115%,
     ),
     lg: (
-      font-size: type-scale(17),
+      font-size: carbon--type-scale(17),
       line-height: 111%,
       letter-spacing: -0.64px,
     ),
     xlg: (
-      font-size: type-scale(20),
+      font-size: carbon--type-scale(20),
       line-height: 107%,
       letter-spacing: -0.64px,
     ),
     max: (
-      font-size: type-scale(23),
+      font-size: carbon--type-scale(23),
       line-height: 105%,
       letter-spacing: -0.96px,
     ),
@@ -310,27 +310,27 @@ $display-03: (
 
 $display-04: (
   font-family: carbon--font-family('sans'),
-  font-size: type-scale(10),
+  font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('semibold'),
   line-height: 119%,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: type-scale(14),
+      font-size: carbon--type-scale(14),
       line-height: 115%,
     ),
     lg: (
-      font-size: type-scale(17),
+      font-size: carbon--type-scale(17),
       line-height: 111%,
       letter-spacing: -0.64px,
     ),
     xlg: (
-      font-size: type-scale(20),
+      font-size: carbon--type-scale(20),
       line-height: 107%,
       letter-spacing: -0.64px,
     ),
     max: (
-      font-size: type-scale(23),
+      font-size: carbon--type-scale(23),
       line-height: 105%,
       letter-spacing: -0.96px,
     ),
