@@ -183,6 +183,8 @@ TextInput.defaultProps = {
   light: false,
 };
 
-export default React.forwardRef((props, ref) => (
-  <TextInput {...props} forwardRef={ref} />
-));
+const forwardRef = (props, ref) => <TextInput {...props} forwardRef={ref} />;
+
+forwardRef.displayName = 'TextInput';
+
+export default React.forwardRef(forwardRef);
