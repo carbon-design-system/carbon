@@ -1,40 +1,84 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
 
-<ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
+<ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
+  class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
   tabindex="0">
   <li class="{{@root.prefix}}--dropdown-text">
     {{#unless inline}} Dropdown label {{else}}
     <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
     {{#if featureFlags.componentsX}}
-      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+    {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
     {{else}}
-      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
+    <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+      <path d="M10 0L5 5 0 0z"></path>
+    </svg>
     {{/if}}
     {{/unless}}
   </li>
   {{#unless inline}}
   {{#if featureFlags.componentsX}}
-    {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+  {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
   {{else}}
-    <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-      <path d="M10 0L5 5 0 0z"></path>
-    </svg>
+  <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+    <path d="M10 0L5 5 0 0z"></path>
+  </svg>
   {{/if}}
   {{/unless}}
   <li>
     <ul class="{{@root.prefix}}--dropdown-list">
       {{#each items}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
-          <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
-        </li>
+      <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+        <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
+      </li>
       {{/each}}
     </ul>
   </li>
 </ul>
+<br>
+{{#if featureFlags.componentsX}}
+  <div class="{{@root.prefix}}--form-item">
+    <ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
+      class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
+      tabindex="0" data-invalid>
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--dropdown__invalid')}}
+      <li class="{{@root.prefix}}--dropdown-text">
+        {{#unless inline}} Dropdown label {{else}}
+        <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
+        {{#if featureFlags.componentsX}}
+        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+        {{else}}
+        <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+          <path d="M10 0L5 5 0 0z"></path>
+        </svg>
+        {{/if}}
+        {{/unless}}
+      </li>
+      {{#unless inline}}
+      {{#if featureFlags.componentsX}}
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+      {{else}}
+      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+        <path d="M10 0L5 5 0 0z"></path>
+      </svg>
+      {{/if}}
+      {{/unless}}
+      <li>
+        <ul class="{{@root.prefix}}--dropdown-list">
+          {{#each items}}
+          <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+            <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
+          </li>
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+    <div class="{{@root.prefix}}--form-requirement">
+      This is not a validation message
+    </div>
+  </div>
+{{/if}}
