@@ -249,15 +249,15 @@
   }
 
   // Force all of our side navigation items to be the same dimensions. When our
-  // menu expands, we can unset these values.
+  // menu expands, we can undo the forced dimensions.
   .#{$prefix}--side-nav__item {
     width: mini-units(6);
     height: mini-units(6);
     overflow: hidden;
 
     @include expanded() {
-      width: unset;
-      height: unset;
+      width: auto;
+      height: auto;
     }
   }
 
