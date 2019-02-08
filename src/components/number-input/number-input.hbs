@@ -10,7 +10,7 @@
     <label for="number-input0" class="{{@root.prefix}}--label">Number Input label</label>
     <input id="number-input0" type="number" min="0" max="100" value="1">
     <div class="{{@root.prefix}}--number__controls">
-      <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+      <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
         {{#if @root.featureFlags.componentsX}}
           {{ carbon-icon 'CaretUpGlyph' }}
         {{else}}
@@ -19,7 +19,7 @@
           </svg>
         {{/if}}
       </button>
-      <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+      <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
         {{#if @root.featureFlags.componentsX}}
           {{ carbon-icon 'CaretDownGlyph' }}
         {{else}}
@@ -40,10 +40,10 @@
         <input id="number-input1" type="number" min="0" max="100" value="1">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
         <div class="{{@root.prefix}}--number__controls">
-          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
             {{ carbon-icon 'CaretUpGlyph' }}
           </button>
-          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
             {{ carbon-icon 'CaretDownGlyph' }}
           </button>
         </div>
@@ -51,12 +51,12 @@
     {{else}}
       <input id="number-input1" type="number" min="0" max="100" value="1">
       <div class="{{@root.prefix}}--number__controls">
-        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
           </svg>
         </button>
-        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
           </svg>
@@ -76,10 +76,10 @@
         <input id="number-input2" type="number" min="0" max="100" value="1">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
         <div class="{{@root.prefix}}--number__controls">
-          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
             {{ carbon-icon 'CaretUpGlyph' }}
           </button>
-          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
             {{ carbon-icon 'CaretDownGlyph' }}
           </button>
         </div>
@@ -87,12 +87,12 @@
     {{else}}
       <input id="number-input2" type="number" min="0" max="100" value="1">
       <div class="{{@root.prefix}}--number__controls">
-        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
           </svg>
         </button>
-        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
           </svg>
@@ -115,10 +115,10 @@
       <div class="{{@root.prefix}}--number__input-wrapper">
         <input id="number-input3" type="number" min="0" max="100" value="1">
         <div class="{{@root.prefix}}--number__controls">
-          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
             {{ carbon-icon 'CaretUpGlyph' }}
           </button>
-          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
             {{ carbon-icon 'CaretDownGlyph' }}
           </button>
         </div>
@@ -126,12 +126,12 @@
     {{else}}
       <input id="number-input3" type="number" min="0" max="100" value="1">
       <div class="{{@root.prefix}}--number__controls">
-        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
           </svg>
         </button>
-        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
           </svg>
@@ -157,10 +157,10 @@
         <input id="number-input4" type="number" min="0" max="100" value="1">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
         <div class="{{@root.prefix}}--number__controls">
-          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
             {{ carbon-icon 'CaretUpGlyph' }}
           </button>
-          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
             {{ carbon-icon 'CaretDownGlyph' }}
           </button>
         </div>
@@ -168,12 +168,12 @@
     {{else}}
       <input id="number-input4" type="number" min="0" max="100" value="1">
       <div class="{{@root.prefix}}--number__controls">
-        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
           </svg>
         </button>
-        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
           </svg>
@@ -202,10 +202,10 @@
         <input id="number-input4" type="number" min="0" max="100" value="1">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
         <div class="{{@root.prefix}}--number__controls">
-          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+          <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
             {{ carbon-icon 'CaretUpGlyph' }}
           </button>
-          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+          <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
             {{ carbon-icon 'CaretDownGlyph' }}
           </button>
         </div>
@@ -213,12 +213,12 @@
     {{else}}
       <input id="number-input4" type="number" min="0" max="100" value="1">
       <div class="{{@root.prefix}}--number__controls">
-        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon">
+        <button aria-label="increase number input" class="{{@root.prefix}}--number__control-btn up-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
           </svg>
         </button>
-        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon">
+        <button aria-label="decrease number input" class="{{@root.prefix}}--number__control-btn down-icon" type="button">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
           </svg>
