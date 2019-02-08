@@ -5,7 +5,7 @@
   "repository": "git@github.com:IBM/carbon-elements.git",
   "license": "Apache-2.0",
   "engines": {
-    "node": "8.x"
+    "node": "10.x"
   },
   "workspaces": {
     "packages": [
