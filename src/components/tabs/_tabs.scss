@@ -129,7 +129,7 @@
       background: transparent;
       padding: $spacing-sm 0 $spacing-sm;
 
-      & + & {
+      & + .#{$prefix}--tabs__nav-item {
         margin-left: rem(48px);
       }
     }
@@ -344,7 +344,7 @@
     width: 100%;
     @include breakpoint(bp--sm--major) {
       background: transparent;
-      & + & {
+      & + .#{$prefix}--tabs__nav-item {
         margin-left: rem(1px);
       }
     }
