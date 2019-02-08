@@ -473,7 +473,6 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection > svg {
     fill: $ui-05;
-    height: 100%;
   }
 
   .#{$prefix}--list-box__selection:focus {
@@ -489,10 +488,10 @@ $list-box-menu-width: rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: 0;
-    background-color: $interactive-01;
+    background-color: $interactive-02;
     height: rem(24px);
     width: rem(42px);
-    color: white;
+    color: $inverse-01;
     line-height: 0;
     padding: 0.5rem;
     margin-right: rem(10px);
@@ -501,9 +500,12 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection--multi > svg {
     fill: white;
-    width: 0.5rem;
-    height: 0.5rem;
     margin-left: rem(5px);
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg:hover {
+    border-radius: 50%;
+    background-color: $icon-02;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
