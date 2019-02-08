@@ -15,7 +15,7 @@ about: Looking to get an App Icon Approved? Here is the right place to submit.
 
 #### 5. Box Link
 
-Add in a box link (or other cloud) link to your completed App Icon Bulder and App Icon Template files. Please make sure the permissions are set so anyone can view the icon.
+Add in a box link (or other cloud) link to your completed App Icon Delivery and App Icon Template files. Please make sure the permissions are set so anyone can view the icon.
 
 #### 6. Screenshot
 
