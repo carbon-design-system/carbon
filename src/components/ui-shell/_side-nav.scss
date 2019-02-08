@@ -307,11 +307,16 @@
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] {
-    display: none;
+    display: block;
+    visibility: hidden;
+    max-height: 0;
+    transition: $transition--expansion max-height $carbon--ease-out, $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true'] + .#{$prefix}--side-nav__menu[role='menu'] {
-    display: block;
+    max-height: 1500px;
+    visibility: inherit;
+    transition: $transition--expansion max-height $carbon--ease-in, $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[role='menuitem'] {
