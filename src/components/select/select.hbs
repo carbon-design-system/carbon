@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -6,7 +6,8 @@
 -->
 
 <div class="{{@root.prefix}}--form-item">
-  <div class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}">
+  <div
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}">
     <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
     {{#unless inline}}
     {{#if helperText}}
@@ -20,23 +21,26 @@
         {{#each items}}
         <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
           selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
-          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
           selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
-          {{#if @root.featureFlags.componentsX}}
-          {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }} {{else}} <svg class="{{@root.prefix}}--select__arrow"
-          width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-          </svg>
-          {{/if}}
-          {{#if inline}}
-          {{#if helperText}}
-          <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
-          {{/if}}
-          {{/if}}
-          {{#if invalid}}
-          <div class="{{@root.prefix}}--form-requirement">
-            Validation message here
-          </div>
-          {{/if}}
+    {{#if @root.featureFlags.componentsX}}
+    {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+    {{#if invalid}}
+    {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid')}}
+    {{/if}}
+    {{else}} <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+    </svg>
+    {{/if}}
+    {{#if inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/if}}
+    {{#if invalid}}
+    <div class="{{@root.prefix}}--form-requirement">
+      Validation message here
+    </div>
+    {{/if}}
   </div>
 </div>

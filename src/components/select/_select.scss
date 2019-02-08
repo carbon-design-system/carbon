@@ -283,8 +283,18 @@
     pointer-events: none;
   }
 
-  &[data-invalid] ~ .#{$prefix}--select__arrow {
-    bottom: 2.5rem;
+  &[data-invalid] ~ {
+    .#{$prefix}--select__arrow {
+      bottom: 2.4rem;
+    }
+
+    .#{$prefix}--select__invalid {
+      position: absolute;
+      right: rem(34px);
+      bottom: 2.15rem;
+      pointer-events: none;
+      fill: $support-01;
+    }
   }
 
   .#{$prefix}--select-optgroup,
@@ -351,7 +361,7 @@
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
     top: 1.125rem;
-    right: $spacing-xs;
+    right: 1rem;
   }
 
   .#{$prefix}--select--inline[data-invalid] {
@@ -366,7 +376,7 @@
       background-color: transparent;
     }
 
-    & ~ * {
+    ~ * {
       cursor: not-allowed;
     }
   }
