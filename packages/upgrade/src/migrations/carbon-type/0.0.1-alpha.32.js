@@ -90,6 +90,16 @@ module.exports = {
           },
           {
             filename: '_scale.scss',
+            from: createFunctionRegex('type-scale'),
+            to: 'carbon--type-scale',
+          },
+          {
+            filename: '_scale.scss',
+            from: createMixinRegex('type-scale'),
+            to: 'carbon--type-scale',
+          },
+          {
+            filename: '_scale.scss',
             from: createFunctionRegex('font-size'),
             to: 'carbon--font-size',
           },
