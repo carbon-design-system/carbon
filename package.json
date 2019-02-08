@@ -23,7 +23,7 @@
     "format:diff": "prettier --list-different '**/*.{css,js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:staged": "prettier --write",
     "lint": "toolkit lint .",
-    "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
+    "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
     "test": "jest",
     "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns=examples"
@@ -37,7 +37,6 @@
     "@carbon/cli-plugin-editorconfig": "^0.0.23",
     "@carbon/cli-plugin-eslint": "^0.0.23",
     "@carbon/cli-plugin-github-files": "^0.0.23",
-    "@carbon/cli-plugin-stylelint": "^0.0.23",
     "@carbon/toolkit": "^0.0.23",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
@@ -60,12 +59,12 @@
     "prettier": "^1.15.2",
     "remark": "^10.0.1",
     "remark-word-wrap": "^2.0.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "stylelint": "^9.10.1"
   },
   "toolkit": {
     "plugins": [
       "@carbon/cli-plugin-eslint",
-      "@carbon/cli-plugin-stylelint",
       "@carbon/cli-plugin-github-files",
       "@carbon/cli-plugin-editorconfig"
     ]
@@ -88,6 +87,7 @@
     ],
     "*.{scss,css}": [
       "yarn format:staged",
+      "yarn lint:styles",
       "git add"
     ],
     "*.md": [

@@ -20,11 +20,11 @@
 .#{$prefix}--grid {
   @include carbon--make-container();
   @include carbon--make-container-max-widths();
+}
 
-  &--full-width {
-    @include carbon--largest-breakpoint() {
-      max-width: 100%;
-    }
+.#{$prefix}--grid--full-width {
+  @include carbon--largest-breakpoint() {
+    max-width: 100%;
   }
 }
 

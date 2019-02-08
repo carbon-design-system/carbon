@@ -211,7 +211,7 @@ $quotation-02: (
   font-size: type-scale(8),
   font-weight: carbon--font-weight('light'),
   line-height: 125%,
-  letter-spacing: 0rem,
+  letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: type-scale(9),
@@ -401,23 +401,21 @@ $tokens: (
 /// @param {Map} $type-styles - the value of a given type token
 /// @param {?Map} $breakpoints - custom breakpoints to use
 @mixin fluid-type($type-styles, $breakpoints: $carbon--grid-breakpoints) {
-  & {
-    // Include the initial styles for the given token by default without any
-    // media query guard. This includes `font-size` as a fallback in the case
-    // that a browser does not support `calc()`
-    @include properties(map-remove($type-styles, breakpoints));
-    // We also need to include the `sm` styles by default since they don't
-    // appear in the fluid styles for tokens
-    @include fluid-type-size($type-styles, sm, $breakpoints);
+  // Include the initial styles for the given token by default without any
+  // media query guard. This includes `font-size` as a fallback in the case
+  // that a browser does not support `calc()`
+  @include properties(map-remove($type-styles, breakpoints));
+  // We also need to include the `sm` styles by default since they don't
+  // appear in the fluid styles for tokens
+  @include fluid-type-size($type-styles, sm, $breakpoints);
 
-    // Finally, we need to go through all the breakpoints defined in the type
-    // token and apply the properties and fluid type size for that given
-    // breakpoint
-    @each $name, $values in map-get($type-styles, breakpoints) {
-      @include carbon--breakpoint($name) {
-        @include properties($values);
-        @include fluid-type-size($type-styles, $name, $breakpoints);
-      }
+  // Finally, we need to go through all the breakpoints defined in the type
+  // token and apply the properties and fluid type size for that given
+  // breakpoint
+  @each $name, $values in map-get($type-styles, breakpoints) {
+    @include carbon--breakpoint($name) {
+      @include properties($values);
+      @include fluid-type-size($type-styles, $name, $breakpoints);
     }
   }
 }

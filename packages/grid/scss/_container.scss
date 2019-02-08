@@ -45,6 +45,7 @@
 // gets the last breakpoint width, and sets it to a max-width
 @mixin carbon--set-largest-breakpoint($breakpoints: $carbon--grid-breakpoints) {
   $largest-breakpoint: last-map-item($breakpoints);
+
   max-width: map-get($largest-breakpoint, 'width');
 }
 
