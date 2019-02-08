@@ -39,7 +39,7 @@ Modal.init();
 Modal.create(document.getElementById('my-modal'));
 ```
 
-#### Public Methods
+#### Public methods
 
 | Name    | Params | Description          |
 | ------- | ------ | -------------------- |
@@ -57,7 +57,7 @@ modalInstance.show();
 
 #### Options
 
-| Option               | Default Selector             | Description                                                                                                                          |
+| Option               | Default selector             | Description                                                                                                                          |
 | -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | selectorInit         | '[data-modal]'               | The css selector for root modal component                                                                                            |
 | selectorModalClose   | '[data-modal-close]'         | The selector to find elements that close the modal                                                                                   |
@@ -100,7 +100,7 @@ modalInstance.show();
 
 #### Events
 
-| Event Option      | Event Name          |
+| Event option      | Event name          |
 | ----------------- | ------------------- |
 | eventBeforeShown  | 'modal-beingshown'  |
 | eventAfterShown   | 'modal-shown'       |
