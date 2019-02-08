@@ -1,13 +1,17 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // ComboBox
 //-----------------------------
 
-@import '../../globals/scss/colors';
-@import '../../globals/scss/css--helpers';
-@import '../../globals/scss/layout';
-@import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
+@import '../../globals/scss/functions';
+@import '../../globals/scss/import-once';
 @import '../list-box/list-box';
 
 @mixin combo-box {
@@ -17,6 +21,11 @@
 }
 
 @mixin combo-box--x {
+  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon--open {
+    display: none;
+  }
+
   .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
     padding: 0;
   }

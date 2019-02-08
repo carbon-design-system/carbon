@@ -1,7 +1,12 @@
-@import '../../globals/scss/colors';
-@import '../../globals/scss/theme';
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
@@ -128,7 +133,7 @@
   }
 
   .#{$prefix}--label--disabled {
-    color: $disabled;
+    color: $disabled-02;
     cursor: not-allowed;
   }
 

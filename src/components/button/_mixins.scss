@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @mixin button-base {
   @include reset;
   @include font-family;
@@ -74,7 +81,7 @@
   flex-shrink: 0;
   font-size: $button-font-size;
   font-weight: $button-font-weight;
-  height: auto;
+  height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: left;
@@ -90,8 +97,8 @@
   &:disabled {
     cursor: not-allowed;
     color: $ui-04;
-    background: $ibm-colors__gray--30;
-    border-color: $ibm-colors__gray--30;
+    background: $ibm-colors__gray-30;
+    border-color: $ibm-colors__gray-30;
   }
 
   .#{$prefix}--btn__icon {
@@ -153,8 +160,8 @@
   &:disabled:hover,
   &:disabled:focus {
     color: $ui-04;
-    background: $ibm-colors__gray--30;
-    border-color: $ibm-colors__gray--30;
+    background: $ibm-colors__gray-30;
+    border-color: $ibm-colors__gray-30;
     text-decoration: none;
   }
 

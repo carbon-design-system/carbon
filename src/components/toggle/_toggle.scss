@@ -1,10 +1,14 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Toggle
 //-----------------------------
 
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
@@ -365,8 +369,8 @@
 
   .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before {
-      background-color: $ibm-colors__gray--20; // TODO: Replace with role or add new color variable
-      border-color: $ibm-colors__gray--20; // TODO: Replace with role or add new color variable
+      background-color: $ibm-colors__gray-20; // TODO: Replace with role or add new color variable
+      border-color: $ibm-colors__gray-20; // TODO: Replace with role or add new color variable
     }
 
     &:after {

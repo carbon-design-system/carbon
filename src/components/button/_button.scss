@@ -1,8 +1,12 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import 'mixins';
@@ -176,6 +180,10 @@
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
     display: inline-block;
+
+    &:disabled > .#{$prefix}--btn__icon {
+      fill: $ui-04;
+    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
@@ -189,17 +197,17 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($brand-01, transparent, $inverse-01, #0353e9, $ui-01, $brand-02);
+    @include button-theme--x($interactive-01, transparent, $text-04, #0353e9, $text-04, $interactive-02);
   }
 
   .#{$prefix}--btn--secondary {
     @include button-theme--x(
-      $ibm-colors__gray--80,
-      $ibm-colors__gray--80,
-      $inverse-01,
-      $ibm-colors__gray--70,
-      $inverse-01,
-      $ibm-colors__gray--60
+      $ibm-colors__gray-80,
+      $ibm-colors__gray-80,
+      $text-04,
+      $ibm-colors__gray-70,
+      $text-04,
+      $ibm-colors__gray-60
     );
 
     &:hover,
@@ -209,7 +217,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $brand-01, $brand-01, #0353e9, $brand-01, $brand-02);
+    @include button-theme--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
     position: relative;
 
     &:hover {
@@ -233,19 +241,26 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $brand-01, $ibm-colors__gray--10, $brand-01, $ibm-colors__blue--70);
+    @include button-theme--x(
+      transparent,
+      transparent,
+      $interactive-03,
+      $ibm-colors__gray-10,
+      $interactive-03,
+      $ibm-colors__blue-70
+    );
 
     &:hover,
     &:active {
-      color: $ibm-colors__blue--70;
+      color: $ibm-colors__blue-70;
 
       .#{$prefix}--btn__icon {
-        fill: $ibm-colors__blue--70;
+        fill: $ibm-colors__blue-70;
       }
     }
 
     &:active {
-      background-color: $active-01;
+      background-color: $active-ui;
     }
 
     .#{$prefix}--btn__icon {
@@ -266,7 +281,7 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red--80);
+    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red-80);
 
     &:hover {
       color: $inverse-01;
@@ -279,7 +294,7 @@
   }
 
   .#{$prefix}--btn--danger--primary {
-    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red--80);
+    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red-80);
 
     &:hover:disabled,
     &:focus:disabled {
@@ -290,7 +305,7 @@
 
   .#{$prefix}--btn--sm {
     @include letter-spacing;
-    height: auto;
+    height: rem(32px);
     padding: $button-padding-sm;
   }
 

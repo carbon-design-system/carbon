@@ -1,9 +1,12 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
@@ -330,7 +333,7 @@
   }
 }
 
-@mixin tooltip--experimental {
+@mixin tooltip--x {
   .#{$prefix}--tooltip--icon {
     display: flex;
     align-items: center;
@@ -393,7 +396,7 @@
     // Need to add new UI color -- IBM Color Gray 80
     background: $tooltip-background-color;
     margin-top: $spacing-2xs;
-    padding: rem(16px) rem(16px) rem(24px) rem(16px);
+    padding: 1rem;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
@@ -445,7 +448,6 @@
       align-items: center;
       justify-content: space-between;
       margin-top: 1rem;
-      margin-bottom: rem(-16px);
     }
 
     &[data-floating-menu-direction='left'] {
@@ -490,7 +492,7 @@
       @include typescale('zeta');
       display: inline-flex;
       position: relative;
-      border-bottom: 1px dotted $brand-01;
+      border-bottom: 1px dotted $interactive-01;
       color: $text-01;
 
       &:hover {
@@ -688,7 +690,7 @@
 
 @include exports('tooltip') {
   @if feature-flag-enabled('components-x') {
-    @include tooltip--experimental;
+    @include tooltip--x;
   } @else {
     @include tooltip;
   }
