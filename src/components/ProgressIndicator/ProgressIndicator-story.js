@@ -7,10 +7,11 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-
 import { withKnobs, number } from '@storybook/addon-knobs';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
+import Tooltip from '../Tooltip';
+import { componentsX } from '../../internal/FeatureFlags';
 
 storiesOf('Progress Indicator', module)
   .addDecorator(withKnobs)
@@ -18,26 +19,55 @@ storiesOf('Progress Indicator', module)
     'Default',
     () => (
       <ProgressIndicator
-        currentIndex={number('Current progress (currentIndex)', 3)}>
+        currentIndex={number('Current progress (currentIndex)', 1)}>
         <ProgressStep
           label="First step"
-          description="Step 1: Getting Started with Node.js"
+          description="Step 1: Getting started with Carbon Design System"
+          secondaryLabel="Optional label"
         />
         <ProgressStep
-          label="Second step"
-          description="Step 2: Getting Started with Node.js"
+          label={componentsX ? null : 'Second step with tooltip'}
+          description="Step 2: Getting started with Carbon Design System"
+          renderLabel={() => (
+            <Tooltip
+              direction="bottom"
+              showIcon={false}
+              triggerClassName="bx--progress-label"
+              triggerText={'Second step with tooltip'}
+              tooltipId="tooltipId-0">
+              <p>Overflow tooltip content.</p>
+            </Tooltip>
+          )}
         />
         <ProgressStep
-          label="Third step"
-          description="Step 3: Getting Started with Node.js"
+          label={componentsX ? null : 'Third step with tooltip'}
+          description="Step 3: Getting started with Carbon Design System"
+          renderLabel={() => (
+            <Tooltip
+              direction="bottom"
+              showIcon={false}
+              triggerClassName="bx--progress-label"
+              triggerText={'Third step with tooltip'}
+              tooltipId="tooltipId-1">
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste
+                blanditiis cumque maxime tenetur veniam est illo deserunt sint
+                quae pariatur. Laboriosam, consequatur.
+              </p>
+            </Tooltip>
+          )}
         />
         <ProgressStep
           label="Fourth step"
-          description="Step 4: Getting Started with Node.js"
+          description="Step 4: Getting started with Carbon Design System"
+          invalid
+          secondaryLabel="Example invalid step"
         />
         <ProgressStep
           label="Fifth step"
-          description="Step 5: Getting Started with Node.js"
+          description="Step 5: Getting started with Carbon Design System"
+          disabled
         />
       </ProgressIndicator>
     ),
