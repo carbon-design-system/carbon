@@ -82,5 +82,5 @@ function fluidTypeSize(defaultStyles, fluidBreakpointName, fluidBreakpoints) {
 }
 
 function subtract(a, b) {
-  return parseFloat(a, 10) - parseFloat(b, 10);
+  return parseFloat(a) - parseFloat(b);
 }
