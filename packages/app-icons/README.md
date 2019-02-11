@@ -4,7 +4,7 @@
 
 ## Getting started
 
-Please refer to the [App Icon Guidelines](www.ibm.com/design/language/elements/app-icons) for icon design guidance.
+Please refer to the [App Icon Guidelines](http://www.ibm.com/design/language/elements/app-icons) for icon design guidance.
 
 Design and produce app icons with the [App Icon builder and template](https://github.com/IBM/carbon-elements/tree/master/packages/app-icons/app-icon-template).
 
