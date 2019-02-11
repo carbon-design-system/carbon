@@ -95,7 +95,7 @@ export default class MultiSelect extends React.Component {
     /**
      * Callback function for translating ListBoxMenuIcon SVG title
      */
-    translateWithId: PropTypes.function,
+    translateWithId: PropTypes.func,
   };
 
   static defaultProps = {
