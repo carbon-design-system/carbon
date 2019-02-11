@@ -210,6 +210,11 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--select-input__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
   .#{$prefix}--select-input {
     @include font-family;
     @include typescale('zeta');
@@ -279,22 +284,13 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    bottom: 1rem;
     pointer-events: none;
   }
 
-  &[data-invalid] ~ {
-    .#{$prefix}--select__arrow {
-      bottom: 2.4rem;
-    }
-
-    .#{$prefix}--select__invalid {
-      position: absolute;
-      right: rem(34px);
-      bottom: 2.15rem;
-      pointer-events: none;
-      fill: $support-01;
-    }
+  &[data-invalid] ~ .#{$prefix}--select__invalid {
+    position: absolute;
+    right: rem(34px); // 1.5rem + chevron width
+    fill: $support-01;
   }
 
   .#{$prefix}--select-optgroup,
@@ -322,6 +318,7 @@
   .#{$prefix}--select--inline {
     display: grid;
     grid-template-columns: auto auto;
+    align-items: center;
 
     // Targets IE10+ browsers: Display grid auto not supported
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -361,7 +358,7 @@
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
     top: 1.125rem;
-    right: 1rem;
+    right: $spacing-md;
   }
 
   .#{$prefix}--select--inline[data-invalid] {
