@@ -79,19 +79,16 @@ export default class SideNav extends React.Component {
     });
 
     return (
-      <aside className={className}>
-        <nav
-          className={`${prefix}--side-nav__navigation`}
-          role="navigation"
-          {...accessibilityLabel}>
-          {children}
-          <SideNavFooter
-            assistiveText={assistiveText}
-            isExpanded={isExpanded}
-            onToggle={this.handleExpand}
-          />
-        </nav>
-      </aside>
+      <nav
+        className={`${prefix}--side-nav__navigation ${className}`}
+        {...accessibilityLabel}>
+        {children}
+        <SideNavFooter
+          assistiveText={assistiveText}
+          isExpanded={isExpanded}
+          onToggle={this.handleExpand}
+        />
+      </nav>
     );
   }
 }
