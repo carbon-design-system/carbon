@@ -169,12 +169,12 @@
     // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
     background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23bebebe'%3e%3cpath d='M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z'/%3e%3c/svg%3e");
     outline: none;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--text-input:disabled::-webkit-input-placeholder {
-    color: $disabled;
+    color: $disabled-03;
   }
 
   //-----------------------------
