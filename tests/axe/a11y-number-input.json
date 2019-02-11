@@ -1,0 +1,1153 @@
+[
+  {
+    "inapplicable": [
+      {
+        "description": "Ensures every accesskey attribute value is unique",
+        "help": "accesskey attribute value must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/accesskeys?application=webdriverjs",
+        "id": "accesskeys",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "wcag2a",
+          "wcag211",
+          "cat.keyboard"
+        ]
+      },
+      {
+        "description": "Ensures <area> elements of image maps have alternate text",
+        "help": "Active <area> elements must have alternate text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/area-alt?application=webdriverjs",
+        "id": "area-alt",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2a",
+          "wcag111",
+          "section508",
+          "section508.22.a"
+        ]
+      },
+      {
+        "description": "Ensures elements with ARIA roles have all required ARIA attributes",
+        "help": "Required ARIA attributes must be provided",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-required-attr?application=webdriverjs",
+        "id": "aria-required-attr",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag411",
+          "wcag412"
+        ]
+      },
+      {
+        "description": "Ensures elements with an ARIA role that require child roles contain them",
+        "help": "Certain ARIA roles must contain particular children",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-required-children?application=webdriverjs",
+        "id": "aria-required-children",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures elements with an ARIA role that require parent roles are contained by them",
+        "help": "Certain ARIA roles must be contained by particular parents",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-required-parent?application=webdriverjs",
+        "id": "aria-required-parent",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures all elements with a role attribute use a valid value",
+        "help": "ARIA roles used must conform to valid values",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-roles?application=webdriverjs",
+        "id": "aria-roles",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag131",
+          "wcag411",
+          "wcag412"
+        ]
+      },
+      {
+        "description": "Ensures <audio> elements have captions",
+        "help": "<audio> elements must have a captions track",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/audio-caption?application=webdriverjs",
+        "id": "audio-caption",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.time-and-media",
+          "wcag2a",
+          "wcag122",
+          "section508",
+          "section508.22.a"
+        ]
+      },
+      {
+        "description": "Ensures <blink> elements are not used",
+        "help": "<blink> elements are deprecated and must not be used",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/blink?application=webdriverjs",
+        "id": "blink",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.time-and-media",
+          "wcag2a",
+          "wcag222",
+          "section508",
+          "section508.22.j"
+        ]
+      },
+      {
+        "description": "Ensures related <input type=\"checkbox\"> elements have a group and that that group designation is consistent",
+        "help": "Checkbox inputs with the same name attribute value must be part of a group",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/checkboxgroup?application=webdriverjs",
+        "id": "checkboxgroup",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.forms",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensures <dl> elements are structured correctly",
+        "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script> or <template> elements",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/definition-list?application=webdriverjs",
+        "id": "definition-list",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.structure",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures <dt> and <dd> elements are contained by a <dl>",
+        "help": "<dt> and <dd> elements must be contained by a <dl>",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/dlitem?application=webdriverjs",
+        "id": "dlitem",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.structure",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures headings have discernible text",
+        "help": "Headings must not be empty",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/empty-heading?application=webdriverjs",
+        "id": "empty-heading",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.name-role-value",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensures <iframe> and <frame> elements contain a unique title attribute",
+        "help": "Frames must have a unique title attribute",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/frame-title-unique?application=webdriverjs",
+        "id": "frame-title-unique",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensures <iframe> and <frame> elements contain a non-empty title attribute",
+        "help": "Frames must have title attribute",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/frame-title?application=webdriverjs",
+        "id": "frame-title",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2a",
+          "wcag241",
+          "section508",
+          "section508.22.i"
+        ]
+      },
+      {
+        "description": "Ensures <input type=\"image\"> elements have alternate text",
+        "help": "Image buttons must have alternate text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/input-image-alt?application=webdriverjs",
+        "id": "input-image-alt",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2a",
+          "wcag111",
+          "section508",
+          "section508.22.a"
+        ]
+      },
+      {
+        "description": "The main landmark should not be contained in another landmark",
+        "help": "Main landmark is not at top level",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/landmark-main-is-top-level?application=webdriverjs",
+        "id": "landmark-main-is-top-level",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensures presentational <table> elements do not use <th>, <caption> elements or the summary attribute",
+        "help": "Layout tables must not use data table elements",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/layout-table?application=webdriverjs",
+        "id": "layout-table",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.semantics",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures links have discernible text",
+        "help": "Links must have discernible text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/link-name?application=webdriverjs",
+        "id": "link-name",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.name-role-value",
+          "wcag2a",
+          "wcag111",
+          "wcag412",
+          "wcag244",
+          "section508",
+          "section508.22.a"
+        ]
+      },
+      {
+        "description": "Ensures that lists are structured correctly",
+        "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/list?application=webdriverjs",
+        "id": "list",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.structure",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures <li> elements are used semantically",
+        "help": "<li> elements must be contained in a <ul> or <ol>",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/listitem?application=webdriverjs",
+        "id": "listitem",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.structure",
+          "wcag2a",
+          "wcag131"
+        ]
+      },
+      {
+        "description": "Ensures <marquee> elements are not used",
+        "help": "<marquee> elements are deprecated and must not be used",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/marquee?application=webdriverjs",
+        "id": "marquee",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.parsing",
+          "wcag2a",
+          "wcag222"
+        ]
+      },
+      {
+        "description": "Ensures <meta http-equiv=\"refresh\"> is not used",
+        "help": "Timed refresh must not exist",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/meta-refresh?application=webdriverjs",
+        "id": "meta-refresh",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.time",
+          "wcag2a",
+          "wcag2aaa",
+          "wcag221",
+          "wcag224",
+          "wcag325"
+        ]
+      },
+      {
+        "description": "Ensures <object> elements have alternate text",
+        "help": "<object> elements must have alternate text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/object-alt?application=webdriverjs",
+        "id": "object-alt",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2a",
+          "wcag111",
+          "section508",
+          "section508.22.a"
+        ]
+      },
+      {
+        "description": "Ensures related <input type=\"radio\"> elements have a group and that the group designation is consistent",
+        "help": "Radio inputs with the same name attribute value must be part of a group",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/radiogroup?application=webdriverjs",
+        "id": "radiogroup",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.forms",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensures the scope attribute is used correctly on tables",
+        "help": "scope attribute should be used correctly",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/scope-attr-valid?application=webdriverjs",
+        "id": "scope-attr-valid",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.tables",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensures that server-side image maps are not used",
+        "help": "Server-side image maps must not be used",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/server-side-image-map?application=webdriverjs",
+        "id": "server-side-image-map",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2a",
+          "wcag211",
+          "section508",
+          "section508.22.f"
+        ]
+      },
+      {
+        "description": "Ensures tabindex attribute values are not greater than 0",
+        "help": "Elements should not have tabindex greater than zero",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/tabindex?application=webdriverjs",
+        "id": "tabindex",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.keyboard",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensure that tables do not have the same summary and caption",
+        "help": "The <caption> element should not contain the same text as the summary attribute",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/table-duplicate-name?application=webdriverjs",
+        "id": "table-duplicate-name",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.tables",
+          "best-practice"
+        ]
+      },
+      {
+        "description": "Ensure that each cell in a table using the headers refers to another cell in that table",
+        "help": "All cells in a table element that use the headers attribute must only refer to other cells of that same table",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/td-headers-attr?application=webdriverjs",
+        "id": "td-headers-attr",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.tables",
+          "wcag2a",
+          "wcag131",
+          "section508",
+          "section508.22.g"
+        ]
+      },
+      {
+        "description": "Ensure that each table header in a data table refers to data cells",
+        "help": "All th elements and elements with role=columnheader/rowheader must have data cells they describe",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/th-has-data-cells?application=webdriverjs",
+        "id": "th-has-data-cells",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.tables",
+          "wcag2a",
+          "wcag131",
+          "section508",
+          "section508.22.g"
+        ]
+      },
+      {
+        "description": "Ensures lang attributes have valid values",
+        "help": "lang attribute must have a valid value",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/valid-lang?application=webdriverjs",
+        "id": "valid-lang",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.language",
+          "wcag2aa",
+          "wcag312"
+        ]
+      },
+      {
+        "description": "Ensures <video> elements have captions",
+        "help": "<video> elements must have captions",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/video-caption?application=webdriverjs",
+        "id": "video-caption",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2a",
+          "wcag122",
+          "wcag123",
+          "section508",
+          "section508.22.a"
+        ]
+      },
+      {
+        "description": "Ensures <video> elements have audio descriptions",
+        "help": "<video> elements must have an audio description track",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/video-description?application=webdriverjs",
+        "id": "video-description",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.text-alternatives",
+          "wcag2aa",
+          "wcag125",
+          "section508",
+          "section508.22.b"
+        ]
+      }
+    ],
+    "incomplete": [
+      {
+        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+        "help": "Elements must have sufficient color contrast",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/color-contrast?application=webdriverjs",
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#ffffff",
+                  "fontSize": "10.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Unable to determine contrast ratio",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<div id=\"__bs_notify__\" style=\"display: block; padding: 15px; font-family: sans-serif; position: fixed; font-size: 0.9em; z-index: 9999; right: 0px; top: 0px; border-bottom-left-radius: 5px; background-color: rgb(27, 32, 50); margin: 0px; color: white; text-align: center; pointer-events: none;\">",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              "#__bs_notify__"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143"
+        ]
+      }
+    ],
+    "timestamp": 1549584078784,
+    "url": "http://localhost:3000/component/number-input/",
+    "violations": [
+      {
+        "description": "Ensures every id attribute value is unique",
+        "help": "id attribute value must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/duplicate-id?application=webdriverjs",
+        "id": "duplicate-id",
+        "impact": "moderate",
+        "nodes": [
+          {
+            "all": [],
+            "any": [
+              {
+                "data": "number-input0",
+                "id": "duplicate-id",
+                "impact": "moderate",
+                "message": "Document has multiple elements with the same id attribute: number-input0",
+                "relatedNodes": [
+                  {
+                    "html": "<input id=\"number-input0\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(1) > .bx--number.bx--number--light > input[type=\"number\"]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<input id=\"number-input0\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "moderate",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(1) > .bx--number > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": "number-input1",
+                "id": "duplicate-id",
+                "impact": "moderate",
+                "message": "Document has multiple elements with the same id attribute: number-input1",
+                "relatedNodes": [
+                  {
+                    "html": "<input id=\"number-input1\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(2) > .bx--number.bx--number--light > input[type=\"number\"]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<input id=\"number-input1\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "moderate",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(2) > .bx--number > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": "number-input2",
+                "id": "duplicate-id",
+                "impact": "moderate",
+                "message": "Document has multiple elements with the same id attribute: number-input2",
+                "relatedNodes": [
+                  {
+                    "html": "<input id=\"number-input2\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(3) > div > input[type=\"number\"]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<input id=\"number-input2\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "moderate",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(3) > .bx--number.bx--number--nolabel > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": "number-input3",
+                "id": "duplicate-id",
+                "impact": "moderate",
+                "message": "Document has multiple elements with the same id attribute: number-input3",
+                "relatedNodes": [
+                  {
+                    "html": "<input id=\"number-input3\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(4) > div > input[type=\"number\"]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<input id=\"number-input3\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "moderate",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(4) > .bx--number.bx--number--helpertext > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": "number-input4",
+                "id": "duplicate-id",
+                "impact": "moderate",
+                "message": "Document has multiple elements with the same id attribute: number-input4",
+                "relatedNodes": [
+                  {
+                    "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(6) > .bx--number.bx--number--helpertext > input[type=\"number\"]"
+                    ]
+                  },
+                  {
+                    "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(5) > div > input[type=\"number\"]"
+                    ]
+                  },
+                  {
+                    "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(6) > div > input[type=\"number\"]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "moderate",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(5) > .bx--number.bx--number--helpertext > input[type=\"number\"]"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.parsing",
+          "wcag2a",
+          "wcag411"
+        ]
+      },
+      {
+        "description": "Ensures every form element has a label",
+        "help": "Form elements must have labels",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/label?application=webdriverjs",
+        "id": "label",
+        "impact": "critical",
+        "nodes": [
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input0\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input0\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(1) > .bx--number > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input0\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(1) > .bx--number.bx--number--light > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(1) > .bx--number > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input1\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input1\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(2) > .bx--number > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input1\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(2) > .bx--number.bx--number--light > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(2) > .bx--number > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": null,
+                "id": "aria-label",
+                "impact": "serious",
+                "message": "aria-label attribute does not exist or is empty",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "aria-labelledby",
+                "impact": "serious",
+                "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty or not visible",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "implicit-label",
+                "impact": "critical",
+                "message": "Form element does not have an implicit (wrapped) <label>",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "explicit-label",
+                "impact": "critical",
+                "message": "Form element does not have an explicit <label>",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "non-empty-title",
+                "impact": "serious",
+                "message": "Element has no title attribute or the title attribute is empty",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<input id=\"number-input2\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "critical",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(3) > .bx--number.bx--number--nolabel > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input3\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input3\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(4) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input3\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(4) > div > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(4) > .bx--number.bx--number--helpertext > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(5) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(6) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(5) > div > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(6) > div > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(5) > .bx--number.bx--number--helpertext > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(5) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(6) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(5) > div > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(6) > div > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(3) > div:nth-child(6) > .bx--number.bx--number--helpertext > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input0\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input0\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(1) > .bx--number > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input0\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(1) > .bx--number.bx--number--light > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(14) > div:nth-child(1) > .bx--number.bx--number--light > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input1\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input1\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(2) > .bx--number > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input1\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(2) > .bx--number.bx--number--light > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(14) > div:nth-child(2) > .bx--number.bx--number--light > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": null,
+                "id": "aria-label",
+                "impact": "serious",
+                "message": "aria-label attribute does not exist or is empty",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "aria-labelledby",
+                "impact": "serious",
+                "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty or not visible",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "implicit-label",
+                "impact": "critical",
+                "message": "Form element does not have an implicit (wrapped) <label>",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "explicit-label",
+                "impact": "critical",
+                "message": "Form element does not have an explicit <label>",
+                "relatedNodes": []
+              },
+              {
+                "data": null,
+                "id": "non-empty-title",
+                "impact": "serious",
+                "message": "Element has no title attribute or the title attribute is empty",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<input id=\"number-input2\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "critical",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(14) > div:nth-child(3) > div > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input3\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input3\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(4) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input3\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(4) > div > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(14) > div:nth-child(4) > div > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(5) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(6) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(5) > div > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(6) > div > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(14) > div:nth-child(5) > div > input[type=\"number\"]"
+            ]
+          },
+          {
+            "all": [],
+            "any": [],
+            "html": "<input id=\"number-input4\" type=\"number\" min=\"0\" max=\"100\" value=\"1\">",
+            "impact": "serious",
+            "none": [
+              {
+                "data": null,
+                "id": "multiple-label",
+                "impact": "serious",
+                "message": "Form element has multiple <label> elements",
+                "relatedNodes": [
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(5) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(3) > div:nth-child(6) > .bx--number.bx--number--helpertext > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(5) > div > label.bx--label"
+                    ]
+                  },
+                  {
+                    "html": "<label for=\"number-input4\" class=\"bx--label\">Number Input label</label>",
+                    "target": [
+                      "html > body > div:nth-child(14) > div:nth-child(6) > div > label.bx--label"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": [
+              "html > body > div:nth-child(14) > div:nth-child(6) > div > input[type=\"number\"]"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.forms",
+          "wcag2a",
+          "wcag332",
+          "wcag131",
+          "section508",
+          "section508.22.n"
+        ]
+      },
+      {
+        "description": "Ensures a navigation point to the primary content of the page. If the page contains iframes, each iframe should contain either no main landmarks or just one.",
+        "help": "Page must contain one main landmark.",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/landmark-one-main?application=webdriverjs",
+        "id": "landmark-one-main",
+        "impact": "moderate",
+        "nodes": [
+          {
+            "all": [
+              {
+                "data": false,
+                "id": "has-at-least-one-main",
+                "impact": "moderate",
+                "message": "Document has no main landmarks",
+                "relatedNodes": []
+              }
+            ],
+            "any": [],
+            "html": "<html lang=\"en\">",
+            "impact": "moderate",
+            "none": [],
+            "target": [
+              "html"
+            ]
+          }
+        ],
+        "tags": [
+          "best-practice"
+        ]
+      }
+    ],
+    "time": 293,
+    "status": 200
+  }
+]
