@@ -148,7 +148,8 @@
       display: none;
     }
 
-    &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+    &[type='text'] + .#{$prefix}--text-input--password__visibility,
+    &[type='password'] + .#{$prefix}--text-input--password__visibility {
       top: rem(-28px);
       right: rem(12px);
       display: flex;
@@ -195,10 +196,10 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--text-input:disabled[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility,
-  .#{$prefix}--text-input[data-invalid][data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility,
-  .#{$prefix}--text-input:invalid[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility,
-  .#{$prefix}--text-input[data-loading][data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+  .#{$prefix}--text-input:disabled + .#{$prefix}--text-input--password__visibility,
+  .#{$prefix}--text-input[data-invalid] + .#{$prefix}--text-input--password__visibility,
+  .#{$prefix}--text-input:invalid + .#{$prefix}--text-input--password__visibility,
+  .#{$prefix}--text-input[data-loading] + .#{$prefix}--text-input--password__visibility {
     right: rem(32px);
   }
 
