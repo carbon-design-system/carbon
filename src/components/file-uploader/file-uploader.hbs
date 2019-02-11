@@ -16,6 +16,7 @@
     <input type="file" class="{{@root.prefix}}--file-input" id="your-file-importer-id-here" data-file-uploader
       data-target="[data-file-container]" multiple />
     <div data-file-container class="{{@root.prefix}}--file-container">
+      {{#if exampleUploadStates}}
       <span class="{{@root.prefix}}--file__selected-file">
         <p class="{{@root.prefix}}--file-filename">color.jpeg</p>
         <span data-for="your-file-importer-id-here" class="{{@root.prefix}}--file__state-container"></span>
@@ -58,6 +59,7 @@
         </div>
         {{/if}}
       </span>
+      {{/if}}
     </div>
   </div>
 </div>
