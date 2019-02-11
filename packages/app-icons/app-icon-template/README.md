@@ -1,6 +1,6 @@
 # IBM App icon template
 
-> Please refer to the Please refer to the [App Icon Guidelines](www.ibm.com/design/language/elements/app-icons) for icon design guidance.
+> Please refer to the Please refer to the [App Icon Guidelines](http://www.ibm.com/design/language/elements/app-icons) for icon design guidance.
 
 ## Product and web
 
