@@ -263,13 +263,13 @@
       color: $disabled;
       border-bottom: 1px solid $disabled-background-color;
     }
+  }
 
-    ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-    }
+  .#{$prefix}--form-requirement {
+    display: block;
+    color: $support-01;
+    font-weight: 400;
+    overflow: visible;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
