@@ -22,6 +22,7 @@ import Icon from '../Icon';
 // TODO: import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
 import { componentsX } from '../../internal/FeatureFlags';
+import { keys, matches as keyCodeMatches } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -330,15 +331,35 @@ export default class OverflowMenu extends Component {
     });
   }
 
+  getPrimaryFocusableElement = () => {
+    if (this.menuEl) {
+      const primaryFocusPropEl = this.menuEl.querySelector(
+        '[data-floating-menu-primary-focus]'
+      );
+      if (primaryFocusPropEl) {
+        return primaryFocusPropEl;
+      }
+    }
+    const firstItem = this.overflowMenuItem0;
+    if (
+      firstItem &&
+      firstItem.overflowMenuItem &&
+      firstItem.overflowMenuItem.current
+    ) {
+      return firstItem.overflowMenuItem.current;
+    }
+  };
+
   componentDidUpdate() {
     const { onClose, onOpen, floatingMenu } = this.props;
 
     if (this.state.open) {
       if (!floatingMenu) {
-        (
-          this.menuEl.querySelector('[data-overflow-menu-primary-focus]') ||
-          this.menuEl
-        ).focus();
+        const primaryFocusableElement = this.getPrimaryFocusableElement();
+        if (primaryFocusableElement) {
+          primaryFocusableElement.focus();
+        }
+
         onOpen();
       }
     } else {
@@ -373,7 +394,7 @@ export default class OverflowMenu extends Component {
   };
 
   handleKeyDown = evt => {
-    if (evt.which === 40) {
+    if (keyCodeMatches(evt, [keys.DOWN])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
@@ -381,15 +402,14 @@ export default class OverflowMenu extends Component {
 
   handleKeyPress = evt => {
     // only respond to key events when the menu is closed, so that menu items still respond to key events
-    const key = evt.key || evt.which;
     if (!this.state.open) {
-      if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      if (keyCodeMatches(evt, [keys.ENTER, keys.SPACE])) {
         this.setState({ open: true });
       }
     }
 
     // Close the overflow menu on escape
-    if (key === 'Escape' || key === 'Esc' || key === 27) {
+    if (keyCodeMatches(evt, [keys.ESC])) {
       this.closeMenu();
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
@@ -401,6 +421,27 @@ export default class OverflowMenu extends Component {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.closeMenu();
     }
+  };
+
+  /**
+   * collapse menu when focus is lost
+   * Due to Storybook hijacking focus, we must wrap our `activeElement` check
+   * in a closure. As a result of this hack, we must also call `event.persist()`
+   * to ensure that we can access the event properties asynchronously
+   *
+   * https://reactjs.org/docs/events.html#event-pooling
+   */
+  handleBlur = evt => {
+    if (this.props.floatingMenu) {
+      return;
+    }
+    evt.persist();
+    // event loop hack
+    setTimeout(() => {
+      if (!this.menuEl.contains(evt.target.ownerDocument.activeElement)) {
+        this.setState({ open: false });
+      }
+    }, 0);
   };
 
   closeMenu = () => {
@@ -420,6 +461,25 @@ export default class OverflowMenu extends Component {
   focusMenuEl = () => {
     if (this.menuEl) {
       this.menuEl.focus();
+    }
+  };
+
+  handleOverflowMenuItemFocus = index => {
+    const i = (() => {
+      switch (index) {
+        case -1:
+          return React.Children.count(this.props.children) - 1;
+        case React.Children.count(this.props.children):
+          return 0;
+        default:
+          return index;
+      }
+    })();
+    const { overflowMenuItem } =
+      this[`overflowMenuItem${i}`] ||
+      React.Children.toArray(this.props.children)[i];
+    if (overflowMenuItem && overflowMenuItem.current) {
+      overflowMenuItem.current.focus();
     }
   };
 
@@ -531,11 +591,17 @@ export default class OverflowMenu extends Component {
       iconClass
     );
 
-    const childrenWithProps = React.Children.toArray(children).map(child =>
-      React.cloneElement(child, {
-        closeMenu: this.closeMenu,
-        floatingMenu: floatingMenu || undefined,
-      })
+    const childrenWithProps = React.Children.toArray(children).map(
+      (child, index) =>
+        React.cloneElement(child, {
+          closeMenu: this.closeMenu,
+          floatingMenu: floatingMenu || undefined,
+          handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
+          ref: e => {
+            this[`overflowMenuItem${index}`] = e;
+          },
+          index,
+        })
     );
 
     const menuBody = (
@@ -601,6 +667,7 @@ export default class OverflowMenu extends Component {
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
+          onBlur={this.handleBlur}
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
