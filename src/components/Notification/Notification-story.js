@@ -38,12 +38,10 @@ storiesOf('Notifications', module)
   .add(
     'Deprecated: <Notfication />',
     () => (
-      <div>
-        <Notification
-          {...notificationProps()}
-          caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
-        />
-      </div>
+      <Notification
+        {...notificationProps()}
+        caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+      />
     ),
     {
       info: {
@@ -55,16 +53,10 @@ storiesOf('Notifications', module)
     }
   )
   .add('Toast', () => (
-    <div>
-      <ToastNotification
-        {...notificationProps()}
-        caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
-        style={{ minWidth: '30rem', marginBottom: '.5rem' }}
-      />
-    </div>
+    <ToastNotification
+      {...notificationProps()}
+      caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+      style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+    />
   ))
-  .add('inline', () => (
-    <div>
-      <InlineNotification {...notificationProps()} />
-    </div>
-  ));
+  .add('inline', () => <InlineNotification {...notificationProps()} />);
