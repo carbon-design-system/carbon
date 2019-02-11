@@ -112,6 +112,15 @@
     width: 100%;
   }
 
+  .#{$prefix}--file-complete {
+    fill: $support-02;
+  }
+
+  .#{$prefix}--file--invalid {
+    margin-right: $spacing-xs;
+    fill: $support-01;
+  }
+
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
@@ -152,13 +161,42 @@
     align-items: center;
     justify-content: space-between;
     min-height: rem(30px);
-    background-color: $inverse-01;
+    background-color: $ibm-colors__gray-10;
     padding: 0 $spacing-xs 0 $spacing-md;
-    margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-xs;
+    overflow-y: hidden;
 
     &:last-child {
       margin-bottom: 0;
     }
+
+    .#{$prefix}--inline-loading__animation,
+    .#{$prefix}--loading {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .#{$prefix}--inline-loading__animation {
+      right: -0.25rem; // offset due to larger SVG size
+    }
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
+    @include focus-outline('invalid');
+    margin-bottom: $spacing-2xs;
+
+    .#{$prefix}--file-filename {
+      color: $ibm-colors__gray-30;
+    }
+  }
+
+  .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    display: block;
+    max-height: rem(200px);
+    color: $support-01;
+    font-weight: 400;
+    margin: 0 0 $spacing-xs 0;
+    overflow: visible;
   }
 
   .#{$prefix}--file-filename {
