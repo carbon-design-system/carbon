@@ -144,7 +144,9 @@ export default class Slider extends PureComponent {
   };
 
   componentDidMount() {
-    this.updatePosition();
+    if (!sliderValuePropSync) {
+      this.updatePosition();
+    }
   }
 
   static getDerivedStateFromProps({ value, min, max }, state) {
