@@ -23,7 +23,7 @@ import {
   gray100,
 
   // Support
-  green60,
+  green50,
   yellow,
   red60,
   red80,
@@ -64,7 +64,7 @@ export const inverse01 = white;
 export const inverse02 = gray80;
 
 export const support01 = red60;
-export const support02 = green60;
+export const support02 = green50;
 export const support03 = yellow;
 export const support04 = blue70;
 
