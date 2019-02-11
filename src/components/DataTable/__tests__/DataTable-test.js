@@ -40,6 +40,8 @@ const getSelectAll = wrapper =>
   wrapper.find('TableSelectAll input[type="checkbox"]');
 const getLastCallFor = mocker =>
   mocker.mock.calls[mocker.mock.calls.length - 1];
+const getInputAtIndex = ({ wrapper, index, inputType }) =>
+  getRowAt(wrapper, index).find(`input[type="${inputType}"]`);
 
 describe('DataTable', () => {
   let mockProps;
@@ -286,14 +288,20 @@ describe('DataTable', () => {
     it('should select a specific row when a user interacts with select row', () => {
       const wrapper = mount(<DataTable {...mockProps} />);
       expect(getSelectAll(wrapper).prop('checked')).toBe(false);
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'checkbox' }).prop(
+          'checked'
+        )
+      ).toBe(false);
 
-      const beforeInput = getRowAt(wrapper, 0).find('input[type="checkbox"]');
-      expect(beforeInput.prop('checked')).toBe(false);
-
-      beforeInput.simulate('click');
-
-      const afterInput = getRowAt(wrapper, 0).find('input[type="checkbox"]');
-      expect(afterInput.prop('checked')).toBe(true);
+      getInputAtIndex({ wrapper, index: 0, inputType: 'checkbox' }).simulate(
+        'click'
+      );
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'checkbox' }).prop(
+          'checked'
+        )
+      ).toBe(true);
 
       const { selectedRows } = getLastCallFor(mockProps.render)[0];
       expect(selectedRows.length).toBe(1);
@@ -314,6 +322,142 @@ describe('DataTable', () => {
       expect(getSelectAll(wrapper).prop('checked')).toBe(false);
       const { selectedRows } = getLastCallFor(mockProps.render)[0];
       expect(selectedRows.length).toBe(0);
+    });
+  });
+
+  describe('selection -- radio buttons', () => {
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        rows: [
+          {
+            id: 'b',
+            fieldA: 'Field 2:A',
+            fieldB: 'Field 2:B',
+          },
+          {
+            id: 'a',
+            fieldA: 'Field 1:A',
+            fieldB: 'Field 1:B',
+          },
+          {
+            id: 'c',
+            fieldA: 'Field 3:A',
+            fieldB: 'Field 3:B',
+          },
+        ],
+        headers: [
+          {
+            key: 'fieldA',
+            header: 'Field A',
+          },
+          {
+            key: 'fieldB',
+            header: 'Field B',
+          },
+        ],
+        locale: 'en',
+        radio: true,
+        render: jest.fn(
+          ({ rows, headers, getHeaderProps, getSelectionProps }) => (
+            <TableContainer title="DataTable with selection">
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    {headers.map(header => (
+                      <TableHeader {...getHeaderProps({ header })}>
+                        {header.header}
+                      </TableHeader>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow key={row.id}>
+                      <TableSelectRow {...getSelectionProps({ row })} />
+                      {row.cells.map(cell => (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )
+        ),
+      };
+    });
+
+    it('should render', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not have select-all checkbox', () => {
+      const wrapper = mount(<DataTable {...mockProps} rows={[]} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should select a specific row when a user interacts with select row', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(false);
+
+      getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).simulate(
+        'click'
+      );
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(true);
+
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(1);
+    });
+
+    it('should deselect all other rows when a row is selected', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(false);
+
+      getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).simulate(
+        'click'
+      );
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(true);
+      expect(
+        getInputAtIndex({ wrapper, index: 1, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(false);
+
+      getInputAtIndex({ wrapper, index: 1, inputType: 'radio' }).simulate(
+        'click'
+      );
+      expect(
+        getInputAtIndex({ wrapper, index: 0, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(false);
+      expect(
+        getInputAtIndex({ wrapper, index: 1, inputType: 'radio' }).prop(
+          'checked'
+        )
+      ).toBe(true);
+
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(1);
     });
   });
 

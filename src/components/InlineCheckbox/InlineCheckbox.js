@@ -56,6 +56,19 @@ export default class InlineCheckbox extends React.Component {
      * Provide an optional tooltip for the InlineCheckbox
      */
     title: PropTypes.string,
+
+    /**
+     * Provide an optional hook that is called each time the input is updated
+     */
+    onChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    ariaLabel: '',
+    checked: false,
+    id: 'inline-checkbox',
+    name: '',
+    onChange: () => {},
   };
 
   componentDidMount() {
@@ -80,6 +93,7 @@ export default class InlineCheckbox extends React.Component {
       disabled,
       ariaLabel,
       name,
+      onChange,
       onClick,
       onKeyDown,
       title = undefined,
@@ -88,6 +102,9 @@ export default class InlineCheckbox extends React.Component {
       id,
       name,
       onClick,
+      onChange: evt => {
+        onChange(evt.target.checked, id, evt);
+      },
       onKeyDown,
       className: `${prefix}--checkbox`,
       type: 'checkbox',

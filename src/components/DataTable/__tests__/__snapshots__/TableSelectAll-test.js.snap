@@ -29,6 +29,7 @@ exports[`DataTable.TableSelectAll should render 1`] = `
                   checked={false}
                   id="id"
                   name="select-all"
+                  onChange={[Function]}
                   onClick={[MockFunction]}
                 >
                   <input
@@ -36,6 +37,7 @@ exports[`DataTable.TableSelectAll should render 1`] = `
                     className="bx--checkbox"
                     id="id"
                     name="select-all"
+                    onChange={[Function]}
                     onClick={[MockFunction]}
                     type="checkbox"
                   />

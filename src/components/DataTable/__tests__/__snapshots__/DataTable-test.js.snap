@@ -1,5 +1,917 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DataTable selection -- radio buttons should not have select-all checkbox 1`] = `
+<DataTable
+  filterRows={[Function]}
+  headers={
+    Array [
+      Object {
+        "header": "Field A",
+        "key": "fieldA",
+      },
+      Object {
+        "header": "Field B",
+        "key": "fieldB",
+      },
+    ]
+  }
+  locale="en"
+  radio={true}
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": true,
+            "rows": Array [],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              short={false}
+              shouldShowBorder={true}
+              zebra={true}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody />
+            </Table>
+          </TableContainer>,
+        },
+      ],
+    }
+  }
+  rows={Array []}
+  short={false}
+  shouldShowBorder={true}
+  sortRow={[Function]}
+  translateWithId={[Function]}
+>
+  <TableContainer
+    title="DataTable with selection"
+  >
+    <div
+      className="bx--data-table-v2-container"
+    >
+      <h4
+        className="bx--data-table-v2-header"
+      >
+        DataTable with selection
+      </h4>
+      <Table
+        short={false}
+        shouldShowBorder={true}
+        zebra={true}
+      >
+        <table
+          className="bx--data-table-v2 bx--data-table-v2--zebra"
+        >
+          <TableHead>
+            <thead>
+              <TableRow>
+                <tr>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    key="fieldA"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      aria-sort="none"
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field A
+                        </span>
+                        <Icon
+                          className="bx--table-sort-v2__icon"
+                          description="Sort rows by this header in ascending order"
+                          fillRule="evenodd"
+                          icon={
+                            Object {
+                              "height": "5",
+                              "id": "icon--caret--up",
+                              "name": "icon--caret--up",
+                              "styles": "",
+                              "svgData": Object {
+                                "circles": "",
+                                "ellipses": "",
+                                "paths": Array [
+                                  Object {
+                                    "d": "M0 5L5 .002 10 5z",
+                                  },
+                                ],
+                                "polygons": "",
+                                "polylines": "",
+                                "rects": "",
+                              },
+                              "tags": "icon--caret--up",
+                              "viewBox": "0 0 10 5",
+                              "width": "10",
+                            }
+                          }
+                          role="img"
+                        >
+                          <svg
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
+                            className="bx--table-sort-v2__icon"
+                            fillRule="evenodd"
+                            height="5"
+                            role="img"
+                            viewBox="0 0 10 5"
+                            width="10"
+                          >
+                            <title>
+                              Sort rows by this header in ascending order
+                            </title>
+                            <path
+                              d="M0 5L5 .002 10 5z"
+                              key="key0"
+                            />
+                          </svg>
+                        </Icon>
+                      </button>
+                    </th>
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    key="fieldB"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      aria-sort="none"
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field B
+                        </span>
+                        <Icon
+                          className="bx--table-sort-v2__icon"
+                          description="Sort rows by this header in ascending order"
+                          fillRule="evenodd"
+                          icon={
+                            Object {
+                              "height": "5",
+                              "id": "icon--caret--up",
+                              "name": "icon--caret--up",
+                              "styles": "",
+                              "svgData": Object {
+                                "circles": "",
+                                "ellipses": "",
+                                "paths": Array [
+                                  Object {
+                                    "d": "M0 5L5 .002 10 5z",
+                                  },
+                                ],
+                                "polygons": "",
+                                "polylines": "",
+                                "rects": "",
+                              },
+                              "tags": "icon--caret--up",
+                              "viewBox": "0 0 10 5",
+                              "width": "10",
+                            }
+                          }
+                          role="img"
+                        >
+                          <svg
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
+                            className="bx--table-sort-v2__icon"
+                            fillRule="evenodd"
+                            height="5"
+                            role="img"
+                            viewBox="0 0 10 5"
+                            width="10"
+                          >
+                            <title>
+                              Sort rows by this header in ascending order
+                            </title>
+                            <path
+                              d="M0 5L5 .002 10 5z"
+                              key="key0"
+                            />
+                          </svg>
+                        </Icon>
+                      </button>
+                    </th>
+                  </TableHeader>
+                </tr>
+              </TableRow>
+            </thead>
+          </TableHead>
+          <TableBody>
+            <tbody />
+          </TableBody>
+        </table>
+      </Table>
+    </div>
+  </TableContainer>
+</DataTable>
+`;
+
+exports[`DataTable selection -- radio buttons should render 1`] = `
+<DataTable
+  filterRows={[Function]}
+  headers={
+    Array [
+      Object {
+        "header": "Field A",
+        "key": "fieldA",
+      },
+      Object {
+        "header": "Field B",
+        "key": "fieldB",
+      },
+    ]
+  }
+  locale="en"
+  radio={true}
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "getTableProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "radio": true,
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": <TableContainer
+            title="DataTable with selection"
+          >
+            <Table
+              short={false}
+              shouldShowBorder={true}
+              zebra={true}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field A
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    Field B
+                  </TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    id="data-table-11__select-row-b"
+                    name="select-row-b"
+                    onSelect={[Function]}
+                    radio={true}
+                  />
+                  <TableCell>
+                    Field 2:A
+                  </TableCell>
+                  <TableCell>
+                    Field 2:B
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    id="data-table-11__select-row-a"
+                    name="select-row-a"
+                    onSelect={[Function]}
+                    radio={true}
+                  />
+                  <TableCell>
+                    Field 1:A
+                  </TableCell>
+                  <TableCell>
+                    Field 1:B
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    id="data-table-11__select-row-c"
+                    name="select-row-c"
+                    onSelect={[Function]}
+                    radio={true}
+                  />
+                  <TableCell>
+                    Field 3:A
+                  </TableCell>
+                  <TableCell>
+                    Field 3:B
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>,
+        },
+      ],
+    }
+  }
+  rows={
+    Array [
+      Object {
+        "fieldA": "Field 2:A",
+        "fieldB": "Field 2:B",
+        "id": "b",
+      },
+      Object {
+        "fieldA": "Field 1:A",
+        "fieldB": "Field 1:B",
+        "id": "a",
+      },
+      Object {
+        "fieldA": "Field 3:A",
+        "fieldB": "Field 3:B",
+        "id": "c",
+      },
+    ]
+  }
+  short={false}
+  shouldShowBorder={true}
+  sortRow={[Function]}
+  translateWithId={[Function]}
+>
+  <TableContainer
+    title="DataTable with selection"
+  >
+    <div
+      className="bx--data-table-v2-container"
+    >
+      <h4
+        className="bx--data-table-v2-header"
+      >
+        DataTable with selection
+      </h4>
+      <Table
+        short={false}
+        shouldShowBorder={true}
+        zebra={true}
+      >
+        <table
+          className="bx--data-table-v2 bx--data-table-v2--zebra"
+        >
+          <TableHead>
+            <thead>
+              <TableRow>
+                <tr>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    key="fieldA"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      aria-sort="none"
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field A
+                        </span>
+                        <Icon
+                          className="bx--table-sort-v2__icon"
+                          description="Sort rows by this header in ascending order"
+                          fillRule="evenodd"
+                          icon={
+                            Object {
+                              "height": "5",
+                              "id": "icon--caret--up",
+                              "name": "icon--caret--up",
+                              "styles": "",
+                              "svgData": Object {
+                                "circles": "",
+                                "ellipses": "",
+                                "paths": Array [
+                                  Object {
+                                    "d": "M0 5L5 .002 10 5z",
+                                  },
+                                ],
+                                "polygons": "",
+                                "polylines": "",
+                                "rects": "",
+                              },
+                              "tags": "icon--caret--up",
+                              "viewBox": "0 0 10 5",
+                              "width": "10",
+                            }
+                          }
+                          role="img"
+                        >
+                          <svg
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
+                            className="bx--table-sort-v2__icon"
+                            fillRule="evenodd"
+                            height="5"
+                            role="img"
+                            viewBox="0 0 10 5"
+                            width="10"
+                          >
+                            <title>
+                              Sort rows by this header in ascending order
+                            </title>
+                            <path
+                              d="M0 5L5 .002 10 5z"
+                              key="key0"
+                            />
+                          </svg>
+                        </Icon>
+                      </button>
+                    </th>
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    isSortable={true}
+                    key="fieldB"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      aria-sort="none"
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field B
+                        </span>
+                        <Icon
+                          className="bx--table-sort-v2__icon"
+                          description="Sort rows by this header in ascending order"
+                          fillRule="evenodd"
+                          icon={
+                            Object {
+                              "height": "5",
+                              "id": "icon--caret--up",
+                              "name": "icon--caret--up",
+                              "styles": "",
+                              "svgData": Object {
+                                "circles": "",
+                                "ellipses": "",
+                                "paths": Array [
+                                  Object {
+                                    "d": "M0 5L5 .002 10 5z",
+                                  },
+                                ],
+                                "polygons": "",
+                                "polylines": "",
+                                "rects": "",
+                              },
+                              "tags": "icon--caret--up",
+                              "viewBox": "0 0 10 5",
+                              "width": "10",
+                            }
+                          }
+                          role="img"
+                        >
+                          <svg
+                            alt="Sort rows by this header in ascending order"
+                            aria-label="Sort rows by this header in ascending order"
+                            className="bx--table-sort-v2__icon"
+                            fillRule="evenodd"
+                            height="5"
+                            role="img"
+                            viewBox="0 0 10 5"
+                            width="10"
+                          >
+                            <title>
+                              Sort rows by this header in ascending order
+                            </title>
+                            <path
+                              d="M0 5L5 .002 10 5z"
+                              key="key0"
+                            />
+                          </svg>
+                        </Icon>
+                      </button>
+                    </th>
+                  </TableHeader>
+                </tr>
+              </TableRow>
+            </thead>
+          </TableHead>
+          <TableBody>
+            <tbody>
+              <TableRow
+                key="b"
+              >
+                <tr>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    id="data-table-11__select-row-b"
+                    name="select-row-b"
+                    onSelect={[Function]}
+                    radio={true}
+                  >
+                    <td>
+                      <RadioButton
+                        ariaLabel="Select row"
+                        checked={false}
+                        id="data-table-11__select-row-b"
+                        labelText=""
+                        name="select-row-b"
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        value=""
+                      >
+                        <div
+                          className="radioButtonWrapper"
+                        >
+                          <input
+                            ariaLabel="Select row"
+                            checked={false}
+                            className="bx--radio-button"
+                            id="data-table-11__select-row-b"
+                            name="select-row-b"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="radio"
+                            value=""
+                          />
+                          <label
+                            aria-label=""
+                            className="bx--radio-button__label"
+                            htmlFor="data-table-11__select-row-b"
+                          >
+                            <span
+                              className="bx--radio-button__appearance"
+                            />
+                          </label>
+                        </div>
+                      </RadioButton>
+                    </td>
+                  </TableSelectRow>
+                  <TableCell
+                    key="b:fieldA"
+                  >
+                    <td>
+                      Field 2:A
+                    </td>
+                  </TableCell>
+                  <TableCell
+                    key="b:fieldB"
+                  >
+                    <td>
+                      Field 2:B
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+              <TableRow
+                key="a"
+              >
+                <tr>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    id="data-table-11__select-row-a"
+                    name="select-row-a"
+                    onSelect={[Function]}
+                    radio={true}
+                  >
+                    <td>
+                      <RadioButton
+                        ariaLabel="Select row"
+                        checked={false}
+                        id="data-table-11__select-row-a"
+                        labelText=""
+                        name="select-row-a"
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        value=""
+                      >
+                        <div
+                          className="radioButtonWrapper"
+                        >
+                          <input
+                            ariaLabel="Select row"
+                            checked={false}
+                            className="bx--radio-button"
+                            id="data-table-11__select-row-a"
+                            name="select-row-a"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="radio"
+                            value=""
+                          />
+                          <label
+                            aria-label=""
+                            className="bx--radio-button__label"
+                            htmlFor="data-table-11__select-row-a"
+                          >
+                            <span
+                              className="bx--radio-button__appearance"
+                            />
+                          </label>
+                        </div>
+                      </RadioButton>
+                    </td>
+                  </TableSelectRow>
+                  <TableCell
+                    key="a:fieldA"
+                  >
+                    <td>
+                      Field 1:A
+                    </td>
+                  </TableCell>
+                  <TableCell
+                    key="a:fieldB"
+                  >
+                    <td>
+                      Field 1:B
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+              <TableRow
+                key="c"
+              >
+                <tr>
+                  <TableSelectRow
+                    ariaLabel="Select row"
+                    checked={false}
+                    id="data-table-11__select-row-c"
+                    name="select-row-c"
+                    onSelect={[Function]}
+                    radio={true}
+                  >
+                    <td>
+                      <RadioButton
+                        ariaLabel="Select row"
+                        checked={false}
+                        id="data-table-11__select-row-c"
+                        labelText=""
+                        name="select-row-c"
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        value=""
+                      >
+                        <div
+                          className="radioButtonWrapper"
+                        >
+                          <input
+                            ariaLabel="Select row"
+                            checked={false}
+                            className="bx--radio-button"
+                            id="data-table-11__select-row-c"
+                            name="select-row-c"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="radio"
+                            value=""
+                          />
+                          <label
+                            aria-label=""
+                            className="bx--radio-button__label"
+                            htmlFor="data-table-11__select-row-c"
+                          >
+                            <span
+                              className="bx--radio-button__appearance"
+                            />
+                          </label>
+                        </div>
+                      </RadioButton>
+                    </td>
+                  </TableSelectRow>
+                  <TableCell
+                    key="c:fieldA"
+                  >
+                    <td>
+                      Field 3:A
+                    </td>
+                  </TableCell>
+                  <TableCell
+                    key="c:fieldB"
+                  >
+                    <td>
+                      Field 3:B
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+            </tbody>
+          </TableBody>
+        </table>
+      </Table>
+    </div>
+  </TableContainer>
+</DataTable>
+`;
+
 exports[`DataTable selection should have select-all default to un-checked if no rows are present 1`] = `
 <DataTable
   filterRows={[Function]}
@@ -38,6 +950,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
               },
             ],
             "onInputChange": [Function],
+            "radio": undefined,
             "rows": Array [],
             "selectAll": [Function],
             "selectRow": [Function],
@@ -142,6 +1055,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         id="data-table-7__select-all"
                         indeterminate={false}
                         name="select-all"
+                        onChange={[Function]}
                         onClick={[Function]}
                       >
                         <input
@@ -149,6 +1063,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                           className="bx--checkbox"
                           id="data-table-7__select-all"
                           name="select-all"
+                          onChange={[Function]}
                           onClick={[Function]}
                           type="checkbox"
                         />
@@ -358,6 +1273,7 @@ exports[`DataTable selection should render 1`] = `
               },
             ],
             "onInputChange": [Function],
+            "radio": undefined,
             "rows": Array [
               Object {
                 "cells": Array [
@@ -505,6 +1421,7 @@ exports[`DataTable selection should render 1`] = `
                     id="data-table-6__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
+                    radio={null}
                   />
                   <TableCell>
                     Field 2:A
@@ -520,6 +1437,7 @@ exports[`DataTable selection should render 1`] = `
                     id="data-table-6__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
+                    radio={null}
                   />
                   <TableCell>
                     Field 1:A
@@ -535,6 +1453,7 @@ exports[`DataTable selection should render 1`] = `
                     id="data-table-6__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
+                    radio={null}
                   />
                   <TableCell>
                     Field 3:A
@@ -614,6 +1533,7 @@ exports[`DataTable selection should render 1`] = `
                         id="data-table-6__select-all"
                         indeterminate={false}
                         name="select-all"
+                        onChange={[Function]}
                         onClick={[Function]}
                       >
                         <input
@@ -621,6 +1541,7 @@ exports[`DataTable selection should render 1`] = `
                           className="bx--checkbox"
                           id="data-table-6__select-all"
                           name="select-all"
+                          onChange={[Function]}
                           onClick={[Function]}
                           type="checkbox"
                         />
@@ -794,6 +1715,7 @@ exports[`DataTable selection should render 1`] = `
                     id="data-table-6__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
+                    radio={null}
                   >
                     <td>
                       <InlineCheckbox
@@ -801,6 +1723,7 @@ exports[`DataTable selection should render 1`] = `
                         checked={false}
                         id="data-table-6__select-row-b"
                         name="select-row-b"
+                        onChange={[Function]}
                         onClick={[Function]}
                       >
                         <input
@@ -808,6 +1731,7 @@ exports[`DataTable selection should render 1`] = `
                           className="bx--checkbox"
                           id="data-table-6__select-row-b"
                           name="select-row-b"
+                          onChange={[Function]}
                           onClick={[Function]}
                           type="checkbox"
                         />
@@ -845,6 +1769,7 @@ exports[`DataTable selection should render 1`] = `
                     id="data-table-6__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
+                    radio={null}
                   >
                     <td>
                       <InlineCheckbox
@@ -852,6 +1777,7 @@ exports[`DataTable selection should render 1`] = `
                         checked={false}
                         id="data-table-6__select-row-a"
                         name="select-row-a"
+                        onChange={[Function]}
                         onClick={[Function]}
                       >
                         <input
@@ -859,6 +1785,7 @@ exports[`DataTable selection should render 1`] = `
                           className="bx--checkbox"
                           id="data-table-6__select-row-a"
                           name="select-row-a"
+                          onChange={[Function]}
                           onClick={[Function]}
                           type="checkbox"
                         />
@@ -896,6 +1823,7 @@ exports[`DataTable selection should render 1`] = `
                     id="data-table-6__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
+                    radio={null}
                   >
                     <td>
                       <InlineCheckbox
@@ -903,6 +1831,7 @@ exports[`DataTable selection should render 1`] = `
                         checked={false}
                         id="data-table-6__select-row-c"
                         name="select-row-c"
+                        onChange={[Function]}
                         onClick={[Function]}
                       >
                         <input
@@ -910,6 +1839,7 @@ exports[`DataTable selection should render 1`] = `
                           className="bx--checkbox"
                           id="data-table-6__select-row-c"
                           name="select-row-c"
+                          onChange={[Function]}
                           onClick={[Function]}
                           type="checkbox"
                         />
@@ -984,6 +1914,7 @@ exports[`DataTable should render 1`] = `
               },
             ],
             "onInputChange": [Function],
+            "radio": undefined,
             "rows": Array [
               Object {
                 "cells": Array [

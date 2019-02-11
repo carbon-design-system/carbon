@@ -107,6 +107,11 @@ export default class DataTable extends React.Component {
      * Optional boolean to remove borders from data table.
      */
     shouldShowBorder: PropTypes.bool,
+
+    /**
+     * Specify whether the control should be a radio button or inline checkbox
+     */
+    radio: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -223,6 +228,7 @@ export default class DataTable extends React.Component {
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row-${row.id}`,
         ariaLabel: t(translationKey),
+        radio: this.props.radio || null,
       };
     }
 
@@ -345,9 +351,28 @@ export default class DataTable extends React.Component {
   handleOnSelectRow = rowId => () => {
     this.setState(state => {
       const row = state.rowsById[rowId];
-      const selectedRows = state.rowIds.filter(id => {
-        return state.rowsById[id].isSelected;
-      }).length;
+      if (this.props.radio) {
+        // deselect all radio buttons
+        const rowsById = Object.entries(state.rowsById).reduce((p, c) => {
+          const [key, val] = c;
+          val.isSelected = false;
+          p[key] = val;
+          return p;
+        }, {});
+        return {
+          shouldShowBatchActions: false,
+          rowsById: {
+            ...rowsById,
+            [rowId]: {
+              ...row,
+              isSelected: !row.isSelected,
+            },
+          },
+        };
+      }
+      const selectedRows = state.rowIds.filter(
+        id => state.rowsById[id].isSelected
+      ).length;
       // Predict the length of the selected rows after this change occurs
       const selectedRowsCount = !row.isSelected
         ? selectedRows + 1
@@ -445,6 +470,8 @@ export default class DataTable extends React.Component {
       selectAll: this.handleSelectAll,
       selectRow: rowId => this.handleOnSelectRow(rowId)(),
       expandRow: rowId => this.handleOnExpandRow(rowId)(),
+
+      radio: this.props.radio,
     };
 
     if (render !== undefined) {

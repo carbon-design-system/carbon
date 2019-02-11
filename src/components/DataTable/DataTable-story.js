@@ -80,6 +80,20 @@ storiesOf('DataTable', module)
     }
   )
   .add(
+    'with radio button selection',
+    withReadme(readme, require('./stories/with-selection--radio').default),
+    {
+      info: {
+        text: `
+          DataTable with radio button selection
+
+          You can find more detailed information surrounding usage of this component
+          at the following url: ${readmeURL}
+        `,
+      },
+    }
+  )
+  .add(
     'with expansion',
     withReadme(readme, require('./stories/with-expansion').default),
     {
