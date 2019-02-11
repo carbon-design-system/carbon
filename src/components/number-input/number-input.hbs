@@ -206,10 +206,10 @@
   <div data-invalid data-numberinput
     class="{{@root.prefix}}--number {{#if light}}{{@root.prefix}}--number--light{{/if}} {{@root.prefix}}--number--helpertext">
     <label for="number-input4" class="{{@root.prefix}}--label">Number Input label</label>
+    {{#if @root.featureFlags.componentsX}}
     <div class="{{@root.prefix}}--form__helper-text">
       Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
     </div>
-    {{#if @root.featureFlags.componentsX}}
     <div class="{{@root.prefix}}--number__input-wrapper">
       <input id="number-input4" type="number" min="0" max="100" value="1">
       {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--number__invalid')}}
@@ -239,6 +239,9 @@
     </div>
     {{/if}}
     {{#unless @root.featureFlags.componentsX}}
+    <div class="{{@root.prefix}}--form-requirement">
+      Invalid number
+    </div>
     <div class="{{@root.prefix}}--form__helper-text">
       Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
     </div>
