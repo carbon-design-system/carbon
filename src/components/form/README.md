@@ -4,9 +4,9 @@
 
 Modifiers are used with various form-related classes.
 
-| Selector             | Description                         |
-| -------------------- | ----------------------------------- |
-| .bx--label--disabled | Applies disabled styles for a label |
+| Selector               | Description                         |
+| ---------------------- | ----------------------------------- |
+| `.bx--label--disabled` | Applies disabled styles for a label |
 
 ### FAQ
 
