@@ -488,6 +488,19 @@
   .#{$prefix}--date-picker-input__wrapper {
     display: flex;
     align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -532,18 +545,6 @@
     &[data-invalid],
     &[data-invalid]:focus {
       @include focus-outline('invalid');
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-      overflow: visible;
-
-      &::before {
-        display: none;
-      }
     }
 
     &:disabled {
