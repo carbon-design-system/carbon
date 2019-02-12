@@ -31,20 +31,16 @@ const plugins = [
           }
         }
 
-        if (
-          item.isElem('rect') &&
-          item.attr('width', '32') &&
-          item.attr('height', '32')
-        ) {
-          return !item;
-        }
+        const sizes = ['16', '20', '24', '32'];
 
-        if (
-          item.isElem('rect') &&
-          item.attr('width', '16') &&
-          item.attr('height', '16')
-        ) {
-          return !item;
+        for (const size of sizes) {
+          if (
+            item.isElem('rect') &&
+            item.attr('width', size) &&
+            item.attr('height', size)
+          ) {
+            return !item;
+          }
         }
 
         return item;
