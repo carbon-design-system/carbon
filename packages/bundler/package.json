@@ -1,7 +1,7 @@
 {
   "name": "@carbon/bundler",
   "description": "Bundler used for libraries in the Carbon Design System",
-  "version": "0.0.1-alpha.31",
+  "version": "0.0.1-alpha.32",
   "license": "Apache-2.0",
   "bin": {
     "bundler": "./bin/bundler.js"
@@ -21,7 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
-    "@carbon/cli-reporter": "0.0.1-alpha.31",
+    "@carbon/cli-reporter": "0.0.1-alpha.32",
     "autoprefixer": "^9.4.3",
     "babel-plugin-macros": "^2.4.2",
     "chalk": "^2.4.1",
