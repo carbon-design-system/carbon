@@ -250,6 +250,10 @@
     &:focus {
       @include focus-outline('outline');
     }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
   }
 
   .#{$prefix}--dropdown[data-invalid] {
