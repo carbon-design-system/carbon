@@ -431,6 +431,7 @@
   }
 
   .#{$prefix}--dropdown--inline {
+    border-bottom-color: transparent;
     background-color: transparent;
     box-shadow: none;
     transition-property: none;
