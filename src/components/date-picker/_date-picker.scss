@@ -485,6 +485,24 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--date-picker-input__wrapper {
+    display: flex;
+    align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
     .#{$prefix}--date-picker__input {
       width: 7.25rem;
@@ -529,18 +547,6 @@
       @include focus-outline('invalid');
     }
 
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-      overflow: visible;
-
-      &::before {
-        display: none;
-      }
-    }
-
     &:disabled {
       color: $disabled;
       background-color: $disabled-background-color;
@@ -559,7 +565,6 @@
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
-    top: 1.75rem;
     right: 1rem;
     fill: $ui-05;
     cursor: pointer;
@@ -591,17 +596,8 @@
     margin-right: rem(1px);
   }
 
-  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__icon {
-    display: none;
-  }
-
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
     width: rem(143.5px);
-
-    // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
-    background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 16' width='14' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23171717'%3e%3cpath d='M0 5h14v1H0V5zm3-5h1v4H3V0zm7 0h1v4h-1V0zM0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14.5v-12zm1 0v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5z' fill-rule='nonzero' /%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: calc(100% - 1rem) 50%;
   }
 
   .#{$prefix}--date-picker__calendar,
