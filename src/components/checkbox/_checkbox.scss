@@ -245,7 +245,9 @@
     position: absolute;
     left: 0;
     top: rem(2px);
-    background-color: $ui-02;
+
+    // Checkboxes with a background color look visually off against a parent container.
+    background-color: transparent;
     border: 1px solid $ui-05;
     border-radius: 2px;
   }
