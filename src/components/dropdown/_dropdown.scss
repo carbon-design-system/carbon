@@ -435,6 +435,7 @@
     background-color: transparent;
     box-shadow: none;
     transition-property: none;
+    width: initial;
 
     &:focus {
       outline: none;
@@ -444,6 +445,10 @@
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text__inner {
+    margin-right: 1.25rem;
   }
 
   .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
