@@ -142,4 +142,15 @@ storiesOf('DataTable', module)
         `,
       },
     }
+  )
+  .add(
+    'with boolean column',
+    withReadme(readme, require('./stories/with-boolean-column').default),
+    {
+      info: {
+        text: `
+          DataTable with toolbar and filtering with column has boolean value.
+        `,
+      },
+    }
   );
