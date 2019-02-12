@@ -30,20 +30,6 @@
         ]
       },
       {
-        "description": "Ensures ARIA attributes are allowed for an element's role",
-        "help": "Elements must only use allowed ARIA attributes",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-allowed-attr?application=webdriverjs",
-        "id": "aria-allowed-attr",
-        "impact": null,
-        "nodes": [],
-        "tags": [
-          "cat.aria",
-          "wcag2a",
-          "wcag411",
-          "wcag412"
-        ]
-      },
-      {
         "description": "Ensures elements with ARIA roles have all required ARIA attributes",
         "help": "Required ARIA attributes must be provided",
         "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-required-attr?application=webdriverjs",
@@ -96,34 +82,6 @@
           "wcag131",
           "wcag411",
           "wcag412"
-        ]
-      },
-      {
-        "description": "Ensures all ARIA attributes have valid values",
-        "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-valid-attr-value?application=webdriverjs",
-        "id": "aria-valid-attr-value",
-        "impact": null,
-        "nodes": [],
-        "tags": [
-          "cat.aria",
-          "wcag2a",
-          "wcag131",
-          "wcag411",
-          "wcag412"
-        ]
-      },
-      {
-        "description": "Ensures attributes that begin with aria- are valid ARIA attributes",
-        "help": "ARIA attributes must conform to valid names",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/aria-valid-attr?application=webdriverjs",
-        "id": "aria-valid-attr",
-        "impact": null,
-        "nodes": [],
-        "tags": [
-          "cat.aria",
-          "wcag2a",
-          "wcag411"
         ]
       },
       {
@@ -195,6 +153,18 @@
         ]
       },
       {
+        "description": "Ensures headings have discernible text",
+        "help": "Headings must not be empty",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/empty-heading?application=webdriverjs",
+        "id": "empty-heading",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.name-role-value",
+          "best-practice"
+        ]
+      },
+      {
         "description": "Ensures <iframe> and <frame> elements contain a unique title attribute",
         "help": "Frames must have a unique title attribute",
         "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/frame-title-unique?application=webdriverjs",
@@ -234,22 +204,6 @@
           "wcag111",
           "section508",
           "section508.22.a"
-        ]
-      },
-      {
-        "description": "Ensures every form element has a label",
-        "help": "Form elements must have labels",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/label?application=webdriverjs",
-        "id": "label",
-        "impact": null,
-        "nodes": [],
-        "tags": [
-          "cat.forms",
-          "wcag2a",
-          "wcag332",
-          "wcag131",
-          "section508",
-          "section508.22.n"
         ]
       },
       {
@@ -360,18 +314,6 @@
         ]
       },
       {
-        "description": "Ensures tabindex attribute values are not greater than 0",
-        "help": "Elements should not have tabindex greater than zero",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/tabindex?application=webdriverjs",
-        "id": "tabindex",
-        "impact": null,
-        "nodes": [],
-        "tags": [
-          "cat.keyboard",
-          "best-practice"
-        ]
-      },
-      {
         "description": "Ensure that tables do not have the same summary and caption",
         "help": "The <caption> element should not contain the same text as the summary attribute",
         "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/table-duplicate-name?application=webdriverjs",
@@ -458,9 +400,104 @@
         ]
       }
     ],
-    "incomplete": [],
-    "timestamp": 1550012617859,
-    "url": "http://localhost:3000",
+    "incomplete": [
+      {
+        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+        "help": "Elements must have sufficient color contrast",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/color-contrast?application=webdriverjs",
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#ffffff",
+                  "fontSize": "10.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Unable to determine contrast ratio",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<div id=\"__bs_notify__\" style=\"display: block; padding: 15px; font-family: sans-serif; position: fixed; font-size: 0.9em; z-index: 9999; right: 0px; top: 0px; border-bottom-left-radius: 5px; background-color: rgb(27, 32, 50); margin: 0px; color: white; text-align: center; pointer-events: none;\">",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              "#__bs_notify__"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5a6872",
+                  "fontSize": "10.5pt",
+                  "fontWeight": "normal",
+                  "missingData": "imgNode"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because element contains an image node",
+                "relatedNodes": [
+                  {
+                    "html": "<svg focusable=\"false\" preserveAspectRatio=\"xMidYMid meet\" style=\"will-change: transform;\" xmlns=\"http://www.w3.org/2000/svg\" class=\"bx--pagination-nav__select-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\">",
+                    "target": [
+                      ".bx--pagination-nav__select > svg.bx--pagination-nav__select-icon"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<select class=\"bx--pagination-nav__page bx--pagination-nav__page--select\" id=\"select-id-pagination-nav-pages\" aria-label=\"select page number\" tabindex=\"0\">",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              "#select-id-pagination-nav-pages"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#ffffff",
+                  "fontSize": "10.5pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Unable to determine contrast ratio",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<a class=\"bx--pagination-nav__page bx--pagination-nav__page--active\" href=\"javascript:void(0)\">\n            <span class=\"bx--pagination-nav__accessibility-label\">page </span>1\n            </a>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              "html > body > div:nth-child(24) > nav > ul > li:nth-child(2) > a.bx--pagination-nav__page"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143"
+        ]
+      }
+    ],
+    "timestamp": 1550012723120,
+    "url": "http://localhost:3000/component/pagination-nav/",
     "violations": [
       {
         "description": "Ensures a navigation point to the primary content of the page. If the page contains iframes, each iframe should contain either no main landmarks or just one.",
@@ -480,7 +517,7 @@
               }
             ],
             "any": [],
-            "html": "<html dir=\"ltr\" lang=\"en\" i18n-processed=\"\">",
+            "html": "<html lang=\"en\">",
             "impact": "moderate",
             "none": [],
             "target": [
@@ -491,41 +528,9 @@
         "tags": [
           "best-practice"
         ]
-      },
-      {
-        "description": "Ensures <meta name=\"viewport\"> does not disable text scaling and zooming",
-        "help": "Zooming and scaling must not be disabled",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/meta-viewport?application=webdriverjs",
-        "id": "meta-viewport",
-        "impact": "critical",
-        "nodes": [
-          {
-            "all": [],
-            "any": [
-              {
-                "data": null,
-                "id": "meta-viewport",
-                "impact": "critical",
-                "message": "<meta> tag disables zooming on mobile devices",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,\n                                 maximum-scale=1.0, user-scalable=no\">",
-            "impact": "critical",
-            "none": [],
-            "target": [
-              "head > meta[name=\"viewport\"]"
-            ]
-          }
-        ],
-        "tags": [
-          "cat.sensory-and-visual-cues",
-          "wcag2aa",
-          "wcag144"
-        ]
       }
     ],
-    "time": 251,
-    "status": 404
+    "time": 260,
+    "status": 200
   }
 ]

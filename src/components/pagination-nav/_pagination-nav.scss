@@ -1,0 +1,154 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Pagination Nav
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+
+@mixin pagination-nav-base(
+  $text-color: $text-02,
+  $text-color-hover: $hover-primary-text,
+  $text-color-on-dark: $color__white,
+  $background-color-active: $ibm-colors__gray-60,
+  $underline-width: 3px
+) {
+  .#{$prefix}--pagination-nav {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include typescale('zeta');
+    line-height: 0;
+  }
+
+  .#{$prefix}--pagination-nav__list {
+    align-items: center;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--pagination-nav__list-item {
+    padding: $spacing-3xs;
+  }
+
+  .#{$prefix}--pagination-nav__page {
+    @include typescale('zeta');
+    @include button-reset($width: false);
+    border-radius: 0;
+    color: $text-color;
+    display: block;
+    font-weight: 400;
+    line-height: 1;
+    min-width: $spacing-lg;
+    outline: 0;
+    padding: 0.3125rem $spacing-2xs;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 $underline-width $text-color-hover;
+      color: $text-color-hover;
+    }
+
+    &:disabled,
+    &.#{$prefix}--pagination-nav__page--disabled {
+      color: rgba($text-color, 0.5);
+      pointer-events: none;
+    }
+
+    &:active,
+    &.#{$prefix}--pagination-nav__page--active {
+      background-color: $background-color-active;
+      box-shadow: none;
+      color: $text-color-on-dark;
+    }
+
+    &.#{$prefix}--pagination-nav__page--active {
+      pointer-events: none;
+    }
+
+    .#{$prefix}--pagination-nav__icon {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select {
+    position: relative;
+  }
+
+  .#{$prefix}--pagination-nav__page--select {
+    appearance: none;
+    min-height: $spacing-lg;
+    min-width: auto;
+    padding: 0 0.46875rem;
+    position: relative;
+    z-index: 1;
+
+    &:focus {
+      color: $text-color;
+    }
+
+    &:active {
+      background-color: initial;
+      color: $text-color;
+    }
+
+    &:focus + .#{$prefix}--pagination-nav__select-icon,
+    &:hover + .#{$prefix}--pagination-nav__select-icon {
+      fill: $text-color-hover;
+    }
+
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 $text-color;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon {
+    left: calc(50% - #{$spacing-md/2});
+    position: absolute;
+    top: calc(50% - #{$spacing-md/2});
+    z-index: 0;
+  }
+
+  .#{$prefix}--pagination-nav__accessibility-label {
+    @include hidden();
+  }
+}
+
+@mixin pagination-nav {
+  @include pagination-nav-base(
+    $text-color: $ui-05,
+    $text-color-hover: $brand-01,
+    $text-color-on-dark: $inverse-01,
+    $background-color-active: $ui-05,
+    $underline-width: 1px
+  );
+}
+
+@mixin pagination-nav--x {
+  @include pagination-nav-base();
+}
+
+@include exports('pagination-nav') {
+  @if feature-flag-enabled('components-x') {
+    @include pagination-nav--x;
+  } @else {
+    @include pagination-nav;
+  }
+}
