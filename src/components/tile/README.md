@@ -4,11 +4,11 @@
 
 Use these modifiers with `.bx--tile` class.
 
-| Selector              | Description                                                              |
-| --------------------- | ------------------------------------------------------------------------ |
-| .bx--tile--clickable  | Adds specific styles and custom focus/hover states for a clickable tile  |
-| .bx--tile--expandable | Adds specific styles and custom focus/hover states for a expandable tile |
-| .bx--tile--selectable | Adds specific styles and custom focus/hover states for a selectable tile |
+| Selector                | Description                                                              |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `.bx--tile--clickable`  | Adds specific styles and custom focus/hover states for a clickable tile  |
+| `.bx--tile--expandable` | Adds specific styles and custom focus/hover states for a expandable tile |
+| `.bx--tile--selectable` | Adds specific styles and custom focus/hover states for a selectable tile |
 
 ### Javascript
 
