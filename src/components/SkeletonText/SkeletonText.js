@@ -36,7 +36,7 @@ const SkeletonText = ({
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  if (widthPercent & paragraph) {
+  if (widthPercent && paragraph) {
     const lines = [];
     for (var i = 0; i < lineCount; i++) {
       const randomWidth = getRandomInt(0, 75) + 'px';
@@ -52,7 +52,7 @@ const SkeletonText = ({
     return <div>{lines}</div>;
   }
 
-  if (widthPx & paragraph) {
+  if (widthPx && paragraph) {
     const lines = [];
     for (var j = 0; j < lineCount; j++) {
       const randomWidth = getRandomInt(widthNum - 75, widthNum) + 'px';
