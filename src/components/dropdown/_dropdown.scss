@@ -270,6 +270,14 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--dropdown--open {
+    background-color: $hover-ui;
+
+    &:hover .#{$prefix}--dropdown-link {
+      border-bottom-color: transparent;
+    }
+  }
+
   .#{$prefix}--dropdown--open:focus {
     outline: 1px solid transparent;
     box-shadow: none;
