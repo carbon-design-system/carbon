@@ -9,7 +9,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  text,
+  object,
+} from '@storybook/addon-knobs';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 
@@ -33,18 +39,37 @@ const props = () => ({
   onChange: action('onChange'),
   onClick: action('onClick'),
   allowEmpty: boolean('Allow empty value (allowEmpty)', false),
+  numberInputArrowTranslationIds: object(
+    'Number input arrow icon translation IDs (for translateWithId callback)',
+    {
+      'increment.number': 'Increment number',
+      'decrement.number': 'Decrement number',
+    }
+  ),
 });
 
 storiesOf('NumberInput', module)
   .addDecorator(withKnobs)
-  .add('Default', () => <NumberInput {...props()} />, {
-    info: {
-      text: `
+  .add(
+    'Default',
+    () => {
+      const { numberInputArrowTranslationIds, ...rest } = props();
+      return (
+        <NumberInput
+          translateWithId={id => numberInputArrowTranslationIds[id]}
+          {...rest}
+        />
+      );
+    },
+    {
+      info: {
+        text: `
             Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
             The Number Input component can be passed a starting value, a min, a max, and the step.
           `,
-    },
-  })
+      },
+    }
+  )
   .add('skeleton', () => <NumberInputSkeleton />, {
     info: {
       text: `

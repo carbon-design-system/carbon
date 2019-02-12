@@ -10,16 +10,23 @@ import React, { Component } from 'react';
 import { iconCaretUp, iconCaretDown } from 'carbon-icons';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-// TODO: import { WarningFilled16 } from '@carbon/icons-react';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
-// TODO: import { CaretDownGlyph } from '@carbon/icons-react';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
-// TODO: import { CaretUpGlyph } from '@carbon/icons-react';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import Icon from '../Icon';
 import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
+
+export const translationIds = {
+  'increment.number': 'increment.number',
+  'decrement.number': 'decrement.number',
+};
+
+const defaultTranslations = {
+  [translationIds['increment.number']]: 'Increment number',
+  [translationIds['decrement.number']]: 'Decrement number',
+};
 
 export default class NumberInput extends Component {
   constructor(props) {
@@ -36,88 +43,76 @@ export default class NumberInput extends Component {
      * Specify an optional className to be applied to the wrapper node
      */
     className: PropTypes.string,
-
     /**
      * Specify if the control should be disabled, or not
      */
     disabled: PropTypes.bool,
-
     /**
      * Specify whether you want the underlying label to be visually hidden
      */
     hideLabel: PropTypes.bool,
-
     /**
      * Provide a description for up/down icons that can be read by screen readers
      */
     iconDescription: PropTypes.string.isRequired,
-
     /**
      * Specify a custom `id` for the input
      */
     id: PropTypes.string.isRequired,
-
     /**
      * Generic `label` that will be used as the textual representation of what
      * this field is for
      */
     label: PropTypes.node,
-
     /**
      * The maximum value.
      */
     max: PropTypes.number,
-
     /**
      * The minimum value.
      */
     min: PropTypes.number,
-
     /**
      * The new value is available in 'imaginaryTarget.value'
      * i.e. to get the value: evt.imaginaryTarget.value
      */
     onChange: PropTypes.func,
-
     /**
      * Provide an optional function to be called when the up/down button is clicked
      */
     onClick: PropTypes.func,
-
     /**
      * Specify how much the valus should increase/decrease upon clicking on up/down button
      */
     step: PropTypes.number,
-
     /**
      * Specify the value of the input
      */
     value: PropTypes.number,
-
     /**
      * Specify if the currently value is invalid.
      */
     invalid: PropTypes.bool,
-
     /**
      * Message which is displayed if the value is invalid.
      */
     invalidText: PropTypes.string,
-
     /**
      * Provide text that is used alongside the control label for additional help
      */
     helperText: PropTypes.node,
-
     /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
-
     /**
      * `true` to allow empty string.
      */
     allowEmpty: PropTypes.bool,
+    /**
+     * Provide custom text for the component for each translation id
+     */
+    translateWithId: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -134,6 +129,7 @@ export default class NumberInput extends Component {
     helperText: '',
     light: false,
     allowEmpty: false,
+    translateWithId: id => defaultTranslations[id],
   };
 
   /**
@@ -218,6 +214,7 @@ export default class NumberInput extends Component {
       helperText,
       light,
       allowEmpty,
+      translateWithId: t,
       ...other
     } = this.props;
 
@@ -268,6 +265,11 @@ export default class NumberInput extends Component {
       </label>
     ) : null;
 
+    const [incrementNumLabel, decrementNumLabel] = [
+      t('increment.number'),
+      t('decrement.number'),
+    ];
+
     return (
       <div className={`${prefix}--form-item`}>
         <div className={numberInputClasses} {...inputWrapperProps}>
@@ -293,14 +295,24 @@ export default class NumberInput extends Component {
                   <button
                     className={`${prefix}--number__control-btn up-icon`}
                     {...buttonProps}
-                    onClick={evt => this.handleArrowClick(evt, 'up')}>
-                    <CaretUpGlyph className="up-icon" />
+                    onClick={evt => this.handleArrowClick(evt, 'up')}
+                    aria-label={incrementNumLabel}
+                    aria-live="polite"
+                    aria-atomic="true">
+                    <CaretUpGlyph className="up-icon">
+                      <title>{incrementNumLabel}</title>
+                    </CaretUpGlyph>
                   </button>
                   <button
                     className={`${prefix}--number__control-btn down-icon`}
                     {...buttonProps}
-                    onClick={evt => this.handleArrowClick(evt, 'down')}>
-                    <CaretDownGlyph className="down-icon" />
+                    onClick={evt => this.handleArrowClick(evt, 'down')}
+                    aria-label={decrementNumLabel}
+                    aria-live="polite"
+                    aria-atomic="true">
+                    <CaretDownGlyph className="down-icon">
+                      <title>{decrementNumLabel}</title>
+                    </CaretDownGlyph>
                   </button>
                 </div>
               </div>
@@ -311,23 +323,33 @@ export default class NumberInput extends Component {
                 <button
                   className={`${prefix}--number__control-btn up-icon`}
                   {...buttonProps}
-                  onClick={evt => this.handleArrowClick(evt, 'up')}>
+                  onClick={evt => this.handleArrowClick(evt, 'up')}
+                  aria-label={incrementNumLabel}
+                  aria-live="polite"
+                  aria-atomic="true">
                   <Icon
                     className="up-icon"
                     icon={iconCaretUp}
-                    description={this.props.iconDescription}
+                    description={
+                      this.props.iconDescription || incrementNumLabel
+                    }
                     viewBox="0 0 10 5"
                   />
                 </button>
                 <button
                   className={`${prefix}--number__control-btn down-icon`}
                   {...buttonProps}
-                  onClick={evt => this.handleArrowClick(evt, 'down')}>
+                  onClick={evt => this.handleArrowClick(evt, 'down')}
+                  aria-label={decrementNumLabel}
+                  aria-live="polite"
+                  aria-atomic="true">
                   <Icon
                     className="down-icon"
                     icon={iconCaretDown}
                     viewBox="0 0 10 5"
-                    description={this.props.iconDescription}
+                    description={
+                      this.props.iconDescription || decrementNumLabel
+                    }
                   />
                 </button>
               </div>
