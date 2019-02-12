@@ -12,6 +12,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import { componentsX } from '../../globals/js/feature-flags';
 
 /* eslint no-underscore-dangle: [2, { "allow": ["_input", "_updateClassNames", "_updateInputFields"], "allowAfterThis": true }] */
 
@@ -206,14 +207,41 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   };
 
   _rightArrowHTML() {
-    return `
+    return componentsX
+      ? `
+      <svg
+        focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        style="will-change: transform;"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        aria-hidden="true">
+          <path d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"></path>
+      </svg>`
+      : `
       <svg width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
         <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
       </svg>`;
   }
 
   _leftArrowHTML() {
-    return `
+    return componentsX
+      ? `
+      <svg
+        focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        style="will-change: transform;"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        aria-hidden="true"
+      >
+        <path d="M5 8l5-5 .7.7L6.4 8l4.3 4.3-.7.7z"></path>
+      </svg>`
+      : `
       <svg width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
         <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
       </svg>`;
