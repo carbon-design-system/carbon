@@ -32,12 +32,77 @@ In Sass, you can import the files individual by doing:
 @import '@carbon/colors/scss/colors';
 ```
 
-This will make all the colors and token variables available to you in
-your file. They are named with the following structure: `$ibm-color__swatch-grade`, for example:
+This file automatically includes the `carbon--colors` mixin which initializes
+all the color variables for the IBM Design Language.
+
+These color variables follow the naming convention: `$carbon--<swatch>-<grade>`.
+For example:
 
 ```scss
-$ibm-colors__blue-50;
-$ibm-colors__warm-gray-100;
+$carbon--blue-50;
+$carbon--cool-gray-10;
+$carbon--black-100;
+$carbon--white-0;
+```
+
+You can also use the shorthand form of these colors by dropping the `carbon--`
+namespace:
+
+```scss
+$blue-50;
+$cool-gray-10;
+$black-100;
+$white-0;
+```
+
+_Note: the shorthand variables require that you do not have any other
+conflicting variables in your setup. Namespaced variables are always preferred
+for this reason, unless you are confident that no collisions will occur._
+
+If you would like you choose when these variables are defined, then you can call
+the `carbon--colors` mixin directly by importing the following file:
+
+```scss
+@import '@carbon/colors/scss/mixins';
+
+// ...
+@include carbon--colors();
+```
+
+Alongside the color variables detailed above, we also provide a map of colors so
+that you can programmatically use these values. This map is called
+`$carbon--colors` and each key is the name of a swatch. The value of these
+swatches is also a map, but each key is now the grade. In code, this looks like
+the following:
+
+<!-- prettier-ignore-start -->
+```scss
+$carbon--colors: (
+  'blue': (
+    10: #edf4ff,
+    // ...
+  )
+);
+```
+<!-- prettier-ignore-end -->
+
+You can include this variable by including `@carbon/colors/scss/colors` or
+calling the `carbon--colors()` mixin directly.
+
+#### Migrating from previous versions
+
+If you were originally using a project that had color variables defined as
+`$ibm-color__<swatch>-<grade>`, or are relying on `$ibm-color-map`, you can also
+use the entrypoint described above to access these colors. They are meant as an
+easier way to help adopt these packages. However, these variables will be removed
+in the next release of Carbon.
+
+Similar to previous efforts, we also provide colors in the formats mentioned
+above. For example:
+
+```scss
+$ibm-color__blue-50;
+$ibm-color__warm-gray-100;
 ```
 
 If you would like a mixin to conditionally include these variables,

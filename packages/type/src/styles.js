@@ -99,7 +99,7 @@ export const heading02 = {
   letterSpacing: 0,
 };
 
-export const heading03 = {
+export const productiveHeading03 = {
   fontFamily: fontFamilies.sans,
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
@@ -122,6 +122,23 @@ export const productiveHeading05 = {
   lineHeight: rem(40),
   letterSpacing: 0,
 };
+
+export const expressiveHeading03 = fluid({
+  fontFamily: fontFamilies.sans,
+  fontSize: rem(scale[4]),
+  fontWeight: fontWeights.regular,
+  lineHeight: '130%',
+  letterSpacing: 0,
+  breakpoints: {
+    xlg: {
+      fontSize: rem(scale[4]),
+      lineHeight: '125%',
+    },
+    max: {
+      fontSize: rem(scale[5]),
+    },
+  },
+});
 
 export const expressiveHeading04 = fluid({
   fontFamily: fontFamilies.sans,

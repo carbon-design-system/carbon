@@ -10,7 +10,6 @@ import { fontWeights, fontWeight } from './fontWeight';
 import { print } from './print';
 import { reset } from './reset';
 import { getTypeSize, scale } from './scale';
-import { spacing } from './spacing';
 import * as styles from './styles';
 
 export * from './styles';
@@ -24,5 +23,4 @@ export {
   getTypeSize,
   scale,
   styles,
-  spacing,
 };
