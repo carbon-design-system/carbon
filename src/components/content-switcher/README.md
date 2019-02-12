@@ -2,9 +2,9 @@
 
 #### Modifiers
 
-| Name                            | Description                                                  |
-| ------------------------------- | ------------------------------------------------------------ |
-| .bx--content-switcher--selected | Applies the "selected" styles to the content-switcher button |
+| Name                              | Description                                                  |
+| --------------------------------- | ------------------------------------------------------------ |
+| `.bx--content-switcher--selected` | Applies the "selected" styles to the content-switcher button |
 
 ### Javascript
 
@@ -31,10 +31,10 @@ ContentSwitcher.create(document.getElementById('my-content-switcher'));
 
 #### Public Methods
 
-| Name      | Params                                    | Description                                                                                                                                                                                   |
-| --------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| setActive | item: `HTMLElement`, callback: `Function` | Uses `data-target` attribute to show a content panel using the given CSS selector. Non-active targets will be hidden. You can also pass in an optional callback function, see FAQ for details |
-| release   |                                           | Deletes the instance and removes document event listeners                                                                                                                                     |
+| Name        | Params                                        | Description                                                                                                                                                                                   |
+| ----------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `setActive` | `item`: `HTMLElement`, `callback`: `Function` | Uses `data-target` attribute to show a content panel using the given CSS selector. Non-active targets will be hidden. You can also pass in an optional callback function, see FAQ for details |
+| `release`   |                                               | Deletes the instance and removes document event listeners                                                                                                                                     |
 
 ##### Example - Changing the active item
 
@@ -47,22 +47,22 @@ contentSwitcherInstance.setActive(document.getElementById('my-content-switcher-b
 
 #### Options
 
-| Option              | Default Selector                               | Description                                                        |
-| ------------------- | ---------------------------------------------- | ------------------------------------------------------------------ |
-| selectorInit        | [data-content-switcher]                        | The CSS selector to find content-switcher                          |
-| selectorButton      | input[type="radio"], .bx--content-switcher-btn | The CSS selector to find the content-switcher buttons              |
-| classActive         | bx--content-switcher--selected                 | The className for a selected button                                |
-| eventBeforeSelected | content-switcher-beingselected                 | Custom event fired before a button is selected in content-switcher |
-| eventAfterSelected  | content-switcher-selected                      | Custom event fired after a button is selected in content-switcher  |
+| Option                | Default Selector                                 | Description                                                        |
+| --------------------- | ------------------------------------------------ | ------------------------------------------------------------------ |
+| `selectorInit`        | `[data-content-switcher]`                        | The CSS selector to find content-switcher                          |
+| `selectorButton`      | `input[type="radio"], .bx--content-switcher-btn` | The CSS selector to find the content-switcher buttons              |
+| `classActive`         | `bx--content-switcher--selected`                 | The className for a selected button                                |
+| `eventBeforeSelected` | `content-switcher-beingselected`                 | Custom event fired before a button is selected in content-switcher |
+| `eventAfterSelected`  | `content-switcher-selected`                      | Custom event fired after a button is selected in content-switcher  |
 
 #### Events
 
-| Event Name                     | Description                                                        |
-| ------------------------------ | ------------------------------------------------------------------ |
-| content-switcher-beingselected | Custom event fired before a button is selected in content-switcher |
-| content-switcher-selected      | Custom event fired after a button is selected in content-switcher  |
+| Event Name                       | Description                                                        |
+| -------------------------------- | ------------------------------------------------------------------ |
+| `content-switcher-beingselected` | Custom event fired before a button is selected in content-switcher |
+| `content-switcher-selected`      | Custom event fired after a button is selected in content-switcher  |
 
-##### Example 
+##### Example
 
 Preventing a content switcher item from being selected in a certain condition
 
@@ -74,7 +74,7 @@ document.addEventListener('content-switcher-beingselected', function(evt) {
 });
 ```
 
-##### Example 
+##### Example
 
 Notifying events of all content switcher items being selected to an analytics library
 
@@ -89,9 +89,9 @@ document.addEventListener('content-switcher-selected', function(evt) {
 
 #### Classes
 
-| Name                           | Description                         |
-| ------------------------------ | ----------------------------------- |
-| bx--content-switcher--selected | The className for a selected button |
+| Name                             | Description                         |
+| -------------------------------- | ----------------------------------- |
+| `bx--content-switcher--selected` | The className for a selected button |
 
 ### FAQ
 

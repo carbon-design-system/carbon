@@ -23,18 +23,18 @@ Tooltip.create(document.getElementById('my-tooltip-trigger'));
 
 #### Attributes
 
-| Name                   | Param                       | Description                                                                          |
-| ---------------------- | --------------------------- | ------------------------------------------------------------------------------------ |
-| data-tooltip-target    | Any unique CSS selector     | The selector, typically an id, to find the tooltip corresponding to the trigger.     |
-| data-tooltip-direction | Left, top, right, or bottom | Setting this attribute overrides the directions set by this.options.tooltipDirection |
+| Name                     | Param                               | Description                                                                          |
+| ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------ |
+| `data-tooltip-target`    | Any unique CSS selector             | The selector, typically an id, to find the tooltip corresponding to the trigger.     |
+| `data-tooltip-direction` | `left`, `top`, `right`, or `bottom` | Setting this attribute overrides the directions set by this.options.tooltipDirection |
 
 #### Public Methods
 
-| Name    | Params | Description                                                |
-| ------- | ------ | ---------------------------------------------------------- |
-| show    |        | Shows the tooltip.                                         |
-| hide    |        | Hides the tooltip.                                         |
-| release |        | Deletes the instance and removes document event listeners. |
+| Name      | Params | Description                                                |
+| --------- | ------ | ---------------------------------------------------------- |
+| `show`    |        | Shows the tooltip.                                         |
+| `hide`    |        | Hides the tooltip.                                         |
+| `release` |        | Deletes the instance and removes document event listeners. |
 
 ##### Example - Showing tooltip
 
@@ -101,7 +101,7 @@ document.addEventListener('floating-menu-hidden', function(evt) {
 
 | Selector                      | Description                        |
 | ----------------------------- | ---------------------------------- |
-| .bx--tooltip\_\_trigger--bold | Modifier class to make label bold. |
+| `.bx--tooltip__trigger--bold` | Modifier class to make label bold. |
 
 #### HTML
 
@@ -131,8 +131,8 @@ This tooltip variation does not use any JavaScript and should be used to define 
 
 | Selector                           | Description                                           |
 | ---------------------------------- | ----------------------------------------------------- |
-| .bx--tooltip--definition\_\_top    | A simple tooltip that is displayed above the trigger. |
-| .bx--tooltip--definition\_\_bottom | A simple tooltip that is displayed below the trigger. |
+| `.bx--tooltip--definition__top`    | A simple tooltip that is displayed above the trigger. |
+| `.bx--tooltip--definition__bottom` | A simple tooltip that is displayed below the trigger. |
 
 ### Icon tooltip
 
@@ -140,8 +140,8 @@ This tooltip variation does not use any JavaScript and is good for short single 
 
 | Selector                     | Description                                           |
 | ---------------------------- | ----------------------------------------------------- |
-| .bx--tooltip--icon\_\_top    | A simple tooltip that is displayed above the trigger. |
-| .bx--tooltip--icon\_\_bottom | A simple tooltip that is displayed below the trigger. |
+| `.bx--tooltip--icon__top`    | A simple tooltip that is displayed above the trigger. |
+| `.bx--tooltip--icon__bottom` | A simple tooltip that is displayed below the trigger. |
 
 ### Links & Resources
 
