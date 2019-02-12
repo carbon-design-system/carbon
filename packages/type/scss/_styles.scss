@@ -97,7 +97,7 @@ $heading-02: (
   letter-spacing: 0,
 ) !default;
 
-$heading-03: (
+$productive-heading-03: (
   font-family: carbon--font-family('sans'),
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
@@ -119,6 +119,23 @@ $productive-heading-05: (
   font-weight: carbon--font-weight('regular'),
   line-height: carbon--rem(40px),
   letter-spacing: 0,
+) !default;
+
+$expressive-heading-03: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(5),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 130%,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: carbon--type-scale(5),
+      line-height: 125%,
+    ),
+    max: (
+      font-size: carbon--type-scale(6),
+    ),
+  ),
 ) !default;
 
 $expressive-heading-04: (
@@ -356,14 +373,15 @@ $tokens: (
 
   heading-01: $heading-01,
   heading-02: $heading-02,
-  heading-03: $heading-03,
 
   // Product layout, fixed
+  productive-heading-03: $productive-heading-03,
   productive-heading-04: $productive-heading-04,
   productive-heading-05: $productive-heading-05,
 
   // Editorial layout, fluid
   expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-03: $expressive-heading-03,
   expressive-heading-04: $expressive-heading-04,
   expressive-heading-05: $expressive-heading-05,
 

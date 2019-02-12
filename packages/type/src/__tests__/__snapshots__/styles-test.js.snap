@@ -279,6 +279,33 @@ letter-spacing: 0;
 -@media- -(min--width-:- -9-9rem-): [object Object];"
 `;
 
+exports[`styles expressiveHeading03 should be printable 1`] = `
+Object {
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(1.25rem + 0.25 * ((100vw - 82rem) / 17))",
+    "lineHeight": "125%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "1.5rem",
+  },
+  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+  "fontSize": "calc(1.25rem + 0 * ((100vw - 20rem) / 62))",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "130%",
+}
+`;
+
+exports[`styles expressiveHeading03 should be printable 2`] = `
+"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 62));
+font-weight: 400;
+line-height: 130%;
+letter-spacing: 0;
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
 exports[`styles expressiveHeading04 should be printable 1`] = `
 Object {
   "@media (min-width: 82rem)": Object {
@@ -420,24 +447,6 @@ line-height: 1.375rem;
 letter-spacing: 0;"
 `;
 
-exports[`styles heading03 should be printable 1`] = `
-Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
-  "fontSize": "1.25rem",
-  "fontWeight": 400,
-  "letterSpacing": 0,
-  "lineHeight": "1.625rem",
-}
-`;
-
-exports[`styles heading03 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1.25rem;
-font-weight: 400;
-line-height: 1.625rem;
-letter-spacing: 0;"
-`;
-
 exports[`styles helperText01 should be printable 1`] = `
 Object {
   "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
@@ -472,6 +481,24 @@ font-size: 0.75rem;
 font-weight: 400;
 line-height: 1rem;
 letter-spacing: 0.32px;"
+`;
+
+exports[`styles productiveHeading03 should be printable 1`] = `
+Object {
+  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+  "fontSize": "1.25rem",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "1.625rem",
+}
+`;
+
+exports[`styles productiveHeading03 should be printable 2`] = `
+"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+font-size: 1.25rem;
+font-weight: 400;
+line-height: 1.625rem;
+letter-spacing: 0;"
 `;
 
 exports[`styles productiveHeading04 should be printable 1`] = `

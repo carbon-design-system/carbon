@@ -28,25 +28,6 @@
 }
 
 //------------------------------------------------------------------------------
-// Spacing
-//------------------------------------------------------------------------------
-.type-margin-01 {
-  @include carbon--type-spacing(margin-01);
-}
-
-.type-margin-02 {
-  @include carbon--type-spacing(margin-02);
-}
-
-.type-margin-03 {
-  @include carbon--type-spacing(margin-03);
-}
-
-.type-layout-01 {
-  @include carbon--type-spacing(layout-01, top);
-}
-
-//------------------------------------------------------------------------------
 // Demo-specific
 //------------------------------------------------------------------------------
 .samples {
