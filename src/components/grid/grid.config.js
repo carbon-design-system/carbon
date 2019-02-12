@@ -11,6 +11,7 @@ const { prefix } = require('../../globals/js/settings');
 const featureFlags = require('../../globals/js/feature-flags');
 
 module.exports = {
+  preview: 'grid-preview',
   meta: {
     useIframe: true,
   },

@@ -32,8 +32,8 @@ describe('Test text input', () => {
         selectorPasswordField: `.bx--text-input[data-toggle-password-visibility]`,
         selectorPasswordVisibilityButton: `.bx--text-input--password__visibility`,
         passwordIsVisible: `bx--text-input--password-visible`,
-        svgIconVisibilityOn: 'svg.icon--visibility-on',
-        svgIconVisibilityOff: 'svg.icon--visibility-off',
+        svgIconVisibilityOn: 'svg.bx--icon--visibility-on',
+        svgIconVisibilityOff: 'svg.bx--icon--visibility-off',
       });
     });
 
