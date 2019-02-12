@@ -167,19 +167,21 @@
 //--------------------------------------------------------------------------
 // Custom styling for the grid demo
 @if feature-flag-enabled('grid') {
-  .outside {
-    background-color: #dbeaff;
-    outline: 1px solid #97c1ff;
-    height: 80px;
-  }
-
-  .inside {
-    background-color: #edf4ff;
-    height: 100%;
-  }
-
-  [class*='col'] {
-    outline: 1px dashed #97c1ff;
+  .demo--container--grid {
+    .outside {
+      background-color: #dbeaff;
+      outline: 1px solid #97c1ff;
+      height: 80px;
+    }
+  
+    .inside {
+      background-color: #edf4ff;
+      height: 100%;
+    }
+  
+    [class*='col'] {
+      outline: 1px dashed #97c1ff;
+    }
   }
 
   .#{$prefix}--grid {

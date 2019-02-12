@@ -97,7 +97,7 @@ A user with a screen magnifier views web content on a component by component bas
 
 ### How to test
 
-Keyboard accessibility is generally more familiar to developers than magnification tools, but Take this opportunity to familiarize yourself with macOS Zoom Windows Magnifier, or your OS's native low vision accessibility tools as they are relied on by millions of people with temporary or permanent vision impairment every day.
+Keyboard accessibility is generally more familiar to developers than magnification tools, but take this opportunity to familiarize yourself with macOS Zoom Windows Magnifier, or your OS's native low vision accessibility tools as they are relied on by millions of people with temporary or permanent vision impairment every day.
 
 Simply _use_ each component in the manner it was intended while zoomed in to 2x, 4x, and finally 8x magnification while taking into consideration the points mentioned above. Along with the three points mentioned above keep in mind more broad accessibility rules that are in question given this new context.
 
