@@ -21,9 +21,9 @@ $ibm-colors__teal--50;
   color: $ibm-colors__teal--50;
   `,
   `
-$ibm-colors__blue-50;
-$ibm-colors__teal-50;
-  color: $ibm-colors__blue-50;
-  color: $ibm-colors__teal-50;
+$carbon--blue-50;
+$carbon--teal-50;
+  color: $carbon--blue-50;
+  color: $carbon--teal-50;
   `
 );

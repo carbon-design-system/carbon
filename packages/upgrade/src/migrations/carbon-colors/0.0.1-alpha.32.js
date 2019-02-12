@@ -20,11 +20,11 @@ module.exports = {
       async migrate(options) {
         const changes = [
           {
-            from: /(\$ibm-colors__[a-z]+)(--)([\d]+)/gm,
+            from: /\$ibm-colors__([a-z]+)(--)([\d]+)/gm,
             // Capture group $1 refers to $ibm-colors__abcd
             // $2 refers to double dash (--)
             // $3 is the grade at the end
-            to: '$1-$3',
+            to: '$carbon--$1-$3',
           },
         ];
 
