@@ -96,8 +96,8 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
       selectorPasswordField: `.${prefix}--text-input[data-toggle-password-visibility]`,
       selectorPasswordVisibilityButton: `.${prefix}--text-input--password__visibility`,
       passwordIsVisible: `${prefix}--text-input--password-visible`,
-      svgIconVisibilityOn: 'svg.icon--visibility-on',
-      svgIconVisibilityOff: 'svg.icon--visibility-off',
+      svgIconVisibilityOn: `svg.${prefix}--icon--visibility-on`,
+      svgIconVisibilityOff: `svg.${prefix}--icon--visibility-off`,
     };
   }
 

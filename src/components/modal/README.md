@@ -4,9 +4,9 @@
 
 Use these modifiers with `.bx--modal` class.
 
-| Name               | Description                               |
-| ------------------ | ----------------------------------------- |
-| .bx--modal--danger | Selector for applying danger modal styles |
+| Name                 | Description                               |
+| -------------------- | ----------------------------------------- |
+| `.bx--modal--danger` | Selector for applying danger modal styles |
 
 ### JavaScript
 
@@ -41,11 +41,11 @@ Modal.create(document.getElementById('my-modal'));
 
 #### Public methods
 
-| Name    | Params | Description          |
-| ------- | ------ | -------------------- |
-| release |        | Deletes the instance |
-| show    |        | Show the modal       |
-| hide    |        | Hide the modal       |
+| Name      | Params | Description          |
+| --------- | ------ | -------------------- |
+| `release` |        | Deletes the instance |
+| `show`    |        | Show the modal       |
+| `hide`    |        | Hide the modal       |
 
 ##### Example - Showing modal
 
@@ -57,14 +57,14 @@ modalInstance.show();
 
 #### Options
 
-| Option               | Default selector             | Description                                                                                                                          |
-| -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| selectorInit         | '[data-modal]'               | The css selector for root modal component                                                                                            |
-| selectorModalClose   | '[data-modal-close]'         | The selector to find elements that close the modal                                                                                   |
-| selectorPrimaryFocus | '[data-modal-primary-focus]' | The CSS selector to determine the element to put focus when modal gets open                                                          |
-| classVisible         | 'is-visible'                 | Class to toggle visibility of modal                                                                                                  |
-| attribInitTarget     | 'data-modal-target'          | The attribute on the launching element to target the modal                                                                           |
-| initEventNames       | '['click']'                  | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists |
+| Option                 | Default selector             | Description                                                                                                                          |
+| ---------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `selectorInit`         | '[data-modal]'               | The css selector for root modal component                                                                                            |
+| `selectorModalClose`   | '[data-modal-close]'         | The selector to find elements that close the modal                                                                                   |
+| `selectorPrimaryFocus` | '[data-modal-primary-focus]' | The CSS selector to determine the element to put focus when modal gets open                                                          |
+| `classVisible`         | 'is-visible'                 | Class to toggle visibility of modal                                                                                                  |
+| `attribInitTarget`     | 'data-modal-target'          | The attribute on the launching element to target the modal                                                                           |
+| `initEventNames`       | '['click']'                  | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists |
 
 ##### Example - Putting focus on text box when modal gets open
 
@@ -100,12 +100,12 @@ modalInstance.show();
 
 #### Events
 
-| Event option      | Event name          |
-| ----------------- | ------------------- |
-| eventBeforeShown  | 'modal-beingshown'  |
-| eventAfterShown   | 'modal-shown'       |
-| eventBeforeHidden | 'modal-beinghidden' |
-| eventAfterHidden  | 'modal-hidden'      |
+| Event option        | Event name          |
+| ------------------- | ------------------- |
+| `eventBeforeShown`  | 'modal-beingshown'  |
+| `eventAfterShown`   | 'modal-shown'       |
+| `eventBeforeHidden` | 'modal-beinghidden' |
+| `eventAfterHidden`  | 'modal-hidden'      |
 
 ##### Example - Preventing modals from being closed in a certain condition
 

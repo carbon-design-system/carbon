@@ -4,11 +4,11 @@
 
 Use these modifiers with `.bx--progress` class.
 
-| Selector                       | Description                                    |
-| ------------------------------ | ---------------------------------------------- |
-| .bx--progress-step--current    | Applies styles for the current progress-step   |
-| .bx--progress-step--incomplete | Applies styles for an incomplete progress-step |
-| .bx--progress-step--complete   | Applies styles for a complete progress-step    |
+| Selector                         | Description                                    |
+| -------------------------------- | ---------------------------------------------- |
+| `.bx--progress-step--current`    | Applies styles for the current progress-step   |
+| `.bx--progress-step--incomplete` | Applies styles for an incomplete progress-step |
+| `.bx--progress-step--complete`   | Applies styles for a complete progress-step    |
 
 ### Javascript
 
@@ -35,11 +35,11 @@ ProgressIndicator.create(document.getElementById('my-progress'));
 
 #### Public Methods
 
-| Name       | Params                   | Description                                                                                                                                                                                                                                                    |
-| ---------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| getSteps   |                          | Returns Array of Objects with `element` and `order` key/value pairs. The `element` key contains a step element. The `order` key is what order the step element is, order starts counting from 1 (the first step element) to whatever the last step element is. |
-| getCurrent |                          | Returns an Object with data of the current step (`element` and `order` key/value pairs)                                                                                                                                                                        |
-| setCurrent | newCurrentStep: `Number` | Changes the current step with the given `index` number. (ex. `setCurrent(0)` sets the first step as the current step)                                                                                                                                          |
+| Name         | Params                     | Description                                                                                                                                                                                                                                                    |
+| ------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `getSteps`   |                            | Returns Array of Objects with `element` and `order` key/value pairs. The `element` key contains a step element. The `order` key is what order the step element is, order starts counting from 1 (the first step element) to whatever the last step element is. |
+| `getCurrent` |                            | Returns an Object with data of the current step (`element` and `order` key/value pairs)                                                                                                                                                                        |
+| `setCurrent` | `newCurrentStep`: `Number` | Changes the current step with the given `index` number. (ex. `setCurrent(0)` sets the first step as the current step)                                                                                                                                          |
 
 ##### Example - Changing the current step
 
