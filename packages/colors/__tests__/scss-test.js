@@ -52,57 +52,58 @@ async function testSassString(data) {
 }
 
 describe('colors.scss', () => {
-  it('should provide a map of color values', async () => {
+  it('should emit no side-effects if mixins are included', async () => {
     const [calls] = await testSassString(`
-@import './colors.scss';
+@import './mixins.scss';
 
-$map: test($ibm-colors);
-$swatch: test(map-get($ibm-colors, 'black'));
-$value: test(map-get(map-get($ibm-colors, 'black'), 100));
-$null: test(map-get($ibm-colors, black));
+$test: test(mixin-exists(carbon--colors));
+$test: test(global-variable-exists(carbon--blue-50));
 `);
 
-    expect(calls[0]).toBeInstanceOf(types.Map);
-    expect(calls[1]).toBeInstanceOf(types.Map);
-    expect(calls[2]).toBeInstanceOf(types.Color);
-    expect(calls[3]).toBeInstanceOf(types.Null);
+    expect(calls[0].getValue()).toBe(true);
+    expect(calls[1].getValue()).toBe(false);
   });
 
-  it('should provide variables for each color value', async () => {
+  it('should include color variables as globals if the mixin is called', async () => {
+    const [calls] = await testSassString(`
+@import './mixins.scss';
+
+@include carbon--colors();
+$test: test(variable-exists(carbon--blue-50));
+$test: test(global-variable-exists(carbon--blue-50));
+`);
+    expect(calls[0].getValue()).toBe(true);
+    expect(calls[1].getValue()).toBe(true);
+  });
+
+  it('should include color variables in the default entrypoint', async () => {
     const [calls] = await testSassString(`
 @import './colors.scss';
 
-@each $swatch, $values in $ibm-colors {
-  @each $grade, $value in $values {
-    $test: test(global-variable-exists(ibm-colors__#{$swatch}-#{$grade}));
-  }
-}`);
-
-    for (const call of calls) {
-      expect(call).toBeInstanceOf(types.Boolean);
-      expect(call.getValue()).toBe(true);
-    }
+$test: test(mixin-exists(carbon--colors));
+$test: test(variable-exists(carbon--blue-50));
+$test: test(global-variable-exists(carbon--blue-50));
+`);
+    expect(calls[0].getValue()).toBe(true);
+    expect(calls[1].getValue()).toBe(true);
+    expect(calls[2].getValue()).toBe(true);
   });
 
-  it('should provide a fallback ibm-color-map variable', async () => {
-    const [calls] = await testSassString(`
+  describe('deprecated', () => {
+    it('should provide a map of color values', async () => {
+      const [calls] = await testSassString(`
 @import './colors.scss';
 
 $map: test($ibm-color-map);
+$swatch: test(map-get($ibm-color-map, 'black'));
+$value: test(map-get(map-get($ibm-color-map, 'black'), 100));
+$null: test(map-get($ibm-color-map, black));
 `);
 
-    expect(calls[0]).toBeInstanceOf(types.Map);
-  });
-
-  it('should provide grades as a number from a map', async () => {
-    const [calls] = await testSassString(`
-@import './colors.scss';
-
-$valid: test(map-get(map-get($ibm-color-map, 'gray'), 10));
-$invalid: test(map-get(map-get($ibm-color-map, 'gray'), '10'));
-`);
-
-    expect(calls[0]).toBeInstanceOf(types.Color);
-    expect(calls[1]).toBeInstanceOf(types.Null);
+      expect(calls[0]).toBeInstanceOf(types.Map);
+      expect(calls[1]).toBeInstanceOf(types.Map);
+      expect(calls[2]).toBeInstanceOf(types.Color);
+      expect(calls[3]).toBeInstanceOf(types.Null);
+    });
   });
 });
