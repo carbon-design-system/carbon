@@ -309,8 +309,8 @@
     height: rem(40px);
     padding-top: rem(12px);
     padding-bottom: rem(12px);
-    padding-left: rem(15px);
-    padding-right: $spacing-2xl;
+    padding-left: 1rem;
+    padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
