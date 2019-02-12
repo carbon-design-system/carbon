@@ -4,9 +4,9 @@
 
 Use these modifiers with `.bx--toggle` class.
 
-| Selector           | Description                               |
-| ------------------ | ----------------------------------------- |
-| .bx--toggle--small | Selector for applying small toggle styles |
+| Selector             | Description                               |
+| -------------------- | ----------------------------------------- |
+| `.bx--toggle--small` | Selector for applying small toggle styles |
 
 ### FAQ
 

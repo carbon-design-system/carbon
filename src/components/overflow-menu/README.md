@@ -4,10 +4,10 @@
 
 Use these modifiers with .bx--overflow-menu-options class.
 
-| Selector                         | Description                                 |
-| -------------------------------- | ------------------------------------------- |
-| .bx--overflow-menu--flip         | Reverse the direction of the overflow menu. |
-| .bx--overflow-menu-options--open | Displays the overflow menu options.         |
+| Selector                           | Description                                 |
+| ---------------------------------- | ------------------------------------------- |
+| `.bx--overflow-menu--flip`         | Reverse the direction of the overflow menu. |
+| `.bx--overflow-menu-options--open` | Displays the overflow menu options.         |
 
 ### JavaScript
 
@@ -34,10 +34,10 @@ OverflowMenu.create(document.getElementById('my-overflow-menu'));
 
 #### Public Methods
 
-| Name                 | Params          | Description                                                        |
-| -------------------- | --------------- | ------------------------------------------------------------------ |
-| shouldStateBeChanged | state: `String` | Return true if the given state is different from the current state |
-| release              |                 | Deletes the instance and removes document event listeners          |
+| Name                   | Params            | Description                                                        |
+| ---------------------- | ----------------- | ------------------------------------------------------------------ |
+| `shouldStateBeChanged` | `state`: `String` | Return true if the given state is different from the current state |
+| `release`              |                   | Deletes the instance and removes document event listeners          |
 
 #### Options
 
