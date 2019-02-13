@@ -10,8 +10,8 @@
  * bootstrap:
  * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
  */
-@import '@carbon/layout/scss/breakpoint';
-@import '@carbon/layout/scss/utilities';
+@import '../layout/breakpoint';
+@import '../layout/utilities';
 
 /// Create the container for a grid. Will cause full-bleed for the grid unless
 /// max-width properties are added with `make-container-max-widths`
