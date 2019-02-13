@@ -29,7 +29,8 @@ export default class NavigationMenuPanel extends mixin(
   };
 
   /**
-   *
+   * Determine whether or not the state should change based on comparison with
+   * the current state
    * @param {string} state
    * @returns {boolean} true if given state is different from current state
    */
