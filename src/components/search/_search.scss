@@ -195,6 +195,10 @@
     transition: background-color $transition--base, outline $transition--base;
     border-bottom: 1px solid $ui-04;
 
+    &:hover {
+      background-color: $hover-ui;
+    }
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -280,6 +284,7 @@
     height: rem(40px);
     width: rem(40px);
     right: 0;
+    fill: $icon-01;
 
     &:hover {
       background-color: $hover-ui;
