@@ -287,6 +287,11 @@
     }
   }
 
+  .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
   .#{$prefix}--search--sm .#{$prefix}--search-close {
     height: rem(32px);
     width: rem(32px);
