@@ -299,6 +299,18 @@
 }
 
 @mixin snippet--x {
+  .#{$prefix} {
+    &--snippet {
+      &-btn--expand,
+      &-button,
+      &--inline {
+        &:active {
+          background-color: $copy-active;
+        }
+      }
+    }
+  }
+
   .#{$prefix}--snippet code {
     font-family: $font-family-mono;
   }
@@ -324,10 +336,6 @@
     &:focus {
       outline: none;
       border: 2px solid $interactive-01;
-    }
-
-    &:active {
-      background: $copy-active;
     }
   }
 
@@ -429,10 +437,6 @@
     background: $hover-ui;
   }
 
-  .#{$prefix}--snippet-button:active {
-    background: $copy-active;
-  }
-
   .#{$prefix}--btn--copy__feedback {
     @include font-family;
     z-index: z('overlay');
@@ -482,10 +486,6 @@
 
   .#{$prefix}--snippet-btn--expand:focus {
     @include focus-outline('outline');
-  }
-
-  .#{$prefix}--snippet-btn--expand:active {
-    background: $copy-active;
   }
 
   .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
