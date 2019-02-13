@@ -1,7 +1,3 @@
-const hasFocusout = 'onfocusout' in window;
-const focusinEventName = hasFocusout ? 'focusin' : 'focus';
-const focusoutEventName = hasFocusout ? 'focusout' : 'blur';
-
 /**
  * Differentiate between keyboard and mouse-triggered focusout/blur events
  * @param {Element} node  The element to attach event listeners to
@@ -10,6 +6,9 @@ const focusoutEventName = hasFocusout ? 'focusout' : 'blur';
  * @returns {Handle} The handle to release the attached event handler
  */
 export default function onFocusByKeyboard(node, name, callback) {
+  const hasFocusout = 'onfocusout' in window;
+  const focusinEventName = hasFocusout ? 'focusin' : 'focus';
+  const focusoutEventName = hasFocusout ? 'focusout' : 'blur';
   /**
    * Event types supported by this function
    * @type {Object<string, string>}
