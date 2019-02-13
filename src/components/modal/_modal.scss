@@ -166,7 +166,7 @@
     justify-content: center;
     content: '';
     opacity: 0;
-    background-color: rgba($ui-05, 0.7);
+    background-color: $overlay-01;
     transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
     visibility: hidden;
 
