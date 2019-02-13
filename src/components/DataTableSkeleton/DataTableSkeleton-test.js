@@ -13,11 +13,13 @@ describe('DataTableSkeleton', () => {
   describe('Renders as expected', () => {
     const rowCount = 20;
     const columnCount = 3;
+    const headers = ['Name', 'Protocol', 'Port'];
     const wrapper = shallow(
       <DataTableSkeleton
         compact
         rowCount={rowCount}
         columnCount={columnCount}
+        headers={headers}
       />
     );
 
@@ -32,6 +34,12 @@ describe('DataTableSkeleton', () => {
       expect(wrapper.find('tbody > tr > td').length).toEqual(
         rowCount * columnCount
       );
+    });
+
+    it('Has the correct headers', () => {
+      wrapper
+        .find('thead > tr > th')
+        .forEach((header, index) => expect(header.text()).toBe(headers[index]));
     });
   });
 });
