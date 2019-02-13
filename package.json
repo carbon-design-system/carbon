@@ -65,6 +65,7 @@
     "browser-sync": "^2.26.3",
     "carbon-addons-cloud": "^1.8.0",
     "carbon-components-react": "^5.8.0",
+    "change-case": "^3.1.0",
     "chokidar": "^2.0.0",
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
