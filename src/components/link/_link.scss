@@ -54,28 +54,24 @@
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-short-01');
-
     color: $interactive-01;
-
-    // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
-    // effect.
     text-decoration: none;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $interactive-01;
       box-shadow: 0 1px currentColor;
     }
 
     &:active,
     &:active:visited {
-      color: $text-01;
+      color: $link-visited;
       box-shadow: 0 1px currentColor;
     }
 
     &:focus {
-      outline: none;
-      box-shadow: 0 3px currentColor;
+      color: $interactive-01;
+      outline: 3px solid currentColor;
+      outline-offset: 2px;
     }
 
     &[aria-disabled='true'][tabindex='-1'] {
@@ -87,7 +83,7 @@
     }
 
     &:visited {
-      color: $interactive-01;
+      color: $link-visited;
     }
   }
 }
