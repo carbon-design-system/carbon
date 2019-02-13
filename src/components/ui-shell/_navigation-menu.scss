@@ -11,7 +11,6 @@
 @import 'functions';
 
 @mixin carbon-navigation {
-
   //----------------------------------------------------------------------------
   // Navigation
   //----------------------------------------------------------------------------
@@ -20,11 +19,11 @@
     top: mini-units(6);
     bottom: 0;
     left: 0;
-    background-color: $ibm-colors__gray-90;
+    background-color: $ibm-color__gray-90;
     width: mini-units(32);
     z-index: z('dropdown');
     box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
-    color: $ibm-colors__gray-10;
+    color: $ibm-color__gray-10;
   }
 
   .#{$prefix}--navigation--right {
@@ -33,7 +32,7 @@
   }
 
   .#{$prefix}--navigation svg {
-    fill: $ibm-colors__gray-10;
+    fill: $ibm-color__gray-10;
   }
 
   //----------------------------------------------------------------------------
@@ -43,7 +42,7 @@
     display: block;
     content: '';
     height: 1px;
-    background-color: $ibm-colors__gray-80;
+    background-color: $ibm-color__gray-80;
     margin: 0 mini-units(2);
   }
 
@@ -56,8 +55,8 @@
     align-items: center;
   }
 
-  .#{$prefix}--navigation-item--active>a.#{$prefix}--navigation-link {
-    color: $ibm-colors__white;
+  .#{$prefix}--navigation-item--active > a.#{$prefix}--navigation-link {
+    color: $ibm-color__white-0;
     font-weight: 600;
   }
 
@@ -69,7 +68,7 @@
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: $ibm-colors__blue-60;
+    background-color: $ibm-color__blue-60;
   }
 
   //----------------------------------------------------------------------------
@@ -78,7 +77,7 @@
   a.#{$prefix}--navigation-link {
     display: flex;
     align-items: center;
-    color: $ibm-colors__gray-10;
+    color: $ibm-color__gray-10;
     text-decoration: none;
     font-size: rem(14px);
     font-weight: 400;
@@ -89,15 +88,15 @@
 
   a.#{$prefix}--navigation-link:hover {
     background-color: #333333;
-    color: $ibm-colors__white;
+    color: $ibm-color__white-0;
   }
 
   a.#{$prefix}--navigation-link:focus {
-    outline: rem(3px) solid $ibm-colors__blue-60;
+    outline: rem(3px) solid $ibm-color__blue-60;
     outline-offset: rem(-3px);
   }
 
-  .#{$prefix}--navigation-item--icon>a.#{$prefix}--navigation-link {
+  .#{$prefix}--navigation-item--icon > a.#{$prefix}--navigation-link {
     padding-left: 0;
   }
 
@@ -120,7 +119,7 @@
   }
 
   .#{$prefix}--navigation__category-toggle:focus {
-    outline: rem(3px) solid $ibm-colors__blue-60;
+    outline: rem(3px) solid $ibm-color__blue-60;
     outline-offset: rem(-3px);
   }
 
@@ -130,7 +129,7 @@
     justify-content: space-between;
     padding-right: mini-units(2);
     width: 100%;
-    color: $ibm-colors__gray-10;
+    color: $ibm-color__gray-10;
     font-size: rem(14px);
     font-weight: 400;
     min-height: mini-units(5);
@@ -146,7 +145,7 @@
     visibility: hidden;
   }
 
-  .#{$prefix}--navigation__category-item>a.#{$prefix}--navigation-link {
+  .#{$prefix}--navigation__category-item > a.#{$prefix}--navigation-link {
     display: flex;
     align-items: center;
     min-height: mini-units(4);
@@ -157,7 +156,7 @@
     position: relative;
   }
 
-  .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-item>a.#{$prefix}--navigation-link {
+  .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-item > a.#{$prefix}--navigation-link {
     padding-left: mini-units(7);
   }
 
@@ -169,19 +168,19 @@
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: $ibm-colors__blue-60;
+    background-color: $ibm-color__blue-60;
   }
 
-  .#{$prefix}--navigation__category-item--active>a.#{$prefix}--navigation-link {
+  .#{$prefix}--navigation__category-item--active > a.#{$prefix}--navigation-link {
     font-weight: 600;
-    color: $ibm-colors__white;
+    color: $ibm-color__white-0;
   }
 
   .#{$prefix}--navigation__category--expanded .#{$prefix}--navigation__category-title {
     font-weight: 600;
   }
 
-  .#{$prefix}--navigation__category--expanded .#{$prefix}--navigation__category-title>svg {
+  .#{$prefix}--navigation__category--expanded .#{$prefix}--navigation__category-title > svg {
     transform: rotate(180deg);
   }
 
