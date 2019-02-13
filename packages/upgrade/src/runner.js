@@ -28,7 +28,7 @@ async function run(packageName, from, to, options) {
     return versionMigration.version === to;
   });
   const migration = migrationsForVersion.from.find(migration => {
-    return semver.satisfies(from, migration.version);
+    return semver.intersects(migration.version, from);
   });
 
   if (!migration) {
@@ -96,6 +96,7 @@ async function runInDirectory(options) {
       "Yikes! We're sorry, but there does not seem to be a package in your " +
         '`package.json` file that we can migrate.'
     );
+    process.exit(1);
   }
 
   const questions = packageDependencies.map(dependency => {
@@ -107,7 +108,7 @@ async function runInDirectory(options) {
       message: `Choose which version you would like to migrate to for ${name}`,
       choices: [...supportedVersions]
         .filter(supportedVersion => {
-          return semver.gte(supportedVersion.version, version);
+          return semver.satisfies(supportedVersion.version, version);
         })
         .map(supportedVersion => ({
           name: supportedVersion.version,
