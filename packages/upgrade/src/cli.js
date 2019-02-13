@@ -29,8 +29,10 @@ async function main({ argv, cwd }) {
     })
     .option('ignore', {
       alias: 'i',
-      describe: 'provide a glob pattern for directories you would like ignored',
+      describe:
+        'provide a list of glob pattern for directories you would like ignored',
       default: '',
+      array: true,
     });
 
   cli
