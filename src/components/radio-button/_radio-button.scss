@@ -93,6 +93,19 @@
     margin-top: $spacing-xs;
   }
 
+  // vertical radio button
+  .#{$prefix}--radio-button-group--vertical {
+    flex-direction: column;
+
+    .#{$prefix}--radio-button__label {
+      margin-right: 0;
+    }
+
+    .#{$prefix}--radio-button__label:not(:last-of-type) {
+      margin-bottom: $spacing-xs;
+    }
+  }
+
   .#{$prefix}--radio-button {
     @include hidden;
     visibility: unset;
