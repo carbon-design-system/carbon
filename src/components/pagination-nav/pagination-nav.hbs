@@ -12,11 +12,13 @@
         {{#unless elementAsAnchor}}
           <button
             class="{{@root.prefix}}--pagination-nav__page"
+            data-page-direction="previous"
             {{#if showPagePrevious.disabled}}disabled{{/if}}
           >
         {{else}}
           <a
             class="{{@root.prefix}}--pagination-nav__page{{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+            data-page-direction="previous"
             href="javascript:void(0)"
             {{#if showPagePrevious.disabled}}
               aria-disabled="true"
@@ -39,7 +41,7 @@
           <div class="{{@root.prefix}}--pagination-nav__select">
             <select
               class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--select"
-              id="select-id-pagination-nav-pages"
+              data-page-select
               aria-label="select page number"
               tabindex="0"
             >
@@ -60,13 +62,15 @@
           {{#unless @root.elementAsAnchor}}
             <button
               class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active{{/if}}"
+              data-page
               {{#if active}} disabled{{/if}}
             >
           {{else}}
             <a
-              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active{{/if}}"
+              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active  {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+              data-page
               href="javascript:void(0)"
-              {{#if disabled}}
+              {{#if active}}
                 aria-disabled="true"
                 tabindex="-1"
               {{/if}}
@@ -86,11 +90,13 @@
         {{#unless @root.elementAsAnchor}}
           <button
             class="{{@root.prefix}}--pagination-nav__page"
+            data-page-direction="next"
             {{#if showPageNext.disabled}}disabled{{/if}}
           >
         {{else}}
           <a
             class="{{@root.prefix}}--pagination-nav__page{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
+            data-page-direction="next"
             href="javascript:void(0)"
             {{#if showPageNext.disabled}}
               aria-disabled="true"

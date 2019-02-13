@@ -78,12 +78,9 @@
       color: $text-color-on-dark;
     }
 
-    &.#{$prefix}--pagination-nav__page--active {
-      pointer-events: none;
-    }
-
     .#{$prefix}--pagination-nav__icon {
       fill: currentColor;
+      pointer-events: none;
     }
   }
 
@@ -98,10 +95,6 @@
     padding: 0 0.46875rem;
     position: relative;
     z-index: 1;
-
-    &:focus {
-      color: $text-color;
-    }
 
     &:active {
       background-color: initial;
@@ -124,6 +117,10 @@
     position: absolute;
     top: calc(50% - #{$spacing-md/2});
     z-index: 0;
+
+    .#{$prefix}--pagination-nav__page--active + & {
+      display: none;
+    }
   }
 
   .#{$prefix}--pagination-nav__accessibility-label {
