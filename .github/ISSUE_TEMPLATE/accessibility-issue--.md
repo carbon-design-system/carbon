@@ -1,9 +1,9 @@
 ---
-name: "Bug Report \U0001F41B"
-about: Create a report to help us improve
+name: Accessibility Issue ♿
+about: Report an accessibility or usability issue
 title: ''
-labels: ''
-assignees: ''
+labels: 'type: a11y ♿'
+assignees: dakahn
 
 ---
 
@@ -13,19 +13,25 @@ assignees: ''
 
 -->
 
+## Environment
+
+> Operating system
+
+> Browser
+
+> Automated testing tool and ruleset
+
+> Assistive technology used to verify
+
 ## Detailed description
-
-> Describe in detail the issue you're having.
-
-> Is this issue related to a specific component?
-
-> What did you expect to happen? What happened instead? What would you like to see changed?
-
-> What browser are you working in?
 
 > What version of the Carbon Design System are you using?
 
-> What offering/product do you work on? Any pressing ship or release dates we should be aware of?
+> What did you expect to happen? 
+
+> What happened instead?
+
+> What WCAG 2.1 checkpoint does the issue violate?
 
 ## Steps to reproduce the issue
 
