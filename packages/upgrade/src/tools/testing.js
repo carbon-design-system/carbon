@@ -40,7 +40,10 @@ function defineInlineTest(
     });
     jest.mock('../reporter');
 
-    mockOptions = {};
+    mockOptions = {
+      dry: false,
+      ignore: [],
+    };
 
     const migrations = require(pathToMigrations);
 
