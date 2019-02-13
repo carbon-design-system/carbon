@@ -95,6 +95,7 @@ describe('ES modules', () => {
           .trim(),
         ''
       )
+      .replace(';window', '')
       .replace('!function(){"use strict"}();', '');
     expect(code).toBe('');
   });
