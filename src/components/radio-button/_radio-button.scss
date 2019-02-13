@@ -135,6 +135,10 @@
     }
   }
 
+  .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
+    border-color: transparent;
+  }
+
   // Disabled
 
   // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
