@@ -114,7 +114,7 @@ const classic = [
 ];
 
 describe('_theme.scss', () => {
-  test.each(classic)('$%s should be exported', async name => {
+  it.each(classic)('$%s should be exported', async name => {
     const { calls } = await renderSass(`
 @import './src/globals/scss/theme';
 
