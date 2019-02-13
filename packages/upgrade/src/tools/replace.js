@@ -18,7 +18,7 @@ async function replace(globs, changes, options) {
   const { cwd, dry, ignore } = options;
   const files = await glob(['**/*.scss'], {
     cwd,
-    ignore: ['node_modules', ignore].filter(Boolean),
+    ignore: ['node_modules', ...ignore].filter(Boolean),
   });
 
   return Promise.all(files.map(file => replaceInFile(file, changes, options)));
