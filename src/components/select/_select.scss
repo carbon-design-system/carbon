@@ -211,6 +211,7 @@
   }
 
   .#{$prefix}--select-input__wrapper {
+    position: relative;
     display: flex;
     align-items: center;
   }
@@ -316,16 +317,9 @@
   }
 
   .#{$prefix}--select--inline {
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-
-    // Targets IE10+ browsers: Display grid auto not supported
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -379,13 +373,8 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form-requirement {
-    grid-column-start: 2;
-
-    // Targets IE10+ browsers: Display grid auto not supported
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      position: absolute;
-      bottom: -1.5rem;
-    }
+    max-height: initial;
+    margin: 0 0 0 $spacing-xs;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
