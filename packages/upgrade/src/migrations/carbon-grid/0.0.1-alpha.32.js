@@ -19,7 +19,7 @@ module.exports = {
   version: TARGET_VERSION,
   from: [
     {
-      version: '<=0.0.1-alpha.30',
+      version: '<=0.0.1-alpha.31',
       async migrate(options) {
         const changes = [
           // Columns

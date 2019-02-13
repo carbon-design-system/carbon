@@ -19,14 +19,14 @@ module.exports = {
   version: TARGET_VERSION,
   from: [
     {
-      version: '<=0.0.1-alpha.30',
+      version: '<=0.0.1-alpha.31',
       async migrate(options) {
         const migrations = [
           ...colors.from,
           ...grid.from,
           ...layout.from,
           ...motion.from,
-        ].filter(({ version }) => version === '<=0.0.1-alpha.30');
+        ].filter(({ version }) => version === '<=0.0.1-alpha.31');
         await Promise.all(
           migrations.map(migration => migration.migrate(options))
         );
