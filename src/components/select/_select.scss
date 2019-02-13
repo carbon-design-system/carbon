@@ -265,7 +265,7 @@
     padding-right: rem(58px); // 1rem + chevron width + invalid icon width
 
     &:disabled {
-      padding-right: rem(74px); // 1rem + chevron width + invalid icon width + disabled icon width
+      padding-right: rem(82px); // 10px + chevron width + invalid icon width + disabled icon width
     }
   }
 
@@ -372,7 +372,17 @@
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
     top: 1.125rem;
-    right: $spacing-md;
+    right: $spacing-xs;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__disabled-icon,
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    right: rem(24px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid:disabled ~ .#{$prefix}--select__disabled-icon,
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__disabled-icon {
+    right: rem(48px);
   }
 
   .#{$prefix}--select--inline[data-invalid] {
