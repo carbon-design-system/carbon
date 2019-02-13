@@ -30,9 +30,12 @@ const props = {
     onClick: action('onClick'),
     onKeyDown: action('onKeyDown'),
     onSelectionChange: action('onSelectionChange'),
+    tabContentClassName: text(
+      'The className for the child `<TabContent>` components',
+      'tab-content'
+    ),
   }),
   tab: () => ({
-    className: 'another-class',
     href: text('The href for tab (href in <Tab>)', '#'),
     role: text('ARIA role (role in <Tab>)', 'presentation'),
     tabIndex: number('Tab index (tabIndex in <Tab>)', 0),

@@ -107,6 +107,18 @@ describe('Tabs', () => {
       expect(wrapper.find('TabContent').length).toEqual(2);
     });
 
+    it('allows for custom classNames on <TabContent>', () => {
+      const customTabContentClassWrapper = shallow(
+        <Tabs tabContentClassName="tab-content">
+          <Tab label="firstTab">content1</Tab>
+          <Tab label="lastTab">content2</Tab>
+        </Tabs>
+      );
+      expect(customTabContentClassWrapper.find('.tab-content').length).toEqual(
+        2
+      );
+    });
+
     it('renders hidden props with boolean value', () => {
       const hiddenProp = wrapper
         .find('TabContent')
