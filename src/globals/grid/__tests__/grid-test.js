@@ -7,106 +7,20 @@
  * @jest-environment node
  */
 
-const fs = require('fs');
-const path = require('path');
-const { render, types } = require('node-sass');
-
-function sassAsync(options) {
-  return new Promise((resolve, reject) => {
-    render(options, (error, result) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(result);
-    });
-  });
-}
-
-async function testSassString(data) {
-  const calls = [];
-  const result = await sassAsync({
-    data,
-    importer(url, prev, done) {
-      const baseDirectory = prev !== 'stdin' ? path.dirname(prev) : __dirname;
-      const partialFilepath = path.resolve(baseDirectory, path.dirname(url), `_${path.basename(url)}.scss`);
-      const filepath = path.resolve(baseDirectory, path.dirname(url), `${path.basename(url)}.scss`);
-
-      if (fs.existsSync(partialFilepath)) {
-        done({ file: partialFilepath });
-        return;
-      }
-
-      if (fs.existsSync(filepath)) {
-        done({ file: filepath });
-        return;
-      }
-
-      done();
-    },
-    functions: {
-      test(...args) {
-        // Remove the `done()` argument at the end
-        calls.push(args.slice(0, -1));
-        // return types.String('test');
-        return types.Null();
-      },
-    },
-  });
-
-  return [calls, result];
-}
-
-function convert(value) {
-  if (value instanceof types.Boolean || value instanceof types.String) {
-    return value.getValue();
-  }
-
-  if (value instanceof types.Number) {
-    return `${value.getValue()}${value.getUnit()}`;
-  }
-
-  if (value instanceof types.List) {
-    const length = value.getLength();
-    const list = [];
-
-    for (let i = 0; i < length; i++) {
-      list.push(convert(value.getValue(i)));
-    }
-
-    return list;
-  }
-
-  if (value instanceof types.Map) {
-    const length = value.getLength();
-    const map = {};
-
-    for (let i = 0; i < length; i++) {
-      const key = value.getKey(i).getValue();
-      map[key] = convert(value.getValue(i));
-    }
-
-    return map;
-  }
-
-  if (value instanceof types.Null) {
-    return null;
-  }
-
-  throw new Error('Unknown value type:' + value);
-}
+const { types } = require('node-sass');
+const { convert, renderSass } = require('../../../../tools/jest/scss');
 
 describe('_grid.scss', () => {
   describe('stable', () => {
     it('should export grid variables', async () => {
-      const [calls] = await testSassString(`
-@import '../grid';
+      const { calls } = await renderSass(`
+@import './src/globals/grid/grid';
 
 $variables: (
   'max-width': $max-width,
   'columns': $max-width,
   'grid-breakpoints': $grid-breakpoints,
-  'gutter-brekapoints': $gutter-breakpoints,
+  'gutter-breakpoints': $gutter-breakpoints,
   'grid-gutter-breakpoints': $grid-gutter-breakpoints,
 );
 
@@ -115,12 +29,13 @@ $variables: (
 }
 `);
 
-      const variables = calls.reduce((acc, [key, value]) => {
-        return {
+      const variables = calls.reduce(
+        (acc, [key, value]) => ({
           ...acc,
           [key.getValue()]: convert(value),
-        };
-      }, {});
+        }),
+        {}
+      );
 
       expect(variables).toMatchInlineSnapshot(`
 Object {
@@ -136,7 +51,7 @@ Object {
     "sm": "5%",
     "xs": "3%",
   },
-  "gutter-brekapoints": Object {
+  "gutter-breakpoints": Object {
     "sm": "10px",
     "xs": "5px",
   },
@@ -146,10 +61,10 @@ Object {
     });
 
     it('should support the grid mixin', async () => {
-      const [_, result] = await testSassString(`
+      const { result } = await renderSass(`
 $css--reset: false;
 $css--helpers: false;
-@import '../grid';
+@import './src/globals/grid/grid';
 
 @include grid();
 `);
@@ -158,15 +73,38 @@ $css--helpers: false;
     });
 
     it('should support the breakpoint function', async () => {
-      const [calls] = await testSassString(`
-@import '../grid';
+      const { calls, error, output } = await renderSass(`
+@import './src/globals/grid/grid';
 
 @each $key, $value in $grid-breakpoints {
   $t: test($key, breakpoint($key));
 }
-
 $t: test('unknown', breakpoint('unknown'));
 `);
+
+      // We want to check valid breakpoints up to the last call, which was
+      // unknown
+      for (let i = 0; i < calls.length - 1; i++) {
+        expect(calls[i][0]).toBeInstanceOf(types.String);
+        expect(calls[i][1]).toBeInstanceOf(types.Number);
+      }
+
+      // `breakpoint` is expected to warn on the unknown test case
+      expect(output.warn).toHaveBeenCalledTimes(1);
+
+      // This should fail because `breakpoint('unknown')` does not return a
+      // value
+      expect(error).toBeDefined();
+    });
+  });
+
+  describe('experimental', () => {
+    it('should generate grid code when the grid feature flag is on', async () => {
+      const { error, result } = await renderSass(`
+$feature-flags: ( grid: true );
+@import './src/globals/grid/grid';
+`);
+      expect(result.css.toString()).toMatchSnapshot();
     });
   });
 });
