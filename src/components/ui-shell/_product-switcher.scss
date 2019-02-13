@@ -29,12 +29,12 @@
     background-color: $shell-header-bg-02;
     height: 100%;
     overflow-x: hidden;
+    transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
   }
 
   .#{$prefix}--panel--expanded {
     box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
     transform: translate3d(0, 0, 0);
-    transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
   }
 
   //--------------------------------------------------------------------------
@@ -108,6 +108,7 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .#{$prefix}--product-list__item:hover {
@@ -144,6 +145,10 @@
     justify-content: center;
     align-items: center;
     width: mini-units(5);
+
+    &.#{$prefix}--overflow-menu--open {
+      display: flex;
+    }
   }
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu > svg {

@@ -252,6 +252,24 @@
     }
   }
 
+  .#{$prefix}--dropdown[data-invalid] {
+    @include focus-outline('invalid');
+
+    + .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--dropdown__invalid {
+    position: absolute;
+    top: 50%;
+    right: rem(34px);
+    fill: $support-01;
+    transform: translateY(-50%);
+  }
+
   .#{$prefix}--dropdown--open:focus {
     outline: 1px solid transparent;
     box-shadow: none;
@@ -286,6 +304,8 @@
   }
 
   .#{$prefix}--dropdown-text {
+    display: flex;
+    align-items: center;
     height: rem(40px);
     padding-top: rem(12px);
     padding-bottom: rem(12px);
