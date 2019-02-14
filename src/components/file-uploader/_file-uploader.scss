@@ -186,7 +186,12 @@
     margin-bottom: $spacing-2xs;
 
     .#{$prefix}--file-filename {
-      color: $caption-01;
+      // TODO: @include type-style('caption-01');
+      font-family: font-family('sans');
+      font-size: type-scale(1);
+      font-weight: font-weight('regular');
+      line-height: rem(16px);
+      letter-spacing: 0.32px;
     }
   }
 
