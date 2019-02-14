@@ -369,8 +369,8 @@
 
   .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before {
-      background-color: $ibm-color__gray-20; // TODO: Replace with role or add new color variable
-      border-color: $ibm-color__gray-20; // TODO: Replace with role or add new color variable
+      background-color: $ibm-colors__gray-20; // TODO: Replace with role or add new color variable
+      border-color: $ibm-colors__gray-20; // TODO: Replace with role or add new color variable
     }
 
     &:after {
