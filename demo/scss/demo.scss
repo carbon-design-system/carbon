@@ -182,6 +182,10 @@
     [class*='col'] {
       outline: 1px dashed #97c1ff;
     }
+
+    display: block;
+    padding: 0;
+    max-width: 100%;
   }
 
   .#{$prefix}--grid {
