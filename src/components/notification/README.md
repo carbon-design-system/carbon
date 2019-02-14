@@ -2,30 +2,30 @@
 
 #### Mixins
 
-| Name                       | Params          | Description                              |
-| -------------------------- | --------------- | ---------------------------------------- |
-| inline-notification--color | \$color: String | Applies given \$color to border and icon |
-| notification--color        | \$color: String | Applies given \$color to left border     |
+| Name                         | Params           | Description                               |
+| ---------------------------- | ---------------- | ----------------------------------------- |
+| `inline-notification--color` | `$color`: String | Applies given `$color` to border and icon |
+| `notification--color`        | `$color`: String | Applies given `$color` to left border     |
 
 #### Modifiers
 
 Use these modifiers with `.bx--inline-notification` class.
 
-| Selector                          | Description                            |
-| --------------------------------- | -------------------------------------- |
-| .bx--inline-notification--error   | Apply error color to border and icon   |
-| .bx--inline-notification--success | Apply success color to border and icon |
-| .bx--inline-notification--info    | Apply info color to border and icon    |
-| .bx--inline-notification--warning | Apply warning color to border and icon |
+| Selector                            | Description                            |
+| ----------------------------------- | -------------------------------------- |
+| `.bx--inline-notification--error`   | Apply error color to border and icon   |
+| `.bx--inline-notification--success` | Apply success color to border and icon |
+| `.bx--inline-notification--info`    | Apply info color to border and icon    |
+| `.bx--inline-notification--warning` | Apply warning color to border and icon |
 
 Use these modifiers with `.bx--toast-notification` class.
 
-| Selector                         | Description                        |
-| -------------------------------- | ---------------------------------- |
-| .bx--toast-notification--error   | Apply error color on left border   |
-| .bx--toast-notification--success | Apply success color on left border |
-| .bx--toast-notification--info    | Apply info color on left border    |
-| .bx--toast-notification--warning | Apply warning color on left border |
+| Selector                           | Description                        |
+| ---------------------------------- | ---------------------------------- |
+| `.bx--toast-notification--error`   | Apply error color on left border   |
+| `.bx--toast-notification--success` | Apply success color on left border |
+| `.bx--toast-notification--info`    | Apply info color on left border    |
+| `.bx--toast-notification--warning` | Apply warning color on left border |
 
 ### JavaScript
 
@@ -52,10 +52,10 @@ Notification.create(document.getElementById('my-notification'));
 
 #### Public Methods
 
-| Name    | Params | Description                                                                       |
-| ------- | ------ | --------------------------------------------------------------------------------- |
-| remove  |        | Removes the component, deletes the instance, and removes document event listeners |
-| release |        | Delete the instance                                                               |
+| Name      | Params | Description                                                                       |
+| --------- | ------ | --------------------------------------------------------------------------------- |
+| `remove`  |        | Removes the component, deletes the instance, and removes document event listeners |
+| `release` |        | Delete the instance                                                               |
 
 ##### Example - Removing a notification
 
@@ -67,12 +67,12 @@ notificationInstance.remove();
 
 #### Options
 
-| Option                        | Default Selector             | Description                                            |
-| ----------------------------- | ---------------------------- | ------------------------------------------------------ |
-| selectorInit                  | `[data-notification]`        | The selector to find instances of the component        |
-| selectorButton                | `[data-notification-btn]`    | The selector to find the close button in the component |
-| eventBeforeDeleteNotification | `notification-before-delete` | Event before deleting the notification                 |
-| eventAfterDeleteNotification  | `notification-after-delete`  | Event after deleting the notification                  |
+| Option                          | Default Selector             | Description                                            |
+| ------------------------------- | ---------------------------- | ------------------------------------------------------ |
+| `selectorInit`                  | `[data-notification]`        | The selector to find instances of the component        |
+| `selectorButton`                | `[data-notification-btn]`    | The selector to find the close button in the component |
+| `eventBeforeDeleteNotification` | `notification-before-delete` | Event before deleting the notification                 |
+| `eventAfterDeleteNotification`  | `notification-after-delete`  | Event after deleting the notification                  |
 
 ##### Example - Preventing a notification from being removed in a certain condition
 
