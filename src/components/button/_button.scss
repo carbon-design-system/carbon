@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/vars';
+@import '../../globals/scss/variables';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
@@ -182,7 +182,7 @@
     display: inline-block;
 
     &:disabled > .#{$prefix}--btn__icon {
-      fill: $ui-04;
+      fill: theme-token(ui-04);
     }
   }
 
@@ -197,31 +197,45 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interactive-01, transparent, $text-04, #0353e9, $text-04, $interactive-02);
+    @include button-theme--x(
+      theme-token(interactive-01),
+      transparent,
+      theme-token(text-04),
+      #0353e9,
+      theme-token(text-04),
+      theme-token(interactive-02)
+    );
   }
 
   .#{$prefix}--btn--secondary {
     @include button-theme--x(
       $ibm-colors__gray-80,
       $ibm-colors__gray-80,
-      $text-04,
+      theme-token(text-04),
       $ibm-colors__gray-70,
-      $text-04,
+      theme-token(text-04),
       $ibm-colors__gray-60
     );
 
     &:hover,
     &:focus {
-      color: $inverse-01;
+      color: theme-token(inverse-01);
     }
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
+    @include button-theme--x(
+      transparent,
+      theme-token(interactive-01),
+      theme-token(interactive-01),
+      #0353e9,
+      theme-token(interactive-01),
+      theme-token(interactive-02)
+    );
     position: relative;
 
     &:hover {
-      color: $inverse-01;
+      color: theme-token(inverse-01);
     }
 
     &:disabled,
@@ -236,7 +250,7 @@
     }
 
     &:hover > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
+      fill: theme-token(inverse-01);
     }
   }
 
@@ -244,9 +258,9 @@
     @include button-theme--x(
       transparent,
       transparent,
-      $interactive-03,
+      theme-token(interactive-03),
       $ibm-colors__gray-10,
-      $interactive-03,
+      theme-token(interactive-03),
       $ibm-colors__blue-70
     );
 
@@ -260,7 +274,7 @@
     }
 
     &:active {
-      background-color: $active-ui;
+      background-color: theme-token(active-ui);
     }
 
     .#{$prefix}--btn__icon {
@@ -281,24 +295,38 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red-80);
+    @include button-theme--x(
+      transparent,
+      theme-token(support-01),
+      theme-token(support-01),
+      theme-token(support-01),
+      theme-token(support-01),
+      $ibm-colors__red-80
+    );
 
     &:hover {
-      color: $inverse-01;
+      color: theme-token(inverse-01);
       border: $button-border-width solid transparent;
     }
 
     &:hover > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
+      fill: theme-token(inverse-01);
     }
   }
 
   .#{$prefix}--btn--danger--primary {
-    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red-80);
+    @include button-theme--x(
+      theme-token(support-01),
+      transparent,
+      theme-token(inverse-01),
+      #ba1b23,
+      theme-token(ui-01),
+      $ibm-colors__red-80
+    );
 
     &:hover:disabled,
     &:focus:disabled {
-      color: $ui-04;
+      color: theme-token(ui-04);
       border: $button-border-width solid $disabled;
     }
   }

@@ -10,7 +10,7 @@
 //-----------------------------
 
 @import '../../globals/scss/import-once';
-@import '../../globals/scss/vars';
+@import '../../globals/scss/variables';
 @import '../list-box/list-box';
 
 @include exports('multi-select') {

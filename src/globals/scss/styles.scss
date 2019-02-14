@@ -5,6 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// $token-theme: 'theme-custom';
+//
+// $custom-theme-tokens: (
+//   interactive-03: pink,
+// );
+
 //-------------------------
 // 🌍 Global
 //-------------------------
@@ -22,9 +28,8 @@ $css--use-experimental-grid: false !default;
 $css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
-@import 'vars';
+@import 'variables';
 @import 'colors';
-@import 'theme';
 @import 'mixins';
 @import 'layout';
 @import 'layer';
@@ -111,6 +116,18 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 // 🔬 Experimental
 //-------------------------------------
 @import '../../components/ui-shell/ui-shell';
+
+//-------------------------
+// 🎨 Inline Themes
+//-------------------------
+
+// @if feature-flag-enabled('components-x') {
+//   .my-dark-theme {
+//     @include theme-g90() {
+//       @include button--x;
+//     }
+//   }
+// }
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)

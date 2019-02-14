@@ -3,8 +3,57 @@
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
-//
 
-@import 'helper-mixins';
-@import 'functions';
-@import 'theme-tokens';
+@import './vendor/@carbon/themes/scss/mixins';
+
+//-------------------------
+// 🎨 Themes
+//-------------------------
+
+// Name of the default theme, options are:
+// theme-white, theme-g10, theme-g90, theme-g100, theme-custom
+$token-theme: 'theme-white' !default;
+
+// Initialize our custom theme token map with default values
+$custom-theme-tokens: () !default;
+
+@mixin theme-custom {
+  // Initialize $carbon--theme-tokens with the white theme
+  @include theme-white;
+
+  // Warn invalid custom tokens
+  @each $key, $value in $custom-theme-tokens {
+    @if not map-get($carbon--theme-tokens, $key) {
+      @warn "Unknown theme token '#{$key}' is getting ignored.";
+    }
+  }
+
+  // Then merge in custom theme tokens
+  $carbon--theme-tokens: map-merge($carbon--theme-tokens, $custom-theme-tokens) !global;
+
+  @content;
+}
+
+@mixin use-token-theme() {
+  @warn $token-theme;
+  @if ($token-theme == 'theme-white') {
+    @include theme-white;
+  } @else if ($token-theme == 'theme-g10') {
+    @include theme-g10;
+  } @else if ($token-theme == 'theme-g90') {
+    @include theme-g90;
+  } @else if ($token-theme == 'theme-g100') {
+    @include theme-g100;
+  } @else if ($token-theme == 'theme-custom') {
+    @include theme-custom;
+  }
+}
+
+@function theme-token($key) {
+  @if map-get($carbon--theme-tokens, $key) {
+    @return map-get($carbon--theme-tokens, $key);
+  }
+
+  @warn "Unknown theme token '#{$key}'.";
+  @return null;
+}

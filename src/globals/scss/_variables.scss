@@ -5,14 +5,25 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'feature-flags';
-@import 'import-once';
-@import 'functions';
 @import 'colors';
 @import 'spacing';
-@import './vendor/@carbon/themes/scss/mixins';
+@import 'functions';
+@import 'feature-flags';
+@import 'theme';
 
-@mixin theme() {
+$prefix: 'bx' !default;
+
+// TODO: Remove `null`-initialization once `components-x`/`breaking-changes-x` feature flags are removed
+$carbon--ease-in: null;
+$carbon--ease-out: null;
+$carbon--standard-easing: null;
+$transition--base: null;
+$transition--expansion: null;
+$bx--ease-in: null;
+$bx--ease-out: null;
+$bx--standard-easing: null;
+
+@mixin variables() {
   // Color Theme Variables
   $brand-01: $color__blue-51 !default !global;
   $brand-02: $color__blue-40 !default !global;
@@ -48,12 +59,24 @@
   $hover-secondary: $brand-01 !default !global;
   $hover-row: rgba($brand-02, 0.1) !default !global;
 
+  // Easing
+  $carbon--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
+  $carbon--ease-out: cubic-bezier(
+    0,
+    0,
+    0.25,
+    1
+  ); // Used for adding elements to the screen or changing on-screen states at a users's input.
+  $carbon--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
+  $transition--base: 250ms;
+  $transition--expansion: 300ms;
+
   // Global
   $input-border: 1px solid transparent !default !global;
   $input-label-weight: 600 !default !global;
   $focus: $color__blue-20 !default !global;
 
-  // Button Theme Variables
+  // Button
   $button-font-weight: 600 !default !global;
   $button-font-size: 0.875rem !default !global;
   $button-border-radius: 0 !default !global;
@@ -102,7 +125,7 @@
   // Radio Button
   $radio-border-width: 2px !default !global;
 
-  // Structured Theme Variables
+  // Structured List
   $structured-list-padding: 2rem !default !global;
   $structured-list-text-transform: none !default !global;
 
@@ -110,14 +133,23 @@
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01
 }
 
-// Light Experimental Theme
-@mixin theme--experimental() {
-  // Can include various themes here from `@carbon/themes`, including: white,
-  // g10, g90, and g100
-  @include theme-white;
+@mixin variables--experimental() {
+  @include use-token-theme;
 
   $edited: true !default !global;
   $use-layer: true !default !global;
+
+  // Easing
+  $carbon--ease-in: cubic-bezier(0.2, 0, 1, 0.9); // Used primarily for removing elements from the screen.
+  $carbon--ease-out: cubic-bezier(
+    0,
+    0,
+    0.38,
+    0.9
+  ); // Used for adding elements to the screen or changing on-screen states at a users's input.
+  $carbon--standard-easing: cubic-bezier(0.2, 0.2, 0.38, 0.9); // Used for the majority of animations.
+  $transition--base: 100ms;
+  $transition--expansion: 150ms;
 
   // Global
   $input-border: 1px solid transparent !default !global;
@@ -133,7 +165,7 @@
   // Tooltip
   $tooltip-background-color: #3d3d3d !default !global;
 
-  // Button Theme Variables
+  // Button
   $button-font-weight: 400 !default !global;
   $button-font-size: 0.875rem !default !global;
   $button-border-radius: 0 !default !global;
@@ -199,11 +231,9 @@
   // Radio Button
   $radio-border-width: 1px !default !global;
 
-  // Structured Theme Variables
+  // Structured List
   $structured-list-padding: 2rem !default !global;
   $structured-list-text-transform: none !default !global;
-
-  // Slider
 
   //Tab
   $tab-underline-color: 2px solid $ibm-colors__gray-30 !default !global;
@@ -230,10 +260,15 @@
   $nav-08: $color__blue-51 !default !global;
 }
 
-@include exports('theme') {
-  @if feature-flag-enabled('components-x') {
-    @include theme--experimental;
-  } @else {
-    @include theme;
-  }
+@if feature-flag-enabled('components-x') {
+  @include variables--experimental;
+} @else {
+  @include variables;
+}
+
+@if not feature-flag-enabled('breaking-changes-x') {
+  // For back-ward compatibility
+  $bx--ease-in: $carbon--ease-in;
+  $bx--ease-out: $carbon--ease-out;
+  $bx--standard-easing: $carbon--standard-easing;
 }
