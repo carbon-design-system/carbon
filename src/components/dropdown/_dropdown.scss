@@ -276,10 +276,6 @@
 
   .#{$prefix}--dropdown--open {
     background-color: $hover-ui;
-
-    &:hover .#{$prefix}--dropdown-link {
-      border-bottom-color: transparent;
-    }
   }
 
   .#{$prefix}--dropdown--open:focus {
@@ -389,6 +385,7 @@
 
     &:hover {
       color: $text-01;
+      border-bottom-color: transparent;
     }
   }
 
