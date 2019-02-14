@@ -9,10 +9,12 @@
 
 const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = featureFlags;
 
 module.exports = {
   context: {
     featureFlags,
     prefix,
+    componentsX,
   },
 };
