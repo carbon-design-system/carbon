@@ -82,7 +82,7 @@ storiesOf('Tile', module)
     'Clickable',
     () => (
       <ClickableTile
-        href={text('Href for clicable UI (href)', 'javascript:void(0)')}>
+        href={text('Href for clickable UI (href)', 'javascript:void(0)')}>
         Clickable Tile
       </ClickableTile>
     ),
