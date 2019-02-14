@@ -655,7 +655,7 @@ export default class OverflowMenu extends Component {
           />
         );
       }
-      return <OverflowMenuVertical16 />;
+      return <OverflowMenuVertical16 {...iconProps} />;
     })();
 
     return (
