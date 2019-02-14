@@ -321,7 +321,7 @@
     height: rem(40px);
     padding-top: rem(12px);
     padding-bottom: rem(12px);
-    padding-left: 1rem;
+    padding-left: rem(16px);
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
     overflow: hidden;
@@ -375,7 +375,7 @@
     font-weight: normal;
     line-height: rem(16px);
     padding: rem(11px) 0;
-    margin: 0 1rem;
+    margin: 0 rem(16px);
     border: 1px solid transparent;
     border-bottom: 1px solid $ui-03;
     text-overflow: ellipsis;
@@ -384,7 +384,7 @@
     &:focus {
       @include focus-outline('outline');
       margin: 0;
-      padding: rem(11px) 1rem;
+      padding: rem(11px) rem(16px);
     }
 
     &:hover {
@@ -448,7 +448,7 @@
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text__inner {
-    margin-right: 1.25rem;
+    margin-right: rem(20px);
   }
 
   .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
