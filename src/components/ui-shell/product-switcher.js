@@ -21,16 +21,19 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     this.manage(on(element, 'keydown', this._handleKeyDown));
     this.manage(onFocusOutByKeyboard(element, 'blur', this._handleFocusOut));
   }
+
   /**
    * id of currently active trigger button
    * @type {string}
    */
   current = '';
+
   /**
    * A magic string indicting that no product switcher should be selected.
    * @type {string}
    */
   static SELECT_NONE /* #__PURE_CLASS_PROPERTY__ */ = '__carbon-product-switcher-launcher-NONE';
+
   /**
    * The list of the IDs of the trigger buttons that have been used.
    * @type {Set}

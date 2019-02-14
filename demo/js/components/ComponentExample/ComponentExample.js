@@ -7,7 +7,7 @@ import * as components from '../../../components';
 
 import CodeExample from '../CodeExample/CodeExample';
 
-const forEach = Array.prototype.forEach;
+const { forEach } = Array.prototype;
 
 /**
  * The UI to show live code as well as its source.

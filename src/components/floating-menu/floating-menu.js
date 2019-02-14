@@ -150,7 +150,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {Object} The menu position, with `top` and `left` properties.
    */
   _getPos() {
-    const element = this.element;
+    const { element } = this;
     const { refNode, offset, direction } = this.options;
 
     if (!refNode) {
@@ -175,7 +175,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     if (!this.options.debugStyle) {
       return;
     }
-    const element = this.element;
+    const { element } = this;
     const computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
     const styles = {
       position: 'absolute',
@@ -197,7 +197,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @private
    */
   _place() {
-    const element = this.element;
+    const { element } = this;
     const { left, top } = this._getPos();
     element.style.left = `${left}px`;
     element.style.top = `${top}px`;

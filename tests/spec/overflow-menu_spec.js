@@ -185,9 +185,7 @@ describe('Test Overflow menu', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       elements = [...document.querySelectorAll('.bx--overflow-menu')];
-      element1 = elements[0];
-      element2 = elements[1];
-      element3 = elements[2];
+      [element1, element2, element3] = elements;
       optionElements = elements.map(element => element.querySelector('.bx--overflow-menu-options'));
       new OverflowMenu(element1);
       new OverflowMenu(element2);
