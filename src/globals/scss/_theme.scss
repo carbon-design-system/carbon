@@ -35,7 +35,6 @@ $custom-theme-tokens: () !default;
 }
 
 @mixin use-token-theme() {
-  @warn $token-theme;
   @if ($token-theme == 'theme-white') {
     @include theme-white;
   } @else if ($token-theme == 'theme-g10') {

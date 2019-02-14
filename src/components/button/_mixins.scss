@@ -41,7 +41,7 @@
   }
 }
 
-@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
+@mixin button-variant($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
   background-color: $bg-color;
   border-width: $button-border-width;
   border-style: solid;
@@ -113,16 +113,9 @@
   }
 }
 
-@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
-  background-color: $bg-color;
+@mixin button-variant--x() {
   border-width: $button-border-width;
   border-style: solid;
-  border-color: $border-color;
-  color: $font-color;
-
-  &:hover {
-    background-color: $hover-bg-color;
-  }
 
   &::before,
   &::after {
@@ -163,6 +156,16 @@
     background: $ibm-colors__gray-30;
     border-color: $ibm-colors__gray-30;
     text-decoration: none;
+  }
+}
+
+@mixin button-variant-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+  background-color: $bg-color;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:hover {
+    background-color: $hover-bg-color;
   }
 
   &:active {

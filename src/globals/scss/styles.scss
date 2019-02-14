@@ -124,7 +124,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 // @if feature-flag-enabled('components-x') {
 //   .my-dark-theme {
 //     @include theme-g90() {
-//       @include button--x;
+//       @include button-theme--x;
 //     }
 //   }
 // }
