@@ -28,7 +28,10 @@ const directions = {
 
 const props = {
   withIcon: () => ({
-    clickToOpen: boolean('Click to open (clickToOpen)', false),
+    clickToOpen: boolean(
+      'Click to open (clickToOpen, using `false` here is deprecated)',
+      true
+    ),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),

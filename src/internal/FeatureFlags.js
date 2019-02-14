@@ -18,6 +18,11 @@
  */
 
 /**
+ * Breaking changes for next release.
+ */
+export const breakingChangesX = false;
+
+/**
  * Next gen of Carbon component design.
  */
 export const componentsX = false;
