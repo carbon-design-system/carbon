@@ -31,8 +31,10 @@ describe('Pagination Nav', () => {
       expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-pagination-nav]',
         selectorPageElement: '[data-page]',
+        selectorPageButton: '[data-button]',
         selectorPageDirection: '[data-page-direction]',
         selectorPageSelect: '[data-page-select]',
+        selectorPageActive: '[data-active="true"]',
         classActive: 'bx--pagination-nav__page--active',
         classDisabled: 'bx--pagination-nav__page--disabled',
       });
@@ -65,12 +67,12 @@ describe('Pagination Nav', () => {
     });
 
     it('should be called on page direction click', () => {
-      spyOn(instance, 'setActivePage');
+      spyOn(instance, 'clearActivePage');
       const event = new CustomEvent('click', { bubbles: true });
       const pageDirectionButton = element.querySelector(instance.options.selectorPageDirection);
       if (pageDirectionButton) {
         pageDirectionButton.dispatchEvent(event);
-        expect(instance.setActivePage).toHaveBeenCalled();
+        expect(instance.clearActivePage).toHaveBeenCalled();
       }
     });
 
@@ -80,7 +82,8 @@ describe('Pagination Nav', () => {
       const pageSelectMenu = element.querySelector(instance.options.selectorPageSelect);
       if (pageSelectMenu) {
         pageSelectMenu.dispatchEvent(event);
-        expect(instance.setActivePage).toHaveBeenCalled();
+        expect(instance.handleSelectChange).toHaveBeenCalled();
+        expect(instance.setPrevNextStates).toHaveBeenCalled();
         expect(pageSelectMenu.classList.contains(instance.options.classActive)).toBe(true);
       }
     });

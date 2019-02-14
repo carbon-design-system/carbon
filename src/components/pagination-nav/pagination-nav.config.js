@@ -74,23 +74,23 @@ module.exports = {
             select: [
               {
                 value: '',
-                label: '',
+                page: '',
               },
               {
                 value: '6',
-                label: '6',
+                page: '6',
               },
               {
                 value: '7',
-                label: '7',
+                page: '7',
               },
               {
                 value: '8',
-                label: '8',
+                page: '8',
               },
               {
                 value: '9',
-                label: '9',
+                page: '9',
               },
             ],
           },

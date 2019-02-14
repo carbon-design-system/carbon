@@ -439,7 +439,7 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5a6872",
+                  "fgColor": "#565656",
                   "fontSize": "10.5pt",
                   "fontWeight": "normal",
                   "missingData": "imgNode"
@@ -457,35 +457,11 @@
                 ]
               }
             ],
-            "html": "<select class=\"bx--pagination-nav__page bx--pagination-nav__page--select\" id=\"select-id-pagination-nav-pages\" aria-label=\"select page number\" tabindex=\"0\">",
+            "html": "<select class=\"bx--pagination-nav__page bx--pagination-nav__page--select\" data-page-select=\"\" aria-label=\"select page number\" tabindex=\"0\">",
             "impact": "serious",
             "none": [],
             "target": [
-              "#select-id-pagination-nav-pages"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#ffffff",
-                  "fontSize": "10.5pt",
-                  "fontWeight": "normal"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Unable to determine contrast ratio",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<a class=\"bx--pagination-nav__page bx--pagination-nav__page--active\" href=\"javascript:void(0)\">\n            <span class=\"bx--pagination-nav__accessibility-label\">page </span>1\n            </a>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              "html > body > div:nth-child(24) > nav > ul > li:nth-child(2) > a.bx--pagination-nav__page"
+              ".bx--pagination-nav__select > select.bx--pagination-nav__page.bx--pagination-nav__page--select"
             ]
           }
         ],
@@ -496,7 +472,7 @@
         ]
       }
     ],
-    "timestamp": 1550012723120,
+    "timestamp": 1550185926871,
     "url": "http://localhost:3000/component/pagination-nav/",
     "violations": [
       {
@@ -530,7 +506,7 @@
         ]
       }
     ],
-    "time": 260,
+    "time": 276,
     "status": 200
   }
 ]

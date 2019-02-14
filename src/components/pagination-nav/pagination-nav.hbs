@@ -50,9 +50,11 @@
                   value="{{value}}"
                   {{#unless value}}
                     hidden
+                  {{else}}
+                    data-page="{{page}}"
                   {{/unless}}
                 >
-                  {{label}}
+                  {{page}}
                 </option>
               {{/each}}
             </select>
@@ -62,15 +64,21 @@
           {{#unless @root.elementAsAnchor}}
             <button
               class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active{{/if}}"
-              data-page
-              {{#if active}} disabled{{/if}}
+              data-page="{{page}}"
+              data-button
+              {{#if active}}
+                data-active="true"
+                disabled
+              {{/if}}
             >
           {{else}}
             <a
               class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active  {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
-              data-page
+              data-page="{{page}}"
+              data-button
               href="javascript:void(0)"
               {{#if active}}
+                data-active="true"
                 aria-disabled="true"
                 tabindex="-1"
               {{/if}}

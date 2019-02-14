@@ -8,10 +8,11 @@
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class PaginationNav extends mixin(createComponent, InitComponentBySearch, handles) {
+class PaginationNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Pagination Nav component
    * @extends CreateComponent
@@ -21,99 +22,141 @@ class PaginationNav extends mixin(createComponent, InitComponentBySearch, handle
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', evt => this.handleClick(evt));
-    this.selectorPageElementArray = this.element.querySelectorAll(this.options.selectorPageElement);
-    this.totalPages = this.selectorPageElementArray.length;
-    this.currentIndex = 0;
-    this.selectorPageDirectionArray = this.element.querySelectorAll(this.options.selectorPageDirection);
+    this.manage(on(this.element, 'click', evt => this.handleClick(evt)));
+    this.activePageNumber = this.initActivePageNumber();
     this.selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
     if (this.selectorPageSelect) {
-      this.selectorPageSelect.addEventListener('change', evt => this.handleSelectChange(evt));
+      this.manage(on(this.selectorPageSelect, 'change', evt => this.handleSelectChange(evt)));
     }
   }
 
   /**
-   * Toggle active state on click
+   * Get active page number
    */
-  handleClick = evt => {
-    this.selectorPageElementArray.forEach((element, index) => {
-      if (element.classList.contains(this.options.classActive)) {
-        this.currentIndex = index;
-      }
-    });
-    if (evt.target.matches(this.options.selectorPageElement)) {
-      this.currentIndex = Array.prototype.indexOf.call(this.selectorPageElementArray, evt.target);
-      this.setActivePage();
+  initActivePageNumber = () => {
+    let pageNum;
+    const activePageElement = this.element.querySelector(this.options.selectorPageActive);
+    if (activePageElement) {
+      pageNum = Number(activePageElement.dataset.page);
     }
-    if (evt.target.matches(this.options.selectorPageDirection)) {
-      if (evt.target.dataset.pageDirection === 'previous') {
-        if (this.currentIndex === -1) {
-          this.currentIndex = this.totalPages - 1;
-        } else {
-          this.currentIndex -= 1;
-        }
-        this.setActivePage();
+    return pageNum;
+  };
+
+  /**
+   * Clear active page attributes
+   */
+  clearActivePage = evt => {
+    const selectorPageButtonArray = this.element.querySelectorAll(this.options.selectorPageButton);
+    selectorPageButtonArray.forEach(el => {
+      el.classList.remove(this.options.classActive, this.options.classDisabled);
+      el.disabled = false;
+      el.removeAttribute('data-active');
+      this.anchorAttributesHelper(el);
+    });
+    if (this.selectorPageSelect) {
+      const selectorPageSelectOptions = this.selectorPageSelect.options;
+      for (let i = 0; i < selectorPageSelectOptions.length; i++) {
+        selectorPageSelectOptions[i].removeAttribute('data-active');
       }
-      if (evt.target.dataset.pageDirection === 'next') {
-        if (this.currentIndex === -1) {
-          this.currentIndex = 0;
-        } else {
-          this.currentIndex += 1;
-        }
-        this.setActivePage();
+      if (!evt.target.matches(this.options.selectorPageSelect)) {
+        this.selectorPageSelect.classList.remove(this.options.classActive);
+        this.selectorPageSelect.value = '';
       }
     }
   };
 
   /**
-   * Set active state of page element
+   * Add active state on click
    */
-  setActivePage = () => {
-    const selectorPageTarget = this.selectorPageElementArray[this.currentIndex];
-    this.selectorPageElementArray.forEach(element => {
-      element.classList.remove(this.options.classActive, this.options.classDisabled);
-      element.disabled = false;
-    });
-    selectorPageTarget.classList.add(this.options.classActive, this.options.classDisabled);
-    selectorPageTarget.disabled = true;
-    if (this.selectorPageDirectionArray.length) {
-      if (this.currentIndex <= 0) {
-        this.selectorPageDirectionArray[0].disabled = true;
-        this.selectorPageDirectionArray[0].classList.add(this.options.classDisabled);
-        this.selectorPageDirectionArray[0].blur();
-      } else {
-        this.selectorPageDirectionArray[0].disabled = false;
-        this.selectorPageDirectionArray[0].classList.remove(this.options.classDisabled);
+  handleClick = evt => {
+    this.clearActivePage(evt);
+    const selectorPageElementArray = this.element.querySelectorAll(this.options.selectorPageElement);
+    if (evt.target.matches(this.options.selectorPageButton)) {
+      this.activePageNumber = Number(evt.target.dataset.page);
+    }
+    if (evt.target.matches(this.options.selectorPageDirection)) {
+      if (evt.target.dataset.pageDirection === 'previous') {
+        this.activePageNumber -= 1;
       }
-      if (this.currentIndex >= this.totalPages - 1) {
-        this.selectorPageDirectionArray[1].disabled = true;
-        this.selectorPageDirectionArray[1].classList.add(this.options.classDisabled);
-        this.selectorPageDirectionArray[1].blur();
-      } else {
-        this.selectorPageDirectionArray[1].disabled = false;
-        this.selectorPageDirectionArray[1].classList.remove(this.options.classDisabled);
+      if (evt.target.dataset.pageDirection === 'next') {
+        this.activePageNumber += 1;
       }
     }
-    if (this.selectorPageSelect) {
-      this.selectorPageSelect.classList.remove(this.options.classActive);
-      this.selectorPageSelect.value = '';
+    const selectorPageTarget = selectorPageElementArray[this.activePageNumber - 1];
+    selectorPageTarget.dataset.active = true;
+    if (selectorPageTarget.tagName === 'OPTION') {
+      this.selectorPageSelect.value = this.activePageNumber;
+      this.selectorPageSelect.classList.add(this.options.classActive);
+    } else {
+      selectorPageTarget.classList.add(this.options.classActive, this.options.classDisabled);
+      selectorPageTarget.disabled = true;
+      if (selectorPageTarget.tagName === 'A') {
+        selectorPageTarget.setAttribute('tabIndex', -1);
+        selectorPageTarget.setAttribute('aria-disabled', true);
+      }
     }
+    this.setPrevNextStates();
   };
 
   /**
    * Handle select menu on change
    */
   handleSelectChange = evt => {
-    this.currentIndex = -1;
-    this.selectorPageElementArray.forEach(element => {
-      element.classList.remove(this.options.classActive, this.options.classDisabled);
-      element.disabled = false;
-    });
-    this.selectorPageDirectionArray.forEach(element => {
-      element.classList.remove(this.options.classActive, this.options.classDisabled);
-      element.disabled = false;
-    });
+    this.clearActivePage(evt);
+    this.activePageNumber = Number(evt.target.value);
+    const selectorPageSelectOptions = this.selectorPageSelect.options;
+    selectorPageSelectOptions[selectorPageSelectOptions.selectedIndex].dataset.active = true;
     evt.target.classList.add(this.options.classActive);
+    this.setPrevNextStates();
+  };
+
+  /**
+   * Set Previous and Next button states
+   */
+  setPrevNextStates = () => {
+    const selectorPageElementArray = this.element.querySelectorAll(this.options.selectorPageElement);
+    const totalPages = selectorPageElementArray.length;
+    const selectorPageDirectionPrevious = this.element.querySelector('[data-page-direction="previous"]');
+    const selectorPageDirectionNext = this.element.querySelector('[data-page-direction="next"]');
+    if (selectorPageDirectionPrevious) {
+      if (this.activePageNumber <= 1) {
+        selectorPageDirectionPrevious.disabled = true;
+        selectorPageDirectionPrevious.classList.add(this.options.classDisabled);
+        selectorPageDirectionPrevious.blur();
+        this.anchorAttributesHelper(selectorPageDirectionPrevious, 'add');
+      } else {
+        selectorPageDirectionPrevious.disabled = false;
+        selectorPageDirectionPrevious.classList.remove(this.options.classDisabled);
+        this.anchorAttributesHelper(selectorPageDirectionPrevious);
+      }
+    }
+    if (selectorPageDirectionNext) {
+      if (this.activePageNumber >= totalPages) {
+        selectorPageDirectionNext.disabled = true;
+        selectorPageDirectionNext.classList.add(this.options.classDisabled);
+        selectorPageDirectionNext.blur();
+        this.anchorAttributesHelper(selectorPageDirectionNext, 'add');
+      } else {
+        selectorPageDirectionNext.disabled = false;
+        selectorPageDirectionNext.classList.remove(this.options.classDisabled);
+        this.anchorAttributesHelper(selectorPageDirectionNext);
+      }
+    }
+  };
+
+  /**
+   * Add or remove anchor specific element attributes
+   */
+  anchorAttributesHelper = (el, action = 'remove') => {
+    if (el.tagName === 'A') {
+      if (action === 'remove') {
+        el.removeAttribute('tabindex');
+        el.removeAttribute('aria-disabled');
+      } else {
+        el.setAttribute('tabIndex', -1);
+        el.setAttribute('aria-disabled', true);
+      }
+    }
   };
 
   /**
@@ -132,8 +175,10 @@ class PaginationNav extends mixin(createComponent, InitComponentBySearch, handle
    * @type {Object}
    * @property {string} selectorInit The data attribute to find pagination nav.
    * @property {string} selectorPageElement The data attribute to find page element.
+   * @property {string} selectorPageButton The data attribute to find page interactive element.
    * @property {string} selectorPageDirection The data attribute to find page change element.
    * @property {string} selectorPageSelect The data attribute to find page select element.
+   * @property {string} selectorPageActive The data attribute to find active page element.
    * @property {string} [classActive] The CSS class for page's selected state.
    * @property {string} [classDisabled] The CSS class for page's disabled state.
    */
@@ -142,8 +187,10 @@ class PaginationNav extends mixin(createComponent, InitComponentBySearch, handle
     return {
       selectorInit: '[data-pagination-nav]',
       selectorPageElement: '[data-page]',
+      selectorPageButton: '[data-button]',
       selectorPageDirection: '[data-page-direction]',
       selectorPageSelect: '[data-page-select]',
+      selectorPageActive: '[data-active="true"]',
       classActive: `${prefix}--pagination-nav__page--active`,
       classDisabled: `${prefix}--pagination-nav__page--disabled`,
     };
