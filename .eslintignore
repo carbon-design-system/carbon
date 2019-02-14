@@ -22,3 +22,6 @@ src/**/*.config.js
 
 # TODO: Use more granular ESLint configuration
 tests/es-test.js
+
+# TODO: update so that "jest": true has impact on "env" config
+**/__tests__/**
