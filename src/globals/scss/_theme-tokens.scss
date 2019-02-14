@@ -10,7 +10,7 @@
 @import 'functions';
 @import 'colors';
 @import 'spacing';
-@import './vendor/@carbon/themes/scss/mixins';
+@import './vendor/@carbon/elements/scss/themes/mixins';
 
 @mixin theme() {
   // Color Theme Variables
@@ -114,7 +114,7 @@
 @mixin theme--experimental() {
   // Can include various themes here from `@carbon/themes`, including: white,
   // g10, g90, and g100
-  @include theme-white;
+  @include carbon--theme-white();
 
   $edited: true !default !global;
   $use-layer: true !default !global;
@@ -124,10 +124,10 @@
   $input-label-weight: 400 !default !global;
   $disabled: $disabled-02 !default !global;
   $disabled-background-color: $disabled-01 !default !global;
-  $focus: $ibm-colors__blue-60 !default !global;
+  $focus: $ibm-color__blue-60 !default !global;
 
   // Link
-  $link-visited: $ibm-colors__purple-60 !default !global;
+  $link-visited: $ibm-color__purple-60 !default !global;
   $link-inverse-color: #6ea6ff !default !global;
 
   // Tooltip
@@ -144,7 +144,7 @@
   $button-border-width: 1px !default !global;
   $button-outline-width: 3px !default !global;
   $button-outline-offset: -5px !default !global;
-  $button-outline: 1px solid $ibm-colors__white !default !global;
+  $button-outline: 1px solid $ibm-color__white-0 !default !global;
 
   // Accordion (Reverse)
   $accordion-flex-direction: row-reverse !default !global;
@@ -175,17 +175,17 @@
   $data-table-row-height: 2rem !default !global;
 
   // Date Picker
-  $date-picker-in-range-background-color: $ibm-colors__blue-20 !default !global;
+  $date-picker-in-range-background-color: $ibm-color__blue-20 !default !global;
 
   // Modal
   $modal-border-top: $brand-01 4px solid !default !global;
   $modal-footer-background-color: $ui-03 !default !global;
 
   // Notification
-  $notification-info-background-color: $ibm-colors__blue-10 !default !global;
-  $notification-error-background-color: $ibm-colors__red-10 !default !global;
+  $notification-info-background-color: $ibm-color__blue-10 !default !global;
+  $notification-error-background-color: $ibm-color__red-10 !default !global;
   $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
-  $notification-success-background-color: $ibm-colors__green-10 !default !global;
+  $notification-success-background-color: $ibm-color__green-10 !default !global;
 
   // Progress Indicator
   $progress-indicator-bar-width: 1px inset transparent !default !global;
@@ -193,8 +193,8 @@
   $progress-indicator-line-offset: 0.625rem !default !global;
 
   //Code Snippet
-  $copy-active: $ibm-colors__gray-30 !default !global;
-  $copy-btn-feedback: $ibm-colors__gray-80 !default !global;
+  $copy-active: $ibm-color__gray-30 !default !global;
+  $copy-btn-feedback: $ibm-color__gray-80 !default !global;
 
   // Radio Button
   $radio-border-width: 1px !default !global;
@@ -206,13 +206,13 @@
   // Slider
 
   //Tab
-  $tab-underline-color: 2px solid $ibm-colors__gray-30 !default !global;
-  $tab-underline-color-hover: 2px solid $ibm-colors__gray-60 !default !global;
-  $tab-text-disabled: $ibm-colors__gray-30 !default !global;
-  $tab-underline-disabled: 2px solid $ibm-colors__gray-10 !default !global;
+  $tab-underline-color: 2px solid $ibm-color__gray-30 !default !global;
+  $tab-underline-color-hover: 2px solid $ibm-color__gray-60 !default !global;
+  $tab-text-disabled: $ibm-color__gray-30 !default !global;
+  $tab-underline-disabled: 2px solid $ibm-color__gray-10 !default !global;
 
   // Toggle
-  $toggle-background-color: $ibm-colors__green-50 !default !global;
+  $toggle-background-color: $ibm-color__green-50 !default !global;
 
   // Skeleton Loading
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental

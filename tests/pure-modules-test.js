@@ -28,6 +28,9 @@ const files = glob.sync('**/*.js', {
     '**/*.config.js',
     // TODO: Make Flatpickr tree-shakable
     '**/date-picker.js',
+    // Ignore tests
+    '**/__tests__/**',
+    '**/__mocks__/**',
   ],
 });
 
