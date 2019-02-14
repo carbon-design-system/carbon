@@ -43,7 +43,7 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-modules-umd": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
@@ -125,7 +125,7 @@
     "minimatch": "^3.0.0",
     "mkdirp": "^0.5.0",
     "mock-raf": "^1.0.0",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.7",
     "path-to-regexp": "^2.2.0",
     "portscanner": "^2.2.0",
@@ -259,6 +259,16 @@
     "testMatch": [
       "<rootDir>/**/__tests__/**/*.js?(x)",
       "<rootDir>/**/?(*-)(spec|test).js?(x)"
-    ]
+    ],
+    "testPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/lib/",
+      "/umd/"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "./tools/jest/jsTransform.js"
+    }
   }
 }
