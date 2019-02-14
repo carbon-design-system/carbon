@@ -62,3 +62,4 @@
 exports.breakingChangesX = false;
 exports.componentsX = false;
 exports.grid = false;
+exports.gridColumns16 = false;
