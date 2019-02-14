@@ -143,7 +143,7 @@ What `.hbs` file is used for rendering a variant is determined by searching for 
 
 ## Working on JavaScript-framework-specific styles
 
-JavaScript-framework-specific is _not_ recommended as we strive to create styles that is framework-neutral. However, there are some rare cases where framework-specific cannot be avoided, and some of those make sense to be in maintained by core style library here.
+JavaScript-framework-specific is _not_ recommended as we strive to create styles that are framework-neutral. However, there are some rare cases where framework-specific cannot be avoided, and some of those make sense to be in maintained by core style library here.
 
 There are a couple ways to work on framework-specific style.
 
@@ -194,7 +194,7 @@ you make a change to the project styles it will automatically copy over into the
 
 ### Pointing NPM dependency of `carbon-components` right to the source code
 
-Though above approach is the most straightforward, it involves an overhead of having to run build process at `cabron-components`, in addition to one at framework variant repo, upon every Sass code change.
+Though above approach is the most straightforward, it involves an overhead of having to run build process at `carbon-components`, in addition to one at framework variant repo, upon every Sass code change.
 
 To avoid such overhead, you can point NPM dependency of `carbon-components` right to the source code, though there is a caveat that our future change to directory structure, etc. may make such steps no longer work. Here are the steps:
 
