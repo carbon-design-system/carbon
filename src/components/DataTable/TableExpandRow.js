@@ -23,6 +23,7 @@ const TableExpandRow = ({
   onExpand,
   expandIconDescription,
   isSelected,
+  expandHeader,
   ...rest
 }) => {
   const className = cx(
@@ -39,7 +40,8 @@ const TableExpandRow = ({
     <tr {...rest} className={className} data-parent-row>
       <TableCell
         className={`${prefix}--table-expand-v2`}
-        data-previous-value={previousValue}>
+        data-previous-value={previousValue}
+        headers={expandHeader}>
         <button
           className={`${prefix}--table-expand-v2__button`}
           onClick={onExpand}
@@ -79,6 +81,15 @@ TableExpandRow.propTypes = {
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
    */
   expandIconDescription: PropTypes.string,
+
+  /**
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   */
+  expandHeader: PropTypes.string,
+};
+
+TableExpandRow.defaultProps = {
+  expandHeader: 'expand',
 };
 
 export default TableExpandRow;

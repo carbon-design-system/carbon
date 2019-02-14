@@ -14,6 +14,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
         <TableExpandRow
           ariaLabel="Aria label"
           className="custom-class"
+          expandHeader="expand"
           isExpanded={false}
           onExpand={[MockFunction]}
         >
@@ -23,9 +24,11 @@ exports[`DataTable.TableExpandRow should render 1`] = `
           >
             <TableCell
               className="bx--table-expand-v2"
+              headers="expand"
             >
               <td
                 className="bx--table-expand-v2"
+                headers="expand"
               >
                 <button
                   aria-label="Aria label"
