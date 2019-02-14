@@ -29,7 +29,7 @@
       outline: none;
 
       .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
+        outline:none; // chrome fix
         overflow: visible; // safari fix
         outline-offset: -0.5px; // safari fix
       }
