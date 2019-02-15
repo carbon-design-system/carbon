@@ -183,7 +183,6 @@
   }
 
   .#{$prefix}--modal-container {
-    @include layer('pop-out');
     position: relative;
     display: flex;
     flex-direction: column;
