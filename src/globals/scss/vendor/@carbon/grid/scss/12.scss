@@ -1,16 +1,9 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2018, 2018
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
-/**
- * Copyright IBM Corp. 2018, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
 
 @import '@carbon/layout/scss/breakpoint';
 @import 'prefix';
@@ -36,23 +29,23 @@ $breakpoints: map-merge(
       columns: 12,
     ),
   ),
-  $grid-breakpoints
+  $carbon--grid-breakpoints
 );
 
 // Default container class for a grid. Includes max-width for each breakpoint
 .#{$prefix}--grid {
-  @include make-container($breakpoints);
-  @include make-container-max-widths($breakpoints);
+  @include carbon--make-container($breakpoints);
+  @include carbon--make-container-max-widths($breakpoints);
 }
 
 // Fluid variant of the grid. Will not set max-width for breakpoints and will
 // full-bleed across the page.
 .#{$prefix}--fluid-grid {
-  @include make-container($breakpoints);
+  @include carbon--make-container($breakpoints);
 }
 
 .#{$prefix}--row {
-  @include make-row();
+  @include carbon--make-row();
 }
 
-@include make-grid-columns($breakpoints, $grid-gutter);
+@include carbon--make-grid-columns($breakpoints, $carbon--grid-gutter);

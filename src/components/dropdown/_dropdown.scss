@@ -250,6 +250,10 @@
     &:focus {
       @include focus-outline('outline');
     }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
   }
 
   .#{$prefix}--dropdown[data-invalid] {
@@ -268,6 +272,10 @@
     right: rem(34px);
     fill: $support-01;
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--dropdown--open {
+    background-color: $hover-ui;
   }
 
   .#{$prefix}--dropdown--open:focus {
@@ -309,8 +317,8 @@
     height: rem(40px);
     padding-top: rem(12px);
     padding-bottom: rem(12px);
-    padding-left: rem(15px);
-    padding-right: $spacing-2xl;
+    padding-left: rem(16px);
+    padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -371,12 +379,13 @@
 
     &:focus {
       @include focus-outline('outline');
-      margin: 0 rem(2px);
-      padding: rem(11px) rem(14px);
+      margin: 0;
+      padding: rem(11px) rem(16px);
     }
 
     &:hover {
       color: $text-01;
+      border-bottom-color: transparent;
     }
   }
 
@@ -419,9 +428,11 @@
   }
 
   .#{$prefix}--dropdown--inline {
+    border-bottom-color: transparent;
     background-color: transparent;
     box-shadow: none;
     transition-property: none;
+    width: initial;
 
     &:focus {
       outline: none;
@@ -429,8 +440,12 @@
     }
 
     &:hover {
-      background-color: transparent;
+      background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text__inner {
+    margin-right: rem(20px);
   }
 
   .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {

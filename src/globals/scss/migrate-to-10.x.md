@@ -6,7 +6,7 @@
 | -------------------- | --------------------- |
 | `color__blue-*`      | `ibm-color__blue-*`   |
 | `color__navy-gray-*` | Removed TODO skeleton |
-| `color__white`       | `ibm-color__white`    |
+| `color__white`       | `ibm-color__white-0`  |
 | `color__blue-51`     | Removed               |
 | `color__gray-1`      | Removed TODO skeleton |
 | `color__gray-2`      | Removed               |
