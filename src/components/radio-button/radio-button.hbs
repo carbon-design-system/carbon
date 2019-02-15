@@ -8,7 +8,7 @@
 <fieldset class="{{@root.prefix}}--fieldset">
   <legend class="{{@root.prefix}}--label">Radio Button heading</legend>
   <div class="{{@root.prefix}}--form-item">
-    <div class="{{@root.prefix}}--radio-button-group">
+    <div class="{{@root.prefix}}--radio-button-group {{#if vertical}} {{@root.prefix}}--radio-button-group--vertical {{/if}}">
       {{#each items}}
         <input id="{{id}}" class="{{@root.prefix}}--radio-button" type="radio" value="{{value}}" name="{{../group}}" tabindex="0"{{#is value ../selectedValue}} checked{{/is}}{{#if disabled}} disabled{{/if}}>
         <label for="{{id}}" class="{{@root.prefix}}--radio-button__label">
