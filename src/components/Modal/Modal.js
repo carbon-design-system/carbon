@@ -225,7 +225,7 @@ export default class Modal extends Component {
       primaryFocusElement.focus();
       return;
     }
-    if (this.button) {
+    if (this.button && this.button.current) {
       this.button.current.focus();
     }
   };
