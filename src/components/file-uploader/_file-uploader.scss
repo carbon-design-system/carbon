@@ -136,9 +136,8 @@
 
   .#{$prefix}--file-btn {
     display: inline-flex;
-    width: rem(95px);
     margin: 0;
-    padding-right: 1rem;
+    padding-right: rem(64px);
   }
 
   .#{$prefix}--label-description {
