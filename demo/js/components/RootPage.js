@@ -199,7 +199,7 @@ class RootPage extends Component {
     const { componentItems } = this.props;
     const { selectedNavItemId } = this.state;
     if (!selectedNavItemId && componentItems) {
-      const { search } = location;
+      const { search } = window.location;
       const nameInQueryArg =
         search &&
         search
@@ -207,10 +207,10 @@ class RootPage extends Component {
           .split('&')
           .reduce((o, item) => {
             const pair = item.split('=');
-            o[pair[0]] = pair[1];
+            o[pair[0]] = pair[1]; // eslint-disable-line prefer-destructuring
             return o;
           }, {}).nav;
-      const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(location.pathname);
+      const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(window.location.pathname);
       const name = nameInQueryArg || (pathnameTokens && pathnameTokens[1]) || '';
       const selectedNavItem = (name && componentItems.find(item => item.name === name)) || componentItems[0];
       if (selectedNavItem) {
@@ -384,7 +384,7 @@ class RootPage extends Component {
       const selectedNavItem = componentItems && componentItems.find(item => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
-        history.pushState({ name }, name, !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`);
+        window.history.pushState({ name }, name, !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`);
       }
       this._populateCurrent();
     });

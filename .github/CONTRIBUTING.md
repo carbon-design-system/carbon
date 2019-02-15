@@ -141,6 +141,71 @@ What `.hbs` file is used for rendering a variant is determined by searching for 
 2. Variant handle, which takes a format of `componentname--variantname` format
 3. Component handle, which is `componentname`
 
+## Working on JavaScript-framework-specific styles
+
+JavaScript-framework-specific is _not_ recommended as we strive to create styles that are framework-neutral. However, there are some rare cases where framework-specific cannot be avoided, and some of those make sense to be in maintained by core style library here.
+
+There are a couple ways to work on framework-specific style.
+
+### Using `npm link`/`yarn link`
+
+This is the most straightforward way. When in the directory of your `carbon-components` folder, run the following
+command:
+
+```bash
+yarn link
+```
+
+You should see a success message similar to:
+
+```bash
+success Registered "carbon-components".
+info You can now run `yarn link "carbon-components"` in the projects where you want to use this package and it will be used instead.
+```
+
+Now, go to the folder where `carbon-components-angular` is located and run:
+
+```bash
+yarn link carbon-components
+```
+
+You should see a success message similar to:
+
+```bash
+success Using linked package for "carbon-components".
+```
+
+The `yarn link` command will allow us to point the `carbon-components` package
+under `node_modules` to the folder on our filesystem. So, if we make a change in
+`carbon-components` and re-compile the project it will update in the Storybook
+environment for `carbon-components-angular`.
+
+In addition, if you would like to have your changes to styles automatically
+compile and update Storybook you can run the following command in the
+`carbon-components` folder on your machine:
+
+```bash
+yarn gulp watch -s
+```
+
+This will execute the `watch` command in `gulpfile.js`. As a result, whenever
+you make a change to the project styles it will automatically copy over into the
+`scss` folder which Storybook uses in `carbon-components-angular`.
+
+### Pointing NPM dependency of `carbon-components` right to the source code
+
+Though above approach is the most straightforward, it involves an overhead of having to run build process at `carbon-components`, in addition to one at framework variant repo, upon every Sass code change.
+
+To avoid such overhead, you can point NPM dependency of `carbon-components` right to the source code, though there is a caveat that our future change to directory structure, etc. may make such steps no longer work. Here are the steps:
+
+```sh
+> cd /path/to/carbon-components-angular/node_modules/carbon-components
+> mv scss scss.orig
+> ln -s /path/to/carbon-components/src scss
+```
+
+Then edits of `.scss` files in `/path/to/carbon-components/src` will be reflected to the development environment of your framework variant repository. You don't need to do anything in `carbon-components` side.
+
 ## Start Contributing
 
 ### 1. Fork The Repo:
