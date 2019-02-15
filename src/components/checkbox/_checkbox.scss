@@ -190,7 +190,7 @@
 @mixin checkbox--x {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-bottom: rem(6px);
+    margin-bottom: rem(8px);
   }
 
   // Spacing above collection of checkboxes
