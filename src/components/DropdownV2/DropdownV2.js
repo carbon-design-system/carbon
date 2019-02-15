@@ -186,7 +186,11 @@ export default class DropdownV2 extends React.Component {
                   <ListBox.MenuItem
                     key={itemToString(item)}
                     isActive={selectedItem === item}
-                    isHighlighted={highlightedIndex === index}
+                    isHighlighted={
+                      highlightedIndex === index ||
+                      (selectedItem && selectedItem.id === item.id) ||
+                      false
+                    }
                     {...getItemProps({ item, index })}>
                     {itemToElement ? (
                       <ItemToElement key={itemToString(item)} {...item} />
