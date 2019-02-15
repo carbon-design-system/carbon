@@ -71,8 +71,9 @@ const variants = [
       version: 'v1',
     },
     notes: `
-        Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
-      `,
+      Pagination is used for splitting up content or data into several pages,
+      with a control for navigating to the next or previous page.
+    `,
   },
   {
     name: 'v2',
@@ -94,7 +95,10 @@ const variants = [
       pageNumberChoices: [pageNumberChoices[0]],
       disabledPaginationButton: true,
     },
-    notes: `Notify the user of their position in the page range by disabling the appropriate pagination buttons at the start or end of the range.`,
+    notes: `
+      Notify the user of their position in the page range by disabling the appropriate pagination buttons
+      at the start or end of the range.
+    `,
   },
 ];
 
