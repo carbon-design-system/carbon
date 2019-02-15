@@ -4,10 +4,10 @@
 
 Use these modifiers with `.bx--select` class.
 
-| Name                | Description                                |
-| ------------------- | ------------------------------------------ |
-| .bx--select--inline | Selector for applying inline select styles |
-| .bx--select--light  | Selector for applying light select styles  |
+| Name                  | Description                                |
+| --------------------- | ------------------------------------------ |
+| `.bx--select--inline` | Selector for applying inline select styles |
+| `.bx--select--light`  | Selector for applying light select styles  |
 
 #### Inline Select width
 

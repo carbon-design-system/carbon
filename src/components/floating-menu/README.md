@@ -1,11 +1,11 @@
 #### Public Methods
 
-| Name                   | Params                                                  | Description                                                            |
-| ---------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `show`/`hide`          | evt: `Event` or `Element`, callback: `Function`         | Shows/hides the menu.                                                  |
-| `changeState`          | state: `string`, detail: `Object`, callback: `Function` | Changes the shown/hidden state.                                        |
-| `shouldStateBeChanged` | state: `string`                                         | Returns `true` if the given state is different from the current state. |
-| `release`              |                                                         | Deletes the instance and removes resize event listeners.               |
+| Name                   | Params                                                        | Description                                                            |
+| ---------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `show`/`hide`          | `evt`: `Event` or `Element`, `callback`: `Function`           | Shows/hides the menu.                                                  |
+| `changeState`          | `state`: `string`, `detail`: `Object`, `callback`: `Function` | Changes the shown/hidden state.                                        |
+| `shouldStateBeChanged` | `state`: `string`                                             | Returns `true` if the given state is different from the current state. |
+| `release`              |                                                               | Deletes the instance and removes resize event listeners.               |
 
 #### Options
 

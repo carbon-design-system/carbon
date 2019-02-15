@@ -138,9 +138,8 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   /**
    * On trigger, insert the expandable row back in
    */
-  _toggleRowExpand = detail => {
-    const element = detail.element;
-    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
+  _toggleRowExpand = ({ element, initialEvt }) => {
+    const parent = eventMatches(initialEvt, this.options.eventParentContainer);
 
     const index = this.expandCells.indexOf(element);
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {

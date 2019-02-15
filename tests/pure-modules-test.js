@@ -2,8 +2,6 @@
  * @jest-environment node
  */
 
-/* global describe beforeAll it expect */
-
 // eslint-disable-next-line strict,lines-around-directive
 'use strict';
 
@@ -28,6 +26,9 @@ const files = glob.sync('**/*.js', {
     '**/*.config.js',
     // TODO: Make Flatpickr tree-shakable
     '**/date-picker.js',
+    // Ignore tests
+    '**/__tests__/**',
+    '**/__mocks__/**',
   ],
 });
 
@@ -95,6 +96,7 @@ describe('ES modules', () => {
           .trim(),
         ''
       )
+      .replace(';window', '')
       .replace('!function(){"use strict"}();', '');
     expect(code).toBe('');
   });
