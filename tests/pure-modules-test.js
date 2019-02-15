@@ -2,8 +2,6 @@
  * @jest-environment node
  */
 
-/* global describe beforeAll it expect */
-
 // eslint-disable-next-line strict,lines-around-directive
 'use strict';
 

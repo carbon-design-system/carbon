@@ -45,20 +45,32 @@ function importer(url, prev, done) {
   done();
 }
 
+const flags = `
+$css--font-face: false;
+$css--helpers: false;
+$css--body: false;
+$css--use-layer: false;
+$css--reset: false;
+$css--typography: false;
+$css--plex: false;
+`;
+
 async function renderSass(data) {
   const calls = [];
   const warn = jest.fn(() => types.Null());
   const mockError = jest.fn(() => types.Null());
   const log = jest.fn(() => types.Null());
+  const debug = jest.fn(() => types.Null());
   let result;
   let renderError;
 
   try {
     result = await sassAsync({
-      data,
+      data: `${flags}\n${data}`,
       importer,
       functions: {
         '@error': mockError,
+        '@debug': debug,
         '@log': log,
         '@warn': warn,
         test(...args) {
@@ -81,9 +93,10 @@ async function renderSass(data) {
     result,
     error: renderError,
     output: {
-      warn,
+      debug,
       error: mockError,
       log,
+      warn,
     },
   };
 }

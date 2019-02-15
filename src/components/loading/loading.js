@@ -46,7 +46,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
     /**
      * If overlay is the parentNode then toggle it too.
      */
-    const parentNode = this.element.parentNode;
+    const { parentNode } = this.element;
 
     if (parentNode && parentNode.classList.contains(this.options.classLoadingOverlay)) {
       parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
@@ -90,7 +90,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * Delete component from the DOM.
    */
   _deleteElement() {
-    const parentNode = this.element.parentNode;
+    const { parentNode } = this.element;
 
     parentNode.removeChild(this.element);
 
