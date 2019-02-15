@@ -260,7 +260,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
             if (isNaN(index)) {
               this.calendar.setDate(inputDate);
             } else {
-              const selectedDates = this.calendar.selectedDates;
+              const { selectedDates } = this.calendar;
               selectedDates[index] = inputDate;
               this.calendar.setDate(selectedDates);
             }
@@ -282,8 +282,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
     );
   };
 
-  _updateClassNames = calendar => {
-    const calendarContainer = calendar.calendarContainer;
+  _updateClassNames = ({ calendarContainer, selectedDates }) => {
     if (calendarContainer) {
       calendarContainer.classList.add(this.options.classCalendarContainer);
       calendarContainer.querySelector('.flatpickr-month').classList.add(this.options.classMonth);
@@ -296,9 +295,9 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       });
       toArray(calendarContainer.querySelectorAll('.flatpickr-day')).forEach(item => {
         item.classList.add(this.options.classDay);
-        if (item.classList.contains('today') && calendar.selectedDates.length > 0) {
+        if (item.classList.contains('today') && selectedDates.length > 0) {
           item.classList.add('no-border');
-        } else if (item.classList.contains('today') && calendar.selectedDates.length === 0) {
+        } else if (item.classList.contains('today') && selectedDates.length === 0) {
           item.classList.remove('no-border');
         }
       });

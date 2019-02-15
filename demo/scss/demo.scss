@@ -173,15 +173,19 @@
       outline: 1px solid #97c1ff;
       height: 80px;
     }
-  
+
     .inside {
       background-color: #edf4ff;
       height: 100%;
     }
-  
+
     [class*='col'] {
       outline: 1px dashed #97c1ff;
     }
+
+    display: block;
+    padding: 0;
+    max-width: 100%;
   }
 
   .#{$prefix}--grid {

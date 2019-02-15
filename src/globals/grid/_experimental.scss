@@ -1,0 +1,69 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../scss/functions';
+@import '../scss/vendor/@carbon/elements/scss/layout/convert';
+
+@if not(feature-flag-enabled('grid-columns-16')) {
+  $carbon--grid-breakpoints: (
+    sm: (
+      columns: 4,
+      margin: 0,
+      width: carbon--rem(320px),
+    ),
+    md: (
+      columns: 8,
+      margin: carbon--rem(16px),
+      width: carbon--rem(672px),
+    ),
+    lg: (
+      columns: 12,
+      margin: carbon--rem(12px),
+      width: carbon--rem(1056px),
+    ),
+    xlg: (
+      columns: 12,
+      margin: carbon--rem(12px),
+      width: carbon--rem(1312px),
+    ),
+    max: (
+      columns: 12,
+      margin: carbon--rem(16px),
+      width: carbon--rem(1584px),
+    ),
+  ) !global;
+}
+
+@import '../scss/vendor/@carbon/elements/scss/layout/breakpoint';
+@import '../scss/vendor/@carbon/elements/scss/grid/container';
+@import '../scss/vendor/@carbon/elements/scss/grid/row';
+@import '../scss/vendor/@carbon/elements/scss/grid/col';
+
+@mixin grid--x {
+  // Fluid variant of the grid.
+  .#{$prefix}--fluid-grid {
+    @include carbon--make-container();
+  }
+
+  // Default container class for a grid. Includes max-width for all breakpoints
+  .#{$prefix}--grid {
+    @include carbon--make-container();
+    @include carbon--make-container-max-widths();
+  }
+
+  .#{$prefix}--grid--full-width {
+    @include carbon--largest-breakpoint() {
+      max-width: 100%;
+    }
+  }
+
+  .#{$prefix}--row {
+    @include carbon--make-row();
+  }
+
+  @include carbon--make-grid-columns($carbon--grid-breakpoints, $carbon--grid-gutter);
+}
