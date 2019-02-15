@@ -17,8 +17,10 @@ module.exports = {
     {
       name: 'default',
       label: 'Breadcrumb',
-      notes:
-        'Breadcrumb enables users to quickly see their location within a path of navigation and move up to a parent level if desired.',
+      notes: `
+        Breadcrumb enables users to quickly see their location within a path of navigation
+        and move up to a parent level if desired.
+      `,
       context: {
         items: [
           {

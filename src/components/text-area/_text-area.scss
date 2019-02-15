@@ -10,10 +10,7 @@
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
@@ -140,6 +137,10 @@
   .#{$prefix}--text-area::-webkit-input-placeholder {
     @include placeholder-colors;
     @include font-family;
+  }
+
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
   }
 
   //-----------------------------

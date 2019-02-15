@@ -81,7 +81,7 @@ module.exports = function convertPureAssignment(babel) {
       const pureAssignments = this.pureAssignmentsState.pureAssignmentsMap.get(binding);
       if (pureAssignments) {
         const declarator = t.cloneDeep(path.node);
-        const body = declarator.init.callee.body.body;
+        const { body } = declarator.init.callee.body;
         const index = body.findIndex(item => item.type === 'ReturnStatement');
         if (index >= 0) {
           const { argument } = body[index];

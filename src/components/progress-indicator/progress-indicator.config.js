@@ -22,12 +22,18 @@ const steps = [
     label: 'Second Step',
     overflow: true,
     overflowLabel: 'Overflow Ex. 1',
+    tooltipId: Math.random()
+      .toString(36)
+      .substr(2),
   },
   {
     state: 'incomplete',
     label: 'Third Step',
     overflow: true,
     overflowLabel: 'Overflow Ex. 2 Multi Line',
+    tooltipId: Math.random()
+      .toString(36)
+      .substr(2),
   },
   {
     state: 'incomplete',
@@ -50,6 +56,15 @@ module.exports = {
       name: 'default',
       label: 'Progress Indicator',
       context: {
+        steps,
+        componentsX,
+      },
+    },
+    {
+      name: 'vertical',
+      label: 'Vertical',
+      context: {
+        vertical: true,
         steps,
         componentsX,
       },

@@ -10,11 +10,8 @@
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
@@ -155,6 +152,14 @@
   .#{$prefix}--tile--is-selected:focus {
     border: 1px solid $brand-01;
     outline: none;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
+    opacity: 1;
+
+    svg {
+      fill: $brand-01;
+    }
   }
 
   .#{$prefix}--tile-input:checked {
@@ -302,7 +307,7 @@
     opacity: 1;
   }
 
-  .#{$prefix}--tile-input:checked + .#{$prefix}--tile__checkmark svg {
+  .#{$prefix}--tile-input:checked + .#{$prefix}--tile > .#{$prefix}--tile__checkmark svg {
     fill: $ui-05;
   }
 
@@ -312,7 +317,7 @@
   }
 
   .#{$prefix}--tile-input {
-    display: none;
+    @include hidden;
   }
 }
 

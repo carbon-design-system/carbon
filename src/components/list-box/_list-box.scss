@@ -9,14 +9,12 @@
 // List Box
 //-----------------------------
 
-@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/import-once';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
 
 $list-box-width: 100%;
 $list-box-height: rem(40px);
@@ -126,7 +124,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     height: 100%;
-    padding: 0 1rem;
+    padding: 0 2rem 0 1rem;
     cursor: pointer;
   }
 
@@ -415,7 +413,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     height: rem(40px);
-    padding: 0 1rem;
+    padding: 0 2rem 0 1rem;
     cursor: pointer;
     outline: none;
   }

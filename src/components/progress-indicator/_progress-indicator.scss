@@ -6,12 +6,8 @@
 //
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
@@ -31,6 +27,10 @@
     min-width: 7rem;
     transition: $transition--base all $carbon--standard-easing;
     overflow: visible;
+
+    &:first-child .#{$prefix}--progress-line {
+      display: none;
+    }
   }
 
   .#{$prefix}--progress-line {
@@ -40,10 +40,6 @@
     height: 1px;
     width: calc(100% - 24px);
     border: $progress-indicator-bar-width;
-
-    .#{$prefix}--progress-step:first-child & {
-      display: none;
-    }
   }
 
   .#{$prefix}--progress-step svg {
@@ -120,6 +116,42 @@
     @include skeleton;
     height: rem(12px);
     width: rem(40px);
+  }
+
+  // Vertical variant
+  .#{$prefix}--progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    display: list-item;
+    min-height: 6rem;
+
+    svg {
+      display: inline-block;
+    }
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+    margin-top: 0.26rem;
+    margin-left: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    top: 22px;
+    left: 0.69rem;
+    height: calc(100% - 22px);
+    width: 1px;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step:first-child .#{$prefix}--progress-line {
+    display: block;
+  }
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step:last-child .#{$prefix}--progress-line {
+    display: none;
   }
 }
 
@@ -311,6 +343,51 @@
     @include skeleton;
     height: rem(12px);
     width: rem(40px);
+  }
+
+  .#{$prefix}--progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    display: list-item;
+    min-height: 6rem;
+    width: initial;
+    min-width: initial;
+
+    svg {
+      display: inline-block;
+      margin: 0.1rem 0.5rem;
+    }
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
+    margin-left: 0.563rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: initial;
+    max-width: none;
+    vertical-align: top;
+    margin: 0;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
+    margin-top: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
+    margin-top: initial;
+    position: initial;
+    margin-left: 2.25rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
   }
 }
 

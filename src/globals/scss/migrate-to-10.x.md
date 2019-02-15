@@ -6,7 +6,7 @@
 | -------------------- | --------------------- |
 | `color__blue-*`      | `ibm-color__blue-*`   |
 | `color__navy-gray-*` | Removed TODO skeleton |
-| `color__white`       | `ibm-color__white`    |
+| `color__white`       | `ibm-color__white-0`  |
 | `color__blue-51`     | Removed               |
 | `color__gray-1`      | Removed TODO skeleton |
 | `color__gray-2`      | Removed               |
@@ -237,5 +237,10 @@ No change
 | `font-size` mixin      | ☠️ Deprecated, use `font-size` from `@carbon/type`      |
 
 ## `_vars.scss`
+
+| v9                                  | v10                            |
+| ----------------------------------- | ------------------------------ |
+| `$bx--ease-*` (Deprecated)          | Removed (Or defined as `null`) |
+| `$bx--standard-easing` (Deprecated) | Removed (Or defined as `null`) |
 
 TODO motion table

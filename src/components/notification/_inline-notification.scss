@@ -10,16 +10,13 @@
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/theme';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
+@import 'mixins';
 
 @mixin inline-notifications {
   .#{$prefix}--inline-notification {
@@ -77,6 +74,7 @@
 
   .#{$prefix}--inline-notification__title {
     @include typescale('zeta');
+    color: $text-01;
     font-weight: 600;
     margin: 0 $spacing-2xs 0 0;
     line-height: 1.125;

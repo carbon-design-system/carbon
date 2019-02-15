@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/colors';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
@@ -250,15 +249,15 @@
   }
 
   // Force all of our side navigation items to be the same dimensions. When our
-  // menu expands, we can unset these values.
+  // menu expands, we can undo the forced dimensions.
   .#{$prefix}--side-nav__item {
     width: mini-units(6);
     height: mini-units(6);
     overflow: hidden;
 
     @include expanded() {
-      width: unset;
-      height: unset;
+      width: auto;
+      height: auto;
     }
   }
 
@@ -308,11 +307,16 @@
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] {
-    display: none;
+    display: block;
+    visibility: hidden;
+    max-height: 0;
+    transition: $transition--expansion max-height $carbon--ease-out, $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true'] + .#{$prefix}--side-nav__menu[role='menu'] {
-    display: block;
+    max-height: 1500px;
+    visibility: inherit;
+    transition: $transition--expansion max-height $carbon--ease-in, $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] a.#{$prefix}--side-nav__link[role='menuitem'] {

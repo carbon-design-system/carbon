@@ -66,8 +66,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @param {HTMLElement} detail.item The button to be selected.
    * @param {Function} callback Callback called when change in state completes.
    */
-  _changeState(detail, callback) {
-    const item = detail.item;
+  _changeState({ item }, callback) {
     // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
     const itemLink = item.querySelector(this.options.selectorLink);
     if (itemLink) {
