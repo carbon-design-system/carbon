@@ -9,7 +9,9 @@ describe('Test init component by search', function() {
     static options = {
       selectorInit: '[data-my-component]',
     };
+
     static create = spyCreate;
+
     static components = new WeakMap();
   };
 

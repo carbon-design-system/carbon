@@ -95,4 +95,48 @@ $t: test('unknown', breakpoint('unknown'));
     // value
     expect(error).toBeDefined();
   });
+
+  describe('grid--x', () => {
+    it('should generate grid code when the grid feature flag is on', async () => {
+      const { result } = await renderSass(`
+$feature-flags: (grid: true);
+@import './src/globals/grid/grid';
+`);
+      expect(result.css.toString()).toMatchSnapshot();
+    });
+
+    it('should export a 12 column grid by default', async () => {
+      const { result } = await renderSass(`
+$feature-flags: (grid: true);
+@import './src/globals/grid/grid';
+`);
+      const output = result.css.toString();
+      const breakpoints = ['lg', 'xlg', 'max'];
+
+      for (const breakpoint of breakpoints) {
+        expect(output).toEqual(expect.stringContaining(`col-${breakpoint}-12`));
+        expect(output).not.toEqual(expect.stringContaining(`col-${breakpoint}-13`));
+
+        expect(output).toEqual(expect.stringContaining(`--offset-${breakpoint}-11`));
+        expect(output).not.toEqual(expect.stringContaining(`--offset-${breakpoint}-12`));
+      }
+    });
+
+    it('should export a 16 column grid behind a flag', async () => {
+      const { result } = await renderSass(`
+$feature-flags: (grid: true, grid-columns-16: true);
+@import './src/globals/grid/grid';
+`);
+      const output = result.css.toString();
+      const breakpoints = ['lg', 'xlg', 'max'];
+
+      for (const breakpoint of breakpoints) {
+        expect(output).toEqual(expect.stringContaining(`col-${breakpoint}-16`));
+        expect(output).not.toEqual(expect.stringContaining(`col-${breakpoint}-17`));
+
+        expect(output).toEqual(expect.stringContaining(`--offset-${breakpoint}-15`));
+        expect(output).not.toEqual(expect.stringContaining(`--offset-${breakpoint}-16`));
+      }
+    });
+  });
 });

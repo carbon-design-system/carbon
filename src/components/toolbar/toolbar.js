@@ -96,7 +96,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * @param {HTMLElement} boundTable The table associated with the toolbar.
    */
   _handleRowHeightChange(event, boundTable) {
-    const value = event.currentTarget.querySelector('input:checked').value;
+    const { value } = event.currentTarget.querySelector('input:checked');
 
     if (value === 'tall') {
       boundTable.classList.add(this.options.classTallRows);

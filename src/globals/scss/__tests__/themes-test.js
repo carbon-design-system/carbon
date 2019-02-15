@@ -7,7 +7,6 @@
  * @jest-environment node
  */
 
-const { types } = require('node-sass');
 const { renderSass } = require('../../../../tools/jest/scss');
 
 const classic = [

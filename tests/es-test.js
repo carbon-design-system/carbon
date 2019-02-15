@@ -1,5 +1,3 @@
-/* global describe it expect */
-
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';

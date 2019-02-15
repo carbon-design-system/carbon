@@ -27,6 +27,7 @@
     "no-plusplus": 0,
     "no-underscore-dangle": 0,
     "prefer-rest-params": 0,
-    "import/no-extraneous-dependencies": [2, {"devDependencies": true}]
+    "import/no-extraneous-dependencies": [2, {"devDependencies": true}],
+    "import/order": 0
   }
 }

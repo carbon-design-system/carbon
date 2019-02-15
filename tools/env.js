@@ -1,6 +1,6 @@
 'use strict';
 
-const BABEL_ENV = process.env.BABEL_ENV;
+const { BABEL_ENV } = process.env;
 
 module.exports = () => ({
   presets: [
