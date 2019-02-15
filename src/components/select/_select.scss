@@ -229,6 +229,10 @@
     cursor: pointer;
     transition: outline $transition--base, background-color $transition--base;
 
+    &:hover {
+      background-color: $hover-ui;
+    }
+
     // Hide default select arrow in IE10+
     &::-ms-expand {
       display: none;
