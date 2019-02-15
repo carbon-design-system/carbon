@@ -25,7 +25,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
   constructor(element, options) {
     super(element, options);
     // Sets the initial state
-    const initialState = this.options.initialState;
+    const { initialState } = this.options;
     if (initialState) {
       this.setState(initialState);
     }
@@ -36,7 +36,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
    * @param {string} state The new state, should be `inactive`, `active` or `finished`.
    */
   setState(state) {
-    const states = this.constructor.states;
+    const { states } = this.constructor;
     const values = Object.keys(states).map(key => states[key]);
     if (values.indexOf(state) < 0) {
       throw new Error(`One of the following value should be given as the state: ${values.join(', ')}`);
