@@ -7,50 +7,6 @@
 
 const { param } = require('change-case');
 
-const formatImports = iconMeta => {
-  let value = '';
-  for (const icon of iconMeta) {
-    value += `import { ${
-      icon.moduleName
-    }Module } from "./${icon.outputOptions.file
-      .replace('es/', '')
-      .replace('.js', '')}";\n`;
-  }
-  return value;
-};
-
-const formatDeclarations = iconMeta => {
-  let value = '';
-  for (const icon of iconMeta) {
-    value += `${icon.moduleName}Module,\n`;
-  }
-  return value;
-};
-
-const indexTemplate = () => `
-export * from "./IconModule";
-`;
-
-const moduleTemplate = iconMeta => `
-import { NgModule } from "@angular/core";
-
-${formatImports(iconMeta)}
-
-@NgModule({
-	imports: [
-    ${formatDeclarations(iconMeta)}
-  ],
-	exports: [
-    ${formatDeclarations(iconMeta)}
-  ]
-})
-export class IconModule {}
-
-export {
-  ${formatDeclarations(iconMeta)}
-};
-`;
-
 const componentTemplate = (iconName, className, svg, attrs) => `
 import { NgModule, Component, ElementRef, Input } from "@angular/core";
 import { getAttributes } from "@carbon/icon-helpers";
@@ -155,8 +111,6 @@ storiesOf("${basename}", module)
 `;
 
 module.exports = {
-  moduleTemplate,
   componentTemplate,
-  indexTemplate,
   storyTemplate,
 };

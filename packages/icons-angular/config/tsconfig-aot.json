@@ -17,8 +17,8 @@
     "inlineSources": true,
     "typeRoots": ["./../node_modules/@types"]
   },
-  "files": [
-    "./../ts/index.ts"
+  "include": [
+    "./../ts/**/*"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,

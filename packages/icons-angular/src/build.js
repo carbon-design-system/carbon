@@ -9,14 +9,13 @@ const icons = require('@carbon/icons/meta.json');
 const { toString } = require('@carbon/icon-helpers');
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
-const { join, dirname, resolve } = require('path');
+const { join, dirname } = require('path');
 const { param } = require('change-case');
 const ngc = require('@angular/compiler-cli/src/main');
 const { rollup } = require('rollup');
 const {
   componentTemplate,
   moduleTemplate,
-  indexTemplate,
   storyTemplate,
 } = require('./templates');
 const clean = require('./clean');
@@ -28,15 +27,12 @@ async function generateComponents() {
     const className = icon.moduleName;
     const selectorName = param(icon.moduleName);
     const rawSvg = toString(icon.descriptor);
-    const dirExists = await fs.exists(join(paths.TS, icon.basename));
     const outputPath = icon.outputOptions.file
       .replace('es', 'ts')
       .replace('.js', '.ts');
     // try to write out the component
     try {
-      if (!dirExists) {
-        await fs.ensureDir(dirname(outputPath));
-      }
+      await fs.ensureDir(dirname(outputPath));
       await fs.writeFile(
         outputPath,
         componentTemplate(
@@ -50,31 +46,9 @@ async function generateComponents() {
       reporter.error(err);
     }
   }
-  // write out the module
-  // try {
-  // await fs.writeFile(join(paths.TS, 'IconModule.ts'), moduleTemplate(icons));
-  // await fs.writeFile(join(paths.TS, 'index.ts'), indexTemplate());
-  // } catch (err) {
-  // reporter.log(err);
-  // }
 }
 
 async function buildUMD() {
-  const bundle = await rollup({
-    input: join(paths.LIB, 'index.js'),
-    external: ['@angular/core', '@carbon/icon-helpers'],
-  });
-
-  await bundle.write({
-    name: 'CarbonIconsAngular',
-    format: 'umd',
-    file: join(paths.UMD, 'index.js'),
-    globals: {
-      '@carbon/icon-helpers': 'CarbonIconHelpers',
-      '@angular/core': 'ng.Core',
-    },
-  });
-
   for (const icon of icons) {
     const jsSource = icon.outputOptions.file.replace('es', 'lib');
     const iconbundle = await rollup({
