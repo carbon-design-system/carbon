@@ -198,6 +198,11 @@
     margin-top: rem(3px);
   }
 
+  // Remove spacing above collection of checkboxes if label is present
+  .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-top: 0;
+  }
+
   // Spacing below collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin-bottom: rem(3px);
