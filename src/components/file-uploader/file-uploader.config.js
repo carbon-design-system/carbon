@@ -15,4 +15,17 @@ module.exports = {
     prefix,
     componentsX,
   },
+  variants: [
+    {
+      name: 'default',
+      label: 'File uploader',
+    },
+    {
+      name: 'example upload states',
+      label: 'File uploader with example upload states',
+      context: {
+        exampleUploadStates: true,
+      },
+    },
+  ],
 };
