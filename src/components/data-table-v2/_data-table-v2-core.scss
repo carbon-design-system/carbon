@@ -350,14 +350,14 @@ DATA TABLE VARIATIONS
   .#{$prefix}--table-column-checkbox {
     width: rem(64px);
     min-width: rem(64px);
-    vertical-align: middle;
+    padding-top: rem(12px);
   }
 
   //width for overflow menu columns
   .#{$prefix}--table-column-menu {
     width: rem(56px);
     min-width: rem(56px);
-    vertical-align: middle;
+    padding-top: rem(8px);
   }
 
   .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
@@ -368,8 +368,8 @@ DATA TABLE VARIATIONS
   .#{$prefix}--table-column-icon {
     width: rem(24px);
     min-width: rem(24px);
-    vertical-align: middle;
     justify-content: center;
+    padding-top: rem(8px);
     padding-right: 0;
 
     & button {
@@ -661,16 +661,22 @@ DATA TABLE VARIATIONS
 
     .#{$prefix}--table-column-checkbox {
       width: rem(32px);
-      min-width: (32px);
+      min-width: rem(32px);
+      padding-top: rem(1px);
     }
 
     .#{$prefix}--table-column-menu {
       width: rem(28px);
       min-width: rem(28px);
+      padding-top: rem(1px);
+    }
+
+    .#{$prefix}--table-column-icon {
+      padding-top: rem(1px);
     }
 
     .#{$prefix}--table-column-icon button {
-      width: rem(24px);
+      width: rem(28px);
       height: rem(24px);
       justify-content: center;
     }
