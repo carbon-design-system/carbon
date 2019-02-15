@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { iconClose } from 'carbon-icons';
-// TODO: import { Close16 } from '@carbon/icons-react';
 import Close16 from '@carbon/icons-react/lib/close/16';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';

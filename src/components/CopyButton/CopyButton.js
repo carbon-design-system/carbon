@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import { iconCopy } from 'carbon-icons';
-// TODO: import { Copy16 } from '@carbon/icons-react';
 import Copy16 from '@carbon/icons-react/lib/copy/16';
 import Icon from '../Icon';
 import { componentsX } from '../../internal/FeatureFlags';

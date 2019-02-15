@@ -11,7 +11,9 @@ import React from 'react';
 import { iconCaretUp } from 'carbon-icons';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
+import CaretUpGlyph from '@carbon/icons-react/lib/caret--up';
 import { sortStates } from './state/sorting';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -77,16 +79,28 @@ const TableHeader = ({
     <th scope={scope} className={headerClassName} aria-sort={ariaSort}>
       <button className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
-        <Icon
-          className={`${prefix}--table-sort-v2__icon`}
-          icon={iconCaretUp}
-          description={t('carbon.table.header.icon.description', {
-            header: children,
-            sortDirection,
-            isSortHeader,
-            sortStates,
-          })}
-        />
+        {componentsX ? (
+          <CaretUpGlyph
+            className={`${prefix}--table-sort-v2__icon`}
+            aria-label={t('carbon.table.header.icon.description', {
+              header: children,
+              sortDirection,
+              isSortHeader,
+              sortStates,
+            })}
+          />
+        ) : (
+          <Icon
+            className={`${prefix}--table-sort-v2__icon`}
+            icon={iconCaretUp}
+            description={t('carbon.table.header.icon.description', {
+              header: children,
+              sortDirection,
+              isSortHeader,
+              sortStates,
+            })}
+          />
+        )}
       </button>
     </th>
   );

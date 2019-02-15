@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { iconCaretDown } from 'carbon-icons';
-// TODO: import { ChevronDown16 } from '@carbon/icons-react';
 import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';

@@ -14,6 +14,8 @@ import Icon from '../Icon';
 import uid from '../../tools/uniqueId';
 import { ButtonTypes } from '../../prop-types/types';
 import { iconCloseSolid, iconCheckmarkSolid } from 'carbon-icons';
+import CloseFilled16 from '@carbon/icons-react/lib/close--filled/16';
+import CheckmarkFilled16 from '@carbon/icons-react/lib/checkmark--filled/16';
 import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
@@ -233,7 +235,14 @@ export class Filename extends Component {
         </div>
       );
     } else if (status === 'edit') {
-      return (
+      return componentsX ? (
+        <CloseFilled16
+          className={`${prefix}--file-close`}
+          aria-label={iconDescription}
+          style={style}
+          {...other}
+        />
+      ) : (
         <Icon
           description={iconDescription}
           className={`${prefix}--file-close`}
@@ -243,7 +252,14 @@ export class Filename extends Component {
         />
       );
     } else if (status === 'complete') {
-      return (
+      return componentsX ? (
+        <CheckmarkFilled16
+          className={`${prefix}--file-complete`}
+          aria-label={iconDescription}
+          style={style}
+          {...other}
+        />
+      ) : (
         <Icon
           description={iconDescription}
           className={`${prefix}--file-complete`}

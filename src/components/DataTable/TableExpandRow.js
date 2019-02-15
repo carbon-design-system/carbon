@@ -9,9 +9,11 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { iconChevronRight } from 'carbon-icons';
+import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import TableCell from './TableCell';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -46,11 +48,18 @@ const TableExpandRow = ({
           className={`${prefix}--table-expand-v2__button`}
           onClick={onExpand}
           aria-label={ariaLabel}>
-          <Icon
-            className={`${prefix}--table-expand-v2__svg`}
-            icon={iconChevronRight}
-            description={expandIconDescription}
-          />
+          {componentsX ? (
+            <ChevronRight16
+              className={`${prefix}--table-expand-v2__svg`}
+              aria-label={expandIconDescription}
+            />
+          ) : (
+            <Icon
+              className={`${prefix}--table-expand-v2__svg`}
+              icon={iconChevronRight}
+              description={expandIconDescription}
+            />
+          )}
         </button>
       </TableCell>
       {children}

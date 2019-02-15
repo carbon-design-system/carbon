@@ -17,9 +17,13 @@ import {
 } from 'carbon-icons';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
-// temporary workaround for a11y warning icon. TODO: for @carbon/icons-react
+// temporary workaround for a11y warning icon. TODO: for @carbon/icons-, https://github.com/carbon-design-system/carbon-website/issues/797
 import a11yIconWarningSolid from './a11yIconWarningSolid';
 import Close16 from '@carbon/icons-react/lib/close/16';
+import ErrorFilled16 from '@carbon/icons-react/lib/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons-react/lib/checkmark--filled/16';
+import InformationFilled16 from '@carbon/icons-react/lib/information--filled/16';
+import WarningAltFilled16 from '@carbon/icons-react/lib/warning--alt--filled/16';
 import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
@@ -70,7 +74,7 @@ export class NotificationButton extends Component {
   };
 
   static defaultProps = {
-    ariaLabel: 'close notificaion',
+    ariaLabel: 'close notification', // TODO: deprecate this prop
     notificationType: 'toast',
     type: 'button',
     iconDescription: 'close icon',
@@ -105,11 +109,20 @@ export class NotificationButton extends Component {
         notificationType === 'inline',
     });
 
-    return (
-      <button {...other} type={type} className={buttonClasses}>
-        {componentsX ? (
-          <Close16 className={iconClasses} aria-label={ariaLabel} />
-        ) : (
+    const NotificationButtonIcon = (() => {
+      if (componentsX) {
+        const IconTag = icon || Close16;
+        return (
+          <IconTag
+            aria-label={iconDescription}
+            className={iconClasses}
+            icon={!icon && !name ? iconClose : icon}
+            name={name}
+          />
+        );
+      }
+      if (!componentsX) {
+        return (
           <Icon
             description={iconDescription}
             className={iconClasses}
@@ -117,7 +130,14 @@ export class NotificationButton extends Component {
             icon={!icon && !name ? iconClose : icon}
             name={name}
           />
-        )}
+        );
+      }
+      return null;
+    })();
+
+    return (
+      <button {...other} type={type} className={buttonClasses}>
+        {NotificationButtonIcon}
       </button>
     );
   }
@@ -412,10 +432,10 @@ export class InlineNotification extends Component {
 
   useIcon = kindProp =>
     ({
-      error: iconErrorSolid,
-      success: iconCheckmarkSolid,
-      warning: iconWarningSolid,
-      info: iconInfoSolid,
+      error: componentsX ? ErrorFilled16 : iconErrorSolid,
+      success: componentsX ? CheckmarkFilled16 : iconCheckmarkSolid,
+      warning: componentsX ? WarningAltFilled16 : iconWarningSolid,
+      info: componentsX ? InformationFilled16 : iconInfoSolid,
     }[kindProp]);
 
   render() {
@@ -445,6 +465,14 @@ export class InlineNotification extends Component {
     );
 
     const NotificationIcon = kind => {
+      if (componentsX) {
+        const NotificationIconX = this.useIcon(kind);
+        return (
+          <NotificationIconX
+            className={`${prefix}--inline-notification__icon`}
+          />
+        );
+      }
       switch (kind) {
         case 'warning':
           return a11yIconWarningSolid(prefix, notificationType);

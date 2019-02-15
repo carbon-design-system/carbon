@@ -10,7 +10,9 @@ import React from 'react';
 import Icon from '../Icon';
 import SkeletonText from '../SkeletonText';
 import { iconChevronRight } from 'carbon-icons';
+import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
 import { settings } from 'carbon-components';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -18,10 +20,14 @@ export default function AccordionSkeleton(props) {
   const Item = () => (
     <li className={`${prefix}--accordion__item`}>
       <button type="button" className={`${prefix}--accordion__heading`}>
-        <Icon
-          className={`${prefix}--accordion__arrow`}
-          icon={iconChevronRight}
-        />
+        {componentsX ? (
+          <ChevronRight16 className={`${prefix}--accordion__arrow`} />
+        ) : (
+          <Icon
+            className={`${prefix}--accordion__arrow`}
+            icon={iconChevronRight}
+          />
+        )}
         <SkeletonText className={`${prefix}--accordion__title`} />
       </button>
     </li>
@@ -32,10 +38,14 @@ export default function AccordionSkeleton(props) {
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <button type="button" className={`${prefix}--accordion__heading`}>
-            <Icon
-              className={`${prefix}--accordion__arrow`}
-              icon={iconChevronRight}
-            />
+            {componentsX ? (
+              <ChevronRight16 className={`${prefix}--accordion__arrow`} />
+            ) : (
+              <Icon
+                className={`${prefix}--accordion__arrow`}
+                icon={iconChevronRight}
+              />
+            )}
             <SkeletonText className={`${prefix}--accordion__title`} />
           </button>
           <div className={`${prefix}--accordion__content`}>

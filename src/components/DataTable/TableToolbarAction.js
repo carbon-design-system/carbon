@@ -11,6 +11,7 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -22,14 +23,31 @@ const TableToolbarAction = ({
   ...rest
 }) => {
   const toolbarActionClasses = cx(className, `${prefix}--toolbar-action`);
+  const tableToolbarActionIcon = (() => {
+    if (componentsX && icon) {
+      const IconTag = icon;
+      return (
+        <IconTag
+          className={`${prefix}--toolbar-action__icon`}
+          aria-label={iconDescription}
+        />
+      );
+    }
+    if (!componentsX && icon) {
+      return (
+        <Icon
+          className={`${prefix}--toolbar-action__icon`}
+          icon={icon}
+          name={iconName}
+          description={iconDescription}
+        />
+      );
+    }
+    return null;
+  })();
   return (
     <button className={toolbarActionClasses} {...rest}>
-      <Icon
-        className={`${prefix}--toolbar-action__icon`}
-        icon={icon}
-        name={iconName}
-        description={iconDescription}
-      />
+      {tableToolbarActionIcon}
     </button>
   );
 };

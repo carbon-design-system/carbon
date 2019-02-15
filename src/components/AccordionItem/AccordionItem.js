@@ -148,7 +148,6 @@ export default class AccordionItem extends Component {
               role={null} // eslint-disable-line jsx-a11y/aria-role
             />
           )}
-
           <div className={`${prefix}--accordion__title`}>{title}</div>
         </Expando>
         <div className={`${prefix}--accordion__content`}>{children}</div>

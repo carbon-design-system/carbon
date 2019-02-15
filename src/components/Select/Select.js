@@ -12,7 +12,6 @@ import { iconCaretDown } from 'carbon-icons';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import { componentsX } from '../../internal/FeatureFlags';
-// TODO: import { ChevronDownGlyph } from '@carbon/icons-react';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 
 const { prefix } = settings;

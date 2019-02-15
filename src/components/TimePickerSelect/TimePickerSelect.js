@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 import { iconCaretDown } from 'carbon-icons';
-// TODO: import { ChevronDownGlyph } from '@carbon/icons-react';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 import { settings } from 'carbon-components';
 import { componentsX } from '../../internal/FeatureFlags';

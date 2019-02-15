@@ -12,7 +12,6 @@ import Icon from '../Icon';
 import classNames from 'classnames';
 import warning from 'warning';
 import { iconInfoGlyph } from 'carbon-icons';
-// TODO: import { Information } from '@carbon/icons-react';
 import Information from '@carbon/icons-react/lib/information/16';
 import { settings } from 'carbon-components';
 import FloatingMenu, {

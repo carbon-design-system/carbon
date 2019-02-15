@@ -9,9 +9,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { iconSearch } from 'carbon-icons';
+import Search16 from '@carbon/icons-react/lib/search/16';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import ClickListener from '../../internal/ClickListener';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -121,11 +123,18 @@ export default class ToolbarSearch extends Component {
           <button
             className={`${prefix}--toolbar-search__btn`}
             onClick={this.expandSearch}>
-            <Icon
-              icon={iconSearch}
-              description={iconDescription}
-              className={`${prefix}--search-magnifier`}
-            />
+            {componentsX ? (
+              <Search16
+                className={`${prefix}--search-magnifier`}
+                aria-label={labelText}
+              />
+            ) : (
+              <Icon
+                icon={iconSearch}
+                description={iconDescription}
+                className={`${prefix}--search-magnifier`}
+              />
+            )}
           </button>
         </div>
       </ClickListener>

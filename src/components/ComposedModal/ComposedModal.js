@@ -12,7 +12,6 @@ import Button from '../Button';
 import Icon from '../Icon';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-// TODO: import { Close20 } from '@carbon/icons-react';
 import Close20 from '@carbon/icons-react/lib/close/20';
 import { componentsX } from '../../internal/FeatureFlags';
 

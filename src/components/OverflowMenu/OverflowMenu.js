@@ -19,7 +19,6 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import Icon from '../Icon';
-// TODO: import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
 import { componentsX } from '../../internal/FeatureFlags';
 import { keys, matches as keyCodeMatches } from '../../tools/key';

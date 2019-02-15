@@ -10,6 +10,9 @@ import PropTypes from 'prop-types';
 import { iconList, iconGrid } from 'carbon-icons';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
+import ListBulleted16 from '@carbon/icons-react/lib/list--bulleted/16';
+import Grid16 from '@carbon/icons-react/lib/grid/16';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -78,29 +81,44 @@ class SearchLayoutButton extends Component {
 
   render() {
     const { labelText, iconDescriptionList, iconDescriptionGrid } = this.props;
+    const SearchLayoutButtonIcon = () => {
+      if (componentsX) {
+        if (this.state.format === 'list') {
+          return (
+            <ListBulleted16
+              className={`${prefix}--search-view`}
+              aria-label={iconDescriptionList}
+            />
+          );
+        }
+        return (
+          <Grid16
+            className={`${prefix}--search-view`}
+            aria-label={iconDescriptionGrid}
+          />
+        );
+      }
+      return (
+        <Icon
+          icon={this.state.format === 'list' ? iconList : iconGrid}
+          description={
+            this.state.format === 'list'
+              ? iconDescriptionList
+              : iconDescriptionGrid
+          }
+          className={`${prefix}--search-view`}
+        />
+      );
+    };
     return (
       <button
         className={`${prefix}--search-button`}
         type="button"
         onClick={this.toggleLayout}
         aria-label={labelText}>
-        {this.state.format === 'list' ? (
-          <div className={`${prefix}--search__toggle-layout__container`}>
-            <Icon
-              icon={iconList}
-              description={iconDescriptionList}
-              className={`${prefix}--search-view`}
-            />
-          </div>
-        ) : (
-          <div className={`${prefix}--search__toggle-layout__container`}>
-            <Icon
-              icon={iconGrid}
-              description={iconDescriptionGrid}
-              className={`${prefix}--search-view`}
-            />
-          </div>
-        )}
+        <div className={`${prefix}--search__toggle-layout__container`}>
+          <SearchLayoutButtonIcon />
+        </div>
       </button>
     );
   }
