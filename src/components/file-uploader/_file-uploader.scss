@@ -113,10 +113,6 @@
     width: 100%;
   }
 
-  .#{$prefix}--file-complete {
-    fill: $support-02;
-  }
-
   .#{$prefix}--file--invalid {
     margin-right: $spacing-xs;
     fill: $support-01;
@@ -156,15 +152,15 @@
   }
 
   .#{$prefix}--file__selected-file {
-    @include text-overflow(300px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: rem(32px);
-    background-color: $field-01;
-    padding: 0 $spacing-xs 0 $spacing-md;
+    max-width: rem(300px);
     margin-bottom: $spacing-xs;
-    overflow-y: hidden;
+    padding: 0 $spacing-xs 0 $spacing-md;
+    background-color: $field-01;
+    overflow: hidden;
 
     &:last-child {
       margin-bottom: 0;
@@ -172,12 +168,9 @@
 
     .#{$prefix}--inline-loading__animation,
     .#{$prefix}--loading {
+      right: -0.25rem; // offset for loading svg container
       width: 1.5rem;
       height: 1.5rem;
-    }
-
-    .#{$prefix}--inline-loading__animation {
-      right: -0.25rem; // offset due to larger SVG size
     }
   }
 
@@ -197,12 +190,11 @@
 
   .#{$prefix}--file-filename {
     @include carbon--type-style('body-short-01');
-    @include text-overflow(100%);
-    display: inline-flex;
+    @include text-overflow(300px);
+    display: inline-block;
     align-items: center;
     color: $text-01;
     margin-right: $spacing-md;
-    height: 1.875rem;
     /*rtl:ignore*/
     direction: ltr;
     justify-content: flex-start; /*rtl:{flex-end}*/
@@ -212,21 +204,13 @@
     display: flex;
     align-items: center;
 
-    .#{$prefix}--loading {
-      width: 1rem;
-      height: 1rem;
-      margin-right: $spacing-xs;
-    }
-
     .#{$prefix}--loading__svg {
       stroke: $ui-05;
     }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    width: 1rem;
-    height: 1rem;
-    fill: $text-01;
+    fill: $support-02;
     cursor: pointer;
 
     &:focus {
@@ -239,8 +223,6 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    width: 1rem;
-    height: 1rem;
   }
 }
 
