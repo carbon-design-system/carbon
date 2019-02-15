@@ -50,7 +50,7 @@ export default class Tab extends React.Component {
     /**
      * Provide the contents of your Tab
      */
-    label: PropTypes.string,
+    label: PropTypes.node,
 
     /**
      * Provide an accessibility role for your Tab
