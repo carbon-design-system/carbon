@@ -13,6 +13,7 @@
 @import '../button/button';
 @import '../form/form';
 @import '../loading/loading';
+@import '@carbon/type/scss/type';
 
 @mixin file-uploader {
   .#{$prefix}--file {
@@ -183,15 +184,6 @@
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
     margin-bottom: $spacing-2xs;
-
-    .#{$prefix}--file-filename {
-      // TODO: @include type-style('caption-01');
-      font-family: font-family('sans');
-      font-size: type-scale(1);
-      font-weight: font-weight('regular');
-      line-height: rem(16px);
-      letter-spacing: 0.32px;
-    }
   }
 
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
@@ -204,7 +196,7 @@
   }
 
   .#{$prefix}--file-filename {
-    @include typescale('omega');
+    @include carbon--type-style('body-short-01');
     @include text-overflow(100%);
     display: inline-flex;
     align-items: center;
