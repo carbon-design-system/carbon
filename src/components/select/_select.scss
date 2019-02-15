@@ -363,10 +363,6 @@
     &:hover {
       background-color: $ui-01;
     }
-
-    &:focus {
-      @include focus-outline('outline');
-    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
