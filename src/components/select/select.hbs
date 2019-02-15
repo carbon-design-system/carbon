@@ -78,10 +78,6 @@
         <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
             selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
       {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
-      {{#if invalid}}
-      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
-      {{/if}}
-      {{ carbon-icon 'ErrorFilled16' class=(add @root.prefix '--select__disabled-icon')}}
     </div>
     {{else}}
     <select {{#if invalid}} data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}" disabled>

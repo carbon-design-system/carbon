@@ -263,10 +263,6 @@
 
   .#{$prefix}--select--invalid {
     padding-right: rem(58px); // 1rem + chevron width + invalid icon width
-
-    &:disabled {
-      padding-right: rem(82px); // 10px + chevron width + invalid icon width + disabled icon width
-    }
   }
 
   .#{$prefix}--select--invalid,
@@ -281,7 +277,6 @@
     overflow: visible;
   }
 
-  .#{$prefix}--select__disabled-icon,
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
     fill: $disabled;
   }
@@ -301,10 +296,6 @@
   .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: rem(34px); // 1.5rem + chevron width
-  }
-
-  .#{$prefix}--select--invalid ~ .#{$prefix}--select__disabled-icon {
-    right: rem(58px);
   }
 
   .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
@@ -371,12 +362,10 @@
     right: $spacing-xs;
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__disabled-icon,
   .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
     right: rem(24px);
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select--invalid:disabled ~ .#{$prefix}--select__disabled-icon,
   .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__disabled-icon {
     right: rem(48px);
   }
