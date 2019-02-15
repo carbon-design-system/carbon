@@ -43,7 +43,7 @@ compile and update Storybook you can run the following command in the
 `carbon-components` folder on your machine:
 
 ```bash
-yarn gulp watch
+yarn gulp watch -s
 ```
 
 This will execute the `watch` command in `gulpfile.js`. As a result, whenever
