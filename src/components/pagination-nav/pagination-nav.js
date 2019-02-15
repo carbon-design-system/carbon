@@ -23,21 +23,23 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
   constructor(element, options) {
     super(element, options);
     this.manage(on(this.element, 'click', evt => this.handleClick(evt)));
-    this.activePageNumber = this.initActivePageNumber();
-    this.selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
-    if (this.selectorPageSelect) {
-      this.manage(on(this.selectorPageSelect, 'change', evt => this.handleSelectChange(evt)));
-    }
+    this.manage(
+      on(this.element, 'change', evt => {
+        if (evt.target.matches(this.options.selectorPageSelect)) {
+          this.handleSelectChange(evt);
+        }
+      })
+    );
   }
 
   /**
    * Get active page number
    */
-  initActivePageNumber = () => {
+  getActivePageNumber = () => {
     let pageNum;
     const activePageElement = this.element.querySelector(this.options.selectorPageActive);
     if (activePageElement) {
-      pageNum = Number(activePageElement.dataset.page);
+      pageNum = Number(activePageElement.getAttribute(this.options.attribPage));
     }
     return pageNum;
   };
@@ -46,21 +48,22 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    * Clear active page attributes
    */
   clearActivePage = evt => {
-    const selectorPageButtonArray = this.element.querySelectorAll(this.options.selectorPageButton);
-    selectorPageButtonArray.forEach(el => {
+    const pageButtonNodeList = this.element.querySelectorAll(this.options.selectorPageButton);
+    const selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
+    Array.prototype.forEach.call(pageButtonNodeList, el => {
       el.classList.remove(this.options.classActive, this.options.classDisabled);
       el.disabled = false;
-      el.removeAttribute('data-active');
+      el.removeAttribute(this.options.attribActive);
       this.anchorAttributesHelper(el);
     });
-    if (this.selectorPageSelect) {
-      const selectorPageSelectOptions = this.selectorPageSelect.options;
-      for (let i = 0; i < selectorPageSelectOptions.length; i++) {
-        selectorPageSelectOptions[i].removeAttribute('data-active');
-      }
+    if (selectorPageSelect) {
+      const selectorPageSelectOptions = selectorPageSelect.options;
+      Array.prototype.forEach.call(selectorPageSelectOptions, el => {
+        el.removeAttribute(this.options.attribActive);
+      });
       if (!evt.target.matches(this.options.selectorPageSelect)) {
-        this.selectorPageSelect.classList.remove(this.options.classActive);
-        this.selectorPageSelect.value = '';
+        selectorPageSelect.classList.remove(this.options.classActive);
+        selectorPageSelect.value = '';
       }
     }
   };
@@ -69,30 +72,32 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    * Add active state on click
    */
   handleClick = evt => {
+    let nextActivePageNumber = this.getActivePageNumber();
+    const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
+    const selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
     this.clearActivePage(evt);
-    const selectorPageElementArray = this.element.querySelectorAll(this.options.selectorPageElement);
     if (evt.target.matches(this.options.selectorPageButton)) {
-      this.activePageNumber = Number(evt.target.dataset.page);
+      nextActivePageNumber = Number(evt.target.getAttribute(this.options.attribPage));
     }
     if (evt.target.matches(this.options.selectorPageDirection)) {
-      if (evt.target.dataset.pageDirection === 'previous') {
-        this.activePageNumber -= 1;
+      if (evt.target.getAttribute(this.options.attribPageDirection) === 'previous') {
+        nextActivePageNumber -= 1;
       }
-      if (evt.target.dataset.pageDirection === 'next') {
-        this.activePageNumber += 1;
+      if (evt.target.getAttribute(this.options.attribPageDirection) === 'next') {
+        nextActivePageNumber += 1;
       }
     }
-    const selectorPageTarget = selectorPageElementArray[this.activePageNumber - 1];
-    selectorPageTarget.dataset.active = true;
-    if (selectorPageTarget.tagName === 'OPTION') {
-      this.selectorPageSelect.value = this.activePageNumber;
-      this.selectorPageSelect.classList.add(this.options.classActive);
+    const pageTargetElement = pageElementNodeList[nextActivePageNumber - 1];
+    pageTargetElement.setAttribute(this.options.attribActive, true);
+    if (pageTargetElement.tagName === 'OPTION') {
+      selectorPageSelect.value = this.getActivePageNumber();
+      selectorPageSelect.classList.add(this.options.classActive);
     } else {
-      selectorPageTarget.classList.add(this.options.classActive, this.options.classDisabled);
-      selectorPageTarget.disabled = true;
-      if (selectorPageTarget.tagName === 'A') {
-        selectorPageTarget.setAttribute('tabIndex', -1);
-        selectorPageTarget.setAttribute('aria-disabled', true);
+      pageTargetElement.classList.add(this.options.classActive, this.options.classDisabled);
+      pageTargetElement.disabled = true;
+      if (pageTargetElement.tagName === 'A') {
+        pageTargetElement.setAttribute('tabIndex', -1);
+        pageTargetElement.setAttribute('aria-disabled', true);
       }
     }
     this.setPrevNextStates();
@@ -103,9 +108,9 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    */
   handleSelectChange = evt => {
     this.clearActivePage(evt);
-    this.activePageNumber = Number(evt.target.value);
-    const selectorPageSelectOptions = this.selectorPageSelect.options;
-    selectorPageSelectOptions[selectorPageSelectOptions.selectedIndex].dataset.active = true;
+    const selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
+    const selectorPageSelectOptions = selectorPageSelect.options;
+    selectorPageSelectOptions[selectorPageSelectOptions.selectedIndex].setAttribute(this.options.attribActive, true);
     evt.target.classList.add(this.options.classActive);
     this.setPrevNextStates();
   };
@@ -114,32 +119,32 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    * Set Previous and Next button states
    */
   setPrevNextStates = () => {
-    const selectorPageElementArray = this.element.querySelectorAll(this.options.selectorPageElement);
-    const totalPages = selectorPageElementArray.length;
-    const selectorPageDirectionPrevious = this.element.querySelector('[data-page-direction="previous"]');
-    const selectorPageDirectionNext = this.element.querySelector('[data-page-direction="next"]');
-    if (selectorPageDirectionPrevious) {
-      if (this.activePageNumber <= 1) {
-        selectorPageDirectionPrevious.disabled = true;
-        selectorPageDirectionPrevious.classList.add(this.options.classDisabled);
-        selectorPageDirectionPrevious.blur();
-        this.anchorAttributesHelper(selectorPageDirectionPrevious, 'add');
+    const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
+    const totalPages = pageElementNodeList.length;
+    const pageDirectionElementPrevious = this.element.querySelector(`[${this.options.attribPageDirection}="previous"]`);
+    const pageDirectionElementNext = this.element.querySelector(`[${this.options.attribPageDirection}="next"]`);
+    if (pageDirectionElementPrevious) {
+      if (this.getActivePageNumber() <= 1) {
+        pageDirectionElementPrevious.disabled = true;
+        pageDirectionElementPrevious.classList.add(this.options.classDisabled);
+        pageDirectionElementPrevious.blur();
+        this.anchorAttributesHelper(pageDirectionElementPrevious, 'add');
       } else {
-        selectorPageDirectionPrevious.disabled = false;
-        selectorPageDirectionPrevious.classList.remove(this.options.classDisabled);
-        this.anchorAttributesHelper(selectorPageDirectionPrevious);
+        pageDirectionElementPrevious.disabled = false;
+        pageDirectionElementPrevious.classList.remove(this.options.classDisabled);
+        this.anchorAttributesHelper(pageDirectionElementPrevious);
       }
     }
-    if (selectorPageDirectionNext) {
-      if (this.activePageNumber >= totalPages) {
-        selectorPageDirectionNext.disabled = true;
-        selectorPageDirectionNext.classList.add(this.options.classDisabled);
-        selectorPageDirectionNext.blur();
-        this.anchorAttributesHelper(selectorPageDirectionNext, 'add');
+    if (pageDirectionElementNext) {
+      if (this.getActivePageNumber() >= totalPages) {
+        pageDirectionElementNext.disabled = true;
+        pageDirectionElementNext.classList.add(this.options.classDisabled);
+        pageDirectionElementNext.blur();
+        this.anchorAttributesHelper(pageDirectionElementNext, 'add');
       } else {
-        selectorPageDirectionNext.disabled = false;
-        selectorPageDirectionNext.classList.remove(this.options.classDisabled);
-        this.anchorAttributesHelper(selectorPageDirectionNext);
+        pageDirectionElementNext.disabled = false;
+        pageDirectionElementNext.classList.remove(this.options.classDisabled);
+        this.anchorAttributesHelper(pageDirectionElementNext);
       }
     }
   };
@@ -191,6 +196,9 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
       selectorPageDirection: '[data-page-direction]',
       selectorPageSelect: '[data-page-select]',
       selectorPageActive: '[data-active="true"]',
+      attribPage: 'data-page',
+      attribPageDirection: 'data-page-direction',
+      attribActive: 'data-active',
       classActive: `${prefix}--pagination-nav__page--active`,
       classDisabled: `${prefix}--pagination-nav__page--disabled`,
     };

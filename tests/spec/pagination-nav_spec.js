@@ -35,6 +35,9 @@ describe('Pagination Nav', () => {
         selectorPageDirection: '[data-page-direction]',
         selectorPageSelect: '[data-page-select]',
         selectorPageActive: '[data-active="true"]',
+        attribPage: 'data-page',
+        attribPageDirection: 'data-page-direction',
+        attribActive: 'data-active',
         classActive: 'bx--pagination-nav__page--active',
         classDisabled: 'bx--pagination-nav__page--disabled',
       });
