@@ -55,7 +55,7 @@ const mkdirp = promisify(require('mkdirp'));
 const portscanner = require('portscanner');
 
 // Test environment
-const Server = require('karma').Server;
+const { Server } = require('karma');
 const commander = require('commander');
 
 // Fractal templates
