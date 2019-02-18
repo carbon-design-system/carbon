@@ -71,7 +71,7 @@
   .#{$prefix}--table-sort-v2--ascending {
     .#{$prefix}--table-sort-v2__icon {
       transform: rotate(180deg);
-      transition: transform 200ms $carbon--standard-easing;
+      transition: transform $transition--base $carbon--standard-easing;
     }
   }
 
