@@ -12,13 +12,13 @@
         {{#unless elementAsAnchor}}
           <button
             class="{{@root.prefix}}--pagination-nav__page"
-            data-page-direction="previous"
+            data-page-previous
             {{#if showPagePrevious.disabled}}disabled{{/if}}
           >
         {{else}}
           <a
             class="{{@root.prefix}}--pagination-nav__page{{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
-            data-page-direction="previous"
+            data-page-previous
             href="javascript:void(0)"
             {{#if showPagePrevious.disabled}}
               aria-disabled="true"
@@ -43,7 +43,6 @@
               class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--select"
               data-page-select
               aria-label="select page number"
-              tabindex="0"
             >
               {{#each select}}
                 <option
@@ -98,13 +97,13 @@
         {{#unless @root.elementAsAnchor}}
           <button
             class="{{@root.prefix}}--pagination-nav__page"
-            data-page-direction="next"
+            data-page-next
             {{#if showPageNext.disabled}}disabled{{/if}}
           >
         {{else}}
           <a
             class="{{@root.prefix}}--pagination-nav__page{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
-            data-page-direction="next"
+            data-page-next
             href="javascript:void(0)"
             {{#if showPageNext.disabled}}
               aria-disabled="true"

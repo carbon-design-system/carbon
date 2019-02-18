@@ -49,21 +49,21 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    */
   clearActivePage = evt => {
     const pageButtonNodeList = this.element.querySelectorAll(this.options.selectorPageButton);
-    const selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
+    const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
     Array.prototype.forEach.call(pageButtonNodeList, el => {
       el.classList.remove(this.options.classActive, this.options.classDisabled);
       el.disabled = false;
       el.removeAttribute(this.options.attribActive);
       this.anchorAttributesHelper(el);
     });
-    if (selectorPageSelect) {
-      const selectorPageSelectOptions = selectorPageSelect.options;
-      Array.prototype.forEach.call(selectorPageSelectOptions, el => {
+    if (pageSelectElement) {
+      const pageSelectElementOptions = pageSelectElement.options;
+      Array.prototype.forEach.call(pageSelectElementOptions, el => {
         el.removeAttribute(this.options.attribActive);
       });
       if (!evt.target.matches(this.options.selectorPageSelect)) {
-        selectorPageSelect.classList.remove(this.options.classActive);
-        selectorPageSelect.value = '';
+        pageSelectElement.classList.remove(this.options.classActive);
+        pageSelectElement.value = '';
       }
     }
   };
@@ -74,24 +74,22 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
   handleClick = evt => {
     let nextActivePageNumber = this.getActivePageNumber();
     const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
-    const selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
+    const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
     this.clearActivePage(evt);
     if (evt.target.matches(this.options.selectorPageButton)) {
       nextActivePageNumber = Number(evt.target.getAttribute(this.options.attribPage));
     }
-    if (evt.target.matches(this.options.selectorPageDirection)) {
-      if (evt.target.getAttribute(this.options.attribPageDirection) === 'previous') {
-        nextActivePageNumber -= 1;
-      }
-      if (evt.target.getAttribute(this.options.attribPageDirection) === 'next') {
-        nextActivePageNumber += 1;
-      }
+    if (evt.target.matches(this.options.selectorPagePrevious)) {
+      nextActivePageNumber -= 1;
+    }
+    if (evt.target.matches(this.options.selectorPageNext)) {
+      nextActivePageNumber += 1;
     }
     const pageTargetElement = pageElementNodeList[nextActivePageNumber - 1];
     pageTargetElement.setAttribute(this.options.attribActive, true);
     if (pageTargetElement.tagName === 'OPTION') {
-      selectorPageSelect.value = this.getActivePageNumber();
-      selectorPageSelect.classList.add(this.options.classActive);
+      pageSelectElement.value = this.getActivePageNumber();
+      pageSelectElement.classList.add(this.options.classActive);
     } else {
       pageTargetElement.classList.add(this.options.classActive, this.options.classDisabled);
       pageTargetElement.disabled = true;
@@ -108,9 +106,9 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    */
   handleSelectChange = evt => {
     this.clearActivePage(evt);
-    const selectorPageSelect = this.element.querySelector(this.options.selectorPageSelect);
-    const selectorPageSelectOptions = selectorPageSelect.options;
-    selectorPageSelectOptions[selectorPageSelectOptions.selectedIndex].setAttribute(this.options.attribActive, true);
+    const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
+    const pageSelectElementOptions = pageSelectElement.options;
+    pageSelectElementOptions[pageSelectElementOptions.selectedIndex].setAttribute(this.options.attribActive, true);
     evt.target.classList.add(this.options.classActive);
     this.setPrevNextStates();
   };
@@ -121,8 +119,8 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
   setPrevNextStates = () => {
     const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
     const totalPages = pageElementNodeList.length;
-    const pageDirectionElementPrevious = this.element.querySelector(`[${this.options.attribPageDirection}="previous"]`);
-    const pageDirectionElementNext = this.element.querySelector(`[${this.options.attribPageDirection}="next"]`);
+    const pageDirectionElementPrevious = this.element.querySelector(this.options.selectorPagePrevious);
+    const pageDirectionElementNext = this.element.querySelector(this.options.selectorPageNext);
     if (pageDirectionElementPrevious) {
       if (this.getActivePageNumber() <= 1) {
         pageDirectionElementPrevious.disabled = true;
@@ -193,11 +191,11 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
       selectorInit: '[data-pagination-nav]',
       selectorPageElement: '[data-page]',
       selectorPageButton: '[data-button]',
-      selectorPageDirection: '[data-page-direction]',
+      selectorPagePrevious: '[data-page-previous]',
+      selectorPageNext: '[data-page-next]',
       selectorPageSelect: '[data-page-select]',
       selectorPageActive: '[data-active="true"]',
       attribPage: 'data-page',
-      attribPageDirection: 'data-page-direction',
       attribActive: 'data-active',
       classActive: `${prefix}--pagination-nav__page--active`,
       classDisabled: `${prefix}--pagination-nav__page--disabled`,

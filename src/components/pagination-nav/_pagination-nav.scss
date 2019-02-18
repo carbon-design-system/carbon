@@ -58,6 +58,7 @@
     text-decoration: none;
     transition-duration: $transition--base;
     transition-timing-function: ease-in;
+    user-select: none;
 
     &:hover,
     &:focus {

@@ -32,11 +32,11 @@ describe('Pagination Nav', () => {
         selectorInit: '[data-pagination-nav]',
         selectorPageElement: '[data-page]',
         selectorPageButton: '[data-button]',
-        selectorPageDirection: '[data-page-direction]',
+        selectorPagePrevious: '[data-page-previous]',
+        selectorPageNext: '[data-page-next]',
         selectorPageSelect: '[data-page-select]',
         selectorPageActive: '[data-active="true"]',
         attribPage: 'data-page',
-        attribPageDirection: 'data-page-direction',
         attribActive: 'data-active',
         classActive: 'bx--pagination-nav__page--active',
         classDisabled: 'bx--pagination-nav__page--disabled',
@@ -72,9 +72,14 @@ describe('Pagination Nav', () => {
     it('should be called on page direction click', () => {
       spyOn(instance, 'clearActivePage');
       const event = new CustomEvent('click', { bubbles: true });
-      const pageDirectionButton = element.querySelector(instance.options.selectorPageDirection);
-      if (pageDirectionButton) {
-        pageDirectionButton.dispatchEvent(event);
+      const pagePreviousButton = element.querySelector(instance.options.selectorPagePrevious);
+      const pageNextButton = element.querySelector(instance.options.selectorPageNext);
+      if (pagePreviousButton && !pagePreviousButton.disabled) {
+        pagePreviousButton.dispatchEvent(event);
+        expect(instance.clearActivePage).toHaveBeenCalled();
+      }
+      if (pageNextButton) {
+        pageNextButton.dispatchEvent(event);
         expect(instance.clearActivePage).toHaveBeenCalled();
       }
     });
