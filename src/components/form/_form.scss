@@ -41,6 +41,10 @@
     margin-bottom: $spacing-xs;
   }
 
+  .#{$prefix}--label--with-helper {
+    margin-bottom: 0;
+  }
+
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
     @include typescale('zeta');
   }

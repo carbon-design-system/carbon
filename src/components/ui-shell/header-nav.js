@@ -19,6 +19,7 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
     super(element, options);
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
+
   /**
    * The map associating DOM element and Header instance.
    * @member HeaderNav.components

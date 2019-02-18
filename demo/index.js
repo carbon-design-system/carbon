@@ -12,7 +12,7 @@ export * from '../src/bundle';
 setComponents(components);
 
 if (typeof module !== 'undefined' && module.hot) {
-  const forEach = Array.prototype.forEach;
+  const { forEach } = Array.prototype;
 
   module.hot.dispose(() => {
     // Releases handles for event handlers to lazily instantiate components that have been replaced with new ones by HMR

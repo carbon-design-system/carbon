@@ -93,7 +93,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _selectToggle = detail => {
     const { element } = detail;
-    const checked = element.checked;
+    const { checked } = element;
 
     // increment the  count
     this.state.checkboxCount += checked ? 1 : -1;
@@ -107,8 +107,8 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this._actionBarToggle(this.state.checkboxCount > 0);
   };
 
-  _selectAllToggle = detail => {
-    const checked = detail.element.checked;
+  _selectAllToggle = ({ element }) => {
+    const { checked } = element;
 
     const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
 
@@ -184,9 +184,8 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     });
   };
 
-  _rowExpandToggle = detail => {
-    const element = detail.element;
-    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
+  _rowExpandToggle = ({ element, initialEvt }) => {
+    const parent = eventMatches(initialEvt, this.options.eventParentContainer);
 
     const index = this.expandCells.indexOf(element);
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
