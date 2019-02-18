@@ -64,9 +64,9 @@
             <button
               class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active{{/if}}"
               data-page="{{page}}"
-              data-button
+              data-page-button
               {{#if active}}
-                data-active="true"
+                data-page-active="true"
                 disabled
               {{/if}}
             >
@@ -74,10 +74,10 @@
             <a
               class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active  {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
               data-page="{{page}}"
-              data-button
+              data-page-button
               href="javascript:void(0)"
               {{#if active}}
-                data-active="true"
+                data-page-active="true"
                 aria-disabled="true"
                 tabindex="-1"
               {{/if}}

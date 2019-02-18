@@ -190,13 +190,13 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
     return {
       selectorInit: '[data-pagination-nav]',
       selectorPageElement: '[data-page]',
-      selectorPageButton: '[data-button]',
+      selectorPageButton: '[data-page-button]',
       selectorPagePrevious: '[data-page-previous]',
       selectorPageNext: '[data-page-next]',
       selectorPageSelect: '[data-page-select]',
-      selectorPageActive: '[data-active="true"]',
+      selectorPageActive: '[data-page-active="true"]',
       attribPage: 'data-page',
-      attribActive: 'data-active',
+      attribActive: 'data-page-active',
       classActive: `${prefix}--pagination-nav__page--active`,
       classDisabled: `${prefix}--pagination-nav__page--disabled`,
     };
