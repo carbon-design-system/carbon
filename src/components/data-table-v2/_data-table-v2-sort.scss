@@ -117,14 +117,14 @@
 
   .#{$prefix}--table-sort-v2__icon {
     position: relative;
-    left: 2px;
-    transition: transform 200ms $carbon--standard-easing;
+    left: rem(2px);
+    transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
     opacity: 0;
     fill: $ui-05;
     height: rem(9px);
     width: auto;
-    min-width: 14px;
+    min-width: rem(14px);
   }
 }
 

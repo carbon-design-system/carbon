@@ -54,7 +54,7 @@
           top: 0;
           left: 0;
           height: 100%;
-          width: 2px;
+          width: rem(2px);
           background-color: $brand-01;
         }
       }
@@ -63,7 +63,7 @@
     &:hover {
       > td {
         background-color: $hover-row;
-        transition: all 200ms $carbon--standard-easing;
+        transition: all $transition--base $carbon--standard-easing;
       }
 
       > td:first-of-type {
@@ -234,7 +234,7 @@
 
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
     transform: rotate(270deg);
-    transition: transform 200ms $carbon--standard-easing;
+    transition: transform $transition--base $carbon--standard-easing;
   }
 
   .#{$prefix}--table-expand-v2__button {
