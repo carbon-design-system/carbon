@@ -523,9 +523,9 @@
 
   .#{$prefix}--date-picker__input {
     @include reset;
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
-    font-family: $font-family-mono;
+
     display: block;
     position: relative;
     height: rem(40px);

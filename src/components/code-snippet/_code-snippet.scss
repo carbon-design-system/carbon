@@ -306,15 +306,18 @@
   // Inline Code Snippet
   .#{$prefix}--snippet--inline {
     @include reset;
+    // Note: originally this inline snippet inherited font-size, we might need
+    // a more flexible strategy than explicitly setting font-size with this
+    // type style
+    @include type-style('code-01');
+
     position: relative;
     display: inline;
     padding: 0;
-    font-size: inherit;
     border: 2px solid transparent;
     border-radius: 4px;
     background-color: $ui-01;
     color: $text-01;
-    font-size: 85%;
     cursor: pointer;
 
     &:hover {
@@ -345,7 +348,7 @@
 
   // Single Line Snippet
   .#{$prefix}--snippet--single {
-    @include bx--snippet;
+    @include bx--snippet--x;
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
@@ -368,7 +371,7 @@
 
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
-    @include bx--snippet;
+    @include bx--snippet--x;
     border: none;
     padding: $spacing-md;
     min-width: rem(320px);

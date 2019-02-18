@@ -115,8 +115,8 @@
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
-    @include font-family;
-    @include typescale('zeta');
+    @include type-style('heading-01');
+
     color: $text-01;
     margin-bottom: $spacing-xs;
   }
@@ -134,8 +134,8 @@
 
   .#{$prefix}--label-description {
     @include reset;
-    @include typescale('zeta');
-    @include line-height('body');
+    @include type-style('body-short-01');
+
     color: $text-02;
     margin-bottom: $spacing-md;
   }
@@ -162,7 +162,7 @@
   }
 
   .#{$prefix}--file-filename {
-    @include typescale('omega');
+    @include type-style('body-short-01');
     @include text-overflow(100%);
     display: inline-flex;
     align-items: center;
