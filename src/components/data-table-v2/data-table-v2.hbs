@@ -442,7 +442,9 @@
         {{#if row.sectionContent}}
           <tr class="{{@root.prefix}}--expandable-row-v2 {{@root.prefix}}--expandable-row--hidden-v2" data-child-row>
             <td colspan="{{../columns.length}}">
-              {{{row.sectionContent}}}
+              <div>
+                {{{row.sectionContent}}}
+              </div>
             </td>
           </tr>
         {{/if}}

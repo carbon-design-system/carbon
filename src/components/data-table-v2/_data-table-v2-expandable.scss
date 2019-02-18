@@ -154,13 +154,24 @@
   //parent row collapsed
   tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2) {
     //child row hidden / td hidden
+    border-bottom: none;
+
     + tr[data-child-row] {
-      visibility: collapse;
+      height: 0;
+      transition: height $transition--expansion $carbon--standard-easing;
+
       td {
+        padding-top: 0;
+        padding-bottom: 0;
+        transition: padding $transition--expansion $carbon--standard-easing;
+      }
+
+      td div {
         overflow: hidden;
         max-height: 0;
         opacity: 0;
-        transition: opacity $transition--expansion $carbon--standard-easing;
+        transition: max-height $transition--expansion $carbon--standard-easing,
+          opacity $transition--expansion $carbon--standard-easing;
       }
     }
   }
@@ -173,11 +184,17 @@
 
     //child row visible / td visible
     + tr[data-child-row] {
-      visibility: visible;
+      transition: height $transition--expansion $carbon--standard-easing;
+
       td {
+        transition: padding $transition--expansion $carbon--standard-easing;
+      }
+
+      td div {
         max-height: 100%;
         opacity: 1;
-        transition: opacity $transition--expansion $carbon--standard-easing;
+        transition: max-height $transition--expansion $carbon--standard-easing,
+          opacity $transition--expansion $carbon--standard-easing;
       }
     }
 
