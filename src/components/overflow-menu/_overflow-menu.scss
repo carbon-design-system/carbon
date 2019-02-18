@@ -231,7 +231,7 @@
     align-items: flex-start;
     position: absolute;
     z-index: z('floating');
-    background-color: $inverse-01;
+    background-color: $ui-01;
     width: 11.25rem;
     list-style: none;
     top: 32px;
@@ -305,6 +305,13 @@
     border-top: 1px solid $ui-03;
   }
 
+  a.#{$prefix}--overflow-menu-options__btn::before {
+    content: '';
+    height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
   .#{$prefix}--overflow-menu-options__btn {
     @include reset;
     @include typescale('zeta');
@@ -314,18 +321,21 @@
     width: 100%;
     height: 100%;
     border: none;
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     background-color: transparent;
     text-align: left;
     padding: 0 $spacing-md;
     cursor: pointer;
-    color: $text-01;
+    color: $text-02;
     max-width: 11.25rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     transition: outline $transition--base, background-color $transition--base, color $transition--base;
+
+    &:hover {
+      color: $text-01;
+    }
 
     &:focus {
       @include focus-outline('outline');

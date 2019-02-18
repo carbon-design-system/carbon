@@ -13,6 +13,7 @@
 @import '../button/button';
 @import '../form/form';
 @import '../loading/loading';
+@import '@carbon/type/scss/type';
 
 @mixin file-uploader {
   .#{$prefix}--file {
@@ -112,6 +113,11 @@
     width: 100%;
   }
 
+  .#{$prefix}--file--invalid {
+    margin-right: $spacing-xs;
+    fill: $support-01;
+  }
+
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
@@ -127,9 +133,8 @@
 
   .#{$prefix}--file-btn {
     display: inline-flex;
-    width: rem(95px);
     margin: 0;
-    padding-right: 1rem;
+    padding-right: rem(64px);
   }
 
   .#{$prefix}--label-description {
@@ -143,32 +148,53 @@
   .#{$prefix}--file-container {
     display: block;
     width: 100%;
-    margin-top: $spacing-md;
+    margin-top: $spacing-lg;
   }
 
   .#{$prefix}--file__selected-file {
-    @include text-overflow(300px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: rem(30px);
-    background-color: $inverse-01;
+    min-height: rem(32px);
+    max-width: rem(300px);
+    margin-bottom: $spacing-xs;
     padding: 0 $spacing-xs 0 $spacing-md;
-    margin-bottom: $spacing-sm;
+    background-color: $field-01;
+    overflow: hidden;
 
     &:last-child {
       margin-bottom: 0;
     }
+
+    .#{$prefix}--inline-loading__animation,
+    .#{$prefix}--loading {
+      right: -0.25rem; // offset for loading svg container
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
+    @include focus-outline('invalid');
+    margin-bottom: $spacing-2xs;
+  }
+
+  .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    display: block;
+    max-height: rem(200px);
+    color: $support-01;
+    font-weight: 400;
+    margin: 0 0 $spacing-xs 0;
+    overflow: visible;
   }
 
   .#{$prefix}--file-filename {
-    @include typescale('omega');
-    @include text-overflow(100%);
-    display: inline-flex;
+    @include carbon--type-style('body-short-01');
+    @include text-overflow(300px);
+    display: inline-block;
     align-items: center;
     color: $text-01;
     margin-right: $spacing-md;
-    height: 1.875rem;
     /*rtl:ignore*/
     direction: ltr;
     justify-content: flex-start; /*rtl:{flex-end}*/
@@ -178,21 +204,13 @@
     display: flex;
     align-items: center;
 
-    .#{$prefix}--loading {
-      width: 1rem;
-      height: 1rem;
-      margin-right: $spacing-xs;
-    }
-
     .#{$prefix}--loading__svg {
       stroke: $ui-05;
     }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    width: 1rem;
-    height: 1rem;
-    fill: $text-01;
+    fill: $support-02;
     cursor: pointer;
 
     &:focus {
@@ -205,8 +223,6 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    width: 1rem;
-    height: 1rem;
   }
 }
 
