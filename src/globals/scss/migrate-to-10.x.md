@@ -28,6 +28,9 @@ Toggle on feature flag for `font-family` mixin
 
 ## `_css--font-face.scss`
 
+File now relies on `@carbon/elements` for bringing in font files for IBM Plex.
+It is still recommended to use a CDN for serving IBM Plex.
+
 ### Helvetica Neue
 
 Usage of `helvetica-font-face` is deprecated. Please set `$css--plex: true`
@@ -38,16 +41,27 @@ No longer shipping font files for Helvetica Neue
 
 ## `_css--plex-core.scss`
 
+Notable changes:
+
+- IBM Plex fonts now come from Carbon Elements
+- The CDN for IBM Plex font files is now Google Fonts, we still recommend using
+  your own for production (NOTE: how would one do this?)
+
 | v9                        | v10                                                    |
 | ------------------------- | ------------------------------------------------------ |
+| `$font-path`              | ☠️ Deprecated                                          |
 | `$unicodes`               | ☠️ Deprecated                                          |
 | `$families`               | ☠️ Deprecated, use `font-families` from `@carbon/type` |
 | `$fallbacks`              | ☠️ Deprecated, use `font-families` from `@carbon/type` |
 | `$weights`                | ☠️ Deprecated, use `font-weight` from `@carbon/type`   |
-| `check-default-font-path` | TODO: might want to remove?                            |
+| `check-default-font-path` | ☠️ Deprecated                                          |
+| `plex-font-face`          | ☠️ Deprecated                                          |
 
-- `@font-face` declarations now come from `@carbon/type`
-- Font files come from `@ibm/plex`
+TODO:
+
+- How do we warn if using google fonts CDN? Should we?
+- What guidance do we give for folks wanting to use their own type?
+- What guidance do we give for folks wanting to use a CDN for their fonts?
 
 ## `_css--reset.scss`
 

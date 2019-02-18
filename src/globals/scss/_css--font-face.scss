@@ -10,6 +10,9 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 @import 'import-once';
 @import 'css--plex-core';
 @import 'helper-mixins';
+@import 'feature-flags';
+@import './vendor/@carbon/elements/scss/type/font-face/mono';
+@import './vendor/@carbon/elements/scss/type/font-face/sans';
 
 @mixin helvetica-font-face {
   // Default font directory, `!default` flag allows user override.
@@ -70,7 +73,12 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 @include exports('css--font-face') {
   @if not global-variable-exists('css--font-face') or $css--font-face == true {
     @if global-variable-exists('css--plex') and $css--plex == true {
-      @include plex-font-face;
+      @if feature-flag-enabled('components-x') {
+        @include carbon--font-face-mono();
+        @include carbon--font-face-sans();
+      } @else {
+        @include plex-font-face;
+      }
     } @else {
       @include helvetica-font-face;
     }
