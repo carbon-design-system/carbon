@@ -163,7 +163,9 @@
       td {
         padding-top: 0;
         padding-bottom: 0;
-        transition: padding $transition--expansion $carbon--standard-easing;
+        background-color: $hover-field;
+        transition: padding $transition--expansion $carbon--standard-easing,
+          background-color $transition--expansion $carbon--standard-easing;
       }
 
       td div {
