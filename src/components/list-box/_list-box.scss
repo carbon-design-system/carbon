@@ -311,10 +311,6 @@ $list-box-menu-width: rem(300px);
     cursor: pointer;
     color: $text-01;
     transition: all $transition--expansion $carbon--standard-easing;
-
-    &:hover {
-      background-color: $ui-03;
-    }
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -588,14 +584,31 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $ui-03;
+    background-color: $hover-ui;
     color: $text-01;
     border-bottom: 1px solid $ui-01;
 
     &::before,
     &::after {
-      background-color: $ui-03;
+      background-color: $hover-ui;
       // Below two are for fixing border and background-color alignment when zooming in
+      height: 100%;
+      z-index: 1;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item--active,
+  .#{$prefix}--list-box__menu-item--active:hover {
+    color: $text-01;
+    background-color: $selected-ui;
+    border-bottom-color: $selected-ui;
+
+    &:before,
+    &:after {
+      background-color: $selected-ui;
+      border-bottom: 1px solid $selected-ui;
+      // Below two are for fixing border and background-color alignment when zooming in
+      top: 0;
       height: 100%;
       z-index: 1;
     }
