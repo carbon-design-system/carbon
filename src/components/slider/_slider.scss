@@ -268,8 +268,8 @@
   }
 
   // Disabled state
-  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider__range-label {
-    color: $disabled;
+  .#{$prefix}--label--disabled ~ .#{$prefix}--slider-container > .#{$prefix}--slider__range-label {
+    color: $disabled-02;
   }
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {

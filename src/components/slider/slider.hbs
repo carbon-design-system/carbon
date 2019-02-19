@@ -7,7 +7,9 @@
 
 <div class="{{@root.prefix}}--form-item">
   {{#if componentsX}}
-    <label class="{{@root.prefix}}--label">Slider label</label>
+    <label class="{{@root.prefix}}--label {{#if disabled}}{{@root.prefix}}--label--disabled{{/if}}">
+      Slider label
+    </label>
   {{/if}}
   <div class="{{@root.prefix}}--slider-container">
     <label id="{{inputId}}_bottom-range-label" class="{{@root.prefix}}--slider__range-label">0</label>
