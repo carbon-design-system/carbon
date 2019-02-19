@@ -10,22 +10,63 @@
 @import '../../globals/scss/vars';
 
 @mixin data-table-v2-expandable {
+  //PARENT ROW WITH COLLAPSED CHILD ROW
   tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2) {
+    //ADDS BEFORE ELEMENT WITH ZERO WIDTH/HEIGHT FOR TRANSITION
+    td:first-of-type {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0;
+        width: 0;
+        background-color: $brand-01;
+        transition: width $transition--expansion $carbon--standard-easing;
+      }
+    }
+
+    //COLLAPSED CHILD ROW
     + tr[data-child-row] {
-      display: none;
+      height: 0;
+      transition: height $transition--expansion $carbon--standard-easing;
+
       td {
         border-top: 0;
-        padding-bottom: $spacing-xs;
+        padding-top: 0;
+        padding-bottom: 0;
         overflow: hidden;
         max-height: 0;
-        opacity: 0;
-        transition: all $transition--expansion $carbon--standard-easing;
+        background-color: $hover-row;
+        transition: background-color $transition--expansion $carbon--standard-easing,
+          max-height $transition--expansion $carbon--standard-easing, padding-top $transition--expansion $carbon--standard-easing,
+          padding-bottom $transition--expansion $carbon--standard-easing;
+
+        //hides all elements inside of collapsed row td
+        & * {
+          display: none;
+        }
+
+        //ADDS BEFORE ELEMENT (to match parent) WITH ZERO WIDTH/HEIGHT FOR TRANSITION
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 0;
+          width: 0;
+          background-color: $brand-01;
+          transition: width $transition--expansion $carbon--standard-easing;
+        }
       }
     }
   }
 
+  //PARENT ROW WITH EXPANDED CHILD ROW
   tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 {
-    > td:first-of-type {
+    td:first-of-type {
       position: relative;
 
       &:before {
@@ -34,19 +75,23 @@
         top: 0;
         left: 0;
         height: 100%;
-        width: 2px;
+        width: rem(2px);
         background-color: $brand-01;
+        transition: width $transition--expansion $carbon--standard-easing;
       }
     }
 
+    //EXPANDED CHILD ROW
     + tr[data-child-row] {
-      display: table-row;
+      transition: height $transition--expansion $carbon--standard-easing;
+
       td {
         border-top: 0;
         padding-bottom: $spacing-xs;
         max-height: 100%;
-        opacity: 1;
-        transition: all $transition--expansion $carbon--standard-easing;
+        transition: background-color $transition--expansion $carbon--standard-easing,
+          max-height $transition--expansion $carbon--standard-easing, padding-top $transition--expansion $carbon--standard-easing,
+          padding-bottom $transition--expansion $carbon--standard-easing;
 
         &:before {
           content: '';
@@ -56,26 +101,29 @@
           height: 100%;
           width: rem(2px);
           background-color: $brand-01;
+          transition: width $transition--expansion $carbon--standard-easing;
+        }
+
+        & * {
+          display: block;
         }
       }
     }
 
+    //HOVERING ON PARENT ROW WHILE EXPANDED
     &:hover {
-      > td {
+      td {
+        border-bottom: 0;
         background-color: $hover-row;
-        transition: all $transition--base $carbon--standard-easing;
+        transition: background-color $transition--base $carbon--standard-easing;
       }
 
-      > td:first-of-type {
+      td:first-of-type {
         border-left: 1px solid $brand-01;
       }
 
-      > td:last-of-type {
+      td:last-of-type {
         border-right: 1px solid $brand-01;
-      }
-
-      &[data-parent-row] > td {
-        border-bottom: 0;
       }
 
       + tr[data-child-row] {
@@ -84,29 +132,26 @@
           border-bottom: 1px solid $brand-01;
           border-right: 1px solid $brand-01;
           border-left: 1px solid $brand-01;
-          transition: all 200ms $carbon--standard-easing;
+          transition: background-color $transition--base $carbon--standard-easing;
         }
       }
     }
   }
 
+  //HOVERING ON CHILD ROW - ADDS (BELOW) CLASS TO PARENT ROW
   tr.#{$prefix}--expandable-row--hover-v2 {
-    > td:first-of-type {
+    td:first-of-type {
       border-left: 1px solid $brand-01;
     }
 
-    > td {
-      background-color: $hover-row;
-      border-top: 1px solid $brand-01;
-      transition: all 200ms $carbon--standard-easing;
-    }
-
-    > td:last-of-type {
+    td:last-of-type {
       border-right: 1px solid $brand-01;
     }
 
-    > td {
-      transition: all 200ms $carbon--standard-easing;
+    td {
+      background-color: $hover-row;
+      border-top: 1px solid $brand-01;
+      transition: background-color $transition--base $carbon--standard-easing;
     }
   }
 
