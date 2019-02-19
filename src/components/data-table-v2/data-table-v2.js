@@ -119,13 +119,17 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       }
     });
 
-    if (!previousValue || previousValue === 'descending') {
+    if (!previousValue || previousValue === null) {
       element.dataset.previousValue = 'ascending';
       element.classList.add(this.options.classTableSortActive);
       element.classList.add(this.options.classTableSortAscending);
-    } else {
+    } else if (previousValue === 'ascending') {
       element.dataset.previousValue = 'descending';
       element.classList.add(this.options.classTableSortActive);
+      element.classList.remove(this.options.classTableSortAscending);
+    } else if (previousValue === 'descending') {
+      element.removeAttribute('data-previous-value');
+      element.classList.remove(this.options.classTableSortActive);
       element.classList.remove(this.options.classTableSortAscending);
     }
   };
