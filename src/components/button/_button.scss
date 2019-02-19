@@ -281,25 +281,10 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red-80);
+    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $text-04, $active-danger);
 
     &:hover {
-      color: $inverse-01;
       border: $button-border-width solid transparent;
-    }
-
-    &:hover > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
-    }
-  }
-
-  .#{$prefix}--btn--danger--primary {
-    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red-80);
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $ui-04;
-      border: $button-border-width solid $disabled;
     }
   }
 
@@ -310,7 +295,7 @@
   }
 
   .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
-  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
     margin-left: $spacing-md;
   }
 
