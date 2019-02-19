@@ -26,7 +26,7 @@ describe('motion', () => {
     // under _vars.scss
     it('should be exported through _vars.scss', async () => {
       const { calls } = await renderSass(`
-@import './src/globals/scss/motion';
+@import './src/globals/scss/vars';
 
 $c: test(global-variable-exists(${name}));
 `);
