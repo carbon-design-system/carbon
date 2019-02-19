@@ -444,7 +444,7 @@
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled))
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     color: $text-01;
     @include breakpoint(bp--sm--major) {
@@ -475,9 +475,9 @@
   //-----------------------------
   //  Link Focus
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
   }
