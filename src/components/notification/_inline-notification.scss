@@ -186,7 +186,7 @@
   }
 
   .#{$prefix}--inline-notification__subtitle {
-    @include type-style('body-long-01');
+    @include type-style('body-short-01');
 
     word-break: break-word;
   }
