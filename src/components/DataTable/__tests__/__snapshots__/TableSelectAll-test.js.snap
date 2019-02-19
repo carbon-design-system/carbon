@@ -22,6 +22,7 @@ exports[`DataTable.TableSelectAll should render 1`] = `
               onSelect={[MockFunction]}
             >
               <th
+                className="custom-class-name"
                 scope="col"
               >
                 <InlineCheckbox

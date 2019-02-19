@@ -17,8 +17,9 @@ const TableSelectAll = ({
   name,
   onSelect,
   disabled,
+  className,
 }) => (
-  <th scope="col">
+  <th scope="col" className={className}>
     <InlineCheckbox
       ariaLabel={ariaLabel}
       checked={checked}
@@ -61,6 +62,11 @@ TableSelectAll.propTypes = {
    * Provide a handler to listen to when a user initiates a selection request
    */
   onSelect: PropTypes.func.isRequired,
+
+  /**
+   * The CSS class names of the cell that wraps the underlying input control
+   */
+  className: PropTypes.string,
 };
 
 TableSelectAll.defaultProps = {

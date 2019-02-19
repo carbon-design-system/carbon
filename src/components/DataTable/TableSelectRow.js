@@ -18,6 +18,7 @@ const TableSelectRow = ({
   onSelect,
   disabled,
   radio,
+  className,
 }) => {
   const selectionInputProps = {
     id,
@@ -29,7 +30,7 @@ const TableSelectRow = ({
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   return (
-    <td>
+    <td className={className}>
       <InlineInputComponent {...selectionInputProps} />
     </td>
   );
@@ -69,6 +70,11 @@ TableSelectRow.propTypes = {
    * Specify whether the control should be a radio button or inline checkbox
    */
   radio: PropTypes.bool,
+
+  /**
+   * The CSS class names of the cell that wraps the underlying input control
+   */
+  className: PropTypes.string,
 };
 
 export default TableSelectRow;

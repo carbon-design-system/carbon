@@ -21,7 +21,9 @@ exports[`DataTable.TableSelectRow should render 1`] = `
               name="select-all"
               onSelect={[MockFunction]}
             >
-              <td>
+              <td
+                className="custom-class-name"
+              >
                 <InlineCheckbox
                   ariaLabel="Aria label"
                   checked={false}

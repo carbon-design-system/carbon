@@ -35,6 +35,21 @@ describe('DataTable.TableSelectAll', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render with the provided class name', () => {
+    const customClassName = 'custom-table-select-all-classname';
+    const wrapper = mount(
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableSelectAll {...mockProps} className={customClassName} />
+          </TableRow>
+        </TableHead>
+      </Table>
+    );
+    const elements = wrapper.find(`th.${customClassName}`);
+    expect(elements.length).toBe(1);
+  });
+
   it('should invoke `onSelect` when clicked', () => {
     const wrapper = mount(
       <Table>

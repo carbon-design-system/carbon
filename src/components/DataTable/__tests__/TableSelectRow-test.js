@@ -36,6 +36,21 @@ describe('DataTable.TableSelectRow', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render with the provided class name', () => {
+    const customClassName = 'custom-table-select-row-classname';
+    const wrapper = mount(
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableSelectRow {...mockProps} className={customClassName} />
+          </TableRow>
+        </TableHead>
+      </Table>
+    );
+    const elements = wrapper.find(`td.${customClassName}`);
+    expect(elements.length).toBe(1);
+  });
+
   it('should invoke `onSelect` when clicked', () => {
     const wrapper = mount(
       <Table>
