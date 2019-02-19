@@ -35,10 +35,20 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Progress Indicator',
+      label: 'Radio button group',
       context: {
         selectedValue: 'red',
         group: 'radio-button',
+        items,
+      },
+    },
+    {
+      name: 'vertical',
+      label: 'Vertical radio button group',
+      context: {
+        selectedValue: 'red',
+        group: 'radio-button--vertical',
+        vertical: true,
         items,
       },
     },
