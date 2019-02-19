@@ -86,6 +86,10 @@
       color: $link-visited;
     }
   }
+
+  .#{$prefix}--disabled {
+    color: $disabled-02;
+  }
 }
 
 @include exports('link') {
