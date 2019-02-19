@@ -91,7 +91,7 @@
   }
 
   .#{$prefix}--table-expand-v2__button {
-    @include button-reset('false');
+    @include button-reset(false);
 
     &:focus {
       outline: 1px solid transparent;
