@@ -49,7 +49,7 @@ $t: test($${name});
 }
 `
       );
-      const { calls, result } = await renderSass(`
+      const { result } = await renderSass(`
 @import './src/globals/scss/typography';
 ${tests.join('\n')}
 `);
@@ -57,7 +57,7 @@ ${tests.join('\n')}
     });
 
     it('should warn if given invalid size', async () => {
-      const { calls, output } = await renderSass(`
+      const { output } = await renderSass(`
 @import './src/globals/scss/typography';
 .test {
   @include typescale('<unknown>');
