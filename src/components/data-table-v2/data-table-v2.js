@@ -6,7 +6,7 @@
  */
 
 import debounce from 'lodash.debounce';
-// import { componentsX } from '../../globals/js/feature-flags';
+import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -260,30 +260,30 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     }
   };
 
-  // _expandableRowsInit = expandableRows => {
-  // expandableRows.forEach(item => {
-  // if(!componentsX) {
-  //   item.classList.remove(this.options.classExpandableRowHidden);
-  //   this.tableBody.removeChild(item);
-  // }
-  // });
-  // };
+  _expandableRowsInit = expandableRows => {
+    expandableRows.forEach(item => {
+      if (!componentsX) {
+        item.classList.remove(this.options.classExpandableRowHidden);
+        this.tableBody.removeChild(item);
+      }
+    });
+  };
 
   _rowExpandToggle = ({ element, initialEvt }) => {
     const parent = eventMatches(initialEvt, this.options.eventParentContainer);
 
-    // const index = this.expandCells.indexOf(element);
+    const index = this.expandCells.indexOf(element);
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
-      // if(!componentsX) {
-      //   this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
-      // }
+      if (!componentsX) {
+        this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
+      }
     } else {
       parent.classList.remove(this.options.classExpandableRow);
-      // if(!componentsX) {
-      //   this.tableBody.removeChild(parent.nextElementSibling);
-      // }
+      if (!componentsX) {
+        this.tableBody.removeChild(parent.nextElementSibling);
+      }
       element.dataset.previousValue = 'expanded';
     }
   };
@@ -350,11 +350,11 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
         const mergedExpandableRows = [...toArray(this.expandableRows), ...toArray(diffExpandableRows)];
-        // this._expandableRowsInit(diffExpandableRows);
+        this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
     } else if (newExpandableRows.length > 0) {
-      // this._expandableRowsInit(newExpandableRows);
+      this._expandableRowsInit(newExpandableRows);
       this.expandableRows = newExpandableRows;
     }
 
