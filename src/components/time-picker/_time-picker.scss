@@ -116,23 +116,22 @@
     }
   }
 
+  .#{$prefix}--time-picker__select:not(:last-of-type) {
+    margin: 0 $spacing-3xs;
+  }
+
   .#{$prefix}--time-picker__input {
     display: flex;
     flex-direction: column;
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
-    padding-right: $spacing-xl;
-    margin-left: rem(1px);
+    padding-right: rem(42px); // 2rem + SVG width
     min-width: auto;
     width: auto;
     line-height: 1;
     display: flex;
     align-items: center;
-  }
-
-  .#{$prefix}--time-picker .#{$prefix}--select__arrow {
-    right: 0.875rem;
   }
 
   .#{$prefix}--time-picker__input-field {
@@ -188,8 +187,11 @@
     }
   }
 
-  .#{$prefix}--time-picker--light .#{$prefix}--time-picker__input-field {
-    background: $field-02;
+  .#{$prefix}--time-picker--light {
+    .#{$prefix}--time-picker__input-field,
+    .#{$prefix}--select-input {
+      background: $field-02;
+    }
   }
 }
 

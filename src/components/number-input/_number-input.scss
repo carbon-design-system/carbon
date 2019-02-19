@@ -270,6 +270,7 @@
 
   .#{$prefix}--number__control-btn {
     @include button-reset;
+    color: $icon-01;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -277,17 +278,21 @@
     width: rem(20px);
     height: rem(10px);
 
+    svg {
+      fill: currentColor;
+    }
+
     &:focus {
       @include focus-outline;
-      fill: $interactive-01;
+      color: $interactive-01;
     }
 
     &:hover {
       cursor: pointer;
     }
 
-    &:hover svg {
-      fill: $ui-05;
+    &:hover {
+      color: $icon-01;
     }
   }
 

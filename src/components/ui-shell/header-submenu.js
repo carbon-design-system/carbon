@@ -26,6 +26,7 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
     this.manage(on(this.element, 'click', this._handleEvent));
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
   }
+
   /**
    * The map associating DOM element and HeaderSubmenu instance.
    * @member HeaderSubmenu.components
