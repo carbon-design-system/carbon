@@ -171,6 +171,7 @@
 @mixin search--x {
   .#{$prefix}--search {
     display: flex;
+    align-items: center;
     position: relative;
     width: 100%;
   }
@@ -193,6 +194,10 @@
     order: 1;
     transition: background-color $transition--base, outline $transition--base;
     border-bottom: 1px solid $ui-04;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
 
     &:focus {
       @include focus-outline('outline');
@@ -266,8 +271,12 @@
   .#{$prefix}--search-close {
     @include button-reset(false);
     @include focus-outline('reset');
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: opacity $transition--base, outline $transition--base, background-color $transition--base,
       border-color $transition--base;
+    border-bottom: 1px solid transparent;
     cursor: pointer;
     visibility: visible;
     opacity: 1;
@@ -275,8 +284,17 @@
     height: rem(40px);
     width: rem(40px);
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    fill: $icon-01;
+
+    &:hover {
+      background-color: $hover-ui;
+      border-bottom: 1px solid $ui-04;
+    }
+  }
+
+  .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-close {

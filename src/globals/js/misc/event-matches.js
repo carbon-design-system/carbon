@@ -20,7 +20,8 @@ export default function eventMatches(event, selector) {
     if (target.matches(selector)) {
       // If event target itself matches the given selector, return it
       return target;
-    } else if (target.matches(`${selector} *`)) {
+    }
+    if (target.matches(`${selector} *`)) {
       const closest = target.closest(selector);
       if ((currentTarget.nodeType === Node.DOCUMENT_NODE ? currentTarget.documentElement : currentTarget).contains(closest)) {
         return closest;

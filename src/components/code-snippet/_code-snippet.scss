@@ -321,13 +321,13 @@
       background-color: $ui-03;
     }
 
+    &:active {
+      background-color: $copy-active;
+    }
+
     &:focus {
       outline: none;
       border: 2px solid $interactive-01;
-    }
-
-    &:active {
-      background: $copy-active;
     }
   }
 
@@ -430,7 +430,7 @@
   }
 
   .#{$prefix}--snippet-button:active {
-    background: $copy-active;
+    background-color: $copy-active;
   }
 
   .#{$prefix}--btn--copy__feedback {
@@ -480,12 +480,12 @@
     color: $text-01;
   }
 
-  .#{$prefix}--snippet-btn--expand:focus {
-    @include focus-outline('outline');
+  .#{$prefix}--snippet-btn--expand:active {
+    background-color: $copy-active;
   }
 
-  .#{$prefix}--snippet-btn--expand:active {
-    background: $copy-active;
+  .#{$prefix}--snippet-btn--expand:focus {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {

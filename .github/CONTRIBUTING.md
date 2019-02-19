@@ -122,7 +122,7 @@ Defining markup with conditionals or data interpolations requires creating `.con
 Supported [properties in `.config.js`](https://fractal.build/guide/components/configuration-reference.html#component-properties) are the following:
 
 - [`default`](https://fractal.build/guide/components/configuration#default): The default variant name
-- [`variants`](https://fractal.build/guide/components/configuration#variant-properties) - An array of objects, supporitng the following properties:
+- [`variants`](https://fractal.build/guide/components/configuration#variant-properties) - An array of objects, supporting the following properties:
   - `name`: The variant name
   - `label`: The variant name shown in dev env UI
   - `notes`: A short explainer the variant shown in dev env UI
@@ -141,11 +141,76 @@ What `.hbs` file is used for rendering a variant is determined by searching for 
 2. Variant handle, which takes a format of `componentname--variantname` format
 3. Component handle, which is `componentname`
 
+## Working on JavaScript-framework-specific styles
+
+JavaScript-framework-specific is _not_ recommended as we strive to create styles that are framework-neutral. However, there are some rare cases where framework-specific cannot be avoided, and some of those make sense to be in maintained by core style library here.
+
+There are a couple ways to work on framework-specific style.
+
+### Using `npm link`/`yarn link`
+
+This is the most straightforward way. When in the directory of your `carbon-components` folder, run the following
+command:
+
+```bash
+yarn link
+```
+
+You should see a success message similar to:
+
+```bash
+success Registered "carbon-components".
+info You can now run `yarn link "carbon-components"` in the projects where you want to use this package and it will be used instead.
+```
+
+Now, go to the folder where `carbon-components-angular` is located and run:
+
+```bash
+yarn link carbon-components
+```
+
+You should see a success message similar to:
+
+```bash
+success Using linked package for "carbon-components".
+```
+
+The `yarn link` command will allow us to point the `carbon-components` package
+under `node_modules` to the folder on our filesystem. So, if we make a change in
+`carbon-components` and re-compile the project it will update in the Storybook
+environment for `carbon-components-angular`.
+
+In addition, if you would like to have your changes to styles automatically
+compile and update Storybook you can run the following command in the
+`carbon-components` folder on your machine:
+
+```bash
+yarn gulp watch -s
+```
+
+This will execute the `watch` command in `gulpfile.js`. As a result, whenever
+you make a change to the project styles it will automatically copy over into the
+`scss` folder which Storybook uses in `carbon-components-angular`.
+
+### Pointing NPM dependency of `carbon-components` right to the source code
+
+Though above approach is the most straightforward, it involves an overhead of having to run build process at `carbon-components`, in addition to one at framework variant repo, upon every Sass code change.
+
+To avoid such overhead, you can point NPM dependency of `carbon-components` right to the source code, though there is a caveat that our future change to directory structure, etc. may make such steps no longer work. Here are the steps:
+
+```sh
+> cd /path/to/carbon-components-angular/node_modules/carbon-components
+> mv scss scss.orig
+> ln -s /path/to/carbon-components/src scss
+```
+
+Then edits of `.scss` files in `/path/to/carbon-components/src` will be reflected to the development environment of your framework variant repository. You don't need to do anything in `carbon-components` side.
+
 ## Start Contributing
 
 ### 1. Fork The Repo:
 
-Go to [carbon-components](https://github.com/IBM/carbon-components) and click the "Fork" button in the top-right corner.
+Go to [carbon-components](https://github.com/IBM/carbon-components) and click the `Fork` button in the top-right corner.
 
 ### 2. Clone Your Fork:
 
@@ -252,7 +317,7 @@ If you are very sure that your change affects a specific set of components, you 
 gulp test:a11y --name dropdown
 ```
 
-The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/IBM/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
+The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/IBM/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps identifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 
 ### 8. Make a Pull Request
 
@@ -291,7 +356,7 @@ git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
 git push origin { YOUR_BRANCH_NAME }
 ```
 
-In your browser, navigate to [IBM/carbon-components](https://github.com/IBM/carbon-components) and click the button that reads "Compare & pull request"
+In your browser, navigate to [IBM/carbon-components](https://github.com/IBM/carbon-components) and click the button that reads `Compare & pull request`
 
 > **Is it a Breaking Change?**
 
@@ -299,7 +364,7 @@ In your browser, navigate to [IBM/carbon-components](https://github.com/IBM/carb
 > It's important to discern whether your pull request contains breaking changes or not.
 > Sometimes, renaming or removing things in the code can result in breaking changes.
 
-> Here are some examples of breaking changes...changing, renaming or removing any of the following:
+> Here are some examples of breaking changes... changing, renaming or removing any of the following:
 >
 > - HTML attributes
 > - Folders or Files
@@ -313,7 +378,7 @@ Before you create a pull request, change the base branch depending on what kind 
 - Pull requests with **non-breaking changes** like patches and minor updates use the `master` as the base branch.
 - Pull requests with **breaking changes** use the latest `major version number` branch as the base branch (i.e. `7.0.0` or whatever the next major version is).
 
-Write a title and description then click "Create pull request"
+Write a title and description then click `Create pull request`
 
 - [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
 

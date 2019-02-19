@@ -7,7 +7,7 @@
 
 import * as components from './components';
 
-const forEach = Array.prototype.forEach;
+const { forEach } = Array.prototype;
 
 const createAndReleaseComponentsUponDOMMutation = (records, componentClasses, componentClassesForWatchInit, options) => {
   records.forEach(record => {

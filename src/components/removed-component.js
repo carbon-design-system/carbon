@@ -23,13 +23,17 @@ const removedComponent = name => {
     constructor() {
       warn();
     }
+
     static create() {
       warn();
     }
+
     static init() {
       warn();
     }
+
     static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
+
     static options /* #__PURE_CLASS_PROPERTY__ */ = {};
   };
 };
