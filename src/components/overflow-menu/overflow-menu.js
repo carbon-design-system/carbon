@@ -262,6 +262,13 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
         const isOfSelf = element.contains(event.target);
         const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
         const state = shouldBeOpen ? 'shown' : 'hidden';
+        
+        if(isExpanded && !isOfSelf  ){//to perform click on options of overflow menu when it is expanded
+                if(event && event.target && typeof event.target.click === 'function'){
+                  event.target.click();
+                  return;
+                }                
+        }
 
         if (isOfSelf) {
           event.delegateTarget = element; // eslint-disable-line no-param-reassign
