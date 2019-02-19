@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
 import Icon from '../Icon';
 import classNames from 'classnames';
@@ -166,12 +167,27 @@ export default class Tooltip extends Component {
     triggerText: PropTypes.node,
 
     /**
+     * The callback function to optionally render the icon element.
+     * It should be a component with React.forwardRef().
+     */
+    renderIcon: function(props, propName, componentName) {
+      if (props[propName] == undefined) {
+        return;
+      }
+      const RefForwardingComponent = props[propName];
+      if (!isForwardRef(<RefForwardingComponent />))
+        return new Error(`Invalid value of prop '${propName}' supplied to '${componentName}',
+                          it should be created/wrapped with React.forwardRef() to have a ref and access the proper
+                          DOM node of the element to calculate its position in the viewport.`);
+    },
+
+    /**
      * `true` to show the default tooltip icon.
      */
     showIcon: PropTypes.bool,
 
     /**
-     * The the default tooltip icon.
+     * The tooltip icon element or `<Icon>` metadata.
      */
     icon: PropTypes.shape({
       width: PropTypes.string,
@@ -374,6 +390,7 @@ export default class Tooltip extends Component {
       iconName,
       iconTitle,
       iconDescription,
+      renderIcon,
       menuOffset,
       // Exclude `clickToOpen` from `other` to avoid passing it along to `<div>`
       clickToOpen,
@@ -409,6 +426,29 @@ export default class Tooltip extends Component {
           'aria-owns': tooltipId,
         };
 
+    const IconCustomElement = renderIcon || (componentsX && Information);
+
+    const finalIcon = IconCustomElement ? (
+      <IconCustomElement
+        name={iconName}
+        aria-labelledby={triggerId}
+        aria-label={iconDescription}
+        ref={node => {
+          this.triggerEl = node;
+        }}
+      />
+    ) : (
+      <Icon
+        icon={!icon && !iconName ? iconInfoGlyph : icon}
+        name={iconName}
+        description={iconDescription}
+        iconTitle={iconTitle}
+        iconRef={node => {
+          this.triggerEl = node;
+        }}
+      />
+    );
+
     return (
       <>
         <ClickListener onClickOutside={this.handleClickOutside}>
@@ -430,26 +470,7 @@ export default class Tooltip extends Component {
                 aria-label={iconDescription}
                 aria-expanded={open}
                 {...ariaOwnsProps}>
-                {componentsX ? (
-                  <Information
-                    name={iconName}
-                    aria-labelledby={triggerId}
-                    aria-label={iconDescription}
-                    ref={node => {
-                      this.triggerEl = node;
-                    }}
-                  />
-                ) : (
-                  <Icon
-                    icon={!icon && !iconName ? iconInfoGlyph : icon}
-                    name={iconName}
-                    description={iconDescription}
-                    iconTitle={iconTitle}
-                    iconRef={node => {
-                      this.triggerEl = node;
-                    }}
-                  />
-                )}
+                {finalIcon}
               </div>
             </div>
           ) : (
