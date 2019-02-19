@@ -13,7 +13,7 @@
 @import '../button/button';
 @import '../form/form';
 @import '../loading/loading';
-@import '@carbon/type/scss/type';
+@import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
 @mixin file-uploader {
   .#{$prefix}--file {
