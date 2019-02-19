@@ -116,6 +116,7 @@
     @include font-smoothing;
     @include typescale('zeta');
     display: flex;
+    justify-content: space-between;
     height: auto;
     min-height: rem(48px);
     min-width: rem(288px);
