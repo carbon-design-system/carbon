@@ -24,6 +24,7 @@ module.exports = {
         and no more than another given value.
       `,
       context: {
+        value: 25,
         inputId: 'slider-input-box',
       },
     },
@@ -32,7 +33,17 @@ module.exports = {
       label: 'Light',
       context: {
         light: true,
+        value: 75,
         inputId: 'slider-input-box-light',
+      },
+    },
+    {
+      name: 'disabled',
+      label: 'Disabled',
+      context: {
+        disabled: true,
+        value: 50,
+        inputId: 'slider-input-box',
       },
     },
   ],

@@ -26,6 +26,7 @@ project.sublime-project
 project.sublime-workspace
 jsconfig.json
 .vscode
+.idea
 
 # Test reports
 tests/a11y-results
