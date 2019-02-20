@@ -187,9 +187,7 @@ export default class DropdownV2 extends React.Component {
                     key={itemToString(item)}
                     isActive={selectedItem === item}
                     isHighlighted={
-                      highlightedIndex === index ||
-                      (selectedItem && selectedItem.id === item.id) ||
-                      false
+                      highlightedIndex === index || selectedItem === item
                     }
                     {...getItemProps({ item, index })}>
                     {itemToElement ? (
