@@ -345,7 +345,7 @@
     @include breakpoint(bp--sm--major) {
       background: transparent;
       & + .#{$prefix}--tabs__nav-item {
-        margin-left: rem(1px);
+        margin-left: rem(2px);
       }
     }
     @include max-breakpoint(bp--sm--major) {
@@ -386,7 +386,7 @@
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         font-weight: 600;
-        border-bottom: 2px solid $interactive-01;
+        border-bottom: 3px solid $interactive-01;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -444,7 +444,7 @@
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled))
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     color: $text-01;
     @include breakpoint(bp--sm--major) {
@@ -475,9 +475,9 @@
   //-----------------------------
   //  Link Focus
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
   }

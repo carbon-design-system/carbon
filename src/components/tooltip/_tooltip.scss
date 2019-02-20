@@ -340,12 +340,11 @@
   }
 
   .#{$prefix}--tooltip__label {
-    @include font-family;
-    @include typescale('zeta');
+    @include type-style('body-short-01');
+
     display: inline-flex;
     align-items: center;
     color: $text-01;
-    font-weight: normal;
     margin-bottom: $spacing-xs;
 
     .#{$prefix}--tooltip__trigger {

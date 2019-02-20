@@ -65,9 +65,8 @@
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
     @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    @include font-smoothing;
+    @include type-style('body-short-01');
+
     counter-reset: list-item;
   }
 
@@ -76,7 +75,6 @@
     color: $text-01;
     list-style-type: none;
     counter-increment: list-item;
-    line-height: rem(18px);
   }
 
   .#{$prefix}--list--nested {

@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '../../globals/scss/typography';
+
 @mixin button-base {
   @include reset;
   @include font-family;
@@ -74,13 +76,10 @@
 
 @mixin button-base--x {
   @include reset;
-  @include font-family;
-  @include font-smoothing;
-  @include letter-spacing;
+  @include type-style('body-short-01');
+
   cursor: pointer;
   flex-shrink: 0;
-  font-size: $button-font-size;
-  font-weight: $button-font-weight;
   height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
@@ -88,7 +87,6 @@
   text-decoration: none;
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
-  line-height: 1.125rem;
   outline: $button-outline-width solid transparent;
   position: relative;
   max-width: rem(320px);

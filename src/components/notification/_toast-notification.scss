@@ -107,8 +107,7 @@
 @mixin toast-notifications--x {
   .#{$prefix}--toast-notification {
     @include reset;
-    @include font-family;
-    @include font-smoothing;
+
     display: flex;
     width: rem(288px);
     height: auto;
@@ -181,21 +180,23 @@
   }
 
   .#{$prefix}--toast-notification__title {
-    @include typescale('zeta');
-    @include letter-spacing;
+    @include type-style('heading-01');
+
     font-weight: 600;
     margin-top: 1rem;
   }
 
   .#{$prefix}--toast-notification__subtitle {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
+
     color: $text-01;
     margin-top: 0;
     margin-bottom: $spacing-lg;
   }
 
   .#{$prefix}--toast-notification__caption {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
+
     color: $text-01;
     margin-bottom: $spacing-md;
   }
