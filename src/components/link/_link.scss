@@ -64,7 +64,7 @@
 
     &:active,
     &:active:visited {
-      color: $link-visited;
+      color: $text-01;
       box-shadow: 0 1px currentColor;
     }
 
@@ -86,7 +86,7 @@
     }
 
     &:visited {
-      color: $link-visited;
+      color: $interactive-01;
     }
   }
 
