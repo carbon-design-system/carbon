@@ -7,7 +7,7 @@
 
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
-@import 'functions';
+@import 'helper-mixins';
 @import 'import-once';
 
 $unicodes: (
