@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_typography.scss $base-font-size should match export value 1`] = `"16px"`;
+
+exports[`_typography.scss $font-family-helvetica should match export value 1`] = `
+Array [
+  "IBM Helvetica",
+  Array [
+    "Helvetica",
+    "Neue",
+  ],
+  "HelveticaNeue",
+  "Helvetica",
+  "sans-serif",
+]
+`;
+
+exports[`_typography.scss $font-family-mono should match export value 1`] = `
+Array [
+  "ibm-plex-mono",
+  "Menlo",
+  "DejaVu Sans Mono",
+  "Bitstream Vera Sans Mono",
+  "Courier",
+  "monospace",
+]
+`;
+
+exports[`_typography.scss $font-family-sans-serif should match export value 1`] = `
+Array [
+  "ibm-plex-sans",
+  Array [
+    "Helvetica",
+    "Neue",
+  ],
+  "Arial",
+  "sans-serif",
+]
+`;
+
+exports[`_typography.scss $font-family-serif should match export value 1`] = `
+Array [
+  "ibm-plex-serif",
+  "Georgia",
+  "Times",
+  "serif",
+]
+`;
+
+exports[`_typography.scss $font-size-map should match export value 1`] = `
+Object {
+  "11": "0.6875rem",
+  "12": "0.75rem",
+  "14": "0.875rem",
+  "16": "1rem",
+  "18": "1.125rem",
+  "20": "1.25rem",
+  "28": "1.75rem",
+  "36": "2.25rem",
+  "54": "3.375rem",
+  "76": "4.75rem",
+}
+`;
+
+exports[`_typography.scss $typescale-map should match export value 1`] = `
+Object {
+  "alpha": "2.25rem",
+  "beta": "1.75rem",
+  "caption": "0.75rem",
+  "delta": "1.125rem",
+  "epsilon": "1rem",
+  "gamma": "1.25rem",
+  "giga": "4.75rem",
+  "legal": "0.6875rem",
+  "mega": "3.375rem",
+  "omega": "0.75rem",
+  "p": "1rem",
+  "zeta": "0.875rem",
+}
+`;
+
+exports[`_typography.scss font-size mixin should output a font-size property if given a valid size 1`] = `
+".test-76 {
+  font-size: 4.75rem; }
+
+.test-54 {
+  font-size: 3.375rem; }
+
+.test-36 {
+  font-size: 2.25rem; }
+
+.test-28 {
+  font-size: 1.75rem; }
+
+.test-20 {
+  font-size: 1.25rem; }
+
+.test-18 {
+  font-size: 1.125rem; }
+
+.test-16 {
+  font-size: 1rem; }
+
+.test-14 {
+  font-size: 0.875rem; }
+
+.test-12 {
+  font-size: 0.75rem; }
+
+.test-11 {
+  font-size: 0.6875rem; }
+"
+`;
+
+exports[`_typography.scss font-smoothing mixin should output font-smoothing properties 1`] = `
+".test {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+"
+`;
+
+exports[`_typography.scss helvetica mixin should output a font-family value 1`] = `
+".test {
+  font-family: \\"IBM Helvetica\\", Helvetica Neue, HelveticaNeue, Helvetica, sans-serif; }
+"
+`;
+
+exports[`_typography.scss letter-spacing mixin should output letter-spacing properties 1`] = `
+".test {
+  letter-spacing: 0; }
+"
+`;
+
+exports[`_typography.scss line-height should output valid line-heights for specific elements, otherwise it should warn 1`] = `
+".test-heading {
+  line-height: 1.25; }
+
+.test-body {
+  line-height: 1.5; }
+"
+`;
+
+exports[`_typography.scss typescale mixin should return a font-size value for a valid size 1`] = `
+".test-giga {
+  font-size: 4.75rem; }
+
+.test-mega {
+  font-size: 3.375rem; }
+
+.test-alpha {
+  font-size: 2.25rem; }
+
+.test-beta {
+  font-size: 1.75rem; }
+
+.test-gamma {
+  font-size: 1.25rem; }
+
+.test-delta {
+  font-size: 1.125rem; }
+
+.test-epsilon {
+  font-size: 1rem; }
+
+.test-zeta {
+  font-size: 0.875rem; }
+
+.test-omega {
+  font-size: 0.75rem; }
+
+.test-caption {
+  font-size: 0.75rem; }
+
+.test-legal {
+  font-size: 0.6875rem; }
+
+.test-p {
+  font-size: 1rem; }
+"
+`;
