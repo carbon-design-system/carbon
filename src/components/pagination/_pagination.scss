@@ -314,10 +314,7 @@ $css--helpers: true;
 
     &:disabled:hover {
       cursor: default;
-
-      .#{$prefix}--pagination__button-icon {
-        fill: $ui-05;
-      }
+      fill: $ui-05;
     }
   }
 
