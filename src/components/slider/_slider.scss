@@ -170,34 +170,6 @@
     min-width: rem(200px);
   }
 
-  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider__range-label {
-    color: $disabled;
-  }
-
-  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
-    background-color: $ui-03;
-
-    &:hover {
-      transform: translate(-50%, -50%);
-      cursor: not-allowed;
-    }
-
-    &:focus {
-      box-shadow: none;
-      outline: none;
-      background-color: $ui-03;
-    }
-
-    &:active {
-      background: $ui-03;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  .#{$prefix}--slider--disabled .#{$prefix}--slider__track {
-    cursor: not-allowed;
-  }
-
   .#{$prefix}--slider__range-label {
     @include typescale('zeta');
     font-family: $font-family-mono;
@@ -293,6 +265,53 @@
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
     background-color: $interactive-01;
+  }
+
+  // Disabled state
+  .#{$prefix}--label--disabled ~ .#{$prefix}--slider-container > .#{$prefix}--slider__range-label {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    background-color: $ui-03;
+
+    &:hover {
+      transform: translate(-50%, -50%);
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      background-color: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+
+    &:active {
+      background: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+    background-color: $ui-03;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--form-item .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    background-color: $disabled-01;
+    color: $disabled-02;
+    transition: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      outline: none;
+      color: $disabled-02;
+    }
   }
 
   // Skeleton state
