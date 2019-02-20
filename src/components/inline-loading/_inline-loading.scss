@@ -87,7 +87,7 @@
   }
 
   .#{$prefix}--inline-loading__text {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     color: $text-02;
   }
 

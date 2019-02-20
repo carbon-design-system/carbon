@@ -116,17 +116,15 @@
 
 @mixin content-switcher--x {
   .#{$prefix}--content-switcher {
-    @include font-family;
     display: flex;
     height: rem(32px);
   }
 
   .#{$prefix}--content-switcher-btn {
     @include reset;
-    @include font-smoothing;
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
     @include focus-outline('reset');
+
     background-color: $ui-01;
     display: flex;
     align-items: center;

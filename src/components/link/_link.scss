@@ -53,11 +53,9 @@
 @mixin link--x {
   .#{$prefix}--link {
     @include reset;
-    @include font-family;
-    @include font-smoothing;
+    @include type-style('body-short-01');
 
     color: $interactive-01;
-    font-weight: 400;
 
     // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
     // effect.
