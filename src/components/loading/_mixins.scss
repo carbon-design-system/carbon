@@ -19,9 +19,9 @@
   animation-iteration-count: infinite;
 
   // Animate the stroke
-  & svg circle {
+  svg circle {
     animation-name: init-stroke;
-    animation-duration: 1000ms;
+    animation-duration: 10ms;
     animation-timing-function: $carbon--standard-easing;
   }
 }
