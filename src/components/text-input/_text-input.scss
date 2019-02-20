@@ -128,7 +128,7 @@
 @mixin text-input--x {
   .#{$prefix}--text-input {
     @include reset;
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     background-color: $field-01;
     width: 100%;

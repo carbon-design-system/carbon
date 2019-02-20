@@ -214,9 +214,8 @@
   // accomodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
     @include reset;
-    @include font-family;
-    @include font-smoothing;
-    @include typescale('zeta');
+    @include type-style('body-short-01');
+
     line-height: 1.5rem;
     position: relative;
     display: flex;

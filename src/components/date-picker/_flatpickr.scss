@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '../../globals/scss/typography';
+
 .flatpickr-calendar {
   background: transparent;
   overflow: hidden;
@@ -276,15 +278,13 @@
   opacity: 1;
 }
 .flatpickr-current-month {
-  font-size: 135%;
-  line-height: inherit;
-  font-weight: 300;
+  @include type-style('heading-01');
+
   color: inherit;
   position: absolute;
   width: 75%;
   left: 12.5%;
   padding: 6.16px 0 0 0;
-  line-height: 1;
   height: 28px;
   display: inline-block;
   text-align: center;
@@ -378,18 +378,17 @@
   height: 28px;
 }
 span.flatpickr-weekday {
+  @include type-style('body-short-01');
+
   cursor: default;
-  font-size: 90%;
   background: transparent;
   color: rgba(0, 0, 0, 0.54);
-  line-height: 1;
   margin: 0;
   text-align: center;
   display: block;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  font-weight: bolder;
 }
 .dayContainer,
 .flatpickr-weeks {
