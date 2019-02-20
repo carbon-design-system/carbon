@@ -74,9 +74,12 @@
       outline-offset: 2px;
     }
 
-    &[aria-disabled='true'][tabindex='-1'] {
-      color: $disabled;
+    &:not([href]) {
+      color: $disabled-02;
       cursor: not-allowed;
+      pointer-events: none;
+      touch-action: none;
+
       &:hover {
         box-shadow: none;
       }
@@ -88,7 +91,10 @@
   }
 
   .#{$prefix}--disabled {
+    @include font-smoothing;
+    display: inline;
     color: $disabled-02;
+    font-weight: 400;
   }
 }
 
