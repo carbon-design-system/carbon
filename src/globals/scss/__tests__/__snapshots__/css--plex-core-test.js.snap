@@ -1,7 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_css--plex-core plex-font-face should output @font-face files based on families, weights, and unicodes 1`] = `
-"@font-face {
+"@keyframes skeleton {
+  0% {
+    width: 0%;
+    left: 0;
+    right: auto;
+    opacity: 0.3; }
+  20% {
+    width: 100%;
+    left: 0;
+    right: auto;
+    opacity: 1; }
+  28% {
+    width: 100%;
+    left: auto;
+    right: 0; }
+  51% {
+    width: 0%;
+    left: auto;
+    right: 0; }
+  58% {
+    width: 0%;
+    left: auto;
+    right: 0; }
+  82% {
+    width: 100%;
+    left: auto;
+    right: 0; }
+  83% {
+    width: 100%;
+    left: 0;
+    right: auto; }
+  96% {
+    width: 0%;
+    left: 0;
+    right: auto; }
+  100% {
+    width: 0%;
+    left: 0;
+    right: auto;
+    opacity: 0.3; } }
+
+@font-face {
   font-family: 'ibm-plex-mono';
   font-style: normal;
   font-weight: 300;
