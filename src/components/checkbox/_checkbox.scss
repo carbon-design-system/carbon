@@ -297,7 +297,7 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
-    border-bottom: 1.5px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
     width: rem(8px);
     top: rem(11px);
   }
