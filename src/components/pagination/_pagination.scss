@@ -302,11 +302,10 @@ $css--helpers: true;
     display: flex;
     justify-content: center;
     align-items: center;
+    fill: $ui-05;
 
     &:hover {
-      .#{$prefix}--pagination__button-icon {
-        fill: $hover-secondary;
-      }
+      fill: $hover-secondary;
     }
 
     &:focus {
