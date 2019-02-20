@@ -122,8 +122,8 @@
 
   .#{$prefix}--label {
     @include reset;
-    @include font-family;
-    @include typescale('omega');
+    @include type-style('label-01');
+
     color: $text-02;
     font-weight: $input-label-weight;
     display: inline-block;
@@ -173,7 +173,7 @@
 
   .#{$prefix}--form-requirement {
     @include reset;
-    @include typescale('omega');
+    @include type-style('label-01');
     margin: $spacing-2xs 0 0;
     max-height: 0;
     overflow: hidden;

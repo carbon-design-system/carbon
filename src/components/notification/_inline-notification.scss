@@ -112,9 +112,7 @@
 @mixin inline-notifications--x {
   .#{$prefix}--inline-notification {
     @include reset;
-    @include font-family;
-    @include font-smoothing;
-    @include typescale('zeta');
+
     display: flex;
     justify-content: space-between;
     height: auto;
@@ -181,14 +179,15 @@
   }
 
   .#{$prefix}--inline-notification__title {
-    @include typescale('zeta');
-    font-weight: 600;
+    @include type-style('heading-01');
+
     margin: 0 $spacing-2xs 0 0;
     white-space: nowrap;
   }
 
   .#{$prefix}--inline-notification__subtitle {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
+
     word-break: break-word;
   }
 
