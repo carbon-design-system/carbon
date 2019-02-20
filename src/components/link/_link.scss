@@ -94,7 +94,7 @@
     color: $visited-link;
   }
 
-  .#{$prefix}--disabled {
+  .#{$prefix}--link--disabled {
     @include font-smoothing;
     display: inline;
     color: $disabled-02;
