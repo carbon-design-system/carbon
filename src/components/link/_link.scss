@@ -90,6 +90,10 @@
     }
   }
 
+  .#{$prefix}--link--visited {
+    color: $visited-link;
+  }
+
   .#{$prefix}--disabled {
     @include font-smoothing;
     display: inline;
