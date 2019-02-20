@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -10,11 +10,28 @@
   <div class="{{@root.prefix}}--form-item">
     <div class="{{@root.prefix}}--radio-button-group {{#if vertical}} {{@root.prefix}}--radio-button-group--vertical {{/if}}">
       {{#each items}}
-        <input id="{{id}}" class="{{@root.prefix}}--radio-button" type="radio" value="{{value}}" name="{{../group}}" tabindex="0"{{#is value ../selectedValue}} checked{{/is}}{{#if disabled}} disabled{{/if}}>
-        <label for="{{id}}" class="{{@root.prefix}}--radio-button__label">
-          <span class="{{@root.prefix}}--radio-button__appearance"></span>
-          {{label}}
-        </label>
+          <input id="{{id}}" class="{{@root.prefix}}--radio-button" type="radio" value="{{value}}" name="{{../group}}" tabindex="0"{{#is value ../selectedValue}} checked{{/is}}{{#if disabled}} disabled{{/if}}>
+          <label for="{{id}}" class="{{@root.prefix}}--radio-button__label">
+            <span class="{{@root.prefix}}--radio-button__appearance"></span>
+            {{label}}
+          </label>
+      {{/each}}
+    </div>
+  </div>
+</fieldset>
+
+<fieldset class="{{@root.prefix}}--fieldset">
+  <legend class="{{@root.prefix}}--label">Radio Button heading</legend>
+  <div class="{{@root.prefix}}--form-item">
+    <div class="{{@root.prefix}}--radio-button-group">
+      {{#each items}}
+        <div class="{{@root.prefix}}--radio-button-wrapper {{@root.prefix}}--radio-button-wrapper--label-top">
+          <input id="{{id}}x" class="{{@root.prefix}}--radio-button" type="radio" value="{{value}}" name="{{../group}}" tabindex="0"{{#is value ../selectedValue}} checked{{/is}}{{#if disabled}} disabled{{/if}}>
+          <label for="{{id}}x" class="{{@root.prefix}}--radio-button__label">
+            <span class="{{@root.prefix}}--radio-button__appearance"></span>
+            <span class="{{@root.prefix}}--radio-button__label-text">{{label}}</span>
+          </label>
+        </div>
       {{/each}}
     </div>
   </div>
