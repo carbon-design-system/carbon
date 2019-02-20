@@ -248,14 +248,6 @@ DATA TABLE VARIATIONS
   }
 
   //================================================
-  //INNER CONTAINER
-  //================================================
-  .#{$prefix}--data-table-v2_inner-container {
-    min-width: rem(500px);
-    overflow-x: scroll;
-  }
-
-  //================================================
   //DATA TABLE - DEFAULT STYLES
   //================================================
   .#{$prefix}--data-table-v2 {
@@ -366,8 +358,8 @@ DATA TABLE VARIATIONS
 
   //width for additional icon columns
   .#{$prefix}--table-column-icon {
-    width: rem(24px);
-    min-width: rem(24px);
+    width: rem(44px);
+    min-width: rem(44px);
     justify-content: center;
     padding-top: rem(8px);
     padding-right: 0;
@@ -426,18 +418,6 @@ DATA TABLE VARIATIONS
 
   .st0 {
     fill: none;
-  }
-
-  //================================================
-  //HORIZONTAL SCROLLING TABLE - toolbar and header dont scroll on overflow-x
-  //================================================
-  .#{$prefix}--data-table-v2--overflow-scroll {
-    width: 100%;
-
-    th:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu),
-    td:not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu) {
-      min-width: rem(90px);
-    }
   }
 
   //================================================
@@ -596,38 +576,53 @@ DATA TABLE VARIATIONS
   }
 
   //================================================
-  //FIXED HEADER - not working, need to fix
+  //STICKY HEADER WITH HORIZONTAL SCROLL ON BODY
   //================================================
-  .#{$prefix}--data-table-v2--fixed-header {
-    & thead {
-      // display: block;
-      // width: 100%;
-    }
+  .#{$prefix}--data-table-v2-container {
+    max-width: rem(800px);
+  }
 
-    & thead tr {
+  .#{$prefix}--data-table-v2_inner-container {
+    background-color: $ui-03;
+    padding-top: rem(48px);
+    overflow: scroll;
+    max-height: rem(300px);
+  }
+
+  .#{$prefix}--data-table-v2--sticky-header {
+    display: block;
+    position: relative;
+
+    thead {
       background: $ui-03;
-    }
-
-    th {
+      display: block;
+      position: absolute;
+      top: 0;
       height: rem(48px);
     }
 
-    & tbody {
-      // display: block;
-      width: 100%;
-      overflow: auto;
-      max-height: rem(200px);
+    thead tr {
+      background: $ui-03;
+      display: block;
+      position: absolute;
+      top: rem(-48px);
+      height: rem(48px);
     }
 
-    & tbody tr:last-of-type {
+    tbody tr:last-of-type {
       border-bottom: 0;
     }
 
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2) {
-      //not working!
-      // width: 100%;
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--data-table-v2--numerical-cell),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--data-table-v2--numerical-cell) {
+      min-width: rem(150px);
+    }
+
+    .#{$prefix}--data-table-v2--numerical-cell {
+      min-width: rem(70px);
     }
   }
+
   //================================================
   //NUMERICAL COLUMN
   //================================================

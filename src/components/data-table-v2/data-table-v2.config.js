@@ -819,6 +819,7 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
+        sticky: true,
       },
     },
     {
