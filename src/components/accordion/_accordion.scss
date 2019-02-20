@@ -146,7 +146,7 @@
 @mixin accordion--x {
   .#{$prefix}--accordion {
     @include reset;
-    @include font-family;
+
     list-style: none;
     width: 100%;
   }
@@ -213,12 +213,11 @@
   }
 
   .#{$prefix}--accordion__title {
-    @include typescale('zeta');
-    @include line-height('body');
+    @include type-style('body-long-01');
+
     margin: $accordion-title-margin;
     width: 100%;
     text-align: left;
-    font-weight: 400;
     z-index: 0;
   }
 

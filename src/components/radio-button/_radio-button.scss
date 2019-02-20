@@ -84,6 +84,51 @@
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton .#{$prefix}--radio-button__appearance {
     display: none;
   }
+
+  .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+  }
+
+  .#{$prefix}--radio-button-wrapper + .#{$prefix}--radio-button-wrapper {
+    margin-left: 20px;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right .#{$prefix}--radio-button__label {
+    flex-direction: row;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left .#{$prefix}--radio-button__label {
+    flex-direction: row-reverse;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__label {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__appearance {
+    margin: 0;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__label-text {
+    margin-bottom: 5px;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__label {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__label-text {
+    margin-top: 5px;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__appearance {
+    margin: 0;
+  }
 }
 
 @mixin radio-button--experimental {

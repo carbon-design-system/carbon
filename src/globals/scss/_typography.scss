@@ -98,3 +98,10 @@ $font-size-map: (
     @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
   }
 }
+
+// 🔬 Experimental
+@import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
+
+@mixin type-style($name, $fluid: false) {
+  @include carbon--type-style($name, $fluid);
+}
