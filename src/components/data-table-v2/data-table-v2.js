@@ -119,7 +119,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       }
     });
 
-    if (!previousValue || previousValue === null) {
+    if (!previousValue) {
       element.dataset.previousValue = 'ascending';
       element.classList.add(this.options.classTableSortActive);
       element.classList.add(this.options.classTableSortAscending);
