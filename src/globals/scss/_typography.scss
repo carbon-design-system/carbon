@@ -6,6 +6,7 @@
 //
 
 @import 'vars';
+@import './vendor/@carbon/elements/scss/type/font-family';
 
 $font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
 $font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
@@ -51,7 +52,11 @@ $typescale-map: (
 
 @mixin font-family {
   @if global-variable-exists('css--plex') and $css--plex == true {
-    font-family: $font-family-sans-serif;
+    @if feature-flag-enabled('components-x') {
+      font-family: carbon--font-family('sans');
+    } @else {
+      font-family: $font-family-sans-serif;
+    }
   } @else {
     font-family: $font-family-helvetica;
   }

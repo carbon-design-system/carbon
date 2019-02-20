@@ -3,10 +3,9 @@
 // Includes styles for body, link, wrapper and container.
 //--------------------
 @import 'typography';
-@include plex-font-face;
 
 body {
-  font-family: 'ibm-plex-sans', Helvetica Neue, Arial, sans serif;
+  @include font-family;
   background-color: $color__white;
   color: $color__blue-90;
 
