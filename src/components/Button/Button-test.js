@@ -8,6 +8,7 @@
 import React from 'react';
 import { iconSearch } from 'carbon-icons';
 import Button from '../Button';
+import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
 
@@ -94,6 +95,22 @@ describe('Button', () => {
 
     it('Should always render with [role="button"] by default', () => {
       expect(wrapper.props().role).toEqual('button');
+    });
+  });
+
+  describe('Renders arbitrary component with correct props', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = shallow(
+        <Button as={Link} data-foo="foo">
+          <div className="child">child</div>
+          <div className="child">child</div>
+        </Button>
+      );
+    });
+    it('renders as a Link with data attribute', () => {
+      expect(wrapper.is(Link)).toBe(true);
+      expect(wrapper.is('[data-foo="foo"]')).toBe(true);
     });
   });
 
