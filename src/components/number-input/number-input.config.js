@@ -32,5 +32,20 @@ module.exports = {
         light: true,
       },
     },
+    {
+      name: 'mobile',
+      label: 'Mobile Number Input',
+      context: {
+        mobile: true,
+      },
+    },
+    {
+      name: 'mobile-light',
+      label: 'Mobile Number Input (light)',
+      context: {
+        light: true,
+        mobile: true,
+      },
+    },
   ],
 };
