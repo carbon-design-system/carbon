@@ -578,48 +578,56 @@ DATA TABLE VARIATIONS
   //================================================
   //STICKY HEADER WITH HORIZONTAL SCROLL ON BODY
   //================================================
-  .#{$prefix}--data-table-v2-container {
-    max-width: rem(800px);
+  .#{$prefix}--data-table-v2-container-max-width {
+    // max-width: rem(800px);
   }
 
   .#{$prefix}--data-table-v2_inner-container {
     background-color: $ui-03;
-    padding-top: rem(48px);
-    overflow: scroll;
-    max-height: rem(300px);
+    padding-top: rem(49px);
+    transform: translateZ(0);
   }
 
   .#{$prefix}--data-table-v2--sticky-header {
     display: block;
-    position: relative;
+    max-height: rem(300px);
+    overflow: scroll;
 
-    thead {
-      background: $ui-03;
-      display: block;
-      position: absolute;
-      top: 0;
-      height: rem(48px);
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: flex;
     }
 
-    thead tr {
-      background: $ui-03;
-      display: block;
-      position: absolute;
-      top: rem(-48px);
-      height: rem(48px);
+    thead {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    tbody {
+      flex-direction: column;
+    }
+
+    tr {
+      min-height: rem(48px);
+      height: auto;
     }
 
     tbody tr:last-of-type {
       border-bottom: 0;
     }
 
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--data-table-v2--numerical-cell),
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--data-table-v2--numerical-cell) {
-      min-width: rem(150px);
+    td {
+      border-top: 0;
     }
 
-    .#{$prefix}--data-table-v2--numerical-cell {
-      min-width: rem(70px);
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+      min-width: rem(150px);
+      width: 100%;
     }
   }
 
