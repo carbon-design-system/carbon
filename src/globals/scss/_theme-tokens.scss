@@ -112,9 +112,9 @@
 
 // Light Experimental Theme
 @mixin theme--experimental() {
-  // Can include various themes here from `@carbon/themes`, including: white,
-  // g10, g90, and g100
-  @include carbon--theme-white();
+  // Set the global variable $carbon--theme to `g10`, `g90`, or `g100` use a
+  // non-default theme (`white`)
+  @include carbon--theme;
 
   $edited: true !default !global;
   $use-layer: true !default !global;
