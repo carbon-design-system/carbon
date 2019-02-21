@@ -229,8 +229,12 @@
     visibility: hidden;
     opacity: 0;
 
+    @include max-breakpoint('bp--xs--major') {
+      padding-right: $spacing-3xl;
+    }
+
     p {
-      @include typescale('zeta');
+      @include type-style('body-long-01');
     }
   }
 
