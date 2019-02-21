@@ -30,4 +30,4 @@ export const componentsX = false;
 /**
  * Support for prop -> state sync of `<Slider>` value.
  */
-export const sliderValuePropSync = false;
+export const sliderValuePropSync = breakingChangesX;

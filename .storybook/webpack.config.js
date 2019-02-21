@@ -5,6 +5,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const useExperimentalFeatures =
   process.env.CARBON_USE_EXPERIMENTAL_FEATURES === 'true';
 
+const useBreakingChanges = process.env.CARBON_USE_BREAKING_CHANGES === 'true';
+
 const useExternalCss =
   process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
 
@@ -13,6 +15,7 @@ const useStyleSourceMap =
 
 const replaceTable = {
   componentsX: useExperimentalFeatures,
+  breakingChangesX: useBreakingChanges,
 };
 
 const styleLoaders = [
@@ -41,6 +44,7 @@ const styleLoaders = [
       data: `
         $feature-flags: (
           components-x: ${useExperimentalFeatures},
+          breaking-changes-x: ${useBreakingChanges},
           grid: ${useExperimentalFeatures},
           ui-shell: true,
         );

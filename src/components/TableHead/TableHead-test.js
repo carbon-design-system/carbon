@@ -9,7 +9,7 @@ import React from 'react';
 import TableHead from '../TableHead';
 import { shallow } from 'enzyme';
 
-describe('TableHead', () => {
+describeBreakingChangesXFeatures('TableHead', () => {
   describe('Renders as expected', () => {
     const thead = shallow(
       <TableHead>

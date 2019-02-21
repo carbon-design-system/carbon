@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -123,4 +124,4 @@ DropdownItem.defaultProps = {
   selected: false,
 };
 
-export default DropdownItem;
+export default (!breakingChangesX ? DropdownItem : null);

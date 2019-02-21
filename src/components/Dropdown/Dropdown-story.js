@@ -10,6 +10,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 import {
   withKnobs,
@@ -77,49 +78,51 @@ const props = {
   }),
 };
 
-storiesOf('Dropdown', module)
-  .addDecorator(withKnobs)
-  .addDecorator(story => <div style={{ minWidth: '20em' }}>{story()}</div>)
-  .add(
-    'Default',
-    () => {
-      const dropdownItemProps = props.dropdownItem();
-      return (
-        <Dropdown {...props.dropdown()}>
-          <DropdownItem
-            itemText="Option 1"
-            value="option1"
-            {...dropdownItemProps}
-          />
-          <DropdownItem
-            itemText="Option 2"
-            value="option2"
-            {...dropdownItemProps}
-          />
-          <DropdownItem
-            itemText="Option 3"
-            value="option3"
-            {...dropdownItemProps}
-          />
-          <DropdownItem
-            itemText="Option 4"
-            value="option4"
-            {...dropdownItemProps}
-          />
-          <DropdownItem
-            itemText="Option 5"
-            value="option5"
-            {...dropdownItemProps}
-          />
-        </Dropdown>
-      );
-    },
-    {
-      info: {
-        text: `
-            The Dropdown component is used for navigating or filtering existing content.
-            Create Dropdown Item components for each option in the dropdown menu.
-          `,
+if (!breakingChangesX) {
+  storiesOf('Dropdown', module)
+    .addDecorator(withKnobs)
+    .addDecorator(story => <div style={{ minWidth: '20em' }}>{story()}</div>)
+    .add(
+      'Default',
+      () => {
+        const dropdownItemProps = props.dropdownItem();
+        return (
+          <Dropdown {...props.dropdown()}>
+            <DropdownItem
+              itemText="Option 1"
+              value="option1"
+              {...dropdownItemProps}
+            />
+            <DropdownItem
+              itemText="Option 2"
+              value="option2"
+              {...dropdownItemProps}
+            />
+            <DropdownItem
+              itemText="Option 3"
+              value="option3"
+              {...dropdownItemProps}
+            />
+            <DropdownItem
+              itemText="Option 4"
+              value="option4"
+              {...dropdownItemProps}
+            />
+            <DropdownItem
+              itemText="Option 5"
+              value="option5"
+              {...dropdownItemProps}
+            />
+          </Dropdown>
+        );
       },
-    }
-  );
+      {
+        info: {
+          text: `
+              The Dropdown component is used for navigating or filtering existing content.
+              Create Dropdown Item components for each option in the dropdown menu.
+            `,
+        },
+      }
+    );
+}

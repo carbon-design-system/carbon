@@ -11,7 +11,7 @@ import TableHeader from '../TableHeader';
 import Icon from '../Icon';
 import { shallow } from 'enzyme';
 
-describe('TableHeader', () => {
+describeBreakingChangesXFeatures('TableHeader', () => {
   describe('Renders as expected', () => {
     const theader = shallow(
       <TableHeader>

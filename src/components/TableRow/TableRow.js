@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -53,4 +54,4 @@ TableRow.defaultProps = {
   header: false,
 };
 
-export default TableRow;
+export default (!breakingChangesX ? TableRow : null);

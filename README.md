@@ -52,10 +52,10 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 1. (Optional) Set environment variables:
 
-   - `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental features:
+   - `true` to `CARBON_USE_BREAKING_CHANGES` environment variable to test some of the breaking changes for the next release:
 
      ```
-     $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
+     $ export CARBON_USE_BREAKING_CHANGES=true
      ```
 
    - `true` to `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS` environment variable to use external CSS, making style source link usable in DOM inspector:

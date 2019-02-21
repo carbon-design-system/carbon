@@ -9,7 +9,7 @@ import React from 'react';
 import TableBody from '../TableBody';
 import { shallow } from 'enzyme';
 
-describe('TableBody', () => {
+describeBreakingChangesXFeatures('TableBody', () => {
   describe('Renders as expected', () => {
     const rootWrapper = shallow(
       <TableBody className="extra-class">

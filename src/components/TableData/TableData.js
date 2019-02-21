@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { iconChevronRight } from 'carbon-icons';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 import Icon from '../Icon';
 
 const { prefix } = settings;
@@ -87,4 +88,4 @@ TableData.defaultProps = {
   iconDescription: 'expand row',
 };
 
-export default TableData;
+export default (!breakingChangesX ? TableData : null);

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 import TableRow from '../TableRow';
 
 const { prefix } = settings;
@@ -65,4 +66,4 @@ TableBody.propTypes = {
   className: PropTypes.string,
 };
 
-export default TableBody;
+export default (!breakingChangesX ? TableBody : null);

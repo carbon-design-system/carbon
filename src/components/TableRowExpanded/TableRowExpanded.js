@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -64,4 +65,4 @@ TableRowExpanded.defaultProps = {
   expanded: false,
 };
 
-export default TableRowExpanded;
+export default (!breakingChangesX ? TableRowExpanded : null);

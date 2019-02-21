@@ -13,7 +13,7 @@ import Icon from '../Icon';
 import ClickListener from '../../internal/ClickListener';
 import { shallow, mount } from 'enzyme';
 
-describe('Dropdown', () => {
+describeBreakingChangesXFeatures('Dropdown', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
       <Dropdown className="extra-class" defaultText="Choose something.." />

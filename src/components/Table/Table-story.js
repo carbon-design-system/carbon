@@ -8,6 +8,7 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 
+import { breakingChangesX } from '../../internal/FeatureFlags';
 import Table from '../Table';
 import TableHead from '../TableHead';
 import TableHeader from '../TableHeader';
@@ -110,61 +111,63 @@ class NestedTable extends Component {
   }
 }
 
-storiesOf('Table', module)
-  .add(
-    'Simple Table',
-    () => (
-      <Table>
-        <TableHead>
-          <TableRow header>
-            <TableHeader>First Name</TableHeader>
-            <TableHeader>Last Name</TableHeader>
-            <TableHeader>House</TableHeader>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableData>Harry</TableData>
-            <TableData>Potter</TableData>
-            <TableData>Gryffindor</TableData>
-          </TableRow>
-          <TableRow>
-            <TableData>Hermoine</TableData>
-            <TableData>Granger</TableData>
-            <TableData>Gryffindor</TableData>
-          </TableRow>
-          <TableRow>
-            <TableData>Blaise</TableData>
-            <TableData>Zambini</TableData>
-            <TableData>Slytherin</TableData>
-          </TableRow>
-          <TableRow>
-            <TableData>Jon</TableData>
-            <TableData>Snow</TableData>
-            <TableData>Stark</TableData>
-          </TableRow>
-        </TableBody>
-      </Table>
-    ),
-    {
+if (!breakingChangesX) {
+  storiesOf('Table', module)
+    .add(
+      'Simple Table',
+      () => (
+        <Table>
+          <TableHead>
+            <TableRow header>
+              <TableHeader>First Name</TableHeader>
+              <TableHeader>Last Name</TableHeader>
+              <TableHeader>House</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableData>Harry</TableData>
+              <TableData>Potter</TableData>
+              <TableData>Gryffindor</TableData>
+            </TableRow>
+            <TableRow>
+              <TableData>Hermoine</TableData>
+              <TableData>Granger</TableData>
+              <TableData>Gryffindor</TableData>
+            </TableRow>
+            <TableRow>
+              <TableData>Blaise</TableData>
+              <TableData>Zambini</TableData>
+              <TableData>Slytherin</TableData>
+            </TableRow>
+            <TableRow>
+              <TableData>Jon</TableData>
+              <TableData>Snow</TableData>
+              <TableData>Stark</TableData>
+            </TableRow>
+          </TableBody>
+        </Table>
+      ),
+      {
+        info: {
+          text: `
+              The Table component is the data-table implementation of blueix-components.
+              Create a table using Table, TableHead, Table Row, TableHeader, and TableBody. Each component maps to their HTML counterpart,
+              wrapped with carbon components styles.
+      
+              Table doesn't do data-fetch for you or height/width calculations, it auto-fills it
+              to the native HTML spec. Any overrides you want to do can be passed in via props.
+            `,
+        },
+      }
+    )
+    .add('Nested Table', () => <NestedTable />, {
       info: {
         text: `
-            The Table component is the data-table implementation of blueix-components.
-            Create a table using Table, TableHead, Table Row, TableHeader, and TableBody. Each component maps to their HTML counterpart,
-            wrapped with carbon components styles.
-    
-            Table doesn't do data-fetch for you or height/width calculations, it auto-fills it
-            to the native HTML spec. Any overrides you want to do can be passed in via props.
-          `,
+              Nested table shows the expansion capabilities of the basic tables. Note that
+              this functionality is driven (like most of our components) through your application
+              altering props on the elements
+            `,
       },
-    }
-  )
-  .add('Nested Table', () => <NestedTable />, {
-    info: {
-      text: `
-            Nested table shows the expansion capabilities of the basic tables. Note that
-            this functionality is driven (like most of our components) through your application
-            altering props on the elements
-          `,
-    },
-  });
+    });
+}

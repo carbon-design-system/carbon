@@ -12,6 +12,7 @@ import debounce from 'lodash.debounce';
 import warning from 'warning';
 import { iconChevronLeft, iconChevronRight } from 'carbon-icons';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -22,7 +23,7 @@ const { prefix } = settings;
 
 let didWarnAboutDeprecation = false;
 
-export default class Pagination extends Component {
+class Pagination extends Component {
   static propTypes = {
     /**
      * The description for the backward icon.
@@ -373,3 +374,5 @@ export default class Pagination extends Component {
     );
   }
 }
+
+export default (!breakingChangesX ? Pagination : null);

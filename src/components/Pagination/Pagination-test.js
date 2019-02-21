@@ -15,7 +15,7 @@ import { shallow, mount } from 'enzyme';
 
 jest.useFakeTimers();
 
-describe('Pagination', () => {
+describeBreakingChangesXFeatures('Pagination', () => {
   describe('renders as expected', () => {
     const pagination = shallow(
       <Pagination className="extra-class" pageSizes={[5, 10]} totalItems={50} />
