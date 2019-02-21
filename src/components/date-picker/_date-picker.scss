@@ -565,6 +565,7 @@
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
+    top: 2.25rem;
     right: 1rem;
     fill: $ui-05;
     cursor: pointer;
@@ -573,10 +574,6 @@
     &:hover {
       fill: $hover-primary;
     }
-  }
-
-  .#{$prefix}--date-picker--single .#{$prefix}--date-picker__icon {
-    top: 2.25rem;
   }
 
   .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
