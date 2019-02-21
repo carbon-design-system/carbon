@@ -303,11 +303,10 @@ $css--helpers: true;
     display: flex;
     justify-content: center;
     align-items: center;
+    fill: $ui-05;
 
     &:hover {
-      .#{$prefix}--pagination__button-icon {
-        fill: $hover-secondary;
-      }
+      fill: $hover-secondary;
     }
 
     &:focus {
@@ -316,10 +315,7 @@ $css--helpers: true;
 
     &:disabled:hover {
       cursor: default;
-
-      .#{$prefix}--pagination__button-icon {
-        fill: $ui-05;
-      }
+      fill: $ui-05;
     }
   }
 
