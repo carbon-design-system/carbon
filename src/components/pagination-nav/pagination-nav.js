@@ -52,11 +52,12 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
     const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
     Array.prototype.forEach.call(pageButtonNodeList, el => {
       el.classList.remove(this.options.classActive, this.options.classDisabled);
-      el.disabled = false;
       el.removeAttribute(this.options.attribActive);
-      this.anchorAttributesHelper(el);
+      el.removeAttribute('aria-disabled');
+      el.removeAttribute('aria-current');
     });
     if (pageSelectElement) {
+      pageSelectElement.removeAttribute('aria-current');
       const pageSelectElementOptions = pageSelectElement.options;
       Array.prototype.forEach.call(pageSelectElementOptions, el => {
         el.removeAttribute(this.options.attribActive);
@@ -72,33 +73,33 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    * Add active state on click
    */
   handleClick = evt => {
-    let nextActivePageNumber = this.getActivePageNumber();
-    const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
-    const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
-    this.clearActivePage(evt);
-    if (evt.target.matches(this.options.selectorPageButton)) {
-      nextActivePageNumber = Number(evt.target.getAttribute(this.options.attribPage));
-    }
-    if (evt.target.matches(this.options.selectorPagePrevious)) {
-      nextActivePageNumber -= 1;
-    }
-    if (evt.target.matches(this.options.selectorPageNext)) {
-      nextActivePageNumber += 1;
-    }
-    const pageTargetElement = pageElementNodeList[nextActivePageNumber - 1];
-    pageTargetElement.setAttribute(this.options.attribActive, true);
-    if (pageTargetElement.tagName === 'OPTION') {
-      pageSelectElement.value = this.getActivePageNumber();
-      pageSelectElement.classList.add(this.options.classActive);
-    } else {
-      pageTargetElement.classList.add(this.options.classActive, this.options.classDisabled);
-      pageTargetElement.disabled = true;
-      if (pageTargetElement.tagName === 'A') {
-        pageTargetElement.setAttribute('tabIndex', -1);
-        pageTargetElement.setAttribute('aria-disabled', true);
+    if (!evt.target.getAttribute('aria-disabled') === true) {
+      let nextActivePageNumber = this.getActivePageNumber();
+      const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
+      const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
+      this.clearActivePage(evt);
+      if (evt.target.matches(this.options.selectorPageButton)) {
+        nextActivePageNumber = Number(evt.target.getAttribute(this.options.attribPage));
       }
+      if (evt.target.matches(this.options.selectorPagePrevious)) {
+        nextActivePageNumber -= 1;
+      }
+      if (evt.target.matches(this.options.selectorPageNext)) {
+        nextActivePageNumber += 1;
+      }
+      const pageTargetElement = pageElementNodeList[nextActivePageNumber - 1];
+      pageTargetElement.setAttribute(this.options.attribActive, true);
+      if (pageTargetElement.tagName === 'OPTION') {
+        pageSelectElement.value = this.getActivePageNumber();
+        pageSelectElement.classList.add(this.options.classActive);
+        pageSelectElement.setAttribute('aria-current', 'page');
+      } else {
+        pageTargetElement.classList.add(this.options.classActive, this.options.classDisabled);
+        pageTargetElement.setAttribute('aria-disabled', true);
+        pageTargetElement.setAttribute('aria-current', 'page');
+      }
+      this.setPrevNextStates();
     }
-    this.setPrevNextStates();
   };
 
   /**
@@ -109,6 +110,7 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
     const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
     const pageSelectElementOptions = pageSelectElement.options;
     pageSelectElementOptions[pageSelectElementOptions.selectedIndex].setAttribute(this.options.attribActive, true);
+    evt.target.setAttribute('aria-current', 'page');
     evt.target.classList.add(this.options.classActive);
     this.setPrevNextStates();
   };
@@ -123,41 +125,20 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
     const pageDirectionElementNext = this.element.querySelector(this.options.selectorPageNext);
     if (pageDirectionElementPrevious) {
       if (this.getActivePageNumber() <= 1) {
-        pageDirectionElementPrevious.disabled = true;
+        pageDirectionElementPrevious.setAttribute('aria-disabled', true);
         pageDirectionElementPrevious.classList.add(this.options.classDisabled);
-        pageDirectionElementPrevious.blur();
-        this.anchorAttributesHelper(pageDirectionElementPrevious, 'add');
       } else {
-        pageDirectionElementPrevious.disabled = false;
+        pageDirectionElementPrevious.removeAttribute('aria-disabled');
         pageDirectionElementPrevious.classList.remove(this.options.classDisabled);
-        this.anchorAttributesHelper(pageDirectionElementPrevious);
       }
     }
     if (pageDirectionElementNext) {
       if (this.getActivePageNumber() >= totalPages) {
-        pageDirectionElementNext.disabled = true;
+        pageDirectionElementNext.setAttribute('aria-disabled', true);
         pageDirectionElementNext.classList.add(this.options.classDisabled);
-        pageDirectionElementNext.blur();
-        this.anchorAttributesHelper(pageDirectionElementNext, 'add');
       } else {
-        pageDirectionElementNext.disabled = false;
+        pageDirectionElementNext.removeAttribute('aria-disabled');
         pageDirectionElementNext.classList.remove(this.options.classDisabled);
-        this.anchorAttributesHelper(pageDirectionElementNext);
-      }
-    }
-  };
-
-  /**
-   * Add or remove anchor specific element attributes
-   */
-  anchorAttributesHelper = (el, action = 'remove') => {
-    if (el.tagName === 'A') {
-      if (action === 'remove') {
-        el.removeAttribute('tabindex');
-        el.removeAttribute('aria-disabled');
-      } else {
-        el.setAttribute('tabIndex', -1);
-        el.setAttribute('aria-disabled', true);
       }
     }
   };

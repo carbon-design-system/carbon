@@ -74,7 +74,7 @@ describe('Pagination Nav', () => {
       const event = new CustomEvent('click', { bubbles: true });
       const pagePreviousButton = element.querySelector(instance.options.selectorPagePrevious);
       const pageNextButton = element.querySelector(instance.options.selectorPageNext);
-      if (pagePreviousButton && !pagePreviousButton.disabled) {
+      if (pagePreviousButton && !pagePreviousButton.getAttribute('aria-disabled')) {
         pagePreviousButton.dispatchEvent(event);
         expect(instance.clearActivePage).toHaveBeenCalled();
       }
@@ -119,7 +119,7 @@ describe('Pagination Nav', () => {
       pageButtonArray.forEach(el => {
         el.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(el.classList.contains(instance.options.classActive)).toBe(true);
-        expect(el.disabled).toBe(true);
+        expect(el.classList.contains(instance.options.classDisabled)).toBe(true);
       });
     });
 

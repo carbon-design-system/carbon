@@ -4,11 +4,12 @@
 
 Use these modifiers with `.bx--pagination-nav` class.
 
-| Selector                            | Description                                                     |
-| ----------------------------------- | --------------------------------------------------------------- |
-| `.bx--pagination-nav--active`       | Applies active styles to page element                           |
-| `.bx--pagination-nav--disabled`     | Applies disabled styles to page element when using anchor links |
-| `.bx--pagination-nav__page--select` | Applies select override styles to page element                  |
+| Selector                               | Description                                                     |
+| -------------------------------------- | --------------------------------------------------------------- |
+| `.bx--pagination-nav--active`          | Applies active styles to page element                           |
+| `.bx--pagination-nav--disabled`        | Applies disabled styles to page element when using anchor links |
+| `.bx--pagination-nav__page--select`    | Applies select override styles to page element                  |
+| `.bx--pagination-nav__page--direction` | Applies previous/next button styles to page element             |
 
 ### JavaScript
 

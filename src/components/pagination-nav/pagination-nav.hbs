@@ -11,23 +11,28 @@
       <li class="{{@root.prefix}}--pagination-nav__list-item">
         {{#unless elementAsAnchor}}
           <button
-            class="{{@root.prefix}}--pagination-nav__page"
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction {{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
             data-page-previous
-            {{#if showPagePrevious.disabled}}disabled{{/if}}
+            {{#if showPagePrevious.disabled}}
+              aria-disabled="true"
+            {{/if}}
           >
         {{else}}
           <a
-            class="{{@root.prefix}}--pagination-nav__page{{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction{{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
             data-page-previous
             href="javascript:void(0)"
             {{#if showPagePrevious.disabled}}
               aria-disabled="true"
-              tabindex="-1"
             {{/if}}
           >
         {{/unless}}
           <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Previous page </span>
-          {{ carbon-icon 'ChevronLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{#if @root.featureFlags.componentsX}}
+            {{ carbon-icon 'CaretLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{else}}
+            {{ carbon-icon 'ChevronLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{/if}}
         {{#unless elementAsAnchor }}
           </button>
         {{else}}
@@ -57,29 +62,32 @@
                 </option>
               {{/each}}
             </select>
-            {{ carbon-icon 'OverflowMenuHorizontal16' class=(add @root.prefix '--pagination-nav__select-icon') }}
+            <div class="{{@root.prefix}}--pagination-nav__select-icon-wrapper">
+              {{ carbon-icon 'OverflowMenuHorizontal16' class=(add @root.prefix '--pagination-nav__select-icon') }}
+            </div>
           </div>
         {{else}}
           {{#unless @root.elementAsAnchor}}
             <button
-              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active{{/if}}"
+              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
               data-page="{{page}}"
               data-page-button
               {{#if active}}
                 data-page-active="true"
-                disabled
+                aria-current="page"
+                aria-disabled="true"
               {{/if}}
             >
           {{else}}
             <a
-              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active  {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
               data-page="{{page}}"
               data-page-button
               href="javascript:void(0)"
               {{#if active}}
                 data-page-active="true"
+                aria-current="page"
                 aria-disabled="true"
-                tabindex="-1"
               {{/if}}
             >
           {{/unless}}
@@ -96,23 +104,28 @@
       <li class="{{@root.prefix}}--pagination-nav__list-item">
         {{#unless @root.elementAsAnchor}}
           <button
-            class="{{@root.prefix}}--pagination-nav__page"
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
             data-page-next
-            {{#if showPageNext.disabled}}disabled{{/if}}
+            {{#if showPageNext.disabled}}
+              aria-disabled="true"
+            {{/if}}
           >
         {{else}}
           <a
-            class="{{@root.prefix}}--pagination-nav__page{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
             data-page-next
             href="javascript:void(0)"
             {{#if showPageNext.disabled}}
               aria-disabled="true"
-              tabindex="-1"
             {{/if}}
           >
         {{/unless}}
           <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Next page </span>
-          {{ carbon-icon 'ChevronRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{#if @root.featureFlags.componentsX}}
+            {{ carbon-icon 'CaretRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{else}}
+            {{ carbon-icon 'ChevronRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{/if}}
         {{#unless @root.elementAsAnchor}}
           </button>
         {{else}}

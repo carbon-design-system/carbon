@@ -314,6 +314,18 @@
         ]
       },
       {
+        "description": "Ensures tabindex attribute values are not greater than 0",
+        "help": "Elements should not have tabindex greater than zero",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/tabindex?application=webdriverjs",
+        "id": "tabindex",
+        "impact": null,
+        "nodes": [],
+        "tags": [
+          "cat.keyboard",
+          "best-practice"
+        ]
+      },
+      {
         "description": "Ensure that tables do not have the same summary and caption",
         "help": "The <caption> element should not contain the same text as the summary attribute",
         "helpUrl": "https://dequeuniversity.com/rules/axe/2.6/table-duplicate-name?application=webdriverjs",
@@ -431,38 +443,6 @@
             "target": [
               "#__bs_notify__"
             ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#565656",
-                  "fontSize": "10.5pt",
-                  "fontWeight": "normal",
-                  "missingData": "imgNode"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because element contains an image node",
-                "relatedNodes": [
-                  {
-                    "html": "<svg focusable=\"false\" preserveAspectRatio=\"xMidYMid meet\" style=\"will-change: transform;\" xmlns=\"http://www.w3.org/2000/svg\" class=\"bx--pagination-nav__select-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\">",
-                    "target": [
-                      ".bx--pagination-nav__select > svg.bx--pagination-nav__select-icon"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "html": "<select class=\"bx--pagination-nav__page bx--pagination-nav__page--select\" data-page-select=\"\" aria-label=\"select page number\" tabindex=\"0\">",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".bx--pagination-nav__select > select.bx--pagination-nav__page.bx--pagination-nav__page--select"
-            ]
           }
         ],
         "tags": [
@@ -472,7 +452,7 @@
         ]
       }
     ],
-    "timestamp": 1550512923853,
+    "timestamp": 1550778706154,
     "url": "http://localhost:3000/component/pagination-nav/",
     "violations": [
       {
@@ -506,7 +486,7 @@
         ]
       }
     ],
-    "time": 282,
+    "time": 264,
     "status": 200
   }
 ]
