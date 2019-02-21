@@ -579,14 +579,6 @@
     }
   }
 
-  .#{$prefix}--date-picker--single .#{$prefix}--date-picker__icon {
-    top: 2.25rem;
-  }
-
-  .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
-    top: rem(12px);
-  }
-
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $spacing-3xl;
   }
