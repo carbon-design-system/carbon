@@ -179,7 +179,7 @@
 @mixin button--x {
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
-    display: inline-block;
+    // display: inline-block;
 
     &:disabled > .#{$prefix}--btn__icon {
       fill: $ui-04;
@@ -249,6 +249,9 @@
       $interactive-03,
       $ibm-colors__blue-70
     );
+    display: inline-flex;
+    align-items: center;
+    min-width: initial;
 
     &:hover,
     &:active {
@@ -264,7 +267,8 @@
     }
 
     .#{$prefix}--btn__icon {
-      margin-left: $spacing-xs;
+      position: static;
+      transform: none;
     }
 
     &:disabled,
