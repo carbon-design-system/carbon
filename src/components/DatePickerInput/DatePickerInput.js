@@ -78,7 +78,10 @@ export default class DatePickerInput extends Component {
     });
 
     const datePickerIcon = (() => {
-      if (datePickerType !== 'single') {
+      if (!componentsX && datePickerType !== 'single') {
+        return;
+      }
+      if (componentsX && datePickerType === 'simple') {
         return;
       }
       if (componentsX) {
