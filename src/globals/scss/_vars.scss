@@ -8,50 +8,7 @@
 @import 'colors';
 @import 'spacing';
 @import 'theme-tokens';
-
 @import 'functions';
+@import 'motion';
 
 $prefix: 'bx' !default;
-
-// TODO: Remove `null`-initialization once `components-x`/`breaking-changes-x` feature flags are removed
-$carbon--ease-in: null;
-$carbon--ease-out: null;
-$carbon--standard-easing: null;
-$transition--base: null;
-$transition--expansion: null;
-$bx--ease-in: null;
-$bx--ease-out: null;
-$bx--standard-easing: null;
-
-@if feature-flag-enabled('components-x') {
-  $carbon--ease-in: cubic-bezier(0.2, 0, 1, 0.9); // Used primarily for removing elements from the screen.
-  $carbon--ease-out: cubic-bezier(
-    0,
-    0,
-    0.38,
-    0.9
-  ); // Used for adding elements to the screen or changing on-screen states at a users's input.
-  $carbon--standard-easing: cubic-bezier(0.2, 0.2, 0.38, 0.9); // Used for the majority of animations.
-
-  $transition--base: 100ms;
-  $transition--expansion: 150ms;
-} @else {
-  $carbon--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
-  $carbon--ease-out: cubic-bezier(
-    0,
-    0,
-    0.25,
-    1
-  ); // Used for adding elements to the screen or changing on-screen states at a users's input.
-  $carbon--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
-
-  $transition--base: 250ms;
-  $transition--expansion: 300ms;
-}
-
-@if not feature-flag-enabled('breaking-changes-x') {
-  // For back-ward compatibility
-  $bx--ease-in: $carbon--ease-in;
-  $bx--ease-out: $carbon--ease-out;
-  $bx--standard-easing: $carbon--standard-easing;
-}
