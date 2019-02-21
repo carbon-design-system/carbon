@@ -221,21 +221,21 @@
   }
 
   .#{$prefix}--modal-header__label {
-    @include typescale('omega');
-    @include letter-spacing;
+    @include type-style('label-01');
+
     color: $text-02;
-    font-weight: 500;
     margin-bottom: $spacing-2xs;
   }
 
   .#{$prefix}--modal-header__heading {
-    @include typescale('gamma');
-    font-weight: 400;
+    @include type-style('productive-heading-03');
+
     color: $text-01;
   }
 
   .#{$prefix}--modal-content {
-    @include typescale('zeta');
+    @include type-style('body-long-01');
+
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
     color: $text-01;
@@ -243,7 +243,7 @@
   }
 
   .#{$prefix}--modal-content > * {
-    @include typescale('zeta');
+    @include type-style('body-long-01');
   }
 
   .#{$prefix}--modal-footer {
