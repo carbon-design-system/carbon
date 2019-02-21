@@ -388,8 +388,10 @@ export default class OverflowMenu extends Component {
   };
 
   handleClick = evt => {
-    this.setState({ open: !this.state.open });
-    this.props.onClick(evt);
+    if (!this._menuBody || !this._menuBody.contains(evt.target)) {
+      this.setState({ open: !this.state.open });
+      this.props.onClick(evt);
+    }
   };
 
   handleKeyDown = evt => {

@@ -8,7 +8,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import { iconFilter } from 'carbon-icons';
 import Toolbar, {
   ToolbarItem,
@@ -25,7 +24,7 @@ const toolbarProps = {
   className: 'some-class',
 };
 
-const checkboxEvents = {
+const inputProps = {
   className: 'some-class',
   onChange: action('onChange'),
 };
@@ -39,25 +38,13 @@ storiesOf('Toolbar', module).add(
         <OverflowMenu icon={iconFilter} floatingMenu>
           <ToolbarTitle title="FILTER BY" />
           <ToolbarOption>
-            <Checkbox
-              {...checkboxEvents}
-              id="opt-1"
-              labelText="Filter option 1"
-            />
+            <Checkbox {...inputProps} id="opt-1" labelText="Filter option 1" />
           </ToolbarOption>
           <ToolbarOption>
-            <Checkbox
-              {...checkboxEvents}
-              id="opt-2"
-              labelText="Filter option 2"
-            />
+            <Checkbox {...inputProps} id="opt-2" labelText="Filter option 2" />
           </ToolbarOption>
           <ToolbarOption>
-            <Checkbox
-              {...checkboxEvents}
-              id="opt-3"
-              labelText="Filter option 3"
-            />
+            <Checkbox {...inputProps} id="opt-3" labelText="Filter option 3" />
           </ToolbarOption>
         </OverflowMenu>
       </ToolbarItem>
@@ -68,6 +55,7 @@ storiesOf('Toolbar', module).add(
           <ToolbarTitle title="ROW HEIGHT" />
           <ToolbarOption>
             <RadioButton
+              {...inputProps}
               value="short"
               id="radio-1"
               name="toolbar-radio"
@@ -76,6 +64,7 @@ storiesOf('Toolbar', module).add(
           </ToolbarOption>
           <ToolbarOption>
             <RadioButton
+              {...inputProps}
               value="tall"
               id="radio-2"
               name="toolbar-radio"
