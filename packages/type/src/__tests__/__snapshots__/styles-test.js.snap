@@ -383,6 +383,56 @@ letter-spacing: 0;
 -@media- -(min--width-:- -9-9rem-): [object Object];"
 `;
 
+exports[`styles expressiveHeading06 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+    "fontSize": "calc(2.25rem + 0.375 * ((100vw - 42rem) / 24))",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "122%",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+    "fontSize": "calc(2.625rem + 0.375 * ((100vw - 66rem) / 16))",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "119%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+    "fontSize": "calc(3rem + 0.75 * ((100vw - 82rem) / 17))",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "117%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+    "fontSize": "3.75rem",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "4.375rem",
+  },
+  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+  "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "125%",
+}
+`;
+
+exports[`styles expressiveHeading06 should be printable 2`] = `
+"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+font-weight: 600;
+line-height: 125%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
 exports[`styles expressiveParagraph01 should be printable 1`] = `
 Object {
   "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",

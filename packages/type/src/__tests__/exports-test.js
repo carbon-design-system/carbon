@@ -39,6 +39,7 @@ Array [
   "expressiveHeading03",
   "expressiveHeading04",
   "expressiveHeading05",
+  "expressiveHeading06",
   "expressiveParagraph01",
   "quotation01",
   "quotation02",

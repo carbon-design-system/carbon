@@ -195,6 +195,44 @@ export const expressiveHeading05 = fluid({
   },
 });
 
+export const expressiveHeading06 = fluid({
+  fontFamily: fontFamilies.sans,
+  fontSize: rem(scale[7]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: '125%',
+  letterSpacing: 0,
+  breakpoints: {
+    md: {
+      fontSize: rem(scale[8]),
+      fontFamily: fontFamilies.sans,
+      fontWeight: fontWeights.semibold,
+      lineHeight: '122%',
+      letterSpacing: 0,
+    },
+    lg: {
+      fontSize: rem(scale[9]),
+      fontFamily: fontFamilies.sans,
+      fontWeight: fontWeights.semibold,
+      lineHeight: '119%',
+      letterSpacing: 0,
+    },
+    xlg: {
+      fontSize: rem(scale[10]),
+      fontFamily: fontFamilies.sans,
+      fontWeight: fontWeights.semibold,
+      lineHeight: '117%',
+      letterSpacing: 0,
+    },
+    max: {
+      fontSize: rem(scale[12]),
+      fontFamily: fontFamilies.sans,
+      fontWeight: fontWeights.semibold,
+      lineHeight: rem(70),
+      letterSpacing: 0,
+    },
+  },
+});
+
 export const expressiveParagraph01 = fluid({
   fontFamily: fontFamilies.sans,
   fontSize: rem(scale[5]),
