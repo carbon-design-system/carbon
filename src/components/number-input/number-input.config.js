@@ -10,9 +10,10 @@
 const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
+const { componentsX } = featureFlags;
 module.exports = {
   context: {
-    featureFlags,
+    componentsX,
     prefix,
   },
   variants: [
@@ -31,5 +32,24 @@ module.exports = {
         light: true,
       },
     },
+    ...(componentsX
+      ? [
+          {
+            name: 'mobile',
+            label: 'Mobile Number Input',
+            context: {
+              mobile: true,
+            },
+          },
+          {
+            name: 'mobile-light',
+            label: 'Mobile Number Input (light)',
+            context: {
+              light: true,
+              mobile: true,
+            },
+          },
+        ]
+      : []),
   ],
 };
