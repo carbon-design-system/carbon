@@ -576,11 +576,8 @@ DATA TABLE VARIATIONS
   }
 
   //================================================
-  //STICKY HEADER WITH HORIZONTAL SCROLL ON BODY
+  //STICKY HEADER
   //================================================
-  .#{$prefix}--data-table-v2-container-max-width {
-    // max-width: rem(800px);
-  }
 
   .#{$prefix}--data-table-v2_inner-container {
     background-color: $ui-03;
