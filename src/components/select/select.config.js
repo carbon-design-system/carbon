@@ -98,7 +98,7 @@ module.exports = {
     },
     {
       name: 'helperTextInline',
-      label: 'Select (inline witbh helper text)',
+      label: 'Select (inline with helper text)',
       notes: 'Example with an optional helper text group with an inline select',
       context: {
         items,

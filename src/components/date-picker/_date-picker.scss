@@ -17,7 +17,6 @@
 @mixin date-picker {
   .#{$prefix}--date-picker {
     display: flex;
-    align-items: flex-start;
   }
 
   .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
@@ -32,6 +31,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -144,10 +144,13 @@
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__icon {
+    top: initial;
     right: -1.75rem;
+    bottom: 0.6rem;
     left: auto;
   }
 
+  .#{$prefix}--date-picker--range .#{$prefix}--label,
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
     width: 7.075rem;
   }
@@ -468,7 +471,6 @@
 @mixin date-picker--x {
   .#{$prefix}--date-picker {
     display: flex;
-    align-items: flex-start;
   }
 
   .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
@@ -483,6 +485,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   .#{$prefix}--date-picker-input__wrapper {
@@ -516,6 +519,10 @@
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
+    .#{$prefix}--date-picker-container {
+      max-width: rem(288px);
+    }
+
     .#{$prefix}--date-picker__input {
       width: rem(288px);
     }
@@ -575,27 +582,15 @@
     }
   }
 
-  .#{$prefix}--date-picker--single .#{$prefix}--date-picker__icon {
-    top: 2.25rem;
-  }
-
-  .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
-    top: rem(12px);
-  }
-
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $spacing-3xl;
-  }
-
-  .#{$prefix}--date-picker--range {
-    display: flex;
-    position: relative;
   }
 
   .#{$prefix}--date-picker--range > .#{$prefix}--date-picker-container:first-child {
     margin-right: rem(1px);
   }
 
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
     width: rem(143.5px);
   }
