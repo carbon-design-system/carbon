@@ -223,15 +223,21 @@
 
   .#{$prefix}--accordion__content {
     // Transition property for when the accordion closes
-    transition: all motion(standard, productive) 120ms;
+    transition: height motion(standard, productive) 120ms, padding motion(standard, productive) 120ms;
     padding-left: $spacing-md;
     padding-right: 25%;
     height: 0;
     visibility: hidden;
     opacity: 0;
 
+    @include max-breakpoint('bp--xs--major') {
+      padding-right: $spacing-3xl;
+    }
+
     p {
-      @include typescale('zeta');
+      @include type-style('body-long-01');
+      height: 0;
+      transition: height motion(standard, productive) 120ms;
     }
   }
 
@@ -245,7 +251,14 @@
       visibility: visible;
       opacity: 1;
       // Transition property for when the accordion opens
-      transition: all motion(entrance, productive) 120ms;
+      transition: height motion(entrance, productive) 120ms, padding-top motion(entrance, productive) 120ms,
+        padding-bottom motion(entrance, productive) 120ms;
+
+      p {
+        @include type-style('body-long-01');
+        height: auto;
+        transition: height motion(entrance, productive) 120ms;
+      }
     }
 
     .#{$prefix}--accordion__arrow {

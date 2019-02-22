@@ -258,20 +258,19 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
         if (!isExpanded && this.element.ownerDocument.activeElement !== this.element) {
           return;
         }
-        event.preventDefault(); // prevent scrolling
         const isOfSelf = element.contains(event.target);
         const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
         const state = shouldBeOpen ? 'shown' : 'hidden';
 
         if (isOfSelf) {
           event.delegateTarget = element; // eslint-disable-line no-param-reassign
+          event.preventDefault(); // prevent scrolling
+          this.changeState(state, getLaunchingDetails(event), () => {
+            if (state === 'hidden' && isOfMenu) {
+              element.focus();
+            }
+          });
         }
-
-        this.changeState(state, getLaunchingDetails(event), () => {
-          if (state === 'hidden' && isOfMenu) {
-            element.focus();
-          }
-        });
         break;
       }
       case 38: // up arrow
