@@ -340,6 +340,7 @@
     input[type='number'] {
       min-width: rem(64px);
       width: auto;
+      margin: 0;
       border-right: 1px solid $ui-03;
       border-left: 1px solid $ui-03;
       padding: 0;
