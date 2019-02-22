@@ -263,6 +263,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
         const state = shouldBeOpen ? 'shown' : 'hidden';
 
         if (isOfSelf) {
+          event.delegateTarget = element; // eslint-disable-line no-param-reassign
           event.preventDefault(); // prevent scrolling
           this.changeState(state, getLaunchingDetails(event), () => {
             if (state === 'hidden' && isOfMenu) {
