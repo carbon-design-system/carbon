@@ -14,7 +14,6 @@ import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
 import Search16 from '@carbon/icons-react/lib/search/16';
 import { settings } from 'carbon-components';
 import Button from '../Button';
-import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { componentsX } from '../../internal/FeatureFlags';
 
@@ -65,6 +64,12 @@ const props = {
   }),
 };
 
+const CustomLink = ({ children, href, ...other }) => (
+  <a href={href} {...other}>
+    {children}
+  </a>
+);
+
 storiesOf('Buttons', module)
   .addDecorator(withKnobs)
   .add(
@@ -72,7 +77,12 @@ storiesOf('Buttons', module)
     () => {
       const regularProps = props.regular();
       return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}>
           <Button {...regularProps} className="some-class">
             Button
           </Button>
@@ -81,15 +91,17 @@ storiesOf('Buttons', module)
             Link
           </Button>
           &nbsp;
-          <Button
-            {...regularProps}
-            as={Link}
-            kind="secondary"
-            href="#"
-            className="some-class">
-            Link
+          <Button {...regularProps} as="p" href="#" className="some-class">
+            Element
           </Button>
           &nbsp;
+          <Button
+            {...regularProps}
+            as={CustomLink}
+            href="#"
+            className="some-class">
+            Custom component
+          </Button>
         </div>
       );
     },
