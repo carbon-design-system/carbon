@@ -23,7 +23,7 @@
     &:not(.#{$prefix}--pagination-nav__page--direction) {
       &::after {
         background-color: $interactive-01;
-        bottom: -$spacing-sm;
+        bottom: 0;
         content: '';
         display: block;
         height: $spacing-2xs;
@@ -37,9 +37,9 @@
 
     .#{$prefix}--pagination-nav__page--active + &::after,
     &.#{$prefix}--pagination-nav__page--active::after {
-      left: 0;
+      left: calc(50% - #{$spacing-md/2});
       opacity: 1;
-      width: 100%;
+      width: $spacing-md;
     }
   }
 }
@@ -50,12 +50,10 @@
   $background-color-hover: $hover-ui,
   $background-color-active: initial,
   $font-weight: 400,
-  $item-padding: 0 $spacing-md,
-  $button-min-width: $spacing-md,
-  $button-padding: 0.1875rem 0,
-  $select-min-height: 1.25rem,
-  $select-padding: 0.17rem 0.219rem,
-  $button-direction-size: 1.25rem
+  $item-padding: 0,
+  $button-min-width: $spacing-3xl,
+  $button-padding: 1.0625rem $spacing-2xs,
+  $button-direction-size: $spacing-3xl
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
@@ -124,6 +122,7 @@
     &.#{$prefix}--pagination-nav__page--active {
       background-color: $background-color-active;
       color: $text-color-active;
+      font-weight: 600;
       outline: none;
     }
 
@@ -148,9 +147,12 @@
 
   .#{$prefix}--pagination-nav__page--select {
     appearance: none;
-    min-height: $select-min-height;
-    min-width: auto;
-    padding: $select-padding;
+    max-height: $button-min-width;
+    text-indent: calc(50% - 4.5px);
+    // Override some Firefox user-agent styles
+    @-moz-document url-prefix() {
+      text-indent: 0;
+    }
   }
 
   .#{$prefix}--pagination-nav__select-icon-wrapper {
@@ -193,8 +195,6 @@
     $item-padding: 0 $spacing-xs,
     $button-min-width: $spacing-lg,
     $button-padding: 0.3125rem $spacing-2xs,
-    $select-min-height: $spacing-lg,
-    $select-padding: 0.25rem 0.46875rem,
     $button-direction-size: $spacing-lg
   );
 
