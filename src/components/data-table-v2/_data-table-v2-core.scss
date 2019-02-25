@@ -583,12 +583,13 @@ DATA TABLE VARIATIONS
     background-color: $ui-03;
     padding-top: rem(49px);
     transform: translateZ(0);
+    max-width: 100%;
   }
 
   .#{$prefix}--data-table-v2--sticky-header {
     display: block;
     max-height: rem(300px);
-    overflow: scroll;
+    overflow-y: scroll;
 
     thead,
     tbody,
@@ -602,6 +603,8 @@ DATA TABLE VARIATIONS
       position: fixed;
       top: 0;
       width: 100%;
+      overflow: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
     }
 
     tbody {
@@ -611,6 +614,25 @@ DATA TABLE VARIATIONS
     tr {
       min-height: rem(48px);
       height: auto;
+    }
+
+    tbody tr {
+      overflow-x: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+    }
+
+    //hides webkit scrollbar
+    thead::-webkit-scrollbar,
+    tbody tr::-webkit-scrollbar {
+      display: none;
+    }
+
+    //hides ff scrollbar
+    @-moz-document url-prefix() {
+      thead,
+      tbody tr {
+        scrollbar-width: none;
+      }
     }
 
     tbody tr:last-of-type {
