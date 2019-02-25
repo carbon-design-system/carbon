@@ -133,6 +133,20 @@ describe('refs', () => {
     wrapper.instance().focus();
     expect(document.activeElement.type).toEqual('checkbox');
   });
+
+  it('should set indeterminate when accepting refs', () => {
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+      }
+      render() {
+        return <Checkbox indeterminate ref={this.myRef} />;
+      }
+    }
+    const wrapper = mount(<MyComponent />);
+    expect(wrapper.find('input').getDOMNode().indeterminate).toBe(true);
+  });
 });
 
 describe('CheckboxSkeleton', () => {

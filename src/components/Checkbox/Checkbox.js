@@ -24,7 +24,6 @@ const Checkbox = ({
   forwardRef: ref,
   ...other
 }) => {
-  let input;
   const labelClasses = classNames(`${prefix}--checkbox-label`, className);
   const innerLabelClasses = classNames({
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -45,15 +44,16 @@ const Checkbox = ({
         }}
         className={`${prefix}--checkbox`}
         id={id}
-        ref={
-          ref ||
-          (el => {
-            input = el;
-            if (input) {
-              input.indeterminate = indeterminate;
-            }
-          })
-        }
+        ref={el => {
+          if (el) {
+            el.indeterminate = indeterminate;
+          }
+          if (typeof ref === 'function') {
+            ref(el);
+          } else if (Object(ref) === ref) {
+            ref.current = el;
+          }
+        }}
       />
       <label htmlFor={id} className={labelClasses} title={title || null}>
         <span className={innerLabelClasses}>{labelText}</span>
