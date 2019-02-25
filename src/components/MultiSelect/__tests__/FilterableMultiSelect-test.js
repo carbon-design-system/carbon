@@ -43,6 +43,11 @@ describe('MultiSelect.Filterable', () => {
     expect(wrapper.find(listItemName).length).toBe(mockProps.items.length);
   });
 
+  it('should initially have the menu open when open prop is provided', () => {
+    const wrapper = mount(<MultiSelect.Filterable {...mockProps} open />);
+    expect(wrapper.state('isOpen')).toBe(true);
+  });
+
   it('should let the user toggle the menu by the menu icon', () => {
     const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
     findMenuIconNode(wrapper).simulate('click');

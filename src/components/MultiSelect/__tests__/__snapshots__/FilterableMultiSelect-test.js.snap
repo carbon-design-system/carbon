@@ -39,6 +39,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
   light={false}
   locale="en"
   onChange={[MockFunction]}
+  open={false}
   placeholder="Placeholder..."
   sortItems={[Function]}
 >

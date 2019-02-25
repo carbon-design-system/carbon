@@ -80,7 +80,25 @@ export default class FilterableMultiSelect extends React.Component {
      * If invalid, what is the error?
      */
     invalidText: PropTypes.string,
+
+    /**
+     * Initialize the component with an open(`true`)/closed(`false`) menu.
+     */
+    open: PropTypes.bool,
   };
+
+  static getDerivedStateFromProps({ open }, state) {
+    /**
+     * programmatically control this `open` prop
+     */
+    const { prevOpen } = state;
+    return prevOpen === open
+      ? null
+      : {
+          isOpen: open,
+          prevOpen: open,
+        };
+  }
 
   static defaultProps = {
     compareItems: defaultCompareItems,
@@ -91,13 +109,14 @@ export default class FilterableMultiSelect extends React.Component {
     locale: 'en',
     sortItems: defaultSortItems,
     light: false,
+    open: false,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       highlightedIndex: null,
-      isOpen: false,
+      isOpen: props.open,
       inputValue: '',
     };
   }

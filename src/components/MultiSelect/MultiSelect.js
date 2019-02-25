@@ -93,10 +93,28 @@ export default class MultiSelect extends React.Component {
     invalidText: PropTypes.string,
 
     /**
+     * Initialize the component with an open(`true`)/closed(`false`) menu.
+     */
+    open: PropTypes.bool,
+
+    /**
      * Callback function for translating ListBoxMenuIcon SVG title
      */
     translateWithId: PropTypes.func,
   };
+
+  static getDerivedStateFromProps({ open }, state) {
+    /**
+     * programmatically control this `open` prop
+     */
+    const { prevOpen } = state;
+    return prevOpen === open
+      ? null
+      : {
+          isOpen: open,
+          prevOpen: open,
+        };
+  }
 
   static defaultProps = {
     compareItems: defaultCompareItems,
@@ -108,13 +126,14 @@ export default class MultiSelect extends React.Component {
     type: 'default',
     light: false,
     title: false,
+    open: false,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       highlightedIndex: null,
-      isOpen: false,
+      isOpen: props.open,
     };
   }
 

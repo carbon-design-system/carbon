@@ -38,6 +38,7 @@ exports[`MultiSelect should render 1`] = `
   label="Field"
   light={false}
   locale="en"
+  open={false}
   sortItems={[Function]}
   title={false}
   type="default"
