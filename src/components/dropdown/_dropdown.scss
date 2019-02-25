@@ -256,7 +256,7 @@
     }
   }
 
-  .#{$prefix}--dropdown[data-invalid] {
+  .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
 
     .#{$prefix}--dropdown-text {
