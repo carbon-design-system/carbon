@@ -301,6 +301,7 @@
 @mixin snippet--x {
   .#{$prefix}--snippet code {
     font-family: $font-family-mono;
+    @include type-style('code-01');
   }
 
   // Inline Code Snippet
@@ -367,6 +368,7 @@
 
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
+    @include type-style('code-01');
   }
 
   // Multi Line Snippet
@@ -418,6 +420,7 @@
 
     &:focus {
       @include focus-outline('outline');
+      outline-color: $focus;
     }
   }
 
@@ -464,6 +467,10 @@
     padding: $spacing-xs;
     padding-left: $spacing-md;
     color: $text-01;
+  }
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
+    //ADD SOMETHING HERE
   }
 
   .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
