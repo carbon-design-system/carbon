@@ -67,14 +67,14 @@
     @include reset;
     @include type-style('body-short-01');
 
-    counter-reset: list-item;
+    counter-reset: listitem;
   }
 
   .#{$prefix}--list__item {
     font-weight: 400;
     color: $text-01;
     list-style-type: none;
-    counter-increment: list-item;
+    counter-increment: listitem;
   }
 
   .#{$prefix}--list--nested {
@@ -104,7 +104,7 @@
   }
 
   .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
-    content: counter(list-item) '.';
+    content: counter(listitem) '.';
   }
 
   .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item {
