@@ -153,17 +153,18 @@
 
   .#{$prefix}--accordion__item {
     transition: all $transition--base $carbon--standard-easing;
-    border-top: 1px solid $ui-03;
+    border-top-width: 1px;
+    border-top-style: solid;
     overflow: visible;
 
     &:last-child {
-      border-bottom: 1px solid $ui-03;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
     }
   }
 
   .#{$prefix}--accordion__heading {
     @include button-reset;
-    color: $text-01;
     display: flex;
     align-items: center;
     justify-content: $accordion-justify-content;
@@ -185,16 +186,8 @@
       height: calc(100% + 2px);
     }
 
-    &:hover:before {
-      background-color: $hover-ui;
-    }
-
     &:focus {
       outline: none;
-    }
-
-    &:focus:before {
-      @include focus-outline('outline');
     }
   }
 
@@ -206,7 +199,6 @@
     width: 1rem;
     height: 1rem;
     margin: $accordion-arrow-margin;
-    fill: $ui-05;
     // TODO: RTL rotate(180deg);
     transform: rotate(90deg);
     transition: all $transition--base $carbon--standard-easing;
@@ -250,7 +242,6 @@
     .#{$prefix}--accordion__arrow {
       /*rtl:ignore*/
       transform: rotate(-90deg);
-      fill: $ui-05;
     }
   }
 
@@ -262,7 +253,6 @@
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
     pointer-events: none;
-    fill: $ui-05;
     cursor: default;
 
     &:hover,
@@ -282,6 +272,44 @@
 
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
     margin-bottom: 0;
+  }
+
+  @include accordion-colors--x;
+}
+
+@mixin accordion-colors--x {
+  .#{$prefix}--accordion__item {
+    border-top-color: $ui-03;
+
+    &:last-child {
+      border-bottom-color: $ui-03;
+    }
+  }
+
+  .#{$prefix}--accordion__heading {
+    color: $text-01;
+
+    &:hover:before {
+      background-color: $hover-ui;
+    }
+
+    &:focus:before {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--accordion__arrow {
+    fill: $ui-05;
+  }
+
+  .#{$prefix}--accordion__item--active {
+    .#{$prefix}--accordion__arrow {
+      fill: $ui-05;
+    }
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    fill: $ui-05;
   }
 }
 

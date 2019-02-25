@@ -180,10 +180,6 @@
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
     display: inline-block;
-
-    &:disabled > .#{$prefix}--btn__icon {
-      fill: $ui-04;
-    }
   }
 
   // Reset intrisic padding in Firefox (see #731)
@@ -197,11 +193,67 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interactive-01, transparent, $text-04, #0353e9, $text-04, $interactive-02);
+    @include button-theme--x;
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme--x(
+    @include button-theme--x;
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme--x;
+    position: relative;
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme--x;
+
+    .#{$prefix}--btn__icon {
+      margin-left: $spacing-xs;
+    }
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme--x;
+
+    &:hover {
+      border: $button-border-width solid transparent;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    @include letter-spacing;
+    height: rem(32px);
+    padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
+    margin-left: $spacing-md;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
+  }
+
+  @include button-colors--x;
+}
+
+@mixin button-colors--x {
+  button.#{$prefix}--btn {
+    &:disabled > .#{$prefix}--btn__icon {
+      fill: $ui-04;
+    }
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme-colors--x($interactive-01, transparent, $text-04, #0353e9, $text-04, $interactive-02);
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme-colors--x(
       $ibm-colors__gray-80,
       $ibm-colors__gray-80,
       $text-04,
@@ -217,8 +269,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
-    position: relative;
+    @include button-theme-colors--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
 
     &:hover {
       color: $inverse-01;
@@ -241,7 +292,7 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(
+    @include button-theme-colors--x(
       transparent,
       transparent,
       $interactive-03,
@@ -263,10 +314,6 @@
       background-color: $active-ui;
     }
 
-    .#{$prefix}--btn__icon {
-      margin-left: $spacing-xs;
-    }
-
     &:disabled,
     &:hover:disabled,
     &:focus:disabled {
@@ -281,28 +328,7 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $text-04, $active-danger);
-
-    &:hover {
-      border: $button-border-width solid transparent;
-    }
-  }
-
-  .#{$prefix}--btn--sm {
-    @include letter-spacing;
-    height: rem(32px);
-    padding: $button-padding-sm;
-  }
-
-  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
-  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
-    margin-left: $spacing-md;
-  }
-
-  // Skeleton State
-  .#{$prefix}--btn.#{$prefix}--skeleton {
-    @include skeleton;
-    width: rem(150px);
+    @include button-theme-colors--x($support-01, $support-01, $text-04, $hover-danger, $text-04, $active-danger);
   }
 }
 

@@ -113,16 +113,9 @@
   }
 }
 
-@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
-  background-color: $bg-color;
+@mixin button-theme--x {
   border-width: $button-border-width;
   border-style: solid;
-  border-color: $border-color;
-  color: $font-color;
-
-  &:hover {
-    background-color: $hover-bg-color;
-  }
 
   &::before,
   &::after {
@@ -141,16 +134,31 @@
     border: 1px solid transparent;
   }
 
-  &:focus::before {
-    border-color: $ui-02;
-  }
-
   &::after {
     top: -#{$button-border-width};
     left: -#{$button-border-width};
     height: calc(100% + 2 * #{$button-border-width});
     width: calc(100% + 2 * #{$button-border-width});
     border: $button-outline-width solid transparent;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus {
+    text-decoration: none;
+  }
+}
+
+@mixin button-theme-colors--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+  background-color: $bg-color;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+
+  &:focus::before {
+    border-color: $ui-02;
   }
 
   &:focus::after {
@@ -162,7 +170,6 @@
     color: $ui-04;
     background: $ibm-colors__gray-30;
     border-color: $ibm-colors__gray-30;
-    text-decoration: none;
   }
 
   &:active {

@@ -1,3 +1,5 @@
+// $carbon--theme: 'g90';
+
 // Used for sidebar in dev environment
 @import 'interior-left-nav';
 @import '../../src/globals/scss/styles';
@@ -14,6 +16,15 @@
 @import '../js/components/ComponentExample/component-overrides.scss';
 @import '../js/components/PageHeader/page-header.scss';
 @import '../js/components/SideNavToggle/side-nav-toggle.scss';
+
+@if feature-flag-enabled('components-x') {
+  .my-dark-theme {
+    @include carbon--theme-overrides('g90');
+    @include accordion-colors--x;
+    @include button-colors--x;
+    @include text-input-colors--x;
+  }
+}
 
 [data-renderroot] {
   display: block;
