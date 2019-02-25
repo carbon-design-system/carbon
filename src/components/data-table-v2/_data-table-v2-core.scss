@@ -267,8 +267,6 @@ DATA TABLE VARIATIONS
 
     th:hover {
       background: $data-table-column-hover;
-      outline: 1px solid $data-table-column-hover-border;
-      outline-offset: -1px;
     }
 
     tbody {
@@ -308,14 +306,13 @@ DATA TABLE VARIATIONS
   th,
   td {
     @include typescale('zeta');
-    border-top: 1px solid $ui-03;
     padding-left: $spacing-sm;
     padding-right: $spacing-sm;
     vertical-align: top;
     text-align: left;
     color: $text-02;
 
-    &:first-of-type {
+    &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
       padding-left: $spacing-lg;
     }
   }
@@ -340,9 +337,9 @@ DATA TABLE VARIATIONS
 
   //width for checkbox columns
   .#{$prefix}--table-column-checkbox {
-    width: rem(64px);
-    min-width: rem(64px);
-    padding-top: rem(12px);
+    width: rem(50px);
+    min-width: rem(50px);
+    padding: rem(12px) $spacing-md 0 $spacing-md;
   }
 
   //width for overflow menu columns
@@ -528,17 +525,6 @@ DATA TABLE VARIATIONS
       }
     }
 
-    //width for actionable columns (icons)
-    .#{$prefix}--table-column-checkbox {
-      width: rem(64px);
-      min-width: (64px);
-    }
-
-    .#{$prefix}--table-column-menu {
-      width: rem(56px);
-      min-width: rem(56px);
-    }
-
     thead tr th button .#{$prefix}--tooltip,
     tbody tr td .#{$prefix}--tooltip {
       display: block;
@@ -581,7 +567,7 @@ DATA TABLE VARIATIONS
 
   .#{$prefix}--data-table-v2_inner-container {
     background-color: $ui-03;
-    padding-top: rem(49px);
+    padding-top: rem(48px);
     transform: translateZ(0);
     max-width: 100%;
   }
@@ -667,12 +653,10 @@ DATA TABLE VARIATIONS
     }
 
     .#{$prefix}--table-header-label {
-      display: block;
       padding: rem(5px) 0;
     }
 
     .#{$prefix}--table-cell-content {
-      display: block;
       padding: rem(5px) 0;
     }
 
@@ -682,8 +666,6 @@ DATA TABLE VARIATIONS
     }
 
     .#{$prefix}--table-column-checkbox {
-      width: rem(32px);
-      min-width: rem(32px);
       padding-top: rem(1px);
     }
 
@@ -711,12 +693,10 @@ DATA TABLE VARIATIONS
     }
 
     .#{$prefix}--table-header-label {
-      display: block;
       padding: rem(9px) 0;
     }
 
     .#{$prefix}--table-cell-content {
-      display: block;
       padding: rem(9px) 0;
     }
   }
@@ -728,12 +708,10 @@ DATA TABLE VARIATIONS
     }
 
     .#{$prefix}--table-header-label {
-      display: block;
       padding: rem(25px) 0;
     }
 
     .#{$prefix}--table-cell-content {
-      display: block;
       padding: rem(25px) 0;
     }
   }

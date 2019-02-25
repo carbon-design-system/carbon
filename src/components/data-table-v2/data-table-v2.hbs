@@ -333,8 +333,8 @@
         {{#each columns}}
           <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if menu}}class="{{@root.prefix}}--table-column-menu"{{/if}} {{#if section}}class="{{@root.prefix}}--table-expand-v2"{{/if}} {{#if additionalIcons}}class="{{@root.prefix}}--table-column-icon"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table-v2--numerical-cell" {{/if}}>
             {{#if checkbox}}
-              <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}"></label>
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
+              <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}"></label>
             {{else if (not menu)}}
               {{#if sortable}}
                 <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
