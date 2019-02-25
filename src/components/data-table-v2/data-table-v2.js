@@ -63,6 +63,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       if (eventElement) {
         this._toggleState(eventElement, evt);
       }
+
       this._handleDocumentClick(evt);
     });
 
@@ -70,11 +71,34 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       this._keydownHandler(evt);
     });
 
+    const stickyTable = this.element.querySelector(this.options.selectorTableStickyHeader);
+    if (stickyTable) {
+      const thead = stickyTable.querySelector(this.options.selectorTableThead);
+      const tbody = stickyTable.querySelector(this.options.selectorTableBody);
+      const rows = tbody.querySelectorAll('tr');
+
+      thead.addEventListener('scroll', evt => {
+        this._scrollHandler(thead, rows, evt);
+      });
+      rows.forEach(row =>
+        row.addEventListener('scroll', evt => {
+          this._scrollHandler(thead, rows, evt);
+        })
+      );
+    }
+
     this.state = {
       checkboxCount: 0,
     };
 
     this.element.ownerDocument.defaultView.addEventListener('resize', this._handleDebouncedResize);
+  }
+
+  _scrollHandler(thead, rows, evt) {
+    thead.scrollLeft = evt.target.scrollLeft;
+    rows.forEach(row => {
+      row.scrollLeft = evt.target.scrollLeft;
+    });
   }
 
   _handleDocumentClick(evt) {
@@ -390,7 +414,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorExpandableRows: `.${prefix}--expandable-row-v2`,
       selectorParentRows: `.${prefix}--parent-row-v2`,
       selectorChildRow: '[data-child-row]',
+      selectorTableStickyHeader: `.${prefix}--data-table-v2--sticky-header`,
       selectorTableBody: 'tbody',
+      selectorTableThead: 'thead',
       selectorTableSort: `.${prefix}--table-sort-v2`,
       selectorTableSelected: `.${prefix}--data-table-v2--selected`,
       selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-hidden`,
