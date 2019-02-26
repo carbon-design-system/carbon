@@ -121,7 +121,7 @@
   }
 
   .#{$prefix}--tag--gray {
-    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-100);
+    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-100);
   }
 
   .#{$prefix}--tag--cool-gray {
