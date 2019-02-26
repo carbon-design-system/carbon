@@ -42,3 +42,4 @@ export { default as HeaderSubmenu } from '../../components/ui-shell/header-subme
 export { default as HeaderNav } from '../../components/ui-shell/header-nav';
 export { default as NavigationMenu } from '../../components/ui-shell/navigation-menu';
 export { default as ProductSwitcher } from '../../components/ui-shell/product-switcher';
+export { default as PaginationNav } from '../../components/pagination-nav/pagination-nav';

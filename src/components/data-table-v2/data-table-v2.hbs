@@ -115,7 +115,7 @@
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
                       <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
-                        <button class="{{@root.prefix}}--overflow-menu-options__btn">{{label}}</button>
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">{{label}}</button>
                       </li>
                     {{/each}}
                   </ul>

@@ -54,15 +54,10 @@
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-short-01');
-
     color: $interactive-01;
-
-    // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
-    // effect.
     text-decoration: none;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $interactive-01;
       box-shadow: 0 1px currentColor;
     }
@@ -74,13 +69,17 @@
     }
 
     &:focus {
-      outline: none;
-      box-shadow: 0 3px currentColor;
+      color: $interactive-01;
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
     }
 
-    &[aria-disabled='true'][tabindex='-1'] {
-      color: $disabled;
+    &:not([href]) {
+      color: $disabled-02;
       cursor: not-allowed;
+      pointer-events: none;
+      touch-action: none;
+
       &:hover {
         box-shadow: none;
       }
@@ -89,6 +88,19 @@
     &:visited {
       color: $interactive-01;
     }
+  }
+
+  .#{$prefix}--link--visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link--disabled {
+    @include reset;
+    @include type-style('body-short-01');
+    @include font-smoothing;
+    display: inline;
+    color: $disabled-02;
+    font-weight: 400;
   }
 }
 

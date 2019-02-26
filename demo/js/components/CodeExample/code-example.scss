@@ -7,12 +7,12 @@ $temp-text: $color__blue-90;
   position: relative;
   max-width: 100%;
 
-  code[class*="language-"],
-  pre[class*="language-"] {
+  code[class*='language-'],
+  pre[class*='language-'] {
     background-color: #fff;
   }
 
-  pre[class*="language-"] {
+  pre[class*='language-'] {
     padding-top: 0;
     border: none;
     box-shadow: none;
@@ -59,6 +59,7 @@ $temp-text: $color__blue-90;
 
   &--expanded {
     max-height: 100rem;
+    overflow: auto;
   }
 }
 

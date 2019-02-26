@@ -16,7 +16,7 @@ class CodeExample extends Component {
     expandedCode: false,
   };
 
-  componentDidMount = () => {
+  determineShowBtnState = () => {
     if (this.codeBlock.offsetHeight > 190) {
       this.setState({ showBtn: true });
     }
@@ -47,7 +47,7 @@ class CodeExample extends Component {
       }
       this._observerCode = new MutationObserver(() => {
         if (window.Prism && Array.prototype.every.call(node.childNodes, childNode => childNode.nodeType === Node.TEXT_NODE)) {
-          window.Prism.highlightElement(node);
+          window.Prism.highlightElement(node, this.determineShowBtnState());
         }
       });
       this._observerCode.observe(node, {
