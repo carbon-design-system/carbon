@@ -6,7 +6,10 @@
 //
 
 @import 'helper-classes';
+@import 'deprecate';
+@import 'functions';
 
+/// @deprecated (For v10) Superseded by `$carbon--grid-breakpoints`
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
@@ -41,26 +44,40 @@ $padding: (
 // }
 //-------------------------------------
 
+/// @deprecated (For v10) Use `@include carbon--breakpoint()`
 @mixin breakpoint($size) {
-  @if map-has-key($breakpoints, $size) {
-    @media screen and (min-width: map-get($breakpoints, $size)) {
-      @content;
-    }
-  } @else {
-    @media (min-width: $size) {
-      @content;
+  @include deprecate(
+    '`@include breakpoint()` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--breakpoint()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    @if map-has-key($breakpoints, $size) {
+      @media screen and (min-width: map-get($breakpoints, $size)) {
+        @content;
+      }
+    } @else {
+      @media (min-width: $size) {
+        @content;
+      }
     }
   }
 }
 
+/// @deprecated (For v10) Use `@include carbon--breakpoint-down()`
 @mixin max-breakpoint($size) {
-  @if map-has-key($breakpoints, $size) {
-    @media screen and (max-width: map-get($breakpoints, $size)) {
-      @content;
-    }
-  } @else {
-    @media (max-width: $size) {
-      @content;
+  @include deprecate(
+    '`@include max-breakpoint()` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--breakpoint-down()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    @if map-has-key($breakpoints, $size) {
+      @media screen and (max-width: map-get($breakpoints, $size)) {
+        @content;
+      }
+    } @else {
+      @media (max-width: $size) {
+        @content;
+      }
     }
   }
 }
