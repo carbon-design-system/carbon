@@ -404,6 +404,10 @@
   .#{$prefix}--toggle:disabled:active + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance:before {
     box-shadow: none;
   }
+
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+    fill: $disabled-02;
+  }
 }
 
 @include exports('toggle') {
