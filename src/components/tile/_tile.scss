@@ -150,7 +150,7 @@
   .#{$prefix}--tile--is-selected,
   .#{$prefix}--tile--is-selected:hover,
   .#{$prefix}--tile--is-selected:focus {
-    border: 1px solid $interactive-02;
+    border: 1px solid $brand-01;
     outline: none;
   }
 
@@ -299,7 +299,7 @@
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $ui-04;
+    outline: 1px solid $interactive-02;
     outline-offset: -1px;
   }
 
