@@ -313,9 +313,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__btn {
-    @include reset;
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     font-weight: 400;
     width: 100%;
