@@ -33,6 +33,7 @@ const props = () => ({
   className: 'some-class',
   disabled: boolean('Disable the launcher button (disabled)', false),
   passiveModal: boolean('Without footer (passiveModal)', false),
+  danger: boolean('Danger mode (danger)', false),
   buttonTriggerText: text(
     'The text in the trigger button (buttonTriggerText)',
     'Launch Modal'
