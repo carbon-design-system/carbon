@@ -576,10 +576,6 @@
     fill: $ui-05;
     cursor: pointer;
     z-index: 1;
-
-    &:hover {
-      fill: $hover-primary;
-    }
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
