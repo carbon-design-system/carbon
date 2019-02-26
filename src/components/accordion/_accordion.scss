@@ -7,6 +7,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
@@ -173,7 +174,7 @@
     position: relative;
     width: 100%;
     margin: 0;
-    transition: background-color $transition--base;
+    transition: background-color motion(standard, productive) 100ms;
 
     &:hover:before,
     &:focus:before {
@@ -222,15 +223,22 @@
   }
 
   .#{$prefix}--accordion__content {
-    transition: all $transition--expansion $carbon--ease-out;
+    // Transition property for when the accordion closes
+    transition: height motion(standard, productive) 120ms, padding motion(standard, productive) 120ms;
     padding-left: $spacing-md;
     padding-right: 25%;
     height: 0;
     visibility: hidden;
     opacity: 0;
 
+    @include max-breakpoint('bp--xs--major') {
+      padding-right: $spacing-3xl;
+    }
+
     p {
-      @include typescale('zeta');
+      @include type-style('body-long-01');
+      height: 0;
+      transition: height motion(standard, productive) 120ms;
     }
   }
 
@@ -243,7 +251,15 @@
       height: auto;
       visibility: visible;
       opacity: 1;
-      transition: all $transition--expansion $carbon--ease-in;
+      // Transition property for when the accordion opens
+      transition: height motion(entrance, productive) 120ms, padding-top motion(entrance, productive) 120ms,
+        padding-bottom motion(entrance, productive) 120ms;
+
+      p {
+        @include type-style('body-long-01');
+        height: auto;
+        transition: height motion(entrance, productive) 120ms;
+      }
     }
 
     .#{$prefix}--accordion__arrow {

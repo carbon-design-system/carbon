@@ -317,6 +317,37 @@
     background: $field-02;
   }
 
+  .#{$prefix}--number--mobile {
+    min-width: rem(144px);
+    width: auto;
+
+    .#{$prefix}--number__control-btn {
+      width: rem(40px);
+      height: rem(40px);
+      background-color: $field-01;
+
+      &:hover,
+      &:focus {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+      }
+    }
+
+    input[type='number'] {
+      min-width: rem(64px);
+      width: auto;
+      margin: 0;
+      border-right: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
+      padding: 0;
+      text-align: center;
+    }
+  }
+
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
