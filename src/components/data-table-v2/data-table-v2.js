@@ -75,16 +75,13 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     if (stickyTable) {
       const thead = stickyTable.querySelector(this.options.selectorTableThead);
       const tbody = stickyTable.querySelector(this.options.selectorTableBody);
-      const rows = tbody.querySelectorAll('tr');
 
       thead.addEventListener('scroll', evt => {
-        this._scrollHandler(thead, rows, evt);
+        this._scrollHandler(thead, tbody, evt);
       });
-      rows.forEach(row =>
-        row.addEventListener('scroll', evt => {
-          this._scrollHandler(thead, rows, evt);
-        })
-      );
+      tbody.addEventListener('scroll', evt => {
+        this._scrollHandler(thead, tbody, evt);
+      });
     }
 
     this.state = {
@@ -94,11 +91,11 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.element.ownerDocument.defaultView.addEventListener('resize', this._handleDebouncedResize);
   }
 
-  _scrollHandler(thead, rows, evt) {
-    thead.scrollLeft = evt.target.scrollLeft;
-    rows.forEach(row => {
-      row.scrollLeft = evt.target.scrollLeft;
-    });
+  _scrollHandler(thead, tbody, evt) {
+    const source = evt.target;
+    const target = evt.target === thead ? tbody : thead;
+
+    target.scrollLeft = source.scrollLeft;
   }
 
   _handleDocumentClick(evt) {

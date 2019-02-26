@@ -951,6 +951,7 @@ module.exports = {
         sortLabel: 'Sort rows by this header in descending order',
         zebra: true,
         hasToolbar: true,
+        sticky: true,
       },
     },
   ],

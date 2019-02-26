@@ -272,25 +272,33 @@ DATA TABLE VARIATIONS
     tbody {
       @include typescale('zeta');
       background-color: $ui-01;
-      border-bottom: 1px solid $ui-03;
       width: 100%;
+    }
 
-      & > tr {
-        background: $ui-01;
-        border-bottom: 1px solid $ui-03;
+    tbody tr,
+    thead tr {
+      border: none;
+    }
 
-        &:hover:not([disabled]) {
-          background: $hover-field;
+    tbody tr td {
+      background: $ui-01;
+      border-bottom: 1px solid $ui-03;
+      border-top: 1px solid $ui-01;
+    }
 
-          & td {
-            color: $text-01;
-          }
-        }
+    tbody tr:hover:not([disabled]) {
+      background: $hover-field;
 
-        &:focus {
-          @include focus-outline('outline');
-        }
+      & td {
+        color: $text-01;
+        background: $hover-field;
+        border-bottom: 1px solid $hover-field;
+        border-top: 1px solid $hover-field;
       }
+    }
+
+    tbody tr:focus {
+      @include focus-outline('outline');
     }
 
     tr {
@@ -301,120 +309,122 @@ DATA TABLE VARIATIONS
         opacity: 1;
       }
     }
-  }
 
-  th,
-  td {
-    @include typescale('zeta');
-    padding-left: $spacing-sm;
-    padding-right: $spacing-sm;
-    vertical-align: top;
-    text-align: left;
-    color: $text-02;
+    th,
+    td {
+      @include typescale('zeta');
+      padding-left: $spacing-sm;
+      padding-right: $spacing-sm;
+      vertical-align: top;
+      text-align: left;
+      color: $text-02;
+      border-top: 1px solid $ui-01;
+      border-bottom: 1px solid $ui-01;
 
-    &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
-      padding-left: $spacing-lg;
+      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+        padding-left: $spacing-lg;
+      }
     }
-  }
 
-  th {
-    color: $text-01;
-  }
+    th {
+      color: $text-01;
+    }
 
-  td:last-of-type:not(.#{$prefix}--table-column-menu) {
-    padding-right: $spacing-lg;
-  }
+    td:last-of-type:not(.#{$prefix}--table-column-menu) {
+      padding-right: $spacing-lg;
+    }
 
-  .#{$prefix}--table-header-label {
-    display: block;
-    padding: rem(17px) 0;
-  }
+    .#{$prefix}--table-header-label {
+      display: block;
+      padding: rem(17px) 0;
+    }
 
-  .#{$prefix}--table-cell-content {
-    display: block;
-    padding: rem(17px) 0;
-  }
+    .#{$prefix}--table-cell-content {
+      display: block;
+      padding: rem(17px) 0;
+    }
 
-  //width for checkbox columns
-  .#{$prefix}--table-column-checkbox {
-    width: rem(50px);
-    min-width: rem(50px);
-    padding: rem(12px) $spacing-md 0 $spacing-md;
-  }
+    //width for checkbox columns
+    .#{$prefix}--table-column-checkbox {
+      width: rem(50px);
+      min-width: rem(50px);
+      padding: rem(12px) $spacing-md 0 $spacing-md;
+    }
 
-  //width for overflow menu columns
-  .#{$prefix}--table-column-menu {
-    width: rem(56px);
-    min-width: rem(56px);
-    padding-top: rem(8px);
-  }
+    //width for overflow menu columns
+    .#{$prefix}--table-column-menu {
+      width: rem(56px);
+      min-width: rem(56px);
+      padding-top: rem(8px);
+    }
 
-  .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $ui-03;
-  }
+    .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+      background: $ui-03;
+    }
 
-  //width for additional icon columns
-  .#{$prefix}--table-column-icon {
-    width: rem(44px);
-    min-width: rem(44px);
-    justify-content: center;
-    padding-top: rem(8px);
-    padding-right: 0;
+    //width for additional icon columns
+    .#{$prefix}--table-column-icon {
+      width: rem(44px);
+      min-width: rem(44px);
+      justify-content: center;
+      padding-top: rem(8px);
+      padding-right: 0;
 
-    & button {
-      width: rem(32px);
-      height: rem(32px);
-      vertical-align: middle;
-      background: transparent;
-      border: none;
-      outline: none;
+      & button {
+        width: rem(32px);
+        height: rem(32px);
+        vertical-align: middle;
+        background: transparent;
+        border: none;
+        outline: none;
 
-      &:focus:not([disabled]) {
+        &:focus:not([disabled]) {
+          box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        &:hover:not([disabled]) {
+          background: $ui-03;
+        }
+      }
+    }
+
+    // Overrides
+    .#{$prefix}--checkbox-label {
+      padding-left: rem(28px);
+    }
+
+    td .#{$prefix}--overflow-menu {
+      & svg {
+        opacity: 0;
+      }
+
+      &:hover svg,
+      &:focus svg {
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: 0;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
       }
-
-      &:hover:not([disabled]) {
-        background: $ui-03;
-      }
-    }
-  }
-
-  // Overrides
-  .#{$prefix}--checkbox-label {
-    padding-left: rem(28px);
-  }
-
-  td .#{$prefix}--overflow-menu {
-    & svg {
-      opacity: 0;
     }
 
-    &:hover svg,
-    &:focus svg {
+    tr:hover .#{$prefix}--overflow-menu svg {
       opacity: 1;
     }
 
-    &:focus {
-      outline: 0;
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    .#{$prefix}--overflow-menu-options-icon {
+      margin-right: rem(8px);
+      vertical-align: middle;
     }
-  }
 
-  tr:hover .#{$prefix}--overflow-menu svg {
-    opacity: 1;
-  }
+    .#{$prefix}--overflow-menu-options-icon + span {
+      vertical-align: middle;
+    }
 
-  .#{$prefix}--overflow-menu-options-icon {
-    margin-right: rem(8px);
-    vertical-align: middle;
-  }
-
-  .#{$prefix}--overflow-menu-options-icon + span {
-    vertical-align: middle;
-  }
-
-  .st0 {
-    fill: none;
+    .st0 {
+      fill: none;
+    }
   }
 
   //================================================
@@ -423,27 +433,36 @@ DATA TABLE VARIATIONS
   .#{$prefix}--data-table-v2--zebra {
     tbody tr:nth-child(even) {
       background-color: $data-table-zebra-color;
-      border: 1px solid transparent;
+      & td {
+        background-color: $data-table-zebra-color;
+        border-top: 1px solid $data-table-zebra-color;
+      }
     }
 
     tbody tr:nth-child(even):hover {
       background-color: $hover-field;
+      & td {
+        background-color: $hover-field;
+        border-top: 1px solid $hover-field;
+      }
     }
   }
 
   //================================================
   //SELECTED
   //================================================
-  .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
-  tbody tr.#{$prefix}--data-table-v2--selected {
+  .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected:not([disabled]),
+  tbody tr.#{$prefix}--data-table-v2--selected:not([disabled]) {
     background-color: $ui-03;
 
-    & > td {
+    & td {
+      background-color: $ui-03;
+      border-top: 1px solid $ui-03;
       border-bottom: 1px solid $active-01;
     }
 
     &:first-of-type {
-      & > td {
+      & td {
         border-bottom: 1px solid $active-01;
         box-shadow: 0 -0.75px $active-01;
         //adds top box-shadow to first row td's bc border-top wasnt showing up for zebra
@@ -451,17 +470,18 @@ DATA TABLE VARIATIONS
     }
 
     &:last-of-type {
-      & > td {
+      & td {
         border-bottom: 1px solid transparent;
       }
     }
 
-    &:hover {
+    &:hover td {
       background: $hover-selected-ui;
+      border-top: 1px solid $hover-selected-ui;
     }
   }
 
-  tbody tr.#{$prefix}--data-table-v2--selected {
+  tbody tr.#{$prefix}--data-table-v2--selected:not([disabled]) {
     &:first-of-type {
       & > td {
         border-top: 1px solid $active-01;
@@ -483,7 +503,7 @@ DATA TABLE VARIATIONS
     tr,
     th,
     td {
-      border-bottom: 1px solid transparent;
+      border-bottom: none;
     }
   }
 
@@ -564,12 +584,14 @@ DATA TABLE VARIATIONS
   //================================================
   //STICKY HEADER
   //================================================
+  .#{$prefix}--data-table-v2--max-width {
+    max-width: rem(500px);
+  }
 
   .#{$prefix}--data-table-v2_inner-container {
     background-color: $ui-03;
     padding-top: rem(48px);
     transform: translateZ(0);
-    max-width: 100%;
   }
 
   .#{$prefix}--data-table-v2--sticky-header {
@@ -591,10 +613,14 @@ DATA TABLE VARIATIONS
       width: 100%;
       overflow: scroll;
       -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
     }
 
     tbody {
       flex-direction: column;
+      overflow-x: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
     }
 
     tr {
@@ -603,20 +629,18 @@ DATA TABLE VARIATIONS
     }
 
     tbody tr {
-      overflow-x: scroll;
-      -ms-overflow-style: none; //hides ie scrollbar
     }
 
     //hides webkit scrollbar
     thead::-webkit-scrollbar,
-    tbody tr::-webkit-scrollbar {
+    tbody::-webkit-scrollbar {
       display: none;
     }
 
     //hides ff scrollbar
     @-moz-document url-prefix() {
       thead,
-      tbody tr {
+      tbody {
         scrollbar-width: none;
       }
     }
