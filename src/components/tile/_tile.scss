@@ -150,7 +150,7 @@
   .#{$prefix}--tile--is-selected,
   .#{$prefix}--tile--is-selected:hover,
   .#{$prefix}--tile--is-selected:focus {
-    border: 1px solid $brand-01;
+    border: 1px solid $interactive-02;
     outline: none;
   }
 
@@ -248,7 +248,7 @@
 
     svg {
       border-radius: 50%;
-      fill: $ui-04;
+      fill: $icon-02;
     }
   }
 
