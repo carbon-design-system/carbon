@@ -166,6 +166,12 @@ gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
   });
 });
 
+gulp.task('scripts:dev:deploy', ['scripts:dev'], cb => {
+  const srcFile = './demo/demo.js';
+
+  pump([gulp.src(srcFile), terser(), rename('demo.min.js'), gulp.dest('demo')], cb);
+});
+
 gulp.task('scripts:dev:feature-flags', () => {
   const replaceTable = {
     breakingChangesX: useBreakingChanges,
@@ -410,6 +416,7 @@ gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
               routeWithQueryArgs: true,
               useStaticFullRenderPage: true,
             }),
+            minify: true,
           })
         ),
         ...componentSource
@@ -424,7 +431,7 @@ gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
           )
           .toArray(),
         templates
-          .render({ layout: 'preview' })
+          .render({ layout: 'preview', layoutContext: { minify: true } })
           .then(table =>
             Promise.all(
               Array.from(table.entries()).map(([{ handle }, value]) =>
@@ -546,6 +553,7 @@ gulp.task('build', ['build:scripts', 'build:styles', 'html:source']);
 
 // For demo environment
 gulp.task('build:dev', ['sass:dev', 'scripts:dev', 'html:dev']);
+gulp.task('build:dev:deploy', ['sass:dev', 'scripts:dev:deploy', 'html:dev']);
 
 gulp.task('default', () => {
   // eslint-disable-next-line no-console
