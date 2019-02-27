@@ -234,10 +234,6 @@
     transition: $transition--base $carbon--standard-easing;
     border: none;
     background: transparent;
-
-    &:focus {
-      @include focus-outline('outline');
-    }
   }
 
   .#{$prefix}--tile__checkmark {
@@ -249,6 +245,10 @@
     svg {
       border-radius: 50%;
       fill: $icon-02;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
     }
   }
 
@@ -266,6 +266,10 @@
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
