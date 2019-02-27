@@ -421,6 +421,10 @@
     & .#{$prefix}--btn--primary::after {
       display: none;
     }
+
+    & .#{$prefix}--btn--primary:nth-child(3):hover + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+      opacity: 0;
+    }
   }
 
   //override primary btn focus styles
