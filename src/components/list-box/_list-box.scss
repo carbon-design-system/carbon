@@ -32,7 +32,6 @@ $list-box-menu-width: rem(300px);
     background-color: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $ui-05;
-    order: 1;
     cursor: pointer;
     color: $text-01;
   }
@@ -308,7 +307,6 @@ $list-box-menu-width: rem(300px);
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
-    order: 1;
     cursor: pointer;
     color: $text-01;
     transition: all $transition--expansion $carbon--standard-easing;

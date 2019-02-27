@@ -251,7 +251,7 @@
       position: absolute;
       display: block;
       content: '';
-      background-color: $ui-03;
+      background-color: $ui-04;
       cursor: pointer;
       box-sizing: border-box;
       height: rem(24px);
@@ -270,7 +270,7 @@
       top: 3px;
       width: rem(18px);
       height: rem(18px);
-      background-color: $ui-02;
+      background-color: $ui-03;
       border-radius: 50%;
       content: '';
       transition: $transition--base $carbon--standard-easing;
@@ -295,6 +295,21 @@
       top: 3px;
       left: 3px;
     }
+  }
+
+  .#{$prefix}--toggle__check {
+    fill: $ui-03;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    z-index: 1;
+    transition: $transition--base $carbon--standard-easing;
+    transform: scale(0.2);
+  }
+
+  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+    fill: $support-02;
+    transform: scale(1) translateX(16px);
   }
 
   .#{$prefix}--toggle__text--left,
@@ -325,16 +340,13 @@
 
   .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before {
-      background-color: $toggle-background-color;
+      background-color: $support-02;
     }
 
     &:after {
+      background-color: $icon-03;
       transform: translateX(24px);
     }
-  }
-
-  .#{$prefix}--toggle__check {
-    @include hidden;
   }
 
   .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
@@ -370,12 +382,11 @@
 
   .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before {
-      background-color: $ibm-colors__gray-20; // TODO: Replace with role or add new color variable
-      border-color: $ibm-colors__gray-20; // TODO: Replace with role or add new color variable
+      background-color: $disabled-01;
     }
 
     &:after {
-      background-color: $disabled;
+      background-color: $disabled-02;
     }
 
     &:before,
@@ -392,6 +403,10 @@
 
   .#{$prefix}--toggle:disabled:active + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance:before {
     box-shadow: none;
+  }
+
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+    fill: $disabled-02;
   }
 }
 
