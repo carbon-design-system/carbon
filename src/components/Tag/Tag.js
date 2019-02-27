@@ -15,7 +15,6 @@ const { prefix } = settings;
 
 const TYPES = componentsX
   ? {
-      basic: 'Component',
       red: 'Red',
       magenta: 'Magenta',
       purple: 'Purple',
@@ -23,6 +22,7 @@ const TYPES = componentsX
       cyan: 'Cyan',
       teal: 'Teal',
       green: 'Green',
+      gray: 'Gray',
       'cool-gray': 'Cool-Gray',
       'warm-gray': 'Warm-Gray',
     }

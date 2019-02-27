@@ -30,7 +30,7 @@ storiesOf('Tag', module)
         type={select(
           'Tag type (type)',
           types,
-          componentsX ? 'basic' : 'experimental'
+          componentsX ? 'red' : 'experimental'
         )}
         disabled={boolean('Disabled (disabled)', false)}>
         {text('Content (children)', 'This is not a tag')}
