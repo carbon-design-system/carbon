@@ -101,13 +101,25 @@ $typescale-map: (
 }
 
 // Only applied to bold weight text
+/// @deprecated (For v10) The new type styles doesn't use this
 @mixin font-smoothing {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @include deprecate(
+    '`@include font-smoothing` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
+/// @deprecated (For v10) The new type styles doesn't use this
 @mixin letter-spacing {
-  letter-spacing: 0;
+  @include deprecate(
+    '`@include letter-spacing` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    letter-spacing: 0;
+  }
 }
 
 /// @deprecated (For v10) Superseded by `$carbon--type-scale`

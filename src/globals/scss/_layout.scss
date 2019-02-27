@@ -22,11 +22,13 @@ $breakpoints: (
   max: 1584px,
 );
 
+/// @deprecated (For v10) Was used primary for older grid
 $padding: (
   'mobile': 3%,
   'xs': 5%,
 );
 
+/// @deprecated (For v10) Was used primary for older grid
 @function padding($value) {
   @if map-has-key($padding, $value) {
     @return map-get($padding, $value);
@@ -82,23 +84,25 @@ $padding: (
   }
 }
 
-//-------------------------------------
-// @mixin: grid-container
-//-------------------------------------
-// usage:
-// .some-container {
-//   @include grid-container;
-// }
-//-------------------------------------
-
+/// @example
+///   .some-container {
+///     @include grid-container;
+///   }
+/// @deprecated (For v10) Use `@include carbon--make-container()`
 @mixin grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
+  @include deprecate(
+    '`@include grid-container` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--make-container()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    width: 100%;
+    padding-right: padding(mobile);
+    padding-left: padding(mobile);
 
-  @include breakpoint(bp--xs--major) {
-    padding-right: padding(xs);
-    padding-left: padding(xs);
+    @include breakpoint(bp--xs--major) {
+      padding-right: padding(xs);
+      padding-left: padding(xs);
+    }
   }
 }
 
