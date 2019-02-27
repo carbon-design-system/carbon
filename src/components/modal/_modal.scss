@@ -193,8 +193,8 @@
 
     @include breakpoint(md) {
       height: auto;
-      min-width: 500px;
-      max-width: 50%;
+      width: 50%;
+      max-width: 768px;
       max-height: 90%;
     }
 
