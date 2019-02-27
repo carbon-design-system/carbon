@@ -5,18 +5,11 @@
       {
         "modules": false,
         "targets": {
-          "browsers": [
-            "last 1 version",
-            "ie >= 11"
-          ]
+          "browsers": ["last 1 version", "ie >= 11"]
         }
       }
     ],
     "@babel/preset-react"
   ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-object-rest-spread",
-    "dev-expression"
-  ]
+  "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-object-rest-spread", "dev-expression"]
 }

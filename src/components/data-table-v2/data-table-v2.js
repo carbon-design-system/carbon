@@ -46,6 +46,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.expandableRows = [];
     this.parentRows = [];
     this._handleDebouncedResize = debounce(this._addOverflowTooltip, 200);
+    this.stickyTable = this.element.querySelector(this.options.selectorTableStickyHeader);
 
     this.refreshRows();
     this._addOverflowTooltip();
@@ -55,6 +56,21 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
       if (eventElement) {
         this._expandableHoverToggle(eventElement, true);
+      }
+
+      if (this.stickyTable) {
+        const tbodyEvent = eventMatches(evt, this.options.selectorTableBody);
+        const theadEvent = eventMatches(evt, this.options.selectorTableThead);
+        const thead = this.stickyTable.querySelector(this.options.selectorTableThead);
+        const tbody = this.stickyTable.querySelector(this.options.selectorTableBody);
+
+        if (tbodyEvent) {
+          this.deactivateScroll(thead, tbody);
+        }
+
+        if (theadEvent) {
+          this.deactivateScroll(tbody, thead);
+        }
       }
     });
 
@@ -71,19 +87,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       this._keydownHandler(evt);
     });
 
-    const stickyTable = this.element.querySelector(this.options.selectorTableStickyHeader);
-    if (stickyTable) {
-      const thead = stickyTable.querySelector(this.options.selectorTableThead);
-      const tbody = stickyTable.querySelector(this.options.selectorTableBody);
-
-      thead.addEventListener('scroll', evt => {
-        this._scrollHandler(thead, tbody, evt);
-      });
-      tbody.addEventListener('scroll', evt => {
-        this._scrollHandler(thead, tbody, evt);
-      });
-    }
-
     this.state = {
       checkboxCount: 0,
     };
@@ -91,10 +94,27 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.element.ownerDocument.defaultView.addEventListener('resize', this._handleDebouncedResize);
   }
 
+  activateScroll(target) {
+    const thead = this.stickyTable.querySelector(this.options.selectorTableThead);
+    const tbody = this.stickyTable.querySelector(this.options.selectorTableBody);
+    target.addEventListener('scroll', evt => {
+      this._scrollHandler(thead, tbody, evt);
+    });
+  }
+
+  deactivateScroll(target, newScroll) {
+    const thead = this.stickyTable.querySelector(this.options.selectorTableThead);
+    const tbody = this.stickyTable.querySelector(this.options.selectorTableBody);
+    target.removeEventListener('scroll', evt => {
+      this._scrollHandler(thead, tbody, evt);
+    });
+
+    this.activateScroll(newScroll);
+  }
+
   _scrollHandler(thead, tbody, evt) {
     const source = evt.target;
     const target = evt.target === thead ? tbody : thead;
-
     target.scrollLeft = source.scrollLeft;
   }
 
