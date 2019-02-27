@@ -176,6 +176,11 @@
       transition: opacity 200ms;
       visibility: visible;
     }
+
+    .#{$prefix}--text-input,
+    .#{$prefix}--select-input {
+      background-color: $field-02;
+    }
   }
 
   .#{$prefix}--modal--danger {
