@@ -328,6 +328,7 @@ DATA TABLE VARIATIONS
 
     th {
       color: $text-01;
+      border-top: 1px solid transparent;
     }
 
     td:last-of-type:not(.#{$prefix}--table-column-menu) {
@@ -465,6 +466,7 @@ DATA TABLE VARIATIONS
       & td {
         border-bottom: 1px solid $active-01;
         box-shadow: 0 -0.75px $active-01;
+        // border-top: 1px solid $active-01;
         //adds top box-shadow to first row td's bc border-top wasnt showing up for zebra
       }
     }
@@ -478,15 +480,6 @@ DATA TABLE VARIATIONS
     &:hover td {
       background: $hover-selected-ui;
       border-top: 1px solid $hover-selected-ui;
-    }
-  }
-
-  tbody tr.#{$prefix}--data-table-v2--selected:not([disabled]) {
-    &:first-of-type {
-      & > td {
-        border-top: 1px solid $active-01;
-        box-shadow: none;
-      }
     }
   }
 
@@ -504,6 +497,7 @@ DATA TABLE VARIATIONS
     th,
     td {
       border-bottom: none;
+      border-top: none;
     }
   }
 

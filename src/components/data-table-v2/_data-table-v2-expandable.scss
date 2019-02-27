@@ -127,6 +127,12 @@
     //child row hidden / td hidden
     border-bottom: none;
 
+    &:first-of-type:hover {
+      td {
+        border-top: 2px solid $hover-field;
+      }
+    }
+
     + tr[data-child-row] {
       height: 0;
       transition: height $transition--expansion $carbon--standard-easing;
@@ -137,6 +143,8 @@
         background-color: $hover-field;
         transition: padding $transition--expansion $carbon--standard-easing,
           background-color $transition--expansion $carbon--standard-easing;
+        border-bottom: 1px solid transparent;
+        border-top: 1px solid transparent;
       }
 
       td div {
@@ -172,9 +180,11 @@
     }
 
     //when hovering on parent row - on expansion
-    &:hover {
+    &:hover:not([disabled]) {
+      background-color: $hover-field;
       > td {
         background-color: $hover-field;
+        border-bottom: 1px solid $ui-03;
       }
 
       > td:first-of-type {
@@ -185,6 +195,12 @@
         > td {
           background-color: $hover-field;
           color: $text-01;
+        }
+      }
+
+      &:first-of-type:not([disabled]):hover {
+        td {
+          border-top: 2px solid $hover-field;
         }
       }
     }
@@ -203,23 +219,32 @@
   }
 
   //class added to parent row when hovering on expanded child row
-  tr.#{$prefix}--expandable-row--hover-v2 {
+  tr.#{$prefix}--expandable-row--hover-v2:not([disabled]) {
     background-color: $hover-field;
 
-    > td {
+    & td {
       background-color: $hover-field;
+      border-bottom: 1px solid $ui-03;
+      border-top: 1px solid $hover-field;
       color: $text-01;
     }
 
-    > td:first-of-type {
+    td:first-of-type {
       border-bottom: 1px solid $hover-field;
+    }
+
+    &:first-of-type {
+      td {
+        border-top: 2px solid $hover-field;
+      }
     }
   }
 
   .#{$prefix}--table-expand-v2 {
     width: 2.5rem;
     min-width: 2.5rem;
-    vertical-align: middle;
+    vertical-align: top;
+    padding-top: rem(15px);
   }
 
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
@@ -251,24 +276,38 @@
 
   //expand + select row styles
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected {
-    &:first-of-type td {
-      border-bottom: none;
+    &:first-of-type {
+      background: $ui-03;
     }
 
-    & td {
-      border-bottom: none;
+    //visible border when collapsed
+    &:not([disabled]) td[data-previous-value='expanded'] {
+      border-bottom: 1px solid $active-01;
+    }
+
+    //no visible border when expanded
+    &:not([disabled]) td[data-previous-value='collapsed'],
+    &:not([disabled]) td[data-previous-value='collapsed'] ~ td {
+      border-bottom: 1px solid $ui-03;
     }
 
     + tr[data-child-row] {
       background-color: $hover-field;
     }
 
-    &:hover td {
+    //hover on selected parent expanded
+    &:hover:not([disabled]) td {
       background: $hover-selected-ui;
+      border-top: 1px solid $hover-selected-ui;
+      border-bottom: 1px solid $hover-selected-ui;
     }
-
     &:focus {
       outline-offset: 0;
+    }
+
+    //hover on selected parent collapsed
+    &:hover:not([disabled]) {
+      background: $hover-selected-ui;
     }
   }
 
