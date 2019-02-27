@@ -298,7 +298,7 @@ DATA TABLE VARIATIONS
     }
 
     tbody tr:focus {
-      @include focus-outline('outline');
+      outline: 0;
     }
 
     tr {

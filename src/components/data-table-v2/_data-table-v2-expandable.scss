@@ -208,12 +208,9 @@
     //focus on expanded parent row
     &:focus {
       outline: none;
-      border: 2px solid $brand-01;
-      border-bottom: none;
 
       + tr[data-child-row] {
-        border: 2px solid $brand-01;
-        border-top: none;
+        outline: none;
       }
     }
   }
