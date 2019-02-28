@@ -51,10 +51,6 @@ const tags = !componentsX
     ]
   : [
       {
-        type: 'basic',
-        label: 'Component',
-      },
-      {
         type: 'red',
         label: 'Red',
       },
@@ -81,6 +77,10 @@ const tags = !componentsX
       {
         type: 'green',
         label: 'Green',
+      },
+      {
+        type: 'gray',
+        label: 'Gray',
       },
       {
         type: 'cool-gray',
