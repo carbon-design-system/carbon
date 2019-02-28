@@ -87,7 +87,6 @@
       margin-left: 0;
     }
 
-    &--basic,
     &.#{$prefix}--skeleton {
       @include tag-theme--x($bg-color: $ui-03, $text-color: $text-01);
     }
@@ -121,6 +120,10 @@
     @include tag-theme--x($ibm-colors__green-20, $ibm-colors__green-70);
   }
 
+  .#{$prefix}--tag--gray {
+    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-100);
+  }
+
   .#{$prefix}--tag--cool-gray {
     @include tag-theme--x($ibm-colors__cool-gray-20, $ibm-colors__cool-gray-100);
   }
@@ -130,7 +133,7 @@
   }
 
   .#{$prefix}--tag--disabled {
-    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-30);
+    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-30);
 
     &:hover {
       cursor: not-allowed;
