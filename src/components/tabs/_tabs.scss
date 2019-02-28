@@ -426,10 +426,6 @@
       border-bottom: 1px solid $ui-03;
       text-overflow: ellipsis;
       overflow: hidden;
-      &:hover {
-        color: $text-01;
-        border-bottom: 1px solid transparent;
-      }
       &:focus,
       &:active {
         width: 100%;
