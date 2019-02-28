@@ -63,9 +63,11 @@
     }
 
     &:active,
-    &:active:visited {
+    &:active:visited,
+    &:focus:active {
       color: $text-01;
       box-shadow: 0 1px currentColor;
+      outline: none;
     }
 
     &:focus {
