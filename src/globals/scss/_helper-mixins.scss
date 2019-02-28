@@ -24,6 +24,58 @@
 @import 'typography';
 @import 'import-once';
 
+// @access public
+// @content Includes a block of styles for sticky data tables that sets table max-width, max-height and column min-width
+// @example - @include sticky-header($max-height: rem(900px), $min-width: rem(30px));
+// @param {value} $max-width [100%] - sets the max-width of the data table parent container
+// @param {value} $max-height [rem(300px)] - sets the max-height of the data table
+// @param {value} $min-width [rem(100px)] - sets the min-width of th's and td's so their sizes align
+@mixin sticky-header($max-width: 100%, $max-height: rem(300px), $min-width: rem(100px)) {
+  .#{$prefix}--data-table-v2--max-width {
+    max-width: $max-width;
+  }
+
+  .#{$prefix}--data-table-v2--sticky-header {
+    max-height: $max-height;
+
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+      min-width: $min-width;
+    }
+  }
+}
+
+// @access public
+// @content Includes block of styles that overrides min-width and width for an individual column (nth-child of th and td)
+// @example - @include column-width(6, rem(200px));
+// @param {number} $child - declares the nth-type of child
+// @param {value} $width - sets the min-width and width of child
+@mixin column-width($child, $width) {
+  td:nth-child(#{$child}):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+  th:nth-child(#{$child}):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+    min-width: $width;
+    width: $width;
+  }
+}
+
+// @access public
+// @content Similar to the column-width mixin, but allows you to config several columns at once
+// @example - $config: 3 rem(100px), 2 rem(150px), 4 rem(60px), 6 rem(200px);
+//             @include column-configs($config);
+// @param {token} $config - a list of paired items, like a sass array.
+//             The first item is a number for the given child, the second is a value for the width
+//              Each pair is separated by a comma i.e. $config: childNum width, childNum2 width2, childNum3 width3;
+@mixin column-configs($config) {
+  $config: 0 100%;
+  @each $couple in $config {
+    td:nth-child(#{nth($couple, 1)}):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+    th:nth-child(#{nth($couple, 1)}):not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+      min-width: nth($couple, 2);
+      width: nth($couple, 2);
+    }
+  }
+}
+
 @mixin text-overflow($width: false) {
   display: block;
   overflow-x: hidden;

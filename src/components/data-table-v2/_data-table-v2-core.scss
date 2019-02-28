@@ -579,7 +579,7 @@ DATA TABLE VARIATIONS
   //STICKY HEADER
   //================================================
   .#{$prefix}--data-table-v2--max-width {
-    max-width: rem(500px);
+    // max-width: 100%;
   }
 
   .#{$prefix}--data-table-v2_inner-container {
@@ -590,7 +590,7 @@ DATA TABLE VARIATIONS
 
   .#{$prefix}--data-table-v2--sticky-header {
     display: block;
-    max-height: rem(300px);
+    // max-height: rem(300px);
     overflow-y: scroll;
 
     thead,
@@ -649,10 +649,14 @@ DATA TABLE VARIATIONS
 
     th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
     td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
-      min-width: rem(150px);
       width: 100%;
     }
+
+    $config: 3 rem(100px), 2 rem(150px), 4 rem(60px), 6 rem(200px);
+    @include column-configs($config);
   }
+
+  @include sticky-header($max-width: rem(900px));
 
   //================================================
   //NUMERICAL COLUMN
