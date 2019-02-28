@@ -7,6 +7,7 @@
 
 import {
   // Blue
+  blue40,
   blue50,
   blue60,
   blue70,
@@ -39,6 +40,7 @@ import {
 export const interactive01 = blue60;
 export const interactive02 = gray60;
 export const interactive03 = white;
+export const interactive04 = blue50;
 
 export const uiBackground = gray100;
 
@@ -56,6 +58,8 @@ export const text04 = white;
 export const icon01 = gray10;
 export const icon02 = gray30;
 export const icon03 = white;
+
+export const link01 = blue40;
 
 export const field01 = gray90;
 export const field02 = gray80;
