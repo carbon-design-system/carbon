@@ -650,10 +650,13 @@ DATA TABLE VARIATIONS
     th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
     td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
       width: 100%;
+      min-width: 0;
     }
 
-    $config: 3 rem(100px), 2 rem(150px), 4 rem(60px), 6 rem(200px);
-    @include column-configs($config);
+    .#{$prefix}--table-header-label {
+      max-width: calc(100% - 10px);
+      @include text-overflow;
+    }
   }
 
   @include sticky-header($max-width: rem(900px));
