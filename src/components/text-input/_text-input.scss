@@ -152,6 +152,10 @@
     @include placeholder-colors;
   }
 
+  .#{$prefix}--text-input--light {
+    background-color: $field-02;
+  }
+
   //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
@@ -206,8 +210,12 @@
     border-bottom: 1px solid transparent;
   }
 
+  .#{$prefix}--text-input--light:disabled {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--text-input:disabled::-webkit-input-placeholder {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   //-----------------------------
