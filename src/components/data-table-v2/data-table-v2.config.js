@@ -23,7 +23,7 @@ const iconBatchDelete = `
     <rect x="9" y="6" width="1" height="6"/>
     <path d="M2,3v1h1v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V4h1V3H2z M4,14V4h8v10H4z"/>
     <rect x="6" y="1" width="4" height="1"/>
-    <rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
+    <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
   </svg>
 `;
 
@@ -39,7 +39,7 @@ const iconBatchSave = `
   <path d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5
 C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1
 h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"/>
-  <rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
+  <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
 </svg>
 
 `;
@@ -139,6 +139,7 @@ const menuItems = componentsX
       {
         label: `
       <svg class="${prefix}--overflow-menu-options-icon"
+        style="vertical-align: middle; margin-right: 8px;"
         fill-rule="evenodd"
         height="16"
         name="edit"
@@ -154,13 +155,14 @@ const menuItems = componentsX
           1 0 0 1 1.383.03l2.309 2.309a1 1 0 0 1-.034 1.446L3.694
           13H.002V9.28zM0 16.013v-1h16v1z">
         </path>
-      </svg> <span>Edit</span>
+      </svg> <span style="vertical-align: middle;">Edit</span>
     `,
         primaryFocus: true,
       },
       {
         label: `
       <svg class="${prefix}--overflow-menu-options-icon"
+        style="vertical-align: middle; margin-right: 8px;"
         fill-rule="evenodd"
         height="16"
         name="download"
@@ -171,12 +173,13 @@ const menuItems = componentsX
         <title>Download</title>
         <path d="M7.506 11.03l4.137-4.376.727.687-5.363 5.672-5.367-5.67.726-.687 4.14 4.374V0h1v11.03z"></path>
         <path d="M13 15v-2h1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-2h1v2h12z"></path>
-      </svg> <span>Download</span>
+      </svg style="vertical-align: middle;"> <span>Download</span>
     `,
       },
       {
         label: `
     <svg class="${prefix}--overflow-menu-options-icon"
+      style="vertical-align: middle; margin-right: 8px;"
       width="16px"
       height="16px"
       viewBox="0 0 16 16"
@@ -187,13 +190,14 @@ const menuItems = componentsX
       <path d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5
     C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1
     h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"/>
-      <rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
-    </svg> <span>Save</span>
+      <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
+    </svg> <span style="vertical-align: middle;">Save</span>
     `,
       },
       {
         label: `
       <svg class="${prefix}--overflow-menu-options-icon"
+        style="vertical-align: middle; margin-right: 8px;"
         width="16px"
         height="16px"
         viewBox="0 0 16 16"
@@ -205,8 +209,8 @@ const menuItems = componentsX
         <rect x="9" y="6" width="1" height="6"/>
         <path d="M2,3v1h1v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V4h1V3H2z M4,14V4h8v10H4z"/>
         <rect x="6" y="1" width="4" height="1"/>
-        <rect id="_Transparent_Rectangle_" class="st0" width="16" height="16"/>
-      </svg> <span>Delete</span>
+        <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
+      </svg> <span style="vertical-align: middle;">Delete</span>
     `,
       },
     ]

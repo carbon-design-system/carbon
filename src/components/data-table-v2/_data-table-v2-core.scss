@@ -413,19 +413,6 @@ DATA TABLE VARIATIONS
     tr:hover .#{$prefix}--overflow-menu svg {
       opacity: 1;
     }
-
-    .#{$prefix}--overflow-menu-options-icon {
-      margin-right: rem(8px);
-      vertical-align: middle;
-    }
-
-    .#{$prefix}--overflow-menu-options-icon + span {
-      vertical-align: middle;
-    }
-
-    .st0 {
-      fill: none;
-    }
   }
 
   //================================================
