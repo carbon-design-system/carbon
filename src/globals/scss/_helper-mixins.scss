@@ -47,6 +47,7 @@
   }
 }
 
+// Use for config single column
 // @access public
 // @content Includes block of styles that overrides min-width and width for an individual column (nth-child of th and td)
 // @example - @include column-width(6, rem(200px));
@@ -60,6 +61,7 @@
   }
 }
 
+// Use for config multiple columns
 // @access public
 // @content Similar to the column-width mixin, but allows you to config several columns at once
 // @example - $config: 3 rem(100px), 2 rem(150px), 4 rem(60px), 6 rem(200px);
