@@ -220,7 +220,7 @@
   .#{$prefix}--overflow-menu__icon {
     height: rem(16px);
     width: rem(16px);
-    fill: $ui-05;
+    fill: $icon-01;
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -232,7 +232,7 @@
     position: absolute;
     z-index: z('floating');
     background-color: $ui-01;
-    width: 11.25rem;
+    width: rem(160px);
     list-style: none;
     top: 32px;
     left: 0;
@@ -296,7 +296,7 @@
     background-color: transparent;
     align-items: center;
     width: 100%;
-    height: rem(32px);
+    height: rem(40px);
     padding: 0;
     transition: background-color $transition--base;
   }
@@ -313,9 +313,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__btn {
-    @include reset;
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     font-weight: 400;
     width: 100%;
@@ -356,7 +354,7 @@
 
   .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:focus {
-    color: $inverse-01;
+    color: $text-04;
     background-color: $support-01;
   }
 
