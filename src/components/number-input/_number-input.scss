@@ -192,7 +192,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     font-family: $font-family-mono;
     box-sizing: border-box;
@@ -204,7 +204,7 @@
     font-weight: 300;
     height: rem(40px);
     color: $text-01;
-    background-color: $field-01;
+    background-color: $ui-01;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
