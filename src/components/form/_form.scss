@@ -114,6 +114,7 @@
 
   .#{$prefix}--form-item {
     @include type-style('body-short-01');
+    @include carbon--font-family('sans');
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -128,7 +129,7 @@
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-3xs;
     line-height: rem(16px);
   }
 
