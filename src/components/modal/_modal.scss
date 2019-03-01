@@ -176,6 +176,11 @@
       transition: opacity 200ms;
       visibility: visible;
     }
+
+    .#{$prefix}--text-input,
+    .#{$prefix}--select-input {
+      background-color: $field-02;
+    }
   }
 
   .#{$prefix}--modal--danger {
@@ -183,7 +188,6 @@
   }
 
   .#{$prefix}--modal-container {
-    @include layer('pop-out');
     position: relative;
     display: flex;
     flex-direction: column;
@@ -194,8 +198,8 @@
 
     @include breakpoint(md) {
       height: auto;
-      min-width: 500px;
-      max-width: 50%;
+      width: 50%;
+      max-width: 768px;
       max-height: 90%;
     }
 
@@ -217,7 +221,7 @@
 
   .#{$prefix}--modal-header {
     padding-top: 1rem;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-md;
   }
 
   .#{$prefix}--modal-header__label {

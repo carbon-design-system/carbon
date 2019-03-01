@@ -24,6 +24,19 @@
 <div class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
   <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu" aria-expanded="true"
     aria-haspopup="true">
+    <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi" tabindex="0"
+      title="Clear all selected items">
+      1
+      {{#if @root.featureFlags.componentsX}}
+        {{ carbon-icon 'Close16' aria-label='Open menu' }}
+      {{else}}
+        <svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+          <title>Close Modal</title>
+          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
+          />
+        </svg>
+      {{/if}}
+    </div>
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
       {{#if @root.featureFlags.componentsX}}
@@ -42,7 +55,7 @@
     <div class="{{@root.prefix}}--list-box__menu-item">
       <div class="{{@root.prefix}}--form-item {{@root.prefix}}--checkbox-wrapper">
         <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
-          <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on">
+          <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on"{{#if selected}} checked{{/if}}>
           <span class="{{@root.prefix}}--checkbox-appearance"></span>
           <span class="{{@root.prefix}}--checkbox-label-text">{{label}}</span>
         </label>
