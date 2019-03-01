@@ -265,7 +265,8 @@
     position: absolute;
     margin-left: $spacing-lg;
     margin-top: rem(28px);
-    @include type-style('label-01') color: $text-02;
+    @include type-style('label-01');
+    color: $text-02;
   }
 
   //CURRENT STYLING
