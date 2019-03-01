@@ -530,7 +530,7 @@
 
   .#{$prefix}--date-picker__input {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('code-02');
     @include focus-outline('reset');
 
     display: block;
@@ -573,7 +573,7 @@
   .#{$prefix}--date-picker__icon {
     position: absolute;
     right: 1rem;
-    fill: $ui-05;
+    fill: $icon-01;
     cursor: pointer;
     z-index: 1;
   }
@@ -628,8 +628,8 @@
 
   .#{$prefix}--date-picker__month .flatpickr-prev-month,
   .#{$prefix}--date-picker__month .flatpickr-next-month,
-  .flatpickr-month .flatpickr-prev-month,
-  .flatpickr-month .flatpickr-next-month {
+  .flatpickr-months .flatpickr-prev-month,
+  .flatpickr-months .flatpickr-next-month {
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -691,14 +691,14 @@
       background: none;
 
       &:after {
-        border-bottom-color: $interactive-02;
-        border-top-color: $interactive-02;
+        border-bottom-color: $interactive-01;
+        border-top-color: $interactive-01;
       }
     }
 
     &:after {
-      border-bottom-color: $interactive-01;
-      border-top-color: $interactive-01;
+      border-bottom-color: $icon-01;
+      border-top-color: $icon-01;
     }
   }
 
@@ -751,6 +751,7 @@
   .flatpickr-day.today {
     position: relative;
     color: $interactive-01;
+    font-weight: 600;
 
     &::after {
       content: '';
@@ -798,12 +799,24 @@
   .flatpickr-day.selected {
     color: $inverse-01;
     background: $interactive-01;
+
+    &:hover {
+      color: $text-01;
+    }
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
   .flatpickr-day.startRange.selected {
     box-shadow: none;
     z-index: 2;
+  }
+
+  .#{$prefix}--date-picker__day.endRange,
+  .flatpickr-day.endRange {
+    &:hover {
+      background: $ui-01;
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--date-picker__day.endRange.inRange,
