@@ -292,7 +292,7 @@
 
     &:focus {
       @include focus-outline;
-      color: $interactive-01;
+      color: $icon-01;
       outline-offset: -1px;
     }
 
