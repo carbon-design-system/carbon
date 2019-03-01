@@ -322,6 +322,7 @@
     width: auto;
 
     .#{$prefix}--number__control-btn {
+      position: static;
       width: rem(40px);
       height: rem(40px);
       background-color: $field-01;
@@ -334,6 +335,10 @@
       &:focus {
         outline-width: 2px;
         outline-offset: -2px;
+      }
+
+      svg {
+        position: static;
       }
     }
 
