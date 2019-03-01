@@ -48,8 +48,16 @@ $bx--standard-easing: $carbon--standard-easing;
   $carbon--ease-in: cubic-bezier(0.2, 0, 1, 0.9);
   $carbon--ease-out: cubic-bezier(0, 0, 0.38, 0.9);
   $carbon--standard-easing: cubic-bezier(0.2, 0.2, 0.38, 0.9);
-  $transition--base: 100ms;
-  $transition--expansion: 150ms;
+
+  $transition--fast-01: 90ms;
+  $transition--fast-02: 100ms;
+  $transition--moderate-01: 150ms;
+  $transition--moderate-02: 240ms;
+  $transition--slow-01: 400ms;
+  $transition--slow-02: 720ms;
+
+  $transition--base: $transition--fast-02;
+  $transition--expansion: $transition--moderate-01;
 }
 
 /// Get the transition-timing-function for a given easing and motion mode.

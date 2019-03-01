@@ -10,67 +10,119 @@
 const { prefix } = require('../../globals/js/settings');
 const { componentsX } = require('../../globals/js/feature-flags');
 
-const columns = [
-  {
-    name: 'column1',
-    title: 'Column1',
-    nowrap: true,
-  },
-  {
-    name: 'column2',
-    title: 'Column2',
-  },
-  {
-    name: 'column3',
-    title: 'Column3',
-  },
-];
+const columns = !componentsX
+  ? [
+      {
+        name: 'column1',
+        title: 'Column1',
+        nowrap: true,
+      },
+      {
+        name: 'column2',
+        title: 'Column2',
+      },
+      {
+        name: 'column3',
+        title: 'Column3',
+      },
+    ]
+  : [
+      {
+        name: 'column1',
+        title: 'Column1',
+        nowrap: true,
+      },
+      {
+        name: 'column2',
+        title: 'Column2',
+      },
+    ];
 
 /* eslint-disable max-len */
 
-const rows = [
-  {
-    selected: true,
-    id: 'apache-id',
-    value: 'apache spark',
-    selectionLabel: 'apache spark',
-    column1: 'Row 1',
-    column2: 'Row 1',
-    column3: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
-    `,
-  },
-  {
-    id: 'cloudant-id',
-    value: 'Cloudant',
-    selectionLabel: 'Cloudant',
-    column1: 'Row 2',
-    column2: 'Row 2',
-    column3: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
-    `,
-  },
-  {
-    id: 'block-storate-id',
-    value: 'block-storage',
-    selectionLabel: 'block-storage',
-    column1: 'Row 3',
-    column2: 'Row 3',
-    column3: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
-    `,
-  },
-  {
-    id: 'open-whisk-id',
-    value: 'open-whisk',
-    selectionLabel: 'open-whisk',
-    column1: 'Row 4',
-    column2: 'Row 4',
-    column3: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
-    `,
-  },
-];
+const rows = !componentsX
+  ? [
+      {
+        selected: true,
+        id: 'apache-id',
+        value: 'apache spark',
+        selectionLabel: 'apache spark',
+        column1: 'Row 1',
+        column2: 'Row 1',
+        column3: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
+        `,
+      },
+      {
+        id: 'cloudant-id',
+        value: 'Cloudant',
+        selectionLabel: 'Cloudant',
+        column1: 'Row 2',
+        column2: 'Row 2',
+        column3: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
+        `,
+      },
+      {
+        id: 'block-storate-id',
+        value: 'block-storage',
+        selectionLabel: 'block-storage',
+        column1: 'Row 3',
+        column2: 'Row 3',
+        column3: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
+        `,
+      },
+      {
+        id: 'open-whisk-id',
+        value: 'open-whisk',
+        selectionLabel: 'open-whisk',
+        column1: 'Row 4',
+        column2: 'Row 4',
+        column3: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
+        `,
+      },
+    ]
+  : [
+      {
+        selected: true,
+        id: 'apache-id',
+        value: 'apache spark',
+        selectionLabel: 'apache spark',
+        column1: 'Row 1',
+        column2: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue.
+        `,
+      },
+      {
+        id: 'cloudant-id',
+        value: 'Cloudant',
+        selectionLabel: 'Cloudant',
+        column1: 'Row 2',
+        column2: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
+        `,
+      },
+      {
+        id: 'block-storate-id',
+        value: 'block-storage',
+        selectionLabel: 'block-storage',
+        column1: 'Row 3',
+        column2: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue.
+        `,
+      },
+      {
+        id: 'open-whisk-id',
+        value: 'open-whisk',
+        selectionLabel: 'open-whisk',
+        column1: 'Row 4',
+        column2: `
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
+        `,
+      },
+    ];
 
 /* eslint-enable max-len */
 

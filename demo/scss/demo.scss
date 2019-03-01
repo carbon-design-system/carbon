@@ -1,6 +1,13 @@
 // Used for sidebar in dev environment
 @import 'interior-left-nav';
 @import '../../src/globals/scss/styles';
+
+$deprecations--entry: true;
+// Collect all deprecation reasons into this list throughout the import cycle.
+$deprecations--reasons: ();
+// This message will be prepended to any deprecation notice
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
+
 @import '../../src/globals/scss/functions';
 @import './_vars.scss';
 @import './_mixins.scss';
@@ -14,6 +21,18 @@
 @import '../js/components/ComponentExample/component-overrides.scss';
 @import '../js/components/PageHeader/page-header.scss';
 @import '../js/components/SideNavToggle/side-nav-toggle.scss';
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message}
+REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}
 
 [data-renderroot] {
   display: block;
@@ -59,6 +78,17 @@
   transition: 0.2s;
   background-color: $ui-02;
   padding-left: 0;
+}
+
+.demo--container__panel.demo--container--listbox,
+.component-example__live--rendered.list-box > div,
+.component-example__live--rendered.multi-select > div {
+  width: 300px;
+  padding: 0;
+}
+
+.demo--container__panel.demo--container--listbox {
+  margin: 5%;
 }
 
 .demo--theme-switcher {

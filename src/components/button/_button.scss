@@ -290,7 +290,7 @@
 
   .#{$prefix}--btn--sm {
     @include letter-spacing;
-    height: rem(32px);
+    min-height: rem(32px);
     padding: $button-padding-sm;
   }
 
