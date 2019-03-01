@@ -1,3 +1,4 @@
+import { componentsX } from '../../src/globals/js/feature-flags';
 import EventManager from '../utils/event-manager';
 import DataTableV2 from '../../src/components/data-table-v2/data-table-v2';
 import HTML from '../../html/data-table-v2/data-table-v2.html';
@@ -24,24 +25,30 @@ describe('Dropdown', function() {
     let table;
 
     beforeAll(function() {
-      container = document.createElement('div');
-      container.innerHTML = HTML;
-      document.body.appendChild(container);
-      element = document.querySelector('[data-table-v2]');
-      table = new DataTableV2(element);
+      if (!componentsX) {
+        container = document.createElement('div');
+        container.innerHTML = HTML;
+        document.body.appendChild(container);
+        element = document.querySelector('[data-table-v2]');
+        table = new DataTableV2(element);
+      }
     });
 
     it('Expandable rows should be removed from the DOM', function() {
-      const rows = [...element.querySelectorAll('tbody > tr')];
+      if (!componentsX) {
+        const rows = [...element.querySelectorAll('tbody > tr')];
 
-      rows.forEach(row => {
-        expect(row.classList.contains('[data-child-row]')).toBe(false);
-      });
+        rows.forEach(row => {
+          expect(row.classList.contains('[data-child-row]')).toBe(false);
+        });
+      }
     });
 
     afterAll(function() {
-      document.body.removeChild(container);
-      table.release();
+      if (!componentsX) {
+        document.body.removeChild(container);
+        table.release();
+      }
     });
   });
 

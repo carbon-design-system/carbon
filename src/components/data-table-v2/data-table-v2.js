@@ -80,7 +80,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
         this._toggleState(eventElement, evt);
       }
 
-      this._handleDocumentClick(evt);
+      if (componentsX) {
+        this._handleDocumentClick(evt);
+      }
     });
 
     this.element.addEventListener('keydown', evt => {
