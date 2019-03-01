@@ -5,11 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/**
- * Row helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
+// Row helpers for @carbon/grid. Heavily inspired by, or derived from,
+// bootstrap:
+// https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
 @import '@carbon/layout/scss/breakpoint';
 
 /// Used to build a row inside of a grid
