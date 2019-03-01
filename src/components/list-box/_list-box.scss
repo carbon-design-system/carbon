@@ -18,7 +18,7 @@
 
 $list-box-width: 100%;
 $list-box-height: rem(40px);
-$list-box-inline-height: rem(32px);
+$list-box-inline-height: if(not feature-flag-enabled('components-x'), rem(32px), $list-box-height);
 $list-box-menu-width: rem(300px);
 
 @mixin listbox {
@@ -307,13 +307,10 @@ $list-box-menu-width: rem(300px);
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
+    order: 1;
     cursor: pointer;
     color: $text-01;
     transition: all $transition--expansion $carbon--standard-easing;
-
-    &:hover {
-      background-color: $ui-03;
-    }
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -414,11 +411,16 @@ $list-box-menu-width: rem(300px);
     padding: 0 2rem 0 1rem;
     cursor: pointer;
     outline: none;
+    border-bottom: 1px solid $ui-04;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    border: none;
   }
 
   .#{$prefix}--list-box__field:focus,
   .#{$prefix}--list-box__field[aria-expanded='true'] {
-    background: $ui-03;
+    border-bottom: 1px solid $ui-03;
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -426,12 +428,15 @@ $list-box-menu-width: rem(300px);
     opacity: 0.5;
   }
 
+  .#{$prefix}--list-box__field .#{$prefix}--text-input {
+    border-bottom: none; // Use border on list box instead
+  }
+
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
     @include typescale('zeta');
 
     color: $text-01;
-    font-weight: 600;
     user-select: none;
   }
 
@@ -473,7 +478,6 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection > svg {
     fill: $ui-05;
-    height: 100%;
   }
 
   .#{$prefix}--list-box__selection:focus {
@@ -489,21 +493,31 @@ $list-box-menu-width: rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: 0;
-    background-color: $interactive-01;
+    background-color: $interactive-02;
     height: rem(24px);
-    width: rem(42px);
-    color: white;
+    color: $inverse-01;
     line-height: 0;
-    padding: 0.5rem;
+    padding: rem(8px);
+    padding-right: rem(2px); // Align with hover circle of X button
     margin-right: rem(10px);
     border-radius: rem(12px);
   }
 
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__selection--multi {
+    margin-left: rem(8px);
+  }
+
   .#{$prefix}--list-box__selection--multi > svg {
     fill: white;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-left: rem(5px);
+    margin-left: rem(4px);
+    width: rem(20px);
+    height: rem(20px);
+    padding: rem(2px);
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg:hover {
+    border-radius: 50%;
+    background-color: $icon-02;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -535,6 +549,7 @@ $list-box-menu-width: rem(300px);
     height: rem(40px);
     margin-top: -1px;
     padding: 0 1rem;
+    color: $text-02;
     cursor: pointer;
     user-select: none;
     border-bottom: 1px solid $ui-03;
@@ -569,13 +584,33 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $ui-03;
+    background-color: $hover-ui;
     color: $text-01;
     border-bottom: 1px solid $ui-01;
 
     &::before,
     &::after {
-      background-color: $ui-03;
+      background-color: $hover-ui;
+      // Below two are for fixing border and background-color alignment when zooming in
+      height: 100%;
+      z-index: 1;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item--active,
+  .#{$prefix}--list-box__menu-item--active:hover {
+    color: $text-01;
+    background-color: $selected-ui;
+    border-bottom-color: $selected-ui;
+
+    &:before,
+    &:after {
+      background-color: $selected-ui;
+      border-bottom: 1px solid $selected-ui;
+      // Below two are for fixing border and background-color alignment when zooming in
+      top: 0;
+      height: 100%;
+      z-index: 1;
     }
   }
 
