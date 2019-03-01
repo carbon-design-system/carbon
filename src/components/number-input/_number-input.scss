@@ -261,30 +261,39 @@
   .#{$prefix}--number__controls {
     @include reset;
     position: absolute;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    right: 0.4rem;
   }
 
   .#{$prefix}--number__control-btn {
     @include button-reset;
-    color: $icon-01;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    width: rem(20px);
-    height: rem(10px);
+    width: rem(32px);
+    height: rem(20px);
+    color: $icon-01;
 
     svg {
       fill: currentColor;
+      position: relative;
+    }
+
+    &.up-icon svg {
+      top: rem(5px);
+    }
+
+    &.down-icon svg {
+      top: rem(-5px);
     }
 
     &:focus {
       @include focus-outline;
       color: $interactive-01;
+      outline-offset: -1px;
     }
 
     &:hover {
