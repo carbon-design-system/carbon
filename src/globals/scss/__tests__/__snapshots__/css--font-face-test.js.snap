@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_css--font-face.scss experimental should output @font-face blocks from elements if components-x flag is enabled 1`] = `
-"/**
- * Generic \`deprecate\` mixin that is being used to indicate that a component is
- * no longer going to be present in the next major release of Carbon.
- */
-@keyframes skeleton {
+"@keyframes skeleton {
   0% {
     width: 0%;
     left: 0;
@@ -601,11 +597,7 @@ exports[`_css--font-face.scss experimental should output @font-face blocks from 
 `;
 
 exports[`_css--font-face.scss should not output CSS if $css--font-face is false 1`] = `
-"/**
- * Generic \`deprecate\` mixin that is being used to indicate that a component is
- * no longer going to be present in the next major release of Carbon.
- */
-@keyframes skeleton {
+"@keyframes skeleton {
   0% {
     width: 0%;
     left: 0;

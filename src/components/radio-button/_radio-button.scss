@@ -140,7 +140,6 @@
   .#{$prefix}--radio-button-group {
     display: flex;
     align-items: center;
-    margin-top: $spacing-xs;
   }
 
   // vertical radio button
@@ -222,7 +221,8 @@
   // Focus
 
   .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    @include focus-outline('blurred');
+    box-shadow: 0 0 0 2px $focus;
+    outline: 1px solid transparent;
   }
 
   // Skeleton State

@@ -176,8 +176,8 @@
   "scripts": {
     "build": "gulp build",
     "build-dev": "gulp build:dev",
-    "build-dev-rollup": "gulp build:dev --rollup",
-    "build-dev-rollup-experimental": "gulp build:dev --rollup -e",
+    "build-dev-rollup": "gulp build:dev:deploy --rollup",
+    "build-dev-rollup-experimental": "gulp build:dev:deploy --rollup -e",
     "ci-check": "sh ./tools/ci-check.sh",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "dev": "gulp serve",
