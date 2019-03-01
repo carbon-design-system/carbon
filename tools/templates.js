@@ -113,13 +113,14 @@ const cache = {
  * @param {Object} [options] The options.
  * @param {string} [options.layout] The default Handlebars template name to lay out stuffs. `false` to force empty layout.
  * @param {boolean} [options.concat] Setting `true` here returns rendered contents all concatenated, instead of returning a map.
+ * @param {Object} [options.layoutContext] Additional Handlebars rendering context for layout template.
  * @param {string} [handle]
  *   The internal component name seen in Fractal.
  *   Can be of a component or of a variant, or left empty.
  *   Leaving `handle` empty renders all components.
  * @returns {string|Map<Variant, string>} The list of rendered template, keyed by Fractal `Variant` object.
  */
-const renderComponent = ({ layout, concat } = {}, handle) =>
+const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
   cache.get().then(({ componentSource, contents }) => {
     const renderedItems = new Map();
     if (!componentSource) {
@@ -140,7 +141,10 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
           if (template) {
             const body = template(context);
             const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
-            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ yield: body }, context)));
+            renderedItems.set(
+              item,
+              !layoutTemplate ? body : layoutTemplate(Object.assign({ yield: body }, { ...context, ...layoutContext }))
+            );
           }
         });
       }
