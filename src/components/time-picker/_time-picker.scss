@@ -111,7 +111,7 @@
     align-items: flex-end;
 
     .#{$prefix}--label {
-      @include typescale('omega');
+      @include type-style('label-01');
       order: 1;
     }
   }
@@ -136,7 +136,7 @@
 
   .#{$prefix}--time-picker__input-field {
     @include reset;
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     font-family: $font-family-mono;
     display: flex;

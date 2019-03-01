@@ -179,7 +179,7 @@
   }
 
   .#{$prefix}--tile-input {
-    display: none;
+    @include hidden();
   }
 }
 
