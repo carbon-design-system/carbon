@@ -8,11 +8,11 @@
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class CopyButton extends mixin(createComponent, InitComponentBySearch, handles) {
+class CopyButton extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * CopyBtn UI.
    * @extends CreateComponent

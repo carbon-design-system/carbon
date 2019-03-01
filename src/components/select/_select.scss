@@ -210,6 +210,12 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--select-input__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
   .#{$prefix}--select-input {
     @include font-family;
     @include typescale('zeta');
@@ -220,7 +226,7 @@
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
-    padding: 0 $spacing-2xl 0 $spacing-md;
+    padding: 0 rem(34px) 0 $spacing-md; // 1.5rem + chevron width
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -247,24 +253,28 @@
       @include focus-outline('outline');
     }
 
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
-    }
-
     &:disabled {
       cursor: not-allowed;
       background: $disabled-background-color;
       color: $disabled;
       border-bottom: 1px solid $disabled-background-color;
     }
+  }
 
-    ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-    }
+  .#{$prefix}--select--invalid {
+    padding-right: rem(58px); // 1rem + chevron width + invalid icon width
+  }
+
+  .#{$prefix}--select--invalid,
+  .#{$prefix}--select--invalid:focus {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form-requirement {
+    display: block;
+    color: $support-01;
+    font-weight: 400;
+    overflow: visible;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -279,12 +289,17 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    bottom: 1rem;
     pointer-events: none;
   }
 
-  &[data-invalid] ~ .#{$prefix}--select__arrow {
-    bottom: 2.5rem;
+  .#{$prefix}--select__disabled-icon,
+  .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    position: absolute;
+    right: rem(34px); // 1.5rem + chevron width
+  }
+
+  .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    fill: $support-01;
   }
 
   .#{$prefix}--select-optgroup,
@@ -310,15 +325,13 @@
   }
 
   .#{$prefix}--select--inline {
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
-    // Targets IE10+ browsers: Display grid auto not supported
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-bottom: 0;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -333,7 +346,6 @@
     color: $text-01;
     border-bottom: none;
     padding-left: $spacing-xs;
-    padding-right: $spacing-lg;
 
     @-moz-document url-prefix() {
       padding-top: 0;
@@ -342,16 +354,20 @@
     &:hover {
       background-color: $ui-01;
     }
-
-    &:focus {
-      @include focus-outline('outline');
-    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
     top: 1.125rem;
     right: $spacing-xs;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    right: rem(24px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__disabled-icon {
+    right: rem(48px);
   }
 
   .#{$prefix}--select--inline[data-invalid] {
@@ -366,31 +382,18 @@
       background-color: transparent;
     }
 
-    & ~ * {
+    ~ * {
       cursor: not-allowed;
     }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form-requirement {
-    grid-column-start: 2;
-
-    // Targets IE10+ browsers: Display grid auto not supported
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      position: absolute;
-      bottom: -1.5rem;
-    }
+    max-height: initial;
+    margin: 0 0 0 $spacing-xs;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     cursor: not-allowed;
-    // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
-    background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23bebebe'%3e%3cpath d='M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: calc(100% - 8px) 50%;
-  }
-
-  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
-    display: none;
   }
 
   //Skeleton State

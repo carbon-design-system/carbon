@@ -1,0 +1,226 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Pagination Nav
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+
+@mixin pseudo-underline() {
+  @if feature-flag-enabled('components-x') {
+    &:not(.#{$prefix}--pagination-nav__page--direction) {
+      &::after {
+        background-color: $interactive-01;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: $spacing-2xs;
+        left: 50%;
+        position: absolute;
+        opacity: 0;
+        transition: left $transition--expansion $carbon--ease-out, width $transition--expansion $carbon--ease-out;
+        width: 0;
+      }
+    }
+
+    .#{$prefix}--pagination-nav__page--active + &::after,
+    &.#{$prefix}--pagination-nav__page--active::after {
+      left: calc(50% - #{$spacing-md/2});
+      opacity: 1;
+      width: $spacing-md;
+    }
+  }
+}
+
+@mixin pagination-nav-base(
+  $text-color: $text-02,
+  $text-color-active: $text-02,
+  $background-color-hover: $hover-ui,
+  $background-color-active: initial,
+  $font-weight: 400,
+  $item-padding: 0,
+  $button-min-width: $spacing-3xl,
+  $button-padding: 1.0625rem $spacing-2xs,
+  $button-direction-size: $spacing-3xl
+) {
+  .#{$prefix}--pagination-nav {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include typescale('zeta');
+    line-height: 0;
+  }
+
+  .#{$prefix}--pagination-nav__list {
+    align-items: center;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--pagination-nav__list-item {
+    padding: $item-padding;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page {
+    @include typescale('zeta');
+    @include button-reset($width: false);
+    border-radius: 0;
+    color: $text-color;
+    display: block;
+    font-weight: $font-weight;
+    line-height: 1;
+    min-width: $button-min-width;
+    outline: 0;
+    padding: $button-padding;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color, color;
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in-out;
+    user-select: none;
+
+    &:hover {
+      background-color: $background-color-hover;
+      color: $text-color;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled,
+    &.#{$prefix}--pagination-nav__page--disabled {
+      background: none;
+      color: rgba($text-color, 0.5);
+      outline: none;
+      pointer-events: none;
+    }
+
+    @include pseudo-underline();
+
+    &.#{$prefix}--pagination-nav__page--active {
+      background-color: $background-color-active;
+      color: $text-color-active;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .#{$prefix}--pagination-nav__icon {
+      fill: currentColor;
+      pointer-events: none;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page--direction {
+    align-items: center;
+    display: flex;
+    height: $button-direction-size;
+    justify-content: center;
+    line-height: 0;
+    width: $button-direction-size;
+  }
+
+  .#{$prefix}--pagination-nav__select {
+    position: relative;
+  }
+
+  .#{$prefix}--pagination-nav__page--select {
+    appearance: none;
+    max-height: $button-min-width;
+    text-indent: calc(50% - 4.5px);
+    // Override some Firefox user-agent styles
+    @-moz-document url-prefix() {
+      text-indent: 0;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon-wrapper {
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    @include pseudo-underline();
+
+    .#{$prefix}--pagination-nav__page--active + & {
+      .#{$prefix}--pagination-nav__select-icon {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon {
+    left: calc(50% - #{$spacing-md/2});
+    pointer-events: none;
+    position: absolute;
+    top: calc(50% - #{$spacing-md/2});
+  }
+
+  .#{$prefix}--pagination-nav__accessibility-label {
+    @include hidden();
+  }
+
+  @content;
+}
+
+@mixin pagination-nav {
+  @include pagination-nav-base(
+    $text-color: $ui-05,
+    $text-color-active: $color__white,
+    $background-color-hover: $hover-row,
+    $background-color-active: $brand-01,
+    $font-weight: 600,
+    $item-padding: 0 $spacing-xs,
+    $button-min-width: $spacing-lg,
+    $button-padding: 0.3125rem $spacing-2xs,
+    $button-direction-size: $spacing-lg
+  );
+
+  .#{$prefix}--pagination-nav__list-item {
+    &:first-child {
+      .#{$prefix}--pagination-nav__page--direction {
+        margin-right: $spacing-xs;
+      }
+    }
+
+    &:last-child {
+      .#{$prefix}--pagination-nav__page--direction {
+        margin-left: $spacing-xs;
+      }
+    }
+  }
+}
+
+@mixin pagination-nav--x {
+  @include pagination-nav-base();
+}
+
+@include exports('pagination-nav') {
+  @if feature-flag-enabled('components-x') {
+    @include pagination-nav--x;
+  } @else {
+    @include pagination-nav;
+  }
+}
