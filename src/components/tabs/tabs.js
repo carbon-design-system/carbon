@@ -40,6 +40,11 @@ class Tab extends ContentSwitcher {
         this._handleKeyDown(event);
       })
     );
+    this.manage(
+      on(this.element.ownerDocument, 'click', event => {
+        this._handleDocumentClick(event);
+      })
+    );
 
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
@@ -79,6 +84,20 @@ class Tab extends ContentSwitcher {
     if (trigger) {
       this._updateMenuState();
     }
+  }
+
+  /**
+   * Handles click on document.
+   * @param {Event} event The triggering event.
+   * @private
+   */
+  _handleDocumentClick(event) {
+    const { element } = this;
+    const isOfSelf = element.contains(event.target);
+    if (isOfSelf) {
+      return;
+    }
+    this._updateMenuState(false);
   }
 
   /**

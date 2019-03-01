@@ -61,6 +61,17 @@
   padding-left: 0;
 }
 
+.demo--container__panel.demo--container--listbox,
+.component-example__live--rendered.list-box > div,
+.component-example__live--rendered.multi-select > div {
+  width: 300px;
+  padding: 0;
+}
+
+.demo--container__panel.demo--container--listbox {
+  margin: 5%;
+}
+
 .demo--theme-switcher {
   position: absolute;
   top: rem(16px);
