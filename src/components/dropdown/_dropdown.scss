@@ -256,8 +256,12 @@
     }
   }
 
-  .#{$prefix}--dropdown[data-invalid] {
+  .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
+
+    .#{$prefix}--dropdown-text {
+      padding-right: rem(58px); // 2rem + 2xSVG width
+    }
 
     + .#{$prefix}--form-requirement {
       display: inline-block;

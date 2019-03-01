@@ -254,7 +254,7 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th--x;
-    @include typescale('zeta');
+    @include type-style('heading-01');
     display: table-cell;
     font-weight: 600;
     height: rem(40px);
@@ -270,11 +270,12 @@
 
   .#{$prefix}--structured-list-td {
     @include reset;
-    @include typescale('zeta');
+    @include type-style('body-long-01');
     @include line-height('body');
     @include padding-td--x;
     position: relative;
     display: table-cell;
+    max-width: 36rem;
   }
 
   .#{$prefix}--structured-list-th {

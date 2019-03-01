@@ -19,7 +19,7 @@
   flex-shrink: 0;
   font-size: $button-font-size;
   font-weight: $button-font-weight;
-  height: rem($button-height);
+  min-height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: center;
@@ -80,7 +80,7 @@
 
   cursor: pointer;
   flex-shrink: 0;
-  height: rem($button-height);
+  min-height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: left;

@@ -20,17 +20,10 @@ const items = [
     id: 'downshift-1-item-1',
     label: 'Option 2',
   },
-  {
-    id: 'downshift-1-item-2',
-    label: 'Option 3',
-  },
-  {
-    id: 'downshift-1-item-3',
-    label: 'Option 4',
-  },
 ];
 
 module.exports = {
+  preview: 'list-box-preview',
   context: {
     featureFlags,
     prefix,

@@ -7,6 +7,7 @@
 
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
+@import 'helper-mixins';
 @import 'import-once';
 
 $unicodes: (
@@ -52,23 +53,28 @@ $weights: (
 }
 
 @mixin plex-font-face {
-  @include check-default-font-path {
-    @each $family, $name in $families {
-      @each $weight, $styles in $weights {
-        @font-face {
-          font-family: $name;
-          font-style: map-get($styles, 'font-style');
-          font-weight: map-get($styles, 'font-weight');
-          src: url('#{$font-path}/IBMPlex#{$family}-#{$weight}.woff') format('woff');
-        }
-
-        @each $unicode, $range in $unicodes {
+  @include deprecate(
+    '`@include plex-font-face` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('components-x')
+  ) {
+    @include check-default-font-path {
+      @each $family, $name in $families {
+        @each $weight, $styles in $weights {
           @font-face {
             font-family: $name;
             font-style: map-get($styles, 'font-style');
             font-weight: map-get($styles, 'font-weight');
-            src: url('#{$font-path}/IBMPlex#{$family}-#{$weight}-#{$unicode}.woff2') format('woff2');
-            unicode-range: map-get($unicodes, $unicode);
+            src: url('#{$font-path}/IBMPlex#{$family}-#{$weight}.woff') format('woff');
+          }
+
+          @each $unicode, $range in $unicodes {
+            @font-face {
+              font-family: $name;
+              font-style: map-get($styles, 'font-style');
+              font-weight: map-get($styles, 'font-weight');
+              src: url('#{$font-path}/IBMPlex#{$family}-#{$weight}-#{$unicode}.woff2') format('woff2');
+              unicode-range: map-get($unicodes, $unicode);
+            }
           }
         }
       }

@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_grid.scss grid--x should generate grid code when the grid feature flag is on 1`] = `
-"/**
- * Generic \`deprecate\` mixin that is being used to indicate that a component is
- * no longer going to be present in the next major release of Carbon.
- */
-@keyframes skeleton {
+"@keyframes skeleton {
   0% {
     width: 0%;
     left: 0;
@@ -1435,11 +1431,7 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
 `;
 
 exports[`_grid.scss should support the grid mixin 1`] = `
-"/**
- * Generic \`deprecate\` mixin that is being used to indicate that a component is
- * no longer going to be present in the next major release of Carbon.
- */
-@keyframes skeleton {
+"@keyframes skeleton {
   0% {
     width: 0%;
     left: 0;

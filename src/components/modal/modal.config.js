@@ -55,7 +55,7 @@ module.exports = {
         hasFooter: true,
         labelPrimaryButton: 'Danger',
         classModalSupplemental: `${prefix}--modal--danger`,
-        classPrimaryButton: `${prefix}--btn--danger--primary`,
+        classPrimaryButton: `${prefix}--btn--danger`,
         classCloseButton: componentsX ? `${prefix}--btn--secondary` : `${prefix}--btn--tertiary`,
       },
     },
