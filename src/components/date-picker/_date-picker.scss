@@ -650,7 +650,7 @@
 
   .#{$prefix}--date-picker__month .flatpickr-current-month,
   .flatpickr-month .flatpickr-current-month {
-    @include typescale('zeta');
+    @include type-style('heading-01');
     padding: 0;
   }
 
@@ -714,15 +714,14 @@
 
   span.#{$prefix}--date-picker__weekday,
   span.flatpickr-weekday {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     color: $text-01;
     font-weight: 400;
   }
 
   .#{$prefix}--date-picker__day,
   .flatpickr-day {
-    @include typescale('zeta');
-    @include focus-outline('reset');
+    @include type-style('body-short-01');
     height: rem(40px);
     width: rem(40px);
     display: flex;

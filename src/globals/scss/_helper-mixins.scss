@@ -98,7 +98,7 @@
 
 @mixin button-reset($width: true) {
   @include reset;
-  @include font-family;
+  @include type-style('body-short-01');
   @include font-smoothing;
   @include letter-spacing;
   display: inline-block;

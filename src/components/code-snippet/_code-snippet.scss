@@ -437,7 +437,7 @@
   }
 
   .#{$prefix}--btn--copy__feedback {
-    @include font-family;
+    @include type-style('body-short-01');
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;

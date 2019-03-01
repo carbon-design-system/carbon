@@ -154,7 +154,6 @@
 
 @mixin modal--x {
   .#{$prefix}--modal {
-    @include font-family;
     position: fixed;
     top: 0;
     right: 0;
