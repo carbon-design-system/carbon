@@ -256,3 +256,7 @@ REASON: #{$reason}';
 .component-example__live .bx--form-item {
   margin-bottom: 2rem;
 }
+
+.component-example__live .bx--form-item.bx--checkbox-wrapper {
+  margin-bottom: 0;
+}
