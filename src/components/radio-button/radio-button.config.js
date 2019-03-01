@@ -9,24 +9,29 @@
 
 const { prefix } = require('../../globals/js/settings');
 
-const items = [
-  {
-    id: 'radio-button-1',
-    value: 'red',
-    label: 'Radio Button label',
-  },
-  {
-    id: 'radio-button-2',
-    value: 'green',
-    label: 'Radio Button label',
-  },
-  {
-    id: 'radio-button-3',
-    value: 'blue',
-    label: 'Radio Button label',
-    disabled: true,
-  },
-];
+const items = () => {
+  const groupId = Math.random()
+    .toString(36)
+    .substr(2);
+  return [
+    {
+      id: `radio-button-${groupId}-1`,
+      value: 'red',
+      label: 'Radio Button label',
+    },
+    {
+      id: `radio-button-${groupId}-2`,
+      value: 'green',
+      label: 'Radio Button label',
+    },
+    {
+      id: `radio-button-${groupId}-3`,
+      value: 'blue',
+      label: 'Radio Button label',
+      disabled: true,
+    },
+  ];
+};
 
 module.exports = {
   context: {
@@ -39,7 +44,7 @@ module.exports = {
       context: {
         selectedValue: 'red',
         group: 'radio-button',
-        items,
+        items: items(),
       },
     },
     {
@@ -49,7 +54,7 @@ module.exports = {
         direction: 'bottom',
         selectedValue: 'red',
         group: 'radio-button',
-        items,
+        items: items(),
       },
     },
     {
@@ -59,7 +64,7 @@ module.exports = {
         direction: 'left',
         selectedValue: 'red',
         group: 'radio-button',
-        items,
+        items: items(),
       },
     },
     {
@@ -69,7 +74,7 @@ module.exports = {
         direction: 'top',
         selectedValue: 'red',
         group: 'radio-button',
-        items,
+        items: items(),
       },
     },
     {
@@ -82,7 +87,7 @@ module.exports = {
         selectedValue: 'red',
         group: 'radio-button--vertical',
         vertical: true,
-        items,
+        items: items(),
       },
     },
     {
@@ -96,7 +101,7 @@ module.exports = {
         selectedValue: 'red',
         group: 'radio-button--vertical',
         vertical: true,
-        items,
+        items: items(),
       },
     },
     {
@@ -110,7 +115,7 @@ module.exports = {
         selectedValue: 'red',
         group: 'radio-button--vertical',
         vertical: true,
-        items,
+        items: items(),
       },
     },
     {
@@ -124,7 +129,7 @@ module.exports = {
         selectedValue: 'red',
         group: 'radio-button--vertical',
         vertical: true,
-        items,
+        items: items(),
       },
     },
   ],
