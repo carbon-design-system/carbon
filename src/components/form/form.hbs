@@ -36,36 +36,57 @@
   {{/if}}
 </div>
 <div class="{{@root.prefix}}--form-item">
-  {{#if componentsX}}
-  <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
-  {{/if}}
-  <ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value
-    class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
-    tabindex="0">
-    <li class="{{@root.prefix}}--dropdown-text">
-      {{#unless inline}} Dropdown label {{else}}
-      <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
-      {{/unless}}
-    </li>
-    <li class="{{@root.prefix}}--dropdown__arrow-container">
-      {{#if featureFlags.componentsX}}
-      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
-      {{else}}
-      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
+  <div
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}">
+    <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{#unless inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/unless}}
+    {{#if componentsX}}
+    <div class="{{@root.prefix}}--select-input__wrapper">
+      <select {{#if invalid}} data-invalid{{/if}} id="select-id"
+        class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
+        {{#each selectItems}}
+        {{#if items}}
+        <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
+          {{#each items}}
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+      {{#if invalid}}
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
       {{/if}}
-    </li>
-    <li>
-      <ul class="{{@root.prefix}}--dropdown-list">
+    </div>
+    {{else}}
+    <select {{#if invalid}} data-invalid{{/if}} id="select-id"
+      class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
+      {{#each selectItems}}
+      {{#if items}}
+      <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
         {{#each items}}
-        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
-          <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
-        </li>
-        {{/each}}
-      </ul>
-    </li>
-  </ul>
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
+      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+    </svg>
+    {{/if}}
+    {{#if inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/if}}
+    {{#if invalid}}
+    <div class="{{@root.prefix}}--form-requirement">
+      Validation message here
+    </div>
+    {{/if}}
+  </div>
 </div>
 <div class="{{@root.prefix}}--form-item">
   <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">Submit</button>
