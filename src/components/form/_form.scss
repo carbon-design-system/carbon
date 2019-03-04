@@ -113,7 +113,7 @@
   }
 
   .#{$prefix}--form-item {
-    @include font-family;
+    @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -182,7 +182,7 @@
   }
 
   .#{$prefix}--form__helper-text {
-    @include typescale('omega');
+    @include type-style('helper-text-01');
     font-style: italic;
     color: $text-02;
     line-height: 1.5;
