@@ -158,7 +158,6 @@
 @mixin progress-indicator--x {
   .#{$prefix}--progress {
     @include reset;
-    @include font-family;
     display: flex;
     list-style: none;
   }
@@ -202,7 +201,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    @include font-size('14');
+    @include type-style('body-short-01');
 
     &::before {
       content: '';
@@ -266,7 +265,7 @@
     position: absolute;
     margin-left: $spacing-lg;
     margin-top: rem(28px);
-    @include font-size('12');
+    @include type-style('label-01');
     color: $text-02;
   }
 

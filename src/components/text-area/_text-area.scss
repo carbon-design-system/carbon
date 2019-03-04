@@ -137,7 +137,7 @@
 
   .#{$prefix}--text-area::-webkit-input-placeholder {
     @include placeholder-colors;
-    @include font-family;
+    @include type-style('body-long-01');
   }
 
   .#{$prefix}--text-area--light {
