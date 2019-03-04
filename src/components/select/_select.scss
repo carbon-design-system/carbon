@@ -217,8 +217,7 @@
   }
 
   .#{$prefix}--select-input {
-    @include font-family;
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     height: rem(40px);
     appearance: none;
@@ -259,6 +258,11 @@
       color: $disabled;
       border-bottom: 1px solid $disabled-background-color;
     }
+  }
+
+  .#{$prefix}--select--disabled .#{$prefix}--label,
+  .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
+    color: $disabled-02;
   }
 
   .#{$prefix}--select--invalid {
@@ -335,7 +339,6 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
-    @include typescale('zeta');
     white-space: nowrap;
     margin: 0 $spacing-xs 0 0;
     align-self: center;
