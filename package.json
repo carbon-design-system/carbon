@@ -131,7 +131,7 @@
     "@carbon/icons-react": "^0.0.1-alpha.32",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
-    "flatpickr": "4.5.2",
+    "flatpickr": "4.5.5",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
@@ -360,5 +360,5 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "bundleSizeThreshold": 100000
+  "bundleSizeThreshold": 110000
 }

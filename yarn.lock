@@ -5399,6 +5399,11 @@ flatpickr@4.5.2:
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.2.tgz#47c8ad472a096e5fb7e74b809b0703535383f20d"
   integrity sha512-jDy4QYGpmiy7+Qk8QvKJ4spjDdxcx9cxMydmq1x427HkKWBw0qizLYeYM2F6tMcvvqGjU5VpJS55j4LnsaBblA==
 
+flatpickr@4.5.5:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.5.tgz#b138050654932f4cf667897d00b51bb930bf392e"
+  integrity sha512-KgAJxBN1BWiOAkwvFSM/nS9YFESOh1yI7uQEd/HQqcTGev84ADO2Mx8C3bUKgIULscb+LireiSDe5D9fh3PFtQ==
+
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
