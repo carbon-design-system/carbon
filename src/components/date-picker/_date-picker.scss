@@ -508,7 +508,7 @@
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
     .#{$prefix}--date-picker__input {
-      width: 7.25rem;
+      width: rem(120px);
     }
   }
 
