@@ -314,7 +314,7 @@
 
   .#{$prefix}--toggle__text--left,
   .#{$prefix}--toggle__text--right {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     position: relative;
     margin-left: $spacing-xs;
   }

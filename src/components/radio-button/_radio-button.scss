@@ -161,8 +161,7 @@
   }
 
   .#{$prefix}--radio-button__label {
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
     display: flex;
     align-items: center;
     cursor: pointer;
