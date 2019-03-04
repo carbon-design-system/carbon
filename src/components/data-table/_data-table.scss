@@ -10,7 +10,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/functions';
 @import '../checkbox/checkbox';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../components/overflow-menu/overflow-menu';
 
 @mixin data-table {
