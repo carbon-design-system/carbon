@@ -114,7 +114,6 @@
 
   .#{$prefix}--form-item {
     @include type-style('body-short-01');
-    @include carbon--font-family('sans');
     display: flex;
     flex-direction: column;
     flex: 1;
