@@ -30,7 +30,9 @@
     "fs-extra": "^7.0.1",
     "prettier": "^1.15.2",
     "rimraf": "^2.6.2",
-    "rollup": "^0.67.3"
+    "rollup": "^0.66.6",
+    "rollup-plugin-virtual": "^1.0.1",
+    "vue": "^2.6.8"
   },
   "sideEffects": false
 }

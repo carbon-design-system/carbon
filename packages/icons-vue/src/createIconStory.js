@@ -50,11 +50,11 @@ storiesOf('${moduleName}', module)
       action: action('clicked'),
     },
   }))
-  .add('with custom class', () => ({
+  .add('with custom classes', () => ({
     components: {
       icon: ${moduleName},
     },
-    template: \`<icon class="custom class"></icon>\`,
+    template: \`<icon class="custom classes" :class="'dynamic classes_2'"></icon>\`,
   }));`;
 }
 

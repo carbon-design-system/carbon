@@ -47,51 +47,46 @@ export default ${createComponentFromInfo(info)};`;
 }
 
 function createComponentFromInfo(info) {
-  const { descriptor, moduleName, size } = info;
+  const { descriptor, moduleName } = info;
   const { attrs, content } = descriptor;
   return `{
   name: '${moduleName}',
   functional: true,
-  props: [
-    'ariaLabel',
-    'ariaLabelledBy',
-    'height',
-    'title',
-    'viewBox',
-    'width',
-    'preserveAspectRatio',
-    'tabindex',
-    'xmlns',
-  ],
+  // We use title as the prop name as it is not a valid attribute for an SVG
+  // HTML element
+  props: ['title'],
   render(createElement, context) {
-    const { props, listeners, slots } = context;
-    const {
-      ariaLabel,
-      ariaLabelledBy,
-      width = '${attrs.width}',
-      height = '${attrs.height}',
-      viewBox = '${attrs.viewBox}',
-      preserveAspectRatio = 'xMidYMid meet',
-      xmlns = 'http://www.w3.org/2000/svg',
-      ...rest
-    } = props;
+    const { children, data, listeners, props } = context;
     const attrs = getAttributes({
-      ...rest,
-      'aria-label': ariaLabel,
-      'aria-labelledby': ariaLabelledBy,
-      width,
-      height,
-      viewBox,
-      preserveAspectRatio,
-      xmlns,
+      width: '${attrs.width}',
+      height: '${attrs.height}',
+      viewBox: '${attrs.viewBox}',
+      preserveAspectRatio: 'xMidYMid meet',
+      xmlns: 'http://www.w3.org/2000/svg',
+      // Special case here, we need to coordinate that we are using title,
+      // potentially, to get the right focus attributes
+      title: props.title,
+      ...data.attrs,
     });
-    return createElement('svg', {
+    const svgData = {
       attrs,
       on: listeners,
-    }, [
-      slots.title,
+    };
+
+    if (data.staticClass) {
+      svgData.class = {
+        [data.staticClass]: true,
+      };
+    }
+
+    if (data.class) {
+      svgData.class[data.class] = true;
+    }
+
+    return createElement('svg', svgData, [
+      props.title && createElement('title', null, props.title),
       ${content.map(toString).join(', ')},
-      slots.default,
+      children,
     ]);
   },
 };`;
