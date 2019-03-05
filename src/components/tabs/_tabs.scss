@@ -217,8 +217,7 @@
 
 @mixin tabs--x {
   .#{$prefix}--tabs {
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
     color: $text-01;
     height: auto;
     width: 100%;
@@ -302,7 +301,6 @@
     z-index: z('dropdown');
     background: $ui-01;
     @include breakpoint(bp--sm--major) {
-      @include typescale('epsilon');
       flex-direction: row;
       margin-right: $spacing-md;
       margin-left: $spacing-md;
@@ -337,7 +335,6 @@
   // Item
   //-----------------------------
   .#{$prefix}--tabs__nav-item {
-    @include typescale('zeta');
     background-color: $ui-01;
     padding: 0;
     cursor: pointer;
@@ -385,14 +382,13 @@
     @include breakpoint(bp--sm--major) {
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
-        font-weight: 600;
+        @include type-style('heading-01');
         border-bottom: 3px solid $interactive-01;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
         color: $text-01;
-        font-weight: 600;
       }
     }
     @include max-breakpoint(bp--sm--major) {

@@ -113,7 +113,7 @@
   }
 
   .#{$prefix}--form-item {
-    @include font-family;
+    @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -128,7 +128,7 @@
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-3xs;
     line-height: rem(16px);
   }
 
@@ -182,10 +182,9 @@
   }
 
   .#{$prefix}--form__helper-text {
-    @include typescale('omega');
+    @include type-style('helper-text-01');
     font-style: italic;
     color: $text-02;
-    line-height: 1.5;
     z-index: 0;
     opacity: 1;
     max-width: 75%;

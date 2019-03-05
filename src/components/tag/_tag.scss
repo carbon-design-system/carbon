@@ -74,8 +74,7 @@
 
 @mixin tags--x {
   .#{$prefix}--tag {
-    @include font-family;
-    @include typescale('omega');
+    @include type-style('label-01');
     display: inline-flex;
     align-items: center;
     padding: 0 $spacing-xs;
