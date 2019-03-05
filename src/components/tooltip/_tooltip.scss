@@ -422,7 +422,7 @@
         color: $ui-01;
       }
 
-      &:vistited {
+      &:visited {
         color: $link-inverse-color;
       }
     }
@@ -587,17 +587,17 @@
       fill: $ui-05;
     }
 
-    // Tooltip - renders as a combo of :before and :after elements
-    &:before,
-    &:after {
-      @include font-family;
+    // Tooltip - renders as a combo of ::before and ::after elements
+    &::before,
+    &::after {
+      @include type-style('body-short-01');
       position: absolute;
       display: none;
       // Need to add new UI color -- IBM Color Gray 80
       background-color: $tooltip-background-color;
     }
 
-    &:before {
+    &::before {
       right: 0;
       left: 0;
       width: 0.6rem;
@@ -608,8 +608,7 @@
       margin-left: 50%;
     }
 
-    &:after {
-      @include typescale('zeta');
+    &::after {
       @include layer('overlay');
       min-width: rem(32px);
       max-width: rem(208px);
@@ -633,8 +632,8 @@
         fill: $ui-05;
       }
 
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         position: absolute;
         display: flex;
         align-items: center;
@@ -652,12 +651,12 @@
 
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
-    &:before {
+    &::before {
       top: 1px;
       transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
     }
 
-    &:after {
+    &::after {
       top: 0;
       transform: translate(-50%, calc(-100% - 12px));
     }
@@ -665,12 +664,12 @@
 
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
-    &:before {
+    &::before {
       bottom: 0;
       transform: translate(-50%, calc(100% + 10px)) rotate(135deg);
     }
 
-    &:after {
+    &::after {
       bottom: 0;
       transform: translate(-50%, calc(100% + 10px));
     }
