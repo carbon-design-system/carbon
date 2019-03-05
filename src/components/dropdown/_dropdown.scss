@@ -316,6 +316,7 @@
   }
 
   .#{$prefix}--dropdown-text {
+    @include type-style('body-short-01');
     display: flex;
     align-items: center;
     height: rem(40px);
@@ -331,7 +332,7 @@
   .#{$prefix}--dropdown-list {
     @include reset;
     @include layer('overlay');
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
