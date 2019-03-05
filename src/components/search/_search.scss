@@ -195,10 +195,6 @@
     transition: background-color $transition--base, outline $transition--base;
     border-bottom: 1px solid $ui-04;
 
-    &:hover {
-      background-color: $hover-ui;
-    }
-
     &:focus {
       @include focus-outline('outline');
     }
@@ -288,6 +284,10 @@
 
     &:hover {
       background-color: $hover-ui;
+      border-bottom: 1px solid $ui-04;
+    }
+    &:active {
+      background-color: $selected-ui;
       border-bottom: 1px solid $ui-04;
     }
   }
