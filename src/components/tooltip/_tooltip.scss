@@ -528,14 +528,9 @@
   }
 
   // Tooltip Definition caret - bottom position
-  .#{$prefix}--tooltip--definition__bottom {
-    padding: 1rem 1rem 1.5rem;
-    min-height: rem(76px);
-
-    .#{$prefix}--tooltip__caret {
-      top: -0.2rem;
-      transform: rotate(-135deg);
-    }
+  .#{$prefix}--tooltip--definition__bottom .#{$prefix}--tooltip__caret {
+    top: -0.2rem;
+    transform: rotate(-135deg);
   }
 
   // Tooltip Definition caret - top position
