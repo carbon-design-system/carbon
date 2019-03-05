@@ -228,9 +228,7 @@
     &:disabled ~ .#{$prefix}--number__controls svg {
       fill: $disabled;
     }
-  }
 
-  .#{$prefix}--number input[type='number'] {
     appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {
