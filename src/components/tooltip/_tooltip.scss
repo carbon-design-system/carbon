@@ -646,12 +646,8 @@
   }
 
   // Tooltip position - icon only
-  .#{$prefix}--tooltip--icon {
-    .#{$prefix}--tooltip__trigger {
-      svg {
-        margin-left: 0;
-      }
-    }
+  .#{$prefix}--tooltip--icon .#{$prefix}--tooltip__trigger svg {
+    margin-left: 0;
   }
 }
 
