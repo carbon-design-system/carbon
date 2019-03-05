@@ -7,64 +7,85 @@
 
 import React from 'react';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
+import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
+import Search16 from '@carbon/icons-react/lib/search/16';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
 import ModalWrapper from '../ModalWrapper';
 import TextInput from '../TextInput';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
+import { breakingChangesX } from '../../internal/FeatureFlags';
+
+const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  'Add with filled circle (iconAddSolid from `carbon-icons`)': 'iconAddSolid',
-  'Search (iconSearch from `carbon-icons`)': 'iconSearch',
+  ...(breakingChangesX
+    ? {}
+    : {
+        'Add with filled circle (iconAddSolid from `carbon-icons`)':
+          'iconAddSolid',
+        'Search (iconSearch from `carbon-icons`)': 'iconSearch',
+      }),
+  'Add with filled circle (AddFilled16 from `@carbon/icons`)': 'AddFilled16',
+  'Search (Search16 from `@carbon/icons`)': 'Search16',
 };
 
 const iconMap = {
   iconAddSolid,
   iconSearch,
+  AddFilled16: props => (
+    <AddFilled16 className={`${prefix}--btn__icon`} {...props} />
+  ),
+  Search16: props => <Search16 className={`${prefix}--btn__icon`} {...props} />,
 };
 
-const props = () => ({
-  className: 'some-class',
-  disabled: boolean('Disable the launcher button (disabled)', false),
-  passiveModal: boolean('Without footer (passiveModal)', false),
-  danger: boolean('Danger mode (danger)', false),
-  buttonTriggerText: text(
-    'The text in the trigger button (buttonTriggerText)',
-    'Launch Modal'
-  ),
-  triggerButtonIcon: iconMap[select('Icon (icon)', icons, 'none')],
-  modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
-  modalHeading: text('The modal heading (modalHeading)', 'Modal'),
-  selectorPrimaryFocus: text(
-    'Primary focus element selector (selectorPrimaryFocus)',
-    '[data-modal-primary-focus]'
-  ),
-  primaryButtonText: text(
-    'The text in the primary button (primaryButtonText)',
-    'Save'
-  ),
-  secondaryButtonText: text(
-    'The text in the secondary button (secondaryButtonText)',
-    'Cancel'
-  ),
-  shouldCloseAfterSubmit: boolean(
-    'Close after submit (shouldCloseAfterSubmit)',
-    true
-  ),
-  onBlur: action('onBlur'),
-  onClick: action('onClick'),
-  onFocus: action('onFocus'),
-  onMouseDown: action('onMouseDown'),
-  onMouseEnter: action('onMouseEnter'),
-  onMouseLeave: action('onMouseLeave'),
-  onMouseUp: action('onMouseUp'),
-});
+const props = () => {
+  const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
+  return {
+    className: 'some-class',
+    disabled: boolean('Disable the launcher button (disabled)', false),
+    passiveModal: boolean('Without footer (passiveModal)', false),
+    danger: boolean('Danger mode (danger)', false),
+    buttonTriggerText: text(
+      'The text in the trigger button (buttonTriggerText)',
+      'Launch Modal'
+    ),
+    renderTriggerButtonIcon: typeof iconToUse === 'function' && iconToUse,
+    triggerButtonIcon: typeof iconToUse !== 'function' && iconToUse,
+    modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
+    modalHeading: text('The modal heading (modalHeading)', 'Modal'),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      '[data-modal-primary-focus]'
+    ),
+    primaryButtonText: text(
+      'The text in the primary button (primaryButtonText)',
+      'Save'
+    ),
+    secondaryButtonText: text(
+      'The text in the secondary button (secondaryButtonText)',
+      'Cancel'
+    ),
+    shouldCloseAfterSubmit: boolean(
+      'Close after submit (shouldCloseAfterSubmit)',
+      true
+    ),
+    onBlur: action('onBlur'),
+    onClick: action('onClick'),
+    onFocus: action('onFocus'),
+    onMouseDown: action('onMouseDown'),
+    onMouseEnter: action('onMouseEnter'),
+    onMouseLeave: action('onMouseLeave'),
+    onMouseUp: action('onMouseUp'),
+  };
+};
 
 storiesOf('ModalWrapper', module)
   .addDecorator(withKnobs)

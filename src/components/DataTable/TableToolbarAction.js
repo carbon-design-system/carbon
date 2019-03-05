@@ -6,34 +6,46 @@
  */
 
 import cx from 'classnames';
+import warning from 'warning';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
-import { componentsX } from '../../internal/FeatureFlags';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
+let didWarnAboutDeprecation = false;
+
 const TableToolbarAction = ({
   className,
+  renderIcon,
   icon,
   iconName,
   iconDescription,
   ...rest
 }) => {
+  if (__DEV__ && breakingChangesX && (icon || iconName)) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `icon`/`iconName` properties in the `TableToolbarAction` component is being removed in the next release of ' +
+        '`carbon-components-react`. Please use `renderIcon` instead.'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   const toolbarActionClasses = cx(className, `${prefix}--toolbar-action`);
   const tableToolbarActionIcon = (() => {
-    if (componentsX && icon) {
-      const IconTag = icon;
+    if (Object(renderIcon) === renderIcon) {
+      const IconTag = renderIcon;
       return (
         <IconTag
           className={`${prefix}--toolbar-action__icon`}
           aria-label={iconDescription}
         />
       );
-    }
-    if (!componentsX && icon) {
+    } else if (!breakingChangesX && (icon || iconName)) {
       return (
         <Icon
           className={`${prefix}--toolbar-action__icon`}
@@ -57,6 +69,12 @@ TableToolbarAction.propTypes = {
   className: PropTypes.string,
 
   ...isRequiredOneOf({
+    /**
+     * Optional prop to allow overriding the toolbar icon rendering.
+     * Can be a React component class
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
     /**
      * Specify the icon for the toolbar action
      */

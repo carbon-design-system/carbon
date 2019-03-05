@@ -109,7 +109,8 @@ const getMenuOffset = (menuBody, menuDirection) => {
   }
 };
 
-let didWarnAboutDeprecation = false;
+let didWarnAboutDeprecationClickToOpen = false;
+let didWarnAboutDeprecationIcon = false;
 
 export default class Tooltip extends Component {
   state = {};
@@ -225,6 +226,7 @@ export default class Tooltip extends Component {
   static defaultProps = {
     open: false,
     direction: DIRECTION_BOTTOM,
+    renderIcon: !componentsX ? undefined : Information,
     showIcon: true,
     iconDescription: 'tooltip',
     iconTitle: '',
@@ -390,7 +392,7 @@ export default class Tooltip extends Component {
       iconName,
       iconTitle,
       iconDescription,
-      renderIcon,
+      renderIcon: IconCustomElement,
       menuOffset,
       // Exclude `clickToOpen` from `other` to avoid passing it along to `<div>`
       clickToOpen,
@@ -400,11 +402,20 @@ export default class Tooltip extends Component {
 
     if (!clickToOpen && __DEV__) {
       warning(
-        didWarnAboutDeprecation,
+        didWarnAboutDeprecationClickToOpen,
         'The `clickToOpen=false` option in `Tooltip` component is being updated in the next release of ' +
           '`carbon-components-react`. Please use `TooltipIcon` or `TooltipDefinition` instead.'
       );
-      didWarnAboutDeprecation = true;
+      didWarnAboutDeprecationClickToOpen = true;
+    }
+
+    if (__DEV__ && breakingChangesX && (icon || iconName)) {
+      warning(
+        didWarnAboutDeprecationIcon,
+        'The `icon`/`iconName` properties in the `Tooltip` component is being removed in the next release of ' +
+          '`carbon-components-react`. Please use `renderIcon` instead.'
+      );
+      didWarnAboutDeprecationIcon = true;
     }
 
     const { open } = this.state;
@@ -425,8 +436,6 @@ export default class Tooltip extends Component {
       : {
           'aria-owns': tooltipId,
         };
-
-    const IconCustomElement = renderIcon || (componentsX && Information);
 
     const finalIcon = IconCustomElement ? (
       <IconCustomElement

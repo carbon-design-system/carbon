@@ -8,6 +8,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { iconAddSolid } from 'carbon-icons';
+import Download16 from '@carbon/icons-react/lib/download/16';
 import { TableToolbarAction } from '../';
 
 describe('DataTable.TableToolbarAction', () => {
@@ -20,5 +21,16 @@ describe('DataTable.TableToolbarAction', () => {
       />
     );
     expect(wrapper).toMatchSnapshot();
+  });
+});
+
+describe('Custom icon in DataTable.TableToolbarAction', () => {
+  it('should render', () => {
+    const iconAction = mount(
+      <TableToolbarAction renderIcon={Download16} iconDescription="Download" />
+    );
+    const originalIcon = mount(<Download16 />).find('svg');
+    const icon = iconAction.find('svg');
+    expect(icon.children().html()).toBe(originalIcon.children().html());
   });
 });

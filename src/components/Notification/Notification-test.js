@@ -13,6 +13,7 @@ import {
   iconWarningSolid,
   iconClose,
 } from 'carbon-icons';
+import Close16 from '@carbon/icons-react/lib/close/16';
 import Icon from '../Icon';
 import Notification, {
   NotificationButton,
@@ -38,6 +39,15 @@ describe('NotificationButton', () => {
     it('renders correct Icon', () => {
       const icon = wrapper.find('Icon');
       expect(icon.props().icon).toEqual(iconClose);
+    });
+
+    it('supports custom icon', () => {
+      const iconButton = mount(
+        <NotificationButton renderIcon={Close16} iconDescription="Close" />
+      );
+      const originalIcon = mount(<Close16 />).find('svg');
+      const icon = iconButton.find('svg');
+      expect(icon.children().html()).toBe(originalIcon.children().html());
     });
 
     describe('When notificationType equals "toast"', () => {

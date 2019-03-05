@@ -38,17 +38,20 @@ export default () => (
           <TableToolbarSearch onChange={onInputChange} />
           <TableToolbarContent>
             <TableToolbarAction
-              icon={componentsX ? Download16 : iconDownload}
+              renderIcon={!componentsX ? undefined : Download16}
+              icon={componentsX ? undefined : iconDownload}
               iconDescription="Download"
               onClick={action('TableToolbarAction - Download')}
             />
             <TableToolbarAction
-              icon={componentsX ? Edit16 : iconEdit}
+              renderIcon={!componentsX ? undefined : Edit16}
+              icon={componentsX ? undefined : iconEdit}
               iconDescription="Edit"
               onClick={action('TableToolbarAction - Edit')}
             />
             <TableToolbarAction
-              icon={componentsX ? Settings16 : iconSettings}
+              renderIcon={!componentsX ? undefined : Settings16}
+              icon={componentsX ? undefined : iconSettings}
               iconDescription="Settings"
               onClick={action('TableToolbarAction - Settings')}
             />

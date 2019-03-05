@@ -12,28 +12,29 @@ import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
 import Search16 from '@carbon/icons-react/lib/search/16';
-import { settings } from 'carbon-components';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
-import { componentsX } from '../../internal/FeatureFlags';
-
-const { prefix } = settings;
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const icons = {
   None: 'None',
-  'Add with filled circle (iconAddSolid from `carbon-icons`)': componentsX
-    ? 'AddFilled16'
-    : 'iconAddSolid',
-  'Search (iconSearch from `carbon-icons`)': componentsX
-    ? 'Search16'
-    : 'iconSearch',
 };
+
+if (breakingChangesX) {
+  icons['Add with filled circle (iconAddSolid from `carbon-icons`)'] =
+    'iconAddSolid';
+  icons['Search (iconSearch from `carbon-icons`)'] = 'iconSearch';
+}
+
+icons['Add with filled circle (AddFilled16 from `@carbon/icons`)'] =
+  'AddFilled16';
+icons['Search (Search16 from `@carbon/icons`)'] = 'Search16';
 
 const iconMap = {
   iconAddSolid,
   iconSearch,
-  AddFilled16: <AddFilled16 className={`${prefix}--btn__icon`} />,
-  Search16: <Search16 className={`${prefix}--btn__icon`} />,
+  AddFilled16,
+  Search16,
 };
 
 const kinds = {
@@ -45,23 +46,31 @@ const kinds = {
 };
 
 const props = {
-  regular: () => ({
-    className: 'some-class',
-    kind: select('Button kind (kind)', kinds, 'primary'),
-    disabled: boolean('Disabled (disabled)', false),
-    small: boolean('Small (small)', false),
-    icon: iconMap[select('Icon (icon)', icons, 'none')],
-    onClick: action('onClick'),
-    onFocus: action('onFocus'),
-  }),
-  set: () => ({
-    className: 'some-class',
-    disabled: boolean('Disabled (disabled)', false),
-    small: boolean('Small (small)', false),
-    icon: iconMap[select('Icon (icon)', icons, 'none')],
-    onClick: action('onClick'),
-    onFocus: action('onFocus'),
-  }),
+  regular: () => {
+    const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
+    return {
+      className: 'some-class',
+      kind: select('Button kind (kind)', kinds, 'primary'),
+      disabled: boolean('Disabled (disabled)', false),
+      small: boolean('Small (small)', false),
+      renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
+      icon: !iconToUse || !iconToUse.svgData ? undefined : iconToUse,
+      onClick: action('onClick'),
+      onFocus: action('onFocus'),
+    };
+  },
+  set: () => {
+    const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
+    return {
+      className: 'some-class',
+      disabled: boolean('Disabled (disabled)', false),
+      small: boolean('Small (small)', false),
+      renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
+      icon: !iconToUse || !iconToUse.svgData ? undefined : iconToUse,
+      onClick: action('onClick'),
+      onFocus: action('onFocus'),
+    };
+  },
 };
 
 const CustomLink = ({ children, href, ...other }) => (

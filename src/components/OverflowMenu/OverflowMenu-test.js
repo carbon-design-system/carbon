@@ -196,7 +196,7 @@ describe('OverflowMenu', () => {
 
   describe('customized icon', () => {
     it('renders', () => {
-      const rootWrapper = shallow(
+      const rootWrapper = mount(
         <OverflowMenu
           className="extra-class"
           renderIcon={() => <div className="other">Other</div>}>
@@ -204,7 +204,12 @@ describe('OverflowMenu', () => {
           <div className="test-child" />
         </OverflowMenu>
       );
-      expect(rootWrapper.find('.bx--overflow-menu__icon')).toHaveLength(0);
+      // renderIcon should be the only component where `bx--overflow-menu__icon` class is applied,
+      // meaning no actual DOM node should have that class
+      const nodesWithIconClasses = rootWrapper.find('.bx--overflow-menu__icon');
+      expect(nodesWithIconClasses.length).toBe(
+        nodesWithIconClasses.filter('renderIcon').length
+      );
       expect(rootWrapper.find('.other')).toHaveLength(1);
     });
   });
