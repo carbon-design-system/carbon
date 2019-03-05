@@ -263,6 +263,8 @@ REASON: #{$reason}';
   margin-bottom: 2rem;
 }
 
-.component-example__live .bx--form-item.bx--checkbox-wrapper {
-  margin-bottom: 0;
+@if feature-flag-enabled('components-x') {
+  .component-example__live .bx--form-item.bx--checkbox-wrapper {
+    margin-bottom: 0;
+  }
 }
