@@ -53,25 +53,28 @@
 @mixin link--x {
   .#{$prefix}--link {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-long-01');
     color: $interactive-01;
     text-decoration: none;
+    outline: none;
 
     &:hover {
       color: $interactive-01;
-      box-shadow: 0 1px currentColor;
+      box-shadow: 0 1px $interactive-01;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px currentColor;
+      box-shadow: 0 1px $text-01;
     }
 
     &:focus {
-      color: $interactive-01;
-      outline: 2px solid currentColor;
-      outline-offset: 2px;
+      box-shadow: 0 3px $interactive-01;
+    }
+
+    &:focus:active {
+      box-shadow: 0 3px $text-01;
     }
 
     &:not([href]) {
@@ -96,7 +99,7 @@
 
   .#{$prefix}--link--disabled {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-long-01');
     @include font-smoothing;
     display: inline;
     color: $disabled-02;
