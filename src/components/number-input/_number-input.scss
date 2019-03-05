@@ -291,7 +291,8 @@
     &:focus {
       @include focus-outline;
       color: $icon-01;
-      outline-offset: -1px;
+      outline-width: 2px;
+      outline-offset: -2px;
     }
 
     &:hover {
