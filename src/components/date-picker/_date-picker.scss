@@ -914,6 +914,208 @@
   }
 }
 
+@mixin date-picker--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--date-picker-input__wrapper {
+      ~ .#{$prefix}--form-requirement {
+        color: $support-01;
+      }
+    }
+
+    .#{$prefix}--date-picker__input {
+      @include focus-outline--colors('reset');
+      background-color: $field-01;
+      color: $text-01;
+      border-bottom-color: $ui-04;
+
+      &:focus,
+      &.#{$prefix}--focused {
+        @include focus-outline--colors('outline');
+      }
+
+      &[data-invalid],
+      &[data-invalid]:focus {
+        @include focus-outline--colors('invalid');
+      }
+
+      &:disabled {
+        color: $disabled;
+        background-color: $disabled-background-color;
+        border-bottom-color: transparent;
+      }
+
+      &:disabled:hover {
+        border-bottom-color: transparent;
+      }
+
+      &::placeholder {
+        @include placeholder-colors;
+      }
+    }
+
+    .#{$prefix}--date-picker__icon {
+      fill: $ui-05;
+
+      &:hover {
+        fill: $hover-primary;
+      }
+    }
+
+    .#{$prefix}--date-picker__calendar,
+    .flatpickr-calendar.open {
+      background-color: $ui-01;
+
+      &:focus {
+        outline-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--date-picker__month .flatpickr-prev-month,
+    .#{$prefix}--date-picker__month .flatpickr-next-month,
+    .flatpickr-month .flatpickr-prev-month,
+    .flatpickr-month .flatpickr-next-month {
+      fill: $text-01;
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--date-picker__month .flatpickr-current-month svg,
+    .flatpickr-month .flatpickr-current-month svg {
+      fill: $text-01;
+    }
+
+    .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
+    .flatpickr-month .flatpickr-current-month .cur-month {
+      color: $text-01;
+    }
+
+    .#{$prefix}--date-picker__month .numInputWrapper .numInput,
+    .flatpickr-month .numInputWrapper .numInput {
+      color: $text-01;
+      background-color: $field-01;
+
+      &:focus {
+        outline-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+    .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+    .flatpickr-month .numInputWrapper span.arrowUp,
+    .flatpickr-month .numInputWrapper span.arrowDown {
+      &:hover {
+        &:after {
+          border-bottom-color: $interactive-02;
+          border-top-color: $interactive-02;
+        }
+      }
+
+      &:after {
+        border-bottom-color: $interactive-01;
+        border-top-color: $interactive-01;
+      }
+    }
+
+    span.#{$prefix}--date-picker__weekday,
+    span.flatpickr-weekday {
+      color: $text-01;
+    }
+
+    .#{$prefix}--date-picker__day,
+    .flatpickr-day {
+      @include focus-outline--colors('reset');
+      color: $text-01;
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+    }
+
+    .#{$prefix}--date-picker__days .nextMonthDay,
+    .#{$prefix}--date-picker__days .prevMonthDay {
+      color: $text-02;
+    }
+
+    .#{$prefix}--date-picker__day.today,
+    .flatpickr-day.today {
+      color: $interactive-01;
+
+      &::after {
+        background-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--date-picker__day.today.selected {
+      border-color: $interactive-01;
+    }
+
+    .#{$prefix}--date-picker__day.disabled,
+    .flatpickr-day.disabled {
+      color: $ui-05;
+    }
+
+    .#{$prefix}--date-picker__day.inRange,
+    .flatpickr-day.inRange {
+      background-color: $date-picker-in-range-background-color;
+      color: $text-01;
+    }
+
+    .#{$prefix}--date-picker__day.selected,
+    .flatpickr-day.selected {
+      color: $inverse-01;
+      background-color: $interactive-01;
+    }
+
+    .#{$prefix}--date-picker__day.endRange.inRange,
+    .flatpickr-day.endRange.inRange {
+      @include focus-outline--colors('outline');
+      background-color: $ui-01;
+    }
+
+    .#{$prefix}--date-picker__day.endRange.inRange.selected,
+    .flatpickr-day.endRange.inRange.selected {
+      color: $inverse-01;
+      background-color: $interactive-01;
+    }
+
+    .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
+    .flatpickr-day.startRange.inRange:not(.selected) {
+      @include focus-outline--colors('outline');
+      background-color: $ui-01;
+    }
+
+    .flatpickr-prev-month:hover svg,
+    .flatpickr-next-month:hover svg {
+      fill: $text-01;
+    }
+
+    .flatpickr-next-month.disabled,
+    .flatpickr-prev-month.disabled {
+      svg {
+        fill: $ui-05;
+      }
+
+      &:hover {
+        svg {
+          fill: $ui-05;
+        }
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('date-picker') {
   @if feature-flag-enabled('components-x') {
     @include date-picker--x;

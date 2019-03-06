@@ -1,228 +1,110 @@
-// Used for sidebar in dev environment
-@import 'interior-left-nav';
+//
+// 1 - all components
+//
+// @import '../../src/globals/scss/styles';
+
+//
+// 2 and 4 - all components in inline theme
+//
 @import '../../src/globals/scss/styles';
-@import '../../src/globals/scss/functions';
-@import './_vars.scss';
-@import './_mixins.scss';
-@import './_layout.scss';
-@import './_markdown-page.scss';
-@import './_page.scss';
-@import './_prism.scss';
-@import '../js/components/CodeExample/code-example.scss';
-@import '../js/components/CodePage/code-page.scss';
-@import '../js/components/ComponentExample/component-example.scss';
-@import '../js/components/ComponentExample/component-overrides.scss';
-@import '../js/components/PageHeader/page-header.scss';
-@import '../js/components/SideNavToggle/side-nav-toggle.scss';
-
-[data-renderroot] {
-  display: block;
-
-  .component-example__live--with-iframe {
-    height: 25rem;
-
-    iframe {
-      height: 100%;
-    }
-  }
-
-  .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
-    display: none;
-  }
-
-  .bx--interior-left-nav {
-    top: 0;
-    overflow: auto;
-    border-right: none;
-    z-index: 7000;
-
-    &.bx--interior-left-nav--collapsed {
-      width: 0;
-    }
-  }
-
-  .component-example__live--rendered {
-    .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
-      display: flex;
-    }
-
-    .bx--interior-left-nav.bx--interior-left-nav--collapsed {
-      width: 3rem;
-    }
+@if feature-flag-enabled('components-x') {
+  .my-dark-theme {
+    @include carbon--theme-overrides('g90');
+    @include accordion--x;
+    @include breadcrumb-experimental;
+    @include button--x;
+    @include checkbox--x;
+    @include snippet--x;
+    @include combo-box--x;
+    @include content-switcher--x;
+    // @include copy-button; // TODO needs mixin
+    // @include data-table--x; // TODO needs mixin
+    @include date-picker--x;
+    @include dropdown--x;
+    @include file-uploader--x;
+    // @include footer--x; // TODO needs mixin
+    @include form--x;
+    @include inline-loading--x;
+    @include link--x;
+    @include lists--x;
+    @include listbox--x;
+    @include loading--x;
+    @include modal--x;
+    // @include multi-select--x; // TODO needs mixin
+    @include inline-notifications--x;
+    @include toast-notifications--x;
+    @include number-input--x;
+    @include overflow-menu--x;
+    @include pagination--x;
+    @include progress-indicator--x;
+    @include radio-button--experimental;
+    @include search--x;
+    @include select--x;
+    // @include skeleton--x; // TODO needs mixin
+    @include slider--x;
+    @include structured-list--x;
+    @include tabs--x;
+    @include tags--x;
+    @include text-area--x;
+    @include text-input--x;
+    @include tile--x;
+    @include time-picker--x;
+    @include toggle--experimental;
+    @include toolbar--x;
+    @include tooltip--x;
+    // @include ui-shell--x; // TODO needs mixin
   }
 }
 
-.demo--container {
-  display: block;
-  box-sizing: border-box;
-  padding-top: 1em;
-  transition: 0.2s;
-  background-color: $ui-02;
-  padding-left: 0;
-}
-
-.demo--theme-switcher {
-  position: absolute;
-  top: rem(16px);
-  right: rem(16px);
-}
-
-.bx--tile-container {
-  width: 100%;
-
-  .bx--tile {
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
-
-  .bx--col {
-    background: none;
-    margin-bottom: 1rem;
-  }
-}
-
-.demo--container__panel {
-  @include grid-container;
-  width: 100%;
-  max-width: 960px;
-  height: 100%;
-  padding: 1em;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  .demo--container.flex-col & {
-    flex-direction: column;
-    margin: 0 auto;
-
-    & > * {
-      margin: 1rem 0;
-    }
-  }
-
-  .demo--container.flex-row & {
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 auto;
-
-    & > * {
-      margin: 1rem;
-    }
-  }
-
-  &.mobile {
-    max-width: 600px;
-  }
-
-  &[hidden] {
-    display: none;
-  }
-}
-
-.bx--global-header--demo {
-  top: 0;
-  height: 5.375em;
-  display: flex;
-  align-items: center;
-  padding: 1em;
-  z-index: 0;
-}
-
-.demo-switcher {
-  &__container {
-    display: flex;
-    align-items: center;
-
-    label {
-      color: #fff;
-      margin-right: 1rem;
-    }
-  }
-}
-
-.test-header {
-  position: fixed;
-  background-color: $ui-05;
-  width: 100%;
-  top: 0;
-  left: 0;
-  height: 86px;
-  z-index: 8000;
-}
-
-.test-nav {
-  position: fixed;
-  background-color: $ui-04;
-  width: 200px;
-  height: calc(100vh - 86px);
-  bottom: 0;
-  left: 0;
-  z-index: 8000;
-}
-
-//--------------------------------------------------------------------------
-// Grid
-//--------------------------------------------------------------------------
-// Custom styling for the grid demo
-@if feature-flag-enabled('grid') {
-  .demo--container--grid {
-    .outside {
-      background-color: #dbeaff;
-      outline: 1px solid #97c1ff;
-      height: 80px;
-    }
-
-    .inside {
-      background-color: #edf4ff;
-      height: 100%;
-    }
-
-    [class*='col'] {
-      outline: 1px dashed #97c1ff;
-    }
-
-    display: block;
-    padding: 0;
-    max-width: 100%;
-  }
-
-  .#{$prefix}--grid {
-    outline: 1px dashed #97c1ff;
-  }
-} @else {
-  .bx--row {
-    min-height: 50px;
-  }
-
-  [class*='bx--col'] {
-    background-color: $color__gray-1;
-
-    p {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-  }
-
-  .col-example {
-    background-color: rgba(blue, 0.2);
-    height: 100%;
-  }
-
-  .red {
-    background-color: rgba(red, 0.2);
-  }
-
-  .green {
-    background-color: rgba(green, 0.2);
-  }
-
-  .indigo {
-    background-color: rgba(indigo, 0.2);
-  }
-}
-
-.component-example__live .bx--form-item {
-  margin-bottom: 2rem;
-}
+//
+// 3 - all components but new color override mixins
+//
+// @import '../../src/globals/scss/styles';
+// @if feature-flag-enabled('components-x') {
+//   .my-dark-theme {
+//     @include carbon--theme-overrides('g90');
+//     @include accordion--colors;
+//     @include breadcrumb--colors;
+//     @include button--colors;
+//     @include checkbox--colors;
+//     @include snippet--colors;
+//     @include combo-box--colors;
+//     @include content-switcher--colors;
+//     // @include copy-button; // TODO needs mixin
+//     // @include data-table--colors; // TODO needs mixin
+//     @include date-picker--colors;
+//     @include dropdown--colors;
+//     @include file-uploader--colors;
+//     // @include footer; // TODO needs mixin
+//     @include form--colors;
+//     @include inline-loading--colors;
+//     @include link--colors;
+//     @include lists--colors;
+//     @include listbox--colors;
+//     @include loading--colors;
+//     @include modal--colors;
+//     // @include multi-select; // TODO needs mixin
+//     @include inline-notifications--colors;
+//     @include toast-notifications--colors;
+//     @include number-input--colors;
+//     @include overflow-menu--colors;
+//     @include pagination--colors;
+//     @include progress-indicator--colors;
+//     @include radio-button--colors;
+//     @include search--colors;
+//     @include select--colors;
+//     // @include skeleton; // TODO needs mixin
+//     @include slider--colors;
+//     @include structured-list--colors;
+//     @include tabs--colors;
+//     @include tags--colors;
+//     @include text-area--colors;
+//     @include text-input--colors;
+//     @include tile--colors;
+//     @include time-picker--colors;
+//     @include toggle--colors;
+//     @include toolbar--colors;
+//     @include tooltip--colors;
+//     // @include ui-shell; // TODO needs mixin
+//   }
+// }

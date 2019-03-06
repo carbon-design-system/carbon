@@ -688,6 +688,117 @@
   }
 }
 
+@mixin tooltip--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--tooltip__label {
+      color: $text-01;
+    }
+
+    .#{$prefix}--tooltip__trigger {
+      &:focus {
+        @include focus-outline--colors('border');
+        fill: $hover-primary;
+      }
+
+      path,
+      polygon,
+      circle {
+        fill: $ui-05;
+      }
+
+      &:hover,
+      &:focus {
+        color: $text-01;
+        path,
+        polygon,
+        circle {
+          fill: $ui-05;
+        }
+      }
+    }
+
+    .#{$prefix}--tooltip {
+      @include layer('overlay');
+      background-color: $tooltip-background-color;
+      color: $ui-01;
+
+      .#{$prefix}--link {
+        color: $link-inverse-color;
+
+        &:active {
+          color: $ui-01;
+        }
+
+        &:vistited {
+          color: $link-inverse-color;
+        }
+      }
+
+      .#{$prefix}--tooltip__caret {
+        background-color: $tooltip-background-color;
+      }
+    }
+
+    .#{$prefix}--tooltip--definition {
+      .#{$prefix}--tooltip__trigger {
+        border-bottom-color: 1px dotted $interactive-01;
+        color: $text-01;
+
+        &:focus {
+          @include focus-outline--colors('border');
+        }
+      }
+    }
+
+    .#{$prefix}--tooltip--definition__bottom,
+    .#{$prefix}--tooltip--definition__top {
+      @include layer('overlay');
+      background-color: $tooltip-background-color;
+
+      p {
+        color: $ui-01;
+      }
+
+      .#{$prefix}--tooltip__caret {
+        background-color: $tooltip-background-color;
+      }
+    }
+
+    .#{$prefix}--tooltip--icon__top,
+    .#{$prefix}--tooltip--icon__bottom {
+      path {
+        fill: $ui-05;
+      }
+
+      &:before,
+      &:after {
+        background-color: $tooltip-background-color;
+      }
+
+      &:after {
+        color: $ui-01;
+      }
+
+      &:hover,
+      &:focus {
+        path {
+          fill: $ui-05;
+        }
+      }
+
+      &:focus {
+        outline-color: transparent;
+
+        svg {
+          @include focus-outline--colors('border');
+        }
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('tooltip') {
   @if feature-flag-enabled('components-x') {
     @include tooltip--x;

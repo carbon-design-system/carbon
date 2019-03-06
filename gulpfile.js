@@ -8,6 +8,9 @@ const http = require('http');
 // Styles
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('postcss');
+const colorsOnly = require('postcss-colors-only');
+const removeSelectors = require('postcss-remove-selectors');
 
 // Javascript deps
 const babel = require('gulp-babel');
@@ -82,7 +85,7 @@ const promisePortSassDevBuild = portscanner.findAPortNotInUse(cloptions.portSass
  * Dev server
  */
 
-gulp.task('dev-server', ['sass:dev', 'scripts:dev:feature-flags'], cb => {
+gulp.task('dev-server', ['sass:dev', 'sass:dev:compiled', 'scripts:dev:feature-flags'], cb => {
   promisePortSassDevBuild.then(
     portSassDevBuild => {
       let started;
@@ -295,6 +298,40 @@ gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
  * Sass Tasks
  */
 
+const inlineTheme = () =>
+  through.obj((file, enc, callback) => {
+    // 1. split up default and inline theme declarion blocks
+    const defaultCSS = postcss()
+      .use(
+        removeSelectors({
+          selectors: [/.my-dark-theme/],
+        })
+      )
+      .process(file.contents.toString(enc)).css;
+
+    const themeCSS = postcss()
+      .use(
+        removeSelectors({
+          selectors: [/^((?!.my-dark-theme).)*$/],
+        })
+      )
+      .process(file.contents.toString(enc)).css;
+
+    // 2. only keep color declarations for the inline theme
+    const themeColorsCSS = postcss()
+      .use(colorsOnly())
+      .process(themeCSS).css;
+
+    // 3. concatenate default and optimized inline theme
+    file.contents = Buffer.from(
+      `${defaultCSS}
+      ${themeColorsCSS}`,
+      enc
+    );
+
+    callback(null, file);
+  });
+
 gulp.task('sass:compiled', () => {
   function buildStyles(prod) {
     return gulp
@@ -343,10 +380,10 @@ gulp.task('sass:dev', () =>
     .pipe(
       header(`
         $feature-flags: (
-          components-x: ${useExperimentalFeatures},
-          breaking-changes-x: ${useBreakingChanges},
-          grid: ${useExperimentalFeatures},
-          ui-shell: ${useExperimentalFeatures},
+          components-x: true,
+          breaking-changes-x: true,
+          grid: true,
+          ui-shell: true,
         );
       `)
     )
@@ -361,6 +398,43 @@ gulp.task('sass:dev', () =>
         browsers: ['> 1%', 'last 2 versions'],
       })
     )
+    .pipe(inlineTheme())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('demo'))
+    .pipe(browserSync.stream({ match: '**/*.css' }))
+);
+
+gulp.task('sass:dev:compiled', () =>
+  gulp
+    .src('demo/scss/demo.scss')
+    .pipe(sourcemaps.init())
+    .pipe(
+      header(`
+        $feature-flags: (
+          components-x: true,
+          breaking-changes-x: true,
+          grid: true,
+          ui-shell: true,
+        );
+      `)
+    )
+    .pipe(
+      sass({
+        includePaths: ['node_modules'],
+        outputStyle: 'compressed',
+      }).on('error', sass.logError)
+    )
+    .pipe(
+      autoprefixer({
+        browsers: ['> 1%', 'last 2 versions'],
+      })
+    )
+    .pipe(inlineTheme())
+    .pipe(
+      rename(filePath => {
+        filePath.extname = `.min${filePath.extname}`;
+      })
+    )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream({ match: '**/*.css' }))
@@ -371,6 +445,7 @@ gulp.task('sass:dev:server', () => {
     if (!useExperimentalFeatures !== !switchTo) {
       useExperimentalFeatures = switchTo;
       gulp.start('sass:dev');
+      gulp.start('sass:dev:compiled');
       gulp.start('scripts:dev:feature-flags');
     }
   }, 500);
@@ -532,7 +607,10 @@ gulp.task('watch', () => {
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], !cloptions.sassSource ? ['sass:dev'] : ['sass:dev', 'sass:source']);
+  gulp.watch(
+    ['src/**/**/*.scss', 'demo/**/*.scss'],
+    !cloptions.sassSource ? ['sass:dev', 'sass:dev:compiled'] : ['sass:dev', 'sass:dev:compiled', 'sass:source']
+  );
 });
 
 gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);
@@ -545,7 +623,7 @@ gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 gulp.task('build', ['build:scripts', 'build:styles', 'html:source']);
 
 // For demo environment
-gulp.task('build:dev', ['sass:dev', 'scripts:dev', 'html:dev']);
+gulp.task('build:dev', ['sass:dev', 'sass:dev:compiled', 'scripts:dev', 'html:dev']);
 
 gulp.task('default', () => {
   // eslint-disable-next-line no-console

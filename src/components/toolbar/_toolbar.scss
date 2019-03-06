@@ -139,6 +139,46 @@ $css--helpers: true;
   }
 }
 
+@mixin toolbar--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--toolbar {
+      .#{$prefix}--search-input {
+        background-color: transparent;
+      }
+
+      .#{$prefix}--overflow-menu__icon {
+        fill: $text-02;
+      }
+
+      .#{$prefix}--search-magnifier {
+        fill: $text-02;
+      }
+
+      .#{$prefix}--toolbar-search--active {
+        .#{$prefix}--search-input {
+          background-color: $field-02;
+        }
+      }
+
+      .#{$prefix}--overflow-menu--open > .#{$prefix}--overflow-menu__icon {
+        fill: $brand-01;
+      }
+    }
+
+    .#{$prefix}--toolbar-search__btn {
+      &:focus {
+        @include focus-outline--colors;
+      }
+    }
+
+    .#{$prefix}--toolbar-menu__divider {
+      border-top-color: $ui-03;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('toolbar') {
   @if feature-flag-enabled('components-x') {
     @include toolbar--x;

@@ -93,6 +93,43 @@
   }
 }
 
+@mixin link--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--link {
+      color: $interactive-01;
+
+      &:hover,
+      &:focus {
+        color: $interactive-01;
+        box-shadow: 0 1px currentColor;
+      }
+
+      &:active,
+      &:active:visited {
+        color: $text-01;
+        box-shadow: 0 1px currentColor;
+      }
+
+      &:focus {
+        box-shadow: 0 3px currentColor;
+      }
+
+      &[aria-disabled='true'][tabindex='-1'] {
+        color: $disabled;
+        &:hover {
+          box-shadow: none;
+        }
+      }
+
+      &:visited {
+        color: $interactive-01;
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('link') {
   @if feature-flag-enabled('components-x') {
     @include link--x;

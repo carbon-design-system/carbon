@@ -514,6 +514,165 @@
   }
 }
 
+@mixin tabs--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--tabs {
+      color: $text-01;
+    }
+
+    .#{$prefix}--tabs-trigger {
+      color: $text-01;
+      outline-color: transparent;
+      border-bottom-color: $ui-04;
+      background-color: $field-01;
+    }
+
+    .#{$prefix}--tabs-trigger:focus,
+    .#{$prefix}--tabs-trigger:active {
+      @include focus-outline--colors('outline');
+    }
+
+    .#{$prefix}--tabs-trigger svg {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--tabs-trigger--open:focus,
+    .#{$prefix}--tabs-trigger--open:active {
+      @include focus-outline--colors('reset');
+    }
+
+    .#{$prefix}--tabs-trigger--open {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--tabs-trigger-text {
+      color: $text-01;
+    }
+
+    .#{$prefix}--tabs-trigger-text:hover {
+      color: $text-01;
+    }
+
+    .#{$prefix}--tabs__nav {
+      @include layer('overlay');
+      background-color: $ui-01;
+      @include breakpoint(bp--sm--major) {
+        background: none;
+        box-shadow: none;
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item {
+      background-color: $ui-01;
+      @include breakpoint(bp--sm--major) {
+        background: transparent;
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+      @include breakpoint(bp--sm--major) {
+        background: transparent;
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+      @include max-breakpoint(bp--sm--major) {
+        background-color: $hover-ui;
+        box-shadow: 0 -1px 0 $hover-ui;
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
+      @include breakpoint(bp--sm--major) {
+        .#{$prefix}--tabs__nav-link {
+          color: $text-01;
+          border-bottom-color: $interactive-01;
+        }
+
+        .#{$prefix}--tabs__nav-link:focus,
+        .#{$prefix}--tabs__nav-link:active {
+          color: $text-01;
+        }
+      }
+    }
+
+    a.#{$prefix}--tabs__nav-link {
+      color: $text-02;
+      @include breakpoint(bp--sm--major) {
+        border-bottom-color: $tab-underline-color;
+      }
+      @include max-breakpoint(bp--sm--major) {
+        border-bottom-color: 1px solid $ui-03;
+        &:hover {
+          color: $text-01;
+          border-bottom-color: transparent;
+        }
+        &:focus,
+        &:active {
+          outline-color: $interactive-01;
+        }
+      }
+    }
+
+    //-----------------------------
+    //  Link Hover
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled))
+      .#{$prefix}--tabs__nav-link {
+      color: $text-01;
+      @include breakpoint(bp--sm--major) {
+        color: $text-01;
+        border-bottom: $tab-underline-color-hover;
+      }
+    }
+
+    //-----------------------------
+    //  Link Disabled
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+      color: $tab-text-disabled;
+      border-bottom: $tab-underline-disabled;
+    }
+
+    .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+      border-bottom: $tab-underline-disabled;
+    }
+
+    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
+      border-bottom: $tab-underline-disabled;
+    }
+
+    .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+      .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled)):not(.#{$prefix}--tabs__nav-item--selected)
+      a.#{$prefix}--tabs__nav-link:active {
+      color: $text-02;
+    }
+
+    .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-link:active {
+      @include breakpoint(bp--sm--major) {
+        outline-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+      @include skeleton--colors;
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+      @include skeleton--colors;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('tabs') {
   @if feature-flag-enabled('components-x') {
     @include tabs--x;

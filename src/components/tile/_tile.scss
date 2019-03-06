@@ -321,6 +321,62 @@
   }
 }
 
+@mixin tile--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--tile {
+      background-color: $ui-01;
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+    }
+
+    .#{$prefix}--tile--clickable,
+    .#{$prefix}--tile--selectable,
+    .#{$prefix}--tile--expandable {
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--tile--clickable,
+    .#{$prefix}--tile--expandable {
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+    }
+
+    .#{$prefix}--tile__checkmark,
+    .#{$prefix}--tile__chevron {
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+    }
+
+    .#{$prefix}--tile__checkmark {
+      svg {
+        fill: $ui-04;
+      }
+    }
+
+    .#{$prefix}--tile__chevron {
+      svg {
+        fill: $ui-05;
+      }
+    }
+
+    .#{$prefix}--tile--is-selected {
+      outline-color: $ui-04;
+    }
+
+    .#{$prefix}--tile-input:checked + .#{$prefix}--tile > .#{$prefix}--tile__checkmark svg {
+      fill: $ui-05;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('tile') {
   @if feature-flag-enabled('components-x') {
     @include tile--x;

@@ -201,6 +201,52 @@
   }
 }
 
+@mixin toast-notifications--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--toast-notification {
+      color: $text-01;
+    }
+
+    .#{$prefix}--toast-notification--error {
+      @include notification--experimental($support-01, $notification-error-background-color);
+    }
+
+    .#{$prefix}--toast-notification--success {
+      @include notification--experimental($support-02, $notification-success-background-color);
+    }
+
+    .#{$prefix}--toast-notification--info {
+      @include notification--experimental($support-04, $notification-info-background-color);
+    }
+
+    .#{$prefix}--toast-notification--warning {
+      @include notification--experimental($support-03, $notification-warning-background-color);
+    }
+
+    .#{$prefix}--toast-notification__close-button {
+      @include focus-outline--colors('reset');
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      .#{$prefix}--toast-notification__close-icon {
+        fill: $ui-05;
+      }
+    }
+
+    .#{$prefix}--toast-notification__subtitle {
+      color: $text-01;
+    }
+
+    .#{$prefix}--toast-notification__caption {
+      color: $text-01;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('toast-notifications') {
   @if feature-flag-enabled('components-x') {
     @include toast-notifications--x;

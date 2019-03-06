@@ -391,6 +391,78 @@
   }
 }
 
+@mixin progress-indicator--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--progress-step svg {
+      fill: $interactive-01;
+    }
+
+    .#{$prefix}--progress-label:hover {
+      color: $interactive-01;
+      box-shadow: 0 1px $interactive-01;
+    }
+
+    .#{$prefix}--progress-label:focus {
+      outline-color: $interactive-01;
+    }
+
+    .#{$prefix}--progress-label:active {
+      box-shadow: 0 1px $ui-05;
+    }
+
+    .#{$prefix}--progress-optional {
+      color: $text-02;
+    }
+
+    .#{$prefix}--progress-step--current {
+      .#{$prefix}--progress-line {
+        background-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--progress-step--current svg {
+      fill: $interactive-01;
+    }
+
+    .#{$prefix}--progress-step--incomplete {
+      svg {
+        fill: $ui-05;
+      }
+
+      .#{$prefix}--progress-line {
+        background-color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--progress-step--complete {
+      .#{$prefix}--progress-line {
+        background-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--progress-step--disabled {
+      svg {
+        fill: $disabled;
+      }
+
+      .#{$prefix}--progress-label,
+      .#{$prefix}--progress-label:hover {
+        color: $disabled;
+      }
+    }
+
+    .#{$prefix}--progress__warning > path {
+      fill: $support-01;
+    }
+
+    .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+      @include skeleton--colors;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('progress-indicator') {
   @if feature-flag-enabled('components-x') {
     @include progress-indicator--x;

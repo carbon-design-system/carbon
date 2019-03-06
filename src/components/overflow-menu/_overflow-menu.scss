@@ -386,6 +386,88 @@
   }
 }
 
+@mixin overflow-menu--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--overflow-menu {
+      @include focus-outline--colors('reset');
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+      background-color: $ui-01;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .#{$prefix}--overflow-menu__icon {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--overflow-menu-options {
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+      background-color: $ui-01;
+
+      &::after {
+        background-color: $ui-01;
+      }
+    }
+
+    .#{$prefix}--overflow-menu--divider {
+      border-top-color: $ui-03;
+    }
+
+    .#{$prefix}--overflow-menu-options__btn {
+      @include focus-outline--colors('reset');
+      color: $text-02;
+
+      &:hover {
+        color: $text-01;
+      }
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+    }
+
+    .#{$prefix}--overflow-menu-options__option:hover {
+      background-color: $hover-ui;
+    }
+
+    .#{$prefix}--overflow-menu-options__option--danger {
+      border-top-color: $ui-03;
+    }
+
+    .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:hover,
+    .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:focus {
+      color: $inverse-01;
+      background-color: $support-01;
+    }
+
+    .#{$prefix}--overflow-menu-options__option--disabled:hover {
+      background-color: $ui-01;
+    }
+
+    .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
+      color: $disabled;
+
+      &:hover,
+      &:active,
+      &:focus {
+        @include focus-outline--colors('reset');
+        background-color: $ui-01;
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('overflow-menu') {
   @if feature-flag-enabled('components-x') {
     @include overflow-menu--x;

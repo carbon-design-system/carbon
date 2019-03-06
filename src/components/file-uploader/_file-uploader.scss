@@ -226,6 +226,54 @@
   }
 }
 
+@mixin file-uploader--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--file--invalid {
+      fill: $support-01;
+    }
+
+    .#{$prefix}--file--label {
+      color: $text-01;
+    }
+
+    .#{$prefix}--label-description {
+      color: $text-02;
+    }
+
+    .#{$prefix}--file__selected-file {
+      background-color: $field-01;
+    }
+
+    .#{$prefix}--file__selected-file--invalid {
+      @include focus-outline--colors('invalid');
+    }
+
+    .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+      color: $support-01;
+    }
+
+    .#{$prefix}--file-filename {
+      color: $text-01;
+    }
+
+    .#{$prefix}--file__state-container {
+      .#{$prefix}--loading__svg {
+        stroke: $ui-05;
+      }
+    }
+
+    .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+      fill: $support-02;
+
+      &:focus {
+        @include focus-outline--colors('border');
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('file-uploader') {
   @if feature-flag-enabled('components-x') {
     @include file-uploader--x;

@@ -119,6 +119,16 @@
   }
 }
 
+@mixin lists--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--list__item {
+      color: $text-01;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('lists') {
   @if feature-flag-enabled('components-x') {
     @include lists--x;

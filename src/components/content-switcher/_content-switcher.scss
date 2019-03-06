@@ -211,6 +211,65 @@
   }
 }
 
+@mixin content-switcher--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--content-switcher-btn {
+      @include focus-outline('reset');
+      background-color: $ui-01;
+      color: $text-02;
+
+      &:focus {
+        @include focus-outline--colors('outline');
+        color: $text-01;
+      }
+
+      &:hover,
+      &:active {
+        background-color: $hover-ui;
+        color: $text-01;
+      }
+
+      &:disabled {
+        color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--content-switcher-btn:not(:last-of-type)::after {
+      background-color: $content-switcher-divider;
+    }
+
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::after,
+    .#{$prefix}--content-switcher-btn:focus::after,
+    .#{$prefix}--content-switcher-btn:hover::after {
+      background-color: transparent;
+    }
+
+    .#{$prefix}--content-switcher__icon {
+      fill: $text-02;
+    }
+
+    .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
+    .#{$prefix}--content-switcher-btn:focus .#{$prefix}--content-switcher__icon {
+      fill: $text-01;
+    }
+
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+      background-color: $ui-05;
+      color: $inverse-01;
+
+      &:disabled {
+        background-color: $ibm-colors__gray-30;
+      }
+    }
+
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected .#{$prefix}--content-switcher__icon {
+      fill: $inverse-01;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('content-switcher') {
   @if feature-flag-enabled('components-x') {
     @include content-switcher--x;

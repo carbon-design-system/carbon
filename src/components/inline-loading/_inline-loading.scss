@@ -140,6 +140,24 @@
   }
 }
 
+@mixin inline-loading--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--inline-loading__text {
+      color: $text-02;
+    }
+
+    .#{$prefix}--inline-loading__checkmark {
+      stroke: $interactive-01;
+    }
+
+    .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
+      stroke: $interactive-01;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('inline-loading') {
   @if feature-flag-enabled('components-x') {
     @include inline-loading--x;

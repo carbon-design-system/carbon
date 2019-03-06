@@ -35,6 +35,14 @@
   }
 }
 
+@mixin combo-box--colors {
+  @if feature-flag-enabled('components-x') {
+    // TODO when component sets colors
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('combo-box') {
   @if feature-flag-enabled('components-x') {
     @include combo-box--x;

@@ -345,6 +345,74 @@
   }
 }
 
+@mixin structured-list--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--structured-list-row {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
+      background-color: $ui_01;
+      border-bottom-color: $ui-01;
+    }
+
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
+      @include focus-outline--colors('outline');
+    }
+
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+      > .#{$prefix}--structured-list-td,
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected > .#{$prefix}--structured-list-td {
+      color: $text-01;
+    }
+
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+      > .#{$prefix}--structured-list-td {
+      border-top-color: $ui-01;
+    }
+
+    .#{$prefix}--structured-list-th {
+      color: $text-01;
+    }
+    .#{$prefix}--structured-list-td {
+      color: $text-02;
+    }
+
+    .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
+      fill: $ibm-colors__gray-40;
+    }
+
+    .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row .#{$prefix}--structured-list-svg,
+    .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-td .#{$prefix}--structured-list-svg {
+      fill: $text-01;
+    }
+
+    // Skeleton State
+    .#{$prefix}--structured-list.#{$prefix}--skeleton {
+      .#{$prefix}--structured-list-th span {
+        @include skeleton--colors;
+      }
+    }
+
+    .#{$prefix}--structured-list.#{$prefix}--skeleton .#{$prefix}--structured-list-th span {
+      @include skeleton--colors;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('structured-list') {
   @if feature-flag-enabled('components-x') {
     @include structured-list--x;

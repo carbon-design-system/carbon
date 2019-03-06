@@ -359,6 +359,49 @@ $css--helpers: true;
   }
 }
 
+@mixin pagination--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--pagination {
+      background-color: $ui-01;
+      border-top-color: $ui-03;
+    }
+
+    .#{$prefix}--pagination__text {
+      color: $text-01;
+    }
+
+    span.#{$prefix}--pagination__text {
+      color: $text-02;
+    }
+
+    .#{$prefix}--pagination__button {
+      border-left-color: $ui-03;
+
+      &:hover {
+        .#{$prefix}--pagination__button-icon {
+          fill: $hover-secondary;
+        }
+      }
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      &:disabled:hover {
+        .#{$prefix}--pagination__button-icon {
+          fill: $ui-05;
+        }
+      }
+    }
+
+    .#{$prefix}--pagination__button--no-index {
+      fill: $disabled-02;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('pagination') {
   @if feature-flag-enabled('components-x') {
     @include pagination--x;

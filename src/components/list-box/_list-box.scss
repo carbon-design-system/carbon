@@ -619,6 +619,145 @@ $list-box-menu-width: rem(300px);
   }
 }
 
+@mixin listbox--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--list-box {
+      background-color: $field-01;
+      border-bottom-color: $ui-04;
+      color: $text-01;
+
+      &:hover {
+        background-color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--list-box[data-invalid],
+    .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus .#{$prefix}--list-box__label {
+      color: $support-01;
+    }
+
+    .#{$prefix}--list-box ~ .#{$prefix}--form-requirement {
+      color: $support-01;
+    }
+
+    .#{$prefix}--list-box--light {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
+    .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
+      background-color: transparent;
+    }
+
+    .#{$prefix}--list-box.#{$prefix}--list-box--inline {
+      background-color: inherit;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+      color: $text-01;
+    }
+
+    .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
+      outline-color: $interactive-01;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'],
+    .#{$prefix}--list-box.#{$prefix}--list-box--inline > .#{$prefix}--list-box__field:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--list-box__field:focus,
+    .#{$prefix}--list-box__field[aria-expanded='true'] {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--list-box__field[disabled] {
+      outline: none;
+    }
+
+    .#{$prefix}--list-box__label {
+      color: $text-01;
+    }
+
+    .#{$prefix}--list-box__menu-icon > svg {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--list-box__selection > svg {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--list-box__selection:focus {
+      outline-color: $interactive-01;
+    }
+
+    .#{$prefix}--list-box__selection--multi {
+      background-color: $interactive-01;
+      color: white;
+    }
+
+    .#{$prefix}--list-box__selection--multi > svg {
+      fill: white;
+    }
+
+    .#{$prefix}--list-box__selection--multi:focus,
+    .#{$prefix}--list-box__selection--multi:hover {
+      outline: none;
+    }
+
+    .#{$prefix}--list-box__menu {
+      @include box-shadow();
+      background-color: $ui-01;
+    }
+
+    .#{$prefix}--list-box__menu-item {
+      border-bottom-color: $ui-03;
+
+      &::before,
+      &::after {
+        background-color: $ui-01;
+      }
+
+      &:last-of-type {
+        border-bottom-color: $ui-01;
+      }
+
+      &:last-of-type:hover {
+        border-bottom-color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--list-box__menu-item:hover,
+    .#{$prefix}--list-box__menu-item--highlighted {
+      background-color: $ui-03;
+      color: $text-01;
+      border-bottom-color: $ui-01;
+
+      &::before,
+      &::after {
+        background-color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--list-box input[role='combobox'] {
+      background-color: inherit;
+    }
+
+    .#{$prefix}--list-box input[role='combobox']::placeholder {
+      color: $text-01;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('list-box') {
   @if feature-flag-enabled('components-x') {
     @include listbox--x;

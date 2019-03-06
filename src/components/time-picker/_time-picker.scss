@@ -195,6 +195,43 @@
   }
 }
 
+@mixin time-picker--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--time-picker__input-field {
+      @include focus-outline--colors('reset');
+      background-color: $field-01;
+      border-bottom-color: $ui-04;
+      color: $text-01;
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      &::placeholder {
+        color: $text-03;
+      }
+
+      &[data-invalid],
+      &[data-invalid]:focus {
+        @include focus-outline--colors('invalid');
+      }
+
+      & ~ .#{$prefix}--form-requirement {
+        color: $support-01;
+      }
+    }
+
+    .#{$prefix}--time-picker--light {
+      .#{$prefix}--time-picker__input-field,
+      .#{$prefix}--select-input {
+        background-color: $field-02;
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('time-picker') {
   @if feature-flag-enabled('components-x') {
     @include time-picker--x;

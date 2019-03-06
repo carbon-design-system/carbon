@@ -193,6 +193,39 @@
   }
 }
 
+@mixin form--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--label {
+      color: $text-02;
+    }
+
+    .#{$prefix}--label--disabled {
+      color: $disabled-02;
+    }
+
+    .#{$prefix}--label.#{$prefix}--skeleton {
+      @include skeleton--colors;
+    }
+
+    input[data-invalid],
+    textarea[data-invalid],
+    select[data-invalid],
+    .#{$prefix}--list-box[data-invalid] {
+      outline-width: $support-01;
+
+      ~ .#{$prefix}--form-requirement {
+        color: $support-01;
+      }
+    }
+
+    .#{$prefix}--form__helper-text {
+      color: $text-02;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('form') {
   @if feature-flag-enabled('components-x') {
     @include form--x;

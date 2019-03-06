@@ -216,6 +216,44 @@
   }
 }
 
+@mixin inline-notifications--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--inline-notification {
+      color: $text-01;
+    }
+
+    .#{$prefix}--inline-notification--error {
+      @include notification--experimental($support-01, $notification-error-background-color);
+    }
+
+    .#{$prefix}--inline-notification--success {
+      @include notification--experimental($support-02, $notification-success-background-color);
+    }
+
+    .#{$prefix}--inline-notification--info {
+      @include notification--experimental($support-04, $notification-info-background-color);
+    }
+
+    .#{$prefix}--inline-notification--warning {
+      @include notification--experimental($support-03, $notification-warning-background-color);
+    }
+
+    .#{$prefix}--inline-notification__close-button {
+      @include focus-outline--colors('reset');
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      .#{$prefix}--inline-notification__close-icon {
+        fill: $ui-05;
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('inline-notifications') {
   @if feature-flag-enabled('components-x') {
     @include inline-notifications--x;

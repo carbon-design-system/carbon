@@ -177,6 +177,59 @@
   }
 }
 
+@mixin text-area--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--text-area {
+      @include focus-outline--colors('reset');
+      background-color: $field-01;
+      color: $text-01;
+      border-bottom-color: $ui-04;
+
+      & ~ .#{$prefix}--form-requirement {
+        color: $support-01;
+      }
+    }
+
+    .#{$prefix}--text-area:focus,
+    .#{$prefix}--text-area:active {
+      @include focus-outline--colors('outline');
+    }
+
+    .#{$prefix}--text-area::-webkit-input-placeholder {
+      @include placeholder-colors;
+    }
+
+    .#{$prefix}--text-area--light {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--text-area:disabled {
+      background-color: $disabled-background-color;
+      border-bottom-color: transparent;
+    }
+
+    .#{$prefix}--text-area:disabled::-webkit-input-placeholder {
+      color: $disabled;
+    }
+
+    .#{$prefix}--text-area[data-invalid],
+    .#{$prefix}--text-area:invalid {
+      @include focus-outline--colors('invalid');
+      box-shadow: none;
+    }
+
+    #{$prefix}--text-area.#{$prefix}--skeleton {
+      @include skeleton--colors;
+
+      &::-webkit-input-placeholder {
+        color: transparent;
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('text-area') {
   @if feature-flag-enabled('components-x') {
     @include text-area--x;

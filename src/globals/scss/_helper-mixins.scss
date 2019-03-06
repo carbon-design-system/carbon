@@ -77,6 +77,29 @@
   }
 }
 
+@mixin focus-outline--colors($type: 'border') {
+  @if ($type == 'border') {
+    outline-color: $brand-01;
+  }
+
+  @if ($type == 'blurred') {
+    box-shadow: 0 0 0 3px $focus;
+    outline-color: transparent;
+  }
+
+  @if ($type == 'outline') {
+    outline-color: $brand-01;
+  }
+
+  @if ($type == 'invalid') {
+    outline-color: $support-01;
+  }
+
+  @if ($type == 'reset') {
+    outline-color: transparent;
+  }
+}
+
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transition: transform $speed;
@@ -161,6 +184,14 @@
     opacity: 0.3;
     background: $skeleton;
     animation: 3000ms ease-in-out skeleton infinite;
+  }
+}
+
+@mixin skeleton--colors {
+  background-color: $skeleton;
+
+  &:before {
+    background-color: $skeleton;
   }
 }
 

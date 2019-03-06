@@ -291,6 +291,55 @@
   }
 }
 
+@mixin modal--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--modal {
+      background-color: $overlay-01;
+    }
+
+    .#{$prefix}--modal--danger {
+      @include modal--color($support-01);
+    }
+
+    .#{$prefix}--modal-container {
+      @include layer('pop-out');
+      background-color: $ui-01;
+    }
+
+    .#{$prefix}--modal-header__label {
+      color: $text-02;
+    }
+
+    .#{$prefix}--modal-header__heading {
+      color: $text-01;
+    }
+
+    .#{$prefix}--modal-content {
+      color: $text-01;
+    }
+
+    .#{$prefix}--modal-footer {
+      background-color: $modal-footer-background-color;
+    }
+
+    .#{$prefix}--modal-close {
+      &:hover {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        border-color: $interactive-01;
+      }
+    }
+
+    .#{$prefix}--modal-close__icon {
+      fill: $icon-01;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('modal') {
   @if feature-flag-enabled('components-x') {
     @include modal--x;

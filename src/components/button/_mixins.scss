@@ -173,3 +173,48 @@
     fill: $icon-color;
   }
 }
+
+@mixin button-theme--colors($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+  @if feature-flag-enabled('components-x') {
+    background-color: $bg-color;
+    border-color: $border-color;
+    color: $font-color;
+
+    &:hover {
+      background-color: $hover-bg-color;
+    }
+
+    &::before {
+      border-color: transparent;
+    }
+
+    &:focus::before {
+      border-color: $ui-02;
+    }
+
+    &::after {
+      border-color: transparent;
+    }
+
+    &:focus::after {
+      border-color: $focus;
+    }
+
+    &:disabled:hover,
+    &:disabled:focus {
+      color: $ui-04;
+      background-color: $ibm-colors__gray-30;
+      border-color: $ibm-colors__gray-30;
+    }
+
+    &:active {
+      background-color: $active-color;
+    }
+
+    .#{$prefix}--btn__icon {
+      fill: $icon-color;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}

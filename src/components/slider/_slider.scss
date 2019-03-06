@@ -314,6 +314,63 @@
   }
 }
 
+@mixin slider--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--slider--disabled ~ .#{$prefix}--slider__range-label {
+      color: $disabled;
+    }
+
+    .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+      background-color: $ui-03;
+
+      &:focus {
+        background-color: $ui-03;
+      }
+
+      &:active {
+        background-color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--slider__range-label {
+      color: $text-01;
+    }
+
+    .#{$prefix}--slider__track {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--slider__track:before {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--slider__filled-track {
+      background-color: $ui-05;
+    }
+
+    .#{$prefix}--slider__thumb {
+      background-color: $ui-05;
+
+      &:focus {
+        box-shadow: inset 0 0 0 2px $interactive-01, inset 0 0 0 3px $ui-01;
+        background-color: $interactive-01;
+      }
+
+      &:active {
+        box-shadow: inset 0 0 0 2px $interactive-01;
+      }
+    }
+
+    .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+      background-color: $interactive-01;
+    }
+
+    .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__range-label {
+      @include skeleton--colors;
+    }
+  }
+}
+
 @include exports('slider') {
   @if feature-flag-enabled('components-x') {
     @include slider--x;

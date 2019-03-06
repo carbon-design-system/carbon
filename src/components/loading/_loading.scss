@@ -123,6 +123,28 @@
   }
 }
 
+@mixin loading--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--loading__stroke {
+      stroke: $interactive-01;
+    }
+
+    .#{$prefix}--loading--small .#{$prefix}--loading__svg {
+      stroke: $interactive-01;
+    }
+
+    .#{$prefix}--loading__background {
+      stroke: $ui-03;
+    }
+
+    .#{$prefix}--loading-overlay {
+      background-color: rgba($ui-02, 0.6);
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('loading') {
   @if feature-flag-enabled('components-x') {
     @include loading--x;

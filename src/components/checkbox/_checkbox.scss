@@ -341,6 +341,54 @@
   }
 }
 
+@mixin checkbox--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--checkbox-label::before {
+      border-color: $ui-05;
+    }
+
+    .#{$prefix}--checkbox-label::after {
+      border-left-color: $ui-02;
+      border-bottom-color: $ui-02;
+    }
+
+    .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+      background-color: $text-01;
+      border-color: $text-01;
+    }
+
+    .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
+      border-left-color: $inverse-01;
+      border-bottom-color: $inverse-01;
+    }
+
+    .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox-label__focus::before,
+    .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before,
+    .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
+      border-color: $interactive-01;
+    }
+
+    .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
+      color: $text-03;
+    }
+
+    .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true']::before {
+      border-color: $text-03;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('checkbox') {
   @if feature-flag-enabled('components-x') {
     @include checkbox--x;

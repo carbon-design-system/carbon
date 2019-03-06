@@ -327,6 +327,75 @@
   }
 }
 
+@mixin search--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--search-input {
+      @include focus-outline--colors('reset');
+      background-color: $field-01;
+      color: $text-01;
+      border-bottom-color: $ui-04;
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      &::placeholder {
+        color: $text-03;
+      }
+    }
+
+    .#{$prefix}--search-input[disabled] {
+      color: $disabled;
+      background-color: $disabled-background-color;
+
+      &::placeholder {
+        color: $disabled;
+      }
+    }
+
+    .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
+      fill: $disabled;
+    }
+
+    .#{$prefix}--search--light .#{$prefix}--search-input {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--search-magnifier {
+      fill: $text-02;
+    }
+
+    .#{$prefix}--search-close {
+      @include focus-outline--colors('reset');
+      fill: $icon-01;
+
+      &:hover {
+        background-color: $hover-ui;
+        border-bottom-color: $ui-04;
+      }
+    }
+
+    .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
+      border-color: transparent;
+    }
+
+    .#{$prefix}--search-close:focus {
+      @include focus-outline--colors('outline');
+    }
+
+    .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
+    .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
+      @include skeleton--colors;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('search') {
   @if feature-flag-enabled('components-x') {
     @include search--x;

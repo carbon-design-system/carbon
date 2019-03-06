@@ -187,6 +187,46 @@
   }
 }
 
+@mixin radio-button--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--radio-button__appearance {
+      background-color: $inverse-01;
+      border-color: $ui-05;
+    }
+
+    .#{$prefix}--radio-button:checked + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
+      border-color: $ui-05;
+
+      &:before {
+        background-color: $ui-05;
+      }
+    }
+
+    .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
+      border-color: transparent;
+    }
+
+    .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+      color: $disabled;
+    }
+
+    .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance,
+    .#{$prefix}--radio-button:disabled:checked + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
+      border-color: $disabled;
+    }
+
+    .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
+      @include focus-outline--colors('blurred');
+    }
+
+    .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
+      @include skeleton--colors;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('radio-button') {
   @if feature-flag-enabled('components-x') {
     @include radio-button--experimental;

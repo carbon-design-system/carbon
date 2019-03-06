@@ -498,6 +498,123 @@
   }
 }
 
+@mixin dropdown--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--dropdown {
+      @include focus-outline--colors('reset');
+      background-color: $field-01;
+      border-bottom-color: 1px solid $ui-04;
+      color: $text-01;
+      outline-color: transparent;
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--dropdown[data-invalid] {
+      @include focus-outline--colors('invalid');
+
+      + .#{$prefix}--form-requirement {
+        color: $support-01;
+      }
+    }
+
+    .#{$prefix}--dropdown__invalid {
+      fill: $support-01;
+    }
+
+    .#{$prefix}--dropdown--open {
+      background-color: $hover-ui;
+    }
+
+    .#{$prefix}--dropdown--open:focus {
+      outline-color: transparent;
+    }
+
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+
+    .#{$prefix}--dropdown--light {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
+      color: $text-01;
+    }
+
+    .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+      background-color: $ui-01;
+    }
+
+    .#{$prefix}--dropdown-item {
+      &:hover {
+        background-color: $hover-ui;
+      }
+
+      &:active {
+        background-color: $active-ui;
+      }
+    }
+
+    .#{$prefix}--dropdown-link {
+      @include focus-outline--colors('reset');
+      border-bottom-color: $ui-03;
+
+      &:focus {
+        @include focus-outline--colors('outline');
+      }
+
+      &:hover {
+        color: $text-01;
+      }
+    }
+
+    .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
+      border-bottom-color: $hover-ui;
+    }
+
+    .#{$prefix}--dropdown--inline {
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
+      outline-color: $interactive-01;
+    }
+
+    .#{$prefix}--dropdown--inline[data-value=''] .#{$prefix}--dropdown-text {
+      color: $text-01;
+    }
+
+    .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
+      color: $text-01;
+    }
+
+    .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+
+    .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+    .#{$prefix}--dropdown.#{$prefix}--skeleton {
+      @include skeleton--colors;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('dropdown') {
   @if feature-flag-enabled('components-x') {
     @include dropdown--x;

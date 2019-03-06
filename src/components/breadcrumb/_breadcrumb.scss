@@ -119,6 +119,16 @@
   }
 }
 
+@mixin breadcrumb--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--breadcrumb-item::after {
+      color: $text-02;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('breadcrumb') {
   @if feature-flag-enabled('components-x') {
     @include breadcrumb-experimental;

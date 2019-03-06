@@ -394,6 +394,61 @@
   }
 }
 
+@mixin toggle--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--toggle__appearance {
+      &:before {
+        background-color: $ui-03;
+      }
+
+      &:after {
+        background-color: $ui-02;
+      }
+    }
+
+    .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+      &:before {
+        background-color: $toggle-background-color;
+      }
+    }
+
+    .#{$prefix}--toggle + .#{$prefix}--toggle__label,
+    .#{$prefix}--toggle + .#{$prefix}--toggle__label {
+      .#{$prefix}--toggle__appearance:before {
+        box-shadow: 0 0 0 2px transparent;
+      }
+    }
+    .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
+    .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
+      .#{$prefix}--toggle__appearance:before {
+        box-shadow: 0 0 0 2px $focus;
+      }
+    }
+
+    .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+      &:before {
+        background-color: $ibm-colors__gray-20;
+        border-color: $ibm-colors__gray-20;
+      }
+
+      &:after {
+        background-color: $disabled;
+      }
+    }
+
+    .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--left,
+    .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--right {
+      color: $disabled;
+    }
+
+    .#{$prefix}--toggle:disabled:active + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance:before {
+      box-shadow: none;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('toggle') {
   @if feature-flag-enabled('components-x') {
     @include toggle--experimental;

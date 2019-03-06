@@ -285,6 +285,47 @@
   }
 }
 
+@mixin accordion--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--accordion__item {
+      border-top-color: $ui-03;
+
+      &:last-child {
+        border-bottom-color: $ui-03;
+      }
+    }
+
+    .#{$prefix}--accordion__heading {
+      color: $text-01;
+
+      &:hover:before {
+        background-color: $hover-ui;
+      }
+
+      &:focus:before {
+        @include focus-outline--colors('outline');
+      }
+    }
+
+    .#{$prefix}--accordion__arrow {
+      @include focus-outline--colors('reset');
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--accordion__item--active {
+      .#{$prefix}--accordion__arrow {
+        fill: $ui-05;
+      }
+    }
+
+    .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+      fill: $ui-05;
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('accordion') {
   @if feature-flag-enabled('components-x') {
     @include accordion--x;

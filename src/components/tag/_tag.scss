@@ -150,6 +150,65 @@
   }
 }
 
+@mixin tags--colors {
+  @if feature-flag-enabled('components-x') {
+    .#{$prefix}--tag {
+      &--basic,
+      &.#{$prefix}--skeleton {
+        @include tag-theme--x($bg-color: $ui-03, $text-color: $text-01);
+      }
+    }
+
+    .#{$prefix}--tag--red {
+      @include tag-theme--x($ibm-colors__red-20, $ibm-colors__red-70);
+    }
+
+    .#{$prefix}--tag--magenta {
+      @include tag-theme--x($ibm-colors__magenta-20, $ibm-colors__magenta-70);
+    }
+
+    .#{$prefix}--tag--purple {
+      @include tag-theme--x($ibm-colors__purple-20, $ibm-colors__purple-70);
+    }
+
+    .#{$prefix}--tag--blue {
+      @include tag-theme--x($ibm-colors__blue-20, $ibm-colors__blue-70);
+    }
+
+    .#{$prefix}--tag--cyan {
+      @include tag-theme--x($ibm-colors__cyan-20, $ibm-colors__cyan-70);
+    }
+
+    .#{$prefix}--tag--teal {
+      @include tag-theme--x($ibm-colors__teal-20, $ibm-colors__teal-70);
+    }
+
+    .#{$prefix}--tag--green {
+      @include tag-theme--x($ibm-colors__green-20, $ibm-colors__green-70);
+    }
+
+    .#{$prefix}--tag--cool-gray {
+      @include tag-theme--x($ibm-colors__cool-gray-20, $ibm-colors__cool-gray-100);
+    }
+
+    .#{$prefix}--tag--warm-gray {
+      @include tag-theme--x($ibm-colors__warm-gray-20, $ibm-colors__warm-gray-100);
+    }
+
+    .#{$prefix}--tag--disabled {
+      @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-30);
+    }
+
+    .#{$prefix}--tag.#{$prefix}--skeleton {
+      &:after {
+        @include skeleton--colors;
+      }
+    }
+  } @else {
+    // TODO non-experiment color overrides
+  }
+}
+
 @include exports('tags') {
   @if feature-flag-enabled('components-x') {
     @include tags--x;
