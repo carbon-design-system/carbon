@@ -17,6 +17,7 @@ import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 const noop = () => undefined;
@@ -249,36 +250,64 @@ export default class MultiSelect extends React.Component {
                 </ListBox.Field>
                 {isOpen && (
                   <ListBox.Menu>
-                    {sortItems(items, {
-                      selectedItems,
-                      itemToString,
-                      compareItems,
-                      locale: 'en',
-                    }).map((item, index) => {
-                      const itemProps = getItemProps({ item });
-                      const itemText = itemToString(item);
-                      const isChecked =
-                        selectedItem.filter(selected => isEqual(selected, item))
-                          .length > 0;
-                      return (
-                        <ListBox.MenuItem
-                          key={itemProps.id}
-                          isActive={isChecked}
-                          isHighlighted={highlightedIndex === index}
-                          {...itemProps}>
-                          <Checkbox
-                            id={`${itemProps.id}__checkbox`}
-                            title={useTitleInItem ? itemText : null}
-                            name={itemText}
-                            checked={isChecked}
-                            disabled={disabled}
-                            readOnly={true}
-                            tabIndex="-1"
-                            labelText={itemText}
-                          />
-                        </ListBox.MenuItem>
-                      );
-                    })}
+                    {componentsX
+                      ? items.map((item, index) => {
+                          const itemProps = getItemProps({ item });
+                          const itemText = itemToString(item);
+                          const isChecked =
+                            selectedItem.filter(selected =>
+                              isEqual(selected, item)
+                            ).length > 0;
+                          return (
+                            <ListBox.MenuItem
+                              key={itemProps.id}
+                              isActive={isChecked}
+                              isHighlighted={highlightedIndex === index}
+                              {...itemProps}>
+                              <Checkbox
+                                id={`${itemProps.id}__checkbox`}
+                                title={useTitleInItem ? itemText : null}
+                                name={itemText}
+                                checked={isChecked}
+                                disabled={disabled}
+                                readOnly={true}
+                                tabIndex="-1"
+                                labelText={itemText}
+                              />
+                            </ListBox.MenuItem>
+                          );
+                        })
+                      : sortItems(items, {
+                          selectedItems,
+                          itemToString,
+                          compareItems,
+                          locale: 'en',
+                        }).map((item, index) => {
+                          const itemProps = getItemProps({ item });
+                          const itemText = itemToString(item);
+                          const isChecked =
+                            selectedItem.filter(selected =>
+                              isEqual(selected, item)
+                            ).length > 0;
+                          return (
+                            <ListBox.MenuItem
+                              key={itemProps.id}
+                              isActive={isChecked}
+                              isHighlighted={highlightedIndex === index}
+                              {...itemProps}>
+                              <Checkbox
+                                id={`${itemProps.id}__checkbox`}
+                                title={useTitleInItem ? itemText : null}
+                                name={itemText}
+                                checked={isChecked}
+                                disabled={disabled}
+                                readOnly={true}
+                                tabIndex="-1"
+                                labelText={itemText}
+                              />
+                            </ListBox.MenuItem>
+                          );
+                        })}
                   </ListBox.Menu>
                 )}
               </ListBox>
