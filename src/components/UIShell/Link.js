@@ -14,9 +14,10 @@ import React from 'react';
  * in their own components to support use-cases like `react-router` or
  * `@reach/router`
  */
-const Link = ({ element, ...rest }) => {
-  return React.createElement(element, rest);
-};
+const Link = React.forwardRef((props, ref) => {
+  const { element, ...rest } = props;
+  return React.createElement(element, { ...rest, ref });
+});
 
 const LinkPropTypes = {
   /**
@@ -30,8 +31,8 @@ const LinkPropTypes = {
   ]),
 };
 
+Link.displayName = 'Link';
 Link.propTypes = LinkPropTypes;
-
 Link.defaultProps = {
   element: 'a',
 };
