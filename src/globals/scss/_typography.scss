@@ -7,13 +7,25 @@
 
 @import 'vars';
 
+/// @access public
+/// @deprecated
+/// @group typography
+/// @returns font-family types
 $font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
 $font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
 $font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
 $font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
 
+/// @access public
+/// @group typography
+/// @returns 16px font size
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
+/// @access public
+/// @deprecated
+/// @type Map
+/// @group typography
+/// @returns different type sizes in rem
 $typescale-map: (
   'giga': 4.75rem,
   'mega': 3.375rem,
@@ -29,6 +41,11 @@ $typescale-map: (
   'p': 1rem,
 );
 
+/// @access public
+/// @deprecated
+/// @group typography
+/// @param {Map} $size - value of type size
+/// @returns type size in rem from typescale-map
 @mixin typescale($size) {
   @if map-has-key($typescale-map, $size) {
     font-size: map-get($typescale-map, $size);
@@ -37,18 +54,36 @@ $typescale-map: (
   }
 }
 
+/// @access public
+/// @param {Value} $px - value of type in pixels
+/// @returns type size converted to rem
+/// @example - rem(48px);
 @function rem($px) {
   @return ($px / $base-font-size) * 1rem;
 }
 
+/// @access public
+/// @param {Value} $px - value of type in pixels
+/// @returns type size converted to em
+/// @example - em(48px);
 @function em($px) {
   @return ($px / $base-font-size) * 1em;
 }
 
+/// @access public
+/// @deprecated
+/// @returns helvetica font family
+/// @group typography
+/// @example - @include helvetica;
 @mixin helvetica {
   font-family: $font-family-helvetica;
 }
 
+/// @access public
+/// @deprecated
+/// @returns uses sans-serif font type if $css--plex is true, else uses helvetica
+/// @group typography
+/// @example - @include font-family;
 @mixin font-family {
   @if global-variable-exists('css--plex') and $css--plex == true {
     font-family: $font-family-sans-serif;
@@ -57,7 +92,10 @@ $typescale-map: (
   }
 }
 
-// There are two line heights to choose from. One for headings and one for body text
+/// @access public
+/// @content There are two line heights to choose from. One for headings and one for body text
+/// @param {String} $el - 'heading' or 'body'
+/// @example @include line-height('heading');
 @mixin line-height($el) {
   @if $el == 'heading' {
     line-height: 1.25;
@@ -68,16 +106,21 @@ $typescale-map: (
   }
 }
 
-// Only applied to bold weight text
+/// @access public
+/// @require bold-text Only applied to bold weight text
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/// @access public
 @mixin letter-spacing {
   letter-spacing: 0;
 }
 
+/// @access public
+/// @type Map
+/// @returns mapped out pixel equivalent in rem
 $font-size-map: (
   '76': 4.75rem,
   '54': 3.375rem,
@@ -91,6 +134,12 @@ $font-size-map: (
   '11': 0.6875rem,
 );
 
+/// @access public
+/// @deprecated
+/// @param {Map} $size value from $font-size-map
+/// @returns font size in rem from $font-size-map
+/// @require $font-size-map
+/// @example @include font-size('76');
 @mixin font-size($size) {
   @if map-has-key($font-size-map, $size) {
     font-size: map-get($font-size-map, $size);
@@ -102,6 +151,12 @@ $font-size-map: (
 // 🔬 Experimental
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
+/// @access public
+/// @returns different type styles per token.
+/// @see $tokens Map in src/globals/scss/vendor/@carbon/type/scss/_styles.scss
+/// @param {String} $name - the name of the token to get the styles for
+/// @param {Boolean} $fluid [false] - specify whether to include fluid styles
+/// @example -  @include type-style('body-short-01');
 @mixin type-style($name, $fluid: false) {
   @include carbon--type-style($name, $fluid);
 }
