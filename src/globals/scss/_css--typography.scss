@@ -135,7 +135,8 @@
 
 @include exports('css--typography') {
   @if global-variable-exists('css--typography') == false or $css--typography == true {
-    // TODO: Use `@include carbon--type-classes` for `components-x`
-    @include typography;
+    @if not feature-flag-enabled('components-x') {
+      @include typography;
+    }
   }
 }
