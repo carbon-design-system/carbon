@@ -29,7 +29,7 @@ const Select = ({
   invalidText,
   helperText,
   light,
-  forwardRef: ref,
+  innerRef: ref,
   ...other
 }) => {
   const selectClasses = classNames({
@@ -180,7 +180,7 @@ Select.defaultProps = {
   light: false,
 };
 
-const forwardRef = (props, ref) => <Select {...props} forwardRef={ref} />;
+const forwardRef = (props, ref) => <Select {...props} innerRef={ref} />;
 
 forwardRef.displayName = 'Select';
 

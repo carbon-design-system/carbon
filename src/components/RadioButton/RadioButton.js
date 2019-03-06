@@ -10,10 +10,11 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import uid from '../../tools/uniqueId';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
-export default class RadioButton extends React.Component {
+class RadioButton extends React.Component {
   static propTypes = {
     /**
      * Specify whether the <RadioButton> is currently checked
@@ -85,7 +86,7 @@ export default class RadioButton extends React.Component {
       'radioButtonWrapper',
       this.props.className
     );
-    const { labelText, ...other } = this.props;
+    const { labelText, innerRef: ref, ...other } = this.props;
     return (
       <div className={wrapperClasses}>
         <input
@@ -94,6 +95,7 @@ export default class RadioButton extends React.Component {
           className={`${prefix}--radio-button`}
           onChange={this.handleChange}
           id={this.uid}
+          ref={ref}
         />
         <label
           htmlFor={this.uid}
@@ -106,3 +108,13 @@ export default class RadioButton extends React.Component {
     );
   }
 }
+
+export default (!breakingChangesX
+  ? RadioButton
+  : (() => {
+      const forwardRef = (props, ref) => (
+        <RadioButton {...props} innerRef={ref} />
+      );
+      forwardRef.displayName = 'RadioButton';
+      return React.forwardRef(forwardRef);
+    })());

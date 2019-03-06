@@ -25,7 +25,7 @@ const TextInput = ({
   invalidText,
   helperText,
   light,
-  forwardRef: ref,
+  innerRef: ref,
   ...other
 }) => {
   const textInputProps = {
@@ -183,7 +183,7 @@ TextInput.defaultProps = {
   light: false,
 };
 
-const forwardRef = (props, ref) => <TextInput {...props} forwardRef={ref} />;
+const forwardRef = (props, ref) => <TextInput {...props} innerRef={ref} />;
 
 forwardRef.displayName = 'TextInput';
 

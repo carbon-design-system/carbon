@@ -21,7 +21,7 @@ const Checkbox = ({
   hideLabel,
   wrapperClassName,
   title = '',
-  forwardRef: ref,
+  innerRef: ref,
   ...other
 }) => {
   const labelClasses = classNames(`${prefix}--checkbox-label`, className);
@@ -126,7 +126,7 @@ Checkbox.defaultProps = {
   indeterminate: false,
 };
 
-const forwardRef = (props, ref) => <Checkbox {...props} forwardRef={ref} />;
+const forwardRef = (props, ref) => <Checkbox {...props} innerRef={ref} />;
 
 forwardRef.displayName = 'Checkbox';
 

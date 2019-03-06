@@ -8,10 +8,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 
-export default class InlineCheckbox extends React.Component {
+class InlineCheckbox extends React.Component {
   static propTypes = {
     /**
      * Specify the label for the control
@@ -97,6 +99,7 @@ export default class InlineCheckbox extends React.Component {
       onClick,
       onKeyDown,
       title = undefined,
+      innerRef: ref,
     } = this.props;
     const inputProps = {
       id,
@@ -108,7 +111,7 @@ export default class InlineCheckbox extends React.Component {
       onKeyDown,
       className: `${prefix}--checkbox`,
       type: 'checkbox',
-      ref: this.handleRef,
+      ref: mergeRefs(ref, this.handleRef),
       checked: false,
       disabled,
     };
@@ -138,3 +141,13 @@ export default class InlineCheckbox extends React.Component {
     );
   }
 }
+
+export default (!breakingChangesX
+  ? InlineCheckbox
+  : (() => {
+      const forwardRef = (props, ref) => (
+        <InlineCheckbox {...props} innerRef={ref} />
+      );
+      forwardRef.displayName = 'InlineCheckbox';
+      return React.forwardRef(forwardRef);
+    })());

@@ -202,4 +202,12 @@ Button.defaultProps = {
   kind: 'primary',
 };
 
-export default Button;
+export default (!breakingChangesX
+  ? Button
+  : (() => {
+      const forwardRef = (props, ref) => {
+        return <Button {...props} inputref={ref} />;
+      };
+      forwardRef.displayName = 'Button';
+      return React.forwardRef(forwardRef);
+    })());

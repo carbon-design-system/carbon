@@ -14,7 +14,8 @@ import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import Icon from '../Icon';
-import { componentsX } from '../../internal/FeatureFlags';
+import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 
@@ -28,7 +29,7 @@ const defaultTranslations = {
   [translationIds['decrement.number']]: 'Decrement number',
 };
 
-export default class NumberInput extends Component {
+class NumberInput extends Component {
   constructor(props) {
     super(props);
     let value = props.value;
@@ -214,6 +215,7 @@ export default class NumberInput extends Component {
       helperText,
       light,
       allowEmpty,
+      innerRef: ref,
       translateWithId: t,
       ...other
     } = this.props;
@@ -283,7 +285,7 @@ export default class NumberInput extends Component {
                   pattern="[0-9]*"
                   {...other}
                   {...props}
-                  ref={this._handleInputRef}
+                  ref={mergeRefs(ref, this._handleInputRef)}
                 />
                 {invalid && (
                   <WarningFilled16
@@ -359,7 +361,7 @@ export default class NumberInput extends Component {
                 pattern="[0-9]*"
                 {...other}
                 {...props}
-                ref={this._handleInputRef}
+                ref={mergeRefs(ref, this._handleInputRef)}
               />
             </>
           )}
@@ -370,3 +372,13 @@ export default class NumberInput extends Component {
     );
   }
 }
+
+export default (!breakingChangesX
+  ? NumberInput
+  : (() => {
+      const forwardRef = (props, ref) => (
+        <NumberInput {...props} innerRef={ref} />
+      );
+      forwardRef.displayName = 'NumberInput';
+      return React.forwardRef(forwardRef);
+    })());
