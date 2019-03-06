@@ -270,7 +270,7 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $text-04, $active-danger);
+    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
     &:hover {
       border: $button-border-width solid transparent;
