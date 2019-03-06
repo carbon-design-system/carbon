@@ -253,6 +253,7 @@
 
     .#{$prefix}--btn__icon {
       position: static;
+      margin-left: $spacing-xs;
       transform: none;
     }
 
@@ -266,6 +267,10 @@
       .#{$prefix}--btn__icon {
         fill: $disabled;
       }
+    }
+
+    &.#{$prefix}--btn--sm {
+      padding: 0.375rem 1rem;
     }
   }
 
