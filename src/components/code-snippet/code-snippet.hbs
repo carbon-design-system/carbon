@@ -7,10 +7,10 @@
 
 {{#is variant "inline"}}
 <p>Here is an example of a text that a user would be reading. In this paragraph would be
-  <button data-copy-btn="" class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--inline {{@root.prefix}}--btn--copy{{#if light}} {{@root.prefix}}--snippet--light{{/if}}"
+  <button data-copy-btn="" type="button" class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--inline {{@root.prefix}}--btn--copy{{#if light}} {{@root.prefix}}--snippet--light{{/if}}"
     aria-label="Copy code" tabindex="0">
     <code>inline code</code>
-    <div class="{{@root.prefix}}--btn--copy__feedback" data-feedback="Copied!"></div>
+    <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
   </button>
   that the user could look at and copy in to their code editor.</p>
 {{else}}
@@ -41,7 +41,7 @@
   );</code>
     </pre>
 </div>
-<button data-copy-btn class="{{@root.prefix}}--snippet-button" aria-label="Copy code" tabindex="0">
+<button data-copy-btn class="{{@root.prefix}}--snippet-button" type="button" aria-label="Copy" tabindex="0">
   {{#if @root.featureFlags.componentsX}}
   {{ carbon-icon 'Copy16' class=(add @root.prefix '--snippet__icon')}}
   {{else}}
@@ -50,7 +50,7 @@
     <path d="M11 4.2V8h3.8L11 4.2zM15 9h-4c-.6 0-1-.4-1-1V4H4.5c-.3 0-.5.2-.5.5v10c0 .3.2.5.5.5h10c.3 0 .5-.2.5-.5V9zm-4-6c.1 0 .3.1.4.1l4.5 4.5c0 .1.1.3.1.4v6.5c0 .8-.7 1.5-1.5 1.5h-10c-.8 0-1.5-.7-1.5-1.5v-10C3 3.7 3.7 3 4.5 3H11z" />
   </svg>
   {{/if}}
-  <div class="{{@root.prefix}}--btn--copy__feedback" data-feedback="Copied!"></div>
+  <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
 </button>
 {{#is variant "multi"}}
 <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--ghost {{@root.prefix}}--btn--sm {{@root.prefix}}--snippet-btn--expand"

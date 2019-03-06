@@ -190,12 +190,17 @@
 @mixin checkbox--x {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-bottom: rem(6px);
+    margin-bottom: rem(8px);
   }
 
   // Spacing above collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:first-of-type {
     margin-top: rem(3px);
+  }
+
+  // Remove spacing above collection of checkboxes if label is present
+  .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-top: 0;
   }
 
   // Spacing below collection of checkboxes
@@ -248,7 +253,7 @@
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
     border: 1px solid $ui-05;
-    border-radius: 2px;
+    border-radius: 1px;
   }
 
   // Create the appearance of the check in the `after` pseudo-element
@@ -292,7 +297,7 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
-    border-bottom: 1.5px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
     width: rem(8px);
     top: rem(11px);
   }
