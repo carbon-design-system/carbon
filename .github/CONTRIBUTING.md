@@ -84,6 +84,8 @@ If your issue appears to be a bug, and hasn't been reported, open a new issue. H
 
    **Note:** the optional commit -a command line option will automatically "add" and "rm" edited files. See [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/) and [writing good commit messages](https://github.com/erlang/otp/wiki/Writing-good-commit-messages) for more details on commit messages.
 
+   Carbon Elements also uses a commit format called [Conventional Commits](https://www.conventionalcommits.org). This format is used to help automate details about our project and how it changes. When committing changes, there will be a tool that automatically looks at commits and will check to see if the commit matches the format defined by Conventional Commits.
+
 7. Once ready for feedback from other contributors and maintainers, **push your commits to your fork** (be sure to run `yarn ci-check` before pushing, to make sure your code passes linting and unit tests):
 
    ```
