@@ -7,6 +7,10 @@
 
 @import 'helper-classes';
 
+/// @deprecated
+/// @access private
+/// @type Map
+/// @group @mixin breakpoint/max-breakpoint
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
@@ -19,6 +23,10 @@ $breakpoints: (
   max: 1584px,
 );
 
+/// @deprecated
+/// @access private
+/// @type Map
+/// @group @function padding();
 $padding: (
   'mobile': 3%,
   'xs': 5%,
@@ -85,6 +93,9 @@ $padding: (
   }
 }
 
+/// @access private
+/// @type Map
+/// @group @function z();
 $z-indexes: (
   modal: 9000,
   overlay: 8000,

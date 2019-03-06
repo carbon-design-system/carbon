@@ -12,7 +12,10 @@
 // Initialize our feature flag map with default values
 $feature-flags: () !default;
 
-// Default feature flag values
+/// @access private
+/// @type Map | Bool
+/// @group feature-flags
+/// @content -  Default feature flag values
 $default-feature-flags: (
   components-x: false,
   breaking-changes-x: false,
@@ -22,13 +25,18 @@ $default-feature-flags: (
   grid--fallback: false,
 );
 
+/// @access private
+/// @type Bool
+/// @group feature-flags
 $did-warn-diverged-feature-flags: false !default !global;
 
-/// Look for user-defined feature flags that are different from default ones,
-/// and warn them before merging them.
+/// @access private
+/// @group feature-flags
+/// @content - Look for user-defined feature flags that are different from default ones, and warn them before merging them.
 /// @param {Map} $dst - The feature flags to merge to (default feature flags).
 /// @param {Map} $src - The feature flags to merge from (user-defined feature flags).
 /// @returns {Map} - The result of `map-merge($dst, $src)`.
+/// @example - $feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
 @function merge-feature-flags($dst, $src) {
   @if (not $did-warn-diverged-feature-flags) {
     $diverged: ();
