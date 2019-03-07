@@ -11,6 +11,7 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/css--typography';
 @import '../link/link';
+@import '../../globals/scss/functions';
 
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
@@ -70,45 +71,54 @@
   }
 }
 
-@mixin breadcrumb-experimental {
+@mixin breadcrumb--x {
   .#{$prefix}--breadcrumb {
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
+
     display: inline;
 
-    @include breakpoint(bp--xs--major) {
-      display: flex;
-      flex-wrap: wrap;
+    @if feature-flag-enabled('grid') {
+      @include carbon--breakpoint(md) {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    } @else {
+      @include breakpoint(bp--xs--major) {
+        display: flex;
+        flex-wrap: wrap;
+      }
     }
   }
 
   .#{$prefix}--breadcrumb-item {
-    margin-right: $spacing-xs;
+    position: relative;
     display: flex;
     align-items: center;
-    line-height: 1.25; //needed for correct spacing for underline hover
+    margin-right: $spacing-xs;
   }
 
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
+    color: $text-01;
     margin-left: $spacing-xs;
-    color: $text-02;
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {
     content: '';
   }
 
-  .#{$prefix}--breadcrumb-item:last-child {
+  .#{$prefix}--breadcrumb-item:last-child,
+  .#{$prefix}--breadcrumb-item:last-child::after {
     margin-right: 0;
-
-    &::after {
-      margin-right: 0;
-    }
   }
 
   .#{$prefix}--breadcrumb .#{$prefix}--link {
     white-space: nowrap;
+  }
+
+  .#{$prefix}--breadcrumb-item [aria-current='page'],
+  .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current .#{$prefix}--link {
+    color: $text-01;
   }
 
   // Skeleton State
@@ -121,7 +131,7 @@
 
 @include exports('breadcrumb') {
   @if feature-flag-enabled('components-x') {
-    @include breadcrumb-experimental;
+    @include breadcrumb--x;
   } @else {
     @include breadcrumb;
   }
