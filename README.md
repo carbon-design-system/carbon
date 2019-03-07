@@ -70,6 +70,12 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
      $ export CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true
      ```
 
+   - `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental changes:
+
+     ```
+     $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
+     ```
+
 Caveats:
 
 - `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true` and `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true` make WebPack builds slightly slower.
