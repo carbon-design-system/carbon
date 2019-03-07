@@ -281,6 +281,8 @@
     width: rem(40px);
     right: 0;
     fill: $icon-01;
+    border: 2px solid transparent;
+    border-left: none;
 
     &:hover {
       background-color: $hover-ui;
@@ -293,8 +295,8 @@
   }
 
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
-    border: 2px solid transparent;
-    background-clip: content-box;
+    border: 2px solid $focus;
+    border-left: none;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-close {
