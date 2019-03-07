@@ -128,7 +128,7 @@
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
-    margin-bottom: $spacing-3xs;
+    margin-bottom: $spacing-xs;
     line-height: rem(16px);
   }
 
@@ -179,6 +179,10 @@
     overflow: hidden;
     line-height: 1.5;
     display: none;
+  }
+
+  .#{$prefix}--label + .#{$prefix}--form__helper-text {
+    margin-top: rem(-6px); // when both helper text and label are rendered
   }
 
   .#{$prefix}--form__helper-text {

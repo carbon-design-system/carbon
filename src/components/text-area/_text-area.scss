@@ -95,10 +95,6 @@
 }
 
 @mixin text-area--x {
-  .#{$prefix}--label + .#{$prefix}--text-area__wrapper {
-    margin-top: $spacing-xs;
-  }
-
   .#{$prefix}--text-area {
     @include reset;
     @include type-style('body-long-01');

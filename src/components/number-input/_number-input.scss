@@ -302,6 +302,11 @@
     &:hover {
       color: $icon-01;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $disabled;
+    }
   }
 
   .#{$prefix}--number[data-invalid] {
