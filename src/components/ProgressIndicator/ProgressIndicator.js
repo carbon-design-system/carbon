@@ -142,7 +142,7 @@ ProgressStep.propTypes = {
    * An optional parameter to allow for overflow content to be rendered in a
    * tooltip.
    */
-  renderLabel: PropTypes.function,
+  renderLabel: PropTypes.func,
 
   /**
    * Provide the props that describe a progress step tooltip
