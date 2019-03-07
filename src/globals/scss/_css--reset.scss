@@ -10,7 +10,7 @@
 @import './vendor/@carbon/elements/scss/type/reset';
 
 @mixin reset {
-  @if global-variable-exists(css--reset) == false or $css--reset == false {
+  @if global-variable-exists(css--reset) ==false or $css--reset==false {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -28,7 +28,7 @@
 }
 
 @include exports('css--reset') {
-  @if global-variable-exists(css--reset) == false or $css--reset == true {
+  @if global-variable-exists(css--reset) ==false or $css--reset==true {
     @if feature-flag-enabled('components-x') {
       @include carbon--type-reset;
     }
@@ -128,7 +128,10 @@
     input[type='button'],
     input[type='submit'],
     input[type='reset'],
-    input[type='file'] {
+    input[type='file'],
+    input[type='text'],
+    input[type='password'],
+    textarea {
       border-radius: 0;
     }
 
