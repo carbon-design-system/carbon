@@ -60,13 +60,11 @@ describe('Tooltip', () => {
         menuOffset={{ left: 10, top: 15 }}
         showIcon={false}
         open={true}>
-        {' '}
-        <p className="bx--tooltip__label">Tooltip label</p>
+        <p>Tooltip label</p>
         <p>Lorem ipsum dolor sit amet</p>
       </Tooltip>
     );
-
-    const trigger = wrapper.find('.bx--tooltip__trigger');
+    const label = wrapper.find('.bx--tooltip__label');
     const floatingMenu = wrapper.find(FloatingMenu);
 
     describe('tooltip container', () => {
@@ -77,7 +75,7 @@ describe('Tooltip', () => {
         expect(floatingMenu.prop('menuOffset')).toEqual({ left: 10, top: 15 });
       });
       it('does not render info icon', () => {
-        const icon = trigger.find(Icon);
+        const icon = label.find(Icon);
         expect(icon.exists()).toBe(false);
       });
       it('sets the tooltip class', () => {
@@ -89,8 +87,8 @@ describe('Tooltip', () => {
         ).toBe('bx--tooltip bx--tooltip--shown tooltip--class');
       });
       it('sets the trigger class', () => {
-        expect(trigger.prop('className')).toBe(
-          'bx--tooltip__trigger tooltip--trigger-class'
+        expect(label.prop('className')).toBe(
+          'bx--tooltip__label tooltip--trigger-class'
         );
       });
     });
@@ -166,19 +164,19 @@ describe('Tooltip', () => {
 
     it('hover changes state with no icon', () => {
       const wrapper = mount(<Tooltip showIcon={false} triggerText="Tooltip" />);
-      const trigger = wrapper.find('.bx--tooltip__trigger');
-      trigger.simulate('mouseover');
+      const label = wrapper.find('.bx--tooltip__label');
+      label.simulate('mouseover');
       expect(wrapper.state().open).toEqual(true);
-      trigger.simulate('mouseout');
+      label.simulate('mouseout');
       expect(wrapper.state().open).toEqual(false);
     });
 
     it('focus/blur changes state with no icon', () => {
       const wrapper = mount(<Tooltip showIcon={false} triggerText="Tooltip" />);
-      const trigger = wrapper.find('.bx--tooltip__trigger');
-      trigger.simulate('focus');
+      const label = wrapper.find('.bx--tooltip__label');
+      label.simulate('focus');
       expect(wrapper.state().open).toEqual(true);
-      trigger.simulate('blur');
+      label.simulate('blur');
       expect(wrapper.state().open).toEqual(false);
     });
 

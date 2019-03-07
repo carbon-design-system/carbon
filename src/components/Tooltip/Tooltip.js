@@ -427,8 +427,7 @@ export default class Tooltip extends Component {
     );
 
     const triggerClasses = classNames(
-      { [`${prefix}--tooltip__trigger`]: !componentsX },
-      { [`${prefix}--tooltip__label`]: componentsX },
+      `${prefix}--tooltip__label`,
       triggerClassName
     );
     const ariaOwnsProps = !open
@@ -467,7 +466,7 @@ export default class Tooltip extends Component {
               <div
                 role="button"
                 id={triggerId}
-                className={componentsX ? `${prefix}--tooltip__trigger` : null}
+                className={`${prefix}--tooltip__trigger`}
                 tabIndex={tabIndex}
                 onClick={this.handleMouse}
                 onKeyDown={this.handleKeyPress}
