@@ -187,8 +187,13 @@
     color: $text-02;
     z-index: 0;
     opacity: 1;
-    max-width: 75%;
     margin-bottom: $spacing-xs;
+  }
+
+  @media (min-width: breakpoint('sm')) {
+    .#{$prefix}--form__helper-text {
+      max-width: 75%;
+    }
   }
 }
 
