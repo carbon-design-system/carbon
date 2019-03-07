@@ -61,14 +61,6 @@
       box-shadow: 0 2px 0 0 $support-01;
     }
 
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
-    &[data-invalid]:focus ~ .#{$prefix}--label {
-      color: $support-01;
-    }
-
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
