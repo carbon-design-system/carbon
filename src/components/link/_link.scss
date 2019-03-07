@@ -74,7 +74,7 @@
     }
 
     &:focus:active {
-      box-shadow: 0 3px $text-01;
+      box-shadow: 0 1px $text-01;
     }
 
     &:not([href]) {
@@ -104,6 +104,7 @@
     display: inline;
     color: $disabled-02;
     font-weight: 400;
+    cursor: not-allowed;
   }
 }
 
