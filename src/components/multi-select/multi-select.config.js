@@ -23,7 +23,6 @@ const items = [
 ];
 
 module.exports = {
-  preview: 'list-box-preview',
   context: {
     featureFlags,
     prefix,

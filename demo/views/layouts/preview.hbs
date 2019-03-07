@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/demo.css">
   </head>
 
-  <body class="bx--body demo--container" data-floating-menu-container>
+  <body class="bx--body demo--container{{#if component}} demo--container--{{component}}{{/if}}" data-floating-menu-container>
     <div class="demo--container__panel" data-card-list>
       {{{yield}}}
     </div>
