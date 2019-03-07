@@ -110,12 +110,14 @@ describe('DataTableV2', function() {
     });
 
     it('Should toggle the row on click', function() {
-      const firstRowExpand = document.querySelector('[data-event="expand"]');
-      firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('[data-child-row]')).toBeTruthy();
+      if (componentsX) {
+        const firstRowExpand = document.querySelector('[data-event="expand"]');
+        firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(document.querySelector('[data-child-row]')).toBeTruthy();
 
-      firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('[data-child-row]')).toBeTruthy();
+        firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(document.querySelector('[data-child-row]')).toBeTruthy();
+      }
     });
 
     it('Should emit an event on row expansion click', function() {
@@ -233,20 +235,22 @@ describe('DataTableV2', function() {
     const events = new EventManager();
     let table;
     let container;
-    let ths;
     let tds;
     let dt;
+    let origRequestAnimationFrame;
 
     beforeEach(function() {
       container = document.createElement('div');
       container.innerHTML = ExpandableHTML;
       document.body.appendChild(container);
       dt = document.querySelector('.bx--data-table-v2');
+      origRequestAnimationFrame = window.requestAnimationFrame;
+      window.requestAnimationFrame = cb => cb();
       // console.log(dt);
     });
 
     it('Should emit an event on window resize', function() {
-      table = new DataTableV2(dt);
+      table = new DataTableV2(container);
       const spyTruncateEvent = jasmine.createSpy();
       events.on(window, 'resize', spyTruncateEvent);
       window.dispatchEvent(new CustomEvent('resize', { bubbles: true }));
@@ -254,30 +258,47 @@ describe('DataTableV2', function() {
     });
 
     it('Should not have overflow class', function() {
-      table = new DataTableV2(dt);
+      dt.style.width = '1256px';
       tds = dt.querySelectorAll('td');
-      ths = dt.querySelectorAll('th');
-
       tds.forEach(td => {
-        expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+        const span = td.querySelector('.bx--table-cell-content');
+        if (span) {
+          span.style.display = 'block';
+          span.style.maxWidth = 'calc(100% - 10px)';
+          span.style.whiteSpace = 'nowrap';
+        }
       });
-
-      ths.forEach(th => {
-        expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
-      });
-    });
-
-    it('Should have overflow class', function() {
-      table = new DataTableV2(dt);
-      dt.style.maxWidth = '900px';
-      dt.style.width = '900px';
-      tds = dt.querySelectorAll('td');
-      ths = dt.querySelectorAll('th');
+      table = new DataTableV2(container);
 
       tds.forEach(td => {
         const span = td.querySelector('.bx--table-cell-content');
         if (span) {
+          expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+          expect(td.hasAttribute('tabIndex')).toBe(false);
+        } else {
+          expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+        }
+      });
+    });
+
+    it('Should have overflow class', function() {
+      dt.style.maxWidth = '900px';
+      dt.style.width = '900px';
+      tds = dt.querySelectorAll('td');
+      tds.forEach(td => {
+        const span = td.querySelector('.bx--table-cell-content');
+        if (span) {
           span.textContent = 'Adding some really long text content to overflow the content and test for truncation.';
+          span.style.display = 'block';
+          span.style.maxWidth = 'calc(100% - 10px)';
+          span.style.whiteSpace = 'nowrap';
+        }
+      });
+      table = new DataTableV2(container);
+
+      tds.forEach(td => {
+        const span = td.querySelector('.bx--table-cell-content');
+        if (span) {
           expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(true);
           expect(td.hasAttribute('tabIndex')).toBe(true);
         } else {
@@ -287,6 +308,7 @@ describe('DataTableV2', function() {
     });
 
     afterEach(function() {
+      window.requestAnimationFrame = origRequestAnimationFrame;
       document.body.removeChild(container);
       table.release();
     });
@@ -299,35 +321,43 @@ describe('DataTableV2', function() {
     let dt;
 
     beforeEach(function() {
-      container = document.createElement('div');
-      container.innerHTML = ExpandableHTML;
-      document.body.appendChild(container);
-      dt = document.querySelector('.bx--data-table-v2');
-      table = new DataTableV2(dt);
+      if (componentsX) {
+        container = document.createElement('div');
+        container.innerHTML = ExpandableHTML;
+        document.body.appendChild(container);
+        dt = document.querySelector('.bx--data-table-v2');
+        table = new DataTableV2(dt);
+      }
     });
 
     it('Should open search bar', function() {
-      const spyClick = jasmine.createSpy();
-      const search = document.querySelector('.bx--toolbar-search-container-hidden');
-      events.on(document, 'click', spyClick);
-      search.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      if (componentsX) {
+        const spyClick = jasmine.createSpy();
+        const search = document.querySelector('.bx--toolbar-search-container-hidden');
+        events.on(document, 'click', spyClick);
+        search.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      }
     });
 
     it('Should close search bar', function() {
-      const spyClick = jasmine.createSpy();
-      const search = document.querySelector('.bx--toolbar-search-container-hidden');
-      const header = document.querySelector('.bx--data-table-v2-header');
-      search.classList.add('bx--toolbar-search-container-active');
-      events.on(document, 'click', spyClick);
-      header.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      table.deactivateSearch();
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      if (componentsX) {
+        const spyClick = jasmine.createSpy();
+        const search = document.querySelector('.bx--toolbar-search-container-hidden');
+        const header = document.querySelector('.bx--data-table-v2-header');
+        search.classList.add('bx--toolbar-search-container-active');
+        events.on(document, 'click', spyClick);
+        header.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        table.deactivateSearch();
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      }
     });
 
     afterEach(function() {
-      document.body.removeChild(container);
-      table.release();
+      if (componentsX) {
+        document.body.removeChild(container);
+        table.release();
+      }
     });
   });
 });
