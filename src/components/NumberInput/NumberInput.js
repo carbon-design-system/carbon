@@ -301,8 +301,10 @@ class NumberInput extends Component {
                     aria-label={incrementNumLabel}
                     aria-live="polite"
                     aria-atomic="true">
-                    <CaretUpGlyph className="up-icon">
-                      <title>{incrementNumLabel}</title>
+                    <CaretUpGlyph
+                      className="up-icon"
+                      aria-label={iconDescription || incrementNumLabel}>
+                      <title>{iconDescription || incrementNumLabel}</title>
                     </CaretUpGlyph>
                   </button>
                   <button
@@ -312,8 +314,10 @@ class NumberInput extends Component {
                     aria-label={decrementNumLabel}
                     aria-live="polite"
                     aria-atomic="true">
-                    <CaretDownGlyph className="down-icon">
-                      <title>{decrementNumLabel}</title>
+                    <CaretDownGlyph
+                      className="down-icon"
+                      aria-label={iconDescription || decrementNumLabel}>
+                      <title>{iconDescription || decrementNumLabel}</title>
                     </CaretDownGlyph>
                   </button>
                 </div>
@@ -332,9 +336,7 @@ class NumberInput extends Component {
                   <Icon
                     className="up-icon"
                     icon={iconCaretUp}
-                    description={
-                      this.props.iconDescription || incrementNumLabel
-                    }
+                    description={iconDescription || incrementNumLabel}
                     viewBox="0 0 10 5"
                   />
                 </button>
@@ -349,9 +351,7 @@ class NumberInput extends Component {
                     className="down-icon"
                     icon={iconCaretDown}
                     viewBox="0 0 10 5"
-                    description={
-                      this.props.iconDescription || decrementNumLabel
-                    }
+                    description={iconDescription || decrementNumLabel}
                   />
                 </button>
               </div>
