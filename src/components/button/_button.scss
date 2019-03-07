@@ -235,7 +235,7 @@
     @include button-theme--x(transparent, transparent, $interactive-01, $hover-ui, $interactive-01, $active-ui);
     display: inline-flex;
     align-items: center;
-    min-width: initial;
+    min-width: auto;
     padding: rem(14px) rem(16px);
 
     &:hover,
