@@ -6,14 +6,22 @@
 //
 
 @import 'vars';
+@import 'deprecate';
+@import 'functions';
 
+/// @deprecated (For v10) Use `$carbon--font-families`
 $font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
+/// @deprecated (For v10) Use `$carbon--font-families`
 $font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
+/// @deprecated (For v10) Use `$carbon--font-families`
 $font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
+/// @deprecated (For v10) Use Plex fonts
 $font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
 
+/// @deprecated (For v10) Superseded by `$carbon--base-font-size`
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
+/// @deprecated (For v10) Superseded by `$carbon--type-scale`
 $typescale-map: (
   'giga': 4.75rem,
   'mega': 3.375rem,
@@ -29,55 +37,92 @@ $typescale-map: (
   'p': 1rem,
 );
 
+/// @deprecated (For v10) Use `@include carbon--type-scale()`
 @mixin typescale($size) {
-  @if map-has-key($typescale-map, $size) {
-    font-size: map-get($typescale-map, $size);
-  } @else {
-    @warn 'This is not a step of the Carbon Type Scale!';
+  @include deprecate(
+    '`@include typescale()` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--type-scale()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    @if map-has-key($typescale-map, $size) {
+      font-size: map-get($typescale-map, $size);
+    } @else {
+      @warn 'This is not a step of the Carbon Type Scale!';
+    }
   }
 }
 
+/// @deprecated (For v10) Use `carbon--rem()`
 @function rem($px) {
   @return ($px / $base-font-size) * 1rem;
 }
 
+/// @deprecated (For v10) Use `carbon--em()`
 @function em($px) {
   @return ($px / $base-font-size) * 1em;
 }
 
+/// @deprecated (For v10) Use Plex fonts
 @mixin helvetica {
   font-family: $font-family-helvetica;
 }
 
+/// @deprecated (For v10) Use `@include carbon--font-family()`
 @mixin font-family {
-  @if global-variable-exists('css--plex') and $css--plex == true {
-    font-family: $font-family-sans-serif;
-  } @else {
-    font-family: $font-family-helvetica;
+  @include deprecate(
+    '`@include font-family` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--font-family()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    @if global-variable-exists('css--plex') and $css--plex == true {
+      font-family: $font-family-sans-serif;
+    } @else {
+      font-family: $font-family-helvetica;
+    }
   }
 }
 
 // There are two line heights to choose from. One for headings and one for body text
+/// @deprecated (For v10) Use `@include carbon--type-style()`
 @mixin line-height($el) {
-  @if $el == 'heading' {
-    line-height: 1.25;
-  } @else if $el == 'body' {
-    line-height: 1.5;
-  } @else {
-    @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
+  @include deprecate(
+    '`@include line-height()` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--type-style()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    @if $el == 'heading' {
+      line-height: 1.25;
+    } @else if $el == 'body' {
+      line-height: 1.5;
+    } @else {
+      @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
+    }
   }
 }
 
 // Only applied to bold weight text
+/// @deprecated (For v10) The new type styles doesn't use this
 @mixin font-smoothing {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @include deprecate(
+    '`@include font-smoothing` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
+/// @deprecated (For v10) The new type styles doesn't use this
 @mixin letter-spacing {
-  letter-spacing: 0;
+  @include deprecate(
+    '`@include letter-spacing` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    letter-spacing: 0;
+  }
 }
 
+/// @deprecated (For v10) Superseded by `$carbon--type-scale`
 $font-size-map: (
   '76': 4.75rem,
   '54': 3.375rem,
@@ -91,11 +136,18 @@ $font-size-map: (
   '11': 0.6875rem,
 );
 
+/// @deprecated (For v10) Use `@include carbon--type-scale()`
 @mixin font-size($size) {
-  @if map-has-key($font-size-map, $size) {
-    font-size: map-get($font-size-map, $size);
-  } @else {
-    @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
+  @include deprecate(
+    '`@include font-size()` has been deprecated. ' + 'It will be removed in the next major release. ' +
+      'Use `@include carbon--type-scale()` instead.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    @if map-has-key($font-size-map, $size) {
+      font-size: map-get($font-size-map, $size);
+    } @else {
+      @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
+    }
   }
 }
 
