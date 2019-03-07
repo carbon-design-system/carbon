@@ -17,7 +17,8 @@
 
 @mixin footer {
   @include deprecate(
-    'The `footer` component in `carbon-components` has been deprecated. ' + 'It will be removed in the next major release.'
+    'The `footer` component in `carbon-components` has been deprecated. ' + 
+      'It will be removed in the next major release.'
   ) {
     .#{$prefix}--footer--bottom-fixed {
       position: fixed;
