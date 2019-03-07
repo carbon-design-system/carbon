@@ -233,9 +233,17 @@
     min-width: rem(38px);
     width: rem(38px);
     padding: $spacing-2xs;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
 
     &:focus {
       outline: 1px solid $brand-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
     }
   }
 
@@ -673,9 +681,18 @@
     border: none;
     border-radius: 0;
     padding: $spacing-2xs;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
 
     &:focus {
       outline: 1px solid $interactive-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      // Added in when upgraded to Flatpickr 4.5.5
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
     }
   }
 
