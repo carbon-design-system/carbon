@@ -68,12 +68,6 @@ REASON: #{$reason}';
     .bx--interior-left-nav.bx--interior-left-nav--collapsed {
       width: 3rem;
     }
-
-    &.link div {
-      display: flex;
-      flex-direction: column;
-      grid-gap: 32px;
-    }
   }
 }
 
