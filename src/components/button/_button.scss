@@ -233,7 +233,7 @@
     }
   }
 
-  .#{$prefix}--btn--ghost {
+  button.#{$prefix}--btn--ghost {
     @include button-theme--x(transparent, transparent, $interactive-01, $hover-ui, $interactive-01, $active-ui);
     display: inline-flex;
     align-items: center;
