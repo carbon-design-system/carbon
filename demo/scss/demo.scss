@@ -80,7 +80,8 @@ REASON: #{$reason}';
   padding-left: 0;
 }
 
-.demo--container__panel.demo--container--listbox,
+.demo--container.demo--container--list-box > .demo--container__panel,
+.demo--container.demo--container--multi-select > .demo--container__panel,
 .component-example__live--rendered.list-box > div,
 .component-example__live--rendered.multi-select > div {
   width: 300px;
@@ -253,11 +254,13 @@ REASON: #{$reason}';
   }
 }
 
-.component-example__live .bx--form-item {
+.component-example__live .bx--form-item,
+.demo--container__panel .bx--form-item {
   margin-bottom: 2rem;
 }
 
-.component-example__live .bx--form-item.bx--checkbox-wrapper {
+.component-example__live .bx--form-item.bx--checkbox-wrapper,
+.demo--container__panel .bx--form-item.bx--checkbox-wrapper {
   margin-bottom: 0;
 }
 
