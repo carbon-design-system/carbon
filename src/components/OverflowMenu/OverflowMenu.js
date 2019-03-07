@@ -353,7 +353,8 @@ export default class OverflowMenu extends Component {
   };
 
   componentDidUpdate() {
-    const { onClose, onOpen, floatingMenu } = this.props;
+    const { onClose, onOpen, floatingMenu: origFloatingMenu } = this.props;
+    const floatingMenu = !!breakingChangesX || origFloatingMenu;
 
     if (this.state.open) {
       if (!floatingMenu) {
@@ -436,7 +437,8 @@ export default class OverflowMenu extends Component {
    * https://reactjs.org/docs/events.html#event-pooling
    */
   handleBlur = evt => {
-    if (this.props.floatingMenu) {
+    const floatingMenu = !!breakingChangesX || this.props.floatingMenu;
+    if (floatingMenu) {
       return;
     }
     evt.persist();
@@ -555,7 +557,7 @@ export default class OverflowMenu extends Component {
       iconName,
       direction,
       flipped,
-      floatingMenu,
+      floatingMenu: origFloatingMenu,
       menuOffset,
       menuOffsetFlip,
       iconClass,
@@ -564,12 +566,17 @@ export default class OverflowMenu extends Component {
       renderIcon: IconElement,
       ...other
     } = this.props;
+    const floatingMenu = !!breakingChangesX || origFloatingMenu;
 
     if (__DEV__) {
       warning(
         floatingMenu || direction === DIRECTION_BOTTOM,
         '[OverflowMenu] menu direction other than `bottom` is only supporting with `floatingMenu` option. Received: `%s`',
         direction
+      );
+      warning(
+        floatingMenu,
+        '[OverflowMenu] non-floating option has been deprecated.'
       );
     }
 

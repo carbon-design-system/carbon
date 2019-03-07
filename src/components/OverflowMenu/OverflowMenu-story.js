@@ -22,7 +22,7 @@ const directions = {
 
 const props = {
   menu: () => ({
-    floatingMenu: boolean('Floating menu (floatingMenu)', false),
+    floatingMenu: boolean('Floating menu (floatingMenu)', true),
     direction: select(
       'Menu direction (Only with `floatingMenu`) (direction)',
       directions,
