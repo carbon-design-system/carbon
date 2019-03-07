@@ -25,7 +25,6 @@
     align-items: center;
     color: $text-01;
     font-weight: normal;
-    margin-bottom: $spacing-xs;
 
     .#{$prefix}--tooltip__trigger {
       margin-left: $spacing-xs;
@@ -53,6 +52,7 @@
     &:hover,
     &:focus {
       color: $text-01;
+
       path,
       polygon,
       circle {
@@ -341,11 +341,9 @@
 
   .#{$prefix}--tooltip__label {
     @include type-style('body-short-01');
-
     display: inline-flex;
     align-items: center;
     color: $text-01;
-    margin-bottom: $spacing-xs;
 
     .#{$prefix}--tooltip__trigger {
       margin-left: $spacing-xs;
@@ -373,6 +371,7 @@
     &:hover,
     &:focus {
       color: $text-01;
+
       path,
       polygon,
       circle {
