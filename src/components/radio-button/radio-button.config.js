@@ -17,17 +17,17 @@ const items = () => {
     {
       id: `radio-button-${groupId}-1`,
       value: 'red',
-      label: 'Radio Button label',
+      label: 'Radio button label',
     },
     {
       id: `radio-button-${groupId}-2`,
       value: 'green',
-      label: 'Radio Button label',
+      label: 'Radio button label',
     },
     {
       id: `radio-button-${groupId}-3`,
       value: 'blue',
-      label: 'Radio Button label',
+      label: 'Radio button label',
       disabled: true,
     },
   ];
@@ -50,6 +50,9 @@ module.exports = {
     {
       name: 'horizontal-bottom',
       label: 'Radio button group (Label at bottom)',
+      meta: {
+        xVersionNotSupported: true,
+      },
       context: {
         direction: 'bottom',
         selectedValue: 'red',
@@ -70,6 +73,9 @@ module.exports = {
     {
       name: 'horizontal-top',
       label: 'Radio button group (Label at top)',
+      meta: {
+        xVersionNotSupported: true,
+      },
       context: {
         direction: 'top',
         selectedValue: 'red',
@@ -91,20 +97,6 @@ module.exports = {
       },
     },
     {
-      name: 'vertical-bottom',
-      label: 'Vertical radio button group (Label at bottom)',
-      meta: {
-        xVersionOnly: true,
-      },
-      context: {
-        direction: 'bottom',
-        selectedValue: 'red',
-        group: 'radio-button--vertical',
-        vertical: true,
-        items: items(),
-      },
-    },
-    {
       name: 'vertical-left',
       label: 'Vertical radio button group (Label at left)',
       meta: {
@@ -112,20 +104,6 @@ module.exports = {
       },
       context: {
         direction: 'left',
-        selectedValue: 'red',
-        group: 'radio-button--vertical',
-        vertical: true,
-        items: items(),
-      },
-    },
-    {
-      name: 'vertical-top',
-      label: 'Vertical radio button group (Label at top)',
-      meta: {
-        xVersionOnly: true,
-      },
-      context: {
-        direction: 'top',
         selectedValue: 'red',
         group: 'radio-button--vertical',
         vertical: true,
