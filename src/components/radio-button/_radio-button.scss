@@ -140,6 +140,7 @@
   .#{$prefix}--radio-button-group {
     display: flex;
     align-items: center;
+    margin-top: rem(6px);
   }
 
   // vertical radio button
@@ -195,12 +196,6 @@
       background-color: $ui-05;
     }
   }
-
-  .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    border-color: transparent;
-  }
-
-  // Disabled
 
   // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
   [disabled] ~ _ {
@@ -262,32 +257,6 @@
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left .#{$prefix}--radio-button__appearance {
     margin-right: 0;
     margin-left: $spacing-xs;
-  }
-
-  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__label {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-
-  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__appearance {
-    margin-right: 0;
-  }
-
-  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__label-text {
-    margin-bottom: 5px;
-  }
-
-  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__label {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__label-text {
-    margin-top: 5px;
-  }
-
-  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__appearance {
-    margin-right: 0;
   }
 }
 
