@@ -488,16 +488,17 @@ export default class OverflowMenu extends Component {
   };
 
   /**
-   * Handles the floating menu being unmounted.
+   * Handles the floating menu being unmounted or non-floating menu being
+   * mounted or unmounted.
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
   _bindMenuBody = menuBody => {
-    if (!menuBody) {
+    if (!this.props.floatingMenu || !menuBody) {
       this._menuBody = menuBody;
-      if (this._hFocusIn) {
-        this._hFocusIn = this._hFocusIn.release();
-      }
+    }
+    if (!menuBody && this._hFocusIn) {
+      this._hFocusIn = this._hFocusIn.release();
     }
   };
 
