@@ -8,10 +8,25 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const featureFlags = require('../../globals/js/feature-flags');
+
+const items = [
+  {
+    label: 'Breadcrumb 1',
+  },
+  {
+    label: 'Breadcrumb 2',
+  },
+  {
+    label: 'Breadcrumb 3',
+  },
+];
 
 module.exports = {
   context: {
+    featureFlags,
     prefix,
+    items,
   },
   variants: [
     {
@@ -21,18 +36,20 @@ module.exports = {
         Breadcrumb enables users to quickly see their location within a path of navigation
         and move up to a parent level if desired.
       `,
+    },
+    {
+      name: 'current-page',
+      label: 'with current page',
       context: {
-        items: [
-          {
-            label: 'Breadcrumb 1',
-          },
-          {
-            label: 'Breadcrumb 2',
-          },
-          {
-            label: 'Breadcrumb 3',
-          },
-        ],
+        items: items.map((item, i) => {
+          if (i !== items.length - 1) {
+            return item;
+          }
+          return {
+            ...item,
+            current: true,
+          };
+        }),
       },
     },
   ],
