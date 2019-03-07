@@ -95,6 +95,10 @@
 }
 
 @mixin text-area--x {
+  .#{$prefix}--label + .#{$prefix}--text-area__wrapper {
+    margin-top: $spacing-xs;
+  }
+
   .#{$prefix}--text-area {
     @include reset;
     @include type-style('body-long-01');
@@ -144,6 +148,22 @@
     background-color: $field-02;
   }
 
+  .#{$prefix}--text-area--invalid {
+    padding-right: $spacing-2xl;
+  }
+
+  .#{$prefix}--text-area__wrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .#{$prefix}--text-area__invalid-icon {
+    position: absolute;
+    right: rem(16px);
+    top: rem(16px);
+    fill: $support-01;
+  }
+
   //-----------------------------
   // Disabled
   //-----------------------------
@@ -162,6 +182,7 @@
   // Error
   //-----------------------------
   .#{$prefix}--text-area[data-invalid],
+  .#{$prefix}--text-area--invalid,
   .#{$prefix}--text-area:invalid {
     @include focus-outline('invalid');
     box-shadow: none;
