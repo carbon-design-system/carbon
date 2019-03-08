@@ -8,7 +8,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../form/form';
 
@@ -192,7 +192,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
     font-family: $font-family-mono;
     box-sizing: border-box;
@@ -228,9 +228,7 @@
     &:disabled ~ .#{$prefix}--number__controls svg {
       fill: $disabled;
     }
-  }
 
-  .#{$prefix}--number input[type='number'] {
     appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {
@@ -261,30 +259,40 @@
   .#{$prefix}--number__controls {
     @include reset;
     position: absolute;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    right: 0.4rem;
   }
 
   .#{$prefix}--number__control-btn {
     @include button-reset;
-    color: $icon-01;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    width: rem(20px);
-    height: rem(10px);
+    width: rem(32px);
+    height: rem(20px);
+    color: $icon-01;
 
     svg {
       fill: currentColor;
+      position: relative;
+    }
+
+    &.up-icon svg {
+      top: rem(5px);
+    }
+
+    &.down-icon svg {
+      top: rem(-5px);
     }
 
     &:focus {
       @include focus-outline;
-      color: $interactive-01;
+      color: $icon-01;
+      outline-width: 2px;
+      outline-offset: -2px;
     }
 
     &:hover {
@@ -293,6 +301,11 @@
 
     &:hover {
       color: $icon-01;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $disabled;
     }
   }
 
@@ -314,7 +327,54 @@
   }
 
   .#{$prefix}--number--light input[type='number'] {
-    background: $field-02;
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--number--mobile {
+    min-width: rem(144px);
+    width: auto;
+
+    .#{$prefix}--number__control-btn {
+      position: static;
+      width: rem(40px);
+      height: rem(40px);
+      background-color: $ui-01;
+
+      &:hover,
+      &:focus {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+      }
+
+      svg {
+        position: static;
+      }
+    }
+
+    input[type='number'] {
+      min-width: rem(64px);
+      width: auto;
+      margin: 0;
+      border-right: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
+      padding: 0;
+      text-align: center;
+      background-color: $field-01;
+    }
+
+    &.#{$prefix}--number--light {
+      input[type='number'] {
+        background-color: $field-02;
+      }
+
+      .#{$prefix}--number__control-btn {
+        background-color: $ui-02;
+      }
+    }
   }
 
   // Skeleton State

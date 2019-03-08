@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { prefix } = require('../../globals/js/settings');
+const { prefix, componentsX } = require('../../globals/js/settings');
 const featureFlags = require('../../globals/js/feature-flags');
 
 module.exports = {
@@ -106,6 +106,10 @@ module.exports = {
     {
       name: 'danger--primary',
       label: 'Primary Danger Buttons',
+      meta: {
+        removed: componentsX,
+        xVersionNotSupported: true,
+      },
       context: {
         variant: 'danger--primary',
         danger: true,
@@ -119,6 +123,10 @@ module.exports = {
         regular sized button. This issue is most found in tables. Small button should have three words
         or less.
       `,
+      meta: {
+        removed: componentsX,
+        xVersionNotSupported: true,
+      },
       context: {
         variant: 'danger--primary',
         danger: true,

@@ -9,7 +9,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
 @mixin form {
   .#{$prefix}--fieldset {
@@ -113,7 +113,7 @@
   }
 
   .#{$prefix}--form-item {
-    @include font-family;
+    @include type-style('body-short-01');
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -181,15 +181,23 @@
     display: none;
   }
 
+  .#{$prefix}--label + .#{$prefix}--form__helper-text {
+    margin-top: rem(-6px); // when both helper text and label are rendered
+  }
+
   .#{$prefix}--form__helper-text {
-    @include typescale('omega');
+    @include type-style('helper-text-01');
     font-style: italic;
     color: $text-02;
-    line-height: 1.5;
     z-index: 0;
     opacity: 1;
-    max-width: 75%;
     margin-bottom: $spacing-xs;
+  }
+
+  @media (min-width: breakpoint('sm')) {
+    .#{$prefix}--form__helper-text {
+      max-width: 75%;
+    }
   }
 }
 
