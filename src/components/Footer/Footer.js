@@ -9,10 +9,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import warning from 'warning';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 import Link from '../Link';
 import Button from '../Button';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 const Footer = ({
   className,
@@ -26,6 +30,15 @@ const Footer = ({
   buttonText,
   ...other
 }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `Footer` component has been deprecated and will be removed ' +
+        'in the next major release of `carbon-components-react`.'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   const classNames = classnames(
     `${prefix}--footer ${prefix}--footer--bottom-fixed`,
     className
@@ -113,4 +126,4 @@ Footer.defaultProps = {
   buttonText: 'Create',
 };
 
-export default Footer;
+export default (!breakingChangesX ? Footer : null);

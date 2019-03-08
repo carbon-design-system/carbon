@@ -9,7 +9,7 @@ import React from 'react';
 import Footer from '../Footer';
 import { mount } from 'enzyme';
 
-describe('Footer', () => {
+describeBreakingChangesXFeatures('Footer', () => {
   describe('Renders as expected', () => {
     const footer = mount(
       <Footer
