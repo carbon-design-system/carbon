@@ -156,6 +156,11 @@
     @include notification--experimental($support-03, $notification-warning-background-color);
   }
 
+  .#{$prefix}--inline-notification--warning .#{$prefix}--inline-notification__icon path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
   .#{$prefix}--inline-notification__details {
     display: flex;
     margin: 0 $spacing-md;
