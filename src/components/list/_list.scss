@@ -12,7 +12,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
 @mixin lists {
   .#{$prefix}--list--nested,
