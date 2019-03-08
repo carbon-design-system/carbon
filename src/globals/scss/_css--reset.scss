@@ -6,7 +6,7 @@
 //
 
 @import 'functions';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import './vendor/@carbon/elements/scss/type/reset';
 
 @mixin reset {
