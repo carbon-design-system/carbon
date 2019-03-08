@@ -282,21 +282,20 @@
     right: 0;
     fill: $icon-01;
     border: 2px solid transparent;
-    border-left: none;
+    border-left: 0px;
 
     &:hover {
       background-color: $hover-ui;
       border-bottom: 1px solid $ui-04;
     }
     &:active {
-      background-color: $selected-ui;
-      border-bottom: 1px solid $ui-04;
+      @include focus-outline('outline');
     }
   }
 
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
     border: 2px solid $focus;
-    border-left: none;
+    border-left: 0px;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-close {
