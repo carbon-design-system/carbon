@@ -32,7 +32,7 @@ $css--use-experimental-grid-fallback: false !default;
 @import 'layer';
 @import 'spacing';
 @import 'typography';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'css--reset';
 @import 'css--font-face';
 @import 'css--helpers';

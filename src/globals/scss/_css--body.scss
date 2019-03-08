@@ -8,8 +8,8 @@
 @import 'vars';
 @import 'typography';
 @import 'css--reset';
-@import 'import-once';
 @import 'functions';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 @mixin css-body {
   body {
