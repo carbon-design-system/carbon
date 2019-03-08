@@ -21,7 +21,7 @@ const steps = [
     state: 'current',
     label: 'Second Step',
     overflow: true,
-    overflowLabel: 'Overflow Ex. 1',
+    overflowLabel: 'Overflow Ex.1',
     tooltipId: Math.random()
       .toString(36)
       .substr(2),
