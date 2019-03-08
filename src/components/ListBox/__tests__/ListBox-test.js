@@ -51,4 +51,14 @@ describe('ListBox', () => {
         .includes(mockProps.className)
     ).toBe(true);
   });
+
+  it('should pass down innerTabIndex prop to the inner divs tabIndex', () => {
+    mockProps.innerTabIndex = -1;
+    const wrapper = mount(<ListBox {...mockProps} />);
+    expect(wrapper.children().prop('tabIndex')).toBe(-1);
+  });
+  it('should default the inner divs tabIndex to 0 if no innerTabIndex prop', () => {
+    const wrapper = mount(<ListBox {...mockProps} />);
+    expect(wrapper.children().prop('tabIndex')).toBe(0);
+  });
 });

@@ -39,7 +39,7 @@ exports[`ListBox should render 1`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="listbox"
-    tabIndex="0"
+    tabIndex={0}
   >
     <ListBoxField>
       <div

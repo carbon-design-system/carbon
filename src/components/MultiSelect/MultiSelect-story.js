@@ -104,6 +104,7 @@ storiesOf('MultiSelect', module)
       } = props();
       const ComponentToUse = !filterable ? MultiSelect : MultiSelect.Filterable;
       const placeholder = !filterable ? undefined : defaultPlaceholder;
+
       return (
         <div style={{ width: 300 }}>
           <ComponentToUse
