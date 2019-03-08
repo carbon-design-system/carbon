@@ -244,20 +244,21 @@
     min-width: rem(115px);
     width: rem(125px);
     min-height: $spacing-lg;
-    height: $spacing-lg;
     margin-left: rem(22px);
     margin-top: rem(40px);
-    padding: 3px $spacing-md;
+    padding: $spacing-xs $spacing-md;
     display: block;
     visibility: hidden;
+    @include type-style('body-long-01');
+    color: $inverse-01;
   }
 
   //multiline tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
     width: rem(150px);
     height: auto;
-    padding: $spacing-md;
-    padding-bottom: $spacing-lg;
+    @include type-style('body-long-01');
+    color: $inverse-01;
   }
 
   //OPTIONAL HELPER TEXT STYLING
