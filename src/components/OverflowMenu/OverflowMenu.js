@@ -22,6 +22,7 @@ import Icon from '../Icon';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
 import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import { keys, matches as keyCodeMatches } from '../../tools/key';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 
@@ -162,7 +163,7 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
   }
 };
 
-export default class OverflowMenu extends Component {
+class OverflowMenu extends Component {
   state = {};
 
   static propTypes = {
@@ -564,6 +565,7 @@ export default class OverflowMenu extends Component {
       onClick, // eslint-disable-line
       onOpen, // eslint-disable-line
       renderIcon: IconElement,
+      innerRef: ref,
       ...other
     } = this.props;
     const floatingMenu = !!breakingChangesX || origFloatingMenu;
@@ -689,7 +691,7 @@ export default class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
-          ref={this.bindMenuEl}>
+          ref={mergeRefs(ref, this.bindMenuEl)}>
           {overflowMenuIcon}
           {open && wrappedMenuBody}
         </div>
@@ -697,3 +699,13 @@ export default class OverflowMenu extends Component {
     );
   }
 }
+
+export default (!breakingChangesX
+  ? OverflowMenu
+  : (() => {
+      const forwardRef = (props, ref) => (
+        <OverflowMenu {...props} innerRef={ref} />
+      );
+      forwardRef.displayName = 'OverflowMenu';
+      return React.forwardRef(forwardRef);
+    })());
