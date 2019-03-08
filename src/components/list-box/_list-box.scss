@@ -14,7 +14,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
 $list-box-width: 100%;
 $list-box-height: rem(40px);
