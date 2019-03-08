@@ -9,15 +9,33 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import RadioButton from '../RadioButton';
 import RadioButtonSkeleton from '../RadioButton/RadioButton.Skeleton';
+import { breakingChangesX } from '../../internal/FeatureFlags';
+
+const labelPositions = {
+  'Left (left)': 'left',
+  'Right (right)': 'right',
+};
+
+if (!breakingChangesX) {
+  Object.assign(labelPositions, {
+    'Top (top)': 'top',
+    'Bottom (bottom)': 'bottom',
+  });
+}
 
 const radioProps = () => ({
   className: 'some-class',
   name: text('Form item name (name)', 'test'),
   value: text('Value (value)', 'standard'),
   labelText: text('Label text (labelText)', 'Standard Radio Button'),
+  labelPosition: select(
+    'Label position (labelPosition)',
+    labelPositions,
+    'right'
+  ),
   checked: boolean('Checked (checked)', false),
   disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),

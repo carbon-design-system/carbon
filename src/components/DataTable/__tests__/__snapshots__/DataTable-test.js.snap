@@ -722,6 +722,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-11__select-row-b"
+                        labelPosition="right"
                         labelText=""
                         name="select-row-b"
                         onChange={[Function]}
@@ -729,7 +730,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         value=""
                       >
                         <div
-                          className="radioButtonWrapper"
+                          className="bx--radio-button-wrapper radioButtonWrapper"
                         >
                           <input
                             ariaLabel="Select row"
@@ -788,6 +789,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-11__select-row-a"
+                        labelPosition="right"
                         labelText=""
                         name="select-row-a"
                         onChange={[Function]}
@@ -795,7 +797,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         value=""
                       >
                         <div
-                          className="radioButtonWrapper"
+                          className="bx--radio-button-wrapper radioButtonWrapper"
                         >
                           <input
                             ariaLabel="Select row"
@@ -854,6 +856,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-11__select-row-c"
+                        labelPosition="right"
                         labelText=""
                         name="select-row-c"
                         onChange={[Function]}
@@ -861,7 +864,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         value=""
                       >
                         <div
-                          className="radioButtonWrapper"
+                          className="bx--radio-button-wrapper radioButtonWrapper"
                         >
                           <input
                             ariaLabel="Select row"

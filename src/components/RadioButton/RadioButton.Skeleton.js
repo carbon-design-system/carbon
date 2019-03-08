@@ -6,15 +6,20 @@
  */
 
 import React from 'react';
+import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
 export default class RadioButtonSkeleton extends React.Component {
   render() {
     const { id } = this.props;
+    const wrapperClasses = classNames(`${prefix}--radio-button-wrapper`, {
+      radioButtonWrapper: !breakingChangesX,
+    });
     return (
-      <div className="radioButtonWrapper">
+      <div className={wrapperClasses}>
         <div className={`${prefix}--radio-button ${prefix}--skeleton`} />
         {
           /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
