@@ -505,7 +505,7 @@
     min-width: rem(258px);
     max-width: rem(288px);
     margin-top: $spacing-sm;
-    padding: $spacing-md;
+    padding: $spacing-xs $spacing-md;
     border-radius: rem(2px);
     pointer-events: none;
     cursor: pointer;
