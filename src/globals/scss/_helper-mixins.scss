@@ -22,9 +22,9 @@
 @import 'vars';
 @import 'css--reset';
 @import 'typography';
-@import 'import-once';
 @import 'deprecate';
 @import 'functions';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 @mixin text-overflow($width: false) {
   display: block;
