@@ -315,49 +315,54 @@ describe('DataTableV2', function() {
   });
 
   describe('Toggle active search bar', function() {
-    const events = new EventManager();
     let table;
     let container;
     let dt;
 
     beforeEach(function() {
-      if (componentsX) {
-        container = document.createElement('div');
-        container.innerHTML = ExpandableHTML;
-        document.body.appendChild(container);
-        dt = document.querySelector('.bx--data-table-v2');
-        table = new DataTableV2(dt);
-      }
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      dt = document.querySelector('.bx--data-table-v2');
+      table = new DataTableV2(container);
     });
 
-    it('Should open search bar', function() {
-      if (componentsX) {
-        const spyClick = jasmine.createSpy();
-        const search = document.querySelector('.bx--toolbar-search-container-hidden');
-        events.on(document, 'click', spyClick);
-        search.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
-      }
+    it('Should open search bar on click', function() {
+      const search = document.querySelector('.bx--toolbar-search-container-hidden');
+      const magnifier = document.querySelector('.bx--search-magnifier');
+      magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
     });
 
-    it('Should close search bar', function() {
-      if (componentsX) {
-        const spyClick = jasmine.createSpy();
-        const search = document.querySelector('.bx--toolbar-search-container-hidden');
-        const header = document.querySelector('.bx--data-table-v2-header');
-        search.classList.add('bx--toolbar-search-container-active');
-        events.on(document, 'click', spyClick);
-        header.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        table.deactivateSearch();
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
-      }
+    it('Should close search bar on click', function() {
+      const search = document.querySelector('.bx--toolbar-search-container-hidden');
+      search.classList.add('bx--toolbar-search-container-active');
+      dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+    });
+
+    it('Should open search bar on keydown', function() {
+      const search = document.querySelector('.bx--toolbar-search-container-hidden');
+      const magnifier = document.querySelector('.bx--search-magnifier');
+      const event = new CustomEvent('keydown', { bubbles: true });
+      event.which = 13;
+      magnifier.dispatchEvent(event);
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+    });
+
+    it('Should close search bar on keydown', function() {
+      const search = document.querySelector('.bx--toolbar-search-container-hidden');
+      const btn = document.querySelector('.bx--btn');
+      search.classList.add('bx--toolbar-search-container-active');
+      const event = new CustomEvent('keydown', { bubbles: true });
+      event.which = 27;
+      btn.dispatchEvent(event);
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
     });
 
     afterEach(function() {
-      if (componentsX) {
-        document.body.removeChild(container);
-        table.release();
-      }
+      document.body.removeChild(container);
+      table.release();
     });
   });
 });

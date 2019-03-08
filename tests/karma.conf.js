@@ -4,6 +4,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
+const path = require('path');
 const commander = require('commander');
 
 const flatten = a => a.reduce((result, item) => [...result, ...(Array.isArray(item) ? item : [item])], []);
@@ -34,6 +35,26 @@ const customLaunchers = {
 const travisLaunchers = {
   chrome: 'Chrome_Travis',
 };
+
+class FeatureFlagProxyPlugin {
+  /**
+   * A WebPack resolver plugin that proxies module request
+   * for `src/globals/js/feature-flags` to `demo/js/feature-flags`,
+   * which is a file generated from `src/globals/js/feature-flags` with effective feature flag values.
+   */
+  constructor() {
+    this.source = 'before-described-relative';
+  }
+
+  apply(resolver) {
+    resolver.plugin(this.source, (request, callback) => {
+      if (/feature-flags$/i.test(request.path)) {
+        request.path = path.resolve(__dirname, '../demo/feature-flags');
+      }
+      callback();
+    });
+  }
+}
 
 module.exports = function(config) {
   config.set({
@@ -69,6 +90,10 @@ module.exports = function(config) {
     webpack: {
       mode: 'development',
       devtool: 'inline-source-maps',
+      resolve: {
+        modules: ['node_modules'],
+        plugins: [new FeatureFlagProxyPlugin()],
+      },
       module: {
         rules: [
           {
