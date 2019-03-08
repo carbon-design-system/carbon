@@ -143,7 +143,7 @@ const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
             const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
             renderedItems.set(
               item,
-              !layoutTemplate ? body : layoutTemplate(Object.assign({ yield: body }, { ...context, ...layoutContext }))
+              !layoutTemplate ? body : layoutTemplate({ yield: body, component: metadata.handle, ...context, ...layoutContext })
             );
           }
         });
