@@ -6,7 +6,7 @@
 //
 
 @import 'vars';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 @include exports('helper-classes') {
   .#{$prefix}--text-truncate--end {
