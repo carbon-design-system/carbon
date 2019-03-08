@@ -6,7 +6,7 @@
 //
 
 @import 'feature-flags';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'functions';
 @import 'colors';
 @import 'spacing';

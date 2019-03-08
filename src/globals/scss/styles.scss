@@ -21,10 +21,11 @@ $css--plex: true !default;
 
 // TODO: remove in next major release. Synced in `feature-flags` as an adapter
 // in the interim
-/// @deprecated
+/// @deprecated (For v10) v10 always uses `@carbon/grid`
 /// @access public
 /// @type Bool
 $css--use-experimental-grid: false !default;
+/// @deprecated (For v10) v10 always uses `@carbon/grid`
 $css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
@@ -36,7 +37,7 @@ $css--use-experimental-grid-fallback: false !default;
 @import 'layer';
 @import 'spacing';
 @import 'typography';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'css--reset';
 @import 'css--font-face';
 @import 'css--helpers';

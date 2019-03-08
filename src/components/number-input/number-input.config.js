@@ -32,24 +32,26 @@ module.exports = {
         light: true,
       },
     },
-    ...(componentsX
-      ? [
-          {
-            name: 'mobile',
-            label: 'Mobile Number Input',
-            context: {
-              mobile: true,
-            },
-          },
-          {
-            name: 'mobile-light',
-            label: 'Mobile Number Input (light)',
-            context: {
-              light: true,
-              mobile: true,
-            },
-          },
-        ]
-      : []),
+    {
+      name: 'mobile',
+      label: 'Mobile Number Input',
+      meta: {
+        xVersionOnly: true,
+      },
+      context: {
+        mobile: true,
+      },
+    },
+    {
+      name: 'mobile-light',
+      label: 'Mobile Number Input (light)',
+      meta: {
+        xVersionOnly: true,
+      },
+      context: {
+        light: true,
+        mobile: true,
+      },
+    },
   ],
 };

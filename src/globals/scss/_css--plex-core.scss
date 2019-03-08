@@ -8,9 +8,10 @@
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
 @import 'helper-mixins';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 /// @access private
+/// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
 /// @group plex-font-face
 /// @example - @include plex-font-face;
@@ -23,6 +24,7 @@ $unicodes: (
 );
 
 /// @access private
+/// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
 /// @group plex-font-face
 /// @example - @include plex-font-face;
@@ -32,6 +34,7 @@ $families: (
 );
 
 /// @access private
+/// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
 /// @group plex-font-face
 /// @example - @include plex-font-face;
@@ -41,6 +44,7 @@ $fallbacks: (
 );
 
 /// @access private
+/// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map | String
 /// @group plex-font-face
 /// @example - @include plex-font-face;
@@ -59,6 +63,7 @@ $weights: (
   ),
 ) !default;
 
+/// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 @mixin check-default-font-path {
   @if (str-index($font-path, 'https://unpkg.com/') == 1) {
     @warn 'The default font path (#{$font-path}) should be used only for demonstration/evaluation purposes. For production applications, please host fonts in your own CDN and change `$font-path` accordingly.';
@@ -68,6 +73,7 @@ $weights: (
   }
 }
 
+/// @deprecated (For v10) Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 @mixin plex-font-face {
   @include deprecate(
     '`@include plex-font-face` has been deprecated. ' + 'It will be removed in the next major release.',
