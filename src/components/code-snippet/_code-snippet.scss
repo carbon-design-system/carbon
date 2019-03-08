@@ -400,7 +400,7 @@
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container {
     max-height: rem(1500px);
-    transition: max-height $transition--expansion $carbon--standard-easing;
+    transition: max-height 700ms $carbon--standard-easing;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
@@ -432,7 +432,7 @@
     top: 0;
     right: 0;
     border: none;
-    background-color: transparent;
+    background-color: $ui-01;
     outline: none;
     padding: 0;
     height: $spacing-2xl;
@@ -493,7 +493,7 @@
 
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
     position: relative;
-    top: rem(-2px);
+    top: rem(-1px);
   }
 
   .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
@@ -503,7 +503,7 @@
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $text-01;
     margin-left: $spacing-xs;
-    margin-bottom: rem(3px);
+    margin-bottom: rem(1px);
     transform: rotate(0deg);
     transition: $transition--expansion;
   }
