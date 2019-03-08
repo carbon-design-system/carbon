@@ -6,7 +6,7 @@
 //
 
 @import 'feature-flags';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'functions';
 @import 'colors';
 @import 'spacing';
@@ -131,7 +131,7 @@
   $link-inverse-color: #6ea6ff !default !global;
 
   // Tooltip
-  $tooltip-background-color: #3d3d3d !default !global;
+  $tooltip-background-color: $inverse-02 !default !global;
 
   // Button Theme Variables
   $button-font-weight: 400 !default !global;
@@ -210,9 +210,6 @@
   $tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default !global;
   $tab-text-disabled: $ibm-color__gray-30 !default !global;
   $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
-
-  // Toggle
-  $toggle-background-color: $ibm-color__green-50 !default !global;
 
   // Skeleton Loading
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental

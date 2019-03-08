@@ -8,7 +8,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
@@ -461,7 +461,7 @@
   }
 
   .#{$prefix}--btn--copy__feedback {
-    @include font-family;
+    @include type-style('body-short-01');
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;

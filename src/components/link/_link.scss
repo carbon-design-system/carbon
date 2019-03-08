@@ -15,7 +15,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/functions';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
 @mixin link {
@@ -53,34 +53,36 @@
 @mixin link--x {
   .#{$prefix}--link {
     @include reset;
-    @include type-style('body-short-01');
-
+    @include type-style('body-long-01');
     color: $interactive-01;
-
-    // There is currently no way to set the thinkness of an underline so we'll rely on the box shadow property to achieve this
-    // effect.
     text-decoration: none;
+    outline: none;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $interactive-01;
-      box-shadow: 0 1px currentColor;
+      box-shadow: 0 1px $interactive-01;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px currentColor;
+      box-shadow: 0 1px $text-01;
     }
 
     &:focus {
-      outline: none;
-      box-shadow: 0 3px currentColor;
+      box-shadow: 0 3px $interactive-01;
     }
 
-    &[aria-disabled='true'][tabindex='-1'] {
-      color: $disabled;
+    &:focus:active {
+      box-shadow: 0 1px $text-01;
+    }
+
+    &:not([href]) {
+      color: $disabled-02;
       cursor: not-allowed;
+      pointer-events: none;
+      touch-action: none;
+
       &:hover {
         box-shadow: none;
       }
@@ -89,6 +91,20 @@
     &:visited {
       color: $interactive-01;
     }
+  }
+
+  .#{$prefix}--link--visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link--disabled {
+    @include reset;
+    @include type-style('body-long-01');
+    @include font-smoothing;
+    display: inline;
+    color: $disabled-02;
+    font-weight: 400;
+    cursor: not-allowed;
   }
 }
 

@@ -12,7 +12,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/layout';
@@ -256,8 +256,12 @@
     }
   }
 
-  .#{$prefix}--dropdown[data-invalid] {
+  .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
+
+    .#{$prefix}--dropdown-text {
+      padding-right: rem(58px); // 2rem + 2xSVG width
+    }
 
     + .#{$prefix}--form-requirement {
       display: inline-block;

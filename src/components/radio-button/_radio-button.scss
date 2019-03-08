@@ -12,7 +12,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 @import '../../globals/scss/css--reset';
 
@@ -92,8 +92,8 @@
     margin: 0px;
   }
 
-  .#{$prefix}--radio-button-wrapper + .#{$prefix}--radio-button-wrapper {
-    margin-left: 20px;
+  .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-right: $spacing-md;
   }
 
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right .#{$prefix}--radio-button__label {
@@ -104,13 +104,18 @@
     flex-direction: row-reverse;
   }
 
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left .#{$prefix}--radio-button__appearance {
+    margin-right: 0;
+    margin-left: $spacing-xs;
+  }
+
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__label {
     flex-direction: column-reverse;
     text-align: center;
   }
 
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__appearance {
-    margin: 0;
+    margin-right: 0;
   }
 
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top .#{$prefix}--radio-button__label-text {
@@ -127,7 +132,7 @@
   }
 
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom .#{$prefix}--radio-button__appearance {
-    margin: 0;
+    margin-right: 0;
   }
 }
 
@@ -135,7 +140,7 @@
   .#{$prefix}--radio-button-group {
     display: flex;
     align-items: center;
-    margin-top: $spacing-xs;
+    margin-top: rem(6px);
   }
 
   // vertical radio button
@@ -157,8 +162,7 @@
   }
 
   .#{$prefix}--radio-button__label {
-    @include typescale('zeta');
-    @include font-family;
+    @include type-style('body-short-01');
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -193,12 +197,6 @@
     }
   }
 
-  .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    border-color: transparent;
-  }
-
-  // Disabled
-
   // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
   [disabled] ~ _ {
     font-size: inherit;
@@ -217,7 +215,8 @@
   // Focus
 
   .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    @include focus-outline('blurred');
+    box-shadow: 0 0 0 2px $focus;
+    outline: 1px solid transparent;
   }
 
   // Skeleton State
@@ -229,6 +228,35 @@
 
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton .#{$prefix}--radio-button__appearance {
     display: none;
+  }
+
+  .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-right: $spacing-md;
+  }
+
+  .#{$prefix}--radio-button-group--vertical .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-right: 0;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right .#{$prefix}--radio-button__label {
+    flex-direction: row;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left .#{$prefix}--radio-button__label {
+    flex-direction: row-reverse;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left .#{$prefix}--radio-button__appearance {
+    margin-right: 0;
+    margin-left: $spacing-xs;
   }
 }
 

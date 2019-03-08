@@ -8,6 +8,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { breakingChangesX } = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -22,8 +23,10 @@ const items = [
 
 module.exports = {
   meta: {
+    removed: breakingChangesX,
     useIframe: true,
   },
+  hidden: true,
   context: {
     prefix,
   },

@@ -9,7 +9,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
 @mixin tags {
@@ -74,8 +74,7 @@
 
 @mixin tags--x {
   .#{$prefix}--tag {
-    @include font-family;
-    @include typescale('omega');
+    @include type-style('label-01');
     display: inline-flex;
     align-items: center;
     padding: 0 $spacing-xs;
@@ -87,7 +86,6 @@
       margin-left: 0;
     }
 
-    &--basic,
     &.#{$prefix}--skeleton {
       @include tag-theme--x($bg-color: $ui-03, $text-color: $text-01);
     }
@@ -121,6 +119,10 @@
     @include tag-theme--x($ibm-colors__green-20, $ibm-colors__green-70);
   }
 
+  .#{$prefix}--tag--gray {
+    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-100);
+  }
+
   .#{$prefix}--tag--cool-gray {
     @include tag-theme--x($ibm-colors__cool-gray-20, $ibm-colors__cool-gray-100);
   }
@@ -130,7 +132,7 @@
   }
 
   .#{$prefix}--tag--disabled {
-    @include tag-theme--x($ibm-colors__gray-20, $ibm-colors__gray-30);
+    @include tag-theme--x($ibm-colors__gray-10, $ibm-colors__gray-30);
 
     &:hover {
       cursor: not-allowed;

@@ -9,7 +9,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/layer';
 @import '../form/form';
 @import 'flatpickr.scss';
@@ -233,9 +233,17 @@
     min-width: rem(38px);
     width: rem(38px);
     padding: $spacing-2xs;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
 
     &:focus {
       outline: 1px solid $brand-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
     }
   }
 
@@ -508,7 +516,7 @@
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
     .#{$prefix}--date-picker__input {
-      width: 7.25rem;
+      width: rem(120px);
     }
   }
 
@@ -530,7 +538,7 @@
 
   .#{$prefix}--date-picker__input {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('code-02');
     @include focus-outline('reset');
 
     display: block;
@@ -573,13 +581,9 @@
   .#{$prefix}--date-picker__icon {
     position: absolute;
     right: 1rem;
-    fill: $ui-05;
+    fill: $icon-01;
     cursor: pointer;
     z-index: 1;
-
-    &:hover {
-      fill: $hover-primary;
-    }
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -632,8 +636,8 @@
 
   .#{$prefix}--date-picker__month .flatpickr-prev-month,
   .#{$prefix}--date-picker__month .flatpickr-next-month,
-  .flatpickr-month .flatpickr-prev-month,
-  .flatpickr-month .flatpickr-next-month {
+  .flatpickr-months .flatpickr-prev-month,
+  .flatpickr-months .flatpickr-next-month {
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -654,7 +658,7 @@
 
   .#{$prefix}--date-picker__month .flatpickr-current-month,
   .flatpickr-month .flatpickr-current-month {
-    @include typescale('zeta');
+    @include type-style('heading-01');
     padding: 0;
   }
 
@@ -677,9 +681,18 @@
     border: none;
     border-radius: 0;
     padding: $spacing-2xs;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
 
     &:focus {
       outline: 1px solid $interactive-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      // Added in when upgraded to Flatpickr 4.5.5
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
     }
   }
 
@@ -695,14 +708,14 @@
       background: none;
 
       &:after {
-        border-bottom-color: $interactive-02;
-        border-top-color: $interactive-02;
+        border-bottom-color: $interactive-01;
+        border-top-color: $interactive-01;
       }
     }
 
     &:after {
-      border-bottom-color: $interactive-01;
-      border-top-color: $interactive-01;
+      border-bottom-color: $icon-01;
+      border-top-color: $icon-01;
     }
   }
 
@@ -718,15 +731,14 @@
 
   span.#{$prefix}--date-picker__weekday,
   span.flatpickr-weekday {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     color: $text-01;
     font-weight: 400;
   }
 
   .#{$prefix}--date-picker__day,
   .flatpickr-day {
-    @include typescale('zeta');
-    @include focus-outline('reset');
+    @include type-style('body-short-01');
     height: rem(40px);
     width: rem(40px);
     display: flex;
@@ -755,6 +767,7 @@
   .flatpickr-day.today {
     position: relative;
     color: $interactive-01;
+    font-weight: 600;
 
     &::after {
       content: '';
@@ -802,12 +815,24 @@
   .flatpickr-day.selected {
     color: $inverse-01;
     background: $interactive-01;
+
+    &:hover {
+      color: $text-01;
+    }
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
   .flatpickr-day.startRange.selected {
     box-shadow: none;
     z-index: 2;
+  }
+
+  .#{$prefix}--date-picker__day.endRange,
+  .flatpickr-day.endRange {
+    &:hover {
+      background: $ui-01;
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--date-picker__day.endRange.inRange,
