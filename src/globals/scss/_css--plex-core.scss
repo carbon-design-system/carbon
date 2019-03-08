@@ -8,7 +8,7 @@
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
 @import 'helper-mixins';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 $unicodes: (
