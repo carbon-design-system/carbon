@@ -250,6 +250,8 @@
     padding: 3px $spacing-md;
     display: block;
     visibility: hidden;
+    @include type-style('body-long-01');
+    color: $inverse-01;
   }
 
   //multiline tooltip
@@ -257,6 +259,8 @@
     width: rem(150px);
     height: auto;
     padding: $spacing-md;
+    @include type-style('body-long-01');
+    color: $inverse-01;
   }
 
   //OPTIONAL HELPER TEXT STYLING
