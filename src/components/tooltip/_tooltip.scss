@@ -570,8 +570,8 @@
     &::before {
       right: 0;
       left: 0;
-      width: 0.6rem;
-      height: 0.6rem;
+      width: rem(18px);
+      height: rem(18px);
       margin: 0 auto;
       content: '';
       margin-top: 1px;
@@ -635,7 +635,7 @@
   .#{$prefix}--tooltip--icon__bottom {
     &::before {
       bottom: 0;
-      transform: translate(-50%, calc(100% + 10px)) rotate(135deg);
+      transform: translate(-50%, calc(100% + 9px)) rotate(135deg);
     }
 
     &::after {
