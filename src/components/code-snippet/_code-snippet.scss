@@ -301,6 +301,7 @@
 @mixin snippet--x {
   .#{$prefix}--snippet code {
     font-family: $font-family-mono;
+    @include type-style('code-01');
   }
 
   // Inline Code Snippet
@@ -367,6 +368,17 @@
 
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
+    @include type-style('code-01');
+  }
+
+  .#{$prefix}--snippet--single::after {
+    width: rem(16px);
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: rem(56px);
+    background-image: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(243, 243, 243, 1));
   }
 
   // Multi Line Snippet
@@ -383,15 +395,26 @@
     position: relative;
     max-height: rem(238px);
     min-height: rem(56px);
-    transition: all $transition--base $carbon--standard-easing;
+    transition: max-height $transition--expansion $carbon--standard-easing;
   }
 
-  .#{$prefix}--snippet--expand.#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container {
     max-height: rem(1500px);
+    transition: max-height 700ms $carbon--standard-easing;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    white-space: pre-wrap;
+    overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+    width: rem(16px);
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(243, 243, 243, 1));
   }
 
   //Copy Button
@@ -409,7 +432,7 @@
     top: 0;
     right: 0;
     border: none;
-    background-color: transparent;
+    background-color: $ui-01;
     outline: none;
     padding: 0;
     height: $spacing-2xl;
@@ -418,6 +441,7 @@
 
     &:focus {
       @include focus-outline('outline');
+      outline-color: $focus;
     }
   }
 
@@ -464,6 +488,12 @@
     padding: $spacing-xs;
     padding-left: $spacing-md;
     color: $text-01;
+    background-color: $field-01;
+  }
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
+    position: relative;
+    top: rem(-1px);
   }
 
   .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
@@ -475,10 +505,10 @@
     margin-left: $spacing-xs;
     margin-bottom: rem(1px);
     transform: rotate(0deg);
-    transition: $transition--base;
+    transition: $transition--expansion;
   }
 
-  .#{$prefix}--snippet-btn--expand:hover {
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
     background: $hover-ui;
     color: $text-01;
   }
