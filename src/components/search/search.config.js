@@ -40,6 +40,9 @@ module.exports = {
           without the use of navigation. Search can be used as the primary means of discovering content,
           or as a filter to aid the user in finding content.
         `,
+      meta: {
+        xVersionNotSupported: true,
+      },
       context: {
         suffix: 'xl',
         componentsX,
