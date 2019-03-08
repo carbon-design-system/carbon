@@ -197,18 +197,11 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interactive-01, transparent, $text-04, #0353e9, $text-04, $interactive-02);
+    @include button-theme--x($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme--x(
-      $ibm-colors__gray-80,
-      $ibm-colors__gray-80,
-      $text-04,
-      $ibm-colors__gray-70,
-      $text-04,
-      $ibm-colors__gray-60
-    );
+    @include button-theme--x($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
 
     &:hover,
     &:focus {
@@ -217,7 +210,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $interactive-01, $interactive-01, #0353e9, $interactive-01, $interactive-02);
+    @include button-theme--x(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
     position: relative;
 
     &:hover {
@@ -240,15 +233,12 @@
     }
   }
 
-  .#{$prefix}--btn--ghost {
-    @include button-theme--x(
-      transparent,
-      transparent,
-      $interactive-03,
-      $ibm-colors__gray-10,
-      $interactive-03,
-      $ibm-colors__blue-70
-    );
+  button.#{$prefix}--btn--ghost {
+    @include button-theme--x(transparent, transparent, $interactive-01, $hover-ui, $interactive-01, $active-ui);
+    display: inline-flex;
+    align-items: center;
+    min-width: auto;
+    padding: rem(14px) rem(16px);
 
     &:hover,
     &:active {
@@ -264,7 +254,9 @@
     }
 
     .#{$prefix}--btn__icon {
+      position: static;
       margin-left: $spacing-xs;
+      transform: none;
     }
 
     &:disabled,
@@ -278,10 +270,14 @@
         fill: $disabled;
       }
     }
+
+    &.#{$prefix}--btn--sm {
+      padding: 0.375rem 1rem;
+    }
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $text-04, $active-danger);
+    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
     &:hover {
       border: $button-border-width solid transparent;
