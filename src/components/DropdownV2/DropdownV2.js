@@ -82,7 +82,7 @@ export default class DropdownV2 extends React.Component {
     /**
      * In the case you want to control the dropdown selection entirely.
      */
-    selectedItem: PropTypes.object,
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
     /**
      * `true` to use the light version.
