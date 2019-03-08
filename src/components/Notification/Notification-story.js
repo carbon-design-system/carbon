@@ -13,6 +13,7 @@ import Notification, {
   ToastNotification,
   InlineNotification,
 } from '../Notification';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const kinds = {
   'Error (error)': 'error',
@@ -33,9 +34,19 @@ const notificationProps = () => ({
   onCloseButtonClick: action('onCloseButtonClick'),
 });
 
-storiesOf('Notifications', module)
+const stories = storiesOf('Notifications', module)
   .addDecorator(withKnobs)
-  .add(
+  .add('Toast', () => (
+    <ToastNotification
+      {...notificationProps()}
+      caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+      style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+    />
+  ))
+  .add('inline', () => <InlineNotification {...notificationProps()} />);
+
+if (!breakingChangesX) {
+  stories.add(
     'Deprecated: <Notfication />',
     () => (
       <Notification
@@ -51,12 +62,5 @@ storiesOf('Notifications', module)
           `,
       },
     }
-  )
-  .add('Toast', () => (
-    <ToastNotification
-      {...notificationProps()}
-      caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
-      style={{ minWidth: '30rem', marginBottom: '.5rem' }}
-    />
-  ))
-  .add('inline', () => <InlineNotification {...notificationProps()} />);
+  );
+}

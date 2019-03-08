@@ -29,7 +29,7 @@ import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
-let didWarnAboutDeprecation = false;
+let didWarnAboutDeprecationButtonIcon = false;
 
 export class NotificationButton extends Component {
   static propTypes = {
@@ -105,11 +105,11 @@ export class NotificationButton extends Component {
 
     if (__DEV__ && breakingChangesX && (icon || name)) {
       warning(
-        didWarnAboutDeprecation,
+        didWarnAboutDeprecationButtonIcon,
         'The `icon`/`name` properties in the `NotificationButton` component is being removed in the next release of ' +
           '`carbon-components-react`. Please use `renderIcon` instead.'
       );
-      didWarnAboutDeprecation = true;
+      didWarnAboutDeprecationButtonIcon = true;
     }
 
     const buttonClasses = classNames(
@@ -529,9 +529,10 @@ export class InlineNotification extends Component {
   }
 }
 
-// Deprecated
+let didWarnAboutDeprecationNotification = false;
 
-export default class Notification extends Component {
+// Deprecated
+class Notification extends Component {
   static propTypes = {
     children: PropTypes.node,
 
@@ -602,6 +603,15 @@ export default class Notification extends Component {
     }[kindProp]);
 
   render() {
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecationNotification,
+        'The `Notification` component is being removed in the next release of ' +
+          '`carbon-components-react`. Please use `InlineNotification` or `ToastNotification` instead.'
+      );
+      didWarnAboutDeprecationNotification = true;
+    }
+
     if (!this.state.open) {
       return null;
     }
@@ -689,3 +699,5 @@ export default class Notification extends Component {
     return caption ? toastHTML : inlineHTML;
   }
 }
+
+export default (!breakingChangesX ? Notification : null);
