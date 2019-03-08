@@ -1,6 +1,21 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
 
+const featureFlags = require('../../globals/js/feature-flags');
+const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
+
 module.exports = {
+  context: {
+    featureFlags,
+    prefix,
+  },
   variants: [
     {
       name: 'default',
@@ -13,8 +28,8 @@ module.exports = {
           .toString(36)
           .substr(2),
         hasFooter: true,
-        classPrimaryButton: 'bx--btn--primary',
-        classCloseButton: 'bx--btn--secondary',
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
     {
@@ -26,8 +41,8 @@ module.exports = {
           .toString(36)
           .substr(2),
         hasFooter: false,
-        classPrimaryButton: 'bx--btn--primary',
-        classCloseButton: 'bx--btn--secondary',
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
     {
@@ -39,9 +54,22 @@ module.exports = {
           .substr(2),
         hasFooter: true,
         labelPrimaryButton: 'Danger',
-        classModalSupplemental: 'bx--modal--danger',
-        classPrimaryButton: 'bx--btn--danger--primary',
-        classCloseButton: 'bx--btn--tertiary',
+        classModalSupplemental: `${prefix}--modal--danger`,
+        classPrimaryButton: `${prefix}--btn--danger`,
+        classCloseButton: componentsX ? `${prefix}--btn--secondary` : `${prefix}--btn--tertiary`,
+      },
+    },
+    {
+      name: 'input',
+      label: 'Input Modal',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasInput: true,
+        hasFooter: true,
+        classPrimaryButton: `${prefix}--btn--primary`,
+        classCloseButton: `${prefix}--btn--secondary`,
       },
     },
   ],

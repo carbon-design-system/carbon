@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -6,6 +13,8 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -57,12 +66,11 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @param {HTMLElement} detail.item The button to be selected.
    * @param {Function} callback Callback called when change in state completes.
    */
-  _changeState(detail, callback) {
-    const item = detail.item;
+  _changeState({ item }, callback) {
     // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
     const itemLink = item.querySelector(this.options.selectorLink);
     if (itemLink) {
-      [...this.element.querySelectorAll(this.options.selectorLink)].forEach(link => {
+      toArray(this.element.querySelectorAll(this.options.selectorLink)).forEach(link => {
         if (link !== itemLink) {
           link.setAttribute('aria-selected', 'false');
         }
@@ -70,13 +78,13 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
       itemLink.setAttribute('aria-selected', 'true');
     }
 
-    const selectorButtons = [...this.element.querySelectorAll(this.options.selectorButton)];
+    const selectorButtons = toArray(this.element.querySelectorAll(this.options.selectorButton));
 
     selectorButtons.forEach(button => {
       if (button !== item) {
         button.setAttribute('aria-selected', false);
         button.classList.toggle(this.options.classActive, false);
-        [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => {
+        toArray(button.ownerDocument.querySelectorAll(button.dataset.target)).forEach(element => {
           element.setAttribute('hidden', '');
           element.setAttribute('aria-hidden', 'true');
         });
@@ -85,7 +93,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
 
     item.classList.toggle(this.options.classActive, true);
     item.setAttribute('aria-selected', true);
-    [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => {
+    toArray(item.ownerDocument.querySelectorAll(item.dataset.target)).forEach(element => {
       element.removeAttribute('hidden');
       element.setAttribute('aria-hidden', 'false');
     });
@@ -126,7 +134,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @member ContentSwitcher.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

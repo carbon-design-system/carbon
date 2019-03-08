@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-------------------------------------------
 // 🌌 Spacing
 // ------------------------------------------
@@ -6,6 +13,7 @@
 //
 //   Spacing Scale
 //   ==========================================
+//   4xs  ||  1px
 //   3xs  ||  2px
 //   2xs  ||  4px
 //   xs   ||  8px
@@ -30,6 +38,7 @@
 
 $spacing-baseline: 1rem !default;
 
+$spacing-4xs: $spacing-baseline * 0.0625 !default;
 $spacing-3xs: $spacing-baseline * 0.125 !default;
 $spacing-2xs: $spacing-baseline * 0.25 !default;
 $spacing-xs: $spacing-baseline * 0.5 !default;

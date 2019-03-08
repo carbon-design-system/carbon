@@ -16,7 +16,7 @@ class CodeExample extends Component {
     expandedCode: false,
   };
 
-  componentDidMount = () => {
+  determineShowBtnState = () => {
     if (this.codeBlock.offsetHeight > 190) {
       this.setState({ showBtn: true });
     }
@@ -30,7 +30,7 @@ class CodeExample extends Component {
   };
 
   expandCode = () => {
-    this.setState({ expandedCode: !this.state.expandedCode });
+    this.setState(({ expandedCode }) => ({ expandedCode: !expandedCode }));
   };
 
   handleClick = () => {
@@ -47,7 +47,7 @@ class CodeExample extends Component {
       }
       this._observerCode = new MutationObserver(() => {
         if (window.Prism && Array.prototype.every.call(node.childNodes, childNode => childNode.nodeType === Node.TEXT_NODE)) {
-          window.Prism.highlightElement(node);
+          window.Prism.highlightElement(node, this.determineShowBtnState());
         }
       });
       this._observerCode.observe(node, {
@@ -61,28 +61,29 @@ class CodeExample extends Component {
 
   render() {
     const { htmlFile } = this.props;
+    const { copied, expandedCode, showBtn } = this.state;
 
     const copyBtnClass = classnames({
       'bx--btn--copy__feedback': true,
-      'bx--btn--copy__feedback--displayed': this.state.copied,
+      'bx--btn--copy__feedback--displayed': copied,
     });
 
     const codeExampleClass = classnames({
       'code-example__raw-html': true,
-      'code-example__raw-html--expanded': this.state.expandedCode,
+      'code-example__raw-html--expanded': expandedCode,
     });
 
     const expandBtnIconClass = classnames({
       'code-example__expand--icon': true,
-      'code-example__expand--icon--rotated': this.state.expandedCode,
+      'code-example__expand--icon--rotated': expandedCode,
     });
 
     const expandBtnClass = classnames({
-      'code-example__expand': this.state.showBtn,
-      'code-example__expand--hidden': !this.state.showBtn,
+      'code-example__expand': showBtn,
+      'code-example__expand--hidden': !showBtn,
     });
 
-    const expandCodeBtnText = this.state.expandedCode ? 'Show less code' : 'Show more code';
+    const expandCodeBtnText = expandedCode ? 'Show less code' : 'Show more code';
     return (
       <div className="code-example">
         <div
@@ -97,13 +98,17 @@ class CodeExample extends Component {
           </pre>
         </div>
         <CopyToClipboard text={htmlFile} onCopy={this.handleCopy}>
-          <button data-copy-btn className="bx--snippet-button code-example__copy-btn" onClick={() => this.handleClick()}>
+          <button
+            type="button"
+            data-copy-btn
+            className="bx--snippet-button code-example__copy-btn"
+            onClick={() => this.handleClick()}>
             Copy
             <Icon className="code-example__copy-btn--icon bx--snippet__icon" name="copy" description="Copy code icon" />
             <div className={copyBtnClass} data-feedback="Copied!" />
           </button>
         </CopyToClipboard>
-        <button className={expandBtnClass} onClick={this.expandCode}>
+        <button type="button" className={expandBtnClass} onClick={this.expandCode}>
           <span>{expandCodeBtnText}</span>
           <Icon className={expandBtnIconClass} name="chevron--down" description="Expand code icon" />
         </button>

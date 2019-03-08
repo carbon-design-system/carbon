@@ -1,19 +1,23 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Slider
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/layout';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 @import '../text-input/text-input';
 
-@include exports('slider') {
+@mixin slider {
   .#{$prefix}--slider-container {
     display: flex;
     align-items: center;
@@ -26,6 +30,15 @@
     margin: 0 $spacing-md;
     max-width: rem(640px);
     min-width: rem(200px);
+    order: 1;
+  }
+
+  .#{$prefix}--slider__range-label:first-of-type {
+    order: 0;
+  }
+
+  .#{$prefix}--slider-text-input {
+    order: 3;
   }
 
   .#{$prefix}--slider--disabled {
@@ -52,6 +65,7 @@
 
     &:last-of-type {
       margin-right: $spacing-md;
+      order: 2;
     }
   }
 
@@ -85,6 +99,7 @@
     transition: transform 100ms $carbon--standard-easing, background 100ms $carbon--standard-easing;
     cursor: pointer;
     outline: none;
+    z-index: 2;
 
     &--clicked {
       transition: left $transition--base $carbon--standard-easing;
@@ -109,7 +124,7 @@
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
     width: rem(60px);
-    min-width: 0;
+    min-width: rem(60px);
     height: 2rem;
     padding: 0;
     text-align: center;
@@ -137,5 +152,191 @@
     left: 50%;
     cursor: default;
     pointer-events: none;
+  }
+}
+
+@mixin slider--x {
+  .#{$prefix}--slider-container {
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  .#{$prefix}--slider {
+    position: relative;
+    width: 100%;
+    margin: 0 $spacing-md;
+    max-width: rem(640px);
+    min-width: rem(200px);
+  }
+
+  .#{$prefix}--slider__range-label {
+    @include typescale('zeta');
+    font-family: $font-family-mono;
+    color: $text-01;
+
+    &:last-of-type {
+      margin-right: $spacing-md;
+    }
+  }
+
+  .#{$prefix}--slider__track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $ui-03;
+    cursor: pointer;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__track:before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    height: rem(4px);
+    width: rem(2px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: rem(-5px);
+    background: $ui-03;
+  }
+
+  .#{$prefix}--slider__filled-track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $ui-05;
+    transform-origin: left;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+    transition: background $transition--base;
+  }
+
+  .#{$prefix}--slider__thumb {
+    position: absolute;
+    height: rem(14px);
+    width: rem(14px);
+    background: $ui-05;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: transform $transition--base $carbon--standard-easing, background $transition--base $carbon--standard-easing,
+      box-shadow $transition--base $carbon--standard-easing;
+    cursor: pointer;
+    outline: none;
+    z-index: 3;
+
+    &:hover {
+      // 20px / 14px = 1.4285714286
+      transform: translate(-50%, -50%) scale(1.4285714286);
+    }
+
+    &:focus {
+      // 20px / 14px = 1.4285714286
+      transform: translate(-50%, -50%) scale(1.4285714286);
+      box-shadow: inset 0 0 0 2px $interactive-01, inset 0 0 0 3px $ui-01;
+      background-color: $interactive-01;
+    }
+
+    &:active {
+      transform: translate(-50%, -50%) scale(1.4285714286);
+      box-shadow: inset 0 0 0 2px $interactive-01;
+    }
+  }
+
+  .#{$prefix}--slider__input {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
+    width: rem(64px);
+    height: rem(40px);
+    padding: 0;
+    text-align: center;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+    background-color: $interactive-01;
+  }
+
+  // Disabled state
+  .#{$prefix}--label--disabled ~ .#{$prefix}--slider-container > .#{$prefix}--slider__range-label {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    background-color: $ui-03;
+
+    &:hover {
+      transform: translate(-50%, -50%);
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      background-color: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+
+    &:active {
+      background: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+    background-color: $ui-03;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--form-item .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    background-color: $disabled-01;
+    color: $disabled-02;
+    transition: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      outline: none;
+      color: $disabled-02;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__range-label {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__thumb {
+    left: 50%;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+@include exports('slider') {
+  @if feature-flag-enabled('components-x') {
+    @include slider--x;
+  } @else {
+    @include slider;
   }
 }

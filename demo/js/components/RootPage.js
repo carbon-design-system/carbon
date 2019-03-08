@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import classnames from 'classnames';
+import { ToggleSmall } from 'carbon-components-react';
+import on from '../../../src/globals/js/misc/on';
 import CodePage from './CodePage/CodePage';
 import SideNav from './SideNav';
 import PageHeader from './PageHeader/PageHeader';
@@ -16,55 +18,118 @@ const checkStatus = response => {
   throw error;
 };
 
-const load = (componentItems, selectedNavItemId) => {
-  const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
-  const subItems = metadata.items || [];
-  const hasRenderedContent =
-    !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
-  if (!hasRenderedContent) {
-    return fetch(`/code/${metadata.name}`)
-      .then(checkStatus)
-      .then(response => {
-        const contentType = response.headers.get('content-type');
-        return contentType && contentType.includes('application/json') ? response.json() : response.text();
-      })
-      .then(responseContent => {
-        if (Object(responseContent) === responseContent) {
-          return componentItems.map(item => {
-            if (item.id !== selectedNavItemId) {
-              return item;
-            }
-            return !item.items
-              ? {
-                  ...item,
-                  renderedContent: responseContent[`${item.handle}--default`],
-                }
-              : {
-                  ...item,
-                  items: item.items.map(
-                    subItem =>
-                      !responseContent[subItem.handle]
-                        ? subItem
-                        : {
-                            ...subItem,
-                            renderedContent: responseContent[subItem.handle],
-                          }
-                  ),
-                };
-          });
-        }
-        return componentItems.map(
-          item =>
-            item.id !== selectedNavItemId
-              ? item
-              : {
-                  ...item,
-                  renderedContent: responseContent,
-                }
-        );
-      });
+/**
+ * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @returns {Object[]} List of Fractal Component instance data with the contents of all components cleared.
+ */
+const clearContent = componentItems =>
+  componentItems.map(item => ({
+    ...item,
+    items: item.items.map(subItem => ({
+      ...subItem,
+      renderedContent: undefined,
+    })),
+  }));
+
+/**
+ * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @param {string} id The component ID.
+ * @param {Object|string} content The content. String for component content, object for variant content (keyed by variant ID).
+ * @returns {Object[]}
+ *   List of Fractal Component instance data with the content of the given component ID populated with the given content.
+ */
+const applyContent = (componentItems, id, content) => {
+  if (Object(content) === content) {
+    return componentItems.map(item => {
+      if (item.id !== id) {
+        return item;
+      }
+      return !item.items
+        ? {
+            ...item,
+            renderedContent: content[`${item.handle}--default`],
+          }
+        : {
+            ...item,
+            items: item.items.map(subItem =>
+              !content[subItem.handle]
+                ? subItem
+                : {
+                    ...subItem,
+                    renderedContent: content[subItem.handle],
+                  }
+            ),
+          };
+    });
   }
-  return Promise.resolve(null);
+  return componentItems.map(item =>
+    item.id !== id
+      ? item
+      : {
+          ...item,
+          renderedContent: content,
+        }
+  );
+};
+
+/**
+ * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @returns {Object[]} The component data with `isHidden` moved to `meta.isDefaultHidden`.
+ */
+const preserveDefaultHidden = componentItems =>
+  componentItems.map(item => {
+    const { items: subItems, meta = {} } = item;
+    return {
+      ...item,
+      meta: {
+        ...meta,
+        // `hidden` in config data is set to `isHidden` in Fractal Component instance
+        isDefaultHidden: item.isHidden,
+      },
+      ...(!subItems
+        ? {}
+        : {
+            items: preserveDefaultHidden(subItems),
+          }),
+    };
+  });
+
+/**
+ * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @param {boolean} isComponentsX `true` if the current style is of the experimental version.
+ * @returns {Object[]} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
+ */
+const applyComponentsX = (componentItems, isComponentsX) =>
+  componentItems.map(item => {
+    const { items: subItems, meta = {} } = item;
+    return {
+      ...item,
+      isHidden: meta.isDefaultHidden || (meta.xVersionNotSupported && isComponentsX) || (meta.xVersionOnly && !isComponentsX),
+      ...(!subItems
+        ? {}
+        : {
+            items: applyComponentsX(subItems, isComponentsX),
+          }),
+    };
+  });
+
+/**
+ * @param {string} name The event name.
+ * @param {Function} callback The callback.
+ * @returns {Handle} The handle to release the attached event handler.
+ */
+const onBrowserSyncEvent = (name, callback) => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (!window.___browserSync___) {
+    return null;
+  }
+  window.___browserSync___.socket.on(name, callback); // eslint-disable-line no-underscore-dangle
+  return {
+    release() {
+      window.___browserSync___.socket.off(name, callback); // eslint-disable-line no-underscore-dangle
+      return null;
+    },
+  };
 };
 
 /**
@@ -81,42 +146,93 @@ class RootPage extends Component {
      * The array of document data. (Preserved for future)
      */
     docItems: PropTypes.arrayOf(PropTypes.shape()).isRequired, // eslint-disable-line react/no-unused-prop-types
+
+    /**
+     * The port of the server triggering experimental/classic Sass build
+     */
+    portSassBuild: PropTypes.number,
+
+    /**
+     * `true` to use query args for routing.
+     */
+    routeWithQueryArgs: PropTypes.bool,
+
+    /**
+     * `true` to use static full render page.
+     */
+    useStaticFullRenderPage: PropTypes.bool,
   };
 
-  constructor(props) {
+  constructor() {
     super();
-
-    const { componentItems } = props;
-
-    this.state = {
-      /**
-       * The array of component data.
-       * @type {Object[]}
-       */
-      componentItems,
-    };
-
     window.addEventListener('popstate', evt => {
       this.switchTo(evt.state.name);
     });
   }
 
+  state = {};
+
+  static getDerivedStateFromProps({ componentItems, isComponentsX }, state) {
+    const {
+      prevComponentItems,
+      prevIsComponentsX,
+      componentItems: currentComponentItems,
+      isComponentsX: currentIsComponentsX,
+    } = state;
+    if (prevComponentItems === componentItems && prevIsComponentsX === isComponentsX) {
+      return null;
+    }
+    const newIsComponentsX = prevIsComponentsX === isComponentsX ? currentIsComponentsX : isComponentsX;
+    const newComponentItems = applyComponentsX(
+      preserveDefaultHidden(prevComponentItems === componentItems ? currentComponentItems : componentItems),
+      newIsComponentsX
+    );
+    return {
+      componentItems: newComponentItems,
+      isComponentsX: newIsComponentsX,
+      prevComponentItems: componentItems,
+      prevIsComponentsX: isComponentsX,
+    };
+  }
+
   componentDidMount() {
     const { componentItems } = this.props;
-    if (!this.state.selectedNavItemId && componentItems) {
-      const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(location.pathname);
-      const name = (pathnameTokens && pathnameTokens[1]) || '';
+    const { selectedNavItemId } = this.state;
+    if (!selectedNavItemId && componentItems) {
+      const { search } = window.location;
+      const nameInQueryArg =
+        search &&
+        search
+          .replace(/^\??(.*?)\/?$/, '$1')
+          .split('&')
+          .reduce((o, item) => {
+            const pair = item.split('=');
+            o[pair[0]] = pair[1]; // eslint-disable-line prefer-destructuring
+            return o;
+          }, {}).nav;
+      const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(window.location.pathname);
+      const name = nameInQueryArg || (pathnameTokens && pathnameTokens[1]) || '';
       const selectedNavItem = (name && componentItems.find(item => item.name === name)) || componentItems[0];
       if (selectedNavItem) {
         this.switchTo(selectedNavItem.id);
       }
     }
+    if (!this.hBrowserSyncEvent) {
+      this.hBrowserSyncEvent = onBrowserSyncEvent('file:reload', this._handleBrowserSyncEvent);
+    }
+    this._inspectLinkTag();
   }
 
-  componentWillReceiveProps(props) {
-    const { componentItems } = props;
-    if (this.props.componentItems !== componentItems) {
-      this.setState({ componentItems });
+  componentWillUnmount() {
+    if (this.hStyleLoad) {
+      this.hStyleLoad = this.hStyleLoad.release();
+    }
+    if (this.hStyleInspectionTimeout) {
+      clearTimeout(this.hStyleInspectionTimeout);
+      this.hStyleInspectionTimeout = null;
+    }
+    if (this.hBrowserSyncEvent) {
+      this.hBrowserSyncEvent = this.hBrowserSyncEvent.release();
     }
   }
 
@@ -142,8 +258,119 @@ class RootPage extends Component {
    * @returns The component data that is currently selected.
    */
   getCurrentComponentItem() {
-    const { componentItems } = this.state;
-    return componentItems && componentItems.find(item => item.id === this.state.selectedNavItemId);
+    const { componentItems, selectedNavItemId } = this.state;
+    return componentItems && componentItems.find(item => item.id === selectedNavItemId);
+  }
+
+  /**
+   * Handles an event from BrowserSync.
+   * @param {Object} evt The event.
+   * @private
+   */
+  _handleBrowserSyncEvent = evt => {
+    if (evt.basename === 'demo.css') {
+      this._inspectLinkTag();
+    }
+  };
+
+  /**
+   * Toggles usage of experimental CSS upon user event.
+   * @param {Object} evt The event.
+   * @private
+   */
+  _switchExperimental = evt => {
+    const { portSassBuild } = this.props;
+    fetch(`http://localhost:${portSassBuild}/${evt.target.checked ? 'experimental' : 'classic'}`);
+  };
+
+  /**
+   * Inspects `<link>` tag to see if experimental version of demo CSS is loaded there.
+   */
+  _inspectLinkTag() {
+    if (this.hStyleLoad) {
+      this.hStyleLoad = this.hStyleLoad.release();
+    }
+    if (this.hStyleInspectionTimeout) {
+      clearTimeout(this.hStyleInspectionTimeout);
+      this.hStyleInspectionTimeout = null;
+    }
+    this.hStyleInspectionTimeout = setTimeout(() => {
+      const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
+        /\/demo\.css/i.test(link.getAttribute('href'))
+      );
+      const lastLink = links[links.length - 1];
+      if (lastLink.sheet) {
+        this._detectComponentsX(lastLink);
+      } else {
+        this.hStyleLoad = on(lastLink, 'load', () => {
+          this._detectComponentsX(lastLink);
+        });
+      }
+    }, 0);
+  }
+
+  /**
+   * Populates the content of current selection.
+   */
+  _populateCurrent() {
+    const { componentItems, selectedNavItemId } = this.state;
+    const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
+    const subItems = metadata.items || [];
+    const hasRenderedContent =
+      !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
+    if (!hasRenderedContent) {
+      fetch(`/code/${metadata.name}`)
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(responseContent => {
+          // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
+          this.setState(({ componentItems: prevComponentItems }) => ({
+            componentItems: applyContent(prevComponentItems, selectedNavItemId, responseContent),
+          }));
+        });
+    }
+  }
+
+  /**
+   * Detects if the demo CSS bundle is of X version and set states accordingly.
+   * @param {HTMLElement} link The `<link>` for the demo CSS bundle.
+   * @private
+   */
+  _detectComponentsX(link) {
+    if (this.hTimeoutDetectExperimental) {
+      clearTimeout(this.hTimeoutDetectExperimental);
+      this.hTimeoutDetectExperimental = null;
+    }
+    let rulesLength = 0;
+    try {
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=761236#c1 suggests that `NS_ERROR_DOM_INVALID_ACCESS_ERR` is thrown
+      // if we try to read `.cssRules` on a stylesheet that's not done being parsed yet
+      rulesLength = link.sheet.cssRules.length;
+    } catch (err) {} // eslint-disable-line no-empty
+    // For IE11/FF
+    if (rulesLength === 0) {
+      this.hTimeoutDetectExperimental = setTimeout(() => {
+        this._detectComponentsX(link);
+      }, 100);
+      return;
+    }
+    const { isComponentsX: oldIsComponentsX, componentItems } = this.state;
+    const isComponentsX = Array.prototype.some.call(
+      link.sheet.cssRules,
+      rule =>
+        /^\.bx--body$/.test(rule.selectorText) &&
+        /^rgb\(255,\s*255,\s*255\)$/.test(rule.style.getPropertyValue('background-color'))
+    );
+    if (oldIsComponentsX !== isComponentsX) {
+      this.setState(
+        {
+          // TODO: Load/navigate
+          componentItems: applyComponentsX(clearContent(componentItems), isComponentsX),
+          isComponentsX,
+        },
+        this._populateCurrent
+      );
+    }
   }
 
   /**
@@ -151,27 +378,25 @@ class RootPage extends Component {
    * @param {string} selectedNavItemId The ID of the newly selected component.
    */
   switchTo(selectedNavItemId) {
+    const { routeWithQueryArgs } = this.props;
     this.setState({ selectedNavItemId }, () => {
       const { componentItems } = this.state;
       const selectedNavItem = componentItems && componentItems.find(item => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
-        history.pushState({ name }, name, `/demo/${name}`);
+        window.history.pushState({ name }, name, !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`);
       }
-      load(componentItems, selectedNavItemId).then(newComponentItems => {
-        if (newComponentItems) {
-          this.setState({ componentItems: newComponentItems });
-        }
-      });
+      this._populateCurrent();
     });
   }
 
   render() {
-    const { componentItems } = this.state;
+    const { portSassBuild, useStaticFullRenderPage } = this.props;
+    const { componentItems, isComponentsX, navClosed } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
     const classNames = classnames({
-      'bx--interior-left-nav--collapsed': this.state.navClosed,
+      'bx--interior-left-nav--collapsed': navClosed,
     });
     return !metadata ? null : (
       <Fragment>
@@ -179,7 +404,15 @@ class RootPage extends Component {
         <SideNav items={componentItems} className={classNames} onItemClick={this.onSideNavItemClick} />
         <main role="main" id="maincontent" className="container" aria-labelledby="page-title" tabIndex="-1" data-page={name}>
           <PageHeader label="Component" title={label} />
-          <CodePage metadata={metadata} />
+          <CodePage metadata={metadata} useStaticFullRenderPage={useStaticFullRenderPage} />
+          <ToggleSmall
+            id="theme-switcher"
+            className="demo--theme-switcher"
+            ariaLabel="Theme switcher"
+            disabled={!portSassBuild}
+            toggled={isComponentsX}
+            onChange={this._switchExperimental}
+          />
         </main>
       </Fragment>
     );

@@ -1,0 +1,80 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/colors';
+
+// Header bar background
+$shell-header-bg-01: #252525;
+
+// Header-panel background
+$shell-header-bg-02: #f3f3f3;
+
+// Panel item hover
+$shell-header-bg-03: #dcdcdc;
+
+// Panel overflow hover
+$shell-header-bg-04: #bebebe;
+
+// Panel input background
+$shell-header-bg-05: #fff;
+
+// Header Nav Link hober
+$shell-header-bg-06: #4c4c4c;
+
+// Primary text in header-panel, Item text
+$shell-header-text-01: #f3f3f3;
+
+// Secondary text in header-panel, Item text
+$shell-header-text-02: #171717;
+
+// Secondary text in header-panel, Category label
+$shell-header-text-03: #8c8c8c;
+
+// Header bar icons
+$shell-header-icon-01: #f3f3f3;
+
+// Icons in header panel
+$shell-header-icon-02: #252525;
+
+// Item link
+$shell-header-link: #0062ff;
+
+// Header icon selected state background
+$shell-header-icon-selected: #0062ff;
+
+// Side-nav panel background
+$shell-side-nav-bg-01: $ibm-colors__gray-90;
+
+// Selected category background
+// Select L2 flatted item background
+// Item hover background
+// Footer-bar background
+$shell-side-nav-bg-02: $ibm-colors__gray-80;
+
+// Selected L2 nested item
+$shell-side-nav-bg-03: $ibm-colors__gray-70;
+
+// Primary text in side-nav
+// L2 Flatten item text
+// L2 Nested item text
+// L1 title text
+$shell-side-nav-text-01: $ibm-colors__gray-10;
+
+// Secondary text in side nav
+// L2 Category label
+$shell-side-nav-text-02: $ibm-colors__gray-30;
+
+// side-nav icon color
+$shell-side-nav-icon-01: $ibm-colors__gray-10;
+
+// item highlight bar
+$shell-side-nav-accent-01: $ibm-colors__blue-60;
+
+// Temporary token
+$shell-brand-01: #0062ff;
+$shell-ui-02: #3d3d3d;
+$shell-ui-03: #000;

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
@@ -143,7 +150,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {Object} The menu position, with `top` and `left` properties.
    */
   _getPos() {
-    const element = this.element;
+    const { element } = this;
     const { refNode, offset, direction } = this.options;
 
     if (!refNode) {
@@ -153,7 +160,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     return getFloatingPosition({
       menuSize: element.getBoundingClientRect(),
       refPosition: refNode.getBoundingClientRect(),
-      offset: typeof offset !== 'function' ? offset : offset(element, direction),
+      offset: typeof offset !== 'function' ? offset : offset(element, direction, refNode),
       direction,
       scrollX: refNode.ownerDocument.defaultView.pageXOffset,
       scrollY: refNode.ownerDocument.defaultView.pageYOffset,
@@ -168,7 +175,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     if (!this.options.debugStyle) {
       return;
     }
-    const element = this.element;
+    const { element } = this;
     const computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
     const styles = {
       position: 'absolute',
@@ -190,7 +197,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @private
    */
   _place() {
-    const element = this.element;
+    const { element } = this;
     const { left, top } = this._getPos();
     element.style.left = `${left}px`;
     element.style.top = `${top}px`;
@@ -253,7 +260,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     super.release();
   }
 
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorContainer: '[data-floating-menu-container]',
     selectorPrimaryFocus: '[data-floating-menu-primary-focus]',
     attribDirection: 'data-floating-menu-direction',
@@ -271,7 +278,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     },
   };
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default FloatingMenu;

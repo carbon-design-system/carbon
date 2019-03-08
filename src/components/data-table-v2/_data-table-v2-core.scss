@@ -1,4 +1,14 @@
-@import '../../globals/scss/import-once';
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/css--typography';
+@import '../../globals/scss/functions';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
 
 @include exports('data-table-v2-core') {
   .#{$prefix}--data-table-v2-container {
@@ -14,15 +24,21 @@
     width: 100%;
     border-bottom: 1px solid $ui-03;
 
+    @if feature-flag-enabled('breaking-changes-x') {
+      min-width: rem(500px);
+    }
+
     thead {
       @include typescale('zeta');
       background-color: $ui-02;
       font-weight: 700;
+      border-right: 1px solid $ui-03;
     }
 
     tbody {
       @include typescale('zeta');
       background-color: $ui-01;
+      border-right: 1px solid $ui-03;
     }
 
     tr {
@@ -69,7 +85,6 @@
 
       &:last-of-type {
         padding-right: $spacing-lg;
-        border-right: 1px solid $ui-03;
       }
     }
 
@@ -111,22 +126,19 @@
   }
 
   .#{$prefix}--data-table-v2--no-border {
-    tr {
-      &:last-of-type {
-        td {
-          border-bottom-color: transparent;
-        }
-      }
+    & {
+      border-bottom-color: transparent;
+    }
+
+    thead,
+    tbody {
+      border-right-color: transparent;
     }
 
     th,
     td {
       &:first-of-type {
         border-left-color: transparent;
-      }
-
-      &:last-of-type {
-        border-right-color: $ui-03;
       }
     }
   }

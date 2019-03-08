@@ -1,7 +1,19 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import warning from 'warning';
+import { breakingChangesX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import removedComponent from '../removed-component';
+
+let didWarnAboutDeprecation;
 
 class Carousel extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -12,6 +24,13 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `Carousel` component in `carbon-components` has been deprecated. It will be removed in the next major release.'
+      );
+      didWarnAboutDeprecation = true;
+    }
     this.filmstrip = this.element.querySelector(this.options.selectorFilmstrip);
     this.carouselItem = this.element.querySelector(this.options.selectorCarouselItem);
 
@@ -61,7 +80,7 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
    * The map associating DOM element and accordion UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
-export default Carousel;
+export default (!breakingChangesX ? Carousel : removedComponent('Carousel'));

@@ -1,6 +1,21 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
 
+const featureFlags = require('../../globals/js/feature-flags');
+const { prefix } = require('../../globals/js/settings');
+
+const { componentsX } = featureFlags;
 module.exports = {
+  context: {
+    componentsX,
+    prefix,
+  },
   variants: [
     {
       name: 'default',
@@ -15,6 +30,27 @@ module.exports = {
       label: 'Number Input (Light)',
       context: {
         light: true,
+      },
+    },
+    {
+      name: 'mobile',
+      label: 'Mobile Number Input',
+      meta: {
+        xVersionOnly: true,
+      },
+      context: {
+        mobile: true,
+      },
+    },
+    {
+      name: 'mobile-light',
+      label: 'Mobile Number Input (light)',
+      meta: {
+        xVersionOnly: true,
+      },
+      context: {
+        light: true,
+        mobile: true,
       },
     },
   ],

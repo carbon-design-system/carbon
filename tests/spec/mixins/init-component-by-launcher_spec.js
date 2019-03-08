@@ -16,10 +16,12 @@ describe('Test init component by launcher', function() {
       initEventNames: ['foo'],
       attribInitTarget: 'data-init-target',
     };
+
     static create(element, options) {
       spyCreate(element, options);
       return new this(element, options);
     }
+
     createdByLauncher = spyCreatedByLauncher;
   };
 

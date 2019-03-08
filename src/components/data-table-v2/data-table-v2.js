@@ -1,9 +1,18 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
@@ -62,7 +71,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _sortToggle = detail => {
     const { element, previousValue } = detail;
 
-    [...this.tableHeaders].forEach(header => {
+    toArray(this.tableHeaders).forEach(header => {
       const sortEl = header.querySelector(this.options.selectorTableSort);
 
       if (sortEl !== null && sortEl !== element) {
@@ -84,7 +93,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _selectToggle = detail => {
     const { element } = detail;
-    const checked = element.checked;
+    const { checked } = element;
 
     // increment the  count
     this.state.checkboxCount += checked ? 1 : -1;
@@ -98,10 +107,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this._actionBarToggle(this.state.checkboxCount > 0);
   };
 
-  _selectAllToggle = detail => {
-    const checked = detail.element.checked;
+  _selectAllToggle = ({ element }) => {
+    const { checked } = element;
 
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
 
     this.state.checkboxCount = checked ? inputs.length - 1 : 0;
 
@@ -124,8 +133,8 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _actionBarCancel = () => {
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
-    const row = [...this.element.querySelectorAll(this.options.selectorTableSelected)];
+    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
+    const row = toArray(this.element.querySelectorAll(this.options.selectorTableSelected));
 
     row.forEach(item => {
       item.classList.remove(this.options.classTableSelected);
@@ -175,9 +184,8 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     });
   };
 
-  _rowExpandToggle = detail => {
-    const element = detail.element;
-    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
+  _rowExpandToggle = ({ element, initialEvt }) => {
+    const parent = eventMatches(initialEvt, this.options.eventParentContainer);
 
     const index = this.expandCells.indexOf(element);
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
@@ -229,9 +237,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   }
 
   refreshRows = () => {
-    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
-    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
-    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
+    const newExpandCells = toArray(this.element.querySelectorAll(this.options.selectorExpandCells));
+    const newExpandableRows = toArray(this.element.querySelectorAll(this.options.selectorExpandableRows));
+    const newParentRows = toArray(this.element.querySelectorAll(this.options.selectorParentRows));
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
@@ -240,7 +248,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
-        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
+        const mergedExpandableRows = [...toArray(this.expandableRows), ...toArray(diffExpandableRows)];
         this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
@@ -253,10 +261,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.parentRows = newParentRows;
   };
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   // UI Events
-  static eventHandlers = {
+  static eventHandlers /* #__PURE_CLASS_PROPERTY__ */ = {
     expand: '_rowExpandToggle',
     sort: '_sortToggle',
     select: '_selectToggle',

@@ -1,32 +1,93 @@
-<div class="bx--form-item">
-  <input id="text-input-3" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text">
-  <label for="text-input-3" class="bx--label">Text Input label</label>
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--form-item">
+  {{#if componentsX}}
+  <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
+  <div class="{{prefix}}--form__helper-text">
+    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+  </div>
+  <input id="text-input-3" type="text"
+    class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
+    placeholder="Optional placeholder text">
+  {{else}}
+  <input id="text-input-3" type="text"
+    class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
+    placeholder="Optional placeholder text">
+  <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
+  {{/if}}
 </div>
-<div class="bx--form-item">
-  <textarea id="text-area-2" class="bx--text-area{{#if light}} bx--text-area--light{{/if}}" rows="4" cols="50" placeholder="Placeholder text."></textarea>
-  <label for="text-area-2" class="bx--label">Text Area label</label>
+<div class="{{@root.prefix}}--form-item">
+  {{#if componentsX}}
+  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+  <div class="{{prefix}}--form__helper-text">
+    Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+  </div>
+  <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+    rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  {{else}}
+  <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
+    rows="4" cols="50" placeholder="Placeholder text."></textarea>
+  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
+  {{/if}}
 </div>
-<div class="bx--form-item">
-  <div class="bx--select{{#if light}} bx--select--light{{/if}}">
-    <select id="select-id" class="bx--select-input">
-      {{#each selectItems}}
+<div class="{{@root.prefix}}--form-item">
+  <div
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}">
+    <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
+    {{#unless inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/unless}}
+    {{#if componentsX}}
+    <div class="{{@root.prefix}}--select-input__wrapper">
+      <select {{#if invalid}} data-invalid{{/if}} id="select-id"
+        class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
+        {{#each selectItems}}
         {{#if items}}
-          <optgroup class="bx--select-optgroup" label="{{label}}">
-            {{#each items}}
-              <option class="bx--select-option" value="{{value}}"{{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}</option>
-            {{/each}}
-          </optgroup>
-        {{else}}
-          <option class="bx--select-option" value="{{value}}"{{#if disabled}} disabled{{/if}}{{#if selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}}</option>
-        {{/if}}
-      {{/each}}
-    </select>
-    <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
+          {{#each items}}
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+      {{#if invalid}}
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
+      {{/if}}
+    </div>
+    {{else}}
+    <select {{#if invalid}} data-invalid{{/if}} id="select-id"
+      class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
+      {{#each selectItems}}
+      {{#if items}}
+      <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
+        {{#each items}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
+      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
+          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
-    <label for="select-id" class="bx--label">Select label</label>
+    {{/if}}
+    {{#if inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/if}}
+    {{#if invalid}}
+    <div class="{{@root.prefix}}--form-requirement">
+      Validation message here
+    </div>
+    {{/if}}
   </div>
 </div>
-<div class="bx--form-item">
-  <button class="bx--btn bx--btn--primary" type="button">Submit</button>
+<div class="{{@root.prefix}}--form-item">
+  <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">Submit</button>
 </div>

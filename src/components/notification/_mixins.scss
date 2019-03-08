@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //----------------------------------------------
 // Inline Notification
 // ---------------------------------------------
@@ -17,4 +24,14 @@
 
 @mixin notification--color($color) {
   border-left: 6px solid $color;
+}
+
+@mixin notification--experimental($color, $background-color) {
+  border-left: 3px solid $color;
+  background: $background-color;
+
+  .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--toast-notification__icon {
+    fill: $color;
+  }
 }

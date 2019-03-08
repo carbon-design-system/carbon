@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -131,6 +138,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     this._handleKeydownListener = this.manage(
       on(this.element.ownerDocument.body, 'keydown', evt => {
         if (evt.which === 27) {
+          evt.stopPropagation();
           this.hide(evt);
         }
       })
@@ -157,7 +165,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @member Modal.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -166,6 +174,8 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @member Modal.options
    * @type {Object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
+   * @property {string} [selectorModalClose] The selector to find elements that close the modal.
+   * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
    * @property {string[]} [selectorsFloatingMenu]
    *   The CSS selectors of floating menus.

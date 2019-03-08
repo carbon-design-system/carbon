@@ -1,17 +1,22 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Text area
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
-@include exports('text-area') {
+@mixin text-area {
   .#{$prefix}--text-area {
     @include reset;
     @include font-family;
@@ -87,15 +92,96 @@
       color: transparent;
     }
   }
+}
 
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
+@mixin text-area--x {
+  .#{$prefix}--text-area {
+    @include reset;
+    @include type-style('body-long-01');
+    @include focus-outline('reset');
 
-    &::-webkit-input-placeholder {
-      color: transparent;
+    background-color: $field-01;
+    width: 100%;
+    min-width: 10rem;
+    min-height: rem(40px);
+    padding: rem(11px) $spacing-md;
+    color: $text-01;
+    order: 3;
+    resize: vertical;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    transition: $transition--base all;
+
+    & ~ .#{$prefix}--form__helper-text {
+      margin-top: 0;
+      order: 2;
+      font-style: italic;
     }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 4;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-area::-webkit-input-placeholder {
+    @include placeholder-colors;
+    @include type-style('body-long-01');
+  }
+
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-area--invalid {
+    padding-right: $spacing-2xl;
+  }
+
+  .#{$prefix}--text-area__wrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .#{$prefix}--text-area__invalid-icon {
+    position: absolute;
+    right: rem(16px);
+    top: rem(16px);
+    fill: $support-01;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-area:disabled {
+    cursor: not-allowed;
+    outline: none;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--text-area:disabled::-webkit-input-placeholder {
+    color: $disabled;
+  }
+
+  //-----------------------------
+  // Error
+  //-----------------------------
+  .#{$prefix}--text-area[data-invalid],
+  .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area:invalid {
+    @include focus-outline('invalid');
+    box-shadow: none;
   }
 
   // Skeleton State
@@ -106,5 +192,13 @@
     &::-webkit-input-placeholder {
       color: transparent;
     }
+  }
+}
+
+@include exports('text-area') {
+  @if feature-flag-enabled('components-x') {
+    @include text-area--x;
+  } @else {
+    @include text-area;
   }
 }

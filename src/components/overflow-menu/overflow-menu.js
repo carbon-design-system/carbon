@@ -1,44 +1,59 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
+import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM, DIRECTION_LEFT, DIRECTION_RIGHT } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
+import { componentsX } from '../../globals/js/feature-flags';
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
  * @type {Object<string, string>}
  */
-const triggerButtonPositionProps = {
+const triggerButtonPositionProps = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: 'bottom',
   [DIRECTION_BOTTOM]: 'top',
-};
+  [DIRECTION_LEFT]: 'left',
+  [DIRECTION_RIGHT]: 'right',
+}))();
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
  * @type {Object<string, number>}
  */
-const triggerButtonPositionFactors = {
+const triggerButtonPositionFactors = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: -2,
   [DIRECTION_BOTTOM]: -1,
-};
+  [DIRECTION_LEFT]: -2,
+  [DIRECTION_RIGHT]: -1,
+}))();
 
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @param {string} direction The floating menu direction.
+ * @param {Element} trigger The trigger button.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
-export const getMenuOffset = (menuBody, direction) => {
+export const getMenuOffset = (menuBody, direction, trigger) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
   if (!triggerButtonPositionProp || !triggerButtonPositionFactor) {
     console.warn('Wrong floating menu direction:', direction); // eslint-disable-line no-console
   }
+
   const menuWidth = menuBody.offsetWidth;
+  const menuHeight = menuBody.offsetHeight;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
   const values = [triggerButtonPositionProp, 'left', 'width', 'height', 'border-top-width'].reduce(
     (o, name) => ({
@@ -54,6 +69,32 @@ export const getMenuOffset = (menuBody, direction) => {
       top: Math.sqrt(borderTopWidth ** 2 * 2) + triggerButtonPositionFactor * values[triggerButtonPositionProp],
     };
   }
+
+  if (componentsX) {
+    // eslint-disable-next-line no-use-before-define
+    const menu = OverflowMenu.components.get(trigger);
+    if (!menu) {
+      throw new TypeError('Overflow menu instance cannot be found.');
+    }
+    const flip = menuBody.classList.contains(menu.options.classMenuFlip);
+
+    if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
+      const triggerWidth = trigger.offsetWidth;
+      return {
+        left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
+        top: 0,
+      };
+    }
+
+    if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
+      const triggerHeight = trigger.offsetHeight;
+      return {
+        left: 0,
+        top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
+      };
+    }
+  }
+
   return undefined;
 };
 
@@ -81,7 +122,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'keypress', event => {
+      on(this.element.ownerDocument, 'keydown', event => {
         this._handleKeyPress(event);
       })
     );
@@ -99,6 +140,12 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
+    if (state === 'hidden') {
+      this.element.setAttribute('aria-expanded', 'false');
+    } else {
+      this.element.setAttribute('aria-expanded', 'true');
+    }
+
     if (!this.optionMenu) {
       const optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
       if (!optionMenu) {
@@ -150,41 +197,113 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   }
 
   /**
+   * Provides the element to move focus from
+   * @returns {Element} Currently highlighted element.
+   */
+  getCurrentNavigation = () => {
+    const focused = this.element.ownerDocument.activeElement;
+    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+  };
+
+  /**
+   * Moves the focus up/down.
+   * @param {number} direction The direction of navigating.
+   */
+  navigate = direction => {
+    const items = [...this.element.ownerDocument.querySelectorAll(this.options.selectorItem)];
+    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const getNextItem = old => {
+      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+
+      // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+      const index = Math.max(items.indexOf(old) + direction, -1);
+      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+    };
+    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+      if (
+        !current.matches(this.options.selectorItemHidden) &&
+        !current.parentNode.matches(this.options.selectorItemHidden) &&
+        !current.matches(this.options.selectorItemSelected)
+      ) {
+        current.focus();
+        break;
+      }
+    }
+  };
+
+  /**
    * Handles key press on document.
    * @param {Event} event The triggering event.
    * @private
    */
   _handleKeyPress(event) {
     const key = event.which;
-    if (key === 13) {
-      const { element, optionMenu, options } = this;
-      const isOfSelf = element.contains(event.target);
-      const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
-      const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
-      const state = shouldBeOpen ? 'shown' : 'hidden';
+    const { element, optionMenu, options } = this;
+    const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
+    const isExpanded = this.element.classList.contains(this.options.classShown);
 
-      if (isOfSelf) {
-        if (element.tagName === 'A') {
-          event.preventDefault();
+    switch (key) {
+      // Esc
+      case 27:
+        this.changeState('hidden', getLaunchingDetails(event), () => {
+          if (isOfMenu) {
+            element.focus();
+          }
+        });
+        break;
+      // Enter || Space bar
+      case 13:
+      case 32: {
+        if (!isExpanded && this.element.ownerDocument.activeElement !== this.element) {
+          return;
         }
-        event.delegateTarget = element; // eslint-disable-line no-param-reassign
+        const isOfSelf = element.contains(event.target);
+        const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
+        const state = shouldBeOpen ? 'shown' : 'hidden';
+
+        if (isOfSelf) {
+          event.delegateTarget = element; // eslint-disable-line no-param-reassign
+          event.preventDefault(); // prevent scrolling
+          this.changeState(state, getLaunchingDetails(event), () => {
+            if (state === 'hidden' && isOfMenu) {
+              element.focus();
+            }
+          });
+        }
+        break;
       }
-
-      this.changeState(state, getLaunchingDetails(event), () => {
-        if (state === 'hidden' && isOfMenu) {
-          element.focus();
+      case 38: // up arrow
+      case 40: // down arrow
+        {
+          if (!isExpanded) {
+            return;
+          }
+          event.preventDefault(); // prevent scrolling
+          const direction = {
+            38: -1,
+            40: 1,
+          }[event.which];
+          this.navigate(direction);
         }
-      });
+        break;
+      default:
+        break;
     }
   }
 
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;
     return {
       selectorInit: '[data-overflow-menu]',
       selectorOptionMenu: `.${prefix}--overflow-menu-options`,
+      selectorItem: `
+        .${prefix}--overflow-menu-options--open >
+        .${prefix}--overflow-menu-options__option:not(.${prefix}--overflow-menu-options__option--disabled) >
+        .${prefix}--overflow-menu-options__btn
+      `,
       classShown: `${prefix}--overflow-menu--open`,
       classMenuShown: `${prefix}--overflow-menu-options--open`,
       classMenuFlip: `${prefix}--overflow-menu--flip`,

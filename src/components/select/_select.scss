@@ -1,17 +1,23 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Select
 //-----------------------------
 
+@import '../../globals/scss/functions';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
-@include exports('select') {
+@mixin select {
   .#{$prefix}--select {
     @include reset;
     position: relative;
@@ -193,5 +199,219 @@
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
     display: none;
+  }
+}
+
+@mixin select--x {
+  .#{$prefix}--select {
+    @include reset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--select-input__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--select-input {
+    @include font-family;
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    height: rem(40px);
+    appearance: none;
+    display: block;
+    width: rem(224px);
+    min-width: rem(128px);
+    max-width: rem(448px);
+    padding: 0 rem(34px) 0 $spacing-md; // 1.5rem + chevron width
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    border-radius: 0;
+    cursor: pointer;
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    // Select text renders a little high on Firefox
+    @-moz-document url-prefix() {
+      padding-top: rem(4px);
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: $disabled-background-color;
+      color: $disabled;
+      border-bottom: 1px solid $disabled-background-color;
+    }
+  }
+
+  .#{$prefix}--select--invalid {
+    padding-right: rem(58px); // 1rem + chevron width + invalid icon width
+  }
+
+  .#{$prefix}--select--invalid,
+  .#{$prefix}--select--invalid:focus {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form-requirement {
+    display: block;
+    color: $support-01;
+    font-weight: 400;
+    overflow: visible;
+  }
+
+  .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
+    fill: $disabled;
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--select__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--select__disabled-icon,
+  .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    position: absolute;
+    right: rem(34px); // 1.5rem + chevron width
+  }
+
+  .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    fill: $support-01;
+  }
+
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Override some Firefox user-agent styles
+  @-moz-document url-prefix() {
+    .#{$prefix}--select-option {
+      background-color: $ui-01;
+      color: $text-01;
+    }
+
+    .#{$prefix}--select-optgroup {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-bottom: 0;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--label {
+    @include typescale('zeta');
+    white-space: nowrap;
+    margin: 0 $spacing-xs 0 0;
+    align-self: center;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input {
+    background-color: transparent;
+    color: $text-01;
+    border-bottom: none;
+    padding-left: $spacing-xs;
+
+    @-moz-document url-prefix() {
+      padding-top: 0;
+    }
+
+    &:hover {
+      background-color: $ui-01;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select__arrow {
+    bottom: auto;
+    top: 1.125rem;
+    right: $spacing-xs;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+    right: rem(24px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__disabled-icon {
+    right: rem(48px);
+  }
+
+  .#{$prefix}--select--inline[data-invalid] {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    color: $disabled;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    ~ * {
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--form-requirement {
+    max-height: initial;
+    margin: 0 0 0 $spacing-xs;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    cursor: not-allowed;
+  }
+
+  //Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+}
+
+@include exports('select') {
+  @if feature-flag-enabled('components-x') {
+    @include select--x;
+  } @else {
+    @include select;
   }
 }

@@ -16,6 +16,7 @@ describe('Test watch mode', function() {
     static options = {
       selectorInit: '[data-my-component-inited-by-search]',
     };
+
     static components = new WeakMap();
   };
 
@@ -25,6 +26,7 @@ describe('Test watch mode', function() {
       selectorInit: '[data-my-component-inited-by-event]',
       initEventNames: ['instantiating-event'],
     };
+
     static components = new WeakMap();
   };
 
@@ -35,6 +37,7 @@ describe('Test watch mode', function() {
       attribInitTarget: 'data-init-target',
       initEventNames: ['launching-event'],
     };
+
     static components = new WeakMap();
   };
 

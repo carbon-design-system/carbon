@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -18,7 +25,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
   constructor(element, options) {
     super(element, options);
     // Sets the initial state
-    const initialState = this.options.initialState;
+    const { initialState } = this.options;
     if (initialState) {
       this.setState(initialState);
     }
@@ -29,7 +36,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
    * @param {string} state The new state, should be `inactive`, `active` or `finished`.
    */
   setState(state) {
-    const states = this.constructor.states;
+    const { states } = this.constructor;
     const values = Object.keys(states).map(key => states[key]);
     if (values.indexOf(state) < 0) {
       throw new Error(`One of the following value should be given as the state: ${values.join(', ')}`);
@@ -66,7 +73,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
    * The list of states.
    * @type {Object<string, string>}
    */
-  static states = {
+  static states /* #__PURE_CLASS_PROPERTY__ */ = {
     INACTIVE: 'inactive',
     ACTIVE: 'active',
     FINISHED: 'finished',
@@ -77,7 +84,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
    * @member InlineLoading.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

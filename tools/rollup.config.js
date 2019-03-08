@@ -7,21 +7,17 @@ const replace = require('rollup-plugin-replace');
 
 module.exports = {
   input: 'src/bundle.js',
-  format: 'iife',
-  name: 'CarbonComponents',
   plugins: [
     resolve(),
     commonjs({
-      include: 'node_modules/**',
+      include: ['node_modules/**', 'src/globals/js/settings.js', 'src/globals/js/feature-flags.js'],
       sourceMap: false,
     }),
     babel({
       exclude: ['node_modules/**'], // only transpile our source code
-      plugins: ['external-helpers'],
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
-  file: 'scripts/carbon-components.js',
 };

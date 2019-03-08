@@ -7,6 +7,9 @@ bower_components
 demo/*.css
 demo/*.map
 demo/*.js
+demo/*.html
+demo/code
+demo/component
 demo/hot
 !demo/index.js
 !demo/components.js
@@ -23,6 +26,7 @@ project.sublime-project
 project.sublime-workspace
 jsconfig.json
 .vscode
+.idea
 
 # Test reports
 tests/a11y-results

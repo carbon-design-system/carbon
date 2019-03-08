@@ -1,3 +1,11 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -40,7 +48,6 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
 
     if (this.element.offsetHeight < this.options.minHeight) {
       this.element.classList.add(this.options.classHideExpand);
-      this.element.classList.add(this.options.classExpanded);
     }
   }
 
@@ -49,7 +56,7 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
    * @member CodeSnippet.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -60,16 +67,19 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
    * @type {Object}
    * @property {string} selectorInit The data attribute to find code snippet UIs.
    */
-  static options = {
-    selectorInit: '[data-code-snippet]',
-    attribShowMoreText: 'data-show-more-text',
-    attribShowLessText: 'data-show-less-text',
-    minHeight: 288,
-    classExpanded: 'bx--snippet--expand',
-    classExpandBtn: '.bx--snippet-btn--expand',
-    classExpandText: '.bx--snippet-btn--text',
-    classHideExpand: 'bx--snippet-btn--expand--hide',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-code-snippet]',
+      attribShowMoreText: 'data-show-more-text',
+      attribShowLessText: 'data-show-less-text',
+      minHeight: 288,
+      classExpanded: `${prefix}--snippet--expand`,
+      classExpandBtn: `.${prefix}--snippet-btn--expand`,
+      classExpandText: `.${prefix}--snippet-btn--text`,
+      classHideExpand: `${prefix}--snippet-btn--expand--hide`,
+    };
+  }
 }
 
 export default CodeSnippet;

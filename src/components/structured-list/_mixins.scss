@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 // Used only for .#{prefix}--structured-list--condensed
 @mixin padding-td--condensed($padding: $structured-list-padding) {
   padding: $padding / 4;
@@ -42,4 +49,38 @@
   &:last-child {
     padding-right: 0;
   }
+}
+
+// Used only for experimental .#{prefix}--structured-list--condensed
+@mixin padding-td--condensed--x($padding: $structured-list-padding) {
+  padding: $padding / 4;
+  padding-left: 0;
+}
+
+// Used only for experimental [data-structured-list]
+@mixin padding--data-structured-list--x($padding: $structured-list-padding) {
+  padding-left: $padding / 2;
+  padding-right: $padding / 2;
+
+  // Controls gutter sizes for check
+  &:first-child {
+    padding-left: $padding / 2;
+    padding-right: $padding / 2;
+  }
+}
+
+// Used only for experimental normal structured-list
+@mixin padding-th--x($padding: $structured-list-padding) {
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-xs;
+}
+
+// Used only for experimental normal structured-list
+@mixin padding-td--x($padding: $structured-list-padding) {
+  padding-top: $spacing-md;
+  padding-right: $spacing-md;
+  padding-bottom: $spacing-lg;
+  padding-left: $spacing-md;
 }

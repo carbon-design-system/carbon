@@ -46,21 +46,16 @@ describe('Test toolbar', function() {
   });
 
   describe('Keydown on search', function() {
+    let container;
     let search;
-    const container = document.createElement('div');
-    container.innerHTML = ToolbarHTML;
+    let toolbar;
 
     beforeEach(function() {
+      container = document.createElement('div');
+      container.innerHTML = ToolbarHTML;
       document.body.appendChild(container);
-      new Toolbar(document.querySelector('[data-toolbar]'));
-      search = document.querySelector('[data-toolbar-search]');
-    });
-
-    it('Should open search on enter or spacebar keydown', function() {
-      const event = new CustomEvent('keydown', { bubbles: true });
-      event.which = 32;
-      search.dispatchEvent(event);
-      expect(search.classList.contains('bx--toolbar-search--active')).toBe(true);
+      toolbar = new Toolbar(container.querySelector('[data-toolbar]'));
+      search = container.querySelector('[data-toolbar-search]');
     });
 
     it('Should close search on esc keydown', function() {
@@ -71,8 +66,10 @@ describe('Test toolbar', function() {
     });
 
     afterEach(function() {
+      toolbar.release();
       if (document.body.contains(container)) {
         document.body.removeChild(container);
+        container = null;
       }
     });
   });
@@ -98,18 +95,6 @@ describe('Test toolbar', function() {
       const searches = toolbars.map(toolbar => toolbar.element.querySelector(toolbar.options.selectorSearch));
       searches[0].classList.add(toolbars[0].classSearchActive);
       searches[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(searches[0].classList.contains('bx--toolbar-search--active')).toBe(false);
-      expect(searches[1].classList.contains('bx--toolbar-search--active')).toBe(true);
-    });
-
-    it('Should make the search box exclusive upon hitting space bar on one of the search boxes', function() {
-      const searches = toolbars.map(toolbar => toolbar.element.querySelector(toolbar.options.selectorSearch));
-      searches[0].classList.add(toolbars[0].classSearchActive);
-      searches[1].dispatchEvent(
-        Object.assign(new CustomEvent('keydown', { bubbles: true }), {
-          which: 32,
-        })
-      );
       expect(searches[0].classList.contains('bx--toolbar-search--active')).toBe(false);
       expect(searches[1].classList.contains('bx--toolbar-search--active')).toBe(true);
     });

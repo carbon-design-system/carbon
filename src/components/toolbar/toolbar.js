@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -5,6 +12,8 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -28,7 +37,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
             this._handleRowHeightChange(event, boundTable);
           })
         );
-        // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
+        // toArray(this.element.querySelectorAll(this.options.selectorRowHeight)).forEach((item) => {
         //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
         // });
       }
@@ -63,7 +72,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
     }
 
     const targetComponentElement = eventMatches(event, this.options.selectorInit);
-    [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach(item => {
+    toArray(this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)).forEach(item => {
       if (!targetComponentElement || !targetComponentElement.contains(item)) {
         item.classList.remove(this.options.classSearchActive);
       }
@@ -76,17 +85,8 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    */
   _handleKeyDown(event) {
     const searchInput = eventMatches(event, this.options.selectorSearch);
-    const isOfSelf = this.element.contains(event.target);
-    const shouldBeOpen = isOfSelf && !this.element.classList.contains(this.options.classSearchActive);
-
-    if (searchInput) {
-      if ((event.which === 13 || event.which === 32) && !shouldBeOpen) {
-        searchInput.classList.add(this.options.classSearchActive);
-      }
-
-      if (event.which === 27) {
-        searchInput.classList.remove(this.options.classSearchActive);
-      }
+    if (searchInput && event.which === 27) {
+      searchInput.classList.remove(this.options.classSearchActive);
     }
   }
 
@@ -96,7 +96,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * @param {HTMLElement} boundTable The table associated with the toolbar.
    */
   _handleRowHeightChange(event, boundTable) {
-    const value = event.currentTarget.querySelector('input:checked').value;
+    const { value } = event.currentTarget.querySelector('input:checked');
 
     if (value === 'tall') {
       boundTable.classList.add(this.options.classTallRows);
@@ -109,7 +109,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * The map associating DOM element and Toolbar UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -43,14 +50,14 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
    * The map associating DOM element and accordion UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
    * @property {string} selectorInit The CSS selector to find InlineNotification.
    * @property {string} selectorButton The CSS selector to find close button.
    */
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-notification]',
     selectorButton: '[data-notification-btn]',
     eventBeforeDeleteNotification: 'notification-before-delete',

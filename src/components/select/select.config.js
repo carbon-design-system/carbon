@@ -1,4 +1,15 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
+
+const featureFlags = require('../../globals/js/feature-flags');
+const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -40,6 +51,11 @@ const items = [
 ];
 
 module.exports = {
+  context: {
+    featureFlags,
+    prefix,
+    componentsX,
+  },
   variants: [
     {
       name: 'default',
@@ -69,6 +85,25 @@ module.exports = {
       context: {
         light: true,
         items,
+      },
+    },
+    {
+      name: 'helperText',
+      label: 'Select (helper text)',
+      notes: 'Example with an optional helper text group',
+      context: {
+        items,
+        helperText: true,
+      },
+    },
+    {
+      name: 'helperTextInline',
+      label: 'Select (inline with helper text)',
+      notes: 'Example with an optional helper text group with an inline select',
+      context: {
+        items,
+        helperText: true,
+        inline: true,
       },
     },
     {

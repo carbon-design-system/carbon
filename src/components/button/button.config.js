@@ -1,7 +1,21 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
+
+const { prefix, componentsX } = require('../../globals/js/settings');
+const featureFlags = require('../../globals/js/feature-flags');
 
 module.exports = {
   default: 'primary',
+  context: {
+    featureFlags,
+    prefix,
+  },
   variants: [
     {
       name: 'primary',
@@ -92,6 +106,10 @@ module.exports = {
     {
       name: 'danger--primary',
       label: 'Primary Danger Buttons',
+      meta: {
+        removed: componentsX,
+        xVersionNotSupported: true,
+      },
       context: {
         variant: 'danger--primary',
         danger: true,
@@ -105,6 +123,10 @@ module.exports = {
         regular sized button. This issue is most found in tables. Small button should have three words
         or less.
       `,
+      meta: {
+        removed: componentsX,
+        xVersionNotSupported: true,
+      },
       context: {
         variant: 'danger--primary',
         danger: true,

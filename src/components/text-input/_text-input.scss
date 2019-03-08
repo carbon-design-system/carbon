@@ -1,17 +1,21 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Text
 //-----------------------------
-
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
-@include exports('text-input') {
+@mixin text-input {
   .#{$prefix}--text-input {
     @include reset;
     @include font-family;
@@ -73,6 +77,36 @@
         display: none;
       }
     }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+
+    &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+      top: rem(-28px);
+      right: rem(12px);
+      display: flex;
+      justify-content: center;
+      align-self: flex-end;
+      align-items: center;
+      order: 3;
+      height: rem(16px);
+      width: rem(16px);
+      padding: 0;
+      margin-bottom: -1rem;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      outline: inherit;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
+      }
+    }
   }
 
   .#{$prefix}--text-input--light {
@@ -87,5 +121,121 @@
     &::-webkit-input-placeholder {
       color: transparent;
     }
+  }
+}
+
+@mixin text-input--x {
+  .#{$prefix}--text-input {
+    @include reset;
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    background-color: $field-01;
+    width: 100%;
+    height: rem(40px);
+    padding: 0 $spacing-xl 0 $spacing-md;
+    color: $text-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    transition: $transition--base all;
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--text-input::-webkit-input-placeholder {
+    @include placeholder-colors;
+  }
+
+  .#{$prefix}--text-input--light {
+    background-color: $field-02;
+  }
+
+  //-----------------------------
+  // Disabled & Error icon spacing
+  //-----------------------------
+  .#{$prefix}--text-input__field-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .#{$prefix}--text-input__invalid-icon {
+      position: absolute;
+      right: rem(16px);
+      fill: $support-01;
+    }
+
+    .#{$prefix}--text-input--password__visibility {
+      position: absolute;
+      height: rem(16px);
+      width: rem(16px);
+      right: rem(16px);
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      outline: inherit;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
+      }
+    }
+
+    .#{$prefix}--text-input--invalid + .#{$prefix}--text-input--password__visibility {
+      right: rem(40px);
+    }
+  }
+
+  .#{$prefix}--text-input:disabled + .#{$prefix}--text-input--password__visibility svg {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-input:disabled {
+    cursor: not-allowed;
+    outline: none;
+    background-color: $disabled-01;
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--text-input--light:disabled {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-input:disabled::-webkit-input-placeholder {
+    color: $disabled-02;
+  }
+
+  //-----------------------------
+  // Error
+  //-----------------------------
+  .#{$prefix}--text-input[data-invalid],
+  .#{$prefix}--text-input:invalid {
+    @include focus-outline('invalid');
+    box-shadow: none;
+
+    .#{$prefix}--text-input--password__visibility {
+      right: rem(40px);
+    }
+  }
+}
+
+@include exports('text-input') {
+  @if feature-flag-enabled('components-x') {
+    @include text-input--x;
+  } @else {
+    @include text-input;
   }
 }

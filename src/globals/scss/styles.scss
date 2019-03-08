@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-------------------------
 // 🌍 Global
 //-------------------------
@@ -5,21 +12,27 @@
 $css--font-face: true !default;
 $css--helpers: true !default;
 $css--body: true !default;
-$css--use-experimental-grid: false !default;
-$css--use-experimental-grid-fallback: false !default;
 $css--use-layer: true !default;
 $css--reset: true !default;
 $css--typography: true !default;
 $css--plex: true !default;
+// TODO: remove in next major release. Synced in `feature-flags` as an adapter
+// in the interim
+/// @deprecated (For v10) v10 always uses `@carbon/grid`
+$css--use-experimental-grid: false !default;
+/// @deprecated (For v10) v10 always uses `@carbon/grid`
+$css--use-experimental-grid-fallback: false !default;
 
-@import 'colors';
+@import 'feature-flags';
 @import 'vars';
+@import 'colors';
+@import 'theme';
 @import 'mixins';
 @import 'layout';
 @import 'layer';
 @import 'spacing';
 @import 'typography';
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'css--reset';
 @import 'css--font-face';
 @import 'css--helpers';
@@ -95,6 +108,12 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../../components/carousel/carousel';
 @import '../../components/skeleton/skeleton';
 @import '../../components/inline-loading/inline-loading';
+@import '../../components/pagination-nav/pagination-nav';
+
+//-------------------------------------
+// 🔬 Experimental
+//-------------------------------------
+@import '../../components/ui-shell/ui-shell';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)

@@ -53,6 +53,7 @@ describe('Test Overflow menu', function() {
   describe('Custom event emission', function() {
     let menu;
     let element;
+    let optionsElement;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -61,6 +62,7 @@ describe('Test Overflow menu', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       element = document.querySelector('.bx--overflow-menu');
+      optionsElement = element.querySelector('.bx--overflow-menu-options');
       menu = new OverflowMenu(element);
     });
 
@@ -73,6 +75,60 @@ describe('Test Overflow menu', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent, 'floating-menu-shown event').not.toHaveBeenCalled();
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').toBe(false);
+    });
+
+    describe('Arrow key navigation', function() {
+      const upArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(upArrowKeydown, 'which', { value: 38, writable: true });
+      const downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
+      Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
+      let items;
+
+      beforeEach(() => {
+        element.classList.add('bx--overflow-menu--open');
+        optionsElement.classList.add('bx--overflow-menu-options--open');
+        items = document.querySelectorAll(`
+          .bx--overflow-menu-options--open >
+          .bx--overflow-menu-options__option:not(.bx--overflow-menu-options__option--disabled)
+          > .bx--overflow-menu-options__btn
+        `);
+        items[0].focus();
+      });
+
+      describe('Up/Down arrow keys', function() {
+        it('should move focus from currently focused item to previous menu item', function() {
+          spyOn(items[0], 'focus');
+          items[1].focus();
+          element.dispatchEvent(upArrowKeydown);
+          expect(items[0].focus).toHaveBeenCalled();
+          expect(items[0].focus).toHaveBeenCalledTimes(1);
+        });
+
+        it('should wrap focus from first menu item to last menu item', function() {
+          spyOn(items[items.length - 1], 'focus');
+          element.dispatchEvent(upArrowKeydown);
+          expect(items[items.length - 1].focus).toHaveBeenCalled();
+          expect(items[items.length - 1].focus).toHaveBeenCalledTimes(1);
+        });
+
+        it('should move focus from currently focused item to next menu item', function() {
+          spyOn(items[1], 'focus');
+          optionsElement.dispatchEvent(downArrowKeydown);
+          expect(items[1].focus).toHaveBeenCalledTimes(1);
+        });
+
+        it('should wrap focus from last menu item to first menu item', function() {
+          spyOn(items[0], 'focus');
+          items[items.length - 1].focus();
+          optionsElement.dispatchEvent(downArrowKeydown);
+          expect(items[0].focus).toHaveBeenCalledTimes(1);
+        });
+      });
+
+      afterEach(() => {
+        element.classList.remove('bx--overflow-menu--open');
+        optionsElement.classList.remove('bx--overflow-menu-options--open');
+      });
     });
 
     it('Should emit an event after showing', function() {
@@ -89,6 +145,7 @@ describe('Test Overflow menu', function() {
       });
       events.on(element.ownerDocument.body, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
+      optionsElement.classList.add('bx--overflow-menu-options--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent, 'floating-menu-hidden event').not.toHaveBeenCalled();
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').toBe(true);
@@ -98,12 +155,14 @@ describe('Test Overflow menu', function() {
       const spyOverflowEvent = jasmine.createSpy();
       events.on(document, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
+      optionsElement.classList.add('bx--overflow-menu-options--open');
       element.dispatchEvent(new CustomEvent('mousedown', { bubbles: true }));
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent).toHaveBeenCalled();
     });
 
     afterEach(function() {
+      optionsElement.classList.remove('bx--overflow-menu-options--open');
       element.classList.remove('bx--overflow-menu--open');
       events.reset();
     });
@@ -119,15 +178,15 @@ describe('Test Overflow menu', function() {
     let element1;
     let element2;
     let element3;
+    let optionElements;
     const container = document.createElement('div');
     container.innerHTML = [HTML, HTML, HTML].join('');
 
     beforeAll(function() {
       document.body.appendChild(container);
       elements = [...document.querySelectorAll('.bx--overflow-menu')];
-      element1 = elements[0];
-      element2 = elements[1];
-      element3 = elements[2];
+      [element1, element2, element3] = elements;
+      optionElements = elements.map(element => element.querySelector('.bx--overflow-menu-options'));
       new OverflowMenu(element1);
       new OverflowMenu(element2);
       new OverflowMenu(element3);
@@ -149,9 +208,12 @@ describe('Test Overflow menu', function() {
     });
 
     afterEach(function() {
-      element1.classList.remove('bx--overflow-menu--open');
-      element2.classList.remove('bx--overflow-menu--open');
-      element3.classList.remove('bx--overflow-menu--open');
+      optionElements.forEach(optionElement => {
+        optionElement.classList.remove('bx--overflow-menu-options--open');
+      });
+      elements.forEach(element => {
+        element.classList.remove('bx--overflow-menu--open');
+      });
     });
 
     afterAll(function() {

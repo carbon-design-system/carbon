@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../scss/vars';
 
 $max-width: 1600px;
@@ -55,7 +62,6 @@ $grid-gutter-breakpoints: (
   [class*='#{$prefix}--col'] {
     position: relative;
     width: 100%;
-    min-height: 1px;
     padding: 0 gutter('xs');
 
     @media (min-width: breakpoint('sm')) {
@@ -65,7 +71,8 @@ $grid-gutter-breakpoints: (
 
   @for $i from 1 through $columns {
     .#{$prefix}--col-xs-#{$i} {
-      flex-basis: (100% * $i / $columns);
+      flex: 0 0 (100% * $i / $columns);
+      max-width: (100% * $i / $columns);
     }
 
     .#{$prefix}--offset-xs-#{$i} {
@@ -82,7 +89,8 @@ $grid-gutter-breakpoints: (
 
       @for $i from 1 through $columns {
         .#{$prefix}--col-#{$breakpoint}-#{$i} {
-          flex-basis: (100% * $i / $columns);
+          flex: 0 0 (100% * $i / $columns);
+          max-width: (100% * $i / $columns);
         }
 
         .#{$prefix}--offset-#{$breakpoint}-#{$i} {
@@ -132,6 +140,6 @@ $grid-gutter-breakpoints: (
 }
 
 @mixin column-size($col-num) {
-  flex-basis: (100% * $col-num / $columns);
+  flex: 0 0 (100% * $col-num / $columns);
   max-width: (100% * $col-num / $columns);
 }

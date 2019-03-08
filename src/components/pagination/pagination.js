@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -90,7 +97,7 @@ class Pagination extends mixin(createComponent, initComponentBySearch, handles) 
    * The map associating DOM element and pagination instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -113,7 +120,7 @@ class Pagination extends mixin(createComponent, initComponentBySearch, handles) 
    *   The name of the custom event fired when a user goes forward or backward a page.
    *   event.detail.direction contains the direction a user wishes to go.
    */
-  static options = {
+  static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-pagination]',
     selectorItemsPerPageInput: '[data-items-per-page]',
     selectorPageNumberInput: '[data-page-number-input]',

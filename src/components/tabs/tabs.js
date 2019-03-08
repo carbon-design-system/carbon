@@ -1,7 +1,16 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import eventMatches from '../../globals/js/misc/event-matches';
 import ContentSwitcher from '../content-switcher/content-switcher';
 import on from '../../globals/js/misc/on';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class Tab extends ContentSwitcher {
   /**
@@ -29,6 +38,11 @@ class Tab extends ContentSwitcher {
     this.manage(
       on(this.element, 'keydown', event => {
         this._handleKeyDown(event);
+      })
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'click', event => {
+        this._handleDocumentClick(event);
       })
     );
 
@@ -63,13 +77,27 @@ class Tab extends ContentSwitcher {
   _handleClick(event) {
     const button = eventMatches(event, this.options.selectorButton);
     const trigger = eventMatches(event, this.options.selectorTrigger);
-    if (button) {
+    if (button && !button.classList.contains(this.options.classButtonDisabled)) {
       super._handleClick(event);
       this._updateMenuState(false);
     }
     if (trigger) {
       this._updateMenuState();
     }
+  }
+
+  /**
+   * Handles click on document.
+   * @param {Event} event The triggering event.
+   * @private
+   */
+  _handleDocumentClick(event) {
+    const { element } = this;
+    const isOfSelf = element.contains(event.target);
+    if (isOfSelf) {
+      return;
+    }
+    this._updateMenuState(false);
   }
 
   /**
@@ -93,7 +121,7 @@ class Tab extends ContentSwitcher {
     }[event.which];
 
     if (direction) {
-      const buttons = [...this.element.querySelectorAll(this.options.selectorButton)];
+      const buttons = toArray(this.element.querySelectorAll(this.options.selectorButtonEnabled));
       const button = this.element.querySelector(this.options.selectorButtonSelected);
       const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
       const nextIndexLooped =
@@ -116,8 +144,14 @@ class Tab extends ContentSwitcher {
    */
   _updateMenuState(force) {
     const menu = this.element.querySelector(this.options.selectorMenu);
+    const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (menu) {
       menu.classList.toggle(this.options.classHidden, typeof force === 'undefined' ? force : !force);
+      if (menu.classList.contains(this.options.classHidden)) {
+        trigger.classList.remove(this.options.classOpen);
+      } else {
+        trigger.classList.add(this.options.classOpen);
+      }
     }
   }
 
@@ -137,7 +171,7 @@ class Tab extends ContentSwitcher {
    * @member Tab.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -168,10 +202,13 @@ class Tab extends ContentSwitcher {
       selectorTrigger: `.${prefix}--tabs-trigger`,
       selectorTriggerText: `.${prefix}--tabs-trigger-text`,
       selectorButton: `.${prefix}--tabs__nav-item`,
+      selectorButtonEnabled: `.${prefix}--tabs__nav-item:not(.${prefix}--tabs__nav-item--disabled)`,
       selectorButtonSelected: `.${prefix}--tabs__nav-item--selected`,
       selectorLink: `.${prefix}--tabs__nav-link`,
       classActive: `${prefix}--tabs__nav-item--selected`,
       classHidden: `${prefix}--tabs__nav--hidden`,
+      classOpen: `${prefix}--tabs-trigger--open`,
+      classButtonDisabled: `${prefix}--tabs__nav-item--disabled`,
       eventBeforeSelected: 'tab-beingselected',
       eventAfterSelected: 'tab-selected',
     });
@@ -185,7 +222,7 @@ class Tab extends ContentSwitcher {
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */
-  static NAVIGATE = {
+  static NAVIGATE /* #__PURE_CLASS_PROPERTY__ */ = {
     BACKWARD: -1,
     FORWARD: 1,
   };

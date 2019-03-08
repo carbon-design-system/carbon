@@ -1,4 +1,11 @@
 /**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
  * @param {Event} event The event.
  * @param {string} selector The selector.
  * @returns {Element}
@@ -13,7 +20,8 @@ export default function eventMatches(event, selector) {
     if (target.matches(selector)) {
       // If event target itself matches the given selector, return it
       return target;
-    } else if (target.matches(`${selector} *`)) {
+    }
+    if (target.matches(`${selector} *`)) {
       const closest = target.closest(selector);
       if ((currentTarget.nodeType === Node.DOCUMENT_NODE ? currentTarget.documentElement : currentTarget).contains(closest)) {
         return closest;

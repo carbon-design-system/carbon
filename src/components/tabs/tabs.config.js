@@ -1,4 +1,14 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
+
+const { prefix } = require('../../globals/js/settings');
+const featureFlags = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -29,17 +39,15 @@ const items = [
     panelClass: 'tab-4',
     label: 'Tab label 4',
     panelContent: 'Content for fourth tab goes here.',
-  },
-  {
-    linkId: 'tab-link-5',
-    panelId: 'tab-panel-5',
-    panelClass: 'tab-5',
-    label: 'Tab label 5',
-    panelContent: 'Content for fifth tab goes here.',
+    disabled: true,
   },
 ];
 
 module.exports = {
+  context: {
+    prefix,
+    featureFlags,
+  },
   variants: [
     {
       name: 'default',

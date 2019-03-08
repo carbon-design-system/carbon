@@ -1,3 +1,11 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -6,6 +14,8 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class FileUploader extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -52,11 +62,19 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   }
 
   _closeButtonHTML() {
+    if (componentsX) {
+      return `
+      <button class="${this.options.classFileClose}" type="button" aria-label="close">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16">
+      <path fill="#231F20" d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"/>
+      </svg>
+      </button>`;
+    }
     return `
-      <svg class="${this.options.classFileClose}" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
-        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
-          9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
-      </svg>`;
+    <svg class="${this.options.classFileClose}" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
+      <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
+        9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
+    </svg>`;
   }
 
   _checkmarkHTML() {
@@ -76,7 +94,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   };
 
   _getStateContainers() {
-    const stateContainers = [...this.element.querySelectorAll(`[data-for=${this.inputId}]`)];
+    const stateContainers = toArray(this.element.querySelectorAll(`[data-for=${this.inputId}]`));
 
     if (stateContainers.length === 0) {
       throw new TypeError('State container elements not found; invoke _displayFilenames() first');
@@ -94,7 +112,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    */
   _displayFilenames() {
     const container = this.element.querySelector(this.options.selectorContainer);
-    const HTMLString = [...this.input.files].map(file => this._filenamesHTML(file.name, this.inputId)).join('');
+    const HTMLString = toArray(this.input.files)
+      .map(file => this._filenamesHTML(file.name, this.inputId))
+      .join('');
 
     container.insertAdjacentHTML('afterbegin', HTMLString);
   }
@@ -160,7 +180,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    * @member FileUploader.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;

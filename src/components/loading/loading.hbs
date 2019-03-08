@@ -1,8 +1,18 @@
-{{#if overlay}}<div class="bx--loading-overlay">{{/if}}
-<div data-loading class="bx--loading{{#if small}} bx--loading--small{{/if}}">
-  <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#if overlay}}<div class="{{@root.prefix}}--loading-overlay">{{/if}}
+<div data-loading class="{{@root.prefix}}--loading{{#if small}} {{@root.prefix}}--loading--small{{/if}}">
+  <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
     <title>Loading</title>
-    <circle cx="0" cy="0" r="37.5" />
+    {{#if componentsX}}
+    {{#if small}}<circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="37.5" />{{/if}}
+    {{/if}}
+    <circle {{#if componentsX}}class="{{@root.prefix}}--loading__stroke"{{/if}} cx="0" cy="0" r="37.5" />
   </svg>
 </div>
 {{#if overlay}}</div>{{/if}}

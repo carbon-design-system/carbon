@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //----------------------------------------------
 // Mixins
 // ---------------------------------------------
@@ -15,7 +22,9 @@
 @import 'vars';
 @import 'css--reset';
 @import 'typography';
-@import 'import-once';
+@import 'deprecate';
+@import 'functions';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 @mixin text-overflow($width: false) {
   display: block;
@@ -50,8 +59,23 @@
   }
 
   @if ($type == 'blurred') {
-    box-shadow: 0 0 0 3px $color__blue-20;
+    box-shadow: 0 0 0 3px $focus;
     outline: 1px solid transparent;
+  }
+
+  @if ($type == 'outline') {
+    outline: 2px solid $brand-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'invalid') {
+    outline: 2px solid $support-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'reset') {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
   }
 }
 
@@ -76,7 +100,7 @@
 
 @mixin button-reset($width: true) {
   @include reset;
-  @include font-family;
+  @include type-style('body-short-01');
   @include font-smoothing;
   @include letter-spacing;
   display: inline-block;
@@ -95,24 +119,7 @@
   }
 }
 
-/**
- * Generic `deprecate` mixin that is being used to indicate that a component is
- * no longer going to be present in the next major release of Carbon.
- */
-@mixin deprecate($reason) {
-  $deprecations--entry: false !default;
-
-  @if ($deprecations--entry == true) {
-    $deprecations--reasons: append($deprecations--reasons, $reason) !global;
-    @content;
-  } @else {
-    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon. REASON: #{$reason}';
-    @content;
-  }
-}
-
 // 💀 Skeleton loading animation
-
 @mixin skeleton {
   position: relative;
   border: none;
@@ -195,12 +202,14 @@
   }
 }
 
-//----------------------------------------------
-// Deprecated
-// ---------------------------------------------
-
+/// @deprecated A legacy class used for our older way of dark/light theme switch
 @mixin light-ui {
-  .#{$prefix}--global-light-ui & {
-    @content;
+  @include deprecate(
+    '`@include light-ui` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    .#{$prefix}--global-light-ui & {
+      @content;
+    }
   }
 }

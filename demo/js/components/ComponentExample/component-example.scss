@@ -13,8 +13,8 @@
     position: relative;
     padding: 2rem 2rem 2.5rem;
     margin: 1.5rem 0 0;
-    background-color: $color__gray-3;
-    color: $color__blue-90;
+    background-color: $ui-02;
+    color: $text-01;
     border: 1px solid $color__gray-1;
 
     &--rendered {
@@ -33,6 +33,10 @@
     color: $color__navy-gray-6;
     font-size: 0.75rem;
     padding: 0.5rem 1rem;
-    z-index: 9999;
+    z-index: z('overlay');
+  }
+
+  &__view-full-render--link-only {
+    position: relative;
   }
 }

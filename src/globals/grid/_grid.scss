@@ -1,15 +1,19 @@
-@import '../scss/import-once';
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../scss/feature-flags';
+@import '../scss/functions';
+@import '../scss/mixins';
 @import './classic/classic';
-@import './experimental/experimental';
-@import './experimental/fallback';
+@import './experimental';
 
 @include exports('grid') {
-  @if global-variable-exists('css--use-experimental-grid') == true and $css--use-experimental-grid == true {
-    @if global-variable-exists('css--use-experimental-grid-fallback') == true and $css--use-experimental-grid-fallback == true {
-      @include grid-experimental-fallback;
-    } @else {
-      @include grid-experimental;
-    }
+  @if feature-flag-enabled('grid') {
+    @include grid--x;
   } @else {
     @include grid;
   }

@@ -1,7 +1,16 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -39,13 +48,15 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
        */
       totalSteps: this.getSteps().length,
     };
+
+    this.addOverflowTooltip();
   }
 
   /**
    * Returns all steps with details about element and index.
    */
   getSteps() {
-    return [...this.element.querySelectorAll(this.options.selectorStepElement)].map((element, index) => ({
+    return toArray(this.element.querySelectorAll(this.options.selectorStepElement)).map((element, index) => ({
       element,
       index,
     }));
@@ -151,7 +162,25 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       </svg>`;
   }
 
-  static components = new WeakMap();
+  addOverflowTooltip() {
+    const stepLabels = toArray(this.element.querySelectorAll(this.options.selectorLabel));
+    const tooltips = toArray(this.element.querySelectorAll(this.options.selectorTooltip));
+
+    stepLabels.forEach(step => {
+      if (step.scrollWidth > this.options.maxWidth) {
+        step.classList.add(this.options.classOverflowLabel);
+      }
+    });
+
+    tooltips.forEach(tooltip => {
+      const childText = tooltip.querySelector(this.options.selectorTooltipText);
+      if (childText.scrollHeight > this.options.tooltipMaxHeight) {
+        tooltip.classList.add(this.options.classTooltipMulti);
+      }
+    });
+  }
+
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.
@@ -178,10 +207,17 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
       selectorCurrent: `.${prefix}--progress-step--current`,
       selectorIncomplete: `.${prefix}--progress-step--incomplete`,
       selectorComplete: `.${prefix}--progress-step--complete`,
+      selectorLabel: `.${prefix}--progress-label`,
+      selectorTooltip: `.${prefix}--tooltip`,
+      selectorTooltipText: `.${prefix}--tooltip__text`,
       classStep: `${prefix}--progress-step`,
       classComplete: `${prefix}--progress-step--complete`,
       classCurrent: `${prefix}--progress-step--current`,
       classIncomplete: `${prefix}--progress-step--incomplete`,
+      classOverflowLabel: `${prefix}--progress-label-overflow`,
+      classTooltipMulti: `${prefix}--tooltip_multi`,
+      maxWidth: 87,
+      tooltipMaxHeight: 21,
     };
   }
 }

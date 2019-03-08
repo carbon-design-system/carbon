@@ -1,13 +1,18 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
-@include exports('button') {
+@mixin button {
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
     display: inline-block;
@@ -97,6 +102,10 @@
       }
     }
 
+    &:active {
+      color: $ui-05;
+    }
+
     .#{$prefix}--btn__icon {
       margin-left: $spacing-xs;
     }
@@ -164,5 +173,139 @@
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
     width: rem(150px);
+  }
+}
+
+@mixin button--x {
+  // <button> elements cannot be used as flex containers
+  button.#{$prefix}--btn {
+    display: inline-block;
+
+    &:disabled > .#{$prefix}--btn__icon {
+      fill: $ui-04;
+    }
+  }
+
+  // Reset intrisic padding in Firefox (see #731)
+  button.#{$prefix}--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  .#{$prefix}--btn {
+    @include button-base--x;
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme--x($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme--x($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme--x(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
+    position: relative;
+
+    &:hover {
+      color: $inverse-01;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled {
+      background: transparent;
+      color: $disabled;
+
+      & > .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &:hover > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  button.#{$prefix}--btn--ghost {
+    @include button-theme--x(transparent, transparent, $interactive-01, $hover-ui, $interactive-01, $active-ui);
+    display: inline-flex;
+    align-items: center;
+    min-width: auto;
+    padding: rem(14px) rem(16px);
+
+    &:hover,
+    &:active {
+      color: $ibm-colors__blue-70;
+
+      .#{$prefix}--btn__icon {
+        fill: $ibm-colors__blue-70;
+      }
+    }
+
+    &:active {
+      background-color: $active-ui;
+    }
+
+    .#{$prefix}--btn__icon {
+      position: static;
+      margin-left: $spacing-xs;
+      transform: none;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $disabled;
+      background: transparent;
+      border-color: transparent;
+
+      .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &.#{$prefix}--btn--sm {
+      padding: 0.375rem 1rem;
+    }
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
+
+    &:hover {
+      border: $button-border-width solid transparent;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    @include letter-spacing;
+    min-height: rem(32px);
+    padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
+    margin-left: $spacing-md;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
+  }
+}
+
+@include exports('button') {
+  @if feature-flag-enabled('components-x') {
+    @include button--x;
+  } @else {
+    @include button;
   }
 }

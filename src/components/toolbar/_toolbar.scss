@@ -1,9 +1,16 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 $css--helpers: true;
 
-@import '../../globals/scss/import-once';
-@import '../../globals/scss/colors';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--helpers';
 @import '../button/button';
 @import '../checkbox/checkbox';
@@ -12,7 +19,7 @@ $css--helpers: true;
 @import '../overflow-menu/overflow-menu';
 @import '../search/search';
 
-@include exports('toolbar') {
+@mixin toolbar {
   .#{$prefix}--toolbar {
     @include font-family;
     display: flex;
@@ -122,5 +129,20 @@ $css--helpers: true;
 
   .#{$prefix}--radio-button-group {
     border: none;
+  }
+}
+
+@mixin toolbar--x {
+  @include toolbar;
+  .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active) .#{$prefix}--search-input {
+    border-bottom: none;
+  }
+}
+
+@include exports('toolbar') {
+  @if feature-flag-enabled('components-x') {
+    @include toolbar--x;
+  } @else {
+    @include toolbar;
   }
 }

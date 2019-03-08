@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -6,6 +13,8 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
+
+const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
 class Search extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -64,7 +73,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @param {HTMLElement} element The element contining the layout toggle.
    */
   toggleLayout(element) {
-    [...element.querySelectorAll(this.options.selectorSearchView)].forEach(item => {
+    toArray(element.querySelectorAll(this.options.selectorSearchView)).forEach(item => {
       item.classList.toggle(this.options.classLayoutHidden);
     });
   }
@@ -116,7 +125,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @member Search.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 }
 
 export default Search;

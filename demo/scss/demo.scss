@@ -1,6 +1,14 @@
 // Used for sidebar in dev environment
-@import '../../src/components/interior-left-nav/interior-left-nav';
+@import 'interior-left-nav';
 @import '../../src/globals/scss/styles';
+
+$deprecations--entry: true;
+// Collect all deprecation reasons into this list throughout the import cycle.
+$deprecations--reasons: ();
+// This message will be prepended to any deprecation notice
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
+
+@import '../../src/globals/scss/functions';
 @import './_vars.scss';
 @import './_mixins.scss';
 @import './_layout.scss';
@@ -13,6 +21,18 @@
 @import '../js/components/ComponentExample/component-overrides.scss';
 @import '../js/components/PageHeader/page-header.scss';
 @import '../js/components/SideNavToggle/side-nav-toggle.scss';
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message}
+REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}
 
 [data-renderroot] {
   display: block;
@@ -58,6 +78,24 @@
   transition: 0.2s;
   background-color: $ui-02;
   padding-left: 0;
+}
+
+.demo--container.demo--container--list-box > .demo--container__panel,
+.demo--container.demo--container--multi-select > .demo--container__panel,
+.component-example__live--rendered.list-box > div,
+.component-example__live--rendered.multi-select > div {
+  width: 300px;
+  padding: 0;
+}
+
+.demo--container__panel.demo--container--listbox {
+  margin: 5%;
+}
+
+.demo--theme-switcher {
+  position: absolute;
+  top: rem(16px);
+  right: rem(16px);
 }
 
 .bx--tile-container {
@@ -155,32 +193,79 @@
   z-index: 8000;
 }
 
-.bx--row {
-  min-height: 50px;
-}
+//--------------------------------------------------------------------------
+// Grid
+//--------------------------------------------------------------------------
+// Custom styling for the grid demo
+@if feature-flag-enabled('grid') {
+  .demo--container--grid {
+    .outside {
+      background-color: #dbeaff;
+      outline: 1px solid #97c1ff;
+      height: 80px;
+    }
 
-[class*='bx--col'] {
-  background-color: $color__gray-1;
+    .inside {
+      background-color: #edf4ff;
+      height: 100%;
+    }
 
-  p {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    [class*='col'] {
+      outline: 1px dashed #97c1ff;
+    }
+
+    display: block;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .#{$prefix}--grid {
+    outline: 1px dashed #97c1ff;
+  }
+} @else {
+  .bx--row {
+    min-height: 50px;
+  }
+
+  [class*='bx--col'] {
+    background-color: $color__gray-1;
+
+    p {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  .col-example {
+    background-color: rgba(blue, 0.2);
+    height: 100%;
+  }
+
+  .red {
+    background-color: rgba(red, 0.2);
+  }
+
+  .green {
+    background-color: rgba(green, 0.2);
+  }
+
+  .indigo {
+    background-color: rgba(indigo, 0.2);
   }
 }
 
-.col-example {
-  background-color: rgba(blue, 0.2);
-  height: 100%;
+.component-example__live .bx--form-item,
+.demo--container__panel .bx--form-item {
+  margin-bottom: 2rem;
 }
 
-.red {
-  background-color: rgba(red, 0.2);
+.component-example__live .bx--form-item.bx--checkbox-wrapper,
+.demo--container__panel .bx--form-item.bx--checkbox-wrapper {
+  margin-bottom: 0;
 }
 
-.green {
-  background-color: rgba(green, 0.2);
-}
-
-.indigo {
-  background-color: rgba(indigo, 0.2);
+@if feature-flag-enabled('components-x') {
+  .component-variation__name {
+    @include type-style('heading-02');
+  }
 }

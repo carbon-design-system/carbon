@@ -1,15 +1,20 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // List
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
-@include exports('lists') {
+@mixin lists {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
@@ -52,5 +57,70 @@
   .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
     content: '-';
     padding-right: $spacing-2xs;
+  }
+}
+
+@mixin lists--x {
+  .#{$prefix}--list--nested,
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered {
+    @include reset;
+    @include type-style('body-short-01');
+
+    counter-reset: listitem;
+  }
+
+  .#{$prefix}--list__item {
+    font-weight: 400;
+    color: $text-01;
+    list-style-type: none;
+    counter-increment: listitem;
+  }
+
+  .#{$prefix}--list--nested {
+    margin-bottom: rem(4px);
+    margin-left: $spacing-xl;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    display: inline-block;
+    margin-right: $spacing-xs;
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    margin-right: $spacing-xs;
+    display: inline-block;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
+    content: '\002013';
+  }
+
+  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    content: '\0025AA';
+  }
+
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    content: counter(listitem) '.';
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    counter-increment: sub-list-item;
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    content: counter(sub-list-item, lower-alpha) '.';
+    width: 0.6rem;
+  }
+}
+
+@include exports('lists') {
+  @if feature-flag-enabled('components-x') {
+    @include lists--x;
+  } @else {
+    @include lists;
   }
 }

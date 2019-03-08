@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -39,7 +46,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
     /**
      * If overlay is the parentNode then toggle it too.
      */
-    const parentNode = this.element.parentNode;
+    const { parentNode } = this.element;
 
     if (parentNode && parentNode.classList.contains(this.options.classLoadingOverlay)) {
       parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
@@ -83,7 +90,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * Delete component from the DOM.
    */
   _deleteElement() {
-    const parentNode = this.element.parentNode;
+    const { parentNode } = this.element;
 
     parentNode.removeChild(this.element);
 
@@ -97,7 +104,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * @member Loading.components
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   /**
    * The component options.

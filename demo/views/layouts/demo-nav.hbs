@@ -15,12 +15,12 @@
         overflow: hidden;
       }
     </style>
-    <link rel="stylesheet" type="text/css" href="/demo/demo.css">
+    <link rel="stylesheet" type="text/css" href="/demo.css">
   </head>
   <body>
     <div data-renderroot></div>
     <input aria-label="inpute-text-offleft" type="text" class="offleft" />
-    {{{body}}}
-    <script src="/demo/demo.js"></script>
+    {{{yield}}}
+    <script src="/demo{{#if minify}}.min{{/if}}.js"></script>
   </body>
 </html>

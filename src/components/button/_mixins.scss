@@ -1,3 +1,12 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/typography';
+
 @mixin button-base {
   @include reset;
   @include font-family;
@@ -10,7 +19,7 @@
   flex-shrink: 0;
   font-size: $button-font-size;
   font-weight: $button-font-weight;
-  height: rem($button-height);
+  min-height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: center;
@@ -58,6 +67,104 @@
 
   &:active {
     background-color: darken($bg-color, 20%);
+  }
+
+  .#{$prefix}--btn__icon {
+    fill: $icon-color;
+  }
+}
+
+@mixin button-base--x {
+  @include reset;
+  @include type-style('body-short-01');
+
+  cursor: pointer;
+  flex-shrink: 0;
+  min-height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  text-align: left;
+  text-decoration: none;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
+  outline: $button-outline-width solid transparent;
+  position: relative;
+  max-width: rem(320px);
+  min-width: rem(80px);
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $ui-04;
+    background: $ibm-colors__gray-30;
+    border-color: $ibm-colors__gray-30;
+  }
+
+  .#{$prefix}--btn__icon {
+    width: rem(16px);
+    height: rem(16px);
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
+    position: absolute;
+    right: rem(16px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+  background-color: $bg-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    position: absolute;
+    content: '';
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
+  }
+
+  &::before {
+    top: calc(-#{$button-border-width} + #{$button-outline-width});
+    left: -$button-border-width + $button-outline-width;
+    width: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
+    height: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
+    border: 1px solid transparent;
+  }
+
+  &:focus::before {
+    border-color: $ui-02;
+  }
+
+  &::after {
+    top: -#{$button-border-width};
+    left: -#{$button-border-width};
+    height: calc(100% + 2 * #{$button-border-width});
+    width: calc(100% + 2 * #{$button-border-width});
+    border: $button-outline-width solid transparent;
+  }
+
+  &:focus::after {
+    border-color: $focus;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus {
+    color: $ui-04;
+    background: $ibm-colors__gray-30;
+    border-color: $ibm-colors__gray-30;
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: $active-color;
   }
 
   .#{$prefix}--btn__icon {

@@ -1,0 +1,34 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{> header }}
+{{#if sidenav.state.fixed}}
+{{> side-nav-fixed }}
+{{else}}
+{{> side-nav }}
+{{/if}}
+{{> product-switcher }}
+{{> navigation-menu }}
+<div class="bx--content">
+  <h1>Heading</h1>
+  {{#each content}}
+  <h2>Sub-section</h2>
+  <p>
+    Elit odit veritatis repudiandae laboriosam amet. Dolore doloribus ut obcaecati harum ad Expedita hic atque quas
+    repellat et sed Tempore similique laudantium autem quam commodi, temporibus. Minus voluptates reiciendis adipisci.
+  </p>
+  <p>
+    Elit odit veritatis repudiandae laboriosam amet. Dolore doloribus ut obcaecati harum ad Expedita hic atque quas
+    repellat et sed Tempore similique laudantium autem quam commodi, temporibus. Minus voluptates reiciendis adipisci.
+  </p>
+  <h3>Tertiary section</h3>
+  <p>
+    Adipisicing eius ea est ducimus nihil Sit modi quisquam tempore asperiores at Culpa omnis quasi a rem sapiente,
+    illo Omnis aut maiores magnam perspiciatis at, rerum? Esse ullam veritatis debitis.
+  </p>
+  {{/each}}
+</div>

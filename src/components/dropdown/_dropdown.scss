@@ -1,19 +1,23 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 //-----------------------------
 // Dropdown
 //-----------------------------
 
-@import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/spacing';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/layout';
 
-@include exports('dropdown') {
+@mixin dropdown {
   .#{$prefix}--dropdown {
     @include reset;
     @include font-family;
@@ -154,6 +158,11 @@
     }
   }
 
+  .#{$prefix}--dropdown--auto-width {
+    width: auto;
+    max-width: rem(400px);
+  }
+
   .#{$prefix}--dropdown--inline {
     background-color: transparent;
     box-shadow: none;
@@ -213,7 +222,290 @@
   }
 
   // Skeleton State
-  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton {
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
     @include skeleton;
+  }
+}
+
+@mixin dropdown--x {
+  .#{$prefix}--dropdown {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    @include focus-outline('reset');
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    width: 100%;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
+    transition: $transition--base all;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--dropdown--invalid {
+    @include focus-outline('invalid');
+
+    .#{$prefix}--dropdown-text {
+      padding-right: rem(58px); // 2rem + 2xSVG width
+    }
+
+    + .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--dropdown__invalid {
+    position: absolute;
+    top: 50%;
+    right: rem(34px);
+    fill: $support-01;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--dropdown--open {
+    background-color: $hover-ui;
+  }
+
+  .#{$prefix}--dropdown--open:focus {
+    outline: 1px solid transparent;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    @include layer('overlay');
+  }
+
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--dropdown__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    top: rem(17px);
+    width: rem(10px);
+    height: rem(6px);
+    pointer-events: none;
+    transition: transform $transition--expansion $carbon--standard-easing;
+    transform-origin: 50% 45%;
+  }
+
+  .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown-text {
+    display: flex;
+    align-items: center;
+    height: rem(40px);
+    padding-top: rem(12px);
+    padding-bottom: rem(12px);
+    padding-left: rem(16px);
+    padding-right: rem(42px); // 2rem + SVG width
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--dropdown-list {
+    @include reset;
+    @include layer('overlay');
+    @include typescale('zeta');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    position: absolute;
+    z-index: z('dropdown');
+    max-height: 0;
+    transition: max-height $transition--expansion cubic-bezier(0, 0, 0.38, 0.9);
+    overflow: hidden;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: opacity $transition--expansion cubic-bezier(0, 0, 0.38, 0.9), background-color $transition--base;
+    opacity: 0;
+    margin-top: -1px;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:active {
+      background-color: $active-ui;
+    }
+
+    &:first-of-type {
+      padding-top: 3px;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
+    border-bottom: none;
+    margin-bottom: 2px;
+  }
+
+  .#{$prefix}--dropdown-link {
+    @include focus-outline('reset');
+    display: block;
+    color: currentColor;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 rem(16px);
+    border: 1px solid transparent;
+    border-bottom: 1px solid $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:focus {
+      @include focus-outline('outline');
+      margin: 0;
+      padding: rem(11px) rem(16px);
+    }
+
+    &:hover {
+      color: $text-01;
+      border-bottom-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
+    border-bottom-color: $hover-ui;
+  }
+
+  .#{$prefix}--dropdown--selected {
+    display: none;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
+    transform: rotate(-180deg);
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    max-height: 15rem;
+
+    &:hover {
+      overflow: auto;
+    }
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
+    opacity: 1;
+  }
+
+  .#{$prefix}--dropdown--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--dropdown--auto-width {
+    width: auto;
+    max-width: rem(400px);
+  }
+
+  .#{$prefix}--dropdown--inline {
+    border-bottom-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    transition-property: none;
+    width: initial;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text__inner {
+    margin-right: rem(20px);
+  }
+
+  .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
+    outline: 2px solid $interactive-01;
+  }
+
+  .#{$prefix}--dropdown--inline[data-value=''] .#{$prefix}--dropdown-text {
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
+    display: inline-block;
+    padding-right: 1.5rem;
+    overflow: visible;
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+    @include layer('overlay');
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-text {
+    outline: none;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-item:first-of-type {
+    padding-top: 3px;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown__arrow {
+    position: relative;
+    top: -2px;
+    left: 8px;
+    right: 0;
+    bottom: 0;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
+    font-weight: normal;
+  }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
+    @include skeleton;
+  }
+}
+
+@include exports('dropdown') {
+  @if feature-flag-enabled('components-x') {
+    @include dropdown--x;
+  } @else {
+    @include dropdown;
   }
 }

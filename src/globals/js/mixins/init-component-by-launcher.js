@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import eventMatches from '../misc/event-matches';
 import on from '../misc/on';
 
@@ -11,7 +18,7 @@ export default function(ToMix) {
      * `true` suggests that this component is lazily initialized upon an action/event, etc.
      * @type {boolean}
      */
-    static forLazyInit = true;
+    static forLazyInit /* #__PURE_CLASS_PROPERTY__ */ = true;
 
     /**
      * Instantiates this component in the given element.
