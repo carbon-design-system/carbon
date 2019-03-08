@@ -502,8 +502,7 @@
     z-index: 1;
     display: none;
     background: $inverse-02;
-    min-width: rem(258px);
-    max-width: rem(288px);
+    width: rem(208px);
     margin-top: $spacing-sm;
     padding: $spacing-xs $spacing-md;
     border-radius: rem(2px);
