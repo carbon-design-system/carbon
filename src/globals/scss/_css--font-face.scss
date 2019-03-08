@@ -7,7 +7,7 @@
 
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
-@import 'import-once';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 @import 'css--plex-core';
 @import 'helper-mixins';
 @import 'feature-flags';
