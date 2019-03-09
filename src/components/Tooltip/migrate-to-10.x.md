@@ -1,23 +1,20 @@
 # Props
 
-`<OverflowMenu>`
+`<Tooltip>`
 
 | v9                                        | v10                                                                              |
 | ----------------------------------------- | -------------------------------------------------------------------------------- |
-| `floatingMenu`                            | Removed - `<OverflowMenu>` always works as a floating menu                       |
 | `icon`, icon name from `carbon-icons`     | `renderIcon`, which takes a React component, e.g. one from `@carbon/icons-react` |
 | `iconName`, icon data from `carbon-icons` | `renderIcon`, which takes a React component, e.g. one from `@carbon/icons-react` |
 
 ## `v10` example
 
 ```javascript
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import Information16 from '@carbon/icons-react/lib/information/16';
 
 ...
 
-<OverflowMenu renderIcon={OverflowMenuVertical16}>
-  <OverflowMenuItem itemText="Option 1" />
-  <OverflowMenuItem itemText="Option 2" />
-  ...
-</OverflowMenu>
+<Tooltip renderIcon={Information16}>
+  My tooltip content...
+</Tooltip>
 ```
