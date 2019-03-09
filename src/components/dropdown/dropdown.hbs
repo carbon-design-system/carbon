@@ -12,8 +12,10 @@
     {{#unless inline}} Dropdown label {{else}}
     <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
     {{/unless}}
+  {{#unless inline}}
   </li>
   <li class="{{@root.prefix}}--dropdown__arrow-container">
+  {{/unless}}
     {{#if featureFlags.componentsX}}
     {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
     {{else}}
@@ -43,8 +45,10 @@
       {{#unless inline}} Dropdown label {{else}}
       <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
       {{/unless}}
+    {{#unless inline}}
     </li>
     <li class="{{@root.prefix}}--dropdown__arrow-container">
+    {{/unless}}
       {{#if featureFlags.componentsX}}
       {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
       {{else}}

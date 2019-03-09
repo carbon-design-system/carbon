@@ -142,6 +142,11 @@
     @include notification--experimental($support-03, $notification-warning-background-color);
   }
 
+  .#{$prefix}--toast-notification--warning .#{$prefix}--toast-notification__icon path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
   .#{$prefix}--toast-notification__icon {
     height: 1rem;
     width: 1rem;

@@ -156,16 +156,21 @@
     @include notification--experimental($support-03, $notification-warning-background-color);
   }
 
+  .#{$prefix}--inline-notification--warning .#{$prefix}--inline-notification__icon path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
   .#{$prefix}--inline-notification__details {
     display: flex;
     margin: 0 $spacing-md;
   }
 
   .#{$prefix}--inline-notification__icon {
-    height: 1rem;
-    width: 1rem;
-    min-height: 1rem;
-    min-width: 1rem;
+    height: rem(20px);
+    width: rem(20px);
+    min-height: rem(20px);
+    min-width: rem(20px);
     margin-right: $spacing-md;
     margin-top: rem(14px);
   }
@@ -175,19 +180,16 @@
     flex-wrap: wrap;
     align-items: center;
     padding: $spacing-sm 0;
-    max-width: 75%;
   }
 
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-01');
-
     margin: 0 $spacing-2xs 0 0;
     white-space: nowrap;
   }
 
   .#{$prefix}--inline-notification__subtitle {
     @include type-style('body-short-01');
-
     word-break: break-word;
   }
 
