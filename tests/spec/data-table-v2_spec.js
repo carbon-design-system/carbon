@@ -62,6 +62,69 @@ describe('DataTableV2', function() {
     });
   });
 
+  describe('Mouseover event', function() {
+    const events = new EventManager();
+    let table;
+    let container;
+    let dt;
+
+    beforeEach(function() {
+      container = document.createElement('div');
+    });
+
+    it('Should emit event when hovering on child row', function() {
+      container.innerHTML = ExpandableHTML;
+      document.body.appendChild(container);
+      dt = document.querySelector('.bx--data-table-v2');
+      table = new DataTableV2(container);
+
+      const childRow = dt.querySelector('[data-child-row]');
+      const spyRowHoverEvent = jasmine.createSpy();
+      events.on(dt, 'mouseover', spyRowHoverEvent);
+      childRow.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
+      expect(spyRowHoverEvent).toHaveBeenCalled();
+    });
+
+    it('Should emit event when hovering on thead', function() {
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      dt = document.querySelector('.bx--data-table-v2');
+      table = new DataTableV2(container);
+
+      const sticky = document.querySelector('.bx--data-table-v2--sticky-header');
+      const thead = dt.querySelector('thead');
+      const spyTheadHoverEvent = jasmine.createSpy();
+      events.on(dt, 'mouseover', spyTheadHoverEvent);
+      thead.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
+
+      if (sticky) {
+        expect(spyTheadHoverEvent).toHaveBeenCalled();
+      }
+    });
+
+    it('Should emit event when hovering on tbody', function() {
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      dt = document.querySelector('.bx--data-table-v2');
+      table = new DataTableV2(container);
+
+      const sticky = document.querySelector('.bx--data-table-v2--sticky-header');
+      const thead = dt.querySelector('tbody');
+      const spyTbodyHoverEvent = jasmine.createSpy();
+      events.on(dt, 'mouseover', spyTbodyHoverEvent);
+      thead.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
+
+      if (sticky) {
+        expect(spyTbodyHoverEvent).toHaveBeenCalled();
+      }
+    });
+
+    afterEach(function() {
+      document.body.removeChild(container);
+      table.release();
+    });
+  });
+
   describe('Initial tasks', function() {
     let container;
     let element;
@@ -159,8 +222,26 @@ describe('DataTableV2', function() {
     });
 
     it('Should toggle the class on click', function() {
-      firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
+      if (!componentsX) {
+        firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
+      }
+    });
+
+    it('Should switch through tri-state sort', function() {
+      if (componentsX) {
+        firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
+        expect(firstSort.getAttribute('data-previous-value') === 'ascending').toBe(true);
+
+        firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(false);
+        expect(firstSort.getAttribute('data-previous-value') === 'descending').toBe(true);
+
+        firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(false);
+        expect(firstSort.hasAttribute('data-previous-value')).toBe(false);
+      }
     });
 
     it('Should emit an event on sort click', function() {
@@ -236,6 +317,7 @@ describe('DataTableV2', function() {
     let table;
     let container;
     let tds;
+    let ths;
     let dt;
     let origRequestAnimationFrame;
 
@@ -281,7 +363,7 @@ describe('DataTableV2', function() {
       });
     });
 
-    it('Should have overflow class', function() {
+    it('Tds Should have overflow class', function() {
       dt.style.maxWidth = '900px';
       dt.style.width = '900px';
       tds = dt.querySelectorAll('td');
@@ -303,6 +385,52 @@ describe('DataTableV2', function() {
           expect(td.hasAttribute('tabIndex')).toBe(true);
         } else {
           expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+        }
+      });
+    });
+
+    it('Ths Should have overflow class', function() {
+      dt.style.maxWidth = '900px';
+      dt.style.width = '900px';
+      ths = dt.querySelectorAll('th');
+      ths.forEach(th => {
+        const span = th.querySelector('.bx--table-header-label');
+        if (span) {
+          span.textContent = 'Adding some really long text content to overflow the content and test for truncation.';
+          span.style.display = 'block';
+          span.style.maxWidth = 'calc(100% - 10px)';
+          span.style.whiteSpace = 'nowrap';
+        }
+      });
+      table = new DataTableV2(container);
+
+      ths.forEach(th => {
+        const span = th.querySelector('.bx--table-header-label');
+        if (span) {
+          expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(true);
+          expect(th.hasAttribute('tabIndex')).toBe(true);
+        } else {
+          expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+        }
+      });
+    });
+
+    it('Should remove overflow class', function() {
+      ths = dt.querySelectorAll('th');
+      ths.forEach(th => {
+        const span = th.querySelector('.bx--table-header-label');
+        if (span) {
+          th.classList.add('bx--data-table-v2--truncated');
+          th.tabindex = 0;
+        }
+      });
+      table = new DataTableV2(container);
+
+      ths.forEach(th => {
+        const span = th.querySelector('.bx--table-header-label');
+        if (span) {
+          expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+          expect(th.hasAttribute('tabIndex')).toBe(false);
         }
       });
     });
