@@ -35,16 +35,6 @@ $transition--moderate-02: 240ms;
 $transition--slow-01: 400ms;
 $transition--slow-02: 720ms;
 
-/// Productive easing curves
-$ibm-productive-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
-$ibm-productive-entrance: cubic-bezier(0, 0, 0.38, 0.9);
-$ibm-productive-exit: cubic-bezier(0.2, 0, 1, 0.9);
-
-/// Expressive easing curves
-$ibm-expressive-standard: cubic-bezier(0.4, 0.14, 0.3, 1);
-$ibm-expressive-entrance: cubic-bezier(0, 0, 0.3, 1);
-$ibm-expressive-exit: cubic-bezier(0.4, 0.14, 1, 1);
-
 // ☠️ Deprecated
 
 /// Default ease-in for components
@@ -63,9 +53,9 @@ $bx--ease-out: $carbon--ease-out;
 $bx--standard-easing: $carbon--standard-easing;
 
 @if feature-flag-enabled('components-x') {
-  $carbon--ease-in: $ibm-productive-entrance;
-  $carbon--ease-out: $ibm-productive-exit;
-  $carbon--standard-easing: $ibm-productive-standard;
+  $carbon--ease-in: cubic-bezier(0, 0, 0.38, 0.9);
+  $carbon--ease-out: cubic-bezier(0.2, 0, 1, 0.9);
+  $carbon--standard-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
 
   $transition--base: $transition--fast-02;
   $transition--expansion: $transition--moderate-01;
