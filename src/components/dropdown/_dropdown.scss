@@ -384,7 +384,7 @@
     }
 
     &:active {
-      background-color: $active-ui;
+      background-color: $selected-ui;
     }
 
     &:first-of-type {
