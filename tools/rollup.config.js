@@ -14,6 +14,16 @@ module.exports = {
       sourceMap: false,
     }),
     babel({
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            targets: {
+              browsers: ['last 1 version', 'ie >= 11'],
+            },
+          },
+        ],
+      ],
       exclude: ['node_modules/**'], // only transpile our source code
     }),
     replace({
