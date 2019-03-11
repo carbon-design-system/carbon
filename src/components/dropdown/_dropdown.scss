@@ -448,6 +448,7 @@
   }
 
   .#{$prefix}--dropdown--disabled {
+    border-bottom-color: transparent;
     opacity: 0.5;
     cursor: not-allowed;
 
