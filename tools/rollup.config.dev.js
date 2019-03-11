@@ -61,6 +61,16 @@ module.exports = {
       exclude: ['node_modules/**'],
     }),
     babel({
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            targets: {
+              browsers: ['last 1 version', 'ie >= 11'],
+            },
+          },
+        ],
+      ],
       include: ['node_modules/markdown-it/**'],
     }),
     replace({
