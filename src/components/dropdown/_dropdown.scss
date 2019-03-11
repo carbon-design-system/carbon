@@ -307,8 +307,8 @@
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--dropdown--open {
-    background-color: $hover-ui;
+  .#{$prefix}--dropdown--open:hover {
+    background-color: $field-01;
   }
 
   .#{$prefix}--dropdown--open:focus {
