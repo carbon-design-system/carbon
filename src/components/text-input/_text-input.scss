@@ -208,6 +208,7 @@
     outline: none;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
+    color: $disabled-02;
   }
 
   .#{$prefix}--text-input--light:disabled {

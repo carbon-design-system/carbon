@@ -1,35 +1,41 @@
 # carbon-components
 
+[![Carbon Components is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 [![Build Status](https://travis-ci.org/IBM/carbon-components.svg?branch=master)](https://travis-ci.org/IBM/carbon-components)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
 The Carbon Design System is a series of individual styles and components, that when combined make beautiful, intuitive designs. These designs are systemic and logical, as they all follow the same universal principles.
 
 The component library gives developers a collection of re-usable HTML and SCSS partials for building their products.
 
-# How to install
+## Getting started
 
-Run the following command using [npm](https://www.npmjs.com/):
+To install `carbon-components` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S carbon-components
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following
+command instead:
 
 ```bash
 yarn add carbon-components
 ```
 
-(**Important note**: `src` directory in the package has been deprecated and subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
-
 If you just want to try out `carbon-components`, you can also use [CodeSandbox](https://codesandbox.io).
 
 [![Edit carbon-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/IBM/carbon-components/tree/master/examples/codesandbox)
+
+(**Important note**: `src` directory in the package has been deprecated and subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
 
 # :books: Documentation
 
 - See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions to this repo.
+- [🏃‍♀️ Migration Guides](./docs/migration)
+  - [v9 to v10](./docs/migrate-to-10.x.md)
 
 ## Contributors
 
