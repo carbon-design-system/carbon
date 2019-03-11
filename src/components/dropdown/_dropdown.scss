@@ -340,10 +340,6 @@
     transform-origin: 50% 45%;
   }
 
-  .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
-    color: $text-01;
-  }
-
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: flex;
@@ -443,7 +439,6 @@
 
   .#{$prefix}--dropdown--disabled {
     border-bottom-color: transparent;
-    opacity: 0.5;
     cursor: not-allowed;
 
     &:hover {
@@ -452,6 +447,14 @@
 
     &:focus {
       outline: none;
+    }
+
+    .#{$prefix}--dropdown-text {
+      color: $disabled-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      fill: $disabled-02;
     }
 
     &.#{$prefix}--dropdown--light:hover {
