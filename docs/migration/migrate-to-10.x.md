@@ -47,7 +47,6 @@ Anything in this document is subject to change up until v10 is released._
 | Notification       | [Migrate](../../src/components/notification/migrate-to-10.x.md)       |
 | Number Input       | [Migrate](../../src/components/number-input/migrate-to-10.x.md)       |
 | Overflow Menu      | [Migrate](../../src/components/overflow-menu/migrate-to-10.x.md)      |
-| Pagination Nav     | Removed                                                               |
 | Pagination         | [Migrate](../../src/components/pagination/migrate-to-10.x.md)         |
 | Progress Indicator | [Migrate](../../src/components/progress-indicator/migrate-to-10.x.md) |
 | Radio Button       | [Migrate](../../src/components/radio-button/migrate-to-10.x.md)       |
