@@ -157,7 +157,7 @@ $typescale-map: (
   }
 }
 
-<<<<<<<head///@access public
+///@access public
 /// @type Map
 /// @returns mapped out pixel equivalent in rem
 /// @deprecated (For v10) Superseded by `$carbon--type-scale`
@@ -171,7 +171,7 @@ $font-size-map: (
   '16': 1rem,
   '14': 0.875rem,
   '12': 0.75rem,
-  '11': 0.6875rem
+  '11': 0.6875rem,
 );
 
 /// @access public

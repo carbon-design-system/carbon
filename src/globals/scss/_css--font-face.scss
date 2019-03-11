@@ -14,6 +14,8 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 @import './vendor/@carbon/elements/scss/type/font-face/mono';
 @import './vendor/@carbon/elements/scss/type/font-face/sans';
 
+/// @access public
+/// @deprecated (For v10) Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 @mixin helvetica-font-face {
   // Default font directory, `!default` flag allows user override.
   // (font files are configured to be served as static assets from server.js)

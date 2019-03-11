@@ -9,7 +9,10 @@
 // 🎌 Feature Flags
 //-------------------------
 
-// Initialize our feature flag map with default values
+/// @access public
+/// @type Map | Bool
+/// @content Initialize our feature flag map with default values, user can override default values ($default-feature-flags) here
+/// @example $feature-flags:(components-x: true, ui-shell:true); overrides default values for components-x and ui-shell
 $feature-flags: () !default;
 
 /// @access private

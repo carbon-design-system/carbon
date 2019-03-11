@@ -26,6 +26,10 @@
 @import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
+/// @access public
+/// @content adds text overflow styling
+/// @param {Value} $width [false] - value of width if you want to set width, else nothing
+/// @example @include text-overflow(300px);
 @mixin text-overflow($width: false) {
   display: block;
   overflow-x: hidden;
@@ -38,10 +42,17 @@
   }
 }
 
+/// @access public
+/// @content adds placeholder text color
+/// @example @include placeholder-colors;
 @mixin placeholder-colors {
   color: $text-03;
 }
 
+/// @access public
+/// @content adds small or large box shadow
+/// @param {String} $size ['small'] - size of box shadow
+/// @example @include box-shadow(); @include box-shadow('large');
 @mixin box-shadow($size: 'small') {
   // Large - For dropdowns
   @if ($size == 'large') {
@@ -53,6 +64,10 @@
   }
 }
 
+/// @access public
+/// @content adds outline styles depending on specific type
+/// @param {String} $type ['border'] - type of outline from: border, blurred, outline, invalid, reset
+/// @example @include focus-outline('outline');
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
     outline: 1px solid $brand-01;
@@ -79,12 +94,20 @@
   }
 }
 
+/// @access public
+/// @content adds rotational transformation
+/// @param {Value} $deg - how many degrees to rotate
+/// @param {Value} $speed - speed of rotation
+/// @param {Value} $origin [center] - transform-origin
+/// @example @include rotate(90deg, 300ms);
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transition: transform $speed;
   transform-origin: $origin;
 }
 
+/// @access public
+/// @content adds styles to hide content
 @mixin hidden {
   position: absolute;
   width: 1px;
@@ -98,6 +121,10 @@
   white-space: nowrap;
 }
 
+/// @access public
+/// @content resets button styles
+/// @param {Bool} $width [true] - sets width to 100% if true
+/// @example @include button-reset($width: false);
 @mixin button-reset($width: true) {
   @include reset;
   @include type-style('body-short-01');
@@ -119,7 +146,9 @@
   }
 }
 
-// 💀 Skeleton loading animation
+/// @access public
+/// @content 💀 Skeleton loading animation
+/// @example @include skeleton;
 @mixin skeleton {
   position: relative;
   border: none;
@@ -202,6 +231,7 @@
   }
 }
 
+/// @access public
 /// @deprecated A legacy class used for our older way of dark/light theme switch
 @mixin light-ui {
   @include deprecate(
