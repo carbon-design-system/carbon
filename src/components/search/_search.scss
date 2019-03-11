@@ -260,6 +260,11 @@
     transform: translate(-50%, -50%);
   }
 
+  // .#{$prefix}--search--xl .#{$prefix}--search-close {
+  //   height: rem(20px);
+  //   width: rem(20px);
+  // }
+
   .#{$prefix}--search-close {
     @include button-reset(false);
     @include focus-outline('reset');
