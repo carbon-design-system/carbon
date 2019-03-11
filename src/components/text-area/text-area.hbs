@@ -62,6 +62,9 @@
 
 <div class="bx--form-item">
   <label for="text-area-5" class="bx--label bx--label--disabled">Text Area label</label>
+  <div class="{{@root.prefix}}--form__helper-text {{@root.prefix}}--form__helper-text--disabled">
+    Optional helper text goes here
+  </div>
   {{#if componentsX}}
   <div class="{{@root.prefix}}--text-area__wrapper">
     <textarea id="text-area-5" class="bx--text-area bx--text-area--v2{{#if light}} bx--text-area--light{{/if}}" rows="4"
