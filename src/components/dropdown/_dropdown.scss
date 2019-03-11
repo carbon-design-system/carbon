@@ -229,6 +229,35 @@
 }
 
 @mixin dropdown--x {
+  .#{$prefix}--dropdown__wrapper--inline {
+    display: inline-flex;
+    align-items: center;
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text {
+      margin: 0;
+    }
+
+    .#{$prefix}--form__helper-text {
+      flex: 1;
+      order: 1;
+    }
+
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list__wrapper {
+      margin: 0 $spacing-md;
+    }
+
+    .#{$prefix}--dropdown-list__wrapper {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .#{$prefix}--dropdown--invalid {
+      margin: 0;
+    }
+  }
+
   .#{$prefix}--dropdown {
     @include reset;
     @include font-family;
