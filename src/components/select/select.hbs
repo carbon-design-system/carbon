@@ -43,7 +43,7 @@
     </div>
     {{else}}
     <select {{#if invalid}}data-invalid{{/if}} id="select-id"
-      class="{{@root.prefix}}--select-input {{#if invalid}}{{@root.prefix}}--select--invalid{{/if}}">
+      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}">
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
