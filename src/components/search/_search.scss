@@ -13,7 +13,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/import-once';
 
 @mixin search {
   .#{$prefix}--search {
@@ -195,10 +195,6 @@
     transition: background-color $transition--base, outline $transition--base;
     border-bottom: 1px solid $ui-04;
 
-    &:hover {
-      background-color: $hover-ui;
-    }
-
     &:focus {
       @include focus-outline('outline');
     }
@@ -236,10 +232,6 @@
   .#{$prefix}--search--sm .#{$prefix}--search-input {
     @include type-style('body-short-01');
     height: rem(32px);
-  }
-
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
-    height: rem(40px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
@@ -285,16 +277,22 @@
     width: rem(40px);
     right: 0;
     fill: $icon-01;
+    border: 2px solid transparent;
+    border-left: 0;
 
     &:hover {
       background-color: $hover-ui;
       border-bottom: 1px solid $ui-04;
     }
+    &:active {
+      @include focus-outline('outline');
+      background-color: $selected-ui;
+    }
   }
 
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
-    border: 2px solid transparent;
-    background-clip: content-box;
+    border: 2px solid $focus;
+    border-left: 0;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-close {

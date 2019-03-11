@@ -432,11 +432,12 @@
   }
 
   .#{$prefix}--dropdown--inline {
+    display: inline-block;
     border-bottom-color: transparent;
     background-color: transparent;
     box-shadow: none;
     transition-property: none;
-    width: initial;
+    width: auto;
 
     &:focus {
       outline: none;
