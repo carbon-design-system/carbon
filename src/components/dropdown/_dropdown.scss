@@ -320,9 +320,9 @@
     display: flex;
     align-items: center;
     height: rem(40px);
-    padding-top: rem(12px);
-    padding-bottom: rem(12px);
-    padding-left: rem(16px);
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    padding-left: $spacing-md;
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
     overflow: hidden;
@@ -472,7 +472,8 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding-right: 1.5rem;
+    padding-left: $spacing-sm;
+    padding-right: $spacing-lg;
     overflow: visible;
     color: $text-01;
   }
