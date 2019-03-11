@@ -11,7 +11,8 @@
 @import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
-@mixin css-body {
+/// @access private
+@mixin css-body--stable {
   body {
     @include reset;
     @include font-family;
@@ -21,6 +22,7 @@
   }
 }
 
+/// @access private
 @mixin css-body--x {
   body {
     @include reset;
@@ -31,12 +33,17 @@
   }
 }
 
-@include exports('css--body') {
+/// @access public
+@mixin css-body {
   @if global-variable-exists('css--body') == false or $css--body == true {
     @if not feature-flag-enabled('components-x') {
-      @include css-body;
+      @include css-body--stable;
     } @else {
       @include css-body--x;
     }
   }
+}
+
+@include exports('css--body') {
+  @include css-body;
 }
