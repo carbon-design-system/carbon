@@ -27,6 +27,9 @@ module.exports = {
         without the use of navigation. Search can be used as the primary means of discovering content,
         or as a filter to aid the user in finding content.
       `,
+      meta: {
+        xVersionNotSupported: true,
+      },
       context: {
         suffix: 'lg',
         componentsX,
@@ -40,6 +43,25 @@ module.exports = {
           without the use of navigation. Search can be used as the primary means of discovering content,
           or as a filter to aid the user in finding content.
         `,
+      meta: {
+        xVersionNotSupported: true,
+      },
+      context: {
+        suffix: 'xl',
+        componentsX,
+      },
+    },
+    {
+      name: 'extra large',
+      label: 'Normal search',
+      notes: `
+          Search enables users to specify a word or a phrase to find particular relevant pieces of content
+          without the use of navigation. Search can be used as the primary means of discovering content,
+          or as a filter to aid the user in finding content.
+        `,
+      meta: {
+        xVersionOnly: true,
+      },
       context: {
         suffix: 'xl',
         componentsX,
@@ -67,8 +89,28 @@ module.exports = {
         without the use of navigation. Search can be used as the primary means of discovering content,
         or as a filter to aid the user in finding content.
       `,
+      meta: {
+        xVersionNotSupported: true,
+      },
       context: {
         suffix: 'lg',
+        light: true,
+        componentsX,
+      },
+    },
+    {
+      name: 'extra large light',
+      label: 'Normal search (Light)',
+      notes: `
+          Search enables users to specify a word or a phrase to find particular relevant pieces of content
+          without the use of navigation. Search can be used as the primary means of discovering content,
+          or as a filter to aid the user in finding content.
+        `,
+      meta: {
+        xVersionOnly: true,
+      },
+      context: {
+        suffix: 'xl',
         light: true,
         componentsX,
       },
