@@ -38,6 +38,7 @@
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
 
     &:focus {
