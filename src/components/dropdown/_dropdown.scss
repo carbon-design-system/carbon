@@ -388,13 +388,12 @@
     }
 
     &:first-of-type {
-      padding-top: 3px;
+      padding-top: 2px;
     }
   }
 
   .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
     border-bottom: none;
-    margin-bottom: 2px;
   }
 
   .#{$prefix}--dropdown-link {
@@ -524,7 +523,7 @@
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-item:first-of-type {
-    padding-top: 3px;
+    padding-top: 2px;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
