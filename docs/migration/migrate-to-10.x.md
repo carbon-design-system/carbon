@@ -56,7 +56,7 @@ Anything in this document is subject to change up until v10 is released._
 | Structured List    | [Migrate](../../src/components/structured-list/migrate-to-10.x.md)    |
 | Tabs               | [Migrate](../../src/components/tabs/migrate-to-10.x.md)               |
 | Tag                | [Migrate](../../src/components/tag/migrate-to-10.x.md)                |
-| Text Area          | No breaking changes                                                   |
+| Text Area          | TODO                                                                  |
 | Text Input         | [Migrate](../../src/components/text-input/migrate-to-10.x.md)         |
 | Tile               | [Migrate](../../src/components/tile/migrate-to-10.x.md)               |
 | Time Picker        | [Migrate](../../src/components/time-picker/migrate-to-10.x.md)        |
