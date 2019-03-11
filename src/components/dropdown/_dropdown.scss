@@ -462,6 +462,10 @@
     &.#{$prefix}--dropdown--light:hover {
       background-color: $field-02;
     }
+
+    &.#{$prefix}--dropdown--inline:focus .#{prefix}--dropdown-text {
+      outline: none;
+    }
   }
 
   .#{$prefix}--dropdown--auto-width {
