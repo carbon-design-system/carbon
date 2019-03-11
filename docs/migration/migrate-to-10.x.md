@@ -1,0 +1,131 @@
+# 10.x Migration
+
+_Note: this migration guide is for a future, unreleased version of Carbon.
+Anything in this document is subject to change up until v10 is released._
+
+ <!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Components](#components)
+- [Icons](#icons)
+
+ <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+
+## Components
+
+| Component             | v10                                                                 |
+| --------------------- | ------------------------------------------------------------------- |
+| `Accordion`           | No breaking changes                                                 |
+| `AccordionItem`       | No breaking changes                                                 |
+| `Breadcrumb`          | No breaking changes                                                 |
+| `BreadcrumbItem`      | No breaking changes                                                 |
+| `Button`              | [Migrate](../../src/components/Button/migrate-to-10.x.md)           |
+| `Checkbox`            | No breaking changes                                                 |
+| `CodeSnippet`         | No breaking changes                                                 |
+| `ComboBox`            | No breaking changes                                                 |
+| `ComposedModal`       | No breaking changes                                                 |
+| `ContentSwitcher`     | No breaking changes                                                 |
+| `Copy`                | No breaking changes                                                 |
+| `CopyButton`          | No breaking changes                                                 |
+| `DangerButton`        | No breaking changes                                                 |
+| `DataTable`           | [Migrate](../../src/components/DataTable/migrate-to-10.x.md)        |
+| `DatePicker`          | No breaking changes                                                 |
+| `DatePickerInput`     | No breaking changes                                                 |
+| `Dropdown`            | Existing import remapped to `DropdownV2`                            |
+| `DropdownItem`        | Removed                                                             |
+| `DropdownV2`          | Renamed to `Dropdown`                                               |
+| `FileUploader`        | No breaking changes                                                 |
+| `Footer`              | Removed                                                             |
+| `Form`                | No breaking changes                                                 |
+| `FormGroup`           | No breaking changes                                                 |
+| `FormItem`            | No breaking changes                                                 |
+| `FormLabel`           | No breaking changes                                                 |
+| `Icon`                | Deprecated, [Migrate](#icons)                                       |
+| `InlineCheckbox`      | [Migrate](../../src/components/InlineCheckbox/migrate-to-10.x.md)   |
+| `InlineLoading`       | No breaking changes                                                 |
+| `Link`                | No breaking changes                                                 |
+| `ListBox`             | No breaking changes                                                 |
+| `ListItem`            | No breaking changes                                                 |
+| `Loading`             | No breaking changes                                                 |
+| `Modal`               | No breaking changes                                                 |
+| `ModalWrapper`        | No breaking changes                                                 |
+| `MultiSelect`         | No breaking changes                                                 |
+| `Notification`        | Deprecated, use `InlineNotification` or `ToastNotification` instead |
+| `NumberInput`         | [Migrate](../../src/components/NumberInput/migrate-to-10.x.md)      |
+| `OverflowMenu`        | [Migrate](../../src/components/OverflowMenu/migrate-to-10.x.md)     |
+| `OverflowMenuItem`    | No breaking changes                                                 |
+| `Pagination`          | Export now points to `PaginationV2`                                 |
+| `PaginationV2`        | Renamed to `Pagination`                                             |
+| `PrimaryButton`       | No breaking changes                                                 |
+| `ProgresIndicator`    | No breaking changes                                                 |
+| `RadioButton`         | [Migrate](../../src/components/RadioButton/migrate-to-10.x.md)      |
+| `RadioButtonGroup`    | No breaking changes                                                 |
+| `RadioTile`           | No breaking changes                                                 |
+| `Search`              | No breaking changes                                                 |
+| `SearchFilterButton`  | No breaking changes                                                 |
+| `SearchLayoutButton`  | No breaking changes                                                 |
+| `SecondaryButton`     | No breaking changes                                                 |
+| `Select`              | No breaking changes                                                 |
+| `SelectItem`          | No breaking changes                                                 |
+| `SelectItemGroup`     | No breaking changes                                                 |
+| `SkeletonPlaceholder` | No breaking changes                                                 |
+| `SkeletonText`        | No breaking changes                                                 |
+| `Slider`              | No breaking changes                                                 |
+| `StructuredList`      | No breaking changes                                                 |
+| `Switch`              | No breaking changes                                                 |
+| `Tab`                 | No breaking changes                                                 |
+| `TabContent`          | No breaking changes                                                 |
+| `Table`               | Export now points to `DataTable.Table`                              |
+| `TableBody`           | Export now points to `DataTable.TableBody`                          |
+| `TableData`           | Removed                                                             |
+| `TableHead`           | Export now points to `DataTable.TableHead`                          |
+| `TableHeader`         | Export now points to `DataTable.TableHeader`                        |
+| `TableRow`            | Export now points to `DataTable.TableRow`                           |
+| `TableRowExpanded`    | Removed                                                             |
+| `Tabs`                | No breaking changes                                                 |
+| `Tag`                 | No breaking changes                                                 |
+| `TextArea`            | No breaking changes                                                 |
+| `TextInput`           | No breaking changes                                                 |
+| `Tile`                | No breaking changes                                                 |
+| `TileGroup`           | No breaking changes                                                 |
+| `TimePicker`          | No breaking changes                                                 |
+| `TimePickerSelect`    | No breaking changes                                                 |
+| `Toggle`              | No breaking changes                                                 |
+| `ToggleSmall`         | No breaking changes                                                 |
+| `Toolbar`             | No breaking changes                                                 |
+| `ToolbarSearch`       | No breaking changes                                                 |
+| `Tooltip`             | [Migrate](../../src/components/Tooltip/migrate-to-10.x.md)          |
+| `TooltipDefinition`   | No breaking changes                                                 |
+| `TooltipIcon`         | No breaking changes                                                 |
+| `TooltipSimple`       | Removed, use `TooltipDefinition` or `TooltipIcon` instead           |
+| `UI Shell`            | New, experimental                                                   |
+| `UnorderedList`       | No breaking changes                                                 |
+
+## Icons
+
+The `<Icon>` component in `carbon-components-react` has been deprecated in
+`v10.0.0` in preference of [`@carbon/icons-react`](https://www.npmjs.com/package/@carbon/icons-react).
+
+At a high-level, this component was removed due to performance, most notably
+over this pattern:
+
+```jsx
+<Icon name="icon-name" />
+```
+
+Supporting the `name` prop meant that all icons needed to be included in the
+bundle of a product since a bundler could not determine which icons were being
+used and which weren't due to the runtime nature of props.
+
+We looked to solve this in the interim by adding in an `icon` prop, however this
+creates an additional install in order to use. With `@carbon/icons-react`, you
+can import icon components directly and use them in a variety of sizes (16x16,
+20x20, 24x24, and 32x32).
+
+In addition, these components have minor accessibility and performance improvements, most notably
+around inlining the SVG data for an icon instead of deriving the markup at
+runtime.

@@ -1,22 +1,11 @@
-# Carbon Components React
+# carbon-components-react
 
+[![Carbon Components is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 [![CircleCI](https://circleci.com/gh/IBM/carbon-components-react.svg?style=shield)](https://circleci.com/gh/IBM/carbon-components-react)
 [![All Contributors](https://img.shields.io/badge/all_contributors-64-orange.svg?style=flat-square)](#contributors)
-[![Greenkeeper badge](https://badges.greenkeeper.io/IBM/carbon-components-react.svg)](https://greenkeeper.io/)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
-> A collection of [Carbon Components](https://github.com/IBM/carbon-components) implemented using [React](https://facebook.github.io/react/).
-
-## Usage
-
-### List of Available Components
-
-View available React Components [here](http://react.carbondesignsystem.com). You can see usage information in several ways:
-
-1. Clicking the blue **Show Info** icon in the top right corner of the selected component. You can see the list of available React props
-2. Clicking the **STORY** tab at the bottom. This tab contains the code that shows how the component is being used
-3. Clicking the **KNOBS** tab at the bottom and changing values there. Most knobs are shown as something like `Button kind (kind)`, where `kind` is the name of React prop
-4. Clicking the **ACTION LOGGER** tab at the bottom and interacting with the selected component. You may see something like `onClick` which typically indicates that the event handler (React prop) with the same name is called. You can also expand the twistie to see the details of the event
-5. Clicking the **README** tab at the bottom. You can see some more document for some components
+> A collection of [Carbon Components](https://github.com/IBM/carbon-components) implemented using [React](https://reactjs.org/).
 
 ### Getting Started
 
@@ -42,56 +31,24 @@ If you just want to try out `carbon-components-react`, you can also use [CodeSan
 
 [![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/IBM/carbon-components-react/tree/master/examples/codesandbox)
 
-## Development
+## Usage
 
-Please refer to the [Contribution Guidelines](./.github/CONTRIBUTING.md) before starting any work.
+### List of Available Components
 
-### Using the server
+View available React Components [here](http://react.carbondesignsystem.com). You can see usage information in several ways:
 
-We recommend the use of [React Storybook](https://github.com/storybooks/react-storybook) for developing components.
+1. Clicking the blue **Show Info** icon in the top right corner of the selected component. You can see the list of available React props
+2. Clicking the **STORY** tab at the bottom. This tab contains the code that shows how the component is being used
+3. Clicking the **KNOBS** tab at the bottom and changing values there. Most knobs are shown as something like `Button kind (kind)`, where `kind` is the name of React prop
+4. Clicking the **ACTION LOGGER** tab at the bottom and interacting with the selected component. You may see something like `onClick` which typically indicates that the event handler (React prop) with the same name is called. You can also expand the twistie to see the details of the event
+5. Clicking the **README** tab at the bottom. You can see some more document for some components
 
-1. (Optional) Set environment variables:
+# :books: Documentation
 
-   - `true` to `CARBON_USE_BREAKING_CHANGES` environment variable to test some of the breaking changes for the next release:
-
-     ```
-     $ export CARBON_USE_BREAKING_CHANGES=true
-     ```
-
-   - `true` to `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS` environment variable to use external CSS, making style source link usable in DOM inspector:
-
-     ```
-     $ export CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true
-     ```
-
-   - `true` to `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP` environment variable to use Sass source map, making style source link point to the original Sass code:
-
-     ```
-     $ export CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true
-     ```
-
-   - `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental changes:
-
-     ```
-     $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
-     ```
-
-Caveats:
-
-- `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true` and `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true` make WebPack builds slightly slower.
-- With `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true`, the source map (hitting style source link in DOM inspector) sometimes leads you to a mix-in, instead of a style rule calling the mix-in, which may get you lost.
-
-2. Start the server:
-
-   ```
-   $ yarn storybook
-   ```
-
-3. Open browser to `http://localhost:9000/`.
-
-4. Develop components in their respective folders (`/components` or `/internal`).
-
-5. Write stories for your components in `/.storybook`.
+- See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
+- [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions to this repo
+- [🏃‍♀️ Migration Guides](./docs/migration)
+  - [v9](./docs/migrate-to-10.x.md)
 
 ## Contributing
 
@@ -104,7 +61,6 @@ To update the `Contributors` section, follow [these instructions](https://github
 Thanks goes to these wonderful people:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore -->
 | [<img src="https://avatars3.githubusercontent.com/u/4185382?v=4" width="100px;"/><br /><sub><b>Brian Han</b></sub>](https://github.com/hellobrian)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=hellobrian "Code") | [<img src="https://avatars2.githubusercontent.com/u/1266014?v=4" width="100px;"/><br /><sub><b>Chris Dhanaraj</b></sub>](http://twitter.com/chrisdhanaraj)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=chrisdhanaraj "Code") | [<img src="https://avatars0.githubusercontent.com/u/181819?v=4" width="100px;"/><br /><sub><b>Nick Sandonato</b></sub>](https://github.com/nsand)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=nsand "Code") | [<img src="https://avatars1.githubusercontent.com/u/11928039?v=4" width="100px;"/><br /><sub><b>TJ Egan</b></sub>](http://tw15egan.github.io/portfolio)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=tw15egan "Code") | [<img src="https://avatars0.githubusercontent.com/u/5447411?v=4" width="100px;"/><br /><sub><b>Mari Johannessen</b></sub>](http://www.marijohannessen.com)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=marijohannessen "Code") | [<img src="https://avatars1.githubusercontent.com/u/8836958?v=4" width="100px;"/><br /><sub><b>Sam Doyle</b></sub>](https://github.com/sam1463)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=sam1463 "Code") | [<img src="https://avatars0.githubusercontent.com/u/6420214?v=4" width="100px;"/><br /><sub><b>alex weidner</b></sub>](https://github.com/shimmerjs)<br />[💻](https://github.com/IBM/carbon-components-react/commits?author=shimmerjs "Code") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
