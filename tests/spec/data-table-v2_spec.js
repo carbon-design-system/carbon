@@ -78,7 +78,12 @@ describe('DataTableV2', function() {
       dt = document.querySelector('.bx--data-table-v2');
       table = new DataTableV2(container);
 
-      const childRow = dt.querySelector('[data-child-row]');
+      // expand row
+      const firstRowExpand = document.querySelector('[data-event="expand"]');
+      firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      // hover on expanded row
+      const childRow = document.querySelector('[data-child-row]');
       const spyRowHoverEvent = jasmine.createSpy();
       events.on(dt, 'mouseover', spyRowHoverEvent);
       childRow.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
@@ -131,6 +136,7 @@ describe('DataTableV2', function() {
     let table;
 
     beforeAll(function() {
+      /* istanbul ignore if */
       if (!componentsX) {
         container = document.createElement('div');
         container.innerHTML = HTML;
@@ -141,6 +147,7 @@ describe('DataTableV2', function() {
     });
 
     it('Expandable rows should be removed from the DOM', function() {
+      /* istanbul ignore if */
       if (!componentsX) {
         const rows = [...element.querySelectorAll('tbody > tr')];
 
@@ -151,6 +158,7 @@ describe('DataTableV2', function() {
     });
 
     afterAll(function() {
+      /* istanbul ignore if */
       if (!componentsX) {
         document.body.removeChild(container);
         table.release();
@@ -173,6 +181,7 @@ describe('DataTableV2', function() {
     });
 
     it('Should toggle the row on click', function() {
+      /* istanbul ignore if */
       if (componentsX) {
         const firstRowExpand = document.querySelector('[data-event="expand"]');
         firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -222,6 +231,7 @@ describe('DataTableV2', function() {
     });
 
     it('Should toggle the class on click', function() {
+      /* istanbul ignore if */
       if (!componentsX) {
         firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
@@ -229,6 +239,7 @@ describe('DataTableV2', function() {
     });
 
     it('Should switch through tri-state sort', function() {
+      /* istanbul ignore if */
       if (componentsX) {
         firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
@@ -322,123 +333,143 @@ describe('DataTableV2', function() {
     let origRequestAnimationFrame;
 
     beforeEach(function() {
-      container = document.createElement('div');
-      container.innerHTML = ExpandableHTML;
-      document.body.appendChild(container);
-      dt = document.querySelector('.bx--data-table-v2');
-      origRequestAnimationFrame = window.requestAnimationFrame;
-      window.requestAnimationFrame = cb => cb();
-      // console.log(dt);
+      /* istanbul ignore if */
+      if (componentsX) {
+        container = document.createElement('div');
+        container.innerHTML = ExpandableHTML;
+        document.body.appendChild(container);
+        dt = document.querySelector('.bx--data-table-v2');
+        origRequestAnimationFrame = window.requestAnimationFrame;
+        window.requestAnimationFrame = cb => cb();
+      }
     });
 
     it('Should emit an event on window resize', function() {
-      table = new DataTableV2(container);
-      const spyTruncateEvent = jasmine.createSpy();
-      events.on(window, 'resize', spyTruncateEvent);
-      window.dispatchEvent(new CustomEvent('resize', { bubbles: true }));
-      expect(spyTruncateEvent).toHaveBeenCalled();
+      /* istanbul ignore if */
+      if (componentsX) {
+        table = new DataTableV2(container);
+        const spyTruncateEvent = jasmine.createSpy();
+        events.on(window, 'resize', spyTruncateEvent);
+        window.dispatchEvent(new CustomEvent('resize', { bubbles: true }));
+        expect(spyTruncateEvent).toHaveBeenCalled();
+      }
     });
 
     it('Should not have overflow class', function() {
-      dt.style.width = '1256px';
-      tds = dt.querySelectorAll('td');
-      tds.forEach(td => {
-        const span = td.querySelector('.bx--table-cell-content');
-        if (span) {
-          span.style.display = 'block';
-          span.style.maxWidth = 'calc(100% - 10px)';
-          span.style.whiteSpace = 'nowrap';
-        }
-      });
-      table = new DataTableV2(container);
+      /* istanbul ignore if */
+      if (componentsX) {
+        dt.style.width = '1256px';
+        tds = dt.querySelectorAll('td');
+        tds.forEach(td => {
+          const span = td.querySelector('.bx--table-cell-content');
+          if (span) {
+            span.style.display = 'block';
+            span.style.maxWidth = 'calc(100% - 10px)';
+            span.style.whiteSpace = 'nowrap';
+          }
+        });
+        table = new DataTableV2(container);
 
-      tds.forEach(td => {
-        const span = td.querySelector('.bx--table-cell-content');
-        if (span) {
-          expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
-          expect(td.hasAttribute('tabIndex')).toBe(false);
-        } else {
-          expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
-        }
-      });
+        tds.forEach(td => {
+          const span = td.querySelector('.bx--table-cell-content');
+          if (span) {
+            expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+            expect(td.hasAttribute('tabIndex')).toBe(false);
+          } else {
+            expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+          }
+        });
+      }
     });
 
     it('Tds Should have overflow class', function() {
-      dt.style.maxWidth = '900px';
-      dt.style.width = '900px';
-      tds = dt.querySelectorAll('td');
-      tds.forEach(td => {
-        const span = td.querySelector('.bx--table-cell-content');
-        if (span) {
-          span.textContent = 'Adding some really long text content to overflow the content and test for truncation.';
-          span.style.display = 'block';
-          span.style.maxWidth = 'calc(100% - 10px)';
-          span.style.whiteSpace = 'nowrap';
-        }
-      });
-      table = new DataTableV2(container);
+      /* istanbul ignore if */
+      if (componentsX) {
+        dt.style.maxWidth = '900px';
+        dt.style.width = '900px';
+        tds = dt.querySelectorAll('td');
+        tds.forEach(td => {
+          const span = td.querySelector('.bx--table-cell-content');
+          if (span) {
+            span.textContent = 'Adding some really long text content to overflow the content and test for truncation.';
+            span.style.display = 'block';
+            span.style.maxWidth = 'calc(100% - 10px)';
+            span.style.whiteSpace = 'nowrap';
+          }
+        });
+        table = new DataTableV2(container);
 
-      tds.forEach(td => {
-        const span = td.querySelector('.bx--table-cell-content');
-        if (span) {
-          expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(true);
-          expect(td.hasAttribute('tabIndex')).toBe(true);
-        } else {
-          expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
-        }
-      });
+        tds.forEach(td => {
+          const span = td.querySelector('.bx--table-cell-content');
+          if (span) {
+            expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(true);
+            expect(td.hasAttribute('tabIndex')).toBe(true);
+          } else {
+            expect(td.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+          }
+        });
+      }
     });
 
     it('Ths Should have overflow class', function() {
-      dt.style.maxWidth = '900px';
-      dt.style.width = '900px';
-      ths = dt.querySelectorAll('th');
-      ths.forEach(th => {
-        const span = th.querySelector('.bx--table-header-label');
-        if (span) {
-          span.textContent = 'Adding some really long text content to overflow the content and test for truncation.';
-          span.style.display = 'block';
-          span.style.maxWidth = 'calc(100% - 10px)';
-          span.style.whiteSpace = 'nowrap';
-        }
-      });
-      table = new DataTableV2(container);
+      /* istanbul ignore if */
+      if (componentsX) {
+        dt.style.maxWidth = '900px';
+        dt.style.width = '900px';
+        ths = dt.querySelectorAll('th');
+        ths.forEach(th => {
+          const span = th.querySelector('.bx--table-header-label');
+          if (span) {
+            span.textContent = 'Adding some really long text content to overflow the content and test for truncation.';
+            span.style.display = 'block';
+            span.style.maxWidth = 'calc(100% - 10px)';
+            span.style.whiteSpace = 'nowrap';
+          }
+        });
+        table = new DataTableV2(container);
 
-      ths.forEach(th => {
-        const span = th.querySelector('.bx--table-header-label');
-        if (span) {
-          expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(true);
-          expect(th.hasAttribute('tabIndex')).toBe(true);
-        } else {
-          expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
-        }
-      });
+        ths.forEach(th => {
+          const span = th.querySelector('.bx--table-header-label');
+          if (span) {
+            expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(true);
+            expect(th.hasAttribute('tabIndex')).toBe(true);
+          } else {
+            expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+          }
+        });
+      }
     });
 
     it('Should remove overflow class', function() {
-      ths = dt.querySelectorAll('th');
-      ths.forEach(th => {
-        const span = th.querySelector('.bx--table-header-label');
-        if (span) {
-          th.classList.add('bx--data-table-v2--truncated');
-          th.tabindex = 0;
-        }
-      });
-      table = new DataTableV2(container);
+      /* istanbul ignore if */
+      if (componentsX) {
+        ths = dt.querySelectorAll('th');
+        ths.forEach(th => {
+          const span = th.querySelector('.bx--table-header-label');
+          if (span) {
+            th.classList.add('bx--data-table-v2--truncated');
+            th.tabindex = 0;
+          }
+        });
+        table = new DataTableV2(container);
 
-      ths.forEach(th => {
-        const span = th.querySelector('.bx--table-header-label');
-        if (span) {
-          expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
-          expect(th.hasAttribute('tabIndex')).toBe(false);
-        }
-      });
+        ths.forEach(th => {
+          const span = th.querySelector('.bx--table-header-label');
+          if (span) {
+            expect(th.classList.contains('bx--data-table-v2--truncated')).toBe(false);
+            expect(th.hasAttribute('tabIndex')).toBe(false);
+          }
+        });
+      }
     });
 
     afterEach(function() {
-      window.requestAnimationFrame = origRequestAnimationFrame;
-      document.body.removeChild(container);
-      table.release();
+      /* istanbul ignore if */
+      if (componentsX) {
+        window.requestAnimationFrame = origRequestAnimationFrame;
+        document.body.removeChild(container);
+        table.release();
+      }
     });
   });
 
@@ -448,49 +479,67 @@ describe('DataTableV2', function() {
     let dt;
 
     beforeEach(function() {
-      container = document.createElement('div');
-      container.innerHTML = HTML;
-      document.body.appendChild(container);
-      dt = document.querySelector('.bx--data-table-v2');
-      table = new DataTableV2(container);
+      /* istanbul ignore if */
+      if (componentsX) {
+        container = document.createElement('div');
+        container.innerHTML = HTML;
+        document.body.appendChild(container);
+        dt = document.querySelector('.bx--data-table-v2');
+        table = new DataTableV2(container);
+      }
     });
 
     it('Should open search bar on click', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-hidden');
-      const magnifier = document.querySelector('.bx--search-magnifier');
-      magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-hidden');
+        const magnifier = document.querySelector('.bx--search-magnifier');
+        magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      }
     });
 
     it('Should close search bar on click', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-hidden');
-      search.classList.add('bx--toolbar-search-container-active');
-      dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-hidden');
+        search.classList.add('bx--toolbar-search-container-active');
+        dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      }
     });
 
     it('Should open search bar on keydown', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-hidden');
-      const magnifier = document.querySelector('.bx--search-magnifier');
-      const event = new CustomEvent('keydown', { bubbles: true });
-      event.which = 13;
-      magnifier.dispatchEvent(event);
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-hidden');
+        const magnifier = document.querySelector('.bx--search-magnifier');
+        const event = new CustomEvent('keydown', { bubbles: true });
+        event.which = 13;
+        magnifier.dispatchEvent(event);
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      }
     });
 
     it('Should close search bar on keydown', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-hidden');
-      const btn = document.querySelector('.bx--btn');
-      search.classList.add('bx--toolbar-search-container-active');
-      const event = new CustomEvent('keydown', { bubbles: true });
-      event.which = 27;
-      btn.dispatchEvent(event);
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-hidden');
+        const btn = document.querySelector('.bx--btn');
+        search.classList.add('bx--toolbar-search-container-active');
+        const event = new CustomEvent('keydown', { bubbles: true });
+        event.which = 27;
+        btn.dispatchEvent(event);
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      }
     });
 
     afterEach(function() {
-      document.body.removeChild(container);
-      table.release();
+      /* istanbul ignore if */
+      if (componentsX) {
+        document.body.removeChild(container);
+        table.release();
+      }
     });
   });
 });
