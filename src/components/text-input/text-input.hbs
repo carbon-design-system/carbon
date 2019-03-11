@@ -57,10 +57,10 @@
   class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
   <label for="text-input-4" class="{{prefix}}--label">Text Input label</label>
   {{#if componentsX}}
-  <div class="{{prefix}}--text-input__field-wrapper">
+  <div class="{{prefix}}--text-input__field-wrapper" data-invalid>
     {{ carbon-icon 'WarningFilled16' class=(add prefix '--text-input__invalid-icon')}}
     {{#unless password}}
-    <input data-invalid id="text-input-4" type="text"
+    <input id="text-input-4" type="text"
       class="{{prefix}}--text-input {{prefix}}--text-input--invalid {{#if light}} {{prefix}}--text-input--light{{/if}}"
       placeholder="Placeholder text">
     {{else}}
