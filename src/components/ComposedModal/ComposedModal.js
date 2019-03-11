@@ -372,6 +372,7 @@ export class ModalHeader extends Component {
         <button
           onClick={this.handleCloseButtonClick}
           className={closeClass}
+          title={iconDescription}
           type="button">
           {componentsX ? (
             <Close20

@@ -97,6 +97,7 @@ exports[`ModalWrapper should render 1`] = `
             <button
               className="bx--modal-close"
               onClick={[Function]}
+              title="close the modal"
               type="button"
             >
               <Icon

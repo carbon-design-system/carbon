@@ -286,6 +286,7 @@ export default class Modal extends Component {
         className={`${prefix}--modal-close`}
         type="button"
         onClick={onRequestClose}
+        title={iconDescription}
         ref={this.button}>
         {componentsX ? (
           <Close20

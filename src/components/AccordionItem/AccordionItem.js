@@ -134,7 +134,8 @@ export default class AccordionItem extends Component {
           type="button"
           aria-expanded={this.state.open}
           className={`${prefix}--accordion__heading`}
-          onClick={this.handleHeadingClick}>
+          onClick={this.handleHeadingClick}
+          title={iconDescription}>
           {componentsX ? (
             <ChevronRight16
               className={`${prefix}--accordion__arrow`}

@@ -47,6 +47,7 @@ const TableExpandRow = ({
         <button
           className={`${prefix}--table-expand-v2__button`}
           onClick={onExpand}
+          title={expandIconDescription}
           aria-label={ariaLabel}>
           {componentsX ? (
             <ChevronRight16

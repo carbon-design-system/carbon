@@ -122,6 +122,7 @@ export default class ToolbarSearch extends Component {
           />
           <button
             className={`${prefix}--toolbar-search__btn`}
+            title={labelText}
             onClick={this.expandSearch}>
             {componentsX ? (
               <Search16

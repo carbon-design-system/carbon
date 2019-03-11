@@ -154,7 +154,11 @@ export class NotificationButton extends Component {
     })();
 
     return (
-      <button {...other} type={type} className={buttonClasses}>
+      <button
+        {...other}
+        type={type}
+        title={iconDescription}
+        className={buttonClasses}>
         {NotificationButtonIcon}
       </button>
     );

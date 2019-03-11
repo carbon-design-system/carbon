@@ -30,6 +30,7 @@ exports[`DataTable.TableToolbarAction should render 1`] = `
 >
   <button
     className="custom-class bx--toolbar-action"
+    title="Add"
   >
     <Icon
       className="bx--toolbar-action__icon"

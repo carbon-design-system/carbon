@@ -23,6 +23,7 @@ const SearchFilterButton = ({ labelText, iconDescription, ...other }) => (
     className={`${prefix}--search-button`}
     type="button"
     aria-label={labelText}
+    title={labelText}
     {...other}>
     {componentsX ? (
       <Filter16

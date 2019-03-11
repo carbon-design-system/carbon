@@ -58,7 +58,7 @@ const TableToolbarAction = ({
     return null;
   })();
   return (
-    <button className={toolbarActionClasses} {...rest}>
+    <button className={toolbarActionClasses} title={iconDescription} {...rest}>
       {tableToolbarActionIcon}
     </button>
   );

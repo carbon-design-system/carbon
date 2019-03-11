@@ -115,7 +115,8 @@ class SearchLayoutButton extends Component {
         className={`${prefix}--search-button`}
         type="button"
         onClick={this.toggleLayout}
-        aria-label={labelText}>
+        aria-label={labelText}
+        title={labelText}>
         <div className={`${prefix}--search__toggle-layout__container`}>
           <SearchLayoutButtonIcon />
         </div>
