@@ -49,10 +49,6 @@
     @include typescale('zeta');
   }
 
-  .#{$prefix}--label--disabled {
-    opacity: 0.5;
-  }
-
   // Skeleton State
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
@@ -104,6 +100,11 @@
     opacity: 1;
     margin-bottom: $spacing-xs;
   }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    opacity: 0.5;
+  }
 }
 
 @mixin form--x {
@@ -134,11 +135,6 @@
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
     @include typescale('zeta');
-  }
-
-  .#{$prefix}--label--disabled {
-    color: $disabled-02;
-    cursor: not-allowed;
   }
 
   // Skeleton State
@@ -192,6 +188,11 @@
     z-index: 0;
     opacity: 1;
     margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    color: $disabled-02;
   }
 
   @media (min-width: breakpoint('sm')) {
