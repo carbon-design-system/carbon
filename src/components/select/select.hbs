@@ -114,7 +114,7 @@
     </div>
     {{else}}
     <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled"
-      class="{{@root.prefix}}--select-input {{#if invalid}}{{@root.prefix}}--select--invalid {{/if}}" disabled>
+      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}" disabled>
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
