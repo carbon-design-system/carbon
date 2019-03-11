@@ -15,8 +15,8 @@
     {{/if}}
     {{/unless}}
     {{#if @root.featureFlags.componentsX}}
-    <div class="{{@root.prefix}}--select-input__wrapper">
-      <select {{#if invalid}}data-invalid{{/if}} id="select-id"
+    <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
+      <select id="select-id"
         class="{{@root.prefix}}--select-input {{#if invalid}}{{@root.prefix}}--select--invalid{{/if}}">
         {{#each items}}
         {{#if items}}
@@ -89,8 +89,8 @@
     {{/if}}
     {{/unless}}
     {{#if @root.featureFlags.componentsX}}
-    <div class="{{@root.prefix}}--select-input__wrapper">
-      <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled"
+    <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
+      <select id="select-id-disabled"
         class="{{@root.prefix}}--select-input {{#if invalid}}{{@root.prefix}}--select--invalid{{/if}}" disabled>
         {{#each items}}
         {{#if items}}
