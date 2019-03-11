@@ -11,7 +11,7 @@
   <p class="{{@root.prefix}}--label-description">only .jpg and .png files. 500kb max file size.</p>
   <div class="{{@root.prefix}}--file" data-file>
     <label for="your-file-importer-id-here"
-      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{#if componentsX}}{{else}}{{@root.prefix}}--btn--sm{{/if}}"
+      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{#unless componentsX}}{{@root.prefix}}--btn--sm{{/unless}}"
       role="button" tabindex="0">Add file</label>
     <input type="file" class="{{@root.prefix}}--file-input" id="your-file-importer-id-here" data-file-uploader
       data-target="[data-file-container]" multiple />
