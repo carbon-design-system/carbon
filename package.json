@@ -78,6 +78,7 @@
       "react/jsx-uses-vars": 1,
       "react/jsx-uses-react": 1,
       "react/no-find-dom-node": 1,
+      "react/no-typos": 2,
       "jsdoc/check-param-names": 2,
       "jsdoc/check-tag-names": 2,
       "jsdoc/check-types": 2,
