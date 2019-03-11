@@ -377,7 +377,6 @@
   .#{$prefix}--dropdown-item {
     transition: opacity $transition--expansion cubic-bezier(0, 0, 0.38, 0.9), background-color $transition--base;
     opacity: 0;
-    margin-top: -1px;
 
     &:hover {
       background-color: $hover-ui;
@@ -385,10 +384,6 @@
 
     &:active {
       background-color: $selected-ui;
-    }
-
-    &:first-of-type {
-      padding-top: 1px;
     }
   }
 
@@ -399,7 +394,7 @@
   .#{$prefix}--dropdown-link {
     @include focus-outline('reset');
     display: block;
-    color: currentColor;
+    color: $text-02;
     text-decoration: none;
     font-weight: normal;
     line-height: rem(16px);
