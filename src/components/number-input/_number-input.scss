@@ -334,7 +334,8 @@
     min-width: rem(144px);
     width: auto;
 
-    .#{$prefix}--number__control-btn {
+    .#{$prefix}--number__control-btn,
+    &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
       position: static;
       width: rem(40px);
       height: rem(40px);

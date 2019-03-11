@@ -340,10 +340,10 @@
   }
 
   .#{$prefix}--tooltip__label {
-    @include type-style('body-short-01');
+    @include type-style('label-01');
     display: inline-flex;
     align-items: center;
-    color: $text-01;
+    color: $text-02;
 
     .#{$prefix}--tooltip__trigger {
       margin-left: $spacing-xs;
@@ -365,18 +365,7 @@
     path,
     polygon,
     circle {
-      fill: $ui-05;
-    }
-
-    &:hover,
-    &:focus {
-      color: $text-01;
-
-      path,
-      polygon,
-      circle {
-        fill: $ui-05;
-      }
+      fill: $icon-02;
     }
   }
 
@@ -391,26 +380,20 @@
     display: none;
     min-width: rem(208px);
     max-width: rem(288px);
-    // Need to add new UI color -- IBM Color Gray 80
-    background: $tooltip-background-color;
+    background: $inverse-02;
     margin-top: $spacing-2xs;
     padding: 1rem;
     border-radius: rem(2px);
     z-index: z('floating');
     word-wrap: break-word;
-    // Need to change inverse color to Gray--10 across the board?
-    color: $ui-01;
+    color: $inverse-01;
 
     p {
-      @include font-family;
-      @include typescale('zeta');
+      @include type-style('body-short-01');
     }
 
-    // Need to change HTML to use small button, not override regular button styles
     button {
-      height: auto;
-      padding: $button-padding-sm;
-      padding-right: rem(32px);
+      padding-right: $spacing-xl;
     }
 
     .#{$prefix}--link {
@@ -419,18 +402,17 @@
       font-size: rem(14px);
 
       &:active {
-        color: $ui-01;
+        color: $inverse-01;
       }
 
-      &:vistited {
+      &:visited {
         color: $link-inverse-color;
       }
     }
 
     .#{$prefix}--tooltip__caret {
       position: absolute;
-      // Need to add new UI color -- IBM Color Gray 80
-      background: $tooltip-background-color;
+      background: $inverse-02;
       left: 0;
       top: rem(-4px);
       right: 0;
@@ -487,7 +469,7 @@
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
-      @include typescale('zeta');
+      @include type-style('label-01');
       display: inline-flex;
       position: relative;
       border-bottom: 1px dotted $interactive-01;
@@ -519,22 +501,17 @@
     position: absolute;
     z-index: 1;
     display: none;
-    // Need to add new UI color -- IBM Color Gray 80
-    background: $tooltip-background-color;
-    width: 100vw;
-    min-width: rem(208px);
-    max-width: rem(288px);
+    background: $inverse-02;
+    width: rem(208px);
     margin-top: $spacing-sm;
-    padding: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
     border-radius: rem(2px);
     pointer-events: none;
     cursor: pointer;
 
     p {
-      @include font-family;
-      @include typescale('zeta');
-      // Need to change inverse color to Gray--10 across the board?
-      color: $ui-01;
+      @include type-style('body-short-01');
+      color: $inverse-01;
     }
 
     .#{$prefix}--tooltip__caret {
@@ -543,21 +520,15 @@
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
-      // Need to add new UI color -- IBM Color Gray 80
-      background: $tooltip-background-color;
+      background: $inverse-02;
       margin-left: $spacing-md;
     }
   }
 
   // Tooltip Definition caret - bottom position
-  .#{$prefix}--tooltip--definition__bottom {
-    padding: 1rem 1rem 1.5rem;
-    min-height: rem(76px);
-
-    .#{$prefix}--tooltip__caret {
-      top: -0.2rem;
-      transform: rotate(-135deg);
-    }
+  .#{$prefix}--tooltip--definition__bottom .#{$prefix}--tooltip__caret {
+    top: -0.2rem;
+    transform: rotate(-135deg);
   }
 
   // Tooltip Definition caret - top position
@@ -575,7 +546,6 @@
   // Icon CSS only tooltip
   .#{$prefix}--tooltip--icon__top,
   .#{$prefix}--tooltip--icon__bottom {
-    @include font-family;
     @include reset;
     position: relative;
     display: inline-flex;
@@ -584,41 +554,38 @@
     overflow: visible;
 
     path {
-      fill: $ui-05;
+      fill: $icon-02;
     }
 
-    // Tooltip - renders as a combo of :before and :after elements
-    &:before,
-    &:after {
-      @include font-family;
+    // Tooltip - renders as a combo of ::before and ::after elements
+    &::before,
+    &::after {
+      @include type-style('body-short-01');
       position: absolute;
       display: none;
-      // Need to add new UI color -- IBM Color Gray 80
-      background-color: $tooltip-background-color;
+      background-color: $inverse-02;
     }
 
-    &:before {
+    &::before {
       right: 0;
       left: 0;
-      width: 0.6rem;
-      height: 0.6rem;
+      width: rem(18px);
+      height: rem(18px);
       margin: 0 auto;
       content: '';
       margin-top: 1px;
       margin-left: 50%;
     }
 
-    &:after {
-      @include typescale('zeta');
+    &::after {
       @include layer('overlay');
-      min-width: rem(32px);
+      min-width: rem(24px);
       max-width: rem(208px);
-      height: rem(32px);
+      height: rem(24px);
       margin-left: 50%;
       padding: 0 1rem;
       border-radius: rem(2px);
-      // Need to change inverse color to Gray--10 across the board?
-      color: $ui-01;
+      color: $inverse-01;
       font-weight: 400;
       content: attr(aria-label);
       transform: translateX(-50%);
@@ -630,11 +597,11 @@
     &:hover,
     &:focus {
       path {
-        fill: $ui-05;
+        fill: $icon-02;
       }
 
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         position: absolute;
         display: flex;
         align-items: center;
@@ -652,12 +619,12 @@
 
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
-    &:before {
+    &::before {
       top: 1px;
       transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
     }
 
-    &:after {
+    &::after {
       top: 0;
       transform: translate(-50%, calc(-100% - 12px));
     }
@@ -665,24 +632,20 @@
 
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
-    &:before {
+    &::before {
       bottom: 0;
-      transform: translate(-50%, calc(100% + 10px)) rotate(135deg);
+      transform: translate(-50%, calc(100% + 9px)) rotate(135deg);
     }
 
-    &:after {
+    &::after {
       bottom: 0;
       transform: translate(-50%, calc(100% + 10px));
     }
   }
 
   // Tooltip position - icon only
-  .#{$prefix}--tooltip--icon {
-    .#{$prefix}--tooltip__trigger {
-      svg {
-        margin-left: 0;
-      }
-    }
+  .#{$prefix}--tooltip--icon .#{$prefix}--tooltip__trigger svg {
+    margin-left: 0;
   }
 }
 

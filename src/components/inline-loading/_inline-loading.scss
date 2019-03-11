@@ -78,11 +78,11 @@
     align-items: center;
 
     .#{$prefix}--loading__svg circle {
-      stroke-width: 10;
+      stroke-width: 12;
     }
 
     .#{$prefix}--loading__stroke {
-      stroke-dashoffset: 75;
+      stroke-dashoffset: 99;
     }
   }
 
@@ -114,7 +114,7 @@
     fill: none;
     stroke: $interactive-01;
     transform-origin: 50% 50%;
-    stroke-width: 2.1;
+    stroke-width: 1.8;
     stroke-dasharray: 12;
     stroke-dashoffset: 12;
     animation-name: stroke;
