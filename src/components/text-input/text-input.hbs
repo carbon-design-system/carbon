@@ -207,6 +207,9 @@
 
 <div {{#if password}} data-text-input {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper">
   <label for="text-input-7" class="{{prefix}}--label {{prefix}}--label--disabled">Text Input label</label>
+  <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
+    Optional helper text goes here
+  </div>
   {{#if componentsX}}
   <div class="{{prefix}}--text-input__field-wrapper">
     {{#unless password}}
