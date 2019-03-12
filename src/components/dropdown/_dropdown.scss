@@ -533,6 +533,10 @@
     color: $disabled-02;
   }
 
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus .#{$prefix}--dropdown-text {
+    outline: 0;
+  }
+
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown__invalid-icon {
     right: rem(32px);
   }
