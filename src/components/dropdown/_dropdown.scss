@@ -12,7 +12,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/layout';
@@ -432,11 +432,12 @@
   }
 
   .#{$prefix}--dropdown--inline {
+    display: inline-block;
     border-bottom-color: transparent;
     background-color: transparent;
     box-shadow: none;
     transition-property: none;
-    width: initial;
+    width: auto;
 
     &:focus {
       outline: none;

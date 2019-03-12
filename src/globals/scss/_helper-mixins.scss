@@ -22,7 +22,9 @@
 @import 'vars';
 @import 'css--reset';
 @import 'typography';
-@import 'import-once';
+@import 'deprecate';
+@import 'functions';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
 
 // @access public
 // @content Includes a block of styles for sticky data tables that sets table max-width, max-height and column min-width
@@ -153,7 +155,7 @@
 
 @mixin button-reset($width: true) {
   @include reset;
-  @include font-family;
+  @include type-style('body-short-01');
   @include font-smoothing;
   @include letter-spacing;
   display: inline-block;
@@ -172,24 +174,7 @@
   }
 }
 
-/**
- * Generic `deprecate` mixin that is being used to indicate that a component is
- * no longer going to be present in the next major release of Carbon.
- */
-@mixin deprecate($reason) {
-  $deprecations--entry: false !default;
-
-  @if ($deprecations--entry == true) {
-    $deprecations--reasons: append($deprecations--reasons, $reason) !global;
-    @content;
-  } @else {
-    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon. REASON: #{$reason}';
-    @content;
-  }
-}
-
 // 💀 Skeleton loading animation
-
 @mixin skeleton {
   position: relative;
   border: none;
@@ -272,12 +257,14 @@
   }
 }
 
-//----------------------------------------------
-// Deprecated
-// ---------------------------------------------
-
+/// @deprecated A legacy class used for our older way of dark/light theme switch
 @mixin light-ui {
-  .#{$prefix}--global-light-ui & {
-    @content;
+  @include deprecate(
+    '`@include light-ui` has been deprecated. ' + 'It will be removed in the next major release.',
+    feature-flag-enabled('breaking-changes-x')
+  ) {
+    .#{$prefix}--global-light-ui & {
+      @content;
+    }
   }
 }

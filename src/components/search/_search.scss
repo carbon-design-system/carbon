@@ -182,7 +182,7 @@
 
   .#{$prefix}--search-input {
     @include reset;
-    @include font-family;
+    @include type-style('body-short-02');
     @include focus-outline('reset');
     appearance: none;
     border: none;
@@ -194,10 +194,6 @@
     order: 1;
     transition: background-color $transition--base, outline $transition--base;
     border-bottom: 1px solid $ui-04;
-
-    &:hover {
-      background-color: $hover-ui;
-    }
 
     &:focus {
       @include focus-outline('outline');
@@ -234,17 +230,13 @@
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-input {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     height: rem(32px);
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
-    @include typescale('epsilon');
-    height: rem(40px);
-  }
-
   .#{$prefix}--search--xl .#{$prefix}--search-input {
-    @include typescale('epsilon');
+    @include type-style('body-short-02');
+    font-size: carbon--type-scale(4);
     height: rem(48px);
     padding: 0 rem(64px) 0 rem(48px);
   }
@@ -285,16 +277,22 @@
     width: rem(40px);
     right: 0;
     fill: $icon-01;
+    border: 2px solid transparent;
+    border-left: 0;
 
     &:hover {
       background-color: $hover-ui;
       border-bottom: 1px solid $ui-04;
     }
+    &:active {
+      @include focus-outline('outline');
+      background-color: $selected-ui;
+    }
   }
 
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
-    border: 2px solid transparent;
-    background-clip: content-box;
+    border: 2px solid $focus;
+    border-left: 0;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-close {

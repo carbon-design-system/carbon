@@ -13,7 +13,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
 @mixin text-area {
@@ -43,6 +43,7 @@
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
 
     &:disabled {
@@ -137,11 +138,27 @@
 
   .#{$prefix}--text-area::-webkit-input-placeholder {
     @include placeholder-colors;
-    @include font-family;
+    @include type-style('body-long-01');
   }
 
   .#{$prefix}--text-area--light {
     background-color: $field-02;
+  }
+
+  .#{$prefix}--text-area--invalid {
+    padding-right: $spacing-2xl;
+  }
+
+  .#{$prefix}--text-area__wrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .#{$prefix}--text-area__invalid-icon {
+    position: absolute;
+    right: rem(16px);
+    top: rem(16px);
+    fill: $support-01;
   }
 
   //-----------------------------
@@ -162,6 +179,7 @@
   // Error
   //-----------------------------
   .#{$prefix}--text-area[data-invalid],
+  .#{$prefix}--text-area--invalid,
   .#{$prefix}--text-area:invalid {
     @include focus-outline('invalid');
     box-shadow: none;

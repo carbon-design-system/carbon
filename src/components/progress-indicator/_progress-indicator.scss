@@ -9,7 +9,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
 @mixin progress-indicator {
   .#{$prefix}--progress {
@@ -55,6 +55,17 @@
   .#{$prefix}--progress-label {
     line-height: 1;
     width: 75%;
+  }
+
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    display: inline-flex;
+    flex-flow: column nowrap;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    outline: none;
   }
 
   .#{$prefix}--progress-step--current {
@@ -158,7 +169,6 @@
 @mixin progress-indicator--x {
   .#{$prefix}--progress {
     @include reset;
-    @include font-family;
     display: flex;
     list-style: none;
   }
@@ -173,7 +183,7 @@
     transition: $transition--base all $carbon--standard-easing;
     overflow: visible;
 
-    > .#{$prefix}--tooltip__label {
+    .#{$prefix}--tooltip__label {
       display: block;
     }
   }
@@ -202,7 +212,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    @include font-size('14');
+    @include type-style('body-short-01');
 
     &::before {
       content: '';
@@ -245,20 +255,21 @@
     min-width: rem(115px);
     width: rem(125px);
     min-height: $spacing-lg;
-    height: $spacing-lg;
     margin-left: rem(22px);
     margin-top: rem(40px);
-    padding: 3px $spacing-md;
+    padding: $spacing-xs $spacing-md;
     display: block;
     visibility: hidden;
+    @include type-style('body-long-01');
+    color: $inverse-01;
   }
 
   //multiline tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
     width: rem(150px);
     height: auto;
-    padding: $spacing-md;
-    padding-bottom: $spacing-lg;
+    @include type-style('body-long-01');
+    color: $inverse-01;
   }
 
   //OPTIONAL HELPER TEXT STYLING
@@ -266,7 +277,7 @@
     position: absolute;
     margin-left: $spacing-lg;
     margin-top: rem(28px);
-    @include font-size('12');
+    @include type-style('label-01');
     color: $text-02;
   }
 
@@ -300,6 +311,16 @@
     .#{$prefix}--progress-line {
       background-color: $interactive-01;
     }
+  }
+
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    display: flex;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    outline: none;
   }
 
   //DISABLED STYLING

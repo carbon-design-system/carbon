@@ -1,6 +1,13 @@
 // Used for sidebar in dev environment
 @import 'interior-left-nav';
 @import '../../src/globals/scss/styles';
+
+$deprecations--entry: true;
+// Collect all deprecation reasons into this list throughout the import cycle.
+$deprecations--reasons: ();
+// This message will be prepended to any deprecation notice
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
+
 @import '../../src/globals/scss/functions';
 @import './_vars.scss';
 @import './_mixins.scss';
@@ -14,6 +21,18 @@
 @import '../js/components/ComponentExample/component-overrides.scss';
 @import '../js/components/PageHeader/page-header.scss';
 @import '../js/components/SideNavToggle/side-nav-toggle.scss';
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message}
+REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}
 
 [data-renderroot] {
   display: block;
@@ -61,7 +80,8 @@
   padding-left: 0;
 }
 
-.demo--container__panel.demo--container--listbox,
+.demo--container.demo--container--list-box > .demo--container__panel,
+.demo--container.demo--container--multi-select > .demo--container__panel,
 .component-example__live--rendered.list-box > div,
 .component-example__live--rendered.multi-select > div {
   width: 300px;
@@ -234,6 +254,20 @@
   }
 }
 
-.component-example__live .bx--form-item {
+.component-example__live .bx--form-item,
+.demo--container__panel .bx--form-item {
   margin-bottom: 2rem;
+}
+
+@if feature-flag-enabled('components-x') {
+  .component-example__live .bx--form-item.bx--checkbox-wrapper,
+  .demo--container__panel .bx--form-item.bx--checkbox-wrapper {
+    margin-bottom: 0;
+  }
+}
+
+@if feature-flag-enabled('components-x') {
+  .component-variation__name {
+    @include type-style('heading-02');
+  }
 }

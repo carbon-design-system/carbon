@@ -12,7 +12,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
 @mixin toggle {
@@ -273,7 +273,7 @@
       background-color: $ui-03;
       border-radius: 50%;
       content: '';
-      transition: $transition--base $carbon--standard-easing;
+      transition: $transition--fast-01 motion(exit, productive);
     }
   }
 
@@ -303,7 +303,7 @@
     left: 6px;
     top: 6px;
     z-index: 1;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $transition--fast-01 motion(exit, productive);
     transform: scale(0.2);
   }
 
@@ -314,7 +314,7 @@
 
   .#{$prefix}--toggle__text--left,
   .#{$prefix}--toggle__text--right {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     position: relative;
     margin-left: $spacing-xs;
   }
@@ -362,7 +362,6 @@
   .#{$prefix}--toggle + .#{$prefix}--toggle__label,
   .#{$prefix}--toggle + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      transition: box-shadow $transition--base;
       box-shadow: 0 0 0 2px transparent;
     }
   }
@@ -392,7 +391,7 @@
     &:before,
     &:after {
       cursor: not-allowed;
-      transition: $transition--base $carbon--standard-easing;
+      transition: $transition--fast-01 motion(exit, productive);
     }
   }
 

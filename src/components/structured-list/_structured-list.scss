@@ -9,7 +9,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/import-once';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
 @mixin structured-list {
@@ -191,7 +191,6 @@
 
   .#{$prefix}--structured-list {
     @include reset;
-    @include font-family;
     display: table;
     overflow-x: auto;
     overflow-y: hidden;
