@@ -479,9 +479,7 @@
     @include breakpoint(bp--sm--major) {
       outline: 2px solid $interactive-01;
       outline-offset: -2px;
-      border-bottom: 2px !important;
-      // position: relative;
-      // bottom: -3px;
+      border-bottom: 2px;
     }
   }
 
