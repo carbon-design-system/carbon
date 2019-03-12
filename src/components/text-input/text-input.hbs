@@ -5,7 +5,8 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<div {{#if password}} data-text-input {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper">
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
   <label for="text-input-3" class="{{prefix}}--label">Text Input label</label>
   {{#if componentsX}}
   <div class="{{prefix}}--text-input__field-wrapper">
@@ -14,8 +15,8 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
     {{else}}
     <input id="text-input-3" type="password"
-      class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
-      data-toggle-password-visibility>
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -30,7 +31,7 @@
     placeholder="Placeholder text">
   {{else}}
   <input id="text-input-3" type="password"
-    class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+    class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
     data-toggle-password-visibility>
   <button
     class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
@@ -52,7 +53,8 @@
   {{/if}}
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper">
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
   <label for="text-input-4" class="{{prefix}}--label">Text Input label</label>
   {{#if componentsX}}
   <div class="{{prefix}}--text-input__field-wrapper">
@@ -63,7 +65,7 @@
       placeholder="Placeholder text">
     {{else}}
     <input data-invalid id="text-input-4" type="password"
-      class="{{prefix}}--text-input {{prefix}}--text-input--invalid {{#if light}} {{prefix}}--text-input--light{{/if}}"
+      class="{{prefix}}--text-input {{prefix}}--text-input--invalid{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
       placeholder="Placeholder text" data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
@@ -79,7 +81,7 @@
     class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
   {{else}}
   <input data-invalid id="text-input-4" type="password"
-    class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+    class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
     data-toggle-password-visibility>
   <button
     class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
@@ -104,7 +106,8 @@
   </div>
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper">
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
   <label for="text-input-5" class="{{prefix}}--label">Text Input label</label>
   <div class="{{prefix}}--form__helper-text">
     Optional helper text goes here
@@ -116,8 +119,8 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
     {{else}}
     <input id="text-input-5" type="password"
-      class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
-      data-toggle-password-visibility>
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -132,7 +135,7 @@
     placeholder="Placeholder text">
   {{else}}
   <input id="text-input-5" type="password"
-    class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+    class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
     data-toggle-password-visibility>
   <button
     class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
@@ -154,7 +157,8 @@
   {{/if}}
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper"
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}"
   style="width: 320px">
   <label for="text-input-6" class="{{prefix}}--label">Text Input label</label>
   <div class="{{prefix}}--form__helper-text">
@@ -167,8 +171,8 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
     {{else}}
     <input id="text-input-6" type="password"
-      class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
-      data-toggle-password-visibility>
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -183,7 +187,7 @@
     placeholder="Placeholder text">
   {{else}}
   <input id="text-input-6" type="password"
-    class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+    class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
     data-toggle-password-visibility>
   <button
     class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
@@ -205,7 +209,8 @@
   {{/if}}
 </div>
 
-<div {{#if password}} data-text-input {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper">
+<div {{#if password}} data-text-input {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
   <label for="text-input-7" class="{{prefix}}--label {{prefix}}--label--disabled">Text Input label</label>
   <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
     Optional helper text goes here
@@ -218,8 +223,8 @@
       disabled>
     {{else}}
     <input id="text-input-7" type="password"
-      class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
-      data-toggle-password-visibility disabled>
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
+      placeholder="Placeholder text" data-toggle-password-visibility disabled>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -234,7 +239,7 @@
     placeholder="Placeholder text" disabled>
   {{else}}
   <input id="text-input-7" type="password"
-    class="{{prefix}}--text-input {{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+    class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
     data-toggle-password-visibility disabled>
   <button
     class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
