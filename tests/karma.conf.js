@@ -225,6 +225,7 @@ module.exports = function(config) {
                   'src/components/pagination/pagination.js',
                   'src/components/unified-header/left-nav.js',
                   'src/components/unified-header/profile-switcher.js',
+                  'src/components/data-table-v2/data-table-v2.js', // to-do: remove when v9 is deprecated
                 ],
               },
             },
