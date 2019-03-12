@@ -243,7 +243,13 @@
     }
 
     .#{$prefix}--dropdown {
-      margin: 0 $spacing-md;
+      margin-left: rem(4px);
+    }
+
+    &--invalid .#{$prefix}--label {
+      position: relative;
+      top: rem(7px);
+      align-self: flex-start;
     }
   }
 
@@ -274,11 +280,24 @@
     }
   }
 
+  .#{$prefix}--dropdown--open {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--dropdown--inline__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--dropdown--inline__wrapper .#{$prefix}--dropdown--invalid + .#{$prefix}--form-requirement {
+    margin-left: rem(4px);
+  }
+
   .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
 
     .#{$prefix}--dropdown-text {
-      padding-right: rem(58px); // 2rem + 2xSVG width
+      padding-right: rem(56px); // TODO: spacing token
     }
 
     + .#{$prefix}--form-requirement {
@@ -291,7 +310,7 @@
   .#{$prefix}--dropdown__invalid-icon {
     position: absolute;
     top: 50%;
-    right: rem(34px);
+    right: rem(40px); // TODO: spacing token
     fill: $support-01;
     transform: translateY(-50%);
   }
@@ -321,9 +340,7 @@
     fill: $ui-05;
     position: absolute;
     right: 1rem;
-    top: rem(17px);
-    width: rem(10px);
-    height: rem(6px);
+    top: rem(13px);
     pointer-events: none;
     transition: transform $transition--expansion $carbon--standard-easing;
     transform-origin: 50% 45%;
@@ -365,10 +382,18 @@
 
     &:hover {
       background-color: $hover-ui;
+
+      + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+        border-color: transparent;
+      }
     }
 
     &:active {
       background-color: $selected-ui;
+    }
+
+    &:first-of-type .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
     }
   }
 
@@ -386,7 +411,7 @@
     padding: rem(11px) 0;
     margin: 0 rem(16px);
     border: 1px solid transparent;
-    border-bottom: 1px solid $ui-03;
+    border-top-color: $ui-03;
     text-overflow: ellipsis;
     overflow: hidden;
 
@@ -398,7 +423,7 @@
 
     &:hover {
       color: $text-01;
-      border-bottom-color: transparent;
+      border-color: transparent;
     }
   }
 
@@ -466,6 +491,8 @@
     box-shadow: none;
     transition-property: none;
     width: auto;
+    height: rem(32px);
+    background-color: $field-02;
 
     &:focus {
       outline: none;
@@ -475,10 +502,19 @@
     &:hover {
       background-color: $hover-ui;
     }
+
+    &.#{$prefix}--dropdown--disabled {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      top: rem(8px);
+      right: rem(8px);
+    }
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open {
-    background-color: $field-01;
+    background-color: transparent;
   }
 
   .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
@@ -487,14 +523,22 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding-left: $spacing-sm;
-    padding-right: rem(42px);
+    padding: rem(7px) rem(32px) rem(7px) $spacing-sm; // TODO: spacing token
+    height: rem(32px);
     overflow: visible;
     color: $text-01;
   }
 
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled .#{$prefix}--dropdown-text {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown__invalid-icon {
+    right: rem(32px);
+  }
+
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text {
-    padding-right: rem(58px);
+    padding-right: rem(56px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus {
