@@ -389,6 +389,7 @@
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
         color: $text-01;
+        border-bottom: 2px;
       }
     }
     @include max-breakpoint(bp--sm--major) {
