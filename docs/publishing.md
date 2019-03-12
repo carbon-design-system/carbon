@@ -1,16 +1,16 @@
+# Publishing
+
+<!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 ## Table of Contents
 
-- [Publishing](#publishing)
-  - [Pre-release](#pre-release)
-  - [FAQ](#faq)
+- [Pre-release](#pre-release)
+- [FAQ](#faq)
     - [How do I fix the repo state if I cancel during a publish?](#how-do-i-fix-the-repo-state-if-i-cancel-during-a-publish)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Publishing
+<!-- prettier-ignore-end -->
 
 > Steps for publishing the monorepo
 
