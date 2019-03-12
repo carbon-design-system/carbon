@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
-<style type="text/css">
-	.st0{opacity:0;fill-opacity:0;}
-</style>
-<path d="M12,1C5.9,1,1,5.9,1,12s4.9,11,11,11s11-4.9,11-11S18.1,1,12,1z M11,8V5h2v9h-2V8z M12,18.9c-0.7,0-1.4-0.7-1.4-1.4
-	c0-0.8,0.7-1.4,1.4-1.4c0.7,0,1.4,0.6,1.4,1.4C13.4,18.3,12.7,18.9,12,18.9z"/>
-<path id="inner-path" class="st0" d="M10.6,17.5c0-0.8,0.6-1.4,1.4-1.4c0.8,0,1.4,0.6,1.4,1.4c0,0.8-0.6,1.4-1.4,1.4
-	C11.3,18.9,10.6,18.2,10.6,17.5z M11,14V5h2v9H11z"/>
-</svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#fff;opacity:0;}.cls-2{fill:none;}</style></defs><title>warning--filled</title><path id="Compound_Path" data-name="Compound Path" d="M12,1A11,11,0,1,0,23,12,11.0122,11.0122,0,0,0,12,1Zm-.8751,5h1.75v8h-1.75ZM12,19.25A1.25,1.25,0,1,1,13.25,18,1.25,1.25,0,0,1,12,19.25Z" transform="translate(0)"/><path id="inner-path" class="cls-1" d="M13.25,18A1.25,1.25,0,1,1,12,16.75,1.25,1.25,0,0,1,13.25,18ZM12.8751,6h-1.75v8h1.75Z" transform="translate(0)"/><rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-2" width="24" height="24"/></svg>
