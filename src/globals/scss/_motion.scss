@@ -27,6 +27,14 @@ $transition--base: 250ms;
 /// @access public
 $transition--expansion: 300ms;
 
+/// New easing durations
+$transition--fast-01: 70ms;
+$transition--fast-02: 110ms;
+$transition--moderate-01: 150ms;
+$transition--moderate-02: 240ms;
+$transition--slow-01: 400ms;
+$transition--slow-02: 720ms;
+
 // ☠️ Deprecated
 
 /// Default ease-in for components
@@ -45,16 +53,9 @@ $bx--ease-out: $carbon--ease-out;
 $bx--standard-easing: $carbon--standard-easing;
 
 @if feature-flag-enabled('components-x') {
-  $carbon--ease-in: cubic-bezier(0.2, 0, 1, 0.9);
-  $carbon--ease-out: cubic-bezier(0, 0, 0.38, 0.9);
-  $carbon--standard-easing: cubic-bezier(0.2, 0.2, 0.38, 0.9);
-
-  $transition--fast-01: 90ms;
-  $transition--fast-02: 100ms;
-  $transition--moderate-01: 150ms;
-  $transition--moderate-02: 240ms;
-  $transition--slow-01: 400ms;
-  $transition--slow-02: 720ms;
+  $carbon--ease-in: cubic-bezier(0, 0, 0.38, 0.9);
+  $carbon--ease-out: cubic-bezier(0.2, 0, 1, 0.9);
+  $carbon--standard-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
 
   $transition--base: $transition--fast-02;
   $transition--expansion: $transition--moderate-01;
