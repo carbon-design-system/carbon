@@ -150,7 +150,7 @@ describe('TextInput', () => {
         />
       );
 
-      const input = wrapper.dive().find('input');
+      const input = wrapper.find('input');
 
       it('should not invoke onClick', () => {
         input.simulate('click');
@@ -176,7 +176,7 @@ describe('TextInput', () => {
         />
       );
 
-      const input = wrapper.dive().find('input');
+      const input = wrapper.find('input');
       const eventObject = {
         target: {
           defaultValue: 'test',

@@ -5,7 +5,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
   className="custom-class"
   iconDescription="Add"
 >
-  <Button
+  <ForwardRef
     className="custom-class"
     disabled={false}
     icon={
@@ -94,6 +94,6 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         </svg>
       </Icon>
     </button>
-  </Button>
+  </ForwardRef>
 </TableBatchAction>
 `;

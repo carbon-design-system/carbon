@@ -28,7 +28,7 @@ describe('Select', () => {
 
     const selectContainer = wrapper.find('.bx--form-item > div');
     const label = wrapper.find('label');
-    const selectWrapper = () => wrapper.find('Select');
+    const selectWrapper = () => wrapper.find(Select);
     const select = () => wrapper.find('select');
     const helper = wrapper.find('.bx--form__helper-text');
 

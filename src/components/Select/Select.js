@@ -16,84 +16,88 @@ import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 
 const { prefix } = settings;
 
-const Select = ({
-  className,
-  id,
-  inline,
-  labelText,
-  disabled,
-  children,
-  iconDescription,
-  hideLabel,
-  invalid,
-  invalidText,
-  helperText,
-  light,
-  innerRef: ref,
-  ...other
-}) => {
-  const selectClasses = classNames({
-    [`${prefix}--select`]: true,
-    [`${prefix}--select--inline`]: inline,
-    [`${prefix}--select--light`]: light,
-    [className]: className,
-  });
-  const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
-  const errorId = `${id}-error-msg`;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
-  const helper = helperText ? (
-    <div className={`${prefix}--form__helper-text`}>{helperText}</div>
-  ) : null;
-  const ariaProps = {};
-  if (invalid) {
-    ariaProps['aria-describedby'] = errorId;
-  }
-  return (
-    <div className={`${prefix}--form-item`}>
-      <div className={selectClasses}>
-        <label htmlFor={id} className={labelClasses}>
-          {labelText}
-        </label>
-        {componentsX && !inline && helper}
-        <select
-          {...other}
-          {...ariaProps}
-          id={id}
-          className={`${prefix}--select-input`}
-          disabled={disabled || undefined}
-          data-invalid={invalid || undefined}
-          aria-invalid={invalid || undefined}
-          ref={ref}>
-          {children}
-        </select>
-        {componentsX ? (
-          <ChevronDownGlyph
-            aria-hidden={true}
-            aria-label={iconDescription}
-            alt={iconDescription}
-            className={`${prefix}--select__arrow`}
-            name="chevron--down"
-          />
-        ) : (
-          <Icon
-            icon={iconCaretDown}
-            className={`${prefix}--select__arrow`}
-            description={iconDescription}
-          />
-        )}
-        {!componentsX && helper}
-        {componentsX && inline && helper}
-        {error}
+const Select = React.forwardRef(
+  (
+    {
+      className,
+      id,
+      inline,
+      labelText,
+      disabled,
+      children,
+      iconDescription,
+      hideLabel,
+      invalid,
+      invalidText,
+      helperText,
+      light,
+      ...other
+    },
+    ref
+  ) => {
+    const selectClasses = classNames({
+      [`${prefix}--select`]: true,
+      [`${prefix}--select--inline`]: inline,
+      [`${prefix}--select--light`]: light,
+      [className]: className,
+    });
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
+    const errorId = `${id}-error-msg`;
+    const error = invalid ? (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
       </div>
-    </div>
-  );
-};
+    ) : null;
+    const helper = helperText ? (
+      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+    ) : null;
+    const ariaProps = {};
+    if (invalid) {
+      ariaProps['aria-describedby'] = errorId;
+    }
+    return (
+      <div className={`${prefix}--form-item`}>
+        <div className={selectClasses}>
+          <label htmlFor={id} className={labelClasses}>
+            {labelText}
+          </label>
+          {componentsX && !inline && helper}
+          <select
+            {...other}
+            {...ariaProps}
+            id={id}
+            className={`${prefix}--select-input`}
+            disabled={disabled || undefined}
+            data-invalid={invalid || undefined}
+            aria-invalid={invalid || undefined}
+            ref={ref}>
+            {children}
+          </select>
+          {componentsX ? (
+            <ChevronDownGlyph
+              aria-hidden={true}
+              aria-label={iconDescription}
+              alt={iconDescription}
+              className={`${prefix}--select__arrow`}
+              name="chevron--down"
+            />
+          ) : (
+            <Icon
+              icon={iconCaretDown}
+              className={`${prefix}--select__arrow`}
+              description={iconDescription}
+            />
+          )}
+          {!componentsX && helper}
+          {componentsX && inline && helper}
+          {error}
+        </div>
+      </div>
+    );
+  }
+);
 
 Select.propTypes = {
   /**
@@ -180,8 +184,4 @@ Select.defaultProps = {
   light: false,
 };
 
-const forwardRef = (props, ref) => <Select {...props} innerRef={ref} />;
-
-forwardRef.displayName = 'Select';
-
-export default React.forwardRef(forwardRef);
+export default Select;

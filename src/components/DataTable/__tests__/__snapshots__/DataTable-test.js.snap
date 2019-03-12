@@ -2112,7 +2112,7 @@ exports[`DataTable should render 1`] = `
                   iconDescription="Settings"
                   onClick={[MockFunction]}
                 />
-                <Button
+                <ForwardRef
                   disabled={false}
                   iconDescription="Provide icon description if icon is used"
                   kind="primary"
@@ -2122,7 +2122,7 @@ exports[`DataTable should render 1`] = `
                   type="button"
                 >
                   Add new
-                </Button>
+                </ForwardRef>
               </TableToolbarContent>
             </TableToolbar>
             <Table
@@ -2628,7 +2628,7 @@ exports[`DataTable should render 1`] = `
                   </Icon>
                 </button>
               </TableToolbarAction>
-              <Button
+              <ForwardRef
                 disabled={false}
                 iconDescription="Provide icon description if icon is used"
                 kind="primary"
@@ -2646,7 +2646,7 @@ exports[`DataTable should render 1`] = `
                 >
                   Add new
                 </button>
-              </Button>
+              </ForwardRef>
             </div>
           </TableToolbarContent>
         </section>

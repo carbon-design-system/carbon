@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import Button from '../Button';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
@@ -114,13 +115,13 @@ describe('<ModalFooter />', () => {
     });
 
     it('renders primary button if primary text', () => {
-      const buttonComponent = primaryWrapper.find('Button');
+      const buttonComponent = primaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
       expect(buttonComponent.props().kind).toBe('primary');
     });
 
     it('renders primary button if secondary text', () => {
-      const buttonComponent = secondaryWrapper.find('Button');
+      const buttonComponent = secondaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
       expect(buttonComponent.props().kind).toBe('secondary');
     });
@@ -135,13 +136,13 @@ describe('<ModalFooter />', () => {
     );
 
     it('renders danger--primary button if primary text && danger', () => {
-      const buttonComponent = primaryWrapper.find('Button');
+      const buttonComponent = primaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
       expect(buttonComponent.props().kind).toBe('danger--primary');
     });
 
     it('renders tertiary button if secondary text && danger', () => {
-      const buttonComponent = secondaryWrapper.find('Button');
+      const buttonComponent = secondaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
       expect(buttonComponent.props().kind).toBe('tertiary');
     });

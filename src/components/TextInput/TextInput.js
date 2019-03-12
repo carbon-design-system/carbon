@@ -12,85 +12,89 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TextInput = ({
-  labelText,
-  className = `${prefix}--text__input`,
-  id,
-  placeholder,
-  type,
-  onChange,
-  onClick,
-  hideLabel,
-  invalid,
-  invalidText,
-  helperText,
-  light,
-  innerRef: ref,
-  ...other
-}) => {
-  const textInputProps = {
-    id,
-    onChange: evt => {
-      if (!other.disabled) {
-        onChange(evt);
-      }
+const TextInput = React.forwardRef(
+  (
+    {
+      labelText,
+      className = `${prefix}--text__input`,
+      id,
+      placeholder,
+      type,
+      onChange,
+      onClick,
+      hideLabel,
+      invalid,
+      invalidText,
+      helperText,
+      light,
+      ...other
     },
-    onClick: evt => {
-      if (!other.disabled) {
-        onClick(evt);
-      }
-    },
-    placeholder,
-    type,
-    ref,
-  };
+    ref
+  ) => {
+    const textInputProps = {
+      id,
+      onChange: evt => {
+        if (!other.disabled) {
+          onChange(evt);
+        }
+      },
+      onClick: evt => {
+        if (!other.disabled) {
+          onClick(evt);
+        }
+      },
+      placeholder,
+      type,
+      ref,
+    };
 
-  const errorId = id + '-error-msg';
-  const textInputClasses = classNames(`${prefix}--text-input`, className, {
-    [`${prefix}--text-input--light`]: light,
-  });
-  const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
+    const errorId = id + '-error-msg';
+    const textInputClasses = classNames(`${prefix}--text-input`, className, {
+      [`${prefix}--text-input--light`]: light,
+    });
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
 
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
+    const label = labelText ? (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    ) : null;
 
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+    const error = invalid ? (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    ) : null;
 
-  const input = invalid ? (
-    <input
-      {...other}
-      {...textInputProps}
-      data-invalid
-      aria-invalid
-      aria-describedby={errorId}
-      className={textInputClasses}
-    />
-  ) : (
-    <input {...other} {...textInputProps} className={textInputClasses} />
-  );
+    const input = invalid ? (
+      <input
+        {...other}
+        {...textInputProps}
+        data-invalid
+        aria-invalid
+        aria-describedby={errorId}
+        className={textInputClasses}
+      />
+    ) : (
+      <input {...other} {...textInputProps} className={textInputClasses} />
+    );
 
-  const helper = helperText ? (
-    <div className={`${prefix}--form__helper-text`}>{helperText}</div>
-  ) : null;
+    const helper = helperText ? (
+      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+    ) : null;
 
-  return (
-    <div className={`${prefix}--form-item`}>
-      {label}
-      {helper}
-      {input}
-      {error}
-    </div>
-  );
-};
+    return (
+      <div className={`${prefix}--form-item`}>
+        {label}
+        {helper}
+        {input}
+        {error}
+      </div>
+    );
+  }
+);
 
 TextInput.propTypes = {
   /**
@@ -183,8 +187,4 @@ TextInput.defaultProps = {
   light: false,
 };
 
-const forwardRef = (props, ref) => <TextInput {...props} innerRef={ref} />;
-
-forwardRef.displayName = 'TextInput';
-
-export default React.forwardRef(forwardRef);
+export default TextInput;

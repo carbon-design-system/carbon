@@ -12,55 +12,59 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const Checkbox = ({
-  className,
-  id,
-  labelText,
-  onChange,
-  indeterminate,
-  hideLabel,
-  wrapperClassName,
-  title = '',
-  innerRef: ref,
-  ...other
-}) => {
-  const labelClasses = classNames(`${prefix}--checkbox-label`, className);
-  const innerLabelClasses = classNames({
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
-  const wrapperClasses = classNames(
-    `${prefix}--form-item`,
-    `${prefix}--checkbox-wrapper`,
-    wrapperClassName
-  );
+const Checkbox = React.forwardRef(
+  (
+    {
+      className,
+      id,
+      labelText,
+      onChange,
+      indeterminate,
+      hideLabel,
+      wrapperClassName,
+      title = '',
+      ...other
+    },
+    ref
+  ) => {
+    const labelClasses = classNames(`${prefix}--checkbox-label`, className);
+    const innerLabelClasses = classNames({
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
+    const wrapperClasses = classNames(
+      `${prefix}--form-item`,
+      `${prefix}--checkbox-wrapper`,
+      wrapperClassName
+    );
 
-  return (
-    <div className={wrapperClasses}>
-      <input
-        {...other}
-        type="checkbox"
-        onChange={evt => {
-          onChange(evt.target.checked, id, evt);
-        }}
-        className={`${prefix}--checkbox`}
-        id={id}
-        ref={el => {
-          if (el) {
-            el.indeterminate = indeterminate;
-          }
-          if (typeof ref === 'function') {
-            ref(el);
-          } else if (Object(ref) === ref) {
-            ref.current = el;
-          }
-        }}
-      />
-      <label htmlFor={id} className={labelClasses} title={title || null}>
-        <span className={innerLabelClasses}>{labelText}</span>
-      </label>
-    </div>
-  );
-};
+    return (
+      <div className={wrapperClasses}>
+        <input
+          {...other}
+          type="checkbox"
+          onChange={evt => {
+            onChange(evt.target.checked, id, evt);
+          }}
+          className={`${prefix}--checkbox`}
+          id={id}
+          ref={el => {
+            if (el) {
+              el.indeterminate = indeterminate;
+            }
+            if (typeof ref === 'function') {
+              ref(el);
+            } else if (Object(ref) === ref) {
+              ref.current = el;
+            }
+          }}
+        />
+        <label htmlFor={id} className={labelClasses} title={title || null}>
+          <span className={innerLabelClasses}>{labelText}</span>
+        </label>
+      </div>
+    );
+  }
+);
 
 Checkbox.propTypes = {
   /**
@@ -126,8 +130,4 @@ Checkbox.defaultProps = {
   indeterminate: false,
 };
 
-const forwardRef = (props, ref) => <Checkbox {...props} innerRef={ref} />;
-
-forwardRef.displayName = 'Checkbox';
-
-export default React.forwardRef(forwardRef);
+export default Checkbox;

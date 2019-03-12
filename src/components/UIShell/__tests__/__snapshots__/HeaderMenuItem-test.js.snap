@@ -5,34 +5,28 @@ exports[`HeaderMenuItem should render 1`] = `
   className="custom-class"
   role="none"
 >
-  <HeaderMenuItem
+  <li
     className="custom-class"
-    innerRef={null}
     role="none"
   >
-    <li
-      className="custom-class"
-      role="none"
+    <Link
+      className="bx--header__menu-item"
+      element="a"
+      role="menuitem"
+      tabIndex={0}
     >
-      <Link
+      <a
         className="bx--header__menu-item"
-        element="a"
         role="menuitem"
         tabIndex={0}
       >
-        <a
-          className="bx--header__menu-item"
-          role="menuitem"
-          tabIndex={0}
+        <span
+          className="bx--text-truncate--end"
         >
-          <span
-            className="bx--text-truncate--end"
-          >
-            Menu Item
-          </span>
-        </a>
-      </Link>
-    </li>
-  </HeaderMenuItem>
+          Menu Item
+        </span>
+      </a>
+    </Link>
+  </li>
 </ForwardRef>
 `;

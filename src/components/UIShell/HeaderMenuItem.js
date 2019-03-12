@@ -12,22 +12,22 @@ import Link, { LinkPropTypes } from './Link';
 
 const { prefix } = settings;
 
-const HeaderMenuItem = props => {
-  const { className, children, role, innerRef, ...rest } = props;
-
-  return (
-    <li className={className} role={role}>
-      <Link
-        {...rest}
-        className={`${prefix}--header__menu-item`}
-        ref={innerRef}
-        role="menuitem"
-        tabIndex={0}>
-        <span className={`${prefix}--text-truncate--end`}>{children}</span>
-      </Link>
-    </li>
-  );
-};
+const HeaderMenuItem = React.forwardRef(
+  ({ className, children, role, ...rest }, ref) => {
+    return (
+      <li className={className} role={role}>
+        <Link
+          {...rest}
+          className={`${prefix}--header__menu-item`}
+          ref={ref}
+          role="menuitem"
+          tabIndex={0}>
+          <span className={`${prefix}--text-truncate--end`}>{children}</span>
+        </Link>
+      </li>
+    );
+  }
+);
 
 HeaderMenuItem.propTypes = {
   /**
@@ -54,6 +54,4 @@ HeaderMenuItem.propTypes = {
   role: PropTypes.string,
 };
 
-export default React.forwardRef((props, ref) => {
-  return <HeaderMenuItem {...props} innerRef={ref} />;
-});
+export default HeaderMenuItem;

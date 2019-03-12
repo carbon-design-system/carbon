@@ -116,7 +116,7 @@ export default class ModalWrapper extends React.Component {
           icon={triggerButtonIcon}
           iconDescription={triggerButtonIconDescription}
           onClick={this.handleOpen}
-          inputref={this.triggerButton}>
+          ref={this.triggerButton}>
           {buttonTriggerText}
         </Button>
         <Modal {...props}>{children}</Modal>
