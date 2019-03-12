@@ -272,7 +272,7 @@ export default class DatePicker extends Component {
               : '',
           clickOpens: true,
           nextArrow: this.rightArrowHTML(),
-          leftArrow: this.leftArrowHTML(),
+          prevArrow: this.leftArrowHTML(),
           onChange: (...args) => {
             if (onChange) {
               onChange(...args);
@@ -329,14 +329,26 @@ export default class DatePicker extends Component {
   };
 
   rightArrowHTML() {
-    return `
+    return componentsX
+      ? `
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+        <rect width="16" height="16" style="fill:none" />
+      </svg>`
+      : `
       <svg height="12" width="7" viewBox="0 0 7 12">
         <path d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
       </svg>`;
   }
 
   leftArrowHTML() {
-    return `
+    return componentsX
+      ? `
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+        <rect width="16" height="16" style="fill:none" />
+      </svg>`
+      : `
       <svg width="7" height="12" viewBox="0 0 7 12" fill-rule="evenodd">
         <path d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
       </svg>`;

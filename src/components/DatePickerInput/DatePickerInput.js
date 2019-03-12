@@ -142,9 +142,21 @@ export default class DatePickerInput extends Component {
 
     return (
       <div className={containerClasses}>
-        {datePickerIcon}
-        {label}
-        {input}
+        {componentsX ? (
+          <>
+            {label}
+            <div className={`${prefix}--date-picker-input__wrapper`}>
+              {input}
+              {datePickerIcon}
+            </div>
+          </>
+        ) : (
+          <>
+            {datePickerIcon}
+            {label}
+            {input}
+          </>
+        )}
         {error}
       </div>
     );
