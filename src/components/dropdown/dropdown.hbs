@@ -102,7 +102,7 @@
       should wrap (~100 character count maximum)</div>
     {{/unless}}
     <ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="dropdown-id-disabled"
-      class="{{@root.prefix}}--dropdown{{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}} {{@root.prefix}}--dropdown--disabled"
+      class="{{@root.prefix}}--dropdown{{#if up}} {{@root.prefix}}--dropdown--up{{/if}}{{#if light}} {{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}} {{@root.prefix}}--dropdown--disabled"
       tabindex="0">
       <li class="{{@root.prefix}}--dropdown-text">
         {{#unless inline}} Dropdown option {{else}}
@@ -137,7 +137,8 @@
 
 <div class="{{@root.prefix}}--form-item">
   {{#if featureFlags.componentsX}}
-  <div class="{{@root.prefix}}--dropdown__wrapper {{#if inline}}{{@root.prefix}}--dropdown__wrapper--inline{{/if}}">
+  <div
+    class="{{@root.prefix}}--dropdown__wrapper {{#if inline}}{{@root.prefix}}--dropdown__wrapper--inline {{@root.prefix}}--dropdown__wrapper--inline--invalid{{/if}}">
     {{/if}}
     <label for="dropdown-id-invalid" class="{{@root.prefix}}--label">Dropdown
       label</label>
