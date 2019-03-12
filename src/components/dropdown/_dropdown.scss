@@ -233,6 +233,10 @@
     display: inline-flex;
     align-items: center;
 
+    .#{$prefix}--label {
+      @include type-style('body-short-01');
+    }
+
     .#{$prefix}--label,
     .#{$prefix}--form__helper-text {
       margin: 0;
