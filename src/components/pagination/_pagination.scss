@@ -195,6 +195,8 @@ $css--helpers: true;
 }
 
 @mixin pagination--x {
+  $pagination-breakpoint: 530px;
+
   .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
     border-top: 0;
   }
@@ -202,6 +204,7 @@ $css--helpers: true;
   .#{$prefix}--pagination {
     @include reset;
     @include font-family;
+    @include type-style('body-short-01');
     width: 100%;
     background-color: $ui-01;
     display: flex;
@@ -220,12 +223,13 @@ $css--helpers: true;
       width: auto;
       min-width: auto;
       height: 100%;
-      padding: 0 1.5rem 0 0.5rem;
-      // TODO: @include type-style('body-short-01');
-      font-size: rem(12px);
-      font-weight: regular;
-      line-height: rem(18px);
-      letter-spacing: 0.16px;
+      padding: 0 2.5rem 0 $spacing-md;
+      margin-right: -0.65rem;
+      @include breakpoint($pagination-breakpoint) {
+        padding: 0 1.5rem 0 0.5rem;
+        margin-right: 0;
+      }
+      @include type-style('body-short-01');
 
       &:hover {
         background: $hover-ui;
@@ -241,22 +245,30 @@ $css--helpers: true;
 
     .#{$prefix}--select__item-count {
       border-right: $spacing-4xs solid $ui-03;
-      padding-right: 0.5rem;
     }
 
     .#{$prefix}--select__page-number {
       border-left: $spacing-4xs solid $ui-03;
     }
 
-    // .#{prefix}--select__item-count .#{$prefix}--select-input {
-
-    // }
-    .#{$prefix}--select__page-number .#{$prefix}--select-input {
-      padding-left: 1rem;
-      padding-right: 2rem;
+    .#{$prefix}--select__item-count .#{$prefix}--select-input {
+      @include breakpoint($pagination-breakpoint) {
+        padding-right: 2rem;
+        margin-right: -0.65rem;
+      }
     }
+
+    .#{$prefix}--select__page-number .#{$prefix}--select-input {
+      @include breakpoint($pagination-breakpoint) {
+        padding-left: 1rem;
+        padding-right: 2rem;
+      }
+    }
+
     .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
-      right: 1.6rem;
+      @include breakpoint($pagination-breakpoint) {
+        right: 1.6rem;
+      }
     }
   }
 
@@ -282,19 +294,15 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__left {
-    padding: 0 $spacing-md;
+    @include breakpoint($pagination-breakpoint) {
+      padding: 0 $spacing-md;
+    }
   }
 
   .#{$prefix}--pagination__text {
-    // TODO: @include type-style('body-short-01');
-    font-size: rem(12px);
-    font-weight: regular;
-    line-height: rem(18px);
-    letter-spacing: 0.16px;
-    color: $text-01;
     display: none;
 
-    @include breakpoint('530px') {
+    @include breakpoint($pagination-breakpoint) {
       display: inline-block;
     }
   }
