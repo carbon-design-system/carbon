@@ -27,6 +27,11 @@ export function em(px) {
   return `${px / baseFontSize}em`;
 }
 
+/**
+ * Convert a given px unit to its string representation
+ * @param {number} px
+ * @returns {string}
+ */
 export function px(value) {
   return `${value}px`;
 }
@@ -75,23 +80,47 @@ export function breakpoint(...args) {
 
 // Mini-unit
 export const miniUnit = 8;
+
 export function miniUnits(count) {
   return rem(miniUnit * count);
 }
 
 // Spacing
-// Supports 0, 2px, 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 80px, 96px
+export const spacing01 = miniUnits(0.25);
+export const spacing02 = miniUnits(0.5);
+export const spacing03 = miniUnits(1);
+export const spacing04 = miniUnits(1.5);
+export const spacing05 = miniUnits(2);
+export const spacing06 = miniUnits(3);
+export const spacing07 = miniUnits(4);
+export const spacing08 = miniUnits(5);
+export const spacing09 = miniUnits(6);
 export const spacing = [
-  0,
-  miniUnits(0.25),
-  miniUnits(0.5),
-  miniUnits(1),
-  miniUnits(1.5),
-  miniUnits(2),
-  miniUnits(3),
-  miniUnits(4),
-  miniUnits(6),
-  miniUnits(8),
-  miniUnits(10),
-  miniUnits(12),
+  spacing01,
+  spacing02,
+  spacing03,
+  spacing04,
+  spacing05,
+  spacing06,
+  spacing07,
+  spacing08,
+  spacing09,
+];
+
+// Layout
+export const layout01 = miniUnits(2);
+export const layout02 = miniUnits(3);
+export const layout03 = miniUnits(4);
+export const layout04 = miniUnits(6);
+export const layout05 = miniUnits(8);
+export const layout06 = miniUnits(12);
+export const layout07 = miniUnits(20);
+export const layout = [
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
 ];
