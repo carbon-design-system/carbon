@@ -389,14 +389,14 @@ const columns = !componentsX
         title: 'Status',
         sortable: true,
       },
-      {
-        name: 'edit',
-        additionalIcons: true,
-      },
-      {
-        name: 'delete',
-        additionalIcons: true,
-      },
+      // {
+      //   name: 'edit',
+      //   additionalIcons: true,
+      // },
+      // {
+      //   name: 'delete',
+      //   additionalIcons: true,
+      // },
       {
         name: 'menu',
         menu: true,
