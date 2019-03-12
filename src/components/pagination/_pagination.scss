@@ -219,13 +219,17 @@ $css--helpers: true;
     .#{$prefix}--select-input {
       width: auto;
       min-width: auto;
-      height: auto;
+      height: 100%;
       padding: 0 1.5rem 0 0.5rem;
       // TODO: @include type-style('body-short-01');
       font-size: rem(12px);
       font-weight: regular;
       line-height: rem(18px);
       letter-spacing: 0.16px;
+
+      &:hover {
+        background: $hover-ui;
+      }
     }
 
     .#{$prefix}--select__arrow {
@@ -242,7 +246,17 @@ $css--helpers: true;
 
     .#{$prefix}--select__page-number {
       border-left: $spacing-4xs solid $ui-03;
-      padding-left: 0.5rem;
+    }
+
+    // .#{prefix}--select__item-count .#{$prefix}--select-input {
+
+    // }
+    .#{$prefix}--select__page-number .#{$prefix}--select-input {
+      padding-left: 1rem;
+      padding-right: 2rem;
+    }
+    .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
+      right: 1.6rem;
     }
   }
 
@@ -289,6 +303,10 @@ $css--helpers: true;
     margin-left: $spacing-md;
     color: $text-02;
   }
+  .#{$prefix}--pagination__text[for='select-id-pagination-page'] {
+    margin-left: -0.5rem;
+    z-index: 100;
+  }
 
   .#{$prefix}--pagination__button {
     @include reset;
@@ -303,9 +321,10 @@ $css--helpers: true;
     justify-content: center;
     align-items: center;
     fill: $ui-05;
+    transition: outline $transition--base, background-color $transition--base;
 
     &:hover {
-      fill: $hover-secondary;
+      background: $hover-ui;
     }
 
     &:focus {
