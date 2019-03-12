@@ -26,12 +26,17 @@
       role="presentation" {{#if disabled}} aria-disabled="true" {{/if}}>
       <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}"
         {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}} {{#if disabled}} tabindex="-1" {{/if}}>
+        {{#if @root.featureFlags.componentsX}}
         <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+          {{/if}}
           {{label}}
+          {{#if @root.featureFlags.componentsX}}
         </div>
+        {{/if}}
       </button>
     </li>
     {{/each}}
+    {{#if @root.featureFlags.componentsX}}
     <li
       class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}"
       role="presentation" {{#if disabled}} aria-disabled="true" {{/if}}>
@@ -43,6 +48,7 @@
         {{carbon-icon 'Add16'}}
       </button>
     </li>
+    {{/if}}
   </ul>
 </div>
 
@@ -67,12 +73,17 @@
       role="presentation" {{#if disabled}} aria-disabled="true" {{/if}}>
       <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}"
         {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}} {{#if disabled}} tabindex="-1" {{/if}}>
+        {{#if @root.featureFlags.componentsX}}
         <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+          {{/if}}
           {{label}}
+          {{#if @root.featureFlags.componentsX}}
         </div>
+        {{/if}}
       </button>
     </li>
     {{/each}}
+    {{#if @root.featureFlags.componentsX}}
     <li
       class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}"
       role="presentation" {{#if disabled}} aria-disabled="true" {{/if}}>
@@ -84,6 +95,7 @@
         {{carbon-icon 'Add16'}}
       </button>
     </li>
+    {{/if}}
   </ul>
 </div>
 
@@ -109,12 +121,17 @@
       <a href="https://www.ibm.com" class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}}
         title="{{title}}" {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}{{#if disabled}}
         tabindex="-1" {{/if}}>
+        {{#if @root.featureFlags.componentsX}}
         <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+          {{/if}}
           {{label}}
+          {{#if @root.featureFlags.componentsX}}
         </div>
+        {{/if}}
       </a>
     </li>
     {{/each}}
+    {{#if @root.featureFlags.componentsX}}
     <li
       class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}"
       role="presentation" {{#if disabled}} aria-disabled="true" {{/if}}>
@@ -127,5 +144,6 @@
         {{carbon-icon 'Add16'}}
       </a>
     </li>
+    {{/if}}
   </ul>
 </div>
