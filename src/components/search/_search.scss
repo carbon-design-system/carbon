@@ -279,15 +279,20 @@
     fill: $icon-01;
     border: 2px solid transparent;
     border-left: 0;
+  }
 
-    &:hover {
-      background-color: $hover-ui;
-      border-bottom: 1px solid $ui-04;
-    }
-    &:active {
-      @include focus-outline('outline');
-      background-color: $selected-ui;
-    }
+  .#{$prefix}--search-close:hover {
+    background-color: $hover-ui;
+    border-bottom: 1px solid $ui-04;
+  }
+  .#{$prefix}--search-close:active {
+    @include focus-outline('outline');
+    background-color: $selected-ui;
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-close svg {
+    width: 20px;
+    height: 20px;
   }
 
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
