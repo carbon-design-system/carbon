@@ -57,6 +57,17 @@
     width: 75%;
   }
 
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    display: inline-flex;
+    flex-flow: column nowrap;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    outline: none;
+  }
+
   .#{$prefix}--progress-step--current {
     circle:first-child {
       stroke: $brand-01;
@@ -172,7 +183,7 @@
     transition: $transition--base all $carbon--standard-easing;
     overflow: visible;
 
-    > .#{$prefix}--tooltip__label {
+    .#{$prefix}--tooltip__label {
       display: block;
     }
   }
@@ -300,6 +311,16 @@
     .#{$prefix}--progress-line {
       background-color: $interactive-01;
     }
+  }
+
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    display: flex;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    outline: none;
   }
 
   //DISABLED STYLING

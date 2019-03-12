@@ -13,9 +13,11 @@ module.exports = {
       load(id) {
         if (id === require.resolve('markdown-it')) {
           return `
-            export default class Markdown {
+            function Markdown() {}
+            Markdown.prototype = {
               render() { return '' }
-            }
+            };
+            export default Markdown;
           `;
         }
         if (id === path.resolve(__dirname, '../src/globals/js/feature-flags.js')) {
@@ -49,9 +51,6 @@ module.exports = {
     }),
     babel({
       exclude: ['node_modules/**'],
-    }),
-    babel({
-      include: ['node_modules/markdown-it/**'],
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('development'),
