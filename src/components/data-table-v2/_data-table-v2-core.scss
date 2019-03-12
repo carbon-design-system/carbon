@@ -176,43 +176,6 @@
 }
 
 @mixin data-table-v2-core--x {
-  /*
-TREE OVERVIEW OF COMPONENT
-
-|- Main dt container
-  |- Title
-  |- Secondary title text
-  |- Toolbar
-  |- Table
-    |- thead
-    |- tbody
-  |- Pagination (optional)
-
-|- Main dt container
-  |- Title
-  |- Secondary title text
-  |- Toolbar
-  |- Inner table container (optional - scrolls just the table and not the toolbar on horizontal overflow)
-    |- Table
-      |- thead
-      |- tbody
-  |- Pagination (optional)
-
-DATA TABLE VARIATIONS
-    - zebra
-    - selected
-    - expand
-    - no border
-    - size variations
-    - pagination
-    - fixed header
-    - horizontal scroll
-    - text truncation
-    - numerical column right align
-    - secondary text options for Tall table
-    - disabled row
-*/
-
   //================================================
   //MAIN CONTAINER
   //================================================
@@ -260,7 +223,7 @@ DATA TABLE VARIATIONS
     }
 
     thead {
-      @include typescale('zeta');
+      @include type-style('body-short-01');
       background-color: $ui-03;
       font-weight: 700;
     }
@@ -269,8 +232,14 @@ DATA TABLE VARIATIONS
       background: $data-table-column-hover;
     }
 
+    th.#{$prefix}--table-column-icon:hover,
+    th.#{$prefix}--table-column-menu:hover,
+    th.#{$prefix}--table-expand-v2:hover {
+      background: $ui-03;
+    }
+
     tbody {
-      @include typescale('zeta');
+      @include type-style('body-short-01');
       background-color: $ui-01;
       width: 100%;
     }
@@ -365,28 +334,31 @@ DATA TABLE VARIATIONS
 
     //width for additional icon columns
     .#{$prefix}--table-column-icon {
+      width: rem(32px);
+      min-width: rem(32px);
+      justify-content: center;
+      padding: 0;
+      padding-top: rem(8px);
+    }
+
+    .#{$prefix}--table-column-icon button {
+      width: rem(32px);
+      height: rem(32px);
+      vertical-align: middle;
+      background: transparent;
+      border: none;
+      outline: none;
+
+      &:focus:not([disabled]),
+      &:hover:not([disabled]) {
+        background: $ui-03;
+      }
+    }
+
+    .#{$prefix}--table-column-icon + .#{$prefix}--table-column-menu {
       width: rem(44px);
       min-width: rem(44px);
-      justify-content: center;
-      padding-top: rem(8px);
-      padding-right: 0;
-
-      & button {
-        width: rem(32px);
-        height: rem(32px);
-        vertical-align: middle;
-        background: transparent;
-        border: none;
-        outline: none;
-
-        &:focus:not([disabled]) {
-          box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        &:hover:not([disabled]) {
-          background: $ui-03;
-        }
-      }
+      padding-left: 0;
     }
 
     // Overrides
@@ -571,7 +543,7 @@ DATA TABLE VARIATIONS
 
   .#{$prefix}--data-table-v2_inner-container {
     background-color: $ui-03;
-    padding-top: rem(48px);
+    padding-top: rem(54px);
     transform: translateZ(0);
   }
 
