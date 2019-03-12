@@ -168,7 +168,7 @@ module.exports = {
     'max-nesting-depth': [
       0,
       {
-        ignoreAtRules: ['if', 'else', 'each', 'include'],
+        ignoreAtRules: ['if', 'else', 'each', 'include', 'mixin'],
       },
     ],
     // Disallow unknown animations.
