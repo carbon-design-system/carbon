@@ -178,9 +178,7 @@
   //-----------------------------
   // Error
   //-----------------------------
-  .#{$prefix}--text-area[data-invalid],
-  .#{$prefix}--text-area--invalid,
-  .#{$prefix}--text-area:invalid {
+  .#{$prefix}--text-area--invalid {
     @include focus-outline('invalid');
     box-shadow: none;
   }

@@ -35,7 +35,7 @@ If you just want to try out `carbon-components`, you can also use [CodeSandbox](
 - See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions to this repo.
 - [🏃‍♀️ Migration Guides](./docs/migration)
-  - [v9 to v10](./docs/migrate-to-10.x.md)
+  - [v9 to v10](./docs/migration/migrate-to-10.x.md)
 
 ## Contributors
 

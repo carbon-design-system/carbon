@@ -319,16 +319,14 @@
     width: 100%;
     height: 100%;
     border: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: transparent;
     text-align: left;
     padding: 0 $spacing-md;
     cursor: pointer;
     color: $text-02;
     max-width: 11.25rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     transition: outline $transition--base, background-color $transition--base, color $transition--base;
 
     &:hover {
@@ -342,6 +340,12 @@
     &::-moz-focus-inner {
       border: none;
     }
+  }
+
+  .#{$prefix}--overflow-menu-options__option-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
