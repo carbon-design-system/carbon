@@ -99,6 +99,7 @@
     justify-content: space-between;
     width: 100%;
     color: $text-01;
+    padding: 0 $spacing-sm;
 
     &:focus {
       outline: 0;
@@ -156,6 +157,21 @@
     height: rem(16px);
     width: auto;
     min-width: rem(14px);
+  }
+
+  .#{$prefix}--data-table-v2--no-sort {
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
+      padding-left: $spacing-sm;
+      padding-right: $spacing-sm;
+
+      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+        padding-left: $spacing-lg;
+      }
+    }
+
+    .#{$prefix}--table-sort-v2 {
+      padding: 0;
+    }
   }
 }
 

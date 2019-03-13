@@ -232,22 +232,22 @@
       visibility: hidden;
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-magnifier {
+    & .#{$prefix}--search .#{$prefix}--search-magnifier {
       height: rem(48px);
       width: rem(48px);
       padding: $spacing-md;
       left: 0;
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
+    & .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
       @include focus-outline('outline');
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+    & .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
       background: $hover-field;
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-close {
+    & .#{$prefix}--search .#{$prefix}--search-close {
       height: rem(48px);
       width: rem(48px);
     }
@@ -260,23 +260,23 @@
     width: 100%;
     transition: width 175ms $carbon--standard-easing;
 
-    & > .#{$prefix}--search .#{$prefix}--search-input {
+    & .#{$prefix}--search .#{$prefix}--search-input {
       visibility: visible;
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-input:focus {
+    & .#{$prefix}--search .#{$prefix}--search-input:focus {
       @include focus-outline('outline');
       background: $hover-field;
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-input:active,
-    & > .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+    & .#{$prefix}--search .#{$prefix}--search-input:active,
+    & .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
       background: $hover-field;
     }
 
-    & > .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
-    & > .#{$prefix}--search .#{$prefix}--search-magnifier:active,
-    & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+    & .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
+    & .#{$prefix}--search .#{$prefix}--search-magnifier:active,
+    & .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
       @include focus-outline('reset');
       background: transparent;
     }
@@ -565,18 +565,18 @@
       height: rem(32px);
       width: rem(32px);
 
-      & > .#{$prefix}--search .#{$prefix}--search-input {
+      & .#{$prefix}--search .#{$prefix}--search-input {
         height: rem(32px);
         padding-left: $spacing-xl;
       }
 
-      & > .#{$prefix}--search .#{$prefix}--search-magnifier {
+      & .#{$prefix}--search .#{$prefix}--search-magnifier {
         height: rem(32px);
         width: rem(32px);
         padding: $spacing-xs;
       }
 
-      & > .#{$prefix}--search .#{$prefix}--search-close {
+      & .#{$prefix}--search .#{$prefix}--search-close {
         height: rem(32px);
         width: rem(32px);
       }
@@ -586,23 +586,23 @@
       width: 100%;
       transition: width 175ms $carbon--standard-easing;
 
-      & > .#{$prefix}--search .#{$prefix}--search-input {
+      & .#{$prefix}--search .#{$prefix}--search-input {
         visibility: visible;
       }
 
-      & > .#{$prefix}--search .#{$prefix}--search-input:focus {
+      & .#{$prefix}--search .#{$prefix}--search-input:focus {
         @include focus-outline('outline');
         background: $hover-field;
       }
 
-      & > .#{$prefix}--search .#{$prefix}--search-input:active,
-      & > .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+      & .#{$prefix}--search .#{$prefix}--search-input:active,
+      & .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
         background: $hover-field;
       }
 
-      & > .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
-      & > .#{$prefix}--search .#{$prefix}--search-magnifier:active,
-      & > .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+      & .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
+      & .#{$prefix}--search .#{$prefix}--search-magnifier:active,
+      & .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
         @include focus-outline('reset');
         background: transparent;
       }

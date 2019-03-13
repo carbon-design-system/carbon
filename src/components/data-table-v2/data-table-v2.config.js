@@ -899,6 +899,7 @@ module.exports = {
         title: 'Table title',
         tall: true,
         hasToolbar: true,
+        noSort: true,
         state: 'default',
         searchLabel: 'Search',
         clearSearchLabel: 'Clear search input',
@@ -917,6 +918,7 @@ module.exports = {
       context: {
         title: 'Table title',
         small: true,
+        noSort: true,
         hasToolbar: true,
         state: 'default',
         searchLabel: 'Search',

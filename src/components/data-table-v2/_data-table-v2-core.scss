@@ -300,32 +300,37 @@
       border-top: 1px solid transparent;
     }
 
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
+      padding: 0;
+    }
+
     td:last-of-type:not(.#{$prefix}--table-column-menu) {
       padding-right: $spacing-lg;
     }
 
     .#{$prefix}--table-header-label {
       display: block;
-      padding: rem(17px) 0;
+      padding: rem(14px) 0;
     }
 
     .#{$prefix}--table-cell-content {
       display: block;
-      padding: rem(17px) 0;
+      padding: rem(14px) 0;
     }
 
     //width for checkbox columns
     .#{$prefix}--table-column-checkbox {
       width: rem(50px);
       min-width: rem(50px);
-      padding: rem(12px) $spacing-md 0 $spacing-md;
+      padding: rem(10px) $spacing-md 0 $spacing-md;
     }
 
     //width for overflow menu columns
     .#{$prefix}--table-column-menu {
-      width: rem(56px);
-      min-width: rem(56px);
+      width: rem(52px);
+      min-width: rem(52px);
       padding-top: rem(8px);
+      padding-right: rem(8px);
     }
 
     .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
@@ -356,8 +361,8 @@
     }
 
     .#{$prefix}--table-column-icon + .#{$prefix}--table-column-menu {
-      width: rem(44px);
-      min-width: rem(44px);
+      width: rem(40px);
+      min-width: rem(40px);
       padding-left: 0;
     }
 
@@ -505,6 +510,8 @@
       max-width: rem(200px);
       top: rem(40px);
       visibility: hidden;
+      opacity: 0;
+      transition: opacity $transition--base $carbon--ease-in;
 
       & .#{$prefix}--tooltip__text {
         text-align: left;
@@ -516,13 +523,18 @@
       }
     }
 
-    thead tr th.#{$prefix}--data-table-v2--truncated {
-      &:hover button .#{$prefix}--tooltip {
-        visibility: visible;
-      }
+    th.#{$prefix}--data-table-v2--truncated:hover button .#{$prefix}--tooltip,
+    th.#{$prefix}--data-table-v2--truncated:focus button .#{$prefix}--tooltip {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity $transition--base $carbon--ease-in;
     }
 
-    tbody tr td.#{$prefix}--data-table-v2--truncated {
+    th.#{$prefix}--data-table-v2--truncated:focus {
+      outline: 0;
+    }
+
+    td.#{$prefix}--data-table-v2--truncated {
       &:focus {
         @include focus-outline('outline');
       }
@@ -530,6 +542,8 @@
       &:focus .#{$prefix}--tooltip,
       &:hover .#{$prefix}--tooltip {
         visibility: visible;
+        opacity: 1;
+        transition: opacity $transition--base $carbon--ease-in;
       }
     }
   }
@@ -543,7 +557,7 @@
 
   .#{$prefix}--data-table-v2_inner-container {
     background-color: $ui-03;
-    padding-top: rem(54px);
+    padding-top: rem(48px);
     transform: translateZ(0);
   }
 
@@ -637,11 +651,11 @@
     }
 
     .#{$prefix}--table-header-label {
-      padding: rem(5px) 0;
+      padding: rem(2px) 0;
     }
 
     .#{$prefix}--table-cell-content {
-      padding: rem(5px) 0;
+      padding: rem(2px) 0;
     }
 
     .#{$prefix}--overflow-menu {
@@ -677,11 +691,11 @@
     }
 
     .#{$prefix}--table-header-label {
-      padding: rem(9px) 0;
+      padding: rem(7px) 0;
     }
 
     .#{$prefix}--table-cell-content {
-      padding: rem(9px) 0;
+      padding: rem(7px) 0;
     }
   }
 
@@ -692,12 +706,17 @@
     }
 
     .#{$prefix}--table-header-label {
-      padding: rem(25px) 0;
+      padding: rem(16px) 0;
     }
 
     .#{$prefix}--table-cell-content {
-      padding: rem(25px) 0;
+      padding: rem(16px) 0;
     }
+  }
+
+  .#{$prefix}--data-table-v2--cell-secondary-text {
+    padding-top: rem(2px);
+    @include font-size('12');
   }
 
   .#{$prefix}--data-table-v2--static {
@@ -736,14 +755,6 @@
 
   tbody tr[disabled] .#{$prefix}--overflow-menu {
     display: none;
-  }
-
-  //================================================
-  //SECONDARY TEXT / ICON CELL VARIANTS
-  //================================================
-  .#{$prefix}--data-table-v2--cell-secondary-text {
-    padding-top: rem(9px);
-    @include font-size('12');
   }
 }
 
