@@ -169,7 +169,7 @@
 
   .#{$prefix}--form-requirement {
     @include reset;
-    @include type-style('label-01');
+    @include type-style('caption-01');
     margin: $spacing-2xs 0 0;
     max-height: 0;
     overflow: hidden;
