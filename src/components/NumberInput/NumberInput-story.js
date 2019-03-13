@@ -30,6 +30,7 @@ const props = () => ({
   step: number('Step of up/down arrow (step)', 10),
   disabled: boolean('Disabled (disabled)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
+  isMobile: boolean('Mobile variant', false),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'Number is not valid'
