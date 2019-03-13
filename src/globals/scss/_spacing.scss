@@ -56,3 +56,27 @@ $layout-md: $spacing-baseline * 3 !default;
 $layout-lg: $spacing-baseline * 4 !default;
 $layout-xl: $spacing-baseline * 6 !default;
 $layout-2xl: $spacing-baseline * 10 !default;
+
+$carbon-spacing: (
+    spacing: (
+        2xs: $layout-2xs,
+        xs: $layout-xs,
+        sm: $layout-sm,
+        md: $layout-md,
+        lg: $layout-lg,
+        xl: $layout-xl,
+        2xl: $layout-2xl,
+    ),
+    layout: (
+        4xs: $spacing-4xs,
+        3xs: $spacing-3xs,
+        2xs: $spacing-2xs,
+        xs: $spacing-xs,
+        sm: $spacing-sm,
+        md: $spacing-md,
+        lg: $spacing-lg,
+        xl: $spacing-xl,
+        2xl: $spacing-2xl,
+        3xl: $spacing-3xl,
+    )
+);
