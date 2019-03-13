@@ -48,7 +48,7 @@ View available React Components [here](http://react.carbondesignsystem.com). You
 - See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions to this repo
 - [🏃‍♀️ Migration Guides](./docs/migration)
-  - [v9](./docs/migrate-to-10.x.md)
+  - [v9 to v10](./docs/migrate-to-10.x.md)
 
 ## Contributing
 
