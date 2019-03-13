@@ -309,7 +309,6 @@
 
   .#{$prefix}--dropdown--open:focus {
     outline: 1px solid transparent;
-    box-shadow: none;
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
@@ -473,15 +472,10 @@
     justify-self: start;
     display: inline-block;
     border-bottom-color: transparent;
-    box-shadow: none;
     transition-property: none;
     width: auto;
     height: rem(32px);
     background-color: $field-02;
-
-    &:focus {
-      box-shadow: none;
-    }
 
     &:hover {
       background-color: $hover-ui;
@@ -523,10 +517,6 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text {
     padding-right: rem(56px);
-  }
-
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus {
-    box-shadow: none;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
