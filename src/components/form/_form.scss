@@ -149,8 +149,9 @@
   }
 
   input[data-invalid],
-  textarea[data-invalid],
-  select[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
     outline: 2px solid $support-01;
     outline-offset: -2px;
@@ -169,7 +170,7 @@
 
   .#{$prefix}--form-requirement {
     @include reset;
-    @include type-style('label-01');
+    @include type-style('caption-01');
     margin: $spacing-2xs 0 0;
     max-height: 0;
     overflow: hidden;
