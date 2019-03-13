@@ -525,6 +525,8 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
+    margin-right: $spacing-sm;
+    margin-left: rem(10px);
   }
 
   // Skeleton State
