@@ -181,6 +181,7 @@
   button.#{$prefix}--btn {
     display: inline-block;
 
+    &--disabled > .#{$prefix}--btn__icon,
     &:disabled > .#{$prefix}--btn__icon {
       fill: $ui-04;
     }
@@ -219,7 +220,10 @@
 
     &:disabled,
     &:hover:disabled,
-    &:focus:disabled {
+    &:focus:disabled,
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
       background: transparent;
       color: $disabled;
 
@@ -261,7 +265,10 @@
 
     &:disabled,
     &:hover:disabled,
-    &:focus:disabled {
+    &:focus:disabled,
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
       color: $disabled;
       background: transparent;
       border-color: transparent;
