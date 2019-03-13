@@ -60,6 +60,24 @@ const plugins = [
     },
   },
   {
+    addInnerPath: {
+      type: 'perItem',
+      description: 'map the inner-path id to a corresponding data attribute',
+      fn(item) {
+        if (item.attr('id', 'inner-path')) {
+          item.removeAttr('id');
+          item.addAttr({
+            name: 'data-icon-path',
+            value: 'inner-path',
+            prefix: '',
+            local: 'data-icon-path',
+          });
+        }
+        return item;
+      },
+    },
+  },
+  {
     inlineStyles: {
       onlyMatchedOnce: false,
       removeMatchedSelectors: true,
