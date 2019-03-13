@@ -147,45 +147,41 @@
       here; if message is more than one line text
       should wrap (~100 character count maximum)</div>
     {{/unless}}
-    {{#if inline}}
-    <div class="{{@root.prefix}}--dropdown--inline__wrapper">
+    <ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="dropdown-id-invalid"
+      class="{{@root.prefix}}--dropdown {{@root.prefix}}--dropdown--invalid {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
+      tabindex="0" data-invalid>
+      {{#if featureFlags.componentsX}}
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--dropdown__invalid-icon')}}
       {{/if}}
-      <ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="dropdown-id-invalid"
-        class="{{@root.prefix}}--dropdown {{@root.prefix}}--dropdown--invalid {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}}{{#if inline}} {{@root.prefix}}--dropdown--inline{{/if}}"
-        tabindex="0" data-invalid>
+      <li class="{{@root.prefix}}--dropdown-text">
+        {{#unless inline}} Dropdown option {{else}}
+        <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
+        {{/unless}}
+        {{#unless inline}}
+      </li>
+      <li class="{{@root.prefix}}--dropdown__arrow-container">
+        {{/unless}}
         {{#if featureFlags.componentsX}}
-        {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--dropdown__invalid-icon')}}
+        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--dropdown__arrow') }}
+        {{else}}
+        <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+          <path d="M10 0L5 5 0 0z"></path>
+        </svg>
         {{/if}}
-        <li class="{{@root.prefix}}--dropdown-text">
-          {{#unless inline}} Dropdown option {{else}}
-          <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
-          {{/unless}}
-          {{#unless inline}}
-        </li>
-        <li class="{{@root.prefix}}--dropdown__arrow-container">
-          {{/unless}}
-          {{#if featureFlags.componentsX}}
-          {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--dropdown__arrow') }}
-          {{else}}
-          <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-            <path d="M10 0L5 5 0 0z"></path>
-          </svg>
-          {{/if}}
-        </li>
-        <li>
-          <ul class="{{@root.prefix}}--dropdown-list">
-            {{#each items}}
-            <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
-              <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
-            </li>
-            {{/each}}
-          </ul>
-        </li>
-      </ul>
-      {{#if inline}}
-      <div class="{{@root.prefix}}--form-requirement">
-        This is not a validation message
-      </div>
+      </li>
+      <li>
+        <ul class="{{@root.prefix}}--dropdown-list">
+          {{#each items}}
+          <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+            <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
+          </li>
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+    {{#if inline}}
+    <div class="{{@root.prefix}}--form-requirement">
+      This is not a validation message
     </div>
     {{/if}}
     {{#if featureFlags.componentsX}}

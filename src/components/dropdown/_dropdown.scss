@@ -230,26 +230,23 @@
 
 @mixin dropdown--x {
   .#{$prefix}--dropdown__wrapper--inline {
-    display: inline-flex;
+    display: inline-grid;
     align-items: center;
+    grid-template: auto auto / auto auto;
+    grid-gap: rem(4px);
 
     .#{$prefix}--label {
       @include type-style('body-short-01');
     }
 
     .#{$prefix}--label,
-    .#{$prefix}--form__helper-text {
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
       margin: 0;
     }
 
-    .#{$prefix}--dropdown {
-      margin-left: rem(4px);
-    }
-
-    &--invalid .#{$prefix}--label {
-      position: relative;
-      top: rem(7px);
-      align-self: flex-start;
+    .#{$prefix}--form-requirement {
+      grid-column: 2;
     }
   }
 
@@ -282,15 +279,6 @@
 
   .#{$prefix}--dropdown--open {
     border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--dropdown--inline__wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .#{$prefix}--dropdown--inline__wrapper .#{$prefix}--dropdown--invalid + .#{$prefix}--form-requirement {
-    margin-left: rem(4px);
   }
 
   .#{$prefix}--dropdown--invalid {
@@ -486,6 +474,7 @@
   }
 
   .#{$prefix}--dropdown--inline {
+    justify-self: start;
     display: inline-block;
     border-bottom-color: transparent;
     box-shadow: none;
