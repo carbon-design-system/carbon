@@ -235,8 +235,7 @@
   //-----------------------------
   // Error
   //-----------------------------
-  .#{$prefix}--text-input[data-invalid],
-  .#{$prefix}--text-input:invalid {
+  .#{$prefix}--text-input--invalid {
     @include focus-outline('invalid');
     box-shadow: none;
 
