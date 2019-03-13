@@ -523,10 +523,6 @@
     @include layer('overlay');
   }
 
-  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-item:first-of-type {
-    padding-top: 2px;
-  }
-
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
   }
