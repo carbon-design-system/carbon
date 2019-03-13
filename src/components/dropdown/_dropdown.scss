@@ -462,10 +462,6 @@
     &.#{$prefix}--dropdown--light:hover {
       background-color: $field-02;
     }
-
-    &.#{$prefix}--dropdown--inline:focus .#{prefix}--dropdown-text {
-      outline: none;
-    }
   }
 
   .#{$prefix}--dropdown--auto-width {
@@ -484,7 +480,6 @@
     background-color: $field-02;
 
     &:focus {
-      outline: none;
       box-shadow: none;
     }
 
@@ -504,10 +499,6 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open {
     background-color: transparent;
-  }
-
-  .#{$prefix}--dropdown--inline:focus .#{$prefix}--dropdown-text {
-    outline: 2px solid $interactive-01;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
@@ -540,10 +531,6 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
     @include layer('overlay');
-  }
-
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-text {
-    outline: none;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-item:first-of-type {
