@@ -50,6 +50,14 @@ body {
     width: calc(100% - 200px);
   }
 
+  .bx--side-nav ~ & {
+    margin-left: 3rem;
+    @include breakpoint('bp--md--major') {
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+    }
+  }
+
   &--expanded {
     width: 100%;
     margin-left: 0;
@@ -63,7 +71,9 @@ body {
 }
 
 a {
-  @include font-smoothing;
+  @if not feature-flag-enabled('components-x') {
+    @include font-smoothing;
+  }
   color: $color__blue-51;
   font-weight: 600;
 

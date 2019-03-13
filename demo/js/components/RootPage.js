@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import classnames from 'classnames';
 import { ToggleSmall } from 'carbon-components-react';
+import eventMatches from '../../../src/globals/js/misc/event-matches';
 import on from '../../../src/globals/js/misc/on';
 import CodePage from './CodePage/CodePage';
 import SideNav from './SideNav';
 import PageHeader from './PageHeader/PageHeader';
-import SideNavToggle from './SideNavToggle/SideNavToggle';
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 400) {
@@ -237,20 +236,16 @@ class RootPage extends Component {
   }
 
   /**
-   * The handler for changing in the state of side nav's toggle button.
-   */
-  onSideNavToggle = evt => {
-    this.setState({ navClosed: evt.closed });
-  };
-
-  /**
    * The handler for the `click` event on the side nav for changing selection.
    */
   onSideNavItemClick = evt => {
-    const { componentItems } = this.state;
-    const selectedNavItem = componentItems && componentItems.find(item => item.id === evt.target.dataset.navId);
-    if (selectedNavItem) {
-      this.switchTo(selectedNavItem.id);
+    const link = eventMatches(evt, '[data-nav-id]');
+    if (link) {
+      const { componentItems } = this.state;
+      const selectedNavItem = componentItems && componentItems.find(item => item.id === link.dataset.navId);
+      if (selectedNavItem) {
+        this.switchTo(selectedNavItem.id);
+      }
     }
   };
 
@@ -392,16 +387,12 @@ class RootPage extends Component {
 
   render() {
     const { portSassBuild, useStaticFullRenderPage } = this.props;
-    const { componentItems, isComponentsX, navClosed } = this.state;
+    const { componentItems, isComponentsX, selectedNavItemId } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
-    const classNames = classnames({
-      'bx--interior-left-nav--collapsed': navClosed,
-    });
     return !metadata ? null : (
       <Fragment>
-        <SideNavToggle onChange={this.onSideNavToggle} />
-        <SideNav items={componentItems} className={classNames} onItemClick={this.onSideNavItemClick} />
+        <SideNav items={componentItems} activeItemId={selectedNavItemId} onItemClick={this.onSideNavItemClick} />
         <main role="main" id="maincontent" className="container" aria-labelledby="page-title" tabIndex="-1" data-page={name}>
           <PageHeader label="Component" title={label} />
           <CodePage metadata={metadata} useStaticFullRenderPage={useStaticFullRenderPage} />

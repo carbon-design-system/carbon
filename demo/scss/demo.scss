@@ -1,5 +1,4 @@
 // Used for sidebar in dev environment
-@import 'interior-left-nav';
 @import '../../src/globals/scss/styles';
 
 $deprecations--entry: true;
@@ -42,31 +41,6 @@ REASON: #{$reason}';
 
     iframe {
       height: 100%;
-    }
-  }
-
-  .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
-    display: none;
-  }
-
-  .bx--interior-left-nav {
-    top: 0;
-    overflow: auto;
-    border-right: none;
-    z-index: 7000;
-
-    &.bx--interior-left-nav--collapsed {
-      width: 0;
-    }
-  }
-
-  .component-example__live--rendered {
-    .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
-      display: flex;
-    }
-
-    .bx--interior-left-nav.bx--interior-left-nav--collapsed {
-      width: 3rem;
     }
   }
 }
@@ -252,6 +226,14 @@ REASON: #{$reason}';
   .indigo {
     background-color: rgba(indigo, 0.2);
   }
+}
+
+.bx--side-nav__icon--small {
+  display: none;
+}
+
+a.bx--side-nav__link {
+  padding-left: 2rem;
 }
 
 .component-example__live .bx--form-item,

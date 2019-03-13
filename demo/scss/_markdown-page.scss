@@ -4,7 +4,9 @@
   }
 
   h3 {
-    @include font-smoothing;
+    @if not feature-flag-enabled('components-x') {
+      @include font-smoothing;
+    }
   }
 
   video {
@@ -58,7 +60,9 @@
     margin-bottom: 4rem;
 
     strong {
-      @include letter-spacing;
+      @if not feature-flag-enabled('components-x') {
+        @include letter-spacing;
+      }
       font-size: 1.125rem;
       line-height: 1.5;
       font-weight: 600;
@@ -87,7 +91,11 @@
   }
 
   p em {
-    @include typescale('zeta');
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('zeta');
+    } @else {
+      @include type-style('body-short-01');
+    }
     color: $text-02;
     font-style: normal;
   }
@@ -167,7 +175,11 @@
 
     thead {
       th {
-        @include typescale('zeta');
+        @if not feature-flag-enabled('components-x') {
+          @include typescale('zeta');
+        } @else {
+          @include type-style('body-short-01');
+        }
         font-weight: 600;
         text-align: left;
         line-height: 1.25;
@@ -182,12 +194,18 @@
         border-bottom: 1px solid $ui-04;
 
         td {
-          @include typescale('zeta');
+          @if not feature-flag-enabled('components-x') {
+            @include typescale('zeta');
+          } @else {
+            @include type-style('body-short-01');
+          }
           padding: 1rem 3rem 1rem 0;
           line-height: 1.25;
 
           strong {
-            @include letter-spacing;
+            @if not feature-flag-enabled('components-x') {
+              @include letter-spacing;
+            }
           }
 
           &:first-child {
@@ -231,8 +249,14 @@
 
   ul,
   ol {
-    @include typescale('epsilon');
-    @include font-smoothing;
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('epsilon');
+    } @else {
+      @include type-style('heading-01');
+    }
+    @if not feature-flag-enabled('components-x') {
+      @include font-smoothing;
+    }
     margin-left: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.75;
@@ -334,7 +358,11 @@
   }
 
   blockquote + p strong {
-    @include typescale('epsilon');
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('epsilon');
+    } @else {
+      @include type-style('heading-01');
+    }
     color: $brand-01;
   }
 
@@ -449,7 +477,9 @@
       margin-bottom: 3rem;
 
       strong {
-        @include letter-spacing;
+        @if not feature-flag-enabled('components-x') {
+          @include letter-spacing;
+        }
         position: absolute;
         top: 0;
         left: 0;
