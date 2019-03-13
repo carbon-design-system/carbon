@@ -149,8 +149,9 @@
   }
 
   input[data-invalid],
-  textarea[data-invalid],
-  select[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
     outline: 2px solid $support-01;
     outline-offset: -2px;
