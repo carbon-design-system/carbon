@@ -28,7 +28,7 @@
 <div style="padding: 1rem;">
   {{#each items}}
     <div id="{{panelId}}" class="{{panelClass}}" role="tabpanel" aria-labelledby="{{linkId}}" aria-hidden="{{not selected}}"{{#if (not selected)}} hidden{{/if}}>
-      <p>{{panelContent}}</p>
+      <p style="font-size: 14px; font-weight: 600; lineHeight: 18px; letterSpacing: 0.16px;">{{panelContent}}</p>
     </div>
   {{/each}}
 </div>
