@@ -133,7 +133,7 @@
     background-color: $field-01;
     width: 100%;
     height: rem(40px);
-    padding: 0 $spacing-xl 0 $spacing-md;
+    padding: 0 $spacing-md; // TODO: REPLACE SPACING TOKEN
     color: $text-01;
     border: none;
     border-bottom: 1px solid $ui-04;
@@ -147,6 +147,10 @@
     &-wrapper svg[hidden] {
       display: none;
     }
+  }
+
+  .#{$prefix}--password-input {
+    padding-right: rem(40px);
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -189,6 +193,14 @@
           fill: $hover-primary;
         }
       }
+    }
+
+    .#{$prefix}--text-input--invalid {
+      padding-right: rem(40px);
+    }
+
+    .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
+      padding-right: rem(64px);
     }
 
     .#{$prefix}--text-input--invalid + .#{$prefix}--text-input--password__visibility {
