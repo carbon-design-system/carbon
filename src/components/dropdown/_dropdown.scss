@@ -232,7 +232,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-template: auto auto / auto auto;
+    grid-template: auto auto / auto min-content;
     grid-gap: rem(4px);
 
     .#{$prefix}--label {
