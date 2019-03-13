@@ -370,10 +370,6 @@
     right: rem(48px);
   }
 
-  .#{$prefix}--select--inline[data-invalid] {
-    @include focus-outline('invalid');
-  }
-
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
     color: $disabled;
     cursor: not-allowed;
