@@ -15,31 +15,53 @@
     {{/if}}
     {{/unless}}
     {{#if @root.featureFlags.componentsX}}
-    <div class="{{@root.prefix}}--select-input__wrapper">
-      <select {{#if invalid}} data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
+    <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
+      <select id="select-id"
+        class="{{@root.prefix}}--select-input {{#if invalid}}{{@root.prefix}}--select--invalid{{/if}}">
         {{#each items}}
         {{#if items}}
         <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
           {{#each items}}
-          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
+            {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+            {{label}}
+          </option>
+          {{/each}}
+        </optgroup>
+        {{else}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
+          {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+          {{label}}
+        </option>
+        {{/if}}
+        {{/each}}
+      </select>
       {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
       {{#if invalid}}
       {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
       {{/if}}
     </div>
     {{else}}
-    <select {{#if invalid}} data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
+    <select {{#if invalid}}data-invalid{{/if}} id="select-id"
+      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}">
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
         {{#each items}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
-      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}} {{#if
+          selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+          {{label}}
+        </option>
+        {{/each}}
+      </optgroup>
+      {{else}}
+      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}} {{#if
+          selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+        {{label}}
+      </option>
+      {{/if}}
+      {{/each}}
+    </select>
     <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
@@ -67,28 +89,49 @@
     {{/if}}
     {{/unless}}
     {{#if @root.featureFlags.componentsX}}
-    <div class="{{@root.prefix}}--select-input__wrapper">
-      <select {{#if invalid}} data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}" disabled>
+    <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
+      <select id="select-id-disabled"
+        class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}" disabled>
         {{#each items}}
         {{#if items}}
         <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
           {{#each items}}
-          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-            selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+          <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
+            {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+            {{label}}
+          </option>
+          {{/each}}
+        </optgroup>
+        {{else}}
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
+          {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+          {{label}}
+        </option>
+        {{/if}}
+        {{/each}}
+      </select>
       {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
     </div>
     {{else}}
-    <select {{#if invalid}} data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}" disabled>
+    <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled"
+      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}" disabled>
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
         {{#each items}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
-      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
+        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
+          {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+          {{label}}
+        </option>
+        {{/each}}
+      </optgroup>
+      {{else}}
+      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
+        {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
+        {{label}}
+      </option>{{/if}}
+      {{/each}}
+    </select>
     <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
