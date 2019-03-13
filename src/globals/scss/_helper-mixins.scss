@@ -100,9 +100,11 @@
 
 @mixin button-reset($width: true) {
   @include reset;
-  @include type-style('body-short-01');
-  @include font-smoothing;
-  @include letter-spacing;
+  @if not feature-flag-enabled('components-x') {
+    @include font-family;
+    @include font-smoothing;
+    @include letter-spacing;
+  }
   display: inline-block;
   background: none;
   appearance: none;
@@ -204,10 +206,7 @@
 
 /// @deprecated A legacy class used for our older way of dark/light theme switch
 @mixin light-ui {
-  @include deprecate(
-    '`@include light-ui` has been deprecated. ' + 'It will be removed in the next major release.',
-    feature-flag-enabled('breaking-changes-x')
-  ) {
+  @include deprecate('`@include light-ui` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
     .#{$prefix}--global-light-ui & {
       @content;
     }

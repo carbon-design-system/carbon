@@ -101,7 +101,6 @@
   .#{$prefix}--link--disabled {
     @include reset;
     @include type-style('body-long-01');
-    @include font-smoothing;
     display: inline;
     color: $disabled-02;
     font-weight: 400;

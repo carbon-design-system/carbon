@@ -270,7 +270,6 @@
   .#{$prefix}--structured-list-td {
     @include reset;
     @include type-style('body-long-01');
-    @include line-height('body');
     @include padding-td--x;
     position: relative;
     display: table-cell;
