@@ -195,8 +195,6 @@ $css--helpers: true;
 }
 
 @mixin pagination--x {
-  $pagination-breakpoint: 530px;
-
   .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
     border-top: 0;
   }
@@ -212,63 +210,57 @@ $css--helpers: true;
     justify-content: space-between;
     border-top: $spacing-4xs solid $ui-03;
     height: rem(48px);
+  }
 
-    .#{$prefix}--select {
-      height: 100%;
-      align-items: center;
-      grid-template-columns: auto 0;
+  .#{$prefix}--pagination .#{$prefix}--select {
+    height: 100%;
+    align-items: center;
+    grid-template-columns: auto 0;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input {
+    width: auto;
+    min-width: auto;
+    height: 100%;
+    padding: 0 2.5rem 0 $spacing-md;
+    margin-right: -0.65rem;
+    @include carbon--breakpoint('md') {
+      padding: 0 1.5rem 0 0.5rem;
+      margin-right: 0;
     }
+    @include type-style('body-short-01');
+  }
 
-    .#{$prefix}--select-input {
-      width: auto;
-      min-width: auto;
-      height: 100%;
-      padding: 0 2.5rem 0 $spacing-md;
+  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    position: relative;
+    top: auto;
+    right: 1.1rem;
+    bottom: auto;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__item-count .#{$prefix}--select-input {
+    border-right: $spacing-4xs solid $ui-03;
+    @include carbon--breakpoint('md') {
+      padding-right: 2rem;
       margin-right: -0.65rem;
-      @include breakpoint($pagination-breakpoint) {
-        padding: 0 1.5rem 0 0.5rem;
-        margin-right: 0;
-      }
-      @include type-style('body-short-01');
-
-      &:hover {
-        background: $hover-ui;
-      }
     }
+  }
 
-    .#{$prefix}--select__arrow {
-      position: relative;
-      top: auto;
-      right: 1.1rem;
-      bottom: auto;
+  .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select-input {
+    border-left: $spacing-4xs solid $ui-03;
+    @include carbon--breakpoint('md') {
+      padding-left: 1rem;
+      padding-right: 2rem;
     }
+  }
 
-    .#{$prefix}--select__item-count {
-      border-right: $spacing-4xs solid $ui-03;
-    }
-
-    .#{$prefix}--select__page-number {
-      border-left: $spacing-4xs solid $ui-03;
-    }
-
-    .#{$prefix}--select__item-count .#{$prefix}--select-input {
-      @include breakpoint($pagination-breakpoint) {
-        padding-right: 2rem;
-        margin-right: -0.65rem;
-      }
-    }
-
-    .#{$prefix}--select__page-number .#{$prefix}--select-input {
-      @include breakpoint($pagination-breakpoint) {
-        padding-left: 1rem;
-        padding-right: 2rem;
-      }
-    }
-
-    .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
-      @include breakpoint($pagination-breakpoint) {
-        right: 1.6rem;
-      }
+  .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
+    @include carbon--breakpoint('md') {
+      right: 1.6rem;
     }
   }
 
@@ -294,7 +286,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__left {
-    @include breakpoint($pagination-breakpoint) {
+    @include carbon--breakpoint('md') {
       padding: 0 $spacing-md;
     }
   }
@@ -302,7 +294,7 @@ $css--helpers: true;
   .#{$prefix}--pagination__text {
     display: none;
 
-    @include breakpoint($pagination-breakpoint) {
+    @include carbon--breakpoint('md') {
       display: inline-block;
     }
   }
@@ -330,19 +322,14 @@ $css--helpers: true;
     align-items: center;
     fill: $ui-05;
     transition: outline $transition--base, background-color $transition--base;
+  }
 
-    &:hover {
-      background: $hover-ui;
-    }
+  .#{$prefix}--pagination__button:focus {
+    @include focus-outline('outline');
+  }
 
-    &:focus {
-      @include focus-outline('outline');
-    }
-
-    &:disabled:hover {
-      cursor: default;
-      fill: $ui-05;
-    }
+  .#{$prefix}--pagination__button:hover {
+    background: $hover-ui;
   }
 
   .#{$prefix}--pagination__button--no-index {
@@ -350,29 +337,36 @@ $css--helpers: true;
     cursor: not-allowed;
   }
 
+  .#{$prefix}--pagination__button:disabled:hover,
+  .#{$prefix}--pagination__button--no-index:hover {
+    cursor: not-allowed;
+    fill: $disabled-02;
+    background: $ui-01;
+  }
+
   .#{$prefix}--pagination--inline {
     height: rem(42px);
     margin-top: -0.5rem;
     margin-bottom: -0.5rem;
     margin-right: -1rem;
+  }
 
-    .#{$prefix}--pagination__button {
-      height: rem(40px);
-      border-left: $spacing-4xs solid $ui-03;
-      border-right: $spacing-4xs solid $ui-03;
-      margin: 0;
-    }
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button {
+    height: rem(40px);
+    border-left: $spacing-4xs solid $ui-03;
+    border-right: $spacing-4xs solid $ui-03;
+    margin: 0;
+  }
 
-    .#{$prefix}--pagination__button--forward {
-      border-right: 0;
-      padding: 0 $spacing-md;
-      margin-left: $spacing-md;
-    }
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward {
+    border-right: 0;
+    padding: 0 $spacing-md;
+    margin-left: $spacing-md;
+  }
 
-    .#{$prefix}--pagination__button--backward {
-      margin: 0 $spacing-md;
-      padding: 0 $spacing-md;
-    }
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward {
+    margin: 0 $spacing-md;
+    padding: 0 $spacing-md;
   }
 
   // Skeleton state
