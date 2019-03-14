@@ -290,11 +290,6 @@
     background-color: $selected-ui;
   }
 
-  .#{$prefix}--search--xl .#{$prefix}--search-close svg {
-    width: 20px;
-    height: 20px;
-  }
-
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
     border: 2px solid $focus;
     border-left: 0;
