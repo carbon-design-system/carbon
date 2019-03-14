@@ -75,9 +75,16 @@
   .#{$prefix}--breadcrumb {
     @include type-style('body-short-01');
     display: inline;
-    @include carbon--breakpoint(md) {
-      display: flex;
-      flex-wrap: wrap;
+    @if feature-flag-enabled('grid') {
+      @include carbon--breakpoint(md) {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    } @else {
+      @include breakpoint(bp--xs--major) {
+        display: flex;
+        flex-wrap: wrap;
+      }
     }
   }
 
