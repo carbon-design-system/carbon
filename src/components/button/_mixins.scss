@@ -79,6 +79,9 @@
   @include type-style('body-short-01');
 
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   flex-shrink: 0;
   min-height: rem($button-height);
   padding: $button-padding;
@@ -89,7 +92,7 @@
   outline: $button-outline-width solid transparent;
   position: relative;
   max-width: rem(320px);
-  min-width: rem(80px);
+  min-width: rem(125px);
 
   &:disabled {
     cursor: not-allowed;
@@ -98,14 +101,15 @@
     border-color: $ibm-color__gray-30;
   }
 
+  .#{$prefix}--btn__content {
+    flex: 1;
+  }
+
   .#{$prefix}--btn__icon {
     width: rem(16px);
     height: rem(16px);
+    margin-left: $spacing-md;
     transition: $duration--fast-01 motion(entrance, productive);
-    position: absolute;
-    right: rem(16px);
-    top: 50%;
-    transform: translateY(-50%);
   }
 }
 
