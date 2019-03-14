@@ -39,9 +39,15 @@ const matchesFuncName =
  * @returns {boolean} `true` if the given DOM element is a element node and matches the given selector.
  * @private
  */
-const matches = (elem, selector) =>
-  typeof elem[matchesFuncName] === 'function' &&
-  elem[matchesFuncName](selector);
+const matches = (elem, selector) => {
+  if (breakingChangesX) {
+    return elem.matches(selector);
+  }
+  return (
+    typeof elem[matchesFuncName] === 'function' &&
+    elem[matchesFuncName](selector)
+  );
+};
 
 /**
  * @param {Element} elem An element.
@@ -50,6 +56,9 @@ const matches = (elem, selector) =>
  * @private
  */
 const closest = (elem, selector) => {
+  if (breakingChangesX) {
+    return elem.closest(selector);
+  }
   const doc = elem.ownerDocument;
   for (
     let traverse = elem;

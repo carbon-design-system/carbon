@@ -129,3 +129,10 @@ can import icon components directly and use them in a variety of sizes (16x16,
 In addition, these components have minor accessibility and performance improvements, most notably
 around inlining the SVG data for an icon instead of deriving the markup at
 runtime.
+
+## Polyfills
+
+Required polyfills list has been updated, adding:
+
+- [`Element.prototype.closest()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/closest)
+- [`Element.prototype.matches()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
