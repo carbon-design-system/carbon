@@ -201,7 +201,6 @@ $css--helpers: true;
 
   .#{$prefix}--pagination {
     @include reset;
-    @include font-family;
     @include type-style('body-short-01');
     width: 100%;
     background-color: $ui-01;
@@ -219,6 +218,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-short-01');
     width: auto;
     min-width: auto;
     height: 100%;
@@ -228,7 +228,6 @@ $css--helpers: true;
       padding: 0 1.5rem 0 0.5rem;
       margin-right: 0;
     }
-    @include type-style('body-short-01');
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
@@ -305,7 +304,6 @@ $css--helpers: true;
   }
   .#{$prefix}--pagination__text[for='select-id-pagination-page'] {
     margin-left: -0.5rem;
-    z-index: 100;
   }
 
   .#{$prefix}--pagination__button {
