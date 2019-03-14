@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -9,39 +9,42 @@
   <div class="{{@root.prefix}}--time-picker">
     <div class="{{@root.prefix}}--time-picker__input">
       <label for="time-picker-1" class="{{@root.prefix}}--label">Select a time</label>
-      <input id="time-picker-1" type="text" class="{{@root.prefix}}--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)"
-        placeholder="hh:mm" maxlength="5" />
+      <input id="time-picker-1" type="text" class="{{@root.prefix}}--time-picker__input-field"
+        pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" />
       <div class="{{@root.prefix}}--form-requirement">
         Invalid time.
       </div>
     </div>
-    <div class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
+    <div
+      class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
       <label for="select-id-1" class="{{@root.prefix}}--label {{@root.prefix}}--visually-hidden">Select AM/PM</label>
       <select id="select-id-1" class="{{@root.prefix}}--select-input">
         <option class="{{@root.prefix}}--select-option" value="AM">AM</option>
         <option class="{{@root.prefix}}--select-option" value="PM">PM</option>
       </select>
       {{#if @root.componentsX}}
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
       {{else}}
-        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+      <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+      </svg>
       {{/if}}
     </div>
-    <div class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
-      <label for="select-id-2" class="{{@root.prefix}}--label {{@root.prefix}}--visually-hidden">Select time zone</label>
+    <div
+      class="{{@root.prefix}}--time-picker__select {{@root.prefix}}--select {{#if componentsX}}{{else}}{{@root.prefix}}--select--inline{{/if}}">
+      <label for="select-id-2" class="{{@root.prefix}}--label {{@root.prefix}}--visually-hidden">Select time
+        zone</label>
       <select id="select-id-2" class="{{@root.prefix}}--select-input">
         <option class="{{@root.prefix}}--select-option" value="option-1">Time zone 1</option>
         <option class="{{@root.prefix}}--select-option" value="option-2">Time zone 2</option>
         <option class="{{@root.prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
       {{#if @root.componentsX}}
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+      {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
       {{else}}
-        <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
+      <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+      </svg>
       {{/if}}
     </div>
   </div>
