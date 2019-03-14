@@ -46,6 +46,9 @@ module.exports = {
     {
       name: 'with-icon',
       label: 'With icon',
+      meta: {
+        xVersionNotSupported: true,
+      },
       context: {
         hasIcon: true,
         items,
