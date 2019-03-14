@@ -64,7 +64,7 @@
   position: relative;
 
   .button button {
-    margin: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .data-table > div {
@@ -84,6 +84,7 @@
     left: 2rem;
     top: 2rem;
     width: calc(100% - 4rem);
+
     .bx--overflow-menu--flip {
       left: auto;
     }
