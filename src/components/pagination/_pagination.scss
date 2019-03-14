@@ -303,7 +303,7 @@ $css--helpers: true;
     color: $text-02;
   }
   .#{$prefix}--pagination__text[for='select-id-pagination-page'] {
-    margin-left: -0.5rem;
+    margin-left: -1rem;
   }
 
   .#{$prefix}--pagination__button {
