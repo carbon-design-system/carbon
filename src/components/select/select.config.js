@@ -115,7 +115,16 @@ module.exports = {
       },
     },
     {
-      name: 'inline-invalid',
+      name: 'lightInvalid',
+      label: 'Select (Light/Invalid)',
+      context: {
+        light: true,
+        invalid: true,
+        items,
+      },
+    },
+    {
+      name: 'inlineInvalid',
       label: 'Inline Select (Invalid)',
       context: {
         inline: true,
@@ -124,10 +133,21 @@ module.exports = {
       },
     },
     {
-      name: 'light-invalid',
-      label: 'Select (Light/Invalid)',
+      name: 'inlineInvalidHelperText',
+      label: 'Inline Select (Invalid)',
+      context: {
+        inline: true,
+        invalid: true,
+        helperText: true,
+        items,
+      },
+    },
+    {
+      name: 'inlineLightInvalid',
+      label: 'Inline Select (Light/Invalid)',
       context: {
         light: true,
+        inline: true,
         invalid: true,
         items,
       },

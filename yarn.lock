@@ -644,6 +644,14 @@
     "@carbon/icon-helpers" "0.0.1-beta.0"
     "@carbon/icons" "0.0.1-beta.0"
 
+"@carbon/icons-react@^0.0.1-alpha.32":
+  version "0.0.1-beta.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-0.0.1-beta.0.tgz#0dd2a3723e6ef14c075bd39eab702153b485384b"
+  integrity sha512-SBpDmHB8b2zQ56aTfJF9hAc/H/rmULVSu237jgCnFC5m5IJybc19hSNb9En9i49QxgAT/KRTWOBcqTMiXFX9BQ==
+  dependencies:
+    "@carbon/icon-helpers" "0.0.1-beta.0"
+    prop-types "^15.6.2"
+
 "@carbon/icons@0.0.1-beta.0":
   version "0.0.1-beta.0"
   resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-0.0.1-beta.0.tgz#7105a24a54c8ba43845fe3b560db6d5235d8591b"
@@ -2664,27 +2672,32 @@ capture-stack-trace@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
 
-carbon-addons-cloud@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/carbon-addons-cloud/-/carbon-addons-cloud-1.8.0.tgz#4a2a3b98f2c7989a8e21ad57a601248dbd9d7ce5"
+carbon-components-react@^6.0.0:
+  version "6.106.3"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.106.3.tgz#25b3b027b44822d04b8f17660bccec686d16d80c"
+  integrity sha512-6E1O8ces8dVZaOamtffDK0MBT99iy226/z2jjn/Wt7n5X/gJJhqmZ3vka+u1+KIW7ww3AKzoPf+Zb//jU3+Eww==
   dependencies:
-    classnames "^2.2.5"
-    prop-types "^15.6.0"
-    window-or-global "^1.0.1"
-
-carbon-components-react@^5.8.0:
-  version "5.52.4"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-5.52.4.tgz#3182ce178bc246f0c0730e691535a907e975a464"
-  dependencies:
-    classnames "2.2.5"
+    "@carbon/icons-react" "^0.0.1-alpha.32"
+    classnames "2.2.6"
     downshift "^1.31.14"
-    flatpickr "4.5.0"
+    flatpickr "4.5.5"
     invariant "^2.2.3"
     lodash.debounce "^4.0.8"
     lodash.isequal "^4.5.0"
     lodash.omit "^4.5.0"
+    react-is "^16.8.2"
     warning "^3.0.0"
     window-or-global "^1.0.1"
+
+carbon-components@^9.0.0:
+  version "9.84.3"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.84.3.tgz#9a534f636e33d1df790d2e18a43b815e96809d61"
+  integrity sha512-4P7pUVcV3p6Zzrhc8R1uLiEl+tZdySM1EhU1ghKMg0MhB2TI/i2WVvDgJuXlzsIOe5GkK6UlVPv/uqMBE4WMsQ==
+  dependencies:
+    carbon-icons "^7.0.7"
+    flatpickr "4.5.7"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
 
 carbon-icons@^7.0.7:
   version "7.0.7"
@@ -2854,11 +2867,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-
-classnames@^2.2.0, classnames@^2.2.5:
+classnames@2.2.6, classnames@^2.2.0:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -5114,9 +5123,10 @@ flat-cache@^1.2.1:
     rimraf "~2.6.2"
     write "^0.2.1"
 
-flatpickr@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.0.tgz#f72c7164a1c24e3ad419e3b2209d1a2d3604724a"
+flatpickr@4.5.5:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.5.tgz#b138050654932f4cf667897d00b51bb930bf392e"
+  integrity sha512-KgAJxBN1BWiOAkwvFSM/nS9YFESOh1yI7uQEd/HQqcTGev84ADO2Mx8C3bUKgIULscb+LireiSDe5D9fh3PFtQ==
 
 flatpickr@4.5.7:
   version "4.5.7"
@@ -10711,6 +10721,11 @@ react-dom@^16.2.0:
 react-ga@^2.4.0:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.6.tgz#5a2e2fa78ae298e5b0a4498210eeec631ef1b562"
+
+react-is@^16.8.2:
+  version "16.8.4"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"
+  integrity sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
 
 react@^16.2.0:
   version "16.6.3"
