@@ -342,6 +342,14 @@
     }
   }
 
+  .#{$prefix}--overflow-menu-options__btn svg {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn:hover svg {
+    fill: $icon-01;
+  }
+
   .#{$prefix}--overflow-menu-options__option-content {
     white-space: nowrap;
     overflow: hidden;
