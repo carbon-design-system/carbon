@@ -115,8 +115,12 @@
     @include focus-outline('invalid');
   }
 
-  .#{$prefix}--time-picker__select:not(:last-of-type) {
-    margin: 0 $spacing-3xs;
+  .#{$prefix}--time-picker__select {
+    justify-content: center;
+
+    &:not(:last-of-type) {
+      margin: 0 $spacing-3xs;
+    }
   }
 
   .#{$prefix}--time-picker__input {
