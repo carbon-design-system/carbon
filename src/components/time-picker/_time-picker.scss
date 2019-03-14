@@ -137,7 +137,7 @@
   .#{$prefix}--time-picker__input-field {
     @include reset;
     @include focus-outline('reset');
-    @include type-style('code-01');
+    @include type-style('code-02');
     display: flex;
     align-items: center;
     width: 4.875rem;
