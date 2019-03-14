@@ -145,7 +145,6 @@
 
     &:focus {
       box-shadow: inset 0 0 0 2px $focus;
-      color: $text-01;
       z-index: 3;
     }
 
@@ -193,7 +192,8 @@
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher-btn:hover::before {
+  .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher-btn:hover + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
 
