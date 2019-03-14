@@ -527,6 +527,11 @@
     font-weight: normal;
     margin-right: $spacing-sm;
     margin-left: rem(10px);
+
+    &:focus {
+      margin: 0;
+      padding-left: rem(10px);
+    }
   }
 
   // Skeleton State

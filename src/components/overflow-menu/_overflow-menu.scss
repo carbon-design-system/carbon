@@ -376,7 +376,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
-    color: $disabled;
+    color: $disabled-02;
     pointer-events: none;
 
     &:hover,
@@ -385,6 +385,10 @@
       @include focus-outline('reset');
       background-color: $ui-01;
     }
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn svg {
+    fill: $disabled-02;
   }
 
   .#{$prefix}--overflow-menu--flip {

@@ -109,15 +109,18 @@
   .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-end;
-
-    .#{$prefix}--label {
-      @include type-style('label-01');
-      order: 1;
-    }
   }
 
-  .#{$prefix}--time-picker__select:not(:last-of-type) {
-    margin: 0 $spacing-3xs;
+  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--time-picker__select {
+    justify-content: center;
+
+    &:not(:last-of-type) {
+      margin: 0 $spacing-3xs;
+    }
   }
 
   .#{$prefix}--time-picker__input {
@@ -126,72 +129,21 @@
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
-    padding-right: rem(42px); // 2rem + SVG width
     min-width: auto;
     width: auto;
+    padding-right: rem(48px);
     line-height: 1;
-    display: flex;
-    align-items: center;
   }
 
   .#{$prefix}--time-picker__input-field {
     @include reset;
-    @include type-style('body-short-01');
     @include focus-outline('reset');
-    font-family: $font-family-mono;
+    @include type-style('code-02');
     display: flex;
     align-items: center;
-    background-color: $field-01;
-    border: none;
-    border-bottom: 1px solid $ui-04;
     width: 4.875rem;
-    color: $text-01;
     height: rem(40px);
-    padding: 0 $spacing-md;
-    order: 2;
     transition: outline $transition--base;
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-
-    &::placeholder {
-      color: $text-03;
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: 0;
-      max-height: 0;
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &[data-invalid] ~ .#{$prefix}--form-requirement {
-      overflow: visible;
-      max-height: 0;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-
-  .#{$prefix}--time-picker--light {
-    .#{$prefix}--time-picker__input-field,
-    .#{$prefix}--select-input {
-      background: $field-02;
-    }
   }
 }
 

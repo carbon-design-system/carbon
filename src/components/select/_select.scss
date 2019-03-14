@@ -265,12 +265,12 @@
     color: $disabled-02;
   }
 
-  .#{$prefix}--select--invalid {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
     padding-right: rem(58px); // 1rem + chevron width + invalid icon width
   }
 
-  .#{$prefix}--select--invalid,
-  .#{$prefix}--select--invalid:focus {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input:focus {
     @include focus-outline('invalid');
   }
 
@@ -297,12 +297,12 @@
   }
 
   .#{$prefix}--select__disabled-icon,
-  .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: rem(34px); // 1.5rem + chevron width
   }
 
-  .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
     fill: $support-01;
   }
 
@@ -334,6 +334,12 @@
     align-items: center;
   }
 
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--form__helper-text {
+    margin-top: rem(13px);
+    align-self: flex-start;
+  }
+
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-bottom: 0;
     margin-left: rem(8px);
@@ -342,7 +348,6 @@
   .#{$prefix}--select--inline .#{$prefix}--label {
     white-space: nowrap;
     margin: 0 $spacing-xs 0 0;
-    align-self: center;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
@@ -366,11 +371,11 @@
     right: $spacing-xs;
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select--inline .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__invalid-icon {
     right: rem(24px);
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select--invalid ~ .#{$prefix}--select__disabled-icon {
+  .#{$prefix}--select--inline .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__disabled-icon {
     right: rem(48px);
   }
 
