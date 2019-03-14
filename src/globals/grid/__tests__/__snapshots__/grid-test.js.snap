@@ -42,21 +42,6 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
     right: auto;
     opacity: 0.3; } }
 
-/**
- * Container helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
-/**
- * Row helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
-/**
- * Column helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
 .bx--fluid-grid {
   margin-right: auto;
   margin-left: auto;
@@ -122,115 +107,59 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col,
   .bx--grid--condensed .bx--col {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-sm-1 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-sm-1 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-sm-1 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-sm-1,
   .bx--grid--condensed .bx--col-sm-1 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-sm-1 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-sm-1 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-sm-2 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-sm-2 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-sm-2 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-sm-2,
   .bx--grid--condensed .bx--col-sm-2 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-sm-2 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-sm-2 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-sm-3 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-sm-3 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-sm-3 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-sm-3,
   .bx--grid--condensed .bx--col-sm-3 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-sm-3 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-sm-3 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-sm-4 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-sm-4 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-sm-4 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-sm-4,
   .bx--grid--condensed .bx--col-sm-4 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-sm-4 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-sm-4 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-sm,
 .bx--col-sm--auto {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-sm > *, .bx--grid--padding
-  .bx--col-sm--auto > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-sm, .bx--grid--bleed
+  .bx--row--condensed .bx--col-sm,
+  .bx--grid--condensed .bx--col-sm, .bx--row--condensed
+  .bx--col-sm--auto,
+  .bx--grid--condensed
   .bx--col-sm--auto {
-    padding-right: 0;
-    padding-left: 0; }
-  .bx--grid--condensed .bx--col-sm, .bx--grid--condensed
-  .bx--col-sm--auto {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-sm, .bx--grid--padding.bx--grid--hang
-  .bx--col-sm--auto {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-sm, [dir='rtl'] .bx--grid--padding.bx--grid--hang
-  .bx--col-sm--auto {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col,
 .bx--col-sm {
@@ -276,169 +205,86 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-1 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-1 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-1,
   .bx--grid--condensed .bx--col-md-1 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-1 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-1 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-2 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-2 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-2 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-2,
   .bx--grid--condensed .bx--col-md-2 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-2 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-2 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-3 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-3 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-3 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-3,
   .bx--grid--condensed .bx--col-md-3 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-3 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-3 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-4 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-4 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-4 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-4,
   .bx--grid--condensed .bx--col-md-4 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-4 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-4 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-5 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-5 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-5 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-5,
   .bx--grid--condensed .bx--col-md-5 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-5 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-5 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-6 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-6 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-6 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-6,
   .bx--grid--condensed .bx--col-md-6 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-6 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-6 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-7 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-7 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-7 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-7,
   .bx--grid--condensed .bx--col-md-7 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-7 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-7 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md-8 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md-8 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md-8 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-md-8,
   .bx--grid--condensed .bx--col-md-8 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md-8 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md-8 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-md,
 .bx--col-md--auto {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-md > *, .bx--grid--padding
-  .bx--col-md--auto > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-md, .bx--grid--bleed
+  .bx--row--condensed .bx--col-md,
+  .bx--grid--condensed .bx--col-md, .bx--row--condensed
+  .bx--col-md--auto,
+  .bx--grid--condensed
   .bx--col-md--auto {
-    padding-right: 0;
-    padding-left: 0; }
-  .bx--grid--condensed .bx--col-md, .bx--grid--condensed
-  .bx--col-md--auto {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-md, .bx--grid--padding.bx--grid--hang
-  .bx--col-md--auto {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-md, [dir='rtl'] .bx--grid--padding.bx--grid--hang
-  .bx--col-md--auto {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 @media (min-width: 42rem) {
   .bx--col,
@@ -496,241 +342,122 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-1 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-1 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-1,
   .bx--grid--condensed .bx--col-lg-1 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-1 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-1 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-2 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-2 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-2 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-2,
   .bx--grid--condensed .bx--col-lg-2 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-2 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-2 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-3 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-3 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-3 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-3,
   .bx--grid--condensed .bx--col-lg-3 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-3 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-3 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-4 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-4 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-4 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-4,
   .bx--grid--condensed .bx--col-lg-4 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-4 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-4 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-5 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-5 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-5 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-5,
   .bx--grid--condensed .bx--col-lg-5 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-5 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-5 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-6 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-6 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-6 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-6,
   .bx--grid--condensed .bx--col-lg-6 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-6 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-6 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-7 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-7 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-7 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-7,
   .bx--grid--condensed .bx--col-lg-7 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-7 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-7 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-8 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-8 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-8 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-8,
   .bx--grid--condensed .bx--col-lg-8 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-8 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-8 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-9 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-9 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-9 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-9,
   .bx--grid--condensed .bx--col-lg-9 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-9 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-9 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-10 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-10 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-10 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-10,
   .bx--grid--condensed .bx--col-lg-10 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-10 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-10 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-11 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-11 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-11 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-11,
   .bx--grid--condensed .bx--col-lg-11 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-11 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-11 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg-12 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg-12 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg-12 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-lg-12,
   .bx--grid--condensed .bx--col-lg-12 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg-12 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg-12 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-lg,
 .bx--col-lg--auto {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-lg > *, .bx--grid--padding
-  .bx--col-lg--auto > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-lg, .bx--grid--bleed
+  .bx--row--condensed .bx--col-lg,
+  .bx--grid--condensed .bx--col-lg, .bx--row--condensed
+  .bx--col-lg--auto,
+  .bx--grid--condensed
   .bx--col-lg--auto {
-    padding-right: 0;
-    padding-left: 0; }
-  .bx--grid--condensed .bx--col-lg, .bx--grid--condensed
-  .bx--col-lg--auto {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-lg, .bx--grid--padding.bx--grid--hang
-  .bx--col-lg--auto {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-lg, [dir='rtl'] .bx--grid--padding.bx--grid--hang
-  .bx--col-lg--auto {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 @media (min-width: 66rem) {
   .bx--col,
@@ -808,241 +535,122 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-1 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-1 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-1,
   .bx--grid--condensed .bx--col-xlg-1 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-1 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-1 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-2 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-2 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-2 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-2,
   .bx--grid--condensed .bx--col-xlg-2 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-2 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-2 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-3 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-3 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-3 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-3,
   .bx--grid--condensed .bx--col-xlg-3 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-3 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-3 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-4 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-4 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-4 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-4,
   .bx--grid--condensed .bx--col-xlg-4 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-4 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-4 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-5 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-5 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-5 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-5,
   .bx--grid--condensed .bx--col-xlg-5 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-5 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-5 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-6 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-6 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-6 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-6,
   .bx--grid--condensed .bx--col-xlg-6 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-6 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-6 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-7 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-7 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-7 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-7,
   .bx--grid--condensed .bx--col-xlg-7 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-7 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-7 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-8 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-8 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-8 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-8,
   .bx--grid--condensed .bx--col-xlg-8 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-8 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-8 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-9 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-9 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-9 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-9,
   .bx--grid--condensed .bx--col-xlg-9 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-9 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-9 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-10 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-10 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-10 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-10,
   .bx--grid--condensed .bx--col-xlg-10 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-10 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-10 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-11 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-11 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-11 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-11,
   .bx--grid--condensed .bx--col-xlg-11 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-11 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-11 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg-12 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg-12 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg-12 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-xlg-12,
   .bx--grid--condensed .bx--col-xlg-12 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg-12 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg-12 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-xlg,
 .bx--col-xlg--auto {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-xlg > *, .bx--grid--padding
-  .bx--col-xlg--auto > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-xlg, .bx--grid--bleed
+  .bx--row--condensed .bx--col-xlg,
+  .bx--grid--condensed .bx--col-xlg, .bx--row--condensed
+  .bx--col-xlg--auto,
+  .bx--grid--condensed
   .bx--col-xlg--auto {
-    padding-right: 0;
-    padding-left: 0; }
-  .bx--grid--condensed .bx--col-xlg, .bx--grid--condensed
-  .bx--col-xlg--auto {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-xlg, .bx--grid--padding.bx--grid--hang
-  .bx--col-xlg--auto {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-xlg, [dir='rtl'] .bx--grid--padding.bx--grid--hang
-  .bx--col-xlg--auto {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 @media (min-width: 82rem) {
   .bx--col,
@@ -1120,241 +728,122 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-1 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-1 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-1,
   .bx--grid--condensed .bx--col-max-1 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-1 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-1 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-2 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-2 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-2 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-2,
   .bx--grid--condensed .bx--col-max-2 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-2 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-2 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-3 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-3 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-3 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-3,
   .bx--grid--condensed .bx--col-max-3 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-3 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-3 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-4 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-4 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-4 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-4,
   .bx--grid--condensed .bx--col-max-4 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-4 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-4 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-5 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-5 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-5 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-5,
   .bx--grid--condensed .bx--col-max-5 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-5 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-5 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-6 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-6 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-6 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-6,
   .bx--grid--condensed .bx--col-max-6 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-6 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-6 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-7 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-7 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-7 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-7,
   .bx--grid--condensed .bx--col-max-7 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-7 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-7 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-8 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-8 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-8 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-8,
   .bx--grid--condensed .bx--col-max-8 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-8 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-8 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-9 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-9 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-9 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-9,
   .bx--grid--condensed .bx--col-max-9 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-9 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-9 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-10 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-10 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-10 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-10,
   .bx--grid--condensed .bx--col-max-10 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-10 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-10 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-11 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-11 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-11 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-11,
   .bx--grid--condensed .bx--col-max-11 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-11 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-11 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max-12 {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max-12 > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max-12 {
-    padding-right: 0;
-    padding-left: 0; }
+  .bx--row--condensed .bx--col-max-12,
   .bx--grid--condensed .bx--col-max-12 {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max-12 {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max-12 {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 .bx--col-max,
 .bx--col-max--auto {
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem; }
-  .bx--grid--padding .bx--col-max > *, .bx--grid--padding
-  .bx--col-max--auto > * {
-    padding: 1rem; }
-  .bx--grid--bleed .bx--col-max, .bx--grid--bleed
+  .bx--row--condensed .bx--col-max,
+  .bx--grid--condensed .bx--col-max, .bx--row--condensed
+  .bx--col-max--auto,
+  .bx--grid--condensed
   .bx--col-max--auto {
-    padding-right: 0;
-    padding-left: 0; }
-  .bx--grid--condensed .bx--col-max, .bx--grid--condensed
-  .bx--col-max--auto {
-    padding-right: 1px;
-    padding-left: 1px; }
-  .bx--grid--padding.bx--grid--hang .bx--col-max, .bx--grid--padding.bx--grid--hang
-  .bx--col-max--auto {
-    padding-left: 0; }
-  [dir='rtl'] .bx--grid--padding.bx--grid--hang .bx--col-max, [dir='rtl'] .bx--grid--padding.bx--grid--hang
-  .bx--col-max--auto {
-    padding-right: 0;
-    padding-left: initial; }
+    padding-right: 0.0625rem;
+    padding-left: 0.0625rem; }
 
 @media (min-width: 99rem) {
   .bx--col,
@@ -1472,21 +961,6 @@ exports[`_grid.scss should support the grid mixin 1`] = `
     right: auto;
     opacity: 0.3; } }
 
-/**
- * Container helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
-/**
- * Row helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
-/**
- * Column helpers for @carbon/grid. Heavily inspired by, or derived from,
- * bootstrap:
- * https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
- */
 .bx--grid {
   margin-left: 3%;
   margin-right: 3%;
