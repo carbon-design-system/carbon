@@ -131,7 +131,7 @@
     display: inline-block;
     width: 100%;
     height: rem(40px);
-    padding: $spacing-xs $spacing-md;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -203,7 +203,7 @@
   }
 
   .#{$prefix}--content-switcher__icon + span {
-    margin-left: $spacing-xs;
+    margin-left: $carbon--spacing-03;
   }
 
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
@@ -218,7 +218,7 @@
 
     // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-colors__gray-30;
+      background-color: $ibm-color__gray-30;
     }
   }
 

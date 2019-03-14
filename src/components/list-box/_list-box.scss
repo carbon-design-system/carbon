@@ -331,7 +331,7 @@ $list-box-menu-width: rem(300px);
     order: 3;
     color: $support-01;
     font-weight: 400;
-    margin-top: $spacing-2xs;
+    margin-top: $carbon--spacing-02;
 
     &::before {
       display: none;
@@ -382,7 +382,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
     position: static;
-    padding: 0 $spacing-xs;
+    padding: 0 $carbon--spacing-03;
   }
 
   .#{$prefix}--list-box--inline > .#{$prefix}--list-box__menu {

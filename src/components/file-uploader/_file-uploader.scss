@@ -114,7 +114,7 @@
   }
 
   .#{$prefix}--file--invalid {
-    margin-right: $spacing-xs;
+    margin-right: $carbon--spacing-03;
     fill: $support-01;
   }
 
@@ -124,7 +124,7 @@
     @include type-style('heading-01');
 
     color: $text-01;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $carbon--spacing-03;
   }
 
   .#{$prefix}--file-input {
@@ -142,13 +142,13 @@
     @include type-style('body-short-01');
 
     color: $text-02;
-    margin-bottom: $spacing-md;
+    margin-bottom: $carbon--spacing-05;
   }
 
   .#{$prefix}--file-container {
     display: block;
     width: 100%;
-    margin-top: $spacing-lg;
+    margin-top: $carbon--spacing-06;
   }
 
   .#{$prefix}--file__selected-file {
@@ -157,8 +157,8 @@
     justify-content: space-between;
     min-height: rem(40px);
     max-width: rem(300px);
-    margin-bottom: $spacing-xs;
-    padding: 0 $spacing-xs 0 $spacing-md;
+    margin-bottom: $carbon--spacing-03;
+    padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
     background-color: $field-01;
     overflow: hidden;
 
@@ -176,7 +176,7 @@
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
-    margin-bottom: $spacing-2xs;
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
@@ -184,7 +184,7 @@
     max-height: rem(200px);
     color: $support-01;
     font-weight: 400;
-    margin: 0 0 $spacing-xs 0;
+    margin: 0 0 $carbon--spacing-03 0;
     overflow: visible;
   }
 
@@ -194,7 +194,7 @@
     display: inline-block;
     align-items: center;
     color: $text-01;
-    margin-right: $spacing-md;
+    margin-right: $carbon--spacing-05;
     /*rtl:ignore*/
     direction: ltr;
     justify-content: flex-start; /*rtl:{flex-end}*/

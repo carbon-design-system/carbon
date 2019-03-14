@@ -232,7 +232,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-md;
+    padding: 0 $carbon--spacing-05;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
@@ -302,8 +302,8 @@
     background: $ui-01;
     @include breakpoint(bp--sm--major) {
       flex-direction: row;
-      margin-right: $spacing-md;
-      margin-left: $spacing-md;
+      margin-right: $carbon--spacing-05;
+      margin-left: $carbon--spacing-05;
       background: none;
       box-shadow: none;
       z-index: auto;
@@ -316,7 +316,7 @@
       transition: max-height $transition--expansion $carbon--standard-easing;
       max-height: 600px;
       width: 100%;
-      padding-top: $spacing-4xs;
+      padding-top: 0;
     }
   }
 
@@ -405,19 +405,19 @@
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
-    padding: $spacing-xs $spacing-md;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     width: rem(160px);
     white-space: nowrap;
     text-overflow: ellipsis;
     @include breakpoint(bp--sm--major) {
       border-bottom: $tab-underline-color;
-      padding: $spacing-xs $spacing-md;
+      padding: $carbon--spacing-03 $carbon--spacing-05;
     }
     @include max-breakpoint(bp--sm--major) {
       height: rem(40px);
       width: calc(100% - 32px);
-      margin: 0 $spacing-md;
-      padding: $spacing-sm 0;
+      margin: 0 $carbon--spacing-05;
+      padding: $carbon--spacing-04 0;
       line-height: rem(16px);
       color: $text-02;
       border-bottom: 1px solid $ui-03;

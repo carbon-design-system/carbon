@@ -140,11 +140,11 @@
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item[role='menuitem']:active {
-    background-color: $ibm-colors__gray-80;
+    background-color: $ibm-color__gray-80;
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:focus {
-    border-color: $ibm-colors__blue-60;
+    border-color: $ibm-color__blue-60;
     outline: none;
   }
 
@@ -157,7 +157,7 @@
   }
 
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
-    background-color: $ibm-colors__gray-80;
+    background-color: $ibm-color__gray-80;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
     z-index: #{z('header') + 1};
@@ -179,7 +179,7 @@
     width: mini-units(25);
     flex-direction: column;
     transform: translateY(100%);
-    background-color: $ibm-colors__gray-80;
+    background-color: $ibm-color__gray-80;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     z-index: z('header');
   }
@@ -194,7 +194,7 @@
   }
 
   .#{$prefix}--header__menu-arrow {
-    fill: $ibm-colors__gray-10;
+    fill: $ibm-color__gray-10;
     margin-left: mini-units(1);
   }
 
@@ -232,7 +232,7 @@
     width: auto;
     height: 3rem;
     clip: auto;
-    border: 4px solid $ibm-colors__blue-60;
+    border: 4px solid $ibm-color__blue-60;
     z-index: 9999;
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
