@@ -7,7 +7,7 @@
 
 <div class="{{@root.prefix}}--form-item">
   <div
-    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}">
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}">
     <label for="select-id" class="{{@root.prefix}}--label">Select label</label>
     {{#unless inline}}
     {{#if helperText}}
@@ -19,8 +19,7 @@
     <div class="{{@root.prefix}}--select-input--inline__wrapper">
       {{/if}}
       <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
-        <select id="select-id"
-          class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}">
+        <select id="select-id" class="{{@root.prefix}}--select-input">
           {{#each items}}
           {{#if items}}
           <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
@@ -53,8 +52,7 @@
       {{/if}}
     </div>
     {{else}}
-    <select {{#if invalid}}data-invalid{{/if}} id="select-id"
-      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}">
+    <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
@@ -94,7 +92,7 @@
 
 <div class="{{@root.prefix}}--form-item">
   <div
-    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}} {{@root.prefix}}--select--disabled">
+    class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}} {{@root.prefix}}--select--disabled">
     <label for="select-id-disabled" class="{{@root.prefix}}--label">Select label</label>
     {{#unless inline}}
     {{#if helperText}}
@@ -106,8 +104,7 @@
     <div class="{{@root.prefix}}--select-input--inline__wrapper">
       {{/if}}
       <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
-        <select id="select-id-disabled"
-          class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}" disabled>
+        <select id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
           {{#each items}}
           {{#if items}}
           <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
@@ -127,8 +124,7 @@
     </div>
     {{/if}}
     {{else}}
-    <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled"
-      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}}" disabled>
+    <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
