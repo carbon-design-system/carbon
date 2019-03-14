@@ -43,8 +43,8 @@
 }
 
 .flatpickr-calendar.animate.open {
-  -webkit-animation: fpFadeInDown 300ms cubic-bezier(0.23, 1, 0.32, 1);
-  animation: fpFadeInDown 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-animation: fpFadeInDown $transition--fast-02 motion(entrance, productive);
+  animation: fpFadeInDown $transition--fast-02 motion(entrance, productive);
 }
 
 .flatpickr-calendar.inline {

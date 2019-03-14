@@ -58,15 +58,6 @@
   & .tabs .bx--tabs__nav {
     z-index: 6000;
   }
-
-  & .interior-left-nav .bx--interior-left-nav {
-    top: 8.5rem;
-    max-height: 80vh;
-  }
-
-  & .interior-left-nav .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
-    margin-bottom: 0;
-  }
 }
 
 .component-example__live {
@@ -82,15 +73,6 @@
 
   .bx--tooltip__trigger:hover {
     color: inherit;
-  }
-
-  & > .interior-left-nav .bx--interior-left-nav {
-    position: initial;
-    min-height: rem(400px);
-  }
-
-  & > .interior-left-nav .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
-    margin-bottom: 0;
   }
 
   & .text-input .bx--text-input {

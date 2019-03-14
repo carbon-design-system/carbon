@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { InteriorLeftNav, InteriorLeftNavItem } from 'carbon-addons-cloud';
+import { SideNav as UIShellSideNav, SideNavItems, SideNavLink } from 'carbon-components-react/es/components/UIShell';
 
 /**
  * The side nav.
@@ -36,23 +36,26 @@ class SideNav extends Component {
 
   render() {
     const { items, activeItemId, className } = this.props;
-    const activeItem = items && items.find(item => item.id === activeItemId);
-    const { activeName } = activeItem || {};
     return (
-      <InteriorLeftNav className={className} activeHref={activeName ? `/demo/${activeName}` : ''}>
-        {items
-          .filter(item => !item.isHidden)
-          .map(item => {
-            const { id, name, label } = item;
-            return (
-              <InteriorLeftNavItem key={id} href={`/demo/${name}`}>
-                <a href={`/demo/${name}`} data-nav-id={id} onClick={this.handleItemClick}>
+      <UIShellSideNav className={className}>
+        <SideNavItems>
+          {items
+            .filter(item => !item.isHidden)
+            .map(item => {
+              const { id, name, label } = item;
+              return (
+                <SideNavLink
+                  key={id}
+                  data-nav-id={id}
+                  isActive={id === activeItemId}
+                  href={`/demo/${name}`}
+                  onClick={this.handleItemClick}>
                   {label}
-                </a>
-              </InteriorLeftNavItem>
-            );
-          })}
-      </InteriorLeftNav>
+                </SideNavLink>
+              );
+            })}
+        </SideNavItems>
+      </UIShellSideNav>
     );
   }
 }
