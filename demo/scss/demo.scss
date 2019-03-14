@@ -19,7 +19,6 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../js/components/ComponentExample/component-example.scss';
 @import '../js/components/ComponentExample/component-overrides.scss';
 @import '../js/components/PageHeader/page-header.scss';
-@import '../js/components/SideNavToggle/side-nav-toggle.scss';
 
 // Cycle through all the deprecation reasons, if any exist, that have been
 // accumulated through the @import process.
