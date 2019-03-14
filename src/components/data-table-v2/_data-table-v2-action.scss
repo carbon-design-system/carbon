@@ -600,11 +600,11 @@
       height: rem(32px);
     }
 
-    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-input {
+    .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input {
       height: rem(32px);
     }
 
-    .#{$prefix}--toolbar-search-container > .#{$prefix}--search > .#{$prefix}--search-close {
+    .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-close {
       height: rem(32px);
       width: rem(32px);
     }
@@ -631,8 +631,8 @@
     }
 
     .#{$prefix}--toolbar-search-container-active {
-      width: 100%;
-      transition: width 175ms $carbon--standard-easing;
+      flex: auto;
+      transition: flex 175ms $carbon--standard-easing;
 
       & .#{$prefix}--search .#{$prefix}--search-input {
         visibility: visible;
