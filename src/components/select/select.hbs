@@ -19,8 +19,7 @@
     <div class="{{@root.prefix}}--select-input--inline__wrapper">
       {{/if}}
       <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
-        <select id="select-id"
-          class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select-input--invalid{{/if}}">
+        <select id="select-id" class="{{@root.prefix}}--select-input">
           {{#each items}}
           {{#if items}}
           <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
@@ -53,8 +52,7 @@
       {{/if}}
     </div>
     {{else}}
-    <select {{#if invalid}}data-invalid{{/if}} id="select-id"
-      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select-input--invalid{{/if}}">
+    <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
@@ -106,8 +104,7 @@
     <div class="{{@root.prefix}}--select-input--inline__wrapper">
       {{/if}}
       <div class="{{@root.prefix}}--select-input__wrapper" {{#if invalid}}data-invalid{{/if}}>
-        <select id="select-id-disabled"
-          class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select-input--invalid{{/if}}" disabled>
+        <select id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
           {{#each items}}
           {{#if items}}
           <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
@@ -127,8 +124,7 @@
     </div>
     {{/if}}
     {{else}}
-    <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled"
-      class="{{@root.prefix}}--select-input{{#if invalid}} {{@root.prefix}}--select-input--invalid{{/if}}" disabled>
+    <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
       {{#each items}}
       {{#if items}}
       <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">

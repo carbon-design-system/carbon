@@ -265,12 +265,12 @@
     color: $disabled-02;
   }
 
-  .#{$prefix}--select-input--invalid {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
     padding-right: rem(58px); // 1rem + chevron width + invalid icon width
   }
 
-  .#{$prefix}--select-input--invalid,
-  .#{$prefix}--select-input--invalid:focus {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input:focus {
     @include focus-outline('invalid');
   }
 
@@ -297,12 +297,12 @@
   }
 
   .#{$prefix}--select__disabled-icon,
-  .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: rem(34px); // 1.5rem + chevron width
   }
 
-  .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
     fill: $support-01;
   }
 
