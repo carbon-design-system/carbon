@@ -101,11 +101,8 @@
     border-color: $ibm-color__gray-30;
   }
 
-  .#{$prefix}--btn__content {
-    flex: 1;
-  }
-
   .#{$prefix}--btn__icon {
+    flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
     margin-left: $spacing-md;
