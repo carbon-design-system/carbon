@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { componentsX } from '../../internal/FeatureFlags';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
 
@@ -51,9 +53,14 @@ const TextInput = React.forwardRef(
     const errorId = id + '-error-msg';
     const textInputClasses = classNames(`${prefix}--text-input`, className, {
       [`${prefix}--text-input--light`]: light,
+      [`${prefix}--text-input--invalid`]: invalid,
     });
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: other.disabled,
+    });
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: other.disabled,
     });
 
     const label = labelText ? (
@@ -82,14 +89,29 @@ const TextInput = React.forwardRef(
     );
 
     const helper = helperText ? (
-      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+      <div className={helperTextClasses}>{helperText}</div>
     ) : null;
 
+    const textInputWrapperClasses = classNames(`${prefix}--form-item`, {
+      [`${prefix}--text-input-wrapper`]: componentsX,
+    });
+
     return (
-      <div className={`${prefix}--form-item`}>
+      <div className={textInputWrapperClasses}>
         {label}
         {helper}
-        {input}
+        {componentsX ? (
+          <div className={`${prefix}--text-input__field-wrapper`}>
+            {invalid && (
+              <WarningFilled16
+                className={`${prefix}--text-input__invalid-icon`}
+              />
+            )}
+            {input}
+          </div>
+        ) : (
+          input
+        )}
         {error}
       </div>
     );
