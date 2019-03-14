@@ -353,7 +353,7 @@
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
-    height: carbon--mini-units(3.5);
+    height: $carbon--spacing-08;
     padding: 0 56px 0 $carbon--spacing-05;
   }
 
@@ -435,8 +435,8 @@
     background-color: $ui-01;
     outline: none;
     padding: 0;
-    height: carbon--mini-units(3.5);
-    width: carbon--mini-units(3.5);
+    height: $carbon--spacing-08;
+    width: $carbon--spacing-08;
     overflow: visible;
 
     &:focus {

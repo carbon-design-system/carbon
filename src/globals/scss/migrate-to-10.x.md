@@ -146,7 +146,7 @@ No change
 
 ## `_spacing.scss`
 
-Spacing scale no longer uses t-shirt sizing, instead uses a scale approach.
+Spacing scale no longer uses t-shirt sizing, instead uses a scale approach (ref: https://github.com/IBM/carbon-elements/blob/v0.0.1-beta.1/docs/migration/10.x-layout.md#migrating).
 
 | v9          | v10 (spacing scale step) |
 | ----------- | ------------------------ |
@@ -158,8 +158,8 @@ Spacing scale no longer uses t-shirt sizing, instead uses a scale approach.
 | spacing-md  | 5                        |
 | spacing-lg  | 6                        |
 | spacing-xl  | 7                        |
-| spacing-2xl | N/A                      |
-| spacing-3xl | 8                        |
+| spacing-2xl | 8                        |
+| spacing-3xl | 9                        |
 | layout-2xs  | 5                        |
 | layout-xs   | 6                        |
 | layout-sm   | 7                        |

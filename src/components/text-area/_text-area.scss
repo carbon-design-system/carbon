@@ -146,7 +146,7 @@
   }
 
   .#{$prefix}--text-area--invalid {
-    padding-right: carbon--mini-units(3.5);
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-area__wrapper {
