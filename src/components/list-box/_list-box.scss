@@ -434,7 +434,7 @@ $list-box-menu-width: rem(300px);
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
-    @include type-style('label-01');
+    @include type-style('body-short-01');
 
     color: $text-01;
     user-select: none;
