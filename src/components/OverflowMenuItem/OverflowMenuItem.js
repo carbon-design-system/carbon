@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
-import { breakingChangesX } from '../../internal/FeatureFlags';
+import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import { keys } from '../../tools/key';
 
 const { prefix } = settings;
@@ -166,6 +166,16 @@ export default class OverflowMenuItem extends React.Component {
         ? { 'data-floating-menu-primary-focus': true }
         : {};
     const TagToUse = href ? 'a' : 'button';
+    const OverflowMenuItemContent = (() => {
+      if (!componentsX || (componentsX && typeof itemText !== 'string')) {
+        return itemText;
+      }
+      return (
+        <div className={`${prefix}--overflow-menu-options__option-content`}>
+          {itemText}
+        </div>
+      );
+    })();
     return (
       <li className={overflowMenuItemClasses} role="menuitem">
         <TagToUse
@@ -183,7 +193,7 @@ export default class OverflowMenuItem extends React.Component {
           title={requireTitle ? itemText : null}
           tabIndex="-1"
           index={index}>
-          {itemText}
+          {OverflowMenuItemContent}
         </TagToUse>
       </li>
     );

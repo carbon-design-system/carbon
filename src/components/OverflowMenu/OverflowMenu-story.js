@@ -6,15 +6,18 @@
  */
 
 import React from 'react';
+import { settings } from 'carbon-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import Add16 from '@carbon/icons-react/lib/add/16';
 import { iconAdd } from 'carbon-icons';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Icon from '../Icon';
+import { componentsX } from '../../internal/FeatureFlags';
 
+const { prefix } = settings;
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
@@ -48,60 +51,80 @@ const props = {
   }),
 };
 
+const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
+  <>
+    <OverflowMenu {...overflowMenuProps}>
+      <OverflowMenuItem
+        {...overflowMenuItemProps}
+        itemText="Option 1"
+        primaryFocus
+      />
+      <OverflowMenuItem
+        {...overflowMenuItemProps}
+        itemText="Option 2 is an example of a really long string and how we recommend handling this"
+        requireTitle
+      />
+      <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
+      <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
+      <OverflowMenuItem
+        {...overflowMenuItemProps}
+        itemText={
+          <div
+            style={{
+              display: 'flex',
+              ...(componentsX
+                ? {}
+                : {
+                    justifyContent: 'space-between',
+                  }),
+            }}>
+            {componentsX ? (
+              <>
+                <div
+                  className={`${prefix}--overflow-menu-options__option-content`}>
+                  Add
+                </div>
+                <Add16 />
+              </>
+            ) : (
+              <>
+                Add <Icon icon={iconAdd} style={{ height: '12px' }} />
+              </>
+            )}
+          </div>
+        }
+      />
+      <OverflowMenuItem
+        {...overflowMenuItemProps}
+        itemText="Danger option"
+        hasDivider
+        isDelete
+      />
+    </OverflowMenu>
+    <OverflowMenu {...overflowMenuProps}>
+      <OverflowMenuItem
+        {...overflowMenuItemProps}
+        itemText="Option 1"
+        primaryFocus
+      />
+      <OverflowMenuItem
+        {...overflowMenuItemProps}
+        itemText="Option 2 is an example of a really long string and how we recommend handling this"
+      />
+    </OverflowMenu>
+  </>
+);
+
 storiesOf('OverflowMenu', module)
   .addDecorator(withKnobs)
   .add(
     'basic',
-    () => {
-      const overflowMenuItemProps = props.menuItem();
-      return (
-        <>
-          <OverflowMenu {...props.menu()}>
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText="Option 1"
-              primaryFocus
-            />
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText="Option 2 is an example of a really long string and how we recommend handling this"
-              requireTitle
-            />
-            <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
-            <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText={
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                  }}>
-                  Add <Icon icon={iconAdd} style={{ height: '12px' }} />
-                </div>
-              }
-            />
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText="Danger option"
-              hasDivider
-              isDelete
-            />
-          </OverflowMenu>
-          <OverflowMenu {...props.menu()}>
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText="Option 1"
-              primaryFocus
-            />
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText="Option 2 is an example of a really long string and how we recommend handling this"
-            />
-          </OverflowMenu>
-        </>
-      );
-    },
+    () => (
+      <OverflowMenuExample
+        overflowMenuProps={props.menu()}
+        overflowMenuItemProps={props.menuItem()}
+      />
+    ),
     {
       info: {
         text: `
@@ -113,46 +136,15 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'with links',
-    () => {
-      const overflowMenuItemProps = {
-        ...props.menuItem(),
-        href: 'https://www.ibm.com',
-      };
-      return (
-        <OverflowMenu {...props.menu()}>
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Option 1"
-            primaryFocus
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Option 2 is an example of a really long string and how we recommend handling this"
-            requireTitle
-          />
-          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
-          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText={
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}>
-                Add <Icon icon={iconAdd} style={{ height: '12px' }} />
-              </div>
-            }
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Danger option"
-            hasDivider
-            isDelete
-          />
-        </OverflowMenu>
-      );
-    },
+    () => (
+      <OverflowMenuExample
+        overflowMenuProps={props.menu()}
+        overflowMenuItemProps={{
+          ...props.menuItem(),
+          href: 'https://www.ibm.com',
+        }}
+      />
+    ),
     {
       info: {
         text: `
@@ -166,26 +158,18 @@ storiesOf('OverflowMenu', module)
   )
   .add(
     'custom trigger',
-    () => {
-      const overflowMenuItemProps = props.menuItem();
-      return (
-        <OverflowMenu
-          {...props.menu()}
-          style={{ width: 'auto' }}
-          renderIcon={iconProps => <div {...iconProps}>Custom trigger</div>}>
-          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 1" />
-          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 2" />
-          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
-          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Danger option"
-            hasDivider
-            isDelete
-          />
-        </OverflowMenu>
-      );
-    },
+    () => (
+      <OverflowMenuExample
+        overflowMenuProps={{
+          ...props.menu(),
+          style: { width: 'auto' },
+          renderIcon: () => (
+            <div style={{ padding: '0 1rem' }}>Custom trigger</div>
+          ),
+        }}
+        overflowMenuItemProps={props.menuItem()}
+      />
+    ),
     {
       info: {
         text: `
