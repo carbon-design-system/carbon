@@ -178,16 +178,17 @@
 
 @mixin button--x {
   // <button> elements cannot be used as flex containers
-  button.#{$prefix}--btn {
+  .#{$prefix}--btn {
     display: inline-block;
 
+    &--disabled > .#{$prefix}--btn__icon,
     &:disabled > .#{$prefix}--btn__icon {
       fill: $ui-04;
     }
   }
 
   // Reset intrisic padding in Firefox (see #731)
-  button.#{$prefix}--btn::-moz-focus-inner {
+  .#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;
   }
@@ -219,7 +220,10 @@
 
     &:disabled,
     &:hover:disabled,
-    &:focus:disabled {
+    &:focus:disabled,
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
       background: transparent;
       color: $disabled;
 
@@ -233,7 +237,7 @@
     }
   }
 
-  button.#{$prefix}--btn--ghost {
+  .#{$prefix}--btn--ghost {
     @include button-theme--x(transparent, transparent, $interactive-01, $hover-ui, $interactive-01, $active-ui);
     display: inline-flex;
     align-items: center;
@@ -242,10 +246,10 @@
 
     &:hover,
     &:active {
-      color: $ibm-colors__blue-70;
+      color: $ibm-color__blue-70;
 
       .#{$prefix}--btn__icon {
-        fill: $ibm-colors__blue-70;
+        fill: $ibm-color__blue-70;
       }
     }
 
@@ -261,7 +265,10 @@
 
     &:disabled,
     &:hover:disabled,
-    &:focus:disabled {
+    &:focus:disabled,
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
       color: $disabled;
       background: transparent;
       border-color: transparent;
@@ -292,7 +299,7 @@
 
   .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
   .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
-    margin-left: $spacing-md;
+    margin-left: $carbon--spacing-05;
   }
 
   // Skeleton State

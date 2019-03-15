@@ -111,14 +111,14 @@
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $spacing-md;
+    padding-left: $carbon--spacing-05;
     color: $text-01;
-    margin-top: $spacing-xs;
-    margin-bottom: $spacing-xs;
-    margin-right: $spacing-md;
+    margin-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-03;
+    margin-right: $carbon--spacing-05;
 
     &:first-child {
-      margin-top: $spacing-md;
+      margin-top: $carbon--spacing-05;
     }
 
     @include breakpoint(max) {
@@ -152,12 +152,12 @@
     width: 1rem;
     min-height: 1rem;
     min-width: 1rem;
-    margin-right: $spacing-md;
-    margin-top: $spacing-md;
+    margin-right: $carbon--spacing-05;
+    margin-top: $carbon--spacing-05;
   }
 
   .#{$prefix}--toast-notification__details {
-    margin-right: $spacing-md;
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--toast-notification__close-button {
@@ -196,14 +196,14 @@
 
     color: $text-01;
     margin-top: 0;
-    margin-bottom: $spacing-lg;
+    margin-bottom: $carbon--spacing-06;
   }
 
   .#{$prefix}--toast-notification__caption {
     @include type-style('body-short-01');
 
     color: $text-01;
-    margin-bottom: $spacing-md;
+    margin-bottom: $carbon--spacing-05;
   }
 }
 
