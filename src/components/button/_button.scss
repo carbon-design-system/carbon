@@ -240,6 +240,10 @@
     min-width: auto;
     padding: rem(14px) rem(16px);
 
+    .#{$prefix}--btn__icon {
+      margin-left: $carbon--spacing-03;
+    }
+
     &:hover,
     &:active {
       color: $ibm-color__blue-70;
