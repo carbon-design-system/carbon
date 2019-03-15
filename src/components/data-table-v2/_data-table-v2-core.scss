@@ -10,7 +10,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@include exports('data-table-v2-core') {
+@mixin data-table-v2-core {
   .#{$prefix}--data-table-v2-container {
     width: 100%;
     min-width: rem(500px);
@@ -168,5 +168,290 @@
   .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
     background-color: rgba($brand-02, 0.1);
+  }
+}
+
+@mixin data-table-v2-core--x {
+  //================================================
+  //MAIN CONTAINER
+  //================================================
+  .#{$prefix}--data-table-v2-container {
+    min-width: rem(600px);
+    padding-top: $spacing-3xs; // allow space for focus styles
+
+    .#{$prefix}--search-input {
+      background-color: transparent;
+    }
+  }
+
+  //================================================
+  //TABLE HEADER
+  //================================================
+  .#{$prefix}--data-table-v2-header {
+    background: $ui-01;
+    height: rem(88px);
+    color: $text-01;
+    @include font-size('20');
+    font-weight: 400;
+    padding: 22px 0 0 $spacing-md;
+    position: relative;
+    top: rem(21px);
+  }
+
+  .#{$prefix}--data-table-v2-optional {
+    position: relative;
+    left: rem(17px);
+    top: rem(-20px);
+    @include font-size('14');
+    color: $text-02;
+  }
+
+  //================================================
+  //DATA TABLE - DEFAULT STYLES
+  //================================================
+  .#{$prefix}--data-table-v2 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+
+    [class*='col'] {
+      outline: none;
+    }
+
+    thead {
+      @include type-style('body-short-01');
+      background-color: $ui-03;
+      font-weight: 700;
+    }
+
+    th:hover {
+      background: $data-table-column-hover;
+    }
+
+    th.#{$prefix}--table-column-icon:hover,
+    th.#{$prefix}--table-column-menu:hover,
+    th.#{$prefix}--table-expand-v2:hover {
+      background: $ui-03;
+    }
+
+    tbody {
+      @include type-style('body-short-01');
+      background-color: $ui-01;
+      width: 100%;
+    }
+
+    tbody tr,
+    thead tr {
+      border: none;
+    }
+
+    tbody tr td {
+      background: $ui-01;
+      border-bottom: 1px solid $ui-03;
+      border-top: 1px solid $ui-01;
+    }
+
+    tbody tr:hover:not([disabled]) {
+      background: $hover-field;
+
+      & td {
+        color: $text-01;
+        background: $hover-field;
+        border-bottom: 1px solid $hover-field;
+        border-top: 1px solid $hover-field;
+      }
+    }
+
+    tbody tr:focus {
+      outline: 0;
+    }
+
+    tr {
+      height: rem(48px);
+      width: 100%;
+
+      .#{$prefix}--overflow-menu {
+        opacity: 1;
+      }
+    }
+
+    th,
+    td {
+      @include typescale('zeta');
+      padding-left: $spacing-sm;
+      padding-right: $spacing-sm;
+      vertical-align: top;
+      text-align: left;
+      color: $text-02;
+      border-top: 1px solid $ui-01;
+      border-bottom: 1px solid $ui-01;
+
+      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+        padding-left: $spacing-lg;
+      }
+    }
+
+    th {
+      color: $text-01;
+      border-top: 1px solid transparent;
+    }
+
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
+      padding: 0;
+    }
+
+    td:last-of-type:not(.#{$prefix}--table-column-menu) {
+      padding-right: $spacing-lg;
+    }
+
+    .#{$prefix}--table-header-label {
+      display: block;
+      padding: rem(14px) 0;
+    }
+
+    .#{$prefix}--table-cell-content {
+      display: block;
+      padding: rem(14px) 0;
+    }
+
+    //width for checkbox columns
+    .#{$prefix}--table-column-checkbox {
+      width: rem(50px);
+      min-width: rem(50px);
+      padding: rem(10px) $spacing-md 0 $spacing-md;
+    }
+
+    //width for overflow menu columns
+    .#{$prefix}--table-column-menu {
+      width: rem(52px);
+      min-width: rem(52px);
+      padding-top: rem(8px);
+      padding-right: rem(8px);
+    }
+
+    .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+      background: $ui-03;
+    }
+
+    //width for additional icon columns
+    .#{$prefix}--table-column-icon {
+      width: rem(32px);
+      min-width: rem(32px);
+      justify-content: center;
+      padding: 0;
+      padding-top: rem(8px);
+    }
+
+    .#{$prefix}--table-column-icon button {
+      width: rem(32px);
+      height: rem(32px);
+      vertical-align: middle;
+      background: transparent;
+      border: none;
+      outline: none;
+
+      &:focus:not([disabled]),
+      &:hover:not([disabled]) {
+        background: $ui-03;
+      }
+    }
+
+    .#{$prefix}--table-column-icon + .#{$prefix}--table-column-menu {
+      width: rem(40px);
+      min-width: rem(40px);
+      padding-left: 0;
+    }
+
+    // Overrides
+    .#{$prefix}--checkbox-label {
+      padding-left: rem(28px);
+    }
+
+    td .#{$prefix}--overflow-menu {
+      & svg {
+        opacity: 0;
+      }
+
+      &:hover svg,
+      &:focus svg {
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: 0;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    tr:hover .#{$prefix}--overflow-menu svg {
+      opacity: 1;
+    }
+  }
+
+  //================================================
+  //NO SORT
+  //================================================
+  .#{$prefix}--data-table-v2--no-sort {
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
+      padding-left: $spacing-sm;
+      padding-right: $spacing-sm;
+
+      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+        padding-left: $spacing-lg;
+      }
+    }
+
+    .#{$prefix}--table-sort-v2 {
+      padding: 0;
+    }
+  }
+
+  //================================================
+  //NUMERICAL COLUMN
+  //================================================
+  .#{$prefix}--data-table-v2--numerical-cell {
+    text-align: right;
+  }
+
+  //================================================
+  //DISABLED
+  //================================================
+  tbody tr[disabled] {
+    cursor: no-drop;
+
+    & td,
+    & td:hover {
+      color: $disabled;
+      background: $disabled-background-color;
+      cursor: no-drop;
+    }
+
+    & .#{$prefix}--table-expand-v2 button svg,
+    & .#{$prefix}--table-column-menu div svg {
+      fill: $disabled;
+      cursor: no-drop;
+    }
+
+    & .#{$prefix}--table-column-menu div,
+    & .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
+      background: $disabled-background-color;
+      cursor: no-drop;
+    }
+
+    & .#{$prefix}--table-column-icon svg {
+      fill: $disabled;
+    }
+  }
+
+  tbody tr[disabled] .#{$prefix}--overflow-menu {
+    display: none;
+  }
+}
+
+@include exports('data-table-v2-core') {
+  @if feature-flag-enabled('components-x') {
+    @include data-table-v2-core--x;
+  } @else {
+    @include data-table-v2-core;
   }
 }
