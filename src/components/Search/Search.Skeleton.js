@@ -29,7 +29,7 @@ export default class SearchSkeleton extends Component {
 
     const searchClasses = classNames({
       [`${prefix}--skeleton`]: true,
-      [`${prefix}--search--lg`]: !small,
+      [`${prefix}--search--xl`]: !small,
       [`${prefix}--search--sm`]: small,
     });
 

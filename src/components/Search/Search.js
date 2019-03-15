@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { iconSearch, iconCloseSolid } from 'carbon-icons';
 import Search16 from '@carbon/icons-react/lib/search/16';
 import Close16 from '@carbon/icons-react/lib/close/16';
+import Close20 from '@carbon/icons-react/lib/close/20';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
 import { componentsX } from '../../internal/FeatureFlags';
@@ -128,7 +129,7 @@ export default class Search extends Component {
 
     const searchClasses = classNames({
       [`${prefix}--search`]: true,
-      [`${prefix}--search--lg`]: !small,
+      [`${prefix}--search--${componentsX ? 'xl' : 'lg'}`]: !small,
       [`${prefix}--search--sm`]: small,
       [`${prefix}--search--light`]: light,
       [className]: className,
@@ -138,6 +139,8 @@ export default class Search extends Component {
       [`${prefix}--search-close`]: true,
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
+
+    const CloseIconX = !small ? Close20 : Close16;
 
     return (
       <div
@@ -177,7 +180,7 @@ export default class Search extends Component {
           type="button"
           aria-label={closeButtonLabelText}>
           {componentsX ? (
-            <Close16 aria-label={closeButtonLabelText} role="img" />
+            <CloseIconX aria-label={closeButtonLabelText} role="img" />
           ) : (
             <Icon icon={iconCloseSolid} description={closeButtonLabelText} />
           )}

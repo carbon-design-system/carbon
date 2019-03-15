@@ -22,7 +22,7 @@ const props = () => ({
   small: boolean('Small UI (small)', false),
   light: boolean('Light variant (light)', false),
   name: text('Form item name (name)', ''),
-  value: text('Value (value)', 'Default value knob'),
+  value: text('Value (value)', ''),
   labelText: text('Label text (labelText)', 'Search'),
   closeButtonLabelText: text(
     'The label text for the close button (closeButtonLabelText)',

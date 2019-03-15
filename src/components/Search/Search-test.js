@@ -197,7 +197,7 @@ describe('SearchSkeleton', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--search--lg')).toEqual(true);
+      expect(wrapper.hasClass('bx--search--xl')).toEqual(true);
     });
   });
 });
