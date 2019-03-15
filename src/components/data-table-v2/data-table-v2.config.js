@@ -8,12 +8,13 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
-const iconAddSolid = `
-  <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
-  </svg>
-`;
+// const iconAddSolid = `
+//   <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+//     <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+//   </svg>
+// `;
 
 const iconDownload = `
   <svg class="${prefix}--toolbar-action__icon"
@@ -46,40 +47,120 @@ const iconSettings = `
 `;
 /* eslint-enable max-len */
 
-const menuItems = [
-  {
-    label: 'Stop app',
-    primaryFocus: true,
-  },
-  {
-    label: 'Restart app',
-  },
-  {
-    label: 'Rename app',
-  },
-  {
-    label: 'Edit routes and access, use title when',
-  },
-  {
-    label: 'Delete app',
-    danger: true,
-  },
-];
+const menuItems = componentsX
+  ? [
+      {
+        label: `
+      <svg class="${prefix}--overflow-menu-options-icon"
+        style="vertical-align: middle; margin-right: 8px;"
+        fill-rule="evenodd"
+        height="16"
+        name="edit"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        aria-label="Edit"
+        alt="Edit">
+        <title>Edit</title>
+        <path d="M7.926 3.38L1.002
+          9.72V12h2.304l6.926-6.316L7.926 3.38zm.738-.675l2.308
+          2.304 1.451-1.324-2.308-2.309-1.451 1.329zM.002 9.28L9.439.639a1
+          1 0 0 1 1.383.03l2.309 2.309a1 1 0 0 1-.034 1.446L3.694
+          13H.002V9.28zM0 16.013v-1h16v1z">
+        </path>
+      </svg> <span style="vertical-align: middle;">Edit</span>
+    `,
+        primaryFocus: true,
+      },
+      {
+        label: `
+      <svg class="${prefix}--overflow-menu-options-icon"
+        style="vertical-align: middle; margin-right: 8px;"
+        fill-rule="evenodd"
+        height="16"
+        name="download"
+        role="img"
+        viewBox="0 0 14 16"
+        width="14"
+        aria-label="Download" alt="Download">
+        <title>Download</title>
+        <path d="M7.506 11.03l4.137-4.376.727.687-5.363 5.672-5.367-5.67.726-.687 4.14 4.374V0h1v11.03z"></path>
+        <path d="M13 15v-2h1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-2h1v2h12z"></path>
+      </svg style="vertical-align: middle;"> <span>Download</span>
+    `,
+      },
+      {
+        label: `
+    <svg class="${prefix}--overflow-menu-options-icon"
+      style="vertical-align: middle; margin-right: 8px;"
+      width="16px"
+      height="16px"
+      viewBox="0 0 16 16"
+      role="img"
+      aria-label="Save"
+      alt="Save">
+      <title>Save</title>
+      <path d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5
+    C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1
+    h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"/>
+      <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
+    </svg> <span style="vertical-align: middle;">Save</span>
+    `,
+      },
+      {
+        label: `
+      <svg class="${prefix}--overflow-menu-options-icon"
+        style="vertical-align: middle; margin-right: 8px;"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
+        role="img"
+        aria-label="Delete"
+        alt="Delete">
+        <title>Trash Can</title>
+        <rect x="6" y="6" width="1" height="6"/>
+        <rect x="9" y="6" width="1" height="6"/>
+        <path d="M2,3v1h1v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V4h1V3H2z M4,14V4h8v10H4z"/>
+        <rect x="6" y="1" width="4" height="1"/>
+        <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
+      </svg> <span style="vertical-align: middle;">Delete</span>
+    `,
+      },
+    ]
+  : [
+      {
+        label: 'Stop app',
+        primaryFocus: true,
+      },
+      {
+        label: 'Restart app',
+      },
+      {
+        label: 'Rename app',
+      },
+      {
+        label: 'Edit routes and access, use title when',
+      },
+      {
+        label: 'Delete app',
+        danger: true,
+      },
+    ];
 
-const batchActions = [
-  {
-    label: 'Ghost',
-    icon: iconAddSolid,
-  },
-  {
-    label: 'Ghost',
-    icon: iconAddSolid,
-  },
-  {
-    label: 'Ghost',
-    icon: iconAddSolid,
-  },
-];
+// const batchActions = [
+//   {
+//     label: 'Ghost',
+//     icon: iconAddSolid,
+//   },
+//   {
+//     label: 'Ghost',
+//     icon: iconAddSolid,
+//   },
+//   {
+//     label: 'Ghost',
+//     icon: iconAddSolid,
+//   },
+// ];
 
 const toolbarActions = [
   {
@@ -93,44 +174,70 @@ const toolbarActions = [
   },
 ];
 
-const columns = [
+const toolbarActionsX = [
   {
-    name: 'select',
-    title: 'Label name',
-    checkbox: true,
-    checkboxId: `${prefix}--checkbox-20`,
-    checkboxName: 'checkbox-20',
-    checkboxValue: 'green',
+    icon: iconSettings,
+    overflowItems: [
+      {
+        label: 'Option 1',
+        primaryFocus: true,
+      },
+      {
+        label: 'Option 2',
+      },
+      {
+        label: 'Option 3',
+      },
+    ],
   },
+];
+
+const toolbarActionsXDisabled = [
+  {
+    icon: iconSettings,
+    disabled: true,
+  },
+];
+
+const columns = [
+  // {
+  //   name: 'select',
+  //   title: 'Label name',
+  //   checkbox: true,
+  //   checkboxId: `${prefix}--checkbox-20`,
+  //   checkboxName: 'checkbox-20',
+  //   checkboxValue: 'green',
+  // },
   {
     name: 'name',
     title: 'Name',
-    sortable: true,
+    // sortable: true,
   },
   {
     name: 'protocol',
     title: 'Protocol',
-    sortable: true,
+    // sortable: true,
   },
   {
     name: 'port',
     title: 'Port',
-    sortable: true,
+    // sortable: true,
+    numerical: true,
   },
   {
     name: 'rule',
     title: 'Rule',
-    sortable: true,
+    // sortable: true,
   },
   {
     name: 'attachedGroups',
     title: 'Attached Groups',
-    sortable: true,
+    // sortable: true,
   },
   {
     name: 'status',
     title: 'Status',
-    sortable: true,
+    // sortable: true,
   },
   {
     name: 'menu',
@@ -138,68 +245,68 @@ const columns = [
   },
 ];
 
-const columnsExpandable = [
-  {
-    name: 'section',
-    section: true,
-  },
-  {
-    name: 'name',
-    title: 'Name',
-    sortable: true,
-  },
-  {
-    name: 'protocol',
-    title: 'Protocol',
-    sortable: true,
-  },
-  {
-    name: 'port',
-    title: 'Ports',
-    sortable: true,
-  },
-  {
-    name: 'rule',
-    title: 'Rule',
-    sortable: true,
-  },
-  {
-    name: 'attachedGroups',
-    title: 'Attached Groups',
-    sortable: true,
-  },
-  {
-    name: 'status',
-    title: 'Status',
-    sortable: true,
-  },
-];
+// const columnsExpandable = [
+//   {
+//     name: 'section',
+//     section: true,
+//   },
+//   {
+//     name: 'name',
+//     title: 'Name',
+//     sortable: true,
+//   },
+//   {
+//     name: 'protocol',
+//     title: 'Protocol',
+//     sortable: true,
+//   },
+//   {
+//     name: 'port',
+//     title: 'Ports',
+//     sortable: true,
+//   },
+//   {
+//     name: 'rule',
+//     title: 'Rule',
+//     sortable: true,
+//   },
+//   {
+//     name: 'attachedGroups',
+//     title: 'Attached Groups',
+//     sortable: true,
+//   },
+//   {
+//     name: 'status',
+//     title: 'Status',
+//     sortable: true,
+//   },
+// ];
 
-const columnsEditable = columns.slice(1, 7).map((column, i) => ({
-  ...column,
-  editable: true,
-  editing: i === 0,
-}));
+// const columnsEditable = columns.slice(1, 7).map((column, i) => ({
+//   ...column,
+//   editable: true,
+//   editing: i === 0,
+// }));
 
-const columnsSmall = columns.slice(1, -1).map(column => ({
-  ...column,
-  sortable: false,
-}));
+// const columnsSmall = columns.slice(1, -1).map(column => ({
+//   ...column,
+//   sortable: false,
+// }));
 
 const rows = [
   {
     id: 'row-id-13',
-    select: {
-      id: `${prefix}--checkbox-13`,
-      name: 'checkbox-13',
-      value: 'green',
-      label: 'Label name',
-    },
+    // select: {
+    //   id: `${prefix}--checkbox-13`,
+    //   name: 'checkbox-13',
+    //   value: 'green',
+    //   label: 'Label name',
+    // },
     name: 'Load Balancer 1',
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: "Maureen's VM Groups Testing a really long text here",
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -209,12 +316,13 @@ const rows = [
   },
   {
     id: 'row-id-14',
-    select: {
-      id: `${prefix}--checkbox-14`,
-      name: 'checkbox-14',
-      value: 'green',
-      label: 'Label name',
-    },
+    disabled: true,
+    // select: {
+    //   id: `${prefix}--checkbox-14`,
+    //   name: 'checkbox-14',
+    //   value: 'green',
+    //   label: 'Label name',
+    // },
     name: 'Load Balancer 5',
     protocol: 'HTTP',
     port: '80',
@@ -229,12 +337,12 @@ const rows = [
   },
   {
     id: 'row-id-15',
-    select: {
-      id: `${prefix}--checkbox-15`,
-      name: 'checkbox-15',
-      value: 'green',
-      label: 'Label name',
-    },
+    // select: {
+    //   id: `${prefix}--checkbox-15`,
+    //   name: 'checkbox-15',
+    //   value: 'green',
+    //   label: 'Label name',
+    // },
     name: 'Load Balancer 5',
     protocol: 'HTTP',
     port: '80',
@@ -249,12 +357,12 @@ const rows = [
   },
   {
     id: 'row-id-11',
-    select: {
-      id: `${prefix}--checkbox-11`,
-      name: 'checkbox-11',
-      value: 'green',
-      label: 'Label name',
-    },
+    // select: {
+    //   id: `${prefix}--checkbox-11`,
+    //   name: 'checkbox-11',
+    //   value: 'green',
+    //   label: 'Label name',
+    // },
     name: 'Load Balancer 5',
     protocol: 'HTTP',
     port: '80',
@@ -269,12 +377,12 @@ const rows = [
   },
   {
     id: 'row-id-12',
-    select: {
-      id: `${prefix}--checkbox-12`,
-      name: 'checkbox-12',
-      value: 'green',
-      label: 'Label name',
-    },
+    // select: {
+    //   id: `${prefix}--checkbox-12`,
+    //   name: 'checkbox-12',
+    //   value: 'green',
+    //   label: 'Label name',
+    // },
     name: 'Load Balancer 5',
     protocol: 'HTTP',
     port: '80',
@@ -289,84 +397,85 @@ const rows = [
   },
 ];
 
-const rowsExpandable = [
-  {
-    sectionContent: `
-      <h4>
-        <strong>Harry Potter</strong>
-      </h4>
-      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
-        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
-        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
-        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
-        as they tried to protect him, shortly before attacking Harry.</p>
-    `,
-    section: true,
-    name: 'Load Balancer 1',
-    protocol: 'HTTP',
-    port: '80',
-    rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
-    status: 'Active',
-  },
-  {
-    sectionContent: `
-      <h4>
-        <strong>Harry Potter</strong>
-      </h4>
-      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
-        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
-        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
-        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
-        as they tried to protect him, shortly before attacking Harry.</p>
-    `,
-    section: true,
-    name: 'Load Balancer 1',
-    protocol: 'HTTP',
-    port: '80',
-    rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
-    status: 'Active',
-  },
-];
+// const rowsExpandable = [
+//   {
+//     sectionContent: `
+//       <h4>
+//         <strong>Harry Potter</strong>
+//       </h4>
+//       <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
+//         Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
+//         attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
+//         him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
+//         as they tried to protect him, shortly before attacking Harry.</p>
+//     `,
+//     section: true,
+//     name: 'Load Balancer 1',
+//     protocol: 'HTTP',
+//     port: '80',
+//     rule: 'Round Robin',
+//     attachedGroups: "Maureen's VM Groups",
+//     status: 'Active',
+//   },
+//   {
+//     sectionContent: `
+//       <h4>
+//         <strong>Harry Potter</strong>
+//       </h4>
+//       <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
+//         Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
+//         attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
+//         him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
+//         as they tried to protect him, shortly before attacking Harry.</p>
+//     `,
+//     section: true,
+//     name: 'Load Balancer 1',
+//     protocol: 'HTTP',
+//     port: '80',
+//     rule: 'Round Robin',
+//     attachedGroups: "Maureen's VM Groups",
+//     status: 'Active',
+//   },
+// ];
 
-const rowsEditable = [
-  {
-    id: 'row-id-15',
-    name: 'Load Balancer 3',
-    protocol: 'HTTP',
-    port: '3000',
-    rule: 'Round Robin',
-    attachedGroups: 'Kevins VM Groups',
-    status: 'Disabled',
-  },
-  {
-    id: 'row-id-11',
-    name: 'Load Balancer 1',
-    protocol: 'HTTP',
-    port: '443',
-    rule: 'Round Robin',
-    attachedGroups: 'Maureens VM Groups',
-    status: 'Starting',
-  },
-  {
-    id: 'row-id-10',
-    name: 'Load Balancer 2',
-    protocol: 'HTTP',
-    port: '80',
-    rule: 'DNS delegation',
-    attachedGroups: 'Andrews VM Groups',
-    status: 'Active',
-  },
-].map((row, i) => ({
-  ...row,
-  editable: i === 0,
-}));
+// const rowsEditable = [
+//   {
+//     id: 'row-id-15',
+//     name: 'Load Balancer 3',
+//     protocol: 'HTTP',
+//     port: '3000',
+//     rule: 'Round Robin',
+//     attachedGroups: 'Kevins VM Groups',
+//     status: 'Disabled',
+//   },
+//   {
+//     id: 'row-id-11',
+//     name: 'Load Balancer 1',
+//     protocol: 'HTTP',
+//     port: '443',
+//     rule: 'Round Robin',
+//     attachedGroups: 'Maureens VM Groups',
+//     status: 'Starting',
+//   },
+//   {
+//     id: 'row-id-10',
+//     name: 'Load Balancer 2',
+//     protocol: 'HTTP',
+//     port: '80',
+//     rule: 'DNS delegation',
+//     attachedGroups: 'Andrews VM Groups',
+//     status: 'Active',
+//   },
+// ].map((row, i) => ({
+//   ...row,
+//   editable: i === 0,
+// }));
 
 module.exports = {
   label: 'Data Table V2',
   context: {
     prefix,
+    componentsX,
   },
   variants: [
     {
@@ -378,7 +487,10 @@ module.exports = {
       `,
       context: {
         title: 'Table title',
-        batchActions,
+        state: 'disabled',
+        optionalHelper: 'Optional Helper Text',
+        toolbarActionsXDisabled,
+        // batchActions,
         toolbarActions,
         columns,
         rows,
@@ -392,53 +504,58 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
+        noSort: true,
       },
     },
-    {
-      name: 'expandable',
-      label: 'Expandable',
-      context: {
-        title: 'Table title',
-        columns: columnsExpandable,
-        rows: rowsExpandable,
-        searchInputId: 'search__input-2',
-        searchLabelId: 'search-input-label-1',
-        searchLabel: 'Search',
-        clearSearchLabel: 'Clear search input',
-        hasToolbar: true,
-      },
-    },
-    {
-      name: 'editable',
-      label: 'Inline Edit',
-      context: {
-        title: 'Table title',
-        columns: columnsEditable,
-        rows: rowsEditable,
-        cancelLabel: 'Cancel',
-        saveLabel: 'Save',
-        sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
-      },
-    },
-    {
-      name: 'small',
-      label: 'Small',
-      context: {
-        small: true,
-        columns: columnsSmall,
-        rows,
-      },
-    },
+    // {
+    //   name: 'expandable',
+    //   label: 'Expandable',
+    //   context: {
+    //     title: 'Table title',
+    //     state: 'default',
+    //     toolbarActions,
+    //     toolbarActionsX,
+    //     columns: columnsExpandable,
+    //     rows: rowsExpandable,
+    //     searchInputId: 'search__input-2',
+    //     searchLabelId: 'search-input-label-1',
+    //     searchLabel: 'Search',
+    //     clearSearchLabel: 'Clear search input',
+    //     hasToolbar: true,
+    //   },
+    // },
+    // {
+    //   name: 'editable',
+    //   label: 'Inline Edit',
+    //   context: {
+    //     title: 'Table title',
+    //     columns: columnsEditable,
+    //     rows: rowsEditable,
+    //     cancelLabel: 'Cancel',
+    //     saveLabel: 'Save',
+    //     sortLabel: 'Sort rows by this header in descending order',
+    //     zebra: true,
+    //   },
+    // },
+    // {
+    //   name: 'small',
+    //   label: 'Small',
+    //   context: {
+    //     small: true,
+    //     columns: columnsSmall,
+    //     rows,
+    //   },
+    // },
     {
       name: 'with-pager',
       label: 'Pagination',
       context: {
         hasPager: true,
         title: 'Table title',
-        batchActions,
+        state: 'persistent-search',
+        toolbarActionsX,
+        // batchActions,
         toolbarActions,
         columns,
         rows,
@@ -452,8 +569,8 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
+        noSort: true,
       },
     },
   ],
