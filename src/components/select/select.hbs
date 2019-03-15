@@ -49,8 +49,13 @@
         Validation message here
       </div>
       {{/if}}
-      {{/if}}
     </div>
+    {{/if}}
+    {{#if inline}}
+    {{#if helperText}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
+    {{/if}}
+    {{/if}}
     {{else}}
     <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
       {{#each items}}
@@ -74,11 +79,6 @@
     <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
-    {{/if}}
-    {{#if inline}}
-    {{#if helperText}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
-    {{/if}}
     {{/if}}
     {{#unless inline}}
     {{#if invalid}}
