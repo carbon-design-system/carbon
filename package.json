@@ -87,7 +87,7 @@
     ],
     "*.{scss,css}": [
       "yarn format:staged",
-      "yarn lint:styles",
+      "stylelint --config ./packages/stylelint-config-elements",
       "git add"
     ],
     "*.md": [
