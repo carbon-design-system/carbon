@@ -147,7 +147,7 @@
   }
 
   input[type='number'] {
-    font-family: $font-family-mono;
+    font-family: carbon--font-family('mono');
   }
 
   input[data-invalid],
