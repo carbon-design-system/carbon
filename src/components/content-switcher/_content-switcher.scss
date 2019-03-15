@@ -122,6 +122,10 @@
     height: rem(32px);
   }
 
+  .#{$prefix}--content-switcher--disabled {
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--content-switcher-btn {
     @include reset;
     @include type-style('body-short-01');
@@ -145,7 +149,6 @@
 
     &:focus {
       box-shadow: inset 0 0 0 2px $focus;
-      color: $text-01;
       z-index: 3;
     }
 
@@ -162,6 +165,7 @@
 
     &:disabled {
       color: $ui-03;
+      pointer-events: none;
 
       &:hover {
         cursor: not-allowed;
@@ -191,9 +195,11 @@
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher-btn:hover::before {
+  .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher-btn:hover + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
 
