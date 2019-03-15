@@ -133,7 +133,7 @@
     background-color: $field-01;
     width: 100%;
     height: rem(40px);
-    padding: 0 $spacing-md; // TODO: REPLACE SPACING TOKEN
+    padding: 0 $carbon--spacing-05;
     color: $text-01;
     border: none;
     border-bottom: 1px solid $ui-04;

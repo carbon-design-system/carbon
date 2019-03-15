@@ -26,7 +26,7 @@
         bottom: 0;
         content: '';
         display: block;
-        height: $spacing-2xs;
+        height: $carbon--spacing-02;
         left: 50%;
         position: absolute;
         opacity: 0;
@@ -37,9 +37,9 @@
 
     .#{$prefix}--pagination-nav__page--active + &::after,
     &.#{$prefix}--pagination-nav__page--active::after {
-      left: calc(50% - #{$spacing-md/2});
+      left: calc(50% - #{$carbon--spacing-05/2});
       opacity: 1;
-      width: $spacing-md;
+      width: $carbon--spacing-05;
     }
   }
 }
@@ -51,9 +51,11 @@
   $background-color-active: initial,
   $font-weight: 400,
   $item-padding: 0,
-  $button-min-width: $spacing-3xl,
-  $button-padding: 1.0625rem $spacing-2xs,
-  $button-direction-size: $spacing-3xl
+  $button-min-width: $carbon--spacing-09,
+  $button-padding: 1.0625rem $carbon--spacing-02,
+  $button-direction-size: $carbon--spacing-09,
+  $select-icon-top-position: $carbon--spacing-05,
+  $select-icon-left-position: $carbon--spacing-05
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
@@ -172,10 +174,10 @@
   }
 
   .#{$prefix}--pagination-nav__select-icon {
-    left: calc(50% - #{$spacing-md/2});
+    left: calc(50% - #{$select-icon-top-position/2});
     pointer-events: none;
     position: absolute;
-    top: calc(50% - #{$spacing-md/2});
+    top: calc(50% - #{$select-icon-top-position/2});
   }
 
   .#{$prefix}--pagination-nav__accessibility-label {
@@ -195,7 +197,9 @@
     $item-padding: 0 $spacing-xs,
     $button-min-width: $spacing-lg,
     $button-padding: 0.3125rem $spacing-2xs,
-    $button-direction-size: $spacing-lg
+    $button-direction-size: $spacing-lg,
+    $select-icon-top-position: $spacing-md,
+    $select-icon-left-position: $spacing-md
   );
 
   .#{$prefix}--pagination-nav__list-item {

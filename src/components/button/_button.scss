@@ -246,10 +246,10 @@
 
     &:hover,
     &:active {
-      color: $ibm-colors__blue-70;
+      color: $ibm-color__blue-70;
 
       .#{$prefix}--btn__icon {
-        fill: $ibm-colors__blue-70;
+        fill: $ibm-color__blue-70;
       }
     }
 
@@ -299,7 +299,7 @@
 
   .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
   .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
-    margin-left: $spacing-md;
+    margin-left: $carbon--spacing-05;
   }
 
   // Skeleton State

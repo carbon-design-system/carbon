@@ -120,8 +120,8 @@
     min-width: rem(288px);
     max-width: rem(288px);
     color: $text-01;
-    margin-top: $spacing-md;
-    margin-bottom: $spacing-md;
+    margin-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
 
     @include breakpoint(md) {
       max-width: rem(608px);
@@ -163,7 +163,7 @@
 
   .#{$prefix}--inline-notification__details {
     display: flex;
-    margin: 0 $spacing-md;
+    margin: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--inline-notification__icon {
@@ -171,7 +171,7 @@
     width: rem(20px);
     min-height: rem(20px);
     min-width: rem(20px);
-    margin-right: $spacing-md;
+    margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
   }
 
@@ -179,12 +179,12 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: $spacing-sm 0;
+    padding: $carbon--spacing-04 0;
   }
 
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-01');
-    margin: 0 $spacing-2xs 0 0;
+    margin: 0 $carbon--spacing-02 0 0;
     white-space: nowrap;
   }
 

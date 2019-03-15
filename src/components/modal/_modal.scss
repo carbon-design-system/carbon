@@ -220,14 +220,14 @@
 
   .#{$prefix}--modal-header {
     padding-top: 1rem;
-    margin-bottom: $spacing-md;
+    margin-bottom: $carbon--spacing-05;
   }
 
   .#{$prefix}--modal-header__label {
     @include type-style('label-01');
 
     color: $text-02;
-    margin-bottom: $spacing-2xs;
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--modal-header__heading {
@@ -240,7 +240,7 @@
     @include type-style('body-long-01');
 
     overflow-y: auto;
-    margin-bottom: $spacing-3xl;
+    margin-bottom: $carbon--spacing-09;
     color: $text-01;
     font-weight: 400;
   }

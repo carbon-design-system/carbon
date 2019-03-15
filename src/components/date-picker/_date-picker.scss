@@ -505,7 +505,7 @@
       display: block;
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-2xs;
+      margin-top: $carbon--spacing-02;
       overflow: visible;
 
       &::before {
@@ -545,7 +545,7 @@
     position: relative;
     height: rem(40px);
     max-width: rem(288px);
-    padding: 0 $spacing-md;
+    padding: 0 $carbon--spacing-05;
     background-color: $field-01;
     border: none;
     color: $text-01;
@@ -587,7 +587,7 @@
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
-    padding-right: $spacing-3xl;
+    padding-right: $carbon--spacing-09;
   }
 
   .#{$prefix}--date-picker--range > .#{$prefix}--date-picker-container:first-child {
@@ -607,7 +607,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: $spacing-2xs $spacing-2xs $spacing-xs $spacing-2xs;
+    padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03 $carbon--spacing-02;
     width: rem(288px) !important;
     height: rem(336px);
     border-radius: 0;
@@ -631,7 +631,7 @@
     align-items: center;
     width: 100%;
     height: rem(40px);
-    margin-bottom: $spacing-2xs;
+    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--date-picker__month .flatpickr-prev-month,
@@ -669,7 +669,7 @@
 
   .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
   .flatpickr-month .flatpickr-current-month .cur-month {
-    margin-right: $spacing-2xs;
+    margin-right: $carbon--spacing-02;
     color: $text-01;
   }
 
@@ -680,7 +680,7 @@
     background-color: $field-01;
     border: none;
     border-radius: 0;
-    padding: $spacing-2xs;
+    padding: $carbon--spacing-02;
     // Added in when upgraded to Flatpickr 4.5.5
     -moz-appearance: textfield; /* Firefox */
 

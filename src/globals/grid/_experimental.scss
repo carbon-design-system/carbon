@@ -39,9 +39,7 @@
 }
 
 @import '../scss/vendor/@carbon/elements/scss/layout/breakpoint';
-@import '../scss/vendor/@carbon/elements/scss/grid/container';
-@import '../scss/vendor/@carbon/elements/scss/grid/row';
-@import '../scss/vendor/@carbon/elements/scss/grid/col';
+@import '../scss/vendor/@carbon/elements/scss/grid/mixins';
 
 @mixin grid--x {
   // Fluid variant of the grid.
