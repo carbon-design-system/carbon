@@ -346,7 +346,7 @@
     color: $text-02;
 
     .#{$prefix}--tooltip__trigger {
-      margin-left: $spacing-xs;
+      margin-left: $carbon--spacing-03;
     }
   }
 
@@ -381,7 +381,7 @@
     min-width: rem(208px);
     max-width: rem(288px);
     background: $inverse-02;
-    margin-top: $spacing-2xs;
+    margin-top: $carbon--spacing-02;
     padding: 1rem;
     border-radius: rem(2px);
     z-index: z('floating');
@@ -393,7 +393,7 @@
     }
 
     button {
-      padding-right: $spacing-xl;
+      padding-right: $carbon--spacing-07;
     }
 
     .#{$prefix}--link {
@@ -503,8 +503,8 @@
     display: none;
     background: $inverse-02;
     width: rem(208px);
-    margin-top: $spacing-sm;
-    padding: $spacing-xs $spacing-md;
+    margin-top: $carbon--spacing-04;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     border-radius: rem(2px);
     pointer-events: none;
     cursor: pointer;
@@ -521,7 +521,7 @@
       width: 0.6rem;
       height: 0.6rem;
       background: $inverse-02;
-      margin-left: $spacing-md;
+      margin-left: $carbon--spacing-05;
     }
   }
 

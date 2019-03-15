@@ -7,33 +7,49 @@
 
 @import 'mini-unit';
 
-// fixed spacing
-// Supports 0, 2px, 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 80px, 96px
-$carbon--fixed-spacing-scale: (
-  0,
-  carbon--mini-units(0.25),
-  carbon--mini-units(0.5),
-  carbon--mini-units(1),
-  carbon--mini-units(1.5),
-  carbon--mini-units(2),
-  carbon--mini-units(3),
-  carbon--mini-units(4),
-  carbon--mini-units(6),
-  carbon--mini-units(8),
-  carbon--mini-units(10),
-  carbon--mini-units(12)
-);
+$carbon--spacing-01: carbon--mini-units(0.25) !default;
+$carbon--spacing-02: carbon--mini-units(0.5) !default;
+$carbon--spacing-03: carbon--mini-units(1) !default;
+$carbon--spacing-04: carbon--mini-units(1.5) !default;
+$carbon--spacing-05: carbon--mini-units(2) !default;
+$carbon--spacing-06: carbon--mini-units(3) !default;
+$carbon--spacing-07: carbon--mini-units(4) !default;
+$carbon--spacing-08: carbon--mini-units(5) !default;
+$carbon--spacing-09: carbon--mini-units(6) !default;
+
+$spacing-01: $carbon--spacing-01 !default;
+$spacing-02: $carbon--spacing-02 !default;
+$spacing-03: $carbon--spacing-03 !default;
+$spacing-04: $carbon--spacing-04 !default;
+$spacing-05: $carbon--spacing-05 !default;
+$spacing-06: $carbon--spacing-06 !default;
+$spacing-07: $carbon--spacing-07 !default;
+$spacing-08: $carbon--spacing-08 !default;
+$spacing-09: $carbon--spacing-09 !default;
+
+$carbon--layout-01: carbon--mini-units(2) !default;
+$carbon--layout-02: carbon--mini-units(3) !default;
+$carbon--layout-03: carbon--mini-units(4) !default;
+$carbon--layout-04: carbon--mini-units(6) !default;
+$carbon--layout-05: carbon--mini-units(8) !default;
+$carbon--layout-06: carbon--mini-units(12) !default;
+$carbon--layout-07: carbon--mini-units(20) !default;
+
+$layout-01: $carbon--layout-01 !default;
+$layout-02: $carbon--layout-02 !default;
+$layout-03: $carbon--layout-03 !default;
+$layout-04: $carbon--layout-04 !default;
+$layout-05: $carbon--layout-05 !default;
+$layout-06: $carbon--layout-06 !default;
+$layout-07: $carbon--layout-07 !default;
 
 // fluid spacing
-$carbon--fluid-spacing-scale: (0, 2vw, 5vw, 10vw);
+$carbon--fluid-spacing-01: 0;
+$carbon--fluid-spacing-02: 2vw;
+$carbon--fluid-spacing-03: 5vw;
+$carbon--fluid-spacing-04: 10vw;
 
-/// Get the value of the spacing scale at the given step. The first step is
-/// surprisingly 0, even though lists in sass start at 1. This is because we
-/// want to make accesses to the 0 value more natural, in addition to mirroring
-/// how this would be called in other programming languages
-//  $step: integer
-//  $fluid: boolean
-@function carbon--spacing($step, $fluid: false) {
-  $scale: if($fluid, $carbon--fluid-spacing-scale, $carbon--fixed-spacing-scale);
-  @return nth($scale, $step + 1);
-}
+$fluid-spacing-01: $carbon--fluid-spacing-01 !default;
+$fluid-spacing-02: $carbon--fluid-spacing-02 !default;
+$fluid-spacing-03: $carbon--fluid-spacing-03 !default;
+$fluid-spacing-04: $carbon--fluid-spacing-04 !default;

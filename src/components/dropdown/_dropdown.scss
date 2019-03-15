@@ -338,9 +338,9 @@
     display: flex;
     align-items: center;
     height: rem(40px);
-    padding-top: $spacing-sm;
-    padding-bottom: $spacing-sm;
-    padding-left: $spacing-md;
+    padding-top: $carbon--spacing-04;
+    padding-bottom: $carbon--spacing-04;
+    padding-left: $carbon--spacing-05;
     padding-right: rem(42px); // 2rem + SVG width
     white-space: nowrap;
     overflow: hidden;
@@ -497,7 +497,7 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding: rem(7px) rem(32px) rem(7px) $spacing-sm; // TODO: spacing token
+    padding: rem(7px) rem(32px) rem(7px) $carbon--spacing-04; // TODO: spacing token
     height: rem(32px);
     overflow: visible;
     color: $text-01;
@@ -525,7 +525,7 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
     font-weight: normal;
-    margin-right: $spacing-sm;
+    margin-right: $carbon--spacing-04;
     margin-left: rem(10px);
 
     &:focus {

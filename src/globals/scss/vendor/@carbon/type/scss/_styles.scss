@@ -180,6 +180,31 @@ $expressive-heading-05: (
   ),
 ) !default;
 
+$expressive-heading-06: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: 125%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(9),
+      line-height: 122%,
+    ),
+    lg: (
+      font-size: carbon--type-scale(10),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(11),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: carbon--type-scale(13),
+    ),
+  ),
+) !default;
+
 $expressive-paragraph-01: (
   font-family: carbon--font-family('sans'),
   font-size: carbon--type-scale(6),
@@ -384,6 +409,7 @@ $tokens: (
   expressive-heading-03: $expressive-heading-03,
   expressive-heading-04: $expressive-heading-04,
   expressive-heading-05: $expressive-heading-05,
+  expressive-heading-06: $expressive-heading-06,
 
   quotation-01: $quotation-01,
   quotation-02: $quotation-02,

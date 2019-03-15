@@ -94,13 +94,13 @@
     position: relative;
     display: flex;
     align-items: center;
-    margin-right: $spacing-xs;
+    margin-right: $carbon--spacing-03;
   }
 
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
     color: $text-01;
-    margin-left: $spacing-xs;
+    margin-left: $carbon--spacing-03;
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {

@@ -140,7 +140,7 @@
   $button-height: 48px !default !global;
   $button-padding: 0.875rem 4rem 0.875rem 1rem !default !global;
   $button-padding-sm: 0.375rem 4rem 0.375rem 1rem !default !global;
-  $button-padding-lg: $spacing-sm !default !global;
+  $button-padding-lg: $carbon--spacing-04 !default !global;
   $button-border-width: 1px !default !global;
   $button-outline-width: 3px !default !global;
   $button-outline-offset: -5px !default !global;
@@ -149,9 +149,9 @@
   // Accordion (Reverse)
   $accordion-flex-direction: row-reverse !default !global;
   $accordion-justify-content: flex-start !default !global;
-  $accordion-arrow-margin: 0 $spacing-md 0 0 !default !global;
-  $accordion-title-margin: 0 0 0 $spacing-md !default !global;
-  $accordion-content-padding: 0 0 0 $spacing-md !default !global;
+  $accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default !global;
+  $accordion-title-margin: 0 0 0 $carbon--spacing-05 !default !global;
+  $accordion-content-padding: 0 0 0 $carbon--spacing-05 !default !global;
 
   // Card
   $card-text-align: center !default !global;
@@ -194,7 +194,7 @@
 
   //Code Snippet
   $copy-active: $active-ui !default !global;
-  $copy-btn-feedback: $ibm-colors__gray-80 !default !global;
+  $copy-btn-feedback: $ibm-color__gray-80 !default !global;
 
   // Radio Button
   $radio-border-width: 1px !default !global;

@@ -207,7 +207,7 @@ $css--helpers: true;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: $spacing-4xs solid $ui-03;
+    border-top: 1px solid $ui-03;
     height: rem(48px);
   }
 
@@ -250,7 +250,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select-input {
-    border-left: $spacing-4xs solid $ui-03;
+    border-left: 1px solid $ui-03;
     @include carbon--breakpoint('md') {
       padding-left: 1rem;
       padding-right: 2rem;
@@ -286,7 +286,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__left {
     @include carbon--breakpoint('md') {
-      padding: 0 $spacing-md;
+      padding: 0 $carbon--spacing-05;
     }
   }
 
@@ -299,7 +299,7 @@ $css--helpers: true;
   }
 
   span.#{$prefix}--pagination__text {
-    margin-left: $spacing-md;
+    margin-left: $carbon--spacing-05;
     color: $text-02;
   }
   .#{$prefix}--pagination__text[for='select-id-pagination-page'] {
@@ -314,7 +314,7 @@ $css--helpers: true;
     height: 100%;
     margin: 0;
     padding: 0 rem(14px);
-    border-left: $spacing-4xs solid $ui-03;
+    border-left: 1px solid $ui-03;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -351,20 +351,20 @@ $css--helpers: true;
 
   .#{$prefix}--pagination--inline .#{$prefix}--pagination__button {
     height: rem(40px);
-    border-left: $spacing-4xs solid $ui-03;
-    border-right: $spacing-4xs solid $ui-03;
+    border-left: 1px solid $ui-03;
+    border-right: 1px solid $ui-03;
     margin: 0;
   }
 
   .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward {
     border-right: 0;
-    padding: 0 $spacing-md;
-    margin-left: $spacing-md;
+    padding: 0 $carbon--spacing-05;
+    margin-left: $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward {
-    margin: 0 $spacing-md;
-    padding: 0 $spacing-md;
+    margin: 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05;
   }
 
   // Skeleton state
