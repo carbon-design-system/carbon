@@ -209,7 +209,7 @@
     transform-origin: left;
     pointer-events: none;
     transform: translate(0%, -50%);
-    transition: background $transition--base;
+    transition: background $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--slider__thumb {
@@ -221,8 +221,8 @@
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform $transition--base $carbon--standard-easing, background $transition--base $carbon--standard-easing,
-      box-shadow $transition--base $carbon--standard-easing;
+    transition: transform $duration--fast-01 motion(standard, productive),
+      background $duration--fast-01 motion(standard, productive), box-shadow $duration--fast-01 motion(standard, productive);
     cursor: pointer;
     outline: none;
     z-index: 3;

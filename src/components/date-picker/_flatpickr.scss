@@ -43,8 +43,8 @@
 }
 
 .flatpickr-calendar.animate.open {
-  -webkit-animation: fpFadeInDown $transition--fast-02 motion(entrance, productive);
-  animation: fpFadeInDown $transition--fast-02 motion(entrance, productive);
+  -webkit-animation: fpFadeInDown $duration--fast-02 motion(entrance, productive);
+  animation: fpFadeInDown $duration--fast-02 motion(entrance, productive);
 }
 
 .flatpickr-calendar.inline {

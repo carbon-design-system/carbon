@@ -57,6 +57,7 @@
     color: $interactive-01;
     text-decoration: none;
     outline: none;
+    transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
       color: $interactive-01;

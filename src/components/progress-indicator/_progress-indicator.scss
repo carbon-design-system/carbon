@@ -180,7 +180,7 @@
     flex: 1;
     min-width: 7rem;
     width: rem(128px);
-    transition: $transition--base all $carbon--standard-easing;
+    transition: $duration--fast-02 all motion(standard, productive);
     overflow: visible;
 
     .#{$prefix}--tooltip__label {
