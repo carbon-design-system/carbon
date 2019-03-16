@@ -203,7 +203,8 @@
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
-    transition: outline $transition--base, background-color $transition--base;
+    transition: outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');

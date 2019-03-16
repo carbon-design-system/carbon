@@ -208,7 +208,7 @@
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
-    transition: all $transition--base;
+    transition: all $duration--fast-02 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');

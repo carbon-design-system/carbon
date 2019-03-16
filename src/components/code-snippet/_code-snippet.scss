@@ -395,12 +395,12 @@
     position: relative;
     max-height: rem(238px);
     min-height: rem(56px);
-    transition: max-height $transition--expansion $carbon--standard-easing;
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container {
     max-height: rem(1500px);
-    transition: max-height 700ms $carbon--standard-easing;
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
@@ -422,7 +422,7 @@
     fill: $icon-01;
     height: rem(16px);
     width: rem(16px);
-    transition: all $transition--base $carbon--standard-easing;
+    transition: all $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--snippet-button {
@@ -505,7 +505,7 @@
     margin-left: $spacing-xs;
     margin-bottom: rem(1px);
     transform: rotate(0deg);
-    transition: $transition--expansion;
+    transition: $duration--moderate-01 motion(standard, productive);
   }
 
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {

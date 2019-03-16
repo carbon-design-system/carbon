@@ -192,7 +192,7 @@
     text-overflow: ellipsis;
     width: 100%;
     order: 1;
-    transition: background-color $transition--base, outline $transition--base;
+    transition: background-color $duration--fast-01, outline $duration--fast-01;
     border-bottom: 1px solid $ui-04;
 
     &:focus {
@@ -266,8 +266,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity $transition--base, outline $transition--base, background-color $transition--base,
-      border-color $transition--base;
+    transition: opacity $duration--fast-02, outline $duration--fast-02, background-color $duration--fast-02,
+      border-color $duration--fast-02;
     border-bottom: 1px solid transparent;
     cursor: pointer;
     visibility: visible;

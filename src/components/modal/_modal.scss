@@ -166,13 +166,14 @@
     content: '';
     opacity: 0;
     background-color: $overlay-01;
-    transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
+    transition: opacity $duration--moderate-01 motion(exit, expressive),
+      z-index 0s $duration--moderate-01 motion(exit, expressive), visibility 0s $duration--moderate-01 motion(exit, expressive);
     visibility: hidden;
 
     &.is-visible {
       z-index: z('modal');
       opacity: 1;
-      transition: opacity 200ms;
+      transition: opacity $duration--slow-01 motion(entrance, expressive);
       visibility: visible;
     }
 

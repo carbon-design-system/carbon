@@ -266,7 +266,7 @@
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
-    transition: $transition--base all;
+    transition: $duration--fast-02 motion(standard, productive) all;
 
     &:focus {
       @include focus-outline('outline');
@@ -329,7 +329,7 @@
     right: 1rem;
     top: rem(13px);
     pointer-events: none;
-    transition: transform $transition--expansion $carbon--standard-easing;
+    transition: transform $duration--fast-02 motion(standard, productive);
     transform-origin: 50% 45%;
   }
 
@@ -359,12 +359,13 @@
     position: absolute;
     z-index: z('dropdown');
     max-height: 0;
-    transition: max-height $transition--expansion cubic-bezier(0, 0, 0.38, 0.9);
+    transition: max-height $duration--fast-02 motion(standard, productive);
     overflow: hidden;
   }
 
   .#{$prefix}--dropdown-item {
-    transition: opacity $transition--expansion cubic-bezier(0, 0, 0.38, 0.9), background-color $transition--base;
+    transition: opacity $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
     opacity: 0;
 
     &:hover {

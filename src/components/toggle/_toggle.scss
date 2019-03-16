@@ -273,7 +273,7 @@
       background-color: $ui-03;
       border-radius: 50%;
       content: '';
-      transition: $transition--fast-01 motion(exit, productive);
+      transition: $duration--fast-01 motion(exit, productive);
     }
   }
 
@@ -303,7 +303,7 @@
     left: 6px;
     top: 6px;
     z-index: 1;
-    transition: $transition--fast-01 motion(exit, productive);
+    transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
   }
 
@@ -391,7 +391,7 @@
     &:before,
     &:after {
       cursor: not-allowed;
-      transition: $transition--fast-01 motion(exit, productive);
+      transition: $duration--fast-01 motion(exit, productive);
     }
   }
 
