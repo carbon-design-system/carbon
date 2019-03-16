@@ -225,7 +225,7 @@
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
-    padding: 0 rem(34px) 0 $spacing-md; // 1.5rem + chevron width
+    padding: 0 rem(34px) 0 $carbon--spacing-05; // 1.5rem + chevron width
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -347,14 +347,14 @@
 
   .#{$prefix}--select--inline .#{$prefix}--label {
     white-space: nowrap;
-    margin: 0 $spacing-xs 0 0;
+    margin: 0 $carbon--spacing-03 0 0;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
     background-color: transparent;
     color: $text-01;
     border-bottom: none;
-    padding-left: $spacing-xs;
+    padding-left: $carbon--spacing-03;
 
     @-moz-document url-prefix() {
       padding-top: 0;
@@ -368,7 +368,7 @@
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
     top: 1.125rem;
-    right: $spacing-xs;
+    right: $carbon--spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__invalid-icon {

@@ -353,8 +353,8 @@
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
-    height: $spacing-2xl;
-    padding: 0 56px 0 $spacing-md;
+    height: $carbon--spacing-08;
+    padding: 0 56px 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
@@ -362,7 +362,7 @@
     align-items: center;
     overflow-x: scroll;
     position: relative;
-    padding: 0 0 $spacing-md 0;
+    padding: 0 0 $carbon--spacing-05 0;
     height: rem(56px);
   }
 
@@ -385,7 +385,7 @@
   .#{$prefix}--snippet--multi {
     @include bx--snippet--x;
     border: none;
-    padding: $spacing-md;
+    padding: $carbon--spacing-05;
     min-width: rem(320px);
     max-width: 100%;
   }
@@ -435,8 +435,8 @@
     background-color: $ui-01;
     outline: none;
     padding: 0;
-    height: $spacing-2xl;
-    width: $spacing-2xl;
+    height: $carbon--spacing-08;
+    width: $carbon--spacing-08;
     overflow: visible;
 
     &:focus {
@@ -446,8 +446,8 @@
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
-    height: $spacing-xl;
-    width: $spacing-xl;
+    height: $carbon--spacing-07;
+    width: $carbon--spacing-07;
     top: $spacing-xs;
     right: $spacing-xs;
   }
@@ -486,7 +486,7 @@
     right: $spacing-xs;
     bottom: $spacing-xs;
     padding: $spacing-xs;
-    padding-left: $spacing-md;
+    padding-left: $carbon--spacing-05;
     color: $text-01;
     background-color: $field-01;
   }

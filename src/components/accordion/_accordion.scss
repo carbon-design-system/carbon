@@ -225,14 +225,15 @@
   .#{$prefix}--accordion__content {
     // Transition property for when the accordion closes
     transition: height motion(standard, productive) $duration--fast-02, padding motion(standard, productive) $duration--fast-02;
-    padding-left: $spacing-md;
+    padding-left: $carbon--spacing-05;
+
     padding-right: 25%;
     height: 0;
     visibility: hidden;
     opacity: 0;
 
     @include max-breakpoint('bp--xs--major') {
-      padding-right: $spacing-3xl;
+      padding-right: $carbon--spacing-09;
     }
 
     p {
@@ -246,7 +247,7 @@
     overflow: visible;
 
     .#{$prefix}--accordion__content {
-      padding-bottom: $spacing-lg;
+      padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-xs;
       height: auto;
       visibility: visible;

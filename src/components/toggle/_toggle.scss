@@ -238,7 +238,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin: $spacing-xs 0;
+    margin: $carbon--spacing-03 0;
   }
 
   .#{$prefix}--toggle__appearance {
@@ -316,7 +316,7 @@
   .#{$prefix}--toggle__text--right {
     @include type-style('body-short-01');
     position: relative;
-    margin-left: $spacing-xs;
+    margin-left: $carbon--spacing-03;
   }
 
   .#{$prefix}--toggle__text--left {

@@ -190,7 +190,7 @@
     min-height: 4rem;
     background-color: $ui-01;
     position: relative;
-    padding: $spacing-md;
+    padding: $carbon--spacing-05;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
@@ -225,7 +225,7 @@
   }
 
   .#{$prefix}--tile--selectable {
-    padding-right: $spacing-3xl;
+    padding-right: $carbon--spacing-09;
   }
 
   .#{$prefix}--tile__checkmark,

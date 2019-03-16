@@ -199,8 +199,8 @@
     display: inline-flex;
     width: 100%;
     min-width: 9.375rem;
-    padding-left: $spacing-md;
-    padding-right: $spacing-xl;
+    padding-left: $carbon--spacing-05;
+    padding-right: $carbon--spacing-07;
     font-weight: 300;
     height: rem(40px);
     color: $text-01;
@@ -247,7 +247,7 @@
     ~ .#{$prefix}--form-requirement {
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-2xs;
+      margin-top: $carbon--spacing-02;
       overflow: visible;
 
       &::before {

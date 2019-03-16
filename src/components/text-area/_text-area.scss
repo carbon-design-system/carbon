@@ -105,7 +105,7 @@
     width: 100%;
     min-width: 10rem;
     min-height: rem(40px);
-    padding: rem(11px) $spacing-md;
+    padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
     order: 3;
     resize: vertical;
@@ -123,7 +123,7 @@
       order: 4;
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-2xs;
+      margin-top: $carbon--spacing-02;
 
       &::before {
         display: none;
@@ -146,7 +146,7 @@
   }
 
   .#{$prefix}--text-area--invalid {
-    padding-right: $spacing-2xl;
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-area__wrapper {

@@ -5,47 +5,33 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../layout/breakpoint';
-@import 'prefix';
-@import 'container';
-@import 'row';
-@import 'col';
+@import 'mixins';
 
-$breakpoints: map-merge(
+$carbon--12-column-grid: map-merge(
+  $carbon--grid-breakpoints,
   (
-    sm: (
-      columns: 12,
-    ),
-    md: (
-      columns: 12,
-    ),
-    lg: (
-      columns: 12,
-    ),
-    xlg: (
-      columns: 12,
-    ),
-    max: (
-      columns: 12,
-    ),
-  ),
-  $carbon--grid-breakpoints
+    lg:
+      map-merge(
+        map-get($carbon--grid-breakpoints, lg),
+        (
+          columns: 12,
+        )
+      ),
+    xlg:
+      map-merge(
+        map-get($carbon--grid-breakpoints, xlg),
+        (
+          columns: 12,
+        )
+      ),
+    max:
+      map-merge(
+        map-get($carbon--grid-breakpoints, max),
+        (
+          columns: 12,
+        )
+      ),
+  )
 );
 
-// Default container class for a grid. Includes max-width for each breakpoint
-.#{$prefix}--grid {
-  @include carbon--make-container($breakpoints);
-  @include carbon--make-container-max-widths($breakpoints);
-}
-
-// Fluid variant of the grid. Will not set max-width for breakpoints and will
-// full-bleed across the page.
-.#{$prefix}--fluid-grid {
-  @include carbon--make-container($breakpoints);
-}
-
-.#{$prefix}--row {
-  @include carbon--make-row();
-}
-
-@include carbon--make-grid-columns($breakpoints, $carbon--grid-gutter);
+@include carbon--grid($breakpoints: $carbon--12-column-grid);

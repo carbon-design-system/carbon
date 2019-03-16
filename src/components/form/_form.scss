@@ -110,7 +110,7 @@
 @mixin form--x {
   .#{$prefix}--fieldset {
     @include reset;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $carbon--spacing-07;
   }
 
   .#{$prefix}--form-item {
@@ -129,7 +129,7 @@
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $carbon--spacing-03;
     line-height: rem(16px);
   }
 
@@ -178,7 +178,7 @@
   .#{$prefix}--form-requirement {
     @include reset;
     @include type-style('caption-01');
-    margin: $spacing-2xs 0 0;
+    margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
     line-height: 1.5;
@@ -195,7 +195,7 @@
     color: $text-02;
     z-index: 0;
     opacity: 1;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $carbon--spacing-03;
   }
 
   .#{$prefix}--label--disabled,

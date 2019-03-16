@@ -165,7 +165,7 @@
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
-    margin: 0 $spacing-md;
+    margin: 0 $carbon--spacing-05;
     max-width: rem(640px);
     min-width: rem(200px);
   }
@@ -176,7 +176,7 @@
     color: $text-01;
 
     &:last-of-type {
-      margin-right: $spacing-md;
+      margin-right: $carbon--spacing-05;
     }
   }
 
