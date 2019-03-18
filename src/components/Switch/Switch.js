@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -50,30 +51,37 @@ const Switch = props => {
     className: classes,
   };
 
-  const btnIcon = icon
-    ? React.cloneElement(icon, {
-        className: classNames(
-          icon.props.className,
-          ` ${prefix}--content-switcher__icon`
-        ),
-      })
-    : null;
-
-  if (kind === 'button') {
+  if (componentsX) {
     return (
       <button {...other} {...commonProps}>
-        {btnIcon}
         <span>{text}</span>
       </button>
     );
-  }
+  } else {
+    const btnIcon = icon
+      ? React.cloneElement(icon, {
+          className: classNames(
+            icon.props.className,
+            ` ${prefix}--content-switcher__icon`
+          ),
+        })
+      : null;
+    if (kind === 'button') {
+      return (
+        <button {...other} {...commonProps}>
+          {btnIcon}
+          <span>{text}</span>
+        </button>
+      );
+    }
 
-  return (
-    <a href={href} {...other} {...commonProps}>
-      {btnIcon}
-      <span>{text}</span>
-    </a>
-  );
+    return (
+      <a href={href} {...other} {...commonProps}>
+        {btnIcon}
+        <span>{text}</span>
+      </a>
+    );
+  }
 };
 
 Switch.propTypes = {
@@ -89,7 +97,8 @@ Switch.propTypes = {
   index: PropTypes.number,
 
   /**
-   * Specify whether the <Switch> should be used as a <button> element or an <a> element
+   * Specify whether the <Switch> should be used as a <button> element or an <a> element.
+   * `anchor` support removed in v10. relevant to Carbon v9 only
    */
   kind: PropTypes.oneOf(['button', 'anchor']).isRequired,
 
@@ -121,7 +130,8 @@ Switch.propTypes = {
   text: PropTypes.string.isRequired,
 
   /**
-   * Specify an icon to include in your Switch
+   * Specify an icon to include in your Switch.
+   * Icon support removed in v10. relevant to v9 only.
    */
   icon: PropTypes.element,
 
@@ -134,7 +144,7 @@ Switch.propTypes = {
 
 Switch.defaultProps = {
   selected: false,
-  kind: 'anchor',
+  kind: componentsX ? undefined : 'anchor',
   text: 'Provide text',
   href: '',
   onClick: () => {},

@@ -10,8 +10,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
-import Search16 from '@carbon/icons-react/lib/search/16';
 import Icon from '../Icon';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
@@ -31,10 +29,7 @@ const icons = {
 };
 
 const iconMap = componentsX
-  ? {
-      AddFilled16: <AddFilled16 name="add--filled" />,
-      Search16: <Search16 name="search" />,
-    }
+  ? undefined
   : {
       iconAddSolid: <Icon icon={iconAddSolid} />,
       iconSearch: <Icon icon={iconSearch} />,
@@ -51,9 +46,15 @@ const props = {
   }),
   switch: () => ({
     onClick: action('onClick - Switch'),
-    kind: select('Button kind (kind in <Switch>)', kinds, 'anchor'),
-    href: text('The link href (href in <Switch>)', ''),
-    icon: iconMap[select('Icon (icon in <Switch>)', icons, 'none')],
+    kind: componentsX
+      ? undefined
+      : select('Button kind (kind in <Switch>)', kinds, 'anchor'),
+    href: componentsX
+      ? undefined
+      : text('The link href (href in <Switch>)', ''),
+    icon: componentsX
+      ? undefined
+      : iconMap[select('Icon (icon in <Switch>)', icons, 'none')],
     disabled: boolean('Disabled (disabled)', false),
   }),
 };
