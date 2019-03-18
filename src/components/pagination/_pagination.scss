@@ -319,7 +319,8 @@ $css--helpers: true;
     justify-content: center;
     align-items: center;
     fill: $ui-05;
-    transition: outline $transition--base, background-color $transition--base;
+    transition: outline $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--pagination__button:focus {

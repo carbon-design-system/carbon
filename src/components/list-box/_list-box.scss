@@ -310,7 +310,7 @@ $list-box-menu-width: rem(300px);
     order: 1;
     cursor: pointer;
     color: $text-01;
-    transition: all $transition--expansion $carbon--standard-easing;
+    transition: all $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -449,7 +449,7 @@ $list-box-menu-width: rem(300px);
     bottom: 0;
     height: 100%;
     padding: 0 1rem;
-    transition: transform 200ms $carbon--standard-easing;
+    transition: transform $duration--fast-02 motion(standard, productive);
     cursor: pointer;
   }
 
@@ -473,7 +473,7 @@ $list-box-menu-width: rem(300px);
     padding: 0 1rem;
     cursor: pointer;
     user-select: none;
-    transition: background-color 200ms $carbon--standard-easing;
+    transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__selection > svg {

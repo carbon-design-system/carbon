@@ -85,7 +85,7 @@
   border-radius: $button-border-radius;
   text-align: left;
   text-decoration: none;
-  transition: $transition--fast-01 motion(entrance, productive);
+  transition: $duration--fast-01 motion(entrance, productive);
   outline: $button-outline-width solid transparent;
   position: relative;
   max-width: rem(320px);
@@ -101,7 +101,7 @@
   .#{$prefix}--btn__icon {
     width: rem(16px);
     height: rem(16px);
-    transition: $transition--fast-01 motion(entrance, productive);
+    transition: $duration--fast-01 motion(entrance, productive);
     position: absolute;
     right: rem(16px);
     top: 50%;
@@ -125,7 +125,7 @@
     box-sizing: border-box;
     position: absolute;
     content: '';
-    transition: $transition--fast-01 motion(entrance, productive);
+    transition: $duration--fast-01 motion(entrance, productive);
   }
 
   &::before {

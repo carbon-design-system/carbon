@@ -550,7 +550,7 @@
     border: none;
     color: $text-01;
     border-bottom: 1px solid $ui-04;
-    transition: $transition--fast-01 all;
+    transition: $duration--fast-01 motion(standard, productive) all;
 
     &:focus,
     &.#{$prefix}--focused {
@@ -645,7 +645,7 @@
     width: rem(40px);
     padding: 0;
     fill: $text-01;
-    transition: background-color $transition--fast-01;
+    transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
@@ -747,7 +747,7 @@
     color: $text-01;
     border-radius: 0;
     border: none;
-    transition: all $transition--fast-01;
+    transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
       background: $hover-ui;
