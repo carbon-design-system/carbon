@@ -254,6 +254,11 @@
     tbody tr:hover:not([disabled]) {
       background: $hover-field;
 
+      &:first-of-type {
+        outline: 1px solid $hover-field;
+        outline-offset: -1px;
+      }
+
       & td {
         color: $text-01;
         background: $hover-field;
@@ -305,11 +310,6 @@
     }
 
     .#{$prefix}--table-header-label {
-      display: block;
-      padding: rem(14px) 0;
-    }
-
-    .#{$prefix}--table-cell-content {
       display: block;
       padding: rem(14px) 0;
     }
@@ -395,6 +395,14 @@
     th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
       padding-left: $spacing-sm;
       padding-right: $spacing-sm;
+
+      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+        padding-left: $spacing-lg;
+      }
+    }
+
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
+      padding: rem(14px) $spacing-sm;
 
       &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
         padding-left: $spacing-lg;
