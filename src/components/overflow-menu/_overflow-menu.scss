@@ -200,7 +200,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: outline $transition--base, background-color $transition--base;
+    transition: outline $duration--fast-02 motion(entrance, productive),
+      background-color $duration--fast-02 motion(entrance, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -242,7 +243,7 @@
       position: absolute;
       display: block;
       background-color: $ui-01;
-      transition: background-color $transition--base;
+      transition: background-color $duration--fast-02 motion(entrance, productive);
     }
   }
 
@@ -298,7 +299,7 @@
     width: 100%;
     height: rem(40px);
     padding: 0;
-    transition: background-color $transition--base;
+    transition: background-color $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--overflow-menu--divider {
@@ -327,7 +328,8 @@
     cursor: pointer;
     color: $text-02;
     max-width: 11.25rem;
-    transition: outline $transition--base, background-color $transition--base, color $transition--base;
+    transition: outline $duration--fast-02 motion(entrance, productive),
+      background-color $duration--fast-02 motion(entrance, productive), color $duration--fast-02 motion(entrance, productive);
 
     &:hover {
       color: $text-01;

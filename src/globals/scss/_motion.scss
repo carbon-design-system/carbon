@@ -28,12 +28,12 @@ $transition--base: 250ms;
 $transition--expansion: 300ms;
 
 /// New easing durations
-$transition--fast-01: 70ms;
-$transition--fast-02: 110ms;
-$transition--moderate-01: 150ms;
-$transition--moderate-02: 240ms;
-$transition--slow-01: 400ms;
-$transition--slow-02: 720ms;
+$duration--fast-01: 70ms;
+$duration--fast-02: 110ms;
+$duration--moderate-01: 150ms;
+$duration--moderate-02: 240ms;
+$duration--slow-01: 400ms;
+$duration--slow-02: 720ms;
 
 // ☠️ Deprecated
 
@@ -57,8 +57,8 @@ $bx--standard-easing: $carbon--standard-easing;
   $carbon--ease-out: cubic-bezier(0.2, 0, 1, 0.9);
   $carbon--standard-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
 
-  $transition--base: $transition--fast-02;
-  $transition--expansion: $transition--moderate-01;
+  $transition--base: $duration--fast-02;
+  $transition--expansion: $duration--moderate-02;
 }
 
 /// Get the transition-timing-function for a given easing and motion mode.

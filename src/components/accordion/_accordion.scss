@@ -153,7 +153,7 @@
   }
 
   .#{$prefix}--accordion__item {
-    transition: all $transition--fast-02 motion(standard, productive);
+    transition: all $duration--fast-02 motion(standard, productive);
     border-top: 1px solid $ui-03;
     overflow: visible;
 
@@ -174,7 +174,7 @@
     position: relative;
     width: 100%;
     margin: 0;
-    transition: background-color motion(standard, productive) $transition--fast-02;
+    transition: background-color motion(standard, productive) $duration--fast-02;
 
     &:hover:before,
     &:focus:before {
@@ -210,7 +210,7 @@
     fill: $ui-05;
     // TODO: RTL rotate(180deg);
     transform: rotate(90deg);
-    transition: all $transition--fast-02 motion(standard, productive);
+    transition: all $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--accordion__title {
@@ -224,9 +224,9 @@
 
   .#{$prefix}--accordion__content {
     // Transition property for when the accordion closes
-    transition: height motion(standard, productive) $transition--fast-02,
-      padding motion(standard, productive) $transition--fast-02;
+    transition: height motion(standard, productive) $duration--fast-02, padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
+
     padding-right: 25%;
     height: 0;
     visibility: hidden;
@@ -239,7 +239,7 @@
     p {
       @include type-style('body-long-01');
       height: 0;
-      transition: height motion(standard, productive) $transition--fast-02;
+      transition: height motion(standard, productive) $duration--fast-02;
     }
   }
 
@@ -253,14 +253,14 @@
       visibility: visible;
       opacity: 1;
       // Transition property for when the accordion opens
-      transition: height motion(entrance, productive) $transition--fast-02,
-        padding-top motion(entrance, productive) $transition--fast-02,
-        padding-bottom motion(entrance, productive) $transition--fast-02;
+      transition: height motion(entrance, productive) $duration--fast-02,
+        padding-top motion(entrance, productive) $duration--fast-02,
+        padding-bottom motion(entrance, productive) $duration--fast-02;
 
       p {
         @include type-style('body-long-01');
         height: auto;
-        transition: height motion(entrance, productive) $transition--fast-02;
+        transition: height motion(entrance, productive) $duration--fast-02;
       }
     }
 

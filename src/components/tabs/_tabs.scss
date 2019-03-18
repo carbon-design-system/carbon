@@ -253,13 +253,13 @@
     width: rem(12px);
     height: rem(7px);
     fill: $ui-05;
-    transition: transform $transition--expansion $carbon--standard-easing;
+    transition: transform $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--tabs-trigger--open:focus,
   .#{$prefix}--tabs-trigger--open:active {
     @include focus-outline('reset');
-    transition: outline $transition--expansion $carbon--standard-easing;
+    transition: outline $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--tabs-trigger--open {
@@ -267,7 +267,7 @@
   }
 
   .#{$prefix}--tabs-trigger--open svg {
-    @include rotate(-180deg, $transition--expansion, 50% 45%);
+    @include rotate(-180deg, $duration--moderate-01, 50% 45%);
   }
 
   // There is only a difference in tab color when in mobile/dropdown view
@@ -313,7 +313,7 @@
     }
 
     @include max-breakpoint(bp--sm--major) {
-      transition: max-height $transition--expansion $carbon--standard-easing;
+      transition: max-height $duration--moderate-01 motion(standard, productive);
       max-height: 600px;
       width: 100%;
       padding-top: 0;
@@ -325,7 +325,7 @@
       display: flex;
     }
     @include max-breakpoint(bp--sm--major) {
-      transition: max-height $transition--expansion $carbon--standard-easing;
+      transition: max-height $duration--moderate-01 motion(standard, productive);
       overflow: hidden;
       max-height: 0;
     }

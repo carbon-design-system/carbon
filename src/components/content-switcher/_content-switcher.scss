@@ -144,7 +144,7 @@
     text-decoration: none;
     border: none;
     color: $text-02;
-    transition: all $transition--base $carbon--standard-easing;
+    transition: all $duration--fast-01 motion(standard, productive);
     position: relative;
 
     &:focus {
@@ -205,7 +205,7 @@
 
   .#{$prefix}--content-switcher__icon {
     fill: $text-02;
-    transition: fill $transition--base $carbon--standard-easing;
+    transition: fill $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--content-switcher__icon + span {

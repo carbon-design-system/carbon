@@ -292,7 +292,7 @@
     display: inline-block;
     fill: transparent;
     vertical-align: middle;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
