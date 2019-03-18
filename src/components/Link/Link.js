@@ -15,7 +15,7 @@ const { prefix } = settings;
 const Link = ({ children, className, href, ...other }) => {
   const classNames = classnames(`${prefix}--link`, className);
   return (
-    <a href={href} className={classNames} {...other}>
+    <a href={other.disabled ? null : href} className={classNames} {...other}>
       {children}
     </a>
   );
