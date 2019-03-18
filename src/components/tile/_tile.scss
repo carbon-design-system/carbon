@@ -202,7 +202,7 @@
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--moderate-01 motion(standard, productive);
     cursor: pointer;
 
     &:hover {
@@ -231,7 +231,7 @@
   .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile__chevron {
     position: absolute;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--fast-02 motion(standard, productive);
     border: none;
     background: transparent;
   }
@@ -260,7 +260,7 @@
 
     svg {
       transform-origin: center;
-      transition: $transition--base $carbon--standard-easing;
+      transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
     }
 
@@ -275,7 +275,7 @@
 
   .#{$prefix}--tile--expandable {
     overflow: hidden;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--tile-content__above-the-fold {
@@ -285,12 +285,12 @@
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
     opacity: 0;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile--is-expanded {
     overflow: visible;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--tile__chevron svg {
       transform: rotate(-180deg);
@@ -298,7 +298,7 @@
 
     .#{$prefix}--tile-content__below-the-fold {
       opacity: 1;
-      transition: $transition--base $carbon--standard-easing;
+      transition: $duration--fast-02 motion(standard, productive);
     }
   }
 
