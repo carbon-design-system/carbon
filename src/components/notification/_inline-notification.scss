@@ -123,15 +123,15 @@
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
 
-    @include breakpoint(md) {
+    @include carbon--breakpoint(md) {
       max-width: rem(608px);
     }
 
-    @include breakpoint(lg) {
+    @include carbon--breakpoint(lg) {
       max-width: rem(736px);
     }
 
-    @include breakpoint(max) {
+    @include carbon--breakpoint(max) {
       max-width: rem(832px);
     }
   }
