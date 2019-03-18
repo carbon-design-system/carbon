@@ -211,7 +211,7 @@
   //================================================
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //================================================
-  .#{$prefix}--toolbar-search-container-hidden {
+  .#{$prefix}--toolbar-search-container-expandable {
     height: rem(48px);
     width: rem(48px);
     position: relative;
@@ -327,10 +327,10 @@
     }
 
     &:disabled {
-      cursor: no-drop;
+      cursor: not-allowed;
       > .#{$prefix}--toolbar-action__icon {
         fill: $disabled;
-        cursor: no-drop;
+        cursor: not-allowed;
       }
     }
 
@@ -364,49 +364,47 @@
   //================================================
   //PERSISTENT SEARCH - OPTIONAL TOOLBAR
   //================================================
-  .#{$prefix}--toolbar-search-container {
+  .#{$prefix}--toolbar-search-container-persistent {
     width: 100%;
     height: rem(48px);
     opacity: 1;
     position: relative;
-    top: rem(-8px);
     transition: opacity $transition--base;
   }
 
-  .#{$prefix}--toolbar-search-container + .#{$prefix}--toolbar-content {
+  .#{$prefix}--toolbar-search-container-persistent + .#{$prefix}--toolbar-content {
     position: relative;
-    top: rem(-8px);
     width: auto;
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search {
     position: initial;
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-magnifier {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-magnifier {
     left: $spacing-md;
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input {
     height: rem(48px);
     padding-left: $spacing-3xl;
     border: none;
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:focus:not([disabled]) {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:focus:not([disabled]) {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:hover:not([disabled]) {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:hover:not([disabled]) {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:active:not([disabled]),
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:active:not([disabled]),
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container .#{$prefix}--search .#{$prefix}--search-close {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-close {
     height: rem(48px);
     width: rem(48px);
   }

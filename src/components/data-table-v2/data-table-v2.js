@@ -337,7 +337,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorTableBody: 'tbody',
       selectorTableSort: `.${prefix}--table-sort-v2`,
       selectorTableSelected: `.${prefix}--data-table-v2--selected`,
-      selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-hidden`,
+      selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-expandable`,
       selectorSearchMagnifier: `.${prefix}--search-magnifier`,
       selectorSearchInput: `.${prefix}--search-input`,
       classExpandableRow: `${prefix}--expandable-row-v2`,

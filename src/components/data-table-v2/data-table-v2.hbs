@@ -236,7 +236,7 @@
 
       <!-- Persistent Search -->
       {{#is state "persistent-search"}}
-      <div class="{{@root.prefix}}--toolbar-search-container">
+      <div class="{{@root.prefix}}--toolbar-search-container-persistent">
         <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
           <div class="{{@root.prefix}}--search-magnifier">
             {{ carbon-icon 'Search16'}}
@@ -254,7 +254,7 @@
      <div class="{{@root.prefix}}--toolbar-content">
           <!--  Default hidden search -->
          {{#is state "default"}}
-           <div class="{{@root.prefix}}--toolbar-search-container-hidden">
+           <div class="{{@root.prefix}}--toolbar-search-container-expandable">
              <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
                <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
                  {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
@@ -284,7 +284,7 @@
           {{/is}}
           <!--  Disabled toolbar hidden search -->
           {{#is state "disabled"}}
-            <div class="{{@root.prefix}}--toolbar-search-container-hidden">
+            <div class="{{@root.prefix}}--toolbar-search-container-expandable">
               <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
                 <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
                   {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
