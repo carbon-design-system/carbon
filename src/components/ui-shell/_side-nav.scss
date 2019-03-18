@@ -187,7 +187,6 @@
   }
 
   .#{$prefix}--side-nav__select {
-    @include font-family();
     appearance: none;
     flex: 1 1 0%;
     background-color: $shell-header-bg-01;

@@ -15,6 +15,7 @@ const filterOptions = [
     id: 'filter-option-1',
     value: 'filter-option-1',
     label: 'Filter option 1',
+    primaryFocus: true,
   },
   {
     id: 'filter-option-2',
@@ -34,6 +35,7 @@ const rowHeightOptions = [
     value: 'short',
     label: 'Short',
     selected: true,
+    primaryFocus: true,
   },
   {
     id: 'tall-rows',

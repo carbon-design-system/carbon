@@ -2,19 +2,23 @@
 /// no longer going to be present in the next major release of Carbon.
 /// @access public
 /// @param {String} $reason - The message
-/// @param {Bool} $condition [true] - `true` to emits the given deprecation messsage
+/// @param {Bool} $condition [true] - `true` to emit the given deprecation messsage
+/// @param {Bool} $remove-deprecated [false] - `true` to omit the content if $condition is `true`
 /// @require {Bool} $deprecations--entry
 /// @require {Map} $deprecations--reasons
-@mixin deprecate($reason, $condition: true) {
+@mixin deprecate($reason, $condition: true, $remove-deprecated: false) {
   $deprecations--entry: false !default;
 
   @if not $condition {
     @content;
-  } @else if ($deprecations--entry == true) {
-    $deprecations--reasons: append($deprecations--reasons, $reason) !global;
-    @content;
   } @else {
-    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon. REASON: #{$reason}';
-    @content;
+    @if ($deprecations--entry == true) {
+      $deprecations--reasons: append($deprecations--reasons, $reason) !global;
+    } @else {
+      @warn 'Deprecated code was found, this code will be removed before the next release of Carbon. REASON: #{$reason}';
+    }
+    @if not $remove-deprecated {
+      @content;
+    }
   }
 }

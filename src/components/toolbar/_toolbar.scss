@@ -21,7 +21,9 @@ $css--helpers: true;
 
 @mixin toolbar {
   .#{$prefix}--toolbar {
-    @include font-family;
+    @if not feature-flag-enabled('components-x') {
+      @include font-family;
+    }
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -111,8 +113,12 @@ $css--helpers: true;
   }
 
   .#{$prefix}--toolbar-menu__title {
-    @include typescale('omega');
-    @include letter-spacing;
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('omega');
+      @include letter-spacing;
+    } @else {
+      @include type-style('caption-01');
+    }
     font-weight: 600;
     padding: 0.5rem 1.25rem;
   }
