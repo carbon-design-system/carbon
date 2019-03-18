@@ -189,18 +189,13 @@
   //================================================
   .#{$prefix}--table-toolbar {
     display: flex;
-    padding-top: $spacing-xs;
-    padding-bottom: $spacing-xs;
     width: 100%;
-    position: relative;
     background: $ui-01;
     height: rem(48px);
 
     .#{$prefix}--search-input {
-      position: relative;
-
       &:focus {
-        box-shadow: inset 0px 0px 0px 1px $brand-01;
+        box-shadow: inset 0 0 0 1px $brand-01;
         outline: 0;
       }
     }
@@ -209,9 +204,6 @@
   .#{$prefix}--toolbar-content {
     display: flex;
     height: rem(48px);
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 100%;
     justify-content: flex-end;
   }
@@ -226,35 +218,35 @@
     transition: flex 175ms $carbon--standard-easing;
     box-shadow: none;
 
-    & .#{$prefix}--search {
+    .#{$prefix}--search {
       width: rem(48px);
       height: 100%;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-input {
+    .#{$prefix}--search-input {
       border: none;
       height: 100%;
       @include font-size('14');
-      padding-left: $spacing-3xl;
       visibility: hidden;
+      padding: 0;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier {
       height: rem(48px);
       width: rem(48px);
       padding: $spacing-md;
       left: 0;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
+    .#{$prefix}--search-magnifier:focus {
       outline: none;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+    .#{$prefix}--search-magnifier:hover {
       background: $hover-field;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-close {
+    .#{$prefix}--search-close {
       height: rem(48px);
       width: rem(48px);
     }
@@ -267,59 +259,37 @@
     flex: auto;
     transition: flex 175ms $carbon--standard-easing;
 
-    & .#{$prefix}--search {
+    .#{$prefix}--search {
       width: 100%;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-input {
+    .#{$prefix}--search .#{$prefix}--search-input {
+      padding-left: $spacing-3xl;
       visibility: visible;
+    }
+
+    .#{$prefix}--search .#{$prefix}--search-input:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--search .#{$prefix}--search-input:focus + .#{$prefix}--search-close {
       border: none;
       box-shadow: none;
       outline: none;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-input:focus {
-      outline: none;
-      border: none;
-      box-shadow: none;
-    }
-
-    & .#{$prefix}--search .#{$prefix}--search-input:focus + .#{$prefix}--search-close {
-      border: none;
-      box-shadow: none;
-      outline: none;
-    }
-
-    & .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+    .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
       background: $hover-field;
       border: none;
     }
 
-    & .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
-    & .#{$prefix}--search .#{$prefix}--search-magnifier:active,
-    & .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+    .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
+    .#{$prefix}--search .#{$prefix}--search-magnifier:active,
+    .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
       outline: none;
       border: none;
       background: transparent;
     }
-  }
-
-  .#{$prefix}--toolbar-search-container-hidden::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    box-shadow: 0 0 0 2px inset $interactive-01;
-    z-index: 100;
-    opacity: 0;
-    transition: $transition--base;
-  }
-  .#{$prefix}--toolbar-search-container-hidden:focus-within::before {
-    opacity: 1;
   }
 
   //================================================
