@@ -238,7 +238,7 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $interactive-03, $hover-ui, $interactive-03, $active-ui);
+    @include button-theme--x(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
     display: inline-flex;
     align-items: center;
     min-width: auto;
