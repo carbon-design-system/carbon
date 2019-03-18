@@ -248,7 +248,7 @@
       border-top: 1px solid $ui-01;
     }
 
-    tbody tr:hover:not([disabled]) {
+    tbody tr:hover:not(.#{$prefix}--row-disabled) {
       background: $hover-field;
 
       &:first-of-type {
@@ -421,34 +421,40 @@
   //-------------------------------------------------
   //DISABLED
   //-------------------------------------------------
-  tbody tr[disabled] {
+  tbody tr.#{$prefix}--row-disabled {
     cursor: not-allowed;
 
-    & td,
-    & td:hover {
+    td,
+    td:hover {
       color: $disabled;
       background: $disabled-background-color;
       cursor: not-allowed;
     }
 
-    & .#{$prefix}--table-expand-v2 button svg,
-    & .#{$prefix}--table-column-menu div svg {
+    .#{$prefix}--table-expand-v2 button svg,
+    .#{$prefix}--table-column-menu div svg {
       fill: $disabled;
       cursor: not-allowed;
     }
 
-    & .#{$prefix}--table-column-menu div,
-    & .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
+    .#{$prefix}--table-column-menu div,
+    .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
       background: $disabled-background-color;
       cursor: not-allowed;
     }
 
-    & .#{$prefix}--table-column-icon svg {
+    .#{$prefix}--table-column-icon svg {
       fill: $disabled;
     }
   }
 
-  tbody tr[disabled] .#{$prefix}--overflow-menu {
+  tbody tr.#{$prefix}--row-disabled:hover {
+    cursor: not-allowed;
+    color: $disabled;
+    background: $disabled-background-color;
+  }
+
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--overflow-menu {
     display: none;
   }
 }

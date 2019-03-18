@@ -371,7 +371,7 @@
     </thead>
   <tbody>
     {{#each rows as |row|}}
-      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if row.disabled}} disabled {{/if}} {{#if (not row.disabled)}} tabindex="0" {{/if}}>
+      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if row.disabled}} class="{{@root.prefix}}--row-disabled" {{/if}}>
         {{#each ../columns as |column|}}
           {{#with (lookup row column.name) as |data|}}
           <!-- expand icon td -->
