@@ -390,6 +390,7 @@
     max-width: 100%;
   }
 
+  //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     overflow: hidden;
     position: relative;
@@ -398,12 +399,20 @@
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
+  // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container {
     max-height: rem(1500px);
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
+  // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
+    overflow: hidden;
+    padding-bottom: rem(24px);
+  }
+
+  // expanded pre
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container pre {
     overflow-x: scroll;
   }
 
@@ -415,6 +424,10 @@
     top: 0;
     right: 0;
     background-image: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(243, 243, 243, 1));
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
+    overflow: hidden;
   }
 
   //Copy Button
@@ -523,6 +536,7 @@
 
   .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
+    transition: transform $transition--expansion;
   }
 
   // Skeleton State
