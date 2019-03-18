@@ -111,7 +111,7 @@
     resize: vertical;
     border: none;
     border-bottom: 1px solid $ui-04;
-    transition: $transition--base all;
+    transition: $duration--fast-02 all;
 
     & ~ .#{$prefix}--form__helper-text {
       margin-top: 0;

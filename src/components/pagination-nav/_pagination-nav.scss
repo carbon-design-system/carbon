@@ -30,7 +30,7 @@
         left: 50%;
         position: absolute;
         opacity: 0;
-        transition: left $transition--expansion $carbon--ease-out, width $transition--expansion $carbon--ease-out;
+        transition: width $duration--fast-02 motion(standard, productive);
         width: 0;
       }
     }
@@ -98,8 +98,7 @@
     text-align: center;
     text-decoration: none;
     transition: background-color, color;
-    transition-duration: $transition--base;
-    transition-timing-function: ease-in-out;
+    transition: $duration--fast-02 motion(standard, productive);
     user-select: none;
 
     &:hover {
