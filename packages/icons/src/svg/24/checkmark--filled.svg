@@ -7,7 +7,7 @@
 	.st1{opacity:0;fill:#FFFFFF;fill-opacity:0;}
 </style>
 <rect id="_Transparent_Rectangle_" class="st0" width="24" height="24"/>
-<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M10.6,15.9L7,12.4l1.1-1.1l2.4,2.4l5.3-5.3L17,9.6
-	L10.6,15.9z"/>
-<path id="inner-path" class="st1" d="M10.6,15.9L7,12.4l1.1-1.1l2.4,2.4l5.3-5.3L17,9.6L10.6,15.9z"/>
+<path d="M12,1C6,1,1,6,1,12s5,11,11,11s11-4.9,11-11S18.1,1,12,1z M10.4,16.3l-3.9-3.9l1.3-1.2l2.7,2.7l5.8-5.8l1.3,1.3L10.4,16.3z"
+	/>
+<path id="inner-path" class="st1" d="M10.4,16.3l-3.9-3.9l1.3-1.2l2.7,2.7l5.8-5.8l1.3,1.3L10.4,16.3z"/>
 </svg>

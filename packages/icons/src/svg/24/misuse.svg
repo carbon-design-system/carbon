@@ -6,9 +6,9 @@
 	.st0{fill:none;}
 	.st1{opacity:0;fill:#FFFFFF;fill-opacity:0;}
 </style>
-<rect id="_Transparent_Rectangle_" class="st0" width="32" height="32"/>
-<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M15.9,17L12,13.1L8.1,17L7,15.9l3.9-3.9L7,8.1L8.1,7
-	l3.9,3.9L15.9,7L17,8.1L13.1,12l3.9,3.9L15.9,17z"/>
-<path id="inner-path" class="st1" d="M15.9,17L12,13.1L8.1,17L7,15.9l3.9-3.9L7,8.1L8.1,7l3.9,3.9L15.9,7L17,8.1L13.1,12l3.9,3.9
-	L15.9,17z"/>
+<rect id="_Transparent_Rectangle_" class="st0" width="24" height="24"/>
+<path d="M12,1C6,1,1,6,1,12s5,11,11,11s11-4.9,11-11S18.1,1,12,1z M16.2,17.5L12,13.3l-4.2,4.2l-1.3-1.3l4.2-4.2L6.5,7.8l1.3-1.3
+	l4.2,4.2l4.2-4.2l1.3,1.3L13.3,12l4.2,4.2L16.2,17.5z"/>
+<path id="inner-path" class="st1" d="M16.2,17.5L12,13.3l-4.2,4.2l-1.3-1.3l4.2-4.2L6.5,7.8l1.3-1.3l4.2,4.2l4.2-4.2l1.3,1.3
+	L13.3,12l4.2,4.2L16.2,17.5z"/>
 </svg>
