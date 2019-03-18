@@ -193,15 +193,14 @@
     color: $text-01;
     @include font-size('20');
     font-weight: 400;
-    padding: 22px 0 0 $spacing-md;
-    position: relative;
-    top: rem(21px);
+    padding: rem(22px) 0 0 $spacing-md;
+  }
+
+  .#{$prefix}--data-table-v2-title {
+    margin-bottom: rem(8px);
   }
 
   .#{$prefix}--data-table-v2-optional {
-    position: relative;
-    left: rem(17px);
-    top: rem(-20px);
     @include font-size('14');
     color: $text-02;
   }
