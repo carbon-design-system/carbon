@@ -172,9 +172,9 @@
 }
 
 @mixin data-table-v2-core--x {
-  //================================================
-  //MAIN CONTAINER
-  //================================================
+  //-------------------------------------------------
+  //Main Container
+  //-------------------------------------------------
   .#{$prefix}--data-table-v2-container {
     min-width: rem(600px);
     width: 100%;
@@ -186,9 +186,9 @@
     }
   }
 
-  //================================================
-  //TABLE HEADER
-  //================================================
+  //-------------------------------------------------
+  //Main Container > Table Header
+  //-------------------------------------------------
   .#{$prefix}--data-table-v2-header {
     background: $ui-01;
     height: rem(88px);
@@ -207,17 +207,13 @@
     color: $text-02;
   }
 
-  //================================================
-  //DATA TABLE - DEFAULT STYLES
-  //================================================
+  //-------------------------------------------------
+  //Main Container > Table (Default Styles)
+  //-------------------------------------------------
   .#{$prefix}--data-table-v2 {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-
-    [class*='col'] {
-      outline: none;
-    }
 
     thead {
       @include type-style('body-short-01');
@@ -389,9 +385,9 @@
     }
   }
 
-  //================================================
+  //-------------------------------------------------
   //NO SORT
-  //================================================
+  //-------------------------------------------------
   .#{$prefix}--data-table-v2--no-sort {
     th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
       padding-left: $spacing-sm;
@@ -415,36 +411,36 @@
     }
   }
 
-  //================================================
+  //-------------------------------------------------
   //NUMERICAL COLUMN
-  //================================================
+  //-------------------------------------------------
   td.#{$prefix}--data-table-v2--numerical-cell {
     text-align: right;
   }
 
-  //================================================
+  //-------------------------------------------------
   //DISABLED
-  //================================================
+  //-------------------------------------------------
   tbody tr[disabled] {
-    cursor: no-drop;
+    cursor: not-allowed;
 
     & td,
     & td:hover {
       color: $disabled;
       background: $disabled-background-color;
-      cursor: no-drop;
+      cursor: not-allowed;
     }
 
     & .#{$prefix}--table-expand-v2 button svg,
     & .#{$prefix}--table-column-menu div svg {
       fill: $disabled;
-      cursor: no-drop;
+      cursor: not-allowed;
     }
 
     & .#{$prefix}--table-column-menu div,
     & .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
       background: $disabled-background-color;
-      cursor: no-drop;
+      cursor: not-allowed;
     }
 
     & .#{$prefix}--table-column-icon svg {
