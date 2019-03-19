@@ -38,21 +38,13 @@ const props = () => ({
 
 storiesOf('Slider', module)
   .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <div style={{ marginTop: '2rem' }}>
-        <Slider id="slider" {...props()} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
+  .add('default', () => <Slider id="slider" {...props()} />, {
+    info: {
+      text: `
             Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
           `,
-      },
-    }
-  )
+    },
+  })
   .add(
     'skeleton',
     () => (

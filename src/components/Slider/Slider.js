@@ -397,6 +397,10 @@ export default class Slider extends PureComponent {
 
     const { value, left } = this.state;
 
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
+    });
+
     const sliderClasses = classNames(
       `${prefix}--slider`,
       { [`${prefix}--slider--disabled`]: disabled },
@@ -416,7 +420,7 @@ export default class Slider extends PureComponent {
 
     return (
       <div className={`${prefix}--form-item`}>
-        <label htmlFor={id} className={`${prefix}--label`}>
+        <label htmlFor={id} className={labelClasses}>
           {labelText}
         </label>
         <div className={`${prefix}--slider-container`}>
@@ -487,6 +491,7 @@ export default class Slider extends PureComponent {
               onChange={this.handleChange}
               labelText=""
               aria-label={ariaLabelInput}
+              disabled={disabled}
             />
           )}
         </div>
