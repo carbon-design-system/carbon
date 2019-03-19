@@ -134,7 +134,7 @@ module.exports = {
     },
     {
       name: 'inlineInvalidHelperText',
-      label: 'Inline Select (Invalid)',
+      label: 'Inline Select (Invalid with helper text)',
       context: {
         inline: true,
         invalid: true,
