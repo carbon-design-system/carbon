@@ -15,9 +15,9 @@
 /// @deprecated (For v10) Use `@include carbon--type-classes`
 @mixin typography {
   @include deprecate(
-    '`@include typography` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--type-classes` instead.',
-    feature-flag-enabled('components-x')
+    '`@include typography` has been removed. ' + 'Use `@include carbon--type-classes` instead.',
+    feature-flag-enabled('components-x'),
+    true
   ) {
     // really big
     .#{$prefix}--type-giga {

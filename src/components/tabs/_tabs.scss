@@ -222,7 +222,7 @@
     height: auto;
     width: 100%;
     position: relative;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       background: none;
       min-height: rem(48px);
     }
@@ -239,7 +239,7 @@
     outline: 2px solid transparent;
     border-bottom: 1px solid $ui-04;
     background-color: $field-01;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       display: none;
     }
   }
@@ -300,7 +300,7 @@
     flex-direction: column;
     z-index: z('dropdown');
     background: $ui-01;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       flex-direction: row;
       margin-right: $carbon--spacing-05;
       margin-left: $carbon--spacing-05;
@@ -308,11 +308,11 @@
       box-shadow: none;
       z-index: auto;
     }
-    @include breakpoint(bp--lg--major) {
+    @include carbon--breakpoint(xlg) {
       margin-left: 0;
     }
 
-    @include max-breakpoint(bp--sm--major) {
+    @include carbon--breakpoint-down(md) {
       transition: max-height $duration--moderate-01 motion(standard, productive);
       max-height: 600px;
       width: 100%;
@@ -321,10 +321,10 @@
   }
 
   .#{$prefix}--tabs__nav--hidden {
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       display: flex;
     }
-    @include max-breakpoint(bp--sm--major) {
+    @include carbon--breakpoint-down(md) {
       transition: max-height $duration--moderate-01 motion(standard, productive);
       overflow: hidden;
       max-height: 0;
@@ -339,13 +339,13 @@
     padding: 0;
     cursor: pointer;
     width: 100%;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       background: transparent;
       & + .#{$prefix}--tabs__nav-item {
         margin-left: rem(2px);
       }
     }
-    @include max-breakpoint(bp--sm--major) {
+    @include carbon--breakpoint-down(md) {
       height: rem(40px);
     }
   }
@@ -354,13 +354,13 @@
   // Item Hover
   //-----------------------------
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       background: transparent;
     }
   }
 
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    @include max-breakpoint(bp--sm--major) {
+    @include carbon--breakpoint-down(md) {
       background-color: $hover-ui;
       box-shadow: 0 -1px 0 $hover-ui;
     }
@@ -379,7 +379,7 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
     border: none;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         @include type-style('heading-01');
@@ -392,7 +392,7 @@
         border-bottom: 2px;
       }
     }
-    @include max-breakpoint(bp--sm--major) {
+    @include carbon--breakpoint-down(md) {
       display: none;
     }
   }
@@ -409,11 +409,11 @@
     width: rem(160px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
       padding: $carbon--spacing-03 $carbon--spacing-05;
     }
-    @include max-breakpoint(bp--sm--major) {
+    @include carbon--breakpoint-down(md) {
       height: rem(40px);
       width: calc(100% - 32px);
       margin: 0 $carbon--spacing-05;
@@ -440,7 +440,7 @@
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     color: $text-01;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       color: $text-01;
       border-bottom: $tab-underline-color-hover;
     }
@@ -477,7 +477,7 @@
 
   .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-link:active {
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       outline: 2px solid $interactive-01;
       outline-offset: -2px;
       border-bottom: 2px;
