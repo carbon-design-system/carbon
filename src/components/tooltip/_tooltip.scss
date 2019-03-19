@@ -464,7 +464,6 @@
   // Tooltip Definition
   // Definition CSS only tooltip
   .#{$prefix}--tooltip--definition {
-    @include font-family;
     @include reset;
     position: relative;
 

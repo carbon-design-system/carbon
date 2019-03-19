@@ -123,15 +123,15 @@
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
 
-    @include breakpoint(md) {
+    @include carbon--breakpoint(md) {
       max-width: rem(608px);
     }
 
-    @include breakpoint(lg) {
+    @include carbon--breakpoint(lg) {
       max-width: rem(736px);
     }
 
-    @include breakpoint(max) {
+    @include carbon--breakpoint(max) {
       max-width: rem(832px);
     }
   }
@@ -167,10 +167,7 @@
   }
 
   .#{$prefix}--inline-notification__icon {
-    height: rem(20px);
-    width: rem(20px);
-    min-height: rem(20px);
-    min-width: rem(20px);
+    flex-shrink: 0;
     margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
   }

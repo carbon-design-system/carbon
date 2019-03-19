@@ -134,7 +134,9 @@
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
-    @include typescale('zeta');
+    // When tooltip trigger is put in form label the trigger button should fit in the size of label
+    // https://github.com/IBM/carbon-components-react/issues/115
+    @include type-style('label-01');
   }
 
   // Skeleton State
@@ -145,7 +147,7 @@
   }
 
   input[type='number'] {
-    font-family: $font-family-mono;
+    font-family: carbon--font-family('mono');
   }
 
   input[data-invalid],
