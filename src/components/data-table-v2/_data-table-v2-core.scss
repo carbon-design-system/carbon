@@ -219,10 +219,6 @@
       font-weight: 700;
     }
 
-    th:hover {
-      background: $data-table-column-hover;
-    }
-
     th.#{$prefix}--table-column-icon:hover,
     th.#{$prefix}--table-column-menu:hover,
     th.#{$prefix}--table-expand-v2:hover {
@@ -249,11 +245,6 @@
     tbody tr:hover:not(.#{$prefix}--row-disabled) {
       background: $hover-field;
 
-      &:first-of-type {
-        outline: 1px solid $hover-field;
-        outline-offset: -1px;
-      }
-
       & td {
         color: $text-01;
         background: $hover-field;
@@ -277,7 +268,6 @@
 
     th,
     td {
-      @include typescale('zeta');
       padding-left: $spacing-sm;
       padding-right: $spacing-sm;
       vertical-align: top;
@@ -285,10 +275,6 @@
       color: $text-02;
       border-top: 1px solid $ui-01;
       border-bottom: 1px solid $ui-01;
-
-      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
-        padding-left: $spacing-lg;
-      }
     }
 
     th {
@@ -296,12 +282,20 @@
       border-top: 1px solid transparent;
     }
 
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
-      padding: 0;
+    th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+      padding-left: $spacing-lg;
     }
 
-    td:last-of-type:not(.#{$prefix}--table-column-menu) {
-      padding-right: $spacing-lg;
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
+      padding: rem(14px) $spacing-sm;
+
+      &:first-of-type {
+        padding-left: $spacing-lg;
+      }
+
+      &:last-of-type {
+        padding-right: $spacing-lg;
+      }
     }
 
     .#{$prefix}--table-header-label {
@@ -372,40 +366,17 @@
         opacity: 1;
       }
 
-      &:focus {
-        outline: 0;
-        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+      &[aria-expanded='false']:focus {
+        @include focus-outline('outline');
+      }
+
+      &[aria-expanded='true']:focus {
+        outline: none;
       }
     }
 
     tr:hover .#{$prefix}--overflow-menu svg {
       opacity: 1;
-    }
-  }
-
-  //-------------------------------------------------
-  //NO SORT
-  //-------------------------------------------------
-  .#{$prefix}--data-table-v2--no-sort {
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
-      padding-left: $spacing-sm;
-      padding-right: $spacing-sm;
-
-      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
-        padding-left: $spacing-lg;
-      }
-    }
-
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
-      padding: rem(14px) $spacing-sm;
-
-      &:first-of-type:not(.#{$prefix}--table-column-checkbox) {
-        padding-left: $spacing-lg;
-      }
-    }
-
-    .#{$prefix}--table-sort-v2 {
-      padding: 0;
     }
   }
 
