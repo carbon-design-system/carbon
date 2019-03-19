@@ -192,18 +192,16 @@
   .#{$prefix}--data-table-v2-header {
     background: $ui-01;
     height: rem(88px);
-    color: $text-01;
-    @include font-size('20');
-    font-weight: 400;
     padding: rem(22px) 0 0 $spacing-md;
   }
 
   .#{$prefix}--data-table-v2-title {
-    margin-bottom: rem(8px);
+    @include type-style('productive-heading-03');
+    color: $text-01;
   }
 
   .#{$prefix}--data-table-v2-optional {
-    @include font-size('14');
+    @include type-style('body-short-01');
     color: $text-02;
   }
 
