@@ -43,14 +43,12 @@
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
         {{/if}}
       </div>
-      {{#if inline}}
       {{#if invalid}}
       <div class="{{@root.prefix}}--form-requirement">
         Validation message here
       </div>
       {{/if}}
     </div>
-    {{/if}}
     {{else}}
     <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
       {{#each items}}
@@ -116,14 +114,12 @@
             selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
       </div>
-      {{#if inline}}
       {{#if invalid}}
       <div class="{{@root.prefix}}--form-requirement">
         Validation message here
       </div>
       {{/if}}
     </div>
-    {{/if}}
     {{else}}
     <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
       {{#each items}}
