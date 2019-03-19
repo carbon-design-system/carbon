@@ -121,7 +121,7 @@
       margin-top: $carbon--spacing-05;
     }
 
-    @include breakpoint(max) {
+    @include carbon--breakpoint(max) {
       width: rem(352px);
     }
   }
@@ -148,10 +148,7 @@
   }
 
   .#{$prefix}--toast-notification__icon {
-    height: 1rem;
-    width: 1rem;
-    min-height: 1rem;
-    min-width: 1rem;
+    flex-shrink: 0;
     margin-right: $carbon--spacing-05;
     margin-top: $carbon--spacing-05;
   }

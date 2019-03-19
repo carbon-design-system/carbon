@@ -59,9 +59,13 @@
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
-    @include font-family;
-    @include font-smoothing;
-    @include typescale('zeta');
+    @if not feature-flag-enabled('components-x') {
+      @include font-family;
+      @include font-smoothing;
+      @include typescale('zeta');
+    } @else {
+      @include type-style('body-short-01');
+    }
     line-height: 0;
   }
 
@@ -84,7 +88,11 @@
   }
 
   .#{$prefix}--pagination-nav__page {
-    @include typescale('zeta');
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('zeta');
+    } @else {
+      @include type-style('body-short-01');
+    }
     @include button-reset($width: false);
     border-radius: 0;
     color: $text-color;

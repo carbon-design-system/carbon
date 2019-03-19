@@ -30,10 +30,14 @@ $padding: (
 
 /// @deprecated (For v10) Was used primary for older grid
 @function padding($value) {
-  @if map-has-key($padding, $value) {
-    @return map-get($padding, $value);
+  @if feature-flag-enabled('breaking-changes-x') {
+    @warn ('`@function padding()` has been removed.');
   } @else {
-    @warn 'padding: could not find #{$value} in $padding map. Please make sure it is defined';
+    @if map-has-key($padding, $value) {
+      @return map-get($padding, $value);
+    } @else {
+      @warn 'padding: could not find #{$value} in $padding map. Please make sure it is defined';
+    }
   }
 }
 
@@ -49,9 +53,9 @@ $padding: (
 /// @deprecated (For v10) Use `@include carbon--breakpoint()`
 @mixin breakpoint($size) {
   @include deprecate(
-    '`@include breakpoint()` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--breakpoint()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include breakpoint()` has been removed. ' + 'Use `@include carbon--breakpoint()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     @if map-has-key($breakpoints, $size) {
       @media screen and (min-width: map-get($breakpoints, $size)) {
@@ -68,9 +72,9 @@ $padding: (
 /// @deprecated (For v10) Use `@include carbon--breakpoint-down()`
 @mixin max-breakpoint($size) {
   @include deprecate(
-    '`@include max-breakpoint()` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--breakpoint-down()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include max-breakpoint()` has been removed. ' + 'Use `@include carbon--breakpoint-down()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     @if map-has-key($breakpoints, $size) {
       @media screen and (max-width: map-get($breakpoints, $size)) {
@@ -91,9 +95,9 @@ $padding: (
 /// @deprecated (For v10) Use `@include carbon--make-container()`
 @mixin grid-container {
   @include deprecate(
-    '`@include grid-container` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--make-container()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include grid-container` has been removed. ' + 'Use `@include carbon--make-container()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     width: 100%;
     padding-right: padding(mobile);

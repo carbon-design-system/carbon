@@ -232,7 +232,7 @@
     visibility: hidden;
     opacity: 0;
 
-    @include max-breakpoint('bp--xs--major') {
+    @include carbon--breakpoint-down('md') {
       padding-right: $carbon--spacing-09;
     }
 
