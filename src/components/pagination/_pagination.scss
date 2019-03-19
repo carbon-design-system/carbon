@@ -51,7 +51,7 @@ $css--helpers: true;
   .#{$prefix}--pagination__text {
     @include typescale('omega');
     @include type-style('body-short-01');
-    color: $text-02;
+    color: $text-01;
     display: none;
     padding-right: $spacing-2xs;
 
