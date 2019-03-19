@@ -54,7 +54,7 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--product-switcher__subheader,
   .#{$prefix}--product-switcher__all-btn {
-    @include typescale('omega');
+    @include type-style('body-short-01');
     padding: mini-units(1);
     color: $shell-header-text-03;
   }
@@ -92,7 +92,7 @@
   .#{$prefix}--product-switcher__back-btn {
     display: flex;
     align-items: center;
-    @include typescale('omega');
+    @include type-style('body-short-01');
     padding: mini-units(1) mini-units(2);
   }
 
@@ -134,7 +134,7 @@
   }
 
   .#{$prefix}--product-link__name {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     margin-left: 0.25rem;
     font-weight: 400;
     color: $shell-header-text-02;

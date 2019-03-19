@@ -38,6 +38,7 @@
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
 
     &:focus {
@@ -132,11 +133,11 @@
     background-color: $field-01;
     width: 100%;
     height: rem(40px);
-    padding: 0 $spacing-xl 0 $spacing-md;
+    padding: 0 $carbon--spacing-05;
     color: $text-01;
     border: none;
     border-bottom: 1px solid $ui-04;
-    transition: $transition--base all;
+    transition: $duration--fast-02 all;
 
     &:focus,
     &:active {
@@ -146,6 +147,10 @@
     &-wrapper svg[hidden] {
       display: none;
     }
+  }
+
+  .#{$prefix}--password-input {
+    padding-right: rem(40px);
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -190,6 +195,14 @@
       }
     }
 
+    .#{$prefix}--text-input--invalid {
+      padding-right: rem(40px);
+    }
+
+    .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
+      padding-right: rem(64px);
+    }
+
     .#{$prefix}--text-input--invalid + .#{$prefix}--text-input--password__visibility {
       right: rem(40px);
     }
@@ -208,6 +221,7 @@
     outline: none;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
+    color: $disabled-02;
   }
 
   .#{$prefix}--text-input--light:disabled {
@@ -221,8 +235,7 @@
   //-----------------------------
   // Error
   //-----------------------------
-  .#{$prefix}--text-input[data-invalid],
-  .#{$prefix}--text-input:invalid {
+  .#{$prefix}--text-input--invalid {
     @include focus-outline('invalid');
     box-shadow: none;
 

@@ -49,10 +49,6 @@
     @include typescale('zeta');
   }
 
-  .#{$prefix}--label--disabled {
-    opacity: 0.5;
-  }
-
   // Skeleton State
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
@@ -104,12 +100,17 @@
     opacity: 1;
     margin-bottom: $spacing-xs;
   }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    opacity: 0.5;
+  }
 }
 
 @mixin form--x {
   .#{$prefix}--fieldset {
     @include reset;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $carbon--spacing-07;
   }
 
   .#{$prefix}--form-item {
@@ -128,17 +129,14 @@
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $carbon--spacing-03;
     line-height: rem(16px);
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
-    @include typescale('zeta');
-  }
-
-  .#{$prefix}--label--disabled {
-    color: $disabled-02;
-    cursor: not-allowed;
+    // When tooltip trigger is put in form label the trigger button should fit in the size of label
+    // https://github.com/IBM/carbon-components-react/issues/115
+    @include type-style('label-01');
   }
 
   // Skeleton State
@@ -149,16 +147,24 @@
   }
 
   input[type='number'] {
-    font-family: $font-family-mono;
+    font-family: carbon--font-family('mono');
   }
 
   input[data-invalid],
-  textarea[data-invalid],
-  select[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
     outline: 2px solid $support-01;
     outline-offset: -2px;
+  }
 
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
@@ -173,8 +179,8 @@
 
   .#{$prefix}--form-requirement {
     @include reset;
-    @include type-style('label-01');
-    margin: $spacing-2xs 0 0;
+    @include type-style('caption-01');
+    margin: $carbon--spacing-02 0 0;
     max-height: 0;
     overflow: hidden;
     line-height: 1.5;
@@ -191,7 +197,12 @@
     color: $text-02;
     z-index: 0;
     opacity: 1;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    color: $disabled-02;
   }
 
   @media (min-width: breakpoint('sm')) {

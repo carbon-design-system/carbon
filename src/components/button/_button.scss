@@ -177,27 +177,27 @@
 }
 
 @mixin button--x {
-  // <button> elements cannot be used as flex containers
-  button.#{$prefix}--btn {
-    display: inline-block;
+  .#{$prefix}--btn {
+    @include button-base--x;
 
+    &--disabled > .#{$prefix}--btn__icon,
     &:disabled > .#{$prefix}--btn__icon {
       fill: $ui-04;
     }
   }
 
   // Reset intrisic padding in Firefox (see #731)
-  button.#{$prefix}--btn::-moz-focus-inner {
+  .#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;
   }
 
-  .#{$prefix}--btn {
-    @include button-base--x;
-  }
-
   .#{$prefix}--btn--primary {
     @include button-theme--x($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
+
+    &:hover {
+      color: $text-04;
+    }
   }
 
   .#{$prefix}--btn--secondary {
@@ -211,7 +211,6 @@
 
   .#{$prefix}--btn--tertiary {
     @include button-theme--x(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
-    position: relative;
 
     &:hover {
       color: $inverse-01;
@@ -219,7 +218,10 @@
 
     &:disabled,
     &:hover:disabled,
-    &:focus:disabled {
+    &:focus:disabled,
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
       background: transparent;
       color: $disabled;
 
@@ -233,19 +235,21 @@
     }
   }
 
-  button.#{$prefix}--btn--ghost {
+  .#{$prefix}--btn--ghost {
     @include button-theme--x(transparent, transparent, $interactive-01, $hover-ui, $interactive-01, $active-ui);
-    display: inline-flex;
-    align-items: center;
     min-width: auto;
     padding: rem(14px) rem(16px);
 
+    .#{$prefix}--btn__icon {
+      margin-left: $carbon--spacing-03;
+    }
+
     &:hover,
     &:active {
-      color: $ibm-colors__blue-70;
+      color: $ibm-color__blue-70;
 
       .#{$prefix}--btn__icon {
-        fill: $ibm-colors__blue-70;
+        fill: $ibm-color__blue-70;
       }
     }
 
@@ -253,15 +257,12 @@
       background-color: $active-ui;
     }
 
-    .#{$prefix}--btn__icon {
-      position: static;
-      margin-left: $spacing-xs;
-      transform: none;
-    }
-
     &:disabled,
     &:hover:disabled,
-    &:focus:disabled {
+    &:focus:disabled,
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
       color: $disabled;
       background: transparent;
       border-color: transparent;
@@ -280,19 +281,14 @@
     @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
     &:hover {
+      color: $text-04;
       border: $button-border-width solid transparent;
     }
   }
 
   .#{$prefix}--btn--sm {
-    @include letter-spacing;
     min-height: rem(32px);
     padding: $button-padding-sm;
-  }
-
-  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
-  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger {
-    margin-left: $spacing-md;
   }
 
   // Skeleton State

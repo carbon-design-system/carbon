@@ -270,8 +270,8 @@
   .#{$prefix}--structured-list-td {
     @include reset;
     @include type-style('body-long-01');
-    @include line-height('body');
     @include padding-td--x;
+    line-height: carbon--rem(21px);
     position: relative;
     display: table-cell;
     max-width: 36rem;
@@ -292,11 +292,11 @@
     display: inline-block;
     fill: transparent;
     vertical-align: middle;
-    transition: $transition--base $carbon--standard-easing;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
-    fill: $ibm-colors__gray-40;
+    fill: $ibm-color__gray-40;
   }
 
   .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row .#{$prefix}--structured-list-svg,

@@ -8,14 +8,14 @@
 <div class="{{@root.prefix}}--form-item">
   <strong class="{{#if componentsX}}{{@root.prefix}}--file--label{{else}}{{@root.prefix}}--label{{/if}}">Account
     photo</strong>
-  <p class="{{@root.prefix}}--label-description">only .jpg and .png files. 500kb max file size.</p>
+  <p class="{{@root.prefix}}--label-description">Only .jpg and .png files. 500kb max file size.</p>
   <div class="{{@root.prefix}}--file" data-file>
     <label for="your-file-importer-id-here"
-      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--sm"
+      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#unless componentsX}} {{@root.prefix}}--btn--sm{{/unless}}"
       role="button" tabindex="0">Add file</label>
     <input type="file" class="{{@root.prefix}}--file-input" id="your-file-importer-id-here" data-file-uploader
       data-target="[data-file-container]" multiple />
-    <di data-file-container class="{{@root.prefix}}--file-container">
+    <div data-file-container class="{{@root.prefix}}--file-container">
       {{#if exampleUploadStates}}
       <div class="{{@root.prefix}}--file__selected-file">
         <p class="{{@root.prefix}}--file-filename">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero vero
@@ -54,16 +54,11 @@
                 <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="37.5"></circle>
               </svg>
             </div>
-            <svg data-inline-loading-finished="" hidden=""
-              class="{{@root.prefix}}--inline-loading__checkmark-container {{@root.prefix}}--inline-loading__svg"
-              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
-              <polyline class="{{@root.prefix}}--inline-loading__checkmark" points="0.74 3.4 3.67 6.34 9.24 0.74">
-              </polyline>
-            </svg>
           </div>
           {{/if}}
         </span>
       </div>
       {{/if}}
+    </div>
   </div>
 </div>

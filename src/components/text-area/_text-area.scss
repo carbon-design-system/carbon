@@ -43,6 +43,7 @@
 
     &::placeholder {
       @include placeholder-colors;
+      opacity: 1;
     }
 
     &:disabled {
@@ -104,13 +105,13 @@
     width: 100%;
     min-width: 10rem;
     min-height: rem(40px);
-    padding: rem(11px) $spacing-md;
+    padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
     order: 3;
     resize: vertical;
     border: none;
     border-bottom: 1px solid $ui-04;
-    transition: $transition--base all;
+    transition: $duration--fast-02 all;
 
     & ~ .#{$prefix}--form__helper-text {
       margin-top: 0;
@@ -122,7 +123,7 @@
       order: 4;
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-2xs;
+      margin-top: $carbon--spacing-02;
 
       &::before {
         display: none;
@@ -145,7 +146,7 @@
   }
 
   .#{$prefix}--text-area--invalid {
-    padding-right: $spacing-2xl;
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-area__wrapper {
@@ -177,9 +178,7 @@
   //-----------------------------
   // Error
   //-----------------------------
-  .#{$prefix}--text-area[data-invalid],
-  .#{$prefix}--text-area--invalid,
-  .#{$prefix}--text-area:invalid {
+  .#{$prefix}--text-area--invalid {
     @include focus-outline('invalid');
     box-shadow: none;
   }

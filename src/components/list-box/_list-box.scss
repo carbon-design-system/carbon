@@ -310,7 +310,7 @@ $list-box-menu-width: rem(300px);
     order: 1;
     cursor: pointer;
     color: $text-01;
-    transition: all $transition--expansion $carbon--standard-easing;
+    transition: all $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -331,7 +331,7 @@ $list-box-menu-width: rem(300px);
     order: 3;
     color: $support-01;
     font-weight: 400;
-    margin-top: $spacing-2xs;
+    margin-top: $carbon--spacing-02;
 
     &::before {
       display: none;
@@ -382,7 +382,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
     position: static;
-    padding: 0 $spacing-xs;
+    padding: 0 $carbon--spacing-03;
   }
 
   .#{$prefix}--list-box--inline > .#{$prefix}--list-box__menu {
@@ -434,7 +434,7 @@ $list-box-menu-width: rem(300px);
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
 
     color: $text-01;
     user-select: none;
@@ -449,7 +449,7 @@ $list-box-menu-width: rem(300px);
     bottom: 0;
     height: 100%;
     padding: 0 1rem;
-    transition: transform 200ms $carbon--standard-easing;
+    transition: transform $duration--fast-02 motion(standard, productive);
     cursor: pointer;
   }
 
@@ -473,7 +473,7 @@ $list-box-menu-width: rem(300px);
     padding: 0 1rem;
     cursor: pointer;
     user-select: none;
-    transition: background-color 200ms $carbon--standard-easing;
+    transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__selection > svg {
@@ -486,7 +486,7 @@ $list-box-menu-width: rem(300px);
 
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
-    @include typescale('omega');
+    @include type-style('label-01');
 
     position: static;
     display: flex;
@@ -542,7 +542,7 @@ $list-box-menu-width: rem(300px);
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
 
     display: flex;
     align-items: center;

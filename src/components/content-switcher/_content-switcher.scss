@@ -117,7 +117,13 @@
 @mixin content-switcher--x {
   .#{$prefix}--content-switcher {
     display: flex;
+    justify-content: space-evenly;
+    width: 100%;
     height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--disabled {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -126,19 +132,23 @@
     @include focus-outline('reset');
 
     background-color: $ui-01;
-    display: flex;
-    align-items: center;
-    padding: $spacing-xs $spacing-xl;
+    display: inline-block;
+    width: 100%;
+    height: rem(40px);
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
     text-decoration: none;
     border: none;
     color: $text-02;
-    transition: all $transition--base $carbon--standard-easing;
+    transition: all $duration--fast-01 motion(standard, productive);
     position: relative;
 
     &:focus {
-      @include focus-outline('outline');
-      color: $text-01;
+      box-shadow: inset 0 0 0 2px $focus;
       z-index: 3;
     }
 
@@ -155,6 +165,7 @@
 
     &:disabled {
       color: $ui-03;
+      pointer-events: none;
 
       &:hover {
         cursor: not-allowed;
@@ -162,7 +173,17 @@
     }
   }
 
-  .#{$prefix}--content-switcher-btn:not(:last-of-type)::after {
+  .#{$prefix}--content-switcher-btn:first-child {
+    border-top-left-radius: rem(4px);
+    border-bottom-left-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher-btn:last-child {
+    border-top-right-radius: rem(4px);
+    border-bottom-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
     content: '';
     display: block;
     height: rem(16px);
@@ -170,22 +191,25 @@
     background-color: $content-switcher-divider;
     position: absolute;
     z-index: 2;
-    right: rem(-1px);
+    left: 0;
   }
 
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::after,
-  .#{$prefix}--content-switcher-btn:focus::after,
-  .#{$prefix}--content-switcher-btn:hover::after {
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher-btn:focus + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher-btn:hover + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
 
   .#{$prefix}--content-switcher__icon {
     fill: $text-02;
-    transition: fill $transition--base $carbon--standard-easing;
+    transition: fill $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--content-switcher__icon + span {
-    margin-left: $spacing-xs;
+    margin-left: $carbon--spacing-03;
   }
 
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
@@ -200,7 +224,7 @@
 
     // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-colors__gray-30;
+      background-color: $ibm-color__gray-30;
     }
   }
 

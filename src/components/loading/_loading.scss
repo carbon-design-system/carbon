@@ -93,6 +93,9 @@
   .#{$prefix}--loading--small {
     width: 2rem;
     height: 2rem;
+    circle {
+      stroke-width: 12;
+    }
   }
 
   .#{$prefix}--loading--small .#{$prefix}--loading__svg {
@@ -114,7 +117,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 2000ms $carbon--standard-easing;
+    transition: background-color $duration--slow-02 motion(standard, expressive);
     z-index: z('overlay');
   }
 

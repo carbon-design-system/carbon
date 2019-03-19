@@ -79,19 +79,19 @@
 
   .#{$prefix}--list--nested {
     margin-bottom: rem(4px);
-    margin-left: $spacing-xl;
+    margin-left: $carbon--spacing-07;
   }
 
   .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
   .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
     display: inline-block;
-    margin-right: $spacing-xs;
+    margin-right: $carbon--spacing-03;
     margin-bottom: rem(4px);
   }
 
   .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before,
   .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
-    margin-right: $spacing-xs;
+    margin-right: $carbon--spacing-03;
     display: inline-block;
   }
 

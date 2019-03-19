@@ -194,13 +194,13 @@
   .#{$prefix}--number input[type='number'] {
     @include type-style('body-short-01');
     @include focus-outline('reset');
-    font-family: $font-family-mono;
+    font-family: carbon--font-family('mono');
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;
     min-width: 9.375rem;
-    padding-left: $spacing-md;
-    padding-right: $spacing-xl;
+    padding-left: $carbon--spacing-05;
+    padding-right: $carbon--spacing-07;
     font-weight: 300;
     height: rem(40px);
     color: $text-01;
@@ -208,7 +208,7 @@
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
-    transition: all $transition--base;
+    transition: all $duration--fast-02 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -247,7 +247,7 @@
     ~ .#{$prefix}--form-requirement {
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-2xs;
+      margin-top: $carbon--spacing-02;
       overflow: visible;
 
       &::before {
@@ -334,7 +334,8 @@
     min-width: rem(144px);
     width: auto;
 
-    .#{$prefix}--number__control-btn {
+    .#{$prefix}--number__control-btn,
+    &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
       position: static;
       width: rem(40px);
       height: rem(40px);

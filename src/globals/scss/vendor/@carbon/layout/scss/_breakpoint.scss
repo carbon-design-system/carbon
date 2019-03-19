@@ -9,8 +9,8 @@
 @import 'convert';
 @import 'utilities';
 
-$carbon--grid-cell-padding: carbon--rem(16px);
 $carbon--grid-gutter: carbon--rem(32px);
+$carbon--grid-gutter--condensed: carbon--rem(2px);
 
 // Initial map of our breakpoints and their values
 $carbon--grid-breakpoints: (

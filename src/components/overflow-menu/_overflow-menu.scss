@@ -200,7 +200,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: outline $transition--base, background-color $transition--base;
+    transition: outline $duration--fast-02 motion(entrance, productive),
+      background-color $duration--fast-02 motion(entrance, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -242,7 +243,7 @@
       position: absolute;
       display: block;
       background-color: $ui-01;
-      transition: background-color $transition--base;
+      transition: background-color $duration--fast-02 motion(entrance, productive);
     }
   }
 
@@ -298,7 +299,7 @@
     width: 100%;
     height: rem(40px);
     padding: 0;
-    transition: background-color $transition--base;
+    transition: background-color $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--overflow-menu--divider {
@@ -319,17 +320,16 @@
     width: 100%;
     height: 100%;
     border: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: transparent;
     text-align: left;
-    padding: 0 $spacing-md;
+    padding: 0 $carbon--spacing-05;
     cursor: pointer;
     color: $text-02;
     max-width: 11.25rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: outline $transition--base, background-color $transition--base, color $transition--base;
+    transition: outline $duration--fast-02 motion(entrance, productive),
+      background-color $duration--fast-02 motion(entrance, productive), color $duration--fast-02 motion(entrance, productive);
 
     &:hover {
       color: $text-01;
@@ -342,6 +342,20 @@
     &::-moz-focus-inner {
       border: none;
     }
+  }
+
+  .#{$prefix}--overflow-menu-options__btn svg {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn:hover svg {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--overflow-menu-options__option-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
@@ -364,7 +378,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
-    color: $disabled;
+    color: $disabled-02;
     pointer-events: none;
 
     &:hover,
@@ -373,6 +387,10 @@
       @include focus-outline('reset');
       background-color: $ui-01;
     }
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn svg {
+    fill: $disabled-02;
   }
 
   .#{$prefix}--overflow-menu--flip {
