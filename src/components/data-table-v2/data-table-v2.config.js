@@ -491,7 +491,7 @@ module.exports = {
         optionalHelper: 'Optional Helper Text',
         toolbarActionsXDisabled,
         // batchActions,
-        toolbarActions,
+        // toolbarActions,
         columns,
         rows,
         selectedItemsCounterLabel: `
@@ -505,7 +505,7 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
-        noSort: true,
+        sort: true,
       },
     },
     {
@@ -514,8 +514,8 @@ module.exports = {
       context: {
         title: 'Table title',
         state: 'default',
-        toolbarActions,
-        toolbarActionsX,
+        // toolbarActions,
+        // toolbarActionsX,
         columns: columnsExpandable,
         rows: rowsExpandable,
         searchInputId: 'search__input-2',
@@ -570,7 +570,7 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
-        noSort: true,
+        sort: true,
       },
     },
   ],
