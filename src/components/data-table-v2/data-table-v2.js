@@ -61,9 +61,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       }
     });
 
-    this.element.addEventListener('keydown', evt => {
-      this._keydownHandler(evt);
-    });
+    this.element.addEventListener('keydown', this._keydownHandler);
 
     this.state = {
       checkboxCount: 0,
