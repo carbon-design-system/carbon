@@ -176,14 +176,10 @@
   //Main Container
   //-------------------------------------------------
   .#{$prefix}--data-table-v2-container {
-    min-width: rem(600px);
+    min-width: rem(500px);
     width: 100%;
     overflow-x: auto;
     padding-top: $spacing-3xs; // allow space for focus styles
-
-    .#{$prefix}--search-input {
-      background-color: transparent;
-    }
   }
 
   //-------------------------------------------------
