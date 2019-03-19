@@ -37,7 +37,6 @@
     background-color: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $ui-05;
-    order: 2;
     border-radius: 0;
     cursor: pointer;
     border-bottom: 1px solid transparent;
@@ -45,10 +44,6 @@
     // Hide default select arrow in IE10+
     &::-ms-expand {
       display: none;
-    }
-
-    & ~ .#{$prefix}--label {
-      order: 1;
     }
 
     &:focus {
@@ -75,7 +70,6 @@
     }
 
     ~ .#{$prefix}--form-requirement {
-      order: 3;
       color: $support-01;
       font-weight: 400;
       margin-top: $spacing-2xs;
@@ -128,7 +122,7 @@
 
   .#{$prefix}--select--inline {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 
     // Targets IE10+ browsers: Display grid auto not supported
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -137,11 +131,24 @@
       align-items: center;
     }
 
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--select-input {
+      grid-row-start: 2;
+    }
+
     .#{$prefix}--label {
       white-space: nowrap;
       margin: 0 $spacing-xs 0 0;
       font-weight: 400;
       align-self: center;
+    }
+
+    .#{$prefix}--form__helper-text {
+      order: 0;
+      grid-column-start: 3;
+      align-self: center;
+      margin-bottom: 0;
     }
 
     .#{$prefix}--select-input {
@@ -158,9 +165,16 @@
         @include focus-outline('border');
       }
 
+      ~ .#{$prefix}--select__arrow,
+      ~ .#{$prefix}--form-requirement {
+        grid-column-start: 2;
+      }
+
       ~ .#{$prefix}--select__arrow {
-        bottom: auto;
-        top: 1rem;
+        position: relative;
+        top: calc(100% + 1rem);
+        grid-row-start: 1;
+        justify-self: end;
       }
 
       &[data-invalid] {
@@ -179,7 +193,7 @@
       }
 
       ~ .#{$prefix}--form-requirement {
-        grid-column-start: 2;
+        grid-row-start: 3;
 
         // Targets IE10+ browsers: Display grid auto not supported
         @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -214,6 +228,10 @@
     position: relative;
     display: flex;
     align-items: center;
+
+    &:hover .#{$prefix}--select-input {
+      background-color: $hover-ui;
+    }
   }
 
   .#{$prefix}--select-input {
@@ -225,7 +243,7 @@
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
-    padding: 0 rem(34px) 0 $carbon--spacing-05; // 1.5rem + chevron width
+    padding: 0 rem(42px) 0 $carbon--spacing-05; // 1.5rem + chevron width
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -252,11 +270,12 @@
       @include focus-outline('outline');
     }
 
-    &:disabled {
+    &:disabled,
+    &:hover:disabled {
       cursor: not-allowed;
-      background: $disabled-background-color;
-      color: $disabled;
-      border-bottom: 1px solid $disabled-background-color;
+      background-color: $disabled-background-color;
+      color: $disabled-02;
+      border-bottom-color: $disabled-background-color;
     }
   }
 
@@ -266,7 +285,7 @@
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
-    padding-right: rem(58px); // 1rem + chevron width + invalid icon width
+    padding-right: rem(64px); // 1rem + chevron width + invalid icon width
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
@@ -282,11 +301,22 @@
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
-    fill: $disabled;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--select--light .#{$prefix}--select-input {
-    background: $field-02;
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $ui-01;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled-02;
+    }
   }
 
   .#{$prefix}--select__arrow {
@@ -296,7 +326,6 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--select__disabled-icon,
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: rem(34px); // 1.5rem + chevron width
@@ -355,13 +384,14 @@
     color: $text-01;
     border-bottom: none;
     padding-left: $carbon--spacing-03;
+    padding-right: rem(26px);
 
     @-moz-document url-prefix() {
       padding-top: 0;
     }
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $hover-ui;
     }
   }
 
@@ -371,12 +401,12 @@
     right: $carbon--spacing-03;
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__invalid-icon {
-    right: rem(24px);
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--select-input {
+    padding-right: rem(50px);
   }
 
-  .#{$prefix}--select--inline .#{$prefix}--select-input--invalid ~ .#{$prefix}--select__disabled-icon {
-    right: rem(48px);
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
+    right: rem(24px);
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
