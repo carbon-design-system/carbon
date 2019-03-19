@@ -40,9 +40,9 @@ $typescale-map: (
 /// @deprecated (For v10) Use `@include carbon--type-scale()`
 @mixin typescale($size) {
   @include deprecate(
-    '`@include typescale()` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--type-scale()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include typescale()` has been removed. ' + 'Use `@include carbon--type-scale()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     @if map-has-key($typescale-map, $size) {
       font-size: map-get($typescale-map, $size);
@@ -70,9 +70,9 @@ $typescale-map: (
 /// @deprecated (For v10) Use `@include carbon--font-family()`
 @mixin font-family {
   @include deprecate(
-    '`@include font-family` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--font-family()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include font-family` has been removed. ' + 'Use `@include carbon--font-family()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     @if global-variable-exists('css--plex') and $css--plex == true {
       font-family: $font-family-sans-serif;
@@ -86,9 +86,9 @@ $typescale-map: (
 /// @deprecated (For v10) Use `@include carbon--type-style()`
 @mixin line-height($el) {
   @include deprecate(
-    '`@include line-height()` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--type-style()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include line-height()` has been removed. ' + 'Use `@include carbon--type-style()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     @if $el == 'heading' {
       line-height: 1.25;
@@ -103,10 +103,7 @@ $typescale-map: (
 // Only applied to bold weight text
 /// @deprecated (For v10) The new type styles doesn't use this
 @mixin font-smoothing {
-  @include deprecate(
-    '`@include font-smoothing` has been deprecated. ' + 'It will be removed in the next major release.',
-    feature-flag-enabled('breaking-changes-x')
-  ) {
+  @include deprecate('`@include font-smoothing` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -114,10 +111,7 @@ $typescale-map: (
 
 /// @deprecated (For v10) The new type styles doesn't use this
 @mixin letter-spacing {
-  @include deprecate(
-    '`@include letter-spacing` has been deprecated. ' + 'It will be removed in the next major release.',
-    feature-flag-enabled('breaking-changes-x')
-  ) {
+  @include deprecate('`@include letter-spacing` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
     letter-spacing: 0;
   }
 }
@@ -139,9 +133,9 @@ $font-size-map: (
 /// @deprecated (For v10) Use `@include carbon--type-scale()`
 @mixin font-size($size) {
   @include deprecate(
-    '`@include font-size()` has been deprecated. ' + 'It will be removed in the next major release. ' +
-      'Use `@include carbon--type-scale()` instead.',
-    feature-flag-enabled('breaking-changes-x')
+    '`@include font-size()` has been removed. ' + 'Use `@include carbon--type-scale()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
   ) {
     @if map-has-key($font-size-map, $size) {
       font-size: map-get($font-size-map, $size);

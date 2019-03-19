@@ -7,6 +7,7 @@
 
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
+@import 'functions';
 @import 'helper-mixins';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
@@ -60,8 +61,10 @@ $weights: (
 /// @deprecated (For v10) Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 @mixin plex-font-face {
   @include deprecate(
-    '`@include plex-font-face` has been deprecated. ' + 'It will be removed in the next major release.',
-    feature-flag-enabled('components-x')
+    '`@include plex-font-face` has been removed. ' +
+      'Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc. instead.',
+    feature-flag-enabled('components-x'),
+    true
   ) {
     @include check-default-font-path {
       @each $family, $name in $families {

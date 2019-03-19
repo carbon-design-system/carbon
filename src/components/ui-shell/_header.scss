@@ -76,7 +76,7 @@
   // Header - Name
   //--------------------------------------------------------------------------
   a.#{$prefix}--header__name {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
     display: flex;
     align-items: center;
     height: 100%;

@@ -46,15 +46,8 @@
       <li class="{{@root.prefix}}--toolbar-menu__title">FILTER BY</li>
       {{#each filterOptions}}
         <li class="{{@root.prefix}}--toolbar-menu__option">
-          <input id="{{id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{value}}" name="checkbox">
-          <label for="{{id}}" class="{{@root.prefix}}--checkbox-label">
-            <span class="{{@root.prefix}}--checkbox-appearance">
-              <svg class="{{@root.prefix}}--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-                <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-              </svg>
-            </span>
-            {{label}}
-          </label>
+          <input id="{{id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{value}}" name="checkbox"{{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}>
+          <label for="{{id}}" class="{{@root.prefix}}--checkbox-label">{{label}}</label>
         </li>
       {{/each}}
     </ul>
@@ -79,7 +72,7 @@
         <legend class="{{@root.prefix}}--visually-hidden">Select table row height</legend>
         {{#each rowHeightOptions}}
           <li class="{{@root.prefix}}--toolbar-menu__option">
-            <input id="{{id}}" class="{{@root.prefix}}--radio-button" type="radio" value="{{value}}" name="radio"{{#if selected}} checked{{/if}}>
+            <input id="{{id}}" class="{{@root.prefix}}--radio-button" type="radio" value="{{value}}" name="radio"{{#if selected}} checked{{/if}}{{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}>
             <label for="{{id}}" class="{{@root.prefix}}--radio-button__label">
               <span class="{{@root.prefix}}--radio-button__appearance"></span>
               {{label}}

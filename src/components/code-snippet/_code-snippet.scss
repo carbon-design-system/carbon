@@ -300,7 +300,6 @@
 
 @mixin snippet--x {
   .#{$prefix}--snippet code {
-    font-family: $font-family-mono;
     @include type-style('code-01');
   }
 

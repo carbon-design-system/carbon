@@ -434,7 +434,7 @@ $list-box-menu-width: rem(300px);
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
 
     color: $text-01;
     user-select: none;
@@ -486,7 +486,7 @@ $list-box-menu-width: rem(300px);
 
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
-    @include typescale('omega');
+    @include type-style('label-01');
 
     position: static;
     display: flex;
@@ -542,7 +542,7 @@ $list-box-menu-width: rem(300px);
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
-    @include typescale('zeta');
+    @include type-style('body-short-01');
 
     display: flex;
     align-items: center;
