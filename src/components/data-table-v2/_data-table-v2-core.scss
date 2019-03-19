@@ -302,7 +302,7 @@
       padding-right: rem(8px);
     }
 
-    .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+    td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
       background: $ui-03;
     }
 
@@ -311,21 +311,21 @@
       padding-left: rem(28px);
     }
 
-    td .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
+    td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
       @include focus-outline('outline');
     }
 
-    td .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
+    td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
       outline: none;
     }
 
-    td .#{$prefix}--overflow-menu svg {
+    td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
       opacity: 0;
     }
 
-    td .#{$prefix}--overflow-menu:hover svg,
-    td .#{$prefix}--overflow-menu:focus svg,
-    tr:hover .#{$prefix}--overflow-menu svg {
+    td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:hover .#{$prefix}--overflow-menu__icon,
+    td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:focus .#{$prefix}--overflow-menu__icon,
+    tr:hover td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
       opacity: 1;
     }
   }
@@ -345,14 +345,18 @@
     cursor: not-allowed;
   }
 
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-expand-v2 button svg,
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu div svg {
+  tbody
+    tr.#{$prefix}--row-disabled
+    .#{$prefix}--table-expand-v2
+    .#{$prefix}--table-expand-v2__button
+    .#{$prefix}--table-expand-v2__svg,
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
     fill: $disabled;
     cursor: not-allowed;
   }
 
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu div,
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu,
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
     background: $disabled-background-color;
     cursor: not-allowed;
   }
