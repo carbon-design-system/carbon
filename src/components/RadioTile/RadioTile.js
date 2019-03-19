@@ -112,11 +112,9 @@ export default class RadioTile extends React.Component {
           onKeyDown={this.handleKeyDown}>
           <div className={`${prefix}--tile__checkmark`}>
             {componentsX ? (
-              <CheckmarkFilled
-                aria-label={iconDescription}
-                alt={iconDescription}
-                description={iconDescription}
-              />
+              <CheckmarkFilled aria-label={iconDescription}>
+                {iconDescription && <title>{iconDescription}</title>}
+              </CheckmarkFilled>
             ) : (
               <Icon icon={iconCheckmarkSolid} description={iconDescription} />
             )}

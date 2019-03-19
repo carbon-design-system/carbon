@@ -240,8 +240,9 @@ export class Filename extends Component {
           className={`${prefix}--file-close`}
           aria-label={iconDescription}
           style={style}
-          {...other}
-        />
+          {...other}>
+          {iconDescription && <title>{iconDescription}</title>}
+        </CloseFilled16>
       ) : (
         <Icon
           description={iconDescription}
@@ -257,8 +258,9 @@ export class Filename extends Component {
           className={`${prefix}--file-complete`}
           aria-label={iconDescription}
           style={style}
-          {...other}
-        />
+          {...other}>
+          {iconDescription && <title>{iconDescription}</title>}
+        </CheckmarkFilled16>
       ) : (
         <Icon
           description={iconDescription}

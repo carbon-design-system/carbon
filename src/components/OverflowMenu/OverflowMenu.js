@@ -670,13 +670,15 @@ class OverflowMenu extends Component {
       onClick: this.handleClick,
       onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
-      description: iconDescription,
+      [IconElement ? 'aria-label' : 'description']: iconDescription,
       focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
     const overflowMenuIcon = (() => {
       return IconElement ? (
-        <IconElement {...iconProps} />
+        <IconElement {...iconProps}>
+          {iconDescription && <title>{iconDescription}</title>}
+        </IconElement>
       ) : (
         <Icon
           {...iconProps}

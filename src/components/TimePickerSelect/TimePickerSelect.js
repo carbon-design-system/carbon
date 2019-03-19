@@ -113,7 +113,11 @@ export default class TimePickerSelect extends Component {
           {children}
         </select>
         {componentsX ? (
-          <ChevronDownGlyph className={`${prefix}--select__arrow`} />
+          <ChevronDownGlyph
+            className={`${prefix}--select__arrow`}
+            aria-label={iconDescription}>
+            {iconDescription && <title>{iconDescription}</title>}
+          </ChevronDownGlyph>
         ) : (
           <Icon
             icon={iconCaretDown}

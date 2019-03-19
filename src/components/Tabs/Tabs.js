@@ -272,7 +272,9 @@ export default class Tabs extends React.Component {
               {selectedLabel}
             </a>
             {componentsX ? (
-              <ChevronDownGlyph aria-hidden />
+              <ChevronDownGlyph aria-hidden>
+                {iconDescription && <title>{iconDescription}</title>}
+              </ChevronDownGlyph>
             ) : (
               <Icon description={iconDescription} icon={iconCaretDown} />
             )}

@@ -57,6 +57,10 @@ const props = {
       'Form validation UI content (invalidText in <DatePickerInput>)',
       'A valid value is required'
     ),
+    iconDescription: text(
+      'Icon description (iconDescription in <DatePickerInput>)',
+      'Icon description'
+    ),
     onClick: action('onClick'),
     onChange: action('onInputChange'),
   }),
@@ -91,13 +95,7 @@ storiesOf('DatePicker', module)
           'The date format (dateFormat in <DatePicker>)',
           'm/d/Y'
         )}>
-        <DatePickerInput
-          {...props.datePickerInput()}
-          iconDescription={text(
-            'Icon description (iconDescription in <DatePickerInput>)',
-            'Icon description'
-          )}
-        />
+        <DatePickerInput {...props.datePickerInput()} />
       </DatePicker>
     ),
     {

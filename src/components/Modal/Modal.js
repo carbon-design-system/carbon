@@ -290,7 +290,6 @@ export default class Modal extends Component {
         ref={this.button}>
         {componentsX ? (
           <Close20
-            alt={iconDescription}
             aria-label={iconDescription}
             className={`${prefix}--modal-close__icon`}
           />

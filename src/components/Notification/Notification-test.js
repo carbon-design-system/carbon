@@ -47,7 +47,9 @@ describe('NotificationButton', () => {
       );
       const originalIcon = mount(<Close16 />).find('svg');
       const icon = iconButton.find('svg');
-      expect(icon.children().html()).toBe(originalIcon.children().html());
+      expect(icon.find(':not(svg):not(title)').html()).toBe(
+        originalIcon.children().html()
+      );
     });
 
     describe('When notificationType equals "toast"', () => {
