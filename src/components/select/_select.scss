@@ -25,6 +25,10 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--form__helper-text {
+    order: 0;
+  }
+
   .#{$prefix}--select-input {
     @include font-family;
     @include typescale('zeta');
@@ -145,7 +149,6 @@
     }
 
     .#{$prefix}--form__helper-text {
-      order: 0;
       grid-column-start: 3;
       align-self: center;
       margin-bottom: 0;
