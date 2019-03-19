@@ -195,7 +195,7 @@ describe('ToastNotification', () => {
 
 describe('InlineNotification', () => {
   describe('Renders as expected', () => {
-    const inline = shallow(
+    const inline = mount(
       <InlineNotification
         title="this is a title"
         subtitle="this is a subtitle"
@@ -217,17 +217,9 @@ describe('InlineNotification', () => {
       expect(inline.find(Icon).some({ icon: iconErrorSolid })).toBe(true);
     });
 
-    // removed because of a11y warning icon workaround, depending on TODO: for @carbon/icons-react
-    // it('renders warning notification with matching kind and <icon name=""> values', () => {
-    //   inline.setProps({ kind: 'warning' });
-    //   expect(inline.find(Icon).some({ icon: iconWarningSolid })).toBe(true);
-    // });
-
     it('renders warning notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'warning' });
-      expect(
-        inline.children('.bx--inline-notification__details').exists()
-      ).toBe(true);
+      expect(inline.find('.bx--inline-notification__icon').exists()).toBe(true);
     });
 
     it('renders info notification with matching kind value but without <icon name="">', () => {
@@ -236,12 +228,12 @@ describe('InlineNotification', () => {
     });
 
     it('renders HTML for inline notifications when caption does not exist', () => {
-      expect(inline.hasClass('bx--inline-notification')).toBe(true);
+      expect(inline.find('.bx--inline-notification').exists()).toBe(true);
     });
 
     it('adds extra classes via className', () => {
       inline.setProps({ className: 'extra-class' });
-      expect(inline.hasClass('extra-class')).toBe(true);
+      expect(inline.find('.extra-class').exists()).toBe(true);
     });
 
     it('interpolates matching className based on kind prop', () => {
@@ -249,9 +241,9 @@ describe('InlineNotification', () => {
 
       kinds.forEach(kind => {
         inline.setProps({ kind });
-        expect(inline.hasClass(`bx--inline-notification--${kind}`)).toEqual(
-          true
-        );
+        expect(
+          inline.find(`.bx--inline-notification--${kind}`).exists()
+        ).toEqual(true);
       });
     });
 

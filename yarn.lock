@@ -922,17 +922,17 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/icon-helpers@0.0.1-alpha.32":
-  version "0.0.1-alpha.32"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.32.tgz#6bb291b574ebd49784fec4c8751245840aedb80c"
-  integrity sha512-Mx7Uttbv4MvG6V1mBayrM5qivqAamZZp+F3AQvSyngTFIDanCjBzaseqKWYBIT3zAbAQvzpjShDlo9xZgPQ9Xg==
+"@carbon/icon-helpers@0.0.1-beta.2":
+  version "0.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-beta.2.tgz#8dbe56b72d60e7ca7175eefec8b97481d749b9cb"
+  integrity sha512-bwjRXHH2Ts4grvldW3P8jd2F1VTJezDyeKvGG6WdKovfWWJMD8mi3d7hBlOPW0tRHzTOxkam7OK9Jk/kEoLTkA==
 
-"@carbon/icons-react@^0.0.1-alpha.32":
-  version "0.0.1-alpha.32"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-0.0.1-alpha.32.tgz#8e507d231399e4197e2868c6c215e3bba74f226a"
-  integrity sha512-PO96imAfYa4O+ckMLu7VRK6SOZgkM0nwPbz0KAIXPWsDuAH+hP9OIUYHjRbzLXunzwHGGGygXNAxmMIFSLzUOg==
+"@carbon/icons-react@^0.0.1-beta.2":
+  version "0.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-0.0.1-beta.2.tgz#8e4087bf26a71bbb6e57de976ab762d47d2c482c"
+  integrity sha512-rq6O4w/EY4XxuS8076mxbXkMuov0iwoNuQRcs5cJMPvK+VTjOZyHAlPUVl00aWbWwNoAEuQ6LWe01n/f8KovJg==
   dependencies:
-    "@carbon/icon-helpers" "0.0.1-alpha.32"
+    "@carbon/icon-helpers" "0.0.1-beta.2"
     prop-types "^15.6.2"
 
 "@emotion/cache@^0.8.8":
@@ -3158,10 +3158,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@^9.84.14:
-  version "9.84.14"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.84.14.tgz#109d0e01e840e5c887a7ea21782c93781d5d4f66"
-  integrity sha512-GTwsJyN7gSs2eFqAFFIslqn3pPTsgPn5kX9eTzCU/vBe6+g3sc5M1IsWf55QDlVo5oZiVrg/Ny9uLhC73Maq4g==
+carbon-components@^9.84.16:
+  version "9.84.16"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.84.16.tgz#58b453c9bc578e65d984d0f6b2f584130a787c4b"
+  integrity sha512-lGFQDKO+ARZ/+mpeHx3uoEwHgNAe2lPY+bCpSOJ7j7mGQYUn8uMG3lvzINLTpHFWeCD0NJSShQ6cByX7S+cajw==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.7"
