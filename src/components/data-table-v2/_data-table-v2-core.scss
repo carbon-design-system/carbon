@@ -252,6 +252,7 @@
     th {
       color: $text-01;
       border-top: 1px solid $ui-03;
+      border-bottom: 1px solid $ui-03;
     }
 
     th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
