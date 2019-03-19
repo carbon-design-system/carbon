@@ -168,6 +168,9 @@
   .#{$prefix}--tag--filter > svg {
     fill: $inverse-01;
     margin-left: rem(4px);
+    padding: rem(4px);
+    width: rem(20px);
+    height: rem(20px);
   }
 
   .#{$prefix}--tag--filter > svg:hover {
