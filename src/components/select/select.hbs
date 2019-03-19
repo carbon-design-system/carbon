@@ -49,8 +49,8 @@
         Validation message here
       </div>
       {{/if}}
-      {{/if}}
     </div>
+    {{/if}}
     {{else}}
     <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
       {{#each items}}
@@ -80,7 +80,7 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/if}}
-    {{#unless inline}}
+    {{#unless componentsX}}
     {{#if invalid}}
     <div class="{{@root.prefix}}--form-requirement">
       Validation message here
@@ -93,7 +93,8 @@
 <div class="{{@root.prefix}}--form-item">
   <div
     class="{{@root.prefix}}--select{{#if inline}} {{@root.prefix}}--select--inline{{/if}}{{#if light}} {{@root.prefix}}--select--light{{/if}}{{#if invalid}} {{@root.prefix}}--select--invalid{{/if}} {{@root.prefix}}--select--disabled">
-    <label for="select-id-disabled" class="{{@root.prefix}}--label">Select label</label>
+    <label for="select-id-disabled" class="{{@root.prefix}}--label {{@root.prefix}}--label--disabled">Select
+      label</label>
     {{#unless inline}}
     {{#if helperText}}
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
@@ -151,7 +152,7 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/if}}
-    {{#unless inline}}
+    {{#unless componentsX}}
     {{#if invalid}}
     <div class="{{@root.prefix}}--form-requirement">
       Validation message here

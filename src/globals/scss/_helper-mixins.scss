@@ -55,7 +55,7 @@
 
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
-    outline: 1px solid $brand-01;
+    outline: 1px solid if(not feature-flag-enabled('components-x'), $brand-01, $focus);
   }
 
   @if ($type == 'blurred') {
@@ -64,7 +64,7 @@
   }
 
   @if ($type == 'outline') {
-    outline: 2px solid $brand-01;
+    outline: 2px solid if(not feature-flag-enabled('components-x'), $brand-01, $focus);
     outline-offset: -2px;
   }
 
