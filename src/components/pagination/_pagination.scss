@@ -259,7 +259,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
     @include carbon--breakpoint('md') {
-      right: 1.6rem;
+      right: 1.8rem;
     }
   }
 
@@ -302,8 +302,9 @@ $css--helpers: true;
     margin-left: $carbon--spacing-05;
     color: $text-02;
   }
-  .#{$prefix}--pagination__text[for='select-id-pagination-page'] {
-    margin-left: -1rem;
+
+  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
+    margin-left: -0.5rem;
   }
 
   .#{$prefix}--pagination__button {
