@@ -3,17 +3,25 @@
 _Note: this migration guide is for a future, unreleased version of Carbon.
 Anything in this document is subject to change up until v10 is released._
 
- <!-- prettier-ignore-start -->
+<!-- prettier-ignore-start -->
+<!-- To run doctoc, just do `npx doctoc migrate-to-10.x.md` in this directory! -->
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-## Table of Contents
 
+- [Process](#process)
 - [Components](#components)
 - [Icons](#icons)
+- [Polyfills](#polyfills)
 
- <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
+
+## Process
+
+1. Update your `carbon-components-react` package using `npm` or `yarn`.
+1. When migrating from v9 to v10, you'll first want to address your component instances marked with `Removed` in the table below. E.g. if you're using the `<Footer />` React component that was previously available in Carbon, you'll need to either remove your footer instances or create your own footer component so the `<Footer />` syntax is recognized in your client-side JavaScript.
 
 ## Components
 
@@ -61,7 +69,7 @@ Anything in this document is subject to change up until v10 is released._
 | `Pagination`          | Export now points to `PaginationV2`                                 |
 | `PaginationV2`        | Renamed to `Pagination`                                             |
 | `PrimaryButton`       | No breaking changes                                                 |
-| `ProgresIndicator`    | No breaking changes                                                 |
+| `ProgressIndicator`   | No breaking changes                                                 |
 | `RadioButton`         | [Migrate](../../src/components/RadioButton/migrate-to-10.x.md)      |
 | `RadioButtonGroup`    | No breaking changes                                                 |
 | `RadioTile`           | No breaking changes                                                 |
@@ -129,6 +137,8 @@ can import icon components directly and use them in a variety of sizes (16x16,
 In addition, these components have minor accessibility and performance improvements, most notably
 around inlining the SVG data for an icon instead of deriving the markup at
 runtime.
+
+When migrating `<Icon />` components, make sure your `description` props become `aria-label` attributes to properly describe the icon to screen readers.
 
 ## Polyfills
 
