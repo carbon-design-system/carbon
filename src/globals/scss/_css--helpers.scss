@@ -27,7 +27,11 @@
 
   .#{$prefix}--body {
     @include reset;
-    @include font-family;
+    @if not feature-flag-enabled('components-x') {
+      @include font-family;
+    } @else {
+      @include type-style('body-short-01');
+    }
     color: $text-01;
     background-color: $ui-02;
     line-height: 1;

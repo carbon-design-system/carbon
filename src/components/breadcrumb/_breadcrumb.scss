@@ -74,9 +74,7 @@
 @mixin breadcrumb--x {
   .#{$prefix}--breadcrumb {
     @include type-style('body-short-01');
-
     display: inline;
-
     @if feature-flag-enabled('grid') {
       @include carbon--breakpoint(md) {
         display: flex;

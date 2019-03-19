@@ -121,7 +121,7 @@
       margin-top: $carbon--spacing-05;
     }
 
-    @include breakpoint(max) {
+    @include carbon--breakpoint(max) {
       width: rem(352px);
     }
   }
