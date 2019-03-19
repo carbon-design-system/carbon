@@ -288,14 +288,14 @@
 
     td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
       padding: rem(14px) $spacing-sm;
+    }
 
-      &:first-of-type {
-        padding-left: $spacing-lg;
-      }
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2):first-of-type {
+      padding-left: $spacing-lg;
+    }
 
-      &:last-of-type {
-        padding-right: $spacing-lg;
-      }
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2):last-of-type {
+      padding-right: $spacing-lg;
     }
 
     .#{$prefix}--table-header-label {
@@ -322,59 +322,25 @@
       background: $ui-03;
     }
 
-    //width for additional icon columns
-    .#{$prefix}--table-column-icon {
-      width: rem(32px);
-      min-width: rem(32px);
-      justify-content: center;
-      padding: 0;
-      padding-top: rem(8px);
-    }
-
-    .#{$prefix}--table-column-icon button {
-      width: rem(32px);
-      height: rem(32px);
-      vertical-align: middle;
-      background: transparent;
-      border: none;
-      outline: none;
-
-      &:focus:not([disabled]),
-      &:hover:not([disabled]) {
-        background: $ui-03;
-      }
-    }
-
-    .#{$prefix}--table-column-icon + .#{$prefix}--table-column-menu {
-      width: rem(40px);
-      min-width: rem(40px);
-      padding-left: 0;
-    }
-
-    // Overrides
+    // Checbox and Overflow Menu Overrides
     .#{$prefix}--checkbox-label {
       padding-left: rem(28px);
     }
 
-    td .#{$prefix}--overflow-menu {
-      & svg {
-        opacity: 0;
-      }
-
-      &:hover svg,
-      &:focus svg {
-        opacity: 1;
-      }
-
-      &[aria-expanded='false']:focus {
-        @include focus-outline('outline');
-      }
-
-      &[aria-expanded='true']:focus {
-        outline: none;
-      }
+    td .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
+      @include focus-outline('outline');
     }
 
+    td .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
+      outline: none;
+    }
+
+    td .#{$prefix}--overflow-menu svg {
+      opacity: 0;
+    }
+
+    td .#{$prefix}--overflow-menu:hover svg,
+    td .#{$prefix}--overflow-menu:focus svg,
     tr:hover .#{$prefix}--overflow-menu svg {
       opacity: 1;
     }
@@ -383,7 +349,8 @@
   //-------------------------------------------------
   //NUMERICAL COLUMN
   //-------------------------------------------------
-  td.#{$prefix}--data-table-v2--numerical-cell {
+  td.#{$prefix}--data-table-v2--numerical-cell,
+  th.#{$prefix}--data-table-v2--numerical-cell {
     text-align: right;
   }
 
@@ -392,29 +359,25 @@
   //-------------------------------------------------
   tbody tr.#{$prefix}--row-disabled {
     cursor: not-allowed;
+  }
 
-    td,
-    td:hover {
-      color: $disabled;
-      background: $disabled-background-color;
-      cursor: not-allowed;
-    }
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-expand-v2 button svg,
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu div svg {
+    fill: $disabled;
+    cursor: not-allowed;
+  }
 
-    .#{$prefix}--table-expand-v2 button svg,
-    .#{$prefix}--table-column-menu div svg {
-      fill: $disabled;
-      cursor: not-allowed;
-    }
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu div,
+  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
+    background: $disabled-background-color;
+    cursor: not-allowed;
+  }
 
-    .#{$prefix}--table-column-menu div,
-    .#{$prefix}--table-column-menu div[aria-expanded='false']:hover {
-      background: $disabled-background-color;
-      cursor: not-allowed;
-    }
-
-    .#{$prefix}--table-column-icon svg {
-      fill: $disabled;
-    }
+  tbody tr.#{$prefix}--row-disabled td,
+  tbody tr.#{$prefix}--row-disabled td:hover {
+    color: $disabled;
+    background: $disabled-background-color;
+    cursor: not-allowed;
   }
 
   tbody tr.#{$prefix}--row-disabled:hover {
