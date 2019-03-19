@@ -219,51 +219,27 @@
       font-weight: 700;
     }
 
-    th.#{$prefix}--table-column-icon:hover,
-    th.#{$prefix}--table-column-menu:hover,
-    th.#{$prefix}--table-expand-v2:hover {
-      background: $ui-03;
-    }
-
     tbody {
       @include type-style('body-short-01');
       background-color: $ui-01;
       width: 100%;
     }
 
-    tbody tr,
-    thead tr {
+    tr {
       border: none;
-    }
-
-    tbody tr td {
-      background: $ui-01;
-      border-bottom: 1px solid $ui-03;
-      border-top: 1px solid $ui-01;
+      height: rem(48px);
+      width: 100%;
     }
 
     tbody tr:hover:not(.#{$prefix}--row-disabled) {
       background: $hover-field;
-
-      & td {
-        color: $text-01;
-        background: $hover-field;
-        border-bottom: 1px solid $hover-field;
-        border-top: 1px solid $hover-field;
-      }
     }
 
-    tbody tr:focus {
-      outline: 0;
-    }
-
-    tr {
-      height: rem(48px);
-      width: 100%;
-
-      .#{$prefix}--overflow-menu {
-        opacity: 1;
-      }
+    tbody tr:hover:not(.#{$prefix}--row-disabled) td {
+      color: $text-01;
+      background: $hover-field;
+      border-bottom: 1px solid $hover-field;
+      border-top: 1px solid $hover-field;
     }
 
     th,
@@ -279,11 +255,23 @@
 
     th {
       color: $text-01;
-      border-top: 1px solid transparent;
+      border-top: 1px solid $ui-03;
     }
 
     th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
       padding-left: $spacing-lg;
+    }
+
+    th.#{$prefix}--table-column-icon:hover,
+    th.#{$prefix}--table-column-menu:hover,
+    th.#{$prefix}--table-expand-v2:hover {
+      background: $ui-03;
+    }
+
+    tbody tr td {
+      background: $ui-01;
+      border-bottom: 1px solid $ui-03;
+      border-top: 1px solid $ui-01;
     }
 
     td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
