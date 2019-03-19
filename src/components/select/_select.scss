@@ -37,7 +37,6 @@
     background-color: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $ui-05;
-    order: 2;
     border-radius: 0;
     cursor: pointer;
     border-bottom: 1px solid transparent;
@@ -45,10 +44,6 @@
     // Hide default select arrow in IE10+
     &::-ms-expand {
       display: none;
-    }
-
-    & ~ .#{$prefix}--label {
-      order: 1;
     }
 
     &:focus {
@@ -75,7 +70,6 @@
     }
 
     ~ .#{$prefix}--form-requirement {
-      order: 3;
       color: $support-01;
       font-weight: 400;
       margin-top: $spacing-2xs;
@@ -128,7 +122,7 @@
 
   .#{$prefix}--select--inline {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 
     // Targets IE10+ browsers: Display grid auto not supported
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -137,11 +131,24 @@
       align-items: center;
     }
 
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--select-input {
+      grid-row-start: 2;
+    }
+
     .#{$prefix}--label {
       white-space: nowrap;
       margin: 0 $spacing-xs 0 0;
       font-weight: 400;
       align-self: center;
+    }
+
+    .#{$prefix}--form__helper-text {
+      order: 0;
+      grid-column-start: 3;
+      align-self: center;
+      margin-bottom: 0;
     }
 
     .#{$prefix}--select-input {
@@ -158,9 +165,16 @@
         @include focus-outline('border');
       }
 
+      ~ .#{$prefix}--select__arrow,
+      ~ .#{$prefix}--form-requirement {
+        grid-column-start: 2;
+      }
+
       ~ .#{$prefix}--select__arrow {
-        bottom: auto;
-        top: 1rem;
+        position: relative;
+        top: calc(100% + 1rem);
+        grid-row-start: 1;
+        justify-self: end;
       }
 
       &[data-invalid] {
@@ -179,7 +193,7 @@
       }
 
       ~ .#{$prefix}--form-requirement {
-        grid-column-start: 2;
+        grid-row-start: 3;
 
         // Targets IE10+ browsers: Display grid auto not supported
         @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
