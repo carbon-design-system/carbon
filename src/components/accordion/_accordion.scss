@@ -258,7 +258,6 @@
         padding-bottom motion(entrance, productive) $duration--fast-02;
 
       p {
-        @include type-style('body-long-01');
         height: auto;
         transition: height motion(entrance, productive) $duration--fast-02;
       }
