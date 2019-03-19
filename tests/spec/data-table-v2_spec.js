@@ -1,4 +1,3 @@
-import { componentsX } from '../../src/globals/js/feature-flags';
 import EventManager from '../utils/event-manager';
 import flattenOptions from '../utils/flatten-options';
 import DataTableV2 from '../../src/components/data-table-v2/data-table-v2';
@@ -35,9 +34,6 @@ describe('DataTableV2', function() {
         selectorTableBody: 'tbody',
         selectorTableSort: '.bx--table-sort-v2',
         selectorTableSelected: '.bx--data-table-v2--selected',
-        selectorToolbarSearchContainer: '.bx--toolbar-search-container-expandable',
-        selectorSearchMagnifier: '.bx--search-magnifier',
-        selectorSearchInput: '.bx--search-input',
         classExpandableRow: 'bx--expandable-row-v2',
         classExpandableRowHidden: 'bx--expandable-row--hidden-v2',
         classExpandableRowHover: 'bx--expandable-row--hover-v2',
@@ -45,7 +41,6 @@ describe('DataTableV2', function() {
         classTableSortActive: 'bx--table-sort-v2--active',
         classActionBarActive: 'bx--batch-actions--active',
         classTableSelected: 'bx--data-table-v2--selected',
-        classToolbarSearchActive: 'bx--toolbar-search-container-active',
         eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
         eventAfterExpand: 'data-table-v2-aftertoggleexpand',
         eventBeforeSort: 'data-table-v2-beforetogglesort',
@@ -213,76 +208,6 @@ describe('DataTableV2', function() {
     afterAll(function() {
       document.body.removeChild(container);
       table.release();
-    });
-  });
-
-  describe('Toggle active search bar', function() {
-    let table;
-    let container;
-    let dt;
-
-    beforeEach(function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        container = document.createElement('div');
-        container.innerHTML = HTML;
-        document.body.appendChild(container);
-        dt = document.querySelector('.bx--data-table-v2');
-        table = new DataTableV2(container);
-      }
-    });
-
-    it('Should open search bar on click', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-hidden');
-        const magnifier = document.querySelector('.bx--search-magnifier');
-        magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
-      }
-    });
-
-    it('Should close search bar on click', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-hidden');
-        search.classList.add('bx--toolbar-search-container-active');
-        dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
-      }
-    });
-
-    it('Should open search bar on keydown', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-hidden');
-        const magnifier = document.querySelector('.bx--search-magnifier');
-        const event = new CustomEvent('keydown', { bubbles: true });
-        event.which = 13;
-        magnifier.dispatchEvent(event);
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
-      }
-    });
-
-    it('Should close search bar on keydown', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-hidden');
-        const btn = document.querySelector('.bx--btn');
-        search.classList.add('bx--toolbar-search-container-active');
-        const event = new CustomEvent('keydown', { bubbles: true });
-        event.which = 27;
-        btn.dispatchEvent(event);
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
-      }
-    });
-
-    afterEach(function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        document.body.removeChild(container);
-        table.release();
-      }
     });
   });
 });

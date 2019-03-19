@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -60,10 +59,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       if (eventElement) {
         this._toggleState(eventElement, evt);
       }
-
-      if (componentsX) {
-        this._handleDocumentClick(evt);
-      }
     });
 
     this.element.addEventListener('keydown', evt => {
@@ -73,36 +68,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state = {
       checkboxCount: 0,
     };
-  }
-
-  _handleDocumentClick(evt) {
-    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
-    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
-    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
-
-    if (searchContainer && searchEvent) {
-      this.activateSearch(searchContainer);
-    }
-
-    if (activeSearch) {
-      this.deactivateSearch(searchContainer, evt);
-    }
-  }
-
-  activateSearch(container) {
-    const input = container.querySelector(this.options.selectorSearchInput);
-    container.classList.add(this.options.classToolbarSearchActive);
-    input.focus();
-  }
-
-  deactivateSearch(container, evt) {
-    const trigger = container.querySelector(this.options.selectorSearchMagnifier);
-    const input = container.querySelector(this.options.selectorSearchInput);
-    const svg = trigger.querySelector('svg');
-    if (input.value.length === 0 && evt.target !== input && evt.target !== trigger && evt.target !== svg) {
-      container.classList.remove(this.options.classToolbarSearchActive);
-      input.focus();
-    }
   }
 
   _sortToggle = detail => {
@@ -263,20 +228,8 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _keydownHandler = evt => {
-    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
-    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
-    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
-
     if (evt.which === 27) {
       this._actionBarCancel();
-    }
-
-    if (searchContainer && searchEvent && evt.which === 13) {
-      this.activateSearch(searchContainer);
-    }
-
-    if (activeSearch && evt.which === 27) {
-      this.deactivateSearch(searchContainer, evt);
     }
   };
 
@@ -337,9 +290,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorTableBody: 'tbody',
       selectorTableSort: `.${prefix}--table-sort-v2`,
       selectorTableSelected: `.${prefix}--data-table-v2--selected`,
-      selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-expandable`,
-      selectorSearchMagnifier: `.${prefix}--search-magnifier`,
-      selectorSearchInput: `.${prefix}--search-input`,
       classExpandableRow: `${prefix}--expandable-row-v2`,
       classExpandableRowHidden: `${prefix}--expandable-row--hidden-v2`,
       classExpandableRowHover: `${prefix}--expandable-row--hover-v2`,
@@ -347,7 +297,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       classTableSortActive: `${prefix}--table-sort-v2--active`,
       classActionBarActive: `${prefix}--batch-actions--active`,
       classTableSelected: `${prefix}--data-table-v2--selected`,
-      classToolbarSearchActive: `${prefix}--toolbar-search-container-active`,
       eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
       eventAfterExpand: 'data-table-v2-aftertoggleexpand',
       eventBeforeSort: 'data-table-v2-beforetogglesort',
