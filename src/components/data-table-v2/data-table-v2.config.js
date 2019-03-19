@@ -490,8 +490,8 @@ module.exports = {
         state: 'disabled',
         optionalHelper: 'Optional Helper Text',
         toolbarActionsXDisabled,
-        // batchActions,
-        // toolbarActions,
+        batchActions,
+        toolbarActions,
         columns,
         rows,
         selectedItemsCounterLabel: `
@@ -514,8 +514,8 @@ module.exports = {
       context: {
         title: 'Table title',
         state: 'default',
-        // toolbarActions,
-        // toolbarActionsX,
+        toolbarActions,
+        toolbarActionsX,
         columns: columnsExpandable,
         rows: rowsExpandable,
         searchInputId: 'search__input-2',
