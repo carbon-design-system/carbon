@@ -468,6 +468,7 @@
   </section>
   {{/if}}
 
+ {{#if (not small)}}</div>{{/if}}
 <!-- Pagination -->
   {{#if hasPager}}
  <div class="{{@root.prefix}}--pagination" data-pagination>
@@ -533,6 +534,4 @@
    </div>
  </div>
  {{/if}}
-
- {{#if (not small)}}</div>{{/if}}
 {{/if}}
