@@ -58,6 +58,25 @@
     @include tag-theme($color__yellow-10, $color__yellow-60);
   }
 
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    @include tag-theme($brand-01, white);
+    cursor: pointer;
+  }
+
+  .#{$prefix}--tag--filter > svg {
+    fill: white;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: rem(5px);
+  }
+
+  .#{$prefix}--tag--filter:focus,
+  .#{$prefix}--tag--filter:hover {
+    background-color: $hover-primary;
+    outline: none;
+  }
+
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include tag-theme($color__gray-1, $color__navy-gray-4);
@@ -137,6 +156,31 @@
     &:hover {
       cursor: not-allowed;
     }
+  }
+
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    @include tag-theme--x($interactive-02, $inverse-01);
+    cursor: pointer;
+    padding-right: rem(2px); // Align with hover circle of X button
+  }
+
+  .#{$prefix}--tag--filter > svg {
+    fill: $inverse-01;
+    margin-left: rem(4px);
+    padding: rem(2px);
+    width: rem(20px);
+    height: rem(20px);
+  }
+
+  .#{$prefix}--tag--filter > svg:hover {
+    border-radius: 50%;
+    background-color: $icon-02;
+  }
+
+  .#{$prefix}--tag--filter:focus,
+  .#{$prefix}--tag--filter:hover {
+    outline: none;
   }
 
   // Skeleton state
