@@ -12,45 +12,6 @@ The update to tables splits out the `scss` files into multiple partial files wit
 | `data-table-v2-expandable` | Expandable row styles                    |
 | `data-table-v2-sort`       | Sortable header styles                   |
 
-#### Classes
-
-- Core
-  - `bx--data-table-v2-container`
-    - `bx--data-table-v2-header`
-    - `bx--data-table-v2`
-      - `bx--data-table-v2--zebra`
-      - `bx--data-table-v2--no-border`
-      - `bx--data-table-v2--static`
-      - `bx--data-table-v2--selected`
-      - Sizing (smallest to largest)
-        - `bx--data-table-v2--compact`
-        - `bx--data-table-v2--short`
-        - `bx--data-table-v2--tall`
-- Action
-  - `bx--table-toolbar`
-  - `bx--toolbar-content`
-  - `bx--toolbar-action`
-  - `bx--toolbar-action__icon`
-  - `bx--batch-actions`
-  - `bx--batch-actions--active`
-  - `bx--action-list`
-  - `bx--action-icons`
-  - `bx--batch-summary`
-  - `bx--batch-summary__para`
-  - `bx--batch-summary__cancel`
-- Expandable
-  - `bx--expandable-row-v2`
-  - `bx--expandable-row--hidden-v2`
-  - `bx--expandable-row--hover-v2`
-  - `bx--table-expand-v2`
-  - `bx--table-expand-v2__button`
-  - `bx--table-expand-v2__svg`
-- Sort
-  - `bx--table-sort-v2`
-  - `bx--table-sort-v2--ascending`
-  - `bx--table-sort-v2--active`
-  - `bx--table-sort-v2__icon`
-
 #### Modifiers
 
 | Name                           | Description                                  |
