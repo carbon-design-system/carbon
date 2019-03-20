@@ -3158,7 +3158,7 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@^9.84.18:
+carbon-components@^9.84.21:
   version "9.84.21"
   resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.84.21.tgz#01e00adae06aecb082f23c3504ce9cafbeab37a8"
   integrity sha512-SV1IeDLk2ILVf6RsZNQ7IJgkcoYx1rQcHscKT5UpX8QMk9nllfiBW82szQwFMbmtr3aVuZfkhzV8InaDEDSnlw==
