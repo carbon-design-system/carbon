@@ -299,6 +299,7 @@ export default class PaginationV2 extends Component {
           <Select
             id={`${prefix}-pagination-select-${inputId}`}
             className={`${prefix}--select__item-count`}
+            labelText=""
             hideLabel
             inline
             onChange={this.handleSizeChange}
@@ -325,8 +326,9 @@ export default class PaginationV2 extends Component {
             <Select
               id={`${prefix}-pagination-select-${inputId + 2}`}
               className={`${prefix}--select__page-number`}
-              hideLabel
+              labelText={`Page number, of ${totalPages} pages`}
               inline
+              hideLabel
               onChange={this.handlePageInputChange}
               value={statePage}>
               {selectItems}
