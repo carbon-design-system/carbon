@@ -39,7 +39,7 @@ $padding: (
 //-------------------------------------
 /// @deprecated (For v10) Was used primary for older grid
 /// @group $padding map
-/// @param {Map} $value - mobile or xs
+/// @param {String} $value - mobile or xs
 /// @example
 //    .container {
 //      padding: padding(mobile);
@@ -61,7 +61,7 @@ $padding: (
 //-------------------------------------
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--breakpoint()`
-/// @param {Map} $size - from $breakpoints map (see line 16)
+/// @param {String} $size - from $breakpoints map (see line 16)
 /// @content will add media query for styles using breakpoint as min-width
 /// @example
 //    @include breakpoint(bp--md--major) {
@@ -90,7 +90,7 @@ $padding: (
 //-------------------------------------
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--breakpoint-down()`
-/// @param {Map} $size - from $breakpoints map (see line 16)
+/// @param {String} $size - from $breakpoints map (see line 16)
 /// @example @include max-breakpoint('bp--xs--major') { ... };
 /// @content will add media query for styles using breakpoint as max-width
 @mixin max-breakpoint($size) {

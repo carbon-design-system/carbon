@@ -50,7 +50,7 @@ $typescale-map: (
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--type-scale()`
 /// @group typography
-/// @param {Map} $size - value of type size
+/// @param {String} $size - value of type size
 /// @returns type size in rem from typescale-map
 @mixin typescale($size) {
   @include deprecate(
@@ -170,7 +170,7 @@ $font-size-map: (
 
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--type-scale()`
-/// @param {Map} $size value from $font-size-map
+/// @param {String} $size value from $font-size-map
 /// @returns font size in rem from $font-size-map
 /// @require $font-size-map
 /// @example @include font-size('76');

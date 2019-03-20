@@ -35,7 +35,7 @@ $box-shadow--pop-out: 0 12px 24px 0 $box-shadow;
 
 // Layer box-shadow map
 /// @access private
-/// @type Map | Value
+/// @type Map
 /// @group layer
 /// @example - @include layer('raised');
 $layer-shadows: (
@@ -50,7 +50,7 @@ $layer-shadows: (
 
 // Layer mixin
 /// @access public
-/// @param {Map} $layer - a value from the $layer-shadows map
+/// @param {String} $layer - a value from the $layer-shadows map
 /// @group layer
 /// @example - @include layer('raised');
 @mixin layer($layer) {
