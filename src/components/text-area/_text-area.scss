@@ -175,14 +175,6 @@
     color: $disabled;
   }
 
-  //-----------------------------
-  // Error
-  //-----------------------------
-  .#{$prefix}--text-area--invalid {
-    @include focus-outline('invalid');
-    box-shadow: none;
-  }
-
   // Skeleton State
   #{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
