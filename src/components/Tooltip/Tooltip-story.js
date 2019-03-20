@@ -39,6 +39,10 @@ const props = {
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
   }),
   withoutIcon: () => ({
+    clickToOpen: boolean(
+      'Click to open (clickToOpen, using `false` here is deprecated)',
+      true
+    ),
     showIcon: false,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
@@ -46,7 +50,10 @@ const props = {
   }),
   customIcon: () => ({
     showIcon: true,
-    clickToOpen: boolean('Click to open (clickToOpen)', false),
+    clickToOpen: boolean(
+      'Click to open (clickToOpen, using `false` here is deprecated)',
+      true
+    ),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -64,7 +71,10 @@ const props = {
   }),
   customIconOnly: () => ({
     showIcon: true,
-    clickToOpen: boolean('Click to open (clickToOpen)', false),
+    clickToOpen: boolean(
+      'Click to open (clickToOpen, using `false` here is deprecated)',
+      true
+    ),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: null,
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
