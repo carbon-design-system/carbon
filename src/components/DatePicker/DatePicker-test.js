@@ -10,6 +10,7 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
+import { componentsX } from '../../internal/FeatureFlags';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -204,7 +205,9 @@ describe('DatePicker', () => {
     });
 
     it('should render an icon', () => {
-      expect(icon.length).toEqual(1);
+      if (!componentsX) {
+        expect(icon.length).toEqual(1);
+      }
     });
   });
 

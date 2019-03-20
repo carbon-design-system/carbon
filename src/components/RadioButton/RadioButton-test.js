@@ -9,6 +9,7 @@ import React from 'react';
 import RadioButton from '../RadioButton';
 import RadioButtonSkeleton from '../RadioButton/RadioButton.Skeleton';
 import { mount, shallow } from 'enzyme';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const render = props =>
   mount(
@@ -76,7 +77,13 @@ describe('RadioButton', () => {
 
     describe('wrapper', () => {
       it('should have the correct class', () => {
-        expect(div.hasClass('radioButtonWrapper')).toEqual(true);
+        expect(
+          div.hasClass(
+            !breakingChangesX
+              ? 'radioButtonWrapper'
+              : 'bx--radio-button-wrapper'
+          )
+        ).toEqual(true);
       });
 
       it('should have extra classes applied', () => {

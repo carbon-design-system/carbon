@@ -10,6 +10,7 @@ import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
+import { breakingChangesX } from '../../internal/FeatureFlags';
 
 describe('Slider', () => {
   describe('Renders as expected', () => {
@@ -185,12 +186,16 @@ describe('handleMouseEnd', () => {
     />
   );
   it('calls onRelease', () => {
-    wrapper.setState({
-      value: 130,
-    });
-    expect(handleRelease).lastCalledWith({ value: 50 });
-    wrapper.instance().handleMouseEnd();
-    expect(handleRelease).lastCalledWith({ value: 130 });
+    if (!breakingChangesX) {
+      // `onChange`/`onRelease` fired only upon user gesture in `v10`
+      // TODO: See if we can create a better test case here
+      wrapper.setState({
+        value: 130,
+      });
+      expect(handleRelease).lastCalledWith({ value: 50 });
+      wrapper.instance().handleMouseEnd();
+      expect(handleRelease).lastCalledWith({ value: 130 });
+    }
   });
 });
 
@@ -210,12 +215,16 @@ describe('handleTouchEnd', () => {
     />
   );
   it('calls onRelease', () => {
-    wrapper.setState({
-      value: 385,
-    });
-    expect(handleRelease).lastCalledWith({ value: 50 });
-    wrapper.instance().handleTouchEnd();
-    expect(handleRelease).lastCalledWith({ value: 385 });
+    if (!breakingChangesX) {
+      // `onChange`/`onRelease` fired only upon user gesture in `v10`
+      // TODO: See if we can create a better test case here
+      wrapper.setState({
+        value: 385,
+      });
+      expect(handleRelease).lastCalledWith({ value: 50 });
+      wrapper.instance().handleTouchEnd();
+      expect(handleRelease).lastCalledWith({ value: 385 });
+    }
   });
 });
 

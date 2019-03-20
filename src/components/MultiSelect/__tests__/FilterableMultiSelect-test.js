@@ -16,6 +16,7 @@ import {
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
+import { componentsX } from '../../../internal/FeatureFlags';
 
 const listItemName = 'ListBoxMenuItem';
 
@@ -111,7 +112,7 @@ describe('MultiSelect.Filterable', () => {
 
     wrapper
       .find(listItemName)
-      .at(0)
+      .at(!componentsX ? 0 : 1) // The second selected item does not move to top in v10
       .simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(4);
     expect(mockProps.onChange).toHaveBeenCalledWith({

@@ -6,9 +6,11 @@
  */
 
 import React from 'react';
+import Search16 from '@carbon/icons-react/lib/search/16';
 import { iconSearch } from 'carbon-icons';
 import SecondaryButton from '../SecondaryButton';
 import { shallow, mount } from 'enzyme';
+import { componentsX } from '../../internal/FeatureFlags';
 
 describe('SecondaryButton', () => {
   describe('Renders as expected', () => {
@@ -38,7 +40,10 @@ describe('SecondaryButton', () => {
 
     describe('Renders icon buttons', () => {
       const iconButton = mount(
-        <SecondaryButton icon={iconSearch} iconDescription="Search">
+        <SecondaryButton
+          icon={!componentsX && iconSearch}
+          renderIcon={componentsX && Search16}
+          iconDescription="Search">
           Search
         </SecondaryButton>
       );

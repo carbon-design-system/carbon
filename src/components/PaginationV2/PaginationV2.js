@@ -354,7 +354,7 @@ export default class PaginationV2 extends Component {
             className={forwardButtonClasses}
             aria-label={forwardText}
             onClick={this.incrementPage}
-            disabled={forwardButtonDisabled}>
+            disabled={forwardButtonDisabled || isLastPage}>
             {componentsX ? (
               <CaretRight24 />
             ) : (

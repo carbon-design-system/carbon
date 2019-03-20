@@ -7,12 +7,14 @@
 
 import React, { Component } from 'react';
 import debounce from 'lodash.debounce';
+import Information from '@carbon/icons-react/lib/information/16';
 import { iconInfoGlyph } from 'carbon-icons';
 import Icon from '../Icon';
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 
 jest.mock('lodash.debounce');
 
@@ -42,10 +44,12 @@ describe('Tooltip', () => {
       });
 
       it('renders the info icon', () => {
-        const icon = trigger.find(Icon);
+        const icon = trigger.find(!componentsX ? Icon : Information);
         expect(icon.length).toBe(1);
-        expect(icon.props().icon).toBe(iconInfoGlyph);
-        expect(icon.props().iconTitle).toBe('');
+        if (!componentsX) {
+          expect(icon.props().icon).toBe(iconInfoGlyph);
+          expect(icon.props().iconTitle).toBe('');
+        }
       });
     });
   });
@@ -145,64 +149,80 @@ describe('Tooltip', () => {
 
   describe('events', () => {
     it('hover changes state with icon', () => {
-      const wrapper = mount(<Tooltip triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
-      icon.simulate('mouseover');
-      expect(wrapper.state().open).toEqual(true);
-      icon.simulate('mouseout');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(<Tooltip triggerText="Tooltip" />);
+        const icon = wrapper.find(Icon);
+        icon.simulate('mouseover');
+        expect(wrapper.state().open).toEqual(true);
+        icon.simulate('mouseout');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('focus/blur changes state with icon', () => {
-      const wrapper = mount(<Tooltip triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
-      icon.simulate('focus');
-      expect(wrapper.state().open).toEqual(true);
-      icon.simulate('blur');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(<Tooltip triggerText="Tooltip" />);
+        const icon = wrapper.find(Icon);
+        icon.simulate('focus');
+        expect(wrapper.state().open).toEqual(true);
+        icon.simulate('blur');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('hover changes state with no icon', () => {
-      const wrapper = mount(<Tooltip showIcon={false} triggerText="Tooltip" />);
-      const label = wrapper.find('.bx--tooltip__label');
-      label.simulate('mouseover');
-      expect(wrapper.state().open).toEqual(true);
-      label.simulate('mouseout');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(
+          <Tooltip showIcon={false} triggerText="Tooltip" />
+        );
+        const label = wrapper.find('.bx--tooltip__label');
+        label.simulate('mouseover');
+        expect(wrapper.state().open).toEqual(true);
+        label.simulate('mouseout');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('focus/blur changes state with no icon', () => {
-      const wrapper = mount(<Tooltip showIcon={false} triggerText="Tooltip" />);
-      const label = wrapper.find('.bx--tooltip__label');
-      label.simulate('focus');
-      expect(wrapper.state().open).toEqual(true);
-      label.simulate('blur');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(
+          <Tooltip showIcon={false} triggerText="Tooltip" />
+        );
+        const label = wrapper.find('.bx--tooltip__label');
+        label.simulate('focus');
+        expect(wrapper.state().open).toEqual(true);
+        label.simulate('blur');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('hover changes state with custom icon', () => {
-      const wrapper = mount(
-        <Tooltip
-          renderIcon={React.forwardRef((props, ref) => (
-            <div className="custom-icon" ref={ref} />
-          ))}
-          triggerText="Tooltip"
-        />
-      );
-      const icon = wrapper.find('.custom-icon');
-      icon.simulate('mouseover');
-      expect(wrapper.state().open).toEqual(true);
-      icon.simulate('mouseout');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(
+          <Tooltip
+            renderIcon={React.forwardRef((props, ref) => (
+              <div className="custom-icon" ref={ref} />
+            ))}
+            triggerText="Tooltip"
+          />
+        );
+        const icon = wrapper.find('.custom-icon');
+        icon.simulate('mouseover');
+        expect(wrapper.state().open).toEqual(true);
+        icon.simulate('mouseout');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('click changes state when clickToOpen is set', () => {
       const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
+      const icon = wrapper.find(!componentsX ? Icon : Information);
       icon.simulate('click');
-      expect(wrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
       icon.simulate('click');
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('click changes state when clickToOpen and custom icon are set', () => {
@@ -217,44 +237,52 @@ describe('Tooltip', () => {
       );
       const icon = wrapper.find('.custom-icon');
       icon.simulate('click');
-      expect(wrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
       icon.simulate('click');
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('hover does not change state when clickToOpen is set', () => {
-      const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
-      icon.simulate('mouseover');
-      expect(wrapper.state().open).toEqual(false);
-      icon.simulate('mouseout');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
+        const icon = wrapper.find(Icon);
+        icon.simulate('mouseover');
+        expect(wrapper.state().open).toEqual(false);
+        icon.simulate('mouseout');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('hover does not change state when clickToOpen and custom icon are set', () => {
-      const wrapper = mount(
-        <Tooltip
-          renderIcon={React.forwardRef((props, ref) => (
-            <div className="custom-icon" ref={ref} />
-          ))}
-          clickToOpen
-          triggerText="Tooltip"
-        />
-      );
-      const icon = wrapper.find('.custom-icon');
-      icon.simulate('mouseover');
-      expect(wrapper.state().open).toEqual(false);
-      icon.simulate('mouseout');
-      expect(wrapper.state().open).toEqual(false);
+      if (!breakingChangesX) {
+        const wrapper = mount(
+          <Tooltip
+            renderIcon={React.forwardRef((props, ref) => (
+              <div className="custom-icon" ref={ref} />
+            ))}
+            clickToOpen
+            triggerText="Tooltip"
+          />
+        );
+        const icon = wrapper.find('.custom-icon');
+        icon.simulate('mouseover');
+        expect(wrapper.state().open).toEqual(false);
+        icon.simulate('mouseout');
+        expect(wrapper.state().open).toEqual(false);
+      }
     });
 
     it('Enter key press changes state when clickToOpen is set', () => {
       const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
+      const icon = wrapper.find(!componentsX ? Icon : Information);
       icon.simulate('keyDown', { which: 'Enter' });
-      expect(wrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
       icon.simulate('keyDown', { key: 13 });
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('Enter key press changes state when clickToOpen and custom icon are set', () => {
@@ -269,18 +297,22 @@ describe('Tooltip', () => {
       );
       const icon = wrapper.find('.custom-icon');
       icon.simulate('keyDown', { which: 'Enter' });
-      expect(wrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
       icon.simulate('keyDown', { key: 13 });
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('Space key press changes state when clickToOpen is set', () => {
       const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
+      const icon = wrapper.find(!componentsX ? Icon : Information);
       icon.simulate('keyDown', { which: ' ' });
-      expect(wrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
       icon.simulate('keyDown', { key: 32 });
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('Space key press changes state when clickToOpen and custom icon are set', () => {
@@ -295,16 +327,19 @@ describe('Tooltip', () => {
       );
       const icon = wrapper.find('.custom-icon');
       icon.simulate('keyDown', { which: ' ' });
-      expect(wrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
       icon.simulate('keyDown', { key: 32 });
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('A different key press does not change state', () => {
       const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      const icon = wrapper.find(Icon);
+      const icon = wrapper.find(!componentsX ? Icon : Information);
       icon.simulate('keyDown', { which: 'x' });
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('A different key press does not change state when custom icon is set', () => {
@@ -319,44 +354,72 @@ describe('Tooltip', () => {
       );
       const icon = wrapper.find('.custom-icon');
       icon.simulate('keyDown', { which: 'x' });
-      expect(wrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('should be in a closed state after handleOutsideClick() is invoked', () => {
       const rootWrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      expect(rootWrapper.state().open).toEqual(false);
-      rootWrapper.setState({ open: true });
-      rootWrapper.instance().handleClickOutside();
-      expect(rootWrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .setState({ open: true });
+      rootWrapper.update();
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .handleClickOutside();
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
 
     it('prop.open change should update open state', () => {
       const rootWrapper = mount(<Tooltip open={false} triggerText="Tooltip" />);
-      expect(rootWrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
       rootWrapper.setProps({
         open: true,
         triggerText: 'Tooltip',
       });
-      expect(rootWrapper.state().open).toEqual(true);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(true);
     });
 
     it('should avoid change the open state upon setting props, unless there the value actually changes', () => {
-      const rootWrapper = shallow(<Tooltip />);
+      const rootWrapper = mount(<Tooltip />);
       rootWrapper.setProps({ open: true });
-      rootWrapper.setState({ open: false });
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .setState({ open: false });
+      rootWrapper.update();
       rootWrapper.setProps({ open: true });
-      expect(rootWrapper.state().open).toEqual(false);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
   });
 
   describe('getTriggerPosition', () => {
     it('sets triggerPosition when triggerEl is set', () => {
       const rootWrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      rootWrapper.setState({
-        triggerPosition: { left: 0, top: 0, right: 0, bottom: 0 },
-      });
-      rootWrapper.instance().getTriggerPosition();
-      expect(rootWrapper.state().triggerPosition).not.toEqual({
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .setState({
+          triggerPosition: { left: 0, top: 0, right: 0, bottom: 0 },
+        });
+      rootWrapper.update();
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .getTriggerPosition();
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').state.triggerPosition).not.toEqual({
         left: 0,
         top: 0,
         right: 0,
@@ -365,12 +428,23 @@ describe('Tooltip', () => {
     });
     it('does not set triggerPosition when triggerEl is not set', () => {
       const rootWrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
-      rootWrapper.setState({
-        triggerPosition: { left: 0, top: 0, right: 0, bottom: 0 },
-      });
-      delete rootWrapper.instance().triggerEl;
-      rootWrapper.instance().getTriggerPosition();
-      expect(rootWrapper.state().triggerPosition).toEqual({
+      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .setState({
+          triggerPosition: { left: 0, top: 0, right: 0, bottom: 0 },
+        });
+      rootWrapper.update();
+      delete rootWrapper.find('Tooltip').instance().triggerEl;
+      rootWrapper
+        .find('Tooltip')
+        .instance()
+        .getTriggerPosition();
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(
+        rootWrapper.find('Tooltip').instance().state.triggerPosition
+      ).toEqual({
         left: 0,
         top: 0,
         right: 0,

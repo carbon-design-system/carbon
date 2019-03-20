@@ -6,10 +6,13 @@
  */
 
 import React from 'react';
+import ListBulleted16 from '@carbon/icons-react/lib/list--bulleted/16';
+import Grid16 from '@carbon/icons-react/lib/grid/16';
 import { iconList, iconGrid } from 'carbon-icons';
 import Icon from '../Icon';
 import SearchLayoutButton from '../SearchLayoutButton';
 import { shallow, mount } from 'enzyme';
+import { componentsX } from '../../internal/FeatureFlags';
 
 describe('SearchLayoutButton', () => {
   const wrapper = mount(<SearchLayoutButton labelText="testlabel" />);
@@ -29,23 +32,45 @@ describe('SearchLayoutButton', () => {
 
   describe('icons', () => {
     it('should use "list" icon for toggle button', () => {
-      const icon = wrapper.find(Icon);
-      expect(icon.props().icon).toEqual(iconList);
+      const icon = wrapper.find(!componentsX ? Icon : ListBulleted16);
+      if (!componentsX) {
+        expect(icon.props().icon).toEqual(iconList);
+      } else {
+        expect(icon.length).toBe(1);
+      }
     });
 
     it('should use "grid" icon when format state is not "list"', () => {
       wrapper.setState({ format: 'not-list' });
-      const icon = wrapper.find(Icon);
-      expect(icon.props().icon).toEqual(iconGrid);
+      const icon = wrapper.find(!componentsX ? Icon : Grid16);
+      if (!componentsX) {
+        expect(icon.props().icon).toEqual(iconGrid);
+      } else {
+        expect(icon.length).toBe(1);
+      }
     });
 
     it('should support specifying the layout via props', () => {
       const wrapperWithFormatProps = mount(
         <SearchLayoutButton format="grid" />
       );
-      expect(wrapperWithFormatProps.find(Icon).props().icon).toEqual(iconGrid);
+      if (!componentsX) {
+        expect(wrapperWithFormatProps.find(Icon).props().icon).toEqual(
+          iconGrid
+        );
+      } else {
+        expect(wrapperWithFormatProps.find(Grid16).length).toBe(1);
+        expect(wrapperWithFormatProps.find(ListBulleted16).length).toBe(0);
+      }
       wrapperWithFormatProps.setProps({ format: 'list' });
-      expect(wrapperWithFormatProps.find(Icon).props().icon).toEqual(iconList);
+      if (!componentsX) {
+        expect(wrapperWithFormatProps.find(Icon).props().icon).toEqual(
+          iconList
+        );
+      } else {
+        expect(wrapperWithFormatProps.find(Grid16).length).toBe(0);
+        expect(wrapperWithFormatProps.find(ListBulleted16).length).toBe(1);
+      }
     });
 
     it('should avoid change the format upon setting props, unless there the value actually changes', () => {

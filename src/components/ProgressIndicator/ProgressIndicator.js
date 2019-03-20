@@ -50,6 +50,7 @@ export const ProgressStep = ({ ...props }) => {
     (componentsX ? (
       <svg>
         <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+        <title>{description}</title>
       </svg>
     ) : (
       <svg>
@@ -62,7 +63,9 @@ export const ProgressStep = ({ ...props }) => {
   const completeSvg =
     complete &&
     (componentsX ? (
-      <CheckmarkOutline16 aria-label={description} role="img" />
+      <CheckmarkOutline16 aria-label={description} role="img">
+        <title>{description}</title>
+      </CheckmarkOutline16>
     ) : (
       <svg width="16" height="16" viewBox="0 0 16 16">
         <title>{description}</title>
@@ -78,10 +81,15 @@ export const ProgressStep = ({ ...props }) => {
     }
     if (componentsX) {
       if (invalid) {
-        return <Warning16 className={`${prefix}--progress__warning`} />;
+        return (
+          <Warning16 className={`${prefix}--progress__warning`}>
+            <title>{description}</title>
+          </Warning16>
+        );
       }
       return (
         <svg>
+          <title>{description}</title>
           <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" />
         </svg>
       );

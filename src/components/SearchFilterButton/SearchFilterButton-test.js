@@ -9,7 +9,9 @@ import React from 'react';
 import Icon from '../Icon';
 import SearchFilterButton from '../SearchFilterButton';
 import { mount } from 'enzyme';
+import Filter16 from '@carbon/icons-react/lib/filter/16';
 import { iconFilter } from 'carbon-icons';
+import { componentsX } from '../../internal/FeatureFlags';
 
 describe('SearchFilterButton', () => {
   const wrapper = mount(<SearchFilterButton labelText="testlabel" />);
@@ -29,8 +31,12 @@ describe('SearchFilterButton', () => {
 
   describe('icons', () => {
     it('should use "filter" icon', () => {
-      const icon = wrapper.find(Icon);
-      expect(icon.props().icon).toEqual(iconFilter);
+      const icon = wrapper.find(!componentsX ? Icon : Filter16);
+      if (!componentsX) {
+        expect(icon.props().icon).toEqual(iconFilter);
+      } else {
+        expect(icon.length).toBe(1);
+      }
     });
   });
 });

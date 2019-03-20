@@ -151,7 +151,8 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
     switch (triggerButtonPositionProp) {
       case 'top':
       case 'bottom': {
-        const triggerWidth = trigger.offsetWidth;
+        // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
+        const triggerWidth = !trigger ? 0 : trigger.offsetWidth;
         return {
           left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
           top: 0,
@@ -159,7 +160,8 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
       }
       case 'left':
       case 'right': {
-        const triggerHeight = trigger.offsetHeight;
+        // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
+        const triggerHeight = !trigger ? 0 : trigger.offsetHeight;
         return {
           left: 0,
           top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),

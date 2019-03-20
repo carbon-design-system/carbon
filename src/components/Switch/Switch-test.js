@@ -8,6 +8,7 @@
 import React from 'react';
 import Switch from '../Switch';
 import { shallow } from 'enzyme';
+import { componentsX } from '../../internal/FeatureFlags';
 
 describe('Switch', () => {
   describe('component rendering', () => {
@@ -23,51 +24,66 @@ describe('Switch', () => {
     });
 
     it('should render a link when kind is link', () => {
-      expect(linkWrapper.is('a')).toEqual(true);
+      if (!componentsX) {
+        expect(linkWrapper.is('a')).toEqual(true);
+      }
     });
 
     it('should have the expected text', () => {
       expect(buttonWrapper.text()).toEqual('test');
-      expect(linkWrapper.text()).toEqual('test');
+      if (!componentsX) {
+        expect(linkWrapper.text()).toEqual('test');
+      }
     });
     it('should have the expected icon', () => {
-      expect(buttonWrapper.find('svg').length).toEqual(1);
-      expect(linkWrapper.find('svg').length).toEqual(1);
+      if (!componentsX) {
+        expect(buttonWrapper.find('svg').length).toEqual(1);
+        expect(linkWrapper.find('svg').length).toEqual(1);
+      }
     });
 
     it('icon should have the expected class', () => {
-      const cls = 'bx--content-switcher__icon';
-
-      expect(buttonWrapper.find('svg').hasClass(cls)).toEqual(true);
-      expect(linkWrapper.find('svg').hasClass(cls)).toEqual(true);
-      expect(linkWrapper.find('svg').hasClass('testClass')).toEqual(true);
+      if (!componentsX) {
+        const cls = 'bx--content-switcher__icon';
+        expect(buttonWrapper.find('svg').hasClass(cls)).toEqual(true);
+        expect(linkWrapper.find('svg').hasClass(cls)).toEqual(true);
+        expect(linkWrapper.find('svg').hasClass('testClass')).toEqual(true);
+      }
     });
     it('should have the expected class', () => {
       const cls = 'bx--content-switcher-btn';
 
       expect(buttonWrapper.hasClass(cls)).toEqual(true);
-      expect(linkWrapper.hasClass(cls)).toEqual(true);
+      if (!componentsX) {
+        expect(linkWrapper.hasClass(cls)).toEqual(true);
+      }
     });
 
     it('should not have selected class', () => {
       const selectedClass = 'bx--content-switcher--selected';
 
       expect(buttonWrapper.hasClass(selectedClass)).toEqual(false);
-      expect(linkWrapper.hasClass(selectedClass)).toEqual(false);
+      if (!componentsX) {
+        expect(linkWrapper.hasClass(selectedClass)).toEqual(false);
+      }
     });
 
     it('should have a selected class when selected is set to true', () => {
       const selected = true;
 
       buttonWrapper.setProps({ selected });
-      linkWrapper.setProps({ selected });
+      if (!componentsX) {
+        linkWrapper.setProps({ selected });
+      }
 
       expect(buttonWrapper.hasClass('bx--content-switcher--selected')).toEqual(
         true
       );
-      expect(linkWrapper.hasClass('bx--content-switcher--selected')).toEqual(
-        true
-      );
+      if (!componentsX) {
+        expect(linkWrapper.hasClass('bx--content-switcher--selected')).toEqual(
+          true
+        );
+      }
     });
   });
 

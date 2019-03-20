@@ -133,7 +133,6 @@ export class NotificationButton extends Component {
           <IconTag
             aria-label={iconDescription}
             className={iconClasses}
-            icon={!icon && !name ? iconClose : icon}
             name={name}
           />
         );

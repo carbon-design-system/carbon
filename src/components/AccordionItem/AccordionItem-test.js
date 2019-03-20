@@ -38,9 +38,7 @@ describe('AccordionItem', () => {
     it('should use correct icon', () => {
       const heading = wrapper.find('.bx--accordion__heading');
       if (componentsX) {
-        expect(heading.find(ChevronRight16).props().icon.id).toEqual(
-          'icon--chevron--right'
-        );
+        expect(heading.find(ChevronRight16).length).toBe(1);
       } else {
         expect(heading.find(Icon).props().icon).toEqual(iconChevronRight);
       }
@@ -105,7 +103,7 @@ describe('AccordionItem', () => {
     it('renders heading as expected', () => {
       const heading = wrapper.find('.bx--accordion__heading');
       expect(heading.length).toBe(1);
-      expect(heading.find(Icon).length).toBe(1);
+      expect(heading.find(componentsX ? ChevronRight16 : Icon).length).toBe(1);
       const title = heading.find('.bx--accordion__title');
       expect(title.text()).toBe('A heading');
       expect(title.find('h2').exists()).toEqual(true);
