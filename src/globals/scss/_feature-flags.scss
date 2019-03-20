@@ -11,14 +11,14 @@
 
 /// Initialize our feature flag map with default values, user can override default values ($default-feature-flags) here
 /// @access public
-/// @type Map | Bool
-/// @example $feature-flags:(components-x: true, ui-shell:true); overrides default values for components-x and ui-shell
+/// @type Map
+/// @example
+/// $feature-flags: (components-x: true, ui-shell: true); // overrides default values for components-x and ui-shell
 $feature-flags: () !default;
 
 /// Default feature flag values
 /// @access private
-/// @type Map | Bool
-/// @group feature-flags
+/// @type Map
 $default-feature-flags: (
   components-x: false,
   breaking-changes-x: false,
@@ -30,12 +30,10 @@ $default-feature-flags: (
 
 /// @access private
 /// @type Bool
-/// @group feature-flags
 $did-warn-diverged-feature-flags: false !default !global;
 
 /// Look for user-defined feature flags that are different from default ones, and warn them before merging them.
 /// @access private
-/// @group feature-flags
 /// @param {Map} $dst - The feature flags to merge to (default feature flags).
 /// @param {Map} $src - The feature flags to merge from (user-defined feature flags).
 /// @returns {Map} - The result of `map-merge($dst, $src)`.
