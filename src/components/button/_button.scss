@@ -180,7 +180,7 @@
   .#{$prefix}--btn {
     @include button-base--x;
 
-    &--disabled > .#{$prefix}--btn__icon,
+    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
     &:disabled > .#{$prefix}--btn__icon {
       fill: $ui-04;
     }
@@ -219,9 +219,9 @@
     &:disabled,
     &:hover:disabled,
     &:focus:disabled,
-    &--disabled,
-    &--disabled:hover,
-    &--disabled:focus {
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
       background: transparent;
       color: $disabled;
 
@@ -260,9 +260,9 @@
     &:disabled,
     &:hover:disabled,
     &:focus:disabled,
-    &--disabled,
-    &--disabled:hover,
-    &--disabled:focus {
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
       color: $disabled;
       background: transparent;
       border-color: transparent;
