@@ -47,6 +47,7 @@ const Button = React.forwardRef(
       [`${prefix}--btn--ghost`]: kind === 'ghost',
       [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
       [`${prefix}--btn--tertiary`]: kind === 'tertiary',
+      [`${prefix}--btn--disabled`]: disabled,
     });
 
     const commonProps = {

@@ -9,12 +9,15 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
 import Search16 from '@carbon/icons-react/lib/search/16';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
+
+const { prefix } = settings;
 
 const icons = {
   None: 'None',
@@ -157,7 +160,7 @@ storiesOf('Buttons', module)
     () => {
       const setProps = props.set();
       return (
-        <div>
+        <div className={`${prefix}--btn-set`}>
           <Button kind="secondary" {...setProps}>
             Secondary button
           </Button>
