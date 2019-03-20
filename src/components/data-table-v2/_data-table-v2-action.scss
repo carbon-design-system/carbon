@@ -9,7 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@mixin data-table-v2-action {
+@include exports('data-table-v2-action') {
   .#{$prefix}--table-toolbar {
     display: flex;
     padding-top: $spacing-xs;
@@ -180,16 +180,5 @@
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
     opacity: 0;
-  }
-}
-
-@mixin data-table-v2-action--x {
-}
-
-@include exports('data-table-v2-action') {
-  @if feature-flag-enabled('components-x') {
-    @include data-table-v2-action--x;
-  } @else {
-    @include data-table-v2-action;
   }
 }
