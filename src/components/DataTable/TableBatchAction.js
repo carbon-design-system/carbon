@@ -19,6 +19,11 @@ TableBatchAction.propTypes = {
    * Provide a text description for the icon in the button
    */
   iconDescription: PropTypes.string.isRequired,
+
+  /**
+   * Optional function to render your own icon in the underlying button
+   */
+  renderIcon: PropTypes.func,
 };
 
 TableBatchAction.defaultProps = {

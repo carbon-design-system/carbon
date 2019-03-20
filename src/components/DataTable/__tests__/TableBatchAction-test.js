@@ -14,4 +14,14 @@ describe('DataTable.TableBatchAction', () => {
     const wrapper = mount(<TableBatchAction className="custom-class" />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should support rendering a custom icon', () => {
+    const renderIcon = jest.fn(props => (
+      <svg {...props}>
+        <circle cx="16" cy="16" r="8" />
+      </svg>
+    ));
+    mount(<TableBatchAction renderIcon={renderIcon} />);
+    expect(renderIcon).toHaveBeenCalled();
+  });
 });
