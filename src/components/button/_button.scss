@@ -177,6 +177,21 @@
 }
 
 @mixin button--x {
+  // button set styles
+  .#{$prefix}--btn-set {
+    display: flex;
+  }
+
+  .#{$prefix}--btn-set > .#{$prefix}--btn {
+    max-width: rem(196px); // taken from design kit
+    width: 100%;
+  }
+
+  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+    border-left: rem(1px) solid $disabled-03;
+  }
+
   .#{$prefix}--btn {
     @include button-base--x;
 
