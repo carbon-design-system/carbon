@@ -226,11 +226,11 @@
       width: 100%;
     }
 
-    tbody tr:hover:not(.#{$prefix}--row-disabled) {
+    tbody tr:hover {
       background: $hover-field;
     }
 
-    tbody tr:hover:not(.#{$prefix}--row-disabled) td {
+    tbody tr:hover td {
       color: $text-01;
       background: $hover-field;
       border-bottom: 1px solid $hover-field;
@@ -253,7 +253,7 @@
     }
 
     th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
-      padding-left: $spacing-06;
+      padding-left: $spacing-05;
     }
 
     .#{$prefix}--table-header-label {
@@ -270,17 +270,11 @@
     }
 
     td:first-of-type {
-      padding-left: $spacing-06;
+      padding-left: $spacing-05;
     }
 
     td:last-of-type {
-      padding-right: $spacing-06;
-    }
-
-    // specific padding for checkbox columns
-    .#{$prefix}--table-column-checkbox,
-    .#{$prefix}--table-column-checkbox:first-of-type {
-      padding: rem(10px) $spacing-05 0 $spacing-05;
+      padding-right: $spacing-05;
     }
 
     // specific padding for overflow menu columns
