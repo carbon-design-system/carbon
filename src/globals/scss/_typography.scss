@@ -9,7 +9,10 @@
 @import 'deprecate';
 @import 'functions';
 
+/// @access public
 /// @deprecated (For v10) Use `$carbon--font-families`
+/// @group typography
+/// @returns font-family types
 $font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
 /// @deprecated (For v10) Use `$carbon--font-families`
 $font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
@@ -18,10 +21,17 @@ $font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
 /// @deprecated (For v10) Use Plex fonts
 $font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
 
+/// @access public
+/// @group typography
+/// @returns 16px font size
 /// @deprecated (For v10) Superseded by `$carbon--base-font-size`
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
-/// @deprecated (For v10) Superseded by `$carbon--type-scale`
+/// @access public
+/// @deprecated (For v10) Superseded by `$carbon--base-font-size`
+/// @type Map
+/// @group typography
+/// @returns different type sizes in rem
 $typescale-map: (
   'giga': 4.75rem,
   'mega': 3.375rem,
@@ -37,7 +47,11 @@ $typescale-map: (
   'p': 1rem,
 );
 
+/// @access public
 /// @deprecated (For v10) Use `@include carbon--type-scale()`
+/// @group typography
+/// @param {String} $size - value of type size
+/// @returns type size in rem from typescale-map
 @mixin typescale($size) {
   @include deprecate(
     '`@include typescale()` has been removed. ' + 'Use `@include carbon--type-scale()` instead.',
@@ -52,16 +66,28 @@ $typescale-map: (
   }
 }
 
+/// @access public
+/// @param {Value} $px - value of type in pixels
+/// @returns type size converted to rem
+/// @example - rem(48px);
 /// @deprecated (For v10) Use `carbon--rem()`
 @function rem($px) {
   @return ($px / $base-font-size) * 1rem;
 }
 
+/// @access public
+/// @param {Value} $px - value of type in pixels
+/// @returns type size converted to em
+/// @example - em(48px);
 /// @deprecated (For v10) Use `carbon--em()`
 @function em($px) {
   @return ($px / $base-font-size) * 1em;
 }
 
+/// @access public
+/// @returns helvetica font family
+/// @group typography
+/// @example - @include helvetica;
 /// @deprecated (For v10) Use Plex fonts
 @mixin helvetica {
   @include deprecate(
@@ -73,7 +99,11 @@ $typescale-map: (
   }
 }
 
+/// @access public
 /// @deprecated (For v10) Use `@include carbon--font-family()`
+/// @returns uses sans-serif font type if $css--plex is true, else uses helvetica
+/// @group typography
+/// @example - @include font-family;
 @mixin font-family {
   @include deprecate(
     '`@include font-family` has been removed. ' + 'Use `@include carbon--font-family()` instead.',
@@ -88,7 +118,10 @@ $typescale-map: (
   }
 }
 
-// There are two line heights to choose from. One for headings and one for body text
+/// There are two line heights to choose from. One for headings and one for body text
+/// @access public
+/// @param {String} $el - 'heading' or 'body'
+/// @example @include line-height('heading');
 /// @deprecated (For v10) Use `@include carbon--type-style()`
 @mixin line-height($el) {
   @include deprecate(
@@ -106,7 +139,8 @@ $typescale-map: (
   }
 }
 
-// Only applied to bold weight text
+/// @access public
+/// @require bold-text Only applied to bold weight text
 /// @deprecated (For v10) The new type styles doesn't use this
 @mixin font-smoothing {
   @include deprecate('`@include font-smoothing` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
@@ -115,6 +149,7 @@ $typescale-map: (
   }
 }
 
+/// @access public
 /// @deprecated (For v10) The new type styles doesn't use this
 @mixin letter-spacing {
   @include deprecate('`@include letter-spacing` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
@@ -122,6 +157,9 @@ $typescale-map: (
   }
 }
 
+/// @access public
+/// @type Map
+/// @returns mapped out pixel equivalent in rem
 /// @deprecated (For v10) Superseded by `$carbon--type-scale`
 $font-size-map: (
   '76': 4.75rem,
@@ -136,7 +174,12 @@ $font-size-map: (
   '11': 0.6875rem,
 );
 
+/// @access public
 /// @deprecated (For v10) Use `@include carbon--type-scale()`
+/// @param {String} $size value from $font-size-map
+/// @returns font size in rem from $font-size-map
+/// @require $font-size-map
+/// @example @include font-size('76');
 @mixin font-size($size) {
   @include deprecate(
     '`@include font-size()` has been removed. ' + 'Use `@include carbon--type-scale()` instead.',
@@ -154,6 +197,12 @@ $font-size-map: (
 // 🔬 Experimental
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
+/// @access public
+/// @returns different type styles per token.
+/// @see $tokens Map in src/globals/scss/vendor/@carbon/type/scss/_styles.scss
+/// @param {String} $name - the name of the token to get the styles for
+/// @param {Boolean} $fluid [false] - specify whether to include fluid styles
+/// @example -  @include type-style('body-short-01');
 @mixin type-style($name, $fluid: false) {
   @include carbon--type-style($name, $fluid);
 }

@@ -11,4 +11,7 @@
 @import 'functions';
 @import 'motion';
 
+/// Sets the prefix for all classes
+/// @access public
+/// @example .bx--batch-actions
 $prefix: 'bx' !default;
