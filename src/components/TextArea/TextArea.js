@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { componentsX } from '../../internal/FeatureFlags';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
 
@@ -39,12 +41,9 @@ const TextArea = ({
     },
   };
 
-  const errorId = id + '-error-msg';
-  const textareaClasses = classNames(`${prefix}--text-area`, className, {
-    [`${prefix}--text-area--light`]: light,
-  });
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
+    [`${prefix}--label--disabled`]: other.disabled,
   });
 
   const label = labelText ? (
@@ -53,34 +52,56 @@ const TextArea = ({
     </label>
   ) : null;
 
+  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+  });
+
+  const helper = helperText ? (
+    <div className={helperTextClasses}>{helperText}</div>
+  ) : null;
+
+  const errorId = id + '-error-msg';
+
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
 
-  const input = invalid ? (
+  const textareaClasses = classNames(`${prefix}--text-area`, className, {
+    [`${prefix}--text-area--light`]: light,
+    [`${prefix}--text-area--invalid`]: invalid,
+  });
+
+  const input = (
     <textarea
       {...other}
       {...textareaProps}
-      aria-invalid
-      aria-describedby={errorId}
       className={textareaClasses}
-      data-invalid
+      aria-invalid={invalid || null}
+      aria-describedby={invalid ? errorId : null}
+      data-invalid={(invalid && !componentsX) || null}
+      disabled={other.disabled}
     />
-  ) : (
-    <textarea {...other} {...textareaProps} className={textareaClasses} />
   );
-
-  const helper = helperText ? (
-    <div className={`${prefix}--form__helper-text`}>{helperText}</div>
-  ) : null;
 
   return (
     <div className={`${prefix}--form-item`}>
       {label}
-      {input}
-      {helper}
+      {componentsX && helper}
+      {componentsX ? (
+        <div
+          className={`${prefix}--text-area__wrapper`}
+          data-invalid={invalid || null}>
+          {invalid && (
+            <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
+          )}
+          {input}
+        </div>
+      ) : (
+        input
+      )}
+      {!componentsX && helper}
       {error}
     </div>
   );
