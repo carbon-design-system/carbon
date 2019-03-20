@@ -112,8 +112,8 @@ $typescale-map: (
   }
 }
 
+/// There are two line heights to choose from. One for headings and one for body text
 /// @access public
-/// @content There are two line heights to choose from. One for headings and one for body text
 /// @param {String} $el - 'heading' or 'body'
 /// @example @include line-height('heading');
 /// @deprecated (For v10) Use `@include carbon--type-style()`
@@ -151,7 +151,7 @@ $typescale-map: (
   }
 }
 
-///@access public
+/// @access public
 /// @type Map
 /// @returns mapped out pixel equivalent in rem
 /// @deprecated (For v10) Superseded by `$carbon--type-scale`

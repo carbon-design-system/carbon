@@ -7,8 +7,8 @@
 
 @import 'feature-flags';
 
+/// Used for enabling features
 /// @access public
-/// @content Used for enabling features
 /// @param {String} $feature - feature from $default-feature-flags
 /// @example @if feature-flag-enabled('components-x') { ... } will include code inside of { } only if components-x is true
 @function feature-flag-enabled($feature) {
