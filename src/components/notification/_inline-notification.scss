@@ -167,10 +167,7 @@
   }
 
   .#{$prefix}--inline-notification__icon {
-    height: rem(20px);
-    width: rem(20px);
-    min-height: rem(20px);
-    min-width: rem(20px);
+    flex-shrink: 0;
     margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
   }
