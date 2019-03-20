@@ -8,13 +8,13 @@
 <rect class="st0" width="20" height="20"/>
 <g id="_3px_loose">
 	<rect x="15.5" y="15.5" width="2.5" height="2.5"/>
-	<rect x="8.8" y="15.5" width="2.5" height="2.5"/>
+	<rect x="8.75" y="15.5" width="2.5" height="2.5"/>
 	<rect x="2" y="15.5" width="2.5" height="2.5"/>
-	<rect x="15.5" y="8.8" width="2.5" height="2.5"/>
-	<rect x="8.8" y="8.8" width="2.5" height="2.5"/>
-	<rect x="2" y="8.8" width="2.5" height="2.5"/>
+	<rect x="15.5" y="8.75" width="2.5" height="2.5"/>
+	<rect x="8.75" y="8.75" width="2.5" height="2.5"/>
+	<rect x="2" y="8.75" width="2.5" height="2.5"/>
 	<rect x="15.5" y="2" width="2.5" height="2.5"/>
-	<rect x="8.8" y="2" width="2.5" height="2.5"/>
+	<rect x="8.75" y="2" width="2.5" height="2.5"/>
 	<rect x="2" y="2" width="2.5" height="2.5"/>
 </g>
 </svg>
