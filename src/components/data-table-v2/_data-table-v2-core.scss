@@ -311,14 +311,6 @@
     .#{$prefix}--overflow-menu__icon {
     opacity: 1;
   }
-
-  //----------------------------------------------------------------------------
-  // Numerical cell
-  //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-v2 td.#{$prefix}--data-table-v2--numerical-cell,
-  .#{$prefix}--data-table-v2 th.#{$prefix}--data-table-v2--numerical-cell {
-    text-align: right;
-  }
 }
 
 @include exports('data-table-v2-core') {
