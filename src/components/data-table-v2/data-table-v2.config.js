@@ -316,7 +316,7 @@ const rows = [
   },
   {
     id: 'row-id-14',
-    disabled: true,
+    // disabled: true,
     select: {
       id: `${prefix}--checkbox-14`,
       name: 'checkbox-14',

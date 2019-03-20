@@ -256,12 +256,6 @@
       padding-left: $spacing-06;
     }
 
-    th.#{$prefix}--table-column-icon:hover,
-    th.#{$prefix}--table-column-menu:hover,
-    th.#{$prefix}--table-expand-v2:hover {
-      background: $ui-03;
-    }
-
     .#{$prefix}--table-header-label {
       display: block;
       padding: rem(14px) 0;
@@ -326,46 +320,6 @@
   td.#{$prefix}--data-table-v2--numerical-cell,
   th.#{$prefix}--data-table-v2--numerical-cell {
     text-align: right;
-  }
-
-  //-------------------------------------------------
-  //DISABLED
-  //-------------------------------------------------
-  tbody tr.#{$prefix}--row-disabled {
-    cursor: not-allowed;
-  }
-
-  tbody
-    tr.#{$prefix}--row-disabled
-    .#{$prefix}--table-expand-v2
-    .#{$prefix}--table-expand-v2__button
-    .#{$prefix}--table-expand-v2__svg,
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
-    fill: $disabled;
-    cursor: not-allowed;
-  }
-
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu,
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $disabled-background-color;
-    cursor: not-allowed;
-  }
-
-  tbody tr.#{$prefix}--row-disabled td,
-  tbody tr.#{$prefix}--row-disabled td:hover {
-    color: $disabled;
-    background: $disabled-background-color;
-    cursor: not-allowed;
-  }
-
-  tbody tr.#{$prefix}--row-disabled:hover {
-    cursor: not-allowed;
-    color: $disabled;
-    background: $disabled-background-color;
-  }
-
-  tbody tr.#{$prefix}--row-disabled .#{$prefix}--overflow-menu {
-    display: none;
   }
 }
 
