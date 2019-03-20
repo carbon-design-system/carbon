@@ -302,14 +302,9 @@
     background: $ui-01;
     @include carbon--breakpoint(md) {
       flex-direction: row;
-      margin-right: $carbon--spacing-05;
-      margin-left: $carbon--spacing-05;
       background: none;
       box-shadow: none;
       z-index: auto;
-    }
-    @include carbon--breakpoint(xlg) {
-      margin-left: 0;
     }
 
     @include carbon--breakpoint-down(md) {
