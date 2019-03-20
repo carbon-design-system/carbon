@@ -396,7 +396,6 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
-        sort: true,
       },
     },
     {
@@ -404,7 +403,6 @@ module.exports = {
       label: 'Expandable',
       context: {
         title: 'Table title',
-        toolbarActions,
         columns: columnsExpandable,
         rows: rowsExpandable,
         searchInputId: 'search__input-2',
@@ -457,7 +455,6 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
-        sort: true,
       },
     },
   ],
