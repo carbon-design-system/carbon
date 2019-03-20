@@ -90,7 +90,13 @@ $typescale-map: (
 /// @example - @include helvetica;
 /// @deprecated (For v10) Use Plex fonts
 @mixin helvetica {
-  font-family: $font-family-helvetica;
+  @include deprecate(
+    '`@include helvetica` has been removed. ' + 'Use `@include carbon--font-family()` instead.',
+    feature-flag-enabled('breaking-changes-x'),
+    true
+  ) {
+    font-family: $font-family-helvetica;
+  }
 }
 
 /// @access public
