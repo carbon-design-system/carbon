@@ -447,6 +447,11 @@ class Tooltip extends Component {
           'aria-owns': tooltipId,
         };
 
+    const ariaDescribedbyProps = !open
+      ? {}
+      : {
+          'aria-describedby': tooltipId,
+        };
     const finalIcon = IconCustomElement ? (
       <IconCustomElement
         name={iconName}
@@ -489,6 +494,7 @@ class Tooltip extends Component {
                 aria-haspopup="true"
                 aria-label={iconDescription}
                 aria-expanded={open}
+                {...ariaDescribedbyProps}
                 {...ariaOwnsProps}>
                 {finalIcon}
               </div>
@@ -510,6 +516,7 @@ class Tooltip extends Component {
               onBlur={this.handleMouse}
               aria-haspopup="true"
               aria-expanded={open}
+              {...ariaDescribedbyProps}
               {...ariaOwnsProps}>
               {triggerText}
             </div>
