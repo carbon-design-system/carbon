@@ -12,6 +12,24 @@ The update to tables splits out the `scss` files into multiple partial files wit
 | `data-table-v2-expandable` | Expandable row styles                    |
 | `data-table-v2-sort`       | Sortable header styles                   |
 
+#### Classes
+
+- Core
+  - `bx--data-table-v2-container`
+    - `bx--data-table-v2-header`
+      - Should probably change tag type from h4
+    - `bx--data-table-v2`
+      - `bx--data-table-v2--zebra`
+      - `bx--data-table-v2--no-border`
+        - This still needed?
+      - `bx--data-table-v2--static`
+        - This still needed?
+      - `bx--data-table-v2--selected`
+      - Sizing (smallest to largest)
+        - `bx--data-table-v2--compact`
+        - `bx--data-table-v2--short`
+        - `bx--data-table-v2--tall`
+
 #### Modifiers
 
 | Name                           | Description                                  |
