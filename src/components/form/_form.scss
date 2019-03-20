@@ -134,7 +134,9 @@
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
-    @include typescale('zeta');
+    // When tooltip trigger is put in form label the trigger button should fit in the size of label
+    // https://github.com/IBM/carbon-components-react/issues/115
+    @include type-style('label-01');
   }
 
   // Skeleton State
@@ -145,16 +147,15 @@
   }
 
   input[type='number'] {
-    font-family: $font-family-mono;
+    font-family: carbon--font-family('mono');
   }
 
   input[data-invalid],
   .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid] > .#{$prefix}--text-area--invalid,
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
-    outline: 2px solid $support-01;
-    outline-offset: -2px;
+    @include focus-outline('invalid');
   }
 
   input[data-invalid],

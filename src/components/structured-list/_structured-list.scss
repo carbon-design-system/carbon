@@ -270,8 +270,8 @@
   .#{$prefix}--structured-list-td {
     @include reset;
     @include type-style('body-long-01');
-    @include line-height('body');
     @include padding-td--x;
+    line-height: carbon--rem(21px);
     position: relative;
     display: table-cell;
     max-width: 36rem;
