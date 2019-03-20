@@ -136,9 +136,10 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--text-area::-webkit-input-placeholder {
+  .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
+    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
@@ -171,8 +172,8 @@
     border-bottom: 1px solid transparent;
   }
 
-  .#{$prefix}--text-area:disabled::-webkit-input-placeholder {
-    color: $disabled;
+  .#{$prefix}--text-area:disabled::placeholder {
+    color: $disabled-02;
   }
 
   // Skeleton State
@@ -180,7 +181,7 @@
     @include skeleton;
     height: rem(100px);
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: transparent;
     }
   }
