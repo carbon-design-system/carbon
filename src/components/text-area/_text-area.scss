@@ -157,8 +157,8 @@
 
   .#{$prefix}--text-area__invalid-icon {
     position: absolute;
-    right: rem(16px);
-    top: rem(16px);
+    right: $carbon--spacing-05;
+    top: $carbon--spacing-04;
     fill: $support-01;
   }
 
