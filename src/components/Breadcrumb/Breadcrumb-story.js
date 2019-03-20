@@ -11,9 +11,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import Breadcrumb from '../Breadcrumb';
-import BreadcrumbItem from '../BreadcrumbItem';
-import BreadcrumbSkeleton from '../Breadcrumb/Breadcrumb.Skeleton';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
+import * as FeatureFlags from '../../internal/FeatureFlags';
 
 const props = () => ({
   className: 'some-class',
@@ -21,10 +20,10 @@ const props = () => ({
   onClick: action('onClick'),
 });
 
-storiesOf('Breadcrumb', module)
+const breadcrumbStory = storiesOf('Breadcrumb', module)
   .addDecorator(withKnobs)
   .add(
-    'Default',
+    'default',
     () => (
       <Breadcrumb {...props()}>
         <BreadcrumbItem>
@@ -42,6 +41,24 @@ storiesOf('Breadcrumb', module)
       },
     }
   )
+  .add(
+    'no trailing slash',
+    () => (
+      <Breadcrumb {...props()} noTrailingSlash>
+        <BreadcrumbItem>
+          <a href="/#">Breadcrumb 1</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+      </Breadcrumb>
+    ),
+    {
+      info: {
+        text:
+          'You can choose not to render a trailing slash with the `noTrailingSlash` prop',
+      },
+    }
+  )
   .add('skeleton', () => <BreadcrumbSkeleton />, {
     info: {
       text: `
@@ -49,3 +66,47 @@ storiesOf('Breadcrumb', module)
           `,
     },
   });
+
+if (FeatureFlags.componentsX) {
+  breadcrumbStory
+    .add(
+      'current page',
+      () => (
+        <Breadcrumb {...props()}>
+          <BreadcrumbItem>
+            <a href="/#">Breadcrumb 1</a>
+          </BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="#" isCurrentPage>
+            Breadcrumb 3
+          </BreadcrumbItem>
+        </Breadcrumb>
+      ),
+      {
+        info: {
+          text:
+            'You can specify a BreadcrumbItem component as the current page with the `isCurrentPage` prop',
+        },
+      }
+    )
+    .add(
+      'current page with aria-current',
+      () => (
+        <Breadcrumb {...props()}>
+          <BreadcrumbItem>
+            <a href="/#">Breadcrumb 1</a>
+          </BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="#" aria-current="page">
+            Breadcrumb 3
+          </BreadcrumbItem>
+        </Breadcrumb>
+      ),
+      {
+        info: {
+          text:
+            'You can specify a BreadcrumbItem component as the current page with the `aria-current` prop by specifying `aria-current="page"`',
+        },
+      }
+    );
+}

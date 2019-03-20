@@ -7,8 +7,7 @@
 
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
-export Breadcrumb from './components/Breadcrumb';
-export BreadcrumbItem from './components/BreadcrumbItem';
+export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export Checkbox from './components/Checkbox';
 export CodeSnippet from './components/CodeSnippet';

@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Breadcrumb.Skeleton';
-export default from './Breadcrumb';
+import Breadcrumb from './Breadcrumb';
+import BreadcrumbItem from './BreadcrumbItem';
+import BreadcrumbSkeleton from './Breadcrumb.Skeleton';
+
+export { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton };
+
+// Maintain default export as Breadcrumb for backwards-compatability
+export default Breadcrumb;
