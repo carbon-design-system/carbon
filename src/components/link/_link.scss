@@ -54,28 +54,24 @@
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-long-01');
-    color: $interactive-01;
+    color: $link-01;
     text-decoration: none;
     outline: none;
     transition: $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $interactive-01;
-      box-shadow: 0 1px $interactive-01;
+      color: $link-01;
+      box-shadow: 0 1px currentColor;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px $text-01;
+      box-shadow: 0 1px currentColor;
     }
 
     &:focus {
-      box-shadow: 0 3px $interactive-01;
-    }
-
-    &:focus:active {
-      box-shadow: 0 1px $text-01;
+      box-shadow: 0 3px $link-01;
     }
 
     &:not([href]) {
@@ -90,7 +86,7 @@
     }
 
     &:visited {
-      color: $interactive-01;
+      color: $link-01;
     }
   }
 
