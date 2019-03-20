@@ -47,105 +47,25 @@ const iconSettings = `
 `;
 /* eslint-enable max-len */
 
-const menuItems = componentsX
-  ? [
-      {
-        label: `
-      <svg class="${prefix}--overflow-menu-options-icon"
-        style="vertical-align: middle; margin-right: 8px;"
-        fill-rule="evenodd"
-        height="16"
-        name="edit"
-        role="img"
-        viewBox="0 0 16 16"
-        width="16"
-        aria-label="Edit"
-        alt="Edit">
-        <title>Edit</title>
-        <path d="M7.926 3.38L1.002
-          9.72V12h2.304l6.926-6.316L7.926 3.38zm.738-.675l2.308
-          2.304 1.451-1.324-2.308-2.309-1.451 1.329zM.002 9.28L9.439.639a1
-          1 0 0 1 1.383.03l2.309 2.309a1 1 0 0 1-.034 1.446L3.694
-          13H.002V9.28zM0 16.013v-1h16v1z">
-        </path>
-      </svg> <span style="vertical-align: middle;">Edit</span>
-    `,
-        primaryFocus: true,
-      },
-      {
-        label: `
-      <svg class="${prefix}--overflow-menu-options-icon"
-        style="vertical-align: middle; margin-right: 8px;"
-        fill-rule="evenodd"
-        height="16"
-        name="download"
-        role="img"
-        viewBox="0 0 14 16"
-        width="14"
-        aria-label="Download" alt="Download">
-        <title>Download</title>
-        <path d="M7.506 11.03l4.137-4.376.727.687-5.363 5.672-5.367-5.67.726-.687 4.14 4.374V0h1v11.03z"></path>
-        <path d="M13 15v-2h1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-2h1v2h12z"></path>
-      </svg style="vertical-align: middle;"> <span>Download</span>
-    `,
-      },
-      {
-        label: `
-    <svg class="${prefix}--overflow-menu-options-icon"
-      style="vertical-align: middle; margin-right: 8px;"
-      width="16px"
-      height="16px"
-      viewBox="0 0 16 16"
-      role="img"
-      aria-label="Save"
-      alt="Save">
-      <title>Save</title>
-      <path d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5
-    C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1
-    h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"/>
-      <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
-    </svg> <span style="vertical-align: middle;">Save</span>
-    `,
-      },
-      {
-        label: `
-      <svg class="${prefix}--overflow-menu-options-icon"
-        style="vertical-align: middle; margin-right: 8px;"
-        width="16px"
-        height="16px"
-        viewBox="0 0 16 16"
-        role="img"
-        aria-label="Delete"
-        alt="Delete">
-        <title>Trash Can</title>
-        <rect x="6" y="6" width="1" height="6"/>
-        <rect x="9" y="6" width="1" height="6"/>
-        <path d="M2,3v1h1v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V4h1V3H2z M4,14V4h8v10H4z"/>
-        <rect x="6" y="1" width="4" height="1"/>
-        <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
-      </svg> <span style="vertical-align: middle;">Delete</span>
-    `,
-      },
-    ]
-  : [
-      {
-        label: 'Stop app',
-        primaryFocus: true,
-      },
-      {
-        label: 'Restart app',
-      },
-      {
-        label: 'Rename app',
-      },
-      {
-        label: 'Edit routes and access, use title when',
-      },
-      {
-        label: 'Delete app',
-        danger: true,
-      },
-    ];
+const menuItems = [
+  {
+    label: 'Stop app',
+    primaryFocus: true,
+  },
+  {
+    label: 'Restart app',
+  },
+  {
+    label: 'Rename app',
+  },
+  {
+    label: 'Edit routes and access, use title when',
+  },
+  {
+    label: 'Delete app',
+    danger: true,
+  },
+];
 
 const batchActions = [
   {
@@ -174,31 +94,6 @@ const toolbarActions = [
   },
 ];
 
-const toolbarActionsX = [
-  {
-    icon: iconSettings,
-    overflowItems: [
-      {
-        label: 'Option 1',
-        primaryFocus: true,
-      },
-      {
-        label: 'Option 2',
-      },
-      {
-        label: 'Option 3',
-      },
-    ],
-  },
-];
-
-const toolbarActionsXDisabled = [
-  {
-    icon: iconSettings,
-    disabled: true,
-  },
-];
-
 const columns = [
   {
     name: 'select',
@@ -222,7 +117,6 @@ const columns = [
     name: 'port',
     title: 'Port',
     sortable: true,
-    numerical: true,
   },
   {
     name: 'rule',
@@ -316,7 +210,6 @@ const rows = [
   },
   {
     id: 'row-id-14',
-    // disabled: true,
     select: {
       id: `${prefix}--checkbox-14`,
       name: 'checkbox-14',
@@ -487,9 +380,7 @@ module.exports = {
       `,
       context: {
         title: 'Table title',
-        state: 'disabled',
         optionalHelper: 'Optional Helper Text',
-        toolbarActionsXDisabled,
         batchActions,
         toolbarActions,
         columns,
@@ -513,9 +404,7 @@ module.exports = {
       label: 'Expandable',
       context: {
         title: 'Table title',
-        state: 'default',
         toolbarActions,
-        toolbarActionsX,
         columns: columnsExpandable,
         rows: rowsExpandable,
         searchInputId: 'search__input-2',
@@ -553,8 +442,6 @@ module.exports = {
       context: {
         hasPager: true,
         title: 'Table title',
-        state: 'persistent-search',
-        toolbarActionsX,
         batchActions,
         toolbarActions,
         columns,
