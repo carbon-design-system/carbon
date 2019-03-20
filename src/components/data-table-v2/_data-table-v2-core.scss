@@ -210,9 +210,8 @@
     width: 100%;
 
     thead {
-      @include type-style('body-short-01');
+      @include type-style('heading-01');
       background-color: $ui-03;
-      font-weight: 700;
     }
 
     tbody {
@@ -244,9 +243,6 @@
       padding-right: $spacing-sm;
       vertical-align: top;
       text-align: left;
-      color: $text-02;
-      border-top: 1px solid $ui-01;
-      border-bottom: 1px solid $ui-01;
     }
 
     th {
@@ -263,6 +259,12 @@
     th.#{$prefix}--table-column-menu:hover,
     th.#{$prefix}--table-expand-v2:hover {
       background: $ui-03;
+    }
+
+    td {
+      color: $text-02;
+      border-top: 1px solid $ui-01;
+      border-bottom: 1px solid $ui-01;
     }
 
     tbody tr td {
