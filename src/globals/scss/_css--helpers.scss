@@ -10,6 +10,8 @@
 @import 'typography';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Include styles for screen reader/assistive text
+/// @access public
 @mixin css-helpers {
   .#{$prefix}--assistive-text,
   .#{$prefix}--visually-hidden {

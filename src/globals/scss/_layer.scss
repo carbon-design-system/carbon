@@ -22,6 +22,10 @@
 //
 
 // Box shadow variables
+/// @access private
+/// @type Value
+/// @group layer
+/// @example box-shadow: 0px 3px 3px 0 $box-shadow;
 $box-shadow: rgba(0, 0, 0, 0.1);
 $box-shadow--raised: 0 1px 2px 0 $box-shadow;
 $box-shadow--overlay: 0 4px 8px 0 $box-shadow;
@@ -30,6 +34,10 @@ $box-shadow--temporary-nav: 0 8px 16px 0 $box-shadow;
 $box-shadow--pop-out: 0 12px 24px 0 $box-shadow;
 
 // Layer box-shadow map
+/// @access private
+/// @type Map
+/// @group layer
+/// @example - @include layer('raised');
 $layer-shadows: (
   base: none,
   flat: none,
@@ -41,6 +49,10 @@ $layer-shadows: (
 );
 
 // Layer mixin
+/// @access public
+/// @param {String} $layer - a value from the $layer-shadows map
+/// @group layer
+/// @example - @include layer('raised');
 @mixin layer($layer) {
   @if global-variable-exists('css--use-layer') == false or $css--use-layer == true {
     @if map-has-key($layer-shadows, $layer) {

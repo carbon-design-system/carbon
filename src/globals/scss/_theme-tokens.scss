@@ -14,6 +14,7 @@
 
 @mixin theme() {
   // Color Theme Variables
+  /// @access public
   $brand-01: $color__blue-51 !default !global;
   $brand-02: $color__blue-40 !default !global;
   $brand-03: $color__teal-20 !default !global;
@@ -49,11 +50,13 @@
   $hover-row: rgba($brand-02, 0.1) !default !global;
 
   // Global
+  /// @access public
   $input-border: 1px solid transparent !default !global;
   $input-label-weight: 600 !default !global;
   $focus: $color__blue-20 !default !global;
 
   // Button Theme Variables
+  /// @access public
   $button-font-weight: 600 !default !global;
   $button-font-size: 0.875rem !default !global;
   $button-border-radius: 0 !default !global;
@@ -64,6 +67,7 @@
   $button-outline-width: 1px !default !global;
 
   // Accordion (Reverse)
+  /// @access public
   $accordion-flex-direction: row !default !global;
   $accordion-justify-content: flex-start !default !global;
   $accordion-arrow-margin: 0 0 0 $spacing-2xs !default !global;
@@ -71,42 +75,52 @@
   $accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default !global;
 
   // Card
+  /// @access public
   $card-text-align: center !default !global;
   $card-flex-align: center !default !global;
 
   // Checkbox
+  /// @access public
   $checkbox-border-width: 2px !default !global;
 
   // Code Snippet
+  /// @access public
   $snippet-background-color: $ui-01 !default !global;
   $snippet-border-color: $ui-03 !default !global;
 
   // Content Switcher
+  /// @access public
   $content-switcher-border-radius: 8px !default !global;
   $content-switcher-option-border: 1px solid $brand-01 !default !global;
 
   // Data Table
+  /// @access public
   $data-table-heading-transform: uppercase !default !global;
   $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
   $data-table-row-height: 2rem !default !global;
 
   // Modal
+  /// @access public
   $modal-border-top: $brand-01 4px solid !default !global;
   $modal-footer-background-color: $ui-02 !default !global;
 
   // Progress Indicator
+  /// @access public
   $progress-indicator-bar-width: 1px inset transparent !default !global;
   $progress-indicator-stroke-width: 5 !default !global;
   $progress-indicator-line-offset: 0.625rem !default !global;
 
   // Radio Button
+  /// @access public
   $radio-border-width: 2px !default !global;
 
   // Structured Theme Variables
+  /// @access public
   $structured-list-padding: 2rem !default !global;
   $structured-list-text-transform: none !default !global;
 
   // Skeleton Loading
+  /// @access public
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01
 }
 
@@ -116,10 +130,12 @@
   // g10, g90, and g100
   @include carbon--theme-white();
 
+  /// @access public
   $edited: true !default !global;
   $use-layer: true !default !global;
 
   // Global
+  /// @access public
   $input-border: 1px solid transparent !default !global;
   $input-label-weight: 400 !default !global;
   $disabled: $disabled-02 !default !global;
@@ -127,13 +143,16 @@
   $focus: $ibm-color__blue-60 !default !global;
 
   // Link
+  /// @access public
   $link-visited: $ibm-color__purple-60 !default !global;
   $link-inverse-color: #6ea6ff !default !global;
 
   // Tooltip
+  /// @access public
   $tooltip-background-color: $inverse-02 !default !global;
 
   // Button Theme Variables
+  /// @access public
   $button-font-weight: 400 !default !global;
   $button-font-size: 0.875rem !default !global;
   $button-border-radius: 0 !default !global;
@@ -147,6 +166,7 @@
   $button-outline: 1px solid $ibm-color__white-0 !default !global;
 
   // Accordion (Reverse)
+  /// @access public
   $accordion-flex-direction: row-reverse !default !global;
   $accordion-justify-content: flex-start !default !global;
   $accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default !global;
@@ -154,67 +174,83 @@
   $accordion-content-padding: 0 0 0 $carbon--spacing-05 !default !global;
 
   // Card
+  /// @access public
   $card-text-align: center !default !global;
   $card-flex-align: center !default !global;
 
   // Checkbox
+  /// @access public
   $checkbox-border-width: 2px !default !global;
 
   // Code Snippet
+  /// @access public
   $snippet-background-color: $ui-01 !default !global; // TODO: Define for experimental
   $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
 
   // Content Switcher
+  /// @access public
   $content-switcher-border-radius: 0px !default !global;
   $content-switcher-option-border: 1px solid $brand-01 !default !global;
   $content-switcher-divider: $ui-03 !default !global;
 
   // Data Table
+  /// @access public
   $data-table-heading-transform: uppercase !default !global;
   $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
   $data-table-row-height: 2rem !default !global;
 
   // Date Picker
+  /// @access public
   $date-picker-in-range-background-color: $ibm-color__blue-20 !default !global;
 
   // Modal
+  /// @access public
   $modal-border-top: $brand-01 4px solid !default !global;
   $modal-footer-background-color: $ui-03 !default !global;
 
   // Notification
+  /// @access public
   $notification-info-background-color: $ibm-color__blue-10 !default !global;
   $notification-error-background-color: $ibm-color__red-10 !default !global;
   $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
   $notification-success-background-color: $ibm-color__green-10 !default !global;
 
   // Progress Indicator
+  /// @access public
   $progress-indicator-bar-width: 1px inset transparent !default !global;
   $progress-indicator-stroke-width: 5 !default !global;
   $progress-indicator-line-offset: 0.625rem !default !global;
 
   //Code Snippet
+  /// @access public
   $copy-active: $active-ui !default !global;
   $copy-btn-feedback: $ibm-color__gray-80 !default !global;
 
   // Radio Button
+  /// @access public
   $radio-border-width: 1px !default !global;
 
   // Structured Theme Variables
+  /// @access public
   $structured-list-padding: 2rem !default !global;
   $structured-list-text-transform: none !default !global;
 
   // Slider
 
   //Tab
+  /// @access public
   $tab-underline-color: 3px solid $ibm-color__gray-30 !default !global;
   $tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default !global;
   $tab-text-disabled: $ibm-color__gray-30 !default !global;
   $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
 
   // Skeleton Loading
+  /// @access public
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
 
   // ☠️ Deprecated
+  /// @deprecated
+  /// @access public
   $hover-field: $hover-ui !default !global;
   $active-01: $active-ui !default !global;
   $nav-01: $color__navy-gray-1 !default !global;
