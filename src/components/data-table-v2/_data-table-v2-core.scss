@@ -247,6 +247,7 @@
 
     th {
       color: $text-01;
+      background-color: $ui-03;
       border-top: 1px solid $ui-03;
       border-bottom: 1px solid $ui-03;
     }
@@ -261,46 +262,36 @@
       background: $ui-03;
     }
 
-    td {
-      color: $text-02;
-      border-top: 1px solid $ui-01;
-      border-bottom: 1px solid $ui-01;
-    }
-
-    tbody tr td {
-      background: $ui-01;
-      border-bottom: 1px solid $ui-03;
-      border-top: 1px solid $ui-01;
-    }
-
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2) {
-      padding: rem(14px) $spacing-sm;
-    }
-
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2):first-of-type {
-      padding-left: $spacing-lg;
-    }
-
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-icon):not(.#{$prefix}--table-expand-v2):last-of-type {
-      padding-right: $spacing-lg;
-    }
-
     .#{$prefix}--table-header-label {
       display: block;
       padding: rem(14px) 0;
     }
 
-    //width for checkbox columns
-    .#{$prefix}--table-column-checkbox {
-      width: rem(50px);
-      min-width: rem(50px);
+    td {
+      background: $ui-01;
+      color: $text-02;
+      border-top: 1px solid $ui-01;
+      border-bottom: 1px solid $ui-03;
+      padding: rem(14px) $spacing-sm;
+    }
+
+    td:first-of-type {
+      padding-left: $spacing-lg;
+    }
+
+    td:last-of-type {
+      padding-right: $spacing-lg;
+    }
+
+    // specific padding for checkbox columns
+    .#{$prefix}--table-column-checkbox,
+    .#{$prefix}--table-column-checkbox:first-of-type {
       padding: rem(10px) $spacing-md 0 $spacing-md;
     }
 
-    //width for overflow menu columns
-    .#{$prefix}--table-column-menu {
-      width: rem(52px);
-      min-width: rem(52px);
+    // specific padding for overflow menu columns
+    .#{$prefix}--table-column-menu,
+    .#{$prefix}--table-column-menu:last-of-type {
       padding-top: rem(8px);
       padding-right: rem(8px);
     }
@@ -309,11 +300,7 @@
       background: $ui-03;
     }
 
-    // Checbox and Overflow Menu Overrides
-    .#{$prefix}--checkbox-label {
-      padding-left: rem(28px);
-    }
-
+    // Overflow Menu Overrides
     td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
       @include focus-outline('outline');
     }
