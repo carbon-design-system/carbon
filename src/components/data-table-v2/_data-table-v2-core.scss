@@ -253,7 +253,7 @@
     border-bottom: 1px solid $ui-03;
   }
 
-  .#{$prefix}--data-table-v2 th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+  .#{$prefix}--data-table-v2 th:first-of-type {
     padding-left: $spacing-05;
   }
 
