@@ -306,18 +306,12 @@
 
     @include carbon--breakpoint(md) {
       flex-direction: row;
-      margin-right: $carbon--spacing-05;
-      margin-left: $carbon--spacing-05;
       background: none;
       box-shadow: none;
       z-index: auto;
       transition: inherit;
       max-height: auto;
       width: auto;
-    }
-
-    @include carbon--breakpoint(xlg) {
-      margin-left: 0;
     }
   }
 

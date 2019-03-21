@@ -25,10 +25,10 @@
   </ul>
 </nav>
 <!-- The markup below is for demonstration purposes only -->
-<div style="padding: 1rem;">
+<div>
   {{#each items}}
     <div id="{{panelId}}" class="{{panelClass}}" role="tabpanel" aria-labelledby="{{linkId}}" aria-hidden="{{not selected}}"{{#if (not selected)}} hidden{{/if}}>
-      <p style="font-size: 14px; font-weight: 600; lineHeight: 18px; letterSpacing: 0.16px;">{{panelContent}}</p>
+      <p style="padding: 0 1rem; font-size: 14px; font-weight: 600;">{{panelContent}}</p>
     </div>
   {{/each}}
 </div>
