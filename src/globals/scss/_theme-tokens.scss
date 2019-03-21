@@ -198,6 +198,8 @@
   $data-table-heading-transform: uppercase !default !global;
   $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
   $data-table-row-height: 2rem !default !global;
+  $data-table-zebra-color: #fcfcfc !default !global;
+  $data-table-column-hover: $hover-selected-ui !default !global;
 
   // Date Picker
   /// @access public
