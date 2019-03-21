@@ -42,56 +42,16 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
     right: auto;
     opacity: 0.3; } }
 
-.bx--fluid-grid {
+.bx--grid {
   margin-right: auto;
   margin-left: auto;
   max-width: 99rem;
   padding-left: 1rem;
   padding-right: 1rem; }
   @media (min-width: 42rem) {
-    .bx--fluid-grid {
-      padding-left: 2rem;
-      padding-right: 2rem; } }
-  @media (min-width: 66rem) {
-    .bx--fluid-grid {
-      padding-left: 1.75rem;
-      padding-right: 1.75rem; } }
-  @media (min-width: 99rem) {
-    .bx--fluid-grid {
-      padding-left: 2rem;
-      padding-right: 2rem; } }
-
-.bx--grid {
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 99rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  max-width: 20rem; }
-  @media (min-width: 42rem) {
     .bx--grid {
       padding-left: 2rem;
       padding-right: 2rem; } }
-  @media (min-width: 66rem) {
-    .bx--grid {
-      padding-left: 1.75rem;
-      padding-right: 1.75rem; } }
-  @media (min-width: 99rem) {
-    .bx--grid {
-      padding-left: 2rem;
-      padding-right: 2rem; } }
-  @media (min-width: 42rem) {
-    .bx--grid {
-      max-width: 42rem; } }
-  @media (min-width: 66rem) {
-    .bx--grid {
-      max-width: 66rem; } }
-  @media (min-width: 82rem) {
-    .bx--grid {
-      max-width: 82rem; } }
-  @media (min-width: 99rem) {
-    .bx--grid {
-      max-width: 99rem; } }
 
 @media (min-width: 99rem) {
   .bx--grid--full-width {
@@ -102,6 +62,12 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
   flex-wrap: wrap;
   margin-right: -1rem;
   margin-left: -1rem; }
+
+.bx--grid--condensed .bx--row:not(:last-of-type) {
+  margin-bottom: 0.125rem; }
+
+.bx--row--condensed + .bx--row--condensed {
+  margin-top: 0.125rem; }
 
 .bx--col {
   width: 100%;
@@ -916,6 +882,51 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
     margin-left: 83.33333%; }
   .bx--offset-max-11 {
     margin-left: 91.66667%; } }
+
+.bx--no-gutter,
+.bx--row.bx--no-gutter [class*='bx--col'] {
+  padding-left: 0;
+  padding-right: 0; }
+
+.bx--no-gutter--left,
+.bx--row.bx--no-gutter--left [class*='bx--col'] {
+  padding-left: 0; }
+
+.bx--no-gutter--right,
+.bx--row.bx--no-gutter--right [class*='bx--col'] {
+  padding-right: 0; }
+
+.bx--hang--left {
+  padding-left: 1rem; }
+
+.bx--hang--right {
+  padding-right: 1rem; }
+
+.bx--aspect-ratio {
+  height: 0;
+  position: relative; }
+
+.bx--aspect-ratio--object {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100; }
+
+.bx--aspect-ratio--16x9 {
+  padding-bottom: 56.25%; }
+
+.bx--aspect-ratio--2x1 {
+  padding-bottom: 50%; }
+
+.bx--aspect-ratio--4x3 {
+  padding-bottom: 75%; }
+
+.bx--aspect-ratio--1x1 {
+  padding-bottom: 100%; }
 "
 `;
 
