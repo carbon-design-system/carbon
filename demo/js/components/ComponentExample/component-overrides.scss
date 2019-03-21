@@ -49,7 +49,7 @@
   & .tabs .bx--tabs__nav--hidden {
     display: none;
 
-    @include breakpoint('768px') {
+    @include breakpoint(if(not feature-flag-enabled('components-x'), '768px', '42rem')) {
       display: flex;
       margin-top: 8px;
     }
@@ -137,7 +137,7 @@
   & .tabs .bx--tabs__nav--hidden {
     display: none;
 
-    @include breakpoint('768px') {
+    @include breakpoint(if(not feature-flag-enabled('components-x'), '768px', '42rem')) {
       display: flex;
     }
   }
@@ -154,7 +154,7 @@
     & > div {
       min-width: 100%;
 
-      @include breakpoint('768px') {
+      @include breakpoint(if(not feature-flag-enabled('components-x'), '768px', '42rem')) {
         min-width: 570px;
       }
     }
@@ -179,7 +179,7 @@
 .page-header + div > .bx--tabs {
   background-color: $field-01;
 
-  @include breakpoint('768px') {
+  @include breakpoint(if(not feature-flag-enabled('components-x'), '768px', '42rem')) {
     background-color: transparent;
   }
 }
