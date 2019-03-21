@@ -39,8 +39,17 @@
 //   2xl  ||  160px
 //   ==========================================
 
+/// @access public
+/// @returns 1 rem
+/// @group spacing/layout tokens
 $spacing-baseline: 1rem !default;
 
+/// @access public
+/// @returns - spacing values in rem, see scale above
+/// @example
+//    .box {
+//      padding-left: $spacing-md;
+//    }
 $spacing-4xs: $spacing-baseline * 0.0625 !default;
 $spacing-3xs: $spacing-baseline * 0.125 !default;
 $spacing-2xs: $spacing-baseline * 0.25 !default;
@@ -52,6 +61,8 @@ $spacing-xl: $spacing-baseline * 2 !default;
 $spacing-2xl: $spacing-baseline * 2.5 !default;
 $spacing-3xl: $spacing-baseline * 3 !default;
 
+/// @access public
+/// @returns - layout values in rem, see scale above
 $layout-2xs: $spacing-baseline !default;
 $layout-xs: $spacing-baseline * 1.5 !default;
 $layout-sm: $spacing-baseline * 2 !default;
