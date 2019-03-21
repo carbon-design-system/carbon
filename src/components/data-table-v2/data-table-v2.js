@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -80,14 +81,32 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       }
     });
 
-    if (!previousValue || previousValue === 'descending') {
-      element.dataset.previousValue = 'ascending';
-      element.classList.add(this.options.classTableSortActive);
-      element.classList.add(this.options.classTableSortAscending);
-    } else {
-      element.dataset.previousValue = 'descending';
-      element.classList.add(this.options.classTableSortActive);
-      element.classList.remove(this.options.classTableSortAscending);
+    if (!componentsX) {
+      if (!previousValue || previousValue === 'descending') {
+        element.dataset.previousValue = 'ascending';
+        element.classList.add(this.options.classTableSortActive);
+        element.classList.add(this.options.classTableSortAscending);
+      } else {
+        element.dataset.previousValue = 'descending';
+        element.classList.add(this.options.classTableSortActive);
+        element.classList.remove(this.options.classTableSortAscending);
+      }
+    }
+
+    if (componentsX) {
+      if (!previousValue) {
+        element.dataset.previousValue = 'ascending';
+        element.classList.add(this.options.classTableSortActive);
+        element.classList.add(this.options.classTableSortAscending);
+      } else if (previousValue === 'ascending') {
+        element.dataset.previousValue = 'descending';
+        element.classList.add(this.options.classTableSortActive);
+        element.classList.remove(this.options.classTableSortAscending);
+      } else if (previousValue === 'descending') {
+        element.removeAttribute('data-previous-value');
+        element.classList.remove(this.options.classTableSortActive);
+        element.classList.remove(this.options.classTableSortAscending);
+      }
     }
   };
 
