@@ -44,6 +44,14 @@ module.exports = {
       },
     },
     {
+      name: 'light',
+      label: 'Light',
+      context: {
+        light: true,
+        items,
+      },
+    },
+    {
       name: 'inline',
       label: 'Inline',
       context: {
@@ -52,10 +60,11 @@ module.exports = {
       },
     },
     {
-      name: 'light',
-      label: 'Light',
+      name: 'inline-light',
+      label: 'Inline (light)',
       context: {
         light: true,
+        inline: true,
         items,
       },
     },
