@@ -1,22 +1,42 @@
 # `src/globals/scss`
 
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [`_colors.scss`](#_colorsscss)
+- [`_css--body.scss`](#_css--bodyscss)
+  - [Internals](#internals)
+- [`_css--font-face.scss`](#_css--font-facescss)
+  - [Helvetica Neue](#helvetica-neue)
+- [`_css--plex-core.scss`](#_css--plex-corescss)
+- [`_css--reset.scss`](#_css--resetscss)
+- [`_css--typography.scss`](#_css--typographyscss)
+- [`_feature-flags.scss`](#_feature-flagsscss)
+  - [Internals](#internals-1)
+- [`_functions.scss`](#_functionsscss)
+- [`_helper-classes.scss`](#_helper-classesscss)
+- [`_helper-mixins.scss`](#_helper-mixinsscss)
+  - [Internals](#internals-2)
+- [`_import-once.scss`](#_import-oncescss)
+- [`_layer.scss`](#_layerscss)
+  - [Internal](#internal)
+- [`_layout.scss`](#_layoutscss)
+- [`_mixins.scss`](#_mixinsscss)
+- [`_motion.scss`](#_motionscss)
+- [`_spacing.scss`](#_spacingscss)
+- [`_theme-tokens.scss`](#_theme-tokensscss)
+- [`_theme.scss`](#_themescss)
+- [`_typography.scss`](#_typographyscss)
+- [`_vars.scss`](#_varsscss)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+
 ## `_colors.scss`
 
-| v9                   | v10                   |
-| -------------------- | --------------------- |
-| `color__blue-*`      | `ibm-color__blue-*`   |
-| `color__navy-gray-*` | Removed TODO skeleton |
-| `color__white`       | `ibm-color__white-0`  |
-| `color__blue-51`     | Removed               |
-| `color__gray-1`      | Removed TODO skeleton |
-| `color__gray-2`      | Removed               |
-| `color__gray-3`      | Removed               |
-| `color__teal-*`      | Removed               |
-| `color__green-*`     | `ibm-color__green-*`  |
-| `color__yellow-*`    | `ibm-color__yellow`   |
-| `color__orange-*`    | `ibm-color__orange`   |
-| `color__red-*`       | `ibm-color__red-*`    |
-| `color__purple-*`    | `ibm-color__purple-*` |
+Migration table available [here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
 
 ## `_css--body.scss`
 
@@ -45,23 +65,17 @@ Notable changes:
 
 - IBM Plex fonts now come from Carbon Elements
 - The CDN for IBM Plex font files is now Google Fonts, we still recommend using
-  your own for production (NOTE: how would one do this?)
+  your own for production
 
-| v9                        | v10                                                    |
-| ------------------------- | ------------------------------------------------------ |
-| `$font-path`              | ☠️ Deprecated                                          |
-| `$unicodes`               | ☠️ Deprecated                                          |
-| `$families`               | ☠️ Deprecated, use `font-families` from `@carbon/type` |
-| `$fallbacks`              | ☠️ Deprecated, use `font-families` from `@carbon/type` |
-| `$weights`                | ☠️ Deprecated, use `font-weight` from `@carbon/type`   |
-| `check-default-font-path` | ☠️ Deprecated                                          |
-| `plex-font-face`          | ☠️ Deprecated                                          |
-
-TODO:
-
-- How do we warn if using google fonts CDN? Should we?
-- What guidance do we give for folks wanting to use their own type?
-- What guidance do we give for folks wanting to use a CDN for their fonts?
+| v9                        | v10                                                 |
+| ------------------------- | --------------------------------------------------- |
+| `$font-path`              | ☠️ Deprecated                                       |
+| `$unicodes`               | ☠️ Deprecated                                       |
+| `$families`               | ☠️ Deprecated, use `$carbon--font-families` instead |
+| `$fallbacks`              | ☠️ Deprecated, use `$carbon--font-families` instead |
+| `$weights`                | ☠️ Deprecated, use `$carbon--font-weights` instead  |
+| `check-default-font-path` | ☠️ Deprecated                                       |
+| `plex-font-face`          | ☠️ Deprecated                                       |
 
 ## `_css--reset.scss`
 
@@ -69,23 +83,25 @@ No change
 
 ## `_css--typography.scss`
 
-Classes have been replaced with Type styles. TODO link to type styles. Below is
+Classes have been replaced with Type styles. Below is
 a rough conversion table if you would still like to use the classes.
 
-| v9          | v10                     |
-| ----------- | ----------------------- |
-| `Giga`      | `display-03`            |
-| `Mega`      | `display-01`            |
-| `Alpha`     | `productive-heading-05` |
-| `Beta`      | `productive-heading-04` |
-| `Gamma`     | `heading-03`            |
-| `Delta`     | `heading-02`            |
-| `Epsilon`   | `heading-01`            |
-| `Zeta`      | N/A                     |
-| `Omega`     | N/A                     |
-| `Caption`   | `caption-01`            |
-| `Legal`     | `caption-01`            |
-| `Paragraph` | `body-long-02`          |
+| Type class | v9   | v10                     |
+| ---------- | ---- | ----------------------- |
+| Giga       | 76px | `display-03`            |
+| Mega       | 54px | `display-01`            |
+| Alpha      | 36px | `productive-heading-05` |
+| Beta       | 28px | `productive-heading-04` |
+| Gamma      | 20px | `heading-03`            |
+| Delta      | 18px | `heading-02`            |
+| Epsilon    | 16px | `heading-01`            |
+| Zeta       | 14px | N/A                     |
+| Omega      | 12px | N/A                     |
+| Caption    | 12px | `caption-01`            |
+| Legal      | 11px | `caption-01`            |
+| Paragraph  | 16px | `body-long-02`          |
+
+For full details, please check our [our v10 migration guide for type.](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-type.md)
 
 ## `_feature-flags.scss`
 
@@ -129,20 +145,24 @@ No change
 
 Replaced with `@carbon/grid`
 
-| v9               | v10                 | Changes                                     |
-| ---------------- | ------------------- | ------------------------------------------- |
-| `$breakpoints`   | `$grid-breakpoints` | Renamed breakpoints to sm, md, lg, xlg, max |
-| `$padding`       | ☠️ Deprecated       |                                             |
-| `padding`        | ☠️ Deprecated       |                                             |
-| `breakpoint`     | ☠️ Deprecated       | Moved to `@carbon/grid`                     |
-| `max-breakpoint` | ☠️ Deprecated       | Moved to `@carbon/grid`                     |
-| `grid-container` | ☠️ Deprecated       | TODO                                        |
-| `$z-indexes`     | No change           |                                             |
-| `z`              | No change           |                                             |
+| v9               | v10                                                                          |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `$breakpoints`   | ☠️ Deprecated, please use `$carbon--grid-breakpoints`                        |
+| `$padding`       | ☠️ Deprecated                                                                |
+| `padding`        | ☠️ Deprecated                                                                |
+| `breakpoint`     | ☠️ Deprecated, please use `carbon--breakpoint` instead                       |
+| `max-breakpoint` | ☠️ Deprecated, please use `carbon--breakpoint-down` isntead                  |
+| `grid-container` | ☠️ Deprecated, please use `carbon--grid` or `carbon--make-container` instead |
+| `$z-indexes`     | No change                                                                    |
+| `z`              | No change                                                                    |
 
 ## `_mixins.scss`
 
 No change
+
+## `_motion.scss`
+
+New in v10. For full details, please check out our [migration guide](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-motion.md).
 
 ## `_spacing.scss`
 
@@ -170,63 +190,7 @@ Spacing scale no longer uses t-shirt sizing, instead uses a scale approach (ref:
 
 ## `_theme-tokens.scss`
 
-Legend:
-
-- ✨ New
-- ☠️ Deprecated (to be removed next version)
-
-| v9                 | v10                          |
-| ------------------ | ---------------------------- |
-| brand-01           | replaced with interactive-01 |
-| brand-02           | replaced with interactive-02 |
-| brand-03           | replaced with interactive-03 |
-| ui-01              | No change                    |
-| ui-02              | No change                    |
-| ui-03              | No change                    |
-| ui-04              | No change                    |
-| ui-05              | No change                    |
-|                    |  ✨ ui-background            |
-| text-01            | No change                    |
-| text-02            | No change                    |
-| text-03            | No change                    |
-|                    | ✨ text-04                   |
-| inverse-01         | No change                    |
-| inverse-02         | No change                    |
-| field-01           | No change                    |
-| field-02           | No change                    |
-| support-01         | No change                    |
-| support-02         | No change                    |
-| support-03         | No change                    |
-| support-04         | No change                    |
-| nav-01             | ☠️ Deprecated                |
-| nav-02             | ☠️ Deprecated                |
-| nav-03             | ☠️ Deprecated                |
-| nav-04             | ☠️ Deprecated                |
-| nav-05             | ☠️ Deprecated                |
-| nav-06             | ☠️ Deprecated                |
-| nav-07             | ☠️ Deprecated                |
-| nav-08             | ☠️ Deprecated                |
-|                    | ✨ focus                     |
-| hover-primary      | No change                    |
-|                    | ✨ active-primary            |
-| hover-primary-text | No change                    |
-| hover-secondary    | No change                    |
-|                    | ✨ active-secondary          |
-|                    | ✨hover-tertiary             |
-|                    | ✨active-tertiary            |
-| hover-field        | ☠️ Deprecated, use hover-ui  |
-|                    | ✨hover-ui                   |
-| active-01          | ☠️ Deprecated, use active-ui |
-|                    | ✨active-ui                  |
-|                    | ✨selected-ui                |
-|                    | ✨hover-selected-ui          |
-| hover-danger       | No change                    |
-|                    | ✨active-danger              |
-| hover-row          | No change                    |
-|                    | ✨visited-link               |
-|                    | ✨disabled-01                |
-|                    | ✨disabled-02                |
-|                    | ✨disabled-03                |
+Migration table available [here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
 
 ## `_theme.scss`
 
@@ -234,21 +198,23 @@ No change
 
 ## `_typography.scss`
 
-| v9                     | v10                                                     |
-| ---------------------- | ------------------------------------------------------- |
-| `$font-family-*`       | Deprecated, use `font-families` map from `@carbon/type` |
-| `$base-font-size`      | Comes from `@carbon/layout/scss/convert`                |
-| `$typescale-map`       | Replaced with `$type-scale` from `@carbon/type`         |
-| `typescale` mixin      | Replaced with `type-scale` from `@carbon/type`          |
-| `rem` mixin            | Moved to `@carbon/layout/scss/convert`                  |
-| `em` mixin             | Moved to `@carbon/layout/scss/convert`                  |
-| `helvetica` mixin      | ☠️ Deprecated                                           |
-| `font-family` mixin    | ☠️ Deprecated, use `font-family` from `@carbon/type`    |
-| `line-height` mixin    | ☠️ Deprecated                                           |
-| `font-smoothing` mixin | ☠️ Deprecated                                           |
-| `letter-spacing` mixin | ☠️ Deprecated                                           |
-| `$font-size-map`       | ☠️ Deprecated, use `type-scale` from `@carbon/type`     |
-| `font-size` mixin      | ☠️ Deprecated, use `font-size` from `@carbon/type`      |
+| v9                     | v10                                                         |
+| ---------------------- | ----------------------------------------------------------- |
+| `$font-family-*`       | ☠️ Deprecated, please use `$carbon--font-families` instead  |
+| `$base-font-size`      | ☠️ Deprecated, please use `$carbon--base-font-size` instead |
+| `$typescale-map`       | ☠️ Deprecated, please use `carbon--$type-scale` instead     |
+| `typescale` mixin      | ☠️ Deprecated, please use `carbon--type-scale` instead      |
+| `rem` mixin            | No change                                                   |
+| `em` mixin             | No change                                                   |
+| `helvetica` mixin      | ☠️ Deprecated                                               |
+| `font-family` mixin    | ☠️ Deprecated, please use `carbon--font-family` instead     |
+| `line-height` mixin    | ☠️ Deprecated                                               |
+| `font-smoothing` mixin | ☠️ Deprecated                                               |
+| `letter-spacing` mixin | ☠️ Deprecated                                               |
+| `$font-size-map`       | ☠️ Deprecated                                               |
+| `font-size` mixin      | ☠️ Deprecated                                               |
+
+For full details, please check our [our v10 migration guide for type.](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-type.md)
 
 ## `_vars.scss`
 
@@ -256,5 +222,3 @@ No change
 | ----------------------------------- | ------------------------------ |
 | `$bx--ease-*` (Deprecated)          | Removed (Or defined as `null`) |
 | `$bx--standard-easing` (Deprecated) | Removed (Or defined as `null`) |
-
-TODO motion table
