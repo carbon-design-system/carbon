@@ -313,13 +313,6 @@
       max-height: auto;
       width: auto;
     }
-
-    @include carbon--breakpoint-down(md) {
-      transition: max-height $duration--moderate-01 motion(standard, productive);
-      max-height: 600px;
-      width: 100%;
-      padding-top: 0;
-    }
   }
 
   .#{$prefix}--tabs__nav--hidden {
