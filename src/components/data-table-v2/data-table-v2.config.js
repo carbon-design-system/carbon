@@ -8,6 +8,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const iconAddSolid = `
   <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -199,7 +200,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: "Maureen's VM Groups Testing a really long text here",
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -367,6 +368,7 @@ module.exports = {
   label: 'Data Table V2',
   context: {
     prefix,
+    componentsX,
   },
   variants: [
     {
@@ -378,6 +380,7 @@ module.exports = {
       `,
       context: {
         title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
         batchActions,
         toolbarActions,
         columns,
@@ -392,7 +395,6 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
       },
     },
@@ -452,7 +454,6 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
       },
     },

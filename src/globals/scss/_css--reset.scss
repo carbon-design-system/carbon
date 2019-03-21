@@ -9,6 +9,8 @@
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import './vendor/@carbon/elements/scss/type/reset';
 
+/// Resets default browser styling
+/// @access public
 @mixin reset {
   @if global-variable-exists(css--reset) ==false or $css--reset==false {
     box-sizing: border-box;

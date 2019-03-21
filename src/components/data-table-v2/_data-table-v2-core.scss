@@ -10,7 +10,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@include exports('data-table-v2-core') {
+@mixin data-table-v2-core {
   .#{$prefix}--data-table-v2-container {
     width: 100%;
     min-width: rem(500px);
@@ -168,5 +168,155 @@
   .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
     background-color: rgba($brand-02, 0.1);
+  }
+}
+
+@mixin data-table-v2-core--x {
+  //----------------------------------------------------------------------------
+  // Container
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-v2-container {
+    min-width: rem(500px);
+    width: 100%;
+    overflow-x: auto;
+    padding-top: $spacing-01; // allow space for focus styles
+  }
+
+  //----------------------------------------------------------------------------
+  // Table title text
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-v2-title-container {
+    background: $ui-01;
+    height: rem(88px);
+    padding: rem(22px) 0 0 $spacing-05;
+  }
+
+  .#{$prefix}--data-table-v2-header {
+    @include type-style('productive-heading-03');
+    color: $text-01;
+  }
+
+  .#{$prefix}--data-table-v2-optional {
+    @include type-style('body-short-01');
+    color: $text-02;
+  }
+
+  //----------------------------------------------------------------------------
+  // Data table
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-v2 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table-v2 thead {
+    @include type-style('heading-01');
+    background-color: $ui-03;
+  }
+
+  .#{$prefix}--data-table-v2 tbody {
+    @include type-style('body-short-01');
+    background-color: $ui-01;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table-v2 tr {
+    border: none;
+    height: $layout-04;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table-v2 tbody tr:hover {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--data-table-v2 tbody tr:hover td {
+    color: $text-01;
+    background: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  .#{$prefix}--data-table-v2 th,
+  .#{$prefix}--data-table-v2 td {
+    padding-left: $spacing-04;
+    padding-right: $spacing-04;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .#{$prefix}--data-table-v2 th {
+    color: $text-01;
+    background-color: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table-v2 th:first-of-type {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table-v2 .#{$prefix}--table-header-label {
+    display: block;
+    padding: rem(14px) 0;
+  }
+
+  .#{$prefix}--data-table-v2 td {
+    background: $ui-01;
+    color: $text-02;
+    border-top: 1px solid $ui-01;
+    border-bottom: 1px solid $ui-03;
+    padding: rem(14px) $spacing-04;
+  }
+
+  .#{$prefix}--data-table-v2 td:first-of-type {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table-v2 td:last-of-type {
+    padding-right: $spacing-05;
+  }
+
+  // specific padding for overflow menu columns
+  .#{$prefix}--data-table-v2 .#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table-v2 .#{$prefix}--table-column-menu:last-of-type {
+    padding-top: $spacing-03;
+    padding-right: $spacing-03;
+  }
+
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+    background: $ui-03;
+  }
+
+  // Overflow Menu Overrides
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
+    opacity: 0;
+  }
+
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:hover .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:focus .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table-v2
+    tr:hover
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
+}
+
+@include exports('data-table-v2-core') {
+  @if feature-flag-enabled('components-x') {
+    @include data-table-v2-core--x;
+  } @else {
+    @include data-table-v2-core;
   }
 }
