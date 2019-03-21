@@ -107,7 +107,7 @@
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-sm;
+    padding: 0 $spacing-04;
   }
 
   .#{$prefix}--table-sort-v2:focus {
@@ -142,9 +142,9 @@
     transform: rotate(0);
     opacity: 0;
     fill: $ui-05;
-    height: rem(16px);
+    height: $layout-01;
     width: auto;
-    min-width: rem(14px);
+    min-width: $layout-01;
   }
 
   // active icons
@@ -170,7 +170,7 @@
     opacity: 0;
     fill: $ui-05;
     width: auto;
-    min-width: rem(14px);
+    min-width: $layout-01;
   }
 }
 
