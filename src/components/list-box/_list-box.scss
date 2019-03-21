@@ -335,6 +335,14 @@ $list-box-menu-width: rem(300px);
     cursor: pointer;
     color: $text-01;
     transition: all $duration--fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--list-box--expanded:hover {
+    background-color: $field-01;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -360,6 +368,14 @@ $list-box-menu-width: rem(300px);
   }
 
   // Disabled state for `list-box`
+  .#{$prefix}--list-box--disabled:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
@@ -394,15 +410,26 @@ $list-box-menu-width: rem(300px);
 
   // disabled && invalid
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
-    padding-right: $carbon--spacing-05;
+    padding-right: $carbon--spacing-09;
   }
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: inherit;
-    width: auto;
-    height: $list-box-inline-height;
-    box-shadow: none;
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    height: rem(32px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
@@ -416,7 +443,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     height: rem(40px);
-    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
     border-bottom: 1px solid $ui-04;
