@@ -4,6 +4,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
+const path = require('path');
 const commander = require('commander');
 
 const flatten = a => a.reduce((result, item) => [...result, ...(Array.isArray(item) ? item : [item])], []);
@@ -19,6 +20,7 @@ const cloptions = commander
 const isFilesDefault =
   cloptions.file.length === defaultFiles.length && cloptions.file.every((item, i) => item === defaultFiles[i]);
 
+cloptions.browser = ['Chrome'];
 const customLaunchers = {
   Chrome_Travis: {
     base: 'Chrome',
@@ -33,6 +35,26 @@ const customLaunchers = {
 const travisLaunchers = {
   chrome: 'Chrome_Travis',
 };
+
+class FeatureFlagProxyPlugin {
+  /**
+   * A WebPack resolver plugin that proxies module request
+   * for `src/globals/js/feature-flags` to `demo/js/feature-flags`,
+   * which is a file generated from `src/globals/js/feature-flags` with effective feature flag values.
+   */
+  constructor() {
+    this.source = 'before-described-relative';
+  }
+
+  apply(resolver) {
+    resolver.plugin(this.source, (request, callback) => {
+      if (/feature-flags$/i.test(request.path)) {
+        request.path = path.resolve(__dirname, '../demo/feature-flags');
+      }
+      callback();
+    });
+  }
+}
 
 module.exports = function(config) {
   config.set({
@@ -68,6 +90,10 @@ module.exports = function(config) {
     webpack: {
       mode: 'development',
       devtool: 'inline-source-maps',
+      resolve: {
+        modules: ['node_modules'],
+        plugins: [new FeatureFlagProxyPlugin()],
+      },
       module: {
         rules: [
           {
@@ -199,6 +225,7 @@ module.exports = function(config) {
                   'src/components/pagination/pagination.js',
                   'src/components/unified-header/left-nav.js',
                   'src/components/unified-header/profile-switcher.js',
+                  'src/components/data-table-v2/data-table-v2.js', // to-do: remove when v9 is deprecated
                 ],
               },
             },

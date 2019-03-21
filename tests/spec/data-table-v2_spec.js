@@ -1,9 +1,10 @@
 import EventManager from '../utils/event-manager';
+import flattenOptions from '../utils/flatten-options';
 import DataTableV2 from '../../src/components/data-table-v2/data-table-v2';
 import HTML from '../../html/data-table-v2/data-table-v2.html';
 import ExpandableHTML from '../../html/data-table-v2/data-table-v2--expandable.html';
 
-describe('Dropdown', function() {
+describe('DataTableV2', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
@@ -15,6 +16,38 @@ describe('Dropdown', function() {
       expect(() => {
         new DataTableV2(document.createTextNode(''));
       }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+    });
+
+    it('Should set default options', function() {
+      const table = new DataTableV2(document.createElement('div'));
+      expect(flattenOptions(table.options)).toEqual({
+        selectorInit: '[data-table-v2]',
+        selectorToolbar: '.bx--table--toolbar',
+        selectorActions: '.bx--batch-actions',
+        selectorCount: '[data-items-selected]',
+        selectorActionCancel: '.bx--batch-summary__cancel',
+        selectorCheckbox: '.bx--checkbox',
+        selectorExpandCells: '.bx--table-expand-v2',
+        selectorExpandableRows: '.bx--expandable-row-v2',
+        selectorParentRows: '.bx--parent-row-v2',
+        selectorChildRow: '[data-child-row]',
+        selectorTableBody: 'tbody',
+        selectorTableSort: '.bx--table-sort-v2',
+        selectorTableSelected: '.bx--data-table-v2--selected',
+        classExpandableRow: 'bx--expandable-row-v2',
+        classExpandableRowHidden: 'bx--expandable-row--hidden-v2',
+        classExpandableRowHover: 'bx--expandable-row--hover-v2',
+        classTableSortAscending: 'bx--table-sort-v2--ascending',
+        classTableSortActive: 'bx--table-sort-v2--active',
+        classActionBarActive: 'bx--batch-actions--active',
+        classTableSelected: 'bx--data-table-v2--selected',
+        eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
+        eventAfterExpand: 'data-table-v2-aftertoggleexpand',
+        eventBeforeSort: 'data-table-v2-beforetogglesort',
+        eventAfterSort: 'data-table-v2-aftertogglesort',
+        eventTrigger: '[data-event]',
+        eventParentContainer: '[data-parent-row]',
+      });
     });
   });
 
