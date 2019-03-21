@@ -20,7 +20,6 @@ const cloptions = commander
 const isFilesDefault =
   cloptions.file.length === defaultFiles.length && cloptions.file.every((item, i) => item === defaultFiles[i]);
 
-cloptions.browser = ['Chrome'];
 const customLaunchers = {
   Chrome_Travis: {
     base: 'Chrome',
