@@ -350,6 +350,10 @@
     }
   }
 
+  .#{$prefix}--tooltip__label:focus {
+    @include focus-outline('border');
+  }
+
   .#{$prefix}--tooltip__trigger {
     @include button-reset($width: false);
     display: inline-flex;
@@ -434,7 +438,7 @@
       .#{$prefix}--tooltip__caret {
         left: auto;
         top: 50%;
-        right: rem(-5px);
+        right: rem(-4px);
         transform: rotate(-45deg) translate(50%, -50%);
       }
     }
@@ -442,14 +446,14 @@
     &[data-floating-menu-direction='top'] {
       .#{$prefix}--tooltip__caret {
         top: auto;
-        bottom: rem(-6px);
+        bottom: rem(-4px);
         transform: rotate(45deg);
       }
     }
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: rem(-5px);
+        left: rem(-4px);
         top: 50%;
         right: auto;
         transform: rotate(135deg) translate(-50%, 50%);
