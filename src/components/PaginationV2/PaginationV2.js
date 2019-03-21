@@ -139,9 +139,9 @@ export default class PaginationV2 extends Component {
   };
 
   static defaultProps = {
-    backwardText: 'Backward',
+    backwardText: 'Previous page',
     itemRangeText: (min, max, total) => `${min}-${max} of ${total} items`,
-    forwardText: 'Forward',
+    forwardText: 'Next page',
     itemsPerPageText: 'Items per page:',
     pageNumberText: 'Page Number',
     pageRangeText: (current, total) =>
@@ -340,30 +340,14 @@ export default class PaginationV2 extends Component {
             onClick={this.decrementPage}
             aria-label={backwardText}
             disabled={backButtonDisabled}>
-            {componentsX ? (
-              <CaretLeft24 />
-            ) : (
-              <Icon
-                className={`${prefix}--pagination__button-icon`}
-                icon={iconChevronLeft}
-                description={backwardText}
-              />
-            )}
+            <CaretLeft24 />
           </button>
           <button
             className={forwardButtonClasses}
             aria-label={forwardText}
             onClick={this.incrementPage}
             disabled={forwardButtonDisabled || isLastPage}>
-            {componentsX ? (
-              <CaretRight24 />
-            ) : (
-              <Icon
-                className={`${prefix}--pagination__button-icon`}
-                icon={iconChevronRight}
-                description={forwardText}
-              />
-            )}
+            <CaretRight24 />
           </button>
         </div>
       </div>

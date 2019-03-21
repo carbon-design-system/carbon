@@ -32,11 +32,11 @@ const props = () => ({
     : boolean('At the last page (isLastPage)', false),
   backwardText: text(
     'The description for the backward icon (backwardText)',
-    'Backward'
+    'Previous page'
   ),
   forwardText: text(
     'The description for the backward icon (forwardText)',
-    'Forward'
+    'Next page'
   ),
   pageSize: number('Number of items per page (pageSize)', 10),
   pageSizes: array('Choices of `pageSize` (pageSizes)', [10, 20, 30, 40, 50]),
