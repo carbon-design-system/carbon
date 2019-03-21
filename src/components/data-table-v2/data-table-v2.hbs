@@ -349,8 +349,8 @@
               {{#if sortable}}
                 <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
                   <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
-                  {{carbon-icon 'CaretDown20' class=(add @root.prefix '--table-sort-v2__icon')}}
-                  {{carbon-icon 'CaretSort20' class=(add @root.prefix '--table-sort-v2__icon-inactive')}}
+                  {{carbon-icon 'ArrowDown16' class=(add @root.prefix '--table-sort-v2__icon')}}
+                  {{carbon-icon 'ArrowsVertical20' class=(add @root.prefix '--table-sort-v2__icon-inactive')}}
                   {{#if ../truncate}}
                     <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip" data-avoid-focus-on-open>
                       <span class="{{@root.prefix}}--tooltip__caret"></span>
