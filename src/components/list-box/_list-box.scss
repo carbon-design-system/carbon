@@ -357,6 +357,10 @@ $list-box-menu-width: rem(300px);
     fill: $support-01;
   }
 
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
+    top: $carbon--spacing-03;
+  }
+
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
     border-bottom: 0;
     padding-right: carbon--mini-units(8);
@@ -430,6 +434,18 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box.#{$prefix}--list-box--inline,
   .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
     height: rem(32px);
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding: 0 carbon--mini-units(7) 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
+    padding: 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
+    right: $carbon--spacing-07;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
@@ -570,7 +586,7 @@ $list-box-menu-width: rem(300px);
     top: rem(40px);
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(120px);
+    max-height: rem(140px);
     overflow-y: auto;
     z-index: z('dropdown');
   }
