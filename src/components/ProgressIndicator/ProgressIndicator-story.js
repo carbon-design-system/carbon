@@ -12,9 +12,8 @@ import { action } from '@storybook/addon-actions';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import Tooltip from '../Tooltip';
-import { componentsX } from '../../internal/FeatureFlags';
 
-storiesOf('Progress Indicator', module)
+storiesOf('ProgressIndicator', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
@@ -27,7 +26,7 @@ storiesOf('Progress Indicator', module)
           secondaryLabel="Optional label"
         />
         <ProgressStep
-          label={componentsX ? null : 'Second step with tooltip'}
+          label="Second step with tooltip"
           description="Step 2: Getting started with Carbon Design System"
           renderLabel={() => (
             <Tooltip
@@ -41,7 +40,7 @@ storiesOf('Progress Indicator', module)
           )}
         />
         <ProgressStep
-          label={componentsX ? null : 'Third step with tooltip'}
+          label="Third step with tooltip"
           description="Step 3: Getting started with Carbon Design System"
           renderLabel={() => (
             <Tooltip
