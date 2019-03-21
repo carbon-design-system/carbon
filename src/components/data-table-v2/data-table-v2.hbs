@@ -211,9 +211,9 @@
 {{#if componentsX}}
   {{#if hasToolbar}}
   <div class="{{@root.prefix}}--data-table-v2-container {{#if sticky}}{{@root.prefix}}--data-table-v2--max-width{{/if}}" data-table-v2>
-    <div class="{{@root.prefix}}--data-table-v2-title-container">
-      <h4 class="{{@root.prefix}}--data-table-v2-header">{{title}}</h4>
-      <p class="{{@root.prefix}}--data-table-v2-optional">{{optionalHelper}}</p>
+    <div class="{{@root.prefix}}--data-table-v2-header">
+      <h4 class="{{@root.prefix}}--data-table-v2-header__title">{{title}}</h4>
+      <p class="{{@root.prefix}}--data-table-v2-header__description">{{optionalHelper}}</p>
     </div>
     <!-- Toolbar Content -->
     <section class="{{@root.prefix}}--table-toolbar {{#if small}} {{@root.prefix}}--table-toolbar--small {{/if}}">

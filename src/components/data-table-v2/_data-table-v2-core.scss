@@ -185,18 +185,18 @@
   //----------------------------------------------------------------------------
   // Table title text
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-v2-title-container {
+  .#{$prefix}--data-table-v2-header {
     background: $ui-01;
     height: rem(88px);
     padding: rem(22px) 0 0 $spacing-05;
   }
 
-  .#{$prefix}--data-table-v2-header {
+  .#{$prefix}--data-table-v2-header__title {
     @include type-style('productive-heading-03');
     color: $text-01;
   }
 
-  .#{$prefix}--data-table-v2-optional {
+  .#{$prefix}--data-table-v2-header__description {
     @include type-style('body-short-01');
     color: $text-02;
   }
