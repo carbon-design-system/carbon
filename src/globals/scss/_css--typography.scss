@@ -12,6 +12,8 @@
 @import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Includes type styles for different elements and classes
+/// @access public
 /// @deprecated (For v10) Use `@include carbon--type-classes`
 @mixin typography {
   @include deprecate(

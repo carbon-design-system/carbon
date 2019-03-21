@@ -9,10 +9,16 @@
 // 🎌 Feature Flags
 //-------------------------
 
-// Initialize our feature flag map with default values
+/// Initialize our feature flag map with default values, user can override default values ($default-feature-flags) here
+/// @access public
+/// @type Map
+/// @example
+/// $feature-flags: (components-x: true, ui-shell: true); // overrides default values for components-x and ui-shell
 $feature-flags: () !default;
 
-// Default feature flag values
+/// Default feature flag values
+/// @access private
+/// @type Map
 $default-feature-flags: (
   components-x: false,
   breaking-changes-x: false,
@@ -22,13 +28,16 @@ $default-feature-flags: (
   grid--fallback: false,
 );
 
+/// @access private
+/// @type Bool
 $did-warn-diverged-feature-flags: false !default !global;
 
-/// Look for user-defined feature flags that are different from default ones,
-/// and warn them before merging them.
+/// Look for user-defined feature flags that are different from default ones, and warn them before merging them.
+/// @access private
 /// @param {Map} $dst - The feature flags to merge to (default feature flags).
 /// @param {Map} $src - The feature flags to merge from (user-defined feature flags).
 /// @returns {Map} - The result of `map-merge($dst, $src)`.
+/// @example - $feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
 @function merge-feature-flags($dst, $src) {
   @if (not $did-warn-diverged-feature-flags) {
     $diverged: ();

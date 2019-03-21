@@ -9,6 +9,8 @@
 // 🌍 Global
 //-------------------------
 
+/// @access public
+/// @type Bool
 $css--font-face: true !default;
 $css--helpers: true !default;
 $css--body: true !default;
@@ -16,9 +18,12 @@ $css--use-layer: true !default;
 $css--reset: true !default;
 $css--typography: true !default;
 $css--plex: true !default;
+
 // TODO: remove in next major release. Synced in `feature-flags` as an adapter
 // in the interim
 /// @deprecated (For v10) v10 always uses `@carbon/grid`
+/// @access public
+/// @type Bool
 $css--use-experimental-grid: false !default;
 /// @deprecated (For v10) v10 always uses `@carbon/grid`
 $css--use-experimental-grid-fallback: false !default;
@@ -53,6 +58,7 @@ $css--use-experimental-grid-fallback: false !default;
  * this variable _will not_ be set to true, so the deprecation message will be
  * displayed after the @import.
  */
+/// @access private
 $deprecations--entry: true;
 // Collect all deprecation reasons into this list throughout the import cycle.
 $deprecations--reasons: ();
