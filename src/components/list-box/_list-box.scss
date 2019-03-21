@@ -478,6 +478,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection > svg {
     fill: $ui-05;
+    height: 100%;
   }
 
   .#{$prefix}--list-box__selection:focus {
