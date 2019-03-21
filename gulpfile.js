@@ -352,6 +352,7 @@ gulp.task('sass:dev', () =>
           components-x: ${useExperimentalFeatures},
           breaking-changes-x: ${useBreakingChanges},
           grid: ${useExperimentalFeatures},
+          grid-columns-16: false,
           ui-shell: true,
         );
       `)
