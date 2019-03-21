@@ -251,15 +251,12 @@
     background-color: $ui-03;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $ui-03;
+    padding-top: rem(14px);
+    padding-bottom: rem(14px);
   }
 
   .#{$prefix}--data-table-v2 th:first-of-type {
     padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table-v2 .#{$prefix}--table-header-label {
-    display: block;
-    padding: rem(14px) 0;
   }
 
   .#{$prefix}--data-table-v2 td {
