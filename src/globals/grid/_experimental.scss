@@ -6,62 +6,38 @@
 //
 
 @import '../scss/functions';
-@import '../scss/vendor/@carbon/elements/scss/layout/convert';
-
-@if not(feature-flag-enabled('grid-columns-16')) {
-  $carbon--grid-breakpoints: (
-    sm: (
-      columns: 4,
-      margin: 0,
-      width: carbon--rem(320px),
-    ),
-    md: (
-      columns: 8,
-      margin: carbon--rem(16px),
-      width: carbon--rem(672px),
-    ),
-    lg: (
-      columns: 12,
-      margin: carbon--rem(12px),
-      width: carbon--rem(1056px),
-    ),
-    xlg: (
-      columns: 12,
-      margin: carbon--rem(12px),
-      width: carbon--rem(1312px),
-    ),
-    max: (
-      columns: 12,
-      margin: carbon--rem(16px),
-      width: carbon--rem(1584px),
-    ),
-  ) !global;
-}
-
-@import '../scss/vendor/@carbon/elements/scss/layout/breakpoint';
 @import '../scss/vendor/@carbon/elements/scss/grid/mixins';
 
 @mixin grid--x {
-  // Fluid variant of the grid.
-  .#{$prefix}--fluid-grid {
-    @include carbon--make-container();
+  @if feature-flag-enabled('grid-columns-16') {
+    @include carbon--grid();
+  } @else {
+    $carbon--12-column-grid: map-merge(
+      $carbon--grid-breakpoints,
+      (
+        lg:
+          map-merge(
+            map-get($carbon--grid-breakpoints, lg),
+            (
+              columns: 12,
+            )
+          ),
+        xlg:
+          map-merge(
+            map-get($carbon--grid-breakpoints, xlg),
+            (
+              columns: 12,
+            )
+          ),
+        max:
+          map-merge(
+            map-get($carbon--grid-breakpoints, max),
+            (
+              columns: 12,
+            )
+          ),
+      )
+    );
+    @include carbon--grid($carbon--12-column-grid);
   }
-
-  // Default container class for a grid. Includes max-width for all breakpoints
-  .#{$prefix}--grid {
-    @include carbon--make-container();
-    @include carbon--make-container-max-widths();
-  }
-
-  .#{$prefix}--grid--full-width {
-    @include carbon--largest-breakpoint() {
-      max-width: 100%;
-    }
-  }
-
-  .#{$prefix}--row {
-    @include carbon--make-row();
-  }
-
-  @include carbon--make-grid-columns($carbon--grid-breakpoints, $carbon--grid-gutter);
 }
