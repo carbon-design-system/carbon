@@ -638,6 +638,10 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box__menu-item:hover .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
+  }
+
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
     display: block;
@@ -673,6 +677,10 @@ $list-box-menu-width: rem(300px);
     + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
   }
 
   .#{$prefix}--list-box__menu-item--active,
