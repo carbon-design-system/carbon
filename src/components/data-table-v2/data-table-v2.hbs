@@ -351,7 +351,7 @@
             {{else if (not menu)}}
             <!-- sortable th  -->
               {{#if sortable}}
-                <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
+                <button class="{{@root.prefix}}--table-sort-v2" data-event="sort" title="{{title}}">
                   <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
                   {{carbon-icon 'ArrowDown16' class=(add @root.prefix '--table-sort-v2__icon')}}
                   {{carbon-icon 'ArrowsVertical20' class=(add @root.prefix '--table-sort-v2__icon-unsorted')}}

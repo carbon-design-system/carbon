@@ -94,6 +94,13 @@
     padding: rem(10px) $spacing-05;
   }
 
+  .#{$prefix}--data-table-v2--sort .#{$prefix}--table-header-label {
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   // -------------------------------------
   // Th > Button
   // -------------------------------------
@@ -120,6 +127,7 @@
   .#{$prefix}--table-sort-v2:hover svg {
     opacity: 1;
   }
+
   // -------------------------------------
   //Th > Button > Svg (Sort Icons)
   // -------------------------------------
@@ -132,7 +140,7 @@
     display: none;
   }
 
-  .#{$prefix}--table-sort-v2__icon-inactive {
+  .#{$prefix}--table-sort-v2__icon-unsorted {
     position: relative;
     left: rem(2px);
     padding-left: rem(8px);
