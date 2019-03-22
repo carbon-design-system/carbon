@@ -299,6 +299,31 @@ $list-box-menu-width: rem(300px);
 @mixin listbox--x {
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.
+  .#{$prefix}--list-box__wrapper--inline {
+    display: inline-grid;
+    align-items: center;
+    grid-template: auto auto / auto auto auto;
+    grid-gap: rem(4px);
+
+    .#{$prefix}--label {
+      @include type-style('body-short-01');
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+
+    .#{$prefix}--form__helper-text {
+      max-width: none;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 2;
+    }
+  }
+
   .#{$prefix}--list-box {
     position: relative;
     width: $list-box-width;
@@ -307,10 +332,21 @@ $list-box-menu-width: rem(300px);
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
-    order: 1;
     cursor: pointer;
     color: $text-01;
     transition: all $duration--fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--list-box--expanded:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -318,24 +354,24 @@ $list-box-menu-width: rem(300px);
   }
 
   // invalid states
-  .#{$prefix}--list-box[data-invalid],
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus {
-    box-shadow: 0 2px 0 0 $support-01;
+  .#{$prefix}--list-box__invalid-icon {
+    position: absolute;
+    top: $carbon--spacing-04;
+    right: $carbon--spacing-08;
+    fill: $support-01;
   }
 
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus .#{$prefix}--list-box__label {
-    color: $support-01;
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
+    top: $carbon--spacing-03;
   }
 
-  .#{$prefix}--list-box ~ .#{$prefix}--form-requirement {
-    order: 3;
-    color: $support-01;
-    font-weight: 400;
-    margin-top: $carbon--spacing-02;
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+    border-bottom: 0;
+    padding-right: carbon--mini-units(8);
+  }
 
-    &::before {
-      display: none;
-    }
+  .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding-right: carbon--mini-units(7);
   }
 
   // Light variation for 'list-box'
@@ -343,9 +379,33 @@ $list-box-menu-width: rem(300px);
     background-color: $field-02;
   }
 
-  // Disabled state for a `list-box`
-  .#{$prefix}--list-box--disabled {
-    opacity: 0.5;
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
+    border-bottom-width: 0;
+  }
+
+  // Disabled state for `list-box`
+  .#{$prefix}--list-box--disabled:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
+    border-bottom-width: 0;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
+    fill: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -354,9 +414,10 @@ $list-box-menu-width: rem(300px);
     cursor: not-allowed;
   }
 
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: transparent;
+    color: $disabled-02;
     text-decoration: none;
   }
 
@@ -364,41 +425,58 @@ $list-box-menu-width: rem(300px);
     cursor: not-allowed;
   }
 
+  // disabled && invalid
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding-right: carbon--mini-units(4);
+  }
+
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: inherit;
-    width: auto;
-    height: $list-box-inline-height;
-    box-shadow: none;
+    background-color: $field-02;
+    border-width: 0;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded {
+    border-bottom-width: 0;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded
+    .#{$prefix}--list-box__field[aria-expanded='true'] {
+    border-width: 0;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
+    padding: 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
+    right: $carbon--spacing-07;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
     color: $text-01;
-  }
-
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
-    padding: 0 0 0 rem(10px);
-  }
-
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
-    position: static;
-    padding: 0 $carbon--spacing-03;
-  }
-
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__menu {
-    top: $list-box-inline-height;
-    width: $list-box-menu-width;
-  }
-
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
-    outline: 1px solid $interactive-01;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'],
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline > .#{$prefix}--list-box__field:focus {
-    outline: none;
-    box-shadow: none;
   }
 
   // The field we use for input, showing selection, etc.
@@ -408,7 +486,7 @@ $list-box-menu-width: rem(300px);
     display: inline-flex;
     align-items: center;
     height: rem(40px);
-    padding: 0 2rem 0 1rem;
+    padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
     border-bottom: 1px solid $ui-04;
@@ -418,14 +496,13 @@ $list-box-menu-width: rem(300px);
     border: none;
   }
 
-  .#{$prefix}--list-box__field:focus,
-  .#{$prefix}--list-box__field[aria-expanded='true'] {
-    border-bottom: 1px solid $ui-03;
+  .#{$prefix}--list-box__field:focus {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--list-box__field[disabled] {
     outline: none;
-    opacity: 0.5;
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
@@ -435,7 +512,6 @@ $list-box-menu-width: rem(300px);
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
     @include type-style('body-short-01');
-
     color: $text-01;
     user-select: none;
   }
@@ -479,10 +555,6 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__selection > svg {
     fill: $ui-05;
     height: 100%;
-  }
-
-  .#{$prefix}--list-box__selection:focus {
-    outline: 1px solid $interactive-01;
   }
 
   // Modifier for a selection to show that multiple selections have been made
@@ -529,73 +601,86 @@ $list-box-menu-width: rem(300px);
   // Descendant of a `list-box` that displays a list of options to select
   .#{$prefix}--list-box__menu {
     @include box-shadow();
-
     position: absolute;
     left: 0;
     right: 0;
-    top: rem(40px);
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(120px);
+    max-height: rem(140px);
     overflow-y: auto;
     z-index: z('dropdown');
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu {
+    background-color: $field-02;
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
-
-    display: flex;
-    align-items: center;
     height: rem(40px);
-    margin-top: -1px;
-    padding: 0 1rem;
     color: $text-02;
     cursor: pointer;
     user-select: none;
-    border-bottom: 1px solid $ui-03;
     position: relative;
 
-    &::before,
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      height: calc(100% + 1px);
-      width: 1rem;
-      background-color: $ui-01;
+    &:hover {
+      background-color: $hover-ui;
+
+      + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
+        border-color: transparent;
+      }
     }
 
-    &::before {
-      left: 0;
-    }
-
-    &::after {
-      right: 0;
-    }
-
-    &:last-of-type {
-      border-bottom: 1px solid $ui-01;
-    }
-
-    &:last-of-type:hover {
-      border-bottom: 1px solid $ui-03;
+    &:active {
+      background-color: $selected-ui;
     }
   }
 
-  .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box__menu-item:hover .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__option {
+    @include focus-outline('reset');
+    display: block;
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 rem(16px);
+    border: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:focus {
+      @include focus-outline('outline');
+      margin: 0;
+      padding: rem(11px) rem(16px);
+      border-color: transparent;
+    }
+
+    &:hover {
+      color: $text-01;
+      border-color: transparent;
+    }
+  }
+
   .#{$prefix}--list-box__menu-item--highlighted {
     background-color: $hover-ui;
     color: $text-01;
-    border-bottom: 1px solid $ui-01;
+    border-color: transparent;
 
-    &::before,
-    &::after {
-      background-color: $hover-ui;
-      // Below two are for fixing border and background-color alignment when zooming in
-      height: 100%;
-      z-index: 1;
+    + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
+      border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
   }
 
   .#{$prefix}--list-box__menu-item--active,
@@ -603,16 +688,6 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
     background-color: $selected-ui;
     border-bottom-color: $selected-ui;
-
-    &:before,
-    &:after {
-      background-color: $selected-ui;
-      border-bottom: 1px solid $selected-ui;
-      // Below two are for fixing border and background-color alignment when zooming in
-      top: 0;
-      height: 100%;
-      z-index: 1;
-    }
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
