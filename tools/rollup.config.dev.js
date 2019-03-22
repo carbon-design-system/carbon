@@ -15,7 +15,7 @@ module.exports = {
           return `
             function Markdown() {}
             Markdown.prototype = {
-              render() { return '' }
+              render: function () { return '' }
             };
             export default Markdown;
           `;
@@ -32,6 +32,7 @@ module.exports = {
     resolve({
       jsnext: true,
       main: true,
+      browser: true,
     }),
     commonjs({
       include: ['node_modules/**', 'src/globals/js/settings.js', 'demo/feature-flags.js'],
