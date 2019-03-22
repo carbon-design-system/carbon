@@ -594,33 +594,26 @@ $list-box-menu-width: rem(300px);
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
-    display: flex;
-    align-items: center;
     height: rem(40px);
-    margin-top: -1px;
-    padding: 0 1rem;
     color: $text-02;
     cursor: pointer;
     user-select: none;
-    border-bottom: 1px solid $ui-03;
     position: relative;
 
-    &::before,
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      height: calc(100% + 1px);
-      width: 1rem;
-      background-color: $ui-01;
+    &:hover {
+      background-color: $hover-ui;
+
+      + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+        border-color: transparent;
+      }
     }
 
-    &::before {
-      left: 0;
+    &:active {
+      background-color: $selected-ui;
     }
 
-    &::after {
-      right: 0;
+    &:first-of-type .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
     }
 
     &:last-of-type {
@@ -632,19 +625,42 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box__menu-item__option {
+    @include focus-outline('reset');
+    display: block;
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 rem(16px);
+    border: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:focus {
+      @include focus-outline('outline');
+      margin: 0;
+      padding: rem(11px) rem(16px);
+      border-color: transparent;
+    }
+
+    &:hover {
+      color: $text-01;
+      border-color: transparent;
+    }
+  }
+
   .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box__menu-item--highlighted {
     background-color: $hover-ui;
     color: $text-01;
-    border-bottom: 1px solid $ui-01;
+  }
 
-    &::before,
-    &::after {
-      background-color: $hover-ui;
-      // Below two are for fixing border and background-color alignment when zooming in
-      height: 100%;
-      z-index: 1;
-    }
+  .#{$prefix}--list-box__menu-item--highlighted > .#{$prefix}--list-box__menu-item__option {
+    border-bottom: 0;
+    color: $text-01;
   }
 
   .#{$prefix}--list-box__menu-item--active,
@@ -652,16 +668,6 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
     background-color: $selected-ui;
     border-bottom-color: $selected-ui;
-
-    &:before,
-    &:after {
-      background-color: $selected-ui;
-      border-bottom: 1px solid $selected-ui;
-      // Below two are for fixing border and background-color alignment when zooming in
-      top: 0;
-      height: 100%;
-      z-index: 1;
-    }
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
