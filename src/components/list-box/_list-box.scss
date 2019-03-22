@@ -370,6 +370,10 @@ $list-box-menu-width: rem(300px);
     padding-right: carbon--mini-units(8);
   }
 
+  .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding-right: carbon--mini-units(7);
+  }
+
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
@@ -421,13 +425,23 @@ $list-box-menu-width: rem(300px);
     padding-right: $carbon--spacing-09;
   }
 
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding-right: carbon--mini-units(4);
+  }
+
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
     background-color: $field-02;
+    border-width: 0;
 
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded
+    .#{$prefix}--list-box__field[aria-expanded='true'] {
+    border-width: 0;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
@@ -441,7 +455,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
-    padding: 0 carbon--mini-units(7) 0 $carbon--spacing-03;
+    padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
