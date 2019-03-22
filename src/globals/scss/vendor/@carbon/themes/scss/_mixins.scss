@@ -15,6 +15,7 @@
   $interactive-01: map-get($theme, interactive-01) !global;
   $interactive-02: map-get($theme, interactive-02) !global;
   $interactive-03: map-get($theme, interactive-03) !global;
+  $interactive-04: map-get($theme, interactive-04) !global;
   $ui-background: map-get($theme, ui-background) !global;
   $ui-01: map-get($theme, ui-01) !global;
   $ui-02: map-get($theme, ui-02) !global;
@@ -27,6 +28,8 @@
   $text-04: map-get($theme, text-04) !global;
   $icon-01: map-get($theme, icon-01) !global;
   $icon-02: map-get($theme, icon-02) !global;
+  $icon-03: map-get($theme, icon-03) !global;
+  $link-01: map-get($theme, link-01) !global;
   $field-01: map-get($theme, field-01) !global;
   $field-02: map-get($theme, field-02) !global;
   $inverse-01: map-get($theme, inverse-01) !global;
@@ -55,6 +58,7 @@
   $disabled-01: map-get($theme, disabled-01) !global;
   $disabled-02: map-get($theme, disabled-02) !global;
   $disabled-03: map-get($theme, disabled-03) !global;
+  $highlight: map-get($theme, highlight) !global;
   $brand-01: map-get($theme, brand-01) !global;
   $brand-02: map-get($theme, brand-02) !global;
   $brand-03: map-get($theme, brand-03) !global;
