@@ -609,6 +609,11 @@ $list-box-menu-width: rem(300px);
     z-index: z('dropdown');
   }
 
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu {
+    background-color: $field-02;
+  }
+
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
