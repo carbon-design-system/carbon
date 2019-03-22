@@ -396,6 +396,7 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
+        sort: true,
       },
     },
     {
@@ -410,6 +411,7 @@ module.exports = {
         searchLabel: 'Search',
         clearSearchLabel: 'Clear search input',
         hasToolbar: true,
+        sort: true,
       },
     },
     {
@@ -423,6 +425,7 @@ module.exports = {
         saveLabel: 'Save',
         sortLabel: 'Sort rows by this header in descending order',
         zebra: true,
+        sort: true,
       },
     },
     {
@@ -455,6 +458,7 @@ module.exports = {
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
+        sort: true,
       },
     },
   ],

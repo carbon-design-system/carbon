@@ -138,9 +138,18 @@ describe('DataTableV2', function() {
       table = new DataTableV2(element);
     });
 
-    it('Should toggle the class on click', function() {
+    it('Should switch through tri-state sort', function() {
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
+      expect(firstSort.getAttribute('data-previous-value') === 'ascending').toBe(true);
+
+      firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(false);
+      expect(firstSort.getAttribute('data-previous-value') === 'descending').toBe(true);
+
+      firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(false);
+      expect(firstSort.hasAttribute('data-previous-value')).toBe(false);
     });
 
     it('Should emit an event on sort click', function() {
