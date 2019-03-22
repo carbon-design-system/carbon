@@ -95,7 +95,7 @@
   }
 
   // -------------------------------------
-  // Sort button
+  // Th > Button
   // -------------------------------------
   .#{$prefix}--table-sort-v2 {
     @include button-reset(false);
@@ -108,24 +108,21 @@
     width: 100%;
     color: $text-01;
     padding: 0 $spacing-04;
+    padding-right: rem(8px);
   }
 
   .#{$prefix}--table-sort-v2:focus {
-    outline: 0;
+    @include focus-outline('outline');
   }
 
+  // changes opacity when th is inactive (see line 153)
   .#{$prefix}--table-sort-v2:focus svg,
   .#{$prefix}--table-sort-v2:hover svg {
     opacity: 1;
   }
   // -------------------------------------
-  // Sort icons
+  //Th > Button > Svg (Sort Icons)
   // -------------------------------------
-
-  .#{$prefix}--data-table-v2 th:hover .#{$prefix}--table-sort-v2 .#{$prefix}--table-sort-v2__icon {
-    opacity: 1;
-  }
-
   // inactive icons
   .#{$prefix}--table-sort-v2 .#{$prefix}--table-sort-v2__icon-inactive {
     display: block;
@@ -138,13 +135,12 @@
   .#{$prefix}--table-sort-v2__icon-inactive {
     position: relative;
     left: rem(2px);
-    transition: transform $transition--base $carbon--standard-easing;
-    transform: rotate(0);
+    padding-left: rem(8px);
+    padding-right: 0;
     opacity: 0;
     fill: $ui-05;
     height: $layout-01;
     width: auto;
-    min-width: $layout-01;
   }
 
   // active icons
@@ -154,23 +150,26 @@
 
   .#{$prefix}--table-sort-v2.#{$prefix}--table-sort-v2--active .#{$prefix}--table-sort-v2__icon {
     display: block;
-    opacity: 1;
+    opacity: 1; //changes opacity when th is active (see line 117)
   }
 
   .#{$prefix}--table-sort-v2--ascending .#{$prefix}--table-sort-v2__icon {
     transform: rotate(180deg);
     transition: transform $transition--base $carbon--standard-easing;
+    padding-right: rem(8px);
+    padding-left: 0;
   }
 
   .#{$prefix}--table-sort-v2__icon {
     position: relative;
     left: rem(2px);
+    padding-left: rem(8px);
+    padding-right: 0;
     transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
     opacity: 0;
     fill: $ui-05;
     width: auto;
-    min-width: $layout-01;
   }
 }
 
