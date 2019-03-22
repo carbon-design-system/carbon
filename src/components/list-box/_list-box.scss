@@ -638,10 +638,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
-    border-bottom-color: $hover-ui;
-  }
-
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
     display: block;
