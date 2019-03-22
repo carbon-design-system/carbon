@@ -19,8 +19,8 @@
     "clean": "lerna run clean && lerna clean --yes && rimraf build && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
     "examples": "rimraf build && yarn build && node tasks/examples.js",
-    "format": "prettier --write '**/*.{css,js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{css,js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:staged": "prettier --write",
     "lint": "toolkit lint .",
     "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
@@ -149,7 +149,12 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
     ],
     "watchPathIgnorePatterns": [
-      "examples"
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/examples/",
+      "/lib/",
+      "/storybook/"
     ]
   }
 }

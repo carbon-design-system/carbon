@@ -1,0 +1,22 @@
+{
+  "name": "@carbon/test-utils",
+  "private": true,
+  "version": "0.0.1-beta.2",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/test-utils",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "node-sass": "^4.11.0"
+  }
+}

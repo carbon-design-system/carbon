@@ -18,7 +18,7 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rimraf css es lib umd scss",
+    "clean": "rimraf es lib umd scss/_mixins.scss scss/_theme.scss scss/_variables.scss",
     "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check 'scss/*.scss'"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@carbon/cli-reporter": "0.0.1-beta.2",
+    "@carbon/test-utils": "0.0.1-beta.2",
     "change-case": "^3.0.2",
     "fs-extra": "^7.0.1",
     "prettier": "^1.15.3",

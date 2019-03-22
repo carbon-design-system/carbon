@@ -31,9 +31,9 @@
   "devDependencies": {
     "@carbon/bundler": "0.0.1-beta.2",
     "@carbon/cli-reporter": "0.0.1-beta.2",
+    "@carbon/test-utils": "0.0.1-beta.2",
     "change-case": "^3.0.2",
     "fs-extra": "^7.0.0",
-    "node-sass": "^4.9.4",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2"
   },

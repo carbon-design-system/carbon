@@ -20,43 +20,78 @@ yarn add @carbon/themes
 
 ## Usage
 
-You can use `@carbon/themes` in JavaScript or Sass by including this package in
-your project. By default, `@carbon/themes` provides a set of color tokens that
-are pre-defined for a specific theme. Currently, we offer the following color
-themes: white, gray 10, gray 90, gray 100
+You can use `@carbon/themes` in JavaScript or Sass by including this
+package in your project. By default, `@carbon/themes` provides a set
+of color tokens that are pre-defined for a specific theme. Currently,
+we offer the following color themes: white, gray 10, gray 90, gray 100.
 
-You can preview all of the token values for this on the [Carbon Design System
-website](https://next.carbondesignsystem.com/guidelines/color/usage).
+You can preview all of the token values for this on the [Carbon Design
+System website](https://next.carbondesignsystem.com/guidelines/color/usage)
+.
 
 ### Sass
 
 If you're project is using Sass, you can include this package and the
-corresponding default theme by writing the following in your Sass file:
+corresponding default theme by writing the following in your Sass
+file:
 
 ```scss
 @import '@carbon/themes/scss/themes';
 ```
 
-By default, the white theme will be initialized. If you would like to include
-another theme, you can do so by calling one of our theme mixins. For example:
+By default, the white theme will be initialized. If you would like to
+include another theme, you can do so by calling our mixin. For
+example:
 
 ```scss
 @import '@carbon/themes/scss/themes';
 
-// Call the gray 10 theme
-@include carbon--theme-g10();
+// Use the gray 10 theme
+@include carbon--theme($carbon--theme--g10);
 
-// Call the gray 90 theme
-@include carbon--theme-g90();
+// Use the gray 90 theme
+@include carbon--theme($carbon--theme--g90);
 
-// Call the gray 100 theme
-@include carbon--theme-g100();
+// Use the gray 100 theme
+@include carbon--theme($carbon--theme--g100);
+```
+
+Alternatively, you can set the global theme variable then call the
+mixin without passing in a theme name.
+
+```scss
+@import '@carbon/themes/scss/themes';
+
+$carbon--theme: $carbon--theme--g10;
+
+// Use the gray 10 theme
+@include carbon--theme();
+```
+
+Inline theming can be done by using the mixin. For example:
+
+```scss
+@import '@carbon/themes/scss/themes';
+
+// Use the default white theme here
+
+.my-dark-theme {
+  @include carbon--theme($carbon--theme--g90) {
+    // Use the dark theme here
+  }
+}
+
+.my-darker-theme {
+  @include carbon--theme($carbon--theme--g100) {
+    // Use the darker theme here
+  }
+}
 ```
 
 ### JavaScript
 
-If you're looking to use these themes in JavaScript, we export a variety of
-bindings for you to use, including:
+If you're looking to use these themes in JavaScript, we export a
+variety of bindings for you to use, including:
 
 ```js
 import {
