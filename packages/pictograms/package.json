@@ -2,7 +2,7 @@
   "name": "@carbon/pictograms",
   "private": true,
   "description": "Pictograms for digital and software products using the Carbon Design System",
-  "version": "0.0.1-beta.3",
+  "version": "0.0.1-beta.4",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/pictograms",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
