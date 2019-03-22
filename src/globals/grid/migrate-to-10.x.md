@@ -7,7 +7,7 @@
 | `$grid-breakpoints`        | Replaced with `$carbon--grid-breakpoints`           |
 | `$gutter-breakpoints`      | Deprecated                                          |
 | `$grid-gutter-breakpoints` | Deprecated                                          |
-| `grid` mixin               | TODO in elements                                    |
+| `grid` mixin               | Replaced with `carbon--grid`                        |
 | `breakpoint` function      | Replaced with `carbon--breakpoint`                  |
 | `gutter` function          | Deprecated                                          |
 | `grid-gutter` function     | Deprecated                                          |
