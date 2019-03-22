@@ -122,7 +122,7 @@
     @include focus-outline('outline');
   }
 
-  // changes opacity when th is inactive (see line 153)
+  // changes opacity when th is inactive (see line 161)
   .#{$prefix}--table-sort-v2:focus svg,
   .#{$prefix}--table-sort-v2:hover svg {
     opacity: 1;
@@ -143,7 +143,7 @@
   .#{$prefix}--table-sort-v2__icon-unsorted {
     position: relative;
     left: rem(2px);
-    padding-left: rem(8px);
+    padding-left: $spacing-03;
     padding-right: 0;
     opacity: 0;
     fill: $ui-05;
@@ -158,19 +158,19 @@
 
   .#{$prefix}--table-sort-v2.#{$prefix}--table-sort-v2--active .#{$prefix}--table-sort-v2__icon {
     display: block;
-    opacity: 1; //changes opacity when th is active (see line 117)
+    opacity: 1; //changes opacity when th is active (see line 125)
   }
 
   .#{$prefix}--table-sort-v2--ascending .#{$prefix}--table-sort-v2__icon {
     transform: rotate(180deg);
-    padding-right: rem(8px);
+    padding-right: $spacing-03;
     padding-left: 0;
   }
 
   .#{$prefix}--table-sort-v2__icon {
     position: relative;
     left: rem(2px);
-    padding-left: rem(8px);
+    padding-left: $spacing-03;
     padding-right: 0;
     transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
