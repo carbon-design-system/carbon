@@ -7,7 +7,7 @@
  * @jest-environment node
  */
 
-const { renderSass } = require('../../../../tools/jest/scss');
+const { createSassRenderer, convert } = require('@carbon/test-utils/scss');
 
 const classic = [
   'brand-01',
@@ -112,14 +112,29 @@ const classic = [
   'skeleton',
 ];
 
+const render = createSassRenderer(__dirname);
+
 describe('_theme.scss', () => {
+  it('should allow custom overrides of tokens', async () => {
+    const testColor = '#000000';
+    const { calls } = await render(`
+$brand-01: ${testColor} !global;
+
+@import '../theme';
+
+$c: test($brand-01);
+`);
+
+    expect(convert(calls[0][0])).toEqual(testColor);
+  });
+
   it.each(classic)('$%s should be exported', async name => {
-    const { calls } = await renderSass(`
-@import './src/globals/scss/theme';
+    const { calls } = await render(`
+@import '../theme';
 
 $c: test(global-variable-exists(${name}));
 `);
     // Check that global-variable-exists returned true
-    expect(calls[0][0].getValue()).toBe(true);
+    expect(convert(calls[0][0])).toBe(true);
   });
 });
