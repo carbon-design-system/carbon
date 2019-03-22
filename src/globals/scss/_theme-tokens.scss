@@ -15,33 +15,38 @@
 @mixin theme() {
   /// Color Theme Variables
   /// @access public
-  $brand-01: $color__blue-51 !default !global;
-  $brand-02: $color__blue-40 !default !global;
-  $brand-03: $color__teal-20 !default !global;
-  $inverse-01: $color__white !default !global;
-  $inverse-02: #272d33 !default !global;
-  $ui-01: $color__white !default !global;
-  $ui-02: #f4f7fb !default !global;
-  $ui-03: $color__gray-1 !default !global;
-  $ui-04: #8897a2 !default !global;
-  $ui-05: $color__navy-gray-6 !default !global;
-  $text-01: $color__blue-90 !default !global;
-  $text-02: $color__navy-gray-6 !default !global;
-  $text-03: #cdd1d4 !default !global;
-  $field-01: #f4f7fb !default !global;
-  $field-02: $color__white !default !global;
-  $support-01: #e0182d !default !global;
-  $support-02: $color__green-40 !default !global;
-  $support-03: $color__yellow-30 !default !global;
-  $support-04: $color__blue-30 !default !global;
-  $nav-01: $color__navy-gray-1 !default !global;
-  $nav-02: $color__blue-90 !default !global;
-  $nav-03: $color__purple-30 !default !global;
-  $nav-04: $color__purple-60 !default !global;
-  $nav-05: $color__teal-40 !default !global;
-  $nav-06: $color__teal-50 !default !global;
-  $nav-07: $color__blue-30 !default !global;
-  $nav-08: $color__blue-51 !default !global;
+  $brand-01: $color__blue-51 !global;
+  $brand-02: $color__blue-40 !global;
+  $brand-03: $color__teal-20 !global;
+  $inverse-01: $color__white !global;
+  $inverse-02: #272d33 !global;
+  $ui-01: $color__white !global;
+  $ui-02: #f4f7fb !global;
+  $ui-03: $color__gray-1 !global;
+  $ui-04: #8897a2 !global;
+  $ui-05: $color__navy-gray-6 !global;
+  $text-01: $color__blue-90 !global;
+  $text-02: $color__navy-gray-6 !global;
+  $text-03: #cdd1d4 !global;
+  $field-01: #f4f7fb !global;
+  $field-02: $color__white !global;
+  $support-01: #e0182d !global;
+  $support-02: $color__green-40 !global;
+  $support-03: $color__yellow-30 !global;
+  $support-04: $color__blue-30 !global;
+  $nav-01: $color__navy-gray-1 !global;
+  $nav-02: $color__blue-90 !global;
+  $nav-03: $color__purple-30 !global;
+  $nav-04: $color__purple-60 !global;
+  $nav-05: $color__teal-40 !global;
+  $nav-06: $color__teal-50 !global;
+  $nav-07: $color__blue-30 !global;
+  $nav-08: $color__blue-51 !global;
+  $hover-primary: darken($brand-01, 10%) !global;
+  $hover-primary-text: darken($brand-01, 15%) !global;
+  $hover-danger: darken($support-01, 10%) !global;
+  $hover-secondary: $brand-01 !global;
+  $hover-row: rgba($brand-02, 0.1) !global;
 
   $carbon--v9-theme: (
     brand-01: $brand-01,
@@ -71,16 +76,15 @@
     nav-06: $nav-06,
     nav-07: $nav-07,
     nav-08: $nav-08,
+    hover-primary: $hover-primary,
+    hover-primary-text: $hover-primary-text,
+    hover-danger: $hover-danger,
+    hover-secondary: $hover-secondary,
+    hover-row: $hover-row,
   );
 
   $carbon--theme: $carbon--v9-theme !global;
   @include carbon--theme($carbon--theme);
-
-  $hover-primary: darken($brand-01, 10%) !default !global;
-  $hover-primary-text: darken($brand-01, 15%) !default !global;
-  $hover-danger: darken($support-01, 10%) !default !global;
-  $hover-secondary: $brand-01 !default !global;
-  $hover-row: rgba($brand-02, 0.1) !default !global;
 
   // Global
   /// @access public
