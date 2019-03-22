@@ -36,7 +36,6 @@
     "@angular/compiler-cli": "6.1.10",
     "@angular/core": "6.1.10",
     "@carbon/cli-reporter": "0.0.1-beta.3",
-    "@carbon/icon-helpers": "0.0.1-alpha.32",
     "@carbon/icons": "0.0.1-beta.3",
     "change-case": "3.0.2",
     "fs-extra": "7.0.1",
