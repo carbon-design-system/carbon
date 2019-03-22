@@ -213,6 +213,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     @include type-style('body-short-01');
+    transition: box-shadow $transition--base $carbon--standard-easing;
 
     &::before {
       content: '';
@@ -221,17 +222,21 @@
   }
 
   .#{$prefix}--progress-label:hover {
-    color: $interactive-01;
+    color: $link-01;
     cursor: pointer;
-    box-shadow: 0 1px $interactive-01;
+    box-shadow: 0 rem(1px) $link-01;
   }
 
   .#{$prefix}--progress-label:focus {
-    outline: 2px solid $interactive-01;
+    outline: none;
+    color: $link-01;
+    box-shadow: 0 rem(3px) 0 0 $link-01;
+    transition: box-shadow 0.05s $carbon--standard-easing;
   }
 
   .#{$prefix}--progress-label:active {
-    box-shadow: 0 1px $ui-05;
+    color: $interactive-01;
+    box-shadow: 0 rem(3px) 0 0 $interactive-01;
   }
 
   //OVERFLOW STYLING
@@ -278,7 +283,7 @@
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
     @include type-style('label-01');
-    color: $text-02;
+    color: $text-01;
   }
 
   //CURRENT STYLING
