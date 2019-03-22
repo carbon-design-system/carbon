@@ -15,7 +15,7 @@ module.exports = {
           return `
             function Markdown() {}
             Markdown.prototype = {
-              render() { return '' }
+              render: function () { return '' }
             };
             export default Markdown;
           `;
