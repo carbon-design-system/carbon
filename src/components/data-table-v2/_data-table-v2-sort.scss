@@ -90,6 +90,10 @@
     padding: 0;
   }
 
+  .#{$prefix}--data-table-v2--sort th:first-of-type .#{$prefix}--table-sort-v2 {
+    padding-left: $spacing-04;
+  }
+
   .#{$prefix}--data-table-v2--sort th.#{$prefix}--table-column-checkbox {
     padding: rem(10px) $spacing-05;
   }
@@ -114,8 +118,7 @@
     justify-content: space-between;
     width: 100%;
     color: $text-01;
-    padding: 0 $spacing-04;
-    padding-right: $spacing-03;
+    padding: 0 $spacing-03;
     height: $layout-04;
   }
 
