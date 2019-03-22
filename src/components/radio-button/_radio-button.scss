@@ -210,6 +210,10 @@
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button:disabled:checked + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
     border-color: $disabled;
+
+    &::before {
+      background-color: $disabled;
+    }
   }
 
   // Focus
