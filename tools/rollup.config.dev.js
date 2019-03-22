@@ -32,6 +32,7 @@ module.exports = {
     resolve({
       jsnext: true,
       main: true,
+      browser: true,
     }),
     commonjs({
       include: ['node_modules/**', 'src/globals/js/settings.js', 'demo/feature-flags.js'],
