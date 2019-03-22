@@ -1,7 +1,7 @@
 {
   "name": "@carbon/grid",
   "description": "Grid for digital and software products using the Carbon Design System",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/grid",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
@@ -22,8 +22,8 @@
   },
   "scripts": {},
   "dependencies": {
-    "@carbon/import-once": "0.0.1-beta.2",
-    "@carbon/layout": "0.0.1-beta.2"
+    "@carbon/import-once": "0.0.1-beta.3",
+    "@carbon/layout": "0.0.1-beta.3"
   },
   "eyeglass": {
     "exports": false,
