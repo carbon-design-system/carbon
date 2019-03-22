@@ -163,7 +163,6 @@
 
   .#{$prefix}--table-sort-v2--ascending .#{$prefix}--table-sort-v2__icon {
     transform: rotate(180deg);
-    transition: transform $transition--base $carbon--standard-easing;
     padding-right: rem(8px);
     padding-left: 0;
   }
