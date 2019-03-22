@@ -8,7 +8,7 @@
 @import '../scss/feature-flags';
 @import '../scss/functions';
 @import '../scss/mixins';
-@import './classic/classic';
+@import './classic';
 @import './experimental';
 
 @include exports('grid') {
