@@ -115,7 +115,8 @@
     width: 100%;
     color: $text-01;
     padding: 0 $spacing-04;
-    padding-right: rem(8px);
+    padding-right: $spacing-03;
+    height: $layout-04;
   }
 
   .#{$prefix}--table-sort-v2:focus {
