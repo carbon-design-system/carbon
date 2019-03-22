@@ -252,8 +252,6 @@
 
   .#{$prefix}--dropdown {
     @include reset;
-    @include font-family;
-    @include typescale('zeta');
     @include focus-outline('reset');
     position: relative;
     list-style: none;

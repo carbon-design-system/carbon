@@ -300,7 +300,6 @@
 
 @mixin snippet--x {
   .#{$prefix}--snippet code {
-    font-family: $font-family-mono;
     @include type-style('code-01');
   }
 
@@ -369,6 +368,7 @@
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
     @include type-style('code-01');
+    padding-right: $spacing-xs;
   }
 
   .#{$prefix}--snippet--single::after {

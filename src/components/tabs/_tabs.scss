@@ -222,7 +222,7 @@
     height: auto;
     width: 100%;
     position: relative;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       background: none;
       min-height: rem(48px);
     }
@@ -239,7 +239,7 @@
     outline: 2px solid transparent;
     border-bottom: 1px solid $ui-04;
     background-color: $field-01;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       display: none;
     }
   }
@@ -300,34 +300,31 @@
     flex-direction: column;
     z-index: z('dropdown');
     background: $ui-01;
-    @include breakpoint(bp--sm--major) {
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+    max-height: 600px;
+    width: 100%;
+
+    @include carbon--breakpoint(md) {
       flex-direction: row;
-      margin-right: $carbon--spacing-05;
-      margin-left: $carbon--spacing-05;
       background: none;
       box-shadow: none;
       z-index: auto;
-    }
-    @include breakpoint(bp--lg--major) {
-      margin-left: 0;
-    }
-
-    @include max-breakpoint(bp--sm--major) {
-      transition: max-height $duration--moderate-01 motion(standard, productive);
-      max-height: 600px;
-      width: 100%;
-      padding-top: 0;
+      transition: inherit;
+      max-height: auto;
+      width: auto;
     }
   }
 
   .#{$prefix}--tabs__nav--hidden {
-    @include breakpoint(bp--sm--major) {
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+    overflow: hidden;
+    max-height: 0;
+
+    @include carbon--breakpoint(md) {
       display: flex;
-    }
-    @include max-breakpoint(bp--sm--major) {
-      transition: max-height $duration--moderate-01 motion(standard, productive);
-      overflow: hidden;
-      max-height: 0;
+      transition: inherit;
+      overflow: visible;
+      max-height: none;
     }
   }
 
@@ -339,14 +336,13 @@
     padding: 0;
     cursor: pointer;
     width: 100%;
-    @include breakpoint(bp--sm--major) {
+    height: rem(40px);
+    @include carbon--breakpoint(md) {
       background: transparent;
+      height: auto;
       & + .#{$prefix}--tabs__nav-item {
         margin-left: rem(2px);
       }
-    }
-    @include max-breakpoint(bp--sm--major) {
-      height: rem(40px);
     }
   }
 
@@ -354,15 +350,18 @@
   // Item Hover
   //-----------------------------
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       background: transparent;
     }
   }
 
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    @include max-breakpoint(bp--sm--major) {
-      background-color: $hover-ui;
-      box-shadow: 0 -1px 0 $hover-ui;
+    background-color: $hover-ui;
+    box-shadow: 0 -1px 0 $hover-ui;
+
+    @include carbon--breakpoint(md) {
+      background-color: transparent;
+      box-shadow: none;
     }
   }
 
@@ -379,7 +378,9 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
     border: none;
-    @include breakpoint(bp--sm--major) {
+    display: none;
+    @include carbon--breakpoint(md) {
+      display: list-item;
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         @include type-style('heading-01');
@@ -392,9 +393,6 @@
         border-bottom: 2px;
       }
     }
-    @include max-breakpoint(bp--sm--major) {
-      display: none;
-    }
   }
 
   //-----------------------------
@@ -405,31 +403,37 @@
     color: $text-02;
     text-decoration: none;
     font-weight: 400;
-    padding: $carbon--spacing-03 $carbon--spacing-05;
-    width: rem(160px);
+    padding: $carbon--spacing-04 0;
+    width: calc(100% - 32px);
+    height: rem(40px);
     white-space: nowrap;
     text-overflow: ellipsis;
-    @include breakpoint(bp--sm--major) {
+    margin: 0 $carbon--spacing-05;
+    line-height: rem(16px);
+    border-bottom: 1px solid $ui-03;
+    overflow: hidden;
+
+    &:focus,
+    &:active {
+      width: 100%;
+      margin: 0;
+      padding-left: 16px;
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
+    }
+
+    @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color;
       padding: $carbon--spacing-03 $carbon--spacing-05;
-    }
-    @include max-breakpoint(bp--sm--major) {
-      height: rem(40px);
-      width: calc(100% - 32px);
-      margin: 0 $carbon--spacing-05;
-      padding: $carbon--spacing-04 0;
-      line-height: rem(16px);
-      color: $text-02;
-      border-bottom: 1px solid $ui-03;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      width: rem(160px);
+      margin: 0;
+      line-height: inherit;
+
       &:focus,
       &:active {
-        width: 100%;
-        margin: 0;
-        padding-left: 16px;
-        outline: 2px solid $interactive-01;
-        outline-offset: -2px;
+        width: rem(160px);
+        padding: $carbon--spacing-03 $carbon--spacing-05;
+        border-bottom: 2px;
       }
     }
   }
@@ -440,7 +444,7 @@
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
     color: $text-01;
-    @include breakpoint(bp--sm--major) {
+    @include carbon--breakpoint(md) {
       color: $text-01;
       border-bottom: $tab-underline-color-hover;
     }
@@ -473,15 +477,6 @@
   .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     a.#{$prefix}--tabs__nav-link:active {
     color: $text-02;
-  }
-
-  .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-link:active {
-    @include breakpoint(bp--sm--major) {
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
-      border-bottom: 2px;
-    }
   }
 
   //-----------------------------
