@@ -275,7 +275,9 @@
                 {{#each toolbar.overflowItems}}
                 <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
                   <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
+                    <div class="{{@root.prefix}}--overflow-menu-options__option-content">
                     {{label}}
+                    </div>
                   </button>
                 </li>
                 {{/each}}
@@ -313,7 +315,9 @@
                 {{#each toolbar.overflowItems}}
                 <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
                   <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
+                    <div class="{{@root.prefix}}--overflow-menu-options__option-content">
                     {{label}}
+                    </div>
                   </button>
                 </li>
                 {{/each}}
@@ -404,7 +408,11 @@
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
                       <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
-                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">{{{label}}}</button>
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+                            {{{label}}}
+                          </div>
+                        </button>
                       </li>
                     {{/each}}
                   </ul>
