@@ -345,6 +345,10 @@ $list-box-menu-width: rem(300px);
     background-color: $field-01;
   }
 
+  .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--list-box .#{$prefix}--text-input {
     height: 100%;
   }
@@ -603,7 +607,7 @@ $list-box-menu-width: rem(300px);
     &:hover {
       background-color: $hover-ui;
 
-      + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+      + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
         border-color: transparent;
       }
     }
@@ -611,18 +615,10 @@ $list-box-menu-width: rem(300px);
     &:active {
       background-color: $selected-ui;
     }
+  }
 
-    &:first-of-type .#{$prefix}--dropdown-link {
-      border-top-color: transparent;
-    }
-
-    &:last-of-type {
-      border-bottom: 1px solid $ui-01;
-    }
-
-    &:last-of-type:hover {
-      border-bottom: 1px solid $ui-03;
-    }
+  .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
+    border-bottom-color: $hover-ui;
   }
 
   .#{$prefix}--list-box__menu-item__option {
@@ -652,15 +648,14 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box__menu-item--highlighted {
     background-color: $hover-ui;
     color: $text-01;
-  }
+    border-color: transparent;
 
-  .#{$prefix}--list-box__menu-item--highlighted > .#{$prefix}--list-box__menu-item__option {
-    border-bottom: 0;
-    color: $text-01;
+    + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
+      border-color: transparent;
+    }
   }
 
   .#{$prefix}--list-box__menu-item--active,
