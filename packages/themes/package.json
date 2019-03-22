@@ -29,6 +29,7 @@
     "@carbon/test-utils": "0.0.1-beta.2",
     "change-case": "^3.0.2",
     "fs-extra": "^7.0.1",
+    "node-sass": "^4.11.0",
     "prettier": "^1.15.3",
     "rimraf": "^2.6.3"
   }
