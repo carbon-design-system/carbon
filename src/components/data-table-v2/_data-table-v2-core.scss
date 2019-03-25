@@ -177,7 +177,6 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-v2-container {
     min-width: rem(500px);
-    width: 100%;
     overflow-x: auto;
     padding-top: $spacing-01; // allow space for focus styles
   }
@@ -268,6 +267,7 @@
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
     padding: rem(14px) $spacing-04;
+    padding-bottom: rem(13px);
   }
 
   .#{$prefix}--data-table-v2 td:first-of-type {

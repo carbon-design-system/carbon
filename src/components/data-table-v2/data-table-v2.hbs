@@ -275,7 +275,9 @@
                 {{#each toolbar.overflowItems}}
                 <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
                   <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
+                    <div class="{{@root.prefix}}--overflow-menu-options__option-content">
                     {{label}}
+                    </div>
                   </button>
                 </li>
                 {{/each}}
@@ -313,7 +315,9 @@
                 {{#each toolbar.overflowItems}}
                 <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
                   <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
+                    <div class="{{@root.prefix}}--overflow-menu-options__option-content">
                     {{label}}
+                    </div>
                   </button>
                 </li>
                 {{/each}}
@@ -339,7 +343,7 @@
     <thead>
       <tr>
         {{#each columns}}
-          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if menu}}class="{{@root.prefix}}--table-column-menu"{{/if}} {{#if section}}class="{{@root.prefix}}--table-expand-v2"{{/if}} {{#if additionalIcons}}class="{{@root.prefix}}--table-column-icon"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table-v2--numerical-cell" {{/if}}>
+          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand-v2"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table-v2--numerical-cell" {{/if}}>
             <!-- checkbox th -->
             {{#if checkbox}}
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
@@ -347,10 +351,10 @@
             {{else if (not menu)}}
             <!-- sortable th  -->
               {{#if sortable}}
-                <button class="{{@root.prefix}}--table-sort-v2" data-event="sort">
+                <button class="{{@root.prefix}}--table-sort-v2" data-event="sort" title="{{title}}">
                   <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
                   {{carbon-icon 'ArrowDown16' class=(add @root.prefix '--table-sort-v2__icon')}}
-                  {{carbon-icon 'ArrowsVertical20' class=(add @root.prefix '--table-sort-v2__icon-inactive')}}
+                  {{carbon-icon 'Arrows16' class=(add @root.prefix '--table-sort-v2__icon-unsorted')}}
                   {{#if ../truncate}}
                     <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip" data-avoid-focus-on-open>
                       <span class="{{@root.prefix}}--tooltip__caret"></span>
@@ -404,7 +408,11 @@
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
                     {{#each data.items}}
                       <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
-                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">{{{label}}}</button>
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+                            {{{label}}}
+                          </div>
+                        </button>
                       </li>
                     {{/each}}
                   </ul>
