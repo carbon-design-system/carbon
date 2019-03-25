@@ -311,6 +311,53 @@
     .#{$prefix}--overflow-menu__icon {
     opacity: 1;
   }
+
+  //----------------------------------------------------------------------------
+  // Select
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table-v2 th.#{$prefix}--table-column-checkbox {
+    padding: rem(12px) $spacing-03 0 $spacing-05;
+    width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
+  }
+
+  th.#{$prefix}--table-column-checkbox:hover {
+    background: $data-table-column-hover;
+  }
+
+  // default selected row
+  tr.#{$prefix}--data-table-v2--selected td {
+    background-color: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $active-01; //bottom border acts as separator from other rows
+  }
+
+  // first row
+  tr.#{$prefix}--data-table-v2--selected:first-of-type td {
+    border-top: 1px solid $active-01; //top border acts as separator from thead
+  }
+
+  // last row
+  tr.#{$prefix}--data-table-v2--selected:last-of-type td {
+    border-top: 1px solid $ui-03; // doesn't need separators
+    border-bottom: 1px solid $ui-03;
+  }
+
+  // hover
+  .#{$prefix}--data-table-v2 tbody .#{$prefix}--data-table-v2--selected:hover td {
+    color: $text-01;
+    background: $data-table-column-hover;
+    border-top: 1px solid $data-table-column-hover;
+    border-bottom: 1px solid $data-table-column-hover;
+  }
+
+  // selected overflow menu
+  .#{$prefix}--data-table-v2--selected .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
 }
 
 @include exports('data-table-v2-core') {
