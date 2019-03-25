@@ -47,8 +47,10 @@ $carbon--theme--v9: (
   hover-row: rgba($color__blue-40, 0.1),
 );
 
-/// @access public
-$carbon--theme: $carbon--theme--v9 !default !global;
+@if not feature-flag-enabled('components-x') {
+  /// @access public
+  $carbon--theme: $carbon--theme--v9 !global;
+}
 
 @import './vendor/@carbon/elements/scss/themes/themes';
 
@@ -141,12 +143,6 @@ $carbon--theme: $carbon--theme--v9 !default !global;
 
 // Light Experimental Theme
 @mixin theme--experimental() {
-  /// @access public
-  @if $carbon--theme == $carbon--theme--v9 {
-    $carbon--theme: $carbon--theme--white !global;
-  }
-  @include carbon--theme($carbon--theme);
-
   /// @access public
   $edited: true !default !global;
   $use-layer: true !default !global;
