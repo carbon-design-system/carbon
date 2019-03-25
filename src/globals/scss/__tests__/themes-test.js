@@ -128,6 +128,20 @@ $c: test($brand-01);
     expect(convert(calls[0][0])).toEqual(testColor);
   });
 
+  it('should allow custom overrides of tokens in v10', async () => {
+    const testColor = '#000000';
+    const { calls } = await render(`
+$feature-flags: (components-x: true);
+$interactive-01: ${testColor} !global;
+
+@import '../theme';
+
+$c: test($interactive-01);
+`);
+
+    expect(convert(calls[0][0])).toEqual(testColor);
+  });
+
   it('should allow custom theme overrides', async () => {
     const testColor = '#000000';
     const { calls } = await render(`
