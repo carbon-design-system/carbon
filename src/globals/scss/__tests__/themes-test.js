@@ -128,6 +128,22 @@ $c: test($brand-01);
     expect(convert(calls[0][0])).toEqual(testColor);
   });
 
+  it('should allow custom theme overrides', async () => {
+    const testColor = '#000000';
+    const { calls } = await render(`
+$feature-flags: (components-x: true);
+$carbon--theme: (
+  interactive-01: ${testColor},
+) !global;
+
+@import '../theme';
+
+$c: test(map-get($carbon--theme, interactive-01));
+`);
+
+    expect(convert(calls[0][0])).toBe(testColor);
+  });
+
   it.each(classic)('$%s should be exported', async name => {
     const { calls } = await render(`
 @import '../theme';

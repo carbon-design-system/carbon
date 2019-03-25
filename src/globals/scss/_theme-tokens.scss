@@ -48,7 +48,7 @@ $carbon--theme--v9: (
 );
 
 /// @access public
-$carbon--theme: $carbon--theme--v9 !global;
+$carbon--theme: $carbon--theme--v9 !default !global;
 
 @import './vendor/@carbon/elements/scss/themes/themes';
 
@@ -142,7 +142,9 @@ $carbon--theme: $carbon--theme--v9 !global;
 // Light Experimental Theme
 @mixin theme--experimental() {
   /// @access public
-  $carbon--theme: $carbon--theme--white !global;
+  @if $carbon--theme == $carbon--theme--v9 {
+    $carbon--theme: $carbon--theme--white !global;
+  }
   @include carbon--theme($carbon--theme);
 
   /// @access public
