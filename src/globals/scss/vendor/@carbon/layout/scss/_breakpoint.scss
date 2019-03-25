@@ -43,9 +43,9 @@ $carbon--grid-breakpoints: (
 
 /// Get the value of the next breakpoint, or null for the last breakpoint.
 /// @param {String} $name - the name of the brekapoint
-/// @param {Map} $breakpoints - a map of breakpoints where the key is the name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// of the breakpoint and the value is the values for the breakpoint
-/// @param {List} $breakpoint-names - a list of names from the $breakpoints map
+/// @param {List} $breakpoint-names [map-keys($breakpoints)] - a list of names from the $breakpoints map
 /// @returns {String}
 @function carbon--breakpoint-next($name, $breakpoints: $carbon--grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
   $n: index($breakpoint-names, $name);
@@ -69,7 +69,7 @@ $carbon--grid-breakpoints: (
 }
 
 /// returns the largest breakpoint name
-/// @param {string} $breakpoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// @content
 @function carbon--largest-breakpoint-name($breakpoints: $carbon--grid-breakpoints) {
   $total-breakpoints: length($breakpoints);
@@ -85,13 +85,17 @@ $carbon--grid-breakpoints: (
 }
 
 /// Generate a media query up to the width of the given breakpoint name
-/// @param {string} $name
+/// @param {string | number} $name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// @content
 @mixin carbon--breakpoint-up($name, $breakpoints: $carbon--grid-breakpoints) {
-  $breakpoint: map-get($breakpoints, $name);
-  $width: map-get($breakpoint, width);
-
-  @if map-has-key($breakpoints, $name) {
+  @if type-of($name) == 'number' {
+    @media (min-width: $name) {
+      @content;
+    }
+  } @else if map-has-key($breakpoints, $name) {
+    $breakpoint: map-get($breakpoints, $name);
+    $width: map-get($breakpoint, width);
     @if carbon--is-smallest-breakpoint($name, $breakpoints) {
       @content;
     } @else {
@@ -105,12 +109,17 @@ $carbon--grid-breakpoints: (
 }
 
 /// Generate a media query for the maximum width of the given styles
-/// @param {string} $name
+/// @param {string | number} $name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// @content
 @mixin carbon--breakpoint-down($name, $breakpoints: $carbon--grid-breakpoints) {
-  $breakpoint: map-get($breakpoints, $name);
-  $width: map-get($breakpoint, width);
-  @if map-has-key($breakpoints, $name) {
+  @if type-of($name) == 'number' {
+    @media (max-width: $name) {
+      @content;
+    }
+  } @else if map-has-key($breakpoints, $name) {
+    $breakpoint: map-get($breakpoints, $name);
+    $width: map-get($breakpoint, width);
     @if carbon--is-smallest-breakpoint($name, $breakpoints) {
       @content;
     } @else {
@@ -125,15 +134,19 @@ $carbon--grid-breakpoints: (
 
 /// Generate a media query for the range between the lower and upper
 /// breakpoints.
-/// @param {string} $lower
-/// @param {string} $upper
+/// @param {string | number} $lower
+/// @param {string | number} $upper
 /// @content
 @mixin carbon--breakpoint-between($lower, $upper, $breakpoints: $carbon--grid-breakpoints) {
-  $min: map-get($breakpoints, $lower);
-  $max: map-get($breakpoints, $upper);
+  $is-number-lower: type-of($lower) == 'number';
+  $is-number-upper: type-of($upper) == 'number';
+  $min: if($is-number-lower, $lower, map-get($breakpoints, $lower));
+  $max: if($is-number-upper, $upper, map-get($breakpoints, $upper));
 
   @if $min and $max {
-    @media (min-width: map-get($min, width)) and (max-width: map-get($map, width)) {
+    $min-width: if(not $is-number-lower and $min, map-get($min, width), $min);
+    $max-width: if(not $is-number-upper and $max, map-get($max, width), $max);
+    @media (min-width: $min-width) and (max-width: $max-width) {
       @content;
     }
   } @else if $min != null and $max == null {
@@ -150,7 +163,7 @@ $carbon--grid-breakpoints: (
 }
 
 /// generate media query for the largest breakpoint
-/// @param {string} $breakpoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// @content
 @mixin carbon--largest-breakpoint($breakpoints: $carbon--grid-breakpoints) {
   @include carbon--breakpoint(carbon--largest-breakpoint-name()) {
@@ -159,7 +172,8 @@ $carbon--grid-breakpoints: (
 }
 
 /// Generate a media query for a given breakpoint
-/// @param {string} $breakpoint
+/// @param {string | number} $name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// @content
 @mixin carbon--breakpoint($name, $breakpoints: $carbon--grid-breakpoints) {
   @include carbon--breakpoint-up($name, $breakpoints) {

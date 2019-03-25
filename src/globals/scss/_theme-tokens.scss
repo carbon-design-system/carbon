@@ -10,30 +10,53 @@
 @import 'functions';
 @import 'colors';
 @import 'spacing';
-@import './vendor/@carbon/elements/scss/themes/mixins';
+
+/// @access private
+$carbon--theme--v9: (
+  brand-01: $color__blue-51,
+  brand-02: $color__blue-40,
+  brand-03: $color__teal-20,
+  inverse-01: $color__white,
+  inverse-02: #272d33,
+  ui-01: $color__white,
+  ui-02: #f4f7fb,
+  ui-03: $color__gray-1,
+  ui-04: #8897a2,
+  ui-05: $color__navy-gray-6,
+  text-01: $color__blue-90,
+  text-02: $color__navy-gray-6,
+  text-03: #cdd1d4,
+  field-01: #f4f7fb,
+  field-02: $color__white,
+  support-01: #e0182d,
+  support-02: $color__green-40,
+  support-03: $color__yellow-30,
+  support-04: $color__blue-30,
+  nav-01: $color__navy-gray-1,
+  nav-02: $color__blue-90,
+  nav-03: $color__purple-30,
+  nav-04: $color__purple-60,
+  nav-05: $color__teal-40,
+  nav-06: $color__teal-50,
+  nav-07: $color__blue-30,
+  nav-08: $color__blue-51,
+  hover-primary: darken($color__blue-51, 10%),
+  hover-primary-text: darken($color__blue-51, 15%),
+  hover-danger: darken(#e0182d, 10%),
+  hover-secondary: $color__blue-51,
+  hover-row: rgba($color__blue-40, 0.1),
+);
+
+@if not feature-flag-enabled('components-x') {
+  /// @access public
+  $carbon--theme: $carbon--theme--v9 !global;
+}
+
+@import './vendor/@carbon/elements/scss/themes/themes';
 
 @mixin theme() {
-  // Color Theme Variables
+  // Nav
   /// @access public
-  $brand-01: $color__blue-51 !default !global;
-  $brand-02: $color__blue-40 !default !global;
-  $brand-03: $color__teal-20 !default !global;
-  $inverse-01: $color__white !default !global;
-  $inverse-02: #272d33 !default !global;
-  $ui-01: $color__white !default !global;
-  $ui-02: #f4f7fb !default !global;
-  $ui-03: $color__gray-1 !default !global;
-  $ui-04: #8897a2 !default !global;
-  $ui-05: $color__navy-gray-6 !default !global;
-  $text-01: $color__blue-90 !default !global;
-  $text-02: $color__navy-gray-6 !default !global;
-  $text-03: #cdd1d4 !default !global;
-  $field-01: #f4f7fb !default !global;
-  $field-02: $color__white !default !global;
-  $support-01: #e0182d !default !global;
-  $support-02: $color__green-40 !default !global;
-  $support-03: $color__yellow-30 !default !global;
-  $support-04: $color__blue-30 !default !global;
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
   $nav-03: $color__purple-30 !default !global;
@@ -42,12 +65,6 @@
   $nav-06: $color__teal-50 !default !global;
   $nav-07: $color__blue-30 !default !global;
   $nav-08: $color__blue-51 !default !global;
-
-  $hover-primary: darken($brand-01, 10%) !default !global;
-  $hover-primary-text: darken($brand-01, 15%) !default !global;
-  $hover-danger: darken($support-01, 10%) !default !global;
-  $hover-secondary: $brand-01 !default !global;
-  $hover-row: rgba($brand-02, 0.1) !default !global;
 
   // Global
   /// @access public
@@ -126,10 +143,6 @@
 
 // Light Experimental Theme
 @mixin theme--experimental() {
-  // Can include various themes here from `@carbon/themes`, including: white,
-  // g10, g90, and g100
-  @include carbon--theme-white();
-
   /// @access public
   $edited: true !default !global;
   $use-layer: true !default !global;
