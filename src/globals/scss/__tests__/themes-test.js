@@ -144,6 +144,44 @@ $c: test(map-get($carbon--theme, interactive-01));
     expect(convert(calls[0][0])).toBe(testColor);
   });
 
+  it('should allow inline theming', async () => {
+    const testColor = '#000000';
+    const inlineColor = '#ffffff';
+    const { calls } = await render(`
+$feature-flags: (components-x: true);
+$carbon--theme: (
+  interactive-01: ${testColor},
+) !global;
+$carbon--inline--theme: (
+  interactive-01: ${inlineColor},
+);
+
+@import '../theme';
+
+$c: test(map-get($carbon--theme, interactive-01));
+
+@mixin my-selector {
+  $c: test($interactive-01);
+  .my-selector {
+    color: $interactive-01;
+  }
+}
+
+@include my-selector();
+
+@include carbon--theme($carbon--inline--theme) {
+  @include my-selector();
+}
+
+@include my-selector();
+`);
+
+    expect(convert(calls[0][0])).toBe(testColor);
+    expect(convert(calls[1][0])).toBe(testColor);
+    expect(convert(calls[2][0])).toBe(inlineColor);
+    expect(convert(calls[3][0])).toBe(testColor);
+  });
+
   it.each(classic)('$%s should be exported', async name => {
     const { calls } = await render(`
 @import '../theme';
