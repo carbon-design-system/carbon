@@ -78,6 +78,11 @@
     border-bottom: none;
   }
 
+  .#{$prefix}--data-table-v2--sort td {
+    padding-left: $spacing-03;
+    padding-right: $spacing-03;
+  }
+
   .#{$prefix}--data-table-v2--sort th:first-of-type .#{$prefix}--table-sort-v2 {
     padding-left: $spacing-04;
   }
