@@ -11,6 +11,7 @@
 @import 'colors';
 @import 'spacing';
 
+/// @access private
 $carbon--theme--v9: (
   brand-01: $color__blue-51,
   brand-02: $color__blue-40,
@@ -46,11 +47,14 @@ $carbon--theme--v9: (
   hover-row: rgba($color__blue-40, 0.1),
 );
 
+/// @access public
 $carbon--theme: $carbon--theme--v9 !global;
 
 @import './vendor/@carbon/elements/scss/themes/themes';
 
 @mixin theme() {
+  // Nav
+  /// @access public
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
   $nav-03: $color__purple-30 !default !global;
@@ -137,6 +141,7 @@ $carbon--theme: $carbon--theme--v9 !global;
 
 // Light Experimental Theme
 @mixin theme--experimental() {
+  /// @access public
   $carbon--theme: $carbon--theme--white !global;
   @include carbon--theme($carbon--theme);
 
