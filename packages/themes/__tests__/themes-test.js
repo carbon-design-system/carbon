@@ -16,13 +16,13 @@ const { formatTokenName, themes, tokens } = require('../src');
 const render = createSassRenderer(__dirname);
 
 describe('themes.scss', () => {
-  describe('_variables.scss', () => {
+  describe('_theme-maps.scss', () => {
     it('should export all themes as sass maps', async () => {
       const themeMapsTests = Object.keys(themes).map(theme => {
         return `$t: test(global-variable-exists(carbon--theme--${theme}));`;
       });
       const { calls } = await render(`
-@import '../scss/variables';
+@import '../scss/theme-maps';
 
 ${themeMapsTests.join('\n')}
 `);
@@ -31,13 +31,15 @@ ${themeMapsTests.join('\n')}
         expect(call[0].getValue()).toBe(true);
       }
     });
+  });
 
+  describe('_tokens.scss', () => {
     it('should export all tokens', async () => {
       const tokenVariableTests = tokens.colors.map(token => {
         return `$t: test(global-variable-exists(${formatTokenName(token)}));`;
       });
       const { calls } = await render(`
-  @import '../scss/variables';
+  @import '../scss/tokens';
 
   ${tokenVariableTests.join('\n')}
 `);

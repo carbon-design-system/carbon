@@ -18,7 +18,7 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rimraf es lib umd scss/_mixins.scss scss/_theme.scss scss/_variables.scss",
+    "clean": "rimraf es lib umd scss/_mixins.scss scss/_tokens.scss scss/_theme-maps.scss",
     "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check 'scss/*.scss'"
   },
   "dependencies": {
