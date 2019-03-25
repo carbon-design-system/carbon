@@ -226,11 +226,11 @@
     width: 100%;
   }
 
-  .#{$prefix}--data-table-v2 tbody tr:not(.#{$prefix}--data-table-v2--selected):hover {
+  .#{$prefix}--data-table-v2 tbody tr:hover {
     background: $hover-field;
   }
 
-  .#{$prefix}--data-table-v2 tbody tr:not(.#{$prefix}--data-table-v2--selected):hover td {
+  .#{$prefix}--data-table-v2 tbody tr:hover td {
     color: $text-01;
     background: $hover-field;
     border-bottom: 1px solid $hover-field;
