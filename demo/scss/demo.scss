@@ -1,4 +1,26 @@
-// Used for sidebar in dev environment
+// Manual theme tests for development environment
+// 1) v9 and v10 - customize individual variables
+// $interactive-01: pink;
+// $brand-01: pink;
+
+// 2) new in v10 - customize many variables via alternate theme
+// @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// $carbon--theme: $carbon--theme--g90;
+
+// 3a) possible in v10 - customize individual variables of an alternate theme
+// @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// $carbon--theme: $carbon--theme--g90;
+// $interactive-01: pink;
+
+// 3b) possible in v10 - customize individual variables of an alternate theme
+// @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// $carbon--theme: map-merge(
+//   $carbon--theme--g90,
+//   (
+//     interactive-01: pink,
+//   )
+// );
+
 @import '../../src/globals/scss/styles';
 
 $deprecations--entry: true;

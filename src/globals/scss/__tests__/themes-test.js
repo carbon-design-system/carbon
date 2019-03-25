@@ -7,7 +7,7 @@
  * @jest-environment node
  */
 
-const { renderSass } = require('../../../../tools/jest/scss');
+const { createSassRenderer, convert } = require('@carbon/test-utils/scss');
 
 const classic = [
   'brand-01',
@@ -112,14 +112,97 @@ const classic = [
   'skeleton',
 ];
 
+const render = createSassRenderer(__dirname);
+
 describe('_theme.scss', () => {
+  it('should allow custom overrides of tokens', async () => {
+    const testColor = '#000000';
+    const { calls } = await render(`
+$brand-01: ${testColor} !global;
+
+@import '../theme';
+
+$c: test($brand-01);
+`);
+
+    expect(convert(calls[0][0])).toEqual(testColor);
+  });
+
+  it('should allow custom overrides of tokens in v10', async () => {
+    const testColor = '#000000';
+    const { calls } = await render(`
+$feature-flags: (components-x: true);
+$interactive-01: ${testColor} !global;
+
+@import '../theme';
+
+$c: test($interactive-01);
+`);
+
+    expect(convert(calls[0][0])).toEqual(testColor);
+  });
+
+  it('should allow custom theme overrides', async () => {
+    const testColor = '#000000';
+    const { calls } = await render(`
+$feature-flags: (components-x: true);
+$carbon--theme: (
+  interactive-01: ${testColor},
+) !global;
+
+@import '../theme';
+
+$c: test(map-get($carbon--theme, interactive-01));
+`);
+
+    expect(convert(calls[0][0])).toBe(testColor);
+  });
+
+  it('should allow inline theming', async () => {
+    const testColor = '#000000';
+    const inlineColor = '#ffffff';
+    const { calls } = await render(`
+$feature-flags: (components-x: true);
+$carbon--theme: (
+  interactive-01: ${testColor},
+) !global;
+$carbon--inline--theme: (
+  interactive-01: ${inlineColor},
+);
+
+@import '../theme';
+
+$c: test(map-get($carbon--theme, interactive-01));
+
+@mixin my-selector {
+  $c: test($interactive-01);
+  .my-selector {
+    color: $interactive-01;
+  }
+}
+
+@include my-selector();
+
+@include carbon--theme($carbon--inline--theme) {
+  @include my-selector();
+}
+
+@include my-selector();
+`);
+
+    expect(convert(calls[0][0])).toBe(testColor);
+    expect(convert(calls[1][0])).toBe(testColor);
+    expect(convert(calls[2][0])).toBe(inlineColor);
+    expect(convert(calls[3][0])).toBe(testColor);
+  });
+
   it.each(classic)('$%s should be exported', async name => {
-    const { calls } = await renderSass(`
-@import './src/globals/scss/theme';
+    const { calls } = await render(`
+@import '../theme';
 
 $c: test(global-variable-exists(${name}));
 `);
     // Check that global-variable-exists returned true
-    expect(calls[0][0].getValue()).toBe(true);
+    expect(convert(calls[0][0])).toBe(true);
   });
 });
