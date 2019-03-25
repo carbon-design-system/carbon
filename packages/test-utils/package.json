@@ -1,6 +1,6 @@
 {
   "name": "@carbon/test-utils",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.5",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/test-utils",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
