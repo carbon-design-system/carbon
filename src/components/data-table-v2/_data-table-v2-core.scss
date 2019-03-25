@@ -320,8 +320,8 @@
   }
 
   .#{$prefix}--data-table-v2 th.#{$prefix}--table-column-checkbox {
-    padding: rem(11px) $spacing-05;
-    width: rem(52px); // 16px padding left + 16px padding right + 20px checkbox width
+    padding: rem(12px) $spacing-03 0 $spacing-05;
+    width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
   }
 
   th.#{$prefix}--table-column-checkbox:hover {
