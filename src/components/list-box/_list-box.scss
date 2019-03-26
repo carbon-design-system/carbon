@@ -302,7 +302,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-template: auto auto / auto auto auto;
+    grid-template: auto auto / auto auto;
     grid-gap: rem(4px);
 
     .#{$prefix}--label {
@@ -490,6 +490,9 @@ $list-box-menu-width: rem(300px);
     cursor: pointer;
     outline: none;
     border-bottom: 1px solid $ui-04;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
