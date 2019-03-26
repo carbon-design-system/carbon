@@ -517,6 +517,9 @@ $list-box-menu-width: rem(300px);
     @include type-style('body-short-01');
     color: $text-01;
     user-select: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   // Menu status inside of a `list-box__field`
