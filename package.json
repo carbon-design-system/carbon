@@ -1,8 +1,8 @@
 {
   "name": "carbon-components",
-  "description": "Carbon Components is a component library for IBM Cloud",
-  "homepage": "http://carbondesignsystem.com/",
-  "version": "7.2.1",
+  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
+  "homepage": "https://www.carbondesignsystem.com/",
+  "version": "10.0.0-beta.1",
   "module": "es/index.js",
   "main": "umd/index.js",
   "repository": {
@@ -177,7 +177,7 @@
     "!**/__tests__/**/*"
   ],
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp build && gulp html:source -e",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup",
     "build-dev-rollup-experimental": "gulp build:dev:deploy --rollup -e",
@@ -188,7 +188,7 @@
     "lint:staged": "eslint",
     "prebuild": "gulp clean",
     "precommit": "lint-staged",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "yarn build",
     "format": "prettier --write \"**/*.{css,js,md,scss}\"",
     "format:staged": "prettier --write",
     "start": "node server.js",
