@@ -567,7 +567,7 @@ $list-box-menu-width: rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: 0;
-    background-color: $interactive-02;
+    background-color: $inverse-02;
     height: rem(24px);
     color: $inverse-01;
     line-height: 0;
@@ -587,7 +587,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
-    background-color: $icon-02;
+    background-color: $hover-secondary;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
