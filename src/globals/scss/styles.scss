@@ -124,7 +124,6 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 // 🙈 Hidden (Not exposed on website)
 //-------------------------------------
 @import '../../components/footer/footer';
-@import '../../components/fab/fab';
 
 // Cycle through all the deprecation reasons, if any exist, that have been
 // accumulated through the @import process.
