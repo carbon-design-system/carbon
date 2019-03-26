@@ -325,6 +325,10 @@
     width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
   }
 
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-checkbox {
+    padding-top: rem(12px);
+  }
+
   th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
   }

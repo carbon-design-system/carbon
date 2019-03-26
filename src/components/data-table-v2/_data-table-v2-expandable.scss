@@ -147,9 +147,6 @@
     .#{$prefix}--child-row-inner-container {
     overflow: hidden;
     max-height: 0;
-    opacity: 0;
-    transition: max-height $transition--expansion $carbon--standard-easing,
-      opacity $transition--expansion $carbon--standard-easing;
   }
 
   //child row visible
@@ -163,9 +160,6 @@
 
   tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 + tr[data-child-row] td .#{$prefix}--child-row-inner-container {
     max-height: 100%;
-    opacity: 1;
-    transition: max-height $transition--expansion $carbon--standard-easing,
-      opacity $transition--expansion $carbon--standard-easing;
   }
 
   //----------------------------------------------------------------------------
@@ -219,7 +213,7 @@
   //----------------------------------------------------------------------------
   // Expand icon column
   //----------------------------------------------------------------------------
-  .#{$prefix}--table-expand-v2 {
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-expand-v2 {
     width: 2.5rem;
     min-width: 2.5rem;
     vertical-align: top;
