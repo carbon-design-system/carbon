@@ -709,29 +709,12 @@ $list-box-menu-width: rem(300px);
   }
 
   // Tweaks for descendants
-
-  // In multi-select scenarios, we need to target checkbox inputs
-  .#{$prefix}--list-box__menu-item > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin: 0;
-    width: 100%;
-  }
-
   // When handling input, we need to target nodes that specifically opt-in to
   // the `combobox` role in order to make sure the text input is styled
   // correctly.
   .#{$prefix}--list-box input[role='combobox'] {
     background-color: inherit;
-    font-weight: 600;
     min-width: 0;
-  }
-
-  .#{$prefix}--list-box input[role='combobox']::placeholder {
-    color: $text-01;
-    font-weight: 400;
-  }
-
-  .#{$prefix}--list-box--disabled input[role='combobox'] {
-    opacity: 1;
   }
 }
 
