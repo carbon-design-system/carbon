@@ -45,7 +45,7 @@ $value: test($${name});
       expect(output.warn).toHaveBeenCalledTimes(2);
     });
 
-    fit('should not warn if $font-path is set and does not contain unpkg', async () => {
+    it('should not warn if $font-path is set and does not contain unpkg', async () => {
       const { output } = await renderClassic(`
 $font-path: 'https://my-custom-cdn.com';
 @import '../css--plex-core';
