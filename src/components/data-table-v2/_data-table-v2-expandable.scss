@@ -306,7 +306,8 @@
     border-bottom: 1px solid $hover-selected-ui;
   }
 
-  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 td {
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 td,
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 td:first-of-type {
     background: $hover-selected-ui;
     border-top: 1px solid $hover-selected-ui;
     border-bottom: 1px solid $hover-selected-ui;
