@@ -123,8 +123,7 @@
   .#{$prefix}--expandable-row--hidden-v2 td {
     border-top: 0;
     width: auto;
-    padding: $spacing-sm;
-    padding-left: $spacing-3xl;
+    padding: $spacing-05;
   }
 
   //child row hidden
@@ -229,7 +228,7 @@
 
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
     transform: rotate(270deg);
-    transition: transform $transition--base $carbon--standard-easing;
+    transition: transform $transition--expansion $carbon--standard-easing;
   }
 
   .#{$prefix}--table-expand-v2__button {
@@ -247,15 +246,15 @@
   .#{$prefix}--table-expand-v2__svg {
     fill: $ui-05;
     transform: rotate(90deg);
-    transition: transform 200ms $carbon--standard-easing;
-    height: rem(16px);
+    transition: transform $transition--expansion $carbon--standard-easing;
+    height: $layout-01;
     width: auto;
-    max-width: rem(16px);
-    padding: $spacing-3xs;
+    max-width: $layout-01;
+    padding: $spacing-01;
   }
 
   th.#{$prefix}--table-expand-v2 + th.#{$prefix}--table-column-checkbox {
-    padding-left: rem(8px);
+    padding-left: $spacing-03;
   }
 
   //----------------------------------------------------------------------------
