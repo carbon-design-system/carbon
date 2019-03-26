@@ -647,17 +647,19 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
-    display: block;
+    display: flex;
+    align-items: center;
+    height: rem(40px);
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
     line-height: rem(16px);
-    padding: rem(11px) 0;
-    margin: 0 rem(16px);
+    margin: 0 $carbon--spacing-05;
     border: 1px solid transparent;
     border-top-color: $ui-03;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 
     &:focus {
       @include focus-outline('outline');
@@ -670,6 +672,10 @@ $list-box-menu-width: rem(300px);
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-item__option {
+    margin: 0 $carbon--spacing-03;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
