@@ -647,13 +647,13 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
-    display: flex;
-    align-items: center;
+    display: block;
     height: rem(40px);
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
     line-height: rem(16px);
+    padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
     border: 1px solid transparent;
     border-top-color: $ui-03;
