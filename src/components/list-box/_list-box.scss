@@ -679,6 +679,12 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-item__option {
     margin: 0 $carbon--spacing-03;
+
+    &:focus {
+      margin: 0;
+      padding-left: $carbon--spacing-03;
+      padding-right: $carbon--spacing-03;
+    }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
