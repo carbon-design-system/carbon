@@ -27,13 +27,17 @@
       {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
     </div>
   </div>
-  <div class="{{@root.prefix}}--list-box__menu">
+  <ul class="{{@root.prefix}}--list-box__menu">
     {{#each items}}
-    <div
+    <li
       class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
-      id="{{id}}">{{label}}</div>
+      id="{{id}}">
+      <div class="{{@root.prefix}}--list-box__menu-item__option" tabindex="0">
+        {{label}}
+      </div>
+    </li>
     {{/each}}
-  </div>
+  </ul>
 </div>
 {{else}}
 <div
