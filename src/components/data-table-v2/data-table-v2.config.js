@@ -300,15 +300,9 @@ const rows = [
 
 const rowsExpandable = [
   {
-    sectionContent: `
-      <h4>
-        <strong>Harry Potter</strong>
-      </h4>
-      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
-        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
-        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
-        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
-        as they tried to protect him, shortly before attacking Harry.</p>
+    sectionContent:
+      /* eslint-disable max-len */
+      ` <p>This content area is left to be formatted by the implementer. Please follow spacing and alignment guidelines to make sure your layout is aligned with the IBM design language.</p>
     `,
     section: true,
     select: {
@@ -325,15 +319,9 @@ const rowsExpandable = [
     status: 'Active',
   },
   {
-    sectionContent: `
-      <h4>
-        <strong>Harry Potter</strong>
-      </h4>
-      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
-        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
-        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
-        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
-        as they tried to protect him, shortly before attacking Harry.</p>
+    sectionContent:
+      /* eslint-disable max-len */
+      ` <p>This content area is left to be formatted by the implementer. Please follow spacing and alignment guidelines to make sure your layout is aligned with the IBM design language.</p>
     `,
     select: {
       id: `${prefix}--checkbox-12`,
