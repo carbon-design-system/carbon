@@ -9,7 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@include exports('data-table-v2-expandable') {
+@mixin data-table-v2-expandable {
   tr.#{$prefix}--expandable-row-v2 {
     // hide on init
     &.#{$prefix}--expandable-row--hidden-v2 {
@@ -104,5 +104,219 @@
     width: auto;
     max-width: 16px;
     padding: $spacing-3xs;
+  }
+}
+
+@mixin data-table-v2-expandable--x {
+  //----------------------------------------------------------------------------
+  // Parent row
+  //----------------------------------------------------------------------------
+  // expanded
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 td:first-of-type {
+    border-bottom: 1px solid $ui-01; // first td doesn't have a visible border
+  }
+
+  //----------------------------------------------------------------------------
+  // Child row
+  //----------------------------------------------------------------------------
+  // default styles
+  .#{$prefix}--expandable-row--hidden-v2 td {
+    border-top: 0;
+    width: auto;
+    padding: $spacing-sm;
+    padding-left: $spacing-3xl;
+  }
+
+  //child row hidden
+  tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2) + tr[data-child-row] {
+    height: 0;
+    transition: height $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2) + tr[data-child-row] td {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 0;
+    background-color: $hover-field;
+    transition: padding $transition--expansion $carbon--standard-easing,
+      background-color $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2)
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height $transition--expansion $carbon--standard-easing,
+      opacity $transition--expansion $carbon--standard-easing;
+  }
+
+  //child row visible
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 + tr[data-child-row] {
+    transition: height $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 + tr[data-child-row] td {
+    transition: padding $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 + tr[data-child-row] td .#{$prefix}--child-row-inner-container {
+    max-height: 100%;
+    opacity: 1;
+    transition: max-height $transition--expansion $carbon--standard-easing,
+      opacity $transition--expansion $carbon--standard-easing;
+  }
+
+  //----------------------------------------------------------------------------
+  // Hover styles
+  //----------------------------------------------------------------------------
+  //hovering on collapsed parent
+  tr.#{$prefix}--parent-row-v2:not(.#{$prefix}--expandable-row-v2):first-of-type:hover td {
+    border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
+  }
+
+  // hovering on expanded parent
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2:hover td {
+    background-color: $hover-field;
+    border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $ui-03;
+    color: $text-01;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2:hover td:first-of-type {
+    border-bottom: 1px solid $hover-field; // first td doesn't have a visible border
+  }
+
+  // child row when hovering on expanded parent
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2:hover + tr[data-child-row] td {
+    background-color: $hover-field;
+    color: $text-01;
+  }
+
+  //hovering on expanded child row (class added to parent)
+  tr.#{$prefix}--expandable-row--hover-v2 {
+    background-color: $hover-field;
+  }
+
+  tr.#{$prefix}--expandable-row--hover-v2 td {
+    background-color: $hover-field;
+    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $hover-field;
+    color: $text-01;
+  }
+
+  tr.#{$prefix}--expandable-row--hover-v2:first-of-type td {
+    border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2.#{$prefix}--expandable-row--hover-v2 td:first-of-type {
+    border-bottom: 1px solid $hover-field;
+  }
+
+  //----------------------------------------------------------------------------
+  // Expand icon column
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-expand-v2 {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    vertical-align: top;
+    padding-top: rem(15px);
+  }
+
+  .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
+    transform: rotate(270deg);
+    transition: transform $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--table-expand-v2__button {
+    @include button-reset('false');
+  }
+
+  .#{$prefix}--table-expand-v2__button:focus {
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--table-expand-v2__button:focus .#{$prefix}--table-expand-v2__svg {
+    box-shadow: inset 0px 0px 0px 1px $focus;
+  }
+
+  .#{$prefix}--table-expand-v2__svg {
+    fill: $ui-05;
+    transform: rotate(90deg);
+    transition: transform 200ms $carbon--standard-easing;
+    height: rem(16px);
+    width: auto;
+    max-width: rem(16px);
+    padding: $spacing-3xs;
+  }
+
+  th.#{$prefix}--table-expand-v2 + th.#{$prefix}--table-column-checkbox {
+    padding-left: rem(8px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Selected
+  //----------------------------------------------------------------------------
+  // collapsed
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected:first-of-type td {
+    background: $ui-03;
+    border-top: 1px solid $active-01;
+    border-bottom: 1px solid $active-01;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected td {
+    background: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $active-01;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected:last-of-type td {
+    background: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  // collapsed hover
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected:not(.#{$prefix}--expandable-row-v2):hover td {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid $hover-selected-ui;
+  }
+
+  //expanded
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2 td,
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2 td:first-of-type {
+    border-bottom: 1px solid $ui-03; //no visible border when expanded
+  }
+
+  // expanded hover
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2:hover td,
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2:hover td:first-of-type {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid $hover-selected-ui;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 td {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid $hover-selected-ui;
+  }
+
+  // child row
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected + tr[data-child-row] {
+    background-color: $hover-field;
+  }
+}
+
+@include exports('data-table-v2-expandable') {
+  @if feature-flag-enabled('components-x') {
+    @include data-table-v2-expandable--x;
+  } @else {
+    @include data-table-v2-expandable;
   }
 }
