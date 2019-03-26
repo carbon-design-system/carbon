@@ -1,18 +1,27 @@
 icons:
   - name: add
-    friendly_name: add
+    friendly_name: Add
     usage: This is a description for usage
     categories:
-      - example cateogry
+      - Navigation
     aliases:
       - add
+      - plus
+      - cross
+      - create
     sizes:
       - 16
+      - 32
     variants:
-      name: alt
-      usage: This is a description for usage
-      sizes:
-        - 32
+      - name: add--alt
+        usage: This is a description for usage
+        sizes:
+          - 16
+          - 32
+      - name: add--filled
+        usage: This is a description for usage
+        sizes:
+          - 16
   - name: apps
     friendly_name: apps
     usage: This is a description for usage
