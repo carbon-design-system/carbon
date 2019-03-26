@@ -217,7 +217,8 @@
     width: 2.5rem;
     min-width: 2.5rem;
     vertical-align: top;
-    padding-top: rem(15px);
+    padding-top: $spacing-03;
+    padding-bottom: 0;
   }
 
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
@@ -227,6 +228,10 @@
 
   .#{$prefix}--table-expand-v2__button {
     @include button-reset('false');
+    display: flex;
+    justify-content: space-around;
+    height: $layout-03;
+    width: $layout-01;
   }
 
   .#{$prefix}--table-expand-v2__button:focus {
