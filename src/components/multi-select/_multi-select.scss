@@ -35,6 +35,10 @@
     display: flex;
     align-items: center;
   }
+
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox:checked ~ .#{$prefix}--checkbox-label-text {
+    color: $text-01;
+  }
 }
 
 @include exports('multi-select') {
