@@ -485,6 +485,7 @@ $list-box-menu-width: rem(300px);
     position: relative;
     display: inline-flex;
     align-items: center;
+    vertical-align: top;
     height: rem(40px);
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
@@ -561,7 +562,6 @@ $list-box-menu-width: rem(300px);
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
-
     position: static;
     display: flex;
     align-items: center;
