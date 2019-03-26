@@ -32,8 +32,9 @@ $css--plex: false;
     expect(result.css.toString()).toEqual(expect.stringContaining(`font-family: 'IBM Helvetica'`));
   });
 
-  it('should output plex if $css--font-face and $css--plex are true', async () => {
+  it('should output ibm-plex-sans if $css--font-face and $css--plex are true', async () => {
     const { result } = await renderSass(`
+$feature-flags: (components-x: false);
 $css--font-face: true;
 $css--plex: true;
 @import './src/globals/scss/css--font-face';
@@ -41,6 +42,18 @@ $css--plex: true;
 
     expect(result.css.toString()).toEqual(expect.stringContaining('@font-face'));
     expect(result.css.toString()).toEqual(expect.stringContaining(`font-family: 'ibm-plex-sans'`));
+  });
+
+  it('should output IBM Ples Sans if $css--font-face and $css--plex are true', async () => {
+    const { result } = await renderSass(`
+$feature-flags: (components-x: true);
+$css--font-face: true;
+$css--plex: true;
+@import './src/globals/scss/css--font-face';
+`);
+
+    expect(result.css.toString()).toEqual(expect.stringContaining('@font-face'));
+    expect(result.css.toString()).toEqual(expect.stringContaining(`font-family: 'IBM Plex Sans'`));
   });
 
   describe('experimental', () => {

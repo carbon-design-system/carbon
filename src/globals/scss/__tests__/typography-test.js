@@ -19,6 +19,15 @@ const variables = [
   'font-size-map',
 ];
 
+/**
+ * @param {Mock} fn A Jest mock function.
+ * @returns {CallInfo[]} The array of Jest mock calls excluding feature flag warning.
+ */
+const filterFeatureFlagCalls = fn =>
+  fn.mock.calls.filter(
+    ([value]) => typeof value.getLength !== 'undefined' || !/^Usage of non-default feature flags was found/.test(value.getValue())
+  );
+
 describe('_typography.scss', () => {
   describe.each(variables)('$%s', name => {
     it('should be exported', async () => {
@@ -50,6 +59,7 @@ $t: test($${name});
 `
       );
       const { result } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
 @import './src/globals/scss/typography';
 ${tests.join('\n')}
 `);
@@ -58,12 +68,13 @@ ${tests.join('\n')}
 
     it('should warn if given invalid size', async () => {
       const { output } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
 @import './src/globals/scss/typography';
 .test {
   @include typescale('<unknown>');
 }
 `);
-      expect(output.warn).toHaveBeenCalledTimes(1);
+      expect(filterFeatureFlagCalls(output.warn).length).toBe(1);
     });
   });
 
@@ -84,6 +95,7 @@ $t: test(em(16px));
   describe('helvetica mixin', () => {
     it('should output a font-family value', async () => {
       const { result } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
 @import './src/globals/scss/typography';
 .test {
   @include helvetica();
@@ -97,8 +109,10 @@ $t: test(em(16px));
   describe('font-family mixin', () => {
     it('should output IBM Plex if css--plex is set to true', async () => {
       const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+$feature-flags: (breaking-changes-x: false);
 $css--plex: true;
+
+@import './src/globals/scss/typography';
 
 .test {
   @include font-family();
@@ -110,8 +124,10 @@ $css--plex: true;
 
     it('should output IBM Helvetica if css--plex is set to false', async () => {
       const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+$feature-flags: (breaking-changes-x: false);
 $css--plex: false;
+
+@import './src/globals/scss/typography';
 
 .test {
   @include font-family();
@@ -125,6 +141,8 @@ $css--plex: false;
   describe('line-height', () => {
     it('should output valid line-heights for specific elements, otherwise it should warn', async () => {
       const { output, result } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
+
 @import './src/globals/scss/typography';
 
 .test-heading {
@@ -140,13 +158,15 @@ $css--plex: false;
 }
 `);
       expect(result.css.toString()).toMatchSnapshot();
-      expect(output.warn).toHaveBeenCalledTimes(1);
+      expect(filterFeatureFlagCalls(output.warn).length).toBe(1);
     });
   });
 
   describe('font-smoothing mixin', () => {
     it('should output font-smoothing properties', async () => {
       const { result } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
+
 @import './src/globals/scss/typography';
 
 .test {
@@ -160,6 +180,8 @@ $css--plex: false;
   describe('letter-spacing mixin', () => {
     it('should output letter-spacing properties', async () => {
       const { result } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
+
 @import './src/globals/scss/typography';
 
 .test {
@@ -181,6 +203,7 @@ $css--plex: false;
 `
       );
       const { output, result } = await renderSass(`
+$feature-flags: (breaking-changes-x: false);
 @import './src/globals/scss/typography';
 ${tests.join('\n')}
 
@@ -190,7 +213,7 @@ ${tests.join('\n')}
 `);
 
       expect(result.css.toString()).toMatchSnapshot();
-      expect(output.warn).toHaveBeenCalledTimes(1);
+      expect(filterFeatureFlagCalls(output.warn).length).toBe(1);
     });
   });
 });
