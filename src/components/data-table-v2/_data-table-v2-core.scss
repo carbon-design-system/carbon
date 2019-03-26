@@ -326,7 +326,8 @@
   }
 
   .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-checkbox {
-    padding-top: rem(12px);
+    padding-top: rem(11px);
+    padding-bottom: 0;
   }
 
   th.#{$prefix}--table-column-checkbox:hover {
