@@ -263,6 +263,7 @@
 
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected td {
     background: $ui-03;
+    color: $text-01;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $active-01;
   }
@@ -301,7 +302,8 @@
   }
 
   // child row
-  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected + tr[data-child-row] {
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected + tr[data-child-row] td {
+    color: $text-01;
     background-color: $hover-field;
   }
 }
