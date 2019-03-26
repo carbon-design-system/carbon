@@ -489,14 +489,9 @@ $list-box-menu-width: rem(300px);
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
-    border-bottom: 1px solid $ui-04;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
-    border: none;
   }
 
   .#{$prefix}--list-box__field:focus {
