@@ -221,6 +221,12 @@
     padding-bottom: 0;
   }
 
+  @supports (-moz-appearance: none) {
+    .#{$prefix}--data-table-v2 td.#{$prefix}--table-expand-v2 {
+      padding-top: rem(14px);
+    }
+  }
+
   .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
     transform: rotate(270deg);
     transition: transform $transition--expansion $carbon--standard-easing;
