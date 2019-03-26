@@ -485,18 +485,14 @@ $list-box-menu-width: rem(300px);
     position: relative;
     display: inline-flex;
     align-items: center;
+    vertical-align: top;
     height: rem(40px);
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
     cursor: pointer;
     outline: none;
-    border-bottom: 1px solid $ui-04;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
-    border: none;
   }
 
   .#{$prefix}--list-box__field:focus {
@@ -517,6 +513,9 @@ $list-box-menu-width: rem(300px);
     @include type-style('body-short-01');
     color: $text-01;
     user-select: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   // Menu status inside of a `list-box__field`
@@ -563,7 +562,6 @@ $list-box-menu-width: rem(300px);
   // Modifier for a selection to show that multiple selections have been made
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
-
     position: static;
     display: flex;
     align-items: center;
@@ -648,16 +646,18 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
     display: block;
+    height: rem(40px);
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
     line-height: rem(16px);
     padding: rem(11px) 0;
-    margin: 0 rem(16px);
+    margin: 0 $carbon--spacing-05;
     border: 1px solid transparent;
     border-top-color: $ui-03;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 
     &:focus {
       @include focus-outline('outline');
@@ -669,6 +669,16 @@ $list-box-menu-width: rem(300px);
     &:hover {
       color: $text-01;
       border-color: transparent;
+    }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-item__option {
+    margin: 0 $carbon--spacing-03;
+
+    &:focus {
+      margin: 0;
+      padding-left: $carbon--spacing-03;
+      padding-right: $carbon--spacing-03;
     }
   }
 

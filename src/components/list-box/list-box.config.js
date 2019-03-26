@@ -28,6 +28,10 @@ const items = [
     id: 'downshift-1-item-3',
     label: 'Option 4',
   },
+  {
+    id: 'downshift-1-item-4',
+    label: 'An example option that is really long to show what should be done to handle long text',
+  },
 ];
 
 module.exports = {

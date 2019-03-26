@@ -333,8 +333,7 @@
 
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
-    display: flex;
-    align-items: center;
+    display: block;
     height: rem(40px);
     padding-top: $carbon--spacing-04;
     padding-bottom: $carbon--spacing-04;
@@ -390,16 +389,18 @@
   .#{$prefix}--dropdown-link {
     @include focus-outline('reset');
     display: block;
+    height: rem(40px);
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
     line-height: rem(16px);
     padding: rem(11px) 0;
-    margin: 0 rem(16px);
+    margin: 0 $carbon--spacing-05;
     border: 1px solid transparent;
     border-top-color: $ui-03;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 
     &:focus {
       @include focus-outline('outline');
