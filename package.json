@@ -172,7 +172,9 @@
     "scripts/**/*",
     "scss/**/*",
     "src/**/*",
-    "umd/**/*"
+    "umd/**/*",
+    "!**/*.config.js",
+    "!**/__tests__/**/*"
   ],
   "scripts": {
     "build": "gulp build",
