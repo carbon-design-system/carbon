@@ -6,45 +6,63 @@
 -->
 
 {{#if @root.featureFlags.componentsX}}
-<div
-  class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
-  <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu" aria-expanded="false"
-    aria-haspopup="true">
-    <span class="{{@root.prefix}}--list-box__label">Label</span>
-    <div class="{{@root.prefix}}--list-box__menu-icon">
-      {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
+    <label class="{{@root.prefix}}--label">Multi-Select label</label>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
+    <div
+      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
+        aria-expanded="false" aria-haspopup="true">
+        <span class="{{@root.prefix}}--list-box__label">Multi select options</span>
+        <div class="{{@root.prefix}}--list-box__menu-icon">
+          {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div
-  class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
-  <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu" aria-expanded="true"
-    aria-haspopup="true">
-    <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi"
-      tabindex="0" title="Clear all selected items">
-      1
-      {{ carbon-icon 'Close16' aria-label='Open menu' }}
-    </div>
-    <span class="{{@root.prefix}}--list-box__label">Label</span>
-    <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-      {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
+    <label class="{{@root.prefix}}--label">Multi-Select label</label>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
+    <div
+      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
+        aria-expanded="false" aria-haspopup="true">
+        <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi"
+          tabindex="0" title="Clear all selected items">
+          1
+          {{ carbon-icon 'Close16' aria-label='Open menu' }}
+        </div>
+        <span class="{{@root.prefix}}--list-box__label">Multi select options</span>
+        <div class="{{@root.prefix}}--list-box__menu-icon">
+          {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
+        </div>
+      </div>
+      <fieldset class="{{@root.prefix}}--list-box__menu">
+        <legend class="{{@root.prefix}}--assistive-text">Description of form elements within the fieldset</legend>
+        {{#each items}}
+        <div class="{{@root.prefix}}--list-box__menu-item">
+          <div class="{{@root.prefix}}--list-box__menu-item__option">
+            <div class="{{@root.prefix}}--form-item {{@root.prefix}}--checkbox-wrapper">
+              <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
+                <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}"
+                  value="on" {{#if selected}} checked{{/if}}>
+                <span class="{{@root.prefix}}--checkbox-appearance"></span>
+                <span class="{{@root.prefix}}--checkbox-label-text">{{label}}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </fieldset>
     </div>
   </div>
-  <fieldset class="{{@root.prefix}}--list-box__menu">
-    <legend class="{{@root.prefix}}--assistive-text">Description of form elements within the fieldset</legend>
-    {{#each items}}
-    <div class="{{@root.prefix}}--list-box__menu-item">
-      <div class="{{@root.prefix}}--form-item {{@root.prefix}}--checkbox-wrapper">
-        <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
-          <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on"
-            {{#if selected}} checked{{/if}}>
-          <span class="{{@root.prefix}}--checkbox-appearance"></span>
-          <span class="{{@root.prefix}}--checkbox-label-text">{{label}}</span>
-        </label>
-      </div>
-    </div>
-    {{/each}}
-  </fieldset>
 </div>
 {{else}}
 <div
