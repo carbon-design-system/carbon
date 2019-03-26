@@ -61,9 +61,10 @@ function createImporter(cwd) {
  * Create a sass renderer for the given current working directory. Setting `cwd`
  * is useful so that we can resolve sass files relative to the test file.
  * @param {string} cwd
+ * @param {string} initialData - optional string to prefix each render call
  * @return {Function}
  */
-function createSassRenderer(cwd) {
+function createSassRenderer(cwd, initialData = '') {
   const importer = createImporter(cwd);
   return async data => {
     const calls = [];
@@ -71,12 +72,18 @@ function createSassRenderer(cwd) {
     const mockError = jest.fn(() => types.Null());
     const log = jest.fn(() => types.Null());
     const debug = jest.fn(() => types.Null());
+    const output = {
+      debug,
+      error: mockError,
+      log,
+      warn,
+    };
     let result;
     let renderError;
 
     try {
       result = await sassAsync({
-        data,
+        data: [initialData, data].join('\n'),
         importer,
         functions: {
           '@error': mockError,
@@ -103,11 +110,11 @@ function createSassRenderer(cwd) {
       calls,
       result,
       error: renderError,
-      output: {
-        debug,
-        error: mockError,
-        log,
-        warn,
+      output,
+      getOutput(level = 'debug') {
+        return output[level].mock.calls
+          .map(call => convert(call[0]))
+          .join('\n');
       },
     };
   };
