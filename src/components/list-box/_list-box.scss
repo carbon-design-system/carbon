@@ -577,10 +577,6 @@ $list-box-menu-width: rem(300px);
     border-radius: rem(12px);
   }
 
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__selection--multi {
-    margin-left: rem(8px);
-  }
-
   .#{$prefix}--list-box__selection--multi > svg {
     fill: white;
     margin-left: rem(4px);
