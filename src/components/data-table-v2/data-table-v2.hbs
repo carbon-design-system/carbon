@@ -390,7 +390,7 @@
             <!-- checkbox td -->
             {{else if column.checkbox}}
               <td class="{{@root.prefix}}--table-column-checkbox">
-                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if (and ../../../componentsX row.disabled)}} disabled {{/if}}>
+                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if row.disabled}} disabled {{/if}}>
                 <label for="{{data.id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}"></label>
               </td>
             <!-- inline action td's -->
@@ -463,7 +463,7 @@
       {{#if row.sectionContent}}
           <tr class="{{@root.prefix}}--expandable-row-v2 {{@root.prefix}}--expandable-row--hidden-v2" data-child-row>
             <td colspan="{{../columns.length}}">
-              <div>
+              <div class="{{@root.prefix}}--child-row-inner-container">
                 {{{row.sectionContent}}}
               </div>
             </td>
