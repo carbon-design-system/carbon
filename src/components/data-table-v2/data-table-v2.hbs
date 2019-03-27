@@ -382,9 +382,7 @@
             {{#if column.section}}
               <td class="{{@root.prefix}}--table-expand-v2" data-event="expand">
                 <button class="{{@root.prefix}}--table-expand-v2__button">
-                  <svg class="{{@root.prefix}}--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
-                    <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
-                  </svg>
+                  {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--table-expand-v2__svg') }}
                 </button>
               </td>
             <!-- checkbox td -->

@@ -253,10 +253,6 @@
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $transition--expansion $carbon--standard-easing;
-    height: $layout-01;
-    width: auto;
-    max-width: $layout-01;
-    padding: $spacing-01;
   }
 
   th.#{$prefix}--table-expand-v2 + th.#{$prefix}--table-column-checkbox {
