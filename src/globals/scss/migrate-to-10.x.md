@@ -1,5 +1,7 @@
 # `src/globals/scss`
 
+**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be _removed_ soon after the initial `v10` release.
+
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -36,7 +38,7 @@
 
 ## `_colors.scss`
 
-Migration table available [here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
+`$color__` variables are deprecated. Migration table available [here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
 
 ## `_css--body.scss`
 
