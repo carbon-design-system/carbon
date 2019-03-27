@@ -1,52 +1,102 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
 
-<div class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
+{{#if @root.featureFlags.componentsX}}
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
+    <label class="{{@root.prefix}}--label">Multi-Select label</label>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
+    <div
+      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
+        aria-expanded="false" aria-haspopup="true">
+        <span class="{{@root.prefix}}--list-box__label">Multi select options</span>
+        <div class="{{@root.prefix}}--list-box__menu-icon">
+          {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
+    <label class="{{@root.prefix}}--label">Multi-Select label</label>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
+    <div
+      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
+        aria-expanded="true" aria-haspopup="true">
+        <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi"
+          tabindex="0" title="Clear all selected items">
+          1
+          {{ carbon-icon 'Close16' aria-label='Clear selection' }}
+        </div>
+        <span class="{{@root.prefix}}--list-box__label">Multi select options</span>
+        <div class="{{@root.prefix}}--list-box__menu-icon">
+          {{ carbon-icon 'ChevronUp16' aria-label='Close menu' }}
+        </div>
+      </div>
+      <fieldset class="{{@root.prefix}}--list-box__menu">
+        <legend class="{{@root.prefix}}--assistive-text">Description of form elements within the fieldset</legend>
+        {{#each items}}
+        <div class="{{@root.prefix}}--list-box__menu-item">
+          <div class="{{@root.prefix}}--list-box__menu-item__option">
+            <div class="{{@root.prefix}}--checkbox-wrapper">
+              <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
+                <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}"
+                  value="on" {{#if selected}} checked{{/if}}>
+                <span class="{{@root.prefix}}--checkbox-appearance"></span>
+                <span class="{{@root.prefix}}--checkbox-label-text">{{label}}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </fieldset>
+    </div>
+  </div>
+</div>
+{{else}}
+<div
+  class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
   <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu" aria-expanded="false"
     aria-haspopup="true">
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon">
-      {{#if @root.featureFlags.componentsX}}
-        {{ carbon-icon 'ChevronDownGlyph' aria-label='Open menu' }}
-      {{else}}
       <svg width="10" height="5" name="caret--down" role="img" viewBox="0 0 10 5" aria-label="Open menu">
         <title>Open menu</title>
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
-      {{/if}}
     </div>
   </div>
 </div>
-<div class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
+<div
+  class="{{@root.prefix}}--form-item {{@root.prefix}}--multi-select {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}">
   <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu" aria-expanded="true"
     aria-haspopup="true">
-    <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi" tabindex="0"
-      title="Clear all selected items">
+    <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi"
+      tabindex="0" title="Clear all selected items">
       1
-      {{#if @root.featureFlags.componentsX}}
-        {{ carbon-icon 'Close16' aria-label='Open menu' }}
-      {{else}}
-        <svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-          <title>Close Modal</title>
-          <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
-          />
-        </svg>
-      {{/if}}
+      <svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+        <title>Close Modal</title>
+        <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+          fill-rule="nonzero" />
+      </svg>
     </div>
     <span class="{{@root.prefix}}--list-box__label">Label</span>
     <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-      {{#if @root.featureFlags.componentsX}}
-        {{ carbon-icon 'ChevronDownGlyph' aria-label='Close menu' }}
-      {{else}}
       <svg width="10" height="5" name="caret--down" role="img" viewBox="0 0 10 5" aria-label="Close menu">
         <title>Close menu</title>
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
-      {{/if}}
     </div>
   </div>
   <fieldset class="{{@root.prefix}}--list-box__menu">
@@ -55,7 +105,8 @@
     <div class="{{@root.prefix}}--list-box__menu-item">
       <div class="{{@root.prefix}}--form-item {{@root.prefix}}--checkbox-wrapper">
         <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
-          <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on"{{#if selected}} checked{{/if}}>
+          <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}" value="on"
+            {{#if selected}} checked{{/if}}>
           <span class="{{@root.prefix}}--checkbox-appearance"></span>
           <span class="{{@root.prefix}}--checkbox-label-text">{{label}}</span>
         </label>
@@ -64,3 +115,4 @@
     {{/each}}
   </fieldset>
 </div>
+{{/if}}
