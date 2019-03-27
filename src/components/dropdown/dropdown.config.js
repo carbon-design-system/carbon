@@ -31,6 +31,10 @@ const items = [
     label: 'Option 5',
     value: 'router',
   },
+  {
+    label: 'An example option that is really long to show what should be done to handle long text',
+    value: 'loremipsum',
+  },
 ];
 
 module.exports = {
