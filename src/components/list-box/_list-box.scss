@@ -567,7 +567,7 @@ $list-box-menu-width: rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: 0;
-    background-color: $interactive-02;
+    background-color: $inverse-02;
     height: rem(24px);
     color: $inverse-01;
     line-height: 0;
@@ -575,10 +575,6 @@ $list-box-menu-width: rem(300px);
     padding-right: rem(2px); // Align with hover circle of X button
     margin-right: rem(10px);
     border-radius: rem(12px);
-  }
-
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__selection--multi {
-    margin-left: rem(8px);
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
@@ -591,7 +587,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
-    background-color: $icon-02;
+    background-color: $hover-secondary;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,
@@ -610,11 +606,6 @@ $list-box-menu-width: rem(300px);
     max-height: rem(140px);
     overflow-y: auto;
     z-index: z('dropdown');
-  }
-
-  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu {
-    background-color: $field-02;
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
