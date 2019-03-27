@@ -2,7 +2,7 @@
   "name": "@carbon/stylelint-config-elements",
   "private": true,
   "description": "Stylelint configuration for Carbon Elements",
-  "version": "0.0.1-beta.5",
+  "version": "10.0.0-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/stylelint-config-elements",
