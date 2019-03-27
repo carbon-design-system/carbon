@@ -22,7 +22,7 @@ $feature-flags: () !default;
 $default-feature-flags: (
   components-x: true,
   breaking-changes-x: true,
-  ui-shell: true,
+  ui-shell: false,
   grid: true,
   grid-columns-16: false,
   grid--fallback: false,
