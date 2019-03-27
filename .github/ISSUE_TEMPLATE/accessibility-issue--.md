@@ -3,7 +3,8 @@ name: Accessibility Issue ♿
 about: Report an accessibility or usability issue
 title: ''
 labels: 'type: a11y ♿'
-assignees: dakahn
+assignees: ''
+
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
