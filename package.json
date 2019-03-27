@@ -177,7 +177,7 @@
     "!**/__tests__/**/*"
   ],
   "scripts": {
-    "build": "gulp build && gulp html:source -e",
+    "build": "gulp build",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup",
     "build-dev-rollup-experimental": "gulp build:dev:deploy --rollup -e",
