@@ -682,6 +682,7 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
     border-color: transparent;
 
+    > .#{$prefix}--list-box__menu-item__option,
     + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
       border-color: transparent;
     }
