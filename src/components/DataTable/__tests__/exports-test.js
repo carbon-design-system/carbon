@@ -12,7 +12,7 @@ import * as DataTable from '../../DataTable';
 const COMPONENT_PATH = path.resolve(__dirname, '../');
 const blacklist = new Set([
   'README.md',
-  'migrate-to-10.x.md',
+  'migrate-to-7.x.md',
   'state',
   'tools',
   '.DS_Store',

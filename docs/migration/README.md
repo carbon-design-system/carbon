@@ -2,4 +2,4 @@
 
 Available guides:
 
-- [v9 to v10](./migrate-to-10.x.md)
+- [v6 to v7](./migrate-to-7.x.md)
