@@ -26,6 +26,7 @@
 
     &::placeholder {
       color: $text-02;
+      opacity: 1;
     }
 
     &[disabled]::placeholder {
