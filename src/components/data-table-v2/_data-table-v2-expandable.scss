@@ -262,6 +262,28 @@
     padding-left: $spacing-03;
   }
 
+  // fix expanded parent separating border length
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 td.#{$prefix}--table-expand-v2 + td::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: rem(-1px);
+    height: rem(1px);
+    width: rem(8px);
+    background: $ui-01;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2:hover td.#{$prefix}--table-expand-v2 + td::after,
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2.#{$prefix}--expandable-row--hover-v2
+    td.#{$prefix}--table-expand-v2
+    + td::after {
+    background: $hover-field;
+  }
+
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected td.#{$prefix}--table-expand-v2 + td::after {
+    display: none;
+  }
+
   //----------------------------------------------------------------------------
   // Selected
   //----------------------------------------------------------------------------
