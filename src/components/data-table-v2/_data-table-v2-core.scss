@@ -30,14 +30,21 @@
     }
 
     thead {
-      @include typescale('zeta');
+      @if not feature-flag-enabled('components-x') {
+        @include typescale('zeta');
+      } @else {
+        @include type-style('heading-01');
+      }
       background-color: $ui-02;
-      font-weight: 700;
       border-right: 1px solid $ui-03;
     }
 
     tbody {
-      @include typescale('zeta');
+      @if not feature-flag-enabled('components-x') {
+        @include typescale('zeta');
+      } @else {
+        @include type-style('body-short-01');
+      }
       background-color: $ui-01;
       border-right: 1px solid $ui-03;
     }
@@ -68,11 +75,20 @@
 
     th {
       border-top: 1px solid $ui-03;
+      @if not feature-flag-enabled('components-x') {
+        @include typescale('zeta');
+      } @else {
+        @include type-style('heading-01');
+      }
     }
 
     th,
     td {
-      @include typescale('zeta');
+      @if not feature-flag-enabled('components-x') {
+        @include typescale('zeta');
+      } @else {
+        @include type-style('body-short-01');
+      }
       border-top: 1px solid $ui-03;
       padding-left: $spacing-sm;
       vertical-align: middle;

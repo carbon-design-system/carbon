@@ -152,13 +152,21 @@
   }
 
   .#{$prefix}--batch-summary__para {
-    @include typescale('zeta');
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('zeta');
+    } @else {
+      @include type-style('heading-01');
+    }
     margin-right: $spacing-lg;
   }
 
   .#{$prefix}--batch-summary__cancel {
     @include button-reset(auto);
-    @include typescale('zeta');
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('zeta');
+    } @else {
+      @include type-style('heading-01');
+    }
     color: $ui-01;
     border-bottom: 1px solid transparent;
     font-weight: 600;
