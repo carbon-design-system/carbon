@@ -341,6 +341,10 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box--expanded {
+    border-bottom-color: $ui-03;
+  }
+
   .#{$prefix}--list-box--expanded:hover {
     background-color: $field-01;
   }
