@@ -269,7 +269,12 @@
     border-bottom: 1px solid $ui-03;
     padding: rem(14px) $spacing-04;
     padding-bottom: rem(13px);
-    background-clip: padding-box; // fix to show borders in ff
+  }
+
+  @supports (-moz-appearance: none) {
+    .#{$prefix}--data-table-v2 td {
+      background-clip: padding-box; // fix to show borders in ff
+    }
   }
 
   .#{$prefix}--data-table-v2 td:first-of-type {
