@@ -155,7 +155,7 @@
     @if not feature-flag-enabled('components-x') {
       @include typescale('zeta');
     } @else {
-      @include type-style('heading-01');
+      @include type-style('body-short-01');
     }
     margin-right: $spacing-lg;
   }
@@ -165,7 +165,7 @@
     @if not feature-flag-enabled('components-x') {
       @include typescale('zeta');
     } @else {
-      @include type-style('heading-01');
+      @include type-style('body-short-01');
     }
     color: $ui-01;
     border-bottom: 1px solid transparent;
