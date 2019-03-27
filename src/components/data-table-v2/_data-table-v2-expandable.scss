@@ -187,6 +187,12 @@
   tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2:hover + tr[data-child-row] td {
     background-color: $hover-field;
     color: $text-01;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  //hovering on expanded child row
+  tr.#{$prefix}--expandable-row--hover-v2 + tr[data-child-row] td {
+    border-bottom: 1px solid $ui-03;
   }
 
   //hovering on expanded child row (class added to parent)
@@ -201,13 +207,8 @@
     color: $text-01;
   }
 
-  tr.#{$prefix}--expandable-row--hover-v2:first-of-type td {
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $ui-03;
-  }
-
   tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2.#{$prefix}--expandable-row--hover-v2 td:first-of-type {
-    border-bottom: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
