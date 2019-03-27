@@ -18,6 +18,8 @@ Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/m
 
 ## Components
 
+**IMPORTANT NOTE**: `v9` component styles will be _removed_ soon after the initial `v10` release.
+
 | Component          | v10                                                                   |
 | ------------------ | --------------------------------------------------------------------- |
 | Accordion          | [Migrate](../../src/components/accordion/migrate-to-10.x.md)          |
@@ -69,6 +71,8 @@ Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/m
 | Unified Header     | Removed                                                               |
 
 ## Styles
+
+**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be _removed_ soon after the initial `v10` release.
 
 | `scss` path         | v10                                                                           |
 | ------------------- | ----------------------------------------------------------------------------- |
