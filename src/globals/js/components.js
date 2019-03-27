@@ -15,7 +15,6 @@ export { default as Loading } from '../../components/loading/loading';
 export { default as InlineLoading } from '../../components/inline-loading/inline-loading';
 export { default as Dropdown } from '../../components/dropdown/dropdown';
 export { default as NumberInput } from '../../components/number-input/number-input';
-export { default as DataTable } from '../../components/data-table/data-table';
 export { default as DataTableV2 } from '../../components/data-table-v2/data-table-v2';
 export { default as DatePicker } from '../../components/date-picker/date-picker';
 export { default as Pagination } from '../../components/pagination/pagination';
