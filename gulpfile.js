@@ -138,8 +138,8 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-const useBreakingChanges = !!cloptions.useBreakingChanges;
-let useExperimentalFeatures = !!cloptions.useExperimentalFeatures;
+const { useBreakingChanges } = cloptions;
+let { useExperimentalFeatures } = cloptions;
 
 gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
   if (cloptions.rollup) {
@@ -173,17 +173,20 @@ gulp.task('scripts:dev:deploy', ['scripts:dev'], cb => {
 });
 
 gulp.task('scripts:dev:feature-flags', () => {
-  const replaceTable = {
-    breakingChangesX: useBreakingChanges,
-    componentsX: useExperimentalFeatures,
-    grid: useExperimentalFeatures,
-  };
+  const replaceTable = {};
+  if (typeof useBreakingChanges !== 'undefined') {
+    replaceTable.breakingChangesX = useBreakingChanges;
+  }
+  if (typeof useExperimentalFeatures !== 'undefined') {
+    replaceTable.componentsX = useExperimentalFeatures;
+    replaceTable.grid = useExperimentalFeatures;
+  }
   return readFile(path.resolve(__dirname, 'src/globals/js/feature-flags.js'))
     .then(contents =>
       contents
         .toString()
         .replace(/(exports\.([\w-_]+)\s*=\s*)(true|false)/g, (match, definition, name) =>
-          !(name in replaceTable) ? match : `${definition}${replaceTable[name]}`
+          !(name in replaceTable) ? match : `${definition}${!!replaceTable[name]}`
         )
     )
     .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));
@@ -342,19 +345,26 @@ gulp.task('sass:compiled', () => {
   );
 });
 
-gulp.task('sass:dev', () =>
-  gulp
+gulp.task('sass:dev', () => {
+  const flags = {
+    'grid-columns-16': false,
+    'ui-shell': true,
+  };
+  if (typeof useBreakingChanges !== 'undefined') {
+    flags['breaking-changes-x'] = useBreakingChanges;
+  }
+  if (typeof useExperimentalFeatures !== 'undefined') {
+    flags['components-x'] = useExperimentalFeatures;
+    flags.grid = useExperimentalFeatures;
+  }
+  return gulp
     .src('demo/scss/demo.scss')
     .pipe(sourcemaps.init())
     .pipe(
       header(`
-        $feature-flags: (
-          components-x: ${useExperimentalFeatures},
-          breaking-changes-x: ${useBreakingChanges},
-          grid: ${useExperimentalFeatures},
-          grid-columns-16: false,
-          ui-shell: true,
-        );
+        $feature-flags: (${Object.keys(flags)
+          .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
+          .join(', ')});
       `)
     )
     .pipe(
@@ -370,12 +380,12 @@ gulp.task('sass:dev', () =>
     )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
-    .pipe(browserSync.stream({ match: '**/*.css' }))
-);
+    .pipe(browserSync.stream({ match: '**/*.css' }));
+});
 
 gulp.task('sass:dev:server', () => {
   const debouncedSassBuild = debounce(switchTo => {
-    if (!useExperimentalFeatures !== !switchTo) {
+    if (typeof useExperimentalFeatures === 'undefined' || !useExperimentalFeatures !== !switchTo) {
       useExperimentalFeatures = switchTo;
       gulp.start('sass:dev');
       gulp.start('scripts:dev:feature-flags');
