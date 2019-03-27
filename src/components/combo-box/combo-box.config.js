@@ -57,14 +57,16 @@ module.exports = {
               items,
             },
           },
-          {
-            name: 'inline',
-            label: 'Inline',
-            context: {
-              inline: true,
-              items,
-            },
-          },
+          // this variant is not part of our current spec
+          // but it is supported (because of list-box) if needed
+          // {
+          //   name: 'inline',
+          //   label: 'Inline',
+          //   context: {
+          //     inline: true,
+          //     items,
+          //   },
+          // },
         ]
       : [
           {
