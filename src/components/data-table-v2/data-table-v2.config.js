@@ -302,7 +302,7 @@ const rowsExpandable = [
   {
     sectionContent:
       /* eslint-disable max-len */
-      ` <p>This content area is left to be formatted by the implementer. Please follow spacing and alignment guidelines to make sure your layout is aligned with the IBM design language.</p>
+      ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
     `,
     section: true,
     select: {
@@ -321,7 +321,7 @@ const rowsExpandable = [
   {
     sectionContent:
       /* eslint-disable max-len */
-      ` <p>This content area is left to be formatted by the implementer. Please follow spacing and alignment guidelines to make sure your layout is aligned with the IBM design language.</p>
+      ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
     `,
     select: {
       id: `${prefix}--checkbox-12`,
