@@ -12,6 +12,12 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
+
+function getRandomInt(min, max, n) {
+  return Math.floor(randoms[n % 3] * (max - min + 1)) + min;
+}
+
 const SkeletonText = ({
   paragraph,
   lineCount,
@@ -32,14 +38,10 @@ const SkeletonText = ({
 
   const widthPercent = width.includes('%');
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   if (widthPercent && paragraph) {
     const lines = [];
     for (var i = 0; i < lineCount; i++) {
-      const randomWidth = getRandomInt(0, 75) + 'px';
+      const randomWidth = getRandomInt(0, 75, i) + 'px';
       lines.push(
         <p
           className={skeletonTextClasses}
@@ -55,7 +57,7 @@ const SkeletonText = ({
   if (widthPx && paragraph) {
     const lines = [];
     for (var j = 0; j < lineCount; j++) {
-      const randomWidth = getRandomInt(widthNum - 75, widthNum) + 'px';
+      const randomWidth = getRandomInt(widthNum - 75, widthNum, j) + 'px';
       lines.push(
         <p
           className={skeletonTextClasses}
