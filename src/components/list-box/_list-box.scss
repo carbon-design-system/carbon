@@ -630,6 +630,10 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box__menu-item:first-of-type .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
   .#{$prefix}--list-box__menu-item:hover .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
   }
