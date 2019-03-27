@@ -13,7 +13,7 @@
 @import '../../globals/scss/vars';
 @import '../list-box/list-box';
 
-@include exports('multi-select') {
+@mixin multiselect {
   .#{$prefix}--multi-select.#{$prefix}--combo-box > .#{$prefix}--list-box__field {
     padding: 0 1rem;
   }
@@ -21,5 +21,30 @@
   .#{$prefix}--multi-select.#{$prefix}--combo-box input[role='combobox'] {
     padding: 0;
     outline: none;
+  }
+}
+
+@mixin multiselect--x {
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
+    min-width: auto;
+  }
+
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item__option .#{$prefix}--checkbox-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox:checked ~ .#{$prefix}--checkbox-label-text {
+    color: $text-01;
+  }
+}
+
+@include exports('multi-select') {
+  @if feature-flag-enabled('components-x') {
+    @include multiselect--x;
+  } @else {
+    @include multiselect;
   }
 }
