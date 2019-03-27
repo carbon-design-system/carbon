@@ -111,6 +111,10 @@
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-v2 tr.#{$prefix}--parent-row-v2 {
+    height: rem(47px);
+  }
+
   // expanded
   tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 td:first-of-type {
     border-bottom: 1px solid $ui-01; // first td doesn't have a visible border
@@ -218,7 +222,7 @@
     width: 2.5rem;
     min-width: 2.5rem;
     vertical-align: top;
-    padding-top: $spacing-03;
+    padding-top: rem(7px);
     padding-bottom: 0;
   }
 
