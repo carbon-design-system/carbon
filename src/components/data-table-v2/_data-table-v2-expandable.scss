@@ -287,7 +287,7 @@
   //----------------------------------------------------------------------------
   // Selected
   //----------------------------------------------------------------------------
-  // collapsed
+  // parent collapsed
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected:first-of-type td {
     background: $ui-03;
     border-top: 1px solid $active-01;
@@ -307,20 +307,20 @@
     border-bottom: 1px solid $ui-03;
   }
 
-  // collapsed hover
+  // parent collapsed hover
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected:not(.#{$prefix}--expandable-row-v2):hover td {
     background: $hover-selected-ui;
     border-top: 1px solid $hover-selected-ui;
     border-bottom: 1px solid $hover-selected-ui;
   }
 
-  //expanded
+  // parent expanded
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2 td,
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2 td:first-of-type {
     border-bottom: 1px solid $ui-03; //no visible border when expanded
   }
 
-  // expanded hover
+  // parent expanded hover
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2:hover td,
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2:hover td:first-of-type {
     background: $hover-selected-ui;
@@ -335,17 +335,18 @@
     border-bottom: 1px solid $hover-selected-ui;
   }
 
+  // child row expanded
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2 + tr[data-child-row] td {
+    color: $text-01;
+    background-color: $hover-field;
+    border-bottom: 1px solid $active-ui;
+    border-top: 1px solid $active-ui;
+  }
+
+  // child row expanded hover
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2:hover + tr[data-child-row] td,
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 + tr[data-child-row] td {
     background: $ui-03;
-    border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $ui-03;
-  }
-
-  // child row
-  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected + tr[data-child-row] td {
-    color: $text-01;
-    background-color: $hover-field;
   }
 }
 
