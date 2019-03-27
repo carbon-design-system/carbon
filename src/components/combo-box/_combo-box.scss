@@ -23,6 +23,14 @@
 @mixin combo-box--x {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
     padding-right: $carbon--spacing-09;
+
+    &::placeholder {
+      color: $text-02;
+    }
+
+    &[disabled]::placeholder {
+      color: $disabled-02;
+    }
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid] .#{$prefix}--text-input {
