@@ -33,11 +33,6 @@
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
     padding: 0;
   }
-
-  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon,
-  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon--open {
-    display: none;
-  }
 }
 
 @include exports('combo-box') {
