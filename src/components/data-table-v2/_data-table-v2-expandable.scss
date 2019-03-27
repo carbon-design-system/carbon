@@ -313,6 +313,13 @@
     border-bottom: 1px solid $hover-selected-ui;
   }
 
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row-v2:hover + tr[data-child-row] td,
+  tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected.#{$prefix}--expandable-row--hover-v2 + tr[data-child-row] td {
+    background: $ui-03;
+    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $ui-03;
+  }
+
   // child row
   tr.#{$prefix}--parent-row-v2.#{$prefix}--data-table-v2--selected + tr[data-child-row] td {
     color: $text-01;
