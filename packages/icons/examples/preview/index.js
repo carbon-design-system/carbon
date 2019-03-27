@@ -1,6 +1,7 @@
 import 'url-polyfill';
 
 import { getAttributes } from '@carbon/icon-helpers';
+import Prism from 'prismjs';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import meta from '../../meta.json';
@@ -8,98 +9,166 @@ import meta from '../../meta.json';
 const GITHUB_ICON_URL =
   'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';
 
-const MODES = {
-  expanded: 'expanded',
-  minimal: 'minimal',
-  standard: 'standard',
-};
-
 function App({ meta }) {
-  const [mode, setMode] = useState(MODES.standard);
-  const headers = [
-    'Name',
-    'Size',
-    'Preview',
-    mode !== MODES.minimal && 'Download',
-    mode !== MODES.minimal && 'GitHub',
-    mode !== MODES.minimal && 'Issues',
-    mode === MODES.expanded && 'Module',
-    mode === MODES.expanded && 'Relative',
-  ].filter(Boolean);
+  const headers = ['Name', 'Size', 'Preview', 'GitHub', 'Issues', 'Path'];
 
   return (
     <React.Fragment>
-      <div>
-        {`Viewing mode: ${mode}`}
-        <div>
-          <button onClick={() => setMode(MODES.minimal)}>Minimal</button>
-          <button onClick={() => setMode(MODES.standard)}>Standard</button>
-          <button onClick={() => setMode(MODES.expanded)}>Expanded</button>
+      <div className="bx--grid">
+        <div className="bx--row">
+          <div className="bx--col">
+            <h1>Icons</h1>
+          </div>
+        </div>
+        <div className="bx--row">
+          <div className="bx--col-sm-4 bx--col-md-6 bx--col-lg-6">
+            <h2>Usage</h2>
+            <p>
+              Icons in Carbon are now provided through a set of packages that
+              let you use icons in various frameworks. We currently support:
+            </p>
+            <ul>
+              <li>
+                <a href="//www.npmjs.com/package/@carbon/icons">Vanilla</a>
+              </li>
+              <li>
+                <a href="//www.npmjs.com/package/@carbon/icons-angular">
+                  Angular
+                </a>
+              </li>
+              <li>
+                <a href="//www.npmjs.com/package/@carbon/icons-react">React</a>
+              </li>
+              <li>
+                <a href="//www.npmjs.com/package/@carbon/icons-vue">Vue</a>
+              </li>
+            </ul>
+            <p>
+              In order to use icons in alongside these packages, you will need a
+              couple of pieces of information, namely the icon size and name.
+              For most product UIs, you will want to use the 16x16 icons.
+            </p>
+            <em>
+              Note: You can share links to specific icons by clicking on the
+              name of an icon in the table below and sharing that URL with a
+              collaborator.
+            </em>
+            <p>
+              In order to make use of an icon, you should look at the{' '}
+              <strong>Path</strong> header. This header will provide you with
+              the path to import the module in code. In general, the structure
+              of how to import an icon will follow:
+            </p>
+            <pre>
+              <code
+                className="language-js"
+                dangerouslySetInnerHTML={{
+                  __html: Prism.highlight(
+                    `import IconName from '@carbon/icon-<package>/es/<path-to-icon>/<size>';`,
+                    Prism.languages.javascript,
+                    'javascript'
+                  ),
+                }}
+              />
+            </pre>
+            <p>
+              For example, if I wanted to import the <a href="#16%2Fadd">add</a>{' '}
+              icon in React, it would look like:
+            </p>
+            <pre>
+              <code
+                className="language-js"
+                dangerouslySetInnerHTML={{
+                  __html: Prism.highlight(
+                    `import IconName from '@carbon/icon-react/es/add/16';`,
+                    Prism.languages.javascript,
+                    'javascript'
+                  ),
+                }}
+              />
+            </pre>
+            <p>
+              The path information comes from the table below under the{' '}
+              <strong>Path</strong> header. If you would like to use CommonJS or
+              UMD modules, you can replace the path value of <code>es</code>{' '}
+              with either <code>lib</code> or <code>umd</code> respectively.
+            </p>
+            <p>
+              For specific guidance on how to use these icons, checkout each
+              package's README to learn more!
+            </p>
+          </div>
         </div>
       </div>
-      <Table headers={headers}>
-        {meta.map(info => {
-          const {
-            basename,
-            descriptor,
-            filename,
-            moduleName,
-            original,
-            outputOptions,
-            prefix,
-            size,
-          } = info;
-          const { attrs } = descriptor;
-          const svg = js2svg(descriptor);
-          const name = original
-            ? prefix.join('/') + '/' + basename + ` (Downsized to ${size})`
-            : prefix.join('/') + '/' + basename;
-          const id = window.encodeURIComponent(name);
+      <section>
+        <div className="bx--grid">
+          <div className="bx--row">
+            <div className="bx--col">
+              <Table headers={headers}>
+                {meta.map(info => {
+                  const {
+                    basename,
+                    descriptor,
+                    filename,
+                    moduleName,
+                    original,
+                    outputOptions,
+                    prefix,
+                    size,
+                  } = info;
+                  const { attrs } = descriptor;
+                  const svg = js2svg(descriptor);
+                  const name = original
+                    ? prefix.join('/') +
+                      '/' +
+                      basename +
+                      ` (Downsized to ${size})`
+                    : prefix.join('/') + '/' + basename;
+                  const id = window.encodeURIComponent(name);
+                  const source = [GITHUB_ICON_URL, ...prefix, filename].join(
+                    '/'
+                  );
 
-          const download = ['..', '..', 'svg', ...prefix, filename].join('/');
-          const source = [GITHUB_ICON_URL, ...prefix, filename].join('/');
-
-          return (
-            <tr key={id} id={id}>
-              <td className="icon-name">
-                <a href={`#${id}`}>{name}</a>
-              </td>
-              <td className="icon-size">{`${attrs.width}x${attrs.height}`}</td>
-              <td className="icon-preview-container">
-                <div className="icon-preview">{svg}</div>
-              </td>
-              {!(mode === MODES.minimal) && (
-                <React.Fragment>
-                  <td>
-                    <a href={download} download>
-                      Download
-                    </a>
-                  </td>
-                  <td>
-                    <a href={source} rel="noopener noreferrer" target="_blank">
-                      Source
-                    </a>
-                  </td>
-                  <td>
-                    <a
-                      href={getBugTemplate(info, source)}
-                      rel="noopener noreferrer"
-                      target="_blank">
-                      Template
-                    </a>
-                  </td>
-                </React.Fragment>
-              )}
-              {mode === MODES.expanded && (
-                <React.Fragment>
-                  <td>{moduleName}</td>
-                  <td>{outputOptions.file}</td>
-                </React.Fragment>
-              )}
-            </tr>
-          );
-        })}
-      </Table>
+                  return (
+                    <tr key={id} id={id}>
+                      <td className="icon-name">
+                        <a href={`#${id}`}>{name}</a>
+                      </td>
+                      <td className="icon-size">{`${attrs.width}x${
+                        attrs.height
+                      }`}</td>
+                      <td className="icon-preview-container">
+                        <div className="icon-preview">{svg}</div>
+                      </td>
+                      <td>
+                        <a
+                          href={source}
+                          rel="noopener noreferrer"
+                          target="_blank">
+                          Source
+                        </a>
+                      </td>
+                      <td>
+                        <a
+                          href={getBugTemplate(info, source)}
+                          rel="noopener noreferrer"
+                          target="_blank">
+                          Create
+                        </a>
+                      </td>
+                      <td>
+                        <div className="icon-code-snippets">
+                          <code>{outputOptions.file}</code>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </Table>
+            </div>
+          </div>
+        </div>
+      </section>
     </React.Fragment>
   );
 }
