@@ -32,6 +32,7 @@
     thead {
       @if not feature-flag-enabled('components-x') {
         @include typescale('zeta');
+        font-weight: 700;
       } @else {
         @include type-style('heading-01');
       }
