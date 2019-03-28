@@ -36,6 +36,11 @@
     align-items: center;
   }
 
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item__option > .#{$prefix}--form-item {
+    margin: 0;
+    flex-direction: row;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox:checked ~ .#{$prefix}--checkbox-label-text {
     color: $text-01;
   }
