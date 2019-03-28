@@ -3,6 +3,7 @@ import flattenOptions from '../utils/flatten-options';
 import DataTableV2 from '../../src/components/data-table-v2/data-table-v2';
 import HTML from '../../html/data-table-v2/data-table-v2.html';
 import ExpandableHTML from '../../html/data-table-v2/data-table-v2--expandable.html';
+import { componentsX } from '../../src/globals/js/feature-flags';
 
 describe('DataTableV2', function() {
   describe('Constructor', function() {
@@ -95,9 +96,21 @@ describe('DataTableV2', function() {
     it('Should toggle the row on click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('[data-child-row]')).toBeTruthy();
+      if (!componentsX) {
+        expect(document.querySelector('[data-child-row]')).toBeTruthy();
+      } else {
+        expect(
+          document.querySelector('[data-child-row]').previousElementSibling.classList.contains('bx--expandable-row-v2')
+        ).toBeTruthy();
+      }
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('[data-child-row]')).toBeFalsy();
+      if (!componentsX) {
+        expect(document.querySelector('[data-child-row]')).toBeFalsy();
+      } else {
+        expect(
+          document.querySelector('[data-child-row]').previousElementSibling.classList.contains('bx--expandable-row-v2')
+        ).toBeFalsy();
+      }
     });
 
     it('Should emit an event on row expansion click', function() {
