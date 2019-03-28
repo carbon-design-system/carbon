@@ -21,17 +21,26 @@
 }
 
 @mixin combo-box--x {
-  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon,
-  .#{$prefix}--combo-box > .#{$prefix}--list-box__field[disabled] > .#{$prefix}--list-box__menu-icon--open {
-    display: none;
+  .#{$prefix}--combo-box .#{$prefix}--text-input {
+    padding-right: $carbon--spacing-09;
+
+    &::placeholder {
+      color: $text-02;
+      opacity: 1;
+    }
+
+    &[disabled]::placeholder {
+      color: $disabled-02;
+    }
   }
 
-  .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
+  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid] .#{$prefix}--text-input {
+    padding-right: carbon--mini-units(8);
+  }
+
+  .#{$prefix}--combo-box .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
     padding: 0;
-  }
-
-  .#{$prefix}--combo-box.#{$prefix}--list-box {
-    border-bottom: none;
   }
 }
 

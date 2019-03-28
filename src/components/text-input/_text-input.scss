@@ -228,7 +228,8 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--text-input:disabled::-webkit-input-placeholder {
+  .#{$prefix}--text-input:disabled::placeholder {
+    opacity: 1;
     color: $disabled-02;
   }
 
