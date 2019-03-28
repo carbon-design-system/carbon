@@ -382,15 +382,13 @@
             {{#if column.section}}
               <td class="{{@root.prefix}}--table-expand-v2" data-event="expand">
                 <button class="{{@root.prefix}}--table-expand-v2__button">
-                  <svg class="{{@root.prefix}}--table-expand-v2__svg" width="7" height="12" viewBox="0 0 7 12">
-                    <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
-                  </svg>
+                  {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--table-expand-v2__svg') }}
                 </button>
               </td>
             <!-- checkbox td -->
             {{else if column.checkbox}}
               <td class="{{@root.prefix}}--table-column-checkbox">
-                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if (and ../../../componentsX row.disabled)}} disabled {{/if}}>
+                <input data-event="select" id="{{data.id}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{data.value}}" name="{{data.name}}" {{#if row.disabled}} disabled {{/if}}>
                 <label for="{{data.id}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{data.label}}"></label>
               </td>
             <!-- inline action td's -->
@@ -463,7 +461,7 @@
       {{#if row.sectionContent}}
           <tr class="{{@root.prefix}}--expandable-row-v2 {{@root.prefix}}--expandable-row--hidden-v2" data-child-row>
             <td colspan="{{../columns.length}}">
-              <div>
+              <div class="{{@root.prefix}}--child-row-inner-container">
                 {{{row.sectionContent}}}
               </div>
             </td>

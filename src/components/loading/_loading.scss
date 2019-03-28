@@ -82,7 +82,7 @@
   }
 
   .#{$prefix}--loading__stroke {
-    stroke: $interactive-01;
+    stroke: $interactive-04;
     stroke-dashoffset: $loading__gap;
   }
 
@@ -99,7 +99,7 @@
   }
 
   .#{$prefix}--loading--small .#{$prefix}--loading__svg {
-    stroke: $interactive-01;
+    stroke: $interactive-04;
   }
 
   .#{$prefix}--loading__background {

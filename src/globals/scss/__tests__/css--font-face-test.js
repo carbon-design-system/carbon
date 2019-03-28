@@ -7,11 +7,19 @@
  * @jest-environment node
  */
 
-const { renderSass } = require('../../../../tools/jest/scss');
+const { createSassRenderer } = require('@carbon/test-utils/scss');
+
+const render = createSassRenderer(__dirname);
+const renderClassic = content =>
+  render(`
+$feature-flags: (components-x: false, breaking-changes-x: false);
+${content}
+`);
 
 describe('_css--font-face.scss', () => {
   it('should not output CSS if $css--font-face is false', async () => {
-    const { result } = await renderSass(`
+    const { result } = await renderClassic(`
+$css--reset: false;
 $css--font-face: false;
 @import './src/globals/scss/css--font-face';
 `);
@@ -22,7 +30,8 @@ $css--font-face: false;
   });
 
   it('should output helvetica if $css--font-face is true and $css--plex is false', async () => {
-    const { result } = await renderSass(`
+    const { result } = await renderClassic(`
+$css--reset: false;
 $css--font-face: true;
 $css--plex: false;
 @import './src/globals/scss/css--font-face';
@@ -33,7 +42,8 @@ $css--plex: false;
   });
 
   it('should output plex if $css--font-face and $css--plex are true', async () => {
-    const { result } = await renderSass(`
+    const { result } = await renderClassic(`
+$css--reset: false;
 $css--font-face: true;
 $css--plex: true;
 @import './src/globals/scss/css--font-face';
@@ -45,7 +55,8 @@ $css--plex: true;
 
   describe('experimental', () => {
     it('should output @font-face blocks from elements if components-x flag is enabled', async () => {
-      const { result } = await renderSass(`
+      const { result } = await render(`
+$css--reset: false;
 $css--font-face: true;
 $css--plex: true;
 $feature-flags: (components-x: true);
