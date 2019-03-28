@@ -13,23 +13,39 @@ const resolve = require('rollup-plugin-node-resolve');
 const replace = require('rollup-plugin-replace');
 const terser = require('rollup-plugin-terser');
 const virtual = require('rollup-plugin-virtual');
+const { breakingChangesX } = require('../src/globals/js/feature-flags');
+
+const ignore = [
+  'bundle.js',
+  'index.js',
+  'globals/js/boot.js',
+  'globals/js/components.js',
+  'globals/js/watch.js',
+  '**/*.config.js',
+  // TODO: Make Flatpickr tree-shakable
+  '**/date-picker.js',
+  // Ignore tests
+  '**/__tests__/**',
+  '**/__mocks__/**',
+];
+
+if (breakingChangesX) {
+  ignore.push(
+    ...[
+      'components/carousel/**',
+      'components/data-table/**',
+      'components/fab/**',
+      'components/lightbox/**',
+      'components/left-nav/**',
+      'components/unified-header/**',
+    ]
+  );
+}
 
 const cwd = path.resolve(__dirname, '../es');
 const files = glob.sync('**/*.js', {
   cwd,
-  ignore: [
-    'bundle.js',
-    'index.js',
-    'globals/js/boot.js',
-    'globals/js/components.js',
-    'globals/js/watch.js',
-    '**/*.config.js',
-    // TODO: Make Flatpickr tree-shakable
-    '**/date-picker.js',
-    // Ignore tests
-    '**/__tests__/**',
-    '**/__mocks__/**',
-  ],
+  ignore,
 });
 
 describe('ES modules', () => {
