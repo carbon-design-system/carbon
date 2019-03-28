@@ -13,6 +13,7 @@ import ListBoxField from './ListBoxField';
 import ListBoxMenu from './ListBoxMenu';
 import { ListBoxType } from './ListBoxPropTypes';
 import childrenOf from '../../prop-types/childrenOf';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
 
@@ -42,6 +43,7 @@ const ListBox = ({
   invalidText,
   light,
   innerTabIndex,
+  isOpen,
   ...rest
 }) => {
   const className = cx({
@@ -50,6 +52,7 @@ const ListBox = ({
     [`${prefix}--list-box--inline`]: type === 'inline',
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
+    [`${prefix}--list-box--expanded`]: isOpen,
   });
   return (
     <>
@@ -74,7 +77,7 @@ const ListBox = ({
 };
 
 ListBox.propTypes = {
-  children: childrenOf([ListBoxField, ListBoxMenu]),
+  children: childrenOf([ListBoxField, ListBoxMenu, WarningFilled16]),
 
   /**
    * Specify a class name to be applied on the containing list box node

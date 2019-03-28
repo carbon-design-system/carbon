@@ -10,7 +10,9 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -43,6 +45,21 @@ export default class DropdownV2 extends React.Component {
       PropTypes.object,
       PropTypes.string,
     ]),
+
+    /**
+     * Specify whether you want the inline version of this control
+     */
+    inline: PropTypes.bool,
+
+    /**
+     * Specify if the currently selected value is invalid.
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Message which is displayed if the value is invalid.
+     */
+    invalidText: PropTypes.string,
 
     /**
      * Helper function passed to downshift that allows the library to render a
@@ -130,85 +147,117 @@ export default class DropdownV2 extends React.Component {
       type,
       initialSelectedItem,
       selectedItem,
-      light,
       id,
       titleText,
       helperText,
+      light,
+      invalid,
+      invalidText,
     } = this.props;
-    const className = cx(`${prefix}--dropdown`, containerClassName, {
-      [`${prefix}--dropdown--light`]: light,
+    const inline = type === 'inline';
+    const className = ({ isOpen }) =>
+      cx(`${prefix}--dropdown`, containerClassName, {
+        [`${prefix}--dropdown--invalid`]: invalid,
+        [`${prefix}--dropdown--open`]: isOpen,
+        [`${prefix}--dropdown--inline`]: inline,
+        [`${prefix}--dropdown--disabled`]: disabled,
+        [`${prefix}--dropdown--light`]: light,
+      });
+    const titleClasses = cx(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
     });
     const title = titleText ? (
-      <label htmlFor={id} className={`${prefix}--label`}>
+      <label htmlFor={id} className={titleClasses}>
         {titleText}
       </label>
     ) : null;
+    const helperClasses = cx(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
     const helper = helperText ? (
-      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+      <div className={helperClasses}>{helperText}</div>
     ) : null;
+    const wrapperClasses = cx(
+      `${prefix}--dropdown__wrapper`,
+      `${prefix}--list-box__wrapper`,
+      {
+        [`${prefix}--dropdown__wrapper--inline`]: inline,
+        [`${prefix}--list-box__wrapper--inline`]: inline,
+        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      }
+    );
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     const Dropdown = (
-      <Downshift
-        id={id}
-        onChange={this.handleOnChange}
-        itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}
-        selectedItem={selectedItem}>
-        {({
-          isOpen,
-          itemToString,
-          selectedItem,
-          highlightedIndex,
-          getRootProps,
-          getButtonProps,
-          getItemProps,
-          getLabelProps,
-        }) => (
-          <ListBox
-            type={type}
-            className={className}
-            disabled={disabled}
-            ariaLabel={ariaLabel}
-            {...getRootProps({ refKey: 'innerRef' })}>
-            <ListBox.Field {...getButtonProps({ disabled })}>
-              <span
-                className={`${prefix}--list-box__label`}
-                {...getLabelProps()}>
-                {selectedItem ? itemToString(selectedItem) : label}
-              </span>
-              <ListBox.MenuIcon isOpen={isOpen} />
-            </ListBox.Field>
-            {isOpen && (
-              <ListBox.Menu>
-                {items.map((item, index) => (
-                  <ListBox.MenuItem
-                    key={itemToString(item)}
-                    isActive={selectedItem === item}
-                    isHighlighted={
-                      highlightedIndex === index || selectedItem === item
-                    }
-                    {...getItemProps({ item, index })}>
-                    {itemToElement ? (
-                      <ItemToElement key={itemToString(item)} {...item} />
-                    ) : (
-                      itemToString(item)
-                    )}
-                  </ListBox.MenuItem>
-                ))}
-              </ListBox.Menu>
-            )}
-          </ListBox>
-        )}
-      </Downshift>
-    );
-    return title || helper ? (
       <>
         {title}
-        {helper}
-        {Dropdown}
+        {!inline && helper}
+        <Downshift
+          id={id}
+          onChange={this.handleOnChange}
+          itemToString={itemToString}
+          defaultSelectedItem={initialSelectedItem}
+          selectedItem={selectedItem}>
+          {({
+            isOpen,
+            itemToString,
+            selectedItem,
+            highlightedIndex,
+            getRootProps,
+            getButtonProps,
+            getItemProps,
+            getLabelProps,
+          }) => (
+            <ListBox
+              type={type}
+              className={className({ isOpen })}
+              disabled={disabled}
+              ariaLabel={ariaLabel}
+              isOpen={isOpen}
+              invalid={invalid}
+              invalidText={invalidText}
+              {...getRootProps({ refKey: 'innerRef' })}>
+              {componentsX && invalid && (
+                <WarningFilled16
+                  className={`${prefix}--list-box__invalid-icon`}
+                />
+              )}
+              <ListBox.Field {...getButtonProps({ disabled })}>
+                <span
+                  className={`${prefix}--list-box__label`}
+                  {...getLabelProps()}>
+                  {selectedItem ? itemToString(selectedItem) : label}
+                </span>
+                <ListBox.MenuIcon isOpen={isOpen} />
+              </ListBox.Field>
+              {isOpen && (
+                <ListBox.Menu>
+                  {items.map((item, index) => (
+                    <ListBox.MenuItem
+                      key={itemToString(item)}
+                      isActive={selectedItem === item}
+                      isHighlighted={
+                        highlightedIndex === index || selectedItem === item
+                      }
+                      {...getItemProps({ item, index })}>
+                      {itemToElement ? (
+                        <ItemToElement key={itemToString(item)} {...item} />
+                      ) : (
+                        itemToString(item)
+                      )}
+                    </ListBox.MenuItem>
+                  ))}
+                </ListBox.Menu>
+              )}
+            </ListBox>
+          )}
+        </Downshift>
       </>
+    );
+    return componentsX ? (
+      <div className={wrapperClasses}>{Dropdown}</div>
     ) : (
       Dropdown
     );

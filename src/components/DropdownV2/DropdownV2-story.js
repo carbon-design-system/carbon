@@ -47,12 +47,17 @@ const types = {
 
 const props = () => ({
   type: select('Dropdown type (type)', types, 'default'),
-  label: text('Label (label)', 'Label'),
+  label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   titleText: text('Title (titleText)', 'This is not a dropdown title.'),
   helperText: text('Helper text (helperText)', 'This is not some helper text.'),
+  invalid: boolean('Show form validation UI (invalid)', false),
+  invalidText: text(
+    'Form validation UI content (invalidText)',
+    'A valid value is required'
+  ),
 });
 
 const itemToElement = item => {

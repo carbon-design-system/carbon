@@ -65,6 +65,7 @@ exports[`DropdownV2 should render 1`] = `
       className="bx--dropdown"
       disabled={false}
       innerRef={[Function]}
+      isOpen={false}
       type="default"
     >
       <div
@@ -235,14 +236,15 @@ exports[`DropdownV2 should render DropdownItem components 1`] = `
   >
     <ListBox
       ariaLabel="Choose an item"
-      className="bx--dropdown"
+      className="bx--dropdown bx--dropdown--open"
       disabled={false}
       innerRef={[Function]}
+      isOpen={true}
       type="default"
     >
       <div
         aria-label="Choose an item"
-        className="bx--dropdown bx--list-box"
+        className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="listbox"
@@ -649,14 +651,15 @@ exports[`DropdownV2 should render custom item components 1`] = `
   >
     <ListBox
       ariaLabel="Choose an item"
-      className="bx--dropdown"
+      className="bx--dropdown bx--dropdown--open"
       disabled={false}
       innerRef={[Function]}
+      isOpen={true}
       type="default"
     >
       <div
         aria-label="Choose an item"
-        className="bx--dropdown bx--list-box"
+        className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="listbox"
@@ -955,14 +958,15 @@ exports[`DropdownV2 should render with strings as items 1`] = `
   >
     <ListBox
       ariaLabel="Choose an item"
-      className="bx--dropdown"
+      className="bx--dropdown bx--dropdown--open"
       disabled={false}
       innerRef={[Function]}
+      isOpen={true}
       type="default"
     >
       <div
         aria-label="Choose an item"
-        className="bx--dropdown bx--list-box"
+        className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="listbox"

@@ -9,6 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -25,7 +26,13 @@ const ListBoxMenuItem = ({ children, isActive, isHighlighted, ...rest }) => {
   });
   return (
     <div className={className} {...rest}>
-      {children}
+      {componentsX ? (
+        <div className={`${prefix}--list-box__menu-item__option`}>
+          {children}
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
 };
