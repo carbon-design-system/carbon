@@ -26,14 +26,6 @@ $feature-flags: (components-x: false, breaking-changes-x: false);
 ${content}
 `);
 
-const isClassic = async () => {
-  const { calls } = await renderClassic(`
-@import '../../scss/functions';
-$t: test(feature-flag-enabled('breaking-changes-x'));
-`);
-  return !convert(calls[0][0]);
-};
-
 describe('_typography.scss', () => {
   describe.each(variables)('$%s', name => {
     it('should be exported', async () => {
@@ -78,9 +70,7 @@ ${tests.join('\n')}
   @include typescale('<unknown>');
 }
 `);
-      // `output.warn` is called twice now since feature flags have diverged in
-      // v10
-      expect(output.warn).toHaveBeenCalledTimes((await isClassic()) ? 1 : 2);
+      expect(output.warn).toHaveBeenCalledTimes(1);
     });
   });
 

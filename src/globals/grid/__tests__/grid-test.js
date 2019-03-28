@@ -28,14 +28,6 @@ $feature-flags: (components-x: false, breaking-changes-x: false, grid: false);
 ${content}
 `);
 
-const isClassic = async () => {
-  const { calls } = await renderClassic(`
-@import '../../scss/functions';
-$t: test(feature-flag-enabled('breaking-changes-x'));
-`);
-  return !convert(calls[0][0]);
-};
-
 describe('_grid.scss', () => {
   it('should export grid variables', async () => {
     const { calls } = await renderClassic(`
@@ -113,8 +105,7 @@ $t: test('unknown', breakpoint('unknown'));
     }
 
     // `breakpoint` is expected to warn on the unknown test case
-    // Should be called twice now since feature flags have diverged in v10
-    expect(output.warn).toHaveBeenCalledTimes((await isClassic()) ? 1 : 2);
+    expect(output.warn).toHaveBeenCalledTimes(1);
 
     // This should fail because `breakpoint('unknown')` does not return a
     // value

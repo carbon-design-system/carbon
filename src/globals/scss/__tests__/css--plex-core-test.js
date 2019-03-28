@@ -18,14 +18,6 @@ $feature-flags: (components-x: false, breaking-changes-x: false);
 ${content}
 `);
 
-const isClassic = async () => {
-  const { calls } = await renderClassic(`
-@import '../../scss/functions';
-$t: test(feature-flag-enabled('breaking-changes-x'));
-`);
-  return !convert(calls[0][0]);
-};
-
 describe('_css--plex-core', () => {
   it.each(variables)('should export the variable $%s', async name => {
     const { calls } = await renderClassic(`
@@ -49,8 +41,7 @@ $value: test($${name});
 };
 `);
 
-      // This should be called twice now that feature flags have diverged in v10
-      expect(output.warn).toHaveBeenCalledTimes((await isClassic()) ? 1 : 2);
+      expect(output.warn).toHaveBeenCalledTimes(1);
     });
 
     it('should not warn if $font-path is set and does not contain unpkg', async () => {
@@ -62,8 +53,7 @@ $font-path: 'https://my-custom-cdn.com';
   $test: true;
 };
 `);
-      // In v10, one call comes from feature flag divergence
-      expect(output.warn).toHaveBeenCalledTimes((await isClassic()) ? 0 : 1);
+      expect(output.warn).toHaveBeenCalledTimes(0);
     });
   });
 
