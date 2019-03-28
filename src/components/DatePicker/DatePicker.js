@@ -257,7 +257,7 @@ export default class DatePicker extends Component {
       if (typeof appendTo === 'string' && !breakingChangesX) {
         warning(
           false,
-          `The DatePicker appendTo prop will be deprecated in Carbon X. 
+          `CSS selector (string) for the DatePicker appendTo prop will be deprecated in Carbon X. 
           - If you were using appendTo for styling, consider using a className.
           - If you were using appendTo for attaching to a specific DOM node, consider a React portal.`
         );
