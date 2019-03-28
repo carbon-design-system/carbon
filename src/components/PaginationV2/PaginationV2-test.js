@@ -96,8 +96,8 @@ describe('Pagination', () => {
         const label = left.find('.bx--pagination__text').at(1);
         expect(label.text()).toBe(
           !componentsX
-            ? '\u00a0|\u00a0\u00a01-5 of 50 items'
-            : '1-5 of 50 items'
+            ? '\u00a0|\u00a0\u00a01–5 of 50 items'
+            : '1–5 of 50 items'
         );
       });
 
@@ -139,7 +139,7 @@ describe('Pagination', () => {
         it('should show the item range without the total', () => {
           const label = left.find('.bx--pagination__text').at(1);
           expect(label.text()).toBe(
-            !componentsX ? '\u00a0|\u00a0\u00a01-5 items' : '1-5 items'
+            !componentsX ? '\u00a0|\u00a0\u00a01–5 items' : '1–5 items'
           );
         });
       });
@@ -169,8 +169,8 @@ describe('Pagination', () => {
           const labels = pager.find('.bx--pagination__text');
           expect(labels.at(1).text()).toBe(
             !componentsX
-              ? '\u00a0|\u00a0\u00a01-10 of 50 items'
-              : '1-10 of 50 items'
+              ? '\u00a0|\u00a0\u00a01–10 of 50 items'
+              : '1–10 of 50 items'
           );
           expect(labels.at(2).text()).toBe(
             !componentsX ? '1 of 5 pages' : 'of 5 pages'
@@ -263,7 +263,7 @@ describe('Pagination', () => {
         );
         const labels = pager.find('.bx--pagination__text');
         expect(labels.at(1).text()).toBe(
-          !componentsX ? '\u00a0|\u00a0\u00a00-0 of 0 items' : '0-0 of 0 items'
+          !componentsX ? '\u00a0|\u00a0\u00a00–0 of 0 items' : '0–0 of 0 items'
         );
         expect(labels.at(2).text()).toBe(
           !componentsX ? '1 of 1 pages' : 'of 1 pages'

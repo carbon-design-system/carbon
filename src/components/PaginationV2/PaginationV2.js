@@ -140,7 +140,7 @@ export default class PaginationV2 extends Component {
 
   static defaultProps = {
     backwardText: 'Previous page',
-    itemRangeText: (min, max, total) => `${min}-${max} of ${total} items`,
+    itemRangeText: (min, max, total) => `${min}–${max} of ${total} items`,
     forwardText: 'Next page',
     itemsPerPageText: 'Items per page:',
     pageNumberText: 'Page Number',
@@ -151,7 +151,7 @@ export default class PaginationV2 extends Component {
     pagesUnknown: false,
     isLastPage: false,
     pageInputDisabled: false,
-    itemText: (min, max) => `${min}-${max} items`,
+    itemText: (min, max) => `${min}–${max} items`,
     pageText: page => `page ${page}`,
   };
 
