@@ -271,6 +271,12 @@
     padding-bottom: rem(13px);
   }
 
+  @supports (-moz-appearance: none) {
+    .#{$prefix}--data-table-v2 td {
+      background-clip: padding-box; // fix to show borders in ff
+    }
+  }
+
   .#{$prefix}--data-table-v2 td:first-of-type {
     padding-left: $spacing-05;
   }
@@ -323,6 +329,11 @@
   .#{$prefix}--data-table-v2 th.#{$prefix}--table-column-checkbox {
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
+  }
+
+  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-checkbox {
+    padding-top: rem(11px);
+    padding-bottom: 0;
   }
 
   th.#{$prefix}--table-column-checkbox:hover {
