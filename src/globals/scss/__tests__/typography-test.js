@@ -27,7 +27,7 @@ ${content}
 `);
 
 const isClassic = async () => {
-  const { calls } = await renderClassic(`
+  const { calls } = await render(`
 @import '../../scss/functions';
 $t: test(feature-flag-enabled('breaking-changes-x'));
 `);
