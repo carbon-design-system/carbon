@@ -7,21 +7,14 @@
  * @jest-environment node
  */
 
-const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
+const { convert, renderSass } = require('../../../../tools/jest/scss');
 
 const variables = ['font-path', 'unicodes', 'families', 'fallbacks', 'weights'];
-const render = createSassRenderer(__dirname);
-const renderClassic = content =>
-  render(`
-$css--reset: false;
-$feature-flags: (components-x: false, breaking-changes-x: false);
-${content}
-`);
 
 describe('_css--plex-core', () => {
   it.each(variables)('should export the variable $%s', async name => {
-    const { calls } = await renderClassic(`
-@import '../css--plex-core';
+    const { calls } = await renderSass(`
+@import './src/globals/scss/css--plex-core';
 
 $c: test(global-variable-exists(${name}));
 $value: test($${name});
@@ -33,37 +26,33 @@ $value: test($${name});
 
   describe('check-default-font-path', () => {
     it('should warn if the default $font-path uses unpkg', async () => {
-      const { output } = await renderClassic(`
-@import '../css--plex-core';
+      const { output } = await renderSass(`
+@import './src/globals/scss/css--plex-core';
 
 @include check-default-font-path() {
   $test: true;
 };
 `);
-
-      // This should be called twice now that feature flags have diverged in v10
-      expect(output.warn).toHaveBeenCalledTimes(2);
+      expect(output.warn).toHaveBeenCalledTimes(1);
     });
 
-    fit('should not warn if $font-path is set and does not contain unpkg', async () => {
-      const { output } = await renderClassic(`
+    it('should not warn if $font-path is set and does not contain unpkg', async () => {
+      const { output } = await renderSass(`
 $font-path: 'https://my-custom-cdn.com';
-@import '../css--plex-core';
+@import './src/globals/scss/css--plex-core';
 
 @include check-default-font-path() {
   $test: true;
 };
 `);
-      // This should be called only once becaues feature flags have diverged in
-      // v10
-      expect(output.warn).toHaveBeenCalledTimes(1);
+      expect(output.warn).not.toHaveBeenCalled();
     });
   });
 
   describe('plex-font-face', () => {
     it('should output @font-face files based on families, weights, and unicodes', async () => {
-      const { result } = await renderClassic(`
-@import '../css--plex-core';
+      const { result } = await renderSass(`
+@import './src/globals/scss/css--plex-core';
 
 @include plex-font-face();
 `);
