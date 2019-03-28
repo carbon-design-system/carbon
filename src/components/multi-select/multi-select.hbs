@@ -49,7 +49,7 @@
         {{#each items}}
         <div class="{{@root.prefix}}--list-box__menu-item">
           <div class="{{@root.prefix}}--list-box__menu-item__option">
-            <div class="{{@root.prefix}}--checkbox-wrapper">
+            <div class="{{@root.prefix}}--form-item {{@root.prefix}}--checkbox-wrapper">
               <label title="{{label}}" class="{{@root.prefix}}--checkbox-label">
                 <input type="checkbox" name="Option 1" readonly="" class="{{@root.prefix}}--checkbox" id="{{id}}"
                   value="on" {{#if selected}} checked{{/if}}>

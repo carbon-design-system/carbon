@@ -1,6 +1,7 @@
 import FileUploader from '../../src/components/file-uploader/file-uploader';
 import HTML from '../../html/file-uploader/file-uploader.html';
 import flattenOptions from '../utils/flatten-options';
+import { componentsX } from '../../demo/feature-flags';
 
 describe('File Uploader', function() {
   describe('Constructor', function() {
@@ -137,7 +138,7 @@ describe('File Uploader', function() {
       const div = document.createElement('div');
       div.innerHTML = closeButtonHTML;
       document.body.appendChild(div);
-      const closeButtonElement = document.querySelector('[width="16"]');
+      const closeButtonElement = document.querySelector(!componentsX ? '[width="16"]' : 'button[aria-label="close"]');
 
       expect(
         closeButtonElement
