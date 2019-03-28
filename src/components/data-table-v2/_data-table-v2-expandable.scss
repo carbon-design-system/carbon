@@ -111,8 +111,9 @@
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-v2 tr.#{$prefix}--parent-row-v2 {
-    height: rem(47px);
+  //first row top border
+  .#{$prefix}--data-table-v2 tr.#{$prefix}--parent-row-v2:first-of-type td {
+    border-top: 1px solid $ui-03;
   }
 
   //----------------------------------------------------------------------------
@@ -154,7 +155,7 @@
   }
 
   tr.#{$prefix}--parent-row-v2.#{$prefix}--expandable-row-v2 + tr[data-child-row] td {
-    padding-bottom: $spacing-06;
+    padding-bottom: rem(23px);
     transition: padding $transition--expansion $carbon--standard-easing;
   }
 
@@ -359,7 +360,7 @@
     + tr[data-child-row]:last-of-type
     td {
     box-shadow: inset 0 -1px $active-01;
-    padding-bottom: rem(25px);
+    padding-bottom: rem(24px);
   }
 
   // child row expanded hover
