@@ -218,6 +218,11 @@ $css--helpers: true;
     grid-template-columns: auto 0;
   }
 
+  .#{$prefix}--select-input__wrapper,
+  .#{$prefix}--select-input--inline__wrapper {
+    height: 100%;
+  }
+
   .#{$prefix}--pagination .#{$prefix}--select-input {
     @include type-style('body-short-01');
     width: auto;
