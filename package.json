@@ -134,6 +134,7 @@
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.5.5",
+    "focus-trap-react": "^6.0.0",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",

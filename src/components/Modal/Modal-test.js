@@ -13,31 +13,34 @@ import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
 import { componentsX } from '../../internal/FeatureFlags';
 
+// The modal is the 0th child inside the wrapper on account of focus-trap-react
+const getModal = wrapper => wrapper.childAt(0);
+
 describe('Modal', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<Modal className="extra-class" />);
     const mounted = mount(<Modal className="extra-class" />);
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--modal')).toEqual(true);
+      expect(getModal(wrapper).hasClass('bx--modal')).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(getModal(wrapper).hasClass('extra-class')).toEqual(true);
     });
 
     it('should not be a passive modal by default', () => {
-      expect(wrapper.hasClass('bx--modal-tall')).toEqual(true);
+      expect(getModal(wrapper).hasClass('bx--modal-tall')).toEqual(true);
     });
 
     it('should be a passive modal when passiveModal is passed', () => {
       wrapper.setProps({ passiveModal: true });
-      expect(wrapper.hasClass('bx--modal-tall')).toEqual(false);
+      expect(getModal(wrapper).hasClass('bx--modal-tall')).toEqual(false);
     });
 
     it('should set id if one is passed via props', () => {
       const modal = shallow(<Modal id="modal-1" />);
-      expect(modal.props().id).toEqual('modal-1');
+      expect(getModal(modal).props().id).toEqual('modal-1');
     });
 
     it('has the expected default iconDescription', () => {
@@ -215,7 +218,7 @@ describe('Danger Modal', () => {
     const wrapper = shallow(<Modal danger />);
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--modal--danger')).toEqual(true);
+      expect(getModal(wrapper).hasClass('bx--modal--danger')).toEqual(true);
     });
 
     it('has correct button combination', () => {
