@@ -7,7 +7,7 @@
  * @jest-environment node
  */
 
-const { convert, renderSass } = require('../../../../tools/jest/scss');
+const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
 
 const variables = [
   'font-family-mono',
@@ -19,11 +19,26 @@ const variables = [
   'font-size-map',
 ];
 
+const render = createSassRenderer(__dirname);
+const renderClassic = content =>
+  render(`
+$feature-flags: (components-x: false, breaking-changes-x: false);
+${content}
+`);
+
+const isClassic = async () => {
+  const { calls } = await renderClassic(`
+@import '../../scss/functions';
+$t: test(feature-flag-enabled('breaking-changes-x'));
+`);
+  return !convert(calls[0][0]);
+};
+
 describe('_typography.scss', () => {
   describe.each(variables)('$%s', name => {
     it('should be exported', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { calls } = await renderClassic(`
+@import '../typography';
 $t: test(global-variable-exists(${name}));
 `);
       // Check that global-variable-exists returned true
@@ -31,8 +46,8 @@ $t: test(global-variable-exists(${name}));
     });
 
     it('should match export value', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { calls } = await renderClassic(`
+@import '../typography';
 $t: test($${name});
 `);
       expect(convert(calls[0][0])).toMatchSnapshot();
@@ -49,28 +64,30 @@ $t: test($${name});
 }
 `
       );
-      const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { result } = await renderClassic(`
+@import '../typography';
 ${tests.join('\n')}
 `);
       expect(result.css.toString()).toMatchSnapshot();
     });
 
     it('should warn if given invalid size', async () => {
-      const { output } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { output } = await renderClassic(`
+@import '../typography';
 .test {
   @include typescale('<unknown>');
 }
 `);
-      expect(output.warn).toHaveBeenCalledTimes(1);
+      // `output.warn` is called twice now since feature flags have diverged in
+      // v10
+      expect(output.warn).toHaveBeenCalledTimes((await isClassic()) ? 1 : 2);
     });
   });
 
   describe('unit mixin', () => {
     it('should output the appropriate unit derived from a pixel value', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { calls } = await renderClassic(`
+@import '../typography';
 
 $t: test(rem(16px));
 $t: test(em(16px));
@@ -83,8 +100,8 @@ $t: test(em(16px));
 
   describe('helvetica mixin', () => {
     it('should output a font-family value', async () => {
-      const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { result } = await renderClassic(`
+@import '../typography';
 .test {
   @include helvetica();
 }
@@ -96,8 +113,8 @@ $t: test(em(16px));
 
   describe('font-family mixin', () => {
     it('should output IBM Plex if css--plex is set to true', async () => {
-      const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { result } = await renderClassic(`
+@import '../typography';
 $css--plex: true;
 
 .test {
@@ -109,8 +126,8 @@ $css--plex: true;
     });
 
     it('should output IBM Helvetica if css--plex is set to false', async () => {
-      const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { result } = await renderClassic(`
+@import '../typography';
 $css--plex: false;
 
 .test {
@@ -122,32 +139,10 @@ $css--plex: false;
     });
   });
 
-  describe('line-height', () => {
-    it('should output valid line-heights for specific elements, otherwise it should warn', async () => {
-      const { output, result } = await renderSass(`
-@import './src/globals/scss/typography';
-
-.test-heading {
-  @include line-height('heading');
-}
-
-.test-body {
-  @include line-height('body');
-}
-
-.test-unknown {
-  @include line-height('<unknown>');
-}
-`);
-      expect(result.css.toString()).toMatchSnapshot();
-      expect(output.warn).toHaveBeenCalledTimes(1);
-    });
-  });
-
   describe('font-smoothing mixin', () => {
     it('should output font-smoothing properties', async () => {
-      const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { result } = await renderClassic(`
+@import '../typography';
 
 .test {
   @include font-smoothing();
@@ -159,38 +154,14 @@ $css--plex: false;
 
   describe('letter-spacing mixin', () => {
     it('should output letter-spacing properties', async () => {
-      const { result } = await renderSass(`
-@import './src/globals/scss/typography';
+      const { result } = await renderClassic(`
+@import '../typography';
 
 .test {
   @include letter-spacing();
 }
 `);
       expect(result.css.toString()).toMatchSnapshot();
-    });
-  });
-
-  describe('font-size mixin', () => {
-    it('should output a font-size property if given a valid size', async () => {
-      const sizes = ['76', '54', '36', '28', '20', '18', '16', '14', '12', '11'];
-      const tests = sizes.map(
-        size => `
-.test-${size} {
-  @include font-size('${size}');
-}
-`
-      );
-      const { output, result } = await renderSass(`
-@import './src/globals/scss/typography';
-${tests.join('\n')}
-
-.test-unknown {
-  @include font-size('<unknown>');
-}
-`);
-
-      expect(result.css.toString()).toMatchSnapshot();
-      expect(output.warn).toHaveBeenCalledTimes(1);
     });
   });
 });
