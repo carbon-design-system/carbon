@@ -46,7 +46,7 @@
       height: rem(48px);
 
       &:hover {
-        td {
+        > td {
           background-color: rgba($brand-02, 0.1);
           border-top: 1px solid $brand-01;
           border-bottom: 1px solid $brand-01;

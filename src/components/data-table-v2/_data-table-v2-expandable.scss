@@ -31,7 +31,7 @@
     }
 
     + tr[data-child-row] {
-      td {
+      > td {
         border-top: 0;
         padding-bottom: $spacing-xs;
       }
