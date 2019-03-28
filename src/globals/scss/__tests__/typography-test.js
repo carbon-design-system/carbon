@@ -29,7 +29,7 @@ ${content}
 const isClassic = async () => {
   const { calls } = await renderClassic(`
 @import '../../scss/functions';
-$t: test(feature-flag-enabled('braking-changes-x'));
+$t: test(feature-flag-enabled('breaking-changes-x'));
 `);
   return !convert(calls[0][0]);
 };
