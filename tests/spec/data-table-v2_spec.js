@@ -27,7 +27,7 @@ describe('DataTableV2', function() {
         selectorCount: '[data-items-selected]',
         selectorActionCancel: '.bx--batch-summary__cancel',
         selectorCheckbox: '.bx--checkbox',
-        selectorExpandCells: '.bx--table-expand-v2',
+        selectorExpandCells: 'td.bx--table-expand-v2',
         selectorExpandableRows: '.bx--expandable-row-v2',
         selectorParentRows: '.bx--parent-row-v2',
         selectorChildRow: '[data-child-row]',
