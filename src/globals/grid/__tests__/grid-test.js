@@ -8,30 +8,12 @@
  */
 
 const { types } = require('node-sass');
-const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
-
-const sassRender = createSassRenderer(__dirname);
-const render = content =>
-  sassRender(`
-$css--font-face: false;
-$css--helpers: false;
-$css--body: false;
-$css--use-layer: false;
-$css--reset: false;
-$css--typography: false;
-$css--plex: false;
-${content}
-`);
-const renderClassic = content =>
-  render(`
-$feature-flags: (components-x: false, breaking-changes-x: false, grid: false);
-${content}
-`);
+const { convert, renderSass } = require('../../../../tools/jest/scss');
 
 describe('_grid.scss', () => {
   it('should export grid variables', async () => {
-    const { calls } = await renderClassic(`
-@import '../grid';
+    const { calls } = await renderSass(`
+@import './src/globals/grid/grid';
 
 $variables: (
   'max-width': $max-width,
@@ -78,8 +60,10 @@ Object {
   });
 
   it('should support the grid mixin', async () => {
-    const { result } = await renderClassic(`
-@import '../grid';
+    const { result } = await renderSass(`
+$css--reset: false;
+$css--helpers: false;
+@import './src/globals/grid/grid';
 
 @include grid();
 `);
@@ -88,8 +72,8 @@ Object {
   });
 
   it('should support the breakpoint function', async () => {
-    const { calls, error, output } = await renderClassic(`
-@import '../grid';
+    const { calls, error, output } = await renderSass(`
+@import './src/globals/grid/grid';
 
 @each $key, $value in $grid-breakpoints {
   $t: test($key, breakpoint($key));
@@ -105,8 +89,7 @@ $t: test('unknown', breakpoint('unknown'));
     }
 
     // `breakpoint` is expected to warn on the unknown test case
-    // Should be called twice now since feature flags have diverged in v10
-    expect(output.warn).toHaveBeenCalledTimes(2);
+    expect(output.warn).toHaveBeenCalledTimes(1);
 
     // This should fail because `breakpoint('unknown')` does not return a
     // value
@@ -115,17 +98,17 @@ $t: test('unknown', breakpoint('unknown'));
 
   describe('grid--x', () => {
     it('should generate grid code when the grid feature flag is on', async () => {
-      const { result } = await render(`
+      const { result } = await renderSass(`
 $feature-flags: (grid: true);
-@import '../grid';
+@import './src/globals/grid/grid';
 `);
       expect(result.css.toString()).toMatchSnapshot();
     });
 
     it('should export a 12 column grid by default', async () => {
-      const { result } = await render(`
+      const { result } = await renderSass(`
 $feature-flags: (grid: true);
-@import '../grid';
+@import './src/globals/grid/grid';
 `);
       const output = result.css.toString();
       const breakpoints = ['lg', 'xlg', 'max'];
@@ -140,9 +123,9 @@ $feature-flags: (grid: true);
     });
 
     it('should export a 16 column grid behind a flag', async () => {
-      const { result } = await render(`
+      const { result } = await renderSass(`
 $feature-flags: (grid: true, grid-columns-16: true);
-@import '../grid';
+@import './src/globals/grid/grid';
 `);
       const output = result.css.toString();
       const breakpoints = ['lg', 'xlg', 'max'];
