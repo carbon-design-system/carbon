@@ -285,7 +285,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorCount: '[data-items-selected]',
       selectorActionCancel: `.${prefix}--batch-summary__cancel`,
       selectorCheckbox: `.${prefix}--checkbox`,
-      selectorExpandCells: `.${prefix}--table-expand-v2`,
+      selectorExpandCells: `td.${prefix}--table-expand-v2`,
       selectorExpandableRows: `.${prefix}--expandable-row-v2`,
       selectorParentRows: `.${prefix}--parent-row-v2`,
       selectorChildRow: '[data-child-row]',
