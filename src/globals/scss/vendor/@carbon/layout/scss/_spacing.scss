@@ -17,6 +17,18 @@ $carbon--spacing-07: carbon--mini-units(4) !default;
 $carbon--spacing-08: carbon--mini-units(5) !default;
 $carbon--spacing-09: carbon--mini-units(6) !default;
 
+$carbon--spacing: (
+  $carbon--spacing-01,
+  $carbon--spacing-02,
+  $carbon--spacing-03,
+  $carbon--spacing-04,
+  $carbon--spacing-05,
+  $carbon--spacing-06,
+  $carbon--spacing-07,
+  $carbon--spacing-08,
+  $carbon--spacing-09
+) !default;
+
 $spacing-01: $carbon--spacing-01 !default;
 $spacing-02: $carbon--spacing-02 !default;
 $spacing-03: $carbon--spacing-03 !default;
@@ -35,6 +47,16 @@ $carbon--layout-05: carbon--mini-units(8) !default;
 $carbon--layout-06: carbon--mini-units(12) !default;
 $carbon--layout-07: carbon--mini-units(20) !default;
 
+$carbon--layout: (
+  $carbon--layout-01,
+  $carbon--layout-02,
+  $carbon--layout-03,
+  $carbon--layout-04,
+  $carbon--layout-05,
+  $carbon--layout-06,
+  $carbon--layout-07
+) !default;
+
 $layout-01: $carbon--layout-01 !default;
 $layout-02: $carbon--layout-02 !default;
 $layout-03: $carbon--layout-03 !default;
@@ -48,6 +70,13 @@ $carbon--fluid-spacing-01: 0;
 $carbon--fluid-spacing-02: 2vw;
 $carbon--fluid-spacing-03: 5vw;
 $carbon--fluid-spacing-04: 10vw;
+
+$carbon--fluid-spacing: (
+  $carbon--fluid-spacing-01,
+  $carbon--fluid-spacing-02,
+  $carbon--fluid-spacing-03,
+  $carbon--fluid-spacing-04
+) !default;
 
 $fluid-spacing-01: $carbon--fluid-spacing-01 !default;
 $fluid-spacing-02: $carbon--fluid-spacing-02 !default;
