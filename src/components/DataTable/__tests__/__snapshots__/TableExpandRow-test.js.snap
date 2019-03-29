@@ -35,55 +35,34 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                   className="bx--table-expand-v2__button"
                   onClick={[MockFunction]}
                 >
-                  <Icon
+                  <ChevronRight16
                     className="bx--table-expand-v2__svg"
-                    description="Provide a description that will be used as the title"
-                    fillRule="evenodd"
-                    icon={
-                      Object {
-                        "height": "12",
-                        "id": "icon--chevron--right",
-                        "name": "icon--chevron--right",
-                        "styles": "",
-                        "svgData": Object {
-                          "circles": "",
-                          "ellipses": "",
-                          "paths": Array [
-                            Object {
-                              "d": "M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z",
-                              "fill-rule": "nonzero",
-                            },
-                          ],
-                          "polygons": "",
-                          "polylines": "",
-                          "rects": "",
-                        },
-                        "tags": "icon--chevron--right",
-                        "viewBox": "0 0 7 12",
-                        "width": "7",
-                      }
-                    }
-                    role="img"
+                    height={16}
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <svg
-                      alt="Provide a description that will be used as the title"
-                      aria-label="Provide a description that will be used as the title"
+                      aria-hidden={true}
                       className="bx--table-expand-v2__svg"
-                      fillRule="evenodd"
-                      height="12"
-                      role="img"
-                      viewBox="0 0 7 12"
-                      width="7"
+                      focusable="false"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      style={
+                        Object {
+                          "willChange": "transform",
+                        }
+                      }
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <title>
-                        Provide a description that will be used as the title
-                      </title>
                       <path
-                        d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
-                        key="key0"
+                        d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
                       />
                     </svg>
-                  </Icon>
+                  </ChevronRight16>
                 </button>
               </td>
             </TableCell>

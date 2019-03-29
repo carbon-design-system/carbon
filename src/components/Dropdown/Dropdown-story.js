@@ -5,124 +5,189 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { breakingChangesX } from '../../internal/FeatureFlags';
-
-import {
-  withKnobs,
-  boolean,
-  number,
-  select,
-  text,
-} from '@storybook/addon-knobs';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownItem from '../DropdownItem';
+import DropdownSkeleton from './Dropdown.Skeleton';
+import WithState from '../../tools/withState';
 
-const values = {
-  'None ()': 'none',
-  'Option 1 (option1)': 'option1',
-  'Option 2 (option2)': 'option2',
-  'Option 3 (option3)': 'option3',
-  'Option 4 (option4)': 'option4',
-  'Option 5 (option5)': 'option5',
-};
-
-const texts = {
-  'None ()': 'none',
-  'Option 1': 'Option 1',
-  'Option 2': 'Option 2',
-  'Option 3': 'Option 3',
-  'Option 4': 'Option 4',
-  'Option 5': 'Option 5',
-};
-
-const props = {
-  dropdown: () => {
-    const value = select('Selected value (value in <Dropdown>)', values, '');
-    const selectedText = select(
-      'Selected text (selectedText in <Dropdown>)',
-      texts,
-      ''
-    );
-    return {
-      className: 'some-class',
-      defaultText: text(
-        'The initial trigger text (defaultText in <Dropdown>)',
-        'Dropdown label'
-      ),
-      value: value === 'none' ? '' : value,
-      selectedText: selectedText === 'none' ? '' : selectedText,
-      light: boolean('Light variant (light in <Dropdown>)', false),
-      disabled: boolean('Disabled (disabled in <Dropdown>)', false),
-      open: boolean('Open dropdown (open in <Dropdown>)', false),
-      tabIndex: number('Tab index (tabIndex in <Dropdown>)', -1),
-      ariaLabel: text(
-        'Dropdown menu label (ariaLabel in <Dropdown>)',
-        'dropdown menu label'
-      ),
-      iconDescription: text(
-        'Trigger icon description (iconDescription in <Dropdown>)',
-        ''
-      ),
-      onChange: action('onChange'),
-      onOpen: action('onOpen'),
-      onClose: action('onClose'),
-    };
+const items = [
+  {
+    id: 'option-1',
+    text: 'Option 1',
   },
-  dropdownItem: () => ({
-    href: text('Link (href in <DropdownItem>)', ''),
-  }),
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3',
+  },
+  {
+    id: 'option-4',
+    text: 'Option 4',
+  },
+];
+
+const stringItems = ['Option 1', 'Option 2', 'Option 3'];
+
+const dropdownItems = [
+  { itemText: 'hello', value: 'hello', style: { opacity: 1 } },
+  { itemText: 'world', value: 'world', style: { opacity: 1 } },
+];
+
+const types = {
+  'Default (default)': 'default',
+  'Inline (inline)': 'inline',
 };
 
-if (!breakingChangesX) {
-  storiesOf('Dropdown', module)
-    .addDecorator(withKnobs)
-    .addDecorator(story => <div style={{ minWidth: '20em' }}>{story()}</div>)
-    .add(
-      'Default',
-      () => {
-        const dropdownItemProps = props.dropdownItem();
-        return (
-          <Dropdown {...props.dropdown()}>
-            <DropdownItem
-              itemText="Option 1"
-              value="option1"
-              {...dropdownItemProps}
-            />
-            <DropdownItem
-              itemText="Option 2"
-              value="option2"
-              {...dropdownItemProps}
-            />
-            <DropdownItem
-              itemText="Option 3"
-              value="option3"
-              {...dropdownItemProps}
-            />
-            <DropdownItem
-              itemText="Option 4"
-              value="option4"
-              {...dropdownItemProps}
-            />
-            <DropdownItem
-              itemText="Option 5"
-              value="option5"
-              {...dropdownItemProps}
-            />
-          </Dropdown>
-        );
+const props = () => ({
+  type: select('Dropdown type (type)', types, 'default'),
+  label: text('Label (label)', 'Dropdown menu options'),
+  ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
+  disabled: boolean('Disabled (disabled)', false),
+  light: boolean('Light variant (light)', false),
+  titleText: text('Title (titleText)', 'This is not a dropdown title.'),
+  helperText: text('Helper text (helperText)', 'This is not some helper text.'),
+  invalid: boolean('Show form validation UI (invalid)', false),
+  invalidText: text(
+    'Form validation UI content (invalidText)',
+    'A valid value is required'
+  ),
+});
+
+const itemToElement = item => {
+  const itemAsArray = item.text.split(' ');
+  return (
+    <div>
+      <span>{itemAsArray[0]}</span>
+      <span style={{ color: 'red' }}> {itemAsArray[1]}</span>
+    </div>
+  );
+};
+
+storiesOf('Dropdown', module)
+  .addDecorator(withKnobs)
+  .add(
+    'default',
+    () => (
+      <div style={{ width: 300 }}>
+        <Dropdown
+          {...props()}
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: 'Dropdown',
       },
-      {
-        info: {
-          text: `
-              The Dropdown component is used for navigating or filtering existing content.
-              Create Dropdown Item components for each option in the dropdown menu.
-            `,
-        },
-      }
-    );
-}
+    }
+  )
+  .add(
+    'items as strings',
+    () => (
+      <div style={{ width: 300 }}>
+        <Dropdown
+          {...props()}
+          items={stringItems}
+          onChange={action('onChange')}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: 'Rendering an array of strings as `items`',
+      },
+    }
+  )
+  .add(
+    'items as components',
+    () => (
+      <div style={{ width: 300 }}>
+        <Dropdown
+          {...props()}
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          itemToElement={itemToElement}
+          onChange={action('onChange')}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: `Rendering items as custom components`,
+      },
+    }
+  )
+  .add(
+    'with DropdownItems',
+    () => (
+      <div style={{ width: 300 }}>
+        <Dropdown
+          {...props()}
+          items={dropdownItems}
+          itemToString={item => (item ? item.itemText : '')}
+          itemToElement={DropdownItem}
+          onChange={action('onChange')}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: `
+          Using DropdownItem as the components to render. Has some kinks due to the onClick in the DropdownItem.
+        `,
+      },
+    }
+  )
+  .add(
+    'fully controlled',
+    () => (
+      <WithState initialState={{ selectedItem: items[0] }}>
+        {({ state, setState }) => (
+          <div style={{ width: 300 }}>
+            <Dropdown
+              {...props()}
+              items={items}
+              itemToString={item => (item ? item.text : '')}
+              onChange={({ selectedItem }) =>
+                setTimeout(() => setState({ selectedItem }), 1000)
+              }
+              selectedItem={state.selectedItem}
+            />
+          </div>
+        )}
+      </WithState>
+    ),
+    {
+      info: {
+        text: `
+            Sometimes you want to control everything.
+          `,
+      },
+    }
+  )
+  .add(
+    'skeleton',
+    () => (
+      <div style={{ width: 300 }}>
+        <DropdownSkeleton />
+        &nbsp;
+        <DropdownSkeleton inline />
+      </div>
+    ),
+    {
+      info: {
+        text: `
+            Placeholder skeleton state to use when content is loading.
+          `,
+      },
+    }
+  );

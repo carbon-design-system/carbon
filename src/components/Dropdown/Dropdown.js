@@ -5,268 +5,261 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
+import Downshift from 'downshift';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import classNames from 'classnames';
-import warning from 'warning';
-import { iconCaretDown } from 'carbon-icons';
+import React from 'react';
 import { settings } from 'carbon-components';
-import { breakingChangesX } from '../../internal/FeatureFlags';
-import ClickListener from '../../internal/ClickListener';
-import Icon from '../Icon';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
-let didWarnAboutDeprecation = false;
+const defaultItemToString = item => {
+  if (typeof item === 'string') {
+    return item;
+  }
 
-class Dropdown extends PureComponent {
+  return item ? item.label : '';
+};
+
+export default class Dropdown extends React.Component {
   static propTypes = {
     /**
-     * Specify a label to be read by screen readers on the container node
-     */
-    ariaLabel: PropTypes.string.isRequired,
-
-    /**
-     * Specify the drop down items
-     */
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify the text for the trigger button until a selection is made
-     */
-    defaultText: PropTypes.string,
-
-    /**
-     * Specify the value of the selected dropdown item
-     */
-    value: PropTypes.string,
-
-    /**
-     * Specify the tab index of the container node
-     */
-    tabIndex: PropTypes.number,
-
-    onClick: PropTypes.func,
-
-    /**
-     * Specify an `onChange` handler that is called whenever the Dropdown
-     * changes which item is selected
-     */
-    onChange: PropTypes.func.isRequired,
-
-    /**
-     * Function called when menu is open
-     */
-    onOpen: PropTypes.func,
-
-    /**
-     * Function called when menu is closed
-     */
-    onClose: PropTypes.func,
-
-    /**
-     * Specify the text content of the selected dropdown item
-     */
-    selectedText: PropTypes.string,
-
-    /**
-     * `true` if the menu should be open.
-     */
-    open: PropTypes.bool,
-
-    /**
-     * Specify a description for the twistie icon that can be read by screen
-     * readers
-     */
-    iconDescription: PropTypes.string,
-
-    /**
-     * Specify if the control should be disabled, or not
+     * Disable the control
      */
     disabled: PropTypes.bool,
 
     /**
-     * Specify whether you want the light version of this control
+     * We try to stay as generic as possible here to allow individuals to pass
+     * in a collection of whatever kind of data structure they prefer
+     */
+    items: PropTypes.array.isRequired,
+
+    /**
+     * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+     * from their collection that are pre-selected
+     */
+    initialSelectedItem: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
+
+    /**
+     * Specify whether you want the inline version of this control
+     */
+    inline: PropTypes.bool,
+
+    /**
+     * Specify if the currently selected value is invalid.
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Message which is displayed if the value is invalid.
+     */
+    invalidText: PropTypes.string,
+
+    /**
+     * Helper function passed to downshift that allows the library to render a
+     * given item to a string label. By default, it extracts the `label` field
+     * from a given item to serve as the item label in the list.
+     */
+    itemToString: PropTypes.func,
+
+    /**
+     * Function to render items as custom components instead of strings.
+     * Defaults to null and is overriden by a getter
+     */
+    itemToElement: PropTypes.func,
+
+    /**
+     * `onChange` is a utility for this controlled component to communicate to a
+     * consuming component what kind of internal state changes are occuring.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Generic `label` that will be used as the textual representation of what
+     * this field is for
+     */
+    label: PropTypes.node.isRequired,
+
+    /**
+     * 'aria-label' of the ListBox component.
+     */
+    ariaLabel: PropTypes.string,
+
+    /**
+     * The dropdown type, `default` or `inline`
+     */
+    type: ListBoxPropTypes.ListBoxType,
+
+    /**
+     * In the case you want to control the dropdown selection entirely.
+     */
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+    /**
+     * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * Provide the title text that will be read by a screen reader when
+     * visiting this control
+     */
+    titleText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+
+    /**
+     * Provide helper text that is used alongside the control label for
+     * additional help
+     */
+    helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   };
 
   static defaultProps = {
-    tabIndex: 0,
-    open: false,
     disabled: false,
+    type: 'default',
+    itemToString: defaultItemToString,
+    itemToElement: null,
     light: false,
-    iconDescription: 'open list of options',
-    onChange: () => {},
-    onOpen: () => {},
-    onClose: () => {},
+    titleText: '',
+    helperText: '',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = this.resetState(props);
-    if (__DEV__) {
-      warning(
-        didWarnAboutDeprecation,
-        'The `Dropdown` component is being updated in the next release of ' +
-          '`carbon-components-react`. Please use `DropdownV2` instead.'
-      );
-      didWarnAboutDeprecation = true;
+  handleOnChange = selectedItem => {
+    if (this.props.onChange) {
+      this.props.onChange({ selectedItem });
     }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState(this.resetState(nextProps));
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.open && this.state.open) {
-      this.props.onOpen();
-    }
-    if (prevState.open && !this.state.open) {
-      this.props.onClose();
-    }
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeydown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeydown);
-  }
-
-  resetState(props) {
-    const { children, selectedText, value, defaultText, open } = props;
-
-    let matchingChild;
-    React.Children.forEach(children, child => {
-      if (
-        child &&
-        (child.props.itemText === selectedText || child.props.value === value)
-      ) {
-        matchingChild = child;
-      }
-    });
-
-    if (matchingChild) {
-      return {
-        open,
-        selectedText: matchingChild.props.itemText,
-        value: matchingChild.props.value,
-      };
-    }
-    return {
-      open,
-      selectedText: defaultText,
-      value: '',
-    };
-  }
-
-  close = () => {
-    this.setState({ open: false });
-  };
-
-  toggle = evt => {
-    if (this.props.disabled) {
-      return;
-    }
-
-    // Open on click, enter, or space
-    if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
-      this.setState({ open: !this.state.open });
-    }
-  };
-
-  handleKeydown = evt => {
-    const key = evt.keyCode || evt.which;
-    if (key === 27 && this.state.open) {
-      this.setState({ open: !this.state.open });
-    }
-  };
-
-  handleItemClick = info => {
-    this.props.onChange(info);
-    this.setState({
-      selectedText: info.itemText,
-      value: info.value,
-    });
   };
 
   render() {
     const {
-      ariaLabel,
-      tabIndex,
-      defaultText, // eslint-disable-line no-unused-vars
-      iconDescription,
+      className: containerClassName,
       disabled,
+      items,
+      label,
+      ariaLabel,
+      itemToString,
+      itemToElement,
+      type,
+      initialSelectedItem,
+      selectedItem,
+      id,
+      titleText,
+      helperText,
       light,
-      selectedText, // eslint-disable-line no-unused-vars
-      onOpen, // eslint-disable-line no-unused-vars
-      onClose, // eslint-disable-line no-unused-vars
-      ...other
+      invalid,
+      invalidText,
     } = this.props;
-
-    const children = React.Children.toArray(this.props.children)
-      .filter(Boolean)
-      .map(child =>
-        React.cloneElement(child, {
-          onClick: (...args) => {
-            child.props.onClick && child.props.onClick(...args);
-            this.handleItemClick(...args);
-          },
-          isDropdownOpen: this.state.open,
-        })
-      );
-
-    const dropdownClasses = classNames({
-      [`${prefix}--dropdown`]: true,
-      [`${prefix}--dropdown--open`]: this.state.open,
-      [`${prefix}--dropdown--disabled`]: disabled,
-      [`${prefix}--dropdown--light`]: light,
-      [this.props.className]: this.props.className,
+    const inline = type === 'inline';
+    const className = ({ isOpen }) =>
+      cx(`${prefix}--dropdown`, containerClassName, {
+        [`${prefix}--dropdown--invalid`]: invalid,
+        [`${prefix}--dropdown--open`]: isOpen,
+        [`${prefix}--dropdown--inline`]: inline,
+        [`${prefix}--dropdown--disabled`]: disabled,
+        [`${prefix}--dropdown--light`]: light,
+      });
+    const titleClasses = cx(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
     });
-
-    const dropdown = (
-      <ClickListener onClickOutside={this.close}>
-        <ul
-          {...other}
-          onClick={this.toggle}
-          onKeyPress={this.toggle}
-          value={this.state.value}
-          className={dropdownClasses}
-          tabIndex={tabIndex}
-          aria-label={ariaLabel}
-          role="listbox">
-          <li className={`${prefix}--dropdown-text`}>
-            {this.state.selectedText}
-          </li>
-          <li>
-            <Icon
-              icon={iconCaretDown}
-              className={`${prefix}--dropdown__arrow`}
-              description={iconDescription}
-            />
-          </li>
-          <li>
-            <ul
-              role="menu"
-              className={`${prefix}--dropdown-list`}
-              aria-label="inner dropdown menu">
-              {children}
-            </ul>
-          </li>
-        </ul>
-      </ClickListener>
+    const title = titleText ? (
+      <label htmlFor={id} className={titleClasses}>
+        {titleText}
+      </label>
+    ) : null;
+    const helperClasses = cx(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+    const helper = helperText ? (
+      <div className={helperClasses}>{helperText}</div>
+    ) : null;
+    const wrapperClasses = cx(
+      `${prefix}--dropdown__wrapper`,
+      `${prefix}--list-box__wrapper`,
+      {
+        [`${prefix}--dropdown__wrapper--inline`]: inline,
+        [`${prefix}--list-box__wrapper--inline`]: inline,
+        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      }
     );
 
-    return dropdown;
+    // needs to be Capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
+    const Dropdown = (
+      <>
+        {title}
+        {!inline && helper}
+        <Downshift
+          id={id}
+          onChange={this.handleOnChange}
+          itemToString={itemToString}
+          defaultSelectedItem={initialSelectedItem}
+          selectedItem={selectedItem}>
+          {({
+            isOpen,
+            itemToString,
+            selectedItem,
+            highlightedIndex,
+            getRootProps,
+            getButtonProps,
+            getItemProps,
+            getLabelProps,
+          }) => (
+            <ListBox
+              type={type}
+              className={className({ isOpen })}
+              disabled={disabled}
+              ariaLabel={ariaLabel}
+              isOpen={isOpen}
+              invalid={invalid}
+              invalidText={invalidText}
+              {...getRootProps({ refKey: 'innerRef' })}>
+              {componentsX && invalid && (
+                <WarningFilled16
+                  className={`${prefix}--list-box__invalid-icon`}
+                />
+              )}
+              <ListBox.Field {...getButtonProps({ disabled })}>
+                <span
+                  className={`${prefix}--list-box__label`}
+                  {...getLabelProps()}>
+                  {selectedItem ? itemToString(selectedItem) : label}
+                </span>
+                <ListBox.MenuIcon isOpen={isOpen} />
+              </ListBox.Field>
+              {isOpen && (
+                <ListBox.Menu>
+                  {items.map((item, index) => (
+                    <ListBox.MenuItem
+                      key={itemToString(item)}
+                      isActive={selectedItem === item}
+                      isHighlighted={
+                        highlightedIndex === index || selectedItem === item
+                      }
+                      {...getItemProps({ item, index })}>
+                      {itemToElement ? (
+                        <ItemToElement key={itemToString(item)} {...item} />
+                      ) : (
+                        itemToString(item)
+                      )}
+                    </ListBox.MenuItem>
+                  ))}
+                </ListBox.Menu>
+              )}
+            </ListBox>
+          )}
+        </Downshift>
+      </>
+    );
+    return componentsX ? (
+      <div className={wrapperClasses}>{Dropdown}</div>
+    ) : (
+      Dropdown
+    );
   }
 }
-
-export default (!breakingChangesX ? Dropdown : null);

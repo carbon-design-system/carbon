@@ -21,17 +21,36 @@ export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
-export DataTable from './components/DataTable';
+export {
+  default as DataTable,
+  Table,
+  TableActionList,
+  TableBatchAction,
+  TableBatchActions,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableExpandHeader,
+  TableExpandRow,
+  TableExpandedRow,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableSelectAll,
+  TableSelectRow,
+  TableToolbar,
+  TableToolbarAction,
+  TableToolbarContent,
+  TableToolbarSearch,
+} from './components/DataTable';
 export DatePicker from './components/DatePicker';
 export DatePickerInput from './components/DatePickerInput';
 export Dropdown from './components/Dropdown';
 export DropdownItem from './components/DropdownItem';
-export DropdownV2 from './components/DropdownV2';
 export FileUploader, {
   Filename,
   FileUploaderButton,
 } from './components/FileUploader';
-export Footer from './components/Footer';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
@@ -55,7 +74,6 @@ export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
-export PaginationV2 from './components/PaginationV2';
 export PrimaryButton from './components/PrimaryButton';
 export {
   ProgressIndicator,
@@ -82,13 +100,6 @@ export {
 } from './components/StructuredList';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
-export Table from './components/Table';
-export TableBody from './components/TableBody';
-export TableData from './components/TableData';
-export TableHead from './components/TableHead';
-export TableHeader from './components/TableHeader';
-export TableRow from './components/TableRow';
-export TableRowExpanded from './components/TableRowExpanded';
 export Tabs from './components/Tabs';
 export Tag from './components/Tag';
 export TextArea from './components/TextArea';
@@ -117,7 +128,6 @@ export ToolbarSearch from './components/ToolbarSearch';
 export Tooltip from './components/Tooltip';
 export TooltipDefinition from './components/TooltipDefinition';
 export TooltipIcon from './components/TooltipIcon';
-export TooltipSimple from './components/TooltipSimple';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';
@@ -127,7 +137,7 @@ export BreadcrumbSkeleton from './components/Breadcrumb/Breadcrumb.Skeleton';
 export ButtonSkeleton from './components/Button/Button.Skeleton';
 export CheckboxSkeleton from './components/Checkbox/Checkbox.Skeleton';
 export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
-export DropdownSkeleton from './components/DropdownV2/Dropdown.Skeleton';
+export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
 export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';

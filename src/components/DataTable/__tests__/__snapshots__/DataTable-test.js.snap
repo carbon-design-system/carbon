@@ -141,54 +141,36 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                         >
                           Field A
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -214,54 +196,36 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                         >
                           Field B
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -575,54 +539,36 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         >
                           Field A
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -648,54 +594,36 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         >
                           Field B
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -718,42 +646,51 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     radio={true}
                   >
                     <td>
-                      <RadioButton
+                      <ForwardRef(RadioButton)
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-11__select-row-b"
-                        labelPosition="right"
-                        labelText=""
                         name="select-row-b"
-                        onChange={[Function]}
                         onClick={[Function]}
-                        value=""
                       >
-                        <div
-                          className="bx--radio-button-wrapper radioButtonWrapper"
+                        <RadioButton
+                          ariaLabel="Select row"
+                          checked={false}
+                          id="data-table-11__select-row-b"
+                          innerRef={null}
+                          labelPosition="right"
+                          labelText=""
+                          name="select-row-b"
+                          onChange={[Function]}
+                          onClick={[Function]}
+                          value=""
                         >
-                          <input
-                            ariaLabel="Select row"
-                            checked={false}
-                            className="bx--radio-button"
-                            id="data-table-11__select-row-b"
-                            name="select-row-b"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            type="radio"
-                            value=""
-                          />
-                          <label
-                            aria-label=""
-                            className="bx--radio-button__label"
-                            htmlFor="data-table-11__select-row-b"
+                          <div
+                            className="bx--radio-button-wrapper"
                           >
-                            <span
-                              className="bx--radio-button__appearance"
+                            <input
+                              ariaLabel="Select row"
+                              checked={false}
+                              className="bx--radio-button"
+                              id="data-table-11__select-row-b"
+                              name="select-row-b"
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              type="radio"
+                              value=""
                             />
-                          </label>
-                        </div>
-                      </RadioButton>
+                            <label
+                              aria-label=""
+                              className="bx--radio-button__label"
+                              htmlFor="data-table-11__select-row-b"
+                            >
+                              <span
+                                className="bx--radio-button__appearance"
+                              />
+                            </label>
+                          </div>
+                        </RadioButton>
+                      </ForwardRef(RadioButton)>
                     </td>
                   </TableSelectRow>
                   <TableCell
@@ -785,42 +722,51 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     radio={true}
                   >
                     <td>
-                      <RadioButton
+                      <ForwardRef(RadioButton)
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-11__select-row-a"
-                        labelPosition="right"
-                        labelText=""
                         name="select-row-a"
-                        onChange={[Function]}
                         onClick={[Function]}
-                        value=""
                       >
-                        <div
-                          className="bx--radio-button-wrapper radioButtonWrapper"
+                        <RadioButton
+                          ariaLabel="Select row"
+                          checked={false}
+                          id="data-table-11__select-row-a"
+                          innerRef={null}
+                          labelPosition="right"
+                          labelText=""
+                          name="select-row-a"
+                          onChange={[Function]}
+                          onClick={[Function]}
+                          value=""
                         >
-                          <input
-                            ariaLabel="Select row"
-                            checked={false}
-                            className="bx--radio-button"
-                            id="data-table-11__select-row-a"
-                            name="select-row-a"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            type="radio"
-                            value=""
-                          />
-                          <label
-                            aria-label=""
-                            className="bx--radio-button__label"
-                            htmlFor="data-table-11__select-row-a"
+                          <div
+                            className="bx--radio-button-wrapper"
                           >
-                            <span
-                              className="bx--radio-button__appearance"
+                            <input
+                              ariaLabel="Select row"
+                              checked={false}
+                              className="bx--radio-button"
+                              id="data-table-11__select-row-a"
+                              name="select-row-a"
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              type="radio"
+                              value=""
                             />
-                          </label>
-                        </div>
-                      </RadioButton>
+                            <label
+                              aria-label=""
+                              className="bx--radio-button__label"
+                              htmlFor="data-table-11__select-row-a"
+                            >
+                              <span
+                                className="bx--radio-button__appearance"
+                              />
+                            </label>
+                          </div>
+                        </RadioButton>
+                      </ForwardRef(RadioButton)>
                     </td>
                   </TableSelectRow>
                   <TableCell
@@ -852,42 +798,51 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     radio={true}
                   >
                     <td>
-                      <RadioButton
+                      <ForwardRef(RadioButton)
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-11__select-row-c"
-                        labelPosition="right"
-                        labelText=""
                         name="select-row-c"
-                        onChange={[Function]}
                         onClick={[Function]}
-                        value=""
                       >
-                        <div
-                          className="bx--radio-button-wrapper radioButtonWrapper"
+                        <RadioButton
+                          ariaLabel="Select row"
+                          checked={false}
+                          id="data-table-11__select-row-c"
+                          innerRef={null}
+                          labelPosition="right"
+                          labelText=""
+                          name="select-row-c"
+                          onChange={[Function]}
+                          onClick={[Function]}
+                          value=""
                         >
-                          <input
-                            ariaLabel="Select row"
-                            checked={false}
-                            className="bx--radio-button"
-                            id="data-table-11__select-row-c"
-                            name="select-row-c"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            type="radio"
-                            value=""
-                          />
-                          <label
-                            aria-label=""
-                            className="bx--radio-button__label"
-                            htmlFor="data-table-11__select-row-c"
+                          <div
+                            className="bx--radio-button-wrapper"
                           >
-                            <span
-                              className="bx--radio-button__appearance"
+                            <input
+                              ariaLabel="Select row"
+                              checked={false}
+                              className="bx--radio-button"
+                              id="data-table-11__select-row-c"
+                              name="select-row-c"
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              type="radio"
+                              value=""
                             />
-                          </label>
-                        </div>
-                      </RadioButton>
+                            <label
+                              aria-label=""
+                              className="bx--radio-button__label"
+                              htmlFor="data-table-11__select-row-c"
+                            >
+                              <span
+                                className="bx--radio-button__appearance"
+                              />
+                            </label>
+                          </div>
+                        </RadioButton>
+                      </ForwardRef(RadioButton)>
                     </td>
                   </TableSelectRow>
                   <TableCell
@@ -1052,30 +1007,40 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     <th
                       scope="col"
                     >
-                      <InlineCheckbox
+                      <ForwardRef(InlineCheckbox)
                         ariaLabel="Select all rows"
                         checked={false}
                         id="data-table-7__select-all"
                         indeterminate={false}
                         name="select-all"
-                        onChange={[Function]}
                         onClick={[Function]}
                       >
-                        <input
+                        <InlineCheckbox
+                          ariaLabel="Select all rows"
                           checked={false}
-                          className="bx--checkbox"
                           id="data-table-7__select-all"
+                          indeterminate={false}
+                          innerRef={null}
                           name="select-all"
                           onChange={[Function]}
                           onClick={[Function]}
-                          type="checkbox"
-                        />
-                        <label
-                          aria-label="Select all rows"
-                          className="bx--checkbox-label"
-                          htmlFor="data-table-7__select-all"
-                        />
-                      </InlineCheckbox>
+                        >
+                          <input
+                            checked={false}
+                            className="bx--checkbox"
+                            id="data-table-7__select-all"
+                            name="select-all"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select all rows"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-7__select-all"
+                          />
+                        </InlineCheckbox>
+                      </ForwardRef(InlineCheckbox)>
                     </th>
                   </TableSelectAll>
                   <TableHeader
@@ -1100,54 +1065,36 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         >
                           Field A
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -1173,54 +1120,36 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         >
                           Field B
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -1530,30 +1459,40 @@ exports[`DataTable selection should render 1`] = `
                     <th
                       scope="col"
                     >
-                      <InlineCheckbox
+                      <ForwardRef(InlineCheckbox)
                         ariaLabel="Select all rows"
                         checked={false}
                         id="data-table-6__select-all"
                         indeterminate={false}
                         name="select-all"
-                        onChange={[Function]}
                         onClick={[Function]}
                       >
-                        <input
+                        <InlineCheckbox
+                          ariaLabel="Select all rows"
                           checked={false}
-                          className="bx--checkbox"
                           id="data-table-6__select-all"
+                          indeterminate={false}
+                          innerRef={null}
                           name="select-all"
                           onChange={[Function]}
                           onClick={[Function]}
-                          type="checkbox"
-                        />
-                        <label
-                          aria-label="Select all rows"
-                          className="bx--checkbox-label"
-                          htmlFor="data-table-6__select-all"
-                        />
-                      </InlineCheckbox>
+                        >
+                          <input
+                            checked={false}
+                            className="bx--checkbox"
+                            id="data-table-6__select-all"
+                            name="select-all"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select all rows"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-all"
+                          />
+                        </InlineCheckbox>
+                      </ForwardRef(InlineCheckbox)>
                     </th>
                   </TableSelectAll>
                   <TableHeader
@@ -1578,54 +1517,36 @@ exports[`DataTable selection should render 1`] = `
                         >
                           Field A
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -1651,54 +1572,36 @@ exports[`DataTable selection should render 1`] = `
                         >
                           Field B
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -1721,29 +1624,38 @@ exports[`DataTable selection should render 1`] = `
                     radio={null}
                   >
                     <td>
-                      <InlineCheckbox
+                      <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-6__select-row-b"
                         name="select-row-b"
-                        onChange={[Function]}
                         onClick={[Function]}
                       >
-                        <input
+                        <InlineCheckbox
+                          ariaLabel="Select row"
                           checked={false}
-                          className="bx--checkbox"
                           id="data-table-6__select-row-b"
+                          innerRef={null}
                           name="select-row-b"
                           onChange={[Function]}
                           onClick={[Function]}
-                          type="checkbox"
-                        />
-                        <label
-                          aria-label="Select row"
-                          className="bx--checkbox-label"
-                          htmlFor="data-table-6__select-row-b"
-                        />
-                      </InlineCheckbox>
+                        >
+                          <input
+                            checked={false}
+                            className="bx--checkbox"
+                            id="data-table-6__select-row-b"
+                            name="select-row-b"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select row"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-row-b"
+                          />
+                        </InlineCheckbox>
+                      </ForwardRef(InlineCheckbox)>
                     </td>
                   </TableSelectRow>
                   <TableCell
@@ -1775,29 +1687,38 @@ exports[`DataTable selection should render 1`] = `
                     radio={null}
                   >
                     <td>
-                      <InlineCheckbox
+                      <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-6__select-row-a"
                         name="select-row-a"
-                        onChange={[Function]}
                         onClick={[Function]}
                       >
-                        <input
+                        <InlineCheckbox
+                          ariaLabel="Select row"
                           checked={false}
-                          className="bx--checkbox"
                           id="data-table-6__select-row-a"
+                          innerRef={null}
                           name="select-row-a"
                           onChange={[Function]}
                           onClick={[Function]}
-                          type="checkbox"
-                        />
-                        <label
-                          aria-label="Select row"
-                          className="bx--checkbox-label"
-                          htmlFor="data-table-6__select-row-a"
-                        />
-                      </InlineCheckbox>
+                        >
+                          <input
+                            checked={false}
+                            className="bx--checkbox"
+                            id="data-table-6__select-row-a"
+                            name="select-row-a"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select row"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-row-a"
+                          />
+                        </InlineCheckbox>
+                      </ForwardRef(InlineCheckbox)>
                     </td>
                   </TableSelectRow>
                   <TableCell
@@ -1829,29 +1750,38 @@ exports[`DataTable selection should render 1`] = `
                     radio={null}
                   >
                     <td>
-                      <InlineCheckbox
+                      <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
                         id="data-table-6__select-row-c"
                         name="select-row-c"
-                        onChange={[Function]}
                         onClick={[Function]}
                       >
-                        <input
+                        <InlineCheckbox
+                          ariaLabel="Select row"
                           checked={false}
-                          className="bx--checkbox"
                           id="data-table-6__select-row-c"
+                          innerRef={null}
                           name="select-row-c"
                           onChange={[Function]}
                           onClick={[Function]}
-                          type="checkbox"
-                        />
-                        <label
-                          aria-label="Select row"
-                          className="bx--checkbox-label"
-                          htmlFor="data-table-6__select-row-c"
-                        />
-                      </InlineCheckbox>
+                        >
+                          <input
+                            checked={false}
+                            className="bx--checkbox"
+                            id="data-table-6__select-row-c"
+                            name="select-row-c"
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select row"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-row-c"
+                          />
+                        </InlineCheckbox>
+                      </ForwardRef(InlineCheckbox)>
                     </td>
                   </TableSelectRow>
                   <TableCell
@@ -2247,55 +2177,37 @@ exports[`DataTable should render 1`] = `
                   className="bx--search bx--search--sm bx--search--light"
                   role="search"
                 >
-                  <Icon
+                  <Search16
+                    aria-label="Filter table"
                     className="bx--search-magnifier"
-                    description="Filter table"
-                    fillRule="evenodd"
-                    icon={
-                      Object {
-                        "height": "16",
-                        "id": "icon--search",
-                        "name": "icon--search",
-                        "styles": "",
-                        "svgData": Object {
-                          "circles": "",
-                          "ellipses": "",
-                          "paths": Array [
-                            Object {
-                              "d": "M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z",
-                              "fill-rule": "nonzero",
-                            },
-                          ],
-                          "polygons": "",
-                          "polylines": "",
-                          "rects": "",
-                        },
-                        "tags": "icon--search",
-                        "viewBox": "0 0 16 16",
-                        "width": "16",
-                      }
-                    }
+                    height={16}
+                    preserveAspectRatio="xMidYMid meet"
                     role="img"
+                    viewBox="0 0 16 16"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <svg
-                      alt="Filter table"
                       aria-label="Filter table"
                       className="bx--search-magnifier"
-                      fillRule="evenodd"
-                      height="16"
+                      focusable="false"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
                       role="img"
+                      style={
+                        Object {
+                          "willChange": "transform",
+                        }
+                      }
                       viewBox="0 0 16 16"
-                      width="16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <title>
-                        Filter table
-                      </title>
                       <path
-                        d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
-                        key="key0"
+                        d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
                       />
                     </svg>
-                  </Icon>
+                  </Search16>
                   <label
                     className="bx--label"
                     htmlFor="custom-id"
@@ -2315,52 +2227,34 @@ exports[`DataTable should render 1`] = `
                     onClick={[Function]}
                     type="button"
                   >
-                    <Icon
-                      description="Provide a description that will be used as the title"
-                      fillRule="evenodd"
-                      icon={
-                        Object {
-                          "height": "16",
-                          "id": "icon--close--solid",
-                          "name": "icon--close--solid",
-                          "styles": "",
-                          "svgData": Object {
-                            "circles": "",
-                            "ellipses": "",
-                            "paths": Array [
-                              Object {
-                                "d": "M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z",
-                              },
-                            ],
-                            "polygons": "",
-                            "polylines": "",
-                            "rects": "",
-                          },
-                          "tags": "icon--close--solid",
-                          "viewBox": "0 0 16 16",
-                          "width": "16",
-                        }
-                      }
+                    <Close16
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
                       role="img"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <svg
-                        alt="Provide a description that will be used as the title"
-                        aria-label="Provide a description that will be used as the title"
-                        fillRule="evenodd"
-                        height="16"
+                        aria-hidden={true}
+                        focusable="false"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
                         role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
                         viewBox="0 0 16 16"
-                        width="16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <title>
-                          Provide a description that will be used as the title
-                        </title>
                         <path
-                          d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-                          key="key0"
+                          d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
                         />
                       </svg>
-                    </Icon>
+                    </Close16>
                   </button>
                 </div>
               </Search>
@@ -2401,56 +2295,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--toolbar-action"
                   onClick={[MockFunction]}
                   title="Download"
-                >
-                  <Icon
-                    className="bx--toolbar-action__icon"
-                    description="Download"
-                    fillRule="evenodd"
-                    icon={
-                      Object {
-                        "height": "16",
-                        "id": "icon--download",
-                        "name": "icon--download",
-                        "styles": "",
-                        "svgData": Object {
-                          "circles": "",
-                          "ellipses": "",
-                          "paths": Array [
-                            Object {
-                              "d": "M7.5 11l4.1-4.4.7.7L7 13 1.6 7.3l.7-.7L6.5 11V0h1v11zm5.5 4v-2h1v2c0 .6-.4 1-1 1H1c-.6 0-1-.4-1-1v-2h1v2h12z",
-                            },
-                          ],
-                          "polygons": "",
-                          "polylines": "",
-                          "rects": "",
-                        },
-                        "tags": "icon--download",
-                        "viewBox": "0 0 14 16",
-                        "width": "14",
-                      }
-                    }
-                    role="img"
-                  >
-                    <svg
-                      alt="Download"
-                      aria-label="Download"
-                      className="bx--toolbar-action__icon"
-                      fillRule="evenodd"
-                      height="16"
-                      role="img"
-                      viewBox="0 0 14 16"
-                      width="14"
-                    >
-                      <title>
-                        Download
-                      </title>
-                      <path
-                        d="M7.5 11l4.1-4.4.7.7L7 13 1.6 7.3l.7-.7L6.5 11V0h1v11zm5.5 4v-2h1v2c0 .6-.4 1-1 1H1c-.6 0-1-.4-1-1v-2h1v2h12z"
-                        key="key0"
-                      />
-                    </svg>
-                  </Icon>
-                </button>
+                />
               </TableToolbarAction>
               <TableToolbarAction
                 icon={
@@ -2484,57 +2329,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--toolbar-action"
                   onClick={[MockFunction]}
                   title="Edit"
-                >
-                  <Icon
-                    className="bx--toolbar-action__icon"
-                    description="Edit"
-                    fillRule="evenodd"
-                    icon={
-                      Object {
-                        "height": "16",
-                        "id": "icon--edit",
-                        "name": "icon--edit",
-                        "styles": "",
-                        "svgData": Object {
-                          "circles": "",
-                          "ellipses": "",
-                          "paths": Array [
-                            Object {
-                              "d": "M7.926 3.38L1.002 9.72V12h2.304l6.926-6.316L7.926 3.38zm.738-.675l2.308 2.304 1.451-1.324-2.308-2.309-1.451 1.329zM.002 9.28L9.439.639a1 1 0 0 1 1.383.03l2.309 2.309a1 1 0 0 1-.034 1.446L3.694 13H.002V9.28zM0 16.013v-1h16v1z",
-                              "fill-rule": "nonzero",
-                            },
-                          ],
-                          "polygons": "",
-                          "polylines": "",
-                          "rects": "",
-                        },
-                        "tags": "icon--edit",
-                        "viewBox": "0 0 16 16",
-                        "width": "16",
-                      }
-                    }
-                    role="img"
-                  >
-                    <svg
-                      alt="Edit"
-                      aria-label="Edit"
-                      className="bx--toolbar-action__icon"
-                      fillRule="evenodd"
-                      height="16"
-                      role="img"
-                      viewBox="0 0 16 16"
-                      width="16"
-                    >
-                      <title>
-                        Edit
-                      </title>
-                      <path
-                        d="M7.926 3.38L1.002 9.72V12h2.304l6.926-6.316L7.926 3.38zm.738-.675l2.308 2.304 1.451-1.324-2.308-2.309-1.451 1.329zM.002 9.28L9.439.639a1 1 0 0 1 1.383.03l2.309 2.309a1 1 0 0 1-.034 1.446L3.694 13H.002V9.28zM0 16.013v-1h16v1z"
-                        key="key0"
-                      />
-                    </svg>
-                  </Icon>
-                </button>
+                />
               </TableToolbarAction>
               <TableToolbarAction
                 icon={
@@ -2570,63 +2365,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--toolbar-action"
                   onClick={[MockFunction]}
                   title="Settings"
-                >
-                  <Icon
-                    className="bx--toolbar-action__icon"
-                    description="Settings"
-                    fillRule="evenodd"
-                    icon={
-                      Object {
-                        "height": "16",
-                        "id": "icon--settings",
-                        "name": "icon--settings",
-                        "styles": "",
-                        "svgData": Object {
-                          "circles": "",
-                          "ellipses": "",
-                          "paths": Array [
-                            Object {
-                              "d": "M7.5 10.5C8.9 10.5 10 9.4 10 8S8.9 5.5 7.5 5.5 5 6.6 5 8s1.2 2.5 2.5 2.5zm0 1C5.6 11.5 4 9.9 4 8s1.6-3.5 3.5-3.5S11 6.1 11 8s-1.5 3.5-3.5 3.5z",
-                            },
-                            Object {
-                              "d": "M6.3 2.6l-.3.1c-.7.2-1.3.5-1.9 1l-.2.2-1.4-.8-1.3 1.8L2.4 6l-.1.2C2.1 6.8 2 7.4 2 8c0 .3 0 .7.1 1l.1.3-1.2 1L2.2 12l1.1-.6.3.3c.6.8 1.4 1.3 2.4 1.6l.3.1.2 1.6h2.1l.2-1.6.3-.1c.8-.2 1.6-.7 2.2-1.3l.3-.2 1.1.6 1.2-1.7-1.1-1 .1-.3c.1-.5.1-1 .1-1.4 0-.5-.1-1.1-.2-1.6l-.1-.3 1.2-1-1.2-1.7-1.4.6-.3-.2c-.6-.5-1.3-.9-2-1.1l-.2-.1L8.6 1H6.5l-.2 1.6zM5.5.9c0-.5.5-.9 1-.9h2.1c.5 0 .9.4 1 .9l.1 1c.6.2 1.2.5 1.8 1l.7-.4c.4-.2 1-.1 1.3.3l1.2 1.7c.3.4.2 1-.1 1.3l-.7.6c.1.5.1 1.1.1 1.6 0 .4 0 .8-.1 1.3l.6.6c.4.3.4.9.1 1.3l-1.2 1.7c-.3.4-.8.5-1.3.3l-.4-.2c-.6.5-1.3.9-2 1.2l-.1 1c-.1.5-.5.9-1 .9H6.5c-.5 0-.9-.4-1-.9l-.1-1c-.8-.3-1.6-.8-2.3-1.4l-.4.2c-.4.2-1 .1-1.3-.3L.2 11c-.3-.4-.2-1 .1-1.3l.8-.7c0-.4-.1-.7-.1-1 0-.6.1-1.2.2-1.8l-.6-.6C.2 5.3.1 4.7.4 4.3l1.2-1.7c.3-.5.9-.6 1.3-.4l.9.5c.5-.3 1-.6 1.6-.8l.1-1z",
-                            },
-                          ],
-                          "polygons": "",
-                          "polylines": "",
-                          "rects": "",
-                        },
-                        "tags": "icon--settings",
-                        "viewBox": "0 0 15 16",
-                        "width": "15",
-                      }
-                    }
-                    role="img"
-                  >
-                    <svg
-                      alt="Settings"
-                      aria-label="Settings"
-                      className="bx--toolbar-action__icon"
-                      fillRule="evenodd"
-                      height="16"
-                      role="img"
-                      viewBox="0 0 15 16"
-                      width="15"
-                    >
-                      <title>
-                        Settings
-                      </title>
-                      <path
-                        d="M7.5 10.5C8.9 10.5 10 9.4 10 8S8.9 5.5 7.5 5.5 5 6.6 5 8s1.2 2.5 2.5 2.5zm0 1C5.6 11.5 4 9.9 4 8s1.6-3.5 3.5-3.5S11 6.1 11 8s-1.5 3.5-3.5 3.5z"
-                        key="key0"
-                      />
-                      <path
-                        d="M6.3 2.6l-.3.1c-.7.2-1.3.5-1.9 1l-.2.2-1.4-.8-1.3 1.8L2.4 6l-.1.2C2.1 6.8 2 7.4 2 8c0 .3 0 .7.1 1l.1.3-1.2 1L2.2 12l1.1-.6.3.3c.6.8 1.4 1.3 2.4 1.6l.3.1.2 1.6h2.1l.2-1.6.3-.1c.8-.2 1.6-.7 2.2-1.3l.3-.2 1.1.6 1.2-1.7-1.1-1 .1-.3c.1-.5.1-1 .1-1.4 0-.5-.1-1.1-.2-1.6l-.1-.3 1.2-1-1.2-1.7-1.4.6-.3-.2c-.6-.5-1.3-.9-2-1.1l-.2-.1L8.6 1H6.5l-.2 1.6zM5.5.9c0-.5.5-.9 1-.9h2.1c.5 0 .9.4 1 .9l.1 1c.6.2 1.2.5 1.8 1l.7-.4c.4-.2 1-.1 1.3.3l1.2 1.7c.3.4.2 1-.1 1.3l-.7.6c.1.5.1 1.1.1 1.6 0 .4 0 .8-.1 1.3l.6.6c.4.3.4.9.1 1.3l-1.2 1.7c-.3.4-.8.5-1.3.3l-.4-.2c-.6.5-1.3.9-2 1.2l-.1 1c-.1.5-.5.9-1 .9H6.5c-.5 0-.9-.4-1-.9l-.1-1c-.8-.3-1.6-.8-2.3-1.4l-.4.2c-.4.2-1 .1-1.3-.3L.2 11c-.3-.4-.2-1 .1-1.3l.8-.7c0-.4-.1-.7-.1-1 0-.6.1-1.2.2-1.8l-.6-.6C.2 5.3.1 4.7.4 4.3l1.2-1.7c.3-.5.9-.6 1.3-.4l.9.5c.5-.3 1-.6 1.6-.8l.1-1z"
-                        key="key1"
-                      />
-                    </svg>
-                  </Icon>
-                </button>
+                />
               </TableToolbarAction>
               <ForwardRef
                 disabled={false}
@@ -2685,54 +2424,36 @@ exports[`DataTable should render 1`] = `
                         >
                           Field A
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>
@@ -2758,54 +2479,36 @@ exports[`DataTable should render 1`] = `
                         >
                           Field B
                         </span>
-                        <Icon
+                        <CaretUpGlyph
+                          aria-label="Sort rows by this header in ascending order"
                           className="bx--table-sort-v2__icon"
-                          description="Sort rows by this header in ascending order"
-                          fillRule="evenodd"
-                          icon={
-                            Object {
-                              "height": "5",
-                              "id": "icon--caret--up",
-                              "name": "icon--caret--up",
-                              "styles": "",
-                              "svgData": Object {
-                                "circles": "",
-                                "ellipses": "",
-                                "paths": Array [
-                                  Object {
-                                    "d": "M0 5L5 .002 10 5z",
-                                  },
-                                ],
-                                "polygons": "",
-                                "polylines": "",
-                                "rects": "",
-                              },
-                              "tags": "icon--caret--up",
-                              "viewBox": "0 0 10 5",
-                              "width": "10",
-                            }
-                          }
-                          role="img"
+                          height={4}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 8 4"
+                          width={8}
+                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <svg
-                            alt="Sort rows by this header in ascending order"
                             aria-label="Sort rows by this header in ascending order"
                             className="bx--table-sort-v2__icon"
-                            fillRule="evenodd"
-                            height="5"
+                            focusable="false"
+                            height={4}
+                            preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            viewBox="0 0 10 5"
-                            width="10"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 8 4"
+                            width={8}
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              Sort rows by this header in ascending order
-                            </title>
                             <path
-                              d="M0 5L5 .002 10 5z"
-                              key="key0"
+                              d="M0 4l4-4 4 4z"
                             />
                           </svg>
-                        </Icon>
+                        </CaretUpGlyph>
                       </button>
                     </th>
                   </TableHeader>

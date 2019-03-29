@@ -7,22 +7,16 @@
 
 import React from 'react';
 import { iconAdd, iconAddSolid, iconAddOutline } from 'carbon-icons';
-import iconsList from 'carbon-icons';
 import { storiesOf } from '@storybook/react';
 
 import { withKnobs, select, text } from '@storybook/addon-knobs';
-import Icon, { setIconsList } from '../Icon';
+import Icon from '../Icon';
 import IconSkeleton from '../Icon/Icon.Skeleton';
-
-setIconsList(iconsList);
 
 const icons = {
   'Add (iconAdd from `carbon-icons`)': 'iconAdd',
   'Add with filled circle (iconAddSolid from `carbon-icons`)': 'iconAddSolid',
   'Add with circle (iconAddOutline from `carbon-icons`)': 'iconAddOutline',
-  'Legacy add (icon--add)': 'icon--add',
-  'Legacy add with filled circle (add--solid)': 'add--solid',
-  'Legacy add with circle (add--outline)': 'add--outline',
 };
 
 const iconMap = {

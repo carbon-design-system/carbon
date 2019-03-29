@@ -96,55 +96,36 @@ exports[`ModalWrapper should render 1`] = `
                 title="close the modal"
                 type="button"
               >
-                <Icon
+                <Close20
+                  aria-label="close the modal"
                   className="bx--modal-close__icon"
-                  description="close the modal"
-                  fillRule="evenodd"
-                  icon={
-                    Object {
-                      "height": "10",
-                      "id": "icon--close",
-                      "name": "icon--close",
-                      "styles": "",
-                      "svgData": Object {
-                        "circles": "",
-                        "ellipses": "",
-                        "paths": Array [
-                          Object {
-                            "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
-                            "fill-rule": "nonzero",
-                          },
-                        ],
-                        "polygons": "",
-                        "polylines": "",
-                        "rects": "",
-                      },
-                      "tags": "icon--close",
-                      "viewBox": "0 0 10 10",
-                      "width": "10",
-                    }
-                  }
-                  role="img"
+                  height={20}
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <svg
-                    alt="close the modal"
                     aria-label="close the modal"
                     className="bx--modal-close__icon"
-                    fillRule="evenodd"
-                    height="10"
+                    focusable="false"
+                    height={20}
+                    preserveAspectRatio="xMidYMid meet"
                     role="img"
-                    viewBox="0 0 10 10"
-                    width="10"
+                    style={
+                      Object {
+                        "willChange": "transform",
+                      }
+                    }
+                    viewBox="0 0 32 32"
+                    width={20}
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <title>
-                      close the modal
-                    </title>
                     <path
-                      d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
-                      key="key0"
+                      d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
                     />
                   </svg>
-                </Icon>
+                </Close20>
               </button>
             </div>
             <div
@@ -184,11 +165,25 @@ exports[`ModalWrapper should render 1`] = `
                 inputref={
                   Object {
                     "current": <button
-                      class="bx--btn bx--btn--primary"
-                      tabindex="0"
+                      class="bx--modal-close"
+                      title="close the modal"
                       type="button"
                     >
-                      Save
+                      <svg
+                        aria-label="close the modal"
+                        class="bx--modal-close__icon"
+                        focusable="false"
+                        height="20"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        viewBox="0 0 32 32"
+                        width="20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+                        />
+                      </svg>
                     </button>,
                   }
                 }

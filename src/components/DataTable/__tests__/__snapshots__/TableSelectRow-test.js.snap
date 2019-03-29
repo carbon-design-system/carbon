@@ -24,29 +24,38 @@ exports[`DataTable.TableSelectRow should render 1`] = `
               <td
                 className="custom-class-name"
               >
-                <InlineCheckbox
+                <ForwardRef(InlineCheckbox)
                   ariaLabel="Aria label"
                   checked={false}
                   id="id"
                   name="select-all"
-                  onChange={[Function]}
                   onClick={[MockFunction]}
                 >
-                  <input
+                  <InlineCheckbox
+                    ariaLabel="Aria label"
                     checked={false}
-                    className="bx--checkbox"
                     id="id"
+                    innerRef={null}
                     name="select-all"
                     onChange={[Function]}
                     onClick={[MockFunction]}
-                    type="checkbox"
-                  />
-                  <label
-                    aria-label="Aria label"
-                    className="bx--checkbox-label"
-                    htmlFor="id"
-                  />
-                </InlineCheckbox>
+                  >
+                    <input
+                      checked={false}
+                      className="bx--checkbox"
+                      id="id"
+                      name="select-all"
+                      onChange={[Function]}
+                      onClick={[MockFunction]}
+                      type="checkbox"
+                    />
+                    <label
+                      aria-label="Aria label"
+                      className="bx--checkbox-label"
+                      htmlFor="id"
+                    />
+                  </InlineCheckbox>
+                </ForwardRef(InlineCheckbox)>
               </td>
             </TableSelectRow>
           </tr>

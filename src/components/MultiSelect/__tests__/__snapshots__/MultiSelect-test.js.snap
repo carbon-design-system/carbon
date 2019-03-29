@@ -124,55 +124,39 @@ exports[`MultiSelect should render 1`] = `
                 <div
                   className="bx--list-box__menu-icon"
                 >
-                  <Icon
-                    alt="Open menu"
-                    description="Open menu"
-                    fillRule="evenodd"
-                    focusable="false"
-                    icon={
-                      Object {
-                        "height": "5",
-                        "id": "icon--caret--down",
-                        "name": "icon--caret--down",
-                        "styles": "",
-                        "svgData": Object {
-                          "circles": "",
-                          "ellipses": "",
-                          "paths": Array [
-                            Object {
-                              "d": "M0 0l5 4.998L10 0z",
-                            },
-                          ],
-                          "polygons": "",
-                          "polylines": "",
-                          "rects": "",
-                        },
-                        "tags": "icon--caret--down",
-                        "viewBox": "0 0 10 5",
-                        "width": "10",
-                      }
-                    }
-                    role="img"
+                  <ChevronDown16
+                    aria-label="Open menu"
+                    height={16}
+                    name="chevron--down"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <svg
-                      alt="Open menu"
                       aria-label="Open menu"
-                      fillRule="evenodd"
                       focusable="false"
-                      height="5"
+                      height={16}
+                      name="chevron--down"
+                      preserveAspectRatio="xMidYMid meet"
                       role="img"
-                      viewBox="0 0 10 5"
-                      width="10"
+                      style={
+                        Object {
+                          "willChange": "transform",
+                        }
+                      }
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <title>
                         Open menu
                       </title>
                       <path
-                        d="M0 0l5 4.998L10 0z"
-                        key="key0"
+                        d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
                       />
                     </svg>
-                  </Icon>
+                  </ChevronDown16>
                 </div>
               </ListBoxMenuIcon>
             </div>

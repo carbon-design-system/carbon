@@ -164,7 +164,7 @@ exports[`Breadcrumb should render 1`] = `
 <Breadcrumb
   className="parent-class"
 >
-  <div
+  <nav
     className="bx--breadcrumb parent-class"
   >
     <BreadcrumbItem
@@ -186,7 +186,7 @@ exports[`Breadcrumb should render 1`] = `
         </Link>
       </div>
     </BreadcrumbItem>
-  </div>
+  </nav>
 </Breadcrumb>
 `;
 
@@ -194,7 +194,7 @@ exports[`Breadcrumb should support rendering without a trailing slash 1`] = `
 <Breadcrumb
   noTrailingSlash={true}
 >
-  <div
+  <nav
     className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
   >
     <BreadcrumbItem
@@ -215,6 +215,6 @@ exports[`Breadcrumb should support rendering without a trailing slash 1`] = `
         </Link>
       </div>
     </BreadcrumbItem>
-  </div>
+  </nav>
 </Breadcrumb>
 `;

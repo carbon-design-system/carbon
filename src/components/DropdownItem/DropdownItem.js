@@ -8,13 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import warning from 'warning';
 import { settings } from 'carbon-components';
 import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
-
-let didWarnAboutDeprecation = false;
 
 const DropdownItem = ({
   className,
@@ -27,16 +24,6 @@ const DropdownItem = ({
   selected,
   ...other
 }) => {
-  if (__DEV__) {
-    warning(
-      didWarnAboutDeprecation,
-      'The `DropdownItem` component has been deprecated and will be ' +
-        'removed in the next major release of `carbon-components-react`. ' +
-        'Please use `DropdownV2` instead.'
-    );
-    didWarnAboutDeprecation = true;
-  }
-
   const dropdownItemClasses = classNames({
     [`${prefix}--dropdown-item`]: true,
     [className]: className,

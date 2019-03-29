@@ -3,9 +3,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const useExperimentalFeatures =
-  process.env.CARBON_USE_EXPERIMENTAL_FEATURES === 'true';
+  process.env.CARBON_USE_EXPERIMENTAL_FEATURES !== 'false';
 
-const useBreakingChanges = process.env.CARBON_USE_BREAKING_CHANGES === 'true';
+const useBreakingChanges = process.env.CARBON_USE_BREAKING_CHANGES !== 'false';
 
 const useExternalCss =
   process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';

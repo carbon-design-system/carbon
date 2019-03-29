@@ -42,58 +42,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       disabled={false}
       tabIndex={0}
       type="button"
-    >
-      <Icon
-        aria-hidden={true}
-        className="bx--btn__icon"
-        description="Add"
-        fillRule="evenodd"
-        icon={
-          Object {
-            "height": "16",
-            "id": "icon--add--solid",
-            "name": "icon--add--solid",
-            "styles": "",
-            "svgData": Object {
-              "circles": "",
-              "ellipses": "",
-              "paths": Array [
-                Object {
-                  "d": "M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z",
-                },
-              ],
-              "polygons": "",
-              "polylines": "",
-              "rects": "",
-            },
-            "tags": "icon--add--solid",
-            "viewBox": "0 0 16 16",
-            "width": "16",
-          }
-        }
-        role="img"
-      >
-        <svg
-          alt="Add"
-          aria-hidden={true}
-          aria-label="Add"
-          className="bx--btn__icon"
-          fillRule="evenodd"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <title>
-            Add
-          </title>
-          <path
-            d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-            key="key0"
-          />
-        </svg>
-      </Icon>
-    </button>
+    />
   </ForwardRef>
 </TableBatchAction>
 `;
