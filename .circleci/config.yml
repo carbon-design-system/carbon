@@ -13,7 +13,7 @@ jobs:
             export PATH=$HOME/.yarn/bin:$PATH
       - run:
           name: Install dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile --offline
       - run:
           name: Run Continuous Integration checks
           command: yarn ci-check
