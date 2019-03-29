@@ -210,10 +210,10 @@
 <!-- v10 Data Table -->
 {{#if componentsX}}
   {{#if hasToolbar}}
-  <div class="{{@root.prefix}}--data-table-v2-container {{#if sticky}}{{@root.prefix}}--data-table-v2--max-width{{/if}}" data-table-v2>
-    <div class="{{@root.prefix}}--data-table-v2-header">
-      <h4 class="{{@root.prefix}}--data-table-v2-header__title">{{title}}</h4>
-      <p class="{{@root.prefix}}--data-table-v2-header__description">{{optionalHelper}}</p>
+  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table>
+    <div class="{{@root.prefix}}--data-table-header">
+      <h4 class="{{@root.prefix}}--data-table-header__title">{{title}}</h4>
+      <p class="{{@root.prefix}}--data-table-header__description">{{optionalHelper}}</p>
     </div>
     <!-- Toolbar Content -->
     <section class="{{@root.prefix}}--table-toolbar {{#if small}} {{@root.prefix}}--table-toolbar--small {{/if}}">
@@ -336,14 +336,14 @@
   <!-- End Toolbar Content -->
 
   {{#if sticky}}
-  <section class="{{@root.prefix}}--data-table-v2_inner-container">
+  <section class="{{@root.prefix}}--data-table_inner-container">
   {{/if}}
   <!-- Table -->
-  <table class="{{@root.prefix}}--data-table-v2 {{#if truncate}}{{@root.prefix}}--data-table-v2--overflow-truncate{{/if}} {{#if sticky}}{{@root.prefix}}--data-table-v2--sticky-header{{/if}} {{#if zebra}} {{@root.prefix}}--data-table-v2--no-border {{@root.prefix}}--data-table-v2--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table-v2--compact{{/if}} {{#if tall}}{{@root.prefix}}--data-table-v2--tall {{/if}}{{#if sort}} {{@root.prefix}}--data-table-v2--sort {{/if}}" >
+  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}} {{#if sticky}}{{@root.prefix}}--data-table--sticky-header{{/if}} {{#if zebra}} {{@root.prefix}}--data-table--no-border {{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}} {{#if tall}}{{@root.prefix}}--data-table--tall {{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort {{/if}}" >
     <thead>
       <tr>
         {{#each columns}}
-          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand-v2"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table-v2--numerical-cell" {{/if}}>
+          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell" {{/if}}>
             <!-- checkbox th -->
             {{#if checkbox}}
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
@@ -351,10 +351,10 @@
             {{else if (not menu)}}
             <!-- sortable th  -->
               {{#if sortable}}
-                <button class="{{@root.prefix}}--table-sort-v2" data-event="sort" title="{{title}}">
+                <button class="{{@root.prefix}}--table-sort" data-event="sort" title="{{title}}">
                   <span class="{{@root.prefix}}--table-header-label">{{title}}</span>
-                  {{carbon-icon 'ArrowDown16' class=(add @root.prefix '--table-sort-v2__icon')}}
-                  {{carbon-icon 'Arrows16' class=(add @root.prefix '--table-sort-v2__icon-unsorted')}}
+                  {{carbon-icon 'ArrowDown16' class=(add @root.prefix '--table-sort__icon')}}
+                  {{carbon-icon 'Arrows16' class=(add @root.prefix '--table-sort__icon-unsorted')}}
                   {{#if ../truncate}}
                     <div id="label-tooltip" role="tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip" data-avoid-focus-on-open>
                       <span class="{{@root.prefix}}--tooltip__caret"></span>
@@ -375,14 +375,14 @@
     </thead>
   <tbody>
     {{#each rows as |row|}}
-      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row-v2" data-parent-row {{/if}} {{#if row.disabled}} class="{{@root.prefix}}--row-disabled" {{/if}}>
+      <tr{{#if row.sectionContent}} class="{{@root.prefix}}--parent-row" data-parent-row {{/if}} {{#if row.disabled}} class="{{@root.prefix}}--row-disabled" {{/if}}>
         {{#each ../columns as |column|}}
           {{#with (lookup row column.name) as |data|}}
           <!-- expand icon td -->
             {{#if column.section}}
-              <td class="{{@root.prefix}}--table-expand-v2" data-event="expand">
-                <button class="{{@root.prefix}}--table-expand-v2__button">
-                  {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--table-expand-v2__svg') }}
+              <td class="{{@root.prefix}}--table-expand" data-event="expand">
+                <button class="{{@root.prefix}}--table-expand__button">
+                  {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--table-expand__svg') }}
                 </button>
               </td>
             <!-- checkbox td -->
@@ -432,13 +432,13 @@
               <td class="{{@root.prefix}}--data-table-cell--editable"><span class="{{@root.prefix}}--data-table-cell__content">{{data}}</span></td>
             <!-- all other td's -->
             {{else}}
-              <td {{#if column.numerical}} class="{{@root.prefix}}--data-table-v2--numerical-cell" {{/if}}>
+              <td {{#if column.numerical}} class="{{@root.prefix}}--data-table--numerical-cell" {{/if}}>
                 <!-- truncated new markup -->
                 {{#if ../../truncate}}
                   <span class="{{@root.prefix}}--table-cell-content" aria-describedby="label-tooltip">{{data}}
                       {{#if ../../../tall }}
                         {{#if (and row.secondaryText column.secondary)}}
-                        <div class="{{@root.prefix}}--data-table-v2--cell-secondary-text">
+                        <div class="{{@root.prefix}}--data-table--cell-secondary-text">
                           {{row.secondaryText}}
                         </div>
                         {{/if}}
@@ -459,7 +459,7 @@
       </tr>
       <!-- Expandable child row -->
       {{#if row.sectionContent}}
-          <tr class="{{@root.prefix}}--expandable-row-v2 {{@root.prefix}}--expandable-row--hidden-v2" data-child-row>
+          <tr class="{{@root.prefix}}--expandable-row {{@root.prefix}}--expandable-row--hidden" data-child-row>
             <td colspan="{{../columns.length}}">
               <div class="{{@root.prefix}}--child-row-inner-container">
                 {{{row.sectionContent}}}

@@ -5,6 +5,8 @@ import HTML from '../../html/data-table-v2/data-table-v2.html';
 import ExpandableHTML from '../../html/data-table-v2/data-table-v2--expandable.html';
 import { componentsX } from '../../src/globals/js/feature-flags';
 
+const suffix = componentsX ? '' : '-v2';
+
 describe('DataTableV2', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
@@ -22,30 +24,30 @@ describe('DataTableV2', function() {
     it('Should set default options', function() {
       const table = new DataTableV2(document.createElement('div'));
       expect(flattenOptions(table.options)).toEqual({
-        selectorInit: '[data-table-v2]',
+        selectorInit: `[data-table${suffix}]`,
         selectorToolbar: '.bx--table--toolbar',
         selectorActions: '.bx--batch-actions',
         selectorCount: '[data-items-selected]',
         selectorActionCancel: '.bx--batch-summary__cancel',
         selectorCheckbox: '.bx--checkbox',
-        selectorExpandCells: 'td.bx--table-expand-v2',
-        selectorExpandableRows: '.bx--expandable-row-v2',
-        selectorParentRows: '.bx--parent-row-v2',
+        selectorExpandCells: `td.bx--table-expand${suffix}`,
+        selectorExpandableRows: `.bx--expandable-row${suffix}`,
+        selectorParentRows: `.bx--parent-row${suffix}`,
         selectorChildRow: '[data-child-row]',
         selectorTableBody: 'tbody',
-        selectorTableSort: '.bx--table-sort-v2',
-        selectorTableSelected: '.bx--data-table-v2--selected',
-        classExpandableRow: 'bx--expandable-row-v2',
-        classExpandableRowHidden: 'bx--expandable-row--hidden-v2',
-        classExpandableRowHover: 'bx--expandable-row--hover-v2',
-        classTableSortAscending: 'bx--table-sort-v2--ascending',
-        classTableSortActive: 'bx--table-sort-v2--active',
+        selectorTableSort: `.bx--table-sort${suffix}`,
+        selectorTableSelected: `.bx--data-table${suffix}--selected`,
+        classExpandableRow: `bx--expandable-row${suffix}`,
+        classExpandableRowHidden: `bx--expandable-row--hidden${suffix}`,
+        classExpandableRowHover: `bx--expandable-row--hover${suffix}`,
+        classTableSortAscending: `bx--table-sort${suffix}--ascending`,
+        classTableSortActive: `bx--table-sort${suffix}--active`,
         classActionBarActive: 'bx--batch-actions--active',
-        classTableSelected: 'bx--data-table-v2--selected',
-        eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
-        eventAfterExpand: 'data-table-v2-aftertoggleexpand',
-        eventBeforeSort: 'data-table-v2-beforetogglesort',
-        eventAfterSort: 'data-table-v2-aftertogglesort',
+        classTableSelected: `bx--data-table${suffix}--selected`,
+        eventBeforeExpand: `data-table${suffix}-beforetoggleexpand`,
+        eventAfterExpand: `data-table${suffix}-aftertoggleexpand`,
+        eventBeforeSort: `data-table${suffix}-beforetogglesort`,
+        eventAfterSort: `data-table${suffix}-aftertogglesort`,
         eventTrigger: '[data-event]',
         eventParentContainer: '[data-parent-row]',
       });
@@ -61,7 +63,7 @@ describe('DataTableV2', function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector('[data-table-v2]');
+      element = document.querySelector(`[data-table${suffix}]`);
       table = new DataTableV2(element);
     });
 
@@ -89,7 +91,7 @@ describe('DataTableV2', function() {
       container = document.createElement('div');
       container.innerHTML = ExpandableHTML;
       document.body.appendChild(container);
-      element = document.querySelector('[data-table-v2]');
+      element = document.querySelector(`[data-table${suffix}]`);
       table = new DataTableV2(element);
     });
 
@@ -100,7 +102,7 @@ describe('DataTableV2', function() {
         expect(document.querySelector('[data-child-row]')).toBeTruthy();
       } else {
         expect(
-          document.querySelector('[data-child-row]').previousElementSibling.classList.contains('bx--expandable-row-v2')
+          document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
         ).toBeTruthy();
       }
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -108,7 +110,7 @@ describe('DataTableV2', function() {
         expect(document.querySelector('[data-child-row]')).toBeFalsy();
       } else {
         expect(
-          document.querySelector('[data-child-row]').previousElementSibling.classList.contains('bx--expandable-row-v2')
+          document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
         ).toBeFalsy();
       }
     });
@@ -116,7 +118,7 @@ describe('DataTableV2', function() {
     it('Should emit an event on row expansion click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       const spyToggleRowExpandEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, 'data-table-v2-aftertoggleexpand', spyToggleRowExpandEvent);
+      events.on(element.ownerDocument.body, `data-table${suffix}-aftertoggleexpand`, spyToggleRowExpandEvent);
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleRowExpandEvent).toHaveBeenCalled();
     });
@@ -146,34 +148,34 @@ describe('DataTableV2', function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector('[data-table-v2]');
+      element = document.querySelector(`[data-table${suffix}]`);
       firstSort = element.querySelector('[data-event="sort"]');
       table = new DataTableV2(element);
     });
 
     it('Should switch through tri-state sort', function() {
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
+      expect(firstSort.classList.contains(`bx--table-sort${suffix}--ascending`)).toBe(true);
       expect(firstSort.getAttribute('data-previous-value') === 'ascending').toBe(true);
 
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(false);
+      expect(firstSort.classList.contains(`bx--table-sort${suffix}--ascending`)).toBe(false);
       expect(firstSort.getAttribute('data-previous-value') === 'descending').toBe(true);
 
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(false);
+      expect(firstSort.classList.contains(`bx--table-sort${suffix}--ascending`)).toBe(false);
       expect(firstSort.hasAttribute('data-previous-value')).toBe(false);
     });
 
     it('Should emit an event on sort click', function() {
       const spyToggleSortEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, 'data-table-v2-aftertogglesort', spyToggleSortEvent);
+      events.on(element.ownerDocument.body, `data-table${suffix}-aftertogglesort`, spyToggleSortEvent);
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleSortEvent).toHaveBeenCalled();
     });
 
     afterEach(function() {
-      firstSort.classList.remove('bx--table-sort-v2--ascending');
+      firstSort.classList.remove(`bx--table-sort${suffix}--ascending`);
       firstSort.dataset.previousValue = '';
       events.reset();
     });
@@ -194,7 +196,7 @@ describe('DataTableV2', function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector('[data-table-v2]');
+      element = document.querySelector(`[data-table${suffix}]`);
       table = new DataTableV2(element);
     });
 

@@ -67,30 +67,30 @@
   }
 }
 
-@mixin data-table-v2-sort--x {
+@mixin data-table-sort--x {
   // -------------------------------------
   // Sortable table
   // -------------------------------------
-  .#{$prefix}--data-table-v2--sort th {
+  .#{$prefix}--data-table--sort th {
     padding: 0;
     height: $layout-04;
     border-top: none;
     border-bottom: none;
   }
 
-  .#{$prefix}--data-table-v2--sort td {
+  .#{$prefix}--data-table--sort td {
     padding-left: $spacing-03;
     padding-right: $spacing-03;
   }
 
-  .#{$prefix}--data-table-v2--sort th:first-of-type .#{$prefix}--table-sort-v2 {
+  .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
     padding-left: $spacing-04;
   }
 
   // -------------------------------------
   // Th > Button
   // -------------------------------------
-  .#{$prefix}--table-sort-v2 {
+  .#{$prefix}--table-sort {
     @include button-reset(false);
     position: relative;
     font: inherit;
@@ -103,17 +103,17 @@
     height: 100%;
   }
 
-  .#{$prefix}--table-sort-v2:focus {
+  .#{$prefix}--table-sort:focus {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--table-sort-v2:hover {
+  .#{$prefix}--table-sort:hover {
     background: $data-table-column-hover;
   }
 
   // changes opacity when th is inactive (see line 161)
-  .#{$prefix}--table-sort-v2:focus svg,
-  .#{$prefix}--table-sort-v2:hover svg {
+  .#{$prefix}--table-sort:focus svg,
+  .#{$prefix}--table-sort:hover svg {
     opacity: 1;
   }
 
@@ -121,15 +121,15 @@
   //Th > Button > Svg (Sort Icons)
   // -------------------------------------
   // inactive icons
-  .#{$prefix}--table-sort-v2 .#{$prefix}--table-sort-v2__icon-inactive {
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon-inactive {
     display: block;
   }
 
-  .#{$prefix}--table-sort-v2 .#{$prefix}--table-sort-v2__icon {
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon {
     display: none;
   }
 
-  .#{$prefix}--table-sort-v2__icon-unsorted {
+  .#{$prefix}--table-sort__icon-unsorted {
     position: relative;
     left: rem(2px);
     margin-left: $spacing-03;
@@ -141,20 +141,20 @@
   }
 
   // active icons
-  .#{$prefix}--table-sort-v2.#{$prefix}--table-sort-v2--active .#{$prefix}--table-sort-v2__icon-unsorted {
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active .#{$prefix}--table-sort__icon-unsorted {
     display: none;
   }
 
-  .#{$prefix}--table-sort-v2.#{$prefix}--table-sort-v2--active .#{$prefix}--table-sort-v2__icon {
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active .#{$prefix}--table-sort__icon {
     display: block;
     opacity: 1; //changes opacity when th is active (see line 125)
   }
 
-  .#{$prefix}--table-sort-v2--ascending .#{$prefix}--table-sort-v2__icon {
+  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--table-sort-v2__icon {
+  .#{$prefix}--table-sort__icon {
     position: relative;
     left: rem(2px);
     margin-left: $spacing-03;
@@ -168,9 +168,9 @@
   }
 }
 
-@include exports('data-table-v2-sort') {
+@include exports('data-table-sort') {
   @if feature-flag-enabled('components-x') {
-    @include data-table-v2-sort--x;
+    @include data-table-sort--x;
   } @else {
     @include data-table-v2-sort;
   }
