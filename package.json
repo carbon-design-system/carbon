@@ -150,7 +150,6 @@
     "rollup-plugin-virtual": "^1.0.0",
     "sass-loader": "^6.0.0",
     "scss-to-json": "1.1.0",
-    "semantic-release": "^15.5.0",
     "serve-static": "^1.13.0",
     "style-loader": "^0.20.0",
     "terser": "^3.14.0",
