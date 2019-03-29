@@ -35,11 +35,11 @@
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
-      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
         aria-expanded="false" aria-haspopup="true">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="" id="downshift-input-2" placeholder="Filter...">
+        {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
         <div class="{{@root.prefix}}--list-box__menu-icon">
           {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
         </div>
