@@ -2,7 +2,7 @@
   "name": "carbon-components",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
   "homepage": "https://www.carbondesignsystem.com/",
-  "version": "10.0.0-rc.0",
+  "version": "10.0.0",
   "module": "es/index.js",
   "main": "umd/index.js",
   "repository": {
