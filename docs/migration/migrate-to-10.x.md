@@ -3,7 +3,7 @@
 _Note: this migration guide is for a future, unreleased version of Carbon.
 Anything in this document is subject to change up until v10 is released._
 
-Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/migration/overview) for more information on migrating from v9 to v10.
+Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/migration/overview) for more information on migrating from v9 to v10.
 
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -67,7 +67,6 @@ Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/m
 | Toggle             | No breaking changes                                                   |
 | Toolbar            | [Migrate](../../src/components/toolbar/migrate-to-10.x.md)            |
 | Tooltip            | [Migrate](../../src/components/tooltip/migrate-to-10.x.md)            |
-| UI Shell           | New, experimental                                                     |
 | Unified Header     | Removed                                                               |
 
 ## Styles
