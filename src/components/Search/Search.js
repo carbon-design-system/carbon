@@ -59,6 +59,16 @@ export default class Search extends Component {
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the value of the <input>
+     */
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Optionally provide the default value of the <input>
+     */
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {
