@@ -7,8 +7,7 @@
 
 > The Carbon elements project helps developers execute the
 > IBM Design Language in digital and software products. This project contains a
-> collection of packages for different elements of this language. We'll be
-> introducing additional elements over the next several months.
+> collection of packages for different elements of this language.
 
 ## Getting started
 
