@@ -129,6 +129,81 @@
     </div>
   </div>
 </div>
+<br><br><br><br><br><br><br><br>
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
+    <label class="{{@root.prefix}}--label">Combo box label</label>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text
+      here
+    </div>
+    {{/unless}}
+    <div
+      class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
+        aria-expanded="true" aria-haspopup="true">
+        <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
+          autocomplete="off" value="Option 3" id="downshift-input-2" placeholder="Filter...">
+        <div role="button" class="{{@root.prefix}}--list-box__selection" tabindex="0" title="Clear selected item">
+          {{ carbon-icon 'Close16' aria-label="Clear text input" }}
+        </div>
+        <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
+          {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
+        </div>
+      </div>
+      <ul class="{{@root.prefix}}--list-box__menu">
+        {{#each items}}
+        <li
+          class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
+          id="{{id}}">
+          <div class="{{@root.prefix}}--list-box__menu-item__option" tabindex="0">
+            {{label}}
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br>
+<div class="{{@root.prefix}}--form-item">
+  <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
+    <label class="{{@root.prefix}}--label">Combo box label</label>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
+    <div
+      class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
+      data-invalid>
+      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
+        aria-expanded="false" aria-haspopup="true">
+        <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
+          autocomplete="off" value="Option 3" id="downshift-input-2" placeholder="Filter...">
+        {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
+        <div role="button" class="{{@root.prefix}}--list-box__selection" tabindex="0" title="Clear selected item">
+          {{ carbon-icon 'Close16' aria-label="Clear text input" }}
+        </div>
+        <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
+          {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
+        </div>
+      </div>
+      <ul class="{{@root.prefix}}--list-box__menu">
+        {{#each items}}
+        <li
+          class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
+          id="{{id}}">
+          <div class="{{@root.prefix}}--list-box__menu-item__option" tabindex="0">
+            {{label}}
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="{{@root.prefix}}--form-requirement">
+      Validation message here
+    </div>
+  </div>
+</div>
 {{else}}
 <div
   class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
