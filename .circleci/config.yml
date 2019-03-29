@@ -17,9 +17,3 @@ jobs:
       - run:
           name: Run Continuous Integration checks
           command: yarn ci-check
-      - run:
-          name: Semantic Release
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              yarn semantic-release
-            fi

@@ -59,7 +59,7 @@ const pageNumberChoices = [
 
 const variants = [
   {
-    name: 'default',
+    name: componentsX ? 'deprecated' : 'default', // Not supporting theme switcher here
     label: 'V1',
     meta: {
       removed: componentsX,
@@ -76,20 +76,21 @@ const variants = [
     `,
   },
   {
-    name: 'v2',
-    label: 'V2',
+    name: componentsX ? 'default' : 'v2', // Not supporting theme switcher here
+    label: componentsX ? 'Default' : 'V2', // Not supporting theme switcher here
     context: {
-      version: 'v2',
+      version: 'x',
       itemsPerPageChoices,
       pageNumberChoices,
       totalPages: 5,
     },
   },
   {
-    name: 'v2 Disabled Pagination Buttons',
-    label: 'V2 Disabled Pagination Buttons',
+    // `name`/`label`` here not supporting theme switcher
+    name: componentsX ? 'Disabled Pagination Buttons' : 'v2 Disabled Pagination Buttons',
+    label: componentsX ? 'Disabled Pagination Buttons' : 'V2 Disabled Pagination Buttons',
     context: {
-      version: 'v2',
+      version: 'x',
       itemsPerPageChoices: [itemsPerPageChoices[0]],
       totalPages: 1,
       pageNumberChoices: [pageNumberChoices[0]],
