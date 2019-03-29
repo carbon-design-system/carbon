@@ -10,6 +10,9 @@
 @import '../../globals/scss/vars';
 
 @include exports('data-table-v2-inline-edit') {
+  /// @access private
+  $data-table-suffix: if(feature-flag-enabled('components-x'), '-v2', '');
+
   .#{$prefix}--inline-edit-label {
     display: flex;
     justify-content: space-between;
@@ -62,7 +65,7 @@
     }
   }
 
-  .#{$prefix}--data-table-v2--short {
+  .#{$prefix}--data-table#{$data-table-suffix}--short {
     input {
       height: rem(32px);
     }

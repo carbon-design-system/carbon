@@ -69,8 +69,8 @@
 {{else}}
   <div class="{{@root.prefix}}--pagination" data-pagination>
     <div class="{{@root.prefix}}--pagination__left">
-      <div class="{{@root.prefix}}--select{{#is version "v2"}} {{@root.prefix}}--select--inline{{/is}}">
-        {{#is version "v2"}}
+      <div class="{{@root.prefix}}--select{{#is version "x"}} {{@root.prefix}}--select--inline{{/is}}">
+        {{#is version "x"}}
           <label for="select-id-pagination" id="select-id-pagination-label"
             class="{{@root.prefix}}--pagination__text">Items per page: </label>
         {{/is}}
@@ -89,17 +89,17 @@
           </svg>
         {{/if}}
       </div>
-      {{#isnt version "v2"}}
+      {{#isnt version "x"}}
         <span class="{{@root.prefix}}--pagination__text">Items per page&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       {{/isnt}}
       <span class="{{@root.prefix}}--pagination__text">
-        {{#is version "v2"}}
+        {{#is version "x"}}
           <span>|&nbsp;</span>
         {{/is}}
         <span data-displayed-item-range>1-10</span> of
         <span data-total-items>40</span> items</span>
     </div>
-    <div class="{{@root.prefix}}--pagination__right{{#is version "v2"}} {{@root.prefix}}--pagination--inline{{/is}}">
+    <div class="{{@root.prefix}}--pagination__right{{#is version "x"}} {{@root.prefix}}--pagination--inline{{/is}}">
       <span class="{{@root.prefix}}--pagination__text">
         <span data-displayed-page-number>1</span> of
         <span data-total-pages>4</span> pages</span>
@@ -114,7 +114,7 @@
         {{/if}}
       </button>
       <label for="page-number-input" class="{{@root.prefix}}--visually-hidden">Page number input</label>
-      {{#isnt version "v2"}}
+      {{#isnt version "x"}}
         <input id="page-number-input" type="text" class="{{@root.prefix}}--text-input" placeholder="0" value="1"
           data-page-number-input>
 {{else}}
