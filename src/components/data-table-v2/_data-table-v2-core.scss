@@ -172,11 +172,11 @@
   }
 }
 
-@mixin data-table-v2-core--x {
+@mixin data-table-core--x {
   //----------------------------------------------------------------------------
   // Container
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-v2-container {
+  .#{$prefix}--data-table-container {
     min-width: rem(500px);
     overflow-x: auto;
     padding-top: $spacing-01; // allow space for focus styles
@@ -185,18 +185,18 @@
   //----------------------------------------------------------------------------
   // Table title text
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-v2-header {
+  .#{$prefix}--data-table-header {
     background: $ui-01;
     height: rem(88px);
     padding: rem(22px) 0 0 $spacing-05;
   }
 
-  .#{$prefix}--data-table-v2-header__title {
+  .#{$prefix}--data-table-header__title {
     @include type-style('productive-heading-03');
     color: $text-01;
   }
 
-  .#{$prefix}--data-table-v2-header__description {
+  .#{$prefix}--data-table-header__description {
     @include type-style('body-short-01');
     color: $text-02;
   }
@@ -204,65 +204,65 @@
   //----------------------------------------------------------------------------
   // Data table
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table-v2 {
+  .#{$prefix}--data-table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
   }
 
-  .#{$prefix}--data-table-v2 thead {
+  .#{$prefix}--data-table thead {
     @include type-style('heading-01');
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table-v2 tbody {
+  .#{$prefix}--data-table tbody {
     @include type-style('body-short-01');
     background-color: $ui-01;
     width: 100%;
   }
 
-  .#{$prefix}--data-table-v2 tr {
+  .#{$prefix}--data-table tr {
     border: none;
     height: $layout-04;
     width: 100%;
   }
 
-  .#{$prefix}--data-table-v2 tbody tr:hover {
+  .#{$prefix}--data-table tbody tr:hover {
     background: $hover-field;
   }
 
-  .#{$prefix}--data-table-v2 tbody tr:hover td {
+  .#{$prefix}--data-table tbody tr:hover td {
     color: $text-01;
     background: $hover-field;
     border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
   }
 
-  .#{$prefix}--data-table-v2 th,
-  .#{$prefix}--data-table-v2 td {
+  .#{$prefix}--data-table th,
+  .#{$prefix}--data-table td {
     padding-left: $spacing-04;
     padding-right: $spacing-04;
     vertical-align: top;
     text-align: left;
   }
 
-  .#{$prefix}--data-table-v2 th {
+  .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $ui-03;
   }
 
-  .#{$prefix}--data-table-v2 th:first-of-type {
+  .#{$prefix}--data-table th:first-of-type {
     padding-left: $spacing-05;
   }
 
-  .#{$prefix}--data-table-v2 .#{$prefix}--table-header-label {
+  .#{$prefix}--data-table .#{$prefix}--table-header-label {
     display: block;
     padding: rem(14px) 0;
   }
 
-  .#{$prefix}--data-table-v2 td {
+  .#{$prefix}--data-table td {
     background: $ui-01;
     color: $text-02;
     border-top: 1px solid $ui-01;
@@ -272,46 +272,46 @@
   }
 
   @supports (-moz-appearance: none) {
-    .#{$prefix}--data-table-v2 td {
+    .#{$prefix}--data-table td {
       background-clip: padding-box; // fix to show borders in ff
     }
   }
 
-  .#{$prefix}--data-table-v2 td:first-of-type {
+  .#{$prefix}--data-table td:first-of-type {
     padding-left: $spacing-05;
   }
 
-  .#{$prefix}--data-table-v2 td:last-of-type {
+  .#{$prefix}--data-table td:last-of-type {
     padding-right: $spacing-05;
   }
 
   // specific padding for overflow menu columns
-  .#{$prefix}--data-table-v2 .#{$prefix}--table-column-menu,
-  .#{$prefix}--data-table-v2 .#{$prefix}--table-column-menu:last-of-type {
+  .#{$prefix}--data-table .#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
     padding-top: $spacing-03;
     padding-right: $spacing-03;
   }
 
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
     background: $ui-03;
   }
 
   // Overflow Menu Overrides
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
     outline: none;
   }
 
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
     opacity: 0;
   }
 
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:hover .#{$prefix}--overflow-menu__icon,
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:focus .#{$prefix}--overflow-menu__icon,
-  .#{$prefix}--data-table-v2
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:hover .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:focus .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table
     tr:hover
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu
@@ -326,12 +326,12 @@
     padding-left: $spacing-05;
   }
 
-  .#{$prefix}--data-table-v2 th.#{$prefix}--table-column-checkbox {
+  .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
   }
 
-  .#{$prefix}--data-table-v2 td.#{$prefix}--table-column-checkbox {
+  .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {
     padding-top: rem(11px);
     padding-bottom: 0;
   }
@@ -341,25 +341,25 @@
   }
 
   // default selected row
-  tr.#{$prefix}--data-table-v2--selected td {
+  tr.#{$prefix}--data-table--selected td {
     background-color: $ui-03;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $active-01; //bottom border acts as separator from other rows
   }
 
   // first row
-  tr.#{$prefix}--data-table-v2--selected:first-of-type td {
+  tr.#{$prefix}--data-table--selected:first-of-type td {
     border-top: 1px solid $active-01; //top border acts as separator from thead
   }
 
   // last row
-  tr.#{$prefix}--data-table-v2--selected:last-of-type td {
+  tr.#{$prefix}--data-table--selected:last-of-type td {
     border-top: 1px solid $ui-03; // doesn't need separators
     border-bottom: 1px solid $ui-03;
   }
 
   // hover
-  .#{$prefix}--data-table-v2 tbody .#{$prefix}--data-table-v2--selected:hover td {
+  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
     color: $text-01;
     background: $data-table-column-hover;
     border-top: 1px solid $data-table-column-hover;
@@ -367,14 +367,14 @@
   }
 
   // selected overflow menu
-  .#{$prefix}--data-table-v2--selected .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
     opacity: 1;
   }
 }
 
 @include exports('data-table-v2-core') {
   @if feature-flag-enabled('components-x') {
-    @include data-table-v2-core--x;
+    @include data-table-core--x;
   } @else {
     @include data-table-v2-core;
   }
