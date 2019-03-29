@@ -34,9 +34,9 @@
     <div
       class="{{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
+      {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
         aria-expanded="false" aria-haspopup="true">
-        {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
         <span class="{{@root.prefix}}--list-box__label">List box options</span>
         <div class="{{@root.prefix}}--list-box__menu-icon">
           {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
