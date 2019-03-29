@@ -20,10 +20,10 @@ $feature-flags: () !default;
 /// @access private
 /// @type Map
 $default-feature-flags: (
-  components-x: false,
-  breaking-changes-x: false,
+  components-x: true,
+  breaking-changes-x: true,
   ui-shell: false,
-  grid: false,
+  grid: true,
   grid-columns-16: false,
   grid--fallback: false,
 );
