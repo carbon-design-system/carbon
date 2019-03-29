@@ -187,8 +187,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
     background: $ui-01;
-    height: rem(88px);
-    padding: rem(22px) 0 0 $spacing-05;
+    padding: $spacing-05 0 $spacing-06 $spacing-05;
   }
 
   .#{$prefix}--data-table-header__title {
@@ -311,11 +310,7 @@
 
   .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:hover .#{$prefix}--overflow-menu__icon,
   .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu:focus .#{$prefix}--overflow-menu__icon,
-  .#{$prefix}--data-table
-    tr:hover
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu
-    .#{$prefix}--overflow-menu__icon {
+  .#{$prefix}--data-table tr:hover td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
     opacity: 1;
   }
 
