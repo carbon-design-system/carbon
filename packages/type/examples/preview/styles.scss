@@ -7,6 +7,10 @@
 @include carbon--type-reset();
 @include carbon--type-classes();
 
+@include carbon--font-face-sans();
+@include carbon--font-face-serif();
+@include carbon--font-face-mono();
+
 //------------------------------------------------------------------------------
 // Font-face
 //------------------------------------------------------------------------------
