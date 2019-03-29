@@ -5,8 +5,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
+- [Publishing a stable release](#publishing-a-stable-release)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
+
+## Publishing a stable release
 
 You can publish a release of `carbon-components` by following these steps:
 
