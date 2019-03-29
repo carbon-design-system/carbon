@@ -79,3 +79,10 @@ Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/m
 | `src`               | Deprecated in v10, use `scss` instead [Migrate](../../src/migrate-to-10.x.md) |
 | `scss/globals`      | [Migrate](../../src/globals/scss/migrate-to-10.x.md)                          |
 | `scss/globals/grid` | [Migrate](../../src/globals/scss/grid/migrate-to-10.x.md)                     |
+
+### Features
+
+| Sass feature        | v10     |
+| ------------------- | ------- |
+| `font-size` mixin   | Removed |
+| `line-height` mixin | Removed |
