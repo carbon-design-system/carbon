@@ -33,24 +33,24 @@ body {
   padding: 0;
 }
 
-@each $step in $carbon--fixed-spacing-scale {
-  $index: index($carbon--fixed-spacing-scale, $step) - 1;
+@each $spacer in $carbon--spacing {
+  $index: index($carbon--spacing, $spacer);
 
   .fixed-spacing-scale-#{$index} {
-    width: carbon--spacing($index);
-    height: carbon--spacing($index);
+    width: $spacer;
+    height: $spacer;
     background-color: black;
     margin-right: carbon--mini-units(3);
     margin-bottom: carbon--mini-units(3);
   }
 }
 
-@each $step in $carbon--fluid-spacing-scale {
-  $index: index($carbon--fluid-spacing-scale, $step) - 1;
+@each $spacer in $carbon--fluid-spacing {
+  $index: index($carbon--fluid-spacing, $spacer);
 
   .fluid-spacing-scale-#{$index} {
-    width: carbon--spacing($index, true);
-    height: carbon--spacing($index, true);
+    width: $spacer;
+    height: $spacer;
     background-color: black;
     margin-right: carbon--mini-units(3);
     margin-bottom: carbon--mini-units(3);
