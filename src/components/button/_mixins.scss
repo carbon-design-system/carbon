@@ -79,6 +79,9 @@
   @include type-style('body-short-01');
 
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   flex-shrink: 0;
   min-height: rem($button-height);
   padding: $button-padding;
@@ -89,9 +92,10 @@
   outline: $button-outline-width solid transparent;
   position: relative;
   max-width: rem(320px);
-  min-width: rem(80px);
+  min-width: rem(125px);
 
-  &:disabled {
+  &:disabled,
+  &.#{$prefix}--btn--disabled {
     cursor: not-allowed;
     color: $ui-04;
     background: $ibm-color__gray-30;
@@ -99,13 +103,11 @@
   }
 
   .#{$prefix}--btn__icon {
+    flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
+    margin-left: $spacing-md;
     transition: $duration--fast-01 motion(entrance, productive);
-    position: absolute;
-    right: rem(16px);
-    top: 50%;
-    transform: translateY(-50%);
   }
 }
 
@@ -128,7 +130,7 @@
     transition: $duration--fast-01 motion(entrance, productive);
   }
 
-  &::before {
+  &:not(.#{$prefix}--btn--disabled)::before {
     top: calc(-#{$button-border-width} + #{$button-outline-width});
     left: -$button-border-width + $button-outline-width;
     width: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
@@ -140,7 +142,7 @@
     border-color: $ui-02;
   }
 
-  &::after {
+  &:not(.#{$prefix}--btn--disabled)::after {
     top: -#{$button-border-width};
     left: -#{$button-border-width};
     height: calc(100% + 2 * #{$button-border-width});
@@ -153,7 +155,9 @@
   }
 
   &:disabled:hover,
-  &:disabled:focus {
+  &:disabled:focus,
+  &:hover.#{$prefix}--btn--disabled,
+  &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
     background: $ibm-color__gray-30;
     border-color: $ibm-color__gray-30;

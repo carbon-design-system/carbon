@@ -64,7 +64,6 @@ $temp-text: $color__blue-90;
 }
 
 .code-example__expand {
-  @include helvetica;
   position: absolute;
   bottom: rem(2px);
   right: rem(2px);

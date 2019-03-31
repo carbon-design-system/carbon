@@ -8,6 +8,7 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
+const { componentsX } = require('../../globals/js/feature-flags');
 
 const iconAddSolid = `
   <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -144,6 +145,14 @@ const columnsExpandable = [
     section: true,
   },
   {
+    name: 'select',
+    title: 'Label name',
+    checkbox: true,
+    checkboxId: `${prefix}--checkbox-20`,
+    checkboxName: 'checkbox-20',
+    checkboxValue: 'green',
+  },
+  {
     name: 'name',
     title: 'Name',
     sortable: true,
@@ -199,7 +208,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: "Maureen's VM Groups Testing a really long text here",
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -291,17 +300,17 @@ const rows = [
 
 const rowsExpandable = [
   {
-    sectionContent: `
-      <h4>
-        <strong>Harry Potter</strong>
-      </h4>
-      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
-        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
-        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
-        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
-        as they tried to protect him, shortly before attacking Harry.</p>
+    sectionContent:
+      /* eslint-disable max-len */
+      ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
     `,
     section: true,
+    select: {
+      id: `${prefix}--checkbox-13`,
+      name: 'checkbox-13',
+      value: 'green',
+      label: 'Label name',
+    },
     name: 'Load Balancer 1',
     protocol: 'HTTP',
     port: '80',
@@ -310,16 +319,16 @@ const rowsExpandable = [
     status: 'Active',
   },
   {
-    sectionContent: `
-      <h4>
-        <strong>Harry Potter</strong>
-      </h4>
-      <p>Harry James Potter (b. 31 July, 1980) was a half-blood wizard, the only child and son of the late James and Lily
-        Potter (née Evans), and one of the most famous and powerful wizards of modern times. In what proved to be a vain
-        attempt to circumvent a prophecy that stated that a boy born at the end of July of 1980 could be able to defeat
-        him, Lord Voldemort tried to murder him when he was a year and three months old. Voldemort murdered Harry's parents
-        as they tried to protect him, shortly before attacking Harry.</p>
+    sectionContent:
+      /* eslint-disable max-len */
+      ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
     `,
+    select: {
+      id: `${prefix}--checkbox-12`,
+      name: 'checkbox-12',
+      value: 'green',
+      label: 'Label name',
+    },
     section: true,
     name: 'Load Balancer 1',
     protocol: 'HTTP',
@@ -367,6 +376,7 @@ module.exports = {
   label: 'Data Table V2',
   context: {
     prefix,
+    componentsX,
   },
   variants: [
     {
@@ -378,6 +388,7 @@ module.exports = {
       `,
       context: {
         title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
         batchActions,
         toolbarActions,
         columns,
@@ -392,8 +403,8 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
+        sort: true,
       },
     },
     {
@@ -408,6 +419,15 @@ module.exports = {
         searchLabel: 'Search',
         clearSearchLabel: 'Clear search input',
         hasToolbar: true,
+        sort: true,
+        batchActions,
+        toolbarActions,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
       },
     },
     {
@@ -421,6 +441,7 @@ module.exports = {
         saveLabel: 'Save',
         sortLabel: 'Sort rows by this header in descending order',
         zebra: true,
+        sort: true,
       },
     },
     {
@@ -452,8 +473,8 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
         hasToolbar: true,
+        sort: true,
       },
     },
   ],

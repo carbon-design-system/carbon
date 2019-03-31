@@ -4,6 +4,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
+const path = require('path');
 const commander = require('commander');
 
 const flatten = a => a.reduce((result, item) => [...result, ...(Array.isArray(item) ? item : [item])], []);
@@ -34,6 +35,26 @@ const travisLaunchers = {
   chrome: 'Chrome_Travis',
 };
 
+class FeatureFlagProxyPlugin {
+  /**
+   * A WebPack resolver plugin that proxies module request
+   * for `src/globals/js/feature-flags` to `demo/js/feature-flags`,
+   * which is a file generated from `src/globals/js/feature-flags` with effective feature flag values.
+   */
+  constructor() {
+    this.source = 'before-described-relative';
+  }
+
+  apply(resolver) {
+    resolver.plugin(this.source, (request, callback) => {
+      if (/feature-flags$/i.test(request.path)) {
+        request.path = path.resolve(__dirname, '../demo/feature-flags');
+      }
+      callback();
+    });
+  }
+}
+
 module.exports = function(config) {
   config.set({
     basePath: '..',
@@ -53,7 +74,8 @@ module.exports = function(config) {
             'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
             'src/components/**/!(*.config).js', // For generatoring coverage report for untested files
             'src/globals/js/{misc,mixins}/**/*.js', // For generatoring coverage report for untested files
-            'tests/spec/**/*.js',
+            // Excluding tests for removed components
+            'tests/spec/**/!(carousel|data-table|fab|left-nav|lightbox|profile-switcher)_spec.js',
           ]
         : []),
     ],
@@ -68,6 +90,10 @@ module.exports = function(config) {
     webpack: {
       mode: 'development',
       devtool: 'inline-source-maps',
+      resolve: {
+        modules: ['node_modules'],
+        plugins: [new FeatureFlagProxyPlugin()],
+      },
       module: {
         rules: [
           {
@@ -192,13 +218,18 @@ module.exports = function(config) {
                   // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
                   // That said, new files should never be added, except for misc code that is very broser-specific
                   'src/components/removed-component.js',
+                  'src/components/carousel/carousel.js', // Removed for `v10`
                   'src/components/code-snippet/code-snippet.js',
                   'src/components/copy-button/copy-button.js',
+                  'src/components/data-table/data-table.js', // Removed for `v10`
                   'src/components/detail-page-header/detail-page-header.js',
-                  'src/components/interior-left-nav/interior-left-nav.js',
+                  'src/components/fab/fab.js', // Removed for `v10`
+                  'src/components/interior-left-nav/interior-left-nav.js', // Removed for `v10`
+                  'src/components/lightbox/lightbox.js', // Removed for `v10`
                   'src/components/pagination/pagination.js',
-                  'src/components/unified-header/left-nav.js',
-                  'src/components/unified-header/profile-switcher.js',
+                  'src/components/unified-header/left-nav.js', // Removed for `v10`
+                  'src/components/unified-header/profile-switcher.js', // Removed for `v10`
+                  'src/components/data-table-v2/data-table-v2.js', // to-do: remove when v9 is deprecated
                 ],
               },
             },

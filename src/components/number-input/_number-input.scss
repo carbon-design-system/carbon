@@ -194,7 +194,7 @@
   .#{$prefix}--number input[type='number'] {
     @include type-style('body-short-01');
     @include focus-outline('reset');
-    font-family: $font-family-mono;
+    font-family: carbon--font-family('mono');
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;

@@ -50,7 +50,8 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__text {
     @include typescale('omega');
-    color: $text-02;
+    @include type-style('body-short-01');
+    color: $text-01;
     display: none;
     padding-right: $spacing-2xs;
 
@@ -195,7 +196,7 @@ $css--helpers: true;
 }
 
 @mixin pagination--x {
-  .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
     border-top: 0;
   }
 
@@ -215,6 +216,11 @@ $css--helpers: true;
     height: 100%;
     align-items: center;
     grid-template-columns: auto 0;
+  }
+
+  .#{$prefix}--select-input__wrapper,
+  .#{$prefix}--select-input--inline__wrapper {
+    height: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
@@ -259,7 +265,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
     @include carbon--breakpoint('md') {
-      right: 1.6rem;
+      right: 1.8rem;
     }
   }
 
@@ -300,10 +306,11 @@ $css--helpers: true;
 
   span.#{$prefix}--pagination__text {
     margin-left: $carbon--spacing-05;
-    color: $text-02;
+    color: $text-01;
   }
-  .#{$prefix}--pagination__text[for='select-id-pagination-page'] {
-    margin-left: -1rem;
+
+  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
+    margin-left: -0.5rem;
   }
 
   .#{$prefix}--pagination__button {

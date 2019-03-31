@@ -18,6 +18,8 @@ Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/m
 
 ## Components
 
+**IMPORTANT NOTE**: `v9` component styles will be _removed_ soon after the initial `v10` release.
+
 | Component          | v10                                                                   |
 | ------------------ | --------------------------------------------------------------------- |
 | Accordion          | [Migrate](../../src/components/accordion/migrate-to-10.x.md)          |
@@ -70,8 +72,17 @@ Refer to the [Carbon X Migration Guide](https://carbondesignsystem.com/updates/m
 
 ## Styles
 
+**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be _removed_ soon after the initial `v10` release.
+
 | `scss` path         | v10                                                                           |
 | ------------------- | ----------------------------------------------------------------------------- |
 | `src`               | Deprecated in v10, use `scss` instead [Migrate](../../src/migrate-to-10.x.md) |
 | `scss/globals`      | [Migrate](../../src/globals/scss/migrate-to-10.x.md)                          |
 | `scss/globals/grid` | [Migrate](../../src/globals/scss/grid/migrate-to-10.x.md)                     |
+
+### Features
+
+| Sass feature        | v10     |
+| ------------------- | ------- |
+| `font-size` mixin   | Removed |
+| `line-height` mixin | Removed |

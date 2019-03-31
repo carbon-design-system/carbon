@@ -11,6 +11,7 @@
 @import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
+/// @access private
 @mixin css-body {
   body {
     @include reset;
@@ -21,6 +22,7 @@
   }
 }
 
+/// @access private
 @mixin css-body--x {
   body {
     @include reset;

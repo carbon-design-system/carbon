@@ -10,6 +10,8 @@
 @import 'typography';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Include styles for screen reader/assistive text
+/// @access public
 @mixin css-helpers {
   .#{$prefix}--assistive-text,
   .#{$prefix}--visually-hidden {
@@ -27,7 +29,11 @@
 
   .#{$prefix}--body {
     @include reset;
-    @include font-family;
+    @if not feature-flag-enabled('components-x') {
+      @include font-family;
+    } @else {
+      @include type-style('body-short-01');
+    }
     color: $text-01;
     background-color: $ui-02;
     line-height: 1;

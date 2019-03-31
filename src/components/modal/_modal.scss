@@ -196,14 +196,14 @@
     max-height: 100%;
     height: 100%;
 
-    @include breakpoint(md) {
+    @include carbon--breakpoint(md) {
       height: auto;
       width: 50%;
       max-width: 768px;
       max-height: 90%;
     }
 
-    @include breakpoint(lg) {
+    @include carbon--breakpoint(lg) {
       max-height: 80%;
     }
   }
