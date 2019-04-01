@@ -273,6 +273,7 @@
                 </button>
               </div>
             </div>
+            {{/is}}
             {{#each toolbarActionsX as |toolbar|}}
             <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
               aria-expanded="false" {{#if disabled}} disabled {{/if}}>
@@ -290,7 +291,7 @@
               </ul>
             </div>
             {{/each}}
-          {{/is}}
+
           <!--  Toolbar primary button -->
           <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
             {{#if small }} Primary {{else}} Primary Button {{/if}}
