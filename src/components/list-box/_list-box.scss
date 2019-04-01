@@ -539,6 +539,13 @@ $list-box-menu-width: rem(300px);
     padding-right: carbon--mini-units(9);
   }
 
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value='']
+    + .#{$prefix}--list-box__invalid-icon {
+    right: rem(40px); // to account for clear input button outline
+  }
+
   // disabled && invalid && empty input field
   .#{$prefix}--list-box--disabled[data-invalid] .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
     padding-right: $carbon--spacing-09;
