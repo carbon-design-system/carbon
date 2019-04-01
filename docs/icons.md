@@ -146,3 +146,4 @@ icons. This is due to the following constraints:
   namely for individuals with dyslexia
   - https://twitter.com/sarah_edo/status/1044580394052403200
   - https://speakerdeck.com/ninjanails/death-to-icon-fonts
+  - https://mobile.twitter.com/SaraSoueidan/status/1102208464724602880
