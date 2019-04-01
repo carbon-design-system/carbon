@@ -59,7 +59,7 @@
  * }
  */
 
-exports.breakingChangesX = false;
-exports.componentsX = false;
-exports.grid = false;
+exports.breakingChangesX = true;
+exports.componentsX = true;
+exports.grid = true;
 exports.gridColumns16 = false;

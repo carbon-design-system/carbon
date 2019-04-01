@@ -7,7 +7,6 @@
 
 export { default as Checkbox } from '../../components/checkbox/checkbox';
 export { default as FileUploader } from '../../components/file-uploader/file-uploader';
-export { default as FabButton } from '../../components/fab/fab';
 export { default as ContentSwitcher } from '../../components/content-switcher/content-switcher';
 export { default as Tab } from '../../components/tabs/tabs';
 export { default as OverflowMenu } from '../../components/overflow-menu/overflow-menu';
@@ -16,11 +15,8 @@ export { default as Loading } from '../../components/loading/loading';
 export { default as InlineLoading } from '../../components/inline-loading/inline-loading';
 export { default as Dropdown } from '../../components/dropdown/dropdown';
 export { default as NumberInput } from '../../components/number-input/number-input';
-export { default as DataTable } from '../../components/data-table/data-table';
 export { default as DataTableV2 } from '../../components/data-table-v2/data-table-v2';
 export { default as DatePicker } from '../../components/date-picker/date-picker';
-export { default as LeftNav } from '../../components/unified-header/left-nav';
-export { default as ProfileSwitcher } from '../../components/unified-header/profile-switcher';
 export { default as Pagination } from '../../components/pagination/pagination';
 export { default as Search } from '../../components/search/search';
 export { default as Accordion } from '../../components/accordion/accordion';
@@ -33,8 +29,6 @@ export { default as FloatingMenu } from '../../components/floating-menu/floating
 export { default as StructuredList } from '../../components/structured-list/structured-list';
 export { default as Slider } from '../../components/slider/slider';
 export { default as Tile } from '../../components/tile/tile';
-export { default as Carousel } from '../../components/carousel/carousel';
-export { default as Lightbox } from '../../components/lightbox/lightbox';
 export { default as CodeSnippet } from '../../components/code-snippet/code-snippet';
 export { default as TextInput } from '../../components/text-input/text-input';
 export { default as SideNav } from '../../components/ui-shell/side-nav';
