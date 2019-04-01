@@ -10,56 +10,6 @@
 const { prefix } = require('../../globals/js/settings');
 const { componentsX } = require('../../globals/js/feature-flags');
 
-const iconBatchDelete = `
-  <svg  class="${prefix}--btn__icon"
-    width="16px"
-    height="16px"
-    viewBox="0 0 16 16"
-    role="img"
-    aria-label="Delete"
-    alt="Delete">
-    <title>Trash Can</title>
-    <rect x="6" y="6" width="1" height="6"/>
-    <rect x="9" y="6" width="1" height="6"/>
-    <path d="M2,3v1h1v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V4h1V3H2z M4,14V4h8v10H4z"/>
-    <rect x="6" y="1" width="4" height="1"/>
-    <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
-  </svg>
-`;
-
-const iconBatchSave = `
-<svg  class="${prefix}--btn__icon"
-  width="16px"
-  height="16px"
-  viewBox="0 0 16 16"
-  role="img"
-  aria-label="Save"
-  alt="Save">
-  <title>Save</title>
-  <path d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5
-C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1
-h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"/>
-  <rect id="_Transparent_Rectangle_" style="fill: none;" class="st0" width="16" height="16"/>
-</svg>
-`;
-
-const iconBatchDownload = `
-<svg class="${prefix}--btn__icon ${prefix}--batch-download"
-  fill-rule="evenodd"
-  height="16px"
-  width="16px"
-  name="download"
-  role="img"
-  viewBox="0 0 16 16"
-  width="14"
-  aria-label="Download"
-  alt="Download">
-  <title>Download</title>
-  <path d="M7.506 11.03l4.137-4.376.727.687-5.363 5.672-5.367-5.67.726-.687 4.14 4.374V0h1v11.03z"></path>
-  <path d="M13 15v-2h1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-2h1v2h12z"></path>
-</svg>
-`;
-
 const iconAddSolid = `
   <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
     <path d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
@@ -132,15 +82,6 @@ const batchActions = [
   },
 ];
 
-const batchActionsX = [
-  {
-    label: 'Delete',
-    icon: iconBatchDelete,
-  },
-  { label: 'Save', icon: iconBatchSave },
-  { label: 'Download', icon: iconBatchDownload },
-];
-
 const toolbarActions = [
   {
     icon: iconDownload,
@@ -155,7 +96,6 @@ const toolbarActions = [
 
 const toolbarActionsX = [
   {
-    icon: iconSettings,
     overflowItems: [
       {
         label: 'Option 1',
@@ -464,12 +404,11 @@ module.exports = {
         subset of their fields in columns, or headers.
       `,
       context: {
-        state: 'persistent-search',
+        state: 'default',
         title: 'Table title',
         optionalHelper: 'Optional Helper Text',
         batchActions,
         toolbarActions,
-        batchActionsX,
         toolbarActionsX,
         columns,
         rows,
@@ -503,7 +442,6 @@ module.exports = {
         sort: true,
         batchActions,
         toolbarActions,
-        batchActionsX,
         toolbarActionsX,
         selectedItemsCounterLabel: `
           <span data-items-selected>3</span> items selected
@@ -545,7 +483,6 @@ module.exports = {
         title: 'Table title',
         batchActions,
         toolbarActions,
-        batchActionsX,
         toolbarActionsX,
         columns,
         rows,
