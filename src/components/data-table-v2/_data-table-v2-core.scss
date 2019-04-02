@@ -314,15 +314,13 @@
     opacity: 1;
   }
 
-  .#{$prefix}--table-row--menu-option .#{$prefix}--overflow-menu-options__btn .#{$prefix}--overflow-menu-options__option-content {
-    display: flex;
-  }
-
   .#{$prefix}--table-row--menu-option
     .#{$prefix}--overflow-menu-options__btn
     .#{$prefix}--overflow-menu-options__option-content
     svg {
     margin-right: rem(8px);
+    position: relative;
+    top: rem(3px); //used to center svg without setting display flex //display block needed for overflow text truncation
   }
 
   //----------------------------------------------------------------------------
