@@ -58,11 +58,13 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.element.addEventListener('click', evt => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
+      const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+
       if (eventElement) {
         this._toggleState(eventElement, evt);
       }
 
-      if (componentsX) {
+      if (componentsX && searchContainer) {
         this._handleDocumentClick(evt);
       }
     });
