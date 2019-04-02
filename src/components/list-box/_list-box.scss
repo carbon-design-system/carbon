@@ -562,7 +562,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
-    fill: $ui-05;
+    fill: $icon-02;
     height: 100%;
   }
 
@@ -589,7 +589,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $ui-05;
+    fill: $icon-02;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
