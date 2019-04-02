@@ -221,12 +221,18 @@
       <!-- Batch actions -->
       <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
           <div class="{{@root.prefix}}--action-list">
-            {{#each batchActionsX}}
             <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
-              {{label}}
-              {{{icon}}}
+              Delete
+              {{ carbon-icon 'Delete16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            {{/each}}
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+              Save
+              {{ carbon-icon 'Save16' class=(add @root.prefix '--btn__icon')}}
+            </button>
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+              Download
+              {{ carbon-icon 'Download16' class=(add @root.prefix '--btn__icon')}}
+            </button>
             <button data-event="action-bar-cancel" class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--batch-summary__cancel">{{cancelLabel}}</button>
           </div>
         <div class="{{@root.prefix}}--batch-summary">
@@ -235,28 +241,12 @@
       </div>
       {{/if}}
 
-      <!-- Persistent Search -->
-      {{#is state "persistent-search"}}
-      <div class="{{@root.prefix}}--toolbar-search-container-persistent">
-        <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-          <div class="{{@root.prefix}}--search-magnifier">
-            {{ carbon-icon 'Search16'}}
-          </div>
-          <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
-          <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
-          <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}" aria-label="{{clearSearchLabel}}">
-            {{ carbon-icon 'Close16'}}
-          </button>
-        </div>
-      </div>
-      {{/is}}
-
       {{#if toolbarActions}}
      <div class="{{@root.prefix}}--toolbar-content">
           <!--  Default hidden search -->
          {{#is state "default"}}
            <div class="{{@root.prefix}}--toolbar-search-container-expandable">
-             <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
+             <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm" role="search">
                <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
                  {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
                </div>
@@ -267,30 +257,14 @@
                 </button>
               </div>
             </div>
-            {{#each toolbarActionsX as |toolbar|}}
-            <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
-              aria-expanded="false" {{#if disabled}} disabled {{/if}}>
-              {{{icon}}}
-              <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
-                {{#each toolbar.overflowItems}}
-                <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
-                  <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}}>
-                    <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-                    {{label}}
-                    </div>
-                  </button>
-                </li>
-                {{/each}}
-              </ul>
-            </div>
-            {{/each}}
-          {{/is}}
-          <!--  Disabled toolbar hidden search -->
-          {{#is state "disabled"}}
-            <div class="{{@root.prefix}}--toolbar-search-container-expandable">
-              <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm {{@root.prefix}}--search--light" role="search">
-                <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
-                  {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
+            {{/is}}
+
+            <!-- Persistent Search -->
+            {{#is state "persistent-search"}}
+            <div class="{{@root.prefix}}--toolbar-search-container-persistent">
+              <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm" role="search">
+                <div class="{{@root.prefix}}--search-magnifier">
+                  {{ carbon-icon 'Search16'}}
                 </div>
                 <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
                 <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search" placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
@@ -299,18 +273,13 @@
                 </button>
               </div>
             </div>
-            {{#each toolbarActionsXDisabled}}
-            <button class="{{@root.prefix}}--toolbar-action" {{#if disabled}} disabled {{/if}}>
-              {{{icon}}}
-            </button>
-            {{/each}}
-          {{/is}}
-          <!-- disabled toolbar overflow menu -->
-          {{#is state "persistent-search"}}
+            {{/is}}
+
+            <!-- Toolbar Overflow Menu -->
             {{#each toolbarActionsX as |toolbar|}}
             <div class="{{@root.prefix}}--overflow-menu {{@root.prefix}}--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
               aria-expanded="false" {{#if disabled}} disabled {{/if}}>
-              {{{icon}}}
+              {{ carbon-icon 'Settings16' class=(add @root.prefix '--toolbar-action__icon')}}
               <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
                 {{#each toolbar.overflowItems}}
                 <li class="{{@root.prefix}}--overflow-menu-options__option {{#if (not ../../small)}} {{@root.prefix}}--overflow-menu--data-table {{/if}}" role="presentation">
@@ -324,7 +293,8 @@
               </ul>
             </div>
             {{/each}}
-          {{/is}}
+
+          <!--  Toolbar primary button -->
           <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
             {{#if small }} Primary {{else}} Primary Button {{/if}}
             {{ carbon-icon 'Add20' class=(add @root.prefix '--btn__icon') }}
@@ -404,15 +374,36 @@
                 <div data-overflow-menu role="menu" tabindex="0" aria-label="{{data.label}}" class="{{@root.prefix}}--overflow-menu">
                   {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
                   <ul class="{{@root.prefix}}--overflow-menu-options{{#if data.flip}} {{@root.prefix}}--overflow-menu--flip{{/if}}">
-                    {{#each data.items}}
-                      <li class="{{@root.prefix}}--overflow-menu-options__option{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
+
+                      <li class="{{@root.prefix}}--overflow-menu-options__option {{@root.prefix}}--table-row--menu-option">
                         <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">
                           <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-                            {{{label}}}
+                           {{ carbon-icon 'Edit16' }} Edit
                           </div>
                         </button>
                       </li>
-                    {{/each}}
+                      <li class="{{@root.prefix}}--overflow-menu-options__option {{@root.prefix}}--table-row--menu-option">
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+                            {{ carbon-icon 'Download16' }} Download
+                          </div>
+                        </button>
+                      </li>
+                      <li class="{{@root.prefix}}--overflow-menu-options__option {{@root.prefix}}--table-row--menu-option">
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+                            {{ carbon-icon 'Save16' }} Save
+                          </div>
+                        </button>
+                      </li>
+                      <li class="{{@root.prefix}}--overflow-menu-options__option {{@root.prefix}}--table-row--menu-option">
+                        <button class="{{@root.prefix}}--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="{{@root.prefix}}--overflow-menu-options__option-content">
+                            {{ carbon-icon 'Delete16' }} Delete
+                          </div>
+                        </button>
+                      </li>
+
                   </ul>
                 </div>
               </td>
