@@ -236,7 +236,6 @@
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-input {
     border: none;
     height: 100%;
-    @include font-size('14');
     visibility: hidden;
     padding: 0;
     background-color: transparent;
@@ -527,7 +526,7 @@
   }
 
   .#{$prefix}--batch-summary__para {
-    @include type-style('interactive-01');
+    @include type-style('body-short-01');
   }
 }
 
