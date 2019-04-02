@@ -14,8 +14,8 @@
     {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="" id="downshift-input-2" placeholder="Filter...">
         <div class="{{@root.prefix}}--list-box__menu-icon">
@@ -34,8 +34,8 @@
     {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="This is not a value." id="downshift-input-2" placeholder="Filter...">
         <div class="{{@root.prefix}}--list-box__selection" role="button" tabIndex="0">
@@ -58,8 +58,8 @@
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="" id="downshift-input-2" placeholder="Filter...">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
@@ -83,8 +83,8 @@
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="This is not a value." id="downshift-input-2" placeholder="Filter...">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
@@ -112,8 +112,8 @@
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true" disabled>
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="true" disabled>
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." disabled>
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
@@ -138,8 +138,8 @@
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true" disabled>
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="true" disabled>
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="This is not a value" id="downshift-input-2" placeholder="Filter..." disabled>
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
@@ -166,8 +166,8 @@
     {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--disabled{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true" disabled>
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="true" disabled>
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="" id="downshift-input-2" placeholder="Filter..." disabled>
         <div class="{{@root.prefix}}--list-box__menu-icon">
@@ -188,8 +188,8 @@
     {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
-        aria-expanded="true" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="" id="downshift-input-2" placeholder="Filter...">
         <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
@@ -221,8 +221,8 @@
     {{/unless}}
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
-        aria-expanded="true" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="Option 3" id="downshift-input-2" placeholder="Filter...">
         <div role="button" class="{{@root.prefix}}--list-box__selection" tabindex="0" title="Clear selected item">
@@ -256,8 +256,8 @@
     <div
       class="{{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}"
       data-invalid>
-      <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
-        aria-expanded="false" aria-haspopup="true">
+      <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+        aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" role="combobox" aria-autocomplete="list" aria-expanded="false"
           autocomplete="off" value="Option 3" id="downshift-input-2" placeholder="Filter...">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
@@ -288,7 +288,7 @@
 {{else}}
 <div
   class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
-  <div role="button" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
+  <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
     aria-haspopup="true" {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox"
       aria-autocomplete="list" aria-expanded="false" autocomplete="off" value="" id="downshift-input-2"
       placeholder="Filter..." {{#if disabled}} disabled{{/if}}>
@@ -302,7 +302,7 @@
 </div>
 <div
   class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
-  <div role="button" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
+  <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
     aria-haspopup="true" {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox"
       aria-autocomplete="list" aria-expanded="true" autocomplete="off" value="" id="downshift-input-2"
       placeholder="Filter..." aria-activedescendant="downshift-1-item-2" {{#if disabled}} disabled{{/if}}>
