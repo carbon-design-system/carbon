@@ -44,7 +44,7 @@
           {{ carbon-icon 'ChevronUp16' aria-label='Close menu' }}
         </div>
       </div>
-      <fieldset class="{{@root.prefix}}--list-box__menu">
+      <fieldset class="{{@root.prefix}}--list-box__menu" role="listbox">
         <legend class="{{@root.prefix}}--assistive-text">Description of form elements within the fieldset</legend>
         {{#each items}}
         <div class="{{@root.prefix}}--list-box__menu-item">
@@ -99,7 +99,7 @@
       </svg>
     </div>
   </div>
-  <fieldset class="{{@root.prefix}}--list-box__menu">
+  <fieldset class="{{@root.prefix}}--list-box__menu" role="listbox">
     <legend class="{{@root.prefix}}--assistive-text">Description of form elements within the fieldset</legend>
     {{#each items}}
     <div class="{{@root.prefix}}--list-box__menu-item">
