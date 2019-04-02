@@ -107,7 +107,7 @@ describe('DataTableV2', function() {
       } else {
         expect(
           document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
-        ).toBeTruthy();
+        ).toBe(true);
       }
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       if (!componentsX) {
@@ -115,7 +115,7 @@ describe('DataTableV2', function() {
       } else {
         expect(
           document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
-        ).toBeFalsy();
+        ).toBe(false);
       }
     });
 
