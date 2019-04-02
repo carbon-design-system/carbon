@@ -209,7 +209,7 @@
     height: $layout-04;
     width: $layout-04;
     position: relative;
-    transition: flex 175ms $carbon--standard-easing;
+    transition: flex $transition--expansion $carbon--standard-easing;
     box-shadow: none;
   }
 
@@ -252,7 +252,7 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-active {
     flex: auto;
-    transition: flex 175ms $carbon--standard-easing;
+    transition: flex $transition--expansion $carbon--standard-easing;
   }
 
   .#{$prefix}--toolbar-search-container-active .#{$prefix}--search {
@@ -421,7 +421,7 @@
     height: 100%;
     z-index: z('header');
     background-color: transparent;
-    transition: opacity 200ms $carbon--standard-easing, background-color 200ms $carbon--standard-easing;
+    transition: opacity $transition--base $carbon--standard-easing, background-color $transition--base $carbon--standard-easing;
     pointer-events: none;
     visibility: hidden;
   }
@@ -434,7 +434,7 @@
     visibility: visible;
     background-color: $brand-01;
     pointer-events: all;
-    transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1), background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
+    transition: opacity $transition--base $carbon--standard-easing, background-color $transition--base $carbon--standard-easing;
     opacity: 1;
   }
 
