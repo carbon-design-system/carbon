@@ -17,7 +17,7 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="" id="downshift-input-2" placeholder="Filter...">
+          value="" id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         <div class="{{@root.prefix}}--list-box__menu-icon">
           {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
         </div>
@@ -37,7 +37,7 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="This is not a value." id="downshift-input-2" placeholder="Filter...">
+          value="This is not a value." id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         <div class="{{@root.prefix}}--list-box__selection" role="button">
           {{ carbon-icon "Close16" aria-label="Clear all" title="Clear all" }}
         </div>
@@ -61,7 +61,7 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="" id="downshift-input-2" placeholder="Filter...">
+          value="" id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
         <div class="{{@root.prefix}}--list-box__menu-icon">
           {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
@@ -86,7 +86,7 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="This is not a value." id="downshift-input-2" placeholder="Filter...">
+          value="This is not a value." id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
         <div class="{{@root.prefix}}--list-box__selection" role="button">
           {{ carbon-icon "Close16" aria-label="Clear all" title="Clear all" }}
@@ -191,12 +191,12 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="" id="downshift-input-2" placeholder="Filter...">
+          value="" id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
           {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
         </div>
       </div>
-      <ul class="{{@root.prefix}}--list-box__menu" role="listbox">
+      <ul class="{{@root.prefix}}--list-box__menu" role="listbox" aria-label="Filter...">
         {{#each items}}
         <li
           class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
@@ -224,7 +224,7 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="Option 3" id="downshift-input-2" placeholder="Filter...">
+          value="Option 3" id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         <div role="button" class="{{@root.prefix}}--list-box__selection" title="Clear selected item">
           {{ carbon-icon 'Close16' aria-label="Clear text input" }}
         </div>
@@ -232,7 +232,7 @@
           {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
         </div>
       </div>
-      <ul class="{{@root.prefix}}--list-box__menu" role="listbox">
+      <ul class="{{@root.prefix}}--list-box__menu" role="listbox" aria-label="Filter...">
         {{#each items}}
         <li
           class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
@@ -259,7 +259,7 @@
       <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
         aria-haspopup="listbox">
         <input class="{{@root.prefix}}--text-input" aria-autocomplete="list" aria-expanded="false" autocomplete="off"
-          value="Option 3" id="downshift-input-2" placeholder="Filter...">
+          value="Option 3" id="downshift-input-2" placeholder="Filter..." aria-label="Filter...">
         {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--list-box__invalid-icon')}}
         <div role="button" class="{{@root.prefix}}--list-box__selection" title="Clear selected item">
           {{ carbon-icon 'Close16' aria-label="Clear text input" }}
@@ -268,7 +268,7 @@
           {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
         </div>
       </div>
-      <ul class="{{@root.prefix}}--list-box__menu" role="listbox">
+      <ul class="{{@root.prefix}}--list-box__menu" role="listbox" aria-label="Filter...">
         {{#each items}}
         <li
           class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
