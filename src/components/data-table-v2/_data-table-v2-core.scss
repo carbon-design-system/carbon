@@ -314,6 +314,17 @@
     opacity: 1;
   }
 
+  .#{$prefix}--table-row--menu-option .#{$prefix}--overflow-menu-options__btn .#{$prefix}--overflow-menu-options__option-content {
+    display: flex;
+  }
+
+  .#{$prefix}--table-row--menu-option
+    .#{$prefix}--overflow-menu-options__btn
+    .#{$prefix}--overflow-menu-options__option-content
+    svg {
+    margin-right: rem(8px);
+  }
+
   //----------------------------------------------------------------------------
   // Select
   //----------------------------------------------------------------------------
