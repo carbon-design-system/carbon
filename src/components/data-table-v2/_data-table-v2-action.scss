@@ -197,7 +197,7 @@
 
   .#{$prefix}--toolbar-content {
     display: flex;
-    height: rem(48px);
+    height: $layout-04;
     width: 100%;
     justify-content: flex-end;
   }
@@ -206,21 +206,21 @@
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
-    height: rem(48px);
-    width: rem(48px);
+    height: $layout-04;
+    width: $layout-04;
     position: relative;
     transition: flex 175ms $carbon--standard-easing;
     box-shadow: none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
-    width: rem(48px);
+    width: $layout-04;
     height: 100%;
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier {
-    height: rem(48px);
-    width: rem(48px);
+    height: $layout-04;
+    width: $layout-04;
     padding: $spacing-md;
     left: 0;
   }
@@ -243,8 +243,8 @@
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-close {
-    height: rem(48px);
-    width: rem(48px);
+    height: $layout-04;
+    width: $layout-04;
   }
 
   //-------------------------------------------------
@@ -305,8 +305,8 @@
     @include button-reset;
     display: flex;
     cursor: pointer;
-    height: rem(48px);
-    width: rem(48px);
+    height: $layout-04;
+    width: $layout-04;
     padding: $spacing-md;
   }
 
@@ -334,20 +334,20 @@
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     margin: 0;
-    height: rem(48px);
+    height: $layout-04;
   }
 
   .#{$prefix}--overflow-menu--data-table {
-    height: rem(48px);
+    height: $layout-04;
   }
 
   //-------------------------------------------------
   //TOOLBAR BUTTON ICONS
   //-------------------------------------------------
   .#{$prefix}--toolbar-action__icon {
-    height: rem(16px);
+    height: $layout-01;
     width: auto;
-    max-width: rem(16px);
+    max-width: $layout-01;
     fill: $ui-05;
     transition: $transition--base;
   }
@@ -357,7 +357,7 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent {
     width: 100%;
-    height: rem(48px);
+    height: $layout-04;
     opacity: 1;
     position: relative;
     transition: opacity $transition--base;
@@ -377,7 +377,7 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input {
-    height: rem(48px);
+    height: $layout-04;
     padding-left: $spacing-3xl;
     border: none;
   }
@@ -396,8 +396,8 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-close {
-    height: rem(48px);
-    width: rem(48px);
+    height: $layout-04;
+    width: $layout-04;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
@@ -496,9 +496,9 @@
     display: block;
     position: absolute;
     opacity: 1;
-    top: rem(16px);
+    top: $spacing-05;
     left: 0;
-    height: rem(16px);
+    height: $layout-01;
     width: rem(1px);
     content: '';
     background-color: $ui-01;
@@ -512,7 +512,7 @@
 
   // cancel btn
   .#{$prefix}--batch-summary__cancel {
-    padding-right: rem(16px);
+    padding-right: $spacing-05;
     position: relative;
   }
 
@@ -520,7 +520,7 @@
   .#{$prefix}--batch-summary {
     position: absolute;
     left: 0;
-    margin-left: rem(16px);
+    margin-left: $spacing-05;
     display: flex;
     align-items: center;
     color: $ui-01;
