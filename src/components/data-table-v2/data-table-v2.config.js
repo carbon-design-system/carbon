@@ -94,6 +94,23 @@ const toolbarActions = [
   },
 ];
 
+const toolbarActionsX = [
+  {
+    overflowItems: [
+      {
+        label: 'Option 1',
+        primaryFocus: true,
+      },
+      {
+        label: 'Option 2',
+      },
+      {
+        label: 'Option 3',
+      },
+    ],
+  },
+];
+
 const columns = [
   {
     name: 'select',
@@ -387,10 +404,12 @@ module.exports = {
         subset of their fields in columns, or headers.
       `,
       context: {
+        state: 'default',
         title: 'Table title',
         optionalHelper: 'Optional Helper Text',
         batchActions,
         toolbarActions,
+        toolbarActionsX,
         columns,
         rows,
         selectedItemsCounterLabel: `
@@ -411,6 +430,7 @@ module.exports = {
       name: 'expandable',
       label: 'Expandable',
       context: {
+        state: 'persistent-search',
         title: 'Table title',
         columns: columnsExpandable,
         rows: rowsExpandable,
@@ -422,6 +442,7 @@ module.exports = {
         sort: true,
         batchActions,
         toolbarActions,
+        toolbarActionsX,
         selectedItemsCounterLabel: `
           <span data-items-selected>3</span> items selected
         `,
@@ -457,10 +478,12 @@ module.exports = {
       name: 'with-pager',
       label: 'Pagination',
       context: {
+        state: 'persistent-search',
         hasPager: true,
         title: 'Table title',
         batchActions,
         toolbarActions,
+        toolbarActionsX,
         columns,
         rows,
         selectedItemsCounterLabel: `
