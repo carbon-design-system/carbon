@@ -508,10 +508,6 @@ $list-box-menu-width: rem(300px);
     color: $disabled-02;
   }
 
-  .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    border-bottom: none; // Use border on list box instead
-  }
-
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
     padding-right: carbon--mini-units(9);
