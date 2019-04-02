@@ -527,7 +527,7 @@
   }
 
   .#{$prefix}--batch-summary__para {
-    @include typescale('zeta');
+    @include type-style('interactive-01');
   }
 }
 
