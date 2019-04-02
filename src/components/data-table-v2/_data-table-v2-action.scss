@@ -191,7 +191,7 @@
     display: flex;
     width: 100%;
     background: $ui-01;
-    height: rem(48px);
+    height: $layout-04;
     position: relative; //need for batch actions
   }
 
