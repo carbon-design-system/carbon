@@ -450,6 +450,7 @@
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     fill: $ui-01;
+    margin-left: $spacing-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
@@ -495,7 +496,7 @@
     display: block;
     position: absolute;
     opacity: 1;
-    top: $spacing-05;
+    top: rem(15px); //visually 16px spacing is 1px too low
     left: 0;
     height: $layout-01;
     width: rem(1px);
