@@ -66,7 +66,25 @@ describe('RadioButton', () => {
 
       it('should render a span with the correct class', () => {
         const span = label.find('span');
-        expect(span.hasClass('bx--radio-button__appearance')).toEqual(true);
+        expect(span.at(0).hasClass('bx--radio-button__appearance')).toEqual(
+          true
+        );
+      });
+
+      it('should render a span for the label text', () => {
+        const span = label.find('span');
+        expect(span.at(1).hasClass('')).toEqual(true);
+        expect(span.at(1).text()).toEqual('testlabel');
+      });
+
+      it('should render a span with hidden class name to hide label text', () => {
+        wrapper.setProps({
+          hideLabel: true,
+        });
+        const label = wrapper.find('span');
+        const span = label.find('span');
+        expect(span.at(1).hasClass('bx--visually-hidden')).toEqual(true);
+        expect(span.at(1).text()).toEqual('testlabel');
       });
 
       it('should render label text', () => {

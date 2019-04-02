@@ -25,13 +25,19 @@ const TableSelectRow = ({
     name,
     onClick: onSelect,
     checked,
-    ariaLabel,
     disabled,
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   return (
     <td className={className}>
-      <InlineInputComponent {...selectionInputProps} />
+      <InlineInputComponent
+        {...selectionInputProps}
+        {...radio && {
+          labelText: ariaLabel,
+          hideLabel: true,
+        }}
+        {...!radio && { ariaLabel }}
+      />
     </td>
   );
 };

@@ -63,9 +63,17 @@ describe('RadioButton', () => {
         expect(label.props().className).toEqual('bx--radio-button__label');
       });
 
-      it('should render a span with the correct class', () => {
+      it('should render a span with the correct class for radio style', () => {
         const span = label.find('span');
-        expect(span.hasClass('bx--radio-button__appearance')).toEqual(true);
+        expect(span.at(0).hasClass('bx--radio-button__appearance')).toEqual(
+          true
+        );
+      });
+
+      it('should render a span for the label text', () => {
+        const span = label.find('span');
+        expect(span.at(1).hasClass('')).toEqual(true);
+        expect(span.at(1).text()).toEqual('testlabel');
       });
 
       it('should render label text', () => {

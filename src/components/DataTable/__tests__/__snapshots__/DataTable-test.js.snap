@@ -647,19 +647,20 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   >
                     <td>
                       <ForwardRef(RadioButton)
-                        ariaLabel="Select row"
                         checked={false}
+                        hideLabel={true}
                         id="data-table-11__select-row-b"
+                        labelText="Select row"
                         name="select-row-b"
                         onClick={[Function]}
                       >
                         <RadioButton
-                          ariaLabel="Select row"
                           checked={false}
+                          hideLabel={true}
                           id="data-table-11__select-row-b"
                           innerRef={null}
                           labelPosition="right"
-                          labelText=""
+                          labelText="Select row"
                           name="select-row-b"
                           onChange={[Function]}
                           onClick={[Function]}
@@ -669,7 +670,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             className="bx--radio-button-wrapper"
                           >
                             <input
-                              ariaLabel="Select row"
                               checked={false}
                               className="bx--radio-button"
                               id="data-table-11__select-row-b"
@@ -680,13 +680,18 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label=""
+                              aria-label="Select row"
                               className="bx--radio-button__label"
                               htmlFor="data-table-11__select-row-b"
                             >
                               <span
                                 className="bx--radio-button__appearance"
                               />
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select row
+                              </span>
                             </label>
                           </div>
                         </RadioButton>
@@ -723,19 +728,20 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   >
                     <td>
                       <ForwardRef(RadioButton)
-                        ariaLabel="Select row"
                         checked={false}
+                        hideLabel={true}
                         id="data-table-11__select-row-a"
+                        labelText="Select row"
                         name="select-row-a"
                         onClick={[Function]}
                       >
                         <RadioButton
-                          ariaLabel="Select row"
                           checked={false}
+                          hideLabel={true}
                           id="data-table-11__select-row-a"
                           innerRef={null}
                           labelPosition="right"
-                          labelText=""
+                          labelText="Select row"
                           name="select-row-a"
                           onChange={[Function]}
                           onClick={[Function]}
@@ -745,7 +751,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             className="bx--radio-button-wrapper"
                           >
                             <input
-                              ariaLabel="Select row"
                               checked={false}
                               className="bx--radio-button"
                               id="data-table-11__select-row-a"
@@ -756,13 +761,18 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label=""
+                              aria-label="Select row"
                               className="bx--radio-button__label"
                               htmlFor="data-table-11__select-row-a"
                             >
                               <span
                                 className="bx--radio-button__appearance"
                               />
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select row
+                              </span>
                             </label>
                           </div>
                         </RadioButton>
@@ -799,19 +809,20 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   >
                     <td>
                       <ForwardRef(RadioButton)
-                        ariaLabel="Select row"
                         checked={false}
+                        hideLabel={true}
                         id="data-table-11__select-row-c"
+                        labelText="Select row"
                         name="select-row-c"
                         onClick={[Function]}
                       >
                         <RadioButton
-                          ariaLabel="Select row"
                           checked={false}
+                          hideLabel={true}
                           id="data-table-11__select-row-c"
                           innerRef={null}
                           labelPosition="right"
-                          labelText=""
+                          labelText="Select row"
                           name="select-row-c"
                           onChange={[Function]}
                           onClick={[Function]}
@@ -821,7 +832,6 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             className="bx--radio-button-wrapper"
                           >
                             <input
-                              ariaLabel="Select row"
                               checked={false}
                               className="bx--radio-button"
                               id="data-table-11__select-row-c"
@@ -832,13 +842,18 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               value=""
                             />
                             <label
-                              aria-label=""
+                              aria-label="Select row"
                               className="bx--radio-button__label"
                               htmlFor="data-table-11__select-row-c"
                             >
                               <span
                                 className="bx--radio-button__appearance"
                               />
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select row
+                              </span>
                             </label>
                           </div>
                         </RadioButton>

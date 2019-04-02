@@ -49,6 +49,11 @@ class RadioButton extends React.Component {
     labelText: PropTypes.node.isRequired,
 
     /**
+     * Specify whether the label should be hidden, or not
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
      * Provide where label text should be placed
      */
     labelPosition: PropTypes.string,
@@ -94,6 +99,7 @@ class RadioButton extends React.Component {
       labelText,
       labelPosition,
       innerRef: ref,
+      hideLabel,
       ...other
     } = this.props;
     if (__DEV__) {
@@ -103,6 +109,9 @@ class RadioButton extends React.Component {
           'and being removed in the next release of `carbon-components-react`.'
       );
     }
+    const innerLabelClasses = classNames({
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
     const wrapperClasses = classNames(
       className,
       `${prefix}--radio-button-wrapper`,
@@ -127,7 +136,7 @@ class RadioButton extends React.Component {
           className={`${prefix}--radio-button__label`}
           aria-label={labelText}>
           <span className={`${prefix}--radio-button__appearance`} />
-          {labelText}
+          <span className={innerLabelClasses}>{labelText}</span>
         </label>
       </div>
     );
