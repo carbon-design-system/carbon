@@ -92,7 +92,6 @@
   outline: $button-outline-width solid transparent;
   position: relative;
   max-width: rem(320px);
-  min-width: rem(125px);
 
   &:disabled,
   &.#{$prefix}--btn--disabled {
@@ -103,10 +102,11 @@
   }
 
   .#{$prefix}--btn__icon {
+    position: absolute;
+    right: rem(16px);
     flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    margin-left: $spacing-md;
     transition: $duration--fast-01 motion(entrance, productive);
   }
 }
