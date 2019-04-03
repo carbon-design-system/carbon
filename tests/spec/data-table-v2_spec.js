@@ -37,11 +37,15 @@ describe('DataTableV2', function() {
         selectorTableBody: 'tbody',
         selectorTableSort: `.bx--table-sort${suffix}`,
         selectorTableSelected: `.bx--data-table${suffix}--selected`,
+        selectorToolbarSearchContainer: '.bx--toolbar-search-container-expandable',
+        selectorSearchMagnifier: '.bx--search-magnifier',
+        selectorSearchInput: '.bx--search-input',
         classExpandableRow: `bx--expandable-row${suffix}`,
         classExpandableRowHidden: `bx--expandable-row--hidden${suffix}`,
         classExpandableRowHover: `bx--expandable-row--hover${suffix}`,
         classTableSortAscending: `bx--table-sort${suffix}--ascending`,
         classTableSortActive: `bx--table-sort${suffix}--active`,
+        classToolbarSearchActive: 'bx--toolbar-search-container-active',
         classActionBarActive: 'bx--batch-actions--active',
         classTableSelected: `bx--data-table${suffix}--selected`,
         eventBeforeExpand: `data-table${suffix}-beforetoggleexpand`,
@@ -103,7 +107,7 @@ describe('DataTableV2', function() {
       } else {
         expect(
           document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
-        ).toBeTruthy();
+        ).toBe(true);
       }
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       if (!componentsX) {
@@ -111,7 +115,7 @@ describe('DataTableV2', function() {
       } else {
         expect(
           document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
-        ).toBeFalsy();
+        ).toBe(false);
       }
     });
 
@@ -232,6 +236,76 @@ describe('DataTableV2', function() {
     afterAll(function() {
       document.body.removeChild(container);
       table.release();
+    });
+  });
+
+  describe('Toggle active search bar', function() {
+    let table;
+    let container;
+    let dt;
+
+    beforeEach(function() {
+      /* istanbul ignore if */
+      if (componentsX) {
+        container = document.createElement('div');
+        container.innerHTML = HTML;
+        document.body.appendChild(container);
+        dt = document.querySelector('.bx--data-table');
+        table = new DataTableV2(container);
+      }
+    });
+
+    it('Should open search bar on click', function() {
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-expandable');
+        const magnifier = document.querySelector('.bx--search-magnifier');
+        magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      }
+    });
+
+    it('Should close search bar on click', function() {
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-expandable');
+        search.classList.add('bx--toolbar-search-container-active');
+        dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      }
+    });
+
+    it('Should open search bar on keydown', function() {
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-expandable');
+        const magnifier = document.querySelector('.bx--search-magnifier');
+        const event = new CustomEvent('keydown', { bubbles: true });
+        event.which = 13;
+        magnifier.dispatchEvent(event);
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      }
+    });
+
+    it('Should close search bar on keydown', function() {
+      /* istanbul ignore if */
+      if (componentsX) {
+        const search = document.querySelector('.bx--toolbar-search-container-expandable');
+        const input = document.querySelector('input');
+        search.classList.add('bx--toolbar-search-container-active');
+        const event = new CustomEvent('keydown', { bubbles: true });
+        event.which = 27;
+        input.dispatchEvent(event);
+        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      }
+    });
+
+    afterEach(function() {
+      /* istanbul ignore if */
+      if (componentsX) {
+        document.body.removeChild(container);
+        table.release();
+      }
     });
   });
 });
