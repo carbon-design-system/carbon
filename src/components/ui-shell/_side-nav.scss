@@ -56,7 +56,8 @@
   // Include the fixed variant here so components can render in both expandable
   // and fixed side navs
   .#{$prefix}--side-nav--fixed &,
-  .#{$prefix}--side-nav--expanded & {
+  .#{$prefix}--side-nav--expanded &
+  .#{$prefix}--side-nav--focused & {
     @if $visibility == true {
       visibility: visible;
     }
@@ -95,7 +96,8 @@
   }
 
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
-  .#{$prefix}--side-nav--expanded {
+  .#{$prefix}--side-nav--expanded,
+  .#{$prefix}--side-nav--focused {
     width: mini-units(32);
   }
 
