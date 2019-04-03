@@ -2,5 +2,21 @@
   "lerna": "3.13.1",
   "version": "10.0.0",
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "npmClientArgs": [
+    "--frozen-lockfile"
+  ],
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "**/__fixtures__/**",
+        "**/__tests__/**",
+        "e2e/**",
+        "**/*.md"
+      ]
+    },
+    "version": {
+      "message": "chore(release): publish %s"
+    }
+  }
 }

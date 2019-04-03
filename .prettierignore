@@ -15,3 +15,6 @@ packages/elements/scss/*
 !packages/elements/scss/elements.scss
 !packages/elements/scss/index.scss
 packages/themes/scss/*
+
+# Changelogs, generated automatically
+**/CHANGELOG.md

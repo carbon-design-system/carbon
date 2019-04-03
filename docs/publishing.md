@@ -6,6 +6,7 @@
 ## Table of Contents
 
 - [Pre-release](#pre-release)
+- [Release](#release)
 - [FAQ](#faq)
     - [How do I fix the repo state if I cancel during a publish?](#how-do-i-fix-the-repo-state-if-i-cancel-during-a-publish)
 
@@ -23,8 +24,15 @@
 
 ## Pre-release
 
-5. Run `./tasks/publish.sh --exact --preid alpha --cd-version prerelease --force-publish=* --npm-tag alpha`
-6. Confirm package changes
+6. Run `./tasks/publish.sh --exact --preid alpha --cd-version prerelease --force-publish=* --npm-tag alpha`
+7. Confirm package changes
+
+## Release
+
+6. Set `GH_TOKEN` in your terminal ENV, the specific value will be for the
+   `carbon-bot` functional ID and can be received from another team member.
+7. Export value above by writing `export GH_TOKEN=XYZ`
+8. Run `./tasks/publish.sh ---exact --conventional-commits --github-release --no-push`
 
 ## FAQ
 
