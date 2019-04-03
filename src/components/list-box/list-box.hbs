@@ -112,7 +112,7 @@
           {{ carbon-icon 'ChevronDown16' aria-label='Close menu' }}
         </div>
       </div>
-      <ul class="{{@root.prefix}}--list-box__menu">
+      <ul class="{{@root.prefix}}--list-box__menu" role="combobox">
         {{#each items}}
         <li
           class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"

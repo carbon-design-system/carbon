@@ -472,7 +472,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
-    padding: 0 $carbon--spacing-03;
+    right: $carbon--spacing-03;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
@@ -508,8 +508,38 @@ $list-box-menu-width: rem(300px);
     color: $disabled-02;
   }
 
-  .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    border-bottom: none; // Use border on list box instead
+  // populated input field
+  .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+    padding-right: carbon--mini-units(9);
+  }
+
+  // invalid && populated input field
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+    padding-right: rem(98px); // to account for clear input button outline
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value]
+    + .#{$prefix}--list-box__invalid-icon {
+    right: rem(66px); // to account for clear input button outline
+  }
+
+  // empty input field
+  .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+    padding-right: $carbon--spacing-09;
+  }
+
+  // invalid && empty input field
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+    padding-right: carbon--mini-units(9);
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value='']
+    + .#{$prefix}--list-box__invalid-icon {
+    right: rem(40px); // to account for clear input button outline
   }
 
   // Label for a `list-box__field`
@@ -524,19 +554,15 @@ $list-box-menu-width: rem(300px);
 
   // Menu status inside of a `list-box__field`
   .#{$prefix}--list-box__menu-icon {
-    display: inline-block;
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    right: $carbon--spacing-05;
     height: 100%;
-    padding: 0 1rem;
     transition: transform $duration--fast-02 motion(standard, productive);
     cursor: pointer;
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
-    fill: $ui-05;
+    fill: $icon-01;
     height: 100%;
   }
 
@@ -546,21 +572,32 @@ $list-box-menu-width: rem(300px);
 
   // Selection indicator for a `list-box__field`
   .#{$prefix}--list-box__selection {
-    display: inline-block;
     position: absolute;
-    top: 0;
-    right: rem(26px);
-    bottom: 0;
-    height: rem(40px);
-    padding: 0 1rem;
+    right: rem(33px); // to preserve .5rem space between icons according to spec
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(30px);
+    width: rem(30px);
     cursor: pointer;
     user-select: none;
     transition: background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $ui-05;
-    height: 100%;
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
+    fill: $disabled-02;
   }
 
   // Modifier for a selection to show that multiple selections have been made
@@ -573,6 +610,7 @@ $list-box-menu-width: rem(300px);
     padding: 0;
     background-color: $inverse-02;
     height: rem(24px);
+    width: auto;
     color: $inverse-01;
     line-height: 0;
     padding: rem(8px);

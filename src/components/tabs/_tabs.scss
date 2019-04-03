@@ -89,15 +89,15 @@
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
-      margin-right: $spacing-md;
-      margin-left: $spacing-md;
+      padding-right: $spacing-md;
+      padding-left: $spacing-md;
       background: none;
       box-shadow: none;
       z-index: auto;
     }
 
     @include breakpoint(bp--lg--major) {
-      margin-left: 0;
+      padding-left: 0;
     }
   }
 
