@@ -58,8 +58,14 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.element.addEventListener('click', evt => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
+      const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+
       if (eventElement) {
         this._toggleState(eventElement, evt);
+      }
+
+      if (componentsX && searchContainer) {
+        this._handleDocumentClick(evt);
       }
     });
 
@@ -68,6 +74,41 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state = {
       checkboxCount: 0,
     };
+  }
+
+  _handleDocumentClick(evt) {
+    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
+    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+
+    if (searchContainer && searchEvent) {
+      this.activateSearch(searchContainer);
+    }
+
+    if (activeSearch) {
+      this.deactivateSearch(searchContainer, evt);
+    }
+  }
+
+  activateSearch(container) {
+    const input = container.querySelector(this.options.selectorSearchInput);
+    container.classList.add(this.options.classToolbarSearchActive);
+    input.focus();
+  }
+
+  deactivateSearch(container, evt) {
+    const trigger = container.querySelector(this.options.selectorSearchMagnifier);
+    const input = container.querySelector(this.options.selectorSearchInput);
+    const svg = trigger.querySelector('svg');
+    if (input.value.length === 0 && evt.target !== input && evt.target !== trigger && evt.target !== svg) {
+      container.classList.remove(this.options.classToolbarSearchActive);
+      trigger.focus();
+    }
+
+    if (evt.which === 27 && evt.target === input) {
+      container.classList.remove(this.options.classToolbarSearchActive);
+      trigger.focus();
+    }
   }
 
   _sortToggle = detail => {
@@ -238,8 +279,20 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _keydownHandler = evt => {
+    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
+    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+
     if (evt.which === 27) {
       this._actionBarCancel();
+    }
+
+    if (searchContainer && searchEvent && evt.which === 13) {
+      this.activateSearch(searchContainer);
+    }
+
+    if (activeSearch && evt.which === 27) {
+      this.deactivateSearch(searchContainer, evt);
     }
   };
 
@@ -300,11 +353,15 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorTableBody: 'tbody',
       selectorTableSort: `.${prefix}--table-sort${suffix}`,
       selectorTableSelected: `.${prefix}--data-table${suffix}--selected`,
+      selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-expandable`,
+      selectorSearchMagnifier: `.${prefix}--search-magnifier`,
+      selectorSearchInput: `.${prefix}--search-input`,
       classExpandableRow: `${prefix}--expandable-row${suffix}`,
       classExpandableRowHidden: `${prefix}--expandable-row--hidden${suffix}`,
       classExpandableRowHover: `${prefix}--expandable-row--hover${suffix}`,
       classTableSortAscending: `${prefix}--table-sort${suffix}--ascending`,
       classTableSortActive: `${prefix}--table-sort${suffix}--active`,
+      classToolbarSearchActive: `${prefix}--toolbar-search-container-active`,
       classActionBarActive: `${prefix}--batch-actions--active`,
       classTableSelected: `${prefix}--data-table${suffix}--selected`,
       eventBeforeExpand: `data-table${suffix}-beforetoggleexpand`,
