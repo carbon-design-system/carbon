@@ -345,6 +345,7 @@
   }
 
   // default selected row
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
     background-color: $ui-03;
@@ -358,12 +359,14 @@
   }
 
   // last row
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected:last-of-type td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
     border-top: 1px solid $ui-03; // doesn't need separators
     border-bottom: 1px solid $ui-03;
   }
 
   // hover
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected:hover td,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
     color: $text-01;
     background: $data-table-column-hover;
