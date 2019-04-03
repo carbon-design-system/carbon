@@ -201,7 +201,7 @@
     }
   }
 
-  .#{$prefix}--btn:not(.#{$prefix}--btn--ghost):not(.#{$prefix}--btn--icon-btn) {
+  .#{$prefix}--btn:not(.#{$prefix}--btn--ghost) {
     padding-right: rem(64px);
   }
 
@@ -256,10 +256,10 @@
 
   .#{$prefix}--btn--ghost {
     @include button-theme--x(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
-    min-width: auto;
     padding: rem(14px) rem(16px);
 
     .#{$prefix}--btn__icon {
+      position: static;
       margin-left: $carbon--spacing-03;
     }
 
