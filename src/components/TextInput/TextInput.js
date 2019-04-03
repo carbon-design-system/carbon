@@ -101,7 +101,9 @@ const TextInput = React.forwardRef(
         {label}
         {helper}
         {componentsX ? (
-          <div className={`${prefix}--text-input__field-wrapper`}>
+          <div
+            className={`${prefix}--text-input__field-wrapper`}
+            data-invalid={invalid || null}>
             {invalid && (
               <WarningFilled16
                 className={`${prefix}--text-input__invalid-icon`}
