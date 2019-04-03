@@ -20,8 +20,8 @@ function App() {
     <React.Fragment>
       <TableOfContents />
       <FontFaces />
-      <TypeScale />
       <TypeStyles />
+      <TypeScale />
     </React.Fragment>
   );
 }
@@ -35,10 +35,10 @@ function TableOfContents() {
           <a href="#font-faces">Font faces</a>
         </li>
         <li>
-          <a href="#type-scale">Type scale</a>
+          <a href="#type-styles">Type styles</a>
         </li>
         <li>
-          <a href="#type-styles">Type styles</a>
+          <a href="#type-scale">Type scale</a>
         </li>
       </ul>
     </React.Fragment>
@@ -161,6 +161,31 @@ function TypeScale() {
 }
 
 function TypeStyles() {
+  const fontFamilies = [
+    {
+      title: 'Arabic',
+      fontFamily: 'IBM Plex Arabic',
+      sample: 'السادس',
+      dir: 'rtl',
+    },
+    {
+      title: 'Devanagari',
+      fontFamily: 'IBM Plex Devanagari',
+      sample: 'कारन प्रदान',
+    },
+    {
+      title: 'Hebrew',
+      fontFamily: 'IBM Plex Sans Hebrew',
+      sample: 'אחרים בהתייחסות',
+      dir: 'rtl',
+    },
+    {
+      title: 'Thai',
+      fontFamily: 'IBM Plex Thai',
+      sample: 'บลูเบอร์รีแอคทีฟซู',
+    },
+  ];
+
   return (
     <article>
       <header>
@@ -170,8 +195,15 @@ function TypeStyles() {
       <table>
         <thead>
           <tr>
-            <td>Token</td>
-            <td>Sample</td>
+            <th>Token</th>
+            <th>Sample</th>
+            {fontFamilies.map(({ dir, title }) => (
+              <th
+                key={title}
+                style={{ textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+                {title}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -183,8 +215,17 @@ function TypeStyles() {
                 </pre>
               </td>
               <td className={`bx--type-${formatTokenName(token)}`}>
-                Text sample
+                <span>Text sample</span>
               </td>
+              {fontFamilies.map(({ dir, fontFamily, title, sample }) => (
+                <td
+                  key={title}
+                  className={`bx--type-${formatTokenName(token)}`}
+                  style={{ fontFamily }}
+                  dir={dir}>
+                  <span>{sample}</span>
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>

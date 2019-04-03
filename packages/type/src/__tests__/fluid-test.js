@@ -61,7 +61,6 @@ Object {
     "letterSpacing": "-0.96px",
     "lineHeight": "105%",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
   "fontWeight": 600,
   "letterSpacing": 0,

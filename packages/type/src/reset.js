@@ -23,4 +23,7 @@ export const reset = {
   strong: {
     fontWeight: fontWeights.semibold,
   },
+  code: {
+    fontFamily: fontFamilies.mono,
+  },
 };

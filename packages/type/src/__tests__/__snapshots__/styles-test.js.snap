@@ -2,7 +2,6 @@
 
 exports[`styles bodyLong01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "0.875rem",
   "fontWeight": 400,
   "letterSpacing": "0.16px",
@@ -11,8 +10,7 @@ Object {
 `;
 
 exports[`styles bodyLong01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 0.875rem;
+"font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.25rem;
 letter-spacing: 0.16px;"
@@ -20,7 +18,6 @@ letter-spacing: 0.16px;"
 
 exports[`styles bodyLong02 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1rem",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -29,8 +26,7 @@ Object {
 `;
 
 exports[`styles bodyLong02 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1rem;
+"font-size: 1rem;
 font-weight: 400;
 line-height: 1.5rem;
 letter-spacing: 0;"
@@ -38,7 +34,6 @@ letter-spacing: 0;"
 
 exports[`styles bodyShort01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "0.875rem",
   "fontWeight": 400,
   "letterSpacing": "0.16px",
@@ -47,8 +42,7 @@ Object {
 `;
 
 exports[`styles bodyShort01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 0.875rem;
+"font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.125rem;
 letter-spacing: 0.16px;"
@@ -56,7 +50,6 @@ letter-spacing: 0.16px;"
 
 exports[`styles bodyShort02 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1rem",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -65,8 +58,7 @@ Object {
 `;
 
 exports[`styles bodyShort02 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1rem;
+"font-size: 1rem;
 font-weight: 400;
 line-height: 1.375rem;
 letter-spacing: 0;"
@@ -74,7 +66,6 @@ letter-spacing: 0;"
 
 exports[`styles caption01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "0.75rem",
   "fontWeight": 400,
   "letterSpacing": "0.32px",
@@ -83,8 +74,7 @@ Object {
 `;
 
 exports[`styles caption01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 0.75rem;
+"font-size: 0.75rem;
 font-weight: 400;
 line-height: 1rem;
 letter-spacing: 0.32px;"
@@ -92,7 +82,6 @@ letter-spacing: 0.32px;"
 
 exports[`styles code01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
   "fontSize": "0.75rem",
   "fontWeight": 400,
   "letterSpacing": "0.32px",
@@ -101,8 +90,7 @@ Object {
 `;
 
 exports[`styles code01 should be printable 2`] = `
-"font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-font-size: 0.75rem;
+"font-size: 0.75rem;
 font-weight: 400;
 line-height: 1rem;
 letter-spacing: 0.32px;"
@@ -110,7 +98,6 @@ letter-spacing: 0.32px;"
 
 exports[`styles code02 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
   "fontSize": "0.875rem",
   "fontWeight": 400,
   "letterSpacing": "0.32px",
@@ -119,8 +106,7 @@ Object {
 `;
 
 exports[`styles code02 should be printable 2`] = `
-"font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-font-size: 0.875rem;
+"font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.25rem;
 letter-spacing: 0.32px;"
@@ -142,7 +128,6 @@ Object {
     "fontSize": "4.75rem",
     "lineHeight": "113%",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2.625rem + 0 * ((100vw - 20rem) / 22))",
   "fontWeight": 300,
   "letterSpacing": 0,
@@ -151,8 +136,7 @@ Object {
 `;
 
 exports[`styles display01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(2.625rem + 0 * ((100vw - 20rem) / 22));
+"font-size: calc(2.625rem + 0 * ((100vw - 20rem) / 22));
 font-weight: 300;
 line-height: 119%;
 letter-spacing: 0;
@@ -178,7 +162,6 @@ Object {
     "fontSize": "4.75rem",
     "lineHeight": "113%",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2.625rem + 0 * ((100vw - 20rem) / 22))",
   "fontWeight": 600,
   "letterSpacing": 0,
@@ -187,8 +170,7 @@ Object {
 `;
 
 exports[`styles display02 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(2.625rem + 0 * ((100vw - 20rem) / 22));
+"font-size: calc(2.625rem + 0 * ((100vw - 20rem) / 22));
 font-weight: 600;
 line-height: 119%;
 letter-spacing: 0;
@@ -218,7 +200,6 @@ Object {
     "letterSpacing": "-0.96px",
     "lineHeight": "105%",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
   "fontWeight": 300,
   "letterSpacing": 0,
@@ -227,8 +208,7 @@ Object {
 `;
 
 exports[`styles display03 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(2.625rem + 1.625 * ((100vw - 20rem) / 22));
+"font-size: calc(2.625rem + 1.625 * ((100vw - 20rem) / 22));
 font-weight: 300;
 line-height: 119%;
 letter-spacing: 0;
@@ -259,7 +239,6 @@ Object {
     "letterSpacing": "-0.96px",
     "lineHeight": "105%",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
   "fontWeight": 600,
   "letterSpacing": 0,
@@ -268,8 +247,7 @@ Object {
 `;
 
 exports[`styles display04 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(2.625rem + 1.625 * ((100vw - 20rem) / 22));
+"font-size: calc(2.625rem + 1.625 * ((100vw - 20rem) / 22));
 font-weight: 600;
 line-height: 119%;
 letter-spacing: 0;
@@ -288,7 +266,6 @@ Object {
   "@media (min-width: 99rem)": Object {
     "fontSize": "1.5rem",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(1.25rem + 0 * ((100vw - 20rem) / 62))",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -297,8 +274,7 @@ Object {
 `;
 
 exports[`styles expressiveHeading03 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 62));
+"font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 62));
 font-weight: 400;
 line-height: 130%;
 letter-spacing: 0;
@@ -315,7 +291,6 @@ Object {
   "@media (min-width: 99rem)": Object {
     "fontSize": "2rem",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(1.75rem + 0 * ((100vw - 20rem) / 62))",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -324,8 +299,7 @@ Object {
 `;
 
 exports[`styles expressiveHeading04 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(1.75rem + 0 * ((100vw - 20rem) / 62));
+"font-size: calc(1.75rem + 0 * ((100vw - 20rem) / 62));
 font-weight: 400;
 line-height: 129%;
 letter-spacing: 0;
@@ -336,34 +310,29 @@ letter-spacing: 0;
 exports[`styles expressiveHeading05 should be printable 1`] = `
 Object {
   "@media (min-width: 42rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "calc(2.25rem + 0.375 * ((100vw - 42rem) / 24))",
     "fontWeight": 300,
     "letterSpacing": 0,
     "lineHeight": "122%",
   },
   "@media (min-width: 66rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "calc(2.625rem + 0.375 * ((100vw - 66rem) / 16))",
     "fontWeight": 300,
     "letterSpacing": 0,
     "lineHeight": "119%",
   },
   "@media (min-width: 82rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "calc(3rem + 0.75 * ((100vw - 82rem) / 17))",
     "fontWeight": 300,
     "letterSpacing": 0,
     "lineHeight": "117%",
   },
   "@media (min-width: 99rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "3.75rem",
     "fontWeight": 300,
     "letterSpacing": 0,
     "lineHeight": "4.375rem",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -372,8 +341,7 @@ Object {
 `;
 
 exports[`styles expressiveHeading05 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+"font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
 font-weight: 400;
 line-height: 125%;
 letter-spacing: 0;
@@ -386,34 +354,29 @@ letter-spacing: 0;
 exports[`styles expressiveHeading06 should be printable 1`] = `
 Object {
   "@media (min-width: 42rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "calc(2.25rem + 0.375 * ((100vw - 42rem) / 24))",
     "fontWeight": 600,
     "letterSpacing": 0,
     "lineHeight": "122%",
   },
   "@media (min-width: 66rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "calc(2.625rem + 0.375 * ((100vw - 66rem) / 16))",
     "fontWeight": 600,
     "letterSpacing": 0,
     "lineHeight": "119%",
   },
   "@media (min-width: 82rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "calc(3rem + 0.75 * ((100vw - 82rem) / 17))",
     "fontWeight": 600,
     "letterSpacing": 0,
     "lineHeight": "117%",
   },
   "@media (min-width: 99rem)": Object {
-    "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
     "fontSize": "3.75rem",
     "fontWeight": 600,
     "letterSpacing": 0,
     "lineHeight": "4.375rem",
   },
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
   "fontWeight": 600,
   "letterSpacing": 0,
@@ -422,8 +385,7 @@ Object {
 `;
 
 exports[`styles expressiveHeading06 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+"font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
 font-weight: 600;
 line-height: 125%;
 letter-spacing: 0;
@@ -435,7 +397,6 @@ letter-spacing: 0;
 
 exports[`styles expressiveParagraph01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1.5rem",
   "fontWeight": 300,
   "letterSpacing": 0,
@@ -452,8 +413,7 @@ Object {
 `;
 
 exports[`styles expressiveParagraph01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1.5rem;
+"font-size: 1.5rem;
 font-weight: 300;
 line-height: 125%;
 letter-spacing: 0;
@@ -463,7 +423,6 @@ max: [object Object];"
 
 exports[`styles heading01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "0.875rem",
   "fontWeight": 600,
   "letterSpacing": "0.16px",
@@ -472,8 +431,7 @@ Object {
 `;
 
 exports[`styles heading01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 0.875rem;
+"font-size: 0.875rem;
 font-weight: 600;
 line-height: 1.125rem;
 letter-spacing: 0.16px;"
@@ -481,7 +439,6 @@ letter-spacing: 0.16px;"
 
 exports[`styles heading02 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1rem",
   "fontWeight": 600,
   "letterSpacing": 0,
@@ -490,8 +447,7 @@ Object {
 `;
 
 exports[`styles heading02 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1rem;
+"font-size: 1rem;
 font-weight: 600;
 line-height: 1.375rem;
 letter-spacing: 0;"
@@ -499,7 +455,6 @@ letter-spacing: 0;"
 
 exports[`styles helperText01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "0.75rem",
   "fontStyle": "italic",
   "letterSpacing": "0.32px",
@@ -508,8 +463,7 @@ Object {
 `;
 
 exports[`styles helperText01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 0.75rem;
+"font-size: 0.75rem;
 font-style: italic;
 line-height: 1rem;
 letter-spacing: 0.32px;"
@@ -517,7 +471,6 @@ letter-spacing: 0.32px;"
 
 exports[`styles label01 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "0.75rem",
   "fontWeight": 400,
   "letterSpacing": "0.32px",
@@ -526,8 +479,7 @@ Object {
 `;
 
 exports[`styles label01 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 0.75rem;
+"font-size: 0.75rem;
 font-weight: 400;
 line-height: 1rem;
 letter-spacing: 0.32px;"
@@ -535,7 +487,6 @@ letter-spacing: 0.32px;"
 
 exports[`styles productiveHeading03 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1.25rem",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -544,8 +495,7 @@ Object {
 `;
 
 exports[`styles productiveHeading03 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1.25rem;
+"font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.625rem;
 letter-spacing: 0;"
@@ -553,7 +503,6 @@ letter-spacing: 0;"
 
 exports[`styles productiveHeading04 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "1.75rem",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -562,8 +511,7 @@ Object {
 `;
 
 exports[`styles productiveHeading04 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 1.75rem;
+"font-size: 1.75rem;
 font-weight: 400;
 line-height: 2.25rem;
 letter-spacing: 0;"
@@ -571,7 +519,6 @@ letter-spacing: 0;"
 
 exports[`styles productiveHeading05 should be printable 1`] = `
 Object {
-  "fontFamily": "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   "fontSize": "2rem",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -580,8 +527,7 @@ Object {
 `;
 
 exports[`styles productiveHeading05 should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-font-size: 2rem;
+"font-size: 2rem;
 font-weight: 400;
 line-height: 2.5rem;
 letter-spacing: 0;"
@@ -590,33 +536,28 @@ letter-spacing: 0;"
 exports[`styles quotation01 should be printable 1`] = `
 Object {
   "@media (min-width: 42rem)": Object {
-    "fontFamily": "'IBM Plex Serif', 'Georgia', Times, serif",
     "fontSize": "calc(1.25rem + 0.25 * ((100vw - 42rem) / 24))",
     "fontWeight": 400,
     "letterSpacing": 0,
   },
   "@media (min-width: 66rem)": Object {
-    "fontFamily": "'IBM Plex Serif', 'Georgia', Times, serif",
     "fontSize": "calc(1.5rem + 0.25 * ((100vw - 66rem) / 16))",
     "fontWeight": 400,
     "letterSpacing": 0,
     "lineHeight": "125%",
   },
   "@media (min-width: 82rem)": Object {
-    "fontFamily": "'IBM Plex Serif', 'Georgia', Times, serif",
     "fontSize": "calc(1.75rem + 0.25 * ((100vw - 82rem) / 17))",
     "fontWeight": 400,
     "letterSpacing": 0,
     "lineHeight": "129%",
   },
   "@media (min-width: 99rem)": Object {
-    "fontFamily": "'IBM Plex Serif', 'Georgia', Times, serif",
     "fontSize": "2rem",
     "fontWeight": 400,
     "letterSpacing": 0,
     "lineHeight": "125%",
   },
-  "fontFamily": "'IBM Plex Serif', 'Georgia', Times, serif",
   "fontSize": "calc(1.25rem + 0 * ((100vw - 20rem) / 22))",
   "fontWeight": 400,
   "letterSpacing": 0,
@@ -625,8 +566,7 @@ Object {
 `;
 
 exports[`styles quotation01 should be printable 2`] = `
-"font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
-font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 22));
+"font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 22));
 font-weight: 400;
 line-height: 130%;
 letter-spacing: 0;
@@ -653,7 +593,6 @@ Object {
   "@media (min-width: 99rem)": Object {
     "fontSize": "3.75rem",
   },
-  "fontFamily": "'IBM Plex Serif', 'Georgia', Times, serif",
   "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
   "fontWeight": 300,
   "letterSpacing": 0,
@@ -662,8 +601,7 @@ Object {
 `;
 
 exports[`styles quotation02 should be printable 2`] = `
-"font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
-font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+"font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
 font-weight: 300;
 line-height: 125%;
 letter-spacing: 0;
