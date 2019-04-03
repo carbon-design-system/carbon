@@ -62,7 +62,7 @@
   .#{$prefix}--list-box[data-invalid] {
     box-shadow: 0 2px 0px 0px $support-01;
 
-    ~ .#{$prefix}--form-requirement {
+    ~.#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
     }
@@ -152,9 +152,10 @@
 
   input[data-invalid],
   .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--text-area__wrapper[data-invalid] > .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area__wrapper[data-invalid]>.#{$prefix}--text-area--invalid,
   .#{$prefix}--select-input__wrapper[data-invalid],
-  .#{$prefix}--list-box[data-invalid] {
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
     @include focus-outline('invalid');
   }
 
@@ -164,7 +165,7 @@
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
-    ~ .#{$prefix}--form-requirement {
+    ~.#{$prefix}--form-requirement {
       max-height: rem(200px);
       display: block;
       color: $support-01;
@@ -186,7 +187,7 @@
     display: none;
   }
 
-  .#{$prefix}--label + .#{$prefix}--form__helper-text {
+  .#{$prefix}--label+.#{$prefix}--form__helper-text {
     margin-top: rem(-6px); // when both helper text and label are rendered
   }
 
@@ -214,7 +215,9 @@
 @include exports('form') {
   @if feature-flag-enabled('components-x') {
     @include form--x;
-  } @else {
+  }
+
+  @else {
     @include form;
   }
 }

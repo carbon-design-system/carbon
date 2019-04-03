@@ -22,8 +22,6 @@
 
 @mixin combo-box--x {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
-    padding-right: $carbon--spacing-09;
-
     &::placeholder {
       color: $text-02;
       opacity: 1;
@@ -34,8 +32,8 @@
     }
   }
 
-  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid] .#{$prefix}--text-input {
-    padding-right: carbon--mini-units(8);
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded .#{$prefix}--text-input {
+    border-bottom-color: $ui-03;
   }
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
