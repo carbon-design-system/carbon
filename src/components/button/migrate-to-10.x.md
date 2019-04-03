@@ -4,9 +4,8 @@ Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is
 
 ### SCSS
 
-A new class has been added to target disabled buttons and buttons with icons
+A new class has been added to target disabled buttons
 
 | Old Class | New Class         | Note |
 | --------- | ----------------- | ---- |
 | -         | bx--btn--disabled | New  |
-| -         | bx--btn--icon-btn | New  |
