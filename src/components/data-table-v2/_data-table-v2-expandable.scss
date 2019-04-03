@@ -141,10 +141,7 @@
       background-color $transition--expansion $carbon--standard-easing;
   }
 
-  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
-    + tr[data-child-row]
-    td
-    .#{$prefix}--child-row-inner-container {
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row) + tr[data-child-row] td .#{$prefix}--child-row-inner-container {
     overflow: hidden;
     max-height: 0;
   }
@@ -287,9 +284,7 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td.#{$prefix}--table-expand + td::after,
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
-    td.#{$prefix}--table-expand
-    + td::after {
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover td.#{$prefix}--table-expand + td::after {
     background: $hover-field;
   }
 
@@ -356,9 +351,7 @@
     border-top: 1px solid $active-ui;
   }
 
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
-    + tr[data-child-row]:last-of-type
-    td {
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row + tr[data-child-row]:last-of-type td {
     box-shadow: inset 0 -1px $active-01;
     padding-bottom: rem(24px);
   }
