@@ -427,6 +427,47 @@ module.exports = {
       },
     },
     {
+      name: 'zebra-select',
+      label: 'Zebra Select',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        state: 'default',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+        zebra: true,
+      },
+    },
+    {
+      name: 'zebra',
+      label: 'Zebra',
+      context: {
+        small: true,
+        columns: columnsSmall,
+        rows,
+        zebra: true,
+      },
+    },
+    {
       name: 'expandable',
       label: 'Expandable',
       context: {
@@ -449,20 +490,6 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-      },
-    },
-    {
-      name: 'editable',
-      label: 'Inline Edit',
-      context: {
-        title: 'Table title',
-        columns: columnsEditable,
-        rows: rowsEditable,
-        cancelLabel: 'Cancel',
-        saveLabel: 'Save',
-        sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
-        sort: true,
       },
     },
     {
