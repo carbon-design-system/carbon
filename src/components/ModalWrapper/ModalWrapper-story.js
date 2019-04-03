@@ -183,7 +183,7 @@ storiesOf('ModalWrapper', module)
             className="some-class"
           />
           <RadioButton
-            value="standard"
+            value="disabled"
             labelText="Radio Button label 3"
             id="radio-3"
             className="some-class"
