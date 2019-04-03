@@ -201,12 +201,6 @@ const columnsExpandable = [
   },
 ];
 
-const columnsEditable = columns.slice(1, 7).map((column, i) => ({
-  ...column,
-  editable: true,
-  editing: i === 0,
-}));
-
 const columnsSmall = columns.slice(1, -1).map(column => ({
   ...column,
   sortable: false,
@@ -355,39 +349,6 @@ const rowsExpandable = [
     status: 'Active',
   },
 ];
-
-const rowsEditable = [
-  {
-    id: 'row-id-15',
-    name: 'Load Balancer 3',
-    protocol: 'HTTP',
-    port: '3000',
-    rule: 'Round Robin',
-    attachedGroups: 'Kevins VM Groups',
-    status: 'Disabled',
-  },
-  {
-    id: 'row-id-11',
-    name: 'Load Balancer 1',
-    protocol: 'HTTP',
-    port: '443',
-    rule: 'Round Robin',
-    attachedGroups: 'Maureens VM Groups',
-    status: 'Starting',
-  },
-  {
-    id: 'row-id-10',
-    name: 'Load Balancer 2',
-    protocol: 'HTTP',
-    port: '80',
-    rule: 'DNS delegation',
-    attachedGroups: 'Andrews VM Groups',
-    status: 'Active',
-  },
-].map((row, i) => ({
-  ...row,
-  editable: i === 0,
-}));
 
 module.exports = {
   label: 'Data Table V2',
