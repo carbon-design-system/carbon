@@ -44,6 +44,23 @@
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox:checked ~ .#{$prefix}--checkbox-label-text {
     color: $text-01;
   }
+
+  .#{$prefix}--multi-select--filterable {
+    .#{$prefix}--list-box__selection--multi {
+      position: absolute;
+      left: 1rem;
+      right: auto;
+    }
+  }
+
+  .#{$prefix}--multi-select--filterable--selected .#{$prefix}--text-input {
+    // this value will need to change based on the number of digits in
+    // the number of items selected
+    //
+    // i.e. the input field needs adjusted padding to account for the width of
+    // the number in <ListBox.Selection>
+    padding-left: carbon--mini-units(9);
+  }
 }
 
 @include exports('multi-select') {
