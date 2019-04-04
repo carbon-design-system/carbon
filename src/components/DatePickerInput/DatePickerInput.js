@@ -42,6 +42,7 @@ export default class DatePickerInput extends Component {
     const {
       id,
       labelText,
+      disabled,
       invalid,
       invalidText,
       hideLabel,
@@ -59,12 +60,12 @@ export default class DatePickerInput extends Component {
     const datePickerInputProps = {
       id,
       onChange: evt => {
-        if (!other.disabled) {
+        if (!disabled) {
           onChange(evt);
         }
       },
       onClick: evt => {
-        if (!other.disabled) {
+        if (!disabled) {
           onClick(evt);
         }
       },
@@ -75,6 +76,7 @@ export default class DatePickerInput extends Component {
 
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: disabled,
     });
 
     const datePickerIcon = (() => {
@@ -124,6 +126,7 @@ export default class DatePickerInput extends Component {
       <input
         {...other}
         {...datePickerInputProps}
+        disabled={disabled}
         ref={input => {
           this.input = input;
         }}
@@ -137,6 +140,7 @@ export default class DatePickerInput extends Component {
         }}
         {...other}
         {...datePickerInputProps}
+        disabled={disabled}
         className={`${prefix}--date-picker__input`}
       />
     );
