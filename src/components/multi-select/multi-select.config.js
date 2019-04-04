@@ -55,5 +55,13 @@ module.exports = {
         items,
       },
     },
+    {
+      name: 'light',
+      label: 'Light',
+      context: {
+        light: true,
+        items,
+      },
+    },
   ],
 };
