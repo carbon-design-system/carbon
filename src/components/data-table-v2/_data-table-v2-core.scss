@@ -324,6 +324,29 @@
   }
 
   //----------------------------------------------------------------------------
+  //NO BORDER
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--no-border tbody,
+  .#{$prefix}--data-table--no-border tr,
+  .#{$prefix}--data-table--no-border th,
+  .#{$prefix}--data-table--no-border td {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+  }
+
+  //----------------------------------------------------------------------------
+  //ZEBRA
+  //----------------------------------------------------------------------------
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
+    background-color: $data-table-zebra-color;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even):hover td {
+    background-color: $hover-field;
+  }
+
+  //----------------------------------------------------------------------------
   // Select
   //----------------------------------------------------------------------------
   .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
@@ -377,33 +400,6 @@
   // selected overflow menu
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
     opacity: 1;
-  }
-
-  //----------------------------------------------------------------------------
-  //ZEBRA
-  //----------------------------------------------------------------------------
-
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
-    background-color: $data-table-zebra-color;
-    border-top: 1px solid $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
-  }
-
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even):hover td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
-  }
-
-  //----------------------------------------------------------------------------
-  //NO BORDER
-  //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--no-border tbody,
-  .#{$prefix}--data-table--no-border tr,
-  .#{$prefix}--data-table--no-border th,
-  .#{$prefix}--data-table--no-border td {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
   }
 }
 
