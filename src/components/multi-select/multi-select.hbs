@@ -13,10 +13,14 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
     {{/unless}}
     <div
-      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}{{#if filterable}} {{@root.prefix}}--combo-box {{@root.prefix}}--multi-select--filterable{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
         aria-expanded="false" aria-haspopup="true">
+        {{#if filterable}}
+        <input class="{{@root.prefix}}--text-input" placeholder="Filter...">
+        {{else}}
         <span class="{{@root.prefix}}--list-box__label">Multi select options</span>
+        {{/if}}
         <div class="{{@root.prefix}}--list-box__menu-icon">
           {{ carbon-icon 'ChevronDown16' aria-label='Open menu' }}
         </div>
@@ -31,7 +35,7 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
     {{/unless}}
     <div
-      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
+      class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded {{@root.prefix}}--multi-select--selected{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}{{#if filterable}} {{@root.prefix}}--combo-box {{@root.prefix}}--multi-select--filterable{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
         aria-expanded="true" aria-haspopup="true">
         <div role="button" class="{{@root.prefix}}--list-box__selection {{@root.prefix}}--list-box__selection--multi"
@@ -39,7 +43,11 @@
           1
           {{ carbon-icon 'Close16' aria-label='Clear selection' }}
         </div>
+        {{#if filterable}}
+        <input class="{{@root.prefix}}--text-input" placeholder="Filter...">
+        {{else}}
         <span class="{{@root.prefix}}--list-box__label">Multi select options</span>
+        {{/if}}
         <div class="{{@root.prefix}}--list-box__menu-icon">
           {{ carbon-icon 'ChevronUp16' aria-label='Close menu' }}
         </div>
