@@ -247,6 +247,8 @@ export default class Modal extends Component {
 
   handleTransitionEnd = evt => {
     if (
+      evt.target === evt.currentTarget && // Not to handle `onTransitionEnd` on child DOM nodes
+      this.outerModal.current &&
       this.outerModal.current.offsetWidth &&
       this.outerModal.current.offsetHeight &&
       this.beingOpen
