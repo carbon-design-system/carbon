@@ -6,7 +6,7 @@ The update to tables splits out the `scss` files into multiple partial files wit
 
 | Name                       | Description                              |
 | -------------------------- | ---------------------------------------- |
-| `data-tables`              | index file, brings in all functionality  |
+| `data-table`               | index file, brings in all functionality  |
 | `data-table-v2-core`       | Core styles and base modifiers, required |
 | `data-table-v2-action`     | Action bar styles                        |
 | `data-table-v2-expandable` | Expandable row styles                    |
@@ -14,14 +14,14 @@ The update to tables splits out the `scss` files into multiple partial files wit
 
 #### Modifiers
 
-| Name                           | Description                                  |
-| ------------------------------ | -------------------------------------------- |
-| `bx--data-table-v2--compact`   | Change table row height to 24                |
-| `bx--data-table-v2--short`     | Change table row height to 32                |
-| `bx--data-table-v2--tall`      | Change table row height to 64                |
-| `bx--data-table-v2--zebra`     | Toggle on zebra striping                     |
-| `bx--data-table-v2--static`    | Change default table width from 100% to auto |
-| `bx--data-table-v2--no-border` | Remove default border on table cells         |
+| Name                        | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `bx--data-table--compact`   | Change table row height to 24                |
+| `bx--data-table--short`     | Change table row height to 32                |
+| `bx--data-table--tall`      | Change table row height to 64                |
+| `bx--data-table--zebra`     | Toggle on zebra striping                     |
+| `bx--data-table--static`    | Change default table width from 100% to auto |
+| `bx--data-table--no-border` | Remove default border on table cells         |
 
 ### JavaScript
 
@@ -42,8 +42,8 @@ var DataTableV2 = CarbonComponents.DataTableV2;
 #### Instantiating
 
 ```javascript
-// `#my-data-table-v2` is an element with `[data-data-table-v2]` attribute
-DataTableV2.create(document.getElementById('my-data-table-v2'));
+// `#my-data-table` is an element with `[data-data-table]` attribute
+DataTableV2.create(document.getElementById('my-data-table'));
 ```
 
 #### Public Methods
@@ -56,26 +56,26 @@ DataTableV2.create(document.getElementById('my-data-table-v2'));
 ##### Example - Keeping data table in sync with dynamic change in rows list (For expantable table)
 
 ```javascript
-// `#my-data-table-v2` is an element with `[data-data-table-v2]` attribute
-var dataTableV2Instance = DataTableV2.create(document.getElementById('my-data-table-v2'));
+// `#my-data-table` is an element with `[data-data-table]` attribute
+var dataTableV2Instance = DataTableV2.create(document.getElementById('my-data-table'));
 dataTableV2Instance.refreshRows();
 ```
 
 #### Events
 
-| Key                    | Value                              | Description                         |
-| ---------------------- | ---------------------------------- | ----------------------------------- |
-| `eventBeforeExpand`    | `data-table-v2-beforetoggleexpand` | Row expansion event                 |
-| `eventAfterExpand`     | `data-table-v2-aftertoggleexpand`  | Row expansion event                 |
-| `eventBeforeSort`      | `data-table-v2-beforetogglesort`   | Sort event                          |
-| `eventAfterSort`       | `data-table-v2-aftertogglesort`    | Sort event                          |
-| `eventTrigger`         | `[data-event]`                     | Data attribute for clickable events |
-| `eventParentContainer` | `[data-parent-row]`                | Data attribute for event container  |
+| Key                    | Value                           | Description                         |
+| ---------------------- | ------------------------------- | ----------------------------------- |
+| `eventBeforeExpand`    | `data-table-beforetoggleexpand` | Row expansion event                 |
+| `eventAfterExpand`     | `data-table-aftertoggleexpand`  | Row expansion event                 |
+| `eventBeforeSort`      | `data-table-beforetogglesort`   | Sort event                          |
+| `eventAfterSort`       | `data-table-aftertogglesort`    | Sort event                          |
+| `eventTrigger`         | `[data-event]`                  | Data attribute for clickable events |
+| `eventParentContainer` | `[data-parent-row]`             | Data attribute for event container  |
 
 ##### Example - Preventing a table expando from being toggled in a certain condition
 
 ```javascript
-document.addEventListener('data-table-v2-beforetoggleexpand', function(evt) {
+document.addEventListener('data-table-beforetoggleexpand', function(evt) {
   if (!myApplication.shouldToggleExpando(evt.target)) {
     evt.preventDefault();
   }
@@ -85,34 +85,34 @@ document.addEventListener('data-table-v2-beforetoggleexpand', function(evt) {
 ##### Example - Sorting table content
 
 ```javascript
-document.addEventListener('data-table-v2-aftertogglesort', function(evt) {
-  // `evt.target` will be `div.bx--data-table-v2-container`
-  // `evt.detail.element` will be `button.bx--table-sort-v2` whose sorting is changed,
-  // and will have `bx--table-sort-v2--ascending` class or not depending on the sorting state
+document.addEventListener('data-table-aftertogglesort', function(evt) {
+  // `evt.target` will be `div.bx--data-table-container`
+  // `evt.detail.element` will be `button.bx--table-sort` whose sorting is changed,
+  // and will have `bx--table-sort--ascending` class or not depending on the sorting state
   evt.target.querySelector('tbody').innerHTML = myApplication.resortTableContent(evt.target, evt.detail.element);
 });
 ```
 
 #### Options
 
-| Key                        | Value                           | Description                                |
-| -------------------------- | ------------------------------- | ------------------------------------------ |
-| `selectorInit`             | `[data-table-v2]`               | Required css class to target table element |
-| `selectorToolbar`          | `.bx--table--toolbar`           | Toolbar parent selector                    |
-| `selectorActions`          | `.bx--batch-actions`            | Action bar parent selector                 |
-| `selectorCount`            | `[data-items-selected]`         | Selected count span selector               |
-| `selectorActionCancel`     | `.bx--batch-summary__cancel`    | Action cancel button selector              |
-| `selectorCheckbox`         | `.bx--checkbox`                 | Checkbox class selector                    |
-| `selectorExpandCells`      | `.bx--table-expand-v2`          | Expand td selector                         |
-| `selectorExpandableRows`   | `.bx--expandable-row-v2`        | Expand tr selector                         |
-| `selectorParentRows`       | `.bx--parent-row-v2`            | Parent row selector                        |
-| `selectorChildRow`         | `[data-child-row]`              | Child row selector                         |
-| `selectorTableBody`        | `tbody`                         | Generic tbody selector                     |
-| `classExpandableRow`       | `bx--expandable-row-v2`         | Expandable Row parent class                |
-| `classExpandableRowHidden` | `bx--expandable-row--hidden-v2` | Initial hidden class                       |
-| `classExpandableRowHover`  | `bx--expandable-row--hover-v2`  | Hover styles class                         |
-| `classTableSortAscending`  | `bx--table-sort-v2--ascending`  | Ascending sort icon class                  |
-| `classTableSortActive`     | `bx--table-sort-v2--active`     | Active sort icon class                     |
+| Key                        | Value                        | Description                                |
+| -------------------------- | ---------------------------- | ------------------------------------------ |
+| `selectorInit`             | `[data-table]`               | Required css class to target table element |
+| `selectorToolbar`          | `.bx--table--toolbar`        | Toolbar parent selector                    |
+| `selectorActions`          | `.bx--batch-actions`         | Action bar parent selector                 |
+| `selectorCount`            | `[data-items-selected]`      | Selected count span selector               |
+| `selectorActionCancel`     | `.bx--batch-summary__cancel` | Action cancel button selector              |
+| `selectorCheckbox`         | `.bx--checkbox`              | Checkbox class selector                    |
+| `selectorExpandCells`      | `.bx--table-expand`          | Expand td selector                         |
+| `selectorExpandableRows`   | `.bx--expandable-row`        | Expand tr selector                         |
+| `selectorParentRows`       | `.bx--parent-row`            | Parent row selector                        |
+| `selectorChildRow`         | `[data-child-row]`           | Child row selector                         |
+| `selectorTableBody`        | `tbody`                      | Generic tbody selector                     |
+| `classExpandableRow`       | `bx--expandable-row`         | Expandable Row parent class                |
+| `classExpandableRowHidden` | `bx--expandable-row--hidden` | Initial hidden class                       |
+| `classExpandableRowHover`  | `bx--expandable-row--hover`  | Hover styles class                         |
+| `classTableSortAscending`  | `bx--table-sort--ascending`  | Ascending sort icon class                  |
+| `classTableSortActive`     | `bx--table-sort--active`     | Active sort icon class                     |
 
 ### FAQ
 
@@ -120,7 +120,7 @@ document.addEventListener('data-table-v2-aftertogglesort', function(evt) {
 The table component does not sort the table for you, rather it emits an event and toggles the sort UI. It is up to the user to re-render the table rows sorted; you can see this in action [in the React Storybook](http://react.carbondesignsystem.com/?selectedKind=DataTable&selectedStory=with%20sorting&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 **How do I use the expandable rows**
-If you would like to programmatically expand table rows, you can add the `bx--expandable-row-v2` to the `selectorParentRows` elements.
+If you would like to programmatically expand table rows, you can add the `bx--expandable-row` to the `selectorParentRows` elements.
 
 **How do I activate the batch actions pane**
 If you would like to programmatically activate the batch actions pane, you can add `bx--batch-actions--active` to the `bx--batch-actions` element.
