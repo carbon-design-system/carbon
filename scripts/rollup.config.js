@@ -8,7 +8,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const resolve = require('rollup-plugin-node-resolve');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
-const uglify = require('rollup-plugin-uglify');
+const { terser } = require('rollup-plugin-terser');
 const sizes = require('rollup-plugin-sizes');
 
 const packageJson = require('../package.json');
@@ -21,7 +21,7 @@ const prodSettings =
   env === 'development'
     ? []
     : [
-        uglify(),
+        terser(),
         sizes({
           report(details) {
             const table = new Table({
