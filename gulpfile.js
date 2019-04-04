@@ -12,7 +12,6 @@ const autoprefixer = require('gulp-autoprefixer');
 // Javascript deps
 const babel = require('gulp-babel');
 const terser = require('gulp-terser');
-const pump = require('pump');
 const { promisify } = require('bluebird');
 const debounce = require('lodash.debounce');
 
@@ -24,11 +23,10 @@ const nodemon = require('gulp-nodemon');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
-const gutil = require('gulp-util');
 const header = require('gulp-header');
 const jsdoc = require('gulp-jsdoc3');
+const log = require('fancy-log');
 const through = require('through2');
-const merge = require('merge-stream');
 
 // Rollup
 const { rollup } = require('rollup');
@@ -79,36 +77,6 @@ const axe = require('gulp-axe-webdriver');
 const promisePortSassDevBuild = portscanner.findAPortNotInUse(cloptions.portSassDevBuild, cloptions.portSassDevBuild + 100);
 
 /**
- * Dev server
- */
-
-gulp.task('dev-server', ['sass:dev', 'scripts:dev:feature-flags'], cb => {
-  promisePortSassDevBuild.then(
-    portSassDevBuild => {
-      let started;
-      const options = {
-        script: './server.js',
-        ext: 'js',
-        watch: ['server.js', 'tools/templates.js'],
-        env: {
-          PORT: cloptions.port,
-          PORT_SASS_DEV_BUILD: portSassDevBuild,
-        },
-      };
-      nodemon(options).on('start', () => {
-        if (!started) {
-          started = true;
-          cb();
-        }
-      });
-    },
-    err => {
-      console.log('Error finding the port for Sass dev build:', err); // eslint-disable-line no-console
-    }
-  );
-});
-
-/**
  * Clean
  */
 
@@ -141,37 +109,6 @@ gulp.task('clean', () =>
 const { useBreakingChanges } = cloptions;
 let { useExperimentalFeatures } = cloptions;
 
-gulp.task('scripts:dev', ['scripts:dev:feature-flags'], () => {
-  if (cloptions.rollup) {
-    return rollup(rollupConfigDev)
-      .then(bundle =>
-        bundle.write({
-          format: 'iife',
-          name: 'CarbonComponents',
-          file: 'demo/demo.js',
-          sourcemap: 'inline',
-        })
-      )
-      .then(() => {
-        browserSync.reload();
-      });
-  }
-  return webpackPromisified(webpackDevConfig).then(stats => {
-    gutil.log(
-      '[webpack:build]',
-      stats.toString({
-        colors: true,
-      })
-    );
-  });
-});
-
-gulp.task('scripts:dev:deploy', ['scripts:dev'], cb => {
-  const srcFile = './demo/demo.js';
-
-  pump([gulp.src(srcFile), terser(), rename('demo.min.js'), gulp.dest('demo')], cb);
-});
-
 gulp.task('scripts:dev:feature-flags', () => {
   const replaceTable = {};
   if (typeof useBreakingChanges !== 'undefined') {
@@ -191,6 +128,42 @@ gulp.task('scripts:dev:feature-flags', () => {
     )
     .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));
 });
+
+const buildDemoJS = () => {
+  if (cloptions.rollup) {
+    return rollup(rollupConfigDev)
+      .then(bundle =>
+        bundle.write({
+          format: 'iife',
+          name: 'CarbonComponents',
+          file: 'demo/demo.js',
+          sourcemap: 'inline',
+        })
+      )
+      .then(() => {
+        browserSync.reload();
+      });
+  }
+  return webpackPromisified(webpackDevConfig).then(stats => {
+    log(
+      '[webpack:build]',
+      stats.toString({
+        colors: true,
+      })
+    );
+  });
+};
+
+gulp.task('scripts:dev', gulp.series('scripts:dev:feature-flags', buildDemoJS));
+
+const minifyDemoJS = () =>
+  gulp
+    .src('./demo/demo.js')
+    .pipe(terser())
+    .pipe(rename('demo.min.js'))
+    .pipe(gulp.dest('demo'));
+
+gulp.task('scripts:dev:deploy', gulp.series('scripts:dev', minifyDemoJS));
 
 const pathsToConvertToESM = new Set([
   path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
@@ -294,19 +267,22 @@ gulp.task('scripts:rollup', () =>
   )
 );
 
-gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
-  const srcFile = './scripts/carbon-components.js';
+const minifyJS = () =>
+  gulp
+    .src('./scripts/carbon-components.js')
+    .pipe(terser())
+    .pipe(rename('carbon-components.min.js'))
+    .pipe(gulp.dest('scripts'));
 
-  pump([gulp.src(srcFile), terser(), rename('carbon-components.min.js'), gulp.dest('scripts')], cb);
-});
+gulp.task('scripts:compiled', gulp.series('scripts:rollup', minifyJS));
 
 /**
  * Sass Tasks
  */
 
-gulp.task('sass:compiled', () => {
-  function buildStyles(prod) {
-    return gulp
+const buildStyles = prod => {
+  const buildStylesForType = () =>
+    gulp
       .src('src/globals/scss/styles.scss')
       .pipe(sourcemaps.init())
       .pipe(
@@ -337,13 +313,10 @@ gulp.task('sass:compiled', () => {
       )
       .pipe(gulp.dest('css'))
       .pipe(browserSync.stream({ match: '**/*.css' }));
-  }
+  return buildStylesForType;
+};
 
-  return merge(
-    buildStyles(), // Expanded CSS
-    buildStyles(true) // Minified CSS
-  );
-});
+gulp.task('sass:compiled', gulp.parallel(buildStyles(), buildStyles(true)));
 
 gulp.task('sass:dev', () => {
   const flags = {
@@ -387,8 +360,8 @@ gulp.task('sass:dev:server', () => {
   const debouncedSassBuild = debounce(switchTo => {
     if (typeof useExperimentalFeatures === 'undefined' || !useExperimentalFeatures !== !switchTo) {
       useExperimentalFeatures = switchTo;
-      gulp.start('sass:dev');
-      gulp.start('scripts:dev:feature-flags');
+      gulp.task('sass:dev')();
+      gulp.task('scripts:dev:feature-flags')();
     }
   }, 500);
   return promisePortSassDevBuild.then(portSassDevBuild => {
@@ -408,13 +381,9 @@ gulp.task('sass:dev:server', () => {
   });
 });
 
-gulp.task('sass:source', () => {
-  const srcFiles = './src/**/*.scss';
+gulp.task('sass:source', () => gulp.src('./src/**/*.scss').pipe(gulp.dest('scss')));
 
-  return gulp.src(srcFiles).pipe(gulp.dest('scss'));
-});
-
-gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
+const buildDemoHTML = () =>
   Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
     templates.cache.get().then(({ componentSource, docSource, contents }) =>
       Promise.all([
@@ -452,10 +421,11 @@ gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
           ),
       ])
     )
-  )
-);
+  );
 
-gulp.task('html:source', ['scripts:dev:feature-flags'], () => {
+gulp.task('html:dev', gulp.series('scripts:dev:feature-flags', buildDemoHTML));
+
+const buildHTML = () => {
   const names = {
     'notification--default': 'inline-notification',
     'notification--toast': 'toast-notification',
@@ -469,7 +439,41 @@ gulp.task('html:source', ['scripts:dev:feature-flags'], () => {
     });
     return Promise.all(promises);
   });
-});
+};
+
+gulp.task('html:source', gulp.series('scripts:dev:feature-flags', buildHTML));
+
+/**
+ * Dev server
+ */
+
+const launchDevServer = cb => {
+  promisePortSassDevBuild.then(
+    portSassDevBuild => {
+      let started;
+      const options = {
+        script: './server.js',
+        ext: 'js',
+        watch: ['server.js', 'tools/templates.js'],
+        env: {
+          PORT: cloptions.port,
+          PORT_SASS_DEV_BUILD: portSassDevBuild,
+        },
+      };
+      nodemon(options).on('start', () => {
+        if (!started) {
+          started = true;
+          cb();
+        }
+      });
+    },
+    err => {
+      console.log('Error finding the port for Sass dev build:', err); // eslint-disable-line no-console
+    }
+  );
+};
+
+gulp.task('dev-server', gulp.series(gulp.parallel(['sass:dev', 'scripts:dev:feature-flags']), launchDevServer));
 
 /**
  * JSDoc
@@ -511,9 +515,7 @@ gulp.task('jsdoc', cb => {
  * Test
  */
 
-gulp.task('test', ['test:unit', 'test:a11y']);
-
-gulp.task('test:unit', ['html:source'], done => {
+const startTest = done => {
   new Server(
     {
       configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
@@ -521,9 +523,11 @@ gulp.task('test:unit', ['html:source'], done => {
     },
     done
   ).start();
-});
+};
 
-gulp.task('test:a11y', ['sass:compiled'], done => {
+gulp.task('test:unit', gulp.series('html:source', startTest));
+
+const startAccessibilityTest = done => {
   const componentName = cloptions.name;
   const options = {
     a11yCheckOptions: {
@@ -543,30 +547,34 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
   };
 
   return axe(options, done);
-});
+};
+
+gulp.task('test:a11y', gulp.series('sass:compiled', startAccessibilityTest));
+
+gulp.task('test', gulp.parallel('test:unit', 'test:a11y'));
 
 // Watch Tasks
 gulp.task('watch', () => {
   if (cloptions.rollup) {
-    gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
+    gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], gulp.task('scripts:dev'));
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], !cloptions.sassSource ? ['sass:dev'] : ['sass:dev', 'sass:source']);
+  gulp.watch(
+    ['src/**/**/*.scss', 'demo/**/*.scss'],
+    !cloptions.sassSource ? gulp.task('sass:dev') : gulp.parallel('sass:dev', 'sass:source')
+  );
 });
 
-gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);
+gulp.task('serve', gulp.parallel('dev-server', 'watch', 'sass:dev:server'));
 
 // Build task collection
-gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);
-gulp.task('build:styles', ['sass:compiled', 'sass:source']);
+gulp.task('build:scripts', gulp.parallel('scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev'));
+gulp.task('build:styles', gulp.parallel('sass:compiled', 'sass:source'));
 
 // Mapped to npm run build
-gulp.task('build', ['build:scripts', 'build:styles', 'html:source']);
+gulp.task('build', gulp.parallel('build:scripts', 'build:styles', 'html:source'));
 
 // For demo environment
-gulp.task('build:dev', ['sass:dev', 'scripts:dev', 'html:dev']);
-gulp.task('build:dev:deploy', ['sass:dev', 'scripts:dev:deploy', 'html:dev']);
+gulp.task('build:dev', gulp.parallel('sass:dev', 'scripts:dev', 'html:dev'));
+gulp.task('build:dev:deploy', gulp.parallel('sass:dev', 'scripts:dev:deploy', 'html:dev'));
 
-gulp.task('default', () => {
-  // eslint-disable-next-line no-console
-  console.log('\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n');
-});
+gulp.task('default', gulp.task('serve'));

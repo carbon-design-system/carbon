@@ -4,6 +4,7 @@ set -e
 
 yarn build
 yarn lint
+yarn format:check
 yarn test:unit -- --browser ChromeHeadless_Travis --browser Firefox
 yarn test:build
 if [[ -n "$RUN_EACH" ]]; then find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 yarn test:unit -- -d -f; fi
