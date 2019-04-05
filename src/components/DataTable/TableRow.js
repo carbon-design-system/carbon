@@ -17,7 +17,7 @@ const TableRow = props => {
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
   const className = cx(props.className, {
-    [`${prefix}--data-table-v2--selected`]: props.isSelected,
+    [`${prefix}--data-table--selected`]: props.isSelected,
   });
   const cleanProps = {
     ...omit(props, ['ariaLabel', 'onExpand', 'isExpanded', 'isSelected']),

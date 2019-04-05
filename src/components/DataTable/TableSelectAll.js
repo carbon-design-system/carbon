@@ -8,6 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import InlineCheckbox from '../InlineCheckbox';
+import cx from 'classnames';
+
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const TableSelectAll = ({
   ariaLabel,
@@ -19,7 +24,7 @@ const TableSelectAll = ({
   disabled,
   className,
 }) => (
-  <th scope="col" className={className}>
+  <th scope="col" className={cx(`${prefix}--table-column-checkbox`, className)}>
     <InlineCheckbox
       ariaLabel={ariaLabel}
       checked={checked}

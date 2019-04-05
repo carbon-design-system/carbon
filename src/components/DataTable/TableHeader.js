@@ -8,12 +8,10 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { iconCaretUp } from 'carbon-icons';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
-import CaretUpGlyph from '@carbon/icons-react/lib/caret--up';
+import Arrow from '@carbon/icons-react/lib/arrow--up/20';
+import Arrows from '@carbon/icons-react/lib/arrows--vertical/20';
 import { sortStates } from './state/sorting';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -67,10 +65,10 @@ const TableHeader = ({
   }
 
   const className = cx(headerClassName, {
-    [`${prefix}--table-sort-v2`]: true,
-    [`${prefix}--table-sort-v2--active`]:
+    [`${prefix}--table-sort`]: true,
+    [`${prefix}--table-sort--active`]:
       isSortHeader && sortDirection !== sortStates.NONE,
-    [`${prefix}--table-sort-v2--ascending`]:
+    [`${prefix}--table-sort--ascending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
@@ -79,28 +77,24 @@ const TableHeader = ({
     <th scope={scope} className={headerClassName} aria-sort={ariaSort}>
       <button className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-header-label`}>{children}</span>
-        {componentsX ? (
-          <CaretUpGlyph
-            className={`${prefix}--table-sort-v2__icon`}
-            aria-label={t('carbon.table.header.icon.description', {
-              header: children,
-              sortDirection,
-              isSortHeader,
-              sortStates,
-            })}
-          />
-        ) : (
-          <Icon
-            className={`${prefix}--table-sort-v2__icon`}
-            icon={iconCaretUp}
-            description={t('carbon.table.header.icon.description', {
-              header: children,
-              sortDirection,
-              isSortHeader,
-              sortStates,
-            })}
-          />
-        )}
+        <Arrow
+          className={`${prefix}--table-sort__icon`}
+          aria-label={t('carbon.table.header.icon.description', {
+            header: children,
+            sortDirection,
+            isSortHeader,
+            sortStates,
+          })}
+        />
+        <Arrows
+          className={`${prefix}--table-sort__icon-unsorted`}
+          aria-label={t('carbon.table.header.icon.description', {
+            header: children,
+            sortDirection,
+            isSortHeader,
+            sortStates,
+          })}
+        />
       </button>
     </th>
   );

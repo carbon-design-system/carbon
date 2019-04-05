@@ -6,7 +6,9 @@
  */
 
 import React from 'react';
-import { iconDownload, iconEdit, iconSettings } from 'carbon-icons';
+import Download16 from '@carbon/icons-react/lib/download/16';
+import Edit16 from '@carbon/icons-react/lib/edit/16';
+import Settings16 from '@carbon/icons-react/lib/settings/16';
 import Button from '../../Button';
 import DataTable, {
   Table,
@@ -82,17 +84,17 @@ describe('DataTable', () => {
             <TableToolbarSearch onChange={onInputChange} id="custom-id" />
             <TableToolbarContent>
               <TableToolbarAction
-                icon={iconDownload}
+                renderIcon={Download16}
                 iconDescription="Download"
                 onClick={jest.fn()}
               />
               <TableToolbarAction
-                icon={iconEdit}
+                renderIcon={Edit16}
                 iconDescription="Edit"
                 onClick={jest.fn()}
               />
               <TableToolbarAction
-                icon={iconSettings}
+                renderIcon={Settings16}
                 iconDescription="Settings"
                 onClick={jest.fn()}
               />
@@ -533,11 +535,9 @@ describe('DataTable', () => {
                         ))}
                       </TableExpandRow>
                       {row.isExpanded && (
-                        <TableExpandedRow>
-                          <TableCell colSpan={headers.length + 3}>
-                            <h1>Expandable row content</h1>
-                            <p>Description here</p>
-                          </TableCell>
+                        <TableExpandedRow colSpan={headers.length + 3}>
+                          <h1>Expandable row content</h1>
+                          <p>Description here</p>
                         </TableExpandedRow>
                       )}
                     </React.Fragment>

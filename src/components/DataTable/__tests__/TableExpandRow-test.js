@@ -43,12 +43,18 @@ describe('DataTable.TableExpandRow', () => {
       </Table>
     );
     expect(
-      Object.keys(wrapper.find('TableCell').props()).indexOf(
-        'data-previous-value'
-      ) !== -1
+      Object.keys(
+        wrapper
+          .find('TableCell')
+          .first()
+          .props()
+      ).indexOf('data-previous-value') !== -1
     ).toBe(true);
     expect(
-      wrapper.find('TableCell').prop('data-previous-value')
+      wrapper
+        .find('TableCell')
+        .first()
+        .prop('data-previous-value')
     ).not.toBeDefined();
   });
 
@@ -72,8 +78,11 @@ describe('DataTable.TableExpandRow', () => {
         </TableBody>
       </Table>
     );
-    expect(expandedWrapper.find('TableCell').prop('data-previous-value')).toBe(
-      'collapsed'
-    );
+    expect(
+      expandedWrapper
+        .find('TableCell')
+        .first()
+        .prop('data-previous-value')
+    ).toBe('collapsed');
   });
 });

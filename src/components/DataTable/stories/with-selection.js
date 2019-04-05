@@ -30,8 +30,8 @@ export default () => (
       getRowProps,
       getSelectionProps,
     }) => (
-      <TableContainer title="DataTable">
-        <Table>
+      <TableContainer title="DataTable" description="With selection">
+        <Table sortable={true}>
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />

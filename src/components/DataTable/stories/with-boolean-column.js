@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { iconDownload, iconEdit, iconSettings } from 'carbon-icons';
 import Download16 from '@carbon/icons-react/lib/download/16';
 import Edit16 from '@carbon/icons-react/lib/edit/16';
 import Settings16 from '@carbon/icons-react/lib/settings/16';
@@ -26,7 +25,6 @@ import DataTable, {
   TableToolbarContent,
   TableToolbarSearch,
 } from '../../DataTable';
-import { componentsX } from '../../../internal/FeatureFlags';
 // import { initialRows, headers } from './shared';
 
 const initialRows = [
@@ -98,25 +96,22 @@ export default () => (
     rows={initialRows}
     headers={headers}
     render={({ rows, headers, getHeaderProps, getRowProps, onInputChange }) => (
-      <TableContainer title="DataTable with toolbar">
+      <TableContainer title="DataTable" description="With boolean column">
         <TableToolbar>
           <TableToolbarSearch onChange={onInputChange} />
           <TableToolbarContent>
             <TableToolbarAction
-              renderIcon={!componentsX ? undefined : Download16}
-              icon={componentsX ? undefined : iconDownload}
+              renderIcon={Download16}
               iconDescription="Download"
               onClick={action('TableToolbarAction - Download')}
             />
             <TableToolbarAction
-              renderIcon={!componentsX ? undefined : Edit16}
-              icon={componentsX ? undefined : iconEdit}
+              renderIcon={Edit16}
               iconDescription="Edit"
               onClick={action('TableToolbarAction - Edit')}
             />
             <TableToolbarAction
-              renderIcon={!componentsX ? undefined : Settings16}
-              icon={componentsX ? undefined : iconSettings}
+              renderIcon={Settings16}
               iconDescription="Settings"
               onClick={action('TableToolbarAction - Settings')}
             />
@@ -125,7 +120,7 @@ export default () => (
             </Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table>
+        <Table sortable={true}>
           <TableHead>
             <TableRow>
               {headers.map(header => (

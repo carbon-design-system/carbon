@@ -7,7 +7,7 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableHead>
       <thead>
@@ -42,7 +42,7 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableHead>
       <thead>
@@ -77,7 +77,7 @@ exports[`DataTable.TableHeader should render 1`] = `
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableHead>
       <thead>
@@ -112,7 +112,7 @@ exports[`DataTable.TableHeader should render 2`] = `
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableHead>
       <thead>

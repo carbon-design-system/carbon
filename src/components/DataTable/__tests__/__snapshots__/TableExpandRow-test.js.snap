@@ -7,7 +7,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableBody>
       <tbody>
@@ -19,24 +19,24 @@ exports[`DataTable.TableExpandRow should render 1`] = `
           onExpand={[MockFunction]}
         >
           <tr
-            className="bx--parent-row-v2 custom-class"
+            className="bx--parent-row custom-class"
             data-parent-row={true}
           >
             <TableCell
-              className="bx--table-expand-v2"
+              className="bx--table-expand"
               headers="expand"
             >
               <td
-                className="bx--table-expand-v2"
+                className="bx--table-expand"
                 headers="expand"
               >
                 <button
                   aria-label="Aria label"
-                  className="bx--table-expand-v2__button"
+                  className="bx--table-expand__button"
                   onClick={[MockFunction]}
                 >
                   <ChevronRight16
-                    className="bx--table-expand-v2__svg"
+                    className="bx--table-expand__svg"
                     height={16}
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 16 16"
@@ -45,7 +45,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="bx--table-expand-v2__svg"
+                      className="bx--table-expand__svg"
                       focusable="false"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
@@ -70,9 +70,19 @@ exports[`DataTable.TableExpandRow should render 1`] = `
         </TableExpandRow>
         <TableExpandedRow>
           <tr
-            className="bx--expandable-row-v2"
+            className="bx--expandable-row"
             data-child-row={true}
-          />
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <TableCell>
+              <td>
+                <div
+                  className="bx--child-row-inner-container"
+                />
+              </td>
+            </TableCell>
+          </tr>
         </TableExpandedRow>
       </tbody>
     </TableBody>

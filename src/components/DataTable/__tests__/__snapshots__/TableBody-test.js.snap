@@ -7,7 +7,7 @@ exports[`DataTable.TableBody should render 1`] = `
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableBody
       className="custom-class"

@@ -17,7 +17,7 @@ describe('DataTable.Table', () => {
 
   it('should support disable zebra stripe', () => {
     const wrapper = shallow(<Table zebra={false} />);
-    expect(wrapper.hasClass('bx--data-table-v2')).toBe(true);
-    expect(wrapper.hasClass('bx--data-table-v2--zebra')).toBe(false);
+    expect(wrapper.hasClass('bx--data-table')).toBe(true);
+    expect(wrapper.hasClass('bx--data-table--zebra')).toBe(false);
   });
 });

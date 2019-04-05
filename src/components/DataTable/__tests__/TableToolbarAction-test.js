@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { iconAddSolid } from 'carbon-icons';
 import Download16 from '@carbon/icons-react/lib/download/16';
 import { TableToolbarAction } from '../';
 
@@ -16,7 +15,7 @@ describe('DataTable.TableToolbarAction', () => {
     const wrapper = mount(
       <TableToolbarAction
         className="custom-class"
-        icon={iconAddSolid}
+        renderIcon={Download16}
         iconDescription="Add"
       />
     );

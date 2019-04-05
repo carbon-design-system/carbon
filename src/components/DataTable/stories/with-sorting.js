@@ -22,8 +22,8 @@ export default () => (
     rows={initialRows}
     headers={headers}
     render={({ rows, headers, getHeaderProps, getRowProps }) => (
-      <TableContainer title="DataTable with sorting">
-        <Table>
+      <TableContainer title="DataTable" description="With sorting">
+        <Table sortable={true}>
           <TableHead>
             <TableRow>
               {headers.map(header => (

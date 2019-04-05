@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { iconDownload, iconEdit, iconSettings } from 'carbon-icons';
 import DataTable, {
   Table,
   TableBatchAction,
@@ -33,7 +32,6 @@ import Download16 from '@carbon/icons-react/lib/download/16';
 import Edit16 from '@carbon/icons-react/lib/edit/16';
 import Settings16 from '@carbon/icons-react/lib/settings/16';
 import { batchActionClick, initialRows, headers } from './shared';
-import { componentsX } from '../../../internal/FeatureFlags';
 
 export default () => {
   const insertInRandomPosition = (array, element) => {
@@ -111,7 +109,9 @@ export default () => {
             onInputChange,
             selectedRows,
           }) => (
-            <TableContainer title="DataTable with dynamic rows">
+            <TableContainer
+              title="DataTable"
+              description="With dynamic content">
               <Button small onClick={this.handleOnRowAdd}>
                 Add new row
               </Button>
@@ -133,26 +133,23 @@ export default () => {
                 <TableToolbarSearch onChange={onInputChange} />
                 <TableToolbarContent>
                   <TableToolbarAction
-                    renderIcon={!componentsX ? undefined : Download16}
-                    icon={componentsX ? undefined : iconDownload}
+                    renderIcon={Download16}
                     iconDescription="Download"
                     onClick={action('TableToolbarAction - Download')}
                   />
                   <TableToolbarAction
-                    renderIcon={!componentsX ? undefined : Edit16}
-                    icon={componentsX ? undefined : iconEdit}
+                    renderIcon={Edit16}
                     iconDescription="Edit"
                     onClick={action('TableToolbarAction - Edit')}
                   />
                   <TableToolbarAction
-                    renderIcon={!componentsX ? undefined : Settings16}
-                    icon={componentsX ? undefined : iconSettings}
+                    renderIcon={Settings16}
                     iconDescription="Settings"
                     onClick={action('TableToolbarAction - Settings')}
                   />
                 </TableToolbarContent>
               </TableToolbar>
-              <Table>
+              <Table sortable={true}>
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
@@ -173,14 +170,10 @@ export default () => {
                           <TableCell key={cell.id}>{cell.value}</TableCell>
                         ))}
                       </TableExpandRow>
-                      {row.isExpanded && (
-                        <TableExpandedRow>
-                          <TableCell colSpan={headers.length + 3}>
-                            <h1>Expandable row content</h1>
-                            <p>Description here</p>
-                          </TableCell>
-                        </TableExpandedRow>
-                      )}
+                      <TableExpandedRow colSpan={headers.length + 3}>
+                        <h1>Expandable row content</h1>
+                        <p>Description here</p>
+                      </TableExpandedRow>
                     </React.Fragment>
                   ))}
                 </TableBody>

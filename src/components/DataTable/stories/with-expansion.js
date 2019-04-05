@@ -25,8 +25,8 @@ export default () => (
     rows={initialRows}
     headers={headers}
     render={({ rows, headers, getHeaderProps, getRowProps }) => (
-      <TableContainer title="DataTable with expansion">
-        <Table>
+      <TableContainer title="DataTable" description="With expansion">
+        <Table sortable={true}>
           <TableHead>
             <TableRow>
               <TableExpandHeader />
@@ -45,14 +45,10 @@ export default () => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableExpandRow>
-                {row.isExpanded && (
-                  <TableExpandedRow>
-                    <TableCell colSpan={headers.length + 1}>
-                      <h1>Expandable row content</h1>
-                      <p>Description here</p>
-                    </TableCell>
-                  </TableExpandedRow>
-                )}
+                <TableExpandedRow colSpan={headers.length + 1}>
+                  <h1>Expandable row content</h1>
+                  <p>Description here</p>
+                </TableExpandedRow>
               </React.Fragment>
             ))}
           </TableBody>

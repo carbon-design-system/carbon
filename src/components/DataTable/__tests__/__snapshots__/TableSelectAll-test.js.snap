@@ -7,7 +7,7 @@ exports[`DataTable.TableSelectAll should render 1`] = `
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra"
+    className="bx--data-table bx--data-table--zebra"
   >
     <TableHead>
       <thead>
@@ -22,7 +22,7 @@ exports[`DataTable.TableSelectAll should render 1`] = `
               onSelect={[MockFunction]}
             >
               <th
-                className="custom-class-name"
+                className="bx--table-column-checkbox custom-class-name"
                 scope="col"
               >
                 <ForwardRef(InlineCheckbox)

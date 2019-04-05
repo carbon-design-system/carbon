@@ -8,7 +8,7 @@ exports[`DataTable.Table should render 1`] = `
   zebra={true}
 >
   <table
-    className="bx--data-table-v2 custom-class bx--data-table-v2--zebra"
+    className="bx--data-table custom-class bx--data-table--zebra"
   />
 </Table>
 `;
