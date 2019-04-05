@@ -171,7 +171,7 @@
 
   .#{$prefix}--radio-button__appearance {
     @include reset;
-    background-color: $inverse-01;
+    background-color: transparent;
     border-radius: 50%;
     border: $radio-border-width solid $ui-05;
     flex-shrink: 0;

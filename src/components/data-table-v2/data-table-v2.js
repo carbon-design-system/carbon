@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -13,6 +14,7 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const suffix = componentsX ? '' : '-v2';
 
 class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
@@ -56,8 +58,14 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.element.addEventListener('click', evt => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
+      const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+
       if (eventElement) {
         this._toggleState(eventElement, evt);
+      }
+
+      if (componentsX && searchContainer) {
+        this._handleDocumentClick(evt);
       }
     });
 
@@ -66,6 +74,41 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state = {
       checkboxCount: 0,
     };
+  }
+
+  _handleDocumentClick(evt) {
+    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
+    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+
+    if (searchContainer && searchEvent) {
+      this.activateSearch(searchContainer);
+    }
+
+    if (activeSearch) {
+      this.deactivateSearch(searchContainer, evt);
+    }
+  }
+
+  activateSearch(container) {
+    const input = container.querySelector(this.options.selectorSearchInput);
+    container.classList.add(this.options.classToolbarSearchActive);
+    input.focus();
+  }
+
+  deactivateSearch(container, evt) {
+    const trigger = container.querySelector(this.options.selectorSearchMagnifier);
+    const input = container.querySelector(this.options.selectorSearchInput);
+    const svg = trigger.querySelector('svg');
+    if (input.value.length === 0 && evt.target !== input && evt.target !== trigger && evt.target !== svg) {
+      container.classList.remove(this.options.classToolbarSearchActive);
+      trigger.focus();
+    }
+
+    if (evt.which === 27 && evt.target === input) {
+      container.classList.remove(this.options.classToolbarSearchActive);
+      trigger.focus();
+    }
   }
 
   _sortToggle = detail => {
@@ -183,8 +226,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _expandableRowsInit = expandableRows => {
     expandableRows.forEach(item => {
-      item.classList.remove(this.options.classExpandableRowHidden);
-      this.tableBody.removeChild(item);
+      if (!componentsX) {
+        item.classList.remove(this.options.classExpandableRowHidden);
+        this.tableBody.removeChild(item);
+      }
     });
   };
 
@@ -195,10 +240,14 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
-      this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
+      if (!componentsX) {
+        this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
+      }
     } else {
       parent.classList.remove(this.options.classExpandableRow);
-      this.tableBody.removeChild(parent.nextElementSibling);
+      if (!componentsX) {
+        this.tableBody.removeChild(parent.nextElementSibling);
+      }
       element.dataset.previousValue = 'expanded';
     }
   };
@@ -230,8 +279,20 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _keydownHandler = evt => {
+    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
+    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+
     if (evt.which === 27) {
       this._actionBarCancel();
+    }
+
+    if (searchContainer && searchEvent && evt.which === 13) {
+      this.activateSearch(searchContainer);
+    }
+
+    if (activeSearch && evt.which === 27) {
+      this.deactivateSearch(searchContainer, evt);
     }
   };
 
@@ -279,30 +340,34 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   static get options() {
     const { prefix } = settings;
     return {
-      selectorInit: '[data-table-v2]',
+      selectorInit: `[data-table${suffix}]`,
       selectorToolbar: `.${prefix}--table--toolbar`,
       selectorActions: `.${prefix}--batch-actions`,
       selectorCount: '[data-items-selected]',
       selectorActionCancel: `.${prefix}--batch-summary__cancel`,
       selectorCheckbox: `.${prefix}--checkbox`,
-      selectorExpandCells: `.${prefix}--table-expand-v2`,
-      selectorExpandableRows: `.${prefix}--expandable-row-v2`,
-      selectorParentRows: `.${prefix}--parent-row-v2`,
+      selectorExpandCells: `td.${prefix}--table-expand${suffix}`,
+      selectorExpandableRows: `.${prefix}--expandable-row${suffix}`,
+      selectorParentRows: `.${prefix}--parent-row${suffix}`,
       selectorChildRow: '[data-child-row]',
       selectorTableBody: 'tbody',
-      selectorTableSort: `.${prefix}--table-sort-v2`,
-      selectorTableSelected: `.${prefix}--data-table-v2--selected`,
-      classExpandableRow: `${prefix}--expandable-row-v2`,
-      classExpandableRowHidden: `${prefix}--expandable-row--hidden-v2`,
-      classExpandableRowHover: `${prefix}--expandable-row--hover-v2`,
-      classTableSortAscending: `${prefix}--table-sort-v2--ascending`,
-      classTableSortActive: `${prefix}--table-sort-v2--active`,
+      selectorTableSort: `.${prefix}--table-sort${suffix}`,
+      selectorTableSelected: `.${prefix}--data-table${suffix}--selected`,
+      selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-expandable`,
+      selectorSearchMagnifier: `.${prefix}--search-magnifier`,
+      selectorSearchInput: `.${prefix}--search-input`,
+      classExpandableRow: `${prefix}--expandable-row${suffix}`,
+      classExpandableRowHidden: `${prefix}--expandable-row--hidden${suffix}`,
+      classExpandableRowHover: `${prefix}--expandable-row--hover${suffix}`,
+      classTableSortAscending: `${prefix}--table-sort${suffix}--ascending`,
+      classTableSortActive: `${prefix}--table-sort${suffix}--active`,
+      classToolbarSearchActive: `${prefix}--toolbar-search-container-active`,
       classActionBarActive: `${prefix}--batch-actions--active`,
-      classTableSelected: `${prefix}--data-table-v2--selected`,
-      eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
-      eventAfterExpand: 'data-table-v2-aftertoggleexpand',
-      eventBeforeSort: 'data-table-v2-beforetogglesort',
-      eventAfterSort: 'data-table-v2-aftertogglesort',
+      classTableSelected: `${prefix}--data-table${suffix}--selected`,
+      eventBeforeExpand: `data-table${suffix}-beforetoggleexpand`,
+      eventAfterExpand: `data-table${suffix}-aftertoggleexpand`,
+      eventBeforeSort: `data-table${suffix}-beforetogglesort`,
+      eventAfterSort: `data-table${suffix}-aftertogglesort`,
       eventTrigger: '[data-event]',
       eventParentContainer: '[data-parent-row]',
     };

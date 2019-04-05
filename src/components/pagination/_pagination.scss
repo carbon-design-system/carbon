@@ -196,7 +196,7 @@ $css--helpers: true;
 }
 
 @mixin pagination--x {
-  .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
     border-top: 0;
   }
 
@@ -216,6 +216,11 @@ $css--helpers: true;
     height: 100%;
     align-items: center;
     grid-template-columns: auto 0;
+  }
+
+  .#{$prefix}--select-input__wrapper,
+  .#{$prefix}--select-input--inline__wrapper {
+    height: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
