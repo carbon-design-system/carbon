@@ -8,6 +8,8 @@ exports[`SideNav should render 1`] = `
   <nav
     aria-label="Navigation"
     className="bx--side-nav__navigation bx--side-nav bx--side-nav--expanded"
+    onBlur={[Function]}
+    onFocus={[Function]}
   >
     <h2>
       Navigation
@@ -76,6 +78,8 @@ exports[`SideNav should toggle the menu expansion state when clicking on the foo
   <nav
     aria-label="Navigation"
     className="bx--side-nav__navigation bx--side-nav"
+    onBlur={[Function]}
+    onFocus={[Function]}
   >
     <h2>
       Navigation

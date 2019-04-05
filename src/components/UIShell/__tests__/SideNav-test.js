@@ -31,4 +31,10 @@ describe('SideNav', () => {
     expect(wrapper.state('isExpanded')).toBe(false);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should add focus class when nav items are focused', () => {
+    const wrapper = mount(<SideNav {...mockProps} />);
+    wrapper.simulate('focus');
+    expect(wrapper.state('isFocused')).toBe(true);
+  });
 });
