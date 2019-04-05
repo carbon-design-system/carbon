@@ -22,3 +22,8 @@ Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https
 </svg>
 ```
 
+
+
+### SCSS
+
+No selector changes.
