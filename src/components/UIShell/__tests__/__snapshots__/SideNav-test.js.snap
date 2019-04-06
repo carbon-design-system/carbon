@@ -3,76 +3,7 @@
 exports[`SideNav should render 1`] = `
 <SideNav
   aria-label="Navigation"
-  translateById={[Function]}
->
-  <nav
-    aria-label="Navigation"
-    className="bx--side-nav__navigation bx--side-nav bx--side-nav--expanded"
-    onBlur={[Function]}
-    onFocus={[Function]}
-  >
-    <h2>
-      Navigation
-    </h2>
-    <SideNavFooter
-      assistiveText="Close"
-      isExpanded={true}
-      onToggle={[Function]}
-    >
-      <footer
-        className="bx--side-nav__footer"
-      >
-        <button
-          className="bx--side-nav__toggle"
-          onClick={[Function]}
-          title="Close"
-          type="button"
-        >
-          <div
-            className="bx--side-nav__icon"
-          >
-            <Close20
-              height={20}
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 32 32"
-              width={20}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <svg
-                aria-hidden={true}
-                focusable="false"
-                height={20}
-                preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
-                viewBox="0 0 32 32"
-                width={20}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
-                />
-              </svg>
-            </Close20>
-          </div>
-          <span
-            className="bx--assistive-text"
-          >
-            Close
-          </span>
-        </button>
-      </footer>
-    </SideNavFooter>
-  </nav>
-</SideNav>
-`;
-
-exports[`SideNav should toggle the menu expansion state when clicking on the footer 1`] = `
-<SideNav
-  aria-label="Navigation"
+  isExpanded={false}
   translateById={[Function]}
 >
   <nav
@@ -132,6 +63,77 @@ exports[`SideNav should toggle the menu expansion state when clicking on the foo
             className="bx--assistive-text"
           >
             Open
+          </span>
+        </button>
+      </footer>
+    </SideNavFooter>
+  </nav>
+</SideNav>
+`;
+
+exports[`SideNav should toggle the menu expansion state when clicking on the footer 1`] = `
+<SideNav
+  aria-label="Navigation"
+  isExpanded={false}
+  translateById={[Function]}
+>
+  <nav
+    aria-label="Navigation"
+    className="bx--side-nav__navigation bx--side-nav bx--side-nav--expanded"
+    onBlur={[Function]}
+    onFocus={[Function]}
+  >
+    <h2>
+      Navigation
+    </h2>
+    <SideNavFooter
+      assistiveText="Close"
+      isExpanded={true}
+      onToggle={[Function]}
+    >
+      <footer
+        className="bx--side-nav__footer"
+      >
+        <button
+          className="bx--side-nav__toggle"
+          onClick={[Function]}
+          title="Close"
+          type="button"
+        >
+          <div
+            className="bx--side-nav__icon"
+          >
+            <Close20
+              height={20}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                focusable="false"
+                height={20}
+                preserveAspectRatio="xMidYMid meet"
+                style={
+                  Object {
+                    "willChange": "transform",
+                  }
+                }
+                viewBox="0 0 32 32"
+                width={20}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+                />
+              </svg>
+            </Close20>
+          </div>
+          <span
+            className="bx--assistive-text"
+          >
+            Close
           </span>
         </button>
       </footer>

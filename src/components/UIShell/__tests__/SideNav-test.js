@@ -26,14 +26,33 @@ describe('SideNav', () => {
 
   it('should toggle the menu expansion state when clicking on the footer', () => {
     const wrapper = mount(<SideNav {...mockProps} />);
-    expect(wrapper.state('isExpanded')).toBe(true);
-    wrapper.find('button').simulate('click');
     expect(wrapper.state('isExpanded')).toBe(false);
+    wrapper.find('button').simulate('click');
+    expect(wrapper.state('isExpanded')).toBe(true);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should add focus class when nav items are focused', () => {
+  it('should be expanded by default', () => {
+    const wrapper = mount(<SideNav {...mockProps} isExpanded />);
+    expect(wrapper.state('isExpanded')).toBe(true);
+  });
+
+  it('should be collapsed by default', () => {
     const wrapper = mount(<SideNav {...mockProps} />);
+    expect(wrapper.state('isExpanded')).toBe(false);
+  });
+
+  it('Blur event should trigger a state update of isFocused', () => {
+    const wrapper = mount(<SideNav {...mockProps} />);
+    wrapper.simulate('focus');
+    expect(wrapper.state('isFocused')).toBe(true);
+    wrapper.simulate('blur');
+    expect(wrapper.state('isFocused')).toBe(false);
+  });
+
+  it('Focus event should trigger a state update of isFocused', () => {
+    const wrapper = mount(<SideNav {...mockProps} />);
+    expect(wrapper.state('isFocused')).toBe(false);
     wrapper.simulate('focus');
     expect(wrapper.state('isFocused')).toBe(true);
   });
