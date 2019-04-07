@@ -147,7 +147,7 @@ function TypeScale() {
         <tbody>
           {CarbonType.scale.map((size, step) => (
             <tr key={size}>
-              <td>{step}</td>
+              <td>{step + 1}</td>
               <td>{size}</td>
               <td className={`type-scale-${step + 1}`}>
                 Good design is good business
