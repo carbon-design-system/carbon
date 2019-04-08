@@ -7,13 +7,19 @@ Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https
 **New Markup**:
 
 ```html
-<div class="bx--form-item"><strong class="bx--file--label">Account photo</strong> ...</div>
+<div class="bx--form-item">
+    <strong class="bx--file--label">Account photo</strong> 
+    ...
+</div>
 ```
 
 **Old Markup**:
 
 ```html
-<div class="bx--form-item"><strong class="bx--label">Account photo</strong> ...</div>
+<div class="bx--form-item">
+    <strong class="bx--label">Account photo</strong> 
+    ...
+</div>
 ```
 
 ### SCSS
