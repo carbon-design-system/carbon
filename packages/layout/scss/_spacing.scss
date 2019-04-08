@@ -16,6 +16,9 @@ $carbon--spacing-06: carbon--mini-units(3) !default;
 $carbon--spacing-07: carbon--mini-units(4) !default;
 $carbon--spacing-08: carbon--mini-units(5) !default;
 $carbon--spacing-09: carbon--mini-units(6) !default;
+$carbon--spacing-10: carbon--mini-units(8) !default;
+$carbon--spacing-11: carbon--mini-units(10) !default;
+$carbon--spacing-12: carbon--mini-units(12) !default;
 
 $carbon--spacing: (
   $carbon--spacing-01,
@@ -26,7 +29,10 @@ $carbon--spacing: (
   $carbon--spacing-06,
   $carbon--spacing-07,
   $carbon--spacing-08,
-  $carbon--spacing-09
+  $carbon--spacing-09,
+  $carbon--spacing-10,
+  $carbon--spacing-11,
+  $carbon--spacing-12
 ) !default;
 
 $spacing-01: $carbon--spacing-01 !default;
@@ -38,6 +44,9 @@ $spacing-06: $carbon--spacing-06 !default;
 $spacing-07: $carbon--spacing-07 !default;
 $spacing-08: $carbon--spacing-08 !default;
 $spacing-09: $carbon--spacing-09 !default;
+$spacing-09: $carbon--spacing-10 !default;
+$spacing-09: $carbon--spacing-11 !default;
+$spacing-09: $carbon--spacing-12 !default;
 
 $carbon--layout-01: carbon--mini-units(2) !default;
 $carbon--layout-02: carbon--mini-units(3) !default;

@@ -29,7 +29,7 @@ export function em(px) {
 
 /**
  * Convert a given px unit to its string representation
- * @param {number} px
+ * @param {number} value - number of pixels
  * @returns {string}
  */
 export function px(value) {
@@ -95,6 +95,9 @@ export const spacing06 = miniUnits(3);
 export const spacing07 = miniUnits(4);
 export const spacing08 = miniUnits(5);
 export const spacing09 = miniUnits(6);
+export const spacing10 = miniUnits(8);
+export const spacing11 = miniUnits(10);
+export const spacing12 = miniUnits(12);
 export const spacing = [
   spacing01,
   spacing02,
@@ -105,6 +108,9 @@ export const spacing = [
   spacing07,
   spacing08,
   spacing09,
+  spacing10,
+  spacing11,
+  spacing12,
 ];
 
 // Layout
