@@ -84,11 +84,6 @@
     padding-right: $spacing-03;
   }
 
-  .#{$prefix}--data-table--sort th:first-of-type.#{$prefix}--table-column-checkbox,
-  .#{$prefix}--data-table--sort td:first-of-type {
-    padding-left: $spacing-04;
-  }
-
   .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
     padding-left: $spacing-04;
   }
