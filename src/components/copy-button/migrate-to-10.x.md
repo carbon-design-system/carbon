@@ -5,4 +5,3 @@ Updating HTML pertains only to SVG icon. Icon from [`carbon-elements`](https://g
 ### SCSS
 
 No selector changes.
-
