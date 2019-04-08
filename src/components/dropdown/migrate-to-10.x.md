@@ -35,17 +35,17 @@ bx--form-item
 **Old Structure**:
 
 ```
-└── bx--dropdown
-	├── bx--dropdown-text
-	|	└── bx--dropdown__arrow
-    └── <li>
-		└── dropdown list
-			├── bx--dropdown-item
-        	|	└── bx--dropdown-link
-        	├── dropdown list item
-       		|	└── bx--dropdown-link
-        	└── bx--dropdown-item
-        		└── bx--dropdown-link
+bx--dropdown
+├── bx--dropdown-text
+|	└── bx--dropdown__arrow
+└── <li>
+	└── dropdown list
+		├── bx--dropdown-item
+        |	└── bx--dropdown-link
+        ├── dropdown list item
+       	|	└── bx--dropdown-link
+        └── bx--dropdown-item
+        	└── bx--dropdown-link
 ```
 
 ### SCSS
