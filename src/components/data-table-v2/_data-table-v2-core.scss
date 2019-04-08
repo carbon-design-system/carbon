@@ -291,6 +291,10 @@
     padding-right: $spacing-03;
   }
 
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu {
+    padding-bottom: 0;
+  }
+
   .#{$prefix}--data-table td.#{$prefix}--table-column-menu .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
     background: $ui-03;
   }
@@ -324,6 +328,26 @@
   }
 
   //----------------------------------------------------------------------------
+  //ZEBRA
+  //----------------------------------------------------------------------------
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
+    border-bottom: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
+    background-color: $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    border-top: 1px solid $data-table-zebra-color;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr:hover td {
+    background-color: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  //----------------------------------------------------------------------------
   // Select
   //----------------------------------------------------------------------------
   .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
@@ -344,25 +368,40 @@
     background: $data-table-column-hover;
   }
 
-  // default selected row
+  // default selected row + zebra select - even child
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected td {
+    color: $text-01;
     background-color: $ui-03;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $active-01; //bottom border acts as separator from other rows
   }
 
   // first row
+  .#{$prefix}--data-table--zebra tbody tr:first-of-type:nth-child(odd).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected:first-of-type td {
     border-top: 1px solid $active-01; //top border acts as separator from thead
   }
 
-  // last row
+  // last row + zebra select last
+  .#{$prefix}--data-table--zebra tbody tr:last-of-type:nth-child(odd).#{$prefix}--data-table--selected td,
+  .#{$prefix}--data-table--zebra tbody tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
     border-top: 1px solid $ui-03; // doesn't need separators
     border-bottom: 1px solid $ui-03;
   }
 
-  // hover
+  // zebra select - odd child
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected td {
+    border-bottom: 1px solid $active-01;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected:hover td {
+    border-bottom: 1px solid $data-table-column-hover;
+  }
+
+  // hover + zebra select - even child
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd).#{$prefix}--data-table--selected:hover td,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
     color: $text-01;
     background: $data-table-column-hover;

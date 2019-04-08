@@ -201,12 +201,6 @@ const columnsExpandable = [
   },
 ];
 
-const columnsEditable = columns.slice(1, 7).map((column, i) => ({
-  ...column,
-  editable: true,
-  editing: i === 0,
-}));
-
 const columnsSmall = columns.slice(1, -1).map(column => ({
   ...column,
   sortable: false,
@@ -356,39 +350,6 @@ const rowsExpandable = [
   },
 ];
 
-const rowsEditable = [
-  {
-    id: 'row-id-15',
-    name: 'Load Balancer 3',
-    protocol: 'HTTP',
-    port: '3000',
-    rule: 'Round Robin',
-    attachedGroups: 'Kevins VM Groups',
-    status: 'Disabled',
-  },
-  {
-    id: 'row-id-11',
-    name: 'Load Balancer 1',
-    protocol: 'HTTP',
-    port: '443',
-    rule: 'Round Robin',
-    attachedGroups: 'Maureens VM Groups',
-    status: 'Starting',
-  },
-  {
-    id: 'row-id-10',
-    name: 'Load Balancer 2',
-    protocol: 'HTTP',
-    port: '80',
-    rule: 'DNS delegation',
-    attachedGroups: 'Andrews VM Groups',
-    status: 'Active',
-  },
-].map((row, i) => ({
-  ...row,
-  editable: i === 0,
-}));
-
 module.exports = {
   label: 'Data Table V2',
   context: {
@@ -427,6 +388,47 @@ module.exports = {
       },
     },
     {
+      name: 'zebra-select',
+      label: 'Zebra Select',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        state: 'default',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+        zebra: true,
+      },
+    },
+    {
+      name: 'zebra',
+      label: 'Zebra',
+      context: {
+        small: true,
+        columns: columnsSmall,
+        rows,
+        zebra: true,
+      },
+    },
+    {
       name: 'expandable',
       label: 'Expandable',
       context: {
@@ -449,20 +451,6 @@ module.exports = {
         addNewLabel: 'Add new',
         cancelLabel: 'Cancel',
         sortLabel: 'Sort rows by this header in descending order',
-      },
-    },
-    {
-      name: 'editable',
-      label: 'Inline Edit',
-      context: {
-        title: 'Table title',
-        columns: columnsEditable,
-        rows: rowsEditable,
-        cancelLabel: 'Cancel',
-        saveLabel: 'Save',
-        sortLabel: 'Sort rows by this header in descending order',
-        zebra: true,
-        sort: true,
       },
     },
     {
