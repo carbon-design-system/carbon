@@ -207,14 +207,6 @@
     border: 0;
   }
 
-  .#{$prefix}--btn--icon-only {
-    min-width: auto;
-
-    .#{$prefix}--btn__icon {
-      margin: 0;
-    }
-  }
-
   .#{$prefix}--btn--primary {
     @include button-theme--x($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
 
@@ -297,6 +289,14 @@
 
     &.#{$prefix}--btn--sm {
       padding: 0.375rem 1rem;
+    }
+  }
+
+  .#{$prefix}--btn--icon-only {
+    padding-right: rem(15px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
     }
   }
 
