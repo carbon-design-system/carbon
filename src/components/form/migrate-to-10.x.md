@@ -13,9 +13,9 @@ Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https
 **New Structure**:
 
 ```html
-├── bx--form-item
+bx--form-item
 	├── bx--label 
- 	├── bx--form__helper-text (optional)
+	├── bx--form__helper-text (optional)
 	├── input
 	└── bx--form-requirement (invalid use only)
 ```
@@ -23,7 +23,7 @@ Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https
 **Old Structure**:
 
 ```html
-├── bx--form-item
+bx--form-item
 	├── input
 	├── bx--label
 	└── bx--form-requirement (invalid use only)
