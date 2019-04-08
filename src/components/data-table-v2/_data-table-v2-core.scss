@@ -331,11 +331,11 @@
   //ZEBRA
   //----------------------------------------------------------------------------
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
     border-bottom: 1px solid $ui-01;
   }
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
     background-color: $data-table-zebra-color;
     border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
@@ -369,7 +369,7 @@
   }
 
   // default selected row + zebra select - even child
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected td,
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
     background-color: $ui-03;
@@ -378,6 +378,7 @@
   }
 
   // first row
+  .#{$prefix}--data-table--zebra tbody tr:first-of-type:nth-child(odd).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected:first-of-type td {
     border-top: 1px solid $active-01; //top border acts as separator from thead
   }
@@ -391,16 +392,16 @@
   }
 
   // zebra select - odd child
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd).#{$prefix}--data-table--selected td {
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected td {
     border-bottom: 1px solid $active-01;
   }
 
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd).#{$prefix}--data-table--selected:hover td {
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected:hover td {
     border-bottom: 1px solid $data-table-column-hover;
   }
 
   // hover + zebra select - even child
-  .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected:hover td,
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd).#{$prefix}--data-table--selected:hover td,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
     color: $text-01;
     background: $data-table-column-hover;
