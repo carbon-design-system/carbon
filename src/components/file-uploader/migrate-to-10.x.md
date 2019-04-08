@@ -1,9 +1,23 @@
 ### HTML
 
-Design change around the label UI involves markup change, utilizing a new CSS classe (below). Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/file-uploader/code) site. React and other framework variants should reflect the change automatically.
+No structural changes, however, the label now has a new CSS class.
+
+Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/file-uploader/code) site. React and other framework variants should reflect the change automatically.
+
+**New Markup**:
+
+```html
+<div class="bx--form-item"><strong class="bx--file--label">Account photo</strong> ...</div>
+```
+
+**Old Markup**:
+
+```html
+<div class="bx--form-item"><strong class="bx--label">Account photo</strong> ...</div>
+```
 
 ### SCSS
 
-| Class             | Note |
-| ----------------- | ---- |
-| `bx--file--label` | New  |
+| v9  | v10              | Note  |
+| --- | ---------------- | ----- |
+| -   | `bx--file—label` | ✨New |
