@@ -292,11 +292,16 @@
     }
   }
 
-  .#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
     padding-right: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
+    }
+
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+      margin: 0;
     }
   }
 
