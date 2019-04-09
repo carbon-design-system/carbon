@@ -86,6 +86,11 @@ export default class FilterableMultiSelect extends React.Component {
      * Initialize the component with an open(`true`)/closed(`false`) menu.
      */
     open: PropTypes.bool,
+
+    /**
+     * Callback function for translating ListBoxMenuIcon SVG title
+     */
+    translateWithId: PropTypes.func,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -221,6 +226,7 @@ export default class FilterableMultiSelect extends React.Component {
       light,
       invalid,
       invalidText,
+      translateWithId,
     } = this.props;
     const className = cx(
       `${prefix}--multi-select`,
@@ -281,7 +287,10 @@ export default class FilterableMultiSelect extends React.Component {
                   {inputValue && isOpen && (
                     <ListBox.Selection clearSelection={this.clearInputValue} />
                   )}
-                  <ListBox.MenuIcon isOpen={isOpen} />
+                  <ListBox.MenuIcon
+                    isOpen={isOpen}
+                    translateWithId={translateWithId}
+                  />
                 </ListBox.Field>
                 {isOpen && (
                   <ListBox.Menu>
