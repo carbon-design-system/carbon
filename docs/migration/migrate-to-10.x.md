@@ -1,8 +1,5 @@
 # 10.x Migration
 
-_Note: this migration guide is for a future, unreleased version of Carbon.
-Anything in this document is subject to change up until v10 is released._
-
 Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/migration/overview) for more information on migrating from v9 to v10.
 
 <!-- prettier-ignore-start -->
