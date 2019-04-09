@@ -1,8 +1,5 @@
 # 7.x Migration
 
-_Note: this migration guide is for a future, unreleased version of Carbon.
-Anything in this document is subject to change up until v10 is released._
-
 <!-- prettier-ignore-start -->
 <!-- To run doctoc, just do `npx doctoc migrate-to-7.x.md` in this directory! -->
 
