@@ -110,7 +110,7 @@ describe('OverflowMenu', () => {
 
     it('should render a ul with the appropriate class', () => {
       const rootWrapper = mount(
-        <OverflowMenu>
+        <OverflowMenu menuOptionsClass="extra-menu-class">
           <div className="test-child" />
           <div className="test-child" />
         </OverflowMenu>
@@ -124,6 +124,7 @@ describe('OverflowMenu', () => {
       const list = rootWrapper.find('ul');
       expect(list.length).toEqual(1);
       expect(list.hasClass('bx--overflow-menu-options')).toEqual(true);
+      expect(list.hasClass('extra-menu-class')).toEqual(true);
     });
 
     it('should render children as expected', () => {

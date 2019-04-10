@@ -297,6 +297,11 @@ class OverflowMenu extends Component {
     onClose: PropTypes.func,
 
     /**
+     * The class to apply to the menu options
+     */
+    menuOptionsClass: PropTypes.string,
+
+    /**
      * Function called when menu is closed
      */
     onOpen: PropTypes.func,
@@ -577,6 +582,7 @@ class OverflowMenu extends Component {
       onOpen, // eslint-disable-line
       renderIcon: IconElement,
       innerRef: ref,
+      menuOptionsClass,
       ...other
     } = this.props;
     const floatingMenu = !!breakingChangesX || origFloatingMenu;
@@ -613,6 +619,7 @@ class OverflowMenu extends Component {
     );
 
     const overflowMenuOptionsClasses = classNames(
+      menuOptionsClass,
       `${prefix}--overflow-menu-options`,
       {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
