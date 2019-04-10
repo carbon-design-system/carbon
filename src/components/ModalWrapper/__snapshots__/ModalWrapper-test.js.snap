@@ -60,7 +60,11 @@ exports[`ModalWrapper should render 1`] = `
       <FocusTrap
         _createFocusTrap={[Function]}
         active={false}
-        focusTrapOptions={Object {}}
+        focusTrapOptions={
+          Object {
+            "initialFocus": [Function],
+          }
+        }
         paused={false}
       >
         <div
