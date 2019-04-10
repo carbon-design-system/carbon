@@ -151,6 +151,15 @@ export default class TimePicker extends Component {
     } = this.props;
 
     const timePickerInputProps = {
+      className: classNames(
+        `${prefix}--time-picker__input-field`,
+        `${prefix}--text-input`,
+        className,
+        {
+          [`${prefix}--text-input--light`]: light,
+          [`${prefix}--text-input--invalid`]: invalid,
+        }
+      ),
       onChange: evt => {
         if (!other.disabled) {
           this.setState({
@@ -213,7 +222,6 @@ export default class TimePicker extends Component {
               {...other}
               {...timePickerInputProps}
               data-invalid={invalid ? invalid : undefined}
-              className={`${prefix}--time-picker__input-field`}
             />
             {error}
           </div>
