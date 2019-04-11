@@ -21,6 +21,7 @@ export class ${className} {
   @Input() ariaHidden: boolean;
   @Input() title: string;
   @Input() focusable: boolean;
+  @Input() innerClass: string;
 
   static titleIdCounter = 0;
 
@@ -28,6 +29,12 @@ export class ${className} {
 
   ngAfterViewInit() {
     const svg = this.elementRef.nativeElement.querySelector("svg");
+
+    if (this.innerClass) {
+      for (const newClass of this.innerClass.split(" ")) {
+        svg.classList.add(newClass);
+      }
+    }
 
     const attributes = getAttributes({
       width: ${attrs.width},
@@ -88,6 +95,11 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
   template: \`<ibm-icon-${param(
     icon.moduleName
   )} title="icon title"></ibm-icon-${param(icon.moduleName)}>\`
+}))
+.add("${icon.moduleName} with inner class", () => ({
+  template: \`<ibm-icon-${param(
+    icon.moduleName
+  )} innerClass="test-class"></ibm-icon-${param(icon.moduleName)}>\`
 }))`;
 
 const gerateIconStories = icons => {
@@ -98,14 +110,24 @@ const gerateIconStories = icons => {
   return value;
 };
 
+const generateStoryImports = icons => {
+  let imports = '';
+  for (const icon of icons) {
+    imports += `import { ${
+      icon.moduleName
+    }Module } from "./../${icon.outputOptions.file.replace('es', 'lib')}"\n`;
+  }
+  return imports;
+};
+
 const storyTemplate = (basename, icons) => `
 import { storiesOf, moduleMetadata } from "@storybook/angular";
 
-import { IconModule } from "./../lib";
+${generateStoryImports(icons)}
 
 storiesOf("${basename}", module)
   .addDecorator(moduleMetadata({
-    imports: [ IconModule ],
+    imports: [ ${icons.map(i => `${i.moduleName}Module`).join(', ')} ],
   }))
   ${gerateIconStories(icons)};
 `;
