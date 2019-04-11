@@ -32,7 +32,7 @@ const ignoreGlobs = ['**/__tests__/*', '**/*-test.js', '**/*-story.js'].join(
 console.log('Deleting old build folders...'); // eslint-disable-line no-console
 
 Promise.all([
-  rimrafAsync(`${rootDir}/cjs`),
+  rimrafAsync(`${rootDir}/lib`),
   rimrafAsync(`${rootDir}/es`),
   rimrafAsync(`${rootDir}/umd`),
 ])
