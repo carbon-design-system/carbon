@@ -213,6 +213,13 @@
     margin-left: $carbon--spacing-03;
   }
 
+  .#{$prefix}--content-switcher__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
   .#{$prefix}--content-switcher-btn:focus .#{$prefix}--content-switcher__icon {
     fill: $text-01;
