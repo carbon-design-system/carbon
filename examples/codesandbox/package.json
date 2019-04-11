@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "carbon-components": "^9.42.3",
-    "carbon-components-react": "^6.45.2",
+    "carbon-components": "^10.1.0",
+    "carbon-components-react": "^7.0.0",
     "carbon-icons": "^7.0.7",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-scripts": "2.1.1"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
