@@ -132,7 +132,8 @@
     @include focus-outline('reset');
 
     background-color: $ui-01;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: 100%;
     height: rem(40px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
