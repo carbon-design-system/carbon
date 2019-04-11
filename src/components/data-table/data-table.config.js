@@ -351,7 +351,7 @@ const rowsExpandable = [
 ];
 
 module.exports = {
-  label: 'Data Table V2',
+  label: 'Data Table',
   context: {
     prefix,
     componentsX,
@@ -359,7 +359,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Data Table V2',
+      label: 'Data Table',
       notes: `
         Data Tables are used to represent a collection of resources, displaying a
         subset of their fields in columns, or headers.

@@ -4,13 +4,13 @@ The update to tables splits out the `scss` files into multiple partial files wit
 
 #### Files
 
-| Name                       | Description                              |
-| -------------------------- | ---------------------------------------- |
-| `data-table`               | index file, brings in all functionality  |
-| `data-table-v2-core`       | Core styles and base modifiers, required |
-| `data-table-v2-action`     | Action bar styles                        |
-| `data-table-v2-expandable` | Expandable row styles                    |
-| `data-table-v2-sort`       | Sortable header styles                   |
+| Name                    | Description                              |
+| ----------------------- | ---------------------------------------- |
+| `data-table`            | index file, brings in all functionality  |
+| `data-table-core`       | Core styles and base modifiers, required |
+| `data-table-action`     | Action bar styles                        |
+| `data-table-expandable` | Expandable row styles                    |
+| `data-table-sort`       | Sortable header styles                   |
 
 #### Modifiers
 
@@ -30,20 +30,20 @@ The update to tables splits out the `scss` files into multiple partial files wit
 ##### ES2015
 
 ```javascript
-import { DataTableV2 } from 'carbon-components';
+import { DataTable } from 'carbon-components';
 ```
 
 ##### With pre-build bundle (`carbon-components.min.js`)
 
 ```javascript
-var DataTableV2 = CarbonComponents.DataTableV2;
+var DataTable = CarbonComponents.DataTable;
 ```
 
 #### Instantiating
 
 ```javascript
 // `#my-data-table` is an element with `[data-data-table]` attribute
-DataTableV2.create(document.getElementById('my-data-table'));
+DataTable.create(document.getElementById('my-data-table'));
 ```
 
 #### Public Methods
@@ -57,8 +57,8 @@ DataTableV2.create(document.getElementById('my-data-table'));
 
 ```javascript
 // `#my-data-table` is an element with `[data-data-table]` attribute
-var dataTableV2Instance = DataTableV2.create(document.getElementById('my-data-table'));
-dataTableV2Instance.refreshRows();
+var dataTableInstance = DataTable.create(document.getElementById('my-data-table'));
+dataTableInstance.refreshRows();
 ```
 
 #### Events
