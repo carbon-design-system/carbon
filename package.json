@@ -1,6 +1,6 @@
 {
   "name": "carbon-components-react",
-  "version": "7.0.1",
+  "version": "7.1.0",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
   "license": "Apache-2.0",
   "main": "lib/index.js",
