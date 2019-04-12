@@ -1,0 +1,178 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
+
+@mixin data-table-v2-sort {
+  .#{$prefix}--table-sort-v2--ascending {
+    .#{$prefix}--table-sort-v2__icon {
+      transform: rotate(180deg);
+      transition: transform 200ms $carbon--standard-easing;
+    }
+  }
+
+  .#{$prefix}--table-sort-v2--active {
+    .#{$prefix}--table-sort-v2__icon {
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--data-table-v2 th {
+    &:hover {
+      .#{$prefix}--table-sort-v2__icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .#{$prefix}--table-sort-v2 {
+    @include button-reset(false);
+    position: relative;
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: $text-01;
+
+    &:focus {
+      outline: 0;
+
+      svg {
+        opacity: 1;
+        outline: 1px solid $brand-01;
+        fill: $brand-01;
+        outline-offset: -0.5px; // safari fix
+      }
+    }
+  }
+
+  .#{$prefix}--table-sort-v2__icon {
+    position: relative;
+    left: 2px;
+    transition: transform 200ms $carbon--standard-easing;
+    transform: rotate(0);
+    opacity: 0;
+    fill: $ui-05;
+    height: rem(9px);
+    padding: $spacing-3xs;
+    width: auto;
+    min-width: 14px;
+  }
+}
+
+@mixin data-table-sort--x {
+  // -------------------------------------
+  // Sortable table
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table--sort th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+    padding: 0;
+    height: $layout-04;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .#{$prefix}--data-table--sort td {
+    padding-left: $spacing-03;
+    padding-right: $spacing-03;
+  }
+
+  .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
+    padding-left: $spacing-04;
+  }
+
+  // -------------------------------------
+  // Th > Button
+  // -------------------------------------
+  .#{$prefix}--table-sort {
+    @include button-reset(false);
+    position: relative;
+    font: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: $text-01;
+    padding: 0 $spacing-03;
+    height: 100%;
+  }
+
+  .#{$prefix}--table-sort:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--table-sort:hover {
+    background: $data-table-column-hover;
+  }
+
+  // changes opacity when th is inactive (see line 161)
+  .#{$prefix}--table-sort:focus svg,
+  .#{$prefix}--table-sort:hover svg {
+    opacity: 1;
+  }
+
+  // -------------------------------------
+  //Th > Button > Svg (Sort Icons)
+  // -------------------------------------
+  // inactive icons
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon-inactive {
+    display: block;
+  }
+
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort__icon-unsorted {
+    position: relative;
+    left: rem(2px);
+    margin-left: $spacing-03;
+    margin-right: 0;
+    opacity: 0;
+    fill: $ui-05;
+    width: auto;
+    min-width: $layout-01;
+  }
+
+  // active icons
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active .#{$prefix}--table-sort__icon-unsorted {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active .#{$prefix}--table-sort__icon {
+    display: block;
+    opacity: 1; //changes opacity when th is active (see line 125)
+  }
+
+  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--table-sort__icon {
+    position: relative;
+    left: rem(2px);
+    margin-left: $spacing-03;
+    margin-right: 0;
+    transition: transform $transition--base $carbon--standard-easing;
+    transform: rotate(0);
+    opacity: 0;
+    fill: $ui-05;
+    width: auto;
+    min-width: $layout-01;
+  }
+}
+
+@include exports('data-table-sort') {
+  @if feature-flag-enabled('components-x') {
+    @include data-table-sort--x;
+  } @else {
+    @include data-table-v2-sort;
+  }
+}

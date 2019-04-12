@@ -1,28 +1,28 @@
 import EventManager from '../utils/event-manager';
 import flattenOptions from '../utils/flatten-options';
-import DataTableV2 from '../../src/components/data-table-v2/data-table-v2';
-import HTML from '../../html/data-table-v2/data-table-v2.html';
-import ExpandableHTML from '../../html/data-table-v2/data-table-v2--expandable.html';
+import DataTable from '../../src/components/data-table/data-table';
+import HTML from '../../html/data-table/data-table.html';
+import ExpandableHTML from '../../html/data-table/data-table--expandable.html';
 import { componentsX } from '../../src/globals/js/feature-flags';
 
 const suffix = componentsX ? '' : '-v2';
 
-describe('DataTableV2', function() {
+describe('DataTable', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
-        new DataTableV2();
+        new DataTable();
       }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
-        new DataTableV2(document.createTextNode(''));
+        new DataTable(document.createTextNode(''));
       }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should set default options', function() {
-      const table = new DataTableV2(document.createElement('div'));
+      const table = new DataTable(document.createElement('div'));
       expect(flattenOptions(table.options)).toEqual({
         selectorInit: `[data-table${suffix}]`,
         selectorToolbar: '.bx--table--toolbar',
@@ -68,7 +68,7 @@ describe('DataTableV2', function() {
       container.innerHTML = HTML;
       document.body.appendChild(container);
       element = document.querySelector(`[data-table${suffix}]`);
-      table = new DataTableV2(element);
+      table = new DataTable(element);
     });
 
     it('Expandable rows should be removed from the DOM', function() {
@@ -96,7 +96,7 @@ describe('DataTableV2', function() {
       container.innerHTML = ExpandableHTML;
       document.body.appendChild(container);
       element = document.querySelector(`[data-table${suffix}]`);
-      table = new DataTableV2(element);
+      table = new DataTable(element);
     });
 
     it('Should toggle the row on click', function() {
@@ -154,7 +154,7 @@ describe('DataTableV2', function() {
       document.body.appendChild(container);
       element = document.querySelector(`[data-table${suffix}]`);
       firstSort = element.querySelector('[data-event="sort"]');
-      table = new DataTableV2(element);
+      table = new DataTable(element);
     });
 
     it('Should switch through tri-state sort', function() {
@@ -201,7 +201,7 @@ describe('DataTableV2', function() {
       container.innerHTML = HTML;
       document.body.appendChild(container);
       element = document.querySelector(`[data-table${suffix}]`);
-      table = new DataTableV2(element);
+      table = new DataTable(element);
     });
 
     it('Should toggle the action bar on checkbox select', function() {
@@ -251,7 +251,7 @@ describe('DataTableV2', function() {
         container.innerHTML = HTML;
         document.body.appendChild(container);
         dt = document.querySelector('.bx--data-table');
-        table = new DataTableV2(container);
+        table = new DataTable(container);
       }
     });
 
