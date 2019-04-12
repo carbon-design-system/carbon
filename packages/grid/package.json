@@ -20,7 +20,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "bundler sassdoc 'scss'"
+  },
   "dependencies": {
     "@carbon/import-once": "10.0.0",
     "@carbon/layout": "10.0.0"

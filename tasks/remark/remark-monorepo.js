@@ -65,6 +65,7 @@ function monorepo(options) {
       ...createTitle(localPackageJson.name, localPackageJson.description),
       ...createGettingStarted(localPackageJson.name),
       ...usage,
+      ...(await createAPIDoc(localPackageJson.name, path.join(cwd, 'docs'))),
       ...(await createExamples(
         localPackageJson.name,
         path.join(cwd, 'examples')
@@ -185,6 +186,81 @@ function createGettingStarted(name) {
       lang: 'bash',
       meta: null,
       value: `yarn add ${name}`,
+    },
+  ];
+}
+
+async function createAPIDoc(name, docsDir) {
+  // No docs to list
+  if (!(await fs.pathExists(docsDir))) {
+    return [];
+  }
+
+  const docs = (await fs.readdir(docsDir)).filter(name => {
+    // Ignore dotfiles and json files
+    return !(name[0] === '.' || name === 'sass.json');
+  });
+
+  if (docs.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      type: 'heading',
+      depth: 2,
+      children: [
+        {
+          type: 'text',
+          value: '📖 API Documentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      children: [
+        {
+          type: 'text',
+          value: "If you're looking for ",
+        },
+        {
+          type: 'inlineCode',
+          value: name,
+        },
+        {
+          type: 'text',
+          value: ' API documentation, check out:',
+        },
+      ],
+    },
+    {
+      type: 'list',
+      ordered: false,
+      spread: false,
+      children: docs.map(doc => ({
+        type: 'listItem',
+        spread: false,
+        checked: null,
+        children: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'link',
+                title: null,
+                url: `./docs/${doc}`,
+                children: [
+                  {
+                    type: 'text',
+                    value: `${doc[0].toUpperCase() +
+                      doc.slice(1).replace(/\.[^/.]+$/, '')}`,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      })),
     },
   ];
 }

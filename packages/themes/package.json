@@ -19,7 +19,7 @@
   },
   "scripts": {
     "clean": "rimraf es lib umd scss/_mixins.scss scss/_tokens.scss scss/_theme-maps.scss",
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check 'scss/*.scss'"
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check 'scss/*.scss' && bundler sassdoc 'scss'"
   },
   "dependencies": {
     "@carbon/colors": "10.0.0"
@@ -29,6 +29,7 @@
     "@carbon/test-utils": "10.0.0",
     "change-case": "^3.0.2",
     "fs-extra": "^7.0.1",
+    "js-yaml": "^3.13.0",
     "node-sass": "^4.11.0",
     "prettier": "^1.15.3",
     "rimraf": "^2.6.3"

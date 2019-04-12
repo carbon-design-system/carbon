@@ -19,7 +19,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonLayout",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonLayout && bundler sassdoc 'scss'",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {

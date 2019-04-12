@@ -70,6 +70,12 @@ import { easings, motion } from '@carbon/motion';
 motion('standard', 'productive'); // Returns a string `cubic-bezier()` function
 ```
 
+## 📖 API Documentation
+
+If you're looking for `@carbon/motion` API documentation, check out:
+
+- [Sass](./docs/sass.md)
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new

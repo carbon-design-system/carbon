@@ -7,6 +7,10 @@
 
 @import 'mixins';
 
+/// Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the default 16
+/// @type Map
+/// @access public
+/// @group @carbon/grid
 $carbon--12-column-grid: map-merge(
   $carbon--grid-breakpoints,
   (

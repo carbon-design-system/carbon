@@ -24,7 +24,7 @@ async function bundle(entrypoint, options, info) {
     process.exit(1);
   }
 
-  reporter.success('Done! ✨');
+  reporter.success('Done! 🎉');
 }
 
 module.exports = bundle;

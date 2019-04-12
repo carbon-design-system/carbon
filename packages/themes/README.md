@@ -23,7 +23,8 @@ yarn add @carbon/themes
 You can use `@carbon/themes` in JavaScript or Sass by including this
 package in your project. By default, `@carbon/themes` provides a set
 of color tokens that are pre-defined for a specific theme. Currently,
-we offer the following color themes: white, gray 10, gray 90, gray 100.
+we offer the following color themes: white, gray 10, gray 90, gray 100
+.
 
 You can preview all of the token values for this on the [Carbon Design
 System website](https://next.carbondesignsystem.com/guidelines/color/usage)
@@ -109,6 +110,19 @@ import {
   interactive02,
 } from '@carbon/themes';
 ```
+
+## 📖 API Documentation
+
+If you're looking for `@carbon/themes` API documentation, check out:
+
+- [Sass](./docs/sass.md)
+
+## 📚 Examples
+
+If you're looking for more examples on how to use `@carbon/themes`, we
+have some examples that you can check out:
+
+- [Lib](./examples/lib)
 
 ## 🙌 Contributing
 

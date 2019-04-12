@@ -8,6 +8,9 @@
 @import '@carbon/layout/scss/breakpoint';
 @import 'scale';
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $caption-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
@@ -15,6 +18,9 @@ $caption-01: (
   letter-spacing: 0.32px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $label-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
@@ -22,6 +28,9 @@ $label-01: (
   letter-spacing: 0.32px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $helper-text-01: (
   font-size: carbon--type-scale(1),
   font-style: italic,
@@ -29,6 +38,9 @@ $helper-text-01: (
   letter-spacing: 0.32px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $body-short-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
@@ -36,6 +48,9 @@ $body-short-01: (
   letter-spacing: 0.16px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $body-long-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
@@ -43,6 +58,9 @@ $body-long-01: (
   letter-spacing: 0.16px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $body-short-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
@@ -50,6 +68,9 @@ $body-short-02: (
   letter-spacing: 0,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $body-long-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
@@ -57,6 +78,9 @@ $body-long-02: (
   letter-spacing: 0,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $code-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
@@ -64,6 +88,9 @@ $code-01: (
   letter-spacing: 0.32px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $code-02: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
@@ -71,6 +98,9 @@ $code-02: (
   letter-spacing: 0.32px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $heading-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('semibold'),
@@ -78,6 +108,9 @@ $heading-01: (
   letter-spacing: 0.16px,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $heading-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('semibold'),
@@ -85,6 +118,9 @@ $heading-02: (
   letter-spacing: 0,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $productive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
@@ -92,6 +128,9 @@ $productive-heading-03: (
   letter-spacing: 0,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $productive-heading-04: (
   font-size: carbon--type-scale(7),
   font-weight: carbon--font-weight('regular'),
@@ -99,6 +138,9 @@ $productive-heading-04: (
   letter-spacing: 0,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $productive-heading-05: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
@@ -106,6 +148,9 @@ $productive-heading-05: (
   letter-spacing: 0,
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
@@ -122,6 +167,9 @@ $expressive-heading-03: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-heading-04: (
   font-size: carbon--type-scale(7),
   font-weight: carbon--font-weight('regular'),
@@ -138,6 +186,9 @@ $expressive-heading-04: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-heading-05: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
@@ -162,6 +213,9 @@ $expressive-heading-05: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-heading-06: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('semibold'),
@@ -186,6 +240,9 @@ $expressive-heading-06: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-paragraph-01: (
   font-size: carbon--type-scale(6),
   font-weight: carbon--font-weight('light'),
@@ -203,6 +260,9 @@ $expressive-paragraph-01: (
   ),
 );
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $quotation-01: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
@@ -227,6 +287,9 @@ $quotation-01: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $quotation-02: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('light'),
@@ -251,6 +314,9 @@ $quotation-02: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $display-01: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
@@ -274,6 +340,9 @@ $display-01: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $display-02: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('semibold'),
@@ -297,6 +366,9 @@ $display-02: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $display-03: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
@@ -325,6 +397,9 @@ $display-03: (
   ),
 ) !default;
 
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $display-04: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('semibold'),
@@ -353,53 +428,50 @@ $display-04: (
   ),
 ) !default;
 
-// prettier-ignore
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $tokens: (
-  // Universal tokens
   caption-01: $caption-01,
   label-01: $label-01,
-
   helper-text-01: $helper-text-01,
-
   body-short-01: $body-short-01,
   body-short-02: $body-short-02,
-
   body-long-01: $body-long-01,
   body-long-02: $body-long-02,
-
   code-01: $code-01,
   code-02: $code-02,
-
   heading-01: $heading-01,
   heading-02: $heading-02,
-
-  // Product layout, fixed
   productive-heading-03: $productive-heading-03,
   productive-heading-04: $productive-heading-04,
   productive-heading-05: $productive-heading-05,
-
-  // Editorial layout, fluid
   expressive-paragraph-01: $expressive-paragraph-01,
   expressive-heading-03: $expressive-heading-03,
   expressive-heading-04: $expressive-heading-04,
   expressive-heading-05: $expressive-heading-05,
   expressive-heading-06: $expressive-heading-06,
-
   quotation-01: $quotation-01,
   quotation-02: $quotation-02,
-
   display-01: $display-01,
   display-02: $display-02,
   display-03: $display-03,
   display-04: $display-04,
 );
 
+/// @param {Map} $map
+/// @access public
+/// @group @carbon/type
 @mixin properties($map) {
   @each $name, $value in $map {
     #{$name}: $value;
   }
 }
 
+/// @param {Number} $value - Number with units
+/// @return {Number} Without units
+/// @access public
+/// @group @carbon/type
 @function strip-unit($value) {
   @return $value / ($value * 0 + 1);
 }
@@ -416,8 +488,10 @@ $tokens: (
 /// Most of the logic for this work comes from CSS Tricks:
 /// https://css-tricks.com/snippets/css/fluid-typography/
 ///
-/// @param {Map} $type-styles - the value of a given type token
-/// @param {?Map} $breakpoints - custom breakpoints to use
+/// @param {Map} $type-styles - The value of a given type token
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - Custom breakpoints to use
+/// @access public
+/// @group @carbon/type
 @mixin fluid-type($type-styles, $breakpoints: $carbon--grid-breakpoints) {
   // Include the initial styles for the given token by default without any
   // media query guard. This includes `font-size` as a fallback in the case
@@ -439,10 +513,11 @@ $tokens: (
 }
 
 /// Computes the fluid `font-size` for a given type style and breakpoint
-/// @param {Map} $type-styles - the styles for a given token
-/// @param {String} $name - the name of the breakpoint to which we apply the fluid
-/// styles
-/// @param {?Map} $breakpoints - the breakpoints for the grid system
+/// @param {Map} $type-styles - The styles for a given token
+/// @param {String} $name - The name of the breakpoint to which we apply the fluid
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - The breakpoints for the grid system
+/// @access public
+/// @group @carbon/type
 @mixin fluid-type-size(
   $type-styles,
   $name,
@@ -524,10 +599,11 @@ $tokens: (
 /// styles for the token if they are defined. Fluid styles will cause the
 /// token's font-size to be computed based on the viewport size. As a result, use
 /// with caution in fixed contexts.
-/// @param {String} $name - the name of the token to get the styles for
-/// @param {?Boolean} $fluid - specify whether to include fluid styles for the
-/// @param {?Map} $breakpoints - provide a custom breakpoint map to use
-/// token
+/// @param {String} $name - The name of the token to get the styles for
+/// @param {Boolean} $fluid [false] - Specify whether to include fluid styles for the
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - Provide a custom breakpoint map to use
+/// @access public
+/// @group @carbon/type
 @mixin carbon--type-style(
   $name,
   $fluid: false,

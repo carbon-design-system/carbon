@@ -68,6 +68,12 @@ span one column at our `sm` breakpoint. By default, as we scale beyond
 the breakpoint the layout will still take up a percentage of the
 overall width.
 
+## 📖 API Documentation
+
+If you're looking for `@carbon/grid` API documentation, check out:
+
+- [Sass](./docs/sass.md)
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new

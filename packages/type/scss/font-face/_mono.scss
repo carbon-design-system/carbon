@@ -7,6 +7,9 @@
 
 @import 'settings';
 
+/// Mono `@font-face`'s
+/// @access public
+/// @group @carbon/type
 @mixin carbon--font-face-mono {
   // .woff support for IE11
   @font-face {

@@ -16,6 +16,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "bundler sassdoc 'scss'"
+  },
   "eyeglass": {
     "exports": false,
     "name": "@carbon/import-once",

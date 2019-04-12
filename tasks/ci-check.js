@@ -30,7 +30,7 @@ async function main() {
     await promise;
     clearInterval(interval);
     console.log();
-    reporter.success('Done! ✨');
+    reporter.success('Done! 🎉');
   } finally {
     clearInterval(interval);
   }
