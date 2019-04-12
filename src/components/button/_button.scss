@@ -292,6 +292,19 @@
     }
   }
 
+  .#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-right: rem(15px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
+    }
+
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+      margin: 0;
+    }
+  }
+
   .#{$prefix}--btn--danger {
     @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
