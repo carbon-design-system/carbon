@@ -25,7 +25,7 @@ describe('DataTableSkeleton', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table-v2')).toEqual(true);
+      expect(wrapper.hasClass('bx--data-table')).toEqual(true);
     });
 
     it('Has the correct number of rows and columns', () => {
@@ -50,8 +50,8 @@ describe('DataTableSkeleton Compact', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table-v2')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table-v2--compact')).toEqual(true);
+      expect(wrapper.hasClass('bx--data-table')).toEqual(true);
+      expect(wrapper.hasClass('bx--data-table--compact')).toEqual(true);
     });
   });
 });
@@ -62,8 +62,8 @@ describe('DataTableSkeleton Zebra', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table-v2')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table-v2--zebra')).toEqual(true);
+      expect(wrapper.hasClass('bx--data-table')).toEqual(true);
+      expect(wrapper.hasClass('bx--data-table--zebra')).toEqual(true);
     });
   });
 });

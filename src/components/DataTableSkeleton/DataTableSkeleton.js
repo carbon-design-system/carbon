@@ -22,9 +22,9 @@ const DataTableSkeleton = ({
 }) => {
   const dataTableSkeletonClasses = classNames({
     [`${prefix}--skeleton`]: true,
-    [`${prefix}--data-table-v2`]: true,
-    [`${prefix}--data-table-v2--zebra`]: zebra,
-    [`${prefix}--data-table-v2--compact`]: compact,
+    [`${prefix}--data-table`]: true,
+    [`${prefix}--data-table--zebra`]: zebra,
+    [`${prefix}--data-table--compact`]: compact,
   });
 
   let normalizedHeaders;
