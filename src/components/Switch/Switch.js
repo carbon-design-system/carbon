@@ -54,7 +54,7 @@ const Switch = props => {
   if (componentsX) {
     return (
       <button {...other} {...commonProps}>
-        <span>{text}</span>
+        <span className={`${prefix}--content-switcher__label`}>{text}</span>
       </button>
     );
   } else {
