@@ -1,3 +1,87 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 10.1.0 (2019-04-12)
+
+
+### Features
+
+* **elements:** add icons scss support ([#461](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/461)) ([d47d12f](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/d47d12f))
+* **sassdoc:** render Sassdoc in markdown ([#462](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/462)) ([73cea35](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/73cea35)), closes [#470](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/470)
+
+
+
+# 10.0.0 (2019-03-29)
+
+
+
+# 10.0.0-rc.0 (2019-03-27)
+
+
+
+## 0.0.1-beta.5 (2019-03-25)
+
+
+
+## 0.0.1-beta.4 (2019-03-22)
+
+
+
+## 0.0.1-beta.3 (2019-03-22)
+
+
+
+## 0.0.1-beta.2 (2019-03-19)
+
+
+
+## 0.0.1-beta.1 (2019-03-13)
+
+
+
+## 0.0.1-beta.0 (2019-03-07)
+
+
+
+## 0.0.1-alpha.32 (2019-02-12)
+
+
+
+## 0.0.1-alpha.31 (2019-01-28)
+
+
+
+## 0.0.1-alpha.30 (2019-01-22)
+
+
+### Features
+
+* **elements:** flatten bundled output ([#284](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/284)) ([4f1d3d9](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/4f1d3d9))
+
+
+
+## 0.0.1-alpha.29 (2019-01-14)
+
+
+
+## 0.0.1-alpha.28 (2019-01-11)
+
+
+
+## 0.0.1-alpha.27 (2019-01-10)
+
+
+### Features
+
+* **elements:** add @carbon/elements package ([#199](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/199)) ([0ade011](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/0ade011))
+* **elements:** add themes to elements ([#245](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/245)) ([0438c65](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/0438c65))
+
+
+
+
+
 # [10.0.0](https://github.com/IBM/carbon-elements/tree/master/packages/elements/compare/v10.0.0-rc.0...v10.0.0) (2019-03-29)
 
 
@@ -62,6 +146,3 @@
 
 * **elements:** add @carbon/elements package ([#199](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/199)) ([0ade011](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/0ade011))
 * **elements:** add themes to elements ([#245](https://github.com/IBM/carbon-elements/tree/master/packages/elements/issues/245)) ([0438c65](https://github.com/IBM/carbon-elements/tree/master/packages/elements/commit/0438c65))
-
-
-

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/scss-generator",
   "private": true,
-  "version": "10.0.0",
+  "version": "10.1.0",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/scss-generator",

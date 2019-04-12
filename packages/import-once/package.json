@@ -1,7 +1,7 @@
 {
   "name": "@carbon/import-once",
   "description": "Sass helper for importing files only once. Used in the Carbon Design System",
-  "version": "10.0.0",
+  "version": "10.1.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/import-once",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
