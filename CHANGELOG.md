@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [10.1.1](https://github.com/IBM/carbon-elements/compare/v10.1.0...v10.1.1) (2019-04-13)
+
+
+### Bug Fixes
+
+* **bundler:** move change-case to deps ([0c52c70](https://github.com/IBM/carbon-elements/commit/0c52c70))
+
+
+
+
+
 # [0.0.0](https://github.com/IBM/carbon-elements/compare/v10.0.0...v0.0.0) (2019-04-03)
 
 
@@ -513,6 +529,3 @@
 
 * **colors:** add colors package ([#5](https://github.com/IBM/carbon-elements/issues/5)) ([8b4d40e](https://github.com/IBM/carbon-elements/commit/8b4d40e))
 * **icons:** add icons package ([c6bd42c](https://github.com/IBM/carbon-elements/commit/c6bd42c))
-
-
-

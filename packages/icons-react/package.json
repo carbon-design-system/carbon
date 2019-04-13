@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "10.1.0",
+  "version": "10.1.1",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-react",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
@@ -25,13 +25,13 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "10.1.0",
+    "@carbon/icon-helpers": "10.1.1",
     "prop-types": "^15.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "@carbon/bundler": "10.1.0",
+    "@carbon/bundler": "10.1.1",
     "@carbon/cli-reporter": "10.0.0",
     "@carbon/icons": "10.1.0",
     "change-case": "^3.0.2",

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.1](https://github.com/IBM/carbon-elements/tree/master/packages/elements/compare/v10.1.0...v10.1.1) (2019-04-13)
+
+**Note:** Version bump only for package @carbon/elements
+
+
+
+
+
 # 10.1.0 (2019-04-12)
 
 
