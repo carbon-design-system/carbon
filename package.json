@@ -47,6 +47,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
+    "@carbon/bundler": "^10.1.1",
     "@carbon/elements": "^10.0.0",
     "@carbon/icons-handlebars": "^10.0.0",
     "@carbon/test-utils": "^10.0.0",
@@ -174,11 +175,12 @@
     "!**/__tests__/**/*"
   ],
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp build && yarn docs",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup",
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
+    "docs": "bundler sassdoc 'scss' --output 'docs/api'",
     "lint": "eslint .",
     "lint:staged": "eslint",
     "prebuild": "gulp clean",
@@ -199,8 +201,16 @@
       "@commitlint/config-conventional"
     ],
     "rules": {
-      "header-max-length": [2, "always", 50],
-      "body-max-line-length": [2, "always", 72]
+      "header-max-length": [
+        2,
+        "always",
+        50
+      ],
+      "body-max-line-length": [
+        2,
+        "always",
+        72
+      ]
     }
   },
   "husky": {
