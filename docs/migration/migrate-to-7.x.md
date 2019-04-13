@@ -1,5 +1,7 @@
 # 7.x Migration
 
+Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/v10-migration/overview) for more information on migrating from v9 to v10.
+
 <!-- prettier-ignore-start -->
 <!-- To run doctoc, just do `npx doctoc migrate-to-7.x.md` in this directory! -->
 
