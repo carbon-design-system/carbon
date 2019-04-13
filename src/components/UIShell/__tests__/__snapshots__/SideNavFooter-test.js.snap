@@ -11,7 +11,7 @@ exports[`SideNavFooter should render 1`] = `
   >
     <button
       className="bx--side-nav__toggle"
-      onClick={[MockFunction]}
+      onClick={[Function]}
       title="open"
       type="button"
     >
@@ -66,14 +66,14 @@ exports[`SideNavFooter should render 2`] = `
   >
     <button
       className="bx--side-nav__toggle"
-      onClick={[MockFunction]}
+      onClick={[Function]}
       title="close"
       type="button"
     >
       <div
         className="bx--side-nav__icon"
       >
-        <Close20
+        <ChevronRight20
           height={20}
           preserveAspectRatio="xMidYMid meet"
           viewBox="0 0 32 32"
@@ -95,10 +95,10 @@ exports[`SideNavFooter should render 2`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+              d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
             />
           </svg>
-        </Close20>
+        </ChevronRight20>
       </div>
       <span
         className="bx--assistive-text"

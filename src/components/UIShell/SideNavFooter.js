@@ -22,7 +22,7 @@ const { prefix } = settings;
 const SideNavFooter = ({
   assistiveText,
   className: customClassName,
-  isExpanded,
+  expanded,
   onToggle,
 }) => {
   const className = cx(`${prefix}--side-nav__footer`, customClassName);
@@ -31,10 +31,10 @@ const SideNavFooter = ({
       <button
         className={`${prefix}--side-nav__toggle`}
         type="button"
-        onClick={onToggle}
+        onClick={evt => onToggle(evt)}
         title={assistiveText}>
         <div className={`${prefix}--side-nav__icon`}>
-          {isExpanded ? <Close20 /> : <ChevronRight20 />}
+          {expanded ? <Close20 /> : <ChevronRight20 />}
         </div>
         <span className={`${prefix}--assistive-text`}>{assistiveText}</span>
       </button>
@@ -52,7 +52,7 @@ SideNavFooter.propTypes = {
   /**
    * Specify whether the side navigation is expanded or collapsed
    */
-  isExpanded: PropTypes.bool.isRequired,
+  expanded: PropTypes.bool.isRequired,
 
   /**
    * Provide a function that is called when the toggle button is interacted
