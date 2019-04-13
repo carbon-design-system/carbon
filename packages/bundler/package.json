@@ -25,6 +25,7 @@
     "autoprefixer": "^9.4.3",
     "babel-plugin-macros": "^2.4.2",
     "chalk": "^2.4.1",
+    "change-case": "^3.0.2",
     "cli-table": "^0.3.1",
     "commander": "^2.19.0",
     "cssnano": "^4.1.7",
@@ -41,8 +42,5 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "sassdoc": "^2.5.1"
-  },
-  "devDependencies": {
-    "change-case": "^3.0.2"
   }
 }
