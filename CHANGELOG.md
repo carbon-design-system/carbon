@@ -14,7 +14,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [0.0.0](https://github.com/IBM/carbon-elements/compare/v10.0.0...v0.0.0) (2019-04-03)
+# [10.1.0](https://github.com/IBM/carbon-elements/compare/v10.0.0...v10.1.0) (2019-04-03)
 
 
 ### Bug Fixes
