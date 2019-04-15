@@ -37,16 +37,17 @@
     opacity: 0;
     background-color: $overlay-01;
     visibility: hidden;
-    transition: opacity $duration--slow-01 motion(exit, expressive), z-index $duration--slow-01 motion(exit, expressive),
-      visibility $duration--slow-01 motion(exit, expressive);
+    transition: opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-01 motion(exit, expressive),
+      visibility $duration--moderate-02 motion(exit, expressive);
 
     &.is-visible {
       z-index: z('modal');
       transform: translateY(0);
       opacity: 1;
-      transition: opacity $duration--slow-01 motion(entrance, expressive) z-index $duration--slow-01 motion(entrance, expressive),
-        visibility $duration--slow-01 motion(entrance, expressive);
       visibility: visible;
+      transition: opacity $duration--moderate-02 motion(entrance, expressive) z-index $duration--slow-01
+          motion(entrance, expressive),
+        visibility $duration--moderate-02 motion(entrance, expressive);
     }
 
     .#{$prefix}--text-input,
@@ -61,6 +62,15 @@
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
     transform: translateY(0);
+    max-height: 100%;
+
+    @include carbon--breakpoint(md) {
+      max-height: 90%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-height: 80%;
+    }
   }
 
   .#{$prefix}--modal-container {
@@ -69,20 +79,17 @@
     flex-direction: column;
     background-color: $ui-01;
     width: 100%;
-    max-height: 100%;
+    max-height: 0;
     height: 100%;
-    transform: translateY(-24px);
-    transition: transform $duration--moderate-02 motion(entrance, expressive);
+    overflow: hidden;
+    transform: translate3d(0, -24px, 0);
+    transition: transform $duration--moderate-02 motion(exit, expressive),
+      max-height $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
-      height: auto;
       width: 50%;
       max-width: 768px;
-      max-height: 90%;
-    }
-
-    @include carbon--breakpoint(lg) {
-      max-height: 80%;
+      height: auto;
     }
   }
 
