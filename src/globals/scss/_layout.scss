@@ -12,7 +12,7 @@
 /// @deprecated (For v10) Superseded by `$carbon--grid-breakpoints`
 /// @access private
 /// @type Map
-/// @group @mixin breakpoint/max-breakpoint
+/// @group global-layout
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
@@ -28,22 +28,20 @@ $breakpoints: (
 /// @deprecated (For v10) Was used primary for older grid
 /// @access private
 /// @type Map
-/// @group @function padding();
+/// @group global-layout
 $padding: (
   'mobile': 3%,
   'xs': 5%,
 );
 
-//-------------------------------------
-// @function: padding($value)
-//-------------------------------------
 /// @deprecated (For v10) Was used primary for older grid
-/// @group $padding map
-/// @param {String} $value - mobile or xs
-/// @example
-//    .container {
-//      padding: padding(mobile);
-//    }
+/// @group global-layout
+/// @access public
+/// @param {String} $value - `mobile` or `xs`
+/// @example - scss
+///   .container {
+///     padding: padding(mobile);
+///   }
 @function padding($value) {
   @if feature-flag-enabled('breaking-changes-x') {
     @warn ('`@function padding()` has been removed.');
@@ -56,17 +54,12 @@ $padding: (
   }
 }
 
-//-------------------------------------
-// @mixin: breakpoint($size)
-//-------------------------------------
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--breakpoint()`
-/// @param {String} $size - from $breakpoints map (see line 16)
-/// @content will add media query for styles using breakpoint as min-width
-/// @example
-//    @include breakpoint(bp--md--major) {
-//        - styles here --
-//    }
+/// @param {String} $size - From `$breakpoints` map
+/// @content Will add media query for styles using breakpoint as min-width
+/// @example @include breakpoint(bp--md--major) { ... };
+/// @group global-layout
 @mixin breakpoint($size) {
   @include deprecate(
     '`@include breakpoint()` has been removed. ' + 'Use `@include carbon--breakpoint()` instead.',
@@ -85,14 +78,12 @@ $padding: (
   }
 }
 
-//-------------------------------------
-// @mixin: max-breakpoint($size)
-//-------------------------------------
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--breakpoint-down()`
-/// @param {String} $size - from $breakpoints map (see line 16)
+/// @param {String} $size - From `$breakpoints` map
 /// @example @include max-breakpoint('bp--xs--major') { ... };
-/// @content will add media query for styles using breakpoint as max-width
+/// @content Will add media query for styles using breakpoint as max-width
+/// @group global-layout
 @mixin max-breakpoint($size) {
   @include deprecate(
     '`@include max-breakpoint()` has been removed. ' + 'Use `@include carbon--breakpoint-down()` instead.',
@@ -111,15 +102,13 @@ $padding: (
   }
 }
 
-//-------------------------------------
-// @mixin: grid-container
-//-------------------------------------
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--make-container()`
 /// @example
 ///   .some-container {
 ///     @include grid-container;
 ///   }
+/// @group global-layout
 @mixin grid-container {
   @include deprecate(
     '`@include grid-container` has been removed. ' + 'Use `@include carbon--make-container()` instead.',
@@ -139,7 +128,7 @@ $padding: (
 
 /// @access private
 /// @type Map
-/// @group @function z();
+/// @group global-layout
 $z-indexes: (
   modal: 9000,
   overlay: 8000,
@@ -151,16 +140,13 @@ $z-indexes: (
   floating: 10000,
 );
 
-//-------------------------------------
-// @function: z($layer)
-//-------------------------------------
 /// @access public
-/// @param {String} $layer value from $z-indexes map (See line 139)
-/// @group $z-indexes
-/// @example
-//    .modal {
-//       z-index: z('modal');
-//    }
+/// @param {String} $layer - Value from `$z-indexes` map
+/// @group global-layout
+/// @example - scss
+///   .modal {
+///     z-index: z('modal');
+///   }
 @function z($layer) {
   @if not map-has-key($z-indexes, $layer) {
     @warn 'No layer found for `#{$layer}` in $z-indexes map. Property omitted.';

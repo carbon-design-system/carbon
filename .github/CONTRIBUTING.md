@@ -9,13 +9,12 @@ Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
 
 Contributing to carbon-components requires that you can run this repo locally on your computer.
 
-## Coding Style
+## Coding style
 
 ### Class names
 
 Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with `bx--` by default,
-and design systems inheriting Carbon can override.
-This prefix prevents potential conflicts with class names from the user.
+and design systems inheriting Carbon can override. This prefix prevents potential conflicts with class names from the user.
 
 **HTML**
 
@@ -48,7 +47,7 @@ Follow BEM naming convention for classes. Again, the only thing we do differentl
 Avoid nesting selectors, this will make it easier to maintain in the future.
 
 ```scss
-<-- Don't do this -->
+// Don't do this
 .#{$prefix}--inline-notification {
   .#{$prefix}--btn {
     &:hover {
@@ -59,12 +58,69 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
   }
 }
 
-<!-- Do this instead -->
+// Do this instead
 .#{$prefix}--inline-notification .#{$prefix}--btn {
     &:hover svg {
       ...
     }
   }
+}
+```
+
+### Sass documentation
+
+[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source. SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc comments.
+
+For consistency, capitalize types (used in `@type`, `@param`, `@return`) and descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
+
+The following annotations are used:
+
+**Required annotations**
+
+- [Description](http://sassdoc.com/annotations/#description) - can be one line or multiple lines
+- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`, where public items make up our public API
+- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or component name
+- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**, (e.g. `Map`, `Color`, `Number`)
+- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on **functions** and **mixins**, include the type, name, and description, with a default value if there is one (e.g. `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
+- [`@return`](http://sassdoc.com/annotations/#return) - allowed on **functions**, include the type and description (e.g. `@return {Number} In px`)
+- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if aliasing a variable
+- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**, describe the usage of content
+- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around possible replacements or when the item will no longer be available
+
+**Optional annotations**
+
+- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't straight forward or there are multiple use cases
+- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to reference
+
+**Examples**
+
+```scss
+// Variable example
+
+/// Primary interactive color; Primary buttons
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$interactive-01: map-get($carbon--theme, interactive-01) !default;
+
+// Mixin example
+
+/// Create the container for a grid. Will cause full-bleed for the grid unless
+/// max-width properties are added with `make-container-max-widths`
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
+}
+
+// Function example
+
+/// Compute the type size for the given type scale step
+/// @param {Number} $step - Type scale step
+/// @return {Number} In px
+/// @access public
+/// @group @carbon/type
+@function carbon--get-type-size($step) {
 }
 ```
 
@@ -79,7 +135,7 @@ A nested element can use a new block name as long as the styles are independent 
 :point_up: The `#{$prefix}--component-button` class implies that this button has independent styles from its parent.
 Generally, it's preferred to start a new block.
 
-### Red Flags
+### Red flags
 
 Avoid names with multiple `__element` names:
 

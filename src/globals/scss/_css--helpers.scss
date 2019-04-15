@@ -12,6 +12,7 @@
 
 /// Include styles for screen reader/assistive text
 /// @access public
+/// @group global-helpers
 @mixin css-helpers {
   .#{$prefix}--assistive-text,
   .#{$prefix}--visually-hidden {

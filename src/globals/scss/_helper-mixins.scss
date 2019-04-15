@@ -28,8 +28,9 @@
 
 /// Adds text overflow styling
 /// @access public
-/// @param {Value} $width [false] - value of width if you want to set width, else nothing
+/// @param {Number} $width [false] - Value of width if you want to set width, else nothing
 /// @example @include text-overflow(300px);
+/// @group global-helpers
 @mixin text-overflow($width: false) {
   display: block;
   overflow-x: hidden;
@@ -45,14 +46,16 @@
 /// Adds placeholder text color
 /// @access public
 /// @example @include placeholder-colors;
+/// @group global-helpers
 @mixin placeholder-colors {
   color: $text-03;
 }
 
 /// Adds small or large box shadow
 /// @access public
-/// @param {String} $size ['small'] - size of box shadow
+/// @param {String} $size ['small'] - Size of box shadow
 /// @example @include box-shadow(); @include box-shadow('large');
+/// @group global-helpers
 @mixin box-shadow($size: 'small') {
   // Large - For dropdowns
   @if ($size == 'large') {
@@ -66,8 +69,9 @@
 
 /// Adds outline styles depending on specific type
 /// @access public
-/// @param {String} $type ['border'] - type of outline from: border, blurred, outline, invalid, reset
+/// @param {String} $type ['border'] - Type of outline from: `border`, `blurred`, `outline`, `invalid`, `reset`
 /// @example @include focus-outline('outline');
+/// @group global-helpers
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
     outline: 1px solid if(not feature-flag-enabled('components-x'), $brand-01, $focus);
@@ -96,10 +100,11 @@
 
 /// Adds rotational transformation
 /// @access public
-/// @param {Value} $deg - how many degrees to rotate
-/// @param {Value} $speed - speed of rotation
-/// @param {Value} $origin [center] - transform-origin
+/// @param {Number} $deg - How many degrees to rotate
+/// @param {Number} $speed - Speed of rotation
+/// @param {Value} $origin [center] - `transform-origin`
 /// @example @include rotate(90deg, 300ms);
+/// @group global-helpers
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transition: transform $speed;
@@ -108,6 +113,7 @@
 
 /// Adds styles to hide content
 /// @access public
+/// @group global-helpers
 @mixin hidden {
   position: absolute;
   width: 1px;
@@ -123,8 +129,9 @@
 
 /// Resets button styles
 /// @access public
-/// @param {Bool} $width [true] - sets width to 100% if true
+/// @param {Bool} $width [true] - Sets width to 100% if true
 /// @example @include button-reset($width: false);
+/// @group global-helpers
 @mixin button-reset($width: true) {
   @include reset;
   @if not feature-flag-enabled('components-x') {
@@ -148,9 +155,10 @@
   }
 }
 
-/// 💀 Skeleton loading animation
+/// Skeleton loading animation
 /// @access public
 /// @example @include skeleton;
+/// @group global-helpers
 @mixin skeleton {
   position: relative;
   border: none;
@@ -235,6 +243,7 @@
 
 /// @access public
 /// @deprecated A legacy class used for our older way of dark/light theme switch
+/// @group global-helpers
 @mixin light-ui {
   @include deprecate('`@include light-ui` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
     .#{$prefix}--global-light-ui & {

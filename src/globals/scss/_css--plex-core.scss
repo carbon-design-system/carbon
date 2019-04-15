@@ -14,7 +14,7 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 /// @access private
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
-/// @group plex-font-face
+/// @group global-font-face
 /// @example - @include plex-font-face;
 $unicodes: (
   Pi:
@@ -27,7 +27,7 @@ $unicodes: (
 /// @access private
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
-/// @group plex-font-face
+/// @group global-font-face
 /// @example - @include plex-font-face;
 $families: (
   'Mono': unquote("'ibm-plex-mono'"),
@@ -37,7 +37,7 @@ $families: (
 /// @access private
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
-/// @group plex-font-face
+/// @group global-font-face
 /// @example - @include plex-font-face;
 $fallbacks: (
   'Mono': unquote("'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
@@ -64,7 +64,9 @@ $weights: (
   ),
 ) !default;
 
+/// @access public
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
+/// @group global-font-face
 @mixin check-default-font-path {
   @if (str-index($font-path, 'https://unpkg.com/') == 1) {
     @warn 'The default font path (#{$font-path}) should be used only for demonstration/evaluation purposes. For production applications, please host fonts in your own CDN and change `$font-path` accordingly.';
@@ -74,7 +76,10 @@ $weights: (
   }
 }
 
+/// Plex font face declarations
+/// @access public
 /// @deprecated (For v10) Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
+/// @group global-font-face
 @mixin plex-font-face {
   @include deprecate(
     '`@include plex-font-face` has been removed. ' +

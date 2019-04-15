@@ -15,6 +15,7 @@
 /// Includes type styles for different elements and classes
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--type-classes`
+/// @group global-typography
 @mixin typography {
   @include deprecate(
     '`@include typography` has been removed. ' + 'Use `@include carbon--type-classes` instead.',
