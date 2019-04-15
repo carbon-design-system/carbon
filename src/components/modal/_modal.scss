@@ -160,6 +160,7 @@
     overflow: hidden;
     cursor: pointer;
     background-color: transparent;
+    transition: background-color $duration--fast-02 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;
