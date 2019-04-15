@@ -39,6 +39,9 @@ To import using CommonJS, you can do the following:
 const Add24 = require('@carbon/icons-react/lib/Add/24');
 ```
 
+_Note: if you would like to find the import path for an icon, you can reference
+our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new

@@ -30,7 +30,8 @@ ways. The first is to install them when you're initializing your Vue
 app. For example:
 
 ```js
-import { CarbonIconsVue, Bee32 } from '@carbon/icons-vue';
+import { CarbonIconsVue } from '@carbon/icons-vue';
+import Bee32 from '@carbon/icons-vue/es/bee/32';
 import Vue from 'vue';
 import App from './App.vue';
 
@@ -45,6 +46,9 @@ new Vue({
 }).$mount('#app');
 ```
 
+_Note: if you would like to find the import path for an icon, you can reference
+our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
+
 Using `CarbonIconsVue` we can pass in any of the icon components that
 we'd like to use. In our application, we can then use them by doing:
 
@@ -58,7 +62,7 @@ If you would rather not register icons globally, you can also import
 them into individual components.
 
 ```js
-import { Bee32 } from '@carbon/icons-vue';
+import Bee32 from '@carbon/icons-vue/es/bee/32';
 
 export default {
   name: 'MyComponent',

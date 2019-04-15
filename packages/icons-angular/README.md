@@ -42,6 +42,9 @@ import { Add32Module } from '@carbon/icons-angular/lib/add/32.js';
 export class MyModule {}
 ```
 
+_Note: if you would like to find the import path for an icon, you can reference
+our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
+
 In your component template:
 
 ```html
