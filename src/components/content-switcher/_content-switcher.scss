@@ -132,14 +132,14 @@
     @include focus-outline('reset');
 
     background-color: $ui-01;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: 100%;
     height: rem(40px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     text-align: left;
     text-decoration: none;
     border: none;
@@ -210,6 +210,13 @@
 
   .#{$prefix}--content-switcher__icon + span {
     margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--content-switcher__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,

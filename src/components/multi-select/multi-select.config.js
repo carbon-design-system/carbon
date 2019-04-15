@@ -48,10 +48,26 @@ module.exports = {
       },
     },
     {
+      name: 'filterable',
+      label: 'Filterable Multi Select',
+      context: {
+        filterable: true,
+        items,
+      },
+    },
+    {
       name: 'inline',
       label: 'Inline',
       context: {
         inline: true,
+        items,
+      },
+    },
+    {
+      name: 'light',
+      label: 'Light',
+      context: {
+        light: true,
         items,
       },
     },
