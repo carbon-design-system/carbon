@@ -66,6 +66,11 @@
     width: 100%;
   }
 
+  .#{$prefix}--data-table tbody tr,
+  .#{$prefix}--data-table tbody tr td {
+    transition: background-color $duration--fast-02 motion(standard, productive);
+  }
+
   .#{$prefix}--data-table tbody tr:hover {
     background: $hover-field;
   }

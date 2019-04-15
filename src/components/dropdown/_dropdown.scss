@@ -55,7 +55,7 @@
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
-    transition: $duration--fast-02 motion(standard, productive) all;
+    transition: background-color $duration--fast-02 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -219,6 +219,7 @@
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
     max-height: 15rem;
+    transition: max-height $duration--fast-02 motion(entrance, productive);
 
     &:hover {
       overflow: auto;

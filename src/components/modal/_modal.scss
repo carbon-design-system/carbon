@@ -36,14 +36,16 @@
     content: '';
     opacity: 0;
     background-color: $overlay-01;
-    transition: opacity $duration--moderate-01 motion(exit, expressive),
-      z-index 0s $duration--moderate-01 motion(exit, expressive), visibility 0s $duration--moderate-01 motion(exit, expressive);
     visibility: hidden;
+    transition: opacity $duration--slow-01 motion(exit, expressive), z-index $duration--slow-01 motion(exit, expressive),
+      visibility $duration--slow-01 motion(exit, expressive);
 
     &.is-visible {
       z-index: z('modal');
+      transform: translateY(0);
       opacity: 1;
-      transition: opacity $duration--slow-01 motion(entrance, expressive);
+      transition: opacity $duration--slow-01 motion(entrance, expressive) z-index $duration--slow-01 motion(entrance, expressive),
+        visibility $duration--slow-01 motion(entrance, expressive);
       visibility: visible;
     }
 
@@ -57,6 +59,10 @@
     @include modal--color($support-01);
   }
 
+  .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
+    transform: translateY(0);
+  }
+
   .#{$prefix}--modal-container {
     position: relative;
     display: flex;
@@ -65,6 +71,8 @@
     width: 100%;
     max-height: 100%;
     height: 100%;
+    transform: translateY(-24px);
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
 
     @include carbon--breakpoint(md) {
       height: auto;
