@@ -7,12 +7,17 @@
 
 @import 'convert';
 
-// Default mini-unit value
+/// Default mini-unit value
+/// @type Number
+/// @access public
+/// @group @carbon/layout
 $carbon--mini-unit-size: 8px !default;
 
 /// Get the value of the corresponding number of units
-/// @param {number} $count the number of units to get the value for
-/// @return rem
+/// @param {Number} $count - The number of units to get the value for
+/// @return {Number} In rem units
+/// @access public
+/// @group @carbon/layout
 @function carbon--mini-units($count) {
   @return carbon--rem($carbon--mini-unit-size * $count);
 }
