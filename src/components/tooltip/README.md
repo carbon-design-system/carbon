@@ -99,6 +99,8 @@ document.addEventListener('floating-menu-hidden', function(evt) {
 
 ### Interactive tooltip
 
+Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button). For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+
 | Selector                      | Description                        |
 | ----------------------------- | ---------------------------------- |
 | `.bx--tooltip__trigger--bold` | Modifier class to make label bold. |
@@ -127,7 +129,7 @@ By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can chan
 
 ### Definition tooltip
 
-This tooltip variation does not use any JavaScript and should be used to define a word. For anything more advanced please use the main variation.
+This tooltip variation is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word. This works better than interactive tooltip in regular use cases because info icon used in interactive tooltip gets really busy when it’s used several times on a page. This tooltip variation does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use the main variation.
 
 | Selector                           | Description                                           |
 | ---------------------------------- | ----------------------------------------------------- |
@@ -136,7 +138,7 @@ This tooltip variation does not use any JavaScript and should be used to define 
 
 ### Icon tooltip
 
-This tooltip variation does not use any JavaScript and is good for short single line of text describing an icon. No label should be added to this variation.
+This tooltip variation is for short single line of text describing an icon. This tooltip variation does not use any JavaScript. No label should be added to this variation. If there are actions a user can take in the tooltip (e.g. a link or a button), use the main variation.
 
 | Selector                     | Description                                           |
 | ---------------------------- | ----------------------------------------------------- |
