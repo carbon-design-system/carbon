@@ -28,10 +28,12 @@ for package in node_modules/@carbon/*; do
   TARGET_DIR="$VENDOR_DIR/$PKG_NAME"
   SCSS_FILES="$package/scss"
 
-  if [ -d "$SCSS_FILES" ]; then
-    echo "Copying scss files for package: $PKG_NAME to $TARGET_DIR"
-    mkdir -p $TARGET_DIR
-    cp -R $SCSS_FILES $TARGET_DIR
+  if [ "$PKG_NAME" = "@carbon/elements" ]; then
+    if [ -d "$SCSS_FILES" ]; then
+      echo "Copying scss files for package: $PKG_NAME to $TARGET_DIR"
+      mkdir -p $TARGET_DIR
+      cp -R $SCSS_FILES $TARGET_DIR
+    fi
   fi
 done
 
