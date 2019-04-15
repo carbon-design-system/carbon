@@ -127,8 +127,8 @@
   "peerDependencies": {
     "carbon-components": "^10.0.0",
     "carbon-icons": "^7.0.7",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "dependencies": {
     "@carbon/icons-react": "^0.0.1-beta.4",
@@ -140,7 +140,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
-    "react-is": "^16.8.5",
+    "react-is": "^16.8.6",
     "warning": "^3.0.0",
     "window-or-global": "^1.0.1"
   },
@@ -191,8 +191,8 @@
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.11.0",
-    "enzyme-to-json": "^3.3.4",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.16.0",
     "eslint-plugin-jsdoc": "^4.8.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
@@ -209,10 +209,10 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.16.0",
     "promise": "^8.0.1",
-    "prop-types": "^15.5.8",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
-    "react-test-renderer": "^16.8.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
     "requestanimationframe": "^0.0.23",
     "rimraf": "^2.6.3",
     "rollup": "^1.10.0",
@@ -229,9 +229,6 @@
     "terser-webpack-plugin": "^1.1.0",
     "webpack": "^4.25.1",
     "whatwg-fetch": "^2.0.3"
-  },
-  "resolutions": {
-    "enzyme-adapter-react-16/react-test-renderer": "^16.4.0"
   },
   "release": {
     "branch": "master"
