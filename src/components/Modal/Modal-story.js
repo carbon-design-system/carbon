@@ -23,7 +23,10 @@ const props = () => ({
   ),
   modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
   modalLabel: text('Optional label (modalLabel)', 'Label'),
-  modalAriaLabel: text('ARIA label (modalAriaLabel)', ''),
+  modalAriaLabel: text(
+    'ARIA label (modalAriaLabel)',
+    'A label to be read by screen readers on the modal root node'
+  ),
   primaryButtonText: text(
     'Primary button text (primaryButtonText)',
     'Primary Button'
