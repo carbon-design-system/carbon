@@ -34,19 +34,20 @@
     align-items: center;
     justify-content: center;
     content: '';
+    background-color: transparent;
     opacity: 0;
-    background-color: $overlay-01;
     visibility: hidden;
-    transition: opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-01 motion(exit, expressive),
+    transition: background-color $duration--slow-02 motion(exit, expressive),
+      opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-02 motion(exit, expressive),
       visibility $duration--moderate-02 motion(exit, expressive);
 
     &.is-visible {
       z-index: z('modal');
-      transform: translateY(0);
-      opacity: 1;
       visibility: visible;
-      transition: opacity $duration--moderate-02 motion(entrance, expressive) z-index $duration--slow-01
-          motion(entrance, expressive),
+      opacity: 1;
+      background-color: $overlay-01;
+      transition: background-color $duration--slow-02 motion(entrance, expressive),
+        opacity $duration--moderate-02 motion(entrance, expressive), z-index $duration--slow-02 motion(entrance, expressive),
         visibility $duration--moderate-02 motion(entrance, expressive);
     }
 
@@ -61,16 +62,8 @@
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
-    transform: translateY(0);
-    max-height: 100%;
-
-    @include carbon--breakpoint(md) {
-      max-height: 90%;
-    }
-
-    @include carbon--breakpoint(lg) {
-      max-height: 80%;
-    }
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
+    transform: translateY(0) scaleY(1);
   }
 
   .#{$prefix}--modal-container {
@@ -79,17 +72,22 @@
     flex-direction: column;
     background-color: $ui-01;
     width: 100%;
-    max-height: 0;
     height: 100%;
+    max-height: 100%;
     overflow: hidden;
-    transform: translate3d(0, -24px, 0);
-    transition: transform $duration--moderate-02 motion(exit, expressive),
-      max-height $duration--moderate-02 motion(exit, expressive);
+    transform-origin: top center;
+    transform: translate3d(0, -24px, 0) scaleY(0);
+    transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
       width: 50%;
       max-width: 768px;
+      max-height: 90%;
       height: auto;
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-height: 80%;
     }
   }
 
