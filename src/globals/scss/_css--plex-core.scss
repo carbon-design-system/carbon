@@ -47,7 +47,7 @@ $fallbacks: (
 /// @access private
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @type Map
-/// @group plex-font-face
+/// @group global-font-face
 /// @example - @include plex-font-face;
 $weights: (
   'Light': (
