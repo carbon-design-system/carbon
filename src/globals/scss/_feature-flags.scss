@@ -13,15 +13,13 @@
 /// @access public
 /// @type Map
 /// @example
-/// $feature-flags: (components-x: true, ui-shell: true); // overrides default values for components-x and ui-shell
+/// $feature-flags: (ui-shell: true); // overrides default values for ui-shell
 $feature-flags: () !default;
 
 /// Default feature flag values
 /// @access private
 /// @type Map
 $default-feature-flags: (
-  components-x: true,
-  breaking-changes-x: true,
   ui-shell: false,
   grid: true,
   grid-columns-16: false,

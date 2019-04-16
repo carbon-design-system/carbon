@@ -19,96 +19,6 @@
   .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-end;
-
-    .#{$prefix}--label {
-      order: 1;
-    }
-  }
-
-  .#{$prefix}--time-picker__input {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid transparent;
-  }
-
-  .#{$prefix}--time-picker .#{$prefix}--select-input {
-    padding-right: $spacing-xl;
-  }
-
-  .#{$prefix}--time-picker .#{$prefix}--select__arrow {
-    right: 0.875rem;
-  }
-
-  .#{$prefix}--time-picker__input-field {
-    @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    display: flex;
-    align-items: center;
-    background-color: $field-01;
-    border: none;
-    width: 4.875rem;
-    color: $text-01;
-    height: rem(40px);
-    padding: 0 $spacing-md;
-    order: 2;
-    box-shadow: 0 1px 0 0 $ui-05;
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 2px 0 0 $brand-01;
-    }
-
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
-    &::placeholder {
-      color: $text-02;
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      box-shadow: 0 2px 0 0 $support-01;
-    }
-
-    &[data-invalid]:focus ~ .#{$prefix}--label {
-      color: $support-01;
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: 0;
-      max-height: 0;
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &[data-invalid] ~ .#{$prefix}--form-requirement {
-      overflow: visible;
-      max-height: 0;
-      margin-top: $spacing-2xs;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-
-  .#{$prefix}--time-picker--light .#{$prefix}--time-picker__input-field {
-    background: $field-02;
-  }
-}
-
-@mixin time-picker--x {
-  .#{$prefix}--time-picker {
-    display: flex;
-    align-items: flex-end;
   }
 
   .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
@@ -148,9 +58,5 @@
 }
 
 @include exports('time-picker') {
-  @if feature-flag-enabled('components-x') {
-    @include time-picker--x;
-  } @else {
-    @include time-picker;
-  }
+  @include time-picker;
 }

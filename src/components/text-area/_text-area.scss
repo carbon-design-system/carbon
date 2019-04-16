@@ -19,85 +19,6 @@
 @mixin text-area {
   .#{$prefix}--text-area {
     @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    width: 100%;
-    min-width: 10rem;
-    padding: $spacing-md;
-    color: $text-01;
-    background-color: $field-01;
-    border: none;
-    box-shadow: 0 1px 0 0 $ui-05;
-    order: 2;
-    resize: vertical;
-    border-bottom: 1px solid transparent;
-
-    & ~ .#{$prefix}--label {
-      order: 1;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 2px 0 0 $brand-01;
-    }
-
-    &::placeholder {
-      @include placeholder-colors;
-      opacity: 1;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    &:disabled:hover {
-      border: $input-border;
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      box-shadow: 0 2px 0 0 $support-01;
-    }
-
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
-    &[data-invalid]:focus + .#{$prefix}--label {
-      color: $support-01;
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-
-      &::before {
-        display: none;
-      }
-    }
-  }
-
-  .#{$prefix}--text-area--light {
-    background: $field-02;
-  }
-
-  // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
-    @include skeleton;
-    height: rem(100px);
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-}
-
-@mixin text-area--x {
-  .#{$prefix}--text-area {
-    @include reset;
     @include type-style('body-long-01');
     @include focus-outline('reset');
 
@@ -188,9 +109,5 @@
 }
 
 @include exports('text-area') {
-  @if feature-flag-enabled('components-x') {
-    @include text-area--x;
-  } @else {
-    @include text-area;
-  }
+  @include text-area;
 }

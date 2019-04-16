@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import './vendor/@carbon/elements/scss/type/reset';
 
@@ -31,9 +30,7 @@
 
 @include exports('css--reset') {
   @if global-variable-exists(css--reset) ==false or $css--reset==true {
-    @if feature-flag-enabled('components-x') {
-      @include carbon--type-reset;
-    }
+    @include carbon--type-reset;
 
     // http://cssreset.com/scripts/eric-meyer-reset-css/
     html,

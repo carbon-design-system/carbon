@@ -13,170 +13,6 @@
 @import '../../globals/scss/css--reset';
 
 @mixin button {
-  // <button> elements cannot be used as flex containers
-  button.#{$prefix}--btn {
-    display: inline-block;
-  }
-
-  // Reset intrisic padding in Firefox (see #731)
-  button.#{$prefix}--btn::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-  }
-
-  // Vertically center icon inside <button>
-  button.#{$prefix}--btn .#{$prefix}--btn__icon {
-    position: relative;
-    vertical-align: middle;
-    top: -1px;
-
-    // Targets IE10+ browsers: Reset <svg> position for vertical centering
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      top: 0;
-    }
-  }
-
-  .#{$prefix}--btn {
-    @include button-base;
-  }
-
-  .#{$prefix}--btn--primary {
-    @include button-theme($brand-01, transparent, $inverse-01, $hover-primary, $ui-01);
-  }
-
-  .#{$prefix}--btn--secondary {
-    @include button-theme(transparent, $brand-01, $brand-01, $hover-secondary, $brand-01);
-
-    &:hover,
-    &:focus {
-      color: $inverse-01;
-    }
-
-    &:active {
-      color: $brand-01;
-    }
-
-    &:hover > .#{$prefix}--btn__icon,
-    &:focus > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
-    }
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $brand-01;
-    }
-  }
-
-  .#{$prefix}--btn--tertiary {
-    @include button-theme(transparent, $ui-05, $ui-05, $ui-05, $ui-05);
-
-    &:hover,
-    &:focus {
-      color: $inverse-01;
-    }
-
-    &:active {
-      color: $ui-05;
-    }
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $ui-05;
-    }
-
-    &:hover > .#{$prefix}--btn__icon,
-    &:focus > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
-    }
-  }
-
-  .#{$prefix}--btn--ghost {
-    @include button-theme(transparent, transparent, $brand-01, $brand-01, $brand-01);
-
-    &:hover,
-    &:focus {
-      color: $inverse-01;
-
-      .#{$prefix}--btn__icon {
-        fill: $inverse-01;
-      }
-    }
-
-    &:active {
-      color: $ui-05;
-    }
-
-    .#{$prefix}--btn__icon {
-      margin-left: $spacing-xs;
-    }
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $brand-01;
-
-      .#{$prefix}--btn__icon {
-        fill: $brand-01;
-      }
-    }
-  }
-
-  .#{$prefix}--btn--danger {
-    @include button-theme(transparent, $support-01, $support-01, $support-01, $support-01);
-
-    &:hover {
-      color: $inverse-01;
-      border: $button-border-width solid transparent;
-    }
-
-    &:focus {
-      color: $inverse-01;
-    }
-
-    &:active {
-      color: $support-01;
-    }
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $support-01;
-      border: $button-border-width solid $support-01;
-    }
-
-    &:hover > .#{$prefix}--btn__icon,
-    &:focus > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
-    }
-  }
-
-  .#{$prefix}--btn--danger--primary {
-    @include button-theme($support-01, transparent, $inverse-01, darken($support-01, 10%), $ui-01);
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $ui-01;
-      border: $button-border-width solid $support-01;
-    }
-  }
-
-  .#{$prefix}--btn--sm {
-    @include letter-spacing;
-    height: 2rem;
-    padding: $button-padding-sm;
-  }
-
-  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
-  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
-    margin-left: $spacing-md;
-  }
-
-  // Skeleton State
-  .#{$prefix}--btn.#{$prefix}--skeleton {
-    @include skeleton;
-    width: rem(150px);
-  }
-}
-
-@mixin button--x {
   // button set styles
   .#{$prefix}--btn-set {
     display: flex;
@@ -193,7 +29,7 @@
   }
 
   .#{$prefix}--btn {
-    @include button-base--x;
+    @include button-base;
 
     &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
     &:disabled > .#{$prefix}--btn__icon {
@@ -208,7 +44,7 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
+    @include button-theme($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
 
     &:hover {
       color: $text-04;
@@ -216,7 +52,7 @@
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme--x($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
+    @include button-theme($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
 
     &:hover,
     &:focus {
@@ -225,7 +61,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
+    @include button-theme(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
 
     &:hover {
       color: $inverse-01;
@@ -251,7 +87,7 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
+    @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
     padding: rem(14px) rem(16px);
 
     .#{$prefix}--btn__icon {
@@ -306,7 +142,7 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
+    @include button-theme($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
     &:hover {
       color: $text-04;
@@ -327,9 +163,5 @@
 }
 
 @include exports('button') {
-  @if feature-flag-enabled('components-x') {
-    @include button--x;
-  } @else {
-    @include button;
-  }
+  @include button;
 }

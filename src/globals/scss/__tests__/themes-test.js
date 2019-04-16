@@ -131,7 +131,6 @@ $c: test($brand-01);
   it('should allow custom overrides of tokens in v10', async () => {
     const testColor = '#000000';
     const { calls } = await render(`
-$feature-flags: (components-x: true);
 $interactive-01: ${testColor} !global;
 
 @import '../theme';
@@ -145,7 +144,6 @@ $c: test($interactive-01);
   it('should allow custom theme overrides', async () => {
     const testColor = '#000000';
     const { calls } = await render(`
-$feature-flags: (components-x: true);
 $carbon--theme: (
   interactive-01: ${testColor},
 ) !global;
@@ -162,7 +160,6 @@ $c: test(map-get($carbon--theme, interactive-01));
     const testColor = '#000000';
     const inlineColor = '#ffffff';
     const { calls } = await render(`
-$feature-flags: (components-x: true);
 $carbon--theme: (
   interactive-01: ${testColor},
 ) !global;

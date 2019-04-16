@@ -21,9 +21,6 @@ $css--helpers: true;
 
 @mixin toolbar {
   .#{$prefix}--toolbar {
-    @if not feature-flag-enabled('components-x') {
-      @include font-family;
-    }
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -113,12 +110,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--toolbar-menu__title {
-    @if not feature-flag-enabled('components-x') {
-      @include typescale('omega');
-      @include letter-spacing;
-    } @else {
-      @include type-style('caption-01');
-    }
+    @include type-style('caption-01');
     font-weight: 600;
     padding: 0.5rem 1.25rem;
   }
@@ -136,19 +128,12 @@ $css--helpers: true;
   .#{$prefix}--radio-button-group {
     border: none;
   }
-}
 
-@mixin toolbar--x {
-  @include toolbar;
   .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active) .#{$prefix}--search-input {
     border-bottom: none;
   }
 }
 
 @include exports('toolbar') {
-  @if feature-flag-enabled('components-x') {
-    @include toolbar--x;
-  } @else {
-    @include toolbar;
-  }
+  @include toolbar;
 }

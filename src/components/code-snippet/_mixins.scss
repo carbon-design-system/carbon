@@ -8,17 +8,6 @@
 @import '../../globals/scss/typography';
 
 @mixin bx--snippet {
-  @include typescale('omega');
-  line-height: 1.45;
-  background: $snippet-background-color;
-  border: 1px solid $snippet-border-color;
-  font-family: $font-family-mono;
-  position: relative;
-  max-width: rem(600px);
-  width: 100%;
-}
-
-@mixin bx--snippet--x {
   @include type-style('code-01');
   background: $snippet-background-color;
   border: 1px solid $snippet-border-color;

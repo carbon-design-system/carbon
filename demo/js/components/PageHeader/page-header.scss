@@ -19,11 +19,7 @@
 }
 
 .page-header__label {
-  @if not feature-flag-enabled('components-x') {
-    @include typescale('zeta');
-  } @else {
-    @include type-style('label-01');
-  }
+  @include type-style('label-01');
   color: $text-02;
   font-weight: 400;
   margin: 4rem 0 1rem;
@@ -37,18 +33,12 @@
 }
 
 .page-header__title {
-  @if not feature-flag-enabled('components-x') {
-    @include typescale('mega');
-    @include letter-spacing;
-  } @else {
-    @include type-style('display-01');
-  }
+  @include type-style('display-01');
   color: $text-01;
   font-weight: 300;
   margin: -1.15rem 0 0 -3px;
   line-height: 1.25;
   padding: 0;
-  transition: $transition--base $bx--standard-easing;
 
   @include breakpoint('500px') {
     font-size: rem(52px);
