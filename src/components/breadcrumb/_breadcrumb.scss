@@ -13,6 +13,9 @@
 @import '../link/link';
 @import '../../globals/scss/functions';
 
+/// v9 breadcrumb
+/// @access private
+/// @group breadcrumb
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
     @include typescale('zeta');
@@ -71,6 +74,9 @@
   }
 }
 
+/// v10 breadcrumb
+/// @access private
+/// @group breadcrumb
 @mixin breadcrumb--x {
   .#{$prefix}--breadcrumb {
     @include type-style('body-short-01');

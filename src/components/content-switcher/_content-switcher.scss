@@ -11,6 +11,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// v9 content-switcher
+/// @access private
+/// @group content-switcher
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
     @include font-family;
@@ -114,6 +117,9 @@
   }
 }
 
+/// v10 content-switcher
+/// @access private
+/// @group content-switcher
 @mixin content-switcher--x {
   .#{$prefix}--content-switcher {
     display: flex;

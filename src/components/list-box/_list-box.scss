@@ -16,11 +16,29 @@
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// @type Number
+/// @access public
+/// @group list-box
 $list-box-width: 100%;
+
+/// @type Number
+/// @access public
+/// @group list-box
 $list-box-height: rem(40px);
+
+/// @type Number
+/// @access public
+/// @group list-box
 $list-box-inline-height: if(not feature-flag-enabled('components-x'), rem(32px), $list-box-height);
+
+/// @type Number
+/// @access public
+/// @group list-box
 $list-box-menu-width: rem(300px);
 
+/// v9 list-box
+/// @access private
+/// @group list-box
 @mixin listbox {
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.
@@ -296,6 +314,9 @@ $list-box-menu-width: rem(300px);
   }
 }
 
+/// v10 list-box
+/// @access private
+/// @group list-box
 @mixin listbox--x {
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.

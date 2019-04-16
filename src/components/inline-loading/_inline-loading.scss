@@ -11,6 +11,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'keyframes';
 
+/// v9 inline-loading
+/// @access private
+/// @group inline-loading
 @mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;
@@ -71,6 +74,9 @@
   }
 }
 
+/// v10 inline-loading
+/// @access private
+/// @group inline-loading
 @mixin inline-loading--x {
   .#{$prefix}--inline-loading {
     display: flex;

@@ -13,6 +13,9 @@
 @import '../../globals/scss/vars';
 @import '../list-box/list-box';
 
+/// v9 multi-select
+/// @access private
+/// @group multi-select
 @mixin multiselect {
   .#{$prefix}--multi-select.#{$prefix}--combo-box > .#{$prefix}--list-box__field {
     padding: 0 1rem;
@@ -24,6 +27,9 @@
   }
 }
 
+/// v10 multi-select
+/// @access private
+/// @group multi-select
 @mixin multiselect--x {
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;

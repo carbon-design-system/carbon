@@ -18,6 +18,9 @@
 @import '../../globals/scss/css--typography';
 @import 'mixins';
 
+/// v9 inline notification
+/// @access private
+/// @group notification
 @mixin inline-notifications {
   .#{$prefix}--inline-notification {
     @include reset;
@@ -109,6 +112,9 @@
   }
 }
 
+/// v10 inline notification
+/// @access private
+/// @group notification
 @mixin inline-notifications--x {
   .#{$prefix}--inline-notification {
     @include reset;

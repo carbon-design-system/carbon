@@ -5,13 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Used only for .#{prefix}--structured-list--condensed
+/// Used only for `.#{prefix}--structured-list--condensed`
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td--condensed($padding: $structured-list-padding) {
   padding: $padding / 4;
   padding-left: 0;
 }
 
-// Used only for [data-structured-list]
+/// Used only for [data-structured-list]
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding--data-structured-list($padding: $structured-list-padding) {
   padding-left: $padding / 2;
   padding-right: $padding / 2;
@@ -27,7 +33,10 @@
   }
 }
 
-// Used only for normal structured-list
+/// Used only for normal structured-list
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td($padding: $structured-list-padding) {
   padding-left: 0;
   padding-right: $padding;
@@ -39,7 +48,10 @@
   }
 }
 
-// Used only for normal structured-list
+/// Used only for normal structured-list
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding-th($padding: $structured-list-padding) {
   padding-left: 0;
   padding-right: $padding;
@@ -51,13 +63,19 @@
   }
 }
 
-// Used only for experimental .#{prefix}--structured-list--condensed
+/// Used only for experimental `.#{prefix}--structured-list--condensed`
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td--condensed--x($padding: $structured-list-padding) {
   padding: $padding / 4;
   padding-left: 0;
 }
 
-// Used only for experimental [data-structured-list]
+/// Used only for experimental [data-structured-list]
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding--data-structured-list--x($padding: $structured-list-padding) {
   padding-left: $padding / 2;
   padding-right: $padding / 2;
@@ -69,7 +87,10 @@
   }
 }
 
-// Used only for experimental normal structured-list
+/// Used only for experimental normal structured-list
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding-th--x($padding: $structured-list-padding) {
   padding-left: $carbon--spacing-05;
   padding-right: $carbon--spacing-05;
@@ -77,7 +98,10 @@
   padding-bottom: $carbon--spacing-03;
 }
 
-// Used only for experimental normal structured-list
+/// Used only for experimental normal structured-list
+/// @access private
+/// @group structured-list
+/// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td--x($padding: $structured-list-padding) {
   padding-top: $carbon--spacing-05;
   padding-right: $carbon--spacing-05;

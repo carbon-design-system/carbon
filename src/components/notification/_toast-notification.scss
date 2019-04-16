@@ -18,6 +18,9 @@
 @import '../../globals/scss/css--typography';
 @import 'mixins';
 
+/// v9 toast notification
+/// @access private
+/// @group notification
 @mixin toast-notifications {
   .#{$prefix}--toast-notification {
     @include reset;
@@ -104,6 +107,9 @@
   }
 }
 
+/// v10 toast notification
+/// @access private
+/// @group notification
 @mixin toast-notifications--x {
   .#{$prefix}--toast-notification {
     @include reset;

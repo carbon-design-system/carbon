@@ -16,6 +16,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--typography';
 
+/// v9 tabs
+/// @access private
+/// @group tabs
 @mixin tabs {
   .#{$prefix}--tabs {
     @include typescale('zeta');
@@ -215,6 +218,9 @@
   }
 }
 
+/// v10 tabs
+/// @access private
+/// @group tabs
 @mixin tabs--x {
   .#{$prefix}--tabs {
     @include type-style('body-short-01');

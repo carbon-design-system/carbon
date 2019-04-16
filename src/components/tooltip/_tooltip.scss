@@ -12,6 +12,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
+/// v9 tooltip
+/// @access private
+/// @group tooltip
 @mixin tooltip {
   .#{$prefix}--tooltip--icon {
     display: flex;
@@ -333,6 +336,9 @@
   }
 }
 
+/// v10 tooltip
+/// @access private
+/// @group tooltip
 @mixin tooltip--x {
   .#{$prefix}--tooltip--icon {
     display: flex;

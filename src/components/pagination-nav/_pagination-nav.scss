@@ -18,6 +18,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
+/// v10 pseudo underline
+/// @access private
+/// @group pagination-nav
 @mixin pseudo-underline() {
   @if feature-flag-enabled('components-x') {
     &:not(.#{$prefix}--pagination-nav__page--direction) {
@@ -44,6 +47,20 @@
   }
 }
 
+/// Pagination nav base styles
+/// @access private
+/// @group pagination-nav
+/// @param {Color} $text-color [$text-02]
+/// @param {Color} $text-color-active [$text-02]
+/// @param {Color} $background-color-hover [$hover-ui]
+/// @param {Color} $background-color-active [initial]
+/// @param {Number} $font-weight [400]
+/// @param {Number} $item-padding [0]
+/// @param {Number} $button-min-width [$carbon--spacing-09]
+/// @param {Value} $button-padding [1.0625rem $carbon--spacing-02]
+/// @param {Number} $button-direction-size [$carbon--spacing-09]
+/// @param {Number} $select-icon-top-position [$carbon--spacing-05]
+/// @param {Number} $select-icon-left-position [$carbon--spacing-05]
 @mixin pagination-nav-base(
   $text-color: $text-02,
   $text-color-active: $text-02,
@@ -194,6 +211,9 @@
   @content;
 }
 
+/// v9 pagination-nav
+/// @access private
+/// @group pagination-nav
 @mixin pagination-nav {
   @include pagination-nav-base(
     $text-color: $ui-05,
@@ -224,6 +244,9 @@
   }
 }
 
+/// v10 pagination-nav
+/// @access private
+/// @group pagination-nav
 @mixin pagination-nav--x {
   @include pagination-nav-base();
 }

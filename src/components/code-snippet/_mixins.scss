@@ -7,6 +7,9 @@
 
 @import '../../globals/scss/typography';
 
+/// v9 code-snippet base styles
+/// @access private
+/// @group code-snippet
 @mixin bx--snippet {
   @include typescale('omega');
   line-height: 1.45;
@@ -18,6 +21,9 @@
   width: 100%;
 }
 
+/// v10 code-snippet base styles
+/// @access private
+/// @group code-snippet
 @mixin bx--snippet--x {
   @include type-style('code-01');
   background: $snippet-background-color;

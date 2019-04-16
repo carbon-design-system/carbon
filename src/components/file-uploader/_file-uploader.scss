@@ -15,6 +15,9 @@
 @import '../loading/loading';
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
+/// v9 file-uploader
+/// @access private
+/// @group file-uploader
 @mixin file-uploader {
   .#{$prefix}--file {
     width: 100%;
@@ -108,6 +111,9 @@
   }
 }
 
+/// v10 file-uploader
+/// @access private
+/// @group file-uploader
 @mixin file-uploader--x {
   .#{$prefix}--file {
     width: 100%;

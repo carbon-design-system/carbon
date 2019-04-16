@@ -20,6 +20,9 @@
 
 @import '../button/button';
 
+/// v9 modal
+/// @access private
+/// @group modal
 @mixin modal {
   .#{$prefix}--modal {
     @include reset;
@@ -152,6 +155,9 @@
   }
 }
 
+/// v10 modal
+/// @access private
+/// @group modal
 @mixin modal--x {
   .#{$prefix}--modal {
     position: fixed;

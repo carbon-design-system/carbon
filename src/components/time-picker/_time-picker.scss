@@ -15,6 +15,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// v9 time-picker
+/// @access private
+/// @group time-picker
 @mixin time-picker {
   .#{$prefix}--time-picker {
     display: flex;
@@ -105,6 +108,9 @@
   }
 }
 
+/// v10 time-picker
+/// @access private
+/// @group time-picker
 @mixin time-picker--x {
   .#{$prefix}--time-picker {
     display: flex;

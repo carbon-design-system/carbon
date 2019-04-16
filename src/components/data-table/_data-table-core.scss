@@ -11,6 +11,9 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 
+/// v9 data table core
+/// @access private
+/// @group data-table
 @mixin data-table-v2-core {
   .#{$prefix}--data-table-v2-container {
     width: 100%;
@@ -172,6 +175,9 @@
   }
 }
 
+/// v10 data table core
+/// @access private
+/// @group data-table
 @mixin data-table-core--x {
   //----------------------------------------------------------------------------
   // Container

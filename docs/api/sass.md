@@ -219,6 +219,49 @@
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--font-face-serif [mixin]](#carbon--font-face-serif-mixin)
   - [✅carbon--font-display [variable]](#carbon--font-display-variable)
+- [accordion](#accordion)
+  - [❌accordion [mixin]](#accordion-mixin)
+  - [❌accordion--x [mixin]](#accordion--x-mixin)
+- [breadcrumb](#breadcrumb)
+  - [❌breadcrumb [mixin]](#breadcrumb-mixin)
+  - [❌breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+- [button](#button)
+  - [❌button [mixin]](#button-mixin)
+  - [❌button--x [mixin]](#button--x-mixin)
+  - [❌button-base [mixin]](#button-base-mixin)
+  - [❌button-theme [mixin]](#button-theme-mixin)
+  - [❌button-base--x [mixin]](#button-base--x-mixin)
+  - [❌button-theme--x [mixin]](#button-theme--x-mixin)
+- [checkbox](#checkbox)
+  - [❌checkbox [mixin]](#checkbox-mixin)
+  - [❌checkbox--x [mixin]](#checkbox--x-mixin)
+- [code-snippet](#code-snippet)
+  - [❌snippet [mixin]](#snippet-mixin)
+  - [❌snippet--x [mixin]](#snippet--x-mixin)
+  - [❌bx--snippet [mixin]](#bx--snippet-mixin)
+  - [❌bx--snippet--x [mixin]](#bx--snippet--x-mixin)
+- [combo-box](#combo-box)
+  - [❌combo-box [mixin]](#combo-box-mixin)
+  - [❌combo-box--x [mixin]](#combo-box--x-mixin)
+- [content-switcher](#content-switcher)
+  - [❌content-switcher [mixin]](#content-switcher-mixin)
+  - [❌content-switcher--x [mixin]](#content-switcher--x-mixin)
+- [data-table](#data-table)
+  - [❌assistive-text [mixin]](#assistive-text-mixin)
+  - [❌data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [❌data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [❌data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [❌data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [❌data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [❌data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [❌data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [❌data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+- [date-picker](#date-picker)
+  - [❌date-picker [mixin]](#date-picker-mixin)
+  - [❌date-picker--x [mixin]](#date-picker--x-mixin)
+- [dropdown](#dropdown)
+  - [❌dropdown [mixin]](#dropdown-mixin)
+  - [❌dropdown--x [mixin]](#dropdown--x-mixin)
 - [feature-flags](#feature-flags)
   - [✅feature-flags [variable]](#feature-flags-variable)
   - [❌default-feature-flags [variable]](#default-feature-flags-variable)
@@ -234,6 +277,12 @@
   - [✅css--plex [variable]](#css--plex-variable)
   - [✅⚠️css--use-experimental-grid [variable]](#css--use-experimental-grid-variable)
   - [✅⚠️css--use-experimental-grid-fallback [variable]](#css--use-experimental-grid-fallback-variable)
+- [file-uploader](#file-uploader)
+  - [❌file-uploader [mixin]](#file-uploader-mixin)
+  - [❌file-uploader--x [mixin]](#file-uploader--x-mixin)
+- [form](#form)
+  - [❌form [mixin]](#form-mixin)
+  - [❌form--x [mixin]](#form--x-mixin)
 - [global-body](#global-body)
   - [❌css-body [mixin]](#css-body-mixin)
   - [❌css-body--x [mixin]](#css-body--x-mixin)
@@ -369,6 +418,10 @@
   - [✅layout-lg [variable]](#layout-lg-variable)
   - [✅layout-xl [variable]](#layout-xl-variable)
   - [✅layout-2xl [variable]](#layout-2xl-variable)
+- [global-themes](#global-themes)
+  - [❌carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
+  - [❌theme [mixin]](#theme-mixin)
+  - [❌theme--experimental [mixin]](#theme--experimental-mixin)
 - [global-typography](#global-typography)
   - [✅⚠️typography [mixin]](#typography-mixin)
   - [✅⚠️font-family-mono [variable]](#font-family-mono-variable)
@@ -386,50 +439,216 @@
   - [✅⚠️font-size-map [variable]](#font-size-map-variable)
   - [✅⚠️font-size [mixin]](#font-size-mixin)
   - [✅type-style [mixin]](#type-style-mixin)
-- [general](#general)
-  - [❌data-table-suffix [variable]](#data-table-suffix-variable)
-  - [❌data-table-suffix [variable]](#data-table-suffix-variable)
+- [inline-loading](#inline-loading)
+  - [❌inline-loading [mixin]](#inline-loading-mixin)
+  - [❌inline-loading--x [mixin]](#inline-loading--x-mixin)
+- [link](#link)
+  - [❌link [mixin]](#link-mixin)
+  - [❌link--x [mixin]](#link--x-mixin)
+- [list](#list)
+  - [❌lists [mixin]](#lists-mixin)
+  - [❌lists--x [mixin]](#lists--x-mixin)
+- [list-box](#list-box)
+  - [✅list-box-width [variable]](#list-box-width-variable)
+  - [✅list-box-height [variable]](#list-box-height-variable)
+  - [✅list-box-inline-height [variable]](#list-box-inline-height-variable)
+  - [✅list-box-menu-width [variable]](#list-box-menu-width-variable)
+  - [❌listbox [mixin]](#listbox-mixin)
+  - [❌listbox--x [mixin]](#listbox--x-mixin)
+- [loading](#loading)
+  - [❌loading [mixin]](#loading-mixin)
+  - [❌loading--x [mixin]](#loading--x-mixin)
+  - [✅animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
+  - [✅animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
+  - [✅loading\_\_gap [variable]](#loading__gap-variable)
+  - [✅loading\_\_size [variable]](#loading__size-variable)
+- [modal](#modal)
+  - [❌modal--color [mixin]](#modal--color-mixin)
+  - [❌modal [mixin]](#modal-mixin)
+  - [❌modal--x [mixin]](#modal--x-mixin)
+- [multi-select](#multi-select)
+  - [❌multiselect [mixin]](#multiselect-mixin)
+  - [❌multiselect--x [mixin]](#multiselect--x-mixin)
+- [notification](#notification)
+  - [❌inline-notifications [mixin]](#inline-notifications-mixin)
+  - [❌inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [❌inline-notification--color [mixin]](#inline-notification--color-mixin)
+  - [❌notification--color [mixin]](#notification--color-mixin)
+  - [❌notification--experimental [mixin]](#notification--experimental-mixin)
+  - [❌toast-notifications [mixin]](#toast-notifications-mixin)
+  - [❌toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+- [number-input](#number-input)
+  - [❌number-input [mixin]](#number-input-mixin)
+  - [❌number-input--x [mixin]](#number-input--x-mixin)
+- [overflow-menu](#overflow-menu)
+  - [❌overflow-menu [mixin]](#overflow-menu-mixin)
+  - [❌overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+- [pagination](#pagination)
+  - [❌pagination [mixin]](#pagination-mixin)
+  - [❌pagination--x [mixin]](#pagination--x-mixin)
+- [pagination-nav](#pagination-nav)
+  - [❌pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [❌pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [❌pagination-nav [mixin]](#pagination-nav-mixin)
+  - [❌pagination-nav--x [mixin]](#pagination-nav--x-mixin)
+- [progress-indicator](#progress-indicator)
+  - [❌progress-indicator [mixin]](#progress-indicator-mixin)
+  - [❌progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+- [radio-button](#radio-button)
+  - [❌radio-button [mixin]](#radio-button-mixin)
+  - [❌radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+- [search](#search)
+  - [❌search [mixin]](#search-mixin)
+  - [❌search--x [mixin]](#search--x-mixin)
+- [select](#select)
+  - [❌select [mixin]](#select-mixin)
+  - [❌select--x [mixin]](#select--x-mixin)
+- [slider](#slider)
+  - [❌slider [mixin]](#slider-mixin)
+  - [❌slider--x [mixin]](#slider--x-mixin)
+- [structured-list](#structured-list)
+  - [❌padding-td--condensed [mixin]](#padding-td--condensed-mixin)
+  - [❌padding--data-structured-list [mixin]](#padding--data-structured-list-mixin)
+  - [❌padding-td [mixin]](#padding-td-mixin)
+  - [❌padding-th [mixin]](#padding-th-mixin)
+  - [❌padding-td--condensed--x [mixin]](#padding-td--condensed--x-mixin)
+  - [❌padding--data-structured-list--x [mixin]](#padding--data-structured-list--x-mixin)
+  - [❌padding-th--x [mixin]](#padding-th--x-mixin)
+  - [❌padding-td--x [mixin]](#padding-td--x-mixin)
+  - [❌structured-list [mixin]](#structured-list-mixin)
+  - [❌structured-list--x [mixin]](#structured-list--x-mixin)
+- [tabs](#tabs)
+  - [❌tabs [mixin]](#tabs-mixin)
+  - [❌tabs--x [mixin]](#tabs--x-mixin)
+- [tag](#tag)
+  - [❌tags [mixin]](#tags-mixin)
+  - [❌tags--x [mixin]](#tags--x-mixin)
+- [text-area](#text-area)
+  - [❌text-area [mixin]](#text-area-mixin)
+  - [❌text-area--x [mixin]](#text-area--x-mixin)
+- [text-input](#text-input)
+  - [❌text-input [mixin]](#text-input-mixin)
+  - [❌text-input--x [mixin]](#text-input--x-mixin)
+- [tile](#tile)
+  - [❌tile [mixin]](#tile-mixin)
+  - [❌tile--x [mixin]](#tile--x-mixin)
+- [time-picker](#time-picker)
+  - [❌time-picker [mixin]](#time-picker-mixin)
+  - [❌time-picker--x [mixin]](#time-picker--x-mixin)
+- [toggle](#toggle)
+  - [❌toggle [mixin]](#toggle-mixin)
+  - [❌toggle--x [mixin]](#toggle--x-mixin)
+- [toolbar](#toolbar)
+  - [❌toolbar [mixin]](#toolbar-mixin)
+  - [❌toolbar--x [mixin]](#toolbar--x-mixin)
+- [tooltip](#tooltip)
+  - [❌tooltip [mixin]](#tooltip-mixin)
+  - [❌tooltip--x [mixin]](#tooltip--x-mixin)
+- [ui-shell](#ui-shell)
+  - [❌carbon-content [mixin]](#carbon-content-mixin)
   - [✅mini-units [function]](#mini-units-function)
-  - [✅experimental-focus [mixin]](#experimental-focus-mixin)
-  - [✅text-overflow [mixin]](#text-overflow-mixin)
-  - [✅expanded [mixin]](#expanded-mixin)
-  - [❌carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
-  - [✅carbon--theme [variable]](#carbon--theme-variable)
-  - [✅nav-01 [variable]](#nav-01-variable)
+  - [❌carbon-header [mixin]](#carbon-header-mixin)
+  - [❌carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [❌product-switcher [mixin]](#product-switcher-mixin)
+  - [❌experimental-focus [mixin]](#experimental-focus-mixin)
+  - [❌text-overflow [mixin]](#text-overflow-mixin)
+  - [❌expanded [mixin]](#expanded-mixin)
+  - [❌carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+  - [❌shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
+  - [❌shell-header-bg-02 [variable]](#shell-header-bg-02-variable)
+  - [❌shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
+  - [❌shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
+  - [❌shell-header-bg-05 [variable]](#shell-header-bg-05-variable)
+  - [❌shell-header-bg-06 [variable]](#shell-header-bg-06-variable)
+  - [❌shell-header-text-01 [variable]](#shell-header-text-01-variable)
+  - [❌shell-header-text-02 [variable]](#shell-header-text-02-variable)
+  - [❌shell-header-text-03 [variable]](#shell-header-text-03-variable)
+  - [❌shell-header-icon-01 [variable]](#shell-header-icon-01-variable)
+  - [❌shell-header-icon-02 [variable]](#shell-header-icon-02-variable)
+  - [❌shell-header-link [variable]](#shell-header-link-variable)
+  - [❌shell-header-icon-selected [variable]](#shell-header-icon-selected-variable)
+  - [❌shell-side-nav-bg-01 [variable]](#shell-side-nav-bg-01-variable)
+  - [❌shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
+  - [❌shell-side-nav-bg-03 [variable]](#shell-side-nav-bg-03-variable)
+  - [❌shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
+  - [❌shell-side-nav-text-02 [variable]](#shell-side-nav-text-02-variable)
+  - [❌shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
+  - [❌shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+  - [❌shell-brand-01 [variable]](#shell-brand-01-variable)
+  - [❌shell-ui-02 [variable]](#shell-ui-02-variable)
+  - [❌shell-ui-03 [variable]](#shell-ui-03-variable)
+  - [❌unit [variable]](#unit-variable)
+- [general](#general)
+  - [✅spacing--columns--first [variable]](#spacing--columns--first-variable)
+  - [✅spacing--columns--before [variable]](#spacing--columns--before-variable)
+  - [✅spacing--cell--activity [variable]](#spacing--cell--activity-variable)
+  - [✅spacing--cell--status [variable]](#spacing--cell--status-variable)
+  - [✅spacing--cell-actions [variable]](#spacing--cell-actions-variable)
   - [✅input-border [variable]](#input-border-variable)
-  - [✅button-font-weight [variable]](#button-font-weight-variable)
-  - [✅accordion-flex-direction [variable]](#accordion-flex-direction-variable)
-  - [✅card-text-align [variable]](#card-text-align-variable)
-  - [✅checkbox-border-width [variable]](#checkbox-border-width-variable)
-  - [✅snippet-background-color [variable]](#snippet-background-color-variable)
-  - [✅content-switcher-border-radius [variable]](#content-switcher-border-radius-variable)
-  - [✅data-table-heading-transform [variable]](#data-table-heading-transform-variable)
-  - [✅modal-border-top [variable]](#modal-border-top-variable)
-  - [✅progress-indicator-bar-width [variable]](#progress-indicator-bar-width-variable)
-  - [✅radio-border-width [variable]](#radio-border-width-variable)
-  - [✅structured-list-padding [variable]](#structured-list-padding-variable)
-  - [✅skeleton [variable]](#skeleton-variable)
-  - [✅edited [variable]](#edited-variable)
-  - [✅input-border [variable]](#input-border-variable)
+  - [✅input-label-weight [variable]](#input-label-weight-variable)
+  - [✅disabled [variable]](#disabled-variable)
+  - [✅disabled-background-color [variable]](#disabled-background-color-variable)
+  - [✅focus [variable]](#focus-variable)
   - [✅link-visited [variable]](#link-visited-variable)
+  - [✅link-inverse-color [variable]](#link-inverse-color-variable)
   - [✅tooltip-background-color [variable]](#tooltip-background-color-variable)
   - [✅button-font-weight [variable]](#button-font-weight-variable)
+  - [✅button-font-size [variable]](#button-font-size-variable)
+  - [✅button-border-radius [variable]](#button-border-radius-variable)
+  - [✅button-height [variable]](#button-height-variable)
+  - [✅button-padding [variable]](#button-padding-variable)
+  - [✅button-padding-sm [variable]](#button-padding-sm-variable)
+  - [✅button-padding-lg [variable]](#button-padding-lg-variable)
+  - [✅button-border-width [variable]](#button-border-width-variable)
+  - [✅button-outline-width [variable]](#button-outline-width-variable)
+  - [✅button-outline-offset [variable]](#button-outline-offset-variable)
+  - [✅button-outline [variable]](#button-outline-variable)
   - [✅accordion-flex-direction [variable]](#accordion-flex-direction-variable)
-  - [✅card-text-align [variable]](#card-text-align-variable)
+  - [✅accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [✅accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
+  - [✅accordion-title-margin [variable]](#accordion-title-margin-variable)
+  - [✅accordion-content-padding [variable]](#accordion-content-padding-variable)
   - [✅checkbox-border-width [variable]](#checkbox-border-width-variable)
   - [✅snippet-background-color [variable]](#snippet-background-color-variable)
+  - [✅snippet-border-color [variable]](#snippet-border-color-variable)
   - [✅content-switcher-border-radius [variable]](#content-switcher-border-radius-variable)
+  - [✅content-switcher-option-border [variable]](#content-switcher-option-border-variable)
+  - [✅content-switcher-divider [variable]](#content-switcher-divider-variable)
   - [✅data-table-heading-transform [variable]](#data-table-heading-transform-variable)
+  - [✅data-table-heading-border-bottom [variable]](#data-table-heading-border-bottom-variable)
+  - [✅data-table-row-height [variable]](#data-table-row-height-variable)
+  - [✅data-table-zebra-color [variable]](#data-table-zebra-color-variable)
+  - [✅data-table-column-hover [variable]](#data-table-column-hover-variable)
   - [✅date-picker-in-range-background-color [variable]](#date-picker-in-range-background-color-variable)
   - [✅modal-border-top [variable]](#modal-border-top-variable)
+  - [✅modal-footer-background-color [variable]](#modal-footer-background-color-variable)
   - [✅notification-info-background-color [variable]](#notification-info-background-color-variable)
+  - [✅notification-error-background-color [variable]](#notification-error-background-color-variable)
+  - [✅notification-warning-background-color [variable]](#notification-warning-background-color-variable)
+  - [✅notification-success-background-color [variable]](#notification-success-background-color-variable)
   - [✅progress-indicator-bar-width [variable]](#progress-indicator-bar-width-variable)
+  - [✅progress-indicator-stroke-width [variable]](#progress-indicator-stroke-width-variable)
+  - [✅progress-indicator-line-offset [variable]](#progress-indicator-line-offset-variable)
   - [✅copy-active [variable]](#copy-active-variable)
+  - [✅copy-btn-feedback [variable]](#copy-btn-feedback-variable)
   - [✅radio-border-width [variable]](#radio-border-width-variable)
   - [✅structured-list-padding [variable]](#structured-list-padding-variable)
+  - [✅structured-list-text-transform [variable]](#structured-list-text-transform-variable)
   - [✅tab-underline-color [variable]](#tab-underline-color-variable)
+  - [✅tab-underline-color-hover [variable]](#tab-underline-color-hover-variable)
+  - [✅tab-text-disabled [variable]](#tab-text-disabled-variable)
+  - [✅tab-underline-disabled [variable]](#tab-underline-disabled-variable)
   - [✅skeleton [variable]](#skeleton-variable)
   - [✅⚠️hover-field [variable]](#hover-field-variable)
+  - [✅⚠️active-01 [variable]](#active-01-variable)
+  - [✅⚠️nav-01 [variable]](#nav-01-variable)
+  - [✅⚠️nav-02 [variable]](#nav-02-variable)
+  - [✅⚠️nav-03 [variable]](#nav-03-variable)
+  - [✅⚠️nav-04 [variable]](#nav-04-variable)
+  - [✅⚠️nav-05 [variable]](#nav-05-variable)
+  - [✅⚠️nav-06 [variable]](#nav-06-variable)
+  - [✅⚠️nav-07 [variable]](#nav-07-variable)
+  - [✅⚠️nav-08 [variable]](#nav-08-variable)
   - [✅⚠️rem [function]](#rem-function)
   - [✅⚠️em [function]](#em-function)
   - [✅prefix [variable]](#prefix-variable)
@@ -1656,10 +1875,109 @@ $prefix: 'bx';
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [carbon--grid [mixin]](#carbon--grid-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
+  - [combo-box--x [mixin]](#combo-box--x-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
   - [light-ui [mixin]](#light-ui-mixin)
   - [typography [mixin]](#typography-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [inline-loading--x [mixin]](#inline-loading--x-mixin)
+  - [link [mixin]](#link-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+  - [modal--color [mixin]](#modal--color-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
+  - [multiselect--x [mixin]](#multiselect--x-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [inline-notification--color [mixin]](#inline-notification--color-mixin)
+  - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [toolbar--x [mixin]](#toolbar--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
+  - [carbon-content [mixin]](#carbon-content-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [product-switcher [mixin]](#product-switcher-mixin)
   - [expanded [mixin]](#expanded-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ## @carbon/icons
 
@@ -2067,6 +2385,7 @@ Generate a media query for the maximum width of the given styles
   - [breakpoints [variable]](#breakpoints-variable)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
   - [max-breakpoint [mixin]](#max-breakpoint-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -2187,7 +2506,13 @@ Generate a media query for a given breakpoint
   - [carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
   - [breakpoint [mixin]](#breakpoint-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
 
 ### ✅carbon--base-font-size [variable]
 
@@ -2235,6 +2560,7 @@ Convert a given px unit to a rem unit
   - [carbon--base-font-size [variable]](#carbon--base-font-size-variable)
 - **Used by**:
   - [carbon--mini-units [function]](#carbon--mini-units-function)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
 
 ### ✅carbon--em [function]
 
@@ -2439,6 +2765,9 @@ Get the value of the corresponding number of units
 - **Requires**:
   - [carbon--rem [function]](#carbon--rem-function)
   - [carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
+- **Used by**:
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [multiselect--x [mixin]](#multiselect--x-mixin)
 
 ### ✅carbon--spacing-01 [variable]
 
@@ -2457,6 +2786,8 @@ $carbon--spacing-01: carbon--mini-units(0.25);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-01`
+- **Used by**:
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
 
 ### ✅carbon--spacing-02 [variable]
 
@@ -2475,6 +2806,17 @@ $carbon--spacing-02: carbon--mini-units(0.5);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-02`
+- **Used by**:
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅carbon--spacing-03 [variable]
 
@@ -2493,6 +2835,25 @@ $carbon--spacing-03: carbon--mini-units(1);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-03`
+- **Used by**:
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [multiselect--x [mixin]](#multiselect--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [padding-th--x [mixin]](#padding-th--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅carbon--spacing-04 [variable]
 
@@ -2511,6 +2872,14 @@ $carbon--spacing-04: carbon--mini-units(1.5);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-04`
+- **Used by**:
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅carbon--spacing-05 [variable]
 
@@ -2529,6 +2898,33 @@ $carbon--spacing-05: carbon--mini-units(2);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-05`
+- **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [padding-th--x [mixin]](#padding-th--x-mixin)
+  - [padding-td--x [mixin]](#padding-td--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅carbon--spacing-06 [variable]
 
@@ -2547,6 +2943,12 @@ $carbon--spacing-06: carbon--mini-units(3);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-06`
+- **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [padding-td--x [mixin]](#padding-td--x-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -2565,6 +2967,13 @@ $carbon--spacing-07: carbon--mini-units(4);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-07`
+- **Used by**:
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅carbon--spacing-08 [variable]
 
@@ -2583,6 +2992,11 @@ $carbon--spacing-08: carbon--mini-units(5);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-08`
+- **Used by**:
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
 
 ### ✅carbon--spacing-09 [variable]
 
@@ -2601,6 +3015,12 @@ $carbon--spacing-09: carbon--mini-units(6);
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-09`
+- **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
 
 ### ✅carbon--spacing-10 [variable]
 
@@ -2699,6 +3119,8 @@ $spacing-01: $carbon--spacing-01;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-01`
+- **Used by**:
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
 
 ### ✅spacing-02 [variable]
 
@@ -2729,6 +3151,11 @@ $spacing-03: $carbon--spacing-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-03`
+- **Used by**:
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
 
 ### ✅spacing-04 [variable]
 
@@ -2744,6 +3171,9 @@ $spacing-04: $carbon--spacing-04;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-04`
+- **Used by**:
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
 
 ### ✅spacing-05 [variable]
 
@@ -2759,6 +3189,10 @@ $spacing-05: $carbon--spacing-05;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-05`
+- **Used by**:
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
 
 ### ✅spacing-06 [variable]
 
@@ -2774,6 +3208,8 @@ $spacing-06: $carbon--spacing-06;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-06`
+- **Used by**:
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
 
 ### ✅spacing-07 [variable]
 
@@ -3029,6 +3465,10 @@ $layout-01: $carbon--layout-01;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--layout-01`
+- **Used by**:
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
 
 ### ✅layout-02 [variable]
 
@@ -3059,6 +3499,8 @@ $layout-03: $carbon--layout-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--layout-03`
+- **Used by**:
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
 
 ### ✅layout-04 [variable]
 
@@ -3074,6 +3516,10 @@ $layout-04: $carbon--layout-04;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--layout-04`
+- **Used by**:
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
 
 ### ✅layout-05 [variable]
 
@@ -3934,6 +4380,17 @@ $interactive-01: map-get($carbon--theme, interactive-01);
   - `brand-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [inline-loading--x [mixin]](#inline-loading--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅interactive-02 [variable]
 
@@ -3954,6 +4411,10 @@ $interactive-02: map-get($carbon--theme, interactive-02);
   - `brand-02`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
 
 ### ✅interactive-03 [variable]
 
@@ -3974,6 +4435,7 @@ $interactive-03: map-get($carbon--theme, interactive-03);
   - `brand-03`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅interactive-04 [variable]
 
@@ -3992,6 +4454,8 @@ $interactive-04: map-get($carbon--theme, interactive-04);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
 
 ### ✅ui-background [variable]
 
@@ -4029,6 +4493,44 @@ $ui-01: map-get($carbon--theme, ui-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-02 [variable]
 
@@ -4047,8 +4549,17 @@ $ui-02: map-get($carbon--theme, ui-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [css-body [mixin]](#css-body-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
 
 ### ✅ui-03 [variable]
 
@@ -4067,6 +4578,37 @@ $ui-03: map-get($carbon--theme, ui-03);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [combo-box--x [mixin]](#combo-box--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-04 [variable]
 
@@ -4085,6 +4627,24 @@ $ui-04: map-get($carbon--theme, ui-04);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-05 [variable]
 
@@ -4103,6 +4663,51 @@ $ui-05: map-get($carbon--theme, ui-05);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅text-01 [variable]
 
@@ -4121,9 +4726,65 @@ $text-01: map-get($carbon--theme, text-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form [mixin]](#form-mixin)
   - [css-body [mixin]](#css-body-mixin)
   - [css-body--x [mixin]](#css-body--x-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [multiselect--x [mixin]](#multiselect--x-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅text-02 [variable]
 
@@ -4142,6 +4803,33 @@ $text-02: map-get($carbon--theme, text-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [combo-box--x [mixin]](#combo-box--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [inline-loading--x [mixin]](#inline-loading--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅text-03 [variable]
 
@@ -4161,6 +4849,7 @@ $text-03: map-get($carbon--theme, text-03);
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [search--x [mixin]](#search--x-mixin)
 
 ### ✅text-04 [variable]
 
@@ -4179,6 +4868,8 @@ $text-04: map-get($carbon--theme, text-04);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -4197,6 +4888,13 @@ $icon-01: map-get($carbon--theme, icon-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
 
 ### ✅icon-02 [variable]
 
@@ -4215,6 +4913,11 @@ $icon-02: map-get($carbon--theme, icon-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅icon-03 [variable]
 
@@ -4233,6 +4936,8 @@ $icon-03: map-get($carbon--theme, icon-03);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅link-01 [variable]
 
@@ -4251,6 +4956,8 @@ $link-01: map-get($carbon--theme, link-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
 
 ### ✅field-01 [variable]
 
@@ -4269,6 +4976,31 @@ $field-01: map-get($carbon--theme, field-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅field-02 [variable]
 
@@ -4287,6 +5019,31 @@ $field-02: map-get($carbon--theme, field-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅inverse-01 [variable]
 
@@ -4305,6 +5062,22 @@ $inverse-01: map-get($carbon--theme, inverse-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅inverse-02 [variable]
 
@@ -4323,6 +5096,10 @@ $inverse-02: map-get($carbon--theme, inverse-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅support-01 [variable]
 
@@ -4341,7 +5118,35 @@ $support-01: map-get($carbon--theme, support-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
   - [focus-outline [mixin]](#focus-outline-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅support-02 [variable]
 
@@ -4360,6 +5165,13 @@ $support-02: map-get($carbon--theme, support-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅support-03 [variable]
 
@@ -4378,6 +5190,10 @@ $support-03: map-get($carbon--theme, support-03);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
 
 ### ✅support-04 [variable]
 
@@ -4396,6 +5212,10 @@ $support-04: map-get($carbon--theme, support-04);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
 
 ### ✅overlay-01 [variable]
 
@@ -4414,6 +5234,7 @@ $overlay-01: map-get($carbon--theme, overlay-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
 
 ### ✅focus [variable]
 
@@ -4432,7 +5253,16 @@ $focus: map-get($carbon--theme, focus);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
   - [focus-outline [mixin]](#focus-outline-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅hover-primary [variable]
 
@@ -4451,6 +5281,19 @@ $hover-primary: map-get($carbon--theme, hover-primary);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [search [mixin]](#search-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅active-primary [variable]
 
@@ -4469,6 +5312,7 @@ $active-primary: map-get($carbon--theme, active-primary);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅hover-primary-text [variable]
 
@@ -4487,6 +5331,8 @@ $hover-primary-text: map-get($carbon--theme, hover-primary-text);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [link [mixin]](#link-mixin)
 
 ### ✅hover-secondary [variable]
 
@@ -4505,6 +5351,15 @@ $hover-secondary: map-get($carbon--theme, hover-secondary);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅active-secondary [variable]
 
@@ -4523,6 +5378,7 @@ $active-secondary: map-get($carbon--theme, active-secondary);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅hover-tertiary [variable]
 
@@ -4541,6 +5397,7 @@ $hover-tertiary: map-get($carbon--theme, hover-tertiary);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅active-tertiary [variable]
 
@@ -4559,6 +5416,7 @@ $active-tertiary: map-get($carbon--theme, active-tertiary);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅hover-ui [variable]
 
@@ -4579,6 +5437,22 @@ $hover-ui: map-get($carbon--theme, hover-ui);
   - `hover-field`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
 
 ### ✅active-ui [variable]
 
@@ -4599,6 +5473,9 @@ $active-ui: map-get($carbon--theme, active-ui);
   - `active-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅selected-ui [variable]
 
@@ -4617,6 +5494,9 @@ $selected-ui: map-get($carbon--theme, selected-ui);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
 
 ### ✅hover-selected-ui [variable]
 
@@ -4635,6 +5515,8 @@ $hover-selected-ui: map-get($carbon--theme, hover-selected-ui);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -4653,6 +5535,7 @@ $hover-danger: map-get($carbon--theme, hover-danger);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅active-danger [variable]
 
@@ -4671,6 +5554,7 @@ $active-danger: map-get($carbon--theme, active-danger);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅hover-row [variable]
 
@@ -4689,6 +5573,14 @@ $hover-row: map-get($carbon--theme, hover-row);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅visited-link [variable]
 
@@ -4707,6 +5599,7 @@ $visited-link: map-get($carbon--theme, visited-link);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [link--x [mixin]](#link--x-mixin)
 
 ### ✅disabled-01 [variable]
 
@@ -4725,6 +5618,10 @@ $disabled-01: map-get($carbon--theme, disabled-01);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅disabled-02 [variable]
 
@@ -4743,6 +5640,20 @@ $disabled-02: map-get($carbon--theme, disabled-02);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [combo-box--x [mixin]](#combo-box--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅disabled-03 [variable]
 
@@ -4761,6 +5672,7 @@ $disabled-03: map-get($carbon--theme, disabled-03);
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button--x [mixin]](#button--x-mixin)
 
 ### ✅highlight [variable]
 
@@ -4796,8 +5708,44 @@ $brand-01: map-get($carbon--theme, brand-01);
 - **Alias**: `interactive-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
   - [focus-outline [mixin]](#focus-outline-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
   - [typography [mixin]](#typography-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [link [mixin]](#link-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️brand-02 [variable]
@@ -4816,6 +5764,10 @@ $brand-02: map-get($carbon--theme, brand-02);
 - **Alias**: `interactive-02`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️brand-03 [variable]
@@ -4834,6 +5786,7 @@ $brand-03: map-get($carbon--theme, brand-03);
 - **Alias**: `interactive-03`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [loading [mixin]](#loading-mixin)
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️active-01 [variable]
@@ -4852,6 +5805,9 @@ $active-01: map-get($carbon--theme, active-01);
 - **Alias**: `active-ui`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: This may not be available in future releases
 
 ### ✅⚠️hover-field [variable]
@@ -4870,6 +5826,10 @@ $hover-field: map-get($carbon--theme, hover-field);
 - **Alias**: `hover-ui`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: This may not be available in future releases
 
 ## @carbon/type
@@ -4974,6 +5934,8 @@ Get the font-family for an IBM Plex font
   - [carbon--font-families [variable]](#carbon--font-families-variable)
 - **Used by**:
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
 
 ### ✅carbon--font-family [mixin]
 
@@ -5217,6 +6179,7 @@ Get the value of a specific step in the typescale
 - **Used by**:
   - [carbon--type-scale [mixin]](#carbon--type-scale-mixin)
   - [carbon--font-size [mixin]](#carbon--font-size-mixin)
+  - [search--x [mixin]](#search--x-mixin)
 
 ### ✅carbon--type-scale [mixin]
 
@@ -7649,6 +8612,6257 @@ $carbon--font-display: auto;
 - **Links**:
   - [Link](https://css-tricks.com/almanac/properties/f/font-display/)
 
+## accordion
+
+### ❌accordion [mixin]
+
+v9 accordion
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin accordion() {
+  .#{$prefix}--accordion {
+    @include reset;
+    @include font-family;
+    list-style: none;
+    width: 100%;
+  }
+
+  .#{$prefix}--accordion__item {
+    transition: all $transition--base $carbon--standard-easing;
+    border-top: 1px solid $ui-03;
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+
+      .#{$prefix}--accordion__arrow {
+        @include focus-outline('border');
+        overflow: visible; // safari fix
+        outline-offset: -0.5px; // safari fix
+      }
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $ui-03;
+    }
+  }
+
+  .#{$prefix}--accordion__heading {
+    @include button-reset;
+    color: $text-01;
+    display: flex;
+    align-items: center;
+    justify-content: $accordion-justify-content;
+    flex-direction: $accordion-flex-direction;
+    cursor: pointer;
+    padding: $spacing-xs 0;
+
+    // new version of markup uses focus on the heading,
+    // not the list element itself
+    &:focus {
+      outline: none;
+
+      .#{$prefix}--accordion__arrow {
+        @include focus-outline('border');
+        overflow: visible; // safari fix
+        outline-offset: -0.5px; // safari fix
+      }
+    }
+  }
+
+  .#{$prefix}--accordion__arrow {
+    transition: all $transition--base $carbon--standard-easing;
+    height: 1.25rem;
+    width: 1.25rem;
+    padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
+    margin: $accordion-arrow-margin;
+    fill: $ui-05;
+    transform: rotate(0) /*rtl:rotate(180deg)*/;
+  }
+
+  .#{$prefix}--accordion__title {
+    @include typescale('epsilon');
+    @include line-height('body');
+    margin: $accordion-title-margin;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .#{$prefix}--accordion__content {
+    transition: all $transition--expansion $carbon--ease-out;
+    padding: $accordion-content-padding;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+
+    p {
+      @include typescale('zeta');
+    }
+  }
+
+  .#{$prefix}--accordion__item--active {
+    overflow: visible;
+
+    > .#{$prefix}--accordion__content {
+      padding-top: $spacing-md;
+      padding-bottom: $spacing-lg;
+      height: auto;
+      visibility: visible;
+      opacity: 1;
+      transition: all $transition--expansion $carbon--ease-in;
+    }
+
+    > .#{$prefix}--accordion__heading > .#{$prefix}--accordion__arrow {
+      /*rtl:ignore*/
+      transform: rotate(90deg);
+      fill: $brand-01;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    pointer-events: none;
+    fill: $ui-05;
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:focus
+    .#{$prefix}--accordion__arrow {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
+    margin-bottom: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [line-height [mixin]](#line-height-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [accordion-flex-direction [variable]](#accordion-flex-direction-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+  - [accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [accordion-title-margin [variable]](#accordion-title-margin-variable)
+  - [transition--expansion [variable]](#transition--expansion-variable)
+  - [carbon--ease-out [variable]](#carbon--ease-out-variable)
+  - [accordion-content-padding [variable]](#accordion-content-padding-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [carbon--ease-in [variable]](#carbon--ease-in-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+
+### ❌accordion--x [mixin]
+
+v10 accordion
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin accordion--x() {
+  .#{$prefix}--accordion {
+    @include reset;
+
+    list-style: none;
+    width: 100%;
+  }
+
+  .#{$prefix}--accordion__item {
+    transition: all $duration--fast-02 motion(standard, productive);
+    border-top: 1px solid $ui-03;
+    overflow: visible;
+
+    &:last-child {
+      border-bottom: 1px solid $ui-03;
+    }
+  }
+
+  .#{$prefix}--accordion__heading {
+    @include button-reset;
+    color: $text-01;
+    display: flex;
+    align-items: center;
+    justify-content: $accordion-justify-content;
+    cursor: pointer;
+    padding: rem(6px) 0;
+    flex-direction: $accordion-flex-direction;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    transition: background-color motion(standard, productive) $duration--fast-02;
+
+    &:hover:before,
+    &:focus:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: calc(100% + 2px);
+    }
+
+    &:hover:before {
+      background-color: $hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus:before {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--accordion__arrow {
+    @include focus-outline('reset');
+    // Without flex basis and flex shrink being set here, our icon width can go
+    // <16px and cause the icon to render in the incorrect artboard size
+    flex: 0 0 1rem;
+    width: 1rem;
+    height: 1rem;
+    margin: $accordion-arrow-margin;
+    fill: $ui-05;
+    // TODO: RTL rotate(180deg);
+    transform: rotate(90deg);
+    transition: all $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--accordion__title {
+    @include type-style('body-long-01');
+
+    margin: $accordion-title-margin;
+    width: 100%;
+    text-align: left;
+    z-index: 0;
+  }
+
+  .#{$prefix}--accordion__content {
+    // Transition property for when the accordion closes
+    transition: height motion(standard, productive) $duration--fast-02, padding
+        motion(standard, productive) $duration--fast-02;
+    padding-left: $carbon--spacing-05;
+
+    padding-right: 25%;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+
+    @include carbon--breakpoint-down('md') {
+      padding-right: $carbon--spacing-09;
+    }
+
+    p {
+      @include type-style('body-long-01');
+    }
+  }
+
+  .#{$prefix}--accordion__item--active {
+    overflow: visible;
+
+    .#{$prefix}--accordion__content {
+      padding-bottom: $carbon--spacing-06;
+      padding-top: $spacing-xs;
+      height: auto;
+      visibility: visible;
+      opacity: 1;
+      // Transition property for when the accordion opens
+      transition: height motion(entrance, productive) $duration--fast-02, padding-top
+          motion(entrance, productive) $duration--fast-02,
+        padding-bottom motion(entrance, productive) $duration--fast-02;
+    }
+
+    .#{$prefix}--accordion__arrow {
+      /*rtl:ignore*/
+      transform: rotate(-90deg);
+      fill: $ui-05;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    pointer-events: none;
+    fill: $ui-05;
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:focus
+    .#{$prefix}--accordion__arrow {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
+    margin-bottom: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [accordion](#accordion)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
+  - [motion [function]](#motion-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [accordion-flex-direction [variable]](#accordion-flex-direction-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [accordion-title-margin [variable]](#accordion-title-margin-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+
+## breadcrumb
+
+### ❌breadcrumb [mixin]
+
+v9 breadcrumb
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin breadcrumb() {
+  .#{$prefix}--breadcrumb {
+    @include typescale('zeta');
+    @include font-family;
+    display: inline;
+
+    @include breakpoint(bp--xs--major) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item {
+    margin-right: $spacing-md;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--breadcrumb-item::after {
+    content: '/';
+    margin-left: $spacing-md;
+    color: $text-02;
+  }
+
+  .#{$prefix}--breadcrumb--no-trailing-slash
+    .#{$prefix}--breadcrumb-item:last-child::after {
+    content: '';
+  }
+
+  .#{$prefix}--breadcrumb-item:last-child {
+    margin-right: 0;
+
+    &::after {
+      margin-right: 0;
+    }
+  }
+
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
+    white-space: nowrap;
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      color: $hover-primary-text;
+      border-bottom: 1px solid $hover-primary-text;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
+    @include skeleton;
+    width: rem(100px);
+    height: 1rem;
+  }
+}
+```
+
+</details>
+
+- **Group**: [breadcrumb](#breadcrumb)
+- **Requires**:
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [breakpoint [mixin]](#breakpoint-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
+
+### ❌breadcrumb--x [mixin]
+
+v10 breadcrumb
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin breadcrumb--x() {
+  .#{$prefix}--breadcrumb {
+    @include type-style('body-short-01');
+    display: inline;
+    @if feature-flag-enabled('grid') {
+      @include carbon--breakpoint(md) {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    } @else {
+      @include breakpoint(bp--xs--major) {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb-item::after {
+    content: '/';
+    color: $text-01;
+    margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb--no-trailing-slash
+    .#{$prefix}--breadcrumb-item:last-child::after {
+    content: '';
+  }
+
+  .#{$prefix}--breadcrumb-item:last-child,
+  .#{$prefix}--breadcrumb-item:last-child::after {
+    margin-right: 0;
+  }
+
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--breadcrumb-item [aria-current='page'],
+  .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
+    .#{$prefix}--link {
+    color: $text-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
+    @include skeleton;
+    width: rem(100px);
+    height: 1rem;
+  }
+}
+```
+
+</details>
+
+- **Group**: [breadcrumb](#breadcrumb)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [breakpoint [mixin]](#breakpoint-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [feature-flag-enabled [function]](#feature-flag-enabled-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [text-01 [variable]](#text-01-variable)
+
+## button
+
+### ❌button [mixin]
+
+v9 button
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin button() {
+  // <button> elements cannot be used as flex containers
+  button.#{$prefix}--btn {
+    display: inline-block;
+  }
+
+  // Reset intrisic padding in Firefox (see #731)
+  button.#{$prefix}--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  // Vertically center icon inside <button>
+  button.#{$prefix}--btn .#{$prefix}--btn__icon {
+    position: relative;
+    vertical-align: middle;
+    top: -1px;
+
+    // Targets IE10+ browsers: Reset <svg> position for vertical centering
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      top: 0;
+    }
+  }
+
+  .#{$prefix}--btn {
+    @include button-base;
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme(
+      $brand-01,
+      transparent,
+      $inverse-01,
+      $hover-primary,
+      $ui-01
+    );
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme(
+      transparent,
+      $brand-01,
+      $brand-01,
+      $hover-secondary,
+      $brand-01
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+
+    &:active {
+      color: $brand-01;
+    }
+
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme(transparent, $ui-05, $ui-05, $ui-05, $ui-05);
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+
+    &:active {
+      color: $ui-05;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-05;
+    }
+
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme(
+      transparent,
+      transparent,
+      $brand-01,
+      $brand-01,
+      $brand-01
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+
+      .#{$prefix}--btn__icon {
+        fill: $inverse-01;
+      }
+    }
+
+    &:active {
+      color: $ui-05;
+    }
+
+    .#{$prefix}--btn__icon {
+      margin-left: $spacing-xs;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $brand-01;
+
+      .#{$prefix}--btn__icon {
+        fill: $brand-01;
+      }
+    }
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme(
+      transparent,
+      $support-01,
+      $support-01,
+      $support-01,
+      $support-01
+    );
+
+    &:hover {
+      color: $inverse-01;
+      border: $button-border-width solid transparent;
+    }
+
+    &:focus {
+      color: $inverse-01;
+    }
+
+    &:active {
+      color: $support-01;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $support-01;
+      border: $button-border-width solid $support-01;
+    }
+
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--danger--primary {
+    @include button-theme(
+      $support-01,
+      transparent,
+      $inverse-01,
+      darken($support-01, 10%),
+      $ui-01
+    );
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-01;
+      border: $button-border-width solid $support-01;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    @include letter-spacing;
+    height: 2rem;
+    padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
+    margin-left: $spacing-md;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
+  }
+}
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Requires**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [letter-spacing [mixin]](#letter-spacing-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [button-padding-sm [variable]](#button-padding-sm-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+
+### ❌button--x [mixin]
+
+v10 button
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin button--x() {
+  // button set styles
+  .#{$prefix}--btn-set {
+    display: flex;
+  }
+
+  .#{$prefix}--btn-set > .#{$prefix}--btn {
+    max-width: rem(196px); // taken from design kit
+    width: 100%;
+  }
+
+  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
+    + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
+    + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+    border-left: rem(1px) solid $disabled-03;
+  }
+
+  .#{$prefix}--btn {
+    @include button-base--x;
+
+    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
+    &:disabled > .#{$prefix}--btn__icon {
+      fill: $ui-04;
+    }
+  }
+
+  // Reset intrisic padding in Firefox (see #731)
+  .#{$prefix}--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme--x(
+      $interactive-01,
+      transparent,
+      $text-04,
+      $hover-primary,
+      $text-04,
+      $active-primary
+    );
+
+    &:hover {
+      color: $text-04;
+    }
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme--x(
+      $interactive-02,
+      transparent,
+      $text-04,
+      $hover-secondary,
+      $text-04,
+      $active-secondary
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme--x(
+      transparent,
+      $interactive-03,
+      $interactive-03,
+      $hover-tertiary,
+      $interactive-03,
+      $active-tertiary
+    );
+
+    &:hover {
+      color: $inverse-01;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      background: transparent;
+      color: $disabled;
+
+      & > .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &:hover > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme--x(
+      transparent,
+      transparent,
+      $interactive-04,
+      $hover-ui,
+      $interactive-04,
+      $active-ui
+    );
+    padding: rem(14px) rem(16px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
+      margin-left: $carbon--spacing-03;
+    }
+
+    &:hover,
+    &:active {
+      color: $ibm-color__blue-70;
+
+      .#{$prefix}--btn__icon {
+        fill: $ibm-color__blue-70;
+      }
+    }
+
+    &:active {
+      background-color: $active-ui;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      color: $disabled;
+      background: transparent;
+      border-color: transparent;
+
+      .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &.#{$prefix}--btn--sm {
+      padding: 0.375rem 1rem;
+    }
+  }
+
+  .#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-right: rem(15px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
+    }
+
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+      margin: 0;
+    }
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme--x(
+      $support-01,
+      $support-01,
+      $text-04,
+      $hover-danger,
+      $icon-03,
+      $active-danger
+    );
+
+    &:hover {
+      color: $text-04;
+      border: $button-border-width solid transparent;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    min-height: rem(32px);
+    padding: $button-padding-sm;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
+  }
+}
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Requires**:
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [text-04 [variable]](#text-04-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [active-primary [variable]](#active-primary-variable)
+  - [interactive-02 [variable]](#interactive-02-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [active-secondary [variable]](#active-secondary-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [interactive-03 [variable]](#interactive-03-variable)
+  - [hover-tertiary [variable]](#hover-tertiary-variable)
+  - [active-tertiary [variable]](#active-tertiary-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [active-ui [variable]](#active-ui-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [hover-danger [variable]](#hover-danger-variable)
+  - [icon-03 [variable]](#icon-03-variable)
+  - [active-danger [variable]](#active-danger-variable)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [button-padding-sm [variable]](#button-padding-sm-variable)
+
+### ❌button-base [mixin]
+
+v9 button base styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin button-base() {
+  @include reset;
+  @include font-family;
+  @include font-smoothing;
+  @include letter-spacing;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  min-height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
+  white-space: nowrap;
+  line-height: 16px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--btn__icon {
+    width: rem(16px);
+    height: rem(16px);
+    margin-left: 0.5rem;
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
+  }
+}
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [letter-spacing [mixin]](#letter-spacing-mixin)
+  - [rem [function]](#rem-function)
+  - [button-font-size [variable]](#button-font-size-variable)
+  - [button-font-weight [variable]](#button-font-weight-variable)
+  - [button-height [variable]](#button-height-variable)
+  - [button-padding [variable]](#button-padding-variable)
+  - [button-border-radius [variable]](#button-border-radius-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [prefix [variable]](#prefix-variable)
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+
+### ❌button-theme [mixin]
+
+v9 button variant styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin button-theme() {
+  background-color: $bg-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:focus,
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+
+  &:focus {
+    border: $button-border-width solid $ui-02;
+    outline: $button-border-width solid $hover-bg-color;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus {
+    background-color: $bg-color;
+  }
+
+  &:active {
+    background-color: darken($bg-color, 20%);
+  }
+
+  .#{$prefix}--btn__icon {
+    fill: $icon-color;
+  }
+}
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Requires**:
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [prefix [variable]](#prefix-variable)
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+
+### ❌button-base--x [mixin]
+
+v10 button base styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin button-base--x() {
+  @include reset;
+  @include type-style('body-short-01');
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  min-height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  text-align: left;
+  text-decoration: none;
+  transition: $duration--fast-01 motion(entrance, productive);
+  outline: $button-outline-width solid transparent;
+  position: relative;
+  max-width: rem(320px);
+
+  &:disabled,
+  &.#{$prefix}--btn--disabled {
+    cursor: not-allowed;
+    color: $ui-04;
+    background: $ibm-color__gray-30;
+    border-color: $ibm-color__gray-30;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: absolute;
+    right: rem(16px);
+    flex-shrink: 0;
+    width: rem(16px);
+    height: rem(16px);
+    transition: $duration--fast-01 motion(entrance, productive);
+  }
+}
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [button-height [variable]](#button-height-variable)
+  - [button-padding [variable]](#button-padding-variable)
+  - [button-border-radius [variable]](#button-border-radius-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [button-outline-width [variable]](#button-outline-width-variable)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+- **Used by**:
+  - [button--x [mixin]](#button--x-mixin)
+
+### ❌button-theme--x [mixin]
+
+v10 button variant styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin button-theme--x() {
+  background-color: $bg-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    position: absolute;
+    content: '';
+    transition: $duration--fast-01 motion(entrance, productive);
+  }
+
+  &:not(.#{$prefix}--btn--disabled)::before {
+    top: calc(-#{$button-border-width} + #{$button-outline-width});
+    left: -$button-border-width + $button-outline-width;
+    width: calc(
+      100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width})
+    );
+    height: calc(
+      100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width})
+    );
+    border: 1px solid transparent;
+  }
+
+  &:focus::before {
+    border-color: $ui-02;
+  }
+
+  &:not(.#{$prefix}--btn--disabled)::after {
+    top: -#{$button-border-width};
+    left: -#{$button-border-width};
+    height: calc(100% + 2 * #{$button-border-width});
+    width: calc(100% + 2 * #{$button-border-width});
+    border: $button-outline-width solid transparent;
+  }
+
+  &:focus::after {
+    border-color: $focus;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus,
+  &:hover.#{$prefix}--btn--disabled,
+  &:focus.#{$prefix}--btn--disabled {
+    color: $ui-04;
+    background: $ibm-color__gray-30;
+    border-color: $ibm-color__gray-30;
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: $active-color;
+  }
+
+  .#{$prefix}--btn__icon {
+    fill: $icon-color;
+  }
+}
+```
+
+</details>
+
+- **Group**: [button](#button)
+- **Requires**:
+  - [motion [function]](#motion-function)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [prefix [variable]](#prefix-variable)
+  - [button-outline-width [variable]](#button-outline-width-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [focus [variable]](#focus-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+- **Used by**:
+  - [button--x [mixin]](#button--x-mixin)
+
+## checkbox
+
+### ❌checkbox [mixin]
+
+v9 checkbox
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin checkbox() {
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-bottom: $spacing-md;
+
+    &:first-of-type {
+      margin-top: $spacing-xs;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$prefix}--checkbox {
+    @include hidden;
+  }
+
+  .#{$prefix}--checkbox-label {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include typescale('zeta');
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: $spacing-lg;
+    min-height: rem(16px);
+  }
+
+  .#{$prefix}--checkbox-label::before {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(50% - 9px);
+    height: rem(18px);
+    width: rem(18px);
+    border: $checkbox-border-width solid $ui-05;
+    background-color: $ui-01;
+  }
+
+  // Checkmark
+  .#{$prefix}--checkbox-label::after {
+    box-sizing: border-box;
+    content: '';
+    width: 9px;
+    height: 5px;
+    background: none;
+    /*rtl:ignore*/
+    border-left: 1px solid $inverse-01;
+    border-bottom: 1px solid $inverse-01;
+    /*rtl:ignore*/
+    transform: scale(0) rotate(-45deg);
+    position: absolute;
+    left: rem(5px);
+    top: 50%;
+    margin-top: rem(-3px);
+  }
+
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+    background-color: $brand-01;
+    border-color: $brand-01;
+  }
+
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    opacity: 1;
+    /*rtl:ignore*/
+    transform: scale(1) rotate(-45deg);
+  }
+
+  .#{$prefix}--checkbox:not(:checked) + .#{$prefix}--checkbox-label::after {
+    opacity: 0;
+    /*rtl:ignore*/
+    transform: scale(0) rotate(-45deg);
+  }
+
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label__focus::before {
+    @include focus-outline('blurred');
+  }
+
+  // Indeterminate dash
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
+    transform: scale(1) rotate(0deg);
+    /*rtl:ignore*/
+    border-left: 0 solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
+    opacity: 1;
+    width: rem(10px);
+    margin-top: rem(-4px);
+    left: rem(4px);
+  }
+
+  //Disabled
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox:disabled ~ .#{$prefix}--checkbox-label-text,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--checkbox-appearance {
+    position: absolute;
+    left: 0;
+    top: calc(50% - 9px);
+    display: inline-block;
+    height: rem(18px);
+    width: rem(18px);
+    margin-right: $spacing-xs;
+    background-color: $ui-01;
+    border: $checkbox-border-width solid $ui-05;
+    min-width: rem(18px);
+  }
+
+  // Backwards compatibilty for old checkbox html using .#{$prefix}--checkbox-appearance
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance {
+    top: rem(-1px);
+  }
+
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance {
+    display: flex;
+    align-items: baseline;
+    background-color: $brand-01;
+    border-color: $brand-01;
+  }
+
+  .#{$prefix}--checkbox:focus
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-appearance {
+    @include focus-outline('blurred');
+  }
+
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-appearance {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--checkbox-checkmark {
+    display: none;
+    fill: $inverse-01;
+    width: 100%;
+    height: 100%;
+  }
+
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-appearance
+    .#{$prefix}--checkbox-checkmark,
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance
+    .#{$prefix}--checkbox-checkmark {
+    display: block;
+
+    @-moz-document url-prefix() {
+      & {
+        stroke: $brand-01;
+      }
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--checkbox-label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: rem(18px);
+
+    &:after,
+    &:before {
+      border: none;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [checkbox](#checkbox)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [checkbox-border-width [variable]](#checkbox-border-width-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+
+### ❌checkbox--x [mixin]
+
+v10 checkbox
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin checkbox--x() {
+  // Spacing between checkboxes
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-bottom: rem(8px);
+  }
+
+  // Spacing above collection of checkboxes
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:first-of-type {
+    margin-top: rem(3px);
+  }
+
+  // Remove spacing above collection of checkboxes if label is present
+  .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-top: 0;
+  }
+
+  // Spacing below collection of checkboxes
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin-bottom: rem(3px);
+  }
+
+  // Visually, we'll hide the checkbox input and create our own styled version
+  // to match the specs.
+  .#{$prefix}--checkbox {
+    @include hidden;
+  }
+
+  // The label corresponds to the content inside of the `label` tag. Since we're
+  // creating our own checkbox style, we'll need to position this in order to
+  // accomodate the spacing needed for the checkbox.
+  .#{$prefix}--checkbox-label {
+    @include reset;
+    @include type-style('body-short-01');
+
+    line-height: 1.5rem;
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
+    min-height: rem(24px);
+    user-select: none;
+  }
+
+  // Spacing for presentational checkbox
+  .#{$prefix}--checkbox-label::before {
+    box-sizing: border-box;
+    content: '';
+
+    // According to the spec, we'll want the bounding box for our checkbox to
+    // be 16px. The border size will be what will be updated during the
+    // different checkbox states.
+    width: rem(16px);
+    height: rem(16px);
+    margin: rem(2px);
+
+    // We need to position the pseudo-element absolutely in the space that we've
+    // created with the padding from the label itself. We position only with
+    // `top` since we don't want the checkbox to be centered vertically with the
+    // text overflows.
+    position: absolute;
+    left: 0;
+    top: rem(2px);
+
+    // Checkboxes with a background color look visually off against a parent container.
+    background-color: transparent;
+    border: 1px solid $ui-05;
+    border-radius: 1px;
+  }
+
+  // Create the appearance of the check in the `after` pseudo-element
+  .#{$prefix}--checkbox-label::after {
+    content: '';
+    position: absolute;
+    left: rem(6px);
+    top: rem(8px);
+    width: rem(7px);
+    height: rem(3px);
+    background: none;
+    border-left: 2px solid $ui-02;
+    border-bottom: 2px solid $ui-02;
+    transform: scale(0) rotate(-45deg);
+    transform-origin: bottom right;
+    margin-top: rem(-3px);
+  }
+
+  //----------------------------------------------
+  // Checked
+  // ---------------------------------------------
+
+  // Update properties for checked checkbox
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+    background-color: $text-01;
+    border-color: $text-01;
+    border-width: 1px;
+  }
+
+  // Display the check
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    transform: scale(1) rotate(-45deg);
+  }
+
+  // Indeterminate symbol
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
+    transform: scale(1) rotate(0deg);
+    border-left: 0 solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
+    width: rem(8px);
+    top: rem(11px);
+  }
+
+  //----------------------------------------------
+  // Focus
+  // ---------------------------------------------
+
+  // Unchecked
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label__focus::before,
+  // Checked
+  .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before,
+  // Indeterminate
+  .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
+    // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
+    border-color: $interactive-01;
+    border-width: 3px;
+    width: rem(20px);
+    height: rem(20px);
+    left: -2px;
+    top: 0;
+  }
+
+  //----------------------------------------------
+  // Disabled
+  // ---------------------------------------------
+
+  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
+  [disabled] ~ _ {
+    font-size: inherit;
+  }
+
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
+    cursor: not-allowed;
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true']::before {
+    border-color: $disabled-02;
+  }
+
+  .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate:disabled
+    + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
+    background-color: $disabled-02;
+  }
+}
+```
+
+</details>
+
+- **Group**: [checkbox](#checkbox)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
+## code-snippet
+
+### ❌snippet [mixin]
+
+v9 code-snippet
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin snippet() {
+  .#{$prefix}--snippet code {
+    font-family: $font-family-mono;
+  }
+
+  // Inline Code Snippet
+  .#{$prefix}--snippet--inline {
+    @include reset;
+    position: relative;
+    display: inline;
+    padding: 0;
+    background: transparent;
+    font-size: inherit;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: $field-01;
+    color: $text-01;
+    font-size: 85%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($field-01, 10%);
+    }
+
+    &:focus {
+      @include focus-outline;
+      outline: none;
+      border: 1px solid $brand-01;
+    }
+  }
+
+  .#{$prefix}--snippet--inline code {
+    padding: rem(1px) $spacing-xs;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: rgba($brand-02, 0.1);
+    }
+  }
+
+  // Single Line Snippet
+  .#{$prefix}--snippet--single {
+    @include bx--snippet;
+    height: rem(56px);
+    padding: 0 $spacing-2xl 0 $spacing-md;
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    height: 130%;
+    overflow-x: scroll;
+    position: relative;
+    padding-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--snippet--single pre {
+    white-space: nowrap;
+  }
+
+  // Multi Line Snippet
+  .#{$prefix}--snippet--multi {
+    @include bx--snippet;
+    padding: $spacing-md $spacing-3xl $spacing-xl $spacing-lg;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    overflow: hidden;
+    position: relative;
+    max-height: rem(238px);
+    min-height: rem(56px);
+    transition: all $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
+    white-space: pre-wrap;
+  }
+
+  .#{$prefix}--snippet__icon {
+    fill: $brand-01;
+    height: rem(24px);
+    width: rem(18px);
+    transition: all $transition--base $carbon--standard-easing;
+
+    &:hover {
+      fill: $hover-primary;
+    }
+  }
+
+  .#{$prefix}--snippet-button {
+    @include reset;
+    cursor: pointer;
+    position: absolute;
+    top: 0.675rem;
+    right: 0.5rem;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0;
+    height: rem(32px);
+    width: rem(32px);
+    overflow: visible;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--snippet .#{$prefix}--btn--copy__feedback {
+    @include font-family;
+    z-index: z('overlay');
+    font-weight: 400;
+    left: inherit;
+    top: 0.75rem;
+    right: 1.25rem;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+
+  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
+    top: rem(25px);
+    left: 1rem;
+    right: auto;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+    left: 50%;
+  }
+
+  // Show more / less button
+  .#{$prefix}--snippet-btn--expand {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .#{$prefix}--snippet-btn--expand--hide .#{$prefix}--snippet-btn--expand {
+    display: none;
+  }
+
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    fill: $brand-01;
+    margin-left: $spacing-2xs;
+    transform: rotate(0deg);
+    transition: $transition--base;
+  }
+
+  .#{$prefix}--snippet-btn--expand:hover .#{$prefix}--icon-chevron--down,
+  .#{$prefix}--snippet-btn--expand:focus .#{$prefix}--icon-chevron--down {
+    fill: $inverse-01;
+  }
+
+  .#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    transform: rotate(180deg);
+  }
+
+  // Skeleton
+
+  #{$prefix}--snippet--multi.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton span {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:nth-child(2) {
+      width: 85%;
+    }
+
+    &:nth-child(3) {
+      width: 95%;
+    }
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton
+    .#{$prefix}--snippet-container {
+    padding-bottom: 0;
+  }
+
+  /*
+    Deprecated class names will be removed in v10.x
+  */
+
+  .#{$prefix}--snippet--terminal {
+    @include bx--snippet;
+    height: rem(56px);
+    padding: 0 $spacing-2xl 0 $spacing-md;
+  }
+
+  .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    height: 130%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    position: relative;
+    padding-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--snippet--code {
+    @include bx--snippet;
+    padding: $spacing-md $spacing-3xl $spacing-md $spacing-lg;
+  }
+
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
+    overflow: hidden;
+    position: relative;
+    max-height: rem(254px);
+    min-height: rem(56px);
+    transition: all $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--code
+    .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
+  }
+
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container pre {
+    white-space: pre-wrap;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+}
+```
+
+</details>
+
+- **Group**: [code-snippet](#code-snippet)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [font-family-mono [variable]](#font-family-mono-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [brand-02 [variable]](#brand-02-variable)
+  - [spacing-2xl [variable]](#spacing-2xl-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-3xl [variable]](#spacing-3xl-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+
+### ❌snippet--x [mixin]
+
+v10 code-snippet
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin snippet--x() {
+  .#{$prefix}--snippet code {
+    @include type-style('code-01');
+  }
+
+  // Inline Code Snippet
+  .#{$prefix}--snippet--inline {
+    @include reset;
+    // Note: originally this inline snippet inherited font-size, we might need
+    // a more flexible strategy than explicitly setting font-size with this
+    // type style
+    @include type-style('code-01');
+
+    position: relative;
+    display: inline;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: $ui-01;
+    color: $text-01;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $ui-03;
+    }
+
+    &:active {
+      background-color: $copy-active;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid $interactive-01;
+    }
+  }
+
+  .#{$prefix}--snippet--inline code {
+    padding: 0 $spacing-xs;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: rgba($interactive-02, 0.1);
+    }
+  }
+
+  // Single Line Snippet
+  .#{$prefix}--snippet--single {
+    @include bx--snippet--x;
+    border: none;
+    max-width: rem(760px);
+    min-width: rem(320px);
+    height: $carbon--spacing-08;
+    padding: 0 56px 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    position: relative;
+    padding: 0 0 $carbon--spacing-05 0;
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet--single pre {
+    white-space: nowrap;
+    @include type-style('code-01');
+    padding-right: $spacing-xs;
+  }
+
+  .#{$prefix}--snippet--single::after {
+    width: rem(16px);
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: rem(56px);
+    background-image: linear-gradient(
+      to right,
+      rgba(243, 243, 243, 0),
+      rgba(243, 243, 243, 1)
+    );
+  }
+
+  // Multi Line Snippet
+  .#{$prefix}--snippet--multi {
+    @include bx--snippet--x;
+    border: none;
+    padding: $carbon--spacing-05;
+    min-width: rem(320px);
+    max-width: 100%;
+  }
+
+  //closed snippet container
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    overflow: hidden;
+    position: relative;
+    max-height: rem(238px);
+    min-height: rem(56px);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+  }
+
+  // expanded snippet container
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+  }
+
+  // closed pre
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
+    overflow: hidden;
+    padding-bottom: rem(24px);
+  }
+
+  // expanded pre
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container
+    pre {
+    overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+    width: rem(16px);
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(
+      to right,
+      rgba(243, 243, 243, 0),
+      rgba(243, 243, 243, 1)
+    );
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
+    overflow: hidden;
+  }
+
+  //Copy Button
+  .#{$prefix}--snippet__icon {
+    fill: $icon-01;
+    height: rem(16px);
+    width: rem(16px);
+    transition: all $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--snippet-button {
+    @include reset;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: $ui-01;
+    outline: none;
+    padding: 0;
+    height: $carbon--spacing-08;
+    width: $carbon--spacing-08;
+    overflow: visible;
+
+    &:focus {
+      @include focus-outline('outline');
+      outline-color: $focus;
+    }
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
+    height: $carbon--spacing-07;
+    width: $carbon--spacing-07;
+    top: $spacing-xs;
+    right: $spacing-xs;
+  }
+
+  .#{$prefix}--snippet-button:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--snippet-button:active {
+    background-color: $copy-active;
+  }
+
+  .#{$prefix}--btn--copy__feedback {
+    @include type-style('body-short-01');
+    z-index: z('overlay');
+    font-weight: 400;
+    left: inherit;
+    top: 0.75rem;
+    right: 1.25rem;
+  }
+
+  .#{$prefix}--btn--copy__feedback:before,
+  .#{$prefix}--btn--copy__feedback:after {
+    background: $copy-btn-feedback;
+  }
+
+  .#{$prefix}--btn--copy__feedback:after {
+    border: none;
+  }
+
+  // Show more / less button
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    right: $spacing-xs;
+    bottom: $spacing-xs;
+    padding: $spacing-xs;
+    padding-left: $carbon--spacing-05;
+    color: $text-01;
+    background-color: $field-01;
+  }
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
+    .#{$prefix}--snippet-btn--text {
+    position: relative;
+    top: rem(-1px);
+  }
+
+  .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
+    display: none;
+  }
+
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    fill: $text-01;
+    margin-left: $spacing-xs;
+    margin-bottom: rem(1px);
+    transform: rotate(0deg);
+    transition: $duration--moderate-01 motion(standard, productive);
+  }
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+    background: $hover-ui;
+    color: $text-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand:active {
+    background-color: $copy-active;
+  }
+
+  .#{$prefix}--snippet-btn--expand:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    transform: rotate(180deg);
+    transition: transform $transition--expansion;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+
+  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
+    top: rem(25px);
+    left: 1rem;
+    right: auto;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+    left: 50%;
+  }
+
+  #{$prefix}--snippet--multi.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton span {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:nth-child(2) {
+      width: 85%;
+    }
+
+    &:nth-child(3) {
+      width: 95%;
+    }
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton
+    .#{$prefix}--snippet-container {
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+}
+```
+
+</details>
+
+- **Group**: [code-snippet](#code-snippet)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [bx--snippet--x [mixin]](#bx--snippet--x-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [copy-active [variable]](#copy-active-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [interactive-02 [variable]](#interactive-02-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [duration--moderate-01 [variable]](#duration--moderate-01-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [focus [variable]](#focus-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [copy-btn-feedback [variable]](#copy-btn-feedback-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [transition--expansion [variable]](#transition--expansion-variable)
+
+### ❌bx--snippet [mixin]
+
+v9 code-snippet base styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin bx--snippet() {
+  @include typescale('omega');
+  line-height: 1.45;
+  background: $snippet-background-color;
+  border: 1px solid $snippet-border-color;
+  font-family: $font-family-mono;
+  position: relative;
+  max-width: rem(600px);
+  width: 100%;
+}
+```
+
+</details>
+
+- **Group**: [code-snippet](#code-snippet)
+- **Requires**:
+  - [typescale [mixin]](#typescale-mixin)
+  - [rem [function]](#rem-function)
+  - [snippet-background-color [variable]](#snippet-background-color-variable)
+  - [snippet-border-color [variable]](#snippet-border-color-variable)
+  - [font-family-mono [variable]](#font-family-mono-variable)
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
+
+### ❌bx--snippet--x [mixin]
+
+v10 code-snippet base styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin bx--snippet--x() {
+  @include type-style('code-01');
+  background: $snippet-background-color;
+  border: 1px solid $snippet-border-color;
+  position: relative;
+  max-width: rem(600px);
+  width: 100%;
+}
+```
+
+</details>
+
+- **Group**: [code-snippet](#code-snippet)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [snippet-background-color [variable]](#snippet-background-color-variable)
+  - [snippet-border-color [variable]](#snippet-border-color-variable)
+- **Used by**:
+  - [snippet--x [mixin]](#snippet--x-mixin)
+
+## combo-box
+
+### ❌combo-box [mixin]
+
+v9 combo-box
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin combo-box() {
+  .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [combo-box](#combo-box)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+
+### ❌combo-box--x [mixin]
+
+v10 combo-box
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin combo-box--x() {
+  .#{$prefix}--combo-box .#{$prefix}--text-input {
+    &::placeholder {
+      color: $text-02;
+      opacity: 1;
+    }
+
+    &[disabled]::placeholder {
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
+    .#{$prefix}--text-input {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--combo-box .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [combo-box](#combo-box)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+
+## content-switcher
+
+### ❌content-switcher [mixin]
+
+v9 content-switcher
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin content-switcher() {
+  .#{$prefix}--content-switcher {
+    @include font-family;
+    display: flex;
+    height: rem(40px);
+  }
+
+  .#{$prefix}--content-switcher-btn {
+    @include reset;
+    @include font-smoothing;
+    @include typescale('zeta');
+    @include font-family;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 $spacing-xl;
+    margin: 0;
+    text-decoration: none;
+    border: 1px solid $brand-01;
+    color: $brand-01;
+
+    &:focus {
+      outline: 1px solid transparent;
+      background-color: $hover-primary;
+      z-index: 2;
+      border-color: $hover-primary;
+      text-decoration: underline;
+      color: $inverse-01;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $hover-primary;
+      border-color: $hover-primary;
+      color: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--content-switcher__icon {
+    margin-right: $spacing-xs;
+    fill: currentColor;
+    // need to color any child path or g
+    * {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:last-of-type) {
+    border-right: none;
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type) {
+    border-left: $content-switcher-option-border;
+
+    &:hover {
+      border-left-color: $hover-primary;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn:first-of-type {
+    border-bottom-left-radius: $content-switcher-border-radius;
+    border-top-left-radius: $content-switcher-border-radius;
+
+    &:hover {
+      border-color: $hover-primary;
+    }
+
+    &:focus {
+      z-index: 0;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn:last-of-type {
+    border-top-right-radius: $content-switcher-border-radius;
+    border-bottom-right-radius: $content-switcher-border-radius;
+
+    &:hover {
+      border-color: $hover-primary;
+    }
+
+    &:focus {
+      z-index: 0;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    background-color: $brand-01;
+    color: $inverse-01;
+    font-weight: 400;
+    outline: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+      border-color: $hover-primary;
+      background-color: $hover-primary;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [content-switcher](#content-switcher)
+- **Requires**:
+  - [font-family [mixin]](#font-family-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [content-switcher-option-border [variable]](#content-switcher-option-border-variable)
+  - [content-switcher-border-radius [variable]](#content-switcher-border-radius-variable)
+
+### ❌content-switcher--x [mixin]
+
+v10 content-switcher
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin content-switcher--x() {
+  .#{$prefix}--content-switcher {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--content-switcher-btn {
+    @include reset;
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+
+    background-color: $ui-01;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: rem(40px);
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    border: none;
+    color: $text-02;
+    transition: all $duration--fast-01 motion(standard, productive);
+    position: relative;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px $focus;
+      z-index: 3;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $hover-ui;
+      color: $text-01;
+      z-index: 3;
+    }
+
+    &:disabled {
+      color: $ui-03;
+      pointer-events: none;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn:first-child {
+    border-top-left-radius: rem(4px);
+    border-bottom-left-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher-btn:last-child {
+    border-top-right-radius: rem(4px);
+    border-bottom-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
+    content: '';
+    display: block;
+    height: rem(16px);
+    width: rem(1px);
+    background-color: $content-switcher-divider;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher__icon {
+    fill: $text-02;
+    transition: fill $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--content-switcher__icon + span {
+    margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--content-switcher__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
+  .#{$prefix}--content-switcher-btn:focus .#{$prefix}--content-switcher__icon {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    background-color: $ui-05;
+    color: $inverse-01;
+    z-index: 3;
+
+    // TODO: replace with new disabled color token when finalized
+    &:disabled {
+      background-color: $ibm-color__gray-30;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    .#{$prefix}--content-switcher__icon {
+    fill: $inverse-01;
+  }
+}
+```
+
+</details>
+
+- **Group**: [content-switcher](#content-switcher)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [focus [variable]](#focus-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [content-switcher-divider [variable]](#content-switcher-divider-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+
+## data-table
+
+### ❌assistive-text [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin assistive-text() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  visibility: visible;
+  white-space: nowrap;
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+
+### ❌data-table-v2-action [mixin]
+
+v9 data table action
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-v2-action() {
+  .#{$prefix}--table-toolbar {
+    display: flex;
+    padding-top: $spacing-xs;
+    padding-bottom: $spacing-xs;
+    width: 100%;
+    position: relative;
+
+    .#{$prefix}--search-input {
+      position: relative;
+
+      &:focus {
+        box-shadow: inset 0px 0px 0px 1px $brand-01;
+        outline: 0;
+      }
+    }
+  }
+
+  .#{$prefix}--toolbar-content {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .#{$prefix}--toolbar-action {
+    @include button-reset;
+    cursor: pointer;
+    padding-left: $spacing-sm;
+    padding-right: $spacing-sm;
+
+    &:hover {
+      > .#{$prefix}--toolbar-action__icon {
+        fill: $hover-secondary;
+      }
+    }
+
+    &:focus {
+      @include focus-outline;
+      > .#{$prefix}--toolbar-action__icon {
+        fill: $hover-secondary;
+      }
+    }
+
+    &:active {
+      > .#{$prefix}--toolbar-action__icon {
+        fill: $hover-secondary;
+      }
+    }
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+
+    ~ .#{$prefix}--btn {
+      margin-left: $spacing-sm;
+      margin-right: $spacing-sm;
+    }
+  }
+
+  .#{$prefix}--toolbar-action__icon {
+    height: rem(16px);
+    width: auto;
+    max-width: 16px;
+    fill: $ui-05;
+    transition: $transition--base;
+  }
+
+  .#{$prefix}--batch-actions {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+    width: 100%;
+    height: 100%;
+    z-index: z('header');
+    background-color: transparent;
+    transition: opacity 200ms $carbon--standard-easing, background-color 200ms
+        $carbon--standard-easing;
+    pointer-events: none;
+    visibility: hidden;
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    .#{$prefix}--btn {
+      color: $ui-01;
+    }
+
+    .#{$prefix}--btn__icon {
+      fill: $ui-01;
+    }
+
+    .#{$prefix}--btn--ghost {
+      &:hover,
+      &:focus {
+        background-color: $ui-01;
+        color: $brand-01;
+
+        .#{$prefix}--btn__icon {
+          fill: $brand-01;
+        }
+      }
+
+      &:focus {
+        border: 2px solid $brand-01;
+        outline: 2px solid $ui-02;
+      }
+    }
+  }
+
+  .#{$prefix}--batch-actions--active {
+    visibility: visible;
+    background-color: $brand-01;
+    pointer-events: all;
+    transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1), background-color
+        200ms cubic-bezier(0.5, 0, 0.1, 1);
+    opacity: 1;
+  }
+
+  .#{$prefix}--action-list {
+    margin-left: -0.5rem;
+  }
+
+  .#{$prefix}--action-icons {
+    margin-left: auto;
+    svg {
+      padding: 0 $spacing-sm;
+      fill: $ui-01;
+      height: rem(16px);
+      width: auto;
+    }
+  }
+
+  .#{$prefix}--batch-summary {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: $ui-01;
+  }
+
+  .#{$prefix}--batch-summary__para {
+    @include typescale('zeta');
+    margin-right: $spacing-lg;
+  }
+
+  .#{$prefix}--batch-summary__cancel {
+    @include button-reset(auto);
+    @include typescale('zeta');
+    color: $ui-01;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border $transition--base $carbon--standard-easing;
+
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid $ui-01;
+    }
+  }
+
+  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container,
+  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
+    opacity: 1;
+    transition: opacity $transition--base;
+  }
+
+  .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
+  .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
+    opacity: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-sm [variable]](#spacing-sm-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+
+### ❌data-table-v2-action--x [mixin]
+
+v10 data table action
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-v2-action--x() {
+  //-------------------------------------------------
+  //TOOLBAR
+  //-------------------------------------------------
+  .#{$prefix}--table-toolbar {
+    display: flex;
+    width: 100%;
+    background: $ui-01;
+    height: $layout-04;
+    position: relative; //need for batch actions
+  }
+
+  .#{$prefix}--toolbar-content {
+    display: flex;
+    height: $layout-04;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  //-------------------------------------------------
+  //HIDDEN SEARCH - DEFAULT TOOLBAR
+  //-------------------------------------------------
+  .#{$prefix}--toolbar-search-container-expandable {
+    height: $layout-04;
+    width: $layout-04;
+    position: relative;
+    transition: flex $transition--expansion $carbon--standard-easing;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
+    width: $layout-04;
+    height: 100%;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier {
+    height: $layout-04;
+    width: $layout-04;
+    padding: $spacing-md;
+    left: 0;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:hover {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-input {
+    border: none;
+    height: 100%;
+    visibility: hidden;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close {
+    height: $layout-04;
+    width: $layout-04;
+  }
+
+  //-------------------------------------------------
+  //ACTIVE SEARCH - DEFAULT TOOLBAR
+  //-------------------------------------------------
+  .#{$prefix}--toolbar-search-container-active {
+    flex: auto;
+    transition: flex $transition--expansion $carbon--standard-easing;
+  }
+
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search {
+    width: 100%;
+  }
+
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input {
+    padding-left: $spacing-3xl;
+    visibility: visible;
+  }
+
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input:focus
+    + .#{$prefix}--search-close {
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input:not(:placeholder-shown) {
+    background: $hover-field;
+    border: none;
+  }
+
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:focus,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:active,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:hover {
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+
+  //-------------------------------------------------
+  //SEARCH CLOSE BUTTON
+  //-------------------------------------------------
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close,
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search-close:hover,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-close,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-close:hover {
+    border: none; //to-do: is there a spec for close button on hover?
+    background-color: transparent;
+  }
+
+  //-------------------------------------------------
+  //TOOLBAR BUTTONS
+  //-------------------------------------------------
+  .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
+    @include button-reset;
+    display: flex;
+    cursor: pointer;
+    height: $layout-04;
+    width: $layout-04;
+    padding: $spacing-md;
+  }
+
+  .#{$prefix}--toolbar-action:hover:not([disabled]) {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
+    background: $ui-01;
+  }
+
+  .#{$prefix}--toolbar-action[disabled] {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toolbar-action[disabled] .#{$prefix}--toolbar-action__icon {
+    fill: $disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toolbar-action:focus:not([disabled]),
+  .#{$prefix}--toolbar-action:active:not([disabled]) {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
+    margin: 0;
+    height: $layout-04;
+  }
+
+  .#{$prefix}--overflow-menu--data-table {
+    height: $layout-04;
+  }
+
+  //-------------------------------------------------
+  //TOOLBAR BUTTON ICONS
+  //-------------------------------------------------
+  .#{$prefix}--toolbar-action__icon {
+    height: $layout-01;
+    width: auto;
+    max-width: $layout-01;
+    fill: $ui-05;
+    transition: $transition--base;
+  }
+
+  //-------------------------------------------------
+  //PERSISTENT SEARCH - OPTIONAL TOOLBAR
+  //-------------------------------------------------
+  .#{$prefix}--toolbar-search-container-persistent {
+    width: 100%;
+    height: $layout-04;
+    opacity: 1;
+    position: relative;
+    transition: opacity $transition--base;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    + .#{$prefix}--toolbar-content {
+    position: relative;
+    width: auto;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search {
+    position: initial;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier {
+    left: $spacing-md;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input {
+    height: $layout-04;
+    padding-left: $spacing-3xl;
+    border: none;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:focus:not([disabled]) {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:hover:not([disabled]) {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:active:not([disabled]),
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:not(:placeholder-shown) {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-close {
+    height: $layout-04;
+    width: $layout-04;
+  }
+
+  .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
+  .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
+    opacity: 0;
+  }
+
+  //-------------------------------------------------
+  //BATCH ACTIONS
+  //-------------------------------------------------
+  .#{$prefix}--batch-actions {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    opacity: 0;
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+    width: 100%;
+    height: 100%;
+    z-index: z('header');
+    background-color: transparent;
+    transition: opacity $transition--base $carbon--standard-easing, background-color
+        $transition--base $carbon--standard-easing;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--batch-actions:focus {
+    @include focus-outline;
+  }
+
+  .#{$prefix}--batch-actions--active {
+    visibility: visible;
+    background-color: $brand-01;
+    pointer-events: all;
+    transition: opacity $transition--base $carbon--standard-easing, background-color
+        $transition--base $carbon--standard-easing;
+    opacity: 1;
+  }
+
+  //btns container
+  .#{$prefix}--action-list {
+    position: absolute;
+    right: 0;
+    display: flex;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn {
+    color: $ui-01;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
+    fill: $ui-01;
+    margin-left: $spacing-03;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
+    fill: none;
+  }
+
+  .#{$prefix}--batch-download {
+    padding: rem(1px); //makes it smaller to match other icons
+  }
+
+  //override btn styles
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::before,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::before,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary::before,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary::before,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::after,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus::after,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary::after,
+  .#{$prefix}--action-list .#{$prefix}--btn--primary::after {
+    display: none;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
+    outline: 2px solid $ui-01;
+    outline-offset: rem(-2px);
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn {
+    min-width: 0;
+  }
+
+  // cancel btn pseudo element
+  .#{$prefix}--action-list
+    .#{$prefix}--btn--primary:nth-child(3):hover
+    + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before,
+  .#{$prefix}--action-list
+    .#{$prefix}--btn--primary:nth-child(3):focus
+    + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+    opacity: 0;
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+    display: block;
+    position: absolute;
+    opacity: 1;
+    top: rem(15px); //visually 16px spacing is 1px too low
+    left: 0;
+    height: $layout-01;
+    width: rem(1px);
+    content: '';
+    background-color: $ui-01;
+    border: none;
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
+    opacity: 0;
+    transition: opacity $transition--base $carbon--standard-easing;
+  }
+
+  // cancel btn
+  .#{$prefix}--batch-summary__cancel {
+    padding-right: $spacing-05;
+    position: relative;
+  }
+
+  // items selected text
+  .#{$prefix}--batch-summary {
+    position: absolute;
+    left: 0;
+    margin-left: $spacing-05;
+    display: flex;
+    align-items: center;
+    color: $ui-01;
+  }
+
+  .#{$prefix}--batch-summary__para {
+    @include type-style('body-short-01');
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [z [function]](#z-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [layout-04 [variable]](#layout-04-variable)
+  - [transition--expansion [variable]](#transition--expansion-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [hover-field [variable]](#hover-field-variable)
+  - [spacing-3xl [variable]](#spacing-3xl-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [layout-01 [variable]](#layout-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+
+### ❌data-table-v2-core [mixin]
+
+v9 data table core
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-v2-core() {
+  .#{$prefix}--data-table-v2-container {
+    width: 100%;
+    min-width: rem(500px);
+    overflow-x: auto;
+    padding-top: $spacing-3xs; // allow space for focus styles
+  }
+
+  .#{$prefix}--data-table-v2 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border-bottom: 1px solid $ui-03;
+
+    @if feature-flag-enabled('breaking-changes-x') {
+      min-width: rem(500px);
+    }
+
+    thead {
+      @include typescale('zeta');
+      background-color: $ui-02;
+      font-weight: 700;
+      border-right: 1px solid $ui-03;
+    }
+
+    tbody {
+      @include typescale('zeta');
+      background-color: $ui-01;
+      border-right: 1px solid $ui-03;
+    }
+
+    tr {
+      height: rem(48px);
+
+      &:hover {
+        td {
+          background-color: rgba($brand-02, 0.1);
+          border-top: 1px solid $brand-01;
+          border-bottom: 1px solid $brand-01;
+
+          &:first-of-type {
+            border-left: 1px solid $brand-01;
+          }
+
+          &:last-of-type {
+            border-right: 1px solid $brand-01;
+          }
+        }
+
+        .#{$prefix}--overflow-menu {
+          opacity: 1;
+        }
+      }
+    }
+
+    th {
+      border-top: 1px solid $ui-03;
+    }
+
+    th,
+    td {
+      @include typescale('zeta');
+      border-top: 1px solid $ui-03;
+      padding-left: $spacing-sm;
+      vertical-align: middle;
+      text-align: left;
+      color: $text-01;
+
+      &:first-of-type {
+        padding-left: rem(24px);
+        border-left: 1px solid $ui-03;
+      }
+
+      &:last-of-type {
+        padding-right: $spacing-lg;
+      }
+    }
+
+    // Overrrides
+    .#{$prefix}--checkbox-label {
+      padding-left: rem(28px);
+    }
+
+    .#{$prefix}--overflow-menu {
+      opacity: 0;
+
+      &:focus {
+        outline: 0;
+        opacity: 1;
+        box-shadow: none;
+
+        .#{$prefix}--overflow-menu__icon {
+          box-shadow: inset 0px 0px 0px 1px $brand-01;
+        }
+      }
+    }
+
+    .#{$prefix}--overflow-menu__icon {
+      transform: rotate(90deg);
+    }
+  }
+
+  // Options
+
+  .#{$prefix}--data-table-v2-header {
+    margin-bottom: $spacing-xs;
+    color: $text-01;
+  }
+
+  .#{$prefix}--data-table-v2--zebra {
+    tbody tr:nth-child(even) {
+      background-color: $ui-02;
+    }
+  }
+
+  .#{$prefix}--data-table-v2--no-border {
+    & {
+      border-bottom-color: transparent;
+    }
+
+    thead,
+    tbody {
+      border-right-color: transparent;
+    }
+
+    th,
+    td {
+      &:first-of-type {
+        border-left-color: transparent;
+      }
+    }
+  }
+
+  .#{$prefix}--data-table-v2--compact {
+    tbody tr {
+      height: rem(24px);
+    }
+  }
+
+  .#{$prefix}--data-table-v2--short {
+    tbody tr {
+      height: rem(32px);
+    }
+  }
+
+  .#{$prefix}--data-table-v2--tall {
+    tbody tr {
+      height: rem(64px);
+    }
+  }
+
+  .#{$prefix}--data-table-v2--static {
+    width: auto;
+  }
+
+  .#{$prefix}--data-table-v2--zebra
+    tbody
+    tr.#{$prefix}--data-table-v2--selected,
+  tbody tr.#{$prefix}--data-table-v2--selected {
+    background-color: rgba($brand-02, 0.1);
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [typescale [mixin]](#typescale-mixin)
+  - [rem [function]](#rem-function)
+  - [feature-flag-enabled [function]](#feature-flag-enabled-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [brand-02 [variable]](#brand-02-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-sm [variable]](#spacing-sm-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+
+### ❌data-table-core--x [mixin]
+
+v10 data table core
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-core--x() {
+  //----------------------------------------------------------------------------
+  // Container
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-container {
+    min-width: rem(500px);
+    overflow-x: auto;
+    padding-top: $spacing-01; // allow space for focus styles
+  }
+
+  //----------------------------------------------------------------------------
+  // Table title text
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-header {
+    background: $ui-01;
+    padding: $spacing-05 0 $spacing-06 $spacing-05;
+  }
+
+  .#{$prefix}--data-table-header__title {
+    @include type-style('productive-heading-03');
+    color: $text-01;
+  }
+
+  .#{$prefix}--data-table-header__description {
+    @include type-style('body-short-01');
+    color: $text-02;
+  }
+
+  //----------------------------------------------------------------------------
+  // Data table
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table thead {
+    @include type-style('heading-01');
+    background-color: $ui-03;
+  }
+
+  .#{$prefix}--data-table tbody {
+    @include type-style('body-short-01');
+    background-color: $ui-01;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table tr {
+    border: none;
+    height: $layout-04;
+    width: 100%;
+  }
+
+  .#{$prefix}--data-table tbody tr:hover {
+    background: $hover-field;
+  }
+
+  .#{$prefix}--data-table tbody tr:hover td {
+    color: $text-01;
+    background: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  .#{$prefix}--data-table th,
+  .#{$prefix}--data-table td {
+    padding-left: $spacing-04;
+    padding-right: $spacing-04;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .#{$prefix}--data-table th {
+    color: $text-01;
+    background-color: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--data-table th:first-of-type {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table .#{$prefix}--table-header-label {
+    display: block;
+    padding: rem(14px) 0;
+  }
+
+  .#{$prefix}--data-table td {
+    background: $ui-01;
+    color: $text-02;
+    border-top: 1px solid $ui-01;
+    border-bottom: 1px solid $ui-03;
+    padding: rem(14px) $spacing-04;
+    padding-bottom: rem(13px);
+  }
+
+  @supports (-moz-appearance: none) {
+    .#{$prefix}--data-table td {
+      background-clip: padding-box; // fix to show borders in ff
+    }
+  }
+
+  .#{$prefix}--data-table td:first-of-type {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table td:last-of-type {
+    padding-right: $spacing-05;
+  }
+
+  // specific padding for overflow menu columns
+  .#{$prefix}--data-table .#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
+    padding-top: $spacing-03;
+    padding-right: $spacing-03;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-column-menu {
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
+    background: $ui-03;
+  }
+
+  // Overflow Menu Overrides
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 0;
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu:hover
+    .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu:focus
+    .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table
+    tr:hover
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
+
+  .#{$prefix}--table-row--menu-option
+    .#{$prefix}--overflow-menu-options__btn
+    .#{$prefix}--overflow-menu-options__option-content
+    svg {
+    margin-right: $spacing-03;
+    position: relative;
+    top: rem(
+      3px
+    ); //used to center svg without setting display flex //display block needed for overflow text truncation
+  }
+
+  //----------------------------------------------------------------------------
+  //ZEBRA
+  //----------------------------------------------------------------------------
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(even) td {
+    border-bottom: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr:nth-child(odd) td {
+    background-color: $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    border-top: 1px solid $data-table-zebra-color;
+  }
+
+  .#{$prefix}--data-table--zebra tbody tr:hover td {
+    background-color: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+
+  //----------------------------------------------------------------------------
+  // Select
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
+    padding: rem(12px) $spacing-03 0 $spacing-05;
+    width: rem(
+      44px
+    ); // 16px padding left + 8px padding right + 20px checkbox width
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {
+    padding-top: rem(11px);
+    padding-bottom: 0;
+  }
+
+  th.#{$prefix}--table-column-checkbox:hover {
+    background: $data-table-column-hover;
+  }
+
+  // default selected row + zebra select - even child
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected
+    td,
+  tr.#{$prefix}--data-table--selected td {
+    color: $text-01;
+    background-color: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $active-01; //bottom border acts as separator from other rows
+  }
+
+  // first row
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:first-of-type:nth-child(odd).#{$prefix}--data-table--selected
+    td,
+  tr.#{$prefix}--data-table--selected:first-of-type td {
+    border-top: 1px solid $active-01; //top border acts as separator from thead
+  }
+
+  // last row + zebra select last
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:last-of-type:nth-child(odd).#{$prefix}--data-table--selected
+    td,
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
+    td,
+  tr.#{$prefix}--data-table--selected:last-of-type td {
+    border-top: 1px solid $ui-03; // doesn't need separators
+    border-bottom: 1px solid $ui-03;
+  }
+
+  // zebra select - odd child
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(even).#{$prefix}--data-table--selected
+    td {
+    border-bottom: 1px solid $active-01;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(even).#{$prefix}--data-table--selected:hover
+    td {
+    border-bottom: 1px solid $data-table-column-hover;
+  }
+
+  // hover + zebra select - even child
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected:hover
+    td,
+  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
+    color: $text-01;
+    background: $data-table-column-hover;
+    border-top: 1px solid $data-table-column-hover;
+    border-bottom: 1px solid $data-table-column-hover;
+  }
+
+  // selected overflow menu
+  .#{$prefix}--data-table--selected
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-01 [variable]](#spacing-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [spacing-06 [variable]](#spacing-06-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [layout-04 [variable]](#layout-04-variable)
+  - [hover-field [variable]](#hover-field-variable)
+  - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [data-table-zebra-color [variable]](#data-table-zebra-color-variable)
+  - [data-table-column-hover [variable]](#data-table-column-hover-variable)
+  - [active-01 [variable]](#active-01-variable)
+
+### ❌data-table-v2-expandable [mixin]
+
+v9 data table expandable
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-v2-expandable() {
+  tr.#{$prefix}--expandable-row-v2 {
+    // hide on init
+    &.#{$prefix}--expandable-row--hidden-v2 {
+      display: none;
+    }
+
+    > td:first-of-type {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 2px;
+        background-color: $brand-01;
+      }
+    }
+
+    + tr[data-child-row] {
+      td {
+        border-top: 0;
+        padding-bottom: $spacing-xs;
+      }
+    }
+
+    &:hover {
+      > td {
+        background-color: $hover-row;
+      }
+
+      > td:first-of-type {
+        border-left: 1px solid transparent;
+      }
+
+      > td:last-of-type {
+        border-right: 1px solid $brand-01;
+      }
+
+      &[data-parent-row] > td {
+        border-bottom: 0;
+      }
+
+      + tr[data-child-row] {
+        > td {
+          background-color: $hover-row;
+          border-bottom: 1px solid $brand-01;
+          border-right: 1px solid $brand-01;
+        }
+      }
+    }
+  }
+
+  tr.#{$prefix}--expandable-row--hover-v2 {
+    > td {
+      background-color: $hover-row;
+      border-top: 1px solid $brand-01;
+    }
+
+    > td:last-of-type {
+      border-right: 1px solid $brand-01;
+    }
+  }
+
+  .#{$prefix}--table-expand-v2 {
+    width: 2.5rem;
+  }
+
+  .#{$prefix}--table-expand-v2[data-previous-value='collapsed']
+    .#{$prefix}--table-expand-v2__svg {
+    transform: rotate(90deg);
+    transition: transform 200ms $carbon--standard-easing;
+  }
+
+  .#{$prefix}--table-expand-v2__button {
+    @include button-reset(false);
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        box-shadow: inset 0px 0px 0px 1px $brand-01;
+      }
+    }
+  }
+
+  .#{$prefix}--table-expand-v2__svg {
+    fill: $ui-05;
+    transform: rotate(0deg);
+    transition: transform 200ms $carbon--standard-easing;
+    height: 16px;
+    width: auto;
+    max-width: 16px;
+    padding: $spacing-3xs;
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [hover-row [variable]](#hover-row-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+
+### ❌data-table-expandable--x [mixin]
+
+v10 data table expandable
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-expandable--x() {
+  //----------------------------------------------------------------------------
+  // Parent row
+  //----------------------------------------------------------------------------
+  //first row top border
+  .#{$prefix}--data-table tr.#{$prefix}--parent-row:first-of-type td {
+    border-top: 1px solid $ui-03;
+  }
+
+  //----------------------------------------------------------------------------
+  // Child row
+  //----------------------------------------------------------------------------
+  // default styles
+  .#{$prefix}--expandable-row--hidden td {
+    border-top: 0;
+    width: auto;
+    padding: $spacing-05;
+  }
+
+  //child row hidden
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row] {
+    height: 0;
+    transition: height $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row]
+    td {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 0;
+    background-color: $hover-field;
+    transition: padding $transition--expansion $carbon--standard-easing, background-color
+        $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container {
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  //child row visible
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] {
+    transition: height $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-bottom: rem(23px);
+    transition: padding $transition--expansion $carbon--standard-easing;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container {
+    max-height: 100%;
+  }
+
+  // bottom border overrides
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] > td {
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $ui-03;
+  }
+
+  .#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+    + tr[data-child-row]
+    > td {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row > td:first-of-type {
+    box-shadow: none; // first td doesn't have a visible border
+  }
+
+  //----------------------------------------------------------------------------
+  // Hover styles
+  //----------------------------------------------------------------------------
+  //hovering on collapsed parent
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
+    td {
+    border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
+  }
+
+  // hovering on expanded parent
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
+    background-color: $hover-field;
+    border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $ui-03;
+    color: $text-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
+    border-bottom: 1px solid $hover-field; // first td doesn't have a visible border
+  }
+
+  // child row when hovering on expanded parent
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    td {
+    background-color: $hover-field;
+    color: $text-01;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  //hovering on expanded child row
+  tr.#{$prefix}--expandable-row--hover + tr[data-child-row] td {
+    border-bottom: 1px solid $ui-03;
+  }
+
+  //hovering on expanded child row (class added to parent)
+  tr.#{$prefix}--expandable-row--hover {
+    background-color: $hover-field;
+  }
+
+  tr.#{$prefix}--expandable-row--hover td {
+    background-color: $hover-field;
+    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $hover-field;
+    color: $text-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td:first-of-type {
+    border-bottom: 1px solid $hover-field; // first parent td doesnt have visible bottom border
+  }
+
+  //----------------------------------------------------------------------------
+  // Expand icon column
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table td.#{$prefix}--table-expand {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    vertical-align: top;
+    padding-top: rem(7px);
+    padding-bottom: 0;
+  }
+
+  @supports (-moz-appearance: none) {
+    .#{$prefix}--data-table td.#{$prefix}--table-expand {
+      padding-top: rem(14px);
+    }
+  }
+
+  .#{$prefix}--table-expand[data-previous-value='collapsed']
+    .#{$prefix}--table-expand__svg {
+    transform: rotate(270deg);
+    transition: transform $transition--expansion $carbon--standard-easing;
+  }
+
+  .#{$prefix}--table-expand__button {
+    @include button-reset('false');
+    display: flex;
+    justify-content: space-around;
+    height: $layout-03;
+    width: $layout-01;
+  }
+
+  .#{$prefix}--table-expand__button:focus {
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
+    box-shadow: inset 0px 0px 0px 1px $focus;
+  }
+
+  .#{$prefix}--table-expand__svg {
+    fill: $ui-05;
+    transform: rotate(90deg);
+    transition: transform $transition--expansion $carbon--standard-easing;
+  }
+
+  th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
+    padding-left: $spacing-03;
+  }
+
+  // fix expanded parent separating border length
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    td.#{$prefix}--table-expand
+    + td::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: rem(-1px);
+    height: rem(1px);
+    width: rem(8px);
+    background: $ui-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+    td.#{$prefix}--table-expand
+    + td::after,
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
+    td.#{$prefix}--table-expand
+    + td::after {
+    background: $hover-field;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
+    td.#{$prefix}--table-expand
+    + td::after {
+    display: none;
+  }
+
+  //----------------------------------------------------------------------------
+  // Selected
+  //----------------------------------------------------------------------------
+  // parent collapsed
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
+    background: $ui-03;
+    border-top: 1px solid $active-01;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $active-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
+    background: $ui-03;
+    color: $text-01;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $active-01;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
+    background: $ui-03;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $ui-03;
+  }
+
+  // parent collapsed hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
+    td {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $hover-selected-ui;
+  }
+
+  // parent expanded
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    td:first-of-type {
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $ui-03; //no visible border when expanded
+  }
+
+  // parent expanded hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    td:first-of-type {
+    background: $hover-selected-ui;
+    border-top: 1px solid $hover-selected-ui;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $hover-selected-ui;
+  }
+
+  // child row expanded
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    color: $text-01;
+    background-color: $hover-field;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 1px $active-01;
+    border-top: 1px solid $active-ui;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+    + tr[data-child-row]:last-of-type
+    td {
+    box-shadow: inset 0 -1px $active-01;
+    padding-bottom: rem(24px);
+  }
+
+  // child row expanded hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    + tr[data-child-row]
+    td {
+    background: $ui-03;
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [transition--expansion [variable]](#transition--expansion-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [hover-field [variable]](#hover-field-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [layout-03 [variable]](#layout-03-variable)
+  - [layout-01 [variable]](#layout-01-variable)
+  - [focus [variable]](#focus-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [active-01 [variable]](#active-01-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [active-ui [variable]](#active-ui-variable)
+
+### ❌data-table-v2-sort [mixin]
+
+v9 data table sort
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-v2-sort() {
+  .#{$prefix}--table-sort-v2--ascending {
+    .#{$prefix}--table-sort-v2__icon {
+      transform: rotate(180deg);
+      transition: transform 200ms $carbon--standard-easing;
+    }
+  }
+
+  .#{$prefix}--table-sort-v2--active {
+    .#{$prefix}--table-sort-v2__icon {
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--data-table-v2 th {
+    &:hover {
+      .#{$prefix}--table-sort-v2__icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .#{$prefix}--table-sort-v2 {
+    @include button-reset(false);
+    position: relative;
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: $text-01;
+
+    &:focus {
+      outline: 0;
+
+      svg {
+        opacity: 1;
+        outline: 1px solid $brand-01;
+        fill: $brand-01;
+        outline-offset: -0.5px; // safari fix
+      }
+    }
+  }
+
+  .#{$prefix}--table-sort-v2__icon {
+    position: relative;
+    left: 2px;
+    transition: transform 200ms $carbon--standard-easing;
+    transform: rotate(0);
+    opacity: 0;
+    fill: $ui-05;
+    height: rem(9px);
+    padding: $spacing-3xs;
+    width: auto;
+    min-width: 14px;
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+
+### ❌data-table-sort--x [mixin]
+
+v10 data table sort
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin data-table-sort--x() {
+  // -------------------------------------
+  // Sortable table
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table--sort
+    th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+    padding: 0;
+    height: $layout-04;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .#{$prefix}--data-table--sort td {
+    padding-left: $spacing-03;
+    padding-right: $spacing-03;
+  }
+
+  .#{$prefix}--data-table--sort th:first-of-type .#{$prefix}--table-sort {
+    padding-left: $spacing-04;
+  }
+
+  // -------------------------------------
+  // Th > Button
+  // -------------------------------------
+  .#{$prefix}--table-sort {
+    @include button-reset(false);
+    position: relative;
+    font: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: $text-01;
+    padding: 0 $spacing-03;
+    height: 100%;
+  }
+
+  .#{$prefix}--table-sort:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--table-sort:hover {
+    background: $data-table-column-hover;
+  }
+
+  // changes opacity when th is inactive (see line 161)
+  .#{$prefix}--table-sort:focus svg,
+  .#{$prefix}--table-sort:hover svg {
+    opacity: 1;
+  }
+
+  // -------------------------------------
+  //Th > Button > Svg (Sort Icons)
+  // -------------------------------------
+  // inactive icons
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon-inactive {
+    display: block;
+  }
+
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort__icon-unsorted {
+    position: relative;
+    left: rem(2px);
+    margin-left: $spacing-03;
+    margin-right: 0;
+    opacity: 0;
+    fill: $ui-05;
+    width: auto;
+    min-width: $layout-01;
+  }
+
+  // active icons
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon-unsorted {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon {
+    display: block;
+    opacity: 1; //changes opacity when th is active (see line 125)
+  }
+
+  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--table-sort__icon {
+    position: relative;
+    left: rem(2px);
+    margin-left: $spacing-03;
+    margin-right: 0;
+    transition: transform $transition--base $carbon--standard-easing;
+    transform: rotate(0);
+    opacity: 0;
+    fill: $ui-05;
+    width: auto;
+    min-width: $layout-01;
+  }
+}
+```
+
+</details>
+
+- **Group**: [data-table](#data-table)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [layout-04 [variable]](#layout-04-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [spacing-04 [variable]](#spacing-04-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [data-table-column-hover [variable]](#data-table-column-hover-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [layout-01 [variable]](#layout-01-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+
+## date-picker
+
+### ❌date-picker [mixin]
+
+v9 date-picker
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin date-picker() {
+  .#{$prefix}--date-picker {
+    display: flex;
+  }
+
+  .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--date-picker ~ .#{$prefix}--label {
+    order: 1;
+  }
+
+  .#{$prefix}--date-picker-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
+    .#{$prefix}--date-picker__input {
+      width: 7.125rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
+    .#{$prefix}--date-picker__input {
+      width: 5.7rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
+    .#{$prefix}--date-picker__input {
+      width: 9rem;
+    }
+  }
+
+  .#{$prefix}--date-picker__input {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    display: block;
+    position: relative;
+    height: rem(40px);
+    max-width: 9rem;
+    padding: 0 $spacing-md;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    order: 2;
+    color: $text-01;
+    border-bottom: 1px solid transparent;
+
+    &:focus,
+    &.#{$prefix}--focused {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border: 1px solid transparent;
+    }
+
+    &::placeholder {
+      color: $text-02;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon {
+    position: absolute;
+    top: 2.25rem;
+    left: 1rem;
+    fill: $brand-01;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+      fill: $hover-primary;
+    }
+  }
+
+  .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
+    top: rem(14px);
+  }
+
+  .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
+    padding-left: $spacing-3xl;
+  }
+
+  .#{$prefix}--date-picker--range {
+    display: flex;
+    position: relative;
+  }
+
+  .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
+    margin-right: $spacing-xs;
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__icon {
+    top: initial;
+    right: -1.75rem;
+    bottom: 0.6rem;
+    left: auto;
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--label,
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
+    width: 7.075rem;
+  }
+
+  .#{$prefix}--date-picker__calendar.flatpickr-calendar.open {
+    @include layer('pop-out');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-md $spacing-md $spacing-2xs;
+    width: rem(285px) !important;
+    height: rem(262px);
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    margin-top: 1px;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month,
+  .flatpickr-month {
+    width: 100%;
+    margin-bottom: $spacing-2xs;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-prev-month,
+  .#{$prefix}--date-picker__month .flatpickr-next-month,
+  .flatpickr-month .flatpickr-prev-month,
+  .flatpickr-month .flatpickr-next-month {
+    padding: 0;
+    line-height: rem(20px);
+    fill: $text-01;
+
+    &:hover svg {
+      fill: $hover-secondary;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month,
+  .flatpickr-month .flatpickr-current-month {
+    @include typescale('omega');
+    text-transform: uppercase;
+    padding: 0;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month svg,
+  .flatpickr-month .flatpickr-current-month svg {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
+  .flatpickr-month .flatpickr-current-month .cur-month {
+    margin-right: 0.25rem;
+    color: $text-01;
+  }
+
+  .numInputWrapper,
+  .flatpickr-current-month .numInputWrapper {
+    min-width: rem(38px);
+    width: rem(38px);
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper .numInput,
+  .flatpickr-month .numInputWrapper .numInput {
+    font-weight: 600;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    min-width: rem(38px);
+    width: rem(38px);
+    padding: $spacing-2xs;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    left: 2.6rem;
+    border: none;
+    width: rem(12px);
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $brand-02;
+        border-top-color: $brand-02;
+      }
+    }
+
+    &:after {
+      border-bottom-color: $brand-01;
+      border-top-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowUp {
+    top: 1px;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    top: 9px;
+  }
+
+  span.#{$prefix}--date-picker__weekday,
+  span.flatpickr-weekday {
+    @include typescale('omega');
+    font-weight: 600;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__day,
+  .flatpickr-day {
+    @include typescale('omega');
+    height: rem(25px);
+    width: 1.8rem;
+    line-height: rem(25px);
+    flex-basis: 1.8rem;
+    max-width: 1.8rem;
+    margin: rem(0.5px) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-01;
+    border-radius: 0;
+    border: 2px solid transparent;
+
+    &:hover {
+      background: $hover-row;
+    }
+
+    &:focus {
+      outline: none;
+      background: $ui-03;
+    }
+  }
+
+  .#{$prefix}--date-picker__days .nextMonthDay,
+  .#{$prefix}--date-picker__days .prevMonthDay {
+    opacity: 0.5;
+    color: $ui-05;
+  }
+
+  .#{$prefix}--date-picker__day.today,
+  .flatpickr-day.today {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 3px;
+      width: 3px;
+      border-radius: 50%;
+      background: $brand-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.today.no-border,
+  .flatpickr-day.today.no-border {
+    border: none;
+  }
+
+  .#{$prefix}--date-picker__day.today.selected {
+    border: 2px solid $brand-01;
+    &::after {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.disabled,
+  .flatpickr-day.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: $ui-05;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.inRange,
+  .flatpickr-day.inRange {
+    background: $ui-02;
+    box-shadow: -6px 0 0 $ui-02, 6px 0 0 $ui-02;
+  }
+
+  .#{$prefix}--date-picker__day.selected,
+  .flatpickr-day.selected {
+    border: 2px solid $brand-01;
+    background: $ui-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.selected,
+  .flatpickr-day.startRange.selected {
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange,
+  .flatpickr-day.endRange.inRange {
+    background: $ui-01;
+    color: $text-01;
+    border: 2px solid $brand-01;
+    z-index: 3;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange.selected,
+  .flatpickr-day.endRange.inRange.selected {
+    box-shadow: none;
+    border: 2px solid $brand-01;
+    background: $ui-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
+  .flatpickr-day.startRange.inRange:not(.selected) {
+    box-shadow: none;
+    background: $ui-01;
+    border: 2px solid $brand-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__days,
+  .dayContainer {
+    width: rem(225px);
+    min-width: rem(225px);
+    max-width: rem(225px);
+    height: rem(164px);
+  }
+
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer {
+    width: rem(225px);
+    height: rem(200px);
+  }
+
+  .#{$prefix}--date-picker__weekdays,
+  .flatpickr-weekdays,
+  .flatpickr-weekdaycontainer {
+    width: rem(225px);
+    margin-bottom: $spacing-2xs;
+  }
+
+  .flatpickr-weekdaycontainer {
+    display: flex;
+  }
+
+  .flatpickr-months {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    padding-top: 5px;
+  }
+
+  .flatpickr-prev-month:hover svg,
+  .flatpickr-next-month:hover svg {
+    fill: $brand-01;
+  }
+
+  .flatpickr-next-month.disabled,
+  .flatpickr-prev-month.disabled {
+    svg {
+      fill: $ui-05;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      svg {
+        fill: $ui-05;
+      }
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--date-picker.#{$prefix}--skeleton input,
+  .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+}
+```
+
+</details>
+
+- **Group**: [date-picker](#date-picker)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [spacing-3xl [variable]](#spacing-3xl-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [brand-02 [variable]](#brand-02-variable)
+  - [hover-row [variable]](#hover-row-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+
+### ❌date-picker--x [mixin]
+
+v10 date-picker
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin date-picker--x() {
+  .#{$prefix}--date-picker {
+    display: flex;
+  }
+
+  .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--date-picker ~ .#{$prefix}--label {
+    order: 1;
+  }
+
+  .#{$prefix}--date-picker-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--date-picker-input__wrapper {
+    display: flex;
+    align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
+    .#{$prefix}--date-picker__input {
+      width: rem(120px);
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
+    .#{$prefix}--date-picker__input {
+      width: 5.7rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
+    .#{$prefix}--date-picker-container {
+      max-width: rem(288px);
+    }
+
+    .#{$prefix}--date-picker__input {
+      width: rem(288px);
+    }
+  }
+
+  .#{$prefix}--date-picker__input {
+    @include reset;
+    @include type-style('code-02');
+    @include focus-outline('reset');
+
+    display: block;
+    position: relative;
+    height: rem(40px);
+    max-width: rem(288px);
+    padding: 0 $carbon--spacing-05;
+    background-color: $field-01;
+    border: none;
+    color: $text-01;
+    border-bottom: 1px solid $ui-04;
+    transition: $duration--fast-01 motion(standard, productive) all;
+
+    &:focus,
+    &.#{$prefix}--focused {
+      @include focus-outline('outline');
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      @include focus-outline('invalid');
+    }
+
+    &:disabled {
+      color: $disabled;
+      background-color: $disabled-background-color;
+      border-bottom: 1px solid transparent;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border-bottom: 1px solid transparent;
+    }
+
+    &::placeholder {
+      @include placeholder-colors;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon {
+    position: absolute;
+    right: 1rem;
+    fill: $icon-01;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
+    width: rem(143.5px);
+  }
+
+  .#{$prefix}--date-picker__calendar,
+  .flatpickr-calendar.open {
+    @include layer('pop-out');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
+      $carbon--spacing-02;
+    width: rem(288px) !important;
+    height: rem(336px);
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    margin-top: -2px;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    &:focus {
+      outline: 1px solid $interactive-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month,
+  .flatpickr-month {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: rem(40px);
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-prev-month,
+  .#{$prefix}--date-picker__month .flatpickr-next-month,
+  .flatpickr-months .flatpickr-prev-month,
+  .flatpickr-months .flatpickr-next-month {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: rem(40px);
+    width: rem(40px);
+    padding: 0;
+    fill: $text-01;
+    transition: background-color $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .flatpickr-current-month .numInputWrapper {
+    width: 7ch;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month,
+  .flatpickr-month .flatpickr-current-month {
+    @include type-style('heading-01');
+    padding: 0;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month svg,
+  .flatpickr-month .flatpickr-current-month svg {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
+  .flatpickr-month .flatpickr-current-month .cur-month {
+    margin-right: $carbon--spacing-02;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper .numInput,
+  .flatpickr-month .numInputWrapper .numInput {
+    font-weight: 600;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    padding: $carbon--spacing-02;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
+
+    &:focus {
+      outline: 1px solid $interactive-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      // Added in when upgraded to Flatpickr 4.5.5
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    left: 2.6rem;
+    border: none;
+    width: rem(12px);
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $interactive-01;
+        border-top-color: $interactive-01;
+      }
+    }
+
+    &:after {
+      border-bottom-color: $icon-01;
+      border-top-color: $icon-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowUp {
+    top: 4px;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    top: 11px;
+  }
+
+  span.#{$prefix}--date-picker__weekday,
+  span.flatpickr-weekday {
+    @include type-style('body-short-01');
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--date-picker__day,
+  .flatpickr-day {
+    @include type-style('body-short-01');
+    height: rem(40px);
+    width: rem(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-01;
+    border-radius: 0;
+    border: none;
+    transition: all $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background: $hover-ui;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--date-picker__days .nextMonthDay,
+  .#{$prefix}--date-picker__days .prevMonthDay {
+    color: $text-02;
+  }
+
+  .#{$prefix}--date-picker__day.today,
+  .flatpickr-day.today {
+    position: relative;
+    color: $interactive-01;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: rem(7px);
+      left: 50%;
+      transform: translateX(-50%);
+      height: rem(4px);
+      width: rem(4px);
+      background: $interactive-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.today.no-border,
+  .flatpickr-day.today.no-border {
+    border: none;
+  }
+
+  .#{$prefix}--date-picker__day.today.selected {
+    border: 2px solid $interactive-01;
+    &::after {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.disabled,
+  .flatpickr-day.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: $ui-05;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.inRange,
+  .flatpickr-day.inRange {
+    background: $date-picker-in-range-background-color;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__day.selected,
+  .flatpickr-day.selected {
+    color: $inverse-01;
+    background: $interactive-01;
+
+    &:hover {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.startRange.selected,
+  .flatpickr-day.startRange.selected {
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  .#{$prefix}--date-picker__day.endRange,
+  .flatpickr-day.endRange {
+    &:hover {
+      background: $ui-01;
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange,
+  .flatpickr-day.endRange.inRange {
+    @include focus-outline('outline');
+    background: $ui-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange.selected,
+  .flatpickr-day.endRange.inRange.selected {
+    color: $inverse-01;
+    background: $interactive-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
+  .flatpickr-day.startRange.inRange:not(.selected) {
+    @include focus-outline('outline');
+    background: $ui-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__days,
+  .dayContainer {
+    width: 100%;
+    min-width: 100%;
+    height: rem(246px);
+  }
+
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer {
+    width: 100%;
+    height: rem(336px);
+  }
+
+  .#{$prefix}--date-picker__weekdays,
+  .flatpickr-weekdays,
+  .flatpickr-weekdaycontainer {
+    width: 100%;
+  }
+
+  .flatpickr-weekdays {
+    height: rem(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flatpickr-weekdaycontainer {
+    display: flex;
+  }
+
+  .flatpickr-months {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    padding-top: 12px;
+  }
+
+  .flatpickr-prev-month:hover svg,
+  .flatpickr-next-month:hover svg {
+    fill: $text-01;
+  }
+
+  .flatpickr-next-month.disabled,
+  .flatpickr-prev-month.disabled {
+    svg {
+      fill: $ui-05;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      svg {
+        fill: $ui-05;
+      }
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--date-picker.#{$prefix}--skeleton input,
+  .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+}
+```
+
+</details>
+
+- **Group**: [date-picker](#date-picker)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [disabled-background-color [variable]](#disabled-background-color-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [date-picker-in-range-background-color [variable]](#date-picker-in-range-background-color-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+
+## dropdown
+
+### ❌dropdown [mixin]
+
+v9 dropdown
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin dropdown() {
+  .#{$prefix}--dropdown {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    order: 1;
+    width: 100%;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &.#{$prefix}--dropdown--open:focus {
+      outline: 1px solid transparent;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+  }
+
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--dropdown--up {
+    .#{$prefix}--dropdown-list {
+      bottom: 2.5rem;
+    }
+  }
+
+  .#{$prefix}--dropdown__arrow {
+    fill: $brand-01;
+    position: absolute;
+    right: 1rem;
+    top: 1.175rem;
+    width: rem(10px);
+    height: rem(5px);
+    pointer-events: none;
+    transition: transform $transition--expansion $carbon--standard-easing;
+    transform-origin: 50% 45%;
+  }
+
+  .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown-text {
+    height: rem(40px);
+    padding-top: rem(13px);
+    padding-bottom: rem(13px);
+    padding-left: $spacing-md;
+    padding-right: $spacing-2xl;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: $input-border;
+  }
+
+  .#{$prefix}--dropdown-list {
+    @include reset;
+    @include layer('overlay');
+    @include typescale('zeta');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    position: absolute;
+    z-index: z('dropdown');
+    max-height: 0;
+    transition: max-height $transition--expansion $carbon--ease-out;
+    overflow: hidden;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: opacity $transition--expansion $carbon--ease-out;
+    opacity: 0;
+  }
+
+  .#{$prefix}--dropdown-link {
+    display: block;
+    color: currentColor;
+    text-decoration: none;
+    font-weight: normal;
+    padding: $spacing-md $spacing-lg $spacing-md $spacing-md;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:hover,
+    &:focus {
+      background-color: $hover-row;
+      outline: 1px solid transparent;
+      text-decoration: underline;
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--dropdown--selected {
+    display: none;
+  }
+
+  .#{$prefix}--dropdown--open {
+    .#{$prefix}--dropdown__arrow {
+      transform: rotate(-180deg);
+    }
+
+    .#{$prefix}--dropdown-list {
+      max-height: 15rem;
+
+      &:hover {
+        overflow: auto;
+      }
+    }
+
+    .#{$prefix}--dropdown-item {
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--dropdown--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--dropdown--auto-width {
+    width: auto;
+    max-width: rem(400px);
+  }
+
+  .#{$prefix}--dropdown--inline {
+    background-color: transparent;
+    box-shadow: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    &:focus .#{$prefix}--dropdown-text {
+      @include focus-outline('border');
+    }
+
+    &[data-value=''] .#{$prefix}--dropdown-text {
+      color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text {
+      display: inline-block;
+      padding-right: 1.5rem;
+      overflow: visible;
+      color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text:hover {
+      background-color: $field-01;
+    }
+
+    &.#{$prefix}--dropdown--open:focus {
+      box-shadow: none;
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-text {
+      outline: none;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      position: relative;
+      top: -2px;
+      left: 8px;
+      right: 0;
+      bottom: 0;
+    }
+
+    .#{$prefix}--dropdown-link {
+      font-weight: normal;
+    }
+
+    .#{$prefix}--dropdown-link:hover {
+      background-color: $field-01;
+      color: $text-01;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
+    @include skeleton;
+  }
+}
+```
+
+</details>
+
+- **Group**: [dropdown](#dropdown)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [transition--expansion [variable]](#transition--expansion-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-2xl [variable]](#spacing-2xl-variable)
+  - [input-border [variable]](#input-border-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [carbon--ease-out [variable]](#carbon--ease-out-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [hover-row [variable]](#hover-row-variable)
+
+### ❌dropdown--x [mixin]
+
+v10 dropdown
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin dropdown--x() {
+  .#{$prefix}--dropdown__wrapper--inline {
+    display: inline-grid;
+    align-items: center;
+    grid-template: auto auto / auto min-content;
+    grid-gap: rem(4px);
+
+    .#{$prefix}--label {
+      @include type-style('body-short-01');
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 2;
+    }
+  }
+
+  .#{$prefix}--dropdown {
+    @include reset;
+    @include focus-outline('reset');
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    width: 100%;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
+    transition: $duration--fast-02 motion(standard, productive) all;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--dropdown--open {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--dropdown--invalid {
+    @include focus-outline('invalid');
+
+    .#{$prefix}--dropdown-text {
+      padding-right: rem(56px); // TODO: spacing token
+    }
+
+    + .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--dropdown__invalid-icon {
+    position: absolute;
+    top: 50%;
+    right: rem(40px); // TODO: spacing token
+    fill: $support-01;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--dropdown--open:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--dropdown--open:focus {
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    @include layer('overlay');
+  }
+
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--dropdown__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    top: rem(13px);
+    pointer-events: none;
+    transition: transform $duration--fast-02 motion(standard, productive);
+    transform-origin: 50% 45%;
+  }
+
+  .#{$prefix}--dropdown-text {
+    @include type-style('body-short-01');
+    display: block;
+    height: rem(40px);
+    padding-top: $carbon--spacing-04;
+    padding-bottom: $carbon--spacing-04;
+    padding-left: $carbon--spacing-05;
+    padding-right: rem(42px); // 2rem + SVG width
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--dropdown-list {
+    @include reset;
+    @include layer('overlay');
+    @include type-style('body-short-01');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    position: absolute;
+    z-index: z('dropdown');
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
+    overflow: hidden;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: opacity $duration--fast-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive);
+    opacity: 0;
+
+    &:hover {
+      background-color: $hover-ui;
+
+      + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+        border-color: transparent;
+      }
+    }
+
+    &:active {
+      background-color: $selected-ui;
+    }
+
+    &:first-of-type .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--dropdown-link {
+    @include focus-outline('reset');
+    display: block;
+    height: rem(40px);
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 $carbon--spacing-05;
+    border: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:focus {
+      @include focus-outline('outline');
+      margin: 0;
+      padding: rem(11px) rem(16px);
+    }
+
+    &:hover {
+      color: $text-01;
+      border-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
+    border-bottom-color: $hover-ui;
+  }
+
+  .#{$prefix}--dropdown--selected {
+    display: none;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
+    transform: rotate(-180deg);
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    max-height: 15rem;
+
+    &:hover {
+      overflow: auto;
+    }
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
+    opacity: 1;
+  }
+
+  .#{$prefix}--dropdown--disabled {
+    border-bottom-color: transparent;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $field-01;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    .#{$prefix}--dropdown-text {
+      color: $disabled-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      fill: $disabled-02;
+    }
+
+    &.#{$prefix}--dropdown--light:hover {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$prefix}--dropdown--auto-width {
+    width: auto;
+    max-width: rem(400px);
+  }
+
+  .#{$prefix}--dropdown--inline {
+    justify-self: start;
+    display: inline-block;
+    border-bottom-color: transparent;
+    transition-property: none;
+    width: auto;
+    height: rem(32px);
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &.#{$prefix}--dropdown--disabled {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      top: rem(8px);
+      right: rem(8px);
+    }
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
+    display: inline-block;
+    padding: rem(7px) rem(32px) rem(7px) $carbon--spacing-04; // TODO: spacing token
+    height: rem(32px);
+    overflow: visible;
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
+    .#{$prefix}--dropdown-text {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
+    .#{$prefix}--dropdown-text {
+    outline: 0;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown__invalid-icon {
+    right: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown-text {
+    padding-right: rem(56px);
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
+    .#{$prefix}--dropdown-list {
+    @include layer('overlay');
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
+    font-weight: normal;
+    margin-right: $carbon--spacing-04;
+    margin-left: rem(10px);
+
+    &:focus {
+      margin: 0;
+      padding-left: rem(10px);
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
+    @include skeleton;
+  }
+}
+```
+
+</details>
+
+- **Group**: [dropdown](#dropdown)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
 ## feature-flags
 
 ### ✅feature-flags [variable]
@@ -7828,6 +15042,8 @@ Used for enabling features
 - **Requires**:
   - [feature-flags [variable]](#feature-flags-variable)
 - **Used by**:
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
   - [plex-font-face [mixin]](#plex-font-face-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
   - [focus-outline [mixin]](#focus-outline-mixin)
@@ -7845,6 +15061,9 @@ Used for enabling features
   - [font-smoothing [mixin]](#font-smoothing-mixin)
   - [letter-spacing [mixin]](#letter-spacing-mixin)
   - [font-size [mixin]](#font-size-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
 
 ### ✅css--font-face [variable]
 
@@ -8000,6 +15219,541 @@ $css--use-experimental-grid-fallback: false;
 - **Type**: `Bool`
 - **Deprecated**: (For v10) v10 always uses `@carbon/grid`
 
+## file-uploader
+
+### ❌file-uploader [mixin]
+
+v9 file-uploader
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin file-uploader() {
+  .#{$prefix}--file {
+    width: 100%;
+  }
+
+  .#{$prefix}--file-input {
+    @include hidden;
+  }
+
+  .#{$prefix}--file-btn {
+    display: inline-flex;
+    margin: 0;
+  }
+
+  .#{$prefix}--label-description {
+    @include reset;
+    @include typescale('zeta');
+    @include line-height('body');
+    color: $text-02;
+    margin-bottom: $spacing-lg;
+  }
+
+  .#{$prefix}--file-container {
+    display: block;
+    width: 100%;
+    margin-top: $spacing-lg;
+  }
+
+  .#{$prefix}--file__selected-file {
+    @include text-overflow(300px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: rem(30px);
+    background-color: $field-02;
+    border: 1px solid $ui-03;
+    padding: 0 $spacing-md;
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$prefix}--file-filename {
+    @include typescale('omega');
+    @include text-overflow(100%);
+    display: inline-flex;
+    align-items: center;
+    color: $text-01;
+    margin-right: $spacing-md;
+    height: 1.875rem;
+    /*rtl:ignore*/
+    direction: ltr;
+    justify-content: flex-start; /*rtl:{flex-end}*/
+  }
+
+  .#{$prefix}--file__state-container {
+    display: flex;
+    align-items: center;
+
+    .#{$prefix}--loading {
+      width: 1rem;
+      height: 1rem;
+      margin-right: $spacing-xs;
+    }
+
+    .#{$prefix}--loading__svg {
+      stroke: $ui-05;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close,
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    width: 1rem;
+    height: 1rem;
+    fill: $text-01;
+    cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    fill: $ui-05;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    fill: $support-02;
+  }
+}
+```
+
+</details>
+
+- **Group**: [file-uploader](#file-uploader)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [line-height [mixin]](#line-height-mixin)
+  - [text-overflow [mixin]](#text-overflow-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [support-02 [variable]](#support-02-variable)
+
+### ❌file-uploader--x [mixin]
+
+v10 file-uploader
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin file-uploader--x() {
+  .#{$prefix}--file {
+    width: 100%;
+  }
+
+  .#{$prefix}--file--invalid {
+    margin-right: $carbon--spacing-03;
+    fill: $support-01;
+  }
+
+  // TODO: sync with type
+  .#{$prefix}--file--label {
+    @include reset;
+    @include type-style('heading-01');
+
+    color: $text-01;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file-input {
+    @include hidden;
+  }
+
+  .#{$prefix}--file-btn {
+    display: inline-flex;
+    margin: 0;
+    padding-right: rem(64px);
+  }
+
+  .#{$prefix}--label-description {
+    @include reset;
+    @include type-style('body-short-01');
+
+    color: $text-02;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file-container {
+    display: block;
+    width: 100%;
+    margin-top: $carbon--spacing-06;
+  }
+
+  .#{$prefix}--file__selected-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: rem(40px);
+    max-width: rem(300px);
+    margin-bottom: $carbon--spacing-03;
+    padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
+    background-color: $field-01;
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .#{$prefix}--inline-loading__animation,
+    .#{$prefix}--loading {
+      right: -0.25rem; // offset for loading svg container
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
+    @include focus-outline('invalid');
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    display: block;
+    max-height: rem(200px);
+    color: $support-01;
+    font-weight: 400;
+    margin: 0 0 $carbon--spacing-03 0;
+    overflow: visible;
+  }
+
+  .#{$prefix}--file-filename {
+    @include type-style('body-short-01');
+    @include text-overflow(300px);
+    display: inline-block;
+    align-items: center;
+    color: $text-01;
+    margin-right: $carbon--spacing-05;
+    /*rtl:ignore*/
+    direction: ltr;
+    justify-content: flex-start; /*rtl:{flex-end}*/
+  }
+
+  .#{$prefix}--file__state-container {
+    display: flex;
+    align-items: center;
+
+    .#{$prefix}--loading__svg {
+      stroke: $ui-05;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    fill: $support-02;
+    cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [file-uploader](#file-uploader)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [hidden [mixin]](#hidden-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [text-overflow [mixin]](#text-overflow-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [support-02 [variable]](#support-02-variable)
+
+## form
+
+### ❌form [mixin]
+
+v9 form
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin form() {
+  .#{$prefix}--fieldset {
+    @include reset;
+    margin-bottom: $spacing-xl;
+  }
+
+  .#{$prefix}--form-item {
+    @include font-family;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .#{$prefix}--form-item--light input,
+  .#{$prefix}--form-item--light input[type='number'] {
+    background: $field-02 !important;
+  }
+
+  .#{$prefix}--label {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    color: $text-01;
+    font-weight: $input-label-weight;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--label--with-helper {
+    margin-bottom: 0;
+  }
+
+  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
+    @include typescale('zeta');
+  }
+
+  // Skeleton State
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+
+  input[data-invalid],
+  textarea[data-invalid],
+  select[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    box-shadow: 0 2px 0px 0px $support-01;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+    }
+  }
+
+  // Fix for red ring when input is marked required in Firefox, refs #744
+  input:not(output):not([data-invalid]):-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--form-requirement {
+    @include reset;
+    @include typescale('omega');
+    margin: $spacing-sm 0 0;
+    max-height: 0;
+    overflow: hidden;
+    font-weight: 600;
+    line-height: 1.5;
+    display: none;
+
+    &::before {
+      content: '*';
+      display: inline-block;
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--form__helper-text {
+    @include typescale('omega');
+    color: $text-02;
+    order: 1;
+    line-height: 1.5;
+    z-index: 0;
+    max-height: 3rem;
+    opacity: 1;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    opacity: 0.5;
+  }
+}
+```
+
+</details>
+
+- **Group**: [form](#form)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [input-label-weight [variable]](#input-label-weight-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-sm [variable]](#spacing-sm-variable)
+  - [text-02 [variable]](#text-02-variable)
+
+### ❌form--x [mixin]
+
+v10 form
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin form--x() {
+  .#{$prefix}--fieldset {
+    @include reset;
+    margin-bottom: $carbon--spacing-07;
+  }
+
+  .#{$prefix}--form-item {
+    @include type-style('body-short-01');
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .#{$prefix}--label {
+    @include reset;
+    @include type-style('label-01');
+
+    color: $text-02;
+    font-weight: $input-label-weight;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: $carbon--spacing-03;
+    line-height: rem(16px);
+  }
+
+  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
+    // When tooltip trigger is put in form label the trigger button should fit in the size of label
+    // https://github.com/IBM/carbon-components-react/issues/115
+    @include type-style('label-01');
+  }
+
+  // Skeleton State
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+
+  input[type='number'] {
+    font-family: carbon--font-family('mono');
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid,
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
+    @include focus-outline('invalid');
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+    }
+  }
+
+  // Fix for red ring when input is marked required in Firefox, refs #744
+  input:not(output):not([data-invalid]):-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--form-requirement {
+    @include reset;
+    @include type-style('caption-01');
+    margin: $carbon--spacing-02 0 0;
+    max-height: 0;
+    overflow: hidden;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .#{$prefix}--label + .#{$prefix}--form__helper-text {
+    margin-top: rem(-6px); // when both helper text and label are rendered
+  }
+
+  .#{$prefix}--form__helper-text {
+    @include type-style('helper-text-01');
+    font-style: italic;
+    color: $text-02;
+    z-index: 0;
+    opacity: 1;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    color: $disabled-02;
+  }
+
+  @media (min-width: breakpoint('sm')) {
+    .#{$prefix}--form__helper-text {
+      max-width: 75%;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [form](#form)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [carbon--font-family [function]](#carbon--font-family-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [input-label-weight [variable]](#input-label-weight-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
 ## global-body
 
 ### ❌css-body [mixin]
@@ -8073,6 +15827,8 @@ $color__blue-20: #7cc7ff;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_blue-30 [variable]
@@ -8088,6 +15844,9 @@ $color__blue-30: #5aaafa;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_blue-40 [variable]
@@ -8133,6 +15892,9 @@ $color__blue-90: #152935;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_navy-gray-1 [variable]
@@ -8148,6 +15910,9 @@ $color__navy-gray-1: #0f212e;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_navy-gray-2 [variable]
@@ -8193,6 +15958,8 @@ $color__navy-gray-4: #394b54;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_navy-gray-5 [variable]
@@ -8283,6 +16050,9 @@ $color__white: #fff;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [select [mixin]](#select-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_blue-51 [variable]
@@ -8298,6 +16068,9 @@ $color__blue-51: #3d70b2;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_gray-1 [variable]
@@ -8313,6 +16086,8 @@ $color__gray-1: #dfe3e6;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_gray-2 [variable]
@@ -8358,6 +16133,8 @@ $color__blue-10: #c0e6ff;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_blue-60 [variable]
@@ -8373,6 +16150,8 @@ $color__blue-60: #325c80;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_teal-10 [variable]
@@ -8388,6 +16167,8 @@ $color__teal-10: #a7fae6;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_teal-20 [variable]
@@ -8433,6 +16214,9 @@ $color__teal-40: #00b4a0;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_teal-50 [variable]
@@ -8448,6 +16232,9 @@ $color__teal-50: #008571;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_teal-60 [variable]
@@ -8463,6 +16250,8 @@ $color__teal-60: #006d5d;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_green-10 [variable]
@@ -8478,6 +16267,8 @@ $color__green-10: #c8f08f;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_green-20 [variable]
@@ -8553,6 +16344,8 @@ $color__green-60: #2d660a;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_yellow-10 [variable]
@@ -8568,6 +16361,8 @@ $color__yellow-10: #fde876;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_yellow-20 [variable]
@@ -8613,6 +16408,8 @@ $color__yellow-60: #735f00;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_orange-10 [variable]
@@ -8628,6 +16425,8 @@ $color__orange-10: #ffd4a0;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_orange-20 [variable]
@@ -8673,6 +16472,8 @@ $color__orange-60: #a53725;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_red-10 [variable]
@@ -8763,6 +16564,8 @@ $color__purple-10: #eed2ff;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_purple-20 [variable]
@@ -8793,6 +16596,9 @@ $color__purple-30: #ba8ff7;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ### ✅⚠️color\_\_purple-40 [variable]
@@ -8823,6 +16629,10 @@ $color__purple-60: #734098;
 
 - **Group**: [global-colors](#global-colors)
 - **Type**: `Color`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [tags [mixin]](#tags-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--colors()`
 
 ## global-deprecate
@@ -9322,6 +17132,10 @@ Adds text overflow styling
 </details>
 
 - **Group**: [global-helpers](#global-helpers)
+- **Used by**:
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅placeholder-colors [mixin]
 
@@ -9352,6 +17166,13 @@ Adds placeholder text color
 - **Group**: [global-helpers](#global-helpers)
 - **Requires**:
   - [text-03 [variable]](#text-03-variable)
+- **Used by**:
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
 
 ### ✅box-shadow [mixin]
 
@@ -9396,6 +17217,9 @@ Adds small or large box shadow
 - **Group**: [global-helpers](#global-helpers)
 - **Requires**:
   - [box-shadow [variable]](#box-shadow-variable)
+- **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
 
 ### ✅focus-outline [mixin]
 
@@ -9461,6 +17285,54 @@ Adds outline styles depending on specific type
   - [brand-01 [variable]](#brand-01-variable)
   - [focus [variable]](#focus-variable)
   - [support-01 [variable]](#support-01-variable)
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [link [mixin]](#link-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅rotate [mixin]
 
@@ -9499,6 +17371,8 @@ Adds rotational transformation
 </details>
 
 - **Group**: [global-helpers](#global-helpers)
+- **Used by**:
+  - [tabs--x [mixin]](#tabs--x-mixin)
 
 ### ✅hidden [mixin]
 
@@ -9525,6 +17399,22 @@ Adds styles to hide content
 </details>
 
 - **Group**: [global-helpers](#global-helpers)
+- **Used by**:
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅button-reset [mixin]
 
@@ -9584,6 +17474,27 @@ Resets button styles
   - [font-smoothing [mixin]](#font-smoothing-mixin)
   - [letter-spacing [mixin]](#letter-spacing-mixin)
   - [feature-flag-enabled [function]](#feature-flag-enabled-function)
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅skeleton [mixin]
 
@@ -9639,6 +17550,42 @@ Skeleton loading animation
 - **Group**: [global-helpers](#global-helpers)
 - **Requires**:
   - [skeleton [variable]](#skeleton-variable)
+- **Used by**:
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅⚠️light-ui [mixin]
 
@@ -9851,6 +17798,19 @@ Layer mixin to set `box-shadow`
 - **Requires**:
   - [css--use-layer [variable]](#css--use-layer-variable)
   - [layer-shadows [variable]](#layer-shadows-variable)
+- **Used by**:
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ## global-layout
 
@@ -9915,6 +17875,12 @@ $padding: (
 - **Type**: `Map`
 - **Used by**:
   - [padding [function]](#padding-function)
+  - [padding-td--condensed [mixin]](#padding-td--condensed-mixin)
+  - [padding--data-structured-list [mixin]](#padding--data-structured-list-mixin)
+  - [padding-td [mixin]](#padding-td-mixin)
+  - [padding-th [mixin]](#padding-th-mixin)
+  - [padding-td--condensed--x [mixin]](#padding-td--condensed--x-mixin)
+  - [padding--data-structured-list--x [mixin]](#padding--data-structured-list--x-mixin)
 - **Deprecated**: (For v10) Was used primary for older grid
 
 ### ✅⚠️padding [function]
@@ -10018,7 +17984,11 @@ $padding: (
   - [feature-flag-enabled [function]](#feature-flag-enabled-function)
   - [breakpoints [variable]](#breakpoints-variable)
 - **Used by**:
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
   - [grid-container [mixin]](#grid-container-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--breakpoint()`
 
 ### ✅⚠️max-breakpoint [mixin]
@@ -10187,6 +18157,28 @@ $z-indexes: (
 - **Group**: [global-layout](#global-layout)
 - **Requires**:
   - [z-indexes [variable]](#z-indexes-variable)
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ## global-motion
 
@@ -10207,6 +18199,9 @@ $carbon--ease-in: cubic-bezier(0.25, 0, 1, 1);
 - **Type**: `Function`
 - **Aliased**:
   - `bx--ease-in`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--ease-out [variable]
 
@@ -10225,6 +18220,11 @@ $carbon--ease-out: cubic-bezier(0, 0, 0.25, 1);
 - **Type**: `Function`
 - **Aliased**:
   - `bx--ease-out`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--standard-easing [variable]
 
@@ -10243,6 +18243,27 @@ $carbon--standard-easing: cubic-bezier(0.5, 0, 0.1, 1);
 - **Type**: `Function`
 - **Aliased**:
   - `bx--standard-easing`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅transition--base [variable]
 
@@ -10259,6 +18280,23 @@ $transition--base: 250ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [link [mixin]](#link-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [search [mixin]](#search-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅transition--expansion [variable]
 
@@ -10275,6 +18313,13 @@ $transition--expansion: 300ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅duration--fast-01 [variable]
 
@@ -10291,6 +18336,18 @@ $duration--fast-01: 70ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅duration--fast-02 [variable]
 
@@ -10307,6 +18364,22 @@ $duration--fast-02: 110ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
 
 ### ✅duration--moderate-01 [variable]
 
@@ -10323,6 +18396,11 @@ $duration--moderate-01: 150ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
 
 ### ✅duration--moderate-02 [variable]
 
@@ -10355,6 +18433,8 @@ $duration--slow-01: 400ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [modal--x [mixin]](#modal--x-mixin)
 
 ### ✅duration--slow-02 [variable]
 
@@ -10371,6 +18451,8 @@ $duration--slow-02: 720ms;
 
 - **Group**: [global-motion](#global-motion)
 - **Type**: `Number`
+- **Used by**:
+  - [loading--x [mixin]](#loading--x-mixin)
 
 ### ✅⚠️bx--ease-in [variable]
 
@@ -10455,6 +18537,30 @@ We also offer two modes: `productive` and `expressive`.
 - **Returns**: `Function` A CSS cubic-bezier function
 - **Requires**:
   - [carbon--motion [function]](#carbon--motion-function)
+- **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tile--x [mixin]](#tile--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
 
 ### ✅motion [mixin]
 
@@ -10519,11 +18625,65 @@ Resets default browser styling
 - **Requires**:
   - [css--reset [variable]](#css--reset-variable)
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
   - [css-body [mixin]](#css-body-mixin)
   - [css-body--x [mixin]](#css-body--x-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
   - [button-reset [mixin]](#button-reset-mixin)
   - [typography [mixin]](#typography-mixin)
+  - [link [mixin]](#link-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ## global-spacing
 
@@ -10558,6 +18718,8 @@ $spacing-4xs: $spacing-baseline * 0.0625;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [pagination--x [mixin]](#pagination--x-mixin)
 
 ### ✅spacing-3xs [variable]
 
@@ -10574,6 +18736,15 @@ $spacing-3xs: $spacing-baseline * 0.125;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅spacing-2xs [variable]
 
@@ -10590,6 +18761,24 @@ $spacing-2xs: $spacing-baseline * 0.25;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅spacing-xs [variable]
 
@@ -10606,6 +18795,34 @@ $spacing-xs: $spacing-baseline * 0.5;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-v2-expandable [mixin]](#data-table-v2-expandable-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [select [mixin]](#select-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅spacing-sm [variable]
 
@@ -10622,6 +18839,13 @@ $spacing-sm: $spacing-baseline * 0.75;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [form [mixin]](#form-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅spacing-md [variable]
 
@@ -10638,6 +18862,37 @@ $spacing-md: $spacing-baseline;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [select [mixin]](#select-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [padding-td [mixin]](#padding-td-mixin)
+  - [padding-th [mixin]](#padding-th-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅spacing-lg [variable]
 
@@ -10654,6 +18909,19 @@ $spacing-lg: $spacing-baseline * 1.5;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅spacing-xl [variable]
 
@@ -10670,6 +18938,14 @@ $spacing-xl: $spacing-baseline * 2;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [form [mixin]](#form-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅spacing-2xl [variable]
 
@@ -10686,6 +18962,13 @@ $spacing-2xl: $spacing-baseline * 2.5;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
 
 ### ✅spacing-3xl [variable]
 
@@ -10702,6 +18985,12 @@ $spacing-3xl: $spacing-baseline * 3;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [tile [mixin]](#tile-mixin)
 
 ### ✅layout-2xs [variable]
 
@@ -10814,6 +19103,680 @@ $layout-2xl: $spacing-baseline * 10;
 
 - **Group**: [global-spacing](#global-spacing)
 - **Type**: `Number`
+
+## global-themes
+
+### ❌carbon--theme--v9 [variable]
+
+v9 theme tokens
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--v9: (
+  brand-01: $color__blue-51,
+  brand-02: $color__blue-40,
+  brand-03: $color__teal-20,
+  inverse-01: $color__white,
+  inverse-02: #272d33,
+  ui-01: $color__white,
+  ui-02: #f4f7fb,
+  ui-03: $color__gray-1,
+  ui-04: #8897a2,
+  ui-05: $color__navy-gray-6,
+  text-01: $color__blue-90,
+  text-02: $color__navy-gray-6,
+  text-03: #cdd1d4,
+  field-01: #f4f7fb,
+  field-02: $color__white,
+  support-01: #e0182d,
+  support-02: $color__green-40,
+  support-03: $color__yellow-30,
+  support-04: $color__blue-30,
+  nav-01: $color__navy-gray-1,
+  nav-02: $color__blue-90,
+  nav-03: $color__purple-30,
+  nav-04: $color__purple-60,
+  nav-05: $color__teal-40,
+  nav-06: $color__teal-50,
+  nav-07: $color__blue-30,
+  nav-08: $color__blue-51,
+  hover-primary: darken($color__blue-51, 10%),
+  hover-primary-text: darken($color__blue-51, 15%),
+  hover-danger: darken(#e0182d, 10%),
+  hover-secondary: $color__blue-51,
+  hover-row: rgba($color__blue-40, 0.1),
+);
+```
+
+</details>
+
+- **Group**: [global-themes](#global-themes)
+- **Type**: `Map`
+
+### ❌theme [mixin]
+
+v9 theme mixin
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin theme() {
+  // Nav
+  $nav-01: $color__navy-gray-1 !default !global;
+  $nav-02: $color__blue-90 !default !global;
+  $nav-03: $color__purple-30 !default !global;
+  $nav-04: $color__purple-60 !default !global;
+  $nav-05: $color__teal-40 !default !global;
+  $nav-06: $color__teal-50 !default !global;
+  $nav-07: $color__blue-30 !default !global;
+  $nav-08: $color__blue-51 !default !global;
+
+  // Global
+  $input-border: 1px solid transparent !default !global;
+  $input-label-weight: 600 !default !global;
+  $focus: $color__blue-20 !default !global;
+
+  // Button Theme Variables
+  $button-font-weight: 600 !default !global;
+  $button-font-size: 0.875rem !default !global;
+  $button-border-radius: 0 !default !global;
+  $button-height: 40px !default !global;
+  $button-padding: 0 $spacing-md !default !global;
+  $button-padding-sm: 0 $spacing-xs !default !global;
+  $button-border-width: 2px !default !global;
+  $button-outline-width: 1px !default !global;
+
+  // Accordion (Reverse)
+  $accordion-flex-direction: row !default !global;
+  $accordion-justify-content: flex-start !default !global;
+  $accordion-arrow-margin: 0 0 0 $spacing-2xs !default !global;
+  $accordion-title-margin: 0 0 0 $spacing-md !default !global;
+  $accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default !global;
+
+  // Card
+  $card-text-align: center !default !global;
+  $card-flex-align: center !default !global;
+
+  // Checkbox
+  $checkbox-border-width: 2px !default !global;
+
+  // Code Snippet
+  $snippet-background-color: $ui-01 !default !global;
+  $snippet-border-color: $ui-03 !default !global;
+
+  // Content Switcher
+  $content-switcher-border-radius: 8px !default !global;
+  $content-switcher-option-border: 1px solid $brand-01 !default !global;
+
+  // Data Table
+  $data-table-heading-transform: uppercase !default !global;
+  $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
+  $data-table-row-height: 2rem !default !global;
+
+  // Modal
+  $modal-border-top: $brand-01 4px solid !default !global;
+  $modal-footer-background-color: $ui-02 !default !global;
+
+  // Progress Indicator
+  $progress-indicator-bar-width: 1px inset transparent !default !global;
+  $progress-indicator-stroke-width: 5 !default !global;
+  $progress-indicator-line-offset: 0.625rem !default !global;
+
+  // Radio Button
+  $radio-border-width: 2px !default !global;
+
+  // Structured Theme Variables
+  $structured-list-padding: 2rem !default !global;
+  $structured-list-text-transform: none !default !global;
+
+  // Skeleton Loading
+  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01
+}
+```
+
+</details>
+
+- **Group**: [global-themes](#global-themes)
+- **Requires**:
+  - [nav-01 [variable]](#nav-01-variable)
+  - [color\_\_navy-gray-1 [variable]](#color__navy-gray-1-variable)
+  - [nav-02 [variable]](#nav-02-variable)
+  - [color\_\_blue-90 [variable]](#color__blue-90-variable)
+  - [nav-03 [variable]](#nav-03-variable)
+  - [color\_\_purple-30 [variable]](#color__purple-30-variable)
+  - [nav-04 [variable]](#nav-04-variable)
+  - [color\_\_purple-60 [variable]](#color__purple-60-variable)
+  - [nav-05 [variable]](#nav-05-variable)
+  - [color\_\_teal-40 [variable]](#color__teal-40-variable)
+  - [nav-06 [variable]](#nav-06-variable)
+  - [color\_\_teal-50 [variable]](#color__teal-50-variable)
+  - [nav-07 [variable]](#nav-07-variable)
+  - [color\_\_blue-30 [variable]](#color__blue-30-variable)
+  - [nav-08 [variable]](#nav-08-variable)
+  - [color\_\_blue-51 [variable]](#color__blue-51-variable)
+  - [input-border [variable]](#input-border-variable)
+  - [input-label-weight [variable]](#input-label-weight-variable)
+  - [focus [variable]](#focus-variable)
+  - [color\_\_blue-20 [variable]](#color__blue-20-variable)
+  - [button-font-weight [variable]](#button-font-weight-variable)
+  - [button-font-size [variable]](#button-font-size-variable)
+  - [button-border-radius [variable]](#button-border-radius-variable)
+  - [button-height [variable]](#button-height-variable)
+  - [button-padding [variable]](#button-padding-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [button-padding-sm [variable]](#button-padding-sm-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [button-outline-width [variable]](#button-outline-width-variable)
+  - [accordion-flex-direction [variable]](#accordion-flex-direction-variable)
+  - [accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [accordion-title-margin [variable]](#accordion-title-margin-variable)
+  - [accordion-content-padding [variable]](#accordion-content-padding-variable)
+  - [spacing-2xl [variable]](#spacing-2xl-variable)
+  - [checkbox-border-width [variable]](#checkbox-border-width-variable)
+  - [snippet-background-color [variable]](#snippet-background-color-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [snippet-border-color [variable]](#snippet-border-color-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [content-switcher-border-radius [variable]](#content-switcher-border-radius-variable)
+  - [content-switcher-option-border [variable]](#content-switcher-option-border-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [data-table-heading-transform [variable]](#data-table-heading-transform-variable)
+  - [data-table-heading-border-bottom [variable]](#data-table-heading-border-bottom-variable)
+  - [data-table-row-height [variable]](#data-table-row-height-variable)
+  - [modal-border-top [variable]](#modal-border-top-variable)
+  - [modal-footer-background-color [variable]](#modal-footer-background-color-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [progress-indicator-bar-width [variable]](#progress-indicator-bar-width-variable)
+  - [progress-indicator-stroke-width [variable]](#progress-indicator-stroke-width-variable)
+  - [progress-indicator-line-offset [variable]](#progress-indicator-line-offset-variable)
+  - [radio-border-width [variable]](#radio-border-width-variable)
+  - [structured-list-padding [variable]](#structured-list-padding-variable)
+  - [structured-list-text-transform [variable]](#structured-list-text-transform-variable)
+  - [skeleton [variable]](#skeleton-variable)
+  - [field-01 [variable]](#field-01-variable)
+
+### ❌theme--experimental [mixin]
+
+v10 theme mixin
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin theme--experimental() {
+  // Global
+
+  /// @type Value
+  /// @access public
+  /// @group global
+  $input-border: 1px solid transparent !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group global
+  $input-label-weight: 400 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group global
+  $disabled: $disabled-02 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group global
+  $disabled-background-color: $disabled-01 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group global
+  $focus: $ibm-color__blue-60 !default !global;
+
+  // Link
+
+  /// @type Color
+  /// @access public
+  /// @group link
+  $link-visited: $ibm-color__purple-60 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group link
+  $link-inverse-color: #6ea6ff !default !global;
+
+  // Tooltip
+
+  /// @type Color
+  /// @access public
+  /// @group tooltip
+  $tooltip-background-color: $inverse-02 !default !global;
+
+  // Button
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  $button-font-weight: 400 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  $button-font-size: 0.875rem !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group
+  $button-border-radius: 0 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group
+  $button-height: 48px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
+  $button-padding: 0.875rem 63px 0.875rem 15px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
+  $button-padding-sm: 0.375rem 63px 0.375rem 15px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  $button-padding-lg: $carbon--spacing-04 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  $button-border-width: 1px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  $button-outline-width: 3px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  $button-outline-offset: -5px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
+  $button-outline: 1px solid $ibm-color__white-0 !default !global;
+
+  // Accordion
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-flex-direction: row-reverse !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-justify-content: flex-start !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-title-margin: 0 0 0 $carbon--spacing-05 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-content-padding: 0 0 0 $carbon--spacing-05 !default !global;
+
+  // Checkbox
+
+  /// @type Number
+  /// @access public
+  /// @group checkbox
+  $checkbox-border-width: 2px !default !global;
+
+  // Code Snippet
+
+  /// @type Color
+  /// @access public
+  /// @group code-snippet
+  $snippet-background-color: $ui-01 !default !global; // TODO: Define for experimental
+
+  /// @type Color
+  /// @access public
+  /// @group code-snippet
+  $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
+
+  // Content Switcher
+
+  /// @type Number
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-border-radius: 0px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-option-border: 1px solid $brand-01 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-divider: $ui-03 !default !global;
+
+  // Data Table
+
+  /// @type Value
+  /// @access public
+  /// @group data-table
+  $data-table-heading-transform: uppercase !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group data-table
+  $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group data-table
+  $data-table-row-height: 2rem !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group data-table
+  $data-table-zebra-color: #fcfcfc !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group data-table
+  $data-table-column-hover: $hover-selected-ui !default !global;
+
+  // Date Picker
+
+  /// @type Color
+  /// @access public
+  /// @group data-table
+  $date-picker-in-range-background-color: $ibm-color__blue-20 !default !global;
+
+  // Modal
+
+  /// @type Color
+  /// @access public
+  /// @group modal
+  $modal-border-top: $brand-01 4px solid !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group modal
+  $modal-footer-background-color: $ui-03 !default !global;
+
+  // Notification
+
+  /// @type Color
+  /// @access public
+  /// @group notification
+  $notification-info-background-color: $ibm-color__blue-10 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group notification
+  $notification-error-background-color: $ibm-color__red-10 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group notification
+  $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group notification
+  $notification-success-background-color: $ibm-color__green-10 !default !global;
+
+  // Progress Indicator
+
+  /// @type Value
+  /// @access public
+  /// @group progress-indicator
+  $progress-indicator-bar-width: 1px inset transparent !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group progress-indicator
+  $progress-indicator-stroke-width: 5 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group progress-indicator
+  $progress-indicator-line-offset: 0.625rem !default !global;
+
+  // Copy Button
+
+  /// @type Color
+  /// @access public
+  /// @group copy-button
+  $copy-active: $active-ui !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group copy-button
+  $copy-btn-feedback: $ibm-color__gray-80 !default !global;
+
+  // Radio Button
+
+  /// @type Number
+  /// @access public
+  /// @group radio-button
+  $radio-border-width: 1px !default !global;
+
+  // Structured List
+
+  /// @type Number
+  /// @access public
+  /// @group structured-list
+  $structured-list-padding: 2rem !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group structured-list
+  $structured-list-text-transform: none !default !global;
+
+  // Tabs
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
+  $tab-underline-color: 3px solid $ibm-color__gray-30 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
+  $tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group tabs
+  $tab-text-disabled: $ibm-color__gray-30 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
+  $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
+
+  // Skeleton Loading
+
+  /// @type Color
+  /// @access public
+  /// @group skeleton
+  $skeleton: rgba(
+    $color__blue-51,
+    0.1
+  ) !default !global; //old $field-01 TODO: Define for experimental
+
+  // ☠️ Deprecated
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $hover-field: $hover-ui !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $active-01: $active-ui !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-01: $color__navy-gray-1 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group
+  $nav-02: $color__blue-90 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-03: $color__purple-30 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-04: $color__purple-60 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-05: $color__teal-40 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-06: $color__teal-50 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-07: $color__blue-30 !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
+  $nav-08: $color__blue-51 !default !global;
+}
+```
+
+</details>
+
+- **Group**: [global-themes](#global-themes)
+- **Requires**:
+  - [input-border [variable]](#input-border-variable)
+  - [input-label-weight [variable]](#input-label-weight-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-background-color [variable]](#disabled-background-color-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
+  - [focus [variable]](#focus-variable)
+  - [link-visited [variable]](#link-visited-variable)
+  - [link-inverse-color [variable]](#link-inverse-color-variable)
+  - [tooltip-background-color [variable]](#tooltip-background-color-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
+  - [button-font-weight [variable]](#button-font-weight-variable)
+  - [button-font-size [variable]](#button-font-size-variable)
+  - [button-border-radius [variable]](#button-border-radius-variable)
+  - [button-height [variable]](#button-height-variable)
+  - [button-padding [variable]](#button-padding-variable)
+  - [button-padding-sm [variable]](#button-padding-sm-variable)
+  - [button-padding-lg [variable]](#button-padding-lg-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [button-border-width [variable]](#button-border-width-variable)
+  - [button-outline-width [variable]](#button-outline-width-variable)
+  - [button-outline-offset [variable]](#button-outline-offset-variable)
+  - [button-outline [variable]](#button-outline-variable)
+  - [accordion-flex-direction [variable]](#accordion-flex-direction-variable)
+  - [accordion-justify-content [variable]](#accordion-justify-content-variable)
+  - [accordion-arrow-margin [variable]](#accordion-arrow-margin-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [accordion-title-margin [variable]](#accordion-title-margin-variable)
+  - [accordion-content-padding [variable]](#accordion-content-padding-variable)
+  - [checkbox-border-width [variable]](#checkbox-border-width-variable)
+  - [snippet-background-color [variable]](#snippet-background-color-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [snippet-border-color [variable]](#snippet-border-color-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [content-switcher-border-radius [variable]](#content-switcher-border-radius-variable)
+  - [content-switcher-option-border [variable]](#content-switcher-option-border-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [content-switcher-divider [variable]](#content-switcher-divider-variable)
+  - [data-table-heading-transform [variable]](#data-table-heading-transform-variable)
+  - [data-table-heading-border-bottom [variable]](#data-table-heading-border-bottom-variable)
+  - [data-table-row-height [variable]](#data-table-row-height-variable)
+  - [data-table-zebra-color [variable]](#data-table-zebra-color-variable)
+  - [data-table-column-hover [variable]](#data-table-column-hover-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [date-picker-in-range-background-color [variable]](#date-picker-in-range-background-color-variable)
+  - [modal-border-top [variable]](#modal-border-top-variable)
+  - [modal-footer-background-color [variable]](#modal-footer-background-color-variable)
+  - [notification-info-background-color [variable]](#notification-info-background-color-variable)
+  - [notification-error-background-color [variable]](#notification-error-background-color-variable)
+  - [notification-warning-background-color [variable]](#notification-warning-background-color-variable)
+  - [notification-success-background-color [variable]](#notification-success-background-color-variable)
+  - [progress-indicator-bar-width [variable]](#progress-indicator-bar-width-variable)
+  - [progress-indicator-stroke-width [variable]](#progress-indicator-stroke-width-variable)
+  - [progress-indicator-line-offset [variable]](#progress-indicator-line-offset-variable)
+  - [copy-active [variable]](#copy-active-variable)
+  - [active-ui [variable]](#active-ui-variable)
+  - [copy-btn-feedback [variable]](#copy-btn-feedback-variable)
+  - [radio-border-width [variable]](#radio-border-width-variable)
+  - [structured-list-padding [variable]](#structured-list-padding-variable)
+  - [structured-list-text-transform [variable]](#structured-list-text-transform-variable)
+  - [tab-underline-color [variable]](#tab-underline-color-variable)
+  - [tab-underline-color-hover [variable]](#tab-underline-color-hover-variable)
+  - [tab-text-disabled [variable]](#tab-text-disabled-variable)
+  - [tab-underline-disabled [variable]](#tab-underline-disabled-variable)
+  - [skeleton [variable]](#skeleton-variable)
+  - [color\_\_blue-51 [variable]](#color__blue-51-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [active-01 [variable]](#active-01-variable)
+  - [nav-01 [variable]](#nav-01-variable)
+  - [color\_\_navy-gray-1 [variable]](#color__navy-gray-1-variable)
+  - [nav-02 [variable]](#nav-02-variable)
+  - [color\_\_blue-90 [variable]](#color__blue-90-variable)
+  - [nav-03 [variable]](#nav-03-variable)
+  - [color\_\_purple-30 [variable]](#color__purple-30-variable)
+  - [nav-04 [variable]](#nav-04-variable)
+  - [color\_\_purple-60 [variable]](#color__purple-60-variable)
+  - [nav-05 [variable]](#nav-05-variable)
+  - [color\_\_teal-40 [variable]](#color__teal-40-variable)
+  - [nav-06 [variable]](#nav-06-variable)
+  - [color\_\_teal-50 [variable]](#color__teal-50-variable)
+  - [nav-07 [variable]](#nav-07-variable)
+  - [color\_\_blue-30 [variable]](#color__blue-30-variable)
+  - [nav-08 [variable]](#nav-08-variable)
 
 ## global-typography
 
@@ -10975,6 +19938,9 @@ $font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono',
 </details>
 
 - **Group**: [global-typography](#global-typography)
+- **Used by**:
+  - [snippet [mixin]](#snippet-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
 - **Deprecated**: (For v10) Use `$carbon--font-families`
 
 ### ✅⚠️font-family-sans-serif [variable]
@@ -11122,7 +20088,42 @@ Type size in rem from typescale-map
   - [feature-flag-enabled [function]](#feature-flag-enabled-function)
   - [typescale-map [variable]](#typescale-map-variable)
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
   - [typography [mixin]](#typography-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [link [mixin]](#link-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--type-scale()`
 
 ### ✅⚠️helvetica [mixin]
@@ -11210,9 +20211,40 @@ Uses sans-serif font type if `$css--plex` is true, else uses Helvetica
   - [font-family-sans-serif [variable]](#font-family-sans-serif-variable)
   - [font-family-helvetica [variable]](#font-family-helvetica-variable)
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [form [mixin]](#form-mixin)
   - [css-body [mixin]](#css-body-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
   - [button-reset [mixin]](#button-reset-mixin)
+  - [link [mixin]](#link-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--font-family()`
 
 ### ✅⚠️line-height [mixin]
@@ -11266,7 +20298,10 @@ Line heights for headings body text
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [feature-flag-enabled [function]](#feature-flag-enabled-function)
 - **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [typography [mixin]](#typography-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
 - **Deprecated**: (For v10) Use `@include carbon--type-style()`
 
 ### ✅⚠️font-smoothing [mixin]
@@ -11296,7 +20331,17 @@ Font smoothing declarations
   - [deprecate [mixin]](#deprecate-mixin)
   - [feature-flag-enabled [function]](#feature-flag-enabled-function)
 - **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [button-reset [mixin]](#button-reset-mixin)
+  - [link [mixin]](#link-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 - **Deprecated**: (For v10) The new type styles doesn't use this
 
 ### ✅⚠️letter-spacing [mixin]
@@ -11325,7 +20370,12 @@ Letter spacing declaration
   - [deprecate [mixin]](#deprecate-mixin)
   - [feature-flag-enabled [function]](#feature-flag-enabled-function)
 - **Used by**:
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
   - [button-reset [mixin]](#button-reset-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
 - **Deprecated**: (For v10) The new type styles doesn't use this
 
 ### ✅⚠️font-size-map [variable]
@@ -11446,36 +20496,10544 @@ Different type styles per token
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
 - **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [bx--snippet--x [mixin]](#bx--snippet--x-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form--x [mixin]](#form--x-mixin)
   - [css-body--x [mixin]](#css-body--x-mixin)
   - [css-helpers [mixin]](#css-helpers-mixin)
+  - [inline-loading--x [mixin]](#inline-loading--x-mixin)
+  - [link--x [mixin]](#link--x-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [product-switcher [mixin]](#product-switcher-mixin)
 
-## general
+## inline-loading
 
-### ❌data-table-suffix [variable]
+### ❌inline-loading [mixin]
+
+v9 inline-loading
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$data-table-suffix: if(feature-flag-enabled('components-x'), '-v2', '');
+@mixin inline-loading() {
+  .#{$prefix}--inline-loading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--inline-loading__text {
+    @include typescale('zeta');
+  }
+
+  .#{$prefix}--inline-loading__animation {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .#{$prefix}--inline-loading__checkmark-container {
+    width: 0.75rem;
+    position: absolute;
+    top: 0.75rem;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--inline-loading__checkmark {
+    fill: none;
+    stroke: $brand-01;
+    transform-origin: 50% 50%;
+    stroke-width: 2.1;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 12;
+    animation-name: stroke;
+    animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
+    stroke: $brand-01;
+  }
+  /* If IE11 Don't show check animation */
+  @media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
+    .#{$prefix}--inline-loading__checkmark-container {
+      top: 1px;
+      right: 0.5rem;
+    }
+
+    .#{$prefix}--inline-loading__checkmark {
+      animation: none;
+      stroke-dashoffset: 0;
+      stroke-dasharray: 0;
+    }
+  }
+}
 ```
 
 </details>
 
-- **Group**: [general](#general)
+- **Group**: [inline-loading](#inline-loading)
+- **Requires**:
+  - [typescale [mixin]](#typescale-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [brand-01 [variable]](#brand-01-variable)
 
-### ❌data-table-suffix [variable]
+### ❌inline-loading--x [mixin]
+
+v10 inline-loading
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$data-table-suffix: if(feature-flag-enabled('components-x'), '-v2', '');
+@mixin inline-loading--x() {
+  .#{$prefix}--inline-loading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    .#{$prefix}--loading__svg circle {
+      stroke-width: 12;
+    }
+
+    .#{$prefix}--loading__stroke {
+      stroke-dashoffset: 99;
+    }
+  }
+
+  .#{$prefix}--inline-loading__text {
+    @include type-style('body-short-01');
+    color: $text-02;
+  }
+
+  .#{$prefix}--inline-loading__animation {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .#{$prefix}--inline-loading__checkmark-container {
+    width: 0.75rem;
+    position: absolute;
+    top: 0.75rem;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--inline-loading__checkmark {
+    fill: none;
+    stroke: $interactive-01;
+    transform-origin: 50% 50%;
+    stroke-width: 1.8;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 12;
+    animation-name: stroke;
+    animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+  }
+
+  .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
+    stroke: $interactive-01;
+  }
+  /* If IE11 Don't show check animation */
+  @media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
+    .#{$prefix}--inline-loading__checkmark-container {
+      top: 1px;
+      right: 0.5rem;
+    }
+
+    .#{$prefix}--inline-loading__checkmark {
+      animation: none;
+      stroke-dashoffset: 0;
+      stroke-dasharray: 0;
+    }
+  }
+}
 ```
 
 </details>
 
-- **Group**: [general](#general)
+- **Group**: [inline-loading](#inline-loading)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+
+## link
+
+### ❌link [mixin]
+
+v9 link
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin link() {
+  .#{$prefix}--link {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    @include font-smoothing;
+    font-weight: 600;
+    color: $brand-01;
+    text-decoration: underline;
+    transition: $transition--base;
+
+    &:visited {
+      color: $brand-01;
+    }
+
+    &:active,
+    &:hover,
+    &:focus {
+      color: $hover-primary-text;
+    }
+
+    &:focus {
+      @include focus-outline('border');
+    }
+
+    &[aria-disabled='true'] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [link](#link)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
+
+### ❌link--x [mixin]
+
+v10 link
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin link--x() {
+  .#{$prefix}--link {
+    @include reset;
+    @include type-style('body-long-01');
+    color: $link-01;
+    text-decoration: none;
+    outline: none;
+    transition: $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      color: $link-01;
+      box-shadow: 0 1px currentColor;
+    }
+
+    &:active,
+    &:active:visited {
+      color: $text-01;
+      box-shadow: 0 1px currentColor;
+    }
+
+    &:focus {
+      box-shadow: 0 3px currentColor;
+    }
+
+    &:not([href]) {
+      color: $disabled-02;
+      cursor: not-allowed;
+      pointer-events: none;
+      touch-action: none;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    &:visited {
+      color: $link-01;
+    }
+  }
+
+  .#{$prefix}--link--visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link--disabled {
+    @include reset;
+    @include type-style('body-long-01');
+    display: inline;
+    color: $disabled-02;
+    font-weight: 400;
+    cursor: not-allowed;
+  }
+}
+```
+
+</details>
+
+- **Group**: [link](#link)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [visited-link [variable]](#visited-link-variable)
+
+## list
+
+### ❌lists [mixin]
+
+v9 list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin lists() {
+  .#{$prefix}--list--nested,
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    @include font-smoothing;
+    margin-left: $spacing-xl;
+    line-height: 1.5;
+  }
+
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered {
+    padding: $spacing-md;
+  }
+
+  .#{$prefix}--list__item {
+    font-weight: 600;
+    padding-left: $spacing-2xs;
+    color: $text-01;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
+    list-style-type: disc;
+  }
+
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item {
+    list-style-type: decimal;
+  }
+
+  .#{$prefix}--list--nested {
+    margin-left: $spacing-xs;
+  }
+
+  .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    list-style-type: none;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    content: '-';
+    padding-right: $spacing-2xs;
+  }
+}
+```
+
+</details>
+
+- **Group**: [list](#list)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+
+### ❌lists--x [mixin]
+
+v10 list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin lists--x() {
+  .#{$prefix}--list--nested,
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered {
+    @include reset;
+    @include type-style('body-short-01');
+
+    counter-reset: listitem;
+  }
+
+  .#{$prefix}--list__item {
+    font-weight: 400;
+    color: $text-01;
+    list-style-type: none;
+    counter-increment: listitem;
+  }
+
+  .#{$prefix}--list--nested {
+    margin-bottom: rem(4px);
+    margin-left: $carbon--spacing-07;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    display: inline-block;
+    margin-right: $carbon--spacing-03;
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--list--unordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
+    margin-right: $carbon--spacing-03;
+    display: inline-block;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
+    content: '\002013';
+  }
+
+  .#{$prefix}--list--unordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
+    content: '\0025AA';
+  }
+
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    content: counter(listitem) '.';
+  }
+
+  .#{$prefix}--list--ordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item {
+    counter-increment: sub-list-item;
+  }
+
+  .#{$prefix}--list--ordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
+    content: counter(sub-list-item, lower-alpha) '.';
+    width: 0.6rem;
+  }
+}
+```
+
+</details>
+
+- **Group**: [list](#list)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+
+## list-box
+
+### ✅list-box-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$list-box-width: 100%;
+```
+
+</details>
+
+- **Group**: [list-box](#list-box)
+- **Type**: `Number`
+- **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+
+### ✅list-box-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$list-box-height: rem(40px);
+```
+
+</details>
+
+- **Group**: [list-box](#list-box)
+- **Type**: `Number`
+- **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
+
+### ✅list-box-inline-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$list-box-inline-height: if(
+  not feature-flag-enabled('components-x'),
+  rem(32px),
+  $list-box-height
+);
+```
+
+</details>
+
+- **Group**: [list-box](#list-box)
+- **Type**: `Number`
+- **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
+
+### ✅list-box-menu-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$list-box-menu-width: rem(300px);
+```
+
+</details>
+
+- **Group**: [list-box](#list-box)
+- **Type**: `Number`
+- **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
+
+### ❌listbox [mixin]
+
+v9 list-box
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin listbox() {
+  // The overall container element for a `list-box`. Has two variants,
+  // `disabled` and `inline`.
+  .#{$prefix}--list-box {
+    position: relative;
+    width: $list-box-width;
+    height: $list-box-height;
+    max-height: $list-box-height;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    cursor: pointer;
+    color: $text-01;
+  }
+
+  // invalid states
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus {
+    box-shadow: 0 2px 0 0 $support-01;
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field:focus
+    .#{$prefix}--list-box__label {
+    color: $support-01;
+  }
+
+  .#{$prefix}--list-box ~ .#{$prefix}--form-requirement {
+    order: 3;
+    color: $support-01;
+    font-weight: 400;
+    margin-top: $spacing-2xs;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  // Light variation for 'list-box'
+  .#{$prefix}--list-box--light {
+    background-color: $field-02;
+  }
+
+  // Disabled state for a `list-box`
+  .#{$prefix}--list-box--disabled {
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  // Inline variant for a `list-box`
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline {
+    background-color: inherit;
+    width: auto;
+    height: $list-box-inline-height;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+    color: $brand-01;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding: 0 0 0 rem(10px);
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
+    position: static;
+    padding: 0 $spacing-xs;
+  }
+
+  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__menu {
+    top: $list-box-inline-height;
+    width: $list-box-menu-width;
+  }
+
+  .#{$prefix}--list-box--inline
+    > .#{$prefix}--list-box__field[aria-expanded='true']
+    ~ .#{$prefix}--list-box__menu {
+    outline: 1px solid $brand-01;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .#{$prefix}--list-box--inline
+    > .#{$prefix}--list-box__field[aria-expanded='true'],
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    > .#{$prefix}--list-box__field:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  // The field we use for input, showing selection, etc.
+  .#{$prefix}--list-box__field {
+    @include button-reset;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem 0 1rem;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__field[aria-expanded='true'] {
+    outline: none;
+    box-shadow: 0 2px 0 0 $brand-01;
+  }
+
+  .#{$prefix}--list-box__field[disabled] {
+    outline: none;
+    opacity: 0.5;
+  }
+
+  // Label for a `list-box__field`
+  .#{$prefix}--list-box__label {
+    @include typescale('zeta');
+
+    color: $text-01;
+    font-weight: 600;
+    user-select: none;
+  }
+
+  // Menu status inside of a `list-box__field`
+  .#{$prefix}--list-box__menu-icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 0 1rem;
+    transition: transform 200ms $carbon--standard-easing;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--list-box__menu-icon > svg {
+    fill: $brand-01;
+    height: 100%;
+  }
+
+  .#{$prefix}--list-box__menu-icon--open {
+    transform: rotate(180deg);
+  }
+
+  // Selection indicator for a `list-box__field`
+  .#{$prefix}--list-box__selection {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: rem(26px);
+    bottom: 0;
+    height: rem(40px);
+    padding: 0 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 200ms $carbon--standard-easing;
+  }
+
+  .#{$prefix}--list-box__selection > svg {
+    fill: $ui-05;
+    height: 100%;
+  }
+
+  .#{$prefix}--list-box__selection:focus {
+    outline: 1px solid $brand-01;
+  }
+
+  // Modifier for a selection to show that multiple selections have been made
+  .#{$prefix}--list-box__selection--multi {
+    @include typescale('omega');
+
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: $brand-01;
+    height: rem(18px);
+    color: white;
+    line-height: 0;
+    padding: rem(5px);
+    margin-right: rem(10px);
+    border-radius: rem(13px);
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg {
+    fill: white;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: rem(5px);
+  }
+
+  .#{$prefix}--list-box__selection--multi:focus,
+  .#{$prefix}--list-box__selection--multi:hover {
+    background-color: $hover-primary;
+    outline: none;
+  }
+
+  // Descendant of a `list-box` that displays a list of options to select
+  .#{$prefix}--list-box__menu {
+    @include box-shadow();
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: $list-box-height;
+    width: $list-box-width;
+    background-color: $ui-01;
+    max-height: rem(120px);
+    overflow-y: auto;
+    z-index: z('dropdown');
+  }
+
+  // Descendant of a `list-box__menu` that represents a selection for a control
+  .#{$prefix}--list-box__menu-item {
+    @include typescale('zeta');
+
+    display: flex;
+    align-items: center;
+    height: rem(40px);
+    padding: 0 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: $hover-row;
+    outline: 1px solid transparent;
+    text-decoration: underline;
+    color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
+    width: 100%;
+  }
+
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  // Tweaks for descendants
+
+  // In multi-select scenarios, we need to target checkbox inputs
+  .#{$prefix}--list-box__menu-item
+    > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin: 0;
+    width: 100%;
+  }
+
+  // When handling input, we need to target nodes that specifically opt-in to
+  // the `combobox` role in order to make sure the text input is styled
+  // correctly.
+  .#{$prefix}--list-box input[role='combobox'] {
+    background-color: inherit;
+    font-weight: 600;
+    outline-offset: 0;
+    min-width: 0;
+  }
+
+  .#{$prefix}--list-box input[role='combobox']::placeholder {
+    @include placeholder-colors;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--list-box--disabled input[role='combobox'] {
+    opacity: 1;
+  }
+}
+```
+
+</details>
+
+- **Group**: [list-box](#list-box)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [box-shadow [mixin]](#box-shadow-mixin)
+  - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [list-box-width [variable]](#list-box-width-variable)
+  - [list-box-height [variable]](#list-box-height-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [list-box-inline-height [variable]](#list-box-inline-height-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [list-box-menu-width [variable]](#list-box-menu-width-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-row [variable]](#hover-row-variable)
+
+### ❌listbox--x [mixin]
+
+v10 list-box
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin listbox--x() {
+  // The overall container element for a `list-box`. Has two variants,
+  // `disabled` and `inline`.
+  .#{$prefix}--list-box__wrapper--inline {
+    display: inline-grid;
+    align-items: center;
+    grid-template: auto auto / auto auto;
+    grid-gap: rem(4px);
+
+    .#{$prefix}--label {
+      @include type-style('body-short-01');
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+
+    .#{$prefix}--form__helper-text {
+      max-width: none;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 2;
+    }
+  }
+
+  .#{$prefix}--list-box {
+    position: relative;
+    width: $list-box-width;
+    height: rem(40px);
+    max-height: rem(40px);
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    cursor: pointer;
+    color: $text-01;
+    transition: all $duration--fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--list-box--expanded {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--list-box--expanded:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box .#{$prefix}--text-input {
+    height: 100%;
+  }
+
+  // invalid states
+  .#{$prefix}--list-box__invalid-icon {
+    position: absolute;
+    top: $carbon--spacing-04;
+    right: $carbon--spacing-08;
+    fill: $support-01;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
+    top: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+    border-bottom: 0;
+    padding-right: carbon--mini-units(8);
+  }
+
+  .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-right: carbon--mini-units(7);
+  }
+
+  // Light variation for 'list-box'
+  .#{$prefix}--list-box--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
+    border-bottom-width: 0;
+  }
+
+  // Disabled state for `list-box`
+  .#{$prefix}--list-box--disabled:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
+    border-bottom-width: 0;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__label {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item--highlighted {
+    color: $disabled-02;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:hover {
+    cursor: not-allowed;
+  }
+
+  // disabled && invalid
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-right: carbon--mini-units(4);
+  }
+
+  // Inline variant for a `list-box`
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline {
+    background-color: $field-02;
+    border-width: 0;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded {
+    border-bottom-width: 0;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded
+    .#{$prefix}--list-box__field[aria-expanded='true'] {
+    border-width: 0;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-icon {
+    right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__invalid-icon {
+    right: $carbon--spacing-07;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+    color: $text-01;
+  }
+
+  // The field we use for input, showing selection, etc.
+  .#{$prefix}--list-box__field {
+    @include button-reset;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: top;
+    height: rem(40px);
+    padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--list-box__field:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--list-box__field[disabled] {
+    outline: none;
+    color: $disabled-02;
+  }
+
+  // populated input field
+  .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+    padding-right: carbon--mini-units(9);
+  }
+
+  // invalid && populated input field
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value] {
+    padding-right: rem(98px); // to account for clear input button outline
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value]
+    + .#{$prefix}--list-box__invalid-icon {
+    right: rem(66px); // to account for clear input button outline
+  }
+
+  // empty input field
+  .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+    padding-right: $carbon--spacing-09;
+  }
+
+  // invalid && empty input field
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value=''] {
+    padding-right: carbon--mini-units(9);
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value='']
+    + .#{$prefix}--list-box__invalid-icon {
+    right: rem(40px); // to account for clear input button outline
+  }
+
+  // Label for a `list-box__field`
+  .#{$prefix}--list-box__label {
+    @include type-style('body-short-01');
+    color: $text-01;
+    user-select: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  // Menu status inside of a `list-box__field`
+  .#{$prefix}--list-box__menu-icon {
+    position: absolute;
+    right: $carbon--spacing-05;
+    height: 100%;
+    transition: transform $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+  }
+
+  .#{$prefix}--list-box__menu-icon > svg {
+    fill: $icon-01;
+    height: 100%;
+  }
+
+  .#{$prefix}--list-box__menu-icon--open {
+    transform: rotate(180deg);
+  }
+
+  // Selection indicator for a `list-box__field`
+  .#{$prefix}--list-box__selection {
+    position: absolute;
+    right: rem(33px); // to preserve .5rem space between icons according to spec
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(30px);
+    width: rem(30px);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--list-box__selection > svg {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
+    fill: $disabled-02;
+  }
+
+  // Modifier for a selection to show that multiple selections have been made
+  .#{$prefix}--list-box__selection--multi {
+    @include type-style('label-01');
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    background-color: $inverse-02;
+    height: rem(24px);
+    width: auto;
+    color: $inverse-01;
+    line-height: 0;
+    padding: rem(8px);
+    padding-right: rem(2px); // Align with hover circle of X button
+    margin-right: rem(10px);
+    border-radius: rem(12px);
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg {
+    fill: white;
+    margin-left: rem(4px);
+    width: rem(20px);
+    height: rem(20px);
+    padding: rem(2px);
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg:hover {
+    border-radius: 50%;
+    background-color: $hover-secondary;
+  }
+
+  .#{$prefix}--list-box__selection--multi:focus,
+  .#{$prefix}--list-box__selection--multi:hover {
+    outline: none;
+  }
+
+  // Descendant of a `list-box` that displays a list of options to select
+  .#{$prefix}--list-box__menu {
+    @include box-shadow();
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: $list-box-width;
+    background-color: $ui-01;
+    max-height: rem(140px);
+    overflow-y: auto;
+    z-index: z('dropdown');
+  }
+
+  // Descendant of a `list-box__menu` that represents a selection for a control
+  .#{$prefix}--list-box__menu-item {
+    @include type-style('body-short-01');
+    height: rem(40px);
+    color: $text-02;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+
+    &:hover {
+      background-color: $hover-ui;
+
+      + .#{$prefix}--list-box__menu-item
+        .#{$prefix}--list-box__menu-item__option {
+        border-color: transparent;
+      }
+    }
+
+    &:active {
+      background-color: $selected-ui;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item:first-of-type
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item:hover
+    .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__option {
+    @include focus-outline('reset');
+    display: block;
+    height: rem(40px);
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 $carbon--spacing-05;
+    border: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:focus {
+      @include focus-outline('outline');
+      margin: 0;
+      padding: rem(11px) rem(16px);
+      border-color: transparent;
+    }
+
+    &:hover {
+      color: $text-01;
+      border-color: transparent;
+    }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__option {
+    margin: 0 $carbon--spacing-03;
+
+    &:focus {
+      margin: 0;
+      padding-left: $carbon--spacing-03;
+      padding-right: $carbon--spacing-03;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: $hover-ui;
+    color: $text-01;
+    border-color: transparent;
+
+    > .#{$prefix}--list-box__menu-item__option,
+    + .#{$prefix}--list-box__menu-item
+      .#{$prefix}--list-box__menu-item__option {
+      border-color: transparent;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item--active,
+  .#{$prefix}--list-box__menu-item--active:hover {
+    color: $text-01;
+    background-color: $selected-ui;
+    border-bottom-color: $selected-ui;
+  }
+
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
+    width: 100%;
+  }
+
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  // Tweaks for descendants
+  // When handling input, we need to target nodes that specifically opt-in to
+  // the `combobox` role in order to make sure the text input is styled
+  // correctly.
+  .#{$prefix}--list-box input[role='combobox'] {
+    background-color: inherit;
+    min-width: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [list-box](#list-box)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [box-shadow [mixin]](#box-shadow-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [list-box-width [variable]](#list-box-width-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
+
+## loading
+
+### ❌loading [mixin]
+
+v9 loading
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin loading() {
+  .#{$prefix}--loading {
+    @include reset;
+    @include animation__loading--spin;
+    width: $loading__size;
+    height: $loading__size;
+  }
+
+  // Animation (Spin by default)
+  .#{$prefix}--loading__svg {
+    fill: transparent;
+    stroke: $brand-03;
+    stroke-width: 7;
+    stroke-linecap: butt;
+    stroke-dasharray: 240;
+    stroke-dashoffset: $loading__gap;
+  }
+
+  .#{$prefix}--loading--stop {
+    @include animation__loading--stop;
+  }
+
+  .#{$prefix}--loading--small {
+    width: 2rem;
+    height: 2rem;
+
+    .#{$prefix}--loading__svg {
+      stroke: $ui-05;
+    }
+  }
+
+  .#{$prefix}--loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($ui-01, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 2000ms $carbon--standard-easing;
+    z-index: z('overlay');
+  }
+
+  .#{$prefix}--loading-overlay--stop {
+    display: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
+  - [animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [loading\_\_size [variable]](#loading__size-variable)
+  - [brand-03 [variable]](#brand-03-variable)
+  - [loading\_\_gap [variable]](#loading__gap-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+
+### ❌loading--x [mixin]
+
+v10 loading
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin loading--x() {
+  .#{$prefix}--loading {
+    @include reset;
+    @include animation__loading--spin;
+    width: $loading__size;
+    height: $loading__size;
+  }
+
+  // Animation (Spin by default)
+  .#{$prefix}--loading__svg {
+    fill: transparent;
+  }
+
+  .#{$prefix}--loading__svg circle {
+    stroke-width: 8;
+    stroke-linecap: butt;
+    stroke-dasharray: 240;
+  }
+
+  .#{$prefix}--loading__stroke {
+    stroke: $interactive-04;
+    stroke-dashoffset: $loading__gap;
+  }
+
+  .#{$prefix}--loading--stop {
+    @include animation__loading--stop;
+  }
+
+  .#{$prefix}--loading--small {
+    width: 2rem;
+    height: 2rem;
+    circle {
+      stroke-width: 12;
+    }
+  }
+
+  .#{$prefix}--loading--small .#{$prefix}--loading__svg {
+    stroke: $interactive-04;
+  }
+
+  .#{$prefix}--loading__background {
+    stroke: $ui-03;
+    stroke-dashoffset: 0;
+  }
+
+  .#{$prefix}--loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($ui-02, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color $duration--slow-02 motion(standard, expressive);
+    z-index: z('overlay');
+  }
+
+  .#{$prefix}--loading-overlay--stop {
+    display: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
+  - [animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
+  - [motion [function]](#motion-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [loading\_\_size [variable]](#loading__size-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
+  - [loading\_\_gap [variable]](#loading__gap-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+  - [duration--slow-02 [variable]](#duration--slow-02-variable)
+
+### ✅animation\_\_loading--spin [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin animation__loading--spin() {
+  // Animate the container
+  animation-name: rotate;
+  animation-duration: 690ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+
+  // Animate the stroke
+  svg circle {
+    animation-name: init-stroke;
+    animation-duration: 10ms;
+    animation-timing-function: $carbon--standard-easing;
+  }
+}
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Requires**:
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+- **Used by**:
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+
+### ✅animation\_\_loading--stop [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin animation__loading--stop() {
+  // Animate the container
+  animation: rotate-end-p1 700ms $carbon--ease-out forwards, rotate-end-p2 700ms
+      $carbon--ease-out 700ms forwards;
+
+  // Animate the stroke
+  & svg circle {
+    animation-name: stroke-end;
+    animation-duration: 700ms;
+    animation-timing-function: $carbon--ease-out;
+    animation-delay: 700ms;
+    animation-fill-mode: forwards;
+  }
+}
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Requires**:
+  - [carbon--ease-out [variable]](#carbon--ease-out-variable)
+- **Used by**:
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+
+### ✅loading\_\_gap [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$loading__gap: 40;
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Type**: `Number`
+- **Used by**:
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+
+### ✅loading\_\_size [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$loading__size: 10.5rem;
+```
+
+</details>
+
+- **Group**: [loading](#loading)
+- **Type**: `Number`
+- **Used by**:
+  - [loading [mixin]](#loading-mixin)
+  - [loading--x [mixin]](#loading--x-mixin)
+
+## modal
+
+### ❌modal--color [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin modal--color() {
+  .#{$prefix}--modal-container {
+    border-top-color: $color;
+  }
+}
+```
+
+</details>
+
+- **Group**: [modal](#modal)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+- **Used by**:
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+
+### ❌modal [mixin]
+
+v9 modal
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin modal() {
+  .#{$prefix}--modal {
+    @include reset;
+    @include font-family;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: z('hidden');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    opacity: 0;
+    background-color: rgba($ui-03, 0.5);
+    transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
+    visibility: hidden;
+
+    &.is-visible {
+      z-index: z('modal');
+      opacity: 1;
+      transition: opacity 200ms;
+      visibility: visible;
+    }
+  }
+
+  .#{$prefix}--modal--danger {
+    @include modal--color($support-01);
+  }
+
+  .#{$prefix}--modal-container {
+    @include reset;
+    @include layer('pop-out');
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $ui-01;
+    border-top: $modal-border-top;
+    min-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    padding: $spacing-xl 3% 0rem 3%;
+
+    @media (min-width: 600px) {
+      height: auto;
+      min-width: 500px;
+      max-width: 75%;
+      max-height: 90%;
+      padding: $spacing-2xl $spacing-3xl 0 $spacing-3xl;
+    }
+
+    @media (min-width: 1024px) {
+      max-width: 50%;
+      max-height: 80%;
+    }
+  }
+
+  .#{$prefix}--modal-header {
+    margin-bottom: $spacing-lg;
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-footer {
+    flex-shrink: 0;
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include reset;
+    @include typescale('omega');
+    @include letter-spacing;
+    color: $text-01;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include reset;
+    @include typescale('beta');
+    font-weight: 300;
+    color: $text-02;
+  }
+
+  .#{$prefix}--modal-content {
+    overflow-y: auto;
+    margin-bottom: $spacing-3xl;
+    color: $text-01;
+    font-weight: 400;
+
+    > * {
+      @include reset;
+    }
+  }
+
+  .#{$prefix}--modal-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    background-color: $modal-footer-background-color;
+    margin-left: rem(-24px);
+    margin-right: rem(-24px);
+    padding: $spacing-xl $spacing-xl;
+
+    @media (min-width: 600px) {
+      margin-left: rem(-48px);
+      margin-right: rem(-48px);
+      padding: $spacing-xl $spacing-3xl;
+    }
+  }
+
+  .#{$prefix}--modal-close {
+    position: absolute;
+    top: rem(16px);
+    right: rem(16px);
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0.25rem 0.25rem 0.125rem;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--modal-close__icon {
+    fill: $ui-05;
+  }
+}
+```
+
+</details>
+
+- **Group**: [modal](#modal)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [modal--color [mixin]](#modal--color-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [letter-spacing [mixin]](#letter-spacing-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [z [function]](#z-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [modal-border-top [variable]](#modal-border-top-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [spacing-2xl [variable]](#spacing-2xl-variable)
+  - [spacing-3xl [variable]](#spacing-3xl-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [modal-footer-background-color [variable]](#modal-footer-background-color-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+
+### ❌modal--x [mixin]
+
+v10 modal
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin modal--x() {
+  .#{$prefix}--modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: z('hidden');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    opacity: 0;
+    background-color: $overlay-01;
+    transition: opacity $duration--moderate-01 motion(exit, expressive), z-index
+        0s $duration--moderate-01 motion(exit, expressive),
+      visibility 0s $duration--moderate-01 motion(exit, expressive);
+    visibility: hidden;
+
+    &.is-visible {
+      z-index: z('modal');
+      opacity: 1;
+      transition: opacity $duration--slow-01 motion(entrance, expressive);
+      visibility: visible;
+    }
+
+    .#{$prefix}--text-input,
+    .#{$prefix}--select-input {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$prefix}--modal--danger {
+    @include modal--color($support-01);
+  }
+
+  .#{$prefix}--modal-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $ui-01;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+
+    @include carbon--breakpoint(md) {
+      height: auto;
+      width: 50%;
+      max-width: 768px;
+      max-height: 90%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-height: 80%;
+    }
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content {
+    width: 75%;
+    padding-left: 1rem;
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-footer {
+    flex-shrink: 0;
+  }
+
+  .#{$prefix}--modal-header {
+    padding-top: 1rem;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include type-style('label-01');
+
+    color: $text-02;
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include type-style('productive-heading-03');
+
+    color: $text-01;
+  }
+
+  .#{$prefix}--modal-content {
+    @include type-style('body-long-01');
+
+    overflow-y: auto;
+    margin-bottom: $carbon--spacing-09;
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--modal-content > * {
+    @include type-style('body-long-01');
+  }
+
+  .#{$prefix}--modal-footer {
+    display: flex;
+    margin-top: auto;
+    height: 4rem;
+    background-color: $modal-footer-background-color;
+
+    button.#{$prefix}--btn {
+      max-width: none;
+      width: 50%;
+      height: 4rem;
+      margin: 0;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  .#{$prefix}--modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $interactive-01;
+    }
+  }
+
+  .#{$prefix}--modal-close__icon {
+    fill: $icon-01;
+    height: rem(20px);
+    width: rem(20px);
+  }
+}
+```
+
+</details>
+
+- **Group**: [modal](#modal)
+- **Requires**:
+  - [modal--color [mixin]](#modal--color-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [z [function]](#z-function)
+  - [motion [function]](#motion-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [overlay-01 [variable]](#overlay-01-variable)
+  - [duration--moderate-01 [variable]](#duration--moderate-01-variable)
+  - [duration--slow-01 [variable]](#duration--slow-01-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [modal-footer-background-color [variable]](#modal-footer-background-color-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+
+## multi-select
+
+### ❌multiselect [mixin]
+
+v9 multi-select
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin multiselect() {
+  .#{$prefix}--multi-select.#{$prefix}--combo-box
+    > .#{$prefix}--list-box__field {
+    padding: 0 1rem;
+  }
+
+  .#{$prefix}--multi-select.#{$prefix}--combo-box input[role='combobox'] {
+    padding: 0;
+    outline: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [multi-select](#multi-select)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+
+### ❌multiselect--x [mixin]
+
+v10 multi-select
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin multiselect--x() {
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
+    min-width: auto;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    > .#{$prefix}--form-item {
+    margin: 0;
+    flex-direction: row;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item
+    .#{$prefix}--checkbox:checked
+    ~ .#{$prefix}--checkbox-label-text {
+    color: $text-01;
+  }
+
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field {
+    padding-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--multi-select--filterable {
+    .#{$prefix}--list-box__selection--multi {
+      position: absolute;
+      left: $carbon--spacing-03;
+      right: auto;
+    }
+  }
+
+  .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
+    // this value will need to change based on the number of digits in
+    // the number of items selected
+    //
+    // i.e. the input field needs adjusted padding to account for the width of
+    // the number in <ListBox.Selection>
+    padding-left: carbon--mini-units(6);
+  }
+}
+```
+
+</details>
+
+- **Group**: [multi-select](#multi-select)
+- **Requires**:
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+
+## notification
+
+### ❌inline-notifications [mixin]
+
+v9 inline notification
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin inline-notifications() {
+  .#{$prefix}--inline-notification {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include typescale('zeta');
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    padding: $spacing-sm $spacing-md;
+    min-height: rem(40px);
+    color: $text-02;
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include inline-notification--color($support-01);
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include inline-notification--color($support-02);
+  }
+
+  .#{$prefix}--inline-notification--info {
+    @include inline-notification--color($support-04);
+  }
+
+  .#{$prefix}--inline-notification--warning {
+    @include inline-notification--color($support-03);
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    height: 16px;
+    width: 16px;
+    min-width: 22px;
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 $spacing-md;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include typescale('zeta');
+    color: $text-01;
+    font-weight: 600;
+    margin: 0 $spacing-2xs 0 0;
+    line-height: 1.125;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include typescale('zeta');
+    line-height: 1.125;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: 16px;
+    width: 12px;
+    position: relative;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--inline-notification__close-icon {
+    height: 10px;
+    width: 10px;
+    fill: $ui-05;
+    position: absolute;
+    top: 3px;
+    right: 1px;
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [inline-notification--color [mixin]](#inline-notification--color-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-sm [variable]](#spacing-sm-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [support-02 [variable]](#support-02-variable)
+  - [support-04 [variable]](#support-04-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+
+### ❌inline-notifications--x [mixin]
+
+v10 inline notification
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin inline-notifications--x() {
+  .#{$prefix}--inline-notification {
+    @include reset;
+
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    min-height: rem(48px);
+    min-width: rem(288px);
+    max-width: rem(288px);
+    color: $text-01;
+    margin-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      max-width: rem(608px);
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-width: rem(736px);
+    }
+
+    @include carbon--breakpoint(max) {
+      max-width: rem(832px);
+    }
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include notification--experimental(
+      $support-01,
+      $notification-error-background-color
+    );
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include notification--experimental(
+      $support-02,
+      $notification-success-background-color
+    );
+  }
+
+  .#{$prefix}--inline-notification--info {
+    @include notification--experimental(
+      $support-04,
+      $notification-info-background-color
+    );
+  }
+
+  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
+    display: none;
+  }
+
+  .#{$prefix}--inline-notification--warning {
+    @include notification--experimental(
+      $support-03,
+      $notification-warning-background-color
+    );
+  }
+
+  .#{$prefix}--inline-notification--warning
+    .#{$prefix}--inline-notification__icon
+    path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    margin: 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    flex-shrink: 0;
+    margin-right: $carbon--spacing-05;
+    margin-top: rem(14px);
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $carbon--spacing-04 0;
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include type-style('heading-01');
+    margin: 0 $carbon--spacing-02 0 0;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include type-style('body-short-01');
+    word-break: break-word;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('reset');
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
+    transition: outline $duration--fast-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--inline-notification__close-icon {
+      height: 1rem;
+      width: 1rem;
+      fill: $ui-05;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [notification-error-background-color [variable]](#notification-error-background-color-variable)
+  - [support-02 [variable]](#support-02-variable)
+  - [notification-success-background-color [variable]](#notification-success-background-color-variable)
+  - [support-04 [variable]](#support-04-variable)
+  - [notification-info-background-color [variable]](#notification-info-background-color-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [notification-warning-background-color [variable]](#notification-warning-background-color-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+
+### ❌inline-notification--color [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin inline-notification--color() {
+  border: 1px solid $color;
+  border-left: 6px solid $color;
+
+  .#{$prefix}--inline-notification__icon {
+    fill: $color;
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+
+### ❌notification--color [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin notification--color() {
+  border-left: 6px solid $color;
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Used by**:
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+
+### ❌notification--experimental [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin notification--experimental() {
+  border-left: 3px solid $color;
+  background: $background-color;
+
+  .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--toast-notification__icon {
+    fill: $color;
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+- **Used by**:
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+
+### ❌toast-notifications [mixin]
+
+v9 toast notification
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin toast-notifications() {
+  .#{$prefix}--toast-notification {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include layer('overlay');
+    display: flex;
+    justify-content: space-between;
+    width: 16.875rem;
+    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
+    background-color: $ui-01;
+    color: $text-01;
+    margin-top: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    margin-right: $spacing-md;
+
+    &:first-child {
+      margin-top: $spacing-md;
+    }
+  }
+
+  .#{$prefix}--toast-notification--error {
+    @include notification--color($support-01);
+  }
+
+  .#{$prefix}--toast-notification--success {
+    @include notification--color($support-02);
+  }
+
+  .#{$prefix}--toast-notification--info {
+    @include notification--color($support-04);
+  }
+
+  .#{$prefix}--toast-notification--warning {
+    @include notification--color($support-03);
+  }
+
+  .#{$prefix}--toast-notification__close-button {
+    background-color: $ui-01;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    width: 12px;
+    height: 12px;
+    position: relative;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--toast-notification__close-icon,
+  .#{$prefix}--toast-notification__icon {
+    height: 1rem;
+    width: 1rem;
+    height: 10px;
+    width: 10px;
+    fill: $ui-05;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
+
+  .#{$prefix}--toast-notification__title {
+    @include typescale('zeta');
+    @include letter-spacing;
+    font-weight: 600;
+    line-height: 1;
+    padding-bottom: $spacing-3xs;
+  }
+
+  .#{$prefix}--toast-notification__subtitle {
+    @include typescale('omega');
+    color: $text-02;
+    margin-top: 0;
+    margin-bottom: $spacing-md;
+    line-height: 1.2;
+  }
+
+  .#{$prefix}--toast-notification__caption {
+    @include typescale('omega');
+    color: $text-02;
+    line-height: 1;
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [notification--color [mixin]](#notification--color-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [letter-spacing [mixin]](#letter-spacing-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [support-02 [variable]](#support-02-variable)
+  - [support-04 [variable]](#support-04-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+  - [text-02 [variable]](#text-02-variable)
+
+### ❌toast-notifications--x [mixin]
+
+v10 toast notification
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin toast-notifications--x() {
+  .#{$prefix}--toast-notification {
+    @include reset;
+
+    display: flex;
+    width: rem(288px);
+    height: auto;
+    padding-left: $carbon--spacing-05;
+    color: $text-01;
+    margin-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-03;
+    margin-right: $carbon--spacing-05;
+
+    &:first-child {
+      margin-top: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(max) {
+      width: rem(352px);
+    }
+  }
+
+  .#{$prefix}--toast-notification--error {
+    @include notification--experimental(
+      $support-01,
+      $notification-error-background-color
+    );
+  }
+
+  .#{$prefix}--toast-notification--success {
+    @include notification--experimental(
+      $support-02,
+      $notification-success-background-color
+    );
+  }
+
+  .#{$prefix}--toast-notification--info {
+    @include notification--experimental(
+      $support-04,
+      $notification-info-background-color
+    );
+  }
+
+  .#{$prefix}--toast-notification--warning {
+    @include notification--experimental(
+      $support-03,
+      $notification-warning-background-color
+    );
+  }
+
+  .#{$prefix}--toast-notification--warning
+    .#{$prefix}--toast-notification__icon
+    path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
+  .#{$prefix}--toast-notification__icon {
+    flex-shrink: 0;
+    margin-right: $carbon--spacing-05;
+    margin-top: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--toast-notification__details {
+    margin-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('reset');
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-height: rem(48px);
+    min-width: rem(48px);
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--toast-notification__close-icon {
+      height: 1rem;
+      width: 1rem;
+      fill: $ui-05;
+    }
+  }
+
+  .#{$prefix}--toast-notification__title {
+    @include type-style('heading-01');
+
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .#{$prefix}--toast-notification__subtitle {
+    @include type-style('body-short-01');
+
+    color: $text-01;
+    margin-top: 0;
+    margin-bottom: $carbon--spacing-06;
+  }
+
+  .#{$prefix}--toast-notification__caption {
+    @include type-style('body-short-01');
+
+    color: $text-01;
+    margin-bottom: $carbon--spacing-05;
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [notification-error-background-color [variable]](#notification-error-background-color-variable)
+  - [support-02 [variable]](#support-02-variable)
+  - [notification-success-background-color [variable]](#notification-success-background-color-variable)
+  - [support-04 [variable]](#support-04-variable)
+  - [notification-info-background-color [variable]](#notification-info-background-color-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [notification-warning-background-color [variable]](#notification-warning-background-color-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+
+## number-input
+
+### ❌number-input [mixin]
+
+v9 number-input
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin number-input() {
+  .#{$prefix}--number {
+    @include reset;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .#{$prefix}--number input[type='number'] {
+    @include typescale('zeta');
+    @include font-family;
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    min-width: 9.375rem;
+    padding-left: $spacing-md;
+    padding-right: $spacing-xl;
+    font-weight: 300;
+    height: rem(40px);
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    order: 2;
+    border-radius: 0;
+    border-bottom: 1px solid transparent;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--number input[type='number'] {
+    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+
+    &::-ms-clear {
+      display: none; // IE: Hide "clear-field" `x` button on input field
+    }
+
+    &::-webkit-inner-spin-button {
+      appearance: none; // Safari: Hide number spinner
+    }
+  }
+
+  .#{$prefix}--number__controls {
+    @include reset;
+    position: absolute;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    right: 0.5rem;
+    top: 2rem;
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include button-reset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: rem(20px);
+    height: rem(10px);
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover svg {
+      fill: $hover-primary;
+    }
+  }
+
+  .#{$prefix}--number__controls svg {
+    fill: $brand-01;
+
+    // Hover styles for use with old HTML w/o button
+    &:hover {
+      cursor: pointer;
+      fill: $hover-primary;
+    }
+  }
+
+  .#{$prefix}--number[data-invalid] {
+    .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+    }
+
+    input[type='number'],
+    input[type='number']:focus {
+      outline: none;
+      box-shadow: 0 2px 0px 0px $support-01;
+    }
+
+    input[type='number']:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not([data-invalid])
+    .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext[data-invalid] .#{$prefix}--number__controls {
+    top: auto;
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--number--light input[type='number'] {
+    background: $field-02;
+  }
+
+  // Skeleton State
+  .#{$prefix}--number.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+
+    input[type='number'] {
+      display: none;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [number-input](#number-input)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [field-02 [variable]](#field-02-variable)
+
+### ❌number-input--x [mixin]
+
+v10 number-input
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin number-input--x() {
+  .#{$prefix}--number {
+    @include reset;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .#{$prefix}--number input[type='number'] {
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    font-family: carbon--font-family('mono');
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    min-width: 9.375rem;
+    padding-left: $carbon--spacing-05;
+    padding-right: $carbon--spacing-07;
+    font-weight: 300;
+    height: rem(40px);
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid $ui-04;
+    transition: all $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled;
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls svg {
+      fill: $disabled;
+    }
+
+    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+
+    &::-ms-clear {
+      display: none; // IE: Hide "clear-field" `x` button on input field
+    }
+
+    &::-webkit-inner-spin-button {
+      appearance: none; // Safari: Hide number spinner
+    }
+  }
+
+  .#{$prefix}--number__input-wrapper {
+    display: flex;
+    align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--number__controls {
+    @include reset;
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include button-reset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(32px);
+    height: rem(20px);
+    color: $icon-01;
+
+    svg {
+      fill: currentColor;
+      position: relative;
+    }
+
+    &.up-icon svg {
+      top: rem(5px);
+    }
+
+    &.down-icon svg {
+      top: rem(-5px);
+    }
+
+    &:focus {
+      @include focus-outline;
+      color: $icon-01;
+      outline-width: 2px;
+      outline-offset: -2px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: $icon-01;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $disabled;
+    }
+  }
+
+  .#{$prefix}--number[data-invalid] {
+    .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+    }
+
+    input[type='number'] {
+      @include focus-outline('invalid');
+    }
+  }
+
+  .#{$prefix}--number__invalid {
+    position: absolute;
+    right: 2rem;
+    fill: $support-01;
+  }
+
+  .#{$prefix}--number--light input[type='number'] {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--number--mobile {
+    min-width: rem(144px);
+    width: auto;
+
+    .#{$prefix}--number__control-btn,
+    &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
+      position: static;
+      width: rem(40px);
+      height: rem(40px);
+      background-color: $ui-01;
+
+      &:hover,
+      &:focus {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+      }
+
+      svg {
+        position: static;
+      }
+    }
+
+    input[type='number'] {
+      min-width: rem(64px);
+      width: auto;
+      margin: 0;
+      border-right: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
+      padding: 0;
+      text-align: center;
+      background-color: $field-01;
+    }
+
+    &.#{$prefix}--number--light {
+      input[type='number'] {
+        background-color: $field-02;
+      }
+
+      .#{$prefix}--number__control-btn {
+        background-color: $ui-02;
+      }
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--number.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+
+    input[type='number'] {
+      display: none;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [number-input](#number-input)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [carbon--font-family [function]](#carbon--font-family-function)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [disabled-background-color [variable]](#disabled-background-color-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-02 [variable]](#ui-02-variable)
+
+## overflow-menu
+
+### ❌overflow-menu [mixin]
+
+v9 overflow-menu
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin overflow-menu() {
+  .#{$prefix}--overflow-menu {
+    @include reset;
+    position: relative;
+    width: rem(20px);
+    height: rem(38px);
+    cursor: pointer;
+
+    &:focus {
+      outline: 1px solid transparent;
+      box-shadow: 0 0 0 1px $brand-01;
+    }
+  }
+
+  .#{$prefix}--overflow-menu__icon {
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    fill: $ui-05;
+
+    &:hover,
+    &:focus {
+      fill: $hover-secondary;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options {
+    @include reset;
+    @include layer('overlay');
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    z-index: z('floating');
+    background-color: $inverse-01;
+    border: 1px solid $ui-03;
+    width: 11.25rem;
+    list-style: none;
+    margin-top: $spacing-2xs;
+    padding: $spacing-2xs 0 $spacing-xs;
+    left: -20px;
+  }
+
+  .#{$prefix}--overflow-menu-options--open {
+    display: flex;
+  }
+
+  .#{$prefix}--overflow-menu-options {
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: rem(8px);
+      height: rem(8px);
+      z-index: -1;
+      transform: rotate(45deg);
+      background-color: $inverse-01;
+      border-top: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
+      top: -5px;
+      left: 24px;
+    }
+
+    &[data-floating-menu-direction='top']:before {
+      transform: rotate(225deg);
+      top: auto;
+      bottom: -5px;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__option {
+    @include reset;
+    display: flex;
+    background-color: transparent;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .#{$prefix}--overflow-menu--divider {
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn {
+    @include reset;
+    @include typescale('zeta');
+    @include font-family;
+    font-weight: 400;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: inline-block;
+    background-color: transparent;
+    text-align: left;
+    padding: $spacing-xs $spacing-md;
+    cursor: pointer;
+    color: $text-01;
+    max-width: 11.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:focus {
+      outline: 1px solid transparent;
+      text-decoration: underline;
+      background-color: $hover-row;
+      text-decoration: underline;
+    }
+
+    .#{$prefix}--overflow-menu-options__option--danger & {
+      &:focus {
+        outline: 1px solid transparent;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__option:hover {
+    background-color: $hover-row;
+  }
+
+  .#{$prefix}--overflow-menu-options__option:hover
+    .#{$prefix}--overflow-menu-options__btn {
+    text-decoration: none;
+    background-color: $hover-row;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--danger {
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--danger {
+    .#{$prefix}--overflow-menu-options__btn {
+      &:hover,
+      &:focus {
+        color: $inverse-01;
+        background-color: $support-01;
+      }
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled:hover {
+    background-color: $ui-01;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn {
+    color: $text-01;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled:hover
+    .#{$prefix}--overflow-menu-options__btn {
+    color: $text-01;
+    opacity: 0.5;
+    background-color: $ui-01;
+
+    &:active,
+    &:focus {
+      background-color: $ui-01;
+      pointer-events: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu--flip {
+    left: -140px;
+
+    &:before {
+      left: 145px;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [overflow-menu](#overflow-menu)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [hover-row [variable]](#hover-row-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+
+### ❌overflow-menu--x [mixin]
+
+v10 overflow-menu
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin overflow-menu--x() {
+  .#{$prefix}--overflow-menu {
+    @include reset;
+    @include focus-outline('reset');
+    position: relative;
+    width: rem(32px);
+    height: rem(32px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: outline $duration--fast-02 motion(entrance, productive), background-color
+        $duration--fast-02 motion(entrance, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+    background-color: $ui-01;
+    transition: none;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .#{$prefix}--overflow-menu__icon {
+    height: rem(16px);
+    width: rem(16px);
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--overflow-menu-options {
+    @include reset;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    z-index: z('floating');
+    background-color: $ui-01;
+    width: rem(160px);
+    list-style: none;
+    top: 32px;
+    left: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      background-color: $ui-01;
+      transition: background-color $duration--fast-02 motion(entrance, productive);
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    top: rem(-3px);
+    left: 0;
+    width: rem(32px);
+    height: rem(3px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
+    bottom: rem(-6px);
+    left: 0;
+    width: rem(32px);
+    height: rem(6px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
+    right: rem(-6px);
+    top: 0;
+    height: rem(32px);
+    width: rem(6px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
+    top: 0;
+    left: rem(-6px);
+    height: rem(32px);
+    width: rem(6px);
+  }
+
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    left: auto;
+    right: 0;
+  }
+
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
+    top: auto;
+    bottom: 0;
+  }
+
+  .#{$prefix}--overflow-menu-options--open {
+    display: flex;
+  }
+
+  .#{$prefix}--overflow-menu-options__option {
+    @include reset;
+    display: flex;
+    background-color: transparent;
+    align-items: center;
+    width: 100%;
+    height: rem(40px);
+    padding: 0;
+    transition: background-color $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--overflow-menu--divider {
+    border-top: 1px solid $ui-03;
+  }
+
+  a.#{$prefix}--overflow-menu-options__btn::before {
+    content: '';
+    height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn {
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    font-weight: 400;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    background-color: transparent;
+    text-align: left;
+    padding: 0 $carbon--spacing-05;
+    cursor: pointer;
+    color: $text-02;
+    max-width: 11.25rem;
+    transition: outline $duration--fast-02 motion(entrance, productive), background-color
+        $duration--fast-02 motion(entrance, productive),
+      color $duration--fast-02 motion(entrance, productive);
+
+    &:hover {
+      color: $text-01;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &::-moz-focus-inner {
+      border: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__btn svg {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn:hover svg {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--overflow-menu-options__option-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--overflow-menu-options__option:hover {
+    background-color: $hover-ui;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--danger {
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:hover,
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:focus {
+    color: $text-04;
+    background-color: $support-01;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled:hover {
+    background-color: $ui-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn {
+    color: $disabled-02;
+    pointer-events: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+      @include focus-outline('reset');
+      background-color: $ui-01;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn
+    svg {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--overflow-menu--flip {
+    left: -140px;
+
+    &:before {
+      left: 145px;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [overflow-menu](#overflow-menu)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+  - [text-04 [variable]](#text-04-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
+## pagination
+
+### ❌pagination [mixin]
+
+v9 pagination
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin pagination() {
+  .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
+    border-top: 0;
+  }
+
+  .#{$prefix}--pagination {
+    @include reset;
+    @include font-family;
+    width: 100%;
+    background-color: $ui-01;
+    padding: $spacing-xs $spacing-md;
+    display: flex;
+    align-items: center;
+    border: 1px solid $ui-03;
+    height: rem(40px);
+
+    .#{$prefix}--form-item {
+      flex: auto;
+    }
+  }
+
+  .#{$prefix}--pagination__left {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--pagination__right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .#{$prefix}--pagination__text {
+    @include typescale('omega');
+    @include type-style('body-short-01');
+    color: $text-01;
+    display: none;
+    padding-right: $spacing-2xs;
+
+    @include breakpoint('530px') {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--pagination__button-icon {
+    height: rem(12px);
+    width: rem(12px);
+    fill: $ui-05;
+    pointer-events: none;
+    transition: $transition--base;
+    margin-top: $spacing-3xs;
+  }
+
+  .#{$prefix}--pagination__button {
+    @include reset;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      .#{$prefix}--pagination__button-icon {
+        fill: $hover-secondary;
+      }
+    }
+
+    &:focus {
+      @include focus-outline('border');
+    }
+
+    &:disabled:hover {
+      cursor: default;
+
+      .#{$prefix}--pagination__button-icon {
+        fill: $ui-05;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination__button--backward {
+    margin-left: $spacing-md;
+    margin-right: $spacing-lg;
+  }
+
+  .#{$prefix}--pagination__button--forward {
+    margin-left: $spacing-lg;
+  }
+
+  .#{$prefix}--pagination__button--no-index {
+    border-right: 0;
+    margin-right: 1px;
+  }
+
+  .#{$prefix}--pagination {
+    .#{$prefix}--select {
+      margin-right: $spacing-xs;
+    }
+
+    .#{$prefix}--select--inline {
+      margin-right: 0;
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .#{$prefix}--select-input {
+      height: rem(24px);
+      width: auto;
+      padding: 0 1.25rem 0 0;
+      margin: 0;
+      font-weight: 600;
+      text-align-last: center;
+      box-shadow: none;
+
+      &:focus {
+        @include focus-outline('border');
+      }
+    }
+
+    .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
+      right: 0.3rem;
+      top: 0.625rem;
+    }
+
+    .#{$prefix}--text-input {
+      background-color: $field-01;
+      height: rem(24px);
+      min-width: rem(24px);
+      width: rem(24px);
+      padding: 0;
+      margin: 0;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: none;
+      order: 0;
+
+      &:focus {
+        @include focus-outline('border');
+      }
+    }
+  }
+
+  .#{$prefix}--pagination--inline {
+    height: 42px;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    margin-right: -1rem;
+
+    .#{$prefix}--pagination__button {
+      height: rem(40px);
+      border-left: 1px solid $ui-03;
+      border-right: 1px solid $ui-03;
+      margin: 0;
+    }
+
+    .#{$prefix}--pagination__button--forward {
+      border-right: 0;
+      padding: 0 $spacing-md;
+      margin-left: $spacing-md;
+    }
+
+    .#{$prefix}--pagination__button--backward {
+      margin: 0 $spacing-md;
+      padding: 0 $spacing-md;
+    }
+
+    .#{$prefix}--select__arrow {
+      right: 0;
+      top: 0.6rem;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [pagination](#pagination)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [breakpoint [mixin]](#breakpoint-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [field-01 [variable]](#field-01-variable)
+
+### ❌pagination--x [mixin]
+
+v10 pagination
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin pagination--x() {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
+    border-top: 0;
+  }
+
+  .#{$prefix}--pagination {
+    @include reset;
+    @include type-style('body-short-01');
+    width: 100%;
+    background-color: $ui-01;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $ui-03;
+    height: rem(48px);
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select {
+    height: 100%;
+    align-items: center;
+    grid-template-columns: auto 0;
+  }
+
+  .#{$prefix}--select-input__wrapper,
+  .#{$prefix}--select-input--inline__wrapper {
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-short-01');
+    width: auto;
+    min-width: auto;
+    height: 100%;
+    padding: 0 2.5rem 0 $spacing-md;
+    margin-right: -0.65rem;
+    @include carbon--breakpoint('md') {
+      padding: 0 1.5rem 0 0.5rem;
+      margin-right: 0;
+    }
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    position: relative;
+    top: auto;
+    right: 1.1rem;
+    bottom: auto;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__item-count
+    .#{$prefix}--select-input {
+    border-right: $spacing-4xs solid $ui-03;
+    @include carbon--breakpoint('md') {
+      padding-right: 2rem;
+      margin-right: -0.65rem;
+    }
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select-input {
+    border-left: 1px solid $ui-03;
+    @include carbon--breakpoint('md') {
+      padding-left: 1rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select__arrow {
+    @include carbon--breakpoint('md') {
+      right: 1.8rem;
+    }
+  }
+
+  .#{$prefix}--pagination__left,
+  .#{$prefix}--pagination__right {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    margin-right: 1rem;
+    margin-left: rem(1px);
+  }
+
+  .#{$prefix}--pagination__left {
+    @include carbon--breakpoint('md') {
+      padding: 0 $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--pagination__text {
+    display: none;
+
+    @include carbon--breakpoint('md') {
+      display: inline-block;
+    }
+  }
+
+  span.#{$prefix}--pagination__text {
+    margin-left: $carbon--spacing-05;
+    color: $text-01;
+  }
+
+  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
+    margin-left: -0.5rem;
+  }
+
+  .#{$prefix}--pagination__button {
+    @include reset;
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+    padding: 0 rem(14px);
+    border-left: 1px solid $ui-03;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: $ui-05;
+    transition: outline $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--pagination__button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--pagination__button:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination__button--no-index {
+    fill: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--pagination__button:disabled:hover,
+  .#{$prefix}--pagination__button--no-index:hover {
+    cursor: not-allowed;
+    fill: $disabled-02;
+    background: $ui-01;
+  }
+
+  .#{$prefix}--pagination--inline {
+    height: rem(42px);
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    margin-right: -1rem;
+  }
+
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button {
+    height: rem(40px);
+    border-left: 1px solid $ui-03;
+    border-right: 1px solid $ui-03;
+    margin: 0;
+  }
+
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward {
+    border-right: 0;
+    padding: 0 $carbon--spacing-05;
+    margin-left: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward {
+    margin: 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05;
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [pagination](#pagination)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [spacing-4xs [variable]](#spacing-4xs-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
+## pagination-nav
+
+### ❌pseudo-underline [mixin]
+
+v10 pseudo underline
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin pseudo-underline() {
+  @if feature-flag-enabled('components-x') {
+    &:not(.#{$prefix}--pagination-nav__page--direction) {
+      &::after {
+        background-color: $interactive-01;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: $carbon--spacing-02;
+        left: 50%;
+        position: absolute;
+        opacity: 0;
+        transition: width $duration--fast-02 motion(standard, productive);
+        width: 0;
+      }
+    }
+
+    .#{$prefix}--pagination-nav__page--active + &::after,
+    &.#{$prefix}--pagination-nav__page--active::after {
+      left: calc(50% - #{$carbon--spacing-05/2});
+      opacity: 1;
+      width: $carbon--spacing-05;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [pagination-nav](#pagination-nav)
+- **Requires**:
+  - [feature-flag-enabled [function]](#feature-flag-enabled-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+- **Used by**:
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+
+### ❌pagination-nav-base [mixin]
+
+Pagination nav base styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin pagination-nav-base(
+  $text-color: $text-02,
+  $text-color-active: $text-02,
+  $background-color-hover: $hover-ui,
+  $background-color-active: initial,
+  $font-weight: 400,
+  $item-padding: 0,
+  $button-min-width: $carbon--spacing-09,
+  $button-padding: 1.0625rem $carbon--spacing-02,
+  $button-direction-size: $carbon--spacing-09,
+  $select-icon-top-position: $carbon--spacing-05,
+  $select-icon-left-position: $carbon--spacing-05
+) {
+  .#{$prefix}--pagination-nav {
+    @include reset;
+    @if not feature-flag-enabled('components-x') {
+      @include font-family;
+      @include font-smoothing;
+      @include typescale('zeta');
+    } @else {
+      @include type-style('body-short-01');
+    }
+    line-height: 0;
+  }
+
+  .#{$prefix}--pagination-nav__list {
+    align-items: center;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--pagination-nav__list-item {
+    padding: $item-padding;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page {
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('zeta');
+    } @else {
+      @include type-style('body-short-01');
+    }
+    @include button-reset($width: false);
+    border-radius: 0;
+    color: $text-color;
+    display: block;
+    font-weight: $font-weight;
+    line-height: 1;
+    min-width: $button-min-width;
+    outline: 0;
+    padding: $button-padding;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color, color;
+    transition: $duration--fast-02 motion(standard, productive);
+    user-select: none;
+
+    &:hover {
+      background-color: $background-color-hover;
+      color: $text-color;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled,
+    &.#{$prefix}--pagination-nav__page--disabled {
+      background: none;
+      color: rgba($text-color, 0.5);
+      outline: none;
+      pointer-events: none;
+    }
+
+    @include pseudo-underline();
+
+    &.#{$prefix}--pagination-nav__page--active {
+      background-color: $background-color-active;
+      color: $text-color-active;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .#{$prefix}--pagination-nav__icon {
+      fill: currentColor;
+      pointer-events: none;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page--direction {
+    align-items: center;
+    display: flex;
+    height: $button-direction-size;
+    justify-content: center;
+    line-height: 0;
+    width: $button-direction-size;
+  }
+
+  .#{$prefix}--pagination-nav__select {
+    position: relative;
+  }
+
+  .#{$prefix}--pagination-nav__page--select {
+    appearance: none;
+    max-height: $button-min-width;
+    text-indent: calc(50% - 4.5px);
+    // Override some Firefox user-agent styles
+    @-moz-document url-prefix() {
+      text-indent: 0;
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon-wrapper {
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    @include pseudo-underline();
+
+    .#{$prefix}--pagination-nav__page--active + & {
+      .#{$prefix}--pagination-nav__select-icon {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination-nav__select-icon {
+    left: calc(50% - #{$select-icon-top-position/2});
+    pointer-events: none;
+    position: absolute;
+    top: calc(50% - #{$select-icon-top-position/2});
+  }
+
+  .#{$prefix}--pagination-nav__accessibility-label {
+    @include hidden();
+  }
+
+  @content;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                         | Description | Type     | Default value                   |
+| ---------------------------- | ----------- | -------- | ------------------------------- |
+| `$text-color`                | —           | `Color`  | `$text-02`                      |
+| `$text-color-active`         | —           | `Color`  | `$text-02`                      |
+| `$background-color-hover`    | —           | `Color`  | `$hover-ui`                     |
+| `$background-color-active`   | —           | `Color`  | `initial`                       |
+| `$font-weight`               | —           | `Number` | `400`                           |
+| `$item-padding`              | —           | `Number` | `0`                             |
+| `$button-min-width`          | —           | `Number` | `$carbon--spacing-09`           |
+| `$button-padding`            | —           | `Value`  | `1.0625rem $carbon--spacing-02` |
+| `$button-direction-size`     | —           | `Number` | `$carbon--spacing-09`           |
+| `$select-icon-top-position`  | —           | `Number` | `$carbon--spacing-05`           |
+| `$select-icon-left-position` | —           | `Number` | `$carbon--spacing-05`           |
+
+- **Group**: [pagination-nav](#pagination-nav)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [hidden [mixin]](#hidden-mixin)
+  - [feature-flag-enabled [function]](#feature-flag-enabled-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [button-padding [variable]](#button-padding-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+- **Used by**:
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [pagination-nav--x [mixin]](#pagination-nav--x-mixin)
+
+### ❌pagination-nav [mixin]
+
+v9 pagination-nav
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin pagination-nav() {
+  @include pagination-nav-base(
+    $text-color: $ui-05,
+    $text-color-active: $color__white,
+    $background-color-hover: $hover-row,
+    $background-color-active: $brand-01,
+    $font-weight: 600,
+    $item-padding: 0 $spacing-xs,
+    $button-min-width: $spacing-lg,
+    $button-padding: 0.3125rem $spacing-2xs,
+    $button-direction-size: $spacing-lg,
+    $select-icon-top-position: $spacing-md,
+    $select-icon-left-position: $spacing-md
+  );
+
+  .#{$prefix}--pagination-nav__list-item {
+    &:first-child {
+      .#{$prefix}--pagination-nav__page--direction {
+        margin-right: $spacing-xs;
+      }
+    }
+
+    &:last-child {
+      .#{$prefix}--pagination-nav__page--direction {
+        margin-left: $spacing-xs;
+      }
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [pagination-nav](#pagination-nav)
+- **Requires**:
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [color\_\_white [variable]](#color__white-variable)
+  - [hover-row [variable]](#hover-row-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+  - [button-padding [variable]](#button-padding-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [prefix [variable]](#prefix-variable)
+
+### ❌pagination-nav--x [mixin]
+
+v10 pagination-nav
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin pagination-nav--x() {
+  @include pagination-nav-base();
+}
+```
+
+</details>
+
+- **Group**: [pagination-nav](#pagination-nav)
+- **Requires**:
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+
+## progress-indicator
+
+### ❌progress-indicator [mixin]
+
+v9 progress-indicator
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin progress-indicator() {
+  .#{$prefix}--progress {
+    @include reset;
+    @include font-family;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--progress-step {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 7rem;
+    transition: $transition--base all $carbon--standard-easing;
+    overflow: visible;
+
+    &:first-child .#{$prefix}--progress-line {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--progress-line {
+    position: absolute;
+    top: $progress-indicator-line-offset;
+    right: 100%;
+    height: 1px;
+    width: calc(100% - 24px);
+    border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    margin-bottom: $spacing-xs;
+    fill: $brand-01;
+  }
+
+  .#{$prefix}--progress-label {
+    line-height: 1;
+    width: 75%;
+  }
+
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    display: inline-flex;
+    flex-flow: column nowrap;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    outline: none;
+  }
+
+  .#{$prefix}--progress-step--current {
+    circle:first-child {
+      stroke: $brand-01;
+      stroke-width: $progress-indicator-stroke-width;
+      fill: transparent;
+    }
+
+    .#{$prefix}--progress-label {
+      @include font-smoothing;
+      color: $brand-01;
+      font-weight: 600;
+    }
+    .#{$prefix}--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--progress-step--incomplete {
+    circle {
+      stroke: $ui-04;
+      stroke-width: $progress-indicator-stroke-width;
+      fill: transparent;
+    }
+
+    .#{$prefix}--progress-label {
+      color: $text-02;
+    }
+
+    .#{$prefix}--progress-line {
+      background-color: $ui-04;
+    }
+  }
+
+  .#{$prefix}--progress-step--complete {
+    circle {
+      stroke: $brand-01;
+      stroke-width: $progress-indicator-stroke-width;
+      fill: transparent;
+    }
+
+    polygon {
+      fill: $brand-01;
+    }
+
+    .#{$prefix}--progress-label {
+      @include font-smoothing;
+      color: $brand-01;
+      font-weight: 600;
+    }
+    .#{$prefix}--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
+  }
+
+  // Vertical variant
+  .#{$prefix}--progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    display: list-item;
+    min-height: 6rem;
+
+    svg {
+      display: inline-block;
+    }
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+    margin-top: 0.26rem;
+    margin-left: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    top: 22px;
+    left: 0.69rem;
+    height: calc(100% - 22px);
+    width: 1px;
+  }
+
+  .#{$prefix}--progress--vertical
+    .#{$prefix}--progress-step:first-child
+    .#{$prefix}--progress-line {
+    display: block;
+  }
+  .#{$prefix}--progress--vertical
+    .#{$prefix}--progress-step:last-child
+    .#{$prefix}--progress-line {
+    display: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [progress-indicator](#progress-indicator)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [progress-indicator-line-offset [variable]](#progress-indicator-line-offset-variable)
+  - [progress-indicator-bar-width [variable]](#progress-indicator-bar-width-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [progress-indicator-stroke-width [variable]](#progress-indicator-stroke-width-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [text-02 [variable]](#text-02-variable)
+
+### ❌progress-indicator--x [mixin]
+
+v10 progress-indicator
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin progress-indicator--x() {
+  .#{$prefix}--progress {
+    @include reset;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--progress-step {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    flex: 1;
+    min-width: 7rem;
+    width: rem(128px);
+    transition: $duration--fast-02 all motion(standard, productive);
+    overflow: visible;
+
+    .#{$prefix}--tooltip__label {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--progress-line {
+    position: absolute;
+    height: 1px;
+    width: rem(128px);
+    border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: $carbon--spacing-05;
+    height: $carbon--spacing-05;
+    border-radius: 50%;
+    margin: 9px $carbon--spacing-03 0 0;
+    fill: $interactive-01;
+  }
+
+  .#{$prefix}--progress-label {
+    line-height: 1.45;
+    max-width: rem(88px);
+    margin: $carbon--spacing-03 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @include type-style('body-short-01');
+    transition: box-shadow $transition--base $carbon--standard-easing;
+
+    &::before {
+      content: '';
+      display: block;
+    }
+  }
+
+  .#{$prefix}--progress-label:hover {
+    color: $link-01;
+    cursor: pointer;
+    box-shadow: 0 rem(1px) $link-01;
+  }
+
+  .#{$prefix}--progress-label:focus {
+    outline: none;
+    color: $link-01;
+    box-shadow: 0 rem(3px) 0 0 $link-01;
+    transition: box-shadow 0.05s $carbon--standard-easing;
+  }
+
+  .#{$prefix}--progress-label:active {
+    color: $interactive-01;
+    box-shadow: 0 rem(3px) 0 0 $interactive-01;
+  }
+
+  //OVERFLOW STYLING
+  .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
+  .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
+    visibility: visible;
+  }
+
+  .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
+    margin-left: rem(10px);
+  }
+
+  .#{$prefix}--tooltip__text {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  //single line tooltip
+  .#{$prefix}--progress-step .#{$prefix}--tooltip {
+    min-width: rem(115px);
+    width: rem(125px);
+    min-height: $carbon--spacing-06;
+    margin-left: rem(22px);
+    margin-top: rem(40px);
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    display: block;
+    visibility: hidden;
+    @include type-style('body-long-01');
+    color: $inverse-01;
+  }
+
+  //multiline tooltip
+  .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
+    width: rem(150px);
+    height: auto;
+    @include type-style('body-long-01');
+    color: $inverse-01;
+  }
+
+  //OPTIONAL HELPER TEXT STYLING
+  .#{$prefix}--progress-optional {
+    position: absolute;
+    margin-left: $carbon--spacing-06;
+    margin-top: rem(28px);
+    @include type-style('label-01');
+    color: $text-01;
+  }
+
+  //CURRENT STYLING
+  .#{$prefix}--progress-step--current {
+    .#{$prefix}--progress-line {
+      background-color: $interactive-01;
+    }
+  }
+
+  .#{$prefix}--progress-step--current svg {
+    width: 14px;
+    height: 14px;
+    fill: $interactive-01;
+    margin-top: rem(9.5px);
+  }
+
+  //INCOMPLETE STYLING
+  .#{$prefix}--progress-step--incomplete {
+    svg {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--progress-line {
+      background-color: $ui-03;
+    }
+  }
+
+  //COMPLETED STYLING
+  .#{$prefix}--progress-step--complete {
+    .#{$prefix}--progress-line {
+      background-color: $interactive-01;
+    }
+  }
+
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    display: flex;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    outline: none;
+  }
+
+  //DISABLED STYLING
+  .#{$prefix}--progress-step--disabled {
+    cursor: not-allowed;
+
+    svg {
+      fill: $disabled;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label,
+    .#{$prefix}--progress-label:hover {
+      color: $disabled;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--progress-label:focus,
+    .#{$prefix}--progress-label:active {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--progress-line {
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label-overflow:hover
+      ~ .#{$prefix}--tooltip--definition
+      .#{$prefix}--tooltip--definition__bottom {
+      display: none;
+    }
+  }
+
+  //ERROR STYLING
+  .#{$prefix}--progress__warning > path {
+    fill: $support-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
+  }
+
+  .#{$prefix}--progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    display: list-item;
+    min-height: 6rem;
+    width: initial;
+    min-width: initial;
+
+    svg {
+      display: inline-block;
+      margin: 0.1rem 0.5rem;
+    }
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step--current svg {
+    margin-left: 0.563rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: initial;
+    max-width: none;
+    vertical-align: top;
+    margin: 0;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
+    margin-top: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
+    margin-top: initial;
+    position: initial;
+    margin-left: 2.25rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+  }
+}
+```
+
+</details>
+
+- **Group**: [progress-indicator](#progress-indicator)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [progress-indicator-bar-width [variable]](#progress-indicator-bar-width-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [support-01 [variable]](#support-01-variable)
+
+## radio-button
+
+### ❌radio-button [mixin]
+
+v9 radio-button
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin radio-button() {
+  .#{$prefix}--radio-button-group {
+    display: flex;
+    align-items: center;
+    margin-top: $spacing-xs;
+  }
+
+  .#{$prefix}--radio-button {
+    @include hidden;
+    visibility: unset;
+  }
+
+  .#{$prefix}--radio-button__label {
+    @include typescale('zeta');
+    @include font-family;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: $spacing-md;
+  }
+
+  .#{$prefix}--radio-button__appearance {
+    @include reset;
+    background-color: $inverse-01;
+    border-radius: 50%;
+    border: $radio-border-width solid $ui-05;
+    flex-shrink: 0;
+    height: rem(18px);
+    width: rem(18px);
+    margin-right: $spacing-xs;
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $brand-01;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      position: relative;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--radio-button:focus
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    @include focus-outline('blurred');
+  }
+
+  // Skeleton State
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: rem(18px);
+  }
+
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton
+    .#{$prefix}--radio-button__appearance {
+    display: none;
+  }
+
+  .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+  }
+
+  .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-right: $spacing-md;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right
+    .#{$prefix}--radio-button__label {
+    flex-direction: row;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
+    .#{$prefix}--radio-button__label {
+    flex-direction: row-reverse;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
+    .#{$prefix}--radio-button__appearance {
+    margin-right: 0;
+    margin-left: $spacing-xs;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top
+    .#{$prefix}--radio-button__label {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top
+    .#{$prefix}--radio-button__appearance {
+    margin-right: 0;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-top
+    .#{$prefix}--radio-button__label-text {
+    margin-bottom: 5px;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom
+    .#{$prefix}--radio-button__label {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom
+    .#{$prefix}--radio-button__label-text {
+    margin-top: 5px;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-bottom
+    .#{$prefix}--radio-button__appearance {
+    margin-right: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [radio-button](#radio-button)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [radio-border-width [variable]](#radio-border-width-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+
+### ❌radio-button--experimental [mixin]
+
+v10 radio-button
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin radio-button--experimental() {
+  .#{$prefix}--radio-button-group {
+    display: flex;
+    align-items: center;
+    margin-top: rem(6px);
+  }
+
+  // vertical radio button
+  .#{$prefix}--radio-button-group--vertical {
+    flex-direction: column;
+
+    .#{$prefix}--radio-button__label {
+      margin-right: 0;
+    }
+
+    .#{$prefix}--radio-button__label:not(:last-of-type) {
+      margin-bottom: $carbon--spacing-03;
+    }
+  }
+
+  .#{$prefix}--radio-button {
+    @include hidden;
+    visibility: unset;
+  }
+
+  .#{$prefix}--radio-button__label {
+    @include type-style('body-short-01');
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--radio-button__appearance {
+    @include reset;
+    background-color: transparent;
+    border-radius: 50%;
+    border: $radio-border-width solid $ui-05;
+    flex-shrink: 0;
+    height: rem(18px);
+    width: rem(18px);
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $ui-05;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      position: relative;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: $ui-05;
+    }
+  }
+
+  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
+  [disabled] ~ _ {
+    font-size: inherit;
+  }
+
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+    color: $disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--radio-button:disabled
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance,
+  .#{$prefix}--radio-button:disabled:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $disabled;
+
+    &::before {
+      background-color: $disabled;
+    }
+  }
+
+  // Focus
+
+  .#{$prefix}--radio-button:focus
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    box-shadow: 0 0 0 2px $focus;
+    outline: 1px solid transparent;
+  }
+
+  // Skeleton State
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: rem(18px);
+  }
+
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton
+    .#{$prefix}--radio-button__appearance {
+    display: none;
+  }
+
+  .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-right: 0;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right
+    .#{$prefix}--radio-button__label {
+    flex-direction: row;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
+    .#{$prefix}--radio-button__label {
+    flex-direction: row-reverse;
+  }
+
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
+    .#{$prefix}--radio-button__appearance {
+    margin-right: 0;
+    margin-left: $carbon--spacing-03;
+  }
+}
+```
+
+</details>
+
+- **Group**: [radio-button](#radio-button)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [radio-border-width [variable]](#radio-border-width-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [focus [variable]](#focus-variable)
+
+## search
+
+### ❌search [mixin]
+
+v9 search
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin search() {
+  .#{$prefix}--search {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--search .#{$prefix}--label {
+    @include hidden;
+  }
+
+  .#{$prefix}--search-input {
+    @include reset;
+    @include font-family;
+    appearance: none;
+    border: none;
+    background-color: $field-01;
+    color: $text-01;
+    font-weight: 600;
+    padding: 0 $spacing-2xl;
+    text-overflow: ellipsis;
+    width: 100%;
+    order: 1;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus ~ .#{$prefix}--search-magnifier {
+      fill: $brand-01;
+    }
+
+    &::placeholder {
+      color: $text-02;
+      font-weight: 400;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search--sm .#{$prefix}--search-input {
+    @include typescale('zeta');
+    height: rem(32px);
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
+    @include typescale('zeta');
+    height: rem(40px);
+  }
+
+  .#{$prefix}--search-magnifier,
+  .#{$prefix}--search-close {
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    top: calc(50% - 0.5rem);
+    // Ensure clear icon is rendered in Firefox (#1127)
+    z-index: 1;
+  }
+
+  .#{$prefix}--search-magnifier {
+    left: 0.75rem;
+    fill: $ui-05;
+    z-index: 2;
+  }
+
+  .#{$prefix}--search-close {
+    @include button-reset(false);
+
+    transition: opacity $transition--base;
+    fill: $ui-05;
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .#{$prefix}--search-close:focus {
+    outline: 1px solid $brand-01;
+    outline-offset: 2px;
+  }
+
+  .#{$prefix}--search-close {
+    right: 0.75rem;
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-close {
+    right: rem(12px);
+  }
+
+  .#{$prefix}--search-button {
+    @include reset;
+    border: 0;
+    transition: $transition--base;
+    height: rem(40px);
+    width: rem(40px);
+    min-width: rem(40px);
+    margin-left: $spacing-2xs;
+    background-color: $ui-01;
+    position: relative;
+    padding: 0;
+    outline: 1px solid transparent;
+    order: 2;
+  }
+
+  .#{$prefix}--search-button svg {
+    position: relative;
+    top: -1px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    transition: $transition--base;
+    fill: $hover-primary;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .#{$prefix}--search-button:hover,
+  .#{$prefix}--search-button:focus {
+    cursor: pointer;
+    background-color: $brand-01;
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--search-button:hover svg,
+  .#{$prefix}--search-button:focus svg {
+    fill: $ui-01;
+  }
+
+  .#{$prefix}--search-close--hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .#{$prefix}--search-view--hidden {
+    display: none;
+  }
+
+  .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
+  .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
+    @include skeleton;
+    width: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [search](#search)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-2xl [variable]](#spacing-2xl-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+
+### ❌search--x [mixin]
+
+v10 search
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin search--x() {
+  .#{$prefix}--search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--search .#{$prefix}--label {
+    @include hidden;
+  }
+
+  .#{$prefix}--search-input {
+    @include reset;
+    @include type-style('body-short-02');
+    @include focus-outline('reset');
+    appearance: none;
+    border: none;
+    background-color: $field-01;
+    color: $text-01;
+    padding: 0 $carbon--spacing-08;
+    text-overflow: ellipsis;
+    width: 100%;
+    order: 1;
+    transition: background-color $duration--fast-01, outline $duration--fast-01;
+    border-bottom: 1px solid $ui-04;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &::placeholder {
+      color: $text-03;
+      font-weight: 400;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--search-input[disabled] {
+    color: $disabled;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: $disabled;
+      font-weight: 400;
+    }
+  }
+
+  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
+    fill: $disabled;
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search--sm .#{$prefix}--search-input {
+    @include type-style('body-short-01');
+    height: rem(32px);
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-input {
+    @include type-style('body-short-02');
+    font-size: carbon--type-scale(4);
+    height: rem(48px);
+    padding: 0 rem(64px) 0 rem(48px);
+  }
+
+  .#{$prefix}--search-magnifier {
+    left: 0.75rem;
+    z-index: 2;
+    position: absolute;
+    height: rem(16px);
+    width: rem(16px);
+    top: 50%;
+    transform: translateY(-50%);
+    // Ensure clear icon is rendered in Firefox (#1127)
+    fill: $text-02;
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
+    height: rem(20px);
+    width: rem(20px);
+    left: rem(24px);
+    transform: translate(-50%, -50%);
+  }
+
+  .#{$prefix}--search-close {
+    @include button-reset(false);
+    @include focus-outline('reset');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity $duration--fast-02, outline $duration--fast-02,
+      background-color $duration--fast-02, border-color $duration--fast-02;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    height: rem(40px);
+    width: rem(40px);
+    right: 0;
+    fill: $icon-01;
+    border: 2px solid transparent;
+    border-left: 0;
+
+    &:hover {
+      background-color: $hover-ui;
+      border-bottom: 1px solid $ui-04;
+    }
+    &:active {
+      @include focus-outline('outline');
+      background-color: $selected-ui;
+    }
+  }
+
+  .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
+    border: 2px solid $focus;
+    border-left: 0;
+  }
+
+  .#{$prefix}--search--sm .#{$prefix}--search-close {
+    height: rem(32px);
+    width: rem(32px);
+  }
+
+  .#{$prefix}--search--xl .#{$prefix}--search-close {
+    height: rem(48px);
+    width: rem(48px);
+  }
+
+  .#{$prefix}--search-close:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--search-close--hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
+  .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
+    @include skeleton;
+    width: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [search](#search)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [carbon--type-scale [function]](#carbon--type-scale-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [text-03 [variable]](#text-03-variable)
+  - [disabled [variable]](#disabled-variable)
+  - [disabled-background-color [variable]](#disabled-background-color-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
+  - [focus [variable]](#focus-variable)
+
+## select
+
+### ❌select [mixin]
+
+v9 select
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin select() {
+  .#{$prefix}--select {
+    @include reset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--form__helper-text {
+    order: 0;
+  }
+
+  .#{$prefix}--select-input {
+    @include font-family;
+    @include typescale('zeta');
+    height: rem(40px);
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: 0 $spacing-2xl 0 $spacing-md;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    border-radius: 0;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    ~ .#{$prefix}--form-requirement {
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--select__arrow {
+    fill: $brand-01;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: rem(10px);
+    height: rem(5px);
+    pointer-events: none;
+  }
+
+  &[data-invalid] ~ .#{$prefix}--select__arrow {
+    bottom: 2.25rem;
+  }
+
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Override some Firefox user-agent styles
+  @-moz-document url-prefix() {
+    .#{$prefix}--select-option {
+      background-color: $ui-01;
+      color: $text-01;
+    }
+
+    .#{$prefix}--select-optgroup {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    // Targets IE10+ browsers: Display grid auto not supported
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--select-input {
+      grid-row-start: 2;
+    }
+
+    .#{$prefix}--label {
+      white-space: nowrap;
+      margin: 0 $spacing-xs 0 0;
+      font-weight: 400;
+      align-self: center;
+    }
+
+    .#{$prefix}--form__helper-text {
+      grid-column-start: 3;
+      align-self: center;
+      margin-bottom: 0;
+    }
+
+    .#{$prefix}--select-input {
+      background-color: transparent;
+      color: $brand-01;
+      font-weight: 600;
+      box-shadow: none;
+
+      &:hover {
+        background-color: $color__white;
+      }
+
+      &:focus {
+        @include focus-outline('border');
+      }
+
+      ~ .#{$prefix}--select__arrow,
+      ~ .#{$prefix}--form-requirement {
+        grid-column-start: 2;
+      }
+
+      ~ .#{$prefix}--select__arrow {
+        position: relative;
+        top: calc(100% + 1rem);
+        grid-row-start: 1;
+        justify-self: end;
+      }
+
+      &[data-invalid] {
+        color: $text-01;
+        outline-offset: 2px;
+
+        &:focus {
+          outline: 1px solid $support-01;
+          box-shadow: none;
+        }
+      }
+
+      &:disabled ~ * {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      ~ .#{$prefix}--form-requirement {
+        grid-row-start: 3;
+
+        // Targets IE10+ browsers: Display grid auto not supported
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+          position: absolute;
+          bottom: -1.5rem;
+        }
+      }
+    }
+  }
+
+  //Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [select](#select)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-2xl [variable]](#spacing-2xl-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [color\_\_white [variable]](#color__white-variable)
+
+### ❌select--x [mixin]
+
+v10 select
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin select--x() {
+  .#{$prefix}--select {
+    @include reset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--select-input__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:hover .#{$prefix}--select-input {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--select-input {
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    height: rem(40px);
+    appearance: none;
+    display: block;
+    width: rem(224px);
+    min-width: rem(128px);
+    max-width: rem(448px);
+    padding: 0 rem(42px) 0 $carbon--spacing-05; // 1.5rem + chevron width
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    border-radius: 0;
+    cursor: pointer;
+    transition: outline $duration--fast-01, background-color $duration--fast-01;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    // Select text renders a little high on Firefox
+    @-moz-document url-prefix() {
+      padding-top: rem(4px);
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled-02;
+      border-bottom-color: $disabled-background-color;
+    }
+  }
+
+  .#{$prefix}--select--disabled .#{$prefix}--label,
+  .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
+    padding-right: rem(64px); // 1rem + chevron width + invalid icon width
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:focus {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form-requirement {
+    display: block;
+    color: $support-01;
+    font-weight: 400;
+    overflow: visible;
+  }
+
+  .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $ui-01;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--select__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    position: absolute;
+    right: rem(34px); // 1.5rem + chevron width
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    fill: $support-01;
+  }
+
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Override some Firefox user-agent styles
+  @-moz-document url-prefix() {
+    .#{$prefix}--select-option {
+      background-color: $ui-01;
+      color: $text-01;
+    }
+
+    .#{$prefix}--select-optgroup {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--form__helper-text {
+    margin-top: rem(13px);
+    align-self: flex-start;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-bottom: 0;
+    margin-left: rem(8px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--label {
+    white-space: nowrap;
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input {
+    background-color: transparent;
+    color: $text-01;
+    border-bottom: none;
+    padding-left: $carbon--spacing-03;
+    padding-right: rem(26px);
+
+    @-moz-document url-prefix() {
+      padding-top: 0;
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select__arrow {
+    bottom: auto;
+    top: 1.125rem;
+    right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input {
+    padding-right: rem(50px);
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    right: rem(24px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    color: $disabled;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    ~ * {
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    cursor: not-allowed;
+  }
+
+  //Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [select](#select)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [disabled-background-color [variable]](#disabled-background-color-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [disabled [variable]](#disabled-variable)
+
+## slider
+
+### ❌slider [mixin]
+
+v9 slider
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin slider() {
+  .#{$prefix}--slider-container {
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  .#{$prefix}--slider {
+    position: relative;
+    width: 100%;
+    margin: 0 $spacing-md;
+    max-width: rem(640px);
+    min-width: rem(200px);
+    order: 1;
+  }
+
+  .#{$prefix}--slider__range-label:first-of-type {
+    order: 0;
+  }
+
+  .#{$prefix}--slider-text-input {
+    order: 3;
+  }
+
+  .#{$prefix}--slider--disabled {
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    &:hover {
+      transform: translate(-50%, -50%);
+    }
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    &:active {
+      background: $hover-secondary;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider__range-label {
+    @include typescale('zeta');
+    color: $text-02;
+
+    &:last-of-type {
+      margin-right: $spacing-md;
+      order: 2;
+    }
+  }
+
+  .#{$prefix}--slider__track {
+    position: absolute;
+    width: 100%;
+    height: rem(4px);
+    background: $ui-04;
+    cursor: pointer;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__filled-track {
+    position: absolute;
+    width: 100%;
+    height: rem(4px);
+    background: $brand-01;
+    transform-origin: left;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__thumb {
+    position: absolute;
+    height: rem(24px);
+    width: rem(24px);
+    background: $brand-01;
+    border-radius: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: transform 100ms $carbon--standard-easing, background 100ms
+        $carbon--standard-easing;
+    cursor: pointer;
+    outline: none;
+    z-index: 2;
+
+    &--clicked {
+      transition: left $transition--base $carbon--standard-easing;
+    }
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    &:focus {
+      @include focus-outline('blurred');
+    }
+    &:active {
+      background: darken($brand-01, 5%);
+      transform: translate(-50%, -50%) scale(1.25);
+    }
+  }
+
+  .#{$prefix}--slider__input {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
+    width: rem(60px);
+    min-width: rem(60px);
+    height: 2rem;
+    padding: 0;
+    text-align: center;
+    font-weight: 600;
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__thumb {
+    left: 50%;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [slider](#slider)
+- **Requires**:
+  - [typescale [mixin]](#typescale-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [transition--base [variable]](#transition--base-variable)
+
+### ❌slider--x [mixin]
+
+v10 slider
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin slider--x() {
+  .#{$prefix}--slider-container {
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  .#{$prefix}--slider {
+    position: relative;
+    width: 100%;
+    margin: 0 $carbon--spacing-05;
+    max-width: rem(640px);
+    min-width: rem(200px);
+  }
+
+  .#{$prefix}--slider__range-label {
+    @include type-style('code-02');
+    color: $text-01;
+
+    &:last-of-type {
+      margin-right: $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--slider__track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $ui-03;
+    cursor: pointer;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__track:before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    height: rem(4px);
+    width: rem(2px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: rem(-5px);
+    background: $ui-03;
+  }
+
+  .#{$prefix}--slider__filled-track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $ui-05;
+    transform-origin: left;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+    transition: background $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--slider__thumb {
+    position: absolute;
+    height: rem(14px);
+    width: rem(14px);
+    background: $ui-05;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: transform $duration--fast-01 motion(standard, productive), background
+        $duration--fast-01 motion(standard, productive),
+      box-shadow $duration--fast-01 motion(standard, productive);
+    cursor: pointer;
+    outline: none;
+    z-index: 3;
+
+    &:hover {
+      // 20px / 14px = 1.4285714286
+      transform: translate(-50%, -50%) scale(1.4285714286);
+    }
+
+    &:focus {
+      // 20px / 14px = 1.4285714286
+      transform: translate(-50%, -50%) scale(1.4285714286);
+      box-shadow: inset 0 0 0 2px $interactive-01, inset 0 0 0 3px $ui-01;
+      background-color: $interactive-01;
+    }
+
+    &:active {
+      transform: translate(-50%, -50%) scale(1.4285714286);
+      box-shadow: inset 0 0 0 2px $interactive-01;
+    }
+  }
+
+  .#{$prefix}--slider__input {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
+    width: rem(64px);
+    height: rem(40px);
+    padding: 0;
+    text-align: center;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+    background-color: $interactive-01;
+  }
+
+  // Disabled state
+  .#{$prefix}--label--disabled
+    ~ .#{$prefix}--slider-container
+    > .#{$prefix}--slider__range-label {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    background-color: $ui-03;
+
+    &:hover {
+      transform: translate(-50%, -50%);
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      background-color: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+
+    &:active {
+      background: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider--disabled
+    .#{$prefix}--slider__thumb:focus
+    ~ .#{$prefix}--slider__filled-track {
+    background-color: $ui-03;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--slider--disabled
+    ~ .#{$prefix}--form-item
+    .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    background-color: $disabled-01;
+    color: $disabled-02;
+    transition: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      outline: none;
+      color: $disabled-02;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__thumb {
+    left: 50%;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [slider](#slider)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
+
+## structured-list
+
+### ❌padding-td--condensed [mixin]
+
+Used only for `.#{prefix}--structured-list--condensed`
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding-td--condensed($padding: $structured-list-padding) {
+  padding: $padding / 4;
+  padding-left: 0;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding [variable]](#padding-variable)
+- **Used by**:
+  - [structured-list [mixin]](#structured-list-mixin)
+
+### ❌padding--data-structured-list [mixin]
+
+Used only for [data-structured-list]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding--data-structured-list($padding: $structured-list-padding) {
+  padding-left: $padding / 2;
+  padding-right: $padding / 2;
+
+  // Controls gutter sizes for check
+  &:first-child {
+    padding-left: $padding / 2;
+    padding-right: $padding / 4;
+  }
+
+  &:last-child {
+    padding-right: $padding;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding [variable]](#padding-variable)
+- **Used by**:
+  - [structured-list [mixin]](#structured-list-mixin)
+
+### ❌padding-td [mixin]
+
+Used only for normal structured-list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding-td($padding: $structured-list-padding) {
+  padding-left: 0;
+  padding-right: $padding;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+
+  &:last-child {
+    padding-right: $padding;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding [variable]](#padding-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+- **Used by**:
+  - [structured-list [mixin]](#structured-list-mixin)
+
+### ❌padding-th [mixin]
+
+Used only for normal structured-list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding-th($padding: $structured-list-padding) {
+  padding-left: 0;
+  padding-right: $padding;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding [variable]](#padding-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+- **Used by**:
+  - [structured-list [mixin]](#structured-list-mixin)
+
+### ❌padding-td--condensed--x [mixin]
+
+Used only for experimental `.#{prefix}--structured-list--condensed`
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding-td--condensed--x($padding: $structured-list-padding) {
+  padding: $padding / 4;
+  padding-left: 0;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding [variable]](#padding-variable)
+- **Used by**:
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+
+### ❌padding--data-structured-list--x [mixin]
+
+Used only for experimental [data-structured-list]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding--data-structured-list--x($padding: $structured-list-padding) {
+  padding-left: $padding / 2;
+  padding-right: $padding / 2;
+
+  // Controls gutter sizes for check
+  &:first-child {
+    padding-left: $padding / 2;
+    padding-right: $padding / 2;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding [variable]](#padding-variable)
+- **Used by**:
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+
+### ❌padding-th--x [mixin]
+
+Used only for experimental normal structured-list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding-th--x($padding: $structured-list-padding) {
+  padding-left: $carbon--spacing-05;
+  padding-right: $carbon--spacing-05;
+  padding-top: $carbon--spacing-05;
+  padding-bottom: $carbon--spacing-03;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+- **Used by**:
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+
+### ❌padding-td--x [mixin]
+
+Used only for experimental normal structured-list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin padding-td--x($padding: $structured-list-padding) {
+  padding-top: $carbon--spacing-05;
+  padding-right: $carbon--spacing-05;
+  padding-bottom: $carbon--spacing-06;
+  padding-left: $carbon--spacing-05;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name       | Description | Type     | Default value              |
+| ---------- | ----------- | -------- | -------------------------- |
+| `$padding` | —           | `Number` | `$structured-list-padding` |
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+- **Used by**:
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+
+### ❌structured-list [mixin]
+
+v9 structured-list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin structured-list() {
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
+    @include padding--data-structured-list;
+  }
+
+  // Deprecated
+  [data-structured-list] .#{$prefix}--structured-list-td,
+  [data-structured-list] .#{$prefix}--structured-list-th {
+    @include padding--data-structured-list;
+  }
+
+  .#{$prefix}--structured-list-input {
+    display: none;
+
+    &:checked
+      + .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-svg,
+    &:checked
+      + .#{$prefix}--structured-list-td
+      .#{$prefix}--structured-list-svg {
+      fill: $brand-02;
+    }
+  }
+
+  .#{$prefix}--structured-list {
+    @include reset;
+    @include font-family;
+    display: table;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    min-width: 500px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 5rem;
+    background-color: transparent;
+
+    &.#{$prefix}--structured-list--border {
+      border: 1px solid $ui-03;
+      background-color: $ui-01;
+    }
+
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
+      @include padding-td--condensed;
+    }
+  }
+
+  .#{$prefix}--structured-list-row {
+    display: table-row;
+    border-bottom: 1px solid $ui-03;
+    transition: $transition--base $carbon--standard-easing;
+
+    // Deprecated
+    [data-structured-list]
+      &:hover:not(.#{$prefix}--structured-list-row--header-row) {
+      background-color: $hover-row;
+      cursor: pointer;
+    }
+
+    &.#{$prefix}--structured-list-row--selected {
+      background-color: $hover-row;
+    }
+
+    &.#{$prefix}--structured-list-row--header-row {
+      border-bottom: 2px solid $brand-01;
+      cursor: inherit;
+    }
+
+    &:focus:not(.#{$prefix}--structured-list-row--header-row) {
+      @include focus-outline('border');
+    }
+
+    &:hover .#{$prefix}--structured-list-svg {
+      fill: $hover-row;
+    }
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row) {
+    background-color: $hover-row;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--structured-list-thead {
+    display: table-header-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-th {
+    @include reset;
+    @include padding-th;
+    @include typescale('omega');
+    display: table-cell;
+    font-weight: 600;
+    height: rem(40px);
+    text-align: left;
+    text-transform: $structured-list-text-transform;
+    vertical-align: bottom;
+  }
+
+  .#{$prefix}--structured-list-tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-td {
+    @include reset;
+    @include typescale('zeta');
+    @include line-height('body');
+    @include padding-td;
+    position: relative;
+    display: table-cell;
+  }
+
+  .#{$prefix}--structured-list-th,
+  .#{$prefix}--structured-list-td {
+    color: $text-01;
+  }
+
+  .#{$prefix}--structured-list-content--nowrap {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--structured-list-svg {
+    display: inline-block;
+    fill: transparent;
+    vertical-align: middle;
+    transition: $transition--base $carbon--standard-easing;
+  }
+
+  // Skeleton State
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        width: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    .#{$prefix}--structured-list-th span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th:first-child {
+      width: 5%;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  // Deprecated class
+  .#{$prefix}--structured-list-content {
+    @include typescale('zeta');
+  }
+}
+```
+
+</details>
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding--data-structured-list [mixin]](#padding--data-structured-list-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [padding-td--condensed [mixin]](#padding-td--condensed-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [padding-th [mixin]](#padding-th-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [line-height [mixin]](#line-height-mixin)
+  - [padding-td [mixin]](#padding-td-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [brand-02 [variable]](#brand-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [hover-row [variable]](#hover-row-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [structured-list-text-transform [variable]](#structured-list-text-transform-variable)
+  - [text-01 [variable]](#text-01-variable)
+
+### ❌structured-list--x [mixin]
+
+v10 structured-list
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin structured-list--x() {
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
+    @include padding--data-structured-list--x;
+  }
+
+  .#{$prefix}--structured-list-input {
+    display: none;
+  }
+
+  .#{$prefix}--structured-list {
+    @include reset;
+    display: table;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    min-width: 500px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 5rem;
+    background-color: transparent;
+
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
+      @include padding-td--condensed--x;
+    }
+  }
+
+  .#{$prefix}--structured-list-row {
+    display: table-row;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
+    background-color: $ui_01;
+    cursor: pointer;
+    border-bottom: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
+    background-color: $ui-03;
+  }
+
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
+    border-bottom: 1px solid $ui-03;
+    cursor: inherit;
+  }
+
+  .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+    > .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+    > .#{$prefix}--structured-list-td {
+    color: $text-01;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+    > .#{$prefix}--structured-list-td {
+    border-top: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--structured-list-thead {
+    display: table-header-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-th {
+    @include reset;
+    @include padding-th--x;
+    @include type-style('heading-01');
+    display: table-cell;
+    font-weight: 600;
+    height: rem(40px);
+    text-align: left;
+    text-transform: $structured-list-text-transform;
+    vertical-align: bottom;
+  }
+
+  .#{$prefix}--structured-list-tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-td {
+    @include reset;
+    @include type-style('body-long-01');
+    @include padding-td--x;
+    line-height: carbon--rem(21px);
+    position: relative;
+    display: table-cell;
+    max-width: 36rem;
+  }
+
+  .#{$prefix}--structured-list-th {
+    color: $text-01;
+  }
+  .#{$prefix}--structured-list-td {
+    color: $text-02;
+  }
+
+  .#{$prefix}--structured-list-content--nowrap {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--structured-list-svg {
+    display: inline-block;
+    fill: transparent;
+    vertical-align: middle;
+    transition: $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
+    fill: $ibm-color__gray-40;
+  }
+
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-row
+    .#{$prefix}--structured-list-svg,
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    fill: $text-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        width: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    .#{$prefix}--structured-list-th span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th
+    span {
+    @include skeleton;
+    width: 75%;
+    height: 1rem;
+    display: block;
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th:first-child {
+    width: 5%;
+
+    span {
+      display: none;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [structured-list](#structured-list)
+- **Requires**:
+  - [padding--data-structured-list--x [mixin]](#padding--data-structured-list--x-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [padding-td--condensed--x [mixin]](#padding-td--condensed--x-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [padding-th--x [mixin]](#padding-th--x-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [padding-td--x [mixin]](#padding-td--x-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [carbon--rem [function]](#carbon--rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [structured-list-text-transform [variable]](#structured-list-text-transform-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+
+## tabs
+
+### ❌tabs [mixin]
+
+v9 tabs
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tabs() {
+  .#{$prefix}--tabs {
+    @include typescale('zeta');
+    @include font-smoothing;
+    @include font-family;
+    color: $text-01;
+    font-weight: 600;
+    height: auto;
+    width: 100%;
+    position: relative;
+
+    @include breakpoint(bp--sm--major) {
+      background: none;
+      min-height: rem(49px);
+    }
+  }
+
+  .#{$prefix}--tabs-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-md;
+    height: rem(40px);
+    cursor: pointer;
+    background-color: $field-01;
+    box-shadow: 0 1px 0 0 $ui-05;
+
+    svg {
+      width: rem(10px);
+      height: rem(5px);
+      fill: $brand-01;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    @include breakpoint(bp--sm--major) {
+      display: none;
+    }
+  }
+
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--tabs-trigger-text {
+    text-decoration: none;
+    font-weight: 600;
+    color: $text-01;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--tabs__nav {
+    @include layer('overlay');
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    z-index: z('dropdown');
+    background: $ui-01;
+
+    @include breakpoint(bp--sm--major) {
+      @include typescale('epsilon');
+      flex-direction: row;
+      padding-right: $spacing-md;
+      padding-left: $spacing-md;
+      background: none;
+      box-shadow: none;
+      z-index: auto;
+    }
+
+    @include breakpoint(bp--lg--major) {
+      padding-left: 0;
+    }
+  }
+
+  .#{$prefix}--tabs__nav--hidden {
+    display: none;
+
+    @include breakpoint(bp--sm--major) {
+      display: flex;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item {
+    @include typescale('zeta');
+    background-color: $ui-01;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: $hover-row;
+
+      @include breakpoint(bp--sm--major) {
+        outline: 1px solid transparent;
+        background: transparent;
+      }
+    }
+
+    @include breakpoint(bp--sm--major) {
+      background: transparent;
+      padding: $spacing-sm 0 $spacing-sm;
+
+      & + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(48px);
+      }
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item--selected {
+    border: none;
+
+    @include breakpoint(bp--sm--major) {
+      border-bottom: 2px solid $brand-01;
+
+      .#{$prefix}--tabs__nav-link {
+        color: $brand-01;
+
+        &:focus {
+          color: $brand-01;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
+    color: $text-01;
+
+    @include breakpoint(bp--sm--major) {
+      color: $hover-secondary;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-link {
+    display: inline-block;
+    color: $text-01;
+    text-decoration: none;
+    padding: $spacing-md;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    &:focus,
+    &:active {
+      outline: 1px solid transparent;
+      background-color: $brand-01;
+      color: $inverse-01;
+    }
+
+    @include breakpoint(bp--sm--major) {
+      padding: 0 $spacing-3xs;
+      width: auto;
+
+      &:hover {
+        color: $brand-01;
+      }
+
+      &:focus,
+      &:active {
+        background-color: transparent;
+        color: $text-01;
+        outline: 1px solid transparent;
+        box-shadow: 0 0 0 1px $brand-01;
+      }
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+    width: rem(100px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include hidden;
+  }
+}
+```
+
+</details>
+
+- **Group**: [tabs](#tabs)
+- **Requires**:
+  - [typescale [mixin]](#typescale-mixin)
+  - [font-smoothing [mixin]](#font-smoothing-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [breakpoint [mixin]](#breakpoint-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [hidden [mixin]](#hidden-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-row [variable]](#hover-row-variable)
+  - [spacing-sm [variable]](#spacing-sm-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+
+### ❌tabs--x [mixin]
+
+v10 tabs
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tabs--x() {
+  .#{$prefix}--tabs {
+    @include type-style('body-short-01');
+    color: $text-01;
+    height: auto;
+    width: 100%;
+    position: relative;
+    @include carbon--breakpoint(md) {
+      background: none;
+      min-height: rem(48px);
+    }
+  }
+
+  .#{$prefix}--tabs-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $carbon--spacing-05;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
+    border-bottom: 1px solid $ui-04;
+    background-color: $field-01;
+    @include carbon--breakpoint(md) {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--tabs-trigger:focus,
+  .#{$prefix}--tabs-trigger:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tabs-trigger svg {
+    width: rem(12px);
+    height: rem(7px);
+    fill: $ui-05;
+    transition: transform $duration--moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs-trigger--open:focus,
+  .#{$prefix}--tabs-trigger--open:active {
+    @include focus-outline('reset');
+    transition: outline $duration--moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs-trigger--open {
+    background: $ui-03;
+  }
+
+  .#{$prefix}--tabs-trigger--open svg {
+    @include rotate(-180deg, $duration--moderate-01, 50% 45%);
+  }
+
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--tabs-trigger-text {
+    text-decoration: none;
+    padding-top: 2px;
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--tabs-trigger-text:hover {
+    color: $text-01;
+  }
+
+  .#{$prefix}--tabs-trigger-text:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--tabs__nav {
+    @include layer('overlay');
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    z-index: z('dropdown');
+    background: $ui-01;
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+    max-height: 600px;
+    width: 100%;
+
+    @include carbon--breakpoint(md) {
+      flex-direction: row;
+      background: none;
+      box-shadow: none;
+      z-index: auto;
+      transition: inherit;
+      max-height: auto;
+      width: auto;
+    }
+  }
+
+  .#{$prefix}--tabs__nav--hidden {
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+    overflow: hidden;
+    max-height: 0;
+
+    @include carbon--breakpoint(md) {
+      display: flex;
+      transition: inherit;
+      overflow: visible;
+      max-height: none;
+    }
+  }
+
+  //-----------------------------
+  // Item
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item {
+    background-color: $ui-01;
+    padding: 0;
+    cursor: pointer;
+    width: 100%;
+    height: rem(40px);
+    @include carbon--breakpoint(md) {
+      background: transparent;
+      height: auto;
+      & + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(2px);
+      }
+    }
+  }
+
+  //-----------------------------
+  // Item Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+    @include carbon--breakpoint(md) {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    background-color: $hover-ui;
+    box-shadow: 0 -1px 0 $hover-ui;
+
+    @include carbon--breakpoint(md) {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  //---------------------------------------------
+  // Item Disabled
+  //---------------------------------------------
+  .#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs__nav-item--disabled:hover {
+    cursor: not-allowed;
+  }
+
+  //-----------------------------
+  // Item Selected
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
+    border: none;
+    display: none;
+    @include carbon--breakpoint(md) {
+      display: list-item;
+      .#{$prefix}--tabs__nav-link {
+        color: $text-01;
+        @include type-style('heading-01');
+        border-bottom: 3px solid $interactive-01;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        color: $text-01;
+        border-bottom: 2px;
+      }
+    }
+  }
+
+  //-----------------------------
+  // Link
+  //-----------------------------
+  a.#{$prefix}--tabs__nav-link {
+    display: inline-block;
+    color: $text-02;
+    text-decoration: none;
+    font-weight: 400;
+    padding: $carbon--spacing-04 0;
+    width: calc(100% - 32px);
+    height: rem(40px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 $carbon--spacing-05;
+    line-height: rem(16px);
+    border-bottom: 1px solid $ui-03;
+    overflow: hidden;
+
+    &:focus,
+    &:active {
+      width: 100%;
+      margin: 0;
+      padding-left: 16px;
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
+    }
+
+    @include carbon--breakpoint(md) {
+      border-bottom: $tab-underline-color;
+      padding: $carbon--spacing-03 $carbon--spacing-05;
+      width: rem(160px);
+      margin: 0;
+      line-height: inherit;
+
+      &:focus,
+      &:active {
+        width: rem(160px);
+        padding: $carbon--spacing-03 $carbon--spacing-05;
+        border-bottom: 2px;
+      }
+    }
+  }
+
+  //-----------------------------
+  //  Link Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    color: $text-01;
+    @include carbon--breakpoint(md) {
+      color: $text-01;
+      border-bottom: $tab-underline-color-hover;
+    }
+  }
+
+  //-----------------------------
+  //  Link Disabled
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    color: $tab-text-disabled;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    cursor: no-drop;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
+    outline: none;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  //-----------------------------
+  //  Link Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
+    color: $text-02;
+  }
+
+  //-----------------------------
+  // Skeleton state
+  //-----------------------------
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+    width: rem(100px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include hidden;
+  }
+}
+```
+
+</details>
+
+- **Group**: [tabs](#tabs)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [rotate [mixin]](#rotate-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [hidden [mixin]](#hidden-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [duration--moderate-01 [variable]](#duration--moderate-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [tab-underline-color [variable]](#tab-underline-color-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [tab-underline-color-hover [variable]](#tab-underline-color-hover-variable)
+  - [tab-text-disabled [variable]](#tab-text-disabled-variable)
+  - [tab-underline-disabled [variable]](#tab-underline-disabled-variable)
+
+## tag
+
+### ❌tags [mixin]
+
+v9 tag
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tags() {
+  .#{$prefix}--tag {
+    @include font-family;
+    @include typescale('omega');
+    display: inline-flex;
+    align-items: center;
+    padding: 0 $spacing-xs;
+    height: 1.25rem;
+    margin: $spacing-3xs;
+    border-radius: rem(15px);
+
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+  }
+
+  .#{$prefix}--tag--ibm {
+    @include tag-theme($color__blue-10, $color__blue-60);
+  }
+
+  .#{$prefix}--tag--beta {
+    @include tag-theme($color__gray-1, $color__navy-gray-4);
+  }
+
+  .#{$prefix}--tag--third-party {
+    @include tag-theme($color__teal-10, $color__teal-60);
+  }
+
+  .#{$prefix}--tag--local,
+  .#{$prefix}--tag--dedicated,
+  .#{$prefix}--tag--custom {
+    @include tag-theme($color__purple-10, $color__purple-60);
+  }
+
+  .#{$prefix}--tag--experimental {
+    @include tag-theme($color__orange-10, $color__orange-60);
+  }
+
+  .#{$prefix}--tag--community {
+    @include tag-theme($color__green-10, $color__green-60);
+  }
+
+  .#{$prefix}--tag--private {
+    @include tag-theme($color__yellow-10, $color__yellow-60);
+  }
+
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    @include tag-theme($brand-01, white);
+    cursor: pointer;
+  }
+
+  .#{$prefix}--tag--filter > svg {
+    fill: white;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: rem(5px);
+  }
+
+  .#{$prefix}--tag--filter:focus,
+  .#{$prefix}--tag--filter:hover {
+    background-color: $hover-primary;
+    outline: none;
+  }
+
+  // Skeleton state
+  .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include tag-theme($color__gray-1, $color__navy-gray-4);
+    width: rem(60px);
+
+    &:after {
+      @include skeleton;
+      content: '';
+      height: rem(6px);
+      width: 100%;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [tag](#tag)
+- **Requires**:
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [spacing-3xs [variable]](#spacing-3xs-variable)
+  - [color\_\_blue-10 [variable]](#color__blue-10-variable)
+  - [color\_\_blue-60 [variable]](#color__blue-60-variable)
+  - [color\_\_gray-1 [variable]](#color__gray-1-variable)
+  - [color\_\_navy-gray-4 [variable]](#color__navy-gray-4-variable)
+  - [color\_\_teal-10 [variable]](#color__teal-10-variable)
+  - [color\_\_teal-60 [variable]](#color__teal-60-variable)
+  - [color\_\_purple-10 [variable]](#color__purple-10-variable)
+  - [color\_\_purple-60 [variable]](#color__purple-60-variable)
+  - [color\_\_orange-10 [variable]](#color__orange-10-variable)
+  - [color\_\_orange-60 [variable]](#color__orange-60-variable)
+  - [color\_\_green-10 [variable]](#color__green-10-variable)
+  - [color\_\_green-60 [variable]](#color__green-60-variable)
+  - [color\_\_yellow-10 [variable]](#color__yellow-10-variable)
+  - [color\_\_yellow-60 [variable]](#color__yellow-60-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+
+### ❌tags--x [mixin]
+
+v10 tag
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tags--x() {
+  .#{$prefix}--tag {
+    @include type-style('label-01');
+    display: inline-flex;
+    align-items: center;
+    padding: 0 $carbon--spacing-03;
+    height: 1.5rem;
+    margin: $carbon--spacing-02;
+    border-radius: rem(15px);
+
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+
+    &.#{$prefix}--skeleton {
+      @include tag-theme--x($bg-color: $ui-03, $text-color: $text-01);
+    }
+  }
+
+  .#{$prefix}--tag--red {
+    @include tag-theme--x($ibm-color__red-20, $ibm-color__red-70);
+  }
+
+  .#{$prefix}--tag--magenta {
+    @include tag-theme--x($ibm-color__magenta-20, $ibm-color__magenta-70);
+  }
+
+  .#{$prefix}--tag--purple {
+    @include tag-theme--x($ibm-color__purple-20, $ibm-color__purple-70);
+  }
+
+  .#{$prefix}--tag--blue {
+    @include tag-theme--x($ibm-color__blue-20, $ibm-color__blue-70);
+  }
+
+  .#{$prefix}--tag--cyan {
+    @include tag-theme--x($ibm-color__cyan-20, $ibm-color__cyan-70);
+  }
+
+  .#{$prefix}--tag--teal {
+    @include tag-theme--x($ibm-color__teal-20, $ibm-color__teal-70);
+  }
+
+  .#{$prefix}--tag--green {
+    @include tag-theme--x($ibm-color__green-20, $ibm-color__green-70);
+  }
+
+  .#{$prefix}--tag--gray {
+    @include tag-theme--x($ibm-color__gray-20, $ibm-color__gray-100);
+  }
+
+  .#{$prefix}--tag--cool-gray {
+    @include tag-theme--x($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
+  }
+
+  .#{$prefix}--tag--warm-gray {
+    @include tag-theme--x($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
+  }
+
+  .#{$prefix}--tag--disabled {
+    @include tag-theme--x($ibm-color__gray-10, $ibm-color__gray-30);
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    @include tag-theme--x($interactive-02, $inverse-01);
+    cursor: pointer;
+    padding-right: rem(2px); // Align with hover circle of X button
+  }
+
+  .#{$prefix}--tag--filter > svg {
+    fill: $inverse-01;
+    margin-left: rem(4px);
+    padding: rem(2px);
+    width: rem(20px);
+    height: rem(20px);
+  }
+
+  .#{$prefix}--tag--filter > svg:hover {
+    border-radius: 50%;
+    background-color: $icon-02;
+  }
+
+  .#{$prefix}--tag--filter:focus,
+  .#{$prefix}--tag--filter:hover {
+    outline: none;
+  }
+
+  // Skeleton state
+  .#{$prefix}--tag.#{$prefix}--skeleton {
+    width: rem(60px);
+
+    &:after {
+      @include skeleton;
+      content: '';
+      height: rem(6px);
+      width: 100%;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [tag](#tag)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [interactive-02 [variable]](#interactive-02-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+
+## text-area
+
+### ❌text-area [mixin]
+
+v9 text-area
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin text-area() {
+  .#{$prefix}--text-area {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    width: 100%;
+    min-width: 10rem;
+    padding: $spacing-md;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    order: 2;
+    resize: vertical;
+    border-bottom: 1px solid transparent;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &::placeholder {
+      @include placeholder-colors;
+      opacity: 1;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border: $input-border;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--text-area--light {
+    background: $field-02;
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [text-area](#text-area)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [input-border [variable]](#input-border-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [field-02 [variable]](#field-02-variable)
+
+### ❌text-area--x [mixin]
+
+v10 text-area
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin text-area--x() {
+  .#{$prefix}--text-area {
+    @include reset;
+    @include type-style('body-long-01');
+    @include focus-outline('reset');
+
+    background-color: $field-01;
+    width: 100%;
+    min-width: 10rem;
+    min-height: rem(40px);
+    padding: rem(11px) $carbon--spacing-05;
+    color: $text-01;
+    order: 3;
+    resize: vertical;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    transition: $duration--fast-02 all;
+
+    & ~ .#{$prefix}--form__helper-text {
+      margin-top: 0;
+      order: 2;
+      font-style: italic;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 4;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-area::placeholder {
+    @include placeholder-colors;
+    @include type-style('body-long-01');
+    opacity: 1;
+  }
+
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-area--invalid {
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--text-area__wrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .#{$prefix}--text-area__invalid-icon {
+    position: absolute;
+    right: $carbon--spacing-05;
+    top: $carbon--spacing-04;
+    fill: $support-01;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-area:disabled {
+    cursor: not-allowed;
+    outline: none;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--text-area:disabled::placeholder {
+    color: $disabled-02;
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [text-area](#text-area)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [disabled-background-color [variable]](#disabled-background-color-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
+## text-input
+
+### ❌text-input [mixin]
+
+v9 text-input
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin text-input() {
+  .#{$prefix}--text-input {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    display: block;
+    width: 100%;
+    height: rem(40px);
+    min-width: rem(300px);
+    padding: 0 $spacing-md;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    order: 2;
+    border-bottom: 1px solid transparent;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &::placeholder {
+      @include placeholder-colors;
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border: none;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+
+    &[data-toggle-password-visibility]
+      + .#{$prefix}--text-input--password__visibility {
+      top: rem(-28px);
+      right: rem(12px);
+      display: flex;
+      justify-content: center;
+      align-self: flex-end;
+      align-items: center;
+      order: 3;
+      height: rem(16px);
+      width: rem(16px);
+      padding: 0;
+      margin-bottom: -1rem;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      outline: inherit;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--text-input--light {
+    background-color: $field-02;
+  }
+
+  // Skeleton State
+  .#{$prefix}--text-input.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [text-input](#text-input)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [field-02 [variable]](#field-02-variable)
+
+### ❌text-input--x [mixin]
+
+v10 text-input
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin text-input--x() {
+  .#{$prefix}--text-input {
+    @include reset;
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    background-color: $field-01;
+    width: 100%;
+    height: rem(40px);
+    padding: 0 $carbon--spacing-05;
+    color: $text-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    transition: $duration--fast-02 all;
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--password-input {
+    padding-right: rem(40px);
+  }
+
+  .#{$prefix}--text-input::-webkit-input-placeholder {
+    @include placeholder-colors;
+  }
+
+  .#{$prefix}--text-input--light {
+    background-color: $field-02;
+  }
+
+  //-----------------------------
+  // Disabled & Error icon spacing
+  //-----------------------------
+  .#{$prefix}--text-input__field-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .#{$prefix}--text-input__invalid-icon {
+      position: absolute;
+      right: rem(16px);
+      fill: $support-01;
+    }
+
+    .#{$prefix}--text-input--password__visibility {
+      position: absolute;
+      height: rem(16px);
+      width: rem(16px);
+      right: rem(16px);
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
+      }
+    }
+
+    .#{$prefix}--text-input--invalid {
+      padding-right: rem(40px);
+    }
+
+    .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
+      padding-right: rem(64px);
+    }
+
+    .#{$prefix}--text-input--invalid
+      + .#{$prefix}--text-input--password__visibility {
+      right: rem(40px);
+    }
+  }
+
+  .#{$prefix}--text-input:disabled
+    + .#{$prefix}--text-input--password__visibility
+    svg {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-input:disabled {
+    cursor: not-allowed;
+    outline: none;
+    background-color: $disabled-01;
+    border-bottom: 1px solid transparent;
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--text-input--light:disabled {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-input:disabled::placeholder {
+    opacity: 1;
+    color: $disabled-02;
+  }
+
+  //-----------------------------
+  // Error
+  //-----------------------------
+  .#{$prefix}--text-input--invalid {
+    @include focus-outline('invalid');
+    box-shadow: none;
+
+    .#{$prefix}--text-input--password__visibility {
+      right: rem(40px);
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [text-input](#text-input)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [placeholder-colors [mixin]](#placeholder-colors-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+
+## tile
+
+### ❌tile [mixin]
+
+v9 tile
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tile() {
+  .#{$prefix}--tile {
+    @include layer('raised');
+    display: block;
+    min-width: 8rem;
+    min-height: 4rem;
+    background-color: $ui-01;
+    border: 1px solid $ui-03;
+    position: relative;
+    padding: $spacing-md;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--selectable,
+  .#{$prefix}--tile--expandable {
+    transition: $transition--base $carbon--standard-easing;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid $ui-04;
+    }
+
+    &:hover,
+    &:focus {
+      .#{$prefix}--tile__checkmark {
+        opacity: 1;
+      }
+
+      .#{$prefix}--tile__chevron svg {
+        fill: $brand-01;
+      }
+    }
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--tile--selectable {
+    padding-right: $spacing-3xl;
+  }
+
+  .#{$prefix}--tile--selectable:focus {
+    outline: none;
+    border: 1px solid $brand-01;
+  }
+
+  .#{$prefix}--tile--is-clicked {
+    @include layer('flat');
+    border: 1px solid $ui-04;
+  }
+
+  .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    transition: $transition--base $carbon--standard-easing;
+    border: none;
+    background: transparent;
+
+    &:focus {
+      @include focus-outline;
+    }
+  }
+
+  .#{$prefix}--tile__checkmark {
+    height: 1rem;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+
+    svg {
+      border-radius: 50%;
+      background-color: rgba($ui-01, 0.25);
+      fill: rgba($brand-01, 0.25);
+    }
+  }
+
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    height: 1rem;
+
+    svg {
+      transform-origin: center;
+      transition: $transition--base $carbon--standard-easing;
+      fill: $ui-05;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .#{$prefix}--tile--expandable {
+    overflow: hidden;
+    cursor: default;
+    transition: $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--tile-content__above-the-fold {
+    display: block;
+  }
+
+  .#{$prefix}--tile-content__below-the-fold {
+    display: block;
+    opacity: 0;
+    transition: $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--tile--is-expanded {
+    overflow: visible;
+    transition: $transition--base $carbon--standard-easing;
+
+    .#{$prefix}--tile__chevron svg {
+      transform: rotate(-180deg);
+    }
+
+    .#{$prefix}--tile-content__below-the-fold {
+      opacity: 1;
+      transition: $transition--base $carbon--standard-easing;
+    }
+  }
+
+  .#{$prefix}--tile--is-selected,
+  .#{$prefix}--tile--is-selected:hover,
+  .#{$prefix}--tile--is-selected:focus {
+    border: 1px solid $brand-01;
+    outline: none;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
+    opacity: 1;
+
+    svg {
+      fill: $brand-01;
+    }
+  }
+
+  .#{$prefix}--tile-input:checked {
+    & + .#{$prefix}--tile__checkmark {
+      opacity: 1;
+    }
+
+    & + .#{$prefix}--tile__checkmark svg {
+      fill: $brand-01;
+      background-color: $ui-01;
+    }
+  }
+
+  .#{$prefix}--tile-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .#{$prefix}--tile-input {
+    @include hidden();
+  }
+}
+```
+
+</details>
+
+- **Group**: [tile](#tile)
+- **Requires**:
+  - [layer [mixin]](#layer-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [hidden [mixin]](#hidden-mixin)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-3xl [variable]](#spacing-3xl-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+
+### ❌tile--x [mixin]
+
+v10 tile
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tile--x() {
+  .#{$prefix}--tile {
+    display: block;
+    min-width: 8rem;
+    min-height: 4rem;
+    background-color: $ui-01;
+    position: relative;
+    padding: $carbon--spacing-05;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--selectable,
+  .#{$prefix}--tile--expandable {
+    transition: $duration--moderate-01 motion(standard, productive);
+    cursor: pointer;
+
+    &:hover {
+      background: $hover-ui;
+    }
+
+    &:hover,
+    &:focus {
+      .#{$prefix}--tile__checkmark {
+        opacity: 1;
+      }
+    }
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--tile--selectable {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    transition: $duration--fast-02 motion(standard, productive);
+    border: none;
+    background: transparent;
+  }
+
+  .#{$prefix}--tile__checkmark {
+    height: 1rem;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+
+    svg {
+      border-radius: 50%;
+      fill: $icon-02;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    height: 1rem;
+
+    svg {
+      transform-origin: center;
+      transition: $duration--fast-02 motion(standard, productive);
+      fill: $ui-05;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tile--expandable {
+    overflow: hidden;
+    transition: $duration--moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tile-content__above-the-fold {
+    display: block;
+  }
+
+  .#{$prefix}--tile-content__below-the-fold {
+    display: block;
+    opacity: 0;
+    transition: $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--tile--is-expanded {
+    overflow: visible;
+    transition: $duration--fast-02 motion(standard, productive);
+
+    .#{$prefix}--tile__chevron svg {
+      transform: rotate(-180deg);
+    }
+
+    .#{$prefix}--tile-content__below-the-fold {
+      opacity: 1;
+      transition: $duration--fast-02 motion(standard, productive);
+    }
+  }
+
+  .#{$prefix}--tile--is-selected {
+    outline: 1px solid $interactive-02;
+    outline-offset: -1px;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile-input:checked
+    + .#{$prefix}--tile
+    > .#{$prefix}--tile__checkmark
+    svg {
+    fill: $ui-05;
+  }
+
+  .#{$prefix}--tile-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .#{$prefix}--tile-input {
+    @include hidden;
+  }
+}
+```
+
+</details>
+
+- **Group**: [tile](#tile)
+- **Requires**:
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [hidden [mixin]](#hidden-mixin)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [duration--moderate-01 [variable]](#duration--moderate-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [duration--fast-02 [variable]](#duration--fast-02-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [interactive-02 [variable]](#interactive-02-variable)
+
+## time-picker
+
+### ❌time-picker [mixin]
+
+v9 time-picker
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin time-picker() {
+  .#{$prefix}--time-picker {
+    display: flex;
+    align-items: flex-end;
+
+    .#{$prefix}--label {
+      order: 1;
+    }
+  }
+
+  .#{$prefix}--time-picker__input {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
+    padding-right: $spacing-xl;
+  }
+
+  .#{$prefix}--time-picker .#{$prefix}--select__arrow {
+    right: 0.875rem;
+  }
+
+  .#{$prefix}--time-picker__input-field {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    display: flex;
+    align-items: center;
+    background-color: $field-01;
+    border: none;
+    width: 4.875rem;
+    color: $text-01;
+    height: rem(40px);
+    padding: 0 $spacing-md;
+    order: 2;
+    box-shadow: 0 1px 0 0 $ui-05;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &::placeholder {
+      color: $text-02;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &[data-invalid]:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: 0;
+      max-height: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &[data-invalid] ~ .#{$prefix}--form-requirement {
+      overflow: visible;
+      max-height: 0;
+      margin-top: $spacing-2xs;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--time-picker--light .#{$prefix}--time-picker__input-field {
+    background: $field-02;
+  }
+}
+```
+
+</details>
+
+- **Group**: [time-picker](#time-picker)
+- **Requires**:
+  - [reset [mixin]](#reset-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-xl [variable]](#spacing-xl-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [support-01 [variable]](#support-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [field-02 [variable]](#field-02-variable)
+
+### ❌time-picker--x [mixin]
+
+v10 time-picker
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin time-picker--x() {
+  .#{$prefix}--time-picker {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--time-picker__select {
+    justify-content: center;
+
+    &:not(:last-of-type) {
+      margin: 0 $carbon--spacing-01;
+    }
+  }
+
+  .#{$prefix}--time-picker__input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
+    min-width: auto;
+    width: auto;
+    padding-right: rem(48px);
+    line-height: 1;
+  }
+
+  .#{$prefix}--time-picker__input-field {
+    @include reset;
+    @include focus-outline('reset');
+    @include type-style('code-02');
+    display: flex;
+    align-items: center;
+    width: 4.875rem;
+    height: rem(40px);
+    transition: outline $duration--fast-01;
+  }
+}
+```
+
+</details>
+
+- **Group**: [time-picker](#time-picker)
+- **Requires**:
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+
+## toggle
+
+### ❌toggle [mixin]
+
+v9 toggle
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin toggle() {
+  .#{$prefix}--toggle {
+    @include hidden;
+  }
+
+  .#{$prefix}--toggle__label {
+    @include font-family;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: $transition--base $carbon--standard-easing;
+    cursor: pointer;
+    margin: $spacing-md 0;
+    color: $text-01;
+  }
+
+  .#{$prefix}--toggle__appearance {
+    position: relative;
+    width: rem(48px);
+
+    &:before {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 100%;
+      height: rem(4px);
+      top: -2px;
+      background-color: $ui-04;
+      transition: $transition--base $carbon--standard-easing;
+      cursor: pointer;
+    }
+
+    &:after {
+      box-sizing: border-box;
+      position: absolute;
+      display: block;
+      border: 2px solid $ui-04;
+      cursor: pointer;
+      top: -12px;
+      width: rem(24px);
+      height: rem(24px);
+      background-color: $ui-01;
+      border-radius: 50%;
+      content: '';
+      transition: $transition--base $carbon--standard-easing;
+    }
+  }
+
+  .#{$prefix}--toggle--small + .#{$prefix}--toggle__label {
+    width: rem(32px);
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    width: rem(32px);
+    height: rem(16px);
+
+    &:before {
+      box-sizing: border-box;
+      height: rem(16px);
+      width: rem(32px);
+      border-radius: 0.9375rem;
+      background-color: transparent;
+      border: 2px solid $ui-04;
+      top: 0;
+    }
+
+    &:after {
+      width: rem(10px);
+      height: rem(10px);
+      background-color: $ui-04;
+      border: none;
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .#{$prefix}--toggle__check {
+    fill: $ui-04;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    z-index: 1;
+    transition: $transition--base $carbon--standard-easing;
+    transform: scale(0.2);
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $brand-01;
+    transform: scale(1) translateX(16px);
+  }
+
+  .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle__text--right {
+    @include typescale('zeta');
+    position: relative;
+    color: $text-01;
+  }
+
+  .#{$prefix}--toggle__text--left {
+    margin-right: $spacing-xs;
+  }
+
+  .#{$prefix}--toggle__text--right {
+    margin-left: $spacing-xs;
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $brand-01;
+    }
+
+    &:after {
+      transform: translateX(24px);
+      background-color: $brand-01;
+      box-shadow: none;
+      border-color: $brand-01;
+    }
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $brand-01;
+      border-color: $brand-01;
+    }
+
+    &:after {
+      background-color: $ui-01;
+      border-color: $ui-01;
+      margin-left: 0px;
+      transform: translateX(17px);
+    }
+  }
+
+  .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      outline: 1px solid transparent;
+    }
+
+    .#{$prefix}--toggle__appearance:after {
+      @include focus-outline('blurred');
+    }
+  }
+
+  .#{$prefix}--toggle--small:focus + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      @include focus-outline('blurred');
+    }
+
+    .#{$prefix}--toggle__appearance:after {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before,
+    &:after {
+      cursor: not-allowed;
+      transition: $transition--base $carbon--standard-easing;
+    }
+  }
+
+  // Hide labels for small toggle for default theme
+  .#{$prefix}--toggle.#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle.#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__text--right {
+    @include hidden;
+  }
+
+  // Skeleton state
+  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label {
+    cursor: default;
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__appearance {
+    &:before,
+    &:after {
+      background-color: $brand-01;
+      border-color: $brand-01;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__text--right {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__appearance {
+    &:before {
+      background: transparent;
+      border-color: $ui-05;
+    }
+
+    &:after {
+      background-color: $ui-05;
+      border: none;
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [toggle](#toggle)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [transition--base [variable]](#transition--base-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+
+### ❌toggle--x [mixin]
+
+v10 toggle
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin toggle--x() {
+  .#{$prefix}--toggle {
+    @include hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--toggle__label {
+    @include type-style('label-01');
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: $carbon--spacing-03 0;
+  }
+
+  .#{$prefix}--toggle__appearance {
+    position: relative;
+    width: rem(48px);
+    height: rem(24px);
+
+    // Toggle background oval
+    &:before {
+      position: absolute;
+      display: block;
+      content: '';
+      background-color: $ui-04;
+      cursor: pointer;
+      box-sizing: border-box;
+      height: rem(24px);
+      width: rem(48px);
+      border-radius: rem(15px);
+      top: 0;
+    }
+
+    // Toggle circle
+    &:after {
+      box-sizing: border-box;
+      position: absolute;
+      display: block;
+      cursor: pointer;
+      left: 3px;
+      top: 3px;
+      width: rem(18px);
+      height: rem(18px);
+      background-color: $ui-03;
+      border-radius: 50%;
+      content: '';
+      transition: $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    width: rem(32px);
+    height: rem(16px);
+
+    &:before {
+      box-sizing: border-box;
+      height: rem(16px);
+      width: rem(32px);
+      border-radius: 0.9375rem;
+      top: 0;
+    }
+
+    &:after {
+      width: rem(10px);
+      height: rem(10px);
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .#{$prefix}--toggle__check {
+    fill: $ui-03;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    z-index: 1;
+    transition: $duration--fast-01 motion(exit, productive);
+    transform: scale(0.2);
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $support-02;
+    transform: scale(1) translateX(16px);
+  }
+
+  .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle__text--right {
+    @include type-style('body-short-01');
+    position: relative;
+    margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--toggle__text--left {
+    position: absolute;
+    left: rem(48px);
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
+    left: rem(32px);
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle:not(:checked)
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right,
+  .#{$prefix}--toggle:not(:checked)
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
+    display: inline;
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $support-02;
+    }
+
+    &:after {
+      background-color: $icon-03;
+      transform: translateX(24px);
+    }
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:after {
+      margin-left: 0px;
+      transform: translateX(17px);
+    }
+  }
+
+  //----------------------------------------------
+  // Focus
+  // ---------------------------------------------
+  .#{$prefix}--toggle + .#{$prefix}--toggle__label,
+  .#{$prefix}--toggle + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      box-shadow: 0 0 0 2px transparent;
+    }
+  }
+  .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
+  .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      box-shadow: 0 0 0 2px $focus;
+    }
+  }
+
+  //----------------------------------------------
+  // Disabled
+  // ---------------------------------------------
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $disabled-01;
+    }
+
+    &:after {
+      background-color: $disabled-02;
+    }
+
+    &:before,
+    &:after {
+      cursor: not-allowed;
+      transition: $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right {
+    color: $disabled;
+  }
+
+  .#{$prefix}--toggle:disabled:active
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance:before {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $disabled-02;
+  }
+}
+```
+
+</details>
+
+- **Group**: [toggle](#toggle)
+- **Requires**:
+  - [hidden [mixin]](#hidden-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [rem [function]](#rem-function)
+  - [motion [function]](#motion-function)
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [duration--fast-01 [variable]](#duration--fast-01-variable)
+  - [support-02 [variable]](#support-02-variable)
+  - [icon-03 [variable]](#icon-03-variable)
+  - [focus [variable]](#focus-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled [variable]](#disabled-variable)
+
+## toolbar
+
+### ❌toolbar [mixin]
+
+v9 toolbar
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin toolbar() {
+  .#{$prefix}--toolbar {
+    @if not feature-flag-enabled('components-x') {
+      @include font-family;
+    }
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 1rem 0;
+
+    > div {
+      margin: 0 rem(4px);
+    }
+
+    .#{$prefix}--search-input {
+      height: rem(32px);
+      background-color: transparent;
+      outline: none;
+    }
+
+    .#{$prefix}--search-close {
+      display: none;
+    }
+
+    .#{$prefix}--overflow-menu__icon {
+      fill: $text-02;
+      transition: fill 50ms $carbon--standard-easing;
+    }
+
+    .#{$prefix}--search-magnifier {
+      fill: $text-02;
+      transform: scale(1.15);
+      transition: all 175ms $carbon--standard-easing;
+      top: rem(8px);
+      left: rem(6px);
+      cursor: pointer;
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+    }
+
+    .#{$prefix}--toolbar-search--active {
+      width: rem(250px);
+
+      .#{$prefix}--search-magnifier {
+        transform: scale(1);
+        top: rem(9px);
+      }
+
+      .#{$prefix}--search-input {
+        background-color: $field-02;
+      }
+
+      .#{$prefix}--search-close {
+        display: block;
+      }
+    }
+
+    .#{$prefix}--checkbox-label {
+      margin-bottom: 0;
+    }
+
+    .#{$prefix}--overflow-menu--open > .#{$prefix}--overflow-menu__icon {
+      fill: $brand-01;
+    }
+  }
+
+  .#{$prefix}--toolbar-search {
+    width: 1.8rem;
+    transition: all 175ms $carbon--standard-easing;
+  }
+
+  .#{$prefix}--toolbar-search__btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    border: 0;
+    height: rem(32px);
+    width: rem(32px);
+
+    &:focus {
+      @include focus-outline;
+    }
+  }
+
+  .#{$prefix}--toolbar-filter-icon {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .#{$prefix}--toolbar-menu__title {
+    @if not feature-flag-enabled('components-x') {
+      @include typescale('omega');
+      @include letter-spacing;
+    } @else {
+      @include type-style('caption-01');
+    }
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .#{$prefix}--toolbar-menu__option {
+    padding: 0.5rem 1.25rem;
+  }
+
+  .#{$prefix}--toolbar-menu__divider {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--radio-button-group {
+    border: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [toolbar](#toolbar)
+- **Requires**:
+  - [font-family [mixin]](#font-family-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [letter-spacing [mixin]](#letter-spacing-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [feature-flag-enabled [function]](#feature-flag-enabled-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+- **Used by**:
+  - [toolbar--x [mixin]](#toolbar--x-mixin)
+
+### ❌toolbar--x [mixin]
+
+v10 toolbar
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin toolbar--x() {
+  @include toolbar;
+  .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active)
+    .#{$prefix}--search-input {
+    border-bottom: none;
+  }
+}
+```
+
+</details>
+
+- **Group**: [toolbar](#toolbar)
+- **Requires**:
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [prefix [variable]](#prefix-variable)
+
+## tooltip
+
+### ❌tooltip [mixin]
+
+v9 tooltip
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tooltip() {
+  .#{$prefix}--tooltip--icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--tooltip__label {
+    @include font-family;
+    @include typescale('epsilon');
+    display: inline-flex;
+    align-items: center;
+    color: $text-01;
+    font-weight: normal;
+
+    .#{$prefix}--tooltip__trigger {
+      margin-left: $spacing-xs;
+    }
+  }
+
+  .#{$prefix}--tooltip__trigger {
+    @include button-reset($width: false);
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:focus {
+      @include focus-outline('border');
+      fill: $hover-primary;
+    }
+
+    path,
+    polygon,
+    circle {
+      fill: $brand-01;
+    }
+
+    &:hover,
+    &:focus {
+      color: $text-01;
+
+      path,
+      polygon,
+      circle {
+        fill: $hover-primary;
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip__label--bold {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--tooltip {
+    @include layer('overlay');
+    @include reset;
+    position: absolute;
+    display: none;
+    max-width: rem(240px);
+    background: $ui-01;
+    margin-top: $spacing-2xs;
+    padding: $spacing-md;
+    border: 1px solid $ui-03;
+    border-radius: rem(4px);
+    z-index: z('floating');
+    word-wrap: break-word;
+    color: $text-01;
+
+    p {
+      @include font-family;
+      @include typescale('zeta');
+    }
+
+    .#{$prefix}--tooltip__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 1rem;
+    }
+
+    .#{$prefix}--tooltip__caret {
+      position: absolute;
+      background: $ui-01;
+      left: 0;
+      top: rem(-5px);
+      right: 0;
+      transform: rotate(-135deg);
+      width: 0.6rem;
+      height: 0.6rem;
+      border-right: 1px solid $ui-03;
+      border-bottom: 1px solid $ui-03;
+      margin: 0 auto;
+      content: '';
+    }
+
+    &[data-floating-menu-direction='left'] {
+      .#{$prefix}--tooltip__caret {
+        left: auto;
+        top: 50%;
+        right: rem(-5px);
+        transform: rotate(-45deg) translate(50%, -50%);
+      }
+    }
+
+    &[data-floating-menu-direction='top'] {
+      .#{$prefix}--tooltip__caret {
+        top: auto;
+        bottom: rem(-6px);
+        transform: rotate(45deg);
+      }
+    }
+
+    &[data-floating-menu-direction='right'] {
+      .#{$prefix}--tooltip__caret {
+        left: rem(-5px);
+        top: 50%;
+        right: auto;
+        transform: rotate(135deg) translate(-50%, 50%);
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip--shown {
+    display: block;
+  }
+
+  // Tooltip Definition
+  // Definition CSS only tooltip
+  .#{$prefix}--tooltip--definition {
+    @include font-family;
+    @include reset;
+    @include typescale('delta');
+
+    position: relative;
+
+    .#{$prefix}--tooltip__trigger {
+      display: inline-flex;
+      position: relative;
+      border-bottom: 2px dotted $ui-04;
+
+      &:hover {
+        border-bottom: 2px dotted $hover-primary;
+        cursor: pointer;
+
+        + .#{$prefix}--tooltip--definition__top,
+        + .#{$prefix}--tooltip--definition__bottom {
+          display: block;
+        }
+      }
+
+      &:focus {
+        @include focus-outline('border');
+
+        + .#{$prefix}--tooltip--definition__top,
+        + .#{$prefix}--tooltip--definition__bottom {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip--definition__bottom,
+  .#{$prefix}--tooltip--definition__top {
+    @include layer('overlay');
+    position: absolute;
+    z-index: 1;
+    display: none;
+    background: $inverse-02;
+    max-width: rem(176px);
+    margin-top: $spacing-sm;
+    padding: $spacing-xs;
+    border-radius: rem(4px);
+    pointer-events: none;
+    cursor: pointer;
+
+    p {
+      @include font-family;
+      @include typescale('omega');
+      color: $inverse-01;
+    }
+
+    .#{$prefix}--tooltip__caret {
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      background: $inverse-02;
+      margin-left: $spacing-lg;
+    }
+  }
+
+  // Tooltip Definition caret - bottom position
+  .#{$prefix}--tooltip--definition__bottom {
+    .#{$prefix}--tooltip__caret {
+      top: -0.2rem;
+      transform: rotate(-135deg);
+    }
+  }
+
+  // Tooltip Definition caret - top position
+  .#{$prefix}--tooltip--definition__top {
+    transform: translateY(-100%);
+    margin-top: rem(-32px);
+
+    .#{$prefix}--tooltip__caret {
+      bottom: -0.2rem;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Tooltip Icon
+  // Icon CSS only tooltip
+  .#{$prefix}--tooltip--icon__top,
+  .#{$prefix}--tooltip--icon__bottom {
+    @include font-family;
+    @include reset;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: visible;
+
+    path {
+      fill: $brand-01;
+    }
+
+    // Tooltip - renders as a combo of :before and :after elements
+    &:before,
+    &:after {
+      @include font-family;
+      position: absolute;
+      display: none;
+      background-color: $inverse-02;
+    }
+
+    &:before {
+      right: 0;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      margin: 0 auto;
+      content: '';
+      margin-top: 1px;
+      margin-left: 50%;
+    }
+
+    &:after {
+      @include typescale('omega');
+      @include layer('overlay');
+      max-width: rem(176px);
+      margin-left: 50%;
+      padding: $spacing-2xs;
+      border-radius: 4px;
+      color: $inverse-01;
+      font-weight: 400;
+      content: attr(aria-label);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      margin-left: 50%;
+    }
+
+    &:hover,
+    &:focus {
+      path {
+        fill: $hover-primary;
+      }
+
+      &:before,
+      &:after {
+        position: absolute;
+        display: block;
+      }
+    }
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
+      }
+    }
+  }
+
+  // Tooltip Icon caret - top position
+  .#{$prefix}--tooltip--icon__top {
+    &:before {
+      top: 0;
+      transform: translate(-50%, calc(-100% - 10px)) rotate(45deg);
+    }
+
+    &:after {
+      top: 0;
+      transform: translate(-50%, calc(-100% - 10px));
+    }
+  }
+
+  // Tooltip Icon caret - bottom position
+  .#{$prefix}--tooltip--icon__bottom {
+    &:before {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px)) rotate(135deg);
+    }
+
+    &:after {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px));
+    }
+  }
+
+  // Tooltip position - icon only
+  .#{$prefix}--tooltip--icon {
+    .#{$prefix}--tooltip__trigger {
+      svg {
+        margin-left: 0;
+      }
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [tooltip](#tooltip)
+- **Requires**:
+  - [font-family [mixin]](#font-family-mixin)
+  - [typescale [mixin]](#typescale-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [spacing-xs [variable]](#spacing-xs-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [brand-01 [variable]](#brand-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [spacing-2xs [variable]](#spacing-2xs-variable)
+  - [spacing-md [variable]](#spacing-md-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [ui-04 [variable]](#ui-04-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
+  - [spacing-sm [variable]](#spacing-sm-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [spacing-lg [variable]](#spacing-lg-variable)
+
+### ❌tooltip--x [mixin]
+
+v10 tooltip
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin tooltip--x() {
+  .#{$prefix}--tooltip--icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--tooltip__label {
+    @include type-style('label-01');
+    display: inline-flex;
+    align-items: center;
+    color: $text-02;
+
+    .#{$prefix}--tooltip__trigger {
+      margin-left: $carbon--spacing-03;
+    }
+  }
+
+  .#{$prefix}--tooltip__label:focus {
+    @include focus-outline('border');
+  }
+
+  .#{$prefix}--tooltip__trigger {
+    @include button-reset($width: false);
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:focus {
+      @include focus-outline('border');
+      fill: $hover-primary;
+    }
+
+    path,
+    polygon,
+    circle {
+      fill: $icon-02;
+    }
+  }
+
+  .#{$prefix}--tooltip__label--bold {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--tooltip {
+    @include layer('overlay');
+    @include reset;
+    position: absolute;
+    display: none;
+    min-width: rem(208px);
+    max-width: rem(288px);
+    background: $inverse-02;
+    margin-top: $carbon--spacing-02;
+    padding: 1rem;
+    border-radius: rem(2px);
+    z-index: z('floating');
+    word-wrap: break-word;
+    color: $inverse-01;
+
+    p {
+      @include type-style('body-short-01');
+    }
+
+    button {
+      padding-right: $carbon--spacing-07;
+    }
+
+    .#{$prefix}--link {
+      // Need to add new link / UI color -- IBM Color Blue 40
+      color: $link-inverse-color;
+      font-size: rem(14px);
+
+      &:active {
+        color: $inverse-01;
+      }
+
+      &:visited {
+        color: $link-inverse-color;
+      }
+    }
+
+    .#{$prefix}--tooltip__caret {
+      position: absolute;
+      background: $inverse-02;
+      left: 0;
+      top: rem(-4px);
+      right: 0;
+      transform: rotate(-135deg);
+      width: 0.6rem;
+      height: 0.6rem;
+      margin: 0 auto;
+      content: '';
+    }
+
+    .#{$prefix}--tooltip__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    &[data-floating-menu-direction='left'] {
+      .#{$prefix}--tooltip__caret {
+        left: auto;
+        top: 50%;
+        right: rem(-4px);
+        transform: rotate(-45deg) translate(50%, -50%);
+      }
+    }
+
+    &[data-floating-menu-direction='top'] {
+      .#{$prefix}--tooltip__caret {
+        top: auto;
+        bottom: rem(-4px);
+        transform: rotate(45deg);
+      }
+    }
+
+    &[data-floating-menu-direction='right'] {
+      .#{$prefix}--tooltip__caret {
+        left: rem(-4px);
+        top: 50%;
+        right: auto;
+        transform: rotate(135deg) translate(-50%, 50%);
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip--shown {
+    display: block;
+  }
+
+  // Tooltip Definition
+  // Definition CSS only tooltip
+  .#{$prefix}--tooltip--definition {
+    @include reset;
+    position: relative;
+
+    .#{$prefix}--tooltip__trigger {
+      @include type-style('label-01');
+      display: inline-flex;
+      position: relative;
+      border-bottom: 1px dotted $interactive-01;
+      color: $text-01;
+
+      &:hover {
+        cursor: pointer;
+
+        + .#{$prefix}--tooltip--definition__top,
+        + .#{$prefix}--tooltip--definition__bottom {
+          display: block;
+        }
+      }
+
+      &:focus {
+        @include focus-outline('border');
+
+        + .#{$prefix}--tooltip--definition__top,
+        + .#{$prefix}--tooltip--definition__bottom {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip--definition__bottom,
+  .#{$prefix}--tooltip--definition__top {
+    @include layer('overlay');
+    position: absolute;
+    z-index: 1;
+    display: none;
+    background: $inverse-02;
+    width: rem(208px);
+    margin-top: $carbon--spacing-04;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    border-radius: rem(2px);
+    pointer-events: none;
+    cursor: pointer;
+
+    p {
+      @include type-style('body-short-01');
+      color: $inverse-01;
+    }
+
+    .#{$prefix}--tooltip__caret {
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      background: $inverse-02;
+      margin-left: $carbon--spacing-05;
+    }
+  }
+
+  // Tooltip Definition caret - bottom position
+  .#{$prefix}--tooltip--definition__bottom .#{$prefix}--tooltip__caret {
+    top: -0.2rem;
+    transform: rotate(-135deg);
+  }
+
+  // Tooltip Definition caret - top position
+  .#{$prefix}--tooltip--definition__top {
+    transform: translateY(-100%);
+    margin-top: rem(-32px);
+
+    .#{$prefix}--tooltip__caret {
+      bottom: -0.2rem;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Tooltip Icon
+  // Icon CSS only tooltip
+  .#{$prefix}--tooltip--icon__top,
+  .#{$prefix}--tooltip--icon__bottom {
+    @include reset;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: visible;
+
+    path {
+      fill: $icon-02;
+    }
+
+    // Tooltip - renders as a combo of ::before and ::after elements
+    &::before,
+    &::after {
+      @include type-style('body-short-01');
+      position: absolute;
+      display: none;
+      background-color: $inverse-02;
+    }
+
+    &::before {
+      right: 0;
+      left: 0;
+      width: rem(18px);
+      height: rem(18px);
+      margin: 0 auto;
+      content: '';
+      margin-top: 1px;
+      margin-left: 50%;
+    }
+
+    &::after {
+      @include layer('overlay');
+      min-width: rem(24px);
+      max-width: rem(208px);
+      height: rem(24px);
+      margin-left: 50%;
+      padding: 0 1rem;
+      border-radius: rem(2px);
+      color: $inverse-01;
+      font-weight: 400;
+      content: attr(aria-label);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      margin-left: 50%;
+    }
+
+    &:hover,
+    &:focus {
+      path {
+        fill: $icon-02;
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
+      }
+    }
+  }
+
+  // Tooltip Icon caret - top position
+  .#{$prefix}--tooltip--icon__top {
+    &::before {
+      top: 1px;
+      transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
+    }
+
+    &::after {
+      top: 0;
+      transform: translate(-50%, calc(-100% - 12px));
+    }
+  }
+
+  // Tooltip Icon caret - bottom position
+  .#{$prefix}--tooltip--icon__bottom {
+    &::before {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 9px)) rotate(135deg);
+    }
+
+    &::after {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px));
+    }
+  }
+
+  // Tooltip position - icon only
+  .#{$prefix}--tooltip--icon .#{$prefix}--tooltip__trigger svg {
+    margin-left: 0;
+  }
+}
+```
+
+</details>
+
+- **Group**: [tooltip](#tooltip)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [focus-outline [mixin]](#focus-outline-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [layer [mixin]](#layer-mixin)
+  - [reset [mixin]](#reset-mixin)
+  - [rem [function]](#rem-function)
+  - [z [function]](#z-function)
+  - [prefix [variable]](#prefix-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [hover-primary [variable]](#hover-primary-variable)
+  - [icon-02 [variable]](#icon-02-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [link-inverse-color [variable]](#link-inverse-color-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+
+## ui-shell
+
+### ❌carbon-content [mixin]
+
+UI shell content
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon-content() {
+  .#{$prefix}--content {
+    transform: translate3d(0, 0, 0);
+    will-change: margin-left;
+  }
+
+  .#{$prefix}--header ~ .#{$prefix}--content {
+    margin-top: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav ~ .#{$prefix}--content {
+    margin-left: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    margin-left: mini-units(32);
+  }
+}
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Requires**:
+  - [mini-units [function]](#mini-units-function)
+  - [prefix [variable]](#prefix-variable)
 
 ### ✅mini-units [function]
 
@@ -11496,12 +31054,694 @@ Get a `rem` value based for a number of mini-units.
 
 | Name     | Description | Type     | Default value |
 | -------- | ----------- | -------- | ------------- |
-| `$count` | —           | `number` | —             |
+| `$count` | —           | `Number` | —             |
 
-- **Group**: [general](#general)
-- **Returns**: `rem`
+- **Group**: [ui-shell](#ui-shell)
+- **Returns**: `Number` In rem
+- **Requires**:
+  - [unit [variable]](#unit-variable)
+- **Used by**:
+  - [carbon-content [mixin]](#carbon-content-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [product-switcher [mixin]](#product-switcher-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
-### ✅experimental-focus [mixin]
+### ❌carbon-header [mixin]
+
+UI shell header
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon-header() {
+  .#{$prefix}--header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: mini-units(6);
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    z-index: z('header');
+  }
+
+  .#{$prefix}--header__action {
+    @include button-reset();
+    width: mini-units(6);
+    height: mini-units(6);
+    border: rem(3px) solid transparent;
+  }
+
+  .#{$prefix}--header__action
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
+    display: inline;
+  }
+
+  .#{$prefix}--header__action
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
+    display: inline;
+  }
+
+  .#{$prefix}--header__action:hover {
+    background-color: #333333;
+  }
+
+  .#{$prefix}--header__action--active,
+  .#{$prefix}--header__action--active:hover {
+    background-color: $shell-brand-01;
+  }
+
+  .#{$prefix}--header__action--active,
+  .#{$prefix}--header__action:focus {
+    border-color: $shell-brand-01;
+    outline: none;
+  }
+
+  .#{$prefix}--header__action > svg {
+    fill: $shell-header-icon-01;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Name
+  //--------------------------------------------------------------------------
+  a.#{$prefix}--header__name {
+    @include type-style('body-short-01');
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 mini-units(2);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    line-height: 20px;
+    user-select: none;
+  }
+
+  .#{$prefix}--header__name--prefix {
+    font-weight: 400;
+  }
+
+  a.#{$prefix}--header__name,
+  a.#{$prefix}--header__name:hover {
+    color: $shell-header-text-01;
+  }
+
+  a.#{$prefix}--header__name:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 4px $shell-brand-01;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Navigation
+  //--------------------------------------------------------------------------
+  .#{$prefix}--header__nav {
+    height: 100%;
+  }
+
+  .#{$prefix}--header__menu-bar[role='menubar'] {
+    display: flex;
+    margin-left: mini-units(1);
+    height: 100%;
+  }
+
+  a.#{$prefix}--header__menu-item[role='menuitem'] {
+    display: flex;
+    align-items: center;
+    color: $shell-header-text-01;
+    padding: 0 mini-units(2);
+    // Used for links that are directly in the menubar to span the full height
+    height: 100%;
+    // Text styles
+    font-size: rem(14px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: rem(18px);
+    // Reset link styles and make sure the text isn't selectable
+    text-decoration: none;
+    user-select: none;
+    // Used for focus styles
+    border: 4px solid transparent;
+  }
+
+  a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+    background-color: #333333;
+  }
+
+  .#{$prefix}--header__action:active,
+  a.#{$prefix}--header__menu-item[role='menuitem']:active {
+    background-color: $ibm-color__gray-80;
+  }
+
+  a.#{$prefix}--header__menu-item[role='menuitem']:focus {
+    border-color: $ibm-color__blue-60;
+    outline: none;
+  }
+
+  .#{$prefix}--header__submenu {
+    position: relative;
+  }
+
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-haspopup='true'] {
+    position: relative;
+  }
+
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
+    background-color: $ibm-color__gray-80;
+    // Note: needs to be higher than menu. Adding 1 here instead of moving to
+    // the next level.
+    z-index: #{z('header') + 1};
+  }
+
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    > .#{$prefix}--header__menu-arrow {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--header__menu[role='menu'] {
+    display: none;
+  }
+
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: mini-units(25);
+    flex-direction: column;
+    transform: translateY(100%);
+    background-color: $ibm-color__gray-80;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    z-index: z('header');
+  }
+
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem'] {
+    height: mini-units(6);
+  }
+
+  .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item[role='menuitem']:hover {
+    background-color: #4c4c4c;
+    color: #fff;
+  }
+
+  .#{$prefix}--header__menu-arrow {
+    fill: $ibm-color__gray-10;
+    margin-left: mini-units(1);
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Global
+  //--------------------------------------------------------------------------
+  .#{$prefix}--header__global {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 1 0%;
+    height: 100%;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Skip to content
+  //--------------------------------------------------------------------------
+  .#{$prefix}--skip-to-content {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    visibility: visible;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--skip-to-content:focus {
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 3rem;
+    clip: auto;
+    border: 4px solid $ibm-color__blue-60;
+    z-index: 9999;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    outline: none;
+    padding: 0 1rem;
+  }
+}
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+  - [mini-units [function]](#mini-units-function)
+  - [z [function]](#z-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
+  - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
+  - [shell-brand-01 [variable]](#shell-brand-01-variable)
+  - [shell-header-icon-01 [variable]](#shell-header-icon-01-variable)
+
+### ❌carbon-navigation [mixin]
+
+UI shell navigation
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon-navigation() {
+  //----------------------------------------------------------------------------
+  // Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation {
+    position: fixed;
+    top: mini-units(6);
+    bottom: 0;
+    left: 0;
+    background-color: $ibm-color__gray-90;
+    width: mini-units(32);
+    z-index: z('dropdown');
+    box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
+    color: $ibm-color__gray-10;
+  }
+
+  .#{$prefix}--navigation--right {
+    left: auto;
+    right: 0;
+  }
+
+  .#{$prefix}--navigation svg {
+    fill: $ibm-color__gray-10;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Section
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation-section:not(:last-child)::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: $ibm-color__gray-80;
+    margin: 0 mini-units(2);
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Item
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--navigation-item--active > a.#{$prefix}--navigation-link {
+    color: $ibm-color__white-0;
+    font-weight: 600;
+  }
+
+  .#{$prefix}--navigation-item--active::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-color__blue-60;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--navigation-link {
+    display: flex;
+    align-items: center;
+    color: $ibm-color__gray-10;
+    text-decoration: none;
+    font-size: rem(14px);
+    font-weight: 400;
+    width: 100%;
+    min-height: mini-units(5);
+    padding-left: mini-units(2);
+  }
+
+  a.#{$prefix}--navigation-link:hover {
+    background-color: #333333;
+    color: $ibm-color__white-0;
+  }
+
+  a.#{$prefix}--navigation-link:focus {
+    outline: rem(3px) solid $ibm-color__blue-60;
+    outline-offset: rem(-3px);
+  }
+
+  .#{$prefix}--navigation-item--icon > a.#{$prefix}--navigation-link {
+    padding-left: 0;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Category
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation__category {
+    width: 100%;
+  }
+
+  .#{$prefix}--navigation__category-toggle {
+    @include button-reset($width: true);
+
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--navigation__category-toggle:hover {
+    background-color: #333333;
+  }
+
+  .#{$prefix}--navigation__category-toggle:focus {
+    outline: rem(3px) solid $ibm-color__blue-60;
+    outline-offset: rem(-3px);
+  }
+
+  .#{$prefix}--navigation__category-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: mini-units(2);
+    width: 100%;
+    color: $ibm-color__gray-10;
+    font-size: rem(14px);
+    font-weight: 400;
+    min-height: mini-units(5);
+    padding-left: mini-units(2);
+  }
+
+  .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-title {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--navigation__category-items {
+    display: none;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--navigation__category-item > a.#{$prefix}--navigation-link {
+    display: flex;
+    align-items: center;
+    min-height: mini-units(4);
+    padding-left: mini-units(4);
+  }
+
+  .#{$prefix}--navigation__category-item {
+    position: relative;
+  }
+
+  .#{$prefix}--navigation-item--icon
+    .#{$prefix}--navigation__category-item
+    > a.#{$prefix}--navigation-link {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--navigation__category-item--active::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-color__blue-60;
+  }
+
+  .#{$prefix}--navigation__category-item--active
+    > a.#{$prefix}--navigation-link {
+    font-weight: 600;
+    color: $ibm-color__white-0;
+  }
+
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-title {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-title
+    > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-items {
+    display: block;
+    visibility: inherit;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav Icon
+  //----------------------------------------------------------------------------
+  .#{$prefix}--navigation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: mini-units(6);
+    min-width: mini-units(6);
+    height: mini-units(5);
+    margin-right: mini-units(1);
+  }
+}
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Requires**:
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [mini-units [function]](#mini-units-function)
+  - [z [function]](#z-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+
+### ❌product-switcher [mixin]
+
+UI shell product switcher
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin product-switcher() {
+  //--------------------------------------------------------------------------
+  // Global Panel
+  //--------------------------------------------------------------------------
+  .#{$prefix}--panel--overlay {
+    position: fixed;
+    top: mini-units(6);
+    right: 0;
+    bottom: 0;
+    width: mini-units(32);
+    will-change: transform;
+    transform: translate3d(100%, 0, 0);
+    padding: 1rem 0;
+    overflow-y: auto;
+    z-index: 1000;
+    background-color: $shell-header-bg-02;
+    height: 100%;
+    overflow-x: hidden;
+    transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+
+  .#{$prefix}--panel--expanded {
+    box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
+    transform: translate3d(0, 0, 0);
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Search
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-switcher__search {
+    padding: 0 mini-units(2);
+    margin-bottom: mini-units(3);
+  }
+
+  .#{$prefix}--search--shell input {
+    background-color: $shell-header-bg-05;
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Buttons
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-switcher__subheader,
+  .#{$prefix}--product-switcher__all-btn {
+    @include type-style('body-short-01');
+    padding: mini-units(1);
+    color: $shell-header-text-03;
+  }
+
+  .#{$prefix}--product-switcher__subheader {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--product-switcher__all-btn {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--product-switcher__all-btn,
+  .#{$prefix}--product-switcher__back-btn {
+    display: inline-block;
+    background: transparent;
+    width: 100%;
+    border: none;
+    color: $shell-header-link;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .#{$prefix}--product-switcher__all-btn:hover,
+  .#{$prefix}--product-switcher__back-btn:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--product-switcher__all-btn:focus,
+  .#{$prefix}--product-switcher__back-btn:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__back-btn {
+    display: flex;
+    align-items: center;
+    @include type-style('body-short-01');
+    padding: mini-units(1) mini-units(2);
+  }
+
+  .#{$prefix}--product-switcher__back-arrow {
+    fill: $shell-header-link;
+    margin-right: mini-units(2);
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Product List
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-list__item {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .#{$prefix}--product-list__item:hover {
+    background: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--product-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: mini-units(1) mini-units(2);
+    text-decoration: none;
+  }
+
+  .#{$prefix}--product-link:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__icon {
+    margin-right: mini-units(2);
+  }
+
+  .#{$prefix}--product-link__name {
+    @include type-style('body-short-01');
+    margin-left: 0.25rem;
+    font-weight: 400;
+    color: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: mini-units(5);
+
+    &.#{$prefix}--overflow-menu--open {
+      display: flex;
+    }
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu > svg {
+    fill: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover {
+    background: $shell-header-bg-04;
+  }
+
+  .#{$prefix}--product-switcher__product-list
+    .#{$prefix}--overflow-menu:hover
+    > svg {
+    fill: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:focus {
+    display: flex;
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__product-list
+    .#{$prefix}--overflow-menu-options__option:hover {
+    background: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
+    display: flex;
+  }
+}
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [mini-units [function]](#mini-units-function)
+  - [prefix [variable]](#prefix-variable)
+  - [shell-header-bg-02 [variable]](#shell-header-bg-02-variable)
+  - [shell-ui-03 [variable]](#shell-ui-03-variable)
+  - [shell-header-bg-05 [variable]](#shell-header-bg-05-variable)
+  - [shell-header-text-03 [variable]](#shell-header-text-03-variable)
+  - [shell-header-link [variable]](#shell-header-link-variable)
+  - [shell-header-bg-03 [variable]](#shell-header-bg-03-variable)
+  - [shell-header-text-02 [variable]](#shell-header-text-02-variable)
+  - [shell-header-bg-04 [variable]](#shell-header-bg-04-variable)
+
+### ❌experimental-focus [mixin]
 
 Adds experimental focus styles to a particular selector.
 
@@ -11530,9 +31770,13 @@ Adds experimental focus styles to a particular selector.
 
 </details>
 
-- **Group**: [general](#general)
+- **Group**: [ui-shell](#ui-shell)
+- **Requires**:
+  - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
-### ✅text-overflow [mixin]
+### ❌text-overflow [mixin]
 
 Helper to add in text overflow styles to a particular node. Useful if we
 don't want to have display-inline: block from the text helper classes
@@ -11563,9 +31807,9 @@ don't want to have display-inline: block from the text helper classes
 
 </details>
 
-- **Group**: [general](#general)
+- **Group**: [ui-shell](#ui-shell)
 
-### ✅expanded [mixin]
+### ❌expanded [mixin]
 
 Helper for handling selectors for the expansion state of the side-nav.
 This helper makes it easier to write code for children that need to respond
@@ -11577,7 +31821,7 @@ transition animation.
 <summary>Source code</summary>
 
 ```scss
-@mixin expanded($opacity, $visibility) {
+@mixin expanded($opacity: false, $visibility: false) {
   @if $opacity == true {
     opacity: 0;
   }
@@ -11606,265 +31850,940 @@ transition animation.
 
 - **Parameters**:
 
-| Name          | Description | Type      | Default value |
-| ------------- | ----------- | --------- | ------------- |
-| `$opacity`    | —           | `boolean` | —             |
-| `$visibility` | —           | `boolean` | —             |
+| Name          | Description | Type   | Default value |
+| ------------- | ----------- | ------ | ------------- |
+| `$opacity`    | —           | `Bool` | `false`       |
+| `$visibility` | —           | `Bool` | `false`       |
 
-- **Group**: [general](#general)
+- **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-
-### ❌carbon--theme--v9 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme--v9: (
-  brand-01: $color__blue-51,
-  brand-02: $color__blue-40,
-  brand-03: $color__teal-20,
-  inverse-01: $color__white,
-  inverse-02: #272d33,
-  ui-01: $color__white,
-  ui-02: #f4f7fb,
-  ui-03: $color__gray-1,
-  ui-04: #8897a2,
-  ui-05: $color__navy-gray-6,
-  text-01: $color__blue-90,
-  text-02: $color__navy-gray-6,
-  text-03: #cdd1d4,
-  field-01: #f4f7fb,
-  field-02: $color__white,
-  support-01: #e0182d,
-  support-02: $color__green-40,
-  support-03: $color__yellow-30,
-  support-04: $color__blue-30,
-  nav-01: $color__navy-gray-1,
-  nav-02: $color__blue-90,
-  nav-03: $color__purple-30,
-  nav-04: $color__purple-60,
-  nav-05: $color__teal-40,
-  nav-06: $color__teal-50,
-  nav-07: $color__blue-30,
-  nav-08: $color__blue-51,
-  hover-primary: darken($color__blue-51, 10%),
-  hover-primary-text: darken($color__blue-51, 15%),
-  hover-danger: darken(#e0182d, 10%),
-  hover-secondary: $color__blue-51,
-  hover-row: rgba($color__blue-40, 0.1),
-);
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅carbon--theme [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--theme: $carbon--theme--v9;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅nav-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$nav-01: $color__navy-gray-1 !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅input-border [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$input-border: 1px solid transparent !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅button-font-weight [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$button-font-weight: 600 !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅accordion-flex-direction [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$accordion-flex-direction: row !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅card-text-align [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$card-text-align: center !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅checkbox-border-width [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$checkbox-border-width: 2px !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅snippet-background-color [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$snippet-background-color: $ui-01 !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅content-switcher-border-radius [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$content-switcher-border-radius: 8px !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅data-table-heading-transform [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$data-table-heading-transform: uppercase !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅modal-border-top [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$modal-border-top: $brand-01 4px solid !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅progress-indicator-bar-width [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$progress-indicator-bar-width: 1px inset transparent !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅radio-border-width [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$radio-border-width: 2px !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅structured-list-padding [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$structured-list-padding: 2rem !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
-
-### ✅skeleton [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$skeleton: rgba($color__blue-51, 0.1) !default;
-```
-
-</details>
-
-- **Group**: [general](#general)
 - **Used by**:
-  - [skeleton [mixin]](#skeleton-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
-### ✅edited [variable]
+### ❌carbon-side-nav [mixin]
+
+UI shell side nav
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$edited: true !default;
+@mixin carbon-side-nav() {
+  //----------------------------------------------------------------------------
+  // Side-nav > Panel
+  //----------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on hover. When expanded, it
+  // should have the same dimensions as when expanded on hover.
+  .#{$prefix}--side-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: mini-units(6);
+    max-width: mini-units(32);
+    color: $shell-side-nav-text-01;
+    background-color: $shell-side-nav-bg-01;
+    will-change: width;
+    // TODO: sync with motion work
+    transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    // Useful to toggle this property to see what's going on when not expanded
+    overflow: hidden;
+    // Separates out the panel from the header of the same color
+    border-top: 1px solid $ibm-color__gray-80;
+    z-index: z('header');
+  }
+
+  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav--expanded {
+    width: mini-units(32);
+  }
+
+  // When used alongside the header, we update the `top` positioning so that we
+  // can fit both widgets on the same page without overlapping.
+  .#{$prefix}--header ~ .#{$prefix}--side-nav {
+    top: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav--fixed {
+    width: mini-units(26);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__navigation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__header {
+    display: flex;
+    border-bottom: 1px solid $ibm-color__gray-80;
+    width: 100%;
+    height: mini-units(6);
+    max-width: 100%;
+
+    @include expanded() {
+      height: auto;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header > Details
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__details {
+    display: flex;
+    flex-direction: column;
+    padding-right: mini-units(2);
+    // Necessary for text truncation in title
+    // https://css-tricks.com/flexbox-truncated-text/#article-header-id-3
+    flex: 1;
+    min-width: 0;
+
+    @include expanded($opacity: true, $visibility: true);
+  }
+
+  .#{$prefix}--side-nav__title {
+    @include text-overflow();
+
+    // TODO: sync with type styles
+    font-size: rem(14px);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    margin-top: mini-units(2);
+    user-select: none;
+  }
+
+  // Sync up between our title and select field to get position logic for
+  // text
+  .#{$prefix}--side-nav__title,
+  .#{$prefix}--side-nav__select {
+    padding-left: mini-units(1);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Header > Switcher
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--side-nav__switcher-chevron {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: mini-units(1);
+    bottom: 0;
+    fill: $shell-side-nav-icon-01;
+  }
+
+  .#{$prefix}--side-nav__select {
+    appearance: none;
+    flex: 1 1 0%;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: rem(12px);
+    height: mini-units(4);
+    // Flex bug, used to have the select node respect the width if a child has a
+    // value that is longer than the width of the select
+    min-width: 0;
+    // Buffer the right hand side of select so text doesn't overlay the chevron
+    padding-right: mini-units(4);
+  }
+
+  .#{$prefix}--side-nav__select:focus {
+    @include experimental-focus();
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Footer
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__footer {
+    flex: 0 0 rem(48px);
+    width: 100%;
+    background-color: $shell-side-nav-bg-02;
+  }
+
+  .#{$prefix}--side-nav__toggle {
+    @include button-reset($width: true);
+    height: 100%;
+    text-align: left;
+  }
+
+  .#{$prefix}--side-nav__toggle:hover {
+    background-color: $shell-side-nav-bg-03;
+  }
+
+  .#{$prefix}--side-nav__toggle:focus {
+    @include experimental-focus();
+  }
+
+  .#{$prefix}--side-nav__toggle:active {
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Item(s)
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__items {
+    flex: 1 1 0%;
+    overflow: hidden;
+
+    @include expanded() {
+      overflow-y: auto;
+    }
+  }
+
+  // Force all of our side navigation items to be the same dimensions. When our
+  // menu expands, we can undo the forced dimensions.
+  .#{$prefix}--side-nav__item {
+    width: mini-units(6);
+    height: mini-units(6);
+    overflow: hidden;
+
+    @include expanded() {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover {
+    // TODO: sync color
+    background-color: #333333;
+  }
+
+  .#{$prefix}--side-nav__item--active {
+    // TODO: sync color
+    background-color: #3d3d3d;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > {Menu,Submenu}
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+    @include button-reset($width: true);
+
+    display: flex;
+    align-items: center;
+    color: $shell-side-nav-text-01;
+    // TODO: sync type
+    font-size: rem(14px);
+    line-height: rem(20px);
+    height: mini-units(6);
+    user-select: none;
+  }
+
+  .#{$prefix}--side-nav__submenu:focus {
+    @include experimental-focus();
+  }
+
+  .#{$prefix}--side-nav__submenu-title {
+    @include text-overflow();
+  }
+
+  .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    .#{$prefix}--side-nav__submenu-chevron
+    > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu'] {
+    display: block;
+    visibility: hidden;
+    max-height: 0;
+    transition: $transition--expansion max-height $carbon--ease-out, $transition--expansion
+        visibility $carbon--standard-easing;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    + .#{$prefix}--side-nav__menu[role='menu'] {
+    max-height: 1500px;
+    visibility: inherit;
+    transition: $transition--expansion max-height $carbon--ease-in, $transition--expansion
+        visibility $carbon--standard-easing;
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link[role='menuitem'] {
+    height: mini-units(4);
+    min-height: mini-units(4);
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
+    // TODO: sync with color
+    background-color: #4c4c4c;
+  }
+
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link[aria-current='page'] {
+    background-color: $ibm-color__gray-70;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--side-nav__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    min-height: mini-units(6);
+    padding-right: mini-units(2);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--side-nav__submenu > .#{$prefix}--side-nav__icon,
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__icon {
+    margin-right: mini-units(1);
+  }
+
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text {
+    @include text-overflow();
+    color: $shell-side-nav-text-01;
+    font-size: rem(14px);
+    letter-spacing: 0.1px;
+    line-height: rem(20px);
+    user-select: none;
+  }
+
+  a.#{$prefix}--side-nav__link:focus {
+    @include experimental-focus();
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']::before,
+  a.#{$prefix}--side-nav__link--current::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Icons
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: mini-units(6);
+    height: mini-units(6);
+    // Helpful in flex containers so the icon does not have less than the
+    // expected width
+    flex: 0 0 mini-units(6);
+  }
+
+  .#{$prefix}--side-nav__icon > svg {
+    fill: $shell-side-nav-icon-01;
+  }
+
+  .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded
+    .#{$prefix}--side-nav__icon
+    > svg.#{$prefix}--side-nav-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded
+    .#{$prefix}--side-nav__icon
+    > svg.#{$prefix}--side-nav-collapse-icon {
+    display: block;
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Fixed
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav--fixed
+    .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+    padding-left: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav--fixed
+    .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link {
+    padding-left: mini-units(4);
+  }
+}
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Requires**:
+  - [expanded [mixin]](#expanded-mixin)
+  - [text-overflow [mixin]](#text-overflow-mixin)
+  - [experimental-focus [mixin]](#experimental-focus-mixin)
+  - [button-reset [mixin]](#button-reset-mixin)
+  - [mini-units [function]](#mini-units-function)
+  - [z [function]](#z-function)
+  - [rem [function]](#rem-function)
+  - [prefix [variable]](#prefix-variable)
+  - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
+  - [shell-side-nav-bg-01 [variable]](#shell-side-nav-bg-01-variable)
+  - [shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
+  - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
+  - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
+  - [shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
+  - [shell-side-nav-bg-03 [variable]](#shell-side-nav-bg-03-variable)
+  - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+  - [transition--expansion [variable]](#transition--expansion-variable)
+  - [carbon--ease-out [variable]](#carbon--ease-out-variable)
+  - [carbon--standard-easing [variable]](#carbon--standard-easing-variable)
+  - [carbon--ease-in [variable]](#carbon--ease-in-variable)
+
+### ❌shell-header-bg-01 [variable]
+
+Header bar background
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-bg-01: #252525;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-header-bg-02 [variable]
+
+Header-panel background
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-bg-02: #f3f3f3;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-bg-03 [variable]
+
+Panel item hover
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-bg-03: #dcdcdc;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-bg-04 [variable]
+
+Panel overflow hover
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-bg-04: #bebebe;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-bg-05 [variable]
+
+Panel input background
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-bg-05: #fff;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-bg-06 [variable]
+
+Header Nav Link hober
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-bg-06: #4c4c4c;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+
+### ❌shell-header-text-01 [variable]
+
+Primary text in header-panel, Item text
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-text-01: #f3f3f3;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-header-text-02 [variable]
+
+Secondary text in header-panel, Item text
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-text-02: #171717;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-text-03 [variable]
+
+Secondary text in header-panel, Category label
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-text-03: #8c8c8c;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-icon-01 [variable]
+
+Header bar icons
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-icon-01: #f3f3f3;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-header [mixin]](#carbon-header-mixin)
+
+### ❌shell-header-icon-02 [variable]
+
+Icons in header panel
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-icon-02: #252525;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+
+### ❌shell-header-link [variable]
+
+Item link
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-link: #0062ff;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌shell-header-icon-selected [variable]
+
+Header icon selected state background
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-header-icon-selected: #0062ff;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+
+### ❌shell-side-nav-bg-01 [variable]
+
+Side-nav panel background
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-bg-01: $ibm-color__gray-90;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-side-nav-bg-02 [variable]
+
+Selected category background
+Select L2 flatted item background
+Item hover background
+Footer-bar background
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-bg-02: $ibm-color__gray-80;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-side-nav-bg-03 [variable]
+
+Selected L2 nested item
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-bg-03: $ibm-color__gray-70;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-side-nav-text-01 [variable]
+
+Primary text in side-nav
+L2 Flatten item text
+L2 Nested item text
+L1 title text
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-text-01: $ibm-color__gray-10;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-side-nav-text-02 [variable]
+
+Secondary text in side nav
+L2 Category label
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-text-02: $ibm-color__gray-30;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+
+### ❌shell-side-nav-icon-01 [variable]
+
+side-nav icon color
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-icon-01: $ibm-color__gray-10;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-side-nav-accent-01 [variable]
+
+item highlight bar
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-side-nav-accent-01: $ibm-color__blue-60;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [experimental-focus [mixin]](#experimental-focus-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+
+### ❌shell-brand-01 [variable]
+
+Temporary token
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-brand-01: #0062ff;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon-header [mixin]](#carbon-header-mixin)
+
+### ❌shell-ui-02 [variable]
+
+Temporary token
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-ui-02: #3d3d3d;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+
+### ❌shell-ui-03 [variable]
+
+Temporary token
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$shell-ui-03: #000;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Type**: `Color`
+- **Used by**:
+  - [product-switcher [mixin]](#product-switcher-mixin)
+
+### ❌unit [variable]
+
+Use rem here to accomodate zoom behavior
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$unit: 0.5rem;
+```
+
+</details>
+
+- **Group**: [ui-shell](#ui-shell)
+- **Used by**:
+  - [mini-units [function]](#mini-units-function)
+- **Links**:
+  - [Link](https://github.com/IBM/carbon-components/pull/1032#discussion_r210418579)
+
+## general
+
+### ✅spacing--columns--first [variable]
+
+Spacing for cells that are the first in their row
+@access private
+@group data-table
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing--columns--first: 1.5rem;
+```
+
+</details>
+
+- **Group**: [general](#general)
+
+### ✅spacing--columns--before [variable]
+
+Spacing before columns in cell
+@access private
+@group data-table
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing--columns--before: 0.75rem;
+```
+
+</details>
+
+- **Group**: [general](#general)
+
+### ✅spacing--cell--activity [variable]
+
+Spacing for activity areas in a cell, namely status and actions
+@access private
+@group data-table
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing--cell--activity: 3.5rem;
+```
+
+</details>
+
+- **Group**: [general](#general)
+
+### ✅spacing--cell--status [variable]
+
+Offset used on input nodes to offer space to activity indicators such that
+the input doesn't overlap with the status
+@access private
+@group data-table
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing--cell--status: 2rem;
+```
+
+</details>
+
+- **Group**: [general](#general)
+
+### ✅spacing--cell-actions [variable]
+
+Spacing that should exist around, and in-between, elements in the action
+bar
+@access private
+@group data-table
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing--cell-actions: 0.5rem;
 ```
 
 </details>
@@ -11883,6 +32802,91 @@ $input-border: 1px solid transparent !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Value @access public @group global`
+- **Used by**:
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+
+### ✅input-label-weight [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$input-label-weight: 400 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group global`
+- **Used by**:
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅disabled [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$disabled: $disabled-02 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group global`
+- **Used by**:
+  - [button--x [mixin]](#button--x-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+
+### ✅disabled-background-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$disabled-background-color: $disabled-01 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group global`
+- **Used by**:
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+
+### ✅focus [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$focus: $ibm-color__blue-60 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group global`
 
 ### ✅link-visited [variable]
 
@@ -11896,6 +32900,26 @@ $link-visited: $ibm-color__purple-60 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group link`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅link-inverse-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$link-inverse-color: #6ea6ff !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group link`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
 
 ### ✅tooltip-background-color [variable]
 
@@ -11909,6 +32933,9 @@ $tooltip-background-color: $inverse-02 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group tooltip`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅button-font-weight [variable]
 
@@ -11922,6 +32949,195 @@ $button-font-weight: 400 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Number @access public @group button`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-font-size [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-font-size: 0.875rem !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group button`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-border-radius [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-border-radius: 0 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-height: 48px !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-padding [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding: 0.875rem 63px 0.875rem 15px !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group button`
+- **Used by**:
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [pagination-nav-base [mixin]](#pagination-nav-base-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+
+### ✅button-padding-sm [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-sm: 0.375rem 63px 0.375rem 15px !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group button`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-padding-lg [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-padding-lg: $carbon--spacing-04 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group button`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-border-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-border-width: 1px !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group button`
+- **Used by**:
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-outline-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-outline-width: 3px !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group button`
+- **Used by**:
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [button-theme--x [mixin]](#button-theme--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-outline-offset [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-outline-offset: -5px !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group button`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅button-outline [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-outline: 1px solid $ibm-color__white-0 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group button`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅accordion-flex-direction [variable]
 
@@ -11935,19 +33151,87 @@ $accordion-flex-direction: row-reverse !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Value @access public @group accordion`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
-### ✅card-text-align [variable]
+### ✅accordion-justify-content [variable]
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$card-text-align: center !default;
+$accordion-justify-content: flex-start !default;
 ```
 
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Value @access public @group accordion`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅accordion-arrow-margin [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group accordion`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅accordion-title-margin [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-title-margin: 0 0 0 $carbon--spacing-05 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group accordion`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅accordion-content-padding [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-content-padding: 0 0 0 $carbon--spacing-05 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group accordion`
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅checkbox-border-width [variable]
 
@@ -11961,6 +33245,11 @@ $checkbox-border-width: 2px !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Number @access public @group checkbox`
+- **Used by**:
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅snippet-background-color [variable]
 
@@ -11974,6 +33263,31 @@ $snippet-background-color: $ui-01 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group code-snippet`
+- **Used by**:
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [bx--snippet--x [mixin]](#bx--snippet--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅snippet-border-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$snippet-border-color: $ui-03 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group code-snippet`
+- **Used by**:
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [bx--snippet--x [mixin]](#bx--snippet--x-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅content-switcher-border-radius [variable]
 
@@ -11987,6 +33301,46 @@ $content-switcher-border-radius: 0px !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Number @access public @group content-switcher`
+- **Used by**:
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅content-switcher-option-border [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$content-switcher-option-border: 1px solid $brand-01 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group content-switcher`
+- **Used by**:
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅content-switcher-divider [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$content-switcher-divider: $ui-03 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group content-switcher`
+- **Used by**:
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅data-table-heading-transform [variable]
 
@@ -12000,6 +33354,79 @@ $data-table-heading-transform: uppercase !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Value @access public @group data-table`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅data-table-heading-border-bottom [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$data-table-heading-border-bottom: 1px solid $brand-01 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group data-table`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅data-table-row-height [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$data-table-row-height: 2rem !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group data-table`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅data-table-zebra-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$data-table-zebra-color: #fcfcfc !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group data-table`
+- **Used by**:
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅data-table-column-hover [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$data-table-column-hover: $hover-selected-ui !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group data-table`
+- **Used by**:
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅date-picker-in-range-background-color [variable]
 
@@ -12013,6 +33440,10 @@ $date-picker-in-range-background-color: $ibm-color__blue-20 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group data-table`
+- **Used by**:
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅modal-border-top [variable]
 
@@ -12026,6 +33457,30 @@ $modal-border-top: $brand-01 4px solid !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group modal`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [modal [mixin]](#modal-mixin)
+
+### ✅modal-footer-background-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$modal-footer-background-color: $ui-03 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group modal`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
 
 ### ✅notification-info-background-color [variable]
 
@@ -12039,6 +33494,65 @@ $notification-info-background-color: $ibm-color__blue-10 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group notification`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+
+### ✅notification-error-background-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$notification-error-background-color: $ibm-color__red-10 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group notification`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+
+### ✅notification-warning-background-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$notification-warning-background-color: rgba(#fdd13a, 0.15) !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group notification`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+
+### ✅notification-success-background-color [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$notification-success-background-color: $ibm-color__green-10 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group notification`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
 
 ### ✅progress-indicator-bar-width [variable]
 
@@ -12052,6 +33566,48 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Value @access public @group progress-indicator`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+
+### ✅progress-indicator-stroke-width [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$progress-indicator-stroke-width: 5 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group progress-indicator`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+
+### ✅progress-indicator-line-offset [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$progress-indicator-line-offset: 0.625rem !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Number @access public @group progress-indicator`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅copy-active [variable]
 
@@ -12065,6 +33621,27 @@ $copy-active: $active-ui !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group copy-button`
+- **Used by**:
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅copy-btn-feedback [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$copy-btn-feedback: $ibm-color__gray-80 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group copy-button`
+- **Used by**:
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅radio-border-width [variable]
 
@@ -12078,6 +33655,12 @@ $radio-border-width: 1px !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Number @access public @group radio-button`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
 
 ### ✅structured-list-padding [variable]
 
@@ -12091,6 +33674,29 @@ $structured-list-padding: 2rem !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Number @access public @group structured-list`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+
+### ✅structured-list-text-transform [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$structured-list-text-transform: none !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group structured-list`
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
 
 ### ✅tab-underline-color [variable]
 
@@ -12104,6 +33710,61 @@ $tab-underline-color: 3px solid $ibm-color__gray-30 !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Value @access public @group tabs`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+
+### ✅tab-underline-color-hover [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group tabs`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+
+### ✅tab-text-disabled [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$tab-text-disabled: $ibm-color__gray-30 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Color @access public @group tabs`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+
+### ✅tab-underline-disabled [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$tab-underline-disabled: 3px solid $ibm-color__gray-10 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Type**: `Value @access public @group tabs`
+- **Used by**:
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
 
 ### ✅skeleton [variable]
 
@@ -12117,6 +33778,11 @@ $skeleton: rgba($color__blue-51, 0.1) !default;
 </details>
 
 - **Group**: [general](#general)
+- **Type**: `Color @access public @group skeleton`
+- **Used by**:
+  - [skeleton [mixin]](#skeleton-mixin)
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
 
 ### ✅⚠️hover-field [variable]
 
@@ -12130,7 +33796,177 @@ $hover-field: $hover-ui !default;
 </details>
 
 - **Group**: [general](#general)
-- **Deprecated**: @access public
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️active-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$active-01: $active-ui !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-01: $color__navy-gray-1 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-02: $color__blue-90 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group
+
+### ✅⚠️nav-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-03: $color__purple-30 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-04: $color__purple-60 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-05: $color__teal-40 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-06: $color__teal-50 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-07: $color__blue-30 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
+
+### ✅⚠️nav-08 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$nav-08: $color__blue-51 !default;
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [theme [mixin]](#theme-mixin)
+  - [theme--experimental [mixin]](#theme--experimental-mixin)
+- **Deprecated**: @type Color
+  @access public
+  @group global
 
 ### ✅⚠️rem [function]
 
@@ -12168,6 +34004,81 @@ rem(48px);
 - **Returns**: `Number` Type size converted to rem
 - **Requires**:
   - [base-font-size [variable]](#base-font-size-variable)
+- **Used by**:
+  - [accordion--x [mixin]](#accordion--x-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [breadcrumb--x [mixin]](#breadcrumb--x-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button--x [mixin]](#button--x-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-base--x [mixin]](#button-base--x-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [checkbox--x [mixin]](#checkbox--x-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [snippet--x [mixin]](#snippet--x-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [bx--snippet--x [mixin]](#bx--snippet--x-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [content-switcher--x [mixin]](#content-switcher--x-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-v2-action--x [mixin]](#data-table-v2-action--x-mixin)
+  - [data-table-v2-core [mixin]](#data-table-v2-core-mixin)
+  - [data-table-core--x [mixin]](#data-table-core--x-mixin)
+  - [data-table-expandable--x [mixin]](#data-table-expandable--x-mixin)
+  - [data-table-v2-sort [mixin]](#data-table-v2-sort-mixin)
+  - [data-table-sort--x [mixin]](#data-table-sort--x-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [date-picker--x [mixin]](#date-picker--x-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [dropdown--x [mixin]](#dropdown--x-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [file-uploader--x [mixin]](#file-uploader--x-mixin)
+  - [form [mixin]](#form-mixin)
+  - [form--x [mixin]](#form--x-mixin)
+  - [lists--x [mixin]](#lists--x-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [listbox--x [mixin]](#listbox--x-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [modal--x [mixin]](#modal--x-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notifications--x [mixin]](#inline-notifications--x-mixin)
+  - [toast-notifications--x [mixin]](#toast-notifications--x-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [number-input--x [mixin]](#number-input--x-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [overflow-menu--x [mixin]](#overflow-menu--x-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination--x [mixin]](#pagination--x-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [progress-indicator--x [mixin]](#progress-indicator--x-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [radio-button--experimental [mixin]](#radio-button--experimental-mixin)
+  - [search [mixin]](#search-mixin)
+  - [search--x [mixin]](#search--x-mixin)
+  - [select [mixin]](#select-mixin)
+  - [select--x [mixin]](#select--x-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [slider--x [mixin]](#slider--x-mixin)
+  - [structured-list [mixin]](#structured-list-mixin)
+  - [structured-list--x [mixin]](#structured-list--x-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tabs--x [mixin]](#tabs--x-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [tags--x [mixin]](#tags--x-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-area--x [mixin]](#text-area--x-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [text-input--x [mixin]](#text-input--x-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [time-picker--x [mixin]](#time-picker--x-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toggle--x [mixin]](#toggle--x-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [tooltip--x [mixin]](#tooltip--x-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 - **Deprecated**: (For v10) Use `carbon--rem()`
 
 ### ✅⚠️em [function]

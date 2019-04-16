@@ -17,6 +17,9 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// v9 overflow-menu
+/// @access private
+/// @group overflow-menu
 @mixin overflow-menu {
   .#{$prefix}--overflow-menu {
     @include reset;
@@ -189,6 +192,9 @@
   }
 }
 
+/// v10 overflow-menu
+/// @access private
+/// @group overflow-menu
 @mixin overflow-menu--x {
   .#{$prefix}--overflow-menu {
     @include reset;

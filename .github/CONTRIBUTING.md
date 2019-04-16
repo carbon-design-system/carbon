@@ -73,6 +73,8 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 
 For consistency, capitalize types (used in `@type`, `@param`, `@return`) and descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
 
+If mixins are used with feature flags, only add SassDoc annotations to the newest version of the mixin to prevent SassDoc duplications. (E.g. if mixin `foo--x()` is the newer version of `foo()` and they both define the variable `$bar`, add SassDoc annotations to the `$bar` in `foo--x()`.)
+
 The following annotations are used:
 
 **Required annotations**

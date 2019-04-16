@@ -11,6 +11,7 @@
 
 @include exports('data-table-v2-skeleton') {
   /// @access private
+  /// @group data-table
   $data-table-suffix: if(feature-flag-enabled('components-x'), '-v2', '');
 
   .#{$prefix}--data-table#{$data-table-suffix}.#{$prefix}--skeleton {

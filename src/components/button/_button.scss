@@ -12,6 +12,9 @@
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
+/// v9 button
+/// @access private
+/// @group button
 @mixin button {
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
@@ -176,6 +179,9 @@
   }
 }
 
+/// v10 button
+/// @access private
+/// @group button
 @mixin button--x {
   // button set styles
   .#{$prefix}--btn-set {

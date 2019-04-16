@@ -13,6 +13,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
+/// v9 accordion
+/// @access private
+/// @group accordion
 @mixin accordion {
   .#{$prefix}--accordion {
     @include reset;
@@ -144,6 +147,9 @@
   }
 }
 
+/// v10 accordion
+/// @access private
+/// @group accordion
 @mixin accordion--x {
   .#{$prefix}--accordion {
     @include reset;

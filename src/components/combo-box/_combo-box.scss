@@ -14,12 +14,18 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../list-box/list-box';
 
+/// v9 combo-box
+/// @access private
+/// @group combo-box
 @mixin combo-box {
   .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
     padding: 0;
   }
 }
 
+/// v10 combo-box
+/// @access private
+/// @group combo-box
 @mixin combo-box--x {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
     &::placeholder {

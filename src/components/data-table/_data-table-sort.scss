@@ -9,6 +9,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
+/// v9 data table sort
+/// @access private
+/// @group data-table
 @mixin data-table-v2-sort {
   .#{$prefix}--table-sort-v2--ascending {
     .#{$prefix}--table-sort-v2__icon {
@@ -67,6 +70,9 @@
   }
 }
 
+/// v10 data table sort
+/// @access private
+/// @group data-table
 @mixin data-table-sort--x {
   // -------------------------------------
   // Sortable table

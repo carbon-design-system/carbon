@@ -17,6 +17,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
+/// v9 select
+/// @access private
+/// @group select
 @mixin select {
   .#{$prefix}--select {
     @include reset;
@@ -219,6 +222,9 @@
   }
 }
 
+/// v10 select
+/// @access private
+/// @group select
 @mixin select--x {
   .#{$prefix}--select {
     @include reset;

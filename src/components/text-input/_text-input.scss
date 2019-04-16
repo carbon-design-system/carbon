@@ -15,6 +15,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
+/// v9 text-input
+/// @access private
+/// @group text-input
 @mixin text-input {
   .#{$prefix}--text-input {
     @include reset;
@@ -125,6 +128,9 @@
   }
 }
 
+/// v10 text-input
+/// @access private
+/// @group text-input
 @mixin text-input--x {
   .#{$prefix}--text-input {
     @include reset;

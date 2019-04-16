@@ -17,6 +17,9 @@
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/layout';
 
+/// v9 dropdown
+/// @access private
+/// @group dropdown
 @mixin dropdown {
   .#{$prefix}--dropdown {
     @include reset;
@@ -228,6 +231,9 @@
   }
 }
 
+/// v10 dropdown
+/// @access private
+/// @group dropdown
 @mixin dropdown--x {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;

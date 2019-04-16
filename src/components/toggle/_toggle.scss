@@ -15,6 +15,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
+/// v9 toggle
+/// @access private
+/// @group toggle
 @mixin toggle {
   .#{$prefix}--toggle {
     @include hidden;
@@ -222,6 +225,9 @@
   }
 }
 
+/// v10 toggle
+/// @access private
+/// @group toggle
 @mixin toggle--x {
   .#{$prefix}--toggle {
     @include hidden;

@@ -12,6 +12,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
+/// v9 tag
+/// @access private
+/// @group tag
 @mixin tags {
   .#{$prefix}--tag {
     @include font-family;
@@ -91,6 +94,9 @@
   }
 }
 
+/// v10 tag
+/// @access private
+/// @group tag
 @mixin tags--x {
   .#{$prefix}--tag {
     @include type-style('label-01');

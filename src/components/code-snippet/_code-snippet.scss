@@ -12,6 +12,9 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
+/// v9 code-snippet
+/// @access private
+/// @group code-snippet
 @mixin snippet {
   .#{$prefix}--snippet code {
     font-family: $font-family-mono;
@@ -298,6 +301,9 @@
   }
 }
 
+/// v10 code-snippet
+/// @access private
+/// @group code-snippet
 @mixin snippet--x {
   .#{$prefix}--snippet code {
     @include type-style('code-01');

@@ -14,6 +14,9 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// v9 list
+/// @access private
+/// @group list
 @mixin lists {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
@@ -60,6 +63,9 @@
   }
 }
 
+/// v10 list
+/// @access private
+/// @group list
 @mixin lists--x {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,

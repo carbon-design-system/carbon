@@ -9,6 +9,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
+/// v9 data table action
+/// @access private
+/// @group data-table
 @mixin data-table-v2-action {
   .#{$prefix}--table-toolbar {
     display: flex;
@@ -183,6 +186,9 @@
   }
 }
 
+/// v10 data table action
+/// @access private
+/// @group data-table
 @mixin data-table-v2-action--x {
   //-------------------------------------------------
   //TOOLBAR

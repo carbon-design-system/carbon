@@ -12,6 +12,9 @@
 @import 'mixins';
 @import 'vars';
 
+/// v9 loading
+/// @access private
+/// @group loading
 @mixin loading {
   .#{$prefix}--loading {
     @include reset;
@@ -62,6 +65,9 @@
   }
 }
 
+/// v10 loading
+/// @access private
+/// @group loading
 @mixin loading--x {
   .#{$prefix}--loading {
     @include reset;

@@ -12,6 +12,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
+/// v9 structured-list
+/// @access private
+/// @group structured-list
 @mixin structured-list {
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
@@ -179,6 +182,9 @@
   }
 }
 
+/// v10 structured-list
+/// @access private
+/// @group structured-list
 @mixin structured-list--x {
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {

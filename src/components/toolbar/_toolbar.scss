@@ -19,6 +19,9 @@ $css--helpers: true;
 @import '../overflow-menu/overflow-menu';
 @import '../search/search';
 
+/// v9 toolbar
+/// @access private
+/// @group toolbar
 @mixin toolbar {
   .#{$prefix}--toolbar {
     @if not feature-flag-enabled('components-x') {
@@ -138,6 +141,9 @@ $css--helpers: true;
   }
 }
 
+/// v10 toolbar
+/// @access private
+/// @group toolbar
 @mixin toolbar--x {
   @include toolbar;
   .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active) .#{$prefix}--search-input {

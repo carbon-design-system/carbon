@@ -9,6 +9,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
+/// v9 data table expandable
+/// @access private
+/// @group data-table
 @mixin data-table-v2-expandable {
   tr.#{$prefix}--expandable-row-v2 {
     // hide on init
@@ -107,6 +110,9 @@
   }
 }
 
+/// v10 data table expandable
+/// @access private
+/// @group data-table
 @mixin data-table-expandable--x {
   //----------------------------------------------------------------------------
   // Parent row

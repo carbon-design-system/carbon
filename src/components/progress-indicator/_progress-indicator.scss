@@ -11,6 +11,9 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// v9 progress-indicator
+/// @access private
+/// @group progress-indicator
 @mixin progress-indicator {
   .#{$prefix}--progress {
     @include reset;
@@ -166,6 +169,9 @@
   }
 }
 
+/// v10 progress-indicator
+/// @access private
+/// @group progress-indicator
 @mixin progress-indicator--x {
   .#{$prefix}--progress {
     @include reset;

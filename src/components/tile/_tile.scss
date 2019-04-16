@@ -16,6 +16,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
+/// v9 tile
+/// @access private
+/// @group tile
 @mixin tile {
   .#{$prefix}--tile {
     @include layer('raised');
@@ -183,6 +186,9 @@
   }
 }
 
+/// v10 tile
+/// @access private
+/// @group tile
 @mixin tile--x {
   .#{$prefix}--tile {
     display: block;

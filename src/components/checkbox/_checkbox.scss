@@ -13,6 +13,9 @@
 @import '../form/form';
 @import '../../globals/scss/css--reset';
 
+/// v9 checkbox
+/// @access private
+/// @group checkbox
 @mixin checkbox {
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: $spacing-md;
@@ -187,6 +190,9 @@
   }
 }
 
+/// v10 checkbox
+/// @access private
+/// @group checkbox
 @mixin checkbox--x {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {

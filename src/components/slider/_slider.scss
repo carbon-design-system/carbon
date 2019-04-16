@@ -17,6 +17,9 @@
 @import '../form/form';
 @import '../text-input/text-input';
 
+/// v9 slider
+/// @access private
+/// @group slider
 @mixin slider {
   .#{$prefix}--slider-container {
     display: flex;
@@ -155,6 +158,9 @@
   }
 }
 
+/// v10 slider
+/// @access private
+/// @group slider
 @mixin slider--x {
   .#{$prefix}--slider-container {
     display: flex;
