@@ -145,26 +145,16 @@
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-external-helpers": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-decorators": "^7.1.2",
-    "@babel/plugin-proposal-do-expressions": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.1.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
-    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-object-assign": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-external-helpers": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^7.5.0",
     "@commitlint/config-conventional": "^7.5.0",
@@ -243,28 +233,8 @@
       "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-syntax-import-meta",
       "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-json-strings",
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
-      ],
-      "@babel/plugin-proposal-function-sent",
       "@babel/plugin-proposal-export-namespace-from",
-      "@babel/plugin-proposal-numeric-separator",
-      "@babel/plugin-proposal-throw-expressions",
-      "@babel/plugin-proposal-export-default-from",
-      "@babel/plugin-proposal-logical-assignment-operators",
-      "@babel/plugin-proposal-optional-chaining",
-      [
-        "@babel/plugin-proposal-pipeline-operator",
-        {
-          "proposal": "minimal"
-        }
-      ],
-      "@babel/plugin-proposal-nullish-coalescing-operator",
-      "@babel/plugin-proposal-do-expressions"
+      "@babel/plugin-proposal-export-default-from"
     ]
   },
   "commitlint": {
