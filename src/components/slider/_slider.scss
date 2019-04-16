@@ -73,7 +73,7 @@
     transform-origin: left;
     pointer-events: none;
     transform: translate(0%, -50%);
-    transition: background $duration--fast-01 motion(standard, productive);
+    transition: background $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--slider__thumb {
@@ -85,8 +85,8 @@
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform $duration--fast-01 motion(standard, productive),
-      background $duration--fast-01 motion(standard, productive), box-shadow $duration--fast-01 motion(standard, productive);
+    transition: transform $duration--fast-02 motion(standard, productive),
+      background $duration--fast-02 motion(standard, productive), box-shadow $duration--fast-02 motion(standard, productive);
     cursor: pointer;
     outline: none;
     z-index: 3;
@@ -124,6 +124,10 @@
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       display: none;
+    }
+
+    &:hover {
+      background-color: $hover-field;
     }
   }
 
@@ -169,6 +173,7 @@
     background-color: $disabled-01;
     color: $disabled-02;
     transition: none;
+    cursor: not-allowed;
 
     &:active,
     &:focus,
