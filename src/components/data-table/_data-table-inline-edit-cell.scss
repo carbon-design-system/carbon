@@ -24,7 +24,7 @@
   white-space: nowrap;
 }
 
-@include exports('data-table-v2-inline-edit-cell') {
+@include exports('data-table-inline-edit-cell') {
   // Spacing for cells that are the first in their row
   $spacing--columns--first: 1.5rem;
   // Spacing before columns in cell
