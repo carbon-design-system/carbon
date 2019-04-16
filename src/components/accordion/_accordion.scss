@@ -8,143 +8,10 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/functions';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/css--typography';
 
 @mixin accordion {
-  .#{$prefix}--accordion {
-    @include reset;
-    @include font-family;
-    list-style: none;
-    width: 100%;
-  }
-
-  .#{$prefix}--accordion__item {
-    transition: all $transition--base $carbon--standard-easing;
-    border-top: 1px solid $ui-03;
-    overflow: hidden;
-
-    &:focus {
-      outline: none;
-
-      .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
-        overflow: visible; // safari fix
-        outline-offset: -0.5px; // safari fix
-      }
-    }
-
-    &:last-child {
-      border-bottom: 1px solid $ui-03;
-    }
-  }
-
-  .#{$prefix}--accordion__heading {
-    @include button-reset;
-    color: $text-01;
-    display: flex;
-    align-items: center;
-    justify-content: $accordion-justify-content;
-    flex-direction: $accordion-flex-direction;
-    cursor: pointer;
-    padding: $spacing-xs 0;
-
-    // new version of markup uses focus on the heading,
-    // not the list element itself
-    &:focus {
-      outline: none;
-
-      .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
-        overflow: visible; // safari fix
-        outline-offset: -0.5px; // safari fix
-      }
-    }
-  }
-
-  .#{$prefix}--accordion__arrow {
-    transition: all $transition--base $carbon--standard-easing;
-    height: 1.25rem;
-    width: 1.25rem;
-    padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
-    margin: $accordion-arrow-margin;
-    fill: $ui-05;
-    transform: rotate(0) /*rtl:rotate(180deg)*/;
-  }
-
-  .#{$prefix}--accordion__title {
-    @include typescale('epsilon');
-    @include line-height('body');
-    margin: $accordion-title-margin;
-    font-weight: 400;
-    text-align: left;
-  }
-
-  .#{$prefix}--accordion__content {
-    transition: all $transition--expansion $carbon--ease-out;
-    padding: $accordion-content-padding;
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
-
-    p {
-      @include typescale('zeta');
-    }
-  }
-
-  .#{$prefix}--accordion__item--active {
-    overflow: visible;
-
-    > .#{$prefix}--accordion__content {
-      padding-top: $spacing-md;
-      padding-bottom: $spacing-lg;
-      height: auto;
-      visibility: visible;
-      opacity: 1;
-      transition: all $transition--expansion $carbon--ease-in;
-    }
-
-    > .#{$prefix}--accordion__heading > .#{$prefix}--accordion__arrow {
-      /*rtl:ignore*/
-      transform: rotate(90deg);
-      fill: $brand-01;
-    }
-  }
-
-  // Skeleton state
-  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
-  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
-    cursor: default;
-  }
-
-  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
-    pointer-events: none;
-    fill: $ui-05;
-    cursor: default;
-
-    &:hover,
-    &:focus,
-    &:active {
-      border: none;
-      outline: none;
-      cursor: default;
-    }
-  }
-
-  .#{$prefix}--skeleton .#{$prefix}--accordion__heading:focus .#{$prefix}--accordion__arrow {
-    border: none;
-    outline: none;
-    cursor: default;
-  }
-
-  .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
-    margin-bottom: 0;
-  }
-}
-
-@mixin accordion--x {
   .#{$prefix}--accordion {
     @include reset;
 
@@ -295,9 +162,5 @@
 }
 
 @include exports('accordion') {
-  @if feature-flag-enabled('components-x') {
-    @include accordion--x;
-  } @else {
-    @include accordion;
-  }
+  @include accordion;
 }

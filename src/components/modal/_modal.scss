@@ -15,144 +15,11 @@
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/css--typography';
 @import 'mixins';
 
 @import '../button/button';
 
 @mixin modal {
-  .#{$prefix}--modal {
-    @include reset;
-    @include font-family;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: z('hidden');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    content: '';
-    opacity: 0;
-    background-color: rgba($ui-03, 0.5);
-    transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
-    visibility: hidden;
-
-    &.is-visible {
-      z-index: z('modal');
-      opacity: 1;
-      transition: opacity 200ms;
-      visibility: visible;
-    }
-  }
-
-  .#{$prefix}--modal--danger {
-    @include modal--color($support-01);
-  }
-
-  .#{$prefix}--modal-container {
-    @include reset;
-    @include layer('pop-out');
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-color: $ui-01;
-    border-top: $modal-border-top;
-    min-width: 100%;
-    max-height: 100%;
-    height: 100%;
-    padding: $spacing-xl 3% 0rem 3%;
-
-    @media (min-width: 600px) {
-      height: auto;
-      min-width: 500px;
-      max-width: 75%;
-      max-height: 90%;
-      padding: $spacing-2xl $spacing-3xl 0 $spacing-3xl;
-    }
-
-    @media (min-width: 1024px) {
-      max-width: 50%;
-      max-height: 80%;
-    }
-  }
-
-  .#{$prefix}--modal-header {
-    margin-bottom: $spacing-lg;
-  }
-
-  .#{$prefix}--modal-header,
-  .#{$prefix}--modal-footer {
-    flex-shrink: 0;
-  }
-
-  .#{$prefix}--modal-header__label {
-    @include reset;
-    @include typescale('omega');
-    @include letter-spacing;
-    color: $text-01;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: $spacing-xs;
-  }
-
-  .#{$prefix}--modal-header__heading {
-    @include reset;
-    @include typescale('beta');
-    font-weight: 300;
-    color: $text-02;
-  }
-
-  .#{$prefix}--modal-content {
-    overflow-y: auto;
-    margin-bottom: $spacing-3xl;
-    color: $text-01;
-    font-weight: 400;
-
-    > * {
-      @include reset;
-    }
-  }
-
-  .#{$prefix}--modal-footer {
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
-    background-color: $modal-footer-background-color;
-    margin-left: rem(-24px);
-    margin-right: rem(-24px);
-    padding: $spacing-xl $spacing-xl;
-
-    @media (min-width: 600px) {
-      margin-left: rem(-48px);
-      margin-right: rem(-48px);
-      padding: $spacing-xl $spacing-3xl;
-    }
-  }
-
-  .#{$prefix}--modal-close {
-    position: absolute;
-    top: rem(16px);
-    right: rem(16px);
-    padding: 0;
-    overflow: hidden;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    padding: 0.25rem 0.25rem 0.125rem;
-
-    &:focus {
-      @include focus-outline('border');
-    }
-  }
-
-  .#{$prefix}--modal-close__icon {
-    fill: $ui-05;
-  }
-}
-
-@mixin modal--x {
   .#{$prefix}--modal {
     position: fixed;
     top: 0;
@@ -296,9 +163,5 @@
 }
 
 @include exports('modal') {
-  @if feature-flag-enabled('components-x') {
-    @include modal--x;
-  } @else {
-    @include modal;
-  }
+  @include modal;
 }

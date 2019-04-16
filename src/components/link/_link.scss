@@ -14,43 +14,10 @@
 @import '../../globals/scss/theme';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/functions';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
 @mixin link {
-  .#{$prefix}--link {
-    @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    @include font-smoothing;
-    font-weight: 600;
-    color: $brand-01;
-    text-decoration: underline;
-    transition: $transition--base;
-
-    &:visited {
-      color: $brand-01;
-    }
-
-    &:active,
-    &:hover,
-    &:focus {
-      color: $hover-primary-text;
-    }
-
-    &:focus {
-      @include focus-outline('border');
-    }
-
-    &[aria-disabled='true'] {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-  }
-}
-
-@mixin link--x {
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-long-01');
@@ -105,9 +72,5 @@
 }
 
 @include exports('link') {
-  @if feature-flag-enabled('components-x') {
-    @include link--x;
-  } @else {
-    @include link;
-  }
+  @include link;
 }

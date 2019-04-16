@@ -14,17 +14,6 @@
 @import '../list-box/list-box';
 
 @mixin multiselect {
-  .#{$prefix}--multi-select.#{$prefix}--combo-box > .#{$prefix}--list-box__field {
-    padding: 0 1rem;
-  }
-
-  .#{$prefix}--multi-select.#{$prefix}--combo-box input[role='combobox'] {
-    padding: 0;
-    outline: none;
-  }
-}
-
-@mixin multiselect--x {
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -68,9 +57,5 @@
 }
 
 @include exports('multi-select') {
-  @if feature-flag-enabled('components-x') {
-    @include multiselect--x;
-  } @else {
-    @include multiselect;
-  }
+  @include multiselect;
 }

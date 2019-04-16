@@ -18,24 +18,12 @@
     @include padding--data-structured-list;
   }
 
-  // Deprecated
-  [data-structured-list] .#{$prefix}--structured-list-td,
-  [data-structured-list] .#{$prefix}--structured-list-th {
-    @include padding--data-structured-list;
-  }
-
   .#{$prefix}--structured-list-input {
     display: none;
-
-    &:checked + .#{$prefix}--structured-list-row .#{$prefix}--structured-list-svg,
-    &:checked + .#{$prefix}--structured-list-td .#{$prefix}--structured-list-svg {
-      fill: $brand-02;
-    }
   }
 
   .#{$prefix}--structured-list {
     @include reset;
-    @include font-family;
     display: table;
     overflow-x: auto;
     overflow-y: hidden;
@@ -45,165 +33,10 @@
     border-spacing: 0;
     margin-bottom: 5rem;
     background-color: transparent;
-
-    &.#{$prefix}--structured-list--border {
-      border: 1px solid $ui-03;
-      background-color: $ui-01;
-    }
 
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
       @include padding-td--condensed;
-    }
-  }
-
-  .#{$prefix}--structured-list-row {
-    display: table-row;
-    border-bottom: 1px solid $ui-03;
-    transition: $transition--base $carbon--standard-easing;
-
-    // Deprecated
-    [data-structured-list] &:hover:not(.#{$prefix}--structured-list-row--header-row) {
-      background-color: $hover-row;
-      cursor: pointer;
-    }
-
-    &.#{$prefix}--structured-list-row--selected {
-      background-color: $hover-row;
-    }
-
-    &.#{$prefix}--structured-list-row--header-row {
-      border-bottom: 2px solid $brand-01;
-      cursor: inherit;
-    }
-
-    &:focus:not(.#{$prefix}--structured-list-row--header-row) {
-      @include focus-outline('border');
-    }
-
-    &:hover .#{$prefix}--structured-list-svg {
-      fill: $hover-row;
-    }
-  }
-
-  .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row) {
-    background-color: $hover-row;
-    cursor: pointer;
-  }
-
-  .#{$prefix}--structured-list-thead {
-    display: table-header-group;
-    vertical-align: middle;
-  }
-
-  .#{$prefix}--structured-list-th {
-    @include reset;
-    @include padding-th;
-    @include typescale('omega');
-    display: table-cell;
-    font-weight: 600;
-    height: rem(40px);
-    text-align: left;
-    text-transform: $structured-list-text-transform;
-    vertical-align: bottom;
-  }
-
-  .#{$prefix}--structured-list-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-  }
-
-  .#{$prefix}--structured-list-td {
-    @include reset;
-    @include typescale('zeta');
-    @include line-height('body');
-    @include padding-td;
-    position: relative;
-    display: table-cell;
-  }
-
-  .#{$prefix}--structured-list-th,
-  .#{$prefix}--structured-list-td {
-    color: $text-01;
-  }
-
-  .#{$prefix}--structured-list-content--nowrap {
-    white-space: nowrap;
-  }
-
-  .#{$prefix}--structured-list-svg {
-    display: inline-block;
-    fill: transparent;
-    vertical-align: middle;
-    transition: $transition--base $carbon--standard-easing;
-  }
-
-  // Skeleton State
-  .#{$prefix}--structured-list.#{$prefix}--skeleton {
-    .#{$prefix}--structured-list-th {
-      &:first-child {
-        width: 8%;
-      }
-
-      &:nth-child(3n + 2) {
-        width: 30%;
-      }
-
-      &:nth-child(3n + 3) {
-        width: 15%;
-      }
-    }
-
-    .#{$prefix}--structured-list-th span {
-      @include skeleton;
-      width: 75%;
-      height: 1rem;
-      display: block;
-    }
-  }
-
-  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton {
-    .#{$prefix}--structured-list-th:first-child {
-      width: 5%;
-
-      span {
-        display: none;
-      }
-    }
-  }
-
-  // Deprecated class
-  .#{$prefix}--structured-list-content {
-    @include typescale('zeta');
-  }
-}
-
-@mixin structured-list--x {
-  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
-  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
-    @include padding--data-structured-list--x;
-  }
-
-  .#{$prefix}--structured-list-input {
-    display: none;
-  }
-
-  .#{$prefix}--structured-list {
-    @include reset;
-    display: table;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
-    min-width: 500px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-bottom: 5rem;
-    background-color: transparent;
-
-    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
-    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
-      @include padding-td--condensed--x;
     }
   }
 
@@ -252,7 +85,7 @@
 
   .#{$prefix}--structured-list-th {
     @include reset;
-    @include padding-th--x;
+    @include padding-th;
     @include type-style('heading-01');
     display: table-cell;
     font-weight: 600;
@@ -270,7 +103,7 @@
   .#{$prefix}--structured-list-td {
     @include reset;
     @include type-style('body-long-01');
-    @include padding-td--x;
+    @include padding-td;
     line-height: carbon--rem(21px);
     position: relative;
     display: table-cell;
@@ -346,9 +179,5 @@
 }
 
 @include exports('structured-list') {
-  @if feature-flag-enabled('components-x') {
-    @include structured-list--x;
-  } @else {
-    @include structured-list;
-  }
+  @include structured-list;
 }

@@ -15,96 +15,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/css--typography';
 @import 'mixins';
 
 @mixin toast-notifications {
-  .#{$prefix}--toast-notification {
-    @include reset;
-    @include font-family;
-    @include font-smoothing;
-    @include layer('overlay');
-    display: flex;
-    justify-content: space-between;
-    width: 16.875rem;
-    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
-    background-color: $ui-01;
-    color: $text-01;
-    margin-top: $spacing-xs;
-    margin-bottom: $spacing-xs;
-    margin-right: $spacing-md;
-
-    &:first-child {
-      margin-top: $spacing-md;
-    }
-  }
-
-  .#{$prefix}--toast-notification--error {
-    @include notification--color($support-01);
-  }
-
-  .#{$prefix}--toast-notification--success {
-    @include notification--color($support-02);
-  }
-
-  .#{$prefix}--toast-notification--info {
-    @include notification--color($support-04);
-  }
-
-  .#{$prefix}--toast-notification--warning {
-    @include notification--color($support-03);
-  }
-
-  .#{$prefix}--toast-notification__close-button {
-    background-color: $ui-01;
-    border: none;
-    cursor: pointer;
-    margin: 0;
-    width: 12px;
-    height: 12px;
-    position: relative;
-
-    &:focus {
-      @include focus-outline('border');
-    }
-  }
-
-  .#{$prefix}--toast-notification__close-icon,
-  .#{$prefix}--toast-notification__icon {
-    height: 1rem;
-    width: 1rem;
-    height: 10px;
-    width: 10px;
-    fill: $ui-05;
-    position: absolute;
-    top: 1px;
-    right: 1px;
-  }
-
-  .#{$prefix}--toast-notification__title {
-    @include typescale('zeta');
-    @include letter-spacing;
-    font-weight: 600;
-    line-height: 1;
-    padding-bottom: $spacing-3xs;
-  }
-
-  .#{$prefix}--toast-notification__subtitle {
-    @include typescale('omega');
-    color: $text-02;
-    margin-top: 0;
-    margin-bottom: $spacing-md;
-    line-height: 1.2;
-  }
-
-  .#{$prefix}--toast-notification__caption {
-    @include typescale('omega');
-    color: $text-02;
-    line-height: 1;
-  }
-}
-
-@mixin toast-notifications--x {
   .#{$prefix}--toast-notification {
     @include reset;
 
@@ -205,9 +118,5 @@
 }
 
 @include exports('toast-notifications') {
-  @if feature-flag-enabled('components-x') {
-    @include toast-notifications--x;
-  } @else {
-    @include toast-notifications;
-  }
+  @include toast-notifications;
 }

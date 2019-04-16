@@ -14,37 +14,34 @@
 @import '../../globals/scss/theme';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/functions';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
 @mixin pseudo-underline() {
-  @if feature-flag-enabled('components-x') {
-    &:not(.#{$prefix}--pagination-nav__page--direction) {
-      &::after {
-        background-color: $interactive-01;
-        bottom: 0;
-        content: '';
-        display: block;
-        height: $carbon--spacing-02;
-        left: 50%;
-        position: absolute;
-        opacity: 0;
-        transition: width $duration--fast-02 motion(standard, productive);
-        width: 0;
-      }
+  &:not(.#{$prefix}--pagination-nav__page--direction) {
+    &::after {
+      background-color: $interactive-01;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: $carbon--spacing-02;
+      left: 50%;
+      position: absolute;
+      opacity: 0;
+      transition: width $duration--fast-02 motion(standard, productive);
+      width: 0;
     }
+  }
 
-    .#{$prefix}--pagination-nav__page--active + &::after,
-    &.#{$prefix}--pagination-nav__page--active::after {
-      left: calc(50% - #{$carbon--spacing-05/2});
-      opacity: 1;
-      width: $carbon--spacing-05;
-    }
+  .#{$prefix}--pagination-nav__page--active + &::after,
+  &.#{$prefix}--pagination-nav__page--active::after {
+    left: calc(50% - #{$carbon--spacing-05/2});
+    opacity: 1;
+    width: $carbon--spacing-05;
   }
 }
 
-@mixin pagination-nav-base(
+@mixin pagination-nav(
   $text-color: $text-02,
   $text-color-active: $text-02,
   $background-color-hover: $hover-ui,
@@ -59,13 +56,7 @@
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
-    @if not feature-flag-enabled('components-x') {
-      @include font-family;
-      @include font-smoothing;
-      @include typescale('zeta');
-    } @else {
-      @include type-style('body-short-01');
-    }
+    @include type-style('body-short-01');
     line-height: 0;
   }
 
@@ -88,11 +79,7 @@
   }
 
   .#{$prefix}--pagination-nav__page {
-    @if not feature-flag-enabled('components-x') {
-      @include typescale('zeta');
-    } @else {
-      @include type-style('body-short-01');
-    }
+    @include type-style('body-short-01');
     @include button-reset($width: false);
     border-radius: 0;
     color: $text-color;
@@ -190,48 +177,8 @@
   .#{$prefix}--pagination-nav__accessibility-label {
     @include hidden();
   }
-
-  @content;
-}
-
-@mixin pagination-nav {
-  @include pagination-nav-base(
-    $text-color: $ui-05,
-    $text-color-active: $color__white,
-    $background-color-hover: $hover-row,
-    $background-color-active: $brand-01,
-    $font-weight: 600,
-    $item-padding: 0 $spacing-xs,
-    $button-min-width: $spacing-lg,
-    $button-padding: 0.3125rem $spacing-2xs,
-    $button-direction-size: $spacing-lg,
-    $select-icon-top-position: $spacing-md,
-    $select-icon-left-position: $spacing-md
-  );
-
-  .#{$prefix}--pagination-nav__list-item {
-    &:first-child {
-      .#{$prefix}--pagination-nav__page--direction {
-        margin-right: $spacing-xs;
-      }
-    }
-
-    &:last-child {
-      .#{$prefix}--pagination-nav__page--direction {
-        margin-left: $spacing-xs;
-      }
-    }
-  }
-}
-
-@mixin pagination-nav--x {
-  @include pagination-nav-base();
 }
 
 @include exports('pagination-nav') {
-  @if feature-flag-enabled('components-x') {
-    @include pagination-nav--x;
-  } @else {
-    @include pagination-nav;
-  }
+  @include pagination-nav;
 }

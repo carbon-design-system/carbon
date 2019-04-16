@@ -18,116 +18,6 @@
 @mixin text-input {
   .#{$prefix}--text-input {
     @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    display: block;
-    width: 100%;
-    height: rem(40px);
-    min-width: rem(300px);
-    padding: 0 $spacing-md;
-    color: $text-01;
-    background-color: $field-01;
-    border: none;
-    box-shadow: 0 1px 0 0 $ui-05;
-    order: 2;
-    border-bottom: 1px solid transparent;
-
-    & ~ .#{$prefix}--label {
-      order: 1;
-    }
-
-    &::placeholder {
-      @include placeholder-colors;
-      opacity: 1;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 2px 0 0 $brand-01;
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      box-shadow: 0 2px 0 0 $support-01;
-    }
-
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
-    &[data-invalid]:focus + .#{$prefix}--label {
-      color: $support-01;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    &:disabled:hover {
-      border: none;
-    }
-
-    & ~ .#{$prefix}--form-requirement {
-      order: 3;
-      color: $support-01;
-      font-weight: 400;
-      margin-top: $spacing-2xs;
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &-wrapper svg[hidden] {
-      display: none;
-    }
-
-    &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
-      top: rem(-28px);
-      right: rem(12px);
-      display: flex;
-      justify-content: center;
-      align-self: flex-end;
-      align-items: center;
-      order: 3;
-      height: rem(16px);
-      width: rem(16px);
-      padding: 0;
-      margin-bottom: -1rem;
-      border: 0;
-      background: none;
-      cursor: pointer;
-      outline: inherit;
-
-      svg {
-        fill: $brand-01;
-
-        &:hover {
-          fill: $hover-primary;
-        }
-      }
-    }
-  }
-
-  .#{$prefix}--text-input--light {
-    background-color: $field-02;
-  }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-}
-
-@mixin text-input--x {
-  .#{$prefix}--text-input {
-    @include reset;
     @include type-style('body-short-01');
     @include focus-outline('reset');
     background-color: $field-01;
@@ -246,9 +136,5 @@
 }
 
 @include exports('text-input') {
-  @if feature-flag-enabled('components-x') {
-    @include text-input--x;
-  } @else {
-    @include text-input;
-  }
+  @include text-input;
 }

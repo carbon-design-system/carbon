@@ -7,71 +7,11 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/css--typography';
+@import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'keyframes';
 
 @mixin inline-loading {
-  .#{$prefix}--inline-loading {
-    display: flex;
-    width: 100%;
-    align-items: center;
-  }
-
-  .#{$prefix}--inline-loading__text {
-    @include typescale('zeta');
-  }
-
-  .#{$prefix}--inline-loading__animation {
-    position: relative;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .#{$prefix}--inline-loading__checkmark-container {
-    width: 0.75rem;
-    position: absolute;
-    top: 0.75rem;
-
-    &[hidden] {
-      display: none;
-    }
-  }
-
-  .#{$prefix}--inline-loading__checkmark {
-    fill: none;
-    stroke: $brand-01;
-    transform-origin: 50% 50%;
-    stroke-width: 2.1;
-    stroke-dasharray: 12;
-    stroke-dashoffset: 12;
-    animation-name: stroke;
-    animation-duration: 0.25s;
-    animation-fill-mode: forwards;
-  }
-
-  .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $brand-01;
-  }
-  /* If IE11 Don't show check animation */
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-    .#{$prefix}--inline-loading__checkmark-container {
-      top: 1px;
-      right: 0.5rem;
-    }
-
-    .#{$prefix}--inline-loading__checkmark {
-      animation: none;
-      stroke-dashoffset: 0;
-      stroke-dasharray: 0;
-    }
-  }
-}
-
-@mixin inline-loading--x {
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
@@ -141,9 +81,5 @@
 }
 
 @include exports('inline-loading') {
-  @if feature-flag-enabled('components-x') {
-    @include inline-loading--x;
-  } @else {
-    @include inline-loading;
-  }
+  @include inline-loading;
 }

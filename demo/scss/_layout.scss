@@ -6,13 +6,8 @@
 @import '../../src/globals/scss/functions';
 
 body {
-  @if not feature-flag-enabled('components-x') {
-    font-family: 'ibm-plex-sans', Helvetica Neue, Arial, sans serif;
-  } @else {
-    @include type-style('body-short-01');
-  }
-  background-color: $color__white;
-  color: $color__blue-90;
+  @include type-style('body-short-01');
+  background-color: $carbon--white-0;
 
   hr {
     display: none;
@@ -75,15 +70,7 @@ body {
 }
 
 a {
-  @if not feature-flag-enabled('components-x') {
-    @include font-smoothing;
-  }
-  color: $color__blue-51;
   font-weight: 600;
-
-  &:hover {
-    color: $color__blue-40;
-  }
 }
 
 svg {

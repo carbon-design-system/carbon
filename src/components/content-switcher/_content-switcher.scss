@@ -13,109 +13,6 @@
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
-    @include font-family;
-    display: flex;
-    height: rem(40px);
-  }
-
-  .#{$prefix}--content-switcher-btn {
-    @include reset;
-    @include font-smoothing;
-    @include typescale('zeta');
-    @include font-family;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    padding: 0 $spacing-xl;
-    margin: 0;
-    text-decoration: none;
-    border: 1px solid $brand-01;
-    color: $brand-01;
-
-    &:focus {
-      outline: 1px solid transparent;
-      background-color: $hover-primary;
-      z-index: 2;
-      border-color: $hover-primary;
-      text-decoration: underline;
-      color: $inverse-01;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:hover,
-    &:active {
-      background-color: $hover-primary;
-      border-color: $hover-primary;
-      color: $inverse-01;
-    }
-  }
-
-  .#{$prefix}--content-switcher__icon {
-    margin-right: $spacing-xs;
-    fill: currentColor;
-    // need to color any child path or g
-    * {
-      fill: currentColor;
-    }
-  }
-
-  .#{$prefix}--content-switcher-btn:not(:last-of-type) {
-    border-right: none;
-  }
-
-  .#{$prefix}--content-switcher-btn:not(:first-of-type) {
-    border-left: $content-switcher-option-border;
-
-    &:hover {
-      border-left-color: $hover-primary;
-    }
-  }
-
-  .#{$prefix}--content-switcher-btn:first-of-type {
-    border-bottom-left-radius: $content-switcher-border-radius;
-    border-top-left-radius: $content-switcher-border-radius;
-
-    &:hover {
-      border-color: $hover-primary;
-    }
-
-    &:focus {
-      z-index: 0;
-    }
-  }
-
-  .#{$prefix}--content-switcher-btn:last-of-type {
-    border-top-right-radius: $content-switcher-border-radius;
-    border-bottom-right-radius: $content-switcher-border-radius;
-
-    &:hover {
-      border-color: $hover-primary;
-    }
-
-    &:focus {
-      z-index: 0;
-    }
-  }
-
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $brand-01;
-    color: $inverse-01;
-    font-weight: 400;
-    outline: 1px solid transparent;
-
-    &:hover,
-    &:focus {
-      border-color: $hover-primary;
-      background-color: $hover-primary;
-    }
-  }
-}
-
-@mixin content-switcher--x {
-  .#{$prefix}--content-switcher {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
@@ -241,9 +138,5 @@
 }
 
 @include exports('content-switcher') {
-  @if feature-flag-enabled('components-x') {
-    @include content-switcher--x;
-  } @else {
-    @include content-switcher;
-  }
+  @include content-switcher;
 }

@@ -9,65 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@mixin data-table-v2-sort {
-  .#{$prefix}--table-sort-v2--ascending {
-    .#{$prefix}--table-sort-v2__icon {
-      transform: rotate(180deg);
-      transition: transform 200ms $carbon--standard-easing;
-    }
-  }
-
-  .#{$prefix}--table-sort-v2--active {
-    .#{$prefix}--table-sort-v2__icon {
-      opacity: 1;
-    }
-  }
-
-  .#{$prefix}--data-table-v2 th {
-    &:hover {
-      .#{$prefix}--table-sort-v2__icon {
-        opacity: 1;
-      }
-    }
-  }
-
-  .#{$prefix}--table-sort-v2 {
-    @include button-reset(false);
-    position: relative;
-    font: inherit;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    color: $text-01;
-
-    &:focus {
-      outline: 0;
-
-      svg {
-        opacity: 1;
-        outline: 1px solid $brand-01;
-        fill: $brand-01;
-        outline-offset: -0.5px; // safari fix
-      }
-    }
-  }
-
-  .#{$prefix}--table-sort-v2__icon {
-    position: relative;
-    left: 2px;
-    transition: transform 200ms $carbon--standard-easing;
-    transform: rotate(0);
-    opacity: 0;
-    fill: $ui-05;
-    height: rem(9px);
-    padding: $spacing-3xs;
-    width: auto;
-    min-width: 14px;
-  }
-}
-
-@mixin data-table-sort--x {
+@mixin data-table-sort {
   // -------------------------------------
   // Sortable table
   // -------------------------------------
@@ -170,9 +112,5 @@
 }
 
 @include exports('data-table-sort') {
-  @if feature-flag-enabled('components-x') {
-    @include data-table-sort--x;
-  } @else {
-    @include data-table-v2-sort;
-  }
+  @include data-table-sort;
 }

@@ -14,102 +14,6 @@
 @mixin form {
   .#{$prefix}--fieldset {
     @include reset;
-    margin-bottom: $spacing-xl;
-  }
-
-  .#{$prefix}--form-item {
-    @include font-family;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    align-items: flex-start;
-  }
-
-  .#{$prefix}--form-item--light input,
-  .#{$prefix}--form-item--light input[type='number'] {
-    background: $field-02 !important;
-  }
-
-  .#{$prefix}--label {
-    @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    color: $text-01;
-    font-weight: $input-label-weight;
-    display: inline-block;
-    vertical-align: baseline;
-    margin-bottom: $spacing-xs;
-  }
-
-  .#{$prefix}--label--with-helper {
-    margin-bottom: 0;
-  }
-
-  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
-    @include typescale('zeta');
-  }
-
-  // Skeleton State
-  .#{$prefix}--label.#{$prefix}--skeleton {
-    @include skeleton;
-    width: rem(75px);
-    height: rem(14px);
-  }
-
-  input[data-invalid],
-  textarea[data-invalid],
-  select[data-invalid],
-  .#{$prefix}--list-box[data-invalid] {
-    box-shadow: 0 2px 0px 0px $support-01;
-
-    ~ .#{$prefix}--form-requirement {
-      max-height: rem(200px);
-      display: block;
-    }
-  }
-
-  // Fix for red ring when input is marked required in Firefox, refs #744
-  input:not(output):not([data-invalid]):-moz-ui-invalid {
-    box-shadow: none;
-  }
-
-  .#{$prefix}--form-requirement {
-    @include reset;
-    @include typescale('omega');
-    margin: $spacing-sm 0 0;
-    max-height: 0;
-    overflow: hidden;
-    font-weight: 600;
-    line-height: 1.5;
-    display: none;
-
-    &::before {
-      content: '*';
-      display: inline-block;
-      color: $support-01;
-    }
-  }
-
-  .#{$prefix}--form__helper-text {
-    @include typescale('omega');
-    color: $text-02;
-    order: 1;
-    line-height: 1.5;
-    z-index: 0;
-    max-height: 3rem;
-    opacity: 1;
-    margin-bottom: $spacing-xs;
-  }
-
-  .#{$prefix}--label--disabled,
-  .#{$prefix}--form__helper-text--disabled {
-    opacity: 0.5;
-  }
-}
-
-@mixin form--x {
-  .#{$prefix}--fieldset {
-    @include reset;
     margin-bottom: $carbon--spacing-07;
   }
 
@@ -213,9 +117,5 @@
 }
 
 @include exports('form') {
-  @if feature-flag-enabled('components-x') {
-    @include form--x;
-  } @else {
-    @include form;
-  }
+  @include form;
 }

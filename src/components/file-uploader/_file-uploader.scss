@@ -9,106 +9,12 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
-@import '../../globals/scss/css--typography';
 @import '../button/button';
 @import '../form/form';
 @import '../loading/loading';
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
 @mixin file-uploader {
-  .#{$prefix}--file {
-    width: 100%;
-  }
-
-  .#{$prefix}--file-input {
-    @include hidden;
-  }
-
-  .#{$prefix}--file-btn {
-    display: inline-flex;
-    margin: 0;
-  }
-
-  .#{$prefix}--label-description {
-    @include reset;
-    @include typescale('zeta');
-    @include line-height('body');
-    color: $text-02;
-    margin-bottom: $spacing-lg;
-  }
-
-  .#{$prefix}--file-container {
-    display: block;
-    width: 100%;
-    margin-top: $spacing-lg;
-  }
-
-  .#{$prefix}--file__selected-file {
-    @include text-overflow(300px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: rem(30px);
-    background-color: $field-02;
-    border: 1px solid $ui-03;
-    padding: 0 $spacing-md;
-    margin-bottom: $spacing-md;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .#{$prefix}--file-filename {
-    @include typescale('omega');
-    @include text-overflow(100%);
-    display: inline-flex;
-    align-items: center;
-    color: $text-01;
-    margin-right: $spacing-md;
-    height: 1.875rem;
-    /*rtl:ignore*/
-    direction: ltr;
-    justify-content: flex-start; /*rtl:{flex-end}*/
-  }
-
-  .#{$prefix}--file__state-container {
-    display: flex;
-    align-items: center;
-
-    .#{$prefix}--loading {
-      width: 1rem;
-      height: 1rem;
-      margin-right: $spacing-xs;
-    }
-
-    .#{$prefix}--loading__svg {
-      stroke: $ui-05;
-    }
-  }
-
-  .#{$prefix}--file__state-container .#{$prefix}--file-close,
-  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    width: 1rem;
-    height: 1rem;
-    fill: $text-01;
-    cursor: pointer;
-
-    &:focus {
-      @include focus-outline('border');
-    }
-  }
-
-  .#{$prefix}--file__state-container .#{$prefix}--file-close {
-    fill: $ui-05;
-  }
-
-  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $support-02;
-  }
-}
-
-@mixin file-uploader--x {
   .#{$prefix}--file {
     width: 100%;
   }
@@ -227,9 +133,5 @@
 }
 
 @include exports('file-uploader') {
-  @if feature-flag-enabled('components-x') {
-    @include file-uploader--x;
-  } @else {
-    @include file-uploader;
-  }
+  @include file-uploader;
 }

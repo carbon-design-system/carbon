@@ -9,105 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@mixin data-table-v2-expandable {
-  tr.#{$prefix}--expandable-row-v2 {
-    // hide on init
-    &.#{$prefix}--expandable-row--hidden-v2 {
-      display: none;
-    }
-
-    > td:first-of-type {
-      position: relative;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 2px;
-        background-color: $brand-01;
-      }
-    }
-
-    + tr[data-child-row] {
-      td {
-        border-top: 0;
-        padding-bottom: $spacing-xs;
-      }
-    }
-
-    &:hover {
-      > td {
-        background-color: $hover-row;
-      }
-
-      > td:first-of-type {
-        border-left: 1px solid transparent;
-      }
-
-      > td:last-of-type {
-        border-right: 1px solid $brand-01;
-      }
-
-      &[data-parent-row] > td {
-        border-bottom: 0;
-      }
-
-      + tr[data-child-row] {
-        > td {
-          background-color: $hover-row;
-          border-bottom: 1px solid $brand-01;
-          border-right: 1px solid $brand-01;
-        }
-      }
-    }
-  }
-
-  tr.#{$prefix}--expandable-row--hover-v2 {
-    > td {
-      background-color: $hover-row;
-      border-top: 1px solid $brand-01;
-    }
-
-    > td:last-of-type {
-      border-right: 1px solid $brand-01;
-    }
-  }
-
-  .#{$prefix}--table-expand-v2 {
-    width: 2.5rem;
-  }
-
-  .#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
-    transform: rotate(90deg);
-    transition: transform 200ms $carbon--standard-easing;
-  }
-
-  .#{$prefix}--table-expand-v2__button {
-    @include button-reset(false);
-
-    &:focus {
-      outline: 1px solid transparent;
-
-      svg {
-        box-shadow: inset 0px 0px 0px 1px $brand-01;
-      }
-    }
-  }
-
-  .#{$prefix}--table-expand-v2__svg {
-    fill: $ui-05;
-    transform: rotate(0deg);
-    transition: transform 200ms $carbon--standard-easing;
-    height: 16px;
-    width: auto;
-    max-width: 16px;
-    padding: $spacing-3xs;
-  }
-}
-
-@mixin data-table-expandable--x {
+@mixin data-table-expandable {
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
@@ -364,9 +266,5 @@
 }
 
 @include exports('data-table-v2-expandable') {
-  @if feature-flag-enabled('components-x') {
-    @include data-table-expandable--x;
-  } @else {
-    @include data-table-v2-expandable;
-  }
+  @include data-table-expandable;
 }
