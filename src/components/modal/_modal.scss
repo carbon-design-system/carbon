@@ -63,7 +63,7 @@
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
     transition: transform $duration--moderate-02 motion(entrance, expressive);
-    transform: translateY(0) scaleY(1);
+    transform: translate3d(0, 0, 0);
   }
 
   .#{$prefix}--modal-container {
@@ -76,7 +76,7 @@
     max-height: 100%;
     overflow: hidden;
     transform-origin: top center;
-    transform: translate3d(0, -24px, 0) scaleY(0);
+    transform: translate3d(0, -24px, 0);
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
