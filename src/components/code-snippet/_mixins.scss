@@ -7,7 +7,7 @@
 
 @import '../../globals/scss/typography';
 
-@mixin bx--snippet--x {
+@mixin bx--snippet {
   @include type-style('code-01');
   background: $snippet-background-color;
   border: 1px solid $snippet-border-color;

@@ -11,7 +11,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
-@mixin tags--x {
+@mixin tags {
   .#{$prefix}--tag {
     @include type-style('label-01');
     display: inline-flex;
@@ -26,52 +26,52 @@
     }
 
     &.#{$prefix}--skeleton {
-      @include tag-theme--x($bg-color: $ui-03, $text-color: $text-01);
+      @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
     }
   }
 
   .#{$prefix}--tag--red {
-    @include tag-theme--x($ibm-color__red-20, $ibm-color__red-70);
+    @include tag-theme($ibm-color__red-20, $ibm-color__red-70);
   }
 
   .#{$prefix}--tag--magenta {
-    @include tag-theme--x($ibm-color__magenta-20, $ibm-color__magenta-70);
+    @include tag-theme($ibm-color__magenta-20, $ibm-color__magenta-70);
   }
 
   .#{$prefix}--tag--purple {
-    @include tag-theme--x($ibm-color__purple-20, $ibm-color__purple-70);
+    @include tag-theme($ibm-color__purple-20, $ibm-color__purple-70);
   }
 
   .#{$prefix}--tag--blue {
-    @include tag-theme--x($ibm-color__blue-20, $ibm-color__blue-70);
+    @include tag-theme($ibm-color__blue-20, $ibm-color__blue-70);
   }
 
   .#{$prefix}--tag--cyan {
-    @include tag-theme--x($ibm-color__cyan-20, $ibm-color__cyan-70);
+    @include tag-theme($ibm-color__cyan-20, $ibm-color__cyan-70);
   }
 
   .#{$prefix}--tag--teal {
-    @include tag-theme--x($ibm-color__teal-20, $ibm-color__teal-70);
+    @include tag-theme($ibm-color__teal-20, $ibm-color__teal-70);
   }
 
   .#{$prefix}--tag--green {
-    @include tag-theme--x($ibm-color__green-20, $ibm-color__green-70);
+    @include tag-theme($ibm-color__green-20, $ibm-color__green-70);
   }
 
   .#{$prefix}--tag--gray {
-    @include tag-theme--x($ibm-color__gray-20, $ibm-color__gray-100);
+    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
   }
 
   .#{$prefix}--tag--cool-gray {
-    @include tag-theme--x($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
+    @include tag-theme($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
   }
 
   .#{$prefix}--tag--warm-gray {
-    @include tag-theme--x($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
+    @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
   }
 
   .#{$prefix}--tag--disabled {
-    @include tag-theme--x($ibm-color__gray-10, $ibm-color__gray-30);
+    @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
 
     &:hover {
       cursor: not-allowed;
@@ -80,7 +80,7 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme--x($interactive-02, $inverse-01);
+    @include tag-theme($interactive-02, $inverse-01);
     cursor: pointer;
     padding-right: rem(2px); // Align with hover circle of X button
   }
@@ -117,5 +117,5 @@
 }
 
 @include exports('tags') {
-  @include tags--x;
+  @include tags;
 }

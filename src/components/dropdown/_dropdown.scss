@@ -16,7 +16,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 
-@mixin dropdown--x {
+@mixin dropdown {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
@@ -330,5 +330,5 @@
 }
 
 @include exports('dropdown') {
-  @include dropdown--x;
+  @include dropdown;
 }

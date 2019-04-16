@@ -13,7 +13,7 @@
 @import '../../globals/scss/vars';
 @import '../list-box/list-box';
 
-@mixin multiselect--x {
+@mixin multiselect {
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -57,5 +57,5 @@
 }
 
 @include exports('multi-select') {
-  @include multiselect--x;
+  @include multiselect;
 }

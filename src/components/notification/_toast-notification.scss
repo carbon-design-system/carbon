@@ -17,7 +17,7 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
-@mixin toast-notifications--x {
+@mixin toast-notifications {
   .#{$prefix}--toast-notification {
     @include reset;
 
@@ -118,5 +118,5 @@
 }
 
 @include exports('toast-notifications') {
-  @include toast-notifications--x;
+  @include toast-notifications;
 }

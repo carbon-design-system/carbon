@@ -11,7 +11,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
-@mixin form--x {
+@mixin form {
   .#{$prefix}--fieldset {
     @include reset;
     margin-bottom: $carbon--spacing-07;
@@ -117,5 +117,5 @@
 }
 
 @include exports('form') {
-  @include form--x;
+  @include form;
 }

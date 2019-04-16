@@ -14,7 +14,7 @@
 @import '../form/form';
 @import 'flatpickr.scss';
 
-@mixin date-picker--x {
+@mixin date-picker {
   .#{$prefix}--date-picker {
     display: flex;
   }
@@ -473,5 +473,5 @@
 }
 
 @include exports('date-picker') {
-  @include date-picker--x;
+  @include date-picker;
 }

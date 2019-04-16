@@ -12,7 +12,7 @@
 @import 'mixins';
 @import 'vars';
 
-@mixin loading--x {
+@mixin loading {
   .#{$prefix}--loading {
     @include reset;
     @include animation__loading--spin;
@@ -77,5 +77,5 @@
 }
 
 @include exports('loading') {
-  @include loading--x;
+  @include loading;
 }

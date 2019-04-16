@@ -15,7 +15,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
-@mixin search--x {
+@mixin search {
   .#{$prefix}--search {
     display: flex;
     align-items: center;
@@ -173,5 +173,5 @@
 }
 
 @include exports('search') {
-  @include search--x;
+  @include search;
 }

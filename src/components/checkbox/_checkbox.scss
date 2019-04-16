@@ -12,7 +12,7 @@
 @import '../form/form';
 @import '../../globals/scss/css--reset';
 
-@mixin checkbox--x {
+@mixin checkbox {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: rem(8px);
@@ -178,5 +178,5 @@
 }
 
 @include exports('checkbox') {
-  @include checkbox--x;
+  @include checkbox;
 }

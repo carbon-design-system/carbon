@@ -12,10 +12,10 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
-@mixin structured-list--x {
+@mixin structured-list {
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
-    @include padding--data-structured-list--x;
+    @include padding--data-structured-list;
   }
 
   .#{$prefix}--structured-list-input {
@@ -36,7 +36,7 @@
 
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
-      @include padding-td--condensed--x;
+      @include padding-td--condensed;
     }
   }
 
@@ -85,7 +85,7 @@
 
   .#{$prefix}--structured-list-th {
     @include reset;
-    @include padding-th--x;
+    @include padding-th;
     @include type-style('heading-01');
     display: table-cell;
     font-weight: 600;
@@ -103,7 +103,7 @@
   .#{$prefix}--structured-list-td {
     @include reset;
     @include type-style('body-long-01');
-    @include padding-td--x;
+    @include padding-td;
     line-height: carbon--rem(21px);
     position: relative;
     display: table-cell;
@@ -179,5 +179,5 @@
 }
 
 @include exports('structured-list') {
-  @include structured-list--x;
+  @include structured-list;
 }

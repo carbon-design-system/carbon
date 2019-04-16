@@ -11,7 +11,7 @@
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
 /// @access private
-@mixin css-body--x {
+@mixin css-body {
   body {
     @include reset;
     @include type-style('body-short-01');
@@ -23,6 +23,6 @@
 
 @include exports('css--body') {
   @if global-variable-exists('css--body') == false or $css--body == true {
-    @include css-body--x;
+    @include css-body;
   }
 }

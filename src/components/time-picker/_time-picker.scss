@@ -15,7 +15,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
-@mixin time-picker--x {
+@mixin time-picker {
   .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-end;
@@ -58,5 +58,5 @@
 }
 
 @include exports('time-picker') {
-  @include time-picker--x;
+  @include time-picker;
 }

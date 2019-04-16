@@ -12,7 +12,7 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
-@mixin snippet--x {
+@mixin snippet {
   .#{$prefix}--snippet code {
     @include type-style('code-01');
   }
@@ -62,7 +62,7 @@
 
   // Single Line Snippet
   .#{$prefix}--snippet--single {
-    @include bx--snippet--x;
+    @include bx--snippet;
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
@@ -97,7 +97,7 @@
 
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
-    @include bx--snippet--x;
+    @include bx--snippet;
     border: none;
     padding: $carbon--spacing-05;
     min-width: rem(320px);
@@ -346,5 +346,5 @@
 }
 
 @include exports('snippet') {
-  @include snippet--x;
+  @include snippet;
 }

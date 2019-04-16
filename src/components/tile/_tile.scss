@@ -15,7 +15,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
-@mixin tile--x {
+@mixin tile {
   .#{$prefix}--tile {
     display: block;
     min-width: 8rem;
@@ -158,5 +158,5 @@
 }
 
 @include exports('tile') {
-  @include tile--x;
+  @include tile;
 }

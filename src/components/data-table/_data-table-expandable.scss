@@ -9,7 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@mixin data-table-expandable--x {
+@mixin data-table-expandable {
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
@@ -266,5 +266,5 @@
 }
 
 @include exports('data-table-v2-expandable') {
-  @include data-table-expandable--x;
+  @include data-table-expandable;
 }

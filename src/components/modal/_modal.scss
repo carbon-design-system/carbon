@@ -19,7 +19,7 @@
 
 @import '../button/button';
 
-@mixin modal--x {
+@mixin modal {
   .#{$prefix}--modal {
     position: fixed;
     top: 0;
@@ -163,5 +163,5 @@
 }
 
 @include exports('modal') {
-  @include modal--x;
+  @include modal;
 }

@@ -11,7 +11,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
-@mixin content-switcher--x {
+@mixin content-switcher {
   .#{$prefix}--content-switcher {
     display: flex;
     justify-content: space-evenly;
@@ -138,5 +138,5 @@
 }
 
 @include exports('content-switcher') {
-  @include content-switcher--x;
+  @include content-switcher;
 }

@@ -12,7 +12,7 @@
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
-@mixin button--x {
+@mixin button {
   // button set styles
   .#{$prefix}--btn-set {
     display: flex;
@@ -29,7 +29,7 @@
   }
 
   .#{$prefix}--btn {
-    @include button-base--x;
+    @include button-base;
 
     &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
     &:disabled > .#{$prefix}--btn__icon {
@@ -44,7 +44,7 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
+    @include button-theme($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
 
     &:hover {
       color: $text-04;
@@ -52,7 +52,7 @@
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme--x($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
+    @include button-theme($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
 
     &:hover,
     &:focus {
@@ -61,7 +61,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
+    @include button-theme(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
 
     &:hover {
       color: $inverse-01;
@@ -87,7 +87,7 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
+    @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
     padding: rem(14px) rem(16px);
 
     .#{$prefix}--btn__icon {
@@ -142,7 +142,7 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
+    @include button-theme($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
     &:hover {
       color: $text-04;
@@ -163,5 +163,5 @@
 }
 
 @include exports('button') {
-  @include button--x;
+  @include button;
 }

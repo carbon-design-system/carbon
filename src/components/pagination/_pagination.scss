@@ -16,7 +16,7 @@ $css--helpers: true;
 @import '../select/select';
 @import '../text-input/text-input';
 
-@mixin pagination--x {
+@mixin pagination {
   .#{$prefix}--data-table-container + .#{$prefix}--pagination {
     border-top: 0;
   }
@@ -204,5 +204,5 @@ $css--helpers: true;
 }
 
 @include exports('pagination') {
-  @include pagination--x;
+  @include pagination;
 }

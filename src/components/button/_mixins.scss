@@ -9,73 +9,6 @@
 
 @mixin button-base {
   @include reset;
-  @include font-family;
-  @include font-smoothing;
-  @include letter-spacing;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: $button-font-size;
-  font-weight: $button-font-weight;
-  min-height: rem($button-height);
-  padding: $button-padding;
-  border-radius: $button-border-radius;
-  text-align: center;
-  text-decoration: none;
-  transition-duration: $transition--base;
-  transition-timing-function: ease-in;
-  white-space: nowrap;
-  line-height: 16px;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
-  .#{$prefix}--btn__icon {
-    width: rem(16px);
-    height: rem(16px);
-    margin-left: 0.5rem;
-    transition-duration: $transition--base;
-    transition-timing-function: ease-in;
-  }
-}
-
-@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
-  background-color: $bg-color;
-  border-width: $button-border-width;
-  border-style: solid;
-  border-color: $border-color;
-  color: $font-color;
-
-  &:focus,
-  &:hover {
-    background-color: $hover-bg-color;
-  }
-
-  &:focus {
-    border: $button-border-width solid $ui-02;
-    outline: $button-border-width solid $hover-bg-color;
-  }
-
-  &:disabled:hover,
-  &:disabled:focus {
-    background-color: $bg-color;
-  }
-
-  &:active {
-    background-color: darken($bg-color, 20%);
-  }
-
-  .#{$prefix}--btn__icon {
-    fill: $icon-color;
-  }
-}
-
-@mixin button-base--x {
-  @include reset;
   @include type-style('body-short-01');
 
   cursor: pointer;
@@ -111,7 +44,7 @@
   }
 }
 
-@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
   background-color: $bg-color;
   border-width: $button-border-width;
   border-style: solid;

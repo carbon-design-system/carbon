@@ -17,7 +17,7 @@
 @import '../form/form';
 @import '../text-input/text-input';
 
-@mixin slider--x {
+@mixin slider {
   .#{$prefix}--slider-container {
     display: flex;
     align-items: center;
@@ -195,5 +195,5 @@
 }
 
 @include exports('slider') {
-  @include slider--x;
+  @include slider;
 }

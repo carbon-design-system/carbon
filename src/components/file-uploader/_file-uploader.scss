@@ -14,7 +14,7 @@
 @import '../loading/loading';
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
-@mixin file-uploader--x {
+@mixin file-uploader {
   .#{$prefix}--file {
     width: 100%;
   }
@@ -133,5 +133,5 @@
 }
 
 @include exports('file-uploader') {
-  @include file-uploader--x;
+  @include file-uploader;
 }

@@ -9,7 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@mixin data-table-v2-action--x {
+@mixin data-table-v2-action {
   //-------------------------------------------------
   //TOOLBAR
   //-------------------------------------------------
@@ -358,5 +358,5 @@
 }
 
 @include exports('data-table-v2-action') {
-  @include data-table-v2-action--x;
+  @include data-table-v2-action;
 }

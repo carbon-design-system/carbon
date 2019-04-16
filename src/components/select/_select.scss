@@ -16,7 +16,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
-@mixin select--x {
+@mixin select {
   .#{$prefix}--select {
     @include reset;
     position: relative;
@@ -239,5 +239,5 @@
 }
 
 @include exports('select') {
-  @include select--x;
+  @include select;
 }

@@ -11,7 +11,7 @@
 @import './vendor/@carbon/elements/scss/themes/themes';
 
 // Light Experimental Theme
-@mixin theme--x() {
+@mixin theme() {
   /// @access public
   $edited: true !default !global;
   $use-layer: true !default !global;
@@ -148,5 +148,5 @@
 }
 
 @include exports('theme') {
-  @include theme--x;
+  @include theme;
 }

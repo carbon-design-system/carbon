@@ -11,7 +11,7 @@
 @import '../../globals/scss/layout';
 @import '../link/link';
 
-@mixin breadcrumb--x {
+@mixin breadcrumb {
   .#{$prefix}--breadcrumb {
     @include type-style('body-short-01');
     display: inline;
@@ -61,5 +61,5 @@
 }
 
 @include exports('breadcrumb') {
-  @include breadcrumb--x;
+  @include breadcrumb;
 }

@@ -19,7 +19,7 @@ $css--helpers: true;
 @import '../overflow-menu/overflow-menu';
 @import '../search/search';
 
-@mixin toolbar--x {
+@mixin toolbar {
   .#{$prefix}--toolbar {
     display: flex;
     flex-flow: row nowrap;
@@ -135,5 +135,5 @@ $css--helpers: true;
 }
 
 @include exports('toolbar') {
-  @include toolbar--x;
+  @include toolbar;
 }

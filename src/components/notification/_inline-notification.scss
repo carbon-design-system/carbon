@@ -17,7 +17,7 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
-@mixin inline-notifications--x {
+@mixin inline-notifications {
   .#{$prefix}--inline-notification {
     @include reset;
 
@@ -124,5 +124,5 @@
 }
 
 @include exports('inline-notifications') {
-  @include inline-notifications--x;
+  @include inline-notifications;
 }

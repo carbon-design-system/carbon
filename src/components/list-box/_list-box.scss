@@ -21,7 +21,7 @@ $list-box-height: rem(40px);
 $list-box-inline-height: $list-box-height;
 $list-box-menu-width: rem(300px);
 
-@mixin listbox--x {
+@mixin listbox {
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.
   .#{$prefix}--list-box__wrapper--inline {
@@ -487,5 +487,5 @@ $list-box-menu-width: rem(300px);
 }
 
 @include exports('list-box') {
-  @include listbox--x;
+  @include listbox;
 }

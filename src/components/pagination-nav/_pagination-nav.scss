@@ -41,7 +41,7 @@
   }
 }
 
-@mixin pagination-nav--x(
+@mixin pagination-nav(
   $text-color: $text-02,
   $text-color-active: $text-02,
   $background-color-hover: $hover-ui,
@@ -180,5 +180,5 @@
 }
 
 @include exports('pagination-nav') {
-  @include pagination-nav--x;
+  @include pagination-nav;
 }

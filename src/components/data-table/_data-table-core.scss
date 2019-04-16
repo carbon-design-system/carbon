@@ -9,7 +9,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 
-@mixin data-table-core--x {
+@mixin data-table-core {
   //----------------------------------------------------------------------------
   // Container
   //----------------------------------------------------------------------------
@@ -253,5 +253,5 @@
 }
 
 @include exports('data-table-v2-core') {
-  @include data-table-core--x;
+  @include data-table-core;
 }

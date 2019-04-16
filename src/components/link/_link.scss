@@ -17,7 +17,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
-@mixin link--x {
+@mixin link {
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-long-01');
@@ -72,5 +72,5 @@
 }
 
 @include exports('link') {
-  @include link--x;
+  @include link;
 }

@@ -16,7 +16,7 @@
 @import '../form/form';
 @import '../../globals/scss/css--reset';
 
-@mixin radio-button--x {
+@mixin radio-button {
   .#{$prefix}--radio-button-group {
     display: flex;
     align-items: center;
@@ -145,5 +145,5 @@
 }
 
 @include exports('radio-button') {
-  @include radio-button--x;
+  @include radio-button;
 }

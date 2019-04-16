@@ -12,7 +12,7 @@
 @import '../../globals/scss/css--reset';
 @import '../form/form';
 
-@mixin number-input--x {
+@mixin number-input {
   .#{$prefix}--number {
     @include reset;
     display: flex;
@@ -220,5 +220,5 @@
 }
 
 @include exports('number-input') {
-  @include number-input--x;
+  @include number-input;
 }

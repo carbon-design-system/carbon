@@ -11,7 +11,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'keyframes';
 
-@mixin inline-loading--x {
+@mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;
     width: 100%;
@@ -81,5 +81,5 @@
 }
 
 @include exports('inline-loading') {
-  @include inline-loading--x;
+  @include inline-loading;
 }

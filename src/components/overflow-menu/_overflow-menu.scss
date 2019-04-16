@@ -17,7 +17,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
-@mixin overflow-menu--x {
+@mixin overflow-menu {
   .#{$prefix}--overflow-menu {
     @include reset;
     @include focus-outline('reset');
@@ -231,5 +231,5 @@
 }
 
 @include exports('overflow-menu') {
-  @include overflow-menu--x;
+  @include overflow-menu;
 }
