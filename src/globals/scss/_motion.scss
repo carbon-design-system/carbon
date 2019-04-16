@@ -35,31 +35,12 @@ $duration--moderate-02: 240ms;
 $duration--slow-01: 400ms;
 $duration--slow-02: 720ms;
 
-// ☠️ Deprecated
+$carbon--ease-in: cubic-bezier(0, 0, 0.38, 0.9);
+$carbon--ease-out: cubic-bezier(0.2, 0, 1, 0.9);
+$carbon--standard-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
 
-/// Default ease-in for components
-/// @access public
-/// @deprecated Updated to `$carbon--ease-in`
-$bx--ease-in: $carbon--ease-in;
-
-/// Default ease-out for components
-/// @access public
-/// @deprecated Updated to `$carbon--ease-out`
-$bx--ease-out: $carbon--ease-out;
-
-/// Standard easing for components
-/// @access public
-/// @deprecated Updated to `$carbon--standard-easing`
-$bx--standard-easing: $carbon--standard-easing;
-
-@if feature-flag-enabled('components-x') {
-  $carbon--ease-in: cubic-bezier(0, 0, 0.38, 0.9);
-  $carbon--ease-out: cubic-bezier(0.2, 0, 1, 0.9);
-  $carbon--standard-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
-
-  $transition--base: $duration--fast-02;
-  $transition--expansion: $duration--moderate-02;
-}
+$transition--base: $duration--fast-02;
+$transition--expansion: $duration--moderate-02;
 
 /// Get the transition-timing-function for a given easing and motion mode.
 /// Easings that are currently supported include: standard, entrance, and exit.

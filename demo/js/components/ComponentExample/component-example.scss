@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 100%;
   display: block;
-  color: $color__white;
+  color: $carbon--white-0;
 
   &__live {
     display: flex;
@@ -15,7 +15,7 @@
     margin: 1.5rem 0 0;
     background-color: $ui-02;
     color: $text-01;
-    border: 1px solid $color__gray-1;
+    border: solid $ui-03 1px;
 
     &--rendered {
       display: flex;
@@ -30,7 +30,6 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    color: $color__navy-gray-6;
     font-size: 0.75rem;
     padding: 0.5rem 1rem;
     z-index: z('overlay');

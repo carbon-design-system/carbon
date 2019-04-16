@@ -8,11 +8,20 @@
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
 @import './vendor/@carbon/elements/scss/import-once/import-once';
-@import 'css--plex-core';
+@import 'deprecate';
 @import 'helper-mixins';
-@import 'feature-flags';
 @import './vendor/@carbon/elements/scss/type/font-face/mono';
 @import './vendor/@carbon/elements/scss/type/font-face/sans';
+
+/// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
+@mixin check-default-font-path {
+  @if (str-index($font-path, 'https://unpkg.com/') == 1) {
+    @warn 'The default font path (#{$font-path}) should be used only for demonstration/evaluation purposes. For production applications, please host fonts in your own CDN and change `$font-path` accordingly.';
+    @content;
+  } @else {
+    @content;
+  }
+}
 
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
@@ -75,12 +84,8 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 @include exports('css--font-face') {
   @if not global-variable-exists('css--font-face') or $css--font-face == true {
     @if global-variable-exists('css--plex') and $css--plex == true {
-      @if feature-flag-enabled('components-x') {
-        @include carbon--font-face-mono();
-        @include carbon--font-face-sans();
-      } @else {
-        @include plex-font-face;
-      }
+      @include carbon--font-face-mono();
+      @include carbon--font-face-sans();
     } @else {
       @include helvetica-font-face;
     }

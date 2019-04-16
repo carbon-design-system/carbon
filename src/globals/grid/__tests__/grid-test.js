@@ -18,20 +18,19 @@ $css--helpers: false;
 $css--body: false;
 $css--use-layer: false;
 $css--reset: false;
-$css--typography: false;
 $css--plex: false;
 ${content}
 `);
 const renderClassic = content =>
   render(`
-$feature-flags: (components-x: false, breaking-changes-x: false, grid: false);
+$feature-flags: (grid: false);
 ${content}
 `);
 
 const isClassic = async () => {
   const { calls } = await render(`
 @import '../../scss/functions';
-$t: test(feature-flag-enabled('breaking-changes-x'));
+$t: test(feature-flag-enabled('grid'));
 `);
   return !convert(calls[0][0]);
 };
