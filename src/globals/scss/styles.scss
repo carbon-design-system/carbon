@@ -16,7 +16,6 @@ $css--helpers: true !default;
 $css--body: true !default;
 $css--use-layer: true !default;
 $css--reset: true !default;
-$css--typography: true !default;
 $css--plex: true !default;
 
 // TODO: remove in next major release. Synced in `feature-flags` as an adapter
@@ -42,7 +41,6 @@ $css--use-experimental-grid-fallback: false !default;
 @import 'css--font-face';
 @import 'css--helpers';
 @import 'css--body';
-@import 'css--typography';
 @import '../grid/grid';
 
 //-------------------------

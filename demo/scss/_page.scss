@@ -60,10 +60,6 @@ td {
   }
 
   .page__desc {
-    @if not feature-flag-enabled('components-x') {
-      @include font-smoothing;
-      @include letter-spacing;
-    }
     max-width: 38rem;
     color: $text-01;
     word-wrap: break-word;
@@ -84,11 +80,7 @@ td {
     }
 
     .page__divider-heading {
-      @if not feature-flag-enabled('components-x') {
-        @include typescale('zeta');
-      } @else {
-        @include type-style('body-short-01');
-      }
+      @include type-style('body-short-01');
       font-weight: 600;
       width: 100%;
       padding-bottom: 1rem;
@@ -100,12 +92,7 @@ td {
     }
 
     h1 {
-      @if not feature-flag-enabled('components-x') {
-        @include typescale('mega');
-        @include letter-spacing;
-      } @else {
-        @include type-style('heading-01');
-      }
+      @include type-style('heading-01');
       font-weight: 300;
       line-height: 1.25;
 
@@ -115,11 +102,7 @@ td {
     }
 
     h2 {
-      @if not feature-flag-enabled('components-x') {
-        @include typescale('beta');
-      } @else {
-        @include type-style('heading-02');
-      }
+      @include type-style('heading-02');
       position: relative;
       display: flex;
       align-items: center;
@@ -183,12 +166,7 @@ td {
     }
 
     h3 {
-      @if not feature-flag-enabled('components-x') {
-        @include typescale('delta');
-        @include letter-spacing;
-      } @else {
-        @include type-style('heading-02');
-      }
+      @include type-style('heading-02');
       color: $brand-01;
       padding: 4rem 0 1rem;
       font-weight: 600;

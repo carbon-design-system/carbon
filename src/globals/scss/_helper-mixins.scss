@@ -22,8 +22,6 @@
 @import 'vars';
 @import 'css--reset';
 @import 'typography';
-@import 'deprecate';
-@import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
 /// Adds text overflow styling
@@ -70,7 +68,7 @@
 /// @example @include focus-outline('outline');
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
-    outline: 1px solid if(not feature-flag-enabled('components-x'), $brand-01, $focus);
+    outline: 1px solid $focus;
   }
 
   @if ($type == 'blurred') {
@@ -79,7 +77,7 @@
   }
 
   @if ($type == 'outline') {
-    outline: 2px solid if(not feature-flag-enabled('components-x'), $brand-01, $focus);
+    outline: 2px solid $focus;
     outline-offset: -2px;
   }
 
@@ -127,11 +125,6 @@
 /// @example @include button-reset($width: false);
 @mixin button-reset($width: true) {
   @include reset;
-  @if not feature-flag-enabled('components-x') {
-    @include font-family;
-    @include font-smoothing;
-    @include letter-spacing;
-  }
   display: inline-block;
   background: none;
   appearance: none;
@@ -229,16 +222,6 @@
       left: 0;
       right: auto;
       opacity: 0.3;
-    }
-  }
-}
-
-/// @access public
-/// @deprecated A legacy class used for our older way of dark/light theme switch
-@mixin light-ui {
-  @include deprecate('`@include light-ui` has been removed.', feature-flag-enabled('breaking-changes-x'), true) {
-    .#{$prefix}--global-light-ui & {
-      @content;
     }
   }
 }

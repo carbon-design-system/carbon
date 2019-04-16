@@ -8,22 +8,10 @@
 @import 'vars';
 @import 'typography';
 @import 'css--reset';
-@import 'functions';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
 /// @access private
 @mixin css-body {
-  body {
-    @include reset;
-    @include font-family;
-    color: $text-01;
-    background-color: $ui-02;
-    line-height: 1;
-  }
-}
-
-/// @access private
-@mixin css-body--x {
   body {
     @include reset;
     @include type-style('body-short-01');
@@ -35,10 +23,6 @@
 
 @include exports('css--body') {
   @if global-variable-exists('css--body') == false or $css--body == true {
-    @if not feature-flag-enabled('components-x') {
-      @include css-body;
-    } @else {
-      @include css-body--x;
-    }
+    @include css-body;
   }
 }

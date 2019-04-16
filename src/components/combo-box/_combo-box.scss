@@ -10,17 +10,10 @@
 //-----------------------------
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/functions';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../list-box/list-box';
 
 @mixin combo-box {
-  .#{$prefix}--combo-box > .#{$prefix}--list-box__field {
-    padding: 0;
-  }
-}
-
-@mixin combo-box--x {
   .#{$prefix}--combo-box .#{$prefix}--text-input {
     &::placeholder {
       color: $text-02;
@@ -43,9 +36,5 @@
 }
 
 @include exports('combo-box') {
-  @if feature-flag-enabled('components-x') {
-    @include combo-box--x;
-  } @else {
-    @include combo-box;
-  }
+  @include combo-box;
 }

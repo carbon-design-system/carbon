@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/functions';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
@@ -13,85 +12,6 @@
 @import 'mixins';
 
 @mixin tags {
-  .#{$prefix}--tag {
-    @include font-family;
-    @include typescale('omega');
-    display: inline-flex;
-    align-items: center;
-    padding: 0 $spacing-xs;
-    height: 1.25rem;
-    margin: $spacing-3xs;
-    border-radius: rem(15px);
-
-    &:not(:first-child) {
-      margin-left: 0;
-    }
-  }
-
-  .#{$prefix}--tag--ibm {
-    @include tag-theme($color__blue-10, $color__blue-60);
-  }
-
-  .#{$prefix}--tag--beta {
-    @include tag-theme($color__gray-1, $color__navy-gray-4);
-  }
-
-  .#{$prefix}--tag--third-party {
-    @include tag-theme($color__teal-10, $color__teal-60);
-  }
-
-  .#{$prefix}--tag--local,
-  .#{$prefix}--tag--dedicated,
-  .#{$prefix}--tag--custom {
-    @include tag-theme($color__purple-10, $color__purple-60);
-  }
-
-  .#{$prefix}--tag--experimental {
-    @include tag-theme($color__orange-10, $color__orange-60);
-  }
-
-  .#{$prefix}--tag--community {
-    @include tag-theme($color__green-10, $color__green-60);
-  }
-
-  .#{$prefix}--tag--private {
-    @include tag-theme($color__yellow-10, $color__yellow-60);
-  }
-
-  // tags used for filtering
-  .#{$prefix}--tag--filter {
-    @include tag-theme($brand-01, white);
-    cursor: pointer;
-  }
-
-  .#{$prefix}--tag--filter > svg {
-    fill: white;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-left: rem(5px);
-  }
-
-  .#{$prefix}--tag--filter:focus,
-  .#{$prefix}--tag--filter:hover {
-    background-color: $hover-primary;
-    outline: none;
-  }
-
-  // Skeleton state
-  .#{$prefix}--tag.#{$prefix}--skeleton {
-    @include tag-theme($color__gray-1, $color__navy-gray-4);
-    width: rem(60px);
-
-    &:after {
-      @include skeleton;
-      content: '';
-      height: rem(6px);
-      width: 100%;
-    }
-  }
-}
-
-@mixin tags--x {
   .#{$prefix}--tag {
     @include type-style('label-01');
     display: inline-flex;
@@ -106,52 +26,52 @@
     }
 
     &.#{$prefix}--skeleton {
-      @include tag-theme--x($bg-color: $ui-03, $text-color: $text-01);
+      @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
     }
   }
 
   .#{$prefix}--tag--red {
-    @include tag-theme--x($ibm-color__red-20, $ibm-color__red-70);
+    @include tag-theme($ibm-color__red-20, $ibm-color__red-70);
   }
 
   .#{$prefix}--tag--magenta {
-    @include tag-theme--x($ibm-color__magenta-20, $ibm-color__magenta-70);
+    @include tag-theme($ibm-color__magenta-20, $ibm-color__magenta-70);
   }
 
   .#{$prefix}--tag--purple {
-    @include tag-theme--x($ibm-color__purple-20, $ibm-color__purple-70);
+    @include tag-theme($ibm-color__purple-20, $ibm-color__purple-70);
   }
 
   .#{$prefix}--tag--blue {
-    @include tag-theme--x($ibm-color__blue-20, $ibm-color__blue-70);
+    @include tag-theme($ibm-color__blue-20, $ibm-color__blue-70);
   }
 
   .#{$prefix}--tag--cyan {
-    @include tag-theme--x($ibm-color__cyan-20, $ibm-color__cyan-70);
+    @include tag-theme($ibm-color__cyan-20, $ibm-color__cyan-70);
   }
 
   .#{$prefix}--tag--teal {
-    @include tag-theme--x($ibm-color__teal-20, $ibm-color__teal-70);
+    @include tag-theme($ibm-color__teal-20, $ibm-color__teal-70);
   }
 
   .#{$prefix}--tag--green {
-    @include tag-theme--x($ibm-color__green-20, $ibm-color__green-70);
+    @include tag-theme($ibm-color__green-20, $ibm-color__green-70);
   }
 
   .#{$prefix}--tag--gray {
-    @include tag-theme--x($ibm-color__gray-20, $ibm-color__gray-100);
+    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
   }
 
   .#{$prefix}--tag--cool-gray {
-    @include tag-theme--x($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
+    @include tag-theme($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
   }
 
   .#{$prefix}--tag--warm-gray {
-    @include tag-theme--x($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
+    @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
   }
 
   .#{$prefix}--tag--disabled {
-    @include tag-theme--x($ibm-color__gray-10, $ibm-color__gray-30);
+    @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
 
     &:hover {
       cursor: not-allowed;
@@ -160,7 +80,7 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    @include tag-theme--x($interactive-02, $inverse-01);
+    @include tag-theme($interactive-02, $inverse-01);
     cursor: pointer;
     padding-right: rem(2px); // Align with hover circle of X button
   }
@@ -197,9 +117,5 @@
 }
 
 @include exports('tags') {
-  @if feature-flag-enabled('components-x') {
-    @include tags--x;
-  } @else {
-    @include tags;
-  }
+  @include tags;
 }

@@ -19,52 +19,6 @@
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
     @include reset;
-    @include font-family;
-    @include typescale('zeta');
-    @include font-smoothing;
-    margin-left: $spacing-xl;
-    line-height: 1.5;
-  }
-
-  .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
-    padding: $spacing-md;
-  }
-
-  .#{$prefix}--list__item {
-    font-weight: 600;
-    padding-left: $spacing-2xs;
-    color: $text-01;
-  }
-
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
-    list-style-type: disc;
-  }
-
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item {
-    list-style-type: decimal;
-  }
-
-  .#{$prefix}--list--nested {
-    margin-left: $spacing-xs;
-  }
-
-  .#{$prefix}--list--nested > .#{$prefix}--list__item {
-    list-style-type: none;
-    font-weight: 400;
-  }
-
-  .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
-    content: '-';
-    padding-right: $spacing-2xs;
-  }
-}
-
-@mixin lists--x {
-  .#{$prefix}--list--nested,
-  .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
-    @include reset;
     @include type-style('body-short-01');
 
     counter-reset: listitem;
@@ -118,9 +72,5 @@
 }
 
 @include exports('lists') {
-  @if feature-flag-enabled('components-x') {
-    @include lists--x;
-  } @else {
-    @include lists;
-  }
+  @include lists;
 }

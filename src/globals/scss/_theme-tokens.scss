@@ -5,144 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'feature-flags';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
-@import 'functions';
 @import 'colors';
 @import 'spacing';
-
-/// @access private
-$carbon--theme--v9: (
-  brand-01: $color__blue-51,
-  brand-02: $color__blue-40,
-  brand-03: $color__teal-20,
-  inverse-01: $color__white,
-  inverse-02: #272d33,
-  ui-01: $color__white,
-  ui-02: #f4f7fb,
-  ui-03: $color__gray-1,
-  ui-04: #8897a2,
-  ui-05: $color__navy-gray-6,
-  text-01: $color__blue-90,
-  text-02: $color__navy-gray-6,
-  text-03: #cdd1d4,
-  field-01: #f4f7fb,
-  field-02: $color__white,
-  support-01: #e0182d,
-  support-02: $color__green-40,
-  support-03: $color__yellow-30,
-  support-04: $color__blue-30,
-  nav-01: $color__navy-gray-1,
-  nav-02: $color__blue-90,
-  nav-03: $color__purple-30,
-  nav-04: $color__purple-60,
-  nav-05: $color__teal-40,
-  nav-06: $color__teal-50,
-  nav-07: $color__blue-30,
-  nav-08: $color__blue-51,
-  hover-primary: darken($color__blue-51, 10%),
-  hover-primary-text: darken($color__blue-51, 15%),
-  hover-danger: darken(#e0182d, 10%),
-  hover-secondary: $color__blue-51,
-  hover-row: rgba($color__blue-40, 0.1),
-);
-
-@if not feature-flag-enabled('components-x') {
-  /// @access public
-  $carbon--theme: $carbon--theme--v9 !global;
-}
-
 @import './vendor/@carbon/elements/scss/themes/themes';
 
-@mixin theme() {
-  // Nav
-  /// @access public
-  $nav-01: $color__navy-gray-1 !default !global;
-  $nav-02: $color__blue-90 !default !global;
-  $nav-03: $color__purple-30 !default !global;
-  $nav-04: $color__purple-60 !default !global;
-  $nav-05: $color__teal-40 !default !global;
-  $nav-06: $color__teal-50 !default !global;
-  $nav-07: $color__blue-30 !default !global;
-  $nav-08: $color__blue-51 !default !global;
-
-  // Global
-  /// @access public
-  $input-border: 1px solid transparent !default !global;
-  $input-label-weight: 600 !default !global;
-  $focus: $color__blue-20 !default !global;
-
-  // Button Theme Variables
-  /// @access public
-  $button-font-weight: 600 !default !global;
-  $button-font-size: 0.875rem !default !global;
-  $button-border-radius: 0 !default !global;
-  $button-height: 40px !default !global;
-  $button-padding: 0 $spacing-md !default !global;
-  $button-padding-sm: 0 $spacing-xs !default !global;
-  $button-border-width: 2px !default !global;
-  $button-outline-width: 1px !default !global;
-
-  // Accordion (Reverse)
-  /// @access public
-  $accordion-flex-direction: row !default !global;
-  $accordion-justify-content: flex-start !default !global;
-  $accordion-arrow-margin: 0 0 0 $spacing-2xs !default !global;
-  $accordion-title-margin: 0 0 0 $spacing-md !default !global;
-  $accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default !global;
-
-  // Card
-  /// @access public
-  $card-text-align: center !default !global;
-  $card-flex-align: center !default !global;
-
-  // Checkbox
-  /// @access public
-  $checkbox-border-width: 2px !default !global;
-
-  // Code Snippet
-  /// @access public
-  $snippet-background-color: $ui-01 !default !global;
-  $snippet-border-color: $ui-03 !default !global;
-
-  // Content Switcher
-  /// @access public
-  $content-switcher-border-radius: 8px !default !global;
-  $content-switcher-option-border: 1px solid $brand-01 !default !global;
-
-  // Data Table
-  /// @access public
-  $data-table-heading-transform: uppercase !default !global;
-  $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
-  $data-table-row-height: 2rem !default !global;
-
-  // Modal
-  /// @access public
-  $modal-border-top: $brand-01 4px solid !default !global;
-  $modal-footer-background-color: $ui-02 !default !global;
-
-  // Progress Indicator
-  /// @access public
-  $progress-indicator-bar-width: 1px inset transparent !default !global;
-  $progress-indicator-stroke-width: 5 !default !global;
-  $progress-indicator-line-offset: 0.625rem !default !global;
-
-  // Radio Button
-  /// @access public
-  $radio-border-width: 2px !default !global;
-
-  // Structured Theme Variables
-  /// @access public
-  $structured-list-padding: 2rem !default !global;
-  $structured-list-text-transform: none !default !global;
-
-  // Skeleton Loading
-  /// @access public
-  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01
-}
-
 // Light Experimental Theme
-@mixin theme--experimental() {
+@mixin theme() {
   /// @access public
   $edited: true !default !global;
   $use-layer: true !default !global;
@@ -261,27 +130,23 @@ $carbon--theme--v9: (
 
   // Skeleton Loading
   /// @access public
-  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
+  $skeleton: rgba(#3d70b2, 0.1) !default !global; //old $color__blue-51/$field-01 TODO: Define for experimental
 
   // ☠️ Deprecated
   /// @deprecated
   /// @access public
   $hover-field: $hover-ui !default !global;
   $active-01: $active-ui !default !global;
-  $nav-01: $color__navy-gray-1 !default !global;
-  $nav-02: $color__blue-90 !default !global;
-  $nav-03: $color__purple-30 !default !global;
-  $nav-04: $color__purple-60 !default !global;
-  $nav-05: $color__teal-40 !default !global;
-  $nav-06: $color__teal-50 !default !global;
-  $nav-07: $color__blue-30 !default !global;
-  $nav-08: $color__blue-51 !default !global;
+  $nav-01: #0f212e !default !global; // Old $color__navy-gray-1
+  $nav-02: #152935 !default !global; // Old $color__blue-90
+  $nav-03: #ba8ff7 !default !global; // Old $color__purple-30
+  $nav-04: #734098 !default !global; // Old $color__purple-60
+  $nav-05: #00b4a0 !default !global; // Old $color__teal-40
+  $nav-06: #008571 !default !global; // Old $color__teal-50
+  $nav-07: #5aaafa !default !global; // Old $color__blue-30
+  $nav-08: #3d70b2 !default !global; // Old $color__blue-51
 }
 
 @include exports('theme') {
-  @if feature-flag-enabled('components-x') {
-    @include theme--experimental;
-  } @else {
-    @include theme;
-  }
+  @include theme;
 }

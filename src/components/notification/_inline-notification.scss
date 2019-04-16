@@ -15,101 +15,9 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/css--typography';
 @import 'mixins';
 
 @mixin inline-notifications {
-  .#{$prefix}--inline-notification {
-    @include reset;
-    @include font-family;
-    @include font-smoothing;
-    @include typescale('zeta');
-    display: flex;
-    justify-content: space-between;
-    background-color: transparent;
-    padding: $spacing-sm $spacing-md;
-    min-height: rem(40px);
-    color: $text-02;
-    margin-top: $spacing-md;
-    margin-bottom: $spacing-md;
-  }
-
-  .#{$prefix}--inline-notification--error {
-    @include inline-notification--color($support-01);
-  }
-
-  .#{$prefix}--inline-notification--success {
-    @include inline-notification--color($support-02);
-  }
-
-  .#{$prefix}--inline-notification--info {
-    @include inline-notification--color($support-04);
-  }
-
-  .#{$prefix}--inline-notification--warning {
-    @include inline-notification--color($support-03);
-  }
-
-  .#{$prefix}--inline-notification__details {
-    display: flex;
-    align-items: center;
-  }
-
-  .#{$prefix}--inline-notification__icon {
-    height: 16px;
-    width: 16px;
-    min-width: 22px;
-  }
-
-  .#{$prefix}--inline-notification__text-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 $spacing-md;
-
-    @media (max-width: 640px) {
-      flex-direction: column;
-      width: 100%;
-    }
-  }
-
-  .#{$prefix}--inline-notification__title {
-    @include typescale('zeta');
-    color: $text-01;
-    font-weight: 600;
-    margin: 0 $spacing-2xs 0 0;
-    line-height: 1.125;
-  }
-
-  .#{$prefix}--inline-notification__subtitle {
-    @include typescale('zeta');
-    line-height: 1.125;
-  }
-
-  .#{$prefix}--inline-notification__close-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    height: 16px;
-    width: 12px;
-    position: relative;
-
-    &:focus {
-      @include focus-outline('border');
-    }
-  }
-
-  .#{$prefix}--inline-notification__close-icon {
-    height: 10px;
-    width: 10px;
-    fill: $ui-05;
-    position: absolute;
-    top: 3px;
-    right: 1px;
-  }
-}
-
-@mixin inline-notifications--x {
   .#{$prefix}--inline-notification {
     @include reset;
 
@@ -216,9 +124,5 @@
 }
 
 @include exports('inline-notifications') {
-  @if feature-flag-enabled('components-x') {
-    @include inline-notifications--x;
-  } @else {
-    @include inline-notifications;
-  }
+  @include inline-notifications;
 }

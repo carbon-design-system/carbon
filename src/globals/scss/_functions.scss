@@ -10,7 +10,7 @@
 /// Used for enabling features
 /// @access public
 /// @param {String} $feature - feature from $default-feature-flags
-/// @example @if feature-flag-enabled('components-x') { ... } will include code inside of { } only if components-x is true
+/// @example @if feature-flag-enabled('ui-shell') { ... } will include code inside of { } only if ui-shell is true
 @function feature-flag-enabled($feature) {
   @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == true {
     @return true;
