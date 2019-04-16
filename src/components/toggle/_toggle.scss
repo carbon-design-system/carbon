@@ -54,6 +54,10 @@
       width: rem(48px);
       border-radius: rem(15px);
       top: 0;
+      will-change: box-shadow;
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow $duration--fast-02 motion(standard, productive),
+        background-color $duration--fast-02 motion(standard, productive);
     }
 
     // Toggle circle
@@ -69,7 +73,7 @@
       background-color: $ui-03;
       border-radius: 50%;
       content: '';
-      transition: $duration--fast-01 motion(exit, productive);
+      transition: transform $duration--fast-02 motion(standard, productive);
     }
   }
 
@@ -99,7 +103,7 @@
     left: 6px;
     top: 6px;
     z-index: 1;
-    transition: $duration--fast-01 motion(exit, productive);
+    transition: $duration--fast-02 motion(exit, productive);
     transform: scale(0.2);
   }
 
@@ -187,7 +191,7 @@
     &:before,
     &:after {
       cursor: not-allowed;
-      transition: $duration--fast-01 motion(exit, productive);
+      transition: $duration--fast-02 motion(exit, productive);
     }
   }
 
