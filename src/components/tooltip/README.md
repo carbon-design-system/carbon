@@ -99,6 +99,8 @@ document.addEventListener('floating-menu-hidden', function(evt) {
 
 ### Interactive tooltip
 
+Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button). For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+
 | Selector                      | Description                        |
 | ----------------------------- | ---------------------------------- |
 | `.bx--tooltip__trigger--bold` | Modifier class to make label bold. |
@@ -127,7 +129,7 @@ By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can chan
 
 ### Definition tooltip
 
-This tooltip variation does not use any JavaScript and should be used to define a word. For anything more advanced please use the main variation.
+Definition tooltip is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word. This works better than the interactive tooltip in regular use cases because the info icon used in interactive tooltip can be repetitive when it’s shown several times on a page. Definition tooltip does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
 | Selector                           | Description                                           |
 | ---------------------------------- | ----------------------------------------------------- |
@@ -136,7 +138,7 @@ This tooltip variation does not use any JavaScript and should be used to define 
 
 ### Icon tooltip
 
-This tooltip variation does not use any JavaScript and is good for short single line of text describing an icon. No label should be added to this variation.
+Icon tooltip is for short single line of text describing an icon. Icon tooltip does not use any JavaScript. No label should be added to this variation. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
 | Selector                     | Description                                           |
 | ---------------------------- | ----------------------------------------------------- |
