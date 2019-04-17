@@ -3693,10 +3693,10 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
-carbon-components@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.0.0.tgz#d9e5da8619c7bd74c31ebabb759f23790460f2d6"
-  integrity sha512-SFTUy7C+pIucsWnuOsRFYcChXPhqYnutqwsyuQ4Tr3h+5SlytRo3R3dyHQeka4j+DEUagCRfIBu8NCBnipERyw==
+carbon-components@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.1.0.tgz#c7d60ef3aaa4ec11629d1224e0064d15716e5072"
+  integrity sha512-CdybWT+lDhDnY4fp7HDacmL8X3i/9LD12WKK/AlmIZeoCAmqa0fo9GwRz1o8gQdQYOF/5LAjrdqOlKXkAOrGDQ==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.7"

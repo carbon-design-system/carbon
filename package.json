@@ -174,7 +174,7 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-react-docgen": "^2.0.0",
-    "carbon-components": "^10.0.0",
+    "carbon-components": "^10.1.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
@@ -242,8 +242,16 @@
       "@commitlint/config-conventional"
     ],
     "rules": {
-      "header-max-length": [2, "always", 50],
-      "body-max-line-length": [2, "always", 72]
+      "header-max-length": [
+        2,
+        "always",
+        50
+      ],
+      "body-max-line-length": [
+        2,
+        "always",
+        72
+      ]
     }
   },
   "husky": {
