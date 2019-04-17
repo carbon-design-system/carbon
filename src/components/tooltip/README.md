@@ -129,7 +129,7 @@ By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can chan
 
 ### Definition tooltip
 
-This tooltip variation is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word. This works better than the interactive tooltip in regular use cases because the info icon used in interactive tooltip can be repetitive when it’s shown several times on a page. This tooltip variation does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use the main variation.
+Definition tooltip is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word. This works better than the interactive tooltip in regular use cases because the info icon used in interactive tooltip can be repetitive when it’s shown several times on a page. Definition tooltip does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
 | Selector                           | Description                                           |
 | ---------------------------------- | ----------------------------------------------------- |
@@ -138,7 +138,7 @@ This tooltip variation is for regular use case of tooltip, e.g. giving the user 
 
 ### Icon tooltip
 
-This tooltip variation is for short single line of text describing an icon. This tooltip variation does not use any JavaScript. No label should be added to this variation. If there are actions a user can take in the tooltip (e.g. a link or a button), use the main variation.
+Icon tooltip is for short single line of text describing an icon. Icon tooltip does not use any JavaScript. No label should be added to this variation. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
 | Selector                     | Description                                           |
 | ---------------------------- | ----------------------------------------------------- |
