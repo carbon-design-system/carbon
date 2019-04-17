@@ -40,6 +40,7 @@ const types = {
 };
 
 const props = () => ({
+  id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   filterable: boolean(
     'Filterable (`<MultiSelect.Filterable>` instead of `<MultiSelect>`)',
     false

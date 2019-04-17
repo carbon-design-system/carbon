@@ -23,6 +23,7 @@ describe('Dropdown', () => {
   let mockProps;
   beforeEach(() => {
     mockProps = {
+      id: 'test-dropdown',
       items: generateItems(5, generateGenericItem),
       onChange: jest.fn(),
       label: 'input',

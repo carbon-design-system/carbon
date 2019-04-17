@@ -26,9 +26,19 @@ export default class FilterableMultiSelect extends React.Component {
   static propTypes = {
     ...sortingPropTypes,
     /**
+     * 'aria-label' of the ListBox component.
+     */
+    ariaLabel: PropTypes.string,
+
+    /**
      * Disable the control
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Specify a custom `id`
+     */
+    id: PropTypes.string.isRequired,
 
     /**
      * We try to stay as generic as possible here to allow individuals to pass
@@ -107,6 +117,7 @@ export default class FilterableMultiSelect extends React.Component {
   }
 
   static defaultProps = {
+    ariaLabel: 'Choose an item',
     compareItems: defaultCompareItems,
     disabled: false,
     filterItems: defaultFilterItems,
@@ -212,6 +223,7 @@ export default class FilterableMultiSelect extends React.Component {
   render() {
     const { highlightedIndex, isOpen, inputValue } = this.state;
     const {
+      ariaLabel,
       className: containerClassName,
       disabled,
       filterItems,
@@ -265,9 +277,8 @@ export default class FilterableMultiSelect extends React.Component {
                 disabled={disabled}
                 invalid={invalid}
                 invalidText={invalidText}
-                innerTabIndex="-1"
                 {...getRootProps({ refKey: 'innerRef' })}>
-                <ListBox.Field {...getButtonProps({ disabled })}>
+                <ListBox.Field id={id} {...getButtonProps({ disabled })}>
                   {selectedItem.length > 0 && (
                     <ListBox.Selection
                       clearSelection={clearSelection}
@@ -276,6 +287,8 @@ export default class FilterableMultiSelect extends React.Component {
                   )}
                   <input
                     className={`${prefix}--text-input`}
+                    aria-controls={`${id}__menu`}
+                    aria-autocomplete="list"
                     ref={el => (this.inputNode = el)}
                     {...getInputProps({
                       disabled,
@@ -293,7 +306,7 @@ export default class FilterableMultiSelect extends React.Component {
                   />
                 </ListBox.Field>
                 {isOpen && (
-                  <ListBox.Menu>
+                  <ListBox.Menu aria-label={ariaLabel} id={id}>
                     {componentsX
                       ? filterItems(items, { itemToString, inputValue }).map(
                           (item, index) => {

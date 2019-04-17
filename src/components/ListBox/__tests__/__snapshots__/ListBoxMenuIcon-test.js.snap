@@ -7,6 +7,7 @@ exports[`ListBoxMenuIcon should render 1`] = `
 >
   <div
     className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+    role="button"
   >
     <ChevronDown16
       aria-label="Close menu"
@@ -52,6 +53,7 @@ exports[`ListBoxMenuIcon should render 2`] = `
 >
   <div
     className="bx--list-box__menu-icon"
+    role="button"
   >
     <ChevronDown16
       aria-label="Open menu"

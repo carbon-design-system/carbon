@@ -46,6 +46,7 @@ const types = {
 };
 
 const props = () => ({
+  id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
   type: select('Dropdown type (type)', types, 'default'),
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),

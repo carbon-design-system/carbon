@@ -2,23 +2,26 @@
 
 exports[`ListBox should render 1`] = `
 <ListBox
-  ariaLabel="Choose an item"
   className="bx--list-box__container"
   disabled={false}
+  id="test-listbox"
   innerRef={
     [MockFunction] {
       "calls": Array [
         Array [
           <div
-            aria-label="Choose an item"
             class="bx--list-box__container bx--list-box"
+            id="test-listbox"
             role="listbox"
-            tabindex="0"
+            tabindex="-1"
           >
             <div
+              aria-controls="test-listbox__menu"
+              aria-haspopup="listbox"
+              aria-owns="test-listbox__menu"
               class="bx--list-box__field"
-              role="button"
-              tabindex="0"
+              role="combobox"
+              tabindex="-1"
             />
           </div>,
         ],
@@ -34,18 +37,23 @@ exports[`ListBox should render 1`] = `
   type="default"
 >
   <div
-    aria-label="Choose an item"
     className="bx--list-box__container bx--list-box"
+    id="test-listbox"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="listbox"
-    tabIndex={0}
+    tabIndex="-1"
   >
-    <ListBoxField>
+    <ListBoxField
+      id="test-listbox"
+    >
       <div
+        aria-controls="test-listbox__menu"
+        aria-haspopup="listbox"
+        aria-owns="test-listbox__menu"
         className="bx--list-box__field"
-        role="button"
-        tabIndex="0"
+        role="combobox"
+        tabIndex={-1}
       />
     </ListBoxField>
   </div>

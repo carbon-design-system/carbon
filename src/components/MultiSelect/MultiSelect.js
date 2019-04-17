@@ -32,6 +32,11 @@ export default class MultiSelect extends React.Component {
     disabled: PropTypes.bool,
 
     /**
+     * Specify a custom `id`
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
      * We try to stay as generic as possible here to allow individuals to pass
      * in a collection of whatever kind of data structure they prefer
      */
@@ -187,7 +192,9 @@ export default class MultiSelect extends React.Component {
   render() {
     const { highlightedIndex, isOpen } = this.state;
     const {
+      ariaLabel,
       className: containerClassName,
+      id,
       items,
       itemToString,
       label,
@@ -229,13 +236,17 @@ export default class MultiSelect extends React.Component {
               getButtonProps,
             }) => (
               <ListBox
+                id={id}
                 type={type}
                 className={className}
                 disabled={disabled}
                 invalid={invalid}
                 invalidText={invalidText}
                 {...getRootProps({ refKey: 'innerRef' })}>
-                <ListBox.Field {...getButtonProps({ disabled })}>
+                <ListBox.Field
+                  id={id}
+                  tabIndex="0"
+                  {...getButtonProps({ disabled })}>
                   {selectedItem.length > 0 && (
                     <ListBox.Selection
                       clearSelection={!disabled ? clearSelection : noop}
@@ -249,7 +260,7 @@ export default class MultiSelect extends React.Component {
                   />
                 </ListBox.Field>
                 {isOpen && (
-                  <ListBox.Menu>
+                  <ListBox.Menu aria-label={ariaLabel} id={id}>
                     {componentsX
                       ? items.map((item, index) => {
                           const itemProps = getItemProps({ item });

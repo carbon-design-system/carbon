@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { settings } from 'carbon-components';
+import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
 import childrenOfType from '../../prop-types/childrenOfType';
 
@@ -17,19 +18,25 @@ const { prefix } = settings;
  * class into a single component. It is also being used to validate given
  * `children` components.
  */
-const ListBoxMenu = ({ children, ...rest }) => {
-  return (
-    <div className={`${prefix}--list-box__menu`} {...rest}>
-      {children}
-    </div>
-  );
-};
+const ListBoxMenu = ({ children, id, ...rest }) => (
+  <div
+    id={`${id}__menu`}
+    className={`${prefix}--list-box__menu`}
+    role="listbox"
+    {...rest}>
+    {children}
+  </div>
+);
 
 ListBoxMenu.propTypes = {
   /**
    * Provide the contents of your ListBoxMenu
    */
   children: childrenOfType(ListBoxMenuItem),
+  /**
+   * Specify a custom `id`
+   */
+  id: PropTypes.string.isRequired,
 };
 
 export default ListBoxMenu;

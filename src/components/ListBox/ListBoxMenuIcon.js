@@ -37,7 +37,7 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   });
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
-    <div className={className}>
+    <div className={className} role="button">
       {componentsX ? (
         <ChevronDown16 name="chevron--down" aria-label={description}>
           <title>{description}</title>

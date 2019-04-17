@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListBoxField should render 1`] = `
-<ListBoxField>
+<ListBoxField
+  id="test-listbox"
+>
   <div
+    aria-controls="test-listbox__menu"
+    aria-haspopup="listbox"
+    aria-owns="test-listbox__menu"
     className="bx--list-box__field"
-    role="button"
-    tabIndex="0"
+    role="combobox"
+    tabIndex={-1}
   >
     <ListBoxSelection
       clearSelection={[MockFunction]}

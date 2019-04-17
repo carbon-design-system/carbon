@@ -14,26 +14,38 @@ import WithState from '../../tools/withState';
 
 const items = [
   {
-    id: 'option-1',
+    id: 'option-0',
     text: 'Option 1',
   },
   {
-    id: 'option-2',
+    id: 'option-1',
     text: 'Option 2',
   },
   {
-    id: 'option-3',
+    id: 'option-2',
     text: 'Option 3',
+    selected: true,
+  },
+  {
+    id: 'option-3',
+    text: 'Option 4',
   },
   {
     id: 'option-4',
-    text: 'Option 4',
+    text:
+      'An example option that is really long to show what should be done to handle long text',
   },
 ];
 
 const props = () => ({
-  disabled: boolean('Disabled (disabled)', false),
+  id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
+  titleText: text('Title (titleText)', 'Combobox title'),
+  helperText: text('Helper text (helperText)', 'Optional helper text here'),
+  light: boolean('Light (light)', false),
+  disabled: boolean('Disabled (disabled)', false),
+  invalid: boolean('Invalid (invalid)', false),
+  invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
   onChange: action('onChange'),
 });
 

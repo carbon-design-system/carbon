@@ -15,7 +15,8 @@ describe('ListBox', () => {
   beforeEach(() => {
     mockProps = {
       type: 'default',
-      children: <ListBox.Field />,
+      id: 'test-listbox',
+      children: <ListBox.Field id="test-listbox" />,
       className: 'bx--list-box__container',
       disabled: false,
       innerRef: jest.fn(),
@@ -50,15 +51,5 @@ describe('ListBox', () => {
         .prop('className')
         .includes(mockProps.className)
     ).toBe(true);
-  });
-
-  it('should pass down innerTabIndex prop to the inner divs tabIndex', () => {
-    mockProps.innerTabIndex = -1;
-    const wrapper = mount(<ListBox {...mockProps} />);
-    expect(wrapper.children().prop('tabIndex')).toBe(-1);
-  });
-  it('should default the inner divs tabIndex to 0 if no innerTabIndex prop', () => {
-    const wrapper = mount(<ListBox {...mockProps} />);
-    expect(wrapper.children().prop('tabIndex')).toBe(0);
   });
 });

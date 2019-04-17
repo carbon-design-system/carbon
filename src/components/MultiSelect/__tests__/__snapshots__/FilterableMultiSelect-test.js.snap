@@ -2,6 +2,7 @@
 
 exports[`MultiSelect.Filterable should render 1`] = `
 <FilterableMultiSelect
+  ariaLabel="Choose an item"
   compareItems={[Function]}
   disabled={false}
   filterItems={[Function]}
@@ -72,15 +73,12 @@ exports[`MultiSelect.Filterable should render 1`] = `
       stateReducer={[Function]}
     >
       <ListBox
-        ariaLabel="Choose an item"
         className="bx--multi-select bx--combo-box"
         disabled={false}
         innerRef={[Function]}
-        innerTabIndex="-1"
         type="default"
       >
         <div
-          aria-label="Choose an item"
           className="bx--multi-select bx--combo-box bx--list-box"
           onClick={[Function]}
           onKeyDown={[Function]}
@@ -100,9 +98,11 @@ exports[`MultiSelect.Filterable should render 1`] = `
             type="button"
           >
             <div
+              aria-controls="undefined__menu"
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
+              aria-owns="undefined__menu"
               className="bx--list-box__field"
               data-toggle={true}
               disabled={false}
@@ -110,12 +110,13 @@ exports[`MultiSelect.Filterable should render 1`] = `
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
-              tabIndex="0"
+              tabIndex={-1}
               type="button"
             >
               <input
                 aria-activedescendant={null}
                 aria-autocomplete="list"
+                aria-controls="undefined__menu"
                 aria-expanded={false}
                 autoComplete="off"
                 className="bx--text-input"
@@ -134,6 +135,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon"
+                  role="button"
                 >
                   <ChevronDown16
                     aria-label="Open menu"

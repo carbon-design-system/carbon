@@ -47,6 +47,11 @@ export default class Dropdown extends React.Component {
     ]),
 
     /**
+     * Specify a custom `id`
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
      * Specify whether you want the inline version of this control
      */
     inline: PropTypes.bool,
@@ -195,7 +200,6 @@ export default class Dropdown extends React.Component {
         {title}
         {!inline && helper}
         <Downshift
-          id={id}
           onChange={this.handleOnChange}
           itemToString={itemToString}
           defaultSelectedItem={initialSelectedItem}
@@ -211,10 +215,10 @@ export default class Dropdown extends React.Component {
             getLabelProps,
           }) => (
             <ListBox
+              id={id}
               type={type}
               className={className({ isOpen })}
               disabled={disabled}
-              ariaLabel={ariaLabel}
               isOpen={isOpen}
               invalid={invalid}
               invalidText={invalidText}
@@ -224,7 +228,10 @@ export default class Dropdown extends React.Component {
                   className={`${prefix}--list-box__invalid-icon`}
                 />
               )}
-              <ListBox.Field {...getButtonProps({ disabled })}>
+              <ListBox.Field
+                id={id}
+                tabIndex="0"
+                {...getButtonProps({ disabled })}>
                 <span
                   className={`${prefix}--list-box__label`}
                   {...getLabelProps()}>
@@ -233,7 +240,7 @@ export default class Dropdown extends React.Component {
                 <ListBox.MenuIcon isOpen={isOpen} />
               </ListBox.Field>
               {isOpen && (
-                <ListBox.Menu>
+                <ListBox.Menu aria-label={ariaLabel} id={id}>
                   {items.map((item, index) => (
                     <ListBox.MenuItem
                       key={itemToString(item)}

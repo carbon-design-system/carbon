@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { settings } from 'carbon-components';
+import PropTypes from 'prop-types';
 import ListBoxMenuIcon from './ListBoxMenuIcon';
 import ListBoxSelection from './ListBoxSelection';
 import childrenOf from '../../prop-types/childrenOf';
@@ -18,11 +19,15 @@ const { prefix } = settings;
  * elements inside of a field. It also provides a11y-related attributes like
  * `role` to make sure a user can focus the given field.
  */
-const ListBoxField = ({ children, ...rest }) => (
+const ListBoxField = ({ children, id, ...rest }) => (
   <div
-    role="button"
+    role="combobox"
+    aria-haspopup="listbox"
+    aria-expanded={rest[`aria-expanded`]}
+    aria-owns={`${id}__menu`}
+    aria-controls={`${id}__menu`}
     className={`${prefix}--list-box__field`}
-    tabIndex="0"
+    tabIndex={rest.tabIndex || -1}
     {...rest}>
     {children}
   </div>
@@ -33,6 +38,10 @@ ListBoxField.propTypes = {
    * Provide the contents of your ListBoxField
    */
   children: childrenOf([ListBoxMenuIcon, ListBoxSelection, 'span', 'input']),
+  /**
+   * Specify a custom `id`
+   */
+  id: PropTypes.string.isRequired,
 };
 
 export default ListBoxField;
