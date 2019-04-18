@@ -15,7 +15,6 @@ import handles from '../../globals/js/mixins/handles';
 import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM, DIRECTION_LEFT, DIRECTION_RIGHT } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
-import { componentsX } from '../../globals/js/feature-flags';
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
@@ -55,45 +54,28 @@ export const getMenuOffset = (menuBody, direction, trigger) => {
 
   const menuWidth = menuBody.offsetWidth;
   const menuHeight = menuBody.offsetHeight;
-  const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
-  const values = [triggerButtonPositionProp, 'left', 'width', 'height', 'border-top-width'].reduce(
-    (o, name) => ({
-      ...o,
-      [name]: Number((/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
-    }),
-    {}
-  );
-  if (Object.keys(values).every(name => !isNaN(values[name]))) {
-    const { left, width, height, 'border-top-width': borderTopWidth } = values;
+
+  // eslint-disable-next-line no-use-before-define
+  const menu = OverflowMenu.components.get(trigger);
+  if (!menu) {
+    throw new TypeError('Overflow menu instance cannot be found.');
+  }
+  const flip = menuBody.classList.contains(menu.options.classMenuFlip);
+
+  if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
+    const triggerWidth = trigger.offsetWidth;
     return {
-      left: menuWidth / 2 - (left + Math.sqrt(width ** 2 + height ** 2) / 2),
-      top: Math.sqrt(borderTopWidth ** 2 * 2) + triggerButtonPositionFactor * values[triggerButtonPositionProp],
+      left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
+      top: 0,
     };
   }
 
-  if (componentsX) {
-    // eslint-disable-next-line no-use-before-define
-    const menu = OverflowMenu.components.get(trigger);
-    if (!menu) {
-      throw new TypeError('Overflow menu instance cannot be found.');
-    }
-    const flip = menuBody.classList.contains(menu.options.classMenuFlip);
-
-    if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
-      const triggerWidth = trigger.offsetWidth;
-      return {
-        left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
-        top: 0,
-      };
-    }
-
-    if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
-      const triggerHeight = trigger.offsetHeight;
-      return {
-        left: 0,
-        top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
-      };
-    }
+  if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
+    const triggerHeight = trigger.offsetHeight;
+    return {
+      left: 0,
+      top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
+    };
   }
 
   return undefined;

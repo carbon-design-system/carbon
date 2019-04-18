@@ -5,7 +5,6 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-{{#if @root.featureFlags.componentsX}}
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper{{#if inline}} {{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Combo box label</label>
@@ -287,40 +286,3 @@
     </div>
   </div>
 </div>
-{{else}}
-<div
-  class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
-  <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="open menu" aria-expanded="false"
-    aria-haspopup="true" {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox"
-      aria-autocomplete="list" aria-expanded="false" autocomplete="off" value="" id="downshift-input-2"
-      placeholder="Filter..." {{#if disabled}} disabled{{/if}}>
-    <div class="{{@root.prefix}}--list-box__menu-icon">
-      <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Open menu" name="caret--down" role="img">
-        <title>Close menu</title>
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-    </div>
-  </div>
-</div>
-<div
-  class="{{@root.prefix}}--form-item {{@root.prefix}}--combo-box {{@root.prefix}}--list-box{{#if disabled}} {{@root.prefix}}--list-box--disabled{{/if}}">
-  <div role="combobox" class="{{@root.prefix}}--list-box__field" aria-label="close menu" aria-expanded="true"
-    aria-haspopup="true" {{#if disabled}} disabled{{/if}}> <input class="{{@root.prefix}}--text-input" role="combobox"
-      aria-autocomplete="list" aria-expanded="true" autocomplete="off" value="" id="downshift-input-2"
-      placeholder="Filter..." aria-activedescendant="downshift-1-item-2" {{#if disabled}} disabled{{/if}}>
-    <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-      <svg width="10" height="5" viewBox="0 0 10 5" aria-label="Close menu" name="caret--down" role="img">
-        <title>Close menu</title>
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-    </div>
-  </div>
-  <div class="{{@root.prefix}}--list-box__menu">
-    {{#each items}}
-    <div
-      class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
-      id="{{id}}">{{label}}</div>
-    {{/each}}
-  </div>
-</div>
-{{/if}}

@@ -28,11 +28,7 @@
           >
         {{/unless}}
           <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Previous page </span>
-          {{#if @root.featureFlags.componentsX}}
-            {{ carbon-icon 'CaretLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
-          {{else}}
-            {{ carbon-icon 'ChevronLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
-          {{/if}}
+          {{ carbon-icon 'CaretLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
         {{#unless elementAsAnchor }}
           </button>
         {{else}}
@@ -121,11 +117,7 @@
           >
         {{/unless}}
           <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Next page </span>
-          {{#if @root.featureFlags.componentsX}}
-            {{ carbon-icon 'CaretRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
-          {{else}}
-            {{ carbon-icon 'ChevronRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
-          {{/if}}
+          {{ carbon-icon 'CaretRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
         {{#unless @root.elementAsAnchor}}
           </button>
         {{else}}

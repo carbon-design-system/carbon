@@ -7,9 +7,7 @@
 
 'use strict';
 
-const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
-const { componentsX } = require('../../globals/js/feature-flags');
 
 const itemsPerPageChoices = [
   {
@@ -59,25 +57,8 @@ const pageNumberChoices = [
 
 const variants = [
   {
-    name: componentsX ? 'deprecated' : 'default', // Not supporting theme switcher here
-    label: 'V1',
-    meta: {
-      removed: componentsX,
-      xVersionNotSupported: true,
-    },
-    context: {
-      itemsPerPageChoices,
-      pageNumberChoices,
-      version: 'v1',
-    },
-    notes: `
-      Pagination is used for splitting up content or data into several pages,
-      with a control for navigating to the next or previous page.
-    `,
-  },
-  {
-    name: componentsX ? 'default' : 'v2', // Not supporting theme switcher here
-    label: componentsX ? 'Default' : 'V2', // Not supporting theme switcher here
+    name: 'default',
+    label: 'Default',
     context: {
       version: 'x',
       itemsPerPageChoices,
@@ -87,8 +68,8 @@ const variants = [
   },
   {
     // `name`/`label`` here not supporting theme switcher
-    name: componentsX ? 'Disabled Pagination Buttons' : 'v2 Disabled Pagination Buttons',
-    label: componentsX ? 'Disabled Pagination Buttons' : 'V2 Disabled Pagination Buttons',
+    name: 'Disabled Pagination Buttons',
+    label: 'Disabled Pagination Buttons',
     context: {
       version: 'x',
       itemsPerPageChoices: [itemsPerPageChoices[0]],
@@ -105,7 +86,6 @@ const variants = [
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
   variants,

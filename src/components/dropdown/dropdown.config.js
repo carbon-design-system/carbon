@@ -8,7 +8,6 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
-const featureFlags = require('../../globals/js/feature-flags');
 
 const items = [
   {
@@ -40,7 +39,6 @@ const items = [
 module.exports = {
   context: {
     prefix,
-    featureFlags,
   },
   variants: [
     {
