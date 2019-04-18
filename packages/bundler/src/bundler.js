@@ -40,13 +40,15 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
     );
 
   program
-    .command('sassdoc <entrypoint>')
+    .command('sassdoc <glob>')
     .description('generate sassdoc as markdown')
+    .option('-i, --ignore <glob>', 'pass in a glob of files to ignore')
     .option('-j, --json', 'output as json file')
     .option('-o, --output <dir>', 'specify the directory to output the files')
-    .action((entrypoint, cmd) =>
-      sassdoc(entrypoint, {
+    .action((pattern, cmd) =>
+      sassdoc(pattern, {
         cwd,
+        ignore: cmd.ignore || [],
         json: cmd.json || false,
         output: cmd.output || 'docs',
       })

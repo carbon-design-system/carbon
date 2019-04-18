@@ -21,7 +21,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "bundler sassdoc 'scss'"
+    "build": "bundler sassdoc 'scss/*.scss'"
   },
   "dependencies": {
     "@carbon/import-once": "10.1.0",

@@ -9,20 +9,27 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const glob = require('../glob');
 const { createJson, createMarkdown } = require('../tools/sassdoc.js');
 const { reporter } = require('@carbon/cli-reporter');
 
-async function sassdoc(entrypoint, { cwd, json, output } = {}) {
-  const SRC_DIR = path.resolve(cwd, entrypoint);
+async function sassdoc(pattern, { ignore, cwd, json, output } = {}) {
   const DOCS_DIR = path.resolve(cwd, output);
   const JSON_FILE = path.resolve(DOCS_DIR, 'sass.json');
   const MARKDOWN_FILE = path.resolve(DOCS_DIR, 'sass.md');
 
+  const files = await glob(pattern, {
+    cwd,
+    ignore,
+  });
+
   if (json) {
-    reporter.info(`Creating sassdoc json for: '${SRC_DIR}'`);
+    reporter.info(
+      `Creating sassdoc json for pattern: '${pattern}', ignoring: '${ignore}'`
+    );
 
     try {
-      const jsonFile = await createJson(SRC_DIR);
+      const jsonFile = await createJson(files);
       await fs.ensureDir(DOCS_DIR);
       await fs.writeFile(JSON_FILE, JSON.stringify(jsonFile, null, 2));
     } catch {
@@ -32,10 +39,12 @@ async function sassdoc(entrypoint, { cwd, json, output } = {}) {
 
     reporter.success('Done! 🎉');
   } else {
-    reporter.info(`Creating sassdoc markdown for: '${SRC_DIR}'`);
+    reporter.info(
+      `Creating sassdoc markdown for pattern: '${pattern}', ignoring: '${ignore}'`
+    );
 
     try {
-      const markdownFile = await createMarkdown(SRC_DIR);
+      const markdownFile = await createMarkdown(files);
       await fs.ensureDir(DOCS_DIR);
       await fs.writeFile(MARKDOWN_FILE, markdownFile);
     } catch (error) {

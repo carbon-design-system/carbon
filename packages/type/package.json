@@ -26,7 +26,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc 'scss'",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc 'scss/**/*.scss'",
     "clean": "rimraf css es lib umd"
   },
   "dependencies": {
