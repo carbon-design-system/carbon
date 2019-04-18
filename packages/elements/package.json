@@ -25,7 +25,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonElements && node tasks/build.js && bundler check 'scss/*.scss' && bundler sassdoc 'scss/**/*.scss'",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonElements && node tasks/build.js && bundler check 'scss/*.scss' && bundler sassdoc 'scss/**/*.scss' -i '**/{_inlined,vendor}/**'",
     "clean": "rimraf es lib umd && node tasks/clean.js"
   },
   "dependencies": {

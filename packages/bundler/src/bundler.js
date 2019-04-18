@@ -14,6 +14,7 @@ const packageJson = require('../package.json');
 const bundlers = require('./bundlers');
 const bundle = require('./commands/bundle');
 const check = require('./commands/check');
+const inline = require('./commands/inline');
 const measure = require('./commands/measure');
 const sassdoc = require('./commands/sassdoc');
 
@@ -51,6 +52,22 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
         ignore: cmd.ignore || [],
         json: cmd.json || false,
         output: cmd.output || 'docs',
+      })
+    );
+
+  program
+    .command('inline')
+    .description(
+      'inline sass dependencies from package.json in a target folder'
+    )
+    .option(
+      '-o, --output <dir>',
+      'the directory to output inlined sass dependencies',
+      'scss'
+    )
+    .action(cmd =>
+      inline(cleanArgs(cmd), {
+        cwd,
       })
     );
 
