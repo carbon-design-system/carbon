@@ -246,7 +246,6 @@ Icon.propTypes = {
 Icon.defaultProps = {
   fillRule: 'evenodd',
   role: 'img',
-  description: 'Provide a description that will be used as the title',
 };
 
 export { icons };
