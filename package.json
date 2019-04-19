@@ -251,6 +251,11 @@
         2,
         "always",
         72
+      ],
+      "scope-case": [
+        0,
+        "always",
+        "lower-case"
       ]
     }
   },
