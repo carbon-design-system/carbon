@@ -10,140 +10,381 @@
 @import 'spacing';
 @import './vendor/@carbon/elements/scss/themes/themes';
 
-// Light Experimental Theme
+/// Theme variables
+/// @access private
+/// @group global-themes
 @mixin theme() {
-  /// @access public
-  $edited: true !default !global;
-  $use-layer: true !default !global;
-
   // Global
+
+  /// @type Value
   /// @access public
+  /// @group global
   $input-border: 1px solid transparent !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group global
   $input-label-weight: 400 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group global
   $disabled: $disabled-02 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group global
   $disabled-background-color: $disabled-01 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group global
   $focus: $ibm-color__blue-60 !default !global;
 
   // Link
+
+  /// @type Color
   /// @access public
+  /// @group link
   $link-visited: $ibm-color__purple-60 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group link
   $link-inverse-color: #6ea6ff !default !global;
 
   // Tooltip
+
+  /// @type Color
   /// @access public
+  /// @group tooltip
   $tooltip-background-color: $inverse-02 !default !global;
 
-  // Button Theme Variables
+  // Button
+
+  /// @type Number
   /// @access public
+  /// @group button
   $button-font-weight: 400 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
   $button-font-size: 0.875rem !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group
   $button-border-radius: 0 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group
   $button-height: 48px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
   $button-padding: 0.875rem 63px 0.875rem 15px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
   $button-padding-sm: 0.375rem 63px 0.375rem 15px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
   $button-padding-lg: $carbon--spacing-04 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
   $button-border-width: 1px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
   $button-outline-width: 3px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
   $button-outline-offset: -5px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
   $button-outline: 1px solid $ibm-color__white-0 !default !global;
 
-  // Accordion (Reverse)
+  // Accordion
+
+  /// @type Value
   /// @access public
+  /// @group accordion
   $accordion-flex-direction: row-reverse !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
   $accordion-justify-content: flex-start !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
   $accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
   $accordion-title-margin: 0 0 0 $carbon--spacing-05 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
   $accordion-content-padding: 0 0 0 $carbon--spacing-05 !default !global;
 
-  // Card
-  /// @access public
-  $card-text-align: center !default !global;
-  $card-flex-align: center !default !global;
-
   // Checkbox
+
+  /// @type Number
   /// @access public
+  /// @group checkbox
   $checkbox-border-width: 2px !default !global;
 
   // Code Snippet
+
+  /// @type Color
   /// @access public
+  /// @group code-snippet
   $snippet-background-color: $ui-01 !default !global; // TODO: Define for experimental
+
+  /// @type Color
+  /// @access public
+  /// @group code-snippet
   $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
 
   // Content Switcher
+
+  /// @type Number
   /// @access public
+  /// @group content-switcher
   $content-switcher-border-radius: 0px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group content-switcher
   $content-switcher-option-border: 1px solid $brand-01 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group content-switcher
   $content-switcher-divider: $ui-03 !default !global;
 
   // Data Table
+
+  /// @type Value
   /// @access public
+  /// @group data-table
   $data-table-heading-transform: uppercase !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group data-table
   $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group data-table
   $data-table-row-height: 2rem !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group data-table
   $data-table-zebra-color: #fcfcfc !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group data-table
   $data-table-column-hover: $hover-selected-ui !default !global;
 
   // Date Picker
+
+  /// @type Color
   /// @access public
+  /// @group data-table
   $date-picker-in-range-background-color: $ibm-color__blue-20 !default !global;
 
   // Modal
+
+  /// @type Color
   /// @access public
+  /// @group modal
   $modal-border-top: $brand-01 4px solid !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group modal
   $modal-footer-background-color: $ui-03 !default !global;
 
   // Notification
+
+  /// @type Color
   /// @access public
+  /// @group notification
   $notification-info-background-color: $ibm-color__blue-10 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group notification
   $notification-error-background-color: $ibm-color__red-10 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group notification
   $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group notification
   $notification-success-background-color: $ibm-color__green-10 !default !global;
 
   // Progress Indicator
+
+  /// @type Value
   /// @access public
+  /// @group progress-indicator
   $progress-indicator-bar-width: 1px inset transparent !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group progress-indicator
   $progress-indicator-stroke-width: 5 !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group progress-indicator
   $progress-indicator-line-offset: 0.625rem !default !global;
 
-  //Code Snippet
+  // Copy Button
+
+  /// @type Color
   /// @access public
+  /// @group copy-button
   $copy-active: $active-ui !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group copy-button
   $copy-btn-feedback: $ibm-color__gray-80 !default !global;
 
   // Radio Button
+
+  /// @type Number
   /// @access public
+  /// @group radio-button
   $radio-border-width: 1px !default !global;
 
-  // Structured Theme Variables
+  // Structured List
+
+  /// @type Number
   /// @access public
+  /// @group structured-list
   $structured-list-padding: 2rem !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group structured-list
   $structured-list-text-transform: none !default !global;
 
-  // Slider
+  // Tabs
 
-  //Tab
+  /// @type Value
   /// @access public
+  /// @group tabs
   $tab-underline-color: 3px solid $ibm-color__gray-30 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
   $tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default !global;
+
+  /// @type Color
+  /// @access public
+  /// @group tabs
   $tab-text-disabled: $ibm-color__gray-30 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
   $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
 
   // Skeleton Loading
+
+  /// @type Color
   /// @access public
+  /// @group skeleton
   $skeleton: rgba(#3d70b2, 0.1) !default !global; //old $color__blue-51/$field-01 TODO: Define for experimental
 
-  // ☠️ Deprecated
+  // ⚠️ Deprecated
+
   /// @deprecated
+  /// @type Color
   /// @access public
+  /// @group global
   $hover-field: $hover-ui !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $active-01: $active-ui !default !global;
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-01: #0f212e !default !global; // Old $color__navy-gray-1
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group
   $nav-02: #152935 !default !global; // Old $color__blue-90
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-03: #ba8ff7 !default !global; // Old $color__purple-30
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-04: #734098 !default !global; // Old $color__purple-60
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-05: #00b4a0 !default !global; // Old $color__teal-40
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-06: #008571 !default !global; // Old $color__teal-50
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-07: #5aaafa !default !global; // Old $color__blue-30
+
+  /// @deprecated
+  /// @type Color
+  /// @access public
+  /// @group global
   $nav-08: #3d70b2 !default !global; // Old $color__blue-51
 }
 

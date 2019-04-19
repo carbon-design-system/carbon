@@ -13,6 +13,9 @@
 @import '../../globals/scss/vars';
 @import '../list-box/list-box';
 
+/// Multi select styles
+/// @access private
+/// @group multi-select
 @mixin multiselect {
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;

@@ -9,6 +9,9 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 
+/// Data table core styles
+/// @access private
+/// @group data-table
 @mixin data-table-core {
   //----------------------------------------------------------------------------
   // Container

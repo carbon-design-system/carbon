@@ -15,6 +15,9 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Tabs styles
+/// @access private
+/// @group tabs
 @mixin tabs {
   .#{$prefix}--tabs {
     @include type-style('body-short-01');
