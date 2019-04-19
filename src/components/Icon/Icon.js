@@ -160,7 +160,7 @@ const Icon = ({
   const svgContent = icon ? svgShapes(icon.svgData) : '';
 
   return (
-    <svg {...props} aria-label={description} alt={description}>
+    <svg {...props} aria-label={description}>
       <title>
         {typeof iconTitle === 'undefined' ? description : iconTitle}
       </title>
