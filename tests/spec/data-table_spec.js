@@ -3,9 +3,6 @@ import flattenOptions from '../utils/flatten-options';
 import DataTable from '../../src/components/data-table/data-table';
 import HTML from '../../html/data-table/data-table.html';
 import ExpandableHTML from '../../html/data-table/data-table--expandable.html';
-import { componentsX } from '../../src/globals/js/feature-flags';
-
-const suffix = componentsX ? '' : '-v2';
 
 describe('DataTable', function() {
   describe('Constructor', function() {
@@ -24,34 +21,34 @@ describe('DataTable', function() {
     it('Should set default options', function() {
       const table = new DataTable(document.createElement('div'));
       expect(flattenOptions(table.options)).toEqual({
-        selectorInit: `[data-table${suffix}]`,
+        selectorInit: `[data-table]`,
         selectorToolbar: '.bx--table--toolbar',
         selectorActions: '.bx--batch-actions',
         selectorCount: '[data-items-selected]',
         selectorActionCancel: '.bx--batch-summary__cancel',
         selectorCheckbox: '.bx--checkbox',
-        selectorExpandCells: `td.bx--table-expand${suffix}`,
-        selectorExpandableRows: `.bx--expandable-row${suffix}`,
-        selectorParentRows: `.bx--parent-row${suffix}`,
+        selectorExpandCells: `td.bx--table-expand`,
+        selectorExpandableRows: `.bx--expandable-row`,
+        selectorParentRows: `.bx--parent-row`,
         selectorChildRow: '[data-child-row]',
         selectorTableBody: 'tbody',
-        selectorTableSort: `.bx--table-sort${suffix}`,
-        selectorTableSelected: `.bx--data-table${suffix}--selected`,
+        selectorTableSort: `.bx--table-sort`,
+        selectorTableSelected: `.bx--data-table--selected`,
         selectorToolbarSearchContainer: '.bx--toolbar-search-container-expandable',
         selectorSearchMagnifier: '.bx--search-magnifier',
         selectorSearchInput: '.bx--search-input',
-        classExpandableRow: `bx--expandable-row${suffix}`,
-        classExpandableRowHidden: `bx--expandable-row--hidden${suffix}`,
-        classExpandableRowHover: `bx--expandable-row--hover${suffix}`,
-        classTableSortAscending: `bx--table-sort${suffix}--ascending`,
-        classTableSortActive: `bx--table-sort${suffix}--active`,
+        classExpandableRow: `bx--expandable-row`,
+        classExpandableRowHidden: `bx--expandable-row--hidden`,
+        classExpandableRowHover: `bx--expandable-row--hover`,
+        classTableSortAscending: `bx--table-sort--ascending`,
+        classTableSortActive: `bx--table-sort--active`,
         classToolbarSearchActive: 'bx--toolbar-search-container-active',
         classActionBarActive: 'bx--batch-actions--active',
-        classTableSelected: `bx--data-table${suffix}--selected`,
-        eventBeforeExpand: `data-table${suffix}-beforetoggleexpand`,
-        eventAfterExpand: `data-table${suffix}-aftertoggleexpand`,
-        eventBeforeSort: `data-table${suffix}-beforetogglesort`,
-        eventAfterSort: `data-table${suffix}-aftertogglesort`,
+        classTableSelected: `bx--data-table--selected`,
+        eventBeforeExpand: `data-table-beforetoggleexpand`,
+        eventAfterExpand: `data-table-aftertoggleexpand`,
+        eventBeforeSort: `data-table-beforetogglesort`,
+        eventAfterSort: `data-table-aftertogglesort`,
         eventTrigger: '[data-event]',
         eventParentContainer: '[data-parent-row]',
       });
@@ -67,7 +64,7 @@ describe('DataTable', function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector(`[data-table${suffix}]`);
+      element = document.querySelector(`[data-table]`);
       table = new DataTable(element);
     });
 
@@ -95,34 +92,26 @@ describe('DataTable', function() {
       container = document.createElement('div');
       container.innerHTML = ExpandableHTML;
       document.body.appendChild(container);
-      element = document.querySelector(`[data-table${suffix}]`);
+      element = document.querySelector(`[data-table]`);
       table = new DataTable(element);
     });
 
     it('Should toggle the row on click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      if (!componentsX) {
-        expect(document.querySelector('[data-child-row]')).toBeTruthy();
-      } else {
-        expect(
-          document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
-        ).toBe(true);
-      }
+      expect(document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row`)).toBe(
+        true
+      );
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      if (!componentsX) {
-        expect(document.querySelector('[data-child-row]')).toBeFalsy();
-      } else {
-        expect(
-          document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row${suffix}`)
-        ).toBe(false);
-      }
+      expect(document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row`)).toBe(
+        false
+      );
     });
 
     it('Should emit an event on row expansion click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       const spyToggleRowExpandEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, `data-table${suffix}-aftertoggleexpand`, spyToggleRowExpandEvent);
+      events.on(element.ownerDocument.body, `data-table-aftertoggleexpand`, spyToggleRowExpandEvent);
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleRowExpandEvent).toHaveBeenCalled();
     });
@@ -152,34 +141,34 @@ describe('DataTable', function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector(`[data-table${suffix}]`);
+      element = document.querySelector(`[data-table]`);
       firstSort = element.querySelector('[data-event="sort"]');
       table = new DataTable(element);
     });
 
     it('Should switch through tri-state sort', function() {
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains(`bx--table-sort${suffix}--ascending`)).toBe(true);
+      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(true);
       expect(firstSort.getAttribute('data-previous-value') === 'ascending').toBe(true);
 
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains(`bx--table-sort${suffix}--ascending`)).toBe(false);
+      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(false);
       expect(firstSort.getAttribute('data-previous-value') === 'descending').toBe(true);
 
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains(`bx--table-sort${suffix}--ascending`)).toBe(false);
+      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(false);
       expect(firstSort.hasAttribute('data-previous-value')).toBe(false);
     });
 
     it('Should emit an event on sort click', function() {
       const spyToggleSortEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, `data-table${suffix}-aftertogglesort`, spyToggleSortEvent);
+      events.on(element.ownerDocument.body, `data-table-aftertogglesort`, spyToggleSortEvent);
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleSortEvent).toHaveBeenCalled();
     });
 
     afterEach(function() {
-      firstSort.classList.remove(`bx--table-sort${suffix}--ascending`);
+      firstSort.classList.remove(`bx--table-sort--ascending`);
       firstSort.dataset.previousValue = '';
       events.reset();
     });
@@ -200,7 +189,7 @@ describe('DataTable', function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector(`[data-table${suffix}]`);
+      element = document.querySelector(`[data-table]`);
       table = new DataTable(element);
     });
 
@@ -245,67 +234,49 @@ describe('DataTable', function() {
     let dt;
 
     beforeEach(function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        container = document.createElement('div');
-        container.innerHTML = HTML;
-        document.body.appendChild(container);
-        dt = document.querySelector('.bx--data-table');
-        table = new DataTable(container);
-      }
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      dt = document.querySelector('.bx--data-table');
+      table = new DataTable(container);
     });
 
     it('Should open search bar on click', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-expandable');
-        const magnifier = document.querySelector('.bx--search-magnifier');
-        magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
-      }
+      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const magnifier = document.querySelector('.bx--search-magnifier');
+      magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
     });
 
     it('Should close search bar on click', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-expandable');
-        search.classList.add('bx--toolbar-search-container-active');
-        dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
-      }
+      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      search.classList.add('bx--toolbar-search-container-active');
+      dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
     });
 
     it('Should open search bar on keydown', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-expandable');
-        const magnifier = document.querySelector('.bx--search-magnifier');
-        const event = new CustomEvent('keydown', { bubbles: true });
-        event.which = 13;
-        magnifier.dispatchEvent(event);
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
-      }
+      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const magnifier = document.querySelector('.bx--search-magnifier');
+      const event = new CustomEvent('keydown', { bubbles: true });
+      event.which = 13;
+      magnifier.dispatchEvent(event);
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
     });
 
     it('Should close search bar on keydown', function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        const search = document.querySelector('.bx--toolbar-search-container-expandable');
-        const input = document.querySelector('input');
-        search.classList.add('bx--toolbar-search-container-active');
-        const event = new CustomEvent('keydown', { bubbles: true });
-        event.which = 27;
-        input.dispatchEvent(event);
-        expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
-      }
+      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const input = document.querySelector('input');
+      search.classList.add('bx--toolbar-search-container-active');
+      const event = new CustomEvent('keydown', { bubbles: true });
+      event.which = 27;
+      input.dispatchEvent(event);
+      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
     });
 
     afterEach(function() {
-      /* istanbul ignore if */
-      if (componentsX) {
-        document.body.removeChild(container);
-        table.release();
-      }
+      document.body.removeChild(container);
+      table.release();
     });
   });
 });
