@@ -8,9 +8,28 @@
 
 @import './theme-maps';
 
-/// Define theme variables
+/// Define theme variables from a map of tokens
 /// @access public
-/// @param {Map} $theme - map of theme tokens
+/// @param {Map} $theme [$carbon--theme] - Map of theme tokens
+/// @content Pass in your custom declaration blocks to be used after the token maps set theming variables.
+///
+/// @example scss
+///   // Default usage
+///   @include carbon--theme();
+///
+///   // Alternate styling (not white theme)
+///   @include carbon--theme($carbon--theme--g90) {
+///     // declarations...
+///   }
+///
+///   // Inline styling
+///   @include carbon--theme($carbon--theme--g90) {
+///     .my-dark-theme {
+///       // declarations...
+///     }
+///   }
+///
+/// @group @carbon/themes
 @mixin carbon--theme($theme: $carbon--theme) {
   $interactive-01: map-get($theme, interactive-01) !global;
   $interactive-02: map-get($theme, interactive-02) !global;

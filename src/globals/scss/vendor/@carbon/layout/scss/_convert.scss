@@ -5,19 +5,26 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Default, Use with carbon--em() and carbon--rem() functions
+/// Default font size
+/// @type Number
+/// @access public
+/// @group @carbon/layout
 $carbon--base-font-size: 16px !default;
 
 /// Convert a given px unit to a rem unit
-/// @param {px} $px
-/// @return {rem}
+/// @param {Number} $px - Number with px unit
+/// @return {Number} Number with rem unit
+/// @access public
+/// @group @carbon/layout
 @function carbon--rem($px) {
   @return ($px / $carbon--base-font-size) * 1rem;
 }
 
 /// Convert a given px unit to a em unit
-/// @param {px} $px
-/// @return {em}
+/// @param {Number} $px - Number with px unit
+/// @return {Number} Number with em unit
+/// @access public
+/// @group @carbon/layout
 @function carbon--em($px) {
   @return ($px / $carbon--base-font-size) * 1em;
 }

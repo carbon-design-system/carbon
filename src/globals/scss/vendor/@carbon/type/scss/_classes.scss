@@ -9,6 +9,9 @@
 @import 'styles';
 @import 'font-family';
 
+/// Create type classes for font families, weights, styles
+/// @access public
+/// @group @carbon/type
 @mixin carbon--type-classes {
   // Font families
   @each $name, $value in $carbon--font-families {

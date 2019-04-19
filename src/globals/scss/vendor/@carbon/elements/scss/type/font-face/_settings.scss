@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/// @type String
+/// Defines how font files are loaded and displayed by the browser
+/// @link https://css-tricks.com/almanac/properties/f/font-display/
 /// @access public
 /// @group @carbon/type
-$prefix: 'bx' !default;
+$carbon--font-display: auto !default;

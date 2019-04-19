@@ -7,6 +7,7 @@
 
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import './vendor/@carbon/elements/scss/type/reset';
+@import './vendor/@carbon/elements/scss/icons/mixins';
 
 /// Resets default browser styling
 /// @access public
@@ -30,8 +31,6 @@
 
 @include exports('css--reset') {
   @if global-variable-exists(css--reset) ==false or $css--reset==true {
-    @include carbon--type-reset;
-
     // http://cssreset.com/scripts/eric-meyer-reset-css/
     html,
     body,
@@ -191,5 +190,11 @@
     * {
       box-sizing: border-box;
     }
+
+    // Override `font: inherit` above
+    @include carbon--type-reset;
+
+    // Support for MS high contrast mode for icons
+    @include carbon--icons();
   }
 }
