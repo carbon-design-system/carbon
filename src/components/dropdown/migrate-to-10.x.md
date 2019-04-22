@@ -11,7 +11,7 @@ React and other framework variants should reflect the changes automatically.
 
 **New Structure**:
 
-```
+```bash
 bx--form-item
 └── bx--dropdown__wrapper
 │		├── bx--label
@@ -34,7 +34,7 @@ bx--form-item
 
 **Old Structure**:
 
-```
+```bash
 bx--dropdown
 ├── bx--dropdown-text
 │		└── bx--dropdown__arrow
