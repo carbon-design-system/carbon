@@ -29,10 +29,10 @@
     height: $layout-04;
     width: 100%;
     justify-content: flex-end;
-    will-change: transform;
     transform: translate3d(0, 0, 0);
     visibility: visible;
-    transition: transform $duration--fast-01 motion(exit, productive);
+    transition: transform $duration--fast-01 motion(standard, productive),
+      visibility $duration--fast-01 motion(standard, productive);
     transition-delay: $duration--fast-01;
   }
 
@@ -87,7 +87,7 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-active {
     flex: auto;
-    transition: flex $transition--expansion $carbon--standard-easing;
+    transition: flex $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--toolbar-search-container-active .#{$prefix}--search {
@@ -185,7 +185,6 @@
     width: auto;
     max-width: $layout-01;
     fill: $ui-05;
-    transition: $transition--base;
   }
 
   //-------------------------------------------------
@@ -196,7 +195,6 @@
     height: $layout-04;
     opacity: 1;
     position: relative;
-    transition: opacity $transition--base;
   }
 
   .#{$prefix}--toolbar-search-container-persistent + .#{$prefix}--toolbar-content {
@@ -240,7 +238,8 @@
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
     visibility: hidden;
     transform: translate3d(0, 48px, 0);
-    transition: transform $duration--fast-01 motion(entrance, productive);
+    transition: transform $duration--fast-01 motion(standard, productive),
+      visibility $duration--fast-01 motion(standard, productive);
     transition-delay: 0;
   }
 
@@ -259,8 +258,8 @@
     height: 100%;
     will-change: transform;
     background-color: $brand-01;
-    transition: transform $duration--fast-01 motion(exit, productive), visibility $duration--fast-01 motion(exit, productive),
-      opacity $duration--fast-01 motion(exit, productive);
+    transition: transform $duration--fast-01 motion(standard, productive),
+      visibility $duration--fast-01 motion(standard, productive), opacity $duration--fast-01 motion(standard, productive);
     transform: translate3d(0, 48px, 0);
     transition-delay: 0;
     pointer-events: none;
@@ -344,11 +343,11 @@
     content: '';
     background-color: $ui-01;
     border: none;
+    transition: opacity $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
     opacity: 0;
-    transition: opacity $transition--base $carbon--standard-easing;
   }
 
   // cancel btn
