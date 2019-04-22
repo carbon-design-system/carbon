@@ -10,7 +10,7 @@ Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is
 
 **New structure**:
 
-```
+```bash
 bx--structured-list
 ├── bx--structured-list-thead
 |	  └── bx--structured-list-row
@@ -25,7 +25,7 @@ bx--structured-list
 
 **Old structure**:
 
-```
+```bash
 bx--structured-list
 ├── bx--structured-list-thead
 |	  └── bx--structured-list-row
@@ -37,8 +37,6 @@ bx--structured-list
     	  |   └── bx--structured-list-svg (selectable)
     	  └── bx--structured-list-td
 ```
-
-
 
 ### SCSS
 

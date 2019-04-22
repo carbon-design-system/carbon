@@ -9,7 +9,7 @@ There are some markup changes and an icon from [`carbon-elements`](https://githu
 
 **New structure**:
 
-```
+```bash
 bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
@@ -21,7 +21,7 @@ bx--form-item
 
 **Old structure**:
 
-```
+```bash
 bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
@@ -29,14 +29,12 @@ bx--form-item
 └── bx--form-requirement (invalid only)
 ```
 
-
-
 ### SCSS
 
 One change to an exisiting selector, two new selectors.
 
-| v9                    | v10                                           | Note                                                         |
-| --------------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| v9                    | v10                                           | Note                                                                                        |
+| --------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `input[data-invalid]` | `bx--text-input__field-wrapper[data-invalid]` | :eyes: Changed; Invalid attribute is now in the input container instead of the input itself |
-| -                     | `bx--text-input__field-wrapper`               | :sparkles: New                                               |
-| -                     | `bx--text-input__invalid-icon`                | :sparkles: New                                               |
+| -                     | `bx--text-input__field-wrapper`               | :sparkles: New                                                                              |
+| -                     | `bx--text-input__invalid-icon`                | :sparkles: New                                                                              |

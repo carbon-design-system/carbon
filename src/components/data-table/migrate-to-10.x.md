@@ -11,18 +11,18 @@ React and other framework variants should reflect the changes automatically.
 - All `-v2`'s in selectors have been removed
 - All SVG icons have changed to new icons.
 - Structural changes and new selectors in the table title. See structure below and SCSS section for more details.
-- Structural changes and new selectors in the table toolbar.  See structure below and SCSS section for more details.
+- Structural changes and new selectors in the table toolbar. See structure below and SCSS section for more details.
 - Toolbar overflow menu now uses the overflow menu component `<ul>` markup instead of just `button.bx--batch-actions`
 - `bx—search` container in toolbar no longer has the `bx--search—light` class
 - Batch action buttons no longer have `bx--btn—ghost` class
-- New markup/selector involving expandable features includes a `div.bx--child-row-inner-container`  as a wrapper for content within the child row `td`.
-- New markup/selectors involving sortable features include an additional icon `bx--table-sort__icon-unsorted`   for non-sorted state, and a new class for sortable data table `bx--data-table—-sort`.
-- New selectors `bx—table-column-checkbox`  and `bx—table-column-menu` for checkbox and overflow menu `td`'s and `th`'s.
+- New markup/selector involving expandable features includes a `div.bx--child-row-inner-container` as a wrapper for content within the child row `td`.
+- New markup/selectors involving sortable features include an additional icon `bx--table-sort__icon-unsorted` for non-sorted state, and a new class for sortable data table `bx--data-table—-sort`.
+- New selectors `bx—table-column-checkbox` and `bx—table-column-menu` for checkbox and overflow menu `td`'s and `th`'s.
 - New selector for `li` within a row overflow menu `bx--table-row--menu-option`. See SCSS section for more details.
 
 **New Structure**:
 
-```html
+```bash
 bx--data-table-container
 ├── bx--data-table-header
 |		├── bx--data-table-header__title
@@ -41,8 +41,6 @@ bx--data-table-container
     └── tbody
 pagination
 ```
-
-
 
 ### Selectors
 

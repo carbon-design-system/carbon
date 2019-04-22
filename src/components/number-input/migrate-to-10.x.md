@@ -11,7 +11,7 @@ Icons from [`carbon-elements`](https://github.com/IBM/carbon-elements) package a
 
 **New Structure**:
 
-```html
+```bash
 bx--form-item
 └── bx--number (optional: bx--number--nolabel, bx--number--helpertext)
 		├── bx--label (optional)
@@ -29,7 +29,7 @@ bx--form-item
 
 **Old Structure**:
 
-```html
+```bash
 bx--form-item
 └── bx--number (optional: bx--number--nolabel, bx--number--helpertext)
 		├── bx--label (optional)

@@ -12,7 +12,7 @@ There are several structural changes and new icons from [`carbon-elements`](http
 
 **New Structure**:
 
-```html
+```bash
 bx--pagination
 ├── bx--pagination__left
 |	  ├── bx--pagination__text
@@ -36,7 +36,7 @@ bx--pagination
 
 **Old Structure**:
 
-```html
+```bash
 bx--pagination
 ├── bx--pagination__left
 |	  ├── bx--select
@@ -53,8 +53,6 @@ bx--pagination
 	  └── bx--pagination__button bx--pagination__button--forward
 		    └── bx--pagination__button-icon
 ```
-
-
 
 ### SCSS
 

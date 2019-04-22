@@ -10,7 +10,7 @@ Some new markup has been introduced. Also icon from [`carbon-elements`](https://
 
 **New structure**:
 
-```
+```bash
 bx--progress
 └── bx--progress-step
     ├── svg
@@ -22,24 +22,22 @@ bx--progress
 
 **Old structure**:
 
-```
-bx--progress 
+```bash
+bx--progress
 └── bx--progress-step
     ├── svg
     ├── bx--progress-label
     └── progress line
 ```
 
-
-
 ### SCSS
 
 There are two new selectors introduced to progress indicator, and three existing classes now used as selectors for progress indicator tooltip markup. The remaining progress indicator selectors have no changes.
 
-| v9   | v10                     | Note                                                         |
-| ---- | ----------------------- | ------------------------------------------------------------ |
-| -    | `bx--progress-optional` | ✨New; Used as a secondary label                              |
-| -    | `bx--tooltip_multi`     | ✨New; Used as an addition to regular tooltip class to differentiate styles between a single line tooltip or multi line tooltip for progress step |
-| -    | `bx—tooltip`            | ✨New within progress indicator, but existing an class.       |
-| -    | `bx—tooltip__caret`     | ✨New within progress indicator, but existing an class.       |
-| -    | `bx—tooltip__text`      | ✨New within progress indicator, but existing an class.       |
+| v9  | v10                     | Note                                                                                                                                              |
+| --- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -   | `bx--progress-optional` | ✨New; Used as a secondary label                                                                                                                  |
+| -   | `bx--tooltip_multi`     | ✨New; Used as an addition to regular tooltip class to differentiate styles between a single line tooltip or multi line tooltip for progress step |
+| -   | `bx—tooltip`            | ✨New within progress indicator, but existing an class.                                                                                           |
+| -   | `bx—tooltip__caret`     | ✨New within progress indicator, but existing an class.                                                                                           |
+| -   | `bx—tooltip__text`      | ✨New within progress indicator, but existing an class.                                                                                           |

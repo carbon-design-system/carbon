@@ -10,7 +10,7 @@ There are some markup changes and an icon from [`carbon-elements`](https://githu
 
 **New structure**:
 
-```
+```bash
 bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
@@ -22,7 +22,7 @@ bx--form-item
 
 **Old structure**:
 
-```
+```bash
 bx--form-item
 ├── bx--label
 ├── bx--text-area
@@ -30,14 +30,12 @@ bx--form-item
 └── bx--form-requirement (invalid only)
 ```
 
-
-
 ### SCSS
 
 One change to an exisiting selector and two new selectors.
 
-| v9                       | v10                                    | Note                                                         |
-| ------------------------ | -------------------------------------- | ------------------------------------------------------------ |
+| v9                       | v10                                    | Note                                                                                           |
+| ------------------------ | -------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `textarea[data-invalid]` | `bx--text-area__wrapper[data-invalid]` | :eyes: Changed; Invalid attribute is now in the textarea container instead of the input itself |
-| -                        | `bx--text-area__wrapper`               | :sparkles: New                                               |
-| -                        | `bx--text-area__invalid-icon`          | :sparkles: New                                               |
+| -                        | `bx--text-area__wrapper`               | :sparkles: New                                                                                 |
+| -                        | `bx--text-area__invalid-icon`          | :sparkles: New                                                                                 |

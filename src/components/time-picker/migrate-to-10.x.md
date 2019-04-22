@@ -10,7 +10,7 @@ Some markup changes and icon from [`carbon-elements`](https://github.com/IBM/car
 
 **New structure**:
 
-```html
+```bash
 bx--form-item
 ├── bx--label
 ├── bx--time-picker
@@ -29,7 +29,7 @@ bx--form-item
 
 **Old structure**:
 
-```html
+```bash
 bx--form-item
 └── bx--time-picker
 		├── bx--time-picker__input
@@ -50,6 +50,6 @@ bx--form-item
 
 The `data-invalid` attribute has been placed on the time picker wrapper div
 
-| v9   | v10                             | Note           |
-| ---- | ------------------------------- | -------------- |
-| -    | `bx--time-picker[data-invalid]` | :eyes: Changed |
+| v9  | v10                             | Note           |
+| --- | ------------------------------- | -------------- |
+| -   | `bx--time-picker[data-invalid]` | :eyes: Changed |
