@@ -18,7 +18,7 @@ React and other framework variants should reflect the changes automatically.
 - New markup/selector involving expandable features includes a `div.bx--child-row-inner-container`  as a wrapper for content within the child row `td`.
 - New markup/selectors involving sortable features include an additional icon `bx--table-sort__icon-unsorted`   for non-sorted state, and a new class for sortable data table `bx--data-table—-sort`.
 - New selectors `bx—table-column-checkbox`  and `bx—table-column-menu` for checkbox and overflow menu `td`'s and `th`'s. 
-- New selector for `li` within a row overflow menu ``bx--table-row--menu-option` `. See SCSS section for more details.
+- New selector for `li` within a row overflow menu `bx--table-row--menu-option`. See SCSS section for more details.
 
 **New Structure**:
 
