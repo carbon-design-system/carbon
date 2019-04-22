@@ -34,16 +34,29 @@ export default class Loading extends React.Component {
      * Specify whether you would like the small variant of <Loading>
      */
     small: PropTypes.bool,
+
+    /**
+     * Specify an description that would be used to best describe the loading state
+     */
+    description: PropTypes.string,
   };
 
   static defaultProps = {
     active: true,
     withOverlay: true,
     small: false,
+    description: 'Active loading indicator',
   };
 
   render() {
-    const { active, className, withOverlay, small, ...other } = this.props;
+    const {
+      active,
+      className,
+      withOverlay,
+      small,
+      description,
+      ...other
+    } = this.props;
 
     const loadingClasses = classNames(`${prefix}--loading`, className, {
       [`${prefix}--loading--small`]: small,
@@ -57,6 +70,7 @@ export default class Loading extends React.Component {
     const loading = (
       <div
         {...other}
+        aria-label={description}
         aria-live={active ? 'assertive' : 'off'}
         className={loadingClasses}>
         <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
