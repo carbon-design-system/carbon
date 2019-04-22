@@ -13,7 +13,7 @@ Minor markup changes in the selectable and expandable tile. Icons from [`carbon-
 bx--tile-input
 bx--tile--selectable
 ├── bx--tile__checkmark
-|   └── svg* (new icon)
+│   └── svg* (new icon)
 └──  bx--tile-content
 ```
 
@@ -54,7 +54,7 @@ bx--tile--selectable
 bx--tile--selectable
 ├── bx--tile-input
 ├── bx--tile__checkmark
-|   └── svg* (old icon)
+│   └── svg* (old icon)
 └──  bx--tile-content
 ```
 
