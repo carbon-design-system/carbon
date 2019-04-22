@@ -16,6 +16,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
+/// Text area styles
+/// @access private
+/// @group text-area
 @mixin text-area {
   .#{$prefix}--text-area {
     @include reset;

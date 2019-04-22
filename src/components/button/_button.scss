@@ -12,6 +12,9 @@
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
+/// Button styles
+/// @access private
+/// @group button
 @mixin button {
   // button set styles
   .#{$prefix}--btn-set {

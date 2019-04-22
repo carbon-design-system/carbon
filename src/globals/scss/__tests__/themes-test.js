@@ -72,10 +72,6 @@ const classic = [
   'accordion-title-margin',
   'accordion-content-padding',
 
-  // Card
-  'card-text-align',
-  'card-flex-align',
-
   // Checkbox
   'checkbox-border-width',
 
