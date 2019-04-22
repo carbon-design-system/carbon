@@ -24,20 +24,19 @@ React and other framework variants should reflect the changes automatically.
 
 ```html
 bx--data-table-container
-├── bx--data-table-header <!-- new markup -->
-|	├── bx--data-table-header__title <!-- new markup -->
-|   └── bx--data-table-header__description <!-- new markup -->
+├── bx--data-table-header 
+|	├── bx--data-table-header__title 
+|   └── bx--data-table-header__description 
 ├── bx--table-toolbar
 |   ├── bx--batch-actions
-|	|	├── bx--batch-action-list <!-- buttons contain new icons -->
+|	|	├── bx--batch-action-list 
 |	|	└── bx--batch-summary
 |   |		└── bx--batch-summary__para
 |   └── bx--toolbar-content
 |		├── bx--toolbar-search-container-expandable (bx--toolbar-search-container-persistent) 
-|		|	<!-- new icons for search magnifier & close button -->
-|		├── bx--overflow-menu bx--toolbar-action <!-- new overflow menu markup & icon -->
-|   	└── bx--btn--primary <!-- button contains new icon -->
-└── bx--data-table <!-- new class for sortable table -->
+|		├── bx--overflow-menu bx--toolbar-action 
+|   	└── bx--btn--primary 
+└── bx--data-table 
 	├── thead
     └── tbody
 pagination
