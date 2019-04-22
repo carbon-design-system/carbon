@@ -14,16 +14,16 @@ Some markup changes and icon from [`carbon-elements`](https://github.com/IBM/car
 bx--form-item
 ├── bx--label
 ├── bx--time-picker
-|	├── bx--time-picker__input
-|	|	└── bx--time-picker__input-field (additional classes changed)
-|	├── bx--time-picker__select (additional classes changed)
-|	|	├── bx--label bx--visually-hidden
-|	|	├── bx--select-input
-|	|	└── svg* (new icon)
-|	├── bx--time-picker__select (additional classes changed)
-|	|	├── bx--label bx--visually-hidden
-|	|	├── bx--select-input
-|	|	└── svg* (new icon)
+│   ├── bx--time-picker__input
+│   │   └── bx--time-picker__input-field (additional classes changed)
+│   ├── bx--time-picker__select (additional classes changed)
+│   │   ├── bx--label bx--visually-hidden
+│   │   ├── bx--select-input
+│   │   └── svg* (new icon)
+│   └── bx--time-picker__select (additional classes changed)
+│       ├── bx--label bx--visually-hidden
+│       ├── bx--select-input
+│       └── svg* (new icon)
 └── bx--form-requirement (invalid only)
 ```
 
@@ -32,18 +32,18 @@ bx--form-item
 ```bash
 bx--form-item
 └── bx--time-picker
-	├── bx--time-picker__input
-	|	├── bx--label
-	|	├── bx--time-picker__input-field
-	|	└── bx--form-requirement
-	├── bx--time-picker__select
-	|	├── bx--label bx--visually-hidden
-	|	├── bx--select-input
-	|	└── svg* (old icon)
-	└── bx--time-picker__select
-		├── bx--label bx--visually-hidden
-		├── bx--select-input
-		└── svg* (old icon)
+    ├── bx--time-picker__input
+    │   ├── bx--label
+    │   ├── bx--time-picker__input-field
+    │   └── bx--form-requirement
+    ├── bx--time-picker__select
+    │   ├── bx--label bx--visually-hidden
+    │   ├── bx--select-input
+    │   └── svg* (old icon)
+    └── bx--time-picker__select
+        ├── bx--label bx--visually-hidden
+        ├── bx--select-input
+        └── svg* (old icon)
 ```
 
 ### SCSS

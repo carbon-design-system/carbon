@@ -14,8 +14,8 @@ bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
 ├── bx--text-input__field-wrapper
-|	├── bx--text-input__invalid-icon (invalid only)
-|   └── bx--text-input
+│   ├── bx--text-input__invalid-icon (invalid only)
+│   └── bx--text-input
 └── bx--form-requirement (invalid only)
 ```
 

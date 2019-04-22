@@ -13,14 +13,14 @@ Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is
 ```bash
 bx--structured-list
 ├── bx--structured-list-thead
-|	└── bx--structured-list-row
-|		└── bx--structured-list-th
+│   └── bx--structured-list-row
+│       └── bx--structured-list-th
 └── bx--structured-list-tbody
     └── bx--structured-list-row
-    	├── bx--structured-list-td
-    	├── bx--structured-list-input
-    	└── bx--structured-list-td (selectable)
-    		└── bx--structured-list-svg (selectable)
+        ├── bx--structured-list-td
+        ├── bx--structured-list-input
+        └── bx--structured-list-td (selectable)
+            └── bx--structured-list-svg (selectable)
 ```
 
 **Old structure**:
@@ -28,14 +28,14 @@ bx--structured-list
 ```bash
 bx--structured-list
 ├── bx--structured-list-thead
-|	└── bx--structured-list-row
-|		└── bx--structured-list-th
+│   └── bx--structured-list-row
+│       └── bx--structured-list-th
 └── bx--structured-list-tbody
     └── bx--structured-list-row
         ├── bx--structured-list-input
-    	├── bx--structured-list-td (selectable)
-    	|   └── bx--structured-list-svg (selectable)
-    	└── bx--structured-list-td
+        ├── bx--structured-list-td (selectable)
+        │   └── bx--structured-list-svg (selectable)
+        └── bx--structured-list-td
 ```
 
 ### SCSS
