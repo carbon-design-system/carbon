@@ -135,10 +135,10 @@ describe('<ModalFooter />', () => {
       <ModalFooter secondaryButtonText="test" danger />
     );
 
-    it('renders danger--primary button if primary text && danger', () => {
+    it('renders danger button if primary text && danger', () => {
       const buttonComponent = primaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.props().kind).toBe('danger--primary');
+      expect(buttonComponent.props().kind).toBe('danger');
     });
 
     it('renders tertiary button if secondary text && danger', () => {

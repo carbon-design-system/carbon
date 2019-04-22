@@ -226,7 +226,7 @@ describe('Danger Modal', () => {
       expect(modalButtons[0].props.kind).toEqual(
         !componentsX ? 'tertiary' : 'secondary'
       );
-      expect(modalButtons[1].props.kind).toEqual('danger--primary');
+      expect(modalButtons[1].props.kind).toEqual('danger');
     });
   });
 });
