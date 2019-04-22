@@ -128,7 +128,6 @@ export default class AccordionItem extends Component {
         className={classNames}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        role="presentation"
         {...other}>
         <Expando
           type="button"
