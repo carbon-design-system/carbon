@@ -43,29 +43,6 @@ bx--data-table-container
 pagination
 ```
 
-**Old Structure**:
-
-```html
-bx--data-table-container
-├── bx--data-table-header <!-- new markup -->
-|	├── bx--data-table-header__title <!-- new markup -->
-|   └── bx--data-table-header__description <!-- new markup -->
-├── bx--table-toolbar
-|   ├── bx--batch-actions
-|	|	├── bx--batch-action-list <!-- buttons contain new icon -->
-|	|	└── bx--batch-summary
-|   |		└── bx--batch-summary__para
-|   └── bx--toolbar-content
-|		├── bx--toolbar-search-container-expandable (bx--toolbar-search-container-persistent) 
-|		|	<!-- new icons for search magnifier & close button -->
-|		├── bx--overflow-menu bx--toolbar-action <!-- new overflow menu markup & icon -->
-|   	└── bx--btn--primary <!-- button contains new icon -->
-└── bx--data-table <!-- new class for sortable table -->
-	├── thead
-    └── tbody
-pagination
-```
-
 
 
 ### Selectors
