@@ -14,17 +14,17 @@ Icons from [`carbon-elements`](https://github.com/IBM/carbon-elements) package a
 ```bash
 bx--form-item
 └── bx--number (optional: bx--number--nolabel, bx--number--helpertext)
-		├── bx--label (optional)
-		├── bx--form__helper-text (optional)
+	├── bx--label (optional)
+	├── bx--form__helper-text (optional)
     ├── bx--number__input-wrapper
-   	|		├── input
-    |		├──svg bx--number__invalid (invalid use only)
+   	|	├── input
+    |	├──svg bx--number__invalid (invalid use only)
     | 	└── bx--number__controls
-    | 			├── bx--number__control-btn up-icon
-    |				|		└──svg
-    |				└── bx--number__control-btn down-icon
-    |						└──svg
-		└── form requirement (invalid use only)
+    | 		├── bx--number__control-btn up-icon
+    |		|	└──svg
+    |		└── bx--number__control-btn down-icon
+    |			└──svg
+	└── form requirement (invalid use only)
 ```
 
 **Old Structure**:
@@ -32,15 +32,15 @@ bx--form-item
 ```bash
 bx--form-item
 └── bx--number (optional: bx--number--nolabel, bx--number--helpertext)
-		├── bx--label (optional)
-		├── input
+	├── bx--label (optional)
+	├── input
     ├── bx--number__controls
     | 	├── bx--number__control-btn up-icon
-    |		|		└──svg
-    |		└── bx--number__control-btn down-icon
-    |				└──svg
+    |	|	└──svg
+    |	└── bx--number__control-btn down-icon
+    |		└──svg
     ├── form requirement (invalid use only)
-		└── bx--form__helper-text (optional)
+	└── bx--form__helper-text (optional)
 ```
 
 ### SCSS

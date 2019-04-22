@@ -6,24 +6,22 @@ Design change around the spinner UI involves markup change for the loading SVG's
 
 ```html
 <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-	<circle class="bx--loading__background" cx="0" cy="0" r="30" />
-	<circle class="bx--loading__stroke" cx="0" cy="0" r="30" />
+  <circle class="bx--loading__background" cx="0" cy="0" r="30" />
+  <circle class="bx--loading__stroke" cx="0" cy="0" r="30" />
 </svg>
 ```
 
 **Old Markup**:
 
 ```html
-<svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-	<circle  cx="0" cy="0" r="37.5" />
-</svg>
+<svg class="bx--loading__svg" viewBox="-75 -75 150 150"><circle cx="0" cy="0" r="37.5" /></svg>
 ```
 
-### 
+###
 
 ### SCSS
 
-| v9   | v10                       | Note |
-| ---- | ------------------------- | ---- |
-| -    | `bx--loading__background` | ✨New |
-| -    | `bx--loading__stroke`     | ✨New |
+| v9  | v10                       | Note  |
+| --- | ------------------------- | ----- |
+| -   | `bx--loading__background` | ✨New |
+| -   | `bx--loading__stroke`     | ✨New |

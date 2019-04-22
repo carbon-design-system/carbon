@@ -12,20 +12,20 @@ Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https
 
 **New Structure**:
 
-```html
-bx--form-item 
-├── bx--label 
-├── bx--form__helper-text (optional) 
-├── input 
+```bash
+bx--form-item
+├── bx--label
+├── bx--form__helper-text (optional)
+├── input
 └── bx--form-requirement (invalid use only)
 ```
 
 **Old Structure**:
 
-```html
-bx--form-item 
-├── input 
-├── bx--label 
+```bash
+bx--form-item
+├── input
+├── bx--label
 └── bx--form-requirement (invalid use only)
 ```
 

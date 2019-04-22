@@ -25,19 +25,19 @@ React and other framework variants should reflect the changes automatically.
 ```bash
 bx--data-table-container
 ├── bx--data-table-header
-|		├── bx--data-table-header__title
+|	├── bx--data-table-header__title
 | 	└── bx--data-table-header__description
 ├── bx--table-toolbar
 |   ├── bx--batch-actions
-|		|		├── bx--batch-action-list
-|		|		└── bx--batch-summary
-|   |				└── bx--batch-summary__para
+|	|	├── bx--batch-action-list
+|	|	└── bx--batch-summary
+|   |		└── bx--batch-summary__para
 |   └── bx--toolbar-content
-|				├── bx--toolbar-search-container-expandable (bx--toolbar-search-container-persistent)
-|				├── bx--overflow-menu bx--toolbar-action
-|   		└── bx--btn--primary
+|		├── bx--toolbar-search-container-expandable (bx--toolbar-search-container-persistent)
+|		├── bx--overflow-menu bx--toolbar-action
+|   	└── bx--btn--primary
 └── bx--data-table
-		├── thead
+	├── thead
     └── tbody
 pagination
 ```

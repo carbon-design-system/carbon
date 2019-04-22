@@ -15,23 +15,23 @@ There are several structural changes and new icons from [`carbon-elements`](http
 ```bash
 bx--pagination
 ├── bx--pagination__left
-|	  ├── bx--pagination__text
-|	  ├── bx--select
-|   |	  ├── bx--select-input
-|  	|	  |	  └── bx--select-option
-|   |	  └── bx--select__arrow
+|	├── bx--pagination__text
+|	├── bx--select
+|   |	├── bx--select-input
+|  	|	|	└── bx--select-option
+|   |	└── bx--select__arrow
 |   └── bx--pagination__text
 └── bx--pagination__right
     ├── bx--pagination__text
-	  ├── bx--select
-    |	  ├── bx--select-input
-  	|	  |	   └── bx--select-option
-    |	  └── bx--select__arrow
+	├── bx--select
+    |	├── bx--select-input
+  	|	|	└── bx--select-option
+    |	└── bx--select__arrow
     ├── bx--pagination__text
-	  ├── bx--pagination__button bx--pagination__button--backward
-	  |	  └── bx--pagination__nav-arrow
-	  └── bx--pagination__button bx--pagination__button--forward
-		    └── bx--pagination__nav-arrow
+	├── bx--pagination__button bx--pagination__button--backward
+	|	└── bx--pagination__nav-arrow
+	└── bx--pagination__button bx--pagination__button--forward
+		└── bx--pagination__nav-arrow
 ```
 
 **Old Structure**:
@@ -39,19 +39,19 @@ bx--pagination
 ```bash
 bx--pagination
 ├── bx--pagination__left
-|	  ├── bx--select
-|   |	  ├── bx--select-input
-|  	|	  |	  └── bx--select-option
-|   |	  └── bx--select__arrow
+|	├── bx--select
+|   |	├── bx--select-input
+|  	|	|	└── bx--select-option
+|   |	└── bx--select__arrow
 |   └── bx--pagination__text
 └── bx--pagination__right
     ├── bx--pagination__text
-	  ├── bx--pagination__button bx--pagination__button--backward
-	  |	  └── bx--pagination__button-icon
-	  ├── bx--visually-hidden
-	  ├── bx--text-input
-	  └── bx--pagination__button bx--pagination__button--forward
-		    └── bx--pagination__button-icon
+	├── bx--pagination__button bx--pagination__button--backward
+	|	└── bx--pagination__button-icon
+	├── bx--visually-hidden
+	├── bx--text-input
+	└── bx--pagination__button bx--pagination__button--forward
+		└── bx--pagination__button-icon
 ```
 
 ### SCSS

@@ -15,10 +15,10 @@ bx--form-item
 └── bx--slider-container
     ├── bx--slider__range-label
     ├── bx--slider
-    |	  ├── bx--slider__thumb
-    |	  ├── bx--slider__track
-    |	  ├── x--slider__filled-track
-    |	  └── bx--slider__input
+    |	├── bx--slider__thumb
+    |	├── bx--slider__track
+    |	├── x--slider__filled-track
+    |	└── bx--slider__input
     ├── bx--slider__range-label
     └── bx--text-input bx--slider-text-input
 ```
@@ -30,10 +30,10 @@ bx--form-item
 └── bx--slider-container
     ├── bx--slider__range-label
     ├── bx--slider
-    |	  ├── bx--slider__thumb
-    |	  ├── bx--slider__track
-    |	  ├── x--slider__filled-track
-    |	  └── bx--slider__input
+    |	├── bx--slider__thumb
+    |	├── bx--slider__track
+    |	├── x--slider__filled-track
+    |	└── bx--slider__input
     ├── bx--label
     ├── bx--slider__range-label
     └── bx--text-input bx--slider-text-input

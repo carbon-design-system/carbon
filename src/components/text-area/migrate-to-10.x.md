@@ -15,7 +15,7 @@ bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
 ├── bx--text-area__wrapper
-|	  ├── bx--text-area__invalid-icon (invalid only)
+|	├── bx--text-area__invalid-icon (invalid only)
 |   └── bx--text-area
 └── bx--form-requirement (invalid only)
 ```
