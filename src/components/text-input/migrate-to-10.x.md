@@ -14,7 +14,7 @@ bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
 ├── bx--text-input__field-wrapper
-|	├── bx--text-input__invalid-icon (invalid only)
+|	  ├── bx--text-input__invalid-icon (invalid only)
 |   └── bx--text-input
 └── bx--form-requirement (invalid only)
 ```
@@ -40,4 +40,3 @@ One change to an exisiting selector, two new selectors.
 | `input[data-invalid]` | `bx--text-input__field-wrapper[data-invalid]` | :eyes: Changed; Invalid attribute is now in the input container instead of the input itself |
 | -                     | `bx--text-input__field-wrapper`               | :sparkles: New                                               |
 | -                     | `bx--text-input__invalid-icon`                | :sparkles: New                                               |
-

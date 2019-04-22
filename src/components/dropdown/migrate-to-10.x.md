@@ -11,41 +11,41 @@ React and other framework variants should reflect the changes automatically.
 
 **New Structure**:
 
-```
+```html
 bx--form-item
 └── bx--dropdown__wrapper
-|	├── bx--label
-|	├── bx--form__helper-text (optional)
+|		├── bx--label
+|		├── bx--form__helper-text (optional)
 |   └── bx--dropdown
-|  		├── bx--dropdown__invalid-icon (invalid use only)
-|   	├── bx--dropdown-text
-|    	├── bx--dropdown__arrow-container
-|    	|	└── bx--dropdown__arrow
-|    	└── <li>
-|    		└── bx--dropdown-list
-|    			├── bx--dropdown-item
-|    			|	└── bx--dropdown-link
-|    			├── bx--dropdown-item
-|    			|	└── bx--dropdown-link
-|    			└── bx--dropdown-item
-|    				└── bx--dropdown-link
+|  			├── bx--dropdown__invalid-icon (invalid use only)
+|   		├── bx--dropdown-text
+|    		├── bx--dropdown__arrow-container
+|    		|		└── bx--dropdown__arrow
+|    		└── <li>
+|    				└── bx--dropdown-list
+|    						├── bx--dropdown-item
+|    						|		└── bx--dropdown-link
+|    						├── bx--dropdown-item
+|    						|		└── bx--dropdown-link
+|    						└── bx--dropdown-item
+|    								└── bx--dropdown-link
 └── form requirement (invalid use only)
 ```
 
 **Old Structure**:
 
-```
+```html
 bx--dropdown
 ├── bx--dropdown-text
-|	└── bx--dropdown__arrow
+|		└── bx--dropdown__arrow
 └── <li>
-	└── dropdown list
-		├── bx--dropdown-item
-        |	└── bx--dropdown-link
+		└── dropdown list
+				├── bx--dropdown-item
+        |		└── bx--dropdown-link
         ├── dropdown list item
-       	|	└── bx--dropdown-link
+       	|		└── bx--dropdown-link
         └── bx--dropdown-item
-        	└── bx--dropdown-link
+        		└── bx--dropdown-link
 ```
 
 ### SCSS

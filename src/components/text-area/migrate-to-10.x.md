@@ -1,4 +1,4 @@
-### HTML 
+### HTML
 
 There are some markup changes and an icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Please see the new structure below and reference the [text input page](https://next.carbondesignsystem.com/components/text-input/code) in our site to copy the specified new markup. React and other framework variants should reflect the change automatically.
 
@@ -15,7 +15,7 @@ bx--form-item
 ├── bx--label
 ├── bx--form__helper-text
 ├── bx--text-area__wrapper
-|	├── bx--text-area__invalid-icon (invalid only)
+|	  ├── bx--text-area__invalid-icon (invalid only)
 |   └── bx--text-area
 └── bx--form-requirement (invalid only)
 ```
@@ -41,4 +41,3 @@ One change to an exisiting selector and two new selectors.
 | `textarea[data-invalid]` | `bx--text-area__wrapper[data-invalid]` | :eyes: Changed; Invalid attribute is now in the textarea container instead of the input itself |
 | -                        | `bx--text-area__wrapper`               | :sparkles: New                                               |
 | -                        | `bx--text-area__invalid-icon`          | :sparkles: New                                               |
-

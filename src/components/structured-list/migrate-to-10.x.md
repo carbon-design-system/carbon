@@ -4,7 +4,7 @@ Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is
 
 **Things to note**:
 
-- `bx--structured-list-input` withing the tbody rows has moved. 
+- `bx--structured-list-input` withing the tbody rows has moved.
 - Selectable rows' SVG `td` has moved to the end of the row.
 - New icon is being used.
 
@@ -13,14 +13,14 @@ Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is
 ```
 bx--structured-list
 ├── bx--structured-list-thead
-|	└── bx--structured-list-row
-|		└── bx--structured-list-th
+|	  └── bx--structured-list-row
+|		    └── bx--structured-list-th
 └── bx--structured-list-tbody
-    └── bx--structured-list-row 
-    	├── bx--structured-list-td
-    	├── bx--structured-list-input
-    	└── bx--structured-list-td (selectable)
-    		└── bx--structured-list-svg (selectable)
+    └── bx--structured-list-row
+    	  ├── bx--structured-list-td
+    	  ├── bx--structured-list-input
+    	  └── bx--structured-list-td (selectable)
+    		    └── bx--structured-list-svg (selectable)
 ```
 
 **Old structure**:
@@ -28,14 +28,14 @@ bx--structured-list
 ```
 bx--structured-list
 ├── bx--structured-list-thead
-|	└── bx--structured-list-row
-|		└── bx--structured-list-th
+|	  └── bx--structured-list-row
+|		    └── bx--structured-list-th
 └── bx--structured-list-tbody
-    └── bx--structured-list-row 
+    └── bx--structured-list-row
         ├── bx--structured-list-input
-    	├── bx--structured-list-td (selectable)
-    	|   └── bx--structured-list-svg (selectable)
-    	└── bx--structured-list-td 
+    	  ├── bx--structured-list-td (selectable)
+    	  |   └── bx--structured-list-svg (selectable)
+    	  └── bx--structured-list-td
 ```
 
 

@@ -4,7 +4,7 @@ Our internal changes involves re-ordering the markup.  Please see the new struct
 
 **Things to note**:
 
-- `bx—label` is the only element that has moved. 
+- `bx—label` is the only element that has moved.
 - There is no new markup.
 
 **New structure**:
@@ -15,10 +15,10 @@ bx--form-item
 └── bx--slider-container
     ├── bx--slider__range-label
     ├── bx--slider
-    |	├── bx--slider__thumb
-    |	├── bx--slider__track
-    |	├── x--slider__filled-track
-    |	└── bx--slider__input
+    |	  ├── bx--slider__thumb
+    |	  ├── bx--slider__track
+    |	  ├── x--slider__filled-track
+    |	  └── bx--slider__input
     ├── bx--slider__range-label
     └── bx--text-input bx--slider-text-input
 ```
@@ -30,10 +30,10 @@ bx--form-item
 └── bx--slider-container
     ├── bx--slider__range-label
     ├── bx--slider
-    |	├── bx--slider__thumb
-    |	├── bx--slider__track
-    |	├── x--slider__filled-track
-    |	└── bx--slider__input
+    |	  ├── bx--slider__thumb
+    |	  ├── bx--slider__track
+    |	  ├── x--slider__filled-track
+    |	  └── bx--slider__input
     ├── bx--label
     ├── bx--slider__range-label
     └── bx--text-input bx--slider-text-input

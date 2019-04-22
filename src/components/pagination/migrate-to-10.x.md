@@ -14,44 +14,44 @@ There are several structural changes and new icons from [`carbon-elements`](http
 
 ```html
 bx--pagination
-└── bx--pagination__left
-|	├── bx--pagination__text
-|	├── bx--select
-|   |	├── bx--select-input
-|  	|	|	└── bx--select-option
-|   |	└── bx--select__arrow
+├── bx--pagination__left
+|	  ├── bx--pagination__text
+|	  ├── bx--select
+|   |	  ├── bx--select-input
+|  	|	  |	  └── bx--select-option
+|   |	  └── bx--select__arrow
 |   └── bx--pagination__text
 └── bx--pagination__right
     ├── bx--pagination__text
-	├── bx--select
-    |	├── bx--select-input
-  	|	|	└── bx--select-option
-    |	└── bx--select__arrow
+	  ├── bx--select
+    |	  ├── bx--select-input
+  	|	  |	   └── bx--select-option
+    |	  └── bx--select__arrow
     ├── bx--pagination__text
-	├── bx--pagination__button bx--pagination__button--backward
-	|	└── bx--pagination__nav-arrow
-	└── bx--pagination__button bx--pagination__button--forward
-		└── bx--pagination__nav-arrow
+	  ├── bx--pagination__button bx--pagination__button--backward
+	  |	  └── bx--pagination__nav-arrow
+	  └── bx--pagination__button bx--pagination__button--forward
+		    └── bx--pagination__nav-arrow
 ```
 
 **Old Structure**:
 
 ```html
 bx--pagination
-└── bx--pagination__left
-|	├── bx--select
-|   |	├── bx--select-input
-|  	|	|	└── bx--select-option
-|   |	└── bx--select__arrow
+├── bx--pagination__left
+|	  ├── bx--select
+|   |	  ├── bx--select-input
+|  	|	  |	  └── bx--select-option
+|   |	  └── bx--select__arrow
 |   └── bx--pagination__text
 └── bx--pagination__right
     ├── bx--pagination__text
-	├── bx--pagination__button bx--pagination__button--backward
-	|	└── bx--pagination__button-icon
-	├── bx--visually-hidden
-	├── bx--text-input
-	└── bx--pagination__button bx--pagination__button--forward
-		└── bx--pagination__button-icon
+	  ├── bx--pagination__button bx--pagination__button--backward
+	  |	  └── bx--pagination__button-icon
+	  ├── bx--visually-hidden
+	  ├── bx--text-input
+	  └── bx--pagination__button bx--pagination__button--forward
+		    └── bx--pagination__button-icon
 ```
 
 
@@ -63,4 +63,3 @@ There is _one_ change to an existing selector, the remaining selectors are uncha
 | v9                            | v10                         | Note           |
 | ----------------------------- | --------------------------- | -------------- |
 | `bx--pagination__button-icon` | `bx--pagination__nav-arrow` | :eyes: Changed |
-

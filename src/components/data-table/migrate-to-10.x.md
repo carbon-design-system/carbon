@@ -1,6 +1,6 @@
 ## Data Table
 
-### HTML 
+### HTML
 
 Aside from using new icons from the [`carbon-elements`](https://github.com/IBM/carbon-elements) package, there are several structural changes and new selectors in the Data Table component. Please see the new structure below and reference the [data table page](https://next.carbondesignsystem.com/components/data-table/code) in our site to copy the specified new markup.
 
@@ -17,27 +17,27 @@ React and other framework variants should reflect the changes automatically.
 - Batch action buttons no longer have `bx--btn—ghost` class
 - New markup/selector involving expandable features includes a `div.bx--child-row-inner-container`  as a wrapper for content within the child row `td`.
 - New markup/selectors involving sortable features include an additional icon `bx--table-sort__icon-unsorted`   for non-sorted state, and a new class for sortable data table `bx--data-table—-sort`.
-- New selectors `bx—table-column-checkbox`  and `bx—table-column-menu` for checkbox and overflow menu `td`'s and `th`'s. 
+- New selectors `bx—table-column-checkbox`  and `bx—table-column-menu` for checkbox and overflow menu `td`'s and `th`'s.
 - New selector for `li` within a row overflow menu `bx--table-row--menu-option`. See SCSS section for more details.
 
 **New Structure**:
 
 ```html
 bx--data-table-container
-├── bx--data-table-header 
-|	├── bx--data-table-header__title 
-|   └── bx--data-table-header__description 
+├── bx--data-table-header
+|		├── bx--data-table-header__title
+| 	└── bx--data-table-header__description
 ├── bx--table-toolbar
 |   ├── bx--batch-actions
-|	|	├── bx--batch-action-list 
-|	|	└── bx--batch-summary
-|   |		└── bx--batch-summary__para
+|		|		├── bx--batch-action-list
+|		|		└── bx--batch-summary
+|   |				└── bx--batch-summary__para
 |   └── bx--toolbar-content
-|		├── bx--toolbar-search-container-expandable (bx--toolbar-search-container-persistent) 
-|		├── bx--overflow-menu bx--toolbar-action 
-|   	└── bx--btn--primary 
-└── bx--data-table 
-	├── thead
+|				├── bx--toolbar-search-container-expandable (bx--toolbar-search-container-persistent)
+|				├── bx--overflow-menu bx--toolbar-action
+|   		└── bx--btn--primary
+└── bx--data-table
+		├── thead
     └── tbody
 pagination
 ```
