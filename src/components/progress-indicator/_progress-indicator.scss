@@ -38,6 +38,7 @@
 
   .#{$prefix}--progress-line {
     position: absolute;
+    left: 0;
     height: 1px;
     width: rem(128px);
     border: $progress-indicator-bar-width;
@@ -128,6 +129,7 @@
   //OPTIONAL HELPER TEXT STYLING
   .#{$prefix}--progress-optional {
     position: absolute;
+    left: 0;
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
     @include type-style('label-01');
@@ -252,7 +254,7 @@
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
-    margin-top: initial;
+    margin-top: auto;
     position: initial;
     margin-left: 2.25rem;
   }
