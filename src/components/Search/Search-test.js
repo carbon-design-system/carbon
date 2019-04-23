@@ -66,12 +66,6 @@ describe('Search', () => {
         wrapper.setProps({ placeHolderText: 'Enter text' });
         expect(wrapper.find('input').props().placeholder).toEqual('Enter text');
       });
-
-      it('should specify light version as expected', () => {
-        expect(wrapper.props().light).toEqual(false);
-        wrapper.setProps({ light: true });
-        expect(wrapper.props().light).toEqual(true);
-      });
     });
 
     describe('label', () => {

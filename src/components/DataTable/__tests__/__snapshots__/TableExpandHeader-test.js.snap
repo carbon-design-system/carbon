@@ -2,12 +2,10 @@
 
 exports[`DataTable.TableExpandHeader should render 1`] = `
 <Table
-  short={false}
-  shouldShowBorder={true}
-  zebra={true}
+  isSortable={false}
 >
   <table
-    className="bx--data-table bx--data-table--zebra"
+    className="bx--data-table bx--data-table--no-border"
   >
     <TableHead>
       <thead>

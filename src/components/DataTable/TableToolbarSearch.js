@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { settings } from 'carbon-components';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
@@ -27,25 +27,75 @@ const translateWithId = id => {
 const TableToolbarSearch = ({
   className,
   searchContainerClass,
-  onChange,
+  onChange: onChangeProp,
   translateWithId: t,
   placeHolderText,
   labelText,
+  expanded: expandedProp,
+  defaultExpanded,
+  onExpand,
+  persistant,
   id = `data-table-search-${getInstanceId()}`,
   ...rest
 }) => {
-  const searchContainerClasses = cx(
-    searchContainerClass,
-    `${prefix}--toolbar-search-container`
-  );
+  const { current: controlled } = useRef(expandedProp !== undefined);
+  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const expanded = controlled ? expandedProp : expandedState;
+
+  const searchRef = useRef(null);
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (searchRef.current) {
+      searchRef.current.querySelector('input').focus();
+    }
+  });
+
+  const searchContainerClasses = cx({
+    [searchContainerClass]: searchContainerClass,
+    [`${prefix}--toolbar-action`]: true,
+    [`${prefix}--toolbar-search-container-active`]: expanded,
+    [`${prefix}--toolbar-search-container-expandable`]: !persistant,
+    [`${prefix}--toolbar-search-container-persistant`]: persistant,
+  });
+
+  const searchClasses = cx({
+    className,
+    [`${prefix}--search-maginfier`]: true,
+  });
+
+  const handleExpand = (event, value = !expanded) => {
+    if (!controlled && !persistant) {
+      setExpandedState(value);
+    }
+    if (onExpand) {
+      onExpand(event, value);
+    }
+  };
+
+  const onChange = e => {
+    setValue(e.target.value);
+    if (onChangeProp) {
+      onChangeProp(e);
+    }
+  };
+
   return (
-    <div className={searchContainerClasses}>
+    <div
+      tabIndex="0"
+      role="searchbox"
+      ref={searchRef}
+      onClick={event => handleExpand(event, true)}
+      onFocus={event => handleExpand(event, true)}
+      onBlur={event => !value && handleExpand(event, false)}
+      className={searchContainerClasses}>
       <Search
-        light
-        className={className}
         {...rest}
         small
+        className={searchClasses}
+        value={value}
         id={id}
+        aria-hidden={!expanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
           placeHolderText || t('carbon.table.toolbar.search.placeholder')
@@ -93,10 +143,16 @@ TableToolbarSearch.propTypes = {
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func.isRequired,
+
+  /**
+   * Whether the search should be allowed to expand
+   */
+  persistant: PropTypes.bool,
 };
 
 TableToolbarSearch.defaultProps = {
   translateWithId,
+  persistant: false,
 };
 
 export default TableToolbarSearch;

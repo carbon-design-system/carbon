@@ -99,16 +99,6 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
-     * Optional boolean to create a short data table.
-     */
-    short: PropTypes.bool,
-
-    /**
-     * Optional boolean to remove borders from data table.
-     */
-    shouldShowBorder: PropTypes.bool,
-
-    /**
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
@@ -119,8 +109,6 @@ export default class DataTable extends React.Component {
     filterRows: defaultFilterRows,
     locale: 'en',
     translateWithId,
-    short: false,
-    shouldShowBorder: true,
   };
 
   static translationKeys = Object.values(translationKeys);
@@ -163,7 +151,12 @@ export default class DataTable extends React.Component {
    * @param {Function} config.onClick a custom click handler for the header
    * @returns {Object}
    */
-  getHeaderProps = ({ header, onClick, isSortable = true, ...rest }) => {
+  getHeaderProps = ({
+    header,
+    onClick,
+    isSortable = this.props.isSortable,
+    ...rest
+  }) => {
     const { sortDirection, sortHeaderKey } = this.state;
     return {
       ...rest,
@@ -287,9 +280,18 @@ export default class DataTable extends React.Component {
    * Helper utility to get the Table Props.
    */
   getTableProps = () => {
-    const { short, shouldShowBorder } = this.props;
+    const {
+      useZebraStyles,
+      size,
+      isSortable,
+      useStaticWidth,
+      shouldShowBorder,
+    } = this.props;
     return {
-      short,
+      useZebraStyles,
+      size,
+      isSortable,
+      useStaticWidth,
       shouldShowBorder,
     };
   };
@@ -453,7 +455,9 @@ export default class DataTable extends React.Component {
    * @param {Event} event
    */
   handleOnInputValueChange = event => {
-    this.setState({ filterInputValue: event.target.value });
+    if (event.currentTarget) {
+      this.setState({ filterInputValue: event.currentTarget.value });
+    }
   };
 
   render() {

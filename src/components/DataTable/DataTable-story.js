@@ -6,15 +6,19 @@
  */
 
 import { storiesOf } from '@storybook/react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 
 const readmeURL = 'https://goo.gl/dq6CEK';
 
 const props = () => ({
-  short: boolean('Short variant (short)', false),
-  shouldShowBorder: boolean('Table Border variant (shouldShowBorder)', true),
+  useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
+  size: select(
+    'Row height (size)',
+    { compact: 'compact', short: 'short', tall: 'tall', none: null },
+    null
+  ),
 });
 
 storiesOf('DataTable', module)
@@ -39,118 +43,135 @@ storiesOf('DataTable', module)
   )
   .add(
     'with toolbar',
-    withReadme(readme, require('./stories/with-toolbar').default),
+    withReadme(readme, () =>
+      require('./stories/with-toolbar').default(props())
+    ),
     {
       info: {
         text: `
-          DataTable with toolbar and filtering.
+        DataTable with action menu and filtering.
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
       },
     }
   )
   .add(
     'with sorting',
-    withReadme(readme, require('./stories/with-sorting').default),
+    withReadme(readme, () =>
+      require('./stories/with-sorting').default(props())
+    ),
     {
       info: {
         text: `
-          DataTable with sorting
+        DataTable with sorting
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
       },
     }
   )
   .add(
     'with selection',
-    withReadme(readme, require('./stories/with-selection').default),
+    withReadme(readme, () =>
+      require('./stories/with-selection').default(props())
+    ),
     {
       info: {
         text: `
-          DataTable with selection
+        DataTable with selection
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
       },
     }
   )
+
   .add(
     'with radio button selection',
-    withReadme(readme, require('./stories/with-selection--radio').default),
+    withReadme(readme, () =>
+      require('./stories/with-selection--radio').default(props())
+    ),
     {
       info: {
         text: `
-          DataTable with radio button selection
+        DataTable with radio button selection
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
       },
     }
   )
   .add(
     'with expansion',
-    withReadme(readme, require('./stories/with-expansion').default),
+    withReadme(readme, () =>
+      require('./stories/with-expansion').default(props())
+    ),
     {
       info: {
         text: `
-            DataTable with expansion
+          DataTable with expansion
 
-            You can find more detailed information surrounding usage of this component
-            at the following url: ${readmeURL}
-          `,
+          You can find more detailed information surrounding usage of this component
+          at the following url: ${readmeURL}
+        `,
       },
     }
   )
   .add(
     'with batch actions',
-    withReadme(readme, require('./stories/with-batch-actions').default),
+    withReadme(readme, () =>
+      require('./stories/with-batch-actions').default(props())
+    ),
     {
       info: {
         text: `
-            Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
-            to create the toolbar and placeholder for where the batch action menu will
-            be displayed.
+          Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
+          to create the toolbar and placeholder for where the batch action menu will
+          be displayed.
 
-            You can use the \`getBatchActionProps\` prop getter on the
-            <TableBatchActions> component to have it wire up the ghost menu for you.
+          You can use the \`getBatchActionProps\` prop getter on the
+          <TableBatchActions> component to have it wire up the ghost menu for you.
 
-            Individual <TableBatchAction> components take in any kind of event handler
-            prop that you would expect to use, like \`onClick\`. You can use these
-            alongside the \`selectedRows\` property in your \`render\` prop function
-            to pass along this info to your batch action handler.
+          Individual <TableBatchAction> components take in any kind of event handler
+          prop that you would expect to use, like \`onClick\`. You can use these
+          alongside the \`selectedRows\` property in your \`render\` prop function
+          to pass along this info to your batch action handler.
 
-            You can find more detailed information surrounding usage of this component
-            at the following url: ${readmeURL}
-          `,
+          You can find more detailed information surrounding usage of this component
+          at the following url: ${readmeURL}
+        `,
       },
     }
   )
   .add(
     'with dynamic content',
-    withReadme(readme, require('./stories/with-dynamic-content').default),
+    withReadme(readme, () =>
+      require('./stories/with-dynamic-content').default(props())
+    ),
     {
       info: {
         text: `
-          Showcases DataTable behavior when rows are added to the component,
-          and when cell data changes dynamically.
-        `,
+        Showcases DataTable behavior when rows are added to the component,
+        and when cell data changes dynamically.
+      `,
       },
     }
   )
   .add(
     'with boolean column',
-    withReadme(readme, require('./stories/with-boolean-column').default),
+    withReadme(readme, () =>
+      require('./stories/with-boolean-column').default(props())
+    ),
     {
       info: {
         text: `
-          DataTable with toolbar and filtering with column has boolean value.
-        `,
+        DataTable with toolbar and filtering with column has boolean value.
+      `,
       },
     }
   );

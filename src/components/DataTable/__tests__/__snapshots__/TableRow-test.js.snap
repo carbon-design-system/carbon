@@ -2,15 +2,17 @@
 
 exports[`DataTable.TableRow should render 1`] = `
 <Table
-  short={false}
-  shouldShowBorder={true}
-  zebra={true}
+  isSortable={false}
 >
   <table
-    className="bx--data-table bx--data-table--zebra"
+    className="bx--data-table bx--data-table--no-border"
   >
-    <TableBody>
-      <tbody>
+    <TableBody
+      aria-live="polite"
+    >
+      <tbody
+        aria-live="polite"
+      >
         <TableRow
           className="custom-class"
         >

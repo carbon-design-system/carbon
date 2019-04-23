@@ -3,12 +3,10 @@
 exports[`DataTable.Table should render 1`] = `
 <Table
   className="custom-class"
-  short={false}
-  shouldShowBorder={true}
-  zebra={true}
+  isSortable={false}
 >
   <table
-    className="bx--data-table custom-class bx--data-table--zebra"
+    className="bx--data-table custom-class bx--data-table--no-border"
   />
 </Table>
 `;

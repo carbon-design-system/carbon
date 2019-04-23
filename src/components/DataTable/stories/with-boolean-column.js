@@ -6,11 +6,6 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import Download16 from '@carbon/icons-react/lib/download/16';
-import Edit16 from '@carbon/icons-react/lib/edit/16';
-import Settings16 from '@carbon/icons-react/lib/settings/16';
-import Button from '../../Button';
 import Checkbox from '../../Checkbox';
 import DataTable, {
   Table,
@@ -20,10 +15,6 @@ import DataTable, {
   TableHead,
   TableHeader,
   TableRow,
-  TableToolbar,
-  TableToolbarAction,
-  TableToolbarContent,
-  TableToolbarSearch,
 } from '../../DataTable';
 // import { initialRows, headers } from './shared';
 
@@ -91,36 +82,14 @@ export const headers = [
   },
 ];
 
-export default () => (
+export default props => (
   <DataTable
     rows={initialRows}
     headers={headers}
-    render={({ rows, headers, getHeaderProps, getRowProps, onInputChange }) => (
+    {...props}
+    render={({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With boolean column">
-        <TableToolbar>
-          <TableToolbarSearch onChange={onInputChange} />
-          <TableToolbarContent>
-            <TableToolbarAction
-              renderIcon={Download16}
-              iconDescription="Download"
-              onClick={action('TableToolbarAction - Download')}
-            />
-            <TableToolbarAction
-              renderIcon={Edit16}
-              iconDescription="Edit"
-              onClick={action('TableToolbarAction - Edit')}
-            />
-            <TableToolbarAction
-              renderIcon={Settings16}
-              iconDescription="Settings"
-              onClick={action('TableToolbarAction - Settings')}
-            />
-            <Button onClick={action('Add new row')} small kind="primary">
-              Add new
-            </Button>
-          </TableToolbarContent>
-        </TableToolbar>
-        <Table sortable={true}>
+        <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               {headers.map(header => (

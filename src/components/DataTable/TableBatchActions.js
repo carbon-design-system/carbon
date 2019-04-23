@@ -9,6 +9,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
+import Button from '../Button';
+import TableActionList from './TableActionList';
 
 const { prefix } = settings;
 
@@ -44,7 +46,14 @@ const TableBatchActions = ({
 
   return (
     <div {...rest} className={batchActionsClasses}>
-      {children}
+      <TableActionList>
+        {children}
+        <Button
+          className={`${prefix}--batch-summary__cancel`}
+          onClick={onCancel}>
+          {t('carbon.table.batch.cancel')}
+        </Button>
+      </TableActionList>
       <div className={`${prefix}--batch-summary`}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>
@@ -53,11 +62,6 @@ const TableBatchActions = ({
               : t('carbon.table.batch.item.selected', { totalSelected })}
           </span>
         </p>
-        <button
-          className={`${prefix}--batch-summary__cancel`}
-          onClick={onCancel}>
-          {t('carbon.table.batch.cancel')}
-        </button>
       </div>
     </div>
   );

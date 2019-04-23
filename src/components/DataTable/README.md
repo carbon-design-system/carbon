@@ -393,9 +393,9 @@ In practice, the combination of these components looks like the following:
 <DataTable
   rows={initialRows}
   headers={headers}
-  render={({ rows, headers, getHeaderProps, getRowProps }) => (
+  render={({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
     <TableContainer title="DataTable with expansion">
-      <Table>
+      <Table {...getTableProps()}>
         <TableHead>
           <TableRow>
             {/* add the expand header before all other headers */}

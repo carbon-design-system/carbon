@@ -8,12 +8,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Download16 from '@carbon/icons-react/lib/download/16';
-import { TableToolbarAction } from '../';
+import { TableToolbarMenu } from '..';
 
-describe('DataTable.TableToolbarAction', () => {
+describe('DataTable.TableToolbarMenu', () => {
   it('should render', () => {
     const wrapper = mount(
-      <TableToolbarAction
+      <TableToolbarMenu
         className="custom-class"
         renderIcon={Download16}
         iconDescription="Add"
@@ -23,10 +23,10 @@ describe('DataTable.TableToolbarAction', () => {
   });
 });
 
-describe('Custom icon in DataTable.TableToolbarAction', () => {
+describe('Custom icon in DataTable.TableToolbarMenu', () => {
   it('should render', () => {
     const iconAction = mount(
-      <TableToolbarAction renderIcon={Download16} iconDescription="Download" />
+      <TableToolbarMenu renderIcon={Download16} iconDescription="Download" />
     );
     const originalIcon = mount(<Download16 />).find('svg');
     const icon = iconAction.find('svg');

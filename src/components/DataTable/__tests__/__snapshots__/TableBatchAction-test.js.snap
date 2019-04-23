@@ -4,12 +4,39 @@ exports[`DataTable.TableBatchAction should render 1`] = `
 <TableBatchAction
   className="custom-class"
   iconDescription="Add"
+  renderIcon={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "height": 16,
+        "preserveAspectRatio": "xMidYMid meet",
+        "viewBox": "0 0 16 16",
+        "width": 16,
+        "xmlns": "http://www.w3.org/2000/svg",
+      },
+      "displayName": "AddFilled16",
+      "propTypes": Object {
+        "aria-hidden": [Function],
+        "aria-label": [Function],
+        "aria-labelledby": [Function],
+        "children": [Function],
+        "className": [Function],
+        "height": [Function],
+        "preserveAspectRatio": [Function],
+        "tabIndex": [Function],
+        "viewBox": [Function],
+        "width": [Function],
+        "xmlns": [Function],
+      },
+      "render": [Function],
+    }
+  }
 >
   <ForwardRef
     className="custom-class"
     disabled={false}
     iconDescription="Add"
-    kind="ghost"
+    kind="primary"
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),
@@ -37,12 +64,12 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         "render": [Function],
       }
     }
-    small={true}
+    small={false}
     tabIndex={0}
     type="button"
   >
     <button
-      className="custom-class bx--btn bx--btn--sm bx--btn--ghost"
+      className="custom-class bx--btn bx--btn--primary"
       disabled={false}
       tabIndex={0}
       type="button"

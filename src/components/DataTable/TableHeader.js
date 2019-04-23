@@ -59,7 +59,7 @@ const TableHeader = ({
   if (!isSortable) {
     return (
       <th {...rest} className={headerClassName} scope={scope}>
-        {children}
+        <span className={`${prefix}--table-header-label`}>{children}</span>
       </th>
     );
   }

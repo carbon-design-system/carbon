@@ -11,6 +11,32 @@ exports[`DataTable.TableBatchActions should render 1`] = `
   <div
     className="bx--batch-actions custom-class"
   >
+    <TableActionList>
+      <div
+        className="bx--action-list"
+      >
+        <ForwardRef
+          className="bx--batch-summary__cancel"
+          disabled={false}
+          iconDescription="Provide icon description if icon is used"
+          kind="primary"
+          onClick={[MockFunction]}
+          small={false}
+          tabIndex={0}
+          type="button"
+        >
+          <button
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            disabled={false}
+            onClick={[MockFunction]}
+            tabIndex={0}
+            type="button"
+          >
+            Cancel
+          </button>
+        </ForwardRef>
+      </div>
+    </TableActionList>
     <div
       className="bx--batch-summary"
     >
@@ -21,12 +47,6 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           10 items selected
         </span>
       </p>
-      <button
-        className="bx--batch-summary__cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </button>
     </div>
   </div>
 </TableBatchActions>
@@ -43,6 +63,32 @@ exports[`DataTable.TableBatchActions should render 2`] = `
   <div
     className="bx--batch-actions bx--batch-actions--active custom-class"
   >
+    <TableActionList>
+      <div
+        className="bx--action-list"
+      >
+        <ForwardRef
+          className="bx--batch-summary__cancel"
+          disabled={false}
+          iconDescription="Provide icon description if icon is used"
+          kind="primary"
+          onClick={[MockFunction]}
+          small={false}
+          tabIndex={0}
+          type="button"
+        >
+          <button
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            disabled={false}
+            onClick={[MockFunction]}
+            tabIndex={0}
+            type="button"
+          >
+            Cancel
+          </button>
+        </ForwardRef>
+      </div>
+    </TableActionList>
     <div
       className="bx--batch-summary"
     >
@@ -53,12 +99,6 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           10 items selected
         </span>
       </p>
-      <button
-        className="bx--batch-summary__cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </button>
     </div>
   </div>
 </TableBatchActions>

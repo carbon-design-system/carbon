@@ -20,42 +20,43 @@ import DataTable, {
   TableToolbarAction,
   TableToolbarContent,
   TableToolbarSearch,
-} from '../../DataTable';
-import Download16 from '@carbon/icons-react/lib/download/16';
-import Edit16 from '@carbon/icons-react/lib/edit/16';
-import Settings16 from '@carbon/icons-react/lib/settings/16';
+  TableToolbarMenu,
+} from '..';
+
 import { initialRows, headers } from './shared';
 
-export default () => (
+export default props => (
   <DataTable
     rows={initialRows}
     headers={headers}
-    render={({ rows, headers, getHeaderProps, getRowProps, onInputChange }) => (
+    {...props}
+    render={({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      onInputChange,
+    }) => (
       <TableContainer title="DataTable" description="With toolbar">
         <TableToolbar>
-          <TableToolbarSearch onChange={onInputChange} />
           <TableToolbarContent>
-            <TableToolbarAction
-              renderIcon={Download16}
-              iconDescription="Download"
-              onClick={action('TableToolbarAction - Download')}
-            />
-            <TableToolbarAction
-              renderIcon={Edit16}
-              iconDescription="Edit"
-              onClick={action('TableToolbarAction - Edit')}
-            />
-            <TableToolbarAction
-              renderIcon={Settings16}
-              iconDescription="Settings"
-              onClick={action('TableToolbarAction - Settings')}
-            />
-            <Button onClick={action('Add new row')} small kind="primary">
-              Add new
-            </Button>
+            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction onClick={action('Action 1 Click')}>
+                Action 1
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 2 Click')}>
+                Action 2
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 3 Click')}>
+                Action 3
+              </TableToolbarAction>
+            </TableToolbarMenu>
+            <Button onClick={action('ButtonCLick')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table sortable={true}>
+        <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               {headers.map(header => (

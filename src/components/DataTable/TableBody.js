@@ -5,11 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import wrapComponent from '../../tools/wrapComponent';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const TableBody = wrapComponent({
-  name: 'TableBody',
-  type: 'tbody',
-});
+const TableBody = ({ children, className, ...rest }) => (
+  <tbody className={className} {...rest}>
+    {children}
+  </tbody>
+);
+
+TableBody.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+
+  /**
+   * `polite` Adjust the notification behavior of screen readers
+   */
+  'aria-live': PropTypes.oneOf(['polite', 'assertive', 'off']),
+};
+
+TableBody.defaultProps = {
+  'aria-live': 'polite',
+};
 
 export default TableBody;

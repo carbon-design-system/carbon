@@ -6,7 +6,10 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import Delete from '@carbon/icons-react/lib/delete/16';
+import Save from '@carbon/icons-react/lib/save/16';
+import Download from '@carbon/icons-react/lib/download/16';
+
 import DataTable, {
   Table,
   TableBatchAction,
@@ -26,14 +29,11 @@ import DataTable, {
   TableToolbarAction,
   TableToolbarContent,
   TableToolbarSearch,
+  TableToolbarMenu,
 } from '../../DataTable';
-import Button from '../../Button';
-import Download16 from '@carbon/icons-react/lib/download/16';
-import Edit16 from '@carbon/icons-react/lib/edit/16';
-import Settings16 from '@carbon/icons-react/lib/settings/16';
 import { batchActionClick, initialRows, headers } from './shared';
 
-export default () => {
+export default props => {
   const insertInRandomPosition = (array, element) => {
     const index = Math.floor(Math.random() * (array.length + 1));
     return [...array.slice(0, index), element, ...array.slice(index)];
@@ -99,6 +99,7 @@ export default () => {
         <DataTable
           rows={this.state.rows}
           headers={this.state.headers}
+          {...this.props}
           render={({
             rows,
             headers,
@@ -108,48 +109,45 @@ export default () => {
             getRowProps,
             onInputChange,
             selectedRows,
+            getTableProps,
           }) => (
             <TableContainer
               title="DataTable"
-              description="With dynamic content">
-              <Button small onClick={this.handleOnRowAdd}>
-                Add new row
-              </Button>
-              <Button small onClick={this.handleOnHeaderAdd}>
-                Add new header
-              </Button>
+              description="Use the toolbar menu to add rows and headers">
               <TableToolbar>
                 <TableBatchActions {...getBatchActionProps()}>
-                  <TableBatchAction onClick={batchActionClick(selectedRows)}>
-                    Ghost
+                  <TableBatchAction
+                    renderIcon={Delete}
+                    iconDescription="Delete the selected rows"
+                    onClick={batchActionClick(selectedRows)}>
+                    Delete
                   </TableBatchAction>
-                  <TableBatchAction onClick={batchActionClick(selectedRows)}>
-                    Ghost
+                  <TableBatchAction
+                    renderIcon={Save}
+                    iconDescription="Save the selected rows"
+                    onClick={batchActionClick(selectedRows)}>
+                    Save
                   </TableBatchAction>
-                  <TableBatchAction onClick={batchActionClick(selectedRows)}>
-                    Ghost
+                  <TableBatchAction
+                    renderIcon={Download}
+                    iconDescription="Download the selected rows"
+                    onClick={batchActionClick(selectedRows)}>
+                    Download
                   </TableBatchAction>
                 </TableBatchActions>
-                <TableToolbarSearch onChange={onInputChange} />
                 <TableToolbarContent>
-                  <TableToolbarAction
-                    renderIcon={Download16}
-                    iconDescription="Download"
-                    onClick={action('TableToolbarAction - Download')}
-                  />
-                  <TableToolbarAction
-                    renderIcon={Edit16}
-                    iconDescription="Edit"
-                    onClick={action('TableToolbarAction - Edit')}
-                  />
-                  <TableToolbarAction
-                    renderIcon={Settings16}
-                    iconDescription="Settings"
-                    onClick={action('TableToolbarAction - Settings')}
-                  />
+                  <TableToolbarSearch onChange={onInputChange} />
+                  <TableToolbarMenu>
+                    <TableToolbarAction onClick={this.handleOnRowAdd}>
+                      Add row
+                    </TableToolbarAction>
+                    <TableToolbarAction onClick={this.handleOnHeaderAdd}>
+                      Add header
+                    </TableToolbarAction>
+                  </TableToolbarMenu>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table sortable={true}>
+              <Table {...getTableProps()}>
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
@@ -184,6 +182,5 @@ export default () => {
       );
     }
   }
-
-  return <DynamicRows />;
+  return <DynamicRows {...props} />;
 };

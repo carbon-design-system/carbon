@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-import Download16 from '@carbon/icons-react/lib/download/16';
-import Edit16 from '@carbon/icons-react/lib/edit/16';
-import Settings16 from '@carbon/icons-react/lib/settings/16';
 import Button from '../../Button';
 import DataTable, {
   Table,
@@ -29,6 +26,7 @@ import DataTable, {
   TableToolbarAction,
   TableToolbarContent,
   TableToolbarSearch,
+  TableToolbarMenu,
 } from '../';
 import { sortStates } from '../state/sorting';
 import { mount } from 'enzyme';
@@ -37,7 +35,8 @@ import { mount } from 'enzyme';
 const getHeaderAt = (wrapper, index) =>
   wrapper.find('TableHeader button').at(index);
 const getRowAt = (wrapper, index) => wrapper.find('tbody tr').at(index);
-const getFilterInput = wrapper => wrapper.find('TableToolbarSearch input');
+const getFilterInput = wrapper =>
+  wrapper.find('TableToolbarSearch Search input');
 const getSelectAll = wrapper =>
   wrapper.find('TableSelectAll input[type="checkbox"]');
 const getLastCallFor = mocker =>
@@ -78,53 +77,66 @@ describe('DataTable', () => {
         },
       ],
       locale: 'en',
-      render: jest.fn(({ rows, headers, getHeaderProps, onInputChange }) => (
-        <TableContainer title="DataTable with toolbar">
-          <TableToolbar>
-            <TableToolbarSearch onChange={onInputChange} id="custom-id" />
-            <TableToolbarContent>
-              <TableToolbarAction
-                renderIcon={Download16}
-                iconDescription="Download"
-                onClick={jest.fn()}
-              />
-              <TableToolbarAction
-                renderIcon={Edit16}
-                iconDescription="Edit"
-                onClick={jest.fn()}
-              />
-              <TableToolbarAction
-                renderIcon={Settings16}
-                iconDescription="Settings"
-                onClick={jest.fn()}
-              />
-              <Button onClick={jest.fn()} small kind="primary">
-                Add new
-              </Button>
-            </TableToolbarContent>
-          </TableToolbar>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {headers.map(header => (
-                  <TableHeader {...getHeaderProps({ header })}>
-                    {header.header}
-                  </TableHeader>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map(row => (
-                <TableRow key={row.id}>
-                  {row.cells.map(cell => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
+      render: jest.fn(
+        ({
+          rows,
+          headers,
+          getHeaderProps,
+          onInputChange,
+          getBatchActionProps,
+        }) => (
+          <TableContainer title="DataTable with toolbar">
+            <TableToolbar>
+              <TableBatchActions {...getBatchActionProps()}>
+                <TableBatchAction onClick={jest.fn()}>Ghost</TableBatchAction>
+                <TableBatchAction onClick={jest.fn()}>Ghost</TableBatchAction>
+                <TableBatchAction onClick={jest.fn()}>Ghost</TableBatchAction>
+              </TableBatchActions>
+              <TableToolbarContent>
+                <TableToolbarSearch
+                  persistant
+                  onChange={onInputChange}
+                  id="custom-id"
+                />
+                <TableToolbarMenu>
+                  <TableToolbarAction onClick={jest.fn()}>
+                    Action 1
+                  </TableToolbarAction>
+                  <TableToolbarAction onClick={jest.fn()}>
+                    Action 2
+                  </TableToolbarAction>
+                  <TableToolbarAction onClick={jest.fn()}>
+                    Action 3
+                  </TableToolbarAction>
+                </TableToolbarMenu>
+                <Button onClick={jest.fn()} small kind="primary">
+                  Add new
+                </Button>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headers.map(header => (
+                    <TableHeader {...getHeaderProps({ header })}>
+                      {header.header}
+                    </TableHeader>
                   ))}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )),
+              </TableHead>
+              <TableBody>
+                {rows.map(row => (
+                  <TableRow key={row.id}>
+                    {row.cells.map(cell => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )
+      ),
     };
   });
 
@@ -135,9 +147,8 @@ describe('DataTable', () => {
 
   describe('sorting', () => {
     it('should sort a row by a header when a header is clicked', () => {
-      const wrapper = mount(<DataTable {...mockProps} />);
+      const wrapper = mount(<DataTable isSortable={true} {...mockProps} />);
       const header = getHeaderAt(wrapper, 0);
-
       header.simulate('click');
       expect(wrapper.state('rowIds')).toEqual(['a', 'b', 'c']);
 
@@ -149,7 +160,7 @@ describe('DataTable', () => {
     });
 
     it('should re-sort new row props by the current sort state', () => {
-      const wrapper = mount(<DataTable {...mockProps} />);
+      const wrapper = mount(<DataTable isSortable={true} {...mockProps} />);
       const header = getHeaderAt(wrapper, 0);
 
       header.simulate('click');
@@ -160,7 +171,8 @@ describe('DataTable', () => {
     });
 
     it('should reset to ASC ordering when another header is clicked', () => {
-      const wrapper = mount(<DataTable {...mockProps} />);
+      const wrapper = mount(<DataTable isSortable={true} {...mockProps} />);
+
       const firstHeader = getHeaderAt(wrapper, 0);
       const secondHeader = getHeaderAt(wrapper, 1);
 
@@ -183,11 +195,8 @@ describe('DataTable', () => {
 
       expect(wrapper.state('rowIds').length).toBe(mockProps.rows.length);
 
-      filterInput.simulate('change', {
-        target: {
-          value: 'Field 1',
-        },
-      });
+      filterInput.getDOMNode().value = 'Field 1';
+      filterInput.simulate('change');
 
       expect(mockProps.render).toHaveBeenCalledWith(
         expect.objectContaining({

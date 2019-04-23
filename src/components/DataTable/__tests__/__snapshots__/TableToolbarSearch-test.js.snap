@@ -5,24 +5,31 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   className="custom-class"
   id="custom-id"
   onChange={[MockFunction]}
+  persistant={false}
   translateWithId={[Function]}
 >
   <div
-    className="bx--toolbar-search-container"
+    className="bx--toolbar-action bx--toolbar-search-container-expandable"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    role="searchbox"
+    tabIndex="0"
   >
     <Search
-      className="custom-class"
+      aria-hidden={true}
+      className="className bx--search-maginfier"
       id="custom-id"
       labelText="Filter table"
-      light={true}
-      onChange={[MockFunction]}
+      onChange={[Function]}
       placeHolderText="Search"
       small={true}
       type="text"
+      value=""
     >
       <div
         aria-labelledby="custom-id-label"
-        className="bx--search bx--search--sm bx--search--light custom-class"
+        className="bx--search bx--search--sm className bx--search-maginfier"
         role="search"
       >
         <Search16
@@ -64,11 +71,13 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           Filter table
         </label>
         <input
+          aria-hidden={true}
           className="bx--search-input"
           id="custom-id"
           onChange={[Function]}
           placeholder="Search"
           type="text"
+          value=""
         />
         <button
           className="bx--search-close bx--search-close--hidden"

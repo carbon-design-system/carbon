@@ -125,7 +125,7 @@
     }
   },
   "peerDependencies": {
-    "carbon-components": "^10.0.0",
+    "carbon-components": "^10.1.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

@@ -20,13 +20,14 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-export default () => (
+export default props => (
   <DataTable
     rows={initialRows}
     headers={headers}
-    render={({ rows, headers, getHeaderProps, getRowProps }) => (
+    {...props}
+    render={({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With expansion">
-        <Table sortable={true}>
+        <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               <TableExpandHeader />
