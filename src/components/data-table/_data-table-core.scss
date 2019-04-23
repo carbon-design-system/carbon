@@ -214,13 +214,13 @@
     color: $text-01;
     background-color: $ui-03;
     border-top: 1px solid $ui-03;
-    border-bottom: 1px solid $active-01; //bottom border acts as separator from other rows
+    border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
   }
 
   // first row
   .#{$prefix}--data-table--zebra tbody tr:first-of-type:nth-child(odd).#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--selected:first-of-type td {
-    border-top: 1px solid $active-01; //top border acts as separator from thead
+    border-top: 1px solid $active-ui; //top border acts as separator from thead
   }
 
   // last row + zebra select last
@@ -233,7 +233,7 @@
 
   // zebra select - odd child
   .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected td {
-    border-bottom: 1px solid $active-01;
+    border-bottom: 1px solid $active-ui;
   }
 
   .#{$prefix}--data-table--zebra tbody tr:nth-child(even).#{$prefix}--data-table--selected:hover td {
