@@ -16,6 +16,9 @@
 @import '../form/form';
 @import '../../globals/scss/css--reset';
 
+/// Radio button styles
+/// @access private
+/// @group radio-button
 @mixin radio-button {
   .#{$prefix}--radio-button-group {
     display: flex;

@@ -17,6 +17,9 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
+/// Toast notification styles
+/// @access private
+/// @group notification
 @mixin toast-notifications {
   .#{$prefix}--toast-notification {
     @include reset;
