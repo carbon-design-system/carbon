@@ -35,15 +35,6 @@ const classic = [
   'support-03',
   'support-04',
 
-  'nav-01',
-  'nav-02',
-  'nav-03',
-  'nav-04',
-  'nav-05',
-  'nav-06',
-  'nav-07',
-  'nav-08',
-
   'hover-primary',
   'hover-primary-text',
   'hover-danger',
