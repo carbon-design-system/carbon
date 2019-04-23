@@ -37,10 +37,6 @@
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected .#{$prefix}--list-box__field {
-    padding-left: $carbon--spacing-03;
-  }
-
   .#{$prefix}--multi-select--filterable {
     .#{$prefix}--list-box__selection--multi {
       position: absolute;
@@ -55,7 +51,7 @@
     //
     // i.e. the input field needs adjusted padding to account for the width of
     // the number in <ListBox.Selection>
-    padding-left: carbon--mini-units(6);
+    padding-left: carbon--mini-units(7);
   }
 }
 
