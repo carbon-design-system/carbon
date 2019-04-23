@@ -324,68 +324,6 @@
   /// @access public
   /// @group skeleton
   $skeleton: rgba(#3d70b2, 0.1) !default !global; //old $color__blue-51/$field-01 TODO: Define for experimental
-
-  // ⚠️ Deprecated
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $hover-field: $hover-ui !default !global;
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $active-01: $active-ui !default !global;
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-01: #0f212e !default !global; // Old $color__navy-gray-1
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group
-  $nav-02: #152935 !default !global; // Old $color__blue-90
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-03: #ba8ff7 !default !global; // Old $color__purple-30
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-04: #734098 !default !global; // Old $color__purple-60
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-05: #00b4a0 !default !global; // Old $color__teal-40
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-06: #008571 !default !global; // Old $color__teal-50
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-07: #5aaafa !default !global; // Old $color__blue-30
-
-  /// @deprecated
-  /// @type Color
-  /// @access public
-  /// @group global
-  $nav-08: #3d70b2 !default !global; // Old $color__blue-51
 }
 
 @include exports('theme') {
