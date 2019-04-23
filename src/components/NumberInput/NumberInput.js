@@ -103,6 +103,10 @@ class NumberInput extends Component {
      */
     helperText: PropTypes.node,
     /**
+     * Provide a description that would be used to best describe the use case of the NumberInput component
+     */
+    ariaLabel: PropTypes.string,
+    /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
@@ -131,6 +135,7 @@ class NumberInput extends Component {
     value: 0,
     invalid: false,
     invalidText: 'Provide invalidText',
+    ariaLabel: 'Numeric input field with increment and decrement buttons',
     helperText: '',
     light: false,
     allowEmpty: false,
@@ -217,6 +222,7 @@ class NumberInput extends Component {
       invalid,
       invalidText,
       helperText,
+      ariaLabel,
       light,
       allowEmpty,
       innerRef: ref,
@@ -243,6 +249,7 @@ class NumberInput extends Component {
       step,
       onChange: this.handleChange,
       value: this.state.value,
+      ariaLabel,
     };
 
     const buttonProps = {
