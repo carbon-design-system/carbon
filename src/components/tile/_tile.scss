@@ -15,6 +15,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
+/// Tile styles
+/// @access private
+/// @group tile
 @mixin tile {
   .#{$prefix}--tile {
     display: block;

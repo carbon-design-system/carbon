@@ -10,7 +10,9 @@
 @import 'css--reset';
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Body styles
 /// @access private
+/// @group global-body
 @mixin css-body {
   body {
     @include reset;

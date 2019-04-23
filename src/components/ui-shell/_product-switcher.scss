@@ -11,6 +11,9 @@
 @import 'theme';
 @import 'functions';
 
+/// UI shell product switcher
+/// @access private
+/// @group ui-shell
 @mixin product-switcher {
   //--------------------------------------------------------------------------
   // Global Panel

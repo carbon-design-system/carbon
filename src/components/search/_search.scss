@@ -15,6 +15,9 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
+/// Search styles
+/// @access private
+/// @group search
 @mixin search {
   .#{$prefix}--search {
     display: flex;

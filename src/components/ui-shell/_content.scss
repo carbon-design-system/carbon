@@ -9,6 +9,9 @@
 @import '../../globals/scss/vars';
 @import 'functions';
 
+/// UI shell content
+/// @access private
+/// @group ui-shell
 @mixin carbon-content {
   .#{$prefix}--content {
     transform: translate3d(0, 0, 0);
