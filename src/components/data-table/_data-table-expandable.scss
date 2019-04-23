@@ -9,6 +9,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
+/// Data table expandable styles
+/// @access private
+/// @group data-table
 @mixin data-table-expandable {
   //----------------------------------------------------------------------------
   // Parent row

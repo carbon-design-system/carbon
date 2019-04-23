@@ -9,7 +9,7 @@
 
 /// @access private
 /// @type Map
-/// @group @function z();
+/// @group global-layout
 $z-indexes: (
   modal: 9000,
   overlay: 8000,
@@ -21,16 +21,13 @@ $z-indexes: (
   floating: 10000,
 );
 
-//-------------------------------------
-// @function: z($layer)
-//-------------------------------------
 /// @access public
-/// @param {String} $layer value from $z-indexes map (See line 139)
-/// @group $z-indexes
-/// @example
-//    .modal {
-//       z-index: z('modal');
-//    }
+/// @param {String} $layer - Value from `$z-indexes` map
+/// @group global-layout
+/// @example - scss
+///   .modal {
+///     z-index: z('modal');
+///   }
 @function z($layer) {
   @if not map-has-key($z-indexes, $layer) {
     @warn 'No layer found for `#{$layer}` in $z-indexes map. Property omitted.';

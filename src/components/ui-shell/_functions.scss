@@ -8,8 +8,9 @@
 @import 'variables';
 
 /// Get a `rem` value based for a number of mini-units.
-/// @param {number} $count
-/// @returns {rem}
+/// @param {Number} $count
+/// @returns {Number} In rem
+/// @group ui-shell
 @function mini-units($count) {
   @return $unit * $count;
 }

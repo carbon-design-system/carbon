@@ -9,13 +9,12 @@ Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
 
 Contributing to carbon-components requires that you can run this repo locally on your computer.
 
-## Coding Style
+## Coding style
 
 ### Class names
 
 Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with `bx--` by default,
-and design systems inheriting Carbon can override.
-This prefix prevents potential conflicts with class names from the user.
+and design systems inheriting Carbon can override. This prefix prevents potential conflicts with class names from the user.
 
 **HTML**
 
@@ -48,7 +47,7 @@ Follow BEM naming convention for classes. Again, the only thing we do differentl
 Avoid nesting selectors, this will make it easier to maintain in the future.
 
 ```scss
-<-- Don't do this -->
+// Don't do this
 .#{$prefix}--inline-notification {
   .#{$prefix}--btn {
     &:hover {
@@ -59,12 +58,69 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
   }
 }
 
-<!-- Do this instead -->
+// Do this instead
 .#{$prefix}--inline-notification .#{$prefix}--btn {
     &:hover svg {
       ...
     }
   }
+}
+```
+
+### Sass documentation
+
+[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source. SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc comments.
+
+For consistency, capitalize types (used in `@type`, `@param`, `@return`) and descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
+
+The following annotations are used:
+
+**Required annotations**
+
+- [Description](http://sassdoc.com/annotations/#description) - can be one line or multiple lines
+- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`, where public items make up our public API
+- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or component name
+- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**, (e.g. `Map`, `Color`, `Number`)
+- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on **functions** and **mixins**, include the type, name, and description, with a default value if there is one (e.g. `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
+- [`@return`](http://sassdoc.com/annotations/#return) - allowed on **functions**, include the type and description (e.g. `@return {Number} In px`)
+- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if aliasing a variable
+- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**, describe the usage of content
+- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around possible replacements or when the item will no longer be available
+
+  **Optional annotations**
+
+- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't straight forward or there are multiple use cases
+- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to reference
+
+  **Examples**
+
+```scss
+// Variable example
+
+/// Primary interactive color; Primary buttons
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$interactive-01: map-get($carbon--theme, interactive-01) !default;
+
+// Mixin example
+
+/// Create the container for a grid. Will cause full-bleed for the grid unless
+/// max-width properties are added with `make-container-max-widths`
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
+}
+
+// Function example
+
+/// Compute the type size for the given type scale step
+/// @param {Number} $step - Type scale step
+/// @return {Number} In px
+/// @access public
+/// @group @carbon/type
+@function carbon--get-type-size($step) {
 }
 ```
 
@@ -79,7 +135,7 @@ A nested element can use a new block name as long as the styles are independent 
 :point_up: The `#{$prefix}--component-button` class implies that this button has independent styles from its parent.
 Generally, it's preferred to start a new block.
 
-### Red Flags
+### Red flags
 
 Avoid names with multiple `__element` names:
 
@@ -206,13 +262,13 @@ To avoid such overhead, you can point NPM dependency of `carbon-components` righ
 
 Then edits of `.scss` files in `/path/to/carbon-components/src` will be reflected to the development environment of your framework variant repository. You don't need to do anything in `carbon-components` side.
 
-## Start Contributing
+## Start contributing
 
-### 1. Fork The Repo:
+### 1. Fork the repo:
 
 Go to [carbon-components](https://github.com/IBM/carbon-components) and click the `Fork` button in the top-right corner.
 
-### 2. Clone Your Fork:
+### 2. Clone your fork:
 
 1.  Go to your [GitHub Repositories](https://github.com/settings/repositories).
 1.  Click on `[your_github_username]/carbon-components`.
@@ -227,7 +283,7 @@ cd carbon-components
 
 See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more details.
 
-### 3. Add Upstream Remotes
+### 3. Add upstream remotes
 
 When you clone your forked repo, doing a `git remote -v` will show that the `origin` remote is set up for you already by default. This should be pointing to your forked repo.
 
@@ -246,7 +302,7 @@ When you do `git remote -v`, you'll see these remotes:
 - `origin`: connection to your fork
 - `upstream`: connection to the original repo.
 
-### 4. Work in a Branch
+### 4. Work in a branch
 
 - Always work in a branch.
 - Submit pull requests from a branch.
@@ -319,13 +375,13 @@ gulp test:a11y --name dropdown
 
 The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/IBM/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps identifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 
-### 8. Make a Pull Request
+### 8. Make a pull request
 
 **Note:** Before you make a pull request, [search](https://github.com/IBM/carbon-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
 
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
 
-#### Commit Tip
+#### Commit tip
 
 > **Writing commit messages**
 >
@@ -382,7 +438,7 @@ Write a title and description then click `Create pull request`
 
 - [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
 
-### 9. Updating a Pull Request
+### 9. Updating a pull request
 
 Stay up to date with the activity in your pull request. Maintainers from the Design System team will be reviewing your work and making comments, asking questions and suggesting changes to be made before they merge your code.
 
