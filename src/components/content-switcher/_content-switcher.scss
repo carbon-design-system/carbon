@@ -11,6 +11,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Content switcher styles
+/// @access private
+/// @group content-switcher
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
     display: flex;

@@ -19,6 +19,9 @@ $css--helpers: true;
 @import '../overflow-menu/overflow-menu';
 @import '../search/search';
 
+/// Toolbar styles
+/// @access private
+/// @group toolbar
 @mixin toolbar {
   .#{$prefix}--toolbar {
     display: flex;
