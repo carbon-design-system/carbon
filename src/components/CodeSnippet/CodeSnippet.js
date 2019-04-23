@@ -14,6 +14,7 @@ import Copy from '../Copy';
 import CopyButton from '../CopyButton';
 import Icon from '../Icon';
 import { componentsX } from '../../internal/FeatureFlags';
+import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
@@ -40,11 +41,6 @@ export default class CodeSnippet extends Component {
     feedback: PropTypes.string,
 
     /**
-     * Specify the label used for the Copy Button
-     */
-    copyLabel: PropTypes.string,
-
-    /**
      * Specify the description for the Copy Button
      */
     copyButtonDescription: PropTypes.string,
@@ -54,6 +50,12 @@ export default class CodeSnippet extends Component {
      * Button
      */
     onClick: PropTypes.func,
+
+    /**
+     * Specify a label to be read by screen readers on the containing <textbox>
+     * node
+     */
+    copyLabel: PropTypes.string,
 
     /**
      * Specify a label to be read by screen readers on the containing <textbox>
@@ -119,13 +121,16 @@ export default class CodeSnippet extends Component {
       feedback,
       onClick,
       ariaLabel,
-      copyLabel,
+      copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
       copyButtonDescription,
       light,
       showMoreText,
       showLessText,
       ...other
     } = this.props;
+
+    // a unique id generated for aria-describedby
+    this.uid = uid();
 
     const codeSnippetClasses = classNames(className, {
       [`${prefix}--snippet`]: true,
@@ -172,7 +177,7 @@ export default class CodeSnippet extends Component {
         role="textbox"
         tabIndex={0}
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel ? ariaLabel : 'code-snippet'}>
+        aria-label={ariaLabel || copyLabel || 'code-snippet'}>
         <code>
           <pre
             ref={codeContent => {
@@ -197,10 +202,11 @@ export default class CodeSnippet extends Component {
         <Copy
           {...other}
           onClick={onClick}
+          aria-label={copyLabel || ariaLabel}
+          aria-describedby={this.uid}
           className={codeSnippetClasses}
-          aria-label={copyLabel}
           feedback={feedback}>
-          <code>{children}</code>
+          <code id={this.uid}>{children}</code>
         </Copy>
       );
     }
