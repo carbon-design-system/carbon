@@ -58,6 +58,7 @@
     padding: $spacing-md;
     left: 0;
     cursor: pointer;
+    pointer-events: all;
     transition: background $duration--fast-01 motion(entrance, productive);
   }
 
@@ -257,7 +258,7 @@
     width: 100%;
     height: 100%;
     will-change: transform;
-    background-color: $brand-01;
+    background-color: $interactive-01;
     transition: transform $duration--fast-01 motion(standard, productive),
       visibility $duration--fast-01 motion(standard, productive), opacity $duration--fast-01 motion(standard, productive);
     transform: translate3d(0, 48px, 0);

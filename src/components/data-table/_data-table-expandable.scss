@@ -13,6 +13,10 @@
 /// @access private
 /// @group data-table
 @mixin data-table-expandable {
+  .#{$prefix}--data-table thead tr .#{$prefix}--table-expand {
+    position: relative;
+  }
+
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
