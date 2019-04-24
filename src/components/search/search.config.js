@@ -10,19 +10,19 @@
 const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
-  default: 'large',
+  default: 'extra-large',
   context: {
     prefix,
   },
   variants: [
     {
-      name: 'extra large',
+      name: 'extra-large',
       label: 'Normal search',
       notes: `
-          Search enables users to specify a word or a phrase to find particular relevant pieces of content
-          without the use of navigation. Search can be used as the primary means of discovering content,
-          or as a filter to aid the user in finding content.
-        `,
+        Search enables users to specify a word or a phrase to find particular relevant pieces of content
+        without the use of navigation. Search can be used as the primary means of discovering content,
+        or as a filter to aid the user in finding content.
+      `,
       context: {
         suffix: 'xl',
       },
@@ -41,13 +41,13 @@ module.exports = {
       },
     },
     {
-      name: 'extra large light',
+      name: 'extra-large-light',
       label: 'Normal search (Light)',
       notes: `
-          Search enables users to specify a word or a phrase to find particular relevant pieces of content
-          without the use of navigation. Search can be used as the primary means of discovering content,
-          or as a filter to aid the user in finding content.
-        `,
+        Search enables users to specify a word or a phrase to find particular relevant pieces of content
+        without the use of navigation. Search can be used as the primary means of discovering content,
+        or as a filter to aid the user in finding content.
+      `,
       context: {
         suffix: 'xl',
         light: true,
