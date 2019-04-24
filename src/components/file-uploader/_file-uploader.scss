@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: rem(40px);
+    height: rem(40px);
     max-width: rem(300px);
     margin-bottom: $carbon--spacing-03;
     padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
@@ -104,6 +104,7 @@
     align-items: center;
     color: $text-01;
     margin-right: $carbon--spacing-05;
+    padding: 1px 0;
     /*rtl:ignore*/
     direction: ltr;
     justify-content: flex-start; /*rtl:{flex-end}*/
