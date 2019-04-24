@@ -17,6 +17,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
+/// Link styles
+/// @access private
+/// @group link
 @mixin link {
   .#{$prefix}--link {
     @include reset;

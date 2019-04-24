@@ -17,6 +17,9 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
+/// Inline notification styles
+/// @access private
+/// @group notification
 @mixin inline-notifications {
   .#{$prefix}--inline-notification {
     @include reset;

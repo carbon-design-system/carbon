@@ -16,11 +16,29 @@
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// @type Number
+/// @access private
+/// @group list-box
 $list-box-width: 100%;
+
+/// @type Number
+/// @access private
+/// @group list-box
 $list-box-height: rem(40px);
+
+/// @type Number
+/// @access private
+/// @group list-box
 $list-box-inline-height: $list-box-height;
+
+/// @type Number
+/// @access private
+/// @group list-box
 $list-box-menu-width: rem(300px);
 
+/// List box styles
+/// @access private
+/// @group list-box
 @mixin listbox {
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.
