@@ -136,6 +136,7 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item {
     background-color: $ui-01;
+    display: flex;
     padding: 0;
     cursor: pointer;
     width: 100%;
@@ -183,7 +184,7 @@
     border: none;
     display: none;
     @include carbon--breakpoint(md) {
-      display: list-item;
+      display: flex;
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         @include type-style('heading-01');
