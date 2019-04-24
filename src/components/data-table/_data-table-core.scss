@@ -253,6 +253,84 @@
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu .#{$prefix}--overflow-menu__icon {
     opacity: 1;
   }
+
+  //----------------------------------------------------------------------------
+  //SIZE VARIATIONS
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--compact {
+    thead tr,
+    tbody tr {
+      height: rem(24px);
+    }
+
+    .#{$prefix}--table-header-label {
+      padding: rem(2px) 0;
+    }
+
+    .#{$prefix}--overflow-menu {
+      width: rem(24px);
+      height: rem(24px);
+    }
+
+    .#{$prefix}--table-column-checkbox {
+      padding-top: rem(1px);
+    }
+
+    .#{$prefix}--table-column-menu {
+      width: rem(28px);
+      min-width: rem(28px);
+      padding-top: rem(1px);
+    }
+
+    .#{$prefix}--table-column-icon {
+      padding-top: rem(1px);
+    }
+
+    .#{$prefix}--table-column-icon button {
+      width: rem(28px);
+      height: rem(24px);
+      justify-content: center;
+    }
+  }
+
+  .#{$prefix}--data-table--short {
+    thead tr,
+    tbody tr {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--table-header-label {
+      padding: rem(7px) 0;
+    }
+
+    .#{$prefix}--table-cell-content {
+      padding: rem(7px) 0;
+    }
+  }
+
+  .#{$prefix}--data-table--tall {
+    thead tr,
+    tbody tr {
+      height: rem(64px);
+    }
+
+    .#{$prefix}--table-header-label {
+      padding: rem(16px) 0;
+    }
+
+    .#{$prefix}--table-cell-content {
+      padding: rem(16px) 0;
+    }
+  }
+
+  .#{$prefix}--data-table--cell-secondary-text {
+    padding-top: rem(2px);
+    // @include font-size('12');
+  }
+
+  .#{$prefix}--data-table--static {
+    width: auto;
+  }
 }
 
 @include exports('data-table-v2-core') {

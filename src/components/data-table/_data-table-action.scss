@@ -358,6 +358,101 @@
   .#{$prefix}--batch-summary__para {
     @include type-style('body-short-01');
   }
+
+  //-------------------------------------------------
+  //SMALL TOOLBAR
+  //-------------------------------------------------
+  .#{$prefix}--table-toolbar--small {
+    height: rem(32px);
+
+    .#{$prefix}--toolbar-search-container-expandable,
+    .#{$prefix}--toolbar-search-container-persistent {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-input,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-close,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-close {
+      height: rem(32px);
+      width: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-magnifier {
+      height: rem(32px);
+      width: rem(32px);
+      padding: $spacing-xs;
+    }
+
+    //hidden
+    .#{$prefix}--toolbar-search-container-expandable {
+      width: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-input {
+      padding-left: $spacing-xl;
+    }
+
+    //active
+    .#{$prefix}--toolbar-search-container-active {
+      flex: auto;
+      transition: flex 175ms $carbon--standard-easing;
+    }
+
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input {
+      visibility: visible;
+    }
+
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input:focus {
+      @include focus-outline('outline');
+      background: $hover-field;
+    }
+
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input:active,
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+      background: $hover-field;
+    }
+
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-magnifier:active,
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+      @include focus-outline('reset');
+      background: transparent;
+    }
+  }
+
+  //-------------------------------------------------
+  // SMALL BATCH ACTIONS
+  //-------------------------------------------------
+  .#{$prefix}--table-toolbar--small .#{$prefix}--batch-actions .#{$prefix}--action-list {
+    height: rem(32px);
+  }
+
+  //FIGURE OUT CORRECT SELECTORS FOR EVERYTHING BELOW (WAS PREVIOUSLY NESTED IN SMALL TOOLBAR SELECTOR)
+  .#{$prefix}--toolbar-action {
+    height: rem(32px);
+    width: rem(32px);
+    padding: $spacing-xs;
+  }
+
+  .#{$prefix}--btn--primary {
+    padding-top: rem(6px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+    top: rem(8px);
+  }
+
+  .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
+    height: rem(32px);
+    width: rem(160px);
+    overflow: hidden;
+  }
 }
 
 @include exports('data-table-v2-action') {
