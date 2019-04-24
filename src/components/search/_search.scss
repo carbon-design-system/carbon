@@ -101,6 +101,7 @@
     transform: translateY(-50%);
     // Ensure clear icon is rendered in Firefox (#1127)
     fill: $text-02;
+    pointer-events: none;
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-magnifier {

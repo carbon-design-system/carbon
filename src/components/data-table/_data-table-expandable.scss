@@ -203,16 +203,16 @@
   // parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
     background: $ui-03;
-    border-top: 1px solid $active-01;
+    border-top: 1px solid $active-ui;
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $active-01;
+    box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
     background: $ui-03;
     color: $text-01;
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $active-01;
+    box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
@@ -252,12 +252,12 @@
     color: $text-01;
     background-color: $hover-field;
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $active-01;
+    box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row + tr[data-child-row]:last-of-type td {
-    box-shadow: inset 0 -1px $active-01;
+    box-shadow: inset 0 -1px $active-ui;
     padding-bottom: rem(24px);
   }
 
