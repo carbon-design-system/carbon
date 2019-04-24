@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
+Set up your SSH Key GitHub account and install node.js 4 or higher.
 
 - [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/)
 - [`nvm` (Node Version Manager)](https://github.com/creationix/nvm) to use the `Node 6`.
