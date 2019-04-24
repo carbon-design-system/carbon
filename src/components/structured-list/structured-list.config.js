@@ -84,7 +84,6 @@ module.exports = {
       context: {
         columns,
         rows,
-        hasBorder: true,
         selectable: true,
         group: 'services',
       },
