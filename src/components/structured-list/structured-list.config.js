@@ -149,7 +149,6 @@ module.exports = {
         componentsX,
         columns,
         rows,
-        hasBorder: true,
         selectable: true,
         group: 'services',
       },
