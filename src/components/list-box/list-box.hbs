@@ -5,7 +5,6 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-{{#if @root.featureFlags.componentsX}}
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">List box label</label>
@@ -126,40 +125,3 @@
     </div>
   </div>
 </div>
-{{else}}
-<div
-  class="{{@root.prefix}}--form-item {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-  <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu" aria-expanded="false"
-    aria-haspopup="true">
-    <span class="{{@root.prefix}}--list-box__label">Label</span>
-    <div class="{{@root.prefix}}--list-box__menu-icon">
-      <svg fill-rule="evenodd" height="5" name="caret--down" role="img" viewBox="0 0 10 5" width="10"
-        aria-label="Open menu">
-        <title>Open menu</title>
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
-    </div>
-  </div>
-</div>
-<div
-  class="{{@root.prefix}}--form-item {{@root.prefix}}--list-box{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}">
-  <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu" aria-expanded="true"
-    aria-haspopup="true">
-    <span class="{{@root.prefix}}--list-box__label">Label</span>
-    <div class="{{@root.prefix}}--list-box__menu-icon {{@root.prefix}}--list-box__menu-icon--open">
-      <svg fill-rule="evenodd" height="5" name="caret--down" role="img" viewBox="0 0 10 5" width="10"
-        aria-label="Close menu">
-        <title>Close menu</title>
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
-    </div>
-  </div>
-  <div class="{{@root.prefix}}--list-box__menu">
-    {{#each items}}
-    <div
-      class="{{@root.prefix}}--list-box__menu-item{{#if selected}} {{@root.prefix}}--list-box__menu-item--highlighted{{/if}}"
-      id="{{id}}">{{label}}</div>
-    {{/each}}
-  </div>
-</div>
-{{/if}}

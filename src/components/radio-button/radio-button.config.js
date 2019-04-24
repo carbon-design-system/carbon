@@ -48,19 +48,6 @@ module.exports = {
       },
     },
     {
-      name: 'horizontal-bottom',
-      label: 'Radio button group (Label at bottom)',
-      meta: {
-        xVersionNotSupported: true,
-      },
-      context: {
-        direction: 'bottom',
-        selectedValue: 'red',
-        group: 'radio-button',
-        items: items(),
-      },
-    },
-    {
       name: 'horizontal-left',
       label: 'Radio button group (Label at left)',
       context: {
@@ -71,24 +58,8 @@ module.exports = {
       },
     },
     {
-      name: 'horizontal-top',
-      label: 'Radio button group (Label at top)',
-      meta: {
-        xVersionNotSupported: true,
-      },
-      context: {
-        direction: 'top',
-        selectedValue: 'red',
-        group: 'radio-button',
-        items: items(),
-      },
-    },
-    {
       name: 'vertical',
       label: 'Vertical radio button group',
-      meta: {
-        xVersionOnly: true,
-      },
       context: {
         selectedValue: 'red',
         group: 'radio-button--vertical',
@@ -99,9 +70,6 @@ module.exports = {
     {
       name: 'vertical-left',
       label: 'Vertical radio button group (Label at left)',
-      meta: {
-        xVersionOnly: true,
-      },
       context: {
         direction: 'left',
         selectedValue: 'red',

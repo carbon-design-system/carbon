@@ -1,5 +1,5 @@
 import Search from '../../src/components/search/search';
-import searchHTML from '../../html/search/search--large.html';
+import searchHTML from '../../html/search/search--extra-large.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test Search', function() {

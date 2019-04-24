@@ -8,79 +8,34 @@
 <section class="{{@root.prefix}}--structured-list{{#if selectable}} {{@root.prefix}}--structured-list--selection{{/if}}"{{#if selectable}} data-structured-list{{/if}}>
   <div class="{{@root.prefix}}--structured-list-thead">
     <div class="{{@root.prefix}}--structured-list-row {{@root.prefix}}--structured-list-row--header-row">
-      {{#if componentsX}}
       {{#each columns}}
         <div class="{{@root.prefix}}--structured-list-th">{{title}}</div>
       {{/each}}
       {{#if selectable}}
         <div class="{{@root.prefix}}--structured-list-th"></div>
-      {{/if}}
-      {{else}}
-      {{#if selectable}}
-        <div class="{{@root.prefix}}--structured-list-th"></div>
-      {{/if}}
-      {{#each columns}}
-        <div class="{{@root.prefix}}--structured-list-th">{{title}}</div>
-      {{/each}}
       {{/if}}
     </div>
   </div>
   <div class="{{@root.prefix}}--structured-list-tbody">
     {{#each rows as |row|}}
-      {{#if ../componentsX}}
-        {{#if ../selectable}}
-          <label for="{{row.id}}" aria-label="{{row.selectionLabel}}" class="{{@root.prefix}}--structured-list-row{{#if row.selected}} {{@root.prefix}}--structured-list-row--selected{{/if}}" tabindex="0">
-        {{else}}
-          <div class="{{@root.prefix}}--structured-list-row">
-        {{/if}}
-          {{#each ../columns as |column|}}
-            {{#with (lookup row column.name) as |data|}}
-              <div class="{{@root.prefix}}--structured-list-td{{#if column.nowrap}} {{@root.prefix}}--structured-list-content--nowrap{{/if}}">{{data}}</div>
-            {{/with}}
-          {{/each}}
-        {{#if ../selectable}}
-            <input tabindex="-1" id="{{row.id}}" class="{{@root.prefix}}--structured-list-input" value="{{row.value}}" type="radio" name="{{../group}}" title="{{row.selectionLabel}}"{{#if row.selected}} checked{{/if}} />
-            <div class="{{@root.prefix}}--structured-list-td">
-              {{#if @root.featureFlags.componentsX}}
-                {{ carbon-icon 'CheckmarkFilled16' class=(add @root.prefix '--structured-list-svg') }}
-              {{else}}
-                <svg class="{{@root.prefix}}--structured-list-svg" width="16" height="16" viewBox="0 0 16 16">
-                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
-                    fill-rule="evenodd" />
-                </svg>
-              {{/if}}
-            </div>
-          </label>
-        {{else}}
-          </div>
-        {{/if}}
+      {{#if ../selectable}}
+        <label for="{{row.id}}" aria-label="{{row.selectionLabel}}" class="{{@root.prefix}}--structured-list-row{{#if row.selected}} {{@root.prefix}}--structured-list-row--selected{{/if}}" tabindex="0">
       {{else}}
-        {{#if ../selectable}}
-          <label aria-label="{{row.selectionLabel}}" class="{{@root.prefix}}--structured-list-row{{#if row.selected}} {{@root.prefix}}--structured-list-row--selected{{/if}}" tabindex="0">
-            <input tabindex="-1" class="{{@root.prefix}}--structured-list-input" value="{{row.value}}" type="radio" name="{{../group}}" title="{{row.selectionLabel}}"{{#if row.selected}} checked{{/if}} />
-            <div class="{{@root.prefix}}--structured-list-td">
-              {{#if @root.featureFlags.componentsX}}
-                {{ carbon-icon 'CheckmarkFilled16' class=(add @root.prefix '--structured-list-svg') }}
-              {{else}}
-                <svg class="{{@root.prefix}}--structured-list-svg" width="16" height="16" viewBox="0 0 16 16">
-                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
-                    fill-rule="evenodd" />
-                </svg>
-              {{/if}}
-            </div>
-        {{else}}
-          <div class="{{@root.prefix}}--structured-list-row">
-        {{/if}}
-          {{#each ../columns as |column|}}
-            {{#with (lookup row column.name) as |data|}}
-              <div class="{{@root.prefix}}--structured-list-td{{#if column.nowrap}} {{@root.prefix}}--structured-list-content--nowrap{{/if}}">{{data}}</div>
-            {{/with}}
-          {{/each}}
-        {{#if ../selectable}}
-          </label>
-        {{else}}
+        <div class="{{@root.prefix}}--structured-list-row">
+      {{/if}}
+        {{#each ../columns as |column|}}
+          {{#with (lookup row column.name) as |data|}}
+            <div class="{{@root.prefix}}--structured-list-td{{#if column.nowrap}} {{@root.prefix}}--structured-list-content--nowrap{{/if}}">{{data}}</div>
+          {{/with}}
+        {{/each}}
+      {{#if ../selectable}}
+          <input tabindex="-1" id="{{row.id}}" class="{{@root.prefix}}--structured-list-input" value="{{row.value}}" type="radio" name="{{../group}}" title="{{row.selectionLabel}}"{{#if row.selected}} checked{{/if}} />
+          <div class="{{@root.prefix}}--structured-list-td">
+            {{ carbon-icon 'CheckmarkFilled16' class=(add @root.prefix '--structured-list-svg') }}
           </div>
-        {{/if}}
+        </label>
+      {{else}}
+        </div>
       {{/if}}
     {{/each}}
   </div>

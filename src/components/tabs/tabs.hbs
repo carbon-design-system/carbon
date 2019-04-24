@@ -8,17 +8,11 @@
 <nav data-tabs class="{{@root.prefix}}--tabs" role="navigation">
   <div class="{{@root.prefix}}--tabs-trigger" tabindex="0">
     <a href="javascript:void(0)" class="{{@root.prefix}}--tabs-trigger-text" tabindex="-1"></a>
-    {{#if featureFlags.componentsX}}
-      {{ carbon-icon 'ChevronDownGlyph' }}
-    {{else}}
-      <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
-    {{/if}}
+    {{ carbon-icon 'ChevronDownGlyph' }}
   </div>
   <ul class="{{@root.prefix}}--tabs__nav {{@root.prefix}}--tabs__nav--hidden" role="tablist">
     {{#each items}}
-      <li class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}} {{#if disabled}} {{@root.prefix}}--tabs__nav-item--disabled {{/if}}" data-target=".{{panelClass}}" role="presentation" {{#if ../featureFlags.componentsX}}{{/if}}>
+      <li class="{{@root.prefix}}--tabs__nav-item{{#if selected}} {{@root.prefix}}--tabs__nav-item--selected{{/if}} {{#if disabled}} {{@root.prefix}}--tabs__nav-item--disabled {{/if}}" data-target=".{{panelClass}}" role="presentation">
         <a tabindex="0" id="{{linkId}}" class="{{@root.prefix}}--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="{{panelId}}"{{#if selected}} aria-selected="true"{{/if}}>{{label}}</a>
       </li>
     {{/each}}

@@ -7,12 +7,10 @@
 
 'use strict';
 
-const { componentsX } = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
   context: {
-    componentsX,
     prefix,
   },
   variants: [

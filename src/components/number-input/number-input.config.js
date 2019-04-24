@@ -7,13 +7,10 @@
 
 'use strict';
 
-const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
-const { componentsX } = featureFlags;
 module.exports = {
   context: {
-    componentsX,
     prefix,
   },
   variants: [
@@ -35,9 +32,6 @@ module.exports = {
     {
       name: 'mobile',
       label: 'Mobile Number Input',
-      meta: {
-        xVersionOnly: true,
-      },
       context: {
         mobile: true,
       },
@@ -45,9 +39,6 @@ module.exports = {
     {
       name: 'mobile-light',
       label: 'Mobile Number Input (light)',
-      meta: {
-        xVersionOnly: true,
-      },
       context: {
         light: true,
         mobile: true,

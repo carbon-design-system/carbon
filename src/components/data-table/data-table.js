@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -14,7 +13,6 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
-const suffix = componentsX ? '' : '-v2';
 
 class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
@@ -64,7 +62,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
         this._toggleState(eventElement, evt);
       }
 
-      if (componentsX && searchContainer) {
+      if (searchContainer) {
         this._handleDocumentClick(evt);
       }
     });
@@ -224,30 +222,14 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     }
   };
 
-  _expandableRowsInit = expandableRows => {
-    expandableRows.forEach(item => {
-      if (!componentsX) {
-        item.classList.remove(this.options.classExpandableRowHidden);
-        this.tableBody.removeChild(item);
-      }
-    });
-  };
-
   _rowExpandToggle = ({ element, initialEvt }) => {
     const parent = eventMatches(initialEvt, this.options.eventParentContainer);
 
-    const index = this.expandCells.indexOf(element);
     if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
-      if (!componentsX) {
-        this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
-      }
     } else {
       parent.classList.remove(this.options.classExpandableRow);
-      if (!componentsX) {
-        this.tableBody.removeChild(parent.nextElementSibling);
-      }
       element.dataset.previousValue = 'expanded';
     }
   };
@@ -314,11 +296,9 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
         const mergedExpandableRows = [...toArray(this.expandableRows), ...toArray(diffExpandableRows)];
-        this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
     } else if (newExpandableRows.length > 0) {
-      this._expandableRowsInit(newExpandableRows);
       this.expandableRows = newExpandableRows;
     }
 
@@ -340,34 +320,34 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   static get options() {
     const { prefix } = settings;
     return {
-      selectorInit: `[data-table${suffix}]`,
+      selectorInit: `[data-table]`,
       selectorToolbar: `.${prefix}--table--toolbar`,
       selectorActions: `.${prefix}--batch-actions`,
       selectorCount: '[data-items-selected]',
       selectorActionCancel: `.${prefix}--batch-summary__cancel`,
       selectorCheckbox: `.${prefix}--checkbox`,
-      selectorExpandCells: `td.${prefix}--table-expand${suffix}`,
-      selectorExpandableRows: `.${prefix}--expandable-row${suffix}`,
-      selectorParentRows: `.${prefix}--parent-row${suffix}`,
+      selectorExpandCells: `td.${prefix}--table-expand`,
+      selectorExpandableRows: `.${prefix}--expandable-row`,
+      selectorParentRows: `.${prefix}--parent-row`,
       selectorChildRow: '[data-child-row]',
       selectorTableBody: 'tbody',
-      selectorTableSort: `.${prefix}--table-sort${suffix}`,
-      selectorTableSelected: `.${prefix}--data-table${suffix}--selected`,
+      selectorTableSort: `.${prefix}--table-sort`,
+      selectorTableSelected: `.${prefix}--data-table--selected`,
       selectorToolbarSearchContainer: `.${prefix}--toolbar-search-container-expandable`,
       selectorSearchMagnifier: `.${prefix}--search-magnifier`,
       selectorSearchInput: `.${prefix}--search-input`,
-      classExpandableRow: `${prefix}--expandable-row${suffix}`,
-      classExpandableRowHidden: `${prefix}--expandable-row--hidden${suffix}`,
-      classExpandableRowHover: `${prefix}--expandable-row--hover${suffix}`,
-      classTableSortAscending: `${prefix}--table-sort${suffix}--ascending`,
-      classTableSortActive: `${prefix}--table-sort${suffix}--active`,
+      classExpandableRow: `${prefix}--expandable-row`,
+      classExpandableRowHidden: `${prefix}--expandable-row--hidden`,
+      classExpandableRowHover: `${prefix}--expandable-row--hover`,
+      classTableSortAscending: `${prefix}--table-sort--ascending`,
+      classTableSortActive: `${prefix}--table-sort--active`,
       classToolbarSearchActive: `${prefix}--toolbar-search-container-active`,
       classActionBarActive: `${prefix}--batch-actions--active`,
-      classTableSelected: `${prefix}--data-table${suffix}--selected`,
-      eventBeforeExpand: `data-table${suffix}-beforetoggleexpand`,
-      eventAfterExpand: `data-table${suffix}-aftertoggleexpand`,
-      eventBeforeSort: `data-table${suffix}-beforetogglesort`,
-      eventAfterSort: `data-table${suffix}-aftertogglesort`,
+      classTableSelected: `${prefix}--data-table--selected`,
+      eventBeforeExpand: `data-table-beforetoggleexpand`,
+      eventAfterExpand: `data-table-aftertoggleexpand`,
+      eventBeforeSort: `data-table-beforetogglesort`,
+      eventAfterSort: `data-table-aftertogglesort`,
       eventTrigger: '[data-event]',
       eventParentContainer: '[data-parent-row]',
     };

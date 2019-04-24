@@ -8,11 +8,9 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
-const { componentsX } = require('../../globals/js/feature-flags');
 
 module.exports = {
   context: {
-    componentsX,
     prefix,
   },
   variants: [
@@ -21,7 +19,6 @@ module.exports = {
       label: 'Text Input',
       context: {
         light: false,
-        componentsX,
       },
     },
     {
@@ -29,7 +26,6 @@ module.exports = {
       label: 'Text Input (Light)',
       context: {
         light: true,
-        componentsX,
       },
     },
   ],

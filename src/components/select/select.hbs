@@ -14,7 +14,6 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/unless}}
-    {{#if @root.featureFlags.componentsX}}
     {{#if inline}}
     <div class="{{@root.prefix}}--select-input--inline__wrapper">
       {{/if}}
@@ -49,42 +48,11 @@
       </div>
       {{/if}}
     </div>
-    {{else}}
-    <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="{{@root.prefix}}--select-input">
-      {{#each items}}
-      {{#if items}}
-      <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
-        {{#each items}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}} {{#if
-          selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
-          {{label}}
-        </option>
-        {{/each}}
-      </optgroup>
-      {{else}}
-      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}} {{#if
-          selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
-        {{label}}
-      </option>
-      {{/if}}
-      {{/each}}
-    </select>
-    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
-    {{/if}}
     {{#if inline}}
     {{#if helperText}}
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/if}}
-    {{#unless componentsX}}
-    {{#if invalid}}
-    <div class="{{@root.prefix}}--form-requirement">
-      Validation message here
-    </div>
-    {{/if}}
-    {{/unless}}
   </div>
 </div>
 
@@ -98,7 +66,6 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/unless}}
-    {{#if @root.featureFlags.componentsX}}
     {{#if inline}}
     <div class="{{@root.prefix}}--select-input--inline__wrapper">
       {{/if}}
@@ -120,40 +87,10 @@
       </div>
       {{/if}}
     </div>
-    {{else}}
-    <select {{#if invalid}}data-invalid{{/if}} id="select-id-disabled" class="{{@root.prefix}}--select-input" disabled>
-      {{#each items}}
-      {{#if items}}
-      <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
-        {{#each items}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
-          {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
-          {{label}}
-        </option>
-        {{/each}}
-      </optgroup>
-      {{else}}
-      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}}disabled{{/if}}
-        {{#if selected}}selected{{/if}} {{#if hidden}}hidden{{/if}}>
-        {{label}}
-      </option>{{/if}}
-      {{/each}}
-    </select>
-    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
-    {{/if}}
     {{#if inline}}
     {{#if helperText}}
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/if}}
-    {{#unless componentsX}}
-    {{#if invalid}}
-    <div class="{{@root.prefix}}--form-requirement">
-      Validation message here
-    </div>
-    {{/if}}
-    {{/unless}}
   </div>
 </div>

@@ -7,13 +7,11 @@
 
 'use strict';
 
-const { prefix, componentsX } = require('../../globals/js/settings');
-const featureFlags = require('../../globals/js/feature-flags');
+const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
   default: 'primary',
   context: {
-    featureFlags,
     prefix,
   },
   variants: [
@@ -99,36 +97,6 @@ module.exports = {
       `,
       context: {
         variant: 'danger',
-        danger: true,
-        small: true,
-      },
-    },
-    {
-      name: 'danger--primary',
-      label: 'Primary Danger Buttons',
-      meta: {
-        removed: componentsX,
-        xVersionNotSupported: true,
-      },
-      context: {
-        variant: 'danger--primary',
-        danger: true,
-      },
-    },
-    {
-      name: 'danger--primary--small',
-      label: 'Primary Danger Buttons (Small)',
-      notes: `
-        Small buttons may be used when there is not enough space for a
-        regular sized button. This issue is most found in tables. Small button should have three words
-        or less.
-      `,
-      meta: {
-        removed: componentsX,
-        xVersionNotSupported: true,
-      },
-      context: {
-        variant: 'danger--primary',
         danger: true,
         small: true,
       },

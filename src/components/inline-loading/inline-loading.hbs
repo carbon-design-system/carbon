@@ -10,11 +10,8 @@
   <div class="{{@root.prefix}}--inline-loading__animation">
     <div data-inline-loading-spinner class="{{@root.prefix}}--loading {{@root.prefix}}--loading--small">
       <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
-        {{#if componentsX}}
         <circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="30" />
-        {{/if}}
-        <circle {{#if componentsX}}class="{{@root.prefix}}--loading__stroke" {{/if}} cx="0" cy="0"
-        {{#if componentsX}}r="30" {{else}}r="37.5" {{/if}}/>
+        <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="30"/>
       </svg>
     </div>
     <svg data-inline-loading-finished hidden
