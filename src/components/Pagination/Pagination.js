@@ -301,6 +301,7 @@ export default class Pagination extends Component {
             className={`${prefix}--select__item-count`}
             labelText=""
             hideLabel
+            noLabel
             inline
             onChange={this.handleSizeChange}
             value={statePageSize}>

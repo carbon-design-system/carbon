@@ -26,6 +26,7 @@ const Select = React.forwardRef(
       labelText,
       disabled,
       children,
+      noLabel, // reserved for use with <Pagination> component
       iconDescription,
       hideLabel,
       invalid,
@@ -99,9 +100,11 @@ const Select = React.forwardRef(
     return (
       <div className={`${prefix}--form-item`}>
         <div className={selectClasses}>
-          <label htmlFor={id} className={labelClasses}>
-            {labelText}
-          </label>
+          {!noLabel && (
+            <label htmlFor={id} className={labelClasses}>
+              {labelText}
+            </label>
+          )}
           {!inline && helper}
           {componentsX && inline && (
             <>
@@ -204,6 +207,12 @@ Select.propTypes = {
    * Specify whether you want the light version of this control
    */
   light: PropTypes.bool,
+
+  /**
+   * Reserved for use with <Pagination> component. Will not render a label for the
+   * select since Pagination renders one for us.
+   */
+  noLabel: PropTypes.bool,
 };
 
 Select.defaultProps = {
