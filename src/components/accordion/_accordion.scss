@@ -65,7 +65,7 @@
     }
 
     &:focus:before {
-      @include focus-outline('outline');
+      @include focus-outline('outline-compat');
     }
   }
 
