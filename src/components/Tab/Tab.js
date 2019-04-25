@@ -38,6 +38,11 @@ export default class Tab extends React.Component {
     handleTabKeyDown: PropTypes.func,
 
     /**
+     * Whether your Tab is disabled.
+     */
+    disabled: PropTypes.bool,
+
+    /**
      * Provide a string that represents the `href` of the Tab
      */
     href: PropTypes.string.isRequired,
@@ -114,6 +119,7 @@ export default class Tab extends React.Component {
       handleTabClick,
       handleTabAnchorFocus, // eslint-disable-line
       handleTabKeyDown,
+      disabled,
       href,
       index,
       label,
@@ -125,11 +131,10 @@ export default class Tab extends React.Component {
       ...other
     } = this.props;
 
-    const classes = classNames(
-      `${prefix}--tabs__nav-item`,
-      { [`${prefix}--tabs__nav-item--selected`]: selected },
-      className
-    );
+    const classes = classNames(className, `${prefix}--tabs__nav-item`, {
+      [`${prefix}--tabs__nav-item--disabled`]: disabled,
+      [`${prefix}--tabs__nav-item--selected`]: selected,
+    });
 
     const anchorProps = {
       className: `${prefix}--tabs__nav-link`,
