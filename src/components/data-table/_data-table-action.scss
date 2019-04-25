@@ -31,9 +31,8 @@
     justify-content: flex-end;
     transform: translate3d(0, 0, 0);
     visibility: visible;
-    transition: transform $duration--fast-01 motion(standard, productive),
-      visibility $duration--fast-01 motion(standard, productive);
-    transition-delay: $duration--fast-01;
+    transition: transform $duration--fast-02 motion(standard, productive),
+      visibility $duration--fast-02 motion(standard, productive);
   }
 
   //-------------------------------------------------
@@ -59,7 +58,7 @@
     left: 0;
     cursor: pointer;
     pointer-events: all;
-    transition: background $duration--fast-01 motion(entrance, productive);
+    transition: background $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
@@ -144,7 +143,7 @@
     height: $layout-04;
     width: $layout-04;
     padding: $spacing-md;
-    transition: background $duration--fast-01 motion(entrance, productive);
+    transition: background $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--toolbar-action:hover:not([disabled]) {
@@ -239,9 +238,8 @@
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
     visibility: hidden;
     transform: translate3d(0, 48px, 0);
-    transition: transform $duration--fast-01 motion(standard, productive),
-      visibility $duration--fast-01 motion(standard, productive);
-    transition-delay: 0;
+    transition: transform $duration--fast-02 motion(standard, productive),
+      visibility $duration--fast-02 motion(standard, productive);
   }
 
   //-------------------------------------------------
@@ -259,10 +257,9 @@
     height: 100%;
     will-change: transform;
     background-color: $interactive-01;
-    transition: transform $duration--fast-01 motion(standard, productive),
-      visibility $duration--fast-01 motion(standard, productive), opacity $duration--fast-01 motion(standard, productive);
+    transition: transform $duration--fast-02 motion(standard, productive),
+      visibility $duration--fast-02 motion(standard, productive), opacity $duration--fast-02 motion(standard, productive);
     transform: translate3d(0, 48px, 0);
-    transition-delay: 0;
     pointer-events: none;
     visibility: hidden;
   }
@@ -275,7 +272,6 @@
     visibility: visible;
     pointer-events: all;
     transform: translate3d(0, 0, 0);
-    transition-delay: $duration--fast-01;
   }
 
   //btns container
@@ -344,7 +340,7 @@
     content: '';
     background-color: $ui-01;
     border: none;
-    transition: opacity $duration--fast-01 motion(standard, productive);
+    transition: opacity $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
