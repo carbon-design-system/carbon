@@ -7,7 +7,6 @@
 
 'use strict';
 
-const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 /* eslint-disable max-len */
@@ -42,7 +41,6 @@ const items = [
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
   variants: [
@@ -52,7 +50,6 @@ module.exports = {
       context: {
         variant: 'inline',
         items,
-        componentsX: featureFlags.componentsX,
       },
     },
     {
@@ -66,7 +63,6 @@ module.exports = {
       context: {
         variant: 'toast',
         items,
-        componentsX: featureFlags.componentsX,
       },
     },
   ],

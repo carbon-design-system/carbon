@@ -13,18 +13,10 @@
 @import '../../globals/scss/vars';
 @import '../list-box/list-box';
 
+/// Multi select styles
+/// @access private
+/// @group multi-select
 @mixin multiselect {
-  .#{$prefix}--multi-select.#{$prefix}--combo-box > .#{$prefix}--list-box__field {
-    padding: 0 1rem;
-  }
-
-  .#{$prefix}--multi-select.#{$prefix}--combo-box input[role='combobox'] {
-    padding: 0;
-    outline: none;
-  }
-}
-
-@mixin multiselect--x {
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -45,10 +37,6 @@
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected .#{$prefix}--list-box__field {
-    padding-left: $carbon--spacing-03;
-  }
-
   .#{$prefix}--multi-select--filterable {
     .#{$prefix}--list-box__selection--multi {
       position: absolute;
@@ -63,14 +51,10 @@
     //
     // i.e. the input field needs adjusted padding to account for the width of
     // the number in <ListBox.Selection>
-    padding-left: carbon--mini-units(6);
+    padding-left: carbon--mini-units(7);
   }
 }
 
 @include exports('multi-select') {
-  @if feature-flag-enabled('components-x') {
-    @include multiselect--x;
-  } @else {
-    @include multiselect;
-  }
+  @include multiselect;
 }

@@ -6,7 +6,6 @@
 -->
 
 <div class="{{@root.prefix}}--form-item">
-  {{#if componentsX}}
   <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
   <div class="{{prefix}}--form__helper-text">
     Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
@@ -14,26 +13,14 @@
   <input id="text-input-3" type="text"
     class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
     placeholder="Optional placeholder text">
-  {{else}}
-  <input id="text-input-3" type="text"
-    class="{{@root.prefix}}--text-input{{#if light}} {{@root.prefix}}--text-input--light{{/if}}"
-    placeholder="Optional placeholder text">
-  <label for="text-input-3" class="{{@root.prefix}}--label">Text Input label</label>
-  {{/if}}
 </div>
 <div class="{{@root.prefix}}--form-item">
-  {{#if componentsX}}
   <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
   <div class="{{prefix}}--form__helper-text">
     Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
   </div>
   <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
     rows="4" cols="50" placeholder="Placeholder text."></textarea>
-  {{else}}
-  <textarea id="text-area-2" class="{{@root.prefix}}--text-area{{#if light}} {{@root.prefix}}--text-area--light{{/if}}"
-    rows="4" cols="50" placeholder="Placeholder text."></textarea>
-  <label for="text-area-2" class="{{@root.prefix}}--label">Text Area label</label>
-  {{/if}}
 </div>
 <div class="{{@root.prefix}}--form-item">
   <div
@@ -44,7 +31,6 @@
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/if}}
     {{/unless}}
-    {{#if componentsX}}
     <div class="{{@root.prefix}}--select-input__wrapper">
       <select {{#if invalid}} data-invalid{{/if}} id="select-id"
         class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
@@ -61,21 +47,6 @@
       {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--select__invalid-icon')}}
       {{/if}}
     </div>
-    {{else}}
-    <select {{#if invalid}} data-invalid{{/if}} id="select-id"
-      class="{{@root.prefix}}--select-input {{#if invalid}} {{@root.prefix}}--select--invalid {{/if}}">
-      {{#each selectItems}}
-      {{#if items}}
-      <optgroup class="{{@root.prefix}}--select-optgroup" label="{{label}}">
-        {{#each items}}
-        <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/each}} </optgroup> {{else}}
-      <option class="{{@root.prefix}}--select-option" value="{{value}}" {{#if disabled}} disabled{{/if}}{{#if
-          selected}} selected{{/if}}{{#if hidden}} hidden{{/if}}>{{label}} </option> {{/if}} {{/each}} </select>
-    <svg class="{{@root.prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-      <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-    </svg>
-    {{/if}}
     {{#if inline}}
     {{#if helperText}}
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>

@@ -1,5 +1,4 @@
 $temp-bg: #fff;
-$temp-text: $color__blue-90;
 
 .code-example {
   display: flex;
@@ -67,7 +66,6 @@ $temp-text: $color__blue-90;
   position: absolute;
   bottom: rem(2px);
   right: rem(2px);
-  color: $temp-text;
   background-color: $temp-bg;
   border: none;
   padding: 1rem;
@@ -79,7 +77,6 @@ $temp-text: $color__blue-90;
 
   &--icon {
     margin-left: 0.5rem;
-    fill: $temp-text;
     transition: $transition--base;
 
     &--rotated {

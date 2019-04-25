@@ -10,38 +10,15 @@
     <label for="search__input" class="{{@root.prefix}}--label">Search</label>
     <input type="text" class="{{@root.prefix}}--search-input" id="search__input" placeholder="Search">
     <button class="{{@root.prefix}}--toolbar-search__btn" aria-label="Toolbar search">
-      {{#if @root.featureFlags.componentsX}}
-        {{ carbon-icon 'Search16' class=(add @root.prefix '--search-magnifier') }}
-      {{else}}
-        <svg class="{{@root.prefix}}--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
-          <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
-            fill-rule="nonzero" />
-        </svg>
-      {{/if}}
+      {{ carbon-icon 'Search16' class=(add @root.prefix '--search-magnifier') }}
     </button>
     <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="Clear search
         input" aria-label="Clear search input">
-      {{#if @root.featureFlags.componentsX}}
-        {{ carbon-icon 'Close16' }}
-      {{else}}
-        <svg width="16" height="16" viewBox="0 0 16 16">
-          <path d="M8 7.293L5.525 4.818l-.707.707L7.293 8l-2.475 2.475.707.707L8 8.707l2.475 2.475.707-.707L8.707 8l2.475-2.475-.707-.707L8 7.293zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-            fill-rule="evenodd" />
-        </svg>
-      {{/if}}
+      {{ carbon-icon 'Close16' }}
     </button>
   </div>
   <div data-overflow-menu class="{{@root.prefix}}--overflow-menu" tabindex="0" aria-label="List of options">
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'Filter16' class=(add (add @root.prefix '--overflow-menu__icon ') (add @root.prefix '--toolbar-filter-icon')) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--overflow-menu__icon {{@root.prefix}}--toolbar-filter-icon" width="16" height="12" viewBox="0 0 16 12">
-        <g fill-rule="nonzero">
-          <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
-          />
-        </g>
-      </svg>
-    {{/if}}
+    {{ carbon-icon 'Filter16' class=(add (add @root.prefix '--overflow-menu__icon ') (add @root.prefix '--toolbar-filter-icon')) }}
     <ul class="{{@root.prefix}}--overflow-menu-options">
       <li class="{{@root.prefix}}--toolbar-menu__title">FILTER BY</li>
       {{#each filterOptions}}
@@ -53,15 +30,7 @@
     </ul>
   </div>
   <div data-overflow-menu class="{{@root.prefix}}--overflow-menu" tabindex="0" aria-label="List of options">
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
-    {{else}}
-      <svg class="{{@root.prefix}}--overflow-menu__icon" width="4" height="20" viewBox="0 0 4 20" fill-rule="evenodd">
-        <circle cx="2" cy="2" r="2"></circle>
-        <circle cx="2" cy="10" r="2"></circle>
-        <circle cx="2" cy="18" r="2"></circle>
-      </svg>
-    {{/if}}
+    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
     <ul class="{{@root.prefix}}--overflow-menu-options">
       <li class="{{@root.prefix}}--overflow-menu-options__option">
         <button type="button" class="{{@root.prefix}}--overflow-menu-options__btn">Refresh table</button>

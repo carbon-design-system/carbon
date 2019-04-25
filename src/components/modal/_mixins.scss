@@ -9,6 +9,8 @@
 // Modal
 // ---------------------------------------------
 
+/// @access private
+/// @group modal
 @mixin modal--color($color) {
   .#{$prefix}--modal-container {
     border-top-color: $color;

@@ -69,15 +69,15 @@ Notable changes:
 - The CDN for IBM Plex font files is now Google Fonts, we still recommend using
   your own for production
 
-| v9                        | v10                                                 |
-| ------------------------- | --------------------------------------------------- |
-| `$font-path`              | ☠️ Deprecated                                       |
-| `$unicodes`               | ☠️ Deprecated                                       |
-| `$families`               | ☠️ Deprecated, use `$carbon--font-families` instead |
-| `$fallbacks`              | ☠️ Deprecated, use `$carbon--font-families` instead |
-| `$weights`                | ☠️ Deprecated, use `$carbon--font-weights` instead  |
-| `check-default-font-path` | ☠️ Deprecated                                       |
-| `plex-font-face`          | ☠️ Deprecated                                       |
+| v9                        | v10                                              |
+| ------------------------- | ------------------------------------------------ |
+| `$font-path`              | ☠️ Removed                                       |
+| `$unicodes`               | ☠️ Removed                                       |
+| `$families`               | ☠️ Removed, use `$carbon--font-families` instead |
+| `$fallbacks`              | ☠️ Removed, use `$carbon--font-families` instead |
+| `$weights`                | ☠️ Removed, use `$carbon--font-weights` instead  |
+| `check-default-font-path` | ☠️ Removed                                       |
+| `plex-font-face`          | ☠️ Removed                                       |
 
 ## `_css--reset.scss`
 

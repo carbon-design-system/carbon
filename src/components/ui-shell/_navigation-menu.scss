@@ -10,6 +10,9 @@
 @import '../../globals/scss/vars';
 @import 'functions';
 
+/// UI shell navigation
+/// @access private
+/// @group ui-shell
 @mixin carbon-navigation {
   //----------------------------------------------------------------------------
   // Navigation

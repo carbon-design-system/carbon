@@ -9,10 +9,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 
-@include exports('data-table-v2-inline-edit') {
-  /// @access private
-  $data-table-suffix: if(feature-flag-enabled('components-x'), '-v2', '');
-
+@include exports('data-table-inline-edit') {
   .#{$prefix}--inline-edit-label {
     display: flex;
     justify-content: space-between;
@@ -65,7 +62,7 @@
     }
   }
 
-  .#{$prefix}--data-table#{$data-table-suffix}--short {
+  .#{$prefix}--data-table--short {
     input {
       height: rem(32px);
     }

@@ -10,6 +10,8 @@
 //-------------------------
 @import '../../globals/scss/vars';
 
+/// @access private
+/// @group loading
 @mixin animation__loading--spin {
   // Animate the container
   animation-name: rotate;
@@ -26,6 +28,8 @@
   }
 }
 
+/// @access private
+/// @group loading
 @mixin animation__loading--stop {
   // Animate the container
   animation: rotate-end-p1 700ms $carbon--ease-out forwards, rotate-end-p2 700ms $carbon--ease-out 700ms forwards;

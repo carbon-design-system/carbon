@@ -14,10 +14,12 @@
 @import 'theme';
 
 /// Adds experimental focus styles to a particular selector.
+/// @access private
+/// @group ui-shell
 /// @example
-///    .my-custom-selector:focus {
-///      @include experimental-focus();
-///    }
+///   .my-custom-selector:focus {
+///     @include experimental-focus();
+///   }
 @mixin experimental-focus() {
   outline: 4px solid $shell-side-nav-accent-01;
   outline-offset: -4px;
@@ -25,10 +27,12 @@
 
 /// Helper to add in text overflow styles to a particular node. Useful if we
 /// don't want to have display-inline: block from the text helper classes
+/// @access private
+/// @group ui-shell
 /// @example
-///    .my-custom-selector {
-///      @include text-overflow();
-///    }
+///   .my-custom-selector {
+///     @include text-overflow();
+///   }
 @mixin text-overflow {
   white-space: nowrap;
   overflow: hidden;
@@ -40,8 +44,10 @@
 /// to whether the side-nav is open, or closed. For convenience, we also
 /// optionally set properties for opacity and visibility to help with the
 /// transition animation.
-/// @param {boolean} $opacity
-/// @param {boolean} $visibility
+/// @access private
+/// @group ui-shell
+/// @param {Bool} $opacity [false]
+/// @param {Bool} $visibility [false]
 /// @content
 @mixin expanded($opacity: false, $visibility: false) {
   @if $opacity == true {
@@ -67,6 +73,9 @@
   }
 }
 
+/// UI shell side nav
+/// @access private
+/// @group ui-shell
 @mixin carbon-side-nav {
   //----------------------------------------------------------------------------
   // Side-nav > Panel

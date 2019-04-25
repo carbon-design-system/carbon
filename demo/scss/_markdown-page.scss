@@ -3,12 +3,6 @@
     margin-top: 2rem;
   }
 
-  h3 {
-    @if not feature-flag-enabled('components-x') {
-      @include font-smoothing;
-    }
-  }
-
   video {
     margin: 1rem 0;
     max-width: 38rem;
@@ -60,9 +54,6 @@
     margin-bottom: 4rem;
 
     strong {
-      @if not feature-flag-enabled('components-x') {
-        @include letter-spacing;
-      }
       font-size: 1.125rem;
       line-height: 1.5;
       font-weight: 600;
@@ -91,11 +82,7 @@
   }
 
   p em {
-    @if not feature-flag-enabled('components-x') {
-      @include typescale('zeta');
-    } @else {
-      @include type-style('body-short-01');
-    }
+    @include type-style('body-short-01');
     color: $text-02;
     font-style: normal;
   }
@@ -175,11 +162,7 @@
 
     thead {
       th {
-        @if not feature-flag-enabled('components-x') {
-          @include typescale('zeta');
-        } @else {
-          @include type-style('body-short-01');
-        }
+        @include type-style('body-short-01');
         font-weight: 600;
         text-align: left;
         line-height: 1.25;
@@ -194,19 +177,9 @@
         border-bottom: 1px solid $ui-04;
 
         td {
-          @if not feature-flag-enabled('components-x') {
-            @include typescale('zeta');
-          } @else {
-            @include type-style('body-short-01');
-          }
+          @include type-style('body-short-01');
           padding: 1rem 3rem 1rem 0;
           line-height: 1.25;
-
-          strong {
-            @if not feature-flag-enabled('components-x') {
-              @include letter-spacing;
-            }
-          }
 
           &:first-child {
             font-weight: 600;
@@ -249,14 +222,7 @@
 
   ul,
   ol {
-    @if not feature-flag-enabled('components-x') {
-      @include typescale('epsilon');
-    } @else {
-      @include type-style('heading-01');
-    }
-    @if not feature-flag-enabled('components-x') {
-      @include font-smoothing;
-    }
+    @include type-style('heading-01');
     margin-left: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.75;
@@ -358,11 +324,7 @@
   }
 
   blockquote + p strong {
-    @if not feature-flag-enabled('components-x') {
-      @include typescale('epsilon');
-    } @else {
-      @include type-style('heading-01');
-    }
+    @include type-style('heading-01');
     color: $brand-01;
   }
 
@@ -477,14 +439,11 @@
       margin-bottom: 3rem;
 
       strong {
-        @if not feature-flag-enabled('components-x') {
-          @include letter-spacing;
-        }
         position: absolute;
         top: 0;
         left: 0;
         z-index: 2;
-        color: $color__white;
+        color: $carbon--white-0;
         font-size: 1.625rem;
         top: 2.2rem;
         left: 1.625rem;
@@ -502,7 +461,6 @@
 
   blockquote + hr + p {
     margin-top: 1rem;
-    color: $color__navy-gray-6;
   }
 
   hr + p img {
