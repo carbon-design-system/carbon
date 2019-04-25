@@ -76,7 +76,7 @@ const props = {
       true
     ),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    triggerText: null,
+    iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     renderIcon: OverflowMenuVertical16,
   }),

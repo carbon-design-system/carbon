@@ -25,6 +25,7 @@ import ClickListener from '../../internal/ClickListener';
 import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, keyCodes, matches as keyDownMatch } from '../../tools/key';
+import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 
 const { prefix } = settings;
 
@@ -174,11 +175,6 @@ class Tooltip extends Component {
     ]),
 
     /**
-     * The content to put into the trigger UI, except the (default) tooltip icon.
-     */
-    triggerText: PropTypes.node,
-
-    /**
      * The callback function to optionally render the icon element.
      * It should be a component with React.forwardRef().
      */
@@ -213,15 +209,16 @@ class Tooltip extends Component {
      */
     iconName: PropTypes.string,
 
-    /**
-     * The description of the default tooltip icon, to be put in its SVG 'aria-label' and 'alt' .
-     */
-    iconDescription: PropTypes.string,
-
-    /**
-     * The title of the default tooltip icon, to be put in its SVG `<title>` element.
-     */
-    iconTitle: PropTypes.string,
+    ...isRequiredOneOf({
+      /**
+       * The content to put into the trigger UI, except the (default) tooltip icon.
+       */
+      triggerText: PropTypes.node,
+      /**
+       * The description of the default tooltip icon, to be put in its SVG 'aria-label' and 'alt' .
+       */
+      iconDescription: PropTypes.string,
+    }),
 
     /**
      * `true` if opening tooltip should be triggered by clicking the trigger button.
@@ -239,9 +236,7 @@ class Tooltip extends Component {
     direction: DIRECTION_BOTTOM,
     renderIcon: !componentsX ? undefined : Information,
     showIcon: true,
-    iconDescription: 'tooltip',
-    iconTitle: '',
-    triggerText: 'Provide triggerText',
+    triggerText: null,
     menuOffset: getMenuOffset,
     clickToOpen: breakingChangesX,
   };
@@ -422,7 +417,6 @@ class Tooltip extends Component {
       showIcon,
       icon,
       iconName,
-      iconTitle,
       iconDescription,
       renderIcon: IconCustomElement,
       menuOffset,
@@ -463,83 +457,61 @@ class Tooltip extends Component {
       `${prefix}--tooltip__label`,
       triggerClassName
     );
-    const ariaOwnsProps = !open
-      ? {}
-      : {
-          'aria-owns': tooltipId,
-        };
 
-    const ariaDescribedbyProps = !open
-      ? {}
-      : {
-          'aria-describedby': tooltipId,
-        };
-    const finalIcon = IconCustomElement ? (
-      <IconCustomElement
-        name={iconName}
-        aria-labelledby={triggerId}
-        aria-label={iconDescription}
-        ref={mergeRefs(ref, node => {
-          this.triggerEl = node;
-        })}
-      />
-    ) : (
-      <Icon
-        icon={!icon && !iconName ? iconInfoGlyph : icon}
-        name={iconName}
-        description={iconDescription}
-        iconTitle={iconTitle}
-        iconRef={mergeRefs(ref, node => {
-          this.triggerEl = node;
-        })}
-      />
-    );
+    const refProp = mergeRefs(ref, node => {
+      this.triggerEl = node;
+    });
+
+    const iconProperties = { name: iconName, role: null, description: null };
+
+    const properties = {
+      role: 'button',
+      tabIndex: tabIndex,
+      onClick: this.handleMouse,
+      onKeyDown: this.handleKeyPress,
+      onMouseOver: this.handleMouse,
+      onMouseOut: this.handleMouse,
+      onFocus: this.handleMouse,
+      onBlur: this.handleMouse,
+      'aria-haspopup': 'true',
+      'aria-expanded': open,
+      // if the user provides property `triggerText`,
+      // then the button should use aria-describedby to point to its id,
+      // if the user doesn't provide property `triggerText`,
+      // then an aria-label will be provided via the `iconDescription` property.
+      ...(triggerText
+        ? {
+            'aria-describedby': triggerId,
+          }
+        : {
+            'aria-label': iconDescription,
+          }),
+    };
 
     return (
       <>
         <ClickListener onClickOutside={this.handleClickOutside}>
           {showIcon ? (
-            <div className={triggerClasses}>
+            <div id={triggerId} className={triggerClasses}>
               {triggerText}
-              <div
-                role="button"
-                id={triggerId}
-                className={`${prefix}--tooltip__trigger`}
-                tabIndex={tabIndex}
-                title={iconTitle}
-                onClick={this.handleMouse}
-                onKeyDown={this.handleKeyPress}
-                onMouseOver={this.handleMouse}
-                onMouseOut={this.handleMouse}
-                onFocus={this.handleMouse}
-                onBlur={this.handleMouse}
-                aria-haspopup="true"
-                aria-label={iconDescription}
-                aria-expanded={open}
-                {...ariaDescribedbyProps}
-                {...ariaOwnsProps}>
-                {finalIcon}
+              <div className={`${prefix}--tooltip__trigger`} {...properties}>
+                {IconCustomElement ? (
+                  <IconCustomElement ref={refProp} {...iconProperties} />
+                ) : (
+                  <Icon
+                    icon={!icon && !iconName ? iconInfoGlyph : icon}
+                    iconRef={refProp}
+                    {...iconProperties}
+                  />
+                )}
               </div>
             </div>
           ) : (
             <div
-              role="button"
-              tabIndex={tabIndex}
               id={triggerId}
               className={triggerClasses}
-              ref={mergeRefs(ref, node => {
-                this.triggerEl = node;
-              })}
-              onClick={this.handleMouse}
-              onKeyDown={this.handleKeyPress}
-              onMouseOver={this.handleMouse}
-              onMouseOut={this.handleMouse}
-              onFocus={this.handleMouse}
-              onBlur={this.handleMouse}
-              aria-haspopup="true"
-              aria-expanded={open}
-              {...ariaDescribedbyProps}
-              {...ariaOwnsProps}>
+              ref={refProp}
+              {...properties}>
               {triggerText}
             </div>
           )}
