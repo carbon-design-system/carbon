@@ -9,13 +9,7 @@
   {{#each sections}}
     <li data-accordion-item class="{{@root.prefix}}--accordion__item">
       <button class="{{@root.prefix}}--accordion__heading" aria-expanded="false" aria-controls="{{paneId}}">
-        {{#if @root.featureFlags.componentsX}}
-          {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--accordion__arrow') }}
-        {{else}}
-          <svg class="{{@root.prefix}}--accordion__arrow" width="7" height="12" viewBox="0 0 7 12">
-            <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
-          </svg>
-        {{/if}}
+        {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--accordion__arrow') }}
         <div class="{{@root.prefix}}--accordion__title">{{title}}</div>
       </button>
       <div id="{{paneId}}" class="{{@root.prefix}}--accordion__content">

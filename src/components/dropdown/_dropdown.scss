@@ -16,6 +16,9 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 
+/// Dropdown styles
+/// @access private
+/// @group dropdown
 @mixin dropdown {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;

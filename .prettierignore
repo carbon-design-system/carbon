@@ -6,6 +6,7 @@ demo/scss/_prism.scss
 demo/hot
 !demo/index.js
 dist
+docs/api/sass.md
 examples/codesandbox
 src/globals/fonts/LICENSE.md
 tests/a11y-results

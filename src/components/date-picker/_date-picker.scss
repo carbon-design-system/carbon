@@ -14,6 +14,9 @@
 @import '../form/form';
 @import 'flatpickr.scss';
 
+/// Date picker styles
+/// @access private
+/// @group date-picker
 @mixin date-picker {
   .#{$prefix}--date-picker {
     display: flex;

@@ -12,6 +12,9 @@
 @import '../../globals/scss/css--reset';
 @import 'mixins';
 
+/// Code snippet styles
+/// @access private
+/// @group code-snippet
 @mixin snippet {
   .#{$prefix}--snippet code {
     @include type-style('code-01');

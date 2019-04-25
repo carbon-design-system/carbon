@@ -11,6 +11,8 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vars';
 
+/// @access private
+/// @group data-table
 @mixin assistive-text {
   position: absolute;
   width: 1px;
@@ -25,14 +27,25 @@
 }
 
 @include exports('data-table-inline-edit-cell') {
-  // Spacing for cells that are the first in their row
+  /// Spacing for cells that are the first in their row
+  /// @access private
+  /// @group data-table
   $spacing--columns--first: 1.5rem;
-  // Spacing before columns in cell
+
+  /// Spacing before columns in cell
+  /// @access private
+  /// @group data-table
   $spacing--columns--before: 0.75rem;
-  // Spacing for activity areas in a cell, namely status and actions
+
+  /// Spacing for activity areas in a cell, namely status and actions
+  /// @access private
+  /// @group data-table
   $spacing--cell--activity: 3.5rem;
-  // Offset used on input nodes to offer space to activity indicators such that
-  // the input doesn't overlap with the status
+
+  /// Offset used on input nodes to offer space to activity indicators such that
+  /// the input doesn't overlap with the status
+  /// @access private
+  /// @group data-table
   $spacing--cell--status: 2rem;
 
   //----------------------------------------------------------------------------
@@ -180,9 +193,13 @@
   // Cell Edit - Actions
   //----------------------------------------------------------------------------
 
-  // Spacing that should exist around, and in-between, elements in the action
-  // bar
+  /// Spacing that should exist around, and in-between, elements in the action bar
+  /// @access private
+  /// @group data-table
   $spacing--cell-actions: 0.5rem;
+
+  /// @access private
+  /// @group data-table
   $size--edit-actions--height: 3rem;
 
   .#{$prefix}--data-table__edit-actions {

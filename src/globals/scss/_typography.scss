@@ -7,25 +7,30 @@
 
 @import 'vars';
 
+/// Base font size in px
 /// @access public
-/// @group typography
-/// @returns 16px font size
+/// @group global-typography
+/// @type Number
 /// @deprecated (For v10) Superseded by `$carbon--base-font-size`
-$base-font-size: 16px !default; // Default, Use with em() and rem() functions
+$base-font-size: 16px !default;
 
+/// Convert px to rem
 /// @access public
-/// @param {Value} $px - value of type in pixels
-/// @returns type size converted to rem
-/// @example - rem(48px);
+/// @param {Number} $px - Value of type in pixels
+/// @returns {Number} In rem
+/// @example rem(48px);
+/// @group global-typography
 /// @deprecated (For v10) Use `carbon--rem()`
 @function rem($px) {
   @return ($px / $base-font-size) * 1rem;
 }
 
+/// Convert px to em
 /// @access public
-/// @param {Value} $px - value of type in pixels
-/// @returns type size converted to em
-/// @example - em(48px);
+/// @param {Number} $px - Value of type in pixels
+/// @returns {Number} In em
+/// @example em(48px);
+/// @group global-typography
 /// @deprecated (For v10) Use `carbon--em()`
 @function em($px) {
   @return ($px / $base-font-size) * 1em;
@@ -34,12 +39,12 @@ $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 // 🔬 Experimental
 @import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
 
+/// Different type styles per token
 /// @access public
-/// @returns different type styles per token.
-/// @see $tokens Map in src/globals/scss/vendor/@carbon/type/scss/_styles.scss
-/// @param {String} $name - the name of the token to get the styles for
-/// @param {Boolean} $fluid [false] - specify whether to include fluid styles
-/// @example -  @include type-style('body-short-01');
+/// @param {String} $name - The name of the token to get the styles for
+/// @param {Bool} $fluid [false] - Specify whether to include fluid styles
+/// @example @include type-style('body-short-01');
+/// @group global-typography
 @mixin type-style($name, $fluid: false) {
   @include carbon--type-style($name, $fluid);
 }

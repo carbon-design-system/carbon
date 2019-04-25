@@ -7,48 +7,111 @@
 
 @import './vendor/@carbon/elements/scss/motion/motion';
 
-/// Used primarily for removing elements from the screen.
+/// Used primarily for removing elements from the screen
+/// @type Function
 /// @access public
+/// @group global-motion
 $carbon--ease-in: cubic-bezier(0.25, 0, 1, 1);
 
-/// Used for adding elements to the screen or changing on-screen states at a users's input.
+/// Used for adding elements to the screen or changing on-screen states at a users's input
+/// @type Function
 /// @access public
+/// @group global-motion
 $carbon--ease-out: cubic-bezier(0, 0, 0.25, 1);
 
-/// Used for the majority of animations.
+/// Used for the majority of animations
+/// @type Function
 /// @access public
+/// @group global-motion
 $carbon--standard-easing: cubic-bezier(0.5, 0, 0.1, 1);
 
 /// Base transition duration
+/// @type Number
 /// @access public
+/// @group global-motion
 $transition--base: 250ms;
 
 /// Expansion duration
+/// @type Number
 /// @access public
+/// @group global-motion
 $transition--expansion: 300ms;
 
 /// New easing durations
+
+/// Expansion duration
+/// @type Number
+/// @access public
+/// @group global-motion
 $duration--fast-01: 70ms;
+
+/// Expansion duration
+/// @type Number
+/// @access public
+/// @group global-motion
 $duration--fast-02: 110ms;
+
+/// Expansion duration
+/// @type Number
+/// @access public
+/// @group global-motion
 $duration--moderate-01: 150ms;
+
+/// Expansion duration
+/// @type Number
+/// @access public
+/// @group global-motion
 $duration--moderate-02: 240ms;
+
+/// Expansion duration
+/// @type Number
+/// @access public
+/// @group global-motion
 $duration--slow-01: 400ms;
+
+/// Expansion duration
+/// @type Number
+/// @access public
+/// @group global-motion
 $duration--slow-02: 720ms;
 
+/// Default ease-in for components
+/// @access public
+/// @type Function
+/// @group global-motion
 $carbon--ease-in: cubic-bezier(0, 0, 0.38, 0.9);
+
+/// Default ease-out for components
+/// @access public
+/// @type Function
+/// @group global-motion
 $carbon--ease-out: cubic-bezier(0.2, 0, 1, 0.9);
+
+/// Default easing for components
+/// @access public
+/// @type Function
+/// @group global-motion
 $carbon--standard-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
 
+/// @access public
+/// @group global-motion
+/// @alias duration--fast-02
 $transition--base: $duration--fast-02;
+
+/// @access public
+/// @group global-motion
+/// @alias duration--moderate-02
 $transition--expansion: $duration--moderate-02;
 
 /// Get the transition-timing-function for a given easing and motion mode.
-/// Easings that are currently supported include: standard, entrance, and exit.
-/// We also offer two modes: productive and expressive.
+/// Easings that are currently supported include: `standard`, `entrance`, and `exit`.
+/// We also offer two modes: `productive` and `expressive`.
 /// @access public
-/// @param {String} $name - the name of the easing curve to apply
-/// @param {String} $mode - the mode for the easing curve to use
-/// @return {cubic-bezier}
+/// @param {String} $name - The name of the easing curve to apply
+/// @param {String} $mode [productive] - The mode for the easing curve to use
+/// @param {Map} $easings [$carbon--easings] - Map of component easings
+/// @return {Function} A CSS cubic-bezier function
+/// @group global-motion
 @function motion($name, $mode: productive, $easings: $carbon--easings) {
   @return carbon--motion($name, $mode, $easings);
 }
@@ -57,9 +120,10 @@ $transition--expansion: $duration--moderate-02;
 /// Easings that are currently supported include: standard, entrance, and exit.
 /// We also offer two modes: productive and expressive.
 /// @access public
-/// @param {String} $name - the name of the easing curve to apply
-/// @param {String} $mode - the mode for the easing curve to use
-/// @return {cubic-bezier}
+/// @param {String} $name - The name of the easing curve to apply
+/// @param {String} $mode - The mode for the easing curve to use
+/// @group global-motion
+/// @alias carbon--motion
 @mixin motion($name, $mode) {
   @include carbon--motion($name, $mode);
 }

@@ -7,6 +7,9 @@
 
 @import '../../globals/scss/typography';
 
+/// Button base styles
+/// @access private
+/// @group button
 @mixin button-base {
   @include reset;
   @include type-style('body-short-01');
@@ -44,6 +47,9 @@
   }
 }
 
+/// Button variant styles
+/// @access private
+/// @group button
 @mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
   background-color: $bg-color;
   border-width: $button-border-width;

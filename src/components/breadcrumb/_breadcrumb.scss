@@ -11,6 +11,9 @@
 @import '../../globals/scss/layout';
 @import '../link/link';
 
+/// Breadcrumb styles
+/// @access private
+/// @group breadcrumb
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
     @include type-style('body-short-01');

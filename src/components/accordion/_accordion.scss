@@ -11,6 +11,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
+/// Accordion styles
+/// @access private
+/// @group accordion
 @mixin accordion {
   .#{$prefix}--accordion {
     @include reset;

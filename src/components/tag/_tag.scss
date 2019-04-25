@@ -11,6 +11,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 
+/// Tag styles
+/// @access private
+/// @group tag
 @mixin tags {
   .#{$prefix}--tag {
     @include type-style('label-01');

@@ -14,6 +14,8 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 @import './vendor/@carbon/elements/scss/type/font-face/sans';
 
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
+/// @access private
+/// @group global-font-face
 @mixin check-default-font-path {
   @if (str-index($font-path, 'https://unpkg.com/') == 1) {
     @warn 'The default font path (#{$font-path}) should be used only for demonstration/evaluation purposes. For production applications, please host fonts in your own CDN and change `$font-path` accordingly.';
@@ -23,8 +25,10 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
   }
 }
 
+/// Helvetica Neue font face declarations
 /// @access public
 /// @deprecated (For v10) Use `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
+/// @group global-font-face
 @mixin helvetica-font-face {
   // Default font directory, `!default` flag allows user override.
   // (font files are configured to be served as static assets from server.js)

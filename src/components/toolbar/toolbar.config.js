@@ -8,7 +8,6 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
-const featureFlags = require('../../globals/js/feature-flags');
 
 const filterOptions = [
   {
@@ -46,7 +45,6 @@ const rowHeightOptions = [
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
   variants: [

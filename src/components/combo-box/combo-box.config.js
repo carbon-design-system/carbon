@@ -7,7 +7,6 @@
 
 'use strict';
 
-const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 const items = [
@@ -36,7 +35,6 @@ const items = [
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
   variants: [
@@ -47,36 +45,23 @@ module.exports = {
         items,
       },
     },
-    ...(featureFlags.componentsX
-      ? [
-          {
-            name: 'light',
-            label: 'Light',
-            context: {
-              light: true,
-              items,
-            },
-          },
-          // this variant is not part of our current spec
-          // but it is supported (because of list-box) if needed
-          // {
-          //   name: 'inline',
-          //   label: 'Inline',
-          //   context: {
-          //     inline: true,
-          //     items,
-          //   },
-          // },
-        ]
-      : [
-          {
-            name: 'disabled',
-            label: 'Disabled',
-            context: {
-              disabled: true,
-              items,
-            },
-          },
-        ]),
+    {
+      name: 'light',
+      label: 'Light',
+      context: {
+        light: true,
+        items,
+      },
+    },
+    // this variant is not part of our current spec
+    // but it is supported (because of list-box) if needed
+    // {
+    //   name: 'inline',
+    //   label: 'Inline',
+    //   context: {
+    //     inline: true,
+    //     items,
+    //   },
+    // },
   ],
 };

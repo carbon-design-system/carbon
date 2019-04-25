@@ -16,6 +16,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
 
+/// Select styles
+/// @access private
+/// @group select
 @mixin select {
   .#{$prefix}--select {
     @include reset;

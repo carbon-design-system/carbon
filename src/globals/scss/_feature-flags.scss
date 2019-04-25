@@ -9,16 +9,24 @@
 // 🎌 Feature Flags
 //-------------------------
 
-/// Initialize our feature flag map with default values, user can override default values ($default-feature-flags) here
+/// Initialize the feature flag map with default values.
 /// @access public
 /// @type Map
+/// @group feature-flags
 /// @example
-/// $feature-flags: (ui-shell: true); // overrides default values for ui-shell
+/// @example scss - Overriding defaults from the `$default-feature-flags` map
+///   $feature-flags: (
+///     ui-shell: false,
+///     grid: true,
+///     grid-columns-16: false,
+///     grid--fallback: false,
+///   );
 $feature-flags: () !default;
 
 /// Default feature flag values
 /// @access private
 /// @type Map
+/// @group feature-flags
 $default-feature-flags: (
   ui-shell: false,
   grid: true,
@@ -28,14 +36,17 @@ $default-feature-flags: (
 
 /// @access private
 /// @type Bool
+/// @group feature-flags
 $did-warn-diverged-feature-flags: false !default !global;
 
 /// Look for user-defined feature flags that are different from default ones, and warn them before merging them.
 /// @access private
-/// @param {Map} $dst - The feature flags to merge to (default feature flags).
-/// @param {Map} $src - The feature flags to merge from (user-defined feature flags).
-/// @returns {Map} - The result of `map-merge($dst, $src)`.
-/// @example - $feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
+/// @param {Map} $dst - The feature flags to merge to (default feature flags)
+/// @param {Map} $src - The feature flags to merge from (user-defined feature flags)
+/// @returns {Map} - The result of `map-merge($dst, $src)`
+/// @example scss
+///   $feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
+/// @group feature-flags
 @function merge-feature-flags($dst, $src) {
   @if (not $did-warn-diverged-feature-flags) {
     $diverged: ();

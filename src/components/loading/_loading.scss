@@ -12,6 +12,9 @@
 @import 'mixins';
 @import 'vars';
 
+/// Loading styles
+/// @access private
+/// @group loading
 @mixin loading {
   .#{$prefix}--loading {
     @include reset;

@@ -7,6 +7,9 @@
 
 @import '../../globals/scss/typography';
 
+/// Code snippet base styles
+/// @access private
+/// @group code-snippet
 @mixin bx--snippet {
   @include type-style('code-01');
   background: $snippet-background-color;

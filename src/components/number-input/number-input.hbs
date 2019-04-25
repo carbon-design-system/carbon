@@ -17,23 +17,11 @@
       <div class="{{prefix}}--number__controls">
         <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
           aria-live="polite" aria-atomic="true">
-          {{#if componentsX}}
           {{ carbon-icon 'CaretUpGlyph' }}
-          {{else}}
-          <svg width="10" height="5" viewBox="0 0 10 5">
-            <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-          </svg>
-          {{/if}}
         </button>
         <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
           aria-live="polite" aria-atomic="true">
-          {{#if componentsX}}
           {{ carbon-icon 'CaretDownGlyph' }}
-          {{else}}
-          <svg width="10" height="5" viewBox="0 0 10 5">
-            <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-          </svg>
-          {{/if}}
         </button>
       </div>
     </div>
@@ -46,7 +34,6 @@
     {{#if light}} {{prefix}}--number--light {{/if}}
   ">
     <label for="number-input1" class="{{prefix}}--label">Number input label</label>
-    {{#if componentsX}}
     <div class="{{prefix}}--number__input-wrapper">
       <input id="number-input1" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
       {{ carbon-icon 'WarningFilled16' class=(add prefix '--number__invalid')}}
@@ -61,23 +48,6 @@
         </button>
       </div>
     </div>
-    {{else}}
-    <input id="number-input1" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
-    <div class="{{prefix}}--number__controls">
-      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
-      </button>
-      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-    {{/if}}
     <div class="{{prefix}}--form-requirement">
       Invalid number
     </div>
@@ -90,7 +60,6 @@
     {{#if light}} {{prefix}}--number--light{{/if}}
     {{prefix}}--number--nolabel
   ">
-    {{#if componentsX}}
     <div class="{{prefix}}--number__input-wrapper">
       <input id="number-input2" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
       {{ carbon-icon 'WarningFilled16' class=(add prefix '--number__invalid')}}
@@ -105,23 +74,6 @@
         </button>
       </div>
     </div>
-    {{else}}
-    <input id="number-input2" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
-    <div class="{{prefix}}--number__controls">
-      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
-      </button>
-      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-    {{/if}}
     <div class="{{prefix}}--form-requirement">
       Invalid number
     </div>
@@ -135,7 +87,6 @@
     {{prefix}}--number--helpertext
   ">
     <label for="number-input3" class="{{prefix}}--label">Number input label</label>
-    {{#if componentsX}}
     <div class="{{prefix}}--form__helper-text">
       Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
     </div>
@@ -152,28 +103,6 @@
         </button>
       </div>
     </div>
-    {{else}}
-    <input id="number-input3" type="number" min="0" max="100" value="1">
-    <div class="{{prefix}}--number__controls">
-      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
-      </button>
-      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-    {{/if}}
-    {{#unless componentsX}}
-    <div class="{{prefix}}--form__helper-text">
-      Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
-    </div>
-    {{/unless}}
   </div>
 </div>
 
@@ -184,7 +113,6 @@
     {{prefix}}--number--helpertext
   ">
     <label for="number-input4" class="{{prefix}}--label">Number input label</label>
-    {{#if componentsX}}
     <div class="{{prefix}}--form__helper-text">
       Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
     </div>
@@ -202,35 +130,12 @@
         </button>
       </div>
     </div>
-    {{else}}
-    <input id="number-input4" type="number" min="0" max="100" value="1" role="alert" aria-atomic="true">
-    <div class="{{prefix}}--number__controls">
-      <button aria-label="increase number input" class="{{prefix}}--number__control-btn up-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 5L5 .002 10 5z" fill-rule="evenodd" />
-        </svg>
-      </button>
-      <button aria-label="decrease number input" class="{{prefix}}--number__control-btn down-icon" type="button"
-        aria-live="polite" aria-atomic="true">
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-    {{/if}}
     <div class="{{prefix}}--form-requirement">
       Invalid number
     </div>
-    {{#unless componentsX}}
-    <div class="{{prefix}}--form__helper-text">
-      Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
-    </div>
-    {{/unless}}
   </div>
 </div>
 {{else}}
-{{#if componentsX}}
 <div class="{{prefix}}--form-item">
   <div data-numberinput class="
     {{prefix}}--number
@@ -355,5 +260,4 @@
     </div>
   </div>
 </div>
-{{/if}}
 {{/unless}}

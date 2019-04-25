@@ -11,6 +11,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'keyframes';
 
+/// Inline loading styles
+/// @access private
+/// @group inline-loading
 @mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;

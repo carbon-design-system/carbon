@@ -11,6 +11,9 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
+/// Tooltip styles
+/// @access private
+/// @group tooltip
 @mixin tooltip {
   .#{$prefix}--tooltip--icon {
     display: flex;

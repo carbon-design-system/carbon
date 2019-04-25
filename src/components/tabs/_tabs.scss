@@ -15,6 +15,9 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
+/// Tabs styles
+/// @access private
+/// @group tabs
 @mixin tabs {
   .#{$prefix}--tabs {
     @include type-style('body-short-01');
@@ -133,6 +136,7 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item {
     background-color: $ui-01;
+    display: flex;
     padding: 0;
     cursor: pointer;
     width: 100%;
@@ -180,7 +184,7 @@
     border: none;
     display: none;
     @include carbon--breakpoint(md) {
-      display: list-item;
+      display: flex;
       .#{$prefix}--tabs__nav-link {
         color: $text-01;
         @include type-style('heading-01');

@@ -14,6 +14,9 @@
 @import 'theme';
 @import 'functions';
 
+/// UI shell header
+/// @access private
+/// @group ui-shell
 @mixin carbon-header {
   .#{$prefix}--header {
     display: flex;

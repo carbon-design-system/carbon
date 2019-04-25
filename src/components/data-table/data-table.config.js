@@ -8,7 +8,6 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
-const { componentsX } = require('../../globals/js/feature-flags');
 
 const iconAddSolid = `
   <svg class="${prefix}--btn__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -354,7 +353,6 @@ module.exports = {
   label: 'Data Table',
   context: {
     prefix,
-    componentsX,
   },
   variants: [
     {

@@ -16,6 +16,9 @@ $css--helpers: true;
 @import '../select/select';
 @import '../text-input/text-input';
 
+/// Pagination styles
+/// @access private
+/// @group pagination
 @mixin pagination {
   .#{$prefix}--data-table-container + .#{$prefix}--pagination {
     border-top: 0;

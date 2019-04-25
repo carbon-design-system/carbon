@@ -7,7 +7,6 @@
 
 'use strict';
 
-const featureFlags = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 const items = [
@@ -28,7 +27,6 @@ const items = [
 
 module.exports = {
   context: {
-    featureFlags,
     prefix,
   },
   variants: [
@@ -40,17 +38,6 @@ module.exports = {
         Create Switch components for each section in the content switcher.
       `,
       context: {
-        items,
-      },
-    },
-    {
-      name: 'with-icon',
-      label: 'With icon',
-      meta: {
-        xVersionNotSupported: true,
-      },
-      context: {
-        hasIcon: true,
         items,
       },
     },

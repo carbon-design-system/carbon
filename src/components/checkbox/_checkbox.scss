@@ -12,6 +12,9 @@
 @import '../form/form';
 @import '../../globals/scss/css--reset';
 
+/// Checkbox styles
+/// @access private
+/// @group checkbox
 @mixin checkbox {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {

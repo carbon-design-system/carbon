@@ -8,7 +8,6 @@
 'use strict';
 
 const { prefix } = require('../../globals/js/settings');
-const { componentsX } = require('../../globals/js/feature-flags');
 
 const steps = [
   {
@@ -57,7 +56,6 @@ module.exports = {
       label: 'Progress Indicator',
       context: {
         steps,
-        componentsX,
       },
     },
     {
@@ -66,7 +64,6 @@ module.exports = {
       context: {
         vertical: true,
         steps,
-        componentsX,
       },
     },
   ],

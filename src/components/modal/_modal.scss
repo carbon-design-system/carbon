@@ -19,6 +19,9 @@
 
 @import '../button/button';
 
+/// Modal styles
+/// @access private
+/// @group modal
 @mixin modal {
   .#{$prefix}--modal {
     position: fixed;

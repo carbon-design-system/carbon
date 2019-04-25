@@ -12,6 +12,9 @@
 @import '../../globals/scss/css--reset';
 @import '../form/form';
 
+/// Number input styles
+/// @access private
+/// @group number-input
 @mixin number-input {
   .#{$prefix}--number {
     @include reset;
