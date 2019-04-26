@@ -74,6 +74,26 @@ const addIconNode = toSVG({
 });
 ```
 
+### Styling the inner path
+
+Certain icons in the library support an alternate fill inside of the icon, for
+example [`warning--filled`](https://carbon-elements.netlify.com/icons/examples/preview/#16%2Fwarning--filled) supports styling the inner `!` path.
+
+In order to style the inner path, you will need to target the SVG using CSS. In
+general, you can target the path by writing the following:
+
+```
+svg [data-icon-path="inner-path"] {
+  fill: blue;
+  opacity: 1;
+}
+```
+
+In the code snippet above, we are targetting the inner path attribute with `[data-icon-path="inner-path"]`.
+The value of `fill` will be the custom color you would like to set for the inner
+path. We also need to set `opacity` to `1` in order to get this inner path to be
+visible on the page.
+
 ### Reference
 
 You can view a full reference of our icons [here](https://carbon-elements.netlify.com/icons/examples/preview/)
