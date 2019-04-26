@@ -425,7 +425,7 @@ describe('@carbon/scss', () => {
     });
   });
 
-  describe.only('Control structures', () => {
+  describe('Control structures', () => {
     const structures = [
       [
         'if statement',
@@ -468,6 +468,48 @@ describe('@carbon/scss', () => {
     ];
 
     test.each(structures)('%s', (_, ast, expected) => {
+      const { code } = generate(ast);
+      expect(code.trim()).toEqual(expected.trim());
+    });
+  });
+
+  describe('Expressions', () => {
+    const expressions = [
+      [
+        'no arguments',
+        t.Assignment({
+          id: t.Identifier('test'),
+          init: t.CallExpression({
+            callee: t.Identifier('foo'),
+          }),
+        }),
+        '$test: foo();',
+      ],
+      [
+        'single arguments',
+        t.Assignment({
+          id: t.Identifier('test'),
+          init: t.CallExpression({
+            callee: t.Identifier('foo'),
+            arguments: [t.Identifier('bar')],
+          }),
+        }),
+        '$test: foo($bar);',
+      ],
+      [
+        'multiple arguments',
+        t.Assignment({
+          id: t.Identifier('test'),
+          init: t.CallExpression({
+            callee: t.Identifier('foo'),
+            arguments: [t.Identifier('bar'), t.Identifier('baz')],
+          }),
+        }),
+        '$test: foo($bar, $baz);',
+      ],
+    ];
+
+    test.each(expressions)('%s', (_, ast, expected) => {
       const { code } = generate(ast);
       expect(code.trim()).toEqual(expected.trim());
     });

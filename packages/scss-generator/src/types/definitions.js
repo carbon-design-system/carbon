@@ -49,9 +49,13 @@ const Identifier = defineType('Identifier', {
   generate(printer, node, parent) {
     if (
       parent &&
-      (parent.type === AssignmentPattern.type ||
+      (parent.type === Assignment.type ||
+        parent.type === AssignmentPattern.type ||
+        parent.type === CallExpression.type ||
         parent.type === LogicalExpression.type ||
-        parent.type === CallExpression.type)
+        parent.type === SassMixin.type ||
+        parent.type === RestPattern.type ||
+        parent.type === SassFunction.type)
     ) {
       printer.token('$');
     }
@@ -129,7 +133,6 @@ const SassFunction = defineType('SassFunction', {
 
     if (Array.isArray(node.params)) {
       for (let i = 0; i < node.params.length; i++) {
-        printer.token('$');
         printer.print(node.params[i], node);
         if (i !== node.params.length - 1) {
           printer.token(',');
@@ -438,14 +441,16 @@ const Assignment = defineType('Assignment', {
       validate: assertType(Identifier),
     },
     init: {
-      validate: assertOneOf([
-        assertType(SassBoolean),
-        assertType(SassColor),
-        assertType(SassList),
-        assertType(SassMap),
-        assertType(SassNumber),
-        assertType(SassString),
-      ]),
+      validate: () =>
+        assertOneOf([
+          assertType(CallExpression),
+          assertType(SassBoolean),
+          assertType(SassColor),
+          assertType(SassList),
+          assertType(SassMap),
+          assertType(SassNumber),
+          assertType(SassString),
+        ]),
     },
     default: {
       optional: true,
@@ -457,7 +462,6 @@ const Assignment = defineType('Assignment', {
     },
   },
   generate(printer, node, parent) {
-    printer.token('$');
     printer.print(node.id, node);
     printer.token(':');
     printer.space();
@@ -525,8 +529,8 @@ const RestPattern = defineType('RestPattern', {
       validate: assertType(Identifier),
     },
   },
-  generate(printer, node) {
-    printer.print(node.id);
+  generate(printer, node, parent) {
+    printer.print(node.id, parent);
     printer.token('...');
   },
 });
@@ -618,12 +622,22 @@ const CallExpression = defineType('CallExpression', {
       validate: assertType(Identifier),
     },
     arguments: {
+      optional: true,
       validate: arrayOf(assertAny),
     },
   },
   generate(printer, node) {
     printer.print(node.callee);
     printer.token('(');
+    if (Array.isArray(node.arguments)) {
+      for (let i = 0; i < node.arguments.length; i++) {
+        printer.print(node.arguments[i], node);
+        if (i !== node.arguments.length - 1) {
+          printer.token(',');
+          printer.space();
+        }
+      }
+    }
     printer.token(')');
   },
 });
