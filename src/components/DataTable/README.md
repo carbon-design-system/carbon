@@ -418,11 +418,9 @@ In practice, the combination of these components looks like the following:
               </TableExpandRow>
               {/* toggle based off of if the row is expanded. If it is, render TableExpandedRow */}
               {row.isExpanded && (
-                <TableExpandedRow>
-                  <TableCell colSpan={headers.length + 1}>
-                    <h1>Expandable row content</h1>
-                    <p>Description here</p>
-                  </TableCell>
+                <TableExpandedRow colSpan={headers.length + 1}>
+                  <h1>Expandable row content</h1>
+                  <p>Description here</p>
                 </TableExpandedRow>
               )}
             </React.Fragment>
@@ -440,7 +438,8 @@ Some things to note:
 - `TableExpandRow` is what you use instead of `TableRow` for the content of your row. We make sure to add `getRowProps` so that it has the right props
 - `row.isExpanded` is the field available on `row` to know if the `row` is expanded or not
 - `TableExpandedRow` is used as a wrapper for any content you want to appear in the expanded row
-  - Tip: the `colSpan` attribute on the `TableCell` should be `headers.length + 1` in order to span the whole table
+  - Tip: the `colSpan` attribute on the `TableExpandedRow` should be `headers.length + 1` in order to span the whole table
+  - `TableExpandedRow` should not have a `TableCell` child
 
 #### Programmatic expansion
 
