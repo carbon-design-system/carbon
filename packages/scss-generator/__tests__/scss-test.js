@@ -424,4 +424,52 @@ describe('@carbon/scss', () => {
       expect(code).toEqual(prettier.format(expected.trim(), prettierOptions));
     });
   });
+
+  describe.only('Control structures', () => {
+    const structures = [
+      [
+        'if statement',
+        t.IfStatement({
+          test: t.SassBoolean(true),
+          consequent: t.BlockStatement([]),
+        }),
+        `@if true {
+}`,
+      ],
+
+      [
+        'if else',
+        t.IfStatement({
+          test: t.SassBoolean(false),
+          consequent: t.BlockStatement([]),
+          alternate: t.BlockStatement([]),
+        }),
+        `@if false {
+} @else {
+}`,
+      ],
+
+      [
+        'if > else if > else',
+        t.IfStatement({
+          test: t.SassBoolean(false),
+          consequent: t.BlockStatement([]),
+          alternate: t.IfStatement({
+            test: t.SassBoolean(false),
+            consequent: t.BlockStatement([]),
+            alternate: t.BlockStatement([]),
+          }),
+        }),
+        `@if false {
+} @else if false {
+} @else {
+}`,
+      ],
+    ];
+
+    test.each(structures)('%s', (_, ast, expected) => {
+      const { code } = generate(ast);
+      expect(code.trim()).toEqual(expected.trim());
+    });
+  });
 });

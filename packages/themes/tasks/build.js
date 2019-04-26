@@ -10,7 +10,6 @@
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
 const yaml = require('js-yaml');
 const { formatTokenName, themes, tokens } = require('../lib');
 

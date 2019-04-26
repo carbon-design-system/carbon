@@ -17,6 +17,27 @@ const {
 const { defineType } = require('./type');
 
 //-------------------------------------------------------------------------------
+// Comments
+//-------------------------------------------------------------------------------
+const Comment = defineType('Comment', {
+  fields: {
+    value: {
+      validate: assertValueType('string'),
+    },
+  },
+  generate(printer, node) {
+    const lines = node.value.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      printer.token('//');
+      printer.token(lines[i]);
+      if (i !== lines.length - 1) {
+        printer.newline();
+      }
+    }
+  },
+});
+
+//-------------------------------------------------------------------------------
 // Identifier
 //-------------------------------------------------------------------------------
 const Identifier = defineType('Identifier', {
@@ -25,7 +46,15 @@ const Identifier = defineType('Identifier', {
       validate: assertValueType('string'),
     },
   },
-  generate(printer, node) {
+  generate(printer, node, parent) {
+    if (
+      parent &&
+      (parent.type === AssignmentPattern.type ||
+        parent.type === LogicalExpression.type ||
+        parent.type === CallExpression.type)
+    ) {
+      printer.token('$');
+    }
     printer.token(node.name);
   },
 });
@@ -58,6 +87,17 @@ const SassBoolean = defineType('SassBoolean', {
   fields: {
     value: {
       validate: assertValueType('boolean'),
+    },
+  },
+  generate(printer, node) {
+    printer.token(node.value);
+  },
+});
+
+const SassColor = defineType('SassColor', {
+  fields: {
+    value: {
+      validate: assertValueType('string'),
     },
   },
   generate(printer, node) {
@@ -193,7 +233,6 @@ const SassMixin = defineType('SassMixin', {
 
     if (Array.isArray(node.params)) {
       for (let i = 0; i < node.params.length; i++) {
-        printer.token('$');
         printer.print(node.params[i], node);
         if (i !== node.params.length - 1) {
           printer.token(',');
@@ -401,6 +440,7 @@ const Assignment = defineType('Assignment', {
     init: {
       validate: assertOneOf([
         assertType(SassBoolean),
+        assertType(SassColor),
         assertType(SassList),
         assertType(SassMap),
         assertType(SassNumber),
@@ -492,6 +532,103 @@ const RestPattern = defineType('RestPattern', {
 });
 
 //-------------------------------------------------------------------------------
+// Imports
+//-------------------------------------------------------------------------------
+const SassImport = defineType('SassImport', {
+  fields: {
+    path: {
+      validate: assertValueType('string'),
+    },
+  },
+  generate(printer, node) {
+    printer.token('@import');
+    printer.space();
+    printer.token(`'${node.path}'`);
+    printer.token(';');
+  },
+});
+
+//-------------------------------------------------------------------------------
+// Control structures
+//-------------------------------------------------------------------------------
+const IfStatement = defineType('IfStatement', {
+  fields: {
+    test: {
+      validate: assertAny,
+    },
+    consequent: {
+      optional: true,
+      validate: assertType(BlockStatement),
+    },
+    alternate: {
+      optional: true,
+      validate: () =>
+        assertOneOf([assertType(IfStatement), assertType(BlockStatement)]),
+    },
+  },
+  generate(printer, node, parent) {
+    if (parent && parent.type === IfStatement.type) {
+      printer.space();
+      printer.token('if');
+    } else {
+      printer.token('@if');
+    }
+
+    printer.space();
+    printer.print(node.test, node);
+    printer.print(node.consequent, node);
+
+    if (node.alternate) {
+      printer.token('@else');
+      printer.print(node.alternate, node);
+    }
+  },
+});
+
+//-------------------------------------------------------------------------------
+// Logical expressions
+//-------------------------------------------------------------------------------
+const LogicalExpression = defineType('LogicalExpression', {
+  fields: {
+    left: {
+      validate: assertAny,
+    },
+    operator: {
+      validate: assertValueType('string'),
+    },
+    right: {
+      validate: assertAny,
+    },
+  },
+  generate(printer, node) {
+    printer.print(node.left, node);
+    printer.space();
+    printer.token(node.operator);
+    printer.space();
+    printer.print(node.right, node);
+  },
+});
+
+//-------------------------------------------------------------------------------
+// Call expressions
+//-------------------------------------------------------------------------------
+const CallExpression = defineType('CallExpression', {
+  fields: {
+    callee: {
+      validate: assertType(Identifier),
+    },
+    arguments: {
+      validate: arrayOf(assertAny),
+    },
+  },
+  generate(printer, node) {
+    printer.print(node.callee);
+    printer.token('(');
+    printer.token(')');
+  },
+});
+
+//-------------------------------------------------------------------------------
 // StyleSheet
 //-------------------------------------------------------------------------------
 const StyleSheet = defineType('StyleSheet', {
@@ -501,10 +638,13 @@ const StyleSheet = defineType('StyleSheet', {
         assertOneOf([
           assertType(Assignment),
           assertType(AtRule),
+          assertType(Comment),
+          assertType(IfStatement),
           assertType(Rule),
+          assertType(SassFunction),
+          assertType(SassImport),
           assertType(SassMixin),
           assertType(SassMixinCall),
-          assertType(SassFunction),
         ])
       ),
     },
@@ -527,12 +667,18 @@ module.exports = {
   AtReturn,
   AtRule,
   BlockStatement,
+  CallExpression,
+  Comment,
   Declaration,
+  IfStatement,
   Identifier,
+  LogicalExpression,
   RestPattern,
   Rule,
   SassBoolean,
+  SassColor,
   SassFunction,
+  SassImport,
   SassNumber,
   SassString,
   SassList,
