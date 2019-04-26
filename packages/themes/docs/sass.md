@@ -80,65 +80,64 @@ Define theme variables from a map of tokens
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--theme($theme: $carbon--theme) {
-  $interactive-01: map-get($theme, interactive-01) !global;
-  $interactive-02: map-get($theme, interactive-02) !global;
-  $interactive-03: map-get($theme, interactive-03) !global;
-  $interactive-04: map-get($theme, interactive-04) !global;
-  $ui-background: map-get($theme, ui-background) !global;
-  $ui-01: map-get($theme, ui-01) !global;
-  $ui-02: map-get($theme, ui-02) !global;
-  $ui-03: map-get($theme, ui-03) !global;
-  $ui-04: map-get($theme, ui-04) !global;
-  $ui-05: map-get($theme, ui-05) !global;
-  $text-01: map-get($theme, text-01) !global;
-  $text-02: map-get($theme, text-02) !global;
-  $text-03: map-get($theme, text-03) !global;
-  $text-04: map-get($theme, text-04) !global;
-  $icon-01: map-get($theme, icon-01) !global;
-  $icon-02: map-get($theme, icon-02) !global;
-  $icon-03: map-get($theme, icon-03) !global;
-  $link-01: map-get($theme, link-01) !global;
-  $field-01: map-get($theme, field-01) !global;
-  $field-02: map-get($theme, field-02) !global;
-  $inverse-01: map-get($theme, inverse-01) !global;
-  $inverse-02: map-get($theme, inverse-02) !global;
-  $support-01: map-get($theme, support-01) !global;
-  $support-02: map-get($theme, support-02) !global;
-  $support-03: map-get($theme, support-03) !global;
-  $support-04: map-get($theme, support-04) !global;
-  $overlay-01: map-get($theme, overlay-01) !global;
-  $focus: map-get($theme, focus) !global;
-  $hover-primary: map-get($theme, hover-primary) !global;
-  $active-primary: map-get($theme, active-primary) !global;
-  $hover-primary-text: map-get($theme, hover-primary-text) !global;
-  $hover-secondary: map-get($theme, hover-secondary) !global;
-  $active-secondary: map-get($theme, active-secondary) !global;
-  $hover-tertiary: map-get($theme, hover-tertiary) !global;
-  $active-tertiary: map-get($theme, active-tertiary) !global;
-  $hover-ui: map-get($theme, hover-ui) !global;
-  $active-ui: map-get($theme, active-ui) !global;
-  $selected-ui: map-get($theme, selected-ui) !global;
-  $hover-selected-ui: map-get($theme, hover-selected-ui) !global;
-  $hover-danger: map-get($theme, hover-danger) !global;
-  $active-danger: map-get($theme, active-danger) !global;
-  $hover-row: map-get($theme, hover-row) !global;
-  $visited-link: map-get($theme, visited-link) !global;
-  $disabled-01: map-get($theme, disabled-01) !global;
-  $disabled-02: map-get($theme, disabled-02) !global;
-  $disabled-03: map-get($theme, disabled-03) !global;
-  $highlight: map-get($theme, highlight) !global;
-  $brand-01: map-get($theme, brand-01) !global;
-  $brand-02: map-get($theme, brand-02) !global;
-  $brand-03: map-get($theme, brand-03) !global;
-  $active-01: map-get($theme, active-01) !global;
-  $hover-field: map-get($theme, hover-field) !global;
+@mixin carbon--theme($theme: carbon--theme) {
+  $interactive-01: map-get($theme, 'interactive-01') !global;
+  $interactive-02: map-get($theme, 'interactive-02') !global;
+  $interactive-03: map-get($theme, 'interactive-03') !global;
+  $interactive-04: map-get($theme, 'interactive-04') !global;
+  $ui-background: map-get($theme, 'ui-background') !global;
+  $ui-01: map-get($theme, 'ui-01') !global;
+  $ui-02: map-get($theme, 'ui-02') !global;
+  $ui-03: map-get($theme, 'ui-03') !global;
+  $ui-04: map-get($theme, 'ui-04') !global;
+  $ui-05: map-get($theme, 'ui-05') !global;
+  $text-01: map-get($theme, 'text-01') !global;
+  $text-02: map-get($theme, 'text-02') !global;
+  $text-03: map-get($theme, 'text-03') !global;
+  $text-04: map-get($theme, 'text-04') !global;
+  $icon-01: map-get($theme, 'icon-01') !global;
+  $icon-02: map-get($theme, 'icon-02') !global;
+  $icon-03: map-get($theme, 'icon-03') !global;
+  $link-01: map-get($theme, 'link-01') !global;
+  $field-01: map-get($theme, 'field-01') !global;
+  $field-02: map-get($theme, 'field-02') !global;
+  $inverse-01: map-get($theme, 'inverse-01') !global;
+  $inverse-02: map-get($theme, 'inverse-02') !global;
+  $support-01: map-get($theme, 'support-01') !global;
+  $support-02: map-get($theme, 'support-02') !global;
+  $support-03: map-get($theme, 'support-03') !global;
+  $support-04: map-get($theme, 'support-04') !global;
+  $overlay-01: map-get($theme, 'overlay-01') !global;
+  $focus: map-get($theme, 'focus') !global;
+  $hover-primary: map-get($theme, 'hover-primary') !global;
+  $active-primary: map-get($theme, 'active-primary') !global;
+  $hover-primary-text: map-get($theme, 'hover-primary-text') !global;
+  $hover-secondary: map-get($theme, 'hover-secondary') !global;
+  $active-secondary: map-get($theme, 'active-secondary') !global;
+  $hover-tertiary: map-get($theme, 'hover-tertiary') !global;
+  $active-tertiary: map-get($theme, 'active-tertiary') !global;
+  $hover-ui: map-get($theme, 'hover-ui') !global;
+  $active-ui: map-get($theme, 'active-ui') !global;
+  $selected-ui: map-get($theme, 'selected-ui') !global;
+  $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $hover-danger: map-get($theme, 'hover-danger') !global;
+  $active-danger: map-get($theme, 'active-danger') !global;
+  $hover-row: map-get($theme, 'hover-row') !global;
+  $visited-link: map-get($theme, 'visited-link') !global;
+  $disabled-01: map-get($theme, 'disabled-01') !global;
+  $disabled-02: map-get($theme, 'disabled-02') !global;
+  $disabled-03: map-get($theme, 'disabled-03') !global;
+  $highlight: map-get($theme, 'highlight') !global;
+  $brand-01: map-get($theme, 'brand-01') !global;
+  $brand-02: map-get($theme, 'brand-02') !global;
+  $brand-03: map-get($theme, 'brand-03') !global;
+  $active-01: map-get($theme, 'active-01') !global;
+  $hover-field: map-get($theme, 'hover-field') !global;
 
   @content;
-
   // Reset to default theme after apply in content
   @if $theme != $carbon--theme {
-    @include carbon--theme;
+    @include carbon--theme();
   }
 }
 ```
@@ -147,9 +146,9 @@ Define theme variables from a map of tokens
 
 - **Parameters**:
 
-| Name     | Description         | Type  | Default value    |
-| -------- | ------------------- | ----- | ---------------- |
-| `$theme` | Map of theme tokens | `Map` | `$carbon--theme` |
+| Name     | Description         | Type  | Default value   |
+| -------- | ------------------- | ----- | --------------- |
+| `$theme` | Map of theme tokens | `Map` | `carbon--theme` |
 
 **Example**:
 
@@ -537,7 +536,7 @@ Primary interactive color; Primary buttons
 <summary>Source code</summary>
 
 ```scss
-$interactive-01: map-get($carbon--theme, interactive-01);
+$interactive-01: map-get($carbon--theme, 'interactive-01');
 ```
 
 </details>
@@ -557,7 +556,7 @@ Secondary interactive color; Secondary button
 <summary>Source code</summary>
 
 ```scss
-$interactive-02: map-get($carbon--theme, interactive-02);
+$interactive-02: map-get($carbon--theme, 'interactive-02');
 ```
 
 </details>
@@ -577,7 +576,7 @@ $interactive-02: map-get($carbon--theme, interactive-02);
 <summary>Source code</summary>
 
 ```scss
-$interactive-03: map-get($carbon--theme, interactive-03);
+$interactive-03: map-get($carbon--theme, 'interactive-03');
 ```
 
 </details>
@@ -597,7 +596,7 @@ $interactive-03: map-get($carbon--theme, interactive-03);
 <summary>Source code</summary>
 
 ```scss
-$interactive-04: map-get($carbon--theme, interactive-04);
+$interactive-04: map-get($carbon--theme, 'interactive-04');
 ```
 
 </details>
@@ -615,7 +614,7 @@ Default page background
 <summary>Source code</summary>
 
 ```scss
-$ui-background: map-get($carbon--theme, ui-background);
+$ui-background: map-get($carbon--theme, 'ui-background');
 ```
 
 </details>
@@ -633,7 +632,7 @@ Primary container background; Secondary page background
 <summary>Source code</summary>
 
 ```scss
-$ui-01: map-get($carbon--theme, ui-01);
+$ui-01: map-get($carbon--theme, 'ui-01');
 ```
 
 </details>
@@ -651,7 +650,7 @@ Primary page background; Secondary container background
 <summary>Source code</summary>
 
 ```scss
-$ui-02: map-get($carbon--theme, ui-02);
+$ui-02: map-get($carbon--theme, 'ui-02');
 ```
 
 </details>
@@ -669,7 +668,7 @@ Subtle border; Tertiary background color
 <summary>Source code</summary>
 
 ```scss
-$ui-03: map-get($carbon--theme, ui-03);
+$ui-03: map-get($carbon--theme, 'ui-03');
 ```
 
 </details>
@@ -687,7 +686,7 @@ $ui-03: map-get($carbon--theme, ui-03);
 <summary>Source code</summary>
 
 ```scss
-$ui-04: map-get($carbon--theme, ui-04);
+$ui-04: map-get($carbon--theme, 'ui-04');
 ```
 
 </details>
@@ -705,7 +704,7 @@ $ui-04: map-get($carbon--theme, ui-04);
 <summary>Source code</summary>
 
 ```scss
-$ui-05: map-get($carbon--theme, ui-05);
+$ui-05: map-get($carbon--theme, 'ui-05');
 ```
 
 </details>
@@ -723,7 +722,7 @@ Primary text; Body copy; Headers; Hover text color for `$text-02`
 <summary>Source code</summary>
 
 ```scss
-$text-01: map-get($carbon--theme, text-01);
+$text-01: map-get($carbon--theme, 'text-01');
 ```
 
 </details>
@@ -741,7 +740,7 @@ Secondary text; Input labels; Help text
 <summary>Source code</summary>
 
 ```scss
-$text-02: map-get($carbon--theme, text-02);
+$text-02: map-get($carbon--theme, 'text-02');
 ```
 
 </details>
@@ -759,7 +758,7 @@ Placeholder text
 <summary>Source code</summary>
 
 ```scss
-$text-03: map-get($carbon--theme, text-03);
+$text-03: map-get($carbon--theme, 'text-03');
 ```
 
 </details>
@@ -777,7 +776,7 @@ Text on interactive colors
 <summary>Source code</summary>
 
 ```scss
-$text-04: map-get($carbon--theme, text-04);
+$text-04: map-get($carbon--theme, 'text-04');
 ```
 
 </details>
@@ -795,7 +794,7 @@ Primary icons
 <summary>Source code</summary>
 
 ```scss
-$icon-01: map-get($carbon--theme, icon-01);
+$icon-01: map-get($carbon--theme, 'icon-01');
 ```
 
 </details>
@@ -813,7 +812,7 @@ Secondary icons
 <summary>Source code</summary>
 
 ```scss
-$icon-02: map-get($carbon--theme, icon-02);
+$icon-02: map-get($carbon--theme, 'icon-02');
 ```
 
 </details>
@@ -831,7 +830,7 @@ Tertiary icons; Icons on interactive colors; Icons on non-ui colors
 <summary>Source code</summary>
 
 ```scss
-$icon-03: map-get($carbon--theme, icon-03);
+$icon-03: map-get($carbon--theme, 'icon-03');
 ```
 
 </details>
@@ -849,7 +848,7 @@ Primary links; Ghost button
 <summary>Source code</summary>
 
 ```scss
-$link-01: map-get($carbon--theme, link-01);
+$link-01: map-get($carbon--theme, 'link-01');
 ```
 
 </details>
@@ -867,7 +866,7 @@ Default input fields; Field color on \$ui-backgrounds
 <summary>Source code</summary>
 
 ```scss
-$field-01: map-get($carbon--theme, field-01);
+$field-01: map-get($carbon--theme, 'field-01');
 ```
 
 </details>
@@ -885,7 +884,7 @@ Input field color on `$ui-02` backgrounds
 <summary>Source code</summary>
 
 ```scss
-$field-02: map-get($carbon--theme, field-02);
+$field-02: map-get($carbon--theme, 'field-02');
 ```
 
 </details>
@@ -903,7 +902,7 @@ Inverse text color; Inverse icon color
 <summary>Source code</summary>
 
 ```scss
-$inverse-01: map-get($carbon--theme, inverse-01);
+$inverse-01: map-get($carbon--theme, 'inverse-01');
 ```
 
 </details>
@@ -921,7 +920,7 @@ High contrast backgrounds; High contrast elements
 <summary>Source code</summary>
 
 ```scss
-$inverse-02: map-get($carbon--theme, inverse-02);
+$inverse-02: map-get($carbon--theme, 'inverse-02');
 ```
 
 </details>
@@ -939,7 +938,7 @@ Error
 <summary>Source code</summary>
 
 ```scss
-$support-01: map-get($carbon--theme, support-01);
+$support-01: map-get($carbon--theme, 'support-01');
 ```
 
 </details>
@@ -957,7 +956,7 @@ Success
 <summary>Source code</summary>
 
 ```scss
-$support-02: map-get($carbon--theme, support-02);
+$support-02: map-get($carbon--theme, 'support-02');
 ```
 
 </details>
@@ -975,7 +974,7 @@ Warning
 <summary>Source code</summary>
 
 ```scss
-$support-03: map-get($carbon--theme, support-03);
+$support-03: map-get($carbon--theme, 'support-03');
 ```
 
 </details>
@@ -993,7 +992,7 @@ Information
 <summary>Source code</summary>
 
 ```scss
-$support-04: map-get($carbon--theme, support-04);
+$support-04: map-get($carbon--theme, 'support-04');
 ```
 
 </details>
@@ -1011,7 +1010,7 @@ Background overlay
 <summary>Source code</summary>
 
 ```scss
-$overlay-01: map-get($carbon--theme, overlay-01);
+$overlay-01: map-get($carbon--theme, 'overlay-01');
 ```
 
 </details>
@@ -1029,7 +1028,7 @@ Focus border; Focus underline
 <summary>Source code</summary>
 
 ```scss
-$focus: map-get($carbon--theme, focus);
+$focus: map-get($carbon--theme, 'focus');
 ```
 
 </details>
@@ -1047,7 +1046,7 @@ $focus: map-get($carbon--theme, focus);
 <summary>Source code</summary>
 
 ```scss
-$hover-primary: map-get($carbon--theme, hover-primary);
+$hover-primary: map-get($carbon--theme, 'hover-primary');
 ```
 
 </details>
@@ -1065,7 +1064,7 @@ $hover-primary: map-get($carbon--theme, hover-primary);
 <summary>Source code</summary>
 
 ```scss
-$active-primary: map-get($carbon--theme, active-primary);
+$active-primary: map-get($carbon--theme, 'active-primary');
 ```
 
 </details>
@@ -1083,7 +1082,7 @@ $active-primary: map-get($carbon--theme, active-primary);
 <summary>Source code</summary>
 
 ```scss
-$hover-primary-text: map-get($carbon--theme, hover-primary-text);
+$hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
 ```
 
 </details>
@@ -1101,7 +1100,7 @@ $hover-primary-text: map-get($carbon--theme, hover-primary-text);
 <summary>Source code</summary>
 
 ```scss
-$hover-secondary: map-get($carbon--theme, hover-secondary);
+$hover-secondary: map-get($carbon--theme, 'hover-secondary');
 ```
 
 </details>
@@ -1119,7 +1118,7 @@ $hover-secondary: map-get($carbon--theme, hover-secondary);
 <summary>Source code</summary>
 
 ```scss
-$active-secondary: map-get($carbon--theme, active-secondary);
+$active-secondary: map-get($carbon--theme, 'active-secondary');
 ```
 
 </details>
@@ -1137,7 +1136,7 @@ $active-secondary: map-get($carbon--theme, active-secondary);
 <summary>Source code</summary>
 
 ```scss
-$hover-tertiary: map-get($carbon--theme, hover-tertiary);
+$hover-tertiary: map-get($carbon--theme, 'hover-tertiary');
 ```
 
 </details>
@@ -1155,7 +1154,7 @@ $hover-tertiary: map-get($carbon--theme, hover-tertiary);
 <summary>Source code</summary>
 
 ```scss
-$active-tertiary: map-get($carbon--theme, active-tertiary);
+$active-tertiary: map-get($carbon--theme, 'active-tertiary');
 ```
 
 </details>
@@ -1173,7 +1172,7 @@ $active-tertiary: map-get($carbon--theme, active-tertiary);
 <summary>Source code</summary>
 
 ```scss
-$hover-ui: map-get($carbon--theme, hover-ui);
+$hover-ui: map-get($carbon--theme, 'hover-ui');
 ```
 
 </details>
@@ -1193,7 +1192,7 @@ $hover-ui: map-get($carbon--theme, hover-ui);
 <summary>Source code</summary>
 
 ```scss
-$active-ui: map-get($carbon--theme, active-ui);
+$active-ui: map-get($carbon--theme, 'active-ui');
 ```
 
 </details>
@@ -1213,7 +1212,7 @@ Selected UI elements
 <summary>Source code</summary>
 
 ```scss
-$selected-ui: map-get($carbon--theme, selected-ui);
+$selected-ui: map-get($carbon--theme, 'selected-ui');
 ```
 
 </details>
@@ -1231,7 +1230,7 @@ Data table selected row hover
 <summary>Source code</summary>
 
 ```scss
-$hover-selected-ui: map-get($carbon--theme, hover-selected-ui);
+$hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
 ```
 
 </details>
@@ -1249,7 +1248,7 @@ Danger hover; `$support-01` hover
 <summary>Source code</summary>
 
 ```scss
-$hover-danger: map-get($carbon--theme, hover-danger);
+$hover-danger: map-get($carbon--theme, 'hover-danger');
 ```
 
 </details>
@@ -1267,7 +1266,7 @@ Danger active; `$support-01` active
 <summary>Source code</summary>
 
 ```scss
-$active-danger: map-get($carbon--theme, active-danger);
+$active-danger: map-get($carbon--theme, 'active-danger');
 ```
 
 </details>
@@ -1285,7 +1284,7 @@ Row hover
 <summary>Source code</summary>
 
 ```scss
-$hover-row: map-get($carbon--theme, hover-row);
+$hover-row: map-get($carbon--theme, 'hover-row');
 ```
 
 </details>
@@ -1303,7 +1302,7 @@ Visited links
 <summary>Source code</summary>
 
 ```scss
-$visited-link: map-get($carbon--theme, visited-link);
+$visited-link: map-get($carbon--theme, 'visited-link');
 ```
 
 </details>
@@ -1321,7 +1320,7 @@ Disabled fields; Disabled backgrounds; Disabled border
 <summary>Source code</summary>
 
 ```scss
-$disabled-01: map-get($carbon--theme, disabled-01);
+$disabled-01: map-get($carbon--theme, 'disabled-01');
 ```
 
 </details>
@@ -1339,7 +1338,7 @@ Disabled elements on `$disabled-01`; Disabled label; Disabled text on `$disabled
 <summary>Source code</summary>
 
 ```scss
-$disabled-02: map-get($carbon--theme, disabled-02);
+$disabled-02: map-get($carbon--theme, 'disabled-02');
 ```
 
 </details>
@@ -1357,7 +1356,7 @@ Disabled text on `$disabled-02`; Disabled icons on `$disabled-02`
 <summary>Source code</summary>
 
 ```scss
-$disabled-03: map-get($carbon--theme, disabled-03);
+$disabled-03: map-get($carbon--theme, 'disabled-03');
 ```
 
 </details>
@@ -1375,7 +1374,7 @@ $disabled-03: map-get($carbon--theme, disabled-03);
 <summary>Source code</summary>
 
 ```scss
-$highlight: map-get($carbon--theme, highlight);
+$highlight: map-get($carbon--theme, 'highlight');
 ```
 
 </details>
@@ -1391,7 +1390,7 @@ $highlight: map-get($carbon--theme, highlight);
 <summary>Source code</summary>
 
 ```scss
-$brand-01: map-get($carbon--theme, brand-01);
+$brand-01: map-get($carbon--theme, 'brand-01');
 ```
 
 </details>
@@ -1409,7 +1408,7 @@ $brand-01: map-get($carbon--theme, brand-01);
 <summary>Source code</summary>
 
 ```scss
-$brand-02: map-get($carbon--theme, brand-02);
+$brand-02: map-get($carbon--theme, 'brand-02');
 ```
 
 </details>
@@ -1427,7 +1426,7 @@ $brand-02: map-get($carbon--theme, brand-02);
 <summary>Source code</summary>
 
 ```scss
-$brand-03: map-get($carbon--theme, brand-03);
+$brand-03: map-get($carbon--theme, 'brand-03');
 ```
 
 </details>
@@ -1445,7 +1444,7 @@ $brand-03: map-get($carbon--theme, brand-03);
 <summary>Source code</summary>
 
 ```scss
-$active-01: map-get($carbon--theme, active-01);
+$active-01: map-get($carbon--theme, 'active-01');
 ```
 
 </details>
@@ -1463,7 +1462,7 @@ $active-01: map-get($carbon--theme, active-01);
 <summary>Source code</summary>
 
 ```scss
-$hover-field: map-get($carbon--theme, hover-field);
+$hover-field: map-get($carbon--theme, 'hover-field');
 ```
 
 </details>
