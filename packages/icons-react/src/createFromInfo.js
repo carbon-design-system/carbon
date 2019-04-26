@@ -24,7 +24,7 @@ const babelOptions = {
   ],
 };
 const prettierOptions = {
-  parser: 'babylon',
+  parser: 'babel',
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'es5',
@@ -65,6 +65,12 @@ export default ${info.moduleName};
 function iconToString(descriptor) {
   const { elem, attrs = {}, content = [] } = descriptor;
   const props = Object.keys(attrs).reduce((acc, key) => {
+    if (key.includes('data-')) {
+      return {
+        ...acc,
+        [key]: attrs[key],
+      };
+    }
     return {
       ...acc,
       [camelCase(key)]: attrs[key],

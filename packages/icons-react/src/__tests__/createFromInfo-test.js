@@ -166,5 +166,37 @@ describe('createFromInfo', () => {
       getContainer().focus();
       expect(document.activeElement === getContainer()).toBe(true);
     });
+
+    it('should not transform data attributes', async () => {
+      const dataTestId = 1;
+      const descriptor = {
+        attrs: {
+          width: 16,
+          height: 16,
+          viewBox: '0 0 16 16',
+        },
+        content: [
+          {
+            elem: 'circle',
+            attrs: {
+              cx: 8,
+              cy: 8,
+              r: 8,
+              'data-test-id': dataTestId,
+            },
+          },
+        ],
+      };
+      const moduleSource = createModuleFromInfo({
+        descriptor,
+        moduleName: 'MockIcon',
+      });
+      const MockIconComponent = await getModuleFromString(moduleSource);
+
+      ReactDOM.render(<MockIconComponent />, mountNode);
+      expect(
+        mountNode.querySelector(`[data-test-id="${dataTestId}"]`)
+      ).toBeDefined();
+    });
   });
 });
