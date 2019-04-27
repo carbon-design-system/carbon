@@ -71,7 +71,7 @@ async function build() {
   const themeMixin = [
     t.Comment(`/ Define theme variables from a map of tokens
 / @access public
-/ @param {Map} $theme [${defaultThemeMapName}] - Map of theme tokens
+/ @param {Map} $theme [$${defaultThemeMapName}] - Map of theme tokens
 / @content Pass in your custom declaration blocks to be used after the token maps set theming variables.
 /
 / @example scss
