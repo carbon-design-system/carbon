@@ -161,6 +161,7 @@ async function build() {
             callee: t.Identifier('map-get'),
             arguments: [t.Identifier(defaultThemeMapName), t.SassString(name)],
           }),
+          default: true,
         }),
       ].filter(Boolean);
     }),
