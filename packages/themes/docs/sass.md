@@ -80,7 +80,7 @@ Define theme variables from a map of tokens
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--theme($theme: carbon--theme) {
+@mixin carbon--theme($theme: $carbon--theme) {
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -146,9 +146,9 @@ Define theme variables from a map of tokens
 
 - **Parameters**:
 
-| Name     | Description         | Type  | Default value   |
-| -------- | ------------------- | ----- | --------------- |
-| `$theme` | Map of theme tokens | `Map` | `carbon--theme` |
+| Name     | Description         | Type  | Default value    |
+| -------- | ------------------- | ----- | ---------------- |
+| `$theme` | Map of theme tokens | `Map` | `$carbon--theme` |
 
 **Example**:
 
