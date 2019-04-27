@@ -145,7 +145,7 @@ Define color variables
       90: #061f80,
       100: #051243,
     ),
-    coolGray: (
+    cool-gray: (
       10: #f2f4f8,
       20: #d5d9e0,
       30: #b9bfc7,
@@ -244,7 +244,7 @@ Define color variables
       90: #003137,
       100: #081a1c,
     ),
-    warmGray: (
+    warm-gray: (
       10: #f7f3f1,
       20: #e0dbda,
       30: #c1bcbb,
@@ -400,7 +400,7 @@ Define color variables
       90: #061f80,
       100: #051243,
     ),
-    coolGray: (
+    cool-gray: (
       10: #f2f4f8,
       20: #d5d9e0,
       30: #b9bfc7,
@@ -499,7 +499,7 @@ Define color variables
       90: #003137,
       100: #081a1c,
     ),
-    warmGray: (
+    warm-gray: (
       10: #f7f3f1,
       20: #e0dbda,
       30: #c1bcbb,
