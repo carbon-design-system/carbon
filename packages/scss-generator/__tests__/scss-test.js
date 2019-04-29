@@ -53,9 +53,9 @@ describe('@carbon/scss', () => {
           ],
         }),
         `$variable: (
-  a: 1,
-  b: 2,
-  c: 3
+  'a': 1,
+  'b': 2,
+  'c': 3
 );`,
       ],
       ['number', t.SassNumber({ value: 1 }), '$variable: 1;'],
