@@ -18,99 +18,97 @@ const { prefix } = settings;
 
 let didWarnAboutDeprecation = false;
 
-const Button = React.forwardRef(
-  (
-    {
-      children,
-      as,
-      className,
-      disabled,
-      small,
-      kind,
-      href,
-      tabIndex,
-      type,
-      inputref,
-      renderIcon,
-      icon,
-      iconDescription,
-      ...other
-    },
-    ref
-  ) => {
-    const buttonClasses = classNames(className, {
-      [`${prefix}--btn`]: true,
-      [`${prefix}--btn--sm`]: small,
-      [`${prefix}--btn--primary`]: kind === 'primary',
-      [`${prefix}--btn--danger`]: kind === 'danger',
-      [`${prefix}--btn--secondary`]: kind === 'secondary',
-      [`${prefix}--btn--ghost`]: kind === 'ghost',
-      [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
-      [`${prefix}--btn--tertiary`]: kind === 'tertiary',
-      [`${prefix}--btn--disabled`]: disabled,
-    });
+const Button = React.forwardRef(function Button(
+  {
+    children,
+    as,
+    className,
+    disabled,
+    small,
+    kind,
+    href,
+    tabIndex,
+    type,
+    inputref,
+    renderIcon,
+    icon,
+    iconDescription,
+    ...other
+  },
+  ref
+) {
+  const buttonClasses = classNames(className, {
+    [`${prefix}--btn`]: true,
+    [`${prefix}--btn--sm`]: small,
+    [`${prefix}--btn--primary`]: kind === 'primary',
+    [`${prefix}--btn--danger`]: kind === 'danger',
+    [`${prefix}--btn--secondary`]: kind === 'secondary',
+    [`${prefix}--btn--ghost`]: kind === 'ghost',
+    [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
+    [`${prefix}--btn--tertiary`]: kind === 'tertiary',
+    [`${prefix}--btn--disabled`]: disabled,
+  });
 
-    const commonProps = {
-      tabIndex,
-      className: buttonClasses,
-      ref: breakingChangesX ? ref : ref || inputref,
-    };
+  const commonProps = {
+    tabIndex,
+    className: buttonClasses,
+    ref: breakingChangesX ? ref : ref || inputref,
+  };
 
-    if (__DEV__ && breakingChangesX && icon) {
-      warning(
-        didWarnAboutDeprecation,
-        'The `icon` property in the `Button` component is being removed in the next release of ' +
-          '`carbon-components-react`. Please use `renderIcon` instead.'
-      );
-      didWarnAboutDeprecation = true;
-    }
-
-    const hasRenderIcon = Object(renderIcon) === renderIcon;
-    const ButtonImageElement = hasRenderIcon
-      ? renderIcon
-      : !breakingChangesX && icon && Icon;
-    const buttonImage = !ButtonImageElement ? null : (
-      <ButtonImageElement
-        icon={!hasRenderIcon && Object(icon) === icon ? icon : undefined}
-        name={!hasRenderIcon && Object(icon) !== icon ? icon : undefined}
-        aria-label={!hasRenderIcon ? undefined : iconDescription}
-        description={hasRenderIcon ? undefined : iconDescription}
-        className={`${prefix}--btn__icon`}
-        aria-hidden={true}
-      />
+  if (__DEV__ && breakingChangesX && icon) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `icon` property in the `Button` component is being removed in the next release of ' +
+        '`carbon-components-react`. Please use `renderIcon` instead.'
     );
-
-    let component = 'button';
-    let otherProps = {
-      disabled,
-      type,
-    };
-    const anchorProps = {
-      role: 'button',
-      href,
-    };
-    if (as) {
-      component = as;
-      otherProps = {
-        ...otherProps,
-        ...anchorProps,
-      };
-    } else if (href) {
-      component = 'a';
-      otherProps = anchorProps;
-    }
-    return React.createElement(
-      component,
-      {
-        ...other,
-        ...commonProps,
-        ...otherProps,
-      },
-      children,
-      buttonImage
-    );
+    didWarnAboutDeprecation = true;
   }
-);
+
+  const hasRenderIcon = Object(renderIcon) === renderIcon;
+  const ButtonImageElement = hasRenderIcon
+    ? renderIcon
+    : !breakingChangesX && icon && Icon;
+  const buttonImage = !ButtonImageElement ? null : (
+    <ButtonImageElement
+      icon={!hasRenderIcon && Object(icon) === icon ? icon : undefined}
+      name={!hasRenderIcon && Object(icon) !== icon ? icon : undefined}
+      aria-label={!hasRenderIcon ? undefined : iconDescription}
+      description={hasRenderIcon ? undefined : iconDescription}
+      className={`${prefix}--btn__icon`}
+      aria-hidden={true}
+    />
+  );
+
+  let component = 'button';
+  let otherProps = {
+    disabled,
+    type,
+  };
+  const anchorProps = {
+    role: 'button',
+    href,
+  };
+  if (as) {
+    component = as;
+    otherProps = {
+      ...otherProps,
+      ...anchorProps,
+    };
+  } else if (href) {
+    component = 'a';
+    otherProps = anchorProps;
+  }
+  return React.createElement(
+    component,
+    {
+      ...other,
+      ...commonProps,
+      ...otherProps,
+    },
+    children,
+    buttonImage
+  );
+});
 
 Button.propTypes = {
   /**

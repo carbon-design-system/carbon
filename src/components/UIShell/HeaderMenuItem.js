@@ -12,22 +12,23 @@ import Link, { LinkPropTypes } from './Link';
 
 const { prefix } = settings;
 
-const HeaderMenuItem = React.forwardRef(
-  ({ className, children, role, ...rest }, ref) => {
-    return (
-      <li className={className} role={role}>
-        <Link
-          {...rest}
-          className={`${prefix}--header__menu-item`}
-          ref={ref}
-          role="menuitem"
-          tabIndex={0}>
-          <span className={`${prefix}--text-truncate--end`}>{children}</span>
-        </Link>
-      </li>
-    );
-  }
-);
+const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
+  { className, children, role, ...rest },
+  ref
+) {
+  return (
+    <li className={className} role={role}>
+      <Link
+        {...rest}
+        className={`${prefix}--header__menu-item`}
+        ref={ref}
+        role="menuitem"
+        tabIndex={0}>
+        <span className={`${prefix}--text-truncate--end`}>{children}</span>
+      </Link>
+    </li>
+  );
+});
 
 HeaderMenuItem.propTypes = {
   /**

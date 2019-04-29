@@ -14,7 +14,7 @@ import Link from './Link';
 
 const { prefix } = settings;
 
-const SideNavMenuItem = React.forwardRef((props, ref) => {
+const SideNavMenuItem = React.forwardRef(function SideNavMenuItem(props, ref) {
   const { children, className: customClassName, isActive, ...rest } = props;
   const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
   const linkClassName = cx({

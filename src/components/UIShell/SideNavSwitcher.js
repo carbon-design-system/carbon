@@ -13,7 +13,7 @@ import React from 'react';
 
 const { prefix } = settings;
 
-const SideNavSwitcher = React.forwardRef((props, ref) => {
+const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
   const { className: customClassName, labelText, onChange, options } = props;
   const className = cx(`${prefix}--side-nav__switcher`, customClassName);
   // Note for usage around `onBlur`: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-onchange.md

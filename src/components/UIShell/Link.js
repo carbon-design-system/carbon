@@ -14,7 +14,7 @@ import React from 'react';
  * in their own components to support use-cases like `react-router` or
  * `@reach/router`
  */
-const Link = React.forwardRef((props, ref) => {
+const Link = React.forwardRef(function Link(props, ref) {
   const { element, ...rest } = props;
   return React.createElement(element, { ...rest, ref });
 });

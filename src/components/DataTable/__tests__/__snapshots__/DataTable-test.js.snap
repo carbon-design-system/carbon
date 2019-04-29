@@ -1867,7 +1867,7 @@ exports[`DataTable should render 1`] = `
                     Action 3
                   </TableToolbarAction>
                 </TableToolbarMenu>
-                <ForwardRef
+                <ForwardRef(Button)
                   disabled={false}
                   iconDescription="Provide icon description if icon is used"
                   kind="primary"
@@ -1877,7 +1877,7 @@ exports[`DataTable should render 1`] = `
                   type="button"
                 >
                   Add new
-                </ForwardRef>
+                </ForwardRef(Button)>
               </TableToolbarContent>
             </TableToolbar>
             <Table
@@ -2030,7 +2030,7 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef
+                    <ForwardRef(Button)
                       disabled={false}
                       iconDescription="Add"
                       kind="primary"
@@ -2107,7 +2107,7 @@ exports[`DataTable should render 1`] = `
                           </svg>
                         </AddFilled16>
                       </button>
-                    </ForwardRef>
+                    </ForwardRef(Button)>
                   </TableBatchAction>
                   <TableBatchAction
                     iconDescription="Add"
@@ -2140,7 +2140,7 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef
+                    <ForwardRef(Button)
                       disabled={false}
                       iconDescription="Add"
                       kind="primary"
@@ -2217,7 +2217,7 @@ exports[`DataTable should render 1`] = `
                           </svg>
                         </AddFilled16>
                       </button>
-                    </ForwardRef>
+                    </ForwardRef(Button)>
                   </TableBatchAction>
                   <TableBatchAction
                     iconDescription="Add"
@@ -2250,7 +2250,7 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef
+                    <ForwardRef(Button)
                       disabled={false}
                       iconDescription="Add"
                       kind="primary"
@@ -2327,9 +2327,9 @@ exports[`DataTable should render 1`] = `
                           </svg>
                         </AddFilled16>
                       </button>
-                    </ForwardRef>
+                    </ForwardRef(Button)>
                   </TableBatchAction>
-                  <ForwardRef
+                  <ForwardRef(Button)
                     className="bx--batch-summary__cancel"
                     disabled={false}
                     iconDescription="Provide icon description if icon is used"
@@ -2348,7 +2348,7 @@ exports[`DataTable should render 1`] = `
                     >
                       Cancel
                     </button>
-                  </ForwardRef>
+                  </ForwardRef(Button)>
                 </div>
               </TableActionList>
               <div
@@ -2653,7 +2653,7 @@ exports[`DataTable should render 1`] = `
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
-              <ForwardRef
+              <ForwardRef(Button)
                 disabled={false}
                 iconDescription="Provide icon description if icon is used"
                 kind="primary"
@@ -2671,7 +2671,7 @@ exports[`DataTable should render 1`] = `
                 >
                   Add new
                 </button>
-              </ForwardRef>
+              </ForwardRef(Button)>
             </div>
           </TableToolbarContent>
         </section>

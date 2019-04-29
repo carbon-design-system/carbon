@@ -15,7 +15,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
       <div
         className="bx--action-list"
       >
-        <ForwardRef
+        <ForwardRef(Button)
           className="bx--batch-summary__cancel"
           disabled={false}
           iconDescription="Provide icon description if icon is used"
@@ -34,7 +34,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           >
             Cancel
           </button>
-        </ForwardRef>
+        </ForwardRef(Button)>
       </div>
     </TableActionList>
     <div
@@ -67,7 +67,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
       <div
         className="bx--action-list"
       >
-        <ForwardRef
+        <ForwardRef(Button)
           className="bx--batch-summary__cancel"
           disabled={false}
           iconDescription="Provide icon description if icon is used"
@@ -86,7 +86,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           >
             Cancel
           </button>
-        </ForwardRef>
+        </ForwardRef(Button)>
       </div>
     </TableActionList>
     <div

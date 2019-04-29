@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNavSwitcher should render 1`] = `
-<ForwardRef
+<ForwardRef(SideNavSwitcher)
   className="custom-classname"
   labelText="label"
   onChange={[MockFunction]}
@@ -90,5 +90,5 @@ exports[`SideNavSwitcher should render 1`] = `
       </ChevronDown20>
     </div>
   </div>
-</ForwardRef>
+</ForwardRef(SideNavSwitcher)>
 `;

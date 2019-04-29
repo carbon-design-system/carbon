@@ -14,111 +14,109 @@ import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
 
-const TextInput = React.forwardRef(
-  (
-    {
-      labelText,
-      className = `${prefix}--text__input`,
-      id,
-      placeholder,
-      type,
-      onChange,
-      onClick,
-      hideLabel,
-      invalid,
-      invalidText,
-      helperText,
-      light,
-      ...other
+const TextInput = React.forwardRef(function TextInput(
+  {
+    labelText,
+    className = `${prefix}--text__input`,
+    id,
+    placeholder,
+    type,
+    onChange,
+    onClick,
+    hideLabel,
+    invalid,
+    invalidText,
+    helperText,
+    light,
+    ...other
+  },
+  ref
+) {
+  const textInputProps = {
+    id,
+    onChange: evt => {
+      if (!other.disabled) {
+        onChange(evt);
+      }
     },
-    ref
-  ) => {
-    const textInputProps = {
-      id,
-      onChange: evt => {
-        if (!other.disabled) {
-          onChange(evt);
-        }
-      },
-      onClick: evt => {
-        if (!other.disabled) {
-          onClick(evt);
-        }
-      },
-      placeholder,
-      type,
-      ref,
-    };
+    onClick: evt => {
+      if (!other.disabled) {
+        onClick(evt);
+      }
+    },
+    placeholder,
+    type,
+    ref,
+  };
 
-    const errorId = id + '-error-msg';
-    const textInputClasses = classNames(`${prefix}--text-input`, className, {
-      [`${prefix}--text-input--light`]: light,
-      [`${prefix}--text-input--invalid`]: invalid,
-    });
-    const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--visually-hidden`]: hideLabel,
-      [`${prefix}--label--disabled`]: other.disabled,
-    });
-    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: other.disabled,
-    });
+  const errorId = id + '-error-msg';
+  const textInputClasses = classNames(`${prefix}--text-input`, className, {
+    [`${prefix}--text-input--light`]: light,
+    [`${prefix}--text-input--invalid`]: invalid,
+  });
+  const labelClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--visually-hidden`]: hideLabel,
+    [`${prefix}--label--disabled`]: other.disabled,
+  });
+  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+  });
 
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
+  const label = labelText ? (
+    <label htmlFor={id} className={labelClasses}>
+      {labelText}
+    </label>
+  ) : null;
 
-    const error = invalid ? (
-      <div className={`${prefix}--form-requirement`} id={errorId}>
-        {invalidText}
-      </div>
-    ) : null;
+  const error = invalid ? (
+    <div className={`${prefix}--form-requirement`} id={errorId}>
+      {invalidText}
+    </div>
+  ) : null;
 
-    const input = invalid ? (
-      <input
-        {...other}
-        {...textInputProps}
-        data-invalid
-        aria-invalid
-        aria-describedby={errorId}
-        className={textInputClasses}
-      />
-    ) : (
-      <input {...other} {...textInputProps} className={textInputClasses} />
-    );
+  const input = invalid ? (
+    <input
+      {...other}
+      {...textInputProps}
+      data-invalid
+      aria-invalid
+      aria-describedby={errorId}
+      className={textInputClasses}
+    />
+  ) : (
+    <input {...other} {...textInputProps} className={textInputClasses} />
+  );
 
-    const helper = helperText ? (
-      <div className={helperTextClasses}>{helperText}</div>
-    ) : null;
+  const helper = helperText ? (
+    <div className={helperTextClasses}>{helperText}</div>
+  ) : null;
 
-    const textInputWrapperClasses = classNames(`${prefix}--form-item`, {
-      [`${prefix}--text-input-wrapper`]: componentsX,
-    });
+  const textInputWrapperClasses = classNames(`${prefix}--form-item`, {
+    [`${prefix}--text-input-wrapper`]: componentsX,
+  });
 
-    return (
-      <div className={textInputWrapperClasses}>
-        {label}
-        {helper}
-        {componentsX ? (
-          <div
-            className={`${prefix}--text-input__field-wrapper`}
-            data-invalid={invalid || null}>
-            {invalid && (
-              <WarningFilled16
-                className={`${prefix}--text-input__invalid-icon`}
-              />
-            )}
-            {input}
-          </div>
-        ) : (
-          input
-        )}
-        {error}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={textInputWrapperClasses}>
+      {label}
+      {helper}
+      {componentsX ? (
+        <div
+          className={`${prefix}--text-input__field-wrapper`}
+          data-invalid={invalid || null}>
+          {invalid && (
+            <WarningFilled16
+              className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {input}
+        </div>
+      ) : (
+        input
+      )}
+      {error}
+    </div>
+  );
+});
 
 TextInput.propTypes = {
   /**

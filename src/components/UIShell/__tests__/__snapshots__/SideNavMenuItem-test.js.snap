@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNavMenuItem should render 1`] = `
-<ForwardRef
+<ForwardRef(SideNavMenuItem)
   className="custom-classname"
   href="#"
   isActive={false}
@@ -31,11 +31,11 @@ exports[`SideNavMenuItem should render 1`] = `
       </a>
     </Link>
   </li>
-</ForwardRef>
+</ForwardRef(SideNavMenuItem)>
 `;
 
 exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria-current="page"\` 1`] = `
-<ForwardRef
+<ForwardRef(SideNavMenuItem)
   className="custom-classname"
   href="#"
   isActive={true}
@@ -65,11 +65,11 @@ exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria
       </a>
     </Link>
   </li>
-</ForwardRef>
+</ForwardRef(SideNavMenuItem)>
 `;
 
 exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria-current="page"\` 2`] = `
-<ForwardRef
+<ForwardRef(SideNavMenuItem)
   aria-current="page"
   className="custom-classname"
   href="#"
@@ -102,5 +102,5 @@ exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria
       </a>
     </Link>
   </li>
-</ForwardRef>
+</ForwardRef(SideNavMenuItem)>
 `;
