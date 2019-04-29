@@ -205,7 +205,13 @@ const SassMapProperty = defineType('SassMapProperty', {
     },
   },
   generate(printer, node) {
-    printer.print(node.key, node);
+    if (isNaN(node.key.name)) {
+      printer.token(`'`);
+      printer.print(node.key, node);
+      printer.token(`'`);
+    } else {
+      printer.print(node.key, node);
+    }
     printer.token(':');
     printer.space();
     printer.print(node.value, node);

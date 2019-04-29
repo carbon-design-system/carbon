@@ -125,7 +125,18 @@ async function build() {
 / @group @carbon/colors`),
       t.SassMixin({
         id: t.Identifier(`${NAMESPACE}--colors`),
-        body: t.BlockStatement([...colorVariables, colorMap]),
+        body: t.BlockStatement([
+          ...colorValues.map(({ grade, swatch, value }) =>
+            t.Assignment({
+              id: t.Identifier(`carbon--${swatch}-${grade}`),
+              init: t.SassColor(value),
+              default: true,
+              global: true,
+            })
+          ),
+          ...colorVariables,
+          colorMap,
+        ]),
       }),
     ],
   });

@@ -130,10 +130,10 @@ Define color variables
   $ibm-color__white-0: #ffffff !default !global;
   $ibm-color__yellow-20: #fdd13a !default !global;
   $ibm-color-map: (
-    black: (
+    'black': (
       100: #000000,
     ),
-    blue: (
+    'blue': (
       10: #edf4ff,
       20: #c9deff,
       30: #97c1ff,
@@ -145,7 +145,7 @@ Define color variables
       90: #061f80,
       100: #051243,
     ),
-    cool-gray: (
+    'cool-gray': (
       10: #f2f4f8,
       20: #d5d9e0,
       30: #b9bfc7,
@@ -157,7 +157,7 @@ Define color variables
       90: #242a2e,
       100: #13171a,
     ),
-    cyan: (
+    'cyan': (
       10: #e3f6ff,
       20: #b3e6ff,
       30: #6ccaff,
@@ -169,7 +169,7 @@ Define color variables
       90: #002b50,
       100: #07192b,
     ),
-    gray: (
+    'gray': (
       10: #f3f3f3,
       20: #dcdcdc,
       30: #bebebe,
@@ -181,7 +181,7 @@ Define color variables
       90: #282828,
       100: #171717,
     ),
-    green: (
+    'green': (
       10: #dafbe4,
       20: #9deeb2,
       30: #56d679,
@@ -193,7 +193,7 @@ Define color variables
       90: #01330f,
       100: #081b09,
     ),
-    magenta: (
+    'magenta': (
       10: #fff0f6,
       20: #ffcfe1,
       30: #ffa0c2,
@@ -205,10 +205,10 @@ Define color variables
       90: #57002b,
       100: #2a0a16,
     ),
-    orange: (
+    'orange': (
       40: #fc7b1e,
     ),
-    purple: (
+    'purple': (
       10: #f7f1ff,
       20: #e6d6ff,
       30: #d0b0ff,
@@ -220,7 +220,7 @@ Define color variables
       90: #38146b,
       100: #1e1033,
     ),
-    red: (
+    'red': (
       10: #fff0f1,
       20: #fcd0d3,
       30: #ffa4a9,
@@ -232,7 +232,7 @@ Define color variables
       90: #570408,
       100: #2c080a,
     ),
-    teal: (
+    'teal': (
       10: #dbfbfb,
       20: #92eeee,
       30: #20d5d2,
@@ -244,7 +244,7 @@ Define color variables
       90: #003137,
       100: #081a1c,
     ),
-    warm-gray: (
+    'warm-gray': (
       10: #f7f3f1,
       20: #e0dbda,
       30: #c1bcbb,
@@ -256,10 +256,10 @@ Define color variables
       90: #2b2828,
       100: #1a1717,
     ),
-    white: (
+    'white': (
       0: #ffffff,
     ),
-    yellow: (
+    'yellow': (
       20: #fdd13a,
     ),
   ) !default !global;
@@ -280,6 +280,110 @@ Define color variables
 
 ```scss
 @mixin carbon--colors() {
+  $carbon--black-100: #000000 !default !global;
+  $carbon--blue-10: #edf4ff !default !global;
+  $carbon--blue-20: #c9deff !default !global;
+  $carbon--blue-30: #97c1ff !default !global;
+  $carbon--blue-40: #6ea6ff !default !global;
+  $carbon--blue-50: #408bfc !default !global;
+  $carbon--blue-60: #0062ff !default !global;
+  $carbon--blue-70: #054ada !default !global;
+  $carbon--blue-80: #0530ad !default !global;
+  $carbon--blue-90: #061f80 !default !global;
+  $carbon--blue-100: #051243 !default !global;
+  $carbon--cool-gray-10: #f2f4f8 !default !global;
+  $carbon--cool-gray-20: #d5d9e0 !default !global;
+  $carbon--cool-gray-30: #b9bfc7 !default !global;
+  $carbon--cool-gray-40: #9fa5ad !default !global;
+  $carbon--cool-gray-50: #868d95 !default !global;
+  $carbon--cool-gray-60: #697077 !default !global;
+  $carbon--cool-gray-70: #50565b !default !global;
+  $carbon--cool-gray-80: #373d42 !default !global;
+  $carbon--cool-gray-90: #242a2e !default !global;
+  $carbon--cool-gray-100: #13171a !default !global;
+  $carbon--cyan-10: #e3f6ff !default !global;
+  $carbon--cyan-20: #b3e6ff !default !global;
+  $carbon--cyan-30: #6ccaff !default !global;
+  $carbon--cyan-40: #30b0ff !default !global;
+  $carbon--cyan-50: #1191e6 !default !global;
+  $carbon--cyan-60: #0072c3 !default !global;
+  $carbon--cyan-70: #0058a1 !default !global;
+  $carbon--cyan-80: #003d73 !default !global;
+  $carbon--cyan-90: #002b50 !default !global;
+  $carbon--cyan-100: #07192b !default !global;
+  $carbon--gray-10: #f3f3f3 !default !global;
+  $carbon--gray-20: #dcdcdc !default !global;
+  $carbon--gray-30: #bebebe !default !global;
+  $carbon--gray-40: #a4a4a4 !default !global;
+  $carbon--gray-50: #8c8c8c !default !global;
+  $carbon--gray-60: #6f6f6f !default !global;
+  $carbon--gray-70: #565656 !default !global;
+  $carbon--gray-80: #3d3d3d !default !global;
+  $carbon--gray-90: #282828 !default !global;
+  $carbon--gray-100: #171717 !default !global;
+  $carbon--green-10: #dafbe4 !default !global;
+  $carbon--green-20: #9deeb2 !default !global;
+  $carbon--green-30: #56d679 !default !global;
+  $carbon--green-40: #3dbb61 !default !global;
+  $carbon--green-50: #24a148 !default !global;
+  $carbon--green-60: #198038 !default !global;
+  $carbon--green-70: #10642a !default !global;
+  $carbon--green-80: #054719 !default !global;
+  $carbon--green-90: #01330f !default !global;
+  $carbon--green-100: #081b09 !default !global;
+  $carbon--magenta-10: #fff0f6 !default !global;
+  $carbon--magenta-20: #ffcfe1 !default !global;
+  $carbon--magenta-30: #ffa0c2 !default !global;
+  $carbon--magenta-40: #fa75a6 !default !global;
+  $carbon--magenta-50: #ee538b !default !global;
+  $carbon--magenta-60: #d12765 !default !global;
+  $carbon--magenta-70: #a11950 !default !global;
+  $carbon--magenta-80: #760a3a !default !global;
+  $carbon--magenta-90: #57002b !default !global;
+  $carbon--magenta-100: #2a0a16 !default !global;
+  $carbon--orange-40: #fc7b1e !default !global;
+  $carbon--purple-10: #f7f1ff !default !global;
+  $carbon--purple-20: #e6d6ff !default !global;
+  $carbon--purple-30: #d0b0ff !default !global;
+  $carbon--purple-40: #bb8eff !default !global;
+  $carbon--purple-50: #a66efa !default !global;
+  $carbon--purple-60: #8a3ffc !default !global;
+  $carbon--purple-70: #6e32c9 !default !global;
+  $carbon--purple-80: #4f2196 !default !global;
+  $carbon--purple-90: #38146b !default !global;
+  $carbon--purple-100: #1e1033 !default !global;
+  $carbon--red-10: #fff0f1 !default !global;
+  $carbon--red-20: #fcd0d3 !default !global;
+  $carbon--red-30: #ffa4a9 !default !global;
+  $carbon--red-40: #ff767c !default !global;
+  $carbon--red-50: #fb4b53 !default !global;
+  $carbon--red-60: #da1e28 !default !global;
+  $carbon--red-70: #a51920 !default !global;
+  $carbon--red-80: #750e13 !default !global;
+  $carbon--red-90: #570408 !default !global;
+  $carbon--red-100: #2c080a !default !global;
+  $carbon--teal-10: #dbfbfb !default !global;
+  $carbon--teal-20: #92eeee !default !global;
+  $carbon--teal-30: #20d5d2 !default !global;
+  $carbon--teal-40: #00bab6 !default !global;
+  $carbon--teal-50: #009c98 !default !global;
+  $carbon--teal-60: #007d79 !default !global;
+  $carbon--teal-70: #006161 !default !global;
+  $carbon--teal-80: #004548 !default !global;
+  $carbon--teal-90: #003137 !default !global;
+  $carbon--teal-100: #081a1c !default !global;
+  $carbon--warm-gray-10: #f7f3f1 !default !global;
+  $carbon--warm-gray-20: #e0dbda !default !global;
+  $carbon--warm-gray-30: #c1bcbb !default !global;
+  $carbon--warm-gray-40: #a7a2a2 !default !global;
+  $carbon--warm-gray-50: #8f8b8b !default !global;
+  $carbon--warm-gray-60: #726e6e !default !global;
+  $carbon--warm-gray-70: #595555 !default !global;
+  $carbon--warm-gray-80: #403c3c !default !global;
+  $carbon--warm-gray-90: #2b2828 !default !global;
+  $carbon--warm-gray-100: #1a1717 !default !global;
+  $carbon--white-0: #ffffff !default !global;
+  $carbon--yellow-20: #fdd13a !default !global;
   $black-100: #000000 !default !global;
   $blue-10: #edf4ff !default !global;
   $blue-20: #c9deff !default !global;
@@ -385,10 +489,10 @@ Define color variables
   $white-0: #ffffff !default !global;
   $yellow-20: #fdd13a !default !global;
   $carbon--colors: (
-    black: (
+    'black': (
       100: #000000,
     ),
-    blue: (
+    'blue': (
       10: #edf4ff,
       20: #c9deff,
       30: #97c1ff,
@@ -400,7 +504,7 @@ Define color variables
       90: #061f80,
       100: #051243,
     ),
-    cool-gray: (
+    'cool-gray': (
       10: #f2f4f8,
       20: #d5d9e0,
       30: #b9bfc7,
@@ -412,7 +516,7 @@ Define color variables
       90: #242a2e,
       100: #13171a,
     ),
-    cyan: (
+    'cyan': (
       10: #e3f6ff,
       20: #b3e6ff,
       30: #6ccaff,
@@ -424,7 +528,7 @@ Define color variables
       90: #002b50,
       100: #07192b,
     ),
-    gray: (
+    'gray': (
       10: #f3f3f3,
       20: #dcdcdc,
       30: #bebebe,
@@ -436,7 +540,7 @@ Define color variables
       90: #282828,
       100: #171717,
     ),
-    green: (
+    'green': (
       10: #dafbe4,
       20: #9deeb2,
       30: #56d679,
@@ -448,7 +552,7 @@ Define color variables
       90: #01330f,
       100: #081b09,
     ),
-    magenta: (
+    'magenta': (
       10: #fff0f6,
       20: #ffcfe1,
       30: #ffa0c2,
@@ -460,10 +564,10 @@ Define color variables
       90: #57002b,
       100: #2a0a16,
     ),
-    orange: (
+    'orange': (
       40: #fc7b1e,
     ),
-    purple: (
+    'purple': (
       10: #f7f1ff,
       20: #e6d6ff,
       30: #d0b0ff,
@@ -475,7 +579,7 @@ Define color variables
       90: #38146b,
       100: #1e1033,
     ),
-    red: (
+    'red': (
       10: #fff0f1,
       20: #fcd0d3,
       30: #ffa4a9,
@@ -487,7 +591,7 @@ Define color variables
       90: #570408,
       100: #2c080a,
     ),
-    teal: (
+    'teal': (
       10: #dbfbfb,
       20: #92eeee,
       30: #20d5d2,
@@ -499,7 +603,7 @@ Define color variables
       90: #003137,
       100: #081a1c,
     ),
-    warm-gray: (
+    'warm-gray': (
       10: #f7f3f1,
       20: #e0dbda,
       30: #c1bcbb,
@@ -511,10 +615,10 @@ Define color variables
       90: #2b2828,
       100: #1a1717,
     ),
-    white: (
+    'white': (
       0: #ffffff,
     ),
-    yellow: (
+    'yellow': (
       20: #fdd13a,
     ),
   ) !default !global;
