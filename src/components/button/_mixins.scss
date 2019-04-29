@@ -24,7 +24,7 @@
   border-radius: $button-border-radius;
   text-align: left;
   text-decoration: none;
-  transition: $duration--fast-01 motion(entrance, productive);
+  transition: all $duration--fast-01 motion(entrance, productive);
   outline: $button-outline-width solid transparent;
   position: relative;
   max-width: rem(320px);
@@ -43,7 +43,7 @@
     flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    transition: $duration--fast-01 motion(entrance, productive);
+    transition: all $duration--fast-01 motion(entrance, productive);
   }
 }
 
@@ -66,7 +66,7 @@
     box-sizing: border-box;
     position: absolute;
     content: '';
-    transition: $duration--fast-01 motion(entrance, productive);
+    transition: all $duration--fast-02 motion(standard, productive);
   }
 
   &:not(.#{$prefix}--btn--disabled)::before {

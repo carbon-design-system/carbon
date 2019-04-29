@@ -43,11 +43,12 @@
   .#{$prefix}--structured-list-row {
     display: table-row;
     border-bottom: 1px solid $ui-03;
+    transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    background-color: $ui_01;
+    background-color: $ui-01;
     cursor: pointer;
     border-bottom: 1px solid $ui-01;
   }
@@ -108,6 +109,7 @@
     position: relative;
     display: table-cell;
     max-width: 36rem;
+    transition: color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-th {
@@ -125,7 +127,7 @@
     display: inline-block;
     fill: transparent;
     vertical-align: middle;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: all $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {

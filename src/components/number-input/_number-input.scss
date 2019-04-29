@@ -40,10 +40,15 @@
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: $hover-field;
     }
 
     &:disabled {

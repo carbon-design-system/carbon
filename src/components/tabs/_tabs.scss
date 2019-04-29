@@ -56,13 +56,13 @@
     width: rem(12px);
     height: rem(7px);
     fill: $ui-05;
-    transition: transform $duration--moderate-01 motion(standard, productive);
+    transition: transform $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--tabs-trigger--open:focus,
   .#{$prefix}--tabs-trigger--open:active {
     @include focus-outline('reset');
-    transition: outline $duration--moderate-01 motion(standard, productive);
+    transition: outline $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--tabs-trigger--open {
@@ -70,7 +70,7 @@
   }
 
   .#{$prefix}--tabs-trigger--open svg {
-    @include rotate(-180deg, $duration--moderate-01, 50% 45%);
+    @include rotate(-180deg, $duration--fast-01, 50% 45%);
   }
 
   // There is only a difference in tab color when in mobile/dropdown view
@@ -103,7 +103,7 @@
     flex-direction: column;
     z-index: z('dropdown');
     background: $ui-01;
-    transition: max-height $duration--moderate-01 motion(standard, productive);
+    transition: max-height $duration--fast-01 motion(standard, productive);
     max-height: 600px;
     width: 100%;
 
@@ -119,7 +119,7 @@
   }
 
   .#{$prefix}--tabs__nav--hidden {
-    transition: max-height $duration--moderate-01 motion(standard, productive);
+    transition: max-height $duration--fast-01 motion(standard, productive);
     overflow: hidden;
     max-height: 0;
 
@@ -141,6 +141,8 @@
     cursor: pointer;
     width: 100%;
     height: rem(40px);
+    transition: background-color $duration--fast-01 motion(standard, productive);
+
     @include carbon--breakpoint(md) {
       background: transparent;
       height: auto;
@@ -148,6 +150,11 @@
         margin-left: rem(2px);
       }
     }
+  }
+
+  .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
+    transition: color $duration--fast-01 motion(standard, productive),
+      border-bottom-color $duration--fast-01 motion(standard, productive), outline $duration--fast-01 motion(standard, productive);
   }
 
   //-----------------------------
@@ -183,6 +190,8 @@
   .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
     border: none;
     display: none;
+    transition: color $duration--fast-01 motion(standard, productive);
+
     @include carbon--breakpoint(md) {
       display: flex;
       .#{$prefix}--tabs__nav-link {
@@ -194,7 +203,7 @@
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
         color: $text-01;
-        border-bottom: 2px;
+        border-bottom: 2px solid $interactive-01;
       }
     }
   }
@@ -203,6 +212,7 @@
   // Link
   //-----------------------------
   a.#{$prefix}--tabs__nav-link {
+    @include focus-outline('reset');
     display: inline-block;
     color: $text-02;
     text-decoration: none;
@@ -216,6 +226,7 @@
     line-height: rem(16px);
     border-bottom: 1px solid $ui-03;
     overflow: hidden;
+    transition: border $duration--fast-01 motion(standard, productive), outline $duration--fast-01 motion(standard, productive);
 
     &:focus,
     &:active {

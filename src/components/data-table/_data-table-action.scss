@@ -29,6 +29,10 @@
     height: $layout-04;
     width: 100%;
     justify-content: flex-end;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    transition: transform $duration--fast-02 motion(standard, productive),
+      visibility $duration--fast-02 motion(standard, productive);
   }
 
   //-------------------------------------------------
@@ -52,6 +56,9 @@
     width: $layout-04;
     padding: $spacing-md;
     left: 0;
+    cursor: pointer;
+    pointer-events: all;
+    transition: background $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
@@ -80,7 +87,7 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-active {
     flex: auto;
-    transition: flex $transition--expansion $carbon--standard-easing;
+    transition: flex $duration--moderate-01 motion(standard, productive);
   }
 
   .#{$prefix}--toolbar-search-container-active .#{$prefix}--search {
@@ -136,6 +143,7 @@
     height: $layout-04;
     width: $layout-04;
     padding: $spacing-md;
+    transition: background $duration--fast-02 motion(entrance, productive);
   }
 
   .#{$prefix}--toolbar-action:hover:not([disabled]) {
@@ -177,7 +185,6 @@
     width: auto;
     max-width: $layout-01;
     fill: $ui-05;
-    transition: $transition--base;
   }
 
   //-------------------------------------------------
@@ -188,7 +195,6 @@
     height: $layout-04;
     opacity: 1;
     position: relative;
-    transition: opacity $transition--base;
   }
 
   .#{$prefix}--toolbar-search-container-persistent + .#{$prefix}--toolbar-content {
@@ -230,7 +236,10 @@
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
-    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 48px, 0);
+    transition: transform $duration--fast-02 motion(standard, productive),
+      visibility $duration--fast-02 motion(standard, productive);
   }
 
   //-------------------------------------------------
@@ -242,14 +251,15 @@
     top: 0;
     left: 0;
     align-items: center;
-    opacity: 0;
     padding-left: $spacing-lg;
     padding-right: $spacing-lg;
     width: 100%;
     height: 100%;
-    z-index: z('header');
-    background-color: transparent;
-    transition: opacity $transition--base $carbon--standard-easing, background-color $transition--base $carbon--standard-easing;
+    will-change: transform;
+    background-color: $interactive-01;
+    transition: transform $duration--fast-02 motion(standard, productive),
+      visibility $duration--fast-02 motion(standard, productive), opacity $duration--fast-02 motion(standard, productive);
+    transform: translate3d(0, 48px, 0);
     pointer-events: none;
     visibility: hidden;
   }
@@ -260,10 +270,8 @@
 
   .#{$prefix}--batch-actions--active {
     visibility: visible;
-    background-color: $brand-01;
     pointer-events: all;
-    transition: opacity $transition--base $carbon--standard-easing, background-color $transition--base $carbon--standard-easing;
-    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 
   //btns container
@@ -332,11 +340,11 @@
     content: '';
     background-color: $ui-01;
     border: none;
+    transition: opacity $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
     opacity: 0;
-    transition: opacity $transition--base $carbon--standard-easing;
   }
 
   // cancel btn

@@ -28,7 +28,6 @@
     flex: 1;
     min-width: 7rem;
     width: rem(128px);
-    transition: $duration--fast-02 all motion(standard, productive);
     overflow: visible;
 
     .#{$prefix}--tooltip__label {
@@ -55,14 +54,14 @@
   }
 
   .#{$prefix}--progress-label {
+    @include type-style('body-short-01');
     line-height: 1.45;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    @include type-style('body-short-01');
-    transition: box-shadow $transition--base $carbon--standard-easing;
+    transition: box-shadow $duration--fast-02 motion(standard, productive), color $duration--fast-02 motion(standard, productive);
 
     &::before {
       content: '';
@@ -80,7 +79,6 @@
     outline: none;
     color: $link-01;
     box-shadow: 0 rem(3px) 0 0 $link-01;
-    transition: box-shadow 0.05s $carbon--standard-easing;
   }
 
   .#{$prefix}--progress-label:active {
@@ -106,6 +104,7 @@
 
   //single line tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip {
+    @include type-style('body-long-01');
     min-width: rem(115px);
     width: rem(125px);
     min-height: $carbon--spacing-06;
@@ -114,25 +113,24 @@
     padding: $carbon--spacing-03 $carbon--spacing-05;
     display: block;
     visibility: hidden;
-    @include type-style('body-long-01');
     color: $inverse-01;
   }
 
   //multiline tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
+    @include type-style('body-long-01');
     width: rem(150px);
     height: auto;
-    @include type-style('body-long-01');
     color: $inverse-01;
   }
 
   //OPTIONAL HELPER TEXT STYLING
   .#{$prefix}--progress-optional {
+    @include type-style('label-01');
     position: absolute;
     left: 0;
     margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
-    @include type-style('label-01');
     color: $text-01;
   }
 

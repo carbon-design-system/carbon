@@ -30,7 +30,12 @@
     color: $text-01;
     border: none;
     border-bottom: 1px solid $ui-04;
-    transition: $duration--fast-02 all;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-field;
+    }
 
     &:focus,
     &:active {
