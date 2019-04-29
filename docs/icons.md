@@ -8,6 +8,7 @@
 - [Introduction](#introduction)
   - [Prefixes](#prefixes)
 - [Understanding `meta.json`](#understanding-metajson)
+- [Updating icon metadata](#updating-icon-metadata)
 - [FAQ](#faq)
     - [Will there be an `iconfont` package for IBM Design Language icons?](#will-there-be-an-iconfont-package-for-ibm-design-language-icons)
 
@@ -131,6 +132,44 @@ that you can use:
     file: 'es/add--outline/16.js',
   },
 }
+```
+
+## Updating icon metadata
+
+The icons have metadata that are stored in `metadata.yml`. The metadata are used to surface information such as usage, available sizes, categories amd variants. Metadata of an icon is also used to track its `aliases`, which are used to enable search. You can help us make our icon search more robust by refining and expanding this list of aliases. Follow these steps to create an icon metadata update PR:
+
+1. open `metadata.yml` in your text editor, or go to ![metadata.yml](https://github.com/IBM/carbon-elements/blob/master/packages/icons/metadata.yml) in browser.
+2. find the icon you'd like to edit. Please note that icon names are without `--modifiers`. All icons with `--modifiers` are listed as vairants of the same icon.
+3. make desired edits on the icon's `aliases` list.
+4. commit changes, preferably with a commit message "[icon name] metadata update".
+5. create a new branch, suggested branch name is `yourname-metadata-iconName`
+6. create the PR from your branch, or click on `Propose file change` if you are in browser.
+
+```yml
+icons:
+  - name: add
+    friendly_name: Add
+    usage: This is a description for usage
+    categories:
+      - Navigation
+    aliases:
+      - add
+      - plus
+      - cross
+      - create
+    sizes:
+      - 16
+      - 32
+    variants:
+      - name: add--alt
+        usage: This is a description for usage
+        sizes:
+          - 16
+          - 32
+      - name: add--filled
+        usage: This is a description for usage
+        sizes:
+          - 16
 ```
 
 ## FAQ
