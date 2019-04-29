@@ -255,72 +255,79 @@
   }
 
   //----------------------------------------------------------------------------
-  //SIZE VARIATIONS
+  // Compact
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--compact {
-    thead tr,
-    tbody tr {
-      height: rem(24px);
-    }
-
-    .#{$prefix}--table-header-label {
-      padding: rem(2px) 0;
-    }
-
-    .#{$prefix}--overflow-menu {
-      width: rem(24px);
-      height: rem(24px);
-    }
-
-    .#{$prefix}--table-column-checkbox {
-      padding-top: rem(1px);
-    }
-
-    .#{$prefix}--table-column-menu {
-      width: rem(28px);
-      min-width: rem(28px);
-      padding-top: rem(1px);
-    }
-
-    .#{$prefix}--table-column-icon {
-      padding-top: rem(1px);
-    }
-
-    .#{$prefix}--table-column-icon button {
-      width: rem(28px);
-      height: rem(24px);
-      justify-content: center;
-    }
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact thead tr,
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact tbody tr {
+    height: rem(24px);
   }
 
-  .#{$prefix}--data-table--short {
-    thead tr,
-    tbody tr {
-      height: rem(32px);
-    }
-
-    .#{$prefix}--table-header-label {
-      padding: rem(7px) 0;
-    }
-
-    .#{$prefix}--table-cell-content {
-      padding: rem(7px) 0;
-    }
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
+    padding: rem(2px) 0;
   }
 
-  .#{$prefix}--data-table--tall {
-    thead tr,
-    tbody tr {
-      height: rem(64px);
-    }
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact td {
+    padding-top: rem(2px);
+    padding-bottom: rem(2px);
+  }
 
-    .#{$prefix}--table-header-label {
-      padding: rem(16px) 0;
-    }
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
+    width: rem(24px);
+    height: rem(24px);
+  }
 
-    .#{$prefix}--table-cell-content {
-      padding: rem(16px) 0;
-    }
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-checkbox {
+    padding-top: rem(1px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-menu {
+    width: rem(28px);
+    min-width: rem(28px);
+    padding-top: rem(1px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-icon {
+    padding-top: rem(1px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-icon button {
+    width: rem(28px);
+    height: rem(24px);
+    justify-content: center;
+  }
+
+  //----------------------------------------------------------------------------
+  // Short
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--short thead tr,
+  .#{$prefix}--data-table--short tbody tr {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--table-header-label {
+    padding: rem(7px) 0;
+  }
+
+  .#{$prefix}--data-table--short td {
+    padding-top: rem(7px);
+    padding-bottom: rem(6px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Tall
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--tall thead tr,
+  .#{$prefix}--data-table--tall tbody tr {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-header-label {
+    padding: rem(16px) 0;
+  }
+
+  .#{$prefix}--data-table--tall td {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .#{$prefix}--data-table--cell-secondary-text {
