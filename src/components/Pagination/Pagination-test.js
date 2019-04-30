@@ -353,6 +353,29 @@ describe('Pagination', () => {
           );
           expect(right.length).toEqual(0);
         });
+
+        it('should not append `pagination__button--no-index` class if input is disabled', () => {
+          const pagination = shallow(
+            <Pagination
+              page={2}
+              pageSizes={[100]}
+              pagesUnknown={true}
+              pageInputDisabled={true}
+            />
+          );
+          const forwardButton = pagination.find(
+            '.bx--pagination__button--forward'
+          );
+          const backwardButton = pagination.find(
+            '.bx--pagination__button--backward'
+          );
+          expect(
+            backwardButton.hasClass('bx--pagination__button--no-index')
+          ).toEqual(false);
+          expect(
+            forwardButton.hasClass('bx--pagination__button--no-index')
+          ).toEqual(false);
+        });
       });
 
       describe('pagination navigation', () => {

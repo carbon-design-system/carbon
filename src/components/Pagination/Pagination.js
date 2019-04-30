@@ -260,8 +260,7 @@ export default class Pagination extends Component {
       `${prefix}--pagination__button`,
       `${prefix}--pagination__button--backward`,
       {
-        [`${prefix}--pagination__button--no-index`]:
-          pageInputDisabled || backButtonDisabled,
+        [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
       }
     );
     const forwardButtonDisabled =
@@ -270,8 +269,7 @@ export default class Pagination extends Component {
       `${prefix}--pagination__button`,
       `${prefix}--pagination__button--forward`,
       {
-        [`${prefix}--pagination__button--no-index`]:
-          pageInputDisabled || forwardButtonDisabled,
+        [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
       }
     );
     const selectItems = this.renderSelectItems(totalPages);
