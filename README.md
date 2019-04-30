@@ -1,7 +1,7 @@
 # carbon-elements
 
 [![Carbon Elements is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![CircleCI](https://circleci.com/gh/carbon-design-system/carbon-elements.svg?style=shield)](https://circleci.com/gh/IBM/carbon-elements)
+[![CircleCI](https://circleci.com/gh/carbon-design-system/carbon-elements.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-elements)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
