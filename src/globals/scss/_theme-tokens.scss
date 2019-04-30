@@ -226,28 +226,6 @@
   /// @group modal
   $modal-footer-background-color: $ui-03 !default !global;
 
-  // Notification
-
-  /// @type Color
-  /// @access public
-  /// @group notification
-  $notification-info-background-color: $ibm-color__blue-10 !default !global;
-
-  /// @type Color
-  /// @access public
-  /// @group notification
-  $notification-error-background-color: $ibm-color__red-10 !default !global;
-
-  /// @type Color
-  /// @access public
-  /// @group notification
-  $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
-
-  /// @type Color
-  /// @access public
-  /// @group notification
-  $notification-success-background-color: $ibm-color__green-10 !default !global;
-
   // Progress Indicator
 
   /// @type Value
