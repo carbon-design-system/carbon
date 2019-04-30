@@ -89,7 +89,8 @@
     background-color: $active-color;
   }
 
-  .#{$prefix}--btn__icon {
+  .#{$prefix}--btn__icon,
+  .#{$prefix}--btn__icon path {
     fill: $icon-color;
   }
 }

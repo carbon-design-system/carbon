@@ -35,7 +35,7 @@
     @include focus-outline('border');
   }
 
-  .#{$prefix}--tooltip__trigger {
+  .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
     @include button-reset($width: false);
     display: inline-flex;
     align-items: center;
@@ -237,7 +237,7 @@
     cursor: pointer;
     overflow: visible;
 
-    path {
+    &:not(.#{$prefix}--btn--icon-only) path {
       fill: $icon-02;
     }
 
@@ -280,7 +280,7 @@
 
     &:hover,
     &:focus {
-      path {
+      &:not(.#{$prefix}--btn--icon-only) path {
         fill: $icon-02;
       }
 
@@ -292,7 +292,7 @@
       }
     }
 
-    &:focus {
+    &:focus:not(.#{$prefix}--btn--icon-only) {
       outline: 1px solid transparent;
 
       svg {
