@@ -2,7 +2,7 @@
   "name": "carbon-components",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
   "homepage": "https://www.carbondesignsystem.com/",
-  "version": "10.1.0",
+  "version": "10.2.0",
   "module": "es/index.js",
   "main": "umd/index.js",
   "repository": {
@@ -199,8 +199,16 @@
       "@commitlint/config-conventional"
     ],
     "rules": {
-      "header-max-length": [2, "always", 50],
-      "body-max-line-length": [2, "always", 72]
+      "header-max-length": [
+        2,
+        "always",
+        50
+      ],
+      "body-max-line-length": [
+        2,
+        "always",
+        72
+      ]
     }
   },
   "husky": {
