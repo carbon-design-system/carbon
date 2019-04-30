@@ -174,7 +174,7 @@
     "build": "gulp build",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup",
-    "clean": "rimraf ",
+    "clean": "rimraf css es html scripts scss umd",
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
     "lint": "eslint .",
