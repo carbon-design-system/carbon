@@ -1,0 +1,113 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/typography';
+
+/// Button base styles
+/// @access private
+/// @group button
+@mixin button-base {
+  @include reset;
+  @include type-style('body-short-01');
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  min-height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  text-align: left;
+  text-decoration: none;
+  transition: all $duration--fast-01 motion(entrance, productive);
+  outline: $button-outline-width solid transparent;
+  position: relative;
+  max-width: rem(320px);
+
+  &:disabled,
+  &.#{$prefix}--btn--disabled {
+    cursor: not-allowed;
+    color: $ui-04;
+    background: $ibm-color__gray-30;
+    border-color: $ibm-color__gray-30;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: absolute;
+    right: rem(16px);
+    flex-shrink: 0;
+    width: rem(16px);
+    height: rem(16px);
+    transition: all $duration--fast-01 motion(entrance, productive);
+  }
+}
+
+/// Button variant styles
+/// @access private
+/// @group button
+@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+  background-color: $bg-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    position: absolute;
+    content: '';
+    transition: all $duration--fast-02 motion(standard, productive);
+  }
+
+  &:not(.#{$prefix}--btn--disabled)::before {
+    top: calc(-#{$button-border-width} + #{$button-outline-width});
+    left: -$button-border-width + $button-outline-width;
+    width: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
+    height: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
+    border: 1px solid transparent;
+  }
+
+  &:focus::before {
+    border-color: $ui-02;
+  }
+
+  &:not(.#{$prefix}--btn--disabled)::after {
+    top: -#{$button-border-width};
+    left: -#{$button-border-width};
+    height: calc(100% + 2 * #{$button-border-width});
+    width: calc(100% + 2 * #{$button-border-width});
+    border: $button-outline-width solid transparent;
+  }
+
+  &:focus::after {
+    border-color: $focus;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus,
+  &:hover.#{$prefix}--btn--disabled,
+  &:focus.#{$prefix}--btn--disabled {
+    color: $ui-04;
+    background: $ibm-color__gray-30;
+    border-color: $ibm-color__gray-30;
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: $active-color;
+  }
+
+  .#{$prefix}--btn__icon {
+    fill: $icon-color;
+  }
+}

@@ -1,0 +1,125 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Notifications
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import 'mixins';
+
+/// Toast notification styles
+/// @access private
+/// @group notification
+@mixin toast-notifications {
+  .#{$prefix}--toast-notification {
+    @include reset;
+
+    display: flex;
+    width: rem(288px);
+    height: auto;
+    padding-left: $carbon--spacing-05;
+    color: $text-01;
+    margin-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-03;
+    margin-right: $carbon--spacing-05;
+
+    &:first-child {
+      margin-top: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(max) {
+      width: rem(352px);
+    }
+  }
+
+  .#{$prefix}--toast-notification--error {
+    @include notification--experimental($support-01, $notification-error-background-color);
+  }
+
+  .#{$prefix}--toast-notification--success {
+    @include notification--experimental($support-02, $notification-success-background-color);
+  }
+
+  .#{$prefix}--toast-notification--info {
+    @include notification--experimental($support-04, $notification-info-background-color);
+  }
+
+  .#{$prefix}--toast-notification--warning {
+    @include notification--experimental($support-03, $notification-warning-background-color);
+  }
+
+  .#{$prefix}--toast-notification--warning .#{$prefix}--toast-notification__icon path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
+  .#{$prefix}--toast-notification__icon {
+    flex-shrink: 0;
+    margin-right: $carbon--spacing-05;
+    margin-top: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--toast-notification__details {
+    margin-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('reset');
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-height: rem(48px);
+    min-width: rem(48px);
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--toast-notification__close-icon {
+      height: 1rem;
+      width: 1rem;
+      fill: $ui-05;
+    }
+  }
+
+  .#{$prefix}--toast-notification__title {
+    @include type-style('heading-01');
+
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .#{$prefix}--toast-notification__subtitle {
+    @include type-style('body-short-01');
+
+    color: $text-01;
+    margin-top: 0;
+    margin-bottom: $carbon--spacing-06;
+  }
+
+  .#{$prefix}--toast-notification__caption {
+    @include type-style('body-short-01');
+
+    color: $text-01;
+    margin-bottom: $carbon--spacing-05;
+  }
+}
+
+@include exports('toast-notifications') {
+  @include toast-notifications;
+}

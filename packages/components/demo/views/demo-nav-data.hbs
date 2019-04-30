@@ -1,0 +1,13 @@
+<script>
+  var componentItems = {{{JSONstringify componentSource}}}.items;
+  var docItems = {{{JSONstringify docSource}}}.items;
+  {{#if portSassBuild}}
+    var portSassBuild = {{portSassBuild}}
+  {{/if}}
+  {{#if routeWithQueryArgs}}
+    var routeWithQueryArgs = {{routeWithQueryArgs}}
+  {{/if}}
+  {{#if useStaticFullRenderPage}}
+    var useStaticFullRenderPage = {{useStaticFullRenderPage}}
+  {{/if}}
+</script>

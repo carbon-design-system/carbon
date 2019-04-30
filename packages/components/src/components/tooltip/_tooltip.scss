@@ -1,0 +1,338 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+
+/// Tooltip styles
+/// @access private
+/// @group tooltip
+@mixin tooltip {
+  .#{$prefix}--tooltip--icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--tooltip__label {
+    @include type-style('label-01');
+    display: inline-flex;
+    align-items: center;
+    color: $text-02;
+
+    .#{$prefix}--tooltip__trigger {
+      margin-left: $carbon--spacing-03;
+    }
+  }
+
+  .#{$prefix}--tooltip__label:focus {
+    @include focus-outline('border');
+  }
+
+  .#{$prefix}--tooltip__trigger {
+    @include button-reset($width: false);
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:focus {
+      @include focus-outline('border');
+      fill: $hover-primary;
+    }
+
+    path,
+    polygon,
+    circle {
+      fill: $icon-02;
+    }
+  }
+
+  .#{$prefix}--tooltip__label--bold {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--tooltip {
+    @include layer('overlay');
+    @include reset;
+    position: absolute;
+    display: none;
+    min-width: rem(208px);
+    max-width: rem(288px);
+    background: $inverse-02;
+    margin-top: $carbon--spacing-02;
+    padding: 1rem;
+    border-radius: rem(2px);
+    z-index: z('floating');
+    word-wrap: break-word;
+    color: $inverse-01;
+
+    p {
+      @include type-style('body-short-01');
+    }
+
+    button {
+      padding-right: $carbon--spacing-07;
+    }
+
+    .#{$prefix}--link {
+      // Need to add new link / UI color -- IBM Color Blue 40
+      color: $link-inverse-color;
+      font-size: rem(14px);
+
+      &:active {
+        color: $inverse-01;
+      }
+
+      &:visited {
+        color: $link-inverse-color;
+      }
+    }
+
+    .#{$prefix}--tooltip__caret {
+      position: absolute;
+      background: $inverse-02;
+      left: 0;
+      top: rem(-4px);
+      right: 0;
+      transform: rotate(-135deg);
+      width: 0.6rem;
+      height: 0.6rem;
+      margin: 0 auto;
+      content: '';
+    }
+
+    .#{$prefix}--tooltip__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    &[data-floating-menu-direction='left'] {
+      .#{$prefix}--tooltip__caret {
+        left: auto;
+        top: 50%;
+        right: rem(-4px);
+        transform: rotate(-45deg) translate(50%, -50%);
+      }
+    }
+
+    &[data-floating-menu-direction='top'] {
+      .#{$prefix}--tooltip__caret {
+        top: auto;
+        bottom: rem(-4px);
+        transform: rotate(45deg);
+      }
+    }
+
+    &[data-floating-menu-direction='right'] {
+      .#{$prefix}--tooltip__caret {
+        left: rem(-4px);
+        top: 50%;
+        right: auto;
+        transform: rotate(135deg) translate(-50%, 50%);
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip--shown {
+    display: block;
+  }
+
+  // Tooltip Definition
+  // Definition CSS only tooltip
+  .#{$prefix}--tooltip--definition {
+    @include reset;
+    position: relative;
+
+    .#{$prefix}--tooltip__trigger {
+      @include type-style('label-01');
+      display: inline-flex;
+      position: relative;
+      border-bottom: 1px dotted $interactive-01;
+      color: $text-01;
+
+      &:hover {
+        cursor: pointer;
+
+        + .#{$prefix}--tooltip--definition__top,
+        + .#{$prefix}--tooltip--definition__bottom {
+          display: block;
+        }
+      }
+
+      &:focus {
+        @include focus-outline('border');
+
+        + .#{$prefix}--tooltip--definition__top,
+        + .#{$prefix}--tooltip--definition__bottom {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip--definition__bottom,
+  .#{$prefix}--tooltip--definition__top {
+    @include layer('overlay');
+    position: absolute;
+    z-index: 1;
+    display: none;
+    background: $inverse-02;
+    width: rem(208px);
+    margin-top: $carbon--spacing-04;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    border-radius: rem(2px);
+    pointer-events: none;
+    cursor: pointer;
+
+    p {
+      @include type-style('body-short-01');
+      color: $inverse-01;
+    }
+
+    .#{$prefix}--tooltip__caret {
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      background: $inverse-02;
+      margin-left: $carbon--spacing-05;
+    }
+  }
+
+  // Tooltip Definition caret - bottom position
+  .#{$prefix}--tooltip--definition__bottom .#{$prefix}--tooltip__caret {
+    top: -0.2rem;
+    transform: rotate(-135deg);
+  }
+
+  // Tooltip Definition caret - top position
+  .#{$prefix}--tooltip--definition__top {
+    transform: translateY(-100%);
+    margin-top: rem(-32px);
+
+    .#{$prefix}--tooltip__caret {
+      bottom: -0.2rem;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Tooltip Icon
+  // Icon CSS only tooltip
+  .#{$prefix}--tooltip--icon__top,
+  .#{$prefix}--tooltip--icon__bottom {
+    @include reset;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: visible;
+
+    path {
+      fill: $icon-02;
+    }
+
+    // Tooltip - renders as a combo of ::before and ::after elements
+    &::before,
+    &::after {
+      @include type-style('body-short-01');
+      position: absolute;
+      display: none;
+      background-color: $inverse-02;
+    }
+
+    &::before {
+      right: 0;
+      left: 0;
+      width: rem(18px);
+      height: rem(18px);
+      margin: 0 auto;
+      content: '';
+      margin-top: 1px;
+      margin-left: 50%;
+    }
+
+    &::after {
+      @include layer('overlay');
+      min-width: rem(24px);
+      max-width: rem(208px);
+      height: rem(24px);
+      margin-left: 50%;
+      padding: 0 1rem;
+      border-radius: rem(2px);
+      color: $inverse-01;
+      font-weight: 400;
+      content: attr(aria-label);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      margin-left: 50%;
+    }
+
+    &:hover,
+    &:focus {
+      path {
+        fill: $icon-02;
+      }
+
+      &::before,
+      &::after {
+        position: absolute;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
+      }
+    }
+  }
+
+  // Tooltip Icon caret - top position
+  .#{$prefix}--tooltip--icon__top {
+    &::before {
+      top: 1px;
+      transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
+    }
+
+    &::after {
+      top: 0;
+      transform: translate(-50%, calc(-100% - 12px));
+    }
+  }
+
+  // Tooltip Icon caret - bottom position
+  .#{$prefix}--tooltip--icon__bottom {
+    &::before {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 9px)) rotate(135deg);
+    }
+
+    &::after {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px));
+    }
+  }
+
+  // Tooltip position - icon only
+  .#{$prefix}--tooltip--icon .#{$prefix}--tooltip__trigger svg {
+    margin-left: 0;
+  }
+}
+
+@include exports('tooltip') {
+  @include tooltip;
+}

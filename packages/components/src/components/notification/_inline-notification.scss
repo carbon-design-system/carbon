@@ -1,0 +1,131 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Notifications
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import 'mixins';
+
+/// Inline notification styles
+/// @access private
+/// @group notification
+@mixin inline-notifications {
+  .#{$prefix}--inline-notification {
+    @include reset;
+
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    min-height: rem(48px);
+    min-width: rem(288px);
+    max-width: rem(288px);
+    color: $text-01;
+    margin-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      max-width: rem(608px);
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-width: rem(736px);
+    }
+
+    @include carbon--breakpoint(max) {
+      max-width: rem(832px);
+    }
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include notification--experimental($support-01, $notification-error-background-color);
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include notification--experimental($support-02, $notification-success-background-color);
+  }
+
+  .#{$prefix}--inline-notification--info {
+    @include notification--experimental($support-04, $notification-info-background-color);
+  }
+
+  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
+    display: none;
+  }
+
+  .#{$prefix}--inline-notification--warning {
+    @include notification--experimental($support-03, $notification-warning-background-color);
+  }
+
+  .#{$prefix}--inline-notification--warning .#{$prefix}--inline-notification__icon path[opacity='0'] {
+    fill: $text-01;
+    opacity: 1;
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    margin: 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    flex-shrink: 0;
+    margin-right: $carbon--spacing-05;
+    margin-top: rem(14px);
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $carbon--spacing-04 0;
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include type-style('heading-01');
+    margin: 0 $carbon--spacing-02 0 0;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include type-style('body-short-01');
+    word-break: break-word;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('reset');
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
+    transition: outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--inline-notification__close-icon {
+      height: 1rem;
+      width: 1rem;
+      fill: $ui-05;
+    }
+  }
+}
+
+@include exports('inline-notifications') {
+  @include inline-notifications;
+}

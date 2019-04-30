@@ -1,0 +1,18 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div data-content-switcher class="{{@root.prefix}}--content-switcher" role="tablist" aria-label="Demo switch content">
+  {{#each items}}
+  <button class="{{@root.prefix}}--content-switcher-btn{{#if selected}} {{@root.prefix}}--content-switcher--selected{{/if}}"
+    data-target="{{target}}" role="tab" {{#if selected}} aria-selected="true" {{/if}} {{#if disabled}} disabled {{/if}}>
+    {{#if ../hasIcon}}
+      {{ carbon-icon 'AddFilled16' class=(add @root.prefix '--content-switcher__icon') }}
+    {{/if}}
+    {{#if label}}<span class={{@root.prefix}}--content-switcher__label>{{label}}</span>{{/if}}
+  </button>
+  {{/each}}
+</div>

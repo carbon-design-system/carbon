@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'vars';
+
+/// Base font size in px
+/// @access public
+/// @group global-typography
+/// @type Number
+/// @deprecated (For v10) Superseded by `$carbon--base-font-size`
+$base-font-size: 16px !default;
+
+/// Convert px to rem
+/// @access public
+/// @param {Number} $px - Value of type in pixels
+/// @returns {Number} In rem
+/// @example rem(48px);
+/// @group global-typography
+/// @deprecated (For v10) Use `carbon--rem()`
+@function rem($px) {
+  @return ($px / $base-font-size) * 1rem;
+}
+
+/// Convert px to em
+/// @access public
+/// @param {Number} $px - Value of type in pixels
+/// @returns {Number} In em
+/// @example em(48px);
+/// @group global-typography
+/// @deprecated (For v10) Use `carbon--em()`
+@function em($px) {
+  @return ($px / $base-font-size) * 1em;
+}
+
+// 🔬 Experimental
+@import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
+
+/// Different type styles per token
+/// @access public
+/// @param {String} $name - The name of the token to get the styles for
+/// @param {Bool} $fluid [false] - Specify whether to include fluid styles
+/// @example @include type-style('body-short-01');
+/// @group global-typography
+@mixin type-style($name, $fluid: false) {
+  @include carbon--type-style($name, $fluid);
+}

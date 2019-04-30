@@ -1,0 +1,170 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import 'mixins';
+@import '../../globals/scss/css--reset';
+
+/// Button styles
+/// @access private
+/// @group button
+@mixin button {
+  // button set styles
+  .#{$prefix}--btn-set {
+    display: flex;
+  }
+
+  .#{$prefix}--btn-set > .#{$prefix}--btn {
+    max-width: rem(196px); // taken from design kit
+    width: 100%;
+  }
+
+  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+    border-left: rem(1px) solid $disabled-03;
+  }
+
+  .#{$prefix}--btn {
+    @include button-base;
+
+    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
+    &:disabled > .#{$prefix}--btn__icon {
+      fill: $ui-04;
+    }
+  }
+
+  // Reset intrisic padding in Firefox (see #731)
+  .#{$prefix}--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  .#{$prefix}--btn--primary {
+    @include button-theme($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
+
+    &:hover {
+      color: $text-04;
+    }
+  }
+
+  .#{$prefix}--btn--secondary {
+    @include button-theme($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--tertiary {
+    @include button-theme(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
+
+    &:hover {
+      color: $inverse-01;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      background: transparent;
+      color: $disabled;
+
+      & > .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &:hover > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
+    padding: rem(14px) rem(16px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
+      margin-left: $carbon--spacing-03;
+    }
+
+    &:hover,
+    &:active {
+      color: $ibm-color__blue-70;
+
+      .#{$prefix}--btn__icon {
+        fill: $ibm-color__blue-70;
+      }
+    }
+
+    &:active {
+      background-color: $active-ui;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      color: $disabled;
+      background: transparent;
+      border-color: transparent;
+
+      .#{$prefix}--btn__icon {
+        fill: $disabled;
+      }
+    }
+
+    &.#{$prefix}--btn--sm {
+      padding: 0.375rem 1rem;
+    }
+  }
+
+  .#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-right: rem(15px);
+
+    .#{$prefix}--btn__icon {
+      position: static;
+    }
+
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+      margin: 0;
+    }
+  }
+
+  .#{$prefix}--btn--danger {
+    @include button-theme($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
+
+    &:hover {
+      color: $text-04;
+      border: $button-border-width solid transparent;
+    }
+  }
+
+  .#{$prefix}--btn--sm {
+    min-height: rem(32px);
+    padding: $button-padding-sm;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
+  }
+}
+
+@include exports('button') {
+  @include button;
+}

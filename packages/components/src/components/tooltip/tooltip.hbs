@@ -1,0 +1,26 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div id="tooltip-label" class="{{@root.prefix}}--tooltip__label" aria-describedby="unique-tooltip">
+  Tooltip label
+  <div tabindex="0" aria-labelledby="tooltip-label" data-tooltip-trigger data-tooltip-target="#unique-tooltip"
+    role="tooltip" class="{{@root.prefix}}--tooltip__trigger">
+    {{ carbon-icon 'Information16' }}
+  </div>
+</div>
+<div id="unique-tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open>
+  <span class="{{@root.prefix}}--tooltip__caret"></span>
+  <p>This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
+    needed
+    please use a modal instead.</p>
+  <div class="{{@root.prefix}}--tooltip__footer">
+    <a href="#" class="{{@root.prefix}}--link">Learn More</a>
+    <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--sm"
+      type="button">Create</button>
+  </div>
+</div>

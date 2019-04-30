@@ -1,0 +1,29 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<!-- Loading Success State -->
+<div data-inline-loading class="{{@root.prefix}}--inline-loading" role="alert" aria-live="assertive">
+  <div class="{{@root.prefix}}--inline-loading__animation">
+    <div data-inline-loading-spinner class="{{@root.prefix}}--loading {{@root.prefix}}--loading--small">
+      <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
+        <circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="30" />
+        <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="30"/>
+      </svg>
+    </div>
+    <svg data-inline-loading-finished hidden
+      class="{{@root.prefix}}--inline-loading__checkmark-container {{@root.prefix}}--inline-loading__svg"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+      <polyline class="{{@root.prefix}}--inline-loading__checkmark" points="0.74 3.4 3.67 6.34 9.24 0.74"></polyline>
+    </svg>
+  </div>
+  <p data-inline-loading-text-active class="{{@root.prefix}}--inline-loading__text">Loading data...</p>
+  <p data-inline-loading-text-finished hidden class="{{@root.prefix}}--inline-loading__text">Data loaded.</p>
+</div>
+{{#if showToggleButton}}
+<button data-inline-loading-demo-button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary">Toggle
+  state</button>
+{{/if}}

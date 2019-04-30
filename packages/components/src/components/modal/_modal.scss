@@ -1,0 +1,184 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Modals
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import 'mixins';
+
+@import '../button/button';
+
+/// Modal styles
+/// @access private
+/// @group modal
+@mixin modal {
+  .#{$prefix}--modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: z('hidden');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    background-color: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: background-color $duration--slow-02 motion(exit, expressive),
+      opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-02 motion(exit, expressive),
+      visibility $duration--moderate-02 motion(exit, expressive);
+
+    &.is-visible {
+      z-index: z('modal');
+      visibility: visible;
+      opacity: 1;
+      background-color: $overlay-01;
+      transition: background-color $duration--slow-02 motion(entrance, expressive),
+        opacity $duration--moderate-02 motion(entrance, expressive), z-index $duration--slow-02 motion(entrance, expressive),
+        visibility $duration--moderate-02 motion(entrance, expressive);
+    }
+
+    .#{$prefix}--text-input,
+    .#{$prefix}--select-input {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$prefix}--modal--danger {
+    @include modal--color($support-01);
+  }
+
+  .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .#{$prefix}--modal-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $ui-01;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    transform-origin: top center;
+    transform: translate3d(0, -24px, 0);
+    transition: transform $duration--moderate-02 motion(exit, expressive);
+
+    @include carbon--breakpoint(md) {
+      width: 50%;
+      max-width: 768px;
+      max-height: 90%;
+      height: auto;
+    }
+
+    @include carbon--breakpoint(lg) {
+      max-height: 80%;
+    }
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-content {
+    width: 75%;
+    padding-left: 1rem;
+  }
+
+  .#{$prefix}--modal-header,
+  .#{$prefix}--modal-footer {
+    flex-shrink: 0;
+  }
+
+  .#{$prefix}--modal-header {
+    padding-top: 1rem;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include type-style('label-01');
+
+    color: $text-02;
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include type-style('productive-heading-03');
+
+    color: $text-01;
+  }
+
+  .#{$prefix}--modal-content {
+    @include type-style('body-long-01');
+
+    overflow-y: auto;
+    margin-bottom: $carbon--spacing-09;
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--modal-content > * {
+    @include type-style('body-long-01');
+  }
+
+  .#{$prefix}--modal-footer {
+    display: flex;
+    margin-top: auto;
+    height: 4rem;
+    background-color: $modal-footer-background-color;
+
+    button.#{$prefix}--btn {
+      max-width: none;
+      width: 50%;
+      height: 4rem;
+      margin: 0;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  .#{$prefix}--modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    padding: rem(12px);
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color $duration--fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $interactive-01;
+    }
+  }
+
+  .#{$prefix}--modal-close__icon {
+    fill: $icon-01;
+    height: rem(20px);
+    width: rem(20px);
+  }
+}
+
+@include exports('modal') {
+  @include modal;
+}

@@ -1,0 +1,54 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#if @root.featureFlags.grid}}
+<div class="{{@root.prefix}}--grid">
+  {{#each @root.rows as |row|}}
+    <div class="{{@root.prefix}}--row">
+      <div class="bx--col bx--col--auto">
+        <p>{{row.title}}</p>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      {{#each row.columns}}
+        <div class="{{@root.prefix}}--col-{{row.breakpoint}}-1">
+          <div class="outside">
+            <div class="inside">1</div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>
+{{else}}
+<div class="{{@root.prefix}}--grid">
+  <div class="{{@root.prefix}}--row">
+    <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 indigo">
+      <div class="{{@root.prefix}}--row">
+        <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6">
+          <div class="col-example">
+            <p>Content space for {{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6</p>
+          </div>
+        </div>
+        <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 green">
+          <p>Full space for {{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 (columns naturally have padding on them, adding a background color to
+            the column directly will effect the entire column, as opposed to using a child element in the example to the
+            left). </p>
+        </div>
+      </div>
+
+      <p>Columns also expand to match the vertical size of the rest of the row (see red column)</p>
+    </div>
+    <div class="{{@root.prefix}}--col-xs-12 {{@root.prefix}}--col-sm-6 red">
+      <p>Background color over entire column, not just content space</p>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--offset-xs-2 {{@root.prefix}}--col-xs-10">This content is offset. Offset adds a left-margin for x columns.</div>
+    </div>
+  </div>
+</div>
+{{/if}}

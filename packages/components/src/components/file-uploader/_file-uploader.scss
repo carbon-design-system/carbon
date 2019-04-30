@@ -1,0 +1,141 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../button/button';
+@import '../form/form';
+@import '../loading/loading';
+@import '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
+
+/// File uploader styles
+/// @access private
+/// @group file-uploader
+@mixin file-uploader {
+  .#{$prefix}--file {
+    width: 100%;
+  }
+
+  .#{$prefix}--file--invalid {
+    margin-right: $carbon--spacing-03;
+    fill: $support-01;
+  }
+
+  // TODO: sync with type
+  .#{$prefix}--file--label {
+    @include reset;
+    @include type-style('heading-01');
+
+    color: $text-01;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file-input {
+    @include hidden;
+  }
+
+  .#{$prefix}--file-btn {
+    display: inline-flex;
+    margin: 0;
+    padding-right: rem(64px);
+  }
+
+  .#{$prefix}--label-description {
+    @include reset;
+    @include type-style('body-short-01');
+
+    color: $text-02;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file-container {
+    display: block;
+    width: 100%;
+    margin-top: $carbon--spacing-06;
+  }
+
+  .#{$prefix}--file__selected-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: rem(40px);
+    max-width: rem(300px);
+    margin-bottom: $carbon--spacing-03;
+    padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
+    background-color: $field-01;
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .#{$prefix}--inline-loading__animation,
+    .#{$prefix}--loading {
+      right: -0.25rem; // offset for loading svg container
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
+    @include focus-outline('invalid');
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    display: block;
+    max-height: rem(200px);
+    color: $support-01;
+    font-weight: 400;
+    margin: 0 0 $carbon--spacing-03 0;
+    overflow: visible;
+  }
+
+  .#{$prefix}--file-filename {
+    @include type-style('body-short-01');
+    @include text-overflow(300px);
+    display: inline-block;
+    align-items: center;
+    color: $text-01;
+    margin-right: $carbon--spacing-05;
+    padding: 1px 0;
+    /*rtl:ignore*/
+    direction: ltr;
+    justify-content: flex-start; /*rtl:{flex-end}*/
+  }
+
+  .#{$prefix}--file__state-container {
+    display: flex;
+    align-items: center;
+
+    .#{$prefix}--loading__svg {
+      stroke: $ui-05;
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    fill: $support-02;
+    cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+}
+
+@include exports('file-uploader') {
+  @include file-uploader;
+}

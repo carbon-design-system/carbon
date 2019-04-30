@@ -1,0 +1,61 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#is variant "inline"}}
+<p>Here is an example of a text that a user would be reading. In this paragraph would be
+  <button data-copy-btn="" type="button" class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--inline {{@root.prefix}}--btn--copy{{#if light}} {{@root.prefix}}--snippet--light{{/if}}"
+    aria-label="Copy code" tabindex="0">
+    <code>inline code</code>
+    <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
+  </button>
+  that the user could look at and copy in to their code editor.</p>
+{{else}}
+
+<div class="{{@root.prefix}}--snippet {{@root.prefix}}--snippet--{{variant}}" {{#is variant "multi"}}
+  data-code-snippet{{/is}}> <div class="{{@root.prefix}}--snippet-container" aria-label="Code Snippet Text">
+  <pre>
+<code>@mixin grid-container {
+    width: 100%;
+    padding-right: padding(mobile);
+    padding-left: padding(mobile);
+
+    @include breakpoint(bp--xs--major) {
+      padding-right: padding(xs);
+      padding-left: padding(xs);
+    }
+  }
+
+  $z-indexes: (
+    modal : 9000,
+    overlay : 8000,
+    dropdown : 7000,
+    header : 6000,
+    footer : 5000,
+    hidden : - 1,
+    overflowHidden: - 1,
+    floating: 10000
+  );</code>
+    </pre>
+</div>
+<button data-copy-btn class="{{@root.prefix}}--snippet-button" type="button" aria-label="Copy" tabindex="0">
+  {{ carbon-icon 'Copy16' class=(add @root.prefix '--snippet__icon')}}
+  <div class="{{@root.prefix}}--btn--copy__feedback" role="alert" data-feedback="Copied!"></div>
+</button>
+{{#is variant "multi"}}
+<button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--ghost {{@root.prefix}}--btn--sm {{@root.prefix}}--snippet-btn--expand"
+  type="button">
+  <span class="{{@root.prefix}}--snippet-btn--text" data-show-more-text="Show more" data-show-less-text="Show less">Show
+    more</span>
+  {{ carbon-icon 'ChevronDown16' class=(add
+  (add @root.prefix '--icon-chevron--down')
+  (add ' ' (add @root.prefix '--snippet__icon'))
+  )
+  aria-label="Show more icon"}}
+</button>
+{{/is}}
+</div>
+{{/is}}

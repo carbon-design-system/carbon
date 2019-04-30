@@ -1,0 +1,129 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<nav class="{{@root.prefix}}--pagination-nav" aria-label="pagination" data-pagination-nav>
+  <ul class="{{@root.prefix}}--pagination-nav__list">
+    {{#if showPagePrevious}}
+      <li class="{{@root.prefix}}--pagination-nav__list-item">
+        {{#unless elementAsAnchor}}
+          <button
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction {{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+            data-page-previous
+            {{#if showPagePrevious.disabled}}
+              aria-disabled="true"
+            {{/if}}
+          >
+        {{else}}
+          <a
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction{{#if showPagePrevious.disabled}} {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+            data-page-previous
+            href="javascript:void(0)"
+            {{#if showPagePrevious.disabled}}
+              aria-disabled="true"
+            {{/if}}
+          >
+        {{/unless}}
+          <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Previous page </span>
+          {{ carbon-icon 'CaretLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+        {{#unless elementAsAnchor }}
+          </button>
+        {{else}}
+          </a>
+        {{/unless}}
+      </li>
+    {{/if}}
+    {{#each pages}}
+      <li class="{{@root.prefix}}--pagination-nav__list-item">
+        {{#if select}}
+          <div class="{{@root.prefix}}--pagination-nav__select">
+            <select
+              class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--select"
+              data-page-select
+              aria-label="select page number"
+            >
+              {{#each select}}
+                <option
+                  value="{{value}}"
+                  {{#unless value}}
+                    hidden
+                  {{else}}
+                    data-page="{{page}}"
+                  {{/unless}}
+                >
+                  {{page}}
+                </option>
+              {{/each}}
+            </select>
+            <div class="{{@root.prefix}}--pagination-nav__select-icon-wrapper">
+              {{ carbon-icon 'OverflowMenuHorizontal16' class=(add @root.prefix '--pagination-nav__select-icon') }}
+            </div>
+          </div>
+        {{else}}
+          {{#unless @root.elementAsAnchor}}
+            <button
+              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+              data-page="{{page}}"
+              data-page-button
+              {{#if active}}
+                data-page-active="true"
+                aria-current="page"
+                aria-disabled="true"
+              {{/if}}
+            >
+          {{else}}
+            <a
+              class="{{@root.prefix}}--pagination-nav__page{{#if active}} {{@root.prefix}}--pagination-nav__page--active {{@root.prefix}}--pagination-nav__page--disabled{{/if}}"
+              data-page="{{page}}"
+              data-page-button
+              href="javascript:void(0)"
+              {{#if active}}
+                data-page-active="true"
+                aria-current="page"
+                aria-disabled="true"
+              {{/if}}
+            >
+          {{/unless}}
+            <span class="{{@root.prefix}}--pagination-nav__accessibility-label">page </span>{{page}}
+          {{#unless @root.elementAsAnchor}}
+            </button>
+          {{else}}
+            </a>
+          {{/unless}}
+        {{/if}}
+      </li>
+    {{/each}}
+    {{#if showPageNext}}
+      <li class="{{@root.prefix}}--pagination-nav__list-item">
+        {{#unless @root.elementAsAnchor}}
+          <button
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
+            data-page-next
+            {{#if showPageNext.disabled}}
+              aria-disabled="true"
+            {{/if}}
+          >
+        {{else}}
+          <a
+            class="{{@root.prefix}}--pagination-nav__page {{@root.prefix}}--pagination-nav__page--direction{{#if showPageNext.disabled}} {{@root.prefix}}--pagination-nav__page--is-disabled{{/if}}"
+            data-page-next
+            href="javascript:void(0)"
+            {{#if showPageNext.disabled}}
+              aria-disabled="true"
+            {{/if}}
+          >
+        {{/unless}}
+          <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Next page </span>
+          {{ carbon-icon 'CaretRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+        {{#unless @root.elementAsAnchor}}
+          </button>
+        {{else}}
+          </a>
+        {{/unless}}
+      </li>
+    {{/if}}
+  </ul>
+</nav>
