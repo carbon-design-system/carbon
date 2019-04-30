@@ -95,7 +95,7 @@
     position: absolute;
     top: 0;
     right: rem(56px);
-    background-image: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(243, 243, 243, 1));
+    background-image: linear-gradient(to right, transparent, $ui-01);
   }
 
   // Multi Line Snippet
@@ -140,7 +140,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(243, 243, 243, 1));
+    background-image: linear-gradient(to right, transparent, $ui-01);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
