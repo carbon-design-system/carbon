@@ -203,9 +203,13 @@ const SassMapProperty = defineType('SassMapProperty', {
       validate: () =>
         assertOneOf([SassBoolean, SassNumber, SassString, SassList, SassMap]),
     },
+    quoted: {
+      optional: true,
+      validate: assertValueType('boolean'),
+    },
   },
   generate(printer, node) {
-    if (isNaN(node.key.name)) {
+    if (node.quoted) {
       printer.token(`'`);
       printer.print(node.key, node);
       printer.token(`'`);
