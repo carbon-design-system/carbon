@@ -8,13 +8,17 @@ const replace = require('rollup-plugin-replace');
 module.exports = {
   input: 'src/bundle.js',
   plugins: [
-    resolve(),
+    resolve({
+      jsnext: true,
+      main: true,
+      browser: true,
+    }),
     commonjs({
-      include: ['node_modules/**', 'src/globals/js/settings.js', 'src/globals/js/feature-flags.js'],
+      include: [/node_modules/, 'src/globals/js/settings.js', 'src/globals/js/feature-flags.js'],
       sourceMap: false,
     }),
     babel({
-      exclude: ['node_modules/**'], // only transpile our source code
+      exclude: [/node_modules/], // only transpile our source code
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),

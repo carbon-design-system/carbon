@@ -134,7 +134,6 @@
     "react-copy-to-clipboard": "^5.0.0",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.0",
-    "rimraf": "^2.6.3",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.0.0",
     "rollup-plugin-commonjs": "^9.0.0",
@@ -174,16 +173,14 @@
     "build": "gulp build",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup",
-    "clean": "rimraf css es html scripts scss umd",
+    "clean": "gulp clean",
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
+    "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
     "lint": "eslint .",
     "lint:staged": "eslint",
     "prebuild": "gulp clean",
     "prepublishOnly": "yarn build",
-    "format": "prettier --write \"**/*.{css,js,md,scss}\"",
-    "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
-    "format:staged": "prettier --write",
     "start": "node server.js",
     "test": "gulp test",
     "test:build": "cross-env BABEL_ENV=test jest",
@@ -192,29 +189,6 @@
     "semantic-release": "semantic-release"
   },
   "license": "Apache-2.0",
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "header-max-length": [
-        2,
-        "always",
-        50
-      ],
-      "body-max-line-length": [
-        2,
-        "always",
-        72
-      ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "prettier": {
     "jsxBracketSameLine": true,
     "printWidth": 130,
@@ -231,39 +205,6 @@
       "dev-expression"
     ]
   },
-  "lint-staged": {
-    "*.js": [
-      "yarn format:staged",
-      "yarn lint:staged",
-      "git add"
-    ],
-    "*.{css,md,scss}": [
-      "yarn format:staged",
-      "git add"
-    ]
-  },
-  "maintainers": [
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Akira Sudoh",
-      "email": "asudoh@jp.ibm.com"
-    },
-    {
-      "name": "Alison Joseph",
-      "email": "alison.joseph@us.ibm.com"
-    },
-    {
-      "name": "Alessandra Davila",
-      "email": "aledavila@us.ibm.com"
-    }
-  ],
   "eyeglass": {
     "sassDir": "scss",
     "exports": false,

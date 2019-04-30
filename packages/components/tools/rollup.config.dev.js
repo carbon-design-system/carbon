@@ -35,7 +35,7 @@ module.exports = {
       browser: true,
     }),
     commonjs({
-      include: ['node_modules/**', 'src/globals/js/settings.js', 'demo/feature-flags.js'],
+      include: [/node_modules/, 'src/globals/js/settings.js', 'demo/feature-flags.js'],
       sourceMap: true,
       namedExports: {
         'node_modules/prop-types/index.js': ['oneOf'],

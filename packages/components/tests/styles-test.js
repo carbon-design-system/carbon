@@ -10,11 +10,12 @@ const sass = require('node-sass');
 const glob = require('glob');
 
 const defaultOptions = {
-  includePaths: ['node_modules'],
+  includePaths: ['node_modules', '../../../node_modules'],
 };
 const cwd = path.resolve(__dirname, '../src');
 const files = glob.sync('**/*.scss', {
   cwd,
+  ignore: ['**/vendor/@carbon/**'],
 });
 
 describe('styles', () => {
