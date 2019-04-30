@@ -7,6 +7,8 @@
 
 'use strict';
 
+require('core-js/features/array/flat-map');
+
 const { reporter } = require('@carbon/cli-reporter');
 const { types: t, generate } = require('@carbon/scss-generator');
 const { paramCase } = require('change-case');
@@ -78,18 +80,38 @@ async function build() {
     })
   );
   const colorMapProperties = t.SassMap({
-    properties: Object.keys(colors).map(swatch => {
-      return t.SassMapProperty({
-        key: t.Identifier(paramCase(swatch)),
-        value: t.SassMap({
-          properties: Object.keys(colors[swatch]).map(grade => {
-            return t.SassMapProperty({
-              key: t.Identifier(grade),
-              value: t.SassColor(colors[swatch][grade]),
-            });
-          }),
+    properties: Object.keys(colors).flatMap(swatch => {
+      const value = t.SassMap({
+        properties: Object.keys(colors[swatch]).map(grade => {
+          return t.SassMapProperty({
+            key: t.Identifier(grade),
+            value: t.SassColor(colors[swatch][grade]),
+          });
         }),
       });
+
+      if (swatch === paramCase(swatch)) {
+        return [
+          t.SassMapProperty({
+            key: t.Identifier(swatch),
+            value,
+            quoted: true,
+          }),
+        ];
+      }
+
+      return [
+        t.SassMapProperty({
+          key: t.Identifier(paramCase(swatch)),
+          value,
+          quoted: true,
+        }),
+        t.SassMapProperty({
+          key: t.Identifier(swatch),
+          value,
+          quoted: true,
+        }),
+      ];
     }),
   });
   const deprecatedColorMap = t.Assignment({
