@@ -1,4 +1,6 @@
-# top-most EditorConfig file
+# EditorConfig helps developers define and maintain consistent	# top-most EditorConfig file
+# coding styles between different editors and IDEs
+# editorconfig.org
 root = true
 
 [*]
