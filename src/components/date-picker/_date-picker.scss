@@ -356,10 +356,6 @@
   .flatpickr-day.selected {
     color: $inverse-01;
     background: $interactive-01;
-
-    &:hover {
-      color: $text-01;
-    }
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
