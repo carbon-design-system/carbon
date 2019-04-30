@@ -14,7 +14,7 @@
 
 ## Installing dependencies
 
-Carbon Elements is built using a collection of packages all built in the same
+Carbon is built using a collection of packages all built in the same
 git repository. You might have heard this setup described as a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
