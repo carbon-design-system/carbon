@@ -309,7 +309,7 @@
   <section class="{{@root.prefix}}--data-table_inner-container">
   {{/if}}
   <!-- Table -->
-  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}} {{#if sticky}}{{@root.prefix}}--data-table--sticky-header{{/if}} {{#if zebra}}{{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}} {{#if tall}}{{@root.prefix}}--data-table--tall {{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort {{/if}}" >
+  <table class="{{@root.prefix}}--data-table {{#if static}}{{@root.prefix}}--data-table--static{{/if}} {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}} {{#if sticky}}{{@root.prefix}}--data-table--sticky-header{{/if}} {{#if zebra}}{{@root.prefix}}--data-table--zebra{{/if}} {{#if small}} {{@root.prefix}}--data-table--compact{{/if}} {{#if short}}{{@root.prefix}}--data-table--short{{/if}} {{#if tall}}{{@root.prefix}}--data-table--tall {{/if}} {{#if sort}}{{@root.prefix}}--data-table--sort{{/if}}" >
     <thead>
       <tr>
         {{#each columns}}
@@ -442,6 +442,13 @@
                 <!-- default (non truncated) -->
                 {{else}}
                   {{data}}
+                  {{#if ../../../tall}}
+                    {{#if (and row.secondaryText column.secondary)}}
+                    <div class="{{@root.prefix}}--data-table--cell-secondary-text">
+                      {{row.secondaryText}}
+                    </div>
+                    {{/if}}
+                  {{/if}}
                 {{/if}}
               </td>
             {{/if}}
