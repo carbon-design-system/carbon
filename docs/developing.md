@@ -53,6 +53,28 @@ Afterwards, you should be good to go! For more information about how we handle
 dependencies, definitely take a look at our write-up
 [here](/docs/dependencies.md).
 
+## Common tasks
+
+While working on Carbon, here are some of the top-level tasks that you
+might want to run:
+
+| Command                           | Usage                                                                                                         |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `yarn build`                      | Uses `lerna` to run the `build` script in each package                                                        |
+| `yarn clean`                      | Resets the state of the project by removing all `node_modules` and running the `clean` script in each package |
+| `yarn doctoc`                     | Runs `doctoc` on all files in the `doctoc` directory                                                          |
+| `yarn format`, `yarn format:diff` | Format files using prettier, check if files have been formatted                                               |
+| `yarn sync`                       | Sync package files across the project                                                                         |
+
+In addition, you can use `yarn` to run `bin` files using the `yarn <bin>`
+syntax. For example, if you wanted to use `lerna` to run a script in every
+package you could do the following:
+
+```bash
+# Access $(yarn bin)/lerna and pass `run build` to the executable
+yarn lerna run build
+```
+
 ## FAQ
 
 #### CircleCI is failing saying that it cannot find a dependency in offline mode
