@@ -30,7 +30,7 @@
     min-height: rem(48px);
     min-width: rem(288px);
     max-width: rem(288px);
-    color: $text-01;
+    color: $inverse-01;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
 
@@ -48,15 +48,15 @@
   }
 
   .#{$prefix}--inline-notification--error {
-    @include notification--experimental($support-01, $notification-error-background-color);
+    @include notification--color($red-50);
   }
 
   .#{$prefix}--inline-notification--success {
-    @include notification--experimental($support-02, $notification-success-background-color);
+    @include notification--color($support-02);
   }
 
   .#{$prefix}--inline-notification--info {
-    @include notification--experimental($support-04, $notification-info-background-color);
+    @include notification--color($interactive-01);
   }
 
   .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
@@ -64,7 +64,7 @@
   }
 
   .#{$prefix}--inline-notification--warning {
-    @include notification--experimental($support-03, $notification-warning-background-color);
+    @include notification--color($support-03);
   }
 
   .#{$prefix}--inline-notification--warning .#{$prefix}--inline-notification__icon path[opacity='0'] {
@@ -121,7 +121,7 @@
     .#{$prefix}--inline-notification__close-icon {
       height: 1rem;
       width: 1rem;
-      fill: $ui-05;
+      fill: $inverse-01;
     }
   }
 }
