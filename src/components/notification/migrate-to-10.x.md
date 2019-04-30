@@ -43,3 +43,11 @@ Updating HTML pertains only to the "close" button SVG icon. Icon from [`carbon-e
 ### SCSS
 
 No new selectors.
+
+#### Mixins
+
+| Name                  | Params           | Description                               |
+| --------------------- | ---------------- | ----------------------------------------- |
+| `notification--color` | `$color`: String | Applies given `$color` to border and icon |
+
+The `inline-notification--color` mixin has been consolidated with the `notification--color` mixin, which determines the border color and icon color for toast and inline notifications.

@@ -2,10 +2,9 @@
 
 #### Mixins
 
-| Name                         | Params           | Description                               |
-| ---------------------------- | ---------------- | ----------------------------------------- |
-| `inline-notification--color` | `$color`: String | Applies given `$color` to border and icon |
-| `notification--color`        | `$color`: String | Applies given `$color` to left border     |
+| Name                  | Params           | Description                               |
+| --------------------- | ---------------- | ----------------------------------------- |
+| `notification--color` | `$color`: String | Applies given `$color` to border and icon |
 
 #### Modifiers
 
