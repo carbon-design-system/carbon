@@ -34,8 +34,8 @@
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
-    &:disabled > .#{$prefix}--btn__icon {
+    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon path,
+    &:disabled > .#{$prefix}--btn__icon path {
       fill: $ui-04;
     }
   }
@@ -79,12 +79,12 @@
       background: transparent;
       color: $disabled;
 
-      & > .#{$prefix}--btn__icon {
+      & > .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
 
-    &:hover > .#{$prefix}--btn__icon {
+    &:hover > .#{$prefix}--btn__icon path {
       fill: $inverse-01;
     }
   }
@@ -102,7 +102,7 @@
     &:active {
       color: $ibm-color__blue-70;
 
-      .#{$prefix}--btn__icon {
+      .#{$prefix}--btn__icon path {
         fill: $ibm-color__blue-70;
       }
     }
@@ -121,7 +121,7 @@
       background: transparent;
       border-color: transparent;
 
-      .#{$prefix}--btn__icon {
+      .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
