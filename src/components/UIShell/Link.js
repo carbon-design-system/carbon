@@ -24,11 +24,7 @@ const LinkPropTypes = {
    * The base element to use to build the link. Defaults to `a`, can also accept
    * alternative tag names or custom components like `Link` from `react-router`.
    */
-  element: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-    PropTypes.func,
-  ]),
+  element: PropTypes.elementType,
 };
 
 Link.displayName = 'Link';

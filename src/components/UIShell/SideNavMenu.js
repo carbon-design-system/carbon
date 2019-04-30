@@ -29,7 +29,7 @@ export class SideNavMenu extends React.Component {
     /**
      * Pass in a custom icon to render next to the `SideNavMenu` title
      */
-    icon: PropTypes.node.isRequired,
+    icon: PropTypes.node,
 
     /**
      * Specify whether the `SideNavMenu` is "active". `SideNavMenu` should be
@@ -90,7 +90,7 @@ export class SideNavMenu extends React.Component {
           onClick={this.handleToggleExpand}
           ref={buttonRef}
           type="button">
-          <SideNavIcon>{icon}</SideNavIcon>
+          {icon && <SideNavIcon>{icon}</SideNavIcon>}
           <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
           <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
             <ChevronDown20 />
