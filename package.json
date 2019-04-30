@@ -19,7 +19,8 @@
     "doctoc": "doctoc --title '## Table of Contents' docs",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:staged": "prettier --write"
+    "format:staged": "prettier --write",
+    "sync": "node tasks/sync.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",

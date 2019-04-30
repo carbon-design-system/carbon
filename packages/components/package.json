@@ -1,17 +1,27 @@
 {
   "name": "carbon-components",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "homepage": "https://www.carbondesignsystem.com/",
   "version": "10.1.0",
-  "module": "es/index.js",
+  "license": "Apache-2.0",
   "main": "umd/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/IBM/carbon-components.git"
+  "module": "es/index.js",
+  "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/components",
+  "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
+  "homepage": "https://www.carbondesignsystem.com/",
+  "engines": {
+    "node": ">=6.x"
   },
-  "bugs": {
-    "url": "https://github.com/IBM/carbon-components/issues"
-  },
+  "files": [
+    "css/**/*",
+    "es/**/*",
+    "html/**/*",
+    "scripts/**/*",
+    "scss/**/*",
+    "src/**/*",
+    "umd/**/*",
+    "!**/*.config.js",
+    "!**/__tests__/**/*"
+  ],
   "keywords": [
     "carbon",
     "component",
@@ -27,10 +37,35 @@
     "sass",
     "scss",
     "style guide",
-    "eyeglass-module"
+    "eyeglass-module",
+    "carbon-design-system",
+    "react"
   ],
-  "engines": {
-    "node": ">=6.x"
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "build-dev": "gulp build:dev",
+    "build-dev-rollup": "gulp build:dev:deploy --rollup",
+    "clean": "gulp clean",
+    "ci-check": "sh ./tools/ci-check.sh",
+    "dev": "gulp serve",
+    "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
+    "lint": "eslint .",
+    "lint:staged": "eslint",
+    "prebuild": "gulp clean",
+    "prepublishOnly": "yarn build",
+    "start": "node server.js",
+    "test": "gulp test",
+    "test:build": "cross-env BABEL_ENV=test jest",
+    "test:unit": "gulp test:unit",
+    "test:a11y": "gulp test:a11y",
+    "semantic-release": "semantic-release"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0",
+    "freshy": ">= 1.0.3"
   },
   "dependencies": {
     "carbon-icons": "^7.0.7",
@@ -154,41 +189,12 @@
     "webpack-hot-middleware": "^2.21.0",
     "whatwg-fetch": "^3.0.0"
   },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0",
-    "freshy": ">= 1.0.3"
+  "eyeglass": {
+    "sassDir": "scss",
+    "exports": false,
+    "name": "carbon-components",
+    "needs": "^1.2.1"
   },
-  "files": [
-    "css/**/*",
-    "es/**/*",
-    "html/**/*",
-    "scripts/**/*",
-    "scss/**/*",
-    "src/**/*",
-    "umd/**/*",
-    "!**/*.config.js",
-    "!**/__tests__/**/*"
-  ],
-  "scripts": {
-    "build": "gulp build",
-    "build-dev": "gulp build:dev",
-    "build-dev-rollup": "gulp build:dev:deploy --rollup",
-    "clean": "gulp clean",
-    "ci-check": "sh ./tools/ci-check.sh",
-    "dev": "gulp serve",
-    "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
-    "lint": "eslint .",
-    "lint:staged": "eslint",
-    "prebuild": "gulp clean",
-    "prepublishOnly": "yarn build",
-    "start": "node server.js",
-    "test": "gulp test",
-    "test:build": "cross-env BABEL_ENV=test jest",
-    "test:unit": "gulp test:unit",
-    "test:a11y": "gulp test:a11y",
-    "semantic-release": "semantic-release"
-  },
-  "license": "Apache-2.0",
   "prettier": {
     "jsxBracketSameLine": true,
     "printWidth": 130,
@@ -204,12 +210,6 @@
       "@babel/plugin-proposal-object-rest-spread",
       "dev-expression"
     ]
-  },
-  "eyeglass": {
-    "sassDir": "scss",
-    "exports": false,
-    "name": "carbon-components",
-    "needs": "^1.2.1"
   },
   "jest": {
     "testMatch": [
