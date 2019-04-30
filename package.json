@@ -25,6 +25,7 @@
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "doctoc": "^1.4.0",
+    "fs-extra": "^7.0.1",
     "husky": "^2.1.0",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
