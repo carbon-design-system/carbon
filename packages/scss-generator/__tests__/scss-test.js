@@ -45,6 +45,7 @@ describe('@carbon/scss', () => {
             t.SassMapProperty({
               key: t.Identifier({ name: 'b' }),
               value: t.SassNumber({ value: 2 }),
+              quoted: true,
             }),
             t.SassMapProperty({
               key: t.Identifier({ name: 'c' }),
@@ -53,9 +54,9 @@ describe('@carbon/scss', () => {
           ],
         }),
         `$variable: (
-  'a': 1,
+  a: 1,
   'b': 2,
-  'c': 3
+  c: 3
 );`,
       ],
       ['number', t.SassNumber({ value: 1 }), '$variable: 1;'],
