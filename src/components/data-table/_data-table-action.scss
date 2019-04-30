@@ -432,23 +432,22 @@
     height: rem(32px);
   }
 
-  //FIGURE OUT CORRECT SELECTORS FOR EVERYTHING BELOW (WAS PREVIOUSLY NESTED IN SMALL TOOLBAR SELECTOR)
-  .#{$prefix}--toolbar-action {
+  .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
     height: rem(32px);
     width: rem(32px);
     padding: $spacing-xs;
   }
 
-  .#{$prefix}--btn--primary {
+  .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
     padding-top: rem(6px);
     height: rem(32px);
   }
 
-  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+  .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     top: rem(8px);
   }
 
-  .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
+  .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     height: rem(32px);
     width: rem(160px);
     overflow: hidden;

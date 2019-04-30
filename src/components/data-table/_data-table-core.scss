@@ -257,43 +257,47 @@
   //----------------------------------------------------------------------------
   // Compact
   //----------------------------------------------------------------------------
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact thead tr,
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact tbody tr {
+  .#{$prefix}--data-table--compact thead tr,
+  .#{$prefix}--data-table--compact tbody tr {
     height: rem(24px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
+  .#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
     padding: rem(2px) 0;
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact td {
+  .#{$prefix}--data-table--compact td {
     padding-top: rem(2px);
     padding-bottom: rem(2px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
-    width: rem(24px);
-    height: rem(24px);
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-checkbox {
-    padding-top: rem(1px);
+  .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
+    width: rem(32px);
+    height: rem(23px); //24px row - 1px border
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-menu {
-    width: rem(28px);
-    min-width: rem(28px);
-    padding-top: rem(1px);
+    padding-top: 0;
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-icon {
-    padding-top: rem(1px);
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-checkbox {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-icon button {
-    width: rem(28px);
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
+    min-height: rem(23px); //24px row - 1px border
+    height: rem(23px);
+  }
+
+  // Sortable compact
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th {
     height: rem(24px);
-    justify-content: center;
+  }
+
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th .#{$prefix}--table-sort {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   //----------------------------------------------------------------------------
@@ -313,6 +317,29 @@
     padding-bottom: rem(6px);
   }
 
+  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
+    height: rem(31px); //32px row - 1px border
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--short .#{$prefix}--table-column-menu {
+    padding-top: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--short .#{$prefix}--table-column-checkbox {
+    padding-top: rem(3px);
+    padding-bottom: rem(3px);
+  }
+
+  // Sortable Short
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th .#{$prefix}--table-sort {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   //----------------------------------------------------------------------------
   // Tall
   //----------------------------------------------------------------------------
@@ -327,14 +354,38 @@
 
   .#{$prefix}--data-table--tall td {
     padding-top: 1rem;
-    padding-bottom: 1rem;
   }
 
   .#{$prefix}--data-table--cell-secondary-text {
-    padding-top: rem(2px);
-    // @include font-size('12');
+    @include type-style('label-01');
   }
 
+  .#{$prefix}--data-table.#{$prefix}--data-table--tall .#{$prefix}--table-column-menu {
+    padding-top: rem(12px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
+    padding-top: rem(12px);
+  }
+
+  // Sortable Tall
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th .#{$prefix}--table-sort {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th .#{$prefix}--table-sort svg,
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th .#{$prefix}--table-sort .#{$prefix}--table-header-label {
+    align-self: flex-start;
+  }
+
+  //----------------------------------------------------------------------------
+  // Static
+  //----------------------------------------------------------------------------
   .#{$prefix}--data-table--static {
     width: auto;
   }
