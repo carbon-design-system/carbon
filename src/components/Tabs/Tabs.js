@@ -12,7 +12,6 @@ import { iconCaretDown } from 'carbon-icons';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 import { settings } from 'carbon-components';
 import Icon from '../Icon';
-import TabContent from '../TabContent';
 import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
@@ -232,7 +231,7 @@ export default class Tabs extends React.Component {
     });
 
     const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
-      const { children, selected } = tab.props;
+      const { children, selected, renderContent: TabContent } = tab.props;
 
       return (
         <TabContent
