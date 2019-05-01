@@ -31,12 +31,7 @@ const ListBoxSelection = ({
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
   const handleOnClick = event => {
-    // If we have a mult-select badge, clicking it shouldn't open the menu back
-    // up. However, if we have a clear badge then we want the click to have this
-    // behavior.
-    if (selectionCount) {
-      event.stopPropagation();
-    }
+    event.stopPropagation();
     clearSelection(event);
   };
   const handleOnKeyDown = event => {
