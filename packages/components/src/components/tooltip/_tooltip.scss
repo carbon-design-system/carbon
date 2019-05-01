@@ -246,8 +246,12 @@
     &::after {
       @include type-style('body-short-01');
       position: absolute;
-      display: none;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
       background-color: $inverse-02;
+      transition: opacity $duration--fast-01 motion(standard, productive);
     }
 
     &::before {
@@ -286,9 +290,7 @@
 
       &::before,
       &::after {
-        position: absolute;
-        display: flex;
-        align-items: center;
+        opacity: 1;
       }
     }
 
