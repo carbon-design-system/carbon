@@ -29,6 +29,15 @@ const defaultTranslations = {
   [translationIds['decrement.number']]: 'Decrement number',
 };
 
+const capMin = (min, value) =>
+  isNaN(min) || (!min && min !== 0) || isNaN(value) || (!value && value !== 0)
+    ? value
+    : Math.max(min, value);
+const capMax = (max, value) =>
+  isNaN(max) || (!max && max !== 0) || isNaN(value) || (!value && value !== 0)
+    ? value
+    : Math.min(max, value);
+
 class NumberInput extends Component {
   constructor(props) {
     super(props);
@@ -148,12 +157,12 @@ class NumberInput extends Component {
    */
   _inputRef = null;
 
-  static getDerivedStateFromProps({ min, value }, state) {
+  static getDerivedStateFromProps({ min, max, value }, state) {
     const { prevValue } = state;
     return prevValue === value
       ? null
       : {
-          value: isNaN(min) ? value : Math.max(min, value),
+          value: capMax(max, capMin(min, value)),
           prevValue: value,
         };
   }
