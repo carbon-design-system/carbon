@@ -128,8 +128,8 @@ export default class Modal extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
-     * Specify whether the modal should be a focus trap. NOTE: by default
-     * this is true
+     * Specify whether the modal should use 3rd party `focus-trap-react` for the focus-wrap feature.
+     * NOTE: by default this is true.
      */
     focusTrap: PropTypes.bool,
   };
