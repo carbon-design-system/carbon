@@ -16,6 +16,10 @@
 /// @access private
 /// @group code-snippet
 @mixin snippet {
+  .#{$prefix}--snippet {
+    @include reset;
+  }
+
   .#{$prefix}--snippet code {
     @include type-style('code-01');
   }
