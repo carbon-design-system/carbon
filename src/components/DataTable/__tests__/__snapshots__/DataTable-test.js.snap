@@ -244,6 +244,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     "value": "Field 2:B",
                   },
                 ],
+                "disabled": false,
                 "id": "b",
                 "isExpanded": false,
                 "isSelected": false,
@@ -273,6 +274,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     "value": "Field 1:B",
                   },
                 ],
+                "disabled": false,
                 "id": "a",
                 "isExpanded": false,
                 "isSelected": false,
@@ -302,6 +304,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     "value": "Field 3:B",
                   },
                 ],
+                "disabled": false,
                 "id": "c",
                 "isExpanded": false,
                 "isSelected": false,
@@ -354,6 +357,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-11__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
@@ -370,6 +374,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-11__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
@@ -386,6 +391,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-11__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
@@ -510,6 +516,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-11__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
@@ -518,6 +525,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     <td>
                       <ForwardRef(RadioButton)
                         checked={false}
+                        disabled={false}
                         hideLabel={true}
                         id="data-table-11__select-row-b"
                         labelText="Select row"
@@ -526,6 +534,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       >
                         <RadioButton
                           checked={false}
+                          disabled={false}
                           hideLabel={true}
                           id="data-table-11__select-row-b"
                           innerRef={null}
@@ -542,6 +551,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             <input
                               checked={false}
                               className="bx--radio-button"
+                              disabled={false}
                               id="data-table-11__select-row-b"
                               name="select-row-b"
                               onChange={[Function]}
@@ -591,6 +601,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-11__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
@@ -599,6 +610,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     <td>
                       <ForwardRef(RadioButton)
                         checked={false}
+                        disabled={false}
                         hideLabel={true}
                         id="data-table-11__select-row-a"
                         labelText="Select row"
@@ -607,6 +619,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       >
                         <RadioButton
                           checked={false}
+                          disabled={false}
                           hideLabel={true}
                           id="data-table-11__select-row-a"
                           innerRef={null}
@@ -623,6 +636,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             <input
                               checked={false}
                               className="bx--radio-button"
+                              disabled={false}
                               id="data-table-11__select-row-a"
                               name="select-row-a"
                               onChange={[Function]}
@@ -672,6 +686,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-11__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
@@ -680,6 +695,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     <td>
                       <ForwardRef(RadioButton)
                         checked={false}
+                        disabled={false}
                         hideLabel={true}
                         id="data-table-11__select-row-c"
                         labelText="Select row"
@@ -688,6 +704,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       >
                         <RadioButton
                           checked={false}
+                          disabled={false}
                           hideLabel={true}
                           id="data-table-11__select-row-c"
                           innerRef={null}
@@ -704,6 +721,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             <input
                               checked={false}
                               className="bx--radio-button"
+                              disabled={false}
                               id="data-table-11__select-row-c"
                               name="select-row-c"
                               onChange={[Function]}
@@ -1053,6 +1071,7 @@ exports[`DataTable selection should render 1`] = `
                     "value": "Field 2:B",
                   },
                 ],
+                "disabled": false,
                 "id": "b",
                 "isExpanded": false,
                 "isSelected": false,
@@ -1082,6 +1101,7 @@ exports[`DataTable selection should render 1`] = `
                     "value": "Field 1:B",
                   },
                 ],
+                "disabled": false,
                 "id": "a",
                 "isExpanded": false,
                 "isSelected": false,
@@ -1111,6 +1131,7 @@ exports[`DataTable selection should render 1`] = `
                     "value": "Field 3:B",
                   },
                 ],
+                "disabled": false,
                 "id": "c",
                 "isExpanded": false,
                 "isSelected": false,
@@ -1171,6 +1192,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-6__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
@@ -1187,6 +1209,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-6__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
@@ -1203,6 +1226,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-6__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
@@ -1375,6 +1399,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-6__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
@@ -1384,6 +1409,7 @@ exports[`DataTable selection should render 1`] = `
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
+                        disabled={false}
                         id="data-table-6__select-row-b"
                         name="select-row-b"
                         onClick={[Function]}
@@ -1391,6 +1417,7 @@ exports[`DataTable selection should render 1`] = `
                         <InlineCheckbox
                           ariaLabel="Select row"
                           checked={false}
+                          disabled={false}
                           id="data-table-6__select-row-b"
                           innerRef={null}
                           name="select-row-b"
@@ -1400,6 +1427,7 @@ exports[`DataTable selection should render 1`] = `
                           <input
                             checked={false}
                             className="bx--checkbox"
+                            disabled={false}
                             id="data-table-6__select-row-b"
                             name="select-row-b"
                             onChange={[Function]}
@@ -1438,6 +1466,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-6__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
@@ -1447,6 +1476,7 @@ exports[`DataTable selection should render 1`] = `
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
+                        disabled={false}
                         id="data-table-6__select-row-a"
                         name="select-row-a"
                         onClick={[Function]}
@@ -1454,6 +1484,7 @@ exports[`DataTable selection should render 1`] = `
                         <InlineCheckbox
                           ariaLabel="Select row"
                           checked={false}
+                          disabled={false}
                           id="data-table-6__select-row-a"
                           innerRef={null}
                           name="select-row-a"
@@ -1463,6 +1494,7 @@ exports[`DataTable selection should render 1`] = `
                           <input
                             checked={false}
                             className="bx--checkbox"
+                            disabled={false}
                             id="data-table-6__select-row-a"
                             name="select-row-a"
                             onChange={[Function]}
@@ -1501,6 +1533,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
+                    disabled={false}
                     id="data-table-6__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
@@ -1510,6 +1543,7 @@ exports[`DataTable selection should render 1`] = `
                       <ForwardRef(InlineCheckbox)
                         ariaLabel="Select row"
                         checked={false}
+                        disabled={false}
                         id="data-table-6__select-row-c"
                         name="select-row-c"
                         onClick={[Function]}
@@ -1517,6 +1551,7 @@ exports[`DataTable selection should render 1`] = `
                         <InlineCheckbox
                           ariaLabel="Select row"
                           checked={false}
+                          disabled={false}
                           id="data-table-6__select-row-c"
                           innerRef={null}
                           name="select-row-c"
@@ -1526,6 +1561,7 @@ exports[`DataTable selection should render 1`] = `
                           <input
                             checked={false}
                             className="bx--checkbox"
+                            disabled={false}
                             id="data-table-6__select-row-c"
                             name="select-row-c"
                             onChange={[Function]}
@@ -1631,6 +1667,7 @@ exports[`DataTable should render 1`] = `
                     "value": "Field 2:B",
                   },
                 ],
+                "disabled": false,
                 "id": "b",
                 "isExpanded": false,
                 "isSelected": false,
@@ -1660,6 +1697,7 @@ exports[`DataTable should render 1`] = `
                     "value": "Field 1:B",
                   },
                 ],
+                "disabled": false,
                 "id": "a",
                 "isExpanded": false,
                 "isSelected": false,
@@ -1689,6 +1727,7 @@ exports[`DataTable should render 1`] = `
                     "value": "Field 3:B",
                   },
                 ],
+                "disabled": false,
                 "id": "c",
                 "isExpanded": false,
                 "isSelected": false,

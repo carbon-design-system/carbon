@@ -24,10 +24,17 @@ const normalize = (rows, headers, prevState = {}) => {
     rowIds[i] = row.id;
     // Initialize the row info and state values, namely for selection and
     // expansion
-    rowsById[row.id] = {
-      id: row.id,
-      isSelected: false,
-      isExpanded: false,
+    const {
+      id,
+      isSelected = false,
+      isExpanded = false,
+      disabled = false,
+    } = row;
+    rowsById[id] = {
+      id,
+      isSelected,
+      isExpanded,
+      disabled,
       cells: new Array(headers.length),
     };
 

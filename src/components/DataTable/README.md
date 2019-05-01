@@ -150,6 +150,32 @@ const rows = [
 ];
 ```
 
+#### Extra Options
+
+You can also pass optional options with each row object
+
+| property     | type    | description              |
+| ------------ | ------- | ------------------------ |
+| `disabled`   | boolean | will render row disabled |
+| `isSelected` | boolean | will render row selected |
+| `isExpanded` | boolean | will render row expanded |
+
+```js
+const rows = [
+  {
+    id: 'a',
+    field1: 'Field 1a',
+    disabled: true,
+    isExpanded: true,
+  },
+  {
+    id: 'b',
+    field1: 'Field 1b',
+    isSelected: true,
+  },
+];
+```
+
 ### `headers`
 
 The `headers` prop represents the order in which the headers should appear in the table. We expect an array of objects to be passed in, where `key` is the name of the key in a row object, and `header` is the name of the header. For example:

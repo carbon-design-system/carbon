@@ -89,7 +89,6 @@ storiesOf('DataTable', module)
       },
     }
   )
-
   .add(
     'with radio button selection',
     withReadme(readme, () =>
@@ -171,6 +170,22 @@ storiesOf('DataTable', module)
       info: {
         text: `
         DataTable with toolbar and filtering with column has boolean value.
+      `,
+      },
+    }
+  )
+  .add(
+    'with options',
+    withReadme(readme, () =>
+      require('./stories/with-options').default(props())
+    ),
+    {
+      info: {
+        text: `
+        DataTable with options like disabled, isSelected, isExpanded etc.
+
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
       `,
       },
     }
