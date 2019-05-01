@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
 import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 
@@ -17,6 +17,7 @@ const toggleProps = () => ({
   labelText: text('Label for toggle button input', ''),
   labelA: text('Label for untoggled state (labelA)', 'Off'),
   labelB: text('Label for toggled state (labelB)', 'On'),
+  disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),
   onToggle: action('onToggle'),
 });

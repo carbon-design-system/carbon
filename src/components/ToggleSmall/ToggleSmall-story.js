@@ -8,13 +8,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import ToggleSmall from '../ToggleSmall';
 import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 
 const toggleProps = () => ({
   className: 'some-class',
   ariaLabel: text('ARIA label (ariaLabel)', 'Label Name'),
+  disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),
   onToggle: action('onToggle'),
 });
