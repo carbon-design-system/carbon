@@ -12,10 +12,7 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import { settings } from 'carbon-components';
-import warning from 'warning';
 import DatePickerInput from '../DatePickerInput';
-import Icon from '../Icon';
-import { componentsX, breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -61,11 +58,6 @@ export default class DatePicker extends Component {
      * * `range` - With calendar dropdown and a date range.
      */
     datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
-
-    /**
-     * The description of the calendar icon.
-     */
-    iconDescription: PropTypes.string,
 
     /**
      * The date format.
@@ -242,7 +234,6 @@ export default class DatePicker extends Component {
       datePickerType,
       dateFormat,
       locale,
-      appendTo,
       onChange,
       minDate,
       maxDate,
@@ -254,15 +245,6 @@ export default class DatePicker extends Component {
       };
 
       let appendToNode;
-      if (typeof appendTo === 'string' && !breakingChangesX) {
-        warning(
-          false,
-          `CSS selector (string) for the DatePicker appendTo prop will be deprecated in Carbon X. 
-          - If you were using appendTo for styling, consider using a className.
-          - If you were using appendTo for attaching to a specific DOM node, consider a React portal.`
-        );
-        appendToNode = document.querySelector(appendTo);
-      }
 
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
@@ -338,28 +320,18 @@ export default class DatePicker extends Component {
   };
 
   rightArrowHTML() {
-    return componentsX
-      ? `
+    return `
       <svg width="16px" height="16px" viewBox="0 0 16 16">
         <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
         <rect width="16" height="16" style="fill:none" />
-      </svg>`
-      : `
-      <svg height="12" width="7" viewBox="0 0 7 12">
-        <path d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
       </svg>`;
   }
 
   leftArrowHTML() {
-    return componentsX
-      ? `
+    return `
       <svg width="16px" height="16px" viewBox="0 0 16 16">
         <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
         <rect width="16" height="16" style="fill:none" />
-      </svg>`
-      : `
-      <svg width="7" height="12" viewBox="0 0 7 12" fill-rule="evenodd">
-        <path d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
       </svg>`;
   }
 
@@ -450,7 +422,6 @@ export default class DatePicker extends Component {
       onChange, // eslint-disable-line
       locale, // eslint-disable-line
       value, // eslint-disable-line
-      iconDescription,
       ...other
     } = this.props;
 
@@ -463,17 +434,6 @@ export default class DatePicker extends Component {
       [`${prefix}--date-picker--nolabel`]:
         datePickerType === 'range' && this.isLabelTextEmpty(children),
     });
-
-    const datePickerIcon =
-      !componentsX && datePickerType === 'range' ? (
-        <Icon
-          name="calendar"
-          className={`${prefix}--date-picker__icon`}
-          description={iconDescription}
-          onClick={this.openCalendar}
-          focusable="false"
-        />
-      ) : null;
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {
@@ -502,7 +462,6 @@ export default class DatePicker extends Component {
       <div className={`${prefix}--form-item`}>
         <div className={datePickerClasses} {...other}>
           {childrenWithProps}
-          {datePickerIcon}
         </div>
       </div>
     );

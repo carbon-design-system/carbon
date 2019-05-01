@@ -10,7 +10,6 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const types = typesList.reduce(
   (o, type) => ({
@@ -27,11 +26,7 @@ storiesOf('Tag', module)
     () => (
       <Tag
         className="some-class"
-        type={select(
-          'Tag type (type)',
-          types,
-          componentsX ? 'red' : 'experimental'
-        )}
+        type={select('Tag type (type)', types, 'red')}
         disabled={boolean('Disabled (disabled)', false)}>
         {text('Content (children)', 'This is not a tag')}
       </Tag>

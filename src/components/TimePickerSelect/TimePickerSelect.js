@@ -8,11 +8,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '../Icon';
-import { iconCaretDown } from 'carbon-icons';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -88,7 +85,6 @@ export default class TimePickerSelect extends Component {
     const selectClasses = classNames({
       [`${prefix}--select`]: true,
       [`${prefix}--time-picker__select`]: true,
-      [`${prefix}--select--inline`]: !componentsX,
       [className]: className,
     });
 
@@ -112,19 +108,11 @@ export default class TimePickerSelect extends Component {
           disabled={disabled}>
           {children}
         </select>
-        {componentsX ? (
-          <ChevronDownGlyph
-            className={`${prefix}--select__arrow`}
-            aria-label={iconDescription}>
-            {iconDescription && <title>{iconDescription}</title>}
-          </ChevronDownGlyph>
-        ) : (
-          <Icon
-            icon={iconCaretDown}
-            className={`${prefix}--select__arrow`}
-            description={iconDescription}
-          />
-        )}
+        <ChevronDownGlyph
+          className={`${prefix}--select__arrow`}
+          aria-label={iconDescription}>
+          {iconDescription && <title>{iconDescription}</title>}
+        </ChevronDownGlyph>
       </div>
     );
   }

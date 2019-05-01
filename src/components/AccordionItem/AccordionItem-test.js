@@ -6,11 +6,8 @@
  */
 
 import React from 'react';
-import { iconChevronRight } from 'carbon-icons';
 import AccordionItem from '../AccordionItem';
-import Icon from '../Icon';
 import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
-import { componentsX } from '../../internal/FeatureFlags';
 import { shallow, mount } from 'enzyme';
 
 describe('AccordionItem', () => {
@@ -29,7 +26,7 @@ describe('AccordionItem', () => {
 
     it('renders heading as expected', () => {
       const heading = wrapper.find('.bx--accordion__heading');
-      const icon = componentsX ? ChevronRight16 : Icon;
+      const icon = ChevronRight16;
       expect(heading.length).toBe(1);
       expect(heading.find(icon).length).toBe(1);
       expect(heading.find('.bx--accordion__title').text()).toBe('A heading');
@@ -37,11 +34,7 @@ describe('AccordionItem', () => {
 
     it('should use correct icon', () => {
       const heading = wrapper.find('.bx--accordion__heading');
-      if (componentsX) {
-        expect(heading.find(ChevronRight16).length).toBe(1);
-      } else {
-        expect(heading.find(Icon).props().icon).toEqual(iconChevronRight);
-      }
+      expect(heading.find(ChevronRight16).length).toBe(1);
     });
 
     it('has the expected classes', () => {
@@ -103,7 +96,7 @@ describe('AccordionItem', () => {
     it('renders heading as expected', () => {
       const heading = wrapper.find('.bx--accordion__heading');
       expect(heading.length).toBe(1);
-      expect(heading.find(componentsX ? ChevronRight16 : Icon).length).toBe(1);
+      expect(heading.find(ChevronRight16).length).toBe(1);
       const title = heading.find('.bx--accordion__title');
       expect(title.text()).toBe('A heading');
       expect(title.find('h2').exists()).toEqual(true);

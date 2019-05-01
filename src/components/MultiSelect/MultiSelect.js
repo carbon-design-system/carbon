@@ -17,7 +17,6 @@ import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 const noop = () => undefined;
@@ -141,7 +140,7 @@ export default class MultiSelect extends React.Component {
     light: false,
     title: false,
     open: false,
-    selectionFeedback: componentsX ? 'top-after-reopen' : 'top',
+    selectionFeedback: 'top-after-reopen',
   };
 
   constructor(props) {

@@ -12,7 +12,6 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -240,9 +239,7 @@ export default class ComboBox extends React.Component {
       onInputChange, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
-    const className = cx(`${prefix}--combo-box`, containerClassName, {
-      [`${prefix}--form-item`]: !componentsX,
-    });
+    const className = cx(`${prefix}--combo-box`, containerClassName);
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
@@ -290,7 +287,7 @@ export default class ComboBox extends React.Component {
                 disabled,
                 onClick: this.onToggleClick(isOpen),
               })}>
-              {componentsX && invalid && (
+              {invalid && (
                 <WarningFilled16
                   className={`${prefix}--list-box__invalid-icon`}
                 />
@@ -344,14 +341,12 @@ export default class ComboBox extends React.Component {
       </Downshift>
     );
 
-    return componentsX ? (
+    return (
       <div className={wrapperClasses}>
         {title}
         {helper}
         {input}
       </div>
-    ) : (
-      input
     );
   }
 }

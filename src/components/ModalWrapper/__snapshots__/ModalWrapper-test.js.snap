@@ -200,6 +200,31 @@ exports[`ModalWrapper should render 1`] = `
                 <button
                   className="bx--btn bx--btn--primary"
                   disabled={false}
+                  inputref={
+                    Object {
+                      "current": <button
+                        class="bx--modal-close"
+                        title="close the modal"
+                        type="button"
+                      >
+                        <svg
+                          aria-label="close the modal"
+                          class="bx--modal-close__icon"
+                          focusable="false"
+                          height="20"
+                          preserveAspectRatio="xMidYMid meet"
+                          role="img"
+                          viewBox="0 0 32 32"
+                          width="20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+                          />
+                        </svg>
+                      </button>,
+                    }
+                  }
                   onClick={[Function]}
                   tabIndex={0}
                   type="button"

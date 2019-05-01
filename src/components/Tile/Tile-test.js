@@ -7,7 +7,6 @@
 
 import React from 'react';
 import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
-import { iconChevronDown } from 'carbon-icons';
 import {
   Tile,
   ClickableTile,
@@ -17,7 +16,6 @@ import {
   TileBelowTheFoldContent,
 } from '../Tile';
 import { shallow, mount } from 'enzyme';
-import { componentsX } from '../../internal/FeatureFlags';
 
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
@@ -217,18 +215,16 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper
-        .find(!componentsX ? { icon: iconChevronDown } : ChevronDown16)
-        .getElements()[0].props[!componentsX ? 'description' : 'aria-label'];
+      const collapsedDescription = wrapper.find(ChevronDown16).getElements()[0]
+        .props['aria-label'];
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper
-        .find(!componentsX ? { icon: iconChevronDown } : ChevronDown16)
-        .getElements()[0].props[!componentsX ? 'description' : 'aria-label'];
+      const expandedDescription = wrapper.find(ChevronDown16).getElements()[0]
+        .props['aria-label'];
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
 
@@ -241,18 +237,16 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper
-        .find(!componentsX ? { icon: iconChevronDown } : ChevronDown16)
-        .getElements()[0].props[!componentsX ? 'description' : 'aria-label'];
+      const collapsedDescription = wrapper.find(ChevronDown16).getElements()[0]
+        .props['aria-label'];
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper
-        .find(!componentsX ? { icon: iconChevronDown } : ChevronDown16)
-        .getElements()[0].props[!componentsX ? 'description' : 'aria-label'];
+      const expandedDescription = wrapper.find(ChevronDown16).getElements()[0]
+        .props['aria-label'];
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });
 

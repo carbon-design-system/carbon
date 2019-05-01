@@ -7,12 +7,9 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { iconList, iconGrid } from 'carbon-icons';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
 import ListBulleted16 from '@carbon/icons-react/lib/list--bulleted/16';
 import Grid16 from '@carbon/icons-react/lib/grid/16';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -82,31 +79,18 @@ class SearchLayoutButton extends Component {
   render() {
     const { labelText, iconDescriptionList, iconDescriptionGrid } = this.props;
     const SearchLayoutButtonIcon = () => {
-      if (componentsX) {
-        if (this.state.format === 'list') {
-          return (
-            <ListBulleted16
-              className={`${prefix}--search-view`}
-              aria-label={iconDescriptionList}
-            />
-          );
-        }
+      if (this.state.format === 'list') {
         return (
-          <Grid16
+          <ListBulleted16
             className={`${prefix}--search-view`}
-            aria-label={iconDescriptionGrid}
+            aria-label={iconDescriptionList}
           />
         );
       }
       return (
-        <Icon
-          icon={this.state.format === 'list' ? iconList : iconGrid}
-          description={
-            this.state.format === 'list'
-              ? iconDescriptionList
-              : iconDescriptionGrid
-          }
+        <Grid16
           className={`${prefix}--search-view`}
+          aria-label={iconDescriptionGrid}
         />
       );
     };

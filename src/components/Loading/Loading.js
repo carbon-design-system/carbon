@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -75,7 +74,7 @@ export default class Loading extends React.Component {
         className={loadingClasses}>
         <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
           <title>Loading</title>
-          {componentsX && small ? (
+          {small ? (
             <circle
               className={`${prefix}--loading__background`}
               cx="0"
@@ -84,7 +83,7 @@ export default class Loading extends React.Component {
             />
           ) : null}
           <circle
-            className={componentsX ? `${prefix}--loading__stroke` : null}
+            className={`${prefix}--loading__stroke`}
             cx="0"
             cy="0"
             r="37.5"

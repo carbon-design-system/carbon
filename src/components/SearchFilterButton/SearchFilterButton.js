@@ -7,11 +7,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { iconFilter } from 'carbon-icons';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
 import Filter16 from '@carbon/icons-react/lib/filter/16';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -25,18 +22,10 @@ const SearchFilterButton = ({ labelText, iconDescription, ...other }) => (
     aria-label={labelText}
     title={labelText}
     {...other}>
-    {componentsX ? (
-      <Filter16
-        className={`${prefix}--search-filter`}
-        aria-label={iconDescription}
-      />
-    ) : (
-      <Icon
-        icon={iconFilter}
-        description={iconDescription}
-        className={`${prefix}--search-filter`}
-      />
-    )}
+    <Filter16
+      className={`${prefix}--search-filter`}
+      aria-label={iconDescription}
+    />
   </button>
 );
 

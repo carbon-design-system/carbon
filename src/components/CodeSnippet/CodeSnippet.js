@@ -12,8 +12,6 @@ import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
 import { settings } from 'carbon-components';
 import Copy from '../Copy';
 import CopyButton from '../CopyButton';
-import Icon from '../Icon';
-import { componentsX } from '../../internal/FeatureFlags';
 import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
@@ -153,22 +151,12 @@ export default class CodeSnippet extends Component {
         <span className={`${prefix}--snippet-btn--text`}>
           {expandCodeBtnText}
         </span>
-        {componentsX ? (
-          <ChevronDown16
-            aria-label={expandCodeBtnText}
-            className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
-            name="chevron--down"
-            role="img"
-          />
-        ) : (
-          <Icon
-            aria-hidden="true"
-            alt={expandCodeBtnText}
-            name="chevron--down"
-            description={expandCodeBtnText}
-            className={`${prefix}--icon-chevron--down`}
-          />
-        )}
+        <ChevronDown16
+          aria-label={expandCodeBtnText}
+          className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
+          name="chevron--down"
+          role="img"
+        />
       </button>
     );
 

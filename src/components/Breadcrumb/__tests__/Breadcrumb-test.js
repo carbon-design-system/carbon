@@ -69,54 +69,27 @@ describe('Breadcrumb', () => {
     );
   });
 
-  describe('experimental', () => {
-    let Breadcrumb;
-    let BreadcrumbItem;
+  it('should support rendering the current page', () => {
+    const manual = mount(
+      <Breadcrumb>
+        <BreadcrumbItem href="#a">A</BreadcrumbItem>
+        <BreadcrumbItem href="#b">B</BreadcrumbItem>
+        <BreadcrumbItem href="#c" isCurrentPage>
+          C
+        </BreadcrumbItem>
+      </Breadcrumb>
+    );
+    expect(manual).toMatchSnapshot();
 
-    beforeEach(() => {
-      jest.resetModules();
-      const FeatureFlags = require('../../../internal/FeatureFlags');
-      FeatureFlags.componentsX = true;
-      const BreadcrumbEntrypoint = require('../');
-      Breadcrumb = BreadcrumbEntrypoint.Breadcrumb;
-      BreadcrumbItem = BreadcrumbEntrypoint.BreadcrumbItem;
-    });
-
-    it('should render', () => {
-      const wrapper = mount(
-        <Breadcrumb className="parent-class">
-          <BreadcrumbItem
-            className="some-class"
-            href="www.carbondesignsystem.com">
-            Breadcrumb 1
-          </BreadcrumbItem>
-        </Breadcrumb>
-      );
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('should support rendering the current page', () => {
-      const manual = mount(
-        <Breadcrumb>
-          <BreadcrumbItem href="#a">A</BreadcrumbItem>
-          <BreadcrumbItem href="#b">B</BreadcrumbItem>
-          <BreadcrumbItem href="#c" isCurrentPage>
-            C
-          </BreadcrumbItem>
-        </Breadcrumb>
-      );
-      expect(manual).toMatchSnapshot();
-
-      const aria = mount(
-        <Breadcrumb>
-          <BreadcrumbItem href="#a">A</BreadcrumbItem>
-          <BreadcrumbItem href="#b">B</BreadcrumbItem>
-          <BreadcrumbItem href="#c" aria-current="page">
-            C
-          </BreadcrumbItem>
-        </Breadcrumb>
-      );
-      expect(aria).toMatchSnapshot();
-    });
+    const aria = mount(
+      <Breadcrumb>
+        <BreadcrumbItem href="#a">A</BreadcrumbItem>
+        <BreadcrumbItem href="#b">B</BreadcrumbItem>
+        <BreadcrumbItem href="#c" aria-current="page">
+          C
+        </BreadcrumbItem>
+      </Breadcrumb>
+    );
+    expect(aria).toMatchSnapshot();
   });
 });

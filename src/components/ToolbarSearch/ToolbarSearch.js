@@ -8,12 +8,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { iconSearch } from 'carbon-icons';
 import Search16 from '@carbon/icons-react/lib/search/16';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
 import ClickListener from '../../internal/ClickListener';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -40,11 +37,6 @@ export default class ToolbarSearch extends Component {
     small: PropTypes.bool,
 
     /**
-     * The description of the search icon.
-     */
-    iconDescription: PropTypes.string,
-
-    /**
      * The placeholder text of the `<input>`.
      */
     placeHolderText: PropTypes.string,
@@ -64,7 +56,6 @@ export default class ToolbarSearch extends Component {
     type: 'search',
     id: 'search__input',
     labelText: '',
-    iconDescription: 'search',
     placeHolderText: '',
     role: 'search',
   };
@@ -91,7 +82,6 @@ export default class ToolbarSearch extends Component {
       className,
       type,
       id,
-      iconDescription,
       placeHolderText,
       labelText,
       role,
@@ -124,18 +114,10 @@ export default class ToolbarSearch extends Component {
             className={`${prefix}--toolbar-search__btn`}
             title={labelText}
             onClick={this.expandSearch}>
-            {componentsX ? (
-              <Search16
-                className={`${prefix}--search-magnifier`}
-                aria-label={labelText}
-              />
-            ) : (
-              <Icon
-                icon={iconSearch}
-                description={iconDescription}
-                className={`${prefix}--search-magnifier`}
-              />
-            )}
+            <Search16
+              className={`${prefix}--search-magnifier`}
+              aria-label={labelText}
+            />
           </button>
         </div>
       </ClickListener>

@@ -6,6 +6,7 @@
 | -------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `icon`, icon name or icon data from `carbon-icons` | `renderIcon`, which takes a React component, e.g. one from `@carbon/icons-react` |
 | `danger--primary` value in `kind`                  | Removed                                                                          |
+| `inputRef`                                         | `ref`                                                                            |
 
 ## `v10` example
 

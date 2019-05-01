@@ -10,7 +10,6 @@ import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -27,7 +26,7 @@ const BreadcrumbItem = ({
     // We set the current class only if `isCurrentPage` is passed in and we do
     // not have an `aria-current="page"` set for the breadcrumb item
     [`${prefix}--breadcrumb-item--current`]:
-      componentsX && isCurrentPage && ariaCurrent !== 'page',
+      isCurrentPage && ariaCurrent !== 'page',
     [customClassName]: !!customClassName,
   });
 
@@ -56,6 +55,7 @@ BreadcrumbItem.propTypes = {
    * Pass in content that will be inside of the BreadcrumbItem
    */
   children: PropTypes.node,
+
   /**
    * Specify an optional className to be applied to the container node
    */
@@ -65,14 +65,11 @@ BreadcrumbItem.propTypes = {
    * Optional string representing the link location for the BreadcrumbItem
    */
   href: PropTypes.string,
-};
 
-if (componentsX) {
-  BreadcrumbItem.propTypes.children = PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.string,
-  ]).isRequired;
-  BreadcrumbItem.propTypes.isCurrentPage = PropTypes.bool;
-}
+  /**
+   * Provide if this breadcrumb item represents the current page
+   */
+  isCurrentPage: PropTypes.bool,
+};
 
 export default BreadcrumbItem;

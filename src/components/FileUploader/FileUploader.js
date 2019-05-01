@@ -10,13 +10,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
 import uid from '../../tools/uniqueId';
 import { ButtonTypes } from '../../prop-types/types';
-import { iconCloseSolid, iconCheckmarkSolid } from 'carbon-icons';
 import CloseFilled16 from '@carbon/icons-react/lib/close--filled/16';
 import CheckmarkFilled16 from '@carbon/icons-react/lib/checkmark--filled/16';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -149,12 +146,14 @@ export class FileUploaderButton extends Component {
       disabled,
       ...other
     } = this.props;
-    const classes = classNames({
-      [`${prefix}--btn`]: true,
-      [`${prefix}--btn--${buttonKind}`]: true,
-      [`${prefix}--btn--sm`]: componentsX,
-      [className]: className,
-    });
+    const classes = classNames(
+      `${prefix}--btn`,
+      `${prefix}--btn--sm`,
+      className,
+      {
+        [`${prefix}--btn--${buttonKind}`]: buttonKind,
+      }
+    );
 
     this.uid = this.props.id || uid();
 
@@ -235,7 +234,7 @@ export class Filename extends Component {
         </div>
       );
     } else if (status === 'edit') {
-      return componentsX ? (
+      return (
         <CloseFilled16
           className={`${prefix}--file-close`}
           aria-label={iconDescription}
@@ -243,17 +242,9 @@ export class Filename extends Component {
           {...other}>
           {iconDescription && <title>{iconDescription}</title>}
         </CloseFilled16>
-      ) : (
-        <Icon
-          description={iconDescription}
-          className={`${prefix}--file-close`}
-          icon={iconCloseSolid}
-          style={style}
-          {...other}
-        />
       );
     } else if (status === 'complete') {
-      return componentsX ? (
+      return (
         <CheckmarkFilled16
           className={`${prefix}--file-complete`}
           aria-label={iconDescription}
@@ -261,14 +252,6 @@ export class Filename extends Component {
           {...other}>
           {iconDescription && <title>{iconDescription}</title>}
         </CheckmarkFilled16>
-      ) : (
-        <Icon
-          description={iconDescription}
-          className={`${prefix}--file-complete`}
-          icon={iconCheckmarkSolid}
-          style={style}
-          {...other}
-        />
       );
     } else {
       return null;
@@ -408,12 +391,7 @@ export default class FileUploader extends Component {
 
     return (
       <div className={classes} {...other}>
-        <strong
-          className={
-            componentsX ? `${prefix}--file--label` : `${prefix}--label`
-          }>
-          {labelTitle}
-        </strong>
+        <strong className={`${prefix}--file--label`}>{labelTitle}</strong>
         <p className={`${prefix}--label-description`}>{labelDescription}</p>
         <FileUploaderButton
           labelText={buttonLabel}

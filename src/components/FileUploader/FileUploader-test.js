@@ -10,7 +10,6 @@ import CloseFilled16 from '@carbon/icons-react/lib/close--filled/16';
 import FileUploader, { FileUploaderButton, Filename } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { componentsX } from '../../internal/FeatureFlags';
 
 describe('Filename', () => {
   const mountWrapper = mount(<Filename name={'trees.jpg'} />);
@@ -19,9 +18,7 @@ describe('Filename', () => {
     it('should have a click event', () => {
       const onClick = jest.fn();
       mountWrapper.setProps({ onClick, status: 'edit' });
-      mountWrapper
-        .find(!componentsX ? 'Icon' : CloseFilled16)
-        .simulate('click');
+      mountWrapper.find(CloseFilled16).simulate('click');
       expect(onClick).toBeCalled();
     });
   });

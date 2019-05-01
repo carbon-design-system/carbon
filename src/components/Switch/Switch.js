@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -17,14 +16,11 @@ const Switch = props => {
   const {
     className,
     index,
-    kind,
     name,
     onClick,
     onKeyDown,
     selected,
     text,
-    icon,
-    href,
     ...other
   } = props;
 
@@ -51,37 +47,11 @@ const Switch = props => {
     className: classes,
   };
 
-  if (componentsX) {
-    return (
-      <button {...other} {...commonProps}>
-        <span className={`${prefix}--content-switcher__label`}>{text}</span>
-      </button>
-    );
-  } else {
-    const btnIcon = icon
-      ? React.cloneElement(icon, {
-          className: classNames(
-            icon.props.className,
-            ` ${prefix}--content-switcher__icon`
-          ),
-        })
-      : null;
-    if (kind === 'button') {
-      return (
-        <button {...other} {...commonProps}>
-          {btnIcon}
-          <span>{text}</span>
-        </button>
-      );
-    }
-
-    return (
-      <a href={href} {...other} {...commonProps}>
-        {btnIcon}
-        <span>{text}</span>
-      </a>
-    );
-  }
+  return (
+    <button {...other} {...commonProps}>
+      <span className={`${prefix}--content-switcher__label`}>{text}</span>
+    </button>
+  );
 };
 
 Switch.propTypes = {
@@ -95,12 +65,6 @@ Switch.propTypes = {
    * Reserved for usage in ContentSwitcher
    */
   index: PropTypes.number,
-
-  /**
-   * Specify whether the <Switch> should be used as a <button> element or an <a> element.
-   * `anchor` support removed in v10. relevant to Carbon v9 only
-   */
-  kind: PropTypes.oneOf(['button', 'anchor']).isRequired,
 
   /**
    * Provide the name of your Switch that is used for event handlers
@@ -128,25 +92,11 @@ Switch.propTypes = {
    * Provide the contents of your Switch
    */
   text: PropTypes.string.isRequired,
-
-  /**
-   * Specify an icon to include in your Switch.
-   * Icon support removed in v10. relevant to v9 only.
-   */
-  icon: PropTypes.element,
-
-  /**
-   * Optional string representing the link location for the Switch,
-   * if Switch is used as an <a> element
-   */
-  href: PropTypes.string,
 };
 
 Switch.defaultProps = {
   selected: false,
-  kind: componentsX ? undefined : 'anchor',
   text: 'Provide text',
-  href: '',
   onClick: () => {},
   onKeyDown: () => {},
 };

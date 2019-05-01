@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { iconFilter } from 'carbon-icons';
+import Filter16 from '@carbon/icons-react/lib/filter/16';
 import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
@@ -35,7 +35,7 @@ storiesOf('Toolbar', module).add(
     <Toolbar {...toolbarProps} className="some-class">
       <ToolbarItem type="search" placeHolderText="Search" />
       <ToolbarItem>
-        <OverflowMenu icon={iconFilter} floatingMenu>
+        <OverflowMenu renderIcon={Filter16}>
           <ToolbarTitle title="FILTER BY" />
           <ToolbarOption>
             <Checkbox {...inputProps} id="opt-1" labelText="Filter option 1" />
@@ -49,7 +49,7 @@ storiesOf('Toolbar', module).add(
         </OverflowMenu>
       </ToolbarItem>
       <ToolbarItem>
-        <OverflowMenu floatingMenu>
+        <OverflowMenu>
           <OverflowMenuItem itemText="Refresh table" />
           <ToolbarDivider />
           <ToolbarTitle title="ROW HEIGHT" />

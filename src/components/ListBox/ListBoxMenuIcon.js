@@ -8,11 +8,8 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { iconCaretDown } from 'carbon-icons';
 import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -38,18 +35,9 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
     <div className={className} role="button">
-      {componentsX ? (
-        <ChevronDown16 name="chevron--down" aria-label={description}>
-          <title>{description}</title>
-        </ChevronDown16>
-      ) : (
-        <Icon
-          icon={iconCaretDown}
-          description={description}
-          alt={description}
-          focusable="false"
-        />
-      )}
+      <ChevronDown16 name="chevron--down" aria-label={description}>
+        <title>{description}</title>
+      </ChevronDown16>
     </div>
   );
 };

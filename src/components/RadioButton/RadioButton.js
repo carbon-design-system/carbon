@@ -10,7 +10,6 @@ import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
-import { breakingChangesX } from '../../internal/FeatureFlags';
 import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
@@ -118,7 +117,6 @@ class RadioButton extends React.Component {
       {
         [`${prefix}--radio-button-wrapper--label-${labelPosition}`]:
           labelPosition !== 'right',
-        radioButtonWrapper: !breakingChangesX,
       }
     );
     return (
@@ -143,12 +141,8 @@ class RadioButton extends React.Component {
   }
 }
 
-export default (!breakingChangesX
-  ? RadioButton
-  : (() => {
-      const forwardRef = (props, ref) => (
-        <RadioButton {...props} innerRef={ref} />
-      );
-      forwardRef.displayName = 'RadioButton';
-      return React.forwardRef(forwardRef);
-    })());
+export default (() => {
+  const forwardRef = (props, ref) => <RadioButton {...props} innerRef={ref} />;
+  forwardRef.displayName = 'RadioButton';
+  return React.forwardRef(forwardRef);
+})();

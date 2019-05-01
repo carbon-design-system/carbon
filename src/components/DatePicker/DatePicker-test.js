@@ -10,7 +10,6 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
-import { componentsX } from '../../internal/FeatureFlags';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -178,7 +177,6 @@ describe('DatePicker', () => {
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
-    const icon = wrapper.find('svg');
 
     it('has the range date picker class', () => {
       expect(datepicker.children().hasClass('bx--date-picker--range')).toBe(
@@ -202,12 +200,6 @@ describe('DatePicker', () => {
       expect(wrapper.props().value).toEqual(undefined);
       wrapper.setProps({ value: '11/08/2017' });
       expect(wrapper.props().value).toEqual('11/08/2017');
-    });
-
-    it('should render an icon', () => {
-      if (!componentsX) {
-        expect(icon.length).toEqual(1);
-      }
     });
   });
 

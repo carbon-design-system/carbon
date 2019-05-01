@@ -10,7 +10,6 @@ import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
 import { settings } from 'carbon-components';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import { keys } from '../../tools/key';
 
 const { prefix } = settings;
@@ -76,11 +75,6 @@ export default class OverflowMenuItem extends React.Component {
     primaryFocus: PropTypes.bool,
 
     /**
-     * `true` if this menu item belongs to a floating OverflowMenu
-     */
-    floatingMenu: PropTypes.bool,
-
-    /**
      * `true` if this menu item has long text and requires a browser tooltip
      */
     requireTitle: PropTypes.bool,
@@ -127,24 +121,18 @@ export default class OverflowMenuItem extends React.Component {
       handleOverflowMenuItemFocus, // eslint-disable-line
       onKeyDown,
       primaryFocus,
-      floatingMenu: origFloatingMenu,
       wrapperClassName,
       requireTitle,
       index,
       ...other
     } = this.props;
 
-    const floatingMenu = !!breakingChangesX || origFloatingMenu;
     if (__DEV__) {
       warning(
         closeMenu,
         '`<OverflowMenuItem>` detected missing `closeMenu` prop. ' +
           '`closeMenu` is required to let `<OverflowMenu>` close the menu upon actions on `<OverflowMenuItem>`. ' +
           'Please make sure `<OverflowMenuItem>` is a direct child of `<OverflowMenu>.'
-      );
-      warning(
-        floatingMenu,
-        '[OverflowMenuItem] non-floating option has been deprecated.'
       );
     }
 
@@ -161,13 +149,12 @@ export default class OverflowMenuItem extends React.Component {
       },
       wrapperClassName
     );
-    const primaryFocusProp =
-      (primaryFocus && floatingMenu) || primaryFocus
-        ? { 'data-floating-menu-primary-focus': true }
-        : {};
+    const primaryFocusProp = primaryFocus
+      ? { 'data-floating-menu-primary-focus': true }
+      : {};
     const TagToUse = href ? 'a' : 'button';
     const OverflowMenuItemContent = (() => {
-      if (!componentsX || (componentsX && typeof itemText !== 'string')) {
+      if (typeof itemText !== 'string') {
         return itemText;
       }
       return (

@@ -33,7 +33,6 @@ export default class ModalWrapper extends React.Component {
       PropTypes.func,
       PropTypes.object,
     ]),
-    triggerButtonIcon: PropTypes.string,
     triggerButtonIconDescription: PropTypes.string,
     triggerButtonKind: ButtonTypes.buttonKind,
     shouldCloseAfterSubmit: PropTypes.bool,
@@ -81,7 +80,6 @@ export default class ModalWrapper extends React.Component {
       buttonTriggerText,
       buttonTriggerClassName,
       renderTriggerButtonIcon,
-      triggerButtonIcon,
       triggerButtonIconDescription,
       triggerButtonKind,
       disabled,
@@ -113,7 +111,6 @@ export default class ModalWrapper extends React.Component {
           disabled={disabled}
           kind={triggerButtonKind}
           renderIcon={renderTriggerButtonIcon}
-          icon={triggerButtonIcon}
           iconDescription={triggerButtonIconDescription}
           onClick={this.handleOpen}
           ref={this.triggerButton}>

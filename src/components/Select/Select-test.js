@@ -7,13 +7,10 @@
 
 import React from 'react';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
-import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectSkeleton from '../Select/Select.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { iconCaretDown } from 'carbon-icons';
-import { componentsX } from '../../internal/FeatureFlags';
 
 describe('Select', () => {
   describe('Renders as expected', () => {
@@ -40,16 +37,7 @@ describe('Select', () => {
       });
 
       it('renders the down arrow icon', () => {
-        expect(
-          selectContainer.find(!componentsX ? Icon : ChevronDownGlyph).length
-        ).toEqual(1);
-      });
-
-      it('should use correct icon', () => {
-        if (!componentsX) {
-          const icon = wrapper.find(Icon);
-          expect(icon.props().icon).toEqual(iconCaretDown);
-        }
+        expect(selectContainer.find(ChevronDownGlyph).length).toEqual(1);
       });
 
       it('has the expected classes', () => {
@@ -72,9 +60,9 @@ describe('Select', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const description = !componentsX
-          ? wrapper.find(Icon).props().description
-          : wrapper.find(ChevronDownGlyph).props()['aria-label'];
+        const description = wrapper.find(ChevronDownGlyph).props()[
+          'aria-label'
+        ];
         const matches = wrapper.props().iconDescription === description;
         expect(matches).toEqual(true);
       });

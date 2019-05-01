@@ -20,19 +20,11 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
-import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  ...(breakingChangesX
-    ? {}
-    : {
-        'Add with filled circle (iconAddSolid from `carbon-icons`)':
-          'iconAddSolid',
-        'Search (iconSearch from `carbon-icons`)': 'iconSearch',
-      }),
   'Add with filled circle (AddFilled16 from `@carbon/icons`)': 'AddFilled16',
   'Search (Search16 from `@carbon/icons`)': 'Search16',
 };

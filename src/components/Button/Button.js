@@ -7,16 +7,11 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import Icon from '../Icon';
 import classNames from 'classnames';
-import warning from 'warning';
 import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
-import { breakingChangesX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
-
-let didWarnAboutDeprecation = false;
 
 const Button = React.forwardRef(function Button(
   {
@@ -29,9 +24,7 @@ const Button = React.forwardRef(function Button(
     href,
     tabIndex,
     type,
-    inputref,
-    renderIcon,
-    icon,
+    renderIcon: ButtonImageElement,
     iconDescription,
     ...other
   },
@@ -52,28 +45,12 @@ const Button = React.forwardRef(function Button(
   const commonProps = {
     tabIndex,
     className: buttonClasses,
-    ref: breakingChangesX ? ref : ref || inputref,
+    ref,
   };
 
-  if (__DEV__ && breakingChangesX && icon) {
-    warning(
-      didWarnAboutDeprecation,
-      'The `icon` property in the `Button` component is being removed in the next release of ' +
-        '`carbon-components-react`. Please use `renderIcon` instead.'
-    );
-    didWarnAboutDeprecation = true;
-  }
-
-  const hasRenderIcon = Object(renderIcon) === renderIcon;
-  const ButtonImageElement = hasRenderIcon
-    ? renderIcon
-    : !breakingChangesX && icon && Icon;
   const buttonImage = !ButtonImageElement ? null : (
     <ButtonImageElement
-      icon={!hasRenderIcon && Object(icon) === icon ? icon : undefined}
-      name={!hasRenderIcon && Object(icon) !== icon ? icon : undefined}
-      aria-label={!hasRenderIcon ? undefined : iconDescription}
-      description={hasRenderIcon ? undefined : iconDescription}
+      aria-label={iconDescription}
       className={`${prefix}--btn__icon`}
       aria-hidden={true}
     />

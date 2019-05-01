@@ -8,21 +8,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { iconClose } from 'carbon-icons';
-import Icon from '../Icon';
 import Button from '../Button';
 import { settings } from 'carbon-components';
 import Close20 from '@carbon/icons-react/lib/close/20';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import FocusTrap from 'focus-trap-react';
 
 const { prefix } = settings;
-
-const matchesFuncName =
-  typeof Element !== 'undefined' &&
-  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
-    name => typeof Element.prototype[name] === 'function'
-  )[0];
 
 export default class Modal extends Component {
   static propTypes = {
@@ -161,21 +152,6 @@ export default class Modal extends Component {
     } = this.props;
     if (target && typeof target.closest === 'function') {
       return selectorsFloatingMenus.some(selector => target.closest(selector));
-    } else if (!breakingChangesX) {
-      // Alternative if closest does not exist.
-      while (target) {
-        if (typeof target[matchesFuncName] === 'function') {
-          if (
-            selectorsFloatingMenus.some(selector =>
-              target[matchesFuncName](selector)
-            )
-          ) {
-            return true;
-          }
-        }
-        target = target.parentNode;
-      }
-      return false;
     }
   };
 
@@ -307,18 +283,10 @@ export default class Modal extends Component {
         onClick={onRequestClose}
         title={iconDescription}
         ref={this.button}>
-        {componentsX ? (
-          <Close20
-            aria-label={iconDescription}
-            className={`${prefix}--modal-close__icon`}
-          />
-        ) : (
-          <Icon
-            icon={iconClose}
-            className={`${prefix}--modal-close__icon`}
-            description={iconDescription}
-          />
-        )}
+        <Close20
+          aria-label={iconDescription}
+          className={`${prefix}--modal-close__icon`}
+        />
       </button>
     );
 
@@ -340,9 +308,7 @@ export default class Modal extends Component {
         <div className={`${prefix}--modal-content`}>{this.props.children}</div>
         {!passiveModal && (
           <div className={`${prefix}--modal-footer`}>
-            <Button
-              kind={danger && !componentsX ? 'tertiary' : 'secondary'}
-              onClick={onSecondaryButtonClick}>
+            <Button kind="secondary" onClick={onSecondaryButtonClick}>
               {secondaryButtonText}
             </Button>
             <Button

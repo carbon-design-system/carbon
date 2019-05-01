@@ -16,7 +16,6 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
-import DropdownItem from '../DropdownItem';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
 
 describe('Dropdown', () => {
@@ -114,15 +113,6 @@ describe('Dropdown', () => {
       const renderedHelper = wrapper.find('.bx--form__helper-text');
       expect(renderedHelper.text()).toEqual('Helper text');
     });
-  });
-
-  it('should render DropdownItem components', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    wrapper.setProps({
-      itemToElement: DropdownItem,
-    });
-    openMenu(wrapper);
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('should specify light version as expected', () => {

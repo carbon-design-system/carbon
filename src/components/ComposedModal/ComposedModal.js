@@ -7,20 +7,12 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { iconClose } from 'carbon-icons';
 import Button from '../Button';
-import Icon from '../Icon';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import Close20 from '@carbon/icons-react/lib/close/20';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
-const matchesFuncName =
-  typeof Element !== 'undefined' &&
-  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
-    name => typeof Element.prototype[name] === 'function'
-  )[0];
 
 export default class ComposedModal extends Component {
   state = {};
@@ -89,20 +81,6 @@ export default class ComposedModal extends Component {
     } = this.props;
     if (target && typeof target.closest === 'function') {
       return selectorsFloatingMenus.some(selector => target.closest(selector));
-    } else if (!breakingChangesX) {
-      // Alternative if closest does not exist.
-      while (target) {
-        if (typeof target[matchesFuncName] === 'function') {
-          if (
-            selectorsFloatingMenus.some(selector =>
-              target[matchesFuncName](selector)
-            )
-          ) {
-            return true;
-          }
-        }
-        target = target.parentNode;
-      }
     }
   };
 
@@ -373,15 +351,7 @@ export class ModalHeader extends Component {
           className={closeClass}
           title={iconDescription}
           type="button">
-          {componentsX ? (
-            <Close20 aria-label={iconDescription} className={closeIconClass} />
-          ) : (
-            <Icon
-              icon={iconClose}
-              className={closeIconClass}
-              description={iconDescription}
-            />
-          )}
+          <Close20 aria-label={iconDescription} className={closeIconClass} />
         </button>
       </div>
     );

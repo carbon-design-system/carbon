@@ -7,13 +7,10 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { iconCaretUp, iconCaretDown } from 'carbon-icons';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
-import Icon from '../Icon';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
-import { componentsX } from '../../internal/FeatureFlags';
 
 describe('NumberInput', () => {
   describe('should render as expected', () => {
@@ -45,7 +42,7 @@ describe('NumberInput', () => {
         />
       );
 
-      const iconTypes = !componentsX ? [Icon] : [CaretDownGlyph, CaretUpGlyph];
+      const iconTypes = [CaretDownGlyph, CaretUpGlyph];
       label = wrapper.find('label');
       numberInput = wrapper.find('input');
       container = wrapper.find('.bx--number');
@@ -264,13 +261,8 @@ describe('NumberInput', () => {
       });
 
       it('should use correct icons', () => {
-        if (!componentsX) {
-          expect(icons.at(0).prop('icon')).toEqual(iconCaretUp);
-          expect(icons.at(1).prop('icon')).toEqual(iconCaretDown);
-        } else {
-          expect(icons.at(0).type()).toBe(CaretUpGlyph);
-          expect(icons.at(1).type()).toBe(CaretDownGlyph);
-        }
+        expect(icons.at(0).type()).toBe(CaretUpGlyph);
+        expect(icons.at(1).type()).toBe(CaretDownGlyph);
       });
 
       it('adds new iconDescription when passed via props', () => {
@@ -279,12 +271,8 @@ describe('NumberInput', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const iconUpText = !componentsX
-          ? wrapper.find('.up-icon title').text()
-          : wrapper.find('button.up-icon').prop('title');
-        const iconDownText = !componentsX
-          ? wrapper.find('.down-icon title').text()
-          : wrapper.find('button.down-icon').prop('title');
+        const iconUpText = wrapper.find('button.up-icon').prop('title');
+        const iconDownText = wrapper.find('button.down-icon').prop('title');
         const iconDescription = wrapper
           .find('NumberInput')
           .prop('iconDescription');
@@ -390,12 +378,8 @@ describe('NumberInput', () => {
         );
 
         input = wrapper.find('input');
-        upArrow = wrapper
-          .find(!componentsX ? 'Icon.up-icon' : CaretUpGlyph)
-          .closest('button');
-        downArrow = wrapper
-          .find(!componentsX ? 'Icon.down-icon' : CaretDownGlyph)
-          .closest('button');
+        upArrow = wrapper.find(CaretUpGlyph).closest('button');
+        downArrow = wrapper.find(CaretDownGlyph).closest('button');
       });
 
       it('should invoke onClick when numberInput is clicked', () => {

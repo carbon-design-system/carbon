@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -25,18 +24,10 @@ const Breadcrumb = ({
     [customClassName]: !!customClassName,
   });
 
-  if (componentsX) {
-    return (
-      <nav className={className} {...rest}>
-        {children}
-      </nav>
-    );
-  }
-
   return (
-    <div className={className} {...rest}>
+    <nav className={className} {...rest}>
       {children}
-    </div>
+    </nav>
   );
 };
 

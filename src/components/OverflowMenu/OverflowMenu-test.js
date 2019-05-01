@@ -6,12 +6,9 @@
  */
 
 import React from 'react';
-import { iconOverflowMenu } from 'carbon-icons';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
-import Icon from '../Icon';
-import { shallow, mount } from 'enzyme';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
+import { mount } from 'enzyme';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
@@ -22,17 +19,11 @@ describe('OverflowMenu', () => {
       </OverflowMenu>
     );
     const menu = rootWrapper.find('div[role="menu"]');
-    const icon = menu.find(!componentsX ? Icon : OverflowMenuVertical16);
+    const icon = menu.find(OverflowMenuVertical16);
 
     it('should render an Icon', () => {
       expect(icon.length).toBe(1);
       expect(icon.hasClass('bx--overflow-menu__icon')).toEqual(true);
-    });
-
-    it('should use correct overflow-menu icon', () => {
-      if (!componentsX) {
-        expect(icon.props().icon).toEqual(iconOverflowMenu);
-      }
     });
 
     it('has the expected classes', () => {
@@ -74,24 +65,15 @@ describe('OverflowMenu', () => {
     });
 
     it('should apply a tabindex to the menu', () => {
-      if (!breakingChangesX) {
-        const defaultMenu = shallow(
-          <OverflowMenu>
-            <div>Child</div>
-          </OverflowMenu>
-        ).childAt(0);
-        expect(defaultMenu.props().tabIndex).toBe(0);
-      } else {
-        const defaultMenu = mount(
-          <OverflowMenu>
-            <div>Child</div>
-          </OverflowMenu>
-        ).childAt(0);
-        // Enzyme doesn't seem to allow props() in a forwardRef-wrapped class component
-        expect(defaultMenu.find('OverflowMenu').instance().props.tabIndex).toBe(
-          0
-        );
-      }
+      const defaultMenu = mount(
+        <OverflowMenu>
+          <div>Child</div>
+        </OverflowMenu>
+      ).childAt(0);
+      // Enzyme doesn't seem to allow props() in a forwardRef-wrapped class component
+      expect(defaultMenu.find('OverflowMenu').instance().props.tabIndex).toBe(
+        0
+      );
     });
   });
 
@@ -159,7 +141,7 @@ describe('OverflowMenu', () => {
     it('should be in an open state after icon is clicked', () => {
       const rootWrapper = mount(<OverflowMenu />);
       const menu = rootWrapper.childAt(0);
-      const icon = menu.find(!componentsX ? Icon : OverflowMenuVertical16);
+      const icon = menu.find(OverflowMenuVertical16);
 
       icon.simulate('click');
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component

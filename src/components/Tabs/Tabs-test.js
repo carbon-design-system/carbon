@@ -7,13 +7,10 @@
 
 import React from 'react';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
-import { iconCaretDown } from 'carbon-icons';
-import Icon from '../Icon';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 import { shallow, mount } from 'enzyme';
-import { componentsX } from '../../internal/FeatureFlags';
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
@@ -66,11 +63,7 @@ describe('Tabs', () => {
       });
 
       it('renders <Icon>', () => {
-        if (!componentsX) {
-          expect(trigger.find(Icon).props().icon).toEqual(iconCaretDown);
-        } else {
-          expect(trigger.find(ChevronDownGlyph).length).toBe(1);
-        }
+        expect(trigger.find(ChevronDownGlyph).length).toBe(1);
       });
     });
 

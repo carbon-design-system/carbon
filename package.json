@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test:experimental -u --runInBand && yarn test-ssr",
+    "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test-ssr",
     "clean": "rimraf es lib umd storybook-static",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
@@ -23,7 +23,6 @@
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
     "test": "jest",
-    "test:experimental": "jest --setupFiles='<rootDir>/config/jest/setup.js' --setupFiles='<rootDir>/config/jest/experimental.js'",
     "test-ssr": "yarn build && node ssr-tests/*.js"
   },
   "keywords": [
@@ -110,8 +109,7 @@
       "jasmine": true
     },
     "globals": {
-      "__DEV__": true,
-      "describeBreakingChangesXFeatures": true
+      "__DEV__": true
     },
     "settings": {
       "jsdoc": {

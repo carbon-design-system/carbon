@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
@@ -91,28 +90,18 @@ const TextInput = React.forwardRef(function TextInput(
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
 
-  const textInputWrapperClasses = classNames(`${prefix}--form-item`, {
-    [`${prefix}--text-input-wrapper`]: componentsX,
-  });
-
   return (
-    <div className={textInputWrapperClasses}>
+    <div className={(`${prefix}--form-item`, `${prefix}--text-input-wrapper`)}>
       {label}
       {helper}
-      {componentsX ? (
-        <div
-          className={`${prefix}--text-input__field-wrapper`}
-          data-invalid={invalid || null}>
-          {invalid && (
-            <WarningFilled16
-              className={`${prefix}--text-input__invalid-icon`}
-            />
-          )}
-          {input}
-        </div>
-      ) : (
-        input
-      )}
+      <div
+        className={`${prefix}--text-input__field-wrapper`}
+        data-invalid={invalid || null}>
+        {invalid && (
+          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
+        )}
+        {input}
+      </div>
       {error}
     </div>
   );

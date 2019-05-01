@@ -6,15 +6,12 @@
  */
 
 import React from 'react';
-import { iconChevronLeft, iconChevronRight } from 'carbon-icons';
 import CaretRight24 from '@carbon/icons-react/lib/caret--right/24';
 import CaretLeft24 from '@carbon/icons-react/lib/caret--left/24';
-import Icon from '../Icon';
 import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { shallow, mount } from 'enzyme';
-import { componentsX } from '../../internal/FeatureFlags';
 
 jest.useFakeTimers();
 
@@ -24,28 +21,12 @@ describe('Pagination', () => {
       <Pagination className="extra-class" pageSizes={[5, 10]} totalItems={50} />
     );
 
-    beforeEach(() => {
-      pagination.setProps({ itemsPerPageFollowsText: undefined });
-    });
-
     describe('icons', () => {
-      const iconTypes = !componentsX ? [Icon] : [CaretLeft24, CaretRight24];
+      const iconTypes = [CaretLeft24, CaretRight24];
       const icons = pagination.findWhere(n => iconTypes.includes(n.type()));
 
       it('should have 2 icons', () => {
         expect(icons.length).toEqual(2);
-      });
-
-      it('should use correct "backward" icon', () => {
-        if (!componentsX) {
-          expect(icons.first().props().icon).toEqual(iconChevronLeft);
-        }
-      });
-
-      it('should use correct "forward" icon', () => {
-        if (!componentsX) {
-          expect(icons.last().props().icon).toEqual(iconChevronRight);
-        }
       });
     });
 
@@ -77,24 +58,9 @@ describe('Pagination', () => {
         expect(label.text()).toBe('Items per page:');
       });
 
-      it('should support translated label with colon', () => {
-        if (!componentsX) {
-          pagination.setProps({ itemsPerPageFollowsText: 'foo' });
-          const label = pagination
-            .find('.bx--pagination__left')
-            .find('.bx--pagination__text')
-            .first();
-          expect(label.text()).toBe('foo');
-        }
-      });
-
       it('should show the item range out of the total', () => {
         const label = left.find('.bx--pagination__text').at(1);
-        expect(label.text()).toBe(
-          !componentsX
-            ? '\u00a0|\u00a0\u00a01–5 of 50 items'
-            : '1–5 of 50 items'
-        );
+        expect(label.text()).toBe('1–5 of 50 items');
       });
 
       describe('pagination size container when total pages unknown', () => {
@@ -121,22 +87,9 @@ describe('Pagination', () => {
           expect(label.text()).toBe('Items per page:');
         });
 
-        it('should support translated label with colon', () => {
-          if (!componentsX) {
-            pagination.setProps({ itemsPerPageFollowsText: 'foo' });
-            const label = pagination
-              .find('.bx--pagination__left')
-              .find('.bx--pagination__text')
-              .first();
-            expect(label.text()).toBe('foo');
-          }
-        });
-
         it('should show the item range without the total', () => {
           const label = left.find('.bx--pagination__text').at(1);
-          expect(label.text()).toBe(
-            !componentsX ? '\u00a0|\u00a0\u00a01–5 items' : '1–5 items'
-          );
+          expect(label.text()).toBe('1–5 items');
         });
       });
 
@@ -163,14 +116,8 @@ describe('Pagination', () => {
 
           // Text updates after change
           const labels = pager.find('.bx--pagination__text');
-          expect(labels.at(1).text()).toBe(
-            !componentsX
-              ? '\u00a0|\u00a0\u00a01–10 of 50 items'
-              : '1–10 of 50 items'
-          );
-          expect(labels.at(2).text()).toBe(
-            !componentsX ? '1 of 5 pages' : 'of 5 pages'
-          );
+          expect(labels.at(1).text()).toBe('1–10 of 50 items');
+          expect(labels.at(2).text()).toBe('of 5 pages');
         });
 
         it('should reset the page when page size changes', () => {
@@ -248,20 +195,14 @@ describe('Pagination', () => {
 
       it('should show the current page out of the total number of pages', () => {
         const label = right.find('.bx--pagination__text').first();
-        expect(label.text()).toBe(
-          !componentsX ? '1 of 10 pages' : 'of 10 pages'
-        );
+        expect(label.text()).toBe('of 10 pages');
       });
 
       it('should render ranges and pages for no items', () => {
         const pager = mount(<Pagination pageSizes={[5, 10]} totalItems={0} />);
         const labels = pager.find('.bx--pagination__text');
-        expect(labels.at(1).text()).toBe(
-          !componentsX ? '\u00a0|\u00a0\u00a00–0 of 0 items' : '0–0 of 0 items'
-        );
-        expect(labels.at(2).text()).toBe(
-          !componentsX ? '1 of 1 pages' : 'of 1 pages'
-        );
+        expect(labels.at(1).text()).toBe('0–0 of 0 items');
+        expect(labels.at(2).text()).toBe('of 1 pages');
       });
 
       it('should have two buttons for navigation', () => {

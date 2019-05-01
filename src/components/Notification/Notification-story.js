@@ -9,11 +9,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import Notification, {
-  ToastNotification,
-  InlineNotification,
-} from '../Notification';
-import { breakingChangesX } from '../../internal/FeatureFlags';
+import { ToastNotification, InlineNotification } from '../Notification';
 
 const kinds = {
   'Error (error)': 'error',
@@ -34,7 +30,7 @@ const notificationProps = () => ({
   onCloseButtonClick: action('onCloseButtonClick'),
 });
 
-const stories = storiesOf('Notifications', module)
+storiesOf('Notifications', module)
   .addDecorator(withKnobs)
   .add('Toast', () => (
     <ToastNotification
@@ -44,23 +40,3 @@ const stories = storiesOf('Notifications', module)
     />
   ))
   .add('inline', () => <InlineNotification {...notificationProps()} />);
-
-if (!breakingChangesX) {
-  stories.add(
-    'Deprecated: <Notfication />',
-    () => (
-      <Notification
-        {...notificationProps()}
-        caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
-      />
-    ),
-    {
-      info: {
-        text: `
-            Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
-            Toast Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
-          `,
-      },
-    }
-  );
-}

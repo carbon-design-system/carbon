@@ -59,34 +59,6 @@ describe('Icon', () => {
     });
   });
 
-  describe('Supports legacy icon', () => {
-    const props = {
-      className: 'extra-class',
-      name: 'search--glyph',
-      width: '20',
-      height: '20',
-      description: 'close the thing',
-      iconTitle: 'title',
-      style: {
-        transition: '2s',
-      },
-    };
-
-    const wrapper = mount(<Icon {...props} />);
-
-    it('Renders `description` as expected', () => {
-      expect(wrapper.props().description).toEqual('close the thing');
-    });
-
-    it('Renders `title` as expected', () => {
-      expect(wrapper.props().iconTitle).toEqual('title');
-    });
-
-    it('should have expected viewBox on <svg>', () => {
-      expect(wrapper.find('svg').props().viewBox).not.toEqual('');
-    });
-  });
-
   describe('findIcon', () => {
     it('should return a defined object', () => {
       const test = findIcon('search');

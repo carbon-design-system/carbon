@@ -8,11 +8,8 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { iconClose } from 'carbon-icons';
 import Close16 from '@carbon/icons-react/lib/close/16';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -50,11 +47,7 @@ const ListBoxSelection = ({
       onKeyDown={handleOnKeyDown}
       title={description}>
       {selectionCount}
-      {componentsX ? (
-        <Close16 role="img" />
-      ) : (
-        <Icon icon={iconClose} description={description} focusable="false" />
-      )}
+      <Close16 role="img" />
     </div>
   );
 };

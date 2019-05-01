@@ -7,11 +7,9 @@
 
 import React from 'react';
 import Close20 from '@carbon/icons-react/lib/close/20';
-import Icon from '../Icon';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
-import { componentsX } from '../../internal/FeatureFlags';
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
 const getModal = wrapper => wrapper.childAt(0);
@@ -53,9 +51,7 @@ describe('Modal', () => {
     });
 
     it('should have iconDescription match Icon component description prop', () => {
-      const description = !componentsX
-        ? mounted.find(Icon).props().description
-        : mounted.find(Close20).props()['aria-label'];
+      const description = mounted.find(Close20).props()['aria-label'];
       const matches = mounted.props().iconDescription === description;
       expect(matches).toEqual(true);
     });
@@ -223,9 +219,7 @@ describe('Danger Modal', () => {
 
     it('has correct button combination', () => {
       const modalButtons = wrapper.find('.bx--modal-footer').props().children;
-      expect(modalButtons[0].props.kind).toEqual(
-        !componentsX ? 'tertiary' : 'secondary'
-      );
+      expect(modalButtons[0].props.kind).toEqual('secondary');
       expect(modalButtons[1].props.kind).toEqual('danger');
     });
   });

@@ -7,8 +7,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { iconCheckmarkSolid } from 'carbon-icons';
-import Icon from '../Icon';
+import CheckmarkFilled16 from '@carbon/icons-react/lib/checkmark--filled/16';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -18,7 +17,6 @@ import {
   StructuredListCell,
 } from '../StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
-import { componentsX } from '../../internal/FeatureFlags';
 
 storiesOf('StructuredList', module)
   .add(
@@ -67,17 +65,17 @@ storiesOf('StructuredList', module)
   .add(
     'Selection',
     () => {
-      const emptyStructuredListHeadCell = (
-        <StructuredListCell head>{''}</StructuredListCell>
-      );
-      const structuredListHeadColumns = [
-        <StructuredListCell head>ColumnA</StructuredListCell>,
-        <StructuredListCell head>ColumnB</StructuredListCell>,
-        <StructuredListCell head>ColumnC</StructuredListCell>,
-      ];
       const structuredListBodyRowGenerator = numRows => {
-        const checkbox = i => (
-          <>
+        return Array.apply(null, Array(numRows)).map((n, i) => (
+          <StructuredListRow label key={`row-${i}`} htmlFor={`row-${i}`}>
+            <StructuredListCell>Row {i}</StructuredListCell>
+            <StructuredListCell>Row {i}</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
             <StructuredListInput
               id={`row-${i}`}
               value={`row-${i}`}
@@ -86,29 +84,12 @@ storiesOf('StructuredList', module)
               defaultChecked={!i || null}
             />
             <StructuredListCell>
-              <Icon
+              <CheckmarkFilled16
                 className="bx--structured-list-svg"
-                icon={iconCheckmarkSolid}
-                description="select an option"
-              />
+                aria-label="select an option">
+                <title>select an option</title>
+              </CheckmarkFilled16>
             </StructuredListCell>
-          </>
-        );
-        const structuredListBodyColumns = i => [
-          <StructuredListCell>Row {i}</StructuredListCell>,
-          <StructuredListCell>Row {i}</StructuredListCell>,
-          <StructuredListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-            vulputate nisl a porttitor interdum.
-          </StructuredListCell>,
-        ];
-        return Array.apply(null, Array(numRows)).map((n, i) => (
-          <StructuredListRow label htmlFor={`row-${i}`}>
-            {componentsX
-              ? [...structuredListBodyColumns(i), checkbox(i)]
-              : [checkbox(i), ...structuredListBodyColumns(i)]}
           </StructuredListRow>
         ));
       };
@@ -116,9 +97,10 @@ storiesOf('StructuredList', module)
         <StructuredListWrapper selection border>
           <StructuredListHead>
             <StructuredListRow head>
-              {componentsX
-                ? [...structuredListHeadColumns, emptyStructuredListHeadCell]
-                : [emptyStructuredListHeadCell, ...structuredListHeadColumns]}
+              <StructuredListCell head>ColumnA</StructuredListCell>,
+              <StructuredListCell head>ColumnB</StructuredListCell>,
+              <StructuredListCell head>ColumnC</StructuredListCell>
+              <StructuredListCell head>{''}</StructuredListCell>
             </StructuredListRow>
           </StructuredListHead>
           <StructuredListBody>

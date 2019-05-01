@@ -12,7 +12,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
-import * as FeatureFlags from '../../internal/FeatureFlags';
 
 const props = () => ({
   className: 'some-class',
@@ -20,7 +19,7 @@ const props = () => ({
   onClick: action('onClick'),
 });
 
-const breadcrumbStory = storiesOf('Breadcrumb', module)
+storiesOf('Breadcrumb', module)
   .addDecorator(withKnobs)
   .add(
     'default',
@@ -65,48 +64,44 @@ const breadcrumbStory = storiesOf('Breadcrumb', module)
           Placeholder skeleton state to use when content is loading.
           `,
     },
-  });
-
-if (FeatureFlags.componentsX) {
-  breadcrumbStory
-    .add(
-      'current page',
-      () => (
-        <Breadcrumb {...props()}>
-          <BreadcrumbItem>
-            <a href="/#">Breadcrumb 1</a>
-          </BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          <BreadcrumbItem href="#" isCurrentPage>
-            Breadcrumb 3
-          </BreadcrumbItem>
-        </Breadcrumb>
-      ),
-      {
-        info: {
-          text:
-            'You can specify a BreadcrumbItem component as the current page with the `isCurrentPage` prop',
-        },
-      }
-    )
-    .add(
-      'current page with aria-current',
-      () => (
-        <Breadcrumb {...props()}>
-          <BreadcrumbItem>
-            <a href="/#">Breadcrumb 1</a>
-          </BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          <BreadcrumbItem href="#" aria-current="page">
-            Breadcrumb 3
-          </BreadcrumbItem>
-        </Breadcrumb>
-      ),
-      {
-        info: {
-          text:
-            'You can specify a BreadcrumbItem component as the current page with the `aria-current` prop by specifying `aria-current="page"`',
-        },
-      }
-    );
-}
+  })
+  .add(
+    'current page',
+    () => (
+      <Breadcrumb {...props()}>
+        <BreadcrumbItem>
+          <a href="/#">Breadcrumb 1</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        <BreadcrumbItem href="#" isCurrentPage>
+          Breadcrumb 3
+        </BreadcrumbItem>
+      </Breadcrumb>
+    ),
+    {
+      info: {
+        text:
+          'You can specify a BreadcrumbItem component as the current page with the `isCurrentPage` prop',
+      },
+    }
+  )
+  .add(
+    'current page with aria-current',
+    () => (
+      <Breadcrumb {...props()}>
+        <BreadcrumbItem>
+          <a href="/#">Breadcrumb 1</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        <BreadcrumbItem href="#" aria-current="page">
+          Breadcrumb 3
+        </BreadcrumbItem>
+      </Breadcrumb>
+    ),
+    {
+      info: {
+        text:
+          'You can specify a BreadcrumbItem component as the current page with the `aria-current` prop by specifying `aria-current="page"`',
+      },
+    }
+  );

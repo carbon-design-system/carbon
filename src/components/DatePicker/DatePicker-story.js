@@ -117,10 +117,6 @@ storiesOf('DatePicker', module)
           dateFormat={text(
             'The date format (dateFormat in <DatePicker>)',
             'm/d/Y'
-          )}
-          iconDescription={text(
-            'Icon description (iconDescription in <DatePicker>)',
-            'Icon description'
           )}>
           <DatePickerInput
             {...datePickerInputProps}

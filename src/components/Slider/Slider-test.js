@@ -10,7 +10,6 @@ import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
-import { breakingChangesX } from '../../internal/FeatureFlags';
 
 describe('Slider', () => {
   describe('Renders as expected', () => {
@@ -167,64 +166,6 @@ describe('Slider', () => {
         expect(handleRelease).toHaveBeenCalled();
       });
     });
-  });
-});
-
-describe('handleMouseEnd', () => {
-  const handleChange = jest.fn();
-  const handleRelease = jest.fn();
-  const wrapper = mount(
-    <Slider
-      id="slider"
-      className="extra-class"
-      value={50}
-      min={0}
-      max={100}
-      step={1}
-      onChange={handleChange}
-      onRelease={handleRelease}
-    />
-  );
-  it('calls onRelease', () => {
-    if (!breakingChangesX) {
-      // `onChange`/`onRelease` fired only upon user gesture in `v10`
-      // TODO: See if we can create a better test case here
-      wrapper.setState({
-        value: 130,
-      });
-      expect(handleRelease).lastCalledWith({ value: 50 });
-      wrapper.instance().handleMouseEnd();
-      expect(handleRelease).lastCalledWith({ value: 130 });
-    }
-  });
-});
-
-describe('handleTouchEnd', () => {
-  const handleChange = jest.fn();
-  const handleRelease = jest.fn();
-  const wrapper = mount(
-    <Slider
-      id="slider"
-      className="extra-class"
-      value={50}
-      min={0}
-      max={100}
-      step={1}
-      onChange={handleChange}
-      onRelease={handleRelease}
-    />
-  );
-  it('calls onRelease', () => {
-    if (!breakingChangesX) {
-      // `onChange`/`onRelease` fired only upon user gesture in `v10`
-      // TODO: See if we can create a better test case here
-      wrapper.setState({
-        value: 385,
-      });
-      expect(handleRelease).lastCalledWith({ value: 50 });
-      wrapper.instance().handleTouchEnd();
-      expect(handleRelease).lastCalledWith({ value: 385 });
-    }
   });
 });
 

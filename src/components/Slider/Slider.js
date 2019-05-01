@@ -8,10 +8,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
-import { sliderValuePropSync } from '../../internal/FeatureFlags';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -142,18 +139,9 @@ export default class Slider extends PureComponent {
     left: 0,
   };
 
-  componentDidMount() {
-    if (!sliderValuePropSync) {
-      this.updatePosition();
-    }
-  }
-
   static getDerivedStateFromProps({ value, min, max }, state) {
     const { value: currentValue, prevValue, prevMin, prevMax } = state;
-    if (
-      !sliderValuePropSync ||
-      (prevValue === value && prevMin === min && prevMax === max)
-    ) {
+    if (prevValue === value && prevMin === min && prevMax === max) {
       return null;
     }
     const effectiveValue = Math.min(
@@ -167,12 +155,6 @@ export default class Slider extends PureComponent {
       prevMin: min,
       prevMax: max,
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (!sliderValuePropSync && !isEqual(nextProps, this.props)) {
-      this.updatePosition();
-    }
   }
 
   updatePosition = evt => {
@@ -428,11 +410,9 @@ export default class Slider extends PureComponent {
           {labelText}
         </label>
         <div className={`${prefix}--slider-container`}>
-          {componentsX && (
-            <span className={`${prefix}--slider__range-label`}>
-              {formatLabel(min, minLabel)}
-            </span>
-          )}
+          <span className={`${prefix}--slider__range-label`}>
+            {formatLabel(min, minLabel)}
+          </span>
           <div
             className={sliderClasses}
             ref={node => {
@@ -478,11 +458,6 @@ export default class Slider extends PureComponent {
               onChange={this.handleChange}
             />
           </div>
-          {!componentsX && (
-            <span className={`${prefix}--slider__range-label`}>
-              {formatLabel(min, minLabel)}
-            </span>
-          )}
           <span className={`${prefix}--slider__range-label`}>
             {formatLabel(max, maxLabel)}
           </span>

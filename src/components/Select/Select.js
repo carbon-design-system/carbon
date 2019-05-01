@@ -8,10 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { iconCaretDown } from 'carbon-icons';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
-import { componentsX } from '../../internal/FeatureFlags';
 import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
@@ -77,20 +74,12 @@ const Select = React.forwardRef(function Select(
           ref={ref}>
           {children}
         </select>
-        {componentsX ? (
-          <ChevronDownGlyph
-            className={`${prefix}--select__arrow`}
-            aria-label={iconDescription}>
-            <title>{iconDescription}</title>
-          </ChevronDownGlyph>
-        ) : (
-          <Icon
-            icon={iconCaretDown}
-            className={`${prefix}--select__arrow`}
-            description={iconDescription}
-          />
-        )}
-        {componentsX && invalid && (
+        <ChevronDownGlyph
+          className={`${prefix}--select__arrow`}
+          aria-label={iconDescription}>
+          <title>{iconDescription}</title>
+        </ChevronDownGlyph>
+        {invalid && (
           <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
         )}
       </>
@@ -105,7 +94,7 @@ const Select = React.forwardRef(function Select(
           </label>
         )}
         {!inline && helper}
-        {componentsX && inline && (
+        {inline && (
           <>
             <div className={`${prefix}--select-input--inline__wrapper`}>
               <div
@@ -118,16 +107,14 @@ const Select = React.forwardRef(function Select(
             {helper}
           </>
         )}
-        {componentsX && !inline && (
+        {!inline && (
           <div
             className={`${prefix}--select-input__wrapper`}
             data-invalid={invalid || null}>
             {input}
           </div>
         )}
-        {!componentsX && input}
-        {!componentsX && inline && helper}
-        {(!componentsX || (componentsX && !inline)) && error}
+        {!inline && error}
       </div>
     </div>
   );

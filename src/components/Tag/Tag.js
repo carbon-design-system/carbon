@@ -9,34 +9,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
-const TYPES = componentsX
-  ? {
-      red: 'Red',
-      magenta: 'Magenta',
-      purple: 'Purple',
-      blue: 'Blue',
-      cyan: 'Cyan',
-      teal: 'Teal',
-      green: 'Green',
-      gray: 'Gray',
-      'cool-gray': 'Cool-Gray',
-      'warm-gray': 'Warm-Gray',
-    }
-  : {
-      beta: 'Beta',
-      community: 'Community',
-      custom: 'Custom',
-      dedicated: 'Dedicated',
-      experimental: 'Experimental',
-      ibm: 'IBM',
-      local: 'Local',
-      private: 'Private',
-      'third-party': 'Third-Party',
-    };
+const TYPES = {
+  red: 'Red',
+  magenta: 'Magenta',
+  purple: 'Purple',
+  blue: 'Blue',
+  cyan: 'Cyan',
+  teal: 'Teal',
+  green: 'Green',
+  gray: 'Gray',
+  'cool-gray': 'Cool-Gray',
+  'warm-gray': 'Warm-Gray',
+};
 
 const Tag = ({ children, className, type, ...other }) => {
   const tagClass = `${prefix}--tag--${type}`;

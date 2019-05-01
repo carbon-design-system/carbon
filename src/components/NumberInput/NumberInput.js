@@ -7,14 +7,11 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { iconCaretUp, iconCaretDown } from 'carbon-icons';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
-import Icon from '../Icon';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
@@ -246,7 +243,7 @@ class NumberInput extends Component {
       {
         [`${prefix}--number--light`]: light,
         [`${prefix}--number--nolabel`]: hideLabel,
-        [`${prefix}--number--mobile`]: componentsX && isMobile,
+        [`${prefix}--number--mobile`]: isMobile,
       }
     );
 
@@ -298,52 +295,6 @@ class NumberInput extends Component {
       <div className={`${prefix}--form-item`}>
         <div className={numberInputClasses} {...inputWrapperProps}>
           {(() => {
-            if (!componentsX) {
-              return (
-                <>
-                  <div className={`${prefix}--number__controls`}>
-                    <button
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel}
-                      aria-label={incrementNumLabel}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <Icon
-                        className="up-icon"
-                        icon={iconCaretUp}
-                        description={iconDescription || incrementNumLabel}
-                        viewBox="0 0 10 5"
-                      />
-                    </button>
-                    <button
-                      className={`${prefix}--number__control-btn down-icon`}
-                      {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'down')}
-                      title={decrementNumLabel}
-                      aria-label={decrementNumLabel}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <Icon
-                        className="down-icon"
-                        icon={iconCaretDown}
-                        viewBox="0 0 10 5"
-                        description={iconDescription || decrementNumLabel}
-                      />
-                    </button>
-                  </div>
-                  {labelText}
-                  <input
-                    type="number"
-                    pattern="[0-9]*"
-                    {...other}
-                    {...props}
-                    ref={mergeRefs(ref, this._handleInputRef)}
-                  />
-                </>
-              );
-            }
             if (isMobile) {
               return (
                 <>
@@ -426,19 +377,14 @@ class NumberInput extends Component {
             );
           })()}
           {error}
-          {!componentsX && helper}
         </div>
       </div>
     );
   }
 }
 
-export default (!breakingChangesX
-  ? NumberInput
-  : (() => {
-      const forwardRef = (props, ref) => (
-        <NumberInput {...props} innerRef={ref} />
-      );
-      forwardRef.displayName = 'NumberInput';
-      return React.forwardRef(forwardRef);
-    })());
+export default (() => {
+  const forwardRef = (props, ref) => <NumberInput {...props} innerRef={ref} />;
+  forwardRef.displayName = 'NumberInput';
+  return React.forwardRef(forwardRef);
+})();

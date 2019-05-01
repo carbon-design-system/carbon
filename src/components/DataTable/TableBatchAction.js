@@ -21,7 +21,7 @@ TableBatchAction.propTypes = {
   /**
    * Optional function to render your own icon in the underlying button
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 TableBatchAction.defaultProps = {

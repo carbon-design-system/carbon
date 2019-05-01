@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { componentsX } from '../../internal/FeatureFlags';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
@@ -80,7 +79,6 @@ const TextArea = ({
       className={textareaClasses}
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
-      data-invalid={(invalid && !componentsX) || null}
       disabled={other.disabled}
     />
   );
@@ -88,20 +86,15 @@ const TextArea = ({
   return (
     <div className={`${prefix}--form-item`}>
       {label}
-      {componentsX && helper}
-      {componentsX ? (
-        <div
-          className={`${prefix}--text-area__wrapper`}
-          data-invalid={invalid || null}>
-          {invalid && (
-            <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
-          )}
-          {input}
-        </div>
-      ) : (
-        input
-      )}
-      {!componentsX && helper}
+      {helper}
+      <div
+        className={`${prefix}--text-area__wrapper`}
+        data-invalid={invalid || null}>
+        {invalid && (
+          <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
+        )}
+        {input}
+      </div>
       {error}
     </div>
   );

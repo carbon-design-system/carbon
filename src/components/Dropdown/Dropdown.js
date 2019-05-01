@@ -12,7 +12,6 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import { componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -195,8 +194,8 @@ export default class Dropdown extends React.Component {
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const Dropdown = (
-      <>
+    return (
+      <div className={wrapperClasses}>
         {title}
         {!inline && helper}
         <Downshift
@@ -223,7 +222,7 @@ export default class Dropdown extends React.Component {
               invalid={invalid}
               invalidText={invalidText}
               {...getRootProps({ refKey: 'innerRef' })}>
-              {componentsX && invalid && (
+              {invalid && (
                 <WarningFilled16
                   className={`${prefix}--list-box__invalid-icon`}
                 />
@@ -261,12 +260,7 @@ export default class Dropdown extends React.Component {
             </ListBox>
           )}
         </Downshift>
-      </>
-    );
-    return componentsX ? (
-      <div className={wrapperClasses}>{Dropdown}</div>
-    ) : (
-      Dropdown
+      </div>
     );
   }
 }

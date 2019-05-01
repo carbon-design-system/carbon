@@ -8,10 +8,7 @@
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React from 'react';
-import warning from 'warning';
 import icons from 'carbon-icons';
-import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
-import { breakingChangesX } from '../../internal/FeatureFlags';
 
 /**
  * The icons list object from `carbon-icons`.
@@ -114,11 +111,6 @@ export function isPrefixed(name) {
   return name && name.split('--')[0] === 'icon';
 }
 
-let didWarnAboutDeprecation;
-
-const findIconWithPrefix = name =>
-  isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
-
 const Icon = ({
   className,
   iconTitle,
@@ -127,22 +119,13 @@ const Icon = ({
   fillRule,
   height,
   name,
-  icon = !breakingChangesX && findIconWithPrefix(name),
+  icon,
   role,
   style,
   width,
   iconRef,
   ...other
 }) => {
-  if (__DEV__ && breakingChangesX && name) {
-    warning(
-      didWarnAboutDeprecation,
-      'The `name` property in the `Icon` component is being removed in the next release of ' +
-        '`carbon-components-react`. Please use `icon` instead.'
-    );
-    didWarnAboutDeprecation = true;
-  }
-
   const props = {
     className,
     fill,
@@ -200,21 +183,14 @@ Icon.propTypes = {
    */
   height: PropTypes.string,
 
-  ...isRequiredOneOf({
-    /**
-     * The icon data.
-     */
-    icon: PropTypes.shape({
-      width: PropTypes.string,
-      height: PropTypes.string,
-      viewBox: PropTypes.string.isRequired,
-      svgData: PropTypes.object.isRequired,
-    }),
-
-    /**
-     * The name in the sprite.
-     */
-    name: PropTypes.string,
+  /**
+   * The icon data.
+   */
+  icon: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string,
+    viewBox: PropTypes.string.isRequired,
+    svgData: PropTypes.object.isRequired,
   }),
 
   /**

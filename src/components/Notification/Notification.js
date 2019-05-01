@@ -8,26 +8,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import warning from 'warning';
-import {
-  iconClose,
-  iconCheckmarkSolid,
-  iconErrorSolid,
-  iconInfoSolid,
-  iconWarningSolid,
-} from 'carbon-icons';
 import { settings } from 'carbon-components';
-import Icon from '../Icon';
-import a11yIconWarningSolid from './a11yIconWarningSolid';
 import Close16 from '@carbon/icons-react/lib/close/16';
 import ErrorFilled20 from '@carbon/icons-react/lib/error--filled/20';
 import CheckmarkFilled20 from '@carbon/icons-react/lib/checkmark--filled/20';
 import WarningFilled20 from '@carbon/icons-react/lib/warning--filled/20';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
-
-let didWarnAboutDeprecationButtonIcon = false;
 
 export class NotificationButton extends Component {
   static propTypes = {
@@ -52,17 +39,6 @@ export class NotificationButton extends Component {
     iconDescription: PropTypes.string,
 
     /**
-     * Specify an optional icon for the Button through an object representing the SVG data of the icon,
-     * if something but regular "close" icon is desirable
-     */
-    icon: PropTypes.shape({
-      width: PropTypes.string,
-      height: PropTypes.string,
-      viewBox: PropTypes.string.isRequired,
-      svgData: PropTypes.object.isRequired,
-    }),
-
-    /**
      * Optional prop to allow overriding the icon rendering.
      * Can be a React component class
      */
@@ -85,7 +61,7 @@ export class NotificationButton extends Component {
     notificationType: 'toast',
     type: 'button',
     iconDescription: 'close icon',
-    renderIcon: !componentsX ? undefined : Close16,
+    renderIcon: Close16,
   };
 
   render() {
@@ -94,21 +70,11 @@ export class NotificationButton extends Component {
       className,
       iconDescription,
       type,
-      icon,
       renderIcon: IconTag,
       name,
       notificationType,
       ...other
     } = this.props;
-
-    if (__DEV__ && breakingChangesX && (icon || name)) {
-      warning(
-        didWarnAboutDeprecationButtonIcon,
-        'The `icon`/`name` properties in the `NotificationButton` component is being removed in the next release of ' +
-          '`carbon-components-react`. Please use `renderIcon` instead.'
-      );
-      didWarnAboutDeprecationButtonIcon = true;
-    }
 
     const buttonClasses = classNames(
       {
@@ -130,22 +96,7 @@ export class NotificationButton extends Component {
     const NotificationButtonIcon = (() => {
       if (Object(IconTag) === IconTag) {
         return (
-          <IconTag
-            aria-label={iconDescription}
-            className={iconClasses}
-            name={name}
-          />
-        );
-      }
-      if (!breakingChangesX) {
-        return (
-          <Icon
-            description={iconDescription}
-            className={iconClasses}
-            aria-label={ariaLabel}
-            icon={!icon && !name ? iconClose : icon}
-            name={name}
-          />
+          <IconTag aria-label={ariaLabel} className={iconClasses} name={name} />
         );
       }
       return null;
@@ -230,39 +181,18 @@ export class NotificationTextDetails extends Component {
 
 const useIcon = kindProp =>
   ({
-    error: componentsX ? ErrorFilled20 : iconErrorSolid,
-    success: componentsX ? CheckmarkFilled20 : iconCheckmarkSolid,
-    warning: componentsX ? WarningFilled20 : iconWarningSolid,
-    info: componentsX ? null : iconInfoSolid,
+    error: ErrorFilled20,
+    success: CheckmarkFilled20,
+    warning: WarningFilled20,
   }[kindProp]);
 
 const NotificationIcon = ({ notificationType, kind, iconDescription }) => {
-  if (!componentsX) {
-    if (notificationType === 'inline') {
-      switch (kind) {
-        case 'warning':
-          return a11yIconWarningSolid(prefix, notificationType);
-        default:
-          return (
-            <Icon
-              description={iconDescription}
-              className={`${prefix}--inline-notification__icon`}
-              aria-label="close"
-              icon={useIcon(kind)}
-            />
-          );
-      }
-    }
-    return null;
-  }
   const NotificationIconX = useIcon(kind);
-  return (
-    NotificationIconX && (
-      <NotificationIconX
-        className={`${prefix}--${notificationType}-notification__icon`}>
-        <title>{iconDescription}</title>
-      </NotificationIconX>
-    )
+  return !NotificationIconX ? null : (
+    <NotificationIconX
+      className={`${prefix}--${notificationType}-notification__icon`}>
+      <title>{iconDescription}</title>
+    </NotificationIconX>
   );
 };
 
@@ -538,176 +468,3 @@ export class InlineNotification extends Component {
     );
   }
 }
-
-let didWarnAboutDeprecationNotification = false;
-
-// Deprecated
-class Notification extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the notification box
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify what state the notification represents
-     */
-    kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
-
-    /**
-     * Specify the title
-     */
-    title: PropTypes.string.isRequired,
-
-    /**
-     * Specify the sub-title
-     */
-    subtitle: PropTypes.string.isRequired,
-
-    /**
-     * Specify the caption
-     */
-    caption: PropTypes.string,
-
-    /**
-     * Provide a function that is called when menu is closed
-     */
-    onCloseButtonClick: PropTypes.func,
-
-    /**
-     * Provide a description for "close" icon that can be read by screen readers
-     */
-    iconDescription: PropTypes.string.isRequired,
-
-    /**
-     * Specify the close button should be disabled, or not
-     */
-    hideCloseButton: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    onCloseButtonClick: () => {},
-    iconDescription: 'closes notification',
-    title: 'Provide a title',
-    subtitle: 'Provide a subtitle',
-    hideCloseButton: false,
-  };
-
-  state = {
-    open: true,
-  };
-
-  handleCloseButtonClick = evt => {
-    this.setState({ open: false });
-    this.props.onCloseButtonClick(evt);
-  };
-
-  useIcon = kindProp =>
-    ({
-      error: iconErrorSolid,
-      info: iconInfoSolid,
-      success: iconCheckmarkSolid,
-      warning: iconWarningSolid,
-    }[kindProp]);
-
-  render() {
-    if (__DEV__) {
-      warning(
-        didWarnAboutDeprecationNotification,
-        'The `Notification` component is being removed in the next release of ' +
-          '`carbon-components-react`. Please use `InlineNotification` or `ToastNotification` instead.'
-      );
-      didWarnAboutDeprecationNotification = true;
-    }
-
-    if (!this.state.open) {
-      return null;
-    }
-
-    const {
-      onCloseButtonClick, // eslint-disable-line
-      iconDescription, // eslint-disable-line
-      className,
-      caption,
-      subtitle,
-      title,
-      kind,
-      hideCloseButton,
-      ...other
-    } = this.props;
-
-    const notificationClasses = {
-      toast: classNames(
-        `${prefix}--toast-notification`,
-        {
-          [`${prefix}--toast-notification--${this.props.kind}`]: this.props
-            .kind,
-        },
-        className
-      ),
-      inline: classNames(
-        `${prefix}--inline-notification`,
-        {
-          [`${prefix}--inline-notification--${this.props.kind}`]: this.props
-            .kind,
-        },
-        className
-      ),
-    };
-
-    const toastHTML = (
-      <div
-        {...other}
-        role="alert"
-        kind={kind}
-        className={notificationClasses.toast}>
-        <NotificationTextDetails
-          title={title}
-          subtitle={subtitle}
-          caption={caption}
-          notificationType="toast"
-        />
-        {!hideCloseButton && (
-          <NotificationButton
-            notificationType="toast"
-            onClick={this.handleCloseButtonClick}
-          />
-        )}
-      </div>
-    );
-
-    const inlineHTML = (
-      <div
-        {...other}
-        role="alert"
-        kind={kind}
-        className={notificationClasses.inline}>
-        <div className={`${prefix}--inline-notification__details`}>
-          <Icon
-            description={this.props.iconDescription}
-            className={`${prefix}--inline-notification__icon`}
-            aria-label="close"
-            icon={this.useIcon(kind)}
-          />
-          <NotificationTextDetails
-            title={title}
-            subtitle={subtitle}
-            notificationType="inline"
-          />
-        </div>
-        {!hideCloseButton && (
-          <NotificationButton
-            notificationType="inline"
-            onClick={this.handleCloseButtonClick}
-          />
-        )}
-      </div>
-    );
-
-    return caption ? toastHTML : inlineHTML;
-  }
-}
-
-export default (!breakingChangesX ? Notification : null);

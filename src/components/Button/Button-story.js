@@ -15,23 +15,14 @@ import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
 import Search16 from '@carbon/icons-react/lib/search/16';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
 const icons = {
   None: 'None',
+  'Add with filled circle (AddFilled16 from `@carbon/icons`)': 'AddFilled16',
+  'Search (Search16 from `@carbon/icons`)': 'Search16',
 };
-
-if (breakingChangesX) {
-  icons['Add with filled circle (iconAddSolid from `carbon-icons`)'] =
-    'iconAddSolid';
-  icons['Search (iconSearch from `carbon-icons`)'] = 'iconSearch';
-}
-
-icons['Add with filled circle (AddFilled16 from `@carbon/icons`)'] =
-  'AddFilled16';
-icons['Search (Search16 from `@carbon/icons`)'] = 'Search16';
 
 const iconMap = {
   iconAddSolid,
@@ -47,10 +38,6 @@ const kinds = {
   'Ghost button (ghost)': 'ghost',
 };
 
-if (!componentsX) {
-  kinds['Danger primary button (danger--primary)'] = 'danger--primary';
-}
-
 const props = {
   regular: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
@@ -60,7 +47,6 @@ const props = {
       disabled: boolean('Disabled (disabled)', false),
       small: boolean('Small (small)', false),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
-      icon: !iconToUse || !iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
         'Button icon'
@@ -76,7 +62,6 @@ const props = {
       disabled: boolean('Disabled (disabled)', false),
       small: boolean('Small (small)', false),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
-      icon: !iconToUse || !iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
         'Button icon'

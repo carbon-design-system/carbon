@@ -9,10 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
-import Icon from '../Icon';
 import classNames from 'classnames';
-import warning from 'warning';
-import { iconInfoGlyph } from 'carbon-icons';
 import Information from '@carbon/icons-react/lib/information/16';
 import { settings } from 'carbon-components';
 import FloatingMenu, {
@@ -22,57 +19,11 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
-import { breakingChangesX, componentsX } from '../../internal/FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, keyCodes, matches as keyDownMatch } from '../../tools/key';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 
 const { prefix } = settings;
-
-const matchesFuncName =
-  typeof Element !== 'undefined' &&
-  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
-    name => typeof Element.prototype[name] === 'function'
-  )[0];
-
-/**
- * @param {Node} elem A DOM node.
- * @param {string} selector A CSS selector
- * @returns {boolean} `true` if the given DOM element is a element node and matches the given selector.
- * @private
- */
-const matches = (elem, selector) => {
-  if (breakingChangesX) {
-    return elem.matches(selector);
-  }
-  return (
-    typeof elem[matchesFuncName] === 'function' &&
-    elem[matchesFuncName](selector)
-  );
-};
-
-/**
- * @param {Element} elem An element.
- * @param {string} selector An query selector.
- * @returns {Element} The ancestor of the given element matching the given selector.
- * @private
- */
-const closest = (elem, selector) => {
-  if (breakingChangesX) {
-    return elem.closest(selector);
-  }
-  const doc = elem.ownerDocument;
-  for (
-    let traverse = elem;
-    traverse && traverse !== doc;
-    traverse = traverse.parentNode
-  ) {
-    if (matches(traverse, selector)) {
-      return traverse;
-    }
-  }
-  return null;
-};
 
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
@@ -120,9 +71,6 @@ const getMenuOffset = (menuBody, menuDirection) => {
     };
   }
 };
-
-let didWarnAboutDeprecationClickToOpen = false;
-let didWarnAboutDeprecationIcon = false;
 
 class Tooltip extends Component {
   state = {};
@@ -221,11 +169,6 @@ class Tooltip extends Component {
     }),
 
     /**
-     * `true` if opening tooltip should be triggered by clicking the trigger button.
-     */
-    clickToOpen: PropTypes.bool,
-
-    /**
      * Optional prop to specify the tabIndex of the Tooltip
      */
     tabIndex: PropTypes.number,
@@ -234,18 +177,11 @@ class Tooltip extends Component {
   static defaultProps = {
     open: false,
     direction: DIRECTION_BOTTOM,
-    renderIcon: !componentsX ? undefined : Information,
+    renderIcon: Information,
     showIcon: true,
     triggerText: null,
     menuOffset: getMenuOffset,
-    clickToOpen: breakingChangesX,
   };
-
-  /**
-   * A flag to detect if `oncontextmenu` event is fired right before `mouseover`/`mouseout`/`focus`/`blur` events.
-   * @type {boolean}
-   */
-  _hasContextMenu = false;
 
   /**
    * The element of the tooltip body.
@@ -329,34 +265,17 @@ class Tooltip extends Component {
    */
   _getTarget = () =>
     (this.triggerEl &&
-      closest(this.triggerEl, '[data-floating-menu-container]')) ||
+      this.triggerEl.closest('[data-floating-menu-container]')) ||
     document.body;
 
   handleMouse = evt => {
-    const state = {
-      mouseover: 'over',
-      mouseout: 'out',
-      focus: 'over',
-      blur: 'out',
-      click: 'click',
-    }[evt.type];
-    const hadContextMenu = this._hasContextMenu;
-    this._hasContextMenu = evt.type === 'contextmenu';
-    if (this.props.clickToOpen) {
-      if (state === 'click') {
-        evt.stopPropagation();
-        const shouldOpen = !this.state.open;
-        if (shouldOpen) {
-          this.getTriggerPosition();
-        }
-        this.setState({ open: shouldOpen });
+    if (evt.type === 'click') {
+      evt.stopPropagation();
+      const shouldOpen = !this.state.open;
+      if (shouldOpen) {
+        this.getTriggerPosition();
       }
-    } else if (
-      state &&
-      (state !== 'out' || !hadContextMenu) &&
-      this._debouncedHandleHover
-    ) {
-      this._debouncedHandleHover(state, evt.relatedTarget);
+      this.setState({ open: shouldOpen });
     }
   };
 
@@ -415,35 +334,14 @@ class Tooltip extends Component {
       direction,
       triggerText,
       showIcon,
-      icon,
       iconName,
       iconDescription,
       renderIcon: IconCustomElement,
       menuOffset,
-      // Exclude `clickToOpen` from `other` to avoid passing it along to `<div>`
-      clickToOpen,
       tabIndex = 0,
       innerRef: ref,
       ...other
     } = this.props;
-
-    if (!clickToOpen && __DEV__) {
-      warning(
-        didWarnAboutDeprecationClickToOpen,
-        'The `clickToOpen=false` option in `Tooltip` component is being updated in the next release of ' +
-          '`carbon-components-react`. Please use `TooltipIcon` or `TooltipDefinition` instead.'
-      );
-      didWarnAboutDeprecationClickToOpen = true;
-    }
-
-    if (__DEV__ && breakingChangesX && (icon || iconName)) {
-      warning(
-        didWarnAboutDeprecationIcon,
-        'The `icon`/`iconName` properties in the `Tooltip` component is being removed in the next release of ' +
-          '`carbon-components-react`. Please use `renderIcon` instead.'
-      );
-      didWarnAboutDeprecationIcon = true;
-    }
 
     const { open } = this.state;
 
@@ -495,15 +393,7 @@ class Tooltip extends Component {
             <div id={triggerId} className={triggerClasses}>
               {triggerText}
               <div className={`${prefix}--tooltip__trigger`} {...properties}>
-                {IconCustomElement ? (
-                  <IconCustomElement ref={refProp} {...iconProperties} />
-                ) : (
-                  <Icon
-                    icon={!icon && !iconName ? iconInfoGlyph : icon}
-                    iconRef={refProp}
-                    {...iconProperties}
-                  />
-                )}
+                <IconCustomElement ref={refProp} {...iconProperties} />
               </div>
             </div>
           ) : (
@@ -547,10 +437,8 @@ class Tooltip extends Component {
   }
 }
 
-export default (!breakingChangesX
-  ? Tooltip
-  : (() => {
-      const forwardRef = (props, ref) => <Tooltip {...props} innerRef={ref} />;
-      forwardRef.displayName = 'Tooltip';
-      return React.forwardRef(forwardRef);
-    })());
+export default (() => {
+  const forwardRef = (props, ref) => <Tooltip {...props} innerRef={ref} />;
+  forwardRef.displayName = 'Tooltip';
+  return React.forwardRef(forwardRef);
+})();

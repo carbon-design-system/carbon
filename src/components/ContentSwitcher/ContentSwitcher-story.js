@@ -8,37 +8,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
-import { iconAddSolid, iconSearch } from 'carbon-icons';
-import Icon from '../Icon';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
-import { componentsX } from '../../internal/FeatureFlags';
-
-const icons = {
-  None: 'None',
-  ...(!componentsX && {
-    'Add with filled circle (iconAddSolid from `carbon-icons`)': 'iconAddSolid',
-    'Search (iconSearch from `carbon-icons`)': 'iconSearch',
-  }),
-  ...(componentsX && {
-    'Add with filled circle (AddFilled16 from `@carbon/icons-react`)':
-      'AddFilled16',
-    'Search (Search16 from `@carbon/icons-react`)': 'Search16',
-  }),
-};
-
-const iconMap = componentsX
-  ? undefined
-  : {
-      iconAddSolid: <Icon icon={iconAddSolid} />,
-      iconSearch: <Icon icon={iconSearch} />,
-    };
-
-const kinds = {
-  'Anchor (anchor)': 'anchor',
-  'Button (button)': 'button',
-};
 
 const props = {
   contentSwitcher: () => ({
@@ -46,15 +18,6 @@ const props = {
   }),
   switch: () => ({
     onClick: action('onClick - Switch'),
-    kind: componentsX
-      ? undefined
-      : select('Button kind (kind in <Switch>)', kinds, 'anchor'),
-    href: componentsX
-      ? undefined
-      : text('The link href (href in <Switch>)', ''),
-    icon: componentsX
-      ? undefined
-      : iconMap[select('Icon (icon in <Switch>)', icons, 'none')],
     disabled: boolean('Disabled (disabled)', false),
   }),
 };

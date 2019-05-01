@@ -8,12 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import uid from '../../tools/uniqueId';
-import Icon from '../Icon';
-import { iconCheckmarkSolid } from 'carbon-icons';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import CheckmarkFilled from '@carbon/icons-react/lib/checkmark--filled/16';
-import { componentsX } from '../../internal/FeatureFlags';
 import { keys, matches } from '../../tools/key';
 
 const { prefix } = settings;
@@ -111,13 +108,9 @@ export default class RadioTile extends React.Component {
           tabIndex={this.props.tabIndex}
           onKeyDown={this.handleKeyDown}>
           <div className={`${prefix}--tile__checkmark`}>
-            {componentsX ? (
-              <CheckmarkFilled aria-label={iconDescription}>
-                {iconDescription && <title>{iconDescription}</title>}
-              </CheckmarkFilled>
-            ) : (
-              <Icon icon={iconCheckmarkSolid} description={iconDescription} />
-            )}
+            <CheckmarkFilled aria-label={iconDescription}>
+              {iconDescription && <title>{iconDescription}</title>}
+            </CheckmarkFilled>
           </div>
           <div className={`${prefix}--tile-content`}>{children}</div>
         </label>
