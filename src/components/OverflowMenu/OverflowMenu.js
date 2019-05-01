@@ -330,6 +330,12 @@ class OverflowMenu extends Component {
    */
   _hFocusIn = null;
 
+  /**
+   * The timeout handle for handling `blur` event.
+   * @private
+   */
+  _hBlurTimeout;
+
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.open && !this.state.open) {
       requestAnimationFrame(() => {
@@ -398,6 +404,10 @@ class OverflowMenu extends Component {
   }
 
   componentWillUnmount() {
+    if (typeof this._hBlurTimeout === 'number') {
+      clearTimeout(this._hBlurTimeout);
+      this._hBlurTimeout = undefined;
+    }
     this.hResize.release();
   }
 
@@ -460,7 +470,12 @@ class OverflowMenu extends Component {
     }
     evt.persist();
     // event loop hack
-    setTimeout(() => {
+    if (typeof this._hBlurTimeout === 'number') {
+      clearTimeout(this._hBlurTimeout);
+      this._hBlurTimeout = undefined;
+    }
+    this._hBlurTimeout = setTimeout(() => {
+      this._hBlurTimeout = undefined;
       if (!this.menuEl.contains(evt.target.ownerDocument.activeElement)) {
         this.setState({ open: false });
       }
