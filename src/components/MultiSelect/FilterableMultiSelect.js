@@ -297,6 +297,7 @@ export default class FilterableMultiSelect extends React.Component {
                     <ListBox.Selection
                       clearSelection={clearSelection}
                       selectionCount={selectedItem.length}
+                      translateWithId={translateWithId}
                     />
                   )}
                   <input
