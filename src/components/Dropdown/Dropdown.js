@@ -91,6 +91,11 @@ export default class Dropdown extends React.Component {
     label: PropTypes.node.isRequired,
 
     /**
+     * Callback function for translating ListBoxMenuIcon SVG title
+     */
+    translateWithId: PropTypes.func,
+
+    /**
      * 'aria-label' of the ListBox component.
      */
     ariaLabel: PropTypes.string,
@@ -154,6 +159,7 @@ export default class Dropdown extends React.Component {
       id,
       titleText,
       helperText,
+      translateWithId,
       light,
       invalid,
       invalidText,
@@ -236,7 +242,10 @@ export default class Dropdown extends React.Component {
                   {...getLabelProps()}>
                   {selectedItem ? itemToString(selectedItem) : label}
                 </span>
-                <ListBox.MenuIcon isOpen={isOpen} />
+                <ListBox.MenuIcon
+                  isOpen={isOpen}
+                  translateWithId={translateWithId}
+                />
               </ListBox.Field>
               {isOpen && (
                 <ListBox.Menu aria-label={ariaLabel} id={id}>
