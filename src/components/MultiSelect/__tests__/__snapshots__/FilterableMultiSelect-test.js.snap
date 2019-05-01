@@ -42,6 +42,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
   onChange={[MockFunction]}
   open={false}
   placeholder="Placeholder..."
+  selectionFeedback="top-after-reopen"
   sortItems={[Function]}
 >
   <Selection

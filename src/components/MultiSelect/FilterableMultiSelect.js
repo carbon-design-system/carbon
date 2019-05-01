@@ -98,6 +98,14 @@ export default class FilterableMultiSelect extends React.Component {
     open: PropTypes.bool,
 
     /**
+     * Specify feedback (mode) of the selection.
+     * `top`: selected item jumps to top
+     * `fixed`: selected item stays at it's position
+     * `top-after-reopen`: selected item jump to top after reopen dropdown
+     */
+    selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
+
+    /**
      * Callback function for translating ListBoxMenuIcon SVG title
      */
     translateWithId: PropTypes.func,
@@ -127,6 +135,7 @@ export default class FilterableMultiSelect extends React.Component {
     sortItems: defaultSortItems,
     light: false,
     open: false,
+    selectionFeedback: componentsX ? 'top-after-reopen' : 'top',
   };
 
   constructor(props) {
@@ -135,6 +144,7 @@ export default class FilterableMultiSelect extends React.Component {
       highlightedIndex: null,
       isOpen: props.open,
       inputValue: '',
+      topItems: [],
     };
   }
 
@@ -157,7 +167,11 @@ export default class FilterableMultiSelect extends React.Component {
     });
   };
 
-  handleOnStateChange = changes => {
+  handleOnStateChange = (changes, downshift) => {
+    if (changes.isOpen && !this.state.isOpen) {
+      this.setState({ topItems: downshift.selectedItem });
+    }
+
     const { type } = changes;
     switch (type) {
       case Downshift.stateChangeTypes.keyDownArrowUp:
@@ -307,65 +321,41 @@ export default class FilterableMultiSelect extends React.Component {
                 </ListBox.Field>
                 {isOpen && (
                   <ListBox.Menu aria-label={ariaLabel} id={id}>
-                    {componentsX
-                      ? filterItems(items, { itemToString, inputValue }).map(
-                          (item, index) => {
-                            const itemProps = getItemProps({ item });
-                            const itemText = itemToString(item);
-                            const isChecked =
-                              selectedItem.filter(selected =>
-                                isEqual(selected, item)
-                              ).length > 0;
-                            return (
-                              <ListBox.MenuItem
-                                key={itemProps.id}
-                                isActive={isChecked}
-                                isHighlighted={highlightedIndex === index}
-                                {...itemProps}>
-                                <Checkbox
-                                  id={itemProps.id}
-                                  name={itemText}
-                                  checked={isChecked}
-                                  readOnly={true}
-                                  tabIndex="-1"
-                                  labelText={itemText}
-                                />
-                              </ListBox.MenuItem>
-                            );
-                          }
-                        )
-                      : sortItems(
-                          filterItems(items, { itemToString, inputValue }),
-                          {
-                            selectedItems,
-                            itemToString,
-                            compareItems,
-                            locale,
-                          }
-                        ).map((item, index) => {
-                          const itemProps = getItemProps({ item });
-                          const itemText = itemToString(item);
-                          const isChecked =
-                            selectedItem.filter(selected =>
-                              isEqual(selected, item)
-                            ).length > 0;
-                          return (
-                            <ListBox.MenuItem
-                              key={itemProps.id}
-                              isActive={isChecked}
-                              isHighlighted={highlightedIndex === index}
-                              {...itemProps}>
-                              <Checkbox
-                                id={itemProps.id}
-                                name={itemText}
-                                checked={isChecked}
-                                readOnly={true}
-                                tabIndex="-1"
-                                labelText={itemText}
-                              />
-                            </ListBox.MenuItem>
-                          );
-                        })}
+                    {sortItems(
+                      filterItems(items, { itemToString, inputValue }),
+                      {
+                        selectedItems: {
+                          top: selectedItems,
+                          fixed: [],
+                          'top-after-reopen': this.state.topItems,
+                        }[this.props.selectionFeedback],
+                        itemToString,
+                        compareItems,
+                        locale,
+                      }
+                    ).map((item, index) => {
+                      const itemProps = getItemProps({ item });
+                      const itemText = itemToString(item);
+                      const isChecked =
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={isChecked}
+                          isHighlighted={highlightedIndex === index}
+                          {...itemProps}>
+                          <Checkbox
+                            id={itemProps.id}
+                            name={itemText}
+                            checked={isChecked}
+                            readOnly={true}
+                            tabIndex="-1"
+                            labelText={itemText}
+                          />
+                        </ListBox.MenuItem>
+                      );
+                    })}
                   </ListBox.Menu>
                 )}
               </ListBox>

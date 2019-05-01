@@ -16,7 +16,6 @@ import {
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
-import { componentsX } from '../../../internal/FeatureFlags';
 
 const listItemName = 'ListBoxMenuItem';
 
@@ -76,7 +75,9 @@ describe('MultiSelect.Filterable', () => {
   });
 
   it('should call `onChange` with each update to selected items', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(
+      <MultiSelect.Filterable {...mockProps} selectionFeedback="top" />
+    );
     openMenu(wrapper);
 
     // Select the first two items
@@ -107,14 +108,42 @@ describe('MultiSelect.Filterable', () => {
       .simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(3);
     expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItems: [mockProps.items[0]],
+    });
+
+    wrapper
+      .find(listItemName)
+      .at(0)
+      .simulate('click');
+    expect(mockProps.onChange).toHaveBeenCalledTimes(4);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItems: [],
+    });
+  });
+
+  it('should let items stay at thier position after selecting', () => {
+    const wrapper = mount(
+      <MultiSelect.Filterable {...mockProps} selectionFeedback="fixed" />
+    );
+    openMenu(wrapper);
+
+    // Select the first two items
+    wrapper
+      .find(listItemName)
+      .at(1)
+      .simulate('click');
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [mockProps.items[1]],
     });
 
     wrapper
       .find(listItemName)
-      .at(!componentsX ? 0 : 1) // The second selected item does not move to top in v10
+      .at(1)
       .simulate('click');
-    expect(mockProps.onChange).toHaveBeenCalledTimes(4);
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(2);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItems: [],
     });

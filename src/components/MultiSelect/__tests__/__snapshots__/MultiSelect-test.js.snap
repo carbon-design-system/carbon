@@ -39,6 +39,7 @@ exports[`MultiSelect should render 1`] = `
   light={false}
   locale="en"
   open={false}
+  selectionFeedback="top-after-reopen"
   sortItems={[Function]}
   title={false}
   type="default"

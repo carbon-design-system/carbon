@@ -25,7 +25,7 @@ export const defaultCompareItems = (itemA, itemB, { locale }) =>
  */
 export const defaultSortItems = (
   items,
-  { selectedItems, itemToString, compareItems, locale = 'en' }
+  { selectedItems = [], itemToString, compareItems, locale = 'en' }
 ) =>
   items.sort((itemA, itemB) => {
     const hasItemA = selectedItems.includes(itemA);
