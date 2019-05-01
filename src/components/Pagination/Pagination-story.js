@@ -56,7 +56,7 @@ storiesOf('Pagination', module)
     },
   })
   .add(
-    '↪︎ multipe Pagination components',
+    '↪︎ multiple Pagination components',
     () => {
       return (
         <div>
