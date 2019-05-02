@@ -184,7 +184,7 @@
     height: $layout-01;
     width: auto;
     max-width: $layout-01;
-    fill: $ui-05;
+    fill: $icon-01;
   }
 
   //-------------------------------------------------
@@ -282,11 +282,11 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
-    color: $ui-01;
+    color: $text-04;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
-    fill: $ui-01;
+    fill: $icon-03;
     margin-left: $spacing-03;
   }
 
@@ -338,7 +338,7 @@
     height: $layout-01;
     width: rem(1px);
     content: '';
-    background-color: $ui-01;
+    background-color: $text-04;
     border: none;
     transition: opacity $duration--fast-02 motion(standard, productive);
   }
@@ -360,7 +360,7 @@
     margin-left: $spacing-05;
     display: flex;
     align-items: center;
-    color: $ui-01;
+    color: $text-04;
   }
 
   .#{$prefix}--batch-summary__para {
