@@ -18,7 +18,9 @@ jobs:
           command: yarn install --offline --frozen-lockfile
       - run:
           name: Run Continuous Integration checks
-          command: yarn lerna run ci-check --scope carbon-components
+          command: |
+            yarn build
+            yarn lerna run ci-check --scope carbon-components
 
   react:
     docker:
@@ -38,7 +40,9 @@ jobs:
           command: yarn install --offline --frozen-lockfile
       - run:
           name: Run Continuous Integration checks
-          command: yarn lerna run ci-check --scope carbon-components-react
+          command: |
+            yarn build
+            yarn lerna run ci-check --scope carbon-components-react
       - deploy:
           name: deploy to IBM Cloud
           command: |
