@@ -250,15 +250,17 @@
       align-items: center;
       opacity: 0;
       pointer-events: none;
-      background-color: $inverse-02;
       transition: opacity $duration--fast-01 motion(standard, productive);
     }
 
     &::before {
       right: 0;
       left: 0;
-      width: rem(18px);
-      height: rem(18px);
+      width: 0;
+      height: 0;
+      border-width: 0 rem(4px) rem(5px) rem(4px);
+      border-style: solid;
+      border-color: transparent transparent $inverse-02 transparent;
       margin: 0 auto;
       content: '';
       margin-top: 1px;
@@ -279,7 +281,7 @@
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
-      margin-left: 50%;
+      background-color: $inverse-02;
     }
 
     &:hover,
@@ -307,7 +309,7 @@
   .#{$prefix}--tooltip--icon__top {
     &::before {
       top: 1px;
-      transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
+      transform: translate(-50%, calc(-100% - 9px)) rotate(180deg);
     }
 
     &::after {
@@ -320,7 +322,7 @@
   .#{$prefix}--tooltip--icon__bottom {
     &::before {
       bottom: 0;
-      transform: translate(-50%, calc(100% + 9px)) rotate(135deg);
+      transform: translate(-50%, 10px);
     }
 
     &::after {
