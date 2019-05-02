@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test-ssr",
+    "ci-check": "yarn lint && yarn test --runInBand && yarn test-ssr",
     "clean": "rimraf es lib umd storybook-static",
     "lint": "eslint src",
     "lint:staged": "eslint",
