@@ -65,10 +65,10 @@ module.exports = {
       mainFields: ['jsnext', 'module', 'main'],
     }),
     commonjs({
-      include: 'node_modules/**',
+      include: /node_modules/,
       sourceMap: true,
       namedExports: {
-        'node_modules/react/index.js': [
+        'react/index.js': [
           'Children',
           'Component',
           'PureComponent',
@@ -76,8 +76,8 @@ module.exports = {
           'PropTypes',
           'createElement',
         ],
-        'node_modules/react-dom/index.js': ['render'],
-        'node_modules/react-is/index.js': ['isForwardRef'],
+        'react-dom/index.js': ['render'],
+        'react-is/index.js': ['isForwardRef'],
       },
     }),
     babel({
