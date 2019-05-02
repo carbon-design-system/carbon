@@ -146,28 +146,13 @@ Button.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify an icon to include in the Button through a string or object
-   * representing the SVG data of the icon
-   */
-  icon: PropTypes.oneOfType([
-    PropTypes.shape({
-      width: PropTypes.string,
-      height: PropTypes.string,
-      viewBox: PropTypes.string.isRequired,
-      svgData: PropTypes.object.isRequired,
-    }),
-    PropTypes.string,
-    PropTypes.node,
-  ]),
-
-  /**
    * If specifying the `icon` prop, provide a description for that icon that can
    * be read by screen readers
    */
   iconDescription: props => {
-    if ((props.icon || props.renderIcon) && !props.iconDescription) {
+    if (props.renderIcon && !props.iconDescription) {
       return new Error(
-        'icon/renderIcon property specified without also providing an iconDescription property.'
+        'renderIcon property specified without also providing an iconDescription property.'
       );
     }
     return undefined;

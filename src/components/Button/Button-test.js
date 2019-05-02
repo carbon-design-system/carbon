@@ -132,7 +132,7 @@ describe('Button', () => {
       };
       // eslint-disable-next-line quotes
       const error = new Error(
-        'icon/renderIcon property specified without also providing an iconDescription property.'
+        'renderIcon property specified without also providing an iconDescription property.'
       );
       expect(Button.propTypes.iconDescription(props)).toEqual(error);
     });
@@ -160,7 +160,7 @@ describe('Button', () => {
       };
       // eslint-disable-next-line quotes
       const error = new Error(
-        'icon/renderIcon property specified without also providing an iconDescription property.'
+        'renderIcon property specified without also providing an iconDescription property.'
       );
       expect(Button.propTypes.iconDescription(props)).toEqual(error);
     });

@@ -143,16 +143,6 @@ class Tooltip extends Component {
     showIcon: PropTypes.bool,
 
     /**
-     * The tooltip icon element or `<Icon>` metadata.
-     */
-    icon: PropTypes.shape({
-      width: PropTypes.string,
-      height: PropTypes.string,
-      viewBox: PropTypes.string.isRequired,
-      svgData: PropTypes.object.isRequired,
-    }),
-
-    /**
      * The name of the default tooltip icon.
      */
     iconName: PropTypes.string,
