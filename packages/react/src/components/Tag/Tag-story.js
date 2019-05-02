@@ -10,24 +10,51 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import { action } from '@storybook/addon-actions/dist/preview';
 
-const types = typesList.reduce(
-  (acc, type) => ({
-    ...acc,
-    [`${type} (${type})`]: type,
+const props = {
+  regular: () => ({
+    type: select(
+      'Tag type (type)',
+      typesList.reduce(
+        (acc, type) => ({
+          ...acc,
+          [`${type} (${type})`]: type,
+        }),
+        {}
+      ),
+      'red'
+    ),
+    disabled: boolean('Disabled (disabled)', false),
   }),
-  {}
-);
+  filter() {
+    return { ...this.regular(), onClick: action('onClick') };
+  },
+};
 
 storiesOf('Tag', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
     () => (
-      <Tag
-        className="some-class"
-        type={select('Tag type (type)', types, 'red')}
-        disabled={boolean('Disabled (disabled)', false)}>
+      <Tag className="some-class" {...props.regular()}>
+        {text('Content (children)', 'This is not a tag')}
+      </Tag>
+    ),
+    {
+      info: {
+        text: `
+            Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+            The example below shows how the Tag component can be used. Each type has a default message describing the type,
+            but a custom message can also be applied.
+          `,
+      },
+    }
+  )
+  .add(
+    'Filter',
+    () => (
+      <Tag className="some-class" {...props.filter()} filter>
         {text('Content (children)', 'This is not a tag')}
       </Tag>
     ),
