@@ -13,6 +13,7 @@
   .#{$prefix}--data-table.#{$prefix}--skeleton {
     th {
       border-bottom: 1px solid $brand-01;
+      vertical-align: middle;
 
       &:nth-child(3n + 1) {
         width: 10%;
