@@ -54,12 +54,8 @@ exports[`SideNavMenu should render 1`] = `
   }
   className="custom-classname"
   defaultExpanded={false}
-  icon={
-    <div>
-      icon
-    </div>
-  }
   isActive={false}
+  renderIcon={[Function]}
   title="title"
 >
   <li
@@ -78,9 +74,11 @@ exports[`SideNavMenu should render 1`] = `
         <div
           className="bx--side-nav__icon"
         >
-          <div>
-            icon
-          </div>
+          <renderIcon>
+            <div>
+              icon
+            </div>
+          </renderIcon>
         </div>
       </SideNavIcon>
       <span

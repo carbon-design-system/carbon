@@ -2,11 +2,7 @@
 
 exports[`SideNavHeader should render 1`] = `
 <SideNavHeader
-  icon={
-    <div>
-      mock icon
-    </div>
-  }
+  renderIcon={[Function]}
 >
   <header
     className="bx--side-nav__header"
@@ -17,9 +13,11 @@ exports[`SideNavHeader should render 1`] = `
       <div
         className="bx--side-nav__icon"
       >
-        <div>
-          mock icon
-        </div>
+        <renderIcon>
+          <div>
+            mock icon
+          </div>
+        </renderIcon>
       </div>
     </SideNavIcon>
     <span>

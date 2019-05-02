@@ -144,7 +144,7 @@ storiesOf('[Experimental] UI Shell', module)
           </HeaderGlobalBar>
         </Header>
         <SideNav aria-label="Side navigation">
-          <SideNavHeader icon={<Fade16 />}>
+          <SideNavHeader renderIcon={Fade16}>
             <SideNavDetails title="Side navigation title">
               <SideNavSwitcher
                 labelText="Switcher"
@@ -154,12 +154,12 @@ storiesOf('[Experimental] UI Shell', module)
             </SideNavDetails>
           </SideNavHeader>
           <SideNavItems>
-            <SideNavLink icon={<Fade16 />} href="javascript:void(0)">
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
               Link
             </SideNavLink>
             <SideNavMenu
               defaultExpanded
-              icon={<Fade16 />}
+              renderIcon={Fade16}
               isActive
               title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>

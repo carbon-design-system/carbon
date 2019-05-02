@@ -14,7 +14,7 @@ describe('SideNavHeader', () => {
 
   beforeEach(() => {
     mockProps = {
-      icon: <div>mock icon</div>,
+      renderIcon: () => <div>mock icon</div>,
       children: <span>foo</span>,
     };
   });

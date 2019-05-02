@@ -17,7 +17,7 @@ describe('SideNavMenu', () => {
       buttonRef: jest.fn(),
       className: 'custom-classname',
       children: 'text',
-      icon: <div>icon</div>,
+      renderIcon: () => <div>icon</div>,
       isActive: false,
       title: 'title',
     };
