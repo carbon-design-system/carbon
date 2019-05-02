@@ -5,12 +5,12 @@ daysUntilClose: 3
 # Issues with these labels will never be considered stale
 exemptLabels:
 # Label to use when marking an issue as stale
-staleLabel: wontfix
+staleLabel: inactive
 # Comment to post when marking an issue as stale. Set to `false` to disable
 markComment: >
   We've marked this issue as stale because there hasn't been any activity for a couple of weeks.
-  If there's no further activity on this issue in the next three days then we'll close it.
-  Thanks for your contributions.
+  If there's no further activity on this issue in the next three days then we'll close it. You can
+  keep the conversation going with just a short comment. Thanks for your contributions.
 # Comment to post when closing a stale issue. Set to `false` to disable
 closeComment: >
   As there's been no activity since this issue was marked as stale, we are auto-closing it.
