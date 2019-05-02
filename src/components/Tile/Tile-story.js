@@ -103,10 +103,10 @@ storiesOf('Tile', module)
           <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
             Multi-select Tile
           </SelectableTile>
-          <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
+          <SelectableTile id="tile-2" name="tiles" {...selectableProps}>
             Multi-select Tile
           </SelectableTile>
-          <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
+          <SelectableTile id="tile-3" name="tiles" {...selectableProps}>
             Multi-select Tile
           </SelectableTile>
         </div>

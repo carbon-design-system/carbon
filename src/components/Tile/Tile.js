@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 import CheckmarkFilled from '@carbon/icons-react/lib/checkmark--filled/16';
 import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
 import { keys, matches } from '../../tools/key';
+import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
@@ -336,6 +337,11 @@ export class ExpandableTile extends Component {
      * The description of the "expanded" icon that can be read by screen readers.
      */
     tileExpandedIconText: PropTypes.string,
+
+    /**
+     * An ID that can be provided to aria-labelledby
+     */
+    id: PropTypes.string,
   };
 
   static defaultProps = {
@@ -416,6 +422,9 @@ export class ExpandableTile extends Component {
     return React.Children.map(this.props.children, child => child);
   };
 
+  // a unique ID generated for use in aria-labelledby if one isn't providedj
+  uid = uid();
+
   render() {
     const {
       tabIndex,
@@ -446,6 +455,7 @@ export class ExpandableTile extends Component {
     const content = this.getChildren().map((child, index) => {
       return React.cloneElement(child, { ref: index });
     });
+    const buttonId = this.props.id ? `${this.props.id}__button` : this.uid;
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <div
@@ -457,8 +467,11 @@ export class ExpandableTile extends Component {
         {...other}
         onClick={this.handleClick}
         tabIndex={tabIndex}>
-        <button className={`${prefix}--tile__chevron`}>
+        <button
+          className={`${prefix}--tile__chevron`}
+          aria-labelledby={buttonId}>
           <ChevronDown16
+            id={buttonId}
             aria-label={
               this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
             }
