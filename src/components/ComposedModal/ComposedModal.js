@@ -257,12 +257,12 @@ export class ModalHeader extends Component {
     /**
      * Specify an optional label to be displayed
      */
-    label: PropTypes.string,
+    label: PropTypes.node,
 
     /**
      * Specify an optional title to be displayed
      */
-    title: PropTypes.string,
+    title: PropTypes.node,
 
     /**
      * Specify the content to be placed in the ModalHeader
