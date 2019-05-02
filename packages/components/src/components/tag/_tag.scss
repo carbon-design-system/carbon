@@ -96,6 +96,7 @@
     height: rem(20px);
   }
 
+  .#{$prefix}--tag--filter:focus > svg,
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
     background-color: $icon-02;
