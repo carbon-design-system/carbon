@@ -121,6 +121,7 @@ describe('Carbon Components React', () => {
         "TableToolbar",
         "TableToolbarAction",
         "TableToolbarContent",
+        "TableToolbarMenu",
         "TableToolbarSearch",
         "Tabs",
         "TabsSkeleton",
