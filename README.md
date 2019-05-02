@@ -1,7 +1,7 @@
 # carbon-components-react
 
 [![Carbon Components is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![CircleCI](https://circleci.com/gh/IBM/carbon-components-react.svg?style=shield)](https://circleci.com/gh/IBM/carbon-components-react)
+[![CircleCI](https://circleci.com/gh/carbon-design-system/carbon-components-react.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components-react)
 [![All Contributors](https://img.shields.io/badge/all_contributors-64-orange.svg?style=flat-square)](#contributors)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
