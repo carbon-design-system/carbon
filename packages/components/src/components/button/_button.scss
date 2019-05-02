@@ -90,7 +90,7 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui, 1px);
+    @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
     padding: $button-padding-ghost;
 
     .#{$prefix}--btn__icon {
