@@ -21,7 +21,7 @@ module.exports = {
       notes: 'Primary buttons should be used for the principle call to action on the page.',
       context: {
         variant: 'primary',
-        iconOnly: true,
+        hasIconOnly: true,
       },
     },
     {
@@ -35,7 +35,7 @@ module.exports = {
       context: {
         variant: 'primary',
         small: true,
-        iconOnly: true,
+        hasIconOnly: true,
       },
     },
     {
@@ -44,7 +44,7 @@ module.exports = {
       notes: 'Secondary buttons should be used for secondary actions on each page.',
       context: {
         variant: 'secondary',
-        iconOnly: true,
+        hasIconOnly: true,
       },
     },
     {
@@ -58,7 +58,7 @@ module.exports = {
       context: {
         variant: 'secondary',
         small: true,
-        iconOnly: true,
+        hasIconOnly: true,
       },
     },
     {

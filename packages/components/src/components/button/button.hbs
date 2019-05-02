@@ -23,7 +23,7 @@
   With icon
   {{ carbon-icon 'Add16' class=(add @root.prefix '--btn__icon') }}
 </button>
-{{#if iconOnly}}
+{{#if hasIconOnly}}
 <div class="{{@root.prefix}}--tooltip--icon {{@root.prefix}}--btn--icon-only__wrapper">
   <button
     class="{{@root.prefix}}--btn {{@root.prefix}}--btn--{{variant}} {{@root.prefix}}--btn--icon-only {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom{{#if small}} {{@root.prefix}}--btn--sm{{/if}}"
