@@ -20,6 +20,7 @@
 /// @group tabs
 @mixin tabs {
   .#{$prefix}--tabs {
+    @include reset;
     @include type-style('body-short-01');
     color: $text-01;
     height: auto;
@@ -135,6 +136,7 @@
   // Item
   //-----------------------------
   .#{$prefix}--tabs__nav-item {
+    @include reset;
     background-color: $ui-01;
     display: flex;
     padding: 0;
