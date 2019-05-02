@@ -1,7 +1,7 @@
 # carbon-components
 
 [![Carbon Components is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![Build Status](https://travis-ci.org/IBM/carbon-components.svg?branch=master)](https://travis-ci.org/IBM/carbon-components)
+[![Build Status](https://circleci.com/gh/carbon-design-system/carbon-components.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
 The Carbon Design System is a series of individual styles and components, that when combined make beautiful, intuitive designs. These designs are systemic and logical, as they all follow the same universal principles.
