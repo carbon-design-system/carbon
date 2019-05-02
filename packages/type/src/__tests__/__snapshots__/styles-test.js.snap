@@ -257,6 +257,38 @@ letter-spacing: 0;
 -@media- -(min--width-:- -9-9rem-): [object Object];"
 `;
 
+exports[`styles expressiveHeading01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 600,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.125rem",
+}
+`;
+
+exports[`styles expressiveHeading01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 600;
+line-height: 1.125rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles expressiveHeading02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "1.375rem",
+}
+`;
+
+exports[`styles expressiveHeading02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 600;
+line-height: 1.375rem;
+letter-spacing: 0;"
+`;
+
 exports[`styles expressiveHeading03 should be printable 1`] = `
 Object {
   "@media (min-width: 82rem)": Object {
@@ -485,6 +517,38 @@ line-height: 1rem;
 letter-spacing: 0.32px;"
 `;
 
+exports[`styles productiveHeading01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 600,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.125rem",
+}
+`;
+
+exports[`styles productiveHeading01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 600;
+line-height: 1.125rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles productiveHeading02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "1.375rem",
+}
+`;
+
+exports[`styles productiveHeading02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 600;
+line-height: 1.375rem;
+letter-spacing: 0;"
+`;
+
 exports[`styles productiveHeading03 should be printable 1`] = `
 Object {
   "fontSize": "1.25rem",
@@ -530,6 +594,38 @@ exports[`styles productiveHeading05 should be printable 2`] = `
 "font-size: 2rem;
 font-weight: 400;
 line-height: 2.5rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading06 should be printable 1`] = `
+Object {
+  "fontSize": "2.625rem",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "3.125rem",
+}
+`;
+
+exports[`styles productiveHeading06 should be printable 2`] = `
+"font-size: 2.625rem;
+font-weight: 300;
+line-height: 3.125rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading07 should be printable 1`] = `
+Object {
+  "fontSize": "3.375rem",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "4rem",
+}
+`;
+
+exports[`styles productiveHeading07 should be printable 2`] = `
+"font-size: 3.375rem;
+font-weight: 300;
+line-height: 4rem;
 letter-spacing: 0;"
 `;
 

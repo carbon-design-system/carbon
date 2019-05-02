@@ -37,10 +37,16 @@
   - [✅code-01 [variable]](#code-01-variable)
   - [✅code-02 [variable]](#code-02-variable)
   - [✅heading-01 [variable]](#heading-01-variable)
+  - [✅productive-heading-01 [variable]](#productive-heading-01-variable)
   - [✅heading-02 [variable]](#heading-02-variable)
+  - [✅productive-heading-02 [variable]](#productive-heading-02-variable)
   - [✅productive-heading-03 [variable]](#productive-heading-03-variable)
   - [✅productive-heading-04 [variable]](#productive-heading-04-variable)
   - [✅productive-heading-05 [variable]](#productive-heading-05-variable)
+  - [✅productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [✅productive-heading-07 [variable]](#productive-heading-07-variable)
+  - [✅expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [✅expressive-heading-02 [variable]](#expressive-heading-02-variable)
   - [✅expressive-heading-03 [variable]](#expressive-heading-03-variable)
   - [✅expressive-heading-04 [variable]](#expressive-heading-04-variable)
   - [✅expressive-heading-05 [variable]](#expressive-heading-05-variable)
@@ -2069,6 +2075,20 @@ $heading-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅productive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-01: $heading-01;
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅heading-02 [variable]
 
 <details>
@@ -2081,6 +2101,20 @@ $heading-02: (
   line-height: carbon--rem(22px),
   letter-spacing: 0,
 );
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-02: $heading-02;
 ```
 
 </details>
@@ -2138,6 +2172,72 @@ $productive-heading-05: (
   line-height: carbon--rem(40px),
   letter-spacing: 0,
 );
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-06: (
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('light'),
+  line-height: carbon--rem(50px),
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-07: (
+  font-size: carbon--type-scale(10),
+  font-weight: carbon--font-weight('light'),
+  line-height: carbon--rem(64px),
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅expressive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-01: $heading-01;
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅expressive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-02: $heading-02;
 ```
 
 </details>
@@ -2542,10 +2642,16 @@ $tokens: (
   code-02: $code-02,
   heading-01: $heading-01,
   heading-02: $heading-02,
+  productive-heading-01: $productive-heading-01,
+  productive-heading-02: $productive-heading-02,
   productive-heading-03: $productive-heading-03,
   productive-heading-04: $productive-heading-04,
   productive-heading-05: $productive-heading-05,
+  productive-heading-06: $productive-heading-06,
+  productive-heading-07: $productive-heading-07,
   expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-01: $expressive-heading-01,
+  expressive-heading-02: $expressive-heading-02,
   expressive-heading-03: $expressive-heading-03,
   expressive-heading-04: $expressive-heading-04,
   expressive-heading-05: $expressive-heading-05,

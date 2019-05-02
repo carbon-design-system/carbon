@@ -111,12 +111,22 @@ $heading-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$productive-heading-01: $heading-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $heading-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('semibold'),
   line-height: carbon--rem(22px),
   letter-spacing: 0,
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-02: $heading-02 !default;
 
 /// @type Map
 /// @access public
@@ -147,6 +157,36 @@ $productive-heading-05: (
   line-height: carbon--rem(40px),
   letter-spacing: 0,
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-06: (
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('light'),
+  line-height: carbon--rem(50px),
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-07: (
+  font-size: carbon--type-scale(10),
+  font-weight: carbon--font-weight('light'),
+  line-height: carbon--rem(64px),
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-01: $heading-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-02: $heading-02 !default;
 
 /// @type Map
 /// @access public
@@ -443,10 +483,16 @@ $tokens: (
   code-02: $code-02,
   heading-01: $heading-01,
   heading-02: $heading-02,
+  productive-heading-01: $productive-heading-01,
+  productive-heading-02: $productive-heading-02,
   productive-heading-03: $productive-heading-03,
   productive-heading-04: $productive-heading-04,
   productive-heading-05: $productive-heading-05,
+  productive-heading-06: $productive-heading-06,
+  productive-heading-07: $productive-heading-07,
   expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-01: $expressive-heading-01,
+  expressive-heading-02: $expressive-heading-02,
   expressive-heading-03: $expressive-heading-03,
   expressive-heading-04: $expressive-heading-04,
   expressive-heading-05: $expressive-heading-05,
