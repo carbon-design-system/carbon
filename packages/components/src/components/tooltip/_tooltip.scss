@@ -16,7 +16,7 @@
 /// @group tooltip
 @mixin tooltip {
   .#{$prefix}--tooltip--icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
   }
 

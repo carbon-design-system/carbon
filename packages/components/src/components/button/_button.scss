@@ -150,10 +150,6 @@
     }
   }
 
-  .#{$prefix}--btn--icon-only__wrapper.#{$prefix}--tooltip--icon {
-    display: inline-flex;
-  }
-
   .#{$prefix}--btn--danger {
     @include button-theme($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
 
