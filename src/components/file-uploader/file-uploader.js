@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { componentsX } from '../../globals/js/feature-flags';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -62,19 +61,12 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   }
 
   _closeButtonHTML() {
-    if (componentsX) {
-      return `
+    return `
       <button class="${this.options.classFileClose}" type="button" aria-label="close">
       <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16">
       <path fill="#231F20" d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"/>
       </svg>
       </button>`;
-    }
-    return `
-    <svg class="${this.options.classFileClose}" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
-      <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
-        9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
-    </svg>`;
   }
 
   _checkmarkHTML() {

@@ -66,6 +66,11 @@
     width: 100%;
   }
 
+  .#{$prefix}--data-table tbody tr,
+  .#{$prefix}--data-table tbody tr td {
+    transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
   .#{$prefix}--data-table tbody tr:hover {
     background: $hover-field;
   }
@@ -94,6 +99,11 @@
 
   .#{$prefix}--data-table th:first-of-type {
     padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table th:last-of-type {
+    position: relative;
+    width: auto;
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
@@ -195,8 +205,11 @@
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
+    position: relative;
+    background: $ui-03;
     padding: rem(12px) $spacing-03 0 $spacing-05;
     width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
+    transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--data-table td.#{$prefix}--table-column-checkbox {

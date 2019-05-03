@@ -6,110 +6,45 @@
 -->
 
 {{#each items}}
-<div data-notification class="{{@root.prefix}}--{{../variant}}-notification {{@root.prefix}}--{{../variant}}-notification--{{type}}" role="alert">
-  {{#is ../variant "toast"}}
-  {{#if ../componentsX}}
-  {{#is type "error"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'ErrorFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z" fill-rule="evenodd" />
-      </svg>
-    {{/if}}
-  {{/is}}
-  {{#is type "success"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'CheckmarkFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"></path>
-      </svg>
-    {{/if}}
-  {{/is}}
-  {{#is type "warning"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'WarningFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <path d="M18.05 15.95L9.925.95a.625.625 0 0 0-1.1 0L.7 15.95a.625.625 0 0 0 0 .625.625.625 0 0 0 .55.3H17.5a.625.625 0 0 0 .55-.925z"
-            id="a" />
-          <path d="M.55.006h1.406v5H.55v-5zm.7 8.119a.938.938 0 1 1 0-1.875.938.938 0 0 1 0 1.875z" id="b" />
-        </defs>
-        <g fill="none" fill-rule="evenodd">
-          <path d="M18.675 16.575l-8.125-15a.625.625 0 0 0-1.1 0l-8.125 15a.625.625 0 0 0 0 .625.625.625 0 0 0 .55.3h16.25a.625.625 0 0 0 .55-.925z"
-            fill="#FDD13A" />
-          <g>
-            <path d="M9.3 6.881h1.406v5H9.3v-5zM10 15a.938.938 0 1 1 0-1.875A.938.938 0 0 1 10 15z" fill="#171717"
-              fill-rule="nonzero" />
-          </g>
-          <path d="M0 0h20v20H0z" />
-        </g>
-      </svg>
-    {{/if}}
-  {{/is}}
-  {{/if}}
-  {{/is}}
-  <div class="{{@root.prefix}}--{{../variant}}-notification__details">
-    {{#is ../variant "inline"}}
-    {{#is type "error"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'ErrorFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z" fill-rule="evenodd" />
-      </svg>
-    {{/if}}
-    {{/is}}
-    {{#is type "info"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'InformationFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm1-3V7H7v6h2zM8 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-      </svg>
-    {{/if}}
-    {{/is}}
-    {{#is type "success"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'CheckmarkFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"></path>
-      </svg>
-    {{/if}}
-    {{/is}}
-    {{#is type "warning"}}
-    {{#if @root.featureFlags.componentsX}}
-      {{ carbon-icon 'WarningFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
-    {{else}}
-      <svg class="{{@root.prefix}}--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M.75 16a.75.75 0 0 1-.67-1.085L7.33.415a.75.75 0 0 1 1.34 0l7.25 14.5A.75.75 0 0 1 15.25 16H.75zm6.5-10v5h1.5V6h-1.5zM8 13.5A.75.75 0 1 0 8 12a.75.75 0 0 0 0 1.5z"></path>
-      </svg>
-    {{/if}}
-    {{/is}}
-    <div class="{{@root.prefix}}--{{../variant}}-notification__text-wrapper">
-      <p class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</p>
-      <p class="{{@root.prefix}}--{{../variant}}-notification__subtitle">{{subtitle}}</p>
-    </div>
-    {{/is}}
+  <div data-notification class="{{@root.prefix}}--{{../variant}}-notification {{@root.prefix}}--{{../variant}}-notification--{{type}}" role="alert">
     {{#is ../variant "toast"}}
-    <h3 class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</h3>
-    <p class="{{@root.prefix}}--{{../variant}}-notification__subtitle">{{subtitle}}</p>
-    <p class="{{@root.prefix}}--{{../variant}}-notification__caption">{{timestamp}}</p>
+      {{#is type "error"}}
+        {{ carbon-icon 'ErrorFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+      {{/is}}
+      {{#is type "success"}}
+        {{ carbon-icon 'CheckmarkFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+      {{/is}}
+      {{#is type "warning"}}
+        {{ carbon-icon 'WarningFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+      {{/is}}
     {{/is}}
-  </div>
-  <button data-notification-btn class="{{@root.prefix}}--{{../variant}}-notification__close-button" type="button" aria-label="close">
-    {{#if @root.featureFlags.componentsX}}
+    <div class="{{@root.prefix}}--{{../variant}}-notification__details">
+      {{#is ../variant "inline"}}
+        {{#is type "error"}}
+          {{ carbon-icon 'ErrorFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+        {{/is}}
+        {{#is type "info"}}
+          {{ carbon-icon 'InformationFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+        {{/is}}
+        {{#is type "success"}}
+          {{ carbon-icon 'CheckmarkFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+        {{/is}}
+        {{#is type "warning"}}
+          {{ carbon-icon 'WarningFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
+        {{/is}}
+        <div class="{{@root.prefix}}--{{../variant}}-notification__text-wrapper">
+          <p class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</p>
+          <p class="{{@root.prefix}}--{{../variant}}-notification__subtitle">{{subtitle}}</p>
+        </div>
+      {{/is}}
+      {{#is ../variant "toast"}}
+        <h3 class="{{@root.prefix}}--{{../variant}}-notification__title">{{title}}</h3>
+        <p class="{{@root.prefix}}--{{../variant}}-notification__subtitle">{{subtitle}}</p>
+        <p class="{{@root.prefix}}--{{../variant}}-notification__caption">{{timestamp}}</p>
+      {{/is}}
+    </div>
+    <button data-notification-btn class="{{@root.prefix}}--{{../variant}}-notification__close-button" type="button" aria-label="close">
       {{ carbon-icon 'Close16' class=(add @root.prefix (add '--' (add ../variant '-notification__close-icon'))) }}
-    {{else}}
-      <svg aria-hidden="true" class="{{@root.prefix}}--{{../variant}}-notification__close-icon" width="10" height="10" viewBox="0 0 10 10"
-        xmlns="http://www.w3.org/2000/svg">
-        <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
-          fill-rule="nonzero" />
-      </svg>
-    {{/if}}
-  </button>
-</div>
+    </button>
+  </div>
 {{/each}}

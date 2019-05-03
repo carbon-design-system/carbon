@@ -13,22 +13,16 @@
         pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" />
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-1" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
       <select id="select-id-1" class="{{prefix}}--select-input">
         <option class="{{prefix}}--select-option" value="AM">AM</option>
         <option class="{{prefix}}--select-option" value="PM">PM</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-2" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
         zone</label>
       <select id="select-id-2" class="{{prefix}}--select-input">
@@ -36,13 +30,7 @@
         <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
         <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
   </div>
 </div>
@@ -52,29 +40,18 @@
     <div class="{{prefix}}--time-picker__input">
       <input id="time-picker-2" type="text" class="{{prefix}}--text-input {{prefix}}--time-picker__input-field"
         pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" />
-      {{#unless componentsX}}
-      <div class="{{prefix}}--form-requirement">
-        Invalid time.
-      </div>
-      {{/unless}}
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-3" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
       <select id="select-id-3" class="{{prefix}}--select-input">
         <option class="{{prefix}}--select-option" value="AM">AM</option>
         <option class="{{prefix}}--select-option" value="PM">PM</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-4" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
         zone</label>
       <select id="select-id-4" class="{{prefix}}--select-input">
@@ -82,20 +59,12 @@
         <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
         <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
   </div>
-  {{#if componentsX}}
   <div class="{{prefix}}--form-requirement">
     Invalid time.
   </div>
-  {{/if}}
 </div>
 <div class="{{prefix}}--form-item">
   <label for="time-picker-3" class="{{prefix}}--label {{prefix}}--label--disabled">Select a time</label>
@@ -105,22 +74,16 @@
         pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" disabled />
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-5" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
       <select id="select-id-5" class="{{prefix}}--select-input" disabled>
         <option class="{{prefix}}--select-option" value="AM">AM</option>
         <option class="{{prefix}}--select-option" value="PM">PM</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-6" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
         zone</label>
       <select id="select-id-6" class="{{prefix}}--select-input" disabled>
@@ -128,13 +91,7 @@
         <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
         <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
   </div>
 </div>
@@ -144,29 +101,18 @@
     <div class="{{prefix}}--time-picker__input">
       <input id="time-picker-4" type="text" class="{{prefix}}--text-input {{prefix}}--time-picker__input-field"
         pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" disabled />
-      {{#unless componentsX}}
-      <div class="{{prefix}}--form-requirement">
-        Invalid time.
-      </div>
-      {{/unless}}
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-7" class="{{prefix}}--label {{prefix}}--visually-hidden">Select AM/PM</label>
       <select id="select-id-7" class="{{prefix}}--select-input" disabled>
         <option class="{{prefix}}--select-option" value="AM">AM</option>
         <option class="{{prefix}}--select-option" value="PM">PM</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
     <div
-      class="{{prefix}}--time-picker__select {{prefix}}--select{{#unless componentsX}} {{prefix}}--select--inline{{/unless}}">
+      class="{{prefix}}--time-picker__select {{prefix}}--select">
       <label for="select-id-8" class="{{prefix}}--label {{prefix}}--visually-hidden">Select time
         zone</label>
       <select id="select-id-8" class="{{prefix}}--select-input" disabled>
@@ -174,18 +120,10 @@
         <option class="{{prefix}}--select-option" value="option-2">Time zone 2</option>
         <option class="{{prefix}}--select-option" value="option-3">Time zone 3</option>
       </select>
-      {{#if componentsX}}
       {{ carbon-icon 'ChevronDown16' class=(add prefix '--select__arrow') }}
-      {{else}}
-      <svg class="{{prefix}}--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
-      </svg>
-      {{/if}}
     </div>
   </div>
-  {{#if componentsX}}
   <div class="{{prefix}}--form-requirement">
     Invalid time.
   </div>
-  {{/if}}
 </div>

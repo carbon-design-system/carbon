@@ -54,6 +54,10 @@
       width: rem(48px);
       border-radius: rem(15px);
       top: 0;
+      will-change: box-shadow;
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow $duration--fast-01 motion(exit, productive),
+        background-color $duration--fast-01 motion(exit, productive);
     }
 
     // Toggle circle
@@ -69,7 +73,7 @@
       background-color: $ui-03;
       border-radius: 50%;
       content: '';
-      transition: $duration--fast-01 motion(exit, productive);
+      transition: transform $duration--fast-01 motion(exit, productive);
     }
   }
 

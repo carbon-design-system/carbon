@@ -55,7 +55,7 @@
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
-    transition: $duration--fast-02 motion(standard, productive) all;
+    transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -152,8 +152,8 @@
   }
 
   .#{$prefix}--dropdown-item {
-    transition: opacity $duration--fast-02 motion(standard, productive),
-      background-color $duration--fast-02 motion(standard, productive);
+    transition: opacity $duration--fast-01 motion(standard, productive),
+      background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
 
     &:hover {
@@ -219,6 +219,7 @@
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
     max-height: 15rem;
+    transition: max-height $duration--fast-02 motion(entrance, productive);
 
     &:hover {
       overflow: auto;
@@ -263,10 +264,10 @@
     justify-self: start;
     display: inline-block;
     border-bottom-color: transparent;
-    transition-property: none;
     width: auto;
     height: rem(32px);
     background-color: $field-02;
+    transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
       background-color: $hover-ui;

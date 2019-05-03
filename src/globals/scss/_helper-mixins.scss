@@ -86,6 +86,11 @@
     outline-offset: -2px;
   }
 
+  @if ($type == 'outline-compat') {
+    border: 2px solid $focus;
+    box-sizing: border-box;
+  }
+
   @if ($type == 'invalid') {
     outline: 2px solid $support-01;
     outline-offset: -2px;

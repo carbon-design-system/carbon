@@ -34,17 +34,21 @@
     align-items: center;
     justify-content: center;
     content: '';
+    background-color: transparent;
     opacity: 0;
-    background-color: $overlay-01;
-    transition: opacity $duration--moderate-01 motion(exit, expressive),
-      z-index 0s $duration--moderate-01 motion(exit, expressive), visibility 0s $duration--moderate-01 motion(exit, expressive);
     visibility: hidden;
+    transition: background-color $duration--slow-02 motion(exit, expressive),
+      opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-02 motion(exit, expressive),
+      visibility $duration--moderate-02 motion(exit, expressive);
 
     &.is-visible {
       z-index: z('modal');
-      opacity: 1;
-      transition: opacity $duration--slow-01 motion(entrance, expressive);
       visibility: visible;
+      opacity: 1;
+      background-color: $overlay-01;
+      transition: background-color $duration--slow-02 motion(entrance, expressive),
+        opacity $duration--moderate-02 motion(entrance, expressive), z-index $duration--slow-02 motion(entrance, expressive),
+        visibility $duration--moderate-02 motion(entrance, expressive);
     }
 
     .#{$prefix}--text-input,
@@ -57,20 +61,29 @@
     @include modal--color($support-01);
   }
 
+  .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
+    transform: translate3d(0, 0, 0);
+  }
+
   .#{$prefix}--modal-container {
     position: relative;
     display: flex;
     flex-direction: column;
     background-color: $ui-01;
     width: 100%;
-    max-height: 100%;
     height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    transform-origin: top center;
+    transform: translate3d(0, -24px, 0);
+    transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
-      height: auto;
       width: 50%;
       max-width: 768px;
       max-height: 90%;
+      height: auto;
     }
 
     @include carbon--breakpoint(lg) {
@@ -147,6 +160,7 @@
     overflow: hidden;
     cursor: pointer;
     background-color: transparent;
+    transition: background-color $duration--fast-02 motion(standard, productive);
 
     &:hover {
       background-color: $hover-ui;

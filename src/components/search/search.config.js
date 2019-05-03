@@ -7,64 +7,24 @@
 
 'use strict';
 
-const { componentsX } = require('../../globals/js/feature-flags');
 const { prefix } = require('../../globals/js/settings');
 
 module.exports = {
-  default: 'large',
+  default: 'extra-large',
   context: {
-    featureFlags: {
-      componentsX,
-    },
     prefix,
   },
   variants: [
     {
-      name: 'large',
+      name: 'extra-large',
       label: 'Normal search',
       notes: `
         Search enables users to specify a word or a phrase to find particular relevant pieces of content
         without the use of navigation. Search can be used as the primary means of discovering content,
         or as a filter to aid the user in finding content.
       `,
-      meta: {
-        xVersionNotSupported: true,
-      },
-      context: {
-        suffix: 'lg',
-        componentsX,
-      },
-    },
-    {
-      name: 'extra large',
-      label: 'Extra large search',
-      notes: `
-          Search enables users to specify a word or a phrase to find particular relevant pieces of content
-          without the use of navigation. Search can be used as the primary means of discovering content,
-          or as a filter to aid the user in finding content.
-        `,
-      meta: {
-        xVersionNotSupported: true,
-      },
       context: {
         suffix: 'xl',
-        componentsX,
-      },
-    },
-    {
-      name: 'extra large',
-      label: 'Normal search',
-      notes: `
-          Search enables users to specify a word or a phrase to find particular relevant pieces of content
-          without the use of navigation. Search can be used as the primary means of discovering content,
-          or as a filter to aid the user in finding content.
-        `,
-      meta: {
-        xVersionOnly: true,
-      },
-      context: {
-        suffix: 'xl',
-        componentsX,
       },
     },
     {
@@ -78,41 +38,19 @@ module.exports = {
       `,
       context: {
         suffix: 'sm',
-        componentsX,
       },
     },
     {
-      name: 'large-light',
+      name: 'extra-large-light',
       label: 'Normal search (Light)',
       notes: `
         Search enables users to specify a word or a phrase to find particular relevant pieces of content
         without the use of navigation. Search can be used as the primary means of discovering content,
         or as a filter to aid the user in finding content.
       `,
-      meta: {
-        xVersionNotSupported: true,
-      },
-      context: {
-        suffix: 'lg',
-        light: true,
-        componentsX,
-      },
-    },
-    {
-      name: 'extra large light',
-      label: 'Normal search (Light)',
-      notes: `
-          Search enables users to specify a word or a phrase to find particular relevant pieces of content
-          without the use of navigation. Search can be used as the primary means of discovering content,
-          or as a filter to aid the user in finding content.
-        `,
-      meta: {
-        xVersionOnly: true,
-      },
       context: {
         suffix: 'xl',
         light: true,
-        componentsX,
       },
     },
     {
@@ -127,7 +65,6 @@ module.exports = {
       context: {
         suffix: 'sm',
         light: true,
-        componentsX,
       },
     },
   ],
