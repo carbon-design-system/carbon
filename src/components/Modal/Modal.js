@@ -283,6 +283,7 @@ export default class Modal extends Component {
         type="button"
         onClick={onRequestClose}
         title={iconDescription}
+        aria-label={iconDescription}
         ref={this.button}>
         <Close20
           aria-label={iconDescription}
@@ -301,9 +302,9 @@ export default class Modal extends Component {
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
-            <p className={`${prefix}--modal-header__label`}>{modalLabel}</p>
+            <h2 className={`${prefix}--modal-header__label`}>{modalLabel}</h2>
           )}
-          <p className={`${prefix}--modal-header__heading`}>{modalHeading}</p>
+          <h3 className={`${prefix}--modal-header__heading`}>{modalHeading}</h3>
           {!passiveModal && modalButton}
         </div>
         <div className={`${prefix}--modal-content`}>{this.props.children}</div>
