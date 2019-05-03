@@ -27,7 +27,7 @@ const Checkbox = React.forwardRef(function Checkbox(
   ref
 ) {
   const labelClasses = classNames(`${prefix}--checkbox-label`, className);
-  const innerLabelClasses = classNames({
+  const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
   const wrapperClasses = classNames(
