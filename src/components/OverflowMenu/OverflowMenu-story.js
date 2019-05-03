@@ -6,15 +6,12 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import Add16 from '@carbon/icons-react/lib/add/16';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 
-const { prefix } = settings;
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
@@ -58,20 +55,6 @@ const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
       />
       <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
       <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText={
-          <div style={{ display: 'flex' }}>
-            <>
-              <div
-                className={`${prefix}--overflow-menu-options__option-content`}>
-                Add
-              </div>
-              <Add16 />
-            </>
-          </div>
-        }
-      />
       <OverflowMenuItem
         {...overflowMenuItemProps}
         itemText="Danger option"
