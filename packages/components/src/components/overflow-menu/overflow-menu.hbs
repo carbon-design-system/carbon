@@ -22,17 +22,6 @@
       </button>
     </li>
     {{/each}}
-    <li
-      class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}"
-      role="presentation" {{#if disabled}} aria-disabled="true" {{/if}}>
-      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}"
-        {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}} {{#if disabled}} tabindex="-1" {{/if}}>
-        <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-          Add
-        </div>
-        {{carbon-icon 'Add16'}}
-      </button>
-    </li>
   </ul>
 </div>
 
@@ -53,24 +42,6 @@
       </button>
     </li>
     {{/each}}
-    <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
-      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem">
-        <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-          Add
-        </div>
-        {{carbon-icon 'Add16'}}
-      </button>
-    </li>
-    <li
-      class="{{@root.prefix}}--overflow-menu-options__option {{@root.prefix}}--overflow-menu-options__option--disabled"
-      role="presentation" aria-disabled="true" }>
-      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" tabindex="-1">
-        <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-          Add
-        </div>
-        {{carbon-icon 'Add16'}}
-      </button>
-    </li>
   </ul>
 </div>
 
@@ -92,23 +63,5 @@
       </a>
     </li>
     {{/each}}
-    <li class="{{@root.prefix}}--overflow-menu-options__option" role="presentation">
-      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem">
-        <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-          Add
-        </div>
-        {{carbon-icon 'Add16'}}
-      </button>
-    </li>
-    <li
-      class="{{@root.prefix}}--overflow-menu-options__option {{@root.prefix}}--overflow-menu-options__option--disabled"
-      role="presentation" aria-disabled="true" }>
-      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" tabindex="-1">
-        <div class="{{@root.prefix}}--overflow-menu-options__option-content">
-          Add
-        </div>
-        {{carbon-icon 'Add16'}}
-      </button>
-    </li>
   </ul>
 </div>
