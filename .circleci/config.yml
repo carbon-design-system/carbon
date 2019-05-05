@@ -1,17 +1,28 @@
 version: 2
 jobs:
-  build:
+  components:
     docker:
-      - image: circleci/node:8.12-browsers
+      - image: circleci/node:10.15-browsers
     working_directory: ~/repo
     steps:
       - checkout
       - run:
           name: Install yarn
-          command: curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+            export PATH=$HOME/.yarn/bin:$PATH
       - run:
           name: Install dependencies
-          command: PATH=$HOME/.yarn/bin:$PATH yarn install --frozen-lockfile --offline
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
       - run:
           name: Run Continuous Integration checks
-          command: PATH=$HOME/.yarn/bin:$PATH yarn ci-check
+          command: yarn lerna run ci-check --scope carbon-components
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - components
