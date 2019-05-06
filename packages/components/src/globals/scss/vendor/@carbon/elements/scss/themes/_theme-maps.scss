@@ -7,6 +7,7 @@
 //
 
 $carbon--theme--white: (
+  current-theme: 'white',
   interactive-01: #0062ff,
   interactive-02: #171717,
   interactive-03: #0062ff,
@@ -62,6 +63,7 @@ $carbon--theme--white: (
 ) !default;
 
 $carbon--theme--g10: (
+  current-theme: 'g10',
   interactive-01: #0062ff,
   interactive-02: #171717,
   interactive-03: #0062ff,
@@ -117,6 +119,7 @@ $carbon--theme--g10: (
 ) !default;
 
 $carbon--theme--g90: (
+  current-theme: 'g90',
   interactive-01: #0062ff,
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,
@@ -172,6 +175,7 @@ $carbon--theme--g90: (
 ) !default;
 
 $carbon--theme--g100: (
+  current-theme: 'g100',
   interactive-01: #0062ff,
   interactive-02: #6f6f6f,
   interactive-03: #ffffff,

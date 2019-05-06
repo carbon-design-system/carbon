@@ -8,6 +8,7 @@
 
 @import './theme-maps';
 
+$current-theme: map-get($carbon--theme, current-theme) !default;
 $interactive-01: map-get($carbon--theme, interactive-01) !default;
 $interactive-02: map-get($carbon--theme, interactive-02) !default;
 $interactive-03: map-get($carbon--theme, interactive-03) !default;

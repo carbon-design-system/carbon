@@ -48,7 +48,7 @@
   }
 
   .#{$prefix}--inline-notification--error {
-    @include notification--experimental($support-01, $notification-error-background-color);
+    @include notification--experimental($notification-support-01, $notification-error-background-color);
   }
 
   .#{$prefix}--inline-notification--success {

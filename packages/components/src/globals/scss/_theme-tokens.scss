@@ -248,6 +248,17 @@
   /// @group notification
   $notification-success-background-color: $ibm-color__green-10 !default !global;
 
+  /// @type Color
+  /// @access public
+  /// @group notification
+  $notification-support-01: carbon--theme-custom(
+    $carbon--theme,
+    $carbon--red-50,
+    $carbon--red-50,
+    $carbon--red-60,
+    $carbon--red-60
+  ) !default !global;
+
   // Progress Indicator
 
   /// @type Value
