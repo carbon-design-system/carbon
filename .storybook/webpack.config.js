@@ -1,12 +1,15 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const rtlcss = require('rtlcss');
 
 const useExternalCss =
   process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
 
 const useStyleSourceMap =
   process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
+
+const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
 
 const styleLoaders = [
   {
@@ -19,11 +22,12 @@ const styleLoaders = [
   {
     loader: 'postcss-loader',
     options: {
-      plugins: () => [
-        require('autoprefixer')({
+      plugins: () => {
+        const autoPrefixer = require('autoprefixer')({
           browsers: ['last 1 version', 'ie >= 11'],
-        }),
-      ],
+        });
+        return !useRtl ? [autoPrefixer] : [autoPrefixer, rtlcss];
+      },
       sourceMap: useStyleSourceMap,
     },
   },

@@ -20,4 +20,6 @@ const babelConfig = Object.keys(packageJson.babel).reduce((acc, key) => {
   };
 }, {});
 
+babelConfig.plugins.push('transform-inline-environment-variables');
+
 module.exports = babelConfig;

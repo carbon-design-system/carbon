@@ -7,4 +7,3 @@ import '@storybook/addon-options/register';
 
 // Community addons
 import 'storybook-readme/register';
-import 'storybook-addon-rtl/register';

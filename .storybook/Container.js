@@ -3,6 +3,12 @@ import './polyfills';
 import './_container.scss';
 
 export default class Container extends Component {
+  componentDidMount() {
+    if (process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true') {
+      document.documentElement.dir = 'rtl';
+    }
+  }
+
   render() {
     const { story } = this.props;
 

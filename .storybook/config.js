@@ -3,7 +3,6 @@ import { configure, addDecorator } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { withOptions } from '@storybook/addon-options';
 import { configureActions } from '@storybook/addon-actions';
-import { initializeRTL } from 'storybook-addon-rtl';
 // import { checkA11y } from 'storybook-addon-a11y';
 import Container from './Container';
 
@@ -32,7 +31,5 @@ function loadStories() {
   const req = require.context('../src/components', true, /\-story\.js$/);
   req.keys().forEach(filename => req(filename));
 }
-
-initializeRTL();
 
 configure(loadStories, module);
