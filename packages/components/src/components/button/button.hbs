@@ -24,11 +24,9 @@
   {{ carbon-icon 'Add16' class=(add @root.prefix '--btn__icon') }}
 </button>
 {{#if hasIconOnly}}
-<div class="{{@root.prefix}}--tooltip--icon">
-  <button
-    class="{{@root.prefix}}--btn {{@root.prefix}}--btn--{{variant}} {{@root.prefix}}--btn--icon-only {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--icon__bottom{{#if small}} {{@root.prefix}}--btn--sm{{/if}}"
-    aria-label="Add">
-    {{ carbon-icon 'Add16' class=(add @root.prefix '--btn__icon') }}
-  </button>
-</div>
+<button
+  class="{{@root.prefix}}--btn {{@root.prefix}}--btn--{{variant}} {{@root.prefix}}--btn--icon-only {{@root.prefix}}--btn--icon-only--bottom {{#if small}} {{@root.prefix}}--btn--sm{{/if}}"
+  aria-label="Add">
+  {{ carbon-icon 'Add16' class=(add @root.prefix '--btn__icon') }}
+</button>
 {{/if}}
