@@ -35,8 +35,8 @@
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon path,
-    &:disabled > .#{$prefix}--btn__icon path {
+    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
+    &:disabled > .#{$prefix}--btn__icon svg {
       fill: $ui-04;
     }
   }
