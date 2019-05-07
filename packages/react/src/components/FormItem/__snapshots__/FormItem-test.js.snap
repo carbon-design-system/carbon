@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormItem should render 1`] = `
+<div
+  className="bx--form-item"
+/>
+`;

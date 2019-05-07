@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableBatchAction should render 1`] = `
+<TableBatchAction
+  className="custom-class"
+  iconDescription="Add"
+  renderIcon={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "height": 16,
+        "preserveAspectRatio": "xMidYMid meet",
+        "viewBox": "0 0 16 16",
+        "width": 16,
+        "xmlns": "http://www.w3.org/2000/svg",
+      },
+      "displayName": "AddFilled16",
+      "propTypes": Object {
+        "aria-hidden": [Function],
+        "aria-label": [Function],
+        "aria-labelledby": [Function],
+        "children": [Function],
+        "className": [Function],
+        "height": [Function],
+        "preserveAspectRatio": [Function],
+        "tabIndex": [Function],
+        "viewBox": [Function],
+        "width": [Function],
+        "xmlns": [Function],
+      },
+      "render": [Function],
+    }
+  }
+>
+  <ForwardRef(Button)
+    className="custom-class"
+    disabled={false}
+    iconDescription="Add"
+    kind="primary"
+    renderIcon={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "height": 16,
+          "preserveAspectRatio": "xMidYMid meet",
+          "viewBox": "0 0 16 16",
+          "width": 16,
+          "xmlns": "http://www.w3.org/2000/svg",
+        },
+        "displayName": "AddFilled16",
+        "propTypes": Object {
+          "aria-hidden": [Function],
+          "aria-label": [Function],
+          "aria-labelledby": [Function],
+          "children": [Function],
+          "className": [Function],
+          "height": [Function],
+          "preserveAspectRatio": [Function],
+          "tabIndex": [Function],
+          "viewBox": [Function],
+          "width": [Function],
+          "xmlns": [Function],
+        },
+        "render": [Function],
+      }
+    }
+    small={false}
+    tabIndex={0}
+    type="button"
+  >
+    <button
+      className="custom-class bx--btn bx--btn--primary"
+      disabled={false}
+      tabIndex={0}
+      type="button"
+    >
+      <AddFilled16
+        aria-hidden={true}
+        aria-label="Add"
+        className="bx--btn__icon"
+        height={16}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 16 16"
+        width={16}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <svg
+          aria-hidden={true}
+          aria-label="Add"
+          className="bx--btn__icon"
+          focusable="false"
+          height={16}
+          preserveAspectRatio="xMidYMid meet"
+          role="img"
+          style={
+            Object {
+              "willChange": "transform",
+            }
+          }
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+          />
+        </svg>
+      </AddFilled16>
+    </button>
+  </ForwardRef(Button)>
+</TableBatchAction>
+`;
