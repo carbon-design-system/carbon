@@ -397,6 +397,7 @@ const buildDemoHTML = () =>
               useStaticFullRenderPage: true,
             }),
             minify: true,
+            queryRoute: true,
           })
         ),
         ...componentSource
