@@ -9,6 +9,8 @@
 
 // Tooltip Icon
 // Icon CSS only tooltip
+/// @access public
+/// @group tooltip
 @mixin tooltip--icon {
   @include reset;
   position: relative;
@@ -70,6 +72,8 @@
 }
 
 // Tooltip Icon caret - top position
+/// @access public
+/// @group tooltip
 @mixin tooltip--icon--top {
   &::before {
     top: 1px;
@@ -83,6 +87,8 @@
 }
 
 // Tooltip Icon caret - bottom position
+/// @access public
+/// @group tooltip
 @mixin tooltip--icon--bottom {
   &::before {
     bottom: 0;
