@@ -12,7 +12,7 @@ import { mount, shallow } from 'enzyme';
 describe('TextInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <TextInput
+      <TextInput.ControlledPasswordInput
         id="test"
         className="extra-class"
         labelText="testlabel"
@@ -64,9 +64,9 @@ describe('TextInput', () => {
       });
 
       it('should set type as expected', () => {
+        expect(textInput().props().type).toEqual('password');
+        wrapper.setProps({ type: 'text' });
         expect(textInput().props().type).toEqual('text');
-        wrapper.setProps({ type: 'email' });
-        expect(textInput().props().type).toEqual('email');
       });
 
       it('should set value as expected', () => {

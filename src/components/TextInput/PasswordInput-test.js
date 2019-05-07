@@ -1,18 +1,11 @@
-/**
- * Copyright IBM Corp. 2016, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import React from 'react';
-import TextInput from '../TextInput';
+import PasswordInput from './PasswordInput';
 import { mount, shallow } from 'enzyme';
 
-describe('TextInput', () => {
+describe('PasswordInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <TextInput
+      <PasswordInput
         id="test"
         className="extra-class"
         labelText="testlabel"
@@ -21,75 +14,53 @@ describe('TextInput', () => {
       />
     );
 
-    const textInput = () => wrapper.find('input');
+    const passwordInput = () => wrapper.find('input');
 
     describe('input', () => {
       it('renders as expected', () => {
-        expect(textInput().length).toBe(1);
-      });
-
-      it('should accept refs', () => {
-        class MyComponent extends React.Component {
-          constructor(props) {
-            super(props);
-            this.textInput = React.createRef();
-            this.focus = this.focus.bind(this);
-          }
-          focus() {
-            this.textInput.current.focus();
-          }
-          render() {
-            return (
-              <TextInput id="test" labelText="testlabel" ref={this.textInput} />
-            );
-          }
-        }
-        const wrapper = mount(<MyComponent />);
-        expect(document.activeElement.type).toBeUndefined();
-        wrapper.instance().focus();
-        expect(document.activeElement.type).toEqual('text');
+        expect(passwordInput().length).toBe(1);
       });
 
       it('has the expected classes', () => {
-        expect(textInput().hasClass('bx--text-input')).toEqual(true);
+        expect(passwordInput().hasClass('bx--text-input')).toEqual(true);
       });
 
       it('should add extra classes that are passed via className', () => {
-        expect(textInput().hasClass('extra-class')).toEqual(true);
+        expect(passwordInput().hasClass('extra-class')).toEqual(true);
       });
 
       it('has the expected classes for light', () => {
         wrapper.setProps({ light: true });
-        expect(textInput().hasClass('bx--text-input--light')).toEqual(true);
+        expect(passwordInput().hasClass('bx--text-input--light')).toEqual(true);
       });
 
       it('should set type as expected', () => {
-        expect(textInput().props().type).toEqual('text');
-        wrapper.setProps({ type: 'email' });
-        expect(textInput().props().type).toEqual('email');
+        expect(passwordInput().props().type).toEqual('password');
+        wrapper.find('button').simulate('click');
+        expect(passwordInput().props().type).toEqual('text');
       });
 
       it('should set value as expected', () => {
-        expect(textInput().props().defaultValue).toEqual(undefined);
+        expect(passwordInput().props().defaultValue).toEqual(undefined);
         wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput().props().defaultValue).toEqual('test');
+        expect(passwordInput().props().defaultValue).toEqual('test');
       });
 
       it('should set disabled as expected', () => {
-        expect(textInput().props().disabled).toEqual(false);
+        expect(passwordInput().props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(textInput().props().disabled).toEqual(true);
+        expect(passwordInput().props().disabled).toEqual(true);
       });
 
       it('should set placeholder as expected', () => {
-        expect(textInput().props().placeholder).not.toBeDefined();
+        expect(passwordInput().props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
-        expect(textInput().props().placeholder).toEqual('Enter text');
+        expect(passwordInput().props().placeholder).toEqual('Enter text');
       });
     });
 
     describe('label', () => {
-      wrapper.setProps({ labelText: 'Email Input' });
+      wrapper.setProps({ labelText: 'Password Input' });
       const renderedLabel = wrapper.find('label');
 
       it('renders a label', () => {
@@ -101,7 +72,7 @@ describe('TextInput', () => {
       });
 
       it('should set label as expected', () => {
-        expect(renderedLabel.text()).toEqual('Email Input');
+        expect(renderedLabel.text()).toEqual('Password Input');
       });
     });
 
@@ -141,7 +112,7 @@ describe('TextInput', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <TextInput
+        <PasswordInput
           id="test"
           labelText="testlabel"
           onClick={onClick}
@@ -168,7 +139,7 @@ describe('TextInput', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <TextInput
+        <PasswordInput
           labelText="testlabel"
           id="test"
           onClick={onClick}

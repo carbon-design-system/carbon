@@ -10,9 +10,11 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import PasswordInput from './PasswordInput';
+import ControlledPasswordInput from './ControlledPasswordInput';
+import { textInputProps } from './util';
 
 const { prefix } = settings;
-
 const TextInput = React.forwardRef(function TextInput(
   {
     labelText,
@@ -31,7 +33,12 @@ const TextInput = React.forwardRef(function TextInput(
   },
   ref
 ) {
-  const textInputProps = {
+  const errorId = id + '-error-msg';
+  const textInputClasses = classNames(`${prefix}--text-input`, className, {
+    [`${prefix}--text-input--light`]: light,
+    [`${prefix}--text-input--invalid`]: invalid,
+  });
+  const sharedTextInputProps = {
     id,
     onChange: evt => {
       if (!other.disabled) {
@@ -46,13 +53,9 @@ const TextInput = React.forwardRef(function TextInput(
     placeholder,
     type,
     ref,
+    className: textInputClasses,
+    ...other,
   };
-
-  const errorId = id + '-error-msg';
-  const textInputClasses = classNames(`${prefix}--text-input`, className, {
-    [`${prefix}--text-input--light`]: light,
-    [`${prefix}--text-input--invalid`]: invalid,
-  });
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
@@ -60,38 +63,25 @@ const TextInput = React.forwardRef(function TextInput(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
-
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;
-
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
-
-  const input = invalid ? (
-    <input
-      {...other}
-      {...textInputProps}
-      data-invalid
-      aria-invalid
-      aria-describedby={errorId}
-      className={textInputClasses}
-    />
-  ) : (
-    <input {...other} {...textInputProps} className={textInputClasses} />
+  const input = (
+    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
   );
-
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
 
   return (
-    <div className={(`${prefix}--form-item`, `${prefix}--text-input-wrapper`)}>
+    <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
       {label}
       {helper}
       <div
@@ -107,6 +97,8 @@ const TextInput = React.forwardRef(function TextInput(
   );
 });
 
+TextInput.PasswordInput = PasswordInput;
+TextInput.ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the <input> node
