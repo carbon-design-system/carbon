@@ -61,6 +61,11 @@
       "yarn lerna run lint:staged --scope carbon-components",
       "git add"
     ],
+    "packages/react/**/*.js": [
+      "yarn format:staged",
+      "yarn lerna run lint:staged --scope carbon-components-react",
+      "git add"
+    ],
     "*.{scss,css}": [
       "yarn format:staged",
       "git add"
