@@ -6,6 +6,7 @@
 ## Table of Contents
 
 - [Installing dependencies](#installing-dependencies)
+- [Common tasks](#common-tasks)
 - [FAQ](#faq)
     - [CircleCI is failing saying that it cannot find a dependency in offline mode](#circleci-is-failing-saying-that-it-cannot-find-a-dependency-in-offline-mode)
 
@@ -14,8 +15,8 @@
 
 ## Installing dependencies
 
-Carbon is built using a collection of packages all built in the same
-git repository. You might have heard this setup described as a
+Carbon is built using a collection of packages all built in the same Git
+repository. You might have heard this setup described as a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
 As a result, we use two pieces of tooling to help us managing installing
@@ -55,8 +56,8 @@ dependencies, definitely take a look at our write-up
 
 ## Common tasks
 
-While working on Carbon, here are some of the top-level tasks that you
-might want to run:
+While working on Carbon, here are some of the top-level tasks that you might
+want to run:
 
 | Command                           | Usage                                                                                                         |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------- |

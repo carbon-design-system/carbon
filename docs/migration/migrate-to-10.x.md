@@ -1,6 +1,8 @@
 # 10.x Migration
 
-Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/v10-migration/overview) for more information on migrating from v9 to v10.
+Refer to the
+[Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/v10-migration/overview)
+for more information on migrating from v9 to v10.
 
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -9,13 +11,15 @@ Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updat
 
 - [Components](#components)
 - [Styles](#styles)
+  - [Features](#features)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
 
 ## Components
 
-**IMPORTANT NOTE**: `v9` component styles will be _removed_ soon after the initial `v10` release.
+**IMPORTANT NOTE**: `v9` component styles will be _removed_ soon after the
+initial `v10` release.
 
 | Component          | v10                                                                   |
 | ------------------ | --------------------------------------------------------------------- |
@@ -68,7 +72,8 @@ Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updat
 
 ## Styles
 
-**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be _removed_ soon after the initial `v10` release.
+**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be
+_removed_ soon after the initial `v10` release.
 
 | `scss` path         | v10                                                                           |
 | ------------------- | ----------------------------------------------------------------------------- |

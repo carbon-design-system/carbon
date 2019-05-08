@@ -17,11 +17,23 @@
 
 # Overview
 
-In light of potential `npm` security issues [[1]](https://blog.npmjs.org/post/175824896885/incident-report-npm-inc-operations-incident-of) [[2]](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), we are addressing some of the issues with installing dependencies from a live registry by taking advantage of [Yarn's offline feature](https://yarnpkg.com/blog/2016/11/24/offline-mirror/). The majority of steps taken are inspired by [this tweet](https://twitter.com/leeb/status/1017607265115750400) from Lee Byron.
+In light of potential `npm` security issues
+[[1]](https://blog.npmjs.org/post/175824896885/incident-report-npm-inc-operations-incident-of)
+[[2]](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes),
+we are addressing some of the issues with installing dependencies from a live
+registry by taking advantage of
+[Yarn's offline feature](https://yarnpkg.com/blog/2016/11/24/offline-mirror/).
+The majority of steps taken are inspired by
+[this tweet](https://twitter.com/leeb/status/1017607265115750400) from Lee
+Byron.
 
 # Continuous Integration
 
-We specify a `.yarnc` file in this project that sets the path for Yarn's offline mirror to the folder `.yarn-offline-mirror`. This folder contains all the tarballs for the packages that the project uses. What this allows us to do is run `yarn install --offline` in our Continuous Integration environment so that we don't have to fetch from the live registry in our builds.
+We specify a `.yarnc` file in this project that sets the path for Yarn's offline
+mirror to the folder `.yarn-offline-mirror`. This folder contains all the
+tarballs for the packages that the project uses. What this allows us to do is
+run `yarn install --offline` in our Continuous Integration environment so that
+we don't have to fetch from the live registry in our builds.
 
 # FAQ
 

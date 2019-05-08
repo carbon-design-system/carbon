@@ -44,7 +44,10 @@ modified:   src/globals/scss/_feature-flags.scss
 
 ## Application usage
 
-An alternate way for applications to try out `v10` design is building our latest `v9` release with feature flags changed. (Note: Given this involves build process, below technique is _not_ applied to pre-built bundles, e.g. `carbon-components.css`)
+An alternate way for applications to try out `v10` design is building our latest
+`v9` release with feature flags changed. (Note: Given this involves build
+process, below technique is _not_ applied to pre-built bundles, e.g.
+`carbon-components.css`)
 
 One way to do it is via build toolchain, e.g. in `webpack.config.js`:
 
@@ -100,7 +103,8 @@ module.exports = {
 
 ```
 
-Another way, which is applicable only to our Sass code, is defining feature flags before importing `carbon-components` Sass code, e.g.:
+Another way, which is applicable only to our Sass code, is defining feature
+flags before importing `carbon-components` Sass code, e.g.:
 
 ```scss
 $feature-flags: (
@@ -117,7 +121,10 @@ $feature-flags: (
 ### Introduction
 
 When using iconography in experimental components, we'll want to try and use
-what is available through the [Carbon Elements](https://github.com/IBM/carbon-elements) project. Specifically, `@carbon/icons`. In order to do so, we can use the `@carbon/icons-handlebars` and its accompanying helper.
+what is available through the
+[Carbon Elements](https://github.com/IBM/carbon-elements) project. Specifically,
+`@carbon/icons`. In order to do so, we can use the `@carbon/icons-handlebars`
+and its accompanying helper.
 
 This helper is registered under `tools/templates.js`, specifically by doing:
 
@@ -140,9 +147,16 @@ in the corresponding position where the mixin is called.
 
 #### How do I know the name of an icon to use in the `carbon-icon` helper?
 
-You can view all of the icons from `@carbon/icons` inside of [this demo](https://ibm.github.io/carbon-elements/icons/examples/esm/). In the future, this information will live at https://www.carbondesignsystem.com.
+You can view all of the icons from `@carbon/icons` inside of
+[this demo](https://ibm.github.io/carbon-elements/icons/examples/esm/). In the
+future, this information will live at https://www.carbondesignsystem.com.
 
-For now, you can click the "expanded" viewing mode option and see the module name available for each icon in the second-to-last column. So if you are looking for the glyph version of an icon, you might see `/chevron--down` and in the far right-hand side of the table (when in expanded mode) you'd see `ChevronDownGlyph`. You can use this identifier alongside the `carbon-icons` helper by doing:
+For now, you can click the "expanded" viewing mode option and see the module
+name available for each icon in the second-to-last column. So if you are looking
+for the glyph version of an icon, you might see `/chevron--down` and in the far
+right-hand side of the table (when in expanded mode) you'd see
+`ChevronDownGlyph`. You can use this identifier alongside the `carbon-icons`
+helper by doing:
 
 ```hbs
 {{ carbon-icon 'ChevronDownGlyph' }}
@@ -158,8 +172,9 @@ example, in our dropdown we could do:
 ```
 
 This would take in the `@root.prefix` value and prepends the `--dropdown__arrow`
-value to become, currently `bx--dropdown__arrow`. Anything that you set inside of the string to `class`
-will be set as the class name for the `<svg>` container.
+value to become, currently `bx--dropdown__arrow`. Anything that you set inside
+of the string to `class` will be set as the class name for the `<svg>`
+container.
 
 #### How do I add attributes to an icon?
 
