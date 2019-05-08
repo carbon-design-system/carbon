@@ -19,7 +19,10 @@ and design systems inheriting Carbon can override. This prefix prevents potentia
 **HTML**
 
 ```html
-<div class="bx--inline-notification bx--inline-notification--error" role="alert">
+<div
+  class="bx--inline-notification bx--inline-notification--error"
+  role="alert"
+>
   <div class="bx--inline-notification__details">...</div>
 </div>
 ```
@@ -129,7 +132,9 @@ $interactive-01: map-get($carbon--theme, interactive-01) !default;
 A nested element can use a new block name as long as the styles are independent of the parent.
 
 ```html
-<div class="bx--component"><button class="bx--component-button">Button</button></div>
+<div class="bx--component">
+  <button class="bx--component-button">Button</button>
+</div>
 ```
 
 :point_up: The `#{$prefix}--component-button` class implies that this button has independent styles from its parent.

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableToolbarContent should render 1`] = `
+<TableToolbarContent
+  className="custom-class"
+>
+  <div
+    className="bx--toolbar-content custom-class"
+  />
+</TableToolbarContent>
+`;

@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavMenuItem should render 1`] = `
+<ForwardRef(SideNavMenuItem)
+  className="custom-classname"
+  href="#"
+  isActive={false}
+>
+  <li
+    className="bx--side-nav__menu-item custom-classname"
+    role="none"
+  >
+    <Link
+      className="bx--side-nav__link"
+      element="a"
+      href="#"
+      role="menuitem"
+    >
+      <a
+        className="bx--side-nav__link"
+        href="#"
+        role="menuitem"
+      >
+        <SideNavLinkText>
+          <span
+            className="bx--side-nav__link-text"
+          >
+            link
+          </span>
+        </SideNavLinkText>
+      </a>
+    </Link>
+  </li>
+</ForwardRef(SideNavMenuItem)>
+`;
+
+exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria-current="page"\` 1`] = `
+<ForwardRef(SideNavMenuItem)
+  className="custom-classname"
+  href="#"
+  isActive={true}
+>
+  <li
+    className="bx--side-nav__menu-item custom-classname"
+    role="none"
+  >
+    <Link
+      className="bx--side-nav__link bx--side-nav__link--current"
+      element="a"
+      href="#"
+      role="menuitem"
+    >
+      <a
+        className="bx--side-nav__link bx--side-nav__link--current"
+        href="#"
+        role="menuitem"
+      >
+        <SideNavLinkText>
+          <span
+            className="bx--side-nav__link-text"
+          >
+            link
+          </span>
+        </SideNavLinkText>
+      </a>
+    </Link>
+  </li>
+</ForwardRef(SideNavMenuItem)>
+`;
+
+exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria-current="page"\` 2`] = `
+<ForwardRef(SideNavMenuItem)
+  aria-current="page"
+  className="custom-classname"
+  href="#"
+  isActive={false}
+>
+  <li
+    className="bx--side-nav__menu-item custom-classname"
+    role="none"
+  >
+    <Link
+      aria-current="page"
+      className="bx--side-nav__link"
+      element="a"
+      href="#"
+      role="menuitem"
+    >
+      <a
+        aria-current="page"
+        className="bx--side-nav__link"
+        href="#"
+        role="menuitem"
+      >
+        <SideNavLinkText>
+          <span
+            className="bx--side-nav__link-text"
+          >
+            link
+          </span>
+        </SideNavLinkText>
+      </a>
+    </Link>
+  </li>
+</ForwardRef(SideNavMenuItem)>
+`;

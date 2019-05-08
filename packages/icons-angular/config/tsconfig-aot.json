@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": "",
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "sourceMap": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "outDir": "./../lib",
+    "rootDir": "./../ts",
+    "target": "es5",
+    "inlineSources": true,
+    "typeRoots": ["./../node_modules/@types"]
+  },
+  "include": [
+    "./../ts/**/*"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "genDir": "./../waste"
+  }
+}

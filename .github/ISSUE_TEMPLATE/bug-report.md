@@ -4,7 +4,6 @@ about: Something isn't working as expected? Here is the right place to report.
 title: ''
 labels: "type: bug \U0001F41B"
 assignees: ''
-
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
@@ -12,6 +11,16 @@ assignees: ''
 ## Title line template: [Title]: Brief description
 
 -->
+
+## What package(s) are you using?
+
+<!--
+  Add an x in one of the options below, for example:
+- [x] package name
+-->
+
+- [ ] `carbon-components`
+- [ ] `carbon-components-react`
 
 ## Detailed description
 

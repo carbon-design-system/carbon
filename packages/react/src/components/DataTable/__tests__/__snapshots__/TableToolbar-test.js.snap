@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableToolbar should render 1`] = `
+<TableToolbar
+  className="custom-class"
+>
+  <section
+    aria-label="data table toolbar"
+    className="bx--table-toolbar"
+  />
+</TableToolbar>
+`;

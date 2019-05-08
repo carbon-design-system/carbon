@@ -1,0 +1,34 @@
+{
+  "name": "@carbon/icon-helpers",
+  "description": "Helpers used alongside icons for digital and software products using the Carbon Design System",
+  "version": "10.1.1",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icon-helpers",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "files": [
+    "es",
+    "lib",
+    "umd"
+  ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonIconHelpers",
+    "clean": "rimraf es lib umd"
+  },
+  "devDependencies": {
+    "@carbon/bundler": "10.1.1",
+    "rimraf": "^2.6.2"
+  },
+  "sideEffects": false
+}

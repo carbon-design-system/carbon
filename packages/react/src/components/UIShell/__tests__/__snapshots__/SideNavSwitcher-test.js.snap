@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavSwitcher should render 1`] = `
+<ForwardRef(SideNavSwitcher)
+  className="custom-classname"
+  labelText="label"
+  onChange={[MockFunction]}
+  options={
+    Array [
+      "Option 1",
+      "Option 2",
+      "Option 3",
+    ]
+  }
+>
+  <div
+    className="bx--side-nav__switcher custom-classname"
+  >
+    <label
+      className="bx--assistive-text"
+      htmlFor="side-nav-switcher"
+    >
+      label
+    </label>
+    <select
+      className="bx--side-nav__select"
+      defaultValue=""
+      id="carbon-side-nav-switcher"
+      onBlur={[MockFunction]}
+      onChange={[MockFunction]}
+    >
+      <option
+        className="bx--side-nav__option"
+        disabled={true}
+        hidden={true}
+        value=""
+      >
+        label
+      </option>
+      <option
+        className="bx--side-nav__option"
+        key="Option 1"
+        value="Option 1"
+      >
+        Option 1
+      </option>
+      <option
+        className="bx--side-nav__option"
+        key="Option 2"
+        value="Option 2"
+      >
+        Option 2
+      </option>
+      <option
+        className="bx--side-nav__option"
+        key="Option 3"
+        value="Option 3"
+      >
+        Option 3
+      </option>
+    </select>
+    <div
+      className="bx--side-nav__switcher-chevron"
+    >
+      <ChevronDown20
+        height={20}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <svg
+          aria-hidden={true}
+          focusable="false"
+          height={20}
+          preserveAspectRatio="xMidYMid meet"
+          style={
+            Object {
+              "willChange": "transform",
+            }
+          }
+          viewBox="0 0 32 32"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"
+          />
+        </svg>
+      </ChevronDown20>
+    </div>
+  </div>
+</ForwardRef(SideNavSwitcher)>
+`;

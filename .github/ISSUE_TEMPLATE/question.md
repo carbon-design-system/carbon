@@ -4,7 +4,6 @@ about: Usage question or discussion about Carbon Components.
 title: ''
 labels: 'type: question :question:'
 assignees: ''
-
 ---
 
 <!--
@@ -24,6 +23,16 @@ If these resources don't work out, help us out by filling out a couple of
 details below!
 
 -->
+
+## What package(s) are you using?
+
+<!--
+  Add an x in one of the options below, for example:
+- [x] package name
+-->
+
+- [ ] `carbon-components`
+- [ ] `carbon-components-react`
 
 ## Summary
 

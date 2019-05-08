@@ -1,0 +1,15 @@
+{
+  "name": "@carbon/themes-examples-preview",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "parcel build -d build --public-url \"/themes/examples/preview\" index.html",
+    "develop": "parcel index.html --no-cache"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.12.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderGlobalBar should render 1`] = `
+<HeaderGlobalBar
+  className="custom-class"
+>
+  <div
+    className="bx--header__global custom-class"
+  />
+</HeaderGlobalBar>
+`;

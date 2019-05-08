@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavIcon should render 1`] = `
+<SideNavIcon
+  className="custom-classname"
+  small={false}
+>
+  <div
+    className="bx--side-nav__icon custom-classname"
+  >
+    <span>
+      foo
+    </span>
+  </div>
+</SideNavIcon>
+`;
+
+exports[`SideNavIcon should render 2`] = `
+<SideNavIcon
+  className="custom-classname"
+  small={true}
+>
+  <div
+    className="bx--side-nav__icon bx--side-nav__icon--small custom-classname"
+  >
+    <span>
+      foo
+    </span>
+  </div>
+</SideNavIcon>
+`;
