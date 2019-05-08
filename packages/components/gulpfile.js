@@ -60,7 +60,10 @@ const commander = require('commander');
 // without depending on `@carbon/icons` to be available
 let templates;
 function getTemplates() {
-  templates = require('./tools/templates');
+  if (!templates) {
+    // eslint-disable-next-line global-require
+    templates = require('./tools/templates');
+  }
 }
 
 const assign = v => v;
