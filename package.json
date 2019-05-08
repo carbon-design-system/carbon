@@ -25,7 +25,7 @@
     "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
     "test": "jest",
-    "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages\/components/,/packages\/react/'"
+    "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -36,7 +36,6 @@
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "babel-jest": "^24.8.0",
-    "child-process-promise": "^2.2.1",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
     "fs-extra": "^7.0.1",
@@ -135,8 +134,8 @@
       "/lib/",
       "e2e",
       "examples",
-      "/packages\/components/",
-      "/packages\/react/"
+      "/packages/components/",
+      "/packages/react/"
     ],
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"

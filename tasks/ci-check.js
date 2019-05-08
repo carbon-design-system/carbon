@@ -1,7 +1,10 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const { exec } = require('child-process-promise');
+const childProcess = require('child_process');
+const util = require('util');
+
+const exec = util.promisify(childProcess.exec);
 
 async function main() {
   reporter.info('Running checks in CI...');
@@ -12,7 +15,7 @@ async function main() {
   const tasks = [
     'yarn format:diff',
     `yarn bundler check --ignore '**/@(node_modules|examples|components|react)/**' 'packages/**/*.scss'`,
-    `yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit --testPathIgnorePatterns='examples,/packages\/components/,/packages\/react/'`,
+    `yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
     `yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
   ];
 
