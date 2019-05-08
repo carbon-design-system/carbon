@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBoxField should render 1`] = `
+<ListBoxField
+  id="test-listbox"
+>
+  <div
+    aria-controls="test-listbox__menu"
+    aria-haspopup="listbox"
+    aria-owns="test-listbox__menu"
+    className="bx--list-box__field"
+    role="combobox"
+    tabIndex={-1}
+  >
+    <ListBoxSelection
+      clearSelection={[MockFunction]}
+      translateWithId={[Function]}
+    >
+      <div
+        className="bx--list-box__selection"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex="0"
+        title="Clear selected item"
+      >
+        <Close16
+          height={16}
+          preserveAspectRatio="xMidYMid meet"
+          role="img"
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <svg
+            aria-hidden={true}
+            focusable="false"
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            role="img"
+            style={
+              Object {
+                "willChange": "transform",
+              }
+            }
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+            />
+          </svg>
+        </Close16>
+      </div>
+    </ListBoxSelection>
+  </div>
+</ListBoxField>
+`;
