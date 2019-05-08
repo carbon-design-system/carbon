@@ -56,8 +56,12 @@ const portscanner = require('portscanner');
 const { Server } = require('karma');
 const commander = require('commander');
 
-// Fractal templates
-const templates = require('./tools/templates');
+// Fractal templates, deferred require is so that we can run `gulp clean`
+// without depending on `@carbon/icons` to be available
+let templates;
+function getTemplates() {
+  templates = require('./tools/templates');
+}
 
 const assign = v => v;
 const cloptions = commander
@@ -383,8 +387,9 @@ gulp.task('sass:dev:server', () => {
 
 gulp.task('sass:source', () => gulp.src('./src/**/*.scss').pipe(gulp.dest('scss')));
 
-const buildDemoHTML = () =>
-  Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
+const buildDemoHTML = () => {
+  getTemplates();
+  return Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
     templates.cache.get().then(({ componentSource, docSource, contents }) =>
       Promise.all([
         writeFile(
@@ -423,6 +428,7 @@ const buildDemoHTML = () =>
       ])
     )
   );
+};
 
 gulp.task('html:dev', gulp.series('scripts:dev:feature-flags', buildDemoHTML));
 
@@ -431,6 +437,7 @@ const buildHTML = () => {
     'notification--default': 'inline-notification',
     'notification--toast': 'toast-notification',
   };
+  getTemplates();
   return templates.render({ layout: false }).then(renderedItems => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
