@@ -1,3 +1,3 @@
-import { Dropdown } from "carbon-components";
+import { Dropdown } from 'carbon-components';
 
-Dropdown.create(document.getElementById("my-dropdown"));
+Dropdown.create(document.getElementById('my-dropdown'));

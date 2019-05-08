@@ -15,23 +15,42 @@
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "node tasks/ci-check.js",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
-    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
     "format:staged": "prettier --write",
     "gather-deploy-files": "yarn workspaces run gather-deploy-files",
-    "sync": "node tasks/sync.js"
+    "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
+    "sync": "node tasks/sync.js",
+    "test": "jest",
+    "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages\/components/,/packages\/react/'"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.4",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "babel-jest": "^24.8.0",
+    "child-process-promise": "^2.2.1",
+    "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
     "fs-extra": "^7.0.1",
+    "glob": "^7.1.4",
     "husky": "^2.1.0",
+    "jest": "^24.8.0",
+    "jest-circus": "^24.8.0",
+    "jest-junit": "^6.4.0",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
-    "rimraf": "^2.6.3"
+    "remark": "^10.0.1",
+    "remark-word-wrap": "^2.0.2",
+    "rimraf": "^2.6.3",
+    "stylelint": "^10.0.1"
   },
   "husky": {
     "hooks": {
@@ -64,6 +83,7 @@
     ],
     "*.{scss,css}": [
       "yarn format:staged",
+      "stylelint --config ./packages/stylelint-config-elements",
       "git add"
     ],
     "*.md": [
@@ -76,5 +96,58 @@
     "printWidth": 80,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-toolkit"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "packages/**/*.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "setupFiles": [
+      "./tasks/jest/setup.js"
+    ],
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js?(x)",
+      "<rootDir>/**/?(*.)(spec|test).js?(x)",
+      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "./tasks/jest/jsTransform.js",
+      "^.+\\.css$": "./tasks/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "./tasks/jest/fileTransform.js"
+    },
+    "testRunner": "jest-circus/runner",
+    "testPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/lib/",
+      "e2e",
+      "examples",
+      "/packages\/components/",
+      "/packages\/react/"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "watchPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/examples/",
+      "/lib/",
+      "/storybook/"
+    ]
   }
 }
