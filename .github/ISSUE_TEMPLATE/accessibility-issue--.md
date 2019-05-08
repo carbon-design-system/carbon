@@ -4,7 +4,6 @@ about: Report an accessibility or usability issue
 title: ''
 labels: 'type: a11y ♿'
 assignees: ''
-
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
