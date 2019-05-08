@@ -367,8 +367,9 @@
   .#{$prefix}--date-picker__day.endRange,
   .flatpickr-day.endRange {
     &:hover {
-      background: $ui-01;
       @include focus-outline('outline');
+      background: $ui-01;
+      color: $text-01;
     }
   }
 
