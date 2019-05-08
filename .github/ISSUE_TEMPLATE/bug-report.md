@@ -13,6 +13,16 @@ assignees: ''
 
 -->
 
+## What package(s) are you using?
+
+<!--
+  Add an x in one of the options below, for example:
+- [x] package name
+-->
+
+- [ ] `carbon-components`
+- [ ] `carbon-components-react`
+
 ## Detailed description
 
 > Describe in detail the issue you're having.

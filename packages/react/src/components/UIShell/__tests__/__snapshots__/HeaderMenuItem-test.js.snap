@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderMenuItem should render 1`] = `
+<ForwardRef(HeaderMenuItem)
+  className="custom-class"
+  role="none"
+>
+  <li
+    className="custom-class"
+    role="none"
+  >
+    <Link
+      className="bx--header__menu-item"
+      element="a"
+      role="menuitem"
+      tabIndex={0}
+    >
+      <a
+        className="bx--header__menu-item"
+        role="menuitem"
+        tabIndex={0}
+      >
+        <span
+          className="bx--text-truncate--end"
+        >
+          Menu Item
+        </span>
+      </a>
+    </Link>
+  </li>
+</ForwardRef(HeaderMenuItem)>
+`;

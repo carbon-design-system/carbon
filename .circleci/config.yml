@@ -10,7 +10,9 @@ jobs:
           name: Install yarn
           command: |
             curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-            export PATH=$HOME/.yarn/bin:$PATH
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
       - run:
           name: Install dependencies
           command: yarn install --offline --frozen-lockfile
@@ -21,8 +23,52 @@ jobs:
           name: Run Continuous Integration checks
           command: yarn lerna run ci-check --scope carbon-components
 
+  react:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH=$HOME/.yarn/bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
+      - run:
+          name: Run Continuous Integration checks
+          command: yarn lerna run ci-check --scope carbon-components-react
+      - deploy:
+          name: deploy to IBM Cloud
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Install `ibmcloud` CLI
+              curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
+              # Login and push staging manifest
+              ibmcloud login \
+                --apikey $CLOUD_API_KEY \
+                -a https://api.ng.bluemix.net \
+                -o carbon-design-system \
+                -s production
+              ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
+              ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
+              # Default storybook build
+              cd packages/react
+              yarn build-storybook
+              ibmcloud cf blue-green-deploy carbon-storybook \
+                -f manifest.yml \
+                --delete-old-apps
+            fi
 workflows:
   version: 2
   main:
     jobs:
       - components
+      - react

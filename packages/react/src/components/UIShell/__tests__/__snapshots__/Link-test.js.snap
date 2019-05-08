@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI Shell - Link should render 1`] = `
+<Link
+  element="a"
+  href="#"
+>
+  <a
+    href="#"
+  >
+    foo
+  </a>
+</Link>
+`;
+
+exports[`UI Shell - Link should support rendering a component as the element 1`] = `
+<Link
+  element={[Function]}
+  href="#"
+>
+  <mockComponent
+    href="#"
+  >
+    <a
+      href="#"
+    >
+      link
+    </a>
+  </mockComponent>
+</Link>
+`;
+
+exports[`UI Shell - Link should support rendering a string element 1`] = `
+<Link
+  element="div"
+  href="#"
+>
+  <div
+    href="#"
+  >
+    foo
+  </div>
+</Link>
+`;

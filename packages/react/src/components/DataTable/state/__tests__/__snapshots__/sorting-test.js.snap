@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sorting state sortStates should describe the available sort states 1`] = `
+Object {
+  "ASC": "ASC",
+  "DESC": "DESC",
+  "NONE": "NONE",
+}
+`;
