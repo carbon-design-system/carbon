@@ -498,11 +498,13 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
-  .#{$prefix}--list-box__menu-item--active,
-  .#{$prefix}--list-box__menu-item--active:hover {
+  .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
-    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
