@@ -7,6 +7,7 @@
 
 - [Installing dependencies](#installing-dependencies)
 - [Common tasks](#common-tasks)
+- [Package configuration](#package-configuration)
 - [FAQ](#faq)
     - [CircleCI is failing saying that it cannot find a dependency in offline mode](#circleci-is-failing-saying-that-it-cannot-find-a-dependency-in-offline-mode)
 
@@ -75,6 +76,21 @@ package you could do the following:
 # Access $(yarn bin)/lerna and pass `run build` to the executable
 yarn lerna run build
 ```
+
+## Package configuration
+
+Each package may have a Carbon-specific configuration saved in a `"carbon"` key
+in the package's `package.json` file. Available properties:
+
+| Property       | Value                                             |
+| -------------- | ------------------------------------------------- |
+| `type`         | `core \| community`                               |
+| `status`       | `draft \| experimental \| stable \| deprecated`   |
+| `createdAt`    | first package version (e.g. `"10.0.0"`)           |
+| `deprecatedAt` | package version when deprecated (e.g. `"9.81.0"`) |
+
+These properties influence how packages are categorized, development and support
+status, and key versions to help visualize when a package is new and deprecated.
 
 ## FAQ
 
