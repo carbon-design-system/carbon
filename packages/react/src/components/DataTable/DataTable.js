@@ -389,7 +389,7 @@ export default class DataTable extends React.Component {
           return p;
         }, {});
         return {
-          shouldShowBatchActions: false,
+          shouldShowBatchActions: !row.isSelected || selectedRowsCount > 0,
           rowsById: {
             ...rowsById,
             [rowId]: {
