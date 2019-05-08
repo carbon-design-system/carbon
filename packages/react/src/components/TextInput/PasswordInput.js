@@ -9,19 +9,9 @@ import { textInputProps } from './util';
 
 const { prefix } = settings;
 
-export default class PasswordInput extends React.Component {
-  state = {
-    type: 'password',
-  };
-
-  togglePasswordVisibility = () => {
-    this.setState({
-      type: this.state.type === 'password' ? 'text' : 'password',
-    });
-  };
-
-  render() {
-    const {
+export const ControlledPasswordInput = React.forwardRef(
+  function ControlledPasswordInput(
+    {
       alt,
       labelText,
       className,
@@ -34,8 +24,13 @@ export default class PasswordInput extends React.Component {
       invalidText,
       helperText,
       light,
+      visible,
+      hidePasswordText = 'Hide password',
+      showPasswordText = 'Show password',
       ...other
-    } = this.props;
+    },
+    ref
+  ) {
     const errorId = id + '-error-msg';
     const textInputClasses = classNames(
       `${prefix}--text-input`,
@@ -59,7 +54,8 @@ export default class PasswordInput extends React.Component {
         }
       },
       placeholder,
-      type: this.state.type,
+      type: visible ? 'text' : 'password',
+      ref,
       className: textInputClasses,
       ...other,
     };
@@ -80,14 +76,13 @@ export default class PasswordInput extends React.Component {
         {invalidText}
       </div>
     ) : null;
-    const passwordIsVisible = this.state.type === 'text';
     const passwordVisibilityToggleButtonClasses = classNames(
       `${prefix}--text-input--password__visibility`,
       `${prefix}--tooltip__trigger`,
       `${prefix}--tooltip--icon__bottom`,
       {}
     );
-    const passwordVisibilityIcon = passwordIsVisible ? (
+    const passwordVisibilityIcon = visible ? (
       <ViewOff16 className={`${prefix}--icon-visibility-off`} />
     ) : (
       <View16 className={`${prefix}--icon-visibility-on`} />
@@ -96,12 +91,12 @@ export default class PasswordInput extends React.Component {
       <>
         <input
           {...textInputProps({ invalid, sharedTextInputProps, errorId })}
-          data-toggle-password-visibility={this.state.type === 'password'}
+          data-toggle-password-visibility={!visible}
         />
         <button
           className={passwordVisibilityToggleButtonClasses}
-          aria-label={alt || `${passwordIsVisible ? 'Hide' : 'Show'} password`}
-          onClick={this.togglePasswordVisibility}>
+          aria-label={alt || `${visible ? hidePasswordText : showPasswordText}`}
+          onClick={onClick}>
           {passwordVisibilityIcon}
         </button>
       </>
@@ -129,76 +124,95 @@ export default class PasswordInput extends React.Component {
       </div>
     );
   }
-}
+);
 
-PasswordInput.propTypes = {
+ControlledPasswordInput.propTypes = {
   /**
    * Provide custom alt text for the password visibility toggle button
    */
   alt: PropTypes.string,
+
   /**
    * Provide a custom className that is applied directly to the underlying
    * <input> node
    */
   className: PropTypes.string,
+
   /**
    * Optionally provide the default value of the <input>
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
   /**
    * Specify whether the control is disabled
    */
   disabled: PropTypes.bool,
+
   /**
    * Provide a unique identifier for the input field
    */
   id: PropTypes.string.isRequired,
+
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
   labelText: PropTypes.node.isRequired,
+
   /**
    * Optionally provide an `onChange` handler that is called whenever <input>
    * is updated
    */
   onChange: PropTypes.func,
+
   /**
    * Optionally provide an `onClick` handler that is called whenever the
    * <input> is clicked
    */
   onClick: PropTypes.func,
+
   /**
    * Specify the placeholder attribute for the <input>
    */
   placeholder: PropTypes.string,
+
   /**
    * Provide the current value of the <input>
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Boolean that determines if the password is visible
+   */
+  visible: PropTypes.bool,
+
   /**
    * Specify whether or not the underlying label is visually hidden
    */
   hideLabel: PropTypes.bool,
+
   /**
    * Specify whether the control is currently invalid
    */
   invalid: PropTypes.bool,
+
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
   invalidText: PropTypes.string,
+
   /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
+
   /**
    * Specify light version or default version of this control
    */
   light: PropTypes.bool,
 };
 
-PasswordInput.defaultProps = {
+ControlledPasswordInput.defaultProps = {
   alt: '',
   className: '${prefix}--text__input',
   disabled: false,
@@ -209,3 +223,25 @@ PasswordInput.defaultProps = {
   helperText: '',
   light: false,
 };
+
+export default class PasswordInput extends React.Component {
+  state = {
+    visible: false,
+  };
+
+  togglePasswordVisibility = () => {
+    this.setState(({ visible }) => ({
+      visible: !visible,
+    }));
+  };
+
+  render() {
+    return (
+      <ControlledPasswordInput
+        {...this.props}
+        visible={this.state.visible}
+        onClick={this.togglePasswordVisibility}
+      />
+    );
+  }
+}
