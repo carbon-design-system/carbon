@@ -1,0 +1,20 @@
+node_modules
+lib
+es
+umd
+build
+dist
+ts
+
+# Storybook examples
+**/storybook/stories/**
+
+# Package-specific
+packages/colors/scss/*
+packages/elements/scss/*
+!packages/elements/scss/elements.scss
+!packages/elements/scss/index.scss
+packages/themes/scss/*
+
+# Changelogs, generated automatically
+**/CHANGELOG.md

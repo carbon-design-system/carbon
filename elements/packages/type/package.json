@@ -1,0 +1,46 @@
+{
+  "name": "@carbon/type",
+  "description": "Typography for digital and software products using the Carbon Design System",
+  "version": "10.1.1",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/type",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "files": [
+    "es",
+    "lib",
+    "scss",
+    "src",
+    "umd"
+  ],
+  "keywords": [
+    "eyeglass-module",
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc 'scss/**/*.scss' -i '**/{_inlined,vendor}**' && bundler inline && bundler check 'scss/*.scss'",
+    "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
+  },
+  "dependencies": {
+    "@carbon/import-once": "10.1.0",
+    "@carbon/layout": "10.1.1"
+  },
+  "devDependencies": {
+    "@carbon/bundler": "10.1.1",
+    "rimraf": "^2.6.2"
+  },
+  "eyeglass": {
+    "exports": false,
+    "name": "@carbon/type",
+    "sassDir": "scss",
+    "needs": "^1.3.0"
+  }
+}

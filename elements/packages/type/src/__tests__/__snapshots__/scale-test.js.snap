@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scale should export the type scale 1`] = `
+Array [
+  12,
+  14,
+  16,
+  18,
+  20,
+  24,
+  28,
+  32,
+  36,
+  42,
+  48,
+  54,
+  60,
+  68,
+  76,
+  84,
+  92,
+  102,
+  112,
+  122,
+  132,
+  144,
+  156,
+]
+`;

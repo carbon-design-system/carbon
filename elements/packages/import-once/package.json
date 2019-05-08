@@ -1,0 +1,28 @@
+{
+  "name": "@carbon/import-once",
+  "description": "Sass helper for importing files only once. Used in the Carbon Design System",
+  "version": "10.1.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/import-once",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "keywords": [
+    "eyeglass-module",
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "bundler sassdoc 'scss/*.scss'"
+  },
+  "eyeglass": {
+    "exports": false,
+    "name": "@carbon/import-once",
+    "sassDir": "scss",
+    "needs": "^1.3.0"
+  }
+}

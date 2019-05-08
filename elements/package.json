@@ -1,0 +1,160 @@
+{
+  "name": "elements",
+  "version": "0.0.0",
+  "private": true,
+  "repository": "git@github.com:IBM/carbon-elements.git",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "10.x"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "node tasks/ci-check.js",
+    "clean": "lerna run clean && lerna clean --yes && rimraf build && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents' docs",
+    "examples": "rimraf build && yarn build && node tasks/examples.js",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:staged": "prettier --write",
+    "lint": "toolkit lint .",
+    "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
+    "sync": "node tasks/sync.js",
+    "test": "jest",
+    "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns=examples"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
+    "@carbon/cli-plugin-editorconfig": "^0.0.23",
+    "@carbon/cli-plugin-eslint": "^0.0.23",
+    "@carbon/cli-plugin-github-files": "^0.0.23",
+    "@carbon/toolkit": "^0.0.23",
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "babel-core": "^7.0.0-bridge",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
+    "child-process-promise": "^2.2.1",
+    "cross-spawn": "^6.0.5",
+    "doctoc": "^1.3.1",
+    "eslint-plugin-import": "^2.14.0",
+    "fs-extra": "^7.0.0",
+    "glob": "^7.1.3",
+    "husky": "^1.1.2",
+    "jest": "^24.1.0",
+    "jest-circus": "^24.1.0",
+    "jest-junit": "^6.3.0",
+    "lerna": "^3.13.1",
+    "lint-staged": "^7.3.0",
+    "node-sass": "^4.10.0",
+    "prettier": "^1.15.2",
+    "remark": "^10.0.1",
+    "remark-word-wrap": "^2.0.2",
+    "rimraf": "^2.6.2",
+    "stylelint": "^9.10.1"
+  },
+  "toolkit": {
+    "plugins": [
+      "@carbon/cli-plugin-eslint",
+      "@carbon/cli-plugin-github-files",
+      "@carbon/cli-plugin-editorconfig"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn format:staged",
+      "git add"
+    ],
+    "*.{scss,css}": [
+      "yarn format:staged",
+      "stylelint --config ./packages/stylelint-config-elements",
+      "git add"
+    ],
+    "*.md": [
+      "yarn format:staged",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint-config-toolkit"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-toolkit"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "packages/**/*.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "setupFiles": [
+      "./tasks/jest/setup.js"
+    ],
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js?(x)",
+      "<rootDir>/**/?(*.)(spec|test).js?(x)",
+      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "./tasks/jest/jsTransform.js",
+      "^.+\\.css$": "./tasks/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "./tasks/jest/fileTransform.js"
+    },
+    "testRunner": "jest-circus/runner",
+    "testPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/lib/",
+      "e2e",
+      "examples"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "watchPathIgnorePatterns": [
+      "/cjs/",
+      "/dist/",
+      "/es/",
+      "/examples/",
+      "/lib/",
+      "/storybook/"
+    ]
+  }
+}

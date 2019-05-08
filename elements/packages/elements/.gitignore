@@ -1,0 +1,7 @@
+# Reference for gitignore patterns:
+# https://stackoverflow.com/questions/5533050/gitignore-exclude-folder-but-include-specific-subfolder
+!scss/
+
+scss/*
+!scss/elements.scss
+!scss/index.scss

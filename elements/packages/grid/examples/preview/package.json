@@ -1,0 +1,21 @@
+{
+  "name": "grid-basic-example",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "export PATH_PREFIX=\"/grid/examples/preview\" && parcel build -d build --public-url $PATH_PREFIX index.html",
+    "develop": "parcel index.html --no-cache"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.10.0-beta.1"
+  },
+  "dependencies": {
+    "@reach/router": "^1.2.1",
+    "classnames": "^2.2.6",
+    "prettify-xml": "^1.2.0",
+    "prismjs": "^1.15.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
+  }
+}

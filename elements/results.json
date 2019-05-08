@@ -1,0 +1,164 @@
+[
+  {
+    "filename": "colors.scss",
+    "package": "@carbon/colors",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "tokens.scss",
+    "package": "@carbon/colors",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_col.scss",
+    "package": "@carbon/grid",
+    "size": 168,
+    "gzip": 150
+  },
+  {
+    "filename": "_container.scss",
+    "package": "@carbon/grid",
+    "size": 171,
+    "gzip": 152
+  },
+  {
+    "filename": "_prefix.scss",
+    "package": "@carbon/grid",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_row.scss",
+    "package": "@carbon/grid",
+    "size": 165,
+    "gzip": 148
+  },
+  {
+    "filename": "12.scss",
+    "package": "@carbon/grid",
+    "size": 43187,
+    "gzip": 2730
+  },
+  {
+    "filename": "aspect-ratio.scss",
+    "package": "@carbon/grid",
+    "size": 361,
+    "gzip": 178
+  },
+  {
+    "filename": "grid.scss",
+    "package": "@carbon/grid",
+    "size": 43187,
+    "gzip": 2730
+  },
+  {
+    "filename": "import-once.scss",
+    "package": "@carbon/import-once",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_breakpoint.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_convert.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_key-height.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_mini-unit.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_spacing.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_utilities.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "layout.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "motion.scss",
+    "package": "@carbon/motion",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_font-family.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_reset.scss",
+    "package": "@carbon/type",
+    "size": 242,
+    "gzip": 194
+  },
+  {
+    "filename": "_scale.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_spacing.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_styles.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_font-face.scss",
+    "package": "@carbon/type",
+    "size": 13019,
+    "gzip": 894
+  },
+  {
+    "filename": "_mono.scss",
+    "package": "@carbon/type",
+    "size": 6509,
+    "gzip": 658
+  },
+  {
+    "filename": "_sans.scss",
+    "package": "@carbon/type",
+    "size": 6509,
+    "gzip": 661
+  },
+  {
+    "filename": "type.scss",
+    "package": "@carbon/type",
+    "size": 13262,
+    "gzip": 1016
+  }
+]
