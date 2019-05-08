@@ -23,6 +23,29 @@ jobs:
           name: Run Continuous Integration checks
           command: yarn lerna run ci-check --scope carbon-components
 
+  elements:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
+      - run:
+          name: Run Continuous Integration checks
+          command: yarn ci-check
+
   react:
     docker:
       - image: circleci/node:10.15
@@ -66,9 +89,11 @@ jobs:
                 -f manifest.yml \
                 --delete-old-apps
             fi
+
 workflows:
   version: 2
   main:
     jobs:
       - components
+      - elements
       - react
