@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableSelectAll should render 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableSelectAll
+              ariaLabel="Select all rows in the table"
+              checked={false}
+              className="custom-class-name"
+              id="id"
+              name="select-all"
+              onSelect={[MockFunction]}
+            >
+              <th
+                className="bx--table-column-checkbox custom-class-name"
+                scope="col"
+              >
+                <ForwardRef(InlineCheckbox)
+                  ariaLabel="Select all rows in the table"
+                  checked={false}
+                  id="id"
+                  name="select-all"
+                  onClick={[MockFunction]}
+                >
+                  <InlineCheckbox
+                    ariaLabel="Select all rows in the table"
+                    checked={false}
+                    id="id"
+                    innerRef={null}
+                    name="select-all"
+                    onChange={[Function]}
+                    onClick={[MockFunction]}
+                  >
+                    <input
+                      checked={false}
+                      className="bx--checkbox"
+                      id="id"
+                      name="select-all"
+                      onChange={[Function]}
+                      onClick={[MockFunction]}
+                      type="checkbox"
+                    />
+                    <label
+                      aria-label="Select all rows in the table"
+                      className="bx--checkbox-label"
+                      htmlFor="id"
+                    />
+                  </InlineCheckbox>
+                </ForwardRef(InlineCheckbox)>
+              </th>
+            </TableSelectAll>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavDetails should render 1`] = `
+<SideNavDetails
+  title="foo"
+>
+  <div
+    className="bx--side-nav__details"
+  >
+    <h2
+      className="bx--side-nav__title"
+      title="foo"
+    >
+      foo
+    </h2>
+  </div>
+</SideNavDetails>
+`;
