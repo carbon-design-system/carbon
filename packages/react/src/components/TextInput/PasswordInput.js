@@ -214,7 +214,7 @@ ControlledPasswordInput.propTypes = {
 
 ControlledPasswordInput.defaultProps = {
   alt: '',
-  className: '${prefix}--text__input',
+  className: `${prefix}--text__input`,
   disabled: false,
   onChange: () => {},
   onClick: () => {},
