@@ -1,0 +1,23 @@
+{
+  "name": "@carbon/loading-spec",
+  "private": true,
+  "description": "Loading component specifications for the Carbon Design System",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/loading-spec",
+  "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
+  "carbon": {
+    "type": "core",
+    "status": "draft",
+    "createdAt": "5.0.0"
+  },
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "spec"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

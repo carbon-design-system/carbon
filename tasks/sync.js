@@ -28,32 +28,36 @@ const DEFAULT_KEYWORDS = [
   'carbon',
   'carbon-design-system',
   'components',
-  'react',
 ];
 
-// We're going to use this in our `sortFields` method. The idea is that we want
-// our `package.json` files to be ordered in the order given in this array. To
-// accomplish this, we create an object where we can reference the value
-// assigned to a field when sorting. By default, highest priority fields start
-// with 1 and go up. Unknown fields are all given the same priority, which is
-// just the length of the array + 1. When we use `sortFields` we are checking
-// for the value from `packageJsonFields` and comparing it with the other value.
+// Package naming conventions to add to default keywords
+const PACKAGE_TYPES = ['spec', 'react'];
+
+// We're going to use this in our `sortPackageFields` method. The idea is that
+// we want our `package.json` files to be ordered in the order given in this
+// array. To accomplish this, we create an object where we can reference the
+// value assigned to a field when sorting. By default, highest priority fields
+// start with 1 and go up. Unknown fields are all given the same priority, which
+// is just the length of the array + 1. When we use `sortPackageFields` we are
+// checking for the value from `packageJsonFields` and comparing it with the
+// other value.
 const packageJsonFields = [
   'name',
   'private',
   'description',
   'version',
   'license',
-  'main',
-  'module',
   'repository',
   'bugs',
   'homepage',
+  'carbon',
+  'scripts',
+  'main',
+  'module',
   'engines',
   'files',
   'keywords',
   'publishConfig',
-  'scripts',
   'resolutions',
   'peerDependencies',
   'dependencies',
@@ -70,10 +74,25 @@ const packageJsonFields = [
   }),
   {}
 );
-const UNKNOWN_FIELD = Object.keys(packageJsonFields).length + 1;
-function sortFields(a, b) {
-  const aValue = packageJsonFields[a] || UNKNOWN_FIELD;
-  const bValue = packageJsonFields[b] || UNKNOWN_FIELD;
+const UNKNOWN_PACKAGE_FIELD = Object.keys(packageJsonFields).length + 1;
+function sortPackageFields(a, b) {
+  const aValue = packageJsonFields[a] || UNKNOWN_PACKAGE_FIELD;
+  const bValue = packageJsonFields[b] || UNKNOWN_PACKAGE_FIELD;
+  return aValue - bValue;
+}
+
+// To sort the `carbon` object in the `packageJson` object.
+const carbonFields = ['type', 'status', 'createdAt', 'deprecatedAt'].reduce(
+  (acc, key, index) => ({
+    ...acc,
+    [key]: index + 1,
+  }),
+  {}
+);
+const UNKNOWN_CARBON_FIELD = Object.keys(carbonFields).length + 1;
+function sortCarbonFields(a, b) {
+  const aValue = carbonFields[a] || UNKNOWN_CARBON_FIELD;
+  const bValue = carbonFields[b] || UNKNOWN_CARBON_FIELD;
   return aValue - bValue;
 }
 
@@ -100,20 +119,29 @@ async function sync() {
         access: 'public',
       };
 
+      // Modify default keywords
+      let keywords = [...DEFAULT_KEYWORDS];
+      PACKAGE_TYPES.forEach(type => {
+        if (basename.includes('-' + type)) {
+          keywords.push(type);
+        }
+      });
+
+      // Use default keywords
       if (Array.isArray(file.keywords)) {
-        const keywordsToAdd = DEFAULT_KEYWORDS.filter(keyword => {
+        const keywordsToAdd = keywords.filter(keyword => {
           return file.keywords.indexOf(keyword) === -1;
         });
         if (keywordsToAdd.length > 0) {
           file.keywords = [...file.keywords, ...keywordsToAdd];
         }
       } else {
-        file.keywords = DEFAULT_KEYWORDS;
+        file.keywords = keywords;
       }
 
       // Construct our new packageJson file with sorted fields
       const packageJson = Object.keys(file)
-        .sort(sortFields)
+        .sort(sortPackageFields)
         .reduce(
           (acc, key) => ({
             ...acc,
@@ -121,6 +149,19 @@ async function sync() {
           }),
           {}
         );
+
+      // Sort the carbon object in the packageJson file
+      if (packageJson.carbon) {
+        packageJson.carbon = Object.keys(packageJson.carbon)
+          .sort(sortCarbonFields)
+          .reduce(
+            (acc, key) => ({
+              ...acc,
+              [key]: packageJson.carbon[key],
+            }),
+            {}
+          );
+      }
 
       await fs.writeJson(filepath, packageJson, { spaces: 2 });
       return {

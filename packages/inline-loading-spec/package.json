@@ -1,0 +1,23 @@
+{
+  "name": "@carbon/inline-loading-spec",
+  "private": true,
+  "description": "Inline loading component specifications for the Carbon Design System",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/inline-loading-spec",
+  "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
+  "carbon": {
+    "type": "core",
+    "status": "draft",
+    "createdAt": "9.0.0"
+  },
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "spec"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

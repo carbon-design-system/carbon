@@ -3,11 +3,30 @@
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
   "version": "10.2.0",
   "license": "Apache-2.0",
-  "main": "umd/index.js",
-  "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/components",
   "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
   "homepage": "https://www.carbondesignsystem.com/",
+  "scripts": {
+    "build": "gulp build",
+    "build-dev": "gulp build:dev",
+    "build-dev-rollup": "gulp build:dev:deploy --rollup",
+    "clean": "gulp clean",
+    "ci-check": "sh ./tools/ci-check.sh",
+    "dev": "gulp serve",
+    "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
+    "lint": "eslint .",
+    "lint:staged": "eslint",
+    "prebuild": "gulp clean",
+    "prepublishOnly": "yarn build",
+    "start": "node server.js",
+    "test": "gulp test",
+    "test:build": "cross-env BABEL_ENV=test jest",
+    "test:unit": "gulp test:unit",
+    "test:a11y": "gulp test:a11y",
+    "semantic-release": "semantic-release"
+  },
+  "main": "umd/index.js",
+  "module": "es/index.js",
   "engines": {
     "node": ">=6.x"
   },
@@ -38,30 +57,10 @@
     "scss",
     "style guide",
     "eyeglass-module",
-    "carbon-design-system",
-    "react"
+    "carbon-design-system"
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": "gulp build",
-    "build-dev": "gulp build:dev",
-    "build-dev-rollup": "gulp build:dev:deploy --rollup",
-    "clean": "gulp clean",
-    "ci-check": "sh ./tools/ci-check.sh",
-    "dev": "gulp serve",
-    "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
-    "lint": "eslint .",
-    "lint:staged": "eslint",
-    "prebuild": "gulp clean",
-    "prepublishOnly": "yarn build",
-    "start": "node server.js",
-    "test": "gulp test",
-    "test:build": "cross-env BABEL_ENV=test jest",
-    "test:unit": "gulp test:unit",
-    "test:a11y": "gulp test:a11y",
-    "semantic-release": "semantic-release"
   },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0",

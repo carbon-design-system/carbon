@@ -1,0 +1,23 @@
+{
+  "name": "@carbon/data-table-spec",
+  "private": true,
+  "description": "Data table component specifications for the Carbon Design System",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/data-table-spec",
+  "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
+  "carbon": {
+    "type": "core",
+    "status": "draft",
+    "createdAt": "7.26.0"
+  },
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "spec"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

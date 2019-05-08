@@ -1,0 +1,23 @@
+{
+  "name": "@carbon/search-spec",
+  "private": true,
+  "description": "Search component specifications for the Carbon Design System",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/search-spec",
+  "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
+  "carbon": {
+    "type": "core",
+    "status": "draft",
+    "createdAt": "2.0.0"
+  },
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "spec"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
