@@ -2,6 +2,7 @@
   "name": "@carbon/link-spec",
   "private": true,
   "description": "Link component specifications for the Carbon Design System",
+  "version": "10.0.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/link-spec",
   "bugs": "https://github.com/carbon-design-system/carbon-components/issues",

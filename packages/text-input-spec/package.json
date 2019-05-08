@@ -2,6 +2,7 @@
   "name": "@carbon/text-input-spec",
   "private": true,
   "description": "Text input component specifications for the Carbon Design System",
+  "version": "10.0.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/text-input-spec",
   "bugs": "https://github.com/carbon-design-system/carbon-components/issues",

@@ -2,6 +2,7 @@
   "name": "@carbon/date-picker-spec",
   "private": true,
   "description": "Date picker component specifications for the Carbon Design System",
+  "version": "10.0.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon-components/tree/master/packages/date-picker-spec",
   "bugs": "https://github.com/carbon-design-system/carbon-components/issues",
