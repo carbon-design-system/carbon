@@ -103,7 +103,7 @@
   },
   "stylelint": {
     "extends": [
-      "stylelint-config-toolkit"
+      "./packages/stylelint-config-elements"
     ]
   },
   "jest": {
