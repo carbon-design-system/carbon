@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableBatchActions should render 1`] = `
+<TableBatchActions
+  className="custom-class"
+  onCancel={[MockFunction]}
+  shouldShowBatchActions={false}
+  totalSelected={10}
+  translateWithId={[Function]}
+>
+  <div
+    className="bx--batch-actions custom-class"
+  >
+    <TableActionList>
+      <div
+        className="bx--action-list"
+      >
+        <ForwardRef(Button)
+          className="bx--batch-summary__cancel"
+          disabled={false}
+          iconDescription="Provide icon description if icon is used"
+          kind="primary"
+          onClick={[MockFunction]}
+          small={false}
+          tabIndex={0}
+          type="button"
+        >
+          <button
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            disabled={false}
+            onClick={[MockFunction]}
+            tabIndex={0}
+            type="button"
+          >
+            Cancel
+          </button>
+        </ForwardRef(Button)>
+      </div>
+    </TableActionList>
+    <div
+      className="bx--batch-summary"
+    >
+      <p
+        className="bx--batch-summary__para"
+      >
+        <span>
+          10 items selected
+        </span>
+      </p>
+    </div>
+  </div>
+</TableBatchActions>
+`;
+
+exports[`DataTable.TableBatchActions should render 2`] = `
+<TableBatchActions
+  className="custom-class"
+  onCancel={[MockFunction]}
+  shouldShowBatchActions={true}
+  totalSelected={10}
+  translateWithId={[Function]}
+>
+  <div
+    className="bx--batch-actions bx--batch-actions--active custom-class"
+  >
+    <TableActionList>
+      <div
+        className="bx--action-list"
+      >
+        <ForwardRef(Button)
+          className="bx--batch-summary__cancel"
+          disabled={false}
+          iconDescription="Provide icon description if icon is used"
+          kind="primary"
+          onClick={[MockFunction]}
+          small={false}
+          tabIndex={0}
+          type="button"
+        >
+          <button
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            disabled={false}
+            onClick={[MockFunction]}
+            tabIndex={0}
+            type="button"
+          >
+            Cancel
+          </button>
+        </ForwardRef(Button)>
+      </div>
+    </TableActionList>
+    <div
+      className="bx--batch-summary"
+    >
+      <p
+        className="bx--batch-summary__para"
+      >
+        <span>
+          10 items selected
+        </span>
+      </p>
+    </div>
+  </div>
+</TableBatchActions>
+`;

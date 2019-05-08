@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavFooter should render 1`] = `
+<SideNavFooter
+  assistiveText="open"
+  isExpanded={false}
+  onToggle={[MockFunction]}
+>
+  <footer
+    className="bx--side-nav__footer"
+  >
+    <button
+      className="bx--side-nav__toggle"
+      onClick={[Function]}
+      title="open"
+      type="button"
+    >
+      <div
+        className="bx--side-nav__icon"
+      >
+        <ChevronRight20
+          height={20}
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 32 32"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <svg
+            aria-hidden={true}
+            focusable="false"
+            height={20}
+            preserveAspectRatio="xMidYMid meet"
+            style={
+              Object {
+                "willChange": "transform",
+              }
+            }
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
+            />
+          </svg>
+        </ChevronRight20>
+      </div>
+      <span
+        className="bx--assistive-text"
+      >
+        open
+      </span>
+    </button>
+  </footer>
+</SideNavFooter>
+`;
+
+exports[`SideNavFooter should render 2`] = `
+<SideNavFooter
+  assistiveText="close"
+  isExpanded={true}
+  onToggle={[MockFunction]}
+>
+  <footer
+    className="bx--side-nav__footer"
+  >
+    <button
+      className="bx--side-nav__toggle"
+      onClick={[Function]}
+      title="close"
+      type="button"
+    >
+      <div
+        className="bx--side-nav__icon"
+      >
+        <ChevronRight20
+          height={20}
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 32 32"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <svg
+            aria-hidden={true}
+            focusable="false"
+            height={20}
+            preserveAspectRatio="xMidYMid meet"
+            style={
+              Object {
+                "willChange": "transform",
+              }
+            }
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
+            />
+          </svg>
+        </ChevronRight20>
+      </div>
+      <span
+        className="bx--assistive-text"
+      >
+        close
+      </span>
+    </button>
+  </footer>
+</SideNavFooter>
+`;

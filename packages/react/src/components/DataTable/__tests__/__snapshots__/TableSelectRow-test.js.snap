@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableSelectRow should render 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableSelectRow
+              ariaLabel="Aria label"
+              checked={false}
+              className="custom-class-name"
+              id="id"
+              name="select-all"
+              onSelect={[MockFunction]}
+            >
+              <td
+                className="custom-class-name"
+              >
+                <ForwardRef(InlineCheckbox)
+                  ariaLabel="Aria label"
+                  checked={false}
+                  id="id"
+                  name="select-all"
+                  onClick={[MockFunction]}
+                >
+                  <InlineCheckbox
+                    ariaLabel="Aria label"
+                    checked={false}
+                    id="id"
+                    innerRef={null}
+                    name="select-all"
+                    onChange={[Function]}
+                    onClick={[MockFunction]}
+                  >
+                    <input
+                      checked={false}
+                      className="bx--checkbox"
+                      id="id"
+                      name="select-all"
+                      onChange={[Function]}
+                      onClick={[MockFunction]}
+                      type="checkbox"
+                    />
+                    <label
+                      aria-label="Aria label"
+                      className="bx--checkbox-label"
+                      htmlFor="id"
+                    />
+                  </InlineCheckbox>
+                </ForwardRef(InlineCheckbox)>
+              </td>
+            </TableSelectRow>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;
