@@ -47,12 +47,12 @@
       "header-max-length": [
         2,
         "always",
-        80
+        50
       ],
       "body-max-line-length": [
         2,
         "always",
-        80
+        72
       ]
     }
   },
@@ -60,11 +60,6 @@
     "packages/components/**/*.js": [
       "yarn format:staged",
       "yarn lerna run lint:staged --scope carbon-components",
-      "git add"
-    ],
-    "packages/react/**/*.js": [
-      "yarn format:staged",
-      "yarn lerna run lint:staged --scope carbon-components-react",
       "git add"
     ],
     "*.{scss,css}": [
