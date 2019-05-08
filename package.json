@@ -20,6 +20,7 @@
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:staged": "prettier --write",
+    "gather-deploy-files": "yarn workspaces run gather-deploy-files",
     "sync": "node tasks/sync.js"
   },
   "devDependencies": {

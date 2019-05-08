@@ -7,6 +7,10 @@ dist
 umd
 css
 
+# Netlify deploy folder
+/demo/*
+!/demo/index.html
+
 # Config files
 .npmrc
 

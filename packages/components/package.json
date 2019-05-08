@@ -52,6 +52,7 @@
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
     "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
+    "gather-deploy-files": "sh ./tools/deploy.sh",
     "lint": "eslint .",
     "lint:staged": "eslint",
     "prebuild": "gulp clean",
