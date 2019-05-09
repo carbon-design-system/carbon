@@ -8,11 +8,12 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -o ../../demo/react",
     "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test-ssr",
     "clean": "rimraf es lib umd storybook-static",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
+    "gather-deploy-files": "yarn build-storybook",
     "lint": "eslint src",
     "lint:staged": "eslint",
     "prepublish": "yarn build",
