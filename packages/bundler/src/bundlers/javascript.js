@@ -34,7 +34,11 @@ async function bundle(entrypoint, options) {
       format: 'umd',
       directory: path.join(packageFolder, 'umd'),
     },
-  ];
+  ].map(({ format, directory }) => ({
+    format,
+    directory,
+    entrypoint: path.join(directory, 'index.js'),
+  }));
 
   await Promise.all(outputFolders.map(({ directory }) => fs.remove(directory)));
 
@@ -82,24 +86,22 @@ async function bundle(entrypoint, options) {
   });
 
   await Promise.all(
-    outputFolders
-      .filter(folder => folder.type !== 'esm')
-      .map(({ format, directory }) => {
-        const outputOptions = {
-          format,
-          file: jsEntrypoint.replace(/\/es\//, `/${path.basename(directory)}/`),
+    outputFolders.map(({ format, entrypoint: file }) => {
+      const outputOptions = {
+        format,
+        file,
+      };
+
+      if (format === 'umd') {
+        outputOptions.name = name;
+        outputOptions.globals = {
+          ...formatDependenciesIntoGlobals(dependencies),
+          ...globals,
         };
+      }
 
-        if (format === 'umd') {
-          outputOptions.name = name;
-          outputOptions.globals = {
-            ...formatDependenciesIntoGlobals(dependencies),
-            ...globals,
-          };
-        }
-
-        return bundle.write(outputOptions);
-      })
+      return bundle.write(outputOptions);
+    })
   );
 }
 
