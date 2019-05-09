@@ -49,3 +49,11 @@ There are two important React props:
 - `primaryFocus` in `OverflowMenuItem`: This is required for the menu item you put keyboard focus on when `OverflowMenu` gets open
 
 Please refer to [our Storybook](http://react.carbondesignsystem.com/?selectedKind=OverflowMenu&selectedStory=basic) for more details.
+
+## Note about `<OverflowMenu>` children
+
+Make sure the children of `<OverflowMenu>` are React components that accept `ref` as their children - Typically `<OverflowMenuItem>`. Otherwise, you'll get an error like:
+
+```
+Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+```
