@@ -19,7 +19,7 @@ const types = {
   'For password (password)': 'password',
 };
 
-class ControlledPasswordInputApp extends React.Component {
+class PresentationalPasswordInputApp extends React.Component {
   state = {
     type: 'password',
   };
@@ -32,7 +32,7 @@ class ControlledPasswordInputApp extends React.Component {
 
   render() {
     return (
-      <TextInput.ControlledPasswordInput
+      <TextInput.PresentationalPasswordInput
         type={this.state.type}
         togglePasswordVisibility={this.togglePasswordVisibility}
         {...TextInputProps()}
@@ -97,7 +97,7 @@ storiesOf('TextInput', module)
   )
   .add(
     'Fully controlled toggle password visibility',
-    () => <ControlledPasswordInputApp />,
+    () => <PresentationalPasswordInputApp />,
     {
       info: {
         text: `

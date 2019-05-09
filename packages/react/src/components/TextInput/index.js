@@ -6,6 +6,6 @@
  */
 
 export * from './TextInput.Skeleton';
-export ControlledPasswordInput from './PasswordInput';
+export PresentationalPasswordInput from './PasswordInput';
 export PasswordInput from './PasswordInput';
 export default from './TextInput';

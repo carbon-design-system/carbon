@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
-import PasswordInput, { ControlledPasswordInput } from './PasswordInput';
+import PasswordInput, { PresentationalPasswordInput } from './PasswordInput';
 import { textInputProps } from './util';
 
 const { prefix } = settings;
@@ -97,7 +97,7 @@ const TextInput = React.forwardRef(function TextInput(
 });
 
 TextInput.PasswordInput = PasswordInput;
-TextInput.ControlledPasswordInput = ControlledPasswordInput;
+TextInput.PresentationalPasswordInput = PresentationalPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the <input> node

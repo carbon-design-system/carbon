@@ -8,7 +8,7 @@ const { prefix } = settings;
 describe('TextInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <TextInput.ControlledPasswordInput
+      <TextInput.PresentationalPasswordInput
         id="test"
         className="extra-class"
         labelText="testlabel"

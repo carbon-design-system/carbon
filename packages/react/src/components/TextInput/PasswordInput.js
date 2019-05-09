@@ -9,8 +9,8 @@ import { textInputProps } from './util';
 
 const { prefix } = settings;
 
-export const ControlledPasswordInput = React.forwardRef(
-  function ControlledPasswordInput(
+export const PresentationalPasswordInput = React.forwardRef(
+  function PresentationalPasswordInput(
     {
       alt,
       labelText,
@@ -126,7 +126,7 @@ export const ControlledPasswordInput = React.forwardRef(
   }
 );
 
-ControlledPasswordInput.propTypes = {
+PresentationalPasswordInput.propTypes = {
   /**
    * Provide custom alt text for the password visibility toggle button
    */
@@ -212,7 +212,7 @@ ControlledPasswordInput.propTypes = {
   light: PropTypes.bool,
 };
 
-ControlledPasswordInput.defaultProps = {
+PresentationalPasswordInput.defaultProps = {
   alt: '',
   className: `${prefix}--text__input`,
   disabled: false,
@@ -237,7 +237,7 @@ export default class PasswordInput extends React.Component {
 
   render() {
     return (
-      <ControlledPasswordInput
+      <PresentationalPasswordInput
         {...this.props}
         visible={this.state.visible}
         onClick={this.togglePasswordVisibility}
