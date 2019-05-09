@@ -39,3 +39,7 @@ You can also include `<title>` for better accessibility to describe what the but
   </svg>
 </button>
 ```
+
+### Icon-only buttons
+
+When using the icon-only button variant, tooltip styles must also be imported for the component to display properly.

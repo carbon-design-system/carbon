@@ -1,0 +1,102 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'layer';
+
+// Tooltip Icon
+// Icon CSS only tooltip
+/// @access public
+/// @group tooltip
+@mixin tooltip--icon {
+  @include reset;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: visible;
+
+  // Tooltip - renders as a combo of ::before and ::after elements
+  &::before,
+  &::after {
+    @include type-style('body-short-01');
+    position: absolute;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $duration--fast-01 motion(standard, productive);
+  }
+
+  &::before {
+    right: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-width: 0 rem(4px) rem(5px) rem(4px);
+    border-style: solid;
+    border-color: transparent transparent $inverse-02 transparent;
+    margin: 0 auto;
+    content: '';
+    margin-top: 1px;
+    margin-left: 50%;
+  }
+
+  &::after {
+    @include layer('overlay');
+    min-width: rem(24px);
+    max-width: rem(208px);
+    height: rem(24px);
+    margin-left: 50%;
+    padding: 0 1rem;
+    border-radius: rem(2px);
+    color: $inverse-01;
+    font-weight: 400;
+    content: attr(aria-label);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+    background-color: $inverse-02;
+  }
+
+  &:hover,
+  &:focus {
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// Tooltip Icon caret - top position
+/// @access public
+/// @group tooltip
+@mixin tooltip--icon--top {
+  &::before {
+    top: 1px;
+    transform: translate(-50%, calc(-100% - 9px)) rotate(180deg);
+  }
+
+  &::after {
+    top: 0;
+    transform: translate(-50%, calc(-100% - 12px));
+  }
+}
+
+// Tooltip Icon caret - bottom position
+/// @access public
+/// @group tooltip
+@mixin tooltip--icon--bottom {
+  &::before {
+    bottom: 0;
+    transform: translate(-50%, 10px);
+  }
+
+  &::after {
+    bottom: 0;
+    transform: translate(-50%, calc(100% + 10px));
+  }
+}
