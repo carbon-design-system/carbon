@@ -8,6 +8,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/tooltip';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
@@ -16,7 +17,7 @@
 /// @group tooltip
 @mixin tooltip {
   .#{$prefix}--tooltip--icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
   }
 
@@ -35,7 +36,7 @@
     @include focus-outline('border');
   }
 
-  .#{$prefix}--tooltip__trigger {
+  .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
     @include button-reset($width: false);
     display: inline-flex;
     align-items: center;
@@ -230,65 +231,12 @@
   // Icon CSS only tooltip
   .#{$prefix}--tooltip--icon__top,
   .#{$prefix}--tooltip--icon__bottom {
-    @include reset;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    overflow: visible;
-
-    path {
-      fill: $icon-02;
-    }
-
-    // Tooltip - renders as a combo of ::before and ::after elements
-    &::before,
-    &::after {
-      @include type-style('body-short-01');
-      position: absolute;
-      display: none;
-      background-color: $inverse-02;
-    }
-
-    &::before {
-      right: 0;
-      left: 0;
-      width: rem(18px);
-      height: rem(18px);
-      margin: 0 auto;
-      content: '';
-      margin-top: 1px;
-      margin-left: 50%;
-    }
-
-    &::after {
-      @include layer('overlay');
-      min-width: rem(24px);
-      max-width: rem(208px);
-      height: rem(24px);
-      margin-left: 50%;
-      padding: 0 1rem;
-      border-radius: rem(2px);
-      color: $inverse-01;
-      font-weight: 400;
-      content: attr(aria-label);
-      transform: translateX(-50%);
-      white-space: nowrap;
-      pointer-events: none;
-      margin-left: 50%;
-    }
+    @include tooltip--icon;
 
     &:hover,
     &:focus {
-      path {
+      svg {
         fill: $icon-02;
-      }
-
-      &::before,
-      &::after {
-        position: absolute;
-        display: flex;
-        align-items: center;
       }
     }
 
@@ -303,28 +251,12 @@
 
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
-    &::before {
-      top: 1px;
-      transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
-    }
-
-    &::after {
-      top: 0;
-      transform: translate(-50%, calc(-100% - 12px));
-    }
+    @include tooltip--icon--top;
   }
 
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
-    &::before {
-      bottom: 0;
-      transform: translate(-50%, calc(100% + 9px)) rotate(135deg);
-    }
-
-    &::after {
-      bottom: 0;
-      transform: translate(-50%, calc(100% + 10px));
-    }
+    @include tooltip--icon--bottom;
   }
 
   // Tooltip position - icon only
