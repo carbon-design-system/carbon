@@ -18,6 +18,7 @@
   .#{$prefix}--accordion {
     @include reset;
 
+    background: black;
     list-style: none;
     width: 100%;
   }
