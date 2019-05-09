@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect should render 1`] = `
+<MultiSelect
+  compareItems={[Function]}
+  disabled={false}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  label="Field"
+  light={false}
+  locale="en"
+  open={false}
+  selectionFeedback="top-after-reopen"
+  sortItems={[Function]}
+  title={false}
+  type="default"
+>
+  <div
+    className="bx--multi-select__wrapper bx--list-box__wrapper"
+  >
+    <Selection
+      disabled={false}
+      initialSelectedItems={Array []}
+      onChange={[Function]}
+      render={[Function]}
+    >
+      <Downshift
+        breakingChanges={Object {}}
+        defaultHighlightedIndex={null}
+        defaultInputValue=""
+        defaultIsOpen={false}
+        defaultSelectedItem={null}
+        environment={[Window]}
+        getA11yStatusMessage={[Function]}
+        highlightedIndex={null}
+        isOpen={false}
+        itemToString={[Function]}
+        onChange={[Function]}
+        onInputValueChange={[Function]}
+        onOuterClick={[Function]}
+        onSelect={[Function]}
+        onStateChange={[Function]}
+        onUserAction={[Function]}
+        render={[Function]}
+        selectedItem={Array []}
+        selectedItemChanged={[Function]}
+        stateReducer={[Function]}
+      >
+        <ListBox
+          className="bx--multi-select"
+          disabled={false}
+          innerRef={[Function]}
+          isOpen={false}
+          light={false}
+          type="default"
+        >
+          <div
+            className="bx--multi-select bx--list-box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="listbox"
+            tabIndex="-1"
+          >
+            <ListBoxField
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="0"
+              type="button"
+            >
+              <div
+                aria-controls="undefined__menu"
+                aria-expanded={false}
+                aria-haspopup={true}
+                aria-label="open menu"
+                aria-owns="undefined__menu"
+                className="bx--list-box__field"
+                data-toggle={true}
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                role="button"
+                tabIndex="0"
+                type="button"
+              >
+                <span
+                  className="bx--list-box__label"
+                >
+                  Field
+                </span>
+                <ListBoxMenuIcon
+                  isOpen={false}
+                  translateWithId={[Function]}
+                >
+                  <div
+                    className="bx--list-box__menu-icon"
+                    role="button"
+                  >
+                    <ChevronDown16
+                      aria-label="Open menu"
+                      height={16}
+                      name="chevron--down"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-label="Open menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <title>
+                          Open menu
+                        </title>
+                        <path
+                          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+                        />
+                      </svg>
+                    </ChevronDown16>
+                  </div>
+                </ListBoxMenuIcon>
+              </div>
+            </ListBoxField>
+          </div>
+        </ListBox>
+      </Downshift>
+    </Selection>
+  </div>
+</MultiSelect>
+`;

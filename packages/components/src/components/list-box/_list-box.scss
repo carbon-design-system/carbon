@@ -363,7 +363,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
-    fill: white;
+    fill: $inverse-01;
     margin-left: rem(4px);
     width: rem(20px);
     height: rem(20px);
@@ -373,6 +373,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__selection--multi > svg:hover {
     border-radius: 50%;
     background-color: $hover-secondary;
+    fill: $icon-03;
   }
 
   .#{$prefix}--list-box__selection--multi:focus,

@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb should render 1`] = `
+<Breadcrumb
+  className="parent-class"
+>
+  <nav
+    className="bx--breadcrumb parent-class"
+  >
+    <BreadcrumbItem
+      className="some-class"
+      href="www.carbondesignsystem.com"
+    >
+      <div
+        className="bx--breadcrumb-item some-class"
+      >
+        <Link
+          href="www.carbondesignsystem.com"
+        >
+          <a
+            className="bx--link"
+            href="www.carbondesignsystem.com"
+          >
+            Breadcrumb 1
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+  </nav>
+</Breadcrumb>
+`;
+
+exports[`Breadcrumb should support rendering the current page 1`] = `
+<Breadcrumb>
+  <nav
+    className="bx--breadcrumb"
+  >
+    <BreadcrumbItem
+      href="#a"
+    >
+      <div
+        className="bx--breadcrumb-item"
+      >
+        <Link
+          href="#a"
+        >
+          <a
+            className="bx--link"
+            href="#a"
+          >
+            A
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+    <BreadcrumbItem
+      href="#b"
+    >
+      <div
+        className="bx--breadcrumb-item"
+      >
+        <Link
+          href="#b"
+        >
+          <a
+            className="bx--link"
+            href="#b"
+          >
+            B
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+    <BreadcrumbItem
+      href="#c"
+      isCurrentPage={true}
+    >
+      <div
+        className="bx--breadcrumb-item bx--breadcrumb-item--current"
+      >
+        <Link
+          href="#c"
+        >
+          <a
+            className="bx--link"
+            href="#c"
+          >
+            C
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+  </nav>
+</Breadcrumb>
+`;
+
+exports[`Breadcrumb should support rendering the current page 2`] = `
+<Breadcrumb>
+  <nav
+    className="bx--breadcrumb"
+  >
+    <BreadcrumbItem
+      href="#a"
+    >
+      <div
+        className="bx--breadcrumb-item"
+      >
+        <Link
+          href="#a"
+        >
+          <a
+            className="bx--link"
+            href="#a"
+          >
+            A
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+    <BreadcrumbItem
+      href="#b"
+    >
+      <div
+        className="bx--breadcrumb-item"
+      >
+        <Link
+          href="#b"
+        >
+          <a
+            className="bx--link"
+            href="#b"
+          >
+            B
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+    <BreadcrumbItem
+      aria-current="page"
+      href="#c"
+    >
+      <div
+        className="bx--breadcrumb-item"
+      >
+        <Link
+          aria-current="page"
+          href="#c"
+        >
+          <a
+            aria-current="page"
+            className="bx--link"
+            href="#c"
+          >
+            C
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+  </nav>
+</Breadcrumb>
+`;
+
+exports[`Breadcrumb should support rendering without a trailing slash 1`] = `
+<Breadcrumb
+  noTrailingSlash={true}
+>
+  <nav
+    className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
+  >
+    <BreadcrumbItem
+      href="www.carbondesignsystem.com"
+    >
+      <div
+        className="bx--breadcrumb-item"
+      >
+        <Link
+          href="www.carbondesignsystem.com"
+        >
+          <a
+            className="bx--link"
+            href="www.carbondesignsystem.com"
+          >
+            Breadcrumb 1
+          </a>
+        </Link>
+      </div>
+    </BreadcrumbItem>
+  </nav>
+</Breadcrumb>
+`;

@@ -1,6 +1,6 @@
-# carbon-components
+# carbon
 
-[![Carbon Components is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
+[![Carbon is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 [![Build Status](https://circleci.com/gh/carbon-design-system/carbon-components.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
@@ -11,25 +11,22 @@
 
 ## Getting started
 
-To install `carbon-components` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+The Carbon Design System is a collection of packages that help developers and
+designers build digital experiences on the web. We current offer the following
+packages that you can start using today:
 
-```bash
-npm install -S carbon-components
-```
-
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following
-command instead:
-
-```bash
-yarn add carbon-components
-```
-
-If you just want to try out `carbon-components`, you can also use [CodeSandbox](https://codesandbox.io).
-
-[![Edit carbon-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/IBM/carbon-components/tree/master/examples/codesandbox)
-
-(**Important note**: `src` directory in the package has been deprecated and subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
+| Package name                                  | Description                                                                                                                                         |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`carbon-components`](./packages/components)  | Component styles and Vanilla JavaScript                                                                                                             |
+| [`carbon-components-react`](./packages/react) | React components                                                                                                                                    |
+| [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                               |
+| [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                |
+| [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                   |
+| [`@carbon/icons`](./packages/icons)           | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](./packages/icons-angular), and [Vue](./packages/icons-vue) |
+| [`@carbon/layout`](./packages/layout)         | Layout-based units and spacing scale                                                                                                                |
+| [`@carbon/motion`](./packages/motion)         | Productive and expressive motion curves                                                                                                             |
+| [`@carbon/themes`](./packages/themes)         | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                          |
+| [`@carbon/type`](./packages/type)             | New type tokens used alongside IBM Plex                                                                                                             |
 
 ## :books: Documentation
 

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.Table should render 1`] = `
+<Table
+  className="custom-class"
+  isSortable={false}
+>
+  <table
+    className="bx--data-table custom-class bx--data-table--no-border"
+  />
+</Table>
+`;

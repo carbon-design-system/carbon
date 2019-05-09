@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TooltipDefinition should allow the user to specify the direction 1`] = `
+<TooltipDefinition
+  className="custom-class"
+  direction="top"
+  tooltipText="tooltip text"
+>
+  <div
+    className="custom-class bx--tooltip--definition"
+  >
+    <button
+      aria-describedby="definition-tooltip-2"
+      className="bx--tooltip__trigger"
+    >
+      tooltip trigger
+    </button>
+    <div
+      aria-label="tooltip text"
+      className="bx--tooltip--definition__top"
+      id="definition-tooltip-2"
+      role="tooltip"
+    >
+      <span
+        className="bx--tooltip__caret"
+      />
+      <p>
+        tooltip text
+      </p>
+    </div>
+  </div>
+</TooltipDefinition>
+`;
+
+exports[`TooltipDefinition should render 1`] = `
+<TooltipDefinition
+  className="custom-class"
+  direction="bottom"
+  tooltipText="tooltip text"
+>
+  <div
+    className="custom-class bx--tooltip--definition"
+  >
+    <button
+      aria-describedby="definition-tooltip-1"
+      className="bx--tooltip__trigger"
+    >
+      tooltip trigger
+    </button>
+    <div
+      aria-label="tooltip text"
+      className="bx--tooltip--definition__bottom"
+      id="definition-tooltip-1"
+      role="tooltip"
+    >
+      <span
+        className="bx--tooltip__caret"
+      />
+      <p>
+        tooltip text
+      </p>
+    </div>
+  </div>
+</TooltipDefinition>
+`;

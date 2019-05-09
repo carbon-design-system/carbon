@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableHeader should have an active and ascending class if sorting by ASC 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={true}
+              isSortable={false}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="ASC"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Header
+                </span>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableHeader should have an active class if it is the sort header and the sort state is not NONE 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={true}
+              isSortable={false}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="NONE"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Header
+                </span>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableHeader should render 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={false}
+              isSortable={false}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="NONE"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Header
+                </span>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableHeader should render 2`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={true}
+              isSortable={false}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="NONE"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Header
+                </span>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;

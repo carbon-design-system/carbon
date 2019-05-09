@@ -26,3 +26,6 @@ packages/components/scripts
 packages/components/css
 packages/components/scss
 packages/components/docs/js
+
+# Changelogs
+**/CHANGELOG.md

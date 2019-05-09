@@ -1,0 +1,19 @@
+{
+  "name": "colors-examples-preview",
+  "prviate": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "parcel build -d build --public-url \"/colors/examples/preview\" index.html",
+    "develop": "parcel index.html --no-cache"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "parcel-bundler": "^1.10.0-beta.1"
+  },
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  }
+}

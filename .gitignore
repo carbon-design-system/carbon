@@ -1,11 +1,16 @@
 # Build folders
 /build
+packages/*/build/
 packages/*/examples/*/build/
 es
 lib
 dist
 umd
 css
+
+# Netlify deploy folder
+/demo/*
+!/demo/index.html
 
 # Config files
 .npmrc
