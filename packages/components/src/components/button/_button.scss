@@ -8,6 +8,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/tooltip';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import 'mixins';
 @import '../../globals/scss/css--reset';
@@ -22,7 +23,7 @@
   }
 
   .#{$prefix}--btn-set > .#{$prefix}--btn {
-    max-width: rem(196px); // taken from design kit
+    max-width: rem(196px); // 196px from design kit
     width: 100%;
   }
 
@@ -34,8 +35,8 @@
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon,
-    &:disabled > .#{$prefix}--btn__icon {
+    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
+    &:disabled > .#{$prefix}--btn__icon svg {
       fill: $ui-04;
     }
   }
@@ -64,7 +65,7 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary);
+    @include button-theme(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary, 1px);
 
     &:hover {
       color: $inverse-01;
@@ -79,19 +80,19 @@
       background: transparent;
       color: $disabled;
 
-      & > .#{$prefix}--btn__icon {
+      & > .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
 
-    &:hover > .#{$prefix}--btn__icon {
+    &:hover > .#{$prefix}--btn__icon path {
       fill: $inverse-01;
     }
   }
 
   .#{$prefix}--btn--ghost {
     @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
-    padding: rem(14px) rem(16px);
+    padding: $button-padding-ghost;
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -102,7 +103,7 @@
     &:active {
       color: $ibm-color__blue-70;
 
-      .#{$prefix}--btn__icon {
+      .#{$prefix}--btn__icon path {
         fill: $ibm-color__blue-70;
       }
     }
@@ -121,25 +122,42 @@
       background: transparent;
       border-color: transparent;
 
-      .#{$prefix}--btn__icon {
+      .#{$prefix}--btn__icon path {
         fill: $disabled;
       }
     }
 
     &.#{$prefix}--btn--sm {
-      padding: 0.375rem 1rem;
+      padding: $button-padding-ghost-sm;
     }
+  }
+
+  .#{$prefix}--btn--icon-only {
+    @include tooltip--icon;
+  }
+
+  .#{$prefix}--btn--icon-only--top {
+    @include tooltip--icon--top;
+  }
+
+  .#{$prefix}--btn--icon-only--bottom {
+    @include tooltip--icon--bottom;
   }
 
   .#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-right: rem(15px);
+    padding-right: rem(13px);
 
     .#{$prefix}--btn__icon {
       position: static;
     }
 
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+      margin: 0;
+    }
+
+    &::after {
+      transform: translate(calc(-50% + 8px), calc(100% + 10px));
       margin: 0;
     }
   }

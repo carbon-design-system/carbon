@@ -26,6 +26,7 @@
   text-decoration: none;
   transition: all $duration--fast-01 motion(entrance, productive);
   outline: $button-outline-width solid transparent;
+  outline-offset: -4px;
   position: relative;
   max-width: rem(320px);
 
@@ -50,9 +51,17 @@
 /// Button variant styles
 /// @access private
 /// @group button
-@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
+@mixin button-theme(
+  $bg-color,
+  $border-color,
+  $font-color,
+  $hover-bg-color,
+  $icon-color,
+  $active-color,
+  $border-width: $button-border-width
+) {
   background-color: $bg-color;
-  border-width: $button-border-width;
+  border-width: $border-width;
   border-style: solid;
   border-color: $border-color;
   color: $font-color;
@@ -61,36 +70,9 @@
     background-color: $hover-bg-color;
   }
 
-  &::before,
-  &::after {
-    box-sizing: border-box;
-    position: absolute;
-    content: '';
-    transition: all $duration--fast-02 motion(standard, productive);
-  }
-
-  &:not(.#{$prefix}--btn--disabled)::before {
-    top: calc(-#{$button-border-width} + #{$button-outline-width});
-    left: -$button-border-width + $button-outline-width;
-    width: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
-    height: calc(100% + (2 * #{$button-border-width}) - (2 * #{$button-outline-width}));
-    border: 1px solid transparent;
-  }
-
-  &:focus::before {
-    border-color: $ui-02;
-  }
-
-  &:not(.#{$prefix}--btn--disabled)::after {
-    top: -#{$button-border-width};
-    left: -#{$button-border-width};
-    height: calc(100% + 2 * #{$button-border-width});
-    width: calc(100% + 2 * #{$button-border-width});
-    border: $button-outline-width solid transparent;
-  }
-
-  &:focus::after {
+  &:focus {
     border-color: $focus;
+    outline-color: $ui-02;
   }
 
   &:disabled:hover,
@@ -107,7 +89,8 @@
     background-color: $active-color;
   }
 
-  .#{$prefix}--btn__icon {
+  .#{$prefix}--btn__icon,
+  .#{$prefix}--btn__icon path {
     fill: $icon-color;
   }
 }
