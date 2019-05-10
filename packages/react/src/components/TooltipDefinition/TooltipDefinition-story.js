@@ -16,8 +16,19 @@ const directions = {
   'Top (top)': 'top',
 };
 
+const alignments = {
+  'Left (left)': 'left',
+  'Center (center)': 'center',
+  'Right (right)': 'right',
+};
+
 const props = () => ({
   direction: select('Tooltip direction (direction)', directions, 'bottom'),
+  alignment: select(
+    'Tooltip alignment to trigger button (alignment)',
+    alignments,
+    'left'
+  ),
   tooltipText: text(
     'Tooltip content (tooltipText)',
     'Brief description of the dotted, underlined word above.'
