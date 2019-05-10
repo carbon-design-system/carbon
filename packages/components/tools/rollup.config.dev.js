@@ -38,18 +38,10 @@ module.exports = {
       include: [/node_modules/, 'src/globals/js/settings.js', 'demo/feature-flags.js'],
       sourceMap: true,
       namedExports: {
-        'node_modules/prop-types/index.js': ['oneOf'],
-        'node_modules/react/index.js': [
-          'Children',
-          'Component',
-          'PureComponent',
-          'Fragment',
-          'PropTypes',
-          'createElement',
-          'isValidElement',
-        ],
-        'node_modules/react-dom/index.js': ['render'],
-        'node_modules/react-is/index.js': ['isForwardRef'],
+        'prop-types': ['oneOf'],
+        react: ['Children', 'Component', 'PureComponent', 'Fragment', 'PropTypes', 'createElement', 'isValidElement'],
+        'react-dom': ['render'],
+        'react-is': ['isForwardRef'],
       },
     }),
     babel({
