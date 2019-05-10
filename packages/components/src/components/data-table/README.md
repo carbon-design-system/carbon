@@ -1,6 +1,7 @@
 ### SCSS
 
-The update to tables splits out the `scss` files into multiple partial files with specific functionality, with a main index file bringing them together.
+The update to tables splits out the `scss` files into multiple partial files
+with specific functionality, with a main index file bringing them together.
 
 #### Files
 
@@ -57,7 +58,9 @@ DataTable.create(document.getElementById('my-data-table'));
 
 ```javascript
 // `#my-data-table` is an element with `[data-data-table]` attribute
-var dataTableInstance = DataTable.create(document.getElementById('my-data-table'));
+var dataTableInstance = DataTable.create(
+  document.getElementById('my-data-table')
+);
 dataTableInstance.refreshRows();
 ```
 
@@ -89,7 +92,12 @@ document.addEventListener('data-table-aftertogglesort', function(evt) {
   // `evt.target` will be `div.bx--data-table-container`
   // `evt.detail.element` will be `button.bx--table-sort` whose sorting is changed,
   // and will have `bx--table-sort--ascending` class or not depending on the sorting state
-  evt.target.querySelector('tbody').innerHTML = myApplication.resortTableContent(evt.target, evt.detail.element);
+  evt.target.querySelector(
+    'tbody'
+  ).innerHTML = myApplication.resortTableContent(
+    evt.target,
+    evt.detail.element
+  );
 });
 ```
 
@@ -116,11 +124,15 @@ document.addEventListener('data-table-aftertogglesort', function(evt) {
 
 ### FAQ
 
-**How do I sort the tables**
-The table component does not sort the table for you, rather it emits an event and toggles the sort UI. It is up to the user to re-render the table rows sorted; you can see this in action [in the React Storybook](http://react.carbondesignsystem.com/?selectedKind=DataTable&selectedStory=with%20sorting&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+**How do I sort the tables** The table component does not sort the table for
+you, rather it emits an event and toggles the sort UI. It is up to the user to
+re-render the table rows sorted; you can see this in action
+[in the React Storybook](http://react.carbondesignsystem.com/?selectedKind=DataTable&selectedStory=with%20sorting&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
-**How do I use the expandable rows**
-If you would like to programmatically expand table rows, you can add the `bx--expandable-row` to the `selectorParentRows` elements.
+**How do I use the expandable rows** If you would like to programmatically
+expand table rows, you can add the `bx--expandable-row` to the
+`selectorParentRows` elements.
 
-**How do I activate the batch actions pane**
-If you would like to programmatically activate the batch actions pane, you can add `bx--batch-actions--active` to the `bx--batch-actions` element.
+**How do I activate the batch actions pane** If you would like to
+programmatically activate the batch actions pane, you can add
+`bx--batch-actions--active` to the `bx--batch-actions` element.

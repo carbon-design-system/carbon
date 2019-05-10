@@ -132,7 +132,8 @@ $css--helpers: true;
     border: none;
   }
 
-  .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active) .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active)
+    .#{$prefix}--search-input {
     border-bottom: none;
   }
 }

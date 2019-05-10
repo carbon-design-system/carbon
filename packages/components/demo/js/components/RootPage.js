@@ -103,7 +103,10 @@ const applyComponentsX = (componentItems, isComponentsX) =>
     const { items: subItems, meta = {} } = item;
     return {
       ...item,
-      isHidden: meta.isDefaultHidden || (meta.xVersionNotSupported && isComponentsX) || (meta.xVersionOnly && !isComponentsX),
+      isHidden:
+        meta.isDefaultHidden ||
+        (meta.xVersionNotSupported && isComponentsX) ||
+        (meta.xVersionOnly && !isComponentsX),
       ...(!subItems
         ? {}
         : {
@@ -178,12 +181,22 @@ class RootPage extends Component {
       componentItems: currentComponentItems,
       isComponentsX: currentIsComponentsX,
     } = state;
-    if (prevComponentItems === componentItems && prevIsComponentsX === isComponentsX) {
+    if (
+      prevComponentItems === componentItems &&
+      prevIsComponentsX === isComponentsX
+    ) {
       return null;
     }
-    const newIsComponentsX = prevIsComponentsX === isComponentsX ? currentIsComponentsX : isComponentsX;
+    const newIsComponentsX =
+      prevIsComponentsX === isComponentsX
+        ? currentIsComponentsX
+        : isComponentsX;
     const newComponentItems = applyComponentsX(
-      preserveDefaultHidden(prevComponentItems === componentItems ? currentComponentItems : componentItems),
+      preserveDefaultHidden(
+        prevComponentItems === componentItems
+          ? currentComponentItems
+          : componentItems
+      ),
       newIsComponentsX
     );
     return {
@@ -209,15 +222,23 @@ class RootPage extends Component {
             o[pair[0]] = pair[1]; // eslint-disable-line prefer-destructuring
             return o;
           }, {}).nav;
-      const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(window.location.pathname);
-      const name = nameInQueryArg || (pathnameTokens && pathnameTokens[1]) || '';
-      const selectedNavItem = (name && componentItems.find(item => item.name === name)) || componentItems[0];
+      const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(
+        window.location.pathname
+      );
+      const name =
+        nameInQueryArg || (pathnameTokens && pathnameTokens[1]) || '';
+      const selectedNavItem =
+        (name && componentItems.find(item => item.name === name)) ||
+        componentItems[0];
       if (selectedNavItem) {
         this.switchTo(selectedNavItem.id);
       }
     }
     if (!this.hBrowserSyncEvent) {
-      this.hBrowserSyncEvent = onBrowserSyncEvent('file:reload', this._handleBrowserSyncEvent);
+      this.hBrowserSyncEvent = onBrowserSyncEvent(
+        'file:reload',
+        this._handleBrowserSyncEvent
+      );
     }
     this._inspectLinkTag();
   }
@@ -242,7 +263,9 @@ class RootPage extends Component {
     const link = eventMatches(evt, '[data-nav-id]');
     if (link) {
       const { componentItems } = this.state;
-      const selectedNavItem = componentItems && componentItems.find(item => item.id === link.dataset.navId);
+      const selectedNavItem =
+        componentItems &&
+        componentItems.find(item => item.id === link.dataset.navId);
       if (selectedNavItem) {
         this.switchTo(selectedNavItem.id);
       }
@@ -254,7 +277,10 @@ class RootPage extends Component {
    */
   getCurrentComponentItem() {
     const { componentItems, selectedNavItemId } = this.state;
-    return componentItems && componentItems.find(item => item.id === selectedNavItemId);
+    return (
+      componentItems &&
+      componentItems.find(item => item.id === selectedNavItemId)
+    );
   }
 
   /**
@@ -275,7 +301,11 @@ class RootPage extends Component {
    */
   _switchExperimental = evt => {
     const { portSassBuild } = this.props;
-    fetch(`http://localhost:${portSassBuild}/${evt.target.checked ? 'experimental' : 'classic'}`);
+    fetch(
+      `http://localhost:${portSassBuild}/${
+        evt.target.checked ? 'experimental' : 'classic'
+      }`
+    );
   };
 
   /**
@@ -290,8 +320,9 @@ class RootPage extends Component {
       this.hStyleInspectionTimeout = null;
     }
     this.hStyleInspectionTimeout = setTimeout(() => {
-      const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
-        /\/demo\.css/i.test(link.getAttribute('href'))
+      const links = Array.prototype.filter.call(
+        document.querySelectorAll('link[type="text/css"]'),
+        link => /\/demo\.css/i.test(link.getAttribute('href'))
       );
       const lastLink = links[links.length - 1];
       if (lastLink.sheet) {
@@ -309,10 +340,14 @@ class RootPage extends Component {
    */
   _populateCurrent() {
     const { componentItems, selectedNavItemId } = this.state;
-    const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
+    const metadata =
+      componentItems &&
+      componentItems.find(item => item.id === selectedNavItemId);
     const subItems = metadata.items || [];
     const hasRenderedContent =
-      !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
+      !metadata.isCollection && subItems.length <= 1
+        ? metadata.renderedContent
+        : subItems.every(item => item.renderedContent);
     if (!hasRenderedContent) {
       fetch(`/code/${metadata.name}`)
         .then(checkStatus)
@@ -320,7 +355,11 @@ class RootPage extends Component {
         .then(responseContent => {
           // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
           this.setState(({ componentItems: prevComponentItems }) => ({
-            componentItems: applyContent(prevComponentItems, selectedNavItemId, responseContent),
+            componentItems: applyContent(
+              prevComponentItems,
+              selectedNavItemId,
+              responseContent
+            ),
           }));
         });
     }
@@ -354,13 +393,18 @@ class RootPage extends Component {
       link.sheet.cssRules,
       rule =>
         /^\.bx--body$/.test(rule.selectorText) &&
-        /^rgb\(255,\s*255,\s*255\)$/.test(rule.style.getPropertyValue('background-color'))
+        /^rgb\(255,\s*255,\s*255\)$/.test(
+          rule.style.getPropertyValue('background-color')
+        )
     );
     if (oldIsComponentsX !== isComponentsX) {
       this.setState(
         {
           // TODO: Load/navigate
-          componentItems: applyComponentsX(clearContent(componentItems), isComponentsX),
+          componentItems: applyComponentsX(
+            clearContent(componentItems),
+            isComponentsX
+          ),
           isComponentsX,
         },
         this._populateCurrent
@@ -376,10 +420,16 @@ class RootPage extends Component {
     const { routeWithQueryArgs } = this.props;
     this.setState({ selectedNavItemId }, () => {
       const { componentItems } = this.state;
-      const selectedNavItem = componentItems && componentItems.find(item => item.id === selectedNavItemId);
+      const selectedNavItem =
+        componentItems &&
+        componentItems.find(item => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
-        window.history.pushState({ name }, name, !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`);
+        window.history.pushState(
+          { name },
+          name,
+          !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`
+        );
       }
       this._populateCurrent();
     });
@@ -392,10 +442,23 @@ class RootPage extends Component {
     const { name, label } = metadata || {};
     return !metadata ? null : (
       <Fragment>
-        <SideNav items={componentItems} activeItemId={selectedNavItemId} onItemClick={this.onSideNavItemClick} />
-        <main role="main" id="maincontent" className="container" aria-labelledby="page-title" tabIndex="-1" data-page={name}>
+        <SideNav
+          items={componentItems}
+          activeItemId={selectedNavItemId}
+          onItemClick={this.onSideNavItemClick}
+        />
+        <main
+          role="main"
+          id="maincontent"
+          className="container"
+          aria-labelledby="page-title"
+          tabIndex="-1"
+          data-page={name}>
           <PageHeader label="Component" title={label} />
-          <CodePage metadata={metadata} useStaticFullRenderPage={useStaticFullRenderPage} />
+          <CodePage
+            metadata={metadata}
+            useStaticFullRenderPage={useStaticFullRenderPage}
+          />
           <ToggleSmall
             id="theme-switcher"
             className="demo--theme-switcher"

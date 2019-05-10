@@ -1,7 +1,7 @@
 # UI Shell
 
-> **Experimental** components for building a product shell when using
-> the Carbon Design System
+> **Experimental** components for building a product shell when using the Carbon
+> Design System
 
 ## Components
 

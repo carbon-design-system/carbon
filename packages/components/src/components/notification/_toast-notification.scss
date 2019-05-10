@@ -43,22 +43,36 @@
   }
 
   .#{$prefix}--toast-notification--error {
-    @include notification--experimental($support-01, $notification-error-background-color);
+    @include notification--experimental(
+      $support-01,
+      $notification-error-background-color
+    );
   }
 
   .#{$prefix}--toast-notification--success {
-    @include notification--experimental($support-02, $notification-success-background-color);
+    @include notification--experimental(
+      $support-02,
+      $notification-success-background-color
+    );
   }
 
   .#{$prefix}--toast-notification--info {
-    @include notification--experimental($support-04, $notification-info-background-color);
+    @include notification--experimental(
+      $support-04,
+      $notification-info-background-color
+    );
   }
 
   .#{$prefix}--toast-notification--warning {
-    @include notification--experimental($support-03, $notification-warning-background-color);
+    @include notification--experimental(
+      $support-03,
+      $notification-warning-background-color
+    );
   }
 
-  .#{$prefix}--toast-notification--warning .#{$prefix}--toast-notification__icon path[opacity='0'] {
+  .#{$prefix}--toast-notification--warning
+    .#{$prefix}--toast-notification__icon
+    path[opacity='0'] {
     fill: $text-01;
     opacity: 1;
   }

@@ -35,7 +35,10 @@ module.exports = {
     'max-len': [2, 130, 4],
     'no-plusplus': 0,
     'no-restricted-globals': ['error', 'isFinite'].concat(restrictedGlobals),
-    'no-underscore-dangle': [2, { allowAfterThis: true, allowAfterSuper: true }],
+    'no-underscore-dangle': [
+      2,
+      { allowAfterThis: true, allowAfterSuper: true },
+    ],
   },
   settings: {
     jsdoc: {
@@ -60,7 +63,11 @@ module.exports = {
         jest: true,
       },
       rules: {
-        'no-restricted-syntax': [2, { selector: 'LabeledStatement' }, { selector: 'WithStatement' }],
+        'no-restricted-syntax': [
+          2,
+          { selector: 'LabeledStatement' },
+          { selector: 'WithStatement' },
+        ],
       },
     },
   ],

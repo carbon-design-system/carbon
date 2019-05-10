@@ -119,12 +119,15 @@ class ComponentExample extends Component {
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function')
         .forEach(Clz => {
-          forEach.call(container.querySelectorAll(Clz.options.selectorInit), element => {
-            const instance = Clz.components.get(element);
-            if (instance) {
-              instance.release();
+          forEach.call(
+            container.querySelectorAll(Clz.options.selectorInit),
+            element => {
+              const instance = Clz.components.get(element);
+              if (instance) {
+                instance.release();
+              }
             }
-          });
+          );
         });
     }
   };
@@ -159,7 +162,8 @@ class ComponentExample extends Component {
       'component-example__view-full-render--link-only': linkOnly,
     });
 
-    const codepenLink = codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
+    const codepenLink =
+      codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
     const variantSuffix = (component === variant && '--default') || '';
     const staticSuffix = !useStaticFullRenderPage ? '' : '.html';
     const componentLink = variant
@@ -167,7 +171,10 @@ class ComponentExample extends Component {
       : `/component/${component}--default${staticSuffix}`;
 
     const viewFullRender = hideViewFullRender ? null : (
-      <Link className={viewFullRenderClassNames} target="_blank" href={codepenLink || componentLink}>
+      <Link
+        className={viewFullRenderClassNames}
+        target="_blank"
+        href={codepenLink || componentLink}>
         {codepenLink ? 'View on CodePen' : 'View full render'}
       </Link>
     );
@@ -194,7 +201,10 @@ class ComponentExample extends Component {
       /* eslint-disable react/no-danger */
       liveExample = (
         <div className={classNames}>
-          <div dangerouslySetInnerHTML={{ __html: htmlFile }} ref={this._setContainer} />
+          <div
+            dangerouslySetInnerHTML={{ __html: htmlFile }}
+            ref={this._setContainer}
+          />
         </div>
       );
       /* eslint-enable react/no-danger */

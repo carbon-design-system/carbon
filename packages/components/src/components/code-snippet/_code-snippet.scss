@@ -121,7 +121,8 @@
   }
 
   // expanded snippet container
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container {
     max-height: rem(1500px);
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
@@ -133,7 +134,9 @@
   }
 
   // expanded pre
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand .#{$prefix}--snippet-container pre {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container
+    pre {
     overflow-x: scroll;
   }
 
@@ -225,7 +228,8 @@
     background-color: $field-01;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
+    .#{$prefix}--snippet-btn--text {
     position: relative;
     top: rem(-1px);
   }
@@ -255,7 +259,9 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+  .#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
     transition: transform $transition--expansion;
   }
@@ -323,7 +329,8 @@
     }
   }
 
-  .#{$prefix}--snippet--single.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton
+    .#{$prefix}--snippet-container {
     padding-bottom: 0;
   }
 

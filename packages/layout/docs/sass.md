@@ -291,7 +291,8 @@ Returns the largest breakpoint name
 
 ### ✅carbon--breakpoint-infix [function]
 
-Get the infix for a given breakpoint in a list of breakpoints. Usesful for generate the size part in a selector, for example: `.prefix--col-sm-2`.
+Get the infix for a given breakpoint in a list of breakpoints. Usesful for
+generate the size part in a selector, for example: `.prefix--col-sm-2`.
 
 <details>
 <summary>Source code</summary>

@@ -469,7 +469,11 @@ $tokens: (
 /// @param {String} $name - the name of the breakpoint to which we apply the fluid
 /// styles
 /// @param {?Map} $breakpoints - the breakpoints for the grid system
-@mixin fluid-type-size($type-styles, $name, $breakpoints: $carbon--grid-breakpoints) {
+@mixin fluid-type-size(
+  $type-styles,
+  $name,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   // Get the information about the breakpoint we're currently working in. Useful
   // for getting initial width information
   $breakpoint: map-get($breakpoints, $name);
@@ -511,7 +515,10 @@ $tokens: (
       $next-fluid-breakpoint-name: $next-breakpoint-available;
       $next-breakpoint-available: null;
     } @else {
-      $next-breakpoint-available: carbon--breakpoint-next($next-breakpoint-available, $breakpoints);
+      $next-breakpoint-available: carbon--breakpoint-next(
+        $next-breakpoint-available,
+        $breakpoints
+      );
     }
   }
 
@@ -520,7 +527,10 @@ $tokens: (
   // values derive from the next breakpoint
   @if $next-fluid-breakpoint-name {
     $next-fluid-breakpoint: map-get($breakpoints, $next-fluid-breakpoint-name);
-    $max-font-size: map-get(map-get($fluid-sizes, $next-fluid-breakpoint-name), font-size);
+    $max-font-size: map-get(
+      map-get($fluid-sizes, $next-fluid-breakpoint-name),
+      font-size
+    );
     $max-vw: map-get($next-fluid-breakpoint, width);
 
     // prettier-ignore
@@ -544,7 +554,11 @@ $tokens: (
 /// @param {?Boolean} $fluid - specify whether to include fluid styles for the
 /// @param {?Map} $breakpoints - provide a custom breakpoint map to use
 /// token
-@mixin carbon--type-style($name, $fluid: false, $breakpoints: $carbon--grid-breakpoints) {
+@mixin carbon--type-style(
+  $name,
+  $fluid: false,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @if not map-has-key($tokens, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }

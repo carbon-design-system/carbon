@@ -69,7 +69,8 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td,
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected > .#{$prefix}--structured-list-td {
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+    > .#{$prefix}--structured-list-td {
     color: $text-01;
   }
 
@@ -134,8 +135,12 @@
     fill: $ibm-color__gray-40;
   }
 
-  .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row .#{$prefix}--structured-list-svg,
-  .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-td .#{$prefix}--structured-list-svg {
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-row
+    .#{$prefix}--structured-list-svg,
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
     fill: $text-01;
   }
 
@@ -163,7 +168,9 @@
     }
   }
 
-  .#{$prefix}--structured-list.#{$prefix}--skeleton .#{$prefix}--structured-list-th span {
+  .#{$prefix}--structured-list.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th
+    span {
     @include skeleton;
     width: 75%;
     height: 1rem;

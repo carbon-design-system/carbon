@@ -12,7 +12,12 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class Notification extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
+class Notification extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState,
+  handles
+) {
   /**
    * InlineNotification.
    * @extends CreateComponent

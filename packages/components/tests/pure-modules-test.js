@@ -86,7 +86,11 @@ describe('ES modules', () => {
           [entry]: `import ${JSON.stringify(filepath)}`,
         }),
         commonjs({
-          include: [/node_modules/, 'src/globals/js/settings.js', 'src/globals/js/feature-flags.js'],
+          include: [
+            /node_modules/,
+            'src/globals/js/settings.js',
+            'src/globals/js/feature-flags.js',
+          ],
           sourceMap: false,
         }),
         resolve(),

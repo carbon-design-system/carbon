@@ -1,6 +1,11 @@
 ### HTML
 
-Design change around the spinner UI involves markup change for the loading SVG's circle, utilizing new CSS classes (below). Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/loading/code) site. React and other framework variants should reflect the change automatically.
+Design change around the spinner UI involves markup change for the loading SVG's
+circle, utilizing new CSS classes (below). Vanilla markup should be migrated to
+one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/loading/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **New Markup**:
 

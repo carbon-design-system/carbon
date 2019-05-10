@@ -163,7 +163,6 @@
     "path-to-regexp": "^2.2.0",
     "portscanner": "^2.2.0",
     "postcss-loader": "^2.1.0",
-    "prettier": "^1.16.0",
     "promise": "^8.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
@@ -195,12 +194,6 @@
     "exports": false,
     "name": "carbon-components",
     "needs": "^1.2.1"
-  },
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 130,
-    "singleQuote": true,
-    "trailingComma": "es5"
   },
   "babel": {
     "presets": [

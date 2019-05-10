@@ -1,6 +1,7 @@
 # Feature flags
 
-[`FeatureFlags.js`](./FeatureFlags.js) contains the list of the default values of compile-time feature flags.
+[`FeatureFlags.js`](./FeatureFlags.js) contains the list of the default values
+of compile-time feature flags.
 
 ## Example: Rendering `foo` if `aFeatureFlag` is `true`, render `bar` otherwise
 

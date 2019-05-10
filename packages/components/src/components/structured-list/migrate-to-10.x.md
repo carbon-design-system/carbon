@@ -1,6 +1,11 @@
 ### HTML
 
-Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Also design change around selection involves markup change. Please see the new structure below and reference the [structured list page](https://next.carbondesignsystem.com/components/structured-list/code) in our site to copy the specified new markup. React and other framework variants should reflect the change automatically.
+Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is
+now used. Also design change around selection involves markup change. Please see
+the new structure below and reference the
+[structured list page](https://next.carbondesignsystem.com/components/structured-list/code)
+in our site to copy the specified new markup. React and other framework variants
+should reflect the change automatically.
 
 **Things to note**:
 

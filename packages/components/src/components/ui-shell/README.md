@@ -4,7 +4,10 @@
 
 #### Header
 
-> A menu that is visually persistent is a menubar. A menubar is typically horizontal and is often used to create a menu bar similar to those found near the top of the window in many desktop applications, offering the user quick access to a consistent set of commands.
+> A menu that is visually persistent is a menubar. A menubar is typically
+> horizontal and is often used to create a menu bar similar to those found near
+> the top of the window in many desktop applications, offering the user quick
+> access to a consistent set of commands.
 
 Source: https://www.w3.org/TR/wai-aria-practices/#menu
 
@@ -20,7 +23,9 @@ Requirements:
   it is a site navigation system
 - Verify that the icons are compatible in high contrast mode
 - [Keyboard Support](https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#kbd_label)
-- When a menu opens, or when a menubar receives focus, keyboard focus is placed on the first item. All items are focusable as described in 5.6 Keyboard Navigation Inside Components.
+- When a menu opens, or when a menubar receives focus, keyboard focus is placed
+  on the first item. All items are focusable as described in 5.6 Keyboard
+  Navigation Inside Components.
 
 ## Side navigation
 
@@ -30,7 +35,11 @@ Our Side Navigation has approximately the following structure:
 <!-- Top level container -->
 <aside class="bx--side-nav">
   <!-- Navigation wrapper for accessibility -->
-  <nav class="bx--side-nav__navigation" role="navigation" aria-label="Navigation">
+  <nav
+    class="bx--side-nav__navigation"
+    role="navigation"
+    aria-label="Navigation"
+  >
     <!-- Has the title and an optionaly select menu rendered at the top of the side nav -->
     <header class="bx--side-nav__header"></header>
     <!-- Renders all of our navigation items -->
@@ -52,8 +61,8 @@ another navigation pattern to the page.
 
 ### Items
 
-A side nav item is a `<li>` with the `bx--side-nav__item` class. Inside, we will have a link
-or a category. Categories themselves have links inside of a menu.
+A side nav item is a `<li>` with the `bx--side-nav__item` class. Inside, we will
+have a link or a category. Categories themselves have links inside of a menu.
 
 Links can either be active, or in-active, and this status is reflected by using
 an aria attribute `aria-current="page"` or by a class name.

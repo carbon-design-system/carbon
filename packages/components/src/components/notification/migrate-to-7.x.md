@@ -1,14 +1,22 @@
 ### HTML
 
-All notification variations have been condensed into two files `inline-notification.html` and `toast-notification.html`.
+All notification variations have been condensed into two files
+`inline-notification.html` and `toast-notification.html`.
 
-There are now two data attributes for `notification.js` to target. `[data-notification]` identifies the component and `[data-notification-btn]` marks the button to close a notification.
+There are now two data attributes for `notification.js` to target.
+`[data-notification]` identifies the component and `[data-notification-btn]`
+marks the button to close a notification.
 
-The majority of the class names have changed along with some structural changes. The class name changes are documented below. However, probably the easiest way to migrate to the 7.0 component is just by copy/pasting in the new HTML.
+The majority of the class names have changed along with some structural changes.
+The class name changes are documented below. However, probably the easiest way
+to migrate to the 7.0 component is just by copy/pasting in the new HTML.
 
 ### SCSS
 
-The `_notification.scss` is now split in to two files. They are located at `src/components/notification/_inline-notification.scss` and `src/components/notification/_toast-notification.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_notification.scss` is now split in to two files. They are located at
+`src/components/notification/_inline-notification.scss` and
+`src/components/notification/_toast-notification.scss`. You will need to update
+any `@import` statements for this file to reflect this change.
 
 **New**:
 
@@ -52,4 +60,6 @@ Here are the possible modifiers.
 
 ### JavaScript
 
-New in 7.0 we now have JavaScript to handle closing a notification! As long as you have the data attributes discussed in the HTML section and the JavaScript is initialized it'll just work. For more details see the component README file.
+New in 7.0 we now have JavaScript to handle closing a notification! As long as
+you have the data attributes discussed in the HTML section and the JavaScript is
+initialized it'll just work. For more details see the component README file.
