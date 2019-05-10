@@ -314,7 +314,7 @@ class RootPage extends Component {
     const hasRenderedContent =
       !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
     if (!hasRenderedContent) {
-      fetch(`./code/${metadata.name}`)
+      fetch(`/code/${metadata.name}`)
         .then(checkStatus)
         .then(response => response.json())
         .then(responseContent => {
@@ -379,7 +379,7 @@ class RootPage extends Component {
       const selectedNavItem = componentItems && componentItems.find(item => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
-        window.history.pushState({ name }, name, !routeWithQueryArgs ? `./demo/${name}` : `./?nav=${name}`);
+        window.history.pushState({ name }, name, !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`);
       }
       this._populateCurrent();
     });
