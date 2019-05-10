@@ -7,7 +7,6 @@
   Carbon Design System
 </h1>
 
-
 > The Carbon Design System is a series of individual styles and components, that
 > when combined make beautiful, intuitive designs. These designs are systemic and
 > logical, as they all follow the same universal principles.
