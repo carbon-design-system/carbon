@@ -27,8 +27,10 @@ Use these modifiers with `.bx--slider` class.
 
 #### Keydown event
 
-Once `Slider` instance is initialized a user can use the following keys to control the slider.
+Once `Slider` instance is initialized a user can use the following keys to
+control the slider.
 
 - `up` and `right` arrow keys increase the slider value by one step
 - `down` and `left` arrow keys decrease the slider value by one step
-- Pressing `shift` while changing the value of the slider will multiple the change by `Slider.options.stepMultiplier` (the default is 4)
+- Pressing `shift` while changing the value of the slider will multiple the
+  change by `Slider.options.stepMultiplier` (the default is 4)

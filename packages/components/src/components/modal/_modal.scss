@@ -38,7 +38,8 @@
     opacity: 0;
     visibility: hidden;
     transition: background-color $duration--slow-02 motion(exit, expressive),
-      opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-02 motion(exit, expressive),
+      opacity $duration--moderate-02 motion(exit, expressive),
+      z-index $duration--slow-02 motion(exit, expressive),
       visibility $duration--moderate-02 motion(exit, expressive);
 
     &.is-visible {
@@ -46,8 +47,10 @@
       visibility: visible;
       opacity: 1;
       background-color: $overlay-01;
-      transition: background-color $duration--slow-02 motion(entrance, expressive),
-        opacity $duration--moderate-02 motion(entrance, expressive), z-index $duration--slow-02 motion(entrance, expressive),
+      transition: background-color $duration--slow-02
+          motion(entrance, expressive),
+        opacity $duration--moderate-02 motion(entrance, expressive),
+        z-index $duration--slow-02 motion(entrance, expressive),
         visibility $duration--moderate-02 motion(entrance, expressive);
     }
 

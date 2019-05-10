@@ -117,7 +117,8 @@ $list-box-menu-width: rem(300px);
     padding-right: carbon--mini-units(8);
   }
 
-  .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
     padding-right: carbon--mini-units(7);
   }
 
@@ -147,7 +148,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
-  .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__label {
     color: $disabled-02;
   }
 
@@ -163,7 +165,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item--highlighted {
     color: $disabled-02;
     text-decoration: none;
   }
@@ -173,11 +176,13 @@ $list-box-menu-width: rem(300px);
   }
 
   // disabled && invalid
-  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field {
     padding-right: $carbon--spacing-09;
   }
 
-  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
     padding-right: carbon--mini-units(4);
   }
 
@@ -206,19 +211,23 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline,
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
     height: rem(32px);
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
     padding: 0 carbon--mini-units(4) 0 $carbon--spacing-03;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-icon {
     right: $carbon--spacing-03;
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__invalid-icon {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__invalid-icon {
     right: $carbon--spacing-07;
   }
 
@@ -257,7 +266,9 @@ $list-box-menu-width: rem(300px);
   }
 
   // invalid && populated input field
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field .#{$prefix}--text-input[value] {
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value] {
     padding-right: rem(98px); // to account for clear input button outline
   }
 
@@ -274,7 +285,9 @@ $list-box-menu-width: rem(300px);
   }
 
   // invalid && empty input field
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field .#{$prefix}--text-input[value=''] {
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input[value=''] {
     padding-right: carbon--mini-units(9);
   }
 
@@ -406,7 +419,8 @@ $list-box-menu-width: rem(300px);
     &:hover {
       background-color: $hover-ui;
 
-      + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
+      + .#{$prefix}--list-box__menu-item
+        .#{$prefix}--list-box__menu-item__option {
         border-color: transparent;
       }
     }
@@ -416,11 +430,13 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box__menu-item:first-of-type .#{$prefix}--list-box__menu-item__option {
+  .#{$prefix}--list-box__menu-item:first-of-type
+    .#{$prefix}--list-box__menu-item__option {
     border-top-color: transparent;
   }
 
-  .#{$prefix}--list-box__menu-item:hover .#{$prefix}--list-box__menu-item__option {
+  .#{$prefix}--list-box__menu-item:hover
+    .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
   }
 
@@ -453,7 +469,8 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-item__option {
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__option {
     margin: 0 $carbon--spacing-03;
 
     &:focus {
@@ -469,12 +486,14 @@ $list-box-menu-width: rem(300px);
     border-color: transparent;
 
     > .#{$prefix}--list-box__menu-item__option,
-    + .#{$prefix}--list-box__menu-item .#{$prefix}--list-box__menu-item__option {
+    + .#{$prefix}--list-box__menu-item
+      .#{$prefix}--list-box__menu-item__option {
       border-color: transparent;
     }
   }
 
-  .#{$prefix}--list-box__menu-item--highlighted .#{$prefix}--list-box__menu-item__option {
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option {
     color: $text-01;
   }
 

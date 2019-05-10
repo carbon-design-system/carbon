@@ -46,7 +46,9 @@ ProgressIndicator.create(document.getElementById('my-progress'));
 
 ```javascript
 // `#my-progress` is an element with `[data-progress]` attribute
-var progressIndicatorInstance = ProgressIndicator.create(document.getElementById('my-progress'));
+var progressIndicatorInstance = ProgressIndicator.create(
+  document.getElementById('my-progress')
+);
 // Sets the 2nd step current
 progressIndicatorInstance.setCurrent(1);
 ```
@@ -88,7 +90,10 @@ progressIndicatorInstance.setCurrent(1);
 
 #### Adding or removing Progress steps
 
-Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically accommodate for any number of steps. A Progress step with an overflow tooltip and optional helper text in HTML looks like this:
+Once `ProgressIndicator` instance is initialized, simply add or remove Progress
+steps in the HTML. The JavaScript will automatically accommodate for any number
+of steps. A Progress step with an overflow tooltip and optional helper text in
+HTML looks like this:
 
 ```html
 <li class="bx--progress-step bx--progress-step--complete">
@@ -101,10 +106,16 @@ Once `ProgressIndicator` instance is initialized, simply add or remove Progress 
     viewBox="0 0 16 16"
     aria-hidden="true"
   >
-    <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path>
+    <path
+      d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+    ></path>
     <path d="M7 10.8L4.5 8.3l.8-.8L7 9.2l3.7-3.7.8.8z"></path>
   </svg>
-  <p tabindex="0" class="bx--progress-label bx--progress-label-overflow" aria-describedby="label-tooltip">
+  <p
+    tabindex="0"
+    class="bx--progress-label bx--progress-label-overflow"
+    aria-describedby="label-tooltip"
+  >
     Overflow Example First step
   </p>
   <div
@@ -122,4 +133,7 @@ Once `ProgressIndicator` instance is initialized, simply add or remove Progress 
 </li>
 ```
 
-Note that each progress step will need a modifier class. In the example above, it is `bx--progress-step--complete`, but the JavaScript will set this to the appropriate modifier class relative to the current step as indicated by `bx--progress-step--incomplete`.
+Note that each progress step will need a modifier class. In the example above,
+it is `bx--progress-step--complete`, but the JavaScript will set this to the
+appropriate modifier class relative to the current step as indicated by
+`bx--progress-step--incomplete`.

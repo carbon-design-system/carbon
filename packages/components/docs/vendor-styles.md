@@ -1,9 +1,9 @@
 # Vendor Styles
 
 While we are building towards our Carbon v10 (X) release, we are including some
-additional packages in a `vendor` folder from a new project called [Carbon
-Elements](https://github.com/IBM/carbon-elements). The goal of these elements is
-to be the code companion for the updated IBM Design Language.
+additional packages in a `vendor` folder from a new project called
+[Carbon Elements](https://github.com/IBM/carbon-elements). The goal of these
+elements is to be the code companion for the updated IBM Design Language.
 
 However, if we use these packages directly then we risk breaking consumers who
 do not have their `node-sass` setup in a way to resolve module imports. As a

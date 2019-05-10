@@ -1,8 +1,10 @@
 # Feature flags
 
-[`feature-flags.js`](./feature-flags.js) contains the list of the default values of compile-time feature flags.
+[`feature-flags.js`](./feature-flags.js) contains the list of the default values
+of compile-time feature flags.
 
-Build toolchain can replace variable here and/or the references in order to apply non-default values to those feature flags.
+Build toolchain can replace variable here and/or the references in order to
+apply non-default values to those feature flags.
 
 ## Example: Render `foo` if `aFeatureFlag` is `true`, render `bar` otherwise
 

@@ -12,7 +12,12 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu, { DIRECTION_LEFT, DIRECTION_TOP, DIRECTION_RIGHT, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
+import FloatingMenu, {
+  DIRECTION_LEFT,
+  DIRECTION_TOP,
+  DIRECTION_RIGHT,
+  DIRECTION_BOTTOM,
+} from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
 
@@ -23,7 +28,10 @@ import on from '../../globals/js/misc/on';
  * @private
  */
 const getMenuOffset = (menuBody, menuDirection) => {
-  const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
+  const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(
+    menuBody,
+    ':before'
+  );
   const arrowPositionProp = {
     [DIRECTION_LEFT]: 'right',
     [DIRECTION_TOP]: 'bottom',
@@ -39,29 +47,43 @@ const getMenuOffset = (menuBody, menuDirection) => {
   const values = [arrowPositionProp, 'border-bottom-width'].reduce(
     (o, name) => ({
       ...o,
-      [name]: Number((/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
+      [name]: Number(
+        (/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]
+      ),
     }),
     {}
   );
   let margin = 0;
   if (menuDirection !== DIRECTION_BOTTOM) {
     const style = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody);
-    margin = Number((/^([\d-.]+)px$/.exec(style.getPropertyValue('margin-top')) || [])[1]);
+    margin = Number(
+      (/^([\d-.]+)px$/.exec(style.getPropertyValue('margin-top')) || [])[1]
+    );
   }
   values[arrowPositionProp] = values[arrowPositionProp] || -6; // IE, etc.
   if (Object.keys(values).every(name => !isNaN(values[name]))) {
-    const { [arrowPositionProp]: arrowPosition, 'border-bottom-width': borderBottomWidth } = values;
+    const {
+      [arrowPositionProp]: arrowPosition,
+      'border-bottom-width': borderBottomWidth,
+    } = values;
     return {
       left: 0,
       top: 0,
       [menuPositionAdjustmentProp]:
-        Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition + margin * (menuDirection === DIRECTION_TOP ? 2 : 1),
+        Math.sqrt(borderBottomWidth ** 2 * 2) -
+        arrowPosition +
+        margin * (menuDirection === DIRECTION_TOP ? 2 : 1),
     };
   }
   return undefined;
 };
 
-class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState, handles) {
+class Tooltip extends mixin(
+  createComponent,
+  initComponentByEvent,
+  eventedShowHideState,
+  handles
+) {
   /**
    * Tooltip.
    * @extends CreateComponent
@@ -92,7 +114,11 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    */
   createdByEvent(event) {
     const { relatedTarget, type } = event;
-    this._debouncedHandleClick({ relatedTarget, type: type === 'focusin' ? 'focus' : type, details: getLaunchingDetails(event) });
+    this._debouncedHandleClick({
+      relatedTarget,
+      type: type === 'focusin' ? 'focus' : type,
+      details: getLaunchingDetails(event),
+    });
   }
 
   /**
@@ -103,7 +129,9 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    // */
   changeState(state, detail, callback) {
     if (!this.tooltip) {
-      const tooltip = this.element.ownerDocument.querySelector(this.element.getAttribute(this.options.attribTooltipTarget));
+      const tooltip = this.element.ownerDocument.querySelector(
+        this.element.getAttribute(this.options.attribTooltipTarget)
+      );
       if (!tooltip) {
         throw new Error('Cannot find the target tooltip.');
       }
@@ -120,7 +148,11 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
 
     // Delegates the action of changing state to the tooltip.
     // (And thus the before/after shown/hidden events are fired from the tooltip)
-    this.tooltip.changeState(state, Object.assign(detail, { delegatorNode: this.element }), callback);
+    this.tooltip.changeState(
+      state,
+      Object.assign(detail, { delegatorNode: this.element }),
+      callback
+    );
   }
 
   /**
@@ -174,7 +206,8 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     if (type === 'blur') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const wentToSelf =
-        (relatedTarget && (this.element.contains && this.element.contains(relatedTarget))) ||
+        (relatedTarget &&
+          (this.element.contains && this.element.contains(relatedTarget))) ||
         (this.tooltip && this.tooltip.element.contains(relatedTarget));
       shouldPreventClose = hadContextMenu || wentToSelf;
     }

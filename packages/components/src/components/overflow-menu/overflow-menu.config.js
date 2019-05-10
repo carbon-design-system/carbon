@@ -11,8 +11,10 @@ const { prefix } = require('../../globals/js/settings');
 
 const items = [
   {
-    title: 'An example option that is really long to show what should be done to handle long text',
-    label: 'An example option that is really long to show what should be done to handle long text',
+    title:
+      'An example option that is really long to show what should be done to handle long text',
+    label:
+      'An example option that is really long to show what should be done to handle long text',
     primaryFocus: true,
   },
   {

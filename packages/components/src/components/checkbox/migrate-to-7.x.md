@@ -5,7 +5,9 @@ All checkboxes must use SVG icons to ensure browser compatibility.
 
 ### SCSS
 
-The `_checkbox.scss` file is now located in `src/components/checkbox/_checkbox.scss`. You'll need to update any `@import` statements for this file to reflect this change.
+The `_checkbox.scss` file is now located in
+`src/components/checkbox/_checkbox.scss`. You'll need to update any `@import`
+statements for this file to reflect this change.
 
 **New**:
 
@@ -20,4 +22,5 @@ The `_checkbox.scss` file is now located in `src/components/checkbox/_checkbox.s
 ```
 
 Almost all checkbox classes have been changed to use less BEM underscore syntax.
-To use the newest checkbox styles, it will be best to copy and paste the latest checkbox HTML provided by the design-system.
+To use the newest checkbox styles, it will be best to copy and paste the latest
+checkbox HTML provided by the design-system.

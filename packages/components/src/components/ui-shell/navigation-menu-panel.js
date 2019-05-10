@@ -34,7 +34,8 @@ export default class NavigationMenuPanel extends mixin(
    * @param {string} state
    * @returns {boolean} true if given state is different from current state
    */
-  shouldStateBeChanged = state => (state === 'expanded') === this.element.hasAttribute('hidden');
+  shouldStateBeChanged = state =>
+    (state === 'expanded') === this.element.hasAttribute('hidden');
 
   /**
    * Changes the expanded/collapsed state.
@@ -46,7 +47,9 @@ export default class NavigationMenuPanel extends mixin(
     toggleAttribute(this.element, 'hidden', state !== 'expanded');
     if (this.triggerButton) {
       if (state === 'expanded') {
-        const focusableMenuItems = this.element.querySelector(this.options.selectorFocusableMenuItem);
+        const focusableMenuItems = this.element.querySelector(
+          this.options.selectorFocusableMenuItem
+        );
         if (focusableMenuItems) {
           focusableMenuItems.focus();
         }
@@ -55,7 +58,10 @@ export default class NavigationMenuPanel extends mixin(
         state === 'expanded'
           ? this.triggerButton.getAttribute(this.options.attribLabelCollapse)
           : this.triggerButton.getAttribute(this.options.attribLabelExpand);
-      this.triggerButton.classList.toggle(this.options.classNavigationMenuPanelHeaderActionActive, state === 'expanded');
+      this.triggerButton.classList.toggle(
+        this.options.classNavigationMenuPanelHeaderActionActive,
+        state === 'expanded'
+      );
       this.triggerButton.setAttribute('aria-label', label);
       this.triggerButton.setAttribute('title', label);
     }

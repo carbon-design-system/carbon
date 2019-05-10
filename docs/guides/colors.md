@@ -64,7 +64,8 @@ otherwise the JavaScript program will not run.
 
 When working with token names and values, you will be working in the
 [`themes`](/packages/themes/src) folder. This folder will have files that are
-named for each theme we currently support. The [`white`](/packages/themes/src/white.js) theme is considered the default theme.
+named for each theme we currently support. The
+[`white`](/packages/themes/src/white.js) theme is considered the default theme.
 
 Each file in this directly (outside of `index.js`) will have all of the theme
 tokens defined inside of them. These files are written in JavaScript exports all
@@ -124,8 +125,8 @@ export const interactive01 = blue20;
 #### Using another theme
 
 If a theme that you are currently editing relies on another theme value, you can
-re-export that token at the end of the file. As an example, let's
-say we are working in the `gray10`, or `g10`, theme. This theme has a token,
+re-export that token at the end of the file. As an example, let's say we are
+working in the `gray10`, or `g10`, theme. This theme has a token,
 `hoverSelectedUI`, that is the same value as the `white` theme.
 
 Following our examples above, we would normally write a token value like:
@@ -146,7 +147,8 @@ Writing the line above will allow us to get the `hoverSelectedUI` value from the
 
 #### `rgba` values
 
-When working with values that have opacity, you can import and use the `rgba` helper to get the proper representation of the value in code.
+When working with values that have opacity, you can import and use the `rgba`
+helper to get the proper representation of the value in code.
 
 We can use this helper by including the following at the top of the file in our
 imports:

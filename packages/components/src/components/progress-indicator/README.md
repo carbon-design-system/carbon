@@ -45,7 +45,9 @@ ProgressIndicator.create(document.getElementById('my-progress'));
 
 ```javascript
 // `#my-progress` is an element with `[data-progress]` attribute
-var progressIndicatorInstance = ProgressIndicator.create(document.getElementById('my-progress'));
+var progressIndicatorInstance = ProgressIndicator.create(
+  document.getElementById('my-progress')
+);
 // Sets the 2nd step current
 progressIndicatorInstance.setCurrent(1);
 ```
@@ -80,17 +82,24 @@ progressIndicatorInstance.setCurrent(1);
 
 #### Adding or removing Progress steps
 
-Once `ProgressIndicator` instance is initialized, simply add or remove Progress steps in the HTML. The JavaScript will automatically accommodate for any number of steps. A Progress step in HTML looks like this:
+Once `ProgressIndicator` instance is initialized, simply add or remove Progress
+steps in the HTML. The JavaScript will automatically accommodate for any number
+of steps. A Progress step in HTML looks like this:
 
 ```html
 <li class="bx--progress-step bx--progress-step--complete">
   <svg width="24px" height="24px" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="12"></circle>
-    <polygon points="10.3 13.6 7.7 11 6.3 12.4 10.3 16.4 17.8 9 16.4 7.6"></polygon>
+    <polygon
+      points="10.3 13.6 7.7 11 6.3 12.4 10.3 16.4 17.8 9 16.4 7.6"
+    ></polygon>
   </svg>
   <p class="bx--progress-label">Label 1</p>
   <span class="bx--progress-line"></span>
 </li>
 ```
 
-Note that each progress step will need a modifier class. In the example above, it is `bx--progress-step--complete`, but the JavaScript will set this to the appropriate modifier class relative to the current step as indicated by `bx--progress-step--incomplete`.
+Note that each progress step will need a modifier class. In the example above,
+it is `bx--progress-step--complete`, but the JavaScript will set this to the
+appropriate modifier class relative to the current step as indicated by
+`bx--progress-step--incomplete`.

@@ -38,7 +38,9 @@ InlineLoading.create(document.getElementById('my-inline-loading'));
 
 ```javascript
 // `#my-inline-loading` is an element with `[data-inline-loading]` attribute
-var inlineLoadingInstance = InlineLoading.create(document.getElementById('my-inline-loading'));
+var inlineLoadingInstance = InlineLoading.create(
+  document.getElementById('my-inline-loading')
+);
 inlineLoadingInstance.setState(InlineLoading.states.FINISHED);
 ```
 

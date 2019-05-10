@@ -14,8 +14,11 @@
 
 ## Why is the clear icon a button?
 
-The clear icon has been updated to use a `button` in order to be tab-able by various browsers. If the icon is just an SVG target, than unfortunately some screen readers may not be able to access it during the normal control flow.
+The clear icon has been updated to use a `button` in order to be tab-able by
+various browsers. If the icon is just an SVG target, than unfortunately some
+screen readers may not be able to access it during the normal control flow.
 
 ## The close icon isn't tab-able in Safari
 
-In order to tab to the close icon in an input in Safar, you'll have to use `<Option><Tab>` instead of the standard `<Tab>` keystroke.
+In order to tab to the close icon in an input in Safar, you'll have to use
+`<Option><Tab>` instead of the standard `<Tab>` keystroke.

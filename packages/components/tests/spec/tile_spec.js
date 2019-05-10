@@ -11,13 +11,19 @@ describe('Test tile', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         tile = new Tile();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         tile = new Tile(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
@@ -77,7 +83,9 @@ describe('Test tile', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
-      tileElementInitialState = tileElement.classList.contains('bx--tile--is-clicked');
+      tileElementInitialState = tileElement.classList.contains(
+        'bx--tile--is-clicked'
+      );
       instance = new Tile(tileElement);
     });
 
@@ -107,7 +115,9 @@ describe('Test tile', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
-      tileElementInitialState = tileElement.classList.contains('bx--tile--is-expanded');
+      tileElementInitialState = tileElement.classList.contains(
+        'bx--tile--is-expanded'
+      );
       instance = new Tile(tileElement);
     });
 
@@ -118,7 +128,9 @@ describe('Test tile', function() {
     it('Should have the is-expanded class after its been clicked', function() {
       tileElement.classList.remove('bx--tile--is-expanded');
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(true);
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(
+        true
+      );
     });
 
     /**
@@ -148,7 +160,9 @@ describe('Test tile', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
-      tileElementInitialState = tileElement.classList.contains('bx--tile--is-selected');
+      tileElementInitialState = tileElement.classList.contains(
+        'bx--tile--is-selected'
+      );
       instance = new Tile(tileElement);
     });
 
@@ -159,7 +173,9 @@ describe('Test tile', function() {
     it('Should have the is-clicked class after its been clicked', function() {
       tileElement.classList.remove('bx--tile--is-selected');
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(tileElement.classList.contains('bx--tile--is-selected')).toBe(true);
+      expect(tileElement.classList.contains('bx--tile--is-selected')).toBe(
+        true
+      );
     });
 
     afterAll(function() {

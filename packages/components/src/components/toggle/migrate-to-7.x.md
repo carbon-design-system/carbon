@@ -4,7 +4,9 @@ Toggle and other form components are wrapped with the `.bx--form-item` element.
 
 ### SCSS
 
-The `_toggle.scss` file is now located at `src/components/toggle/_toggle.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_toggle.scss` file is now located at `src/components/toggle/_toggle.scss`.
+You will need to update any `@import` statements for this file to reflect this
+change.
 
 **New**:
 

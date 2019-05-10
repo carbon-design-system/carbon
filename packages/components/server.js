@@ -25,14 +25,21 @@ const hotMiddleware = devMode && webpackHotMiddleware(compiler);
 let dummyHashSeq = 0;
 let templateOrConfigChanged = false;
 const watchCallback = debounce(() => {
-  const featureFlagCacheKey = Object.keys(require.cache).find(key => /feature-flags\.js$/i.test(key));
+  const featureFlagCacheKey = Object.keys(require.cache).find(key =>
+    /feature-flags\.js$/i.test(key)
+  );
   if (featureFlagCacheKey) {
     require.cache[featureFlagCacheKey] = undefined;
   }
   templates.cache.clear();
   if (templateOrConfigChanged) {
     templateOrConfigChanged = false;
-    hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+    hotMiddleware.publish({
+      action: 'sync',
+      hash: `DUMMY_HASH_${dummyHashSeq++}`,
+      errors: [],
+      warnings: [],
+    });
   }
 }, 500);
 
@@ -45,7 +52,12 @@ const invokeWatchCallback = name => {
 
 if (devMode) {
   chokidar
-    .watch(['demo/feature-flags.js', 'demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
+    .watch([
+      'demo/feature-flags.js',
+      'demo/**/*.hbs',
+      'src/**/*.hbs',
+      'src/**/*.config.js',
+    ])
     .on('add', invokeWatchCallback)
     .on('change', invokeWatchCallback)
     .on('unlink', invokeWatchCallback);
@@ -65,7 +77,11 @@ function navRoute(req, res, next) {
   const name = url === '/' ? url : (reDemoComponentPath.exec(url) || [])[1];
   if (!name || /\.(js|css)/i.test(name)) {
     next();
-  } else if (name !== '/' && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+  } else if (
+    name !== '/' &&
+    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+      '..'
+  ) {
     res.status(404).end();
   } else {
     templates.cache
@@ -94,7 +110,10 @@ function componentRoute(req, res, next) {
   const name = (reComponentPath.exec(req.url) || [])[1];
   if (!name) {
     next();
-  } else if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+  } else if (
+    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+    '..'
+  ) {
     res.writeHead(404);
     res.end();
   } else {
@@ -122,7 +141,10 @@ function codeRoute(req, res, next) {
   const name = (reCodePath.exec(req.url) || [])[1];
   if (!name) {
     next();
-  } else if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+  } else if (
+    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+    '..'
+  ) {
     res.writeHead(404);
     res.end();
   } else {

@@ -46,7 +46,9 @@ class Tab extends ContentSwitcher {
       })
     );
 
-    const selected = this.element.querySelector(this.options.selectorButtonSelected);
+    const selected = this.element.querySelector(
+      this.options.selectorButtonSelected
+    );
     if (selected) {
       this._updateTriggerText(selected);
     }
@@ -77,7 +79,10 @@ class Tab extends ContentSwitcher {
   _handleClick(event) {
     const button = eventMatches(event, this.options.selectorButton);
     const trigger = eventMatches(event, this.options.selectorTrigger);
-    if (button && !button.classList.contains(this.options.classButtonDisabled)) {
+    if (
+      button &&
+      !button.classList.contains(this.options.classButtonDisabled)
+    ) {
       super._handleClick(event);
       this._updateMenuState(false);
     }
@@ -121,11 +126,20 @@ class Tab extends ContentSwitcher {
     }[event.which];
 
     if (direction) {
-      const buttons = toArray(this.element.querySelectorAll(this.options.selectorButtonEnabled));
-      const button = this.element.querySelector(this.options.selectorButtonSelected);
-      const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
+      const buttons = toArray(
+        this.element.querySelectorAll(this.options.selectorButtonEnabled)
+      );
+      const button = this.element.querySelector(
+        this.options.selectorButtonSelected
+      );
+      const nextIndex = Math.max(
+        buttons.indexOf(button) + direction,
+        -1 /* For `button` not found in `buttons` */
+      );
       const nextIndexLooped =
-        nextIndex >= 0 && nextIndex < buttons.length ? nextIndex : nextIndex - Math.sign(nextIndex) * buttons.length;
+        nextIndex >= 0 && nextIndex < buttons.length
+          ? nextIndex
+          : nextIndex - Math.sign(nextIndex) * buttons.length;
       this.setActive(buttons[nextIndexLooped], (error, item) => {
         if (item) {
           const link = item.querySelector(this.options.selectorLink);
@@ -146,7 +160,10 @@ class Tab extends ContentSwitcher {
     const menu = this.element.querySelector(this.options.selectorMenu);
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (menu) {
-      menu.classList.toggle(this.options.classHidden, typeof force === 'undefined' ? force : !force);
+      menu.classList.toggle(
+        this.options.classHidden,
+        typeof force === 'undefined' ? force : !force
+      );
       if (menu.classList.contains(this.options.classHidden)) {
         trigger.classList.remove(this.options.classOpen);
       } else {
@@ -160,7 +177,9 @@ class Tab extends ContentSwitcher {
    * @param {HTMLElement} target The newly selected tab item.
    */
   _updateTriggerText(target) {
-    const triggerText = this.element.querySelector(this.options.selectorTriggerText);
+    const triggerText = this.element.querySelector(
+      this.options.selectorTriggerText
+    );
     if (triggerText) {
       triggerText.textContent = target.textContent;
     }

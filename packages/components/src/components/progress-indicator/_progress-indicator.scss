@@ -61,7 +61,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: box-shadow $duration--fast-02 motion(standard, productive), color $duration--fast-02 motion(standard, productive);
+    transition: box-shadow $duration--fast-02 motion(standard, productive),
+      color $duration--fast-02 motion(standard, productive);
 
     &::before {
       content: '';
@@ -202,7 +203,9 @@
       cursor: not-allowed;
     }
 
-    .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip--definition .#{$prefix}--tooltip--definition__bottom {
+    .#{$prefix}--progress-label-overflow:hover
+      ~ .#{$prefix}--tooltip--definition
+      .#{$prefix}--tooltip--definition__bottom {
       display: none;
     }
   }

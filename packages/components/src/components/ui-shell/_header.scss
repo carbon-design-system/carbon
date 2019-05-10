@@ -38,21 +38,27 @@
     border: rem(3px) solid transparent;
   }
 
-  .#{$prefix}--header__action > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
-  .#{$prefix}--header__action--active > svg.#{$prefix}--navigation-menu-panel-expand-icon {
+  .#{$prefix}--header__action
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
     display: none;
   }
 
-  .#{$prefix}--header__action--active > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
     display: inline;
   }
 
-  .#{$prefix}--header__action > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
-  .#{$prefix}--header__action--active > svg.#{$prefix}--navigation-menu-panel-expand-icon {
+  .#{$prefix}--header__action
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
     display: none;
   }
 
-  .#{$prefix}--header__action--active > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
     display: inline;
   }
 
@@ -166,7 +172,8 @@
     z-index: #{z('header') + 1};
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] > .#{$prefix}--header__menu-arrow {
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    > .#{$prefix}--header__menu-arrow {
     transform: rotate(180deg);
   }
 
@@ -174,7 +181,8 @@
     display: none;
   }
 
-  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] + .#{$prefix}--header__menu {
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -191,7 +199,8 @@
     height: mini-units(6);
   }
 
-  .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem']:hover {
+  .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item[role='menuitem']:hover {
     background-color: #4c4c4c;
     color: #fff;
   }
