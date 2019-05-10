@@ -19,13 +19,19 @@ describe('Test Checkbox', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Checkbox();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Checkbox(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', function() {
@@ -104,14 +110,18 @@ describe('Test Checkbox', function() {
     it('Should show the checkbox upon focusing in nested checkbox', function() {
       container.classList.add('bx--checkbox-label');
       elem.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(container.classList.contains('bx--checkbox-label__focus')).toBe(true);
+      expect(container.classList.contains('bx--checkbox-label__focus')).toBe(
+        true
+      );
     });
 
     it('Should hide the checkbox upon blur in nested checkbox', function() {
       container.classList.add('bx--checkbox-label');
       container.classList.add('bx--checkbox-label__focus');
       elem.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
-      expect(container.classList.contains('bx--checkbox-label__focus')).toBe(false);
+      expect(container.classList.contains('bx--checkbox-label__focus')).toBe(
+        false
+      );
     });
 
     afterAll(function() {

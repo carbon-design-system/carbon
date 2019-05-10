@@ -7,7 +7,11 @@ import ComponentExample from '../ComponentExample/ComponentExample';
 /**
  * The page to show the component demo, its code as well as its README.
  */
-const CodePage = ({ metadata, hideViewFullRender, useStaticFullRenderPage }) => {
+const CodePage = ({
+  metadata,
+  hideViewFullRender,
+  useStaticFullRenderPage,
+}) => {
   const md = new Markdown({ html: true });
   const subItems = metadata.items || [];
   const useSingleVariant = !metadata.isCollection && subItems.length <= 1;
@@ -16,7 +20,9 @@ const CodePage = ({ metadata, hideViewFullRender, useStaticFullRenderPage }) => 
     .filter(item => !item.isHidden)
     .map(item => (
       <div key={item.id} className="component-variation">
-        {!useSingleVariant && <h2 className="component-variation__name">{item.label}</h2>}
+        {!useSingleVariant && (
+          <h2 className="component-variation__name">{item.label}</h2>
+        )}
         {!useSingleVariant && item.notes && <p>{item.notes}</p>}
         <ComponentExample
           variant={item.handle.replace(/--default$/, '')}
@@ -33,7 +39,12 @@ const CodePage = ({ metadata, hideViewFullRender, useStaticFullRenderPage }) => 
   return (
     <div className="page code-page test">
       {componentContent}
-      {metadata.notes && <div className="page_md" dangerouslySetInnerHTML={{ __html: md.render(metadata.notes) }} />}
+      {metadata.notes && (
+        <div
+          className="page_md"
+          dangerouslySetInnerHTML={{ __html: md.render(metadata.notes) }}
+        />
+      )}
     </div>
   );
   /* eslint-enable react/no-danger */

@@ -28,16 +28,20 @@ Fonts if you are using any of our projects, or if you are using
 [`@carbon/type`](../packages/type) directly.
 
 However, the Google Fonts strategy loaded by default is not recommended for
-production use-cases. Below, we offer several alternative ways to include IBM Plex
-in your project for a variety of situations.
+production use-cases. Below, we offer several alternative ways to include IBM
+Plex in your project for a variety of situations.
 
 If you feel like a situation isn't fully covered, or you have an idea for
-another one to add, please [make an issue](https://github.com/IBM/carbon-elements/issues/new/choose)! We want to make sure everyone feels like their use-case is fully covered by this document.
+another one to add, please
+[make an issue](https://github.com/IBM/carbon-elements/issues/new/choose)! We
+want to make sure everyone feels like their use-case is fully covered by this
+document.
 
 ### `@ibm/plex`
 
-IBM Plex is distributed through a package on NPM called [`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex).
-The source for this package is available on [GitHub](https://github.com/ibm/plex#readme).
+IBM Plex is distributed through a package on NPM called
+[`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex). The source for this
+package is available on [GitHub](https://github.com/ibm/plex#readme).
 
 This package ships all of the available fonts, and includes files that offer the
 complete typeface in one file. It also ships fonts split up into a variety of
@@ -100,8 +104,8 @@ The following are the options for each of these sub-paths:
   - `Latin3`
   - `Pi`
 
-To get the hang of things, let's go through a couple of examples for various font
-families and formats.
+To get the hang of things, let's go through a couple of examples for various
+font families and formats.
 
 <details>
 <summary>IBM Plex Arabic</summary>
@@ -134,9 +138,11 @@ families and formats.
 
 ### `@font-face`
 
-To include IBM Plex in your projects on the web, you need to use a CSS
-feature called the [`@font-face` at-rule.](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
-If you have not used this feature before, an overview is available [here](https://css-tricks.com/snippets/css/using-font-face/).
+To include IBM Plex in your projects on the web, you need to use a CSS feature
+called the
+[`@font-face` at-rule.](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
+If you have not used this feature before, an overview is available
+[here](https://css-tricks.com/snippets/css/using-font-face/).
 
 In general, the structure of an `@font-face` block for IBM Plex will follows
 template:
@@ -149,8 +155,8 @@ template:
 }
 ```
 
-Each block corresponds to a given file supplied by the `@ibm/plex` package.
-For example, if we want to load IBM Plex Sans with the font weights of light,
+Each block corresponds to a given file supplied by the `@ibm/plex` package. For
+example, if we want to load IBM Plex Sans with the font weights of light,
 regular, and bold, we would write three separate `@font-face` blocks:
 
 ```css
@@ -185,8 +191,8 @@ body {
 }
 ```
 
-Thankfully, setting this on `body` is is handled by Carbon for you so no need to set this up if
-you're already using Carbon!
+Thankfully, setting this on `body` is is handled by Carbon for you so no need to
+set this up if you're already using Carbon!
 
 If you would like to support Unicode ranges, as well, be on the lookout for an
 update to this document with guidance!
@@ -217,8 +223,9 @@ To quickly load IBM Plex Sans, you could use the following `@font-face` block:
 
 ### Self-hosted, CDN
 
-If your product uses a CDN, or you want to self-host, you can serve the IBM Plex files
-directly. You have a couple of options for getting the right assets, namely:
+If your product uses a CDN, or you want to self-host, you can serve the IBM Plex
+files directly. You have a couple of options for getting the right assets,
+namely:
 
 - Download directly from GitHub (unpreferred as the asset is unversioned)
 - Include `@ibm/plex` as a dependency in your project and update the assets
@@ -248,7 +255,8 @@ or `url-loader` in your webpack config.
 
 If hosting in a CDN, you will need to manually extract the files that you need
 and publish them to your CDN. For an example of how to structure these, you can
-view how Google Fonts does this in [`@carbon/type`](https://github.com/IBM/carbon-elements/blob/master/packages/type/scss/font-face/_sans.scss).
+view how Google Fonts does this in
+[`@carbon/type`](https://github.com/IBM/carbon-elements/blob/master/packages/type/scss/font-face/_sans.scss).
 
 ## FAQ
 

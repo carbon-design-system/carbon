@@ -81,8 +81,17 @@ modalInstance.show();
 >
   <div class="bx--modal-container">
     <div class="bx--modal-header">
-      <p class="bx--modal-header__heading bx--type-beta" id="my-modal-heading">Modal heading</p>
-      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal">(The close button image)</button>
+      <p class="bx--modal-header__heading bx--type-beta" id="my-modal-heading">
+        Modal heading
+      </p>
+      <button
+        class="bx--modal-close"
+        type="button"
+        data-modal-close
+        aria-label="close modal"
+      >
+        (The close button image)
+      </button>
     </div>
     <div class="bx--modal-content">
       <label for="my-text-input" class="bx--label">Text Input label</label>
@@ -132,11 +141,24 @@ document.addEventListener('modal-hidden', function(evt) {
 
 #### How do I point multiple elements to the same modal?
 
-To trigger the same modal, you need to add the `data-modal-target` attribute to a element, and then point it to the same id. For example
+To trigger the same modal, you need to add the `data-modal-target` attribute to
+a element, and then point it to the same id. For example
 
 ```html
-<button class="bx--btn bx-btn--primary" type="button" data-modal-target="#modal">A button</button>
-<button class="bx--btn bx-btn--secondary" type="button" data-modal-target="#modal">Another button</button>
+<button
+  class="bx--btn bx-btn--primary"
+  type="button"
+  data-modal-target="#modal"
+>
+  A button
+</button>
+<button
+  class="bx--btn bx-btn--secondary"
+  type="button"
+  data-modal-target="#modal"
+>
+  Another button
+</button>
 ```
 
 Both these buttons would trigger the modal with the id of `modal.`

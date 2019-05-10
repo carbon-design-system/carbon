@@ -156,7 +156,8 @@
 
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
     transition: color $duration--fast-01 motion(standard, productive),
-      border-bottom-color $duration--fast-01 motion(standard, productive), outline $duration--fast-01 motion(standard, productive);
+      border-bottom-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
   }
 
   //-----------------------------
@@ -228,7 +229,8 @@
     line-height: rem(16px);
     border-bottom: 1px solid $ui-03;
     overflow: hidden;
-    transition: border $duration--fast-01 motion(standard, productive), outline $duration--fast-01 motion(standard, productive);
+    transition: border $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
 
     &:focus,
     &:active {

@@ -22,7 +22,10 @@
 /// Supports sizes from 12px to 92px.
 $carbon--type-scale: ();
 @for $i from 1 through 23 {
-  $carbon--type-scale: append($carbon--type-scale, carbon--rem(carbon--get-type-size($i)));
+  $carbon--type-scale: append(
+    $carbon--type-scale,
+    carbon--rem(carbon--get-type-size($i))
+  );
 }
 
 /// Get the value of a specific step in the typescale

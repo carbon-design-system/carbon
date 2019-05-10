@@ -1,6 +1,7 @@
 # `ComponentName`
 
-> A description of the component, usually from the [Carbon Design System website](https://www.carbondesignsystem.com/)
+> A description of the component, usually from the
+> [Carbon Design System website](https://www.carbondesignsystem.com/)
 
 <!-- You can run `npx doctoc --title '## Table of Contents' <path-to-file.md>` to automatically generate the table of contents for this page -->
 
@@ -16,13 +17,16 @@
 
 ## Installation
 
-This component comes with any installation of the `carbon-components-react` package on npm. You can install this package by running the following command in your terminal with [npm](https://www.npmjs.com/):
+This component comes with any installation of the `carbon-components-react`
+package on npm. You can install this package by running the following command in
+your terminal with [npm](https://www.npmjs.com/):
 
 ```bash
 npm i carbon-components carbon-components-react carbon-icons --save
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
 ```bash
 yarn add carbon-components-react carbon-components carbon-icons

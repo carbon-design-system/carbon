@@ -1,7 +1,8 @@
 # `OverflowMenu` component
 
-> Overflow Menu is used when additional options are available to the user and there is a space constraint.
-> Create Overflow Menu Item components for each option on the menu.
+> Overflow Menu is used when additional options are available to the user and
+> there is a space constraint. Create Overflow Menu Item components for each
+> option on the menu.
 
 ## Table of Contents
 
@@ -18,7 +19,9 @@
 
 ## Installation
 
-This component comes with any installation of the `carbon-components-react` package on NPM. You can install this package by running the following in your terminal:
+This component comes with any installation of the `carbon-components-react`
+package on NPM. You can install this package by running the following in your
+terminal:
 
 ```bash
 npm i carbon-components carbon-components-react carbon-icons --save
@@ -28,7 +31,8 @@ yarn add carbon-components carbon-components-react carbon-icons
 
 ## Usage
 
-You can include `OverflowMenu` and `OverflowMenuItem` by doing the following in your project:
+You can include `OverflowMenu` and `OverflowMenuItem` by doing the following in
+your project:
 
 ```js
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
@@ -46,6 +50,9 @@ You can then create the menu by the following:
 
 There are two important React props:
 
-- `primaryFocus` in `OverflowMenuItem`: This is required for the menu item you put keyboard focus on when `OverflowMenu` gets open
+- `primaryFocus` in `OverflowMenuItem`: This is required for the menu item you
+  put keyboard focus on when `OverflowMenu` gets open
 
-Please refer to [our Storybook](http://react.carbondesignsystem.com/?selectedKind=OverflowMenu&selectedStory=basic) for more details.
+Please refer to
+[our Storybook](http://react.carbondesignsystem.com/?selectedKind=OverflowMenu&selectedStory=basic)
+for more details.

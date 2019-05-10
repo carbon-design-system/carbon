@@ -1,6 +1,8 @@
 ### HTML
 
-Terminal snippet has been renamed to Single line snippet, Code snippet has been renamed to Multi-line snippet. We have also added a new variation, Inline snippet.
+Terminal snippet has been renamed to Single line snippet, Code snippet has been
+renamed to Multi-line snippet. We have also added a new variation, Inline
+snippet.
 
 ### SCSS
 
@@ -12,4 +14,5 @@ Terminal snippet has been renamed to Single line snippet, Code snippet has been 
 
 ### Javascript
 
-The multi-line code snippet now has javascript. Be sure to add the data attribute `[data-code-snippet]` for it to work.
+The multi-line code snippet now has javascript. Be sure to add the data
+attribute `[data-code-snippet]` for it to work.

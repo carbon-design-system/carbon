@@ -12,7 +12,10 @@
 /// heights
 /// @param {string} $breakpoint
 /// @return rem
-@function carbon--get-column-width($breakpoint, $breakpoints: $carbon--grid-breakpoints) {
+@function carbon--get-column-width(
+  $breakpoint,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @if map-has-key($breakpoints, $breakpoint) {
     $values: map-get($breakpoints, $breakpoint);
     $width: map-get($values, width);

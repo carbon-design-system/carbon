@@ -28,12 +28,14 @@
     }
   }
 
-  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded .#{$prefix}--text-input {
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
+    .#{$prefix}--text-input {
     border-bottom-color: $ui-03;
   }
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
-  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field {
     padding: 0;
   }
 }

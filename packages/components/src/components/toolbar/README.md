@@ -20,7 +20,8 @@
 
 #### Bind a Toolbar to a Table
 
-To bind a toolbar to a specific table add the table component's unique id to the `data-table-target` attribute of the toolbar.
+To bind a toolbar to a specific table add the table component's unique id to the
+`data-table-target` attribute of the toolbar.
 
 ```html
 <div class="bx--toolbar" data-table-target="unique-id"></div>

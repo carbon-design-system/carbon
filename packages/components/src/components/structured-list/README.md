@@ -2,7 +2,8 @@
 
 #### Variables
 
-All configurable variables are located in [src/globals/scss/\_vars.scss](https://github.com/IBM/carbon-components/blob/master/src/globals/scss/_vars.scss)
+All configurable variables are located in
+[src/globals/scss/\_vars.scss](https://github.com/IBM/carbon-components/blob/master/src/globals/scss/_vars.scss)
 
 | name                       | description                                                                               |
 | -------------------------- | ----------------------------------------------------------------------------------------- |
@@ -10,8 +11,11 @@ All configurable variables are located in [src/globals/scss/\_vars.scss](https:/
 
 #### Mixins
 
-Mixins specific to structured-list are located in [src/components/structured-list/\_mixins.scss](https://github.com/IBM/carbon-components/blob/master/src/components/structured-list/_mixins.scss).
-All mixins listed below take an optional `$padding` parameter. Default value for `$padding` is equal to `$structured-list-padding: 2rem !default;`, which can be overwritten.
+Mixins specific to structured-list are located in
+[src/components/structured-list/\_mixins.scss](https://github.com/IBM/carbon-components/blob/master/src/components/structured-list/_mixins.scss).
+All mixins listed below take an optional `$padding` parameter. Default value for
+`$padding` is equal to `$structured-list-padding: 2rem !default;`, which can be
+overwritten.
 
 | name                            | params     | description                                                                                                                                            |
 | ------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -52,20 +56,28 @@ Use these modifiers with `.bx--structured-list-td` class.
 
 #### Keydown event
 
-Once `StructuredList` instance is initialized, use [structured-list--selection.html](https://github.com/IBM/carbon-components/blob/master/src/components/structured-list/structured-list--selection.html) and users will be able to make row selections with keyboard similar to radio buttons.
+Once `StructuredList` instance is initialized, use
+[structured-list--selection.html](https://github.com/IBM/carbon-components/blob/master/src/components/structured-list/structured-list--selection.html)
+and users will be able to make row selections with keyboard similar to radio
+buttons.
 
 - `up` and `down` arrow keys for navigation (focus and select)
 - `tab` and `shift + tab` for navigation (focus only)
 - `enter` and `space` for selecting
 
-**Chrome**: `up` and `down` arrow keys will set `focus` on `<label>` elements and associated `<input type="radio">` will recieve `checked` attribute via `StructuredList` JavaScript.
+**Chrome**: `up` and `down` arrow keys will set `focus` on `<label>` elements
+and associated `<input type="radio">` will recieve `checked` attribute via
+`StructuredList` JavaScript.
 
-**Firefox**: `up` and `down` arrows keys will set focus on `<input type="radio">` through the associated `<label>` and will only set the `checked` attribute on the input. Arrow keys will not set focus on the `<label>`.
+**Firefox**: `up` and `down` arrows keys will set focus on
+`<input type="radio">` through the associated `<label>` and will only set the
+`checked` attribute on the input. Arrow keys will not set focus on the
+`<label>`.
 
 #### Add visual styles to text
 
-You can add text to each cell in a structured-list.
-Use CSS to add visual styles to text.
+You can add text to each cell in a structured-list. Use CSS to add visual styles
+to text.
 
 **HTML**
 

@@ -32,8 +32,12 @@ $css--plex: false;
 @import './src/globals/scss/css--font-face';
 `);
 
-    expect(result.css.toString()).toEqual(expect.stringContaining('@font-face'));
-    expect(result.css.toString()).toEqual(expect.stringContaining(`font-family: 'IBM Helvetica'`));
+    expect(result.css.toString()).toEqual(
+      expect.stringContaining('@font-face')
+    );
+    expect(result.css.toString()).toEqual(
+      expect.stringContaining(`font-family: 'IBM Helvetica'`)
+    );
   });
 
   describe('experimental', () => {
@@ -46,9 +50,15 @@ $css--plex: true;
 `);
 
       expect(result.css.toString()).toMatchSnapshot();
-      expect(result.css.toString()).toEqual(expect.stringContaining('@font-face'));
-      expect(result.css.toString()).toEqual(expect.stringContaining(`font-family: 'IBM Plex Mono'`));
-      expect(result.css.toString()).toEqual(expect.stringContaining(`font-family: 'IBM Plex Sans'`));
+      expect(result.css.toString()).toEqual(
+        expect.stringContaining('@font-face')
+      );
+      expect(result.css.toString()).toEqual(
+        expect.stringContaining(`font-family: 'IBM Plex Mono'`)
+      );
+      expect(result.css.toString()).toEqual(
+        expect.stringContaining(`font-family: 'IBM Plex Sans'`)
+      );
     });
   });
 });

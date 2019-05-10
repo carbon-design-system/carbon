@@ -175,7 +175,8 @@ Define theme variables from a map of tokens
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Content**: Pass in your custom declaration blocks to be used after the token maps set theming variables.
+- **Content**: Pass in your custom declaration blocks to be used after the token
+  maps set theming variables.
 - **Requires**:
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
@@ -1332,7 +1333,8 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 
 ### ✅disabled-02 [variable]
 
-Disabled elements on `$disabled-01`; Disabled label; Disabled text on `$disabled-01`; Disabled icons; Disabled border
+Disabled elements on `$disabled-01`; Disabled label; Disabled text on
+`$disabled-01`; Disabled icons; Disabled border
 
 <details>
 <summary>Source code</summary>

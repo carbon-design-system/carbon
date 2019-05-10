@@ -3,7 +3,10 @@ import SideNav from '../../src/components/ui-shell/side-nav';
 describe('Side Nav', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
-      expect(() => new SideNav()).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      expect(() => new SideNav()).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
@@ -63,36 +66,64 @@ describe('Side Nav', function() {
       it('should close the open side nav on toggle click', function() {
         toggleNode.setAttribute('aria-expanded', 'true');
         toggleNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(element.classList.contains('bx--side-nav--expanded')).toBe(false);
+        expect(element.classList.contains('bx--side-nav--expanded')).toBe(
+          false
+        );
       });
     });
 
     describe('Click side nav link', function() {
       it('should attach CSS classes on click', function() {
-        navLinkTriggerNode1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(navLinkTriggerNode1.classList.contains('bx--side-nav__link--current')).toBe(true);
-        expect(navLinkNode1.classList.contains('bx--side-nav__item--active')).toBe(true);
+        navLinkTriggerNode1.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+        expect(
+          navLinkTriggerNode1.classList.contains('bx--side-nav__link--current')
+        ).toBe(true);
+        expect(
+          navLinkNode1.classList.contains('bx--side-nav__item--active')
+        ).toBe(true);
       });
       it('should detach CSS classes from previously active links when nav link is active', function() {
-        navLinkTriggerNode1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        navLinkTriggerNode2.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(navLinkTriggerNode1.classList.contains('bx--side-nav__link--current')).toBe(false);
-        expect(navLinkNode1.classList.contains('bx--side-nav__item--active')).toBe(false);
-        expect(navLinkTriggerNode2.classList.contains('bx--side-nav__link--current')).toBe(true);
-        expect(navLinkNode2.classList.contains('bx--side-nav__item--active')).toBe(true);
+        navLinkTriggerNode1.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+        navLinkTriggerNode2.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+        expect(
+          navLinkTriggerNode1.classList.contains('bx--side-nav__link--current')
+        ).toBe(false);
+        expect(
+          navLinkNode1.classList.contains('bx--side-nav__item--active')
+        ).toBe(false);
+        expect(
+          navLinkTriggerNode2.classList.contains('bx--side-nav__link--current')
+        ).toBe(true);
+        expect(
+          navLinkNode2.classList.contains('bx--side-nav__item--active')
+        ).toBe(true);
       });
     });
 
     describe('Click nav submenu', function() {
       it('should open the submenu on click', function() {
-        navSubmenuTriggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(navSubmenuTriggerNode.getAttribute('aria-expanded')).toBe('true');
+        navSubmenuTriggerNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+        expect(navSubmenuTriggerNode.getAttribute('aria-expanded')).toBe(
+          'true'
+        );
       });
 
       it('should close the open submenu on click', function() {
         navSubmenuTriggerNode.setAttribute('aria-expanded', 'true');
-        navSubmenuTriggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(navSubmenuTriggerNode.getAttribute('aria-expanded')).toBe('false');
+        navSubmenuTriggerNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
+        expect(navSubmenuTriggerNode.getAttribute('aria-expanded')).toBe(
+          'false'
+        );
       });
     });
 

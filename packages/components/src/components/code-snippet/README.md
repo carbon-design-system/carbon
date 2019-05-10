@@ -2,7 +2,8 @@
 
 #### Mixins
 
-Mixins specific to Code Snippet are located in [src/components/code-snippet/\_mixins.scss]().
+Mixins specific to Code Snippet are located in
+[src/components/code-snippet/\_mixins.scss]().
 
 | Name          | Params | Description               |
 | ------------- | ------ | ------------------------- |

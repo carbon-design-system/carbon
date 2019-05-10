@@ -48,7 +48,8 @@ module.exports = {
     {
       name: 'default--with-select',
       label: 'Pagination Nav With Select',
-      notes: 'A Select menu can be added for large sets of pages as an overflow.',
+      notes:
+        'A Select menu can be added for large sets of pages as an overflow.',
       context: {
         variant: 'default',
         pages: [

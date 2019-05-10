@@ -17,7 +17,8 @@
   // Sortable table
   // -------------------------------------
   .#{$prefix}--data-table--sort th,
-  .#{$prefix}--data-table--sort th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+  .#{$prefix}--data-table--sort
+    th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
     padding: 0;
     height: $layout-04;
     border-top: none;
@@ -91,11 +92,13 @@
   }
 
   // active icons
-  .#{$prefix}--table-sort.#{$prefix}--table-sort--active .#{$prefix}--table-sort__icon-unsorted {
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon-unsorted {
     display: none;
   }
 
-  .#{$prefix}--table-sort.#{$prefix}--table-sort--active .#{$prefix}--table-sort__icon {
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon {
     display: block;
     opacity: 1; //changes opacity when th is active (see line 125)
   }

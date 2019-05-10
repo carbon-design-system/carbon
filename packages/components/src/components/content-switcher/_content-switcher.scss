@@ -95,11 +95,14 @@
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
-  .#{$prefix}--content-switcher-btn:focus + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
-  .#{$prefix}--content-switcher-btn:hover + .#{$prefix}--content-switcher-btn::before {
+  .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
 
@@ -135,7 +138,8 @@
     }
   }
 
-  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected .#{$prefix}--content-switcher__icon {
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    .#{$prefix}--content-switcher__icon {
     fill: $inverse-01;
   }
 }

@@ -6,13 +6,19 @@ describe('Test Inline Loading', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new InlineLoading();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new InlineLoading(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
   });
 
@@ -26,39 +32,128 @@ describe('Test Inline Loading', function() {
     });
 
     it('Should support setting the initial state via options', function() {
-      instance = new InlineLoading(elem.querySelector('[data-inline-loading]'), { initialState: 'active' });
-      expect(elem.querySelector('[data-inline-loading-spinner]').classList.contains('bx--loading--stop')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-spinner]').hasAttribute('hidden')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-finished]').hasAttribute('hidden')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-text-active]').hasAttribute('hidden')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-text-finished]').hasAttribute('hidden')).toBe(true);
+      instance = new InlineLoading(
+        elem.querySelector('[data-inline-loading]'),
+        { initialState: 'active' }
+      );
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .classList.contains('bx--loading--stop')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-active]')
+          .hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
     });
 
     it('Should hide everything but spinner when the state is set to inactive', function() {
-      instance = new InlineLoading(elem.querySelector('[data-inline-loading]')).setState('inactive');
-      expect(elem.querySelector('[data-inline-loading-spinner]').classList.contains('bx--loading--stop')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-spinner]').hasAttribute('hidden')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-finished]').hasAttribute('hidden')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-text-active]').hasAttribute('hidden')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-text-finished]').hasAttribute('hidden')).toBe(true);
+      instance = new InlineLoading(
+        elem.querySelector('[data-inline-loading]')
+      ).setState('inactive');
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .classList.contains('bx--loading--stop')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-active]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
     });
 
     it('Should hide elements for finished states when the state is set to active', function() {
-      instance = new InlineLoading(elem.querySelector('[data-inline-loading]')).setState('active');
-      expect(elem.querySelector('[data-inline-loading-spinner]').classList.contains('bx--loading--stop')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-spinner]').hasAttribute('hidden')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-finished]').hasAttribute('hidden')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-text-active]').hasAttribute('hidden')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-text-finished]').hasAttribute('hidden')).toBe(true);
+      instance = new InlineLoading(
+        elem.querySelector('[data-inline-loading]')
+      ).setState('active');
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .classList.contains('bx--loading--stop')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-active]')
+          .hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(true);
     });
 
     it('Should hide elements for active states when the state is set to finished', function() {
-      instance = new InlineLoading(elem.querySelector('[data-inline-loading]')).setState('finished');
-      expect(elem.querySelector('[data-inline-loading-spinner]').classList.contains('bx--loading--stop')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-spinner]').hasAttribute('hidden')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-finished]').hasAttribute('hidden')).toBe(false);
-      expect(elem.querySelector('[data-inline-loading-text-active]').hasAttribute('hidden')).toBe(true);
-      expect(elem.querySelector('[data-inline-loading-text-finished]').hasAttribute('hidden')).toBe(false);
+      instance = new InlineLoading(
+        elem.querySelector('[data-inline-loading]')
+      ).setState('finished');
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .classList.contains('bx--loading--stop')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-spinner]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-finished]')
+          .hasAttribute('hidden')
+      ).toBe(false);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-active]')
+          .hasAttribute('hidden')
+      ).toBe(true);
+      expect(
+        elem
+          .querySelector('[data-inline-loading-text-finished]')
+          .hasAttribute('hidden')
+      ).toBe(false);
     });
 
     it('Should throw if a wrong state is passed in', function() {

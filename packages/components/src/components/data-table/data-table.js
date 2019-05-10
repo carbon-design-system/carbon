@@ -14,7 +14,11 @@ import eventMatches from '../../globals/js/misc/event-matches';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
+class DataTable extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState
+) {
   /**
    * Data Table
    * @extends CreateComponent
@@ -35,9 +39,13 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
 
     this.container = element.parentNode;
     this.toolbarEl = this.element.querySelector(this.options.selectorToolbar);
-    this.batchActionEl = this.element.querySelector(this.options.selectorActions);
+    this.batchActionEl = this.element.querySelector(
+      this.options.selectorActions
+    );
     this.countEl = this.element.querySelector(this.options.selectorCount);
-    this.cancelEl = this.element.querySelector(this.options.selectorActionCancel);
+    this.cancelEl = this.element.querySelector(
+      this.options.selectorActionCancel
+    );
     this.tableHeaders = this.element.querySelectorAll('th');
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
     this.expandCells = [];
@@ -56,7 +64,9 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
 
     this.element.addEventListener('click', evt => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
-      const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+      const searchContainer = this.element.querySelector(
+        this.options.selectorToolbarSearchContainer
+      );
 
       if (eventElement) {
         this._toggleState(eventElement, evt);
@@ -75,9 +85,13 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   }
 
   _handleDocumentClick(evt) {
-    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchContainer = this.element.querySelector(
+      this.options.selectorToolbarSearchContainer
+    );
     const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
-    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+    const activeSearch = searchContainer.classList.contains(
+      this.options.classToolbarSearchActive
+    );
 
     if (searchContainer && searchEvent) {
       this.activateSearch(searchContainer);
@@ -95,10 +109,17 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   }
 
   deactivateSearch(container, evt) {
-    const trigger = container.querySelector(this.options.selectorSearchMagnifier);
+    const trigger = container.querySelector(
+      this.options.selectorSearchMagnifier
+    );
     const input = container.querySelector(this.options.selectorSearchInput);
     const svg = trigger.querySelector('svg');
-    if (input.value.length === 0 && evt.target !== input && evt.target !== trigger && evt.target !== svg) {
+    if (
+      input.value.length === 0 &&
+      evt.target !== input &&
+      evt.target !== trigger &&
+      evt.target !== svg
+    ) {
       container.classList.remove(this.options.classToolbarSearchActive);
       trigger.focus();
     }
@@ -155,7 +176,9 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   _selectAllToggle = ({ element }) => {
     const { checked } = element;
 
-    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
+    const inputs = toArray(
+      this.element.querySelectorAll(this.options.selectorCheckbox)
+    );
 
     this.state.checkboxCount = checked ? inputs.length - 1 : 0;
 
@@ -178,8 +201,12 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   };
 
   _actionBarCancel = () => {
-    const inputs = toArray(this.element.querySelectorAll(this.options.selectorCheckbox));
-    const row = toArray(this.element.querySelectorAll(this.options.selectorTableSelected));
+    const inputs = toArray(
+      this.element.querySelectorAll(this.options.selectorCheckbox)
+    );
+    const row = toArray(
+      this.element.querySelectorAll(this.options.selectorTableSelected)
+    );
 
     row.forEach(item => {
       item.classList.remove(this.options.classTableSelected);
@@ -225,7 +252,10 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   _rowExpandToggle = ({ element, initialEvt }) => {
     const parent = eventMatches(initialEvt, this.options.eventParentContainer);
 
-    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
+    if (
+      element.dataset.previousValue === undefined ||
+      element.dataset.previousValue === 'expanded'
+    ) {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
     } else {
@@ -235,10 +265,14 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   };
 
   _expandableHoverToggle = element => {
-    element.previousElementSibling.classList.add(this.options.classExpandableRowHover);
+    element.previousElementSibling.classList.add(
+      this.options.classExpandableRowHover
+    );
 
     const mouseout = () => {
-      element.previousElementSibling.classList.remove(this.options.classExpandableRowHover);
+      element.previousElementSibling.classList.remove(
+        this.options.classExpandableRowHover
+      );
       element.removeEventListener('mouseout', mouseout);
     };
 
@@ -261,9 +295,13 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   };
 
   _keydownHandler = evt => {
-    const searchContainer = this.element.querySelector(this.options.selectorToolbarSearchContainer);
+    const searchContainer = this.element.querySelector(
+      this.options.selectorToolbarSearchContainer
+    );
     const searchEvent = eventMatches(evt, this.options.selectorSearchMagnifier);
-    const activeSearch = searchContainer.classList.contains(this.options.classToolbarSearchActive);
+    const activeSearch = searchContainer.classList.contains(
+      this.options.classToolbarSearchActive
+    );
 
     if (evt.which === 27) {
       this._actionBarCancel();
@@ -284,18 +322,31 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   }
 
   refreshRows = () => {
-    const newExpandCells = toArray(this.element.querySelectorAll(this.options.selectorExpandCells));
-    const newExpandableRows = toArray(this.element.querySelectorAll(this.options.selectorExpandableRows));
-    const newParentRows = toArray(this.element.querySelectorAll(this.options.selectorParentRows));
+    const newExpandCells = toArray(
+      this.element.querySelectorAll(this.options.selectorExpandCells)
+    );
+    const newExpandableRows = toArray(
+      this.element.querySelectorAll(this.options.selectorExpandableRows)
+    );
+    const newParentRows = toArray(
+      this.element.querySelectorAll(this.options.selectorParentRows)
+    );
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
-      const diffParentRows = newParentRows.filter(newRow => !this.parentRows.some(oldRow => oldRow === newRow));
+      const diffParentRows = newParentRows.filter(
+        newRow => !this.parentRows.some(oldRow => oldRow === newRow)
+      );
 
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
-        const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
-        const mergedExpandableRows = [...toArray(this.expandableRows), ...toArray(diffExpandableRows)];
+        const diffExpandableRows = diffParentRows.map(
+          newRow => newRow.nextElementSibling
+        );
+        const mergedExpandableRows = [
+          ...toArray(this.expandableRows),
+          ...toArray(diffExpandableRows),
+        ];
         this.expandableRows = mergedExpandableRows;
       }
     } else if (newExpandableRows.length > 0) {

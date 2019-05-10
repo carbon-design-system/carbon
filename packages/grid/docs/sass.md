@@ -31,7 +31,8 @@
 
 ### ✅carbon--12-column-grid [variable]
 
-Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the default 16
+Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the
+default 16
 
 <details>
 <summary>Source code</summary>
@@ -69,9 +70,9 @@ $carbon--12-column-grid: map-merge(
 
 ### ❌carbon--make-col-ready [mixin]
 
-Used to initialize the default properties for a column class, most notably
-for setting width and default gutters when a column's breakpoint has not been
-hit yet.
+Used to initialize the default properties for a column class, most notably for
+setting width and default gutters when a column's breakpoint has not been hit
+yet.
 
 <details>
 <summary>Source code</summary>
@@ -359,8 +360,8 @@ used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
 
 ### ✅carbon--aspect-ratios [variable]
 
-The aspect ratios that are used to generate corresponding aspect ratio
-classes in code
+The aspect ratios that are used to generate corresponding aspect ratio classes
+in code
 
 <details>
 <summary>Source code</summary>

@@ -40,7 +40,9 @@ Tooltip.create(document.getElementById('my-tooltip-trigger'));
 
 ```javascript
 // `#my-tooltip-trigger` is an element with `[data-tooltip-trigger]` attribute
-var tooltipInstance = Tooltip.create(document.getElementById('my-tooltip-trigger'));
+var tooltipInstance = Tooltip.create(
+  document.getElementById('my-tooltip-trigger')
+);
 tooltipInstance.show();
 ```
 
@@ -58,7 +60,8 @@ tooltipInstance.show();
 Tooltip.create(document.getElementById('my-tooltip-trigger'), {
   objMenuOffset(menuBody, direction) {
     const { objMenuOffset: offset } = Tooltip.options;
-    const { top, left } = typeof offset !== 'function' ? offset : offset(menuBody, direction);
+    const { top, left } =
+      typeof offset !== 'function' ? offset : offset(menuBody, direction);
     return {
       top: top + 8,
       left,
@@ -99,7 +102,10 @@ document.addEventListener('floating-menu-hidden', function(evt) {
 
 ### Interactive tooltip
 
-Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button). For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+Interactive tooltip should be used if there are actions a user can take in the
+tooltip (e.g. a link or a button). For more regular use case, e.g. giving the
+user more text information about something, use definition tooltip or icon
+tooltip.
 
 | Selector                      | Description                        |
 | ----------------------------- | ---------------------------------- |
@@ -107,7 +113,10 @@ Interactive tooltip should be used if there are actions a user can take in the t
 
 #### HTML
 
-By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can change the behavior by adding `data-floating-menu-container` to one of the DOM ancestors of the tooltip's original location. For example, if you have HTML structure like below, the menu body will go under the second `<div>`:
+By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can
+change the behavior by adding `data-floating-menu-container` to one of the DOM
+ancestors of the tooltip's original location. For example, if you have HTML
+structure like below, the menu body will go under the second `<div>`:
 
 ```html
 <body>
@@ -116,9 +125,22 @@ By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can chan
       <div>
         <div class="bx--tooltip__label" ...>
           Tooltip label
-          <div tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" class="bx--tooltip__trigger" ...>...</div>
+          <div
+            tabindex="0"
+            data-tooltip-trigger
+            data-tooltip-target="#unique-tooltip"
+            class="bx--tooltip__trigger"
+            ...
+          >
+            ...
+          </div>
         </div>
-        <div id="unique-tooltip" data-floating-menu-direction="bottom" class="bx--tooltip" ...>
+        <div
+          id="unique-tooltip"
+          data-floating-menu-direction="bottom"
+          class="bx--tooltip"
+          ...
+        >
           <span class="bx--tooltip__caret"></span> ...
         </div>
       </div>
@@ -129,7 +151,12 @@ By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can chan
 
 ### Definition tooltip
 
-Definition tooltip is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word. This works better than the interactive tooltip in regular use cases because the info icon used in interactive tooltip can be repetitive when it’s shown several times on a page. Definition tooltip does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
+Definition tooltip is for regular use case of tooltip, e.g. giving the user more
+text information about something, like defining a word. This works better than
+the interactive tooltip in regular use cases because the info icon used in
+interactive tooltip can be repetitive when it’s shown several times on a page.
+Definition tooltip does not use any JavaScript. If there are actions a user can
+take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
 | Selector                           | Description                                           |
 | ---------------------------------- | ----------------------------------------------------- |
@@ -138,7 +165,10 @@ Definition tooltip is for regular use case of tooltip, e.g. giving the user more
 
 ### Icon tooltip
 
-Icon tooltip is for short single line of text describing an icon. Icon tooltip does not use any JavaScript. No label should be added to this variation. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
+Icon tooltip is for short single line of text describing an icon. Icon tooltip
+does not use any JavaScript. No label should be added to this variation. If
+there are actions a user can take in the tooltip (e.g. a link or a button), use
+interactive tooltip.
 
 | Selector                     | Description                                           |
 | ---------------------------- | ----------------------------------------------------- |

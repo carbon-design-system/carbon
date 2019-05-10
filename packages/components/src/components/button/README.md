@@ -2,7 +2,8 @@
 
 #### Mixins
 
-Mixins specific to button are located in [src/components/button/\_mixins.scss]().
+Mixins specific to button are located in
+[src/components/button/\_mixins.scss]().
 
 | Name           | Params                                                                   | Description                                                                            |
 | -------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
@@ -27,19 +28,29 @@ Use these modifiers with `.bx--btn` class.
 #### Using icons with buttons
 
 All buttons can use icons. It's recommended to inline SVG icons when possible.
-Simply add the appropriate `<svg>` to the button HTML with the `bx--btn__icon` class.
-You can also include `<title>` for better accessibility to describe what the button does.
+Simply add the appropriate `<svg>` to the button HTML with the `bx--btn__icon`
+class. You can also include `<title>` for better accessibility to describe what
+the button does.
 
 ```html
 <button class="bx--btn bx--btn--secondary" type="button">
   Secondary
-  <svg class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
+  <svg
+    class="bx--btn__icon"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill-rule="evenodd"
+  >
     <title>add a new connection to your instance</title>
-    <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z"></path>
+    <path
+      d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z"
+    ></path>
   </svg>
 </button>
 ```
 
 ### Icon-only buttons
 
-When using the icon-only button variant, tooltip styles must also be imported for the component to display properly.
+When using the icon-only button variant, tooltip styles must also be imported
+for the component to display properly.
