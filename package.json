@@ -46,6 +46,7 @@
     "jest-junit": "^6.4.0",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
     "remark": "^10.0.1",
     "remark-word-wrap": "^2.0.2",
     "rimraf": "^2.6.3",
