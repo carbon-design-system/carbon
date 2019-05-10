@@ -20,6 +20,7 @@ const TooltipDefinition = ({
   className,
   children,
   direction,
+  alignment,
   tooltipText,
   ...rest
 }) => {
@@ -29,8 +30,8 @@ const TooltipDefinition = ({
     [`${prefix}--tooltip--definition`]: true,
   });
   const directionClassName = cx({
-    [`${prefix}--tooltip--definition__bottom`]: direction === 'bottom',
-    [`${prefix}--tooltip--definition__top`]: direction === 'top',
+    [`${prefix}--tooltip--definition__${direction}`]: direction,
+    [`${prefix}--tooltip--definition__align-${alignment}`]: alignment,
   });
   return (
     <div {...rest} className={definitionClassName}>
@@ -61,7 +62,12 @@ TooltipDefinition.propTypes = {
   /**
    * Specify the direction of the tooltip. Can be either bottom or top.
    */
-  direction: PropTypes.oneOf(['top', 'bottom']).isRequired,
+  direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
+   * Specify the alignment (to the trigger button) of the tooltip. Can be one of: start, center or end.
+   */
+  alignment: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
@@ -77,6 +83,7 @@ TooltipDefinition.propTypes = {
 
 TooltipDefinition.defaultProps = {
   direction: 'bottom',
+  alignment: 'start',
 };
 
 export default TooltipDefinition;
