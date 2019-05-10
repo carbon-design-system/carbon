@@ -58,7 +58,7 @@ async function buildUMD() {
       onwarn(warning, warn) {
         if (warning.code === 'THIS_IS_UNDEFINED') return;
         warn(warning);
-      }
+      },
     });
 
     const jsOutput = jsSource.replace('lib', 'umd');
