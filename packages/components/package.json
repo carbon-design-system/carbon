@@ -196,12 +196,6 @@
     "name": "carbon-components",
     "needs": "^1.2.1"
   },
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 130,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "babel": {
     "presets": [
       "./tools/env"
