@@ -5,9 +5,7 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
-> The Carbon Design System is a series of individual styles and components, that
-> when combined make beautiful, intuitive designs. These designs are systemic and
-> logical, as they all follow the same universal principles.
+> The Carbon Design System is a series of individual styles and components that empower the creation of beautiful and intuitive designs.
 
 ## Getting started
 
