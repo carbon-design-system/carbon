@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.carbondesignsystem.com">
-    <img alt="Carbon Design System" src="https://pbs.twimg.com/profile_banners/872205379421089792/1556220395/1500x500" width="100%" />
+    <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
   </a>
 </p>
 <h1 align="center">
