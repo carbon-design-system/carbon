@@ -7,9 +7,10 @@
   Carbon Design System
 </h1>
 
-> The Carbon Design System is a series of individual styles and components, that
-> when combined make beautiful, intuitive designs. These designs are systemic and
-> logical, as they all follow the same universal principles.
+> The Carbon Design System is IBM’s open-source design system for products and
+> experiences. With the IBM Design Language as its foundation, the system
+> consists of working code, design tools and resources, human interface
+> guidelines, and a vibrant community of contributors.
 
 <p align="center">
   <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
