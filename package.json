@@ -65,12 +65,17 @@
       "header-max-length": [
         2,
         "always",
-        80
+        72
       ],
       "body-max-line-length": [
         2,
         "always",
         80
+      ],
+      "scope-case": [
+        0,
+        "always",
+        "lower-case"
       ]
     }
   },
