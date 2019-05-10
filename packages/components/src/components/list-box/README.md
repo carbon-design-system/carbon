@@ -1,6 +1,7 @@
 # `list-box`
 
-> A generic UI component used to build selection menus like Dropdowns, Comboboxes, and more.
+> A generic UI component used to build selection menus like Dropdowns,
+> Comboboxes, and more.
 
 ### SCSS
 

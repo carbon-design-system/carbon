@@ -20,10 +20,14 @@ module.exports = {
             export default Markdown;
           `;
         }
-        if (id === path.resolve(__dirname, '../src/globals/js/feature-flags.js')) {
+        if (
+          id === path.resolve(__dirname, '../src/globals/js/feature-flags.js')
+        ) {
           return `
             export * from ${JSON.stringify('../../../demo/feature-flags')};
-            export { default } from ${JSON.stringify('../../../demo/feature-flags')};
+            export { default } from ${JSON.stringify(
+              '../../../demo/feature-flags'
+            )};
           `;
         }
         return undefined;
@@ -35,13 +39,34 @@ module.exports = {
       browser: true,
     }),
     commonjs({
-      include: [/node_modules/, 'src/globals/js/settings.js', 'demo/feature-flags.js'],
+      include: [
+        /node_modules/,
+        'src/globals/js/settings.js',
+        'demo/feature-flags.js',
+      ],
       sourceMap: true,
       namedExports: {
-        'prop-types/index.js': ['oneOf'],
-        'react/index.js': ['Children', 'Component', 'PureComponent', 'Fragment', 'PropTypes', 'createElement', 'isValidElement'],
-        'react-dom/index.js': ['render'],
-        'react-is/index.js': ['isForwardRef'],
+        'prop-types': ['oneOf'],
+        react: [
+          'Children',
+          'Component',
+          'PureComponent',
+          'Fragment',
+          'PropTypes',
+          'createElement',
+          'isValidElement',
+        ],
+        'react-dom': ['render'],
+        'react-is': ['isForwardRef'],
+        'downshift/node_modules/react': [
+          'Children',
+          'Component',
+          'PureComponent',
+          'Fragment',
+          'PropTypes',
+          'createElement',
+          'isValidElement',
+        ],
       },
     }),
     babel({

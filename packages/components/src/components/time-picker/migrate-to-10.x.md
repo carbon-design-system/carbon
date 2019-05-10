@@ -1,11 +1,19 @@
 ### HTML
 
-Some markup changes and icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Also design change around the select box involves changing the list of CSS classes applied to the markup. Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/date-picker/code) site. React and other framework variants should reflect the change automatically.
+Some markup changes and icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Also design change around the select box involves changing the list of CSS
+classes applied to the markup. Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/date-picker/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **Things to note**:
 
-- Time picker label `bx--label` is no longer a child of `bx—time-picker`, it's now a sibling of it
-- `bx—form-requirement` is no longer a child of `bx--time-picker__input`, it's now a sibling of `bx--time-picker` / child of `bx—form-item`
+- Time picker label `bx--label` is no longer a child of `bx—time-picker`, it's
+  now a sibling of it
+- `bx—form-requirement` is no longer a child of `bx--time-picker__input`, it's
+  now a sibling of `bx--time-picker` / child of `bx—form-item`
 - New icons are being used for selects
 
 **New structure**:

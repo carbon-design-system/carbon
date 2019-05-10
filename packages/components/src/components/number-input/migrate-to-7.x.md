@@ -1,13 +1,16 @@
 ### HTML
 
-Number Input and other form components now use common form HTML and CSS.
-See Form README for details.
+Number Input and other form components now use common form HTML and CSS. See
+Form README for details.
 
-In general, it will be easiest to simply copy and paste the new HTML to replace older Number Inputs.
+In general, it will be easiest to simply copy and paste the new HTML to replace
+older Number Inputs.
 
 ### SCSS
 
-The `_number-input.scss` file is now located at `src/components/number-input/_number-input.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_number-input.scss` file is now located at
+`src/components/number-input/_number-input.scss`. You will need to update any
+`@import` statements for this file to reflect this change.
 
 **New**:
 
@@ -32,7 +35,9 @@ The `_number-input.scss` file is now located at `src/components/number-input/_nu
 
 ### JavaScript
 
-The `handleClick` method is now a private method, so it has been renamed to `_handleClick`.
-The `options` property now only contains a `selectorInit` key/value pair.
-The `ie` property in `options` has been removed.
-In general, the `NumberInput` class does not check for Internet Explorer browsers and relies on increasing and decreasing the Number input `value` attribute directly. Changing the `value` attribute is compatible with all browsers.
+The `handleClick` method is now a private method, so it has been renamed to
+`_handleClick`. The `options` property now only contains a `selectorInit`
+key/value pair. The `ie` property in `options` has been removed. In general, the
+`NumberInput` class does not check for Internet Explorer browsers and relies on
+increasing and decreasing the Number input `value` attribute directly. Changing
+the `value` attribute is compatible with all browsers.

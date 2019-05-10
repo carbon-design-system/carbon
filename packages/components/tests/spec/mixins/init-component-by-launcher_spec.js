@@ -28,19 +28,29 @@ describe('Test init component by launcher', function() {
   it('Should throw if given element is null', function() {
     expect(() => {
       Class.init(null);
-    }).toThrowError(TypeError, 'DOM document or DOM element should be given to search for and initialize this widget.');
+    }).toThrowError(
+      TypeError,
+      'DOM document or DOM element should be given to search for and initialize this widget.'
+    );
   });
 
   it('Should throw if given element is neither a DOM element or a document', function() {
     expect(() => {
       Class.init(document.createTextNode(''));
-    }).toThrowError(TypeError, 'DOM document or DOM element should be given to search for and initialize this widget.');
+    }).toThrowError(
+      TypeError,
+      'DOM document or DOM element should be given to search for and initialize this widget.'
+    );
   });
 
   it('Should do nothing if there is no target modals for a button upon button click', function() {
     launcherButton = document.createElement('a');
     document.body.appendChild(launcherButton);
-    expect(launcherButton.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).toBe(true);
+    expect(
+      launcherButton.dispatchEvent(
+        new CustomEvent('click', { bubbles: true, cancelable: true })
+      )
+    ).toBe(true);
   });
 
   it('Should create an instance if the given element is of the widget', function() {
@@ -82,10 +92,16 @@ describe('Test init component by launcher', function() {
     launcherButton.dataset.initTarget = '[data-my-component]';
     document.body.appendChild(launcherButton);
     context = Class.init();
-    expect(spyCreate, 'Call count of create() before hitting launcher button').not.toHaveBeenCalled();
+    expect(
+      spyCreate,
+      'Call count of create() before hitting launcher button'
+    ).not.toHaveBeenCalled();
     launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true }));
     expect(spyCreate.calls.allArgs(), 'create()').toEqual([[container, {}]]);
-    expect(spyCreatedByLauncher, 'Call count of createdByLauncher()').toHaveBeenCalledTimes(1);
+    expect(
+      spyCreatedByLauncher,
+      'Call count of createdByLauncher()'
+    ).toHaveBeenCalledTimes(1);
   });
 
   it('Should cancel the event if launcher button is <a>', function() {
@@ -96,7 +112,11 @@ describe('Test init component by launcher', function() {
     launcherButton.dataset.initTarget = '[data-my-component]';
     document.body.appendChild(launcherButton);
     context = Class.init();
-    expect(launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true, cancelable: true }))).toBe(false);
+    expect(
+      launcherButton.dispatchEvent(
+        new CustomEvent('foo', { bubbles: true, cancelable: true })
+      )
+    ).toBe(false);
   });
 
   afterEach(function() {

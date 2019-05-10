@@ -87,7 +87,8 @@
 
   // Minor offset for the last cell in a row so that the action bar does not
   // touch the edge of the cell
-  td.#{$prefix}--data-table-cell--editable:last-of-type > .#{$prefix}--data-table-cell__activity {
+  td.#{$prefix}--data-table-cell--editable:last-of-type
+    > .#{$prefix}--data-table-cell__activity {
     margin-right: $spacing--columns--before;
   }
 
@@ -128,7 +129,8 @@
   }
 
   .#{$prefix}--data-table-cell__edit:focus,
-  .#{$prefix}--data-table-cell--editable:hover .#{$prefix}--data-table-cell__edit {
+  .#{$prefix}--data-table-cell--editable:hover
+    .#{$prefix}--data-table-cell__edit {
     opacity: 1;
   }
 
@@ -136,7 +138,8 @@
     fill: $ui-05;
   }
 
-  .#{$prefix}--data-table-cell__edit:active > .#{$prefix}--data-table-cell__icon--edit {
+  .#{$prefix}--data-table-cell__edit:active
+    > .#{$prefix}--data-table-cell__icon--edit {
     fill: $brand-01;
   }
 
@@ -219,7 +222,9 @@
   }
 
   // Undo default margin-left from btn classes
-  .#{$prefix}--data-table__edit-actions .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary {
+  .#{$prefix}--data-table__edit-actions
+    .#{$prefix}--btn--secondary
+    + .#{$prefix}--btn--primary {
     margin-left: $spacing--cell-actions;
   }
 
@@ -330,11 +335,13 @@
     outline: none;
   }
 
-  .#{$prefix}--data-table__status--error:focus .#{$prefix}--data-table__error-text {
+  .#{$prefix}--data-table__status--error:focus
+    .#{$prefix}--data-table__error-text {
     box-shadow: 0 0 0 1px $brand-01;
   }
 
-  .#{$prefix}--data-table__status--error:focus .#{$prefix}--data-table__error-text::after {
+  .#{$prefix}--data-table__status--error:focus
+    .#{$prefix}--data-table__error-text::after {
     border-right-color: $brand-01;
     border-bottom-color: $brand-01;
   }

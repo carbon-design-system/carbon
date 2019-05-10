@@ -29,8 +29,16 @@ With `input` and `label` as siblings
 
 ```html
 <div class="bx--form-item">
-  <input id="bx--checkbox" class="bx--checkbox" type="checkbox" value="green" name="checkbox" />
-  <label for="bx--checkbox" class="bx--checkbox-label"> Checkbox (input + label) </label>
+  <input
+    id="bx--checkbox"
+    class="bx--checkbox"
+    type="checkbox"
+    value="green"
+    name="checkbox"
+  />
+  <label for="bx--checkbox" class="bx--checkbox-label">
+    Checkbox (input + label)
+  </label>
 </div>
 ```
 
@@ -39,7 +47,13 @@ With `label` wrapping `input`
 ```html
 <div class="bx--form-item">
   <label class="bx--checkbox-label">
-    <input class="bx--checkbox" type="checkbox" value="yellow" name="checkbox" /> Checkbox (label > input)
+    <input
+      class="bx--checkbox"
+      type="checkbox"
+      value="yellow"
+      name="checkbox"
+    />
+    Checkbox (label > input)
   </label>
 </div>
 ```
@@ -48,8 +62,10 @@ Note: You no longer need to include a SVG for the checkmark to render.
 
 #### Fieldset and Legend
 
-As a best practice, groups of checkboxes should make use of `<fieldset>` and `<legend>` (see Form for details).
-This is especially true for forms submitting data.
+As a best practice, groups of checkboxes should make use of `<fieldset>` and
+`<legend>` (see Form for details). This is especially true for forms submitting
+data.
 
-But, there are exceptions to the rule. For example, Data Tables make use of checkboxes as a way to select rows of data.
-Checkboxes in this context would represent an entire row of data in its associated table row.
+But, there are exceptions to the rule. For example, Data Tables make use of
+checkboxes as a way to select rows of data. Checkboxes in this context would
+represent an entire row of data in its associated table row.

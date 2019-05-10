@@ -27,8 +27,10 @@
     width: 100%;
   }
 
-  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
+    + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
+    + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
     border-left: rem(1px) solid $disabled-03;
   }
 
@@ -48,7 +50,14 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme($interactive-01, transparent, $text-04, $hover-primary, $text-04, $active-primary);
+    @include button-theme(
+      $interactive-01,
+      transparent,
+      $text-04,
+      $hover-primary,
+      $text-04,
+      $active-primary
+    );
 
     &:hover {
       color: $text-04;
@@ -56,7 +65,14 @@
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme($interactive-02, transparent, $text-04, $hover-secondary, $text-04, $active-secondary);
+    @include button-theme(
+      $interactive-02,
+      transparent,
+      $text-04,
+      $hover-secondary,
+      $text-04,
+      $active-secondary
+    );
 
     &:hover,
     &:focus {
@@ -65,7 +81,15 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme(transparent, $interactive-03, $interactive-03, $hover-tertiary, $interactive-03, $active-tertiary, 1px);
+    @include button-theme(
+      transparent,
+      $interactive-03,
+      $interactive-03,
+      $hover-tertiary,
+      $interactive-03,
+      $active-tertiary,
+      1px
+    );
 
     &:hover {
       color: $inverse-01;
@@ -91,7 +115,14 @@
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme(transparent, transparent, $interactive-04, $hover-ui, $interactive-04, $active-ui);
+    @include button-theme(
+      transparent,
+      transparent,
+      $interactive-04,
+      $hover-ui,
+      $interactive-04,
+      $active-ui
+    );
     padding: $button-padding-ghost;
 
     .#{$prefix}--btn__icon {
@@ -163,7 +194,14 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme($support-01, $support-01, $text-04, $hover-danger, $icon-03, $active-danger);
+    @include button-theme(
+      $support-01,
+      $support-01,
+      $text-04,
+      $hover-danger,
+      $icon-03,
+      $active-danger
+    );
 
     &:hover {
       color: $text-04;

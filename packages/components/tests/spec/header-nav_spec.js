@@ -38,9 +38,15 @@ describe('HeaderNav', function() {
 
   describe('Left/Right arrow keys', function() {
     const leftArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
-    Object.defineProperty(leftArrowKeydown, 'which', { value: 37, writable: true });
+    Object.defineProperty(leftArrowKeydown, 'which', {
+      value: 37,
+      writable: true,
+    });
     const rightArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
-    Object.defineProperty(rightArrowKeydown, 'which', { value: 39, writable: true });
+    Object.defineProperty(rightArrowKeydown, 'which', {
+      value: 39,
+      writable: true,
+    });
 
     describe('right arrow keydown', function() {
       it('should move to next submenu with right arrow key', function() {

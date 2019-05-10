@@ -32,7 +32,8 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * A magic string indicting that no product switcher should be selected.
    * @type {string}
    */
-  static SELECT_NONE /* #__PURE_CLASS_PROPERTY__ */ = '__carbon-product-switcher-launcher-NONE';
+  static SELECT_NONE /* #__PURE_CLASS_PROPERTY__ */ =
+    '__carbon-product-switcher-launcher-NONE';
 
   /**
    * The list of the IDs of the trigger buttons that have been used.
@@ -49,8 +50,14 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     if (this.element.contains(event.relatedTarget)) {
       return;
     }
-    const currentTriggerButton = this.element.ownerDocument.getElementById(this.current);
-    if (currentTriggerButton && event.relatedTarget && !event.relatedTarget.matches(this.options.selectorFloatingMenus)) {
+    const currentTriggerButton = this.element.ownerDocument.getElementById(
+      this.current
+    );
+    if (
+      currentTriggerButton &&
+      event.relatedTarget &&
+      !event.relatedTarget.matches(this.options.selectorFloatingMenus)
+    ) {
       currentTriggerButton.focus();
     }
   };
@@ -68,7 +75,9 @@ export default class ProductSwitcher extends NavigationMenuPanel {
   };
 
   createdByLauncher = event => {
-    const isExpanded = this.element.classList.contains(this.options.classProductSwitcherExpanded);
+    const isExpanded = this.element.classList.contains(
+      this.options.classProductSwitcherExpanded
+    );
     const launcher = event.delegateTarget;
     if (!launcher.id) {
       launcher.id = `__carbon-product-switcher-launcher-${Math.random()
@@ -76,7 +85,11 @@ export default class ProductSwitcher extends NavigationMenuPanel {
         .substr(2)}`;
     }
     const current = launcher.id;
-    this.changeState(isExpanded && this.current === current ? this.constructor.SELECT_NONE : current);
+    this.changeState(
+      isExpanded && this.current === current
+        ? this.constructor.SELECT_NONE
+        : current
+    );
   };
 
   /**
@@ -93,7 +106,10 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState = (state, callback) => {
-    this.element.classList.toggle(this.options.classProductSwitcherExpanded, state !== this.constructor.SELECT_NONE);
+    this.element.classList.toggle(
+      this.options.classProductSwitcherExpanded,
+      state !== this.constructor.SELECT_NONE
+    );
     this.current = state;
     if (this.current !== this.constructor.SELECT_NONE) {
       this.triggerButtonIds.add(this.current);
@@ -103,16 +119,24 @@ export default class ProductSwitcher extends NavigationMenuPanel {
     this.triggerButtonIds.forEach(id => {
       const button = this.element.ownerDocument.getElementById(id);
       const label = button.getAttribute(this.options.attribLabelExpand);
-      button.classList.remove(this.options.classNavigationMenuPanelHeaderActionActive);
+      button.classList.remove(
+        this.options.classNavigationMenuPanelHeaderActionActive
+      );
       button.setAttribute('aria-label', label);
       button.setAttribute('title', label);
     });
 
     // set active trigger button attributes
-    const currentTriggerButton = this.element.ownerDocument.getElementById(this.current);
+    const currentTriggerButton = this.element.ownerDocument.getElementById(
+      this.current
+    );
     if (currentTriggerButton) {
-      const label = currentTriggerButton.getAttribute(this.options.attribLabelCollapse);
-      currentTriggerButton.classList.toggle(this.options.classNavigationMenuPanelHeaderActionActive);
+      const label = currentTriggerButton.getAttribute(
+        this.options.attribLabelCollapse
+      );
+      currentTriggerButton.classList.toggle(
+        this.options.classNavigationMenuPanelHeaderActionActive
+      );
       currentTriggerButton.setAttribute('aria-label', label);
       currentTriggerButton.setAttribute('title', label);
     }

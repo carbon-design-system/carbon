@@ -1,6 +1,11 @@
 ### HTML
 
-HTML changes pertain only to the search and clear icon. Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/search/code) site. React and other framework variants should reflect the change automatically.
+HTML changes pertain only to the search and clear icon. Icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/search/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **New Markup**:
 
@@ -34,7 +39,9 @@ HTML changes pertain only to the search and clear icon. Icon from [`carbon-eleme
   viewBox="0 0 32 32"
   aria-hidden="true"
 >
-  <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"></path>
+  <path
+    d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z"
+  ></path>
 </svg>
 ```
 
@@ -50,7 +57,12 @@ HTML changes pertain only to the search and clear icon. Icon from [`carbon-eleme
 </svg>
 
 <!-- Clear icon -->
-<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="16"
+  height="16"
+  viewBox="0 0 16 16"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <path
     d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
     fill-rule="evenodd"

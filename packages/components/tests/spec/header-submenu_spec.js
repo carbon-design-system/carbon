@@ -5,13 +5,19 @@ describe('Header Submenu', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new HeaderSubmenu();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new HeaderSubmenu(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
   });
 
@@ -100,7 +106,10 @@ describe('Header Submenu', function() {
     it('should close menu when another element is focused or when document is clicked', function() {
       // TODO: mock CustomEvent for IE
       const customEvent = new CustomEvent('blur', { bubbles: true });
-      Object.defineProperty(customEvent, 'relatedTarget', { value: input, writable: true });
+      Object.defineProperty(customEvent, 'relatedTarget', {
+        value: input,
+        writable: true,
+      });
       itemLinkNode.dispatchEvent(customEvent);
       expect(triggerNode.getAttribute('aria-expanded')).toBe('false');
     });
@@ -154,9 +163,15 @@ describe('Header Submenu', function() {
 
     describe('Arrow keys', function() {
       const upArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
-      Object.defineProperty(upArrowKeydown, 'which', { value: 38, writable: true });
+      Object.defineProperty(upArrowKeydown, 'which', {
+        value: 38,
+        writable: true,
+      });
       const downArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
-      Object.defineProperty(downArrowKeydown, 'which', { value: 40, writable: true });
+      Object.defineProperty(downArrowKeydown, 'which', {
+        value: 40,
+        writable: true,
+      });
 
       describe('Up/Down arrow keys', function() {
         it('should move focus from currently focused item to previous menu item', function() {
@@ -232,7 +247,10 @@ describe('Header Submenu', function() {
 
     describe('Space bar', function() {
       const spaceBarDown = new KeyboardEvent('keydown', { bubbles: true });
-      Object.defineProperty(spaceBarDown, 'which', { value: 32, writable: true });
+      Object.defineProperty(spaceBarDown, 'which', {
+        value: 32,
+        writable: true,
+      });
 
       it('should open menu with space bar', function() {
         triggerNode.dispatchEvent(spaceBarDown);
@@ -345,8 +363,14 @@ describe('Header Submenu', function() {
       headerSubmenu = new HeaderSubmenu(element);
       document.body.appendChild(element);
       unknownEvent = new CustomEvent('unknown', { bubbles: true });
-      Object.defineProperty(unknownEvent, 'target', { value: {}, writable: true });
-      Object.defineProperty(unknownEvent, 'currentTarget', { value: {}, writable: true });
+      Object.defineProperty(unknownEvent, 'target', {
+        value: {},
+        writable: true,
+      });
+      Object.defineProperty(unknownEvent, 'currentTarget', {
+        value: {},
+        writable: true,
+      });
     });
 
     beforeEach(function() {

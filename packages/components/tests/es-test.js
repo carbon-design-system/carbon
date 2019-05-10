@@ -14,7 +14,10 @@ describe('ES build', () => {
   });
 
   it('builds es/globals/js/feature-flags.js as ES5 code', async () => {
-    const contents = await readFile(path.resolve(__dirname, '../es/globals/js/feature-flags.js'), 'utf8');
+    const contents = await readFile(
+      path.resolve(__dirname, '../es/globals/js/feature-flags.js'),
+      'utf8'
+    );
     const { code } = await transformAsync(contents, {
       presets: [['@babel/preset-env', { modules: false }]],
       babelrc: false,
@@ -23,7 +26,10 @@ describe('ES build', () => {
   });
 
   it('builds es/globals/js/settings.js as ES5 code', async () => {
-    const contents = await readFile(path.resolve(__dirname, '../es/globals/js/settings.js'), 'utf8');
+    const contents = await readFile(
+      path.resolve(__dirname, '../es/globals/js/settings.js'),
+      'utf8'
+    );
     const { code } = await transformAsync(contents, {
       presets: [['@babel/preset-env', { modules: false }]],
       babelrc: false,

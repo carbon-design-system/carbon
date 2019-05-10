@@ -9,13 +9,19 @@ describe('DataTable', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new DataTable();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new DataTable(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
@@ -34,7 +40,8 @@ describe('DataTable', function() {
         selectorTableBody: 'tbody',
         selectorTableSort: `.bx--table-sort`,
         selectorTableSelected: `.bx--data-table--selected`,
-        selectorToolbarSearchContainer: '.bx--toolbar-search-container-expandable',
+        selectorToolbarSearchContainer:
+          '.bx--toolbar-search-container-expandable',
         selectorSearchMagnifier: '.bx--search-magnifier',
         selectorSearchInput: '.bx--search-input',
         classExpandableRow: `bx--expandable-row`,
@@ -99,19 +106,27 @@ describe('DataTable', function() {
     it('Should toggle the row on click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row`)).toBe(
-        true
-      );
+      expect(
+        document
+          .querySelector('[data-child-row]')
+          .previousElementSibling.classList.contains(`bx--expandable-row`)
+      ).toBe(true);
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('[data-child-row]').previousElementSibling.classList.contains(`bx--expandable-row`)).toBe(
-        false
-      );
+      expect(
+        document
+          .querySelector('[data-child-row]')
+          .previousElementSibling.classList.contains(`bx--expandable-row`)
+      ).toBe(false);
     });
 
     it('Should emit an event on row expansion click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       const spyToggleRowExpandEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, `data-table-aftertoggleexpand`, spyToggleRowExpandEvent);
+      events.on(
+        element.ownerDocument.body,
+        `data-table-aftertoggleexpand`,
+        spyToggleRowExpandEvent
+      );
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleRowExpandEvent).toHaveBeenCalled();
     });
@@ -148,21 +163,35 @@ describe('DataTable', function() {
 
     it('Should switch through tri-state sort', function() {
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(true);
-      expect(firstSort.getAttribute('data-previous-value') === 'ascending').toBe(true);
+      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(
+        true
+      );
+      expect(
+        firstSort.getAttribute('data-previous-value') === 'ascending'
+      ).toBe(true);
 
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(false);
-      expect(firstSort.getAttribute('data-previous-value') === 'descending').toBe(true);
+      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(
+        false
+      );
+      expect(
+        firstSort.getAttribute('data-previous-value') === 'descending'
+      ).toBe(true);
 
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(false);
+      expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(
+        false
+      );
       expect(firstSort.hasAttribute('data-previous-value')).toBe(false);
     });
 
     it('Should emit an event on sort click', function() {
       const spyToggleSortEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, `data-table-aftertogglesort`, spyToggleSortEvent);
+      events.on(
+        element.ownerDocument.body,
+        `data-table-aftertogglesort`,
+        spyToggleSortEvent
+      );
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleSortEvent).toHaveBeenCalled();
     });
@@ -198,11 +227,15 @@ describe('DataTable', function() {
       firstSelect.click();
 
       const batchActions = element.querySelector('.bx--batch-actions');
-      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(true);
+      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(
+        true
+      );
 
       firstSelect.click();
 
-      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(false);
+      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(
+        false
+      );
     });
 
     // it('Should close the action bar on a cancel click', function() {});
@@ -214,7 +247,9 @@ describe('DataTable', function() {
       firstSelect.click();
 
       const batchActions = element.querySelector('.bx--batch-actions');
-      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(true);
+      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(
+        true
+      );
     });
 
     afterEach(function() {
@@ -242,36 +277,52 @@ describe('DataTable', function() {
     });
 
     it('Should open search bar on click', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const search = document.querySelector(
+        '.bx--toolbar-search-container-expandable'
+      );
       const magnifier = document.querySelector('.bx--search-magnifier');
       magnifier.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      expect(
+        search.classList.contains('bx--toolbar-search-container-active')
+      ).toBe(true);
     });
 
     it('Should close search bar on click', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const search = document.querySelector(
+        '.bx--toolbar-search-container-expandable'
+      );
       search.classList.add('bx--toolbar-search-container-active');
       dt.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      expect(
+        search.classList.contains('bx--toolbar-search-container-active')
+      ).toBe(false);
     });
 
     it('Should open search bar on keydown', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const search = document.querySelector(
+        '.bx--toolbar-search-container-expandable'
+      );
       const magnifier = document.querySelector('.bx--search-magnifier');
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 13;
       magnifier.dispatchEvent(event);
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(true);
+      expect(
+        search.classList.contains('bx--toolbar-search-container-active')
+      ).toBe(true);
     });
 
     it('Should close search bar on keydown', function() {
-      const search = document.querySelector('.bx--toolbar-search-container-expandable');
+      const search = document.querySelector(
+        '.bx--toolbar-search-container-expandable'
+      );
       const input = document.querySelector('input');
       search.classList.add('bx--toolbar-search-container-active');
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 27;
       input.dispatchEvent(event);
-      expect(search.classList.contains('bx--toolbar-search-container-active')).toBe(false);
+      expect(
+        search.classList.contains('bx--toolbar-search-container-active')
+      ).toBe(false);
     });
 
     afterEach(function() {

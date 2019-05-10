@@ -28,7 +28,10 @@ class FeatureFlagProxyPlugin {
 module.exports = {
   mode: env,
   devtool: 'source-maps',
-  entry: ['webpack-hot-middleware/client?reload=true', path.resolve(__dirname, '../demo/index')],
+  entry: [
+    'webpack-hot-middleware/client?reload=true',
+    path.resolve(__dirname, '../demo/index'),
+  ],
   output: {
     path: path.resolve(__dirname, '../demo'),
     publicPath: '/',
@@ -75,5 +78,8 @@ module.exports = {
     modules: ['node_modules'],
     plugins: [new FeatureFlagProxyPlugin()],
   },
-  plugins: [new webpack.ProgressPlugin(), new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };

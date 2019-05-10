@@ -1,12 +1,18 @@
 ### HTML
 
-Some new markup has been introduced. Also icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Please see the new structure below and reference the [progress indicator page](https://next.carbondesignsystem.com/components/progress-indicator/code) in our site to copy the specified new markup. React and other framework variants should reflect the change automatically.
+Some new markup has been introduced. Also icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Please see the new structure below and reference the
+[progress indicator page](https://next.carbondesignsystem.com/components/progress-indicator/code)
+in our site to copy the specified new markup. React and other framework variants
+should reflect the change automatically.
 
 **Things to note**:
 
 - We have added an optional secondary label
 - Tooltip for overflowed content
-- Progress step SVGs now have new attributes and paths. Don't forget to copy those over!
+- Progress step SVGs now have new attributes and paths. Don't forget to copy
+  those over!
 
 **New structure**:
 
@@ -32,7 +38,9 @@ bx--progress
 
 ### SCSS
 
-There are two new selectors introduced to progress indicator, and three existing classes now used as selectors for progress indicator tooltip markup. The remaining progress indicator selectors have no changes.
+There are two new selectors introduced to progress indicator, and three existing
+classes now used as selectors for progress indicator tooltip markup. The
+remaining progress indicator selectors have no changes.
 
 | v9  | v10                     | Note                                                                                                                                              |
 | --- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |

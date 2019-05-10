@@ -94,7 +94,8 @@
 
   .#{$prefix}--accordion__content {
     // Transition property for when the accordion closes
-    transition: height motion(standard, productive) $duration--fast-02, padding motion(standard, productive) $duration--fast-02;
+    transition: height motion(standard, productive) $duration--fast-02,
+      padding motion(standard, productive) $duration--fast-02;
     padding-left: $carbon--spacing-05;
 
     padding-right: 25%;
@@ -153,7 +154,9 @@
     }
   }
 
-  .#{$prefix}--skeleton .#{$prefix}--accordion__heading:focus .#{$prefix}--accordion__arrow {
+  .#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:focus
+    .#{$prefix}--accordion__arrow {
     border: none;
     outline: none;
     cursor: default;

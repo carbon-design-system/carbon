@@ -18,10 +18,9 @@
     "ci-check": "node tasks/ci-check.js",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
-    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
     "format:staged": "prettier --write",
-    "gather-deploy-files": "yarn workspaces run gather-deploy-files",
     "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
     "test": "jest",
@@ -46,6 +45,7 @@
     "jest-junit": "^6.4.0",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
     "remark": "^10.0.1",
     "remark-word-wrap": "^2.0.2",
     "rimraf": "^2.6.3",
@@ -65,12 +65,17 @@
       "header-max-length": [
         2,
         "always",
-        80
+        72
       ],
       "body-max-line-length": [
         2,
         "always",
         80
+      ],
+      "scope-case": [
+        0,
+        "always",
+        "lower-case"
       ]
     }
   },
@@ -99,7 +104,8 @@
     "jsxBracketSameLine": true,
     "printWidth": 80,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "proseWrap": "always"
   },
   "stylelint": {
     "extends": [
