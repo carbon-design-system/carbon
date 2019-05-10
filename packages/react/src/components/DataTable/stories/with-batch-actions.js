@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
+import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Delete from '@carbon/icons-react/lib/delete/16';
 import Save from '@carbon/icons-react/lib/save/16';
 import Download from '@carbon/icons-react/lib/download/16';
-
 import Button from '../../Button';
 import DataTable, {
   Table,
@@ -30,13 +30,17 @@ import DataTable, {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '../../DataTable';
-
 import { batchActionClick, initialRows, headers } from './shared';
+
+const actionProps = () => ({
+  radio: boolean('Use radio buttons (radio)', false),
+});
 
 export default props => (
   <DataTable
     rows={initialRows}
     headers={headers}
+    radio={actionProps().radio}
     {...props}
     render={({
       rows,
@@ -92,7 +96,11 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableSelectAll {...getSelectionProps()} />
+              {actionProps().radio ? (
+                <th scope="col" />
+              ) : (
+                <TableSelectAll {...getSelectionProps()} />
+              )}
               {headers.map(header => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}

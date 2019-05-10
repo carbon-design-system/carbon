@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { boolean } from '@storybook/addon-knobs';
 import DataTable, {
   Table,
   TableBody,
@@ -19,10 +20,15 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
+const selectionProps = () => ({
+  radio: boolean('Use radio buttons (radio)', false),
+});
+
 export default props => (
   <DataTable
     rows={initialRows}
     headers={headers}
+    radio={selectionProps().radio}
     {...props}
     render={({
       rows,
@@ -36,7 +42,11 @@ export default props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableSelectAll {...getSelectionProps()} />
+              {selectionProps().radio ? (
+                <th scope="col" />
+              ) : (
+                <TableSelectAll {...getSelectionProps()} />
+              )}
               {headers.map(header => (
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
