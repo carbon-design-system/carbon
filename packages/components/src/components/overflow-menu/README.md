@@ -56,7 +56,8 @@ OverflowMenu.create(document.getElementById('my-overflow-menu'));
 OverflowMenu.create(document.getElementById('my-overflow-menu'), {
   objMenuOffset(menuBody, direction) {
     const { objMenuOffset: offset } = OverflowMenu.options;
-    const { top, left } = typeof offset !== 'function' ? offset : offset(menuBody, direction);
+    const { top, left } =
+      typeof offset !== 'function' ? offset : offset(menuBody, direction);
     return {
       top: top + 8,
       left,
@@ -97,7 +98,11 @@ document.addEventListener('floating-menu-hidden', function(evt) {
 
 ### HTML
 
-By default, the menu body (`ul.bx--overflow-menu-options`) goes right under `<body>`. You can change the behavior by adding `data-floating-menu-container` to one of the DOM ancestors of the root element (`div[data-overflow-menu]`). For example, if you have HTML structure like below, the menu body will go under the second `<div>`:
+By default, the menu body (`ul.bx--overflow-menu-options`) goes right under
+`<body>`. You can change the behavior by adding `data-floating-menu-container`
+to one of the DOM ancestors of the root element (`div[data-overflow-menu]`). For
+example, if you have HTML structure like below, the menu body will go under the
+second `<div>`:
 
 ```html
 <body>

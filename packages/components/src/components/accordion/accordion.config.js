@@ -17,7 +17,8 @@ module.exports = {
     {
       name: 'default',
       label: 'Accordion',
-      notes: 'Accordions allow users to expand and collapse sections of content.',
+      notes:
+        'Accordions allow users to expand and collapse sections of content.',
       context: {
         sections: [
           {

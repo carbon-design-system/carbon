@@ -6,13 +6,19 @@ describe('Test tooltip', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Tooltip();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Tooltip(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
   });
 
@@ -36,7 +42,9 @@ describe('Test tooltip', function() {
     it('Should show the tooltip upon clicking/focusing', function() {
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
+      element.dispatchEvent(
+        new CustomEvent(focusinEventName, { bubbles: true })
+      );
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
@@ -81,7 +89,9 @@ describe('Test tooltip', function() {
       return Tooltip.__with__({
         debounce: fn => fn,
       })(() => {
-        element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
+        element.dispatchEvent(
+          new CustomEvent(focusinEventName, { bubbles: true })
+        );
         expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
       });
     });

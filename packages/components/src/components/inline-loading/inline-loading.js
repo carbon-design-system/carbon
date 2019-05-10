@@ -12,7 +12,11 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import toggleAttribute from '../../globals/js/misc/toggle-attribute';
 
-class InlineLoading extends mixin(createComponent, initComponentBySearch, handles) {
+class InlineLoading extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * Spinner indicating loading state.
    * @extends CreateComponent
@@ -39,18 +43,30 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
     const { states } = this.constructor;
     const values = Object.keys(states).map(key => states[key]);
     if (values.indexOf(state) < 0) {
-      throw new Error(`One of the following value should be given as the state: ${values.join(', ')}`);
+      throw new Error(
+        `One of the following value should be given as the state: ${values.join(
+          ', '
+        )}`
+      );
     }
 
     const elem = this.element;
-    const { selectorSpinner, selectorFinished, selectorTextActive, selectorTextFinished } = this.options;
+    const {
+      selectorSpinner,
+      selectorFinished,
+      selectorTextActive,
+      selectorTextFinished,
+    } = this.options;
     const spinner = elem.querySelector(selectorSpinner);
     const finished = elem.querySelector(selectorFinished);
     const textActive = elem.querySelector(selectorTextActive);
     const textFinished = elem.querySelector(selectorTextFinished);
 
     if (spinner) {
-      spinner.classList.toggle(this.options.classLoadingStop, state !== states.ACTIVE);
+      spinner.classList.toggle(
+        this.options.classLoadingStop,
+        state !== states.ACTIVE
+      );
       toggleAttribute(spinner, 'hidden', state === states.FINISHED);
     }
 

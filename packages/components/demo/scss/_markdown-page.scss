@@ -207,7 +207,14 @@
     }
   }
 
-  main[data-page='style-overview-typography'] & hr + hr + table tbody tr td:nth-child(2) {
+  main[data-page='style-overview-typography']
+    &
+    hr
+    + hr
+    + table
+    tbody
+    tr
+    td:nth-child(2) {
     @media all and (max-width: 600px) {
       text-align: left;
       font-size: 3rem;

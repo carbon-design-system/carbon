@@ -71,7 +71,9 @@ $css--helpers: true;
     bottom: auto;
   }
 
-  .#{$prefix}--pagination .#{$prefix}--select__item-count .#{$prefix}--select-input {
+  .#{$prefix}--pagination
+    .#{$prefix}--select__item-count
+    .#{$prefix}--select-input {
     border-right: $spacing-4xs solid $ui-03;
     @include carbon--breakpoint('md') {
       padding-right: 2rem;
@@ -79,7 +81,9 @@ $css--helpers: true;
     }
   }
 
-  .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select-input {
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select-input {
     border-left: 1px solid $ui-03;
     @include carbon--breakpoint('md') {
       padding-left: 1rem;
@@ -87,7 +91,9 @@ $css--helpers: true;
     }
   }
 
-  .#{$prefix}--pagination .#{$prefix}--select__page-number .#{$prefix}--select__arrow {
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select__arrow {
     @include carbon--breakpoint('md') {
       right: 1.8rem;
     }

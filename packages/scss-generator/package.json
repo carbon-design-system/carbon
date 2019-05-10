@@ -17,6 +17,6 @@
     "access": "public"
   },
   "dependencies": {
-    "prettier": "^1.16.4"
+    "prettier": "^1.17.0"
   }
 }

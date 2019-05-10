@@ -86,7 +86,8 @@
     top: 0;
     transform: translate(-50%, -50%);
     transition: transform $duration--fast-02 motion(standard, productive),
-      background $duration--fast-02 motion(standard, productive), box-shadow $duration--fast-02 motion(standard, productive);
+      background $duration--fast-02 motion(standard, productive),
+      box-shadow $duration--fast-02 motion(standard, productive);
     cursor: pointer;
     outline: none;
     z-index: 3;
@@ -136,7 +137,9 @@
   }
 
   // Disabled state
-  .#{$prefix}--label--disabled ~ .#{$prefix}--slider-container > .#{$prefix}--slider__range-label {
+  .#{$prefix}--label--disabled
+    ~ .#{$prefix}--slider-container
+    > .#{$prefix}--slider__range-label {
     color: $disabled-02;
   }
 
@@ -163,12 +166,16 @@
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
   .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
-  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+  .#{$prefix}--slider--disabled
+    .#{$prefix}--slider__thumb:focus
+    ~ .#{$prefix}--slider__filled-track {
     background-color: $ui-03;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--slider--disabled ~ .#{$prefix}--form-item .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled
+    ~ .#{$prefix}--form-item
+    .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
     background-color: $disabled-01;
     color: $disabled-02;
@@ -184,18 +191,21 @@
   }
 
   // Skeleton state
-  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__range-label {
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
     @include skeleton;
     width: rem(20px);
     height: rem(12px);
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__track {
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
     cursor: default;
     pointer-events: none;
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__thumb {
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__thumb {
     left: 50%;
     cursor: default;
     pointer-events: none;

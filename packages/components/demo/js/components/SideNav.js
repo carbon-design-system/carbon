@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { SideNav as UIShellSideNav, SideNavItems, SideNavLink } from 'carbon-components-react/es/components/UIShell';
+import {
+  SideNav as UIShellSideNav,
+  SideNavItems,
+  SideNavLink,
+} from 'carbon-components-react/es/components/UIShell';
 
 /**
  * The side nav.
@@ -48,7 +52,7 @@ class SideNav extends Component {
                   key={id}
                   data-nav-id={id}
                   isActive={id === activeItemId}
-                  href={`./demo/${name}`}
+                  href={`/demo/${name}`}
                   onClick={this.handleItemClick}>
                   {label}
                 </SideNavLink>

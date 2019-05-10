@@ -26,7 +26,9 @@ export default function(ToMix) {
       super(element, options);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
+        throw new TypeError(
+          'DOM element should be given to initialize this widget.'
+        );
       }
 
       /**
@@ -39,7 +41,10 @@ export default function(ToMix) {
        * The component options.
        * @type {Object}
        */
-      this.options = Object.assign(Object.create(this.constructor.options), options);
+      this.options = Object.assign(
+        Object.create(this.constructor.options),
+        options
+      );
 
       this.constructor.components.set(this.element, this);
     }
@@ -56,7 +61,11 @@ export default function(ToMix) {
      * Releases this component's instance from the associated element.
      */
     release() {
-      for (let child = this.children.pop(); child; child = this.children.pop()) {
+      for (
+        let child = this.children.pop();
+        child;
+        child = this.children.pop()
+      ) {
         child.release();
       }
       this.constructor.components.delete(this.element);

@@ -6,35 +6,63 @@
  */
 
 const { param } = require('change-case');
+const { pascal } = require('change-case');
 
 const componentTemplate = (iconName, className, svg, attrs) => `
-import { NgModule, Component, ElementRef, Input } from "@angular/core";
+import {
+  NgModule,
+  Component,
+  Directive,
+  ElementRef,
+  Input,
+  AfterViewInit
+} from "@angular/core";
 import { getAttributes } from "@carbon/icon-helpers";
 
 @Component({
 	selector: "ibm-icon-${iconName}",
-	template: \`${svg}\`
+  template: \`
+    <svg
+      ibmIcon${pascal(iconName)}
+      [ariaLabel]="ariaLabel"
+      [ariaLabelledby]="ariaLabelledby"
+      [ariaHidden]="ariaHidden"
+      [title]="title"
+      [isFocusable]="focusable"
+      [attr.class]="innerClass">
+    </svg>
+  \`
 })
 export class ${className} {
   @Input() ariaLabel: string;
   @Input() ariaLabelledby: string;
   @Input() ariaHidden: boolean;
   @Input() title: string;
-  @Input() focusable: boolean;
+  @Input() focusable: boolean = false;
   @Input() innerClass: string;
+}
 
+@Directive({
+  selector: "[ibmIcon${pascal(iconName)}]"
+})
+export class ${className}Directive implements AfterViewInit {
   static titleIdCounter = 0;
 
-  constructor(private elementRef: ElementRef) {}
+  @Input() ariaLabel: string;
+  @Input() ariaLabelledby: string;
+  @Input() ariaHidden: boolean;
+  @Input() title: string;
+  @Input() isFocusable: boolean = false;
 
-  ngAfterViewInit() {
-    const svg = this.elementRef.nativeElement.querySelector("svg");
+  constructor(protected elementRef: ElementRef) {}
 
-    if (this.innerClass) {
-      for (const newClass of this.innerClass.split(" ")) {
-        svg.classList.add(newClass);
-      }
-    }
+	ngAfterViewInit() {
+    const svg = this.elementRef.nativeElement;
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    svg.innerHTML = \`${svg
+      .replace(/<svg[\s\S]*?>/g, '')
+      .replace(/<\/svg>/g, '')}\`;
 
     const attributes = getAttributes({
       width: ${attrs.width},
@@ -44,7 +72,7 @@ export class ${className} {
       "aria-label": this.ariaLabel,
       "aria-labelledby": this.ariaLabelledby,
       "aria-hidden": this.ariaHidden,
-      focusable: this.focusable
+      focusable: this.isFocusable.toString()
     });
 
     const attrKeys = Object.keys(attributes);
@@ -62,44 +90,64 @@ export class ${className} {
     if (attributes.title) {
       const title = document.createElement("title");
       title.textContent = attributes.title;
-      ${className}.titleIdCounter++;
-      title.setAttribute("id", \`${iconName}-\$\{${className}.titleIdCounter\}\`);
+      ${className}Directive.titleIdCounter++;
+      title.setAttribute("id", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
       svg.appendChild(title);
-      svg.setAttribute("aria-labelledby", \`${iconName}-\$\{${className}.titleIdCounter\}\`);
+      svg.setAttribute("aria-labelledby", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
     }
-  }
+	}
 }
 
 @NgModule({
   declarations: [
-    ${className}
+    ${className},
+    ${className}Directive
   ],
   exports: [
-    ${className}
+    ${className},
+    ${className}Directive
   ]
 })
 export class ${className}Module {}
 `;
 
 const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
-  template: \`<ibm-icon-${param(icon.moduleName)}></ibm-icon-${param(
-  icon.moduleName
-)}>\`
+  template: \`
+    <p>Component <code>&lt;ibm-icon-${param(
+      icon.moduleName
+    )}&gt;&lt;/ibm-icon-${param(icon.moduleName)}&gt;</code></p>
+    <ibm-icon-${param(icon.moduleName)}></ibm-icon-${param(icon.moduleName)}>
+    <p>Directive <code>&lt;svg ibmIcon${
+      icon.moduleName
+    }&gt;&lt;/svg&gt;</code></p>
+    <svg ibmIcon${icon.moduleName}></svg>
+  \`
 }))
 .add("${icon.moduleName} with label", () => ({
-  template: \`<ibm-icon-${param(
-    icon.moduleName
-  )} ariaLabel="label for the icon"></ibm-icon-${param(icon.moduleName)}>\`
+  template: \`
+    <ibm-icon-${param(
+      icon.moduleName
+    )} ariaLabel="label for the icon"></ibm-icon-${param(icon.moduleName)}>
+    <svg ibmIcon${icon.moduleName} ariaLabel="label for the icon"></svg>
+  \`
 }))
 .add("${icon.moduleName} with title", () => ({
-  template: \`<ibm-icon-${param(
-    icon.moduleName
-  )} title="icon title"></ibm-icon-${param(icon.moduleName)}>\`
+  template: \`
+    <ibm-icon-${param(icon.moduleName)} title="icon title"></ibm-icon-${param(
+  icon.moduleName
+)}>
+    <svg ibmIcon${icon.moduleName} title="icon title"></svg>
+  \`
 }))
-.add("${icon.moduleName} with inner class", () => ({
-  template: \`<ibm-icon-${param(
-    icon.moduleName
-  )} innerClass="test-class"></ibm-icon-${param(icon.moduleName)}>\`
+.add("${icon.moduleName} with class on the SVG", () => ({
+  template: \`
+    <ibm-icon-${param(
+      icon.moduleName
+    )} innerClass="test-class another-class"></ibm-icon-${param(
+  icon.moduleName
+)}>
+    <svg ibmIcon${icon.moduleName} class="test-class another-class"></svg>
+  \`
 }))`;
 
 const gerateIconStories = icons => {

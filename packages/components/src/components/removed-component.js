@@ -15,7 +15,10 @@ const removedComponent = name => {
   let didWarnAboutRemoval = false;
   const warn = () => {
     if (__DEV__) {
-      warning(didWarnAboutRemoval, `The \`${name}\` component has been removed.`);
+      warning(
+        didWarnAboutRemoval,
+        `The \`${name}\` component has been removed.`
+      );
       didWarnAboutRemoval = true;
     }
   };

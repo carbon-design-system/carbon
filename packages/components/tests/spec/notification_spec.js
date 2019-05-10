@@ -17,13 +17,19 @@ describe('ToastNotification', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Notification();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Notification(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', function() {
@@ -47,7 +53,9 @@ describe('ToastNotification', function() {
 
     it('should search for close-button element with options.selectorButton', function() {
       const toastInstance = new Notification(toastElement);
-      const toastButton = toastElement.querySelector(toastInstance.options.selectorButton);
+      const toastButton = toastElement.querySelector(
+        toastInstance.options.selectorButton
+      );
       expect(toastButton).toBe(toastInstance.button);
       toastInstance.release();
     });
@@ -74,27 +82,45 @@ describe('ToastNotification', function() {
 
     it('should call remove method', function() {
       spyOn(instance, 'remove');
-      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      instance.button.dispatchEvent(
+        new CustomEvent('click', { bubbles: true })
+      );
       expect(instance.remove).toHaveBeenCalled();
     });
 
     it('should remove notification on click event', function() {
-      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(document.querySelector('.bx--toast-notification--error')).toBe(null);
+      instance.button.dispatchEvent(
+        new CustomEvent('click', { bubbles: true })
+      );
+      expect(document.querySelector('.bx--toast-notification--error')).toBe(
+        null
+      );
     });
 
     it('should emit notification-before-delete event on click', function() {
       const spyNotificationCloseEvent = jasmine.createSpy();
-      events.on(element, 'notification-before-delete', spyNotificationCloseEvent);
-      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      events.on(
+        element,
+        'notification-before-delete',
+        spyNotificationCloseEvent
+      );
+      instance.button.dispatchEvent(
+        new CustomEvent('click', { bubbles: true })
+      );
 
       expect(spyNotificationCloseEvent).toHaveBeenCalled();
     });
 
     it('should emit notification-after-delete event on click', function() {
       const spyNotificationCloseEvent = jasmine.createSpy();
-      events.on(element, 'notification-after-delete', spyNotificationCloseEvent);
-      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      events.on(
+        element,
+        'notification-after-delete',
+        spyNotificationCloseEvent
+      );
+      instance.button.dispatchEvent(
+        new CustomEvent('click', { bubbles: true })
+      );
 
       expect(spyNotificationCloseEvent).toHaveBeenCalled();
     });

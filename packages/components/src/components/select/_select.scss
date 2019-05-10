@@ -93,7 +93,8 @@
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input:focus {
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:focus {
     @include focus-outline('invalid');
   }
 
@@ -130,12 +131,16 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
     position: absolute;
     right: rem(34px); // 1.5rem + chevron width
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
     fill: $support-01;
   }
 
@@ -168,7 +173,8 @@
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--form__helper-text {
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--form__helper-text {
     margin-top: rem(13px);
     align-self: flex-start;
   }
@@ -205,11 +211,14 @@
     right: $carbon--spacing-03;
   }
 
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--select-input {
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input {
     padding-right: rem(50px);
   }
 
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--select-input ~ .#{$prefix}--select__invalid-icon {
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
     right: rem(24px);
   }
 

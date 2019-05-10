@@ -12,7 +12,11 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class NumberInput extends mixin(createComponent, initComponentBySearch, handles) {
+class NumberInput extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * Number input UI.
    * @extends CreateComponent

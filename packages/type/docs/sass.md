@@ -1314,7 +1314,8 @@ Compute the type size for the given type scale step
 
 ### ✅carbon--type-scale [variable]
 
-Type scole follows a custom formula for determining each step size and supports sizes from 12px to 92px
+Type scole follows a custom formula for determining each step size and supports
+sizes from 12px to 92px
 
 <details>
 <summary>Source code</summary>
@@ -2726,13 +2727,12 @@ $tokens: (
 ### ✅fluid-type [mixin]
 
 This helper includes fluid type styles for the given token value. Fluid type
-means that the `font-size` is computed using `calc()` in order to be
-determined by the screen size instead of a breakpoint. As a result, fluid
-styles should be used with caution in fixed width contexts.
+means that the `font-size` is computed using `calc()` in order to be determined
+by the screen size instead of a breakpoint. As a result, fluid styles should be
+used with caution in fixed width contexts.
 
-In addition, we make use of %-based line-heights so that the line-height of
-each type style is computed correctly due to the dynamic nature of the
-`font-size`.
+In addition, we make use of %-based line-heights so that the line-height of each
+type style is computed correctly due to the dynamic nature of the `font-size`.
 
 Most of the logic for this work comes from CSS Tricks:
 https://css-tricks.com/snippets/css/fluid-typography/
@@ -2882,10 +2882,10 @@ Computes the fluid `font-size` for a given type style and breakpoint
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
-project. Also includes an optional fluid option that will enable fluid
-styles for the token if they are defined. Fluid styles will cause the
-token's font-size to be computed based on the viewport size. As a result, use
-with caution in fixed contexts.
+project. Also includes an optional fluid option that will enable fluid styles
+for the token if they are defined. Fluid styles will cause the token's font-size
+to be computed based on the viewport size. As a result, use with caution in
+fixed contexts.
 
 <details>
 <summary>Source code</summary>

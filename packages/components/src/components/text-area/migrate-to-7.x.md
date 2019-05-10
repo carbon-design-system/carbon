@@ -1,10 +1,13 @@
 ### HTML
 
-Text Area and other form components now make use of common form HTML and CSS. See form README for details.
+Text Area and other form components now make use of common form HTML and CSS.
+See form README for details.
 
 ### SCSS
 
-The `_text-area.scss` file is now located at `src/components/text-area/_text-area.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_text-area.scss` file is now located at
+`src/components/text-area/_text-area.scss`. You will need to update any
+`@import` statements for this file to reflect this change.
 
 **New**:
 

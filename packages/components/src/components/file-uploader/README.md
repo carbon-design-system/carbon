@@ -32,7 +32,9 @@ FileUploader.create(document.getElementById('my-file'));
 
 ```javascript
 // `#my-file` is an element with `[data-file]` attribute
-var fileUploaderInstance = FileUploader.create(document.getElementById('my-file'));
+var fileUploaderInstance = FileUploader.create(
+  document.getElementById('my-file')
+);
 // Makes the 2nd file shown as its uploading complete
 fileUploaderInstance.setState('complete', 1);
 ```
@@ -58,15 +60,17 @@ fileUploaderInstance.setState('complete', 1);
 
 #### Using and understanding File Uploader
 
-When files are added to File Uploader, a `change` event is fired.
-The `change` event triggers a private method to inject HTML into the `selectorContainer` element displaying all added filenames.
+When files are added to File Uploader, a `change` event is fired. The `change`
+event triggers a private method to inject HTML into the `selectorContainer`
+element displaying all added filenames.
 
 ![file](https://cloud.githubusercontent.com/assets/4185382/24562175/7fcb4502-160f-11e7-8d9c-5ef4bdd67194.gif)
 
-Trigger additional states using `setState()` public method.
-Additional states are **edit**, **complete** and **upload**.
+Trigger additional states using `setState()` public method. Additional states
+are **edit**, **complete** and **upload**.
 
-**Edit** injects close icons into each filename state container. A `click` event listener is also added to remove the filename when close button is clicked.
+**Edit** injects close icons into each filename state container. A `click` event
+listener is also added to remove the filename when close button is clicked.
 
 ![edit](https://cloud.githubusercontent.com/assets/4185382/24562305/f3660b28-160f-11e7-9c67-c47829597931.gif)
 
@@ -81,10 +85,11 @@ Additional states are **edit**, **complete** and **upload**.
 
 **Upload** injects Loading components into each filename state container.
 
-Developers using File Uploader will be able to use JavaScript to inject a Loading component when selected files are _actually_ being uploaded.
-Users can select a **single** file or **multiple** files.
-By default, any file type is accepted.
-It's up to the developer and their design team to specify and implement validations for which file types are acceptable.
+Developers using File Uploader will be able to use JavaScript to inject a
+Loading component when selected files are _actually_ being uploaded. Users can
+select a **single** file or **multiple** files. By default, any file type is
+accepted. It's up to the developer and their design team to specify and
+implement validations for which file types are acceptable.
 
 ![upload](https://cloud.githubusercontent.com/assets/4185382/24562332/114feabe-1610-11e7-9aba-3ca74ef9e8cc.gif)
 
@@ -105,9 +110,9 @@ It's up to the developer and their design team to specify and implement validati
 
 #### WCAG AA Color Accessibility
 
-File Uploader color contrast ratios are accessible.
-Since File Uploader (specifically filename elements) low-opacity colors,
-verifying color ratios with IBM a11y tool may not yield passing results.
+File Uploader color contrast ratios are accessible. Since File Uploader
+(specifically filename elements) low-opacity colors, verifying color ratios with
+IBM a11y tool may not yield passing results.
 
 However, evaluating resulting background colors as solid colors will pass.
 
@@ -118,13 +123,16 @@ However, evaluating resulting background colors as solid colors will pass.
 
 #### Truncating long filenames
 
-By default, filenames are truncated so that any filename that goes beyond `300px` will be cutoff.
+By default, filenames are truncated so that any filename that goes beyond
+`300px` will be cutoff.
 
 ![image](https://cloud.githubusercontent.com/assets/4185382/24562399/4a00f560-1610-11e7-97c1-9113fb299160.png)
 
-Truncating filenames is enabled through the use of `@mixin text-overflow($size)`.
+Truncating filenames is enabled through the use of
+`@mixin text-overflow($size)`.
 
-You can override this behavior with SCSS by giving the `@mixin` a new `width` by overriding this `@mixin`.
+You can override this behavior with SCSS by giving the `@mixin` a new `width` by
+overriding this `@mixin`.
 
 ```scss
 // Using mixin, override initial styles in _file-uploader.scss

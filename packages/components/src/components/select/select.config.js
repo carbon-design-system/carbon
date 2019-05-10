@@ -17,7 +17,8 @@ const items = [
     hidden: true,
   },
   {
-    label: 'A much longer option that is worth having around to check how text flows',
+    label:
+      'A much longer option that is worth having around to check how text flows',
     value: 'solong',
   },
   {
@@ -69,7 +70,8 @@ module.exports = {
     {
       name: 'inline',
       label: 'Inline Select',
-      notes: 'Inline select is for use when there will be multiple elements in a row.',
+      notes:
+        'Inline select is for use when there will be multiple elements in a row.',
       context: {
         inline: true,
         items,

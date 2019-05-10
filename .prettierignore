@@ -29,3 +29,13 @@ packages/components/docs/js
 
 # Changelogs
 **/CHANGELOG.md
+
+# Generated docs
+**/docs/sass.md
+
+# Generate sass files
+**/scss/vendor/**
+**/_inlined/**
+
+# Examples
+**/examples/**
