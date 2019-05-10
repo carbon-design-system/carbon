@@ -1,13 +1,31 @@
-# carbon
+<p align="center">
+  <a href="https://www.carbondesignsystem.com">
+    <img alt="Carbon Design System" src="https://pbs.twimg.com/profile_banners/872205379421089792/1556220395/1500x500" width="100%" />
+  </a>
+</p>
+<h1 align="center">
+  Carbon Design System
+</h1>
 
-[![Carbon is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![Build Status](https://circleci.com/gh/carbon-design-system/carbon-components.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
 > The Carbon Design System is a series of individual styles and components, that
 > when combined make beautiful, intuitive designs. These designs are systemic and
 > logical, as they all follow the same universal principles.
+
+<p align="center">
+  <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
+  </a>
+  <a href="https://circleci.com/gh/carbon-design-system/carbon">
+    <img src="https://circleci.com/gh/carbon-design-system/carbon.svg?style=shield" alt="Build Status" />
+  </a>
+  <a href="https://lernajs.io/">
+    <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
+  </a>
+  <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+  </a>
+</p>
 
 ## Getting started
 
