@@ -378,6 +378,15 @@ export default class DataTable extends React.Component {
    * @returns {Function}
    */
   handleOnSelectRow = rowId => () => {
+    // if radio === true, deselect all radio buttons
+    const rowsById = this.props.radio
+      ? Object.entries(this.state.rowsById).reduce((p, c) => {
+          const [key, val] = c;
+          val.isSelected = false;
+          p[key] = val;
+          return p;
+        }, {})
+      : this.state.rowsById;
     this.setState(state => {
       const row = state.rowsById[rowId];
       const selectedRows = state.rowIds.filter(
@@ -387,15 +396,6 @@ export default class DataTable extends React.Component {
       const selectedRowsCount = !row.isSelected
         ? selectedRows + 1
         : selectedRows - 1;
-      // if radio === true, deselect all radio buttons
-      const rowsById = this.props.radio
-        ? Object.entries(state.rowsById).reduce((p, c) => {
-            const [key, val] = c;
-            val.isSelected = false;
-            p[key] = val;
-            return p;
-          }, {})
-        : state.rowsById;
       return {
         // Basic assumption here is that we want to show the batch action bar if
         // the row is being selected. If it's being unselected, then see if we
