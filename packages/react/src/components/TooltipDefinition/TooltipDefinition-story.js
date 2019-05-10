@@ -17,9 +17,9 @@ const directions = {
 };
 
 const alignments = {
-  'Left (left)': 'left',
+  'Start (start)': 'start',
   'Center (center)': 'center',
-  'Right (right)': 'right',
+  'End (end)': 'end',
 };
 
 const props = () => ({

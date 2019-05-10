@@ -65,9 +65,9 @@ TooltipDefinition.propTypes = {
   direction: PropTypes.oneOf(['top', 'bottom']),
 
   /**
-   * Specify the alignment (to the trigger button) of the tooltip. Can be one of: left, center or right.
+   * Specify the alignment (to the trigger button) of the tooltip. Can be one of: start, center or end.
    */
-  alignment: PropTypes.oneOf(['left', 'center', 'right']),
+  alignment: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
@@ -83,7 +83,7 @@ TooltipDefinition.propTypes = {
 
 TooltipDefinition.defaultProps = {
   direction: 'bottom',
-  alignment: 'left',
+  alignment: 'start',
 };
 
 export default TooltipDefinition;
