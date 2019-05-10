@@ -14,6 +14,7 @@ const prettierOptions = {
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'es5',
+  proseWrap: 'always',
 };
 
 function createPrinter(definitions) {
