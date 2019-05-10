@@ -227,6 +227,33 @@
     }
   }
 
+  .#{$prefix}--tooltip--definition__align-end {
+    right: 0;
+  }
+
+  .#{$prefix}--tooltip--definition__align-center {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .#{$prefix}--tooltip--definition__top.#{$prefix}--tooltip--definition__align-center {
+    margin-left: 50%;
+    transform: translate(-50%, -100%);
+  }
+
+  .#{$prefix}--tooltip--definition__align-center .#{$prefix}--tooltip__caret {
+    left: auto;
+    margin-left: auto;
+    // Adjust by the half of the diagonal of the caret, which sizes 0.6rem
+    margin-right: calc(50% - 6px);
+  }
+
+  .#{$prefix}--tooltip--definition__align-end .#{$prefix}--tooltip__caret {
+    left: auto;
+    margin-left: auto;
+    margin-right: rem(16px);
+  }
+
   // Tooltip Icon
   // Icon CSS only tooltip
   .#{$prefix}--tooltip--icon__top,
