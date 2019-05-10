@@ -9,10 +9,17 @@
 /// Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
 /// @type {Map}
 $carbon--font-families: (
-  'mono': unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+  'mono':
+    unquote(
+      "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"
+    ),
   'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
-  'sans-condensed': unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
-  'sans-hebrew': unquote("'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"),
+  'sans-condensed':
+    unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
+  'sans-hebrew':
+    unquote(
+      "'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"
+    ),
   'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
 );
 

@@ -4,7 +4,9 @@ No changes.
 
 ### SCSS
 
-The `_pagination.scss` file is now located at `src/components/pagination/_pagination.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_pagination.scss` file is now located at
+`src/components/pagination/_pagination.scss`. You will need to update any
+`@import` statements for this file to reflect this change.
 
 **New**:
 

@@ -131,7 +131,8 @@
     padding-right: $carbon--spacing-09;
   }
 
-  .#{$prefix}--date-picker--range > .#{$prefix}--date-picker-container:first-child {
+  .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
     margin-right: rem(1px);
   }
 
@@ -148,7 +149,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03 $carbon--spacing-02;
+    padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
+      $carbon--spacing-02;
     width: rem(288px) !important;
     height: rem(336px);
     border-radius: 0;

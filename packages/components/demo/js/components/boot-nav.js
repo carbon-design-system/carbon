@@ -10,8 +10,9 @@ import RootPage from './RootPage';
  * @private
  */
 const pollForBrowserSync = callback => {
-  const bsScriptTag = Array.prototype.find.call(document.querySelectorAll('script'), elem =>
-    /browser-sync-client/i.test(elem.src)
+  const bsScriptTag = Array.prototype.find.call(
+    document.querySelectorAll('script'),
+    elem => /browser-sync-client/i.test(elem.src)
   );
   // eslint-disable-next-line no-underscore-dangle
   if (!bsScriptTag || window.___browserSync___) {
@@ -31,11 +32,13 @@ const pollForBrowserSync = callback => {
 const normalizeComponentItem = ({ notes, variants, items = [], ...other }) => ({
   ...other,
   notes,
-  items: (!variants || !variants.items ? items : variants.items).map(subItem => ({
-    ...subItem,
-    // Avoid using notes copied from component to variant
-    notes: notes === subItem.notes ? undefined : subItem.notes,
-  })),
+  items: (!variants || !variants.items ? items : variants.items).map(
+    subItem => ({
+      ...subItem,
+      // Avoid using notes copied from component to variant
+      notes: notes === subItem.notes ? undefined : subItem.notes,
+    })
+  ),
 });
 
 pollForBrowserSync(() => {

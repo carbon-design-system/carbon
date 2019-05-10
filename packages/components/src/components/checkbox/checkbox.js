@@ -56,8 +56,13 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
       this.element.checked = true;
 
       // nested checkboxes inside labels
-      if (this.element.parentElement.classList.contains(this.options.classLabel)) {
-        this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'true');
+      if (
+        this.element.parentElement.classList.contains(this.options.classLabel)
+      ) {
+        this.element.parentElement.setAttribute(
+          this.options.attribContainedCheckboxState,
+          'true'
+        );
       }
     } else if (this.element.checked === false) {
       this.element.removeAttribute('checked');
@@ -65,21 +70,32 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
       this.element.checked = false;
 
       // nested checkboxes inside labels
-      if (this.element.parentElement.classList.contains(this.options.classLabel)) {
-        this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'false');
+      if (
+        this.element.parentElement.classList.contains(this.options.classLabel)
+      ) {
+        this.element.parentElement.setAttribute(
+          this.options.attribContainedCheckboxState,
+          'false'
+        );
       }
     }
   }
 
   _handleFocus() {
-    if (this.element.parentElement.classList.contains(this.options.classLabel)) {
+    if (
+      this.element.parentElement.classList.contains(this.options.classLabel)
+    ) {
       this.element.parentElement.classList.add(this.options.classLabelFocused);
     }
   }
 
   _handleBlur() {
-    if (this.element.parentElement.classList.contains(this.options.classLabel)) {
-      this.element.parentElement.classList.remove(this.options.classLabelFocused);
+    if (
+      this.element.parentElement.classList.contains(this.options.classLabel)
+    ) {
+      this.element.parentElement.classList.remove(
+        this.options.classLabelFocused
+      );
     }
   }
 
@@ -98,7 +114,9 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     this.element.indeterminate = state === stateChangeTypes.mixed;
     this.element.checked = state === stateChangeTypes.true;
 
-    const container = this.element.closest(this.options.selectorContainedCheckboxState);
+    const container = this.element.closest(
+      this.options.selectorContainedCheckboxState
+    );
     if (container) {
       container.setAttribute(this.options.attribContainedCheckboxState, state);
     }
@@ -106,16 +124,23 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
 
   setDisabled(value) {
     if (value === undefined) {
-      throw new TypeError('setDisabled expects a boolean value of true or false');
+      throw new TypeError(
+        'setDisabled expects a boolean value of true or false'
+      );
     }
     if (value === true) {
       this.element.setAttribute('disabled', true);
     } else if (value === false) {
       this.element.removeAttribute('disabled');
     }
-    const container = this.element.closest(this.options.selectorContainedCheckboxDisabled);
+    const container = this.element.closest(
+      this.options.selectorContainedCheckboxDisabled
+    );
     if (container) {
-      container.setAttribute(this.options.attribContainedCheckboxDisabled, value);
+      container.setAttribute(
+        this.options.attribContainedCheckboxDisabled,
+        value
+      );
     }
   }
 
@@ -126,8 +151,14 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     if (this.element.indeterminate === true) {
       this.element.setAttribute('aria-checked', 'mixed');
     }
-    if (this.element.parentElement.classList.contains(this.options.classLabel) && this.element.indeterminate === true) {
-      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'mixed');
+    if (
+      this.element.parentElement.classList.contains(this.options.classLabel) &&
+      this.element.indeterminate === true
+    ) {
+      this.element.parentElement.setAttribute(
+        this.options.attribContainedCheckboxState,
+        'mixed'
+      );
     }
   }
 
@@ -135,14 +166,31 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     if (this.element.checked === true) {
       this.element.setAttribute('aria-checked', 'true');
     }
-    if (this.element.parentElement.classList.contains(this.options.classLabel) && this.element.checked) {
-      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxState, 'true');
+    if (
+      this.element.parentElement.classList.contains(this.options.classLabel) &&
+      this.element.checked
+    ) {
+      this.element.parentElement.setAttribute(
+        this.options.attribContainedCheckboxState,
+        'true'
+      );
     }
-    if (this.element.parentElement.classList.contains(this.options.classLabel)) {
-      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxDisabled, 'false');
+    if (
+      this.element.parentElement.classList.contains(this.options.classLabel)
+    ) {
+      this.element.parentElement.setAttribute(
+        this.options.attribContainedCheckboxDisabled,
+        'false'
+      );
     }
-    if (this.element.parentElement.classList.contains(this.options.classLabel) && this.element.disabled) {
-      this.element.parentElement.setAttribute(this.options.attribContainedCheckboxDisabled, 'true');
+    if (
+      this.element.parentElement.classList.contains(this.options.classLabel) &&
+      this.element.disabled
+    ) {
+      this.element.parentElement.setAttribute(
+        this.options.attribContainedCheckboxDisabled,
+        'true'
+      );
     }
   }
 

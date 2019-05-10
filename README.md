@@ -29,10 +29,12 @@
 
 ## Getting started
 
-If you're just getting started, check out [`carbon-components`](./packages/components). If you're looking
-for React components, take a look at [`carbon-components-react`](./packages/react).
+If you're just getting started, check out
+[`carbon-components`](./packages/components). If you're looking for React
+components, take a look at [`carbon-components-react`](./packages/react).
 
-If you're trying to find something specific, here's a full list of packages that we support!
+If you're trying to find something specific, here's a full list of packages that
+we support!
 
 | Package name                                  | Description                                                                                                                                         |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -49,17 +51,20 @@ If you're trying to find something specific, here's a full list of packages that
 
 ## :books: Documentation
 
-- See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
-- [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions to this repo.
+- See our documentation site
+  [here](http://carbondesignsystem.com/getting-started/developers) for full
+  how-to docs and guidelines
+- [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
+  to this repo.
 - [🏃‍♀️ Migration Guides](./docs/migration)
   - [v9 to v10](./docs/migration/migrate-to-10.x.md)
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new
-features, or help us improve the project documentation. If you're
-interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)
-and our [Developer Guide](./github/developing.md)! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
+[Developer Guide](./github/developing.md)! 👀
 
 ## 📝 License
 

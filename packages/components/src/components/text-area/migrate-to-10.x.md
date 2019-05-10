@@ -1,6 +1,11 @@
 ### HTML
 
-There are some markup changes and an icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Please see the new structure below and reference the [text input page](https://next.carbondesignsystem.com/components/text-input/code) in our site to copy the specified new markup. React and other framework variants should reflect the change automatically.
+There are some markup changes and an icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Please see the new structure below and reference the
+[text input page](https://next.carbondesignsystem.com/components/text-input/code)
+in our site to copy the specified new markup. React and other framework variants
+should reflect the change automatically.
 
 **Things to note**:
 

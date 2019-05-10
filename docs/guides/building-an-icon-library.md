@@ -23,8 +23,8 @@ awesome! We're so happy to hear that 🎉 We hope that this guide can serve as a
 reference to help get you up-and-running quickly so you can start using these
 icons as quickly as possible.
 
-However, before getting started, make sure that you have [created an
-issue](https://github.com/IBM/carbon-elements/issues/new?labels=&template=feature_request.md)
+However, before getting started, make sure that you have
+[created an issue](https://github.com/IBM/carbon-elements/issues/new?labels=&template=feature_request.md)
 on the Carbon Elements project and have received a green light from one of the
 core contributors. This is in order to verify that the work is going to the
 right place in the Carbon Elements ecosystem.
@@ -54,8 +54,9 @@ determining how to best architect their implementation:
   support both direct imports and a tree-shakeable entrypoint
   - Direct path: `/es/icon-name/16.js`
   - Entrypoint: `/es/index.js`
-  - In general, this means that we cannot support a generic `<Icon name="icon-name">` component
-    given that we could not tree-shake `@carbon/icons` descriptors
+  - In general, this means that we cannot support a generic
+    `<Icon name="icon-name">` component given that we could not tree-shake
+    `@carbon/icons` descriptors
   - A system could support `<Icon icon={descriptor} />`, however this would
     require a user to install two dependencies versus just your icon library
 - Minimize the amount of runtime logic that has to be run. As a result, prefer
@@ -72,11 +73,11 @@ determining how to best architect their implementation:
 
 ### Project structure
 
-After following our [contribution guidelines](/.github/CONTRIBUTING.md), you should have a local version of
-Carbon Elements on your own machine. In order to add a new package to the
-project, you add a folder in the `packages` directory and run `yarn init -y` to
-generate the `package.json` file. Make sure to edit the `name` field in the
-`package.json` file and then run the following task:
+After following our [contribution guidelines](/.github/CONTRIBUTING.md), you
+should have a local version of Carbon Elements on your own machine. In order to
+add a new package to the project, you add a folder in the `packages` directory
+and run `yarn init -y` to generate the `package.json` file. Make sure to edit
+the `name` field in the `package.json` file and then run the following task:
 
 ```bash
 yarn sync

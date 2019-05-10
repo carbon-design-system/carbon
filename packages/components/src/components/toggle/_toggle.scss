@@ -77,7 +77,9 @@
     }
   }
 
-  .#{$prefix}--toggle--small + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     width: rem(32px);
     height: rem(16px);
 
@@ -107,7 +109,9 @@
     transform: scale(0.2);
   }
 
-  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
     fill: $support-02;
     transform: scale(1) translateX(16px);
   }
@@ -124,21 +128,33 @@
     left: rem(48px);
   }
 
-  .#{$prefix}--toggle--small + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--left {
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
     left: rem(32px);
   }
 
-  .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--left,
-  .#{$prefix}--toggle:not(:checked) + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--right {
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle:not(:checked)
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right {
     visibility: hidden;
   }
 
-  .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--right,
-  .#{$prefix}--toggle:not(:checked) + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--left {
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right,
+  .#{$prefix}--toggle:not(:checked)
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
     display: inline;
   }
 
-  .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     &:before {
       background-color: $support-02;
     }
@@ -149,7 +165,9 @@
     }
   }
 
-  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     &:after {
       margin-left: 0px;
       transform: translateX(17px);
@@ -179,7 +197,9 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     &:before {
       background-color: $disabled-01;
     }
@@ -195,16 +215,24 @@
     }
   }
 
-  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--left,
-  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__text--right {
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right {
     color: $disabled;
   }
 
-  .#{$prefix}--toggle:disabled:active + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance:before {
+  .#{$prefix}--toggle:disabled:active
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance:before {
     box-shadow: none;
   }
 
-  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
     fill: $disabled-02;
   }
 }

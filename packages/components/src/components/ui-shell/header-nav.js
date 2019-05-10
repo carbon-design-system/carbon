@@ -14,7 +14,11 @@ import settings from '../../globals/js/settings';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-export default class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
+export default class HeaderNav extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   constructor(element, options) {
     super(element, options);
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
@@ -31,8 +35,12 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @returns {Element} Currently highlighted element.
    */
   getCurrentNavigation = () => {
-    const focused = this.element.ownerDocument.activeElement.closest(this.options.selectorSubmenu);
-    return focused && focused.nodeType === Node.ELEMENT_NODE ? focused.querySelector(this.options.selectorSubmenuLink) : null;
+    const focused = this.element.ownerDocument.activeElement.closest(
+      this.options.selectorSubmenu
+    );
+    return focused && focused.nodeType === Node.ELEMENT_NODE
+      ? focused.querySelector(this.options.selectorSubmenuLink)
+      : null;
   };
 
   /**
@@ -40,15 +48,21 @@ export default class HeaderNav extends mixin(createComponent, initComponentBySea
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = toArray(this.element.querySelectorAll(this.options.selectorSubmenuLink));
+    const items = toArray(
+      this.element.querySelectorAll(this.options.selectorSubmenuLink)
+    );
     const start = this.getCurrentNavigation();
     const getNextItem = old => {
-      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
-      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+      const handleUnderflow = (index, length) =>
+        index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) =>
+        index - (index < length ? 0 : length);
 
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
       const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+      return items[
+        handleUnderflow(handleOverflow(index, items.length), items.length)
+      ];
     };
     getNextItem(start).focus();
   };

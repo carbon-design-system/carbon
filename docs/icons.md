@@ -82,8 +82,8 @@ assets.
 
 The `@carbon/icons` package exposes a `meta.json` file that is helpful for
 library authors to use when generating component icon libraries. For a full
-guide for building icon libraries, check out [this
-guide](/docs/guides/building-an-icon-library.md).
+guide for building icon libraries, check out
+[this guide](/docs/guides/building-an-icon-library.md).
 
 The `meta.json` file contains an array of all of the icons built from the source
 files available in `@carbon/icons`. Each entry contains the following metadata
@@ -136,14 +136,25 @@ that you can use:
 
 ## Updating icon metadata
 
-The icons have metadata that are stored in `metadata.yml`. The metadata are used to surface information such as usage, available sizes, categories amd variants. Metadata of an icon is also used to track its `aliases`, which are used to enable search. You can help us make our icon search more robust by refining and expanding this list of aliases. Follow these steps to create an icon metadata update PR:
+The icons have metadata that are stored in `metadata.yml`. The metadata are used
+to surface information such as usage, available sizes, categories amd variants.
+Metadata of an icon is also used to track its `aliases`, which are used to
+enable search. You can help us make our icon search more robust by refining and
+expanding this list of aliases. Follow these steps to create an icon metadata
+update PR:
 
-1. open `metadata.yml` in your text editor, or go to ![metadata.yml](https://github.com/IBM/carbon-elements/blob/master/packages/icons/metadata.yml) in browser.
-2. find the icon you'd like to edit. Please note that icon names are without `--modifiers`. All icons with `--modifiers` are listed as vairants of the same icon.
+1. open `metadata.yml` in your text editor, or go to
+   ![metadata.yml](https://github.com/IBM/carbon-elements/blob/master/packages/icons/metadata.yml)
+   in browser.
+2. find the icon you'd like to edit. Please note that icon names are without
+   `--modifiers`. All icons with `--modifiers` are listed as vairants of the
+   same icon.
 3. make desired edits on the icon's `aliases` list.
-4. commit changes, preferably with a commit message "[icon name] metadata update".
+4. commit changes, preferably with a commit message "[icon name] metadata
+   update".
 5. create a new branch, suggested branch name is `yourname-metadata-iconName`
-6. create the PR from your branch, or click on `Propose file change` if you are in browser.
+6. create the PR from your branch, or click on `Propose file change` if you are
+   in browser.
 
 ```yml
 icons:

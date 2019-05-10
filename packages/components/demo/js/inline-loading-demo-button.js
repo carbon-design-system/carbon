@@ -5,7 +5,11 @@ import handles from '../../src/globals/js/mixins/handles';
 import on from '../../src/globals/js/misc/on';
 import InlineLoading from '../../src/components/inline-loading/inline-loading';
 
-class InlineLoadingDemoButton extends mixin(createComponent, initComponentBySearch, handles) {
+class InlineLoadingDemoButton extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * The button for inline loading demo.
    * @extends CreateComponent
@@ -20,7 +24,9 @@ class InlineLoadingDemoButton extends mixin(createComponent, initComponentBySear
         this.toggle(event);
       })
     );
-    const targetElem = element.ownerDocument.querySelector(this.options.selectorTarget);
+    const targetElem = element.ownerDocument.querySelector(
+      this.options.selectorTarget
+    );
     if (targetElem) {
       this.state = InlineLoading.states.ACTIVE;
       this.target = InlineLoading.create(targetElem).setState(this.state);
@@ -32,7 +38,10 @@ class InlineLoadingDemoButton extends mixin(createComponent, initComponentBySear
    */
   toggle() {
     if (this.target) {
-      this.state = this.state === InlineLoading.states.ACTIVE ? InlineLoading.states.FINISHED : InlineLoading.states.ACTIVE;
+      this.state =
+        this.state === InlineLoading.states.ACTIVE
+          ? InlineLoading.states.FINISHED
+          : InlineLoading.states.ACTIVE;
       this.target.setState(this.state);
     }
   }

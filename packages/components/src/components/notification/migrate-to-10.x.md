@@ -1,6 +1,11 @@
 ### HTML
 
-Updating HTML pertains only to the "close" button SVG icon. Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/notification/code) site. React and other framework variants should reflect the change automatically.
+Updating HTML pertains only to the "close" button SVG icon. Icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/notification/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **New Markup**:
 
@@ -16,7 +21,9 @@ Updating HTML pertains only to the "close" button SVG icon. Icon from [`carbon-e
   viewBox="0 0 16 16"
   aria-hidden="true"
 >
-  <path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"></path>
+  <path
+    d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+  ></path>
 </svg>
 ```
 

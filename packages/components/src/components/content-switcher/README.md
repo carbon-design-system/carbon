@@ -40,9 +40,13 @@ ContentSwitcher.create(document.getElementById('my-content-switcher'));
 
 ```javascript
 // `#my-content-switcher` is an element with `[data-content-switcher]` attribute
-var contentSwitcherInstance = ContentSwitcher.create(document.getElementById('my-content-switcher'));
+var contentSwitcherInstance = ContentSwitcher.create(
+  document.getElementById('my-content-switcher')
+);
 // `#my-content-switcher-btn-1` is one of the `<button>`s with `bx--content-switcher-btn` class
-contentSwitcherInstance.setActive(document.getElementById('my-content-switcher-btn-1'));
+contentSwitcherInstance.setActive(
+  document.getElementById('my-content-switcher-btn-1')
+);
 ```
 
 #### Options
@@ -76,7 +80,8 @@ document.addEventListener('content-switcher-beingselected', function(evt) {
 
 ##### Example
 
-Notifying events of all content switcher items being selected to an analytics library
+Notifying events of all content switcher items being selected to an analytics
+library
 
 ```javascript
 document.addEventListener('content-switcher-selected', function(evt) {
@@ -97,27 +102,41 @@ document.addEventListener('content-switcher-selected', function(evt) {
 
 #### Preset an active button and panel with HTML
 
-While SCSS and JS are setup, you can configure Content Switcher and its associated content through the HTML.
+While SCSS and JS are setup, you can configure Content Switcher and its
+associated content through the HTML.
 
-Each `bx--content-switcher-btn` has a `data-target` value with a selector for a panel element.
-When one of these buttons is clicked, then it will show the panel that the `data-target` is pointing to.
+Each `bx--content-switcher-btn` has a `data-target` value with a selector for a
+panel element. When one of these buttons is clicked, then it will show the panel
+that the `data-target` is pointing to.
 
 For example,
 
-The first button has a `data-target` pointing to `.demo-panel--opt-1`.
-When clicking the first button, the JavaScript will find the DOM element using the given `data-target` selector and display it while hiding all other panels using the `hidden` attribute.
+The first button has a `data-target` pointing to `.demo-panel--opt-1`. When
+clicking the first button, the JavaScript will find the DOM element using the
+given `data-target` selector and display it while hiding all other panels using
+the `hidden` attribute.
 
 Below is an HTML setup for Content Switcher that will do the following:
 
-- Select the first button by default (as indicated by `bx--content-switcher--selected` class)
+- Select the first button by default (as indicated by
+  `bx--content-switcher--selected` class)
 - Show the `<div class="demo--panel--opt-1">` element
 - Hide the other elements
 
 ```html
 <div data-content-switcher class="bx--content-switcher">
-  <button class="bx--content-switcher-btn bx--content-switcher--selected" data-target=".demo--panel--opt-1">Option 1</button>
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</button>
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">Option 3</button>
+  <button
+    class="bx--content-switcher-btn bx--content-switcher--selected"
+    data-target=".demo--panel--opt-1"
+  >
+    Option 1
+  </button>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">
+    Option 2
+  </button>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">
+    Option 3
+  </button>
 </div>
 <div class="demo--panel--opt-1">Show Option 1</div>
 <div class="demo--panel--opt-2" hidden>Show Option 2</div>
@@ -126,13 +145,25 @@ Below is an HTML setup for Content Switcher that will do the following:
 
 #### Preset an active button and panel with JavaScript
 
-Use `setActive` class method to preset the selection on a Content Switcher; doing this will avoid manually adding `bx--content-switcher--selected` modifier class and `hidden` attributes on HTML.
+Use `setActive` class method to preset the selection on a Content Switcher;
+doing this will avoid manually adding `bx--content-switcher--selected` modifier
+class and `hidden` attributes on HTML.
 
 ```html
-<div data-content-switcher id="my-content-switcher" class="bx--content-switcher">
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-1">Option 1</button>
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</button>
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">Option 3</button>
+<div
+  data-content-switcher
+  id="my-content-switcher"
+  class="bx--content-switcher"
+>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-1">
+    Option 1
+  </button>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">
+    Option 2
+  </button>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">
+    Option 3
+  </button>
 </div>
 <div class="demo--panel--opt-1">Show Option 1</div>
 <div class="demo--panel--opt-2">Show Option 2</div>
@@ -145,12 +176,16 @@ const button = document.querySelector('[data-target=".demo--panel--opt-2"]');
 // Initialize an instance of ContentSwitcher with init(), create(element) or new ContentSwitcher(element)
 ContentSwitcher.init();
 // Grab an ContentSwitcher instance
-const instance = ContentSwitcher.components.get(document.getElementById('my-content-switcher'));
+const instance = ContentSwitcher.components.get(
+  document.getElementById('my-content-switcher')
+);
 // Use setActive
 instance.setActive(button);
 ```
 
-The `setActive` method also takes an optional `callback` function parameter. The most typical example of using this is acting on a newly selected content-switcher button.
+The `setActive` method also takes an optional `callback` function parameter. The
+most typical example of using this is acting on a newly selected
+content-switcher button.
 
 ```js
 contentSwitcher.setActive(button, function(error, item) {
@@ -166,20 +201,43 @@ contentSwitcher.setActive(button, function(error, item) {
 
 #### Using buttons or anchor elements are both fine
 
-Content Switcher can be implemented with either `<button>` or `<a>` elements for its click targets.
-Both uses of HTML will render the same visual styles and interactions.
+Content Switcher can be implemented with either `<button>` or `<a>` elements for
+its click targets. Both uses of HTML will render the same visual styles and
+interactions.
 
 ```html
 <div data-content-switcher class="bx--content-switcher">
-  <a href="javascript:void(0)" class="bx--content-switcher-btn bx--content-switcher--selected" data-target=".demo--panel--opt-1"
+  <a
+    href="javascript:void(0)"
+    class="bx--content-switcher-btn bx--content-switcher--selected"
+    data-target=".demo--panel--opt-1"
     >Option 1</a
   >
-  <a href="javascript:void(0)" class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</a>
-  <a href="javascript:void(0)" class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">Option 3</a>
+  <a
+    href="javascript:void(0)"
+    class="bx--content-switcher-btn"
+    data-target=".demo--panel--opt-2"
+    >Option 2</a
+  >
+  <a
+    href="javascript:void(0)"
+    class="bx--content-switcher-btn"
+    data-target=".demo--panel--opt-3"
+    >Option 3</a
+  >
 </div>
 <div data-content-switcher class="bx--content-switcher">
-  <button class="bx--content-switcher-btn bx--content-switcher--selected" data-target=".demo--panel--opt-1">Option 1</button>
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</button>
-  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">Option 3</button>
+  <button
+    class="bx--content-switcher-btn bx--content-switcher--selected"
+    data-target=".demo--panel--opt-1"
+  >
+    Option 1
+  </button>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">
+    Option 2
+  </button>
+  <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">
+    Option 3
+  </button>
 </div>
 ```

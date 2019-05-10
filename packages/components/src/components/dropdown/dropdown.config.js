@@ -31,7 +31,8 @@ const items = [
     value: 'router',
   },
   {
-    label: 'An example option that is really long to show what should be done to handle long text',
+    label:
+      'An example option that is really long to show what should be done to handle long text',
     value: 'loremipsum',
   },
 ];

@@ -9,16 +9,13 @@
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test-ssr",
+    "ci-check": "yarn lint && yarn test --runInBand && yarn test-ssr",
     "clean": "rimraf es lib umd storybook-static",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "lint": "eslint src",
     "lint:staged": "eslint",
     "prepublish": "yarn build",
-    "prettier": "prettier --write \"**/*.{scss,css,js,md}\"",
-    "prettier:staged": "prettier --write",
-    "prettier:diff": "prettier --check \"**/*.{scss,css,js,md}\"",
     "semantic-release": "semantic-release",
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
@@ -192,7 +189,6 @@
     "node-sass": "4.10.0",
     "object-assign": "^4.1.1",
     "postcss-loader": "^3.0.0",
-    "prettier": "^1.16.0",
     "promise": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -231,12 +227,6 @@
       "@babel/plugin-proposal-export-namespace-from",
       "@babel/plugin-proposal-export-default-from"
     ]
-  },
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "es5"
   },
   "repository": {
     "type": "git",

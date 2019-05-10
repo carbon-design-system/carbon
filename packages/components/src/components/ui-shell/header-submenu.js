@@ -16,11 +16,22 @@ import eventMatches from '../../globals/js/misc/event-matches';
 const forEach = /* #__PURE__ */ (() => Array.prototype.forEach)();
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-export default class HeaderSubmenu extends mixin(createComponent, initComponentBySearch, handles) {
+export default class HeaderSubmenu extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   constructor(element, options) {
     super(element, options);
     const hasFocusOut = 'onfocusout' in window;
-    this.manage(on(this.element, hasFocusOut ? 'focusout' : 'blur', this._handleEvent, !hasFocusOut));
+    this.manage(
+      on(
+        this.element,
+        hasFocusOut ? 'focusout' : 'blur',
+        this._handleEvent,
+        !hasFocusOut
+      )
+    );
     this.manage(on(this.element, 'mouseenter', this._handleEvent));
     this.manage(on(this.element, 'mouseleave', this._handleEvent));
     this.manage(on(this.element, 'click', this._handleEvent));
@@ -63,7 +74,9 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
           // possible arrow keys
         }[event.which];
       case 'click':
-        return eventMatches(event, this.options.selectorItem) ? this.constructor.actions.CLOSE_SUBMENU : null;
+        return eventMatches(event, this.options.selectorItem)
+          ? this.constructor.actions.CLOSE_SUBMENU
+          : null;
       case 'blur':
       case 'focusout': {
         const isOfSelf = this.element.contains(event.relatedTarget);
@@ -85,7 +98,8 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    */
   _getNewState = action => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
-    const isExpanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
+    const isExpanded =
+      trigger.getAttribute(this.options.attribExpanded) === 'true';
     switch (action) {
       case this.constructor.actions.CLOSE_SUBMENU:
         return false;
@@ -105,9 +119,12 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
   _setState = ({ shouldBeExpanded, shouldFocusOnOpen }) => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     trigger.setAttribute(this.options.attribExpanded, shouldBeExpanded);
-    forEach.call(this.element.querySelectorAll(this.options.selectorItem), item => {
-      item.tabIndex = shouldBeExpanded ? 0 : -1;
-    });
+    forEach.call(
+      this.element.querySelectorAll(this.options.selectorItem),
+      item => {
+        item.tabIndex = shouldBeExpanded ? 0 : -1;
+      }
+    );
     // focus first submenu item
     if (shouldBeExpanded && shouldFocusOnOpen) {
       this.element.querySelector(this.options.selectorItem).focus();
@@ -120,7 +137,10 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    */
   getCurrentNavigation = () => {
     const focused = this.element.ownerDocument.activeElement;
-    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+    return focused.nodeType === Node.ELEMENT_NODE &&
+      focused.matches(this.options.selectorItem)
+      ? focused
+      : null;
   };
 
   /**
@@ -128,17 +148,29 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = toArray(this.element.querySelectorAll(this.options.selectorItem));
-    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const items = toArray(
+      this.element.querySelectorAll(this.options.selectorItem)
+    );
+    const start =
+      this.getCurrentNavigation() ||
+      this.element.querySelector(this.options.selectorItemSelected);
     const getNextItem = old => {
-      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
-      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+      const handleUnderflow = (index, length) =>
+        index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) =>
+        index - (index < length ? 0 : length);
 
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
       const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+      return items[
+        handleUnderflow(handleOverflow(index, items.length), items.length)
+      ];
     };
-    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+    for (
+      let current = getNextItem(start);
+      current && current !== start;
+      current = getNextItem(current)
+    ) {
       if (
         !current.matches(this.options.selectorItemHidden) &&
         !current.parentNode.matches(this.options.selectorItemHidden) &&
@@ -195,7 +227,8 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
         break;
       }
       default: {
-        const expanded = trigger.getAttribute(this.options.attribExpanded) === 'true';
+        const expanded =
+          trigger.getAttribute(this.options.attribExpanded) === 'true';
         if (expanded) {
           const direction = {
             38: this.constructor.NAVIGATE.BACKWARD,
@@ -205,7 +238,9 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
             case 35: {
               // end key
               event.preventDefault(); // prevents key from scrolling page
-              const menuItems = this.element.querySelectorAll(this.options.selectorItem);
+              const menuItems = this.element.querySelectorAll(
+                this.options.selectorItem
+              );
               const lastMenuItem = menuItems[menuItems.length - 1];
               if (lastMenuItem) {
                 lastMenuItem.focus();
@@ -215,7 +250,9 @@ export default class HeaderSubmenu extends mixin(createComponent, initComponentB
             case 36: {
               // home key
               event.preventDefault(); // prevents key from scrolling page
-              const [firstMenuItem] = this.element.querySelectorAll(this.options.selectorItem);
+              const [firstMenuItem] = this.element.querySelectorAll(
+                this.options.selectorItem
+              );
               if (firstMenuItem) {
                 firstMenuItem.focus();
               }

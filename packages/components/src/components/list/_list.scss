@@ -46,8 +46,12 @@
     margin-bottom: rem(4px);
   }
 
-  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before,
-  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+  .#{$prefix}--list--unordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
     margin-right: $carbon--spacing-03;
     display: inline-block;
   }
@@ -56,7 +60,9 @@
     content: '\002013';
   }
 
-  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+  .#{$prefix}--list--unordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
     content: '\0025AA';
   }
 
@@ -64,11 +70,15 @@
     content: counter(listitem) '.';
   }
 
-  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item {
+  .#{$prefix}--list--ordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item {
     counter-increment: sub-list-item;
   }
 
-  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+  .#{$prefix}--list--ordered
+    .#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
     content: counter(sub-list-item, lower-alpha) '.';
     width: 0.6rem;
   }

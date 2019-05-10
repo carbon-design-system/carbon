@@ -56,7 +56,9 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * Returns all steps with details about element and index.
    */
   getSteps() {
-    return toArray(this.element.querySelectorAll(this.options.selectorStepElement)).map((element, index) => ({
+    return toArray(
+      this.element.querySelectorAll(this.options.selectorStepElement)
+    ).map((element, index) => ({
       element,
       index,
     }));
@@ -163,8 +165,12 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
   }
 
   addOverflowTooltip() {
-    const stepLabels = toArray(this.element.querySelectorAll(this.options.selectorLabel));
-    const tooltips = toArray(this.element.querySelectorAll(this.options.selectorTooltip));
+    const stepLabels = toArray(
+      this.element.querySelectorAll(this.options.selectorLabel)
+    );
+    const tooltips = toArray(
+      this.element.querySelectorAll(this.options.selectorTooltip)
+    );
 
     stepLabels.forEach(step => {
       if (step.scrollWidth > this.options.maxWidth) {

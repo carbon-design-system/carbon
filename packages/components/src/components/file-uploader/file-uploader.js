@@ -16,7 +16,12 @@ import on from '../../globals/js/misc/on';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-class FileUploader extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
+class FileUploader extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState,
+  handles
+) {
   /**
    * File uploader.
    * @extends CreateComponent
@@ -62,7 +67,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
   _closeButtonHTML() {
     return `
-      <button class="${this.options.classFileClose}" type="button" aria-label="close">
+      <button class="${
+        this.options.classFileClose
+      }" type="button" aria-label="close">
       <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16">
       <path fill="#231F20" d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"/>
       </svg>
@@ -71,7 +78,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
   _checkmarkHTML() {
     return `
-      <svg class="${this.options.classFileComplete}" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
+      <svg class="${
+        this.options.classFileComplete
+      }" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z"/>
       </svg>`;
   }
@@ -86,10 +95,14 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   };
 
   _getStateContainers() {
-    const stateContainers = toArray(this.element.querySelectorAll(`[data-for=${this.inputId}]`));
+    const stateContainers = toArray(
+      this.element.querySelectorAll(`[data-for=${this.inputId}]`)
+    );
 
     if (stateContainers.length === 0) {
-      throw new TypeError('State container elements not found; invoke _displayFilenames() first');
+      throw new TypeError(
+        'State container elements not found; invoke _displayFilenames() first'
+      );
     }
 
     if (stateContainers[0].dataset.for !== this.inputId) {
@@ -103,7 +116,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    * Inject selected files into DOM. Invoked on change event.
    */
   _displayFilenames() {
-    const container = this.element.querySelector(this.options.selectorContainer);
+    const container = this.element.querySelector(
+      this.options.selectorContainer
+    );
     const HTMLString = toArray(this.input.files)
       .map(file => this._filenamesHTML(file.name, this.inputId))
       .join('');
@@ -113,7 +128,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
   _removeState(element) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
+      throw new TypeError(
+        'DOM element should be given to initialize this widget.'
+      );
     }
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -155,7 +172,11 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
     const stateContainers = this._getStateContainers();
 
     if (state === 'edit') {
-      this._handleStateChange(stateContainers, selectIndex, this._closeButtonHTML());
+      this._handleStateChange(
+        stateContainers,
+        selectIndex,
+        this._closeButtonHTML()
+      );
     }
 
     if (state === 'upload') {
@@ -163,7 +184,11 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
     }
 
     if (state === 'complete') {
-      this._handleStateChange(stateContainers, selectIndex, this._checkmarkHTML());
+      this._handleStateChange(
+        stateContainers,
+        selectIndex,
+        this._checkmarkHTML()
+      );
     }
   }
 
@@ -188,8 +213,10 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
       classFileComplete: `${prefix}--file-complete`,
       classSelectedFile: `${prefix}--file__selected-file`,
       classStateContainer: `${prefix}--file__state-container`,
-      eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
-      eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
+      eventBeforeDeleteFilenameFileuploader:
+        'fileuploader-before-delete-filename',
+      eventAfterDeleteFilenameFileuploader:
+        'fileuploader-after-delete-filename',
     };
   }
 }

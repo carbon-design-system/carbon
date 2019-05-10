@@ -18,13 +18,19 @@ describe('Pagination Nav', () => {
     it('Should throw if root element is not given', () => {
       expect(() => {
         new PaginationNav();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', () => {
       expect(() => {
         new PaginationNav(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', () => {
@@ -64,7 +70,9 @@ describe('Pagination Nav', () => {
     it('should be called on click', () => {
       spyOn(instance, 'handleClick');
       const event = new CustomEvent('click', { bubbles: true });
-      const pageButton = element.querySelector(instance.options.selectorPageElement);
+      const pageButton = element.querySelector(
+        instance.options.selectorPageElement
+      );
       pageButton.dispatchEvent(event);
       expect(instance.handleClick).toHaveBeenCalled();
     });
@@ -72,9 +80,16 @@ describe('Pagination Nav', () => {
     it('should be called on page direction click', () => {
       spyOn(instance, 'clearActivePage');
       const event = new CustomEvent('click', { bubbles: true });
-      const pagePreviousButton = element.querySelector(instance.options.selectorPagePrevious);
-      const pageNextButton = element.querySelector(instance.options.selectorPageNext);
-      if (pagePreviousButton && !pagePreviousButton.getAttribute('aria-disabled')) {
+      const pagePreviousButton = element.querySelector(
+        instance.options.selectorPagePrevious
+      );
+      const pageNextButton = element.querySelector(
+        instance.options.selectorPageNext
+      );
+      if (
+        pagePreviousButton &&
+        !pagePreviousButton.getAttribute('aria-disabled')
+      ) {
         pagePreviousButton.dispatchEvent(event);
         expect(instance.clearActivePage).toHaveBeenCalled();
       }
@@ -87,12 +102,16 @@ describe('Pagination Nav', () => {
     it('should be called on page select menu', () => {
       spyOn(instance, 'handleSelectChange');
       const event = new CustomEvent('change', { bubbles: true });
-      const pageSelectMenu = element.querySelector(instance.options.selectorPageSelect);
+      const pageSelectMenu = element.querySelector(
+        instance.options.selectorPageSelect
+      );
       if (pageSelectMenu) {
         pageSelectMenu.dispatchEvent(event);
         expect(instance.handleSelectChange).toHaveBeenCalled();
         expect(instance.setPrevNextStates).toHaveBeenCalled();
-        expect(pageSelectMenu.classList.contains(instance.options.classActive)).toBe(true);
+        expect(
+          pageSelectMenu.classList.contains(instance.options.classActive)
+        ).toBe(true);
       }
     });
 
@@ -115,11 +134,15 @@ describe('Pagination Nav', () => {
     });
 
     it('page should get active class and be disabled when clicked', () => {
-      const pageButtonArray = element.querySelectorAll(instance.options.selectorPageElement);
+      const pageButtonArray = element.querySelectorAll(
+        instance.options.selectorPageElement
+      );
       pageButtonArray.forEach(el => {
         el.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(el.classList.contains(instance.options.classActive)).toBe(true);
-        expect(el.classList.contains(instance.options.classDisabled)).toBe(true);
+        expect(el.classList.contains(instance.options.classDisabled)).toBe(
+          true
+        );
       });
     });
 

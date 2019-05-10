@@ -1,10 +1,16 @@
 ### HTML
 
-There are several structural changes and new icons from [`carbon-elements`](https://github.com/IBM/carbon-elements) package. Please see the new structure below and reference the [pagination page](https://next.carbondesignsystem.com/components/pagination/code) in our site to copy the specified new markup. React and other framework variants should reflect the change automatically.
+There are several structural changes and new icons from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package. Please see
+the new structure below and reference the
+[pagination page](https://next.carbondesignsystem.com/components/pagination/code)
+in our site to copy the specified new markup. React and other framework variants
+should reflect the change automatically.
 
 **Things to note**:
 
-- Both left and right pagination containers now have two `bx—pagination__text`'s each.
+- Both left and right pagination containers now have two `bx—pagination__text`'s
+  each.
 - Visually hidden markup and input has been removed from the right pagination.
 - There are now selects on both right and left pagination.
 - Button and select icons have new paths and svg attributes.
@@ -56,7 +62,8 @@ bx--pagination
 
 ### SCSS
 
-There is _one_ change to an existing selector, the remaining selectors are unchanged.
+There is _one_ change to an existing selector, the remaining selectors are
+unchanged.
 
 | v9                            | v10                         | Note           |
 | ----------------------------- | --------------------------- | -------------- |

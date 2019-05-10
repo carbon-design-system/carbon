@@ -19,13 +19,19 @@ describe('ProgressIndicator', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new ProgressIndicator();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ProgressIndicator(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', function() {
@@ -76,7 +82,9 @@ describe('ProgressIndicator', function() {
     });
 
     it('should remove the svg contained inside given element param', function() {
-      const el = instance.element.querySelector(instance.options.selectorIncomplete);
+      const el = instance.element.querySelector(
+        instance.options.selectorIncomplete
+      );
       instance._updateStep({
         element: el,
         className: instance.options.classComplete,
@@ -85,7 +93,9 @@ describe('ProgressIndicator', function() {
     });
 
     it('should update className with given className param', function() {
-      const el = instance.element.querySelector(instance.options.selectorIncomplete);
+      const el = instance.element.querySelector(
+        instance.options.selectorIncomplete
+      );
       instance._updateStep({
         element: el,
         className: instance.options.classComplete,
@@ -124,13 +134,17 @@ describe('ProgressIndicator', function() {
     it('should not have overflow class', function() {
       stepLabel.textContent = 'Step';
       instance = new ProgressIndicator(element);
-      expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(false);
+      expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(
+        false
+      );
     });
 
     it('should have an overflow class', function() {
       stepLabel.textContent = 'Overflow Ex. 1';
       instance = new ProgressIndicator(element);
-      expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(true);
+      expect(stepLabel.classList.contains('bx--progress-label-overflow')).toBe(
+        true
+      );
     });
 
     it('multi line tooltip should have multi line class', function() {
@@ -168,7 +182,9 @@ describe('ProgressIndicator', function() {
     it('should loop through all step elements with the correct selector', function() {
       const className = instance.options.classStep;
       const steps = instance.getSteps();
-      steps.forEach(step => expect(step.element.classList.contains(className)).toBe(true));
+      steps.forEach(step =>
+        expect(step.element.classList.contains(className)).toBe(true)
+      );
     });
 
     it('should return an Array of objects with "element" and "index" keynames', function() {
@@ -257,8 +273,12 @@ describe('ProgressIndicator', function() {
         .map(step => step)
         .filter(step => step.index < 2)[0];
 
-      expect(previousStep.element.classList.contains(instance.options.classComplete)).toBe(true);
-      expect(previousStep.element.classList.contains(instance.options.classCurrent)).toBe(false);
+      expect(
+        previousStep.element.classList.contains(instance.options.classComplete)
+      ).toBe(true);
+      expect(
+        previousStep.element.classList.contains(instance.options.classCurrent)
+      ).toBe(false);
     });
 
     it('should set state of next steps to incomplete', function() {
@@ -269,9 +289,15 @@ describe('ProgressIndicator', function() {
         .map(step => step)
         .filter(step => step.index > 2)[0];
 
-      expect(nextStep.element.classList.contains(instance.options.classIncomplete)).toBe(true);
-      expect(nextStep.element.classList.contains(instance.options.classComplete)).toBe(false);
-      expect(nextStep.element.classList.contains(instance.options.classCurrent)).toBe(false);
+      expect(
+        nextStep.element.classList.contains(instance.options.classIncomplete)
+      ).toBe(true);
+      expect(
+        nextStep.element.classList.contains(instance.options.classComplete)
+      ).toBe(false);
+      expect(
+        nextStep.element.classList.contains(instance.options.classCurrent)
+      ).toBe(false);
     });
 
     afterEach(function() {

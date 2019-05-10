@@ -38,14 +38,26 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   _hookActions = tileClass => {
     const isExpandable = this.tileType === 'expandable';
     if (isExpandable) {
-      const aboveTheFold = this.element.querySelector(this.options.selectorAboveTheFold);
-      const getStyle = this.element.ownerDocument.defaultView.getComputedStyle(this.element, null);
-      const tilePaddingTop = parseInt(getStyle.getPropertyValue('padding-top'), 10);
-      const tilePaddingBottom = parseInt(getStyle.getPropertyValue('padding-bottom'), 10);
+      const aboveTheFold = this.element.querySelector(
+        this.options.selectorAboveTheFold
+      );
+      const getStyle = this.element.ownerDocument.defaultView.getComputedStyle(
+        this.element,
+        null
+      );
+      const tilePaddingTop = parseInt(
+        getStyle.getPropertyValue('padding-top'),
+        10
+      );
+      const tilePaddingBottom = parseInt(
+        getStyle.getPropertyValue('padding-bottom'),
+        10
+      );
       const tilePadding = tilePaddingTop + tilePaddingBottom;
       if (aboveTheFold) {
         this.tileHeight = this.element.getBoundingClientRect().height;
-        this.atfHeight = aboveTheFold.getBoundingClientRect().height + tilePadding;
+        this.atfHeight =
+          aboveTheFold.getBoundingClientRect().height + tilePadding;
         this.element.style.maxHeight = `${this.atfHeight}px`;
       }
 
@@ -77,8 +89,12 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   };
 
   _setTileHeight = () => {
-    const isExpanded = this.element.classList.contains(this.options.classExpandedTile);
-    this.element.style.maxHeight = isExpanded ? `${this.tileHeight}px` : `${this.atfHeight}px`;
+    const isExpanded = this.element.classList.contains(
+      this.options.classExpandedTile
+    );
+    this.element.style.maxHeight = isExpanded
+      ? `${this.tileHeight}px`
+      : `${this.atfHeight}px`;
   };
 
   release() {
