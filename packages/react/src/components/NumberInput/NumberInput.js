@@ -511,7 +511,7 @@ class NumberInput extends Component {
         const { disabled, onClick, onChange } = this.props;
         if (disabled) {
           // `<PresentationalNumberInput>` takes care of preventing event being fired in disabled state.
-          // The code here is for simiulated testing
+          // The code here is for simulated testing
           return;
         }
         if (evt.type === 'click') {
