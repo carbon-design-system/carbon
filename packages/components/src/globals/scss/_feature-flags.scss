@@ -52,7 +52,9 @@ $did-warn-diverged-feature-flags: false !default !global;
     $diverged: ();
 
     @each $name, $value in $src {
-      @if (map-has-key($dst, $name) == true and map-get($dst, $name) != $value) {
+      @if (
+        map-has-key($dst, $name) == true and map-get($dst, $name) != $value
+      ) {
         $diverged: append($diverged, $name);
       }
     }

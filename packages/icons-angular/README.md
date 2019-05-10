@@ -1,19 +1,19 @@
 # @carbon/icons-angular
 
-> Angular components for icons in digital and software products using
-> the Carbon Design System
+> Angular components for icons in digital and software products using the Carbon
+> Design System
 
 ## Getting started
 
-To install `@carbon/icons-angular` in your project, you will need to
-run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/icons-angular` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icons-angular
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following
-command instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
 ```bash
 yarn add @carbon/icons-angular
@@ -21,9 +21,10 @@ yarn add @carbon/icons-angular
 
 ## Usage
 
-Icons in this package support the following sizes: `16`, `20`, `24`,
-and `32` pixels. These sizes refer to the width and height of the
-icon. To reduce bundle sizes each icon is exported as it's own module, you can use an icon component in your project by doing the following:
+Icons in this package support the following sizes: `16`, `20`, `24`, and `32`
+pixels. These sizes refer to the width and height of the icon. To reduce bundle
+sizes each icon is exported as it's own module, you can use an icon component in
+your project by doing the following:
 
 In your module:
 
@@ -59,7 +60,8 @@ Options availiable to all icon components:
 
 [#](#innerClass) **`@Input() innerClass: string;`**
 
-Applies a `classList` to the inner SVG. Use the normal `class` attribute to apply classes to the host element.
+Applies a `classList` to the inner SVG. Use the normal `class` attribute to
+apply classes to the host element.
 
 Example:
 
@@ -87,7 +89,8 @@ Example:
 
 [#](#ariaLabelledby) **`@Input() ariaLabelledby: string;`**
 
-If supplied, should link to an element providing an accessible description of the icon.
+If supplied, should link to an element providing an accessible description of
+the icon.
 
 Example:
 
@@ -108,7 +111,8 @@ Example:
 
 [#](#title) **`@Input() title: string;`**
 
-Adds a `<title>` element to the inner SVG. Most browsers will display this text as a tooltip when the icon is hovered.
+Adds a `<title>` element to the inner SVG. Most browsers will display this text
+as a tooltip when the icon is hovered.
 
 Example:
 
@@ -118,7 +122,9 @@ Example:
 
 [#](#focusable) **`@Input() focusable: boolean;`**
 
-Enables or disables the `focusable` attribute. Set this to explicitly control whether the underlying element should receive focus. Defaults to `false` in most cases.
+Enables or disables the `focusable` attribute. Set this to explicitly control
+whether the underlying element should receive focus. Defaults to `false` in most
+cases.
 
 Example:
 
@@ -128,10 +134,9 @@ Example:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new
-features, or help us improve the project documentation. If you're
-interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)
-! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
 
 ## 📝 License
 

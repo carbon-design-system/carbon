@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { SideNav as UIShellSideNav, SideNavItems, SideNavLink } from 'carbon-components-react/es/components/UIShell';
+import {
+  SideNav as UIShellSideNav,
+  SideNavItems,
+  SideNavLink,
+} from 'carbon-components-react/es/components/UIShell';
 
 /**
  * The side nav.

@@ -4,7 +4,9 @@ No changes.
 
 ### SCSS
 
-The `_list.scss` file is now located at `src/components/list/_list.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_list.scss` file is now located at `src/components/list/_list.scss`. You
+will need to update any `@import` statements for this file to reflect this
+change.
 
 **New**:
 

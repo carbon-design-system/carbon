@@ -9,7 +9,13 @@
 
 const { renderSass } = require('../../../../tools/jest/scss');
 
-const variables = ['carbon--ease-in', 'carbon--ease-out', 'carbon--standard-easing', 'transition--base', 'transition--expansion'];
+const variables = [
+  'carbon--ease-in',
+  'carbon--ease-out',
+  'carbon--standard-easing',
+  'transition--base',
+  'transition--expansion',
+];
 
 describe('motion', () => {
   describe.each(variables)('$%s', async name => {

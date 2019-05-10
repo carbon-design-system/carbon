@@ -4,7 +4,9 @@ No changes.
 
 ### SCSS
 
-The `_tabs.scss` file is now located at `src/components/tabs/_tabs.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_tabs.scss` file is now located at `src/components/tabs/_tabs.scss`. You
+will need to update any `@import` statements for this file to reflect this
+change.
 
 **New**:
 

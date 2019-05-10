@@ -8,13 +8,21 @@ describe('Popup Nav', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         navigationMenuPanel = new NavigationMenuPanel();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
-        navigationMenuPanel = new NavigationMenuPanel(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+        navigationMenuPanel = new NavigationMenuPanel(
+          document.createTextNode('')
+        );
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     afterEach(function() {
@@ -32,8 +40,12 @@ describe('Popup Nav', function() {
 
     beforeAll(function() {
       const range = document.createRange();
-      button = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu-target]');
-      navigationMenu = range.createContextualFragment(UiShellHtml).querySelector('[data-navigation-menu]');
+      button = range
+        .createContextualFragment(UiShellHtml)
+        .querySelector('[data-navigation-menu-target]');
+      navigationMenu = range
+        .createContextualFragment(UiShellHtml)
+        .querySelector('[data-navigation-menu]');
       document.body.appendChild(button);
       document.body.appendChild(navigationMenu);
       options = Object.assign(Object.create(NavigationMenuPanel.options), {
@@ -41,7 +53,8 @@ describe('Popup Nav', function() {
         attribInitTarget: 'data-navigation-menu-target',
         selectorShellNavSubmenu: '.bx--navigation__category-toggle',
         selectorShellNavLink: '.bx--navigation-link',
-        selectorShellNavLinkCurrent: '.bx--navigation-item--active,.bx--navigation__category-item--active',
+        selectorShellNavLinkCurrent:
+          '.bx--navigation-item--active,.bx--navigation__category-item--active',
         selectorShellNavItem: '.bx--navigation-item',
         selectorShellNavCategory: '.bx--navigation__category',
         classShellNavItemActive: 'bx--navigation-item--active',
@@ -58,14 +71,18 @@ describe('Popup Nav', function() {
 
     it('Should open the popup nav on button click', function() {
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(button.classList.contains('bx--header__action--active')).toBe(true);
+      expect(button.classList.contains('bx--header__action--active')).toBe(
+        true
+      );
       expect(navigationMenu.hasAttribute('hidden')).toBe(false);
     });
 
     it('Should close an open popup nav on button click', function() {
       navigationMenu.removeAttribute('hidden');
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(button.classList.contains('bx--header__action--active')).toBe(false);
+      expect(button.classList.contains('bx--header__action--active')).toBe(
+        false
+      );
       expect(navigationMenu.hasAttribute('hidden')).toBe(true);
     });
 

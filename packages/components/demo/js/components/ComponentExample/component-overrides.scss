@@ -80,7 +80,9 @@
     min-width: 20rem;
   }
 
-  & .detail-page-header .bx--detail-page-header.bx--detail-page-header--no-tabs {
+  &
+    .detail-page-header
+    .bx--detail-page-header.bx--detail-page-header--no-tabs {
     position: absolute;
     left: 2rem;
     top: 2rem;
@@ -95,7 +97,9 @@
     max-width: 700px;
   }
 
-  & .detail-page-header .bx--detail-page-header.bx--detail-page-header--with-tabs {
+  &
+    .detail-page-header
+    .bx--detail-page-header.bx--detail-page-header--with-tabs {
     position: absolute;
     left: 2rem;
     top: 2rem;

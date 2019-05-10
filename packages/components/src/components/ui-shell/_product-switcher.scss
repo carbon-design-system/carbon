@@ -162,7 +162,9 @@
     background: $shell-header-bg-04;
   }
 
-  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover > svg {
+  .#{$prefix}--product-switcher__product-list
+    .#{$prefix}--overflow-menu:hover
+    > svg {
     fill: $shell-header-text-02;
   }
 
@@ -172,7 +174,8 @@
     box-shadow: inset 0 0 0 3px $shell-header-link;
   }
 
-  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu-options__option:hover {
+  .#{$prefix}--product-switcher__product-list
+    .#{$prefix}--overflow-menu-options__option:hover {
     background: $shell-header-bg-03;
   }
 

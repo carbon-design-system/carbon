@@ -15,13 +15,19 @@ describe('Test Copy Button', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new CopyButton();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new CopyButton(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
   });
 
@@ -38,7 +44,9 @@ describe('Test Copy Button', function() {
       document.body.appendChild(container);
       element = document.querySelector('[data-copy-btn]');
       feedbackTooltip = document.querySelector('[data-feedback]');
-      feedbackTooltipInitialState = feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed');
+      feedbackTooltipInitialState = feedbackTooltip.classList.contains(
+        'bx--btn--copy__feedback--displayed'
+      );
       copyBtn = new CopyButton(element);
     });
 
@@ -52,14 +60,20 @@ describe('Test Copy Button', function() {
 
     it('Should show the feedback tooltip on click', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).toBe(true);
+      expect(
+        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(true);
     });
 
     it('Should hide the feedback tooltip after specified timeout value', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).toBe(true);
+      expect(
+        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(true);
       jasmine.clock().tick(2000);
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).toBe(false);
+      expect(
+        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(false);
     });
 
     afterEach(function() {

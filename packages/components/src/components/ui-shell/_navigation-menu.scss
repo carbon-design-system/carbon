@@ -159,7 +159,9 @@
     position: relative;
   }
 
-  .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-item > a.#{$prefix}--navigation-link {
+  .#{$prefix}--navigation-item--icon
+    .#{$prefix}--navigation__category-item
+    > a.#{$prefix}--navigation-link {
     padding-left: mini-units(7);
   }
 
@@ -174,20 +176,25 @@
     background-color: $ibm-color__blue-60;
   }
 
-  .#{$prefix}--navigation__category-item--active > a.#{$prefix}--navigation-link {
+  .#{$prefix}--navigation__category-item--active
+    > a.#{$prefix}--navigation-link {
     font-weight: 600;
     color: $ibm-color__white-0;
   }
 
-  .#{$prefix}--navigation__category--expanded .#{$prefix}--navigation__category-title {
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-title {
     font-weight: 600;
   }
 
-  .#{$prefix}--navigation__category--expanded .#{$prefix}--navigation__category-title > svg {
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-title
+    > svg {
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--navigation__category--expanded .#{$prefix}--navigation__category-items {
+  .#{$prefix}--navigation__category--expanded
+    .#{$prefix}--navigation__category-items {
     display: block;
     visibility: inherit;
   }

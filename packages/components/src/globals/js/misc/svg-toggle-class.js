@@ -10,7 +10,9 @@ function svgToggleClass(svg, name, forceAdd) {
     .getAttribute('class')
     .trim()
     .split(/\s+/);
-  const uniqueList = Object.keys(list.reduce((o, item) => Object.assign(o, { [item]: 1 }), {}));
+  const uniqueList = Object.keys(
+    list.reduce((o, item) => Object.assign(o, { [item]: 1 }), {})
+  );
   const index = uniqueList.indexOf(name);
   const found = index >= 0;
   const add = forceAdd === undefined ? !found : forceAdd;

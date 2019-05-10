@@ -74,7 +74,8 @@
       position: absolute;
       display: block;
       background-color: $ui-01;
-      transition: background-color $duration--fast-02 motion(entrance, productive);
+      transition: background-color $duration--fast-02
+        motion(entrance, productive);
     }
   }
 
@@ -160,7 +161,8 @@
     color: $text-02;
     max-width: 11.25rem;
     transition: outline $duration--fast-02 motion(entrance, productive),
-      background-color $duration--fast-02 motion(entrance, productive), color $duration--fast-02 motion(entrance, productive);
+      background-color $duration--fast-02 motion(entrance, productive),
+      color $duration--fast-02 motion(entrance, productive);
 
     &:hover {
       color: $text-01;
@@ -197,8 +199,10 @@
     border-top: 1px solid $ui-03;
   }
 
-  .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:hover,
-  .#{$prefix}--overflow-menu-options__option--danger .#{$prefix}--overflow-menu-options__btn:focus {
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:hover,
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
     background-color: $support-01;
   }
@@ -208,7 +212,8 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn {
     color: $disabled-02;
     pointer-events: none;
 
@@ -220,7 +225,9 @@
     }
   }
 
-  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn svg {
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn
+    svg {
     fill: $disabled-02;
   }
 

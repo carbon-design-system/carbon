@@ -139,10 +139,16 @@ $feature-flags: (grid: true);
 
       for (const breakpoint of breakpoints) {
         expect(output).toEqual(expect.stringContaining(`col-${breakpoint}-12`));
-        expect(output).not.toEqual(expect.stringContaining(`col-${breakpoint}-13`));
+        expect(output).not.toEqual(
+          expect.stringContaining(`col-${breakpoint}-13`)
+        );
 
-        expect(output).toEqual(expect.stringContaining(`--offset-${breakpoint}-11`));
-        expect(output).not.toEqual(expect.stringContaining(`--offset-${breakpoint}-12`));
+        expect(output).toEqual(
+          expect.stringContaining(`--offset-${breakpoint}-11`)
+        );
+        expect(output).not.toEqual(
+          expect.stringContaining(`--offset-${breakpoint}-12`)
+        );
       }
     });
 
@@ -156,10 +162,16 @@ $feature-flags: (grid: true, grid-columns-16: true);
 
       for (const breakpoint of breakpoints) {
         expect(output).toEqual(expect.stringContaining(`col-${breakpoint}-16`));
-        expect(output).not.toEqual(expect.stringContaining(`col-${breakpoint}-17`));
+        expect(output).not.toEqual(
+          expect.stringContaining(`col-${breakpoint}-17`)
+        );
 
-        expect(output).toEqual(expect.stringContaining(`--offset-${breakpoint}-15`));
-        expect(output).not.toEqual(expect.stringContaining(`--offset-${breakpoint}-16`));
+        expect(output).toEqual(
+          expect.stringContaining(`--offset-${breakpoint}-15`)
+        );
+        expect(output).not.toEqual(
+          expect.stringContaining(`--offset-${breakpoint}-16`)
+        );
       }
     });
   });

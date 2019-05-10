@@ -1,8 +1,12 @@
 ### HTML
 
-Updating HTML pertains only to SVG icon. Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Updating HTML pertains only to SVG icon. Icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
 
-Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/accordion/code) site. React and other framework variants should reflect the change automatically.
+Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/accordion/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **New Markup**:
 
@@ -26,7 +30,10 @@ Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https
 
 ```html
 <svg class="bx--accordion__arrow" width="7" height="12" viewBox="0 0 7 12">
-  <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
+  <path
+    fill-rule="nonzero"
+    d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+  />
 </svg>
 ```
 

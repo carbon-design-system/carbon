@@ -173,7 +173,8 @@
   }
 
   .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox:indeterminate:disabled + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate:disabled
+    + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
     background-color: $disabled-02;

@@ -1,8 +1,13 @@
 ### FAQ
 
-The Time Picker consists of a mandatory input field and two optional [Inline Select](http://carbondesignsystem.com/components/select/code) components. The Inline Select components are only used when the user is required to select either a time zone and/or when specifying AM/PM is required.
+The Time Picker consists of a mandatory input field and two optional
+[Inline Select](http://carbondesignsystem.com/components/select/code)
+components. The Inline Select components are only used when the user is required
+to select either a time zone and/or when specifying AM/PM is required.
 
-The Time Picker uses form validation, and the valid pattern should be specified in the pattern attribute of the input field. You can read more about patterns [here](https://www.w3schools.com/tags/att_input_pattern.asp).
+The Time Picker uses form validation, and the valid pattern should be specified
+in the pattern attribute of the input field. You can read more about patterns
+[here](https://www.w3schools.com/tags/att_input_pattern.asp).
 
 Here are some examples:
 
@@ -16,4 +21,6 @@ Here are some examples:
 
 #### Localization
 
-In order for the component to be localized, please make sure you update the validation pattern, the AM/PM select component (if it is needed), and the time zone select component (if it is needed).
+In order for the component to be localized, please make sure you update the
+validation pattern, the AM/PM select component (if it is needed), and the time
+zone select component (if it is needed).

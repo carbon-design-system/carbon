@@ -51,7 +51,9 @@
     height: 100%;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier {
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier {
     height: $layout-04;
     width: $layout-04;
     padding: $spacing-md;
@@ -61,15 +63,21 @@
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier:focus {
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:focus {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-input {
     border: none;
     height: 100%;
     visibility: hidden;
@@ -77,7 +85,9 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search .#{$prefix}--search-close {
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search
+    .#{$prefix}--search-close {
     height: $layout-04;
     width: $layout-04;
   }
@@ -94,29 +104,44 @@
     width: 100%;
   }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input {
     padding-left: $spacing-3xl;
     visibility: visible;
   }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input:focus {
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input:focus {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input:focus + .#{$prefix}--search-close {
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input:focus
+    + .#{$prefix}--search-close {
     border: none;
     box-shadow: none;
     outline: none;
   }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-input:not(:placeholder-shown) {
     background: $hover-field;
     border: none;
   }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-magnifier:focus,
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-magnifier:active,
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-magnifier:hover {
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:focus,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:active,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier:hover {
     outline: none;
     border: none;
     background: transparent;
@@ -126,9 +151,14 @@
   //SEARCH CLOSE BUTTON
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close,
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close:hover,
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-close,
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search .#{$prefix}--search-close:hover {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search-close:hover,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-close,
+  .#{$prefix}--toolbar-search-container-active
+    .#{$prefix}--search
+    .#{$prefix}--search-close:hover {
     border: none; //to-do: is there a spec for close button on hover?
     background-color: transparent;
   }
@@ -197,7 +227,8 @@
     position: relative;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent + .#{$prefix}--toolbar-content {
+  .#{$prefix}--toolbar-search-container-persistent
+    + .#{$prefix}--toolbar-content {
     position: relative;
     width: auto;
   }
@@ -206,30 +237,44 @@
     position: initial;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-magnifier {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-magnifier {
     left: $spacing-md;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input {
     height: $layout-04;
     padding-left: $spacing-3xl;
     border: none;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:focus:not([disabled]) {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:focus:not([disabled]) {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:hover:not([disabled]) {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:hover:not([disabled]) {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:active:not([disabled]),
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-input:not(:placeholder-shown) {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:active:not([disabled]),
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-input:not(:placeholder-shown) {
     background: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search .#{$prefix}--search-close {
+  .#{$prefix}--toolbar-search-container-persistent
+    .#{$prefix}--search
+    .#{$prefix}--search-close {
     height: $layout-04;
     width: $layout-04;
   }
@@ -258,7 +303,8 @@
     will-change: transform;
     background-color: $interactive-01;
     transition: transform $duration--fast-02 motion(standard, productive),
-      visibility $duration--fast-02 motion(standard, productive), opacity $duration--fast-02 motion(standard, productive);
+      visibility $duration--fast-02 motion(standard, productive),
+      opacity $duration--fast-02 motion(standard, productive);
     transform: translate3d(0, 48px, 0);
     pointer-events: none;
     visibility: hidden;

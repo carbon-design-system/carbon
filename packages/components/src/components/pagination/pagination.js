@@ -11,7 +11,11 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class Pagination extends mixin(createComponent, initComponentBySearch, handles) {
+class Pagination extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * Pagination component.
    * @extends CreateComponent

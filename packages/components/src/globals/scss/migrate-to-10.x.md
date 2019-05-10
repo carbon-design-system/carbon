@@ -1,6 +1,7 @@
 # `src/globals/scss`
 
-**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be _removed_ soon after the initial `v10` release.
+**IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be
+_removed_ soon after the initial `v10` release.
 
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -38,7 +39,8 @@
 
 ## `_colors.scss`
 
-`$color__` variables are deprecated. Migration table available [here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
+`$color__` variables are deprecated. Migration table available
+[here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
 
 ## `_css--body.scss`
 
@@ -85,8 +87,8 @@ No change
 
 ## `_css--typography.scss`
 
-Classes have been replaced with Type styles. Below is
-a rough conversion table if you would still like to use the classes.
+Classes have been replaced with Type styles. Below is a rough conversion table
+if you would still like to use the classes.
 
 | Type class | v9   | v10                     |
 | ---------- | ---- | ----------------------- |
@@ -103,7 +105,8 @@ a rough conversion table if you would still like to use the classes.
 | Legal      | 11px | `caption-01`            |
 | Paragraph  | 16px | `body-long-02`          |
 
-For full details, please check our [our v10 migration guide for type.](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-type.md)
+For full details, please check our
+[our v10 migration guide for type.](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-type.md)
 
 ## `_feature-flags.scss`
 
@@ -164,11 +167,13 @@ No change
 
 ## `_motion.scss`
 
-New in v10. For full details, please check out our [migration guide](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-motion.md).
+New in v10. For full details, please check out our
+[migration guide](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-motion.md).
 
 ## `_spacing.scss`
 
-Spacing scale no longer uses t-shirt sizing, instead uses a scale approach (ref: https://github.com/IBM/carbon-elements/blob/v0.0.1-beta.1/docs/migration/10.x-layout.md#migrating).
+Spacing scale no longer uses t-shirt sizing, instead uses a scale approach (ref:
+https://github.com/IBM/carbon-elements/blob/v0.0.1-beta.1/docs/migration/10.x-layout.md#migrating).
 
 | v9          | v10 (spacing scale step) |
 | ----------- | ------------------------ |
@@ -192,7 +197,8 @@ Spacing scale no longer uses t-shirt sizing, instead uses a scale approach (ref:
 
 ## `_theme-tokens.scss`
 
-Migration table available [here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
+Migration table available
+[here](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-color.md).
 
 ## `_theme.scss`
 
@@ -216,7 +222,8 @@ No change
 | `$font-size-map`       | ☠️ Deprecated                                               |
 | `font-size` mixin      | ☠️ Deprecated                                               |
 
-For full details, please check our [our v10 migration guide for type.](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-type.md)
+For full details, please check our
+[our v10 migration guide for type.](https://github.com/IBM/carbon-elements/blob/master/docs/migration/10.x-type.md)
 
 ## `_vars.scss`
 

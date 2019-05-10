@@ -295,23 +295,28 @@
     color: $text-01;
   }
 
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled .#{$prefix}--dropdown-text {
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
+    .#{$prefix}--dropdown-text {
     color: $disabled-02;
   }
 
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus .#{$prefix}--dropdown-text {
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
+    .#{$prefix}--dropdown-text {
     outline: 0;
   }
 
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown__invalid-icon {
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown__invalid-icon {
     right: rem(32px);
   }
 
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid .#{$prefix}--dropdown-text {
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown-text {
     padding-right: rem(56px);
   }
 
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
+    .#{$prefix}--dropdown-list {
     @include layer('overlay');
   }
 

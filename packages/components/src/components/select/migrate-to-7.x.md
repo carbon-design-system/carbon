@@ -4,7 +4,9 @@ No changes.
 
 ### SCSS
 
-The `_select.scss` file is now located at `src/components/select/_select.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_select.scss` file is now located at `src/components/select/_select.scss`.
+You will need to update any `@import` statements for this file to reflect this
+change.
 
 **New**:
 

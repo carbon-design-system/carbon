@@ -10,13 +10,19 @@ describe('Test modal', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         modal = new Modal();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         modal = new Modal(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
@@ -29,7 +35,11 @@ describe('Test modal', function() {
         selectorInit: '[data-modal]',
         selectorModalClose: '[data-modal-close]',
         selectorPrimaryFocus: '[data-modal-primary-focus]',
-        selectorsFloatingMenus: ['.bx--overflow-menu-options', '.bx--tooltip', '.flatpickr-calendar'],
+        selectorsFloatingMenus: [
+          '.bx--overflow-menu-options',
+          '.bx--tooltip',
+          '.flatpickr-calendar',
+        ],
         classVisible: 'is-visible',
         attribInitTarget: 'data-modal-target',
         initEventNames: ['click'],
@@ -57,7 +67,9 @@ describe('Test modal', function() {
       container = document.createElement('div');
       container.innerHTML = ModalHtml;
       // Reset primary focus eleemnt for testing
-      delete container.querySelector('[data-modal-primary-focus]').dataset.modalPrimaryFocus;
+      delete container.querySelector(
+        '[data-modal-primary-focus]'
+      ).dataset.modalPrimaryFocus;
       document.body.appendChild(container);
       element = container.querySelector('[data-modal]');
     });
@@ -69,7 +81,10 @@ describe('Test modal', function() {
     it("Should sanity check show()'s arguments", function() {
       expect(() => {
         modal.show({});
-      }).toThrowError(TypeError, 'DOM Node should be given for launching element.');
+      }).toThrowError(
+        TypeError,
+        'DOM Node should be given for launching element.'
+      );
     });
 
     it('Should have show() do nothing if already visible', function() {
@@ -85,7 +100,9 @@ describe('Test modal', function() {
       const spy = jasmine.createSpy();
       events.on(modal.element, 'modal-shown', spy);
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(spy).toHaveBeenCalledTimes(1);
       expect(element.classList.contains('is-visible')).toBe(true);
     });
@@ -94,21 +111,30 @@ describe('Test modal', function() {
       const spy = jasmine.createSpy();
       events.on(modal.element, 'modal-shown', spy);
       modal.show(modal.element);
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
-      expect(spy.calls.argsFor(0)[0].detail.launchingElement, 'Launching element for modal-shown event').toBe(modal.element);
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
+      expect(
+        spy.calls.argsFor(0)[0].detail.launchingElement,
+        'Launching element for modal-shown event'
+      ).toBe(modal.element);
     });
 
     it('Should call callback of show() method after it finishes', function() {
       const spy = jasmine.createSpy();
       modal.show(spy);
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('Should focus on modal upon showning', function() {
       spyOn(modal.element, 'focus');
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(modal.element.focus).toHaveBeenCalledTimes(1);
     });
 
@@ -118,7 +144,9 @@ describe('Test modal', function() {
       primaryButton.dataset.modalPrimaryFocus = '';
       try {
         modal.show();
-        modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+        modal.element.dispatchEvent(
+          new CustomEvent('transitionend', { bubbles: true })
+        );
         expect(primaryButton.focus).toHaveBeenCalledTimes(1);
       } finally {
         delete primaryButton.dataset.modalPrimaryFocus;
@@ -128,21 +156,28 @@ describe('Test modal', function() {
     it("Should sanity check hide()'s arguments", function() {
       expect(() => {
         modal.hide({});
-      }).toThrowError(TypeError, 'DOM Node should be given for launching element.');
+      }).toThrowError(
+        TypeError,
+        'DOM Node should be given for launching element.'
+      );
     });
 
     it('Should have hide() not hide if not visible', function() {
       const spy = jasmine.createSpy();
       events.on(element, 'modal-beinghidden', spy);
       modal.hide();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(element.classList.contains('is-visible')).toBe(false);
       expect(spy).not.toHaveBeenCalled();
     });
 
     it('Should have hide() method hide modal', function() {
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       const spy = jasmine.createSpy();
       events.on(element, 'modal-beinghidden', spy);
       modal.hide();
@@ -152,20 +187,31 @@ describe('Test modal', function() {
 
     it('Should have hide() method support providing a DOM element instead of an event', function() {
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       const spy = jasmine.createSpy();
       events.on(modal.element, 'modal-hidden', spy);
       modal.hide(modal.element);
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
-      expect(spy.calls.argsFor(0)[0].detail.launchingElement, 'Launching element for modal-hidden event').toBe(modal.element);
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
+      expect(
+        spy.calls.argsFor(0)[0].detail.launchingElement,
+        'Launching element for modal-hidden event'
+      ).toBe(modal.element);
     });
 
     it('Should call callback of hide() method after it finishes', function() {
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       const spy = jasmine.createSpy();
       modal.hide(spy);
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
@@ -208,60 +254,106 @@ describe('Test modal', function() {
           which: 27,
         })
       );
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(element.classList.contains('is-visible')).toBe(false);
       expect(spyBeforeHidden).toHaveBeenCalled();
       expect(spyAfterHidden).toHaveBeenCalled();
       const eventDataBeforeHidden = spyBeforeHidden.calls.argsFor(0)[0].detail;
       const eventDataAfterHidden = spyAfterHidden.calls.argsFor(0)[0].detail;
-      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').toBe(element.ownerDocument.body);
-      expect(eventDataBeforeHidden.launchingEvent.target, 'Launching event for modal-beinghidden').toBe(
-        element.ownerDocument.body
-      );
-      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').toBe(element.ownerDocument.body);
-      expect(eventDataAfterHidden.launchingEvent.target, 'Launching event for modal-hidden').toBe(element.ownerDocument.body);
+      expect(
+        eventDataBeforeHidden.launchingElement,
+        'Launching element for modal-beinghidden'
+      ).toBe(element.ownerDocument.body);
+      expect(
+        eventDataBeforeHidden.launchingEvent.target,
+        'Launching event for modal-beinghidden'
+      ).toBe(element.ownerDocument.body);
+      expect(
+        eventDataAfterHidden.launchingElement,
+        'Launching element for modal-hidden'
+      ).toBe(element.ownerDocument.body);
+      expect(
+        eventDataAfterHidden.launchingEvent.target,
+        'Launching event for modal-hidden'
+      ).toBe(element.ownerDocument.body);
     });
 
     it('Should handle any elements with data-modal-close attribute to close the modal', function() {
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       const spyBeforeHidden = jasmine.createSpy();
       const spyAfterHidden = jasmine.createSpy();
       events.on(modal.element, 'modal-beinghidden', spyBeforeHidden);
       events.on(modal.element, 'modal-hidden', spyAfterHidden);
       const closeButton = element.querySelector('[data-modal-close]');
       closeButton.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
-      expect(element.classList.contains('is-visible'), 'Visible state').toBe(false);
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
+      expect(element.classList.contains('is-visible'), 'Visible state').toBe(
+        false
+      );
       expect(spyBeforeHidden).toHaveBeenCalled();
       expect(spyAfterHidden).toHaveBeenCalled();
       const eventDataBeforeHidden = spyBeforeHidden.calls.argsFor(0)[0].detail;
       const eventDataAfterHidden = spyAfterHidden.calls.argsFor(0)[0].detail;
-      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').toBe(closeButton);
-      expect(eventDataBeforeHidden.launchingEvent.target, 'Launching event for modal-beinghidden').toBe(closeButton);
-      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').toBe(closeButton);
-      expect(eventDataAfterHidden.launchingEvent.target, 'Launching event for modal-hidden').toBe(closeButton);
+      expect(
+        eventDataBeforeHidden.launchingElement,
+        'Launching element for modal-beinghidden'
+      ).toBe(closeButton);
+      expect(
+        eventDataBeforeHidden.launchingEvent.target,
+        'Launching event for modal-beinghidden'
+      ).toBe(closeButton);
+      expect(
+        eventDataAfterHidden.launchingElement,
+        'Launching element for modal-hidden'
+      ).toBe(closeButton);
+      expect(
+        eventDataAfterHidden.launchingEvent.target,
+        'Launching event for modal-hidden'
+      ).toBe(closeButton);
     });
 
     it('Should handle any click outside the modal element to close the modal', function() {
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       const spyBeforeHidden = jasmine.createSpy();
       const spyAfterHidden = jasmine.createSpy();
       events.on(modal.element, 'modal-beinghidden', spyBeforeHidden);
       events.on(modal.element, 'modal-hidden', spyAfterHidden);
       const containerArea = document.querySelector('.bx--modal');
       containerArea.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       expect(element.classList.contains('is-visible')).toBe(false);
       expect(spyBeforeHidden).toHaveBeenCalled();
       expect(spyAfterHidden).toHaveBeenCalled();
       const eventDataBeforeHidden = spyBeforeHidden.calls.argsFor(0)[0].detail;
       const eventDataAfterHidden = spyAfterHidden.calls.argsFor(0)[0].detail;
-      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').toBe(element);
-      expect(eventDataBeforeHidden.launchingEvent.target, 'Launching event for modal-beinghidden').toBe(element);
-      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').toBe(element);
-      expect(eventDataAfterHidden.launchingEvent.target, 'Launching event for modal-hidden').toBe(element);
+      expect(
+        eventDataBeforeHidden.launchingElement,
+        'Launching element for modal-beinghidden'
+      ).toBe(element);
+      expect(
+        eventDataBeforeHidden.launchingEvent.target,
+        'Launching event for modal-beinghidden'
+      ).toBe(element);
+      expect(
+        eventDataAfterHidden.launchingElement,
+        'Launching element for modal-hidden'
+      ).toBe(element);
+      expect(
+        eventDataAfterHidden.launchingEvent.target,
+        'Launching event for modal-hidden'
+      ).toBe(element);
     });
 
     afterEach(function() {
@@ -289,7 +381,9 @@ describe('Test modal', function() {
       container = document.createElement('div');
       container.innerHTML = ModalHtml;
       // Reset primary focus eleemnt for testing
-      delete container.querySelector('[data-modal-primary-focus]').dataset.modalPrimaryFocus;
+      delete container.querySelector(
+        '[data-modal-primary-focus]'
+      ).dataset.modalPrimaryFocus;
       document.body.appendChild(container);
       element = container.querySelector('[data-modal]');
       input = document.createElement('input');
@@ -300,7 +394,9 @@ describe('Test modal', function() {
 
     it('Should bring back focus when modal loses focus', async function() {
       modal.show();
-      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      modal.element.dispatchEvent(
+        new CustomEvent('transitionend', { bubbles: true })
+      );
       input.focus();
       expect(element.contains(document.activeElement)).toBe(true);
     });

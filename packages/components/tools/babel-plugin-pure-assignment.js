@@ -46,10 +46,24 @@ module.exports = function convertPureAssignment(babel) {
   const pureAssignmentVisitor = {
     ExpressionStatement(path) {
       const { expression } = path.node;
-      if (expression.type === 'AssignmentExpression' && expression.operator === '=') {
+      if (
+        expression.type === 'AssignmentExpression' &&
+        expression.operator === '='
+      ) {
         const { left, computed, optional } = expression;
-        const comment = left.trailingComments && left.trailingComments.find(item => regexPureClassProperty.test(item.value));
-        if (!computed && !optional && left && left.type === 'MemberExpression' && left.object.type === 'Identifier' && comment) {
+        const comment =
+          left.trailingComments &&
+          left.trailingComments.find(item =>
+            regexPureClassProperty.test(item.value)
+          );
+        if (
+          !computed &&
+          !optional &&
+          left &&
+          left.type === 'MemberExpression' &&
+          left.object.type === 'Identifier' &&
+          comment
+        ) {
           const binding = path.scope.getBinding(left.object.name);
           const { init } = binding.path.node;
           if (
@@ -58,7 +72,11 @@ module.exports = function convertPureAssignment(babel) {
             init.leadingComments &&
             init.leadingComments.some(item => regexPure.test(item.value))
           ) {
-            const list = mapGetOrCreate(this.pureAssignmentsMap, binding, () => []);
+            const list = mapGetOrCreate(
+              this.pureAssignmentsMap,
+              binding,
+              () => []
+            );
             list.push(path.node);
             path.remove();
           }
@@ -78,7 +96,9 @@ module.exports = function convertPureAssignment(babel) {
     VariableDeclarator(path) {
       const { name } = path.node.id;
       const binding = path.scope.getBinding(name);
-      const pureAssignments = this.pureAssignmentsState.pureAssignmentsMap.get(binding);
+      const pureAssignments = this.pureAssignmentsState.pureAssignmentsMap.get(
+        binding
+      );
       if (pureAssignments) {
         const declarator = t.cloneDeep(path.node);
         const { body } = declarator.init.callee.body;
@@ -90,8 +110,12 @@ module.exports = function convertPureAssignment(babel) {
               const clone = t.cloneDeep(node);
               const { left, right } = clone.expression;
               left.object = t.cloneDeep(argument);
-              left.trailingComments = left.trailingComments.filter(item => !regexPureClassProperty.test(item.value));
-              right.leadingComments = right.leadingComments.filter(item => !regexPureClassProperty.test(item.value));
+              left.trailingComments = left.trailingComments.filter(
+                item => !regexPureClassProperty.test(item.value)
+              );
+              right.leadingComments = right.leadingComments.filter(
+                item => !regexPureClassProperty.test(item.value)
+              );
               return clone;
             });
             body.splice(index, 0, ...assignmentsToInsert);

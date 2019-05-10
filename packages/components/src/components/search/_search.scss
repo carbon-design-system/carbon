@@ -123,7 +123,8 @@
     align-items: center;
     justify-content: center;
     transition: opacity $duration--fast-02 motion(standard, productive),
-      background-color $duration--fast-02 motion(standard, productive), outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive),
+      outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
     cursor: pointer;
     visibility: visible;
@@ -159,7 +160,8 @@
       height: calc(100% - 2px);
       width: 2px;
       background-color: $field-01;
-      transition: background-color $duration--fast-02 motion(standard, productive);
+      transition: background-color $duration--fast-02
+        motion(standard, productive);
     }
   }
 
