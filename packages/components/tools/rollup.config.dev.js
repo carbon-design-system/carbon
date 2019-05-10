@@ -42,6 +42,15 @@ module.exports = {
         react: ['Children', 'Component', 'PureComponent', 'Fragment', 'PropTypes', 'createElement', 'isValidElement'],
         'react-dom': ['render'],
         'react-is': ['isForwardRef'],
+        'downshift/node_modules/react': [
+          'Children',
+          'Component',
+          'PureComponent',
+          'Fragment',
+          'PropTypes',
+          'createElement',
+          'isValidElement',
+        ],
       },
     }),
     babel({
