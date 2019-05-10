@@ -2,6 +2,7 @@
 
 exports[`TooltipDefinition should allow the user to specify the direction 1`] = `
 <TooltipDefinition
+  alignment="start"
   className="custom-class"
   direction="top"
   tooltipText="tooltip text"
@@ -17,7 +18,7 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
     </button>
     <div
       aria-label="tooltip text"
-      className="bx--tooltip--definition__top"
+      className="bx--tooltip--definition__top bx--tooltip--definition__align-start"
       id="definition-tooltip-2"
       role="tooltip"
     >
@@ -34,6 +35,7 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
 
 exports[`TooltipDefinition should render 1`] = `
 <TooltipDefinition
+  alignment="start"
   className="custom-class"
   direction="bottom"
   tooltipText="tooltip text"
@@ -49,7 +51,7 @@ exports[`TooltipDefinition should render 1`] = `
     </button>
     <div
       aria-label="tooltip text"
-      className="bx--tooltip--definition__bottom"
+      className="bx--tooltip--definition__bottom bx--tooltip--definition__align-start"
       id="definition-tooltip-1"
       role="tooltip"
     >
