@@ -1,19 +1,40 @@
-# carbon
+<p align="center">
+  <a href="https://www.carbondesignsystem.com">
+    <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
+  </a>
+</p>
+<h1 align="center">
+  Carbon Design System
+</h1>
 
-[![Carbon is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![Build Status](https://circleci.com/gh/carbon-design-system/carbon-components.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
+> Carbon is an open-source design system built by IBM. With the IBM Design
+> Language as its foundation, the system consists of working code, design tools
+> and resources, human interface guidelines, and a vibrant community of
+> contributors.
 
-> The Carbon Design System is a series of individual styles and components, that
-> when combined make beautiful, intuitive designs. These designs are systemic
-> and logical, as they all follow the same universal principles.
+<p align="center">
+  <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
+  </a>
+  <a href="https://circleci.com/gh/carbon-design-system/carbon">
+    <img src="https://circleci.com/gh/carbon-design-system/carbon.svg?style=shield" alt="Build Status" />
+  </a>
+  <a href="https://lernajs.io/">
+    <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
+  </a>
+  <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+  </a>
+</p>
 
 ## Getting started
 
-The Carbon Design System is a collection of packages that help developers and
-designers build digital experiences on the web. We current offer the following
-packages that you can start using today:
+If you're just getting started, check out
+[`carbon-components`](./packages/components). If you're looking for React
+components, take a look at [`carbon-components-react`](./packages/react).
+
+If you're trying to find something specific, here's a full list of packages that
+we support!
 
 | Package name                                  | Description                                                                                                                                         |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
