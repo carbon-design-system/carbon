@@ -32,7 +32,8 @@
 /// @group loading
 @mixin animation__loading--stop {
   // Animate the container
-  animation: rotate-end-p1 700ms $carbon--ease-out forwards, rotate-end-p2 700ms $carbon--ease-out 700ms forwards;
+  animation: rotate-end-p1 700ms $carbon--ease-out forwards,
+    rotate-end-p2 700ms $carbon--ease-out 700ms forwards;
 
   // Animate the stroke
   & svg circle {

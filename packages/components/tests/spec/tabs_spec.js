@@ -12,7 +12,8 @@ describe('Test tabs', function() {
         selectorTrigger: '.bx--tabs-trigger',
         selectorTriggerText: '.bx--tabs-trigger-text',
         selectorButton: '.bx--tabs__nav-item',
-        selectorButtonEnabled: '.bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled)',
+        selectorButtonEnabled:
+          '.bx--tabs__nav-item:not(.bx--tabs__nav-item--disabled)',
         selectorButtonSelected: '.bx--tabs__nav-item--selected',
         selectorLink: '.bx--tabs__nav-link',
         classActive: 'bx--tabs__nav-item--selected',
@@ -83,13 +84,17 @@ describe('Test tabs', function() {
       menuNode.classList.add('bx--tabs__nav--hidden');
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).toBe(false);
-      expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(true);
+      expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(
+        true
+      );
     });
 
     it('Should hide drop down upon hitting trigger button', function() {
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).toBe(true);
-      expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(false);
+      expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(
+        false
+      );
     });
 
     afterEach(function() {
@@ -133,32 +138,54 @@ describe('Test tabs', function() {
     beforeEach(function() {
       buttonNodes.forEach((buttonNode, i) => {
         buttonNode.classList.remove('bx--tabs__nav-item--disabled');
-        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs__nav-item--selected');
+        buttonNode.classList[i === 0 ? 'add' : 'remove'](
+          'bx--tabs__nav-item--selected'
+        );
       });
     });
 
     it('Should update active tab upon clicking', function() {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
-      expect(buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
     });
 
     it('Should skip disabled tab upon right key', function() {
       buttonNodes[1].classList.add('bx--tabs__nav-item--disabled');
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
+      const defaultPrevented = element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 39 })
+      );
       expect(defaultPrevented).toBe(true);
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
     });
 
     it('Should avoid activating disabled tab on click', function() {
       buttonNodes[1].classList.add('bx--tabs__nav-item--disabled');
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
     });
 
     it('Should update currently selected tab item for narrow screen', function() {
@@ -167,28 +194,56 @@ describe('Test tabs', function() {
     });
 
     it('Should update active tab upon right key', function() {
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
+      const defaultPrevented = element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 39 })
+      );
       expect(defaultPrevented).toBe(true);
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
-      expect(buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
     });
 
     it('Should handle out of range index', function() {
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 39 })
+      );
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 39 })
+      );
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 39 })
+      );
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
     });
 
     it('Should update active tab upon left key', function() {
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 37 }));
+      const defaultPrevented = element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 37 })
+      );
       expect(defaultPrevented).toBe(true);
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).toBe(false);
-      expect(buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')).toBe(true);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
     });
 
     it('Should focus on the new active tab upon keyboard navigation', function() {
@@ -197,7 +252,9 @@ describe('Test tabs', function() {
       link.classList.add('bx--tabs__nav-link');
       buttonNodes[1].appendChild(link);
       try {
-        element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
+        element.dispatchEvent(
+          Object.assign(new CustomEvent('keydown'), { which: 39 })
+        );
         expect(link.focus).toHaveBeenCalledTimes(1);
       } finally {
         buttonNodes[1].removeChild(link);

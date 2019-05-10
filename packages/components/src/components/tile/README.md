@@ -27,7 +27,12 @@ Use these modifiers with `.bx--tile` class.
 
 #### Expandable Tiles
 
-The expandable tile consists of two content container, one for the above the fold content and one for the below the fold content. Place the content you want to be displayed in the tile before it is expanded in the above the fold container, and the content that is to be revealed when a tile is expnaded in the below the fold container. The JavaScript attached to the expandable tile will automatically calculate the height needed to display both containers.
+The expandable tile consists of two content container, one for the above the
+fold content and one for the below the fold content. Place the content you want
+to be displayed in the tile before it is expanded in the above the fold
+container, and the content that is to be revealed when a tile is expnaded in the
+below the fold container. The JavaScript attached to the expandable tile will
+automatically calculate the height needed to display both containers.
 
 ```html
 <div data-tile="expandable" class="bx--tile bx--tile--expandable" tabindex="0">
@@ -37,15 +42,21 @@ The expandable tile consists of two content container, one for the above the fol
     </svg>
   </button>
   <div class="bx--tile-content">
-    <span data-tile-atf class="bx--tile-content__above-the-fold"> <!-- Above the fold content here --> </span>
-    <span class="bx--tile-content__below-the-fold"> <!-- Rest of the content here --> </span>
+    <span data-tile-atf class="bx--tile-content__above-the-fold">
+      <!-- Above the fold content here -->
+    </span>
+    <span class="bx--tile-content__below-the-fold">
+      <!-- Rest of the content here -->
+    </span>
   </div>
 </div>
 ```
 
 #### Selectable Tiles
 
-The selectable tile includes a hidden checkbox input element, and the value of the selected tile can be obtained using the same method as with any other checkbox element.
+The selectable tile includes a hidden checkbox input element, and the value of
+the selected tile can be obtained using the same method as with any other
+checkbox element.
 
 #### Clickable Tiles
 

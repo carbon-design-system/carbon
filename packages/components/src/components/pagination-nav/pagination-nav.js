@@ -12,7 +12,11 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class PaginationNav extends mixin(createComponent, initComponentBySearch, handles) {
+class PaginationNav extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * Pagination Nav component
    * @extends CreateComponent
@@ -37,7 +41,9 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    */
   getActivePageNumber = () => {
     let pageNum;
-    const activePageElement = this.element.querySelector(this.options.selectorPageActive);
+    const activePageElement = this.element.querySelector(
+      this.options.selectorPageActive
+    );
     if (activePageElement) {
       pageNum = Number(activePageElement.getAttribute(this.options.attribPage));
     }
@@ -48,8 +54,12 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    * Clear active page attributes
    */
   clearActivePage = evt => {
-    const pageButtonNodeList = this.element.querySelectorAll(this.options.selectorPageButton);
-    const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
+    const pageButtonNodeList = this.element.querySelectorAll(
+      this.options.selectorPageButton
+    );
+    const pageSelectElement = this.element.querySelector(
+      this.options.selectorPageSelect
+    );
     Array.prototype.forEach.call(pageButtonNodeList, el => {
       el.classList.remove(this.options.classActive, this.options.classDisabled);
       el.removeAttribute(this.options.attribActive);
@@ -75,11 +85,17 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
   handleClick = evt => {
     if (!evt.target.getAttribute('aria-disabled') === true) {
       let nextActivePageNumber = this.getActivePageNumber();
-      const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
-      const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
+      const pageElementNodeList = this.element.querySelectorAll(
+        this.options.selectorPageElement
+      );
+      const pageSelectElement = this.element.querySelector(
+        this.options.selectorPageSelect
+      );
       this.clearActivePage(evt);
       if (evt.target.matches(this.options.selectorPageButton)) {
-        nextActivePageNumber = Number(evt.target.getAttribute(this.options.attribPage));
+        nextActivePageNumber = Number(
+          evt.target.getAttribute(this.options.attribPage)
+        );
       }
       if (evt.target.matches(this.options.selectorPagePrevious)) {
         nextActivePageNumber -= 1;
@@ -94,7 +110,10 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
         pageSelectElement.classList.add(this.options.classActive);
         pageSelectElement.setAttribute('aria-current', 'page');
       } else {
-        pageTargetElement.classList.add(this.options.classActive, this.options.classDisabled);
+        pageTargetElement.classList.add(
+          this.options.classActive,
+          this.options.classDisabled
+        );
         pageTargetElement.setAttribute('aria-disabled', true);
         pageTargetElement.setAttribute('aria-current', 'page');
       }
@@ -107,9 +126,13 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    */
   handleSelectChange = evt => {
     this.clearActivePage(evt);
-    const pageSelectElement = this.element.querySelector(this.options.selectorPageSelect);
+    const pageSelectElement = this.element.querySelector(
+      this.options.selectorPageSelect
+    );
     const pageSelectElementOptions = pageSelectElement.options;
-    pageSelectElementOptions[pageSelectElementOptions.selectedIndex].setAttribute(this.options.attribActive, true);
+    pageSelectElementOptions[
+      pageSelectElementOptions.selectedIndex
+    ].setAttribute(this.options.attribActive, true);
     evt.target.setAttribute('aria-current', 'page');
     evt.target.classList.add(this.options.classActive);
     this.setPrevNextStates();
@@ -119,17 +142,25 @@ class PaginationNav extends mixin(createComponent, initComponentBySearch, handle
    * Set Previous and Next button states
    */
   setPrevNextStates = () => {
-    const pageElementNodeList = this.element.querySelectorAll(this.options.selectorPageElement);
+    const pageElementNodeList = this.element.querySelectorAll(
+      this.options.selectorPageElement
+    );
     const totalPages = pageElementNodeList.length;
-    const pageDirectionElementPrevious = this.element.querySelector(this.options.selectorPagePrevious);
-    const pageDirectionElementNext = this.element.querySelector(this.options.selectorPageNext);
+    const pageDirectionElementPrevious = this.element.querySelector(
+      this.options.selectorPagePrevious
+    );
+    const pageDirectionElementNext = this.element.querySelector(
+      this.options.selectorPageNext
+    );
     if (pageDirectionElementPrevious) {
       if (this.getActivePageNumber() <= 1) {
         pageDirectionElementPrevious.setAttribute('aria-disabled', true);
         pageDirectionElementPrevious.classList.add(this.options.classDisabled);
       } else {
         pageDirectionElementPrevious.removeAttribute('aria-disabled');
-        pageDirectionElementPrevious.classList.remove(this.options.classDisabled);
+        pageDirectionElementPrevious.classList.remove(
+          this.options.classDisabled
+        );
       }
     }
     if (pageDirectionElementNext) {

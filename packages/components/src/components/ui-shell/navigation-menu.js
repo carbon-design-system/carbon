@@ -53,7 +53,14 @@ export default class NavigationMenu extends NavigationMenuPanel {
       })
     );
     const hasFocusOut = 'onfocusout' in window;
-    this.manage(on(this.element, hasFocusOut ? 'focusout' : 'blur', this._handleFocusOut, !hasFocusOut));
+    this.manage(
+      on(
+        this.element,
+        hasFocusOut ? 'focusout' : 'blur',
+        this._handleFocusOut,
+        !hasFocusOut
+      )
+    );
   }
 
   /**
@@ -66,15 +73,21 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = [...this.element.querySelectorAll(this.options.selectorFocusableNavItems)];
+    const items = [
+      ...this.element.querySelectorAll(this.options.selectorFocusableNavItems),
+    ];
     const start = this.getCurrentNavigation();
     const getNextItem = old => {
-      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
-      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+      const handleUnderflow = (index, length) =>
+        index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) =>
+        index - (index < length ? 0 : length);
 
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
       const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+      return items[
+        handleUnderflow(handleOverflow(index, items.length), items.length)
+      ];
     };
     getNextItem(start).focus();
   };
@@ -96,8 +109,14 @@ export default class NavigationMenu extends NavigationMenuPanel {
       return;
     }
     // handle up/down arrow keys
-    const matchesNavSubmenu = eventMatches(event, this.options.selectorShellNavSubmenu);
-    const matchesShellNavLink = eventMatches(event, this.options.selectorShellNavLink);
+    const matchesNavSubmenu = eventMatches(
+      event,
+      this.options.selectorShellNavSubmenu
+    );
+    const matchesShellNavLink = eventMatches(
+      event,
+      this.options.selectorShellNavLink
+    );
     if (!matchesNavSubmenu && !matchesShellNavLink) {
       return;
     }
@@ -117,7 +136,9 @@ export default class NavigationMenu extends NavigationMenuPanel {
    */
   _handleFocusOut = event => {
     const nextTargetIsOfSelf =
-      this.element.contains(event.relatedTarget) || event.relatedTarget === this.triggerButton || !event.relatedTarget;
+      this.element.contains(event.relatedTarget) ||
+      event.relatedTarget === this.triggerButton ||
+      !event.relatedTarget;
     const oldTargetIsOfSelf = this.element.contains(event.target);
     if (oldTargetIsOfSelf && !nextTargetIsOfSelf) {
       this.changeState('collapsed');
@@ -126,15 +147,22 @@ export default class NavigationMenu extends NavigationMenuPanel {
   };
 
   changeNavSubmenuState = ({ matchesNavSubmenu, shouldBeCollapsed }) => {
-    const shellNavCategory = matchesNavSubmenu.closest(this.options.selectorShellNavCategory);
+    const shellNavCategory = matchesNavSubmenu.closest(
+      this.options.selectorShellNavCategory
+    );
     if (!shellNavCategory) {
       return;
     }
     matchesNavSubmenu.setAttribute('aria-expanded', !shouldBeCollapsed);
-    shellNavCategory.classList.toggle(this.options.classShellNavCategoryExpanded);
-    Array.prototype.forEach.call(shellNavCategory.querySelectorAll(this.options.selectorShellNavLink), item => {
-      item.tabIndex = !shouldBeCollapsed ? 0 : -1;
-    });
+    shellNavCategory.classList.toggle(
+      this.options.classShellNavCategoryExpanded
+    );
+    Array.prototype.forEach.call(
+      shellNavCategory.querySelectorAll(this.options.selectorShellNavLink),
+      item => {
+        item.tabIndex = !shouldBeCollapsed ? 0 : -1;
+      }
+    );
   };
 
   /**
@@ -142,15 +170,31 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * @param {Event} event The event triggering this method
    */
   _handleClick = event => {
-    const matchesNavSubmenu = eventMatches(event, this.options.selectorShellNavSubmenu);
-    const matchesShellNavLink = eventMatches(event, this.options.selectorShellNavLink);
-    const matchesNestedShellNavLink = eventMatches(event, this.options.selectorShellNestedNavLink);
+    const matchesNavSubmenu = eventMatches(
+      event,
+      this.options.selectorShellNavSubmenu
+    );
+    const matchesShellNavLink = eventMatches(
+      event,
+      this.options.selectorShellNavLink
+    );
+    const matchesNestedShellNavLink = eventMatches(
+      event,
+      this.options.selectorShellNestedNavLink
+    );
     if (!matchesNavSubmenu && !matchesShellNavLink) {
       return;
     }
     if (matchesNestedShellNavLink) {
-      [...this.element.querySelectorAll(this.options.selectorShellNavLinkCurrent)].forEach(el => {
-        el.classList.remove(this.options.classShellNavItemActive, this.options.classShellNavLinkCurrent);
+      [
+        ...this.element.querySelectorAll(
+          this.options.selectorShellNavLinkCurrent
+        ),
+      ].forEach(el => {
+        el.classList.remove(
+          this.options.classShellNavItemActive,
+          this.options.classShellNavLinkCurrent
+        );
       });
       matchesNestedShellNavLink
         .closest(this.options.selectorShellNavNestedCategory)
@@ -158,15 +202,25 @@ export default class NavigationMenu extends NavigationMenuPanel {
       return;
     }
     if (matchesNavSubmenu) {
-      const isExpanded = matchesNavSubmenu.getAttribute('aria-expanded') === 'true';
+      const isExpanded =
+        matchesNavSubmenu.getAttribute('aria-expanded') === 'true';
       this.changeNavSubmenuState({ matchesNavSubmenu, isExpanded });
       return;
     }
     if (matchesShellNavLink) {
-      [...this.element.querySelectorAll(this.options.selectorShellNavLinkCurrent)].forEach(el => {
-        el.classList.remove(this.options.classShellNavItemActive, this.options.classShellNavLinkCurrent);
+      [
+        ...this.element.querySelectorAll(
+          this.options.selectorShellNavLinkCurrent
+        ),
+      ].forEach(el => {
+        el.classList.remove(
+          this.options.classShellNavItemActive,
+          this.options.classShellNavLinkCurrent
+        );
       });
-      matchesShellNavLink.closest(this.options.selectorShellNavItem).classList.add(this.options.classShellNavItemActive);
+      matchesShellNavLink
+        .closest(this.options.selectorShellNavItem)
+        .classList.add(this.options.classShellNavItemActive);
     }
   };
 

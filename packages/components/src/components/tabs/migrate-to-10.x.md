@@ -1,6 +1,11 @@
 ### HTML
 
-HTML changes pertain only to the SVG icon for tabs dropdown. Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/tabs/code) site. React and other framework variants should reflect the change automatically.
+HTML changes pertain only to the SVG icon for tabs dropdown. Icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/tabs/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **New Markup**:
 
@@ -22,7 +27,13 @@ HTML changes pertain only to the SVG icon for tabs dropdown. Icon from [`carbon-
 **Old Markup**:
 
 ```html
-<svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+<svg
+  class="bx--dropdown__arrow"
+  width="10"
+  height="5"
+  viewBox="0 0 10 5"
+  fill-rule="evenodd"
+>
   <path d="M10 0L5 5 0 0z"></path>
 </svg>
 ```
@@ -37,4 +48,5 @@ One new class, all other selectors remain unchanged.
 
 ### JavaScript
 
-A new component option, `selectorButtonEnabled` has been added. Please see [`README.md`](./README.md#options) for more details.
+A new component option, `selectorButtonEnabled` has been added. Please see
+[`README.md`](./README.md#options) for more details.

@@ -6,13 +6,19 @@ describe('Test Loading', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Loading();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Loading(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default state to active', function() {
@@ -30,8 +36,14 @@ describe('Test Loading', function() {
   describe('set()', function() {
     it('Should throw if boolean is not passed in', function() {
       const spinner = new Loading(document.createElement('div'));
-      expect(() => spinner.set()).toThrowError(TypeError, 'set expects a boolean.');
-      expect(() => spinner.set('true')).toThrowError(TypeError, 'set expects a boolean.');
+      expect(() => spinner.set()).toThrowError(
+        TypeError,
+        'set expects a boolean.'
+      );
+      expect(() => spinner.set('true')).toThrowError(
+        TypeError,
+        'set expects a boolean.'
+      );
     });
 
     it('Should set state', function() {
@@ -50,10 +62,16 @@ describe('Test Loading', function() {
     it('Should remove and add bx--loading--stop class attribute of DOM element', function() {
       const spinner = new Loading(document.createElement('div'));
       spinner.set(false);
-      expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for stopped state').toBe(true);
+      expect(
+        spinner.element.classList.contains('bx--loading--stop'),
+        'Class for stopped state'
+      ).toBe(true);
 
       spinner.set(true);
-      expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for started state').toBe(false);
+      expect(
+        spinner.element.classList.contains('bx--loading--stop'),
+        'Class for started state'
+      ).toBe(false);
     });
   });
 

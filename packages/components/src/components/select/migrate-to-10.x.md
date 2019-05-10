@@ -1,6 +1,11 @@
 ### HTML
 
-HTML changes pertain only to the icon. Icon from [`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used. Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/select/code) site. React and other framework variants should reflect the change automatically.
+HTML changes pertain only to the icon. Icon from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package is now used.
+Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/select/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **New Markup**:
 
@@ -23,7 +28,9 @@ HTML changes pertain only to the icon. Icon from [`carbon-elements`](https://git
 **Old Markup**:
 
 ```html
-<svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5"><path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" /></svg>
+<svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+  <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+</svg>
 ```
 
 ### SCSS

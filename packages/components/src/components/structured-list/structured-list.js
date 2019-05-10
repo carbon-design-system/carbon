@@ -15,7 +15,11 @@ import on from '../../globals/js/misc/on';
 
 const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
 
-class StructuredList extends mixin(createComponent, initComponentBySearch, handles) {
+class StructuredList extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * StructuredList
    * @extends CreateComponent
@@ -30,7 +34,12 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     super(element, options);
     this.manage(
       on(this.element, 'keydown', evt => {
-        if (evt.which === 37 || evt.which === 38 || evt.which === 39 || evt.which === 40) {
+        if (
+          evt.which === 37 ||
+          evt.which === 38 ||
+          evt.which === 39 ||
+          evt.which === 40
+        ) {
           this._handleKeydownArrow(evt);
         }
         if (evt.which === 13 || evt.which === 32) {
@@ -59,8 +68,12 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   }
 
   _getInput(index) {
-    const rows = toArray(this.element.querySelectorAll(this.options.selectorRow));
-    return this.element.ownerDocument.querySelector(this.options.selectorListInput(rows[index].getAttribute('for')));
+    const rows = toArray(
+      this.element.querySelectorAll(this.options.selectorRow)
+    );
+    return this.element.ownerDocument.querySelector(
+      this.options.selectorListInput(rows[index].getAttribute('for'))
+    );
   }
 
   _handleInputChecked(index) {
@@ -71,8 +84,8 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _handleClick(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(row =>
-      row.classList.remove(this.options.classActive)
+    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(
+      row => row.classList.remove(this.options.classActive)
     );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
@@ -83,14 +96,15 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   _handleKeydownChecked(evt) {
     evt.preventDefault(); // prevent spacebar from scrolling page
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(row =>
-      row.classList.remove(this.options.classActive)
+    toArray(this.element.querySelectorAll(this.options.selectorRow)).forEach(
+      row => row.classList.remove(this.options.classActive)
     );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
       const input =
-        selectedRow.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for'))) ||
-        selectedRow.querySelector('input');
+        selectedRow.querySelector(
+          this.options.selectorListInput(selectedRow.getAttribute('for'))
+        ) || selectedRow.querySelector('input');
       input.checked = true;
     }
   }
@@ -102,7 +116,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     const direction = this._direction(evt);
 
     if (direction && selectedRow !== undefined) {
-      const rows = toArray(this.element.querySelectorAll(this.options.selectorRow));
+      const rows = toArray(
+        this.element.querySelectorAll(this.options.selectorRow)
+      );
       rows.forEach(row => row.classList.remove(this.options.classActive));
       const firstIndex = 0;
       const nextIndex = this._nextIndex(rows, selectedRow, direction);

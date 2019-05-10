@@ -32,20 +32,37 @@ export default function(ToMix) {
      * @returns {Handle} The handle to remove the event listener to handle clicking.
      */
     static init(target = document, options = {}) {
-      const effectiveOptions = Object.assign(Object.create(this.options), options);
-      if (!target || (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE)) {
-        throw new TypeError('DOM document or DOM element should be given to search for and initialize this widget.');
+      const effectiveOptions = Object.assign(
+        Object.create(this.options),
+        options
+      );
+      if (
+        !target ||
+        (target.nodeType !== Node.ELEMENT_NODE &&
+          target.nodeType !== Node.DOCUMENT_NODE)
+      ) {
+        throw new TypeError(
+          'DOM document or DOM element should be given to search for and initialize this widget.'
+        );
       }
-      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      if (
+        target.nodeType === Node.ELEMENT_NODE &&
+        target.matches(effectiveOptions.selectorInit)
+      ) {
         this.create(target, options);
       } else {
         const handles = effectiveOptions.initEventNames.map(name =>
           on(target, name, event => {
-            const launcher = eventMatches(event, `[${effectiveOptions.attribInitTarget}]`);
+            const launcher = eventMatches(
+              event,
+              `[${effectiveOptions.attribInitTarget}]`
+            );
 
             if (launcher) {
               event.delegateTarget = launcher; // eslint-disable-line no-param-reassign
-              const elements = launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget));
+              const elements = launcher.ownerDocument.querySelectorAll(
+                launcher.getAttribute(effectiveOptions.attribInitTarget)
+              );
               if (elements.length > 1) {
                 throw new Error('Target widget must be unique.');
               }

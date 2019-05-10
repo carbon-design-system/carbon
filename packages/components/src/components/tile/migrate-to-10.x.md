@@ -1,6 +1,11 @@
 ### HTML
 
-Minor markup changes in the selectable and expandable tile. Icons from [`carbon-elements`](https://github.com/IBM/carbon-elements) package are now used. Vanilla markup should be migrated to one shown in [carbondesignsystem.com](https://next.carbondesignsystem.com/components/tile/code) site. React and other framework variants should reflect the change automatically.
+Minor markup changes in the selectable and expandable tile. Icons from
+[`carbon-elements`](https://github.com/IBM/carbon-elements) package are now
+used. Vanilla markup should be migrated to one shown in
+[carbondesignsystem.com](https://next.carbondesignsystem.com/components/tile/code)
+site. React and other framework variants should reflect the change
+automatically.
 
 **Things to note**:
 
@@ -29,7 +34,9 @@ bx--tile--selectable
   viewBox="0 0 16 16"
   aria-hidden="true"
 >
-  <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zM7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z"></path>
+  <path
+    d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zM7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z"
+  ></path>
   <path d="M7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z" opacity="0"></path>
 </svg>
 
@@ -69,7 +76,10 @@ bx--tile--selectable
 
 <!-- Expandable svg -->
 <svg width="12" height="7" viewBox="0 0 12 7">
-  <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+  <path
+    fill-rule="nonzero"
+    d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
+  />
 </svg>
 ```
 

@@ -12,7 +12,12 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM, DIRECTION_LEFT, DIRECTION_RIGHT } from '../floating-menu/floating-menu';
+import FloatingMenu, {
+  DIRECTION_TOP,
+  DIRECTION_BOTTOM,
+  DIRECTION_LEFT,
+  DIRECTION_RIGHT,
+} from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
 
@@ -62,7 +67,10 @@ export const getMenuOffset = (menuBody, direction, trigger) => {
   }
   const flip = menuBody.classList.contains(menu.options.classMenuFlip);
 
-  if (triggerButtonPositionProp === 'top' || triggerButtonPositionProp === 'bottom') {
+  if (
+    triggerButtonPositionProp === 'top' ||
+    triggerButtonPositionProp === 'bottom'
+  ) {
     const triggerWidth = trigger.offsetWidth;
     return {
       left: (!flip ? 1 : -1) * (menuWidth / 2 - triggerWidth / 2),
@@ -70,7 +78,10 @@ export const getMenuOffset = (menuBody, direction, trigger) => {
     };
   }
 
-  if (triggerButtonPositionProp === 'left' || triggerButtonPositionProp === 'right') {
+  if (
+    triggerButtonPositionProp === 'left' ||
+    triggerButtonPositionProp === 'right'
+  ) {
     const triggerHeight = trigger.offsetHeight;
     return {
       left: 0,
@@ -81,7 +92,12 @@ export const getMenuOffset = (menuBody, direction, trigger) => {
   return undefined;
 };
 
-class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedShowHideState, handles) {
+class OverflowMenu extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedShowHideState,
+  handles
+) {
   /**
    * Overflow menu.
    * @extends CreateComponent
@@ -111,7 +127,9 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     );
     this.manage(
       on(this.element, 'mousedown', () => {
-        this.wasOpenBeforeClick = element.classList.contains(this.options.classShown);
+        this.wasOpenBeforeClick = element.classList.contains(
+          this.options.classShown
+        );
       })
     );
   }
@@ -130,7 +148,9 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     }
 
     if (!this.optionMenu) {
-      const optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
+      const optionMenu = this.element.querySelector(
+        this.options.selectorOptionMenu
+      );
       if (!optionMenu) {
         throw new Error('Cannot find the target menu.');
       }
@@ -144,13 +164,19 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       });
       this.children.push(this.optionMenu);
     }
-    if (this.optionMenu.element.classList.contains(this.options.classMenuFlip)) {
+    if (
+      this.optionMenu.element.classList.contains(this.options.classMenuFlip)
+    ) {
       this.optionMenu.options.offset = this.options.objMenuOffsetFlip;
     }
 
     // Delegates the action of changing state to the menu.
     // (And thus the before/after shown/hidden events are fired from the menu)
-    this.optionMenu.changeState(state, Object.assign(detail, { delegatorNode: this.element }), callback);
+    this.optionMenu.changeState(
+      state,
+      Object.assign(detail, { delegatorNode: this.element }),
+      callback
+    );
   }
 
   /**
@@ -187,7 +213,10 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    */
   getCurrentNavigation = () => {
     const focused = this.element.ownerDocument.activeElement;
-    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+    return focused.nodeType === Node.ELEMENT_NODE &&
+      focused.matches(this.options.selectorItem)
+      ? focused
+      : null;
   };
 
   /**
@@ -195,17 +224,29 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {number} direction The direction of navigating.
    */
   navigate = direction => {
-    const items = [...this.element.ownerDocument.querySelectorAll(this.options.selectorItem)];
-    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const items = [
+      ...this.element.ownerDocument.querySelectorAll(this.options.selectorItem),
+    ];
+    const start =
+      this.getCurrentNavigation() ||
+      this.element.querySelector(this.options.selectorItemSelected);
     const getNextItem = old => {
-      const handleUnderflow = (index, length) => index + (index >= 0 ? 0 : length);
-      const handleOverflow = (index, length) => index - (index < length ? 0 : length);
+      const handleUnderflow = (index, length) =>
+        index + (index >= 0 ? 0 : length);
+      const handleOverflow = (index, length) =>
+        index - (index < length ? 0 : length);
 
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
       const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+      return items[
+        handleUnderflow(handleOverflow(index, items.length), items.length)
+      ];
     };
-    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+    for (
+      let current = getNextItem(start);
+      current && current !== start;
+      current = getNextItem(current)
+    ) {
       if (
         !current.matches(this.options.selectorItemHidden) &&
         !current.parentNode.matches(this.options.selectorItemHidden) &&
@@ -240,11 +281,15 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       // Enter || Space bar
       case 13:
       case 32: {
-        if (!isExpanded && this.element.ownerDocument.activeElement !== this.element) {
+        if (
+          !isExpanded &&
+          this.element.ownerDocument.activeElement !== this.element
+        ) {
           return;
         }
         const isOfSelf = element.contains(event.target);
-        const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
+        const shouldBeOpen =
+          isOfSelf && !element.classList.contains(options.classShown);
         const state = shouldBeOpen ? 'shown' : 'hidden';
 
         if (isOfSelf) {

@@ -21,13 +21,19 @@ describe('Test Number Input', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new NumberInput();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new NumberInput(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', function() {
@@ -115,7 +121,9 @@ describe('Test Number Input', function() {
       inputNode.value = '1';
       const e = await new Promise(resolve => {
         events.on(document.body, 'change', resolve);
-        downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        downArrowNode.dispatchEvent(
+          new CustomEvent('click', { bubbles: true })
+        );
       });
       await delay(0);
       expect(e.cancelable).toBe(false);

@@ -6,13 +6,19 @@ describe('Dropdown', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Dropdown();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Dropdown(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should not instantiate with "open" stateful modifier class', function() {
@@ -53,7 +59,9 @@ describe('Dropdown', function() {
     it('Should add "open" stateful modifier class', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--dropdown--open')).toBe(true);
-      expect(element.getAttribute('class')).toBe('bx--dropdown bx--dropdown--open');
+      expect(element.getAttribute('class')).toBe(
+        'bx--dropdown bx--dropdown--open'
+      );
     });
 
     it('Should remove "open" stateful modifier class (closed default state)', function() {
@@ -77,31 +85,51 @@ describe('Dropdown', function() {
 
     it('Should open dropdown with enter key', function() {
       spyOn(element, 'focus');
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 13 }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(true);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 13 })
+      );
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(true);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
     it('Should close dropdown with enter key', function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 13 }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(false);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 13 })
+      );
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(false);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
     it('Should open dropdown with space key', function() {
       spyOn(element, 'focus');
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 32 }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(true);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 32 })
+      );
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(true);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
     it('Should close dropdown with space key', function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 32 }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(false);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 32 })
+      );
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(false);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
@@ -113,15 +141,23 @@ describe('Dropdown', function() {
           which: 32,
         })
       );
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(true);
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(true);
       expect(element.focus, 'Focus requested').not.toHaveBeenCalled();
     });
 
     it('Should close dropdown with ESC key', function() {
       spyOn(element, 'focus');
       element.classList.add('bx--dropdown--open');
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(false);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 27 })
+      );
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(false);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
@@ -133,21 +169,32 @@ describe('Dropdown', function() {
           which: 27,
         })
       );
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(false);
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(false);
       expect(element.focus, 'Focus requested').toHaveBeenCalledTimes(1);
     });
 
     it('Should not open dropdown with ESC key', function() {
       spyOn(element, 'focus');
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(false);
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 27 })
+      );
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(false);
       expect(element.focus, 'Focus requested').not.toHaveBeenCalled();
     });
 
     it('Should not open when the disabled class is applied', function() {
       element.classList.add('bx--dropdown--disabled');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.classList.contains('bx--dropdown--open'), 'Open state').toBe(false);
+      expect(
+        element.classList.contains('bx--dropdown--open'),
+        'Open state'
+      ).toBe(false);
     });
 
     afterEach(function() {
@@ -199,8 +246,14 @@ describe('Dropdown', function() {
 
     it('Should add/remove "selected" modifier class', function() {
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(itemNodes[0].classList.contains('bx--dropdown--selected'), 'Unselected item').toBe(false);
-      expect(itemNodes[1].classList.contains('bx--dropdown--selected'), 'Selected item').toBe(true);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        'Unselected item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        'Selected item'
+      ).toBe(true);
     });
 
     it('Should update text', function() {
@@ -217,8 +270,14 @@ describe('Dropdown', function() {
     it('Should not add "selected" modifier class if dropdown type is navigation', function() {
       element.setAttribute('data-dropdown-type', 'navigation');
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(itemNodes[0].classList.contains('bx--dropdown--selected'), 'Unselected item').toBe(false);
-      expect(itemNodes[1].classList.contains('bx--dropdown--selected'), 'Selected item').toBe(false);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        'Unselected item'
+      ).toBe(false);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        'Selected item'
+      ).toBe(false);
     });
 
     it('Should not cause an error if text does not exist', function() {
@@ -235,8 +294,14 @@ describe('Dropdown', function() {
         e.preventDefault();
       });
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(itemNodes[0].classList.contains('bx--dropdown--selected'), 'Other item').toBe(true);
-      expect(itemNodes[1].classList.contains('bx--dropdown--selected'), 'Clicked item').toBe(false);
+      expect(
+        itemNodes[0].classList.contains('bx--dropdown--selected'),
+        'Other item'
+      ).toBe(true);
+      expect(
+        itemNodes[1].classList.contains('bx--dropdown--selected'),
+        'Clicked item'
+      ).toBe(false);
       expect(textNode.textContent).toBe('0');
     });
 
@@ -317,7 +382,9 @@ describe('Dropdown', function() {
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 38 }));
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 38 })
+      );
       expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
       expect(itemNodes[1].focus, 'Focus on 2nd item').not.toHaveBeenCalled();
       expect(itemNodes[2].focus, 'Focus on 3rd item').toHaveBeenCalledTimes(1);
@@ -376,7 +443,9 @@ describe('Dropdown', function() {
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 38 }));
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 38 })
+      );
       expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
       expect(itemNodes[1].focus, 'Focus on 2nd item').not.toHaveBeenCalled();
       expect(itemNodes[2].focus, 'Focus on 3rd item').toHaveBeenCalledTimes(1);
@@ -409,7 +478,9 @@ describe('Dropdown', function() {
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 38 }));
+      element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 38 })
+      );
       expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
       expect(itemNodes[1].focus, 'Focus on 2nd item').toHaveBeenCalledTimes(1);
       expect(itemNodes[2].focus, 'Focus on 3rd item').not.toHaveBeenCalled();

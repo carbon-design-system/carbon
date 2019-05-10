@@ -100,12 +100,15 @@
       padding-right: rem(64px);
     }
 
-    .#{$prefix}--text-input--invalid + .#{$prefix}--text-input--password__visibility {
+    .#{$prefix}--text-input--invalid
+      + .#{$prefix}--text-input--password__visibility {
       right: rem(40px);
     }
   }
 
-  .#{$prefix}--text-input:disabled + .#{$prefix}--text-input--password__visibility svg {
+  .#{$prefix}--text-input:disabled
+    + .#{$prefix}--text-input--password__visibility
+    svg {
     opacity: 0.5;
     cursor: not-allowed;
   }

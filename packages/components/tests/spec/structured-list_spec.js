@@ -19,22 +19,33 @@ describe('StructuredList', function() {
     it('should throw if root element is not given', function() {
       expect(() => {
         new StructuredList();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should throw if root element is not a DOM element', function() {
       expect(() => {
         new StructuredList(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', function() {
       // Spread operator does not take non-owning props
-      const { selectorListInput, ...options } = Object.getPrototypeOf(instance.options);
-      expect(selectorListInput('foo'), 'selectorListInput option').toBe('#foo.bx--structured-list-input');
+      const { selectorListInput, ...options } = Object.getPrototypeOf(
+        instance.options
+      );
+      expect(selectorListInput('foo'), 'selectorListInput option').toBe(
+        '#foo.bx--structured-list-input'
+      );
       expect(flattenOptions(options), 'Other options').toEqual({
         selectorInit: '[data-structured-list]',
-        selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
+        selectorRow:
+          '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
         classActive: 'bx--structured-list-row--selected',
       });
     });
@@ -131,9 +142,13 @@ describe('StructuredList', function() {
           bubbles: true,
         })
       );
-      const rows = instance.element.querySelectorAll(instance.options.selectorRow);
+      const rows = instance.element.querySelectorAll(
+        instance.options.selectorRow
+      );
       rows[1].dispatchEvent(event);
-      expect(rows[1].classList.contains(instance.options.classActive)).toBe(true);
+      expect(rows[1].classList.contains(instance.options.classActive)).toBe(
+        true
+      );
     });
 
     afterEach(function() {
