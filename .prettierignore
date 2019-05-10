@@ -29,3 +29,6 @@ packages/components/docs/js
 
 # Changelogs
 **/CHANGELOG.md
+
+# Generated docs
+**/docs/sass.md
