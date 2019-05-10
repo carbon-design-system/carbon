@@ -895,7 +895,8 @@ Define color variables
 
 ### ✅carbon--12-column-grid [variable]
 
-Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the default 16
+Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the
+default 16
 
 <details>
 <summary>Source code</summary>
@@ -933,9 +934,9 @@ $carbon--12-column-grid: map-merge(
 
 ### ❌carbon--make-col-ready [mixin]
 
-Used to initialize the default properties for a column class, most notably
-for setting width and default gutters when a column's breakpoint has not been
-hit yet.
+Used to initialize the default properties for a column class, most notably for
+setting width and default gutters when a column's breakpoint has not been hit
+yet.
 
 <details>
 <summary>Source code</summary>
@@ -1225,8 +1226,8 @@ used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
 
 ### ✅carbon--aspect-ratios [variable]
 
-The aspect ratios that are used to generate corresponding aspect ratio
-classes in code
+The aspect ratios that are used to generate corresponding aspect ratio classes
+in code
 
 <details>
 <summary>Source code</summary>
@@ -1538,7 +1539,8 @@ $imported-modules: ();
 
 ### ✅exports [mixin]
 
-Module export mixin that helps making sure a module is imported once and only once
+Module export mixin that helps making sure a module is imported once and only
+once
 
 <details>
 <summary>Source code</summary>
@@ -1780,7 +1782,8 @@ Returns the largest breakpoint name
 
 ### ✅carbon--breakpoint-infix [function]
 
-Get the infix for a given breakpoint in a list of breakpoints. Usesful for generate the size part in a selector, for example: `.prefix--col-sm-2`.
+Get the infix for a given breakpoint in a list of breakpoints. Usesful for
+generate the size part in a selector, for example: `.prefix--col-sm-2`.
 
 <details>
 <summary>Source code</summary>
@@ -3377,7 +3380,8 @@ Define theme variables from a map of tokens
 </details>
 
 - **Group**: [@carbon/themes](#carbonthemes)
-- **Content**: Pass in your custom declaration blocks to be used after the token maps set theming variables.
+- **Content**: Pass in your custom declaration blocks to be used after the token
+  maps set theming variables.
 - **Requires**:
   - [interactive-01 [variable]](#interactive-01-variable)
   - [interactive-02 [variable]](#interactive-02-variable)
@@ -4534,7 +4538,8 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 
 ### ✅disabled-02 [variable]
 
-Disabled elements on `$disabled-01`; Disabled label; Disabled text on `$disabled-01`; Disabled icons; Disabled border
+Disabled elements on `$disabled-01`; Disabled label; Disabled text on
+`$disabled-01`; Disabled icons; Disabled border
 
 <details>
 <summary>Source code</summary>
@@ -5921,7 +5926,8 @@ Compute the type size for the given type scale step
 
 ### ✅carbon--type-scale [variable]
 
-Type scole follows a custom formula for determining each step size and supports sizes from 12px to 92px
+Type scole follows a custom formula for determining each step size and supports
+sizes from 12px to 92px
 
 <details>
 <summary>Source code</summary>
@@ -7333,13 +7339,12 @@ $tokens: (
 ### ✅fluid-type [mixin]
 
 This helper includes fluid type styles for the given token value. Fluid type
-means that the `font-size` is computed using `calc()` in order to be
-determined by the screen size instead of a breakpoint. As a result, fluid
-styles should be used with caution in fixed width contexts.
+means that the `font-size` is computed using `calc()` in order to be determined
+by the screen size instead of a breakpoint. As a result, fluid styles should be
+used with caution in fixed width contexts.
 
-In addition, we make use of %-based line-heights so that the line-height of
-each type style is computed correctly due to the dynamic nature of the
-`font-size`.
+In addition, we make use of %-based line-heights so that the line-height of each
+type style is computed correctly due to the dynamic nature of the `font-size`.
 
 Most of the logic for this work comes from CSS Tricks:
 https://css-tricks.com/snippets/css/fluid-typography/
@@ -7491,10 +7496,10 @@ Computes the fluid `font-size` for a given type style and breakpoint
 ### ✅carbon--type-style [mixin]
 
 Helper mixin to include the styles for a given token in any selector in your
-project. Also includes an optional fluid option that will enable fluid
-styles for the token if they are defined. Fluid styles will cause the
-token's font-size to be computed based on the viewport size. As a result, use
-with caution in fixed contexts.
+project. Also includes an optional fluid option that will enable fluid styles
+for the token if they are defined. Fluid styles will cause the token's font-size
+to be computed based on the viewport size. As a result, use with caution in
+fixed contexts.
 
 <details>
 <summary>Source code</summary>
