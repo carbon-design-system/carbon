@@ -28,13 +28,15 @@ assignees: ''
 
 > Is this issue related to a specific component?
 
-> What did you expect to happen? What happened instead? What would you like to see changed?
+> What did you expect to happen? What happened instead? What would you like to
+> see changed?
 
 > What browser are you working in?
 
 > What version of the Carbon Design System are you using?
 
-> What offering/product do you work on? Any pressing ship or release dates we should be aware of?
+> What offering/product do you work on? Any pressing ship or release dates we
+> should be aware of?
 
 ## Steps to reproduce the issue
 
