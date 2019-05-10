@@ -55,6 +55,10 @@ async function buildUMD() {
       input: jsSource,
       external: ['@angular/core', '@carbon/icon-helpers'],
       cache: false,
+      onwarn(warning, warn) {
+        if (warning.code === 'THIS_IS_UNDEFINED') return;
+        warn(warning);
+      },
     });
 
     const jsOutput = jsSource.replace('lib', 'umd');
