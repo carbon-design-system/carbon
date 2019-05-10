@@ -154,8 +154,6 @@
     "@babel/plugin-transform-object-assign": "^7.2.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "@commitlint/cli": "^7.5.0",
-    "@commitlint/config-conventional": "^7.5.0",
     "@storybook/addon-a11y": "^4.1.18",
     "@storybook/addon-actions": "^4.1.18",
     "@storybook/addon-info": "^4.1.18",
@@ -187,11 +185,9 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "gzip-size": "^5.0.0",
-    "husky": "^1.3.0",
     "jest": "^24.0.0",
     "jest-circus": "^24.0.0",
     "lcov2badge": "^0.1.0",
-    "lint-staged": "^8.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "4.10.0",
     "object-assign": "^4.1.1",
@@ -236,50 +232,11 @@
       "@babel/plugin-proposal-export-default-from"
     ]
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "header-max-length": [
-        2,
-        "always",
-        50
-      ],
-      "body-max-line-length": [
-        2,
-        "always",
-        72
-      ],
-      "scope-case": [
-        0,
-        "always",
-        "lower-case"
-      ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
   "prettier": {
     "jsxBracketSameLine": true,
     "printWidth": 80,
     "singleQuote": true,
     "trailingComma": "es5"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn prettier:staged",
-      "yarn lint:staged",
-      "git add"
-    ],
-    "*.{css,md,scss}": [
-      "yarn prettier:staged",
-      "git add"
-    ]
   },
   "repository": {
     "type": "git",
