@@ -48,7 +48,7 @@ class SideNav extends Component {
                   key={id}
                   data-nav-id={id}
                   isActive={id === activeItemId}
-                  href={`./demo/${name}`}
+                  href={`/demo/${name}`}
                   onClick={this.handleItemClick}>
                   {label}
                 </SideNavLink>
