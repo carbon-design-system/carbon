@@ -36,3 +36,6 @@ packages/components/docs/js
 # Generate sass files
 **/scss/vendor/**
 **/_inlined/**
+
+# Examples
+**/examples/**

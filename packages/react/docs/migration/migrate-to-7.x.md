@@ -1,6 +1,8 @@
 # 7.x Migration
 
-Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/v10-migration/overview) for more information on migrating from v9 to v10.
+Refer to the
+[Carbon X Migration Guide](https://www.carbondesignsystem.com/updates/v10-migration/overview)
+for more information on migrating from v9 to v10.
 
 <!-- prettier-ignore-start -->
 <!-- To run doctoc, just do `npx doctoc migrate-to-7.x.md` in this directory! -->
@@ -19,7 +21,12 @@ Refer to the [Carbon X Migration Guide](https://www.carbondesignsystem.com/updat
 ## Process
 
 1. Update your `carbon-components-react` package using `npm` or `yarn`.
-1. When migrating from v6 to v7, you'll first want to address your component instances marked with `Removed` in the table below. E.g. if you're using the `<Footer />` React component that was previously available in Carbon, you'll need to either remove your footer instances or create your own footer component so the `<Footer />` syntax is recognized in your client-side JavaScript.
+1. When migrating from v6 to v7, you'll first want to address your component
+   instances marked with `Removed` in the table below. E.g. if you're using the
+   `<Footer />` React component that was previously available in Carbon, you'll
+   need to either remove your footer instances or create your own footer
+   component so the `<Footer />` syntax is recognized in your client-side
+   JavaScript.
 
 ## Components
 
