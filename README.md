@@ -29,12 +29,10 @@
 
 ## Getting started
 
-If you're looking for a good place to start using our components, you can check
-out our [`carbon-components`](./packages/components) package. If you're looking
-for React components, check out [`carbon-components-react`](./packages/react).
+If you're just getting started, check out [`carbon-components`](./packages/components). If you're looking
+for React components, take a look at [`carbon-components-react`](./packages/react).
 
-If you're looking for something else, here's a full list of packages that we
-support!
+If you're trying to find something specific, here's a full list of packages that we support!
 
 | Package name                                  | Description                                                                                                                                         |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
