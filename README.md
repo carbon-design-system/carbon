@@ -29,9 +29,12 @@
 
 ## Getting started
 
-The Carbon Design System is a collection of packages that help developers and
-designers build digital experiences on the web. We current offer the following
-packages that you can start using today:
+If you're looking for a good place to start using our components, you can check
+out our [`carbon-components`](./packages/components) package. If you're looking
+for React components, check out [`carbon-components-react`](./packages/react).
+
+If you're looking for something else, here's a full list of packages that we
+support!
 
 | Package name                                  | Description                                                                                                                                         |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
