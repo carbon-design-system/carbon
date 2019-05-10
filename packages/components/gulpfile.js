@@ -68,12 +68,26 @@ function getTemplates() {
 
 const assign = v => v;
 const cloptions = commander
-  .option('-b, --use-breaking-changes', 'Build with breaking changes turned on (For dev build only)')
-  .option('-e, --use-experimental-features', 'Build with experimental features turned on (For dev build only)')
-  .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
+  .option(
+    '-b, --use-breaking-changes',
+    'Build with breaking changes turned on (For dev build only)'
+  )
+  .option(
+    '-e, --use-experimental-features',
+    'Build with experimental features turned on (For dev build only)'
+  )
+  .option(
+    '-k, --keepalive',
+    'Keeps browser open after first run of Karma test finishes'
+  )
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
-  .option('--port-sass-dev-build [port]', 'Uses the given port for Sass dev build server', assign, 5000)
+  .option(
+    '--port-sass-dev-build [port]',
+    'Uses the given port for Sass dev build server',
+    assign,
+    5000
+  )
   .option('-r, --rollup', 'Uses Rollup for dev env')
   .option('-s, --sass-source', 'Force building Sass source')
   .parse(process.argv);
@@ -81,7 +95,10 @@ const cloptions = commander
 // Axe A11y Test
 const axe = require('gulp-axe-webdriver');
 
-const promisePortSassDevBuild = portscanner.findAPortNotInUse(cloptions.portSassDevBuild, cloptions.portSassDevBuild + 100);
+const promisePortSassDevBuild = portscanner.findAPortNotInUse(
+  cloptions.portSassDevBuild,
+  cloptions.portSassDevBuild + 100
+);
 
 /**
  * Clean
@@ -129,11 +146,17 @@ gulp.task('scripts:dev:feature-flags', () => {
     .then(contents =>
       contents
         .toString()
-        .replace(/(exports\.([\w-_]+)\s*=\s*)(true|false)/g, (match, definition, name) =>
-          !(name in replaceTable) ? match : `${definition}${!!replaceTable[name]}`
+        .replace(
+          /(exports\.([\w-_]+)\s*=\s*)(true|false)/g,
+          (match, definition, name) =>
+            !(name in replaceTable)
+              ? match
+              : `${definition}${!!replaceTable[name]}`
         )
     )
-    .then(contents => writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents));
+    .then(contents =>
+      writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents)
+    );
 });
 
 const buildDemoJS = () => {
@@ -196,7 +219,9 @@ const convertToESMGulpPlugin = () =>
         .then(bundle => bundle.generate({ format: 'esm' }))
         .then(
           ({ output }) => {
-            file.contents = Buffer.from(output.map(({ code }) => code).join('\n'));
+            file.contents = Buffer.from(
+              output.map(({ code }) => code).join('\n')
+            );
             callback(null, file);
           },
           err => {
@@ -219,7 +244,10 @@ gulp.task('scripts:umd', () => {
         },
       ],
     ],
-    plugins: ['@babel/plugin-transform-modules-umd', ['@babel/plugin-proposal-class-properties', { loose: true }]],
+    plugins: [
+      '@babel/plugin-transform-modules-umd',
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+    ],
   };
 
   return gulp
@@ -365,7 +393,10 @@ gulp.task('sass:dev', () => {
 
 gulp.task('sass:dev:server', () => {
   const debouncedSassBuild = debounce(switchTo => {
-    if (typeof useExperimentalFeatures === 'undefined' || !useExperimentalFeatures !== !switchTo) {
+    if (
+      typeof useExperimentalFeatures === 'undefined' ||
+      !useExperimentalFeatures !== !switchTo
+    ) {
       useExperimentalFeatures = switchTo;
       gulp.task('sass:dev')();
       gulp.task('scripts:dev:feature-flags')();
@@ -374,7 +405,9 @@ gulp.task('sass:dev:server', () => {
   return promisePortSassDevBuild.then(portSassDevBuild => {
     http
       .createServer((req, res) => {
-        const switchTo = ((/^\/(experimental|classic)/i.exec(req.url) || [])[1] || '').toLowerCase();
+        const switchTo = (
+          (/^\/(experimental|classic)/i.exec(req.url) || [])[1] || ''
+        ).toLowerCase();
         if (switchTo) {
           res.writeHead(200, {
             'Access-Control-Allow-Origin': `http://localhost:${cloptions.port}`,
@@ -388,11 +421,16 @@ gulp.task('sass:dev:server', () => {
   });
 });
 
-gulp.task('sass:source', () => gulp.src('./src/**/*.scss').pipe(gulp.dest('scss')));
+gulp.task('sass:source', () =>
+  gulp.src('./src/**/*.scss').pipe(gulp.dest('scss'))
+);
 
 const buildDemoHTML = () => {
   getTemplates();
-  return Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
+  return Promise.all([
+    mkdirp(path.resolve(__dirname, 'demo/code')),
+    mkdirp(path.resolve(__dirname, 'demo/component')),
+  ]).then(() =>
     templates.cache.get().then(({ componentSource, docSource, contents }) =>
       Promise.all([
         writeFile(
@@ -415,7 +453,10 @@ const buildDemoHTML = () => {
               renderedItems.forEach((rendered, item) => {
                 o[item.handle] = rendered.trim();
               });
-              return writeFile(path.resolve(__dirname, 'demo/code', handle), JSON.stringify(o));
+              return writeFile(
+                path.resolve(__dirname, 'demo/code', handle),
+                JSON.stringify(o)
+              );
             })
           )
           .toArray(),
@@ -424,7 +465,10 @@ const buildDemoHTML = () => {
           .then(table =>
             Promise.all(
               Array.from(table.entries()).map(([{ handle }, value]) =>
-                writeFile(path.resolve(__dirname, 'demo/component', `${handle}.html`), value)
+                writeFile(
+                  path.resolve(__dirname, 'demo/component', `${handle}.html`),
+                  value
+                )
               )
             )
           ),
@@ -444,9 +488,16 @@ const buildHTML = () => {
   return templates.render({ layout: false }).then(renderedItems => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
-      const dirname = path.dirname(path.resolve(__dirname, 'html', item.relViewPath));
-      const filename = `${names[item.handle] || item.handle.replace(/--default$/, '')}.html`;
-      promises.push(mkdirp(dirname).then(() => writeFile(path.resolve(dirname, filename), rendered)));
+      const dirname = path.dirname(
+        path.resolve(__dirname, 'html', item.relViewPath)
+      );
+      const filename = `${names[item.handle] ||
+        item.handle.replace(/--default$/, '')}.html`;
+      promises.push(
+        mkdirp(dirname).then(() =>
+          writeFile(path.resolve(dirname, filename), rendered)
+        )
+      );
     });
     return Promise.all(promises);
   });
@@ -484,7 +535,13 @@ const launchDevServer = cb => {
   );
 };
 
-gulp.task('dev-server', gulp.series(gulp.parallel(['sass:dev', 'scripts:dev:feature-flags']), launchDevServer));
+gulp.task(
+  'dev-server',
+  gulp.series(
+    gulp.parallel(['sass:dev', 'scripts:dev:feature-flags']),
+    launchDevServer
+  )
+);
 
 /**
  * JSDoc
@@ -495,7 +552,10 @@ gulp.task('jsdoc', cb => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-object-rest-spread'],
+        plugins: [
+          '@babel/plugin-proposal-class-properties',
+          '@babel/plugin-proposal-object-rest-spread',
+        ],
         babelrc: false,
       })
     )
@@ -553,8 +613,12 @@ const startAccessibilityTest = done => {
     exclude: '.offleft, #flex-col, #flex-row',
     tags: ['wcag2aa', 'wcag2a'],
     folderOutputReport: !componentName ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: !componentName ? `a11y-html.json` : `a11y-${componentName}.json`,
-    urls: !componentName ? ['http://localhost:3000'] : [`http://localhost:3000/component/${componentName}/`],
+    saveOutputIn: !componentName
+      ? `a11y-html.json`
+      : `a11y-${componentName}.json`,
+    urls: !componentName
+      ? ['http://localhost:3000']
+      : [`http://localhost:3000/component/${componentName}/`],
   };
 
   return axe(options, done);
@@ -567,25 +631,39 @@ gulp.task('test', gulp.parallel('test:unit', 'test:a11y'));
 // Watch Tasks
 gulp.task('watch', () => {
   if (cloptions.rollup) {
-    gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], gulp.task('scripts:dev'));
+    gulp.watch(
+      ['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'],
+      gulp.task('scripts:dev')
+    );
   }
   gulp.watch(
     ['src/**/**/*.scss', 'demo/**/*.scss'],
-    !cloptions.sassSource ? gulp.task('sass:dev') : gulp.parallel('sass:dev', 'sass:source')
+    !cloptions.sassSource
+      ? gulp.task('sass:dev')
+      : gulp.parallel('sass:dev', 'sass:source')
   );
 });
 
 gulp.task('serve', gulp.parallel('dev-server', 'watch', 'sass:dev:server'));
 
 // Build task collection
-gulp.task('build:scripts', gulp.parallel('scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev'));
+gulp.task(
+  'build:scripts',
+  gulp.parallel('scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev')
+);
 gulp.task('build:styles', gulp.parallel('sass:compiled', 'sass:source'));
 
 // Mapped to npm run build
-gulp.task('build', gulp.parallel('build:scripts', 'build:styles', 'html:source'));
+gulp.task(
+  'build',
+  gulp.parallel('build:scripts', 'build:styles', 'html:source')
+);
 
 // For demo environment
 gulp.task('build:dev', gulp.parallel('sass:dev', 'scripts:dev', 'html:dev'));
-gulp.task('build:dev:deploy', gulp.parallel('sass:dev', 'scripts:dev:deploy', 'html:dev'));
+gulp.task(
+  'build:dev:deploy',
+  gulp.parallel('sass:dev', 'scripts:dev:deploy', 'html:dev')
+);
 
 gulp.task('default', gulp.task('serve'));

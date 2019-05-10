@@ -12,4 +12,5 @@ Use these modifiers with `.bx--toggle` class.
 
 #### Best practice
 
-Since Toggle uses Checkbox inputs, it's best practice to use `<fieldset>` and `<legend>` elements to label the the group. See Form for more details.
+Since Toggle uses Checkbox inputs, it's best practice to use `<fieldset>` and
+`<legend>` elements to label the the group. See Form for more details.

@@ -7,18 +7,31 @@
 const path = require('path');
 const commander = require('commander');
 
-const flatten = a => a.reduce((result, item) => [...result, ...(Array.isArray(item) ? item : [item])], []);
+const flatten = a =>
+  a.reduce(
+    (result, item) => [...result, ...(Array.isArray(item) ? item : [item])],
+    []
+  );
 const collect = (v, a) => (a.indexOf(v) < 0 ? [...a, v] : a);
 const defaultFiles = ['demo/polyfills/index.js'];
 const cloptions = commander
-  .option('--browser [browser]', 'Browser to test with (ChromeHeadless or Chrome)', collect, [])
-  .option('-d, --debug', 'Disables collection of code coverage, useful for runinng debugger against specs or sources')
+  .option(
+    '--browser [browser]',
+    'Browser to test with (ChromeHeadless or Chrome)',
+    collect,
+    []
+  )
+  .option(
+    '-d, --debug',
+    'Disables collection of code coverage, useful for runinng debugger against specs or sources'
+  )
   .option('-f, --file [file]', 'Spec files to run', collect, defaultFiles)
   .option('-r, --random', 'Enable random execution order of tests')
   .option('-v, --verbose', 'Enables verbose output')
   .parse(process.argv);
 const isFilesDefault =
-  cloptions.file.length === defaultFiles.length && cloptions.file.every((item, i) => item === defaultFiles[i]);
+  cloptions.file.length === defaultFiles.length &&
+  cloptions.file.every((item, i) => item === defaultFiles[i]);
 
 const customLaunchers = {
   Chrome_Travis: {
@@ -248,7 +261,10 @@ module.exports = function(config) {
     autoWatchBatchDelay: 400,
 
     browsers: flatten(
-      (cloptions.browser.length === 0 ? ['ChromeHeadless'] : cloptions.browser).map(browser => {
+      (cloptions.browser.length === 0
+        ? ['ChromeHeadless']
+        : cloptions.browser
+      ).map(browser => {
         const browserLower = browser.toLowerCase();
         return (process.env.TRAVIS && travisLaunchers[browserLower]) || browser;
       })

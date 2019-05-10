@@ -18,13 +18,19 @@ describe('Test init component by search', function() {
   it('Should throw if given element is null', function() {
     expect(() => {
       Class.init(null);
-    }).toThrowError(TypeError, 'DOM document or DOM element should be given to search for and initialize this widget.');
+    }).toThrowError(
+      TypeError,
+      'DOM document or DOM element should be given to search for and initialize this widget.'
+    );
   });
 
   it('Should throw if given element is neither a DOM element or a document', function() {
     expect(() => {
       Class.init(document.createTextNode(''));
-    }).toThrowError(TypeError, 'DOM document or DOM element should be given to search for and initialize this widget.');
+    }).toThrowError(
+      TypeError,
+      'DOM document or DOM element should be given to search for and initialize this widget.'
+    );
   });
 
   it('Should search from document if root element is not given', function() {

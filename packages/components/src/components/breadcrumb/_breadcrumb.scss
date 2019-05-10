@@ -37,7 +37,8 @@
     margin-left: $carbon--spacing-03;
   }
 
-  .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {
+  .#{$prefix}--breadcrumb--no-trailing-slash
+    .#{$prefix}--breadcrumb-item:last-child::after {
     content: '';
   }
 
@@ -51,7 +52,8 @@
   }
 
   .#{$prefix}--breadcrumb-item [aria-current='page'],
-  .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current .#{$prefix}--link {
+  .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
+    .#{$prefix}--link {
     color: $text-01;
   }
 

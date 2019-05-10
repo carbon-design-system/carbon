@@ -24,12 +24,15 @@ if (typeof module !== 'undefined' && module.hot) {
       .map(key => components[key])
       .filter(component => typeof component.init === 'function')
       .forEach(Clz => {
-        forEach.call(document.body.querySelectorAll(Clz.options.selectorInit), element => {
-          const instance = Clz.components.get(element);
-          if (instance) {
-            instance.release();
+        forEach.call(
+          document.body.querySelectorAll(Clz.options.selectorInit),
+          element => {
+            const instance = Clz.components.get(element);
+            if (instance) {
+              instance.release();
+            }
           }
-        });
+        );
       });
   });
 

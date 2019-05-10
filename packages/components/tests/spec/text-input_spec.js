@@ -17,13 +17,19 @@ describe('Test text input', () => {
     it('Should throw if root element is not given', () => {
       expect(() => {
         new TextInput();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', () => {
       expect(() => {
         new TextInput(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', () => {
@@ -54,7 +60,9 @@ describe('Test text input', () => {
       document.body.appendChild(container);
       new TextInput(document.querySelector('[data-text-input]'));
       textInput = document.querySelector('[data-text-input]');
-      passwordVisibilityButton = document.querySelector('.bx--text-input--password__visibility');
+      passwordVisibilityButton = document.querySelector(
+        '.bx--text-input--password__visibility'
+      );
     });
 
     beforeEach(() => {
@@ -62,14 +70,22 @@ describe('Test text input', () => {
     });
 
     it('Should set password visibility state on 2n+1 clicks', () => {
-      passwordVisibilityButton.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(textInput.classList.contains('bx--text-input--password-visible')).toBe(true);
+      passwordVisibilityButton.dispatchEvent(
+        new CustomEvent('click', { bubbles: true })
+      );
+      expect(
+        textInput.classList.contains('bx--text-input--password-visible')
+      ).toBe(true);
     });
 
     it('Should remove password visibility state on 2n clicks', () => {
       textInput.classList.add('bx--text-input--password-visible');
-      passwordVisibilityButton.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(textInput.classList.contains('bx--text-input--password-visible')).toBe(false);
+      passwordVisibilityButton.dispatchEvent(
+        new CustomEvent('click', { bubbles: true })
+      );
+      expect(
+        textInput.classList.contains('bx--text-input--password-visible')
+      ).toBe(false);
     });
 
     afterAll(() => {

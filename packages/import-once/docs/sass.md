@@ -36,7 +36,8 @@ $imported-modules: ();
 
 ### ✅exports [mixin]
 
-Module export mixin that helps making sure a module is imported once and only once
+Module export mixin that helps making sure a module is imported once and only
+once
 
 <details>
 <summary>Source code</summary>

@@ -4,7 +4,9 @@ No structural changes. However, class names have been changed.
 
 ### SCSS
 
-The `_dropdown.scss` file is now located at `src/components/dropdown/_dropdown.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_dropdown.scss` file is now located at
+`src/components/dropdown/_dropdown.scss`. You will need to update any `@import`
+statements for this file to reflect this change.
 
 **New**:
 

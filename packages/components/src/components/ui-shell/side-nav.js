@@ -15,7 +15,11 @@ import eventMatches from '../../globals/js/misc/event-matches';
 
 const { prefix } = settings;
 
-export default class SideNav extends mixin(createComponent, initComponentBySearch, handles) {
+export default class SideNav extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * The map associating DOM element and copy button UI instance.
    * @member SideNav.components
@@ -52,32 +56,55 @@ export default class SideNav extends mixin(createComponent, initComponentBySearc
    * Changes the expanded/collapsed state.
    */
   changeState(state) {
-    this.element.classList.toggle(this.options.classSideNavExpanded, state === this.constructor.state.EXPANDED);
+    this.element.classList.toggle(
+      this.options.classSideNavExpanded,
+      state === this.constructor.state.EXPANDED
+    );
   }
 
   _handleClick = evt => {
     const matchesToggle = eventMatches(evt, this.options.selectorSideNavToggle);
-    const matchesNavSubmenu = eventMatches(evt, this.options.selectorSideNavSubmenu);
-    const matchesSideNavLink = eventMatches(evt, this.options.selectorSideNavLink);
+    const matchesNavSubmenu = eventMatches(
+      evt,
+      this.options.selectorSideNavSubmenu
+    );
+    const matchesSideNavLink = eventMatches(
+      evt,
+      this.options.selectorSideNavLink
+    );
     if (!matchesToggle && !matchesNavSubmenu && !matchesSideNavLink) {
       return;
     }
     if (matchesToggle) {
-      this.changeState(!this.isNavExpanded() ? this.constructor.state.EXPANDED : this.constructor.state.COLLAPSED);
+      this.changeState(
+        !this.isNavExpanded()
+          ? this.constructor.state.EXPANDED
+          : this.constructor.state.COLLAPSED
+      );
       return;
     }
     if (matchesNavSubmenu) {
-      const isSubmenuExpanded = matchesNavSubmenu.getAttribute('aria-expanded') === 'true';
+      const isSubmenuExpanded =
+        matchesNavSubmenu.getAttribute('aria-expanded') === 'true';
       matchesNavSubmenu.setAttribute('aria-expanded', `${!isSubmenuExpanded}`);
       return;
     }
     if (matchesSideNavLink) {
-      [...this.element.querySelectorAll(this.options.selectorSideNavLinkCurrent)].forEach(el => {
-        el.classList.remove(this.options.classSideNavItemActive, this.options.classSideNavLinkCurrent);
+      [
+        ...this.element.querySelectorAll(
+          this.options.selectorSideNavLinkCurrent
+        ),
+      ].forEach(el => {
+        el.classList.remove(
+          this.options.classSideNavItemActive,
+          this.options.classSideNavLinkCurrent
+        );
         el.removeAttribute('aria-current');
       });
       matchesSideNavLink.classList.add(this.options.classSideNavLinkCurrent);
-      const closestSideNavItem = matchesSideNavLink.closest(this.options.selectorSideNavItem);
+      const closestSideNavItem = matchesSideNavLink.closest(
+        this.options.selectorSideNavItem
+      );
       if (closestSideNavItem) {
         closestSideNavItem.classList.add(this.options.classSideNavItemActive);
       }

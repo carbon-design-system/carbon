@@ -1,7 +1,7 @@
 # `DataTable` component
 
-> A set of table primitives to help teams build simple, flexible, and WAI-ARIA compliant
-> Tables in React
+> A set of table primitives to help teams build simple, flexible, and WAI-ARIA
+> compliant Tables in React
 
 ## Table of Contents
 
@@ -40,7 +40,9 @@
 
 ## Installation
 
-This component comes with any installation of the `carbon-components-react` package on NPM. You can install this package by running the following in your terminal:
+This component comes with any installation of the `carbon-components-react`
+package on NPM. You can install this package by running the following in your
+terminal:
 
 ```bash
 npm i carbon-components carbon-components-react carbon-icons --save
@@ -50,13 +52,16 @@ yarn add carbon-components carbon-components-react carbon-icons
 
 ## Usage
 
-You can include `DataTable` and its components by doing the following in your project:
+You can include `DataTable` and its components by doing the following in your
+project:
 
 ```js
 import { DataTable } from 'carbon-components-react';
 ```
 
-The default export for `DataTable` also includes properties for all the `Table*` components that you will also want to use in your application. You can access them by doing either of the following:
+The default export for `DataTable` also includes properties for all the `Table*`
+components that you will also want to use in your application. You can access
+them by doing either of the following:
 
 ```js
 import { DataTable } from 'carbon-components-react';
@@ -70,7 +75,10 @@ const { Table, TableHead, TableHeader, TableBody, TableCell } = DataTable;
 // ...
 ```
 
-The `DataTable` component itself follows the `render` prop pattern, meaning that in order to render something to the screen you'll have to provide a `render` function to the `DataTable` component. In practice, this looks like the following:
+The `DataTable` component itself follows the `render` prop pattern, meaning that
+in order to render something to the screen you'll have to provide a `render`
+function to the `DataTable` component. In practice, this looks like the
+following:
 
 ```jsx
 import { DataTable } from 'carbon-components-react';
@@ -119,19 +127,25 @@ function App() {
 }
 ```
 
-In the example above, we can see that the `render` prop is just a function that has the following arguments:
+In the example above, we can see that the `render` prop is just a function that
+has the following arguments:
 
 - `rows` which are the rows to be rendered inside of `TableBody`
 - `headers` which are the headers to be rendered inside of `TableHead`
-- `getHeaderProps` which is our first `prop` getter. This is used for adding in the hooks for `TableHeader` to properly sort your table
+- `getHeaderProps` which is our first `prop` getter. This is used for adding in
+  the hooks for `TableHeader` to properly sort your table
 
-For a full list of what is available in this `render` prop, check out the [Render Prop Function](#render-prop-function) section.
+For a full list of what is available in this `render` prop, check out the
+[Render Prop Function](#render-prop-function) section.
 
 ## Props
 
 ### `rows`
 
-The `rows` prop is where you provide us with a list of all the rows that you want to render in the table. The only hard requirement is that this is an array of objects, and that each object has a unique `id` field available on it. For example:
+The `rows` prop is where you provide us with a list of all the rows that you
+want to render in the table. The only hard requirement is that this is an array
+of objects, and that each object has a unique `id` field available on it. For
+example:
 
 ```js
 const rows = [
@@ -178,7 +192,10 @@ const rows = [
 
 ### `headers`
 
-The `headers` prop represents the order in which the headers should appear in the table. We expect an array of objects to be passed in, where `key` is the name of the key in a row object, and `header` is the name of the header. For example:
+The `headers` prop represents the order in which the headers should appear in
+the table. We expect an array of objects to be passed in, where `key` is the
+name of the key in a row object, and `header` is the name of the header. For
+example:
 
 ```js
 // Given that we have the following rows with the fields `foo`, `bar`, and `baz`
@@ -224,11 +241,14 @@ const headers = [
 
 ### `sortRow`
 
-Optional hook to manually control sorting of the rows. You can find more information about this [here](#custom-sorting).
+Optional hook to manually control sorting of the rows. You can find more
+information about this [here](#custom-sorting).
 
 ### `filterRows`
 
-Optional hook to manually control filtering of the rows from the `TableToolbarSearch` component. The signature for the default implementation of this looks like the following:
+Optional hook to manually control filtering of the rows from the
+`TableToolbarSearch` component. The signature for the default implementation of
+this looks like the following:
 
 ```js
 /**
@@ -250,11 +270,15 @@ const filterRows = ({ rowIds, headers, cellsById, inputValue }) => {
 
 ### `locale`
 
-Provide a string for the current locale. Defaults to `en`. This helps our default comparison methods better sort numeric inputs.
+Provide a string for the current locale. Defaults to `en`. This helps our
+default comparison methods better sort numeric inputs.
 
 ## Render Prop Function
 
-The `render` prop is a function that you give to the `DataTable` component that takes in a variety of arguments and should ultimately return a valid React element, or component. This could be as simple or complex as the following example:
+The `render` prop is a function that you give to the `DataTable` component that
+takes in a variety of arguments and should ultimately return a valid React
+element, or component. This could be as simple or complex as the following
+example:
 
 ```jsx
 // Not very useful, but returns a valid React element
@@ -295,17 +319,25 @@ The types of arguments that this function has are as follows:
 
 ### Prop Getters
 
-> See [the blog post about prop getters](https://blog.kentcdodds.com/how-to-give-rendering-control-to-users-with-prop-getters-549eaef76acf)
+> See
+> [the blog post about prop getters](https://blog.kentcdodds.com/how-to-give-rendering-control-to-users-with-prop-getters-549eaef76acf)
 
-These functions are used to apply props to the elements that you render. The idea behind this is that it can allow you more flexibility when deciding when to render, and where, while still allowing `DataTable` to help orchestrate state changes inside of the Table itself.
+These functions are used to apply props to the elements that you render. The
+idea behind this is that it can allow you more flexibility when deciding when to
+render, and where, while still allowing `DataTable` to help orchestrate state
+changes inside of the Table itself.
 
-You are able to call these on specific elements in your `render` prop function by doing the following:
+You are able to call these on specific elements in your `render` prop function
+by doing the following:
 
 ```jsx
 <TableHeader {...getHeaderProps({ header })}>{header.header}</TableHeader>
 ```
 
-In order to make sure that everything works as intended, it's important that you pass all of the `props` that you want to place on the component as fields on the object you give to a prop getter. For example, if you wanted to add an `onClick` handler to `TableHeader` above, you would do the following:
+In order to make sure that everything works as intended, it's important that you
+pass all of the `props` that you want to place on the component as fields on the
+object you give to a prop getter. For example, if you wanted to add an `onClick`
+handler to `TableHeader` above, you would do the following:
 
 ```js
 <TableHeader {...getHeaderProps({ header, onClick: this.handleOnClick })}>
@@ -321,7 +353,8 @@ In order to make sure that everything works as intended, it's important that you
 
 ### Actions
 
-These are functions you can call to change the state of the `DataTable` component.
+These are functions you can call to change the state of the `DataTable`
+component.
 
 | property        | type                          | description                                     |
 | --------------- | ----------------------------- | ----------------------------------------------- |
@@ -342,13 +375,17 @@ These are values that represent the current state of the `DataTable` component.
 
 ### Props
 
-As a convenience, `headers` is passed through to make it easier to render the headers in your table.
+As a convenience, `headers` is passed through to make it easier to render the
+headers in your table.
 
 ## Use-cases
 
 ### Sorting
 
-In order to enable the sort behavior for a given `DataTable`, all you need to do is apply the `getHeaderProps` prop getter to each individual `TableHeader` that you want the sort actions hooked up for. In practice, this looks like the following:
+In order to enable the sort behavior for a given `DataTable`, all you need to do
+is apply the `getHeaderProps` prop getter to each individual `TableHeader` that
+you want the sort actions hooked up for. In practice, this looks like the
+following:
 
 ```jsx
 <DataTable
@@ -383,15 +420,25 @@ In order to enable the sort behavior for a given `DataTable`, all you need to do
 
 #### Programmatic sorting
 
-In addition to the prop getter specified in the previous section, you can also change the sort status of the table by using the `sortBy` action made available in your `render` prop function. This `sortBy` utility takes in the `key` of the header you want to sort by as an argument. After invoking this method with the given `key`, the table should be sorted by the header that you've specified.
+In addition to the prop getter specified in the previous section, you can also
+change the sort status of the table by using the `sortBy` action made available
+in your `render` prop function. This `sortBy` utility takes in the `key` of the
+header you want to sort by as an argument. After invoking this method with the
+given `key`, the table should be sorted by the header that you've specified.
 
 #### Custom sorting
 
-If the default sorting logic doesn't match your use-case, you can provide a custom sort method as a `sortRow` prop to `DataTable`.
+If the default sorting logic doesn't match your use-case, you can provide a
+custom sort method as a `sortRow` prop to `DataTable`.
 
-`sortRow` is a method that takes in the values of two cells, in addition to some info, and should return -1, 0, or 1 as a result (mirroring the native sort behavior in JavaScript).
+`sortRow` is a method that takes in the values of two cells, in addition to some
+info, and should return -1, 0, or 1 as a result (mirroring the native sort
+behavior in JavaScript).
 
-The two cells that are passed in are derived by accessing the value of the sort header in each row that we're comparing. For example, if we're sorting on the `Foo` header, with the `foo` key available in each row, then for row `a` and row `b` we would get the `a.foo` and `b.foo` field values.
+The two cells that are passed in are derived by accessing the value of the sort
+header in each row that we're comparing. For example, if we're sorting on the
+`Foo` header, with the `foo` key available in each row, then for row `a` and row
+`b` we would get the `a.foo` and `b.foo` field values.
 
 As a result, a custom `sortRow` function would take on the following shape:
 
@@ -407,11 +454,15 @@ const customSortRow = (cellA, cellB, { sortDirection, sortStates, locale }) => {
 
 ### Expansion
 
-`DataTable` introduces the following components to help out with doing row expansion:
+`DataTable` introduces the following components to help out with doing row
+expansion:
 
-- `TableExpandHeader`: generic component that you place in your `TableHead`. Acts as a column placeholder
-- `TableExpandRow`: generic component used for a row that you want to be expandable
-- `TableExpandedRow`: generic component used for the expanded part of a row. Anything you place in this component will appear when the row is expanded
+- `TableExpandHeader`: generic component that you place in your `TableHead`.
+  Acts as a column placeholder
+- `TableExpandRow`: generic component used for a row that you want to be
+  expandable
+- `TableExpandedRow`: generic component used for the expanded part of a row.
+  Anything you place in this component will appear when the row is expanded
 
 In practice, the combination of these components looks like the following:
 
@@ -460,23 +511,31 @@ In practice, the combination of these components looks like the following:
 
 Some things to note:
 
-- `TableExpandHeader` is placed before all other headers as a placeholder/blank column
-- `TableExpandRow` is what you use instead of `TableRow` for the content of your row. We make sure to add `getRowProps` so that it has the right props
-- `row.isExpanded` is the field available on `row` to know if the `row` is expanded or not
-- `TableExpandedRow` is used as a wrapper for any content you want to appear in the expanded row
-  - Tip: the `colSpan` attribute on the `TableExpandedRow` should be `headers.length + 1` in order to span the whole table
+- `TableExpandHeader` is placed before all other headers as a placeholder/blank
+  column
+- `TableExpandRow` is what you use instead of `TableRow` for the content of your
+  row. We make sure to add `getRowProps` so that it has the right props
+- `row.isExpanded` is the field available on `row` to know if the `row` is
+  expanded or not
+- `TableExpandedRow` is used as a wrapper for any content you want to appear in
+  the expanded row
+  - Tip: the `colSpan` attribute on the `TableExpandedRow` should be
+    `headers.length + 1` in order to span the whole table
   - `TableExpandedRow` should not have a `TableCell` child
 
 #### Programmatic expansion
 
-You can use the `expandRow` action made available through your `render` prop function to toggle the expansion state of a given row. This method takes in the row id as a single argument.
+You can use the `expandRow` action made available through your `render` prop
+function to toggle the expansion state of a given row. This method takes in the
+row id as a single argument.
 
 ### Selection
 
 Selection in a `DataTable` has two parts:
 
 - `TableSelectAll`: component used in the header of the table to select all rows
-- `TableSelectRow`: component used to render the selection checkbox in a `TableRow`
+- `TableSelectRow`: component used to render the selection checkbox in a
+  `TableRow`
 
 In practice, it looks like the following in a `DataTable`:
 
@@ -513,21 +572,32 @@ In practice, it looks like the following in a `DataTable`:
 
 Some items to note:
 
-- `TableSelectAll` is placed before all other headers. It also uses `getSelectionProps` to wire up all the necessary actions
-- `TableSelectRow` is placed before all the cells in a row. It also uses `getSelectionProps`, but it also passes in the specific `row` in order to get selection information about the given row.
+- `TableSelectAll` is placed before all other headers. It also uses
+  `getSelectionProps` to wire up all the necessary actions
+- `TableSelectRow` is placed before all the cells in a row. It also uses
+  `getSelectionProps`, but it also passes in the specific `row` in order to get
+  selection information about the given row.
 
-You can access all the selected rows through the `selectedRows` property passed into your `render` prop function.
+You can access all the selected rows through the `selectedRows` property passed
+into your `render` prop function.
 
 #### Programmatic selection
 
-You can use either of the following actions from your `render` prop function to update the selection status of a row:
+You can use either of the following actions from your `render` prop function to
+update the selection status of a row:
 
-- `selectAll`: invoking this will toggle the selection of all rows, either by making all selected or de-selecting all rows
-- `selectRow`: invoking this will toggle the selection of a specific row. Takes in a valid row id as an argument
+- `selectAll`: invoking this will toggle the selection of all rows, either by
+  making all selected or de-selecting all rows
+- `selectRow`: invoking this will toggle the selection of a specific row. Takes
+  in a valid row id as an argument
 
 ### Filtering
 
-Filtering in a `DataTable` is provided through usage of the `TableToolbar` and the `TableToolbarSearch` component. Any input entered through `TableToolbarSearch` will be used when the `filterRows` prop is applied. By default `filterRows` is provided through our default implementation. However, you can provide your own method if needed.
+Filtering in a `DataTable` is provided through usage of the `TableToolbar` and
+the `TableToolbarSearch` component. Any input entered through
+`TableToolbarSearch` will be used when the `filterRows` prop is applied. By
+default `filterRows` is provided through our default implementation. However,
+you can provide your own method if needed.
 
 In practice, this looks like the following:
 
@@ -586,11 +656,16 @@ In practice, this looks like the following:
 />
 ```
 
-All you need to do to make sure filtering is hooked up is provide the `onInputChange` handler as the `onChange` prop to `TableToolbarSearch` in your `TableToolbar` component.
+All you need to do to make sure filtering is hooked up is provide the
+`onInputChange` handler as the `onChange` prop to `TableToolbarSearch` in your
+`TableToolbar` component.
 
 ### Batch Actions
 
-Batch actions are typically used when you want to the user to select multiple rows in your table and then allow them to perform a single action on the selected rows. To orchestrate this behavior, you'll need to include both the Table components for selection and for batch actions, which include:
+Batch actions are typically used when you want to the user to select multiple
+rows in your table and then allow them to perform a single action on the
+selected rows. To orchestrate this behavior, you'll need to include both the
+Table components for selection and for batch actions, which include:
 
 - `TableToolbar`
 - `TableToolbarAction`
@@ -682,9 +757,13 @@ In practice, this looks like the following:
 The import aspects of this example are:
 
 - That we are including the relevant markup for the Table Toolbar
-- We are wiring up the Batch Actions component with `getBatchActionProps`. This handles toggling the batch action menu for you
-- We are reading the `selectedItems` from the `render` prop function in our Batch Action click handlers
+- We are wiring up the Batch Actions component with `getBatchActionProps`. This
+  handles toggling the batch action menu for you
+- We are reading the `selectedItems` from the `render` prop function in our
+  Batch Action click handlers
 
 ## Attribution
 
-This `README.md` file is adapted from the [Downshift `README.md`](https://github.com/paypal/downshift/blob/master/README.md) file.
+This `README.md` file is adapted from the
+[Downshift `README.md`](https://github.com/paypal/downshift/blob/master/README.md)
+file.

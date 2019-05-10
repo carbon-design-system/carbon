@@ -17,7 +17,8 @@ const selectItems = [
     hidden: true,
   },
   {
-    label: 'A much longer option that is worth having around to check how text flows',
+    label:
+      'A much longer option that is worth having around to check how text flows',
     value: 'solong',
   },
   {

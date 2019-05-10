@@ -11,7 +11,11 @@ const Fractal = require('@frctl/fractal');
 const iconHelper = require('@carbon/icons-handlebars');
 
 const origResolveFilename = Module._resolveFilename;
-Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
+Module._resolveFilename = function resolveModule(
+  request,
+  parentModule,
+  ...other
+) {
   const devFeatureFlags = path.resolve(__dirname, '../demo/feature-flags.js');
   const newRequest =
     !/feature-flags$/i.test(request) || !fs.existsSync(devFeatureFlags)
@@ -34,7 +38,10 @@ const readFile = promisify(fs.readFile);
 
 try {
   // eslint-disable-next-line global-require, import/no-dynamic-require
-  const logger = require(path.resolve(path.dirname(require.resolve('@frctl/fractal')), 'core/log'));
+  const logger = require(path.resolve(
+    path.dirname(require.resolve('@frctl/fractal')),
+    'core/log'
+  ));
   ['log', 'error', 'warn'].forEach(name => {
     logger.on(name, evt => {
       console[name](`Fractal ${name}:`, evt); // eslint-disable-line no-console
@@ -57,7 +64,10 @@ const getContents = glob =>
     return Promise.all(
       filePaths.map(filePath =>
         readFile(filePath, { encoding: 'utf8' }).then(content => {
-          contents.set(path.basename(filePath, path.extname(filePath)), content);
+          contents.set(
+            path.basename(filePath, path.extname(filePath)),
+            content
+          );
         })
       )
     ).then(() => contents);
@@ -87,16 +97,17 @@ const cache = {
       fractal.components.set('path', path.join(__dirname, '../src/components'));
       fractal.components.set('ext', '.hbs');
       fractal.docs.set('path', path.join(__dirname, '../docs'));
-      this.promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs'))]).then(
-        ([sources, contents]) => {
-          const [componentSource, docSource] = sources;
-          return {
-            componentSource,
-            docSource,
-            contents,
-          };
-        }
-      );
+      this.promiseCache = Promise.all([
+        fractal.load(),
+        loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs')),
+      ]).then(([sources, contents]) => {
+        const [componentSource, docSource] = sources;
+        return {
+          componentSource,
+          docSource,
+          contents,
+        };
+      });
     }
     return this.promiseCache;
   },
@@ -132,18 +143,37 @@ const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
     componentSource.forEach(metadata => {
       const items = metadata.isCollection
         ? metadata
-        : !metadata.meta.removed && !metadata.isCollated && metadata.variants && metadata.variants();
+        : !metadata.meta.removed &&
+          !metadata.isCollated &&
+          metadata.variants &&
+          metadata.variants();
       if (items) {
-        const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
+        const filteredItems =
+          !handle || handle === metadata.handle
+            ? items
+            : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
           const { handle: itemHandle, baseHandle, context, meta } = item;
-          const template = !meta.removed && (contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle));
+          const template =
+            !meta.removed &&
+            (contents.get(item.view) ||
+              contents.get(itemHandle) ||
+              contents.get(baseHandle));
           if (template) {
             const body = template(context);
-            const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
+            const layoutTemplate =
+              layout !== false &&
+              (contents.get(item.preview) || contents.get(layout));
             renderedItems.set(
               item,
-              !layoutTemplate ? body : layoutTemplate({ yield: body, component: metadata.handle, ...context, ...layoutContext })
+              !layoutTemplate
+                ? body
+                : layoutTemplate({
+                    yield: body,
+                    component: metadata.handle,
+                    ...context,
+                    ...layoutContext,
+                  })
             );
           }
         });

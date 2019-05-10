@@ -18,7 +18,7 @@
     "ci-check": "node tasks/ci-check.js",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents' docs",
-    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
     "format:staged": "prettier --write",
     "gather-deploy-files": "yarn workspaces run gather-deploy-files",
@@ -46,6 +46,7 @@
     "jest-junit": "^6.4.0",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
     "remark": "^10.0.1",
     "remark-word-wrap": "^2.0.2",
     "rimraf": "^2.6.3",
@@ -104,7 +105,8 @@
     "jsxBracketSameLine": true,
     "printWidth": 80,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "proseWrap": "always"
   },
   "stylelint": {
     "extends": [

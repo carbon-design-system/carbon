@@ -1,19 +1,19 @@
 # @carbon/motion
 
-> Motion helpers for digital and software products using the Carbon
-> Design System
+> Motion helpers for digital and software products using the Carbon Design
+> System
 
 ## Getting started
 
-To install `@carbon/motion` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/motion` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/motion
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following
-command instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
 ```bash
 yarn add @carbon/motion
@@ -21,16 +21,16 @@ yarn add @carbon/motion
 
 ## Usage
 
-`@carbon/motion` supports standard, entrance, and exit easing curves in
-two motion modes: productive and expressive. You can access these
-curves using either Sass or JavaScript.
+`@carbon/motion` supports standard, entrance, and exit easing curves in two
+motion modes: productive and expressive. You can access these curves using
+either Sass or JavaScript.
 
 ### Sass
 
-`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin that you can use to access the value of a motion
-curve or include that curve as the `transition-timing-function` for a
-selector. To use these helpers, you can do the following in your
-project:
+`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin
+that you can use to access the value of a motion curve or include that curve as
+the `transition-timing-function` for a selector. To use these helpers, you can
+do the following in your project:
 
 ```scss
 @import '@carbon/motion/scss/motion.scss';
@@ -47,14 +47,13 @@ project:
 }
 ```
 
-Both the `motion` function and mixin support passing in the name of
-the motion curve and the mode you want to work in.
+Both the `motion` function and mixin support passing in the name of the motion
+curve and the mode you want to work in.
 
 ### JavaScript
 
-If you're using `@carbon/motion` as a JavaScript dependency, we export
-our easings and a function called `motion` that you can use. For
-example:
+If you're using `@carbon/motion` as a JavaScript dependency, we export our
+easings and a function called `motion` that you can use. For example:
 
 ```js
 // CommonJS
@@ -78,10 +77,9 @@ If you're looking for `@carbon/motion` API documentation, check out:
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new
-features, or help us improve the project documentation. If you're
-interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)
-! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
 
 ## 📝 License
 

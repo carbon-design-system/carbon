@@ -1,19 +1,19 @@
 # @carbon/icons-react
 
-> React components for icons in digital and software products using the
-> Carbon Design System
+> React components for icons in digital and software products using the Carbon
+> Design System
 
 ## Getting started
 
-To install `@carbon/icons-react` in your project, you will need to run
-the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/icons-react` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
 npm install -S @carbon/icons-react
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following
-command instead:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
 ```bash
 yarn add @carbon/icons-react
@@ -21,17 +21,16 @@ yarn add @carbon/icons-react
 
 ## Usage
 
-Icons in this package support the following sizes: `16`, `20`, `24`,
-and `32` pixels. These sizes refer to the width and height of the
-icon. You can import an icon component into your project by doing one
-of the following:
+Icons in this package support the following sizes: `16`, `20`, `24`, and `32`
+pixels. These sizes refer to the width and height of the icon. You can import an
+icon component into your project by doing one of the following:
 
 ```jsx
 import Add24 from '@carbon/icons-react/es/add/16';
 ```
 
-We also provide CommonJS and UMD files in the `lib` and `umd`
-directories, respectively.
+We also provide CommonJS and UMD files in the `lib` and `umd` directories,
+respectively.
 
 To import using CommonJS, you can do the following:
 
@@ -44,10 +43,9 @@ our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new
-features, or help us improve the project documentation. If you're
-interested, definitely check out our [Contributing Guide](/.github/CONTRIBUTING.md)
-! 👀
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
 
 ## 📝 License
 

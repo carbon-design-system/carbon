@@ -22,7 +22,10 @@
 /// @param {Number} $gutter - the default gutter used in the grid system
 /// @param {Number} $collapsed-gutter - the condensed mode gutter
 /// @access private
-@mixin carbon--make-col-ready($gutter: $carbon--grid-gutter, $condensed-gutter: $carbon--grid-gutter--condensed) {
+@mixin carbon--make-col-ready(
+  $gutter: $carbon--grid-gutter,
+  $condensed-gutter: $carbon--grid-gutter--condensed
+) {
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
@@ -68,7 +71,10 @@
 /// @param {Map} $breakpoints - the breakpoints in the grid system
 /// @param {Number} $gutter - the gutter for the grid system
 /// @access private
-@mixin carbon--make-grid-columns($breakpoints: $carbon--grid-breakpoints, $gutter: $carbon--grid-gutter) {
+@mixin carbon--make-grid-columns(
+  $breakpoints: $carbon--grid-breakpoints,
+  $gutter: $carbon--grid-gutter
+) {
   .#{$prefix}--col {
     @include carbon--make-col-ready();
   }
@@ -266,7 +272,9 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1));
 /// Add in the max-widths for each breakpoint to the container
 /// @param {Map} $breakpoints
 /// @access private
-@mixin carbon--make-container-max-widths($breakpoints: $carbon--grid-breakpoints) {
+@mixin carbon--make-container-max-widths(
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @each $name, $value in $breakpoints {
     @include carbon--breakpoint($name) {
       max-width: map-get($value, width);

@@ -29,8 +29,16 @@ const root = path.resolve(__dirname, '../..');
 
 function importer(url, prev, done) {
   const baseDirectory = prev !== 'stdin' ? path.dirname(prev) : root;
-  const partialFilepath = path.resolve(baseDirectory, path.dirname(url), `_${path.basename(url)}.scss`);
-  const filepath = path.resolve(baseDirectory, path.dirname(url), `${path.basename(url)}.scss`);
+  const partialFilepath = path.resolve(
+    baseDirectory,
+    path.dirname(url),
+    `_${path.basename(url)}.scss`
+  );
+  const filepath = path.resolve(
+    baseDirectory,
+    path.dirname(url),
+    `${path.basename(url)}.scss`
+  );
 
   if (fs.existsSync(partialFilepath)) {
     done({ file: partialFilepath });
@@ -82,7 +90,9 @@ async function renderSass(data) {
       },
     });
   } catch (error) {
-    if (!error.message.includes('Function breakpoint finished without @return')) {
+    if (
+      !error.message.includes('Function breakpoint finished without @return')
+    ) {
       throw error;
     }
     renderError = error;

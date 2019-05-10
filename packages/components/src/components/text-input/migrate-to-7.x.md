@@ -1,11 +1,17 @@
 ### HTML
 
-Text Input and all other form components now require the use of labels and form validations that come from the Form component.
+Text Input and all other form components now require the use of labels and form
+validations that come from the Form component.
 
 ```html
 <div class="bx--form-item">
   <label for="text-input-1" class="bx--label">Text field label</label>
-  <input id="text-input-1" type="text" class="bx--text-input" placeholder="Hint text here" />
+  <input
+    id="text-input-1"
+    type="text"
+    class="bx--text-input"
+    placeholder="Hint text here"
+  />
 </div>
 ```
 
@@ -13,7 +19,9 @@ See Forms for more details on using labels and form validation.
 
 ### SCSS
 
-The `_text-input.scss` file is now located at `src/components/text-input/_text-input.scss`. You will need to update any `@import` statements for this file to reflect this change.
+The `_text-input.scss` file is now located at
+`src/components/text-input/_text-input.scss`. You will need to update any
+`@import` statements for this file to reflect this change.
 
 **New**:
 

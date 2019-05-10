@@ -18,7 +18,8 @@ module.exports = {
     {
       name: 'primary',
       label: 'Primary Buttons',
-      notes: 'Primary buttons should be used for the principle call to action on the page.',
+      notes:
+        'Primary buttons should be used for the principle call to action on the page.',
       context: {
         variant: 'primary',
         hasIconOnly: true,
@@ -41,7 +42,8 @@ module.exports = {
     {
       name: 'secondary',
       label: 'Secondary Buttons',
-      notes: 'Secondary buttons should be used for secondary actions on each page.',
+      notes:
+        'Secondary buttons should be used for secondary actions on each page.',
       context: {
         variant: 'secondary',
         hasIconOnly: true,
@@ -64,7 +66,8 @@ module.exports = {
     {
       name: 'tertiary',
       label: 'Tertiary Buttons',
-      notes: 'Tertiary buttons should be used for tertiary actions on each page.',
+      notes:
+        'Tertiary buttons should be used for tertiary actions on each page.',
       context: {
         variant: 'tertiary',
       },
@@ -85,7 +88,8 @@ module.exports = {
     {
       name: 'danger',
       label: 'Danger Buttons',
-      notes: 'Danger buttons should be used for a negative action (such as Delete) on the page.',
+      notes:
+        'Danger buttons should be used for a negative action (such as Delete) on the page.',
       context: {
         variant: 'danger',
         danger: true,

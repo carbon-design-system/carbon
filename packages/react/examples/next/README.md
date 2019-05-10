@@ -1,11 +1,12 @@
 # `examples/next`
 
-> See how to integrate `carbon-components` and `carbon-components-react` into a project
-> using Next.js.
+> See how to integrate `carbon-components` and `carbon-components-react` into a
+> project using Next.js.
 
 ## Usage
 
-To run this example, all you need to do is `cd` into the directory, run `yarn install`, and then `yarn start`.
+To run this example, all you need to do is `cd` into the directory, run
+`yarn install`, and then `yarn start`.
 
 ## Learn Next.js
 

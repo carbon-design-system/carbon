@@ -25,16 +25,18 @@
 
 # Overview
 
-In latest version of `carbon-components` and `carbon-components-react`, you can use custom CSS prefix.
-This document explains how to use custom CSS prefix.
+In latest version of `carbon-components` and `carbon-components-react`, you can
+use custom CSS prefix. This document explains how to use custom CSS prefix.
 
 # Example
 
-An example project can be found at [`custom-css-prefix` in our example directory](../examples/custom-css-prefix).
+An example project can be found at
+[`custom-css-prefix` in our example directory](../examples/custom-css-prefix).
 
 # Building Sass code from `carbon-components` with custom CSS prefix
 
-Custom CSS prefix in `carbon-components` Sass code can be used by setting `$prefix` Sass variable, like:
+Custom CSS prefix in `carbon-components` Sass code can be used by setting
+`$prefix` Sass variable, like:
 
 ```scss
 $prefix: 'your-brand';
@@ -43,15 +45,23 @@ $prefix: 'your-brand';
 
 # Building `carbon-components-react` code with custom CSS prefix
 
-Custom CSS prefix in `carbon-components-react` code can be used by changing `prefix` property in [`settings` module in `carbon-components`](https://github.com/IBM/carbon-components/blob/v9.0.0/src/globals/js/settings.js#L16) on-the-fly. This can be done in either of two ways:
+Custom CSS prefix in `carbon-components-react` code can be used by changing
+`prefix` property in
+[`settings` module in `carbon-components`](https://github.com/IBM/carbon-components/blob/v9.0.0/src/globals/js/settings.js#L16)
+on-the-fly. This can be done in either of two ways:
 
 1. Dependency injection
 2. On-the-fly module editing
 
 ## Dependency injection
 
-Dependency injection can be done by using a custom [WebPack "resolve plugin"](https://webpack.js.org/configuration/resolve/#resolve-plugins). See [`webpack.config.js` in our example](../examples/custom-css-prefix/webpack.config.dev.js#L8-L25) for the details.
+Dependency injection can be done by using a custom
+[WebPack "resolve plugin"](https://webpack.js.org/configuration/resolve/#resolve-plugins).
+See
+[`webpack.config.js` in our example](../examples/custom-css-prefix/webpack.config.dev.js#L8-L25)
+for the details.
 
 ## On-the-fly module editing
 
-Dependency injection can be done by using something like [WebPack `string-replace-loader`](https://www.npmjs.com/package/string-replace-loader).
+Dependency injection can be done by using something like
+[WebPack `string-replace-loader`](https://www.npmjs.com/package/string-replace-loader).

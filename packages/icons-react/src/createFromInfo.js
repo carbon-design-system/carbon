@@ -28,6 +28,7 @@ const prettierOptions = {
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'es5',
+  proseWrap: 'always',
 };
 
 const MODULE_IMPORTS = `

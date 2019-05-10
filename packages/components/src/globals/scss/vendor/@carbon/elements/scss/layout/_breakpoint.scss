@@ -47,7 +47,11 @@ $carbon--grid-breakpoints: (
 /// of the breakpoint and the value is the values for the breakpoint
 /// @param {List} $breakpoint-names [map-keys($breakpoints)] - a list of names from the $breakpoints map
 /// @returns {String}
-@function carbon--breakpoint-next($name, $breakpoints: $carbon--grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+@function carbon--breakpoint-next(
+  $name,
+  $breakpoints: $carbon--grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
   $n: index($breakpoint-names, $name);
   @if $n != null and $n < length($breakpoint-names) {
     @return nth($breakpoint-names, $n + 1);
@@ -55,7 +59,11 @@ $carbon--grid-breakpoints: (
   @return null;
 }
 
-@function carbon--breakpoint-prev($name, $breakpoints: $carbon--grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+@function carbon--breakpoint-prev(
+  $name,
+  $breakpoints: $carbon--grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
   $n: index($breakpoint-names, $name);
   @if $n != null and $n > 1 {
     @return nth($breakpoint-names, $n - 1);
@@ -64,14 +72,19 @@ $carbon--grid-breakpoints: (
 }
 
 /// Check to see if the given breakpoint name
-@function carbon--is-smallest-breakpoint($name, $breakpoints: $carbon--grid-breakpoints) {
+@function carbon--is-smallest-breakpoint(
+  $name,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   @return index(map-keys($breakpoints), $name) == 1;
 }
 
 /// returns the largest breakpoint name
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
 /// @content
-@function carbon--largest-breakpoint-name($breakpoints: $carbon--grid-breakpoints) {
+@function carbon--largest-breakpoint-name(
+  $breakpoints: $carbon--grid-breakpoints
+) {
   $total-breakpoints: length($breakpoints);
   @return carbon--key-by-index($breakpoints, $total-breakpoints);
 }
@@ -137,7 +150,11 @@ $carbon--grid-breakpoints: (
 /// @param {string | number} $lower
 /// @param {string | number} $upper
 /// @content
-@mixin carbon--breakpoint-between($lower, $upper, $breakpoints: $carbon--grid-breakpoints) {
+@mixin carbon--breakpoint-between(
+  $lower,
+  $upper,
+  $breakpoints: $carbon--grid-breakpoints
+) {
   $is-number-lower: type-of($lower) == 'number';
   $is-number-upper: type-of($upper) == 'number';
   $min: if($is-number-lower, $lower, map-get($breakpoints, $lower));
