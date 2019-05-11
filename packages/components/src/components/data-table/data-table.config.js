@@ -486,5 +486,34 @@ module.exports = {
         sort: true,
       },
     },
+    {
+      name: 'compat',
+      label: 'Data Table (with deprecated toolbar search and actions)',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        state: 'compat',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+      },
+    },
   ],
 };
