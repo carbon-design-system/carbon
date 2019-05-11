@@ -21,7 +21,6 @@
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
     "format:staged": "prettier --write",
-    "gather-deploy-files": "yarn workspaces run gather-deploy-files",
     "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
     "test": "jest",
