@@ -18,10 +18,10 @@ jobs:
           command: yarn install --offline --frozen-lockfile
       - run:
           name: Build packages
-          command: yarn build
+          command: yarn lerna run build --scope=carbon-components --include-filtered-dependencies
       - run:
           name: Run Continuous Integration checks
-          command: yarn lerna run build --scope=carbon-components --include-filtered-dependencies
+          command: yarn lerna run ci-check --scope carbon-components
 
   elements:
     docker:
