@@ -261,6 +261,7 @@ class Tooltip extends Component {
   handleMouse = evt => {
     if (evt.type === 'click') {
       evt.stopPropagation();
+      evt.preventDefault();
       const shouldOpen = !this.state.open;
       if (shouldOpen) {
         this.getTriggerPosition();
