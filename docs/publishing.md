@@ -89,7 +89,7 @@ After running `npm publish .` and seeing the package publish to the registry,
 you could create a git tag by running:
 
 ```bash
-git tag vX.Y.Z
+git tag -a vX.Y.Z # The commit message should match vX.Y.Z
 ```
 
 You should then push this tag to the project by running:
