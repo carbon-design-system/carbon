@@ -5,17 +5,25 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<div {{#if password}} data-text-input {{/if}}
-  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+<div {{#if password}} data-text-input {{else}} {{#if charCounter}} data-text-input {{/if}} {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}{{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter{{/if}}">
   <label for="text-input-3" class="{{prefix}}--label">Text Input label</label>
+  {{#if charCounter}}
+  <span class="{{prefix}}--text-input--character-counter">
+    <span class="{{prefix}}--text-input--character-counter--length">0</span>/<span
+      class="{{prefix}}--text-input--character-counter--maxlength">{{maxLength}}</span>
+  </span>
+  {{/if}}
   <div class="{{prefix}}--text-input__field-wrapper">
     {{#unless password}}
     <input id="text-input-3" type="text"
-      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+      {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}>
     {{else}}
     <input id="text-input-3" type="password"
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
-      placeholder="Placeholder text" data-toggle-password-visibility>
+      placeholder="Placeholder text" data-toggle-password-visibility{{#if charCounter}} maxlength="{{maxLength}}"
+      {{/if}}>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -26,19 +34,26 @@
   </div>
 </div>
 
-<div {{#if password}} data-text-input {{/if}}
-  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
-  <label for="text-input-4" class="{{prefix}}--label">Text Input label</label>
+<div {{#if password}} data-text-input {{else}} {{#if charCounter}} data-text-input {{/if}} {{/if}} class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}
+  {{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter{{/if}}">
+  <label for=" text-input-4" class="{{prefix}}--label">Text Input label</label>
+  {{#if charCounter}}
+  <span class="{{prefix}}--text-input--character-counter">
+    <span class="{{prefix}}--text-input--character-counter--length">0</span>/<span
+      class="{{prefix}}--text-input--character-counter--maxlength">{{maxLength}}</span>
+  </span>
+  {{/if}}
   <div class="{{prefix}}--text-input__field-wrapper" data-invalid>
     {{ carbon-icon 'WarningFilled16' class=(add prefix '--text-input__invalid-icon')}}
     {{#unless password}}
     <input id="text-input-4" type="text"
       class="{{prefix}}--text-input {{prefix}}--text-input--invalid {{#if light}} {{prefix}}--text-input--light{{/if}}"
-      placeholder="Placeholder text">
+      placeholder="Placeholder text" {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}>
     {{else}}
     <input data-invalid id="text-input-4" type="password"
       class="{{prefix}}--text-input {{prefix}}--text-input--invalid{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
-      placeholder="Placeholder text" data-toggle-password-visibility>
+      placeholder="Placeholder text" {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}
+      data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -52,20 +67,28 @@
   </div>
 </div>
 
-<div {{#if password}} data-text-input {{/if}}
-  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+<div {{#if password}} data-text-input {{else}} {{#if charCounter}} data-text-input {{/if}} {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}{{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter{{/if}}">
   <label for="text-input-5" class="{{prefix}}--label">Text Input label</label>
   <div class="{{prefix}}--form__helper-text">
     Optional helper text goes here
   </div>
+  {{#if charCounter}}
+  <span class="{{prefix}}--text-input--character-counter">
+    <span class="{{prefix}}--text-input--character-counter--length">0</span>/<span
+      class="{{prefix}}--text-input--character-counter--maxlength">{{maxLength}}</span>
+  </span>
+  {{/if}}
   <div class="{{prefix}}--text-input__field-wrapper">
     {{#unless password}}
     <input id="text-input-5" type="text"
-      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+      {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}>
     {{else}}
     <input id="text-input-5" type="password"
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
-      placeholder="Placeholder text" data-toggle-password-visibility>
+      placeholder="Placeholder text" {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}
+      data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -76,21 +99,29 @@
   </div>
 </div>
 
-<div {{#if password}} data-text-input {{/if}}
-  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}"
+<div {{#if password}} data-text-input {{else}} {{#if charCounter}} data-text-input {{/if}} {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}{{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter{{/if}}"
   style="width: 320px">
   <label for="text-input-6" class="{{prefix}}--label">Text Input label</label>
   <div class="{{prefix}}--form__helper-text">
     Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
   </div>
+  {{#if charCounter}}
+  <span class="{{prefix}}--text-input--character-counter">
+    <span class="{{prefix}}--text-input--character-counter--length">0</span>/<span
+      class="{{prefix}}--text-input--character-counter--maxlength">{{maxLength}}</span>
+  </span>
+  {{/if}}
   <div class="{{prefix}}--text-input__field-wrapper">
     {{#unless password}}
     <input id="text-input-6" type="text"
-      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text">
+      class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
+      {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}>
     {{else}}
     <input id="text-input-6" type="password"
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
-      placeholder="Placeholder text" data-toggle-password-visibility>
+      placeholder="Placeholder text" {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}
+      data-toggle-password-visibility>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">
@@ -101,21 +132,28 @@
   </div>
 </div>
 
-<div {{#if password}} data-text-input {{/if}}
-  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}">
+<div {{#if password}} data-text-input {{else}} {{#if charCounter}} data-text-input {{/if}} {{/if}}
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}{{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter{{/if}}">
   <label for="text-input-7" class="{{prefix}}--label {{prefix}}--label--disabled">Text Input label</label>
   <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
     Optional helper text goes here
   </div>
+  {{#if charCounter}}
+  <span class="{{prefix}}--text-input--character-counter">
+    <span class="{{prefix}}--text-input--character-counter--length">0</span>/<span
+      class="{{prefix}}--text-input--character-counter--maxlength">{{maxLength}}</span>
+  </span>
+  {{/if}}
   <div class="{{prefix}}--text-input__field-wrapper">
     {{#unless password}}
     <input id="text-input-7" type="text"
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}" placeholder="Placeholder text"
-      disabled>
+      {{#if charCounter}} maxlength="{{maxLength}}" {{/if}} disabled>
     {{else}}
     <input id="text-input-7" type="password"
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
-      placeholder="Placeholder text" data-toggle-password-visibility disabled>
+      placeholder="Placeholder text" {{#if charCounter}} maxlength="{{maxLength}}" {{/if}}
+      data-toggle-password-visibility disabled>
     <button
       class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
       aria-label="Show password">

@@ -38,7 +38,29 @@ export default class TextInput extends mixin(
         }
       })
     );
+    this.manage(
+      on(this.element, 'keydown', event => {
+        if (event.target.maxLength < 0) {
+          return;
+        }
+        setTimeout(() => {
+          this._handleKeyPress({ element, length: event.target.value.length });
+        }, 0);
+      })
+    );
   }
+
+  /**
+   * Updates the character counter
+   * @param {Object} obj - The elements that can change in the component
+   * @param {HTMLElement} obj.element - The element functioning as a text field
+   * @param {HTMLElement} obj.length - The length of the text field value
+   */
+  _handleKeyPress = ({ element, length }) => {
+    element.querySelector(
+      `.${this.options.selectorCharCounter}`
+    ).textContent = length;
+  };
 
   /**
    *
@@ -124,6 +146,7 @@ export default class TextInput extends mixin(
       passwordIsVisible: `${prefix}--text-input--password-visible`,
       svgIconVisibilityOn: `svg.${prefix}--icon--visibility-on`,
       svgIconVisibilityOff: `svg.${prefix}--icon--visibility-off`,
+      selectorCharCounter: `${prefix}--text-input--character-counter--length`,
     };
   }
 
