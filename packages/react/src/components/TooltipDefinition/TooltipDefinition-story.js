@@ -27,7 +27,7 @@ const props = () => ({
   alignment: select(
     'Tooltip alignment to trigger button (alignment)',
     alignments,
-    'left'
+    'start'
   ),
   tooltipText: text(
     'Tooltip content (tooltipText)',
