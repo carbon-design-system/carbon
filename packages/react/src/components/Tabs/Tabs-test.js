@@ -38,7 +38,7 @@ describe('Tabs', () => {
       });
 
       it('renders expected classes on <nav> by default', () => {
-        expect(wrapper.find('nav').hasClass(`.${prefix}--tabs`)).toBe(true);
+        expect(wrapper.find('nav').hasClass(`${prefix}--tabs`)).toBe(true);
       });
     });
 
