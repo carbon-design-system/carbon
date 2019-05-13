@@ -13,10 +13,6 @@
 /// @access private
 /// @group data-table
 @mixin data-table-expandable {
-  .#{$prefix}--data-table thead tr .#{$prefix}--table-expand {
-    position: relative;
-  }
-
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
@@ -202,6 +198,11 @@
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
+  }
+
+  th.#{$prefix}--table-expand {
+    position: relative;
+    vertical-align: middle;
   }
 
   th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {
