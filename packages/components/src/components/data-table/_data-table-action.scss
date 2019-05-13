@@ -36,6 +36,16 @@
   }
 
   //-------------------------------------------------
+  //DEPRECATED v10/v9 search behaviour
+  //-------------------------------------------------
+  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container {
+    opacity: 1;
+    transition: opacity 110ms;
+    display: flex;
+    align-items: center;
+  }
+
+  //-------------------------------------------------
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
@@ -166,7 +176,9 @@
   //-------------------------------------------------
   //TOOLBAR BUTTONS
   //-------------------------------------------------
-  .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
+  .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action,
+  // DEPRECATED prefer .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action instead
+  .#{$prefix}--toolbar-action {
     @include button-reset;
     display: flex;
     cursor: pointer;
