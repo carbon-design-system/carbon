@@ -18,7 +18,7 @@ jobs:
           command: yarn install --offline --frozen-lockfile
       - run:
           name: Build packages
-          command: yarn build
+          command: yarn lerna run build --scope=carbon-components --include-filtered-dependencies
       - run:
           name: Run Continuous Integration checks
           command: yarn lerna run ci-check --scope carbon-components
@@ -64,7 +64,7 @@ jobs:
           command: yarn install --offline --frozen-lockfile
       - run:
           name: Build packages
-          command: yarn build
+          command: yarn lerna run build --scope=carbon-components-react --include-filtered-dependencies
       - run:
           name: Run Continuous Integration checks
           command: yarn lerna run ci-check --scope carbon-components-react
@@ -74,14 +74,18 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               # Install `ibmcloud` CLI
               curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
+
               # Login and push staging manifest
               ibmcloud login \
                 --apikey $CLOUD_API_KEY \
                 -a https://api.ng.bluemix.net \
-                -o carbon-design-system \
-                -s production
+                -o carbon-design-system
+
+              ibmcloud target -s production
+
               ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
+
               # Default storybook build
               cd packages/react
               yarn build-storybook
