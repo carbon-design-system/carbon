@@ -12,7 +12,7 @@ import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 
 const types = typesList.reduce(
-  (accumulator, type) => ({
+  (acc, type) => ({
     ...accumulator,
     [`${type} (${type})`]: type,
   }),
