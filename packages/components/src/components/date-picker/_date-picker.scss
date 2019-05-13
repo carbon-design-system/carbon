@@ -405,7 +405,7 @@
   .flatpickr-innerContainer,
   .flatpickr-rContainer {
     width: 100%;
-    height: rem(336px);
+    height: auto;
   }
 
   .#{$prefix}--date-picker__weekdays,
