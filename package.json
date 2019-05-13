@@ -90,11 +90,6 @@
       "yarn lerna run lint:staged --scope carbon-components-react",
       "git add"
     ],
-    "**.{scss,css},!**/packages/components/**": [
-      "yarn format:staged",
-      "stylelint --config ./packages/stylelint-config-elements",
-      "git add"
-    ],
     "*.md": [
       "yarn format:staged",
       "git add"
