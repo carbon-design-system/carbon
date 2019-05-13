@@ -81,7 +81,7 @@ jobs:
                 -a https://api.ng.bluemix.net \
                 -o carbon-design-system
 
-              imcloud target -s production
+              ibmcloud target -s production
 
               ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
