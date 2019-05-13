@@ -9,6 +9,9 @@ import React from 'react';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
 import { mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
@@ -23,12 +26,12 @@ describe('OverflowMenu', () => {
 
     it('should render an Icon', () => {
       expect(icon.length).toBe(1);
-      expect(icon.hasClass('bx--overflow-menu__icon')).toEqual(true);
+      expect(icon.hasClass(`${prefix}--overflow-menu__icon`)).toEqual(true);
     });
 
     it('has the expected classes', () => {
-      expect(menu.hasClass('bx--overflow-menu')).toBe(true);
-      expect(menu.hasClass('bx--overflow-menu--open')).not.toBe(true);
+      expect(menu.hasClass(`${prefix}--overflow-menu`)).toBe(true);
+      expect(menu.hasClass(`${prefix}--overflow-menu--open`)).not.toBe(true);
     });
 
     it('should not render a ul unless menu is open', () => {
@@ -105,7 +108,7 @@ describe('OverflowMenu', () => {
       rootWrapper.update();
       const list = rootWrapper.find('ul');
       expect(list.length).toEqual(1);
-      expect(list.hasClass('bx--overflow-menu-options')).toEqual(true);
+      expect(list.hasClass(`${prefix}--overflow-menu-options`)).toEqual(true);
       expect(list.hasClass('extra-menu-class')).toEqual(true);
     });
 
@@ -127,7 +130,7 @@ describe('OverflowMenu', () => {
 
     it('should set expected class when state is open', () => {
       const rootWrapper = mount(<OverflowMenu />);
-      const openClass = 'bx--overflow-menu-options--open';
+      const openClass = `${prefix}--overflow-menu-options--open`;
       expect(rootWrapper.find('ul').length).toEqual(0);
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
       rootWrapper
@@ -266,9 +269,11 @@ describe('OverflowMenu', () => {
           <div className="test-child" />
         </OverflowMenu>
       );
-      // renderIcon should be the only component where `bx--overflow-menu__icon` class is applied,
+      // renderIcon should be the only component where `${prefix}--overflow-menu__icon` class is applied,
       // meaning no actual DOM node should have that class
-      const nodesWithIconClasses = rootWrapper.find('.bx--overflow-menu__icon');
+      const nodesWithIconClasses = rootWrapper.find(
+        `.${prefix}--overflow-menu__icon`
+      );
       expect(nodesWithIconClasses.length).toBe(
         nodesWithIconClasses.filter('renderIcon').length
       );

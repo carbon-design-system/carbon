@@ -8,6 +8,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import TextArea from '../TextArea';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('TextArea', () => {
   describe('should render as expected', () => {
@@ -28,7 +31,7 @@ describe('TextArea', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textarea().hasClass('bx--text-area')).toEqual(true);
+        expect(textarea().hasClass(`${prefix}--text-area`)).toEqual(true);
       });
 
       it('applies extra classes specified via className', () => {
@@ -88,13 +91,13 @@ describe('TextArea', () => {
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+        expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
       });
     });
 
     describe('helper', () => {
       it('renders a helper', () => {
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.length).toEqual(1);
       });
 
@@ -106,7 +109,7 @@ describe('TextArea', () => {
             </span>
           ),
         });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
             This helper text has <a href="#">a link</a>.
@@ -116,7 +119,7 @@ describe('TextArea', () => {
 
       it('should set helper text as expected', () => {
         wrapper.setProps({ helperText: 'Helper text' });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.text()).toEqual('Helper text');
       });
     });

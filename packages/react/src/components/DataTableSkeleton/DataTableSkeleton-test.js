@@ -8,6 +8,9 @@
 import React from 'react';
 import DataTableSkeleton from '../DataTableSkeleton/';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('DataTableSkeleton', () => {
   describe('Renders as expected', () => {
@@ -24,8 +27,8 @@ describe('DataTableSkeleton', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--data-table`)).toEqual(true);
     });
 
     it('Has the correct number of rows and columns', () => {
@@ -49,9 +52,9 @@ describe('DataTableSkeleton Compact', () => {
     const wrapper = shallow(<DataTableSkeleton compact />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table--compact')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--data-table`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--data-table--compact`)).toEqual(true);
     });
   });
 });
@@ -61,9 +64,9 @@ describe('DataTableSkeleton Zebra', () => {
     const wrapper = shallow(<DataTableSkeleton zebra />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table')).toEqual(true);
-      expect(wrapper.hasClass('bx--data-table--zebra')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--data-table`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--data-table--zebra`)).toEqual(true);
     });
   });
 });

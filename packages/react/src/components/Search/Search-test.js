@@ -11,6 +11,9 @@ import Close20 from '@carbon/icons-react/lib/close/20';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Search', () => {
   describe('renders as expected', () => {
@@ -42,7 +45,7 @@ describe('Search', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textInput.hasClass('bx--search-input')).toEqual(true);
+        expect(textInput.hasClass(`${prefix}--search-input`)).toEqual(true);
       });
 
       it('should set type as expected', () => {
@@ -71,7 +74,7 @@ describe('Search', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--label')).toEqual(true);
+        expect(label.hasClass(`${prefix}--label`)).toEqual(true);
       });
 
       it('should set label as expected', () => {
@@ -137,7 +140,7 @@ describe('Search', () => {
       });
 
       it('should have the expected small class', () => {
-        expect(smallContainer.hasClass('bx--search--sm')).toEqual(true);
+        expect(smallContainer.hasClass(`${prefix}--search--sm`)).toEqual(true);
       });
 
       it('should only have 1 button (clear)', () => {
@@ -192,8 +195,8 @@ describe('SearchSkeleton', () => {
     const wrapper = shallow(<SearchSkeleton />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--search--xl')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--search--xl`)).toEqual(true);
     });
   });
 });
@@ -203,8 +206,8 @@ describe('SearchSkeleton Small', () => {
     const wrapper = shallow(<SearchSkeleton small />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--search--sm')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--search--sm`)).toEqual(true);
     });
   });
 });

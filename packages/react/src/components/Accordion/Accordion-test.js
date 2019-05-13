@@ -10,6 +10,9 @@ import Accordion from '../Accordion';
 import AccordionSkeleton from '../Accordion/Accordion.Skeleton';
 import SkeletonText from '../SkeletonText';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Accordion', () => {
   describe('Renders as expected', () => {
@@ -24,7 +27,7 @@ describe('Accordion', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--accordion')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--accordion`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -38,8 +41,8 @@ describe('AccordionSkeleton', () => {
     const wrapper = shallow(<AccordionSkeleton />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--accordion')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--accordion`)).toEqual(true);
     });
 
     it('Renders first item as expected', () => {
@@ -55,12 +58,12 @@ describe('AccordionSkeleton', () => {
 
     it('Renders number of items as expected', () => {
       const fullWrapper = mount(<AccordionSkeleton />);
-      expect(fullWrapper.find('.bx--accordion__item')).toHaveLength(4);
+      expect(fullWrapper.find(`.${prefix}--accordion__item`)).toHaveLength(4);
     });
 
     it('Renders custom number of items', () => {
       const fullWrapper = mount(<AccordionSkeleton count={8} />);
-      expect(fullWrapper.find('.bx--accordion__item')).toHaveLength(8);
+      expect(fullWrapper.find(`.${prefix}--accordion__item`)).toHaveLength(8);
     });
   });
 });

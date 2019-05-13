@@ -9,6 +9,9 @@ import React from 'react';
 import OrderedList from '../OrderedList';
 import ListItem from '../ListItem';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('OrderedList', () => {
   describe('Renders as expected', () => {
@@ -23,7 +26,7 @@ describe('OrderedList', () => {
     });
 
     it('should render with the appropriate classes', () => {
-      expect(list.hasClass('bx--list--ordered')).toEqual(true);
+      expect(list.hasClass(`${prefix}--list--ordered`)).toEqual(true);
       expect(list.hasClass('some-class')).toEqual(true);
     });
 
@@ -33,9 +36,9 @@ describe('OrderedList', () => {
 
     it('should render nested lists', () => {
       list.setProps({ nested: true });
-      expect(list.hasClass('bx--list--nested')).toEqual(true);
+      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(true);
       list.setProps({ nested: false });
-      expect(list.hasClass('bx--list--nested')).toEqual(false);
+      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(false);
     });
   });
 });

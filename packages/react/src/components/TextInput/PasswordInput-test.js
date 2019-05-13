@@ -1,6 +1,9 @@
 import React from 'react';
 import PasswordInput from './PasswordInput';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('PasswordInput', () => {
   describe('renders as expected', () => {
@@ -22,7 +25,7 @@ describe('PasswordInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(passwordInput().hasClass('bx--text-input')).toEqual(true);
+        expect(passwordInput().hasClass(`${prefix}--text-input`)).toEqual(true);
       });
 
       it('should add extra classes that are passed via className', () => {
@@ -31,7 +34,9 @@ describe('PasswordInput', () => {
 
       it('has the expected classes for light', () => {
         wrapper.setProps({ light: true });
-        expect(passwordInput().hasClass('bx--text-input--light')).toEqual(true);
+        expect(
+          passwordInput().hasClass(`${prefix}--text-input--light`)
+        ).toEqual(true);
       });
 
       it('should set type as expected', () => {
@@ -68,7 +73,7 @@ describe('PasswordInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+        expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
       });
 
       it('should set label as expected', () => {
@@ -78,7 +83,7 @@ describe('PasswordInput', () => {
 
     describe('helper', () => {
       it('renders a helper', () => {
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.length).toEqual(1);
       });
 
@@ -90,7 +95,7 @@ describe('PasswordInput', () => {
             </span>
           ),
         });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
             This helper text has <a href="/">a link</a>.
@@ -100,7 +105,7 @@ describe('PasswordInput', () => {
 
       it('should set helper text as expected', () => {
         wrapper.setProps({ helperText: 'Helper text' });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.text()).toEqual('Helper text');
       });
     });

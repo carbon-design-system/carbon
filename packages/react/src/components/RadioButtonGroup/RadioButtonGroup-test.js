@@ -9,6 +9,9 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('RadioButtonGroup', () => {
   describe('renders as expected', () => {
@@ -157,9 +160,9 @@ describe('RadioButtonGroup', () => {
 
     it('should found the provided class along with the base class', () => {
       expect(wrapper.exists('.my-radio-group')).toBe(true);
-      expect(wrapper.exists('.bx--radio-button-group.my-radio-group')).toBe(
-        true
-      );
+      expect(
+        wrapper.exists(`.${prefix}--radio-button-group.my-radio-group`)
+      ).toBe(true);
     });
   });
 });
