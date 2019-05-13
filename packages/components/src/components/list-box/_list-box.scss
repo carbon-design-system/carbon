@@ -418,16 +418,20 @@ $list-box-menu-width: rem(300px);
 
     &:hover {
       background-color: $hover-ui;
-
-      + .#{$prefix}--list-box__menu-item
-        .#{$prefix}--list-box__menu-item__option {
-        border-color: transparent;
-      }
     }
 
     &:active {
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-top-color: $ui-03;
   }
 
   .#{$prefix}--list-box__menu-item:first-of-type
@@ -485,12 +489,6 @@ $list-box-menu-width: rem(300px);
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
-
-    > .#{$prefix}--list-box__menu-item__option,
-    + .#{$prefix}--list-box__menu-item
-      .#{$prefix}--list-box__menu-item__option {
-      border-color: transparent;
-    }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
