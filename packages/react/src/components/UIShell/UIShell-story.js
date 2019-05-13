@@ -186,6 +186,43 @@ storiesOf('[Experimental] UI Shell', module)
     ))
   )
   .add(
+    'Header Base w/ Navigation and Actions',
+    withReadme(readme, () => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          Name
+        </HeaderName>
+        <HeaderNavigation aria-label="IBM [Platform]">
+          <HeaderMenuItem href="#">Catalog</HeaderMenuItem>
+          <HeaderMenuItem href="#">Docs</HeaderMenuItem>
+          <HeaderMenuItem href="#">Support</HeaderMenuItem>
+          <HeaderMenu aria-label="Manage">
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          </HeaderMenu>
+        </HeaderNavigation>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search16 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            onClick={action('notification click')}>
+            <Notification16 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}>
+            <AppSwitcher16 />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+      </Header>
+    ))
+  )
+  .add(
     'SideNav',
     withReadme(readme, () => (
       <>
