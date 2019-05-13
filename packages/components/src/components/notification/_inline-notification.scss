@@ -33,6 +33,7 @@
     color: $text-01;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
