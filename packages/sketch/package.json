@@ -1,0 +1,15 @@
+{
+  "name": "sketch",
+  "private": true,
+  "version": "10.2.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "skpm-build",
+    "develop": "skpm-build --watch --run",
+    "skpm:link": "skpm-link",
+    "watch": "skpm-build --watch"
+  },
+  "dependencies": {
+    "skpm": "^1.2.0"
+  }
+}
