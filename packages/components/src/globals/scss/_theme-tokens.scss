@@ -251,7 +251,11 @@
   /// @type Color
   /// @access public
   /// @group notification
-  $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
+  $notification-warning-background-color: mix(
+    $ibm-color__yellow-20,
+    $ibm-color__white-0,
+    15%
+  ) !default !global;
 
   /// @type Color
   /// @access public
