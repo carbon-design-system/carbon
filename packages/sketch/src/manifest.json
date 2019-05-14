@@ -9,9 +9,18 @@
       "identifier": "carbon.elements.colors",
       "script": "colors.js",
       "handler": "render"
+    },
+    {
+      "name": "Add icons",
+      "identifier": "carbon.elements.icons",
+      "script": "icons.js",
+      "handler": "render"
     }
   ],
   "menu": {
-    "items": ["carbon.elements.colors"]
+    "items": [
+      "carbon.elements.colors",
+      "carbon.elements.icons"
+    ]
   }
 }
