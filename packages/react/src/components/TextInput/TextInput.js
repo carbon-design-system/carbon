@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
@@ -29,10 +29,13 @@ const TextInput = React.forwardRef(function TextInput(
     invalidText,
     helperText,
     light,
+    charCount,
+    maxLength,
     ...other
   },
   ref
 ) {
+  const [inputVal, setInput] = useState('');
   const errorId = id + '-error-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
@@ -54,12 +57,19 @@ const TextInput = React.forwardRef(function TextInput(
     type,
     ref,
     className: textInputClasses,
+    maxLength: maxLength || null,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
   });
+  const charCounterClasses = classNames(
+    `${prefix}--text-input--character-counter`,
+    {
+      [`${prefix}--text-input--character-counter--disabled`]: other.disabled,
+    }
+  );
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
@@ -68,13 +78,28 @@ const TextInput = React.forwardRef(function TextInput(
       {labelText}
     </label>
   ) : null;
+  const charCounter = (
+    <span className={charCounterClasses}>
+      <span className={`${prefix}--text-input--character-counter--length`}>
+        {inputVal.length}
+      </span>
+      /
+      <span className={`${prefix}--text-input--character-counter--maxlength`}>
+        {maxLength}
+      </span>
+    </span>
+  );
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input
+      {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+      value={inputVal}
+      onInput={e => setInput(e.target.value)}
+    />
   );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
@@ -83,6 +108,7 @@ const TextInput = React.forwardRef(function TextInput(
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
       {label}
+      {charCount && charCounter}
       {helper}
       <div
         className={`${prefix}--text-input__field-wrapper`}

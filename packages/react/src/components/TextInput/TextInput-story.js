@@ -8,7 +8,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  select,
+  text,
+  number,
+} from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 
@@ -54,6 +60,8 @@ const TextInputProps = () => ({
   disabled: boolean('Disabled (disabled)', false),
   hideLabel: boolean('No label (hideLabel)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
+  charCount: boolean('Add character counter (charCount)', false),
+  maxLength: number('Input length limit (maxLength)', 100),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'A valid value is required'
