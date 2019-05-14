@@ -11,48 +11,51 @@ import {
   Style,
   SymbolMaster,
 } from 'sketch/dom';
+import { findOrCreatePage } from './tools/page';
+
+const { black, white, orange, yellow, ...swatches } = colors;
+const colorNames = Object.keys(colors);
+const formattedSwatchNames = colorNames.reduce(
+  (acc, key, i) => ({
+    ...acc,
+    [formatTokenName(key)]: colorNames[i],
+  }),
+  {}
+);
 
 export function render(context) {
   sketch.UI.message('Hi 👋 We are still working on this! 🚧');
 
-  // const sharedStyle = SharedStyle.fromStyle({
-  // name: 'test-01',
-  // style: {
-  // fills: [
-  // {
-  // color: '#000000',
-  // fillType: Style.FillType.Color,
-  // },
-  // ],
-  // },
-  // document: context.document,
-  // });
+  const layerStyles = context.document.layerStyles();
+  const sharedStyles = layerStyles.sharedStyles();
 
-  console.log(context.document.documentData().layerStyles());
-  return;
+  for (let i = sharedStyles.count() - 1; i >= 0; i--) {
+    const sharedStyle = sharedStyles.objectAtIndex(i);
+    const name = sharedStyle.name();
+    const parts = name.split('/');
 
-  const PAGE_NAME = 'Color';
-  let [page] = Array.from(context.document.pages()).filter(page => {
-    return '' + page.name() === PAGE_NAME;
-  });
+    if (parts.length !== 3) {
+      continue;
+    }
 
-  if (!page) {
-    page = new Page({
-      name: PAGE_NAME,
-      parent: context.document,
-    });
-  }
+    const [namespace, swatch, grade] = parts;
+    if (namespace !== 'color') {
+      continue;
+    }
 
-  page.selected = true;
+    if (!formattedSwatchNames[swatch]) {
+      continue;
+    }
 
-  if (Array.isArray(page.layers) && page.layers.length !== 0) {
-    for (let i = page.layers().count() - 1; i >= 0; i--) {
-      const layer = page.layers().objectAtIndex(i);
-      layer.removeFromParent();
+    const formattedSwatchName = formattedSwatchNames[swatch];
+
+    if (colors[formattedSwatchName] && colors[formattedSwatchName][grade]) {
+      layerStyles.removeSharedStyle(sharedStyle);
     }
   }
 
-  const { black, white, orange, yellow, ...swatches } = colors;
+  const page = findOrCreatePage(context, 'Color');
+
   const swatchNames = Object.keys(swatches);
   const ARTBOARD_WIDTH = 40;
   const ARTBOARD_HEIGHT = 40;
@@ -66,19 +69,25 @@ export function render(context) {
       const grade = grades[j];
       const name = formatTokenName(swatch);
       const colorName = `${name}-${grade}`;
+      const sharedStyle = SharedStyle.fromStyle({
+        name: ['color', name, grade].join('/'),
+        style: {
+          fills: [
+            {
+              color: swatches[swatch][grade],
+              fillType: Style.FillType.Color,
+            },
+          ],
+        },
+        document: context.document,
+      });
+
       const rectangle = new ShapePath({
         name: colorName,
         frame: new Rectangle(0, 0, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
         shapeType: ShapePath.ShapeType.Rectangle,
-        style: sharedStyle,
-        // style: {
-        // fills: [
-        // {
-        // color: swatches[swatch][grade],
-        // fillType: Style.FillType.Color,
-        // },
-        // ],
-        // },
+        sharedStyleId: sharedStyle.id,
+        style: sharedStyle.style,
       });
 
       const artboard = new SymbolMaster({
@@ -92,7 +101,6 @@ export function render(context) {
         ),
         layers: [rectangle],
       });
-      // console.log(formatTokenName(swatch), grade);
     }
   }
 }
