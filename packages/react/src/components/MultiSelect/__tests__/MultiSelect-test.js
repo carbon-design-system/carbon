@@ -13,6 +13,9 @@ import {
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const mouseDownAndUp = node => {
   node.dispatchEvent(new window.MouseEvent('mousedown', { bubbles: true }));
@@ -54,9 +57,9 @@ describe('MultiSelect', () => {
       const items = generateItems(5, generateGenericItem);
       const wrapper = mount(<MultiSelect label="Field" items={items} />);
       expect(wrapper.state('isOpen')).toBe(false);
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       expect(wrapper.state('isOpen')).toBe(true);
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       expect(wrapper.state('isOpen')).toBe(false);
     });
   });
@@ -98,9 +101,9 @@ describe('MultiSelect', () => {
         wrapper.find('Selection').instance().state.selectedItems.length
       ).toBe(3);
 
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
 
@@ -112,7 +115,7 @@ describe('MultiSelect', () => {
     it('should allow a user to de-select an initial selected item by hitting enter on initial selected item', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       const simulateArrowDown = wrapper =>
-        wrapper.find('.bx--list-box__field').simulate('keydown', {
+        wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
           key: 'ArrowDown',
         });
 
@@ -122,7 +125,7 @@ describe('MultiSelect', () => {
       openMenu(wrapper);
       simulateArrowDown(wrapper);
       wrapper
-        .find('.bx--list-box__field')
+        .find(`.${prefix}--list-box__field`)
         .at(0)
         .simulate('keydown', {
           key: 'Enter',
@@ -144,9 +147,9 @@ describe('MultiSelect', () => {
         wrapper.find('Selection').instance().state.selectedItems.length
       ).toBe(1);
       wrapper.setState({ foo: 'bar' });
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
 
@@ -161,9 +164,9 @@ describe('MultiSelect', () => {
         wrapper.find('Selection').instance().state.selectedItems.length
       ).toBe(3);
 
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(4)
         .simulate('click');
 
@@ -188,20 +191,20 @@ describe('MultiSelect', () => {
 
     it('should open the menu when a user clicks on the ListBox field', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
-      wrapper.find('.bx--list-box__field').simulate('click');
-      expect(wrapper.find('.bx--list-box__menu').length).toBe(1);
-      expect(wrapper.find('.bx--list-box__menu-item').length).toBe(
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
+      expect(wrapper.find(`.${prefix}--list-box__menu`).length).toBe(1);
+      expect(wrapper.find(`.${prefix}--list-box__menu-item`).length).toBe(
         mockProps.items.length
       );
     });
 
     it('should open the menu when a user focuses and hits space on the ListBox field', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
-      wrapper.find('.bx--list-box__field').simulate('keydown', {
+      wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
         key: ' ',
       });
-      expect(wrapper.find('.bx--list-box__menu').length).toBe(1);
-      expect(wrapper.find('.bx--list-box__menu-item').length).toBe(
+      expect(wrapper.find(`.${prefix}--list-box__menu`).length).toBe(1);
+      expect(wrapper.find(`.${prefix}--list-box__menu-item`).length).toBe(
         mockProps.items.length
       );
     });
@@ -210,7 +213,7 @@ describe('MultiSelect', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       openMenu(wrapper);
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .first()
         .simulate('click');
       expect(wrapper.find('Selection').instance().state.selectedItems).toEqual([
@@ -220,17 +223,17 @@ describe('MultiSelect', () => {
 
     it('should allow a user to highlight items with the up and down arrow keys', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       const simulateArrowDown = () =>
-        wrapper.find('.bx--list-box__field').simulate('keydown', {
+        wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
           key: 'ArrowDown',
         });
       const simulateArrowUp = () =>
-        wrapper.find('.bx--list-box__field').simulate('keydown', {
+        wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
           key: 'ArrowUp',
         });
       const getHighlightedId = () =>
-        wrapper.find('.bx--list-box__menu-item--highlighted').prop('id');
+        wrapper.find(`.${prefix}--list-box__menu-item--highlighted`).prop('id');
       simulateArrowDown();
       expect(getHighlightedId()).toBe('downshift-13-item-0');
       simulateArrowDown();
@@ -247,7 +250,7 @@ describe('MultiSelect', () => {
 
     it('should close the menu when a user clicks outside of the control', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       mouseDownAndUp(document.body);
       expect(wrapper.state('isOpen')).toBe(false);
     });
@@ -257,10 +260,10 @@ describe('MultiSelect', () => {
       openMenu(wrapper);
       for (let i = 0; i < mockProps.items.length; i++) {
         wrapper
-          .find('.bx--list-box__menu-item')
+          .find(`.${prefix}--list-box__menu-item`)
           .at(i)
           .simulate('click');
-        expect(wrapper.find('.bx--list-box__selection').text()).toEqual(
+        expect(wrapper.find(`.${prefix}--list-box__selection`).text()).toEqual(
           expect.stringContaining(`${i + 1}`)
         );
       }
@@ -271,46 +274,54 @@ describe('MultiSelect', () => {
 
     it('should allow a user to de-select an item by clicking on a selected item', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
-      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper.find(`.${prefix}--list-box__field`).simulate('click');
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
-      expect(wrapper.find('.bx--list-box__menu-item--active').length).toBe(1);
+      expect(
+        wrapper.find(`.${prefix}--list-box__menu-item--active`).length
+      ).toBe(1);
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
-      expect(wrapper.find('.bx--list-box__menu-item--active').length).toBe(0);
+      expect(
+        wrapper.find(`.${prefix}--list-box__menu-item--active`).length
+      ).toBe(0);
     });
 
     it('should allow a user to de-select an item by hitting enter on a selected item', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       const simulateArrowDown = wrapper =>
-        wrapper.find('.bx--list-box__field').simulate('keydown', {
+        wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
           key: 'ArrowDown',
         });
       openMenu(wrapper);
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
-      expect(wrapper.find('.bx--list-box__menu-item--active').length).toBe(1);
+      expect(
+        wrapper.find(`.${prefix}--list-box__menu-item--active`).length
+      ).toBe(1);
       simulateArrowDown(wrapper);
-      wrapper.find('.bx--list-box__field').simulate('keydown', {
+      wrapper.find(`.${prefix}--list-box__field`).simulate('keydown', {
         key: 'Enter',
       });
-      expect(wrapper.find('.bx--list-box__menu-item--active').length).toBe(0);
+      expect(
+        wrapper.find(`.${prefix}--list-box__menu-item--active`).length
+      ).toBe(0);
     });
 
     it('should allow a user to click on the clear icon to clear all selected items', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       openMenu(wrapper);
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
-      wrapper.find('.bx--list-box__selection').simulate('click');
+      wrapper.find(`.${prefix}--list-box__selection`).simulate('click');
       expect(wrapper.find('Selection').instance().state.selectedItems).toEqual(
         []
       );
@@ -320,10 +331,10 @@ describe('MultiSelect', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       openMenu(wrapper);
       wrapper
-        .find('.bx--list-box__menu-item')
+        .find(`.${prefix}--list-box__menu-item`)
         .at(0)
         .simulate('click');
-      wrapper.find('.bx--list-box__selection').simulate('keydown', {
+      wrapper.find(`.${prefix}--list-box__selection`).simulate('keydown', {
         keyCode: 13,
       });
       expect(wrapper.find('Selection').instance().state.selectedItems).toEqual(

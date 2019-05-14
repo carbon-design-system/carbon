@@ -8,13 +8,16 @@
 import React from 'react';
 import SkeletonText from '../SkeletonText';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('SkeletonText', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<SkeletonText />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton__text')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton__text`)).toEqual(true);
     });
   });
 });
@@ -24,7 +27,7 @@ describe('SkeletonText Heading', () => {
     const wrapper = shallow(<SkeletonText heading />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton__heading')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton__heading`)).toEqual(true);
     });
   });
 });

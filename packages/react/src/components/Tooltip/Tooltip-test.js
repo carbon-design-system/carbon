@@ -13,6 +13,9 @@ import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
 import { mount } from 'enzyme';
 import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 jest.mock('lodash.debounce');
 
@@ -29,12 +32,12 @@ describe('Tooltip', () => {
   describe('Renders as expected with defaults', () => {
     const wrapper = mount(
       <Tooltip triggerText="Tooltip">
-        <p className="bx--tooltip__label">Tooltip label</p>
+        <p className={`${prefix}--tooltip__label`}>Tooltip label</p>
         <p>Lorem ipsum dolor sit amet</p>
       </Tooltip>
     );
 
-    const trigger = wrapper.find('.bx--tooltip__trigger');
+    const trigger = wrapper.find(`.${prefix}--tooltip__trigger`);
 
     describe('tooltip trigger', () => {
       it('renders a tooltip container', () => {
@@ -62,7 +65,7 @@ describe('Tooltip', () => {
         <p>Lorem ipsum dolor sit amet</p>
       </Tooltip>
     );
-    const label = wrapper.find('.bx--tooltip__label');
+    const label = wrapper.find(`.${prefix}--tooltip__label`);
     const floatingMenu = wrapper.find(FloatingMenu);
 
     describe('tooltip container', () => {
@@ -82,11 +85,11 @@ describe('Tooltip', () => {
             .find('[data-floating-menu-direction]')
             .first()
             .prop('className')
-        ).toBe('bx--tooltip bx--tooltip--shown tooltip--class');
+        ).toBe(`${prefix}--tooltip ${prefix}--tooltip--shown tooltip--class`);
       });
       it('sets the trigger class', () => {
         expect(label.prop('className')).toBe(
-          'bx--tooltip__label tooltip--trigger-class'
+          `${prefix}--tooltip__label tooltip--trigger-class`
         );
       });
     });

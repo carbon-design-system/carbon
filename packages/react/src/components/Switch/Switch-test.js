@@ -8,6 +8,9 @@
 import React from 'react';
 import Switch from '../Switch';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Switch', () => {
   describe('component rendering', () => {
@@ -24,18 +27,18 @@ describe('Switch', () => {
     });
 
     it('label should have the expected class', () => {
-      const className = 'bx--content-switcher__label';
+      const className = `${prefix}--content-switcher__label`;
       expect(buttonWrapper.find('span').hasClass(className)).toEqual(true);
     });
 
     it('should have the expected class', () => {
-      const cls = 'bx--content-switcher-btn';
+      const cls = `${prefix}--content-switcher-btn`;
 
       expect(buttonWrapper.hasClass(cls)).toEqual(true);
     });
 
     it('should not have selected class', () => {
-      const selectedClass = 'bx--content-switcher--selected';
+      const selectedClass = `${prefix}--content-switcher--selected`;
 
       expect(buttonWrapper.hasClass(selectedClass)).toEqual(false);
     });
@@ -45,9 +48,9 @@ describe('Switch', () => {
 
       buttonWrapper.setProps({ selected });
 
-      expect(buttonWrapper.hasClass('bx--content-switcher--selected')).toEqual(
-        true
-      );
+      expect(
+        buttonWrapper.hasClass(`${prefix}--content-switcher--selected`)
+      ).toEqual(true);
     });
   });
 

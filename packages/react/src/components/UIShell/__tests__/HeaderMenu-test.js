@@ -8,6 +8,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { HeaderMenu, HeaderMenuItem } from '../';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('HeaderMenu', () => {
   let mountNode;
@@ -57,7 +60,9 @@ describe('HeaderMenu', () => {
       }
     );
     const headerMenu = wrapper.childAt(0);
-    const headerMenuText = headerMenu.find('.bx--header__menu-title').text();
+    const headerMenuText = headerMenu
+      .find(`.${prefix}--header__menu-title`)
+      .text();
 
     expect(headerMenuText).toMatch('Accessibility label');
   });
@@ -77,10 +82,12 @@ describe('HeaderMenu', () => {
 
     const headerMenu = wrapper.childAt(0);
     const headerMenuAnchorChildText = headerMenu
-      .find('.bx--header__menu-title')
+      .find(`.${prefix}--header__menu-title`)
       .childAt(0)
       .text();
-    const headerMenuText = headerMenu.find('.bx--header__menu-title').text();
+    const headerMenuText = headerMenu
+      .find(`.${prefix}--header__menu-title`)
+      .text();
 
     expect(headerMenuText).not.toMatch('Accessibility label');
     expect(headerMenuAnchorChildText).toMatch('Some other text');

@@ -11,7 +11,9 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectSkeleton from '../Select/Select.Skeleton';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 describe('Select', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
@@ -25,11 +27,11 @@ describe('Select', () => {
       </Select>
     );
 
-    const selectContainer = wrapper.find('.bx--form-item > div');
+    const selectContainer = wrapper.find(`.${prefix}--form-item > div`);
     const label = wrapper.find('label');
     const selectWrapper = () => wrapper.find(Select);
     const select = () => wrapper.find('select');
-    const helper = wrapper.find('.bx--form__helper-text');
+    const helper = wrapper.find(`.${prefix}--form__helper-text`);
 
     describe('selectContainer', () => {
       it('renders a container', () => {
@@ -41,7 +43,7 @@ describe('Select', () => {
       });
 
       it('has the expected classes', () => {
-        expect(selectContainer.hasClass('bx--select')).toEqual(true);
+        expect(selectContainer.hasClass(`${prefix}--select`)).toEqual(true);
       });
 
       it('applies extra classes specified via className', () => {
@@ -80,7 +82,7 @@ describe('Select', () => {
       });
 
       it('has the expected classes', () => {
-        expect(select().hasClass('bx--select-input')).toEqual(true);
+        expect(select().hasClass(`${prefix}--select-input`)).toEqual(true);
       });
 
       it('has the expected id', () => {
@@ -109,7 +111,7 @@ describe('Select', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--label')).toEqual(true);
+        expect(label.hasClass(`${prefix}--label`)).toEqual(true);
       });
 
       it('has the expected htmlFor value', () => {
@@ -134,7 +136,7 @@ describe('Select', () => {
             </span>
           ),
         });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
             This helper text has <a href="#">a link</a>.
@@ -156,10 +158,12 @@ describe('Select', () => {
       </Select>
     );
 
-    const selectContainer = wrapper.find('.bx--form-item > div');
+    const selectContainer = wrapper.find(`.${prefix}--form-item > div`);
 
     it('has the expected classes', () => {
-      expect(selectContainer.hasClass('bx--select--inline')).toEqual(true);
+      expect(selectContainer.hasClass(`${prefix}--select--inline`)).toEqual(
+        true
+      );
     });
   });
 });
@@ -190,10 +194,10 @@ describe('SelectSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<SelectSkeleton />);
 
-    const select = wrapper.find('.bx--select');
+    const select = wrapper.find(`.${prefix}--select`);
 
     it('Has the expected classes', () => {
-      expect(select.hasClass('bx--skeleton')).toEqual(true);
+      expect(select.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });

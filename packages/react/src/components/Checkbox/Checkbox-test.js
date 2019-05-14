@@ -9,6 +9,9 @@ import React from 'react';
 import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Checkbox', () => {
   describe('Renders as expected', () => {
@@ -23,7 +26,7 @@ describe('Checkbox', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--checkbox-label')).toEqual(true);
+        expect(label.hasClass(`${prefix}--checkbox-label`)).toEqual(true);
       });
 
       it('has the expected htmlFor value', () => {
@@ -80,7 +83,7 @@ describe('Checkbox', () => {
     const label = wrapper.find('label');
     expect(label.length).toEqual(1);
     const span = wrapper.find('span');
-    expect(span.hasClass('bx--visually-hidden')).toEqual(true);
+    expect(span.hasClass(`${prefix}--visually-hidden`)).toEqual(true);
   });
 
   describe('events', () => {
@@ -160,8 +163,8 @@ describe('CheckboxSkeleton', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--checkbox-label')).toEqual(true);
-        expect(label.hasClass('bx--skeleton')).toEqual(true);
+        expect(label.hasClass(`${prefix}--checkbox-label`)).toEqual(true);
+        expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);
       });
     });
   });

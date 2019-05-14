@@ -9,7 +9,9 @@ import React from 'react';
 import CopyButton from '../CopyButton';
 import Copy16 from '@carbon/icons-react/lib/copy/16';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 jest.useFakeTimers();
 
 describe('CopyButton', () => {
@@ -33,8 +35,8 @@ describe('CopyButton', () => {
 
     it('Renders children as expected', () => {
       expect(wrapper.is('button')).toBe(true);
-      expect(wrapper.hasClass('bx--snippet-button')).toBe(true);
-      expect(wrapper.find('.bx--btn--copy__feedback').length).toBe(1);
+      expect(wrapper.hasClass(`${prefix}--snippet-button`)).toBe(true);
+      expect(wrapper.find(`.${prefix}--btn--copy__feedback`).length).toBe(1);
       expect(wrapper.find(Copy16).length).toBe(1);
     });
 
@@ -57,7 +59,7 @@ describe('CopyButton', () => {
     it('Should be able to specify the feedback message', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
       expect(
-        feedbackWrapper.find('.bx--btn--copy__feedback').props()[
+        feedbackWrapper.find(`.${prefix}--btn--copy__feedback`).props()[
           'data-feedback'
         ]
       ).toBe('Copied!');
@@ -67,14 +69,15 @@ describe('CopyButton', () => {
   describe('Renders feedback as expected', () => {
     it('Should make the feedback visible', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
-      const feedback = () => feedbackWrapper.find('.bx--btn--copy__feedback');
-      expect(feedback().hasClass('bx--btn--copy__feedback--displayed')).toBe(
-        false
-      );
+      const feedback = () =>
+        feedbackWrapper.find(`.${prefix}--btn--copy__feedback`);
+      expect(
+        feedback().hasClass(`${prefix}--btn--copy__feedback--displayed`)
+      ).toBe(false);
       feedbackWrapper.setState({ showFeedback: true });
-      expect(feedback().hasClass('bx--btn--copy__feedback--displayed')).toBe(
-        true
-      );
+      expect(
+        feedback().hasClass(`${prefix}--btn--copy__feedback--displayed`)
+      ).toBe(true);
     });
 
     it('Should show feedback for a limited amount of time', () => {

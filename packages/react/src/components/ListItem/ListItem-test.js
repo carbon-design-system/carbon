@@ -8,6 +8,9 @@
 import React from 'react';
 import ListItem from '../ListItem';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('ListItem', () => {
   describe('Renders as expected', () => {
@@ -18,7 +21,7 @@ describe('ListItem', () => {
     });
 
     it('should render with the appropriate classes', () => {
-      expect(item.hasClass('bx--list__item')).toEqual(true);
+      expect(item.hasClass(`${prefix}--list__item`)).toEqual(true);
       expect(item.hasClass('some-class')).toEqual(true);
     });
 

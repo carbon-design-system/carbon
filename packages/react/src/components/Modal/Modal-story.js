@@ -11,6 +11,9 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const props = () => ({
   className: 'some-class',
@@ -57,7 +60,7 @@ storiesOf('Modal', module)
     'Default',
     () => (
       <Modal {...props()}>
-        <p className="bx--modal-content__text">
+        <p className={`${prefix}--modal-content__text`}>
           Please see ModalWrapper for more examples and demo of the
           functionality.
         </p>

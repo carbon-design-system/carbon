@@ -8,6 +8,9 @@
 import React from 'react';
 import RadioButton from '../RadioButton';
 import { mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const render = props =>
   mount(
@@ -36,7 +39,7 @@ describe('RadioButton', () => {
       });
 
       it('has the expected class', () => {
-        expect(input.hasClass('bx--radio-button')).toEqual(true);
+        expect(input.hasClass(`${prefix}--radio-button`)).toEqual(true);
       });
 
       it('has a unique id set by default', () => {
@@ -59,14 +62,16 @@ describe('RadioButton', () => {
       });
 
       it('should set the correct class', () => {
-        expect(label.props().className).toEqual('bx--radio-button__label');
+        expect(label.props().className).toEqual(
+          `${prefix}--radio-button__label`
+        );
       });
 
       it('should render a span with the correct class for radio style', () => {
         const span = label.find('span');
-        expect(span.at(0).hasClass('bx--radio-button__appearance')).toEqual(
-          true
-        );
+        expect(
+          span.at(0).hasClass(`${prefix}--radio-button__appearance`)
+        ).toEqual(true);
       });
 
       it('should render a span for the label text', () => {
@@ -94,7 +99,7 @@ describe('RadioButton', () => {
 
     describe('wrapper', () => {
       it('should have the correct class', () => {
-        expect(div.hasClass('bx--radio-button-wrapper')).toEqual(true);
+        expect(div.hasClass(`${prefix}--radio-button-wrapper`)).toEqual(true);
       });
 
       it('should have extra classes applied', () => {

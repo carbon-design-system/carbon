@@ -10,6 +10,9 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -22,7 +25,9 @@ describe('DatePicker', () => {
     const datepicker = wrapper.childAt(0);
 
     it('has the expected classes', () => {
-      expect(datepicker.children().hasClass('bx--date-picker')).toBe(true);
+      expect(datepicker.children().hasClass(`${prefix}--date-picker`)).toBe(
+        true
+      );
     });
 
     it('should add extra classes that are passed via className', () => {
@@ -73,9 +78,9 @@ describe('DatePicker', () => {
     const datepicker = wrapper.childAt(0);
 
     it('has the simple date picker class', () => {
-      expect(datepicker.children().hasClass('bx--date-picker--simple')).toBe(
-        true
-      );
+      expect(
+        datepicker.children().hasClass(`${prefix}--date-picker--simple`)
+      ).toBe(true);
     });
 
     it('has the value as expected', () => {
@@ -96,18 +101,18 @@ describe('DatePicker', () => {
         datePickerType="single"
         className="extra-class">
         <div className="test-child">
-          <input type="text" className="bx--date-picker__input" />
+          <input type="text" className={`${prefix}--date-picker__input`} />
         </div>
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
-    const input = wrapper.find('.bx--date-picker__input');
+    const input = wrapper.find(`.${prefix}--date-picker__input`);
     const icon = wrapper.find('svg');
 
     it('has the single date picker class', () => {
-      expect(datepicker.children().hasClass('bx--date-picker--single')).toBe(
-        true
-      );
+      expect(
+        datepicker.children().hasClass(`${prefix}--date-picker--single`)
+      ).toBe(true);
     });
 
     it('should initalize a calendar', () => {
@@ -118,7 +123,9 @@ describe('DatePicker', () => {
       expect(
         wrapper
           .instance()
-          .cal.calendarContainer.classList.contains('bx--date-picker__calendar')
+          .cal.calendarContainer.classList.contains(
+            `${prefix}--date-picker__calendar`
+          )
       ).toBe(true);
     });
 
@@ -167,21 +174,25 @@ describe('DatePicker', () => {
         <div className="test-child">
           <input
             type="text"
-            className="bx--date-picker__input"
+            className={`${prefix}--date-picker__input`}
             id="input-from"
           />
         </div>
         <div className="test-child">
-          <input type="text" className="bx--date-picker__input" id="input-to" />
+          <input
+            type="text"
+            className={`${prefix}--date-picker__input`}
+            id="input-to"
+          />
         </div>
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
 
     it('has the range date picker class', () => {
-      expect(datepicker.children().hasClass('bx--date-picker--range')).toBe(
-        true
-      );
+      expect(
+        datepicker.children().hasClass(`${prefix}--date-picker--range`)
+      ).toBe(true);
     });
 
     it('should initalize a calendar', () => {
@@ -192,7 +203,9 @@ describe('DatePicker', () => {
       expect(
         wrapper
           .instance()
-          .cal.calendarContainer.classList.contains('bx--date-picker__calendar')
+          .cal.calendarContainer.classList.contains(
+            `${prefix}--date-picker__calendar`
+          )
       ).toBe(true);
     });
 
@@ -213,12 +226,16 @@ describe('DatePicker', () => {
         <div className="test-child">
           <input
             type="text"
-            className="bx--date-picker__input"
+            className={`${prefix}--date-picker__input`}
             id="input-from"
           />
         </div>
         <div className="test-child">
-          <input type="text" className="bx--date-picker__input" id="input-to" />
+          <input
+            type="text"
+            className={`${prefix}--date-picker__input`}
+            id="input-to"
+          />
         </div>
       </DatePicker>
     );
@@ -231,12 +248,16 @@ describe('DatePicker', () => {
         <div className="test-child">
           <input
             type="text"
-            className="bx--date-picker__input"
+            className={`${prefix}--date-picker__input`}
             id="input-from"
           />
         </div>
         <div className="test-child">
-          <input type="text" className="bx--date-picker__input" id="input-to" />
+          <input
+            type="text"
+            className={`${prefix}--date-picker__input`}
+            id="input-to"
+          />
         </div>
       </DatePicker>
     );
@@ -271,14 +292,14 @@ describe('DatePicker', () => {
           <div className="test-child">
             <input
               type="text"
-              className="bx--date-picker__input"
+              className={`${prefix}--date-picker__input`}
               id="input-from"
             />
           </div>
           <div className="test-child">
             <input
               type="text"
-              className="bx--date-picker__input"
+              className={`${prefix}--date-picker__input`}
               id="input-to"
             />
           </div>
@@ -302,12 +323,16 @@ describe('DatePicker', () => {
         <div className="test-child">
           <input
             type="text"
-            className="bx--date-picker__input"
+            className={`${prefix}--date-picker__input`}
             id="input-from"
           />
         </div>
         <div className="test-child">
-          <input type="text" className="bx--date-picker__input" id="input-to" />
+          <input
+            type="text"
+            className={`${prefix}--date-picker__input`}
+            id="input-to"
+          />
         </div>
       </DatePicker>
     );
@@ -329,11 +354,13 @@ describe('DatePickerSkeleton', () => {
     const wrapper = shallow(<DatePickerSkeleton range />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.children().hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.children().hasClass('bx--date-picker')).toEqual(true);
-      expect(wrapper.children().hasClass('bx--date-picker--range')).toEqual(
+      expect(wrapper.children().hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.children().hasClass(`${prefix}--date-picker`)).toEqual(
         true
       );
+      expect(
+        wrapper.children().hasClass(`${prefix}--date-picker--range`)
+      ).toEqual(true);
     });
   });
 });
