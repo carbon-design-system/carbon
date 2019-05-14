@@ -6,12 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component, useCallback } from 'react';
+import React, { Component, useCallback, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 
@@ -52,6 +53,8 @@ export const PresentationalNumberInput = React.forwardRef(
     },
     ref
   ) {
+    const inputRef = useRef(null);
+
     const numberInputClasses = classNames(
       `${prefix}--number ${prefix}--number--helpertext`,
       className,
@@ -61,23 +64,6 @@ export const PresentationalNumberInput = React.forwardRef(
         [`${prefix}--number--mobile`]: isMobile,
       }
     );
-
-    const props = {
-      disabled,
-      id,
-      max,
-      min,
-      step,
-      onClick,
-      onChange,
-      value,
-      'aria-label': ariaLabel,
-    };
-
-    const buttonProps = {
-      disabled,
-      type: 'button',
-    };
 
     const inputWrapperProps = {};
     let error = null;
@@ -125,26 +111,50 @@ export const PresentationalNumberInput = React.forwardRef(
             value:
               direction === 'down' ? numericValue - step : numericValue + step,
             direction,
-            inputRef: ref,
+            inputRef: inputRef.current,
           });
         }
       },
-      [disabled, min, max, step, value, ref, onClick, onChange]
+      [disabled, min, max, step, value, onClick, onChange]
     );
 
     const handleUpArrowClick = useCallback(
       evt => {
         handleArrowClick(evt, 'up');
       },
-      [disabled, min, max, step, value, ref, onClick, onChange]
+      [disabled, min, max, step, value, onClick, onChange]
     );
 
     const handleDownArrowClick = useCallback(
       evt => {
         handleArrowClick(evt, 'down');
       },
-      [disabled, min, max, step, value, ref, onClick, onChange]
+      [disabled, min, max, step, value, onClick, onChange]
     );
+
+    const handleChange = useCallback(evt => {
+      onChange(evt, {
+        value: evt.target.value,
+        inputRef: inputRef.current,
+      });
+    }, []);
+
+    const props = {
+      disabled,
+      id,
+      max,
+      min,
+      step,
+      onClick,
+      onChange: handleChange,
+      value,
+      'aria-label': ariaLabel,
+    };
+
+    const buttonProps = {
+      disabled,
+      type: 'button',
+    };
 
     return (
       <div className={`${prefix}--form-item`}>
@@ -171,7 +181,7 @@ export const PresentationalNumberInput = React.forwardRef(
                       pattern="[0-9]*"
                       {...other}
                       {...props}
-                      ref={ref}
+                      ref={mergeRefs(ref, inputRef)}
                     />
                     <button
                       className={`${prefix}--number__control-btn up-icon`}
@@ -197,7 +207,7 @@ export const PresentationalNumberInput = React.forwardRef(
                     pattern="[0-9]*"
                     {...other}
                     {...props}
-                    ref={ref}
+                    ref={mergeRefs(ref, inputRef)}
                   />
                   {invalid && (
                     <WarningFilled16
