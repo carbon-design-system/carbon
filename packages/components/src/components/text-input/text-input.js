@@ -58,7 +58,7 @@ export default class TextInput extends mixin(
    */
   _handleKeyPress = ({ element, length }) => {
     element.querySelector(
-      `.${this.options.selectorCharCounter}`
+      this.options.selectorCharCounter
     ).textContent = length;
   };
 
@@ -146,7 +146,7 @@ export default class TextInput extends mixin(
       passwordIsVisible: `${prefix}--text-input--password-visible`,
       svgIconVisibilityOn: `svg.${prefix}--icon--visibility-on`,
       svgIconVisibilityOff: `svg.${prefix}--icon--visibility-off`,
-      selectorCharCounter: `${prefix}--text-input--character-counter--length`,
+      selectorCharCounter: `.${prefix}--text-input--character-counter--length`,
     };
   }
 
