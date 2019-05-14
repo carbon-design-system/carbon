@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
@@ -24,8 +24,11 @@ const TextArea = ({
   invalidText,
   helperText,
   light,
+  charCount,
+  maxLength,
   ...other
 }) => {
+  const [textareaVal, setInput] = useState('');
   const textareaProps = {
     id,
     onChange: evt => {
@@ -38,6 +41,7 @@ const TextArea = ({
         onClick(evt);
       }
     },
+    maxLength: maxLength || null,
   };
 
   const labelClasses = classNames(`${prefix}--label`, {
@@ -50,6 +54,25 @@ const TextArea = ({
       {labelText}
     </label>
   ) : null;
+
+  const charCounterClasses = classNames(
+    `${prefix}--text-area--character-counter`,
+    {
+      [`${prefix}--text-area--character-counter--disabled`]: other.disabled,
+    }
+  );
+
+  const charCounter = (
+    <span className={charCounterClasses}>
+      <span className={`${prefix}--text-area--character-counter--length`}>
+        {textareaVal.length}
+      </span>
+      /
+      <span className={`${prefix}--text-area--character-counter--maxlength`}>
+        {maxLength}
+      </span>
+    </span>
+  );
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
@@ -80,12 +103,15 @@ const TextArea = ({
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
+      value={textareaVal}
+      onInput={e => setInput(e.target.value)}
     />
   );
 
   return (
     <div className={`${prefix}--form-item`}>
       {label}
+      {charCount && charCounter}
       {helper}
       <div
         className={`${prefix}--text-area__wrapper`}
