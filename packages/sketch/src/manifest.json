@@ -1,0 +1,17 @@
+{
+  "identifier": "com.ibm.carbon.elements",
+  "compatibleVersion": "3",
+  "bundleVersion": 1,
+  "name": "Carbon Elements 🎨",
+  "commands": [
+    {
+      "name": "Add colors",
+      "identifier": "carbon.elements.colors",
+      "script": "colors.js",
+      "handler": "render"
+    }
+  ],
+  "menu": {
+    "items": ["carbon.elements.colors"]
+  }
+}

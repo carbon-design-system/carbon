@@ -400,7 +400,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-proposal-async-generator-functions@^7.1.0", "@babel/plugin-proposal-async-generator-functions@^7.2.0":
+"@babel/plugin-proposal-async-generator-functions@^7.0.0", "@babel/plugin-proposal-async-generator-functions@^7.1.0", "@babel/plugin-proposal-async-generator-functions@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.2.0.tgz#b289b306669dce4ad20b0252889a15768c9d417e"
   dependencies:
@@ -2602,6 +2602,49 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@skpm/babel-preset@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@skpm/babel-preset/-/babel-preset-0.2.1.tgz#1e0404e058514d72adebe98163b69b0bb1d737e4"
+  integrity sha512-bIG9JE0rdSuWh5QMyxIXKUPZUXI2BjXxmI1/dxcRNUK2IweZ9vvuuP7IMaplxPYqZgFqSuj1HAmX1uP/CG9YOw==
+  dependencies:
+    "@babel/plugin-proposal-async-generator-functions" "^7.0.0"
+    "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
+    "@babel/preset-env" "^7.0.0"
+    "@babel/preset-react" "^7.0.0"
+
+"@skpm/builder@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@skpm/builder/-/builder-0.7.0.tgz#483a871aa7c436c2a88e8e2069c81a0a74045d6e"
+  integrity sha512-dpYFQIGLKmSRFWBxmS2zItdFhb+b41Je+9YpyrJJTdyHDQLdSY284hinXESdqyuStUr3lqGXgZfZJpTF0hUw0Q==
+  dependencies:
+    "@babel/core" "^7.4.3"
+    "@skpm/babel-preset" "0.2.1"
+    "@skpm/file-loader" "^2.0.1"
+    "@skpm/internal-utils" "^0.1.14"
+    "@skpm/nib-loader" "^0.1.1"
+    babel-loader "^8.0.5"
+    chalk "^2.4.1"
+    globby "^9.2.0"
+    mkdirp "^0.5.1"
+    parse-author "2.0.0"
+    promise-polyfill "^8.1.0"
+    run-sketch-plugin "^1.0.0"
+    semver "^6.0.0"
+    sketch-polyfill-fetch "^0.4.3"
+    terser-webpack-plugin "^1.2.3"
+    webpack "^4.29.6"
+    webpack-merge "^4.2.1"
+    webpack-sources "^1.3.0"
+    yargs "^13.2.2"
+
+"@skpm/file-loader@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@skpm/file-loader/-/file-loader-2.0.1.tgz#afd7624a77eb567550d7cb88f5a6e68a12785e3f"
+  integrity sha512-Xdv6dPqZu+fhNEZE4/uR9+97uqWfOiXt4E8fdvx2muWwhzs8jJHhc9/PO/9b/6eARbiS4A2W5s/FJC2bzgP0ag==
+  dependencies:
+    loader-utils "^1.0.2"
+    schema-utils "^0.4.5"
+
 "@skpm/internal-utils@^0.1.14":
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/@skpm/internal-utils/-/internal-utils-0.1.14.tgz#e2a9c8fd8307c9b7ff3acd434377c18a828fb153"
@@ -2611,6 +2654,15 @@
     js-yaml "^3.13.1"
     object-assign "*"
     yesno "0.2.0"
+
+"@skpm/nib-loader@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@skpm/nib-loader/-/nib-loader-0.1.1.tgz#7cf31a0831d75d2ecf3832aea3c58cee43e41d82"
+  integrity sha512-EcrJk8i4DF/OzQx2P5Y8WC43eOL7jLElG6PkZ8lPLdfliMd9gehiLjfXBlDwEXj6pxH+zgydTB+9HEERQDZoRg==
+  dependencies:
+    cocoascript-class "^0.1.2"
+    loader-utils "^1.0.2"
+    schema-utils "^0.4.5"
 
 "@storybook/addon-a11y@^4.1.18":
   version "4.1.18"
@@ -4644,6 +4696,16 @@ babel-loader@^8.0.4:
     mkdirp "^0.5.1"
     util.promisify "^1.0.0"
 
+babel-loader@^8.0.5:
+  version "8.0.6"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.6.tgz#e33bdb6f362b03f4bb141a0c21ab87c501b70dfb"
+  integrity sha512-4BmWKtBOBm13uoUwd08UwjZlaw3O9GWf456R9j+5YykFZ6LUIjIKLc0zEZf+hauxPOJs96C8k6FvYD09vWzhYw==
+  dependencies:
+    find-cache-dir "^2.0.0"
+    loader-utils "^1.0.2"
+    mkdirp "^0.5.1"
+    pify "^4.0.1"
+
 babel-messages@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
@@ -6234,6 +6296,11 @@ coa@~1.0.1:
   dependencies:
     q "^1.1.2"
 
+cocoascript-class@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/cocoascript-class/-/cocoascript-class-0.1.2.tgz#dab25f20389946d9986c1812b88ac3783eec42d3"
+  integrity sha1-2rJfIDiZRtmYbBgSuIrDeD7sQtM=
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -6714,6 +6781,11 @@ core-js@~2.3.0:
 core-util-is@1.0.2, core-util-is@^1.0.0, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+
+coscript@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/coscript/-/coscript-1.0.0.tgz#1a0ef8d5f8b4a67901b97ae59bd2f51e6cc6b0f1"
+  integrity sha1-Gg741fi0pnkBuXrlm9L1HmzGsPE=
 
 cosmiconfig@^4.0.0:
   version "4.0.0"
@@ -15279,7 +15351,7 @@ parse-asn1@^5.0.0:
     evp_bytestokey "^1.0.0"
     pbkdf2 "^3.0.3"
 
-parse-author@^2.0.0:
+parse-author@2.0.0, parse-author@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/parse-author/-/parse-author-2.0.0.tgz#d3460bf1ddd0dfaeed42da754242e65fb684a81f"
   integrity sha1-00YL8d3Q367tQtp1QkLmX7aEqB8=
@@ -16419,6 +16491,11 @@ promise-polyfill@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.1.0.tgz#dfa96943ea9c121fca4de9b5868cb39d3472e057"
   integrity sha1-36lpQ+qcEh/KTem1hoyznTRy4Fc=
+
+promise-polyfill@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.1.0.tgz#30059da54d1358ce905ac581f287e184aedf995d"
+  integrity sha512-OzSf6gcCUQ01byV4BgwyUCswlaQQ6gzXc23aLQWhicvfX9kfsUiUhgt3CCQej8jDnl8/PhGF31JdHX2/MzF3WA==
 
 promise-retry@^1.1.1:
   version "1.1.1"
@@ -18047,6 +18124,13 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
+run-sketch-plugin@^1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/run-sketch-plugin/-/run-sketch-plugin-1.0.3.tgz#2eb6112d2b0870adfb03fce8310ade76d7fd8f52"
+  integrity sha1-LrYRLSsIcK37A/zoMQredtf9j1I=
+  dependencies:
+    coscript "^1.0.0"
+
 rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
@@ -18614,6 +18698,11 @@ sisteransi@^1.0.0:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.0.tgz#77d9622ff909080f1c19e5f4a1df0c1b0a27b88c"
   integrity sha512-N+z4pHB4AmUv0SjveWRd6q1Nj5w62m5jodv+GD8lvmbY/83T/rpbJGZOnK5T149OldDj4Db07BSv9xY4K6NTPQ==
 
+sketch-polyfill-fetch@^0.4.3:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/sketch-polyfill-fetch/-/sketch-polyfill-fetch-0.4.5.tgz#04cc50943444e45343295204cd4b3b070d448256"
+  integrity sha512-5iTw1k8eu2BtiDVy8JMMR+uV8hxamb0Ib3Q1Ob9MbDnMm9RocyaDGNCaHs8loKnB69i9fCchMboO0pMR6QjGpQ==
+
 skpm@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/skpm/-/skpm-1.2.0.tgz#fa50465758c17533dc5c9a15be02e99584bc5b95"
@@ -18841,7 +18930,7 @@ source-map-support@^0.4.15:
   dependencies:
     source-map "^0.5.6"
 
-source-map-support@^0.5.0:
+source-map-support@^0.5.0, source-map-support@~0.5.10:
   version "0.5.12"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.12.tgz#b4f3b10d51857a5af0138d3ce8003b201613d599"
   integrity sha512-4h2Pbvyy15EE02G+JOZpUCmqWJuqrs+sEkzewTm++BPi7Hvn/HwcqLAcNxYAyI0x13CpPPn+kMjl+hplXMHITQ==
@@ -19739,6 +19828,20 @@ terser-webpack-plugin@^1.1.0:
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
 
+terser-webpack-plugin@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-1.2.3.tgz#3f98bc902fac3e5d0de730869f50668561262ec8"
+  integrity sha512-GOK7q85oAb/5kE12fMuLdn2btOS9OBZn4VsecpHDywoUC/jLhSAKOiYo0ezx7ss2EXPMzyEWFoE0s1WLE+4+oA==
+  dependencies:
+    cacache "^11.0.2"
+    find-cache-dir "^2.0.0"
+    schema-utils "^1.0.0"
+    serialize-javascript "^1.4.0"
+    source-map "^0.6.1"
+    terser "^3.16.1"
+    webpack-sources "^1.1.0"
+    worker-farm "^1.5.2"
+
 terser@^3.10.0, terser@^3.14.0, terser@^3.14.1:
   version "3.14.1"
   resolved "https://registry.npmjs.org/terser/-/terser-3.14.1.tgz#cc4764014af570bc79c79742358bd46926018a32"
@@ -19746,6 +19849,15 @@ terser@^3.10.0, terser@^3.14.0, terser@^3.14.1:
     commander "~2.17.1"
     source-map "~0.6.1"
     source-map-support "~0.5.6"
+
+terser@^3.16.1:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.17.0.tgz#f88ffbeda0deb5637f9d24b0da66f4e15ab10cb2"
+  integrity sha512-/FQzzPJmCpjAH9Xvk2paiWrFq+5M6aVOf+2KRbwhByISDX/EujxsK+BAvrhb6H+2rtrLCHK9N01wO014vrIwVQ==
+  dependencies:
+    commander "^2.19.0"
+    source-map "~0.6.1"
+    source-map-support "~0.5.10"
 
 terser@^3.8.1:
   version "3.11.0"
@@ -20954,6 +21066,13 @@ webpack-log@^2.0.0:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
 
+webpack-merge@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.2.1.tgz#5e923cf802ea2ace4fd5af1d3247368a633489b4"
+  integrity sha512-4p8WQyS98bUJcCvFMbdGZyZmsKuWjWVnVHnAS3FFg0HDaRVrPbkivx2RYCre8UiemD67RsiFFLfn4JhLAin8Vw==
+  dependencies:
+    lodash "^4.17.5"
+
 webpack-sources@^1.1.0, webpack-sources@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.3.0.tgz#2a28dcb9f1f45fe960d8f1493252b5ee6530fa85"
@@ -20994,6 +21113,36 @@ webpack@^4.25.1:
   version "4.30.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.30.0.tgz#aca76ef75630a22c49fcc235b39b4c57591d33a9"
   integrity sha512-4hgvO2YbAFUhyTdlR4FNyt2+YaYBYHavyzjCMbZzgglo02rlKi/pcsEzwCuCpsn1ryzIl1cq/u8ArIKu8JBYMg==
+  dependencies:
+    "@webassemblyjs/ast" "1.8.5"
+    "@webassemblyjs/helper-module-context" "1.8.5"
+    "@webassemblyjs/wasm-edit" "1.8.5"
+    "@webassemblyjs/wasm-parser" "1.8.5"
+    acorn "^6.0.5"
+    acorn-dynamic-import "^4.0.0"
+    ajv "^6.1.0"
+    ajv-keywords "^3.1.0"
+    chrome-trace-event "^1.0.0"
+    enhanced-resolve "^4.1.0"
+    eslint-scope "^4.0.0"
+    json-parse-better-errors "^1.0.2"
+    loader-runner "^2.3.0"
+    loader-utils "^1.1.0"
+    memory-fs "~0.4.1"
+    micromatch "^3.1.8"
+    mkdirp "~0.5.0"
+    neo-async "^2.5.0"
+    node-libs-browser "^2.0.0"
+    schema-utils "^1.0.0"
+    tapable "^1.1.0"
+    terser-webpack-plugin "^1.1.0"
+    watchpack "^1.5.0"
+    webpack-sources "^1.3.0"
+
+webpack@^4.29.6:
+  version "4.31.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.31.0.tgz#ae201d45f0571336e42d1c2b5c8ab56c4d3b0c63"
+  integrity sha512-n6RVO3X0LbbipoE62akME9K/JI7qYrwwufs20VvgNNpqUoH4860KkaxJTbGq5bgkVZF9FqyyTG/0WPLH3PVNJA==
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/helper-module-context" "1.8.5"

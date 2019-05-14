@@ -5,11 +5,19 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "skpm-build",
-    "develop": "skpm-build --watch --run",
-    "skpm:link": "skpm-link",
-    "watch": "skpm-build --watch"
+    "develop": "skpm-build --watch",
+    "skpm:link": "skpm-link"
   },
   "dependencies": {
+    "@carbon/colors": "10.2.0",
+    "@carbon/themes": "10.2.0",
+    "@skpm/builder": "^0.7.0",
     "skpm": "^1.2.0"
+  },
+  "skpm": {
+    "name": "Carbon Elements",
+    "manifest": "src/manifest.json",
+    "main": "carbon-elements.sketchplugin",
+    "assets": []
   }
 }
