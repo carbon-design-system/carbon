@@ -13,29 +13,47 @@
 /// @group ui-shell
 $shell-header-bg-01: $carbon--gray-100;
 
-/// Header Nav Link hover
+/// Header menu trigger hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-02: #353535; //TODO needs color var gray-90-hover
+$shell-header-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
 
-/// Header Nav Link active and focus
+/// Header action active background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-03: $carbon--gray-70;
+$shell-header-bg-03: $carbon--gray-80;
 
-/// Header Nav Link active and focus
+/// Header nav link hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-04: #2C2C2C; //TODO needs color var gray-100-hover
+$shell-header-bg-04: #353535; //TODO needs color var gray-90-hover
 
-/// Header Border
+/// Header nav link active and focus background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-border: $carbon--gray-80; 
+$shell-header-bg-05: $carbon--gray-70;
+
+/// Header nav link submenu
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-06: $carbon--gray-90;
+
+/// Header border bottom
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-border-01: $carbon--gray-80;
+
+/// Header focus
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-focus: $carbon--white-0;
 
 /// Primary text in header, Title text
 /// @type Color
@@ -43,17 +61,23 @@ $shell-header-border: $carbon--gray-80;
 /// @group ui-shell
 $shell-header-text-01: $carbon--gray-10;
 
-/// Secondary text in header, Menu Item Nav text
+/// Secondary text in header, Menu item nav text
 /// @type Color
 /// @access private
 /// @group ui-shell
 $shell-header-text-02: $carbon--gray-30;
 
+/// Header menu trigger
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-icon-01: $carbon--gray-10;
+
 /// Header bar icons
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-icon: $carbon--white-0;
+$shell-header-icon-02: $carbon--white-0;
 
 /// Item link
 /// @type Color
