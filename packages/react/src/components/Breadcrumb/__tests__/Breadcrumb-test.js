@@ -7,6 +7,9 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Breadcrumb', () => {
   let Breadcrumb;
@@ -63,7 +66,7 @@ describe('Breadcrumb', () => {
     expect(CustomComponent).toHaveBeenCalled();
     expect(CustomComponent).toHaveBeenCalledWith(
       expect.objectContaining({
-        className: 'bx--link',
+        className: `${prefix}--link`,
       }),
       {}
     );

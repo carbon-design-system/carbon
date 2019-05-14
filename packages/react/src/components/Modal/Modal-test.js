@@ -10,6 +10,9 @@ import Close20 from '@carbon/icons-react/lib/close/20';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
 const getModal = wrapper => wrapper.childAt(0);
@@ -20,7 +23,7 @@ describe('Modal', () => {
     const mounted = mount(<Modal className="extra-class" />);
 
     it('has the expected classes', () => {
-      expect(getModal(wrapper).hasClass('bx--modal')).toEqual(true);
+      expect(getModal(wrapper).hasClass(`${prefix}--modal`)).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
@@ -28,12 +31,14 @@ describe('Modal', () => {
     });
 
     it('should not be a passive modal by default', () => {
-      expect(getModal(wrapper).hasClass('bx--modal-tall')).toEqual(true);
+      expect(getModal(wrapper).hasClass(`${prefix}--modal-tall`)).toEqual(true);
     });
 
     it('should be a passive modal when passiveModal is passed', () => {
       wrapper.setProps({ passiveModal: true });
-      expect(getModal(wrapper).hasClass('bx--modal-tall')).toEqual(false);
+      expect(getModal(wrapper).hasClass(`${prefix}--modal-tall`)).toEqual(
+        false
+      );
     });
 
     it('should set id if one is passed via props', () => {
@@ -57,13 +62,17 @@ describe('Modal', () => {
     });
 
     it('enables primary button by default', () => {
-      const primaryButton = mounted.find('.bx--btn.bx--btn--primary').at(0);
+      const primaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--primary`)
+        .at(0);
       expect(primaryButton.prop('disabled')).toEqual(false);
     });
 
     it('disables primary button when diablePrimaryButton prop is passed', () => {
       mounted.setProps({ primaryButtonDisabled: true });
-      const primaryButton = mounted.find('.bx--btn.bx--btn--primary').at(0);
+      const primaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--primary`)
+        .at(0);
       expect(primaryButton.props().disabled).toEqual(true);
     });
   });
@@ -71,13 +80,13 @@ describe('Modal', () => {
   describe('Adds props as expected to the right children', () => {
     it('should set label if one is passed via props', () => {
       const wrapper = shallow(<Modal modalLabel="modal-1" />);
-      const label = wrapper.find('.bx--modal-header__label');
+      const label = wrapper.find(`.${prefix}--modal-header__label`);
       expect(label.props().children).toEqual('modal-1');
     });
 
     it('should set modal heading if one is passed via props', () => {
       const wrapper = shallow(<Modal modalHeading="modal-1" />);
-      const heading = wrapper.find('.bx--modal-header__heading');
+      const heading = wrapper.find(`.${prefix}--modal-header__heading`);
       expect(heading.props().children).toEqual('modal-1');
     });
 
@@ -85,7 +94,8 @@ describe('Modal', () => {
       const wrapper = shallow(
         <Modal primaryButtonText="Submit" secondaryButtonText="Cancel" />
       );
-      const modalButtons = wrapper.find('.bx--modal-footer').props().children;
+      const modalButtons = wrapper.find(`.${prefix}--modal-footer`).props()
+        .children;
       expect(modalButtons[0].props.children).toEqual('Cancel');
       expect(modalButtons[1].props.children).toEqual('Submit');
     });
@@ -95,12 +105,14 @@ describe('Modal', () => {
     it('should set expected class when state is open', () => {
       const wrapper = mount(<ModalWrapper />);
       const modal = wrapper.find(Modal);
-      const modalContainer = modal.find('.bx--modal');
+      const modalContainer = modal.find(`.${prefix}--modal`);
       const openClass = 'is-visible';
 
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
       wrapper.setState({ isOpen: true });
-      expect(wrapper.find('.bx--modal').hasClass(openClass)).toEqual(true);
+      expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
+        true
+      );
     });
 
     it('should set state to open when trigger button is clicked', () => {
@@ -114,7 +126,7 @@ describe('Modal', () => {
     it('should set open state to false when close button is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
       const modal = wrapper.find(Modal);
-      const closeBtn = modal.find('.bx--modal-close');
+      const closeBtn = modal.find(`.${prefix}--modal-close`);
       wrapper.setState({ isOpen: true });
       expect(wrapper.state('isOpen')).toEqual(true);
       closeBtn.simulate('click');
@@ -124,7 +136,7 @@ describe('Modal', () => {
     it('should stay open when "inner modal" is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
       const modal = wrapper.find(Modal);
-      const div = modal.find('.bx--modal-container');
+      const div = modal.find(`.${prefix}--modal-container`);
       wrapper.setState({ isOpen: true });
       div.simulate('click');
       expect(wrapper.state('isOpen')).toEqual(true);
@@ -133,7 +145,7 @@ describe('Modal', () => {
     it('should close when "outer modal" is clicked...not "inner modal"', () => {
       const wrapper = mount(<ModalWrapper />);
       const modal = wrapper.find(Modal);
-      const div = modal.find('.bx--modal');
+      const div = modal.find(`.${prefix}--modal`);
       wrapper.setState({ isOpen: true });
       div.simulate('click');
       expect(wrapper.state('isOpen')).toEqual(false);
@@ -171,7 +183,7 @@ describe('Modal', () => {
     it('should close by default on secondary button click', () => {
       const onRequestClose = jest.fn();
       const modal = mount(<Modal onRequestClose={onRequestClose} />);
-      const secondaryBtn = modal.find('.bx--btn--secondary');
+      const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
       expect(onRequestClose).toBeCalled();
     });
@@ -179,7 +191,7 @@ describe('Modal', () => {
     it('should handle custom secondary button events', () => {
       const onSecondarySubmit = jest.fn();
       const modal = mount(<Modal onSecondarySubmit={onSecondarySubmit} />);
-      const secondaryBtn = modal.find('.bx--btn--secondary');
+      const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
       expect(onSecondarySubmit).toBeCalled();
     });
@@ -190,22 +202,22 @@ describe('Modal Wrapper', () => {
     const wrapper = mount(<ModalWrapper />);
 
     it('should default to primary button', () => {
-      expect(wrapper.find('.bx--btn--primary').length).toEqual(2);
+      expect(wrapper.find(`.${prefix}--btn--primary`).length).toEqual(2);
     });
 
     it('should render ghost button when ghost is passed', () => {
       wrapper.setProps({ triggerButtonKind: 'ghost' });
-      expect(wrapper.find('.bx--btn--ghost').length).toEqual(1);
+      expect(wrapper.find(`.${prefix}--btn--ghost`).length).toEqual(1);
     });
 
     it('should render danger button when danger is passed', () => {
       wrapper.setProps({ triggerButtonKind: 'danger' });
-      expect(wrapper.find('.bx--btn--danger').length).toEqual(1);
+      expect(wrapper.find(`.${prefix}--btn--danger`).length).toEqual(1);
     });
 
     it('should render secondary button when secondary is passed', () => {
       wrapper.setProps({ triggerButtonKind: 'secondary' });
-      expect(wrapper.find('.bx--btn--secondary').length).toEqual(2);
+      expect(wrapper.find(`.${prefix}--btn--secondary`).length).toEqual(2);
     });
   });
 });
@@ -214,11 +226,14 @@ describe('Danger Modal', () => {
     const wrapper = shallow(<Modal danger />);
 
     it('has the expected classes', () => {
-      expect(getModal(wrapper).hasClass('bx--modal--danger')).toEqual(true);
+      expect(getModal(wrapper).hasClass(`${prefix}--modal--danger`)).toEqual(
+        true
+      );
     });
 
     it('has correct button combination', () => {
-      const modalButtons = wrapper.find('.bx--modal-footer').props().children;
+      const modalButtons = wrapper.find(`.${prefix}--modal-footer`).props()
+        .children;
       expect(modalButtons[0].props.kind).toEqual('secondary');
       expect(modalButtons[1].props.kind).toEqual('danger');
     });

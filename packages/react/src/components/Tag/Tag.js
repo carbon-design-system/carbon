@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import Close16 from '@carbon/icons-react/lib/close/16';
 
 const { prefix } = settings;
 
@@ -25,10 +26,22 @@ const TYPES = {
   'warm-gray': 'Warm-Gray',
 };
 
-const Tag = ({ children, className, type, ...other }) => {
+const Tag = ({ children, className, type, filter, disabled, ...other }) => {
   const tagClass = `${prefix}--tag--${type}`;
-  const tagClasses = classNames(`${prefix}--tag`, tagClass, className);
-  return (
+  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
+    [`${prefix}--tag--disabled`]: disabled,
+    [`${prefix}--tag--filter`]: filter,
+  });
+  return filter ? (
+    <span
+      className={tagClasses}
+      title="Clear filter"
+      tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      {...other}>
+      {children !== null && children !== undefined ? children : TYPES[type]}
+      <Close16 aria-label="Clear filter" />
+    </span>
+  ) : (
     <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
@@ -50,6 +63,16 @@ Tag.propTypes = {
    * Specify the type of the <Tag>
    */
   type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
+
+  /**
+   * Specify if the <Tag> is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Determine if <Tag> is a filter/chip
+   */
+  filter: PropTypes.bool,
 };
 
 export const types = Object.keys(TYPES);

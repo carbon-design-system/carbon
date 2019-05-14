@@ -8,6 +8,9 @@
 import React from 'react';
 import Link from '../Link';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Link', () => {
   describe('Renders as expected', () => {
@@ -17,7 +20,7 @@ describe('Link', () => {
       </Link>
     );
     it('should use the appropriate link class', () => {
-      expect(link.hasClass('bx--link')).toEqual(true);
+      expect(link.hasClass(`${prefix}--link`)).toEqual(true);
     });
     it('should inherit the href property', () => {
       expect(link.props().href).toEqual('www.google.com');

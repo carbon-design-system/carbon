@@ -9,6 +9,9 @@ import React from 'react';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('ContentSwitcher', () => {
   describe('component initial rendering', () => {
@@ -22,7 +25,7 @@ describe('ContentSwitcher', () => {
     const children = wrapper.find(Switch);
 
     it('should have the correct class', () => {
-      expect(wrapper.hasClass('bx--content-switcher')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--content-switcher`)).toEqual(true);
     });
 
     it('should render children as expected', () => {

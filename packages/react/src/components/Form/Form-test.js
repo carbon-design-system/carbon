@@ -8,6 +8,9 @@
 import React from 'react';
 import Form from '../Form';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Form', () => {
   describe('Renders as expected', () => {
@@ -20,7 +23,7 @@ describe('Form', () => {
       expect(wrapper.length).toBe(1);
     });
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--form')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--form`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
