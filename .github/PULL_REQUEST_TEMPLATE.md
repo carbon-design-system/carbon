@@ -1,17 +1,6 @@
-Closes IBM/carbon-components-react#
+<!--
+Hi there! This project has been moved over to:
+https://github.com/carbon-design-system/carbon
 
-{{short description}}
-
-#### Changelog
-
-**New**
-
-- {{new thing}}
-
-**Changed**
-
-- {{change thing}}
-
-**Removed**
-
-- {{removed thing}}
+Any pull requests made in this project should be migrated over to that location.
+-->
