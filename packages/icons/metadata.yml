@@ -506,6 +506,12 @@ icons:
     sizes:
       - 16
       - 32
+    variants:
+      - edit--off
+        friendly_name: Not editable
+        usage: This is a description for usage
+        sizes:
+          - 32
   - name: email
     friendly_name: Email
     usage: This is a description for usage
