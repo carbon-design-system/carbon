@@ -214,6 +214,12 @@
     padding: $button-padding-sm;
   }
 
+  &.#{$prefix}--btn--field {
+    padding: $button-padding-field;
+    min-height: 40px;
+    height: 40px;
+  }
+
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;

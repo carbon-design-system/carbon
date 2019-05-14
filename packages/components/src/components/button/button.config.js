@@ -26,6 +26,17 @@ module.exports = {
       },
     },
     {
+      name: 'primary--field',
+      label: 'Primary Buttons (Field)',
+      notes: `
+        "Field" buttons are used in forms, when a button needs to line up horizontally with an input field. Default buttons (above) are larger to create a more prominent call-to-action. Field buttons match the height of input elements that they sit next to.
+      `,
+      context: {
+        variant: 'primary',
+        field: true,
+      },
+    },
+    {
       name: 'primary--small',
       label: 'Primary Buttons (Small)',
       notes: `
