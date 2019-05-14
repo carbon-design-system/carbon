@@ -39,13 +39,11 @@ export default class TextInput extends mixin(
       })
     );
     this.manage(
-      on(this.element, 'keydown', event => {
+      on(this.element, 'input', event => {
         if (event.target.maxLength < 0) {
           return;
         }
-        setTimeout(() => {
-          this._handleKeyPress({ element, length: event.target.value.length });
-        }, 0);
+        this._handleInput({ element, length: event.target.value.length });
       })
     );
   }
@@ -56,7 +54,7 @@ export default class TextInput extends mixin(
    * @param {HTMLElement} obj.element - The element functioning as a text field
    * @param {HTMLElement} obj.length - The length of the text field value
    */
-  _handleKeyPress = ({ element, length }) => {
+  _handleInput = ({ element, length }) => {
     element.querySelector(
       this.options.selectorCharCounter
     ).textContent = length;
