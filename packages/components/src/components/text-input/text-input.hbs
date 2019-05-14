@@ -133,13 +133,13 @@
 </div>
 
 <div {{#if password}} data-text-input {{else}} {{#if charCounter}} data-text-input {{/if}} {{/if}}
-  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}{{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter{{/if}}">
+  class="{{prefix}}--form-item {{prefix}}--text-input-wrapper{{#if password}} {{prefix}}--password-input-wrapper{{/if}}{{#if charCounter}} {{prefix}}--text-input-wrapper--character-counter {{/if}}">
   <label for="text-input-7" class="{{prefix}}--label {{prefix}}--label--disabled">Text Input label</label>
   <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
     Optional helper text goes here
   </div>
   {{#if charCounter}}
-  <span class="{{prefix}}--text-input--character-counter">
+  <span class="{{prefix}}--text-input--character-counter {{prefix}}--text-input--character-counter--disabled">
     <span class="{{prefix}}--text-input--character-counter--length">0</span>/<span
       class="{{prefix}}--text-input--character-counter--maxlength">{{maxLength}}</span>
   </span>
