@@ -109,7 +109,7 @@
     <thead>
       <tr>
         {{#each columns}}
-          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell"{{/if}} {{#if section}} data-event="expandAll"{{/if}}>
+          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox"{{/if}}{{#if menu}} class="{{@root.prefix}}--table-column-menu"{{/if}}{{#if section}} class="{{@root.prefix}}--table-expand"{{/if}}{{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell"{{/if}}{{#if section}} data-event="expandAll"{{/if}}>
             <!-- checkbox th -->
             {{#if checkbox}}
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
