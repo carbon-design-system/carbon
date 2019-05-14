@@ -17,4 +17,4 @@
  * const MyComponent = props => (<div {...props}>{aFeatureFlag ? 'foo' : 'bar'}</div>);
  */
 
-/* Currently no feature flag is in use, but keeping this file as a placeholder */
+export const useControlledStateWithEventListener = false;
