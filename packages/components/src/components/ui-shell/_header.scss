@@ -27,7 +27,7 @@
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    color: $shell-header-text-01;
+    border-bottom: $shell-header-border;
     z-index: z('header');
   }
 
@@ -63,7 +63,7 @@
   }
 
   .#{$prefix}--header__action:hover {
-    background-color: #333333;
+    background-color: $shell-header-bg-04;
   }
 
   .#{$prefix}--header__action--active,
@@ -78,7 +78,7 @@
   }
 
   .#{$prefix}--header__action > svg {
-    fill: $shell-header-icon-01;
+    fill: $shell-header-icon;
   }
 
   //--------------------------------------------------------------------------
@@ -127,7 +127,7 @@
   a.#{$prefix}--header__menu-item[role='menuitem'] {
     display: flex;
     align-items: center;
-    color: $shell-header-text-01;
+    color: $shell-header-text-02;
     padding: 0 mini-units(2);
     // Used for links that are directly in the menubar to span the full height
     height: 100%;
@@ -144,7 +144,7 @@
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:hover {
-    background-color: #333333;
+    background-color: $shell-header-bg-02;
   }
 
   .#{$prefix}--header__action:active,
