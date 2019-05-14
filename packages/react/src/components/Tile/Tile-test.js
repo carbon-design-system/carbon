@@ -16,6 +16,9 @@ import {
   TileBelowTheFoldContent,
 } from '../Tile';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
@@ -30,7 +33,7 @@ describe('Tile', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--tile')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--tile`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -54,7 +57,7 @@ describe('Tile', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--tile--clickable')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--tile--clickable`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -62,9 +65,9 @@ describe('Tile', () => {
     });
 
     it('toggles the clickable class on click', () => {
-      expect(wrapper.hasClass('bx--tile--is-clicked')).toEqual(false);
+      expect(wrapper.hasClass(`${prefix}--tile--is-clicked`)).toEqual(false);
       wrapper.simulate('click');
-      expect(wrapper.hasClass('bx--tile--is-clicked')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--tile--is-clicked`)).toEqual(true);
     });
 
     it('toggles the clickable state on click', () => {
@@ -118,7 +121,7 @@ describe('Tile', () => {
     });
 
     it('has the expected classes', () => {
-      expect(label.hasClass('bx--tile--selectable')).toEqual(true);
+      expect(label.hasClass(`${prefix}--tile--selectable`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -186,7 +189,9 @@ describe('Tile', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.children().hasClass('bx--tile--expandable')).toEqual(true);
+      expect(
+        wrapper.children().hasClass(`${prefix}--tile--expandable`)
+      ).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -194,13 +199,13 @@ describe('Tile', () => {
     });
 
     it('toggles the expandable class on click', () => {
-      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(
-        false
-      );
+      expect(
+        wrapper.children().hasClass(`${prefix}--tile--is-expanded`)
+      ).toEqual(false);
       wrapper.simulate('click');
-      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(
-        true
-      );
+      expect(
+        wrapper.children().hasClass(`${prefix}--tile--is-expanded`)
+      ).toEqual(true);
     });
 
     it('toggles the expandable state on click', () => {

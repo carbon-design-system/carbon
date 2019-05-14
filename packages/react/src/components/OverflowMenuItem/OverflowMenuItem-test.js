@@ -8,7 +8,9 @@
 import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 const shallowRender = props => shallow(<OverflowMenuItem {...props} />);
 
 describe('OverflowMenuItem', () => {
@@ -33,7 +35,9 @@ describe('OverflowMenuItem', () => {
       });
 
       const button = wrapper.find('button');
-      expect(button.hasClass('bx--overflow-menu-options__btn')).toEqual(true);
+      expect(button.hasClass(`${prefix}--overflow-menu-options__btn`)).toEqual(
+        true
+      );
     });
 
     it('should have the correct class when hasDivider is true', () => {
@@ -43,7 +47,9 @@ describe('OverflowMenuItem', () => {
         hasDivider: true,
       });
 
-      expect(wrapper.hasClass('bx--overflow-menu--divider')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--overflow-menu--divider`)).toEqual(
+        true
+      );
     });
 
     it('renders an anchor when passed href', () => {

@@ -11,6 +11,9 @@ import Button from '../Button';
 import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Button', () => {
   describe('Renders common props as expected', () => {
@@ -123,7 +126,7 @@ describe('Button', () => {
     const icon = iconButton.find('svg');
 
     it('should have the appropriate icon', () => {
-      expect(icon.hasClass('bx--btn__icon')).toBe(true);
+      expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
     });
 
     it('should return error if icon given without description', () => {
@@ -148,7 +151,7 @@ describe('Button', () => {
     const icon = iconButton.find('svg');
 
     it('should have the appropriate icon', () => {
-      expect(icon.hasClass('bx--btn__icon')).toBe(true);
+      expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
       expect(icon.find(':not(svg):not(title)').html()).toBe(
         originalIcon.children().html()
       );
@@ -172,7 +175,7 @@ describe('Primary Button', () => {
     const wrapper = shallow(<Button className="extra-class" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -188,7 +191,7 @@ describe('Secondary Button', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn--secondary')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--secondary`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -202,7 +205,7 @@ describe('Ghost Button', () => {
     const wrapper = shallow(<Button kind="ghost" className="extra-class" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn--ghost')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--ghost`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -216,7 +219,7 @@ describe('Small Button', () => {
     const wrapper = shallow(<Button small className="extra-class" />);
 
     it('Has the expected classes for small', () => {
-      expect(wrapper.hasClass('bx--btn--sm')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -230,7 +233,7 @@ describe('DangerButton', () => {
     const wrapper = shallow(<Button kind="danger" className="extra-class" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn--danger')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--danger`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -246,7 +249,7 @@ describe('danger--primaryButton', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn--danger--primary')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--danger--primary`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -260,7 +263,7 @@ describe('TertiaryButton', () => {
     const wrapper = shallow(<Button kind="tertiary" className="extra-class" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn--tertiary')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--tertiary`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -274,8 +277,8 @@ describe('ButtonSkeleton', () => {
     const wrapper = shallow(<ButtonSkeleton />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--btn')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn`)).toEqual(true);
     });
   });
 
@@ -300,8 +303,8 @@ describe('Small ButtonSkeleton', () => {
     const wrapper = shallow(<ButtonSkeleton small />);
 
     it('Has the expected classes for small', () => {
-      expect(wrapper.hasClass('bx--btn--sm')).toEqual(true);
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });
