@@ -1,0 +1,479 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/layer';
+@import '../form/form';
+@import 'flatpickr.scss';
+
+/// Date picker styles
+/// @access private
+/// @group date-picker
+@mixin date-picker {
+  .#{$prefix}--date-picker {
+    display: flex;
+  }
+
+  .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--date-picker ~ .#{$prefix}--label {
+    order: 1;
+  }
+
+  .#{$prefix}--date-picker-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--date-picker-input__wrapper {
+    display: flex;
+    align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
+    .#{$prefix}--date-picker__input {
+      width: rem(120px);
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
+    .#{$prefix}--date-picker__input {
+      width: 5.7rem;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
+    .#{$prefix}--date-picker-container {
+      max-width: rem(288px);
+    }
+
+    .#{$prefix}--date-picker__input {
+      width: rem(288px);
+    }
+  }
+
+  .#{$prefix}--date-picker__input {
+    @include reset;
+    @include type-style('code-02');
+    @include focus-outline('reset');
+
+    display: block;
+    position: relative;
+    height: rem(40px);
+    max-width: rem(288px);
+    padding: 0 $carbon--spacing-05;
+    background-color: $field-01;
+    border: none;
+    color: $text-01;
+    border-bottom: 1px solid $ui-04;
+    transition: $duration--fast-01 motion(standard, productive) all;
+
+    &:focus,
+    &.#{$prefix}--focused {
+      @include focus-outline('outline');
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      @include focus-outline('invalid');
+    }
+
+    &:disabled {
+      color: $disabled;
+      background-color: $disabled-background-color;
+      border-bottom: 1px solid transparent;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border-bottom: 1px solid transparent;
+    }
+
+    &::placeholder {
+      @include placeholder-colors;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon {
+    position: absolute;
+    right: 1rem;
+    fill: $icon-01;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
+  .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
+    width: rem(143.5px);
+  }
+
+  .#{$prefix}--date-picker__calendar,
+  .flatpickr-calendar.open {
+    @include layer('pop-out');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
+      $carbon--spacing-02;
+    width: rem(288px) !important;
+    height: rem(336px);
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    margin-top: -2px;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    &:focus {
+      outline: 1px solid $interactive-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month,
+  .flatpickr-month {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: rem(40px);
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-prev-month,
+  .#{$prefix}--date-picker__month .flatpickr-next-month,
+  .flatpickr-months .flatpickr-prev-month,
+  .flatpickr-months .flatpickr-next-month {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: rem(40px);
+    width: rem(40px);
+    padding: 0;
+    fill: $text-01;
+    transition: background-color $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .flatpickr-current-month .numInputWrapper {
+    width: 7ch;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month,
+  .flatpickr-month .flatpickr-current-month {
+    @include type-style('heading-01');
+    padding: 0;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month svg,
+  .flatpickr-month .flatpickr-current-month svg {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
+  .flatpickr-month .flatpickr-current-month .cur-month {
+    margin-right: $carbon--spacing-02;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper .numInput,
+  .flatpickr-month .numInputWrapper .numInput {
+    font-weight: 600;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    padding: $carbon--spacing-02;
+    // Added in when upgraded to Flatpickr 4.5.5
+    -moz-appearance: textfield; /* Firefox */
+
+    &:focus {
+      outline: 1px solid $interactive-01;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      // Added in when upgraded to Flatpickr 4.5.5
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    left: 2.6rem;
+    border: none;
+    width: rem(12px);
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $interactive-01;
+        border-top-color: $interactive-01;
+      }
+    }
+
+    &:after {
+      border-bottom-color: $icon-01;
+      border-top-color: $icon-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowUp,
+  .flatpickr-month .numInputWrapper span.arrowUp {
+    top: 4px;
+  }
+
+  .#{$prefix}--date-picker__month .numInputWrapper span.arrowDown,
+  .flatpickr-month .numInputWrapper span.arrowDown {
+    top: 11px;
+  }
+
+  span.#{$prefix}--date-picker__weekday,
+  span.flatpickr-weekday {
+    @include type-style('body-short-01');
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--date-picker__day,
+  .flatpickr-day {
+    @include type-style('body-short-01');
+    height: rem(40px);
+    width: rem(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-01;
+    border-radius: 0;
+    border: none;
+    transition: all $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background: $hover-ui;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--date-picker__days .nextMonthDay,
+  .#{$prefix}--date-picker__days .prevMonthDay {
+    color: $text-02;
+  }
+
+  .#{$prefix}--date-picker__day.today,
+  .flatpickr-day.today {
+    position: relative;
+    color: $interactive-01;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: rem(7px);
+      left: 50%;
+      transform: translateX(-50%);
+      height: rem(4px);
+      width: rem(4px);
+      background: $interactive-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.today.no-border,
+  .flatpickr-day.today.no-border {
+    border: none;
+  }
+
+  .#{$prefix}--date-picker__day.today.selected {
+    border: 2px solid $interactive-01;
+    &::after {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.disabled,
+  .flatpickr-day.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: $ui-05;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.inRange,
+  .flatpickr-day.inRange {
+    background: $date-picker-in-range-background-color;
+    color: $text-01;
+  }
+
+  .#{$prefix}--date-picker__day.selected,
+  .flatpickr-day.selected {
+    color: $inverse-01;
+    background: $interactive-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.selected,
+  .flatpickr-day.startRange.selected {
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  .#{$prefix}--date-picker__day.endRange,
+  .flatpickr-day.endRange {
+    &:hover {
+      @include focus-outline('outline');
+      background: $ui-01;
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange,
+  .flatpickr-day.endRange.inRange {
+    @include focus-outline('outline');
+    background: $ui-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__day.endRange.inRange.selected,
+  .flatpickr-day.endRange.inRange.selected {
+    color: $inverse-01;
+    background: $interactive-01;
+  }
+
+  .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
+  .flatpickr-day.startRange.inRange:not(.selected) {
+    @include focus-outline('outline');
+    background: $ui-01;
+    z-index: 3;
+  }
+
+  .#{$prefix}--date-picker__days,
+  .dayContainer {
+    width: 100%;
+    min-width: 100%;
+    height: rem(246px);
+  }
+
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer {
+    width: 100%;
+    height: auto;
+  }
+
+  .#{$prefix}--date-picker__weekdays,
+  .flatpickr-weekdays,
+  .flatpickr-weekdaycontainer {
+    width: 100%;
+  }
+
+  .flatpickr-weekdays {
+    height: rem(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flatpickr-weekdaycontainer {
+    display: flex;
+  }
+
+  .flatpickr-months {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    padding-top: 12px;
+  }
+
+  .flatpickr-prev-month:hover svg,
+  .flatpickr-next-month:hover svg {
+    fill: $text-01;
+  }
+
+  .flatpickr-next-month.disabled,
+  .flatpickr-prev-month.disabled {
+    svg {
+      fill: $ui-05;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      svg {
+        fill: $ui-05;
+      }
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--date-picker.#{$prefix}--skeleton input,
+  .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+}
+
+@include exports('date-picker') {
+  @include date-picker;
+}

@@ -1,0 +1,7 @@
+package.json
+node_modules
+lib
+es
+storybook-static
+umd
+coverage

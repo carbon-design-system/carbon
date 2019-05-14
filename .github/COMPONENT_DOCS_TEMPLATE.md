@@ -2,7 +2,8 @@
 
 #### Mixins
 
-Mixins specific to { THIS_COMPONENT_NAME } are located in [src/components/{ COMPONENT }/\_mixins.scss]().
+Mixins specific to { THIS_COMPONENT_NAME } are located in
+[src/components/{ COMPONENT }/\_mixins.scss]().
 
 | Name       | Params            | Description |
 | ---------- | ----------------- | ----------- |

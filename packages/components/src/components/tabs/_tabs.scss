@@ -1,0 +1,327 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Tabs
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Tabs styles
+/// @access private
+/// @group tabs
+@mixin tabs {
+  .#{$prefix}--tabs {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    height: auto;
+    width: 100%;
+    position: relative;
+    @include carbon--breakpoint(md) {
+      background: none;
+      min-height: rem(48px);
+    }
+  }
+
+  .#{$prefix}--tabs-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $carbon--spacing-05;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
+    border-bottom: 1px solid $ui-04;
+    background-color: $field-01;
+    @include carbon--breakpoint(md) {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--tabs-trigger:focus,
+  .#{$prefix}--tabs-trigger:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tabs-trigger svg {
+    width: rem(12px);
+    height: rem(7px);
+    fill: $ui-05;
+    transition: transform $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs-trigger--open:focus,
+  .#{$prefix}--tabs-trigger--open:active {
+    @include focus-outline('reset');
+    transition: outline $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs-trigger--open {
+    background: $ui-03;
+  }
+
+  .#{$prefix}--tabs-trigger--open svg {
+    @include rotate(-180deg, $duration--fast-01, 50% 45%);
+  }
+
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--tabs-trigger-text {
+    text-decoration: none;
+    padding-top: 2px;
+    color: $text-01;
+    font-weight: 400;
+  }
+
+  .#{$prefix}--tabs-trigger-text:hover {
+    color: $text-01;
+  }
+
+  .#{$prefix}--tabs-trigger-text:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--tabs__nav {
+    @include layer('overlay');
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    z-index: z('dropdown');
+    background: $ui-01;
+    transition: max-height $duration--fast-01 motion(standard, productive);
+    max-height: 600px;
+    width: 100%;
+
+    @include carbon--breakpoint(md) {
+      flex-direction: row;
+      background: none;
+      box-shadow: none;
+      z-index: auto;
+      transition: inherit;
+      max-height: auto;
+      width: auto;
+    }
+  }
+
+  .#{$prefix}--tabs__nav--hidden {
+    transition: max-height $duration--fast-01 motion(standard, productive);
+    overflow: hidden;
+    max-height: 0;
+
+    @include carbon--breakpoint(md) {
+      display: flex;
+      transition: inherit;
+      overflow: visible;
+      max-height: none;
+    }
+  }
+
+  //-----------------------------
+  // Item
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item {
+    @include reset;
+    background-color: $ui-01;
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+    width: 100%;
+    height: rem(40px);
+    transition: background-color $duration--fast-01 motion(standard, productive);
+
+    @include carbon--breakpoint(md) {
+      background: transparent;
+      height: auto;
+      & + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(2px);
+      }
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
+    transition: color $duration--fast-01 motion(standard, productive),
+      border-bottom-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+  }
+
+  //-----------------------------
+  // Item Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+    @include carbon--breakpoint(md) {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    background-color: $hover-ui;
+    box-shadow: 0 -1px 0 $hover-ui;
+
+    @include carbon--breakpoint(md) {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  //---------------------------------------------
+  // Item Disabled
+  //---------------------------------------------
+  .#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs__nav-item--disabled:hover {
+    cursor: not-allowed;
+  }
+
+  //-----------------------------
+  // Item Selected
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
+    border: none;
+    display: none;
+    transition: color $duration--fast-01 motion(standard, productive);
+
+    @include carbon--breakpoint(md) {
+      display: flex;
+      .#{$prefix}--tabs__nav-link {
+        color: $text-01;
+        @include type-style('heading-01');
+        border-bottom: 3px solid $interactive-01;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        color: $text-01;
+        border-bottom: 2px solid $interactive-01;
+      }
+    }
+  }
+
+  //-----------------------------
+  // Link
+  //-----------------------------
+  a.#{$prefix}--tabs__nav-link {
+    @include focus-outline('reset');
+    display: inline-block;
+    color: $text-02;
+    text-decoration: none;
+    font-weight: 400;
+    padding: $carbon--spacing-04 0;
+    width: calc(100% - 32px);
+    height: rem(40px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 $carbon--spacing-05;
+    line-height: rem(16px);
+    border-bottom: 1px solid $ui-03;
+    overflow: hidden;
+    transition: border $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+
+    &:focus,
+    &:active {
+      width: 100%;
+      margin: 0;
+      padding-left: 16px;
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
+    }
+
+    @include carbon--breakpoint(md) {
+      border-bottom: $tab-underline-color;
+      padding: $carbon--spacing-03 $carbon--spacing-05;
+      width: rem(160px);
+      margin: 0;
+      line-height: inherit;
+
+      &:focus,
+      &:active {
+        width: rem(160px);
+        padding: $carbon--spacing-03 $carbon--spacing-05;
+        border-bottom: 2px;
+      }
+    }
+  }
+
+  //-----------------------------
+  //  Link Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    color: $text-01;
+    @include carbon--breakpoint(md) {
+      color: $text-01;
+      border-bottom: $tab-underline-color-hover;
+    }
+  }
+
+  //-----------------------------
+  //  Link Disabled
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    color: $tab-text-disabled;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    cursor: no-drop;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
+    outline: none;
+    border-bottom: $tab-underline-disabled;
+  }
+
+  //-----------------------------
+  //  Link Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
+    color: $text-02;
+  }
+
+  //-----------------------------
+  // Skeleton state
+  //-----------------------------
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+    width: rem(100px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include hidden;
+  }
+}
+
+@include exports('tabs') {
+  @include tabs;
+}

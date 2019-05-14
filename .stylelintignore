@@ -1,0 +1,13 @@
+**/build/**
+**/dist/**
+**/examples/**
+**/vendor/**
+**/_inlined/**
+
+# Generated SCSS directories and files
+**/packages/colors/**/*.scss
+**/packages/elements/scss/**/*.scss
+**/packages/themes/**/*.scss
+
+# Components
+**/packages/components/**

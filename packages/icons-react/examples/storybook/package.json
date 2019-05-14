@@ -1,0 +1,24 @@
+{
+  "name": "storybook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "build-storybook -o build",
+    "develop": "start-storybook -p 3000"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^4.0.7",
+    "@storybook/addon-info": "^4.0.7",
+    "@storybook/addon-options": "^4.0.7",
+    "@storybook/addon-storysource": "^4.0.7",
+    "@storybook/react": "^4.0.7",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "terser-webpack-plugin": "^1.1.0"
+  }
+}

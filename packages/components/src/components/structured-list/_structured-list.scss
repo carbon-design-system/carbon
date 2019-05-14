@@ -1,0 +1,192 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import 'mixins';
+
+@mixin structured-list {
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
+    @include padding--data-structured-list;
+  }
+
+  .#{$prefix}--structured-list-input {
+    display: none;
+  }
+
+  .#{$prefix}--structured-list {
+    @include reset;
+    display: table;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    min-width: 500px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 5rem;
+    background-color: transparent;
+
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
+      @include padding-td--condensed;
+    }
+  }
+
+  .#{$prefix}--structured-list-row {
+    display: table-row;
+    border-bottom: 1px solid $ui-03;
+    transition: background-color $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
+    background-color: $ui-01;
+    cursor: pointer;
+    border-bottom: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
+    background-color: $ui-03;
+  }
+
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
+    border-bottom: 1px solid $ui-03;
+    cursor: inherit;
+  }
+
+  .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+    > .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+    > .#{$prefix}--structured-list-td {
+    color: $text-01;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+    > .#{$prefix}--structured-list-td {
+    border-top: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--structured-list-thead {
+    display: table-header-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-th {
+    @include reset;
+    @include padding-th;
+    @include type-style('heading-01');
+    display: table-cell;
+    font-weight: 600;
+    height: rem(40px);
+    text-align: left;
+    text-transform: $structured-list-text-transform;
+    vertical-align: bottom;
+  }
+
+  .#{$prefix}--structured-list-tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-td {
+    @include reset;
+    @include type-style('body-long-01');
+    @include padding-td;
+    line-height: carbon--rem(21px);
+    position: relative;
+    display: table-cell;
+    max-width: 36rem;
+    transition: color $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--structured-list-th {
+    color: $text-01;
+  }
+  .#{$prefix}--structured-list-td {
+    color: $text-02;
+  }
+
+  .#{$prefix}--structured-list-content--nowrap {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--structured-list-svg {
+    display: inline-block;
+    fill: transparent;
+    vertical-align: middle;
+    transition: all $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
+    fill: $ibm-color__gray-40;
+  }
+
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-row
+    .#{$prefix}--structured-list-svg,
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    fill: $text-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        width: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    .#{$prefix}--structured-list-th span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th
+    span {
+    @include skeleton;
+    width: 75%;
+    height: 1rem;
+    display: block;
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--selection.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th:first-child {
+    width: 5%;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+@include exports('structured-list') {
+  @include structured-list;
+}

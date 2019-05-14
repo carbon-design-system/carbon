@@ -1,0 +1,46 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-------------------------
+// Animations - Loading
+//-------------------------
+@import '../../globals/scss/vars';
+
+/// @access private
+/// @group loading
+@mixin animation__loading--spin {
+  // Animate the container
+  animation-name: rotate;
+  animation-duration: 690ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+
+  // Animate the stroke
+  svg circle {
+    animation-name: init-stroke;
+    animation-duration: 10ms;
+    animation-timing-function: $carbon--standard-easing;
+  }
+}
+
+/// @access private
+/// @group loading
+@mixin animation__loading--stop {
+  // Animate the container
+  animation: rotate-end-p1 700ms $carbon--ease-out forwards,
+    rotate-end-p2 700ms $carbon--ease-out 700ms forwards;
+
+  // Animate the stroke
+  & svg circle {
+    animation-name: stroke-end;
+    animation-duration: 700ms;
+    animation-timing-function: $carbon--ease-out;
+    animation-delay: 700ms;
+    animation-fill-mode: forwards;
+  }
+}

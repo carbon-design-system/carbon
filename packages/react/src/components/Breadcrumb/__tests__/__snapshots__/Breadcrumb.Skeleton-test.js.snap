@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadcrumbSkeleton should render 1`] = `
+<BreadcrumbSkeleton>
+  <div
+    className="bx--breadcrumb bx--skeleton"
+  >
+    <div
+      className="bx--breadcrumb-item"
+    >
+      <a
+        className="bx--link"
+        href="/#"
+      >
+         
+      </a>
+    </div>
+    <div
+      className="bx--breadcrumb-item"
+    >
+      <a
+        className="bx--link"
+        href="/#"
+      >
+         
+      </a>
+    </div>
+    <div
+      className="bx--breadcrumb-item"
+    >
+      <a
+        className="bx--link"
+        href="/#"
+      >
+         
+      </a>
+    </div>
+  </div>
+</BreadcrumbSkeleton>
+`;

@@ -1,0 +1,143 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--helpers: true;
+
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--helpers';
+@import '../button/button';
+@import '../checkbox/checkbox';
+@import '../radio-button/radio-button';
+@import '../form/form';
+@import '../overflow-menu/overflow-menu';
+@import '../search/search';
+
+/// Toolbar styles
+/// @access private
+/// @group toolbar
+@mixin toolbar {
+  .#{$prefix}--toolbar {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 1rem 0;
+
+    > div {
+      margin: 0 rem(4px);
+    }
+
+    .#{$prefix}--search-input {
+      height: rem(32px);
+      background-color: transparent;
+      outline: none;
+    }
+
+    .#{$prefix}--search-close {
+      display: none;
+    }
+
+    .#{$prefix}--overflow-menu__icon {
+      fill: $text-02;
+      transition: fill 50ms $carbon--standard-easing;
+    }
+
+    .#{$prefix}--search-magnifier {
+      fill: $text-02;
+      transform: scale(1.15);
+      transition: all 175ms $carbon--standard-easing;
+      top: rem(8px);
+      left: rem(6px);
+      cursor: pointer;
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+    }
+
+    .#{$prefix}--toolbar-search--active {
+      width: rem(250px);
+
+      .#{$prefix}--search-magnifier {
+        transform: scale(1);
+        top: rem(9px);
+      }
+
+      .#{$prefix}--search-input {
+        background-color: $field-02;
+      }
+
+      .#{$prefix}--search-close {
+        display: block;
+      }
+    }
+
+    .#{$prefix}--checkbox-label {
+      margin-bottom: 0;
+    }
+
+    .#{$prefix}--overflow-menu--open > .#{$prefix}--overflow-menu__icon {
+      fill: $brand-01;
+    }
+  }
+
+  .#{$prefix}--toolbar-search {
+    width: 1.8rem;
+    transition: all 175ms $carbon--standard-easing;
+  }
+
+  .#{$prefix}--toolbar-search__btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    border: 0;
+    height: rem(32px);
+    width: rem(32px);
+
+    &:focus {
+      @include focus-outline;
+    }
+  }
+
+  .#{$prefix}--toolbar-filter-icon {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .#{$prefix}--toolbar-menu__title {
+    @include type-style('caption-01');
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .#{$prefix}--toolbar-menu__option {
+    padding: 0.5rem 1.25rem;
+  }
+
+  .#{$prefix}--toolbar-menu__divider {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--radio-button-group {
+    border: none;
+  }
+
+  .#{$prefix}--toolbar-search:not(.#{$prefix}--toolbar-search--active)
+    .#{$prefix}--search-input {
+    border-bottom: none;
+  }
+}
+
+@include exports('toolbar') {
+  @include toolbar;
+}

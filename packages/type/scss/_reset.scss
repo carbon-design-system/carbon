@@ -1,0 +1,43 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/layout/scss/convert';
+@import 'font-family';
+
+/// Include a type reset for a given body and mono font family
+/// @param {Number} $base-font-size [$carbon--base-font-size] - The base font size for your document
+/// @param {String} $body-font-family [carbon--font-family('sans')] - The font family used on the `<body>` element
+/// @param {String} $mono-font-family [carbon--font-family('mono')] - The font family used on elements that require mono fonts, like the `<code>` element
+/// @access public
+/// @group @carbon/type
+@mixin carbon--type-reset(
+  $base-font-size: $carbon--base-font-size,
+  $body-font-family: carbon--font-family('sans'),
+  $mono-font-family: carbon--font-family('mono')
+) {
+  html {
+    font-size: $base-font-size;
+  }
+
+  body {
+    font-family: $body-font-family;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  // IBM Plex uses semibold instead of bold, as a result we need to map
+  // tags that use `font-weight: bold` to the semibold value
+  strong {
+    font-weight: 600;
+  }
+
+  code {
+    font-family: $mono-font-family;
+  }
+}

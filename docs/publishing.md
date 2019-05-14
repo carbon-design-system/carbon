@@ -5,40 +5,121 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-- [Publishing a stable release](#publishing-a-stable-release)
+- [Pre-release](#pre-release)
+- [Release](#release)
+- [Publishing older library versions](#publishing-older-library-versions)
+- [FAQ](#faq)
+    - [How do I fix the repo state if I cancel during a publish?](#how-do-i-fix-the-repo-state-if-i-cancel-during-a-publish)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
 
-## Publishing a stable release
+> Steps for publishing the monorepo
 
-You can publish a release of `carbon-components` by following these steps:
+1. Make sure your local branch is up-to-date by running
+   `git pull upstream master`
+2. Run `yarn sync` to make sure all packages are synced
+3. Make sure your git status is clean (will also be checked in our publish
+   task), if not commit and push changes, then go to Step 1
+4. Make sure dependencies are up-to-date by doing `yarn clean` && `yarn install`
+5. Run `yarn build` to build all package assets
+6. Run `./tasks/publish.sh` with the appropriate flags (see release steps below)
 
-1. Verify that you are on `master` and are up-to-date by running:
-   - `git pull upstream master && git fetch upstream --tags`
-   - This assumes you have setup `upstream` pointed towards `carbon-components`
-1. Create a new branch called `release/vX.Y.Z` where `X.Y.Z` is the version you
-   would like to publish
-1. Update the `version` field in `package.json` to the version you used above
-1. Commit this version change with the commit message: `vX.Y.Z`
-1. Create a pull Request and request reviewers
-1. Run the following command and include the latest changes in your pull request
-   - `npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 0`
-   - If the the release range is off, ensure you fetched the upstream tags (step 1)
-1. After the pull Request has been approved, merge into master
-1. Now you can publish the package to `npm`. Do this you can run the following
-   command for a dry run:
-   - `npm publish . --dry-run`
-1. If you need to tag this package, you can use the `--tag` flag, for example:
-   - `npm publish . --tag next`
-1. If the changes look good to go, you can run the following command to publish:
-   - `npm publish .`
-1. After the package is published, you should create a git tag by running:
-   - `git tag vX.Y.Z`
-1. You can then push this tag upstream by running:
-   - `git push upstream vX.Y.Z`
-1. After pushing the tag upstream, you should see the tag appear under
-   [releases](https://github.com/IBM/carbon-components/releases)
-1. Edit the tag under releases to include the changelog from your pull request (step 6)
-1. After updating the release on GitHub, you should be good to go! Congrats on
-   the release!!! <span aria-label="celebrate">🎉</span>
+## Pre-release
+
+6. Run
+   `./tasks/publish.sh --exact --preid alpha --cd-version prerelease --force-publish=* --npm-tag alpha`
+7. Confirm package changes
+
+## Release
+
+6. Set `GH_TOKEN` in your terminal ENV, the specific value will be for the
+   `carbon-bot` functional ID and can be received from another team member.
+7. Export value above by writing `export GH_TOKEN=XYZ`
+8. Run
+   `./tasks/publish.sh ---exact --conventional-commits --github-release --git-remote upstream`
+
+## Publishing older library versions
+
+We offer ad-hoc backwards-support for older version of the system. This work is
+primarly driven by external contributors who may still need these older versions
+for legacy code. When updates are received and merged into the codebase, the
+release process will be a bit different than the one described above.
+
+For example, with
+[`carbon-components-react`](https://github.com/carbon-design-system/carbon-components-react)
+we have specific branches for older major versions like `v5` or `v6`. If we
+wanted to publish an update to either of these major versions, this process
+would look like:
+
+- Checkout the branch locally, making sure to pull in the latest from upstream
+- Manually update `package.json` with the new version to publish in a branch
+  called `chore/release-vX.Y.Z` and a commit message: `chore(release): vX.Y.Z`
+- Create a Pull Request with this new branch and commit message
+- Once this is merged into the branch, checkout locally and pull latest. Now we
+  can publish by running `npm publish .`, if you want to do a dry run first you
+  can do `npm publish . --dry-run`. This is helpful when dependencies may be
+  different than in newer versions of the system
+
+One important thing to verify is that `package.json` has a `publishConfig` field
+that looks like the following:
+
+```json
+{
+  "publishConfig": {
+    "tag": "<VERSION>.x"
+  }
+}
+```
+
+For example, `carbon-components-react` v5 would look like:
+
+```json
+{
+  "publishConfig": {
+    "tag": "5.x"
+  }
+}
+```
+
+This tag verifies that when we publish we do not publish to the `latest` tag but
+instead to the major-specific tag for the package.
+
+After running `npm publish .` and seeing the package publish to the registry,
+you could create a git tag by running:
+
+```bash
+git tag -a vX.Y.Z # The commit message should match vX.Y.Z
+```
+
+You should then push this tag to the project by running:
+
+```bash
+git push upstream vX.Y.Z
+```
+
+This helps keep track of what versions have been published and snapshotting the
+code at that point in time.
+
+## FAQ
+
+#### How do I fix the repo state if I cancel during a publish?
+
+The first things Lerna will do are create a git tag and update `package.json`
+versions. If you cancel before any packages publish, then you can do the
+following:
+
+```bash
+# Delete the specific tag, usually something like v0.1.0
+git tag -d name-of-tag
+```
+
+```bash
+# Undo the last commit
+git reset HEAD~
+
+# Remove all staged files
+git checkout -- .
+```
+
+You should be good to go after this!

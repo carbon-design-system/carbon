@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBoxMenuIcon should render 1`] = `
+<ListBoxMenuIcon
+  isOpen={true}
+  translateWithId={[Function]}
+>
+  <div
+    className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+    role="button"
+  >
+    <ChevronDown16
+      aria-label="Close menu"
+      height={16}
+      name="chevron--down"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 16 16"
+      width={16}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <svg
+        aria-label="Close menu"
+        focusable="false"
+        height={16}
+        name="chevron--down"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        style={
+          Object {
+            "willChange": "transform",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>
+          Close menu
+        </title>
+        <path
+          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+        />
+      </svg>
+    </ChevronDown16>
+  </div>
+</ListBoxMenuIcon>
+`;
+
+exports[`ListBoxMenuIcon should render 2`] = `
+<ListBoxMenuIcon
+  isOpen={false}
+  translateWithId={[Function]}
+>
+  <div
+    className="bx--list-box__menu-icon"
+    role="button"
+  >
+    <ChevronDown16
+      aria-label="Open menu"
+      height={16}
+      name="chevron--down"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 16 16"
+      width={16}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <svg
+        aria-label="Open menu"
+        focusable="false"
+        height={16}
+        name="chevron--down"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        style={
+          Object {
+            "willChange": "transform",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>
+          Open menu
+        </title>
+        <path
+          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+        />
+      </svg>
+    </ChevronDown16>
+  </div>
+</ListBoxMenuIcon>
+`;

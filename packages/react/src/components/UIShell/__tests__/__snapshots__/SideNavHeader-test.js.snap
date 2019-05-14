@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNavHeader should render 1`] = `
+<SideNavHeader
+  renderIcon={[Function]}
+>
+  <header
+    className="bx--side-nav__header"
+  >
+    <SideNavIcon
+      small={false}
+    >
+      <div
+        className="bx--side-nav__icon"
+      >
+        <renderIcon>
+          <div>
+            mock icon
+          </div>
+        </renderIcon>
+      </div>
+    </SideNavIcon>
+    <span>
+      foo
+    </span>
+  </header>
+</SideNavHeader>
+`;

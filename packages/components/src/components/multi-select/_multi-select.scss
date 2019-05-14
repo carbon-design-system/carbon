@@ -1,0 +1,67 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// List Box
+//-----------------------------
+
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
+@import '../list-box/list-box';
+
+/// Multi select styles
+/// @access private
+/// @group multi-select
+@mixin multiselect {
+  .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
+    min-width: auto;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    > .#{$prefix}--form-item {
+    margin: 0;
+    flex-direction: row;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item
+    .#{$prefix}--checkbox:checked
+    ~ .#{$prefix}--checkbox-label-text {
+    color: $text-01;
+  }
+
+  .#{$prefix}--multi-select--filterable {
+    .#{$prefix}--list-box__selection--multi {
+      position: absolute;
+      left: $carbon--spacing-03;
+      right: auto;
+    }
+  }
+
+  .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
+    // this value will need to change based on the number of digits in
+    // the number of items selected
+    //
+    // i.e. the input field needs adjusted padding to account for the width of
+    // the number in <ListBox.Selection>
+    padding-left: carbon--mini-units(7);
+  }
+}
+
+@include exports('multi-select') {
+  @include multiselect;
+}

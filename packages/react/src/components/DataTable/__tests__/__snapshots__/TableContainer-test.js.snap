@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableContainer should render 1`] = `
+<TableContainer
+  className="custom-class"
+>
+  <div
+    className="custom-class bx--data-table-container"
+  />
+</TableContainer>
+`;

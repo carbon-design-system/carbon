@@ -1,0 +1,22 @@
+{
+  "lerna": "3.13.4",
+  "version": "independent",
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--frozen-lockfile"
+  ],
+  "useWorkspaces": true,
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/docs/**",
+    "**/e2e/**",
+    "**/examples/**",
+    "**/*.md"
+  ],
+  "command": {
+    "version": {
+      "message": "chore(release): publish %s"
+    }
+  }
+}
