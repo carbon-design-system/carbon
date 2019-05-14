@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import NumberInput, { PresentationalNumberInput } from './NumberInput';
+import NumberInput, { NumberInputView } from './NumberInput';
 
-NumberInput.Presentational = PresentationalNumberInput;
+NumberInput.View = NumberInputView;
 
 export * from './NumberInput.Skeleton';
-export { PresentationalNumberInput };
+export { NumberInputView };
 export default NumberInput;
