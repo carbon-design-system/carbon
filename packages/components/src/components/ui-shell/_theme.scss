@@ -11,85 +11,127 @@
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-01: #252525;
+$shell-header-bg-01: $carbon--gray-100;
 
-/// Header-panel background
+/// Header menu trigger hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-02: #f3f3f3;
+$shell-header-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
 
-/// Panel item hover
+/// Header action active background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-03: #dcdcdc;
+$shell-header-bg-03: $carbon--gray-80;
 
-/// Panel overflow hover
+/// Header nav link hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-04: #bebebe;
+$shell-header-bg-04: #353535; //TODO needs color var gray-90-hover
 
-/// Panel input background
+/// Header nav link active and focus background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-05: #fff;
+$shell-header-bg-05: $carbon--gray-70;
 
-/// Header Nav Link hober
+/// Header nav link submenu
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-06: #4c4c4c;
+$shell-header-bg-06: $carbon--gray-90;
 
-/// Primary text in header-panel, Item text
+/// Header border bottom
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-text-01: #f3f3f3;
+$shell-header-border-01: $carbon--gray-80;
 
-/// Secondary text in header-panel, Item text
+/// Header focus
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-text-02: #171717;
+$shell-header-focus: $carbon--white-0;
 
-/// Secondary text in header-panel, Category label
+/// Primary text in header, Title text
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-text-03: #8c8c8c;
+$shell-header-text-01: $carbon--gray-10;
+
+/// Secondary text in header, Menu item nav text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-text-02: $carbon--gray-30;
+
+/// Header menu trigger
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-icon-01: $carbon--gray-10;
 
 /// Header bar icons
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-icon-01: #f3f3f3;
-
-/// Icons in header panel
-/// @type Color
-/// @access private
-/// @group ui-shell
-$shell-header-icon-02: #252525;
+$shell-header-icon-02: $carbon--white-0;
 
 /// Item link
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-link: #0062ff;
+$shell-header-link: $carbon--blue-60;
+
+/// Header-panel background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-01: $carbon--gray-10; //TODO waiting for updated color
+
+/// Panel item hover
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-02: $carbon--gray-20; //TODO waiting for updated color
+
+/// Panel overflow hover
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-03: $carbon--gray-30; //TODO waiting for updated color
+
+/// Panel input background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-04: $carbon--white-0; //TODO waiting for updated color
+
+/// Secondary text in header-panel, Category label
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-text-03: $carbon--gray-50; //TODO waiting for updated color
+
+/// Icons in header panel
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-icon-02: #252525; //TODO waiting for updated color
 
 /// Header icon selected state background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-icon-selected: #0062ff;
+$shell-header-icon-selected: $carbon--blue-60; //TODO waiting for updated color
 
 /// Side-nav panel background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-01: $ibm-color__gray-90;
+$shell-side-nav-bg-01: $carbon--gray-90; //TODO waiting for updated color
 
 /// Selected category background
 /// Select L2 flatted item background
@@ -98,13 +140,13 @@ $shell-side-nav-bg-01: $ibm-color__gray-90;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-02: $ibm-color__gray-80;
+$shell-side-nav-bg-02: $carbon--gray-80; //TODO waiting for updated color
 
 /// Selected L2 nested item
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-03: $ibm-color__gray-70;
+$shell-side-nav-bg-03: $ibm-color__gray-70; //TODO waiting for updated color
 
 /// Primary text in side-nav
 /// L2 Flatten item text
@@ -113,7 +155,7 @@ $shell-side-nav-bg-03: $ibm-color__gray-70;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-text-01: $ibm-color__gray-10;
+$shell-side-nav-text-01: $ibm-color__gray-10; //TODO waiting for updated color
 
 /// Secondary text in side nav
 /// L2 Category label
@@ -138,16 +180,16 @@ $shell-side-nav-accent-01: $ibm-color__blue-60;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-brand-01: #0062ff;
+$shell-brand-01: $ibm-color__blue-60;
 
 /// Temporary token
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-ui-02: #3d3d3d;
+$shell-ui-02: $carbon--gray-80;
 
 /// Temporary token
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-ui-03: #000;
+$shell-ui-03: $carbon--black-100;
