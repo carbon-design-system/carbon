@@ -8,6 +8,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Table } from '../';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('DataTable.Table', () => {
   it('should render', () => {
@@ -17,7 +20,7 @@ describe('DataTable.Table', () => {
 
   it('should support disable zebra stripe', () => {
     const wrapper = shallow(<Table zebra={false} />);
-    expect(wrapper.hasClass('bx--data-table')).toBe(true);
-    expect(wrapper.hasClass('bx--data-table--zebra')).toBe(false);
+    expect(wrapper.hasClass(`${prefix}--data-table`)).toBe(true);
+    expect(wrapper.hasClass(`${prefix}--data-table--zebra`)).toBe(false);
   });
 });

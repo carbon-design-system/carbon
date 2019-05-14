@@ -8,11 +8,14 @@
 import React from 'react';
 import SkeletonPlaceholder from '../SkeletonPlaceholder';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('SkeletonPlaceholder', () => {
   const wrapper = shallow(<SkeletonPlaceholder />);
 
   it('Has the expected classes', () => {
-    expect(wrapper.hasClass('bx--skeleton__placeholder')).toEqual(true);
+    expect(wrapper.hasClass(`${prefix}--skeleton__placeholder`)).toEqual(true);
   });
 });

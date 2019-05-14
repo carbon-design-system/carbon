@@ -8,6 +8,9 @@
 import React from 'react';
 import TimePicker from '../TimePicker';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('TimePicker', () => {
   describe('renders as expected', () => {
@@ -19,7 +22,7 @@ describe('TimePicker', () => {
       beforeEach(() => {
         wrapper = mount(<TimePicker id="test" className="extra-class" />);
 
-        timePicker = () => wrapper.find('.bx--time-picker');
+        timePicker = () => wrapper.find(`.${prefix}--time-picker`);
         textInput = () => wrapper.find('input');
       });
 
@@ -58,7 +61,7 @@ describe('TimePicker', () => {
         wrapper = mount(<TimePicker id="test" light className="extra-class" />);
     
         it('Has the expected classes for light', () => {
-          expect(wrapper.hasClass('bx--time-picker--light')).toEqual(true);
+          expect(wrapper.hasClass(`${prefix}--time-picker--light`)).toEqual(true);
         });
     
         it('Should add extra classes that are passed via className', () => {
@@ -91,7 +94,7 @@ describe('TimePicker', () => {
       it('has the expected classes', () => {
         wrapper.setProps({ labelText: 'Enter a time' });
         const renderedlabel = wrapper.find('label');
-        expect(renderedlabel.hasClass('bx--label')).toEqual(true);
+        expect(renderedlabel.hasClass(`${prefix}--label`)).toEqual(true);
       });
 
       it('should set label as expected', () => {

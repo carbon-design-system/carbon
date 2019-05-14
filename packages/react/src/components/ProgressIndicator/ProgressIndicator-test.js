@@ -9,6 +9,9 @@ import React from 'react';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('ProgressIndicator', () => {
   describe('Renders as expected', () => {
@@ -52,7 +55,7 @@ describe('ProgressIndicator', () => {
     });
 
     it('should render with the appropriate classes', () => {
-      expect(list.hasClass('bx--progress')).toEqual(true);
+      expect(list.hasClass(`${prefix}--progress`)).toEqual(true);
       expect(list.hasClass('some-class')).toEqual(true);
     });
 
@@ -97,7 +100,7 @@ describe('ProgressIndicator', () => {
             .find(ProgressStep)
             .at(0)
             .children()
-            .hasClass('bx--progress-step')
+            .hasClass(`${prefix}--progress-step`)
         ).toEqual(true);
       });
 
@@ -135,7 +138,7 @@ describe('ProgressIndicator', () => {
               .find(ProgressStep)
               .at(3)
               .children()
-              .hasClass('bx--progress-step--current')
+              .hasClass(`${prefix}--progress-step--current`)
           ).toEqual(true);
         });
 
@@ -156,7 +159,7 @@ describe('ProgressIndicator', () => {
               .find(ProgressStep)
               .at(0)
               .children()
-              .hasClass('bx--progress-step--complete')
+              .hasClass(`${prefix}--progress-step--complete`)
           ).toEqual(true);
         });
         it('should render any completed ProgressSteps with correct props', () => {
@@ -176,7 +179,7 @@ describe('ProgressIndicator', () => {
               .find(ProgressStep)
               .at(5)
               .children()
-              .hasClass('bx--progress-step--incomplete')
+              .hasClass(`${prefix}--progress-step--incomplete`)
           ).toEqual(true);
         });
         it('should render any incompleted ProgressSteps with correct props', () => {
@@ -190,9 +193,11 @@ describe('ProgressIndicator', () => {
 
         it('should render any clickable ProgressSteps with correct classname', () => {
           mountedList.setProps({ onChange: jest.fn() });
-          expect(mountedList.find('.bx--progress-step-button')).toHaveLength(6); // one button for each div
           expect(
-            mountedList.find('.bx--progress-step-button--unclickable')
+            mountedList.find(`.${prefix}--progress-step-button`)
+          ).toHaveLength(6); // one button for each div
+          expect(
+            mountedList.find(`.${prefix}--progress-step-button--unclickable`)
           ).toHaveLength(1); // only the current step should be unclickable
         });
       });
@@ -205,8 +210,8 @@ describe('ProgressIndicatorSkeleton', () => {
     const wrapper = shallow(<ProgressIndicatorSkeleton />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--progress')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--progress`)).toEqual(true);
     });
   });
 });

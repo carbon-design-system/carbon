@@ -9,7 +9,9 @@ import React from 'react';
 import UnorderedList from '../UnorderedList';
 import ListItem from '../ListItem';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 describe('UnorderedList', () => {
   describe('Renders as expected', () => {
     const list = shallow(
@@ -23,7 +25,7 @@ describe('UnorderedList', () => {
     });
 
     it('should render with the appropriate classes', () => {
-      expect(list.hasClass('bx--list--unordered')).toEqual(true);
+      expect(list.hasClass(`${prefix}--list--unordered`)).toEqual(true);
       expect(list.hasClass('some-class')).toEqual(true);
     });
 
@@ -33,9 +35,9 @@ describe('UnorderedList', () => {
 
     it('should render nested lists', () => {
       list.setProps({ nested: true });
-      expect(list.hasClass('bx--list--nested')).toEqual(true);
+      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(true);
       list.setProps({ nested: false });
-      expect(list.hasClass('bx--list--nested')).toEqual(false);
+      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(false);
     });
   });
 });

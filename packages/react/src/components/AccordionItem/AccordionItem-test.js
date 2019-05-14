@@ -9,6 +9,9 @@ import React from 'react';
 import AccordionItem from '../AccordionItem';
 import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('AccordionItem', () => {
   describe('Renders as expected', () => {
@@ -19,27 +22,31 @@ describe('AccordionItem', () => {
     );
 
     it('renders children as expected', () => {
-      expect(wrapper.find('.bx--accordion__content').text()).toBe(
+      expect(wrapper.find(`.${prefix}--accordion__content`).text()).toBe(
         'Lorem ipsum.'
       );
     });
 
     it('renders heading as expected', () => {
-      const heading = wrapper.find('.bx--accordion__heading');
+      const heading = wrapper.find(`.${prefix}--accordion__heading`);
       const icon = ChevronRight16;
       expect(heading.length).toBe(1);
       expect(heading.find(icon).length).toBe(1);
-      expect(heading.find('.bx--accordion__title').text()).toBe('A heading');
+      expect(heading.find(`.${prefix}--accordion__title`).text()).toBe(
+        'A heading'
+      );
     });
 
     it('should use correct icon', () => {
-      const heading = wrapper.find('.bx--accordion__heading');
+      const heading = wrapper.find(`.${prefix}--accordion__heading`);
       expect(heading.find(ChevronRight16).length).toBe(1);
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--accordion__item')).toEqual(true);
-      expect(wrapper.hasClass('bx--accordion__item--active')).toEqual(false);
+      expect(wrapper.hasClass(`${prefix}--accordion__item`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--accordion__item--active`)).toEqual(
+        false
+      );
     });
 
     it('renders extra classes passed in via className', () => {
@@ -52,7 +59,9 @@ describe('AccordionItem', () => {
           Lorem ipsum.
         </AccordionItem>
       );
-      expect(openItem.hasClass('bx--accordion__item--active')).toEqual(true);
+      expect(openItem.hasClass(`${prefix}--accordion__item--active`)).toEqual(
+        true
+      );
       expect(openItem.state().open).toEqual(true);
       openItem.setState({ open: true });
       openItem.setProps({ open: false });
@@ -73,10 +82,12 @@ describe('AccordionItem', () => {
     it('should apply the active class when the state is open', () => {
       const toggler = mount(<AccordionItem />);
       const item = toggler.find('li');
-      expect(item.hasClass('bx--accordion__item--active')).toEqual(false);
+      expect(item.hasClass(`${prefix}--accordion__item--active`)).toEqual(
+        false
+      );
       toggler.setState({ open: true });
       expect(
-        toggler.find('li').hasClass('bx--accordion__item--active')
+        toggler.find('li').hasClass(`${prefix}--accordion__item--active`)
       ).toEqual(true);
     });
   });
@@ -94,10 +105,10 @@ describe('AccordionItem', () => {
     );
 
     it('renders heading as expected', () => {
-      const heading = wrapper.find('.bx--accordion__heading');
+      const heading = wrapper.find(`.${prefix}--accordion__heading`);
       expect(heading.length).toBe(1);
       expect(heading.find(ChevronRight16).length).toBe(1);
-      const title = heading.find('.bx--accordion__title');
+      const title = heading.find(`.${prefix}--accordion__title`);
       expect(title.text()).toBe('A heading');
       expect(title.find('h2').exists()).toEqual(true);
       expect(title.find('h2').hasClass('TitleClass')).toEqual(true);
@@ -115,7 +126,7 @@ describe('AccordionItem', () => {
     const wrapper = mount(
       <AccordionItem onClick={onClick} onHeadingClick={onHeadingClick} />
     );
-    const heading = wrapper.find('button.bx--accordion__heading');
+    const heading = wrapper.find(`button.${prefix}--accordion__heading`);
 
     it('should call onClick', () => {
       wrapper.simulate('click');
@@ -132,7 +143,7 @@ describe('AccordionItem', () => {
     const toggler = mount(
       <AccordionItem title="A heading">Lorem ipsum.</AccordionItem>
     );
-    const heading = toggler.find('button.bx--accordion__heading');
+    const heading = toggler.find(`button.${prefix}--accordion__heading`);
 
     it('should set state to open when clicked', () => {
       expect(toggler.state().open).toEqual(false);
@@ -152,7 +163,7 @@ describe('AccordionItem', () => {
           <input className="testInput" />
         </AccordionItem>
       );
-      heading = toggler.find('button.bx--accordion__heading');
+      heading = toggler.find(`button.${prefix}--accordion__heading`);
     });
 
     it('should close open AccordionItem when using Esc', () => {

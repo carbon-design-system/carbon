@@ -17,6 +17,9 @@ import {
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Dropdown', () => {
   let mockProps;
@@ -71,7 +74,7 @@ describe('Dropdown', () => {
     });
 
     it('has the expected classes', () => {
-      expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+      expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
     });
 
     it('should set title as expected', () => {
@@ -84,7 +87,7 @@ describe('Dropdown', () => {
       const wrapper = mount(
         <Dropdown helperText="Email Input" {...mockProps} />
       );
-      const renderedHelper = wrapper.find('.bx--form__helper-text');
+      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
       expect(renderedHelper.length).toEqual(1);
     });
 
@@ -99,7 +102,7 @@ describe('Dropdown', () => {
           {...mockProps}
         />
       );
-      const renderedHelper = wrapper.find('.bx--form__helper-text');
+      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
       expect(renderedHelper.props().children).toEqual(
         <span>
           This helper text has <a href="/">a link</a>.
@@ -110,7 +113,7 @@ describe('Dropdown', () => {
     it('should set helper text as expected', () => {
       const wrapper = mount(<Dropdown {...mockProps} />);
       wrapper.setProps({ helperText: 'Helper text' });
-      const renderedHelper = wrapper.find('.bx--form__helper-text');
+      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
       expect(renderedHelper.text()).toEqual('Helper text');
     });
   });
@@ -148,7 +151,7 @@ describe('Dropdown', () => {
         <Dropdown {...mockProps} initialSelectedItem={mockProps.items[0]} />
       );
 
-      expect(wrapper.find('span.bx--list-box__label').text()).toEqual(
+      expect(wrapper.find(`span.${prefix}--list-box__label`).text()).toEqual(
         mockProps.items[0].label
       );
     });
@@ -164,7 +167,7 @@ describe('Dropdown', () => {
         <Dropdown {...mockProps} initialSelectedItem={mockProps.items[1]} />
       );
 
-      expect(wrapper.find('span.bx--list-box__label').text()).toEqual(
+      expect(wrapper.find(`span.${prefix}--list-box__label`).text()).toEqual(
         mockProps.items[1]
       );
     });
@@ -176,9 +179,9 @@ describe('DropdownSkeleton', () => {
     const wrapper = shallow(<DropdownSkeleton inline />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--dropdown-v2')).toEqual(true);
-      expect(wrapper.hasClass('bx--list-box--inline')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--list-box--inline`)).toEqual(true);
     });
   });
 });

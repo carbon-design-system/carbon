@@ -150,7 +150,7 @@ $z-indexes: (
     {
       info: {
         text: `
-          Placeholder skeleton state to
+          Placeholder skeleton state to use when content is loading.
         `,
       },
     }
