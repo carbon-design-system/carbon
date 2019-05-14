@@ -13,6 +13,7 @@ import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import mergeRefs from '../../tools/mergeRefs';
+import { useControlledStateWithEventListener } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -156,7 +157,7 @@ class NumberInput extends Component {
 
   static getDerivedStateFromProps({ min, max, value }, state) {
     const { prevValue } = state;
-    return prevValue === value
+    return useControlledStateWithEventListener || prevValue === value
       ? null
       : {
           value: capMax(max, capMin(min, value)),
@@ -168,12 +169,17 @@ class NumberInput extends Component {
     if (!this.props.disabled) {
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
+      const value = evt.target.value;
       this.setState(
         {
-          value: evt.target.value,
+          value,
         },
         () => {
-          this.props.onChange(evt);
+          if (useControlledStateWithEventListener) {
+            this.props.onChange(evt, { value });
+          } else {
+            this.props.onChange(evt);
+          }
         }
       );
     }
@@ -199,8 +205,13 @@ class NumberInput extends Component {
           value,
         },
         () => {
-          this.props.onClick(evt, direction);
-          this.props.onChange(evt, direction);
+          if (useControlledStateWithEventListener) {
+            this.props.onClick(evt, { value, direction });
+            this.props.onChange(evt, { value, direction });
+          } else {
+            this.props.onClick(evt, direction);
+            this.props.onChange(evt, direction);
+          }
         }
       );
     }
@@ -254,7 +265,10 @@ class NumberInput extends Component {
       min,
       step,
       onChange: this.handleChange,
-      value: this.state.value,
+      value:
+        useControlledStateWithEventListener && this.props.onChange
+          ? this.props.value
+          : this.state.value,
       ariaLabel,
     };
 
