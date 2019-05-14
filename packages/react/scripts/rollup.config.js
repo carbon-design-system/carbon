@@ -65,7 +65,7 @@ module.exports = {
       mainFields: ['jsnext', 'module', 'main'],
     }),
     commonjs({
-      include: /node_modules/,
+      include: [/node_modules/, /icons-react\/lib/],
       sourceMap: true,
       namedExports: {
         'react/index.js': [

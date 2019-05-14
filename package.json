@@ -21,7 +21,7 @@
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
     "format:staged": "prettier --write",
-    "lint:styles": "stylelint \"**/*.{css,scss}\" --config ./packages/stylelint-config-elements",
+    "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
     "test": "jest",
     "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
@@ -88,11 +88,6 @@
     "packages/react/**/*.js": [
       "yarn format:staged",
       "yarn lerna run lint:staged --scope carbon-components-react",
-      "git add"
-    ],
-    "*.{scss,css}": [
-      "yarn format:staged",
-      "stylelint --config ./packages/stylelint-config-elements",
       "git add"
     ],
     "*.md": [
