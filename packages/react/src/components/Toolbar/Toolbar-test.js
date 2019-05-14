@@ -15,6 +15,9 @@ import Toolbar, {
 import OverflowMenu from '../OverflowMenu';
 import ToolbarSearch from '../ToolbarSearch';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Toolbar', () => {
   describe('renders as expected', () => {
@@ -22,7 +25,7 @@ describe('Toolbar', () => {
 
     describe('toolbar container', () => {
       it('should render the expected classes', () => {
-        expect(toolbar.children().hasClass('bx--toolbar')).toEqual(true);
+        expect(toolbar.children().hasClass(`${prefix}--toolbar`)).toEqual(true);
         expect(toolbar.children().hasClass('extra-class')).toEqual(true);
       });
     });
@@ -94,7 +97,7 @@ describe('Toolbar', () => {
 
       it('should render a toolbar title with the expected className', () => {
         expect(
-          toolbarTitle.children().hasClass('bx--toolbar-menu__title')
+          toolbarTitle.children().hasClass(`${prefix}--toolbar-menu__title`)
         ).toEqual(true);
       });
 
@@ -118,7 +121,7 @@ describe('Toolbar', () => {
 
       it('should render a toolbar option with the expected className', () => {
         expect(
-          toolbarOption.children().hasClass('bx--toolbar-menu__option')
+          toolbarOption.children().hasClass(`${prefix}--toolbar-menu__option`)
         ).toEqual(true);
       });
 
@@ -140,7 +143,7 @@ describe('Toolbar', () => {
 
       it('should render a toolbar divider with the expected className', () => {
         expect(
-          toolbarDivider.children().hasClass('bx--toolbar-menu__divider')
+          toolbarDivider.children().hasClass(`${prefix}--toolbar-menu__divider`)
         ).toEqual(true);
       });
     });

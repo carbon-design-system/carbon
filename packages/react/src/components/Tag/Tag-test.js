@@ -9,13 +9,16 @@ import React from 'react';
 import Tag from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Tag', () => {
   describe('Renders as expected', () => {
     it('should render with the appropriate type', () => {
       const tag = shallow(<Tag type="beta" />);
-      expect(tag.hasClass('bx--tag')).toEqual(true);
-      expect(tag.hasClass('bx--tag--beta')).toEqual(true);
+      expect(tag.hasClass(`${prefix}--tag`)).toEqual(true);
+      expect(tag.hasClass(`${prefix}--tag--beta`)).toEqual(true);
     });
   });
 
@@ -35,8 +38,8 @@ describe('TagSkeleton', () => {
     const wrapper = shallow(<TagSkeleton />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--tag')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--tag`)).toEqual(true);
     });
   });
 });

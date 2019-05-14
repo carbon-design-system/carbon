@@ -9,6 +9,9 @@ import React from 'react';
 import PrimaryButton from '../PrimaryButton';
 import { shallow, mount } from 'enzyme';
 import Search16 from '@carbon/icons-react/lib/search/16';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('PrimaryButton', () => {
   describe('Renders as expected', () => {
@@ -44,7 +47,7 @@ describe('PrimaryButton', () => {
       );
       const icon = iconButton.find('svg');
       it('should have the appropriate icon', () => {
-        expect(icon.hasClass('bx--btn__icon')).toBe(true);
+        expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
       });
     });
   });

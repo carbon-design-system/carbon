@@ -10,7 +10,9 @@ import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 describe('Slider', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
@@ -25,15 +27,17 @@ describe('Slider', () => {
     );
 
     it('renders children as expected', () => {
-      expect(wrapper.find('.bx--text-input').length).toBe(1);
+      expect(wrapper.find(`.${prefix}--text-input`).length).toBe(1);
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.find('.bx--slider').length).toBe(1);
+      expect(wrapper.find(`.${prefix}--slider`).length).toBe(1);
     });
 
     it('renders extra classes passed in via className', () => {
-      expect(wrapper.find('.bx--slider').hasClass('extra-class')).toEqual(true);
+      expect(
+        wrapper.find(`.${prefix}--slider`).hasClass('extra-class')
+      ).toEqual(true);
     });
 
     it('can be disabled', () => {
@@ -60,13 +64,13 @@ describe('Slider', () => {
       );
       expect(
         wrapper
-          .find('.bx--slider__range-label')
+          .find(`.${prefix}--slider__range-label`)
           .first()
           .text()
       ).toBe('0min');
       expect(
         wrapper
-          .find('.bx--slider__range-label')
+          .find(`.${prefix}--slider__range-label`)
           .last()
           .text()
       ).toBe('100max');
@@ -85,13 +89,13 @@ describe('Slider', () => {
       );
       expect(
         wrapper
-          .find('.bx--slider__range-label')
+          .find(`.${prefix}--slider__range-label`)
           .first()
           .text()
       ).toBe('0-min');
       expect(
         wrapper
-          .find('.bx--slider__range-label')
+          .find(`.${prefix}--slider__range-label`)
           .last()
           .text()
       ).toBe('100-max');
@@ -173,10 +177,10 @@ describe('SliderSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<SliderSkeleton />);
 
-    const slider = wrapper.find('.bx--slider-container');
+    const slider = wrapper.find(`.${prefix}--slider-container`);
 
     it('Has the expected classes', () => {
-      expect(slider.hasClass('bx--skeleton')).toEqual(true);
+      expect(slider.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });

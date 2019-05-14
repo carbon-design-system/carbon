@@ -11,7 +11,9 @@ import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 describe('NumberInput', () => {
   describe('should render as expected', () => {
     let wrapper;
@@ -45,10 +47,10 @@ describe('NumberInput', () => {
       const iconTypes = [CaretDownGlyph, CaretUpGlyph];
       label = wrapper.find('label');
       numberInput = wrapper.find('input');
-      container = wrapper.find('.bx--number');
-      formItem = wrapper.find('.bx--form-item');
+      container = wrapper.find(`.${prefix}--number`);
+      formItem = wrapper.find(`.${prefix}--form-item`);
       icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
-      helper = wrapper.find('.bx--form__helper-text');
+      helper = wrapper.find(`.${prefix}--form__helper-text`);
     });
 
     describe('input', () => {
@@ -57,13 +59,13 @@ describe('NumberInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(container.hasClass('bx--number bx--number--helpertext')).toEqual(
-          true
-        );
+        expect(
+          container.hasClass(`${prefix}--number ${prefix}--number--helpertext`)
+        ).toEqual(true);
       });
 
       it('has renders with form-item wrapper', () => {
-        expect(formItem.hasClass('bx--form-item')).toEqual(true);
+        expect(formItem.hasClass(`${prefix}--form-item`)).toEqual(true);
       });
 
       it('applies extra classes via className', () => {
@@ -97,13 +99,15 @@ describe('NumberInput', () => {
       it('should set invalid as expected', () => {
         expect(container.prop('data-invalid')).toEqual(undefined);
         wrapper.setProps({ invalid: true });
-        expect(wrapper.find('.bx--number').prop('data-invalid')).toEqual(true);
+        expect(wrapper.find(`.${prefix}--number`).prop('data-invalid')).toEqual(
+          true
+        );
       });
 
       it('should set invalidText as expected', () => {
-        expect(wrapper.find('.bx--form-requirement').length).toEqual(0);
+        expect(wrapper.find(`.${prefix}--form-requirement`).length).toEqual(0);
         wrapper.setProps({ invalid: true });
-        const invalidText = wrapper.find('.bx--form-requirement');
+        const invalidText = wrapper.find(`.${prefix}--form-requirement`);
         expect(invalidText.length).toEqual(1);
         expect(invalidText.text()).toEqual('invalid text');
       });
@@ -117,11 +121,13 @@ describe('NumberInput', () => {
       it('should hide label as expected', () => {
         expect(numberInput.prop('min')).toEqual(0);
         wrapper.setProps({ hideLabel: true });
-        expect(wrapper.find('label').hasClass('bx--visually-hidden')).toEqual(
-          true
-        );
         expect(
-          wrapper.find('.bx--number').hasClass('bx--number--nolabel')
+          wrapper.find('label').hasClass(`${prefix}--visually-hidden`)
+        ).toEqual(true);
+        expect(
+          wrapper
+            .find(`.${prefix}--number`)
+            .hasClass(`${prefix}--number--nolabel`)
         ).toEqual(true);
       });
 
@@ -170,7 +176,7 @@ describe('NumberInput', () => {
             .instance()
             .setState({ value: '' });
           wrapper.update();
-          const invalidText = wrapper.find('.bx--form-requirement');
+          const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(1);
 
           expect(invalidText.text()).toEqual('invalid text');
@@ -184,7 +190,7 @@ describe('NumberInput', () => {
             .setState({ value: '' });
           wrapper.update();
           wrapper.setProps({ allowEmpty: true });
-          const invalidText = wrapper.find('.bx--form-requirement');
+          const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(0);
         });
 
@@ -289,7 +295,7 @@ describe('NumberInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--label')).toEqual(true);
+        expect(label.hasClass(`${prefix}--label`)).toEqual(true);
       });
     });
 
@@ -306,7 +312,7 @@ describe('NumberInput', () => {
             </span>
           ),
         });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
             This helper text has <a href="#">a link</a>.
@@ -459,12 +465,12 @@ describe('NumberInputSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<NumberInputSkeleton />);
 
-    const container = wrapper.find('.bx--number');
-    const label = wrapper.find('.bx--label');
+    const container = wrapper.find(`.${prefix}--number`);
+    const label = wrapper.find(`.${prefix}--label`);
 
     it('has the expected classes', () => {
-      expect(container.hasClass('bx--skeleton')).toEqual(true);
-      expect(label.hasClass('bx--skeleton')).toEqual(true);
+      expect(container.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });

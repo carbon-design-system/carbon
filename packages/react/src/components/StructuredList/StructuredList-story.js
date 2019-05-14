@@ -17,6 +17,9 @@ import {
   StructuredListCell,
 } from '../StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 storiesOf('StructuredList', module)
   .add(
@@ -85,7 +88,7 @@ storiesOf('StructuredList', module)
             />
             <StructuredListCell>
               <CheckmarkFilled16
-                className="bx--structured-list-svg"
+                className={`${prefix}--structured-list-svg`}
                 aria-label="select an option">
                 <title>select an option</title>
               </CheckmarkFilled16>
