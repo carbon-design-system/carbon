@@ -125,6 +125,7 @@
     color: $text-01;
     margin-top: 0;
     margin-bottom: $carbon--spacing-06;
+    word-break: break-word;
   }
 
   .#{$prefix}--toast-notification__caption {
