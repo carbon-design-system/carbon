@@ -45,7 +45,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp build && ./tools/copy-vendor-styles.sh && bundler check 'scss/**/*.scss'",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup",
     "clean": "gulp clean",
@@ -82,9 +82,9 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "@carbon/elements": "10.1.1",
-    "@carbon/icons-handlebars": "10.1.1",
-    "@carbon/test-utils": "^10.0.0",
+    "@carbon/elements": "10.2.0",
+    "@carbon/icons-handlebars": "10.2.0",
+    "@carbon/test-utils": "10.2.0",
     "@frctl/fractal": "^1.1.0",
     "adaro": "1.0.4",
     "autoprefixer": "^8.2.0",

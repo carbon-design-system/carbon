@@ -7,6 +7,7 @@
 
 @import './vendor/@carbon/elements/scss/import-once/import-once';
 @import './vendor/@carbon/elements/scss/type/reset';
+@import './vendor/@carbon/elements/scss/icons/mixins';
 
 /// Resets default browser styling
 /// @access public
@@ -192,5 +193,6 @@
     }
 
     @include carbon--type-reset;
+    @include carbon--icons;
   }
 }
