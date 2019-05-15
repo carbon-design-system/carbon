@@ -29,7 +29,7 @@
     padding: 1rem 0;
     overflow-y: auto;
     z-index: 1000;
-    background-color: $shell-header-bg-02;
+    background-color: $shell-panel-bg-01;
     height: 100%;
     overflow-x: hidden;
     transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -49,7 +49,7 @@
   }
 
   .#{$prefix}--search--shell input {
-    background-color: $shell-header-bg-05;
+    background-color: $shell-panel-bg-02;
   }
 
   //--------------------------------------------------------------------------
@@ -115,7 +115,7 @@
   }
 
   .#{$prefix}--product-list__item:hover {
-    background: $shell-header-bg-03;
+    background: $shell-panel-bg-02;
   }
 
   .#{$prefix}--product-link {
@@ -159,7 +159,7 @@
   }
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover {
-    background: $shell-header-bg-04;
+    background: $shell-panel-bg-03;
   }
 
   .#{$prefix}--product-switcher__product-list
@@ -176,7 +176,7 @@
 
   .#{$prefix}--product-switcher__product-list
     .#{$prefix}--overflow-menu-options__option:hover {
-    background: $shell-header-bg-03;
+    background: $shell-panel-bg-04;
   }
 
   .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
