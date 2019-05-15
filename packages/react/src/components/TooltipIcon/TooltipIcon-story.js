@@ -16,8 +16,15 @@ const directions = {
   'Top (top)': 'top',
 };
 
+const alignments = {
+  'Start (start)': 'start',
+  'Center (center)': 'center',
+  'End (end)': 'end',
+};
+
 const props = () => ({
   direction: select('Tooltip direction (direction)', directions, 'bottom'),
+  alignment: select('Tooltip alignment (alignment)', alignments, 'center'),
   tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
 });
 
