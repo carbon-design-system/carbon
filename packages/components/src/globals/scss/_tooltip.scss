@@ -71,32 +71,28 @@
   }
 }
 
-// Tooltip Icon caret - top position
+// Tooltip Icon placement
+/// @param {String} $position ['bottom'] - The position from: `top`, `bottom`
 /// @access public
 /// @group tooltip
-@mixin tooltip--icon--top {
+@mixin tooltip--icon-placement($position: 'bottom') {
   &::before {
-    top: 1px;
-    transform: translate(-50%, calc(-100% - 9px)) rotate(180deg);
+    @if ($position == 'top') {
+      top: 1px;
+      transform: translate(-50%, calc(-100% - 9px)) rotate(180deg);
+    } @else {
+      bottom: 0;
+      transform: translate(-50%, 10px);
+    }
   }
 
   &::after {
-    top: 0;
-    transform: translate(-50%, calc(-100% - 12px));
-  }
-}
-
-// Tooltip Icon caret - bottom position
-/// @access public
-/// @group tooltip
-@mixin tooltip--icon--bottom {
-  &::before {
-    bottom: 0;
-    transform: translate(-50%, 10px);
-  }
-
-  &::after {
-    bottom: 0;
-    transform: translate(-50%, calc(100% + 10px));
+    @if ($position == 'top') {
+      top: 0;
+      transform: translate(-50%, calc(-100% - 12px));
+    } @else {
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px));
+    }
   }
 }

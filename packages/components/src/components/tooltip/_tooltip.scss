@@ -278,12 +278,12 @@
 
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
-    @include tooltip--icon--top;
+    @include tooltip--icon-placement('top');
   }
 
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
-    @include tooltip--icon--bottom;
+    @include tooltip--icon-placement('bottom');
   }
 
   // Tooltip position - icon only
