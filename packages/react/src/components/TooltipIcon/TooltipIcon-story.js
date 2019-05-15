@@ -24,7 +24,7 @@ const alignments = {
 
 const props = () => ({
   direction: select('Tooltip direction (direction)', directions, 'bottom'),
-  alignment: select('Tooltip alignment (alignment)', alignments, 'center'),
+  align: select('Tooltip alignment (align)', alignments, 'center'),
   tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
 });
 

@@ -16,7 +16,7 @@ const TooltipIcon = ({
   className,
   children,
   direction,
-  alignment,
+  align,
   tooltipText,
   ...rest
 }) => {
@@ -27,7 +27,7 @@ const TooltipIcon = ({
   const triggerClassName = cx({
     [`${prefix}--tooltip__trigger`]: true,
     [`${prefix}--tooltip--icon__${direction}`]: direction,
-    [`${prefix}--tooltip--icon__align-${alignment}`]: alignment,
+    [`${prefix}--tooltip--icon__align-${align}`]: align,
   });
   return (
     <div {...rest} className={tooltipClassName}>
@@ -53,7 +53,7 @@ TooltipIcon.propTypes = {
   /**
    * Specify the alignment (to the trigger button) of the tooltip. Can be one of: start, center or end.
    */
-  alignment: PropTypes.oneOf(['start', 'center', 'end']),
+  align: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
    * Provide the text that will be displayed in the tooltip when it is rendered.
@@ -63,7 +63,7 @@ TooltipIcon.propTypes = {
 
 TooltipIcon.defaultProps = {
   direction: 'bottom',
-  alignment: 'center',
+  align: 'center',
 };
 
 export default TooltipIcon;
