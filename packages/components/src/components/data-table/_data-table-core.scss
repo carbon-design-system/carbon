@@ -93,8 +93,6 @@
   .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
-    border-top: 1px solid $ui-03;
-    border-bottom: 1px solid $ui-03;
   }
 
   .#{$prefix}--data-table th:first-of-type {
