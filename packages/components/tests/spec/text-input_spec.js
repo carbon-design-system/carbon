@@ -115,6 +115,9 @@ describe('Test text input', () => {
       bubbles: true,
       data: null,
     });
+    if (!aKeyInput.data) {
+      aKeyInput.data = 'a';
+    }
 
     beforeAll(() => {
       document.body.appendChild(container);

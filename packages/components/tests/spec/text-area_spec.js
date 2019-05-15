@@ -58,6 +58,9 @@ describe('Test textarea', () => {
       bubbles: true,
       data: 'a',
     });
+    if (!aKeyInput.data) {
+      aKeyInput.data = 'a';
+    }
     const deleteKeyInput = new InputEvent('input', {
       inputType: 'deleteContentBackward',
       type: 'input',
