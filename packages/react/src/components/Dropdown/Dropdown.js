@@ -126,6 +126,11 @@ export default class Dropdown extends React.Component {
      * additional help
      */
     helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: Downshift.propTypes,
   };
 
   static defaultProps = {
@@ -163,6 +168,7 @@ export default class Dropdown extends React.Component {
       light,
       invalid,
       invalidText,
+      downshiftProps,
     } = this.props;
     const inline = type === 'inline';
     const className = ({ isOpen }) =>
@@ -205,6 +211,7 @@ export default class Dropdown extends React.Component {
         {title}
         {!inline && helper}
         <Downshift
+          {...downshiftProps}
           onChange={this.handleOnChange}
           itemToString={itemToString}
           defaultSelectedItem={initialSelectedItem}
