@@ -15,6 +15,25 @@ import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 
 const { prefix } = settings;
+const DefaultCharCounter = ({ disabled, count, maxLength }) => {
+  const charCounterClasses = classNames(
+    `${prefix}--text-input--character-counter`,
+    {
+      [`${prefix}--text-input--character-counter--disabled`]: disabled,
+    }
+  );
+  return (
+    <span className={charCounterClasses}>
+      <span className={`${prefix}--text-input--character-counter--length`}>
+        {count}
+      </span>
+      /
+      <span className={`${prefix}--text-input--character-counter--maxlength`}>
+        {maxLength}
+      </span>
+    </span>
+  );
+};
 const TextInput = React.forwardRef(function TextInput(
   {
     labelText,
@@ -30,6 +49,7 @@ const TextInput = React.forwardRef(function TextInput(
     helperText,
     light,
     charCount,
+    renderCharCounter: CharCounter = DefaultCharCounter,
     maxLength,
     ...other
   },
@@ -64,12 +84,6 @@ const TextInput = React.forwardRef(function TextInput(
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
   });
-  const charCounterClasses = classNames(
-    `${prefix}--text-input--character-counter`,
-    {
-      [`${prefix}--text-input--character-counter--disabled`]: other.disabled,
-    }
-  );
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
@@ -78,17 +92,6 @@ const TextInput = React.forwardRef(function TextInput(
       {labelText}
     </label>
   ) : null;
-  const charCounter = (
-    <span className={charCounterClasses}>
-      <span className={`${prefix}--text-input--character-counter--length`}>
-        {inputVal.length}
-      </span>
-      /
-      <span className={`${prefix}--text-input--character-counter--maxlength`}>
-        {maxLength}
-      </span>
-    </span>
-  );
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
@@ -108,7 +111,13 @@ const TextInput = React.forwardRef(function TextInput(
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
       {label}
-      {charCount && charCounter}
+      {charCount && (
+        <CharCounter
+          disabled={other.disabled}
+          count={inputVal.length}
+          maxLength={maxLength}
+        />
+      )}
       {helper}
       <div
         className={`${prefix}--text-input__field-wrapper`}

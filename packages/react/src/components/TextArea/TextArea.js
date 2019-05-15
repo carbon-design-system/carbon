@@ -13,6 +13,26 @@ import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 
 const { prefix } = settings;
 
+const DefaultCharCounter = ({ disabled, count, maxLength }) => {
+  const charCounterClasses = classNames(
+    `${prefix}--text-area--character-counter`,
+    {
+      [`${prefix}--text-area--character-counter--disabled`]: disabled,
+    }
+  );
+  return (
+    <span className={charCounterClasses}>
+      <span className={`${prefix}--text-area--character-counter--length`}>
+        {count}
+      </span>
+      /
+      <span className={`${prefix}--text-area--character-counter--maxlength`}>
+        {maxLength}
+      </span>
+    </span>
+  );
+};
+
 const TextArea = ({
   className,
   id,
@@ -26,6 +46,7 @@ const TextArea = ({
   light,
   charCount,
   maxLength,
+  renderCharCounter: CharCounter = DefaultCharCounter,
   ...other
 }) => {
   const [textareaVal, setInput] = useState('');
@@ -54,25 +75,6 @@ const TextArea = ({
       {labelText}
     </label>
   ) : null;
-
-  const charCounterClasses = classNames(
-    `${prefix}--text-area--character-counter`,
-    {
-      [`${prefix}--text-area--character-counter--disabled`]: other.disabled,
-    }
-  );
-
-  const charCounter = (
-    <span className={charCounterClasses}>
-      <span className={`${prefix}--text-area--character-counter--length`}>
-        {textareaVal.length}
-      </span>
-      /
-      <span className={`${prefix}--text-area--character-counter--maxlength`}>
-        {maxLength}
-      </span>
-    </span>
-  );
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
@@ -111,7 +113,13 @@ const TextArea = ({
   return (
     <div className={`${prefix}--form-item`}>
       {label}
-      {charCount && charCounter}
+      {charCount && (
+        <CharCounter
+          disabled={other.disabled}
+          count={textareaVal.length}
+          maxLength={maxLength}
+        />
+      )}
       {helper}
       <div
         className={`${prefix}--text-area__wrapper`}
