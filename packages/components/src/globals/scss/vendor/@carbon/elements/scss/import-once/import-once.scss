@@ -5,16 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Used from carbon-components:
-// https://github.com/IBM/carbon-components/blob/7fd0895c2061db5a90ff6c8a933a20dd83d6d790/src/globals/scss/_import-once.scss#L1-L16
+/// Used by `exports` mixin to track which modules have been imported
+/// @type Map
+/// @access public
+/// @group @carbon/import-once
 $imported-modules: () !default;
 
-/// Module export mixin
-/// This mixin helps making sure a module is imported once and only once.
+/// Module export mixin that helps making sure a module is imported once and only once
 /// @access public
 /// @param {String} $name - Name of exported module
-/// @param {Bool} $error [false] - Error when a module has been already imported
-/// @require $imported-modules
+/// @param {Bool} $warn [false] - Warn when a module has been already imported
+/// @content Declaration blocks to be imported
+/// @group @carbon/import-once
 @mixin exports($name, $warn: false) {
   @if (index($imported-modules, $name) == null) {
     $imported-modules: append($imported-modules, $name) !global;
