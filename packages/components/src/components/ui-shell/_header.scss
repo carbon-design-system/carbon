@@ -104,28 +104,14 @@
     align-items: center;
     height: 100%;
     padding: 0 mini-units(4) 0 mini-units(2);
-    margin-right: mini-units(2);
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.1px;
     line-height: 20px;
     user-select: none;
-    position: relative;
     border: rem(2px) solid transparent;
     transition: border-color $duration--fast-02;
     outline: none;
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      height: rem(24px);
-      width: rem(1px);
-      background-color: $shell-header-border-01;
-    }
   }
 
   a.#{$prefix}--header__name:focus {
@@ -146,6 +132,20 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--header__nav {
     height: 100%;
+    padding-left: mini-units(2);
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: rem(24px);
+      width: rem(1px);
+      background-color: $shell-header-border-01;
+    }
   }
 
   .#{$prefix}--header__menu-bar[role='menubar'] {
