@@ -203,6 +203,16 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify whether the character counter is shown
+   */
+  charCount: PropTypes.bool,
+
+  /**
+   * The maximum allowed input value length
+   */
+  maxLength: PropTypes.number,
 };
 
 TextInput.defaultProps = {

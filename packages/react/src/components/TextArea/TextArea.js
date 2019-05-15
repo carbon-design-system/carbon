@@ -210,6 +210,16 @@ TextArea.propTypes = {
    * Specify whether you want the light version of this control
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify whether the character counter is shown
+   */
+  charCount: PropTypes.bool,
+
+  /**
+   * The maximum allowed input value length
+   */
+  maxLength: PropTypes.number,
 };
 
 TextArea.defaultProps = {
