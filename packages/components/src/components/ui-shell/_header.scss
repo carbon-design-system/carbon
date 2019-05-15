@@ -27,7 +27,7 @@
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    color: $shell-header-text-01;
+    border-bottom: $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -35,7 +35,7 @@
     @include button-reset();
     width: mini-units(6);
     height: mini-units(6);
-    border: rem(3px) solid transparent;
+    border: rem(2px) solid transparent;
   }
 
   .#{$prefix}--header__action
@@ -63,22 +63,30 @@
   }
 
   .#{$prefix}--header__action:hover {
-    background-color: #333333;
+    background-color: $shell-header-bg-04;
   }
 
   .#{$prefix}--header__action--active,
   .#{$prefix}--header__action--active:hover {
-    background-color: $shell-brand-01;
+    background-color: $shell-header-bg-03;
   }
 
   .#{$prefix}--header__action--active,
   .#{$prefix}--header__action:focus {
-    border-color: $shell-brand-01;
+    border-color: $shell-header-focus;
     outline: none;
   }
 
   .#{$prefix}--header__action > svg {
+    fill: $shell-header-icon-02;
+  }
+
+  .#{$prefix}--header__menu-trigger > svg {
     fill: $shell-header-icon-01;
+  }
+
+  .#{$prefix}--header__menu-trigger:hover {
+    fill: $shell-header-bg-02;
   }
 
   //--------------------------------------------------------------------------
@@ -106,11 +114,6 @@
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--header__name:focus {
-    outline: none;
-    box-shadow: inset 0 0 0 4px $shell-brand-01;
-  }
-
   //--------------------------------------------------------------------------
   // Header - Navigation
   //--------------------------------------------------------------------------
@@ -127,7 +130,7 @@
   a.#{$prefix}--header__menu-item[role='menuitem'] {
     display: flex;
     align-items: center;
-    color: $shell-header-text-01;
+    color: $shell-header-text-02;
     padding: 0 mini-units(2);
     // Used for links that are directly in the menubar to span the full height
     height: 100%;
@@ -140,20 +143,20 @@
     text-decoration: none;
     user-select: none;
     // Used for focus styles
-    border: 4px solid transparent;
+    border: 2px solid transparent;
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:hover {
-    background-color: #333333;
+    background-color: $shell-header-bg-04;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item[role='menuitem']:active {
-    background-color: $ibm-color__gray-80;
+    background-color: $shell-header-bg-05;
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:focus {
-    border-color: $ibm-color__blue-60;
+    border-color: $shell-header-focus;
     outline: none;
   }
 
@@ -166,7 +169,8 @@
   }
 
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
-    background-color: $ibm-color__gray-80;
+    background-color: $shell-header-bg-03;
+    color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
     z-index: #{z('header') + 1};
@@ -190,7 +194,7 @@
     width: mini-units(25);
     flex-direction: column;
     transform: translateY(100%);
-    background-color: $ibm-color__gray-80;
+    background-color: $shell-header-bg-06;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     z-index: z('header');
   }
@@ -201,8 +205,8 @@
 
   .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item[role='menuitem']:hover {
-    background-color: #4c4c4c;
-    color: #fff;
+    background-color: $shell-header-bg-06;
+    color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__menu-arrow {
