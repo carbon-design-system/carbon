@@ -115,6 +115,11 @@ export default class MultiSelect extends React.Component {
      * `top-after-reopen`: selected item jump to top after reopen dropdown
      */
     selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: Downshift.propTypes,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -226,6 +231,7 @@ export default class MultiSelect extends React.Component {
       invalidText,
       useTitleInItem,
       translateWithId,
+      downshiftProps,
     } = this.props;
     const inline = type === 'inline';
     const wrapperClasses = cx(
@@ -261,6 +267,7 @@ export default class MultiSelect extends React.Component {
         initialSelectedItems={initialSelectedItems}
         render={({ selectedItems, onItemChange, clearSelection }) => (
           <Downshift
+            {...downshiftProps}
             highlightedIndex={highlightedIndex}
             isOpen={isOpen}
             itemToString={itemToString}

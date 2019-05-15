@@ -146,6 +146,11 @@ export default class ComboBox extends React.Component {
      * should use "light theme" (white background)?
      */
     light: PropTypes.bool,
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: Downshift.propTypes,
   };
 
   static defaultProps = {
@@ -237,6 +242,7 @@ export default class ComboBox extends React.Component {
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
+      downshiftProps,
       ...rest
     } = this.props;
     const className = cx(`${prefix}--combo-box`, containerClassName);
@@ -257,6 +263,7 @@ export default class ComboBox extends React.Component {
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
     const input = (
       <Downshift
+        {...downshiftProps}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
         inputValue={this.state.inputValue || ''}
