@@ -25,9 +25,9 @@ const cloptions = commander
     '-d, --debug',
     'Disables collection of code coverage, useful for runinng debugger against specs or sources'
   )
-  .option('-f, --file [file]', 'Spec files to run', collect, defaultFiles)
+  .option('--file [file]', 'Spec files to run', collect, defaultFiles)
   .option('-r, --random', 'Enable random execution order of tests')
-  .option('-v, --verbose', 'Enables verbose output')
+  .option('--verbose', 'Enables verbose output')
   .parse(process.argv);
 const isFilesDefault =
   cloptions.file.length === defaultFiles.length &&
