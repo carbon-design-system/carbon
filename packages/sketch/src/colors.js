@@ -9,10 +9,7 @@ import { colors } from '@carbon/colors';
 import { formatTokenName } from '@carbon/themes';
 import sketch from 'sketch';
 import {
-  Artboard,
-  Page,
   Rectangle,
-  Shape,
   ShapePath,
   SharedStyle,
   Style,

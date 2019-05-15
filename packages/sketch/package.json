@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@carbon/colors": "10.2.0",
+    "@carbon/icons": "10.2.0",
     "@carbon/themes": "10.2.0",
     "@skpm/builder": "^0.7.0",
+    "core-js": "^3.0.1",
     "skpm": "^1.2.0"
   },
   "skpm": {
