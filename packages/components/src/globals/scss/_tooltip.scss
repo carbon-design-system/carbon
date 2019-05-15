@@ -79,7 +79,11 @@
 @mixin tooltip--icon-placement($position: 'bottom', $align: 'center') {
   $translate-x: if($align == 'center', -50%, 0);
   $translate-y-caret: if($position == 'top', calc(-100% - 9px), 10px);
-  $translate-y-body: if($position == 'top', calc(-100% - 12px), calc(100% + 10px));
+  $translate-y-body: if(
+    $position == 'top',
+    calc(-100% - 12px),
+    calc(100% + 10px)
+  );
   $rotate-caret: if($position == 'top', 180deg, 0);
 
   &::before {
