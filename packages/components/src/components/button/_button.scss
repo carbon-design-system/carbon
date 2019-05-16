@@ -132,10 +132,10 @@
 
     &:hover,
     &:active {
-      color: $ibm-color__blue-70;
+      color: $interactive-04;
 
       .#{$prefix}--btn__icon path {
-        fill: $ibm-color__blue-70;
+        fill: $interactive-04;
       }
     }
 
