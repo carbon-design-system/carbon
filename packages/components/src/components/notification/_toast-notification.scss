@@ -117,6 +117,7 @@
 
     font-weight: 600;
     margin-top: 1rem;
+    word-break: break-word;
   }
 
   .#{$prefix}--toast-notification__subtitle {
