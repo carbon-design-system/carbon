@@ -15,6 +15,7 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
 
 /// @type Number
 /// @access private
@@ -68,6 +69,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box {
+    @include reset;
     position: relative;
     width: $list-box-width;
     height: rem(40px);
