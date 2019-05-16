@@ -278,12 +278,32 @@
 
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
-    @include tooltip--icon--top;
+    @include tooltip--icon-placement('top');
   }
 
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
-    @include tooltip--icon--bottom;
+    @include tooltip--icon-placement('bottom');
+  }
+
+  // Tooltip Icon caret - top position, left alignment
+  .#{$prefix}--tooltip--icon__top.#{$prefix}--tooltip--icon__align-start {
+    @include tooltip--icon-placement('top', 'start');
+  }
+
+  // Tooltip Icon caret - top position, right alignment
+  .#{$prefix}--tooltip--icon__top.#{$prefix}--tooltip--icon__align-end {
+    @include tooltip--icon-placement('top', 'end');
+  }
+
+  // Tooltip Icon caret - bottom position, left alignment
+  .#{$prefix}--tooltip--icon__bottom.#{$prefix}--tooltip--icon__align-start {
+    @include tooltip--icon-placement('bottom', 'start');
+  }
+
+  // Tooltip Icon caret - bottom position, right alignment
+  .#{$prefix}--tooltip--icon__bottom.#{$prefix}--tooltip--icon__align-end {
+    @include tooltip--icon-placement('bottom', 'end');
   }
 
   // Tooltip position - icon only

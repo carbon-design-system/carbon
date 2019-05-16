@@ -5,7 +5,10 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
+/// Carbon's white color theme
+/// @type Map
+/// @access public
+/// @group @carbon/themes
 $carbon--theme--white: (
   interactive-01: #0062ff,
   interactive-02: #171717,
@@ -60,7 +63,10 @@ $carbon--theme--white: (
   active-01: #bebebe,
   hover-field: #e5e5e5,
 ) !default;
-
+/// Carbon's g10 color theme
+/// @type Map
+/// @access public
+/// @group @carbon/themes
 $carbon--theme--g10: (
   interactive-01: #0062ff,
   interactive-02: #171717,
@@ -115,7 +121,10 @@ $carbon--theme--g10: (
   active-01: #bebebe,
   hover-field: #e5e5e5,
 ) !default;
-
+/// Carbon's g90 color theme
+/// @type Map
+/// @access public
+/// @group @carbon/themes
 $carbon--theme--g90: (
   interactive-01: #0062ff,
   interactive-02: #6f6f6f,
@@ -170,7 +179,10 @@ $carbon--theme--g90: (
   active-01: #6f6f6f,
   hover-field: #353535,
 ) !default;
-
+/// Carbon's g100 color theme
+/// @type Map
+/// @access public
+/// @group @carbon/themes
 $carbon--theme--g100: (
   interactive-01: #0062ff,
   interactive-02: #6f6f6f,
@@ -225,5 +237,9 @@ $carbon--theme--g100: (
   active-01: #565656,
   hover-field: #353535,
 ) !default;
-
+/// Carbon's default theme
+/// @type Map
+/// @access public
+/// @alias carbon--theme--white
+/// @group @carbon/themes
 $carbon--theme: $carbon--theme--white !default;
