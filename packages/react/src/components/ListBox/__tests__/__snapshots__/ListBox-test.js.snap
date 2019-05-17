@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBox should render 1`] = `
+<ListBox
+  className="bx--list-box__container"
+  disabled={false}
+  id="test-listbox"
+  innerRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <div
+            class="bx--list-box__container bx--list-box"
+            id="test-listbox"
+            role="listbox"
+            tabindex="-1"
+          >
+            <div
+              aria-controls="test-listbox__menu"
+              aria-haspopup="listbox"
+              aria-owns="test-listbox__menu"
+              class="bx--list-box__field"
+              role="combobox"
+              tabindex="-1"
+            />
+          </div>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  type="default"
+>
+  <div
+    className="bx--list-box__container bx--list-box"
+    id="test-listbox"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="listbox"
+    tabIndex="-1"
+  >
+    <ListBoxField
+      id="test-listbox"
+    >
+      <div
+        aria-controls="test-listbox__menu"
+        aria-haspopup="listbox"
+        aria-owns="test-listbox__menu"
+        className="bx--list-box__field"
+        role="combobox"
+        tabIndex={-1}
+      />
+    </ListBoxField>
+  </div>
+</ListBox>
+`;

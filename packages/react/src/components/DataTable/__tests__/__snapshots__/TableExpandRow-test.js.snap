@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableExpandRow should render 1`] = `
+<Table
+  isSortable={false}
+>
+  <table
+    className="bx--data-table bx--data-table--no-border"
+  >
+    <TableBody
+      aria-live="polite"
+    >
+      <tbody
+        aria-live="polite"
+      >
+        <TableExpandRow
+          ariaLabel="Aria label"
+          className="custom-class"
+          expandHeader="expand"
+          isExpanded={false}
+          onExpand={[MockFunction]}
+        >
+          <tr
+            className="bx--parent-row custom-class"
+            data-parent-row={true}
+          >
+            <TableCell
+              className="bx--table-expand"
+              headers="expand"
+            >
+              <td
+                className="bx--table-expand"
+                headers="expand"
+              >
+                <button
+                  aria-label="Aria label"
+                  className="bx--table-expand__button"
+                  onClick={[MockFunction]}
+                >
+                  <ChevronRight16
+                    className="bx--table-expand__svg"
+                    height={16}
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="bx--table-expand__svg"
+                      focusable="false"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      style={
+                        Object {
+                          "willChange": "transform",
+                        }
+                      }
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+                      />
+                    </svg>
+                  </ChevronRight16>
+                </button>
+              </td>
+            </TableCell>
+          </tr>
+        </TableExpandRow>
+        <TableExpandedRow>
+          <tr
+            className="bx--expandable-row"
+            data-child-row={true}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <TableCell>
+              <td>
+                <div
+                  className="bx--child-row-inner-container"
+                />
+              </td>
+            </TableCell>
+          </tr>
+        </TableExpandedRow>
+      </tbody>
+    </TableBody>
+  </table>
+</Table>
+`;
