@@ -25,6 +25,54 @@ const types = {
   'For password (password)': 'password',
 };
 
+const props = {
+  textInput: () => ({
+    className: 'some-class',
+    id: 'test2',
+    defaultValue: text(
+      'Default value (defaultValue)',
+      'This is not a default value'
+    ),
+    labelText: text('Label text (labelText)', 'Text Input label'),
+    placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
+    light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
+    hideLabel: boolean('No label (hideLabel)', false),
+    invalid: boolean('Show form validation UI (invalid)', false),
+    charCount: boolean('Add character counter (charCount)', false),
+    maxLength: number('Input length limit (maxLength)', 100),
+    invalidText: text(
+      'Form validation UI content (invalidText)',
+      'A valid value is required'
+    ),
+    helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    onClick: action('onClick'),
+    onChange: action('onChange'),
+  }),
+  passwordInput: () => ({
+    className: 'some-class',
+    id: 'test2',
+    defaultValue: text(
+      'Default value (defaultValue)',
+      'This is not a default value'
+    ),
+    labelText: text('Label text (labelText)', 'Text Input label'),
+    placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
+    light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
+    hideLabel: boolean('No label (hideLabel)', false),
+    invalid: boolean('Show form validation UI (invalid)', false),
+    maxLength: number('Input length limit (maxLength)', 100),
+    invalidText: text(
+      'Form validation UI content (invalidText)',
+      'A valid value is required'
+    ),
+    helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    onClick: action('onClick'),
+    onChange: action('onChange'),
+  }),
+};
+
 class ControlledPasswordInputApp extends React.Component {
   state = {
     type: 'password',
@@ -41,35 +89,11 @@ class ControlledPasswordInputApp extends React.Component {
       <TextInput.ControlledPasswordInput
         type={this.state.type}
         togglePasswordVisibility={this.togglePasswordVisibility}
-        {...TextInputProps()}
+        {...props.passwordInput()}
       />
     );
   }
 }
-
-const TextInputProps = () => ({
-  className: 'some-class',
-  id: 'test2',
-  defaultValue: text(
-    'Default value (defaultValue)',
-    'This is not a default value'
-  ),
-  labelText: text('Label text (labelText)', 'Text Input label'),
-  placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
-  light: boolean('Light variant (light)', false),
-  disabled: boolean('Disabled (disabled)', false),
-  hideLabel: boolean('No label (hideLabel)', false),
-  invalid: boolean('Show form validation UI (invalid)', false),
-  charCount: boolean('Add character counter (charCount)', false),
-  maxLength: number('Input length limit (maxLength)', 100),
-  invalidText: text(
-    'Form validation UI content (invalidText)',
-    'A valid value is required'
-  ),
-  helperText: text('Helper text (helperText)', 'Optional helper text.'),
-  onClick: action('onClick'),
-  onChange: action('onChange'),
-});
 
 storiesOf('TextInput', module)
   .addDecorator(withKnobs)
@@ -78,7 +102,7 @@ storiesOf('TextInput', module)
     () => (
       <TextInput
         type={select('Form control type (type)', types, 'text')}
-        {...TextInputProps()}
+        {...props.textInput()}
       />
     ),
     {
@@ -94,7 +118,7 @@ storiesOf('TextInput', module)
   )
   .add(
     'Toggle password visibility',
-    () => <TextInput.PasswordInput {...TextInputProps()} />,
+    () => <TextInput.PasswordInput {...props.passwordInput()} />,
     {
       info: {
         text: `
