@@ -450,6 +450,19 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
+  .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $ui-03;
+  }
+
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
     display: block;
@@ -478,6 +491,13 @@ $list-box-menu-width: rem(300px);
       color: $text-01;
       border-color: transparent;
     }
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
