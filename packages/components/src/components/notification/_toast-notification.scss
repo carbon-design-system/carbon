@@ -117,6 +117,7 @@
 
     font-weight: 600;
     margin-top: 1rem;
+    word-break: break-word;
   }
 
   .#{$prefix}--toast-notification__subtitle {
@@ -125,6 +126,7 @@
     color: $text-01;
     margin-top: 0;
     margin-bottom: $carbon--spacing-06;
+    word-break: break-word;
   }
 
   .#{$prefix}--toast-notification__caption {
