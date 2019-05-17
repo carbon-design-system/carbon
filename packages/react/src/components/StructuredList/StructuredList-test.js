@@ -15,6 +15,9 @@ import {
   StructuredListCell,
 } from '../StructuredList';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('StructuredListWrapper', () => {
   describe('Renders as expected', () => {
@@ -23,7 +26,7 @@ describe('StructuredListWrapper', () => {
     );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--structured-list')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -32,22 +35,30 @@ describe('StructuredListWrapper', () => {
 
     it('By default, border prop is false', () => {
       wrapper.setProps({ border: false });
-      expect(wrapper.hasClass('bx--structured-list--border')).toEqual(false);
+      expect(wrapper.hasClass(`${prefix}--structured-list--border`)).toEqual(
+        false
+      );
     });
 
     it('By default, selection prop is false', () => {
       wrapper.setProps({ border: false });
-      expect(wrapper.hasClass('bx--structured-list--selection')).toEqual(false);
+      expect(wrapper.hasClass(`${prefix}--structured-list--selection`)).toEqual(
+        false
+      );
     });
 
     it('Should add the modifier class for border when border prop is true', () => {
       wrapper.setProps({ border: true });
-      expect(wrapper.hasClass('bx--structured-list--border')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list--border`)).toEqual(
+        true
+      );
     });
 
     it('Should add the modifier class for selection when selection prop is true', () => {
       wrapper.setProps({ selection: true });
-      expect(wrapper.hasClass('bx--structured-list--selection')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list--selection`)).toEqual(
+        true
+      );
     });
   });
 });
@@ -59,7 +70,9 @@ describe('StructuredListHead', () => {
     );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--structured-list-thead')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list-thead`)).toEqual(
+        true
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -80,7 +93,9 @@ describe('StructuredListInput', () => {
     const wrapper = shallow(<StructuredListInput className="extra-class" />);
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--structured-list-input')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list-input`)).toEqual(
+        true
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -105,7 +120,7 @@ describe('StructuredListRow', () => {
     const wrapper = shallow(<StructuredListRow className="extra-class" />);
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--structured-list-row')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list-row`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -115,9 +130,9 @@ describe('StructuredListRow', () => {
     it('should use correct class when head prop is true', () => {
       wrapper.setProps({ head: true });
 
-      expect(wrapper.hasClass('bx--structured-list-row--header-row')).toEqual(
-        true
-      );
+      expect(
+        wrapper.hasClass(`${prefix}--structured-list-row--header-row`)
+      ).toEqual(true);
     });
 
     it('should use <div> HTML by default (or when label prop is false)', () => {
@@ -146,7 +161,9 @@ describe('StructuredListBody', () => {
     );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--structured-list-tbody')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list-tbody`)).toEqual(
+        true
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -173,19 +190,19 @@ describe('StructuredListCell', () => {
     });
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--structured-list-td')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list-td`)).toEqual(true);
     });
 
     it('should use correct class when head prop is true', () => {
       wrapper.setProps({ head: true });
-      expect(wrapper.hasClass('bx--structured-list-th')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--structured-list-th`)).toEqual(true);
     });
 
     it('should use correct class when noWrap prop is true', () => {
       wrapper.setProps({ noWrap: true });
-      expect(wrapper.hasClass('bx--structured-list-content--nowrap')).toEqual(
-        true
-      );
+      expect(
+        wrapper.hasClass(`${prefix}--structured-list-content--nowrap`)
+      ).toEqual(true);
     });
 
     it('Should accept other props from ...other', () => {

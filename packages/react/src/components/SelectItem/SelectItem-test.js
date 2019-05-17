@@ -8,6 +8,9 @@
 import React from 'react';
 import SelectItem from '../SelectItem';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('SelectItem', () => {
   describe('Renders as expected', () => {
@@ -16,7 +19,7 @@ describe('SelectItem', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--select-option')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--select-option`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {

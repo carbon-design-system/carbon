@@ -1,0 +1,118 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--grid">
+
+  <div class="{{@root.prefix}}--tile-container" style="width: 100%">
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-12">
+        <div data-tile="expandable" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--expandable" tabindex="0">
+          <button class="{{@root.prefix}}--tile__chevron">
+            <svg width="12" height="7" viewBox="0 0 12 7">
+              <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+            </svg>
+          </button>
+          <div class="{{@root.prefix}}--tile-content">
+            <span data-tile-atf class="{{@root.prefix}}--tile-content__above-the-fold" style="height: 200px">
+              <!-- Above the fold content here -->
+              <h2>Above the fold content here</h2>
+            </span>
+            <span class="{{@root.prefix}}--tile-content__below-the-fold" style="height: 400px">
+              <!-- Rest of the content here -->
+              <h2>Below the fold content here</h2>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-sm-2">
+        <label for="tile-id-1" aria-label="tile" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--selectable" data-tile="selectable" tabindex="0">
+          <input tabindex="-1" id="tile-id-1" class="{{@root.prefix}}--tile-input" data-tile-input value="tile" type="checkbox" name="tiles" title="tile"
+          />
+          <div class="{{@root.prefix}}--tile__checkmark">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
+                fill-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="{{@root.prefix}}--tile-content">
+            <!-- Tile content here -->
+          </div>
+        </label>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-sm-2">
+        <label for="tile-id-2" aria-label="tile-2" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--selectable" data-tile="selectable" tabindex="0">
+          <input tabindex="-1" id="tile-id-2" class="{{@root.prefix}}--tile-input" data-tile-input value="tile-2" type="checkbox" name="tiles" title="tile-2"
+          />
+          <div class="{{@root.prefix}}--tile__checkmark">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
+                fill-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="{{@root.prefix}}--tile-content">
+            <!-- Tile content here -->
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-4 {{@root.prefix}}--col-sm-4">
+        <a data-tile="clickable" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--clickable" tabindex="0"></a>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-4 {{@root.prefix}}--col-sm-4">
+        <a data-tile="clickable" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--clickable" tabindex="0"></a>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-8 {{@root.prefix}}--col-sm-4">
+        <a data-tile="clickable" class="{{@root.prefix}}--tile {{@root.prefix}}--tile--clickable" tabindex="0"></a>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-4 {{@root.prefix}}--col-sm-4">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-4 {{@root.prefix}}--col-sm-4">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-4 {{@root.prefix}}--col-sm-4">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-4 {{@root.prefix}}--col-sm-4">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-lg-4 {{@root.prefix}}--col-md-8">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-lg-4 {{@root.prefix}}--col-md-8">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-lg-4 {{@root.prefix}}--col-md-8">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-lg-4 {{@root.prefix}}--col-md-8">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-lg-16">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+    </div>
+    <div class="{{@root.prefix}}--row">
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-5 {{@root.prefix}}--col-sm-2">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+      <div class="{{@root.prefix}}--col {{@root.prefix}}--col-md-3 {{@root.prefix}}--col-sm-2">
+        <div class="{{@root.prefix}}--tile"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

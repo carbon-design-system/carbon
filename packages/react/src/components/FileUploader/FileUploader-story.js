@@ -22,7 +22,9 @@ import {
 import FileUploader, { FileUploaderButton } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import Button from '../Button';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 const buttonKinds = {
   'Primary (primary)': 'primary',
   'Secondary (secondary)': 'secondary',
@@ -93,7 +95,7 @@ storiesOf('FileUploader', module)
     () => {
       let fileUploader;
       return (
-        <div className="bx--file__container">
+        <div className={`${prefix}--file__container`}>
           <FileUploader
             {...props.fileUploader()}
             ref={node => (fileUploader = node)}

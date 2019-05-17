@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
+
+@include exports('skeleton-text') {
+  .#{$prefix}--skeleton__text {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--skeleton__heading {
+    height: 1.5rem;
+  }
+}

@@ -1,0 +1,17 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#each tags}}
+<span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}">{{label}}</span>
+{{/each}}
+
+{{#if filter}}
+<span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" tabindex="0">
+  filter
+  {{ carbon-icon 'Close16' aria-label='Clear filter' }}
+</span>
+{{/if}}

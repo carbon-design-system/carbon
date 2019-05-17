@@ -78,11 +78,6 @@ export default class FilterableMultiSelect extends React.Component {
     placeholder: PropTypes.string.isRequired,
 
     /**
-     * Specify title to show title on hover
-     */
-    useTitleInItem: PropTypes.bool,
-
-    /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
@@ -114,6 +109,11 @@ export default class FilterableMultiSelect extends React.Component {
      * Callback function for translating ListBoxMenuIcon SVG title
      */
     translateWithId: PropTypes.func,
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: Downshift.propTypes,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -260,8 +260,8 @@ export default class FilterableMultiSelect extends React.Component {
       light,
       invalid,
       invalidText,
-      useTitleInItem,
       translateWithId,
+      downshiftProps,
     } = this.props;
     const inline = type === 'inline';
     const wrapperClasses = cx(
@@ -295,6 +295,7 @@ export default class FilterableMultiSelect extends React.Component {
         initialSelectedItems={initialSelectedItems}
         render={({ selectedItems, onItemChange, clearSelection }) => (
           <Downshift
+            {...downshiftProps}
             highlightedIndex={highlightedIndex}
             isOpen={isOpen}
             inputValue={inputValue}
@@ -399,7 +400,6 @@ export default class FilterableMultiSelect extends React.Component {
                             {...itemProps}>
                             <Checkbox
                               id={itemProps.id}
-                              title={useTitleInItem ? itemText : null}
                               name={itemText}
                               checked={isChecked}
                               readOnly={true}

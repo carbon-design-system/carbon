@@ -1,0 +1,217 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--helpers: true;
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../select/select';
+@import '../text-input/text-input';
+
+/// Pagination styles
+/// @access private
+/// @group pagination
+@mixin pagination {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
+    border-top: 0;
+  }
+
+  .#{$prefix}--pagination {
+    @include reset;
+    @include type-style('body-short-01');
+    width: 100%;
+    background-color: $ui-01;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $ui-03;
+    height: rem(48px);
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select {
+    height: 100%;
+    align-items: center;
+    grid-template-columns: auto 0;
+  }
+
+  .#{$prefix}--select-input__wrapper,
+  .#{$prefix}--select-input--inline__wrapper {
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-short-01');
+    width: auto;
+    min-width: auto;
+    height: 100%;
+    padding: 0 2.5rem 0 $spacing-md;
+    margin-right: -0.65rem;
+    @include carbon--breakpoint('md') {
+      padding: 0 1.5rem 0 0.5rem;
+      margin-right: 0;
+    }
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    position: relative;
+    top: auto;
+    right: 1.1rem;
+    bottom: auto;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__item-count
+    .#{$prefix}--select-input {
+    border-right: $spacing-4xs solid $ui-03;
+    @include carbon--breakpoint('md') {
+      padding-right: 2rem;
+      margin-right: -0.65rem;
+    }
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select-input {
+    border-left: 1px solid $ui-03;
+    @include carbon--breakpoint('md') {
+      padding-left: 1rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select__arrow {
+    @include carbon--breakpoint('md') {
+      right: 1.8rem;
+    }
+  }
+
+  .#{$prefix}--pagination__left,
+  .#{$prefix}--pagination__right {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    margin-right: 1rem;
+    margin-left: rem(1px);
+  }
+
+  .#{$prefix}--pagination__left {
+    @include carbon--breakpoint('md') {
+      padding: 0 $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--pagination__text {
+    display: none;
+
+    @include carbon--breakpoint('md') {
+      display: inline-block;
+    }
+  }
+
+  span.#{$prefix}--pagination__text {
+    margin-left: $carbon--spacing-05;
+    color: $text-01;
+  }
+
+  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
+    margin-left: -0.5rem;
+  }
+
+  .#{$prefix}--pagination__button {
+    @include reset;
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+    padding: 0 rem(14px);
+    border-left: 1px solid $ui-03;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: $ui-05;
+    transition: outline $duration--fast-02 motion(standard, productive);
+    transition: background-color $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--pagination__button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--pagination__button:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination__button--no-index {
+    fill: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--pagination__button:disabled:hover,
+  .#{$prefix}--pagination__button--no-index:hover {
+    cursor: not-allowed;
+    fill: $disabled-02;
+    background: $ui-01;
+  }
+
+  .#{$prefix}--pagination--inline {
+    height: rem(42px);
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    margin-right: -1rem;
+  }
+
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button {
+    height: rem(40px);
+    border-left: 1px solid $ui-03;
+    border-right: 1px solid $ui-03;
+    margin: 0;
+  }
+
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--forward {
+    border-right: 0;
+    padding: 0 $carbon--spacing-05;
+    margin-left: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--pagination--inline .#{$prefix}--pagination__button--backward {
+    margin: 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05;
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+@include exports('pagination') {
+  @include pagination;
+}

@@ -15,6 +15,9 @@ import ComposedModal, {
   ModalFooter,
 } from '../ComposedModal';
 import Button from '../Button';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const props = {
   composedModal: (includeOpen = true) => ({
@@ -61,7 +64,7 @@ storiesOf('ComposedModal', module)
       <ComposedModal {...props.composedModal()}>
         <ModalHeader {...props.modalHeader()} />
         <ModalBody>
-          <p className="bx--modal-content__text">
+          <p className={`${prefix}--modal-content__text}`}>
             Please see ModalWrapper for more examples and demo of the
             functionality.
           </p>
@@ -133,7 +136,7 @@ storiesOf('ComposedModal', module)
                 onClose={() => this.toggleModal(false)}>
                 <ModalHeader {...props.modalHeader()} />
                 <ModalBody>
-                  <p className="bx--modal-content__text">
+                  <p className={`${prefix}--modal-content__text`}>
                     Please see ModalWrapper for more examples and demo of the
                     functionality.
                   </p>

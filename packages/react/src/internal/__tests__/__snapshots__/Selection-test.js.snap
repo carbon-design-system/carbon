@@ -16,7 +16,7 @@ exports[`Selection should render 1`] = `
       ],
       "results": Array [
         Object {
-          "type": "return",
+          "isThrow": false,
           "value": <div />,
         },
       ],

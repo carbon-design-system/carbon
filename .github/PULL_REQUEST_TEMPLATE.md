@@ -1,4 +1,4 @@
-Closes IBM/carbon-components-react#
+Closes #
 
 {{short description}}
 
@@ -15,3 +15,7 @@ Closes IBM/carbon-components-react#
 **Removed**
 
 - {{removed thing}}
+
+#### Testing / Reviewing
+
+{{ Add descriptions, steps or a checklist for how reviewers can verify this PR works or not }}

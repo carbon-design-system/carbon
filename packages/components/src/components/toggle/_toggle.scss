@@ -1,0 +1,242 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Toggle
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../form/form';
+
+/// Toggle styles
+/// @access private
+/// @group toggle
+@mixin toggle {
+  .#{$prefix}--toggle {
+    @include hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--toggle__label {
+    @include type-style('label-01');
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: $carbon--spacing-03 0;
+  }
+
+  .#{$prefix}--toggle__appearance {
+    position: relative;
+    width: rem(48px);
+    height: rem(24px);
+
+    // Toggle background oval
+    &:before {
+      position: absolute;
+      display: block;
+      content: '';
+      background-color: $ui-04;
+      cursor: pointer;
+      box-sizing: border-box;
+      height: rem(24px);
+      width: rem(48px);
+      border-radius: rem(15px);
+      top: 0;
+      will-change: box-shadow;
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow $duration--fast-01 motion(exit, productive),
+        background-color $duration--fast-01 motion(exit, productive);
+    }
+
+    // Toggle circle
+    &:after {
+      box-sizing: border-box;
+      position: absolute;
+      display: block;
+      cursor: pointer;
+      left: 3px;
+      top: 3px;
+      width: rem(18px);
+      height: rem(18px);
+      background-color: $ui-03;
+      border-radius: 50%;
+      content: '';
+      transition: transform $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    width: rem(32px);
+    height: rem(16px);
+
+    &:before {
+      box-sizing: border-box;
+      height: rem(16px);
+      width: rem(32px);
+      border-radius: 0.9375rem;
+      top: 0;
+    }
+
+    &:after {
+      width: rem(10px);
+      height: rem(10px);
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .#{$prefix}--toggle__check {
+    fill: $ui-03;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    z-index: 1;
+    transition: $duration--fast-01 motion(exit, productive);
+    transform: scale(0.2);
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $support-02;
+    transform: scale(1) translateX(16px);
+  }
+
+  .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle__text--right {
+    @include type-style('body-short-01');
+    position: relative;
+    margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--toggle__text--left {
+    position: absolute;
+    left: rem(48px);
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
+    left: rem(32px);
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle:not(:checked)
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right,
+  .#{$prefix}--toggle:not(:checked)
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
+    display: inline;
+  }
+
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $support-02;
+    }
+
+    &:after {
+      background-color: $icon-03;
+      transform: translateX(24px);
+    }
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:after {
+      margin-left: 0px;
+      transform: translateX(17px);
+    }
+  }
+
+  //----------------------------------------------
+  // Focus
+  // ---------------------------------------------
+  .#{$prefix}--toggle + .#{$prefix}--toggle__label,
+  .#{$prefix}--toggle + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      box-shadow: 0 0 0 2px transparent;
+    }
+  }
+  .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label,
+  .#{$prefix}--toggle:active + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      box-shadow: 0 0 0 2px $focus;
+    }
+  }
+
+  //----------------------------------------------
+  // Disabled
+  // ---------------------------------------------
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $disabled-01;
+    }
+
+    &:after {
+      background-color: $disabled-02;
+    }
+
+    &:before,
+    &:after {
+      cursor: not-allowed;
+      transition: $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--right {
+    color: $disabled;
+  }
+
+  .#{$prefix}--toggle:disabled:active
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance:before {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $disabled-02;
+  }
+}
+
+@include exports('toggle') {
+  @include toggle;
+}

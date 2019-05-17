@@ -16,6 +16,9 @@ import {
   InlineNotification,
 } from '../Notification';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('NotificationButton', () => {
   describe('Renders as expected', () => {
@@ -43,28 +46,32 @@ describe('NotificationButton', () => {
 
     describe('When notificationType equals "toast"', () => {
       it('button should have correct className by default', () => {
-        expect(wrapper.hasClass('bx--toast-notification__close-button')).toBe(
-          true
-        );
+        expect(
+          wrapper.hasClass(`${prefix}--toast-notification__close-button`)
+        ).toBe(true);
       });
 
       it('icon should have correct className by default', () => {
         const icon = wrapper.find(Close16);
-        expect(icon.hasClass('bx--toast-notification__close-icon')).toBe(true);
+        expect(icon.hasClass(`${prefix}--toast-notification__close-icon`)).toBe(
+          true
+        );
       });
     });
 
     describe('When notificationType equals "inline"', () => {
       it('button should have correct className', () => {
         wrapper.setProps({ notificationType: 'inline' });
-        expect(wrapper.hasClass('bx--inline-notification__close-button')).toBe(
-          true
-        );
+        expect(
+          wrapper.hasClass(`${prefix}--inline-notification__close-button`)
+        ).toBe(true);
       });
 
       it('icon should have correct className', () => {
         const icon = wrapper.find(Close16);
-        expect(icon.hasClass('bx--inline-notification__close-icon')).toBe(true);
+        expect(
+          icon.hasClass(`${prefix}--inline-notification__close-icon`)
+        ).toBe(true);
       });
     });
   });
@@ -76,16 +83,18 @@ describe('NotificationTextDetails', () => {
 
     describe('When notificationType equals "toast"', () => {
       it('div shoudld have correct className by default', () => {
-        expect(wrapper.hasClass('bx--toast-notification__details')).toBe(true);
+        expect(wrapper.hasClass(`${prefix}--toast-notification__details`)).toBe(
+          true
+        );
       });
     });
 
     describe('When notificationType equals "inline"', () => {
       it('div shoudld have correct className', () => {
         wrapper.setProps({ notificationType: 'inline' });
-        expect(wrapper.hasClass('bx--inline-notification__text-wrapper')).toBe(
-          true
-        );
+        expect(
+          wrapper.hasClass(`${prefix}--inline-notification__text-wrapper`)
+        ).toBe(true);
       });
     });
   });
@@ -106,7 +115,7 @@ describe('ToastNotification', () => {
     });
 
     it('renders HTML for toast notifications when caption exists', () => {
-      expect(toast.hasClass('bx--toast-notification')).toBe(true);
+      expect(toast.hasClass(`${prefix}--toast-notification`)).toBe(true);
     });
 
     it('adds extra classes via className', () => {
@@ -120,7 +129,9 @@ describe('ToastNotification', () => {
 
       kinds.forEach(kind => {
         toast.setProps({ kind });
-        expect(toast.hasClass(`bx--toast-notification--${kind}`)).toEqual(true);
+        expect(
+          toast.hasClass(`${prefix}--toast-notification--${kind}`)
+        ).toEqual(true);
       });
     });
 
@@ -208,11 +219,15 @@ describe('InlineNotification', () => {
 
     it('renders warning notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'warning' });
-      expect(inline.find('.bx--inline-notification__icon').exists()).toBe(true);
+      expect(
+        inline.find(`.${prefix}--inline-notification__icon`).exists()
+      ).toBe(true);
     });
 
     it('renders HTML for inline notifications when caption does not exist', () => {
-      expect(inline.find('.bx--inline-notification').exists()).toBe(true);
+      expect(inline.find(`.${prefix}--inline-notification`).exists()).toBe(
+        true
+      );
     });
 
     it('adds extra classes via className', () => {
@@ -226,7 +241,7 @@ describe('InlineNotification', () => {
       kinds.forEach(kind => {
         inline.setProps({ kind });
         expect(
-          inline.find(`.bx--inline-notification--${kind}`).exists()
+          inline.find(`.${prefix}--inline-notification--${kind}`).exists()
         ).toEqual(true);
       });
     });

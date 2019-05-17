@@ -1,0 +1,49 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<ul data-progress data-progress-current class="{{@root.prefix}}--progress {{#if vertical}}{{@root.prefix}}--progress--vertical{{/if}}">
+  {{#each steps}}
+    <li class="{{@root.prefix}}--progress-step {{@root.prefix}}--progress-step--{{state}} {{#if disabled}} {{@root.prefix}}--progress-step--disabled {{/if}}" {{#if invalid}} data-invalid {{/if}} {{#if disabled}} aria-disabled="true" {{/if}}>
+      {{#is state "complete"}}
+        {{carbon-icon 'CheckmarkOutline16'}}
+      {{/is}}
+      {{#is state "current"}}
+        <svg>
+          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" ></path>
+        </svg>
+      {{/is}}
+      {{#is state "incomplete"}}
+        {{#if invalid}}
+          {{carbon-icon 'Warning16' class=(add @root.prefix '--progress__warning')}}
+        {{else}}
+          <svg>
+            <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"></path>
+          </svg>
+        {{/if}}
+      {{/is}}
+      <p tabindex="0" class="{{@root.prefix}}--progress-label"{{#if overflow}} aria-describedby="label-tooltip{{tooltipId}}"{{/if}}>
+        {{#if overflow}}
+          {{#if ../vertical}}
+            {{label}}
+          {{else}}
+            {{overflowLabel}}
+          {{/if}}
+        {{else}}
+          {{label}}
+        {{/if}}
+      </p>
+      <div id="label-tooltip{{tooltipId}}" role="tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip" data-avoid-focus-on-open>
+        <span class="{{@root.prefix}}--tooltip__caret"></span>
+        <p class="{{@root.prefix}}--tooltip__text">{{overflowLabel}}</p>
+      </div>
+      {{#if optional}}
+        <p class="{{@root.prefix}}--progress-optional">{{optionalLabel}}</p>
+      {{/if}}
+      <span class="{{@root.prefix}}--progress-line"></span>
+    </li>
+  {{/each}}
+</ul>

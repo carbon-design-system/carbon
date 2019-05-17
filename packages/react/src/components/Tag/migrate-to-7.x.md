@@ -2,7 +2,8 @@
 
 `<Tag>`
 
-See [our website](https://www.carbondesignsystem.com/components/tag/code) for details.
+See [our website](https://www.carbondesignsystem.com/components/tag/code) for
+details.
 
 | Prop   | v9                                | v10                            |
 | ------ | --------------------------------- | ------------------------------ |

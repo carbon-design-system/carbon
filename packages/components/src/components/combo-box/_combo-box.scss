@@ -1,0 +1,45 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// ComboBox
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../list-box/list-box';
+
+/// Combo box styles
+/// @access private
+/// @group combo-box
+@mixin combo-box {
+  .#{$prefix}--combo-box .#{$prefix}--text-input {
+    &::placeholder {
+      color: $text-02;
+      opacity: 1;
+    }
+
+    &[disabled]::placeholder {
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
+    .#{$prefix}--text-input {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--combo-box .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+}
+
+@include exports('combo-box') {
+  @include combo-box;
+}

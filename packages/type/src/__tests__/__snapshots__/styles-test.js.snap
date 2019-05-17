@@ -1,0 +1,708 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`styles bodyLong01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 400,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.25rem",
+}
+`;
+
+exports[`styles bodyLong01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 400;
+line-height: 1.25rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles bodyLong02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "1.5rem",
+}
+`;
+
+exports[`styles bodyLong02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 400;
+line-height: 1.5rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles bodyShort01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 400,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.125rem",
+}
+`;
+
+exports[`styles bodyShort01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 400;
+line-height: 1.125rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles bodyShort02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "1.375rem",
+}
+`;
+
+exports[`styles bodyShort02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 400;
+line-height: 1.375rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles caption01 should be printable 1`] = `
+Object {
+  "fontSize": "0.75rem",
+  "fontWeight": 400,
+  "letterSpacing": "0.32px",
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`styles caption01 should be printable 2`] = `
+"font-size: 0.75rem;
+font-weight: 400;
+line-height: 1rem;
+letter-spacing: 0.32px;"
+`;
+
+exports[`styles code01 should be printable 1`] = `
+Object {
+  "fontSize": "0.75rem",
+  "fontWeight": 400,
+  "letterSpacing": "0.32px",
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`styles code01 should be printable 2`] = `
+"font-size: 0.75rem;
+font-weight: 400;
+line-height: 1rem;
+letter-spacing: 0.32px;"
+`;
+
+exports[`styles code02 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 400,
+  "letterSpacing": "0.32px",
+  "lineHeight": "1.25rem",
+}
+`;
+
+exports[`styles code02 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 400;
+line-height: 1.25rem;
+letter-spacing: 0.32px;"
+`;
+
+exports[`styles display01 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(2.625rem + 0.75 * ((100vw - 42rem) / 24))",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(3.375rem + 0.375 * ((100vw - 66rem) / 16))",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(3.75rem + 1 * ((100vw - 82rem) / 17))",
+    "lineHeight": "117%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "4.75rem",
+    "lineHeight": "113%",
+  },
+  "fontSize": "calc(2.625rem + 0 * ((100vw - 20rem) / 22))",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "119%",
+}
+`;
+
+exports[`styles display01 should be printable 2`] = `
+"font-size: calc(2.625rem + 0 * ((100vw - 20rem) / 22));
+font-weight: 300;
+line-height: 119%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles display02 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(2.625rem + 0.75 * ((100vw - 42rem) / 24))",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(3.375rem + 0.375 * ((100vw - 66rem) / 16))",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(3.75rem + 1 * ((100vw - 82rem) / 17))",
+    "lineHeight": "116%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "4.75rem",
+    "lineHeight": "113%",
+  },
+  "fontSize": "calc(2.625rem + 0 * ((100vw - 20rem) / 22))",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "119%",
+}
+`;
+
+exports[`styles display02 should be printable 2`] = `
+"font-size: calc(2.625rem + 0 * ((100vw - 20rem) / 22));
+font-weight: 600;
+line-height: 119%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles display03 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(4.25rem + 1.5 * ((100vw - 42rem) / 24))",
+    "lineHeight": "115%",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(5.75rem + 1.875 * ((100vw - 66rem) / 16))",
+    "letterSpacing": "-0.64px",
+    "lineHeight": "111%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(7.625rem + 2.125 * ((100vw - 82rem) / 17))",
+    "lineHeight": "107%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "9.75rem",
+    "letterSpacing": "-0.96px",
+    "lineHeight": "105%",
+  },
+  "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "119%",
+}
+`;
+
+exports[`styles display03 should be printable 2`] = `
+"font-size: calc(2.625rem + 1.625 * ((100vw - 20rem) / 22));
+font-weight: 300;
+line-height: 119%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles display04 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(4.25rem + 1.5 * ((100vw - 42rem) / 24))",
+    "lineHeight": "115%",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(5.75rem + 1.875 * ((100vw - 66rem) / 16))",
+    "letterSpacing": "-0.64px",
+    "lineHeight": "111%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(7.625rem + 2.125 * ((100vw - 82rem) / 17))",
+    "letterSpacing": "-0.64px",
+    "lineHeight": "107%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "9.75rem",
+    "letterSpacing": "-0.96px",
+    "lineHeight": "105%",
+  },
+  "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "119%",
+}
+`;
+
+exports[`styles display04 should be printable 2`] = `
+"font-size: calc(2.625rem + 1.625 * ((100vw - 20rem) / 22));
+font-weight: 600;
+line-height: 119%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles expressiveHeading01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 600,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.125rem",
+}
+`;
+
+exports[`styles expressiveHeading01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 600;
+line-height: 1.125rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles expressiveHeading02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "1.375rem",
+}
+`;
+
+exports[`styles expressiveHeading02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 600;
+line-height: 1.375rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles expressiveHeading03 should be printable 1`] = `
+Object {
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(1.25rem + 0.25 * ((100vw - 82rem) / 17))",
+    "lineHeight": "125%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "1.5rem",
+  },
+  "fontSize": "calc(1.25rem + 0 * ((100vw - 20rem) / 62))",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "130%",
+}
+`;
+
+exports[`styles expressiveHeading03 should be printable 2`] = `
+"font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 62));
+font-weight: 400;
+line-height: 130%;
+letter-spacing: 0;
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles expressiveHeading04 should be printable 1`] = `
+Object {
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(1.75rem + 0.25 * ((100vw - 82rem) / 17))",
+    "lineHeight": "125%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "2rem",
+  },
+  "fontSize": "calc(1.75rem + 0 * ((100vw - 20rem) / 62))",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "129%",
+}
+`;
+
+exports[`styles expressiveHeading04 should be printable 2`] = `
+"font-size: calc(1.75rem + 0 * ((100vw - 20rem) / 62));
+font-weight: 400;
+line-height: 129%;
+letter-spacing: 0;
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles expressiveHeading05 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(2.25rem + 0.375 * ((100vw - 42rem) / 24))",
+    "fontWeight": 300,
+    "letterSpacing": 0,
+    "lineHeight": "122%",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(2.625rem + 0.375 * ((100vw - 66rem) / 16))",
+    "fontWeight": 300,
+    "letterSpacing": 0,
+    "lineHeight": "119%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(3rem + 0.75 * ((100vw - 82rem) / 17))",
+    "fontWeight": 300,
+    "letterSpacing": 0,
+    "lineHeight": "117%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "3.75rem",
+    "fontWeight": 300,
+    "letterSpacing": 0,
+    "lineHeight": "4.375rem",
+  },
+  "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "125%",
+}
+`;
+
+exports[`styles expressiveHeading05 should be printable 2`] = `
+"font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+font-weight: 400;
+line-height: 125%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles expressiveHeading06 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(2.25rem + 0.375 * ((100vw - 42rem) / 24))",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "122%",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(2.625rem + 0.375 * ((100vw - 66rem) / 16))",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "119%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(3rem + 0.75 * ((100vw - 82rem) / 17))",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "117%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "3.75rem",
+    "fontWeight": 600,
+    "letterSpacing": 0,
+    "lineHeight": "4.375rem",
+  },
+  "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "125%",
+}
+`;
+
+exports[`styles expressiveHeading06 should be printable 2`] = `
+"font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+font-weight: 600;
+line-height: 125%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles expressiveParagraph01 should be printable 1`] = `
+Object {
+  "fontSize": "1.5rem",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lg": Object {
+    "fontSize": "1.75rem",
+    "lineHeight": "129%",
+  },
+  "lineHeight": "125%",
+  "max": Object {
+    "fontSize": "2rem",
+    "lineHeight": "125%",
+  },
+}
+`;
+
+exports[`styles expressiveParagraph01 should be printable 2`] = `
+"font-size: 1.5rem;
+font-weight: 300;
+line-height: 125%;
+letter-spacing: 0;
+lg: [object Object];
+max: [object Object];"
+`;
+
+exports[`styles heading01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 600,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.125rem",
+}
+`;
+
+exports[`styles heading01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 600;
+line-height: 1.125rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles heading02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "1.375rem",
+}
+`;
+
+exports[`styles heading02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 600;
+line-height: 1.375rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles helperText01 should be printable 1`] = `
+Object {
+  "fontSize": "0.75rem",
+  "fontStyle": "italic",
+  "letterSpacing": "0.32px",
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`styles helperText01 should be printable 2`] = `
+"font-size: 0.75rem;
+font-style: italic;
+line-height: 1rem;
+letter-spacing: 0.32px;"
+`;
+
+exports[`styles label01 should be printable 1`] = `
+Object {
+  "fontSize": "0.75rem",
+  "fontWeight": 400,
+  "letterSpacing": "0.32px",
+  "lineHeight": "1rem",
+}
+`;
+
+exports[`styles label01 should be printable 2`] = `
+"font-size: 0.75rem;
+font-weight: 400;
+line-height: 1rem;
+letter-spacing: 0.32px;"
+`;
+
+exports[`styles productiveHeading01 should be printable 1`] = `
+Object {
+  "fontSize": "0.875rem",
+  "fontWeight": 600,
+  "letterSpacing": "0.16px",
+  "lineHeight": "1.125rem",
+}
+`;
+
+exports[`styles productiveHeading01 should be printable 2`] = `
+"font-size: 0.875rem;
+font-weight: 600;
+line-height: 1.125rem;
+letter-spacing: 0.16px;"
+`;
+
+exports[`styles productiveHeading02 should be printable 1`] = `
+Object {
+  "fontSize": "1rem",
+  "fontWeight": 600,
+  "letterSpacing": 0,
+  "lineHeight": "1.375rem",
+}
+`;
+
+exports[`styles productiveHeading02 should be printable 2`] = `
+"font-size: 1rem;
+font-weight: 600;
+line-height: 1.375rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading03 should be printable 1`] = `
+Object {
+  "fontSize": "1.25rem",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "1.625rem",
+}
+`;
+
+exports[`styles productiveHeading03 should be printable 2`] = `
+"font-size: 1.25rem;
+font-weight: 400;
+line-height: 1.625rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading04 should be printable 1`] = `
+Object {
+  "fontSize": "1.75rem",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "2.25rem",
+}
+`;
+
+exports[`styles productiveHeading04 should be printable 2`] = `
+"font-size: 1.75rem;
+font-weight: 400;
+line-height: 2.25rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading05 should be printable 1`] = `
+Object {
+  "fontSize": "2rem",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "2.5rem",
+}
+`;
+
+exports[`styles productiveHeading05 should be printable 2`] = `
+"font-size: 2rem;
+font-weight: 400;
+line-height: 2.5rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading06 should be printable 1`] = `
+Object {
+  "fontSize": "2.625rem",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "3.125rem",
+}
+`;
+
+exports[`styles productiveHeading06 should be printable 2`] = `
+"font-size: 2.625rem;
+font-weight: 300;
+line-height: 3.125rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles productiveHeading07 should be printable 1`] = `
+Object {
+  "fontSize": "3.375rem",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "4rem",
+}
+`;
+
+exports[`styles productiveHeading07 should be printable 2`] = `
+"font-size: 3.375rem;
+font-weight: 300;
+line-height: 4rem;
+letter-spacing: 0;"
+`;
+
+exports[`styles quotation01 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(1.25rem + 0.25 * ((100vw - 42rem) / 24))",
+    "fontWeight": 400,
+    "letterSpacing": 0,
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(1.5rem + 0.25 * ((100vw - 66rem) / 16))",
+    "fontWeight": 400,
+    "letterSpacing": 0,
+    "lineHeight": "125%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(1.75rem + 0.25 * ((100vw - 82rem) / 17))",
+    "fontWeight": 400,
+    "letterSpacing": 0,
+    "lineHeight": "129%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "2rem",
+    "fontWeight": 400,
+    "letterSpacing": 0,
+    "lineHeight": "125%",
+  },
+  "fontSize": "calc(1.25rem + 0 * ((100vw - 20rem) / 22))",
+  "fontWeight": 400,
+  "letterSpacing": 0,
+  "lineHeight": "130%",
+}
+`;
+
+exports[`styles quotation01 should be printable 2`] = `
+"font-size: calc(1.25rem + 0 * ((100vw - 20rem) / 22));
+font-weight: 400;
+line-height: 130%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;
+
+exports[`styles quotation02 should be printable 1`] = `
+Object {
+  "@media (min-width: 42rem)": Object {
+    "fontSize": "calc(2.25rem + 0.375 * ((100vw - 42rem) / 24))",
+    "lineHeight": "122%",
+  },
+  "@media (min-width: 66rem)": Object {
+    "fontSize": "calc(2.625rem + 0.375 * ((100vw - 66rem) / 16))",
+    "lineHeight": "119%",
+  },
+  "@media (min-width: 82rem)": Object {
+    "fontSize": "calc(3rem + 0.75 * ((100vw - 82rem) / 17))",
+    "lineHeight": "117%",
+  },
+  "@media (min-width: 99rem)": Object {
+    "fontSize": "3.75rem",
+  },
+  "fontSize": "calc(2rem + 0.25 * ((100vw - 20rem) / 22))",
+  "fontWeight": 300,
+  "letterSpacing": 0,
+  "lineHeight": "125%",
+}
+`;
+
+exports[`styles quotation02 should be printable 2`] = `
+"font-size: calc(2rem + 0.25 * ((100vw - 20rem) / 22));
+font-weight: 300;
+line-height: 125%;
+letter-spacing: 0;
+-@media- -(min--width-:- -4-2rem-): [object Object];
+-@media- -(min--width-:- -6-6rem-): [object Object];
+-@media- -(min--width-:- -8-2rem-): [object Object];
+-@media- -(min--width-:- -9-9rem-): [object Object];"
+`;

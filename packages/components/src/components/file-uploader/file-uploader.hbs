@@ -1,0 +1,56 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="{{@root.prefix}}--form-item">
+  <strong class="{{@root.prefix}}--file--label">Account
+    photo</strong>
+  <p class="{{@root.prefix}}--label-description">Only .jpg and .png files. 500kb max file size.</p>
+  <div class="{{@root.prefix}}--file" data-file>
+    <label for="your-file-importer-id-here"
+      class="{{@root.prefix}}--file-btn {{@root.prefix}}--btn {{@root.prefix}}--btn--primary"
+      role="button" tabindex="0">Add file</label>
+    <input type="file" class="{{@root.prefix}}--file-input" id="your-file-importer-id-here" data-file-uploader
+      data-target="[data-file-container]" multiple />
+    <div data-file-container class="{{@root.prefix}}--file-container">
+      {{#if exampleUploadStates}}
+      <div class="{{@root.prefix}}--file__selected-file">
+        <p class="{{@root.prefix}}--file-filename">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero vero
+          sapiente illum reprehenderit molestiae perferendis voluptatem temporibus laudantium ducimus magni voluptatum
+          veniam, odit nesciunt corporis numquam maxime sunt excepturi sint!</p>
+        <span data-for="your-file-importer-id-here" class="{{@root.prefix}}--file__state-container">
+          {{ carbon-icon 'CheckmarkFilled16' class=(add @root.prefix '--file-complete') }}
+        </span>
+      </div>
+      <div class="{{@root.prefix}}--file__selected-file--invalid__wrapper">
+        <div class="{{@root.prefix}}--file__selected-file {{@root.prefix}}--file__selected-file--invalid" data-invalid>
+          <p class="{{@root.prefix}}--file-filename">color.jpeg</p>
+          <span data-for="your-file-importer-id-here" class="{{@root.prefix}}--file__state-container">
+            {{ carbon-icon 'WarningFilled16' class=(add @root.prefix '--file--invalid')}}
+            {{ carbon-icon 'Close16' class=(add @root.prefix '--file--close') }}
+          </span>
+        </div>
+        <div class="{{@root.prefix}}--form-requirement">
+          File size exceeds limit
+        </div>
+      </div>
+      <div class="{{@root.prefix}}--file__selected-file">
+        <p class="{{@root.prefix}}--file-filename">color.jpeg</p>
+        <span data-for="your-file-importer-id-here" class="{{@root.prefix}}--file__state-container">
+          <div class="{{@root.prefix}}--inline-loading__animation">
+            <div data-inline-loading-spinner="" class="{{@root.prefix}}--loading {{@root.prefix}}--loading--small">
+              <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
+                <circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="37.5"></circle>
+                <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="37.5"></circle>
+              </svg>
+            </div>
+          </div>
+        </span>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

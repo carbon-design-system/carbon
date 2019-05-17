@@ -5,13 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
+
 // Finding nodes in a ListBox
-export const findMenuNode = wrapper => wrapper.find('.bx--list-box__menu');
+export const findMenuNode = wrapper =>
+  wrapper.find(`.${prefix}--list-box__menu`);
 export const findMenuItemNode = (wrapper, index) =>
   wrapper.find('ListBoxMenuItem').at(index);
 export const findMenuIconNode = wrapper =>
-  wrapper.find('.bx--list-box__menu-icon');
-export const findFieldNode = wrapper => wrapper.find('.bx--list-box__field');
+  wrapper.find(`.${prefix}--list-box__menu-icon`);
+export const findFieldNode = wrapper =>
+  wrapper.find(`.${prefix}--list-box__field`);
 
 // Actions
 export const openMenu = wrapper => findFieldNode(wrapper).simulate('click');
@@ -20,7 +26,7 @@ export const openMenu = wrapper => findFieldNode(wrapper).simulate('click');
 export const assertMenuOpen = (wrapper, mockProps) => {
   expect(findMenuNode(wrapper).children().length).toBe(mockProps.items.length);
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
-    expect.stringContaining('bx--list-box__menu-icon--open')
+    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
   expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({
@@ -32,10 +38,10 @@ export const assertMenuOpen = (wrapper, mockProps) => {
 };
 export const assertMenuClosed = wrapper => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
-    expect.stringContaining('bx--list-box__menu-icon')
+    expect.stringContaining(`${prefix}--list-box__menu-icon`)
   );
   expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
-    expect.stringContaining('bx--list-box__menu-icon--open')
+    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
   expect(findFieldNode(wrapper).props()).toEqual(
     expect.objectContaining({

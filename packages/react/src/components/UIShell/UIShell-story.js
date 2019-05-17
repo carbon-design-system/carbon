@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Notification16 from '@carbon/icons-react/lib/notification/16';
-import User16 from '@carbon/icons-react/lib/user/16';
+import Search20 from '@carbon/icons-react/lib/search/20';
+import Notification20 from '@carbon/icons-react/lib/notification/20';
+import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
+
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -78,25 +80,30 @@ storiesOf('[Experimental] UI Shell', module)
           [Platform]
         </HeaderName>
         <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem href="#">Catalog</HeaderMenuItem>
-          <HeaderMenuItem href="#">Docs</HeaderMenuItem>
-          <HeaderMenuItem href="#">Support</HeaderMenuItem>
-          <HeaderMenu aria-label="Manage">
-            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          <HeaderMenu aria-label="Link 4">
+            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
           </HeaderMenu>
         </HeaderNavigation>
         <HeaderGlobalBar>
           <HeaderGlobalAction
-            aria-label="Notifications"
-            onClick={action('notification click')}>
-            <Notification16 />
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search20 />
           </HeaderGlobalAction>
           <HeaderGlobalAction
-            aria-label="Profile"
-            onClick={action('user click')}>
-            <User16 />
+            aria-label="Notifications"
+            onClick={action('notification click')}>
+            <Notification20 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}>
+            <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
       </Header>
@@ -106,6 +113,114 @@ storiesOf('[Experimental] UI Shell', module)
         text: '[Experimental] UI Shell',
       },
     }
+  )
+  .add(
+    'Header Base',
+    withReadme(readme, () => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+      </Header>
+    ))
+  )
+  .add(
+    'Header Base w/ Menu',
+    withReadme(readme, () => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderMenuButton
+          aria-label="Open menu"
+          onClick={action('Menu clicked')}
+        />
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+      </Header>
+    ))
+  )
+  .add(
+    'Header Base w/ Navigation',
+    withReadme(readme, () => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderNavigation aria-label="IBM [Platform]">
+          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          <HeaderMenu aria-label="Link 4">
+            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+          </HeaderMenu>
+        </HeaderNavigation>
+      </Header>
+    ))
+  )
+  .add(
+    'Header Base w/ Actions',
+    withReadme(readme, () => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search20 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            onClick={action('notification click')}>
+            <Notification20 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}>
+            <AppSwitcher20 />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+      </Header>
+    ))
+  )
+  .add(
+    'Header Base w/ Navigation and Actions',
+    withReadme(readme, () => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderNavigation aria-label="IBM [Platform]">
+          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          <HeaderMenu aria-label="Link 4">
+            <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+          </HeaderMenu>
+        </HeaderNavigation>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search20 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            onClick={action('notification click')}>
+            <Notification20 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="App Switcher"
+            onClick={action('app-switcher click')}>
+            <AppSwitcher20 />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+      </Header>
+    ))
   )
   .add(
     'SideNav',
@@ -121,25 +236,30 @@ storiesOf('[Experimental] UI Shell', module)
             [Platform]
           </HeaderName>
           <HeaderNavigation aria-label="IBM [Platform]">
-            <HeaderMenuItem href="#">Catalog</HeaderMenuItem>
-            <HeaderMenuItem href="#">Docs</HeaderMenuItem>
-            <HeaderMenuItem href="#">Support</HeaderMenuItem>
-            <HeaderMenu aria-label="Manage">
-              <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+            <HeaderMenu aria-label="Link 4">
+              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
             </HeaderMenu>
           </HeaderNavigation>
           <HeaderGlobalBar>
             <HeaderGlobalAction
-              aria-label="Notifications"
-              onClick={action('notification click')}>
-              <Notification16 />
+              aria-label="Search"
+              onClick={action('search click')}>
+              <Search20 />
             </HeaderGlobalAction>
             <HeaderGlobalAction
-              aria-label="Profile"
-              onClick={action('user click')}>
-              <User16 />
+              aria-label="Notifications"
+              onClick={action('notification click')}>
+              <Notification20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="App Switcher"
+              onClick={action('app-switcher click')}>
+              <AppSwitcher20 />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
         </Header>

@@ -1,0 +1,149 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Content switcher styles
+/// @access private
+/// @group content-switcher
+@mixin content-switcher {
+  .#{$prefix}--content-switcher {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--content-switcher-btn {
+    @include reset;
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+
+    background-color: $ui-01;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: rem(40px);
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    border: none;
+    color: $text-02;
+    transition: all $duration--fast-01 motion(standard, productive);
+    position: relative;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px $focus;
+      z-index: 3;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $hover-ui;
+      color: $text-01;
+      z-index: 3;
+    }
+
+    &:disabled {
+      color: $ui-03;
+      pointer-events: none;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn:first-child {
+    border-top-left-radius: rem(4px);
+    border-bottom-left-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher-btn:last-child {
+    border-top-right-radius: rem(4px);
+    border-bottom-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
+    content: '';
+    display: block;
+    height: rem(16px);
+    width: rem(1px);
+    background-color: $content-switcher-divider;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher__icon {
+    fill: $text-02;
+    transition: fill $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--content-switcher__icon + span {
+    margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--content-switcher__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
+  .#{$prefix}--content-switcher-btn:focus .#{$prefix}--content-switcher__icon {
+    fill: $text-01;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    background-color: $ui-05;
+    color: $inverse-01;
+    z-index: 3;
+
+    // TODO: replace with new disabled color token when finalized
+    &:disabled {
+      background-color: $ibm-color__gray-30;
+    }
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    .#{$prefix}--content-switcher__icon {
+    fill: $inverse-01;
+  }
+}
+
+@include exports('content-switcher') {
+  @include content-switcher;
+}

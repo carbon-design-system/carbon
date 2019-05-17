@@ -1,0 +1,59 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../layout/convert';
+
+/// Compute the type size for the given type scale step
+/// @param {Number} $step
+/// @return {Number} In px
+/// @access public
+/// @group @carbon/type
+@function carbon--get-type-size($step) {
+  @if $step == 1 {
+    @return 12px;
+  }
+  // Yn = Yn-1 + {INT[(n-2)/4] + 1} * 2
+  @return carbon--get-type-size($step - 1) + (floor(($step - 2) / 4) + 1) * 2;
+}
+
+/// Type scole follows a custom formula for determining each step size and supports sizes from 12px to 92px
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$carbon--type-scale: ();
+@for $i from 1 through 23 {
+  $carbon--type-scale: append(
+    $carbon--type-scale,
+    carbon--rem(carbon--get-type-size($i))
+  );
+}
+
+/// Get the value of a specific step in the typescale
+/// @param {Number} $step
+/// @return {Number} In rem
+/// @access public
+/// @group @carbon/type
+@function carbon--type-scale($step) {
+  @return nth($carbon--type-scale, $step);
+}
+
+/// Set the font-size value of a selector with the value at the given `$step`
+/// @param {Number} $step
+/// @access public
+/// @group @carbon/type
+@mixin carbon--type-scale($step) {
+  font-size: carbon--type-scale($step);
+}
+
+/// Alias of `type-scale` mixin.
+/// @param {Number} $step
+/// @alias carbon--type-scale
+/// @access public
+/// @group @carbon/type
+@mixin carbon--font-size($step) {
+  font-size: carbon--type-scale($step);
+}

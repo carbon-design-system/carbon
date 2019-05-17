@@ -11,6 +11,9 @@ import CodeSnippetSkeleton from '../CodeSnippet/CodeSnippet.Skeleton';
 import Copy from '../Copy';
 import CopyButton from '../CopyButton';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Code Snippet', () => {
   describe('Renders as expected', () => {
@@ -21,12 +24,12 @@ describe('Code Snippet', () => {
     );
 
     it('should use the appropriate snippet class', () => {
-      expect(snippet.hasClass('bx--snippet')).toEqual(true);
-      expect(snippet.hasClass('bx--snippet--single')).toEqual(true);
+      expect(snippet.hasClass(`${prefix}--snippet`)).toEqual(true);
+      expect(snippet.hasClass(`${prefix}--snippet--single`)).toEqual(true);
     });
 
     it('should render children as expected', () => {
-      expect(snippet.find('.bx--snippet-container').length).toBe(1);
+      expect(snippet.find(`.${prefix}--snippet-container`).length).toBe(1);
     });
 
     it('should all for custom classes to be applied', () => {
@@ -58,9 +61,9 @@ describe('CodeSnippetSkeleton', () => {
     const wrapper = shallow(<CodeSnippetSkeleton type="single" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--snippet')).toEqual(true);
-      expect(wrapper.hasClass('bx--snippet--single')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--snippet`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--snippet--single`)).toEqual(true);
     });
   });
 });

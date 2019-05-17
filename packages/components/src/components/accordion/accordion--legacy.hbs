@@ -1,0 +1,23 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<ul data-accordion class="{{@root.prefix}}--accordion">
+  {{#each sections}}
+    <li tabindex="0" data-accordion-item class="{{@root.prefix}}--accordion__item">
+      <div class="{{@root.prefix}}--accordion__heading">
+        <svg class="{{@root.prefix}}--accordion__arrow" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+          <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
+        </svg>
+        <p class="{{@root.prefix}}--accordion__title">{{title}}</p>
+      </div>
+      <div class="{{@root.prefix}}--accordion__content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </li>
+  {{/each}}
+</ul>

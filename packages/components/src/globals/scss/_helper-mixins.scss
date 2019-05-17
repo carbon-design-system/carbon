@@ -1,0 +1,241 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//----------------------------------------------
+// Mixins
+// ---------------------------------------------
+//
+//   Category             ||  Description
+//   ===========================================
+//   Misc                 ||  General helper @mixins
+//   Deprecated           ||  Not used anymore
+//   ===========================================
+
+//----------------------------------------------
+// Misc
+// ---------------------------------------------
+
+@import 'vars';
+@import 'css--reset';
+@import 'typography';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Adds text overflow styling
+/// @access public
+/// @param {Number} $width [false] - Value of width if you want to set width, else nothing
+/// @example @include text-overflow(300px);
+/// @group global-helpers
+@mixin text-overflow($width: false) {
+  display: block;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  // apply a width if width parameter exists
+  @if ($width) {
+    width: $width;
+  }
+}
+
+/// Adds placeholder text color
+/// @access public
+/// @param {String} $size ['small'] - Size of box shadow
+/// @example @include placeholder-colors;
+/// @group global-helpers
+@mixin placeholder-colors {
+  color: $text-03;
+}
+
+/// Adds small or large box shadow
+/// @access public
+/// @param {String} $size ['small'] - size of box shadow
+/// @example @include box-shadow(); @include box-shadow('large');
+/// @group global-helpers
+@mixin box-shadow($size: 'small') {
+  // Large - For dropdowns
+  @if ($size == 'large') {
+    box-shadow: 6px 6px 6px 0 $box-shadow;
+  }
+
+  @if ($size == 'small') {
+    box-shadow: 0px 3px 3px 0 $box-shadow;
+  }
+}
+
+/// Adds outline styles depending on specific type
+/// @access public
+/// @param {String} $type ['border'] - Type of outline from: `border`, `blurred`, `outline`, `invalid`, `reset`
+/// @example @include focus-outline('outline');
+/// @group global-helpers
+@mixin focus-outline($type: 'border') {
+  @if ($type == 'border') {
+    outline: 1px solid $focus;
+  }
+
+  @if ($type == 'blurred') {
+    box-shadow: 0 0 0 3px $focus;
+    outline: 1px solid transparent;
+  }
+
+  @if ($type == 'outline') {
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'outline-compat') {
+    border: 2px solid $focus;
+    box-sizing: border-box;
+  }
+
+  @if ($type == 'invalid') {
+    outline: 2px solid $support-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'reset') {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+  }
+}
+
+/// Adds rotational transformation
+/// @access public
+/// @param {Number} $deg - How many degrees to rotate
+/// @param {Number} $speed - Speed of rotation
+/// @param {Value} $origin [center] - `transform-origin`
+/// @example @include rotate(90deg, 300ms);
+/// @group global-helpers
+@mixin rotate($deg, $speed, $origin: center) {
+  transform: rotate($deg);
+  transition: transform $speed;
+  transform-origin: $origin;
+}
+
+/// Adds styles to hide content
+/// @access public
+/// @group global-helpers
+@mixin hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  visibility: visible;
+  white-space: nowrap;
+}
+
+/// Resets button styles
+/// @access public
+/// @param {Bool} $width [true] - Sets width to 100% if true
+/// @example @include button-reset($width: false);
+/// @group global-helpers
+@mixin button-reset($width: true) {
+  @include reset;
+  display: inline-block;
+  background: none;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+
+  @if ($width == true) {
+    width: 100%;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+/// Skeleton loading animation
+/// @access public
+/// @example @include skeleton;
+/// @group global-helpers
+@mixin skeleton {
+  position: relative;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  pointer-events: none;
+  background: $skeleton;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  &:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    background: $skeleton;
+    animation: 3000ms ease-in-out skeleton infinite;
+  }
+}
+
+@include exports('skeleton') {
+  @keyframes skeleton {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+      opacity: 0.3;
+    }
+    20% {
+      width: 100%;
+      left: 0;
+      right: auto;
+      opacity: 1;
+    }
+    28% {
+      width: 100%;
+      left: auto;
+      right: 0;
+    }
+    51% {
+      width: 0%;
+      left: auto;
+      right: 0;
+    }
+    58% {
+      width: 0%;
+      left: auto;
+      right: 0;
+    }
+    82% {
+      width: 100%;
+      left: auto;
+      right: 0;
+    }
+    83% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    96% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 0%;
+      left: 0;
+      right: auto;
+      opacity: 0.3;
+    }
+  }
+}

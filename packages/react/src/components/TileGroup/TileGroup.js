@@ -52,11 +52,6 @@ export default class TileGroup extends React.Component {
     onChange: PropTypes.func,
 
     /**
-     * Provide an optional legend for this group
-     */
-    legend: PropTypes.string,
-
-    /**
      * Specify the value that is currently selected in the group
      */
     valueSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -111,22 +106,11 @@ export default class TileGroup extends React.Component {
     }
   };
 
-  renderLegend = legend => {
-    if (legend) {
-      return <legend>{legend}</legend>;
-    }
-  };
-
   render() {
-    const {
-      disabled,
-      className = `${prefix}--tile-group`,
-      legend,
-    } = this.props;
+    const { disabled, className = `${prefix}--tile-group` } = this.props;
 
     return (
       <fieldset className={className} disabled={disabled}>
-        {this.renderLegend(legend)}
         {this.getRadioTiles()}
       </fieldset>
     );

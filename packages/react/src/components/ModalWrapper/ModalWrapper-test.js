@@ -8,6 +8,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import ModalWrapper from '../ModalWrapper';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('ModalWrapper', () => {
   let mockProps = {};
@@ -29,7 +32,7 @@ describe('ModalWrapper', () => {
   it('should render', () => {
     const wrapper = mount(
       <ModalWrapper {...mockProps}>
-        <p className="bx--modal-content__text">Text</p>
+        <p className={`${prefix}--modal-content__text`}>Text</p>
       </ModalWrapper>
     );
     expect(wrapper).toMatchSnapshot();
@@ -38,7 +41,7 @@ describe('ModalWrapper', () => {
   it('should close after a successful submit action', () => {
     const wrapper = mount(
       <ModalWrapper {...mockProps}>
-        <p className="bx--modal-content__text">Text</p>
+        <p className={`${prefix}--modal-content__text`}>Text</p>
       </ModalWrapper>
     );
     wrapper.find({ children: mockProps.buttonTriggerText }).simulate('click');
@@ -51,7 +54,7 @@ describe('ModalWrapper', () => {
   it('should return focus to the trigger button after closing', () => {
     const wrapper = mount(
       <ModalWrapper {...mockProps}>
-        <p className="bx--modal-content__text">Text</p>
+        <p className={`${prefix}--modal-content__text`}>Text</p>
       </ModalWrapper>
     );
     const { triggerButton } = wrapper.instance();
@@ -65,7 +68,7 @@ describe('ModalWrapper', () => {
     mockProps.handleSubmit = jest.fn(() => false);
     const wrapper = mount(
       <ModalWrapper {...mockProps}>
-        <p className="bx--modal-content__text">Text</p>
+        <p className={`${prefix}--modal-content__text`}>Text</p>
       </ModalWrapper>
     );
     wrapper.find({ children: mockProps.buttonTriggerText }).simulate('click');

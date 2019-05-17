@@ -1,15 +1,12 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const rtlcss = require('rtlcss');
 
 const useExternalCss =
   process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
 
 const useStyleSourceMap =
   process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
-
-const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
 
 const styleLoaders = [
   {
@@ -22,12 +19,11 @@ const styleLoaders = [
   {
     loader: 'postcss-loader',
     options: {
-      plugins: () => {
-        const autoPrefixer = require('autoprefixer')({
+      plugins: () => [
+        require('autoprefixer')({
           browsers: ['last 1 version', 'ie >= 11'],
-        });
-        return !useRtl ? [autoPrefixer] : [autoPrefixer, rtlcss];
-      },
+        }),
+      ],
       sourceMap: useStyleSourceMap,
     },
   },
@@ -44,6 +40,25 @@ const styleLoaders = [
     },
   },
 ];
+
+class FeatureFlagProxyPlugin {
+  /**
+   * A WebPack resolver plugin that proxies module request
+   * for `carbon-components/es/globals/js/settings` to `./settings`.
+   */
+  constructor() {
+    this.source = 'before-described-relative';
+  }
+
+  apply(resolver) {
+    resolver.plugin(this.source, (request, callback) => {
+      if (/[\\/]globals[\\/]js[\\/]settings$/.test(request.path)) {
+        request.path = path.resolve(__dirname, './settings');
+      }
+      callback();
+    });
+  }
+}
 
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.devtool = useStyleSourceMap ? 'source-map' : '';
@@ -95,6 +110,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
       })
     );
   }
+
+  defaultConfig.resolve = {
+    modules: ['node_modules'],
+    plugins: [new FeatureFlagProxyPlugin()],
+  };
 
   return defaultConfig;
 };

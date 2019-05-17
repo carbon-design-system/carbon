@@ -1,0 +1,20 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+{{#is suffix "sm"}}
+<div class="{{@root.prefix}}--form-item">{{/is}}
+  <div data-search role="search" class="{{@root.prefix}}--search {{@root.prefix}}--search--{{suffix}}{{#if light}} {{@root.prefix}}--search--light{{/if}}">
+    <label id="search-input-label-1" class="{{@root.prefix}}--label" for="search__input-1">Search</label>
+    <input class="{{@root.prefix}}--search-input" type="text" id="search__input-1" placeholder="Search">
+    {{ carbon-icon 'Search16' class=(add @root.prefix '--search-magnifier') }}
+    <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="Clear search
+        input" aria-label="Clear search input">
+      {{#is suffix "sm"}}{{ carbon-icon 'Close16' class=(add @root.prefix '--search-clear') }}{{/is}}
+      {{#is suffix "xl"}}{{ carbon-icon 'Close20' class=(add @root.prefix '--search-clear') }}{{/is}}
+    </button>
+  </div>
+  {{#is suffix "sm"}}</div>{{/is}}

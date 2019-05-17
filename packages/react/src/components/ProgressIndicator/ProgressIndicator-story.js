@@ -12,6 +12,9 @@ import { action } from '@storybook/addon-actions';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import Tooltip from '../Tooltip';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 storiesOf('ProgressIndicator', module)
   .addDecorator(withKnobs)
@@ -32,7 +35,7 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName="bx--progress-label"
+              triggerClassName={`${prefix}--progress-label`}
               triggerText={'Second step with tooltip'}
               tooltipId="tooltipId-0">
               <p>Overflow tooltip content.</p>
@@ -46,7 +49,7 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName="bx--progress-label"
+              triggerClassName={`${prefix}--progress-label`}
               triggerText={'Third step with tooltip'}
               tooltipId="tooltipId-1">
               <p>
@@ -102,7 +105,7 @@ storiesOf('ProgressIndicator', module)
             <Tooltip
               direction="bottom"
               showIcon={false}
-              triggerClassName="bx--progress-label"
+              triggerClassName={`${prefix}--progress-label`}
               triggerText="Tooltip and really long label"
               tooltipId="tooltipId-1">
               <p>

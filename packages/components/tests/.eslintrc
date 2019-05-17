@@ -1,0 +1,26 @@
+{
+  "root": false,
+  "rules": {
+    "func-names": 0,
+    "no-var": 0,
+    "strict": 0
+  },
+  "overrides": [
+    {
+      "files": ["*-test.js"],
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": ["es-test.js"],
+      "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+      },
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}

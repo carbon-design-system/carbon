@@ -1,7 +1,41 @@
-package.json
-node_modules
-lib
+build
+dist
 es
-storybook-static
+html
+lib
+node_modules
+ts
 umd
-coverage
+
+# Components
+packages/components/demo/*.css
+packages/components/demo/*.map
+packages/components/demo/*.js
+packages/components/demo/js/prism.js
+packages/components/demo/scss/_prism.scss
+packages/components/demo/hot
+!packages/components/demo/index.js
+
+packages/components/docs/api/sass.md
+packages/components/examples/codesandbox
+packages/components/src/globals/fonts/LICENSE.md
+packages/components/tests/a11y-results
+packages/components/tests/coverage
+
+packages/components/scripts
+packages/components/css
+packages/components/scss
+packages/components/docs/js
+
+# Changelogs
+**/CHANGELOG.md
+
+# Generated docs
+**/docs/sass.md
+
+# Generate sass files
+**/scss/vendor/**
+**/_inlined/**
+
+# Examples
+**/examples/**

@@ -8,6 +8,9 @@
 import React from 'react';
 import Tab from '../Tab';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Tab', () => {
   describe('renders as expected', () => {
@@ -19,7 +22,9 @@ describe('Tab', () => {
     });
 
     it('renders <a> with expected className', () => {
-      expect(wrapper.find('a').hasClass('bx--tabs__nav-link')).toBe(true);
+      expect(wrapper.find('a').hasClass(`${prefix}--tabs__nav-link`)).toBe(
+        true
+      );
     });
 
     it('renders <li> with [role="presentation"]', () => {
@@ -52,13 +57,17 @@ describe('Tab', () => {
       expect(wrapper.find('a').props().href).toEqual('#other-content');
     });
 
-    it('should not have [className="bx--tabs__nav-item--selected"] by default', () => {
-      expect(wrapper.hasClass('bx--tabs__nav-item--selected')).toBe(false);
+    it(`should not have [className="${prefix}--tabs__nav-item--selected"] by default`, () => {
+      expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
+        false
+      );
     });
 
-    it('adds [className="bx--tabs__nav-item--selected"] when selected prop is true', () => {
+    it(`adds [className="${prefix}--tabs__nav-item--selected"] when selected prop is true`, () => {
       wrapper.setProps({ selected: true });
-      expect(wrapper.hasClass('bx--tabs__nav-item--selected')).toBe(true);
+      expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
+        true
+      );
     });
   });
 

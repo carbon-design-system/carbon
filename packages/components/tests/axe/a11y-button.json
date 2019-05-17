@@ -1,0 +1,154 @@
+[
+  {
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "critical",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143"
+        ],
+        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+        "help": "Elements must have sufficient color contrast",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.2/color-contrast?application=webdriverjs",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#8c9ba5",
+                  "bgColor": "#f5f7fa",
+                  "contrastRatio": 2.66,
+                  "fontSize": "10.5pt",
+                  "fontWeight": "bold",
+                  "missingData": null
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"demo--container\" data-card-list=\"\" style=\"\">",
+                    "target": [
+                      "html > .bx--body > .demo--container"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Element has insufficient color contrast of 2.66 (foreground color: #8c9ba5, background color: #f5f7fa, font size: 10.5pt, font weight: bold)"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<button class=\"bx--btn bx--btn--danger\" type=\"button\" style=\"\">Danger button</button>",
+            "target": [
+              "html > .bx--body > .demo--container > button:nth-of-type(1)"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#8c9ba5",
+                  "bgColor": "#f5f7fa",
+                  "contrastRatio": 2.66,
+                  "fontSize": "10.5pt",
+                  "fontWeight": "bold",
+                  "missingData": null
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"demo--container\" data-card-list=\"\" style=\"\">",
+                    "target": [
+                      "html > .bx--body > .demo--container"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Element has insufficient color contrast of 2.66 (foreground color: #8c9ba5, background color: #f5f7fa, font size: 10.5pt, font weight: bold)"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<button class=\"bx--btn bx--btn--danger\" type=\"button\" style=\"\">\n  Danger\n  <svg class=\"bx--btn__icon\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill-rule=\"evenodd\">\n    <path d=\"M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z\"></path>\n  </svg>\n</button>",
+            "target": [
+              "html > .bx--body > .demo--container > button:nth-of-type(3)"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#8c9ba5",
+                  "bgColor": "#f5f7fa",
+                  "contrastRatio": 2.66,
+                  "fontSize": "10.5pt",
+                  "fontWeight": "bold",
+                  "missingData": null
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"demo--container\" data-card-list=\"\" style=\"\">",
+                    "target": [
+                      "html > .bx--body > .demo--container"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Element has insufficient color contrast of 2.66 (foreground color: #8c9ba5, background color: #f5f7fa, font size: 10.5pt, font weight: bold)"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<button class=\"bx--btn bx--btn--danger bx--btn--sm\" type=\"button\" style=\"\">Danger button</button>",
+            "target": [
+              "html > .bx--body > .demo--container > button:nth-of-type(4)"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#8c9ba5",
+                  "bgColor": "#f5f7fa",
+                  "contrastRatio": 2.66,
+                  "fontSize": "10.5pt",
+                  "fontWeight": "bold",
+                  "missingData": null
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"demo--container\" data-card-list=\"\" style=\"\">",
+                    "target": [
+                      "html > .bx--body > .demo--container"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Element has insufficient color contrast of 2.66 (foreground color: #8c9ba5, background color: #f5f7fa, font size: 10.5pt, font weight: bold)"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<button class=\"bx--btn bx--btn--danger bx--btn--sm\" type=\"button\" style=\"\">",
+            "target": [
+              "html > .bx--body > .demo--container > button:nth-of-type(5)"
+            ]
+          }
+        ]
+      }
+    ],
+    "incomplete": [],
+    "inapplicable": [],
+    "timestamp": 1497301601005,
+    "url": "http://localhost:3000/components/button/",
+    "time": 523,
+    "status": 200
+  }
+]

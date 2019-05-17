@@ -1,0 +1,73 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../button/button';
+
+@include exports('copy-button') {
+  .#{$prefix}--btn--copy {
+    position: relative;
+    overflow: visible;
+
+    .#{$prefix}--btn__icon {
+      margin-left: rem(5px);
+    }
+  }
+
+  .#{$prefix}--btn--copy__feedback {
+    position: absolute;
+    display: none;
+    top: 1.2rem;
+    left: 50%;
+
+    &:focus {
+      border: 2px solid red;
+    }
+
+    &:before {
+      @include layer('overlay');
+      @include type-style('label-01');
+      top: 1.1rem;
+      padding: $spacing-2xs;
+      color: $inverse-01;
+      content: attr(data-feedback);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      border-radius: 4px;
+      font-weight: 400;
+      z-index: 2;
+    }
+
+    &:after {
+      top: 0.85rem;
+      width: 0.6rem;
+      height: 0.6rem;
+      left: -0.3rem;
+      border-right: 1px solid $inverse-02;
+      border-bottom: 1px solid $inverse-02;
+      content: '';
+      transform: rotate(-135deg);
+      z-index: 1;
+    }
+
+    &:before,
+    &:after {
+      position: absolute;
+      display: block;
+      background: $inverse-02;
+    }
+
+    &--displayed {
+      display: inline-flex;
+    }
+  }
+}
