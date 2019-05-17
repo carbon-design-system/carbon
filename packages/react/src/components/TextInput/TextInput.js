@@ -87,11 +87,26 @@ const TextInput = React.forwardRef(function TextInput(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
+  const label = (() => {
+    const labelContent = labelText && (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    );
+    if (charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {labelContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={inputVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+    return labelContent;
+  })();
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
@@ -111,13 +126,6 @@ const TextInput = React.forwardRef(function TextInput(
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
       {label}
-      {charCount && (
-        <CharCounter
-          disabled={other.disabled}
-          count={inputVal.length}
-          maxLength={maxLength}
-        />
-      )}
       {helper}
       <div
         className={`${prefix}--text-input__field-wrapper`}

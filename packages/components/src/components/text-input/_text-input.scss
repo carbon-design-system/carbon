@@ -62,14 +62,24 @@
   // -----------------
   // Character counter
   // -----------------
-  .#{$prefix}--text-input-wrapper--character-counter {
-    position: relative;
+  .#{$prefix}--text-input__character-counter-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-input__character-counter-title
+    + .#{$prefix}--form__helper-text {
+    margin-top: rem(-6px);
+  }
+
+  .#{$prefix}--text-input__character-counter-title .#{$prefix}--label {
+    margin-right: rem(16px);
   }
 
   .#{$prefix}--text-input--character-counter {
+    margin-bottom: $carbon--spacing-03;
     @include type-style('label-01');
-    position: absolute;
-    right: 0;
     color: $text-02;
   }
 

@@ -70,11 +70,26 @@ const TextArea = ({
     [`${prefix}--label--disabled`]: other.disabled,
   });
 
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
+  const label = (() => {
+    const labelContent = labelText ? (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    ) : null;
+    if (charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {labelContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={textareaVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+    return labelContent;
+  })();
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
@@ -113,13 +128,6 @@ const TextArea = ({
   return (
     <div className={`${prefix}--form-item`}>
       {label}
-      {charCount && (
-        <CharCounter
-          disabled={other.disabled}
-          count={textareaVal.length}
-          maxLength={maxLength}
-        />
-      )}
       {helper}
       <div
         className={`${prefix}--text-area__wrapper`}

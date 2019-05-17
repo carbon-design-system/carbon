@@ -99,14 +99,20 @@
   // -----------------
   // Character counter
   // -----------------
-  .#{$prefix}--text-area-wrapper--character-counter {
-    position: relative;
+  .#{$prefix}--text-area__character-counter-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-area__character-counter-title
+    + .#{$prefix}--form__helper-text {
+    margin-top: rem(-6px);
   }
 
   .#{$prefix}--text-area--character-counter {
+    margin-bottom: $carbon--spacing-03;
     @include type-style('label-01');
-    position: absolute;
-    right: 0;
     color: $text-02;
   }
 

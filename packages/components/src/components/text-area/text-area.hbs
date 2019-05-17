@@ -6,12 +6,16 @@
 -->
 
 <div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  <label for="text-area-2" class="{{prefix}}--label">Text Area label</label>
   {{#if charCounter}}
-  <span class="{{prefix}}--text-area--character-counter">
-    <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-      class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-  </span>
+  <div class="{{prefix}}--text-area__character-counter-title">
+    <label for="text-area-2" class="{{prefix}}--label">Text Area label</label>
+    <span class="{{prefix}}--text-area--character-counter">
+      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
+        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
+    </span>
+  </div>
+  {{else}}
+  <label for="text-area-2" class="{{prefix}}--label">Text Area label</label>
   {{/if}}
   <div class="{{prefix}}--text-area__wrapper">
     <textarea id="text-area-2" class="{{prefix}}--text-area {{#if light}} {{prefix}}--text-area--light{{/if}}" rows="4"
@@ -20,12 +24,16 @@
 </div>
 
 <div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  <label for="text-area-3" class="{{prefix}}--label">Text Area label</label>
   {{#if charCounter}}
-  <span class="{{prefix}}--text-area--character-counter">
-    <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-      class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-  </span>
+  <div class="{{prefix}}--text-area__character-counter-title">
+    <label for="text-area-3" class="{{prefix}}--label">Text Area label</label>
+    <span class="{{prefix}}--text-area--character-counter">
+      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
+        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
+    </span>
+  </div>
+  {{else}}
+  <label for="text-area-3" class="{{prefix}}--label">Text Area label</label>
   {{/if}}
   <div class="{{prefix}}--text-area__wrapper" data-invalid>
     {{ carbon-icon 'WarningFilled16' class=(add prefix '--text-area__invalid-icon')}}
@@ -40,12 +48,16 @@
 </div>
 
 <div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  <label for="text-area-4" class="{{prefix}}--label">Text Area label</label>
   {{#if charCounter}}
-  <span class="{{prefix}}--text-area--character-counter">
-    <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-      class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-  </span>
+  <div class="{{prefix}}--text-area__character-counter-title">
+    <label for="text-area-4" class="{{prefix}}--label">Text Area label</label>
+    <span class="{{prefix}}--text-area--character-counter">
+      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
+        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
+    </span>
+  </div>
+  {{else}}
+  <label for="text-area-4" class="{{prefix}}--label">Text Area label</label>
   {{/if}}
   <div class="{{prefix}}--form__helper-text">
     Optional helper text goes here
@@ -57,12 +69,16 @@
 </div>
 
 <div data-text-area class="{{prefix}}--form-item{{#if charCounter}} {{prefix}}--text-area__container{{/if}}">
-  <label for="text-area-5" class="{{prefix}}--label {{prefix}}--label--disabled">Text Area label</label>
   {{#if charCounter}}
-  <span class="{{prefix}}--text-area--character-counter {{prefix}}--text-area--character-counter--disabled">
-    <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
-      class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
-  </span>
+  <div class="{{prefix}}--text-area__character-counter-title">
+    <label for="text-area-5" class="{{prefix}}--label {{prefix}}--label--disabled">Text Area label</label>
+    <span class="{{prefix}}--text-area--character-counter {{prefix}}--text-area--character-counter--disabled">
+      <span class="{{prefix}}--text-area--character-counter--length">0</span>/<span
+        class="{{prefix}}--text-area--character-counter--maxlength">{{maxLength}}</span>
+    </span>
+  </div>
+  {{else}}
+  <label for="text-area-5" class="{{prefix}}--label {{prefix}}--label--disabled">Text Area label</label>
   {{/if}}
   <div class="{{prefix}}--form__helper-text {{prefix}}--form__helper-text--disabled">
     Optional helper text goes here
