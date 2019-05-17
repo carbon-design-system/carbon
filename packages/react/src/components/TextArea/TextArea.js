@@ -76,9 +76,9 @@ const TextArea = ({
         {labelText}
       </label>
     ) : null;
-    if (charCount) {
+    if (labelContent && charCount) {
       return (
-        <div className={`${prefix}--text-input__character-counter-title`}>
+        <div className={`${prefix}--text-area__character-counter-title`}>
           {labelContent}
           <CharCounter
             disabled={other.disabled}
@@ -95,9 +95,25 @@ const TextArea = ({
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
 
-  const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
-  ) : null;
+  const helper = (() => {
+    const helperContent = helperText ? (
+      <div className={helperTextClasses}>{helperText}</div>
+    ) : null;
+    if (!labelText && charCount) {
+      return (
+        <div className={`${prefix}--text-area__character-counter-title`}>
+          {helperContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={textareaVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+
+    return helperContent;
+  })();
 
   const errorId = id + '-error-msg';
 

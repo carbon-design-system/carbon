@@ -93,7 +93,7 @@ const TextInput = React.forwardRef(function TextInput(
         {labelText}
       </label>
     );
-    if (charCount) {
+    if (labelContent && charCount) {
       return (
         <div className={`${prefix}--text-input__character-counter-title`}>
           {labelContent}
@@ -119,9 +119,25 @@ const TextInput = React.forwardRef(function TextInput(
       onInput={e => setInput(e.target.value)}
     />
   );
-  const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
-  ) : null;
+  const helper = (() => {
+    const helperContent = helperText ? (
+      <div className={helperTextClasses}>{helperText}</div>
+    ) : null;
+    if (!labelText && charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {helperContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={inputVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+
+    return helperContent;
+  })();
 
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
