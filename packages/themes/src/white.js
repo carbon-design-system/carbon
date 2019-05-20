@@ -24,7 +24,7 @@ import {
 
   // Support
   blue50,
-  green40;
+  green40,
   green50,
   yellow,
   red50,
