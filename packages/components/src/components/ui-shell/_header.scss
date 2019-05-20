@@ -27,7 +27,7 @@
     right: 0;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
-    border-bottom: $shell-header-border-01;
+    border-bottom: 1px solid $shell-header-border-01;
     z-index: z('header');
   }
 
@@ -36,6 +36,8 @@
     width: mini-units(6);
     height: mini-units(6);
     border: rem(2px) solid transparent;
+    transition: background-color $duration--fast-02,
+      border-color $duration--fast-02;
   }
 
   .#{$prefix}--header__action
@@ -81,6 +83,10 @@
     fill: $shell-header-icon-02;
   }
 
+  .#{$prefix}--header__menu-trigger {
+    margin-right: rem(-8px);
+  }
+
   .#{$prefix}--header__menu-trigger > svg {
     fill: $shell-header-icon-01;
   }
@@ -97,12 +103,19 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 mini-units(2);
+    padding: 0 mini-units(4) 0 mini-units(2);
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.1px;
     line-height: 20px;
     user-select: none;
+    border: rem(2px) solid transparent;
+    transition: border-color $duration--fast-02;
+    outline: none;
+  }
+
+  a.#{$prefix}--header__name:focus {
+    border-color: $shell-header-focus;
   }
 
   .#{$prefix}--header__name--prefix {
@@ -119,11 +132,24 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--header__nav {
     height: 100%;
+    padding-left: mini-units(2);
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: rem(24px);
+      width: rem(1px);
+      background-color: $shell-header-border-01;
+    }
   }
 
   .#{$prefix}--header__menu-bar[role='menubar'] {
     display: flex;
-    margin-left: mini-units(1);
     height: 100%;
   }
 
@@ -144,20 +170,31 @@
     user-select: none;
     // Used for focus styles
     border: 2px solid transparent;
+    transition: background-color $duration--fast-02,
+      border-color $duration--fast-02, color $duration--fast-02;
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:hover {
     background-color: $shell-header-bg-04;
+    color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item[role='menuitem']:active {
     background-color: $shell-header-bg-05;
+    color: $shell-header-text-01;
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:focus {
     border-color: $shell-header-focus;
+    color: $shell-header-text-01;
     outline: none;
+  }
+
+  a.#{$prefix}--header__menu-item[role='menuitem']:hover > svg,
+  a.#{$prefix}--header__menu-item[role='menuitem']:active > svg,
+  a.#{$prefix}--header__menu-item[role='menuitem']:focus > svg {
+    fill: $shell-header-icon-01;
   }
 
   .#{$prefix}--header__submenu {
@@ -169,7 +206,7 @@
   }
 
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true'] {
-    background-color: $shell-header-bg-03;
+    background-color: $shell-header-bg-06;
     color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
@@ -199,6 +236,18 @@
     z-index: z('header');
   }
 
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item:hover {
+    background-color: $shell-header-bg-04;
+  }
+
+  .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item:active {
+    background-color: $shell-header-bg-03;
+  }
+
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item[role='menuitem'] {
     height: mini-units(6);
   }
@@ -210,8 +259,9 @@
   }
 
   .#{$prefix}--header__menu-arrow {
-    fill: $ibm-color__gray-10;
+    fill: $shell-header-icon-03;
     margin-left: mini-units(1);
+    transition: transform $duration--fast-02, fill $duration--fast-02;
   }
 
   //--------------------------------------------------------------------------

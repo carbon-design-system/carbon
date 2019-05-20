@@ -72,31 +72,48 @@
 }
 
 // Tooltip Icon caret - top position
+/// @param {String} $position ['bottom'] - The position, from: `top`, `bottom`
+/// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
 /// @access public
 /// @group tooltip
-@mixin tooltip--icon--top {
+@mixin tooltip--icon-placement($position: 'bottom', $align: 'center') {
+  $translate-x: if($align == 'center', -50%, 0);
+  $translate-y-caret: if($position == 'top', calc(-100% - 9px), 10px);
+  $translate-y-body: if(
+    $position == 'top',
+    calc(-100% - 12px),
+    calc(100% + 10px)
+  );
+  $rotate-caret: if($position == 'top', 180deg, 0);
+
   &::before {
-    top: 1px;
-    transform: translate(-50%, calc(-100% - 9px)) rotate(180deg);
+    @if ($position == 'top') {
+      top: 1px;
+    } @else {
+      bottom: 0;
+    }
+    @if ($align == 'start') {
+      margin-left: 4px;
+    } @else if ($align == 'end') {
+      margin-right: 4px;
+      left: auto;
+      right: 0;
+    }
+    transform: translate($translate-x, $translate-y-caret) rotate($rotate-caret);
   }
 
   &::after {
-    top: 0;
-    transform: translate(-50%, calc(-100% - 12px));
-  }
-}
-
-// Tooltip Icon caret - bottom position
-/// @access public
-/// @group tooltip
-@mixin tooltip--icon--bottom {
-  &::before {
-    bottom: 0;
-    transform: translate(-50%, 10px);
-  }
-
-  &::after {
-    bottom: 0;
-    transform: translate(-50%, calc(100% + 10px));
+    @if ($position == 'top') {
+      top: 0;
+    } @else {
+      bottom: 0;
+    }
+    @if ($align != 'center') {
+      margin-left: 0;
+    }
+    @if ($align == 'end') {
+      right: 0;
+    }
+    transform: translate($translate-x, $translate-y-body);
   }
 }
