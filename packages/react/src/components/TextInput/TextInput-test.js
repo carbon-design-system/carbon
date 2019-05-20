@@ -120,14 +120,14 @@ describe('TextInput', () => {
         wrapper.setProps({
           helperText: (
             <span>
-              This helper text has <a href="/">a link</a>.
+              This helper text has <a href="#">a link</a>.
             </span>
           ),
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
-            This helper text has <a href="/">a link</a>.
+            This helper text has <a href="#">a link</a>.
           </span>
         );
       });
