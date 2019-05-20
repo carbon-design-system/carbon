@@ -257,7 +257,9 @@
   // Tooltip Icon
   // Icon CSS only tooltip
   .#{$prefix}--tooltip--icon__top,
-  .#{$prefix}--tooltip--icon__bottom {
+  .#{$prefix}--tooltip--icon__right,
+  .#{$prefix}--tooltip--icon__bottom,
+  .#{$prefix}--tooltip--icon__left {
     @include tooltip--icon;
 
     &:hover,
@@ -281,9 +283,19 @@
     @include tooltip--icon-placement('top');
   }
 
+  // Tooltip Icon caret - right position
+  .#{$prefix}--tooltip--icon__right {
+    @include tooltip--icon-placement('right');
+  }
+
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
     @include tooltip--icon-placement('bottom');
+  }
+
+  // Tooltip Icon caret - left position
+  .#{$prefix}--tooltip--icon__left {
+    @include tooltip--icon-placement('left');
   }
 
   // Tooltip Icon caret - top position, left alignment
@@ -296,6 +308,16 @@
     @include tooltip--icon-placement('top', 'end');
   }
 
+  // Tooltip Icon caret - right position, left alignment
+  .#{$prefix}--tooltip--icon__right.#{$prefix}--tooltip--icon__align-start {
+    @include tooltip--icon-placement('right', 'start');
+  }
+
+  // Tooltip Icon caret - right position, right alignment
+  .#{$prefix}--tooltip--icon__right.#{$prefix}--tooltip--icon__align-end {
+    @include tooltip--icon-placement('right', 'end');
+  }
+
   // Tooltip Icon caret - bottom position, left alignment
   .#{$prefix}--tooltip--icon__bottom.#{$prefix}--tooltip--icon__align-start {
     @include tooltip--icon-placement('bottom', 'start');
@@ -304,6 +326,16 @@
   // Tooltip Icon caret - bottom position, right alignment
   .#{$prefix}--tooltip--icon__bottom.#{$prefix}--tooltip--icon__align-end {
     @include tooltip--icon-placement('bottom', 'end');
+  }
+
+  // Tooltip Icon caret - left position, left alignment
+  .#{$prefix}--tooltip--icon__left.#{$prefix}--tooltip--icon__align-start {
+    @include tooltip--icon-placement('left', 'start');
+  }
+
+  // Tooltip Icon caret - left position, right alignment
+  .#{$prefix}--tooltip--icon__left.#{$prefix}--tooltip--icon__align-end {
+    @include tooltip--icon-placement('left', 'end');
   }
 
   // Tooltip position - icon only
