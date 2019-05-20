@@ -105,7 +105,8 @@
 
   // When used alongside the header, we update the `top` positioning so that we
   // can fit both widgets on the same page without overlapping.
-  .#{$prefix}--header ~ .#{$prefix}--side-nav {
+  .#{$prefix}--header ~ .#{$prefix}--side-nav,
+  .#{$prefix}--header .#{$prefix}--side-nav {
     top: mini-units(6);
     height: calc(100% - 48px);
   }
@@ -117,6 +118,11 @@
   .#{$prefix}--side-nav--collapsed {
     width: mini-units(32);
     transform: translateX(mini-units(-32));
+  }
+
+  .#{$prefix}--side-nav--collapsed {
+    width: mini-units(26);
+    transform: translateX(mini-units(-26));
   }
 
   //----------------------------------------------------------------------------

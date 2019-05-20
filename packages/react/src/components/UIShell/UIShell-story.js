@@ -12,7 +12,7 @@ import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import HeaderContainer from './HeaderContainer';
@@ -367,7 +367,11 @@ storiesOf('[Experimental] UI Shell', module)
     'Fixed SideNav',
     withReadme(readme, () => (
       <>
+<<<<<<< HEAD
         <SideNav isFixedNav expanded={true} aria-label="Side navigation">
+=======
+        <SideNav isFixedNav defaultExpanded aria-label="Side navigation">
+>>>>>>> feat(ui-shell): add sid nav + header variation
           <SideNavItems>
             <SideNavMenu title="L0 menu">
               <SideNavMenuItem href="javascript:void(0)">
@@ -414,7 +418,11 @@ storiesOf('[Experimental] UI Shell', module)
     'Fixed SideNav w/ Icons',
     withReadme(readme, () => (
       <>
+<<<<<<< HEAD
         <SideNav isFixedNav expanded={true} aria-label="Side navigation">
+=======
+        <SideNav isFixedNav defaultExpanded aria-label="Side navigation">
+>>>>>>> feat(ui-shell): add sid nav + header variation
           <SideNavItems>
             <SideNavMenu renderIcon={Fade16} title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
@@ -458,7 +466,11 @@ storiesOf('[Experimental] UI Shell', module)
             <SkipToContent />
             <HeaderMenuButton
               aria-label="Open menu"
+<<<<<<< HEAD
               onClick={action('Menu clicked')}
+=======
+              onClick={action('menu clicked')}
+>>>>>>> feat(ui-shell): add sid nav + header variation
             />
             <HeaderName href="#" prefix="IBM">
               [Platform]
@@ -490,6 +502,7 @@ storiesOf('[Experimental] UI Shell', module)
                 <AppSwitcher20 />
               </HeaderGlobalAction>
             </HeaderGlobalBar>
+<<<<<<< HEAD
           </Header>
           <SideNav isFixedNav expanded={true} aria-label="Side navigation">
             <SideNavItems>
@@ -534,6 +547,58 @@ storiesOf('[Experimental] UI Shell', module)
               </SideNavLink>
             </SideNavItems>
           </SideNav>
+=======
+            <SideNav isFixedNav defaultExpanded aria-label="Side navigation">
+              <SideNavItems>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                  Link
+                </SideNavLink>
+                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                  Link
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
+          </Header>
+>>>>>>> feat(ui-shell): add sid nav + header variation
           <StoryContent />
         </>
       );
