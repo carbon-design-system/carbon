@@ -79,6 +79,11 @@ export default class DataTable extends React.Component {
     ).isRequired,
 
     /**
+     * Intitial props for optional Pagination child component
+     */
+    paginationPage: PropTypes.number,
+    paginationPageSize: PropTypes.number,
+    /**
      * Optional hook to manually control sorting of the rows.
      */
     sortRow: PropTypes.func,
@@ -110,6 +115,8 @@ export default class DataTable extends React.Component {
   static defaultProps = {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
+    paginationPage: 1,
+    paginationPageSize: 10,
     locale: 'en',
     translateWithId,
   };
@@ -301,6 +308,32 @@ export default class DataTable extends React.Component {
     };
   };
 
+  getPaginationProps = () => {
+    const { paginationPage, paginationPageSize } = this.state;
+
+    return {
+      page: paginationPage,
+      pageSize: paginationPageSize,
+      onChange: this.handlePaginationChange,
+    };
+  };
+
+  getCurrentPageRows = rows => {
+    let lastItemIndex = 0;
+
+    let { paginationPage, paginationPageSize } = this.state;
+
+    if (paginationPage === 1 || rows.length <= paginationPageSize) {
+      lastItemIndex = paginationPageSize;
+      paginationPage = 1;
+    } else {
+      lastItemIndex = paginationPageSize * paginationPage;
+    }
+    // If lastItemIndex is larger than rows.length, it wont break
+    // It will just go to the end of the array
+    return rows.slice((paginationPage - 1) * paginationPageSize, lastItemIndex);
+  };
+
   /**
    * Helper utility to get all the currently selected rows
    * @returns {Array<string>} the array of rowIds that are currently selected
@@ -456,6 +489,12 @@ export default class DataTable extends React.Component {
     );
   };
 
+  handlePaginationChange = e => {
+    this.setState({
+      paginationPage: e.page,
+      paginationPageSize: e.pageSize,
+    });
+  };
   /**
    * Event handler for transitioning input value state changes for the table
    * filter component.
@@ -492,6 +531,8 @@ export default class DataTable extends React.Component {
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
+      getCurrentPageRows: this.getCurrentPageRows,
+      getPaginationProps: this.getPaginationProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,

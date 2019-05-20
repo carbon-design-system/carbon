@@ -122,6 +122,19 @@ storiesOf('DataTable', module)
     }
   )
   .add(
+    'with pagination',
+    withReadme(readme, () =>
+      require('./stories/with-pagination').default(props())
+    ),
+    {
+      info: {
+        text: `
+          DataTable with pagination
+        `,
+      },
+    }
+  )
+  .add(
     'with batch actions',
     withReadme(readme, () =>
       require('./stories/with-batch-actions').default(props())

@@ -35,8 +35,12 @@ const getDerivedStateFromProps = (props, prevState) => {
     // Optional state field to indicate whether a consumer should show a
     // batch actions menu
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
-  };
 
+    // Optional hooked up Pagination component
+    paginationPage: prevState.paginationPage || props.paginationPage,
+    paginationPageSize:
+      prevState.paginationPageSize || props.paginationPageSize,
+  };
   if (prevState.sortDirection && prevState.sortHeaderKey) {
     const { rowIds } = getSortedState(
       props,
