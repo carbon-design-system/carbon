@@ -23,7 +23,7 @@ import {
   gray100,
 
   // Support
-  blue50
+  blue50,
   green40,
   green50,
   yellow,
