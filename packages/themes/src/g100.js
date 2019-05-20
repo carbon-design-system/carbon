@@ -25,8 +25,10 @@ import {
 
   // Support
   green40,
+  green50,
   yellow,
   red50,
+  red60,
   red80,
   purple40,
 
@@ -71,6 +73,11 @@ export const support01 = red50;
 export const support02 = green40;
 export const support03 = yellow;
 export const support04 = blue50;
+
+export const inverseSupport01 = red60;
+export const inverseSupport02 = green50;
+export const inverseSupport03 = yellow;
+export const inverseSupport04 = blue60;
 
 export const overlay01 = rgba(gray100, 0.7);
 
