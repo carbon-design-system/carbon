@@ -186,11 +186,6 @@
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
       margin: 0;
     }
-
-    &::after {
-      transform: translate(calc(-50% + 8px), calc(100% + 10px));
-      margin: 0;
-    }
   }
 
   .#{$prefix}--btn--danger {
