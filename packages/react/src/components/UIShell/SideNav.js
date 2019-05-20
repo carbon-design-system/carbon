@@ -25,6 +25,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     onToggle,
     className: customClassName,
     translateById: t,
+    isSideRail,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -50,7 +51,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded`]: isSideRail ? expanded : true,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
   });
@@ -63,11 +64,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       onFocus={event => handleToggle(event, true)}
       onBlur={event => handleToggle(event, false)}>
       {children}
-      <SideNavFooter
-        assistiveText={assistiveText}
-        expanded={expanded}
-        onToggle={handleToggle}
-      />
+      {isSideRail ? (
+        <SideNavFooter
+          assistiveText={assistiveText}
+          expanded={expanded}
+          onToggle={handleToggle}
+        />
+      ) : null}
     </nav>
   );
 });
