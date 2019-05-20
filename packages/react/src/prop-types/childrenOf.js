@@ -28,7 +28,7 @@ const childrenOf = expectedChildTypes => {
         return;
       }
       const childDisplayName = getDisplayName(child.type || child);
-      if (!expectedChildTypes.includes(child.type)) {
+      if (!expectedChildTypes.includes(child.type) && !expectedDisplayNames.includes(childDisplayName)) {
         throw new Error(
           `Invalid prop \`children\` of type \`${childDisplayName}\` ` +
             `supplied to \`${componentName}\`, expected each child to be one ` +

@@ -26,7 +26,8 @@ const childrenOfType = expectedChildType => {
       const childDisplayName = getDisplayName(child.type);
       if (
         child.type !== expectedChildType.type &&
-        child.type !== expectedChildType
+        child.type !== expectedChildType &&
+        childDisplayName !== expectedDisplayName
       ) {
         throw new Error(
           `Invalid prop \`children\` of type \`${childDisplayName}\` ` +
