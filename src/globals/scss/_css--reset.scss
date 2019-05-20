@@ -194,5 +194,13 @@
     * {
       box-sizing: border-box;
     }
+
+    /// Makes SVGs accessible in high contrast mode
+    /// @link https://github.com/IBM/carbon-elements/issues/345#issuecomment-466577293 Carbon-elements #345
+    @media screen and (-ms-high-contract: active) {
+      svg {
+        fill: ButtonText;
+      }
+    }
   }
 }
