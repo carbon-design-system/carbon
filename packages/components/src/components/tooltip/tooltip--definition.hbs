@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -7,9 +7,31 @@
 
 <div class="{{@root.prefix}}--tooltip--definition">
   <button class="{{@root.prefix}}--tooltip__trigger" type="button" aria-describedby="definition-tooltip">
-    Definition Tooltip
+    Definition Tooltip (default, start aligned)
   </button>
   <div id="definition-tooltip" role="tooltip" class="{{@root.prefix}}--tooltip--definition__bottom">
+    <span class="{{@root.prefix}}--tooltip__caret"></span>
+    <p>Brief description of the dotted, underlined word above.</p>
+  </div>
+</div>
+
+<div class="{{@root.prefix}}--tooltip--definition">
+  <button class="{{@root.prefix}}--tooltip__trigger" type="button" aria-describedby="definition-tooltip">
+    Definition Tooltip (center aligned)
+  </button>
+  <div id="definition-tooltip" role="tooltip"
+    class="{{@root.prefix}}--tooltip--definition__bottom {{@root.prefix}}--tooltip--definition__align-center">
+    <span class="{{@root.prefix}}--tooltip__caret"></span>
+    <p>Brief description of the dotted, underlined word above.</p>
+  </div>
+</div>
+
+<div class="{{@root.prefix}}--tooltip--definition">
+  <button class="{{@root.prefix}}--tooltip__trigger" type="button" aria-describedby="definition-tooltip">
+    Definition Tooltip (end aligned)
+  </button>
+  <div id="definition-tooltip" role="tooltip"
+    class="{{@root.prefix}}--tooltip--definition__bottom {{@root.prefix}}--tooltip--definition__align-end">
     <span class="{{@root.prefix}}--tooltip__caret"></span>
     <p>Brief description of the dotted, underlined word above.</p>
   </div>
