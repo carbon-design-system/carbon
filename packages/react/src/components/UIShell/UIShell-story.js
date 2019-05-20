@@ -12,7 +12,7 @@ import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import HeaderContainer from './HeaderContainer';
@@ -367,7 +367,7 @@ storiesOf('[Experimental] UI Shell', module)
     'Fixed SideNav',
     withReadme(readme, () => (
       <>
-        <SideNav defaultExpanded aria-label="Side navigation">
+        <SideNav isFixedNav defaultExpanded aria-label="Side navigation">
           <SideNavItems>
             <SideNavMenu title="L0 menu">
               <SideNavMenuItem href="javascript:void(0)">
@@ -414,7 +414,7 @@ storiesOf('[Experimental] UI Shell', module)
     'Fixed SideNav w/ Icons',
     withReadme(readme, () => (
       <>
-        <SideNav defaultExpanded aria-label="Side navigation">
+        <SideNav isFixedNav defaultExpanded aria-label="Side navigation">
           <SideNavItems>
             <SideNavMenu renderIcon={Fade16} title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
@@ -448,6 +448,102 @@ storiesOf('[Experimental] UI Shell', module)
         <StoryContent />
       </>
     ))
+  )
+  .add(
+    'Fixed SideNav w/ Header',
+    withReadme(readme, () => {
+      return (
+        <>
+          <Header aria-label="IBM Platform Name">
+            <SkipToContent />
+            <HeaderMenuButton
+              aria-label="Open menu"
+              onClick={action('menu clicked')}
+            />
+            <HeaderName href="#" prefix="IBM">
+              [Platform]
+            </HeaderName>
+            <HeaderNavigation aria-label="IBM [Platform]">
+              <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+              <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+              <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+              <HeaderMenu aria-label="Link 4">
+                <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+              </HeaderMenu>
+            </HeaderNavigation>
+            <HeaderGlobalBar>
+              <HeaderGlobalAction
+                aria-label="Search"
+                onClick={action('search click')}>
+                <Search20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="Notifications"
+                onClick={action('notification click')}>
+                <Notification20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="App Switcher"
+                onClick={action('app-switcher click')}>
+                <AppSwitcher20 />
+              </HeaderGlobalAction>
+            </HeaderGlobalBar>
+            <SideNav isFixedNav defaultExpanded aria-label="Side navigation">
+              <SideNavItems>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="javascript:void(0)">
+                    Link
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                  Link
+                </SideNavLink>
+                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                  Link
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
+          </Header>
+          <StoryContent />
+        </>
+      );
+    })
   )
   .add(
     'SideNav w/ Header',
