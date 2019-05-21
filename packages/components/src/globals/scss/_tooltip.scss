@@ -56,6 +56,7 @@
     color: $inverse-01;
     font-weight: 400;
     content: attr(aria-label);
+    text-align: left;
     transform: translateX(-50%);
     pointer-events: none;
     background-color: $inverse-02;
