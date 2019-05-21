@@ -6,7 +6,7 @@
 -->
 <!-- v10 Data Table -->
 {{#if hasToolbar}}
-  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table>
+  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table{{#if hasExpandAll}} data-table-demo-expand-all-manager{{/if}}>
     <div class="{{@root.prefix}}--data-table-header">
       <h4 class="{{@root.prefix}}--data-table-header__title">{{title}}</h4>
       <p class="{{@root.prefix}}--data-table-header__description">{{optionalHelper}}</p>

@@ -265,6 +265,12 @@ class DataTable extends mixin(
     } else {
       parent.classList.remove(this.options.classExpandableRow);
       element.dataset.previousValue = 'expanded';
+      const expandHeader = this.element.querySelector(
+        this.options.selectorExpandHeader
+      );
+      if (expandHeader) {
+        expandHeader.dataset.previousValue = 'expanded';
+      }
     }
   };
 
@@ -396,6 +402,7 @@ class DataTable extends mixin(
       selectorCount: '[data-items-selected]',
       selectorActionCancel: `.${prefix}--batch-summary__cancel`,
       selectorCheckbox: `.${prefix}--checkbox`,
+      selectorExpandHeader: `th.${prefix}--table-expand`,
       selectorExpandCells: `td.${prefix}--table-expand`,
       selectorExpandableRows: `.${prefix}--expandable-row`,
       selectorParentRows: `.${prefix}--parent-row`,
