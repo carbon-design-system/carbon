@@ -93,6 +93,7 @@
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
+    width: 100%;
     align-items: center;
 
     .#{$prefix}--text-input__invalid-icon {
