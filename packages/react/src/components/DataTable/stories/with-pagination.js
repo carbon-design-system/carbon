@@ -69,7 +69,6 @@ export default props => (
             {...getPaginationProps()}
             pageSizes={[10, 20, 30, 40, 50]}
             totalItems={rows.length}
-            className="service-table-pagination"
           />
         </TableContainer>
       );
