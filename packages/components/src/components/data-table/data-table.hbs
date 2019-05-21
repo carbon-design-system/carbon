@@ -6,7 +6,7 @@
 -->
 <!-- v10 Data Table -->
 {{#if hasToolbar}}
-  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table>
+  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table{{#if hasExpandAll}} data-table-demo-expand-all-manager{{/if}}>
     <div class="{{@root.prefix}}--data-table-header">
       <h4 class="{{@root.prefix}}--data-table-header__title">{{title}}</h4>
       <p class="{{@root.prefix}}--data-table-header__description">{{optionalHelper}}</p>
@@ -136,11 +136,15 @@
     <thead>
       <tr>
         {{#each columns}}
-          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell" {{/if}}>
+          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell"{{/if}} {{#if section}} data-event="expandAll"{{/if}}>
             <!-- checkbox th -->
             {{#if checkbox}}
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
               <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}"></label>
+            {{else if (and section ../hasExpandAll)}}
+              <button class="{{@root.prefix}}--table-expand__button">
+                {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--table-expand__svg') }}
+              </button>
             {{else if (not menu)}}
             <!-- sortable th  -->
               {{#if sortable}}
