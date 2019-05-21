@@ -5,22 +5,77 @@
   "name": "Carbon Elements 🎨",
   "commands": [
     {
-      "name": "Add colors",
-      "identifier": "carbon.elements.colors",
-      "script": "colors.js",
-      "handler": "render"
+      "name": "Sync shared layer styles",
+      "identifier": "carbon.elements.colors.sync",
+      "script": "commands/index.js",
+      "handler": "syncColors"
     },
     {
-      "name": "Add icons",
-      "identifier": "carbon.elements.icons",
-      "script": "icons.js",
-      "handler": "render"
+      "name": "Generate color page",
+      "identifier": "carbon.elements.colors.generate",
+      "script": "commands/index.js",
+      "handler": "generateColors"
+    },
+    {
+      "name": "Sync shared layer styles",
+      "identifier": "carbon.elements.themes.sync",
+      "script": "commands/index.js",
+      "handler": "syncThemes"
+    },
+    {
+      "name": "Generate themes page",
+      "identifier": "carbon.elements.themes.generate",
+      "script": "commands/index.js",
+      "handler": "generateThemes"
+    },
+    {
+      "name": "Sync shared layer styles",
+      "identifier": "carbon.elements.type.sync",
+      "script": "commands/index.js",
+      "handler": "syncType"
+    },
+    {
+      "name": "Generate type page",
+      "identifier": "carbon.elements.type.generate",
+      "script": "commands/index.js",
+      "handler": "generateType"
+    },
+    {
+      "name": "Generate icon page and symbols",
+      "identifier": "carbon.elements.icons.generate",
+      "script": "commands/index.js",
+      "handler": "generateIcons"
     }
   ],
   "menu": {
     "items": [
-      "carbon.elements.colors",
-      "carbon.elements.icons"
+      {
+        "title": "Colors",
+        "items": [
+          "carbon.elements.colors.sync",
+          "carbon.elements.colors.generate"
+        ]
+      },
+      {
+        "title": "Themes",
+        "items": [
+          "carbon.elements.themes.sync",
+          "carbon.elements.themes.generate"
+        ]
+      },
+      {
+        "title": "Icons",
+        "items": [
+          "carbon.elements.icons.generate"
+        ]
+      },
+      {
+        "title": "Type",
+        "items": [
+          "carbon.elements.type.sync",
+          "carbon.elements.type.generate"
+        ]
+      }
     ]
   }
 }

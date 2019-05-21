@@ -22,3 +22,11 @@ export function findOrCreatePage(document, name) {
     parent: document,
   });
 }
+
+/**
+ * Select the given page, making it the active page in the document
+ */
+export function selectPage(page) {
+  page.selected = true;
+  return page;
+}

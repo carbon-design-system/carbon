@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "skpm-build",
+    "clean": "rimraf carbon-elements.sketchplugin",
     "develop": "skpm-build --watch",
     "skpm:link": "skpm-link"
   },
@@ -12,7 +13,9 @@
     "@carbon/colors": "10.2.0",
     "@carbon/icons": "10.2.0",
     "@carbon/themes": "10.2.0",
+    "@carbon/type": "10.2.0",
     "@skpm/builder": "^0.7.0",
+    "color-string": "^1.5.3",
     "core-js": "^3.0.1",
     "react": "^16.8.6",
     "react-sketchapp": "^3.0.0-beta.9",
@@ -27,5 +30,8 @@
     "manifest": "src/manifest.json",
     "main": "carbon-elements.sketchplugin",
     "assets": []
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.3"
   }
 }

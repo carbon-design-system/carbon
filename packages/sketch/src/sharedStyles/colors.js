@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'core-js/features/array/flat-map';
-
 import { colors } from '@carbon/colors';
 import { formatTokenName } from '@carbon/themes';
 import { SharedStyle, Style } from 'sketch/dom';
+import { syncSharedStyle } from '../tools/sharedStyles';
 
 const { black, white, orange, yellow, ...swatches } = colors;
 const colorNames = Object.keys(colors);
@@ -49,11 +48,11 @@ export function syncColorStyles(document) {
     const color = fill.color.slice(0, -2);
     return expectedSharedStyles[name] && expectedSharedStyles[name] === color;
   });
+
+  // Exit early if everything is the same
   if (existingStyles.length === Object.keys(expectedSharedStyles).length) {
     return existingStyles;
   }
-
-  syncColorStyle(document, 'color/black', '#000000');
 
   const sharedStyles = Object.keys(swatches).flatMap(swatchName => {
     const name = formatTokenName(swatchName);
@@ -83,32 +82,12 @@ function formatSharedStyleName(name, grade) {
 }
 
 function syncColorStyle(document, name, value) {
-  const { sharedLayerStyles } = document;
-  const [sharedStyle] = Array.from(sharedLayerStyles).filter(sharedStyle => {
-    return sharedStyle.name === name;
-  });
-
-  if (!sharedStyle) {
-    return SharedStyle.fromStyle({
-      name,
-      style: {
-        fills: [
-          {
-            color: value,
-            fillType: Style.FillType.Color,
-          },
-        ],
+  return syncSharedStyle(document, name, {
+    fills: [
+      {
+        color: value,
+        fillType: Style.FillType.Color,
       },
-      document,
-    });
-  }
-
-  sharedStyle.style.fills = [
-    {
-      color: value,
-      fillType: Style.FillType.Color,
-    },
-  ];
-
-  return sharedStyle;
+    ],
+  });
 }
