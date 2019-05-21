@@ -105,6 +105,10 @@
     width: 100%;
   }
 
+  .#{$prefix}--text-area__character-counter-title .#{$prefix}--label {
+    margin-right: rem(16px);
+  }
+
   .#{$prefix}--text-area__character-counter-title
     + .#{$prefix}--form__helper-text {
     margin-top: rem(-6px);
