@@ -215,9 +215,10 @@
   }
 
   &.#{$prefix}--btn--field {
-    padding: $button-padding-field;
-    min-height: 40px;
     height: 40px;
+    min-height: 40px;
+    padding: $button-padding-field;
+    margin-top: 1.6rem;
   }
 
   // Skeleton State
