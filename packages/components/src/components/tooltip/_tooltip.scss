@@ -149,119 +149,64 @@
 
   // Tooltip Definition
   // Definition CSS only tooltip
+  .#{$prefix}--tooltip--definition .#{$prefix}--tooltip__trigger {
+    @include type-style('label-01');
+    border-bottom: rem(1px) dotted $interactive-01;
+  }
+
   .#{$prefix}--tooltip--definition {
-    @include reset;
-    position: relative;
+    .#{$prefix}--tooltip--top {
+      @include tooltip--trigger('definition', 'top');
 
-    .#{$prefix}--tooltip__trigger {
-      @include type-style('label-01');
-      display: inline-flex;
-      position: relative;
-      border-bottom: 1px dotted $interactive-01;
-      color: $text-01;
-
-      &:hover {
-        cursor: pointer;
-
-        + .#{$prefix}--tooltip--definition__top,
-        + .#{$prefix}--tooltip--definition__bottom {
-          display: block;
-        }
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('definition', 'top', 'start');
       }
 
-      &:focus {
-        @include focus-outline('border');
-
-        + .#{$prefix}--tooltip--definition__top,
-        + .#{$prefix}--tooltip--definition__bottom {
-          display: block;
-        }
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('definition', 'top', 'end');
       }
     }
-  }
 
-  .#{$prefix}--tooltip--definition__bottom,
-  .#{$prefix}--tooltip--definition__top {
-    @include layer('overlay');
-    position: absolute;
-    z-index: 1;
-    display: none;
-    background: $inverse-02;
-    width: rem(208px);
-    margin-top: $carbon--spacing-04;
-    padding: $carbon--spacing-03 $carbon--spacing-05;
-    border-radius: rem(2px);
-    pointer-events: none;
-    cursor: pointer;
+    .#{$prefix}--tooltip--right {
+      @include tooltip--trigger('definition', 'right');
 
-    p {
-      @include type-style('body-short-01');
-      color: $inverse-01;
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('definition', 'right', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('definition', 'right', 'end');
+      }
     }
 
-    .#{$prefix}--tooltip__caret {
-      position: absolute;
-      right: 0;
-      left: 0;
-      width: 0.6rem;
-      height: 0.6rem;
-      background: $inverse-02;
-      margin-left: $carbon--spacing-05;
+    .#{$prefix}--tooltip--bottom {
+      @include tooltip--trigger('definition', 'bottom');
+
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('definition', 'bottom', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('definition', 'bottom', 'end');
+      }
     }
-  }
 
-  // Tooltip Definition caret - bottom position
-  .#{$prefix}--tooltip--definition__bottom .#{$prefix}--tooltip__caret {
-    top: -0.2rem;
-    transform: rotate(-135deg);
-  }
+    .#{$prefix}--tooltip--left {
+      @include tooltip--trigger('definition', 'left');
 
-  // Tooltip Definition caret - top position
-  .#{$prefix}--tooltip--definition__top {
-    transform: translateY(-100%);
-    margin-top: rem(-32px);
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('definition', 'left', 'start');
+      }
 
-    .#{$prefix}--tooltip__caret {
-      bottom: -0.2rem;
-      transform: rotate(45deg);
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('definition', 'left', 'end');
+      }
     }
-  }
-
-  .#{$prefix}--tooltip--definition__align-end {
-    right: 0;
-  }
-
-  .#{$prefix}--tooltip--definition__align-center {
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .#{$prefix}--tooltip--definition__top.#{$prefix}--tooltip--definition__align-center {
-    margin-left: 50%;
-    transform: translate(-50%, -100%);
-  }
-
-  .#{$prefix}--tooltip--definition__align-center .#{$prefix}--tooltip__caret {
-    left: auto;
-    margin-left: auto;
-    // Adjust by the half of the diagonal of the caret, which sizes 0.6rem
-    margin-right: calc(50% - 6px);
-  }
-
-  .#{$prefix}--tooltip--definition__align-end .#{$prefix}--tooltip__caret {
-    left: auto;
-    margin-left: auto;
-    margin-right: rem(16px);
   }
 
   // Tooltip Icon
   // Icon CSS only tooltip
-  .#{$prefix}--tooltip--top,
-  .#{$prefix}--tooltip--right,
-  .#{$prefix}--tooltip--bottom,
-  .#{$prefix}--tooltip--left {
-    @include tooltip--icon;
-
+  .#{$prefix}--tooltip--icon .#{$prefix}--tooltip__trigger {
     &:hover,
     &:focus {
       svg {
@@ -278,64 +223,54 @@
     }
   }
 
-  // Tooltip Icon caret - top position
-  .#{$prefix}--tooltip--top {
-    @include tooltip--placement('top');
-  }
+  .#{$prefix}--tooltip--icon {
+    .#{$prefix}--tooltip--top {
+      @include tooltip--trigger('icon', 'top');
 
-  // Tooltip Icon caret - right position
-  .#{$prefix}--tooltip--right {
-    @include tooltip--placement('right');
-  }
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('icon', 'top', 'start');
+      }
 
-  // Tooltip Icon caret - bottom position
-  .#{$prefix}--tooltip--bottom {
-    @include tooltip--placement('bottom');
-  }
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('icon', 'top', 'end');
+      }
+    }
 
-  // Tooltip Icon caret - left position
-  .#{$prefix}--tooltip--left {
-    @include tooltip--placement('left');
-  }
+    .#{$prefix}--tooltip--right {
+      @include tooltip--trigger('icon', 'right');
 
-  // Tooltip Icon caret - top position, left alignment
-  .#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start {
-    @include tooltip--placement('top', 'start');
-  }
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('icon', 'right', 'start');
+      }
 
-  // Tooltip Icon caret - top position, right alignment
-  .#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end {
-    @include tooltip--placement('top', 'end');
-  }
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('icon', 'right', 'end');
+      }
+    }
 
-  // Tooltip Icon caret - right position, left alignment
-  .#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
-    @include tooltip--placement('right', 'start');
-  }
+    .#{$prefix}--tooltip--bottom {
+      @include tooltip--trigger('icon', 'bottom');
 
-  // Tooltip Icon caret - right position, right alignment
-  .#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
-    @include tooltip--placement('right', 'end');
-  }
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('icon', 'bottom', 'start');
+      }
 
-  // Tooltip Icon caret - bottom position, left alignment
-  .#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
-    @include tooltip--placement('bottom', 'start');
-  }
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('icon', 'bottom', 'end');
+      }
+    }
 
-  // Tooltip Icon caret - bottom position, right alignment
-  .#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
-    @include tooltip--placement('bottom', 'end');
-  }
+    .#{$prefix}--tooltip--left {
+      @include tooltip--trigger('icon', 'left');
 
-  // Tooltip Icon caret - left position, left alignment
-  .#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
-    @include tooltip--placement('left', 'start');
-  }
+      &.#{$prefix}--tooltip--align-start {
+        @include tooltip--trigger('icon', 'left', 'start');
+      }
 
-  // Tooltip Icon caret - left position, right alignment
-  .#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
-    @include tooltip--placement('left', 'end');
+      &.#{$prefix}--tooltip--align-end {
+        @include tooltip--trigger('icon', 'left', 'end');
+      }
+    }
   }
 
   // Tooltip position - icon only

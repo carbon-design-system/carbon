@@ -163,16 +163,12 @@
     }
   }
 
-  .#{$prefix}--btn--icon-only {
-    @include tooltip--icon;
-  }
-
   .#{$prefix}--btn--icon-only--top {
-    @include tooltip--placement('top');
+    @include tooltip--trigger('icon', 'top');
   }
 
   .#{$prefix}--btn--icon-only--bottom {
-    @include tooltip--placement('bottom');
+    @include tooltip--trigger('icon', 'bottom');
   }
 
   .#{$prefix}--btn--icon-only,
