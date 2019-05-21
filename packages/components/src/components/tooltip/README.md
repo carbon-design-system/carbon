@@ -170,10 +170,10 @@ does not use any JavaScript. No label should be added to this variation. If
 there are actions a user can take in the tooltip (e.g. a link or a button), use
 interactive tooltip.
 
-| Selector                     | Description                                           |
-| ---------------------------- | ----------------------------------------------------- |
-| `.bx--tooltip--icon__top`    | A simple tooltip that is displayed above the trigger. |
-| `.bx--tooltip--icon__bottom` | A simple tooltip that is displayed below the trigger. |
+| Selector               | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| `.bx--tooltip--top`    | A simple tooltip that is displayed above the trigger. |
+| `.bx--tooltip--bottom` | A simple tooltip that is displayed below the trigger. |
 
 ### Links & Resources
 

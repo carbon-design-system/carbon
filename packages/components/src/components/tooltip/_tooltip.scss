@@ -256,10 +256,10 @@
 
   // Tooltip Icon
   // Icon CSS only tooltip
-  .#{$prefix}--tooltip--icon__top,
-  .#{$prefix}--tooltip--icon__right,
-  .#{$prefix}--tooltip--icon__bottom,
-  .#{$prefix}--tooltip--icon__left {
+  .#{$prefix}--tooltip--top,
+  .#{$prefix}--tooltip--right,
+  .#{$prefix}--tooltip--bottom,
+  .#{$prefix}--tooltip--left {
     @include tooltip--icon;
 
     &:hover,
@@ -279,62 +279,62 @@
   }
 
   // Tooltip Icon caret - top position
-  .#{$prefix}--tooltip--icon__top {
+  .#{$prefix}--tooltip--top {
     @include tooltip--placement('top');
   }
 
   // Tooltip Icon caret - right position
-  .#{$prefix}--tooltip--icon__right {
+  .#{$prefix}--tooltip--right {
     @include tooltip--placement('right');
   }
 
   // Tooltip Icon caret - bottom position
-  .#{$prefix}--tooltip--icon__bottom {
+  .#{$prefix}--tooltip--bottom {
     @include tooltip--placement('bottom');
   }
 
   // Tooltip Icon caret - left position
-  .#{$prefix}--tooltip--icon__left {
+  .#{$prefix}--tooltip--left {
     @include tooltip--placement('left');
   }
 
   // Tooltip Icon caret - top position, left alignment
-  .#{$prefix}--tooltip--icon__top.#{$prefix}--tooltip--icon__align-start {
+  .#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start {
     @include tooltip--placement('top', 'start');
   }
 
   // Tooltip Icon caret - top position, right alignment
-  .#{$prefix}--tooltip--icon__top.#{$prefix}--tooltip--icon__align-end {
+  .#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end {
     @include tooltip--placement('top', 'end');
   }
 
   // Tooltip Icon caret - right position, left alignment
-  .#{$prefix}--tooltip--icon__right.#{$prefix}--tooltip--icon__align-start {
+  .#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
     @include tooltip--placement('right', 'start');
   }
 
   // Tooltip Icon caret - right position, right alignment
-  .#{$prefix}--tooltip--icon__right.#{$prefix}--tooltip--icon__align-end {
+  .#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
     @include tooltip--placement('right', 'end');
   }
 
   // Tooltip Icon caret - bottom position, left alignment
-  .#{$prefix}--tooltip--icon__bottom.#{$prefix}--tooltip--icon__align-start {
+  .#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
     @include tooltip--placement('bottom', 'start');
   }
 
   // Tooltip Icon caret - bottom position, right alignment
-  .#{$prefix}--tooltip--icon__bottom.#{$prefix}--tooltip--icon__align-end {
+  .#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
     @include tooltip--placement('bottom', 'end');
   }
 
   // Tooltip Icon caret - left position, left alignment
-  .#{$prefix}--tooltip--icon__left.#{$prefix}--tooltip--icon__align-start {
+  .#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
     @include tooltip--placement('left', 'start');
   }
 
   // Tooltip Icon caret - left position, right alignment
-  .#{$prefix}--tooltip--icon__left.#{$prefix}--tooltip--icon__align-end {
+  .#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
     @include tooltip--placement('left', 'end');
   }
 
