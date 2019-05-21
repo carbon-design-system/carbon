@@ -132,7 +132,7 @@
   <section class="{{@root.prefix}}--data-table_inner-container">
   {{/if}}
   <!-- Table -->
-  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}} {{#if sticky}}{{@root.prefix}}--data-table--sticky-header{{/if}} {{#if zebra}}{{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}} {{#if tall}}{{@root.prefix}}--data-table--tall {{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort {{/if}}" >
+  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}}{{#if sticky}} {{@root.prefix}}--data-table--sticky-header{{/if}}{{#if zebra}} {{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}}{{#if tall}} {{@root.prefix}}--data-table--tall{{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort{{/if}}{{#if displayOverflowMenus}} {{@root.prefix}}--data-table--visible-overflow-menu{{/if}}" >
     <thead>
       <tr>
         {{#each columns}}
