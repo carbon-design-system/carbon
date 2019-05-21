@@ -68,7 +68,7 @@
 /// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
 /// @access public
 /// @group tooltip
-@mixin tooltip--icon-placement($position: 'bottom', $align: 'center') {
+@mixin tooltip--placement($position: 'bottom', $align: 'center') {
   $caret-spacing: rem(8px); // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);

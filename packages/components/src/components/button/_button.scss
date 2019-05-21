@@ -168,11 +168,11 @@
   }
 
   .#{$prefix}--btn--icon-only--top {
-    @include tooltip--icon-placement('top');
+    @include tooltip--placement('top');
   }
 
   .#{$prefix}--btn--icon-only--bottom {
-    @include tooltip--icon-placement('bottom');
+    @include tooltip--placement('bottom');
   }
 
   .#{$prefix}--btn--icon-only,
