@@ -22,7 +22,7 @@
 ///   }
 @mixin experimental-focus() {
   outline: 4px solid $shell-side-nav-accent-01;
-  outline-offset: -4px;
+  outline-offset: rem(-4px);
 }
 
 /// Helper to add in text overflow styles to a particular node. Useful if we
@@ -132,7 +132,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__header {
     display: flex;
-    border-bottom: 1px solid $ibm-color__gray-80;
+    border-bottom: 1px solid $shell-side-nav-bg-02;
     width: 100%;
     height: mini-units(6);
     max-width: 100%;
@@ -271,12 +271,12 @@
 
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover {
     // TODO: sync color
-    background-color: #333333;
+    background-color: $shell-side-nav-bg-04;
   }
 
   .#{$prefix}--side-nav__item--active {
     // TODO: sync color
-    background-color: #3d3d3d;
+    background-color: $shell-side-nav-bg-02;
   }
 
   //----------------------------------------------------------------------------
@@ -326,7 +326,7 @@
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     + .#{$prefix}--side-nav__menu[role='menu'] {
-    max-height: 1500px;
+    max-height: rem(1500px);
     visibility: inherit;
     transition: $transition--expansion max-height $carbon--ease-in,
       $transition--expansion visibility $carbon--standard-easing;
@@ -342,7 +342,7 @@
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
     // TODO: sync with color
-    background-color: #4c4c4c;
+    background-color: $shell-side-nav-bg-05;
   }
 
   .#{$prefix}--side-nav__menu[role='menu']
