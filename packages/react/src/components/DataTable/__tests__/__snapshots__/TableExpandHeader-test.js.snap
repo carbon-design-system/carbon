@@ -15,7 +15,7 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
               className="custom-class"
             >
               <th
-                className="custom-class"
+                className="bx--table-expand custom-class"
                 scope="col"
               />
             </TableExpandHeader>

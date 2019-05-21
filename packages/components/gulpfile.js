@@ -119,6 +119,7 @@ gulp.task('clean', () =>
     '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
     '!demo/js/inline-loading-demo-button.js',
+    '!demo/js/data-table-demo-expand-all-manager.js',
     '!demo/js/prism.js',
     '!demo/components.js',
     '!demo/index.js',
