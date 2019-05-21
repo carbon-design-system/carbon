@@ -176,7 +176,8 @@
   }
 
   .#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-right: rem(13px);
 
     .#{$prefix}--btn__icon {
