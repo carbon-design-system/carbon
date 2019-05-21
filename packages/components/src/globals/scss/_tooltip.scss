@@ -9,9 +9,16 @@
 
 // Tooltip Icon
 // Icon CSS only tooltip
+/// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
+/// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
+/// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
 /// @access public
 /// @group tooltip
-@mixin tooltip--icon {
+@mixin tooltip--trigger(
+  $tooltip-type: 'icon',
+  $position: 'bottom',
+  $align: 'center'
+) {
   @include reset;
   position: relative;
   display: inline-flex;
@@ -24,6 +31,7 @@
   &::after {
     @include type-style('body-short-01');
     position: absolute;
+    z-index: z('floating');
     display: flex;
     align-items: center;
     opacity: 0;
@@ -31,6 +39,7 @@
     transition: opacity $duration--fast-01 motion(standard, productive);
   }
 
+  // caret
   &::before {
     width: 0;
     height: 0;
@@ -38,12 +47,17 @@
     content: '';
   }
 
+  // content box
   &::after {
     @include layer('overlay');
     min-width: rem(24px);
     max-width: rem(208px);
     height: auto;
-    padding: 0.125rem 1rem;
+    padding: if(
+      $tooltip-type == 'definition',
+      rem(8px) rem(16px),
+      rem(2px) rem(16px)
+    );
     border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
@@ -61,15 +75,13 @@
       opacity: 1;
     }
   }
-}
 
-// Tooltip Icon caret - top position
-/// @param {String} $position ['bottom'] - The position, from: `top`, `bottom`
-/// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
-/// @access public
-/// @group tooltip
-@mixin tooltip--placement($position: 'bottom', $align: 'center') {
-  $caret-spacing: rem(8px); // space between caret and trigger button
+  // position and alignment
+  $caret-spacing: if(
+    $tooltip-type == 'definition',
+    rem(4px),
+    rem(8px)
+  ); // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);
   $translate-caret: #{$caret-height} + #{$caret-spacing};
@@ -119,6 +131,7 @@
     }
   }
 
+  // alignment options available only for top and bottom tooltip position
   &::after {
     @if ($position == 'top') {
       @if ($align == 'start') {
