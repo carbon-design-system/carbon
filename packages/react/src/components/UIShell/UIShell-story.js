@@ -12,7 +12,7 @@ import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import HeaderContainer from './HeaderContainer';
