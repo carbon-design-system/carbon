@@ -5,8 +5,45 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
 import React from 'react';
+import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
+import { settings } from 'carbon-components';
 
-const TableExpandHeader = props => <th scope="col" {...props} />;
+const { prefix } = settings;
+
+const TableExpandHeader = ({
+  ariaLabel,
+  className: headerClassName,
+  enableExpando,
+  isExpanded,
+  onExpand,
+  expandIconDescription,
+  ...rest
+}) => {
+  const className = cx(`${prefix}--table-expand`, headerClassName);
+  const previousValue = isExpanded ? 'collapsed' : undefined;
+
+  return (
+    <th
+      scope="col"
+      className={className}
+      data-previous-value={previousValue}
+      {...rest}>
+      {!enableExpando ? null : (
+        <button
+          className={`${prefix}--table-expand__button`}
+          onClick={onExpand}
+          title={expandIconDescription}
+          aria-label={ariaLabel}>
+          <ChevronRight16
+            className={`${prefix}--table-expand__svg`}
+            aria-label={expandIconDescription}
+          />
+        </button>
+      )}
+    </th>
+  );
+};
 
 export default TableExpandHeader;
