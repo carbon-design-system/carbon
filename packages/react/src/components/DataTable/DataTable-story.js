@@ -122,6 +122,22 @@ storiesOf('DataTable', module)
     }
   )
   .add(
+    'with batch expansion',
+    withReadme(readme, () =>
+      require('./stories/with-batch-expansion').default(props())
+    ),
+    {
+      info: {
+        text: `
+          DataTable with batch expansion
+
+          You can find more detailed information surrounding usage of this component
+          at the following url: ${readmeURL}
+        `,
+      },
+    }
+  )
+  .add(
     'with batch actions',
     withReadme(readme, () =>
       require('./stories/with-batch-actions').default(props())
