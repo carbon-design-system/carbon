@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ShapePath } from 'sketch/dom';
+import { Rectangle, ShapePath } from 'sketch/dom';
 
 // Sometimes we need to convert non-path data due to limitations in
 // convertShapeToPath plugin, namely when a rect has an `rx` or `ry` attribute

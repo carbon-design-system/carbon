@@ -5,43 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Page } from 'sketch/dom';
+import { Document, Page } from 'sketch/dom';
 
 /**
  * Find or create a page for the given document context and page name
- * @param {SketchContext} context
- * @param {string} pageName
- * @return {MSPage}
  */
-export function findOrCreatePage(context, pageName) {
-  let [page] = Array.from(context.document.pages()).filter(page => {
-    return '' + page.name() === pageName;
+export function findOrCreatePage(document, name) {
+  const [page] = document.pages.filter(page => page.name === name);
+
+  if (page) {
+    page.remove();
+  }
+
+  return new Page({
+    name,
+    parent: document,
   });
-
-  if (!page) {
-    page = new Page({
-      name: pageName,
-      parent: context.document,
-    });
-  }
-
-  clearPage(page);
-  page.selected = true;
-
-  return page;
-}
-
-/**
- * Clear all the layers for a given page.
- * @param {MSPage} page
- * @return {MSPage}
- */
-export function clearPage(page) {
-  if (!Array.isArray(page.layers) && page.layers().count() > 0) {
-    for (let i = page.layers().count() - 1; i >= 0; i--) {
-      const layer = page.layers().objectAtIndex(i);
-      layer.removeFromParent();
-    }
-  }
-  return page;
 }
