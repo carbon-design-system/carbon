@@ -101,6 +101,18 @@ tokens:
   - name: support04
     role:
       - Information
+  - name: inverseSupport01
+    role:
+      - Error on high contrast backgrounds
+  - name: inverseSupport02
+    role:
+      - Success on high contrast backgrounds
+  - name: inverseSupport03
+    role:
+      - Warning on high contrast backgrounds
+  - name: inverseSupport04
+    role:
+      - Information on high contrast backgrounds
   - name: overlay01
     role:
       - Background overlay
