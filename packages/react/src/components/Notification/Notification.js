@@ -141,7 +141,6 @@ export class NotificationTextDetails extends Component {
 
   static defaultProps = {
     title: 'title',
-    subtitle: 'subtitle',
     caption: 'caption',
     notificationType: 'toast',
   };
@@ -221,7 +220,7 @@ export class ToastNotification extends Component {
     /**
      * Specify the sub-title
      */
-    subtitle: PropTypes.node.isRequired,
+    subtitle: PropTypes.node,
 
     /**
      * By default, this value is "alert". You can also provide an alternate
@@ -264,7 +263,6 @@ export class ToastNotification extends Component {
   static defaultProps = {
     kind: 'error',
     title: 'provide a title',
-    subtitle: 'provide a subtitle',
     caption: 'provide a caption',
     role: 'alert',
     notificationType: 'toast',
@@ -369,7 +367,7 @@ export class InlineNotification extends Component {
     /**
      * Specify the sub-title
      */
-    subtitle: PropTypes.node.isRequired,
+    subtitle: PropTypes.node,
 
     /**
      * By default, this value is "alert". You can also provide an alternate
