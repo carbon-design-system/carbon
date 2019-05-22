@@ -156,10 +156,14 @@
 
   .#{$prefix}--tooltip--definition {
     .#{$prefix}--tooltip--top {
-      @include tooltip--trigger('definition', 'top');
+      @include tooltip--trigger('definition', 'top', 'start');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('definition', 'top', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('definition', 'top', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -168,10 +172,14 @@
     }
 
     .#{$prefix}--tooltip--right {
-      @include tooltip--trigger('definition', 'right');
+      @include tooltip--trigger('definition', 'right', 'start');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('definition', 'right', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('definition', 'right', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -180,10 +188,14 @@
     }
 
     .#{$prefix}--tooltip--bottom {
-      @include tooltip--trigger('definition', 'bottom');
+      @include tooltip--trigger('definition', 'bottom', 'start');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('definition', 'bottom', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('definition', 'bottom', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -192,10 +204,14 @@
     }
 
     .#{$prefix}--tooltip--left {
-      @include tooltip--trigger('definition', 'left');
+      @include tooltip--trigger('definition', 'left', 'start');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('definition', 'left', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('definition', 'left', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -225,10 +241,14 @@
 
   .#{$prefix}--tooltip--icon {
     .#{$prefix}--tooltip--top {
-      @include tooltip--trigger('icon', 'top');
+      @include tooltip--trigger('icon', 'top', 'center');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('icon', 'top', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('icon', 'top', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -237,10 +257,14 @@
     }
 
     .#{$prefix}--tooltip--right {
-      @include tooltip--trigger('icon', 'right');
+      @include tooltip--trigger('icon', 'right', 'center');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('icon', 'right', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('icon', 'right', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -249,10 +273,14 @@
     }
 
     .#{$prefix}--tooltip--bottom {
-      @include tooltip--trigger('icon', 'bottom');
+      @include tooltip--trigger('icon', 'bottom', 'center');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('icon', 'bottom', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('icon', 'bottom', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
@@ -261,10 +289,14 @@
     }
 
     .#{$prefix}--tooltip--left {
-      @include tooltip--trigger('icon', 'left');
+      @include tooltip--trigger('icon', 'left', 'center');
 
       &.#{$prefix}--tooltip--align-start {
         @include tooltip--trigger('icon', 'left', 'start');
+      }
+
+      &.#{$prefix}--tooltip--align-center {
+        @include tooltip--trigger('icon', 'left', 'center');
       }
 
       &.#{$prefix}--tooltip--align-end {
