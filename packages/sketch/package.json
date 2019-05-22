@@ -18,17 +18,16 @@
     "@carbon/type": "10.2.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
-    "core-js": "^3.0.1",
     "skpm": "^1.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "rimraf": "^2.6.3"
   },
   "skpm": {
     "name": "Carbon Elements",
     "manifest": "src/manifest.json",
     "main": "carbon-elements.sketchplugin",
     "assets": []
-  },
-  "devDependencies": {
-    "cross-env": "^5.2.0",
-    "rimraf": "^2.6.3"
   }
 }
