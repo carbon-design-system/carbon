@@ -44,6 +44,11 @@ const colors = [
   'support03',
   'support04',
 
+  'inverseSupport01',
+  'inverseSupport02',
+  'inverseSupport03',
+  'inverseSupport04',
+
   'overlay01',
 
   // Interactive states
