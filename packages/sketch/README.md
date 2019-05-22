@@ -5,9 +5,11 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-- [Developing](#developing)
-  - [Where to start](#where-to-start)
-- [References](#references)
+- [Getting started (developing)](#getting-started-developing)
+- [Overview](#overview)
+  - [Building sketch plugins](#building-sketch-plugins)
+  - [Project structure](#project-structure)
+- [Reference](#reference)
 - [Tips & Tricks](#tips--tricks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
