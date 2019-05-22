@@ -38,6 +38,12 @@ const kinds = {
   'Ghost button (ghost)': 'ghost',
 };
 
+const sizes = {
+  Default: 'default',
+  Field: 'field',
+  Small: 'small',
+};
+
 const props = {
   regular: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
@@ -46,6 +52,7 @@ const props = {
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       small: boolean('Small (small)', false),
+      size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
@@ -61,6 +68,7 @@ const props = {
       className: 'some-class',
       disabled: boolean('Disabled (disabled)', false),
       small: boolean('Small (small)', false),
+      size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',

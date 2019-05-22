@@ -20,6 +20,7 @@ const Button = React.forwardRef(function Button(
     className,
     disabled,
     small,
+    size,
     kind,
     href,
     tabIndex,
@@ -32,7 +33,8 @@ const Button = React.forwardRef(function Button(
 ) {
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: small,
+    [`${prefix}--btn--field`]: size === 'field',
+    [`${prefix}--btn--sm`]: size === 'small' || small,
     [`${prefix}--btn--primary`]: kind === 'primary',
     [`${prefix}--btn--danger`]: kind === 'danger',
     [`${prefix}--btn--secondary`]: kind === 'secondary',
