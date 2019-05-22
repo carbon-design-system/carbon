@@ -95,6 +95,12 @@ export default class ComboBox extends React.Component {
     itemToString: PropTypes.func,
 
     /**
+     * Optional function to render items as custom components instead of strings.
+     * Defaults to null and is overriden by a getter
+     */
+    itemToElement: PropTypes.func,
+
+    /**
      * `onChange` is a utility for this controlled component to communicate to a
      * consuming component when a specific dropdown item is selected.
      * @param {{ selectedItem }}
@@ -146,11 +152,17 @@ export default class ComboBox extends React.Component {
      * should use "light theme" (white background)?
      */
     light: PropTypes.bool,
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: Downshift.propTypes,
   };
 
   static defaultProps = {
     disabled: false,
     itemToString: defaultItemToString,
+    itemToElement: null,
     shouldFilterItem: defaultShouldFilterItem,
     type: 'default',
     ariaLabel: 'Choose an item',
@@ -224,6 +236,7 @@ export default class ComboBox extends React.Component {
       id,
       items,
       itemToString,
+      itemToElement,
       titleText,
       helperText,
       placeholder,
@@ -237,6 +250,7 @@ export default class ComboBox extends React.Component {
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
+      downshiftProps,
       ...rest
     } = this.props;
     const className = cx(`${prefix}--combo-box`, containerClassName);
@@ -255,8 +269,12 @@ export default class ComboBox extends React.Component {
       <div className={helperClasses}>{helperText}</div>
     ) : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+
+    // needs to be Capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
     const input = (
       <Downshift
+        {...downshiftProps}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
         inputValue={this.state.inputValue || ''}
@@ -330,7 +348,11 @@ export default class ComboBox extends React.Component {
                         false
                       }
                       {...getItemProps({ item, index })}>
-                      {itemToString(item)}
+                      {itemToElement ? (
+                        <ItemToElement key={itemToString(item)} {...item} />
+                      ) : (
+                        itemToString(item)
+                      )}
                     </ListBox.MenuItem>
                   )
                 )}

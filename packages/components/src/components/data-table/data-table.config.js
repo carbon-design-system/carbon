@@ -452,6 +452,32 @@ module.exports = {
       },
     },
     {
+      name: 'expandable-with-expand-all',
+      label: 'Expandable with expand all',
+      context: {
+        state: 'persistent-search',
+        title: 'Table title',
+        columns: columnsExpandable,
+        rows: rowsExpandable,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        hasToolbar: true,
+        hasExpandAll: true,
+        sort: true,
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+      },
+    },
+    {
       name: 'small',
       label: 'Small',
       context: {
@@ -513,6 +539,37 @@ module.exports = {
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
         sort: true,
+      },
+    },
+    {
+      name: 'show-overflow-menus',
+      label: 'Data Table (with visible overflow menu triggers)',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        state: 'default',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+        displayOverflowMenus: true,
       },
     },
   ],

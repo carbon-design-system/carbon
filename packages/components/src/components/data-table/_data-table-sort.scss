@@ -18,7 +18,7 @@
   // -------------------------------------
   .#{$prefix}--data-table--sort th,
   .#{$prefix}--data-table--sort
-    th:first-of-type:not(.#{$prefix}--table-column-checkbox) {
+    th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
     padding: 0;
     height: $layout-04;
     border-top: none;

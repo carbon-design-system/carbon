@@ -49,6 +49,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
     className="bx--multi-select__wrapper bx--list-box__wrapper"
   >
     <Selection
+      disabled={false}
       initialSelectedItems={Array []}
       onChange={[Function]}
       render={[Function]}

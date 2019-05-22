@@ -253,7 +253,7 @@ export default class Tabs extends React.Component {
 
     return (
       <>
-        <nav {...other} className={classes.tabs} role={role}>
+        <div {...other} className={classes.tabs} role={role}>
           <div
             role="listbox"
             aria-label={ariaLabel}
@@ -275,7 +275,7 @@ export default class Tabs extends React.Component {
           <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}
           </ul>
-        </nav>
+        </div>
         {tabContentWithProps}
       </>
     );

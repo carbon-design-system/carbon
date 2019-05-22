@@ -410,7 +410,6 @@ class Tooltip extends Component {
               className={tooltipClasses}
               {...other}
               data-floating-menu-direction={direction}
-              aria-labelledby={triggerId}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
               onFocus={this.handleMouse}
