@@ -138,13 +138,14 @@
   &::after {
     @if ($position == 'top') {
       @if ($align == 'start') {
-        transform: translate(-1rem, calc(-1 * (#{$translate-body})));
+        left: 0;
+        transform: translate(0, calc(-1 * (#{$translate-body})));
       } @else if ($align == 'end') {
-        transform: translate(
-          calc(-100% + 1rem),
-          calc(-1 * (#{$translate-body}))
-        );
+        right: 0;
+        left: initial;
+        transform: translate(0, calc(-1 * (#{$translate-body})));
       } @else {
+        left: 50%;
         transform: translate(-50%, calc(-1 * (#{$translate-body})));
       }
     }
@@ -153,9 +154,12 @@
     }
     @if ($position == 'bottom') {
       @if ($align == 'start') {
-        transform: translate(-1rem, calc(#{$translate-body}));
+        left: 0;
+        transform: translate(0, calc(#{$translate-body}));
       } @else if ($align == 'end') {
-        transform: translate(calc(-100% + 1rem), calc(#{$translate-body}));
+        right: 0;
+        left: initial;
+        transform: translate(0, calc(#{$translate-body}));
       } @else {
         transform: translate(-50%, calc(#{$translate-body}));
       }
