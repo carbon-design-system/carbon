@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
@@ -15,6 +15,25 @@ import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 
 const { prefix } = settings;
+const DefaultCharCounter = ({ disabled, count, maxLength }) => {
+  const charCounterClasses = classNames(
+    `${prefix}--text-input--character-counter`,
+    {
+      [`${prefix}--text-input--character-counter--disabled`]: disabled,
+    }
+  );
+  return (
+    <span className={charCounterClasses}>
+      <span className={`${prefix}--text-input--character-counter--length`}>
+        {count}
+      </span>
+      /
+      <span className={`${prefix}--text-input--character-counter--maxlength`}>
+        {maxLength}
+      </span>
+    </span>
+  );
+};
 const TextInput = React.forwardRef(function TextInput(
   {
     labelText,
@@ -29,10 +48,14 @@ const TextInput = React.forwardRef(function TextInput(
     invalidText,
     helperText,
     light,
+    charCount,
+    renderCharCounter: CharCounter = DefaultCharCounter,
+    maxLength,
     ...other
   },
   ref
 ) {
+  const [inputVal, setInput] = useState('');
   const errorId = id + '-error-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
@@ -54,6 +77,7 @@ const TextInput = React.forwardRef(function TextInput(
     type,
     ref,
     className: textInputClasses,
+    maxLength: maxLength || null,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -63,22 +87,57 @@ const TextInput = React.forwardRef(function TextInput(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
+  const label = (() => {
+    const labelContent = labelText && (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    );
+    if (labelContent && charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {labelContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={inputVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+    return labelContent;
+  })();
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input
+      {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+      value={inputVal}
+      onInput={e => setInput(e.target.value)}
+    />
   );
-  const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
-  ) : null;
+  const helper = (() => {
+    const helperContent = helperText ? (
+      <div className={helperTextClasses}>{helperText}</div>
+    ) : null;
+    if (!labelText && charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {helperContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={inputVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+
+    return helperContent;
+  })();
 
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
@@ -177,6 +236,16 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify whether the character counter is shown
+   */
+  charCount: PropTypes.bool,
+
+  /**
+   * The maximum allowed input value length
+   */
+  maxLength: PropTypes.number,
 };
 
 TextInput.defaultProps = {
