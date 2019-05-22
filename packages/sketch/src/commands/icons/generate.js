@@ -26,9 +26,6 @@ export function generate() {
   command('commands/icons/generate', () => {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'Icons'));
-
-    page.selected = true;
-
     const sharedStyles = syncColorStyles(document);
     const [sharedStyle] = sharedStyles.filter(
       ({ name }) => name === 'color/black'
@@ -42,14 +39,29 @@ export function generate() {
 
     const icons = normalize(meta);
     const iconNames = Object.keys(icons);
-    const start = 0;
-    const length = iconNames.length;
 
+    // To help with debugging, we have `start` and `end` values here to focus on
+    // specific icon ranges. You can also work on a specific icon by finding
+    // it's index and setting the value of start to the index and end to the
+    // index + 1.
+    //
+    // To find the index, you can use:
+    //   console.log(iconNames.findIndex(name === 'name-to-find')); // 50
+    // And use that value below like:
+    //  const start = 50;
+    //  const end = 51;
+    // This will allow you to focus only on the icon named 'name-to-find'
+    const start = 0;
+    const end = iconNames.length;
+
+    // We keep track of the current X and Y offsets at the top-level, each
+    // iteration of an icon set should reset the X_OFFSET and update the
+    // Y_OFFSET with the maximum size in the icon set.
     let X_OFFSET = 0;
     let Y_OFFSET = 0;
     let maxSize = -Infinity;
 
-    const artboards = iconNames.slice(start, length).flatMap((name, i) => {
+    const artboards = iconNames.slice(start, end).flatMap((name, i) => {
       const sizes = icons[name];
 
       X_OFFSET = 0;
@@ -59,8 +71,14 @@ export function generate() {
       maxSize = -Infinity;
 
       return sizes.map(icon => {
+        // If our icon has an original size, we will need to render it in the
+        // original size and then resize it to the appropriate artboard size
         const size = icon.original || icon.size;
         const descriptor = Object.assign({}, icon.descriptor);
+
+        // We push a transparent rectangle to mirror the "bounding box" found in
+        // icon artboards that is stripped by our build process. Including this
+        // makes sure that our icon renders true to the path data
         descriptor.content.push({
           elem: 'rect',
           attrs: {
@@ -69,6 +87,7 @@ export function generate() {
             fill: 'none',
           },
         });
+
         const layer = createSVGLayer(icon.descriptor);
 
         layer.name = icon.basename;
@@ -105,8 +124,13 @@ export function generate() {
         X_OFFSET = X_OFFSET + icon.size + 8;
 
         const [group] = artboard.layers;
-        // Last layer will be the rectangle we made
+
+        // Last layer will be the transparent rectangle we added above
         const paths = group.layers.slice(0, -1).map(layer => layer.duplicate());
+
+        // We split things out into fillPaths and innerPaths, allowing us to
+        // style them independent of each other in the symbol. Useful for
+        // two-tone icons.
         const { fillPaths = [], innerPaths = [] } = groupByKey(
           paths,
           (path, i) => {
@@ -125,6 +149,9 @@ export function generate() {
           shape.style = sharedStyle.style;
           shape.sharedStyleId = sharedStyle.id;
         } else {
+          // If we have multiple fill paths, we need to consolidate them into a
+          // single Shape so that we can style the icon with one override in the
+          // symbol
           shape = new Shape({
             name: 'Fill',
             frame: new Rectangle(0, 0, icon.size, icon.size),
@@ -186,6 +213,15 @@ function sortBySize(a, b) {
   return b.size - a.size;
 }
 
+/**
+ * Create a layer from an SVG descriptor
+ *
+ * Reference:
+ * https://github.com/airbnb/react-sketchapp/blob/aa3070556c47883974edbc7f78978c421a8199f7/src/jsonUtils/sketchImpl/makeSvgLayer.js#L12
+ *
+ * @param {Object} svg
+ * @return {Layer}
+ */
 function createSVGLayer(svg) {
   const svgString = NSString.stringWithString(toString(svg));
   const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
