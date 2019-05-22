@@ -24,6 +24,11 @@ const fontWeightTable = {
 };
 const expressiveTokens = new Set(['display', 'quotation', 'expressive']);
 
+/**
+ * Sync text shared styles to the given document and return the result
+ * @param {Document} document
+ * @return {Array<SharedStyle>}
+ */
 export function syncTextStyles(document) {
   return Object.keys(styles)
     .filter(token => {
@@ -41,6 +46,11 @@ export function syncTextStyles(document) {
     });
 }
 
+/**
+ * Format the given token to a value for a shared style name
+ * @param {string} token
+ * @return {string}
+ */
 function formatSharedStyleName(token) {
   const parts = formatTokenName(token).split('-');
   if (parts.length === 2) {
@@ -55,6 +65,12 @@ function formatSharedStyleName(token) {
   return `${category}/${name}-${grade}`;
 }
 
+/**
+ * Convert a given token and its style to a format used by Sketch
+ * @param {string} token
+ * @param {Object} style
+ * @return {Object}
+ */
 function convertTypeStyle(token, style) {
   const fontSize = parseFloat(style.fontSize, 10) * 16;
   const fontWeight = fontWeightTable[style.fontWeight];

@@ -7,25 +7,22 @@
 
 import { SharedStyle } from 'sketch/dom';
 
-export function syncSharedStyles(document, stylesToSync) {
-  const sharedStyles = [];
-  for (const {
-    name,
-    style,
-    styleType = SharedStyle.StyleType.Layer,
-  } of stylesToSync) {
-    const sharedStyle = syncSharedStyle(document, name, style, styleType);
-    sharedStyles.push(sharedStyle);
-  }
-  return sharedStyles;
-}
-
+/**
+ * Sync a shared style within a document.
+ * @param {Document} document
+ * @param {string} name
+ * @param {Object} style
+ * @param {StyleType?} styleType
+ * @return {SharedStyle}
+ */
 export function syncSharedStyle(
   document,
   name,
   style,
   styleType = SharedStyle.StyleType.Layer
 ) {
+  // Figure out the type of shared style and try and find if we have already
+  // created a shared style with the given name
   const documentSharedStyles =
     styleType === SharedStyle.StyleType.Layer
       ? document.sharedLayerStyles
@@ -34,6 +31,7 @@ export function syncSharedStyle(
     return sharedStyle.name === name;
   });
 
+  // If none exists, we can create one from scratch
   if (!sharedStyle) {
     return SharedStyle.fromStyle({
       name,
@@ -43,8 +41,12 @@ export function syncSharedStyle(
     });
   }
 
+  // Otherwise, we'll go and update values of the sharedStyle with the given
+  // style if the values are different
   Object.keys(style).forEach(key => {
-    sharedStyle.style[key] = style[key];
+    if (sharedStyle.style[key] !== style[key]) {
+      sharedStyle.style[key] = style[key];
+    }
   });
 
   return sharedStyle;

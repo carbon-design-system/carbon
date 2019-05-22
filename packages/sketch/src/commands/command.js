@@ -7,6 +7,12 @@
 
 import sketch from 'sketch';
 
+/**
+ * Wrap a given command function for consistent UI messages and development
+ * runtime logging.
+ * @param {string} name - the name of the command
+ * @param {Function} fn - the function to call to run the command
+ */
 export function command(name, fn) {
   const start = Date.now();
 

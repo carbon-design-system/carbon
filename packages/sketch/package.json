@@ -1,7 +1,8 @@
 {
   "name": "@carbon/sketch",
+  "description": "Tooling for generating a sketch plugin to bring code to design",
   "private": true,
-  "version": "10.2.0",
+ "version": "10.2.0",
   "license": "Apache-2.0",
   "scripts": {
     "build": "cross-env NODE_ENV=production skpm-build",

@@ -10,6 +10,11 @@ import color from 'color-string';
 import { SharedStyle, Style } from 'sketch/dom';
 import { syncSharedStyle } from '../tools/sharedStyles';
 
+/**
+ * Sync theme color shared styles to the given document and return the result
+ * @param {Document} document
+ * @return {Array<SharedStyle>}
+ */
 export function syncThemeColorStyles(document) {
   const themes = {
     'White theme': white,
@@ -57,6 +62,13 @@ export function syncThemeColorStyles(document) {
   return sharedStyles;
 }
 
+/**
+ * Sync the given color value as a shared style for the document
+ * @param {Document} document
+ * @param {string} name
+ * @param {string} value
+ * @return {SharedStyle}
+ */
 function syncColorStyle(document, name, value) {
   return syncSharedStyle(document, name, {
     fills: [
@@ -70,6 +82,12 @@ function syncColorStyle(document, name, value) {
 
 const keywords = ['ui'];
 
+/**
+ * Transform a formatted token name back to its JavaScript value to look up the
+ * expected value for a token from code
+ * @param {string} token
+ * @return {string}
+ */
 function formatSymbolName(token) {
   const parts = token.split('-');
   let result = '';
