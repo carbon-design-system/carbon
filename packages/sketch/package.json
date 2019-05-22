@@ -4,26 +4,22 @@
   "version": "10.2.0",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "skpm-build",
+    "build": "cross-env NODE_ENV=production skpm-build",
     "clean": "rimraf carbon-elements.sketchplugin",
-    "develop": "skpm-build --watch",
+    "develop": "cross-env NODE_ENV=development skpm-build --watch",
     "skpm:link": "skpm-link"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@carbon/colors": "10.2.0",
+    "@carbon/icon-helpers": "10.2.0",
     "@carbon/icons": "10.2.0",
     "@carbon/themes": "10.2.0",
     "@carbon/type": "10.2.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
     "core-js": "^3.0.1",
-    "react": "^16.8.6",
-    "react-sketchapp": "^3.0.0-beta.9",
-    "react-test-renderer": "^16.8.6",
-    "sketch-constants": "^1.1.0",
-    "skpm": "^1.2.0",
-    "svgpath": "^2.2.2",
-    "uuid": "^3.3.2"
+    "skpm": "^1.2.0"
   },
   "skpm": {
     "name": "Carbon Elements",
@@ -32,6 +28,7 @@
     "assets": []
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "rimraf": "^2.6.3"
   }
 }

@@ -5,16 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import sketch from 'sketch';
 import { Document } from 'sketch/dom';
-import { findOrCreatePage, selectPage } from '../../tools/page';
+import { command } from '../command';
 import { syncTextStyles } from '../../sharedStyles/type';
 
 export function sync() {
-  sketch.UI.message('Hi 👋 We are still working on this! 🚧');
-
-  const document = Document.getSelectedDocument();
-  syncTextStyles(document);
-
-  sketch.UI.message('Done! 🎉');
+  command('commands/type/sync', () => {
+    const document = Document.getSelectedDocument();
+    syncTextStyles(document);
+  });
 }

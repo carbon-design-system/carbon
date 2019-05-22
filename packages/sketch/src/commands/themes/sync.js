@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import sketch from 'sketch';
 import { Document } from 'sketch/dom';
+import { command } from '../command';
 import { syncThemeColorStyles } from '../../sharedStyles/themes';
 
 export function sync() {
-  sketch.UI.message('Hi 👋 We are still working on this! 🚧');
-
-  const document = Document.getSelectedDocument();
-  syncThemeColorStyles(document);
-
-  sketch.UI.message('Done! 🎉');
+  command('commands/themes/sync', () => {
+    const document = Document.getSelectedDocument();
+    syncThemeColorStyles(document);
+  });
 }

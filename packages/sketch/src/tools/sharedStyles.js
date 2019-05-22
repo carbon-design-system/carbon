@@ -9,7 +9,11 @@ import { SharedStyle } from 'sketch/dom';
 
 export function syncSharedStyles(document, stylesToSync) {
   const sharedStyles = [];
-  for (const { name, style, styleType } of stylesToSync) {
+  for (const {
+    name,
+    style,
+    styleType = SharedStyle.StyleType.Layer,
+  } of stylesToSync) {
     const sharedStyle = syncSharedStyle(document, name, style, styleType);
     sharedStyles.push(sharedStyle);
   }
@@ -39,10 +43,9 @@ export function syncSharedStyle(
     });
   }
 
-  sharedStyle.style = {
-    ...sharedStyle.style,
-    ...style,
-  };
+  Object.keys(style).forEach(key => {
+    sharedStyle.style[key] = style[key];
+  });
 
   return sharedStyle;
 }

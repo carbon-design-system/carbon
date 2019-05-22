@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import sketch from 'sketch';
 import { Document, Rectangle, ShapePath, SymbolMaster } from 'sketch/dom';
+import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
+import { groupByKey } from '../../tools/grouping';
 import { syncThemeColorStyles } from '../../sharedStyles/themes';
 
 const ARTBOARD_WIDTH = 40;
@@ -17,31 +18,29 @@ const ARTBOARD_MARGIN_VERTICAL = 8;
 const ARTBOARD_MARGIN_HORIZONTAL = 40;
 
 export function generate() {
-  sketch.UI.message('Hi 👋 We are still working on this! 🚧');
+  command('commands/themes/generate', () => {
+    const document = Document.getSelectedDocument();
+    const page = selectPage(findOrCreatePage(document, 'Themes'));
+    const sharedStyles = syncThemeColorStyles(document);
 
-  const document = Document.getSelectedDocument();
-  const page = selectPage(findOrCreatePage(document, 'Themes'));
-  const sharedStyles = syncThemeColorStyles(document);
+    const tokens = groupByKey(sharedStyles, sharedStyle => {
+      const [category, token] = sharedStyle.name.split('/');
+      return token.trim();
+    });
 
-  const tokens = findBuckets(sharedStyles, sharedStyle => {
-    const [category, token] = sharedStyle.name.split('/');
-    return token.trim();
-  });
+    let X_OFFSET = 0;
+    let Y_OFFSET = 0;
 
-  let X_OFFSET = 0;
-  let Y_OFFSET = 0;
+    for (const token of Object.keys(tokens)) {
+      for (const sharedStyle of tokens[token]) {
+        createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+        X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN_HORIZONTAL;
+      }
 
-  for (const token of Object.keys(tokens)) {
-    for (const sharedStyle of tokens[token]) {
-      createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
-      X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN_HORIZONTAL;
+      X_OFFSET = 0;
+      Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN_VERTICAL;
     }
-
-    X_OFFSET = 0;
-    Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN_VERTICAL;
-  }
-
-  sketch.UI.message('Done! 🎉');
+  });
 }
 
 function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
@@ -61,20 +60,4 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
   });
 
   return artboard;
-}
-
-function findBuckets(collection, sorter) {
-  const result = {};
-
-  for (const element of collection) {
-    const key = sorter(element);
-
-    if (!result[key]) {
-      result[key] = [];
-    }
-
-    result[key].push(element);
-  }
-
-  return result;
 }

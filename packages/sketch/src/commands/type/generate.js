@@ -7,32 +7,33 @@
 
 import sketch from 'sketch';
 import { Document, Rectangle, Text } from 'sketch/dom';
+import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 import { syncTextStyles } from '../../sharedStyles/type';
 
+const TEXT_LAYER_WIDTH = 500;
+const TEXT_LAYER_HEIGHT = 75;
 const TEXT_MARGIN = 16;
 
 export function generate() {
-  sketch.UI.message('Hi 👋 We are still working on this! 🚧');
+  command('commands/type/generate', () => {
+    const document = Document.getSelectedDocument();
+    const page = selectPage(findOrCreatePage(document, 'Type'));
+    const sharedStyles = syncTextStyles(document);
 
-  const document = Document.getSelectedDocument();
-  const page = selectPage(findOrCreatePage(document, 'Type'));
-  const sharedStyles = syncTextStyles(document);
+    let Y_OFFSET = 0;
 
-  let Y_OFFSET = 0;
+    for (const sharedStyle of sharedStyles) {
+      const layer = new Text({
+        name: sharedStyle.name,
+        frame: new Rectangle(0, Y_OFFSET, TEXT_LAYER_WIDTH, TEXT_LAYER_HEIGHT),
+        style: sharedStyle.style,
+        sharedStyleId: sharedStyle.id,
+        parent: page,
+        text: sharedStyle.name,
+      });
 
-  for (const sharedStyle of sharedStyles) {
-    const layer = new Text({
-      name: sharedStyle.name,
-      frame: new Rectangle(0, Y_OFFSET, 500, 75),
-      style: sharedStyle.style,
-      sharedStyleId: sharedStyle.id,
-      parent: page,
-      text: sharedStyle.name,
-    });
-
-    Y_OFFSET = Y_OFFSET + 75 + 16;
-  }
-
-  sketch.UI.message('Done! 🎉');
+      Y_OFFSET = Y_OFFSET + TEXT_LAYER_HEIGHT + TEXT_MARGIN;
+    }
+  });
 }

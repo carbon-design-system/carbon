@@ -5,80 +5,70 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import sketch from 'sketch';
 import { Document, Rectangle, ShapePath, SymbolMaster } from 'sketch/dom';
+import { command } from '../command';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { findOrCreatePage, selectPage } from '../../tools/page';
+import { groupByKey } from '../../tools/grouping';
 
 const ARTBOARD_WIDTH = 40;
 const ARTBOARD_HEIGHT = 40;
 const ARTBOARD_MARGIN = 8;
 
 export function generate() {
-  sketch.UI.message('Hi 👋 We are still working on this! 🚧');
-
-  const document = Document.getSelectedDocument();
-  const page = selectPage(findOrCreatePage(document, 'Color'));
-  const sharedStyles = syncColorStyles(document);
-
-  const buckets = {
-    blackAndWhite: 'blackAndWhite',
-    colors: 'colors',
-    support: 'support',
-  };
-  const { blackAndWhite, colors, support } = split(
-    sharedStyles,
-    Object.keys(buckets),
-    sharedStyle => {
-      const { name } = sharedStyle;
-      const [category, swatch, grade] = name.split('/');
-      switch (swatch) {
-        case 'black':
-        case 'white':
-          return buckets.blackAndWhite;
-        case 'yellow':
-        case 'orange':
-          return buckets.support;
-        default:
-          return buckets.colors;
+  command('commands/colors/generate', () => {
+    const document = Document.getSelectedDocument();
+    const page = selectPage(findOrCreatePage(document, 'Color'));
+    const sharedStyles = syncColorStyles(document);
+    const { blackAndWhite, colors, support } = groupByKey(
+      sharedStyles,
+      sharedStyle => {
+        const { name } = sharedStyle;
+        const [category, swatch, grade] = name.split('/');
+        switch (swatch) {
+          case 'black':
+          case 'white':
+            return 'blackAndWhite';
+          case 'yellow':
+          case 'orange':
+            return 'support';
+          default:
+            return 'colors';
+        }
       }
-    }
-  );
+    );
 
-  let X_OFFSET = 0;
-  let Y_OFFSET = 0;
+    let X_OFFSET = 0;
+    let Y_OFFSET = 0;
 
-  for (const sharedStyle of blackAndWhite) {
-    createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
-
-    X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
-  }
-
-  X_OFFSET = 0;
-  Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
-
-  const swatches = findBuckets(colors, sharedStyle => {
-    const [category, swatch, grade] = sharedStyle.name.split('/');
-    return swatch;
-  });
-
-  for (const swatch of Object.keys(swatches)) {
-    for (const sharedStyle of swatches[swatch]) {
+    for (const sharedStyle of blackAndWhite) {
       createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
       X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
     }
 
     X_OFFSET = 0;
     Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
-  }
 
-  for (const sharedStyle of support) {
-    createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+    const swatches = groupByKey(colors, sharedStyle => {
+      const [category, swatch, grade] = sharedStyle.name.split('/');
+      return swatch;
+    });
 
-    X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
-  }
+    for (const swatch of Object.keys(swatches)) {
+      for (const sharedStyle of swatches[swatch]) {
+        createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+        X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
+      }
 
-  sketch.UI.message('Done! 🎉');
+      X_OFFSET = 0;
+      Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
+    }
+
+    for (const sharedStyle of support) {
+      createSymbolFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+      X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
+    }
+  });
 }
 
 function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
@@ -101,41 +91,4 @@ function createSymbolFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
   });
 
   return artboard;
-}
-
-function split(collection, buckets, sorter) {
-  const result = {};
-
-  for (const bucket of buckets) {
-    result[bucket] = [];
-  }
-
-  for (const element of collection) {
-    const bucket = sorter(element);
-    if (!bucket) {
-      throw new Error(
-        'Expected element to be sorted into a bucket, instead received: ' +
-          bucket
-      );
-    }
-    result[bucket].push(element);
-  }
-
-  return result;
-}
-
-function findBuckets(collection, sorter) {
-  const result = {};
-
-  for (const element of collection) {
-    const key = sorter(element);
-
-    if (!result[key]) {
-      result[key] = [];
-    }
-
-    result[key].push(element);
-  }
-
-  return result;
 }

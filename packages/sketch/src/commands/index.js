@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@babel/polyfill';
+
 // We export all commands through one entrypoint to prevent build errors
 // triggered by having separate entrypoints. Most notably we would encounter
 // parse errors because the bundlers were being generated incorrectly during
