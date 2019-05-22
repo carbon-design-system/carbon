@@ -7,6 +7,9 @@
 
 @import '../../globals/scss/colors';
 
+//----------------------------------------------------------------------------
+// Header tokens
+//----------------------------------------------------------------------------
 /// Header bar background
 /// @type Color
 /// @access private
@@ -127,6 +130,9 @@ $shell-header-text-03: $carbon--gray-50; //TODO waiting for updated color
 /// @group ui-shell
 $shell-header-icon-selected: $carbon--blue-60; //TODO waiting for updated color
 
+//----------------------------------------------------------------------------
+// Side nav tokens
+//----------------------------------------------------------------------------
 /// Side-nav panel background
 /// @type Color
 /// @access private
@@ -135,7 +141,7 @@ $shell-side-nav-bg-01: $carbon--gray-90; //TODO waiting for updated color
 
 /// Selected category background
 /// Select L2 flatted item background
-/// Item hover background
+/// Item active background
 /// Footer-bar background
 /// @type Color
 /// @access private
@@ -147,6 +153,18 @@ $shell-side-nav-bg-02: $carbon--gray-80; //TODO waiting for updated color
 /// @access private
 /// @group ui-shell
 $shell-side-nav-bg-03: $ibm-color__gray-70; //TODO waiting for updated color
+
+/// Side nav item hover background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-04: #353535; //TODO needs color var gray-90-hover
+
+/// Side nav menu item hover background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-05: #4c4c4c; //TODO needs color var gray-80-hover
 
 /// Primary text in side-nav
 /// L2 Flatten item text
@@ -176,6 +194,9 @@ $shell-side-nav-icon-01: $ibm-color__gray-10;
 /// @group ui-shell
 $shell-side-nav-accent-01: $ibm-color__blue-60;
 
+//----------------------------------------------------------------------------
+// Other
+//----------------------------------------------------------------------------
 /// Temporary token
 /// @type Color
 /// @access private

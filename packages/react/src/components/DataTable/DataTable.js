@@ -21,6 +21,8 @@ const getInstanceId = setupGetInstanceId();
 const translationKeys = {
   expandRow: 'carbon.table.row.expand',
   collapseRow: 'carbon.table.row.collapse',
+  expandAll: 'carbon.table.all.expand',
+  collapseAll: 'carbon.table.all.collapse',
   selectAll: 'carbon.table.all.select',
   unselectAll: 'carbon.table.all.unselect',
   selectRow: 'carbon.table.row.select',
@@ -28,6 +30,8 @@ const translationKeys = {
 };
 
 const defaultTranslations = {
+  [translationKeys.expandAll]: 'Expand all rows',
+  [translationKeys.collapseAll]: 'Collapse all rows',
   [translationKeys.expandRow]: 'Expand current row',
   [translationKeys.collapseRow]: 'Collapse current row',
   [translationKeys.selectAll]: 'Select all rows',
@@ -118,7 +122,10 @@ export default class DataTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = getDerivedStateFromProps(props, {});
+    this.state = {
+      ...getDerivedStateFromProps(props, {}),
+      isExpandedAll: false, // Start with collapsed state, treat `undefined` as neutral state
+    };
     this.instanceId = getInstanceId();
   }
 
@@ -182,6 +189,36 @@ export default class DataTable extends React.Component {
   };
 
   /**
+   * Get the props associated with the given expand header.
+   *
+   * @param {Object} config
+   * @param {Function} config.onClick a custom click handler for the expand header
+   * @returns {Object}
+   */
+  getExpandHeaderProps = ({ onClick, ...rest } = {}) => {
+    const { translateWithId: t } = this.props;
+    const { isExpandedAll, rowIds, rowsById } = this.state;
+    const isExpanded =
+      isExpandedAll || rowIds.every(id => rowsById[id].isExpanded);
+    const translationKey = !isExpanded
+      ? translationKeys.collapseAll
+      : translationKeys.expandAll;
+    return {
+      ...rest,
+      ariaLabel: t(translationKey),
+      isExpanded,
+      // Compose the event handlers so we don't overwrite a consumer's `onClick`
+      // handler
+      onExpand: composeEventHandlers([
+        this.handleOnExpandAll,
+        onClick
+          ? this.handleOnExpandHeaderClick(onClick, { isExpanded })
+          : null,
+      ]),
+    };
+  };
+
+  /**
    * Decorate consumer's `onClick` event handler with sort parameters
    *
    * @param {Function} onClick
@@ -190,6 +227,17 @@ export default class DataTable extends React.Component {
    */
   handleOnHeaderClick = (onClick, sortParams) => {
     return e => onClick(e, sortParams);
+  };
+
+  /**
+   * Decorate consumer's `onClick` event handler with sort parameters
+   *
+   * @param {Function} onClick
+   * @param {Object} expandParams
+   * @returns {Function}
+   */
+  handleOnExpandHeaderClick = (onClick, expandParams) => {
+    return e => onClick(e, expandParams);
   };
 
   /**
@@ -432,7 +480,9 @@ export default class DataTable extends React.Component {
   handleOnExpandRow = rowId => () => {
     this.setState(state => {
       const row = state.rowsById[rowId];
+      const { isExpandedAll } = state;
       return {
+        isExpandedAll: row.isExpanded ? false : isExpandedAll,
         rowsById: {
           ...state.rowsById,
           [rowId]: {
@@ -440,6 +490,28 @@ export default class DataTable extends React.Component {
             isExpanded: !row.isExpanded,
           },
         },
+      };
+    });
+  };
+
+  /**
+   * Handler for changing the expansion state of all rows.
+   */
+  handleOnExpandAll = () => {
+    this.setState(state => {
+      const { rowIds, isExpandedAll } = state;
+      return {
+        isExpandedAll: !isExpandedAll,
+        rowsById: rowIds.reduce(
+          (acc, id) => ({
+            ...acc,
+            [id]: {
+              ...state.rowsById[id],
+              isExpanded: !isExpandedAll,
+            },
+          }),
+          {}
+        ),
       };
     });
   };
@@ -488,6 +560,7 @@ export default class DataTable extends React.Component {
 
       // Prop accessors/getters
       getHeaderProps: this.getHeaderProps,
+      getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
@@ -501,7 +574,7 @@ export default class DataTable extends React.Component {
       selectAll: this.handleSelectAll,
       selectRow: rowId => this.handleOnSelectRow(rowId)(),
       expandRow: rowId => this.handleOnExpandRow(rowId)(),
-
+      expandAll: this.handleOnExpandAll,
       radio: this.props.radio,
     };
 
