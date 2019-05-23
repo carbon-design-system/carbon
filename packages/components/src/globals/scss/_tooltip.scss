@@ -7,18 +7,13 @@
 
 @import 'layer';
 
-// Tooltip Icon
-// Icon CSS only tooltip
+// Tooltip
+// Definition and Icon CSS only tooltip
 /// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
 /// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
-/// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
 /// @access public
 /// @group tooltip
-@mixin tooltip--trigger(
-  $tooltip-type: 'icon',
-  $position: 'bottom',
-  $align: 'center'
-) {
+@mixin tooltip--trigger($tooltip-type: 'icon', $position: 'bottom') {
   @include reset;
   position: relative;
   display: inline-flex;
@@ -78,7 +73,20 @@
       opacity: 1;
     }
   }
+}
 
+// Tooltip
+// Definition and Icon CSS only tooltip
+/// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
+/// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
+/// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
+/// @access public
+/// @group tooltip
+@mixin tooltip--placement(
+  $tooltip-type: 'icon',
+  $position: 'bottom',
+  $align: 'center'
+) {
   // position and alignment
   $caret-spacing: if(
     $tooltip-type == 'definition',
