@@ -8,7 +8,7 @@ const babelOptions = {
       '@babel/preset-env',
       {
         targets: {
-          browsers: ['last 1 version', 'ie >= 11', 'Firefox ESR'],
+          browsers: ['extends browserslist-config-carbon'],
         },
       },
     ],

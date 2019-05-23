@@ -3,6 +3,7 @@ import flattenOptions from '../utils/flatten-options';
 import DataTable from '../../src/components/data-table/data-table';
 import HTML from '../../html/data-table/data-table.html';
 import ExpandableHTML from '../../html/data-table/data-table--expandable.html';
+import ExpandableAllHTML from '../../html/data-table/data-table--expandable-with-expand-all.html';
 
 describe('DataTable', function() {
   describe('Constructor', function() {
@@ -54,6 +55,8 @@ describe('DataTable', function() {
         classTableSelected: `bx--data-table--selected`,
         eventBeforeExpand: `data-table-beforetoggleexpand`,
         eventAfterExpand: `data-table-aftertoggleexpand`,
+        eventBeforeExpandAll: `data-table-beforetoggleexpandall`,
+        eventAfterExpandAll: `data-table-aftertoggleexpandall`,
         eventBeforeSort: `data-table-beforetogglesort`,
         eventAfterSort: `data-table-aftertogglesort`,
         eventTrigger: '[data-event]',
@@ -136,6 +139,64 @@ describe('DataTable', function() {
       spyOn(table, '_rowExpandToggle');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(table._rowExpandToggle).toHaveBeenCalled();
+    });
+
+    afterEach(function() {
+      events.reset();
+      table.release();
+      document.body.removeChild(container);
+    });
+  });
+
+  describe('Batch row Expansion', function() {
+    const events = new EventManager();
+    let element;
+    let table;
+    let container;
+
+    beforeEach(function() {
+      container = document.createElement('div');
+      container.innerHTML = ExpandableAllHTML;
+      document.body.appendChild(container);
+      element = document.querySelector(`[data-table]`);
+      table = new DataTable(element);
+    });
+
+    it('Should toggle the rows on click', function() {
+      const headerExpand = element.querySelector('[data-event="expandAll"]');
+      headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      const expandedStateAfterExpand = Array.prototype.map.call(
+        element.querySelectorAll('[data-child-row]'),
+        elem =>
+          elem.previousElementSibling.classList.contains(`bx--expandable-row`)
+      );
+      expect(expandedStateAfterExpand).toEqual([true, true]);
+      headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      const expandedStateAfterCollapse = Array.prototype.map.call(
+        element.querySelectorAll('[data-child-row]'),
+        elem =>
+          elem.previousElementSibling.classList.contains(`bx--expandable-row`)
+      );
+      expect(expandedStateAfterCollapse).toEqual([false, false]);
+    });
+
+    it('Should emit an event on row expansion click', function() {
+      const headerExpand = element.querySelector('[data-event="expandAll"]');
+      const spyToggleRowExpandEvent = jasmine.createSpy();
+      events.on(
+        element.ownerDocument.body,
+        `data-table-aftertoggleexpandall`,
+        spyToggleRowExpandEvent
+      );
+      headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(spyToggleRowExpandEvent).toHaveBeenCalled();
+    });
+
+    it('The event should trigger the function', function() {
+      const headerExpand = element.querySelector('[data-event="expandAll"]');
+      spyOn(table, '_rowExpandToggleAll');
+      headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(table._rowExpandToggleAll).toHaveBeenCalled();
     });
 
     afterEach(function() {
