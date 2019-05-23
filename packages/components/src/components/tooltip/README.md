@@ -158,10 +158,10 @@ interactive tooltip can be repetitive when it’s shown several times on a page.
 Definition tooltip does not use any JavaScript. If there are actions a user can
 take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
-| Selector                           | Description                                           |
-| ---------------------------------- | ----------------------------------------------------- |
-| `.bx--tooltip--definition__top`    | A simple tooltip that is displayed above the trigger. |
-| `.bx--tooltip--definition__bottom` | A simple tooltip that is displayed below the trigger. |
+| Selector               | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| `.bx--tooltip--top`    | A simple tooltip that is displayed above the trigger. |
+| `.bx--tooltip--bottom` | A simple tooltip that is displayed below the trigger. |
 
 ### Icon tooltip
 
