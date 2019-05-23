@@ -182,6 +182,7 @@
     "serve-static": "^1.13.0",
     "style-loader": "^0.20.0",
     "terser": "^3.14.0",
+    "terser-webpack-plugin": "^1.2.0",
     "through2": "^3.0.0",
     "vinyl-named": "^1.1.0",
     "webpack": "^4.23.1",
