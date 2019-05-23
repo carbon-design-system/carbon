@@ -120,8 +120,8 @@
   }
 
   .#{$prefix}--side-nav--collapsed {
-    width: mini-units(26);
-    transform: translateX(mini-units(-26));
+    width: mini-units(32);
+    transform: translateX(mini-units(-32));
   }
 
   //----------------------------------------------------------------------------
@@ -316,10 +316,15 @@
     color: $ibm-color__gray-100;
   }
 
-  //----------------------------------------------------------------------------
-  // Side-nav > Navigation > {Menu,Submenu}
-  //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
+  <<<<<<< head ======= .#{$prefix}--side-nav__item--active {
+    background-color: $ibm-color__gray-20;
+  }
+
+  >>>>>>>fix(ui-shell): fix vanilla fixed side nav example
+    //----------------------------------------------------------------------------
+    // Side-nav > Navigation > {Menu,Submenu}
+    //----------------------------------------------------------------------------
+    .#{$prefix}--side-nav__submenu[aria-haspopup= 'true' ] {
     @include button-reset($width: true);
     @include type-style('heading-01');
     @include focus-outline('reset');
