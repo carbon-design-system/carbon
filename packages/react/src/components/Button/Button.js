@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
+import warning from 'warning';
 
 const { prefix } = settings;
 
@@ -43,6 +44,13 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--tertiary`]: kind === 'tertiary',
     [`${prefix}--btn--disabled`]: disabled,
   });
+
+  if (size) {
+    warning(
+      false,
+      `\nButton property "size" deprecated in favor of "buttonSize". \nInstead of using the "size" property on the Button, set the "buttonSize" property to "small".`
+    );
+  }
 
   const commonProps = {
     tabIndex,
