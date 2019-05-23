@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import { Children } from 'react';
 import createChainableTypeChecker from './tools/createChainableTypeChecker';
 import getDisplayName from './tools/getDisplayName';
@@ -22,14 +21,13 @@ const childrenOfType = expectedChildType => {
     // Support both React elements and components by using `type` if it exists
     expectedChildType.type || expectedChildType
   );
-  const expectedChildElementType = React.createElement(expectedChildType).type;
   const validate = (props, propName, componentName) => {
     Children.forEach(props[propName], child => {
       const childDisplayName = getDisplayName(child.type);
       if (
         child.type !== expectedChildType.type &&
         child.type !== expectedChildType &&
-        child.type !== expectedChildElementType
+        childDisplayName !== expectedDisplayName
       ) {
         throw new Error(
           `Invalid prop \`children\` of type \`${childDisplayName}\` ` +
