@@ -239,7 +239,7 @@
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:hover {
-    background-color: $shell-header-bg-04;
+    background-color: $carbon--gray-80;
   }
 
   .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
