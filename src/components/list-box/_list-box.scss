@@ -92,6 +92,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    width: auto;
+    box-shadow: none;
     padding: 0 0 0 rem(10px);
   }
 
@@ -110,10 +112,13 @@ $list-box-menu-width: rem(300px);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'],
   .#{$prefix}--list-box.#{$prefix}--list-box--inline > .#{$prefix}--list-box__field:focus {
-    outline: none;
     box-shadow: none;
+    outline: 1px solid $brand-01;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true']:focus {
+    outline: none;
   }
 
   // The field we use for input, showing selection, etc.
