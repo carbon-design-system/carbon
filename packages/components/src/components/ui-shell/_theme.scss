@@ -16,7 +16,7 @@
 /// @group ui-shell
 $shell-header-bg-01: $carbon--gray-100;
 
-/// Header menu trigger hover
+/// Header menu trigger hover, Header nav link hover
 /// @type Color
 /// @access private
 /// @group ui-shell
@@ -28,17 +28,17 @@ $shell-header-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
 /// @group ui-shell
 $shell-header-bg-03: $carbon--gray-80;
 
-/// Header nav link hover
+/// Header submenu link hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-04: #2c2c2c; //TODO needs color var gray-100-hover
+$shell-header-bg-04: #353535; //TODO needs color var gray-90-hover
 
 /// Header nav link active and focus background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-05: $carbon--gray-80;
+$shell-header-bg-05: $carbon--gray-70;
 
 /// Header nav link submenu
 /// @type Color
