@@ -136,6 +136,26 @@ $support-03: map-get($carbon--theme, 'support-03') !default;
 /// @access public
 /// @group @carbon/themes
 $support-04: map-get($carbon--theme, 'support-04') !default;
+/// Error on high contrast backgrounds
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-support-01: map-get($carbon--theme, 'inverse-support-01') !default;
+/// Success on high contrast backgrounds
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-support-02: map-get($carbon--theme, 'inverse-support-02') !default;
+/// Warning on high contrast backgrounds
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-support-03: map-get($carbon--theme, 'inverse-support-03') !default;
+/// Information on high contrast backgrounds
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-support-04: map-get($carbon--theme, 'inverse-support-04') !default;
 /// Background overlay
 /// @type Color
 /// @access public
