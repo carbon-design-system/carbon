@@ -73,6 +73,9 @@ describe('ES modules', () => {
       onwarn: (warning, handle) => {
         if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
       },
+      treeshake: {
+        annotations: false,
+      },
     });
     lodashOutput = (await lodashBundle.generate({ format: 'iife' })).output;
   });
@@ -101,6 +104,9 @@ describe('ES modules', () => {
       ],
       onwarn: (warning, handle) => {
         if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+      },
+      treeshake: {
+        annotations: false,
       },
     });
     const { output } = await bundle.generate({ format: 'iife' });
