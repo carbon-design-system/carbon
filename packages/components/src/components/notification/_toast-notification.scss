@@ -28,7 +28,7 @@
     width: rem(288px);
     height: auto;
     padding-left: $carbon--spacing-05;
-    color: $text-01;
+    color: $inverse-01;
     margin-top: $carbon--spacing-03;
     margin-bottom: $carbon--spacing-03;
     margin-right: $carbon--spacing-05;
@@ -45,28 +45,28 @@
 
   .#{$prefix}--toast-notification--error {
     @include notification--experimental(
-      $support-01,
+      $inverse-support-01,
       $notification-error-background-color
     );
   }
 
   .#{$prefix}--toast-notification--success {
     @include notification--experimental(
-      $support-02,
+      $inverse-support-02,
       $notification-success-background-color
     );
   }
 
   .#{$prefix}--toast-notification--info {
     @include notification--experimental(
-      $support-04,
+      $inverse-support-04,
       $notification-info-background-color
     );
   }
 
   .#{$prefix}--toast-notification--warning {
     @include notification--experimental(
-      $support-03,
+      $inverse-support-03,
       $notification-warning-background-color
     );
   }
@@ -108,7 +108,7 @@
     .#{$prefix}--toast-notification__close-icon {
       height: 1rem;
       width: 1rem;
-      fill: $ui-05;
+      fill: $inverse-01;
     }
   }
 
@@ -123,7 +123,7 @@
   .#{$prefix}--toast-notification__subtitle {
     @include type-style('body-short-01');
 
-    color: $text-01;
+    color: $inverse-01;
     margin-top: 0;
     margin-bottom: $carbon--spacing-06;
     word-break: break-word;
@@ -132,7 +132,7 @@
   .#{$prefix}--toast-notification__caption {
     @include type-style('body-short-01');
 
-    color: $text-01;
+    color: $inverse-01;
     margin-bottom: $carbon--spacing-05;
   }
 }

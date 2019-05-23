@@ -241,26 +241,26 @@
   /// @type Color
   /// @access public
   /// @group notification
-  $notification-info-background-color: $ibm-color__blue-10 !default !global;
+  /// @deprecated Global theme token will be used directly in next major release.
+  $notification-info-background-color: $inverse-02 !default !global;
 
   /// @type Color
   /// @access public
   /// @group notification
-  $notification-error-background-color: $ibm-color__red-10 !default !global;
+  /// @deprecated Global theme token will be used directly in next major release.
+  $notification-error-background-color: $inverse-02 !default !global;
 
   /// @type Color
   /// @access public
   /// @group notification
-  $notification-warning-background-color: mix(
-    $ibm-color__yellow-20,
-    $ibm-color__white-0,
-    15%
-  ) !default !global;
+  /// @deprecated Global theme token will be used directly in next major release.
+  $notification-warning-background-color: $inverse-02 !default !global;
 
   /// @type Color
   /// @access public
   /// @group notification
-  $notification-success-background-color: $ibm-color__green-10 !default !global;
+  /// @deprecated Global theme token will be used directly in next major release.
+  $notification-success-background-color: $inverse-02 !default !global;
 
   // Progress Indicator
 
