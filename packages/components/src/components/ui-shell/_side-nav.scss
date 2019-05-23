@@ -111,12 +111,12 @@
   }
 
   .#{$prefix}--side-nav--fixed {
-    width: mini-units(26);
+    width: mini-units(32);
   }
 
   .#{$prefix}--side-nav--collapsed {
-    width: mini-units(26);
-    transform: translateX(mini-units(-26));
+    width: mini-units(32);
+    transform: translateX(mini-units(-32));
   }
 
   //----------------------------------------------------------------------------
@@ -235,7 +235,7 @@
   .#{$prefix}--side-nav__footer {
     flex: 0 0 rem(48px);
     width: 100%;
-    background-color: $shell-side-nav-bg-02;
+    background-color: $shell-side-nav-bg-01;
   }
 
   .#{$prefix}--side-nav__toggle {
@@ -248,6 +248,10 @@
 
   .#{$prefix}--side-nav__toggle:focus {
     @include focus-outline('outline');
+  }
+
+  .#{$prefix}--side-nav__toggle {
+    padding-left: mini-units(2);
   }
 
   //----------------------------------------------------------------------------
@@ -308,7 +312,7 @@
   }
 
   .#{$prefix}--side-nav__item--active {
-    background-color: $shell-side-nav-bg-02;
+    background-color: $ibm-color__gray-20;
   }
 
   //----------------------------------------------------------------------------
@@ -386,7 +390,7 @@
     a.#{$prefix}--side-nav__link[aria-current='page'] {
     background-color: $ibm-color__gray-20;
 
-    & > span {
+    > span {
       color: $ibm-color__gray-100;
     }
   }
