@@ -49,15 +49,15 @@
     @include layer('overlay');
     min-width: rem(24px);
     max-width: rem(208px);
-    height: rem(24px);
+    height: auto;
     margin-left: 50%;
-    padding: 0 1rem;
+    padding: 0.125rem 1rem;
     border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
     content: attr(aria-label);
+    text-align: left;
     transform: translateX(-50%);
-    white-space: nowrap;
     pointer-events: none;
     background-color: $inverse-02;
   }

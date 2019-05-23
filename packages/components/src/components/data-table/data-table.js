@@ -249,19 +249,43 @@ class DataTable extends mixin(
     }
   };
 
-  _rowExpandToggle = ({ element, initialEvt }) => {
-    const parent = eventMatches(initialEvt, this.options.eventParentContainer);
+  _rowExpandToggle = ({ element, forceExpand }) => {
+    const parent = element.closest(this.options.eventParentContainer);
+    // NOTE: `data-previous-value` keeps UI state before this method makes change in style
+    // eslint-disable-next-line eqeqeq
+    const shouldExpand =
+      forceExpand != null
+        ? forceExpand
+        : element.dataset.previousValue === undefined ||
+          element.dataset.previousValue === 'expanded';
 
-    if (
-      element.dataset.previousValue === undefined ||
-      element.dataset.previousValue === 'expanded'
-    ) {
+    if (shouldExpand) {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
     } else {
       parent.classList.remove(this.options.classExpandableRow);
       element.dataset.previousValue = 'expanded';
+      const expandHeader = this.element.querySelector(
+        this.options.selectorExpandHeader
+      );
+      if (expandHeader) {
+        expandHeader.dataset.previousValue = 'expanded';
+      }
     }
+  };
+
+  _rowExpandToggleAll = ({ element }) => {
+    // NOTE: `data-previous-value` keeps UI state before this method makes change in style
+    const shouldExpand =
+      element.dataset.previousValue === undefined ||
+      element.dataset.previousValue === 'expanded';
+    element.dataset.previousValue = shouldExpand ? 'collapsed' : 'expanded';
+    const expandCells = this.element.querySelectorAll(
+      this.options.selectorExpandCells
+    );
+    Array.prototype.forEach.call(expandCells, cell => {
+      this._rowExpandToggle({ element: cell, forceExpand: shouldExpand });
+    });
   };
 
   _expandableHoverToggle = element => {
@@ -362,6 +386,7 @@ class DataTable extends mixin(
   // UI Events
   static eventHandlers /* #__PURE_CLASS_PROPERTY__ */ = {
     expand: '_rowExpandToggle',
+    expandAll: '_rowExpandToggleAll',
     sort: '_sortToggle',
     select: '_selectToggle',
     'select-all': '_selectAllToggle',
@@ -377,6 +402,7 @@ class DataTable extends mixin(
       selectorCount: '[data-items-selected]',
       selectorActionCancel: `.${prefix}--batch-summary__cancel`,
       selectorCheckbox: `.${prefix}--checkbox`,
+      selectorExpandHeader: `th.${prefix}--table-expand`,
       selectorExpandCells: `td.${prefix}--table-expand`,
       selectorExpandableRows: `.${prefix}--expandable-row`,
       selectorParentRows: `.${prefix}--parent-row`,
@@ -397,6 +423,8 @@ class DataTable extends mixin(
       classTableSelected: `${prefix}--data-table--selected`,
       eventBeforeExpand: `data-table-beforetoggleexpand`,
       eventAfterExpand: `data-table-aftertoggleexpand`,
+      eventBeforeExpandAll: `data-table-beforetoggleexpandall`,
+      eventAfterExpandAll: `data-table-aftertoggleexpandall`,
       eventBeforeSort: `data-table-beforetogglesort`,
       eventAfterSort: `data-table-aftertogglesort`,
       eventTrigger: '[data-event]',

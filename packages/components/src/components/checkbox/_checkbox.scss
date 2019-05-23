@@ -144,7 +144,7 @@
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
     // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
-    border-color: $interactive-01;
+    border-color: $focus;
     border-width: 3px;
     width: rem(20px);
     height: rem(20px);

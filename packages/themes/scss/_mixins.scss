@@ -55,6 +55,10 @@
   $support-02: map-get($theme, 'support-02') !global;
   $support-03: map-get($theme, 'support-03') !global;
   $support-04: map-get($theme, 'support-04') !global;
+  $inverse-support-01: map-get($theme, 'inverse-support-01') !global;
+  $inverse-support-02: map-get($theme, 'inverse-support-02') !global;
+  $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
+  $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
