@@ -124,17 +124,9 @@ class Toggle extends React.Component {
           />
 
           <label className={`${prefix}--toggle__label`} htmlFor={id}>
-            <span
-              className={`${prefix}--toggle__text--left`}
-              aria-hidden="true">
-              {labelA}
-            </span>
+            <span className={`${prefix}--toggle__text--left`}>{labelA}</span>
             <span className={`${prefix}--toggle__appearance`} />
-            <span
-              className={`${prefix}--toggle__text--right`}
-              aria-hidden="true">
-              {labelB}
-            </span>
+            <span className={`${prefix}--toggle__text--right`}>{labelB}</span>
           </label>
         </div>
       </>
