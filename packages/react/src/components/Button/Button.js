@@ -48,7 +48,7 @@ const Button = React.forwardRef(function Button(
   if (size) {
     warning(
       false,
-      `\nButton property "size" deprecated in favor of "buttonSize". \nInstead of using the "size" property on the Button, set the "buttonSize" property to "small".`
+      `\nButton property "small" deprecated in favor of "size". \nInstead of using the "small" property on the Button, set the "size" property to "small".`
     );
   }
 
