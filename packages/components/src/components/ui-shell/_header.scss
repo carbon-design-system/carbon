@@ -65,7 +65,7 @@
   }
 
   .#{$prefix}--header__action:hover {
-    background-color: $shell-header-bg-04;
+    background-color: $shell-header-bg-02;
   }
 
   .#{$prefix}--header__action--active,
@@ -175,13 +175,13 @@
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:hover {
-    background-color: $shell-header-bg-04;
+    background-color: $shell-header-bg-02;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item[role='menuitem']:active {
-    background-color: $shell-header-bg-05;
+    background-color: $shell-header-bg-03;
     color: $shell-header-text-01;
   }
 
