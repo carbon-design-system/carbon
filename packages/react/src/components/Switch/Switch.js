@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { match, key } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -32,8 +33,11 @@ const Switch = props => {
   const handleKeyDown = e => {
     const key = e.key || e.which;
 
-    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
-      onKeyDown({ index, name, text });
+    if (match(key, 'ArrowRight')) {
+      onKeyDown({ index, name, text, key });
+    }
+    if (match(key, 'ArrowLeft')) {
+      onKeyDown({ index, name, text, key });
     }
   };
 
@@ -48,7 +52,12 @@ const Switch = props => {
   };
 
   return (
-    <button {...other} {...commonProps}>
+    <button
+      role="tab"
+      tabIndex={selected ? '0' : '-1'}
+      aria-selected={selected}
+      {...other}
+      {...commonProps}>
       <span className={`${prefix}--content-switcher__label`}>{text}</span>
     </button>
   );
