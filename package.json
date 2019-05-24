@@ -32,6 +32,9 @@
   "engines": {
     "node": ">=6.x"
   },
+  "publishConfig": {
+    "tag": "9.x"
+  },
   "dependencies": {
     "carbon-icons": "^7.0.7",
     "flatpickr": "4.5.7",
