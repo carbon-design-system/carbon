@@ -181,7 +181,7 @@ storiesOf('Buttons', module)
         &nbsp;
         <ButtonSkeleton href="#" />
         &nbsp;
-        <ButtonSkeleton small />
+        <ButtonSkeleton size="small" />
       </div>
     ),
     {

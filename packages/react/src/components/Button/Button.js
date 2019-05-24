@@ -45,7 +45,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--disabled`]: disabled,
   });
 
-  if (size) {
+  if (__DEV__ && small) {
     warning(
       false,
       `\nButton property "small" deprecated in favor of "size". \nInstead of using the "small" property on the Button, set the "size" property to "small".`
