@@ -42,7 +42,16 @@ export function syncTextStyles(document) {
     .map(token => {
       const name = formatSharedStyleName(token);
       const style = convertTypeStyle(token, styles[token]);
-      return syncSharedStyle(document, name, style, SharedStyle.StyleType.Text);
+      const sharedTextStyle = syncSharedStyle(
+        document,
+        name,
+        style,
+        SharedStyle.StyleType.Text
+      );
+
+      sharedTextStyle.style.textColor = '#000000ff';
+
+      return sharedTextStyle;
     });
 }
 
