@@ -832,7 +832,7 @@ icons:
     friendly_name: Misuse
     usage: This is a description for usage
     categories:
-      - example category
+      - Status
     aliases:
       - X
       - close
@@ -853,7 +853,7 @@ icons:
     friendly_name: New tab
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - open
       - expand
@@ -867,7 +867,7 @@ icons:
     friendly_name: Notification
     usage: This is a description for usage
     categories:
-      - example category
+      - Toggle
     aliases:
       - alert
       - bell
@@ -904,7 +904,7 @@ icons:
     friendly_name: Overflow menu
     usage: This is a description for usage
     categories:
-      - example category
+      - Navigation
     aliases:
       - show more
       - options
@@ -927,7 +927,7 @@ icons:
     friendly_name: Pause
     usage: This is a description for usage
     categories:
-      - example category
+      - Controls
     aliases:
       - stop
       - play
@@ -953,7 +953,7 @@ icons:
     friendly_name: Play
     usage: This is a description for usage
     categories:
-      - example category
+      - Controls
     aliases:
       - start
       - stop
@@ -985,7 +985,7 @@ icons:
     friendly_name: Power
     usage: This is a description for usage
     categories:
-      - example category
+      - Controls
     aliases:
       - 'on'
       - 'off'
@@ -998,7 +998,7 @@ icons:
     friendly_name: Redo
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - restart
       - return
@@ -1014,7 +1014,7 @@ icons:
     friendly_name: Restart
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - undo
       - rever
@@ -1026,7 +1026,7 @@ icons:
     friendly_name: Save
     usage: This is a description for usage
     categories:
-      - example category
+      - Formatting
     aliases:
       - floppy
       - floppy disk
@@ -1060,7 +1060,7 @@ icons:
     friendly_name: Search
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - find
       - investigate
@@ -1073,11 +1073,12 @@ icons:
     friendly_name: Settings
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - preferences
       - options
       - alternatives
+      - gear
     sizes:
       - 16
       - 32
@@ -1091,7 +1092,7 @@ icons:
     friendly_name: Star
     usage: This is a description for usage
     categories:
-      - example category
+      - Toggle
     aliases:
       - favorite
       - progress
@@ -1119,7 +1120,7 @@ icons:
     friendly_name: Stop
     usage: This is a description for usage
     categories:
-      - example category
+      - Controls
     aliases:
       - block
       - break
@@ -1154,7 +1155,7 @@ icons:
     friendly_name: Subtract
     usage: This is a description for usage
     categories:
-      - example category
+      - Navigation
     aliases:
       - minus
       - remove
@@ -1165,6 +1166,7 @@ icons:
       - discount
       - remove
       - take
+      - delete
     sizes:
       - 16
       - 32
@@ -1179,7 +1181,7 @@ icons:
     friendly_name: Trash can
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - trash
       - waste
@@ -1196,7 +1198,7 @@ icons:
     friendly_name: Undo
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - go back
       - revert
@@ -1210,7 +1212,7 @@ icons:
     friendly_name: Unlocked
     usage: This is a description for usage
     categories:
-      - example category
+      - Toggle
     aliases:
       - open
       - lock
@@ -1222,7 +1224,7 @@ icons:
     friendly_name: Up to top
     usage: This is a description for usage
     categories:
-      - example category
+      - Navigation
     aliases:
       - top
       - top of page
@@ -1236,7 +1238,7 @@ icons:
     friendly_name: Upload
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - transfer
       - connect
@@ -1252,7 +1254,7 @@ icons:
     friendly_name: User
     usage: This is a description for usage
     categories:
-      - example category
+      - User
     aliases:
       - person
       - avatar
@@ -1351,13 +1353,14 @@ icons:
     friendly_name: View
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - eye
       - eyeball
       - examine
       - look
       - inspect
+      - visible
     sizes:
       - 16
       - 32
@@ -1392,7 +1395,7 @@ icons:
     friendly_name: Warning
     usage: This is a description for usage
     categories:
-      - example category
+      - Status
     aliases:
       - halt
       - stop
