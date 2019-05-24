@@ -105,8 +105,6 @@ export default class ContentSwitcher extends React.Component {
       }
     }
 
-    console.log('data', data);
-    console.log('state', this.state);
     this.props.onChange(data);
   };
 

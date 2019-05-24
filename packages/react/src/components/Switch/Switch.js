@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { match, key } from '../../tools/key';
@@ -24,6 +24,12 @@ const Switch = props => {
     text,
     ...other
   } = props;
+
+  const tabRef = useRef();
+
+  useEffect(() => {
+    selected && tabRef.current.focus();
+  });
 
   const handleClick = e => {
     e.preventDefault();
@@ -53,6 +59,7 @@ const Switch = props => {
 
   return (
     <button
+      ref={tabRef}
       role="tab"
       tabIndex={selected ? '0' : '-1'}
       aria-selected={selected}
