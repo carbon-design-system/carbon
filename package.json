@@ -11,7 +11,7 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": []
+    "nohoist": ["**/eslint", "eslint/**"]
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
