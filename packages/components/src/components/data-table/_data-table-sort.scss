@@ -38,7 +38,6 @@
   // Th > Button
   // -------------------------------------
   .#{$prefix}--table-sort {
-    @include focus-outline('reset');
     @include button-reset(false);
     position: relative;
     font: inherit;
@@ -49,9 +48,6 @@
     color: $text-01;
     padding: 0 $spacing-03;
     height: 100%;
-    background-color: $ui-03;
-    transition: background-color $duration--fast-01 motion(entrance, productive),
-      outline $duration--fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--table-sort:focus {
@@ -62,6 +58,7 @@
     background: $data-table-column-hover;
   }
 
+  // changes opacity when th is inactive (see line 161)
   .#{$prefix}--table-sort:focus svg,
   .#{$prefix}--table-sort:hover svg {
     opacity: 1;
@@ -88,7 +85,6 @@
     fill: $ui-05;
     width: auto;
     min-width: $layout-01;
-    transition: opacity $duration--fast-01 motion(entrance, productive);
   }
 
   // active icons
@@ -112,11 +108,72 @@
     left: rem(2px);
     margin-left: $spacing-03;
     margin-right: 0;
+    transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
     opacity: 0;
     fill: $ui-05;
     width: auto;
     min-width: $layout-01;
+  }
+
+  //----------------------------------------------------------------------------
+  // Compact, Short, Tall Sortable
+  //----------------------------------------------------------------------------
+  // Sortable compact
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  // Sortable Short
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  // Sortable Tall
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort
+    svg {
+    align-self: flex-start;
+    top: $spacing-03;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort
+    .#{$prefix}--table-header-label {
+    align-self: flex-start;
+    position: relative;
+    top: rem(-8px);
+    max-height: 3rem;
+    display: -webkit-box; // weird text truncation style used
+    -webkit-line-clamp: 2; // because we need text to wrap
+    -webkit-box-orient: vertical; // can't use white-space: nowrap
   }
 }
 

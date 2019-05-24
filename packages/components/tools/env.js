@@ -9,7 +9,7 @@ module.exports = () => ({
       {
         modules: BABEL_ENV !== 'test' ? false : 'commonjs',
         targets: {
-          browsers: ['last 1 versions', 'Firefox ESR', 'ie >= 11'],
+          browsers: ['extends browserslist-config-carbon'],
         },
       },
     ],
