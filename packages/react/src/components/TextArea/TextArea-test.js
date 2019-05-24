@@ -8,6 +8,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import TextArea from '../TextArea';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('TextArea', () => {
   describe('should render as expected', () => {
@@ -28,7 +31,7 @@ describe('TextArea', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textarea().hasClass('bx--text-area')).toEqual(true);
+        expect(textarea().hasClass(`${prefix}--text-area`)).toEqual(true);
       });
 
       it('applies extra classes specified via className', () => {
@@ -60,12 +63,30 @@ describe('TextArea', () => {
 
       it('should set value as expected', () => {
         wrapper.setProps({ value: 'value set' });
-        expect(textarea().props().value).toEqual('value set');
+        expect(wrapper.props().value).toEqual('value set');
       });
 
       it('should set defaultValue as expected', () => {
         wrapper.setProps({ defaultValue: 'default value' });
         expect(textarea().props().defaultValue).toEqual('default value');
+      });
+
+      it('should count length increases in textarea value', () => {
+        const event = { target: { value: 'z' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textarea().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-area--character-counter`).text()
+        ).toBe('1/10');
+      });
+
+      it('should count length decreases in textarea value', () => {
+        const event = { target: { value: '' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textarea().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-area--character-counter`).text()
+        ).toBe('0/10');
       });
 
       it('should specify light version as expected', () => {
@@ -88,13 +109,13 @@ describe('TextArea', () => {
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+        expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
       });
     });
 
     describe('helper', () => {
       it('renders a helper', () => {
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.length).toEqual(1);
       });
 
@@ -106,7 +127,7 @@ describe('TextArea', () => {
             </span>
           ),
         });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
             This helper text has <a href="#">a link</a>.
@@ -116,7 +137,7 @@ describe('TextArea', () => {
 
       it('should set helper text as expected', () => {
         wrapper.setProps({ helperText: 'Helper text' });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.text()).toEqual('Helper text');
       });
     });

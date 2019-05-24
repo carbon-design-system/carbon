@@ -2,7 +2,7 @@
 
 exports[`TooltipDefinition should allow the user to specify the direction 1`] = `
 <TooltipDefinition
-  alignment="start"
+  align="start"
   className="custom-class"
   direction="top"
   tooltipText="tooltip text"
@@ -35,7 +35,7 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
 
 exports[`TooltipDefinition should render 1`] = `
 <TooltipDefinition
-  alignment="start"
+  align="start"
   className="custom-class"
   direction="bottom"
   tooltipText="tooltip text"

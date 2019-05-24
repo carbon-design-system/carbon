@@ -79,23 +79,18 @@ closing the side nav.
 
 ## Header & header-panel
 
-| `#` | Variable/token              | Role                                                                                                                      | Experimental theme value   |
-| --- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| 1   | `$shell-header-bg-01`       | Header bar background                                                                                                     | `$gray-90`                 |
-| 2   | `$shell-header-bg-02`       | Header-panel background                                                                                                   | `$gray-10`                 |
-| 3   | `$shell-header-bg-03`       | Panel Item hover                                                                                                          | `$gray-20`                 |
-| 4   | `$shell-header-text-01`     | Primary text in header <br> Tab text <br> Product label                                                                   | `$gray-10`                 |
-| 5   | `$shell-header-text-02`     | Primary text in header-panel <br> item text                                                                               | `$gray-90`                 |
-| 6   | `$shell-header-text-03`     | Secondary text in header-panel <br> Category label                                                                        | `$gray-70`                 |
-| 7   | `$shell-header-icon-01`     | header bar icons                                                                                                          | `$gray-10`                 |
-| 8   | `$shell-header-icon-02`     | icons in header-panel                                                                                                     | `$gray-90`                 |
-| 9   | `$shell-header-link`        | item link                                                                                                                 | `$blue-60`                 |
-| 10  | `$shell-header-icon-03`     | Header icon <br> selected state background                                                                                | `$blue-60`                 |
-| --- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| 11  | `$shell-side-nav-bg-01`     | Side-nav panel background                                                                                                 | `$gray-90`                 |
-| 12  | `$shell-side-nav-bg-02`     | Selected category background <br> Select L2 flatted item background <br> Item hover background <br> Footer-bar background | `$gray-80`                 |
-| 13  | `$shell-side-nav-bg-03`     | Selected L2 nested item                                                                                                   | `$gray-70`                 |
-| 14  | `$shell-side-nav-text-01`   | Primary text in side-nav <br> L2 Flatten item text <br> L2 Nested item text <br> L1 title text                            | `$gray-10`                 |
-| 15  | `$shell-side-nav-text-02`   | Secondary text in side nav <br> L2 Category label                                                                         | `$gray-30`                 |
-| 16  | `$shell-side-nav-icon-01`   | side-nav icon color                                                                                                       | `$gray-10`                 |
-| 17  | `$shell-side-nav-accent-01` | item highlight bar                                                                                                        | `$blue-60`                 |
+| `#` | Variable/token            | Role                                        | Theme value |
+| --- | ------------------------- | ------------------------------------------- | ----------- |
+| 1   | `$shell-header-bg-01`     | Header bar background                       | `$gray-100` |
+| 2   | `$shell-header-bg-02`     | Header menu trigger hover                   | `#2c2c2c`   |
+| 3   | `$shell-header-bg-03`     | Header action active background             | `$gray-80`  |
+| 4   | `$shell-header-bg-04`     | Header nav link hover                       | `#353535`   |
+| 5   | `$shell-header-bg-05`     | Header nav link focus and active background | `$gray-70`  |
+| 6   | `$shell-header-bg-06`     | Header nav link submenu                     | `$gray-90`  |
+| 7   | `$shell-header-border-01` | Header bar border bottom                    | `$gray-80`  |
+| 8   | `$shell-header-focus`     | Header focus border                         | `$white-0`  |
+| 9   | `$shell-header-text-01`   | Primary text in header <br> Title text      | `$gray-10`  |
+| 8   | `$shell-header-text-02`   | Secondary text in header <br> Menu items    | `$gray-30`  |
+| 10  | `$shell-header-icon-01`   | Header menu trigger                         | `$gray-10`  |
+| 11  | `$shell-header-icon-02`   | Header bar action icons                     | `$white-0`  |
+| 12  | `$shell-header-link`      | Header menu item link                       | `$blue-60`  |

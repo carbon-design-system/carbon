@@ -76,7 +76,7 @@
 
     &:hover,
     &:focus {
-      color: $inverse-01;
+      color: $text-04;
     }
   }
 
@@ -132,10 +132,10 @@
 
     &:hover,
     &:active {
-      color: $ibm-color__blue-70;
+      color: $interactive-04;
 
       .#{$prefix}--btn__icon path {
-        fill: $ibm-color__blue-70;
+        fill: $interactive-04;
       }
     }
 
@@ -168,11 +168,11 @@
   }
 
   .#{$prefix}--btn--icon-only--top {
-    @include tooltip--icon--top;
+    @include tooltip--icon-placement('top');
   }
 
   .#{$prefix}--btn--icon-only--bottom {
-    @include tooltip--icon--bottom;
+    @include tooltip--icon-placement('bottom');
   }
 
   .#{$prefix}--btn--icon-only,

@@ -8,6 +8,9 @@
 import React from 'react';
 import TextInput from '../TextInput';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('TextInput', () => {
   describe('renders as expected', () => {
@@ -51,7 +54,7 @@ describe('TextInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textInput().hasClass('bx--text-input')).toEqual(true);
+        expect(textInput().hasClass(`${prefix}--text-input`)).toEqual(true);
       });
 
       it('should add extra classes that are passed via className', () => {
@@ -60,7 +63,9 @@ describe('TextInput', () => {
 
       it('has the expected classes for light', () => {
         wrapper.setProps({ light: true });
-        expect(textInput().hasClass('bx--text-input--light')).toEqual(true);
+        expect(textInput().hasClass(`${prefix}--text-input--light`)).toEqual(
+          true
+        );
       });
 
       it('should set type as expected', () => {
@@ -73,6 +78,24 @@ describe('TextInput', () => {
         expect(textInput().props().defaultValue).toEqual(undefined);
         wrapper.setProps({ defaultValue: 'test' });
         expect(textInput().props().defaultValue).toEqual('test');
+      });
+
+      it('should count length increases in text input value', () => {
+        const event = { target: { value: 'z' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textInput().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
+        ).toBe('1/10');
+      });
+
+      it('should count length decreases in text input value', () => {
+        const event = { target: { value: '' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textInput().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
+        ).toBe('0/10');
       });
 
       it('should set disabled as expected', () => {
@@ -97,7 +120,7 @@ describe('TextInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+        expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
       });
 
       it('should set label as expected', () => {
@@ -107,7 +130,7 @@ describe('TextInput', () => {
 
     describe('helper', () => {
       it('renders a helper', () => {
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.length).toEqual(1);
       });
 
@@ -115,21 +138,21 @@ describe('TextInput', () => {
         wrapper.setProps({
           helperText: (
             <span>
-              This helper text has <a href="/">a link</a>.
+              This helper text has <a href="#">a link</a>.
             </span>
           ),
         });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
-            This helper text has <a href="/">a link</a>.
+            This helper text has <a href="#">a link</a>.
           </span>
         );
       });
 
       it('should set helper text as expected', () => {
         wrapper.setProps({ helperText: 'Helper text' });
-        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.text()).toEqual('Helper text');
       });
     });

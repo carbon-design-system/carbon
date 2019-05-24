@@ -13,6 +13,9 @@ import ComposedModal, {
   ModalBody,
   ModalFooter,
 } from '../ComposedModal';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('<ModalHeader />', () => {
   describe('Renders as expected', () => {
@@ -20,25 +23,27 @@ describe('<ModalHeader />', () => {
     const labelWrapper = shallow(<ModalHeader label="Something" />);
 
     it('does not render title if no title', () => {
-      expect(labelWrapper.find('.bx--modal-header__heading').exists()).toBe(
-        false
-      );
+      expect(
+        labelWrapper.find(`.${prefix}--modal-header__heading`).exists()
+      ).toBe(false);
     });
 
     it('does not render label if no label', () => {
-      expect(titleWrapper.find('.bx--modal-header__label').exists()).toBe(
-        false
-      );
+      expect(
+        titleWrapper.find(`.${prefix}--modal-header__label`).exists()
+      ).toBe(false);
     });
 
     it('renders title if title text', () => {
-      expect(titleWrapper.find('.bx--modal-header__heading').exists()).toBe(
-        true
-      );
+      expect(
+        titleWrapper.find(`.${prefix}--modal-header__heading`).exists()
+      ).toBe(true);
     });
 
     it('renders label if label text', () => {
-      expect(labelWrapper.find('.bx--modal-header__label').exists()).toBe(true);
+      expect(
+        labelWrapper.find(`.${prefix}--modal-header__label`).exists()
+      ).toBe(true);
     });
   });
 });
@@ -60,7 +65,7 @@ describe('<ModalBody />', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--modal-content')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--modal-content`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -86,7 +91,7 @@ describe('<ModalFooter />', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--modal-footer')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--modal-footer`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -107,11 +112,11 @@ describe('<ModalFooter />', () => {
     );
 
     it('does not render primary button if no primary text', () => {
-      expect(wrapper.find('.bx--btn--primary').exists()).toBe(false);
+      expect(wrapper.find(`.${prefix}--btn--primary`).exists()).toBe(false);
     });
 
     it('does not render secondary button if no secondary text', () => {
-      expect(wrapper.find('.bx--btn--secondary').exists()).toBe(false);
+      expect(wrapper.find(`.${prefix}--btn--secondary`).exists()).toBe(false);
     });
 
     it('renders primary button if primary text', () => {
@@ -177,7 +182,7 @@ describe('<ComposedModal />', () => {
         <ModalHeader />
       </ComposedModal>
     );
-    const button = wrapper.find('.bx--modal-close').first();
+    const button = wrapper.find(`.${prefix}--modal-close`).first();
     button.simulate('click');
     expect(wrapper.state().open).toEqual(false);
     expect(onClose.mock.calls.length).toBe(1);
@@ -190,7 +195,7 @@ describe('<ComposedModal />', () => {
         <ModalHeader />
       </ComposedModal>
     );
-    const button = wrapper.find('.bx--modal-close').first();
+    const button = wrapper.find(`.${prefix}--modal-close`).first();
     button.simulate('click');
     expect(wrapper.state().open).toEqual(true);
   });
@@ -202,19 +207,19 @@ describe('<ComposedModal />', () => {
       </ComposedModal>
     );
     expect(
-      document.activeElement.classList.contains('bx--btn--primary')
+      document.activeElement.classList.contains(`${prefix}--btn--primary`)
     ).toEqual(true);
   });
 
   it('should focus on the element that matches selectorPrimaryFocus', () => {
     mount(
-      <ComposedModal open selectorPrimaryFocus=".bx--modal-close">
+      <ComposedModal open selectorPrimaryFocus={`.${prefix}--modal-close`}>
         <ModalHeader label="Optional Label" title="Example" />
         <ModalFooter primaryButtonText="Save" />
       </ComposedModal>
     );
     expect(
-      document.activeElement.classList.contains('bx--modal-close')
+      document.activeElement.classList.contains(`${prefix}--modal-close`)
     ).toEqual(true);
   });
 });

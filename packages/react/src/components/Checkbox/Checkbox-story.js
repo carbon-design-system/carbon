@@ -11,6 +11,9 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 const props = () => ({
   className: 'some-class',
@@ -29,8 +32,8 @@ storiesOf('Checkbox', module)
     () => {
       const checkboxProps = props();
       return (
-        <fieldset className="bx--fieldset">
-          <legend className="bx--label">Checkbox heading</legend>
+        <fieldset className={`${prefix}--fieldset`}>
+          <legend className={`${prefix}--label`}>Checkbox heading</legend>
           <Checkbox defaultChecked {...checkboxProps} id="checkbox-label-1" />
           <Checkbox defaultChecked {...checkboxProps} id="checkbox-label-2" />
         </fieldset>
@@ -52,8 +55,8 @@ storiesOf('Checkbox', module)
     () => {
       const checkboxProps = props();
       return (
-        <fieldset className="bx--fieldset">
-          <legend className="bx--label">Checkbox heading</legend>
+        <fieldset className={`${prefix}--fieldset`}>
+          <legend className={`${prefix}--label`}>Checkbox heading</legend>
           <Checkbox {...checkboxProps} id="checkbox-label-1" />
           <Checkbox {...checkboxProps} id="checkbox-label-2" />
         </fieldset>

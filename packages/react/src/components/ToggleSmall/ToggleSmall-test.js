@@ -9,7 +9,9 @@ import React from 'react';
 import ToggleSmall from '../ToggleSmall';
 import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 import { mount, shallow } from 'enzyme';
+import { settings } from 'carbon-components';
 
+const { prefix } = settings;
 describe('ToggleSmall', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(<ToggleSmall id="toggle-1" ariaLabel="test label" />);
@@ -17,7 +19,7 @@ describe('ToggleSmall', () => {
     const input = wrapper.find('input');
 
     it('Switch and label Ids should match', () => {
-      const toggleLabel = wrapper.find('.bx--toggle__label');
+      const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
       expect(input.id).toEqual(toggleLabel.htmlFor);
     });
 
@@ -29,7 +31,9 @@ describe('ToggleSmall', () => {
 
     it('Can set defaultToggled state', () => {
       wrapper.setProps({ defaultToggled: true });
-      expect(wrapper.find('.bx--toggle').props().defaultChecked).toEqual(true);
+      expect(wrapper.find(`.${prefix}--toggle`).props().defaultChecked).toEqual(
+        true
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -39,7 +43,7 @@ describe('ToggleSmall', () => {
 
     it('Can be disabled', () => {
       wrapper.setProps({ disabled: true });
-      expect(wrapper.find('.bx--toggle').props().disabled).toEqual(true);
+      expect(wrapper.find(`.${prefix}--toggle`).props().disabled).toEqual(true);
     });
   });
 
@@ -102,12 +106,12 @@ describe('ToggleSmallSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<ToggleSmallSkeleton />);
     const input = wrapper.find('input');
-    const toggleLabel = wrapper.find('.bx--toggle__label');
+    const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
 
     it('Has the expected classes', () => {
-      expect(input.hasClass('bx--skeleton')).toEqual(true);
-      expect(input.hasClass('bx--toggle')).toEqual(true);
-      expect(toggleLabel.hasClass('bx--skeleton')).toEqual(true);
+      expect(input.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(input.hasClass(`${prefix}--toggle`)).toEqual(true);
+      expect(toggleLabel.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });

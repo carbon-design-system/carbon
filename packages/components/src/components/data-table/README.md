@@ -3,6 +3,16 @@
 The update to tables splits out the `scss` files into multiple partial files
 with specific functionality, with a main index file bringing them together.
 
+By default, overflow menu icons are hidden until the user hovers over a table
+row. To display overflow menu icons by default without requiring the user to
+hover, target the overflow menu icons and set the `opacity` to `1`.
+
+```css
+.bx--data-table .bx--overflow-menu .bx--overflow-menu__icon {
+  opacity: 1;
+}
+```
+
 #### Files
 
 | Name                    | Description                              |

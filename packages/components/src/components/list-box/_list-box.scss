@@ -15,6 +15,7 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
 
 /// @type Number
 /// @access private
@@ -68,6 +69,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box {
+    @include reset;
     position: relative;
     width: $list-box-width;
     height: rem(40px);
@@ -344,6 +346,10 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__selection {
+    right: rem(57px); // 33px + 1.5rem when invalid
+  }
+
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
   }
@@ -418,16 +424,20 @@ $list-box-menu-width: rem(300px);
 
     &:hover {
       background-color: $hover-ui;
-
-      + .#{$prefix}--list-box__menu-item
-        .#{$prefix}--list-box__menu-item__option {
-        border-color: transparent;
-      }
     }
 
     &:active {
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-top-color: $ui-03;
   }
 
   .#{$prefix}--list-box__menu-item:first-of-type
@@ -440,6 +450,19 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
+  .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $ui-03;
+  }
+
   .#{$prefix}--list-box__menu-item__option {
     @include focus-outline('reset');
     display: block;
@@ -450,7 +473,8 @@ $list-box-menu-width: rem(300px);
     line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
-    border: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
     border-top-color: $ui-03;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -469,6 +493,13 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
     margin: 0 $carbon--spacing-03;
@@ -484,12 +515,6 @@ $list-box-menu-width: rem(300px);
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
-
-    > .#{$prefix}--list-box__menu-item__option,
-    + .#{$prefix}--list-box__menu-item
-      .#{$prefix}--list-box__menu-item__option {
-      border-color: transparent;
-    }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -497,11 +522,18 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
-  .#{$prefix}--list-box__menu-item--active,
-  .#{$prefix}--list-box__menu-item--active:hover {
+  .#{$prefix}--list-box__menu-item--active {
     color: $text-01;
-    background-color: $selected-ui;
     border-bottom-color: $selected-ui;
+
+    &:hover {
+      background-color: $selected-ui;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {

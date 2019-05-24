@@ -13,10 +13,6 @@
 /// @access private
 /// @group data-table
 @mixin data-table-expandable {
-  .#{$prefix}--data-table thead tr .#{$prefix}--table-expand {
-    position: relative;
-  }
-
   //----------------------------------------------------------------------------
   // Parent row
   //----------------------------------------------------------------------------
@@ -170,12 +166,6 @@
     padding-bottom: 0;
   }
 
-  @supports (-moz-appearance: none) {
-    .#{$prefix}--data-table td.#{$prefix}--table-expand {
-      padding-top: rem(14px);
-    }
-  }
-
   .#{$prefix}--table-expand[data-previous-value='collapsed']
     .#{$prefix}--table-expand__svg {
     transform: rotate(270deg);
@@ -186,6 +176,7 @@
     @include button-reset('false');
     display: flex;
     justify-content: space-around;
+    align-items: center;
     height: $layout-03;
     width: $layout-01;
   }
@@ -202,6 +193,11 @@
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
+  }
+
+  th.#{$prefix}--table-expand {
+    position: relative;
+    vertical-align: middle;
   }
 
   th.#{$prefix}--table-expand + th.#{$prefix}--table-column-checkbox {

@@ -91,7 +91,7 @@ storiesOf('ModalWrapper', module)
           return true;
         }}
         {...props()}>
-        <p className="bx--modal-content__text">
+        <p className={`${prefix}--modal-content__text`}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           cursus fermentum risus, sit amet fringilla nunc pellentesque quis.
           Duis quis odio ultrices, cursus lacus ac, posuere felis. Donec
@@ -102,7 +102,7 @@ storiesOf('ModalWrapper', module)
           ultrices, risus diam ullamcorper arcu, sit amet gravida metus ligula
           quis metus.
         </p>
-        <p className="bx--modal-content__text">
+        <p className={`${prefix}--modal-content__text`}>
           Donec id sapien ex. Duis aliquam tortor nec mollis pulvinar. Fusce sit
           amet libero blandit, sollicitudin est in, tempor lectus. Donec
           convallis condimentum mi eu ultrices. Sed risus ipsum, fermentum ut

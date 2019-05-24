@@ -45,6 +45,25 @@ const styleLoaders = [
   },
 ];
 
+class FeatureFlagProxyPlugin {
+  /**
+   * A WebPack resolver plugin that proxies module request
+   * for `carbon-components/es/globals/js/settings` to `./settings`.
+   */
+  constructor() {
+    this.source = 'before-described-relative';
+  }
+
+  apply(resolver) {
+    resolver.plugin(this.source, (request, callback) => {
+      if (/[\\/]globals[\\/]js[\\/]settings$/.test(request.path)) {
+        request.path = path.resolve(__dirname, './settings');
+      }
+      callback();
+    });
+  }
+}
+
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.devtool = useStyleSourceMap ? 'source-map' : '';
   defaultConfig.optimization = {
@@ -95,6 +114,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
       })
     );
   }
+
+  defaultConfig.resolve = {
+    modules: ['node_modules'],
+    plugins: [new FeatureFlagProxyPlugin()],
+  };
 
   return defaultConfig;
 };

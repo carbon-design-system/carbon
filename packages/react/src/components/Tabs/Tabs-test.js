@@ -11,10 +11,13 @@ import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
-    describe('navigation (<nav>)', () => {
+    describe('navigation (<div>)', () => {
       const wrapper = shallow(
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
@@ -22,20 +25,29 @@ describe('Tabs', () => {
         </Tabs>
       );
 
-      it('renders [role="navigation"] props on <nav> by default', () => {
-        expect(wrapper.find('nav').props().role).toEqual('navigation');
+      it('renders [role="navigation"] props on wrapping <div> by default', () => {
+        expect(wrapper.find(`.${prefix}--tabs`).props().role).toEqual(
+          'navigation'
+        );
       });
 
       it('renders [role="tablist"] props on <ul> by default', () => {
         expect(wrapper.find('ul').props().role).toEqual('tablist');
       });
 
-      it('renders extra classes on <nav> via className prop', () => {
-        expect(wrapper.find('nav').hasClass('extra-class')).toBe(true);
+      it('renders extra classes on wrapping <div> via className prop', () => {
+        expect(wrapper.find(`.${prefix}--tabs`).hasClass('extra-class')).toBe(
+          true
+        );
       });
 
-      it('renders expected classes on <nav> by default', () => {
-        expect(wrapper.find('nav').hasClass('bx--tabs')).toBe(true);
+      it('renders expected classes on wrapping <div> by default', () => {
+        expect(
+          wrapper
+            .find('div')
+            .first()
+            .hasClass(`${prefix}--tabs`)
+        ).toBe(true);
       });
     });
 
@@ -47,19 +59,21 @@ describe('Tabs', () => {
         </Tabs>
       );
 
-      const trigger = wrapper.find('div.bx--tabs-trigger');
+      const trigger = wrapper.find(`div.${prefix}--tabs-trigger`);
       const tablist = wrapper.find('ul');
 
       it('renders default className for trigger', () => {
-        expect(trigger.hasClass('bx--tabs-trigger')).toBe(true);
+        expect(trigger.hasClass(`${prefix}--tabs-trigger`)).toBe(true);
       });
 
       it('renders hidden className by default', () => {
-        expect(tablist.hasClass('bx--tabs__nav--hidden')).toBe(true);
+        expect(tablist.hasClass(`${prefix}--tabs__nav--hidden`)).toBe(true);
       });
 
       it('renders default className for triggerText', () => {
-        expect(trigger.find('a').hasClass('bx--tabs-trigger-text')).toBe(true);
+        expect(trigger.find('a').hasClass(`${prefix}--tabs-trigger-text`)).toBe(
+          true
+        );
       });
 
       it('renders <Icon>', () => {
@@ -150,7 +164,7 @@ describe('Tabs', () => {
 
       describe('state: dropdownHidden', () => {
         it('toggles dropdownHidden state after trigger is clicked', () => {
-          const trigger = wrapper.find('.bx--tabs-trigger');
+          const trigger = wrapper.find(`.${prefix}--tabs-trigger`);
 
           trigger.simulate('click');
           expect(wrapper.state().dropdownHidden).toEqual(false);
@@ -159,7 +173,7 @@ describe('Tabs', () => {
         });
 
         it('toggles hidden state after trigger-text is clicked', () => {
-          const triggerText = wrapper.find('.bx--tabs-trigger-text');
+          const triggerText = wrapper.find(`.${prefix}--tabs-trigger-text`);
 
           triggerText.simulate('click');
           expect(wrapper.state().dropdownHidden).toEqual(false);
@@ -313,8 +327,8 @@ describe('TabsSkeleton', () => {
     const wrapper = shallow(<TabsSkeleton />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
-      expect(wrapper.hasClass('bx--tabs')).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--tabs`)).toEqual(true);
     });
   });
 });

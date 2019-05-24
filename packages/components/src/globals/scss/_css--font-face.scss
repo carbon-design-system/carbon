@@ -91,8 +91,8 @@ $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !defa
 }
 
 @include exports('css--font-face') {
-  @if not global-variable-exists('css--font-face') or $css--font-face == true {
-    @if global-variable-exists('css--plex') and $css--plex == true {
+  @if not variable-exists('css--font-face') or $css--font-face == true {
+    @if variable-exists('css--plex') and $css--plex == true {
       @include carbon--font-face-mono();
       @include carbon--font-face-sans();
     } @else {

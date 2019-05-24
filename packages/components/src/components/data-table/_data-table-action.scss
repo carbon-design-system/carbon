@@ -176,7 +176,16 @@
   //-------------------------------------------------
   //TOOLBAR BUTTONS
   //-------------------------------------------------
-  .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action,
+  .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
+    @include button-reset;
+    display: flex;
+    cursor: pointer;
+    height: $layout-04;
+    width: $layout-04;
+    padding: $spacing-md;
+    transition: background $duration--fast-02 motion(entrance, productive);
+  }
+
   // DEPRECATED prefer .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action instead
   .#{$prefix}--toolbar-action {
     @include button-reset;
@@ -312,14 +321,14 @@
     padding-right: $spacing-lg;
     width: 100%;
     height: 100%;
+    pointer-events: none;
+    visibility: hidden;
     will-change: transform;
     background-color: $interactive-01;
     transition: transform $duration--fast-02 motion(standard, productive),
       visibility $duration--fast-02 motion(standard, productive),
       opacity $duration--fast-02 motion(standard, productive);
     transform: translate3d(0, 48px, 0);
-    pointer-events: none;
-    visibility: hidden;
   }
 
   .#{$prefix}--batch-actions:focus {
@@ -403,6 +412,7 @@
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
     opacity: 0;
+    transition: opacity $transition--base $carbon--standard-easing;
   }
 
   // cancel btn
@@ -423,6 +433,133 @@
 
   .#{$prefix}--batch-summary__para {
     @include type-style('body-short-01');
+  }
+
+  //-------------------------------------------------
+  //SMALL TOOLBAR
+  //-------------------------------------------------
+  .#{$prefix}--table-toolbar--small {
+    height: rem(32px);
+
+    .#{$prefix}--toolbar-search-container-expandable,
+    .#{$prefix}--toolbar-search-container-persistent {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable
+      .#{$prefix}--search
+      .#{$prefix}--search-input,
+    .#{$prefix}--toolbar-search-container-persistent
+      .#{$prefix}--search
+      .#{$prefix}--search-input {
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable
+      .#{$prefix}--search
+      .#{$prefix}--search-close,
+    .#{$prefix}--toolbar-search-container-persistent
+      .#{$prefix}--search
+      .#{$prefix}--search-close {
+      height: rem(32px);
+      width: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable
+      .#{$prefix}--search
+      .#{$prefix}--search-magnifier,
+    .#{$prefix}--toolbar-search-container-persistent
+      .#{$prefix}--search
+      .#{$prefix}--search-magnifier {
+      height: rem(32px);
+      width: rem(32px);
+      padding: $spacing-xs;
+    }
+
+    //hidden
+    .#{$prefix}--toolbar-search-container-expandable {
+      width: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-search-container-expandable
+      .#{$prefix}--search
+      .#{$prefix}--search-input {
+      padding-left: $spacing-xl;
+    }
+
+    //active
+    .#{$prefix}--toolbar-search-container-active {
+      flex: auto;
+      transition: flex 175ms $carbon--standard-easing;
+    }
+
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-input {
+      visibility: visible;
+    }
+
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-input:focus {
+      @include focus-outline('outline');
+      background: $hover-field;
+    }
+
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-input:active,
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-input:not(:placeholder-shown) {
+      background: $hover-field;
+    }
+
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-magnifier:focus,
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-magnifier:active,
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search
+      .#{$prefix}--search-magnifier:hover {
+      @include focus-outline('reset');
+      background: transparent;
+    }
+  }
+
+  //-------------------------------------------------
+  // SMALL BATCH ACTIONS
+  //-------------------------------------------------
+  .#{$prefix}--table-toolbar--small
+    .#{$prefix}--batch-actions
+    .#{$prefix}--action-list {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
+    height: rem(32px);
+    width: rem(32px);
+    padding: $spacing-xs;
+  }
+
+  .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
+    padding-top: rem(3px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--table-toolbar--small
+    .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+    top: rem(8px);
+  }
+
+  .#{$prefix}--table-toolbar--small
+    .#{$prefix}--toolbar-action
+    ~ .#{$prefix}--btn {
+    height: rem(32px);
+    width: rem(160px);
+    overflow: hidden;
   }
 }
 

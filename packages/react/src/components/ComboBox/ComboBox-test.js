@@ -16,8 +16,11 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
+import { settings } from 'carbon-components';
 
-const findInputNode = wrapper => wrapper.find('.bx--text-input');
+const { prefix } = settings;
+
+const findInputNode = wrapper => wrapper.find(`.${prefix}--text-input`);
 const downshiftActions = {
   setHighlightedIndex: jest.fn(),
 };
@@ -77,6 +80,16 @@ describe('ComboBox', () => {
     });
 
     expect(onInputChange).toHaveBeenCalledWith('something');
+  });
+
+  it('should render custom item components', () => {
+    const wrapper = mount(<ComboBox {...mockProps} />);
+    wrapper.setProps({
+      itemToElement: item => <div className="mock-item">{item.text}</div>,
+    });
+    openMenu(wrapper);
+
+    expect(wrapper.find(`.mock-item`).length).toBe(mockProps.items.length);
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {

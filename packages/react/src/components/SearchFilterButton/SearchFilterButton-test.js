@@ -9,6 +9,9 @@ import React from 'react';
 import SearchFilterButton from '../SearchFilterButton';
 import { mount } from 'enzyme';
 import Filter16 from '@carbon/icons-react/lib/filter/16';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('SearchFilterButton', () => {
   const wrapper = mount(<SearchFilterButton labelText="testlabel" />);
@@ -22,7 +25,7 @@ describe('SearchFilterButton', () => {
     });
 
     it('has expected class', () => {
-      expect(btn.hasClass('bx--search-button')).toEqual(true);
+      expect(btn.hasClass(`${prefix}--search-button`)).toEqual(true);
     });
   });
 
