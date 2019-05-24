@@ -1,9 +1,11 @@
 'use strict';
 
 const env = process.env.NODE_ENV || 'development';
+const isDev = env === 'development';
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+const TerserPlugin = require('terser-webpack-plugin');
 
 class FeatureFlagProxyPlugin {
   /**
@@ -28,18 +30,23 @@ class FeatureFlagProxyPlugin {
 module.exports = {
   mode: env,
   devtool: 'source-maps',
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, '../demo/index'),
-  ],
+  entry: !isDev
+    ? [path.resolve(__dirname, '../demo/index')]
+    : [
+        'webpack-hot-middleware/client?reload=true',
+        path.resolve(__dirname, '../demo/index'),
+      ],
   output: {
     path: path.resolve(__dirname, '../demo'),
     publicPath: '/',
     hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
     hotUpdateMainFilename: 'hot/[hash].hot-update.json',
-    filename: 'demo.js',
+    filename: isDev ? 'demo.js' : 'demo.min.js',
     library: 'CarbonComponents',
     libraryTarget: 'var',
+  },
+  optimization: {
+    minimizer: isDev ? [] : [new TerserPlugin()],
   },
   module: {
     rules: [
@@ -78,8 +85,8 @@ module.exports = {
     modules: ['node_modules'],
     plugins: [new FeatureFlagProxyPlugin()],
   },
-  plugins: [
-    new webpack.ProgressPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: !isDev
+    ? []
+    : [new webpack.ProgressPlugin(), new webpack.HotModuleReplacementPlugin()],
+  performance: { hints: false },
 };

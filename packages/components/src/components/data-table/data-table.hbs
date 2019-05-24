@@ -37,23 +37,6 @@
       </div>
       {{/if}}
 
-      {{#is state "compat"}}
-      <div class="{{@root.prefix}}--toolbar-search-container">
-        <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm" role="search">
-          <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
-            {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
-          </div>
-          <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
-          <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search"
-            placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
-          <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}"
-            aria-label="{{clearSearchLabel}}">
-            {{ carbon-icon 'Close16'}}
-          </button>
-        </div>
-      </div>
-      {{/is}}
-
       {{#if toolbarActions}}
      <div class="{{@root.prefix}}--toolbar-content">
           <!--  Default hidden search -->
@@ -107,16 +90,6 @@
             </div>
             {{/each}}
 
-            <!-- Legacy toolbar actions-->
-            {{#is state "compat"}}
-              {{#each toolbarActions as |toolbar|}}
-              <div class="{{@root.prefix}}--toolbar-action" role="button"
-                tabindex="0" aria-label="Overflow" aria-haspopup="true" aria-expanded="false">
-                {{{ toolbar.icon }}}
-              </div>
-              {{/each}}
-            {{/is}}
-
           <!--  Toolbar primary button -->
           <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
             {{#if small }} Primary {{else}} Primary Button {{/if}}
@@ -132,7 +105,7 @@
   <section class="{{@root.prefix}}--data-table_inner-container">
   {{/if}}
   <!-- Table -->
-  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}}{{#if sticky}} {{@root.prefix}}--data-table--sticky-header{{/if}}{{#if zebra}} {{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}}{{#if tall}} {{@root.prefix}}--data-table--tall{{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort{{/if}}{{#if displayOverflowMenus}} {{@root.prefix}}--data-table--visible-overflow-menu{{/if}}" >
+  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}}{{#if sticky}} {{@root.prefix}}--data-table--sticky-header{{/if}}{{#if zebra}} {{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}}{{#if tall}} {{@root.prefix}}--data-table--tall{{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort{{/if}}{{#if displayOverflowMenus}} {{@root.prefix}}--data-table--visible-overflow-menu{{/if}} {{#if short}}{{@root.prefix}}--data-table--short{{/if}} {{#if static}}{{@root.prefix}}--data-table--static{{/if}}" >
     <thead>
       <tr>
         {{#each columns}}
@@ -269,6 +242,13 @@
                 <!-- default (non truncated) -->
                 {{else}}
                   {{data}}
+                  {{#if ../../../tall}}
+                    {{#if (and row.secondaryText column.secondary)}}
+                    <div class="{{@root.prefix}}--data-table--cell-secondary-text">
+                      {{row.secondaryText}}
+                    </div>
+                    {{/if}}
+                  {{/if}}
                 {{/if}}
               </td>
             {{/if}}

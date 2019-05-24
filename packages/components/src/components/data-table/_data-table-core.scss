@@ -93,8 +93,6 @@
   .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
-    border-top: 1px solid $ui-03;
-    border-bottom: 1px solid $ui-03;
   }
 
   .#{$prefix}--data-table th:first-of-type {
@@ -109,6 +107,7 @@
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
     display: block;
     padding: rem(14px) 0;
+    text-align: left;
   }
 
   .#{$prefix}--data-table td {
@@ -315,6 +314,112 @@
     .#{$prefix}--overflow-menu
     .#{$prefix}--overflow-menu__icon {
     opacity: 1;
+  }
+
+  //----------------------------------------------------------------------------
+  // Compact
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--compact thead tr,
+  .#{$prefix}--data-table--compact tbody tr {
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
+    padding: rem(2px) 0;
+  }
+
+  .#{$prefix}--data-table--compact td {
+    padding-top: rem(2px);
+    padding-bottom: rem(2px);
+  }
+
+  .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
+    width: rem(32px);
+    height: rem(23px); //24px row - 1px border
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    .#{$prefix}--table-column-menu {
+    padding-top: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    .#{$prefix}--table-column-checkbox {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    .#{$prefix}--table-column-checkbox
+    .#{$prefix}--checkbox-label {
+    min-height: rem(23px); //24px row - 1px border
+    height: rem(23px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Short
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--short thead tr,
+  .#{$prefix}--data-table--short tbody tr {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--table-header-label {
+    padding: rem(7px) 0;
+  }
+
+  .#{$prefix}--data-table--short td {
+    padding-top: rem(7px);
+    padding-bottom: rem(6px);
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
+    height: rem(31px); //32px row - 1px border
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--short
+    .#{$prefix}--table-column-menu {
+    padding-top: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--short
+    .#{$prefix}--table-column-checkbox {
+    padding-top: rem(3px);
+    padding-bottom: rem(3px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Tall
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--tall thead tr,
+  .#{$prefix}--data-table--tall tbody tr {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-header-label {
+    padding: rem(16px) 0;
+  }
+
+  .#{$prefix}--data-table--tall td {
+    padding-top: 1rem;
+  }
+
+  .#{$prefix}--data-table--cell-secondary-text {
+    @include type-style('label-01');
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--tall
+    .#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table.#{$prefix}--data-table--tall
+    .#{$prefix}--table-column-checkbox {
+    padding-top: rem(12px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Static
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--static {
+    width: auto;
   }
 }
 
