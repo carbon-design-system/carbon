@@ -161,6 +161,8 @@ export function generate() {
           });
         }
 
+        shape.style.borders = [];
+
         for (const innerPath of innerPaths) {
           innerPath.name = 'Inner Fill';
           innerPath.style = sharedStyle.style;
