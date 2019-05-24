@@ -123,6 +123,7 @@ const columns = [
     name: 'name',
     title: 'Name',
     sortable: true,
+    secondary: true,
   },
   {
     name: 'protocol',
@@ -172,6 +173,7 @@ const columnsExpandable = [
     name: 'name',
     title: 'Name',
     sortable: true,
+    secondary: true,
   },
   {
     name: 'protocol',
@@ -216,6 +218,7 @@ const rows = [
     },
     name: 'Load Balancer 1',
     protocol: 'HTTP',
+    secondaryText: 'Secondary Text',
     port: '80',
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups Testing a really long text here",
@@ -236,6 +239,7 @@ const rows = [
     },
     name: 'Load Balancer 5',
     protocol: 'HTTP',
+    secondaryText: 'Secondary Text',
     port: '80',
     rule: 'Round Robin',
     attachedGroups: "Maureen's VM Groups",
@@ -357,12 +361,149 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Data Table',
+      label: 'Default',
+      context: {
+        columns: columnsSmall,
+        rows,
+      },
+    },
+    {
+      name: 'compact',
+      label: 'Compact',
+      context: {
+        small: true,
+        columns: columnsSmall,
+        rows,
+      },
+    },
+    {
+      name: 'short',
+      label: 'Short',
+      context: {
+        short: true,
+        columns: columnsSmall,
+        rows,
+      },
+    },
+    {
+      name: 'tall',
+      label: 'Tall',
+      context: {
+        tall: true,
+        columns: columnsSmall,
+        rows,
+      },
+    },
+    {
+      name: 'zebra',
+      label: 'Zebra',
+      context: {
+        columns: columnsSmall,
+        rows,
+        zebra: true,
+      },
+    },
+    {
+      name: 'select',
+      label: 'Select',
       notes: `
         Data Tables are used to represent a collection of resources, displaying a
         subset of their fields in columns, or headers.
       `,
       context: {
+        state: 'default',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'small-select',
+      label: 'Small Select',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        small: true,
+        state: 'default',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'short-select',
+      label: 'Short Select',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        short: true,
+        state: 'default',
+        title: 'Table title',
+        optionalHelper: 'Optional Helper Text',
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        columns,
+        rows,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
+        hasToolbar: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'tall-select',
+      label: 'Tall Select',
+      notes: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers.
+      `,
+      context: {
+        tall: true,
         state: 'default',
         title: 'Table title',
         optionalHelper: 'Optional Helper Text',
@@ -413,16 +554,6 @@ module.exports = {
         sortLabel: 'Sort rows by this header in descending order',
         hasToolbar: true,
         sort: true,
-        zebra: true,
-      },
-    },
-    {
-      name: 'zebra',
-      label: 'Zebra',
-      context: {
-        small: true,
-        columns: columnsSmall,
-        rows,
         zebra: true,
       },
     },
@@ -478,15 +609,6 @@ module.exports = {
       },
     },
     {
-      name: 'small',
-      label: 'Small',
-      context: {
-        small: true,
-        columns: columnsSmall,
-        rows,
-      },
-    },
-    {
       name: 'with-pager',
       label: 'Pagination',
       context: {
@@ -496,35 +618,6 @@ module.exports = {
         batchActions,
         toolbarActions,
         toolbarActionsX,
-        columns,
-        rows,
-        selectedItemsCounterLabel: `
-          <span data-items-selected>3</span> items selected
-        `,
-        searchInputId: 'search__input-2',
-        searchLabelId: 'search-input-label-1',
-        searchLabel: 'Search',
-        clearSearchLabel: 'Clear search input',
-        addNewLabel: 'Add new',
-        cancelLabel: 'Cancel',
-        sortLabel: 'Sort rows by this header in descending order',
-        hasToolbar: true,
-        sort: true,
-      },
-    },
-    {
-      name: 'compat',
-      label: 'Data Table (with deprecated toolbar search and actions)',
-      notes: `
-        Data Tables are used to represent a collection of resources, displaying a
-        subset of their fields in columns, or headers.
-      `,
-      context: {
-        state: 'compat',
-        title: 'Table title',
-        optionalHelper: 'Optional Helper Text',
-        batchActions,
-        toolbarActions,
         columns,
         rows,
         selectedItemsCounterLabel: `
