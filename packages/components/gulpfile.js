@@ -36,7 +36,6 @@ const rollupConfigProd = require('./tools/rollup.config');
 
 // WebPack
 const webpack = require('webpack');
-const webpackDevConfig = require('./tools/webpack.dev.config');
 
 const webpackPromisified = promisify(webpack);
 
@@ -175,7 +174,8 @@ const buildDemoJS = () => {
         browserSync.reload();
       });
   }
-  return webpackPromisified(webpackDevConfig).then(stats => {
+  const webpackDemoConfig = require('./tools/webpack-demo.config'); // eslint-disable-line global-require
+  return webpackPromisified(webpackDemoConfig).then(stats => {
     log(
       '[webpack:build]',
       stats.toString({
@@ -187,14 +187,11 @@ const buildDemoJS = () => {
 
 gulp.task('scripts:dev', gulp.series('scripts:dev:feature-flags', buildDemoJS));
 
-const minifyDemoJS = () =>
-  gulp
-    .src('./demo/demo.js')
-    .pipe(terser())
-    .pipe(rename('demo.min.js'))
-    .pipe(gulp.dest('demo'));
+const setProductionMode = async () => {
+  process.env.NODE_ENV = 'production';
+};
 
-gulp.task('scripts:dev:deploy', gulp.series('scripts:dev', minifyDemoJS));
+gulp.task('scripts:dev:deploy', gulp.series(setProductionMode, 'scripts:dev'));
 
 const pathsToConvertToESM = new Set([
   path.resolve(__dirname, 'src/globals/js/feature-flags.js'),
@@ -650,7 +647,12 @@ gulp.task('serve', gulp.parallel('dev-server', 'watch', 'sass:dev:server'));
 // Build task collection
 gulp.task(
   'build:scripts',
-  gulp.parallel('scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev')
+  gulp.parallel(
+    'scripts:umd',
+    'scripts:es',
+    'scripts:compiled',
+    'scripts:dev:deploy'
+  )
 );
 gulp.task('build:styles', gulp.parallel('sass:compiled', 'sass:source'));
 
