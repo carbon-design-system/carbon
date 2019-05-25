@@ -213,9 +213,9 @@ export class ToastNotification extends Component {
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 
     /**
-     * Specify whether you are using the light variant of the ToastNotification.
+     * Specify whether you are using the low contrast variant of the ToastNotification.
      */
-    light: PropTypes.bool,
+    lowContrast: PropTypes.bool,
 
     /**
      * Specify the title
@@ -309,7 +309,7 @@ export class ToastNotification extends Component {
       subtitle,
       title,
       kind,
-      light,
+      lowContrast,
       hideCloseButton,
       ...other
     } = this.props;
@@ -317,7 +317,7 @@ export class ToastNotification extends Component {
     const classes = classNames(
       `${prefix}--toast-notification`,
       {
-        [`${prefix}--toast-notification--light`]: light,
+        [`${prefix}--toast-notification--low-contrast`]: lowContrast,
         [`${prefix}--toast-notification--${kind}`]: kind,
       },
       className
@@ -367,9 +367,9 @@ export class InlineNotification extends Component {
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 
     /**
-     * Specify whether you are using the light variant of the InlineNotification.
+     * Specify whether you are using the low contrast variant of the InlineNotification.
      */
-    light: PropTypes.bool,
+    lowContrast: PropTypes.bool,
 
     /**
      * Specify the title
@@ -440,7 +440,7 @@ export class InlineNotification extends Component {
       subtitle,
       title,
       kind,
-      light,
+      lowContrast,
       hideCloseButton,
       ...other
     } = this.props;
@@ -448,7 +448,7 @@ export class InlineNotification extends Component {
     const classes = classNames(
       `${prefix}--inline-notification`,
       {
-        [`${prefix}--inline-notification--light`]: light,
+        [`${prefix}--inline-notification--low-contrast`]: lowContrast,
         [`${prefix}--inline-notification--${kind}`]: kind,
       },
       className

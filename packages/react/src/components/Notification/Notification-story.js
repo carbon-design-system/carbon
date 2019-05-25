@@ -19,7 +19,7 @@ const kinds = {
 };
 const notificationProps = () => ({
   kind: select('The notification kind (kind)', kinds, 'info'),
-  light: boolean('Use light variant (light)', false),
+  lowContrast: boolean('Use low contrast variant (lowContrast)', false),
   role: text('ARIA role (role)', 'alert'),
   title: text('Title (title)', 'Notification title'),
   subtitle: text('Subtitle (subtitle)', 'Subtitle text goes here.'),

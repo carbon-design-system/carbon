@@ -53,11 +53,11 @@ module.exports = {
       },
     },
     {
-      name: 'default--light',
-      label: 'Inline Notification (light)',
+      name: 'low-contrast',
+      label: 'Inline Notification (Low contrast)',
       context: {
         variant: 'inline',
-        light: true,
+        lowContrast: true,
         items,
       },
     },
@@ -75,8 +75,8 @@ module.exports = {
       },
     },
     {
-      name: 'toast--light',
-      label: 'Toast Notification (light)',
+      name: 'low-contrast',
+      label: 'Toast Notification (Low contrast)',
       notes: `
         Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
         Toast Notifications use 'kind' props to specify the kind of notification that should render
@@ -84,7 +84,7 @@ module.exports = {
       `,
       context: {
         variant: 'toast',
-        light: true,
+        lowContrast: true,
         items,
       },
     },

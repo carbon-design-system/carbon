@@ -43,7 +43,7 @@
     }
   }
 
-  .#{$prefix}--toast-notification--light {
+  .#{$prefix}--toast-notification--low-contrast {
     color: $text-01;
   }
 
@@ -51,7 +51,7 @@
     @include notification--experimental($inverse-support-01, $inverse-02);
   }
 
-  .#{$prefix}--toast-notification--light.#{$prefix}--toast-notification--error {
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
       $support-01,
       $notification-error-background-color
@@ -62,7 +62,7 @@
     @include notification--experimental($inverse-support-02, $inverse-02);
   }
 
-  .#{$prefix}--toast-notification--light.#{$prefix}--toast-notification--success {
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
       $support-02,
       $notification-success-background-color
@@ -73,7 +73,7 @@
     @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
-  .#{$prefix}--toast-notification--light.#{$prefix}--toast-notification--info {
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info {
     @include notification--experimental(
       $support-04,
       $notification-info-background-color
@@ -84,7 +84,7 @@
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
-  .#{$prefix}--toast-notification--light.#{$prefix}--toast-notification--warning {
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning {
     @include notification--experimental(
       $support-03,
       $notification-warning-background-color
@@ -132,7 +132,7 @@
     }
   }
 
-  .#{$prefix}--toast-notification--light
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
     fill: $ui-05;
@@ -155,7 +155,7 @@
     word-break: break-word;
   }
 
-  .#{$prefix}--toast-notification--light
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
     color: $text-01;
   }
@@ -167,7 +167,7 @@
     margin-bottom: $carbon--spacing-05;
   }
 
-  .#{$prefix}--toast-notification--light
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
     color: $text-01;
   }
