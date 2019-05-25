@@ -30,10 +30,9 @@
     min-height: rem(48px);
     min-width: rem(288px);
     max-width: rem(288px);
-    color: $text-01;
+    color: $inverse-01;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
@@ -48,7 +47,16 @@
     }
   }
 
+  .#{$prefix}--inline-notification--low-contrast {
+    color: $text-01;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+
   .#{$prefix}--inline-notification--error {
+    @include notification--experimental($inverse-support-01, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
       $support-01,
       $notification-error-background-color
@@ -56,6 +64,10 @@
   }
 
   .#{$prefix}--inline-notification--success {
+    @include notification--experimental($inverse-support-02, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
       $support-02,
       $notification-success-background-color
@@ -63,6 +75,10 @@
   }
 
   .#{$prefix}--inline-notification--info {
+    @include notification--experimental($inverse-support-04, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info {
     @include notification--experimental(
       $support-04,
       $notification-info-background-color
@@ -74,6 +90,10 @@
   }
 
   .#{$prefix}--inline-notification--warning {
+    @include notification--experimental($inverse-support-03, $inverse-02);
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning {
     @include notification--experimental(
       $support-03,
       $notification-warning-background-color
@@ -136,8 +156,14 @@
     .#{$prefix}--inline-notification__close-icon {
       height: 1rem;
       width: 1rem;
-      fill: $ui-05;
+      fill: $inverse-01;
     }
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button
+    .#{$prefix}--inline-notification__close-icon {
+    fill: $ui-05;
   }
 }
 
