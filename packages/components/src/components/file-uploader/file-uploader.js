@@ -35,6 +35,9 @@ class FileUploader extends mixin(
     super(element, options);
     this.input = this.element.querySelector(this.options.selectorInput);
     this.container = this.element.querySelector(this.options.selectorContainer);
+    this.dropContainer = this.element.querySelector(
+      this.options.selectorDropContainer
+    );
 
     if (!this.input) {
       throw new TypeError('Cannot find the file input box.');
@@ -47,6 +50,11 @@ class FileUploader extends mixin(
     this.inputId = this.input.getAttribute('id');
     this.manage(on(this.input, 'change', () => this._displayFilenames()));
     this.manage(on(this.container, 'click', this._handleDeleteButton));
+
+    this.manage(
+      on(this.element.ownerDocument, 'dragover', this._handleDragDrop)
+    );
+    this.manage(on(this.element.ownerDocument, 'drop', this._handleDragDrop));
   }
 
   _filenamesHTML(name, id) {
@@ -58,10 +66,19 @@ class FileUploader extends mixin(
 
   _uploadHTML() {
     return `
-      <div data-loading class="${this.options.classLoading}">
-        <svg class="${this.options.classLoadingSvg}" viewBox="-42 -42 84 84">
-          <circle cx="0" cy="0" r="37.5" />
-        </svg>
+      <div class="${this.options.classLoadingAnimation}">
+        <div data-inline-loading-spinner class="${this.options.classLoading}">
+          <svg class="${
+            this.options.classLoadingSvg
+          }" viewBox="-75 -75 150 150">
+            <circle class="${
+              this.options.classLoadingBackground
+            }" cx="0" cy="0" r="37.5" />
+            <circle class="${
+              this.options.classLoadingStroke
+            }" cx="0" cy="0" r="37.5" />
+          </svg>
+        </div>
       </div>`;
   }
 
@@ -114,12 +131,13 @@ class FileUploader extends mixin(
 
   /**
    * Inject selected files into DOM. Invoked on change event.
+   * @param {File[]} files The files to upload.
    */
-  _displayFilenames() {
+  _displayFilenames(files = this.input.files) {
     const container = this.element.querySelector(
       this.options.selectorContainer
     );
-    const HTMLString = toArray(this.input.files)
+    const HTMLString = toArray(files)
       .map(file => this._filenamesHTML(file.name, this.inputId))
       .join('');
 
@@ -161,10 +179,42 @@ class FileUploader extends mixin(
   _handleDeleteButton = evt => {
     const target = eventMatches(evt, `[data-for=${this.inputId}]`);
     if (target) {
-      this._changeState('delete-filename-fileuploader', {
+      this.changeState('delete-filename-fileuploader', {
         initialEvt: evt,
         filenameElement: target.parentNode,
       });
+    }
+  };
+
+  /**
+   * Handles drag/drop event.
+   * @param {MouseEvent} evt The event.
+   * @private
+   */
+  _handleDragDrop = evt => {
+    // In IE11 `evt.dataTransfer.types` is a `DOMStringList` instead of an array
+    if (
+      Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') >= 0 &&
+      !eventMatches(evt, this.options.selectorOtherDropContainers)
+    ) {
+      const inArea = eventMatches(evt, this.options.selectorDropContainer);
+      if (evt.type === 'dragover') {
+        evt.preventDefault();
+        const dropEffect = inArea ? 'copy' : 'none';
+        if (Array.isArray(evt.dataTransfer.types)) {
+          // IE11 throws a "permission denied" error accessing `.effectAllowed`
+          evt.dataTransfer.effectAllowed = dropEffect;
+        }
+        evt.dataTransfer.dropEffect = dropEffect;
+        this.dropContainer.classList.toggle(
+          this.options.classDragOver,
+          Boolean(inArea)
+        );
+      } else if (inArea && evt.type === 'drop') {
+        evt.preventDefault();
+        this._displayFilenames(evt.dataTransfer.files);
+        this.dropContainer.classList.remove(this.options.classDragOver);
+      }
     }
   };
 
@@ -206,13 +256,19 @@ class FileUploader extends mixin(
       selectorInput: `input[type="file"].${prefix}--file-input`,
       selectorContainer: '[data-file-container]',
       selectorCloseButton: `.${prefix}--file-close`,
-      classLoading: `${prefix}--loading`,
+      selectorDropContainer: `[data-file-drop-container]`,
+      selectorOtherDropContainers: '[data-drop-container]',
+      classLoading: `${prefix}--loading ${prefix}--loading--small`,
+      classLoadingAnimation: `${prefix}--inline-loading__animation`,
       classLoadingSvg: `${prefix}--loading__svg`,
+      classLoadingBackground: `${prefix}--loading__background`,
+      classLoadingStroke: `${prefix}--loading__stroke`,
       classFileName: `${prefix}--file-filename`,
       classFileClose: `${prefix}--file-close`,
       classFileComplete: `${prefix}--file-complete`,
       classSelectedFile: `${prefix}--file__selected-file`,
       classStateContainer: `${prefix}--file__state-container`,
+      classDragOver: `${prefix}--file__drop-container--drag-over`,
       eventBeforeDeleteFilenameFileuploader:
         'fileuploader-before-delete-filename',
       eventAfterDeleteFilenameFileuploader:

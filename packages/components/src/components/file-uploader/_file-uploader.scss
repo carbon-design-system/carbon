@@ -40,10 +40,35 @@
     @include hidden;
   }
 
+  /// This class is of old markup with "select file" button
+  /// New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  /// @deprecated
   .#{$prefix}--file-btn {
     display: inline-flex;
     margin: 0;
     padding-right: rem(64px);
+  }
+
+  .#{$prefix}--file-browse-btn {
+    color: $link-01;
+    outline: none;
+    transition: $duration--fast-01 motion(standard, productive);
+    cursor: pointer;
+  }
+
+  .#{$prefix}--file-browse-btn:hover {
+    color: $link-01;
+    box-shadow: 0 1px currentColor;
+  }
+
+  .#{$prefix}--file-browse-btn:active,
+  .#{$prefix}--file-browse-btn:active:visited {
+    color: $text-01;
+    box-shadow: 0 1px currentColor;
+  }
+
+  .#{$prefix}--file-browse-btn:focus {
+    box-shadow: 0 3px currentColor;
   }
 
   .#{$prefix}--label-description {
@@ -57,6 +82,9 @@
   .#{$prefix}--file-container {
     display: block;
     width: 100%;
+  }
+
+  .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $carbon--spacing-06;
   }
 
@@ -65,7 +93,7 @@
     align-items: center;
     justify-content: space-between;
     height: rem(40px);
-    max-width: rem(300px);
+    max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
     background-color: $field-01;
@@ -99,7 +127,7 @@
 
   .#{$prefix}--file-filename {
     @include type-style('body-short-01');
-    @include text-overflow(300px);
+    @include text-overflow(320px);
     display: inline-block;
     align-items: center;
     color: $text-01;
@@ -133,6 +161,33 @@
     border: none;
     cursor: pointer;
     padding: 0;
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    fill: $icon-02;
+  }
+
+  .#{$prefix}--file__drop-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: rem(96px);
+    max-width: rem(320px);
+    margin-top: $carbon--spacing-03;
+    padding: 16px;
+    overflow: hidden;
+    background: linear-gradient(90deg, $ui-04 66%, transparent 0%) top/6px 1px
+        repeat-x,
+      linear-gradient(0deg, $ui-04 66%, transparent 0%) right/1px 6px repeat-y,
+      linear-gradient(270deg, $ui-04 66%, transparent 0%) bottom/6px 1px
+        repeat-x,
+      linear-gradient(180deg, $ui-04 66%, transparent 0%) left/1px 6px repeat-y;
+  }
+
+  .#{$prefix}--file__drop-container--drag-over {
+    background: none;
+    outline: 2px solid $interactive-03;
+    outline-offset: -2px;
   }
 }
 
