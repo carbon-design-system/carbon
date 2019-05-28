@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import SideNavFooter from './SideNavFooter';
+import { HandleMenuButtonClickContext } from './Header';
 
 const { prefix } = settings;
 
@@ -18,6 +19,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const {
     expanded: expandedProp,
     defaultExpanded,
+    isChildOfHeader,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     children,
@@ -25,10 +27,14 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     className: customClassName,
     translateById: t,
   } = props;
+
+  const handleMenuButtonClickContext = useContext(HandleMenuButtonClickContext);
+
+  let sideNavExpandedState = handleMenuButtonClickContext.state;
+
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
@@ -49,8 +55,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded`]: expanded || sideNavExpandedState,
     [customClassName]: !!customClassName,
+    [`${prefix}--side-nav--ux`]: isChildOfHeader,
   });
 
   return (
@@ -79,6 +86,7 @@ SideNav.defaultProps = {
     return translations[id];
   },
   defaultExpanded: false,
+  isChildOfHeader: true,
 };
 
 SideNav.propTypes = {
@@ -119,6 +127,10 @@ SideNav.propTypes = {
    * the label you want displayed or read by screen readers.
    */
   translateById: PropTypes.func,
+  /**
+   * Specify is SideNav is being used with Header
+   */
+  isChildOfHeader: PropTypes.bool,
 };
 
 export default SideNav;
