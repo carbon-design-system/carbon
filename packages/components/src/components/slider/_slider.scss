@@ -126,10 +126,6 @@
     &::-webkit-inner-spin-button {
       display: none;
     }
-
-    &:hover {
-      background-color: $hover-field;
-    }
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
