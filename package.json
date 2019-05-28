@@ -11,7 +11,7 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": []
+    "nohoist": ["**/eslint", "eslint/**"]
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -83,6 +83,10 @@
     "packages/components/**/*.js": [
       "yarn format:staged",
       "yarn lerna run lint:staged --scope carbon-components",
+      "git add"
+    ],
+    "packages/components/**/*.scss": [
+      "yarn format:staged",
       "git add"
     ],
     "packages/react/**/*.js": [

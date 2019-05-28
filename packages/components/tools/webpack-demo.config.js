@@ -30,10 +30,12 @@ class FeatureFlagProxyPlugin {
 module.exports = {
   mode: env,
   devtool: 'source-maps',
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, '../demo/index'),
-  ],
+  entry: !isDev
+    ? [path.resolve(__dirname, '../demo/index')]
+    : [
+        'webpack-hot-middleware/client?reload=true',
+        path.resolve(__dirname, '../demo/index'),
+      ],
   output: {
     path: path.resolve(__dirname, '../demo'),
     publicPath: '/',

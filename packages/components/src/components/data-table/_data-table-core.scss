@@ -163,11 +163,15 @@
     outline: none;
   }
 
-  .#{$prefix}--data-table
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu
-    .#{$prefix}--overflow-menu__icon {
-    opacity: 0;
+  @media screen and (hover: hover),
+    (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
+    .#{$prefix}--data-table
+      td.#{$prefix}--table-column-menu
+      .#{$prefix}--overflow-menu
+      .#{$prefix}--overflow-menu__icon {
+      opacity: 0;
+    }
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
