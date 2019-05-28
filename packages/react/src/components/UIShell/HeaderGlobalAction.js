@@ -44,7 +44,7 @@ const HeaderGlobalAction = ({
       {...rest}
       {...accessibilityLabel}
       className={className}
-      onClick={event => console.log(event)}
+      onClick={onClick}
       type="button">
       {children}
     </button>

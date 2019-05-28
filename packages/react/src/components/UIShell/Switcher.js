@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -26,29 +26,26 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const className = cx({
-    [`${prefix}--switcher`]: true,
+  const className = cx(`${prefix}--switcher--item`, {
     [customClassName]: !!customClassName,
   });
 
-  const classNameItem = cx({
-    [`${prefix}--switcher--item`]: true,
+  const classNameItem = cx(`${prefix}--switcher--item`, {
     [customClassName]: !!customClassName,
   });
 
-  const classNameItemLink = cx({
-    [`${prefix}--switcher--item-link`]: true,
+  const classNameItemLink = cx(`${prefix}--switcher--item-link`, {
     [customClassName]: !!customClassName,
   });
 
   return (
-    <ul className={`${className}`} {...accessibilityLabel}>
+    <ul className={className} {...accessibilityLabel}>
       {links &&
         links.map((link, i) => {
           return (
-            <li key={i} className={`${classNameItem}`}>
+            <li key={i} className={classNameItem}>
               <a
-                className={`${classNameItemLink}`}
+                className={classNameItemLink}
                 tabIndex={0}
                 href={link.href}
                 aria-label={link.linkText}>

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -27,14 +27,13 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const className = cx({
-    [`${prefix}--header-panel`]: true,
+  const className = cx(`${prefix}--header-panel`, {
     [`${prefix}--header-panel--expanded`]: expanded,
     [customClassName]: !!customClassName,
   });
 
   return (
-    <div ref={ref} className={`${className}`} {...accessibilityLabel}>
+    <div className={className} {...accessibilityLabel}>
       {children}
     </div>
   );
