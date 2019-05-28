@@ -45,9 +45,9 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--disabled`]: disabled,
   });
 
-  if (__DEV__ && small) {
+  if (__DEV__) {
     warning(
-      false,
+      !small,
       `\nButton property "small" deprecated in favor of "size". \nInstead of using the "small" property on the Button, set the "size" property to "small".`
     );
   }
@@ -120,6 +120,13 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify the size of the button, from a list of available sizes.
+   * For `default` buttons, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small']),
+
+  /**
+   * Deprecated in v10 in favor of `size`.
    * Specify whether the Button should be a small variant
    */
   small: PropTypes.bool,
