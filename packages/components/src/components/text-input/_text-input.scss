@@ -33,10 +33,6 @@
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
-    &:hover {
-      background-color: $hover-field;
-    }
-
     &:focus,
     &:active {
       @include focus-outline('outline');
