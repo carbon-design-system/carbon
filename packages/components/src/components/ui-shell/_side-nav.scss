@@ -311,10 +311,6 @@
     color: $ibm-color__gray-100;
   }
 
-  .#{$prefix}--side-nav__item--active {
-    background-color: $ibm-color__gray-20;
-  }
-
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > {Menu,Submenu}
   //----------------------------------------------------------------------------
@@ -348,12 +344,24 @@
 
   .#{$prefix}--side-nav__submenu-chevron > svg {
     transition: transform $duration--fast-02;
+    height: rem(16px);
+    width: rem(16px);
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     .#{$prefix}--side-nav__submenu-chevron
     > svg {
     transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
+    font-weight: 600;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] {
@@ -387,14 +395,20 @@
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link--current,
   .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[aria-current='page'] {
+    a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
     background-color: $ibm-color__gray-20;
 
     > span {
       color: $ibm-color__gray-100;
+      font-weight: 600;
     }
   }
 
+  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
+    font-weight: 600;
+  }
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
