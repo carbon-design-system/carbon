@@ -27,6 +27,9 @@ packages/components/css
 packages/components/scss
 packages/components/docs/js
 
+# Sketch
+**/*.sketchplugin/**
+
 # Changelogs
 **/CHANGELOG.md
 
