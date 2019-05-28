@@ -13,7 +13,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const Switcher = React.forwardRef(function Switcher(props, ref) {
+const Switcher = React.forwardRef(function Switcher(props) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
