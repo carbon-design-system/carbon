@@ -46,10 +46,6 @@
       outline $duration--fast-02 motion(standard, productive);
     border-bottom: 1px solid $ui-04;
 
-    &:hover {
-      background-color: $hover-field;
-    }
-
     &:focus {
       @include focus-outline('outline');
     }
@@ -176,10 +172,6 @@
     &::before {
       background-color: $focus;
     }
-  }
-
-  .#{$prefix}--search-input:hover ~ .#{$prefix}--search-close::before {
-    background-color: $hover-field;
   }
 
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
