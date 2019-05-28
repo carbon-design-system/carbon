@@ -6,7 +6,7 @@
 -->
 
 {{#each items}}
-  <div data-notification class="{{@root.prefix}}--{{../variant}}-notification {{@root.prefix}}--{{../variant}}-notification--{{type}}" role="alert">
+  <div data-notification class="{{@root.prefix}}--{{../variant}}-notification {{@root.prefix}}--{{../variant}}-notification--{{type}}{{#if ../lowContrast}} {{@root.prefix}}--{{../variant}}-notification--low-contrast{{/if}}" role="alert">
     {{#is ../variant "toast"}}
       {{#is type "error"}}
         {{ carbon-icon 'ErrorFilled20' class=(add @root.prefix (add '--' (add ../variant '-notification__icon'))) }}
