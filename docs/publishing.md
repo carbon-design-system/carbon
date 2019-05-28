@@ -31,10 +31,10 @@
 
 ```bash
 yarn lerna version \
-  <bump>                # See `lerna version --help` for all options
-  --exact               # Updates package.json if direct dependency
-  --preid <id>          # Specify suffix in version, only alpha, beta, and rc
-  --no-push             # Don't push to the git origin
+  <bump>           \    # See `lerna version --help` for all options
+  --exact          \    # Updates package.json if direct dependency
+  --preid <id>     \    # Specify suffix in version, only alpha, beta, and rc
+  --no-push        \    # Don't push to the git origin
   --no-git-tag-version  # Don't create a git tag
 ```
 
