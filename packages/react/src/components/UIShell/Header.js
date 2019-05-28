@@ -30,7 +30,6 @@ const Header = ({
   const handleHeaderMenuButtonClick = () => {
     const newSideNavExpandedState = !isSideNavExpandedState;
     setIsSideNavExpandedState(newSideNavExpandedState);
-    console.log('new state:', newSideNavExpandedState);
     return newSideNavExpandedState;
   };
 
