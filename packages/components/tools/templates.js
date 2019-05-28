@@ -31,7 +31,9 @@ const handlebars = expressHandlebars.create({
 });
 
 const Handlebars = handlebars.handlebars;
-helpers();
+helpers({
+  handlebars: Handlebars,
+});
 iconHelper({ handlebars: Handlebars });
 
 const readFile = promisify(fs.readFile);
