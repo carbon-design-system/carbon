@@ -12,7 +12,6 @@
 @import '../../globals/scss/vars';
 @import 'functions';
 @import 'theme';
-@import '@carbon/motion/scss/motion.scss';
 
 /// UI shell side nav
 /// @access private
@@ -29,6 +28,10 @@
     color: $shell-panel-text-01;
   }
 
+  .#{$prefix}--switcher--item {
+    width: 100%;
+  }
+
   .#{$prefix}--switcher--item:nth-child(1),
   .#{$prefix}--switcher--item:nth-last-child(3) {
     position: relative;
@@ -42,7 +45,39 @@
       bottom: rem(-9px);
       width: rem(222px);
       margin-left: $spacing-05;
-      border-top: 1px solid $carbon--gray-80;
+      border-top: 1px solid $shell-panel-border;
+    }
+  }
+
+  .#{$prefix}--switcher--item:nth-last-child(3) {
+    margin-top: 0;
+  }
+
+  .#{$prefix}--switcher--item:nth-child(2),
+  .#{$prefix}--switcher--item:nth-last-child(2) {
+    padding-top: rem(9px);
+  }
+
+  .#{$prefix}--switcher--item-link {
+    @include carbon--type-style('heading-01');
+    display: block;
+    text-decoration: none;
+    padding: rem(6px) $spacing-05;
+    color: $shell-panel-text-01;
+
+    &:hover {
+      background: $shell-panel-bg-02;
+      color: $shell-panel-text-02;
+    }
+
+    &:focus {
+      outline: 2px solid $shell-panel-focus;
+      outline-offset: -2px;
+    }
+
+    &:active {
+      background: $shell-panel-bg-03;
+      color: $shell-panel-text-02;
     }
   }
 }
@@ -52,47 +87,3 @@
     @include carbon-switcher;
   }
 }
-
-// .#{$prefix}--website-switcher-list__item:nth-child(1),
-// .#{$prefix}--website-switcher-list__item:nth-last-child(3) {
-//   position: relative;
-//   margin-top: $spacing-05;
-//   margin-bottom: $spacing-03;
-
-//   &::after {
-//     content: '';
-//     display: block;
-//     position: absolute;
-//     bottom: rem(-9px);
-//     width: rem(222px);
-//     margin-left: $spacing-05;
-//     border-top: 1px solid $carbon--gray-80;
-//   }
-// }
-
-// .#{$prefix}--website-switcher-list__item:nth-last-child(3) {
-//   margin-top: 0;
-// }
-
-// .#{$prefix}--website-switcher-list__item:nth-child(2),
-// .#{$prefix}--website-switcher-list__item:nth-last-child(2) {
-//   padding-top: rem(9px);
-// }
-
-// .#{$prefix}--website-switcher-list__item-link {
-//   @include carbon--type-style('heading-01');
-//   display: block;
-//   text-decoration: none;
-//   padding: rem(6px) 1rem;
-//   color: $carbon--gray-30;
-
-//   &:hover {
-//     background: #353535;
-//     color: $carbon--gray-10;
-//   }
-
-//   &:focus {
-//     outline: 2px solid $shell-side-nav-accent-01;
-//     outline-offset: -2px;
-//   }
-// }

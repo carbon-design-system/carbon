@@ -236,6 +236,7 @@ storiesOf('[Experimental] UI Shell', module)
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="App Switcher"
+            isActive
             onClick={action('app-switcher click')}>
             <AppSwitcher20 />
           </HeaderGlobalAction>
