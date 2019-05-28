@@ -13,7 +13,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const HeaderPanel = React.forwardRef(function HeaderPanel(props, ref) {
+const HeaderPanel = React.forwardRef(function HeaderPanel(props) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
