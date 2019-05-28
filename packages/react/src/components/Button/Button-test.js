@@ -216,6 +216,17 @@ describe('Ghost Button', () => {
 
 describe('Small Button', () => {
   describe('Renders as expected', () => {
+    const wrapper = shallow(<Button size="small" className="extra-class" />);
+
+    it('Has the expected classes for small', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
+    });
+
+    it('Should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+  describe('deprecated prop `small`', () => {
     const wrapper = shallow(<Button small className="extra-class" />);
 
     it('Has the expected classes for small', () => {
