@@ -94,11 +94,15 @@ $shell-header-icon-03: $carbon--gray-30;
 /// @group ui-shell
 $shell-header-link: $carbon--blue-60;
 
+//----------------------------------------------------------------------------
+// Header Panel tokens
+//----------------------------------------------------------------------------
+
 /// Header-panel background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-01: $carbon--gray-10; //TODO waiting for updated color
+$shell-panel-bg-01: $carbon--gray-100;
 
 /// Panel item hover
 /// @type Color
@@ -118,17 +122,17 @@ $shell-panel-bg-03: $carbon--gray-30; //TODO waiting for updated color
 /// @group ui-shell
 $shell-panel-bg-04: $carbon--white-0; //TODO waiting for updated color
 
-/// Secondary text in header-panel, Category label
+/// Panel input background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-text-03: $carbon--gray-50; //TODO waiting for updated color
+$shell-panel-border: $carbon--gray-80;
 
-/// Header icon selected state background
+/// Secondary text in header-panel
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-icon-selected: $carbon--blue-60; //TODO waiting for updated color
+$shell-panel-text-01: $carbon--gray-30;
 
 //----------------------------------------------------------------------------
 // Side nav tokens

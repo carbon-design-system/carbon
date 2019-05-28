@@ -26,6 +26,7 @@ import {
   HeaderMenuItem,
   HeaderGlobalBar,
   HeaderGlobalAction,
+  HeaderPanel,
   SkipToContent,
   SideNav,
   SideNavHeader,
@@ -182,6 +183,7 @@ storiesOf('[Experimental] UI Shell', module)
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
+        <HeaderPanel expanded />
       </Header>
     ))
   )

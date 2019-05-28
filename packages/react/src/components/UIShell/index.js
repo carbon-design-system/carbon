@@ -15,6 +15,7 @@ export HeaderMenuButton from './HeaderMenuButton';
 export HeaderMenuItem from './HeaderMenuItem';
 export HeaderName from './HeaderName';
 export HeaderNavigation from './HeaderNavigation';
+export HeaderPanel from './HeaderPanel';
 
 export SkipToContent from './SkipToContent';
 
