@@ -228,10 +228,7 @@ storiesOf('[Experimental] UI Shell', module)
       <>
         <Header aria-label="IBM Platform Name">
           <SkipToContent />
-          <HeaderMenuButton
-            aria-label="Open menu"
-            onClick={action('Menu clicked')}
-          />
+          <HeaderMenuButton aria-label="Open menu" />
           <HeaderName href="#" prefix="IBM">
             [Platform]
           </HeaderName>
@@ -262,34 +259,38 @@ storiesOf('[Experimental] UI Shell', module)
               <AppSwitcher20 />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
-        </Header>
-        <SideNav aria-label="Side navigation">
-          <SideNavHeader renderIcon={Fade16}>
-            <SideNavDetails title="Side navigation title">
-              <SideNavSwitcher
-                labelText="Switcher"
-                onChange={action('switcher changed')}
-                options={['Option 1', 'Option 2', 'Option 3']}
-              />
-            </SideNavDetails>
-          </SideNavHeader>
-          <SideNavItems>
-            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-              Link
-            </SideNavLink>
-            <SideNavMenu
-              defaultExpanded
-              renderIcon={Fade16}
-              isActive
-              title="Category title">
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+          <SideNav aria-label="Side navigation">
+            <SideNavHeader renderIcon={Fade16}>
+              <SideNavDetails title="Side navigation title">
+                <SideNavSwitcher
+                  labelText="Switcher"
+                  onChange={action('switcher changed')}
+                  options={['Option 1', 'Option 2', 'Option 3']}
+                />
+              </SideNavDetails>
+            </SideNavHeader>
+            <SideNavItems>
+              <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
                 Link
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            </SideNavMenu>
-          </SideNavItems>
-        </SideNav>
+              </SideNavLink>
+              <SideNavMenu
+                defaultExpanded
+                renderIcon={Fade16}
+                isActive
+                title="Category title">
+                <SideNavMenuItem href="javascript:void(0)">
+                  Link
+                </SideNavMenuItem>
+                <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                  Link
+                </SideNavMenuItem>
+                <SideNavMenuItem href="javascript:void(0)">
+                  Link
+                </SideNavMenuItem>
+              </SideNavMenu>
+            </SideNavItems>
+          </SideNav>
+        </Header>
         <StoryContent />
       </>
     ))
