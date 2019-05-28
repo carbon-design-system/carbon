@@ -47,10 +47,6 @@
       @include focus-outline('outline');
     }
 
-    &:hover {
-      background-color: $hover-field;
-    }
-
     &:disabled {
       cursor: not-allowed;
       background-color: $disabled-background-color;
