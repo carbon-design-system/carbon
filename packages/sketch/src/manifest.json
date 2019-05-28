@@ -1,0 +1,81 @@
+{
+  "identifier": "com.ibm.carbon.elements",
+  "compatibleVersion": "3",
+  "bundleVersion": 1,
+  "name": "Carbon Elements 🎨",
+  "commands": [
+    {
+      "name": "Sync shared layer styles",
+      "identifier": "carbon.elements.colors.sync",
+      "script": "commands/index.js",
+      "handler": "syncColors"
+    },
+    {
+      "name": "Generate color page",
+      "identifier": "carbon.elements.colors.generate",
+      "script": "commands/index.js",
+      "handler": "generateColors"
+    },
+    {
+      "name": "Sync shared layer styles",
+      "identifier": "carbon.elements.themes.sync",
+      "script": "commands/index.js",
+      "handler": "syncThemes"
+    },
+    {
+      "name": "Generate themes page",
+      "identifier": "carbon.elements.themes.generate",
+      "script": "commands/index.js",
+      "handler": "generateThemes"
+    },
+    {
+      "name": "Sync shared layer styles",
+      "identifier": "carbon.elements.type.sync",
+      "script": "commands/index.js",
+      "handler": "syncType"
+    },
+    {
+      "name": "Generate type page",
+      "identifier": "carbon.elements.type.generate",
+      "script": "commands/index.js",
+      "handler": "generateType"
+    },
+    {
+      "name": "Generate icon page and symbols",
+      "identifier": "carbon.elements.icons.generate",
+      "script": "commands/index.js",
+      "handler": "generateIcons"
+    }
+  ],
+  "menu": {
+    "items": [
+      {
+        "title": "Colors",
+        "items": [
+          "carbon.elements.colors.sync",
+          "carbon.elements.colors.generate"
+        ]
+      },
+      {
+        "title": "Themes",
+        "items": [
+          "carbon.elements.themes.sync",
+          "carbon.elements.themes.generate"
+        ]
+      },
+      {
+        "title": "Icons",
+        "items": [
+          "carbon.elements.icons.generate"
+        ]
+      },
+      {
+        "title": "Type",
+        "items": [
+          "carbon.elements.type.sync",
+          "carbon.elements.type.generate"
+        ]
+      }
+    ]
+  }
+}
