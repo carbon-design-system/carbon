@@ -143,7 +143,7 @@ $z-indexes: (
     'skeleton',
     () => (
       <div style={{ width: '800px' }}>
-        <CodeSnippetSkeleton type="single" style={{ paddingBottom: 8 }} />
+        <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
         <CodeSnippetSkeleton type="multi" />
       </div>
     ),

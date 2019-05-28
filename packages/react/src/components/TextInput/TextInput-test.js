@@ -80,6 +80,24 @@ describe('TextInput', () => {
         expect(textInput().props().defaultValue).toEqual('test');
       });
 
+      it('should count length increases in text input value', () => {
+        const event = { target: { value: 'z' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textInput().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
+        ).toBe('1/10');
+      });
+
+      it('should count length decreases in text input value', () => {
+        const event = { target: { value: '' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textInput().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
+        ).toBe('0/10');
+      });
+
       it('should set disabled as expected', () => {
         expect(textInput().props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
@@ -120,14 +138,14 @@ describe('TextInput', () => {
         wrapper.setProps({
           helperText: (
             <span>
-              This helper text has <a href="/">a link</a>.
+              This helper text has <a href="#">a link</a>.
             </span>
           ),
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
-            This helper text has <a href="/">a link</a>.
+            This helper text has <a href="#">a link</a>.
           </span>
         );
       });

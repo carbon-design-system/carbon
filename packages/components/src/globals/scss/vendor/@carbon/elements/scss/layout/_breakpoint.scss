@@ -9,10 +9,22 @@
 @import 'convert';
 @import 'utilities';
 
+/// Carbon gutter size in rem
+/// @type Number
+/// @access public
+/// @group @carbon/layout
 $carbon--grid-gutter: carbon--rem(32px);
+
+/// Carbon condensed gutter size in rem
+/// @type Number
+/// @access public
+/// @group @carbon/layout
 $carbon--grid-gutter--condensed: carbon--rem(2px);
 
 // Initial map of our breakpoints and their values
+/// @type Map
+/// @access public
+/// @group @carbon/layout
 $carbon--grid-breakpoints: (
   sm: (
     columns: 4,
@@ -41,12 +53,13 @@ $carbon--grid-breakpoints: (
   ),
 ) !default;
 
-/// Get the value of the next breakpoint, or null for the last breakpoint.
-/// @param {String} $name - the name of the brekapoint
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
-/// of the breakpoint and the value is the values for the breakpoint
-/// @param {List} $breakpoint-names [map-keys($breakpoints)] - a list of names from the $breakpoints map
-/// @returns {String}
+/// Get the value of the next breakpoint, or null for the last breakpoint
+/// @param {String} $name - The name of the brekapoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
+/// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
 @function carbon--breakpoint-next(
   $name,
   $breakpoints: $carbon--grid-breakpoints,
@@ -59,6 +72,13 @@ $carbon--grid-breakpoints: (
   @return null;
 }
 
+/// Get the value of the previous breakpoint, or null for the first breakpoint
+/// @param {String} $name - The name of the brekapoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
+/// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
 @function carbon--breakpoint-prev(
   $name,
   $breakpoints: $carbon--grid-breakpoints,
@@ -72,6 +92,11 @@ $carbon--grid-breakpoints: (
 }
 
 /// Check to see if the given breakpoint name
+/// @param {String} $name - The name of the brekapoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
+/// @return {Bool}
+/// @access public
+/// @group @carbon/layout
 @function carbon--is-smallest-breakpoint(
   $name,
   $breakpoints: $carbon--grid-breakpoints
@@ -79,9 +104,11 @@ $carbon--grid-breakpoints: (
   @return index(map-keys($breakpoints), $name) == 1;
 }
 
-/// returns the largest breakpoint name
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
-/// @content
+/// Returns the largest breakpoint name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
 @function carbon--largest-breakpoint-name(
   $breakpoints: $carbon--grid-breakpoints
 ) {
@@ -89,18 +116,21 @@ $carbon--grid-breakpoints: (
   @return carbon--key-by-index($breakpoints, $total-breakpoints);
 }
 
-/// Get the infix for a given breakpoint in a list of breakpoints. Usesful for
-/// generate the size part in a selector, for example: `.prefix--col-sm-2`
-/// @param {String} $name - the name of the breakpoint
-/// @returns {String}
+/// Get the infix for a given breakpoint in a list of breakpoints. Usesful for generate the size part in a selector, for example: `.prefix--col-sm-2`.
+/// @param {String} $name - The name of the breakpoint
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
 @function carbon--breakpoint-infix($name) {
   @return '-#{$name}';
 }
 
 /// Generate a media query up to the width of the given breakpoint name
-/// @param {string | number} $name
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
+/// @param {String | Number} $name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
+/// @access public
+/// @group @carbon/layout
 @mixin carbon--breakpoint-up($name, $breakpoints: $carbon--grid-breakpoints) {
   @if type-of($name) == 'number' {
     @media (min-width: $name) {
@@ -122,9 +152,11 @@ $carbon--grid-breakpoints: (
 }
 
 /// Generate a media query for the maximum width of the given styles
-/// @param {string | number} $name
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
+/// @param {String | Number} $name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
+/// @access public
+/// @group @carbon/layout
 @mixin carbon--breakpoint-down($name, $breakpoints: $carbon--grid-breakpoints) {
   @if type-of($name) == 'number' {
     @media (max-width: $name) {
@@ -145,11 +177,13 @@ $carbon--grid-breakpoints: (
   }
 }
 
-/// Generate a media query for the range between the lower and upper
-/// breakpoints.
-/// @param {string | number} $lower
-/// @param {string | number} $upper
+/// Generate a media query for the range between the lower and upper breakpoints
+/// @param {String | Number} $lower
+/// @param {String | Number} $upper
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
+/// @access public
+/// @group @carbon/layout
 @mixin carbon--breakpoint-between(
   $lower,
   $upper,
@@ -179,9 +213,11 @@ $carbon--grid-breakpoints: (
   }
 }
 
-/// generate media query for the largest breakpoint
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
+/// Generate media query for the largest breakpoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
+/// @access public
+/// @group @carbon/layout
 @mixin carbon--largest-breakpoint($breakpoints: $carbon--grid-breakpoints) {
   @include carbon--breakpoint(carbon--largest-breakpoint-name()) {
     @content;
@@ -189,9 +225,11 @@ $carbon--grid-breakpoints: (
 }
 
 /// Generate a media query for a given breakpoint
-/// @param {string | number} $name
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - a map of breakpoints where the key is the name
+/// @param {String | Number} $name
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
 /// @content
+/// @access public
+/// @group @carbon/layout
 @mixin carbon--breakpoint($name, $breakpoints: $carbon--grid-breakpoints) {
   @include carbon--breakpoint-up($name, $breakpoints) {
     @content;

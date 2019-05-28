@@ -1,0 +1,20 @@
+{
+  "name": "browserslist-config-carbon",
+  "description": "Browserslist config for the Carbon Design System",
+  "version": "10.2.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/browserslist-config-carbon",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "keywords": [
+    "eyeglass-module",
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -38,7 +38,7 @@
 }
 
 @include exports('css--helpers') {
-  @if global-variable-exists('css--helpers') == false or $css--helpers == true {
+  @if variable-exists('css--helpers') == false or $css--helpers == true {
     @include css-helpers;
   }
 }

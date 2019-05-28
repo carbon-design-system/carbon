@@ -16,7 +16,7 @@
 ///   @if feature-flag-enabled('components-x') { ... }
 /// @group feature-flags
 @function feature-flag-enabled($feature) {
-  @if global-variable-exists(feature-flags) ==
+  @if variable-exists(feature-flags) ==
     true and
     map-get($feature-flags, $feature) ==
     true

@@ -41,6 +41,10 @@
   - [✅support-02 [variable]](#support-02-variable)
   - [✅support-03 [variable]](#support-03-variable)
   - [✅support-04 [variable]](#support-04-variable)
+  - [✅inverse-support-01 [variable]](#inverse-support-01-variable)
+  - [✅inverse-support-02 [variable]](#inverse-support-02-variable)
+  - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
+  - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
   - [✅focus [variable]](#focus-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
@@ -107,6 +111,10 @@ Define theme variables from a map of tokens
   $support-02: map-get($theme, 'support-02') !global;
   $support-03: map-get($theme, 'support-03') !global;
   $support-04: map-get($theme, 'support-04') !global;
+  $inverse-support-01: map-get($theme, 'inverse-support-01') !global;
+  $inverse-support-02: map-get($theme, 'inverse-support-02') !global;
+  $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
+  $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
@@ -204,6 +212,10 @@ Define theme variables from a map of tokens
   - [support-02 [variable]](#support-02-variable)
   - [support-03 [variable]](#support-03-variable)
   - [support-04 [variable]](#support-04-variable)
+  - [inverse-support-01 [variable]](#inverse-support-01-variable)
+  - [inverse-support-02 [variable]](#inverse-support-02-variable)
+  - [inverse-support-03 [variable]](#inverse-support-03-variable)
+  - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [focus [variable]](#focus-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -267,6 +279,10 @@ $carbon--theme--white: (
   support-02: #24a148,
   support-03: #fdd13a,
   support-04: #054ada,
+  inverse-support-01: #fb4b53,
+  inverse-support-02: #3dbb61,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
   hover-primary: #0353e9,
@@ -338,6 +354,10 @@ $carbon--theme--g10: (
   support-02: #24a148,
   support-03: #fdd13a,
   support-04: #054ada,
+  inverse-support-01: #fb4b53,
+  inverse-support-02: #3dbb61,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
   hover-primary: #0353e9,
@@ -407,6 +427,10 @@ $carbon--theme--g90: (
   support-02: #3dbb61,
   support-03: #fdd13a,
   support-04: #408bfc,
+  inverse-support-01: #da1e28,
+  inverse-support-02: #24a148,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
   hover-primary: #0353e9,
@@ -476,6 +500,10 @@ $carbon--theme--g100: (
   support-02: #3dbb61,
   support-03: #fdd13a,
   support-04: #408bfc,
+  inverse-support-01: #da1e28,
+  inverse-support-02: #24a148,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
   hover-primary: #0353e9,
@@ -994,6 +1022,78 @@ Information
 
 ```scss
 $support-04: map-get($carbon--theme, 'support-04');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-01 [variable]
+
+Error on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-01: map-get($carbon--theme, 'inverse-support-01');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-02 [variable]
+
+Success on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-02: map-get($carbon--theme, 'inverse-support-02');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-03 [variable]
+
+Warning on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-03: map-get($carbon--theme, 'inverse-support-03');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-04 [variable]
+
+Information on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-04: map-get($carbon--theme, 'inverse-support-04');
 ```
 
 </details>
