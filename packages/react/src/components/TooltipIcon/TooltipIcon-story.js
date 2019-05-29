@@ -12,8 +12,10 @@ import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
 
 const directions = {
-  'Bottom (bottom)': 'bottom',
   'Top (top)': 'top',
+  'Right (right)': 'right',
+  'Bottom (bottom)': 'bottom',
+  'Left (left)': 'left',
 };
 
 const alignments = {
