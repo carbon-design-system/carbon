@@ -4,6 +4,7 @@ exports[`Header should render 1`] = `
 <Header
   aria-label="label"
   className="custom-class"
+  isSideNavExpanded={false}
 >
   <header
     aria-label="label"
