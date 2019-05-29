@@ -787,7 +787,7 @@ icons:
     friendly_name: Maximize
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - enlarge
       - full screen
@@ -1432,7 +1432,7 @@ icons:
     friendly_name: Zoom
     usage: This is a description for usage
     categories:
-      - example category
+      - Navigation
     aliases:
       - expand
       - inspect
@@ -1456,7 +1456,7 @@ icons:
     friendly_name: 4 k
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - four k
       - resolution
@@ -1475,7 +1475,7 @@ icons:
     friendly_name: Api
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - Application Programming Interface
       - tool
@@ -1494,7 +1494,7 @@ icons:
     friendly_name: Cad
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - computer aided design
       - canada
@@ -1511,7 +1511,7 @@ icons:
     friendly_name: Csv
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - file
       - file type
@@ -1526,7 +1526,7 @@ icons:
     friendly_name: Dvr
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - record
       - digital
@@ -1540,7 +1540,7 @@ icons:
     friendly_name: Gif
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - file
       - file type
@@ -1551,7 +1551,7 @@ icons:
     friendly_name: Hd
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - high
       - def
@@ -1570,7 +1570,7 @@ icons:
     friendly_name: Hdr
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - high
       - dynamic
@@ -1583,7 +1583,7 @@ icons:
     friendly_name: Http
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - internet
       - web
@@ -1598,7 +1598,7 @@ icons:
     friendly_name: Iso
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - photo
       - sensitivity
@@ -1621,7 +1621,7 @@ icons:
     friendly_name: Jpg
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - file
       - type
@@ -1637,7 +1637,7 @@ icons:
     friendly_name: Json
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - javascript
       - object
@@ -1652,7 +1652,7 @@ icons:
     friendly_name: Mov
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - movie
       - video
@@ -1666,7 +1666,7 @@ icons:
     friendly_name: Mp3
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - music
       - audio
@@ -1680,7 +1680,7 @@ icons:
     friendly_name: Mp4
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - movie
       - video
@@ -1694,7 +1694,7 @@ icons:
     friendly_name: Pdf
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - document
       - doc
@@ -1708,7 +1708,7 @@ icons:
     friendly_name: Png
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - file
       - type
@@ -1724,7 +1724,7 @@ icons:
     friendly_name: H
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - letter
       - alphabet
@@ -1734,7 +1734,7 @@ icons:
     friendly_name: S
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - standard
       - letter
@@ -1752,7 +1752,7 @@ icons:
     friendly_name: T
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - letter
       - alphabet
@@ -1769,7 +1769,7 @@ icons:
     friendly_name: U1
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
     sizes:
@@ -1778,7 +1778,7 @@ icons:
     friendly_name: U2
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
     sizes:
@@ -1787,7 +1787,7 @@ icons:
     friendly_name: U3
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
     sizes:
@@ -1796,7 +1796,7 @@ icons:
     friendly_name: X
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - alphabet
       - letter
@@ -1807,7 +1807,7 @@ icons:
     friendly_name: 'Y'
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - alphabet
       - letter
@@ -1817,7 +1817,7 @@ icons:
     friendly_name: Z
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - alphabet
       - letter
@@ -1827,7 +1827,7 @@ icons:
     friendly_name: Barrier
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - wall
       - fence
@@ -1840,7 +1840,7 @@ icons:
     friendly_name: Bloch sphere
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - bloch
@@ -1851,7 +1851,7 @@ icons:
     friendly_name: C u1
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - c
@@ -1863,7 +1863,7 @@ icons:
     friendly_name: C u3
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - q
       - c
@@ -1875,7 +1875,7 @@ icons:
     friendly_name: C y
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - c
@@ -1886,7 +1886,7 @@ icons:
     friendly_name: C z
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - c
@@ -1897,7 +1897,7 @@ icons:
     friendly_name: Cc x
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - cc
@@ -1909,7 +1909,7 @@ icons:
     friendly_name: Circuit composer
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - H
@@ -1921,7 +1921,7 @@ icons:
     friendly_name: Composer edit
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - circuit
@@ -1934,7 +1934,7 @@ icons:
     friendly_name: Hinton plot
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - Q
       - hinton
@@ -1946,7 +1946,7 @@ icons:
     friendly_name: I d
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - identification
       - identity
@@ -1956,7 +1956,7 @@ icons:
     friendly_name: Matrix
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - cast
       - grid
@@ -1968,7 +1968,7 @@ icons:
     friendly_name: Operation
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - meter
       - gauge
@@ -1991,7 +1991,7 @@ icons:
     friendly_name: Raw
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - format
       - unedited
@@ -2001,7 +2001,7 @@ icons:
     friendly_name: Sql
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - database
       - query
@@ -2011,7 +2011,7 @@ icons:
     friendly_name: Svg
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - format
       - image
@@ -2022,7 +2022,7 @@ icons:
     friendly_name: Tif
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - format
       - image
@@ -2032,7 +2032,7 @@ icons:
     friendly_name: Tsv
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - format
       - data
@@ -2044,7 +2044,7 @@ icons:
     friendly_name: Txt
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - text
       - format
@@ -2055,7 +2055,7 @@ icons:
     friendly_name: Usb
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - connector
       - protocol
@@ -2068,7 +2068,7 @@ icons:
     friendly_name: Vpn
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - protocol
       - virtual
@@ -2082,7 +2082,7 @@ icons:
     friendly_name: Wmv
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - format
       - music
@@ -2094,7 +2094,7 @@ icons:
     friendly_name: Xls
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - excel
       - format
@@ -2105,7 +2105,7 @@ icons:
     friendly_name: Xml
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - format
       - markup
@@ -2117,7 +2117,7 @@ icons:
     friendly_name: Zip
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - compress
       - format
@@ -2127,7 +2127,7 @@ icons:
     friendly_name: Accessibility
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - wheelchair
       - convenience
@@ -2138,7 +2138,7 @@ icons:
     friendly_name: Activity
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - line chart
       - vital
@@ -2150,7 +2150,7 @@ icons:
     friendly_name: Add comment
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - add
       - comment
@@ -2162,7 +2162,7 @@ icons:
     friendly_name: Alarm
     usage: This is a description for usage
     categories:
-      - example category
+      - Action
     aliases:
       - clock
       - timer
@@ -2185,7 +2185,7 @@ icons:
     friendly_name: Analytics
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - line chart
       - trend
@@ -2198,7 +2198,7 @@ icons:
     friendly_name: Aperture
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - eye
       - camera
@@ -2210,7 +2210,7 @@ icons:
     friendly_name: Api
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - program
       - tool
@@ -2227,7 +2227,7 @@ icons:
     friendly_name: Application
     usage: This is a description for usage
     categories:
-      - example category
+      - File
     aliases:
       - box
       - app
@@ -2238,7 +2238,7 @@ icons:
     friendly_name: Archive
     usage: This is a description for usage
     categories:
-      - example category
+      - Data
     aliases:
       - drawer
       - server
@@ -2251,7 +2251,7 @@ icons:
     friendly_name: Arrival
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - plane
       - landing
