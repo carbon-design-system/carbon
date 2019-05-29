@@ -36,8 +36,8 @@ component, new icon), a bug, or a general issue?
 <!--
 Please try to re-create the issue using our CodeSandbox template available here:
 
-* Style and vanilla JS: https://codesandbox.io/s/github/IBM/carbon-components/tree/master/packages/components/examples/codesandbox
-* React: https://codesandbox.io/s/github/IBM/carbon-components/tree/master/packages/react/examples/codesandbox
+* Style and vanilla JS: https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/components/examples/codesandbox
+* React: https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox
 
 This helps reduce the issue to an isolated case that helps us out when debugging.
 If you're able to reproduce using the CodeSandbox link above, please include the
