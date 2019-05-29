@@ -164,15 +164,16 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    @include tooltip--icon;
+    @include tooltip--trigger('icon', 'bottom');
   }
 
   .#{$prefix}--btn--icon-only--top {
-    @include tooltip--icon-placement('top');
+    @include tooltip--trigger('icon', 'top');
+    @include tooltip--placement('icon', 'top', 'center');
   }
 
   .#{$prefix}--btn--icon-only--bottom {
-    @include tooltip--icon-placement('bottom');
+    @include tooltip--placement('icon', 'bottom', 'center');
   }
 
   .#{$prefix}--btn--icon-only,
@@ -184,11 +185,6 @@
     }
 
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
-      margin: 0;
-    }
-
-    &::after {
-      transform: translate(calc(-50% + 8px), calc(100% + 10px));
       margin: 0;
     }
   }
