@@ -13,6 +13,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/tooltip';
 @import '../form/form';
 
 /// Text input styles
@@ -99,6 +100,8 @@
     }
 
     .#{$prefix}--text-input--password__visibility {
+      @include tooltip--trigger('icon', 'bottom');
+      @include tooltip--placement('icon', 'bottom', 'center');
       position: absolute;
       height: rem(16px);
       width: rem(16px);
