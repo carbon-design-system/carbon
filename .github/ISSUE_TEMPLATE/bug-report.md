@@ -17,10 +17,13 @@ assignees: ''
 <!--
   Add an x in one of the options below, for example:
 - [x] package name
+- [ ] package name
+- [ ] package name
 -->
 
 - [ ] `carbon-components`
 - [ ] `carbon-components-react`
+- [ ] Carbon Elements
 
 ## Detailed description
 
