@@ -65,18 +65,22 @@
   }
 
   .#{$prefix}--header__action:hover {
-    background-color: $shell-header-bg-02;
+    background-color: $shell-header-bg-04;
   }
 
-  .#{$prefix}--header__action--active,
-  .#{$prefix}--header__action--active:hover {
-    background-color: $shell-header-bg-03;
+  .#{$prefix}--header__action--active {
+    border-left: 1px solid $shell-header-border-01;
+    border-right: 1px solid $shell-header-border-01;
+    border-bottom: 1px solid $shell-header-bg-01;
   }
 
-  .#{$prefix}--header__action--active,
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
+  }
+
+  .#{$prefix}--header__action:active {
+    background-color: $shell-header-bg-03;
   }
 
   .#{$prefix}--header__action > svg {

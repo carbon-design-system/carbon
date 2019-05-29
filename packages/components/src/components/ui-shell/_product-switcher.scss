@@ -36,7 +36,7 @@
   }
 
   .#{$prefix}--panel--expanded {
-    box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
+    box-shadow: 0 8px 16px 0 rgba($carbon--black-100, 0.25);
     transform: translate3d(0, 0, 0);
   }
 
@@ -49,7 +49,7 @@
   }
 
   .#{$prefix}--search--shell input {
-    background-color: $shell-panel-bg-02;
+    background-color: $carbon--gray-20;
   }
 
   //--------------------------------------------------------------------------
@@ -59,7 +59,7 @@
   .#{$prefix}--product-switcher__all-btn {
     @include type-style('body-short-01');
     padding: mini-units(1);
-    color: $shell-header-text-03;
+    color: $shell-panel-text-01;
   }
 
   .#{$prefix}--product-switcher__subheader {
@@ -115,7 +115,7 @@
   }
 
   .#{$prefix}--product-list__item:hover {
-    background: $shell-panel-bg-02;
+    background: $carbon--gray-20;
   }
 
   .#{$prefix}--product-link {
@@ -159,7 +159,7 @@
   }
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover {
-    background: $shell-panel-bg-03;
+    background: $carbon--gray-30;
   }
 
   .#{$prefix}--product-switcher__product-list
@@ -176,7 +176,7 @@
 
   .#{$prefix}--product-switcher__product-list
     .#{$prefix}--overflow-menu-options__option:hover {
-    background: $shell-panel-bg-04;
+    background: $carbon--white-0;
   }
 
   .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {

@@ -94,41 +94,57 @@ $shell-header-icon-03: $carbon--gray-30;
 /// @group ui-shell
 $shell-header-link: $carbon--blue-60;
 
+//----------------------------------------------------------------------------
+// Header Panel tokens
+//----------------------------------------------------------------------------
+
 /// Header-panel background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-01: $carbon--gray-10; //TODO waiting for updated color
+$shell-panel-bg-01: $carbon--gray-100;
 
-/// Panel item hover
+/// Panel item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-02: $carbon--gray-20; //TODO waiting for updated color
+$shell-panel-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
 
-/// Panel overflow hover
+/// Panel item focus and active background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-03: $carbon--gray-30; //TODO waiting for updated color
+$shell-panel-bg-03: $carbon--gray-80;
 
-/// Panel input background
+/// Panel item link selected background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-04: $carbon--white-0; //TODO waiting for updated color
+$shell-panel-bg-04: $carbon--gray-90;
 
-/// Secondary text in header-panel, Category label
+/// Panel border
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-text-03: $carbon--gray-50; //TODO waiting for updated color
+$shell-panel-border: $carbon--gray-80;
 
-/// Header icon selected state background
+/// Header panel text
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-icon-selected: $carbon--blue-60; //TODO waiting for updated color
+$shell-panel-text-01: $carbon--gray-30;
+
+/// Header panel secondary text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-text-02: $carbon--gray-10;
+
+/// Header panel focus border
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-focus: $carbon--white-0;
 
 //----------------------------------------------------------------------------
 // Side nav tokens
@@ -193,24 +209,3 @@ $shell-side-nav-icon-01: $ibm-color__gray-10;
 /// @access private
 /// @group ui-shell
 $shell-side-nav-accent-01: $ibm-color__blue-60;
-
-//----------------------------------------------------------------------------
-// Other
-//----------------------------------------------------------------------------
-/// Temporary token
-/// @type Color
-/// @access private
-/// @group ui-shell
-$shell-brand-01: $ibm-color__blue-60;
-
-/// Temporary token
-/// @type Color
-/// @access private
-/// @group ui-shell
-$shell-ui-02: $carbon--gray-80;
-
-/// Temporary token
-/// @type Color
-/// @access private
-/// @group ui-shell
-$shell-ui-03: $carbon--black-100;
