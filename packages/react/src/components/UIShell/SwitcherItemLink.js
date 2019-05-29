@@ -33,7 +33,7 @@ const SwitcherItemLink = React.forwardRef(function SwitcherItemLink(props) {
   });
 
   return (
-    <a className={className} tabIndex={0} {...accessibilityLabel}>
+    <a className={className} {...accessibilityLabel}>
       {children}
     </a>
   );

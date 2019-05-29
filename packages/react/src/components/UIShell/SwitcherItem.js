@@ -14,17 +14,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 const { prefix } = settings;
 
 const SwitcherItem = React.forwardRef(function SwitcherItem(props) {
-  const {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-    className: customClassName,
-    children,
-  } = props;
-
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
+  const { className: customClassName, children } = props;
 
   const className = cx(`${prefix}--switcher__item`, {
     [customClassName]: !!customClassName,
