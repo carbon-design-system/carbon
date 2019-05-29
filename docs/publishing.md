@@ -40,7 +40,8 @@ yarn lerna version \
 
 7. Confirm package changes
 8. Add changes with `git add -A`
-9. Create a commit message with the following format: `git commit -m 'chore(release): vX.Y.Z`
+9. Create a commit message with the following format:
+   `git commit -m 'chore(release): vX.Y.Z`
 10. Generate the release changelog with the following command:
 
 ```bash
@@ -48,7 +49,8 @@ npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 1
 ```
 
 10. Make a PR with the proposed changes
-11. After the PR is approved and merged, it's time to publish using the following commands:
+11. After the PR is approved and merged, it's time to publish using the
+    following commands:
 
 ```bash
 # Get latest changes from upstream master branch
