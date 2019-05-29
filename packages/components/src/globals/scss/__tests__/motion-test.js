@@ -18,7 +18,7 @@ const variables = [
 ];
 
 describe('motion', () => {
-  describe.each(variables)('$%s', async name => {
+  describe.each(variables)('$%s', name => {
     // Temporarily test for regression since these variables were initially
     // under _vars.scss
     it('should be exported through _vars.scss', async () => {

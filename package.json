@@ -11,7 +11,10 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": ["**/eslint", "eslint/**"]
+    "nohoist": [
+      "**/eslint",
+      "eslint/**"
+    ]
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -23,8 +26,8 @@
     "format:staged": "prettier --write",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
-    "test": "jest",
-    "test:e2e": "jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -35,6 +38,7 @@
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "babel-jest": "^24.8.0",
+    "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
     "fs-extra": "^7.0.1",
@@ -148,7 +152,7 @@
       "/lib/",
       "e2e",
       "examples",
-      "/packages/components/",
+      "/umd/",
       "/packages/react/"
     ],
     "transformIgnorePatterns": [
