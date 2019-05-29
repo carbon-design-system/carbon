@@ -177,7 +177,8 @@
   }
 
   .#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
     padding-right: rem(13px);
 
     .#{$prefix}--btn__icon {
@@ -209,6 +210,12 @@
   .#{$prefix}--btn--sm {
     min-height: rem(32px);
     padding: $button-padding-sm;
+  }
+
+  &.#{$prefix}--btn--field {
+    height: 40px;
+    min-height: 40px;
+    padding: $button-padding-field;
   }
 
   // Skeleton State
