@@ -270,3 +270,33 @@ a.bx--side-nav__link {
 .component-variation__name {
   @include type-style('heading-02');
 }
+
+//--------------------------------------------------------------------------
+// Button
+//--------------------------------------------------------------------------
+// Custom styling for the button demo
+
+.example-input-button-pairing {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+
+  .example-button-wrapper {
+    margin-top: 1.5rem;
+    margin-left: 4px;
+  }
+}
+
+@media screen and (max-width: 29rem) {
+  .example-input-button-pairing {
+    .bx--form-item {
+      min-width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .example-button-wrapper {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+}
