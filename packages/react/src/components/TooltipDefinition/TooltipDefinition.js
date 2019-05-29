@@ -24,10 +24,14 @@ const TooltipDefinition = ({
 }) => {
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
   const tooltipClassName = cx(`${prefix}--tooltip--definition`, className);
-  const tooltipTriggerClasses = cx(`${prefix}--tooltip__trigger`, {
-    [`${prefix}--tooltip--${direction}`]: direction,
-    [`${prefix}--tooltip--align-${align}`]: align,
-  });
+  const tooltipTriggerClasses = cx(
+    `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip__trigger--definition`,
+    {
+      [`${prefix}--tooltip--${direction}`]: direction,
+      [`${prefix}--tooltip--align-${align}`]: align,
+    }
+  );
   return (
     <div {...rest} className={tooltipClassName}>
       <button
