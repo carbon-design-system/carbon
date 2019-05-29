@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
+import warning from 'warning';
 
 const { prefix } = settings;
 
@@ -20,6 +21,7 @@ const Button = React.forwardRef(function Button(
     className,
     disabled,
     small,
+    size,
     kind,
     href,
     tabIndex,
@@ -32,7 +34,8 @@ const Button = React.forwardRef(function Button(
 ) {
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: small,
+    [`${prefix}--btn--field`]: size === 'field',
+    [`${prefix}--btn--sm`]: size === 'small' || small,
     [`${prefix}--btn--primary`]: kind === 'primary',
     [`${prefix}--btn--danger`]: kind === 'danger',
     [`${prefix}--btn--secondary`]: kind === 'secondary',
@@ -41,6 +44,13 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--tertiary`]: kind === 'tertiary',
     [`${prefix}--btn--disabled`]: disabled,
   });
+
+  if (__DEV__) {
+    warning(
+      !small,
+      `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`type="small"\` instead.`
+    );
+  }
 
   const commonProps = {
     tabIndex,
@@ -110,6 +120,13 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify the size of the button, from a list of available sizes.
+   * For `default` buttons, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small']),
+
+  /**
+   * Deprecated in v10 in favor of `size`.
    * Specify whether the Button should be a small variant
    */
   small: PropTypes.bool,
