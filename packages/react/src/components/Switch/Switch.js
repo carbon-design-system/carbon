@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { match } from '../../tools/key';
+import { match, keyCodes } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -28,8 +28,12 @@ const Switch = props => {
   const tabRef = useRef();
 
   useEffect(() => {
-    selected && tabRef.current.focus();
-  });
+    if (selected && tabRef.current) {
+      tabRef.current.focus();
+    }
+
+    // selected && tabRef.current.focus();
+  }, [selected, tabRef.current]);
 
   const handleClick = e => {
     e.preventDefault();
@@ -39,10 +43,10 @@ const Switch = props => {
   const handleKeyDown = e => {
     const key = e.key || e.which;
 
-    if (match(key, 'ArrowRight')) {
+    if (match(key, keyCodes.RIGHT)) {
       onKeyDown({ index, name, text, key });
     }
-    if (match(key, 'ArrowLeft')) {
+    if (match(key, keyCodes.LEFT)) {
       onKeyDown({ index, name, text, key });
     }
   };

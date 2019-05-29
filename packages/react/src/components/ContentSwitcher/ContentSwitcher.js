@@ -53,8 +53,6 @@ export default class ContentSwitcher extends React.Component {
         };
   }
 
-  static totalNumberOfChildren;
-
   getChildren(children) {
     return React.Children.map(children, (child, index) =>
       React.cloneElement(child, {
@@ -73,7 +71,7 @@ export default class ContentSwitcher extends React.Component {
    * A "ring buffer" function that takes an array and depending on an ArrowRight
    * or ArrowLeft key input loops from last index to first or first index to last.
    */
-  handleOnKeyDown = (key, index, arrayLength) => {
+  getNextIndex = (key, index, arrayLength) => {
     if (key === 'ArrowRight') {
       return (index + 1) % arrayLength;
     }
@@ -92,10 +90,10 @@ export default class ContentSwitcher extends React.Component {
 
     if (key) {
       this.setState({
-        selectedIndex: this.handleOnKeyDown(
+        selectedIndex: this.getNextIndex(
           key,
           selectedIndex,
-          this.totalNumberOfChildren
+          this.props.children.length
         ),
       });
     } else {
@@ -114,8 +112,8 @@ export default class ContentSwitcher extends React.Component {
       selectedIndex, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
+
     const classes = classNames(`${prefix}--content-switcher`, className);
-    this.totalNumberOfChildren = this.props.children.length;
 
     return (
       <div {...other} className={classes}>

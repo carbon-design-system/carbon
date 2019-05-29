@@ -67,7 +67,8 @@
     "plugins": [
       "react",
       "jsdoc",
-      "jsx-a11y"
+      "jsx-a11y",
+      "react-hooks"
     ],
     "rules": {
       "react/jsx-uses-vars": 1,
@@ -129,6 +130,7 @@
     "@carbon/icons-react": "10.3.0-rc.0",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "flatpickr": "4.5.5",
     "focus-trap-react": "^6.0.0",
     "invariant": "^2.2.3",
