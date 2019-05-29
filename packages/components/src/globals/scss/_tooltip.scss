@@ -21,6 +21,16 @@
   cursor: pointer;
   overflow: visible;
 
+  @if $tooltip-type == 'icon' {
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
+      }
+    }
+  }
+
   // Tooltip - renders as a combo of ::before and ::after elements
   &::before,
   &::after {
