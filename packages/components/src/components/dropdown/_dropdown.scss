@@ -148,7 +148,7 @@
     z-index: z('dropdown');
     max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
-    overflow: hidden;
+    overflow: hidden auto;
   }
 
   .#{$prefix}--dropdown-item {
@@ -220,10 +220,6 @@
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
     max-height: 15rem;
     transition: max-height $duration--fast-02 motion(entrance, productive);
-
-    &:hover {
-      overflow: auto;
-    }
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {

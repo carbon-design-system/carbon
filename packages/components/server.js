@@ -17,7 +17,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 const templates = require('./tools/templates');
-const config = devMode && require('./tools/webpack.dev.config'); // eslint-disable-line global-require
+const config = devMode && require('./tools/webpack-demo.config'); // eslint-disable-line global-require
 
 const compiler = devMode && webpack(config);
 const hotMiddleware = devMode && webpackHotMiddleware(compiler);

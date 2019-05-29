@@ -17,13 +17,13 @@ Modifiers are used with various classes for Tabs.
 ##### ES2015
 
 ```javascript
-import { Tabs } from 'carbon-components';
+import { Tab } from 'carbon-components';
 ```
 
 ##### With pre-build bundle (`carbon-components.min.js`)
 
 ```javascript
-var Tabs = CarbonComponents.Tabs;
+var Tab = CarbonComponents.Tab;
 ```
 
 #### Instantiating

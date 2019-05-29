@@ -24,7 +24,7 @@
 }
 
 @include exports('css--body') {
-  @if global-variable-exists('css--body') == false or $css--body == true {
+  @if variable-exists('css--body') == false or $css--body == true {
     @include css-body;
   }
 }

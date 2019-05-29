@@ -13,7 +13,7 @@
 /// @access public
 /// @group global-reset
 @mixin reset {
-  @if global-variable-exists(css--reset) == false or $css--reset == false {
+  @if variable-exists(css--reset) == false or $css--reset == false {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@
 }
 
 @include exports('css--reset') {
-  @if global-variable-exists(css--reset) ==false or $css--reset==true {
+  @if variable-exists(css--reset) == false or $css--reset==true {
     // http://cssreset.com/scripts/eric-meyer-reset-css/
     html,
     body,

@@ -2,4 +2,8 @@ $css--font-face: true;
 $css--reset: true;
 
 $prefix: 'bx';
-@import '~carbon-components/src/globals/scss/styles.scss';
+
+// IMPORTANT: This import path should _not_ be used outside our source tree
+// as `src` directory is _not_ meant to be shipped in our NPM package.
+// Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
+@import '~carbon-components/src/globals/scss/styles.scss'; // SEE THE NOTE ABOVE
