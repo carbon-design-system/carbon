@@ -13,12 +13,13 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const Switcher = React.forwardRef(function Switcher(props) {
+const SwitcherItemLink = React.forwardRef(function SwitcherItemLink(props) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     className: customClassName,
     children,
+    isSelected,
   } = props;
 
   const accessibilityLabel = {
@@ -26,18 +27,19 @@ const Switcher = React.forwardRef(function Switcher(props) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const className = cx(`${prefix}--switcher__item`, {
+  const className = cx(`${prefix}--switcher__item-link`, {
+    [`${prefix}--switcher__item-link--selected`]: isSelected,
     [customClassName]: !!customClassName,
   });
 
   return (
-    <ul className={className} {...accessibilityLabel}>
+    <a className={className} tabIndex={0} {...accessibilityLabel}>
       {children}
-    </ul>
+    </a>
   );
 });
 
-Switcher.propTypes = {
+SwitcherItemLink.propTypes = {
   /**
    * Required props for accessibility label on the underlying menu
    */
@@ -49,9 +51,14 @@ Switcher.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether the link is currently on the page
+   */
+  isSelected: PropTypes.bool,
+
+  /**
    * Specify the text content for the link
    */
   children: PropTypes.string.isRequired,
 };
 
-export default Switcher;
+export default SwitcherItemLink;

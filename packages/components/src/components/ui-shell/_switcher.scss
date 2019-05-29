@@ -28,12 +28,12 @@
     color: $shell-panel-text-01;
   }
 
-  .#{$prefix}--switcher--item {
+  .#{$prefix}--switcher__item {
     width: 100%;
   }
 
-  .#{$prefix}--switcher--item:nth-child(1),
-  .#{$prefix}--switcher--item:nth-last-child(3) {
+  .#{$prefix}--switcher__item:nth-child(1),
+  .#{$prefix}--switcher__item:nth-last-child(3) {
     position: relative;
     margin-top: $spacing-05;
     margin-bottom: $spacing-03;
@@ -49,16 +49,16 @@
     }
   }
 
-  .#{$prefix}--switcher--item:nth-last-child(3) {
+  .#{$prefix}--switcher__item:nth-last-child(3) {
     margin-top: 0;
   }
 
-  .#{$prefix}--switcher--item:nth-child(2),
-  .#{$prefix}--switcher--item:nth-last-child(2) {
+  .#{$prefix}--switcher__item:nth-child(2),
+  .#{$prefix}--switcher__item:nth-last-child(2) {
     padding-top: rem(9px);
   }
 
-  .#{$prefix}--switcher--item-link {
+  .#{$prefix}--switcher__item-link {
     @include carbon--type-style('heading-01');
     display: block;
     text-decoration: none;
@@ -79,6 +79,10 @@
       background: $shell-panel-bg-03;
       color: $shell-panel-text-02;
     }
+  }
+
+  .#{$prefix}--switcher__item-link--selected {
+    background: $shell-panel-bg-04;
   }
 }
 

@@ -37,6 +37,8 @@ import {
   SideNavMenu,
   SideNavMenuItem,
   Switcher,
+  SwitcherItem,
+  SwitcherItemLink,
 } from '../UIShell';
 
 const Fade16 = () => (
@@ -242,17 +244,38 @@ storiesOf('[Experimental] UI Shell', module)
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <HeaderPanel expanded>
-          <Switcher
-            links={[
-              { href: '#', linkText: 'Link' },
-              { href: '#', linkText: 'Link' },
-              { href: '#', linkText: 'Link' },
-              { href: '#', linkText: 'Link' },
-              { href: '#', linkText: 'Link' },
-              { href: '#', linkText: 'Link' },
-              { href: '#', linkText: 'Link' },
-            ]}
-          />
+          <Switcher>
+            <SwitcherItem>
+              <SwitcherItemLink isSelected href="javascript:void(0)">
+                Link
+              </SwitcherItemLink>
+            </SwitcherItem>
+            <SwitcherItem>
+              <SwitcherItemLink href="javascript:void(0)">
+                Link
+              </SwitcherItemLink>
+            </SwitcherItem>
+            <SwitcherItem>
+              <SwitcherItemLink href="javascript:void(0)">
+                Link
+              </SwitcherItemLink>
+            </SwitcherItem>
+            <SwitcherItem>
+              <SwitcherItemLink href="javascript:void(0)">
+                Link
+              </SwitcherItemLink>
+            </SwitcherItem>
+            <SwitcherItem>
+              <SwitcherItemLink href="javascript:void(0)">
+                Link
+              </SwitcherItemLink>
+            </SwitcherItem>
+            <SwitcherItem>
+              <SwitcherItemLink href="javascript:void(0)">
+                Link
+              </SwitcherItemLink>
+            </SwitcherItem>
+          </Switcher>
         </HeaderPanel>
       </Header>
     ))

@@ -108,15 +108,21 @@ $shell-panel-bg-01: $carbon--gray-100;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-02: #353535; //TODO needs color var gray-90-hover
+$shell-panel-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
 
 /// Panel item focus and active background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-03: $carbon--gray-70;
+$shell-panel-bg-03: $carbon--gray-80;
 
-/// Panel input background
+/// Panel item link selected background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-04: $carbon--gray-90;
+
+/// Panel border
 /// @type Color
 /// @access private
 /// @group ui-shell

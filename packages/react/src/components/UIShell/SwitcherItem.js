@@ -13,7 +13,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const Switcher = React.forwardRef(function Switcher(props) {
+const SwitcherItem = React.forwardRef(function SwitcherItem(props) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -30,14 +30,10 @@ const Switcher = React.forwardRef(function Switcher(props) {
     [customClassName]: !!customClassName,
   });
 
-  return (
-    <ul className={className} {...accessibilityLabel}>
-      {children}
-    </ul>
-  );
+  return <li className={className}>{children}</li>;
 });
 
-Switcher.propTypes = {
+SwitcherItem.propTypes = {
   /**
    * Required props for accessibility label on the underlying menu
    */
@@ -51,7 +47,7 @@ Switcher.propTypes = {
   /**
    * Specify the text content for the link
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.string,
 };
 
-export default Switcher;
+export default SwitcherItem;
