@@ -22,6 +22,7 @@ Use these modifiers with `.bx--btn` class.
 | `.bx--btn--danger`    | Selector for applying danger button styles    |
 | `.bx--btn--sm`        | Selector for applying small button styles     |
 | `.bx--btn—ghost`      | Selector for applying ghost button styles     |
+| `.bx--btn--icon-only` | Selector for applying icon button styles      |
 
 ### FAQ
 
