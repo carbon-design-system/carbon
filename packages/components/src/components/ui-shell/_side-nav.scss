@@ -334,6 +334,7 @@
 
   .#{$prefix}--side-nav__submenu-title {
     @include text-overflow();
+    text-align: left;
   }
 
   .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
@@ -357,6 +358,22 @@
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__item--active
+    .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background-color: $shell-side-nav-accent-01;
+    }
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
