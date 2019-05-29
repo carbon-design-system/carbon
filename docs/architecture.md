@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Architecture](#architecture)
+  - [Packages shipping Sass](#packages-shipping-sass)
+    - [Entrypoint behavior](#entrypoint-behavior)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Architecture
 
 ## Packages shipping Sass
