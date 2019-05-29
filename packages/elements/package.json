@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@carbon/colors": "10.2.0",
-    "@carbon/grid": "10.2.0",
+    "@carbon/grid": "10.3.0-rc.1",
     "@carbon/icons": "10.3.0-rc.1",
     "@carbon/import-once": "10.2.0",
     "@carbon/layout": "10.2.0",
