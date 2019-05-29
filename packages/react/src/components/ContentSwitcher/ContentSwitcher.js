@@ -10,7 +10,6 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
-import { match, keys } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -70,25 +69,21 @@ export default class ContentSwitcher extends React.Component {
     );
   }
 
-  handleOnKeyDown = (key, index) => {
-    const lastChild = this.totalNumberOfChildren - 1;
-    const firstChild = this.totalNumberOfChildren - this.totalNumberOfChildren;
-
-    // if they hit ArrowRight on the last child loop back around to the first child
+  /**
+   * A "ring buffer" function that takes an array and depending on an ArrowRight
+   * or ArrowLeft key input loops from last index to first or first index to last.
+   */
+  handleOnKeyDown = (key, index, arrayLength) => {
     if (key === 'ArrowRight') {
-      return index === lastChild ? firstChild : index + 1;
+      return (index + 1) % arrayLength;
     }
 
-    // if they hit ArrowLeft on the first child loop around to the last child
     if (key === 'ArrowLeft') {
-      return index === firstChild ? lastChild : index - 1;
+      return (index + arrayLength - 1) % arrayLength;
     }
   };
 
   handleChildChange = data => {
-    // BUG: The state is being updated but the data being passed back from the child is staying the same
-    // so our stying isn't being updated fully
-
     // the currently selected child index
     const { selectedIndex } = this.state;
     // the newly selected child index
@@ -97,7 +92,11 @@ export default class ContentSwitcher extends React.Component {
 
     if (key) {
       this.setState({
-        selectedIndex: this.handleOnKeyDown(key, selectedIndex),
+        selectedIndex: this.handleOnKeyDown(
+          key,
+          selectedIndex,
+          this.totalNumberOfChildren
+        ),
       });
     } else {
       if (selectedIndex !== index) {

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { match, key } from '../../tools/key';
+import { match } from '../../tools/key';
 
 const { prefix } = settings;
 
