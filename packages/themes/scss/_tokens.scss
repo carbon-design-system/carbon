@@ -261,6 +261,16 @@ $disabled-03: map-get($carbon--theme, 'disabled-03') !default;
 /// @access public
 /// @group @carbon/themes
 $highlight: map-get($carbon--theme, 'highlight') !default;
+/// Skeleton state of graphics
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$skeleton-01: map-get($carbon--theme, 'skeleton-01') !default;
+/// Skeleton state of text
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$skeleton-02: map-get($carbon--theme, 'skeleton-02') !default;
 /// @type Color
 /// @access public
 /// @group @carbon/themes
