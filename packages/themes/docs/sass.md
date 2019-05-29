@@ -66,6 +66,8 @@
   - [✅disabled-02 [variable]](#disabled-02-variable)
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
+  - [✅skeleton-01 [variable]](#skeleton-01-variable)
+  - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
   - [✅⚠️brand-02 [variable]](#brand-02-variable)
   - [✅⚠️brand-03 [variable]](#brand-03-variable)
@@ -136,6 +138,8 @@ Define theme variables from a map of tokens
   $disabled-02: map-get($theme, 'disabled-02') !global;
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
+  $skeleton-01: map-get($theme, 'skeleton-01') !global;
+  $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
   $brand-02: map-get($theme, 'brand-02') !global;
   $brand-03: map-get($theme, 'brand-03') !global;
@@ -237,6 +241,8 @@ Define theme variables from a map of tokens
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
+  - [skeleton-01 [variable]](#skeleton-01-variable)
+  - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
   - [brand-02 [variable]](#brand-02-variable)
   - [brand-03 [variable]](#brand-03-variable)
@@ -304,6 +310,8 @@ $carbon--theme--white: (
   disabled-02: #bebebe,
   disabled-03: #8c8c8c,
   highlight: #c9deff,
+  skeleton-01: #e5e5e5,
+  skeleton-02: #bebebe,
   brand-01: #0062ff,
   brand-02: #171717,
   brand-03: #0062ff,
@@ -379,6 +387,8 @@ $carbon--theme--g10: (
   disabled-02: #bebebe,
   disabled-03: #8c8c8c,
   highlight: #c9deff,
+  skeleton-01: #e5e5e5,
+  skeleton-02: #bebebe,
   brand-01: #0062ff,
   brand-02: #171717,
   brand-03: #0062ff,
@@ -452,6 +462,8 @@ $carbon--theme--g90: (
   disabled-02: #565656,
   disabled-03: #8c8c8c,
   highlight: #061f80,
+  skeleton-01: #353535,
+  skeleton-02: #565656,
   brand-01: #0062ff,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
@@ -525,6 +537,8 @@ $carbon--theme--g100: (
   disabled-02: #3d3d3d,
   disabled-03: #6f6f6f,
   highlight: #061f80,
+  skeleton-01: #353535,
+  skeleton-02: #3d3d3d,
   brand-01: #0062ff,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
@@ -1477,6 +1491,42 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 
 ```scss
 $highlight: map-get($carbon--theme, 'highlight');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅skeleton-01 [variable]
+
+Skeleton state of graphics
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$skeleton-01: map-get($carbon--theme, 'skeleton-01');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅skeleton-02 [variable]
+
+Skeleton state of text
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$skeleton-02: map-get($carbon--theme, 'skeleton-02');
 ```
 
 </details>
