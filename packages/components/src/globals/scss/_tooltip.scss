@@ -7,11 +7,13 @@
 
 @import 'layer';
 
-// Tooltip Icon
-// Icon CSS only tooltip
+// Tooltip
+// Definition and Icon CSS only tooltip
+/// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
+/// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
 /// @access public
 /// @group tooltip
-@mixin tooltip--icon {
+@mixin tooltip--trigger($tooltip-type: 'icon', $position: 'bottom') {
   @include reset;
   position: relative;
   display: inline-flex;
@@ -19,11 +21,22 @@
   cursor: pointer;
   overflow: visible;
 
+  @if $tooltip-type == 'icon' {
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
+      }
+    }
+  }
+
   // Tooltip - renders as a combo of ::before and ::after elements
   &::before,
   &::after {
     @include type-style('body-short-01');
     position: absolute;
+    z-index: z('floating');
     display: flex;
     align-items: center;
     opacity: 0;
@@ -31,27 +44,28 @@
     transition: opacity $duration--fast-01 motion(standard, productive);
   }
 
+  // caret
   &::before {
-    right: 0;
-    left: 0;
     width: 0;
     height: 0;
-    border-width: 0 rem(4px) rem(5px) rem(4px);
     border-style: solid;
-    border-color: transparent transparent $inverse-02 transparent;
-    margin: 0 auto;
     content: '';
-    margin-top: 1px;
-    margin-left: 50%;
   }
 
+  // content box
   &::after {
     @include layer('overlay');
     min-width: rem(24px);
     max-width: rem(208px);
+    @if ($tooltip-type == 'definition') {
+      width: 100%;
+    }
     height: auto;
-    margin-left: 50%;
-    padding: 0.125rem 1rem;
+    padding: if(
+      $tooltip-type == 'definition',
+      rem(8px) rem(16px),
+      rem(2px) rem(16px)
+    );
     border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
@@ -71,49 +85,105 @@
   }
 }
 
-// Tooltip Icon caret - top position
-/// @param {String} $position ['bottom'] - The position, from: `top`, `bottom`
+// Tooltip
+// Definition and Icon CSS only tooltip
+/// @param {String} $tooltip-type ['icon'] - The type, from: `icon`, `definition`
+/// @param {String} $position ['bottom'] - The position, from: `top`, `right`, `bottom`, `left`
 /// @param {String} $align ['center'] - The alignment, from: `start`, `center`, `end`
 /// @access public
 /// @group tooltip
-@mixin tooltip--icon-placement($position: 'bottom', $align: 'center') {
-  $translate-x: if($align == 'center', -50%, 0);
-  $translate-y-caret: if($position == 'top', calc(-100% - 9px), 10px);
-  $translate-y-body: if(
-    $position == 'top',
-    calc(-100% - 12px),
-    calc(100% + 10px)
-  );
-  $rotate-caret: if($position == 'top', 180deg, 0);
+@mixin tooltip--placement(
+  $tooltip-type: 'icon',
+  $position: 'bottom',
+  $align: 'center'
+) {
+  // position and alignment
+  $caret-spacing: if(
+    $tooltip-type == 'definition',
+    rem(4px),
+    rem(8px)
+  ); // space between caret and trigger button
+  $caret-height: rem(5px);
+  $caret-width: rem(8px);
+  $translate-caret: #{$caret-height} + #{$caret-spacing};
+  $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
+  $rotate-caret: set-caret-rotation($position);
 
-  &::before {
-    @if ($position == 'top') {
-      top: 1px;
-    } @else {
-      bottom: 0;
-    }
-    @if ($align == 'start') {
-      margin-left: 4px;
-    } @else if ($align == 'end') {
-      margin-right: 4px;
-      left: auto;
-      right: 0;
-    }
-    transform: translate($translate-x, $translate-y-caret) rotate($rotate-caret);
-  }
-
+  &::before,
   &::after {
     @if ($position == 'top') {
       top: 0;
-    } @else {
-      bottom: 0;
+      left: 50%;
     }
-    @if ($align != 'center') {
-      margin-left: 0;
-    }
-    @if ($align == 'end') {
+    @if ($position == 'right') {
+      top: 50%;
       right: 0;
     }
-    transform: translate($translate-x, $translate-y-body);
+    @if ($position == 'bottom') {
+      bottom: 0;
+      left: 50%;
+    }
+    @if ($position == 'left') {
+      top: 50%;
+      left: 0;
+    }
+  }
+
+  &::before {
+    @if ($position == 'top') {
+      border-width: rem(5px) rem(4px) 0 rem(4px);
+      border-color: $inverse-02 transparent transparent transparent;
+      transform: translate(-50%, calc(-1 * (#{$translate-caret})));
+    }
+    @if ($position == 'right') {
+      border-width: rem(4px) rem(5px) rem(4px) 0;
+      border-color: transparent $inverse-02 transparent transparent;
+      transform: translate(calc(#{$translate-caret}), -50%);
+    }
+    @if ($position == 'bottom') {
+      border-width: 0 rem(4px) rem(5px) rem(4px);
+      border-color: transparent transparent $inverse-02 transparent;
+      transform: translate(-50%, calc(#{$translate-caret}));
+    }
+    @if ($position == 'left') {
+      border-width: rem(4px) 0 rem(4px) rem(5px);
+      border-color: transparent transparent transparent $inverse-02;
+      transform: translate(calc(-1 * (#{$translate-caret})), -50%);
+    }
+  }
+
+  // alignment options available only for top and bottom tooltip position
+  &::after {
+    @if ($position == 'top') {
+      @if ($align == 'start') {
+        left: 0;
+        transform: translate(0, calc(-1 * (#{$translate-body})));
+      } @else if ($align == 'end') {
+        right: 0;
+        left: initial;
+        transform: translate(0, calc(-1 * (#{$translate-body})));
+      } @else {
+        left: 50%;
+        transform: translate(-50%, calc(-1 * (#{$translate-body})));
+      }
+    }
+    @if ($position == 'right') {
+      transform: translate(calc(#{$translate-body}), -50%);
+    }
+    @if ($position == 'bottom') {
+      @if ($align == 'start') {
+        left: 0;
+        transform: translate(0, calc(#{$translate-body}));
+      } @else if ($align == 'end') {
+        right: 0;
+        left: initial;
+        transform: translate(0, calc(#{$translate-body}));
+      } @else {
+        transform: translate(-50%, calc(#{$translate-body}));
+      }
+    }
+    @if ($position == 'left') {
+      transform: translate(calc(-1 * (#{$translate-body})), -50%);
+    }
   }
 }

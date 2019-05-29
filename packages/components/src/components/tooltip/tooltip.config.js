@@ -35,7 +35,7 @@ module.exports = {
         If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
         For top positioning, replace bx--tooltip--definition__bottom class with bx--tooltip--definition__top.
-        For center/right alignment, add bx--tooltip--definition__align-center/bx--tooltip--definition__align-right class
+        For center/right alignment, add bx--tooltip--definition__align-center/bx--tooltip--definition__align-end class
         to the DOM element with bx--tooltip--definition__bottom/bx--tooltip--definition__top.
       `,
     },

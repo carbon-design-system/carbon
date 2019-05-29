@@ -927,6 +927,9 @@ exports[`_grid.scss grid--x should generate grid code when the grid feature flag
 
 .bx--aspect-ratio--1x1 {
   padding-bottom: 100%; }
+
+.bx--aspect-ratio--1x2 {
+  padding-bottom: 200%; }
 "
 `;
 
