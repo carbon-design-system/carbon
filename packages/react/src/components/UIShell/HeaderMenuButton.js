@@ -9,7 +9,7 @@ import Close20 from '@carbon/icons-react/lib/close/20';
 import Menu20 from '@carbon/icons-react/lib//menu/20';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
