@@ -172,7 +172,7 @@
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__details {
     opacity: 1;
-    visibility: visible;
+    visibility: inherit;
   }
 
   .#{$prefix}--side-nav__title {
