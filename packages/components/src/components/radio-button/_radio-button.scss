@@ -29,6 +29,11 @@
   // vertical radio button
   .#{$prefix}--radio-button-group--vertical {
     flex-direction: column;
+    align-items: flex-start;
+
+    &-left {
+      align-items: flex-end;
+    }
 
     .#{$prefix}--radio-button__label {
       margin-right: 0;
