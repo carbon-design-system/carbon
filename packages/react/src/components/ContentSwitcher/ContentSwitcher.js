@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
+import { getNextIndex } from '../../tools/a11y';
 
 const { prefix } = settings;
 
@@ -67,20 +68,6 @@ export default class ContentSwitcher extends React.Component {
     );
   }
 
-  /**
-   * A "ring buffer" function that takes an array and depending on an ArrowRight
-   * or ArrowLeft key input loops from last index to first or first index to last.
-   */
-  getNextIndex = (key, index, arrayLength) => {
-    if (key === 'ArrowRight') {
-      return (index + 1) % arrayLength;
-    }
-
-    if (key === 'ArrowLeft') {
-      return (index + arrayLength - 1) % arrayLength;
-    }
-  };
-
   handleChildChange = data => {
     // the currently selected child index
     const { selectedIndex } = this.state;
@@ -90,7 +77,7 @@ export default class ContentSwitcher extends React.Component {
 
     if (key) {
       this.setState({
-        selectedIndex: this.getNextIndex(
+        selectedIndex: getNextIndex(
           key,
           selectedIndex,
           this.props.children.length
