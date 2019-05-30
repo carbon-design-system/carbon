@@ -14,6 +14,8 @@ import warning from 'warning';
 
 const { prefix } = settings;
 
+let didWarnAboutDeprecation = false;
+
 const Button = React.forwardRef(function Button(
   {
     children,
@@ -46,10 +48,13 @@ const Button = React.forwardRef(function Button(
   });
 
   if (__DEV__) {
-    warning(
-      !small,
-      `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`type="small"\` instead.`
-    );
+    if (small && !didWarnAboutDeprecation) {
+      warning(
+        false,
+        `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`type="small"\` instead.`
+      );
+      didWarnAboutDeprecation = true;
+    }
   }
 
   const commonProps = {
