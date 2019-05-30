@@ -6,31 +6,57 @@
 -->
 
 <div class="{{prefix}}--form-item">
-  <input class="{{prefix}}--toggle" id="toggle1" type="checkbox">
-  <label class="{{prefix}}--toggle__label" for="toggle1">
-    <span class="{{prefix}}--toggle__text--left">Off</span>
-    <span class="{{prefix}}--toggle__appearance"></span>
-    <span class="{{prefix}}--toggle__text--right">On</span>
+  <input class="{{prefix}}--tgl" id="toggle0" type="checkbox">
+  <label class="{{prefix}}--tgl__label" for="toggle0" aria-label="example toggle without state indicator text">
+    <span class="{{prefix}}--tgl__appearance"></span>
   </label>
 </div>
 
-<fieldset class="{{prefix}}--fieldset">
-  <legend class="{{prefix}}--label">Toggle w/ Label</legend>
-  <div class="{{prefix}}--form-item">
-    <input class="{{prefix}}--toggle" id="toggle2" type="checkbox">
-    <label class="{{prefix}}--toggle__label" for="toggle2">
-      <span class="{{prefix}}--toggle__text--left">Off</span>
-      <span class="{{prefix}}--toggle__appearance"></span>
-      <span class="{{prefix}}--toggle__text--right">On</span>
-    </label>
-  </div>
-</fieldset>
+<div class="{{prefix}}--form-item">
+  <input class="{{prefix}}--tgl" id="toggle1" type="checkbox">
+  <label class="{{prefix}}--tgl__label" for="toggle1" aria-label="example toggle with state indicator text">
+    <span class="{{prefix}}--tgl__appearance">
+      <span class="{{prefix}}--toggle__text--off" aria-hidden="true">Off</span>
+      <span class="{{prefix}}--toggle__text--on" aria-hidden="true">On</span>
+    </span>
+  </label>
+</div>
 
 <div class="{{prefix}}--form-item">
-  <input class="{{prefix}}--toggle" id="toggle3" type="checkbox" disabled>
-  <label class="{{prefix}}--toggle__label" for="toggle3">
-    <span class="{{prefix}}--toggle__text--left">Off</span>
-    <span class="{{prefix}}--toggle__appearance"></span>
-    <span class="{{prefix}}--toggle__text--right">On</span>
+  <input class="{{prefix}}--tgl" id="toggle2" type="checkbox">
+  <label class="{{prefix}}--tgl__label" for="toggle2" aria-label="example toggle with visible label">
+    Toggle with visible label
+    <span class="{{prefix}}--tgl__appearance">
+      <span class="{{prefix}}--toggle__text--off" aria-hidden="true">Off</span>
+      <span class="{{prefix}}--toggle__text--on" aria-hidden="true">On</span>
+    </span>
+  </label>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <input class="{{prefix}}--tgl" id="toggle3" type="checkbox" disabled>
+  <label class="{{prefix}}--tgl__label" for="toggle3" aria-label="example disabled toggle without state indicator text">
+    <span class="{{prefix}}--tgl__appearance"></span>
+  </label>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <input class="{{prefix}}--tgl" id="toggle4" type="checkbox" disabled>
+  <label class="{{prefix}}--tgl__label" for="toggle4" aria-label="example disabled toggle with state indicator text">
+    <span class="{{prefix}}--tgl__appearance">
+      <span class="{{prefix}}--toggle__text--off" aria-hidden="true">Off</span>
+      <span class="{{prefix}}--toggle__text--on" aria-hidden="true">On</span>
+    </span>
+  </label>
+</div>
+
+<div class="{{prefix}}--form-item">
+  <input class="{{prefix}}--tgl" id="toggle5" type="checkbox" disabled>
+  <label class="{{prefix}}--tgl__label" for="toggle5" aria-label="example disabled toggle with visible label">
+    Toggle with visible label
+    <span class="{{prefix}}--tgl__appearance">
+      <span class="{{prefix}}--toggle__text--off" aria-hidden="true">Off</span>
+      <span class="{{prefix}}--toggle__text--on" aria-hidden="true">On</span>
+    </span>
   </label>
 </div>
