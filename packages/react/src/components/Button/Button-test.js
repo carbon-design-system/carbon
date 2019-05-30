@@ -33,17 +33,17 @@ describe('Button', () => {
       </Button>
     );
 
-    it('Renders children as expected', () => {
+    it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(2);
       expect(wrapperHref.find('.child').length).toBe(2);
     });
 
-    it('Should set tabIndex if one is passed via props', () => {
+    it('should set tabIndex if one is passed via props', () => {
       expect(wrapper.props().tabIndex).toEqual(2);
       expect(wrapperHref.props().tabIndex).toEqual(2);
     });
 
-    it('Should add extra classes via className', () => {
+    it('should add extra classes via className', () => {
       expect(wrapper.hasClass('extra-class')).toBe(true);
       expect(wrapperHref.hasClass('extra-class')).toBe(true);
     });
@@ -58,24 +58,24 @@ describe('Button', () => {
       </Button>
     );
 
-    it('Renders as a <button> element without an href', () => {
+    it('renders as a <button> element without an href', () => {
       expect(wrapper.is('button')).toBe(true);
     });
 
-    it('Should set disabled to false by default', () => {
+    it('should set disabled to false by default', () => {
       expect(wrapper.props().disabled).toBe(false);
     });
 
-    it('Should set disabled if one is passed via props', () => {
+    it('should set disabled if one is passed via props', () => {
       wrapper.setProps({ disabled: true });
       expect(wrapper.props().disabled).toBe(true);
     });
 
-    it('Should set type to button by default', () => {
+    it('should set type to button by default', () => {
       expect(wrapper.props().type).toEqual('button');
     });
 
-    it('Should only set type to [button, reset or submit] if one is passed via props', () => {
+    it('should only set type to [button, reset or submit] if one is passed via props', () => {
       wrapper.setProps({ type: 'reset' });
       expect(wrapper.props().type).toEqual('reset');
       wrapper.setProps({ type: 'submit' });
@@ -92,11 +92,11 @@ describe('Button', () => {
       </Button>
     );
 
-    it('Renders as an <a> element with an href', () => {
+    it('renders as an <a> element with an href', () => {
       expect(wrapper.is('a')).toBe(true);
     });
 
-    it('Should always render with [role="button"] by default', () => {
+    it('should always render with [role="button"] by default', () => {
       expect(wrapper.props().role).toEqual('button');
     });
   });
@@ -174,11 +174,11 @@ describe('Primary Button', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<Button className="extra-class" />);
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -190,11 +190,11 @@ describe('Secondary Button', () => {
       <Button kind="secondary" className="extra-class" />
     );
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn--secondary`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -204,11 +204,11 @@ describe('Ghost Button', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<Button kind="ghost" className="extra-class" />);
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn--ghost`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -216,13 +216,24 @@ describe('Ghost Button', () => {
 
 describe('Small Button', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Button small className="extra-class" />);
+    const wrapper = shallow(<Button size="small" className="extra-class" />);
 
-    it('Has the expected classes for small', () => {
+    it('has the expected classes for small', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+  describe('deprecated prop `small`', () => {
+    const wrapper = shallow(<Button small className="extra-class" />);
+
+    it('has the expected classes for small', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
+    });
+
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -232,11 +243,11 @@ describe('DangerButton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<Button kind="danger" className="extra-class" />);
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn--danger`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -248,11 +259,11 @@ describe('danger--primaryButton', () => {
       <Button kind="danger--primary" className="extra-class" />
     );
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn--danger--primary`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -262,11 +273,11 @@ describe('TertiaryButton', () => {
   describe('Renders as exptected', () => {
     const wrapper = shallow(<Button kind="tertiary" className="extra-class" />);
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn--tertiary`)).toEqual(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
+    it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
   });
@@ -276,7 +287,7 @@ describe('ButtonSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<ButtonSkeleton />);
 
-    it('Has the expected classes', () => {
+    it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--btn`)).toEqual(true);
     });
@@ -288,11 +299,11 @@ describe('ButtonSkeleton', () => {
       <ButtonSkeleton href="#" />
     );
 
-    it('Renders as an <a> element with an href', () => {
+    it('renders as an <a> element with an href', () => {
       expect(wrapper.is('a')).toBe(true);
     });
 
-    it('Should always render with [role="button"] by default', () => {
+    it('should always render with [role="button"] by default', () => {
       expect(wrapper.props().role).toEqual('button');
     });
   });
@@ -302,7 +313,7 @@ describe('Small ButtonSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<ButtonSkeleton small />);
 
-    it('Has the expected classes for small', () => {
+    it('has the expected classes for small', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });

@@ -12,9 +12,7 @@ import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
 const getInstanceId = setupGetInstanceId();
-
 const TooltipDefinition = ({
   id,
   className,
@@ -25,29 +23,23 @@ const TooltipDefinition = ({
   ...rest
 }) => {
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
-  const definitionClassName = cx({
-    [className]: !!className,
-    [`${prefix}--tooltip--definition`]: true,
-  });
-  const directionClassName = cx({
-    [`${prefix}--tooltip--definition__${direction}`]: direction,
-    [`${prefix}--tooltip--definition__align-${align}`]: align,
-  });
+  const tooltipClassName = cx(`${prefix}--tooltip--definition`, className);
+  const tooltipTriggerClasses = cx(
+    `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip__trigger--definition`,
+    {
+      [`${prefix}--tooltip--${direction}`]: direction,
+      [`${prefix}--tooltip--align-${align}`]: align,
+    }
+  );
   return (
-    <div {...rest} className={definitionClassName}>
+    <div {...rest} className={tooltipClassName}>
       <button
-        className={`${prefix}--tooltip__trigger`}
-        aria-describedby={tooltipId}>
+        className={tooltipTriggerClasses}
+        aria-describedby={tooltipId}
+        aria-label={tooltipText}>
         {children}
       </button>
-      <div
-        id={tooltipId}
-        className={directionClassName}
-        role="tooltip"
-        aria-label={tooltipText}>
-        <span className={`${prefix}--tooltip__caret`} />
-        <p>{tooltipText}</p>
-      </div>
     </div>
   );
 };
@@ -60,12 +52,13 @@ TooltipDefinition.propTypes = {
   children: PropTypes.string.isRequired,
 
   /**
-   * Specify the direction of the tooltip. Can be either bottom or top.
+   * Specify the direction of the tooltip. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
 
   /**
-   * Specify the alignment (to the trigger button) of the tooltip. Can be one of: start, center or end.
+   * Specify the alignment (to the trigger button) of the tooltip.
+   * Can be one of: start, center, or end.
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
 
@@ -78,7 +71,7 @@ TooltipDefinition.propTypes = {
   /**
    * Provide the text that will be displayed in the tooltip when it is rendered.
    */
-  tooltipText: PropTypes.node.isRequired,
+  tooltipText: PropTypes.string.isRequired,
 };
 
 TooltipDefinition.defaultProps = {

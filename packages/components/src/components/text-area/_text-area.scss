@@ -60,10 +60,6 @@
     }
   }
 
-  .#{$prefix}--text-area:hover {
-    background-color: $hover-field;
-  }
-
   .#{$prefix}--text-area:focus,
   .#{$prefix}--text-area:active {
     @include focus-outline('outline');

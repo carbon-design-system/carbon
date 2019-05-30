@@ -90,6 +90,11 @@
   /// @type Value
   /// @access public
   /// @group button
+  $button-padding-field: calc(0.675rem - 3px) 60px calc(0.675rem - 3px) 12px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group button
   $button-padding-sm: calc(0.375rem - 3px) 60px calc(0.375rem - 3px) 12px !default !global;
 
   /// @type Number
