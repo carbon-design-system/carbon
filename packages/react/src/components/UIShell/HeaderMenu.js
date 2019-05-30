@@ -15,11 +15,8 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const defaultRenderMenuContent = ({ ariaLabel }) => (
-  <>
-    {ariaLabel}
-    <ChevronDownGlyph className={`${prefix}--header__menu-arrow`} />
-  </>
+const defaultRenderMenuContent = () => (
+  <ChevronDownGlyph className={`${prefix}--header__menu-arrow`} />
 );
 
 /**
@@ -176,17 +173,14 @@ class HeaderMenu extends React.Component {
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
-          className={cx(
-            `${prefix}--header__menu-item`,
-            `${prefix}--header__menu-title`
-          )}
+          className={`${prefix}--header__menu-item ${prefix}--header__menu-title`}
           href="javascript:void(0)"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
           role="menuitem"
           tabIndex={0}
-          ariaLabel={ariaLabel}>
-          <MenuContent ariaLabel={ariaLabel} />
+          {...accessibilityLabel}>
+          <MenuContent />
         </a>
         <ul
           {...accessibilityLabel}

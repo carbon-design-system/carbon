@@ -26,6 +26,19 @@ module.exports = {
       },
     },
     {
+      name: 'primary--field',
+      label: 'Primary Buttons (Field)',
+      notes: `
+        "Field" buttons are used in forms, when a button needs to line up horizontally with an input field. 
+        Field buttons match the height of input elements that they sit next to.
+      `,
+      context: {
+        variant: 'primary',
+        field: true,
+        hasIconOnly: true,
+      },
+    },
+    {
       name: 'primary--small',
       label: 'Primary Buttons (Small)',
       notes: `
@@ -46,6 +59,19 @@ module.exports = {
         'Secondary buttons should be used for secondary actions on each page.',
       context: {
         variant: 'secondary',
+        hasIconOnly: true,
+      },
+    },
+    {
+      name: 'secondary--field',
+      label: 'Secondary Buttons (Field)',
+      notes: `
+        "Field" buttons are used in forms, when a button needs to line up horizontally with an input field. 
+        Field buttons match the height of input elements that they sit next to.
+      `,
+      context: {
+        variant: 'secondary',
+        field: true,
         hasIconOnly: true,
       },
     },
@@ -73,6 +99,19 @@ module.exports = {
       },
     },
     {
+      name: 'tertiary--field',
+      label: 'Tertiary Buttons (Field)',
+      notes: `
+        "Field" buttons are used in forms, when a button needs to line up horizontally with an input field. 
+        Field buttons match the height of input elements that they sit next to.
+      `,
+      context: {
+        variant: 'tertiary',
+        field: true,
+        hasIconOnly: true,
+      },
+    },
+    {
       name: 'tertiary--small',
       label: 'Tertiary Buttons (Small)',
       notes: `
@@ -96,6 +135,19 @@ module.exports = {
       },
     },
     {
+      name: 'danger--field',
+      label: 'Danger Buttons (Field)',
+      notes: `
+        "Field" buttons are used in forms, when a button needs to line up horizontally with an input field. 
+        Field buttons match the height of input elements that they sit next to.
+      `,
+      context: {
+        variant: 'danger',
+        field: true,
+        hasIconOnly: true,
+      },
+    },
+    {
       name: 'danger--small',
       label: 'Danger Buttons (Small)',
       notes: `
@@ -114,6 +166,19 @@ module.exports = {
       label: 'Ghost Buttons',
       context: {
         variant: 'ghost',
+      },
+    },
+    {
+      name: 'ghost--field',
+      label: 'Ghost Buttons (Field)',
+      notes: `
+        "Field" buttons are used in forms, when a button needs to line up horizontally with an input field. 
+        Field buttons match the height of input elements that they sit next to.
+      `,
+      context: {
+        variant: 'ghost',
+        field: true,
+        hasIconOnly: true,
       },
     },
     {
