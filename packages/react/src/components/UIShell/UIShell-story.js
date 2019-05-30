@@ -15,7 +15,7 @@ import { action } from '@storybook/addon-actions';
 import React from 'react';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
-
+import HeaderContainer from './HeaderContainer';
 import {
   Content,
   Header,
@@ -366,73 +366,85 @@ storiesOf('[Experimental] UI Shell', module)
   .add(
     'SideNav',
     withReadme(readme, () => (
-      <>
-        <Header aria-label="IBM Platform Name">
-          <SkipToContent />
-          <HeaderMenuButton aria-label="Open menu" />
-          <HeaderName href="#" prefix="IBM">
-            [Platform]
-          </HeaderName>
-          <HeaderNavigation aria-label="IBM [Platform]">
-            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-            <HeaderMenu aria-label="Link 4">
-              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-            </HeaderMenu>
-          </HeaderNavigation>
-          <HeaderGlobalBar>
-            <HeaderGlobalAction
-              aria-label="Search"
-              onClick={action('search click')}>
-              <Search20 />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
-              aria-label="Notifications"
-              onClick={action('notification click')}>
-              <Notification20 />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
-              aria-label="App Switcher"
-              onClick={action('app-switcher click')}>
-              <AppSwitcher20 />
-            </HeaderGlobalAction>
-          </HeaderGlobalBar>
-          <SideNav aria-label="Side navigation">
-            <SideNavHeader renderIcon={Fade16}>
-              <SideNavDetails title="Side navigation title">
-                <SideNavSwitcher
-                  labelText="Switcher"
-                  onChange={action('switcher changed')}
-                  options={['Option 1', 'Option 2', 'Option 3']}
-                />
-              </SideNavDetails>
-            </SideNavHeader>
-            <SideNavItems>
-              <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                Link
-              </SideNavLink>
-              <SideNavMenu
-                defaultExpanded
-                renderIcon={Fade16}
-                isActive
-                title="Category title">
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-            </SideNavItems>
-          </SideNav>
-        </Header>
-        <StoryContent />
-      </>
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName href="#" prefix="IBM">
+                [Platform]
+              </HeaderName>
+              <HeaderNavigation aria-label="IBM [Platform]">
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                <HeaderMenu aria-label="Link 4">
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                </HeaderMenu>
+              </HeaderNavigation>
+              <HeaderGlobalBar>
+                <HeaderGlobalAction
+                  aria-label="Search"
+                  onClick={action('search click')}>
+                  <Search20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="Notifications"
+                  onClick={action('notification click')}>
+                  <Notification20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="App Switcher"
+                  onClick={action('app-switcher click')}>
+                  <AppSwitcher20 />
+                </HeaderGlobalAction>
+              </HeaderGlobalBar>
+              <SideNav
+                aria-label="Side navigation"
+                expanded={isSideNavExpanded}>
+                <SideNavHeader renderIcon={Fade16}>
+                  <SideNavDetails title="Side navigation title">
+                    <SideNavSwitcher
+                      labelText="Switcher"
+                      onChange={action('switcher changed')}
+                      options={['Option 1', 'Option 2', 'Option 3']}
+                    />
+                  </SideNavDetails>
+                </SideNavHeader>
+                <SideNavItems>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                  <SideNavMenu
+                    defaultExpanded
+                    renderIcon={Fade16}
+                    isActive
+                    title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                </SideNavItems>
+              </SideNav>
+            </Header>
+            <StoryContent />
+          </>
+        )}
+      />
     ))
   );
