@@ -51,7 +51,8 @@ const Switch = props => {
     ) {
       onKeyDown({ index, name, text });
     }
-    if (match(key, keyCodes.RIGHT) || match(key, keyCodes.LEFT) {
+
+    if (match(key, keyCodes.RIGHT) || match(key, keyCodes.LEFT)) {
       onKeyDown({ index, name, text, key });
     }
     if (match(key, keyCodes.LEFT)) {
