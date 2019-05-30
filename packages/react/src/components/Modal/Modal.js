@@ -80,6 +80,9 @@ export default class Modal extends Component {
      */
     onRequestSubmit: PropTypes.func,
 
+    /**
+     * Specify a handler for keypresses.
+     */
     onKeyDown: PropTypes.func,
 
     /**
