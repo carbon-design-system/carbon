@@ -3,16 +3,6 @@
 The update to tables splits out the `scss` files into multiple partial files
 with specific functionality, with a main index file bringing them together.
 
-By default, overflow menu icons are hidden until the user hovers over a table
-row. To display overflow menu icons by default without requiring the user to
-hover, target the overflow menu icons and set the `opacity` to `1`.
-
-```css
-.bx--data-table .bx--overflow-menu .bx--overflow-menu__icon {
-  opacity: 1;
-}
-```
-
 #### Files
 
 | Name                    | Description                              |
@@ -25,14 +15,15 @@ hover, target the overflow menu icons and set the `opacity` to `1`.
 
 #### Modifiers
 
-| Name                        | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| `bx--data-table--compact`   | Change table row height to 24                |
-| `bx--data-table--short`     | Change table row height to 32                |
-| `bx--data-table--tall`      | Change table row height to 64                |
-| `bx--data-table--zebra`     | Toggle on zebra striping                     |
-| `bx--data-table--static`    | Change default table width from 100% to auto |
-| `bx--data-table--no-border` | Remove default border on table cells         |
+| Name                                    | Description                                         |
+| --------------------------------------- | --------------------------------------------------- |
+| `bx--data-table--compact`               | Change table row height to 24                       |
+| `bx--data-table--short`                 | Change table row height to 32                       |
+| `bx--data-table--tall`                  | Change table row height to 64                       |
+| `bx--data-table--zebra`                 | Toggle on zebra striping                            |
+| `bx--data-table--static`                | Change default table width from 100% to auto        |
+| `bx--data-table--no-border`             | Remove default border on table cells                |
+| `bx--data-table--visible-overflow-menu` | Show overflow menu icons by default (without hover) |
 
 ### JavaScript
 

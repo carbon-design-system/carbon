@@ -83,6 +83,9 @@ const colors = [
 
   'highlight',
 
+  'skeleton01',
+  'skeleton02',
+
   // Deprecated
   'brand01',
   'brand02',
