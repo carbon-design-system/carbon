@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { match, keyCodes } from '../../tools/key';
+import { match, keyCodes, keys } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -43,6 +43,11 @@ const Switch = props => {
   const handleKeyDown = e => {
     const key = e.key || e.which;
 
+    if (
+      match(key, keys.SPACE || keys.ENTER || keycodes.SPACE || keycodes.ENTER)
+    ) {
+      onKeyDown({ index, name, text });
+    }
     if (match(key, keyCodes.RIGHT)) {
       onKeyDown({ index, name, text, key });
     }
