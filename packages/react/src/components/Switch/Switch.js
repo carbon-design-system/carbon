@@ -44,7 +44,10 @@ const Switch = props => {
     const key = e.key || e.which;
 
     if (
-      match(key, keys.SPACE || keys.ENTER || keyCodes.SPACE || keyCodes.ENTER)
+      match(key, keys.SPACE) ||
+      match(key, keys.ENTER) ||
+      match(key, keyCodes.SPACE) ||
+      match(key, keyCodes.ENTER)
     ) {
       onKeyDown({ index, name, text });
     }
