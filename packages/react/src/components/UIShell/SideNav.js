@@ -11,7 +11,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import SideNavFooter from './SideNavFooter';
-import { HandleMenuButtonClickContext } from './Header';
 
 const { prefix } = settings;
 
@@ -27,10 +26,6 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     className: customClassName,
     translateById: t,
   } = props;
-
-  const handleMenuButtonClickContext = useContext(HandleMenuButtonClickContext);
-
-  let sideNavExpandedState = handleMenuButtonClickContext.state;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
@@ -55,7 +50,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded || sideNavExpandedState,
+    [`${prefix}--side-nav--expanded`]: expanded,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
   });
@@ -127,8 +122,9 @@ SideNav.propTypes = {
    * the label you want displayed or read by screen readers.
    */
   translateById: PropTypes.func,
+
   /**
-   * Specify is SideNav is being used with Header
+   * Optionally provide a custom class to apply to the underlying <li> node
    */
   isChildOfHeader: PropTypes.bool,
 };
