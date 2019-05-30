@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 
-const HeaderContainer = ({
-  isSideNavExpanded,
-  onClickSideNavExpand,
-  render: Children,
-}) => {
+const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   const [isSideNavExpandedState, setIsSideNavExpandedState] = useState(
     isSideNavExpanded
   );
