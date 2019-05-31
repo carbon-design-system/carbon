@@ -30,8 +30,16 @@
 ## Getting started
 
 If you're just getting started, check out
-[`carbon-components`](./packages/components). If you're looking for React
+[`carbon-components`](./packages/components).
+
+If you're looking for React
 components, take a look at [`carbon-components-react`](./packages/react).
+
+If you're looking for Angular
+components, take a look at [`carbon-components-angular`](https://github.com/IBM/carbon-components-angular).
+
+If you're looking for Vue
+components, take a look at [`carbon-components-vue`](https://github.com/carbon-design-system/carbon-components-vue).
 
 If you're trying to find something specific, here's a full list of packages that
 we support!
@@ -40,6 +48,8 @@ we support!
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`carbon-components`](./packages/components)  | Component styles and Vanilla JavaScript                                                                                                             |
 | [`carbon-components-react`](./packages/react) | React components                                                                                                                                    |
+| [`carbon-components-angular`](https://github.com/IBM/carbon-components-angular) | Angular components                                                                                                 |
+| [`carbon-components-vue`](https://github.com/carbon-design-system/carbon-components-vue) | Vue components                                                                                           |
 | [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                               |
 | [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                |
 | [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                   |
