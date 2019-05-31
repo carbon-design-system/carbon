@@ -99,6 +99,14 @@
     fill: $shell-header-bg-02;
   }
 
+  .#{$prefix}--header__menu-toggle {
+    display: none;
+
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+    }
+  }
+
   //--------------------------------------------------------------------------
   // Header - Name
   //--------------------------------------------------------------------------
