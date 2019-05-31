@@ -13,18 +13,6 @@
 @import 'functions';
 @import 'theme';
 
-/// Adds experimental focus styles to a particular selector.
-/// @access private
-/// @group ui-shell
-/// @example
-///   .my-custom-selector:focus {
-///     @include experimental-focus();
-///   }
-@mixin experimental-focus() {
-  outline: 4px solid $shell-side-nav-accent-01;
-  outline-offset: rem(-4px);
-}
-
 /// Helper to add in text overflow styles to a particular node. Useful if we
 /// don't want to have display-inline: block from the text helper classes
 /// @access private
@@ -98,8 +86,6 @@
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
-    // Separates out the panel from the header of the same color
-    border-top: 1px solid $ibm-color__gray-80;
     z-index: z('header');
   }
 
@@ -121,10 +107,21 @@
   // can fit both widgets on the same page without overlapping.
   .#{$prefix}--header ~ .#{$prefix}--side-nav {
     top: mini-units(6);
+    height: calc(100% - 48px);
   }
 
   .#{$prefix}--side-nav--fixed {
-    width: mini-units(26);
+    width: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav--collapsed {
+    width: mini-units(32);
+    transform: translateX(mini-units(-32));
+  }
+
+  .#{$prefix}--side-nav--collapsed {
+    width: mini-units(32);
+    transform: translateX(mini-units(-32));
   }
 
   //----------------------------------------------------------------------------
@@ -214,6 +211,7 @@
   }
 
   .#{$prefix}--side-nav__select {
+    @include focus-outline('reset');
     appearance: none;
     flex: 1 1 0%;
     background-color: $shell-header-bg-01;
@@ -229,10 +227,11 @@
     min-width: 0;
     // Buffer the right hand side of select so text doesn't overlay the chevron
     padding-right: mini-units(4);
+    transition: outline $duration--fast-02;
   }
 
   .#{$prefix}--side-nav__select:focus {
-    @include experimental-focus();
+    @include focus-outline('outline');
   }
 
   //----------------------------------------------------------------------------
@@ -241,25 +240,23 @@
   .#{$prefix}--side-nav__footer {
     flex: 0 0 rem(48px);
     width: 100%;
-    background-color: $shell-side-nav-bg-02;
+    background-color: $shell-side-nav-bg-01;
   }
 
   .#{$prefix}--side-nav__toggle {
+    @include focus-outline('reset');
     @include button-reset($width: true);
     height: 100%;
     text-align: left;
-  }
-
-  .#{$prefix}--side-nav__toggle:hover {
-    background-color: $shell-side-nav-bg-03;
+    transition: outline $duration--fast-02;
   }
 
   .#{$prefix}--side-nav__toggle:focus {
-    @include experimental-focus();
+    @include focus-outline('outline');
   }
 
-  .#{$prefix}--side-nav__toggle:active {
-    background-color: $shell-side-nav-accent-01;
+  .#{$prefix}--side-nav__toggle {
+    padding-left: mini-units(2);
   }
 
   //----------------------------------------------------------------------------
@@ -268,6 +265,7 @@
   .#{$prefix}--side-nav__items {
     flex: 1 1 0%;
     overflow: hidden;
+    padding: 1rem 0 0;
 
     @include expanded() {
       overflow-y: auto;
@@ -296,14 +294,26 @@
     height: auto;
   }
 
-  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover {
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__submenu:hover,
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__link:hover,
+  .#{$prefix}--side-nav__menu[role='menu']
+    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
   }
 
-  .#{$prefix}--side-nav__item--active {
-    // TODO: sync color
-    background-color: $shell-side-nav-bg-02;
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__link:hover
+    > span,
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    .#{$prefix}--side-nav__menu-item
+    > .#{$prefix}--side-nav__link:hover
+    > span {
+    color: $ibm-color__gray-100;
   }
 
   //----------------------------------------------------------------------------
@@ -311,36 +321,69 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__submenu[aria-haspopup='true'] {
     @include button-reset($width: true);
-
+    @include type-style('heading-01');
+    @include focus-outline('reset');
+    padding: 0 mini-units(2);
     display: flex;
     align-items: center;
     color: $shell-side-nav-text-01;
-    // TODO: sync type
-    font-size: rem(14px);
-    line-height: rem(20px);
-    height: mini-units(6);
+    height: mini-units(4);
     user-select: none;
+    transition: color $duration--fast-02, background-color $duration--fast-02,
+      outline $duration--fast-02;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
-    @include experimental-focus();
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--side-nav__submenu-title {
     @include text-overflow();
+    text-align: left;
   }
 
   .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    padding-right: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__submenu-chevron > svg {
+    transition: transform $duration--fast-02;
+    height: rem(16px);
+    width: rem(16px);
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     .#{$prefix}--side-nav__submenu-chevron
     > svg {
     transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+  }
+
+  .#{$prefix}--side-nav__item--active
+    .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background-color: $shell-side-nav-accent-01;
+    }
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
+    font-weight: 600;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__menu[role='menu'] {
@@ -363,38 +406,45 @@
     a.#{$prefix}--side-nav__link[role='menuitem'] {
     height: mini-units(4);
     min-height: mini-units(4);
-    padding-left: mini-units(7);
+    padding-left: mini-units(4);
+    font-weight: 400;
   }
 
-  .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
-    // TODO: sync with color
-    background-color: $shell-side-nav-bg-05;
+  .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
+    a.#{$prefix}--side-nav__link[role='menuitem'] {
+    padding-left: mini-units(9);
   }
-
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link--current,
   .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[aria-current='page'] {
-    background-color: $ibm-color__gray-70;
+    a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    background-color: $ibm-color__gray-20;
+
+    > span {
+      color: $ibm-color__gray-100;
+      font-weight: 600;
+    }
   }
 
+  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
+    color: $ibm-color__gray-100;
+    font-weight: 600;
+  }
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
   a.#{$prefix}--side-nav__link {
+    @include focus-outline('reset');
+    @include type-style('heading-01');
     position: relative;
     display: flex;
     align-items: center;
     text-decoration: none;
-    min-height: mini-units(6);
-    padding-right: mini-units(2);
-    font-weight: 400;
-  }
-
-  .#{$prefix}--side-nav__submenu > .#{$prefix}--side-nav__icon,
-  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__icon {
-    margin-right: mini-units(1);
+    min-height: mini-units(4);
+    padding: 0 mini-units(2);
+    transition: color $duration--fast-02, background-color $duration--fast-02,
+      outline $duration--fast-02;
   }
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text {
@@ -407,7 +457,7 @@
   }
 
   a.#{$prefix}--side-nav__link:focus {
-    @include experimental-focus();
+    @include focus-outline('outline');
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -433,11 +483,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: mini-units(6);
-    height: mini-units(6);
+    width: mini-units(2);
+    height: mini-units(2);
     // Helpful in flex containers so the icon does not have less than the
     // expected width
-    flex: 0 0 mini-units(6);
+    flex: 0 0 mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__icon:not(.#{$prefix}--side-nav__submenu-chevron) {
+    margin-right: mini-units(3);
   }
 
   .#{$prefix}--side-nav__icon > svg {

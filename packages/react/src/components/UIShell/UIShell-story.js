@@ -29,9 +29,10 @@ import {
   HeaderPanel,
   SkipToContent,
   SideNav,
-  SideNavHeader,
-  SideNavDetails,
-  SideNavSwitcher,
+  // Temporarily comment these out until they are needed again
+  // SideNavHeader,
+  // SideNavDetails,
+  // SideNavSwitcher,
   SideNavItems,
   SideNavLink,
   SideNavMenu,
@@ -364,7 +365,101 @@ storiesOf('[Experimental] UI Shell', module)
     ))
   )
   .add(
-    'SideNav',
+    'Fixed SideNav',
+    withReadme(readme, () => (
+      <>
+        <SideNav
+          isFixedNav
+          expanded={true}
+          isChildOfHeader={false}
+          aria-label="Side navigation">
+          <SideNavItems>
+            <SideNavMenu title="L0 menu">
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu title="L0 menu">
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu title="L0 menu">
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+            <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
+  )
+  .add(
+    'Fixed SideNav w/ Icons',
+    withReadme(readme, () => (
+      <>
+        <SideNav
+          isFixedNav
+          expanded={true}
+          isChildOfHeader={false}
+          aria-label="Side navigation">
+          <SideNavItems>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+      </>
+    ))
+  )
+  .add(
+    'SideNav w/ Header',
     withReadme(readme, () => (
       <HeaderContainer
         render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -409,24 +504,8 @@ storiesOf('[Experimental] UI Shell', module)
               <SideNav
                 aria-label="Side navigation"
                 expanded={isSideNavExpanded}>
-                <SideNavHeader renderIcon={Fade16}>
-                  <SideNavDetails title="Side navigation title">
-                    <SideNavSwitcher
-                      labelText="Switcher"
-                      onChange={action('switcher changed')}
-                      options={['Option 1', 'Option 2', 'Option 3']}
-                    />
-                  </SideNavDetails>
-                </SideNavHeader>
                 <SideNavItems>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                  <SideNavMenu
-                    defaultExpanded
-                    renderIcon={Fade16}
-                    isActive
-                    title="Category title">
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
@@ -439,6 +518,38 @@ storiesOf('[Experimental] UI Shell', module)
                       Link
                     </SideNavMenuItem>
                   </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+                    Link
+                  </SideNavLink>
                 </SideNavItems>
               </SideNav>
             </Header>
