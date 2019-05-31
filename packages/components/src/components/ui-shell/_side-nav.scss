@@ -103,6 +103,15 @@
     z-index: z('header');
   }
 
+  .#{$prefix}--side-nav--ux {
+    top: $spacing-09;
+    width: mini-units(32);
+
+    @include carbon--breakpoint-down('lg') {
+      width: 0;
+    }
+  }
+
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
@@ -142,6 +151,10 @@
     }
   }
 
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__header {
+    height: auto;
+  }
+
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > Header > Details
   //----------------------------------------------------------------------------
@@ -155,6 +168,11 @@
     min-width: 0;
 
     @include expanded($opacity: true, $visibility: true);
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__details {
+    opacity: 1;
+    visibility: inherit;
   }
 
   .#{$prefix}--side-nav__title {
@@ -256,6 +274,10 @@
     }
   }
 
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__items {
+    overflow-y: auto;
+  }
+
   // Force all of our side navigation items to be the same dimensions. When our
   // menu expands, we can undo the forced dimensions.
   .#{$prefix}--side-nav__item {
@@ -267,6 +289,11 @@
       width: auto;
       height: auto;
     }
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
+    width: auto;
+    height: auto;
   }
 
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover {

@@ -18,6 +18,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const {
     expanded: expandedProp,
     defaultExpanded,
+    isChildOfHeader,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     children,
@@ -25,10 +26,10 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     className: customClassName,
     translateById: t,
   } = props;
+
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
@@ -51,6 +52,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
     [customClassName]: !!customClassName,
+    [`${prefix}--side-nav--ux`]: isChildOfHeader,
   });
 
   return (
@@ -79,6 +81,7 @@ SideNav.defaultProps = {
     return translations[id];
   },
   defaultExpanded: false,
+  isChildOfHeader: true,
 };
 
 SideNav.propTypes = {
@@ -119,6 +122,11 @@ SideNav.propTypes = {
    * the label you want displayed or read by screen readers.
    */
   translateById: PropTypes.func,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying <li> node
+   */
+  isChildOfHeader: PropTypes.bool,
 };
 
 export default SideNav;
