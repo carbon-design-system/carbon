@@ -59,7 +59,7 @@ exports[`SideNavMenu should render 1`] = `
   title="title"
 >
   <li
-    className="bx--side-nav__item custom-classname"
+    className="bx--side-nav__item bx--side-nav__item--icon custom-classname"
   >
     <button
       aria-expanded={false}

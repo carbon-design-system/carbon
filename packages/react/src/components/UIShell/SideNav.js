@@ -18,17 +18,19 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const {
     expanded: expandedProp,
     defaultExpanded,
+    isChildOfHeader,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     children,
     onToggle,
     className: customClassName,
     translateById: t,
+    isFixedNav,
   } = props;
+
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
@@ -50,7 +52,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const className = cx({
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [customClassName]: !!customClassName,
+    [`${prefix}--side-nav--ux`]: isChildOfHeader,
   });
 
   return (
@@ -61,11 +65,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       onFocus={event => handleToggle(event, true)}
       onBlur={event => handleToggle(event, false)}>
       {children}
-      <SideNavFooter
-        assistiveText={assistiveText}
-        expanded={expanded}
-        onToggle={handleToggle}
-      />
+      {isFixedNav ? null : (
+        <SideNavFooter
+          assistiveText={assistiveText}
+          expanded={expanded}
+          onToggle={handleToggle}
+        />
+      )}
     </nav>
   );
 });
@@ -79,6 +85,7 @@ SideNav.defaultProps = {
     return translations[id];
   },
   defaultExpanded: false,
+  isChildOfHeader: true,
 };
 
 SideNav.propTypes = {
@@ -119,6 +126,11 @@ SideNav.propTypes = {
    * the label you want displayed or read by screen readers.
    */
   translateById: PropTypes.func,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying <li> node
+   */
+  isChildOfHeader: PropTypes.bool,
 };
 
 export default SideNav;
