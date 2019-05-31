@@ -2274,7 +2274,7 @@ icons:
     friendly_name: At
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - at
       - \@
@@ -2284,7 +2284,7 @@ icons:
     friendly_name: Bar
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - drink
       - alcohol
@@ -2296,7 +2296,7 @@ icons:
     friendly_name: Battery
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - charging
       - power
@@ -2325,7 +2325,7 @@ icons:
     friendly_name: Bee
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - ibm
       - fly
@@ -2339,7 +2339,7 @@ icons:
     friendly_name: Bicycle
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - bike
       - cycle
@@ -2352,7 +2352,7 @@ icons:
     friendly_name: Binoculars
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - search
       - vision
@@ -2365,7 +2365,7 @@ icons:
     friendly_name: Blog
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - writing
       - journal
@@ -2378,7 +2378,7 @@ icons:
     friendly_name: Bluetooth
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - wireless
       - connect
@@ -2396,7 +2396,7 @@ icons:
     friendly_name: Bookmark
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - flag
       - marker
@@ -2406,7 +2406,7 @@ icons:
     friendly_name: Box
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - file
       - archive
@@ -2431,7 +2431,7 @@ icons:
     friendly_name: Building
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - factory
       - architecture
@@ -2458,7 +2458,7 @@ icons:
     friendly_name: Bullhorn
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - announcement
       - announce
@@ -2475,7 +2475,7 @@ icons:
     friendly_name: Bus
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - transport
       - transportation
@@ -2487,7 +2487,7 @@ icons:
     friendly_name: Cafe
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - coffee
       - caffine
@@ -2501,7 +2501,7 @@ icons:
     friendly_name: Calculator
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - calculate
       - PDA
@@ -2512,7 +2512,7 @@ icons:
     friendly_name: Calibrate
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - caliper
       - measure
@@ -2525,7 +2525,7 @@ icons:
     friendly_name: Camera
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - photo
       - photography
@@ -2545,7 +2545,7 @@ icons:
     friendly_name: Car
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - transport
       - private
@@ -2559,7 +2559,7 @@ icons:
     friendly_name: Carousel
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - roundabout
       - ride
@@ -2581,7 +2581,7 @@ icons:
     friendly_name: Catalog
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - notebook
       - book
@@ -2593,7 +2593,7 @@ icons:
     friendly_name: Categories
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - group
       - section
@@ -2605,7 +2605,7 @@ icons:
     friendly_name: Chart
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - graph
       - bar
@@ -2655,7 +2655,7 @@ icons:
     friendly_name: Checkbox
     usage: This is a description for usage
     categories:
-      - TBD
+      - Toggle
     aliases:
       - check
       - box
@@ -2686,7 +2686,7 @@ icons:
     friendly_name: Chemistry
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - science
       - flask
@@ -2697,7 +2697,7 @@ icons:
     friendly_name: Chip
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - microchip
       - computer chip
@@ -2707,7 +2707,7 @@ icons:
     friendly_name: Circle dash
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - circle
       - dash
@@ -2718,7 +2718,7 @@ icons:
     friendly_name: Classifier
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - measure word
       - counter word
@@ -2732,7 +2732,7 @@ icons:
     friendly_name: Closed caption
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - caption
       - closed
@@ -2754,7 +2754,7 @@ icons:
     friendly_name: Cloud
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - donwload
       - compute
@@ -2792,7 +2792,7 @@ icons:
     friendly_name: Cloud foundry
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - platform
       - multi cloud
@@ -2813,7 +2813,7 @@ icons:
     friendly_name: Cognitive
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - brain
       - idea
@@ -2825,7 +2825,7 @@ icons:
     friendly_name: Collaborate
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - people
       - cooperate
@@ -2839,7 +2839,7 @@ icons:
     friendly_name: Color palette
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - paint palette
       - paint
@@ -2850,7 +2850,7 @@ icons:
     friendly_name: Column
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - grid
       - lines
@@ -2861,7 +2861,7 @@ icons:
     friendly_name: Compare
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - arrows
       - exchange
@@ -2875,7 +2875,7 @@ icons:
     friendly_name: Compass
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - direction
       - navigation
@@ -2889,7 +2889,7 @@ icons:
     friendly_name: Connect
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - network
       - link
@@ -2902,7 +2902,7 @@ icons:
     friendly_name: Connection signal
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - signal
       - tower
@@ -2918,7 +2918,7 @@ icons:
     friendly_name: Contrast
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - brightness
       - darkness
@@ -2932,7 +2932,7 @@ icons:
     friendly_name: Corner
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - frame
       - flourish
@@ -2947,7 +2947,7 @@ icons:
     friendly_name: Crop
     usage: This is a description for usage
     categories:
-      - TBD
+      - Image
     aliases:
       - cut
       - trim
