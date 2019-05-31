@@ -1,0 +1,25 @@
+categories:
+  - name: Actions
+    members:
+    - add
+    - add--alt
+    - add--filled
+    - app-switcher
+  - name: Brand
+    members:
+    - bee
+  - name: Enterprise
+    members:
+
+  - name: Organization
+    members:
+
+  - name: Person
+    members:
+
+  - name: Planning
+    members:
+
+  - name: Tools
+    members:
+

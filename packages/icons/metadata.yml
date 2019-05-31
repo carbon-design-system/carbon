@@ -2262,7 +2262,7 @@ icons:
     friendly_name: Asset
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - runtime
       - wheel
@@ -2274,7 +2274,7 @@ icons:
     friendly_name: At
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - at
       - \@
@@ -2284,7 +2284,7 @@ icons:
     friendly_name: Bar
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - drink
       - alcohol
@@ -2296,7 +2296,7 @@ icons:
     friendly_name: Battery
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - charging
       - power
@@ -2325,7 +2325,7 @@ icons:
     friendly_name: Bee
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - ibm
       - fly
@@ -2339,7 +2339,7 @@ icons:
     friendly_name: Bicycle
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - bike
       - cycle
@@ -2352,7 +2352,7 @@ icons:
     friendly_name: Binoculars
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - search
       - vision
@@ -2365,7 +2365,7 @@ icons:
     friendly_name: Blog
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - writing
       - journal
@@ -2378,7 +2378,7 @@ icons:
     friendly_name: Bluetooth
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - wireless
       - connect
@@ -2396,7 +2396,7 @@ icons:
     friendly_name: Bookmark
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - flag
       - marker
@@ -2406,7 +2406,7 @@ icons:
     friendly_name: Box
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - file
       - archive
@@ -2417,7 +2417,7 @@ icons:
     friendly_name: Brightness contrast
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - sun
       - bright
@@ -2431,7 +2431,7 @@ icons:
     friendly_name: Building
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - factory
       - architecture
@@ -2458,7 +2458,7 @@ icons:
     friendly_name: Bullhorn
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - announcement
       - announce
@@ -2475,7 +2475,7 @@ icons:
     friendly_name: Bus
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - transport
       - transportation
@@ -2487,7 +2487,7 @@ icons:
     friendly_name: Cafe
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - coffee
       - caffine
@@ -2501,7 +2501,7 @@ icons:
     friendly_name: Calculator
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - calculate
       - PDA
@@ -2512,7 +2512,7 @@ icons:
     friendly_name: Calibrate
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - caliper
       - measure
@@ -2525,7 +2525,7 @@ icons:
     friendly_name: Camera
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - photo
       - photography
@@ -2545,7 +2545,7 @@ icons:
     friendly_name: Car
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - transport
       - private
@@ -2559,7 +2559,7 @@ icons:
     friendly_name: Carousel
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - roundabout
       - ride
@@ -2581,7 +2581,7 @@ icons:
     friendly_name: Catalog
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - notebook
       - book
@@ -2593,7 +2593,7 @@ icons:
     friendly_name: Categories
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - group
       - section
@@ -2605,7 +2605,7 @@ icons:
     friendly_name: Chart
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - graph
       - bar
@@ -2655,7 +2655,7 @@ icons:
     friendly_name: Checkbox
     usage: This is a description for usage
     categories:
-      - example category
+      - Toggle
     aliases:
       - check
       - box
@@ -2686,7 +2686,7 @@ icons:
     friendly_name: Chemistry
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - science
       - flask
@@ -2697,7 +2697,7 @@ icons:
     friendly_name: Chip
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - microchip
       - computer chip
@@ -2707,7 +2707,7 @@ icons:
     friendly_name: Circle dash
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - circle
       - dash
@@ -2718,7 +2718,7 @@ icons:
     friendly_name: Classifier
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - measure word
       - counter word
@@ -2732,7 +2732,7 @@ icons:
     friendly_name: Closed caption
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - caption
       - closed
@@ -2754,7 +2754,7 @@ icons:
     friendly_name: Cloud
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - donwload
       - compute
@@ -2792,7 +2792,7 @@ icons:
     friendly_name: Cloud foundry
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - platform
       - multi cloud
@@ -2813,7 +2813,7 @@ icons:
     friendly_name: Cognitive
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - brain
       - idea
@@ -2825,7 +2825,7 @@ icons:
     friendly_name: Collaborate
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - people
       - cooperate
@@ -2839,7 +2839,7 @@ icons:
     friendly_name: Color palette
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - paint palette
       - paint
@@ -2850,7 +2850,7 @@ icons:
     friendly_name: Column
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - grid
       - lines
@@ -2861,7 +2861,7 @@ icons:
     friendly_name: Compare
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - arrows
       - exchange
@@ -2875,7 +2875,7 @@ icons:
     friendly_name: Compass
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - direction
       - navigation
@@ -2889,7 +2889,7 @@ icons:
     friendly_name: Connect
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - network
       - link
@@ -2902,7 +2902,7 @@ icons:
     friendly_name: Connection signal
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - signal
       - tower
@@ -2918,7 +2918,7 @@ icons:
     friendly_name: Contrast
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - brightness
       - darkness
@@ -2932,7 +2932,7 @@ icons:
     friendly_name: Corner
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - frame
       - flourish
@@ -2947,7 +2947,7 @@ icons:
     friendly_name: Crop
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - cut
       - trim
@@ -2962,7 +2962,7 @@ icons:
     friendly_name: Cursor
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - mouse
       - arrow
@@ -2985,7 +2985,7 @@ icons:
     friendly_name: Cut
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - scissors
       - cutting
@@ -2999,7 +2999,7 @@ icons:
     friendly_name: Dashboard
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - gauge
       - ui
@@ -3015,7 +3015,7 @@ icons:
     friendly_name: Data
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - connection
       - dot
@@ -3077,7 +3077,7 @@ icons:
     friendly_name: Data share
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - data
       - share
@@ -3091,7 +3091,7 @@ icons:
     friendly_name: Data vis
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - vis
       - graph
@@ -3126,7 +3126,7 @@ icons:
     friendly_name: Debug
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - bug
       - beetle
@@ -3138,7 +3138,7 @@ icons:
     friendly_name: Delivery truck
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - truck
       - car
@@ -3154,7 +3154,7 @@ icons:
     friendly_name: Departure
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - plane
       - airplane
@@ -3168,7 +3168,7 @@ icons:
     friendly_name: Deploy rules
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - rules
       - deploy
@@ -3181,7 +3181,7 @@ icons:
     friendly_name: Development
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - build
       - pixels
@@ -3197,7 +3197,7 @@ icons:
     friendly_name: Devices
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - monitor
       - screen
@@ -3209,7 +3209,7 @@ icons:
     friendly_name: Diagram
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - pie chart
       - pie
@@ -3222,7 +3222,7 @@ icons:
     friendly_name: Drag
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - expand
       - drop
@@ -3245,7 +3245,7 @@ icons:
     friendly_name: Draw
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - squiggle
       - drawing
@@ -3258,7 +3258,7 @@ icons:
     friendly_name: Edt loop
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - version
       - iteration
@@ -3272,7 +3272,7 @@ icons:
     friendly_name: Education
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - graduation
       - scholarship
@@ -3287,7 +3287,7 @@ icons:
     friendly_name: Erase
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - eraser
       - remove
@@ -3303,7 +3303,7 @@ icons:
     friendly_name: Event
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - calendar
       - star
@@ -3322,7 +3322,7 @@ icons:
     friendly_name: Events
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - people
       - team
@@ -3335,7 +3335,7 @@ icons:
     friendly_name: Exam mode
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - dev test
       - testing
@@ -3347,7 +3347,7 @@ icons:
     friendly_name: Eyedropper
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - dropper
       - pipette
@@ -3359,7 +3359,7 @@ icons:
     friendly_name: Face
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - smiley
       - smile
@@ -3457,7 +3457,7 @@ icons:
     friendly_name: Finance
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - bank
       - columns
@@ -3471,7 +3471,7 @@ icons:
     friendly_name: Fingerprint recognition
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - identification
       - fingerprint
@@ -3487,7 +3487,7 @@ icons:
     friendly_name: Flag
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - country
       - location
@@ -3501,7 +3501,7 @@ icons:
     friendly_name: Flash
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - battery
       - lightning
@@ -3533,7 +3533,7 @@ icons:
     friendly_name: Flow
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - flow chart
       - chart
@@ -3557,7 +3557,7 @@ icons:
     friendly_name: Forward
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - ahead
       - future
@@ -3585,7 +3585,7 @@ icons:
     friendly_name: Function
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - action
       - behavior
@@ -3600,7 +3600,7 @@ icons:
     friendly_name: Game
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - play
       - match
@@ -3623,7 +3623,7 @@ icons:
     friendly_name: Globe
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - planet
       - earth
@@ -3636,7 +3636,7 @@ icons:
     friendly_name: Group
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - category
       - band
@@ -3652,7 +3652,7 @@ icons:
     friendly_name: Headphones
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - headset
       - listening device
@@ -3666,7 +3666,7 @@ icons:
     friendly_name: Headset
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - headphones
       - listening device
@@ -3681,7 +3681,7 @@ icons:
     friendly_name: Health cross
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - red cross
       - medicine
@@ -3694,7 +3694,7 @@ icons:
     friendly_name: Hearing
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - detecting
       - ear
@@ -3710,7 +3710,7 @@ icons:
     friendly_name: Home
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - detecting
       - ear
@@ -3726,7 +3726,7 @@ icons:
     friendly_name: Hotel
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - hostel
       - motel
@@ -3740,7 +3740,7 @@ icons:
     friendly_name: Hourglass
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - clock
       - metronome
@@ -3754,7 +3754,7 @@ icons:
     friendly_name: Humidity
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - weather
       - damp
@@ -3771,7 +3771,7 @@ icons:
     friendly_name: Ibm cloud
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - product
       - cloud
@@ -3787,7 +3787,7 @@ icons:
     friendly_name: Ibm security
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - safe
       - cyber security
@@ -3805,7 +3805,7 @@ icons:
     friendly_name: Idea
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - thought
       - notion
@@ -3822,7 +3822,7 @@ icons:
     friendly_name: Identification
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - id
       - passport
@@ -3837,7 +3837,7 @@ icons:
     friendly_name: Image
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - appearance
       - form
@@ -3859,7 +3859,7 @@ icons:
     friendly_name: Industry
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - field
       - business
@@ -3875,7 +3875,7 @@ icons:
     friendly_name: Insert
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - embed
       - enter
@@ -3890,7 +3890,7 @@ icons:
     friendly_name: Integration
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - assimilate
       - assimilation
@@ -3905,7 +3905,7 @@ icons:
     friendly_name: Inventory management
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - supervision
       - asset management
@@ -3921,7 +3921,7 @@ icons:
     friendly_name: Iot
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - internet of things
       - smart objects
@@ -3951,7 +3951,7 @@ icons:
     friendly_name: Keyboard
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - console
       - typing
@@ -3966,7 +3966,7 @@ icons:
     friendly_name: Letter
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - alphabet
       - language
@@ -4106,7 +4106,7 @@ icons:
     friendly_name: Light
     usage: This is a description for usage
     categories:
-      - example category
+      - Toggle
     aliases:
       - bright
       - sun
@@ -4127,7 +4127,7 @@ icons:
     friendly_name: Link
     usage: This is a description for usage
     categories:
-      - example category
+      - Formatting
     aliases:
       - associate
       - association
@@ -4141,7 +4141,7 @@ icons:
     friendly_name: Location
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - place
       - locate
@@ -4157,7 +4157,7 @@ icons:
     friendly_name: Login
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - log on
       - password
@@ -4172,7 +4172,7 @@ icons:
     friendly_name: Logo
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - brand
       - emblem
@@ -4277,7 +4277,7 @@ icons:
     friendly_name: Logout
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - sign off
       - sign out
@@ -4290,7 +4290,7 @@ icons:
     friendly_name: Loop
     usage: This is a description for usage
     categories:
-      - example category
+      - Image
     aliases:
       - knot
       - curl
@@ -4306,7 +4306,7 @@ icons:
     friendly_name: Mac
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - command
       - key command
@@ -4334,7 +4334,7 @@ icons:
     friendly_name: Mail
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - email
       - send
@@ -4352,7 +4352,7 @@ icons:
     friendly_name: Map
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - atlas
       - locate
@@ -4368,7 +4368,7 @@ icons:
     friendly_name: Medication
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - medicine
       - drug
@@ -4396,7 +4396,7 @@ icons:
     friendly_name: Microphone
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - mic
       - speaker
@@ -4427,7 +4427,7 @@ icons:
     friendly_name: Migrate
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - drift
       - roam
@@ -4443,7 +4443,7 @@ icons:
     friendly_name: Mobile
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - phone
       - iphone
@@ -4475,7 +4475,7 @@ icons:
     friendly_name: Model
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - reference
       - 3d
@@ -4498,7 +4498,7 @@ icons:
     friendly_name: Move
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - action
       - transfer
@@ -4512,7 +4512,7 @@ icons:
     friendly_name: Movement
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - action
       - transfer
@@ -4526,7 +4526,7 @@ icons:
     friendly_name: Music
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - audio
       - melody
@@ -4541,7 +4541,7 @@ icons:
     friendly_name: Not sent
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - failed
       - failure
@@ -4561,7 +4561,7 @@ icons:
     friendly_name: Notebook
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - book
       - notes
@@ -4582,7 +4582,7 @@ icons:
     friendly_name: Number
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - count
       - numeral
@@ -4694,7 +4694,7 @@ icons:
     friendly_name: Opacity
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - transparency
       - dim
@@ -4708,7 +4708,7 @@ icons:
     friendly_name: Open panel
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - open
       - panel
@@ -4761,7 +4761,7 @@ icons:
     friendly_name: Package
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - download
       - kit
@@ -4776,7 +4776,7 @@ icons:
     friendly_name: Page
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - next
       - forward
@@ -4798,7 +4798,7 @@ icons:
     friendly_name: Paint brush
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - brush
       - paint
@@ -4814,7 +4814,7 @@ icons:
     friendly_name: Panel expansion
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - side
       - navigation
@@ -4826,7 +4826,7 @@ icons:
     friendly_name: Parent child
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - nested
       - relation
@@ -4838,7 +4838,7 @@ icons:
     friendly_name: Partnership
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - relationship
       - handshake
@@ -4850,7 +4850,7 @@ icons:
     friendly_name: Password
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - key
       - code
@@ -4862,7 +4862,7 @@ icons:
     friendly_name: Paste
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - copy
       - file
@@ -4873,7 +4873,7 @@ icons:
     friendly_name: Person
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - human
       - male
@@ -4892,7 +4892,7 @@ icons:
     friendly_name: Phone
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - call
       - cell
@@ -4922,7 +4922,7 @@ icons:
     friendly_name: Pills
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - health
       - medicine
@@ -4943,7 +4943,7 @@ icons:
     friendly_name: Pin
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - save
       - favorite
@@ -4953,7 +4953,7 @@ icons:
     friendly_name: Plane
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - airplane
       - flight
@@ -4964,7 +4964,7 @@ icons:
     friendly_name: Playlist
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - music
       - play
@@ -4975,7 +4975,7 @@ icons:
     friendly_name: Popup
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - modal
       - overlay
@@ -4986,7 +4986,7 @@ icons:
     friendly_name: Portfolio
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - briefcase
       - suitcase
@@ -4998,7 +4998,7 @@ icons:
     friendly_name: Presentation file
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - keynote
       - chart
@@ -5010,7 +5010,7 @@ icons:
     friendly_name: Printer
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - print
       - copy
@@ -5022,7 +5022,7 @@ icons:
     friendly_name: Purchase
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - charge
       - card
@@ -5034,7 +5034,7 @@ icons:
     friendly_name: Query queue
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - list
     sizes:
@@ -5043,7 +5043,7 @@ icons:
     friendly_name: Quotes
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - mark
       - punctuation
@@ -5053,7 +5053,7 @@ icons:
     friendly_name: Radio button
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - component
       - circle
@@ -5071,7 +5071,7 @@ icons:
     friendly_name: Radio
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - music
       - sound
@@ -5083,7 +5083,7 @@ icons:
     friendly_name: Receipt
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - check
       - bill
@@ -5094,7 +5094,7 @@ icons:
     friendly_name: Recently viewed
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - history
       - version
@@ -5106,7 +5106,7 @@ icons:
     friendly_name: Recommend
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - suggest
       - award
@@ -5117,7 +5117,7 @@ icons:
     friendly_name: Recording
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - start
       - music
@@ -5140,7 +5140,7 @@ icons:
     friendly_name: Renew
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - refresh
       - replay
@@ -5151,7 +5151,7 @@ icons:
     friendly_name: Repeat
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - repeat once
       - music
@@ -5168,7 +5168,7 @@ icons:
     friendly_name: Reply
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - back
       - respond
@@ -5179,7 +5179,7 @@ icons:
     friendly_name: Report
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - clipboard
       - paper
@@ -5197,7 +5197,7 @@ icons:
     friendly_name: Request quote
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - edit
       - pencil
@@ -5209,7 +5209,7 @@ icons:
     friendly_name: Research
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - study
       - sphere
@@ -5233,7 +5233,7 @@ icons:
     friendly_name: Reset
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - refresh
       - undo
@@ -5250,7 +5250,7 @@ icons:
     friendly_name: Restaurant
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - dining
       - knife
@@ -5272,7 +5272,7 @@ icons:
     friendly_name: Rewind
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - back
       - previous
@@ -5298,7 +5298,7 @@ icons:
     friendly_name: Rocket
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - missile
       - spaceship
@@ -5311,7 +5311,7 @@ icons:
     friendly_name: Rotate
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - revolve
       - circle
@@ -5324,7 +5324,7 @@ icons:
     friendly_name: Row
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - line
       - tier
@@ -5340,7 +5340,7 @@ icons:
     friendly_name: Rss
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - web feed
       - feed
@@ -5354,7 +5354,7 @@ icons:
     friendly_name: Ruler
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - measure
       - tool
@@ -5374,7 +5374,7 @@ icons:
     friendly_name: Run
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - start
       - play
@@ -5385,7 +5385,7 @@ icons:
     friendly_name: Scale
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - scalable
       - ratio
@@ -5402,7 +5402,7 @@ icons:
     friendly_name: Scalpel
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - blade
       - cutter
@@ -5420,7 +5420,7 @@ icons:
     friendly_name: Scan
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - scanner
       - code
@@ -5435,7 +5435,7 @@ icons:
     friendly_name: Screen
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - computer
       - display
@@ -5457,7 +5457,7 @@ icons:
     friendly_name: Send
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - mail
       - message
@@ -5490,7 +5490,7 @@ icons:
     friendly_name: Share knowledge
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - people
       - communicate
@@ -5506,7 +5506,7 @@ icons:
     friendly_name: Share
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - social media
       - facebook
@@ -5522,7 +5522,7 @@ icons:
     friendly_name: Shopping
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - bag
       - cart
@@ -5552,7 +5552,7 @@ icons:
     friendly_name: Shrink screen
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - minimize
       - resize
@@ -5574,7 +5574,7 @@ icons:
     friendly_name: Shuffle
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - move
       - reorder
@@ -5591,7 +5591,7 @@ icons:
     friendly_name: Shuttle
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - bus
       - truck
@@ -5606,7 +5606,7 @@ icons:
     friendly_name: Skip
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - arrow
       - next
@@ -5633,7 +5633,7 @@ icons:
     friendly_name: Smell
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - nose
       - scent
@@ -5647,7 +5647,7 @@ icons:
     friendly_name: Spell check
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - check
       - correction
@@ -5664,7 +5664,7 @@ icons:
     friendly_name: Split screen
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - divide
       - dual
@@ -5680,7 +5680,7 @@ icons:
     friendly_name: Spray paint
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - paint
       - spray
@@ -5695,7 +5695,7 @@ icons:
     friendly_name: Store
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - building
       - shop
@@ -5712,7 +5712,7 @@ icons:
     friendly_name: Table
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - data
       - spreadsheet
@@ -5732,7 +5732,7 @@ icons:
     friendly_name: Table of contents
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - list
       - chart
@@ -5750,7 +5750,7 @@ icons:
     friendly_name: Tag
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - label
       - mark
@@ -5770,7 +5770,7 @@ icons:
     friendly_name: Task
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - clipboard
       - checkmark
@@ -5785,7 +5785,7 @@ icons:
     friendly_name: Taste
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - tongue
       - mouth
@@ -5797,7 +5797,7 @@ icons:
     friendly_name: Taxi
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - car
       - cab
@@ -5810,7 +5810,7 @@ icons:
     friendly_name: Temperature
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - weather
       - thermometer
@@ -5824,7 +5824,7 @@ icons:
     friendly_name: Template
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - dashboard
       - arrange
@@ -5837,7 +5837,7 @@ icons:
     friendly_name: Terminal
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - code
       - code editor
@@ -5848,7 +5848,7 @@ icons:
     friendly_name: Text
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - letter
       - typography
@@ -5984,7 +5984,7 @@ icons:
     friendly_name: Thumbnail
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - preview
       - carousel
@@ -6004,7 +6004,7 @@ icons:
     friendly_name: Thumbs down
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - dislike
       - hand
@@ -6017,7 +6017,7 @@ icons:
     friendly_name: Thumbs up
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - like
       - hand
@@ -6030,7 +6030,7 @@ icons:
     friendly_name: Ticket
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - stub
       - admission
@@ -6040,7 +6040,7 @@ icons:
     friendly_name: Time
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - clock
       - hour
@@ -6052,7 +6052,7 @@ icons:
     friendly_name: Timer
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - alarm
       - alert
@@ -6063,7 +6063,7 @@ icons:
     friendly_name: Tool box
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - kit
       - container
@@ -6073,7 +6073,7 @@ icons:
     friendly_name: Tools
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - wrench
       - fix
@@ -6085,7 +6085,7 @@ icons:
     friendly_name: Touch
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - hand
       - tap
@@ -6106,7 +6106,7 @@ icons:
     friendly_name: Train
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - subway
       - metro
@@ -6117,7 +6117,7 @@ icons:
     friendly_name: Translate
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - language
     sizes:
@@ -6126,7 +6126,7 @@ icons:
     friendly_name: Tree view
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - flow chart
     sizes:
@@ -6135,7 +6135,7 @@ icons:
     friendly_name: Unlink
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - detach
       - paperclip
@@ -6146,7 +6146,7 @@ icons:
     friendly_name: User profile
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - person
       - account
@@ -6160,7 +6160,7 @@ icons:
     friendly_name: Van
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - vehicle
       - car
@@ -6171,7 +6171,7 @@ icons:
     friendly_name: Video
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - camera
       - recorder
@@ -6208,7 +6208,7 @@ icons:
     friendly_name: Visual recognition
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - picture
       - ai
@@ -6218,7 +6218,7 @@ icons:
     friendly_name: Voicemail
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - recording
       - audio
@@ -6229,7 +6229,7 @@ icons:
     friendly_name: Volume
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - sound
       - noise
@@ -6268,7 +6268,7 @@ icons:
     friendly_name: Wallet
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - money
       - purse
@@ -6278,7 +6278,7 @@ icons:
     friendly_name: Watch
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - time
       - clock
@@ -6288,7 +6288,7 @@ icons:
     friendly_name: Watson
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - ai
     sizes:
@@ -6303,7 +6303,7 @@ icons:
     friendly_name: 3 d cursor
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - watson
     sizes:
@@ -6312,7 +6312,7 @@ icons:
     friendly_name: 3 d mpr toggle
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - watson
     sizes:
@@ -6321,7 +6321,7 @@ icons:
     friendly_name: 3 d curve
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - watson
       - curve
@@ -6346,7 +6346,7 @@ icons:
     friendly_name: 3rd party connected
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - watson
       - dots
@@ -6359,7 +6359,7 @@ icons:
     friendly_name: Angle
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - watson
       - tilt
@@ -6371,7 +6371,7 @@ icons:
     friendly_name: Annotation visibility
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - meter
       - instrument
@@ -6384,7 +6384,7 @@ icons:
     friendly_name: Arrow annotation
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - cursor
       - text
@@ -6395,7 +6395,7 @@ icons:
     friendly_name: Auto scroll
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - scrolling
       - slide
@@ -6406,7 +6406,7 @@ icons:
     friendly_name: Cd
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - target
       - mark
@@ -6432,7 +6432,7 @@ icons:
     friendly_name: Circle measurement
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - pan
       - scan
@@ -6443,7 +6443,7 @@ icons:
     friendly_name: Cobb angle
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - corner
       - slant
@@ -6457,7 +6457,7 @@ icons:
     friendly_name: Cross reference
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - read
       - research
@@ -6468,7 +6468,7 @@ icons:
     friendly_name: Dicom
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - digital
       - imaging
@@ -6488,7 +6488,7 @@ icons:
     friendly_name: Edit filter
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - pencil
       - funnel
@@ -6498,7 +6498,7 @@ icons:
     friendly_name: Fusion blender
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - bar
       - box
@@ -6509,7 +6509,7 @@ icons:
     friendly_name: Hanging protocol
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - hanger
       - clothes
@@ -6521,7 +6521,7 @@ icons:
     friendly_name: I ca 3 d
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - iCA
       - dimension
@@ -6533,7 +6533,7 @@ icons:
     friendly_name: Launch study
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - push
       - pull
@@ -6559,7 +6559,7 @@ icons:
     friendly_name: Magnify
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - expand
       - zoom
@@ -6571,7 +6571,7 @@ icons:
     friendly_name: Page scroll
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - pages
       - stack
@@ -6585,7 +6585,7 @@ icons:
     friendly_name: Pet image
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - cursor
       - brightness
@@ -6605,7 +6605,7 @@ icons:
     friendly_name: Pointer text
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - cursor
       - text
@@ -6616,7 +6616,7 @@ icons:
     friendly_name: Region analysis
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - circle
       - hash
@@ -6637,7 +6637,7 @@ icons:
     friendly_name: Spine label
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - backbone
       - stack
@@ -6650,7 +6650,7 @@ icons:
     friendly_name: Stacked move
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - stack
       - pages
@@ -6663,7 +6663,7 @@ icons:
     friendly_name: Stacked scrolling
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - stack
       - pages
@@ -6686,7 +6686,7 @@ icons:
     friendly_name: Stress breath editor
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - air
       - gas
@@ -6699,7 +6699,7 @@ icons:
     friendly_name: Study
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - patient
       - user
@@ -6724,7 +6724,7 @@ icons:
     friendly_name: Window
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - brightness
       - contrast
@@ -6749,7 +6749,7 @@ icons:
     friendly_name: Zoom pan
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - track
       - move
@@ -6763,7 +6763,7 @@ icons:
     friendly_name: Wikis
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - globe
       - wikipedia
@@ -6776,7 +6776,7 @@ icons:
     friendly_name: Wireless checkout
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - shopping bag
       - buy
@@ -6788,7 +6788,7 @@ icons:
     friendly_name: Workspace
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - tiles
       - dashboard
@@ -6799,7 +6799,7 @@ icons:
     friendly_name: X axis
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - horizontal
       - data
@@ -6813,7 +6813,7 @@ icons:
     friendly_name: Y axis
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - verticle
       - data
@@ -6827,7 +6827,7 @@ icons:
     friendly_name: Z axis
     usage: This is a description for usage
     categories:
-      - example category
+      - TBD
     aliases:
       - depth
       - 3D
