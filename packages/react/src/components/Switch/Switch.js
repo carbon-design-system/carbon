@@ -55,8 +55,6 @@ const Switch = props => {
     if (match(key, keyCodes.RIGHT) || match(key, keyCodes.LEFT)) {
       onKeyDown({ index, name, text, key });
     }
-    if (match(key, keyCodes.LEFT)) {
-    }
   };
 
   const classes = classNames(className, `${prefix}--content-switcher-btn`, {
