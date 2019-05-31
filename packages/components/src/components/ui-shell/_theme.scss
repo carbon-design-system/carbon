@@ -153,7 +153,7 @@ $shell-panel-focus: $carbon--white-0;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-01: $carbon--gray-90; //TODO waiting for updated color
+$shell-side-nav-bg-01: $carbon--white-0;
 
 /// Selected category background
 /// Select L2 flatted item background
@@ -174,13 +174,13 @@ $shell-side-nav-bg-03: $ibm-color__gray-70; //TODO waiting for updated color
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-04: #353535; //TODO needs color var gray-90-hover
+$shell-side-nav-bg-04: #e5e5e5; //TODO needs color var gray-90-hover
 
 /// Side nav menu item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-05: #4c4c4c; //TODO needs color var gray-80-hover
+$shell-side-nav-bg-05: #dcdcdc; //TODO needs color var gray-80-hover
 
 /// Primary text in side-nav
 /// L2 Flatten item text
@@ -189,7 +189,7 @@ $shell-side-nav-bg-05: #4c4c4c; //TODO needs color var gray-80-hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-text-01: $ibm-color__gray-10; //TODO waiting for updated color
+$shell-side-nav-text-01: $ibm-color__gray-70; //TODO waiting for updated color
 
 /// Secondary text in side nav
 /// L2 Category label
@@ -202,7 +202,7 @@ $shell-side-nav-text-02: $ibm-color__gray-30;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-icon-01: $ibm-color__gray-10;
+$shell-side-nav-icon-01: $ibm-color__gray-70;
 
 /// Item highlight bar
 /// @type Color

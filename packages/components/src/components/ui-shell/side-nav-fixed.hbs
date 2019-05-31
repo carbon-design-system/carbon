@@ -9,22 +9,9 @@
   <nav class="{{@root.prefix}}--side-nav__navigation" role="navigation" aria-label="Side navigation">
     <ul class="{{@root.prefix}}--side-nav__items">
       <li class="{{@root.prefix}}--side-nav__item">
-        <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)">
-          <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
-        </a>
-      </li>
-      <li class="{{@root.prefix}}--side-nav__item {{@root.prefix}}--side-nav__item--active">
-        <a class="{{@root.prefix}}--side-nav__link {{@root.prefix}}--side-nav__link--current" href="javascript:void(0)"
-          aria-current="page">
-          <span class="{{@root.prefix}}--side-nav__link-text">
-            Link with really long text that should wrap - active
-          </span>
-        </a>
-      </li>
-      <li class="{{@root.prefix}}--side-nav__item">
         <button class="{{@root.prefix}}--side-nav__submenu" role="button" aria-haspopup="true" aria-expanded="false">
           <span class="{{@root.prefix}}--side-nav__submenu-title">
-            Category title that is really long and probably should overflow
+            L0 Menu
           </span>
           <div
             class="{{@root.prefix}}--side-nav__icon {{@root.prefix}}--side-nav__icon--small {{@root.prefix}}--side-nav__submenu-chevron">
@@ -36,23 +23,23 @@
         <ul class="{{@root.prefix}}--side-nav__menu" role="menu" hidden="">
           <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
-              Link
+              <span class="{{@root.prefix}}--side-nav__link-text">L0 menu item</span>
             </a>
           </li>
           <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
-              Link
+              <span class="{{@root.prefix}}--side-nav__link-text">L0 menu item</span>
             </a>
           </li>
           <li class="{{@root.prefix}}--side-nav__menu-item" role="menuitem">
             <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
-              Link
+              <span class="{{@root.prefix}}--side-nav__link-text">L0 menu item</span>
             </a>
           </li>
         </ul>
       </li>
-      <li class="{{@root.prefix}}--side-nav__item {{@root.prefix}}--side-nav__item--active">
-        <button class="{{@root.prefix}}--side-nav__submenu" role="button" aria-haspopup="true" aria-expanded="true">
+      <li class="{{@root.prefix}}--side-nav__item">
+        <button class=" {{@root.prefix}}--side-nav__submenu" role="button" aria-haspopup="true" aria-expanded="true">
           <span class="{{@root.prefix}}--side-nav__submenu-title">
             Category title that is really long and probably should overflow
           </span>
@@ -67,28 +54,41 @@
           <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
               <span class="{{@root.prefix}}--side-nav__link-text">
-                Link with really long text that probably should be truncated
+                L0 menu item
               </span>
             </a>
           </li>
           <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem" aria-current="page">
               <span class="{{@root.prefix}}--side-nav__link-text">
-                Link with really long text that probably should be truncated
+                L0 menu item
               </span>
             </a>
           </li>
           <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
             <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
-              <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
+              <span class="{{@root.prefix}}--side-nav__link-text">L0 menu item</span>
             </a>
           </li>
           <li class="{{@root.prefix}}--side-nav__menu-item" role="none">
-            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem" aria-current="page">
-              <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
+            <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)" role="menuitem">
+              <span class="{{@root.prefix}}--side-nav__link-text">L0 menu item</span>
             </a>
           </li>
         </ul>
+      </li>
+      <li class="{{@root.prefix}}--side-nav__item">
+        <a class="{{@root.prefix}}--side-nav__link" href="javascript:void(0)">
+          <span class="{{@root.prefix}}--side-nav__link-text">Link</span>
+        </a>
+      </li>
+      <li class="{{@root.prefix}}--side-nav__item {{@root.prefix}}--side-nav__item--active">
+        <a class="{{@root.prefix}}--side-nav__link {{@root.prefix}}--side-nav__link--current" href="javascript:void(0)"
+          aria-current="page">
+          <span class="{{@root.prefix}}--side-nav__link-text">
+            Link with really long text that should wrap - active
+          </span>
+        </a>
       </li>
     </ul>
   </nav>
