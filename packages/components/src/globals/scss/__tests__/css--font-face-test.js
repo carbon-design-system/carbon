@@ -16,7 +16,7 @@ describe('_css--font-face.scss', () => {
     const { result } = await render(`
 $css--reset: false;
 $css--font-face: false;
-@import './src/globals/scss/css--font-face';
+@import '../css--font-face';
 `);
 
     // Should be an empty string, currently will output only @keyframes that are
@@ -29,7 +29,7 @@ $css--font-face: false;
 $css--reset: false;
 $css--font-face: true;
 $css--plex: false;
-@import './src/globals/scss/css--font-face';
+@import '../css--font-face';
 `);
 
     expect(result.css.toString()).toEqual(
@@ -46,7 +46,7 @@ $css--plex: false;
 $css--reset: false;
 $css--font-face: true;
 $css--plex: true;
-@import './src/globals/scss/css--font-face';
+@import '../css--font-face';
 `);
 
       expect(result.css.toString()).toMatchSnapshot();
