@@ -493,27 +493,29 @@ class OverflowMenu extends Component {
     );
 
     const menuBody = (
-      <ul className={overflowMenuOptionsClasses} tabIndex="-1" role="menu">
+      <ul
+        className={overflowMenuOptionsClasses}
+        tabIndex="-1"
+        role="menu"
+        aria-label="Menu">
         {childrenWithProps}
       </ul>
     );
 
     const wrappedMenuBody = (
-      <div role="menuitem">
-        <FloatingMenu
-          menuPosition={this.state.menuPosition}
-          menuDirection={direction}
-          menuOffset={flipped ? menuOffsetFlip : menuOffset}
-          menuRef={this._bindMenuBody}
-          menuEl={this.menuEl}
-          flipped={this.props.flipped}
-          target={this._getTarget}
-          onPlace={this._handlePlace}>
-          {React.cloneElement(menuBody, {
-            'data-floating-menu-direction': direction,
-          })}
-        </FloatingMenu>
-      </div>
+      <FloatingMenu
+        menuPosition={this.state.menuPosition}
+        menuDirection={direction}
+        menuOffset={flipped ? menuOffsetFlip : menuOffset}
+        menuRef={this._bindMenuBody}
+        menuEl={this.menuEl}
+        flipped={this.props.flipped}
+        target={this._getTarget}
+        onPlace={this._handlePlace}>
+        {React.cloneElement(menuBody, {
+          'data-floating-menu-direction': direction,
+        })}
+      </FloatingMenu>
     );
 
     const iconProps = {
@@ -525,26 +527,29 @@ class OverflowMenu extends Component {
     };
 
     return (
-      <ClickListener onClickOutside={this.handleClickOutside}>
-        <div
-          {...other}
-          role="menu"
-          aria-haspopup
-          aria-expanded={this.state.open}
-          className={overflowMenuClasses}
-          onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
-          onClick={this.handleClick}
-          aria-label={ariaLabel}
-          id={id}
-          tabIndex={tabIndex}
-          ref={mergeRefs(ref, this.bindMenuEl)}>
-          <IconElement {...iconProps}>
-            {iconDescription && <title>{iconDescription}</title>}
-          </IconElement>
-          {open && wrappedMenuBody}
-        </div>
-      </ClickListener>
+      <React.Fragment>
+        <ClickListener onClickOutside={this.handleClickOutside}>
+          <div
+            {...other}
+            role="button"
+            aria-haspopup
+            aria-expanded={this.state.open}
+            className={overflowMenuClasses}
+            onKeyDown={this.handleKeyPress}
+            onBlur={this.handleBlur}
+            onClick={this.handleClick}
+            aria-label="Menu"
+            id={id}
+            tabIndex={tabIndex}
+            ref={mergeRefs(ref, this.bindMenuEl)}>
+            <IconElement {...iconProps}>
+              {iconDescription && <title>{iconDescription}</title>}
+            </IconElement>
+            {open && wrappedMenuBody}
+          </div>
+        </ClickListener>
+        {menuBody}
+      </React.Fragment>
     );
   }
 }
