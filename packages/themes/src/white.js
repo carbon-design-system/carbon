@@ -23,8 +23,11 @@ import {
   gray100,
 
   // Support
+  blue50,
+  green40,
   green50,
   yellow,
+  red50,
   red60,
   red80,
   purple60,
@@ -71,6 +74,11 @@ export const support02 = green50;
 export const support03 = yellow;
 export const support04 = blue70;
 
+export const inverseSupport01 = red50;
+export const inverseSupport02 = green40;
+export const inverseSupport03 = yellow;
+export const inverseSupport04 = blue50;
+
 export const overlay01 = rgba(gray100, 0.5);
 
 // Interaction states
@@ -105,6 +113,9 @@ export const disabled02 = gray30;
 export const disabled03 = gray50;
 
 export const highlight = blue20;
+
+export const skeleton01 = '#e5e5e5';
+export const skeleton02 = gray30;
 
 // Deprecated ☠️
 export const brand01 = interactive01;

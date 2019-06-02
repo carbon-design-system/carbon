@@ -17,7 +17,7 @@ const { prefix } = settings;
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
-    describe('navigation (<nav>)', () => {
+    describe('navigation (<div>)', () => {
       const wrapper = shallow(
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
@@ -25,20 +25,29 @@ describe('Tabs', () => {
         </Tabs>
       );
 
-      it('renders [role="navigation"] props on <nav> by default', () => {
-        expect(wrapper.find('nav').props().role).toEqual('navigation');
+      it('renders [role="navigation"] props on wrapping <div> by default', () => {
+        expect(wrapper.find(`.${prefix}--tabs`).props().role).toEqual(
+          'navigation'
+        );
       });
 
       it('renders [role="tablist"] props on <ul> by default', () => {
         expect(wrapper.find('ul').props().role).toEqual('tablist');
       });
 
-      it('renders extra classes on <nav> via className prop', () => {
-        expect(wrapper.find('nav').hasClass('extra-class')).toBe(true);
+      it('renders extra classes on wrapping <div> via className prop', () => {
+        expect(wrapper.find(`.${prefix}--tabs`).hasClass('extra-class')).toBe(
+          true
+        );
       });
 
-      it('renders expected classes on <nav> by default', () => {
-        expect(wrapper.find('nav').hasClass(`${prefix}--tabs`)).toBe(true);
+      it('renders expected classes on wrapping <div> by default', () => {
+        expect(
+          wrapper
+            .find('div')
+            .first()
+            .hasClass(`${prefix}--tabs`)
+        ).toBe(true);
       });
     });
 

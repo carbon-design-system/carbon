@@ -15,14 +15,15 @@ with specific functionality, with a main index file bringing them together.
 
 #### Modifiers
 
-| Name                        | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| `bx--data-table--compact`   | Change table row height to 24                |
-| `bx--data-table--short`     | Change table row height to 32                |
-| `bx--data-table--tall`      | Change table row height to 64                |
-| `bx--data-table--zebra`     | Toggle on zebra striping                     |
-| `bx--data-table--static`    | Change default table width from 100% to auto |
-| `bx--data-table--no-border` | Remove default border on table cells         |
+| Name                                    | Description                                         |
+| --------------------------------------- | --------------------------------------------------- |
+| `bx--data-table--compact`               | Change table row height to 24                       |
+| `bx--data-table--short`                 | Change table row height to 32                       |
+| `bx--data-table--tall`                  | Change table row height to 64                       |
+| `bx--data-table--zebra`                 | Toggle on zebra striping                            |
+| `bx--data-table--static`                | Change default table width from 100% to auto        |
+| `bx--data-table--no-border`             | Remove default border on table cells                |
+| `bx--data-table--visible-overflow-menu` | Show overflow menu icons by default (without hover) |
 
 ### JavaScript
 

@@ -44,6 +44,11 @@ const colors = [
   'support03',
   'support04',
 
+  'inverseSupport01',
+  'inverseSupport02',
+  'inverseSupport03',
+  'inverseSupport04',
+
   'overlay01',
 
   // Interactive states
@@ -77,6 +82,9 @@ const colors = [
   'disabled03',
 
   'highlight',
+
+  'skeleton01',
+  'skeleton02',
 
   // Deprecated
   'brand01',

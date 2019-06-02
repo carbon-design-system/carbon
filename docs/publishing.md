@@ -23,13 +23,59 @@
    task), if not commit and push changes, then go to Step 1
 4. Make sure dependencies are up-to-date by doing `yarn clean` && `yarn install`
 5. Run `yarn build` to build all package assets
-6. Run `./tasks/publish.sh` with the appropriate flags (see release steps below)
+6. Run `yarn lerna version` with the appropriate flags (see release steps below)
 
 ## Pre-release
 
-6. Run
-   `./tasks/publish.sh --exact --preid alpha --cd-version prerelease --force-publish=* --npm-tag alpha`
+6. Run the following command using `lerna` to version packages
+
+```bash
+yarn lerna version \
+  <bump>           \    # See `lerna version --help` for all options
+  --exact          \    # Updates package.json if direct dependency
+  --preid <id>     \    # Specify suffix in version, only alpha, beta, and rc
+  --no-push        \    # Don't push to the git origin
+  --no-git-tag-version  # Don't create a git tag
+```
+
 7. Confirm package changes
+8. Add changes with `git add -A`
+9. Create a commit message with the following format:
+   `git commit -m 'chore(release): vX.Y.Z`
+10. Generate the release changelog with the following command:
+
+```bash
+npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 1
+```
+
+10. Make a PR with the proposed changes
+11. After the PR is approved and merged, it's time to publish using the
+    following commands:
+
+```bash
+# Get latest changes from upstream master branch
+git checkout master
+git pull upstream master
+
+# Clean up local project and build from scratch
+# Note: there should be no staged files, can verify by running
+# `git status --porcelain`
+yarn clean && yarn install --offline --frozen-lockfile && yarn build
+
+# Publish from package with specific dist tag, can be:
+# alpha, beta, rc
+yarn lerna publish from-package --dist-tag <tag>
+```
+
+12. After the packages are published, you can tag and push the tag upstream:
+
+```bash
+# Tag after publish
+git tag -a vX.Y.Z
+
+# Push tag upstream
+git push upstream vX.Y.Z
+```
 
 ## Release
 

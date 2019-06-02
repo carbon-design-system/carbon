@@ -82,6 +82,16 @@ describe('ComboBox', () => {
     expect(onInputChange).toHaveBeenCalledWith('something');
   });
 
+  it('should render custom item components', () => {
+    const wrapper = mount(<ComboBox {...mockProps} />);
+    wrapper.setProps({
+      itemToElement: item => <div className="mock-item">{item.text}</div>,
+    });
+    openMenu(wrapper);
+
+    expect(wrapper.find(`.mock-item`).length).toBe(mockProps.items.length);
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
       const wrapper = mount(
