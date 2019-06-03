@@ -111,18 +111,32 @@
     }
   }
 
-  .#{$prefix}--file__selected-file--invalid {
+  .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
+    background-color: $field-01;
+    max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid {
     margin-bottom: $carbon--spacing-02;
+    border-bottom: 1px solid $ui-04;
   }
 
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
     display: block;
-    max-height: rem(200px);
+    max-height: none;
     color: $support-01;
     font-weight: 400;
-    margin: 0 0 $carbon--spacing-03 0;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    + .#{$prefix}--form-requirement
+    .#{$prefix}--form-requirement__supplement {
+    padding-bottom: $carbon--spacing-03;
+    color: $text-01;
   }
 
   .#{$prefix}--file-filename {
