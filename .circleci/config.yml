@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  components:
+  system:
     docker:
       - image: circleci/node:10.15-browsers
     working_directory: ~/repo
@@ -9,30 +9,7 @@ jobs:
       - run:
           name: Install yarn
           command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-            # Reference:
-            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
-            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
-      - run:
-          name: Install dependencies
-          command: yarn install --offline --frozen-lockfile
-      - run:
-          name: Build packages
-          command: yarn lerna run build --scope=carbon-components --include-filtered-dependencies
-      - run:
-          name: Run Continuous Integration checks
-          command: yarn lerna run ci-check --scope carbon-components
-
-  elements:
-    docker:
-      - image: circleci/node:10.15
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Install yarn
-          command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
             # Reference:
             # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
             echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
@@ -43,31 +20,18 @@ jobs:
           name: Build packages
           command: yarn build
       - run:
-          name: Run Continuous Integration checks
-          command: yarn ci-check
-
-  react:
-    docker:
-      - image: circleci/node:10.15
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Install yarn
+          name: Check for generated files that have not been committed
           command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-            # Reference:
-            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
-            echo 'export PATH=$HOME/.yarn/bin:$PATH' >> $BASH_ENV
-      - run:
-          name: Install dependencies
-          command: yarn install --offline --frozen-lockfile
-      - run:
-          name: Build packages
-          command: yarn lerna run build --scope=carbon-components-react --include-filtered-dependencies
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Your git status is not clean. You might have forgot to check-in the following files:";
+              echo "$(git status --porcelain)";
+              exit 1;
+            fi
       - run:
           name: Run Continuous Integration checks
-          command: yarn lerna run ci-check --scope carbon-components-react
+          command: |
+            yarn ci-check
+            yarn lerna run ci-check
       - deploy:
           name: deploy to IBM Cloud
           command: |
@@ -98,6 +62,4 @@ workflows:
   version: 2
   main:
     jobs:
-      - components
-      - elements
-      - react
+      - system

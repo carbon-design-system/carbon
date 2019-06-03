@@ -15,6 +15,7 @@ const { prefix } = settings;
 
 const Header = ({ className: customClassName, children, ...rest }) => {
   const className = cx(`${prefix}--header`, customClassName);
+
   return (
     <header {...rest} className={className} role="banner">
       {children}
