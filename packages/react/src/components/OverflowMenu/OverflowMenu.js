@@ -206,7 +206,7 @@ class OverflowMenu extends Component {
   };
 
   static defaultProps = {
-    ariaLabel: 'list of options',
+    ariaLabel: 'Menu',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -440,6 +440,7 @@ class OverflowMenu extends Component {
     const {
       id,
       tabIndex,
+      ariaLabel,
       children,
       iconDescription,
       direction,
@@ -496,7 +497,7 @@ class OverflowMenu extends Component {
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label="Menu">
+        aria-label={this.props.ariaLabel}>
         {childrenWithProps}
       </ul>
     );
@@ -537,7 +538,7 @@ class OverflowMenu extends Component {
             onKeyDown={this.handleKeyPress}
             onBlur={this.handleBlur}
             onClick={this.handleClick}
-            aria-label="Menu"
+            aria-label={ariaLabel}
             id={id}
             tabIndex={tabIndex}
             ref={mergeRefs(ref, this.bindMenuEl)}>
