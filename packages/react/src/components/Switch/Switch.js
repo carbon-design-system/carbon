@@ -25,14 +25,12 @@ const Switch = props => {
     ...other
   } = props;
 
-  const tabRef = useRef();
+  const tabRef = useRef(null);
 
   useEffect(() => {
     if (selected && tabRef.current) {
       tabRef.current.focus();
     }
-
-    // selected && tabRef.current.focus();
   }, [selected, tabRef.current]);
 
   const handleClick = e => {
@@ -42,15 +40,6 @@ const Switch = props => {
 
   const handleKeyDown = e => {
     const key = e.key || e.which;
-
-    if (
-      match(key, keys.SPACE) ||
-      match(key, keys.ENTER) ||
-      match(key, keyCodes.SPACE) ||
-      match(key, keyCodes.ENTER)
-    ) {
-      onKeyDown({ index, name, text });
-    }
 
     if (match(key, keyCodes.RIGHT) || match(key, keyCodes.LEFT)) {
       onKeyDown({ index, name, text, key });
