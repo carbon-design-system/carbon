@@ -20,6 +20,16 @@ const values = {
   disabled: 'disabled',
 };
 
+const orientations = {
+  'Horizontal (horizontal)': 'horizontal',
+  'Vertical (vertical)': 'vertical',
+};
+
+const labelPositions = {
+  'Left (left)': 'left',
+  'Right (right)': 'right',
+};
+
 const props = {
   group: () => ({
     name: text(
@@ -30,6 +40,16 @@ const props = {
       'Value of the selected button (valueSelected in <RadioButtonGroup>)',
       values,
       'default-selected'
+    ),
+    orientation: select(
+      'Radio button orientation (orientation)',
+      orientations,
+      'horizontal'
+    ),
+    labelPosition: select(
+      'Label position (labelPosition)',
+      labelPositions,
+      'right'
     ),
     onChange: action('onChange'),
   }),
