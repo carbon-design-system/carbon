@@ -440,7 +440,6 @@ class OverflowMenu extends Component {
     const {
       id,
       tabIndex,
-      ariaLabel,
       children,
       iconDescription,
       direction,
