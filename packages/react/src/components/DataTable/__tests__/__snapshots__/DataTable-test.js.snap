@@ -2644,13 +2644,14 @@ exports[`DataTable should render 1`] = `
                       <div
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="list of options"
+                        aria-label="Menu"
+                        ariaLabel="list of options"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="menu"
+                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
@@ -2697,6 +2698,133 @@ exports[`DataTable should render 1`] = `
                         </Settings16>
                       </div>
                     </ClickListener>
+                    <ul
+                      aria-label="Menu"
+                      className="bx--overflow-menu-options bx--overflow-menu--flip"
+                      role="menu"
+                      tabIndex="-1"
+                    >
+                      <TableToolbarAction
+                        closeMenu={[Function]}
+                        handleOverflowMenuItemFocus={[Function]}
+                        index={0}
+                        key=".0"
+                        onClick={[MockFunction]}
+                      >
+                        <OverflowMenuItem
+                          closeMenu={[Function]}
+                          disabled={false}
+                          handleOverflowMenuItemFocus={[Function]}
+                          hasDivider={false}
+                          index={0}
+                          isDelete={false}
+                          itemText="Action 1"
+                          onClick={[MockFunction]}
+                          onKeyDown={[Function]}
+                        >
+                          <li
+                            className="bx--overflow-menu-options__option"
+                            role="menuitem"
+                          >
+                            <button
+                              className="bx--overflow-menu-options__btn"
+                              disabled={false}
+                              index={0}
+                              onClick={[Function]}
+                              onKeyDown={[Function]}
+                              tabIndex="-1"
+                              title={null}
+                            >
+                              <div
+                                className="bx--overflow-menu-options__option-content"
+                              >
+                                Action 1
+                              </div>
+                            </button>
+                          </li>
+                        </OverflowMenuItem>
+                      </TableToolbarAction>
+                      <TableToolbarAction
+                        closeMenu={[Function]}
+                        handleOverflowMenuItemFocus={[Function]}
+                        index={1}
+                        key=".1"
+                        onClick={[MockFunction]}
+                      >
+                        <OverflowMenuItem
+                          closeMenu={[Function]}
+                          disabled={false}
+                          handleOverflowMenuItemFocus={[Function]}
+                          hasDivider={false}
+                          index={1}
+                          isDelete={false}
+                          itemText="Action 2"
+                          onClick={[MockFunction]}
+                          onKeyDown={[Function]}
+                        >
+                          <li
+                            className="bx--overflow-menu-options__option"
+                            role="menuitem"
+                          >
+                            <button
+                              className="bx--overflow-menu-options__btn"
+                              disabled={false}
+                              index={1}
+                              onClick={[Function]}
+                              onKeyDown={[Function]}
+                              tabIndex="-1"
+                              title={null}
+                            >
+                              <div
+                                className="bx--overflow-menu-options__option-content"
+                              >
+                                Action 2
+                              </div>
+                            </button>
+                          </li>
+                        </OverflowMenuItem>
+                      </TableToolbarAction>
+                      <TableToolbarAction
+                        closeMenu={[Function]}
+                        handleOverflowMenuItemFocus={[Function]}
+                        index={2}
+                        key=".2"
+                        onClick={[MockFunction]}
+                      >
+                        <OverflowMenuItem
+                          closeMenu={[Function]}
+                          disabled={false}
+                          handleOverflowMenuItemFocus={[Function]}
+                          hasDivider={false}
+                          index={2}
+                          isDelete={false}
+                          itemText="Action 3"
+                          onClick={[MockFunction]}
+                          onKeyDown={[Function]}
+                        >
+                          <li
+                            className="bx--overflow-menu-options__option"
+                            role="menuitem"
+                          >
+                            <button
+                              className="bx--overflow-menu-options__btn"
+                              disabled={false}
+                              index={2}
+                              onClick={[Function]}
+                              onKeyDown={[Function]}
+                              tabIndex="-1"
+                              title={null}
+                            >
+                              <div
+                                className="bx--overflow-menu-options__option-content"
+                              >
+                                Action 3
+                              </div>
+                            </button>
+                          </li>
+                        </OverflowMenuItem>
+                      </TableToolbarAction>
+                    </ul>
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>

@@ -114,13 +114,14 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
         <div
           aria-expanded={false}
           aria-haspopup={true}
-          aria-label="list of options"
+          aria-label="Menu"
+          ariaLabel="list of options"
           className="custom-class bx--toolbar-action bx--overflow-menu bx--overflow-menu"
           onClick={[Function]}
           onClose={[Function]}
           onKeyDown={[Function]}
           open={false}
-          role="menu"
+          role="button"
           tabIndex={0}
           title="Add"
         >
@@ -164,6 +165,12 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           </Download16>
         </div>
       </ClickListener>
+      <ul
+        aria-label="Menu"
+        className="bx--overflow-menu-options bx--overflow-menu--flip"
+        role="menu"
+        tabIndex="-1"
+      />
     </OverflowMenu>
   </ForwardRef(OverflowMenu)>
 </TableToolbarMenu>
