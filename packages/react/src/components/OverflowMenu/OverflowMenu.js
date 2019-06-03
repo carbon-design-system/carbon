@@ -497,7 +497,7 @@ class OverflowMenu extends Component {
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={this.props.ariaLabel}>
+        aria-label={ariaLabel}>
         {childrenWithProps}
       </ul>
     );
