@@ -2595,7 +2595,7 @@ exports[`DataTable should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="list of options"
+                    ariaLabel="Menu"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
@@ -2645,7 +2645,6 @@ exports[`DataTable should render 1`] = `
                         aria-expanded={false}
                         aria-haspopup={true}
                         aria-label="Menu"
-                        ariaLabel="list of options"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}

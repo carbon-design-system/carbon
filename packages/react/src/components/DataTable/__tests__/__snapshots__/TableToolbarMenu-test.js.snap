@@ -65,7 +65,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     title="Add"
   >
     <OverflowMenu
-      ariaLabel="list of options"
+      ariaLabel="Menu"
       className="custom-class bx--toolbar-action bx--overflow-menu"
       direction="bottom"
       flipped={true}
@@ -115,7 +115,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           aria-expanded={false}
           aria-haspopup={true}
           aria-label="Menu"
-          ariaLabel="list of options"
           className="custom-class bx--toolbar-action bx--overflow-menu bx--overflow-menu"
           onClick={[Function]}
           onClose={[Function]}
