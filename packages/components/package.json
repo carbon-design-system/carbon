@@ -58,7 +58,6 @@
     "prepublishOnly": "yarn build",
     "start": "node server.js",
     "test": "gulp test",
-    "test:build": "cross-env BABEL_ENV=test jest",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
@@ -90,7 +89,6 @@
     "autoprefixer": "^8.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^7.0.0",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-istanbul": "^3.0.0",
@@ -141,7 +139,6 @@
     "handlebars-helpers": "^0.10.0",
     "html-loader": "^0.5.0",
     "jasmine-core": "^3.0.0",
-    "jest": "^23.5.0",
     "karma": "^4.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.0",
@@ -205,21 +202,5 @@
       "@babel/plugin-proposal-object-rest-spread",
       "dev-expression"
     ]
-  },
-  "jest": {
-    "testMatch": [
-      "<rootDir>/**/__tests__/**/*.js?(x)",
-      "<rootDir>/**/?(*-)(spec|test).js?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "/cjs/",
-      "/dist/",
-      "/es/",
-      "/lib/",
-      "/umd/"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx)$": "./tools/jest/jsTransform.js"
-    }
   }
 }
