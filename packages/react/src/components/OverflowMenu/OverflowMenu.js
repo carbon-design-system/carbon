@@ -527,29 +527,26 @@ class OverflowMenu extends Component {
     };
 
     return (
-      <React.Fragment>
-        <ClickListener onClickOutside={this.handleClickOutside}>
-          <div
-            {...other}
-            role="button"
-            aria-haspopup
-            aria-expanded={this.state.open}
-            className={overflowMenuClasses}
-            onKeyDown={this.handleKeyPress}
-            onBlur={this.handleBlur}
-            onClick={this.handleClick}
-            aria-label={ariaLabel}
-            id={id}
-            tabIndex={tabIndex}
-            ref={mergeRefs(ref, this.bindMenuEl)}>
-            <IconElement {...iconProps}>
-              {iconDescription && <title>{iconDescription}</title>}
-            </IconElement>
-            {open && wrappedMenuBody}
-          </div>
-        </ClickListener>
-        {menuBody}
-      </React.Fragment>
+      <ClickListener onClickOutside={this.handleClickOutside}>
+        <div
+          {...other}
+          role="button"
+          aria-haspopup
+          aria-expanded={this.state.open}
+          className={overflowMenuClasses}
+          onKeyDown={this.handleKeyPress}
+          onBlur={this.handleBlur}
+          onClick={this.handleClick}
+          aria-label={ariaLabel}
+          id={id}
+          tabIndex={tabIndex}
+          ref={mergeRefs(ref, this.bindMenuEl)}>
+          <IconElement {...iconProps}>
+            {iconDescription && <title>{iconDescription}</title>}
+          </IconElement>
+          {open && wrappedMenuBody}
+        </div>
+      </ClickListener>
     );
   }
 }
