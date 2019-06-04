@@ -31,6 +31,10 @@
     flex-direction: column;
     align-items: flex-start;
 
+    &.#{$prefix}--radio-button-group--label-left {
+      align-items: flex-end;
+    }
+
     .#{$prefix}--radio-button__label {
       margin-right: 0;
     }
@@ -144,16 +148,20 @@
     margin-bottom: $carbon--spacing-03;
   }
 
+  .#{$prefix}--radio-button-group--label-right .#{$prefix}--radio-button__label,
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right
     .#{$prefix}--radio-button__label {
     flex-direction: row;
   }
 
+  .#{$prefix}--radio-button-group--label-left .#{$prefix}--radio-button__label,
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
     .#{$prefix}--radio-button__label {
     flex-direction: row-reverse;
   }
 
+  .#{$prefix}--radio-button-group--label-left
+    .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
     .#{$prefix}--radio-button__appearance {
     margin-right: 0;
