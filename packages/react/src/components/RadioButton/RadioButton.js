@@ -54,8 +54,9 @@ class RadioButton extends React.Component {
 
     /**
      * Provide where label text should be placed
+     * NOTE: `top`/`bottom` are deprecated
      */
-    labelPosition: PropTypes.string,
+    labelPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
     /**
      * Provide a name for the underlying <input> node
