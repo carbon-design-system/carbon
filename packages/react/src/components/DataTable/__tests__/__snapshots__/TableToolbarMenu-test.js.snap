@@ -164,12 +164,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           </Download16>
         </div>
       </ClickListener>
-      <ul
-        aria-label="Menu"
-        className="bx--overflow-menu-options bx--overflow-menu--flip"
-        role="menu"
-        tabIndex="-1"
-      />
     </OverflowMenu>
   </ForwardRef(OverflowMenu)>
 </TableToolbarMenu>
