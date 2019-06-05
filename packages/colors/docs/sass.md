@@ -8,11 +8,135 @@
 
 <!-- toc -->
 
+- [@carbno/colors](#carbnocolors)
+  - [✅carbon--custom-properties [mixin]](#carbon--custom-properties-mixin)
 - [@carbon/colors](#carboncolors)
   - [✅⚠️ibm--colors [mixin]](#ibm--colors-mixin)
   - [✅carbon--colors [mixin]](#carbon--colors-mixin)
 
 <!-- tocstop -->
+
+## @carbno/colors
+
+### ✅carbon--custom-properties [mixin]
+
+Define color custom properties
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--custom-properties() {
+  --black-100: #000000;
+  --blue-10: #edf4ff;
+  --blue-20: #c9deff;
+  --blue-30: #97c1ff;
+  --blue-40: #6ea6ff;
+  --blue-50: #408bfc;
+  --blue-60: #0062ff;
+  --blue-70: #054ada;
+  --blue-80: #0530ad;
+  --blue-90: #061f80;
+  --blue-100: #051243;
+  --cool-gray-10: #f2f4f8;
+  --cool-gray-20: #d5d9e0;
+  --cool-gray-30: #b9bfc7;
+  --cool-gray-40: #9fa5ad;
+  --cool-gray-50: #868d95;
+  --cool-gray-60: #697077;
+  --cool-gray-70: #50565b;
+  --cool-gray-80: #373d42;
+  --cool-gray-90: #242a2e;
+  --cool-gray-100: #13171a;
+  --cyan-10: #e3f6ff;
+  --cyan-20: #b3e6ff;
+  --cyan-30: #6ccaff;
+  --cyan-40: #30b0ff;
+  --cyan-50: #1191e6;
+  --cyan-60: #0072c3;
+  --cyan-70: #0058a1;
+  --cyan-80: #003d73;
+  --cyan-90: #002b50;
+  --cyan-100: #07192b;
+  --gray-10: #f3f3f3;
+  --gray-20: #dcdcdc;
+  --gray-30: #bebebe;
+  --gray-40: #a4a4a4;
+  --gray-50: #8c8c8c;
+  --gray-60: #6f6f6f;
+  --gray-70: #565656;
+  --gray-80: #3d3d3d;
+  --gray-90: #282828;
+  --gray-100: #171717;
+  --green-10: #dafbe4;
+  --green-20: #9deeb2;
+  --green-30: #56d679;
+  --green-40: #3dbb61;
+  --green-50: #24a148;
+  --green-60: #198038;
+  --green-70: #10642a;
+  --green-80: #054719;
+  --green-90: #01330f;
+  --green-100: #081b09;
+  --magenta-10: #fff0f6;
+  --magenta-20: #ffcfe1;
+  --magenta-30: #ffa0c2;
+  --magenta-40: #fa75a6;
+  --magenta-50: #ee538b;
+  --magenta-60: #d12765;
+  --magenta-70: #a11950;
+  --magenta-80: #760a3a;
+  --magenta-90: #57002b;
+  --magenta-100: #2a0a16;
+  --orange-40: #fc7b1e;
+  --purple-10: #f7f1ff;
+  --purple-20: #e6d6ff;
+  --purple-30: #d0b0ff;
+  --purple-40: #bb8eff;
+  --purple-50: #a66efa;
+  --purple-60: #8a3ffc;
+  --purple-70: #6e32c9;
+  --purple-80: #4f2196;
+  --purple-90: #38146b;
+  --purple-100: #1e1033;
+  --red-10: #fff0f1;
+  --red-20: #fcd0d3;
+  --red-30: #ffa4a9;
+  --red-40: #ff767c;
+  --red-50: #fb4b53;
+  --red-60: #da1e28;
+  --red-70: #a51920;
+  --red-80: #750e13;
+  --red-90: #570408;
+  --red-100: #2c080a;
+  --teal-10: #dbfbfb;
+  --teal-20: #92eeee;
+  --teal-30: #20d5d2;
+  --teal-40: #00bab6;
+  --teal-50: #009c98;
+  --teal-60: #007d79;
+  --teal-70: #006161;
+  --teal-80: #004548;
+  --teal-90: #003137;
+  --teal-100: #081a1c;
+  --warm-gray-10: #f7f3f1;
+  --warm-gray-20: #e0dbda;
+  --warm-gray-30: #c1bcbb;
+  --warm-gray-40: #a7a2a2;
+  --warm-gray-50: #8f8b8b;
+  --warm-gray-60: #726e6e;
+  --warm-gray-70: #595555;
+  --warm-gray-80: #403c3c;
+  --warm-gray-90: #2b2828;
+  --warm-gray-100: #1a1717;
+  --white-0: #ffffff;
+  --yellow-20: #fdd13a;
+}
+```
+
+</details>
+
+- **Group**: [@carbno/colors](#carbnocolors)
 
 ## @carbon/colors
 

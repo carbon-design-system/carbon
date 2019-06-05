@@ -98,6 +98,10 @@ async function build() {
           left: t.Identifier('theme'),
           right: t.Identifier(defaultThemeMapName),
         }),
+        t.AssignmentPattern({
+          left: t.Identifier('emit-custom-properties'),
+          right: t.SassBoolean(false),
+        }),
       ],
       body: t.BlockStatement({
         body: [
@@ -112,6 +116,22 @@ async function build() {
               }),
               global: true,
             });
+          }),
+          t.IfStatement({
+            test: t.LogicalExpression({
+              left: t.Identifier('emit-custom-properties'),
+              operator: '==',
+              right: t.SassBoolean(true),
+            }),
+            consequent: t.BlockStatement(
+              tokenColors.map(token => {
+                const name = formatTokenName(token);
+                return t.Declaration({
+                  property: `--${name}`,
+                  value: `#{map-get($theme, '${name}')}`,
+                });
+              })
+            ),
           }),
           t.AtContent(),
           t.Comment(' Reset to default theme after apply in content'),
