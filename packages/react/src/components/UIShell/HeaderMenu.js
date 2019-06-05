@@ -45,7 +45,7 @@ class HeaderMenu extends React.Component {
     /**
      * Provide a label for the link text
      */
-    menuLinkName: PropTypes.string.Required,
+    menuLinkName: PropTypes.string.isRequired,
 
     /**
      * Optional component to render instead of string
