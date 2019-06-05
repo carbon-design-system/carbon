@@ -61,26 +61,41 @@
   }
 
   .#{$prefix}--list--unordered
-    .#{$prefix}--list--nested
+    ul.#{$prefix}--list--nested
     > .#{$prefix}--list__item:before {
     content: '\0025AA';
+  }
+
+  .#{$prefix}--list--unordered
+    ol.#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
+    content: counter(listitem) '.';
   }
 
   .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
     content: counter(listitem) '.';
   }
 
-  .#{$prefix}--list--ordered
-    .#{$prefix}--list--nested
-    > .#{$prefix}--list__item {
-    counter-increment: sub-list-item;
+  .#{$prefix}--list--ordered ol.#{$prefix}--list--nested {
+    counter-reset: ol-counter;
   }
 
   .#{$prefix}--list--ordered
-    .#{$prefix}--list--nested
+    ol.#{$prefix}--list--nested
+    > .#{$prefix}--list__item {
+    counter-increment: ol-counter;
+  }
+
+  .#{$prefix}--list--ordered
+    ol.#{$prefix}--list--nested
     > .#{$prefix}--list__item:before {
-    content: counter(sub-list-item, lower-alpha) '.';
-    width: 0.6rem;
+    content: counter(ol-counter, lower-alpha) '.';
+  }
+
+  .#{$prefix}--list--ordered
+    ul.#{$prefix}--list--nested
+    > .#{$prefix}--list__item:before {
+    content: '\0025AA';
   }
 }
 
