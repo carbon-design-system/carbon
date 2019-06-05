@@ -52,6 +52,7 @@ describe('Carbon Components React', () => {
         "FormItem",
         "FormLabel",
         "Header",
+        "HeaderContainer",
         "HeaderGlobalAction",
         "HeaderGlobalBar",
         "HeaderMenu",
