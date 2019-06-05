@@ -172,7 +172,7 @@ Button.propTypes = {
    * be read by screen readers
    */
   iconDescription: props => {
-    if (props.renderIcon && !props.iconDescription) {
+    if (props.renderIcon && !props.children && !props.iconDescription) {
       return new Error(
         'renderIcon property specified without also providing an iconDescription property.'
       );
@@ -182,7 +182,6 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  iconDescription: 'Provide icon description if icon is used',
   tabIndex: 0,
   type: 'button',
   disabled: false,

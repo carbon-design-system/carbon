@@ -1918,7 +1918,6 @@ exports[`DataTable should render 1`] = `
                 </TableToolbarMenu>
                 <ForwardRef(Button)
                   disabled={false}
-                  iconDescription="Provide icon description if icon is used"
                   kind="primary"
                   onClick={[MockFunction]}
                   small={true}
@@ -2381,7 +2380,6 @@ exports[`DataTable should render 1`] = `
                   <ForwardRef(Button)
                     className="bx--batch-summary__cancel"
                     disabled={false}
-                    iconDescription="Provide icon description if icon is used"
                     kind="primary"
                     onClick={[Function]}
                     small={false}
@@ -2702,7 +2700,6 @@ exports[`DataTable should render 1`] = `
               </TableToolbarMenu>
               <ForwardRef(Button)
                 disabled={false}
-                iconDescription="Provide icon description if icon is used"
                 kind="primary"
                 onClick={[MockFunction]}
                 small={true}
