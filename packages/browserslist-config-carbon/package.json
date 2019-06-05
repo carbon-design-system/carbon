@@ -1,7 +1,7 @@
 {
   "name": "browserslist-config-carbon",
   "description": "Browserslist config for the Carbon Design System",
-  "version": "10.3.0-rc.2",
+  "version": "10.3.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/browserslist-config-carbon",

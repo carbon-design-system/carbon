@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 10.3.0 (2019-06-05)
+
+
+
+# 10.3.0-rc.2 (2019-06-03)
+
+
+
+# 10.3.0-rc.1 (2019-05-29)
+
+
+
+# 10.3.0-rc.0 (2019-05-28)
+
+
+
+# 10.2.0-bridge (2019-05-13)
+
+**Note:** Version bump only for package @carbon/icons-handlebars
+
+
+
+
+
 ## [10.1.1](https://github.com/IBM/carbon-elements/tree/master/packages/icons-handlebars/compare/v10.1.0...v10.1.1) (2019-04-13)
 
 **Note:** Version bump only for package @carbon/icons-handlebars
