@@ -77,7 +77,7 @@
   .#{$prefix}--list--unordered
     ol.#{$prefix}--list--nested
     > .#{$prefix}--list__item:before {
-    content: counter(listitem) '.';
+    content: counter(listitem, lower-alpha) '.';
   }
 
   .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
