@@ -19,3 +19,4 @@ tests/coverage
 /html
 /docs/js
 node_modules
+**/CHANGELOG.md

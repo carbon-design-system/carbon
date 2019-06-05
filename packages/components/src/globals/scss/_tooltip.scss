@@ -55,11 +55,8 @@
   // content box
   &::after {
     @include layer('overlay');
-    min-width: rem(24px);
+    width: max-content;
     max-width: rem(208px);
-    @if ($tooltip-type == 'definition') {
-      width: 100%;
-    }
     height: auto;
     padding: if(
       $tooltip-type == 'definition',

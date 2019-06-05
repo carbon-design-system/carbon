@@ -147,7 +147,6 @@ exports[`ModalWrapper should render 1`] = `
             >
               <ForwardRef(Button)
                 disabled={false}
-                iconDescription="Provide icon description if icon is used"
                 kind="secondary"
                 onClick={[Function]}
                 small={false}
@@ -166,7 +165,6 @@ exports[`ModalWrapper should render 1`] = `
               </ForwardRef(Button)>
               <ForwardRef(Button)
                 disabled={false}
-                iconDescription="Provide icon description if icon is used"
                 inputref={
                   Object {
                     "current": <button
