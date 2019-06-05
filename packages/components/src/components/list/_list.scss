@@ -32,6 +32,14 @@
     color: $text-01;
     list-style-type: none;
     counter-increment: listitem;
+    margin-left: $carbon--spacing-03;
+    padding-left: $carbon--spacing-03;
+    position: relative;
+  }
+
+  .#{$prefix}--list__item:before {
+    position: absolute;
+    left: -#{$carbon--spacing-03};
   }
 
   .#{$prefix}--list--nested {
@@ -90,6 +98,7 @@
     ol.#{$prefix}--list--nested
     > .#{$prefix}--list__item:before {
     content: counter(ol-counter, lower-alpha) '.';
+    width: 0.6rem;
   }
 
   .#{$prefix}--list--ordered
