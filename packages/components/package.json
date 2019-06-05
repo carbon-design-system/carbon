@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "carbon-icons": "^7.0.7",
-    "flatpickr": "4.5.7",
+    "flatpickr": "4.6.1",
     "lodash.debounce": "^4.0.8",
     "warning": "^3.0.0"
   },
