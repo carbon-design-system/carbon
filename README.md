@@ -48,8 +48,6 @@ we support!
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`carbon-components`](./packages/components)  | Component styles and Vanilla JavaScript                                                                                                             |
 | [`carbon-components-react`](./packages/react) | React components                                                                                                                                    |
-| [`carbon-components-angular`](https://github.com/IBM/carbon-components-angular) | Angular components                                                                                                 |
-| [`carbon-components-vue`](https://github.com/carbon-design-system/carbon-components-vue) | Vue components                                                                                           |
 | [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                               |
 | [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                |
 | [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                   |
