@@ -28,7 +28,7 @@ $feature-flags: () !default;
 /// @type Map
 /// @group feature-flags
 $default-feature-flags: (
-  ui-shell: false,
+  ui-shell: true,
   grid: true,
   grid-columns-16: false,
   grid--fallback: false,

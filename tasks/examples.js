@@ -15,6 +15,15 @@ const spawn = require('cross-spawn');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const BUILD_DIR = path.resolve(__dirname, '../build');
 
+const PACKAGES_TO_BUILD = new Set([
+  'colors',
+  'grid',
+  'icons',
+  'layout',
+  'motion',
+  'themes',
+  'type',
+]);
 const IGNORE_EXAMPLE_DIRS = new Set([
   'styled-components',
   'vue-cli',
@@ -36,39 +45,41 @@ async function main() {
   const packageNames = await fs.readdir(PACKAGES_DIR);
 
   const packages = await Promise.all(
-    packageNames.map(async name => {
-      // Verify that each file that we read from the packages directory is
-      // actually a folder. Typically used to catch `.DS_store` files that
-      // accidentally appear when opening with MacOS Finder
-      const filepath = path.join(PACKAGES_DIR, name);
-      const stat = await fs.lstat(filepath);
-      const descriptor = {
-        filepath,
-        name,
-      };
-      if (!stat.isDirectory()) {
-        throw new Error(`Unexpected file: ${name} at ${filepath}`);
-      }
-
-      // Try and figure out if the package has an examples directory, if not
-      // then we can skip it
-      const examplesDir = path.join(filepath, 'examples');
-      if (!(await fs.pathExists(examplesDir))) {
-        return descriptor;
-      }
-
-      const examples = (await fs.readdir(examplesDir)).filter(example => {
-        return example !== '.yarnrc' && !IGNORE_EXAMPLE_DIRS.has(example);
-      });
-
-      return {
-        ...descriptor,
-        examples: examples.map(name => ({
-          filepath: path.join(examplesDir, name),
+    packageNames
+      .filter(name => PACKAGES_TO_BUILD.has(name))
+      .map(async name => {
+        // Verify that each file that we read from the packages directory is
+        // actually a folder. Typically used to catch `.DS_store` files that
+        // accidentally appear when opening with MacOS Finder
+        const filepath = path.join(PACKAGES_DIR, name);
+        const stat = await fs.lstat(filepath);
+        const descriptor = {
+          filepath,
           name,
-        })),
-      };
-    })
+        };
+        if (!stat.isDirectory()) {
+          throw new Error(`Unexpected file: ${name} at ${filepath}`);
+        }
+
+        // Try and figure out if the package has an examples directory, if not
+        // then we can skip it
+        const examplesDir = path.join(filepath, 'examples');
+        if (!(await fs.pathExists(examplesDir))) {
+          return descriptor;
+        }
+
+        const examples = (await fs.readdir(examplesDir)).filter(example => {
+          return example !== '.yarnrc' && !IGNORE_EXAMPLE_DIRS.has(example);
+        });
+
+        return {
+          ...descriptor,
+          examples: examples.map(name => ({
+            filepath: path.join(examplesDir, name),
+            name,
+          })),
+        };
+      })
   );
 
   const packagesWithExamples = packages.filter(
