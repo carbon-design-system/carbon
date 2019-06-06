@@ -43,6 +43,11 @@ class HeaderMenu extends React.Component {
     tabIndex: PropTypes.number,
 
     /**
+     * Provide a label for the link text
+     */
+    menuLinkName: PropTypes.string.isRequired,
+
+    /**
      * Optional component to render instead of string
      */
     renderMenuContent: PropTypes.func,
@@ -151,6 +156,7 @@ class HeaderMenu extends React.Component {
       className: customClassName,
       children,
       renderMenuContent: MenuContent,
+      menuLinkName,
     } = this.props;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -180,6 +186,7 @@ class HeaderMenu extends React.Component {
           role="menuitem"
           tabIndex={0}
           {...accessibilityLabel}>
+          {menuLinkName}
           <MenuContent />
         </a>
         <ul
