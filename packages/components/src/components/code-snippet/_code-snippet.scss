@@ -80,7 +80,7 @@
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
     display: flex;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: auto;
     position: relative;
     padding: 0 0 $carbon--spacing-05 0;
     height: rem(56px);
