@@ -118,7 +118,7 @@ const StoryContent = () => {
 // components much simpler. In the interim, we're going to create presentational
 // components and try and piece them together to figure out what are standard
 // usage patterns for each to see what kind of component API we should expose
-storiesOf('[Experimental] UI Shell', module)
+storiesOf('UI Shell', module)
   .add(
     'Header',
     withReadme(readme, () => (
@@ -200,7 +200,7 @@ storiesOf('[Experimental] UI Shell', module)
           <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu aria-label="Link 4">
+          <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
             <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
