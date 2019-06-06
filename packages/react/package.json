@@ -129,7 +129,7 @@
     "@carbon/icons-react": "10.3.0",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
-    "flatpickr": "4.5.5",
+    "flatpickr": "4.6.1",
     "focus-trap-react": "^6.0.0",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
