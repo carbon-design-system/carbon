@@ -9,7 +9,7 @@ exports[`HeaderMenuButton should render 1`] = `
 >
   <button
     aria-label="Accessibility label"
-    className="custom-class bx--header__action bx--header__menu-trigger"
+    className="custom-class bx--header__action bx--header__menu-trigger bx--header__menu-toggle"
     onClick={[MockFunction]}
     title="Accessibility label"
     type="button"

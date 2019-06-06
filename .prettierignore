@@ -42,3 +42,6 @@ packages/components/docs/js
 
 # Examples
 **/examples/**
+
+# Yarn
+**/.yarn/**

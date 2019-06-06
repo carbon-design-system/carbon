@@ -62,7 +62,7 @@ describe('HeaderMenu', () => {
     const headerMenu = wrapper.childAt(0);
     const headerMenuText = headerMenu
       .find(`.${prefix}--header__menu-title`)
-      .text();
+      .prop('aria-label');
 
     expect(headerMenuText).toMatch('Accessibility label');
   });

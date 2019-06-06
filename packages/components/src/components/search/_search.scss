@@ -87,7 +87,6 @@
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
     @include type-style('body-short-02');
-    font-size: carbon--type-scale(4);
     height: rem(48px);
     padding: 0 rem(64px) 0 rem(48px);
   }
