@@ -96,7 +96,6 @@
     height: rem(20px);
   }
 
-  .#{$prefix}--tag--filter:focus > svg,
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
     background-color: $icon-02;
@@ -105,6 +104,11 @@
   .#{$prefix}--tag--filter:focus,
   .#{$prefix}--tag--filter:hover {
     outline: none;
+  }
+
+  .#{$prefix}--tag--filter:focus > svg {
+    border: 2px solid $inverse-01;
+    border-radius: 50%;
   }
 
   // Skeleton state
