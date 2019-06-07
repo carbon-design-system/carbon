@@ -52,7 +52,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": <TableContainer
             title="DataTable with selection"
           >
@@ -323,7 +323,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": <TableContainer
             title="DataTable with selection"
           >
@@ -828,7 +828,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": <TableContainer
             title="DataTable with selection"
           >
@@ -1154,7 +1154,7 @@ exports[`DataTable selection should render 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": <TableContainer
             title="DataTable with selection"
           >
@@ -1752,7 +1752,7 @@ exports[`DataTable should render 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": <TableContainer
             title="DataTable with toolbar"
           >

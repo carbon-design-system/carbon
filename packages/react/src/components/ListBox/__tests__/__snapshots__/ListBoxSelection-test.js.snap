@@ -15,11 +15,11 @@ exports[`ListBoxSelection should render 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": "translation",
         },
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": "translation",
         },
       ],
@@ -82,11 +82,11 @@ exports[`ListBoxSelection should render 2`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": "translation",
         },
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": "translation",
         },
       ],
