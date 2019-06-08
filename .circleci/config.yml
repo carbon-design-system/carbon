@@ -31,7 +31,7 @@ jobs:
             yarn sync
 
             if [ -n "$(git status --porcelain)" ]; then
-              echo "Your git status is not clean. You may have forgot to sync the following package.json files:";
+              echo "Your git status is not clean. You may have forgot to sync the files:";
               echo "$(git status --porcelain)";
               echo 'You can fix this by running: `yarn sync`';
               exit 1;
