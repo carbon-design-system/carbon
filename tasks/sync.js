@@ -61,6 +61,7 @@ const packageJsonFields = [
   'devDependencies',
   'sideEffects',
   'eyeglass',
+  'eslintConfig',
   'prettier',
   'babel',
   'jest',
