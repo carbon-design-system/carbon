@@ -1,11 +1,28 @@
 {
   "name": "carbon-components-react",
-  "version": "7.3.0",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
+  "version": "7.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "sideEffects": false,
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/react",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "lib/**/*",
+    "es/**/*",
+    "umd/**/*"
+  ],
+  "keywords": [
+    "react",
+    "carbon",
+    "carbon-components",
+    "ibm",
+    "carbon-design-system",
+    "components"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
@@ -21,103 +38,6 @@
     "storybook": "start-storybook -p 9000",
     "test": "jest",
     "test-ssr": "yarn build && node ssr-tests/*.js"
-  },
-  "keywords": [
-    "react",
-    "carbon",
-    "carbon-components"
-  ],
-  "files": [
-    "lib/**/*",
-    "es/**/*",
-    "umd/**/*"
-  ],
-  "contributors": [
-    {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
-      "name": "Aziz Punjani",
-      "email": "punjani@us.ibm.com"
-    },
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Ian Fleming",
-      "email": "ianfleming@us.ibm.com"
-    },
-    {
-      "name": "Chris Dhanaraj",
-      "email": "chrisdhanaraj@us.ibm.com"
-    }
-  ],
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": [
-      "eslint:recommended",
-      "plugin:jsx-a11y/recommended"
-    ],
-    "plugins": [
-      "react",
-      "jsdoc",
-      "jsx-a11y"
-    ],
-    "rules": {
-      "react/jsx-uses-vars": 1,
-      "react/jsx-uses-react": 1,
-      "react/no-find-dom-node": 1,
-      "react/no-typos": 2,
-      "jsdoc/check-param-names": 2,
-      "jsdoc/check-tag-names": 2,
-      "jsdoc/check-types": 2,
-      "jsx-a11y/no-static-element-interactions": 1,
-      "jsx-a11y/no-noninteractive-element-interactions": 1,
-      "jsx-a11y/click-events-have-key-events": 1,
-      "jsx-a11y/anchor-is-valid": 1,
-      "jsx-a11y/interactive-supports-focus": 1,
-      "jsx-a11y/label-has-for": [
-        1,
-        {
-          "components": [
-            "Label"
-          ],
-          "required": {
-            "some": [
-              "nesting",
-              "id"
-            ]
-          },
-          "allowChildren": true
-        }
-      ]
-    },
-    "env": {
-      "node": true,
-      "browser": true,
-      "es6": true,
-      "jest": true,
-      "jasmine": true
-    },
-    "globals": {
-      "__DEV__": true
-    },
-    "settings": {
-      "jsdoc": {
-        "tagNamePreference": {
-          "augments": "extends"
-        }
-      },
-      "react": {
-        "version": "detect"
-      }
-    }
   },
   "peerDependencies": {
     "carbon-components": "10.3.0-rc.2",
@@ -212,8 +132,67 @@
     "webpack": "^4.25.1",
     "whatwg-fetch": "^2.0.3"
   },
-  "release": {
-    "branch": "master"
+  "sideEffects": false,
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "eslint:recommended",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": [
+      "react",
+      "jsdoc",
+      "jsx-a11y"
+    ],
+    "rules": {
+      "react/jsx-uses-vars": 1,
+      "react/jsx-uses-react": 1,
+      "react/no-find-dom-node": 1,
+      "react/no-typos": 2,
+      "jsdoc/check-param-names": 2,
+      "jsdoc/check-tag-names": 2,
+      "jsdoc/check-types": 2,
+      "jsx-a11y/no-static-element-interactions": 1,
+      "jsx-a11y/no-noninteractive-element-interactions": 1,
+      "jsx-a11y/click-events-have-key-events": 1,
+      "jsx-a11y/anchor-is-valid": 1,
+      "jsx-a11y/interactive-supports-focus": 1,
+      "jsx-a11y/label-has-for": [
+        1,
+        {
+          "components": [
+            "Label"
+          ],
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          },
+          "allowChildren": true
+        }
+      ]
+    },
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "jasmine": true
+    },
+    "globals": {
+      "__DEV__": true
+    },
+    "settings": {
+      "jsdoc": {
+        "tagNamePreference": {
+          "augments": "extends"
+        }
+      },
+      "react": {
+        "version": "detect"
+      }
+    }
   },
   "babel": {
     "presets": [
@@ -228,10 +207,6 @@
       "@babel/plugin-proposal-export-namespace-from",
       "@babel/plugin-proposal-export-default-from"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/IBM/carbon-components-react.git"
   },
   "jest": {
     "collectCoverageFrom": [
