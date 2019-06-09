@@ -12,6 +12,14 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended'],
   plugins: ['react', 'jsdoc', 'jsx-a11y'],
   rules: {
+    'no-unused-vars': [
+      'error',
+      {
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
     'react/jsx-uses-vars': 1,
     'react/jsx-uses-react': 1,
     'react/no-find-dom-node': 1,

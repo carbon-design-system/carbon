@@ -98,11 +98,6 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",
-    "eslint": "^5.16.0",
-    "eslint-config-carbon": "10.3.0",
-    "eslint-plugin-jsdoc": "^7.2.3",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.13.0",
     "gzip-size": "^5.0.0",
     "jest": "^24.0.0",
     "jest-circus": "^24.0.0",
@@ -220,8 +215,5 @@
   "bundleSizeThreshold": 120000,
   "release": {
     "branch": "master"
-  },
-  "eslintConfig": {
-    "extends": ["eslint-config-carbon"]
   }
 }

@@ -7,7 +7,6 @@
 
 'use strict';
 
-const path = require('path');
 const sass = require('node-sass');
 
 const defaultOptions = {
@@ -25,6 +24,11 @@ function compile(filepaths, options) {
             ...options,
           },
           (error, result) => {
+            if (error) {
+              reject(error);
+              return;
+            }
+
             resolve({
               result,
               filepath,

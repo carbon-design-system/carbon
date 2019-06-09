@@ -21,6 +21,7 @@
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
     "format:staged": "prettier --write",
+    "lint": "eslint packages",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
     "test": "cross-env BABEL_ENV=test jest",
@@ -38,6 +39,11 @@
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
+    "eslint": "^5.16.0",
+    "eslint-config-carbon": "10.3.0",
+    "eslint-plugin-jsdoc": "^7.2.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.4",
     "husky": "^2.1.0",
@@ -103,6 +109,9 @@
       "yarn format:staged",
       "git add"
     ]
+  },
+  "eslintConfig": {
+    "extends": ["eslint-config-carbon"]
   },
   "prettier": {
     "jsxBracketSameLine": true,
