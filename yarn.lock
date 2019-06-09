@@ -7975,16 +7975,6 @@ eslint-config-airbnb@^17.0.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-carbon-base@^1.0.0, eslint-config-carbon-base@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-carbon-base/-/eslint-config-carbon-base-1.0.1.tgz#3cc3a930202889be4d2bf6bb223eea7c3dda389a"
-
-eslint-config-carbon@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-carbon/-/eslint-config-carbon-1.0.2.tgz#4af1cefb679d4c88bb1bff5159d692d903d55df2"
-  dependencies:
-    eslint-config-carbon-base "^1.0.0"
-
 eslint-config-prettier@^3.0.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-3.6.0.tgz#8ca3ffac4bd6eeef623a0651f9d754900e3ec217"
