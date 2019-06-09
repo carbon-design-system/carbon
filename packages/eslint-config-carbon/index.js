@@ -12,6 +12,8 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended'],
   plugins: ['react', 'jsdoc', 'jsx-a11y'],
   rules: {
+    // Handle cases where we are destructuring but may not be using the initial
+    // variables
     'no-unused-vars': [
       'error',
       {

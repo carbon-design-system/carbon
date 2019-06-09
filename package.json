@@ -20,7 +20,6 @@
     "doctoc": "doctoc --title '## Table of Contents' docs",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,components}/**'",
-    "format:staged": "prettier --write",
     "lint": "eslint packages",
     "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
     "sync": "node tasks/sync.js",
@@ -87,21 +86,12 @@
     }
   },
   "lint-staged": {
-    "packages/components/**/*.js": [
-      "yarn format:staged",
-      "yarn lerna run lint:staged --scope carbon-components",
+    "**/*.js": [
+      "prettier --write",
+      "eslint",
       "git add"
     ],
     "packages/components/**/*.scss": [
-      "yarn format:staged",
-      "git add"
-    ],
-    "packages/react/**/*.js": [
-      "yarn format:staged",
-      "yarn lerna run lint:staged --scope carbon-components-react",
-      "git add"
-    ],
-    "*.js,!packages/components/**/*.js,!packages/react/**/*.js": [
       "yarn format:staged",
       "git add"
     ],

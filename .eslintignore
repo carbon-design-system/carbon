@@ -29,3 +29,6 @@ packages/components/scss
 packages/components/html
 packages/components/docs/js
 packages/components/node_modules
+
+# Sketch
+*.sketchplugin

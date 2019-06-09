@@ -1,3 +1,12 @@
+/**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* eslint-disable no-console */
+
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
@@ -14,6 +23,7 @@ async function main() {
   };
   const tasks = [
     'yarn format:diff',
+    'yarn lint',
     `yarn bundler check --ignore '**/@(node_modules|examples|components|react)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
     `cross-env BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
