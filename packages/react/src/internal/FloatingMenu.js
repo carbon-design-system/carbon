@@ -42,7 +42,7 @@ export const DIRECTION_BOTTOM = 'bottom';
 /**
  * @param {FloatingMenu~offset} [oldMenuOffset={}] The old value.
  * @param {FloatingMenu~offset} [menuOffset={}] The new value.
- * @returns `true` if the parent component wants to change in the adjustment of the floating menu position.
+ * @return `true` if the parent component wants to change in the adjustment of the floating menu position.
  * @private
  */
 const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
@@ -68,7 +68,7 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
  * @param {string} [params.direction=bottom] The menu direction.
  * @param {number} [params.scrollX=0] The scroll position of the viewport.
  * @param {number} [params.scrollY=0] The scroll position of the viewport.
- * @returns {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
+ * @return {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
  * @private
  */
 const getFloatingPosition = ({
@@ -299,7 +299,7 @@ class FloatingMenu extends React.Component {
   };
 
   /**
-   * @returns The child nodes, with styles containing the floating menu position.
+   * @return The child nodes, with styles containing the floating menu position.
    * @private
    */
   _getChildrenWithProps = () => {

@@ -60,7 +60,7 @@ export function getSvgData(iconName) {
 
 /**
  * @param {object} svgData - JSON Object for an SVG icon
- * @returns {ReactElement} Elements/Nodes for SVG
+ * @return {ReactElement} Elements/Nodes for SVG
  * @example
  * // Returns SVG elements
  * const svgData = getSvgData('copy-code');

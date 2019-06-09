@@ -29,7 +29,7 @@ export const initialSortState = sortStates.NONE;
  * @param {string} prevHeader the value of the previous header
  * @param {string} header the value of the currently selected header
  * @param {string} prevState the previous sort state of the table
- * @returns {string}
+ * @return {string}
  */
 export const getNextSortDirection = (prevHeader, header, prevState) => {
   // If the previous header is equivalent to the current header, we know that we
@@ -78,7 +78,7 @@ export const getNextSortState = (props, state, { key }) => {
  * @param {string} key The key for the given header we are derving the
  * sorted state for
  * @param {string} sortDirection The sortState that we want to order by
- * @returns {object}
+ * @return {object}
  */
 export const getSortedState = (props, state, key, sortDirection) => {
   const { rowIds, cellsById, initialRowOrder } = state;

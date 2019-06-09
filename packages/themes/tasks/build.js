@@ -200,7 +200,7 @@ build().catch(error => {
  * Transform token names to formats expected by Sassdoc for descriptions and
  * aliases
  * @param {object} metadata - token metadata
- * @returns {object} token metadata
+ * @return {object} token metadata
  */
 function transformMetadata(metadata) {
   const namesRegEx = new RegExp(

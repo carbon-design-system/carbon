@@ -9,7 +9,7 @@ const regexPureClassProperty = /^\s*[#@]__PURE_CLASS_PROPERTY__\s*$/;
  * @param createFn
  *   A function that returns the value for the new map item.
  *   Used when the given `map` does not have the given `key`.
- * @returns The existing map item or newly created map item.
+ * @return The existing map item or newly created map item.
  */
 function mapGetOrCreate(map, key, createFn) {
   const existingItem = map.get(key);

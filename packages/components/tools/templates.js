@@ -55,7 +55,7 @@ try {
 
 /**
  * @param {string} glob A glob.
- * @returns {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
+ * @return {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
  */
 const getContents = glob =>
   globby(glob).then(filePaths => {
@@ -78,7 +78,7 @@ const getContents = glob =>
 /**
  * Loads Handlebars templates and compiles them.
  * @param {string} glob A glob.
- * @returns {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
+ * @return {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
  */
 const loadContents = glob =>
   getContents(glob).then(contents => {
@@ -91,7 +91,7 @@ const loadContents = glob =>
 
 const cache = {
   /**
-   * @returns {Promise<object>} The promise that is resolved with the content cache.
+   * @return {Promise<object>} The promise that is resolved with the content cache.
    */
   get() {
     if (!this.promiseCache) {
@@ -131,7 +131,7 @@ const cache = {
  *   The internal component name seen in Fractal.
  *   Can be of a component or of a variant, or left empty.
  *   Leaving `handle` empty renders all components.
- * @returns {string|Map<Variant, string>} The list of rendered template, keyed by Fractal `Variant` object.
+ * @return {string|Map<Variant, string>} The list of rendered template, keyed by Fractal `Variant` object.
  */
 const renderComponent = ({ layout, concat, layoutContext } = {}, handle) =>
   cache.get().then(({ componentSource, contents }) => {

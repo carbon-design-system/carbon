@@ -9,7 +9,7 @@
  * Parse a given hexcode string into an rgba statement with the given opacity
  * @param {string} hexcode
  * @param {number} opacity
- * @returns {string}
+ * @return {string}
  */
 export function rgba(hexcode, opacity) {
   const values = [

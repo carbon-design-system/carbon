@@ -37,7 +37,7 @@ const slugify = title => {
  * @see {@link http://sassdoc.com/configuration/|Sassdoc configuration}
  * @param {string} sourceDir - source directory
  * @param {object} config - configuration object
- * @returns {object} json object
+ * @return {object} json object
  */
 async function createJson(sourceDir, config) {
   config = config || {};
@@ -56,7 +56,7 @@ async function createJson(sourceDir, config) {
  * Remove duplicate objects in `require` and `usedBy` arrays. Array objects have
  * `name` and `type` properties, sometimes nested in a `context` object.
  * @param {Array} arr - array with potential duplicates
- * @returns {Array} deduped array
+ * @return {Array} deduped array
  */
 function dedupeArray(arr) {
   return arr.reduce(
@@ -79,7 +79,7 @@ function dedupeArray(arr) {
  * Create a unique Sassdoc item name
  * @param {string} name - Sassdoc name
  * @param {string} type - Sassdoc type (e.g. `variable`, `mixin`)
- * @returns {string} unique Sassdoc item name
+ * @return {string} unique Sassdoc item name
  */
 function createUniqueName(name, type) {
   return `${name} [${type}]`;
@@ -88,7 +88,7 @@ function createUniqueName(name, type) {
 /**
  * Create a standardized group name
  * @param {Array} group - Item's group
- * @returns {string} group name
+ * @return {string} group name
  */
 function createGroupName(group) {
   return !group || !group[0] || group[0] === 'undefined' ? 'general' : group[0];
@@ -98,7 +98,7 @@ function createGroupName(group) {
  * Create GitHub-flavored markdown anchor link
  * @param {string} name - anchor value
  * @param {string} heading - anchor link destination
- * @returns {string} markdown anchor
+ * @return {string} markdown anchor
  */
 function createAnchorLink(name, heading) {
   const anchorLink = heading
@@ -117,7 +117,7 @@ function createAnchorLink(name, heading) {
 /**
  * Create markdown for Sassdoc item (function, mixin, placeholder, variable)
  * @param {string} item - Sassdoc item
- * @returns {string} item in markdown formatting
+ * @return {string} item in markdown formatting
  */
 function createMarkdownItem(item) {
   let str = '';
@@ -344,7 +344,7 @@ ${item.example[0].code}
  * @see {@link http://sassdoc.com/configuration/|Sassdoc configuration}
  * @param {string} sourceDir - source directory
  * @param {object} config - configuration object
- * @returns {string} markdown
+ * @return {string} markdown
  */
 async function createMarkdown(sourceDir, config) {
   config = config || {};

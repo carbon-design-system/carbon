@@ -18,7 +18,7 @@ import { getCellId } from './cells';
  * @param {Array<object>} config.headers
  * @param {object} config.cellsById object containing a map of cell id to cell
  * @param {string} config.inputValue the current input value in the Table Search
- * @returns {Array<string>} rowIds
+ * @return {Array<string>} rowIds
  */
 export const defaultFilterRows = ({ rowIds, headers, cellsById, inputValue }) =>
   rowIds.filter(rowId =>

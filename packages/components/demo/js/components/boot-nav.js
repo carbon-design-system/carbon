@@ -27,7 +27,7 @@ const pollForBrowserSync = callback => {
  * @param {object} data The Fractal Component instance data
  * @param {string} [data.notes] The notes of the component.
  * @param {Array<object>} [data.variants] The variants of the component.
- * @returns {object} The normalized version of the Fractal Component instance data.
+ * @return {object} The normalized version of the Fractal Component instance data.
  */
 const normalizeComponentItem = ({ notes, variants, items = [], ...other }) => ({
   ...other,

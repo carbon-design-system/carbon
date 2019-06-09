@@ -13,7 +13,7 @@ import { SharedStyle } from 'sketch/dom';
  * @param {string} name
  * @param {object} style
  * @param {StyleType?} styleType
- * @returns {SharedStyle}
+ * @return {SharedStyle}
  */
 export function syncSharedStyle(
   document,

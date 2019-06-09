@@ -53,7 +53,7 @@ const triggerButtonPositionFactors = {
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @param {string} direction The floating menu direction.
- * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
+ * @return {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
 export const getMenuOffset = (menuBody, direction, trigger, flip) => {
@@ -430,7 +430,7 @@ class OverflowMenu extends Component {
   };
 
   /**
-   * @returns {Element} The DOM element where the floating menu is placed in.
+   * @return {Element} The DOM element where the floating menu is placed in.
    */
   _getTarget = () =>
     (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||

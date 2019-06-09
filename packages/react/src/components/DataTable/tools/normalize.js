@@ -12,7 +12,7 @@ import { getCellId } from './cells';
  *
  * @param {Array<object>} rows
  * @param {Array<object>} headers
- * @returns {object}
+ * @return {object}
  */
 const normalize = (rows, headers, prevState = {}) => {
   const { rowsById: prevRowsByIds } = prevState;

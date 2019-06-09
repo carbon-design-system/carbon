@@ -17,7 +17,7 @@ import { sortStates } from '../state/sorting';
  * @param {number|string} a
  * @param {number|string} b
  * @param {string} locale
- * @returns {number}
+ * @return {number}
  */
 export const compare = (a, b, locale = 'en') => {
   if (typeof a === 'number' && typeof b === 'number') {
@@ -38,7 +38,7 @@ export const compare = (a, b, locale = 'en') => {
  * @param {string} a
  * @param {string} b
  * @param {string} locale
- * @returns {number}
+ * @return {number}
  */
 export const compareStrings = (a, b, locale = 'en') => {
   return a.localeCompare(b, locale, { numeric: true });
@@ -60,7 +60,7 @@ export const compareStrings = (a, b, locale = 'en') => {
  * @param {string} config.key the header key that we use to lookup the cell
  * @param {string} [config.locale] optional locale used in the comparison
  * function
- * @returns {Array[string]} array of sorted rowIds
+ * @return {Array[string]} array of sorted rowIds
  */
 export const sortRows = ({
   rowIds,
