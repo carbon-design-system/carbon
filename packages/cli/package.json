@@ -19,6 +19,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@carbon/cli-reporter": "10.2.0",
     "fs-extra": "^8.0.1",
     "prettier": "^1.18.2",
     "remark": "^10.0.1",

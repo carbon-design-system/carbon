@@ -10,7 +10,7 @@
 const cli = require('yargs');
 const packageJson = require('../package.json');
 
-const commands = [require('./commands/sync')];
+const commands = [require('./commands/ci-check'), require('./commands/sync')];
 
 async function main({ argv, cwd }) {
   cli

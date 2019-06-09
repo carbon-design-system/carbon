@@ -7,12 +7,12 @@
 
 'use strict';
 
-const { workspace } = require('../../workspace');
+const { workspace } = require('../workspace');
 
 const tasks = {
-  npm: require('./npm'),
-  package: require('./package'),
-  readme: require('./readme'),
+  npm: require('./sync/npm'),
+  package: require('./sync/package'),
+  readme: require('./sync/readme'),
 };
 
 async function sync(args, env) {

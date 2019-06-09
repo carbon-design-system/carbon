@@ -1,16 +1,24 @@
+/**
+ * Copyright IBM Corp. 2019, 2019
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
 const childProcess = require('child_process');
 const util = require('util');
+const { workspace } = require('../workspace');
 
 const exec = util.promisify(childProcess.exec);
 
-async function main() {
+async function check(args, env) {
   reporter.info('Running checks in CI...');
 
   const options = {
-    cwd: process.cwd(),
+    cwd: env.root.directory,
   };
   const tasks = [
     'yarn format:diff',
@@ -34,19 +42,21 @@ async function main() {
     clearInterval(interval);
     console.log();
     reporter.success('Done! 🎉');
-  } finally {
+  } catch (error) {
     clearInterval(interval);
+    console.log();
+    console.log(error.message);
+    console.log(error.stdout);
+    process.exit(1);
   }
 }
 
-main().catch(error => {
-  console.log();
-  reporter.error(error.message);
-  if (error.stdout !== '') {
-    console.error(error.stdout);
-  }
-  if (error.stderr !== '') {
-    console.error(error.stderr);
-  }
-  process.exit(1);
-});
+function register(cli) {
+  cli.command('ci-check', 'run CI checks', {}, workspace(check));
+  return cli;
+}
+
+module.exports = {
+  check,
+  register,
+};
