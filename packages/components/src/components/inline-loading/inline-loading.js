@@ -23,7 +23,7 @@ class InlineLoading extends mixin(
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The element working as a spinner.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.initialState] The initial state, should be `inactive`, `active` or `finished`.
    */
   constructor(element, options) {
@@ -108,7 +108,7 @@ class InlineLoading extends mixin(
    * or {@linkcode InlineLoading.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode InlineLoading.init .init()} works.
    * @member InlineLoading.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find inline loading components.
    * @property {string} selectorSpinner The CSS selector to find the spinner.
    * @property {string} selectorFinished The CSS selector to find the "finished" icon.
