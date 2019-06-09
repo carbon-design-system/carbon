@@ -91,7 +91,7 @@ workflows:
       - release:
           requires:
             - system
-          filter:
+          filters:
             branches:
               only:
                 - master
