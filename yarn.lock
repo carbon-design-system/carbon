@@ -8034,10 +8034,10 @@ eslint-plugin-jsdoc@^3.3.0:
     jsdoctypeparser "^2.0.0-alpha-8"
     lodash "^4.17.11"
 
-eslint-plugin-jsdoc@^4.8.3:
-  version "4.8.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-4.8.4.tgz#31f413c8a31fe656881398d8920b381bfdfac618"
-  integrity sha512-VDP+BI2hWpKNNdsJDSPofSQ9q7jGLgWbDMI0LzOeEcfsTjSS7jQtHDUuVLQ5E+OV2MPyQPk/3lnVcHfStXk5yA==
+eslint-plugin-jsdoc@^7.2.3:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-7.2.3.tgz#04d21890cdadf33290f865b27f2f901f1321aa42"
+  integrity sha512-233HUc5ftIlmswaNmck++gkoW2iubcDDbM4KCzTHaawJFODuTNriDmZyKm8+7GgNnnwlkrE0mmD4TCzrdMTnsA==
   dependencies:
     comment-parser "^0.5.4"
     jsdoctypeparser "3.1.0"
@@ -8064,7 +8064,7 @@ eslint-plugin-prettier@^2.3.1:
     fast-diff "^1.1.1"
     jest-docblock "^21.0.0"
 
-eslint-plugin-react@^7.11.0, eslint-plugin-react@^7.12.4:
+eslint-plugin-react@^7.11.0, eslint-plugin-react@^7.13.0:
   version "7.13.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.13.0.tgz#bc13fd7101de67996ea51b33873cd9dc2b7e5758"
   integrity sha512-uA5LrHylu8lW/eAH3bEQe9YdzpPaFd9yAJTwTi/i/BKTD7j6aQMKVAdGM/ML72zD6womuSK7EiGtMKuK06lWjQ==
