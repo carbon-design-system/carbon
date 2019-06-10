@@ -8,7 +8,7 @@
 /**
  * Get the type size for the given step
  * @param {number} step
- * @return {number}
+ * @returns {number}
  */
 export function getTypeSize(step) {
   if (step <= 1) {

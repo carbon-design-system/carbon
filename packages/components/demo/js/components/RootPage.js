@@ -19,7 +19,7 @@ const checkStatus = response => {
 
 /**
  * @param {Array<object>} componentItems List of Fractal Component instance data.
- * @return {Array<object>} List of Fractal Component instance data with the contents of all components cleared.
+ * @returns {Array<object>} List of Fractal Component instance data with the contents of all components cleared.
  */
 const clearContent = componentItems =>
   componentItems.map(item => ({
@@ -34,7 +34,7 @@ const clearContent = componentItems =>
  * @param {Array<object>} componentItems List of Fractal Component instance data.
  * @param {string} id The component ID.
  * @param {object|string} content The content. String for component content, object for variant content (keyed by variant ID).
- * @return {Array<object>}
+ * @returns {Array<object>}
  *   List of Fractal Component instance data with the content of the given component ID populated with the given content.
  */
 const applyContent = (componentItems, id, content) => {
@@ -73,7 +73,7 @@ const applyContent = (componentItems, id, content) => {
 
 /**
  * @param {Array<object>} componentItems List of Fractal Component instance data.
- * @return {Array<object>} The component data with `isHidden` moved to `meta.isDefaultHidden`.
+ * @returns {Array<object>} The component data with `isHidden` moved to `meta.isDefaultHidden`.
  */
 const preserveDefaultHidden = componentItems =>
   componentItems.map(item => {
@@ -96,7 +96,7 @@ const preserveDefaultHidden = componentItems =>
 /**
  * @param {Array<object>} componentItems List of Fractal Component instance data.
  * @param {boolean} isComponentsX `true` if the current style is of the experimental version.
- * @return {Array<object>} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
+ * @returns {Array<object>} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
  */
 const applyComponentsX = (componentItems, isComponentsX) =>
   componentItems.map(item => {
@@ -118,7 +118,7 @@ const applyComponentsX = (componentItems, isComponentsX) =>
 /**
  * @param {string} name The event name.
  * @param {Function} callback The callback.
- * @return {Handle} The handle to release the attached event handler.
+ * @returns {Handle} The handle to release the attached event handler.
  */
 const onBrowserSyncEvent = (name, callback) => {
   // eslint-disable-next-line no-underscore-dangle
@@ -273,7 +273,7 @@ class RootPage extends Component {
   };
 
   /**
-   * @return The component data that is currently selected.
+   * @returns The component data that is currently selected.
    */
   getCurrentComponentItem() {
     const { componentItems, selectedNavItemId } = this.state;

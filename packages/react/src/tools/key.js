@@ -52,7 +52,7 @@ export const keys = {
  * }
  * @param {Event} event
  * @param {Array<number>} keysToMatch
- * @return {boolean}
+ * @returns {boolean}
  */
 export function matches(event, keysToMatch) {
   for (let i = 0; i < keysToMatch.length; i++) {
@@ -76,7 +76,7 @@ export function matches(event, keysToMatch) {
  * }
  * @param {Event|number} eventOrCode
  * @param {number} key - the `which` value, should come from keys
- * @return {boolean}
+ * @returns {boolean}
  */
 export function match(eventOrCode, key) {
   return eventOrCode.which === key || eventOrCode === key;
@@ -87,7 +87,7 @@ export function match(eventOrCode, key) {
  * events)
  *
  * @param {Event|number} eventOrCode
- * @return {string}
+ * @returns {string}
  */
 export function getCharacterFor(eventOrCode) {
   if (typeof eventOrCode === 'number') {

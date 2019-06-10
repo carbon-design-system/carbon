@@ -159,7 +159,7 @@ export default class DataTable extends React.Component {
    * @param {object} config
    * @param {string} config.header the header we want the props for
    * @param {Function} config.onClick a custom click handler for the header
-   * @return {object}
+   * @returns {object}
    */
   getHeaderProps = ({
     header,
@@ -193,7 +193,7 @@ export default class DataTable extends React.Component {
    *
    * @param {object} config
    * @param {Function} config.onClick a custom click handler for the expand header
-   * @return {object}
+   * @returns {object}
    */
   getExpandHeaderProps = ({ onClick, ...rest } = {}) => {
     const { translateWithId: t } = this.props;
@@ -223,7 +223,7 @@ export default class DataTable extends React.Component {
    *
    * @param {Function} onClick
    * @param {object} sortParams
-   * @return {Function}
+   * @returns {Function}
    */
   handleOnHeaderClick = (onClick, sortParams) => {
     return e => onClick(e, sortParams);
@@ -234,7 +234,7 @@ export default class DataTable extends React.Component {
    *
    * @param {Function} onClick
    * @param {object} expandParams
-   * @return {Function}
+   * @returns {Function}
    */
   handleOnExpandHeaderClick = (onClick, expandParams) => {
     return e => onClick(e, expandParams);
@@ -246,7 +246,7 @@ export default class DataTable extends React.Component {
    * @param {object} config
    * @param {object} config.row the row we want the props for
    * @param {Function} config.onClick a custom click handler for the header
-   * @return {object}
+   * @returns {object}
    */
   getRowProps = ({ row, onClick, ...rest }) => {
     const { translateWithId: t } = this.props;
@@ -272,7 +272,7 @@ export default class DataTable extends React.Component {
    * for a specific row.
    *
    * @param {object} [row] an optional row that we want to access the props for
-   * @return {object}
+   * @returns {object}
    */
   getSelectionProps = ({ onClick, row, ...rest } = {}) => {
     const { translateWithId: t } = this.props;
@@ -351,7 +351,7 @@ export default class DataTable extends React.Component {
 
   /**
    * Helper utility to get all the currently selected rows
-   * @return {Array<string>} the array of rowIds that are currently selected
+   * @returns {Array<string>} the array of rowIds that are currently selected
    */
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
@@ -363,7 +363,7 @@ export default class DataTable extends React.Component {
    * Helper for getting the table prefix for elements that require an
    * `id` attribute that is unique.
    *
-   * @return {string}
+   * @returns {string}
    */
   getTablePrefix = () => `data-table-${this.instanceId}`;
 
@@ -371,7 +371,7 @@ export default class DataTable extends React.Component {
    * Helper for toggling all selected items in a state. Does not call
    * setState, so use it when setting state.
    * @param {object} initialState
-   * @return {object} object to put into this.setState (use spread operator)
+   * @returns {object} object to put into this.setState (use spread operator)
    */
   setAllSelectedState = (initialState, isSelected) => {
     const { rowIds } = initialState;
@@ -423,7 +423,7 @@ export default class DataTable extends React.Component {
    * Handler for toggling the selection state of a given row.
    *
    * @param {string} rowId
-   * @return {Function}
+   * @returns {Function}
    */
   handleOnSelectRow = rowId => () => {
     this.setState(state => {
@@ -475,7 +475,7 @@ export default class DataTable extends React.Component {
    * Handler for toggling the expansion state of a given row.
    *
    * @param {string} rowId
-   * @return {Function}
+   * @returns {Function}
    */
   handleOnExpandRow = rowId => () => {
     this.setState(state => {
@@ -520,7 +520,7 @@ export default class DataTable extends React.Component {
    * Handler for transitioning to the next sort state of the table
    *
    * @param {string} headerKey the field for the header that we are sorting by
-   * @return {Function}
+   * @returns {Function}
    */
   handleSortBy = headerKey => () => {
     this.setState(state =>

@@ -12,7 +12,7 @@
  * given event.
  *
  * @param {Array<Function>} fns array of functions to apply to the event
- * @return {Function}
+ * @returns {Function}
  */
 export const composeEventHandlers = fns => (event, ...args) => {
   for (let i = 0; i < fns.length; i++) {

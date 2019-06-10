@@ -40,7 +40,7 @@ expectedSharedStyles[formatSharedStyleName('yellow')] = yellow['20'];
 /**
  * Sync color shared styles to the given document and return the result
  * @param {Document} document
- * @return {Array<SharedStyle>}
+ * @returns {Array<SharedStyle>}
  */
 export function syncColorStyles(document) {
   const { sharedLayerStyles } = document;
@@ -85,7 +85,7 @@ export function syncColorStyles(document) {
  * name for the swatch and an optional grade.
  * @param {string} name
  * @param {string?} grade
- * @return {string}
+ * @returns {string}
  */
 function formatSharedStyleName(name, grade) {
   return ['color', name, grade].filter(Boolean).join('/');
@@ -96,7 +96,7 @@ function formatSharedStyleName(name, grade) {
  * @param {Document} document
  * @param {string} name
  * @param {string} value
- * @return {SharedStyle}
+ * @returns {SharedStyle}
  */
 function syncColorStyle(document, name, value) {
   return syncSharedStyle(document, name, {

@@ -28,7 +28,7 @@ const { prefix } = settings;
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @param {string} menuDirection Where the floating menu menu should be placed relative to the trigger button.
- * @return {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
+ * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
 const getMenuOffset = (menuBody, menuDirection) => {
@@ -251,7 +251,7 @@ class Tooltip extends Component {
   _debouncedHandleHover = null;
 
   /**
-   * @return {Element} The DOM element where the floating menu is placed in.
+   * @returns {Element} The DOM element where the floating menu is placed in.
    */
   _getTarget = () =>
     (this.triggerEl &&

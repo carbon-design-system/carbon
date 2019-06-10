@@ -178,7 +178,7 @@ export function generate() {
 /**
  * Normalize a collection of icons by their basename
  * @param {Array<Icon>} icons
- * @return {object}
+ * @returns {object}
  */
 function normalize(icons) {
   // Collect all icons and group them by their base names. The value of the
@@ -216,7 +216,7 @@ function sortBySize(a, b) {
  * https://github.com/airbnb/react-sketchapp/blob/aa3070556c47883974edbc7f78978c421a8199f7/src/jsonUtils/sketchImpl/makeSvgLayer.js#L12
  *
  * @param {object} svg
- * @return {Layer}
+ * @returns {Layer}
  */
 function createSVGLayer(svg) {
   const svgString = NSString.stringWithString(toString(svg));

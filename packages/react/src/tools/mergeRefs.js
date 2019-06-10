@@ -7,7 +7,7 @@
 
 /**
  * @param {...Ref<Element>} refs List of React refs to merge.
- * @return {Ref<Element>} Merged React ref.
+ * @returns {Ref<Element>} Merged React ref.
  */
 const mergeRefs = (...refs) => el => {
   refs.forEach(ref => {

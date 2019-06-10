@@ -59,7 +59,6 @@ module.exports = {
     jsdoc: {
       tagNamePreference: {
         augments: 'extends',
-        returns: 'return',
       },
     },
     react: {

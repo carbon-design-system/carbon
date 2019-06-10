@@ -12,6 +12,6 @@
  *
  * @param {string} rowId
  * @param {string} header
- * @return {string}
+ * @returns {string}
  */
 export const getCellId = (rowId, header) => `${rowId}:${header}`;
