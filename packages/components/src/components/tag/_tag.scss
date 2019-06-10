@@ -98,7 +98,7 @@
 
   .#{$prefix}--tag--filter > svg:hover {
     border-radius: 50%;
-    background-color: $icon-02;
+    background-color: $hover-secondary;
   }
 
   .#{$prefix}--tag--filter:focus,
