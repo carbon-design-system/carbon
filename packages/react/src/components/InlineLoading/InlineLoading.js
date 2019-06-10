@@ -31,6 +31,11 @@ export default class InlineLoading extends React.Component {
     description: PropTypes.string,
 
     /**
+     * Specify the description for the inline loading text
+     */
+    iconDescription: PropTypes.string,
+
+    /**
      * Provide an optional handler to be inovked when <InlineLoading> is
      * successful
      */
@@ -51,6 +56,7 @@ export default class InlineLoading extends React.Component {
     const {
       className,
       success,
+      iconDescription,
       description,
       onSuccess,
       successDelay,
@@ -80,7 +86,9 @@ export default class InlineLoading extends React.Component {
         );
       }
 
-      return <Loading small withOverlay={false} />;
+      return (
+        <Loading small description={iconDescription} withOverlay={false} />
+      );
     };
 
     const loadingText = (
