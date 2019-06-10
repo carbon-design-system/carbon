@@ -123,9 +123,9 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
       icon.moduleName
     )}&gt;&lt;/ibm-icon-${param(icon.moduleName)}&gt;</code></p>
     <ibm-icon-${param(icon.moduleName)}></ibm-icon-${param(icon.moduleName)}>
-    <p>Directive <code>&lt;svg ibmIcon${
-      pascal(icon.moduleName)
-    }&gt;&lt;/svg&gt;</code></p>
+    <p>Directive <code>&lt;svg ibmIcon${pascal(
+      icon.moduleName
+    )}&gt;&lt;/svg&gt;</code></p>
     <svg ibmIcon${pascal(icon.moduleName)}></svg>
   \`
 }))
@@ -152,7 +152,9 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
     )} innerClass="test-class another-class"></ibm-icon-${param(
   icon.moduleName
 )}>
-    <svg ibmIcon${pascal(icon.moduleName)} class="test-class another-class"></svg>
+    <svg ibmIcon${pascal(
+      icon.moduleName
+    )} class="test-class another-class"></svg>
   \`
 }))`;
 
