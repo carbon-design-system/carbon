@@ -332,7 +332,7 @@ async function createExamples(name, examplesDir) {
                 children: [
                   {
                     type: 'text',
-                    value: `${example[0].toUpperCase() + example.slice(1)}`,
+                    value: example,
                   },
                 ],
               },
