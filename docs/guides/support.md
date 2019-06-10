@@ -32,7 +32,7 @@ They help us help them.
 
 _If the user hasn't taken the time to fill out one of our templates feel free to
 ask them to do so. Typically you'll need at least a good description of the
-problem, a walkthru of how to recreate the problem and a minimal test case to
+problem, a walkthrough of how to recreate the problem and a minimal test case to
 observe the problem happening. That last one can be a real sticking point, but
 there's lots of work to do and many many issues to triage — the onus is on them
 to clearly define the issue their having._
