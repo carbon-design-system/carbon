@@ -1,0 +1,28 @@
+{
+  "name": "@carbon/cli",
+  "private": true,
+  "version": "10.3.0",
+  "license": "Apache-2.0",
+  "bin": {
+    "carbon-cli": "./bin/carbon-cli.js"
+  },
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/cli",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@carbon/cli-reporter": "10.2.0",
+    "fs-extra": "^8.0.1",
+    "prettier": "^1.18.2",
+    "remark": "^10.0.1",
+    "yargs": "^13.2.4"
+  }
+}
