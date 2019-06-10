@@ -166,8 +166,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @if (length($deprecations--reasons) > 0) {
   $deprecations--message: '';
   @each $reason in $deprecations--reasons {
-    $deprecations--message: '#{$deprecations--message}
-REASON: #{$reason}';
+    $deprecations--message: '#{$deprecations--message} REASON: #{$reason}';
   }
 
   @warn $deprecations--message;

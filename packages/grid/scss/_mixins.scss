@@ -202,7 +202,7 @@
 /// @type List
 /// @access public
 /// @group @carbon/grid
-$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1));
+$carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 
 /// Output the CSS classes for generating aspect ratio classes
 /// @param {List} $aspect-ratios [$carbon--aspect-ratios] - A list of aspect ratios to generate

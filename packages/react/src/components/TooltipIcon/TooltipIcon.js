@@ -9,28 +9,31 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
+const getInstanceId = setupGetInstanceId();
 const TooltipIcon = ({
+  id,
   className,
   children,
   direction,
+  align,
   tooltipText,
   ...rest
 }) => {
-  const tooltipClassName = cx({
-    [className]: !!className,
-    [`${prefix}--tooltip-icon`]: true,
-  });
-  const triggerClassName = cx({
-    [`${prefix}--tooltip__trigger`]: true,
-    [`${prefix}--tooltip--icon__bottom`]: direction === 'bottom',
-    [`${prefix}--tooltip--icon__top`]: direction === 'top',
+  const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
+  const tooltipClassName = cx(`${prefix}--tooltip--icon`, className);
+  const tooltipTriggerClasses = cx(`${prefix}--tooltip__trigger`, {
+    [`${prefix}--tooltip--${direction}`]: direction,
+    [`${prefix}--tooltip--align-${align}`]: align,
   });
   return (
     <div {...rest} className={tooltipClassName}>
-      <button className={triggerClassName} aria-label={tooltipText}>
+      <button
+        className={tooltipTriggerClasses}
+        aria-describedby={tooltipId}
+        aria-label={tooltipText}>
         {children}
       </button>
     </div>
@@ -45,18 +48,32 @@ TooltipIcon.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Specify the direction of the tooltip. Can be either bottom or top.
+   * Specify the direction of the tooltip. Can be either top or bottom.
    */
-  direction: PropTypes.oneOf(['bottom', 'top']).isRequired,
+  direction: PropTypes.oneOf(['top', 'bottom']),
 
   /**
-   * Provide the text that will be displayed in the tooltip when it is rendered.
+   * Specify the alignment (to the trigger button) of the tooltip.
+   * Can be one of: start, center, or end.
    */
-  tooltipText: PropTypes.node.isRequired,
+  align: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Optionally specify a custom id for the tooltip. If one is not provided, we
+   * generate a unique id for you.
+   */
+  id: PropTypes.string,
+
+  /**
+   * Provide the ARIA label for the tooltip.
+   * TODO: rename this prop (will be a breaking change)
+   */
+  tooltipText: PropTypes.string.isRequired,
 };
 
 TooltipIcon.defaultProps = {
   direction: 'bottom',
+  align: 'center',
 };
 
 export default TooltipIcon;

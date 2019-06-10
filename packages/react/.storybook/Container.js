@@ -14,6 +14,11 @@ export default class Container extends Component {
   render() {
     const { story } = this.props;
 
+    let bgColor = '#ffffff';
+    if (story().props.context.kind === '[Experimental] UI Shell') {
+      bgColor = '#f3f3f3';
+    }
+
     return (
       <React.StrictMode>
         <div
@@ -24,6 +29,7 @@ export default class Container extends Component {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: bgColor,
           }}>
           {story()}
         </div>
