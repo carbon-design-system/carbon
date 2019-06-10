@@ -99,7 +99,7 @@ jobs:
           name: Publish canary packages
           command: |
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-            yarn lerna publish --canary minor --dist-tag canary --yes
+            yarn lerna publish --canary minor --dist-tag canary --no-push --no-git-tag-version --yes
 
 workflows:
   version: 2
