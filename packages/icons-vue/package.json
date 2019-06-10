@@ -5,14 +5,16 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-vue",
-  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-vue",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
     "elements",
     "carbon",
     "carbon-elements",
-    "carbon-design-system"
+    "carbon-design-system",
+    "components",
+    "react"
   ],
   "publishConfig": {
     "access": "public"
