@@ -89,7 +89,7 @@ export class ${className}Directive implements AfterViewInit {
         continue;
       }
       if (value) {
-        svg.setAttributeNS("http://www.w3.org/2000/svg", key, value);
+        svg.setAttribute(key, value);
       }
     }
 
@@ -97,9 +97,9 @@ export class ${className}Directive implements AfterViewInit {
       const title = document.createElement("title");
       title.textContent = attributes.title;
       ${className}Directive.titleIdCounter++;
-      title.setAttributeNS("http://www.w3.org/2000/svg", "id", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
+      title.setAttribute("id", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
       svg.appendChild(title);
-      svg.setAttributeNS("http://www.w3.org/2000/svg", "aria-labelledby", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
+      svg.setAttribute("aria-labelledby", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
     }
 	}
 }
