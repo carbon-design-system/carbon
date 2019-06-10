@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 require('core-js/features/array/flat-map');
@@ -197,8 +199,8 @@ build().catch(error => {
 /**
  * Transform token names to formats expected by Sassdoc for descriptions and
  * aliases
- * @param {Object} - token metadata
- * @return {Object} token metadata
+ * @param {object} metadata - token metadata
+ * @returns {object} token metadata
  */
 function transformMetadata(metadata) {
   const namesRegEx = new RegExp(

@@ -12,10 +12,7 @@ const meta = require('@carbon/icons/meta.json');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
-const {
-  createEntrypointFromMeta,
-  createModuleFromInfo,
-} = require('./createFromInfo');
+const { createModuleFromInfo } = require('./createFromInfo');
 const createIconStory = require('./createIconStory');
 
 const STORYBOOK_DIR = path.resolve(__dirname, '../examples/storybook/stories');

@@ -71,41 +71,39 @@ function sortFields(a, b) {
 
 function run({ packagePaths }) {
   return Promise.all(
-    packagePaths.map(
-      async ({ basename, packageJsonPath, packageJson, ...rest }) => {
-        packageJson.repository = `${REPO_URL_BASE}/${basename}`;
-        packageJson.bugs =
-          'https://github.com/carbon-design-system/carbon/issues';
-        packageJson.license = 'Apache-2.0';
-        packageJson.publishConfig = {
-          access: 'public',
-        };
+    packagePaths.map(async ({ basename, packageJsonPath, packageJson }) => {
+      packageJson.repository = `${REPO_URL_BASE}/${basename}`;
+      packageJson.bugs =
+        'https://github.com/carbon-design-system/carbon/issues';
+      packageJson.license = 'Apache-2.0';
+      packageJson.publishConfig = {
+        access: 'public',
+      };
 
-        if (Array.isArray(packageJson.keywords)) {
-          const keywordsToAdd = DEFAULT_KEYWORDS.filter(keyword => {
-            return packageJson.keywords.indexOf(keyword) === -1;
-          });
-          if (keywordsToAdd.length > 0) {
-            packageJson.keywords = [...packageJson.keywords, ...keywordsToAdd];
-          }
-        } else {
-          packageJson.keywords = DEFAULT_KEYWORDS;
+      if (Array.isArray(packageJson.keywords)) {
+        const keywordsToAdd = DEFAULT_KEYWORDS.filter(keyword => {
+          return packageJson.keywords.indexOf(keyword) === -1;
+        });
+        if (keywordsToAdd.length > 0) {
+          packageJson.keywords = [...packageJson.keywords, ...keywordsToAdd];
         }
-
-        // Construct our new packageJson packageJson with sorted fields
-        const file = Object.keys(packageJson)
-          .sort(sortFields)
-          .reduce(
-            (acc, key) => ({
-              ...acc,
-              [key]: packageJson[key],
-            }),
-            {}
-          );
-
-        await fs.writeJson(packageJsonPath, file, { spaces: 2 });
+      } else {
+        packageJson.keywords = DEFAULT_KEYWORDS;
       }
-    )
+
+      // Construct our new packageJson packageJson with sorted fields
+      const file = Object.keys(packageJson)
+        .sort(sortFields)
+        .reduce(
+          (acc, key) => ({
+            ...acc,
+            [key]: packageJson[key],
+          }),
+          {}
+        );
+
+      await fs.writeJson(packageJsonPath, file, { spaces: 2 });
+    })
   );
 }
 

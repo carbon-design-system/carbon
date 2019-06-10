@@ -5,16 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* global MSSVGImporter, NSString, NSUTF8StringEncoding */
+
 import { toString } from '@carbon/icon-helpers';
-import React from 'react';
-import {
-  Document,
-  Group,
-  Rectangle,
-  Shape,
-  Style,
-  SymbolMaster,
-} from 'sketch/dom';
+import { Document, Rectangle, Shape, SymbolMaster } from 'sketch/dom';
 import { command } from '../command';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
@@ -184,7 +178,7 @@ export function generate() {
 /**
  * Normalize a collection of icons by their basename
  * @param {Array<Icon>} icons
- * @return {Object}
+ * @returns {object}
  */
 function normalize(icons) {
   // Collect all icons and group them by their base names. The value of the
@@ -221,8 +215,8 @@ function sortBySize(a, b) {
  * Reference:
  * https://github.com/airbnb/react-sketchapp/blob/aa3070556c47883974edbc7f78978c421a8199f7/src/jsonUtils/sketchImpl/makeSvgLayer.js#L12
  *
- * @param {Object} svg
- * @return {Layer}
+ * @param {object} svg
+ * @returns {Layer}
  */
 function createSVGLayer(svg) {
   const svgString = NSString.stringWithString(toString(svg));

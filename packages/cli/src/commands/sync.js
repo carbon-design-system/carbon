@@ -17,7 +17,6 @@ const tasks = {
 
 async function sync(args, env) {
   const { target } = args;
-  const { packages, root } = env;
   const tasksToRun = target === 'all' ? Object.keys(tasks) : [target];
 
   for (const name of tasksToRun) {

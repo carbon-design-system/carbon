@@ -9,10 +9,7 @@
 
 'use strict';
 
-const fs = require('fs-extra');
-const path = require('path');
 const { createSassRenderer, types } = require('@carbon/test-utils/scss');
-const { colors } = require('../src/colors');
 
 const render = createSassRenderer(__dirname);
 

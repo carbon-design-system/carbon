@@ -18,8 +18,8 @@ const checkStatus = response => {
 };
 
 /**
- * @param {Object[]} componentItems List of Fractal Component instance data.
- * @returns {Object[]} List of Fractal Component instance data with the contents of all components cleared.
+ * @param {Array<object>} componentItems List of Fractal Component instance data.
+ * @returns {Array<object>} List of Fractal Component instance data with the contents of all components cleared.
  */
 const clearContent = componentItems =>
   componentItems.map(item => ({
@@ -31,10 +31,10 @@ const clearContent = componentItems =>
   }));
 
 /**
- * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @param {Array<object>} componentItems List of Fractal Component instance data.
  * @param {string} id The component ID.
- * @param {Object|string} content The content. String for component content, object for variant content (keyed by variant ID).
- * @returns {Object[]}
+ * @param {object|string} content The content. String for component content, object for variant content (keyed by variant ID).
+ * @returns {Array<object>}
  *   List of Fractal Component instance data with the content of the given component ID populated with the given content.
  */
 const applyContent = (componentItems, id, content) => {
@@ -72,8 +72,8 @@ const applyContent = (componentItems, id, content) => {
 };
 
 /**
- * @param {Object[]} componentItems List of Fractal Component instance data.
- * @returns {Object[]} The component data with `isHidden` moved to `meta.isDefaultHidden`.
+ * @param {Array<object>} componentItems List of Fractal Component instance data.
+ * @returns {Array<object>} The component data with `isHidden` moved to `meta.isDefaultHidden`.
  */
 const preserveDefaultHidden = componentItems =>
   componentItems.map(item => {
@@ -94,9 +94,9 @@ const preserveDefaultHidden = componentItems =>
   });
 
 /**
- * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @param {Array<object>} componentItems List of Fractal Component instance data.
  * @param {boolean} isComponentsX `true` if the current style is of the experimental version.
- * @returns {Object[]} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
+ * @returns {Array<object>} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
  */
 const applyComponentsX = (componentItems, isComponentsX) =>
   componentItems.map(item => {
@@ -285,7 +285,7 @@ class RootPage extends Component {
 
   /**
    * Handles an event from BrowserSync.
-   * @param {Object} evt The event.
+   * @param {object} evt The event.
    * @private
    */
   _handleBrowserSyncEvent = evt => {
@@ -296,7 +296,7 @@ class RootPage extends Component {
 
   /**
    * Toggles usage of experimental CSS upon user event.
-   * @param {Object} evt The event.
+   * @param {object} evt The event.
    * @private
    */
   _switchExperimental = evt => {

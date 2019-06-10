@@ -17,7 +17,7 @@ const prettierOptions = {
 };
 
 function createIconStory(info) {
-  const { descriptor, moduleName, outputOptions } = info;
+  const { moduleName, outputOptions } = info;
   const source = `
 import React from 'react';
 import { storiesOf } from '@storybook/react';

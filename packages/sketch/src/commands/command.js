@@ -21,6 +21,7 @@ export function command(name, fn) {
   sketch.UI.message('Done! 🎉');
 
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log(`[Carbon Elements] ${name}: Done in ${Date.now() - start}ms`);
   }
 }
