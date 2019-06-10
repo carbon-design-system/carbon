@@ -85,11 +85,43 @@ jobs:
               -f manifest.yml \
               --delete-old-apps
 
+  release:
+    docker:
+      - image: circleci/node:10.15-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
+      - run:
+          name: Publish canary packages
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+            yarn lerna publish --canary minor --dist-tag canary --no-push --no-git-tag-version --yes
+
 workflows:
   version: 2
   main:
     jobs:
       - system
+      - release:
+          requires:
+            - system
+          filters:
+            branches:
+              only:
+                - master
       - deploy:
           requires:
             - system
