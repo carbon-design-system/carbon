@@ -11,21 +11,23 @@
 
 Use these modifiers with `.bx--inline-notification` class.
 
-| Selector                            | Description                            |
-| ----------------------------------- | -------------------------------------- |
-| `.bx--inline-notification--error`   | Apply error color to border and icon   |
-| `.bx--inline-notification--success` | Apply success color to border and icon |
-| `.bx--inline-notification--info`    | Apply info color to border and icon    |
-| `.bx--inline-notification--warning` | Apply warning color to border and icon |
+| Selector                                 | Description                                                    |
+| ---------------------------------------- | -------------------------------------------------------------- |
+| `.bx--inline-notification--low-contrast` | Use low contrast variant (The color scheme used until `v10.2`) |
+| `.bx--inline-notification--error`        | Apply error color to border and icon                           |
+| `.bx--inline-notification--success`      | Apply success color to border and icon                         |
+| `.bx--inline-notification--info`         | Apply info color to border and icon                            |
+| `.bx--inline-notification--warning`      | Apply warning color to border and icon                         |
 
 Use these modifiers with `.bx--toast-notification` class.
 
-| Selector                           | Description                        |
-| ---------------------------------- | ---------------------------------- |
-| `.bx--toast-notification--error`   | Apply error color on left border   |
-| `.bx--toast-notification--success` | Apply success color on left border |
-| `.bx--toast-notification--info`    | Apply info color on left border    |
-| `.bx--toast-notification--warning` | Apply warning color on left border |
+| Selector                                | Description                                                    |
+| --------------------------------------- | -------------------------------------------------------------- |
+| `.bx--toast-notification--low-contrast` | Use low contrast variant (The color scheme used until `v10.2`) |
+| `.bx--toast-notification--error`        | Apply error color on left border                               |
+| `.bx--toast-notification--success`      | Apply success color on left border                             |
+| `.bx--toast-notification--info`         | Apply info color on left border                                |
+| `.bx--toast-notification--warning`      | Apply warning color on left border                             |
 
 ### JavaScript
 

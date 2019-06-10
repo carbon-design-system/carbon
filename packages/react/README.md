@@ -20,7 +20,8 @@ yarn add carbon-components-react carbon-components carbon-icons
 
 1. These components require the use of
    [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your
-   project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an
+   project. See our
+   [`webpack.config.js`](/packages/react/.storybook/webpack.config.js) for an
    example configuration.
 
 2. Components do not import any of the styles themselves, use the scss or css
@@ -34,9 +35,9 @@ yarn add carbon-components-react carbon-components carbon-icons
    is required.
 
 If you just want to try out `carbon-components-react`, you can also use
-[CodeSandbox](https://codesandbox.io/s/github/IBM/carbon-components-react/tree/master/examples/codesandbox).
+[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox).
 
-[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/IBM/carbon-components-react/tree/master/examples/codesandbox)
+[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox)
 
 ## Usage
 

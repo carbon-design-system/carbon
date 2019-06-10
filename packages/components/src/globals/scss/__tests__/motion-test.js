@@ -7,7 +7,7 @@
  * @jest-environment node
  */
 
-const { renderSass } = require('../../../../tools/jest/scss');
+const { createSassRenderer } = require('@carbon/test-utils/scss');
 
 const variables = [
   'carbon--ease-in',
@@ -17,13 +17,15 @@ const variables = [
   'transition--expansion',
 ];
 
+const render = createSassRenderer(__dirname);
+
 describe('motion', () => {
-  describe.each(variables)('$%s', async name => {
+  describe.each(variables)('$%s', name => {
     // Temporarily test for regression since these variables were initially
     // under _vars.scss
     it('should be exported through _vars.scss', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/vars';
+      const { calls } = await render(`
+@import '../vars';
 
 $c: test(global-variable-exists(${name}));
 `);
@@ -33,8 +35,8 @@ $c: test(global-variable-exists(${name}));
 
     // New location
     it('should be exported through _motion.scss', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/motion';
+      const { calls } = await render(`
+@import '../motion';
 
 $c: test(global-variable-exists(${name}));
 `);
@@ -45,8 +47,8 @@ $c: test(global-variable-exists(${name}));
 
   describe('motion function', () => {
     it('should be exported', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/motion';
+      const { calls } = await render(`
+@import '../motion';
 
 $c: test(function-exists(motion));
 $c: test(function-exists(carbon--motion));
@@ -59,8 +61,8 @@ $c: test(function-exists(carbon--motion));
 
   describe('motion mixin', () => {
     it('should be exported', async () => {
-      const { calls } = await renderSass(`
-@import './src/globals/scss/motion';
+      const { calls } = await render(`
+@import '../motion';
 
 $c: test(mixin-exists(motion));
 $c: test(mixin-exists(carbon--motion));

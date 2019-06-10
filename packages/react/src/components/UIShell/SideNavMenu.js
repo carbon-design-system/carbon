@@ -79,6 +79,7 @@ export class SideNavMenu extends React.Component {
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]: isActive,
+      [`${prefix}--side-nav__item--icon`]: IconElement,
       [customClassName]: !!customClassName,
     });
     return (
