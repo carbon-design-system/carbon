@@ -132,6 +132,7 @@
     input[type='password'],
     textarea {
       border-radius: 0;
+      font-family: inherit;
     }
 
     input[type='text']::-ms-clear {
