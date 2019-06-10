@@ -97,9 +97,9 @@ export class ${className}Directive implements AfterViewInit {
       const title = document.createElement("title");
       title.textContent = attributes.title;
       ${className}Directive.titleIdCounter++;
-      title.setAttribute("id", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
+      title.setAttribute("id", \`${iconName}-$\{${className}Directive.titleIdCounter}\`);
       svg.appendChild(title);
-      svg.setAttribute("aria-labelledby", \`${iconName}-\$\{${className}Directive.titleIdCounter\}\`);
+      svg.setAttribute("aria-labelledby", \`${iconName}-$\{${className}Directive.titleIdCounter}\`);
     }
 	}
 }

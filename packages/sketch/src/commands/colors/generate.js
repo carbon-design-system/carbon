@@ -24,7 +24,7 @@ export function generate() {
       sharedStyles,
       sharedStyle => {
         const { name } = sharedStyle;
-        const [category, swatch, grade] = name.split('/');
+        const [_category, swatch] = name.split('/');
         switch (swatch) {
           case 'black':
           case 'white':
@@ -50,7 +50,7 @@ export function generate() {
     Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
 
     const swatches = groupByKey(colors, sharedStyle => {
-      const [category, swatch, grade] = sharedStyle.name.split('/');
+      const [_category, swatch] = sharedStyle.name.split('/');
       return swatch;
     });
 

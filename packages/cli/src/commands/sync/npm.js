@@ -19,7 +19,7 @@ const defaultIgnorePatterns = [
 
 function run({ packagePaths }) {
   return Promise.all(
-    packagePaths.map(async ({ packageJson, packagePath }) => {
+    packagePaths.map(async ({ packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
       const ignorePatterns = defaultIgnorePatterns.slice();
 

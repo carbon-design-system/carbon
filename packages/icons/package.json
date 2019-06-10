@@ -34,7 +34,6 @@
   "devDependencies": {
     "@carbon/cli-reporter": "10.2.0",
     "change-case": "^3.0.2",
-    "del": "^3.0.0",
     "js-yaml": "^3.12.1",
     "klaw-sync": "^6.0.0",
     "memfs": "^2.14.0",

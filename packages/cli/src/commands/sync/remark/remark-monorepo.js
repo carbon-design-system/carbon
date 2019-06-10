@@ -10,11 +10,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-function monorepo(options) {
-  const { root } = options;
-  const packageJsonPath = path.join(root, 'package.json');
-  const packageJson = fs.readJsonSync(packageJsonPath);
-
+function monorepo() {
   async function transformer(tree, file) {
     const { cwd } = file;
     const localPackageJsonPath = path.join(cwd, 'package.json');
