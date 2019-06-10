@@ -351,6 +351,25 @@ const rowsExpandable = [
     attachedGroups: "Maureen's VM Groups",
     status: 'Active',
   },
+  {
+    sectionContent:
+      /* eslint-disable max-len */
+      ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
+    `,
+    select: {
+      id: `${prefix}--checkbox-12`,
+      name: 'checkbox-12',
+      value: 'green',
+      label: 'Label name',
+    },
+    section: true,
+    name: 'Load Balancer 1',
+    protocol: 'HTTP',
+    port: '80',
+    rule: 'Round Robin',
+    attachedGroups: "Maureen's VM Groups",
+    status: 'Active',
+  },
 ];
 
 module.exports = {
@@ -663,6 +682,32 @@ module.exports = {
         hasToolbar: true,
         sort: true,
         displayOverflowMenus: true,
+      },
+    },
+    {
+      name: 'small',
+      label: 'Small (mobile) breakpoint',
+      context: {
+        state: 'persistent-search',
+        title: 'Table title',
+        columns: columnsExpandable,
+        rows: rowsExpandable,
+        searchInputId: 'search__input-2',
+        searchLabelId: 'search-input-label-1',
+        searchLabel: 'Search',
+        clearSearchLabel: 'Clear search input',
+        hasToolbar: true,
+        sort: true,
+        isSmall: true,
+        batchActions,
+        toolbarActions,
+        toolbarActionsX,
+        selectedItemsCounterLabel: `
+          <span data-items-selected>3</span> items selected
+        `,
+        addNewLabel: 'Add new',
+        cancelLabel: 'Cancel',
+        sortLabel: 'Sort rows by this header in descending order',
       },
     },
   ],

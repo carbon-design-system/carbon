@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
+
+/// Data table small style
+/// @access private
+/// @group data-table
+@mixin data-table-small {
+  .#{$prefix}--data-table--small {
+    tbody .td-small {
+      border: none !important;
+      display: block;
+      box-shadow: none;
+    }
+    tbody tr.#{$prefix}--parent-row {
+      border-top: 1px solid $ui-01;
+      border-bottom: 1px solid $ui-03;
+    }
+    tbody tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
+      border-bottom: none;
+    }
+    tbody tr.#{$prefix}--expandable-row--hidden td {
+      border-bottom: 1px solid $ui-03 !important;
+    }
+    tbody tr.#{$prefix}--expandable-row--hidden:hover td {
+      transition: background $duration--fast-02 motion(standard, productive);
+    }
+  }
+}
+@include exports('data-table-small') {
+  @include data-table-small;
+}

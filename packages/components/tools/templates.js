@@ -84,6 +84,22 @@ const loadContents = glob =>
   getContents(glob).then(contents => {
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
+      Handlebars.registerHelper('isFirstDataTd', function(columns, index) {
+        var firstDataTdIndex = 0;
+        for (var i = 0; i < columns.length; ++i) {
+          if (
+            columns[i].section |
+            columns[i].checkbox |
+            columns[i].additionalIcons |
+            columns[i].menu
+          ) {
+            ++firstDataTdIndex;
+          } else {
+            break;
+          }
+        }
+        return firstDataTdIndex === index;
+      });
       contents.set(templateName, Handlebars.compile(content));
     });
     return contents;
