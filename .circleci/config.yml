@@ -23,8 +23,17 @@ jobs:
           name: Check for generated files that have not been committed
           command: |
             if [ -n "$(git status --porcelain)" ]; then
-              echo "Your git status is not clean. You might have forgot to check-in the following files:";
+              echo "Your git status is not clean. You may have forgotten to check-in the following files:";
               echo "$(git status --porcelain)";
+              exit 1;
+            fi
+
+            yarn sync
+
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Your git status is not clean. You may have forgotten to sync the following package.json files:";
+              echo "$(git status --porcelain)";
+              echo 'You can fix this by running: `yarn sync`';
               exit 1;
             fi
       - run:

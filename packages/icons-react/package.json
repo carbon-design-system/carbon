@@ -3,8 +3,8 @@
   "description": "React components for icons in digital and software products using the Carbon Design System",
   "version": "10.3.0",
   "license": "Apache-2.0",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons-react",
-  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -15,7 +15,9 @@
     "elements",
     "carbon",
     "carbon-elements",
-    "carbon-design-system"
+    "carbon-design-system",
+    "components",
+    "react"
   ],
   "publishConfig": {
     "access": "public"
