@@ -60,9 +60,15 @@ export class ${className}Directive implements AfterViewInit {
     const svg = this.elementRef.nativeElement;
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
-    svg.innerHTML = \`${svg
-      .replace(/<svg[\s\S]*?>/g, '')
-      .replace(/<\/svg>/g, '')}\`;
+    const domParser = new DOMParser();
+    const rawSVG = \`${svg}\`;
+    const svgElement = domParser.parseFromString(rawSVG, "image/svg+xml").documentElement;
+
+    let node = svgElement.firstChild;
+    while (node) {
+      svg.appendChild(node);
+      node = node.nextSibling;
+    }
 
     const attributes = getAttributes({
       width: ${attrs.width},
@@ -117,10 +123,10 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
       icon.moduleName
     )}&gt;&lt;/ibm-icon-${param(icon.moduleName)}&gt;</code></p>
     <ibm-icon-${param(icon.moduleName)}></ibm-icon-${param(icon.moduleName)}>
-    <p>Directive <code>&lt;svg ibmIcon${
+    <p>Directive <code>&lt;svg ibmIcon${pascal(
       icon.moduleName
-    }&gt;&lt;/svg&gt;</code></p>
-    <svg ibmIcon${icon.moduleName}></svg>
+    )}&gt;&lt;/svg&gt;</code></p>
+    <svg ibmIcon${pascal(icon.moduleName)}></svg>
   \`
 }))
 .add("${icon.moduleName} with label", () => ({
@@ -128,7 +134,7 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
     <ibm-icon-${param(
       icon.moduleName
     )} ariaLabel="label for the icon"></ibm-icon-${param(icon.moduleName)}>
-    <svg ibmIcon${icon.moduleName} ariaLabel="label for the icon"></svg>
+    <svg ibmIcon${pascal(icon.moduleName)} ariaLabel="label for the icon"></svg>
   \`
 }))
 .add("${icon.moduleName} with title", () => ({
@@ -136,7 +142,7 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
     <ibm-icon-${param(icon.moduleName)} title="icon title"></ibm-icon-${param(
   icon.moduleName
 )}>
-    <svg ibmIcon${icon.moduleName} title="icon title"></svg>
+    <svg ibmIcon${pascal(icon.moduleName)} title="icon title"></svg>
   \`
 }))
 .add("${icon.moduleName} with class on the SVG", () => ({
@@ -146,7 +152,9 @@ const iconStoryTemplate = icon => `.add("${icon.moduleName}", () => ({
     )} innerClass="test-class another-class"></ibm-icon-${param(
   icon.moduleName
 )}>
-    <svg ibmIcon${icon.moduleName} class="test-class another-class"></svg>
+    <svg ibmIcon${pascal(
+      icon.moduleName
+    )} class="test-class another-class"></svg>
   \`
 }))`;
 
