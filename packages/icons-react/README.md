@@ -41,11 +41,18 @@ const Add24 = require('@carbon/icons-react/lib/Add/24');
 _Note: if you would like to find the import path for an icon, you can reference
 our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
 
+## 📚 Examples
+
+If you're looking for more examples on how to use `@carbon/icons-react`, we have
+some examples that you can check out:
+
+- [create-react-app](./examples/create-react-app)
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 
