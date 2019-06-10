@@ -83,8 +83,8 @@ supports styling the inner `!` path.
 In order to style the inner path, you will need to target the SVG using CSS. In
 general, you can target the path by writing the following:
 
-```
-svg [data-icon-path="inner-path"] {
+```css
+svg [data-icon-path='inner-path'] {
   fill: blue;
   opacity: 1;
 }
@@ -111,7 +111,7 @@ If you're looking for `@carbon/icons` API documentation, check out:
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 
