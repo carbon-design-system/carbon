@@ -9,7 +9,9 @@
 @import 'variables';
 @import 'functions';
 @import 'header';
-@import 'product-switcher';
+@import 'header-panel';
+@import 'product-switcher'; // TODO needs to be depracated and redone to match react
+@import 'switcher';
 @import 'side-nav';
 @import 'navigation-menu';
 @import 'content';

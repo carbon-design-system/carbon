@@ -88,8 +88,9 @@ storiesOf('Tooltip', module)
     {
       info: {
         text: `
-            Tooltips are used to supply additional information to an element when hovering over it. By default,
-            the tooltip will render above the element. The example below shows the default scenario.
+            Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+            For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+            By default, the tooltip will render above the element. The example below shows the default scenario.
           `,
       },
     }
@@ -120,8 +121,9 @@ storiesOf('Tooltip', module)
     {
       info: {
         text: `
-            Tooltips are used to supply additional information to an element when hovering over it. By default,
-            the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+            Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+            For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+            By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
           `,
       },
     }
@@ -152,8 +154,9 @@ storiesOf('Tooltip', module)
     {
       info: {
         text: `
-            Tooltips are used to supply additional information to an element when hovering over it. By default,
-            the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+            Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+            For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+            By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
           `,
       },
     }
@@ -184,8 +187,9 @@ storiesOf('Tooltip', module)
     {
       info: {
         text: `
-            Tooltips are used to supply additional information to an element when hovering over it. By default,
-            the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+            Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+            For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+            By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
           `,
       },
     }

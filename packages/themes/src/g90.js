@@ -115,6 +115,9 @@ export const disabled03 = gray50;
 
 export const highlight = blue90;
 
+export const skeleton01 = '#353535';
+export const skeleton02 = gray70;
+
 // Deprecated ☠️
 export const brand01 = interactive01;
 export const brand02 = interactive02;

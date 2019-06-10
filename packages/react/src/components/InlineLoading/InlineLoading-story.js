@@ -16,6 +16,10 @@ import InlineLoading from '../InlineLoading';
 
 const props = () => ({
   success: boolean('Loading successful state (success)', false),
+  iconDescription: text(
+    'Icon description (iconDescription)',
+    'Active loading indicator'
+  ),
   description: text(
     'Loading progress description (description)',
     'Loading data...'
@@ -105,7 +109,7 @@ storiesOf('InlineLoading', module)
       info: {
         text: `
             This is a full example of how to levarage the <InlineLoading /> component to create a nice user experience when submitting a form.
-    
+
             For the full source code of this example, check out the 'story' panel below.
           `,
       },

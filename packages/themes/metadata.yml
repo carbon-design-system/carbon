@@ -191,6 +191,12 @@ tokens:
   - name: highlight
     role:
       - interactive01 high light
+  - name: skeleton01
+    role:
+      - Skeleton state of graphics
+  - name: skeleton02
+    role:
+      - Skeleton state of text
   - name: brand01
     alias: interactive01
     deprecated: true
