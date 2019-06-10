@@ -13,14 +13,18 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const SwitcherItem = React.forwardRef(function SwitcherItem(props) {
+const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   const { className: customClassName, children } = props;
 
   const className = cx(`${prefix}--switcher__item`, {
     [customClassName]: !!customClassName,
   });
 
-  return <li className={className}>{children}</li>;
+  return (
+    <li ref={ref} className={className}>
+      {children}
+    </li>
+  );
 });
 
 SwitcherItem.propTypes = {
