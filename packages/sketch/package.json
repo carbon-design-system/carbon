@@ -1,9 +1,21 @@
 {
   "name": "@carbon/sketch",
-  "description": "Tooling for generating a sketch plugin to bring code to design",
   "private": true,
+  "description": "Tooling for generating a sketch plugin to bring code to design",
   "version": "10.3.0",
   "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/sketch",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "cross-env NODE_ENV=production skpm-build",
     "clean": "rimraf carbon-elements.sketchplugin",

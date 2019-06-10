@@ -64,7 +64,6 @@ async function bundle(entrypoint, options) {
             },
           ],
         ],
-        plugins: ['macros'],
       }),
       nodeResolve({
         jsnext: true,
