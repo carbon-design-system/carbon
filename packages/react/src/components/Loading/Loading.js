@@ -73,7 +73,7 @@ export default class Loading extends React.Component {
         aria-live={active ? 'assertive' : 'off'}
         className={loadingClasses}>
         <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
-          <title>Loading</title>
+          <title>{description}</title>
           {small ? (
             <circle
               className={`${prefix}--loading__background`}
