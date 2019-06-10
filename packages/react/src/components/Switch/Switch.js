@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { match, keyCodes, keys } from '../../tools/key';
+import { matches, keyCodes } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -38,10 +38,10 @@ const Switch = props => {
     onClick({ index, name, text });
   };
 
-  const handleKeyDown = e => {
-    const key = e.key || e.which;
+  const handleKeyDown = event => {
+    const key = event.key;
 
-    if (match(key, keyCodes.RIGHT) || match(key, keyCodes.LEFT)) {
+    if (matches(event, [keyCodes.RIGHT, keyCodes.LEFT])) {
       onKeyDown({ index, name, text, key });
     }
   };
