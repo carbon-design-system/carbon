@@ -84,13 +84,23 @@ const loadContents = glob =>
   getContents(glob).then(contents => {
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
+      var uids = [];
+      Handlebars.registerHelper('uid', function() {
+        var uid = Math.random();
+        if (uids.includes(uid)) {
+          uid = Handlebars.helpers.uid.apply(this);
+        } else {
+          uids.push(uid);
+        }
+        return uid;
+      });
       Handlebars.registerHelper('isFirstDataTd', function(columns, index) {
         var firstDataTdIndex = 0;
         for (var i = 0; i < columns.length; ++i) {
           if (
-            columns[i].section |
-            columns[i].checkbox |
-            columns[i].additionalIcons |
+            columns[i].section ||
+            columns[i].checkbox ||
+            columns[i].additionalIcons ||
             columns[i].menu
           ) {
             ++firstDataTdIndex;

@@ -14,14 +14,10 @@
 /// @group data-table
 @mixin data-table-small {
   .#{$prefix}--data-table--small--min-width {
+    min-width: auto; //IE doesn't support `initial`
     min-width: initial;
   }
   .#{$prefix}--data-table--small {
-    tbody .td-small {
-      border: none !important;
-      display: block;
-      box-shadow: none;
-    }
     tbody tr.#{$prefix}--parent-row {
       border-top: 1px solid $ui-01;
       border-bottom: 1px solid $ui-03;
@@ -29,8 +25,20 @@
     tbody tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       border-bottom: none;
     }
-    tbody tr.#{$prefix}--expandable-row--hidden td {
-      border-bottom: 1px solid $ui-03 !important;
+    tbody
+      tr.#{$prefix}--parent-row:not(.bx--expandable-row):first-of-type:hover
+      td {
+      border: none;
+    }
+    tbody tr.#{$prefix}--parent-row td.td-small {
+      border: none;
+      display: block;
+      box-shadow: none;
+    }
+    tbody
+      tr.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hidden
+      > td {
+      border-bottom: 1px solid $ui-03;
     }
     tbody tr.#{$prefix}--expandable-row--hidden:hover td {
       transition: background $duration--fast-02 motion(standard, productive);
