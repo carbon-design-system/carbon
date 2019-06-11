@@ -13,17 +13,13 @@ const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
 const virtual = require('rollup-plugin-virtual');
-const {
-  createModuleFromInfo,
-  createEntrypointFromMeta,
-} = require('./createFromInfo');
+const { createModuleFromInfo } = require('./createFromInfo');
 const createIconStory = require('./createIconStory');
 
 const STORYBOOK_DIR = path.resolve(__dirname, '../examples/storybook/stories');
 
 async function build({ cwd }) {
   reporter.info(`Building components for ${meta.length} icons...`);
-  const ESM_DIR = path.join(cwd, 'es');
   const BUNDLE_FORMATS = [
     {
       format: 'esm',
@@ -40,7 +36,6 @@ async function build({ cwd }) {
   ];
 
   reporter.info('Building ESM and bundle sources...');
-  const babel = require('@babel/core');
 
   await Promise.all(
     meta.map(async info => {

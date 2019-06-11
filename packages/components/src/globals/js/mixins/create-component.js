@@ -20,7 +20,7 @@ export default function(ToMix) {
      * and registers this component't instance associated to an element.
      * @implements Handle
      * @param {HTMLElement} element The element working as this component.
-     * @param {Object} [options] The component options.
+     * @param {object} [options] The component options.
      */
     constructor(element, options = {}) {
       super(element, options);

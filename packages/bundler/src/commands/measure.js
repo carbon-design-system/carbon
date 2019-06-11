@@ -17,10 +17,7 @@ const gzipSize = require('gzip-size');
 const { reporter } = require('@carbon/cli-reporter');
 const compile = require('../tools/compile');
 
-async function measure(
-  pattern,
-  { cwd, entrypoint, monorepo = false, output, ignore = [] }
-) {
+async function measure(pattern, { cwd, output, ignore = [] }) {
   const outputFilename = 'results.json';
   const outputFilepath = output
     ? path.join(output, outputFilename)
@@ -33,9 +30,6 @@ async function measure(
     cwd,
     ignore,
   });
-  const defaultOptions = {
-    includePaths: ['node_modules', '../../node_modules'],
-  };
 
   const results = await Promise.all(
     compile(files.map(file => path.join(cwd, file)))
@@ -122,7 +116,7 @@ function printResults(prevResults, results) {
     head: resultsHeaders.map(label => chalk.gray.yellow(label)),
   });
 
-  results.forEach((result, index) => {
+  results.forEach(result => {
     const prevResult =
       prevResults.find(prevResult => {
         return (

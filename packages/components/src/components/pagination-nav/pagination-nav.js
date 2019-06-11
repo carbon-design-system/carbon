@@ -187,7 +187,7 @@ class PaginationNav extends mixin(
    * or {@linkcode PaginationNav.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode PaginationNav.init .init()} works.
    * @member PaginationNav.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The data attribute to find pagination nav.
    * @property {string} selectorPageElement The data attribute to find page element.
    * @property {string} selectorPageButton The data attribute to find page interactive element.

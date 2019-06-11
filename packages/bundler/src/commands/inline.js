@@ -50,11 +50,7 @@ async function inlineSassDependencies(
   ];
   const inlinedDependencies = (await Promise.all(
     allPossibleDependencies.map(async dependency => {
-      const [
-        packageFolder,
-        scssFolder,
-        localPackageJsonPath,
-      ] = await findSassModule(dependency, cwd);
+      const [packageFolder, scssFolder] = await findSassModule(dependency, cwd);
       if (packageFolder) {
         const dependencyOutputFolder = path.join(vendorFolder, dependency);
 

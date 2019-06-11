@@ -39,7 +39,7 @@ const init = () => {
 
 /**
  * Replaces the list of components to initialize.
- * @param {Object} componentsToReplaceWith The new list of components.
+ * @param {object} componentsToReplaceWith The new list of components.
  */
 export const setComponents = componentsToReplaceWith => {
   components = componentsToReplaceWith;

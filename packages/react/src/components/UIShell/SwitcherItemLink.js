@@ -13,7 +13,10 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const SwitcherItemLink = React.forwardRef(function SwitcherItemLink(props) {
+const SwitcherItemLink = React.forwardRef(function SwitcherItemLink(
+  props,
+  ref
+) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -33,7 +36,7 @@ const SwitcherItemLink = React.forwardRef(function SwitcherItemLink(props) {
   });
 
   return (
-    <a className={className} {...accessibilityLabel}>
+    <a ref={ref} className={className} {...accessibilityLabel}>
       {children}
     </a>
   );

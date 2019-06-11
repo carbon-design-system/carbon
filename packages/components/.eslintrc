@@ -1,33 +1,3 @@
 {
-  "root": true,
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "script"
-  },
-  "env": {
-    "node": true,
-    "es6": true
-  },
-  "extends": [
-    "carbon-base"
-  ],
-  "rules": {
-    "comma-dangle": [
-      2,
-      {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "never"
-      }
-    ],
-    "max-len": [2, 130, 4],
-    "no-param-reassign": [2, { "props": false }],
-    "no-plusplus": 0,
-    "no-underscore-dangle": 0,
-    "prefer-rest-params": 0,
-    "import/no-extraneous-dependencies": [2, {"devDependencies": true}],
-    "import/order": 0
-  }
+  "extends": ["eslint-config-carbon/vanilla"]
 }
