@@ -38,7 +38,7 @@ export default class TextArea extends mixin(
 
   /**
    * Updates the character counter
-   * @param {Object} obj - The elements that can change in the component
+   * @param {object} obj - The elements that can change in the component
    * @param {HTMLElement} obj.element - The textarea element
    * @param {HTMLElement} obj.length - The length of the textarea value
    */

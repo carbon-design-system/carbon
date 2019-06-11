@@ -137,7 +137,7 @@ that you can use:
 ## Updating icon metadata
 
 The icons have metadata that are stored in `metadata.yml`. The metadata are used
-to surface information such as usage, available sizes, categories amd variants.
+to surface information such as usage, available sizes, categories and variants.
 Metadata of an icon is also used to track its `aliases`, which are used to
 enable search. You can help us make our icon search more robust by refining and
 expanding this list of aliases. Follow these steps to create an icon metadata

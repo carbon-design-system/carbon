@@ -26,7 +26,7 @@ class Dropdown extends mixin(
    * @extends InitComponentBySearch
    * @extends TrackBlur
    * @param {HTMLElement} element The element working as a selector.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
@@ -235,7 +235,7 @@ class Dropdown extends mixin(
    * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
    * @member Dropdown.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find selectors.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.

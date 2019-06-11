@@ -66,19 +66,19 @@ export const getNextSortState = (props, state, { key }) => {
  * Derive the set of sorted state fields from props and state for the given
  * header key and sortDirection
  *
- * @param {Object} props
+ * @param {object} props
  * @param {string} props.locale The current locale
  * @param {Function} props.sortRows Method to handle sorting a collection of
  * rows
- * @param {Object} state
+ * @param {object} state
  * @param {Array<string>} state.rowIds Array of row ids
- * @param {Object} state.cellsById Lookup object for cells by id
+ * @param {object} state.cellsById Lookup object for cells by id
  * @param {Array<string>} state.initialRowOrder Initial row order for the
  * current set of rows
  * @param {string} key The key for the given header we are derving the
  * sorted state for
  * @param {string} sortDirection The sortState that we want to order by
- * @returns {Object}
+ * @returns {object}
  */
 export const getSortedState = (props, state, key, sortDirection) => {
   const { rowIds, cellsById, initialRowOrder } = state;

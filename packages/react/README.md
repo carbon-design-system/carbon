@@ -20,7 +20,8 @@ yarn add carbon-components-react carbon-components carbon-icons
 
 1. These components require the use of
    [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your
-   project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an
+   project. See our
+   [`webpack.config.js`](/packages/react/.storybook/webpack.config.js) for an
    example configuration.
 
 2. Components do not import any of the styles themselves, use the scss or css
