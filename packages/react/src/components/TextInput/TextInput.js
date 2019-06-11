@@ -9,9 +9,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, EditOff16 } from '@carbon/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
+import Tooltip from '../Tooltip';
 import { textInputProps } from './util';
 
 const { prefix } = settings;
@@ -29,6 +30,8 @@ const TextInput = React.forwardRef(function TextInput(
     invalidText,
     helperText,
     light,
+    readOnly,
+    readOnlyIconLabel,
     ...other
   },
   ref
@@ -54,6 +57,7 @@ const TextInput = React.forwardRef(function TextInput(
     type,
     ref,
     className: textInputClasses,
+    readOnly,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -73,12 +77,23 @@ const TextInput = React.forwardRef(function TextInput(
       {invalidText}
     </div>
   ) : null;
-  const input = (
+  const inputField = (
     <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
   );
-  const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
-  ) : null;
+  const input =
+    readOnly && inputField.value ? (
+      <Tooltip showIcon={false} triggerText={inputField}>
+        {inputField.value}
+      </Tooltip>
+    ) : (
+      inputField
+    );
+  const helper = (() => {
+    const helperContent = helperText ? (
+      <div className={helperTextClasses}>{helperText}</div>
+    ) : null;
+    return helperContent;
+  })();
 
   return (
     <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
@@ -89,6 +104,13 @@ const TextInput = React.forwardRef(function TextInput(
         data-invalid={invalid || null}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
+        )}
+        {readOnly && (
+          <div
+            className={`${prefix}--text-input__readonly-icon`}
+            aria-label={readOnlyIconLabel}>
+            <EditOff16 />
+          </div>
         )}
         {input}
       </div>
@@ -177,6 +199,16 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+
+  /**
+   * The maximum allowed input value length
+   */
+  readOnly: PropTypes.bool,
+
+  /**
+   * The label for the read-only status icon
+   */
+  readOnlyIconLabel: PropTypes.string,
 };
 
 TextInput.defaultProps = {
@@ -188,6 +220,8 @@ TextInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  readOnly: false,
+  readOnlyIconLabel: 'This input field is read-only',
 };
 
 export default TextInput;
