@@ -99,7 +99,7 @@
     }
 
     .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-      padding-right: rem(64px);
+      padding-right: $carbon--spacing-10;
     }
 
     .#{$prefix}--text-input--invalid
