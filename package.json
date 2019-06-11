@@ -91,16 +91,18 @@
       "git add"
     ],
     "packages/components/**/*.scss": [
-      "yarn format:staged",
+      "prettier --write",
       "git add"
     ],
     "*.md": [
-      "yarn format:staged",
+      "prettier --write",
       "git add"
     ]
   },
   "eslintConfig": {
-    "extends": ["eslint-config-carbon"]
+    "extends": [
+      "eslint-config-carbon"
+    ]
   },
   "prettier": {
     "jsxBracketSameLine": true,
