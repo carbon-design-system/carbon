@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { match, keyCodes } from './key';
+
 /**
  * Various utilities to help with a11y work
  */
@@ -22,10 +24,10 @@
  */
 
 const getNextIndex = (key, index, arrayLength) => {
-  if (key === 'ArrowRight') {
+  if (match(key, keyCodes.RIGHT)) {
     return (index + 1) % arrayLength;
   }
-  if (key === 'ArrowLeft') {
+  if (match(key, keyCodes.LEFT)) {
     return (index + arrayLength - 1) % arrayLength;
   }
 };
