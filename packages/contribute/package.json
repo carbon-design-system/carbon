@@ -1,0 +1,20 @@
+{
+  "name": "@carbon/contribute",
+  "version": "10.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/contribute",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "yargs": "^13.2.4"
+  }
+}
