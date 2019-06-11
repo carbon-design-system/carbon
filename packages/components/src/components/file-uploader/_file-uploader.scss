@@ -129,6 +129,7 @@
   }
 
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
+    @include type-style('caption-01');
     display: block;
     max-height: none;
     color: $support-01;
