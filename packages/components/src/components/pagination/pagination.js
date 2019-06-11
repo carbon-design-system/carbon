@@ -21,7 +21,7 @@ class Pagination extends mixin(
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a pagination component.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @property {string} [selectorInit] The CSS selector to find pagination components.
    * @property {string} [selectorItemsPerPageInput]
    *   The CSS selector to find the input that determines the number of items per page.
@@ -85,7 +85,7 @@ class Pagination extends mixin(
   /**
    * Dispatches a custom event
    * @param {string} evtName name of the event to be dispatched.
-   * @param {Object} detail contains the original event and any other necessary details.
+   * @param {object} detail contains the original event and any other necessary details.
    */
   _emitEvent = (evtName, detail) => {
     const event = new CustomEvent(`${evtName}`, {

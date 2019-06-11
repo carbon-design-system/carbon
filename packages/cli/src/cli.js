@@ -12,7 +12,7 @@ const packageJson = require('../package.json');
 
 const commands = [require('./commands/ci-check'), require('./commands/sync')];
 
-async function main({ argv, cwd }) {
+async function main({ argv }) {
   cli
     .scriptName(packageJson.name)
     .version(packageJson.version)

@@ -26,12 +26,10 @@
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn lint && yarn test --runInBand && yarn test-ssr",
+    "ci-check": "yarn test-ssr",
     "clean": "rimraf es lib umd storybook-static",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
-    "lint": "eslint src",
-    "lint:staged": "eslint",
     "prepublish": "yarn build",
     "semantic-release": "semantic-release",
     "start": "yarn storybook",
@@ -82,7 +80,6 @@
     "@storybook/react": "^5.1.3",
     "all-contributors-cli": "^5.2.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dev-expression": "^0.2.1",
@@ -99,10 +96,6 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",
-    "eslint": "^5.16.0",
-    "eslint-plugin-jsdoc": "^4.8.3",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
     "gzip-size": "^5.0.0",
     "jest": "^24.0.0",
     "jest-circus": "^24.0.0",
@@ -134,67 +127,6 @@
     "whatwg-fetch": "^2.0.3"
   },
   "sideEffects": false,
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": [
-      "eslint:recommended",
-      "plugin:jsx-a11y/recommended"
-    ],
-    "plugins": [
-      "react",
-      "jsdoc",
-      "jsx-a11y"
-    ],
-    "rules": {
-      "react/jsx-uses-vars": 1,
-      "react/jsx-uses-react": 1,
-      "react/no-find-dom-node": 1,
-      "react/no-typos": 2,
-      "jsdoc/check-param-names": 2,
-      "jsdoc/check-tag-names": 2,
-      "jsdoc/check-types": 2,
-      "jsx-a11y/no-static-element-interactions": 1,
-      "jsx-a11y/no-noninteractive-element-interactions": 1,
-      "jsx-a11y/click-events-have-key-events": 1,
-      "jsx-a11y/anchor-is-valid": 1,
-      "jsx-a11y/interactive-supports-focus": 1,
-      "jsx-a11y/label-has-for": [
-        1,
-        {
-          "components": [
-            "Label"
-          ],
-          "required": {
-            "some": [
-              "nesting",
-              "id"
-            ]
-          },
-          "allowChildren": true
-        }
-      ]
-    },
-    "env": {
-      "node": true,
-      "browser": true,
-      "es6": true,
-      "jest": true,
-      "jasmine": true
-    },
-    "globals": {
-      "__DEV__": true
-    },
-    "settings": {
-      "jsdoc": {
-        "tagNamePreference": {
-          "augments": "extends"
-        }
-      },
-      "react": {
-        "version": "detect"
-      }
-    }
-  },
   "babel": {
     "presets": [
       "./scripts/env",
@@ -252,5 +184,34 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "bundleSizeThreshold": 120000
+  "contributors": [
+    {
+      "name": "Brian Han",
+      "email": "bthan@us.ibm.com"
+    },
+    {
+      "name": "Aziz Punjani",
+      "email": "punjani@us.ibm.com"
+    },
+    {
+      "name": "Mari Johannessen",
+      "email": "mjohannessen@us.ibm.com"
+    },
+    {
+      "name": "TJ Egan",
+      "email": "twegan@us.ibm.com"
+    },
+    {
+      "name": "Ian Fleming",
+      "email": "ianfleming@us.ibm.com"
+    },
+    {
+      "name": "Chris Dhanaraj",
+      "email": "chrisdhanaraj@us.ibm.com"
+    }
+  ],
+  "bundleSizeThreshold": 120000,
+  "release": {
+    "branch": "master"
+  }
 }

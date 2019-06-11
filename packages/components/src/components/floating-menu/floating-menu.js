@@ -41,7 +41,7 @@ export const DIRECTION_RIGHT = 'right';
 export const DIRECTION_BOTTOM = 'bottom';
 
 /**
- * @param {Object} params The parameters.
+ * @param {object} params The parameters.
  * @param {FloatingMenu~size} params.menuSize The size of the menu.
  * @param {FloatingMenu~position} params.refPosition The position of the triggering element.
  * @param {FloatingMenu~offset} [params.offset={ left: 0, top: 0 }] The position offset of the menu.
@@ -101,7 +101,7 @@ class FloatingMenu extends mixin(
    * @extends CreateComponent
    * @extends EventedShowHideState
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorContainer] The CSS selector to find the container to put this menu in.
    * @param {string} [options.attribDirection] The attribute name to specify menu placement direction (top/right/bottom/left).
    * @param {string} [options.classShown] The CSS class for shown state, for the menu.
@@ -119,7 +119,7 @@ class FloatingMenu extends mixin(
    *   The name of the custom event telling that menu is sure hidden
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`floating-menu-beinghidden`).
    * @param {Element} [options.refNode] The launching element of the menu. Used for calculating the geometry of the menu.
-   * @param {Object} [options.offset] The offset to adjust the geometry of the menu. Should have `top`/`left` properties.
+   * @param {object} [options.offset] The offset to adjust the geometry of the menu. Should have `top`/`left` properties.
    */
   constructor(element, options) {
     super(element, options);
@@ -168,7 +168,7 @@ class FloatingMenu extends mixin(
 
   /**
    * @private
-   * @returns {Object} The menu position, with `top` and `left` properties.
+   * @returns {object} The menu position, with `top` and `left` properties.
    */
   _getPos() {
     const { element } = this;
@@ -253,7 +253,7 @@ class FloatingMenu extends mixin(
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
