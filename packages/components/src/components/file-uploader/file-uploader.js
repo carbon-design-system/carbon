@@ -110,6 +110,14 @@ class FileUploader extends mixin(
 
   _changeState = (state, detail, callback) => {
     if (state === 'delete-filename-fileuploader') {
+      // remove form requirement when invalid items are removed
+      const { nextElementSibling } = detail.filenameElement;
+      if (
+        nextElementSibling.classList.contains(this.options.classFormRequirement)
+      ) {
+        this.container.removeChild(nextElementSibling);
+      }
+
       this.container.removeChild(detail.filenameElement);
     }
     if (typeof callback === 'function') {
@@ -275,6 +283,7 @@ class FileUploader extends mixin(
       classSelectedFile: `${prefix}--file__selected-file`,
       classStateContainer: `${prefix}--file__state-container`,
       classDragOver: `${prefix}--file__drop-container--drag-over`,
+      classFormRequirement: `${prefix}--form-requirement`,
       eventBeforeDeleteFilenameFileuploader:
         'fileuploader-before-delete-filename',
       eventAfterDeleteFilenameFileuploader:
