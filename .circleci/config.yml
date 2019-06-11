@@ -23,8 +23,17 @@ jobs:
           name: Check for generated files that have not been committed
           command: |
             if [ -n "$(git status --porcelain)" ]; then
-              echo "Your git status is not clean. You might have forgot to check-in the following files:";
+              echo "Your git status is not clean. You may have forgotten to check-in the following files:";
               echo "$(git status --porcelain)";
+              exit 1;
+            fi
+
+            yarn sync
+
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Your git status is not clean. You may have forgotten to sync the following package.json files:";
+              echo "$(git status --porcelain)";
+              echo 'You can fix this by running: `yarn sync`';
               exit 1;
             fi
       - run:
@@ -32,34 +41,92 @@ jobs:
           command: |
             yarn ci-check
             yarn lerna run ci-check
+
+  deploy:
+    docker:
+      - image: circleci/node:10.15-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
       - deploy:
           name: deploy to IBM Cloud
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # Install `ibmcloud` CLI
-              curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
+            # Install `ibmcloud` CLI
+            curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
 
-              # Login and push staging manifest
-              ibmcloud login \
-                --apikey $CLOUD_API_KEY \
-                -a https://api.ng.bluemix.net \
-                -o carbon-design-system
+            # Login and push staging manifest
+            ibmcloud login \
+              --apikey $CLOUD_API_KEY \
+              -a https://api.ng.bluemix.net \
+              -o carbon-design-system
 
-              ibmcloud target -s production
+            ibmcloud target -s production
 
-              ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-              ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
+            ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
+            ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
 
-              # Default storybook build
-              cd packages/react
-              yarn build-storybook
-              ibmcloud cf blue-green-deploy carbon-storybook \
-                -f manifest.yml \
-                --delete-old-apps
-            fi
+            # Default storybook build
+            cd packages/react
+            yarn build-storybook
+            ibmcloud cf blue-green-deploy carbon-storybook \
+              -f manifest.yml \
+              --delete-old-apps
+
+  release:
+    docker:
+      - image: circleci/node:10.15-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
+      - run:
+          name: Publish canary packages
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+            yarn lerna publish --canary minor --dist-tag canary --no-push --no-git-tag-version --yes
 
 workflows:
   version: 2
   main:
     jobs:
       - system
+      - release:
+          requires:
+            - system
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - system
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/

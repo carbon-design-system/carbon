@@ -7,15 +7,6 @@
 
 'use strict';
 
-const prettier = require('prettier');
-
-const prettierOptions = {
-  parser: 'babylon',
-  printWidth: 80,
-  singleQuote: true,
-  trailingComma: 'es5',
-};
-
 function createIconStory(info) {
   const { moduleName, outputOptions } = info;
   return `import { storiesOf } from '@storybook/vue';

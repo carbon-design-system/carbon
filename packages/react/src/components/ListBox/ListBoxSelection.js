@@ -23,10 +23,13 @@ const ListBoxSelection = ({
   selectionCount,
   translateWithId: t,
 }) => {
-  const className = cx({
-    [`${prefix}--list-box__selection`]: true,
-    [`${prefix}--list-box__selection--multi`]: selectionCount,
-  });
+  const className = cx(
+    `${prefix}--tag--filter`,
+    `${prefix}--list-box__selection`,
+    {
+      [`${prefix}--list-box__selection--multi`]: selectionCount,
+    }
+  );
   const handleOnClick = event => {
     event.stopPropagation();
     clearSelection(event);

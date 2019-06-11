@@ -33,6 +33,11 @@ If you're just getting started, check out
 [`carbon-components`](./packages/components). If you're looking for React
 components, take a look at [`carbon-components-react`](./packages/react).
 
+We also have community-contributed components for the following technologies:
+
+- [Angular](https://github.com/IBM/carbon-components-angular)
+- [Vue](https://github.com/carbon-design-system/carbon-components-vue)
+
 If you're trying to find something specific, here's a full list of packages that
 we support!
 

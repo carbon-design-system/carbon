@@ -7,23 +7,12 @@
 
 import { colors } from '@carbon/colors';
 import { formatTokenName } from '@carbon/themes';
-import { SharedStyle, Style } from 'sketch/dom';
+import { Style } from 'sketch/dom';
 import { syncSharedStyle } from '../tools/sharedStyles';
 
 // We separate out certain colors that are not a part of the primary swatches
 // that we need to render
 const { black, white, orange, yellow, ...swatches } = colors;
-const colorNames = Object.keys(colors);
-
-// Color names in JavaScript will be camelCase, so we need to map them over to
-// the token name. For example: `warmGray` becomes `warm-gray`
-const formattedSwatchNames = colorNames.reduce(
-  (acc, key, i) => ({
-    ...acc,
-    [formatTokenName(key)]: colorNames[i],
-  }),
-  {}
-);
 
 // We need to build up our expected shared styles from code to diff with what
 // currently exists in the document. For this case, we'll use the shared style
@@ -51,7 +40,7 @@ expectedSharedStyles[formatSharedStyleName('yellow')] = yellow['20'];
 /**
  * Sync color shared styles to the given document and return the result
  * @param {Document} document
- * @return {Array<SharedStyle>}
+ * @returns {Array<SharedStyle>}
  */
 export function syncColorStyles(document) {
   const { sharedLayerStyles } = document;
@@ -96,7 +85,7 @@ export function syncColorStyles(document) {
  * name for the swatch and an optional grade.
  * @param {string} name
  * @param {string?} grade
- * @return {string}
+ * @returns {string}
  */
 function formatSharedStyleName(name, grade) {
   return ['color', name, grade].filter(Boolean).join('/');
@@ -107,7 +96,7 @@ function formatSharedStyleName(name, grade) {
  * @param {Document} document
  * @param {string} name
  * @param {string} value
- * @return {SharedStyle}
+ * @returns {SharedStyle}
  */
 function syncColorStyle(document, name, value) {
   return syncSharedStyle(document, name, {

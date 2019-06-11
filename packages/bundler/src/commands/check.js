@@ -21,9 +21,6 @@ async function check(pattern, { ignore, cwd, list } = {}) {
     cwd,
     ignore,
   });
-  const defaultOptions = {
-    includePaths: ['node_modules', '../../node_modules'],
-  };
 
   reporter.info(`Compiling ${files.length} files...`);
 

@@ -11,19 +11,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@angular-devkit/core": "^0.6.1",
-    "@angular/common": "6",
-    "@angular/compiler": "6",
-    "@angular/core": "6",
-    "@angular/forms": "6",
-    "@angular/platform-browser": "6",
-    "@angular/platform-browser-dynamic": "6",
-    "@babel/core": "7",
-    "@storybook/angular": "^4.0.7",
-    "babel-loader": "7",
-    "rxjs": "6",
-    "tslint": "4",
+    "@angular-devkit/core": "8.0.2",
+    "@angular/common": "8.0.0",
+    "@angular/compiler": "8.0.0",
+    "@angular/core": "8.0.0",
+    "@angular/forms": "8.0.0",
+    "@angular/platform-browser": "8.0.0",
+    "@angular/platform-browser-dynamic": "8.0.0",
+    "@babel/core": "7.4.5",
+    "@storybook/angular": "5.1.3",
+    "core-js": "3.1.3",
+    "rxjs": "6.4.0",
+    "autoprefixer": "8.1.0",
+    "tslint": "5.17.0",
     "typescript": "2.9.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "0.9.1"
   }
 }

@@ -15,7 +15,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * A navigation menu
    * @extends NavigationMenuPanel
    * @param {HTMLElement} element The element working as a selector.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorInit] The CSS class to find navigation
    * menus.
    * @param {string} [options.attribInitTarget] The attribute name in the
@@ -239,7 +239,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * properties in this object are overriden for the instance being create and
    * how {@linkcode NavigationMenu.init .init()} works.
    * @member NavigationMenu.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS class to find navigation menus.
    * @property {string} attribInitTarget The attribute name in the
    * launcher buttons to find target navigation menu.

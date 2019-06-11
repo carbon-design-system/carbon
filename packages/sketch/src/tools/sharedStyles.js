@@ -11,9 +11,9 @@ import { SharedStyle } from 'sketch/dom';
  * Sync a shared style within a document.
  * @param {Document} document
  * @param {string} name
- * @param {Object} style
+ * @param {object} style
  * @param {StyleType?} styleType
- * @return {SharedStyle}
+ * @returns {SharedStyle}
  */
 export function syncSharedStyle(
   document,

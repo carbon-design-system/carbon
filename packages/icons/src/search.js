@@ -51,7 +51,7 @@ async function search(directory) {
 
   const files = await _search(directory);
   const prefixed = files.map(file => {
-    const { filepath, size } = file;
+    const { filepath } = file;
     const dirname = path.dirname(filepath);
     const prefix = path
       .relative(directory, dirname)
