@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
-import { getNextIndex } from '../../tools/a11y';
+import { getNextIndex } from '../../tools/keyboard-navigation';
 
 const { prefix } = settings;
 
