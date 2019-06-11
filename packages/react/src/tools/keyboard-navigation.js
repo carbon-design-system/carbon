@@ -13,9 +13,9 @@
  * A "ring buffer" function that takes an array and depending on an ArrowRight
  * or ArrowLeft key input loops from last index to first or first index to last.
  *
- * @param key - the left or right arrow keys
- * @param index - the current index in a given array
- * @param arrayLength - the total length of the array
+ * @param {string} key - the left or right arrow keys
+ * @param {number} index - the current index in a given array
+ * @param {number} arrayLength - the total length of the array
  *
  * @example
  * 	getNextIndex(keyCodes.RIGHT, 0, 4)
