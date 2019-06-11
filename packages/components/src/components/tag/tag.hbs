@@ -5,13 +5,17 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-{{#each tags}}
-<span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}">{{label}}</span>
-{{/each}}
+<div role="list">
+  {{#each tags}}
+  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--{{type}}" role="listitem">{{label}}</span>
+  {{/each}}
+</div>
 
-{{#if filter}}
-<span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" tabindex="0">
-  filter
-  {{ carbon-icon 'Close16' aria-label='Clear filter' }}
-</span>
-{{/if}}
+<div role="list">
+  {{#if filter}}
+  <span class="{{@root.prefix}}--tag {{@root.prefix}}--tag--filter" title="Clear filter" tabindex="0" role="listitem">
+    filter
+    {{ carbon-icon 'Close16' aria-label='Clear filter' }}
+  </span>
+  {{/if}}
+</div>
