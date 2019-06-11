@@ -364,12 +364,12 @@ class Tooltip extends Component {
       'aria-haspopup': 'true',
       'aria-expanded': open,
       // if the user provides property `triggerText`,
-      // then the button should use aria-describedby to point to its id,
+      // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
       // then an aria-label will be provided via the `iconDescription` property.
       ...(triggerText
         ? {
-            'aria-describedby': triggerId,
+            'aria-labelledby': triggerId,
           }
         : {
             'aria-label': iconDescription,
