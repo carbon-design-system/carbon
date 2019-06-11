@@ -28,7 +28,7 @@ const Switch = props => {
   const tabRef = useRef(null);
 
   useEffect(() => {
-    if (selected && tabRef.current) {
+    if (selected && document.activeElement !== tabRef.current) {
       tabRef.current.focus();
     }
   }, [selected, tabRef.current]);
