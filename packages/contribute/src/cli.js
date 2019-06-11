@@ -10,7 +10,7 @@
 const cli = require('yargs');
 const packageJson = require('../package.json');
 
-const commands = [];
+const commands = [require('./commands/setup')];
 
 async function main({ argv, cwd }) {
   cli
@@ -18,13 +18,11 @@ async function main({ argv, cwd }) {
     .version(packageJson.version)
     .usage('Usage: $0 [options]');
 
-  cli.command('setup', 'get your machine ready for contributing 🥳', {}, () => {
-    console.log('setup');
-  });
-
-  // for (const command of commands) {
-  // command.register(cli);
-  // }
+  for (const command of commands) {
+    command.register(cli, {
+      cwd: cwd(),
+    });
+  }
 
   cli.strict().parse(argv.slice(2)).argv;
 }

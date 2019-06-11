@@ -15,6 +15,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@octokit/plugin-retry": "^2.2.0",
+    "@octokit/plugin-throttling": "^2.6.0",
+    "@octokit/rest": "^16.28.1",
+    "enquirer": "^2.3.0",
     "yargs": "^13.2.4"
   }
 }
