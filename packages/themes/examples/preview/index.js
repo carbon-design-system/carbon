@@ -250,36 +250,35 @@ function ThemeSwitcher() {
   });
 
   return (
-        <div className="bx--grid">
-          <div className="bx--row">
-            <div className="bx--col">
-              <h2>Custom Properties</h2>
-            </div>
+    <div className="bx--grid">
+      <div className="bx--row">
+        <div className="bx--col">
+          <h2>Custom Properties</h2>
+        </div>
+      </div>
+      <div className="bx--row">
+        <div className="bx--col">
+          <p>Current theme: <code>{theme}</code></p>
+          <div>
+            <p>Change theme</p>
+            <button onClick={() => setTheme('white')}><code>white</code></button>
+            <button onClick={() => setTheme('g10')}><code>g10</code></button>
+            <button onClick={() => setTheme('g90')}><code>g90</code></button>
+            <button onClick={() => setTheme('g100')}><code>g100</code></button>
           </div>
-          <div className="bx--row">
-            <div className="bx--col">
-              <p>Current theme: <code>{theme}</code></p>
-              <div>
-                <p>Change theme</p>
-                <button onClick={() => setTheme('white')}><code>white</code></button>
-                <button onClick={() => setTheme('g10')}><code>g10</code></button>
-                <button onClick={() => setTheme('g90')}><code>g90</code></button>
-                <button onClick={() => setTheme('g100')}><code>g100</code></button>
+          <div className={className}>
+            <p>Tokens</p>
+            {['field-01', 'field-02', 'inverse-01', 'inverse-02'].map(token => (
+              <div
+                key={token}
+                style={{ width: 100, height: 100, background: `var(--${token})` }}>
+                <code>{token}</code>
               </div>
-              <div className={className}>
-                <p>Tokens</p>
-                {['field-01', 'field-02', 'inverse-01', 'inverse-02'].map(token => (
-                  <div
-                    key={token}
-                    style={{ width: 100, height: 100, background: `var(--${token})` }}>
-                    <code>{token}</code>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-
+      </div>
+    </div>
   );
 }
 
