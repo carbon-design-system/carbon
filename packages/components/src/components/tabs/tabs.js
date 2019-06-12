@@ -17,7 +17,7 @@ class Tab extends ContentSwitcher {
    * Container of tabs.
    * @extends ContentSwitcher
    * @param {HTMLElement} element The element working as a container of tabs.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
    * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
    * @param {string} [options.selectorTriggerText]
@@ -57,7 +57,7 @@ class Tab extends ContentSwitcher {
   /**
    * Internal method of {@linkcode Tab#setActive .setActive()}, to select a tab item.
    * @private
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {HTMLElement} detail.item The tab item to be selected.
    * @param {Function} callback Callback called when change in state completes.
    */
@@ -197,7 +197,7 @@ class Tab extends ContentSwitcher {
    * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode Tab.init .init()} works.
    * @member Tab.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find tab containers.
    * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
    * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.

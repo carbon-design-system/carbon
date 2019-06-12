@@ -7,11 +7,8 @@
 
 'use strict';
 
-const { reporter } = require('@carbon/cli-reporter');
 const program = require('commander');
-const path = require('path');
 const packageJson = require('../package.json');
-const bundlers = require('./bundlers');
 const bundle = require('./commands/bundle');
 const check = require('./commands/check');
 const inline = require('./commands/inline');

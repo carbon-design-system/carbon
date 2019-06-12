@@ -27,8 +27,8 @@
     "clean": "node tasks/clean.js"
   },
   "peerDependencies": {
-    "@angular/compiler": "^6.0.0 || ^7.0.0",
-    "@angular/core": "^6.0.0 || ^7.0.0"
+    "@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "dependencies": {
     "@carbon/icon-helpers": "10.2.0"

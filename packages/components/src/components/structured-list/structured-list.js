@@ -26,7 +26,7 @@ class StructuredList extends mixin(
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The root element of tables
-   * @param {Object} [options] the... options
+   * @param {object} [options] the... options
    * @param {string} [options.selectorInit] selector initialization
    * @param {string} [options.selectorRow] css selector for selected row
    */

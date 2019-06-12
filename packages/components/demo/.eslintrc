@@ -1,8 +1,12 @@
 {
   "root": true,
   "extends": [
-    "../src/.eslintrc.js"
+    "eslint-config-carbon/vanilla"
   ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
   "rules": {
     "import/no-extraneous-dependencies": [
       2,

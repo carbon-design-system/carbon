@@ -7,6 +7,8 @@
  * @jest-environment jsdom
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 const Module = require('module');

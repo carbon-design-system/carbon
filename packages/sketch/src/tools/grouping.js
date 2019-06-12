@@ -12,7 +12,7 @@
  *
  * @param {Array} collection
  * @param {Function} sorter
- * @return {Array}
+ * @returns {Array}
  * @example
  *   const array = [1, 2, 3, 4];
  *   const { even, odd } = groupByKey(array, number => {

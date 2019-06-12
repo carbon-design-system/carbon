@@ -13,7 +13,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['carbon-base'],
+  extends: ['eslint-config-carbon/vanilla'],
   globals: {
     jasmine: true,
     describe: true,
