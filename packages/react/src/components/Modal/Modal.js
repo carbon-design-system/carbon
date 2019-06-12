@@ -165,7 +165,7 @@ export default class Modal extends Component {
     }
   };
 
-  handleClick = evt => {
+  handleMousedown = evt => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
@@ -329,7 +329,7 @@ export default class Modal extends Component {
       <div
         {...other}
         onKeyDown={this.handleKeyDown}
-        onClick={this.handleClick}
+        onMouseDown={this.handleMousedown}
         onBlur={this.handleBlur}
         className={modalClasses}
         role="presentation"
