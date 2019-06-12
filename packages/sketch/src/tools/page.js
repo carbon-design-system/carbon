@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Document, Page } from 'sketch/dom';
+import { Page } from 'sketch/dom';
 
 /**
  * Find or create a page for the given document context and page name
  * @param {Document} document
  * @param {string} name
- * @return {Page}
+ * @returns {Page}
  */
 export function findOrCreatePage(document, name) {
   const [page] = document.pages.filter(page => page.name === name);
@@ -29,7 +29,7 @@ export function findOrCreatePage(document, name) {
 /**
  * Select the given page, making it the active page in the document
  * @param {Page} page
- * @return {Page}
+ * @returns {Page}
  */
 export function selectPage(page) {
   page.selected = true;

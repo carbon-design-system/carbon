@@ -7,13 +7,13 @@
 
 import { white, g10, g90, g100, formatTokenName } from '@carbon/themes';
 import color from 'color-string';
-import { SharedStyle, Style } from 'sketch/dom';
+import { Style } from 'sketch/dom';
 import { syncSharedStyle } from '../tools/sharedStyles';
 
 /**
  * Sync theme color shared styles to the given document and return the result
  * @param {Document} document
- * @return {Array<SharedStyle>}
+ * @returns {Array<SharedStyle>}
  */
 export function syncThemeColorStyles(document) {
   const themes = {
@@ -67,7 +67,7 @@ export function syncThemeColorStyles(document) {
  * @param {Document} document
  * @param {string} name
  * @param {string} value
- * @return {SharedStyle}
+ * @returns {SharedStyle}
  */
 function syncColorStyle(document, name, value) {
   return syncSharedStyle(document, name, {
@@ -86,7 +86,7 @@ const keywords = ['ui'];
  * Transform a formatted token name back to its JavaScript value to look up the
  * expected value for a token from code
  * @param {string} token
- * @return {string}
+ * @returns {string}
  */
 function formatSymbolName(token) {
   const parts = token.split('-');

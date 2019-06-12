@@ -10,7 +10,6 @@
 'use strict';
 
 const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
-const path = require('path');
 const { formatTokenName, themes, tokens } = require('../src');
 
 const render = createSassRenderer(__dirname);
@@ -74,14 +73,14 @@ $t: test(mixin-exists(carbon--theme));
         return [variable, themes[key].interactive01, test];
       });
       const tests = themeTests
-        .map(([variable, expectedColor, test]) => test)
+        .map(([_variable, _expectedColor, test]) => test)
         .join('\n');
       const { calls } = await render(`
 @import '../scss/themes';
 ${tests}
 `);
 
-      themeTests.forEach(([variable, expectedColor], i) => {
+      themeTests.forEach(([_variable, expectedColor], i) => {
         expect(convert(calls[i][0])).toBe(expectedColor);
       });
     });

@@ -10,9 +10,9 @@ import { getCellId } from './cells';
 /**
  * Normalize a collection of rows with the given headers.
  *
- * @param {Array<Object>} rows
- * @param {Array<Object>} headers
- * @returns {Object}
+ * @param {Array<object>} rows
+ * @param {Array<object>} headers
+ * @returns {object}
  */
 const normalize = (rows, headers, prevState = {}) => {
   const { rowsById: prevRowsByIds } = prevState;

@@ -54,7 +54,7 @@ class CopyButton extends mixin(
    * If `options` is specified in the constructor, {@linkcode CopyBtn.create .create()}, or {@linkcode CopyBtn.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode CopyBtn.init .init()} works.
    * @member CopyBtn.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The data attribute to find copy button UIs.
    * @property {string} feedbackTooltip The data attribute to find feedback tooltip.
    * @property {string} classShowFeedback The CSS selector for showing the feedback tooltip.

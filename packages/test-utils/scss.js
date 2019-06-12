@@ -27,7 +27,7 @@ function sassAsync(options) {
  * Create an importer for sass with the given `cwd`. This importer will try and
  * mimic the default sass resolution algorithm
  * @param {string} cwd
- * @return {Function}
+ * @returns {Function}
  */
 function createImporter(cwd) {
   return (url, prev, done) => {
@@ -62,7 +62,7 @@ function createImporter(cwd) {
  * is useful so that we can resolve sass files relative to the test file.
  * @param {string} cwd
  * @param {string} initialData - optional string to prefix each render call
- * @return {Function}
+ * @returns {Function}
  */
 function createSassRenderer(cwd, initialData = '') {
   const importer = createImporter(cwd);

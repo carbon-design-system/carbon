@@ -22,7 +22,7 @@ async function optimize(folder, { cwd, buildDir = `${cwd}/svg` } = {}) {
   reporter.info(`Optimizing ${files.length} icons...`);
 
   const optimized = await flatMapAsync(files, async file => {
-    const { filepath, basename, size, prefix } = file;
+    const { filepath } = file;
     const source = await fs.readFile(filepath);
     const optimized = await svgo.optimize(source, {
       path: filepath,
@@ -37,7 +37,7 @@ async function optimize(folder, { cwd, buildDir = `${cwd}/svg` } = {}) {
 
   await Promise.all(
     optimized.map(async file => {
-      const { filename, prefix, optimized, size, source } = file;
+      const { filename, prefix, optimized } = file;
       const outputDir = path.join(buildDir, ...prefix);
       const target = path.join(outputDir, filename);
 
