@@ -46,10 +46,11 @@ const TextArea = ({
   light,
   charCount,
   maxLength,
+  defaultValue,
   renderCharCounter: CharCounter = DefaultCharCounter,
   ...other
 }) => {
-  const [textareaVal, setInput] = useState('');
+  const [textareaVal, setInput] = useState(defaultValue);
   const textareaProps = {
     id,
     onChange: evt => {
