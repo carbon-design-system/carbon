@@ -74,6 +74,7 @@ async function build() {
     t.Comment(`/ Define theme variables from a map of tokens
 / @access public
 / @param {Map} $theme [$${defaultThemeMapName}] - Map of theme tokens
+/ @param {Bool} $emit-custom-properties [false] - Output CSS Custom Properties for theme tokens
 / @content Pass in your custom declaration blocks to be used after the token maps set theming variables.
 /
 / @example scss
