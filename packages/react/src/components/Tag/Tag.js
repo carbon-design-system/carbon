@@ -26,7 +26,15 @@ const TYPES = {
   'warm-gray': 'Warm-Gray',
 };
 
-const Tag = ({ children, className, type, filter, disabled, ...other }) => {
+const Tag = ({
+  children,
+  className,
+  type,
+  filter,
+  disabled,
+  listItem,
+  ...other
+}) => {
   const tagClass = `${prefix}--tag--${type}`;
   const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
     [`${prefix}--tag--disabled`]: disabled,
@@ -36,13 +44,14 @@ const Tag = ({ children, className, type, filter, disabled, ...other }) => {
     <span
       className={tagClasses}
       title="Clear filter"
+      role={listItem && 'listitem'}
       tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
       <Close16 aria-label="Clear filter" />
     </span>
   ) : (
-    <span className={tagClasses} {...other}>
+    <span role={listItem && 'listitem'} className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
   );
@@ -73,6 +82,11 @@ Tag.propTypes = {
    * Determine if <Tag> is a filter/chip
    */
   filter: PropTypes.bool,
+
+  /**
+   * Adds the role="listitem" attribute to a tag -- for use when tags are rendered in UL
+   */
+  listItem: PropTypes.bool,
 };
 
 export const types = Object.keys(TYPES);
