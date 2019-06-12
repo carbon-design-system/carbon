@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { keys, match } from '../../tools/key';
@@ -21,6 +21,8 @@ const ToggleSmall = ({
   onToggle,
   id,
   ariaLabel,
+  labelA,
+  labelB,
   ...other
 }) => {
   let input;
@@ -63,16 +65,34 @@ const ToggleSmall = ({
       />
 
       <label className={`${prefix}--toggle__label`} htmlFor={id}>
-        <span className={`${prefix}--toggle__appearance`}>
-          <svg
-            className={`${prefix}--toggle__check`}
-            width="6px"
-            height="5px"
-            viewBox="0 0 6 5">
-            <path d="M2.2403 2.7299L4.9245 0 6 1.1117 2.2384 5 0 2.6863 1.0612 1.511z" />
-          </svg>
-        </span>
-        <span className={`${prefix}--assistive-text`}>{ariaLabel}</span>
+        {labelA && labelB ? (
+          <Fragment>
+            <span
+              className={`${prefix}--toggle__text--left`}
+              aria-hidden="true">
+              {labelA}
+            </span>
+            <span className={`${prefix}--toggle__appearance`} />
+            <span
+              className={`${prefix}--toggle__text--right`}
+              aria-hidden="true">
+              {labelB}
+            </span>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <span className={`${prefix}--toggle__appearance`}>
+              <svg
+                className={`${prefix}--toggle__check`}
+                width="6px"
+                height="5px"
+                viewBox="0 0 6 5">
+                <path d="M2.2403 2.7299L4.9245 0 6 1.1117 2.2384 5 0 2.6863 1.0612 1.511z" />
+              </svg>
+            </span>
+            <span className={`${prefix}--assistive-text`}>{ariaLabel}</span>
+          </Fragment>
+        )}
       </label>
     </div>
   );
@@ -108,6 +128,16 @@ ToggleSmall.propTypes = {
    * The `aria-label` attribute for the toggle
    */
   ariaLabel: PropTypes.string.isRequired,
+
+  /**
+   * Specify the label for the "off" position
+   */
+  labelA: PropTypes.string,
+
+  /**
+   * Specify the label for the "on" position
+   */
+  labelB: PropTypes.string,
 };
 
 ToggleSmall.defaultProps = {
