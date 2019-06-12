@@ -26,46 +26,8 @@ const colorNameLookup = Object.keys(colors).reduce(
 const tokens = Object.keys(themes[Object.keys(themes)[0]]);
 
 function App() {
-  const [theme, setTheme] = useState('white');
-  const className = cx({
-    'theme--white': theme === 'white',
-    'theme--g10': theme === 'g10',
-    'theme--g90': theme === 'g90',
-    'theme--g100': theme === 'g100',
-  });
   return (
     <React.Fragment>
-      <section>
-        <div className="bx--grid">
-          <div className="bx--row">
-            <div className="bx--col">
-              <h2>Custom Properties</h2>
-            </div>
-          </div>
-          <div className="bx--row">
-            <div className="bx--col">
-              <p>Current theme <code>{theme}</code></p>
-              <div>
-                <p>Set themes</p>
-                <button onClick={() => setTheme('white')}><code>white</code></button>
-                <button onClick={() => setTheme('g10')}><code>g10</code></button>
-                <button onClick={() => setTheme('g90')}><code>g90</code></button>
-                <button onClick={() => setTheme('g100')}><code>g100</code></button>
-              </div>
-              <div className={className}>
-                <p>Tokens</p>
-                {['field-01', 'field-02', 'inverse-01', 'inverse-02'].map(token => (
-                  <div
-                    key={token}
-                    style={{ width: 100, height: 100, background: `var(--${token})` }}>
-                    <code>{token}</code>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <div className="bx--grid">
         <div className="bx--row">
           <div className="bx--col">
@@ -82,6 +44,9 @@ function App() {
               </li>
               <li>
                 <a href="#theming">Theming</a>
+              </li>
+              <li>
+                <a href="#custom-properties">Custom Properties</a>
               </li>
             </ul>
           </div>
@@ -268,8 +233,55 @@ $custom-theme: map-merge(
           </div>
         </div>
       </section>
+      <section id="custom-properties">
+        <ThemeSwitcher />
+      </section>
     </React.Fragment>
   );
 }
+
+function ThemeSwitcher() {
+  const [theme, setTheme] = useState('white');
+  const className = cx({
+    'theme--white': theme === 'white',
+    'theme--g10': theme === 'g10',
+    'theme--g90': theme === 'g90',
+    'theme--g100': theme === 'g100',
+  });
+
+  return (
+        <div className="bx--grid">
+          <div className="bx--row">
+            <div className="bx--col">
+              <h2>Custom Properties</h2>
+            </div>
+          </div>
+          <div className="bx--row">
+            <div className="bx--col">
+              <p>Current theme: <code>{theme}</code></p>
+              <div>
+                <p>Change theme</p>
+                <button onClick={() => setTheme('white')}><code>white</code></button>
+                <button onClick={() => setTheme('g10')}><code>g10</code></button>
+                <button onClick={() => setTheme('g90')}><code>g90</code></button>
+                <button onClick={() => setTheme('g100')}><code>g100</code></button>
+              </div>
+              <div className={className}>
+                <p>Tokens</p>
+                {['field-01', 'field-02', 'inverse-01', 'inverse-02'].map(token => (
+                  <div
+                    key={token}
+                    style={{ width: 100, height: 100, background: `var(--${token})` }}>
+                    <code>{token}</code>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+  );
+}
+
 
 render(<App />);

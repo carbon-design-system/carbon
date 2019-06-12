@@ -152,21 +152,6 @@ async function build() {
           colorMap,
         ]),
       }),
-
-      t.Comment(`/ Define color custom properties
-/ @access public
-/ @group @carbno/colors`),
-      t.SassMixin({
-        id: t.Identifier(`${NAMESPACE}--color-custom-properties`),
-        body: t.BlockStatement([
-          ...colorValues.map(({ grade, swatch, value }) =>
-            t.Declaration({
-              property: `--${swatch}-${grade}`,
-              value,
-            })
-          ),
-        ]),
-      }),
     ],
   });
 
