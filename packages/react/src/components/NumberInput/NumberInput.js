@@ -40,14 +40,13 @@ const capMax = (max, value) =>
 class NumberInput extends Component {
   constructor(props) {
     super(props);
-    const { defaultValue, value: propValue, min } = props;
     let value =
-      useControlledStateWithValue || value === undefined
-        ? defaultValue
-        : propValue;
+      useControlledStateWithValue || props.value === undefined
+        ? props.defaultValue
+        : props.value;
     value = value === undefined ? 0 : value;
-    if (min || min === 0) {
-      value = Math.max(min, value);
+    if (props.min || props.min === 0) {
+      value = Math.max(props.min, value);
     }
     this.state = { value };
   }
