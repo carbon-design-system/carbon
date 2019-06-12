@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { breakpoint, breakpoints, px, rem } from '@carbon/layout';
+import { px, rem } from '@carbon/layout';
 import { fluid } from './fluid';
 import { fontWeights } from './fontWeight';
 import { scale } from './scale';

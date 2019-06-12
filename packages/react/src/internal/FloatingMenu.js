@@ -61,7 +61,7 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
 };
 
 /**
- * @param {Object} params The parameters.
+ * @param {object} params The parameters.
  * @param {FloatingMenu~size} params.menuSize The size of the menu.
  * @param {FloatingMenu~position} params.refPosition The position of the triggering element.
  * @param {FloatingMenu~offset} [params.offset={ left: 0, top: 0 }] The position offset of the menu.

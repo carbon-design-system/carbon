@@ -20,7 +20,7 @@ const autoprefixerOptions = {
   browsers: ['last 1 version', 'ie >= 11', 'Firefox ESR'],
 };
 
-async function bundle(entrypoint, options, info) {
+async function bundle(entrypoint, options) {
   reporter.info(`Bundling ${entrypoint}...`);
 
   const basename = options.name || path.basename(entrypoint, '.scss');

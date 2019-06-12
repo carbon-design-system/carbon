@@ -23,7 +23,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The element working as the search component.
-   * @param {Object} [options] The component options
+   * @param {object} [options] The component options
    * @property {string} [options.selectorInit]
    *   The selector to find search UIs with options.
    * @property {string} [options.selectorSearchView]
@@ -101,7 +101,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * properties in this object are overriden for the instance being created
    * and how {@linkcode Search.init .init()} works.
    * @member Search.options
-   * @type {Object}
+   * @type {object}
    * @property {string} [options.selectorInit]
    *   The selector to find search UIs with options.
    * @property {string} [options.selectorSearchView]
