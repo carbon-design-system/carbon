@@ -149,6 +149,11 @@ class Tooltip extends Component {
 
     ...isRequiredOneOf({
       /**
+       * A general purpose aria-label to be read by screen readers
+       */
+      ariaLabel: PropTypes.string,
+
+      /**
        * The content to put into the trigger UI, except the (default) tooltip icon.
        */
       triggerText: PropTypes.node,
@@ -323,6 +328,7 @@ class Tooltip extends Component {
       triggerClassName,
       direction,
       triggerText,
+      ariaLabel,
       showIcon,
       iconName,
       iconDescription,
@@ -363,17 +369,14 @@ class Tooltip extends Component {
       onBlur: this.handleMouse,
       'aria-haspopup': 'true',
       'aria-expanded': open,
-      // if the user provides property `triggerText`,
-      // then the button should use aria-labelledby to point to its id,
-      // if the user doesn't provide property `triggerText`,
-      // then an aria-label will be provided via the `iconDescription` property.
-      ...(triggerText
-        ? {
-            'aria-labelledby': triggerId,
-          }
-        : {
-            'aria-label': iconDescription,
-          }),
+      // if the user provides and aria-label go with that
+      // if the user provides triggerText -- set aria-labelledby to that elements ID
+      // if the user provides neither of those set aria-label to icon-description
+      ...(ariaLabel
+        ? { 'aria-label': ariaLabel }
+        : triggerText
+        ? { 'aria-labelledby': triggerId }
+        : { 'aria-label': iconDescription }),
     };
 
     return (
