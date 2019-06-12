@@ -20,7 +20,7 @@ const directions = {
 const props = {
   menu: () => ({
     direction: select('Menu direction (direction)', directions, 'bottom'),
-    ariaLabel: text('ARIA label (ariaLabel)', ''),
+    ariaLabel: text('ARIA label (ariaLabel)', 'Menu'),
     iconDescription: text('Icon description (iconDescription)', ''),
     flipped: boolean('Flipped (flipped)', false),
     onClick: action('onClick'),
