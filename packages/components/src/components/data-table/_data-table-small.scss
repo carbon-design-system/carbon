@@ -36,6 +36,17 @@
       box-shadow: none;
     }
     tbody
+      tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td,
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td:first-of-type,
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+      td,
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+      td:first-of-type {
+      border: none;
+    }
+    tbody
       tr.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hidden
       > td {
       border-bottom: 1px solid $ui-03;
