@@ -248,7 +248,7 @@
                   <label class="bx--label" for="{{uid}}">
                     {{column.title}}
                   </label>
-                  <div id="{{uid}}">
+                  <div id="{{uid 'repeat'}}">
                 {{/if}}
                 {{#if ../../truncate}}
                   <span class="{{@root.prefix}}--table-cell-content" aria-describedby="label-tooltip">{{data}}

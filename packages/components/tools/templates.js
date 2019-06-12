@@ -85,7 +85,10 @@ const loadContents = glob =>
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
       var uids = [];
-      Handlebars.registerHelper('uid', function() {
+      Handlebars.registerHelper('uid', function(repeatLastUid) {
+        if (repeatLastUid === 'repeat') {
+          return uids[uids.length - 1];
+        }
         var uid = Math.random();
         if (uids.includes(uid)) {
           uid = Handlebars.helpers.uid.apply(this);
