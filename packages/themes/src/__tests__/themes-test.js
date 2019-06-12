@@ -7,7 +7,6 @@
  * @jest-environment node
  */
 
-const path = require('path');
 const { themes, tokens } = require('../');
 
 describe('themes', () => {

@@ -1918,7 +1918,6 @@ exports[`DataTable should render 1`] = `
                 </TableToolbarMenu>
                 <ForwardRef(Button)
                   disabled={false}
-                  iconDescription="Provide icon description if icon is used"
                   kind="primary"
                   onClick={[MockFunction]}
                   small={true}
@@ -2381,7 +2380,6 @@ exports[`DataTable should render 1`] = `
                   <ForwardRef(Button)
                     className="bx--batch-summary__cancel"
                     disabled={false}
-                    iconDescription="Provide icon description if icon is used"
                     kind="primary"
                     onClick={[Function]}
                     small={false}
@@ -2595,7 +2593,7 @@ exports[`DataTable should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
-                    ariaLabel="list of options"
+                    ariaLabel="Menu"
                     className="bx--toolbar-action bx--overflow-menu"
                     direction="bottom"
                     flipped={true}
@@ -2644,13 +2642,13 @@ exports[`DataTable should render 1`] = `
                       <div
                         aria-expanded={false}
                         aria-haspopup={true}
-                        aria-label="list of options"
+                        aria-label="Menu"
                         className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                         onClick={[Function]}
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        role="menu"
+                        role="button"
                         tabIndex={0}
                         title="Settings"
                       >
@@ -2702,7 +2700,6 @@ exports[`DataTable should render 1`] = `
               </TableToolbarMenu>
               <ForwardRef(Button)
                 disabled={false}
-                iconDescription="Provide icon description if icon is used"
                 kind="primary"
                 onClick={[MockFunction]}
                 small={true}

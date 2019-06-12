@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 require('core-js/features/array/flat-map');
 
-const { reporter } = require('@carbon/cli-reporter');
 const { types: t, generate } = require('@carbon/scss-generator');
 const { paramCase } = require('change-case');
 const fs = require('fs-extra');
@@ -43,7 +44,6 @@ async function build() {
   const colorValues = Object.keys(colors).reduce((acc, key) => {
     const swatch = paramCase(key);
     const values = Object.keys(colors[key]).reduce((acc, grade) => {
-      const name = `${swatch}-${grade}`;
       const value = colors[key][grade];
       return acc.concat({
         swatch,
@@ -66,14 +66,6 @@ async function build() {
   const deprecatedColorVariables = colorValues.map(({ grade, swatch, value }) =>
     t.Assignment({
       id: t.Identifier(`ibm-color__${swatch}-${grade}`),
-      init: t.SassColor(value),
-      default: true,
-      global: true,
-    })
-  );
-  const namespacedColorVariables = colorValues.map(({ grade, swatch, value }) =>
-    t.Assignment({
-      id: t.Identifier(`carbon--${swatch}-${grade}`),
       init: t.SassColor(value),
       default: true,
       global: true,

@@ -17,7 +17,7 @@ exports[`ListBoxField should render 1`] = `
       translateWithId={[Function]}
     >
       <div
-        className="bx--list-box__selection"
+        className="bx--tag--filter bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="button"

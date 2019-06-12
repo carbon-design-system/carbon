@@ -83,7 +83,7 @@ export default class NavigationMenuPanel extends mixin(
    * properties in this object are overriden for the instance being create and
    * how {@linkcode NavigationMenuPanel.init .init()} works.
    * @member NavigationMenuPanel.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS class to find popup navs.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target popup nav.
    * @property {string[]} initEventNames The events that the component will handles

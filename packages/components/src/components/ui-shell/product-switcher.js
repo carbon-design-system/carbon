@@ -8,7 +8,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * A navigation menu
    * @extends NavigationMenuPanel
    * @param {HTMLElement} element The element working as a selector.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorInit] The CSS class to find product
    * switchers
    * @param {string} [options.attribInitTarget] The attribute name in the
@@ -171,7 +171,7 @@ export default class ProductSwitcher extends NavigationMenuPanel {
    * properties in this object are overriden for the instance being create and
    * how {@linkcode ProductSwitcher.init .init()} works.
    * @member ProductSwitcher.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS class to find popup navs.
    * @property {string} attribInitTarget The attribute name in the
    * launcher buttons to find target popup nav.

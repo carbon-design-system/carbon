@@ -1,12 +1,12 @@
 {
   "name": "@carbon/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "10.3.0-rc.2",
+  "version": "10.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/elements",
-  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/elements",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -19,7 +19,9 @@
     "elements",
     "carbon",
     "carbon-elements",
-    "carbon-design-system"
+    "carbon-design-system",
+    "components",
+    "react"
   ],
   "publishConfig": {
     "access": "public"
@@ -30,12 +32,12 @@
   },
   "dependencies": {
     "@carbon/colors": "10.2.0",
-    "@carbon/grid": "10.3.0-rc.2",
-    "@carbon/icons": "10.3.0-rc.2",
+    "@carbon/grid": "10.3.0",
+    "@carbon/icons": "10.3.0",
     "@carbon/import-once": "10.2.0",
     "@carbon/layout": "10.2.0",
     "@carbon/motion": "10.2.0",
-    "@carbon/themes": "10.3.0-rc.2",
+    "@carbon/themes": "10.3.0",
     "@carbon/type": "10.2.0"
   },
   "devDependencies": {

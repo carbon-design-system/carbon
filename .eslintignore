@@ -1,0 +1,34 @@
+# Build folders
+/build
+packages/*/build/
+packages/*/examples/*/build/
+es
+lib
+dist
+umd
+
+node_modules
+packages/*/examples/*
+
+# Components
+packages/components/demo/*.css
+packages/components/demo/*.map
+packages/components/demo/*.js
+packages/components/demo/js/prism.js
+packages/components/demo/hot
+!packages/components/demo/index.js
+packages/components/dist
+packages/components/examples/codesandbox
+packages/components/tests/a11y-results
+packages/components/tests/coverage
+packages/components/es
+packages/components/umd
+packages/components/scripts
+packages/components/css
+packages/components/scss
+packages/components/html
+packages/components/docs/js
+packages/components/node_modules
+
+# Sketch
+*.sketchplugin

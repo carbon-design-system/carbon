@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { breakpoint as bp, breakpoints, rem } from '@carbon/layout';
+import { breakpoint as bp, breakpoints } from '@carbon/layout';
 
 const breakpointNames = Object.keys(breakpoints);
 

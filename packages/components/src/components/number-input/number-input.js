@@ -76,7 +76,7 @@ class NumberInput extends mixin(
    * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @member NumberInput.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS selector to find number input UIs.
    * @property {string} [selectorInput] The CSS selector to find the `<input>` element.
    */

@@ -27,7 +27,7 @@ class Modal extends mixin(
    * @extends EventedShowHideState
    * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
@@ -88,7 +88,7 @@ class Modal extends mixin(
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
-   * @param {Object} detail The detail data to be included in the event that will be fired.
+   * @param {object} detail The detail data to be included in the event that will be fired.
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
@@ -198,7 +198,7 @@ class Modal extends mixin(
    * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
    * @member Modal.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
    * @property {string} [selectorModalClose] The selector to find elements that close the modal.
    * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
