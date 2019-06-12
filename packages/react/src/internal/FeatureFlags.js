@@ -17,4 +17,7 @@
  * const MyComponent = props => (<div {...props}>{aFeatureFlag ? 'foo' : 'bar'}</div>);
  */
 
-export const useControlledStateWithEventListener = false;
+/**
+ * Uses `value` prop to turn several components to controlled mode, notablly `<NumberInput>`.
+ */
+export const useControlledStateWithValue = false;
