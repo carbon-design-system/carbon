@@ -103,16 +103,21 @@
       margin-bottom: 0;
     }
 
-    .#{$prefix}--inline-loading__animation,
-    .#{$prefix}--loading {
+    .#{$prefix}--inline-loading__animation {
       right: -0.25rem; // offset for loading svg container
       width: 1.5rem;
       height: 1.5rem;
+    }
+
+    .#{$prefix}--loading {
+      width: rem(21px);
+      height: rem(21px);
     }
   }
 
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
+    outline-width: 1px;
     background-color: $field-01;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
@@ -120,7 +125,7 @@
 
   .#{$prefix}--file__selected-file--invalid {
     margin-bottom: $carbon--spacing-02;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $ui-03;
   }
 
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
@@ -162,7 +167,7 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $support-02;
+    fill: $interactive-01;
     cursor: pointer;
 
     &:focus {
@@ -187,7 +192,7 @@
     justify-content: space-between;
     height: rem(96px);
     max-width: rem(320px);
-    margin-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-03;
     padding: 16px;
     overflow: hidden;
     background: linear-gradient(90deg, $ui-04 66%, transparent 0%) top/6px 1px
