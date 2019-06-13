@@ -460,6 +460,10 @@
       will-change: transform;
     }
 
+    thead tr th {
+      border-bottom: 1px solid $active-ui;
+    }
+
     tbody {
       flex-direction: column;
       overflow-x: scroll;
@@ -472,7 +476,8 @@
       height: auto;
     }
 
-    tbody tr {
+    tr.#{$prefix}--data-table--selected:first-of-type td {
+      border-top: none;
     }
 
     //hides webkit scrollbar
