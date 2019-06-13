@@ -390,8 +390,8 @@
   //----------------------------------------------
   // Small toggle
   // ---------------------------------------------
-  .#{$prefix}--toggle-input--small {
-    + .#{$prefix}--toggle-input__label > .#{$prefix}--toggle__switch {
+  .#{$prefix}--toggle-input--small + .#{$prefix}--toggle-input__label {
+    > .#{$prefix}--toggle__switch {
       width: rem(32px);
       height: rem(16px);
 
@@ -407,15 +407,20 @@
       }
     }
 
-    + .#{$prefix}--toggle-input__label .#{$prefix}--toggle__text--off,
-    + .#{$prefix}--toggle-input__label .#{$prefix}--toggle__text--on {
+    .#{$prefix}--toggle__text--off,
+    .#{$prefix}--toggle__text--on {
       margin-left: $carbon--spacing-08;
     }
+  }
 
-    &:checked
-      + .#{$prefix}--toggle-input__label
-      > .#{$prefix}--toggle__switch::after {
+  .#{$prefix}--toggle-input--small:checked + .#{$prefix}--toggle-input__label {
+    > .#{$prefix}--toggle__switch::after {
       transform: translateX(17px);
+    }
+
+    .#{$prefix}--toggle__check {
+      fill: $support-02;
+      transform: scale(1) translateX(16px);
     }
   }
 }
