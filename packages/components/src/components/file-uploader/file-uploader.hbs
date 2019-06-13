@@ -10,6 +10,16 @@
     photo</strong>
   <p class="{{@root.prefix}}--label-description">Only .jpg and .png files. 500kb max file size.</p>
   <div class="{{@root.prefix}}--file" data-file data-file-demo-state-manager>
+    <div data-file-drop-container class="{{@root.prefix}}--file__drop-container">
+      <p class="{{@root.prefix}}--file-filename">
+        Drag and drop files here or
+        <label for="your-file-importer-id-here"
+          class="{{@root.prefix}}--file-browse-btn"
+          role="button" tabindex="0">upload</label>
+      </p>
+      <input type="file" class="{{@root.prefix}}--file-input" id="your-file-importer-id-here" data-file-uploader
+        data-target="[data-file-container]" multiple />
+    </div>
     <div data-file-container class="{{@root.prefix}}--file-container">
       {{#if exampleUploadStates}}
       <div class="{{@root.prefix}}--file__selected-file">
@@ -47,16 +57,6 @@
         </span>
       </div>
       {{/if}}
-    </div>
-    <div data-file-drop-container class="{{@root.prefix}}--file__drop-container">
-      <p class="{{@root.prefix}}--file-filename">
-        Drag and drop files here or
-        <label for="your-file-importer-id-here"
-          class="{{@root.prefix}}--file-browse-btn"
-          role="button" tabindex="0">upload</label>
-      </p>
-      <input type="file" class="{{@root.prefix}}--file-input" id="your-file-importer-id-here" data-file-uploader
-        data-target="[data-file-container]" multiple />
     </div>
   </div>
 </div>
