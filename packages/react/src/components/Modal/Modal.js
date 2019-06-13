@@ -293,7 +293,7 @@ export default class Modal extends Component {
     );
 
     const modalBody = (
-      <div
+      <dialogue
         ref={this.innerModal}
         role="dialog"
         className={`${prefix}--modal-container`}
@@ -322,7 +322,7 @@ export default class Modal extends Component {
             </Button>
           </div>
         )}
-      </div>
+      </dialogue>
     );
 
     const modal = (
