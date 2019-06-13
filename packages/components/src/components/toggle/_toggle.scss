@@ -255,6 +255,7 @@
 
   .#{$prefix}--toggle-input__label {
     @include type-style('label-01');
+    color: $text-02;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
