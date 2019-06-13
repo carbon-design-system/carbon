@@ -297,6 +297,7 @@ storiesOf('UI Shell', module)
                 Link
               </SwitcherItemLink>
             </SwitcherItem>
+            <hr class="bx--switcher__item--divider" />
             <SwitcherItem>
               <SwitcherItemLink href="javascript:void(0)">
                 Link
@@ -317,6 +318,7 @@ storiesOf('UI Shell', module)
                 Link
               </SwitcherItemLink>
             </SwitcherItem>
+            <hr class="bx--switcher__item--divider" />
             <SwitcherItem>
               <SwitcherItemLink href="javascript:void(0)">
                 Link
