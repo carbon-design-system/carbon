@@ -44,7 +44,7 @@ const Tag = ({
     <span
       className={tagClasses}
       title="Clear filter"
-      role={listItem && 'listitem'}
+      role={listItem ? 'listitem' : undefined}
       tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
