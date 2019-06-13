@@ -6,14 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { matches, keyCodes } from '../../tools/key';
 
 const { prefix } = settings;
 
-const Switch = props => {
+const Switch = React.forwardRef(function Switch(props, tabRef) {
   const {
     className,
     index,
@@ -24,14 +24,6 @@ const Switch = props => {
     text,
     ...other
   } = props;
-
-  const tabRef = useRef(null);
-
-  useEffect(() => {
-    if (selected && document.activeElement !== tabRef.current) {
-      tabRef.current.focus();
-    }
-  }, [selected, tabRef.current]);
 
   const handleClick = e => {
     e.preventDefault();
@@ -67,7 +59,7 @@ const Switch = props => {
       <span className={`${prefix}--content-switcher__label`}>{text}</span>
     </button>
   );
-};
+});
 
 Switch.propTypes = {
   /**

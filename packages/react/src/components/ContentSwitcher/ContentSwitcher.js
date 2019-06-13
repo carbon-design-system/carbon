@@ -15,6 +15,13 @@ import { getNextIndex } from '../../tools/keyboard-navigation';
 const { prefix } = settings;
 
 export default class ContentSwitcher extends React.Component {
+  /**
+   * The DOM references of child `<Switch>`.
+   * @type {Array<Element>}
+   * @private
+   */
+  _switchRefs = [];
+
   state = {};
 
   static propTypes = {
@@ -55,6 +62,12 @@ export default class ContentSwitcher extends React.Component {
   }
 
   getChildren(children) {
+    const switchRefs =
+      React.Children.map(children, (child, index) => el => {
+        // Sets DOM ref of `<Switch>` to the corresponding index in `this._switchRefs`
+        this._switchRefs[index] = el;
+      }) || [];
+
     return React.Children.map(children, (child, index) =>
       React.cloneElement(child, {
         index,
@@ -64,6 +77,7 @@ export default class ContentSwitcher extends React.Component {
         ]),
         onKeyDown: this.handleChildChange,
         selected: index === this.state.selectedIndex,
+        ref: switchRefs[index],
       })
     );
   }
@@ -76,16 +90,26 @@ export default class ContentSwitcher extends React.Component {
     const { key } = data;
 
     if (key) {
-      this.setState({
-        selectedIndex: getNextIndex(
-          key,
-          selectedIndex,
-          this.props.children.length
-        ),
-      });
+      const nextIndex = getNextIndex(
+        key,
+        selectedIndex,
+        this.props.children.length
+      );
+      this.setState(
+        {
+          selectedIndex: nextIndex,
+        },
+        () => {
+          const switchRef = this._switchRefs[nextIndex];
+          switchRef && switchRef.focus();
+        }
+      );
     } else {
       if (selectedIndex !== index) {
-        this.setState({ selectedIndex: index });
+        this.setState({ selectedIndex: index }, () => {
+          const switchRef = this._switchRefs[index];
+          switchRef && switchRef.focus();
+        });
       }
     }
 
