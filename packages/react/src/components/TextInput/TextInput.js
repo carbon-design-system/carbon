@@ -201,7 +201,7 @@ TextInput.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * The maximum allowed input value length
+   * Specify if the user should be able to edit the value of the input
    */
   readOnly: PropTypes.bool,
 
