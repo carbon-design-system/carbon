@@ -105,8 +105,8 @@
 
     .#{$prefix}--inline-loading__animation {
       right: -0.25rem; // offset for loading svg container
-      width: 1.5rem;
-      height: 1.5rem;
+      width: rem(22px);
+      height: rem(22px);
     }
 
     .#{$prefix}--loading {
