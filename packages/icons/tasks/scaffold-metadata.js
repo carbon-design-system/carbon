@@ -100,7 +100,7 @@ async function scaffold() {
   const icons = Object.keys(iconsGroupedByName).map(key => {
     let iconIsCategorized =
       categoryInformation[key] &&
-      categoryInformation[key].hasOwnProperty('category');
+      categoryInformation[key].hasOwnProperty('subcategory');
 
     // this warning will still be called if all "variants" are defined but there is no "main"
     // may be a worthwhile warning if we check the variants tho?
@@ -113,16 +113,12 @@ async function scaffold() {
       name: key,
       friendly_name: sentenceCase(key),
       usage: 'This is a description for usage',
-      category:
-        categoryInformation[key] &&
-        categoryInformation[key].hasOwnProperty('category')
-          ? categoryInformation[key].category
-          : 'uncategorized',
-      subcategory:
-        categoryInformation[key] &&
-        categoryInformation[key].hasOwnProperty('subcategory')
-          ? categoryInformation[key].subcategory
-          : 'uncategorized',
+      category: iconIsCategorized
+        ? categoryInformation[key].category
+        : 'uncategorized',
+      subcategory: iconIsCategorized
+        ? categoryInformation[key].subcategory
+        : 'uncategorized',
       aliases: [key],
     };
 
