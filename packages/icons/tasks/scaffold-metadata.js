@@ -79,12 +79,16 @@ async function scaffold() {
     {}
   );
 
-  // build object that maps icon names to category & subcategory
-  // - loop through all of `categories.yml`
-  // - keys are icon names
-  // - values are they category they map to
-  // when needing to find category information,
-  // [iconName].category and [iconName].subcategory will return needed info
+  /**
+   * build object that maps icon names to category & subcategory
+   *   - loop through all of `categories.yml`
+   *   - keys are icon names
+   *   - each iconName object has props for category & subcategory
+   *
+   * when needing to find category information,
+   * categoryInformation[iconName].category and
+   * categoryInformation[iconName].subcategory will return needed info
+   */
   let categoryInformation = {};
   categoriesJson['categories'].forEach(category => {
     category.subcategories.forEach(subcategory => {
