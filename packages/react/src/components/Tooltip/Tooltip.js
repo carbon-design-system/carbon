@@ -311,6 +311,18 @@ class Tooltip extends Component {
     }
   };
 
+  getAccessibleLabel = (ariaLabel, triggerText, triggerId) => {
+    // if the user provides and aria-label go with that
+    if (ariaLabel) {
+      return { 'aria-label': ariaLabel };
+      // if the user provides triggerText -- set aria-labelledby to that element's ID
+    } else if (triggerText) {
+      return { 'aria-labelledby': triggerId };
+    }
+    // if the user provides neither of those set aria-label to icon-description
+    return { 'aria-label': iconDescription };
+  };
+
   render() {
     const {
       triggerId = (this.triggerId =
@@ -326,9 +338,9 @@ class Tooltip extends Component {
       children,
       className,
       triggerClassName,
+      ariaLabel,
       direction,
       triggerText,
-      ariaLabel,
       showIcon,
       iconName,
       iconDescription,
@@ -369,14 +381,7 @@ class Tooltip extends Component {
       onBlur: this.handleMouse,
       'aria-haspopup': 'true',
       'aria-expanded': open,
-      // if the user provides and aria-label go with that
-      // if the user provides triggerText -- set aria-labelledby to that elements ID
-      // if the user provides neither of those set aria-label to icon-description
-      ...(ariaLabel
-        ? { 'aria-label': ariaLabel }
-        : triggerText
-        ? { 'aria-labelledby': triggerId }
-        : { 'aria-label': iconDescription }),
+      ...this.getAccessibleLabel(ariaLabel, triggerText, triggerId),
     };
 
     return (
