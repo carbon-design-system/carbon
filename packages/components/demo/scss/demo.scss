@@ -113,8 +113,8 @@ REASON: #{$reason}';
 
 .demo--container.demo--container--list-box > .demo--container__panel,
 .demo--container.demo--container--multi-select > .demo--container__panel,
-.component-example__live.list-box > div,
-.component-example__live.multi-select > div {
+.component-example__live--rendered.list-box > div,
+.component-example__live--rendered.multi-select > div {
   width: 300px;
   padding: 0;
 }
