@@ -85,20 +85,16 @@ const loadContents = glob =>
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
       Handlebars.registerHelper('isFirstDataTd', function(columns, index) {
-        var firstDataTdIndex = 0;
-        for (var i = 0; i < columns.length; ++i) {
-          if (
-            columns[i].section ||
-            columns[i].checkbox ||
-            columns[i].additionalIcons ||
-            columns[i].menu
-          ) {
-            ++firstDataTdIndex;
-          } else {
-            break;
-          }
-        }
-        return firstDataTdIndex === index;
+        return (
+          index ===
+          columns.findIndex(
+            column =>
+              !column.section &&
+              !column.checkbox &&
+              !column.additionalIcons &&
+              !column.menu
+          )
+        );
       });
       contents.set(templateName, Handlebars.compile(content));
     });
