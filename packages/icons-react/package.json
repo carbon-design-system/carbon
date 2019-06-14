@@ -3,10 +3,10 @@
   "description": "React components for icons in digital and software products using the Carbon Design System",
   "version": "10.3.0",
   "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
-  "module": "es/index.js",
-  "main": "lib/index.js",
   "files": [
     "es",
     "lib",
