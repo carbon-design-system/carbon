@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
@@ -9,126 +9,108 @@ import { textInputProps } from './util';
 
 const { prefix } = settings;
 
-export default class PasswordInput extends React.Component {
-  state = {
-    type: 'password',
-  };
-
-  togglePasswordVisibility = () => {
-    this.setState({
-      type: this.state.type === 'password' ? 'text' : 'password',
-    });
-  };
-
-  render() {
-    const {
-      alt,
-      labelText,
-      className,
-      id,
-      placeholder,
-      onChange,
-      onClick,
-      hideLabel,
-      invalid,
-      invalidText,
-      helperText,
-      light,
-      ...other
-    } = this.props;
-    const errorId = id + '-error-msg';
-    const textInputClasses = classNames(
-      `${prefix}--text-input`,
-      `${prefix}--password-input`,
-      className,
-      {
-        [`${prefix}--text-input--light`]: light,
-        [`${prefix}--text-input--invalid`]: invalid,
+export default function PasswordInput({
+  alt,
+  labelText,
+  className,
+  id,
+  placeholder,
+  onChange,
+  onClick,
+  hideLabel,
+  invalid,
+  invalidText,
+  helperText,
+  light,
+  ...other
+}) {
+  const [inputType, setInputType] = useState('password');
+  const togglePasswordVisibility = () =>
+    setInputType(inputType === 'password' ? 'text' : 'password');
+  const errorId = id + '-error-msg';
+  const textInputClasses = classNames(
+    `${prefix}--text-input`,
+    `${prefix}--password-input`,
+    className,
+    {
+      [`${prefix}--text-input--light`]: light,
+      [`${prefix}--text-input--invalid`]: invalid,
+    }
+  );
+  const sharedTextInputProps = {
+    id,
+    onChange: evt => {
+      if (!other.disabled) {
+        onChange(evt);
       }
-    );
-    const sharedTextInputProps = {
-      id,
-      onChange: evt => {
-        if (!other.disabled) {
-          onChange(evt);
-        }
-      },
-      onClick: evt => {
-        if (!other.disabled) {
-          onClick(evt);
-        }
-      },
-      placeholder,
-      type: this.state.type,
-      className: textInputClasses,
-      ...other,
-    };
-    const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--visually-hidden`]: hideLabel,
-      [`${prefix}--label--disabled`]: other.disabled,
-    });
-    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: other.disabled,
-    });
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-    const error = invalid ? (
-      <div className={`${prefix}--form-requirement`} id={errorId}>
-        {invalidText}
-      </div>
-    ) : null;
-    const passwordIsVisible = this.state.type === 'text';
-    const passwordVisibilityToggleButtonClasses = classNames(
-      `${prefix}--text-input--password__visibility`,
-      `${prefix}--tooltip__trigger`,
-      `${prefix}--tooltip--icon__bottom`,
-      {}
-    );
-    const passwordVisibilityIcon = passwordIsVisible ? (
-      <ViewOff16 className={`${prefix}--icon-visibility-off`} />
-    ) : (
-      <View16 className={`${prefix}--icon-visibility-on`} />
-    );
-    const input = (
-      <>
-        <input
-          {...textInputProps({ invalid, sharedTextInputProps, errorId })}
-          data-toggle-password-visibility={this.state.type === 'password'}
-        />
-        <button
-          className={passwordVisibilityToggleButtonClasses}
-          aria-label={alt || `${passwordIsVisible ? 'Hide' : 'Show'} password`}
-          onClick={this.togglePasswordVisibility}>
-          {passwordVisibilityIcon}
-        </button>
-      </>
-    );
-    const helper = helperText ? (
-      <div className={helperTextClasses}>{helperText}</div>
-    ) : null;
+    },
+    onClick: evt => {
+      if (!other.disabled) {
+        onClick(evt);
+      }
+    },
+    placeholder,
+    type: inputType,
+    className: textInputClasses,
+    ...other,
+  };
+  const labelClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--visually-hidden`]: hideLabel,
+    [`${prefix}--label--disabled`]: other.disabled,
+  });
+  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+  });
+  const label = labelText ? (
+    <label htmlFor={id} className={labelClasses}>
+      {labelText}
+    </label>
+  ) : null;
+  const error = invalid ? (
+    <div className={`${prefix}--form-requirement`} id={errorId}>
+      {invalidText}
+    </div>
+  ) : null;
+  const passwordIsVisible = inputType === 'text';
+  const passwordVisibilityIcon = passwordIsVisible ? (
+    <ViewOff16 className={`${prefix}--icon-visibility-off`} />
+  ) : (
+    <View16 className={`${prefix}--icon-visibility-on`} />
+  );
+  const input = (
+    <>
+      <input
+        {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+        data-toggle-password-visibility={inputType === 'password'}
+      />
+      <button
+        className={`${prefix}--text-input--password__visibility`}
+        aria-label={alt || `${passwordIsVisible ? 'Hide' : 'Show'} password`}
+        onClick={togglePasswordVisibility}>
+        {passwordVisibilityIcon}
+      </button>
+    </>
+  );
+  const helper = helperText ? (
+    <div className={helperTextClasses}>{helperText}</div>
+  ) : null;
 
-    return (
+  return (
+    <div
+      className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
+      {label}
+      {helper}
       <div
-        className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
-        {label}
-        {helper}
-        <div
-          className={`${prefix}--text-input__field-wrapper`}
-          data-invalid={invalid || null}>
-          {invalid && (
-            <WarningFilled16
-              className={`${prefix}--text-input__invalid-icon`}
-            />
-          )}
-          {input}
-        </div>
-        {error}
+        className={`${prefix}--text-input__field-wrapper`}
+        data-invalid={invalid || null}>
+        {invalid && (
+          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
+        )}
+        {input}
       </div>
-    );
-  }
+      {error}
+    </div>
+  );
 }
 
 PasswordInput.propTypes = {
