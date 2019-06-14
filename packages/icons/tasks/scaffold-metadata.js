@@ -86,8 +86,8 @@ async function scaffold() {
    *   - each iconName object has props for category & subcategory
    *
    * when needing to find category information,
-   * categoryInformation[iconName].category and
-   * categoryInformation[iconName].subcategory will return needed info
+   * `categoryInformation[iconName].category` and
+   * `categoryInformation[iconName].subcategory` will return needed info
    */
   let categoryInformation = {};
   categoriesJson['categories'].forEach(category => {
