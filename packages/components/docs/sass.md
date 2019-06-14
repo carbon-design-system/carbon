@@ -8783,7 +8783,8 @@ Button styles
     @include button-theme(
       // $support-01, TODO: replace with updated token
         #dc222b,
-      $support-01,
+      // $support-01, TODO: replace with updated token
+        #dc222b,
       $text-04,
       $hover-danger,
       $icon-03,
@@ -16600,8 +16601,7 @@ Tabs styles
       width: 100%;
       margin: 0;
       padding-left: 16px;
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
     }
 
     @include carbon--breakpoint(md) {
