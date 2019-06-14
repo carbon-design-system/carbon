@@ -126,6 +126,7 @@ categories:
           - draggable
           - home
           - menu
+          - overflow-menu
           - overflow-menu--horizontal
           - overflow-menu--vertical
           - page--first

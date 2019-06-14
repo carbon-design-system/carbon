@@ -15,8 +15,19 @@ const search = require('../src/search');
 
 const SVG_DIR = path.resolve(__dirname, '../src/svg');
 const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.yml');
+const CATEGORIES_DEFINITION_PATH = '../categories.yml';
+
+let categoriesJson;
 
 async function scaffold() {
+  try {
+    categoriesJson = yaml.safeLoad(
+      fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
+    );
+  } catch (e) {
+    console.log(e);
+  }
+
   // Get all of our icon files from the SVG directory
   const iconFiles = await search(SVG_DIR);
 
@@ -68,13 +79,50 @@ async function scaffold() {
     {}
   );
 
+  // build object that maps icon names to category & subcategory
+  // - loop through all of `categories.yml`
+  // - keys are icon names
+  // - values are they category they map to
+  // when needing to find category information,
+  // [iconName].category and [iconName].subcategory will return needed info
+  let categoryInformation = {};
+  categoriesJson['categories'].forEach(category => {
+    category.subcategories.forEach(subcategory => {
+      subcategory.members.forEach(iconName => {
+        categoryInformation[iconName] = {
+          category: category.name,
+          subcategory: subcategory.name,
+        };
+      });
+    });
+  });
+
   const icons = Object.keys(iconsGroupedByName).map(key => {
+    let iconIsCategorized =
+      categoryInformation[key] &&
+      categoryInformation[key].hasOwnProperty('category');
+
+    // this warning will still be called if all "variants" are defined but there is no "main"
+    // may be a worthwhile warning if we check the variants tho?
+    // if (!iconIsCategorized) {
+    //   console.log(`warning: "${key}" is not defined in categories.yml.`);
+    // }
+
     const group = iconsGroupedByName[key];
     const icon = {
       name: key,
       friendly_name: sentenceCase(key),
       usage: 'This is a description for usage',
-      categories: ['example cateogry'],
+      category:
+        categoryInformation[key] &&
+        categoryInformation[key].hasOwnProperty('category')
+          ? categoryInformation[key].category
+          : 'uncategorized',
+      subcategory:
+        categoryInformation[key] &&
+        categoryInformation[key].hasOwnProperty('subcategory')
+          ? categoryInformation[key].subcategory
+          : 'uncategorized',
       aliases: [key],
     };
 
