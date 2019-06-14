@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2019, 2019
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,8 +8,6 @@
 /* eslint-disable no-console */
 
 'use strict';
-
-require('core-js/features/array/flat-map');
 
 const meta = require('@carbon/icons/meta.json');
 const fs = require('fs');
@@ -35,7 +33,7 @@ const BUNDLE_FORMATS = [
 ];
 
 async function build() {
-  const modules = meta.flatMap(icon =>
+  const modules = meta.map(icon =>
     createIconComponent(icon.moduleName, icon.descriptor)
   );
 
@@ -107,7 +105,7 @@ export { Icon };
 function createIconComponent(moduleName, descriptor) {
   const { attrs, content } = descriptor;
   const { width, height, viewBox } = attrs;
-  const source = `const ${moduleName} = React.forwardRef(
+  const source = `const ${moduleName} = /*#__PURE__*/ React.forwardRef(
   function ${moduleName}(props, ref) {
     return (
       <Icon width={${width}} height={${height}} viewBox="${viewBox}" ref={ref} {...props}>
@@ -116,7 +114,6 @@ function createIconComponent(moduleName, descriptor) {
     );
   }
 );
-${moduleName}.displayName = '${moduleName}';
 `;
 
   return {
