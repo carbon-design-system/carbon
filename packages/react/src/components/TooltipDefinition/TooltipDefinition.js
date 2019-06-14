@@ -9,10 +9,8 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-const getInstanceId = setupGetInstanceId();
 const TooltipDefinition = ({
   id,
   className,
@@ -22,7 +20,6 @@ const TooltipDefinition = ({
   tooltipText,
   ...rest
 }) => {
-  const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
   const tooltipClassName = cx(`${prefix}--tooltip--definition`, className);
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
@@ -36,7 +33,7 @@ const TooltipDefinition = ({
     <div {...rest} className={tooltipClassName}>
       <button
         className={tooltipTriggerClasses}
-        aria-describedby={tooltipId}
+        aria-describedby={id}
         aria-label={tooltipText}>
         {children}
       </button>
@@ -63,8 +60,7 @@ TooltipDefinition.propTypes = {
   align: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
-   * Optionally specify a custom id for the tooltip. If one is not provided, we
-   * generate a unique id for you.
+   * Optionally specify a custom id for the tooltip.
    */
   id: PropTypes.string,
 
