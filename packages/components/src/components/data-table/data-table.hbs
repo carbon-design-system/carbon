@@ -245,10 +245,10 @@
               <td class="{{#if column.numerical}}{{@root.prefix}}--data-table--numerical-cell{{/if}}{{#if @root.isSmall}} td-small{{/if}}">
                 <!-- truncated new markup -->
                 {{#if @root.isSmall}}
-                  <label class="bx--label" for="{{uid}}">
+                  <label class="bx--label" for="{{../../../id}};row{{@../index}};{{column.title}}">
                     {{column.title}}
                   </label>
-                  <div id="{{uid 'repeat'}}">
+                  <div id="{{../../../id}};row{{@../index}};{{column.title}}">
                 {{/if}}
                 {{#if ../../truncate}}
                   <span class="{{@root.prefix}}--table-cell-content" aria-describedby="label-tooltip">{{data}}

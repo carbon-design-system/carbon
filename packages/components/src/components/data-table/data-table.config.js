@@ -688,6 +688,7 @@ module.exports = {
       name: 'small',
       label: 'Small (mobile) breakpoint',
       context: {
+        id: 'ID unique to this table',
         state: 'persistent-search',
         title: 'Table title',
         columns: columnsExpandable,

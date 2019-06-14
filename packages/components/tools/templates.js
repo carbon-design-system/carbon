@@ -84,19 +84,6 @@ const loadContents = glob =>
   getContents(glob).then(contents => {
     contents.forEach((content, templateName) => {
       Handlebars.registerPartial(templateName, content);
-      var uids = [];
-      Handlebars.registerHelper('uid', function(repeatLastUid) {
-        if (repeatLastUid === 'repeat') {
-          return uids[uids.length - 1];
-        }
-        var uid = Math.random();
-        if (uids.includes(uid)) {
-          uid = Handlebars.helpers.uid.apply(this);
-        } else {
-          uids.push(uid);
-        }
-        return uid;
-      });
       Handlebars.registerHelper('isFirstDataTd', function(columns, index) {
         var firstDataTdIndex = 0;
         for (var i = 0; i < columns.length; ++i) {
