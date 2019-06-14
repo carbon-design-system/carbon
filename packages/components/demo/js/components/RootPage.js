@@ -1,11 +1,30 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import { ToggleSmall } from 'carbon-components-react';
+import { Dropdown, DropdownItem, ToggleSmall } from 'carbon-components-react';
 import eventMatches from '../../../src/globals/js/misc/event-matches';
 import on from '../../../src/globals/js/misc/on';
 import CodePage from './CodePage/CodePage';
 import SideNav from './SideNav';
 import PageHeader from './PageHeader/PageHeader';
+
+const themeSwitcherItems = [
+  {
+    id: 'white',
+    text: 'White',
+  },
+  {
+    id: 'g10',
+    text: 'Gray 10',
+  },
+  {
+    id: 'g90',
+    text: 'Gray 90',
+  },
+  {
+    id: 'g100',
+    text: 'Gray 100',
+  },
+];
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 400) {
@@ -413,6 +432,20 @@ class RootPage extends Component {
   }
 
   /**
+   * Handles selection change in theme switcher dropdown.
+   * @param {object} evt
+   * @param {object} evt.value The id of the selected dropdown item.
+   */
+  _handleChangeThemeSwitcherDropdown = ({ value }) => {
+    themeSwitcherItems.forEach(item => {
+      document.documentElement.classList.toggle(
+        `demo--theme--${item.id}`,
+        item.id === value
+      );
+    });
+  };
+
+  /**
    * Switches the selected component.
    * @param {string} selectedNavItemId The ID of the newly selected component.
    */
@@ -468,6 +501,17 @@ class RootPage extends Component {
             onChange={this._switchExperimental}
           />
         </main>
+        <div className="demo--theme-switcher--dropdown">
+          <Dropdown
+            items={themeSwitcherItems}
+            itemToString={item => (item ? item.text : '')}
+            value={themeSwitcherItems[0].id}
+            onChange={this._handleChangeThemeSwitcherDropdown}>
+            {themeSwitcherItems.map(({ id, text }) => (
+              <DropdownItem itemText={text} value={id} />
+            ))}
+          </Dropdown>
+        </div>
       </Fragment>
     );
   }
