@@ -17,7 +17,10 @@ import { sliderValuePropSync } from '../../internal/FeatureFlags';
 const props = () => ({
   name: text('Form item name (name)', ''),
   inputType: text('The form element type (inputType)', 'number'),
-  ariaLabelInput: text('The ARIA label for the <input> (ariaLabelInput)', ''),
+  ariaLabelInput: text(
+    'The ARIA label for the <input> (ariaLabelInput)',
+    'Label for slider value'
+  ),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   hideTextInput: boolean('Without text input (hideTextInput)', false),
