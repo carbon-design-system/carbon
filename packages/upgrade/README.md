@@ -1,36 +1,21 @@
 # carbon-upgrade
 
-[Experimental] A tool for upgrading Carbon versions (to v10): `npx carbon-upgrade`
+> \[Experimental] A tool for upgrading Carbon versions
 
 ## Getting started
 
-`carbon-upgrade` is a tool that should be run at the root of your project. If
-you're not sure where that is, most of the time this is where your
-`package.json` file is located.
-
-Once you find that folder, you can use the [`npx` tool](https://www.npmjs.com/package/npx)
-to run the following commands in your terminal:
+To install `carbon-upgrade` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
-# Run carbon-upgrade in 'dry mode', which allows you to preview the changes
-# before any files are changed.
-npx carbon-upgrade --dry
+npm install -S carbon-upgrade
 ```
 
-If you would prefer to install the tool globally, you can run the following
-command in your terminal using `npm`:
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
 ```bash
-npm i carbon-upgrade -g
-carbon-upgrade --dry
-```
-
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following
-command instead:
-
-```bash
-yarn global add carbon-upgrade
-carbon-upgrade --dry
+yarn add carbon-upgrade
 ```
 
 ## Usage
@@ -52,3 +37,13 @@ Options:
   --ignore, -i  provide a glob pattern for directories you would like ignored
                                                                    [default: ""]
 ```
+
+## 🙌 Contributing
+
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+
+## 📝 License
+
+Licensed under the [Apache 2.0 License](/LICENSE).
