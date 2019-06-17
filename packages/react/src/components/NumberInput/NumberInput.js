@@ -14,7 +14,7 @@ import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import mergeRefs from '../../tools/mergeRefs';
-import requiresIfValueExists from '../../prop-types/requiresIfValueExists';
+import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
@@ -41,6 +41,10 @@ const capMax = (max, value) =>
 class NumberInput extends Component {
   constructor(props) {
     super(props);
+    if (useControlledStateWithValue && this.isControlled()) {
+      // Skips the logic of setting initial state if this component is controlled
+      return;
+    }
     let value = useControlledStateWithValue ? props.defaultValue : props.value;
     value = value === undefined ? 0 : value;
     if (props.min || props.min === 0) {
@@ -89,7 +93,7 @@ class NumberInput extends Component {
      */
     onChange: !useControlledStateWithValue
       ? PropTypes.func
-      : requiresIfValueExists(PropTypes.func),
+      : requiredIfValueExists(PropTypes.func),
     /**
      * Provide an optional function to be called when the up/down button is clicked
      */

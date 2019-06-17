@@ -9,7 +9,7 @@
  * @param {Function} propType The original prop type checker.
  * @returns {Function} The new prop type checker for `onChange` that makes it required if `value` exists and `readOnly` does not exist.
  */
-export default function requiresIfValueExists(propType) {
+export default function requiredIfValueExists(propType) {
   return function check(props, propName, componentName, ...rest) {
     const { [propName]: onChange, value, readOnly } = props;
     const exists = onChange !== undefined;

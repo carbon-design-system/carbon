@@ -19,5 +19,7 @@
 
 /**
  * Uses `value` prop to turn several components to controlled mode, notablly `<NumberInput>`.
+ * Also, this flag ensures that new value upon user gesture is sent via event handlers,
+ * so appilcation can set the latest value to control our components.
  */
 export const useControlledStateWithValue = false;
