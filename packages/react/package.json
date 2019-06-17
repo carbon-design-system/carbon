@@ -96,6 +96,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "gzip-size": "^5.0.0",
     "jest": "^24.0.0",
     "jest-circus": "^24.0.0",
