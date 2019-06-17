@@ -78,12 +78,6 @@ const ControlledPasswordInput = React.forwardRef(
       </div>
     ) : null;
     const passwordIsVisible = type === 'text';
-    const passwordVisibilityToggleButtonClasses = classNames(
-      `${prefix}--text-input--password__visibility`,
-      `${prefix}--tooltip__trigger`,
-      `${prefix}--tooltip--icon__bottom`,
-      {}
-    );
     const passwordVisibilityIcon = passwordIsVisible ? (
       <ViewOff16 className={`${prefix}--icon-visibility-off`} />
     ) : (
@@ -96,7 +90,7 @@ const ControlledPasswordInput = React.forwardRef(
           data-toggle-password-visibility={type === 'password'}
         />
         <button
-          className={passwordVisibilityToggleButtonClasses}
+          className={`${prefix}--text-input--password__visibility`}
           aria-label={
             alt ||
             `${

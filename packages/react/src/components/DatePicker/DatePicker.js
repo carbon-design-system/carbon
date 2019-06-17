@@ -316,7 +316,6 @@ export default class DatePicker extends Component {
       datePickerType,
       dateFormat,
       locale,
-      onChange,
       minDate,
       maxDate,
       value,
@@ -354,6 +353,7 @@ export default class DatePicker extends Component {
           nextArrow: this.rightArrowHTML(),
           prevArrow: this.leftArrowHTML(),
           onChange: (...args) => {
+            const { onChange } = this.props;
             if (onChange) {
               onChange(...args);
             }
