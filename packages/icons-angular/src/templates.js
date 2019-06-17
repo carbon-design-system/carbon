@@ -66,7 +66,9 @@ export class ${className}Directive implements AfterViewInit {
 
     let node = svgElement.firstChild;
     while (node) {
-      svg.appendChild(node);
+      // importNode makes a clone of the node
+      // this ensures we keep looping over the nodes in the parsed document
+      svg.appendChild(svg.ownerDocument.importNode(node, true));
       node = node.nextSibling;
     }
 
