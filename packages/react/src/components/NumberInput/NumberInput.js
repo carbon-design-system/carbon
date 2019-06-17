@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import warning from 'warning';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
@@ -41,7 +40,8 @@ const capMax = (max, value) =>
 class NumberInput extends Component {
   constructor(props) {
     super(props);
-    if (useControlledStateWithValue && this.isControlled()) {
+    this.isControlled = props.value !== undefined;
+    if (useControlledStateWithValue && this.isControlled) {
       // Skips the logic of setting initial state if this component is controlled
       return;
     }
@@ -177,6 +177,8 @@ class NumberInput extends Component {
 
   static getDerivedStateFromProps({ min, max, value = 0 }, state) {
     const { prevValue } = state;
+    // If `useControlledStateWithValue` feature flag is on, do nothing here.
+    // Otherwise, do prop -> state sync with "value capping".
     return useControlledStateWithValue || prevValue === value
       ? null
       : {
@@ -246,23 +248,6 @@ class NumberInput extends Component {
     this._inputRef = ref;
   };
 
-  /**
-   * @returns {boolean} `true` if the `value` prop is controlled.
-   */
-  isControlled() {
-    const { _lastIsControlled: lastIsControlled } = this;
-    const result = this.props.value !== undefined;
-    if (lastIsControlled !== undefined && lastIsControlled !== result) {
-      warning(
-        'A component is changing an uncontrolled `NumberInput` to be controlled. ' +
-          '`NumberInput` should not switch from uncontrolled to controlled (or vice versa). ' +
-          'Decide between using a controlled or uncontrolled `NumberInput` for the lifetime of the component.'
-      );
-    }
-    this._lastIsControlled = result;
-    return result;
-  }
-
   render() {
     const {
       className,
@@ -307,7 +292,7 @@ class NumberInput extends Component {
       step,
       onChange: this.handleChange,
       value:
-        useControlledStateWithValue && this.isControlled()
+        useControlledStateWithValue && this.isControlled
           ? value
           : this.state.value,
       readOnly,

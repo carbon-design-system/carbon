@@ -19,7 +19,18 @@
 
 /**
  * Uses `value` prop to turn several components to controlled mode, notablly `<NumberInput>`.
+ * The "controlled mode" detection is done in component creation time and _never_ changes after creation.
+ * To ensure the component is in controlled mode, set non-`undefined` value at creation time.
+ *
+ * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
+ *
  * Also, this flag ensures that new value upon user gesture is sent via event handlers,
  * so appilcation can set the latest value to control our components.
+ *
+ * * _With_ this feature flag, the event handler has `onChange(event, { value, direction })` where:
+ *   * `event` is the (React) raw event
+ *   * `value` is the new value
+ *   * `direction` tells you the button you hit is up button or down button
+ * * _Without_ this feature flag the event handler has `onChange(event, direction)`.
  */
 export const useControlledStateWithValue = false;
