@@ -7,12 +7,8 @@
 
 'use strict';
 
-const { reporter } = require('../../reporter');
 const { replace } = require('../../tools/replace');
-const {
-  createFunctionRegex,
-  createVariableRegex,
-} = require('../../tools/regex');
+const { createFunctionRegex } = require('../../tools/regex');
 
 const TARGET_VERSION = '0.0.1-alpha.32';
 module.exports = {

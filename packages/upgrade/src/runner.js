@@ -4,6 +4,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 const cloneDeep = require('lodash.clonedeep');
@@ -153,16 +155,6 @@ function find(set, cb) {
       return item;
     }
   }
-}
-
-function filter(set, cb) {
-  const s = new Set();
-  for (const item of set) {
-    if (cb(item)) {
-      s.add(item);
-    }
-  }
-  return s;
 }
 
 module.exports = {

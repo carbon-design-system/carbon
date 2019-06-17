@@ -7,7 +7,6 @@
 
 'use strict';
 
-const { reporter } = require('../../reporter');
 const colors = require('../carbon-colors/0.0.1-alpha.32');
 const grid = require('../carbon-grid/0.0.1-alpha.32');
 const layout = require('../carbon-layout/0.0.1-alpha.32');

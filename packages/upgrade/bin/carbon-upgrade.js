@@ -7,6 +7,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 // Inspired by Create React App
@@ -20,7 +22,6 @@ process.on('unhandledRejection', error => {
 });
 
 var chalk = require('chalk');
-var packageJson = require('../package.json');
 
 var currentNodeVersion = process.versions.node;
 var semver = currentNodeVersion.split('.');

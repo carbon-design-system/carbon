@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 const diff = require('jest-diff');
@@ -15,7 +17,7 @@ const { reporter } = require('../reporter');
 
 // Given a glob of files, a replacement table, and dry
 async function replace(globs, changes, options) {
-  const { cwd, dry, ignore } = options;
+  const { cwd, ignore } = options;
   const files = await glob(['**/*.scss'], {
     cwd,
     ignore: ['node_modules', ...ignore].filter(Boolean),
