@@ -14,7 +14,7 @@ function createFunctionRegex(name) {
     '(?<=[ \\(])',
     // Positive lookahead for the function definition
     // Support one-line, `my-function()` and multi-line `my-function(\n`
-    `(?=${name}\\(.*[\)\n])`,
+    `(?=${name}\\(.*[)\n])`,
     // Negative lookahead for checking if already migrated
     '(?<!carbon--)',
     // Capture the name of the function itself to change
@@ -30,7 +30,7 @@ function createMixinRegex(name) {
     '(?<=[ \\(])',
     // Positive lookahead for the function definition
     // Support one-line, `my-function()` and multi-line `my-function(\n`
-    `(?=${name}\\(.*[\)\n])?`,
+    `(?=${name}\\(.*[)\n])?`,
     // Negative lookahead for checking if already migrated
     '(?<!carbon--)',
     // Capture the name of the function itself to change
