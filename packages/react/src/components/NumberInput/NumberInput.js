@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import warning from 'warning';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
@@ -40,10 +41,7 @@ const capMax = (max, value) =>
 class NumberInput extends Component {
   constructor(props) {
     super(props);
-    let value =
-      useControlledStateWithValue || props.value === undefined
-        ? props.defaultValue
-        : props.value;
+    let value = useControlledStateWithValue ? props.defaultValue : props.value;
     value = value === undefined ? 0 : value;
     if (props.min || props.min === 0) {
       value = Math.max(props.min, value);
@@ -167,6 +165,12 @@ class NumberInput extends Component {
    */
   _inputRef = null;
 
+  /**
+   * Last evaluation result of whether this component is controlled.
+   * @type {boolean}
+   */
+  _lastIsControlled;
+
   static getDerivedStateFromProps({ min, max, value = 0 }, state) {
     const { prevValue } = state;
     return useControlledStateWithValue || prevValue === value
@@ -238,6 +242,23 @@ class NumberInput extends Component {
     this._inputRef = ref;
   };
 
+  /**
+   * @returns {boolean} `true` if the `value` prop is controlled.
+   */
+  isControlled() {
+    const { _lastIsControlled: lastIsControlled } = this;
+    const result = this.props.value !== undefined;
+    if (lastIsControlled !== undefined && lastIsControlled !== result) {
+      warning(
+        'A component is changing an uncontrolled `NumberInput` to be controlled. ' +
+          '`NumberInput` should not switch from uncontrolled to controlled (or vice versa). ' +
+          'Decide between using a controlled or uncontrolled `NumberInput` for the lifetime of the component.'
+      );
+    }
+    this._lastIsControlled = result;
+    return result;
+  }
+
   render() {
     const {
       className,
@@ -282,7 +303,7 @@ class NumberInput extends Component {
       step,
       onChange: this.handleChange,
       value:
-        useControlledStateWithValue && value !== undefined
+        useControlledStateWithValue && this.isControlled()
           ? value
           : this.state.value,
       readOnly,
