@@ -90,6 +90,12 @@ class NumberInput extends Component {
     /**
      * The new value is available in 'imaginaryTarget.value'
      * i.e. to get the value: evt.imaginaryTarget.value
+     *
+     * * _With_ `useControlledStateWithValue` feature flag, the signature of the event handler will be altered to provide additional context in the second parameter: `onChange(event, { value, direction })` where:
+     *   * `event` is the (React) raw event
+     *   * `value` is the new value
+     *   * `direction` tells you the button you hit is up button or down button
+     * * _Without_ this feature flag the event handler has `onChange(event, direction)` signature.
      */
     onChange: !useControlledStateWithValue
       ? PropTypes.func
@@ -168,12 +174,6 @@ class NumberInput extends Component {
    * @type {HTMLInputElement}
    */
   _inputRef = null;
-
-  /**
-   * Last evaluation result of whether this component is controlled.
-   * @type {boolean}
-   */
-  _lastIsControlled;
 
   static getDerivedStateFromProps({ min, max, value = 0 }, state) {
     const { prevValue } = state;

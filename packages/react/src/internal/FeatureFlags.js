@@ -42,6 +42,6 @@
  *   * `event` is the (React) raw event
  *   * `value` is the new value
  *   * `rest` tells you additional information based on the source component
- * * _Without_ this feature flag the event handler has `onChange(event, direction)`.
+ * * _Without_ this feature flag the event handler has component-specific signature, e.g. `onChange(event, direction)`.
  */
 export const useControlledStateWithValue = false;
