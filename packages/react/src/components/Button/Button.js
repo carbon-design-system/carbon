@@ -51,7 +51,7 @@ const Button = React.forwardRef(function Button(
     if (small && !didWarnAboutDeprecation) {
       warning(
         false,
-        `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`type="small"\` instead.`
+        `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="small"\` instead.`
       );
       didWarnAboutDeprecation = true;
     }
