@@ -27,7 +27,7 @@
  * This flag also updates event handlers to pass an up-to-date value in the second parameter,
  * so applications can use it in both controlled and uncontrolled components.
  *
- * * _With_ this feature flag, the event handler has `onChange(event, { value, direction })` where:
+ * * _With_ this feature flag, the signature of the event handler will be altered to provide additional context in the second parameter: `onChange(event, { value, ...rest })` where:
  *   * `event` is the (React) raw event
  *   * `value` is the new value
  *   * `direction` tells you the button you hit is up button or down button
