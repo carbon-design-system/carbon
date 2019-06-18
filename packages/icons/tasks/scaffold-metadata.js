@@ -115,11 +115,14 @@ async function scaffold() {
       name: key,
       friendly_name: sentenceCase(key),
       usage: 'This is a description for usage',
-      categories: [
-        iconIsCategorized
-          ? `${categoryInformation[key].category}/${categoryInformation[key].subcategory}`
-          : 'uncategorized',
-      ],
+      categories: iconIsCategorized
+        ? [
+            {
+              name: categoryInformation[key].category,
+              subcategory: categoryInformation[key].subcategory,
+            },
+          ]
+        : [],
       aliases: savedIcon ? savedIcon.aliases : [key],
     };
 
