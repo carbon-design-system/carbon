@@ -56,7 +56,7 @@ const TextInput = React.forwardRef(function TextInput(
   },
   ref
 ) {
-  const [inputVal, setInput] = useState(defaultValue);
+  const [inputVal, setInput] = useState(other.value || defaultValue);
   const errorId = id + '-error-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,

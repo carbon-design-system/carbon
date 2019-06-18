@@ -50,7 +50,7 @@ const TextArea = ({
   renderCharCounter: CharCounter = DefaultCharCounter,
   ...other
 }) => {
-  const [textareaVal, setInput] = useState(defaultValue);
+  const [textareaVal, setInput] = useState(other.value || defaultValue);
   const textareaProps = {
     id,
     onChange: evt => {
