@@ -48,6 +48,7 @@
     color: $text-01;
     padding: 0 $spacing-03;
     height: 100%;
+    background-color: $ui-03;
   }
 
   .#{$prefix}--table-sort:focus {
