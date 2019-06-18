@@ -98,6 +98,10 @@
     }
   }
 
+  .#{$prefix}--side-nav--hidden {
+    width: 0;
+  }
+
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
@@ -527,6 +531,41 @@
     .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Header Nav Links in Side Nav
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__header-navigation {
+    display: none;
+
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+      position: relative;
+      margin-bottom: rem(32px);
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: rem(1px);
+        bottom: rem(-16px);
+        left: rem(16px);
+        width: calc(100% - 32px);
+        background: $ibm-color__gray-20;
+      }
+    }
+  }
+
+  .#{$prefix}--side-nav__header-navigation--hidden {
+    display: none;
+    @include carbon--breakpoint-down('lg') {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--side-nav--hidden
+    .#{$prefix}--side-nav__header-navigation::after {
+    display: none;
   }
 }
 
