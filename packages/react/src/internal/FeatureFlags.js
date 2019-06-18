@@ -20,7 +20,7 @@
 /**
  * Uses `value` prop to turn several components to controlled mode, notablly `<NumberInput>`.
  * The "controlled mode" detection is done in component creation time and _never_ changes after creation.
- * To ensure the component is in controlled mode, set non-`undefined` value at creation time.
+ * To ensure the component is in controlled mode, define a `value` prop at creation time.
  *
  * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
  *
