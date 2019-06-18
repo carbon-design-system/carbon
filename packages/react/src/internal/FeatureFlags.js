@@ -24,7 +24,7 @@
  *
  * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
  *
- * Also, this flag ensures that new value upon user gesture is sent via event handlers,
+ * This flag also updates event handlers to pass an up-to-date value in the second parameter,
  * so appilcation can set the latest value to control our components.
  *
  * * _With_ this feature flag, the event handler has `onChange(event, { value, direction })` where:
