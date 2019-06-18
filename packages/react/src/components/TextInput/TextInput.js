@@ -258,6 +258,7 @@ TextInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  defaultValue: '',
 };
 
 export default TextInput;
