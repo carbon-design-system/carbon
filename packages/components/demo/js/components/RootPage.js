@@ -191,7 +191,9 @@ class RootPage extends Component {
     });
   }
 
-  state = {};
+  state = {
+    currentTheme: themeSwitcherItems[0].id,
+  };
 
   static getDerivedStateFromProps({ componentItems, isComponentsX }, state) {
     const {
@@ -437,11 +439,13 @@ class RootPage extends Component {
    * @param {object} evt.value The id of the selected dropdown item.
    */
   _handleChangeThemeSwitcherDropdown = ({ value }) => {
-    themeSwitcherItems.forEach(item => {
-      document.documentElement.classList.toggle(
-        `demo--theme--${item.id}`,
-        item.id === value
-      );
+    this.setState({ currentTheme: value }, () => {
+      themeSwitcherItems.forEach(item => {
+        document.documentElement.classList.toggle(
+          `demo--theme--${item.id}`,
+          item.id === value
+        );
+      });
     });
   };
 
@@ -470,7 +474,12 @@ class RootPage extends Component {
 
   render() {
     const { portSassBuild, useStaticFullRenderPage } = this.props;
-    const { componentItems, isComponentsX, selectedNavItemId } = this.state;
+    const {
+      componentItems,
+      isComponentsX,
+      selectedNavItemId,
+      currentTheme,
+    } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
     return !metadata ? null : (
@@ -505,7 +514,7 @@ class RootPage extends Component {
           <Dropdown
             items={themeSwitcherItems}
             itemToString={item => (item ? item.text : '')}
-            value={themeSwitcherItems[0].id}
+            value={currentTheme}
             onChange={this._handleChangeThemeSwitcherDropdown}>
             {themeSwitcherItems.map(({ id, text }) => (
               <DropdownItem itemText={text} value={id} />
