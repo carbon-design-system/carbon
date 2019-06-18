@@ -113,8 +113,8 @@ async function scaffold() {
     const savedIcon = metadata.icons.find(({ name }) => name === key);
     const icon = {
       name: key,
-      friendly_name: sentenceCase(key),
-      usage: 'This is a description for usage',
+      friendly_name: savedIcon.friendly_name || sentenceCase(key),
+      usage: savedIcon.usage || 'This is a description for usage',
       categories: iconIsCategorized
         ? [
             {
