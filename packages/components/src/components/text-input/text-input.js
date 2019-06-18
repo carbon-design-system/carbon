@@ -50,7 +50,7 @@ export default class TextInput extends mixin(
 
   /**
    * Updates the character counter
-   * @param {Object} obj - The elements that can change in the component
+   * @param {object} obj - The elements that can change in the component
    * @param {HTMLElement} obj.element - The element functioning as a text field
    * @param {HTMLElement} obj.length - The length of the text field value
    */
@@ -62,7 +62,7 @@ export default class TextInput extends mixin(
 
   /**
    *
-   * @param {Object} obj - Object containing selectors and visibility status
+   * @param {object} obj - Object containing selectors and visibility status
    * @param {HTMLElement} obj.iconVisibilityOn - The element functioning as
    * the SVG icon for visibility on
    * @param {HTMLElement} obj.iconVisibilityOff - The element functioning as
@@ -96,7 +96,7 @@ export default class TextInput extends mixin(
   /**
    * Toggles the visibility of the password in the input field and changes the
    * SVG icon indicating password visibility
-   * @param {Object} obj - The elements that can change in the component
+   * @param {object} obj - The elements that can change in the component
    * @param {HTMLElement} obj.element - The element functioning as a text field
    * @param {HTMLElement} obj.button - The button toggling password visibility
    */

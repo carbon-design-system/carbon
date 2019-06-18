@@ -38,7 +38,7 @@ const monthToStr = (monthNumber, shorthand, locale) =>
   locale.months[shorthand ? 'shorthand' : 'longhand'][monthNumber];
 
 /**
- * @param {Object} config Plugin configuration.
+ * @param {object} config Plugin configuration.
  * @param {boolean} [config.shorthand] `true` to use shorthand month.
  * @param {string} config.selectorFlatpickrMonthYearContainer The CSS selector for the container of month/year selection UI.
  * @param {string} config.selectorFlatpickrYearContainer The CSS selector for the container of year selection UI.
@@ -316,7 +316,6 @@ export default class DatePicker extends Component {
       datePickerType,
       dateFormat,
       locale,
-      onChange,
       minDate,
       maxDate,
       value,
@@ -354,6 +353,7 @@ export default class DatePicker extends Component {
           nextArrow: this.rightArrowHTML(),
           prevArrow: this.leftArrowHTML(),
           onChange: (...args) => {
+            const { onChange } = this.props;
             if (onChange) {
               onChange(...args);
             }

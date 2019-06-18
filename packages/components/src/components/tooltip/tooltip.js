@@ -124,7 +124,7 @@ class Tooltip extends mixin(
   /**
    * Changes the shown/hidden state.
    * @param {string} state The new state.
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
    // */
   changeState(state, detail, callback) {
@@ -187,11 +187,11 @@ class Tooltip extends mixin(
 
   /**
    * Handles click/focus events.
-   * @param {Object} params The parameters.
+   * @param {object} params The parameters.
    * @param {Element} params.relatedTarget The element that focus went to. (For `blur` event)
    * @param {string} params.type The event type triggering this method.
    * @param {boolean} params.hadContextMenu
-   * @param {Object} params.details The event details.
+   * @param {object} params.details The event details.
    * @private
    */
   _handleClick({ relatedTarget, type, hadContextMenu, details }) {

@@ -14,7 +14,7 @@ function trackBlur(ToMix) {
      * Mix-in class to add an handler for losing focus.
      * @extends Handles
      * @param {HTMLElement} element The element working as this component.
-     * @param {Object} [options] The component options.
+     * @param {object} [options] The component options.
      */
     constructor(element, options) {
       super(element, options);

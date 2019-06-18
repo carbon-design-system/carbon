@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-angular",
   "description": "Angular components for icons in digital and software products using the Carbon Design System",
-  "version": "10.3.0",
+  "version": "10.3.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-angular",
@@ -27,8 +27,8 @@
     "clean": "node tasks/clean.js"
   },
   "peerDependencies": {
-    "@angular/compiler": "^6.0.0 || ^7.0.0",
-    "@angular/core": "^6.0.0 || ^7.0.0"
+    "@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "dependencies": {
     "@carbon/icon-helpers": "10.2.0"

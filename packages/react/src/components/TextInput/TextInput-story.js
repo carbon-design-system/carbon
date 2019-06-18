@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -73,27 +73,18 @@ const props = {
   }),
 };
 
-class ControlledPasswordInputApp extends React.Component {
-  state = {
-    type: 'password',
-  };
-
-  togglePasswordVisibility = () => {
-    this.setState({
-      type: this.state.type === 'password' ? 'text' : 'password',
-    });
-  };
-
-  render() {
-    return (
-      <TextInput.ControlledPasswordInput
-        type={this.state.type}
-        togglePasswordVisibility={this.togglePasswordVisibility}
-        {...props.passwordInput()}
-      />
-    );
-  }
-}
+const ControlledPasswordInputApp = () => {
+  const [inputType, setInputType] = useState('password');
+  const togglePasswordVisibility = () =>
+    setInputType(inputType === 'password' ? 'text' : 'password');
+  return (
+    <TextInput.ControlledPasswordInput
+      type={inputType}
+      togglePasswordVisibility={togglePasswordVisibility}
+      {...props.passwordInput()}
+    />
+  );
+};
 
 storiesOf('TextInput', module)
   .addDecorator(withKnobs)

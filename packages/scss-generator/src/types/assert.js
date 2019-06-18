@@ -15,7 +15,7 @@ function assertAny() {
 
 function assertDefined(node) {
   if (!node) {
-    throw new Error(`Expected type ${type} to be defined`);
+    throw new Error(`Expected node of type ${node.type} to be defined`);
   }
 }
 

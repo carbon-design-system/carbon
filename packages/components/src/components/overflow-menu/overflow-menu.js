@@ -104,13 +104,13 @@ class OverflowMenu extends mixin(
    * @extends InitComponentBySearch
    * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.selectorOptionMenu] The CSS selector to find the menu.
    * @param {string} [options.classShown] The CSS class for the shown state, for the trigger UI.
    * @param {string} [options.classMenuShown] The CSS class for the shown state, for the menu.
    * @param {string} [options.classMenuFlip] The CSS class for the flipped state of the menu.
-   * @param {Object} [options.objMenuOffset] The offset locating the menu for the non-flipped state.
-   * @param {Object} [options.objMenuOffsetFlip] The offset locating the menu for the flipped state.
+   * @param {object} [options.objMenuOffset] The offset locating the menu for the non-flipped state.
+   * @param {object} [options.objMenuOffsetFlip] The offset locating the menu for the flipped state.
    */
   constructor(element, options) {
     super(element, options);
@@ -137,7 +137,7 @@ class OverflowMenu extends mixin(
   /**
    * Changes the shown/hidden state.
    * @param {string} state The new state.
-   * @param {Object} detail The detail of the event trigging this action.
+   * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {

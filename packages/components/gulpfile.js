@@ -7,7 +7,9 @@ const http = require('http');
 
 // Styles
 const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const deduper = require('postcss-discard-duplicates');
 
 // Javascript deps
 const babel = require('gulp-babel');
@@ -24,13 +26,16 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const header = require('gulp-header');
+const concat = require('gulp-concat');
 const jsdoc = require('gulp-jsdoc3');
 const log = require('fancy-log');
 const through = require('through2');
+const merge = require('merge2');
 
 // Rollup
 const { rollup } = require('rollup');
 const commonjs = require('rollup-plugin-commonjs');
+const { terser: rollupTerser } = require('rollup-plugin-terser');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
@@ -70,6 +75,10 @@ const cloptions = commander
   .option(
     '-b, --use-breaking-changes',
     'Build with breaking changes turned on (For dev build only)'
+  )
+  .option(
+    '--use-custom-properties',
+    'Build CSS with custom properties (For dev build only)'
   )
   .option(
     '-e, --use-experimental-features',
@@ -130,7 +139,7 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-const { useBreakingChanges } = cloptions;
+const { useBreakingChanges, useCustomProperties } = cloptions;
 let { useExperimentalFeatures } = cloptions;
 
 gulp.task('scripts:dev:feature-flags', () => {
@@ -161,12 +170,20 @@ gulp.task('scripts:dev:feature-flags', () => {
 
 const buildDemoJS = () => {
   if (cloptions.rollup) {
-    return rollup(rollupConfigDev)
+    return rollup({
+      ...rollupConfigDev,
+      plugins: [
+        ...rollupConfigDev.plugins,
+        process.env.NODE_ENV !== 'production' ? {} : rollupTerser(),
+      ],
+    })
       .then(bundle =>
         bundle.write({
           format: 'iife',
           name: 'CarbonComponents',
-          file: 'demo/demo.js',
+          file: `demo/demo${
+            process.env.NODE_ENV !== 'production' ? '' : '.min'
+          }.js`,
           sourcemap: 'inline',
         })
       )
@@ -324,9 +341,11 @@ const buildStyles = prod => {
         }).on('error', sass.logError)
       )
       .pipe(
-        autoprefixer({
-          browsers: ['> 1%', 'last 2 versions'],
-        })
+        postcss([
+          autoprefixer({
+            browsers: ['> 1%', 'last 2 versions'],
+          }),
+        ])
       )
       .pipe(
         rename(filePath => {
@@ -363,26 +382,46 @@ gulp.task('sass:dev', () => {
     flags['components-x'] = useExperimentalFeatures;
     flags.grid = useExperimentalFeatures;
   }
-  return gulp
-    .src('demo/scss/demo.scss')
-    .pipe(sourcemaps.init())
-    .pipe(
-      header(`
+  const createStream = (theme = 'white') =>
+    gulp
+      .src('demo/scss/demo.scss')
+      .pipe(sourcemaps.init())
+      .pipe(
+        header(`
+        $demo--carbon--theme-name: ${theme};
         $feature-flags: (${Object.keys(flags)
           .reduce((a, flag) => [...a, `${flag}: ${!!flags[flag]}`], [])
           .join(', ')});
       `)
-    )
+      )
+      .pipe(
+        sass({
+          includePaths: ['node_modules'],
+          outputStyle: 'expanded',
+        }).on('error', sass.logError)
+      );
+  if (useCustomProperties) {
+    return merge(createStream(), createStream('custom-properties'))
+      .pipe(concat('demo.css'))
+      .pipe(
+        postcss([
+          deduper(),
+          autoprefixer({
+            browsers: ['> 1%', 'last 2 versions'],
+          }),
+        ])
+      )
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('demo'))
+      .pipe(browserSync.stream({ match: '**/*.css' }));
+  }
+  return createStream()
     .pipe(
-      sass({
-        includePaths: ['node_modules'],
-        outputStyle: 'expanded',
-      }).on('error', sass.logError)
-    )
-    .pipe(
-      autoprefixer({
-        browsers: ['> 1%', 'last 2 versions'],
-      })
+      postcss([
+        autoprefixer({
+          browsers: ['> 1%', 'last 2 versions'],
+        }),
+      ])
     )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))

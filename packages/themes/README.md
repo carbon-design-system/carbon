@@ -114,18 +114,11 @@ If you're looking for `@carbon/themes` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 
-## 📚 Examples
-
-If you're looking for more examples on how to use `@carbon/themes`, we have some
-examples that you can check out:
-
-- [Lib](./examples/lib)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 
