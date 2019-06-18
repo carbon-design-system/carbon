@@ -95,11 +95,17 @@ class FileUploader extends mixin(
 
   _checkmarkHTML() {
     return `
-      <svg class="${
-        this.options.classFileComplete
-      }" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
-       <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z"/>
-      </svg>`;
+      <svg focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        style="will-change: transform;"
+        xmlns="http://www.w3.org/2000/svg"
+        class="${this.options.classFileComplete}"
+        width="16" height="16" viewBox="0 0 16 16"
+        aria-hidden="true">
+        <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zM7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z"></path>
+        <path d="M7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z" data-icon-path="inner-path" opacity="0"></path>
+      </svg>
+    `;
   }
 
   _changeState = (state, detail, callback) => {
