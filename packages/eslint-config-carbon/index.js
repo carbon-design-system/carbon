@@ -10,7 +10,7 @@
 module.exports = {
   parser: 'babel-eslint',
   extends: ['eslint:recommended', 'plugin:jsx-a11y/recommended'],
-  plugins: ['react', 'jsdoc', 'jsx-a11y'],
+  plugins: ['react', 'jsdoc', 'jsx-a11y', 'react-hooks'],
   rules: {
     // Handle cases where we are destructuring but may not be using the initial
     // variables
@@ -26,6 +26,8 @@ module.exports = {
     'react/jsx-uses-react': 1,
     'react/no-find-dom-node': 1,
     'react/no-typos': 2,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
     'jsdoc/check-param-names': 2,
     'jsdoc/check-tag-names': 2,
     'jsdoc/check-types': 2,
