@@ -30,6 +30,7 @@ export default class HeaderNavigation extends React.Component {
      * or `HeaderMenu`
      */
     children: PropTypes.node,
+    navRef: PropTypes.object,
   };
 
   constructor(props) {
@@ -53,6 +54,7 @@ export default class HeaderNavigation extends React.Component {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       children,
+      navRef,
       className: customClassName,
       ...rest
     } = this.props;
@@ -67,6 +69,7 @@ export default class HeaderNavigation extends React.Component {
     return (
       <nav {...rest} {...accessibilityLabel} className={className}>
         <ul
+          ref={navRef}
           {...accessibilityLabel}
           className={`${prefix}--header__menu-bar`}
           role="menubar">
