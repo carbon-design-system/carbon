@@ -122,7 +122,7 @@ async function scaffold() {
           ? `${categoryInformation[key].category}/${
               categoryInformation[key].subcategory
             }`
-          : '',
+          : 'uncategorized',
       ],
       aliases: [key],
     };
