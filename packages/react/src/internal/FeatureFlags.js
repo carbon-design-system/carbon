@@ -30,7 +30,7 @@
  * * _With_ this feature flag, the signature of the event handler will be altered to provide additional context in the second parameter: `onChange(event, { value, ...rest })` where:
  *   * `event` is the (React) raw event
  *   * `value` is the new value
- *   * `direction` tells you the button you hit is up button or down button
+ *   * `rest` tells you additional information based on the source component
  * * _Without_ this feature flag the event handler has `onChange(event, direction)`.
  */
 export const useControlledStateWithValue = false;
