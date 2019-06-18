@@ -15,18 +15,15 @@ const search = require('../src/search');
 
 const SVG_DIR = path.resolve(__dirname, '../src/svg');
 const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.yml');
-const CATEGORIES_DEFINITION_PATH = '../categories.yml';
-
-let categoriesJson;
+const CATEGORIES_DEFINITION_PATH = path.resolve(__dirname, '../categories.yml');
 
 async function scaffold() {
-  try {
-    categoriesJson = yaml.safeLoad(
-      fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
-    );
-  } catch (e) {
-    console.log(e);
-  }
+  const metadata = yaml.safeLoad(
+    await fs.readFileSync(METADATA_OUTPUT, 'utf8')
+  );
+  const categoriesJson = yaml.safeLoad(
+    await fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
+  );
 
   // Get all of our icon files from the SVG directory
   const iconFiles = await search(SVG_DIR);
@@ -113,18 +110,17 @@ async function scaffold() {
     // }
 
     const group = iconsGroupedByName[key];
+    const savedIcon = metadata.icons.find(({ name }) => name === key);
     const icon = {
       name: key,
       friendly_name: sentenceCase(key),
       usage: 'This is a description for usage',
       categories: [
         iconIsCategorized
-          ? `${categoryInformation[key].category}/${
-              categoryInformation[key].subcategory
-            }`
+          ? `${categoryInformation[key].category}/${categoryInformation[key].subcategory}`
           : 'uncategorized',
       ],
-      aliases: [key],
+      aliases: savedIcon ? savedIcon.aliases : [key],
     };
 
     if (group.icon) {
