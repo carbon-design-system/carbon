@@ -18,9 +18,20 @@
  */
 
 /**
- * Uses `value` prop to turn several components to controlled mode, notablly `<NumberInput>`.
- * The "controlled mode" detection is done in component creation time and _never_ changes after creation.
- * To ensure the component is in controlled mode, define a `value` prop at creation time.
+ * With this flag, certain components will be created in either a controlled or controlled
+ * mode based on the existence of a value prop.
+ *
+ * The following components will have the significance of their props slightly altered as outlined below.
+ *
+ * Components: `<NumberInput>`
+ *
+ * * `value` → when provided, enables controlled mode.
+ *   For the rest of the component's lifecycle, it will be controlled by this prop as it's single source of truth.
+ * * `defaultValue` → Optional starting value, used for for uncontrolled mode only (no value prop).
+ *   The value prop takes precedence over defaultValue.
+ * * `onChange` → Optional event handler.
+ *   However, if value is provided and a handler is not, we'll throw a warning indicating the component is now read-only
+ * * `readOnly` → silences the above warning, acknowledging the read-only state of the component
  *
  * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
  *
