@@ -50,13 +50,12 @@ const TextInput = React.forwardRef(function TextInput(
     light,
     charCount,
     renderCharCounter: CharCounter = DefaultCharCounter,
-    defaultValue,
     maxLength,
     ...other
   },
   ref
 ) {
-  const [inputVal, setInput] = useState(defaultValue);
+  const [inputVal, setInput] = useState('');
   const errorId = id + '-error-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,

@@ -20,7 +20,6 @@ describe('TextInput', () => {
         className="extra-class"
         labelText="testlabel"
         helperText="testHelper"
-        defaultValue="test"
         light
       />
     );
@@ -76,7 +75,9 @@ describe('TextInput', () => {
       });
 
       it('should set value as expected', () => {
-        expect(textInput().props().value).toEqual('test');
+        expect(textInput().props().defaultValue).toEqual(undefined);
+        wrapper.setProps({ defaultValue: 'test' });
+        expect(textInput().props().defaultValue).toEqual('test');
       });
 
       it('should count length increases in text input value', () => {
