@@ -25,7 +25,7 @@
  * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
  *
  * This flag also updates event handlers to pass an up-to-date value in the second parameter,
- * so appilcation can set the latest value to control our components.
+ * so applications can use it in both controlled and uncontrolled components.
  *
  * * _With_ this feature flag, the event handler has `onChange(event, { value, direction })` where:
  *   * `event` is the (React) raw event
