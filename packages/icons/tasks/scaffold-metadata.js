@@ -117,12 +117,13 @@ async function scaffold() {
       name: key,
       friendly_name: sentenceCase(key),
       usage: 'This is a description for usage',
-      category: iconIsCategorized
-        ? categoryInformation[key].category
-        : 'uncategorized',
-      subcategory: iconIsCategorized
-        ? categoryInformation[key].subcategory
-        : 'uncategorized',
+      categories: [
+        iconIsCategorized
+          ? `${categoryInformation[key].category}/${
+              categoryInformation[key].subcategory
+            }`
+          : '',
+      ],
       aliases: [key],
     };
 
