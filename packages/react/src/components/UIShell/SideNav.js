@@ -5,12 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import SideNavFooter from './SideNavFooter';
+// import SideNavFooter from './SideNavFooter';
+import SideNavItems from './SideNavItems';
+import SideNavLink from './SideNavLink';
+import SideNavMenu from './SideNavMenu';
+import SideNavMenuItem from './SideNavMenuItem';
 
 const { prefix } = settings;
 
@@ -24,8 +28,11 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     children,
     onToggle,
     className: customClassName,
-    translateById: t,
+    // translateById: t,
     isFixedNav,
+    headerNavigationRef,
+    hasHeaderItems,
+    isPersistent,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -45,9 +52,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const assistiveText = expanded
-    ? t('carbon.sidenav.state.open')
-    : t('carbon.sidenav.state.closed');
+  // const assistiveText = expanded
+  //   ? t('carbon.sidenav.state.open')
+  //   : t('carbon.sidenav.state.closed');
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
@@ -55,7 +62,21 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
+    [`${prefix}--side-nav--hidden`]: !isPersistent,
   });
+
+  const headerNavClassName = cx({
+    [`${prefix}--side-nav__header-navigation`]: hasHeaderItems,
+    [`${prefix}--side-nav__header-navigation--hidden`]: !hasHeaderItems,
+  });
+
+  const [headerNavChildren, setHeaderNavChildren] = useState(null);
+
+  useEffect(() => {
+    hasHeaderItems
+      ? setHeaderNavChildren([...headerNavigationRef.current.children])
+      : null;
+  }, []);
 
   return (
     <nav
@@ -64,14 +85,45 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       {...accessibilityLabel}
       onFocus={event => handleToggle(event, true)}
       onBlur={event => handleToggle(event, false)}>
-      {children}
-      {isFixedNav ? null : (
-        <SideNavFooter
-          assistiveText={assistiveText}
-          expanded={expanded}
-          onToggle={handleToggle}
-        />
-      )}
+      <SideNavItems>
+        <div className={headerNavClassName}>
+          {headerNavChildren !== null
+            ? headerNavChildren.map(i => {
+                if (
+                  i.classList.length === 0 ||
+                  i.classList[0] !== `${prefix}--header__submenu`
+                ) {
+                  const text = i.innerText;
+                  const url = i.children[0].attributes[0].nodeValue;
+                  return (
+                    <SideNavLink href={url} key={`${Math.random()}`}>
+                      {text}
+                    </SideNavLink>
+                  );
+                } else if (
+                  i.classList.length > 0 &&
+                  i.classList[0] === `${prefix}--header__submenu`
+                ) {
+                  const text = i.children[0].innerText;
+                  const menuItems = [...i.children[1].children];
+                  const menuItemComponents = menuItems.map(i => {
+                    const itemText = i.innerText;
+                    const itemUrl = i.children[0].attributes[0].nodeValue;
+                    return (
+                      <SideNavMenuItem href={itemUrl} key={`${Math.random()}`}>
+                        {itemText}
+                      </SideNavMenuItem>
+                    );
+                  });
+                  return (
+                    <SideNavMenu title={text}>{menuItemComponents}</SideNavMenu>
+                  );
+                }
+              })
+            : null}
+        </div>
+        {children}
+      </SideNavItems>
     </nav>
   );
 });
@@ -86,6 +138,9 @@ SideNav.defaultProps = {
   },
   defaultExpanded: false,
   isChildOfHeader: true,
+  isFixedNav: false,
+  hasHeaderItems: false,
+  isPersistent: true,
 };
 
 SideNav.propTypes = {
@@ -131,6 +186,26 @@ SideNav.propTypes = {
    * Optionally provide a custom class to apply to the underlying <li> node
    */
   isChildOfHeader: PropTypes.bool,
+
+  /**
+   * Returns the ref for headerNavigation when used with SideNav
+   */
+  headerNavigationRef: PropTypes.object,
+
+  /**
+   * Specify if sideNav is standalone
+   */
+  isFixedNav: PropTypes.bool,
+
+  /**
+   * Specify if sideNav will include responsive header navigation links
+   */
+  hasHeaderItems: PropTypes.bool,
+
+  /**
+   * Specify if the sideNav will be persistent above the lg breakpoint
+   */
+  isPersistent: PropTypes.bool,
 };
 
 export default SideNav;
