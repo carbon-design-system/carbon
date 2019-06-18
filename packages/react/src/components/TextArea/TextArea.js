@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
@@ -141,6 +141,10 @@ const TextArea = ({
       onInput={e => setInput(e.target.value)}
     />
   );
+
+  useEffect(() => {
+    setInput(other.value || defaultValue);
+  }, [other, defaultValue]);
 
   return (
     <div className={`${prefix}--form-item`}>
