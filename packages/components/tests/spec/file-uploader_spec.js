@@ -63,7 +63,6 @@ describe('File Uploader', function() {
         classFileComplete: 'bx--file-complete',
         classSelectedFile: 'bx--file__selected-file',
         classStateContainer: 'bx--file__state-container',
-        classFormRequirement: 'bx--form-requirement',
         eventBeforeDeleteFilenameFileuploader:
           'fileuploader-before-delete-filename',
         eventAfterDeleteFilenameFileuploader:
