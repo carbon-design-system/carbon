@@ -56,13 +56,20 @@ describe('File Uploader', function() {
         selectorInput: 'input[type="file"].bx--file-input',
         selectorContainer: '[data-file-container]',
         selectorCloseButton: '.bx--file-close',
-        classLoading: 'bx--loading',
+        selectorDropContainer: '[data-file-drop-container]',
+        selectorOtherDropContainers: '[data-drop-container]',
+        classLoading: 'bx--loading bx--loading--small',
+        classLoadingAnimation: 'bx--inline-loading__animation',
         classLoadingSvg: 'bx--loading__svg',
+        classLoadingBackground: 'bx--loading__background',
+        classLoadingStroke: 'bx--loading__stroke',
         classFileName: 'bx--file-filename',
         classFileClose: 'bx--file-close',
         classFileComplete: 'bx--file-complete',
         classSelectedFile: 'bx--file__selected-file',
+        classSelectedFileInvalid: 'bx--file__selected-file--invalid',
         classStateContainer: 'bx--file__state-container',
+        classDragOver: 'bx--file__drop-container--drag-over',
         eventBeforeDeleteFilenameFileuploader:
           'fileuploader-before-delete-filename',
         eventAfterDeleteFilenameFileuploader:
@@ -109,7 +116,9 @@ describe('File Uploader', function() {
       const div = document.createElement('div');
       div.innerHTML = filenamesHTML;
       document.body.appendChild(div);
-      const nameElement = document.querySelector('.bx--file-filename');
+      const nameElement = document.querySelector(
+        '.bx--file__selected-file .bx--file-filename'
+      );
 
       expect(nameElement.innerHTML).toBe('testName');
 

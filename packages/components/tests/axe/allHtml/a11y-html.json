@@ -519,6 +519,31 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">\"</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(5) > .attr-value.token:nth-child(8) > .punctuation.token:nth-child(3)"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -530,86 +555,11 @@
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token attr-name\">style</span>",
+            "html": "<span class=\"token attr-name\">class</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(5) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">=\"</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(5) > .style-attr.language-css.token > .punctuation.token:nth-child(2)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(5) > .style-attr.language-css.token > .attr-value.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#c92c2c",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token property\">will-change</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(5) > .style-attr.language-css.token > .attr-value.token > .property.token"
+              ".tag.token:nth-child(5) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -644,31 +594,6 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(5) > .attr-value.token:nth-child(18)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#5f6364",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -684,7 +609,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(5) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(1)"
+              ".tag.token:nth-child(5) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(1)"
             ]
           },
           {
@@ -709,7 +634,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(5) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(2)"
+              ".tag.token:nth-child(5) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(2)"
             ]
           },
           {
@@ -719,47 +644,22 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
+                  "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
-                  "missingData": "shortTextContent"
+                  "missingData": "elmPartiallyObscuring"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
+                "message": "Element's background color could not be determined because it partially overlaps other elements",
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token punctuation\">\"</span>",
+            "html": "<span class=\"token attr-name\">aria-hidden</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(5) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(3)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "shortTextContent"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">&gt;</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(5) > .punctuation.token"
+              ".tag.token:nth-child(5) > .attr-name.token:nth-child(17)"
             ]
           },
           {
@@ -793,6 +693,106 @@
             "none": [],
             "target": [
               ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(6) > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(7) > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#c92c2c",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>svg</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(8) > .tag.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&lt;/</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(8) > .tag.token > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(8) > .punctuation.token"
             ]
           },
           {
@@ -877,6 +877,31 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">\"</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(19) > .attr-value.token:nth-child(8) > .punctuation.token:nth-child(3)"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -888,86 +913,11 @@
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token attr-name\">style</span>",
+            "html": "<span class=\"token attr-name\">class</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(19) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">=\"</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(19) > .style-attr.language-css.token > .punctuation.token:nth-child(2)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(19) > .style-attr.language-css.token > .attr-value.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#c92c2c",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token property\">will-change</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(19) > .style-attr.language-css.token > .attr-value.token > .property.token"
+              ".tag.token:nth-child(19) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -1002,31 +952,6 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(19) > .attr-value.token:nth-child(18)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#5f6364",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -1042,7 +967,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(19) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(1)"
+              ".tag.token:nth-child(19) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(1)"
             ]
           },
           {
@@ -1067,7 +992,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(19) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(2)"
+              ".tag.token:nth-child(19) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(2)"
             ]
           },
           {
@@ -1077,47 +1002,22 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
+                  "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
-                  "missingData": "shortTextContent"
+                  "missingData": "elmPartiallyObscuring"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
+                "message": "Element's background color could not be determined because it partially overlaps other elements",
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token punctuation\">\"</span>",
+            "html": "<span class=\"token attr-name\">aria-hidden</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(19) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(3)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "shortTextContent"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">&gt;</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(19) > .punctuation.token"
+              ".tag.token:nth-child(19) > .attr-name.token:nth-child(17)"
             ]
           },
           {
@@ -1151,6 +1051,106 @@
             "none": [],
             "target": [
               ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(20) > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(21) > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#c92c2c",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>svg</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(22) > .tag.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&lt;/</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(22) > .tag.token > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(22) > .punctuation.token"
             ]
           },
           {
@@ -1235,6 +1235,31 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">\"</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(33) > .attr-value.token:nth-child(8) > .punctuation.token:nth-child(3)"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -1246,86 +1271,11 @@
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token attr-name\">style</span>",
+            "html": "<span class=\"token attr-name\">class</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(33) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">=\"</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(33) > .style-attr.language-css.token > .punctuation.token:nth-child(2)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(33) > .style-attr.language-css.token > .attr-value.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#c92c2c",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token property\">will-change</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(33) > .style-attr.language-css.token > .attr-value.token > .property.token"
+              ".tag.token:nth-child(33) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -1360,31 +1310,6 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(33) > .attr-value.token:nth-child(18)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#5f6364",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -1400,7 +1325,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(33) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(1)"
+              ".tag.token:nth-child(33) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(1)"
             ]
           },
           {
@@ -1425,7 +1350,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(33) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(2)"
+              ".tag.token:nth-child(33) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(2)"
             ]
           },
           {
@@ -1435,47 +1360,22 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
+                  "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
-                  "missingData": "shortTextContent"
+                  "missingData": "elmPartiallyObscuring"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
+                "message": "Element's background color could not be determined because it partially overlaps other elements",
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token punctuation\">\"</span>",
+            "html": "<span class=\"token attr-name\">aria-hidden</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(33) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(3)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "shortTextContent"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">&gt;</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(33) > .punctuation.token"
+              ".tag.token:nth-child(33) > .attr-name.token:nth-child(17)"
             ]
           },
           {
@@ -1509,6 +1409,106 @@
             "none": [],
             "target": [
               ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(34) > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(35) > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#c92c2c",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>svg</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(36) > .tag.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&lt;/</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(36) > .tag.token > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(36) > .punctuation.token"
             ]
           },
           {
@@ -1593,6 +1593,31 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">\"</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(47) > .attr-value.token:nth-child(8) > .punctuation.token:nth-child(3)"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -1604,86 +1629,11 @@
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token attr-name\">style</span>",
+            "html": "<span class=\"token attr-name\">class</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(47) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">=\"</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(47) > .style-attr.language-css.token > .punctuation.token:nth-child(2)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(47) > .style-attr.language-css.token > .attr-value.token"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#c92c2c",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "elmPartiallyObscuring"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it partially overlaps other elements",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token property\">will-change</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(47) > .style-attr.language-css.token > .attr-value.token > .property.token"
+              ".tag.token:nth-child(47) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -1718,31 +1668,6 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#1990b8",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "bgOverlap"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element's background color could not be determined because it is overlapped by another element",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(47) > .attr-value.token:nth-child(18)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
                   "fgColor": "#5f6364",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
@@ -1758,7 +1683,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(47) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(1)"
+              ".tag.token:nth-child(47) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(1)"
             ]
           },
           {
@@ -1783,7 +1708,7 @@
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(47) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(2)"
+              ".tag.token:nth-child(47) > .attr-value.token:nth-child(10) > .punctuation.token:nth-child(2)"
             ]
           },
           {
@@ -1793,47 +1718,22 @@
                 "data": {
                   "contrastRatio": 0,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
+                  "fgColor": "#2f9c0a",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal",
-                  "missingData": "shortTextContent"
+                  "missingData": "elmPartiallyObscuring"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
+                "message": "Element's background color could not be determined because it partially overlaps other elements",
                 "relatedNodes": []
               }
             ],
-            "html": "<span class=\"token punctuation\">\"</span>",
+            "html": "<span class=\"token attr-name\">aria-hidden</span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(47) > .attr-value.token:nth-child(18) > .punctuation.token:nth-child(3)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "contrastRatio": 0,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#5f6364",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": "shortTextContent"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element content is too short to determine if it is actual text content",
-                "relatedNodes": []
-              }
-            ],
-            "html": "<span class=\"token punctuation\">&gt;</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(47) > .punctuation.token"
+              ".tag.token:nth-child(47) > .attr-name.token:nth-child(17)"
             ]
           },
           {
@@ -1867,6 +1767,106 @@
             "none": [],
             "target": [
               ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(48) > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(49) > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#c92c2c",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>svg</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(50) > .tag.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "bgOverlap"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it is overlapped by another element",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&lt;/</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(50) > .tag.token > .punctuation.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#5f6364",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": "shortTextContent"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<span class=\"token punctuation\">&gt;</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html > .tag.token:nth-child(50) > .punctuation.token"
             ]
           },
           {
@@ -3054,6 +3054,30 @@
             "target": [
               ".component-variation:nth-child(2) > .component-example > .code-example > .bx--snippet-button.code-example__copy-btn[data-copy-btn=\"true\"]"
             ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "contrastRatio": 0,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#ffffff",
+                  "fontSize": "9.4pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Unable to determine contrast ratio",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<div id=\"__bs_notify__\" style=\"display: block; padding: 15px; font-family: sans-serif; position: fixed; font-size: 0.9em; z-index: 9999; right: 0px; top: 0px; border-bottom-left-radius: 5px; background-color: rgb(27, 32, 50); margin: 0px; color: white; text-align: center; pointer-events: none;\">",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ":root"
+            ]
           }
         ],
         "tags": [
@@ -3111,14 +3135,14 @@
     "testEnvironment": {
       "orientationAngle": 0,
       "orientationType": "landscape-primary",
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36",
       "windowHeight": 710,
       "windowWidth": 1200
     },
     "testRunner": {
       "name": "axe"
     },
-    "timestamp": 1557872754319,
+    "timestamp": 1560963519105,
     "toolOptions": {
       "reporter": "v1",
       "rules": {
@@ -3696,6 +3720,72 @@
               }
             ],
             "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-name\">style</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(5) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.66,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#1990b8",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(5) > .style-attr.language-css.token > .attr-value.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.57,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#2f9c0a",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
             "html": "<span class=\"token attr-name\">xmlns</span>",
             "impact": "serious",
             "none": [],
@@ -3734,39 +3824,6 @@
             "none": [],
             "target": [
               ".tag.token:nth-child(5) > .attr-value.token:nth-child(8)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-                "relatedNodes": [
-                  {
-                    "html": "<code class=\"  language-html\">",
-                    "target": [
-                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">class</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(5) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -3973,15 +4030,15 @@
               {
                 "data": {
                   "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
+                  "contrastRatio": 3.66,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
+                  "fgColor": "#1990b8",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
                 "relatedNodes": [
                   {
                     "html": "<code class=\"  language-html\">",
@@ -3992,12 +4049,12 @@
                 ]
               }
             ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">aria-hidden</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(5) > .attr-name.token:nth-child(17)"
+              ".tag.token:nth-child(5) > .attr-value.token:nth-child(18)"
             ]
           },
           {
@@ -4653,6 +4710,72 @@
               }
             ],
             "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-name\">style</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(19) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.66,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#1990b8",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(19) > .style-attr.language-css.token > .attr-value.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.57,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#2f9c0a",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
             "html": "<span class=\"token attr-name\">xmlns</span>",
             "impact": "serious",
             "none": [],
@@ -4691,39 +4814,6 @@
             "none": [],
             "target": [
               ".tag.token:nth-child(19) > .attr-value.token:nth-child(8)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-                "relatedNodes": [
-                  {
-                    "html": "<code class=\"  language-html\">",
-                    "target": [
-                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">class</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(19) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -4930,15 +5020,15 @@
               {
                 "data": {
                   "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
+                  "contrastRatio": 3.66,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
+                  "fgColor": "#1990b8",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
                 "relatedNodes": [
                   {
                     "html": "<code class=\"  language-html\">",
@@ -4949,12 +5039,12 @@
                 ]
               }
             ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">aria-hidden</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(19) > .attr-name.token:nth-child(17)"
+              ".tag.token:nth-child(19) > .attr-value.token:nth-child(18)"
             ]
           },
           {
@@ -5610,6 +5700,72 @@
               }
             ],
             "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-name\">style</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(33) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.66,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#1990b8",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(33) > .style-attr.language-css.token > .attr-value.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.57,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#2f9c0a",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
             "html": "<span class=\"token attr-name\">xmlns</span>",
             "impact": "serious",
             "none": [],
@@ -5648,39 +5804,6 @@
             "none": [],
             "target": [
               ".tag.token:nth-child(33) > .attr-value.token:nth-child(8)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-                "relatedNodes": [
-                  {
-                    "html": "<code class=\"  language-html\">",
-                    "target": [
-                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">class</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(33) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -5887,15 +6010,15 @@
               {
                 "data": {
                   "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
+                  "contrastRatio": 3.66,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
+                  "fgColor": "#1990b8",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
                 "relatedNodes": [
                   {
                     "html": "<code class=\"  language-html\">",
@@ -5906,12 +6029,12 @@
                 ]
               }
             ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">aria-hidden</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(33) > .attr-name.token:nth-child(17)"
+              ".tag.token:nth-child(33) > .attr-value.token:nth-child(18)"
             ]
           },
           {
@@ -6567,6 +6690,72 @@
               }
             ],
             "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-name\">style</span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(47) > .style-attr.language-css.token > .attr-name.token > .attr-name.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.66,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#1990b8",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token property\">will-change</span><span class=\"token punctuation\">:</span> transform<span class=\"token punctuation\">;</span></span>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              ".tag.token:nth-child(47) > .style-attr.language-css.token > .attr-value.token"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.57,
+                  "expectedContrastRatio": "4.5:1",
+                  "fgColor": "#2f9c0a",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal"
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "relatedNodes": [
+                  {
+                    "html": "<code class=\"  language-html\">",
+                    "target": [
+                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
             "html": "<span class=\"token attr-name\">xmlns</span>",
             "impact": "serious",
             "none": [],
@@ -6605,39 +6794,6 @@
             "none": [],
             "target": [
               ".tag.token:nth-child(47) > .attr-value.token:nth-child(8)"
-            ]
-          },
-          {
-            "all": [],
-            "any": [
-              {
-                "data": {
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
-                  "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
-                  "fontSize": "9.8pt",
-                  "fontWeight": "normal"
-                },
-                "id": "color-contrast",
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-                "relatedNodes": [
-                  {
-                    "html": "<code class=\"  language-html\">",
-                    "target": [
-                      ".component-variation:nth-child(1) > .component-example > .code-example > .code-example__raw-html > pre > .language-html"
-                    ]
-                  }
-                ]
-              }
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">class</span>",
-            "impact": "serious",
-            "none": [],
-            "target": [
-              ".tag.token:nth-child(47) > .attr-name.token:nth-child(9)"
             ]
           },
           {
@@ -6844,15 +7000,15 @@
               {
                 "data": {
                   "bgColor": "#ffffff",
-                  "contrastRatio": 3.57,
+                  "contrastRatio": 3.66,
                   "expectedContrastRatio": "4.5:1",
-                  "fgColor": "#2f9c0a",
+                  "fgColor": "#1990b8",
                   "fontSize": "9.8pt",
                   "fontWeight": "normal"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+                "message": "Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
                 "relatedNodes": [
                   {
                     "html": "<code class=\"  language-html\">",
@@ -6863,12 +7019,12 @@
                 ]
               }
             ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.57 (foreground color: #2f9c0a, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"token attr-name\">aria-hidden</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.66 (foreground color: #1990b8, background color: #ffffff, font size: 9.8pt, font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"token attr-value\"><span class=\"token punctuation\">=</span><span class=\"token punctuation\">\"</span>true<span class=\"token punctuation\">\"</span></span>",
             "impact": "serious",
             "none": [],
             "target": [
-              ".tag.token:nth-child(47) > .attr-name.token:nth-child(17)"
+              ".tag.token:nth-child(47) > .attr-value.token:nth-child(18)"
             ]
           },
           {
@@ -9638,6 +9794,12 @@
                     "target": [
                       ".offleft"
                     ]
+                  },
+                  {
+                    "html": "<div id=\"__bs_notify__\" style=\"display: block; padding: 15px; font-family: sans-serif; position: fixed; font-size: 0.9em; z-index: 9999; right: 0px; top: 0px; border-bottom-left-radius: 5px; background-color: rgb(27, 32, 50); margin: 0px; color: white; text-align: center; pointer-events: none;\">",
+                    "target": [
+                      ":root"
+                    ]
                   }
                 ]
               }
@@ -9657,7 +9819,7 @@
         ]
       }
     ],
-    "time": 6851,
+    "time": 7157,
     "status": 200
   }
 ]
