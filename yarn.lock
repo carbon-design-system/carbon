@@ -5577,9 +5577,9 @@ capture-stack-trace@^1.0.0:
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
 carbon-components-react@^6.0.0:
-  version "6.115.1"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.115.1.tgz#75b0bf752f87af7bded8e6d9ccc3ac8ef5166bd0"
-  integrity sha512-myr4vcF1U7kISfKG7xkLjcwZ4VimxOSEGbwlIU1Hpp2VASHbcJyBAL8XgCa9NQdtcGph5CN2NIX4AdC8R3m6+w==
+  version "6.115.3"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.115.3.tgz#a7eebb703487fde1b078a7b7b761594512bdc0fd"
+  integrity sha512-G/guiRBuGqR+29ocd3iLb35YSVuNjhfovY6+yFkyPDVRmOmq2u8XtO2edhHD/G5JR8mLghEWS9m+f4yzS8DZIQ==
   dependencies:
     "@carbon/icons-react" "^0.0.1-beta.2"
     classnames "2.2.6"
@@ -5595,9 +5595,9 @@ carbon-components-react@^6.0.0:
     window-or-global "^1.0.1"
 
 carbon-components@^9.0.0:
-  version "9.91.1"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.91.1.tgz#b7e5f272fdfaa58e0f570455191b8b573bbe87de"
-  integrity sha512-gHEPftSAUy25Ek4YfYmEZz/q5C22C24Q1qycdM7WSLKQz7f3RaR3mVprW9uRE1haq81f8y1hcWEG4YcX92hGWw==
+  version "9.91.3"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.91.3.tgz#d0f637677ec3cf2fc6300c5cbdebe58908fadd46"
+  integrity sha512-XZ9Mq9b1GaleOUdSrwApzdSiaRU3P9CW3mFBFn49miiKlFPg5MERtuxicTMXrY5WAycXK+cplUi4wPrRTWwWLw==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.7"
@@ -6315,7 +6315,7 @@ concat-stream@^2.0.0:
     readable-stream "^3.0.2"
     typedarray "^0.0.6"
 
-concat-with-sourcemaps@^1.1.0:
+concat-with-sourcemaps@^1.0.0, concat-with-sourcemaps@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.1.0.tgz#d4ea93f05ae25790951b99e7b3b09e3908a4082e"
   dependencies:
@@ -10050,18 +10050,6 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
-gulp-autoprefixer@^6.0.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/gulp-autoprefixer/-/gulp-autoprefixer-6.1.0.tgz#5f7f78468fe99a589ce353fa5891b7bee16b8f1e"
-  integrity sha512-Ti/BUFe+ekhbDJfspZIMiOsOvw51KhI9EncsDfK7NaxjqRm+v4xS9v99kPxEoiDavpWqQWvG8Y6xT1mMlB3aXA==
-  dependencies:
-    autoprefixer "^9.5.1"
-    fancy-log "^1.3.2"
-    plugin-error "^1.0.1"
-    postcss "^7.0.2"
-    through2 "^3.0.1"
-    vinyl-sourcemaps-apply "^0.2.1"
-
 gulp-axe-webdriver@^3.1.0:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/gulp-axe-webdriver/-/gulp-axe-webdriver-3.1.3.tgz#b01e4c4f13579e8096c3ffe5b975f7bb7c7c9cf5"
@@ -10114,6 +10102,15 @@ gulp-cli@^2.2.0:
     v8flags "^3.0.1"
     yargs "^7.1.0"
 
+gulp-concat@^2.6.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/gulp-concat/-/gulp-concat-2.6.1.tgz#633d16c95d88504628ad02665663cee5a4793353"
+  integrity sha1-Yz0WyV2IUEYorQJmVmPO5aR5M1M=
+  dependencies:
+    concat-with-sourcemaps "^1.0.0"
+    through2 "^2.0.0"
+    vinyl "^2.0.0"
+
 gulp-header@^2.0.0:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/gulp-header/-/gulp-header-2.0.7.tgz#07505740eb432e8d2bb2af68744858dabaaf491b"
@@ -10145,6 +10142,17 @@ gulp-nodemon@^2.4.2:
     colors "^1.2.1"
     gulp "^4.0.0"
     nodemon "^1.18.7"
+
+gulp-postcss@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/gulp-postcss/-/gulp-postcss-8.0.0.tgz#8d3772cd4d27bca55ec8cb4c8e576e3bde4dc550"
+  integrity sha512-Wtl6vH7a+8IS/fU5W9IbOpcaLqKxd5L1DUOzaPmlnCbX1CrG0aWdwVnC3Spn8th0m8D59YbysV5zPUe1n/GJYg==
+  dependencies:
+    fancy-log "^1.3.2"
+    plugin-error "^1.0.1"
+    postcss "^7.0.2"
+    postcss-load-config "^2.0.0"
+    vinyl-sourcemaps-apply "^0.2.1"
 
 gulp-rename@^1.4.0:
   version "1.4.0"
@@ -13880,7 +13888,7 @@ merge-stream@^1.0.0, merge-stream@^1.0.1:
   dependencies:
     readable-stream "^2.0.1"
 
-merge2@^1.2.3:
+merge2@^1.2.0, merge2@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.3.tgz#7ee99dbd69bb6481689253f018488a1b902b0ed5"
   integrity sha512-gdUU1Fwj5ep4kplwcmftruWofEFt6lfpkkr3h860CXbAB9c3hGb55EOL2ali0Td5oebvW0E1+3Sr+Ur7XfKpRA==
@@ -15814,7 +15822,7 @@ postcss-discard-duplicates@^2.0.1:
   dependencies:
     postcss "^5.0.4"
 
-postcss-discard-duplicates@^4.0.2:
+postcss-discard-duplicates@^4.0.0, postcss-discard-duplicates@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/postcss-discard-duplicates/-/postcss-discard-duplicates-4.0.2.tgz#3fe133cd3c82282e550fc9b239176a9207b784eb"
   integrity sha512-ZNQfR1gPNAiXZhgENFfEglF93pciw0WxMkJeVmw8eF+JZBbMD7jp6C67GqJAXVZP2BWbOztKfbsdmMp/k8c6oQ==
