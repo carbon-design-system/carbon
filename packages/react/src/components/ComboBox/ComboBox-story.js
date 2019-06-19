@@ -97,6 +97,24 @@ storiesOf('ComboBox', module)
     }
   )
   .add(
+    'custom results sorting',
+    () => (
+      <div style={{ width: 300 }}>
+        <ComboBox
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          dropdownSort={(a, b) => (a.id > b.id ? -1 : 1)}
+          {...props()}
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: 'Control how results are sorted',
+      },
+    }
+  )
+  .add(
     'custom text input handling',
     () => (
       <WithState initialState={{ inputText: '' }}>

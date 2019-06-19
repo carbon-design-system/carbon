@@ -88,6 +88,12 @@ export default class ComboBox extends React.Component {
     items: PropTypes.array.isRequired,
 
     /**
+     * Optional helper function to sort the items in the dropdown list
+     * By default, does not reorder results
+     */
+    dropdownSort: PropTypes.func,
+
+    /**
      * Helper function passed to downshift that allows the library to render a
      * given item to a string label. By default, it extracts the `label` field
      * from a given item to serve as the item label in the list
@@ -237,6 +243,7 @@ export default class ComboBox extends React.Component {
       items,
       itemToString,
       itemToElement,
+      dropdownSort,
       titleText,
       helperText,
       placeholder,
@@ -337,8 +344,9 @@ export default class ComboBox extends React.Component {
             </ListBox.Field>
             {isOpen && (
               <ListBox.Menu aria-label={ariaLabel} id={id}>
-                {this.filterItems(items, itemToString, inputValue).map(
-                  (item, index) => (
+                {this.filterItems(items, itemToString, inputValue)
+                  .sort(dropdownSort)
+                  .map((item, index) => (
                     <ListBox.MenuItem
                       key={itemToString(item)}
                       isActive={selectedItem === item}
@@ -354,8 +362,7 @@ export default class ComboBox extends React.Component {
                         itemToString(item)
                       )}
                     </ListBox.MenuItem>
-                  )
-                )}
+                  ))}
               </ListBox.Menu>
             )}
           </ListBox>
