@@ -101,7 +101,7 @@ async function scaffold() {
   });
 
   const icons = Object.keys(iconsGroupedByName).map(key => {
-    let iconIsCategorized =
+    const iconIsCategorized =
       categoryInformation[key] &&
       categoryInformation[key].hasOwnProperty('subcategory');
 
