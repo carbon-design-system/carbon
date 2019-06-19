@@ -50,9 +50,11 @@ class FileUploader extends mixin(
     this.inputId = this.input.getAttribute('id');
     this.manage(on(this.input, 'change', () => this._displayFilenames()));
     this.manage(on(this.container, 'click', this._handleDeleteButton));
-
     this.manage(
       on(this.element.ownerDocument, 'dragover', this._handleDragDrop)
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'dragleave', this._handleDragDrop)
     );
     this.manage(on(this.element.ownerDocument, 'drop', this._handleDragDrop));
   }
@@ -110,14 +112,6 @@ class FileUploader extends mixin(
 
   _changeState = (state, detail, callback) => {
     if (state === 'delete-filename-fileuploader') {
-      // remove form requirement when invalid items are removed
-      const { nextElementSibling } = detail.filenameElement;
-      if (
-        nextElementSibling.classList.contains(this.options.classFormRequirement)
-      ) {
-        this.container.removeChild(nextElementSibling);
-      }
-
       this.container.removeChild(detail.filenameElement);
     }
     if (typeof callback === 'function') {
@@ -206,10 +200,12 @@ class FileUploader extends mixin(
    * @private
    */
   _handleDragDrop = evt => {
+    const isOfSelf = this.element.contains(evt.target);
     // In IE11 `evt.dataTransfer.types` is a `DOMStringList` instead of an array
     if (
       Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') >= 0 &&
-      !eventMatches(evt, this.options.selectorOtherDropContainers)
+      !eventMatches(evt, this.options.selectorOtherDropContainers) &&
+      isOfSelf
     ) {
       const inArea = eventMatches(evt, this.options.selectorDropContainer);
       if (evt.type === 'dragover') {
@@ -224,7 +220,11 @@ class FileUploader extends mixin(
           this.options.classDragOver,
           Boolean(inArea)
         );
-      } else if (inArea && evt.type === 'drop') {
+      }
+      if (evt.type === 'dragleave') {
+        this.dropContainer.classList.toggle(this.options.classDragOver, false);
+      }
+      if (inArea && evt.type === 'drop') {
         evt.preventDefault();
         this._displayFilenames(evt.dataTransfer.files);
         this.dropContainer.classList.remove(this.options.classDragOver);
@@ -281,9 +281,9 @@ class FileUploader extends mixin(
       classFileClose: `${prefix}--file-close`,
       classFileComplete: `${prefix}--file-complete`,
       classSelectedFile: `${prefix}--file__selected-file`,
+      classSelectedFileInvalid: `${prefix}--file__selected-file--invalid`,
       classStateContainer: `${prefix}--file__state-container`,
       classDragOver: `${prefix}--file__drop-container--drag-over`,
-      classFormRequirement: `${prefix}--form-requirement`,
       eventBeforeDeleteFilenameFileuploader:
         'fileuploader-before-delete-filename',
       eventAfterDeleteFilenameFileuploader:
