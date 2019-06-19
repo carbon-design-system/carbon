@@ -56,7 +56,7 @@ module.exports = {
           'createElement',
           'isValidElement',
         ],
-        'react-dom': ['render'],
+        'react-dom': ['render', 'createPortal'],
         'react-is': ['isForwardRef'],
         'downshift/node_modules/react': [
           'Children',

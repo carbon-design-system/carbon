@@ -1,30 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import { Dropdown, DropdownItem, ToggleSmall } from 'carbon-components-react';
+import AppSwitcher20 from '@carbon/icons-react/es/app-switcher/20';
+import { ToggleSmall } from 'carbon-components-react';
 import eventMatches from '../../../src/globals/js/misc/event-matches';
 import on from '../../../src/globals/js/misc/on';
 import CodePage from './CodePage/CodePage';
 import SideNav from './SideNav';
+import ThemeSidebar from './ThemeSidebar/ThemeSidebar';
 import PageHeader from './PageHeader/PageHeader';
-
-const themeSwitcherItems = [
-  {
-    id: 'white',
-    text: 'White',
-  },
-  {
-    id: 'g10',
-    text: 'Gray 10',
-  },
-  {
-    id: 'g90',
-    text: 'Gray 90',
-  },
-  {
-    id: 'g100',
-    text: 'Gray 100',
-  },
-];
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 400) {
@@ -191,9 +174,7 @@ class RootPage extends Component {
     });
   }
 
-  state = {
-    currentTheme: themeSwitcherItems[0].id,
-  };
+  state = {};
 
   static getDerivedStateFromProps({ componentItems, isComponentsX }, state) {
     const {
@@ -330,6 +311,20 @@ class RootPage extends Component {
   };
 
   /**
+   * Opens theme sidebar.
+   */
+  _openThemeSidebar = () => {
+    this.setState({ isThemeSidebarOpen: true });
+  };
+
+  /**
+   * Closes theme sidebar.
+   */
+  _closeThemeSidebar = () => {
+    this.setState({ isThemeSidebarOpen: false });
+  };
+
+  /**
    * Inspects `<link>` tag to see if experimental version of demo CSS is loaded there.
    */
   _inspectLinkTag() {
@@ -434,22 +429,6 @@ class RootPage extends Component {
   }
 
   /**
-   * Handles selection change in theme switcher dropdown.
-   * @param {object} evt
-   * @param {object} evt.value The id of the selected dropdown item.
-   */
-  _handleChangeThemeSwitcherDropdown = ({ value }) => {
-    this.setState({ currentTheme: value }, () => {
-      themeSwitcherItems.forEach(item => {
-        document.documentElement.classList.toggle(
-          `demo--theme--${item.id}`,
-          item.id === value
-        );
-      });
-    });
-  };
-
-  /**
    * Switches the selected component.
    * @param {string} selectedNavItemId The ID of the newly selected component.
    */
@@ -477,8 +456,8 @@ class RootPage extends Component {
     const {
       componentItems,
       isComponentsX,
+      isThemeSidebarOpen,
       selectedNavItemId,
-      currentTheme,
     } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
@@ -510,17 +489,15 @@ class RootPage extends Component {
             onChange={this._switchExperimental}
           />
         </main>
-        <div className="demo--theme-switcher--dropdown">
-          <Dropdown
-            items={themeSwitcherItems}
-            itemToString={item => (item ? item.text : '')}
-            value={currentTheme}
-            onChange={this._handleChangeThemeSwitcherDropdown}>
-            {themeSwitcherItems.map(({ id, text }) => (
-              <DropdownItem itemText={text} value={id} />
-            ))}
-          </Dropdown>
-        </div>
+        <button
+          className="bx--header__action sidebar__open-button"
+          onClick={this._openThemeSidebar}>
+          <AppSwitcher20 />
+        </button>
+        <ThemeSidebar
+          open={isThemeSidebarOpen}
+          onClose={this._closeThemeSidebar}
+        />
       </Fragment>
     );
   }
