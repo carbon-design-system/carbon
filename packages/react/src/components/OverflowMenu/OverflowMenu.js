@@ -206,7 +206,7 @@ class OverflowMenu extends Component {
   };
 
   static defaultProps = {
-    ariaLabel: 'list of options',
+    ariaLabel: 'Menu',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -493,27 +493,29 @@ class OverflowMenu extends Component {
     );
 
     const menuBody = (
-      <ul className={overflowMenuOptionsClasses} tabIndex="-1" role="menu">
+      <ul
+        className={overflowMenuOptionsClasses}
+        tabIndex="-1"
+        role="menu"
+        aria-label={ariaLabel}>
         {childrenWithProps}
       </ul>
     );
 
     const wrappedMenuBody = (
-      <div role="menuitem">
-        <FloatingMenu
-          menuPosition={this.state.menuPosition}
-          menuDirection={direction}
-          menuOffset={flipped ? menuOffsetFlip : menuOffset}
-          menuRef={this._bindMenuBody}
-          menuEl={this.menuEl}
-          flipped={this.props.flipped}
-          target={this._getTarget}
-          onPlace={this._handlePlace}>
-          {React.cloneElement(menuBody, {
-            'data-floating-menu-direction': direction,
-          })}
-        </FloatingMenu>
-      </div>
+      <FloatingMenu
+        menuPosition={this.state.menuPosition}
+        menuDirection={direction}
+        menuOffset={flipped ? menuOffsetFlip : menuOffset}
+        menuRef={this._bindMenuBody}
+        menuEl={this.menuEl}
+        flipped={this.props.flipped}
+        target={this._getTarget}
+        onPlace={this._handlePlace}>
+        {React.cloneElement(menuBody, {
+          'data-floating-menu-direction': direction,
+        })}
+      </FloatingMenu>
     );
 
     const iconProps = {
@@ -528,7 +530,7 @@ class OverflowMenu extends Component {
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
           {...other}
-          role="menu"
+          role="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}

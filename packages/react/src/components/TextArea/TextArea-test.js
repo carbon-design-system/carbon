@@ -20,6 +20,7 @@ describe('TextArea', () => {
         labelText="testlabel"
         className="extra-class"
         helperText="testHelper"
+        defaultValue="default value"
       />
     );
 
@@ -67,8 +68,7 @@ describe('TextArea', () => {
       });
 
       it('should set defaultValue as expected', () => {
-        wrapper.setProps({ defaultValue: 'default value' });
-        expect(textarea().props().defaultValue).toEqual('default value');
+        expect(textarea().props().value).toEqual('default value');
       });
 
       it('should count length increases in textarea value', () => {
