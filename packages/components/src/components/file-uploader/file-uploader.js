@@ -191,11 +191,11 @@ class FileUploader extends mixin(
    * @private
    */
   _handleDeleteButton = evt => {
-    const target = eventMatches(evt, `[data-for=${this.inputId}]`);
+    const target = eventMatches(evt, this.options.selectorCloseButton);
     if (target) {
       this.changeState('delete-filename-fileuploader', {
         initialEvt: evt,
-        filenameElement: target.parentNode,
+        filenameElement: target.parentNode.parentNode.parentNode,
       });
     }
   };
