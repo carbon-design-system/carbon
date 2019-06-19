@@ -25,6 +25,9 @@
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
+  <a href="https://gitter.im/carbondesignsystem/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
+    <img src="https://badges.gitter.im/carbondesignsystem/community.svg" alt="Chat with us on Gitter" />
+  </a>
 </p>
 
 ## Getting started
