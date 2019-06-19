@@ -149,8 +149,7 @@
       "/lib/",
       "e2e",
       "examples",
-      "/umd/",
-      "/packages/react/"
+      "/umd/"
     ],
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
