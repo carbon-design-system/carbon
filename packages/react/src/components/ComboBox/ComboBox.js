@@ -25,6 +25,8 @@ const defaultItemToString = item => {
 
 const defaultShouldFilterItem = () => true;
 
+const defaultDropdownSort = () => 0;
+
 const getInputValue = (props, state) => {
   if (props.initialSelectedItem) {
     return props.itemToString(props.initialSelectedItem);
@@ -170,6 +172,7 @@ export default class ComboBox extends React.Component {
     itemToString: defaultItemToString,
     itemToElement: null,
     shouldFilterItem: defaultShouldFilterItem,
+    dropdownSort: defaultDropdownSort,
     type: 'default',
     ariaLabel: 'Choose an item',
     light: false,
