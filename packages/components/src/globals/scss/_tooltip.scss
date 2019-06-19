@@ -31,9 +31,12 @@
     }
   }
 
-  // Tooltip - renders as a combo of ::before and ::after elements
+  // ::before - Tooltip caret
+  // ::after - legacy Tooltip content (depreciated)
+  // .#{$prefix}--tooltip__content - WCAG 2.1 compliant tooltip content
   &::before,
-  &::after {
+  &:not(.#{$prefix}--tooltip--a11y)::after,
+  .#{$prefix}--tooltip__content {
     @include type-style('body-short-01');
     position: absolute;
     z-index: z('floating');
@@ -52,8 +55,26 @@
     content: '';
   }
 
+  .#{$prefix}--tooltip__content {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    visibility: visible;
+    color: inherit;
+    // In order to pass AAT, opacity must be set to 1 in the default state
+    // On focus/hover use a keyframe animation to mimic transition
+    opacity: 1;
+  }
+
   // content box
-  &::after {
+  // @todo Simplify CSS selectors on next major release
+  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &:hover .#{$prefix}--tooltip__content,
+  &:focus .#{$prefix}--tooltip__content {
     @include layer('overlay');
     width: max-content;
     max-width: rem(208px);
@@ -66,18 +87,37 @@
     border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
-    content: attr(aria-label);
     text-align: left;
     transform: translateX(-50%);
     pointer-events: none;
     background-color: $inverse-02;
   }
 
+  &:not(.#{$prefix}--tooltip--a11y)::after {
+    content: attr(aria-label);
+  }
+
   &:hover,
   &:focus {
     &::before,
-    &::after {
+    &:not(.#{$prefix}--tooltip--a11y)::after {
       opacity: 1;
+    }
+
+    @keyframes tooltip-fade {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .#{$prefix}--tooltip__content {
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+      animation: tooltip-fade $duration--fast-01 motion(standard, productive);
     }
   }
 }
@@ -106,8 +146,11 @@
   $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
   $rotate-caret: set-caret-rotation($position);
 
+  // @todo Simplify CSS selectors on next major release
   &::before,
-  &::after {
+  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &:hover .#{$prefix}--tooltip__content,
+  &:focus .#{$prefix}--tooltip__content {
     @if ($position == 'top') {
       top: 0;
       left: 50%;
@@ -150,7 +193,10 @@
   }
 
   // alignment options available only for top and bottom tooltip position
-  &::after {
+  // @todo Simplify CSS selectors on next major release
+  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &:hover .#{$prefix}--tooltip__content,
+  &:focus .#{$prefix}--tooltip__content {
     @if ($position == 'top') {
       @if ($align == 'start') {
         left: 0;
