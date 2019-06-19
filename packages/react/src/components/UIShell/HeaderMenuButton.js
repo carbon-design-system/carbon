@@ -6,7 +6,7 @@
  */
 
 import Close20 from '@carbon/icons-react/lib/close/20';
-import Menu20 from '@carbon/icons-react/lib//menu/20';
+import Menu20 from '@carbon/icons-react/lib/menu/20';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
