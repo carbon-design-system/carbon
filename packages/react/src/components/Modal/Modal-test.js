@@ -147,7 +147,7 @@ describe('Modal', () => {
       const modal = wrapper.find(Modal);
       const div = modal.find(`.${prefix}--modal`);
       wrapper.setState({ isOpen: true });
-      div.simulate('click');
+      div.simulate('mousedown');
       expect(wrapper.state('isOpen')).toEqual(false);
     });
 
