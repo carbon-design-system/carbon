@@ -40,10 +40,20 @@ module.exports = (file, api) => {
           size = rest[1];
         }
       } else if (rest.length > 2) {
-        throw new Error(
-          `Unable to automatically update the icon import in file ` +
-            `${file.path}. The import path ${node.source.value} is ambiguous.`
-        );
+        let sliceToIndex = rest.length;
+        if (isNaN(rest[rest.length - 1])) {
+          name = rest[rest.length - 1];
+          sliceToIndex = rest.length;
+        } else if (!isNaN(rest[rest.length - 1])) {
+          name = rest[rest.length - 2];
+          size = rest[rest.length - 1];
+          sliceToIndex = rest.length - 2;
+        } else if (rest[rest.length - 1] === 'index') {
+          name = rest[rest.length - 2];
+          sliceToIndex = rest.length - 1;
+        }
+
+        prefix = rest.slice(0, sliceToIndex);
       }
 
       // When working in a collection, the name of the path is its index
