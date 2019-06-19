@@ -105,12 +105,6 @@ async function scaffold() {
       categoryInformation[key] &&
       categoryInformation[key].hasOwnProperty('subcategory');
 
-    // this warning will still be called if all "variants" are defined but there is no "main"
-    // may be a worthwhile warning if we check the variants tho?
-    // if (!iconIsCategorized) {
-    //   console.log(`warning: "${key}" is not defined in categories.yml.`);
-    // }
-
     const group = iconsGroupedByName[key];
     const savedIcon = metadata.icons.find(({ name }) => name === key);
     const icon = {
