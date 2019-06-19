@@ -21,6 +21,16 @@
 //   )
 // );
 
+@import './_theme.scss';
+
+/// The theme name to use in the dev env.
+/// @type String
+$demo--carbon--theme-name: 'white' !default;
+
+/// The Carbon theme to use, chosen with `$demo--carbon--theme-name`.
+/// @type Map
+$carbon--theme: map-get($carbon--theme--list, $demo--carbon--theme-name);
+
 @import '../../src/globals/scss/styles';
 
 $deprecations--entry: true;
@@ -71,8 +81,34 @@ REASON: #{$reason}';
   box-sizing: border-box;
   padding-top: 1em;
   transition: 0.2s;
-  background-color: $ui-02;
+  background-color: $ui-background;
   padding-left: 0;
+}
+
+:root {
+  @include carbon--theme--custom-properties($carbon--theme--white);
+}
+
+.demo--container,
+:root.demo--theme--white .demo--container,
+.component-example__live,
+:root.demo--theme--white .component-example__live {
+  @include carbon--theme--custom-properties($carbon--theme--white);
+}
+
+:root.demo--theme--g10 .demo--container,
+:root.demo--theme--g10 .component-example__live {
+  @include carbon--theme--custom-properties($carbon--theme--g10);
+}
+
+:root.demo--theme--g90 .demo--container,
+:root.demo--theme--g90 .component-example__live {
+  @include carbon--theme--custom-properties($carbon--theme--g90);
+}
+
+:root.demo--theme--g100 .demo--container,
+:root.demo--theme--g100 .component-example__live {
+  @include carbon--theme--custom-properties($carbon--theme--g100);
 }
 
 .demo--container.demo--container--list-box > .demo--container__panel,
@@ -92,6 +128,13 @@ REASON: #{$reason}';
   top: rem(16px);
   right: rem(16px);
   display: none; // Temporarily hide theme switcher
+}
+
+.demo--theme-switcher--dropdown {
+  position: absolute;
+  top: rem(32px);
+  right: rem(32px);
+  display: if($demo--carbon--theme-name == 'custom-properties', block, none);
 }
 
 .bx--tile-container {

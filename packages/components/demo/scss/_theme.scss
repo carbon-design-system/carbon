@@ -1,0 +1,37 @@
+@import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+
+/// @param {Map} $theme-map [$carbon--theme] The theme map to base the result on.
+/// @return {Map} A Carbon theme map whose valus are CSS custom properties.
+@function carbon-get-theme-map-with-custom-properties(
+  $theme-map: $carbon--theme
+) {
+  $theme-map--with-custom-properties: ();
+  @each $key in map-keys($theme-map) {
+    $theme-map--with-custom-properties: map-merge(
+      $theme-map--with-custom-properties,
+      (
+        $key: var(--#{$key}),
+      )
+    );
+  }
+  @return $theme-map--with-custom-properties;
+}
+
+/// Emits CSS custom properties from a Carbon theme map.
+/// @param {Map} $theme-map [$carbon--theme] The theme map to emit CSS custom properties from.
+/// @example @include carbon--theme--custom-properties($carbon--theme--white);
+@mixin carbon--theme--custom-properties($theme-map: $carbon--theme) {
+  @each $key, $value in $theme-map {
+    --#{$key}: #{$value};
+  }
+}
+
+/// The key/value map of Carbon themes, named by theme name.
+/// @type Map
+$carbon--theme--list: (
+  'white': $carbon--theme--white,
+  'g10': $carbon--theme--g10,
+  'g90': $carbon--theme--g90,
+  'g100': $carbon--theme--g100,
+  'custom-properties': carbon-get-theme-map-with-custom-properties(),
+);
