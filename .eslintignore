@@ -32,3 +32,6 @@ packages/components/node_modules
 
 # Sketch
 *.sketchplugin
+
+# React
+**/storybook-static/**
