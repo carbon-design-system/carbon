@@ -11,4 +11,6 @@
 
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
+defineTest(__dirname, 'update-icon-import-path', null, 'group-icon-imports');
+defineTest(__dirname, 'update-icon-import-path', null, 'prefix-icon-import');
 defineTest(__dirname, 'update-icon-import-path');
