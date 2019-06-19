@@ -47,12 +47,6 @@
       @include focus-outline('outline');
     }
 
-    &:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
-      color: $disabled;
-    }
-
     &:disabled ~ .#{$prefix}--number__controls {
       cursor: not-allowed;
       pointer-events: none;
@@ -71,6 +65,13 @@
     &::-webkit-inner-spin-button {
       appearance: none; // Safari: Hide number spinner
     }
+  }
+
+  .#{$prefix}--number input[type='number']:disabled,
+  .#{$prefix}--number--readonly input[type='number'] {
+    cursor: not-allowed;
+    background-color: $disabled-background-color;
+    color: $disabled;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -140,6 +141,10 @@
       cursor: not-allowed;
       color: $disabled;
     }
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
+    display: none;
   }
 
   .#{$prefix}--number[data-invalid] {

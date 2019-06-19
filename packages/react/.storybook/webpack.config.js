@@ -9,7 +9,13 @@ const useExternalCss =
 const useStyleSourceMap =
   process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
 
+const useControlledStateWithEventListener =
+  process.env.CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
 const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+
+const replaceTable = {
+  useControlledStateWithEventListener,
+};
 
 const styleLoaders = [
   {
@@ -77,6 +83,18 @@ module.exports = ({ config, mode }) => {
       }),
     ],
   };
+
+  config.module.rules.push({
+    test: /(\/|\\)FeatureFlags\.js$/,
+    loader: 'string-replace-loader',
+    options: {
+      multiple: Object.keys(replaceTable).map(key => ({
+        search: `export\\s+const\\s+${key}\\s*=\\s*false`,
+        replace: `export const ${key} = ${replaceTable[key]}`,
+        flags: 'i',
+      })),
+    },
+  });
 
   config.module.rules.push({
     test: /-story\.jsx?$/,
