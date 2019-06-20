@@ -49,6 +49,7 @@
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('heading-01');
     display: block;
+    height: $spacing-07;
     text-decoration: none;
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
