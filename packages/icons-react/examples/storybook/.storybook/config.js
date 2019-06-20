@@ -1,19 +1,8 @@
-import { addDecorator, configure } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-import { withOptions } from '@storybook/addon-options';
+import { configure } from '@storybook/react';
 
-addDecorator(withInfo);
-
-addDecorator(
-  withOptions({
-    name: `@carbon/icons-react`,
-    url:
-      'https://github.com/IBM/carbon-elements/tree/master/packages/icons-react',
-  })
-);
-
+// automatically import all files ending in *.stories.js
+const req = require.context('../stories', true, /\.stories\.js$/);
 function loadStories() {
-  const req = require.context('../stories', true, /\-story\.js$/);
   req.keys().forEach(filename => req(filename));
 }
 

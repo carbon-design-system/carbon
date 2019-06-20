@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
+import { ChevronDownGlyph } from '@carbon/icons-react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectSkeleton from '../Select/Select.Skeleton';

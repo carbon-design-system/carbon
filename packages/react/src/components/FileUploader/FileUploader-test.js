@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import CloseFilled16 from '@carbon/icons-react/lib/close--filled/16';
+import { CloseFilled16 } from '@carbon/icons-react';
 import FileUploader, { FileUploaderButton, Filename } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import { mount, shallow } from 'enzyme';

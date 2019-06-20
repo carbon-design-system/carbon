@@ -8,6 +8,7 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
+@import 'mixins';
 
 /// Data table core styles
 /// @access private
@@ -133,9 +134,11 @@
     padding-right: $spacing-05;
   }
 
-  // specific padding for overflow menu columns
+  // specific padding/width for overflow menu columns
   .#{$prefix}--data-table .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
+    width: rem(52px);
+    min-width: rem(52px);
     padding-top: $spacing-03;
     padding-right: $spacing-03;
   }
@@ -425,6 +428,89 @@
   .#{$prefix}--data-table--static {
     width: auto;
   }
+
+  // -------------
+  // Sticky header
+  // -------------
+  .#{$prefix}--data-table_inner-container {
+    background-color: $ui-03;
+    padding-top: rem(48px);
+    transform: translateZ(0);
+  }
+
+  .#{$prefix}--data-table--sticky-header {
+    display: block;
+    // max-height: rem(300px);
+    overflow-y: scroll;
+
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: flex;
+    }
+
+    thead {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      overflow: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
+    }
+
+    thead tr th {
+      border-bottom: 1px solid $active-ui;
+    }
+
+    tbody {
+      flex-direction: column;
+      overflow-x: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
+    }
+
+    tr {
+      min-height: rem(48px);
+      height: auto;
+    }
+
+    tr.#{$prefix}--data-table--selected:first-of-type td {
+      border-top: none;
+    }
+
+    //hides webkit scrollbar
+    thead::-webkit-scrollbar,
+    tbody::-webkit-scrollbar {
+      display: none;
+    }
+
+    //hides ff scrollbar
+    @-moz-document url-prefix() {
+      thead,
+      tbody {
+        scrollbar-width: none;
+      }
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 0;
+    }
+
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .#{$prefix}--table-header-label {
+      max-width: calc(100% - 10px);
+      @include text-overflow;
+    }
+  }
+
+  @include sticky-header($max-width: rem(900px));
 }
 
 @include exports('data-table-v2-core') {

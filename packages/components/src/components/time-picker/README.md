@@ -17,7 +17,7 @@ Here are some examples:
 
 #### 12-hour am-pm clock
 
-`<input type="text" class="bx--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" />`
+`<input type="text" class="bx--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?" placeholder="hh:mm" maxlength="5" />`
 
 #### Localization
 

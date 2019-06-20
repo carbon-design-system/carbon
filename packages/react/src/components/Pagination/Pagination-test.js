@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-import CaretRight24 from '@carbon/icons-react/lib/caret--right/24';
-import CaretLeft24 from '@carbon/icons-react/lib/caret--left/24';
+import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
 import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
