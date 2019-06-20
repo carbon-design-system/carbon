@@ -20,7 +20,6 @@ describe('TextInput', () => {
         className="extra-class"
         labelText="testlabel"
         helperText="testHelper"
-        defaultValue="test"
         light
       />
     );
@@ -76,25 +75,9 @@ describe('TextInput', () => {
       });
 
       it('should set value as expected', () => {
-        expect(textInput().props().value).toEqual('test');
-      });
-
-      it('should count length increases in text input value', () => {
-        const event = { target: { value: 'z' } };
-        wrapper.setProps({ charCount: true, maxLength: 10 });
-        textInput().simulate('input', event);
-        expect(
-          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
-        ).toBe('1/10');
-      });
-
-      it('should count length decreases in text input value', () => {
-        const event = { target: { value: '' } };
-        wrapper.setProps({ charCount: true, maxLength: 10 });
-        textInput().simulate('input', event);
-        expect(
-          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
-        ).toBe('0/10');
+        expect(textInput().props().defaultValue).toEqual(undefined);
+        wrapper.setProps({ defaultValue: 'test' });
+        expect(textInput().props().defaultValue).toEqual('test');
       });
 
       it('should set disabled as expected', () => {

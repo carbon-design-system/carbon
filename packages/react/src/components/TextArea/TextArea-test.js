@@ -20,7 +20,6 @@ describe('TextArea', () => {
         labelText="testlabel"
         className="extra-class"
         helperText="testHelper"
-        defaultValue="default value"
       />
     );
 
@@ -64,29 +63,12 @@ describe('TextArea', () => {
 
       it('should set value as expected', () => {
         wrapper.setProps({ value: 'value set' });
-        expect(wrapper.props().value).toEqual('value set');
+        expect(textarea().props().value).toEqual('value set');
       });
 
       it('should set defaultValue as expected', () => {
-        expect(textarea().props().value).toEqual('default value');
-      });
-
-      it('should count length increases in textarea value', () => {
-        const event = { target: { value: 'z' } };
-        wrapper.setProps({ charCount: true, maxLength: 10 });
-        textarea().simulate('input', event);
-        expect(
-          wrapper.find(`span.${prefix}--text-area--character-counter`).text()
-        ).toBe('1/10');
-      });
-
-      it('should count length decreases in textarea value', () => {
-        const event = { target: { value: '' } };
-        wrapper.setProps({ charCount: true, maxLength: 10 });
-        textarea().simulate('input', event);
-        expect(
-          wrapper.find(`span.${prefix}--text-area--character-counter`).text()
-        ).toBe('0/10');
+        wrapper.setProps({ defaultValue: 'default value' });
+        expect(textarea().props().defaultValue).toEqual('default value');
       });
 
       it('should specify light version as expected', () => {
