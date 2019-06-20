@@ -9,10 +9,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import {
-  ArrowUp20 as Arrow,
-  ArrowsVertical20 as Arrows,
-} from '@carbon/icons-react';
+import Arrow from '@carbon/icons-react/lib/arrow--up/20';
+import Arrows from '@carbon/icons-react/lib/arrows--vertical/20';
 import { sortStates } from './state/sorting';
 
 const { prefix } = settings;

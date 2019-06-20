@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { CheckmarkFilled16 } from '@carbon/icons-react';
+import CheckmarkFilled16 from '@carbon/icons-react/lib/checkmark--filled/16';
 import {
   StructuredListWrapper,
   StructuredListHead,

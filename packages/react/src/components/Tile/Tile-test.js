@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ChevronDown16 } from '@carbon/icons-react';
+import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
 import {
   Tile,
   ClickableTile,

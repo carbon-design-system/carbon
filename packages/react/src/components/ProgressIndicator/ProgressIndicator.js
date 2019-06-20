@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
-import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
+import CheckmarkOutline16 from '@carbon/icons-react/lib/checkmark--outline/16';
+import Warning16 from '@carbon/icons-react/lib/warning/16';
 import { keys, matches } from '../../tools/key';
 
 const { prefix } = settings;

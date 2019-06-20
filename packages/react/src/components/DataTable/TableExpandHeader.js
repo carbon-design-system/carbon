@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import React from 'react';
-import { ChevronRight16 } from '@carbon/icons-react';
+import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;

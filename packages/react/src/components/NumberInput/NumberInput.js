@@ -9,11 +9,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import {
-  WarningFilled16,
-  CaretDownGlyph,
-  CaretUpGlyph,
-} from '@carbon/icons-react';
+import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
+import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';

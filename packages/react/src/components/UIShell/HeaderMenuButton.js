@@ -1,4 +1,12 @@
-import { Close20, Menu20 } from '@carbon/icons-react';
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import Close20 from '@carbon/icons-react/lib/close/20';
+import Menu20 from '@carbon/icons-react/lib/menu/20';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';

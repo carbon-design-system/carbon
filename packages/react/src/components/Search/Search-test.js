@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { Search16, Close20 } from '@carbon/icons-react';
+import Search16 from '@carbon/icons-react/lib/search/16';
+import Close20 from '@carbon/icons-react/lib/close/20';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';

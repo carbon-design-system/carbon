@@ -10,7 +10,7 @@ import React from 'react';
 import uid from '../../tools/uniqueId';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { CheckmarkFilled16 as CheckmarkFilled } from '@carbon/icons-react';
+import CheckmarkFilled from '@carbon/icons-react/lib/checkmark--filled/16';
 import { keys, matches } from '../../tools/key';
 
 const { prefix } = settings;

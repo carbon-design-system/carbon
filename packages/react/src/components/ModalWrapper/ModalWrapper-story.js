@@ -7,7 +7,8 @@
 
 import React from 'react';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { AddFilled16, Search16 } from '@carbon/icons-react';
+import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
+import Search16 from '@carbon/icons-react/lib/search/16';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 

@@ -8,7 +8,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { ListBulleted16, Grid16 } from '@carbon/icons-react';
+import ListBulleted16 from '@carbon/icons-react/lib/list--bulleted/16';
+import Grid16 from '@carbon/icons-react/lib/grid/16';
 
 const { prefix } = settings;
 

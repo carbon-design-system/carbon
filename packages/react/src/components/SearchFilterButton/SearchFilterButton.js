@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { Filter16 } from '@carbon/icons-react';
+import Filter16 from '@carbon/icons-react/lib/filter/16';
 
 const { prefix } = settings;
 
