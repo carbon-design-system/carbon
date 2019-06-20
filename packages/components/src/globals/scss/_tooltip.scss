@@ -85,6 +85,12 @@
     background-color: $inverse-02;
   }
 
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
+    // Fix for Safari bug when using width: max-content
+    width: auto;
+  }
+
   &:not(.#{$prefix}--tooltip--a11y)::after {
     content: attr(aria-label);
   }
