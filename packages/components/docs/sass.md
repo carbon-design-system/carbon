@@ -4322,6 +4322,7 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [loading [mixin]](#loading-mixin)
@@ -9772,9 +9773,13 @@ Data table action styles
     width: 100%;
     justify-content: flex-end;
     transform: translate3d(0, 0, 0);
-    visibility: visible;
-    transition: transform $duration--fast-02 motion(standard, productive), visibility
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
+    background-color: transparent; // For tool bar animation with (esp.) persistent search box
   }
 
   //-------------------------------------------------
@@ -10044,9 +10049,9 @@ Data table action styles
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
-    visibility: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transform: translate3d(0, 48px, 0);
-    transition: transform $duration--fast-02 motion(standard, productive), visibility
+    transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive);
   }
 
@@ -10064,10 +10069,10 @@ Data table action styles
     width: 100%;
     height: 100%;
     pointer-events: none;
-    visibility: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     will-change: transform;
     background-color: $interactive-01;
-    transition: transform $duration--fast-02 motion(standard, productive), visibility
+    transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive),
       opacity $duration--fast-02 motion(standard, productive);
     transform: translate3d(0, 48px, 0);
@@ -10078,7 +10083,7 @@ Data table action styles
   }
 
   .#{$prefix}--batch-actions--active {
-    visibility: visible;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     pointer-events: all;
     transform: translate3d(0, 0, 0);
   }
@@ -10086,6 +10091,7 @@ Data table action styles
   //btns container
   .#{$prefix}--action-list {
     position: absolute;
+    top: 0;
     right: 0;
     display: flex;
   }
@@ -11255,6 +11261,9 @@ Data table sort styles
     color: $text-01;
     padding: 0 $spacing-03;
     height: 100%;
+    background-color: $ui-03;
+    transition: background-color $duration--fast-01 motion(entrance, productive),
+      outline $duration--fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--table-sort:focus {
@@ -11394,6 +11403,7 @@ Data table sort styles
   - [spacing-03 [variable]](#spacing-03-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [ui-03 [variable]](#ui-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
 
