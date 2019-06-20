@@ -38,6 +38,7 @@ import {
   Switcher,
   SwitcherItem,
   SwitcherItemLink,
+  SwitcherDivider,
 } from '../UIShell';
 
 const Fade16 = () => (
@@ -295,6 +296,7 @@ storiesOf('UI Shell', module)
                 Link
               </SwitcherItemLink>
             </SwitcherItem>
+            <SwitcherDivider />
             <SwitcherItem>
               <SwitcherItemLink href="javascript:void(0)">
                 Link
@@ -315,6 +317,7 @@ storiesOf('UI Shell', module)
                 Link
               </SwitcherItemLink>
             </SwitcherItem>
+            <SwitcherDivider />
             <SwitcherItem>
               <SwitcherItemLink href="javascript:void(0)">
                 Link
