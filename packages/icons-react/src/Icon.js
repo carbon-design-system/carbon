@@ -39,6 +39,28 @@ const Icon = React.forwardRef(function Icon(
     ...style,
   };
 
+  // Set `aria-hidden='true'` for all children nodes if a top-level
+  // accessibility label is defined
+  //
+  // Reference: https://www.scottohara.me/blog/2019/05/22/contextual-images-svgs-and-a11y.html
+  // Section:
+  // If an SVG’s code is fully inlined, then unnecessary child elements and
+  // content should be optimized away. paths and any other direct child elements
+  // of the SVG should receive an aria-hidden="true" if they contain no
+  // information that should be made accessible.
+  if (
+    props['aria-label'] !== undefined ||
+    props['aria-labelledby'] !== undefined
+  ) {
+    return React.createElement(
+      'svg',
+      props,
+      React.Children.map(children, child => {
+        return React.cloneElement(child, { 'aria-hidden': true });
+      })
+    );
+  }
+
   return React.createElement('svg', props, children);
 });
 
