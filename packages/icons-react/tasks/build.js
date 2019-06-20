@@ -110,6 +110,7 @@ function createIconComponent(moduleName, descriptor) {
     return (
       <Icon width={${width}} height={${height}} viewBox="${viewBox}" ref={ref} {...props}>
         ${content.map(convertToJSX).join('\n')}
+        {props.children}
       </Icon>
     );
   }
