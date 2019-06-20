@@ -60,10 +60,13 @@
   }
 
   .#{$prefix}--assistive-text {
+    box-sizing: content-box;
     color: inherit;
     // In order to pass AAT, opacity must be set to 1 in the default state
     // On focus/hover use a keyframe animation to mimic transition
     opacity: 1;
+    // overwrite default nowrap behavior
+    white-space: normal;
   }
 
   // content box
@@ -87,12 +90,6 @@
     transform: translateX(-50%);
     pointer-events: none;
     background-color: $inverse-02;
-  }
-
-  &:hover .#{$prefix}--assistive-text,
-  &:focus .#{$prefix}--assistive-text {
-    // Fix for Safari bug when using width: max-content
-    width: auto;
   }
 
   &:not(.#{$prefix}--tooltip--a11y)::after {
