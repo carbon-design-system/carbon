@@ -118,7 +118,7 @@ export default class FilterableMultiSelect extends React.Component {
     /**
      * Additional props passed to Downshift
      */
-    downshiftProps: Downshift.propTypes,
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
   };
 
   static getDerivedStateFromProps({ open }, state) {
