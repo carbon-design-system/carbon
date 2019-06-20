@@ -56,41 +56,12 @@
     background-color: $field-02;
   }
 
-  // -----------------
-  // Character counter
-  // -----------------
-  .#{$prefix}--text-input__character-counter-title {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .#{$prefix}--text-input__character-counter-title
-    + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px);
-  }
-
-  .#{$prefix}--text-input__character-counter-title .#{$prefix}--label {
-    margin-right: rem(16px);
-  }
-
-  .#{$prefix}--text-input--character-counter {
-    margin-bottom: $carbon--spacing-03;
-    @include type-style('label-01');
-    color: $text-02;
-  }
-
-  .#{$prefix}--text-input--character-counter--disabled {
-    color: $disabled-02;
-  }
-
   //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    width: 100%;
     align-items: center;
 
     .#{$prefix}--text-input__invalid-icon {
