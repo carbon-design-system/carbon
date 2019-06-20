@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-import Close16 from '@carbon/icons-react/lib/close/16';
-import ErrorFilled20 from '@carbon/icons-react/lib/error--filled/20';
-import CheckmarkFilled20 from '@carbon/icons-react/lib/checkmark--filled/20';
+import { Close16, ErrorFilled20, CheckmarkFilled20 } from '@carbon/icons-react';
 import {
   NotificationButton,
   NotificationTextDetails,

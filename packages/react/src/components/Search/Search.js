@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Search16 from '@carbon/icons-react/lib/search/16';
-import Close16 from '@carbon/icons-react/lib/close/16';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Search16, Close16, Close20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
