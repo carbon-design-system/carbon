@@ -44,6 +44,10 @@
     align-items: center;
     opacity: 0;
     pointer-events: none;
+  }
+
+  &:not(.#{$prefix}--tooltip--a11y)::before,
+  &:not(.#{$prefix}--tooltip--a11y)::after {
     transition: opacity $duration--fast-01 motion(standard, productive);
   }
 
@@ -103,10 +107,10 @@
     }
 
     @keyframes tooltip-fade {
-      0% {
+      from {
         opacity: 0;
       }
-      100% {
+      to {
         opacity: 1;
       }
     }
@@ -115,6 +119,10 @@
       clip: auto;
       margin: auto;
       overflow: visible;
+    }
+
+    .#{$prefix}--assistive-text,
+    &.#{$prefix}--tooltip--a11y::before {
       animation: tooltip-fade $duration--fast-01 motion(standard, productive);
     }
   }
