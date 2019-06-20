@@ -1220,6 +1220,19 @@ icons:
         sizes:
           - 16
           - 32
+  - name: switcher
+    friendly_name: Switcher
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Navigation
+    aliases:
+      - switcher
+    sizes:
+      - 16
+      - 20
+      - 24
+      - 32
   - name: trash-can
     friendly_name: Trash can
     usage: This is a description for usage
