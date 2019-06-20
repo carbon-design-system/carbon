@@ -1769,27 +1769,6 @@ exports[`DataTable should render 1`] = `
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
-                      "defaultProps": Object {
-                        "height": 16,
-                        "preserveAspectRatio": "xMidYMid meet",
-                        "viewBox": "0 0 16 16",
-                        "width": 16,
-                        "xmlns": "http://www.w3.org/2000/svg",
-                      },
-                      "displayName": "AddFilled16",
-                      "propTypes": Object {
-                        "aria-hidden": [Function],
-                        "aria-label": [Function],
-                        "aria-labelledby": [Function],
-                        "children": [Function],
-                        "className": [Function],
-                        "height": [Function],
-                        "preserveAspectRatio": [Function],
-                        "tabIndex": [Function],
-                        "viewBox": [Function],
-                        "width": [Function],
-                        "xmlns": [Function],
-                      },
                       "render": [Function],
                     }
                   }
@@ -1802,27 +1781,6 @@ exports[`DataTable should render 1`] = `
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
-                      "defaultProps": Object {
-                        "height": 16,
-                        "preserveAspectRatio": "xMidYMid meet",
-                        "viewBox": "0 0 16 16",
-                        "width": 16,
-                        "xmlns": "http://www.w3.org/2000/svg",
-                      },
-                      "displayName": "AddFilled16",
-                      "propTypes": Object {
-                        "aria-hidden": [Function],
-                        "aria-label": [Function],
-                        "aria-labelledby": [Function],
-                        "children": [Function],
-                        "className": [Function],
-                        "height": [Function],
-                        "preserveAspectRatio": [Function],
-                        "tabIndex": [Function],
-                        "viewBox": [Function],
-                        "width": [Function],
-                        "xmlns": [Function],
-                      },
                       "render": [Function],
                     }
                   }
@@ -1835,27 +1793,6 @@ exports[`DataTable should render 1`] = `
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
-                      "defaultProps": Object {
-                        "height": 16,
-                        "preserveAspectRatio": "xMidYMid meet",
-                        "viewBox": "0 0 16 16",
-                        "width": 16,
-                        "xmlns": "http://www.w3.org/2000/svg",
-                      },
-                      "displayName": "AddFilled16",
-                      "propTypes": Object {
-                        "aria-hidden": [Function],
-                        "aria-label": [Function],
-                        "aria-labelledby": [Function],
-                        "children": [Function],
-                        "className": [Function],
-                        "height": [Function],
-                        "preserveAspectRatio": [Function],
-                        "tabIndex": [Function],
-                        "viewBox": [Function],
-                        "width": [Function],
-                        "xmlns": [Function],
-                      },
                       "render": [Function],
                     }
                   }
@@ -1875,27 +1812,6 @@ exports[`DataTable should render 1`] = `
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
-                      "defaultProps": Object {
-                        "height": 16,
-                        "preserveAspectRatio": "xMidYMid meet",
-                        "viewBox": "0 0 16 16",
-                        "width": 16,
-                        "xmlns": "http://www.w3.org/2000/svg",
-                      },
-                      "displayName": "Settings16",
-                      "propTypes": Object {
-                        "aria-hidden": [Function],
-                        "aria-label": [Function],
-                        "aria-labelledby": [Function],
-                        "children": [Function],
-                        "className": [Function],
-                        "height": [Function],
-                        "preserveAspectRatio": [Function],
-                        "tabIndex": [Function],
-                        "viewBox": [Function],
-                        "width": [Function],
-                        "xmlns": [Function],
-                      },
                       "render": [Function],
                     }
                   }
@@ -2053,27 +1969,6 @@ exports[`DataTable should render 1`] = `
                     renderIcon={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
-                        "defaultProps": Object {
-                          "height": 16,
-                          "preserveAspectRatio": "xMidYMid meet",
-                          "viewBox": "0 0 16 16",
-                          "width": 16,
-                          "xmlns": "http://www.w3.org/2000/svg",
-                        },
-                        "displayName": "AddFilled16",
-                        "propTypes": Object {
-                          "aria-hidden": [Function],
-                          "aria-label": [Function],
-                          "aria-labelledby": [Function],
-                          "children": [Function],
-                          "className": [Function],
-                          "height": [Function],
-                          "preserveAspectRatio": [Function],
-                          "tabIndex": [Function],
-                          "viewBox": [Function],
-                          "width": [Function],
-                          "xmlns": [Function],
-                        },
                         "render": [Function],
                       }
                     }
@@ -2086,27 +1981,6 @@ exports[`DataTable should render 1`] = `
                       renderIcon={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
-                          "defaultProps": Object {
-                            "height": 16,
-                            "preserveAspectRatio": "xMidYMid meet",
-                            "viewBox": "0 0 16 16",
-                            "width": 16,
-                            "xmlns": "http://www.w3.org/2000/svg",
-                          },
-                          "displayName": "AddFilled16",
-                          "propTypes": Object {
-                            "aria-hidden": [Function],
-                            "aria-label": [Function],
-                            "aria-labelledby": [Function],
-                            "children": [Function],
-                            "className": [Function],
-                            "height": [Function],
-                            "preserveAspectRatio": [Function],
-                            "tabIndex": [Function],
-                            "viewBox": [Function],
-                            "width": [Function],
-                            "xmlns": [Function],
-                          },
                           "render": [Function],
                         }
                       }
@@ -2122,38 +1996,44 @@ exports[`DataTable should render 1`] = `
                         type="button"
                       >
                         Ghost
-                        <AddFilled16
+                        <ForwardRef(AddFilled16)
                           aria-hidden={true}
                           aria-label="Add"
                           className="bx--btn__icon"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
+                          <Icon
                             aria-hidden={true}
                             aria-label="Add"
                             className="bx--btn__icon"
-                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
-                            />
-                          </svg>
-                        </AddFilled16>
+                            <svg
+                              aria-hidden={true}
+                              aria-label="Add"
+                              className="bx--btn__icon"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(AddFilled16)>
                       </button>
                     </ForwardRef(Button)>
                   </TableBatchAction>
@@ -2163,27 +2043,6 @@ exports[`DataTable should render 1`] = `
                     renderIcon={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
-                        "defaultProps": Object {
-                          "height": 16,
-                          "preserveAspectRatio": "xMidYMid meet",
-                          "viewBox": "0 0 16 16",
-                          "width": 16,
-                          "xmlns": "http://www.w3.org/2000/svg",
-                        },
-                        "displayName": "AddFilled16",
-                        "propTypes": Object {
-                          "aria-hidden": [Function],
-                          "aria-label": [Function],
-                          "aria-labelledby": [Function],
-                          "children": [Function],
-                          "className": [Function],
-                          "height": [Function],
-                          "preserveAspectRatio": [Function],
-                          "tabIndex": [Function],
-                          "viewBox": [Function],
-                          "width": [Function],
-                          "xmlns": [Function],
-                        },
                         "render": [Function],
                       }
                     }
@@ -2196,27 +2055,6 @@ exports[`DataTable should render 1`] = `
                       renderIcon={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
-                          "defaultProps": Object {
-                            "height": 16,
-                            "preserveAspectRatio": "xMidYMid meet",
-                            "viewBox": "0 0 16 16",
-                            "width": 16,
-                            "xmlns": "http://www.w3.org/2000/svg",
-                          },
-                          "displayName": "AddFilled16",
-                          "propTypes": Object {
-                            "aria-hidden": [Function],
-                            "aria-label": [Function],
-                            "aria-labelledby": [Function],
-                            "children": [Function],
-                            "className": [Function],
-                            "height": [Function],
-                            "preserveAspectRatio": [Function],
-                            "tabIndex": [Function],
-                            "viewBox": [Function],
-                            "width": [Function],
-                            "xmlns": [Function],
-                          },
                           "render": [Function],
                         }
                       }
@@ -2232,38 +2070,44 @@ exports[`DataTable should render 1`] = `
                         type="button"
                       >
                         Ghost
-                        <AddFilled16
+                        <ForwardRef(AddFilled16)
                           aria-hidden={true}
                           aria-label="Add"
                           className="bx--btn__icon"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
+                          <Icon
                             aria-hidden={true}
                             aria-label="Add"
                             className="bx--btn__icon"
-                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
-                            />
-                          </svg>
-                        </AddFilled16>
+                            <svg
+                              aria-hidden={true}
+                              aria-label="Add"
+                              className="bx--btn__icon"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(AddFilled16)>
                       </button>
                     </ForwardRef(Button)>
                   </TableBatchAction>
@@ -2273,27 +2117,6 @@ exports[`DataTable should render 1`] = `
                     renderIcon={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
-                        "defaultProps": Object {
-                          "height": 16,
-                          "preserveAspectRatio": "xMidYMid meet",
-                          "viewBox": "0 0 16 16",
-                          "width": 16,
-                          "xmlns": "http://www.w3.org/2000/svg",
-                        },
-                        "displayName": "AddFilled16",
-                        "propTypes": Object {
-                          "aria-hidden": [Function],
-                          "aria-label": [Function],
-                          "aria-labelledby": [Function],
-                          "children": [Function],
-                          "className": [Function],
-                          "height": [Function],
-                          "preserveAspectRatio": [Function],
-                          "tabIndex": [Function],
-                          "viewBox": [Function],
-                          "width": [Function],
-                          "xmlns": [Function],
-                        },
                         "render": [Function],
                       }
                     }
@@ -2306,27 +2129,6 @@ exports[`DataTable should render 1`] = `
                       renderIcon={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
-                          "defaultProps": Object {
-                            "height": 16,
-                            "preserveAspectRatio": "xMidYMid meet",
-                            "viewBox": "0 0 16 16",
-                            "width": 16,
-                            "xmlns": "http://www.w3.org/2000/svg",
-                          },
-                          "displayName": "AddFilled16",
-                          "propTypes": Object {
-                            "aria-hidden": [Function],
-                            "aria-label": [Function],
-                            "aria-labelledby": [Function],
-                            "children": [Function],
-                            "className": [Function],
-                            "height": [Function],
-                            "preserveAspectRatio": [Function],
-                            "tabIndex": [Function],
-                            "viewBox": [Function],
-                            "width": [Function],
-                            "xmlns": [Function],
-                          },
                           "render": [Function],
                         }
                       }
@@ -2342,38 +2144,44 @@ exports[`DataTable should render 1`] = `
                         type="button"
                       >
                         Ghost
-                        <AddFilled16
+                        <ForwardRef(AddFilled16)
                           aria-hidden={true}
                           aria-label="Add"
                           className="bx--btn__icon"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
+                          <Icon
                             aria-hidden={true}
                             aria-label="Add"
                             className="bx--btn__icon"
-                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
-                            />
-                          </svg>
-                        </AddFilled16>
+                            <svg
+                              aria-hidden={true}
+                              aria-label="Add"
+                              className="bx--btn__icon"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(AddFilled16)>
                       </button>
                     </ForwardRef(Button)>
                   </TableBatchAction>
@@ -2445,37 +2253,43 @@ exports[`DataTable should render 1`] = `
                       className="bx--search bx--search--sm bx--search-maginfier"
                       role="search"
                     >
-                      <Search16
+                      <ForwardRef(Search16)
                         aria-label="Filter table"
                         className="bx--search-magnifier"
-                        height={16}
-                        preserveAspectRatio="xMidYMid meet"
                         role="img"
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <svg
+                        <Icon
                           aria-label="Filter table"
                           className="bx--search-magnifier"
-                          focusable="false"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           role="img"
-                          style={
-                            Object {
-                              "willChange": "transform",
-                            }
-                          }
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path
-                            d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
-                          />
-                        </svg>
-                      </Search16>
+                          <svg
+                            aria-label="Filter table"
+                            className="bx--search-magnifier"
+                            focusable="false"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            role="img"
+                            style={
+                              Object {
+                                "willChange": "transform",
+                              }
+                            }
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Search16)>
                       <label
                         className="bx--label"
                         htmlFor="custom-id"
@@ -2497,34 +2311,38 @@ exports[`DataTable should render 1`] = `
                         onClick={[Function]}
                         type="button"
                       >
-                        <Close16
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
+                        <ForwardRef(Close16)
                           role="img"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
-                            aria-hidden={true}
-                            focusable="false"
+                          <Icon
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             role="img"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
-                            />
-                          </svg>
-                        </Close16>
+                            <svg
+                              aria-hidden={true}
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Close16)>
                       </button>
                     </div>
                   </Search>
@@ -2535,27 +2353,6 @@ exports[`DataTable should render 1`] = `
                 renderIcon={
                   Object {
                     "$$typeof": Symbol(react.forward_ref),
-                    "defaultProps": Object {
-                      "height": 16,
-                      "preserveAspectRatio": "xMidYMid meet",
-                      "viewBox": "0 0 16 16",
-                      "width": 16,
-                      "xmlns": "http://www.w3.org/2000/svg",
-                    },
-                    "displayName": "Settings16",
-                    "propTypes": Object {
-                      "aria-hidden": [Function],
-                      "aria-label": [Function],
-                      "aria-labelledby": [Function],
-                      "children": [Function],
-                      "className": [Function],
-                      "height": [Function],
-                      "preserveAspectRatio": [Function],
-                      "tabIndex": [Function],
-                      "viewBox": [Function],
-                      "width": [Function],
-                      "xmlns": [Function],
-                    },
                     "render": [Function],
                   }
                 }
@@ -2566,27 +2363,6 @@ exports[`DataTable should render 1`] = `
                   renderIcon={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
-                      "defaultProps": Object {
-                        "height": 16,
-                        "preserveAspectRatio": "xMidYMid meet",
-                        "viewBox": "0 0 16 16",
-                        "width": 16,
-                        "xmlns": "http://www.w3.org/2000/svg",
-                      },
-                      "displayName": "Settings16",
-                      "propTypes": Object {
-                        "aria-hidden": [Function],
-                        "aria-label": [Function],
-                        "aria-labelledby": [Function],
-                        "children": [Function],
-                        "className": [Function],
-                        "height": [Function],
-                        "preserveAspectRatio": [Function],
-                        "tabIndex": [Function],
-                        "viewBox": [Function],
-                        "width": [Function],
-                        "xmlns": [Function],
-                      },
                       "render": [Function],
                     }
                   }
@@ -2609,27 +2385,6 @@ exports[`DataTable should render 1`] = `
                     renderIcon={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
-                        "defaultProps": Object {
-                          "height": 16,
-                          "preserveAspectRatio": "xMidYMid meet",
-                          "viewBox": "0 0 16 16",
-                          "width": 16,
-                          "xmlns": "http://www.w3.org/2000/svg",
-                        },
-                        "displayName": "Settings16",
-                        "propTypes": Object {
-                          "aria-hidden": [Function],
-                          "aria-label": [Function],
-                          "aria-labelledby": [Function],
-                          "children": [Function],
-                          "className": [Function],
-                          "height": [Function],
-                          "preserveAspectRatio": [Function],
-                          "tabIndex": [Function],
-                          "viewBox": [Function],
-                          "width": [Function],
-                          "xmlns": [Function],
-                        },
                         "render": [Function],
                       }
                     }
@@ -2652,19 +2407,14 @@ exports[`DataTable should render 1`] = `
                         tabIndex={0}
                         title="Settings"
                       >
-                        <Settings16
+                        <ForwardRef(Settings16)
                           aria-label="open and close list of options"
                           className="bx--overflow-menu__icon"
                           focusable="false"
-                          height={16}
                           onClick={[Function]}
                           onKeyDown={[Function]}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
+                          <Icon
                             aria-label="open and close list of options"
                             className="bx--overflow-menu__icon"
                             focusable="false"
@@ -2672,27 +2422,40 @@ exports[`DataTable should render 1`] = `
                             onClick={[Function]}
                             onKeyDown={[Function]}
                             preserveAspectRatio="xMidYMid meet"
-                            role="img"
-                            style={
-                              Object {
-                                "willChange": "transform",
-                              }
-                            }
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <title>
-                              open and close list of options
-                            </title>
-                            <path
-                              d="M13.5 8.4v-.8l1-.8c.4-.3.4-.9.2-1.3l-1.2-2c-.2-.3-.5-.5-.9-.5-.1 0-.2 0-.3.1l-1.2.4c-.2-.1-.4-.3-.7-.4l-.3-1.3c0-.5-.4-.8-.9-.8H6.8c-.5 0-.9.3-1 .8l-.2 1.3c-.3.1-.5.2-.7.3L3.7 3h-.3c-.4 0-.7.2-.9.5l-1.2 2c-.2.4-.1.9.3 1.3l.9.9v.8l-.9.7c-.4.3-.5.9-.2 1.3l1.2 2c.1.3.4.5.8.5.1 0 .2 0 .3-.1l1.2-.4c.2.1.4.3.7.4l.3 1.3c.1.5.5.8 1 .8h2.4c.5 0 .9-.3 1-.8l.3-1.3c.2-.1.4-.2.7-.4l1.2.4c.1 0 .2.1.3.1.4 0 .7-.2.9-.5l1.1-2c.2-.4.2-.9-.2-1.3l-1.1-.8zm-.9 3.6l-1.7-.6c-.4.3-.9.6-1.4.8L9.2 14H6.8l-.4-1.8c-.5-.2-.9-.5-1.4-.8l-1.6.6-1.2-2 1.4-1.2c-.1-.5-.1-1.1 0-1.6L2.2 6l1.2-2 1.7.6c.4-.4.9-.6 1.4-.8L6.8 2h2.4l.4 1.8c.5.2.9.5 1.4.8l1.6-.6 1.2 2-1.4 1.2c.1.5.1 1.1 0 1.6l1.4 1.2-1.2 2z"
-                            />
-                            <path
-                              d="M8 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c0 1.6-1.3 3-3 3zm0-5c-1.1 0-2 .8-2 1.9V8c0 1.1.8 2 1.9 2H8c1.1 0 2-.8 2-1.9V8c0-1.1-.8-2-2-2 .1 0 0 0 0 0z"
-                            />
-                          </svg>
-                        </Settings16>
+                            <svg
+                              aria-label="open and close list of options"
+                              className="bx--overflow-menu__icon"
+                              focusable="false"
+                              height={16}
+                              onClick={[Function]}
+                              onKeyDown={[Function]}
+                              preserveAspectRatio="xMidYMid meet"
+                              role="img"
+                              style={
+                                Object {
+                                  "willChange": "transform",
+                                }
+                              }
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M13.5 8.4v-.8l1-.8c.4-.3.4-.9.2-1.3l-1.2-2c-.2-.3-.5-.5-.9-.5-.1 0-.2 0-.3.1l-1.2.4c-.2-.1-.4-.3-.7-.4l-.3-1.3c0-.5-.4-.8-.9-.8H6.8c-.5 0-.9.3-1 .8l-.2 1.3c-.3.1-.5.2-.7.3L3.7 3h-.3c-.4 0-.7.2-.9.5l-1.2 2c-.2.4-.1.9.3 1.3l.9.9v.8l-.9.7c-.4.3-.5.9-.2 1.3l1.2 2c.1.3.4.5.8.5.1 0 .2 0 .3-.1l1.2-.4c.2.1.4.3.7.4l.3 1.3c.1.5.5.8 1 .8h2.4c.5 0 .9-.3 1-.8l.3-1.3c.2-.1.4-.2.7-.4l1.2.4c.1 0 .2.1.3.1.4 0 .7-.2.9-.5l1.1-2c.2-.4.2-.9-.2-1.3l-1.1-.8zm-.9 3.6l-1.7-.6c-.4.3-.9.6-1.4.8L9.2 14H6.8l-.4-1.8c-.5-.2-.9-.5-1.4-.8l-1.6.6-1.2-2 1.4-1.2c-.1-.5-.1-1.1 0-1.6L2.2 6l1.2-2 1.7.6c.4-.4.9-.6 1.4-.8L6.8 2h2.4l.4 1.8c.5.2.9.5 1.4.8l1.6-.6 1.2 2-1.4 1.2c.1.5.1 1.1 0 1.6l1.4 1.2-1.2 2z"
+                              />
+                              <path
+                                d="M8 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c0 1.6-1.3 3-3 3zm0-5c-1.1 0-2 .8-2 1.9V8c0 1.1.8 2 1.9 2H8c1.1 0 2-.8 2-1.9V8c0-1.1-.8-2-2-2 .1 0 0 0 0 0z"
+                              />
+                              <title>
+                                open and close list of options
+                              </title>
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Settings16)>
                       </div>
                     </ClickListener>
                   </OverflowMenu>

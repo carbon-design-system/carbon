@@ -14,32 +14,34 @@ exports[`HeaderMenuButton should render 1`] = `
     title="Accessibility label"
     type="button"
   >
-    <Menu20
-      height={20}
-      preserveAspectRatio="xMidYMid meet"
-      viewBox="0 0 20 20"
-      width={20}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <svg
-        aria-hidden={true}
-        focusable="false"
+    <ForwardRef(Menu20)>
+      <Icon
         height={20}
         preserveAspectRatio="xMidYMid meet"
-        style={
-          Object {
-            "willChange": "transform",
-          }
-        }
         viewBox="0 0 20 20"
         width={20}
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M2 14.8h16V16H2zm0-3.6h16v1.2H2zm0-3.6h16v1.2H2zM2 4h16v1.2H2z"
-        />
-      </svg>
-    </Menu20>
+        <svg
+          aria-hidden={true}
+          focusable="false"
+          height={20}
+          preserveAspectRatio="xMidYMid meet"
+          style={
+            Object {
+              "willChange": "transform",
+            }
+          }
+          viewBox="0 0 20 20"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 14.8h16V16H2zm0-3.6h16v1.2H2zm0-3.6h16v1.2H2zM2 4h16v1.2H2z"
+          />
+        </svg>
+      </Icon>
+    </ForwardRef(Menu20)>
   </button>
 </HeaderMenuButton>
 `;
