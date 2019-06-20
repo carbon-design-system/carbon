@@ -13,7 +13,13 @@ module.exports = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
   const importsToReplace = [];
+
   let highestIndex = -Infinity;
+
+  // Save the comments attached to the first node
+  const getFirstNode = () => root.find(j.Program).get('body', 0).node;
+  const firstNode = getFirstNode();
+  const { comments } = firstNode;
 
   root
     .find(j.ImportDeclaration)
@@ -94,6 +100,12 @@ module.exports = (file, api) => {
       ...node.body.slice(highestIndex, node.body.length),
     ];
   });
+
+  // If the first node has been modified or deleted, reattach the comments
+  const firstNode2 = getFirstNode();
+  if (firstNode2 !== firstNode) {
+    firstNode2.comments = comments;
+  }
 
   // TODO make printing configurable
   return root.toSource({ quote: 'single' });
