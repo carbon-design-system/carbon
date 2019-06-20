@@ -33,10 +33,10 @@
 
   // ::before - Tooltip caret
   // ::after - legacy Tooltip content (depreciated)
-  // .#{$prefix}--tooltip__content - WCAG 2.1 compliant tooltip content
+  // .#{$prefix}--assistive-text - WCAG 2.1 compliant tooltip content
   &::before,
   &:not(.#{$prefix}--tooltip--a11y)::after,
-  .#{$prefix}--tooltip__content {
+  .#{$prefix}--assistive-text {
     @include type-style('body-short-01');
     position: absolute;
     z-index: z('floating');
@@ -55,15 +55,7 @@
     content: '';
   }
 
-  .#{$prefix}--tooltip__content {
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-    visibility: visible;
+  .#{$prefix}--assistive-text {
     color: inherit;
     // In order to pass AAT, opacity must be set to 1 in the default state
     // On focus/hover use a keyframe animation to mimic transition
@@ -73,8 +65,8 @@
   // content box
   // @todo Simplify CSS selectors on next major release
   &:not(.#{$prefix}--tooltip--a11y)::after,
-  &:hover .#{$prefix}--tooltip__content,
-  &:focus .#{$prefix}--tooltip__content {
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
     @include layer('overlay');
     width: max-content;
     max-width: rem(208px);
@@ -113,7 +105,7 @@
       }
     }
 
-    .#{$prefix}--tooltip__content {
+    .#{$prefix}--assistive-text {
       clip: auto;
       margin: auto;
       overflow: visible;
@@ -149,8 +141,8 @@
   // @todo Simplify CSS selectors on next major release
   &::before,
   &:not(.#{$prefix}--tooltip--a11y)::after,
-  &:hover .#{$prefix}--tooltip__content,
-  &:focus .#{$prefix}--tooltip__content {
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: 0;
       left: 50%;
@@ -195,8 +187,8 @@
   // alignment options available only for top and bottom tooltip position
   // @todo Simplify CSS selectors on next major release
   &:not(.#{$prefix}--tooltip--a11y)::after,
-  &:hover .#{$prefix}--tooltip__content,
-  &:focus .#{$prefix}--tooltip__content {
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       @if ($align == 'start') {
         left: 0;
