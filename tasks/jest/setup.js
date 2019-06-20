@@ -10,7 +10,9 @@
 global.__DEV__ = true;
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {
-  setTimeout(callback);
+  // TODO: replace with async version
+  // setTimeout(callback);
+  callback();
 };
 
 const enzyme = require.requireActual('enzyme');
