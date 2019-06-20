@@ -88,7 +88,7 @@ async function scaffold() {
    * `categoryInformation[iconName].category` and
    * `categoryInformation[iconName].subcategory` will return needed info
    */
-  let categoryInformation = {};
+  const categoryInformation = {};
   categoriesJson.categories.forEach(category => {
     category.subcategories.forEach(subcategory => {
       subcategory.members.forEach(iconName => {
