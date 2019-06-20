@@ -30,6 +30,7 @@
 
   .#{$prefix}--switcher__item {
     width: 100%;
+    height: $spacing-07;
   }
 
   .#{$prefix}--switcher__item:nth-child(1) {
@@ -38,7 +39,7 @@
 
   .#{$prefix}--switcher__item--divider {
     display: block;
-    width: rem(222px);
+    width: rem(224px);
     height: 1px;
     margin: $spacing-03 $spacing-05;
     background: $shell-panel-border;
@@ -52,9 +53,10 @@
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
 
-    &:hover {
+    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
       background: $shell-panel-bg-02;
       color: $shell-panel-text-02;
+      cursor: pointer;
     }
 
     &:focus {
