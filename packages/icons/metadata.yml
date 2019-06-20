@@ -3,7 +3,7 @@ icons:
     friendly_name: Add
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - plus
@@ -127,7 +127,7 @@ icons:
     friendly_name: Asleep
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - night
@@ -148,7 +148,7 @@ icons:
     friendly_name: Attachment
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - paper clip
@@ -183,7 +183,7 @@ icons:
     friendly_name: Calendar
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Time
     aliases:
       - date
@@ -254,7 +254,7 @@ icons:
     friendly_name: Chat
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - sms
@@ -269,7 +269,7 @@ icons:
     friendly_name: Checkmark
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Status
     aliases:
       - approved
@@ -359,7 +359,7 @@ icons:
     friendly_name: Close
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - X
@@ -385,7 +385,7 @@ icons:
     friendly_name: Code
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - </>
@@ -401,7 +401,7 @@ icons:
     friendly_name: Copy
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - duplicate
@@ -432,7 +432,7 @@ icons:
     friendly_name: Document
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - file
@@ -471,7 +471,7 @@ icons:
     friendly_name: Down to bottom
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - jump to bottom
@@ -484,7 +484,7 @@ icons:
     friendly_name: Download
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - install
@@ -495,7 +495,7 @@ icons:
     friendly_name: Draggable
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - handle
@@ -507,7 +507,7 @@ icons:
     friendly_name: Edit
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - modify
@@ -527,7 +527,7 @@ icons:
     friendly_name: Email
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - mail
@@ -542,7 +542,7 @@ icons:
     friendly_name: Error
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Status
     aliases:
       - state
@@ -569,7 +569,7 @@ icons:
     friendly_name: Export
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - ship
@@ -582,7 +582,7 @@ icons:
     friendly_name: Fade
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - dim
@@ -597,7 +597,7 @@ icons:
     friendly_name: Favorite
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - heart
@@ -619,7 +619,7 @@ icons:
     friendly_name: Filter
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - settings
@@ -641,7 +641,7 @@ icons:
     friendly_name: Folder
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - file
@@ -672,7 +672,7 @@ icons:
     friendly_name: Forum
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - chat
@@ -686,7 +686,7 @@ icons:
     friendly_name: Grid
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - align
@@ -701,7 +701,7 @@ icons:
     friendly_name: Help
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Status
     aliases:
       - support
@@ -722,7 +722,7 @@ icons:
     friendly_name: Information
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Status
     aliases:
       - info
@@ -744,7 +744,7 @@ icons:
     friendly_name: Launch
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - open
@@ -758,7 +758,7 @@ icons:
     friendly_name: List
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - bullet
@@ -797,7 +797,7 @@ icons:
     friendly_name: Locked
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - lock
@@ -812,7 +812,7 @@ icons:
     friendly_name: Maximize
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - enlarge
@@ -829,7 +829,7 @@ icons:
     friendly_name: Menu
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - left nav
@@ -846,7 +846,7 @@ icons:
     friendly_name: Minimize
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - close
@@ -860,7 +860,7 @@ icons:
     friendly_name: Misuse
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Status
     aliases:
       - X
@@ -882,7 +882,7 @@ icons:
     friendly_name: New tab
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - open
@@ -897,7 +897,7 @@ icons:
     friendly_name: Notification
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - alert
@@ -935,7 +935,7 @@ icons:
     friendly_name: Overflow menu
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - show more
@@ -959,7 +959,7 @@ icons:
     friendly_name: Pause
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - stop
@@ -986,7 +986,7 @@ icons:
     friendly_name: Play
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - start
@@ -1019,7 +1019,7 @@ icons:
     friendly_name: Power
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - 'on'
@@ -1033,7 +1033,7 @@ icons:
     friendly_name: Redo
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - restart
@@ -1050,7 +1050,7 @@ icons:
     friendly_name: Restart
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - undo
@@ -1063,7 +1063,7 @@ icons:
     friendly_name: Save
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - floppy
@@ -1098,7 +1098,7 @@ icons:
     friendly_name: Search
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - find
@@ -1112,7 +1112,7 @@ icons:
     friendly_name: Settings
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - preferences
@@ -1132,7 +1132,7 @@ icons:
     friendly_name: Star
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - favorite
@@ -1161,7 +1161,7 @@ icons:
     friendly_name: Stop
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - block
@@ -1197,7 +1197,7 @@ icons:
     friendly_name: Subtract
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - minus
@@ -1224,7 +1224,7 @@ icons:
     friendly_name: Switcher
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - switcher
@@ -1237,7 +1237,7 @@ icons:
     friendly_name: Trash can
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - trash
@@ -1255,7 +1255,7 @@ icons:
     friendly_name: Undo
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - go back
@@ -1270,7 +1270,7 @@ icons:
     friendly_name: Unlocked
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - open
@@ -1296,7 +1296,7 @@ icons:
     friendly_name: Upload
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - transfer
@@ -1313,7 +1313,7 @@ icons:
     friendly_name: User
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - person
@@ -1413,7 +1413,7 @@ icons:
     friendly_name: View
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - eye
@@ -1456,7 +1456,7 @@ icons:
     friendly_name: Warning
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Status
     aliases:
       - halt
@@ -1517,7 +1517,7 @@ icons:
     friendly_name: 4 k
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - four k
@@ -1555,7 +1555,7 @@ icons:
     friendly_name: Cad
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - computer aided design
@@ -1573,7 +1573,7 @@ icons:
     friendly_name: Csv
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - file
@@ -1589,7 +1589,7 @@ icons:
     friendly_name: Dvr
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - record
@@ -1604,7 +1604,7 @@ icons:
     friendly_name: Gif
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - file
@@ -1616,7 +1616,7 @@ icons:
     friendly_name: Hd
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - high
@@ -1636,7 +1636,7 @@ icons:
     friendly_name: Hdr
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - high
@@ -1650,7 +1650,7 @@ icons:
     friendly_name: Http
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - internet
@@ -1666,7 +1666,7 @@ icons:
     friendly_name: Iso
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - photo
@@ -1690,7 +1690,7 @@ icons:
     friendly_name: Jpg
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - file
@@ -1707,7 +1707,7 @@ icons:
     friendly_name: Json
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - javascript
@@ -1723,7 +1723,7 @@ icons:
     friendly_name: Mov
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - movie
@@ -1738,7 +1738,7 @@ icons:
     friendly_name: Mp3
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - music
@@ -1753,7 +1753,7 @@ icons:
     friendly_name: Mp4
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - movie
@@ -1768,7 +1768,7 @@ icons:
     friendly_name: Pdf
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - document
@@ -1783,7 +1783,7 @@ icons:
     friendly_name: Png
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - file
@@ -1800,7 +1800,7 @@ icons:
     friendly_name: H
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - letter
@@ -1811,7 +1811,7 @@ icons:
     friendly_name: S
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - standard
@@ -1830,7 +1830,7 @@ icons:
     friendly_name: T
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - letter
@@ -1848,7 +1848,7 @@ icons:
     friendly_name: U1
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1858,7 +1858,7 @@ icons:
     friendly_name: U2
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1868,7 +1868,7 @@ icons:
     friendly_name: U3
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1878,7 +1878,7 @@ icons:
     friendly_name: X
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - alphabet
@@ -1890,7 +1890,7 @@ icons:
     friendly_name: 'Y'
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - alphabet
@@ -1901,7 +1901,7 @@ icons:
     friendly_name: Z
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - alphabet
@@ -1912,7 +1912,7 @@ icons:
     friendly_name: Barrier
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - wall
@@ -1926,7 +1926,7 @@ icons:
     friendly_name: Bloch sphere
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1938,7 +1938,7 @@ icons:
     friendly_name: C u1
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1951,7 +1951,7 @@ icons:
     friendly_name: C u3
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - q
@@ -1964,7 +1964,7 @@ icons:
     friendly_name: C y
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1976,7 +1976,7 @@ icons:
     friendly_name: C z
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -1988,7 +1988,7 @@ icons:
     friendly_name: Cc x
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -2001,7 +2001,7 @@ icons:
     friendly_name: Circuit composer
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -2014,7 +2014,7 @@ icons:
     friendly_name: Composer edit
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -2028,7 +2028,7 @@ icons:
     friendly_name: Hinton plot
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - Q
@@ -2041,7 +2041,7 @@ icons:
     friendly_name: I d
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - identification
@@ -2052,7 +2052,7 @@ icons:
     friendly_name: Matrix
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - cast
@@ -2065,7 +2065,7 @@ icons:
     friendly_name: Operation
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Research
     aliases:
       - meter
@@ -2089,7 +2089,7 @@ icons:
     friendly_name: Raw
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - format
@@ -2100,7 +2100,7 @@ icons:
     friendly_name: Sql
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - database
@@ -2111,7 +2111,7 @@ icons:
     friendly_name: Svg
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - format
@@ -2123,7 +2123,7 @@ icons:
     friendly_name: Tif
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - format
@@ -2134,7 +2134,7 @@ icons:
     friendly_name: Tsv
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - format
@@ -2147,7 +2147,7 @@ icons:
     friendly_name: Txt
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - text
@@ -2159,7 +2159,7 @@ icons:
     friendly_name: Usb
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - connector
@@ -2173,7 +2173,7 @@ icons:
     friendly_name: Vpn
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - protocol
@@ -2188,7 +2188,7 @@ icons:
     friendly_name: Wmv
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - format
@@ -2201,7 +2201,7 @@ icons:
     friendly_name: Xls
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - excel
@@ -2224,7 +2224,7 @@ icons:
     friendly_name: Zip
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - compress
@@ -2235,7 +2235,7 @@ icons:
     friendly_name: Accessibility
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - wheelchair
@@ -2247,7 +2247,7 @@ icons:
     friendly_name: Activity
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - line chart
@@ -2260,7 +2260,7 @@ icons:
     friendly_name: Add comment
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - add
@@ -2273,7 +2273,7 @@ icons:
     friendly_name: Alarm
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Time
     aliases:
       - clock
@@ -2297,7 +2297,7 @@ icons:
     friendly_name: Analytics
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - line chart
@@ -2311,7 +2311,7 @@ icons:
     friendly_name: Aperture
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - eye
@@ -2324,7 +2324,7 @@ icons:
     friendly_name: Api
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - program
@@ -2342,7 +2342,7 @@ icons:
     friendly_name: Application
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - box
@@ -2354,7 +2354,7 @@ icons:
     friendly_name: Archive
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - drawer
@@ -2368,7 +2368,7 @@ icons:
     friendly_name: Arrival
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - plane
@@ -2380,7 +2380,7 @@ icons:
     friendly_name: Asset
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - runtime
@@ -2393,7 +2393,7 @@ icons:
     friendly_name: At
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - at
@@ -2404,7 +2404,7 @@ icons:
     friendly_name: Bar
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - drink
@@ -2445,7 +2445,7 @@ icons:
     friendly_name: Bee
     usage: This is a description for usage
     categories:
-      - name: Brand
+      - category: Brand
         subcategory: IBM
     aliases:
       - ibm
@@ -2460,7 +2460,7 @@ icons:
     friendly_name: Bicycle
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - bike
@@ -2474,7 +2474,7 @@ icons:
     friendly_name: Binoculars
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - search
@@ -2488,7 +2488,7 @@ icons:
     friendly_name: Blog
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - writing
@@ -2502,7 +2502,7 @@ icons:
     friendly_name: Bluetooth
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - wireless
@@ -2521,7 +2521,7 @@ icons:
     friendly_name: Bookmark
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - flag
@@ -2532,7 +2532,7 @@ icons:
     friendly_name: Box
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - file
@@ -2544,7 +2544,7 @@ icons:
     friendly_name: Brightness contrast
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - sun
@@ -2559,7 +2559,7 @@ icons:
     friendly_name: Building
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - factory
@@ -2587,7 +2587,7 @@ icons:
     friendly_name: Bullhorn
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - announcement
@@ -2605,7 +2605,7 @@ icons:
     friendly_name: Bus
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - transport
@@ -2618,7 +2618,7 @@ icons:
     friendly_name: Cafe
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - coffee
@@ -2633,7 +2633,7 @@ icons:
     friendly_name: Calculator
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - calculate
@@ -2645,7 +2645,7 @@ icons:
     friendly_name: Calibrate
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - caliper
@@ -2659,7 +2659,7 @@ icons:
     friendly_name: Camera
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - photo
@@ -2680,7 +2680,7 @@ icons:
     friendly_name: Car
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - transport
@@ -2716,7 +2716,7 @@ icons:
     friendly_name: Catalog
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - notebook
@@ -2729,7 +2729,7 @@ icons:
     friendly_name: Categories
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - group
@@ -2791,7 +2791,7 @@ icons:
     friendly_name: Checkbox
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - check
@@ -2823,7 +2823,7 @@ icons:
     friendly_name: Chemistry
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - science
@@ -2835,7 +2835,7 @@ icons:
     friendly_name: Chip
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - microchip
@@ -2846,7 +2846,7 @@ icons:
     friendly_name: Circle dash
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - circle
@@ -2871,7 +2871,7 @@ icons:
     friendly_name: Closed caption
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - caption
@@ -2894,7 +2894,7 @@ icons:
     friendly_name: Cloud
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Weather
     aliases:
       - donwload
@@ -2953,7 +2953,7 @@ icons:
     friendly_name: Cognitive
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: Senses
     aliases:
       - brain
@@ -2966,7 +2966,7 @@ icons:
     friendly_name: Collaborate
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - people
@@ -2981,7 +2981,7 @@ icons:
     friendly_name: Color palette
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - paint palette
@@ -2993,7 +2993,7 @@ icons:
     friendly_name: Column
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - grid
@@ -3005,7 +3005,7 @@ icons:
     friendly_name: Compare
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - arrows
@@ -3020,7 +3020,7 @@ icons:
     friendly_name: Compass
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - direction
@@ -3035,7 +3035,7 @@ icons:
     friendly_name: Connect
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - network
@@ -3064,7 +3064,7 @@ icons:
     friendly_name: Contrast
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - brightness
@@ -3079,7 +3079,7 @@ icons:
     friendly_name: Corner
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - frame
@@ -3095,7 +3095,7 @@ icons:
     friendly_name: Crop
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - cut
@@ -3133,7 +3133,7 @@ icons:
     friendly_name: Cut
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - scissors
@@ -3148,7 +3148,7 @@ icons:
     friendly_name: Dashboard
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - gauge
@@ -3226,7 +3226,7 @@ icons:
     friendly_name: Data share
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - data
@@ -3275,7 +3275,7 @@ icons:
     friendly_name: Debug
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - bug
@@ -3288,7 +3288,7 @@ icons:
     friendly_name: Delivery truck
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - truck
@@ -3305,7 +3305,7 @@ icons:
     friendly_name: Departure
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - plane
@@ -3320,7 +3320,7 @@ icons:
     friendly_name: Deploy rules
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - rules
@@ -3334,7 +3334,7 @@ icons:
     friendly_name: Development
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - build
@@ -3351,7 +3351,7 @@ icons:
     friendly_name: Devices
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - monitor
@@ -3364,7 +3364,7 @@ icons:
     friendly_name: Diagram
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - pie chart
@@ -3400,7 +3400,7 @@ icons:
     friendly_name: Draw
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - squiggle
@@ -3427,7 +3427,7 @@ icons:
     friendly_name: Education
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - graduation
@@ -3443,7 +3443,7 @@ icons:
     friendly_name: Erase
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - eraser
@@ -3460,7 +3460,7 @@ icons:
     friendly_name: Event
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Time
     aliases:
       - calendar
@@ -3480,7 +3480,7 @@ icons:
     friendly_name: Events
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - people
@@ -3500,7 +3500,7 @@ icons:
     friendly_name: Exam mode
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - dev test
@@ -3513,7 +3513,7 @@ icons:
     friendly_name: Eyedropper
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - dropper
@@ -3623,7 +3623,7 @@ icons:
     friendly_name: Finance
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - bank
@@ -3638,7 +3638,7 @@ icons:
     friendly_name: Fingerprint recognition
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - identification
@@ -3655,7 +3655,7 @@ icons:
     friendly_name: Flag
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - country
@@ -3670,7 +3670,7 @@ icons:
     friendly_name: Flash
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - battery
@@ -3703,7 +3703,7 @@ icons:
     friendly_name: Flow
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - flow chart
@@ -3755,7 +3755,7 @@ icons:
     friendly_name: Function
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - action
@@ -3793,7 +3793,7 @@ icons:
     friendly_name: Globe
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - planet
@@ -3807,7 +3807,7 @@ icons:
     friendly_name: Group
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - category
@@ -3824,7 +3824,7 @@ icons:
     friendly_name: Headphones
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - headset
@@ -3839,7 +3839,7 @@ icons:
     friendly_name: Headset
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - headphones
@@ -3855,7 +3855,7 @@ icons:
     friendly_name: Health cross
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - red cross
@@ -3869,7 +3869,7 @@ icons:
     friendly_name: Hearing
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: Senses
     aliases:
       - detecting
@@ -3886,7 +3886,7 @@ icons:
     friendly_name: Home
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Navigation
     aliases:
       - detecting
@@ -3903,7 +3903,7 @@ icons:
     friendly_name: Hotel
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - hostel
@@ -3918,7 +3918,7 @@ icons:
     friendly_name: Hourglass
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Time
     aliases:
       - clock
@@ -3933,7 +3933,7 @@ icons:
     friendly_name: Humidity
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Weather
     aliases:
       - weather
@@ -3951,7 +3951,7 @@ icons:
     friendly_name: Ibm cloud
     usage: This is a description for usage
     categories:
-      - name: Brand
+      - category: Brand
         subcategory: IBM
     aliases:
       - product
@@ -3968,7 +3968,7 @@ icons:
     friendly_name: Ibm security
     usage: This is a description for usage
     categories:
-      - name: Brand
+      - category: Brand
         subcategory: IBM
     aliases:
       - safe
@@ -3987,7 +3987,7 @@ icons:
     friendly_name: Idea
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: Senses
     aliases:
       - thought
@@ -4005,7 +4005,7 @@ icons:
     friendly_name: Identification
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - id
@@ -4021,7 +4021,7 @@ icons:
     friendly_name: Image
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - appearance
@@ -4044,7 +4044,7 @@ icons:
     friendly_name: Industry
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - field
@@ -4061,7 +4061,7 @@ icons:
     friendly_name: Insert
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - embed
@@ -4077,7 +4077,7 @@ icons:
     friendly_name: Integration
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - assimilate
@@ -4093,7 +4093,7 @@ icons:
     friendly_name: Inventory management
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - supervision
@@ -4139,7 +4139,7 @@ icons:
     friendly_name: Keyboard
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - console
@@ -4294,7 +4294,7 @@ icons:
     friendly_name: Light
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - bright
@@ -4316,7 +4316,7 @@ icons:
     friendly_name: Link
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - associate
@@ -4331,7 +4331,7 @@ icons:
     friendly_name: Location
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - place
@@ -4348,7 +4348,7 @@ icons:
     friendly_name: Login
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - log on
@@ -4468,7 +4468,7 @@ icons:
     friendly_name: Logout
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - sign off
@@ -4482,7 +4482,7 @@ icons:
     friendly_name: Loop
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - knot
@@ -4543,7 +4543,7 @@ icons:
     friendly_name: Map
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - atlas
@@ -4560,7 +4560,7 @@ icons:
     friendly_name: Medication
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - medicine
@@ -4589,7 +4589,7 @@ icons:
     friendly_name: Microphone
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - mic
@@ -4621,7 +4621,7 @@ icons:
     friendly_name: Migrate
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - drift
@@ -4638,7 +4638,7 @@ icons:
     friendly_name: Mobile
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - phone
@@ -4671,7 +4671,7 @@ icons:
     friendly_name: Model
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - reference
@@ -4695,7 +4695,7 @@ icons:
     friendly_name: Move
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - action
@@ -4710,7 +4710,7 @@ icons:
     friendly_name: Movement
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: Senses
     aliases:
       - action
@@ -4725,7 +4725,7 @@ icons:
     friendly_name: Music
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - audio
@@ -4741,7 +4741,7 @@ icons:
     friendly_name: Not sent
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - failed
@@ -4762,7 +4762,7 @@ icons:
     friendly_name: Notebook
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - book
@@ -4895,7 +4895,7 @@ icons:
     friendly_name: Opacity
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - transparency
@@ -4962,7 +4962,7 @@ icons:
     friendly_name: Package
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - download
@@ -4999,7 +4999,7 @@ icons:
     friendly_name: Paint brush
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - brush
@@ -5016,7 +5016,7 @@ icons:
     friendly_name: Panel expansion
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - side
@@ -5029,7 +5029,7 @@ icons:
     friendly_name: Parent child
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - nested
@@ -5042,7 +5042,7 @@ icons:
     friendly_name: Partnership
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - relationship
@@ -5055,7 +5055,7 @@ icons:
     friendly_name: Password
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - key
@@ -5068,7 +5068,7 @@ icons:
     friendly_name: Paste
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - copy
@@ -5080,7 +5080,7 @@ icons:
     friendly_name: Person
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: User
     aliases:
       - human
@@ -5100,7 +5100,7 @@ icons:
     friendly_name: Phone
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - call
@@ -5131,7 +5131,7 @@ icons:
     friendly_name: Pills
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - health
@@ -5153,7 +5153,7 @@ icons:
     friendly_name: Pin
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - save
@@ -5174,7 +5174,7 @@ icons:
     friendly_name: Playlist
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - music
@@ -5186,7 +5186,7 @@ icons:
     friendly_name: Popup
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - modal
@@ -5198,7 +5198,7 @@ icons:
     friendly_name: Portfolio
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - briefcase
@@ -5211,7 +5211,7 @@ icons:
     friendly_name: Presentation file
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - keynote
@@ -5224,7 +5224,7 @@ icons:
     friendly_name: Printer
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - print
@@ -5237,7 +5237,7 @@ icons:
     friendly_name: Purchase
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - charge
@@ -5250,7 +5250,7 @@ icons:
     friendly_name: Query queue
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - list
@@ -5260,7 +5260,7 @@ icons:
     friendly_name: Quotes
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - mark
@@ -5271,7 +5271,7 @@ icons:
     friendly_name: Radio button
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - component
@@ -5290,7 +5290,7 @@ icons:
     friendly_name: Radio
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - music
@@ -5303,7 +5303,7 @@ icons:
     friendly_name: Receipt
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - check
@@ -5315,7 +5315,7 @@ icons:
     friendly_name: Recently viewed
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - history
@@ -5328,7 +5328,7 @@ icons:
     friendly_name: Recommend
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - suggest
@@ -5340,7 +5340,7 @@ icons:
     friendly_name: Recording
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - start
@@ -5364,7 +5364,7 @@ icons:
     friendly_name: Renew
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - refresh
@@ -5376,7 +5376,7 @@ icons:
     friendly_name: Repeat
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - repeat once
@@ -5394,7 +5394,7 @@ icons:
     friendly_name: Reply
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - back
@@ -5406,7 +5406,7 @@ icons:
     friendly_name: Report
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - clipboard
@@ -5425,7 +5425,7 @@ icons:
     friendly_name: Request quote
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - edit
@@ -5461,7 +5461,7 @@ icons:
     friendly_name: Reset
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - refresh
@@ -5479,7 +5479,7 @@ icons:
     friendly_name: Restaurant
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - dining
@@ -5527,7 +5527,7 @@ icons:
     friendly_name: Rocket
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - missile
@@ -5541,7 +5541,7 @@ icons:
     friendly_name: Rotate
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - revolve
@@ -5555,7 +5555,7 @@ icons:
     friendly_name: Row
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - line
@@ -5572,7 +5572,7 @@ icons:
     friendly_name: Rss
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - web feed
@@ -5587,7 +5587,7 @@ icons:
     friendly_name: Ruler
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - measure
@@ -5608,7 +5608,7 @@ icons:
     friendly_name: Run
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - start
@@ -5620,7 +5620,7 @@ icons:
     friendly_name: Scale
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - scalable
@@ -5638,7 +5638,7 @@ icons:
     friendly_name: Scalpel
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - blade
@@ -5657,7 +5657,7 @@ icons:
     friendly_name: Scan
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - scanner
@@ -5673,7 +5673,7 @@ icons:
     friendly_name: Screen
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - computer
@@ -5696,7 +5696,7 @@ icons:
     friendly_name: Send
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - mail
@@ -5730,7 +5730,7 @@ icons:
     friendly_name: Share knowledge
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - people
@@ -5747,7 +5747,7 @@ icons:
     friendly_name: Share
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - social media
@@ -5793,7 +5793,7 @@ icons:
     friendly_name: Shrink screen
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Controls
     aliases:
       - minimize
@@ -5816,7 +5816,7 @@ icons:
     friendly_name: Shuffle
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - move
@@ -5834,7 +5834,7 @@ icons:
     friendly_name: Shuttle
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - bus
@@ -5876,7 +5876,7 @@ icons:
     friendly_name: Smell
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: Senses
     aliases:
       - nose
@@ -5907,7 +5907,7 @@ icons:
     friendly_name: Split screen
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - divide
@@ -5924,7 +5924,7 @@ icons:
     friendly_name: Spray paint
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - paint
@@ -5940,7 +5940,7 @@ icons:
     friendly_name: Store
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - building
@@ -5958,7 +5958,7 @@ icons:
     friendly_name: Table
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - data
@@ -5979,7 +5979,7 @@ icons:
     friendly_name: Table of contents
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - list
@@ -5998,7 +5998,7 @@ icons:
     friendly_name: Tag
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - label
@@ -6019,7 +6019,7 @@ icons:
     friendly_name: Task
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - clipboard
@@ -6035,7 +6035,7 @@ icons:
     friendly_name: Taste
     usage: This is a description for usage
     categories:
-      - name: Person
+      - category: Person
         subcategory: Senses
     aliases:
       - tongue
@@ -6048,7 +6048,7 @@ icons:
     friendly_name: Taxi
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - car
@@ -6062,7 +6062,7 @@ icons:
     friendly_name: Temperature
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Weather
     aliases:
       - weather
@@ -6077,7 +6077,7 @@ icons:
     friendly_name: Template
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - dashboard
@@ -6091,7 +6091,7 @@ icons:
     friendly_name: Terminal
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - code
@@ -6257,7 +6257,7 @@ icons:
     friendly_name: Thumbs down
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - dislike
@@ -6271,7 +6271,7 @@ icons:
     friendly_name: Thumbs up
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - like
@@ -6285,7 +6285,7 @@ icons:
     friendly_name: Ticket
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - stub
@@ -6296,7 +6296,7 @@ icons:
     friendly_name: Time
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Time
     aliases:
       - clock
@@ -6309,7 +6309,7 @@ icons:
     friendly_name: Timer
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Time
     aliases:
       - alarm
@@ -6330,7 +6330,7 @@ icons:
     friendly_name: Tools
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Instruments
     aliases:
       - wrench
@@ -6363,7 +6363,7 @@ icons:
     friendly_name: Train
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - subway
@@ -6375,7 +6375,7 @@ icons:
     friendly_name: Translate
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - language
@@ -6385,7 +6385,7 @@ icons:
     friendly_name: Tree view
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - flow chart
@@ -6395,7 +6395,7 @@ icons:
     friendly_name: Unlink
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Formatting
     aliases:
       - detach
@@ -6420,7 +6420,7 @@ icons:
     friendly_name: Van
     usage: This is a description for usage
     categories:
-      - name: Planning
+      - category: Planning
         subcategory: Travel
     aliases:
       - vehicle
@@ -6432,7 +6432,7 @@ icons:
     friendly_name: Video
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Toggle
     aliases:
       - camera
@@ -6470,7 +6470,7 @@ icons:
     friendly_name: Visual recognition
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: Data
     aliases:
       - picture
@@ -6481,7 +6481,7 @@ icons:
     friendly_name: Voicemail
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - recording
@@ -6531,7 +6531,7 @@ icons:
     friendly_name: Wallet
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - money
@@ -6542,7 +6542,7 @@ icons:
     friendly_name: Watch
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - time
@@ -6607,7 +6607,7 @@ icons:
     friendly_name: 3rd party connected
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - watson
@@ -6621,7 +6621,7 @@ icons:
     friendly_name: Angle
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - watson
@@ -6634,7 +6634,7 @@ icons:
     friendly_name: Annotation visibility
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - meter
@@ -6658,7 +6658,7 @@ icons:
     friendly_name: Auto scroll
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - scrolling
@@ -6695,7 +6695,7 @@ icons:
     friendly_name: Circle measurement
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - pan
@@ -6707,7 +6707,7 @@ icons:
     friendly_name: Cobb angle
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - corner
@@ -6722,7 +6722,7 @@ icons:
     friendly_name: Cross reference
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - read
@@ -6762,7 +6762,7 @@ icons:
     friendly_name: Fusion blender
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - bar
@@ -6774,7 +6774,7 @@ icons:
     friendly_name: Hanging protocol
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - hanger
@@ -6823,7 +6823,7 @@ icons:
     friendly_name: Magnify
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - expand
@@ -6836,7 +6836,7 @@ icons:
     friendly_name: Mammogram
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - mammogram
@@ -6852,7 +6852,7 @@ icons:
     friendly_name: Page scroll
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - pages
@@ -6886,7 +6886,7 @@ icons:
     friendly_name: Pointer text
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - cursor
@@ -6918,7 +6918,7 @@ icons:
     friendly_name: Spine label
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - backbone
@@ -6932,7 +6932,7 @@ icons:
     friendly_name: Stacked move
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - stack
@@ -6968,7 +6968,7 @@ icons:
     friendly_name: Stress breath editor
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - air
@@ -7030,7 +7030,7 @@ icons:
     friendly_name: Zoom pan
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Health
     aliases:
       - track
@@ -7045,7 +7045,7 @@ icons:
     friendly_name: Wikis
     usage: This is a description for usage
     categories:
-      - name: Tools
+      - category: Tools
         subcategory: Technology
     aliases:
       - globe
@@ -7059,7 +7059,7 @@ icons:
     friendly_name: Wireless checkout
     usage: This is a description for usage
     categories:
-      - name: Enterprise
+      - category: Enterprise
         subcategory: Commerce
     aliases:
       - shopping bag
@@ -7072,7 +7072,7 @@ icons:
     friendly_name: Workspace
     usage: This is a description for usage
     categories:
-      - name: Organization
+      - category: Organization
         subcategory: File
     aliases:
       - tiles
@@ -7084,7 +7084,7 @@ icons:
     friendly_name: X axis
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - horizontal
@@ -7099,7 +7099,7 @@ icons:
     friendly_name: Y axis
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - verticle
@@ -7114,7 +7114,7 @@ icons:
     friendly_name: Z axis
     usage: This is a description for usage
     categories:
-      - name: Actions
+      - category: Actions
         subcategory: Operations
     aliases:
       - depth

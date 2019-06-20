@@ -100,6 +100,8 @@ async function scaffold() {
     });
   });
 
+  console.log(categoryInformation);
+
   const icons = Object.keys(iconsGroupedByName).map(key => {
     const iconIsCategorized =
       categoryInformation[key] && categoryInformation[key].subcategory;
@@ -113,7 +115,7 @@ async function scaffold() {
       categories: iconIsCategorized
         ? [
             {
-              name: categoryInformation[key].category,
+              category: categoryInformation[key].category,
               subcategory: categoryInformation[key].subcategory,
             },
           ]
