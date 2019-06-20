@@ -28,7 +28,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc 'scss/**/*.scss' -i '**/{_inlined,vendor}**' && bundler inline && bundler check 'scss/*.scss'",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc \"scss/**/*.scss\" -i \"**/{_inlined,vendor}**\" && bundler inline && bundler check \"scss/*.scss\"",
     "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
   },
   "dependencies": {

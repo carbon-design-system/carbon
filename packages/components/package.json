@@ -45,12 +45,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "gulp build && ./tools/copy-vendor-styles.sh && bundler check 'scss/**/*.scss'",
+    "build": "gulp build && ./tools/copy-vendor-styles.sh && bundler check \"scss/**/*.scss\" && yarn docs",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup --use-custom-properties",
     "clean": "gulp clean",
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
+    "docs": "bundler sassdoc \"scss{/components,/globals/grid,/globals/scss/vendor/@carbon/elements}/**/*.scss\" -i \"scss/globals/scss/vendor/@carbon/elements/**/{_inlined,vendor}/**\"",
     "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
     "prebuild": "gulp clean",
     "prepublishOnly": "yarn build",
