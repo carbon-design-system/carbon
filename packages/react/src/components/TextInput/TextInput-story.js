@@ -55,6 +55,11 @@ const props = {
       'Form validation UI content (invalidText)',
       'A valid value is required'
     ),
+    readOnly: boolean('Read only (readOnly)', false),
+    readOnlyIconLabel: text(
+      'Read-only icon label (readOnlyIconLabel)',
+      'This input field is read-only'
+    ),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
     onClick: action('onClick'),
     onChange: action('onChange'),
@@ -81,6 +86,11 @@ storiesOf('TextInput', module)
       <TextInput
         type={select('Form control type (type)', types, 'text')}
         {...props.TextInputProps()}
+        invalid={
+          props.TextInputProps().readOnly
+            ? false
+            : props.TextInputProps().invalid
+        }
       />
     ),
     {

@@ -81,9 +81,9 @@ const TextInput = React.forwardRef(function TextInput(
     <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
   );
   const input =
-    readOnly && inputField.value ? (
+    readOnly && (other.value || other.defaultValue) ? (
       <Tooltip showIcon={false} triggerText={inputField}>
-        {inputField.value}
+        {other.value || other.defaultValue}
       </Tooltip>
     ) : (
       inputField
