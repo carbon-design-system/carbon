@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import View16 from '@carbon/icons-react/lib/view/16';
-import ViewOff16 from '@carbon/icons-react/lib/view--off/16';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { View16, ViewOff16, WarningFilled16 } from '@carbon/icons-react';
 import { textInputProps } from './util';
 
 const { prefix } = settings;

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
