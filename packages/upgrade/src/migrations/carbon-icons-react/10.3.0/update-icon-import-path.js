@@ -9,22 +9,47 @@
 
 const { pascal } = require('change-case');
 
+/**
+ * This transform upgrades the import path that teams may be using for icons
+ * currently to the new entrypoint pattern introduced in 10.4.0.
+ *
+ *   Input:
+ *   import React from 'react';
+ *   import Add from '@carbon/icons-react/lib/add/16';
+ *   import Menu from '@carbon/icons-react/lib/menu/16';
+ *
+ *   Output:
+ *   import React from 'react';
+ *   import { Add16 as Add, Menu16 as Menu } from '@carbon/icons-react';
+ */
 module.exports = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
-  const importsToReplace = [];
 
-  let highestIndex = -Infinity;
+  // We use the importIndex value to track where we need to place the captured
+  // `importsToReplace`. Our heuristic for `importIndex` is that it should be
+  // the lowest line number found for all `@carbon/icons-react` imports.
+  const importsToReplace = [];
+  let importIndex = Infinity;
 
   // Save the comments attached to the first node
   const getFirstNode = () => root.find(j.Program).get('body', 0).node;
   const firstNode = getFirstNode();
   const { comments } = firstNode;
 
+  // Our first path through the file we look for import declarations that
+  // include `@carbon/icons-react`. At the time of this transform, these paths
+  // should match a shape that looks like:
+  //
+  //   import IconName from '@carbon/icons-react/<bundle>/<name>/<size>';
   root
     .find(j.ImportDeclaration)
     .filter(path => path.value.source.value.includes('@carbon/icons-react'))
     .forEach(path => {
+      // For each node that we encounter that has `@carbon/icons-react` in the
+      // import source, we need to slice off the first chunks from the value and
+      // then capture all the icon-specific data. Depending on the length of
+      // this data, we assign name, size, and prefix values.
       const { node } = path;
       const [
         _scope,
@@ -37,6 +62,10 @@ module.exports = (file, api) => {
       let size;
       let prefix = [];
 
+      // We have a couple of situations we can run into with the length of `rest`:
+      // (1) ['name-of-icon']
+      // (2) ['name-of-icon', 'size-of-icon'] OR ['name-of-icon', 'index']
+      // (3+) ['prefix-one', 'prefix-two', 'name-of-icon', 'size-of-icon']
       if (rest.length === 1) {
         name = rest[0];
       } else if (rest.length === 2) {
@@ -63,14 +92,22 @@ module.exports = (file, api) => {
       }
 
       // When working in a collection, the name of the path is its index
-      if (path.name > highestIndex) {
-        highestIndex = path.name;
+      if (path.name < importIndex) {
+        importIndex = path.name;
       }
 
+      // Make sure to grab the local name so that we can keep the reference the
+      // same.
+      //
+      //  Input:
+      //  import CustomName from '@carbon/icons-react/lib/icon/size';
+      //
+      //  Output:
+      //  import { IconSize as CustomName } from '@carbon/icons-react';
       const localName = node.specifiers[0].local.name;
       importsToReplace.push({
         name,
-        size: size !== 'index' ? size : null,
+        size,
         prefix,
         localName,
       });
@@ -92,12 +129,14 @@ module.exports = (file, api) => {
     j.stringLiteral('@carbon/icons-react')
   );
 
+  // Finally, go through our program and insert our icon import declaration into
+  // the index specified by `importIndex`
   root.find(j.Program).forEach(path => {
     const { node } = path;
     node.body = [
-      ...node.body.slice(0, highestIndex),
+      ...node.body.slice(0, importIndex),
       iconImport,
-      ...node.body.slice(highestIndex, node.body.length),
+      ...node.body.slice(importIndex, node.body.length),
     ];
   });
 
