@@ -10,46 +10,35 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const childProcess = require('child_process');
-const util = require('util');
+const { exec } = require('child-process-promise');
 const { workspace } = require('../workspace');
-
-const exec = util.promisify(childProcess.exec);
 
 async function check(args, env) {
   reporter.info('Running checks in CI...');
 
   const options = {
     cwd: env.root.directory,
+    stdio: 'inherit',
   };
   const tasks = [
-    'yarn format:diff',
-    'yarn lint',
+    'yarn format:diff --loglevel=silent',
+    'yarn lint --quiet',
     `yarn bundler check --ignore '**/@(node_modules|examples|components|react)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
     `cross-env BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
   ];
 
-  reporter.info('Running the following tasks:');
-  for (let i = 0; i < tasks.length; i++) {
-    reporter.info(`[${i}] ${tasks[i]}`);
-  }
-
-  const promise = Promise.all(tasks.map(task => exec(task, options)));
-  const interval = setInterval(() => {
-    process.stdout.write('.');
-  }, 1000);
-
   try {
-    await promise;
-    clearInterval(interval);
-    console.log();
-    reporter.success('Done! 🎉');
+    for (const task of tasks) {
+      const now = Date.now();
+
+      reporter.info(`Running: ${task}`);
+      await exec(task, options);
+      reporter.success(`Done in: ${Date.now() - now}ms`);
+    }
   } catch (error) {
-    clearInterval(interval);
-    console.log();
-    console.log(error.message);
     console.log(error.stdout);
+    console.log(error.stderr);
     process.exit(1);
   }
 }
