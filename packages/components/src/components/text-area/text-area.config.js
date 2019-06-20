@@ -29,22 +29,5 @@ module.exports = {
         light: true,
       },
     },
-    {
-      name: 'character-counter',
-      label: 'Text area with character counter',
-      context: {
-        charCounter: true,
-        maxLength: 3500,
-      },
-    },
-    {
-      name: 'character-counter--light',
-      label: 'Text area with character counter (light)',
-      context: {
-        charCounter: true,
-        maxLength: 3500,
-        light: true,
-      },
-    },
   ],
 };

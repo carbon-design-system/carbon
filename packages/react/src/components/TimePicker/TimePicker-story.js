@@ -18,7 +18,7 @@ const props = {
   timepicker: () => ({
     pattern: text(
       'Regular expression for the value (pattern in <TimePicker>)',
-      '(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)'
+      '(1[012]|[1-9]):[0-5][0-9](\\s)?'
     ),
     placeholder: text(
       'Placeholder text (placeholder in <TimePicker>)',
