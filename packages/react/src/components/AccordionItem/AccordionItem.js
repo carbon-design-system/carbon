@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
-import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
+import { ChevronRight16 } from '@carbon/icons-react';
 import { match, keys } from '../../tools/key';
 
 const { prefix } = settings;

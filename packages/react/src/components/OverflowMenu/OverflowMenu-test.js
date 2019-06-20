@@ -7,7 +7,7 @@
 
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 

@@ -93,32 +93,34 @@ exports[`SideNavMenu should render 1`] = `
         <div
           className="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron"
         >
-          <ChevronDown20
-            height={20}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 32 32"
-            width={20}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <svg
-              aria-hidden={true}
-              focusable="false"
+          <ForwardRef(ChevronDown20)>
+            <Icon
               height={20}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 32 32"
               width={20}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"
-              />
-            </svg>
-          </ChevronDown20>
+              <svg
+                aria-hidden={true}
+                focusable="false"
+                height={20}
+                preserveAspectRatio="xMidYMid meet"
+                style={
+                  Object {
+                    "willChange": "transform",
+                  }
+                }
+                viewBox="0 0 32 32"
+                width={20}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronDown20)>
         </div>
       </SideNavIcon>
     </button>

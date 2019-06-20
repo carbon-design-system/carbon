@@ -17,8 +17,16 @@ const search = require('../src/search');
 
 const SVG_DIR = path.resolve(__dirname, '../src/svg');
 const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.yml');
+const CATEGORIES_DEFINITION_PATH = path.resolve(__dirname, '../categories.yml');
 
 async function scaffold() {
+  const metadata = yaml.safeLoad(
+    await fs.readFileSync(METADATA_OUTPUT, 'utf8')
+  );
+  const categoriesJson = yaml.safeLoad(
+    await fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
+  );
+
   // Get all of our icon files from the SVG directory
   const iconFiles = await search(SVG_DIR);
 
@@ -70,14 +78,47 @@ async function scaffold() {
     {}
   );
 
+  /**
+   * build object that maps icon names to category & subcategory
+   *   - loop through all of `categories.yml`
+   *   - keys are icon names
+   *   - each iconName object has props for category & subcategory
+   *
+   * when needing to find category information,
+   * `categoryInformation[iconName].category` and
+   * `categoryInformation[iconName].subcategory` will return needed info
+   */
+  const categoryInformation = {};
+  categoriesJson.categories.forEach(category => {
+    category.subcategories.forEach(subcategory => {
+      subcategory.members.forEach(iconName => {
+        categoryInformation[iconName] = {
+          category: category.name,
+          subcategory: subcategory.name,
+        };
+      });
+    });
+  });
+
   const icons = Object.keys(iconsGroupedByName).map(key => {
+    const iconIsCategorized =
+      categoryInformation[key] && categoryInformation[key].subcategory;
+
     const group = iconsGroupedByName[key];
+    const savedIcon = metadata.icons.find(({ name }) => name === key);
     const icon = {
       name: key,
-      friendly_name: sentenceCase(key),
-      usage: 'This is a description for usage',
-      categories: ['example cateogry'],
-      aliases: [key],
+      friendly_name: savedIcon ? savedIcon.friendly_name : sentenceCase(key),
+      usage: savedIcon ? savedIcon.usage : 'This is a description for usage',
+      categories: iconIsCategorized
+        ? [
+            {
+              name: categoryInformation[key].category,
+              subcategory: categoryInformation[key].subcategory,
+            },
+          ]
+        : [],
+      aliases: savedIcon ? savedIcon.aliases : [key],
     };
 
     if (group.icon) {

@@ -22,34 +22,38 @@ exports[`HeaderMenu should render 1`] = `
         tabIndex={0}
       >
         <defaultRenderMenuContent>
-          <ChevronDownGlyph
+          <ForwardRef(ChevronDownGlyph)
             className="bx--header__menu-arrow"
-            height={6}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 10 6"
-            width={10}
-            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              aria-hidden={true}
+            <Icon
               className="bx--header__menu-arrow"
-              focusable="false"
               height={6}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 10 6"
               width={10}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"
-              />
-            </svg>
-          </ChevronDownGlyph>
+              <svg
+                aria-hidden={true}
+                className="bx--header__menu-arrow"
+                focusable="false"
+                height={6}
+                preserveAspectRatio="xMidYMid meet"
+                style={
+                  Object {
+                    "willChange": "transform",
+                  }
+                }
+                viewBox="0 0 10 6"
+                width={10}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 6L0 1 .7.3 5 4.6 9.3.3l.7.7z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(ChevronDownGlyph)>
         </defaultRenderMenuContent>
       </a>
       <ul
