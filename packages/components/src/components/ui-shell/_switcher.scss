@@ -32,6 +32,10 @@
     width: 100%;
   }
 
+  .#{$prefix}--switcher__item:nth-child(1) {
+    margin-top: $spacing-05;
+  }
+
   .#{$prefix}--switcher__item--divider {
     display: block;
     width: rem(222px);
