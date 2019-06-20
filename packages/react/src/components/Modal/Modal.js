@@ -318,7 +318,6 @@ export default class Modal extends Component {
         role="dialog"
         className={`${prefix}--modal-container`}
         aria-label={this.props['aria-label'] || modalAriaLabel}
-        aria-labelledby={this.props.id || null}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
