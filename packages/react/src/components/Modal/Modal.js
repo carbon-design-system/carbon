@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Button from '../Button';
 import { settings } from 'carbon-components';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
 
 const { prefix } = settings;

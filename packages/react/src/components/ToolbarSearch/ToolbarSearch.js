@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Search16 from '@carbon/icons-react/lib/search/16';
+import { Search16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import ClickListener from '../../internal/ClickListener';
 

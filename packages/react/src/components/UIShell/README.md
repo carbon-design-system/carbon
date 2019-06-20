@@ -1,7 +1,6 @@
 # UI Shell
 
-> **Experimental** components for building a product shell when using the Carbon
-> Design System
+> Components for building a product shell when using the Carbon Design System
 
 ## Components
 
@@ -22,3 +21,8 @@
     - `SideNavLink`: renders a link in the side nav
     - `SideNavMenu`: renders a collapsible menu in the side nav
       - `SideNavMenuItem`: renders a link in a side nav menu
+  - `RightPanel`: used for render the container for header actions on the right
+    - `Switcher`: used to render a list of product links inside the right panel
+      - `SwitcherItem`: used to render list item
+        - `SwitcherItemLink`: used to render a link inside the list item
+      - `SwitcherDivider`: used to render a divider for list items

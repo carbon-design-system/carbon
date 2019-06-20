@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { WarningFilled16 } from '@carbon/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';

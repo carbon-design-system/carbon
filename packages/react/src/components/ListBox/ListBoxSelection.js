@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Close16 from '@carbon/icons-react/lib/close/16';
+import { Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
