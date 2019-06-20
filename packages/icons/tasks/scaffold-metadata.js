@@ -102,7 +102,7 @@ async function scaffold() {
 
   const icons = Object.keys(iconsGroupedByName).map(key => {
     const iconIsCategorized =
-      categoryInformation[key] && categoryInformation[key].category;
+      categoryInformation[key] && categoryInformation[key].subcategory;
 
     const group = iconsGroupedByName[key];
     const savedIcon = metadata.icons.find(({ name }) => name === key);
