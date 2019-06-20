@@ -7,12 +7,14 @@
 
 import React, { Component } from 'react';
 import debounce from 'lodash.debounce';
-import Information from '@carbon/icons-react/lib/information/16';
-import Add from '@carbon/icons-react/lib/add/16';
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
 import { mount } from 'enzyme';
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import {
+  Information16 as Information,
+  Add16 as Add,
+  OverflowMenuVertical16,
+} from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import AccordionItem from '../AccordionItem';
-import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
+import { ChevronRight16 } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
