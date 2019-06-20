@@ -28,6 +28,7 @@
   "scripts": {},
   "dependencies": {
     "chalk": "^2.4.2",
+    "change-case": "^3.1.0",
     "cross-spawn": "^6.0.5",
     "fast-glob": "^2.2.6",
     "fs-extra": "^7.0.1",
