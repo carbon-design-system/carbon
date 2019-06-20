@@ -104,39 +104,4 @@ describe('Icon', () => {
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(true);
   });
-
-  it('should set all direct descendants as `aria-hidden="true"` if top-level has aria label', () => {
-    const getContainer = () => mountNode.querySelector('svg');
-
-    render(
-      <Icon width={16} height={16} viewBox="0 0 16 16" aria-label="Mock icon">
-        <title>Redundant title</title>
-        <circle cx={8} cy={8} r={8} />
-      </Icon>,
-      mountNode
-    );
-
-    for (const child of Array.from(getContainer().childNodes)) {
-      expect(child.getAttribute('aria-hidden')).toBe('true');
-    }
-
-    render(
-      <>
-        <Icon
-          width={16}
-          height={16}
-          viewBox="0 0 16 16"
-          aria-labelledby="test-id">
-          <title>Redundant title</title>
-          <circle cx={8} cy={8} r={8} />
-        </Icon>
-        <span id="test-id">Mock icon</span>
-      </>,
-      mountNode
-    );
-
-    for (const child of Array.from(getContainer().childNodes)) {
-      expect(child.getAttribute('aria-hidden')).toBe('true');
-    }
-  });
 });
