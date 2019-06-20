@@ -13,6 +13,8 @@ import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import CaretDownGlyph from '@carbon/icons-react/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-react/lib/caret--up/index';
 import mergeRefs from '../../tools/mergeRefs';
+import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
+import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -38,7 +40,13 @@ const capMax = (max, value) =>
 class NumberInput extends Component {
   constructor(props) {
     super(props);
-    let value = props.value;
+    this.isControlled = props.value !== undefined;
+    if (useControlledStateWithValue && this.isControlled) {
+      // Skips the logic of setting initial state if this component is controlled
+      return;
+    }
+    let value = useControlledStateWithValue ? props.defaultValue : props.value;
+    value = value === undefined ? 0 : value;
     if (props.min || props.min === 0) {
       value = Math.max(props.min, value);
     }
@@ -82,8 +90,16 @@ class NumberInput extends Component {
     /**
      * The new value is available in 'imaginaryTarget.value'
      * i.e. to get the value: evt.imaginaryTarget.value
+     *
+     * * _With_ `useControlledStateWithValue` feature flag, the signature of the event handler will be altered to provide additional context in the second parameter: `onChange(event, { value, direction })` where:
+     *   * `event` is the (React) raw event
+     *   * `value` is the new value
+     *   * `direction` tells you the button you hit is up button or down button
+     * * _Without_ this feature flag the event handler has `onChange(event, direction)` signature.
      */
-    onChange: PropTypes.func,
+    onChange: !useControlledStateWithValue
+      ? PropTypes.func
+      : requiredIfValueExists(PropTypes.func),
     /**
      * Provide an optional function to be called when the up/down button is clicked
      */
@@ -93,9 +109,17 @@ class NumberInput extends Component {
      */
     step: PropTypes.number,
     /**
+     * Optional starting value for uncontrolled state
+     */
+    defaultValue: PropTypes.number,
+    /**
      * Specify the value of the input
      */
     value: PropTypes.number,
+    /**
+     * Specify if the component should be read-only
+     */
+    readOnly: PropTypes.bool,
     /**
      * Specify if the currently value is invalid.
      */
@@ -135,10 +159,7 @@ class NumberInput extends Component {
     hideLabel: false,
     iconDescription: 'choose a number',
     label: ' ',
-    onChange: () => {},
-    onClick: () => {},
     step: 1,
-    value: 0,
     invalid: false,
     invalidText: 'Provide invalidText',
     ariaLabel: 'Numeric input field with increment and decrement buttons',
@@ -154,9 +175,11 @@ class NumberInput extends Component {
    */
   _inputRef = null;
 
-  static getDerivedStateFromProps({ min, max, value }, state) {
+  static getDerivedStateFromProps({ min, max, value = 0 }, state) {
     const { prevValue } = state;
-    return prevValue === value
+    // If `useControlledStateWithValue` feature flag is on, do nothing here.
+    // Otherwise, do prop -> state sync with "value capping".
+    return useControlledStateWithValue || prevValue === value
       ? null
       : {
           value: capMax(max, capMin(min, value)),
@@ -165,15 +188,21 @@ class NumberInput extends Component {
   }
 
   handleChange = evt => {
-    if (!this.props.disabled) {
+    const { disabled, onChange } = this.props;
+    if (!disabled) {
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
+      const value = evt.target.value;
       this.setState(
         {
-          value: evt.target.value,
+          value,
         },
         () => {
-          this.props.onChange(evt);
+          if (useControlledStateWithValue) {
+            onChange(evt, { value });
+          } else if (onChange) {
+            onChange(evt);
+          }
         }
       );
     }
@@ -184,7 +213,7 @@ class NumberInput extends Component {
       typeof this.state.value === 'string'
         ? Number(this.state.value)
         : this.state.value;
-    const { disabled, min, max, step } = this.props;
+    const { disabled, min, max, step, onChange, onClick } = this.props;
     const conditional =
       direction === 'down'
         ? (min !== undefined && value > min) || min === undefined
@@ -199,8 +228,13 @@ class NumberInput extends Component {
           value,
         },
         () => {
-          this.props.onClick(evt, direction);
-          this.props.onChange(evt, direction);
+          if (useControlledStateWithValue) {
+            onClick && onClick(evt, { value, direction });
+            onChange && onChange(evt, { value, direction });
+          } else {
+            onClick && onClick(evt, direction);
+            onChange && onChange(evt, direction);
+          }
         }
       );
     }
@@ -225,6 +259,8 @@ class NumberInput extends Component {
       max,
       min,
       step,
+      value,
+      readOnly,
       invalid,
       invalidText,
       helperText,
@@ -241,6 +277,7 @@ class NumberInput extends Component {
       `${prefix}--number ${prefix}--number--helpertext`,
       className,
       {
+        [`${prefix}--number--readonly`]: readOnly,
         [`${prefix}--number--light`]: light,
         [`${prefix}--number--nolabel`]: hideLabel,
         [`${prefix}--number--mobile`]: isMobile,
@@ -254,7 +291,11 @@ class NumberInput extends Component {
       min,
       step,
       onChange: this.handleChange,
-      value: this.state.value,
+      value:
+        useControlledStateWithValue && this.isControlled
+          ? value
+          : this.state.value,
+      readOnly,
       ariaLabel,
     };
 

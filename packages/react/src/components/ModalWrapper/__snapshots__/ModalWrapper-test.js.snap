@@ -71,8 +71,8 @@ exports[`ModalWrapper should render 1`] = `
           className="bx--modal bx--modal-tall"
           id="modal"
           onBlur={[Function]}
-          onClick={[Function]}
           onKeyDown={[Function]}
+          onMouseDown={[Function]}
           role="presentation"
           tabIndex={-1}
         >

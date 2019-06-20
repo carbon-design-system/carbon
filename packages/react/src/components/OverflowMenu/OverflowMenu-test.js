@@ -21,7 +21,7 @@ describe('OverflowMenu', () => {
         <div className="test-child" />
       </OverflowMenu>
     );
-    const menu = rootWrapper.find('div[role="menu"]');
+    const menu = rootWrapper.find(`div.${prefix}--overflow-menu`);
     const icon = menu.find(OverflowMenuVertical16);
 
     it('should render an Icon', () => {
@@ -50,21 +50,23 @@ describe('OverflowMenu', () => {
     it('should set tabIndex if one is passed via props', () => {
       rootWrapper.setProps({ tabIndex: 2 });
 
-      expect(rootWrapper.find('div[role="menu"]').props().tabIndex).toEqual(2);
+      expect(
+        rootWrapper.find(`div.${prefix}--overflow-menu`).props().tabIndex
+      ).toEqual(2);
     });
 
     it('should set ariaLabel if one is passed via props', () => {
       rootWrapper.setProps({ ariaLabel: 'test label' });
       expect(
-        rootWrapper.find('div[role="menu"]').props()['aria-label']
+        rootWrapper.find(`div.${prefix}--overflow-menu`).props()['aria-label']
       ).toEqual('test label');
     });
 
     it('should set id if one is passed via props', () => {
       rootWrapper.setProps({ id: 'uniqueId' });
-      expect(rootWrapper.find('div[role="menu"]').props().id).toEqual(
-        'uniqueId'
-      );
+      expect(
+        rootWrapper.find(`div.${prefix}--overflow-menu`).props().id
+      ).toEqual('uniqueId');
     });
 
     it('should apply a tabindex to the menu', () => {

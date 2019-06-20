@@ -181,6 +181,10 @@
     width: $layout-01;
   }
 
+  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
+    height: auto;
+  }
+
   .#{$prefix}--table-expand__button:focus {
     outline: 1px solid transparent;
   }
