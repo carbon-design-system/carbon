@@ -24,8 +24,7 @@ attempting any of these steps.
 1. Run `cd packages/sketch` to go into the package folder
 2. Run `yarn build` to build out the initial plugin
 3. Run `yarn skpm:link` to link the plugin to your Sketch plugin folder
-
-Afterwards, you can continue development by running `yarn develop`.
+4. Afterwards, you can continue development by running `yarn develop`.
 
 ## Overview
 
