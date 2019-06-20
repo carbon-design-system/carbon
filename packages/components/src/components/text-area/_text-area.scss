@@ -20,10 +20,6 @@
 /// @access private
 /// @group text-area
 @mixin text-area {
-  .#{$prefix}--text-area__container {
-    position: relative;
-  }
-
   .#{$prefix}--text-area {
     @include reset;
     @include type-style('body-long-01');
@@ -82,7 +78,6 @@
   .#{$prefix}--text-area__wrapper {
     position: relative;
     display: flex;
-    width: 100%;
   }
 
   .#{$prefix}--text-area__invalid-icon {
@@ -90,34 +85,6 @@
     right: $carbon--spacing-05;
     top: $carbon--spacing-04;
     fill: $support-01;
-  }
-
-  // -----------------
-  // Character counter
-  // -----------------
-  .#{$prefix}--text-area__character-counter-title {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .#{$prefix}--text-area__character-counter-title .#{$prefix}--label {
-    margin-right: rem(16px);
-  }
-
-  .#{$prefix}--text-area__character-counter-title
-    + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px);
-  }
-
-  .#{$prefix}--text-area--character-counter {
-    margin-bottom: $carbon--spacing-03;
-    @include type-style('label-01');
-    color: $text-02;
-  }
-
-  .#{$prefix}--text-area--character-counter--disabled {
-    color: $disabled-02;
   }
 
   //-----------------------------
