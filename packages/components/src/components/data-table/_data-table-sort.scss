@@ -48,6 +48,9 @@
     color: $text-01;
     padding: 0 $spacing-03;
     height: 100%;
+    background-color: $ui-03;
+    transition: background-color $duration--fast-01 motion(entrance, productive),
+      outline $duration--fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--table-sort:focus {

@@ -17,19 +17,19 @@
       <!-- Batch actions -->
       <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
           <div class="{{@root.prefix}}--action-list">
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#if small}} {{@root.prefix}}--btn--sm{{/if}}" type="button">
               Delete
               {{ carbon-icon 'Delete16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#if small}} {{@root.prefix}}--btn--sm{{/if}}" type="button">
               Save
               {{ carbon-icon 'Save16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#if small}} {{@root.prefix}}--btn--sm{{/if}}" type="button">
               Download
               {{ carbon-icon 'Download16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            <button data-event="action-bar-cancel" class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--batch-summary__cancel">{{cancelLabel}}</button>
+            <button data-event="action-bar-cancel" class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--batch-summary__cancel{{#if small}} {{@root.prefix}}--btn--sm{{/if}}">{{cancelLabel}}</button>
           </div>
         <div class="{{@root.prefix}}--batch-summary">
           <p class="{{@root.prefix}}--batch-summary__para">{{{selectedItemsCounterLabel}}}</p>
