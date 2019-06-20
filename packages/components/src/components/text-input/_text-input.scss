@@ -176,6 +176,7 @@
   .#{$prefix}--text-input__readonly-icon {
     @include tooltip--trigger('icon', 'bottom');
     @include tooltip--placement('icon', 'bottom', 'end');
+    z-index: z('floating') + 1;
     position: absolute;
     right: $carbon--spacing-05;
     cursor: default;
