@@ -126,7 +126,10 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "packages/**/*.js"
+      "packages/**/src/**/*.js",
+      "!packages/{bundler,cli,components,sketch}/**",
+      "!packages/**/{examples,stories}/**",
+      "!**/*-story.js"
     ],
     "moduleFileExtensions": [
       "js",
