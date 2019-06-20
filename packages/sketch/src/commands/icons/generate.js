@@ -14,7 +14,8 @@ import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
-const meta = require('@carbon/icons/meta.json');
+const buildInfo = require('@carbon/icons/meta.json');
+const metadata = require('./metadata.json');
 
 export function generate() {
   command('commands/icons/generate', () => {
@@ -31,7 +32,7 @@ export function generate() {
       );
     }
 
-    const icons = normalize(meta);
+    const icons = normalize(buildInfo);
     const iconNames = Object.keys(icons);
 
     // To help with debugging, we have `start` and `end` values here to focus on
@@ -46,7 +47,8 @@ export function generate() {
     //  const end = 51;
     // This will allow you to focus only on the icon named 'name-to-find'
     const start = 0;
-    const end = iconNames.length;
+    const end = 10;
+    // const end = iconNames.length;
 
     // We keep track of the current X and Y offsets at the top-level, each
     // iteration of an icon set should reset the X_OFFSET and update the
