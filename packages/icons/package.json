@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && bundler sassdoc 'scss/*.scss'",
+    "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
     "clean": "rimraf es lib svg umd meta.json",
     "prepublishOnly": "yarn build"
   },
