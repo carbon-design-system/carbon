@@ -2578,8 +2578,6 @@ $carbon--spacing-03: carbon--mini-units(1);
   - [padding-th [mixin]](#padding-th-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -2954,6 +2952,8 @@ $spacing-07: $carbon--spacing-07;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-07`
+- **Used by**:
+  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
 
@@ -4479,8 +4479,6 @@ $text-02: map-get($carbon--theme, 'text-02');
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -10453,9 +10451,11 @@ Data table core styles
     padding-right: $spacing-05;
   }
 
-  // specific padding for overflow menu columns
+  // specific padding/width for overflow menu columns
   .#{$prefix}--data-table .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
+    width: rem(52px);
+    min-width: rem(52px);
     padding-top: $spacing-03;
     padding-right: $spacing-03;
   }
@@ -10745,6 +10745,89 @@ Data table core styles
   .#{$prefix}--data-table--static {
     width: auto;
   }
+
+  // -------------
+  // Sticky header
+  // -------------
+  .#{$prefix}--data-table_inner-container {
+    background-color: $ui-03;
+    padding-top: rem(48px);
+    transform: translateZ(0);
+  }
+
+  .#{$prefix}--data-table--sticky-header {
+    display: block;
+    // max-height: rem(300px);
+    overflow-y: scroll;
+
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: flex;
+    }
+
+    thead {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      overflow: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
+    }
+
+    thead tr th {
+      border-bottom: 1px solid $active-ui;
+    }
+
+    tbody {
+      flex-direction: column;
+      overflow-x: scroll;
+      -ms-overflow-style: none; //hides ie scrollbar
+      will-change: transform;
+    }
+
+    tr {
+      min-height: rem(48px);
+      height: auto;
+    }
+
+    tr.#{$prefix}--data-table--selected:first-of-type td {
+      border-top: none;
+    }
+
+    //hides webkit scrollbar
+    thead::-webkit-scrollbar,
+    tbody::-webkit-scrollbar {
+      display: none;
+    }
+
+    //hides ff scrollbar
+    @-moz-document url-prefix() {
+      thead,
+      tbody {
+        scrollbar-width: none;
+      }
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 0;
+    }
+
+    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .#{$prefix}--table-header-label {
+      max-width: calc(100% - 10px);
+      @include text-overflow;
+    }
+  }
+
+  @include sticky-header($max-width: rem(900px));
 }
 ```
 
@@ -10752,6 +10835,7 @@ Data table core styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
+  - [text-overflow [mixin]](#text-overflow-mixin)
   - [prefix [variable]](#prefix-variable)
   - [spacing-01 [variable]](#spacing-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -10941,6 +11025,10 @@ Data table expandable styles
     align-items: center;
     height: $layout-03;
     width: $layout-01;
+  }
+
+  .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
+    height: auto;
   }
 
   .#{$prefix}--table-expand__button:focus {
@@ -14239,12 +14327,6 @@ Number input styles
       @include focus-outline('outline');
     }
 
-    &:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
-      color: $disabled;
-    }
-
     &:disabled ~ .#{$prefix}--number__controls {
       cursor: not-allowed;
       pointer-events: none;
@@ -14263,6 +14345,13 @@ Number input styles
     &::-webkit-inner-spin-button {
       appearance: none; // Safari: Hide number spinner
     }
+  }
+
+  .#{$prefix}--number input[type='number']:disabled,
+  .#{$prefix}--number--readonly input[type='number'] {
+    cursor: not-allowed;
+    background-color: $disabled-background-color;
+    color: $disabled;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -14332,6 +14421,10 @@ Number input styles
       cursor: not-allowed;
       color: $disabled;
     }
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
+    display: none;
   }
 
   .#{$prefix}--number[data-invalid] {
@@ -16870,10 +16963,6 @@ Text area styles
 
 ```scss
 @mixin text-area() {
-  .#{$prefix}--text-area__container {
-    position: relative;
-  }
-
   .#{$prefix}--text-area {
     @include reset;
     @include type-style('body-long-01');
@@ -16932,7 +17021,6 @@ Text area styles
   .#{$prefix}--text-area__wrapper {
     position: relative;
     display: flex;
-    width: 100%;
   }
 
   .#{$prefix}--text-area__invalid-icon {
@@ -16940,34 +17028,6 @@ Text area styles
     right: $carbon--spacing-05;
     top: $carbon--spacing-04;
     fill: $support-01;
-  }
-
-  // -----------------
-  // Character counter
-  // -----------------
-  .#{$prefix}--text-area__character-counter-title {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .#{$prefix}--text-area__character-counter-title .#{$prefix}--label {
-    margin-right: rem(16px);
-  }
-
-  .#{$prefix}--text-area__character-counter-title
-    + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px);
-  }
-
-  .#{$prefix}--text-area--character-counter {
-    margin-bottom: $carbon--spacing-03;
-    @include type-style('label-01');
-    color: $text-02;
-  }
-
-  .#{$prefix}--text-area--character-counter--disabled {
-    color: $disabled-02;
   }
 
   //-----------------------------
@@ -17010,8 +17070,6 @@ Text area styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [text-02 [variable]](#text-02-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
 ## text-input
@@ -17061,41 +17119,12 @@ Text input styles
     background-color: $field-02;
   }
 
-  // -----------------
-  // Character counter
-  // -----------------
-  .#{$prefix}--text-input__character-counter-title {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .#{$prefix}--text-input__character-counter-title
-    + .#{$prefix}--form__helper-text {
-    margin-top: rem(-6px);
-  }
-
-  .#{$prefix}--text-input__character-counter-title .#{$prefix}--label {
-    margin-right: rem(16px);
-  }
-
-  .#{$prefix}--text-input--character-counter {
-    margin-bottom: $carbon--spacing-03;
-    @include type-style('label-01');
-    color: $text-02;
-  }
-
-  .#{$prefix}--text-input--character-counter--disabled {
-    color: $disabled-02;
-  }
-
   //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    width: 100%;
     align-items: center;
 
     .#{$prefix}--text-input__invalid-icon {
@@ -17190,13 +17219,11 @@ Text input styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [text-02 [variable]](#text-02-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [support-01 [variable]](#support-01-variable)
   - [brand-01 [variable]](#brand-01-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 
 ## tile
 
@@ -19335,6 +19362,7 @@ want to have display-inline: block from the text helper classes
 
 - **Group**: [ui-shell](#ui-shell)
 - **Used by**:
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -19905,44 +19933,34 @@ UI shell side nav
 
   .#{$prefix}--switcher__item {
     width: 100%;
+    height: $spacing-07;
   }
 
-  .#{$prefix}--switcher__item:nth-child(1),
-  .#{$prefix}--switcher__item:nth-last-child(3) {
-    position: relative;
+  .#{$prefix}--switcher__item:nth-child(1) {
     margin-top: $spacing-05;
-    margin-bottom: $spacing-03;
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      bottom: rem(-9px);
-      width: rem(222px);
-      margin-left: $spacing-05;
-      border-top: 1px solid $shell-panel-border;
-    }
   }
 
-  .#{$prefix}--switcher__item:nth-last-child(3) {
-    margin-top: 0;
-  }
-
-  .#{$prefix}--switcher__item:nth-child(2),
-  .#{$prefix}--switcher__item:nth-last-child(2) {
-    padding-top: rem(9px);
+  .#{$prefix}--switcher__item--divider {
+    display: block;
+    width: rem(224px);
+    height: 1px;
+    margin: $spacing-03 $spacing-05;
+    background: $shell-panel-border;
+    border: none;
   }
 
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('heading-01');
     display: block;
+    height: $spacing-07;
     text-decoration: none;
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
 
-    &:hover {
+    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
       background: $shell-panel-bg-02;
       color: $shell-panel-text-02;
+      cursor: pointer;
     }
 
     &:focus {
@@ -19970,6 +19988,7 @@ UI shell side nav
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [prefix [variable]](#prefix-variable)
   - [shell-panel-text-01 [variable]](#shell-panel-text-01-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [shell-panel-border [variable]](#shell-panel-border-variable)
