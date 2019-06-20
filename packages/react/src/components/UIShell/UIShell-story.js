@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Search20 from '@carbon/icons-react/lib/search/20';
-import Notification20 from '@carbon/icons-react/lib/notification/20';
-import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
+import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -39,6 +37,7 @@ import {
   Switcher,
   SwitcherItem,
   SwitcherItemLink,
+  SwitcherDivider,
 } from '../UIShell';
 
 const Fade16 = () => (
@@ -491,6 +490,7 @@ storiesOf('UI Shell', module)
                 Link
               </SwitcherItemLink>
             </SwitcherItem>
+            <SwitcherDivider />
             <SwitcherItem>
               <SwitcherItemLink href="javascript:void(0)">
                 Link
@@ -511,6 +511,7 @@ storiesOf('UI Shell', module)
                 Link
               </SwitcherItemLink>
             </SwitcherItem>
+            <SwitcherDivider />
             <SwitcherItem>
               <SwitcherItemLink href="javascript:void(0)">
                 Link

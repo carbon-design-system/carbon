@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Search16 from '@carbon/icons-react/lib/search/16';
+import { Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';

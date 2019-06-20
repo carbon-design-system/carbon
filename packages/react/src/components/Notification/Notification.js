@@ -9,10 +9,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import Close16 from '@carbon/icons-react/lib/close/16';
-import ErrorFilled20 from '@carbon/icons-react/lib/error--filled/20';
-import CheckmarkFilled20 from '@carbon/icons-react/lib/checkmark--filled/20';
-import WarningFilled20 from '@carbon/icons-react/lib/warning--filled/20';
+import {
+  Close16,
+  ErrorFilled20,
+  CheckmarkFilled20,
+  WarningFilled20,
+} from '@carbon/icons-react';
 
 const { prefix } = settings;
 
