@@ -16,7 +16,7 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../tools/key';
 import mergeRefs from '../../tools/mergeRefs';
 

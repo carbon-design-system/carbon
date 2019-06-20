@@ -7,27 +7,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
   renderIcon={
     Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "height": 16,
-        "preserveAspectRatio": "xMidYMid meet",
-        "viewBox": "0 0 16 16",
-        "width": 16,
-        "xmlns": "http://www.w3.org/2000/svg",
-      },
-      "displayName": "Download16",
-      "propTypes": Object {
-        "aria-hidden": [Function],
-        "aria-label": [Function],
-        "aria-labelledby": [Function],
-        "children": [Function],
-        "className": [Function],
-        "height": [Function],
-        "preserveAspectRatio": [Function],
-        "tabIndex": [Function],
-        "viewBox": [Function],
-        "width": [Function],
-        "xmlns": [Function],
-      },
       "render": [Function],
     }
   }
@@ -38,27 +17,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),
-        "defaultProps": Object {
-          "height": 16,
-          "preserveAspectRatio": "xMidYMid meet",
-          "viewBox": "0 0 16 16",
-          "width": 16,
-          "xmlns": "http://www.w3.org/2000/svg",
-        },
-        "displayName": "Download16",
-        "propTypes": Object {
-          "aria-hidden": [Function],
-          "aria-label": [Function],
-          "aria-labelledby": [Function],
-          "children": [Function],
-          "className": [Function],
-          "height": [Function],
-          "preserveAspectRatio": [Function],
-          "tabIndex": [Function],
-          "viewBox": [Function],
-          "width": [Function],
-          "xmlns": [Function],
-        },
         "render": [Function],
       }
     }
@@ -81,27 +39,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
       renderIcon={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "defaultProps": Object {
-            "height": 16,
-            "preserveAspectRatio": "xMidYMid meet",
-            "viewBox": "0 0 16 16",
-            "width": 16,
-            "xmlns": "http://www.w3.org/2000/svg",
-          },
-          "displayName": "Download16",
-          "propTypes": Object {
-            "aria-hidden": [Function],
-            "aria-label": [Function],
-            "aria-labelledby": [Function],
-            "children": [Function],
-            "className": [Function],
-            "height": [Function],
-            "preserveAspectRatio": [Function],
-            "tabIndex": [Function],
-            "viewBox": [Function],
-            "width": [Function],
-            "xmlns": [Function],
-          },
           "render": [Function],
         }
       }
@@ -124,19 +61,14 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           tabIndex={0}
           title="Add"
         >
-          <Download16
+          <ForwardRef(Download16)
             aria-label="open and close list of options"
             className="bx--overflow-menu__icon"
             focusable="false"
-            height={16}
             onClick={[Function]}
             onKeyDown={[Function]}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
+            <Icon
               aria-label="open and close list of options"
               className="bx--overflow-menu__icon"
               focusable="false"
@@ -144,24 +76,37 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
               onClick={[Function]}
               onKeyDown={[Function]}
               preserveAspectRatio="xMidYMid meet"
-              role="img"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title>
-                open and close list of options
-              </title>
-              <path
-                d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"
-              />
-            </svg>
-          </Download16>
+              <svg
+                aria-label="open and close list of options"
+                className="bx--overflow-menu__icon"
+                focusable="false"
+                height={16}
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                style={
+                  Object {
+                    "willChange": "transform",
+                  }
+                }
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"
+                />
+                <title>
+                  open and close list of options
+                </title>
+              </svg>
+            </Icon>
+          </ForwardRef(Download16)>
         </div>
       </ClickListener>
     </OverflowMenu>

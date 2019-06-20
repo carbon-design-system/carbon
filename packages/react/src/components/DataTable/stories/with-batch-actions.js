@@ -7,9 +7,11 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Delete from '@carbon/icons-react/lib/delete/16';
-import Save from '@carbon/icons-react/lib/save/16';
-import Download from '@carbon/icons-react/lib/download/16';
+import {
+  Delete16 as Delete,
+  Save16 as Save,
+  Download16 as Download,
+} from '@carbon/icons-react';
 
 import Button from '../../Button';
 import DataTable, {

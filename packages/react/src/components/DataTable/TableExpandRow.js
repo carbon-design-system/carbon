@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ChevronRight16 from '@carbon/icons-react/lib/chevron--right/16';
+import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import TableCell from './TableCell';
 
