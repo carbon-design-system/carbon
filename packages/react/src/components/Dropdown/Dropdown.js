@@ -261,9 +261,7 @@ export default class Dropdown extends React.Component {
                     <ListBox.MenuItem
                       key={itemToString(item)}
                       isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index || selectedItem === item
-                      }
+                      isHighlighted={highlightedIndex === index}
                       {...getItemProps({ item, index })}>
                       {itemToElement ? (
                         <ItemToElement key={itemToString(item)} {...item} />
