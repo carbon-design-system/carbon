@@ -161,7 +161,7 @@ categories:
           - filter
           - filter--edit
           - flag
-          # fork
+          - fork
           - insert
           - launch
           - login
@@ -320,7 +320,7 @@ categories:
           - 3D-curve--manual
           - 3D-MPR-toggle
           - 3rd-party-connected
-          # 3D-software
+          - 3D-software
           - angle
           - annotation-visibility
           - arrow--annotation
@@ -357,7 +357,7 @@ categories:
           - pointer-text
           - region-analysis--area
           - region-analysis--volume
-          # registration
+          - registration
           - save--annotation
           - save--image
           - save--series
@@ -464,7 +464,7 @@ categories:
           - chart--scatter
           - chart--venn-diagram
           - classifier--language
-          # concept
+          - concept
           - data--1
           - data--2
           - data--base
@@ -492,15 +492,15 @@ categories:
           - share-knowledge
           - table
           - table--split
-          # term
-          # text-link
-          # text-link--analysis
-          # text-mining
-          # text-mining--applier
+          - term
+          - text-link
+          - text-link--analysis
+          - text-mining
+          - text-mining--applier
           - tree-view
-          # tree-view--alt
-          # type-pattern
-          # types
+          - tree-view--alt
+          - type-pattern
+          - types
           - visual-recognition
       - name: File
         members:
@@ -513,10 +513,10 @@ categories:
           - catalog
           - categories
           - category
-          # category--add
-          # category--and
-          # category--new
-          # category--new-each
+          - category--add
+          - category--and
+          - category--new
+          - category--new-each
           - closed-caption
           - closed-caption--alt
           - closed-caption--filled
@@ -700,10 +700,10 @@ categories:
           - cloud--snow
           - fog
           - humidity
-          # hurricane
-          # partly-cloudy
-          # sunny
-          # sunset
+          - hurricane
+          - partly-cloudy
+          - sunny
+          - sunset
           - temperature
   - name: Tools
     subcategories:
@@ -712,13 +712,13 @@ categories:
           - aperture
           - asset
           - at
-          # audio-console
+          - audio-console
           - battery--charging
-          # battery--empty
+          - battery--empty
           - battery--full
           - battery--half
           - battery--low
-          # battery--quarter
+          - battery--quarter
           - blog
           - bluetooth
           - bluetooth--off
@@ -754,15 +754,15 @@ categories:
           - mobile--add
           - mobile--check
           - mobile--download
-          # mobile--landscape
+          - mobile--landscape
           - password
           - printer
           - radio
           - rocket
           - rss
           - share
-          # tablet
-          # tablet--landscape
+          - tablet
+          - tablet--landscape
           - terminal
           - USB
           - voicemail
