@@ -372,14 +372,19 @@ const Declaration = defineType('Declaration', {
       validate: assertValueType('string'),
     },
     value: {
-      validate: assertValueType('string'),
+      validate: () =>
+        assertOneOf([assertValueType('string'), assertType(CallExpression)]),
     },
   },
   generate(printer, node) {
     printer.token(node.property);
     printer.token(':');
     printer.space();
-    printer.token(node.value);
+    if (typeof node.value === 'string') {
+      printer.token(node.value);
+    } else {
+      printer.print(node.value);
+    }
     printer.token(';');
   },
 });
