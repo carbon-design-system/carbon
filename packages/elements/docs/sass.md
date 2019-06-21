@@ -3291,7 +3291,7 @@ Define theme variables from a map of tokens
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--theme($theme: $carbon--theme) {
+@mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -3351,6 +3351,67 @@ Define theme variables from a map of tokens
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
 
+  @if $emit-custom-properties == true {
+    --interactive-01: #{map-get($theme, 'interactive-01')};
+    --interactive-02: #{map-get($theme, 'interactive-02')};
+    --interactive-03: #{map-get($theme, 'interactive-03')};
+    --interactive-04: #{map-get($theme, 'interactive-04')};
+    --ui-background: #{map-get($theme, 'ui-background')};
+    --ui-01: #{map-get($theme, 'ui-01')};
+    --ui-02: #{map-get($theme, 'ui-02')};
+    --ui-03: #{map-get($theme, 'ui-03')};
+    --ui-04: #{map-get($theme, 'ui-04')};
+    --ui-05: #{map-get($theme, 'ui-05')};
+    --text-01: #{map-get($theme, 'text-01')};
+    --text-02: #{map-get($theme, 'text-02')};
+    --text-03: #{map-get($theme, 'text-03')};
+    --text-04: #{map-get($theme, 'text-04')};
+    --icon-01: #{map-get($theme, 'icon-01')};
+    --icon-02: #{map-get($theme, 'icon-02')};
+    --icon-03: #{map-get($theme, 'icon-03')};
+    --link-01: #{map-get($theme, 'link-01')};
+    --field-01: #{map-get($theme, 'field-01')};
+    --field-02: #{map-get($theme, 'field-02')};
+    --inverse-01: #{map-get($theme, 'inverse-01')};
+    --inverse-02: #{map-get($theme, 'inverse-02')};
+    --support-01: #{map-get($theme, 'support-01')};
+    --support-02: #{map-get($theme, 'support-02')};
+    --support-03: #{map-get($theme, 'support-03')};
+    --support-04: #{map-get($theme, 'support-04')};
+    --inverse-support-01: #{map-get($theme, 'inverse-support-01')};
+    --inverse-support-02: #{map-get($theme, 'inverse-support-02')};
+    --inverse-support-03: #{map-get($theme, 'inverse-support-03')};
+    --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
+    --overlay-01: #{map-get($theme, 'overlay-01')};
+    --focus: #{map-get($theme, 'focus')};
+    --hover-primary: #{map-get($theme, 'hover-primary')};
+    --active-primary: #{map-get($theme, 'active-primary')};
+    --hover-primary-text: #{map-get($theme, 'hover-primary-text')};
+    --hover-secondary: #{map-get($theme, 'hover-secondary')};
+    --active-secondary: #{map-get($theme, 'active-secondary')};
+    --hover-tertiary: #{map-get($theme, 'hover-tertiary')};
+    --active-tertiary: #{map-get($theme, 'active-tertiary')};
+    --hover-ui: #{map-get($theme, 'hover-ui')};
+    --active-ui: #{map-get($theme, 'active-ui')};
+    --selected-ui: #{map-get($theme, 'selected-ui')};
+    --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --hover-danger: #{map-get($theme, 'hover-danger')};
+    --active-danger: #{map-get($theme, 'active-danger')};
+    --hover-row: #{map-get($theme, 'hover-row')};
+    --visited-link: #{map-get($theme, 'visited-link')};
+    --disabled-01: #{map-get($theme, 'disabled-01')};
+    --disabled-02: #{map-get($theme, 'disabled-02')};
+    --disabled-03: #{map-get($theme, 'disabled-03')};
+    --highlight: #{map-get($theme, 'highlight')};
+    --skeleton-01: #{map-get($theme, 'skeleton-01')};
+    --skeleton-02: #{map-get($theme, 'skeleton-02')};
+    --brand-01: #{map-get($theme, 'brand-01')};
+    --brand-02: #{map-get($theme, 'brand-02')};
+    --brand-03: #{map-get($theme, 'brand-03')};
+    --active-01: #{map-get($theme, 'active-01')};
+    --hover-field: #{map-get($theme, 'hover-field')};
+  }
+
   @content;
   // Reset to default theme after apply in content
   @if $theme != $carbon--theme {
@@ -3363,9 +3424,10 @@ Define theme variables from a map of tokens
 
 - **Parameters**:
 
-| Name     | Description         | Type  | Default value    |
-| -------- | ------------------- | ----- | ---------------- |
-| `$theme` | Map of theme tokens | `Map` | `$carbon--theme` |
+| Name                      | Description                                   | Type   | Default value    |
+| ------------------------- | --------------------------------------------- | ------ | ---------------- |
+| `$theme`                  | Map of theme tokens                           | `Map`  | `$carbon--theme` |
+| `$emit-custom-properties` | Output CSS Custom Properties for theme tokens | `Bool` | `false`          |
 
 **Example**:
 
