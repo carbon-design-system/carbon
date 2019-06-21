@@ -104,6 +104,7 @@ categories:
         members:
           - add
           - add--alt
+          - add--filled
           - switcher
           - arrow--down
           - arrow--down-left
@@ -117,11 +118,16 @@ categories:
           - caret--left
           - caret--right
           - caret--up
+          - caret--sort--down
+          - caret--sort--up
           - chevron--down
           - chevron--left
           - chevron--right
           - chevron--up
+          - chevron--mini
           - close
+          - close--filled
+          - close--outline
           - down-to-bottom
           - draggable
           - home
@@ -144,6 +150,8 @@ categories:
           - caret--sort
           - chat
           - chevron--sort
+          - chevron--sort--down
+          - chevron--sort--up
           - circle-dash
           - compare
           - connect
@@ -577,11 +585,13 @@ categories:
           - checkmark--filled
           - error
           - error--filled
+          - error--outline
           - help
           - help--filled
           - information
           - information--filled
           - misuse
+          - misuse--outline
           - warning
           - warning--alt
           - warning--alt-filled

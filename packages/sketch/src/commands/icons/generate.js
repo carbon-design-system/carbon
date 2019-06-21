@@ -110,7 +110,7 @@ export function generate() {
           ? `${iconCategoryMapping[icon.basename].category}/${
               iconCategoryMapping[icon.basename].subcategory
             }`
-          : `resolve category info`;
+          : `⚠️☢️⚠️ resolve category info`;
 
         let iconDisplayName = iconHasSizes
           ? `${icon.basename}/${icon.size}`
