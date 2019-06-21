@@ -343,11 +343,7 @@ export default class ComboBox extends React.Component {
                     <ListBox.MenuItem
                       key={itemToString(item)}
                       isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index ||
-                        (selectedItem && selectedItem.id === item.id) ||
-                        false
-                      }
+                      isHighlighted={highlightedIndex === index}
                       {...getItemProps({ item, index })}>
                       {itemToElement ? (
                         <ItemToElement key={itemToString(item)} {...item} />
