@@ -12,19 +12,19 @@ import { getNextIndex } from '../keyboard-navigation';
 
 describe('getNextIndex', () => {
   let indexToTest;
-  it('increments the index forward', () => {
+  test('increments the index forward', () => {
     indexToTest = getNextIndex('ArrowRight', 0, 3);
     expect(indexToTest).toEqual(1);
   });
-  it('increments the index backward', () => {
+  test('increments the index backward', () => {
     indexToTest = getNextIndex('ArrowLeft', 1, 3);
     expect(indexToTest).toEqual(0);
   });
-  it('loops last index to first', () => {
+  test('loops last index to first', () => {
     indexToTest = getNextIndex('ArrowRight', 3, 3);
     expect(indexToTest).toEqual(1);
   });
-  it('loops first index to last', () => {
+  test('loops first index to last', () => {
     indexToTest = getNextIndex('ArrowLeft', 0, 3);
     expect(indexToTest).toEqual(2);
   });

@@ -102,6 +102,7 @@ export default class ContentSwitcher extends React.Component {
         () => {
           const switchRef = this._switchRefs[nextIndex];
           switchRef && switchRef.focus();
+          this.props.onChange(data);
         }
       );
     } else {
@@ -112,8 +113,6 @@ export default class ContentSwitcher extends React.Component {
         });
       }
     }
-
-    this.props.onChange(data);
   };
 
   render() {
