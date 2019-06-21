@@ -61,7 +61,7 @@ categories:
           - erase
           - eyedropper
           - image
-          # language
+          - language
           - link
           - list--bulleted
           - list--numbered
@@ -735,7 +735,7 @@ categories:
           - iot--connect
           - iot--platform
           - keyboard
-          # laptop
+          - laptop
           - mail--all
           - mobile
           - mobile--add
