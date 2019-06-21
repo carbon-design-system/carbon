@@ -15,6 +15,7 @@ import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
 const buildInfo = require('@carbon/icons/meta.json');
+const metadata = require('./metadata.json');
 const iconCategoryMapping = require('./icon-category-mapping.json');
 
 export function generate() {
@@ -99,19 +100,21 @@ export function generate() {
         };
 
         let iconIsCategorized =
-          iconCategoryMapping[name] &&
-          iconCategoryMapping[name].category &&
-          iconCategoryMapping[name].subcategory;
+          iconCategoryMapping[icon.basename] &&
+          iconCategoryMapping[icon.basename].category &&
+          iconCategoryMapping[icon.basename].subcategory;
 
         let iconHasSizes = sizes.length !== 1;
 
         let iconCategory = iconIsCategorized
-          ? `${iconCategoryMapping[name].category}/${
-              iconCategoryMapping[name].subcategory
+          ? `${iconCategoryMapping[icon.basename].category}/${
+              iconCategoryMapping[icon.basename].subcategory
             }`
           : `resolve category info`;
 
-        let iconDisplayName = iconHasSizes ? `${name}/${icon.size}` : `${name}`;
+        let iconDisplayName = iconHasSizes
+          ? `${icon.basename}/${icon.size}`
+          : `${icon.basename}`;
 
         let symbolName = `${iconCategory}/${iconDisplayName}`;
 
