@@ -31,7 +31,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   };
 
   const handleKeyDown = event => {
-    const key = event.key;
+    const key = event.key || event.which;
 
     if (matches(event, [keyCodes.RIGHT, keyCodes.LEFT])) {
       onKeyDown({ index, name, text, key });

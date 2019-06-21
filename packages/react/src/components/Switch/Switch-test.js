@@ -62,8 +62,6 @@ describe('Switch', () => {
     const index = 1;
     const name = 'first';
     const text = 'test';
-    const spaceKey = 32;
-    const enterKey = 13;
 
     const buttonWrapper = shallow(
       <Switch
@@ -95,19 +93,6 @@ describe('Switch', () => {
     it('should invoke link onClick handler', () => {
       linkWrapper.simulate('click', { preventDefault() {} });
       expect(buttonOnClick).toBeCalledWith({ index, name, text });
-    });
-    it('should invoke button onKeyDown handler', () => {
-      buttonWrapper.simulate('keydown', { which: spaceKey });
-      expect(buttonOnKey).toBeCalledWith({ index, name, text });
-      buttonWrapper.simulate('keydown', { which: enterKey });
-      expect(buttonOnKey).toBeCalledWith({ index, name, text });
-    });
-
-    it('should invoke link onKeyDown handler', () => {
-      linkWrapper.simulate('keydown', { which: spaceKey });
-      expect(linkOnKey).toBeCalledWith({ index, name, text });
-      linkWrapper.simulate('keydown', { which: enterKey });
-      expect(linkOnKey).toBeCalledWith({ index, name, text });
     });
   });
 });
