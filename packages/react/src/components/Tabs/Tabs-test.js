@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
+import { ChevronDownGlyph } from '@carbon/icons-react';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';

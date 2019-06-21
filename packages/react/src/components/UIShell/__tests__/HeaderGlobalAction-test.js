@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Fade32 from '@carbon/icons-react/lib/fade/32';
+import { Fade32 } from '@carbon/icons-react';
 import React from 'react';
 import { mount } from 'enzyme';
 import { HeaderGlobalAction } from '../';

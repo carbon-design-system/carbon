@@ -108,7 +108,7 @@ export default class TimePicker extends Component {
 
   static defaultProps = {
     type: 'text',
-    pattern: '(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)',
+    pattern: '(1[012]|[1-9]):[0-5][0-9](\\s)?',
     placeholder: 'hh:mm',
     maxLength: 5,
     invalidText: 'Invalid time format.',

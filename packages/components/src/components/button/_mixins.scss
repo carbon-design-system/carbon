@@ -80,8 +80,8 @@
   &:hover.#{$prefix}--btn--disabled,
   &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
-    background: $ibm-color__gray-30;
-    border-color: $ibm-color__gray-30;
+    background-color: $disabled-02;
+    border-color: $disabled-02;
     text-decoration: none;
   }
 

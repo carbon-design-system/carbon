@@ -6,6 +6,8 @@ daysUntilClose: 3
 exemptLabels:
   - 'type: a11y ♿️'
   - 'type: bug 🐛'
+  - 'Severity 1 🚨'
+  - 'priority: high'
 # Label to use when marking an issue as stale
 staleLabel: inactive
 # Comment to post when marking an issue as stale. Set to `false` to disable

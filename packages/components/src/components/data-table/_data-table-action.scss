@@ -30,9 +30,13 @@
     width: 100%;
     justify-content: flex-end;
     transform: translate3d(0, 0, 0);
-    visibility: visible;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     transition: transform $duration--fast-02 motion(standard, productive),
-      visibility $duration--fast-02 motion(standard, productive);
+      clip-path $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
+    background-color: transparent; // For tool bar animation with (esp.) persistent search box
   }
 
   //-------------------------------------------------
@@ -302,10 +306,10 @@
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
-    visibility: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive),
-      visibility $duration--fast-02 motion(standard, productive);
+      clip-path $duration--fast-02 motion(standard, productive);
   }
 
   //-------------------------------------------------
@@ -322,11 +326,11 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    visibility: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     will-change: transform;
     background-color: $interactive-01;
     transition: transform $duration--fast-02 motion(standard, productive),
-      visibility $duration--fast-02 motion(standard, productive),
+      clip-path $duration--fast-02 motion(standard, productive),
       opacity $duration--fast-02 motion(standard, productive);
     transform: translate3d(0, 48px, 0);
   }
@@ -336,7 +340,7 @@
   }
 
   .#{$prefix}--batch-actions--active {
-    visibility: visible;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     pointer-events: all;
     transform: translate3d(0, 0, 0);
   }
@@ -344,6 +348,7 @@
   //btns container
   .#{$prefix}--action-list {
     position: absolute;
+    top: 0;
     right: 0;
     display: flex;
   }

@@ -10,7 +10,7 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 
 const { prefix } = settings;
@@ -130,7 +130,7 @@ export default class Dropdown extends React.Component {
     /**
      * Additional props passed to Downshift
      */
-    downshiftProps: Downshift.propTypes,
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
   };
 
   static defaultProps = {
