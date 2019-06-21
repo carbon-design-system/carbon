@@ -126,6 +126,7 @@ describe('Carbon Components React', () => {
         "StructuredListWrapper",
         "Switch",
         "Switcher",
+        "SwitcherDivider",
         "SwitcherItem",
         "SwitcherItemLink",
         "Tab",

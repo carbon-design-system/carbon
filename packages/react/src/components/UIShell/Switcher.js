@@ -26,7 +26,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const className = cx(`${prefix}--switcher__item`, {
+  const className = cx(`${prefix}--switcher`, {
     [customClassName]: !!customClassName,
   });
 

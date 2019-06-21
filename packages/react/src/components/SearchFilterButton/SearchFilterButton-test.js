@@ -8,7 +8,7 @@
 import React from 'react';
 import SearchFilterButton from '../SearchFilterButton';
 import { mount } from 'enzyme';
-import Filter16 from '@carbon/icons-react/lib/filter/16';
+import { Filter16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;

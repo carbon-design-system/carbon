@@ -30,44 +30,34 @@
 
   .#{$prefix}--switcher__item {
     width: 100%;
+    height: $spacing-07;
   }
 
-  .#{$prefix}--switcher__item:nth-child(1),
-  .#{$prefix}--switcher__item:nth-last-child(3) {
-    position: relative;
+  .#{$prefix}--switcher__item:nth-child(1) {
     margin-top: $spacing-05;
-    margin-bottom: $spacing-03;
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      bottom: rem(-9px);
-      width: rem(222px);
-      margin-left: $spacing-05;
-      border-top: 1px solid $shell-panel-border;
-    }
   }
 
-  .#{$prefix}--switcher__item:nth-last-child(3) {
-    margin-top: 0;
-  }
-
-  .#{$prefix}--switcher__item:nth-child(2),
-  .#{$prefix}--switcher__item:nth-last-child(2) {
-    padding-top: rem(9px);
+  .#{$prefix}--switcher__item--divider {
+    display: block;
+    width: rem(224px);
+    height: 1px;
+    margin: $spacing-03 $spacing-05;
+    background: $shell-panel-border;
+    border: none;
   }
 
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('heading-01');
     display: block;
+    height: $spacing-07;
     text-decoration: none;
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
 
-    &:hover {
+    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
       background: $shell-panel-bg-02;
       color: $shell-panel-text-02;
+      cursor: pointer;
     }
 
     &:focus {
