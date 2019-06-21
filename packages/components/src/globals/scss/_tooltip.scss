@@ -32,7 +32,7 @@
   }
 
   // ::before - Tooltip caret
-  // ::after - legacy Tooltip content (depreciated)
+  // ::after - legacy Tooltip content (deprecated)
   // .#{$prefix}--assistive-text - WCAG 2.1 compliant tooltip content
   &::before,
   &:not(.#{$prefix}--tooltip--a11y)::after,
