@@ -15,7 +15,7 @@ import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
 const buildInfo = require('@carbon/icons/meta.json');
-const metadata = require('./metadata.json');
+const iconCategoryMapping = require('./icon-category-mapping.json');
 
 export function generate() {
   command('commands/icons/generate', () => {
@@ -47,7 +47,7 @@ export function generate() {
     //  const end = 51;
     // This will allow you to focus only on the icon named 'name-to-find'
     const start = 0;
-    const end = 10;
+    const end = 100;
     // const end = iconNames.length;
 
     // We keep track of the current X and Y offsets at the top-level, each
@@ -98,10 +98,22 @@ export function generate() {
           },
         };
 
-        let symbolName =
-          sizes.length !== 1
-            ? `category/${name}/${icon.size}`
-            : `category/${name}`;
+        let iconIsCategorized =
+          iconCategoryMapping[name] &&
+          iconCategoryMapping[name].category &&
+          iconCategoryMapping[name].subcategory;
+
+        let iconHasSizes = sizes.length !== 1;
+
+        let iconCategory = iconIsCategorized
+          ? `${iconCategoryMapping[name].category}/${
+              iconCategoryMapping[name].subcategory
+            }`
+          : `resolve category info`;
+
+        let iconDisplayName = iconHasSizes ? `${name}/${icon.size}` : `${name}`;
+
+        let symbolName = `${iconCategory}/${iconDisplayName}`;
 
         if (icon.original) {
           symbolName = `${symbolName}*`;
