@@ -68,6 +68,10 @@ export default class ContentSwitcher extends React.Component {
         this._switchRefs[index] = el;
       }) || [];
 
+    function getSwitchRefs(index) {
+      return switchRefs[index];
+    }
+
     return React.Children.map(children, (child, index) =>
       React.cloneElement(child, {
         index,
@@ -77,7 +81,7 @@ export default class ContentSwitcher extends React.Component {
         ]),
         onKeyDown: this.handleChildChange,
         selected: index === this.state.selectedIndex,
-        ref: switchRefs[index],
+        ref: getSwitchRefs(index),
       })
     );
   }
