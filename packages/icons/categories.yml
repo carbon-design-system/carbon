@@ -16,12 +16,14 @@ categories:
           - open-panel--right
           - open-panel--top
           - pause
+          - pause--filled
           - pause--outline
           - pause--outline--filled
           - play
+          - play--filled
+          - play--filled--alt
           - play--outline
           - play--outline--filled
-          - play--solid--filled
           - power
           - recording
           - recording--filled
@@ -34,11 +36,14 @@ categories:
           - shrink-screen
           - shrink-screen--filled
           - skip--back
+          - skip--back--filled
           - skip--forward
+          - skip--forward--filled
           - stop
+          - stop--filled
+          - stop--filled--alt
           - stop--outline
           - stop--outline--filled
-          - stop--solid--filled
           - video--add
           - video--chat
           - volume--down
@@ -66,6 +71,7 @@ categories:
           - list--bulleted
           - list--numbered
           - list—checked
+          - no-image
           - non-editable
           - opacity
           - paint-brush
@@ -141,6 +147,7 @@ categories:
           - arrows--horizontal
           - arrows--vertical
           - bookmark
+          - branch
           - caret--sort
           - chat
           - chevron--sort
@@ -292,7 +299,9 @@ categories:
     subcategories:
       - name: Commerce
         members:
+          - account
           - building
+          - enterprise
           - finance
           - industry
           - inventory-management
@@ -546,6 +555,7 @@ categories:
           - MP3
           - MP4
           - music
+          - no-ticket
           - notebook
           - notebook--reference
           - panel-expansion
@@ -670,11 +680,13 @@ categories:
           - delivery-truck
           - departure
           - globe
+          - help-desk
           - hotel
           - location
           - map
           - restaurant
           - restaurant--fine
+          - service-desk
           - shuttle
           - taxi
           - train
@@ -686,6 +698,7 @@ categories:
           - cloud--lightning
           - cloud--rain
           - cloud--snow
+          - fog
           - humidity
           # hurricane
           # partly-cloudy
