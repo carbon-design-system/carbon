@@ -5356,6 +5356,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -8991,8 +8992,8 @@ Button variant styles
   &:hover.#{$prefix}--btn--disabled,
   &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
-    background: $ibm-color__gray-30;
-    border-color: $ibm-color__gray-30;
+    background-color: $disabled-02;
+    border-color: $disabled-02;
     text-decoration: none;
   }
 
@@ -9015,6 +9016,7 @@ Button variant styles
   - [ui-02 [variable]](#ui-02-variable)
   - [prefix [variable]](#prefix-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
