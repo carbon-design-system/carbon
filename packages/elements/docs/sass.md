@@ -3717,7 +3717,7 @@ $carbon--theme--g90: (
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
   active-tertiary: #bebebe,
-  hover-ui: #353535,
+  hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
   selected-ui: #565656,
   hover-selected-ui: #656565,
@@ -3735,7 +3735,7 @@ $carbon--theme--g90: (
   brand-02: #6f6f6f,
   brand-03: #ffffff,
   active-01: #6f6f6f,
-  hover-field: #353535,
+  hover-field: #4c4c4c,
 );
 ```
 
