@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 import { withKnobs, select, text, number } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
 
-import OverflowMenuVertical16 from '@carbon/icons-react/lib/overflow-menu--vertical/16';
+import { OverflowMenuVertical16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 const directions = {

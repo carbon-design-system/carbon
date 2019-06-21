@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
@@ -119,7 +119,7 @@ export default class MultiSelect extends React.Component {
     /**
      * Additional props passed to Downshift
      */
-    downshiftProps: Downshift.propTypes,
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
   };
 
   static getDerivedStateFromProps({ open }, state) {

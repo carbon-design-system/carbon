@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
@@ -147,7 +147,7 @@ describe('Modal', () => {
       const modal = wrapper.find(Modal);
       const div = modal.find(`.${prefix}--modal`);
       wrapper.setState({ isOpen: true });
-      div.simulate('click');
+      div.simulate('mousedown');
       expect(wrapper.state('isOpen')).toEqual(false);
     });
 

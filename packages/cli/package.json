@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@carbon/cli-reporter": "10.2.0",
+    "child-process-promise": "^2.2.1",
     "fs-extra": "^8.0.1",
     "prettier": "^1.18.2",
     "remark": "^10.0.1",

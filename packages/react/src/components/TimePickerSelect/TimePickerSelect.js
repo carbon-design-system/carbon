@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import ChevronDownGlyph from '@carbon/icons-react/lib/chevron--down/index';
+import { ChevronDownGlyph } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;

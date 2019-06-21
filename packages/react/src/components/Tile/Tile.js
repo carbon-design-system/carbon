@@ -10,8 +10,10 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import CheckmarkFilled from '@carbon/icons-react/lib/checkmark--filled/16';
-import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
+import {
+  CheckmarkFilled16 as CheckmarkFilled,
+  ChevronDown16,
+} from '@carbon/icons-react';
 import { keys, matches } from '../../tools/key';
 import uid from '../../tools/uniqueId';
 
