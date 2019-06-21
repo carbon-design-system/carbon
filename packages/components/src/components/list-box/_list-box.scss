@@ -169,8 +169,10 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: inherit;
     color: $disabled-02;
     text-decoration: none;
+    outline: none;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:hover {
@@ -511,6 +513,7 @@ $list-box-menu-width: rem(300px);
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
