@@ -51,7 +51,7 @@
         {{#each ../columns as |column index|}}
           {{#with (lookup row column.name) as |data|}}
             {{#if @first }}
-              <th {{#if column.numerical}} scope="row" class="{{@root.prefix}}--data-table--numerical-cell" {{/if}}>
+              <th {{#if column.numerical}} class="{{@root.prefix}}--data-table--numerical-cell" {{/if}} scope="row">
                 <!-- truncated new markup -->
                 {{#if ../../truncate}}
                   <span class="{{@root.prefix}}--table-cell-content" aria-describedby="label-tooltip">{{data}}
