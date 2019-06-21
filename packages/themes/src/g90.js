@@ -96,7 +96,7 @@ export const activeSecondary = gray80;
 export const hoverTertiary = gray10;
 export const activeTertiary = gray30;
 
-export const hoverUI = '#353535';
+export const hoverUI = '#4c4c4c';
 export const activeUI = gray60;
 export const selectedUI = gray70;
 
