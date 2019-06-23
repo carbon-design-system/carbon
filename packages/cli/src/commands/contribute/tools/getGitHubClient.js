@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable no-console */
+
 'use strict';
 
 const Octokit = require('@octokit/rest');
-const { prompt } = require('enquirer');
+const { prompt } = require('inquirer');
 
 const CustomOctokit = Octokit.plugin([
   require('@octokit/plugin-throttling'),
