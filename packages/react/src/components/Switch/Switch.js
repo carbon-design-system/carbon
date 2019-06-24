@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { matches, keyCodes } from '../../tools/key';
 
 const { prefix } = settings;
 
@@ -33,9 +32,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   const handleKeyDown = event => {
     const key = event.key || event.which;
 
-    if (matches(event, [keyCodes.RIGHT, keyCodes.LEFT])) {
-      onKeyDown({ index, name, text, key });
-    }
+    onKeyDown({ index, name, text, key });
   };
 
   const classes = classNames(className, `${prefix}--content-switcher-btn`, {
