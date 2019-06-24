@@ -17,14 +17,11 @@ const search = require('../src/search');
 
 const SVG_DIR = path.resolve(__dirname, '../src/svg');
 const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.yml');
-const CATEGORIES_DEFINITION_PATH = path.resolve(__dirname, '../categories.yml');
+const iconCategoryMapping = require('../icon-metadata/icon-category-mapping.json');
 
 async function scaffold() {
   const metadata = yaml.safeLoad(
     await fs.readFileSync(METADATA_OUTPUT, 'utf8')
-  );
-  const categoriesJson = yaml.safeLoad(
-    await fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
   );
 
   // Get all of our icon files from the SVG directory
@@ -78,33 +75,9 @@ async function scaffold() {
     {}
   );
 
-  /**
-   * build object that maps icon names to category & subcategory
-   *   - loop through all of `categories.yml`
-   *   - keys are icon names
-   *   - each iconName object has props for category & subcategory
-   *
-   * when needing to find category information,
-   * `categoryInformation[iconName].category` and
-   * `categoryInformation[iconName].subcategory` will return needed info
-   */
-  const categoryInformation = {};
-  categoriesJson.categories.forEach(category => {
-    category.subcategories.forEach(subcategory => {
-      subcategory.members.forEach(iconName => {
-        categoryInformation[iconName] = {
-          category: category.name,
-          subcategory: subcategory.name,
-        };
-      });
-    });
-  });
-
-  console.log(categoryInformation);
-
   const icons = Object.keys(iconsGroupedByName).map(key => {
     const iconIsCategorized =
-      categoryInformation[key] && categoryInformation[key].subcategory;
+      iconCategoryMapping[key] && iconCategoryMapping[key].subcategory;
 
     const group = iconsGroupedByName[key];
     const savedIcon = metadata.icons.find(({ name }) => name === key);
@@ -115,8 +88,8 @@ async function scaffold() {
       categories: iconIsCategorized
         ? [
             {
-              category: categoryInformation[key].category,
-              subcategory: categoryInformation[key].subcategory,
+              category: iconCategoryMapping[key].category,
+              subcategory: iconCategoryMapping[key].subcategory,
             },
           ]
         : [],
