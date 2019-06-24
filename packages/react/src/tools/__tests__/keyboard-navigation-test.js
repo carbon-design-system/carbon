@@ -10,22 +10,46 @@
  */
 import { getNextIndex } from '../keyboard-navigation';
 
-describe('getNextIndex', () => {
-  let indexToTest;
-  test('increments the index forward', () => {
-    indexToTest = getNextIndex('ArrowRight', 0, 3);
-    expect(indexToTest).toEqual(1);
-  });
-  test('increments the index backward', () => {
-    indexToTest = getNextIndex('ArrowLeft', 1, 3);
-    expect(indexToTest).toEqual(0);
-  });
-  test('loops last index to first', () => {
-    indexToTest = getNextIndex('ArrowRight', 3, 3);
-    expect(indexToTest).toEqual(1);
-  });
-  test('loops first index to last', () => {
-    indexToTest = getNextIndex('ArrowLeft', 0, 3);
-    expect(indexToTest).toEqual(2);
-  });
+const tests = [
+  [
+    'increments the index forward',
+    {
+      key: 'ArrowRight',
+      index: 0,
+      length: 3,
+    },
+    1,
+  ],
+  [
+    'increments the index backward',
+    {
+      key: 'ArrowLeft',
+
+      index: 1,
+      length: 3,
+    },
+    0,
+  ],
+  [
+    'loops last index to first',
+    {
+      key: 'ArrowRight',
+      index: 3,
+      length: 3,
+    },
+    1,
+  ],
+  [
+    'loops first index to last',
+    {
+      key: 'ArrowLeft',
+      index: 0,
+      length: 3,
+    },
+    2,
+  ],
+];
+
+test.each(tests)('%s', (_, { key, index, length }, expected) => {
+  expect(getNextIndex(key, index, length)).toBe(expected);
 });

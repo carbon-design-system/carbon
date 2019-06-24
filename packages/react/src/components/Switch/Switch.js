@@ -61,6 +61,8 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   );
 });
 
+Switch.displayName = 'Switch';
+
 Switch.propTypes = {
   /**
    * Specify an optional className to be added to your Switch
