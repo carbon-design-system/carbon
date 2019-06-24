@@ -75,6 +75,16 @@ const props = {
     name: text('Form item name: (name)', ''),
     multiple: boolean('Supports multiple files (multiple)', true),
   }),
+  fileUploaderDropContainer: () => ({
+    labelText: text('Label text (labelText)', 'click to upload'),
+    name: text('Form item name: (name)', ''),
+    multiple: boolean('Supports multiple files (multiple)', true),
+    accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
+    disabled: boolean('Disabled (disabled)', false),
+    role: text('ARIA role of the button (role)', ''),
+    tabIndex: number('Tab index (tabIndex)', 0),
+    onChange: action('onChange'),
+  }),
 };
 
 storiesOf('FileUploader', module)
@@ -117,6 +127,18 @@ storiesOf('FileUploader', module)
         text: `
             The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
           `,
+      },
+    }
+  )
+  .add(
+    'Drag and drop upload container',
+    () =>
+      require('./stories/drop-container').default(
+        props.fileUploaderDropContainer()
+      ),
+    {
+      info: {
+        text: 'lorem ipsum',
       },
     }
   )
