@@ -51,6 +51,17 @@ module.exports = (file, api) => {
       // then capture all the icon-specific data. Depending on the length of
       // this data, we assign name, size, and prefix values.
       const { node } = path;
+
+      // Ignore imports if they already directly reference the package or one of
+      // its entrypoints that support tree-shaking
+      if (
+        node.source.value === '@carbon/icons-react' ||
+        node.source.value === '@carbon/icons-react/es' ||
+        node.source.value === '@carbon/icons-react/lib'
+      ) {
+        return;
+      }
+
       const [
         _scope,
         _packageName,
