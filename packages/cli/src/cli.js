@@ -10,19 +10,16 @@
 const cli = require('yargs');
 const packageJson = require('../package.json');
 
-const commands = [require('./commands/ci-check'), require('./commands/sync')];
-
 async function main({ argv }) {
   cli
     .scriptName(packageJson.name)
     .version(packageJson.version)
     .usage('Usage: $0 [options]');
 
-  for (const command of commands) {
-    command.register(cli);
-  }
-
-  cli.strict().parse(argv.slice(2)).argv;
+  cli
+    .commandDir('commands')
+    .strict()
+    .parse(argv.slice(2)).argv;
 }
 
 module.exports = main;
