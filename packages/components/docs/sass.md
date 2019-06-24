@@ -2952,8 +2952,6 @@ $spacing-07: $carbon--spacing-07;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-07`
-- **Used by**:
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
 
@@ -10457,11 +10455,9 @@ Data table core styles
     padding-right: $spacing-05;
   }
 
-  // specific padding/width for overflow menu columns
+  // specific padding for overflow menu columns
   .#{$prefix}--data-table .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table .#{$prefix}--table-column-menu:last-of-type {
-    width: rem(52px);
-    min-width: rem(52px);
     padding-top: $spacing-03;
     padding-right: $spacing-03;
   }
@@ -10751,89 +10747,6 @@ Data table core styles
   .#{$prefix}--data-table--static {
     width: auto;
   }
-
-  // -------------
-  // Sticky header
-  // -------------
-  .#{$prefix}--data-table_inner-container {
-    background-color: $ui-03;
-    padding-top: rem(48px);
-    transform: translateZ(0);
-  }
-
-  .#{$prefix}--data-table--sticky-header {
-    display: block;
-    // max-height: rem(300px);
-    overflow-y: scroll;
-
-    thead,
-    tbody,
-    tr,
-    th,
-    td {
-      display: flex;
-    }
-
-    thead {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      overflow: scroll;
-      -ms-overflow-style: none; //hides ie scrollbar
-      will-change: transform;
-    }
-
-    thead tr th {
-      border-bottom: 1px solid $active-ui;
-    }
-
-    tbody {
-      flex-direction: column;
-      overflow-x: scroll;
-      -ms-overflow-style: none; //hides ie scrollbar
-      will-change: transform;
-    }
-
-    tr {
-      min-height: rem(48px);
-      height: auto;
-    }
-
-    tr.#{$prefix}--data-table--selected:first-of-type td {
-      border-top: none;
-    }
-
-    //hides webkit scrollbar
-    thead::-webkit-scrollbar,
-    tbody::-webkit-scrollbar {
-      display: none;
-    }
-
-    //hides ff scrollbar
-    @-moz-document url-prefix() {
-      thead,
-      tbody {
-        scrollbar-width: none;
-      }
-    }
-
-    tbody tr:last-of-type {
-      border-bottom: 0;
-    }
-
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon),
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand-v2):not(.#{$prefix}--table-column-icon) {
-      width: 100%;
-      min-width: 0;
-    }
-
-    .#{$prefix}--table-header-label {
-      max-width: calc(100% - 10px);
-      @include text-overflow;
-    }
-  }
-
-  @include sticky-header($max-width: rem(900px));
 }
 ```
 
@@ -10841,7 +10754,6 @@ Data table core styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
-  - [text-overflow [mixin]](#text-overflow-mixin)
   - [prefix [variable]](#prefix-variable)
   - [spacing-01 [variable]](#spacing-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -14337,6 +14249,12 @@ Number input styles
       @include focus-outline('outline');
     }
 
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled;
+    }
+
     &:disabled ~ .#{$prefix}--number__controls {
       cursor: not-allowed;
       pointer-events: none;
@@ -14355,13 +14273,6 @@ Number input styles
     &::-webkit-inner-spin-button {
       appearance: none; // Safari: Hide number spinner
     }
-  }
-
-  .#{$prefix}--number input[type='number']:disabled,
-  .#{$prefix}--number--readonly input[type='number'] {
-    cursor: not-allowed;
-    background-color: $disabled-background-color;
-    color: $disabled;
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -14431,10 +14342,6 @@ Number input styles
       cursor: not-allowed;
       color: $disabled;
     }
-  }
-
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
-    display: none;
   }
 
   .#{$prefix}--number[data-invalid] {
@@ -19372,7 +19279,6 @@ want to have display-inline: block from the text helper classes
 
 - **Group**: [ui-shell](#ui-shell)
 - **Used by**:
-  - [data-table-core [mixin]](#data-table-core-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
@@ -19943,34 +19849,44 @@ UI shell side nav
 
   .#{$prefix}--switcher__item {
     width: 100%;
-    height: $spacing-07;
   }
 
-  .#{$prefix}--switcher__item:nth-child(1) {
+  .#{$prefix}--switcher__item:nth-child(1),
+  .#{$prefix}--switcher__item:nth-last-child(3) {
+    position: relative;
     margin-top: $spacing-05;
+    margin-bottom: $spacing-03;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: rem(-9px);
+      width: rem(222px);
+      margin-left: $spacing-05;
+      border-top: 1px solid $shell-panel-border;
+    }
   }
 
-  .#{$prefix}--switcher__item--divider {
-    display: block;
-    width: rem(224px);
-    height: 1px;
-    margin: $spacing-03 $spacing-05;
-    background: $shell-panel-border;
-    border: none;
+  .#{$prefix}--switcher__item:nth-last-child(3) {
+    margin-top: 0;
+  }
+
+  .#{$prefix}--switcher__item:nth-child(2),
+  .#{$prefix}--switcher__item:nth-last-child(2) {
+    padding-top: rem(9px);
   }
 
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('heading-01');
     display: block;
-    height: $spacing-07;
     text-decoration: none;
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
 
-    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
+    &:hover {
       background: $shell-panel-bg-02;
       color: $shell-panel-text-02;
-      cursor: pointer;
     }
 
     &:focus {
@@ -19998,7 +19914,6 @@ UI shell side nav
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [prefix [variable]](#prefix-variable)
   - [shell-panel-text-01 [variable]](#shell-panel-text-01-variable)
-  - [spacing-07 [variable]](#spacing-07-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [shell-panel-border [variable]](#shell-panel-border-variable)
