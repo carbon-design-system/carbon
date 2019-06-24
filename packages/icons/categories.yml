@@ -16,12 +16,14 @@ categories:
           - open-panel--right
           - open-panel--top
           - pause
+          - pause--filled
           - pause--outline
           - pause--outline--filled
           - play
+          - play--filled
+          - play--filled--alt
           - play--outline
           - play--outline--filled
-          - play--solid--filled
           - power
           - recording
           - recording--filled
@@ -34,11 +36,14 @@ categories:
           - shrink-screen
           - shrink-screen--filled
           - skip--back
+          - skip--back--filled
           - skip--forward
+          - skip--forward--filled
           - stop
+          - stop--filled
+          - stop--filled--alt
           - stop--outline
           - stop--outline--filled
-          - stop--solid--filled
           - video--add
           - video--chat
           - volume--down
@@ -66,6 +71,7 @@ categories:
           - list--bulleted
           - list--numbered
           - list—checked
+          - no-image
           - non-editable
           - opacity
           - paint-brush
@@ -141,6 +147,7 @@ categories:
           - arrows--horizontal
           - arrows--vertical
           - bookmark
+          - branch
           - caret--sort
           - chat
           - chevron--sort
@@ -154,7 +161,7 @@ categories:
           - filter
           - filter--edit
           - flag
-          # fork
+          - fork
           - insert
           - launch
           - login
@@ -292,7 +299,9 @@ categories:
     subcategories:
       - name: Commerce
         members:
+          - account
           - building
+          - enterprise
           - finance
           - industry
           - inventory-management
@@ -311,7 +320,7 @@ categories:
           - 3D-curve--manual
           - 3D-MPR-toggle
           - 3rd-party-connected
-          # 3D-software
+          - 3D-software
           - angle
           - annotation-visibility
           - arrow--annotation
@@ -348,7 +357,7 @@ categories:
           - pointer-text
           - region-analysis--area
           - region-analysis--volume
-          # registration
+          - registration
           - save--annotation
           - save--image
           - save--series
@@ -455,7 +464,7 @@ categories:
           - chart--scatter
           - chart--venn-diagram
           - classifier--language
-          # concept
+          - concept
           - data--1
           - data--2
           - data--base
@@ -483,15 +492,15 @@ categories:
           - share-knowledge
           - table
           - table--split
-          # term
-          # text-link
-          # text-link--analysis
-          # text-mining
-          # text-mining--applier
+          - term
+          - text-link
+          - text-link--analysis
+          - text-mining
+          - text-mining--applier
           - tree-view
-          # tree-view--alt
-          # type-pattern
-          # types
+          - tree-view--alt
+          - type-pattern
+          - types
           - visual-recognition
       - name: File
         members:
@@ -504,10 +513,10 @@ categories:
           - catalog
           - categories
           - category
-          # category--add
-          # category--and
-          # category--new
-          # category--new-each
+          - category--add
+          - category--and
+          - category--new
+          - category--new-each
           - closed-caption
           - closed-caption--alt
           - closed-caption--filled
@@ -546,6 +555,7 @@ categories:
           - MP3
           - MP4
           - music
+          - no-ticket
           - notebook
           - notebook--reference
           - panel-expansion
@@ -670,11 +680,13 @@ categories:
           - delivery-truck
           - departure
           - globe
+          - help-desk
           - hotel
           - location
           - map
           - restaurant
           - restaurant--fine
+          - service-desk
           - shuttle
           - taxi
           - train
@@ -686,11 +698,12 @@ categories:
           - cloud--lightning
           - cloud--rain
           - cloud--snow
+          - fog
           - humidity
-          # hurricane
-          # partly-cloudy
-          # sunny
-          # sunset
+          - hurricane
+          - partly-cloudy
+          - sunny
+          - sunset
           - temperature
   - name: Tools
     subcategories:
@@ -699,13 +712,13 @@ categories:
           - aperture
           - asset
           - at
-          # audio-console
+          - audio-console
           - battery--charging
-          # battery--empty
+          - battery--empty
           - battery--full
           - battery--half
           - battery--low
-          # battery--quarter
+          - battery--quarter
           - blog
           - bluetooth
           - bluetooth--off
@@ -741,15 +754,15 @@ categories:
           - mobile--add
           - mobile--check
           - mobile--download
-          # mobile--landscape
+          - mobile--landscape
           - password
           - printer
           - radio
           - rocket
           - rss
           - share
-          # tablet
-          # tablet--landscape
+          - tablet
+          - tablet--landscape
           - terminal
           - USB
           - voicemail
