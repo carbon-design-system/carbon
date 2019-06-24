@@ -297,7 +297,9 @@ export default class Pagination extends Component {
             ))}
           </Select>
           <span className={`${prefix}--pagination__text`}>
-            {pagesUnknown
+            {!totalItems
+              ? ''
+              : pagesUnknown
               ? itemText(
                   statePageSize * (statePage - 1) + 1,
                   statePage * statePageSize
