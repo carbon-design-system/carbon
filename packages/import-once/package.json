@@ -19,7 +19,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "bundler sassdoc 'scss/*.scss'"
+    "build": "bundler sassdoc \"scss/*.scss\""
   },
   "eyeglass": {
     "exports": false,
