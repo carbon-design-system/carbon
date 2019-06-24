@@ -3,22 +3,19 @@ from scrips in `../tasks/`
 
 will refactor as we work!
 
-## steps to building icon sketch pacakge:
+## steps to updating & building icon sketch pacakge:
 
 _(paths written from root `icons` folder)_
 
+- add icon svg to appropriate folder under `src`
 - add icon to `categories.yml`
 - run `node tasks/output-icon-category-mapping.js`.
   - this generates the category json info
-- run `node tasks/scaffold-metadata.yml` from package root
-  - this updates `metadata.yml` with updated category information
-- edit `icons/metadata.yml` to add/edit additional information
-- run `node tasks/output-metadata-json.js`
+- run `node tasks/scaffold-metadata.js` from package root
+  - this creatues/updates `metadata.yml` with updated category information
+- edit the file `icons/metadata.yml` to add/edit additional information
+- run `node tasks/scaffold-metadata.js`
   - this generates `icon-metadata.json`, which is used in the sketch plugin
-
-todo: create a script/command to run all these in sequence? combine them into a
-single build script? separate this info, or at least the authoring scripts &
-info, into an `icons-metadata` package?
 
 ---
 

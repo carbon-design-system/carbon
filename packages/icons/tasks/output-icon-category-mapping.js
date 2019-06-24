@@ -16,8 +16,6 @@ const categoriesJson = yaml.safeLoad(
   fs.readFileSync(CATEGORIES_DEFINITION_PATH, 'utf8')
 );
 
-console.log(categoriesJson['categories'][0]['subcategories'][0]['members']);
-
 /**
  * build object that maps icon names to category & subcategory
  *   - loop through all of `categories.yml`
@@ -39,8 +37,6 @@ categoriesJson.categories.forEach(category => {
     });
   });
 });
-
-console.log(iconCategoryInformation);
 
 fs.writeFileSync(
   path.resolve(__dirname, '../icon-metadata/icon-category-mapping.json'),
