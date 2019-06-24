@@ -18404,6 +18404,12 @@ Tooltip styles
   @include tooltip--definition--legacy;
   /* end legacy definition tooltip */
 
+  .#{$prefix}--tooltip--definition.#{$prefix}--tooltip--a11y {
+    // Wrapping element set to inline since the tooltip isn't contained within the trigger (affects center and end alignments)
+    // Also allows for Definition Tooltip to be used within a paragraph of text as defined in the usage guidelines
+    display: inline-flex;
+  }
+
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
