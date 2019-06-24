@@ -28,14 +28,12 @@
           {{ carbon-icon 'CheckmarkFilled16' class=(add prefix '--file-complete') }}
         </span>
       </div>
-      <div class="{{prefix}}--file__selected-file--invalid__wrapper">
-        <div class="{{prefix}}--file__selected-file {{prefix}}--file__selected-file--invalid" data-invalid>
-          <p class="{{prefix}}--file-filename">color.jpeg</p>
-          <span data-for="{{id}}" class="{{prefix}}--file__state-container">
-            {{ carbon-icon 'WarningFilled16' class=(add prefix '--file--invalid')}}
-            {{ carbon-icon 'Close16' class=(add prefix '--file-close') }}
-          </span>
-        </div>
+      <div class="{{prefix}}--file__selected-file {{prefix}}--file__selected-file--invalid" data-invalid>
+        <p class="{{prefix}}--file-filename">color.jpeg</p>
+        <span data-for="{{id}}" class="{{prefix}}--file__state-container">
+          {{ carbon-icon 'WarningFilled16' class=(add prefix '--file--invalid')}}
+          {{ carbon-icon 'Close16' class=(add prefix '--file-close') }}
+        </span>
         <div class="{{prefix}}--form-requirement">
           File size exceeds limit.
           <p class="{{prefix}}--form-requirement__supplement">500 kb max file size. Select a new file and try

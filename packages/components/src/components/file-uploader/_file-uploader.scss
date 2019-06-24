@@ -89,18 +89,26 @@
   }
 
   .#{$prefix}--file__selected-file {
-    display: flex;
+    display: grid;
+    grid-gap: $carbon--spacing-03 $carbon--spacing-05;
+    grid-template-columns: 1fr auto;
+    grid-auto-rows: auto;
     align-items: center;
-    justify-content: space-between;
-    height: rem(40px);
+    min-height: rem(40px);
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
-    padding: 0 $carbon--spacing-05;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     background-color: $field-01;
-    overflow: hidden;
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column-start: 1;
+      grid-column-end: -1;
+      max-height: none;
+      margin: 0;
     }
 
     .#{$prefix}--inline-loading__animation {
@@ -115,6 +123,7 @@
     }
   }
 
+  // TODO: deprecate this block
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
     outline-width: 1px;
@@ -124,14 +133,25 @@
   }
 
   .#{$prefix}--file__selected-file--invalid {
-    margin-bottom: $carbon--spacing-02;
-    border-bottom: 1px solid $ui-03;
+    @include focus-outline('invalid');
+    outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--file-filename {
     color: $disabled-02;
   }
 
+  .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
+    border-top: 1px solid $ui-03;
+    padding-top: rem(8px);
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__supplement {
+    color: $text-01;
+  }
+
+  // TODO: deprecate
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
     @include type-style('caption-01');
     display: block;
@@ -151,12 +171,8 @@
 
   .#{$prefix}--file-filename {
     @include type-style('body-short-01');
-    @include text-overflow(320px);
-    display: inline-block;
-    align-items: center;
+    @include text-overflow(auto);
     color: $text-01;
-    margin-right: $carbon--spacing-05;
-    padding: 1px 0;
     /*rtl:ignore*/
     direction: ltr;
     justify-content: flex-start; /*rtl:{flex-end}*/
@@ -181,10 +197,16 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
-    background: transparent;
+    height: rem(16px);
+    width: rem(16px);
+    background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {

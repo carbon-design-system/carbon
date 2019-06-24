@@ -53,9 +53,6 @@ class FileUploader extends mixin(
     this.manage(
       on(this.element.ownerDocument, 'dragover', this._handleDragDrop)
     );
-    this.manage(
-      on(this.element.ownerDocument, 'dragleave', this._handleDragDrop)
-    );
     this.manage(on(this.element.ownerDocument, 'drop', this._handleDragDrop));
   }
 
@@ -189,7 +186,9 @@ class FileUploader extends mixin(
     if (target) {
       this.changeState('delete-filename-fileuploader', {
         initialEvt: evt,
-        filenameElement: target.parentNode.parentNode.parentNode,
+        filenameElement:
+          target.closest(this.options.selectorSelectedFileInvalidWrapper) ||
+          target.closest(this.options.selectorSelectedFile),
       });
     }
   };
@@ -204,10 +203,10 @@ class FileUploader extends mixin(
     // In IE11 `evt.dataTransfer.types` is a `DOMStringList` instead of an array
     if (
       Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') >= 0 &&
-      !eventMatches(evt, this.options.selectorOtherDropContainers) &&
-      isOfSelf
+      !eventMatches(evt, this.options.selectorOtherDropContainers)
     ) {
-      const inArea = eventMatches(evt, this.options.selectorDropContainer);
+      const inArea =
+        isOfSelf && eventMatches(evt, this.options.selectorDropContainer);
       if (evt.type === 'dragover') {
         evt.preventDefault();
         const dropEffect = inArea ? 'copy' : 'none';
@@ -270,6 +269,8 @@ class FileUploader extends mixin(
       selectorInput: `input[type="file"].${prefix}--file-input`,
       selectorContainer: '[data-file-container]',
       selectorCloseButton: `.${prefix}--file-close`,
+      selectorSelectedFile: `.${prefix}--file__selected-file`,
+      selectorSelectedFileInvalidWrapper: `.${prefix}--file__selected-file--invalid__wrapper`,
       selectorDropContainer: `[data-file-drop-container]`,
       selectorOtherDropContainers: '[data-drop-container]',
       classLoading: `${prefix}--loading ${prefix}--loading--small`,
@@ -281,7 +282,6 @@ class FileUploader extends mixin(
       classFileClose: `${prefix}--file-close`,
       classFileComplete: `${prefix}--file-complete`,
       classSelectedFile: `${prefix}--file__selected-file`,
-      classSelectedFileInvalid: `${prefix}--file__selected-file--invalid`,
       classStateContainer: `${prefix}--file__state-container`,
       classDragOver: `${prefix}--file__drop-container--drag-over`,
       eventBeforeDeleteFilenameFileuploader:
