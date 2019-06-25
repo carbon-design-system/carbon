@@ -26,6 +26,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     className: customClassName,
     translateById: t,
     isFixedNav,
+    isRail,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -37,6 +38,12 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
     if (onToggle) {
       onToggle(event, value);
+    }
+  };
+
+  const handleMouseOver = () => {
+    if (isRail) {
+      setExpandedState(true);
     }
   };
 
@@ -53,6 +60,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
+    [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
   });
@@ -63,7 +71,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       className={`${prefix}--side-nav__navigation ${className}`}
       {...accessibilityLabel}
       onFocus={event => handleToggle(event, true)}
-      onBlur={event => handleToggle(event, false)}>
+      onBlur={event => handleToggle(event, false)}
+      onMouseOver={() => handleMouseOver()}>
       {children}
       {isFixedNav ? null : (
         <SideNavFooter
@@ -131,6 +140,11 @@ SideNav.propTypes = {
    * Optionally provide a custom class to apply to the underlying <li> node
    */
   isChildOfHeader: PropTypes.bool,
+
+  /**
+   * Optional prop to display the side nav rail.
+   */
+  isRail: PropTypes.bool,
 };
 
 export default SideNav;
