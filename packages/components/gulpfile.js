@@ -10,6 +10,9 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const deduper = require('postcss-discard-duplicates');
+const Fiber = require('fibers');
+
+sass.compiler = require('sass');
 
 // Javascript deps
 const babel = require('gulp-babel');
@@ -338,6 +341,7 @@ const buildStyles = prod => {
       .pipe(
         sass({
           outputStyle: prod ? 'compressed' : 'expanded',
+          fiber: Fiber,
         }).on('error', sass.logError)
       )
       .pipe(
@@ -398,6 +402,7 @@ gulp.task('sass:dev', () => {
         sass({
           includePaths: ['node_modules'],
           outputStyle: 'expanded',
+          fiber: Fiber,
         }).on('error', sass.logError)
       );
   if (useCustomProperties) {
