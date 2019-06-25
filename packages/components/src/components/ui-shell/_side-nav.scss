@@ -67,11 +67,7 @@
 @mixin carbon-side-nav {
   //----------------------------------------------------------------------------
   // Side-nav > Panel
-  //----------------------------------------------------------------------------
-  // Used for rendering the actual side rail. There are two states that we have
-  // to style for, namely for when the rail is collapsed and expanded. When
-  // collapsed, the rail is intended to expand on hover. When expanded, it
-  // should have the same dimensions as when expanded on hover.
+  //----------------------------------------------------------------------------.
   .#{$prefix}--side-nav {
     position: fixed;
     top: 0;
@@ -119,9 +115,16 @@
     transform: translateX(mini-units(-32));
   }
 
-  .#{$prefix}--side-nav--collapsed {
-    width: mini-units(32);
-    transform: translateX(mini-units(-32));
+  //----------------------------------------------------------------------------
+  // Rail
+  //---------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on mouse over. When expanded, it
+  // should have the same dimensions as when expanded on mouse over
+
+  .#{$prefix}--side-nav--rail {
+    width: mini-units(6);
   }
 
   //----------------------------------------------------------------------------
