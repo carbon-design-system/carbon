@@ -312,12 +312,28 @@ export default class Modal extends Component {
       </button>
     );
 
+    const getAriaLabelledBy = (() => {
+      const ariaLabelledBy = [];
+      if (modalLabel) {
+        ariaLabelledBy.push(
+          `${prefix}--modal-header__label`,
+          `${prefix}--modal-header__heading`
+        );
+      }
+      return ariaLabelledBy.length ? ariaLabelledBy.join(' ') : null;
+    })();
+
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
         className={`${prefix}--modal-container`}
-        aria-label={this.props['aria-label'] || modalAriaLabel}
+        aria-label={
+          modalLabel
+            ? null
+            : this.props['aria-label'] || modalAriaLabel || modalHeading
+        }
+        aria-labelledby={getAriaLabelledBy}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
