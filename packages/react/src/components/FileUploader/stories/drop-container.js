@@ -74,10 +74,12 @@ function ExampleDropContainerApp(props) {
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
-      setFiles([...files, ...newFiles]);
+      props.multiple
+        ? setFiles([...files, ...newFiles])
+        : setFiles([...files, newFiles[0]]);
       newFiles.forEach(uploadFile);
     },
-    [files]
+    [files, props.multiple]
   );
   const handleFileUploaderItemClick = useCallback(
     (evt, { uuid: clickedUuid }) =>
