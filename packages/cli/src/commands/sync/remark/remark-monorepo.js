@@ -57,6 +57,7 @@ function monorepo() {
     // [ ] Contributors
     // [x] Contributing
     // [x] License
+    // eslint-disable-next-line require-atomic-updates
     tree.children = [
       ...createTitle(localPackageJson.name, localPackageJson.description),
       ...createGettingStarted(localPackageJson.name),
