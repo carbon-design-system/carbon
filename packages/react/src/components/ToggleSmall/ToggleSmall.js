@@ -21,7 +21,6 @@ const ToggleSmall = ({
   onToggle,
   id,
   labelText,
-  ariaLabel,
   labelA,
   labelB,
   ...other
@@ -38,6 +37,7 @@ const ToggleSmall = ({
   } else {
     checkedProps.defaultChecked = defaultToggled;
   }
+  const ariaLabel = labelText || other['aria-label'] || other.ariaLabel || null;
 
   return (
     <div className={wrapperClasses}>
@@ -66,9 +66,9 @@ const ToggleSmall = ({
       <label
         className={`${prefix}--toggle-input__label`}
         htmlFor={id}
-        aria-label={labelText ? null : ariaLabel || other['aria-label']}>
+        aria-label={ariaLabel}>
         {labelText}
-        <span class={`${prefix}--toggle__switch`}>
+        <span className={`${prefix}--toggle__switch`}>
           <svg
             className={`${prefix}--toggle__check`}
             width="6px"
@@ -134,6 +134,8 @@ ToggleSmall.propTypes = {
 ToggleSmall.defaultProps = {
   defaultToggled: false,
   onToggle: () => {},
+  labelA: 'Off',
+  labelB: 'On',
 };
 
 export default ToggleSmall;
