@@ -34,7 +34,7 @@ const TableToolbarSearch = ({
   expanded: expandedProp,
   defaultExpanded,
   onExpand,
-  persistant,
+  persistent,
   id = `data-table-search-${getInstanceId()}`,
   ...rest
 }) => {
@@ -55,8 +55,10 @@ const TableToolbarSearch = ({
     [searchContainerClass]: searchContainerClass,
     [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
-    [`${prefix}--toolbar-search-container-expandable`]: !persistant,
-    [`${prefix}--toolbar-search-container-persistant`]: persistant,
+    [`${prefix}--toolbar-search-container-expandable`]:
+      !persistent || !rest.persistant,
+    [`${prefix}--toolbar-search-container-persistent`]:
+      persistent || rest.persistent,
   });
 
   const searchClasses = cx({
@@ -65,7 +67,7 @@ const TableToolbarSearch = ({
   });
 
   const handleExpand = (event, value = !expanded) => {
-    if (!controlled && !persistant) {
+    if (!controlled && (!persistent || !rest.persistant)) {
       setExpandedState(value);
     }
     if (onExpand) {
@@ -147,12 +149,12 @@ TableToolbarSearch.propTypes = {
   /**
    * Whether the search should be allowed to expand
    */
-  persistant: PropTypes.bool,
+  persistent: PropTypes.bool,
 };
 
 TableToolbarSearch.defaultProps = {
   translateWithId,
-  persistant: false,
+  persistent: false,
 };
 
 export default TableToolbarSearch;
