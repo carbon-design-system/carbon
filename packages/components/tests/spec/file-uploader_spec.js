@@ -56,6 +56,9 @@ describe('File Uploader', function() {
         selectorInput: 'input[type="file"].bx--file-input',
         selectorContainer: '[data-file-container]',
         selectorCloseButton: '.bx--file-close',
+        selectorSelectedFile: '.bx--file__selected-file',
+        selectorSelectedFileInvalidWrapper:
+          '.bx--file__selected-file--invalid__wrapper',
         selectorDropContainer: '[data-file-drop-container]',
         selectorOtherDropContainers: '[data-drop-container]',
         classLoading: 'bx--loading bx--loading--small',
@@ -67,7 +70,6 @@ describe('File Uploader', function() {
         classFileClose: 'bx--file-close',
         classFileComplete: 'bx--file-complete',
         classSelectedFile: 'bx--file__selected-file',
-        classSelectedFileInvalid: 'bx--file__selected-file--invalid',
         classStateContainer: 'bx--file__state-container',
         classDragOver: 'bx--file__drop-container--drag-over',
         eventBeforeDeleteFilenameFileuploader:
@@ -142,7 +144,9 @@ describe('File Uploader', function() {
       const div = document.createElement('div');
       div.innerHTML = uploadHTML;
       document.body.appendChild(div);
-      const uploadElement = document.querySelector('[data-loading]');
+      const uploadElement = document.querySelector(
+        '[data-inline-loading-spinner]'
+      );
 
       expect(uploadElement.classList.contains('bx--loading')).toBe(true);
 
@@ -359,6 +363,129 @@ describe('File Uploader', function() {
       );
       expect(instance._handleStateChange).toHaveBeenCalled();
       document.body.removeChild(div);
+    });
+
+    afterEach(function() {
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_handleDragDrop', function() {
+    let instance;
+    let element;
+    let wrapper;
+    let dropContainer;
+
+    beforeEach(function() {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-file]');
+      instance = new FileUploader(element);
+      dropContainer = element.querySelector(
+        instance.options.selectorDropContainer
+      );
+    });
+
+    it('should be called', function() {
+      spyOn(instance, '_handleDragDrop');
+      instance._handleDragDrop(new CustomEvent('change', { bubbles: true }));
+      expect(instance._handleDragDrop).toHaveBeenCalled();
+    });
+
+    it('should handle dragover event', function() {
+      const dragover = new CustomEvent('dragover', {
+        bubbles: true,
+      });
+      Object.defineProperty(dragover, 'target', {
+        writable: false,
+        value: dropContainer,
+      });
+      Object.defineProperty(dragover, 'dataTransfer', {
+        writable: false,
+        value: { types: ['Files'] },
+      });
+      document.dispatchEvent(dragover);
+      expect(
+        instance.dropContainer.classList.contains(
+          instance.options.classDragOver
+        )
+      ).toBe(true);
+    });
+
+    it('should handle dragleave event', function() {
+      const dragleave = new CustomEvent('dragleave', {
+        bubbles: true,
+      });
+      Object.defineProperty(dragleave, 'target', {
+        writable: false,
+        value: dropContainer,
+      });
+      Object.defineProperty(dragleave, 'dataTransfer', {
+        writable: false,
+        value: { types: ['Files'] },
+      });
+      document.dispatchEvent(dragleave);
+      expect(
+        instance.dropContainer.classList.contains(
+          instance.options.classDragOver
+        )
+      ).toBe(false);
+    });
+
+    it('should handle drop event', function() {
+      spyOn(instance, '_displayFilenames');
+      const drop = new CustomEvent('drop', {
+        bubbles: true,
+      });
+      Object.defineProperty(drop, 'target', {
+        writable: false,
+        value: dropContainer,
+      });
+      Object.defineProperty(drop, 'dataTransfer', {
+        writable: false,
+        value: { types: ['Files'] },
+      });
+      document.dispatchEvent(drop);
+      expect(instance._displayFilenames).toHaveBeenCalled();
+      expect(
+        instance.dropContainer.classList.contains(
+          instance.options.classDragOver
+        )
+      ).toBe(false);
+    });
+
+    it('should ignore events from other file uploaders', function() {
+      const dragover = new CustomEvent('dragover', {
+        bubbles: true,
+      });
+      Object.defineProperty(dragover, 'target', {
+        writable: false,
+        value: document,
+      });
+      Object.defineProperty(dragover, 'dataTransfer', {
+        writable: false,
+        value: { types: ['Files'] },
+      });
+      const dragleave = new CustomEvent('dragleave', {
+        bubbles: true,
+      });
+      Object.defineProperty(dragleave, 'target', {
+        writable: false,
+        value: document,
+      });
+      Object.defineProperty(dragleave, 'dataTransfer', {
+        writable: false,
+        value: { types: ['Files'] },
+      });
+      document.dispatchEvent(dragover);
+      document.dispatchEvent(dragleave);
+      expect(
+        instance.dropContainer.classList.contains(
+          instance.options.classDragOver
+        )
+      ).toBe(false);
     });
 
     afterEach(function() {
