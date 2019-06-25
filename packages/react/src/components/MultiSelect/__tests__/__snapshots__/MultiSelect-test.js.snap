@@ -4,6 +4,7 @@ exports[`MultiSelect should render 1`] = `
 <MultiSelect
   compareItems={[Function]}
   disabled={false}
+  id="test-multiselect"
   initialSelectedItems={Array []}
   itemToString={[Function]}
   items={
@@ -78,6 +79,7 @@ exports[`MultiSelect should render 1`] = `
         <ListBox
           className="bx--multi-select"
           disabled={false}
+          id="test-multiselect"
           innerRef={[Function]}
           isOpen={false}
           light={false}
@@ -85,6 +87,7 @@ exports[`MultiSelect should render 1`] = `
         >
           <div
             className="bx--multi-select bx--list-box"
+            id="test-multiselect"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="listbox"
@@ -96,6 +99,7 @@ exports[`MultiSelect should render 1`] = `
               aria-label="open menu"
               data-toggle={true}
               disabled={false}
+              id="test-multiselect"
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
@@ -104,11 +108,11 @@ exports[`MultiSelect should render 1`] = `
               type="button"
             >
               <div
-                aria-controls="undefined__menu"
+                aria-controls={null}
                 aria-expanded={false}
                 aria-haspopup={true}
                 aria-label="open menu"
-                aria-owns="undefined__menu"
+                aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
                 disabled={false}
@@ -130,7 +134,6 @@ exports[`MultiSelect should render 1`] = `
                 >
                   <div
                     className="bx--list-box__menu-icon"
-                    role="button"
                   >
                     <ForwardRef(ChevronDown16)
                       aria-label="Open menu"

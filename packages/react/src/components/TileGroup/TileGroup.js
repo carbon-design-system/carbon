@@ -81,7 +81,7 @@ export default class TileGroup extends React.Component {
     const children = childrenArray.map(tileRadio => {
       const { value, ...other } = tileRadio.props;
       /* istanbul ignore if */
-      if (tileRadio.props.hasOwnProperty('checked')) {
+      if (typeof tileRadio.props.checked !== 'undefined') {
         warning(
           false,
           `Instead of using the checked property on the RadioTile, set

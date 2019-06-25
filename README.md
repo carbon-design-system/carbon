@@ -72,7 +72,7 @@ we support!
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
-[Developer Guide](./github/developing.md)! 👀
+[Developer Guide](./docs/developing.md)! 👀
 
 ## 📝 License
 
