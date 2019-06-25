@@ -390,16 +390,12 @@
     display: block;
     visibility: hidden;
     max-height: 0;
-    transition: $transition--expansion max-height $carbon--ease-out,
-      $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     + .#{$prefix}--side-nav__menu[role='menu'] {
     max-height: rem(1500px);
     visibility: inherit;
-    transition: $transition--expansion max-height $carbon--ease-in,
-      $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__menu[role='menu']

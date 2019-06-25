@@ -10455,7 +10455,8 @@ Data table core styles
   }
 
   .#{$prefix}--data-table tbody tr,
-  .#{$prefix}--data-table tbody tr td {
+  .#{$prefix}--data-table tbody tr td,
+  .#{$prefix}--data-table tbody tr th {
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
@@ -10463,7 +10464,8 @@ Data table core styles
     background: $hover-field;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td {
+  .#{$prefix}--data-table tbody tr:hover td,
+  .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
     background: $hover-field;
     border-bottom: 1px solid $hover-field;
@@ -10498,13 +10500,18 @@ Data table core styles
     text-align: left;
   }
 
-  .#{$prefix}--data-table td {
+  .#{$prefix}--data-table td,
+  .#{$prefix}--data-table tbody th {
     background: $ui-01;
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
     padding: rem(14px) $spacing-04;
     padding-bottom: rem(13px);
+
+    & + td:first-of-type {
+      padding-left: $spacing-04;
+    }
   }
 
   @supports (-moz-appearance: none) {
@@ -19829,16 +19836,12 @@ UI shell side nav
     display: block;
     visibility: hidden;
     max-height: 0;
-    transition: $transition--expansion max-height $carbon--ease-out, $transition--expansion
-        visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     + .#{$prefix}--side-nav__menu[role='menu'] {
     max-height: rem(1500px);
     visibility: inherit;
-    transition: $transition--expansion max-height $carbon--ease-in, $transition--expansion
-        visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__menu[role='menu']

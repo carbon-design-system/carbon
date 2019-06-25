@@ -20,9 +20,15 @@
   },
   "dependencies": {
     "@carbon/cli-reporter": "10.2.0",
+    "@octokit/plugin-retry": "^2.2.0",
+    "@octokit/plugin-throttling": "^2.6.0",
+    "@octokit/rest": "^16.28.1",
+    "chalk": "^2.4.2",
     "child-process-promise": "^2.2.1",
     "fs-extra": "^8.0.1",
+    "inquirer": "^6.4.1",
     "prettier": "^1.18.2",
+    "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
     "yargs": "^13.2.4"
   }

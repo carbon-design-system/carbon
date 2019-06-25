@@ -95,11 +95,11 @@ exports[`Dropdown should render 1`] = `
             type="button"
           >
             <div
-              aria-controls="test-dropdown__menu"
+              aria-controls={null}
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
-              aria-owns="test-dropdown__menu"
+              aria-owns={null}
               className="bx--list-box__field"
               data-toggle={true}
               disabled={false}
@@ -122,7 +122,6 @@ exports[`Dropdown should render 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon"
-                  role="button"
                 >
                   <ForwardRef(ChevronDown16)
                     aria-label="Open menu"
@@ -295,7 +294,6 @@ exports[`Dropdown should render custom item components 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
-                  role="button"
                 >
                   <ForwardRef(ChevronDown16)
                     aria-label="Close menu"
@@ -625,7 +623,6 @@ exports[`Dropdown should render with strings as items 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
-                  role="button"
                 >
                   <ForwardRef(ChevronDown16)
                     aria-label="Close menu"
