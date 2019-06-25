@@ -80,7 +80,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "@carbon/colors": "^10.3.0",
+    "@carbon/colors": "^10.2.0",
     "@carbon/elements": "^10.3.1",
     "@carbon/icons-handlebars": "10.3.0",
     "@carbon/icons-react": "^10.3.0",
