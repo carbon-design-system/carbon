@@ -13072,8 +13072,16 @@ List box styles
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: inherit;
     color: $disabled-02;
     text-decoration: none;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__option {
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:hover {
@@ -13414,6 +13422,7 @@ List box styles
     background-color: $hover-ui;
     color: $text-01;
     border-color: transparent;
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -13432,6 +13441,7 @@ List box styles
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
+    font-weight: bold;
     color: $text-01;
   }
 
