@@ -11,7 +11,6 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
     className="bx--tooltip--definition custom-class"
   >
     <button
-      aria-describedby="definition-tooltip-2"
       aria-label="tooltip text"
       className="bx--tooltip__trigger bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
     >
@@ -32,7 +31,6 @@ exports[`TooltipDefinition should render 1`] = `
     className="bx--tooltip--definition custom-class"
   >
     <button
-      aria-describedby="definition-tooltip-1"
       aria-label="tooltip text"
       className="bx--tooltip__trigger bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-start"
     >
