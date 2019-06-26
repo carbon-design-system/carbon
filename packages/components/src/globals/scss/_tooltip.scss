@@ -35,7 +35,7 @@
   // ::after - legacy Tooltip content (deprecated)
   // .#{$prefix}--assistive-text - WCAG 2.1 compliant tooltip content
   &::before,
-  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &::after,
   .#{$prefix}--assistive-text {
     @include type-style('body-short-01');
     position: absolute;
@@ -46,9 +46,14 @@
     pointer-events: none;
   }
 
-  &:not(.#{$prefix}--tooltip--a11y)::before,
-  &:not(.#{$prefix}--tooltip--a11y)::after {
+  &::before,
+  &::after {
     transition: opacity $duration--fast-01 motion(standard, productive);
+  }
+
+  &.#{$prefix}--tooltip--a11y::before,
+  &.#{$prefix}--tooltip--a11y::after {
+    transition: none;
   }
 
   // caret
@@ -71,7 +76,7 @@
 
   // content box
   // @todo Simplify CSS selectors on next major release
-  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &::after,
   &:hover .#{$prefix}--assistive-text,
   &:focus .#{$prefix}--assistive-text {
     @include layer('overlay');
@@ -92,14 +97,18 @@
     background-color: $inverse-02;
   }
 
-  &:not(.#{$prefix}--tooltip--a11y)::after {
+  &::after {
     content: attr(aria-label);
+  }
+
+  &.#{$prefix}--tooltip--a11y::after {
+    content: none;
   }
 
   &:hover,
   &:focus {
     &::before,
-    &:not(.#{$prefix}--tooltip--a11y)::after {
+    &::after {
       opacity: 1;
     }
 
@@ -151,7 +160,7 @@
 
   // @todo Simplify CSS selectors on next major release
   &::before,
-  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &::after,
   &:hover .#{$prefix}--assistive-text,
   &:focus .#{$prefix}--assistive-text {
     @if ($position == 'top') {
@@ -197,7 +206,7 @@
 
   // alignment options available only for top and bottom tooltip position
   // @todo Simplify CSS selectors on next major release
-  &:not(.#{$prefix}--tooltip--a11y)::after,
+  &::after,
   &:hover .#{$prefix}--assistive-text,
   &:focus .#{$prefix}--assistive-text {
     @if ($position == 'top') {
