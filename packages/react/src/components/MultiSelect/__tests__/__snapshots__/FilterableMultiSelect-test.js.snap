@@ -6,6 +6,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
   compareItems={[Function]}
   disabled={false}
   filterItems={[Function]}
+  id="test-filterable-multiselect"
   initialSelectedItems={Array []}
   itemToString={[Function]}
   items={
@@ -98,6 +99,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
               aria-label="open menu"
               data-toggle={true}
               disabled={false}
+              id="test-filterable-multiselect"
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
@@ -105,11 +107,11 @@ exports[`MultiSelect.Filterable should render 1`] = `
               type="button"
             >
               <div
-                aria-controls="undefined__menu"
+                aria-controls={null}
                 aria-expanded={false}
                 aria-haspopup={true}
                 aria-label="open menu"
-                aria-owns="undefined__menu"
+                aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
                 disabled={false}
@@ -123,12 +125,12 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 <input
                   aria-activedescendant={null}
                   aria-autocomplete="list"
-                  aria-controls="undefined__menu"
+                  aria-controls="test-filterable-multiselect__menu"
                   aria-expanded={false}
                   autoComplete="off"
                   className="bx--text-input"
                   disabled={false}
-                  id="downshift-0-input"
+                  id="test-filterable-multiselect"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onKeyDown={[Function]}
@@ -142,7 +144,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 >
                   <div
                     className="bx--list-box__menu-icon"
-                    role="button"
                   >
                     <ForwardRef(ChevronDown16)
                       aria-label="Open menu"
