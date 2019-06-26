@@ -57,6 +57,7 @@ export default function FileUploaderDropContainer(props) {
         evt.stopPropagation();
         evt.preventDefault();
         setActive(false);
+        evt.dataTransfer.dropEffect = 'move';
       }}
       onDrop={evt => {
         evt.stopPropagation();
