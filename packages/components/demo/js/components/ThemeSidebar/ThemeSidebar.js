@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React, { Component } from 'react';
 import { Button, Dropdown, DropdownItem } from 'carbon-components-react';
-import Close20 from '@carbon/icons-react/es/close/20';
+import { Close20 } from '@carbon/icons-react';
 import { themes } from '@carbon/themes';
 import generateThemeContent from './generate-theme-content';
 import ThemeCategory from './ThemeCategory';

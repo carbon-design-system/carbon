@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import AppSwitcher20 from '@carbon/icons-react/es/app-switcher/20';
+import { AppSwitcher20 } from '@carbon/icons-react';
 import { ToggleSmall } from 'carbon-components-react';
 import eventMatches from '../../../src/globals/js/misc/event-matches';
 import on from '../../../src/globals/js/misc/on';
