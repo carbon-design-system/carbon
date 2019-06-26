@@ -124,9 +124,11 @@ export default class Tabs extends React.Component {
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
   handleTabClick = onSelectionChange => {
-    return (index, label, evt) => {
+    return (index, evt, disabled) => {
       evt.preventDefault();
-      this.selectTabAt(index, onSelectionChange);
+      if (!disabled) {
+        this.selectTabAt(index, onSelectionChange);
+      }
       this.setState({
         dropdownHidden: true,
       });
@@ -150,7 +152,6 @@ export default class Tabs extends React.Component {
     return index => {
       const tabCount = React.Children.count(this.props.children) - 1;
       let tabIndex = index;
-
       if (index < 0) {
         tabIndex = tabCount;
       } else if (index > tabCount) {

@@ -148,7 +148,7 @@ export default class Tab extends React.Component {
       className: `${prefix}--tabs__nav-link`,
       href,
       role: 'tab',
-      tabIndex,
+      tabIndex: !disabled ? tabIndex : -1,
       ['aria-selected']: selected,
       ref: e => {
         this.tabAnchor = e;
@@ -161,7 +161,7 @@ export default class Tab extends React.Component {
         tabIndex={-1}
         className={classes}
         onClick={evt => {
-          handleTabClick(index, label, evt);
+          handleTabClick(index, evt, disabled);
           onClick(evt);
         }}
         onKeyDown={evt => {
