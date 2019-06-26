@@ -184,11 +184,17 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $interactive-01;
+    fill: $interactive-04;
     cursor: pointer;
 
     &:focus {
       @include focus-outline('border');
+    }
+
+    // for checkmark contrast
+    [data-icon-path='inner-path'] {
+      opacity: 1;
+      fill: $ibm-color__white-0;
     }
   }
 
