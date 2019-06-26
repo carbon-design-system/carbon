@@ -8,7 +8,7 @@
 import { white, g10, g90, g100, formatTokenName } from '@carbon/themes';
 import color from 'color-string';
 import { Style } from 'sketch/dom';
-import { syncSharedStyle } from '../tools/sharedStyles';
+import { syncColorStyle } from '../tools/sharedStyles';
 
 /**
  * Sync theme color shared styles to the given document and return the result
@@ -23,35 +23,6 @@ export function syncThemeColorStyles(document) {
     'Gray 100 theme': g100,
   };
 
-  const { sharedLayerStyles } = document;
-  const existingStyles = sharedLayerStyles.filter(({ name, style }) => {
-    const [category, token] = name.split('/').map(value => value.trim());
-
-    if (!themes[category]) {
-      return false;
-    }
-
-    const expected = color.get.rgb(themes[category][formatSymbolName(token)]);
-    const actual = color.get.rgb(style.fills[0].color);
-
-    for (let i = 0; i < expected.length; i++) {
-      if (actual[i] !== expected[i]) {
-        return false;
-      }
-    }
-
-    return true;
-  });
-  const expectedSharedStyles = Object.keys(themes).reduce((acc, theme) => {
-    const count = Object.keys(themes[theme]).length;
-    return acc + count;
-  }, 0);
-
-  // Exit early if everything is the same
-  if (existingStyles.length === expectedSharedStyles) {
-    return existingStyles;
-  }
-
   const sharedStyles = Object.keys(themes).flatMap(theme => {
     return Object.keys(themes[theme]).map(token => {
       const name = `${theme} / ${formatTokenName(token)}`;
@@ -60,24 +31,6 @@ export function syncThemeColorStyles(document) {
   });
 
   return sharedStyles;
-}
-
-/**
- * Sync the given color value as a shared style for the document
- * @param {Document} document
- * @param {string} name
- * @param {string} value
- * @returns {SharedStyle}
- */
-function syncColorStyle(document, name, value) {
-  return syncSharedStyle(document, name, {
-    fills: [
-      {
-        color: value,
-        fillType: Style.FillType.Color,
-      },
-    ],
-  });
 }
 
 const keywords = ['ui'];
