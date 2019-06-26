@@ -50,7 +50,7 @@ function ExampleDropContainerApp(props) {
             file.uuid === fileToUpload.uuid ? updatedFile : file
           )
         );
-      }, 3000);
+      }, 1000);
     } catch (error) {
       const updatedFile = {
         ...fileToUpload,
