@@ -136,6 +136,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
+      position: absolute;
       right: 0.3rem;
       top: 0.625rem;
     }
