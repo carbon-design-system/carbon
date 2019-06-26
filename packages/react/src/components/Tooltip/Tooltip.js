@@ -311,7 +311,7 @@ class Tooltip extends Component {
     }
   };
 
-  getAccessibleLabel = (ariaLabel, triggerText, triggerId) => {
+  getAccessibleLabel = (ariaLabel, triggerText, triggerId, iconDescription) => {
     // if the user provides and aria-label go with that
     if (ariaLabel) {
       return { 'aria-label': ariaLabel };
@@ -381,7 +381,12 @@ class Tooltip extends Component {
       onBlur: this.handleMouse,
       'aria-haspopup': 'true',
       'aria-expanded': open,
-      ...this.getAccessibleLabel(ariaLabel, triggerText, triggerId),
+      ...this.getAccessibleLabel(
+        ariaLabel,
+        triggerText,
+        triggerId,
+        iconDescription
+      ),
     };
 
     return (
