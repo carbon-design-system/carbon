@@ -151,7 +151,7 @@
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
     @include type-style('caption-01');
     display: block;
-    max-height: none;
+    max-height: rem(200px);
     color: $support-01;
     font-weight: 400;
     padding: $carbon--spacing-03 $carbon--spacing-05;
