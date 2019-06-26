@@ -27,7 +27,7 @@ exports[`ListBoxSelection should render 1`] = `
   }
 >
   <div
-    className="bx--tag--filter bx--list-box__selection"
+    className="bx--list-box__selection"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"
@@ -98,7 +98,7 @@ exports[`ListBoxSelection should render 2`] = `
   }
 >
   <div
-    className="bx--tag--filter bx--list-box__selection bx--list-box__selection--multi"
+    className="bx--list-box__selection bx--tag--filter bx--list-box__selection--multi"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"

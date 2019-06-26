@@ -13244,10 +13244,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__selection {
-    right: rem(57px); // 33px + 1.5rem when invalid
-  }
-
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
   }
