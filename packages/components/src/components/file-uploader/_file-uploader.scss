@@ -137,10 +137,6 @@
     outline-width: 1px;
   }
 
-  .#{$prefix}--file__selected-file--invalid .#{$prefix}--file-filename {
-    color: $disabled-02;
-  }
-
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     border-top: 1px solid $ui-03;
     padding-top: rem(8px);
