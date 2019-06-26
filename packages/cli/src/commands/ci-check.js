@@ -43,12 +43,9 @@ async function check(args, env) {
   }
 }
 
-function register(cli) {
-  cli.command('ci-check', 'run CI checks', {}, workspace(check));
-  return cli;
-}
-
 module.exports = {
-  check,
-  register,
+  command: 'ci-check',
+  desc: 'run CI checks',
+  builder: {},
+  handler: workspace(check),
 };
