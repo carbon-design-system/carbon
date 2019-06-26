@@ -62,30 +62,9 @@ export default class ContentSwitcher extends React.Component {
         };
   }
 
-  getChildren(children) {
-    const switchRefs =
-      React.Children.map(children, (child, index) => el => {
-        // Sets DOM ref of `<Switch>` to the corresponding index in `this._switchRefs`
-        this._switchRefs[index] = el;
-      }) || [];
-
-    function getSwitchRefs(index) {
-      return switchRefs[index];
-    }
-
-    return React.Children.map(children, (child, index) =>
-      React.cloneElement(child, {
-        index,
-        onClick: composeEventHandlers([
-          this.handleChildChange,
-          child.props.onClick,
-        ]),
-        onKeyDown: this.handleChildChange,
-        selected: index === this.state.selectedIndex,
-        ref: getSwitchRefs(index),
-      })
-    );
-  }
+  handleItemRef = index => ref => {
+    this._switchRefs[index] = ref;
+  };
 
   handleChildChange = data => {
     // the currently selected child index
@@ -132,7 +111,18 @@ export default class ContentSwitcher extends React.Component {
 
     return (
       <div {...other} className={classes}>
-        {this.getChildren(children)}
+        {React.Children.map(children, (child, index) =>
+          React.cloneElement(child, {
+            index,
+            onClick: composeEventHandlers([
+              this.handleChildChange,
+              child.props.onClick,
+            ]),
+            onKeyDown: this.handleChildChange,
+            selected: index === this.state.selectedIndex,
+            ref: this.handleItemRef(index),
+          })
+        )}
       </div>
     );
   }
