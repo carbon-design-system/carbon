@@ -94,6 +94,7 @@ export default class ContentSwitcher extends React.Component {
         this.setState({ selectedIndex: index }, () => {
           const switchRef = this._switchRefs[index];
           switchRef && switchRef.focus();
+          this.props.onChange(data);
         });
       }
     }
