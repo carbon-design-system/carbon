@@ -14803,6 +14803,10 @@ Overflow menu styles
     .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
     background-color: $support-01;
+
+    svg {
+      fill: $text-04;
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled:hover {
