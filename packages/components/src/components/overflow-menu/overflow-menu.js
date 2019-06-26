@@ -114,6 +114,11 @@ class OverflowMenu extends mixin(
    */
   constructor(element, options) {
     super(element, options);
+    if (this.element.getAttribute('role') !== 'button') {
+      // Would prefer to use the aria-controls with a specific ID but we
+      // don't have the menuOptions list at this point to pull the ID from
+      this.trigger = this.element.querySelector('button[aria-haspopup]');
+    }
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
         this._handleDocumentClick(event);
@@ -141,10 +146,12 @@ class OverflowMenu extends mixin(
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
+    // @todo Can reference `trigger` only once non-compliant code is deprecated
+    const expandedElement = this.trigger ? 'trigger' : 'element';
     if (state === 'hidden') {
-      this.element.setAttribute('aria-expanded', 'false');
+      this[expandedElement].setAttribute('aria-expanded', 'false');
     } else {
-      this.element.setAttribute('aria-expanded', 'true');
+      this[expandedElement].setAttribute('aria-expanded', 'true');
     }
 
     if (!this.optionMenu) {

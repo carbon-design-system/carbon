@@ -5,6 +5,76 @@
   LICENSE file in the root directory of this source tree.
 -->
 
+{{!-- Passes W3C HTML validation--}}
+<div data-overflow-menu class="{{@root.prefix}}--overflow-menu" aria-owns="{{idSuffix.default}}">
+  {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure--}}
+  <button aria-label="Overflow" aria-haspopup="true" aria-expanded="false" id="{{idSuffix.default}}-trigger" aria-controls="{{idSuffix.default}}">
+    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
+  </button>
+  <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-labelledby="{{idSuffix.default}}-trigger"
+    data-floating-menu-direction="{{direction}}" id="{{idSuffix.default}}">
+    {{#each items}}
+    <li
+      class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}">
+      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}"
+        {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}} {{#if disabled}} disabled {{/if}}>
+        <span class="{{@root.prefix}}--overflow-menu-options__option-content">
+          {{label}}
+        </span>
+      </button>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div data-overflow-menu class="{{@root.prefix}}--overflow-menu" aria-owns="{{idSuffix.flip}}">
+  {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure --}}
+  <button aria-label="Overflow" aria-haspopup="true" aria-expanded="false"  id="{{idSuffix.flip}}-trigger" aria-controls="{{idSuffix.flip}}">
+    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
+  </button>
+  <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
+    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.flip}}-trigger"  id="{{idSuffix.flip}}">
+    {{#each items}}
+    <li
+      class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}">
+      <button class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}} title="{{title}}"
+        {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus {{/if}} {{#if disabled}} disabled {{/if}}>
+        <span class="{{@root.prefix}}--overflow-menu-options__option-content">
+          {{label}}
+        </span>
+      </button>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div data-overflow-menu class="{{@root.prefix}}--overflow-menu" aria-owns="{{idSuffix.link}}">
+  {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure --}}
+  <button aria-label="Overflow" aria-haspopup="true" aria-expanded="false"  id="{{idSuffix.link}}-trigger" aria-controls="{{idSuffix.link}}">
+    {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
+  </button>
+  <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
+    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.link}}-trigger"  id="{{idSuffix.link}}">
+    {{#each items}}
+    <li
+      class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
+      <a href="https://www.ibm.com" class="{{@root.prefix}}--overflow-menu-options__btn" role="menuitem" {{#if title}}
+        title="{{title}}" {{/if}} {{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}{{#if disabled}}
+        tabindex="-1" aria-disabled="true" {{/if}}>
+        <span class="{{@root.prefix}}--overflow-menu-options__option-content">
+          {{label}}
+        </span>
+      </a>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+
+<br>
+
+
+{{!-- Legacy --}}
 <div data-overflow-menu tabindex="0" aria-label="Overflow" class="{{@root.prefix}}--overflow-menu" role="button"
   aria-haspopup="true" aria-expanded="false">
   {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
