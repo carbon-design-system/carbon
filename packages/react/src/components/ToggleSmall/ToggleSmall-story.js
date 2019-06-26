@@ -14,7 +14,10 @@ import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 
 const toggleProps = () => ({
   className: 'some-class',
-  ariaLabel: text('ARIA label (ariaLabel)', 'Label Name'),
+  labelText: text('Label for toggle button input (labelText)', ''),
+  ['aria-label']: text('ARIA label of the toggle (aria-label)', ''),
+  labelA: text('Label for untoggled state (labelA)', ''),
+  labelB: text('Label for toggled state (labelB)', ''),
   disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),
   onToggle: action('onToggle'),
