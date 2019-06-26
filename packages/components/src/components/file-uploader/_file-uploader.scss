@@ -199,6 +199,7 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    fill: $icon-02;
 
     &:focus {
       @include focus-outline('border');
