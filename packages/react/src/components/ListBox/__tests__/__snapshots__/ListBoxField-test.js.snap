@@ -5,7 +5,71 @@ exports[`ListBoxField should render 1`] = `
   id="test-listbox"
 >
   <div
+    aria-controls={null}
+    aria-haspopup="listbox"
+    aria-owns={null}
+    className="bx--list-box__field"
+    role="combobox"
+    tabIndex={-1}
+  >
+    <ListBoxSelection
+      clearSelection={[MockFunction]}
+      translateWithId={[Function]}
+    >
+      <div
+        className="bx--tag--filter bx--list-box__selection"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex="0"
+        title="Clear selected item"
+      >
+        <ForwardRef(Close16)
+          role="img"
+        >
+          <Icon
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            role="img"
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <svg
+              aria-hidden={true}
+              focusable="false"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              style={
+                Object {
+                  "willChange": "transform",
+                }
+              }
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(Close16)>
+      </div>
+    </ListBoxSelection>
+  </div>
+</ListBoxField>
+`;
+
+exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
+<ListBoxField
+  aria-expanded={true}
+  id="test-listbox"
+>
+  <div
     aria-controls="test-listbox__menu"
+    aria-expanded={true}
     aria-haspopup="listbox"
     aria-owns="test-listbox__menu"
     className="bx--list-box__field"
