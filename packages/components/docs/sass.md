@@ -2493,6 +2493,7 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
 ### ✅carbon--spacing-01 [variable]
@@ -2722,6 +2723,7 @@ $carbon--spacing-08: carbon--mini-units(5);
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--spacing-09 [variable]
 
@@ -4542,6 +4544,7 @@ $text-02: map-get($carbon--theme, 'text-02');
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -17601,28 +17604,6 @@ Toggle styles
     }
   }
 
-  .#{$prefix}--toggle--small
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__appearance {
-    width: rem(32px);
-    height: rem(16px);
-
-    &:before {
-      box-sizing: border-box;
-      height: rem(16px);
-      width: rem(32px);
-      border-radius: 0.9375rem;
-      top: 0;
-    }
-
-    &:after {
-      width: rem(10px);
-      height: rem(10px);
-      top: 3px;
-      left: 3px;
-    }
-  }
-
   .#{$prefix}--toggle__check {
     fill: $ui-03;
     position: absolute;
@@ -17631,13 +17612,6 @@ Toggle styles
     z-index: 1;
     transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
-  }
-
-  .#{$prefix}--toggle--small:checked
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__check {
-    fill: $support-02;
-    transform: scale(1) translateX(16px);
   }
 
   .#{$prefix}--toggle__text--left,
@@ -17650,12 +17624,6 @@ Toggle styles
   .#{$prefix}--toggle__text--left {
     position: absolute;
     left: rem(48px);
-  }
-
-  .#{$prefix}--toggle--small
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__text--left {
-    left: rem(32px);
   }
 
   .#{$prefix}--toggle:checked
@@ -17686,15 +17654,6 @@ Toggle styles
     &:after {
       background-color: $icon-03;
       transform: translateX(24px);
-    }
-  }
-
-  .#{$prefix}--toggle--small:checked
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__appearance {
-    &:after {
-      margin-left: 0px;
-      transform: translateX(17px);
     }
   }
 
@@ -17759,6 +17718,245 @@ Toggle styles
     .#{$prefix}--toggle__check {
     fill: $disabled-02;
   }
+
+  //----------------------------------------------
+  // Small toggle
+  // ---------------------------------------------
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    width: rem(32px);
+    height: rem(16px);
+
+    &:before {
+      box-sizing: border-box;
+      height: rem(16px);
+      width: rem(32px);
+      border-radius: 0.9375rem;
+      top: 0;
+    }
+
+    &:after {
+      width: rem(10px);
+      height: rem(10px);
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $support-02;
+    transform: scale(1) translateX(16px);
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
+    left: rem(32px);
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:after {
+      margin-left: 0px;
+      transform: translateX(17px);
+    }
+  }
+
+  // -----------------------------------------------------
+  // new accessible toggle
+  // TODO: deprecate styles above this line
+  // -----------------------------------------------------
+
+  .#{$prefix}--toggle-input {
+    @include hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--toggle-input__label {
+    @include type-style('label-01');
+    color: $text-02;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--toggle__switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: rem(48px);
+    height: rem(24px);
+    margin: $carbon--spacing-03 0;
+    cursor: pointer;
+
+    // Toggle background oval
+    &::before {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      display: block;
+      width: rem(48px);
+      height: rem(24px);
+      border-radius: rem(15px);
+      content: '';
+      background-color: $ui-04;
+      will-change: box-shadow;
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow $duration--fast-01 motion(exit, productive), background-color
+          $duration--fast-01 motion(exit, productive);
+    }
+
+    // Toggle circle
+    &::after {
+      box-sizing: border-box;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      display: block;
+      width: rem(18px);
+      height: rem(18px);
+      border-radius: 50%;
+      background-color: $ui-03;
+      content: '';
+      transition: transform $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle__text--off,
+  .#{$prefix}--toggle__text--on {
+    position: absolute;
+    margin-left: carbon--mini-units(7);
+    @include type-style('body-short-01');
+    user-select: none;
+  }
+
+  //----------------------------------------------
+  // Checked
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input:checked
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch
+    > .#{$prefix}--toggle__text--off,
+  .#{$prefix}--toggle-input:not(:checked)
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch
+    > .#{$prefix}--toggle__text--on {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toggle-input:checked
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch {
+    &::before {
+      background-color: $support-02;
+    }
+
+    &::after {
+      background-color: $icon-03;
+      transform: translateX(24px);
+    }
+  }
+
+  //----------------------------------------------
+  // Focus and active
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input:focus
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before,
+  .#{$prefix}--toggle-input:active
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    box-shadow: 0 0 0 2px $focus;
+  }
+
+  //----------------------------------------------
+  // Disabled
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toggle-input:disabled
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch {
+    cursor: not-allowed;
+
+    &::before {
+      background-color: $disabled-01;
+    }
+
+    &::after {
+      background-color: $disabled-02;
+    }
+
+    &::before,
+    &::after {
+      cursor: not-allowed;
+      transition: $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
+    color: $disabled;
+  }
+
+  .#{$prefix}--toggle-input:disabled:active
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    box-shadow: none;
+  }
+
+  //----------------------------------------------
+  // Small toggle
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input--small + .#{$prefix}--toggle-input__label {
+    > .#{$prefix}--toggle__switch {
+      width: rem(32px);
+      height: rem(16px);
+
+      &::before {
+        width: rem(32px);
+        height: rem(16px);
+        border-radius: 0.9375rem;
+      }
+
+      &::after {
+        width: rem(10px);
+        height: rem(10px);
+      }
+    }
+
+    .#{$prefix}--toggle__text--off,
+    .#{$prefix}--toggle__text--on {
+      margin-left: $carbon--spacing-08;
+    }
+  }
+
+  .#{$prefix}--toggle-input--small:checked + .#{$prefix}--toggle-input__label {
+    > .#{$prefix}--toggle__switch::after {
+      transform: translateX(17px);
+    }
+
+    .#{$prefix}--toggle__check {
+      fill: $support-02;
+      transform: scale(1) translateX(16px);
+    }
+  }
+
+  .#{$prefix}--toggle-input--small:disabled:checked
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__check {
+    fill: $disabled-02;
+  }
 }
 ```
 
@@ -17766,6 +17964,7 @@ Toggle styles
 
 - **Group**: [toggle](#toggle)
 - **Requires**:
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-04 [variable]](#ui-04-variable)
@@ -17775,6 +17974,8 @@ Toggle styles
   - [focus [variable]](#focus-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
 
 ## toolbar
 

@@ -20,12 +20,13 @@ const ToggleSmall = ({
   onChange,
   onToggle,
   id,
-  ariaLabel,
+  labelText,
+  labelA,
+  labelB,
   ...other
 }) => {
   let input;
-  const wrapperClasses = classNames({
-    [`${prefix}--form-item`]: true,
+  const wrapperClasses = classNames(`${prefix}--form-item`, {
     [className]: className,
   });
 
@@ -36,15 +37,17 @@ const ToggleSmall = ({
   } else {
     checkedProps.defaultChecked = defaultToggled;
   }
+  const ariaLabel = labelText || other['aria-label'] || other.ariaLabel || null;
 
   return (
     <div className={wrapperClasses}>
       <input
         {...other}
         {...checkedProps}
+        aria-label={null}
         type="checkbox"
         id={id}
-        className={`${prefix}--toggle ${prefix}--toggle--small`}
+        className={`${prefix}--toggle-input ${prefix}--toggle-input--small`}
         onChange={evt => {
           onChange && onChange(evt);
           onToggle(input.checked, id, evt);
@@ -52,7 +55,6 @@ const ToggleSmall = ({
         ref={el => {
           input = el;
         }}
-        aria-label={ariaLabel}
         onKeyUp={evt => {
           if (match(evt, keys.ENTER)) {
             input.checked = !input.checked;
@@ -61,18 +63,26 @@ const ToggleSmall = ({
           }
         }}
       />
-
-      <label className={`${prefix}--toggle__label`} htmlFor={id}>
-        <span className={`${prefix}--toggle__appearance`}>
+      <label
+        className={`${prefix}--toggle-input__label`}
+        htmlFor={id}
+        aria-label={ariaLabel}>
+        {labelText}
+        <span className={`${prefix}--toggle__switch`}>
           <svg
             className={`${prefix}--toggle__check`}
             width="6px"
             height="5px"
             viewBox="0 0 6 5">
-            <path d="M2.2403 2.7299L4.9245 0 6 1.1117 2.2384 5 0 2.6863 1.0612 1.511z" />
+            <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
           </svg>
+          <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
+            {labelA}
+          </span>
+          <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
+            {labelB}
+          </span>
         </span>
-        <span className={`${prefix}--assistive-text`}>{ariaLabel}</span>
       </label>
     </div>
   );
@@ -107,12 +117,25 @@ ToggleSmall.propTypes = {
   /**
    * The `aria-label` attribute for the toggle
    */
-  ariaLabel: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
+  ['aria-label']: PropTypes.string.isRequired,
+
+  /**
+   * Specify the label for the "off" position
+   */
+  labelA: PropTypes.string.isRequired,
+
+  /**
+   * Specify the label for the "on" position
+   */
+  labelB: PropTypes.string.isRequired,
 };
 
 ToggleSmall.defaultProps = {
   defaultToggled: false,
   onToggle: () => {},
+  labelA: 'Off',
+  labelB: 'On',
 };
 
 export default ToggleSmall;
