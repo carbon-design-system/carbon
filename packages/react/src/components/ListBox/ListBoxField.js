@@ -24,8 +24,8 @@ const ListBoxField = ({ children, id, ...rest }) => (
     role="combobox"
     aria-haspopup="listbox"
     aria-expanded={rest[`aria-expanded`]}
-    aria-owns={`${id}__menu`}
-    aria-controls={`${id}__menu`}
+    aria-owns={(rest[`aria-expanded`] && `${id}__menu`) || null}
+    aria-controls={(rest[`aria-expanded`] && `${id}__menu`) || null}
     className={`${prefix}--list-box__field`}
     tabIndex={rest.tabIndex || -1}
     {...rest}>
