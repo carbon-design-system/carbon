@@ -41,9 +41,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
   };
 
-  const handleMouseOver = () => {
+  const handleMouseOver = value => {
     if (isRail) {
-      setExpandedState(true);
+      setExpandedState(value);
     }
   };
 
@@ -72,7 +72,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       {...accessibilityLabel}
       onFocus={event => handleToggle(event, true)}
       onBlur={event => handleToggle(event, false)}
-      onMouseOver={() => handleMouseOver()}>
+      onMouseEnter={() => handleMouseOver(true)}
+      onMouseLeave={() => handleMouseOver(false)}>
       {children}
       {isFixedNav ? null : (
         <SideNavFooter
