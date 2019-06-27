@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { createRunner, accordion } from '@carbon/spec';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import Accordion from '../Accordion';
 import AccordionSkeleton from '../Accordion/Accordion.Skeleton';
+import AccordionItem from '../AccordionItem';
 import SkeletonText from '../SkeletonText';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
@@ -15,6 +19,45 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 describe('Accordion', () => {
+  describe.only('spec', () => {
+    const runner = createRunner(accordion, {
+      globals: {
+        describe,
+        beforeEach,
+        afterEach,
+        test,
+      },
+      only: ['accordion.header.interaction.keyboard.enter'],
+      wrapEvent: act,
+    });
+
+    runner.beforeEach(context => {
+      const node = document.createElement('div');
+      document.body.appendChild(node);
+
+      act(() => {
+        ReactDOM.render(
+          <Accordion>
+            {context.children.map(child => (
+              <AccordionItem key={child.header} title={child.header}>
+                {child.panel}
+              </AccordionItem>
+            ))}
+          </Accordion>,
+          node
+        );
+      });
+
+      return node.firstChild;
+    });
+
+    runner.afterEach(node => {
+      node.parentNode.removeChild(node);
+    });
+
+    runner.test();
+  });
+
   describe('Renders as expected', () => {
     const wrapper = shallow(
       <Accordion className="extra-class">

@@ -1,0 +1,37 @@
+{
+  "name": "@carbon/spec",
+  "version": "10.0.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/spec",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && rollup -c",
+    "clean": "rimraf es lib umd",
+    "watch": "yarn clean && rollup -c -w"
+  },
+  "dependencies": {
+    "htm": "^2.1.1",
+    "pretty-format": "^24.8.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.5",
+    "@carbon/bundler": "10.2.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.16.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.1.0"
+  }
+}
