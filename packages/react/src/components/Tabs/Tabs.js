@@ -123,11 +123,10 @@ export default class Tabs extends React.Component {
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
   handleTabClick = onSelectionChange => {
-    return (index, evt, disabled) => {
+    return (index, evt) => {
       evt.preventDefault();
-      if (!disabled) {
-        this.selectTabAt(index, onSelectionChange);
-      }
+
+      this.selectTabAt(index, onSelectionChange);
       this.setState({
         dropdownHidden: true,
       });
@@ -135,15 +134,10 @@ export default class Tabs extends React.Component {
   };
 
   handleTabKeyDown = onSelectionChange => {
-    return (index, evt, disabled) => {
+    return (index, evt) => {
       const key = evt.key || evt.which;
 
-      if (
-        key === 'Enter' ||
-        key === 13 ||
-        key === ' ' ||
-        (key === 32 && !disabled)
-      ) {
+      if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
         this.selectTabAt(index, onSelectionChange);
         this.setState({
           dropdownHidden: true,

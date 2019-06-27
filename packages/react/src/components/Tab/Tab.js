@@ -161,12 +161,18 @@ export default class Tab extends React.Component {
         tabIndex={-1}
         className={classes}
         onClick={evt => {
-          handleTabClick(index, evt, disabled);
+          if (disabled) {
+            return;
+          }
+          handleTabClick(index, evt);
           onClick(evt);
         }}
         onKeyDown={evt => {
+          if (disabled) {
+            return;
+          }
           this.setTabFocus(evt);
-          handleTabKeyDown(index, evt, disabled);
+          handleTabKeyDown(index, evt);
           onKeyDown(evt);
         }}
         role="presentation"
