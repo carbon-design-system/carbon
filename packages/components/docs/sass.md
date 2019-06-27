@@ -18417,6 +18417,11 @@ Tooltip styles
     display: inline-flex;
   }
 
+  // default buttons in Safari are adding a small margin, affecting tooltip placement
+  .#{$prefix}--tooltip--definition button.#{$prefix}--tooltip--a11y {
+    margin: 0;
+  }
+
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
