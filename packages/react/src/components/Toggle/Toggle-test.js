@@ -31,9 +31,9 @@ describe('Toggle', () => {
 
     it('Can set defaultToggled state', () => {
       wrapper.setProps({ defaultToggled: true });
-      expect(wrapper.find(`.${prefix}--toggle`).props().defaultChecked).toEqual(
-        true
-      );
+      expect(
+        wrapper.find(`.${prefix}--toggle-input`).props().defaultChecked
+      ).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -43,19 +43,21 @@ describe('Toggle', () => {
 
     it('Can be disabled', () => {
       wrapper.setProps({ disabled: true });
-      expect(wrapper.find(`.${prefix}--toggle`).props().disabled).toEqual(true);
+      expect(wrapper.find(`.${prefix}--toggle-input`).props().disabled).toEqual(
+        true
+      );
     });
 
     it('Can have a labelA', () => {
       wrapper.setProps({ labelA: 'labelA-test' });
-      expect(wrapper.find(`.${prefix}--toggle__text--left`).text()).toEqual(
+      expect(wrapper.find(`.${prefix}--toggle__text--off`).text()).toEqual(
         'labelA-test'
       );
     });
 
     it('Can have a labelB', () => {
       wrapper.setProps({ labelB: 'labelB-test' });
-      expect(wrapper.find(`.${prefix}--toggle__text--right`).text()).toEqual(
+      expect(wrapper.find(`.${prefix}--toggle__text--on`).text()).toEqual(
         'labelB-test'
       );
     });
