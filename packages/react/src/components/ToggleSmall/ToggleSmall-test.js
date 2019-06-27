@@ -14,7 +14,14 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 describe('ToggleSmall', () => {
   describe('Renders as expected', () => {
-    const wrapper = mount(<ToggleSmall id="toggle-1" ariaLabel="test label" />);
+    const wrapper = mount(
+      <ToggleSmall
+        id="toggle-1"
+        aria-label="test label"
+        labelA="Off"
+        labelB="On"
+      />
+    );
 
     const input = wrapper.find('input');
 
@@ -31,9 +38,9 @@ describe('ToggleSmall', () => {
 
     it('Can set defaultToggled state', () => {
       wrapper.setProps({ defaultToggled: true });
-      expect(wrapper.find(`.${prefix}--toggle`).props().defaultChecked).toEqual(
-        true
-      );
+      expect(
+        wrapper.find(`.${prefix}--toggle-input`).props().defaultChecked
+      ).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -43,13 +50,15 @@ describe('ToggleSmall', () => {
 
     it('Can be disabled', () => {
       wrapper.setProps({ disabled: true });
-      expect(wrapper.find(`.${prefix}--toggle`).props().disabled).toEqual(true);
+      expect(wrapper.find(`.${prefix}--toggle-input`).props().disabled).toEqual(
+        true
+      );
     });
   });
 
   it('toggled prop sets checked prop on input', () => {
     const wrapper = mount(
-      <ToggleSmall id="test" ariaLabel="test label" toggled />
+      <ToggleSmall id="test" aria-label="test label" toggled />
     );
 
     const input = () => wrapper.find('input');
@@ -64,7 +73,7 @@ describe('ToggleSmall', () => {
       const onChange = jest.fn();
       const id = 'test-input';
       const wrapper = mount(
-        <ToggleSmall ariaLabel="test label" id={id} onChange={onChange} />
+        <ToggleSmall aria-label="test label" id={id} onChange={onChange} />
       );
 
       const input = wrapper.find('input');
@@ -84,7 +93,7 @@ describe('ToggleSmall', () => {
       const onToggle = jest.fn();
       const id = 'test-input';
       const wrapper = mount(
-        <ToggleSmall ariaLabel="test label" id={id} onToggle={onToggle} />
+        <ToggleSmall aria-label="test label" id={id} onToggle={onToggle} />
       );
 
       const input = wrapper.find('input');

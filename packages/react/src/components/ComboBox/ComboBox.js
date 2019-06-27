@@ -305,11 +305,6 @@ export default class ComboBox extends React.Component {
                 disabled,
                 onClick: this.onToggleClick(isOpen),
               })}>
-              {invalid && (
-                <WarningFilled16
-                  className={`${prefix}--list-box__invalid-icon`}
-                />
-              )}
               <input
                 className={`${prefix}--text-input`}
                 aria-label={ariaLabel}
@@ -324,6 +319,11 @@ export default class ComboBox extends React.Component {
                   onKeyDown: this.handleOnInputKeyDown,
                 })}
               />
+              {invalid && (
+                <WarningFilled16
+                  className={`${prefix}--list-box__invalid-icon`}
+                />
+              )}
               {inputValue && (
                 <ListBox.Selection
                   clearSelection={clearSelection}
