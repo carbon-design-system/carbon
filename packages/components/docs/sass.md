@@ -16723,11 +16723,6 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
     cursor: not-allowed;
-    outline: none;
-  }
-
-  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
-    pointer-events: none;
   }
 
   //-----------------------------
