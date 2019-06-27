@@ -20,7 +20,7 @@ import { ValidationError } from './error';
  * @return Runner
  */
 export function createRunner(rules, options = {}) {
-  const { globals, only = [], exclude = [], wrapEvent } = options;
+  const { globals, only = [], exclude = [] } = options;
   const levels = {
     error: 'violation',
     warning: 'warning',
@@ -60,10 +60,8 @@ export function createRunner(rules, options = {}) {
             _afterEach(node);
           });
 
-          test(rule.description, () => {
-            rule.validate(node, rule.context, {
-              wrapEvent,
-            });
+          test(rule.description, async () => {
+            await rule.validate(node, rule.context);
           });
         });
       });

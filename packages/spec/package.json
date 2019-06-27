@@ -22,8 +22,10 @@
     "watch": "yarn clean && rollup -c -w"
   },
   "dependencies": {
+    "axe-core": "^3.2.2",
     "htm": "^2.1.1",
-    "pretty-format": "^24.8.0"
+    "pretty-format": "^24.8.0",
+    "tabbable": "^4.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.5",

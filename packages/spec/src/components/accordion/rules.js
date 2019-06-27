@@ -6,10 +6,11 @@
  */
 
 import { ValidationError } from '../../error';
+import { axe } from '../../aat';
 import { diff } from '../../tools/diff';
 import { createExpected } from '../../tools/html';
 
-import { pressEnter, pressSpace } from '../../tools/keyboard';
+import { pressEnter, pressSpace, pressTab } from '../../tools/keyboard';
 
 const defaultContext = {
   children: [
@@ -89,9 +90,9 @@ export const rules = [
   },
 
   {
-    id: 'accordion.header.interaction.mouse',
+    id: 'accordion.header.interaction.expand.mouse',
     description:
-      'The accordion header expands its associated panel on mouse click',
+      'An accordion header expands its associated panel on mouse click',
     reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
     level: 'error',
     context: defaultContext,
@@ -112,27 +113,49 @@ export const rules = [
   },
 
   {
-    id: 'accordion.header.interaction.keyboard.enter',
+    id: 'accordion.header.interaction.collapse.mouse',
+    description:
+      'An accordion header collapses its associated panel on mouse click if ' +
+      'the panel is open',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root, context) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      for (let i = 0; i < context.children.length; i++) {
+        const header = headers[i];
+        header.click();
+        header.click();
+
+        if (header.getAttribute('aria-expanded') === 'true') {
+          return new ValidationError([
+            'Expected aria-expanded to be true after the heading is clicked',
+          ]);
+        }
+      }
+    },
+  },
+
+  {
+    id: 'accordion.header.interaction.expand.keyboard.enter',
     description:
       'When focus is on the accordion header for a collapsed panel ' +
       'then pressing Enter will expand the associated panel',
     reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
     level: 'error',
     context: defaultContext,
-    validate(root, context, { wrapEvent }) {
+    validate(root, context) {
+      pressTab(root);
+
+      return;
       const headers = root.querySelectorAll('.bx--accordion__heading');
-
-      document.addEventListener('keydown', () => {
-        console.log('keydown');
-      });
-
       for (let i = 0; i < context.children.length; i++) {
         const header = headers[i];
         header.focus();
         pressSpace(header);
         // console.log(document.activeElement);
-
-        console.log(header.getAttribute('aria-expanded'));
+        // console.log(header.getAttribute('aria-expanded'));
         // if (header.getAttribute('aria-expanded') === 'false') {
         // return new ValidationError([
         // 'Expected aria-expanded to be true after the heading is clicked',
@@ -141,6 +164,28 @@ export const rules = [
       }
     },
   },
+
+  {
+    id: 'accordion.aat.axe',
+    description: 'should pass axe automated accessibility tests',
+    reference: 'https://www.deque.com/axe/',
+    level: 'error',
+    context: defaultContext,
+    async validate(root, context) {
+      const { violations } = await axe(root);
+      if (violations.length > 0) {
+        return new ValidationError(violations);
+      }
+    },
+  },
+
+  // Crazy: a "linter" for our rules to say that anything under "interaction"
+  // has to have: [click target size check, ...]
+
+  // Other keyboard events
+  // Click target size (40x40)
+  // Check if mousedown event triggers interaction state change
+  //   -> "Cancel a click"
 
   // ESC?
 

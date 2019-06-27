@@ -86,7 +86,6 @@ export default class AccordionItem extends Component {
   };
 
   handleHeadingClick = evt => {
-    console.log('heading click');
     const open = !this.state.open;
     this.setState({ open });
     this.props.onHeadingClick({ isOpen: open, event: evt });

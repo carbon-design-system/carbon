@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createRunner, accordion } from '@carbon/spec';
+// TODO
+import { createRunner, accordion } from '../../../../spec/src';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
@@ -27,8 +29,12 @@ describe('Accordion', () => {
         afterEach,
         test,
       },
-      only: ['accordion.header.interaction.keyboard.enter'],
-      wrapEvent: act,
+      only: [
+        // 'accordion.markup',
+        // 'accordion.header.interaction.expand.mouse',
+        // 'accordion.header.interaction.collapse.mouse',
+        'accordion.header.interaction.expand.keyboard.enter',
+      ],
     });
 
     runner.beforeEach(context => {
