@@ -135,16 +135,19 @@ export default class Tabs extends React.Component {
   };
 
   handleTabKeyDown = onSelectionChange => {
-    return (index, disabled, evt) => {
+    return (index, evt, disabled) => {
       const key = evt.key || evt.which;
 
-      if (!disabled) {
-        if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
-          this.selectTabAt(index, onSelectionChange);
-          this.setState({
-            dropdownHidden: true,
-          });
-        }
+      if (
+        key === 'Enter' ||
+        key === 13 ||
+        key === ' ' ||
+        (key === 32 && !disabled)
+      ) {
+        this.selectTabAt(index, onSelectionChange);
+        this.setState({
+          dropdownHidden: true,
+        });
       }
     };
   };

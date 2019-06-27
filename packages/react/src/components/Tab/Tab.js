@@ -166,7 +166,7 @@ export default class Tab extends React.Component {
         }}
         onKeyDown={evt => {
           this.setTabFocus(evt);
-          handleTabKeyDown(index, label, evt);
+          handleTabKeyDown(index, evt, disabled);
           onKeyDown(evt);
         }}
         role="presentation"
