@@ -41,12 +41,6 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
   };
 
-  const handleMouseOver = value => {
-    if (isRail) {
-      setExpandedState(value);
-    }
-  };
-
   const accessibilityLabel = {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -72,8 +66,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       {...accessibilityLabel}
       onFocus={event => handleToggle(event, true)}
       onBlur={event => handleToggle(event, false)}
-      onMouseEnter={() => handleMouseOver(true)}
-      onMouseLeave={() => handleMouseOver(false)}>
+      onMouseEnter={() => handleToggle(true)}
+      onMouseLeave={() => handleToggle(false)}>
       {children}
       {isFixedNav ? null : (
         <SideNavFooter
