@@ -13,7 +13,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-export default function AccordionSkeleton(props) {
+function AccordionSkeleton(props) {
   const Item = () => (
     <li className={`${prefix}--accordion__item`}>
       <button type="button" className={`${prefix}--accordion__heading`}>
@@ -73,3 +73,5 @@ AccordionSkeleton.defaultProps = {
   count: 4,
   uid: '',
 };
+
+export default AccordionSkeleton;

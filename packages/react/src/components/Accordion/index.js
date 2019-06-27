@@ -5,5 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Accordion.Skeleton';
-export default from './Accordion';
+export { default as Accordion } from './Accordion';
+export { default as AccordionItem } from './AccordionItem';
+export { default as AccordionSkeleton } from './Accordion.Skeleton';
