@@ -8,8 +8,19 @@
 import tabbable from 'tabbable';
 
 export function pressTab(node) {
-  console.log(node.querySelector('button').tagName);
-  console.log(tabbable.isTabbable(node.querySelector('button')));
+  const nodes = tabbable(node, { includeContainer: true });
+
+  if (nodes.length === 0) {
+    return;
+  }
+
+  let index = 0;
+
+  if (nodes.includes(document.activeElement)) {
+    index = nodes.indexOf(document.activeElement) + 1;
+  }
+
+  nodes[index].focus();
 }
 
 export function pressEnter(node) {

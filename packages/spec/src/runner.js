@@ -35,10 +35,14 @@ export function createRunner(rules, options = {}) {
     return true;
   });
 
+  let _beforeAll;
   let _beforeEach;
   let _afterEach;
 
   return {
+    beforeAll(fn) {
+      _beforeAll = fn;
+    },
     beforeEach(fn) {
       _beforeEach = fn;
     },
@@ -46,11 +50,15 @@ export function createRunner(rules, options = {}) {
       _afterEach = fn;
     },
     test() {
-      const { describe, beforeEach, afterEach, test } = globals;
+      const { describe, beforeAll, beforeEach, afterEach, test } = globals;
 
       rulesToRun.forEach(rule => {
         describe(rule.id, () => {
           let node;
+
+          beforeAll(() => {
+            _beforeAll();
+          });
 
           beforeEach(() => {
             node = _beforeEach(rule.context);

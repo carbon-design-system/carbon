@@ -25,6 +25,7 @@ describe('Accordion', () => {
     const runner = createRunner(accordion, {
       globals: {
         describe,
+        beforeAll,
         beforeEach,
         afterEach,
         test,
@@ -35,6 +36,14 @@ describe('Accordion', () => {
         // 'accordion.header.interaction.collapse.mouse',
         'accordion.header.interaction.expand.keyboard.enter',
       ],
+    });
+
+    runner.beforeAll(() => {
+      Object.defineProperty(HTMLElement.prototype, 'offsetParent', {
+        get() {
+          return this.parentNode;
+        },
+      });
     });
 
     runner.beforeEach(context => {

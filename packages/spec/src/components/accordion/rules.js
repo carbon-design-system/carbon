@@ -146,14 +146,15 @@ export const rules = [
     level: 'error',
     context: defaultContext,
     validate(root, context) {
-      pressTab(root);
-
-      return;
       const headers = root.querySelectorAll('.bx--accordion__heading');
+
       for (let i = 0; i < context.children.length; i++) {
         const header = headers[i];
-        header.focus();
-        pressSpace(header);
+        pressTab(root);
+        console.log(header === document.activeElement);
+
+        // header.focus();
+        // pressSpace(header);
         // console.log(document.activeElement);
         // console.log(header.getAttribute('aria-expanded'));
         // if (header.getAttribute('aria-expanded') === 'false') {
