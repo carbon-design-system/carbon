@@ -106,6 +106,7 @@ class OverflowMenu extends mixin(
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {object} [options] The component options.
    * @param {string} [options.selectorOptionMenu] The CSS selector to find the menu.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
    * @param {string} [options.classShown] The CSS class for the shown state, for the trigger UI.
    * @param {string} [options.classMenuShown] The CSS class for the shown state, for the menu.
    * @param {string} [options.classMenuFlip] The CSS class for the flipped state of the menu.
@@ -114,10 +115,15 @@ class OverflowMenu extends mixin(
    */
   constructor(element, options) {
     super(element, options);
+
+    // Assuming the static options property is created in mixin but it's unique to Overflow Menu at this time
+    // So I want to keep it scoped to this component. Let me know if there is a different/preferred way to set this property
+    this.options.triggerSelector =
+      this.options.triggerSelector || 'button[aria-haspopup]';
     if (this.element.getAttribute('role') !== 'button') {
       // Would prefer to use the aria-controls with a specific ID but we
       // don't have the menuOptions list at this point to pull the ID from
-      this.trigger = this.element.querySelector('button[aria-haspopup]');
+      this.trigger = this.element.querySelector(this.options.triggerSelector);
     }
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
