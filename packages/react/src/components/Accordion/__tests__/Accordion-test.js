@@ -5,12 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import { mount } from 'enzyme';
 import React from 'react';
 import { Accordion, AccordionItem } from '../';
-
-const { prefix } = settings;
 
 describe('Accordion', () => {
   it('should render', () => {
