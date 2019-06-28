@@ -4383,7 +4383,6 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [accordion [mixin]](#accordion-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -5337,6 +5336,7 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [slider [mixin]](#slider-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5362,6 +5362,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
@@ -5392,6 +5393,7 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
 
 ### ✅highlight [variable]
 
@@ -9715,7 +9717,8 @@ Content switcher styles
     }
 
     &:disabled {
-      color: $ui-03;
+      color: $disabled-02;
+      background-color: $disabled-01;
       pointer-events: none;
 
       &:hover {
@@ -9783,9 +9786,9 @@ Content switcher styles
     color: $inverse-01;
     z-index: 3;
 
-    // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-color__gray-30;
+      background-color: $disabled-03;
+      color: $disabled-02;
     }
   }
 
@@ -9808,9 +9811,11 @@ Content switcher styles
   - [focus [variable]](#focus-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [ui-03 [variable]](#ui-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
 
 ## data-table
 
