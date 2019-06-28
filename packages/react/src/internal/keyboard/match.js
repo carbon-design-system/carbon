@@ -5,58 +5,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// event.key
-export const keyCodes = {
-  TAB: 'Tab',
-  ENTER: 'Enter',
-  ESC: 'Escape',
-  // IE11 Escape
-  IEESC: 'Esc',
-  SPACE: ' ',
-  PAGEUP: 'PageUp',
-  PAGEDOWN: 'PageDown',
-  END: 'End',
-  HOME: 'Home',
-  LEFT: 'ArrowLeft',
-  UP: 'ArrowUp',
-  RIGHT: 'ArrowRight',
-  DOWN: 'ArrowDown',
-};
-
-// event.which (DEPRECATED)
-export const keys = {
-  TAB: 9,
-  ENTER: 13,
-  ESC: 27,
-  SPACE: 32,
-  PAGEUP: 33,
-  PAGEDOWN: 34,
-  END: 35,
-  HOME: 36,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-};
+/**
+ * @typedef Key
+ * @property key {Array<string>|string}
+ * @property which {number}
+ * @property keyCode {number}
+ */
 
 /**
  * Check to see if at least one key code matches the key code of the
  * given event.
  *
  * @example
- * import { keys, matches } from '../keys';
+ * import * as keys from '../keys';
+ * import { matches } from '../match';
+ *
  * function handleOnKeyDown(event) {
- *   if (matches(event, [keys.ENTER, keys.SPACE]) {
+ *   if (matches(event, [keys.Enter, keys.Space]) {
  *     // ...
  *   }
  * }
+ *
  * @param {Event} event
- * @param {Array<number>} keysToMatch
+ * @param {Array<Key>} keysToMatch
  * @returns {boolean}
  */
 export function matches(event, keysToMatch) {
   for (let i = 0; i < keysToMatch.length; i++) {
-    if (keysToMatch[i] === event.which || keysToMatch[i] === event.key) {
+    if (match(event, keysToMatch[i])) {
       return true;
     }
   }
@@ -68,18 +44,37 @@ export function matches(event, keysToMatch) {
  * supports passing in the value directly if you can't used the given event.
  *
  * @example
- * import { keys, match } from '../keys';
+ * import * as keys from '../keys';
+ * import { matches } from '../match';
+ *
  * function handleOnKeyDown(event) {
- *   if (match(event, keys.ENTER) {
+ *   if (match(event, keys.Enter) {
  *     // ...
  *   }
  * }
- * @param {Event|number} eventOrCode
- * @param {number} key - the `which` value, should come from keys
+ *
+ * @param {Event|number|string} eventOrCode
+ * @param {Key} key
  * @returns {boolean}
  */
-export function match(eventOrCode, key) {
-  return eventOrCode.which === key || eventOrCode === key;
+export function match(eventOrCode, { key, which, keyCode } = {}) {
+  if (typeof eventOrCode === 'string') {
+    return eventOrCode === key;
+  }
+
+  if (typeof eventOrCode === 'number') {
+    return eventOrCode === which || eventOrCode === keyCode;
+  }
+
+  if (eventOrCode.key && Array.isArray(key)) {
+    return key.indexOf(eventOrCode.key) !== -1;
+  }
+
+  return (
+    eventOrCode.key === key ||
+    eventOrCode.which === which ||
+    eventOrCode.keyCode === keyCode
+  );
 }
 
 /**
