@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const Switch = props => {
+const Switch = React.forwardRef(function Switch(props, tabRef) {
   const {
     className,
     index,
@@ -29,12 +29,10 @@ const Switch = props => {
     onClick({ index, name, text });
   };
 
-  const handleKeyDown = e => {
-    const key = e.key || e.which;
+  const handleKeyDown = event => {
+    const key = event.key || event.which;
 
-    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
-      onKeyDown({ index, name, text });
-    }
+    onKeyDown({ index, name, text, key });
   };
 
   const classes = classNames(className, `${prefix}--content-switcher-btn`, {
@@ -48,11 +46,19 @@ const Switch = props => {
   };
 
   return (
-    <button {...other} {...commonProps}>
+    <button
+      ref={tabRef}
+      role="tab"
+      tabIndex={selected ? '0' : '-1'}
+      aria-selected={selected}
+      {...other}
+      {...commonProps}>
       <span className={`${prefix}--content-switcher__label`}>{text}</span>
     </button>
   );
-};
+});
+
+Switch.displayName = 'Switch';
 
 Switch.propTypes = {
   /**
