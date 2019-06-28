@@ -50,25 +50,22 @@
   }
 
   .#{$prefix}--file-browse-btn {
+    display: inline-block;
     color: $link-01;
     outline: none;
     transition: $duration--fast-01 motion(standard, productive);
     cursor: pointer;
   }
 
-  .#{$prefix}--file-browse-btn:hover {
-    color: $link-01;
-    box-shadow: 0 1px currentColor;
-  }
-
+  .#{$prefix}--file-browse-btn:hover,
   .#{$prefix}--file-browse-btn:active,
   .#{$prefix}--file-browse-btn:active:visited {
     color: $text-01;
-    box-shadow: 0 1px currentColor;
+    text-decoration: underline;
   }
 
   .#{$prefix}--file-browse-btn:focus {
-    box-shadow: 0 3px currentColor;
+    text-decoration: underline;
   }
 
   .#{$prefix}--label-description {
