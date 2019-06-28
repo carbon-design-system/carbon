@@ -99,9 +99,7 @@ export default function FileUploaderDropContainer(props) {
           }}
         />
       </div>
-      <div data-file-container className={`${prefix}--file-container`}>
-        {props.children}
-      </div>
+      <div className={`${prefix}--file-container`}>{props.children}</div>
     </div>
   );
 }
