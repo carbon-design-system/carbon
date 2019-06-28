@@ -59,12 +59,6 @@ FileUploaderItem.propTypes = {
     status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
     iconDescription: PropTypes.string,
   }),
-
-  /**
-   * Specify an optional `onClick` handler that is called when the file upload
-   * status is clicked
-   */
-  onClick: PropTypes.func,
 };
 
 FileUploaderItem.defaultProps = {
