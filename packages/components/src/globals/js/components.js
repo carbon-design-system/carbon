@@ -57,6 +57,7 @@ export { default as Tile } from '../../components/tile/tile';
 export {
   default as CodeSnippet,
 } from '../../components/code-snippet/code-snippet';
+export { default as TextArea } from '../../components/text-area/text-area';
 export { default as TextInput } from '../../components/text-input/text-input';
 export { default as SideNav } from '../../components/ui-shell/side-nav';
 export {
