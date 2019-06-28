@@ -4,7 +4,84 @@
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
+<strong>WCAG 2.1 compliant</strong>
+<p>start</p>
+<br>
+{{!-- @todo Had to add a modifier to the parent to correct the animation but in the next major release it could be removed in favor of the new HTML format --}}
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+{{!-- Add demo with longer text for testing
+    @todo change label to `Filter` before merge
+--}}
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-start">
+  <span class="{{@root.prefix}}--assistive-text">Lorem ipsum dolor, amet color and this is really long text</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-start">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--right {{@root.prefix}}--tooltip--align-start">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<br>
+<br>
+<p>center</p>
+<br>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--top">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--bottom">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--right">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<br>
+<br>
+<p>end</p>
+<br>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-end">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-end">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-end">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
+<button
+  class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--right {{@root.prefix}}--tooltip--align-end">
+  <span class="{{@root.prefix}}--assistive-text">Filter</span>
+  {{ carbon-icon 'Filter16' }}
+</button>
 
+{{!-- @todo Remove legacy demos before merge --}}
+<br><br><strong>Legacy (WCAG 2.0 compliant)</strong>
 <p>start</p>
 <br>
 <button
@@ -14,7 +91,7 @@
 </button>
 <button
   class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-start"
-  aria-label="Filter">
+  aria-label="Lorem ipsum dolor, amet color and this is really long text">
   {{ carbon-icon 'Filter16' }}
 </button>
 <button
