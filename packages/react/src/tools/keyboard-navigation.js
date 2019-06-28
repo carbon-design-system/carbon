@@ -24,6 +24,7 @@ import { match, keyCodes } from './key';
  */
 
 const getNextIndex = (key, index, arrayLength) => {
+  console.log(key, keyCodes.RIGHT, keyCodes.LEFT);
   if (match(key, keyCodes.RIGHT)) {
     return (index + 1) % arrayLength;
   }
