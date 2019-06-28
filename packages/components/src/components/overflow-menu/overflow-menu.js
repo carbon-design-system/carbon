@@ -147,11 +147,11 @@ class OverflowMenu extends mixin(
    */
   changeState(state, detail, callback) {
     // @todo Can reference `trigger` only once non-compliant code is deprecated
-    const expandedElement = this.trigger ? 'trigger' : 'element';
+    const triggerElement = this.trigger ? 'trigger' : 'element';
     if (state === 'hidden') {
-      this[expandedElement].setAttribute('aria-expanded', 'false');
+      this[triggerElement].setAttribute('aria-expanded', 'false');
     } else {
-      this[expandedElement].setAttribute('aria-expanded', 'true');
+      this[triggerElement].setAttribute('aria-expanded', 'true');
     }
 
     if (!this.optionMenu) {
@@ -168,6 +168,7 @@ class OverflowMenu extends mixin(
         classShown: this.options.classMenuShown,
         classRefShown: this.options.classShown,
         offset: this.options.objMenuOffset,
+        triggerNode: this.trigger,
       });
       this.children.push(this.optionMenu);
     }
