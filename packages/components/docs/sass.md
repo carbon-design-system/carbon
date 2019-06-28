@@ -16726,6 +16726,11 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
     cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    pointer-events: none;
   }
 
   //-----------------------------
@@ -20122,8 +20127,6 @@ UI shell side nav
     display: flex;
     justify-content: center;
     align-items: center;
-    width: mini-units(2);
-    height: mini-units(2);
     // Helpful in flex containers so the icon does not have less than the
     // expected width
     flex: 0 0 mini-units(2);
@@ -20135,6 +20138,8 @@ UI shell side nav
 
   .#{$prefix}--side-nav__icon > svg {
     fill: $shell-side-nav-icon-01;
+    width: mini-units(2);
+    height: mini-units(2);
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
