@@ -48,19 +48,39 @@ export default function FileUploaderItem({
 
 FileUploaderItem.propTypes = {
   /**
-   * An object which represents a file contained in the file uplodaer
-   * `file.name` - file name
-   * `file.status` - status of the file upload
-   * `file.iconDescription` - description of status icon (displayed in
-   * native tooltip)
+   * Unique identifier for the file object
    */
-  file: PropTypes.shape({
-    name: PropTypes.string,
-    status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
-    iconDescription: PropTypes.string,
-  }),
+  uuid: PropTypes.string.isRequired,
+
+  /**
+   * Name of the uploaded file
+   */
+  name: PropTypes.string,
+
+  /**
+   * Status of the file upload
+   */
+  status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+
+  /**
+   * Description of status icon (displayed in native tooltip)
+   */
+  iconDescription: PropTypes.string,
+
+  /**
+   * Specify if the currently uploaded file is invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Event handler that is called after removing a file from the file uploader
+   * The event handler signature looks like `onDelete(evt, { uuid })`
+   */
+  onDelete: PropTypes.func,
 };
 
 FileUploaderItem.defaultProps = {
+  uuid: `${Math.random()}`,
   status: 'uploading',
+  onDelete: () => {},
 };
