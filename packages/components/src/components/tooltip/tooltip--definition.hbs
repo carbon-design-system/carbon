@@ -4,7 +4,6 @@
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
-{{!-- WCAG 2.1 compliant --}}
 {{!-- @todo remove duplicate class on next major release when selectors can be cleaned up --}}
 <div class="{{@root.prefix}}--tooltip--definition {{@root.prefix}}--tooltip--a11y">
   <button
@@ -31,81 +30,4 @@
     Definition Tooltip (end aligned)
   </span>
   <div class="bx--assistive-text" id="example-end" role="tooltip">Brief description of the dotted, underlined word above.</div>
-</div>
-
-{{!-- Top demo --}}
-{{!-- @todo remove demos before merging --}}
-<br>
-<div class="{{@root.prefix}}--tooltip--definition {{@root.prefix}}--tooltip--a11y">
-  <button
-    aria-describedby="top-example-start"
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-start">
-    Definition Tooltip (start aligned)
-  </button>
-  <div class="bx--assistive-text" id="top-example-start" role="tooltip">Brief description of the dotted, underlined word above.</div>
-</div>
-<br>
-<div class="{{@root.prefix}}--tooltip--definition {{@root.prefix}}--tooltip--a11y">
-  <div
-    aria-describedby="top-example-center"
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-center">
-    Definition Tooltip (center aligned)
-  </div>
-  <div class="bx--assistive-text" id="top-example-center" role="tooltip">Brief description of the dotted, underlined word above.</div>
-</div>
-<br>
-<div class="{{@root.prefix}}--tooltip--definition {{@root.prefix}}--tooltip--a11y">
-  <span
-    aria-describedby="top-example-end"
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-end">
-    Definition Tooltip (end aligned)
-  </span>
-  <div class="bx--assistive-text" id="top-example-end" role="tooltip">Brief description of the dotted, underlined word above.</div>
-</div>
-
-
-<br><br>
-{{!-- Legacy --}}
-{{!-- @todo remove demos before merging --}}
-<div class="{{@root.prefix}}--tooltip--definition">
-  <button
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-start"
-    aria-label="Brief description of the dotted, underlined word above.">
-    Definition Tooltip (start aligned)
-  </button>
-</div>
-<div class="{{@root.prefix}}--tooltip--definition">
-  <button
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center"
-    aria-label="Brief description of the dotted, underlined word above.">
-    Definition Tooltip (center aligned)
-  </button>
-</div>
-<div class="{{@root.prefix}}--tooltip--definition">
-  <button
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-end"
-    aria-label="Brief description of the dotted, underlined word above.">
-    Definition Tooltip (end aligned)
-  </button>
-</div>
-<div class="{{@root.prefix}}--tooltip--definition">
-  <button
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-start"
-    aria-label="Brief description of the dotted, underlined word above.">
-    Definition Tooltip (start aligned)
-  </button>
-</div>
-<div class="{{@root.prefix}}--tooltip--definition">
-  <button
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-center"
-    aria-label="Brief description of the dotted, underlined word above.">
-    Definition Tooltip (center aligned)
-  </button>
-</div>
-<div class="{{@root.prefix}}--tooltip--definition">
-  <button
-    class="{{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip__trigger--definition {{@root.prefix}}--tooltip--top {{@root.prefix}}--tooltip--align-end"
-    aria-label="Brief description of the dotted, underlined word above.">
-    Definition Tooltip (end aligned)
-  </button>
 </div>
