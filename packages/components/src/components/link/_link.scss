@@ -41,7 +41,7 @@
     }
 
     &:focus {
-      text-decoration: underline;
+      outline: 1px solid $link-01;
     }
 
     &:not([href]) {
