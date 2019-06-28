@@ -13,12 +13,12 @@ exports[`Accordion should render 1`] = `
     >
       <li
         className="bx--accordion__item child"
-        onKeyDown={[Function]}
       >
         <defaultRenderExpando
           aria-expanded={false}
           className="bx--accordion__heading"
           onClick={[Function]}
+          onKeyDown={[Function]}
           title="Expand/Collapse"
           type="button"
         >
@@ -26,6 +26,7 @@ exports[`Accordion should render 1`] = `
             aria-expanded={false}
             className="bx--accordion__heading"
             onClick={[Function]}
+            onKeyDown={[Function]}
             title="Expand/Collapse"
             type="button"
           >
@@ -84,12 +85,12 @@ exports[`Accordion should render 1`] = `
     >
       <li
         className="bx--accordion__item child"
-        onKeyDown={[Function]}
       >
         <defaultRenderExpando
           aria-expanded={false}
           className="bx--accordion__heading"
           onClick={[Function]}
+          onKeyDown={[Function]}
           title="Expand/Collapse"
           type="button"
         >
@@ -97,6 +98,7 @@ exports[`Accordion should render 1`] = `
             aria-expanded={false}
             className="bx--accordion__heading"
             onClick={[Function]}
+            onKeyDown={[Function]}
             title="Expand/Collapse"
             type="button"
           >
@@ -156,12 +158,12 @@ exports[`Accordion should render 1`] = `
     >
       <li
         className="bx--accordion__item child"
-        onKeyDown={[Function]}
       >
         <defaultRenderExpando
           aria-expanded={false}
           className="bx--accordion__heading"
           onClick={[Function]}
+          onKeyDown={[Function]}
           title="Expand/Collapse"
           type="button"
         >
@@ -169,6 +171,7 @@ exports[`Accordion should render 1`] = `
             aria-expanded={false}
             className="bx--accordion__heading"
             onClick={[Function]}
+            onKeyDown={[Function]}
             title="Expand/Collapse"
             type="button"
           >

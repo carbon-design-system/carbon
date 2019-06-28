@@ -4,7 +4,6 @@ exports[`AccordionSkeleton should render 1`] = `
 <AccordionSkeleton
   count={4}
   open={true}
-  uid=""
 >
   <ul
     className="bx--accordion bx--skeleton"
@@ -115,8 +114,8 @@ exports[`AccordionSkeleton should render 1`] = `
         </SkeletonText>
       </div>
     </li>
-    <Item
-      key="skeleton-accordion-item--0"
+    <AccordionSkeletonItem
+      key="0"
     >
       <li
         className="bx--accordion__item"
@@ -175,9 +174,9 @@ exports[`AccordionSkeleton should render 1`] = `
           </SkeletonText>
         </button>
       </li>
-    </Item>
-    <Item
-      key="skeleton-accordion-item--1"
+    </AccordionSkeletonItem>
+    <AccordionSkeletonItem
+      key="1"
     >
       <li
         className="bx--accordion__item"
@@ -236,9 +235,9 @@ exports[`AccordionSkeleton should render 1`] = `
           </SkeletonText>
         </button>
       </li>
-    </Item>
-    <Item
-      key="skeleton-accordion-item--2"
+    </AccordionSkeletonItem>
+    <AccordionSkeletonItem
+      key="2"
     >
       <li
         className="bx--accordion__item"
@@ -297,7 +296,7 @@ exports[`AccordionSkeleton should render 1`] = `
           </SkeletonText>
         </button>
       </li>
-    </Item>
+    </AccordionSkeletonItem>
   </ul>
 </AccordionSkeleton>
 `;
