@@ -7,7 +7,7 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
-import { Accordion, AccordionItem } from '../';
+import { default as Accordion, AccordionItem } from '../';
 
 describe('Accordion', () => {
   it('should render', () => {
