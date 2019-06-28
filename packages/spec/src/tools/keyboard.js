@@ -7,7 +7,54 @@
 
 import tabbable from 'tabbable';
 
-export function pressTab(node) {
+const keys = {
+  ArrowUp: {
+    which: 38,
+    keyCode: 38,
+    key: 'ArrowUp',
+  },
+  ArrowRight: {
+    which: 39,
+    keyCode: 39,
+    key: 'ArrowRight',
+  },
+  ArrowDown: {
+    which: 40,
+    keyCode: 40,
+    key: 'ArrowDown',
+  },
+  ArrowLeft: {
+    which: 41,
+    keyCode: 41,
+    key: 'ArrowLeft',
+  },
+  End: {
+    which: 35,
+    keyCode: 35,
+    key: 'End',
+  },
+  Home: {
+    which: 36,
+    keyCode: 36,
+    key: 'Home',
+  },
+  PageUp: {
+    which: 33,
+    keyCode: 33,
+    key: 'PageUp',
+  },
+  PageDown: {
+    which: 34,
+    keyCode: 34,
+    key: 'PageDown',
+  },
+};
+
+export function press(node, key, type = 'keydown') {
+  node.dispatchEvent(new KeyboardEvent(type, keys[key]));
+}
+
+export function pressTab(node = document.body) {
   const nodes = tabbable(node, { includeContainer: true });
 
   if (nodes.length === 0) {
@@ -17,7 +64,24 @@ export function pressTab(node) {
   let index = 0;
 
   if (nodes.includes(document.activeElement)) {
-    index = nodes.indexOf(document.activeElement) + 1;
+    index = (nodes.indexOf(document.activeElement) + 1) % nodes.length;
+  }
+
+  nodes[index].focus();
+}
+
+export function pressShiftTab(node = document.body) {
+  const nodes = tabbable(node, { includeContainer: true });
+
+  if (nodes.length === 0) {
+    return;
+  }
+
+  let index = nodes.length - 1;
+
+  if (nodes.includes(document.activeElement)) {
+    index =
+      (nodes.indexOf(document.activeElement) + nodes.length - 1) % nodes.length;
   }
 
   nodes[index].focus();
@@ -50,7 +114,7 @@ export function pressEnter(node) {
   return node;
 }
 
-export function pressSpace(node = document.activeElement) {
+export function pressSpace(node) {
   const events = [
     new KeyboardEvent('keydown', {
       key: 'Space',

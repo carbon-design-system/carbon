@@ -10,7 +10,13 @@ import { axe } from '../../aat';
 import { diff } from '../../tools/diff';
 import { createExpected } from '../../tools/html';
 
-import { pressEnter, pressSpace, pressTab } from '../../tools/keyboard';
+import {
+  press,
+  pressEnter,
+  pressSpace,
+  pressTab,
+  pressShiftTab,
+} from '../../tools/keyboard';
 
 const defaultContext = {
   children: [
@@ -53,19 +59,6 @@ export const rules = [
               {
                 class: 'bx--accordion__heading',
                 'aria-expanded': 'false',
-                'aria-controls': node => {
-                  const attribute = node.getAttribute('aria-controls');
-                  const id = node.parentNode.childNodes[1].id;
-                  if (attribute !== id) {
-                    return [
-                      [
-                        'Expected the value for `aria-controls` to match the id of the panel',
-                        attribute,
-                        id,
-                      ],
-                    ];
-                  }
-                },
               },
               createExpected('svg', {
                 class: 'bx--accordion__arrow',
@@ -149,20 +142,188 @@ export const rules = [
       const headers = root.querySelectorAll('.bx--accordion__heading');
 
       for (let i = 0; i < context.children.length; i++) {
-        const header = headers[i];
         pressTab(root);
-        console.log(header === document.activeElement);
+        pressEnter(document.activeElement);
 
-        // header.focus();
-        // pressSpace(header);
-        // console.log(document.activeElement);
-        // console.log(header.getAttribute('aria-expanded'));
-        // if (header.getAttribute('aria-expanded') === 'false') {
-        // return new ValidationError([
-        // 'Expected aria-expanded to be true after the heading is clicked',
-        // ]);
-        // }
+        if (headers[i].getAttribute('aria-expanded') === 'false') {
+          return new ValidationError([
+            'Expected aria-expanded to be true after the heading is clicked',
+          ]);
+        }
       }
+    },
+  },
+
+  {
+    id: 'accordion.header.interaction.collapse.keyboard.enter',
+    description:
+      'When focus is on the accordion header for a collapsed panel ' +
+      'then pressing Enter will expand the associated panel',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root, context) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      for (let i = 0; i < context.children.length; i++) {
+        pressTab(root);
+        pressEnter(document.activeElement);
+        pressEnter(document.activeElement);
+
+        if (headers[i].getAttribute('aria-expanded') === 'true') {
+          return new ValidationError([
+            'Expected aria-expanded to be false after the heading is collapsed',
+          ]);
+        }
+      }
+    },
+  },
+
+  {
+    id: 'accordion.header.interaction.expand.keyboard.space',
+    description:
+      'When focus is on the accordion header for a collapsed panel ' +
+      'then pressing Space will expand the associated panel',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root, context) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      for (let i = 0; i < context.children.length; i++) {
+        pressTab(root);
+        pressSpace(document.activeElement);
+
+        if (headers[i].getAttribute('aria-expanded') === 'false') {
+          return new ValidationError([
+            'Expected aria-expanded to be true after the heading is clicked',
+          ]);
+        }
+      }
+    },
+  },
+
+  {
+    id: 'accordion.header.interaction.collapse.keyboard.space',
+    description:
+      'When focus is on the accordion header for a expanded panel ' +
+      'then pressing Space will collapse the associated panel',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root, context) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      for (let i = 0; i < context.children.length; i++) {
+        pressTab(root);
+        pressSpace(document.activeElement);
+        pressSpace(document.activeElement);
+
+        if (headers[i].getAttribute('aria-expanded') === 'true') {
+          return new ValidationError([
+            'Expected aria-expanded to be false after the heading is collapsed',
+          ]);
+        }
+      }
+    },
+  },
+
+  {
+    id: 'accordion.header.interaction.move.keyboard.tab',
+    description:
+      'Moves focus to the next focusable element; all focusable ' +
+      'elements in the accordion are included in the page Tab sequence.',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root, context) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      for (let i = 0; i < context.children.length; i++) {
+        pressTab(document.body);
+        if (document.activeElement !== headers[i]) {
+          return new ValidationError([
+            'Expected elements in accordion to follow page Tab sequence.',
+          ]);
+        }
+      }
+    },
+  },
+
+  {
+    id: 'accordion.interaction.movement.keyboard.shift+tab',
+    description:
+      'Moves focus to the previous focusable element; all focusable elements ' +
+      'in the accordion are included in the page Tab sequence.',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root, context) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      for (let i = context.children.length - 1; i >= 0; i--) {
+        pressShiftTab();
+        if (document.activeElement !== headers[i]) {
+          return new ValidationError([
+            'Expected elements in accordion to follow page Tab sequence.',
+          ]);
+        }
+      }
+    },
+  },
+
+  {
+    id: 'accordion.interaction.movement.keyboard.down-arrow',
+    description:
+      'If focus is on an accordion header, moves focus to ' +
+      'the next accordion header. If focus is on the last accordion header, ' +
+      'either does nothing or moves focus to the first accordion header.',
+    reference: 'https://www.w3.org/TR/wai-aria-practices/#accordion',
+    level: 'error',
+    context: defaultContext,
+    validate(root) {
+      const headers = root.querySelectorAll('.bx--accordion__heading');
+
+      pressTab();
+
+      for (let i = 1; i < headers.length; i++) {
+        press(document.activeElement, 'ArrowDown');
+        if (headers[i] !== document.activeElement) {
+          return new ValidationError([
+            'Expected ArrowDown to move focus to the next accordion header',
+          ]);
+        }
+      }
+    },
+  },
+
+  // TODO:
+  // UpArrow
+  // Home/End
+
+  {
+    id: 'accordion.header.target.size',
+    description:
+      'The target size for triggering an accordion header should ' +
+      'meet the minimum size requirement of 40px by 40px',
+    reference: 'TODO',
+    level: 'error',
+    context: defaultContext,
+    validate() {
+      // TODO: would need to be run in a real browser that implements a layout
+      // engine
+    },
+  },
+
+  {
+    id: 'accordion.header.interaction.click.cancel',
+    description: 'State change should not occur click cancel',
+    reference: 'TODO',
+    level: 'error',
+    context: defaultContext,
+    validate() {
+      // TODO: would need to be run in a real browser that implements a layout
+      // engine
     },
   },
 
@@ -172,35 +333,11 @@ export const rules = [
     reference: 'https://www.deque.com/axe/',
     level: 'error',
     context: defaultContext,
-    async validate(root, context) {
+    async validate(root) {
       const { violations } = await axe(root);
       if (violations.length > 0) {
         return new ValidationError(violations);
       }
     },
   },
-
-  // Crazy: a "linter" for our rules to say that anything under "interaction"
-  // has to have: [click target size check, ...]
-
-  // Other keyboard events
-  // Click target size (40x40)
-  // Check if mousedown event triggers interaction state change
-  //   -> "Cancel a click"
-
-  // ESC?
-
-  // Keyboard
-  // One of [Enter, Space]:
-  // When focus is on the accordion header for a collapsed panel,
-  // expands the associated panel.
-
-  // Tab: moves focus to next focusable element. All focusable elements in the
-  // accordion are included in the page Tab sequence
-
-  // Shift + tab: moves focus to the previous focusable element; all focusable
-  // elements in the accordoin are included the page Tab sequence
-
-  // Optional
-  // Down Arrow: if focus is on an accordion header
 ];

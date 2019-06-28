@@ -30,12 +30,7 @@ describe('Accordion', () => {
         afterEach,
         test,
       },
-      only: [
-        // 'accordion.markup',
-        // 'accordion.header.interaction.expand.mouse',
-        // 'accordion.header.interaction.collapse.mouse',
-        'accordion.header.interaction.expand.keyboard.enter',
-      ],
+      exclude: ['accordion.interaction.movement.keyboard.down-arrow'],
     });
 
     runner.beforeAll(() => {

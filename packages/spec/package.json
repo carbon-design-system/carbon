@@ -24,6 +24,7 @@
   "dependencies": {
     "axe-core": "^3.2.2",
     "htm": "^2.1.1",
+    "prettier": "^1.18.2",
     "pretty-format": "^24.8.0",
     "tabbable": "^4.0.0"
   },

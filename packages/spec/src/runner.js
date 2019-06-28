@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ValidationError } from './error';
-
 /**
  * @typedef Runner
  * @property {Function} beforeEach
@@ -17,7 +15,7 @@ import { ValidationError } from './error';
 /**
  * Create a runner for the given collection of rules
  * @param {Array<Rule>} rules
- * @return Runner
+ * @returns Runner
  */
 export function createRunner(rules, options = {}) {
   const { globals, only = [], exclude = [] } = options;
@@ -29,7 +27,7 @@ export function createRunner(rules, options = {}) {
     if (only.length > 0) {
       return only.includes(rule.id);
     } else if (exclude.length > 0) {
-      return exclude.includes(rule.id);
+      return !exclude.includes(rule.id);
     }
     // By default, run all rules
     return true;
@@ -69,7 +67,10 @@ export function createRunner(rules, options = {}) {
           });
 
           test(rule.description, async () => {
-            await rule.validate(node, rule.context);
+            const error = await rule.validate(node, rule.context);
+            if (error) {
+              throw error;
+            }
           });
         });
       });
