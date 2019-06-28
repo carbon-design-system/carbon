@@ -31,9 +31,12 @@
     }
   }
 
-  // Tooltip - renders as a combo of ::before and ::after elements
+  // ::before - Tooltip caret
+  // ::after - legacy Tooltip content (deprecated)
+  // .#{$prefix}--assistive-text - WCAG 2.1 compliant tooltip content
   &::before,
-  &::after {
+  &::after,
+  .#{$prefix}--assistive-text {
     @include type-style('body-short-01');
     position: absolute;
     z-index: z('floating');
@@ -41,7 +44,16 @@
     align-items: center;
     opacity: 0;
     pointer-events: none;
+  }
+
+  &::before,
+  &::after {
     transition: opacity $duration--fast-01 motion(standard, productive);
+  }
+
+  &.#{$prefix}--tooltip--a11y::before,
+  &.#{$prefix}--tooltip--a11y::after {
+    transition: none;
   }
 
   // caret
@@ -52,8 +64,21 @@
     content: '';
   }
 
+  .#{$prefix}--assistive-text {
+    box-sizing: content-box;
+    color: inherit;
+    // In order to pass AAT, opacity must be set to 1 in the default state
+    // On focus/hover use a keyframe animation to mimic transition
+    opacity: 1;
+    // overwrite default nowrap behavior
+    white-space: normal;
+  }
+
   // content box
-  &::after {
+  // @todo Simplify CSS selectors on next major release
+  &::after,
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
     @include layer('overlay');
     width: max-content;
     max-width: rem(208px);
@@ -66,11 +91,18 @@
     border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
-    content: attr(aria-label);
     text-align: left;
     transform: translateX(-50%);
     pointer-events: none;
     background-color: $inverse-02;
+  }
+
+  &::after {
+    content: attr(aria-label);
+  }
+
+  &.#{$prefix}--tooltip--a11y::after {
+    content: none;
   }
 
   &:hover,
@@ -78,6 +110,26 @@
     &::before,
     &::after {
       opacity: 1;
+    }
+
+    @keyframes tooltip-fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .#{$prefix}--assistive-text {
+      clip: auto;
+      margin: auto;
+      overflow: visible;
+    }
+
+    .#{$prefix}--assistive-text,
+    &.#{$prefix}--tooltip--a11y::before {
+      animation: tooltip-fade $duration--fast-01 motion(standard, productive);
     }
   }
 }
@@ -106,8 +158,11 @@
   $translate-body: 100% + #{$caret-spacing} + #{$caret-height};
   $rotate-caret: set-caret-rotation($position);
 
+  // @todo Simplify CSS selectors on next major release
   &::before,
-  &::after {
+  &::after,
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: 0;
       left: 50%;
@@ -150,7 +205,10 @@
   }
 
   // alignment options available only for top and bottom tooltip position
-  &::after {
+  // @todo Simplify CSS selectors on next major release
+  &::after,
+  &:hover .#{$prefix}--assistive-text,
+  &:focus .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       @if ($align == 'start') {
         left: 0;

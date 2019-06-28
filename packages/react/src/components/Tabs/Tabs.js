@@ -35,7 +35,6 @@ export default class Tabs extends React.Component {
 
     /**
      * Specify whether the Tab content is hidden
-     */
     hidden: PropTypes.bool,
 
     /**
@@ -124,8 +123,9 @@ export default class Tabs extends React.Component {
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
   handleTabClick = onSelectionChange => {
-    return (index, label, evt) => {
+    return (index, evt) => {
       evt.preventDefault();
+
       this.selectTabAt(index, onSelectionChange);
       this.setState({
         dropdownHidden: true,
@@ -134,7 +134,7 @@ export default class Tabs extends React.Component {
   };
 
   handleTabKeyDown = onSelectionChange => {
-    return (index, label, evt) => {
+    return (index, evt) => {
       const key = evt.key || evt.which;
 
       if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
@@ -150,7 +150,6 @@ export default class Tabs extends React.Component {
     return index => {
       const tabCount = React.Children.count(this.props.children) - 1;
       let tabIndex = index;
-
       if (index < 0) {
         tabIndex = tabCount;
       } else if (index > tabCount) {
