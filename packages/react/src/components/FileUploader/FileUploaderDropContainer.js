@@ -19,7 +19,6 @@ export default function FileUploaderDropContainer(props) {
     multiple,
     name,
     onAddFiles,
-    onChange,
     role,
     tabIndex,
     ...other
@@ -38,11 +37,8 @@ export default function FileUploaderDropContainer(props) {
             ? [...evt.dataTransfer.files]
             : [...evt.target.files],
       });
-      if (onChange) {
-        onChange(evt);
-      }
     },
-    [onAddFiles, onChange]
+    [onAddFiles]
   );
   return (
     <div
@@ -132,18 +128,6 @@ FileUploaderDropContainer.propTypes = {
   name: PropTypes.string,
 
   /**
-   * Provide an optional `onChange` hook that is called each time the <input>
-   * value changes
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Provide an optional `onClick` hook that is called each time the button is
-   * clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
    * Provide an accessibility role for the <FileUploaderButton>
    */
   role: PropTypes.string,
@@ -169,6 +153,5 @@ FileUploaderDropContainer.defaultProps = {
   labelText: 'Add file',
   multiple: false,
   onAddFiles: () => {},
-  onClick: () => {},
   accept: [],
 };
