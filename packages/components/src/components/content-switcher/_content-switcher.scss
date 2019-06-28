@@ -64,7 +64,8 @@
     }
 
     &:disabled {
-      color: $ui-03;
+      color: $disabled-02;
+      background-color: $disabled-01;
       pointer-events: none;
 
       &:hover {
@@ -132,9 +133,9 @@
     color: $inverse-01;
     z-index: 3;
 
-    // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-color__gray-30;
+      background-color: $disabled-03;
+      color: $disabled-02;
     }
   }
 
