@@ -146,6 +146,12 @@ FileUploaderDropContainer.propTypes = {
    * Specify if any of the selected files is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Event handler that is called after files are added to the uploader
+   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
+   */
+  onAddFiles: PropTypes.func,
 };
 
 FileUploaderDropContainer.defaultProps = {
