@@ -10,8 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
-import { getNextIndex } from '../../tools/keyboard-navigation';
-import { matches, keyCodes } from '../../tools/key';
+import { getNextIndex, matches, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -73,7 +72,7 @@ export default class ContentSwitcher extends React.Component {
     const { index } = data;
     const { key } = data;
 
-    if (matches(data, [keyCodes.RIGHT, keyCodes.LEFT])) {
+    if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
       const nextIndex = getNextIndex(
         key,
         selectedIndex,

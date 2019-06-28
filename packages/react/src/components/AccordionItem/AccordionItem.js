@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import { ChevronRight16 } from '@carbon/icons-react';
-import { match, keys } from '../../tools/key';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -93,7 +93,7 @@ export default class AccordionItem extends Component {
 
   handleKeyDown = evt => {
     if (
-      match(evt.which, keys.ESC) &&
+      match(evt, keys.Escape) &&
       this.state.open &&
       evt.target.classList.contains(`${prefix}--accordion__heading`)
     ) {
