@@ -23,6 +23,5 @@
       - `SideNavMenuItem`: renders a link in a side nav menu
   - `RightPanel`: used for render the container for header actions on the right
     - `Switcher`: used to render a list of product links inside the right panel
-      - `SwitcherItem`: used to render list item
-        - `SwitcherItemLink`: used to render a link inside the list item
+      - `SwitcherItem`: used to render list item, often a link
       - `SwitcherDivider`: used to render a divider for list items
