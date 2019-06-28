@@ -2116,7 +2116,6 @@ Generate a media query for the maximum width of the given styles
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [accordion [mixin]](#accordion-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -2241,6 +2240,7 @@ Generate a media query for a given breakpoint
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅carbon--base-font-size [variable]
 
@@ -2493,6 +2493,7 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
 ### ✅carbon--spacing-01 [variable]
@@ -2722,6 +2723,7 @@ $carbon--spacing-08: carbon--mini-units(5);
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
+  - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--spacing-09 [variable]
 
@@ -4542,6 +4544,7 @@ $text-02: map-get($carbon--theme, 'text-02');
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -13241,10 +13244,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__selection {
-    right: rem(57px); // 33px + 1.5rem when invalid
-  }
-
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
   }
@@ -14804,6 +14803,10 @@ Overflow menu styles
     .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
     background-color: $support-01;
+
+    svg {
+      fill: $text-04;
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled:hover {
@@ -16723,6 +16726,11 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
     cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    pointer-events: none;
   }
 
   //-----------------------------
@@ -17605,28 +17613,6 @@ Toggle styles
     }
   }
 
-  .#{$prefix}--toggle--small
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__appearance {
-    width: rem(32px);
-    height: rem(16px);
-
-    &:before {
-      box-sizing: border-box;
-      height: rem(16px);
-      width: rem(32px);
-      border-radius: 0.9375rem;
-      top: 0;
-    }
-
-    &:after {
-      width: rem(10px);
-      height: rem(10px);
-      top: 3px;
-      left: 3px;
-    }
-  }
-
   .#{$prefix}--toggle__check {
     fill: $ui-03;
     position: absolute;
@@ -17635,13 +17621,6 @@ Toggle styles
     z-index: 1;
     transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
-  }
-
-  .#{$prefix}--toggle--small:checked
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__check {
-    fill: $support-02;
-    transform: scale(1) translateX(16px);
   }
 
   .#{$prefix}--toggle__text--left,
@@ -17654,12 +17633,6 @@ Toggle styles
   .#{$prefix}--toggle__text--left {
     position: absolute;
     left: rem(48px);
-  }
-
-  .#{$prefix}--toggle--small
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__text--left {
-    left: rem(32px);
   }
 
   .#{$prefix}--toggle:checked
@@ -17690,15 +17663,6 @@ Toggle styles
     &:after {
       background-color: $icon-03;
       transform: translateX(24px);
-    }
-  }
-
-  .#{$prefix}--toggle--small:checked
-    + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__appearance {
-    &:after {
-      margin-left: 0px;
-      transform: translateX(17px);
     }
   }
 
@@ -17763,6 +17727,245 @@ Toggle styles
     .#{$prefix}--toggle__check {
     fill: $disabled-02;
   }
+
+  //----------------------------------------------
+  // Small toggle
+  // ---------------------------------------------
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    width: rem(32px);
+    height: rem(16px);
+
+    &:before {
+      box-sizing: border-box;
+      height: rem(16px);
+      width: rem(32px);
+      border-radius: 0.9375rem;
+      top: 0;
+    }
+
+    &:after {
+      width: rem(10px);
+      height: rem(10px);
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
+    fill: $support-02;
+    transform: scale(1) translateX(16px);
+  }
+
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__text--left {
+    left: rem(32px);
+  }
+
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
+    &:after {
+      margin-left: 0px;
+      transform: translateX(17px);
+    }
+  }
+
+  // -----------------------------------------------------
+  // new accessible toggle
+  // TODO: deprecate styles above this line
+  // -----------------------------------------------------
+
+  .#{$prefix}--toggle-input {
+    @include hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--toggle-input__label {
+    @include type-style('label-01');
+    color: $text-02;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--toggle__switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: rem(48px);
+    height: rem(24px);
+    margin: $carbon--spacing-03 0;
+    cursor: pointer;
+
+    // Toggle background oval
+    &::before {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      display: block;
+      width: rem(48px);
+      height: rem(24px);
+      border-radius: rem(15px);
+      content: '';
+      background-color: $ui-04;
+      will-change: box-shadow;
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow $duration--fast-01 motion(exit, productive), background-color
+          $duration--fast-01 motion(exit, productive);
+    }
+
+    // Toggle circle
+    &::after {
+      box-sizing: border-box;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      display: block;
+      width: rem(18px);
+      height: rem(18px);
+      border-radius: 50%;
+      background-color: $ui-03;
+      content: '';
+      transition: transform $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle__text--off,
+  .#{$prefix}--toggle__text--on {
+    position: absolute;
+    margin-left: carbon--mini-units(7);
+    @include type-style('body-short-01');
+    user-select: none;
+  }
+
+  //----------------------------------------------
+  // Checked
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input:checked
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch
+    > .#{$prefix}--toggle__text--off,
+  .#{$prefix}--toggle-input:not(:checked)
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch
+    > .#{$prefix}--toggle__text--on {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toggle-input:checked
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch {
+    &::before {
+      background-color: $support-02;
+    }
+
+    &::after {
+      background-color: $icon-03;
+      transform: translateX(24px);
+    }
+  }
+
+  //----------------------------------------------
+  // Focus and active
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input:focus
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before,
+  .#{$prefix}--toggle-input:active
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    box-shadow: 0 0 0 2px $focus;
+  }
+
+  //----------------------------------------------
+  // Disabled
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toggle-input:disabled
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch {
+    cursor: not-allowed;
+
+    &::before {
+      background-color: $disabled-01;
+    }
+
+    &::after {
+      background-color: $disabled-02;
+    }
+
+    &::before,
+    &::after {
+      cursor: not-allowed;
+      transition: $duration--fast-01 motion(exit, productive);
+    }
+  }
+
+  .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
+    color: $disabled;
+  }
+
+  .#{$prefix}--toggle-input:disabled:active
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    box-shadow: none;
+  }
+
+  //----------------------------------------------
+  // Small toggle
+  // ---------------------------------------------
+  .#{$prefix}--toggle-input--small + .#{$prefix}--toggle-input__label {
+    > .#{$prefix}--toggle__switch {
+      width: rem(32px);
+      height: rem(16px);
+
+      &::before {
+        width: rem(32px);
+        height: rem(16px);
+        border-radius: 0.9375rem;
+      }
+
+      &::after {
+        width: rem(10px);
+        height: rem(10px);
+      }
+    }
+
+    .#{$prefix}--toggle__text--off,
+    .#{$prefix}--toggle__text--on {
+      margin-left: $carbon--spacing-08;
+    }
+  }
+
+  .#{$prefix}--toggle-input--small:checked + .#{$prefix}--toggle-input__label {
+    > .#{$prefix}--toggle__switch::after {
+      transform: translateX(17px);
+    }
+
+    .#{$prefix}--toggle__check {
+      fill: $support-02;
+      transform: scale(1) translateX(16px);
+    }
+  }
+
+  .#{$prefix}--toggle-input--small:disabled:checked
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__check {
+    fill: $disabled-02;
+  }
 }
 ```
 
@@ -17770,6 +17973,7 @@ Toggle styles
 
 - **Group**: [toggle](#toggle)
 - **Requires**:
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-04 [variable]](#ui-04-variable)
@@ -17779,6 +17983,8 @@ Toggle styles
   - [focus [variable]](#focus-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
 
 ## toolbar
 
@@ -18764,10 +18970,12 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: none;
+    display: block;
+  }
 
-    @include carbon--breakpoint-down('lg') {
-      display: block;
+  .#{$prefix}--header__menu-toggle__hidden {
+    @include carbon--breakpoint('lg') {
+      display: none;
     }
   }
 
@@ -18988,7 +19196,7 @@ UI shell header
 
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
-  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
@@ -19509,11 +19717,7 @@ UI shell side nav
 @mixin carbon-side-nav() {
   //----------------------------------------------------------------------------
   // Side-nav > Panel
-  //----------------------------------------------------------------------------
-  // Used for rendering the actual side rail. There are two states that we have
-  // to style for, namely for when the rail is collapsed and expanded. When
-  // collapsed, the rail is intended to expand on hover. When expanded, it
-  // should have the same dimensions as when expanded on hover.
+  //----------------------------------------------------------------------------.
   .#{$prefix}--side-nav {
     position: fixed;
     top: 0;
@@ -19540,6 +19744,18 @@ UI shell side nav
     }
   }
 
+  //----------------------------------------------------------------------------
+  // Rail
+  //---------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on mouse over. When expanded, it
+  // should have the same dimensions as when expanded on mouse over
+
+  .#{$prefix}--side-nav--rail {
+    width: mini-units(6);
+  }
+
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
@@ -19554,11 +19770,6 @@ UI shell side nav
 
   .#{$prefix}--side-nav--fixed {
     width: mini-units(32);
-  }
-
-  .#{$prefix}--side-nav--collapsed {
-    width: mini-units(32);
-    transform: translateX(mini-units(-32));
   }
 
   .#{$prefix}--side-nav--collapsed {
@@ -19921,8 +20132,6 @@ UI shell side nav
     display: flex;
     justify-content: center;
     align-items: center;
-    width: mini-units(2);
-    height: mini-units(2);
     // Helpful in flex containers so the icon does not have less than the
     // expected width
     flex: 0 0 mini-units(2);
@@ -19934,6 +20143,8 @@ UI shell side nav
 
   .#{$prefix}--side-nav__icon > svg {
     fill: $shell-side-nav-icon-01;
+    width: mini-units(2);
+    height: mini-units(2);
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
