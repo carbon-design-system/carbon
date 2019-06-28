@@ -17,7 +17,7 @@ exports[`ListBoxField should render 1`] = `
       translateWithId={[Function]}
     >
       <div
-        className="bx--tag--filter bx--list-box__selection"
+        className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="button"
@@ -81,7 +81,7 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
       translateWithId={[Function]}
     >
       <div
-        className="bx--tag--filter bx--list-box__selection"
+        className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="button"
