@@ -11,7 +11,7 @@ import uid from '../../tools/uniqueId';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { CheckmarkFilled16 as CheckmarkFilled } from '@carbon/icons-react';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -76,7 +76,7 @@ export default class RadioTile extends React.Component {
   };
 
   handleKeyDown = evt => {
-    if (matches(evt, [keys.ENTER, keys.SPACE])) {
+    if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       this.props.onChange(this.props.value, this.props.name, evt);
     }

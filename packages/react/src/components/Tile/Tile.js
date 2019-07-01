@@ -14,7 +14,7 @@ import {
   CheckmarkFilled16 as CheckmarkFilled,
   ChevronDown16,
 } from '@carbon/icons-react';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
@@ -88,7 +88,7 @@ export class ClickableTile extends Component {
 
   handleKeyDown = evt => {
     evt.persist();
-    if (matches(evt, [keys.ENTER, keys.SPACE])) {
+    if (matches(evt, [keys.Enter, keys.Space])) {
       this.setState(
         {
           clicked: !this.state.clicked,
@@ -227,7 +227,7 @@ export class SelectableTile extends Component {
 
   handleKeyDown = evt => {
     evt.persist();
-    if (matches(evt, [keys.ENTER, keys.SPACE])) {
+    if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       this.setState(
         {

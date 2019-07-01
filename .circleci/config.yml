@@ -110,11 +110,64 @@ jobs:
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
             yarn lerna publish --canary minor --dist-tag canary --no-push --no-git-tag-version --yes
 
+  artifacts:
+    docker:
+      - image: circleci/node:10.15-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # - run:
+          # name: Install yarn
+          # command: |
+            # curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+            # # Reference:
+            # # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            # echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      # - run:
+          # name: Install dependencies
+          # command: yarn install --offline --frozen-lockfile
+      # - run:
+          # name: Build packages
+          # command: yarn build
+      # - run:
+          # name: Sync project dependency files
+          # command: yarn sync
+      - run:
+          name: Push generated artifacts to GitHub
+          command: |
+            # if [ -n "$(git status --porcelain)" ]; then
+              echo "testing artifacts task"
+              # echo "Our git status is not clean. Checking in the following files";
+
+              # git config --global credential.helper 'cache --timeout=120'
+              # git config --global user.email "carbon@us.ibm.com"
+              # git config --global user.name "carbon-bot"
+
+              # echo "https://${GH_TOKEN}@github.com" > git credential fill > /dev/null 2>&1
+
+              # TODO: Remove
+              # git commit --allow-empty -m 'chore(project): test automated commit setup'
+
+              # git add -A
+              # git commit -m "chore(project): sync generated files"
+              # git push origin master
+
+              # Clean-up default file storage for `git credential fill`
+              # rm ~/.git-credentials
+            # fi
+
 workflows:
   version: 2
   main:
     jobs:
       - system
+      - artifacts:
+          requires:
+            - system
+          # filters:
+            # branches:
+              # only:
+                # - master
       - release:
           requires:
             - system
