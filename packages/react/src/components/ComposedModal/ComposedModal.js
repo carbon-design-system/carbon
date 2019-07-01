@@ -11,6 +11,7 @@ import Button from '../Button';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
+import '../../tools/toggle-class';
 
 const { prefix } = settings;
 

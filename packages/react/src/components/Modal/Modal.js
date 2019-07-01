@@ -12,6 +12,7 @@ import Button from '../Button';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
+import '../../tools/toggle-class';
 
 const { prefix } = settings;
 
