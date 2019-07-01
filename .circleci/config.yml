@@ -169,18 +169,18 @@ workflows:
             # branches:
               # only:
                 # - master
-      - release:
-          requires:
-            - system
-          filters:
-            branches:
-              only:
-                - master
-      - deploy:
-          requires:
-            - system
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v\d+\.\d+\.\d+$/
+      # - release:
+          # requires:
+            # - system
+          # filters:
+            # branches:
+              # only:
+                # - master
+      # - deploy:
+          # requires:
+            # - system
+          # filters:
+            # branches:
+              # ignore: /.*/
+            # tags:
+              # only: /^v\d+\.\d+\.\d+$/
