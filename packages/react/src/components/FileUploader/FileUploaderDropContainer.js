@@ -14,7 +14,6 @@ export default function FileUploaderDropContainer(props) {
     className,
     id,
     disabled,
-    invalid,
     labelText,
     multiple,
     name,
@@ -69,7 +68,6 @@ export default function FileUploaderDropContainer(props) {
             htmlFor={id || uid}
             role={role || 'button'}
             tabIndex={tabIndex || 0}
-            data-invalid={invalid || null}
             onKeyDown={evt => {
               if (matches(evt, [keys.ENTER, keys.SPACE])) {
                 inputRef.current.click();
@@ -141,11 +139,6 @@ FileUploaderDropContainer.propTypes = {
    * Specify the types of files that this input should be able to receive
    */
   accept: PropTypes.arrayOf(PropTypes.string),
-
-  /**
-   * Specify if any of the selected files is invalid
-   */
-  invalid: PropTypes.bool,
 
   /**
    * Event handler that is called after files are added to the uploader
