@@ -211,10 +211,6 @@
     }
   }
 
-  .#{$prefix}--search-close:focus {
-    @include focus-outline('outline');
-  }
-
   .#{$prefix}--search-close--hidden {
     visibility: hidden;
     opacity: 0;
