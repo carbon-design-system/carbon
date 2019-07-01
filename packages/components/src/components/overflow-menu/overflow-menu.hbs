@@ -5,7 +5,7 @@
   LICENSE file in the root directory of this source tree.
 -->
 {{!-- Passes W3C HTML validation--}}
-<div data-overflow-menu class="{{@root.prefix}}--overflow-menu" aria-owns="{{idSuffix.default}}">
+<div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
   {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure--}}
   <button class="{{@root.prefix}}--overflow-menu__trigger" aria-label="Overflow" aria-haspopup="true" aria-expanded="false" id="{{idSuffix.default}}-trigger" aria-controls="{{idSuffix.default}}">
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
@@ -26,7 +26,7 @@
   </ul>
 </div>
 
-<div data-overflow-menu class="{{@root.prefix}}--overflow-menu" aria-owns="{{idSuffix.flip}}">
+<div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
   {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure --}}
   <button class="{{@root.prefix}}--overflow-menu__trigger" aria-label="Overflow" aria-haspopup="true" aria-expanded="false"  id="{{idSuffix.flip}}-trigger" aria-controls="{{idSuffix.flip}}">
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
@@ -47,7 +47,7 @@
   </ul>
 </div>
 
-<div data-overflow-menu class="{{@root.prefix}}--overflow-menu" aria-owns="{{idSuffix.link}}">
+<div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
   {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure --}}
   <button class="{{@root.prefix}}--overflow-menu__trigger" aria-label="Overflow" aria-haspopup="true" aria-expanded="false"  id="{{idSuffix.link}}-trigger" aria-controls="{{idSuffix.link}}">
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
