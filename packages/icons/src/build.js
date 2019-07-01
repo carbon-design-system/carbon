@@ -127,7 +127,10 @@ async function build(source, { cwd } = {}) {
         });
         const outputOptions = {
           format,
-          file: jsFilepath.replace(/es/, directory),
+          file: path.join(
+            path.join(directory, ...formattedPrefix, basename),
+            size ? `${size}.js` : 'index.js'
+          ),
         };
         if (format === 'umd') {
           outputOptions.name = moduleName;
