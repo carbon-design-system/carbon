@@ -17220,6 +17220,7 @@ Text input styles
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
