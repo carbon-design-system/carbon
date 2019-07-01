@@ -150,10 +150,10 @@ jobs:
 
               # git add -A
               # git commit -m "chore(project): sync generated files"
-              # git push origin master
+              git push origin joshblack-patch-1
 
               # Clean-up default file storage for `git credential fill`
-              rm ~/.git-credentials
+              # rm ~/.git-credentials
             # fi
 
 workflows:
