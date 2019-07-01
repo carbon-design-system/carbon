@@ -127,6 +127,10 @@ export default class ComposedModal extends Component {
     } else if (prevProps.open && !this.props.open) {
       this.beingOpen = false;
     }
+    document.body.classList.toggle(
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
   }
 
   focusButton = focusContainerElement => {
@@ -143,6 +147,10 @@ export default class ComposedModal extends Component {
   };
 
   componentDidMount() {
+    document.body.classList.toggle(
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
     if (!this.props.open) {
       return;
     }

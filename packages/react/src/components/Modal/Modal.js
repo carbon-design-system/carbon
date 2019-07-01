@@ -200,6 +200,10 @@ export default class Modal extends Component {
     } else if (prevProps.open && !this.props.open) {
       this.beingOpen = false;
     }
+    document.body.classList.toggle(
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
   }
 
   initialFocus = focusContainerElement => {
@@ -220,6 +224,10 @@ export default class Modal extends Component {
   };
 
   componentDidMount() {
+    document.body.classList.toggle(
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
     if (!this.props.open) {
       return;
     }
