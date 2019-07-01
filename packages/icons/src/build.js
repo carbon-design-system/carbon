@@ -266,10 +266,7 @@ async function createDescriptorFromFile(file) {
 }
 
 function getIndexName(basename, prefix) {
-  return prefix
-    .filter(part => isNaN(part))
-    .concat(basename)
-    .join('/');
+  return path.join(...prefix.filter(part => isNaN(part)), basename);
 }
 
 async function findPackageJsonFor(filepath) {
