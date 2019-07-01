@@ -116,14 +116,10 @@ class OverflowMenu extends mixin(
   constructor(element, options) {
     super(element, options);
 
-    // Assuming the static options property is created in mixin but it's unique to Overflow Menu at this time
-    // So I want to keep it scoped to this component. Let me know if there is a different/preferred way to set this property
-    this.options.triggerSelector =
-      this.options.triggerSelector || 'button[aria-haspopup]';
     if (this.element.getAttribute('role') !== 'button') {
       // Would prefer to use the aria-controls with a specific ID but we
       // don't have the menuOptions list at this point to pull the ID from
-      this.trigger = this.element.querySelector(this.options.triggerSelector);
+      this.trigger = this.element.querySelector(this.options.selectorTrigger);
     }
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
@@ -343,6 +339,7 @@ class OverflowMenu extends mixin(
     return {
       selectorInit: '[data-overflow-menu]',
       selectorOptionMenu: `.${prefix}--overflow-menu-options`,
+      selectorTrigger: 'button[aria-haspopup]',
       selectorItem: `
         .${prefix}--overflow-menu-options--open >
         .${prefix}--overflow-menu-options__option:not(.${prefix}--overflow-menu-options__option--disabled) >
