@@ -53,10 +53,7 @@ async function search(directory) {
   const prefixed = files.map(file => {
     const { filepath } = file;
     const dirname = path.dirname(filepath);
-    const prefix = path
-      .relative(directory, dirname)
-      .split('/')
-      .filter(Boolean);
+    const prefix = path.relative(directory, dirname).split(path.sep);
     return {
       ...file,
       prefix,
