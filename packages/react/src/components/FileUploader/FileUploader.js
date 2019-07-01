@@ -227,11 +227,13 @@ Filename.propTypes = {
    * Provide a description of the SVG icon to denote file upload status
    */
   iconDescription: PropTypes.string,
+
   /**
    * Provide an optional `onKeyDown` hook that is called if Space or Return is
    * pressed while the component is focused
    */
   status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
+
   /**
    * Provide a custom tabIndex value for the <Filename>
    */
