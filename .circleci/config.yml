@@ -160,10 +160,10 @@ workflows:
   version: 2
   main:
     jobs:
-      - system
+      # - system
       - artifacts:
-          requires:
-            - system
+          # requires:
+            # - system
           # filters:
             # branches:
               # only:
