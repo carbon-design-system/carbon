@@ -57,8 +57,6 @@ describe('File Uploader', function() {
         selectorContainer: '[data-file-container]',
         selectorCloseButton: '.bx--file-close',
         selectorSelectedFile: '.bx--file__selected-file',
-        selectorSelectedFileInvalidWrapper:
-          '.bx--file__selected-file--invalid__wrapper',
         selectorDropContainer: '[data-file-drop-container]',
         selectorOtherDropContainers: '[data-drop-container]',
         classLoading: 'bx--loading bx--loading--small',

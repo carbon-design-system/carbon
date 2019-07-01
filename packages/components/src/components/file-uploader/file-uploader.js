@@ -186,9 +186,7 @@ class FileUploader extends mixin(
     if (target) {
       this.changeState('delete-filename-fileuploader', {
         initialEvt: evt,
-        filenameElement:
-          target.closest(this.options.selectorSelectedFileInvalidWrapper) ||
-          target.closest(this.options.selectorSelectedFile),
+        filenameElement: target.closest(this.options.selectorSelectedFile),
       });
     }
   };
@@ -270,7 +268,6 @@ class FileUploader extends mixin(
       selectorContainer: '[data-file-container]',
       selectorCloseButton: `.${prefix}--file-close`,
       selectorSelectedFile: `.${prefix}--file__selected-file`,
-      selectorSelectedFileInvalidWrapper: `.${prefix}--file__selected-file--invalid__wrapper`,
       selectorDropContainer: `[data-file-drop-container]`,
       selectorOtherDropContainers: '[data-drop-container]',
       classLoading: `${prefix}--loading ${prefix}--loading--small`,
