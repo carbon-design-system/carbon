@@ -145,14 +145,14 @@ jobs:
               printf "username=carbon-bot\npassword=$GH_TOKEN\n" | git credential fill > /dev/null 2>&1
 
               # TODO: Remove
-              # git commit --allow-empty -m 'chore(project): test automated commit setup'
+              git commit --allow-empty -m 'chore(project): test automated commit setup'
 
               # git add -A
               # git commit -m "chore(project): sync generated files"
               # git push origin master
 
               # Clean-up default file storage for `git credential fill`
-              # rm ~/.git-credentials
+              rm ~/.git-credentials
             # fi
 
 workflows:
