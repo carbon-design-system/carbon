@@ -142,7 +142,7 @@ jobs:
               git config --global user.email "carbon@us.ibm.com"
               git config --global user.name "carbon-bot"
 
-              echo "https://${GH_TOKEN}@github.com" | git credential fill > /dev/null 2>&1
+              echo "username=carbon-bot\npassword=$GH_TOKEN" | git credential fill > /dev/null 2>&1
 
               # TODO: Remove
               # git commit --allow-empty -m 'chore(project): test automated commit setup'
