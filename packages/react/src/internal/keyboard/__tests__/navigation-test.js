@@ -3,12 +3,11 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */
-
-/**
+ *
  * @jest-environment jsdom
  */
-import { getNextIndex } from '../keyboard-navigation';
+
+import { getNextIndex } from '../navigation';
 
 const tests = [
   [

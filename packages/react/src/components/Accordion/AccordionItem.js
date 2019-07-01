@@ -10,7 +10,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { match, keys } from '../../tools/key';
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const defaultRenderExpando = props => <button {...props} />;
@@ -50,7 +50,7 @@ function AccordionItem({
 
   // If the AccordionItem is open, and the user hits the ESC key, then close it
   function onKeyDown(event) {
-    if (isOpen && match(event, keys.ESC)) {
+    if (isOpen && match(event, keys.Escape)) {
       setIsOpen(false);
     }
   }
