@@ -32,7 +32,7 @@
         <p class="{{prefix}}--file-filename">color.jpeg</p>
         <span data-for="{{id}}" class="{{prefix}}--file__state-container">
           {{ carbon-icon 'WarningFilled16' class=(add prefix '--file--invalid')}}
-          {{ carbon-icon 'Close16' class=(add prefix '--file-close') }}
+          {{ carbon-icon 'Close16' class=(add prefix '--file-close') aria-label="Remove uploaded file" tabindex="0" }}
         </span>
         <div class="{{prefix}}--form-requirement">
           File size exceeds limit.
