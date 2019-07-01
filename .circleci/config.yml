@@ -139,21 +139,20 @@ jobs:
               # echo "Our git status is not clean. Checking in the following files";
 
               git config --global credential.helper 'cache --timeout=120'
-              git config --global credential.helper 'store --file=~/.git-credentials'
               git config --global user.email "carbon@us.ibm.com"
               git config --global user.name "carbon-bot"
 
-              printf "username=carbon-bot\npassword=$GH_TOKEN\n" | git credential fill > /dev/null 2>&1
-
               # TODO: Remove
-              git commit --allow-empty -m 'chore(project): test automated commit setup'
+              git commit --allow-empty -m 'chore(project): test automated commit setup [skip ci]'
 
               # git add -A
-              # git commit -m "chore(project): sync generated files"
-              git push origin joshblack-patch-1
+              # git commit -m "chore(project): sync generated files [skip ci]"
 
-              # Clean-up default file storage for `git credential fill`
-              # rm ~/.git-credentials
+              # Pipe to /dev/null to prevent any token leaks in CI output
+              git push -q \
+                https://${GH_TOKEN}:@github.com/carbon-design-system/carbon.git \
+                joshblack-patch-1 \
+                > /dev/null 2>&1
             # fi
 
 workflows:
