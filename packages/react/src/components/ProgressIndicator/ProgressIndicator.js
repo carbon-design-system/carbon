@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const defaultRenderLabel = props => <p {...props} />;
@@ -38,7 +38,7 @@ export const ProgressStep = ({ ...props }) => {
   });
 
   const handleKeyDown = e => {
-    if (matches(e, [keys.ENTER, keys.SPACE])) {
+    if (matches(e, [keys.Enter, keys.Space])) {
       onClick();
     }
   };
