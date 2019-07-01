@@ -5,17 +5,70 @@
   LICENSE file in the root directory of this source tree.
 -->
 
-<div id="tooltip-label" class="{{@root.prefix}}--tooltip__label" aria-describedby="unique-tooltip">
+{{!-- Using the trigger label as the tooltip label (can be repetitive for screen reader users) --}}
+<div id="{{noHeading.idSuffix}}-label" class="{{@root.prefix}}--tooltip__label">
   Tooltip label
-  <div tabindex="0" aria-labelledby="tooltip-label" data-tooltip-trigger data-tooltip-target="#unique-tooltip"
-    role="tooltip" class="{{@root.prefix}}--tooltip__trigger">
+  {{!-- @todo add aria-expanded once JavaScript can toggle it --}}
+  {{!-- @todo use a button element once JavaScript can support it as the trigger (remove tabindex="0" and role="button") --}}
+  <div tabindex="0" aria-labelledby="{{noHeading.idSuffix}}-label" data-tooltip-trigger data-tooltip-target="#{{noHeading.idSuffix}}"
+    role="button" class="{{@root.prefix}}--tooltip__trigger" aria-controls="{{noHeading.idSuffix}}" aria-haspopup="true">
     {{ carbon-icon 'Information16' }}
   </div>
 </div>
-<div id="unique-tooltip" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
-  data-avoid-focus-on-open>
+{{!-- @todo add aria-hidden once JavaScript can toggle it --}}
+<div id="{{noHeading.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open role="dialog" aria-describedby="{{noHeading.idSuffix}}-body" aria-labelledby="{{noHeading.idSuffix}}-label">
   <span class="{{@root.prefix}}--tooltip__caret"></span>
-  <p>This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
+  <p id="{{noHeading.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
+    needed
+    please use a modal instead.</p>
+  <div class="{{@root.prefix}}--tooltip__footer">
+    <a href="#" class="{{@root.prefix}}--link">Learn More</a>
+    <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--sm"
+      type="button">Create</button>
+  </div>
+</div>
+
+{{!-- Tooltip with visible label within tooltip --}}
+<div id="{{heading.idSuffix}}-label" class="{{@root.prefix}}--tooltip__label">
+  Tooltip label
+  {{!-- @todo add aria-expanded once JavaScript can toggle it --}}
+  {{!-- @todo use a button element once JavaScript can support it as the trigger (remove tabindex="0" and role="button") --}}
+  <div tabindex="0" aria-labelledby="{{heading.idSuffix}}-label" data-tooltip-trigger data-tooltip-target="#{{heading.idSuffix}}"
+    role="button" class="{{@root.prefix}}--tooltip__trigger" aria-controls="{{heading.idSuffix}}" aria-haspopup="true">
+    {{ carbon-icon 'Information16' }}
+  </div>
+</div>
+{{!-- @todo add aria-hidden once JavaScript can toggle it --}}
+<div id="{{heading.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open role="dialog" aria-describedby="{{heading.idSuffix}}-body" aria-labelledby="{{heading.idSuffix}}-heading">
+  <span class="{{@root.prefix}}--tooltip__caret"></span>
+  <h4 id="{{heading.idSuffix}}-heading">Heading within a Tooltip</h4>
+  <p id="{{heading.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
+    needed
+    please use a modal instead.</p>
+  <div class="{{@root.prefix}}--tooltip__footer">
+    <a href="#" class="{{@root.prefix}}--link">Learn More</a>
+    <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--btn--sm"
+      type="button">Create</button>
+  </div>
+</div>
+
+{{!-- Tooltip without visible label (not recommended for WCAG 2.1) --}}
+<div id="{{label.idSuffix}}-label" class="{{@root.prefix}}--tooltip__label">
+  Tooltip label
+  {{!-- @todo add aria-expanded once JavaScript can toggle it --}}
+  {{!-- @todo use a button element once JavaScript can support it as the trigger (remove tabindex="0" and role="button") --}}
+  <div tabindex="0" aria-labelledby="{{label.idSuffix}}-label" data-tooltip-trigger data-tooltip-target="#{{label.idSuffix}}"
+    role="button" class="{{@root.prefix}}--tooltip__trigger" aria-controls="{{label.idSuffix}}" aria-haspopup="true">
+    {{ carbon-icon 'Information16' }}
+  </div>
+</div>
+{{!-- @todo add aria-hidden once JavaScript can toggle it --}}
+<div id="{{label.idSuffix}}" data-floating-menu-direction="bottom" class="{{@root.prefix}}--tooltip"
+  data-avoid-focus-on-open role="dialog" aria-describedby="{{label.idSuffix}}-body" aria-label="Tooltip label">
+  <span class="{{@root.prefix}}--tooltip__caret"></span>
+  <p id="{{label.idSuffix}}-body" >This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is
     needed
     please use a modal instead.</p>
   <div class="{{@root.prefix}}--tooltip__footer">
