@@ -4,10 +4,11 @@
   This source code is licensed under the Apache-2.0 license found in the
   LICENSE file in the root directory of this source tree.
 -->
-{{!-- Passes W3C HTML validation--}}
 <div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
-  {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure--}}
-  <button class="{{@root.prefix}}--overflow-menu__trigger" aria-label="Overflow" aria-haspopup="true" aria-expanded="false" id="{{idSuffix.default}}-trigger" aria-controls="{{idSuffix.default}}">
+  <button
+    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--right {{@root.prefix}}--tooltip--align-start"
+    aria-haspopup="true" aria-expanded="false" id="{{idSuffix.default}}-trigger" aria-controls="{{idSuffix.default}}">
+    <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
   <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-labelledby="{{idSuffix.default}}-trigger"
@@ -27,8 +28,10 @@
 </div>
 
 <div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
-  {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure --}}
-  <button class="{{@root.prefix}}--overflow-menu__trigger" aria-label="Overflow" aria-haspopup="true" aria-expanded="false"  id="{{idSuffix.flip}}-trigger" aria-controls="{{idSuffix.flip}}">
+  <button
+    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start"
+    aria-haspopup="true" aria-expanded="false" id="{{idSuffix.flip}}-trigger" aria-controls="{{idSuffix.flip}}">
+    <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
   <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
@@ -48,8 +51,10 @@
 </div>
 
 <div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
-  {{!-- @todo This should use WCAG 2.1 Icon Tooltip structure --}}
-  <button class="{{@root.prefix}}--overflow-menu__trigger" aria-label="Overflow" aria-haspopup="true" aria-expanded="false"  id="{{idSuffix.link}}-trigger" aria-controls="{{idSuffix.link}}">
+  <button
+    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start"
+    aria-haspopup="true" aria-expanded="false" id="{{idSuffix.link}}-trigger" aria-controls="{{idSuffix.link}}">
+    <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
   <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
