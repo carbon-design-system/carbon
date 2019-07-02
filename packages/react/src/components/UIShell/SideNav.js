@@ -5,16 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+// TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
-import SideNavItems from './SideNavItems';
-import SideNavLink from './SideNavLink';
-import SideNavMenu from './SideNavMenu';
-import SideNavMenuItem from './SideNavMenuItem';
 
 const { prefix } = settings;
 
@@ -28,10 +25,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     children,
     onToggle,
     className: customClassName,
+    // TO-DO: comment back in when footer is added for rails
     // translateById: t,
     isFixedNav,
-    headerNavigationRef,
-    hasHeaderItems,
     isPersistent,
   } = props;
 
@@ -52,6 +48,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
+  // TO-DO: comment back in when footer is added for rails
   // const assistiveText = expanded
   //   ? t('carbon.sidenav.state.open')
   //   : t('carbon.sidenav.state.closed');
@@ -65,66 +62,23 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav--hidden`]: !isPersistent,
   });
 
-  const headerNavClassName = cx({
-    [`${prefix}--side-nav__header-navigation`]: hasHeaderItems,
-    [`${prefix}--side-nav__header-navigation--hidden`]: !hasHeaderItems,
+  const overlayClassName = cx({
+    [`${prefix}--side-nav__overlay`]: true,
+    [`${prefix}--side-nav__overlay-active`]: expanded,
   });
 
-  const [headerNavChildren, setHeaderNavChildren] = useState(null);
-
-  useEffect(() => {
-    hasHeaderItems
-      ? setHeaderNavChildren([...headerNavigationRef.current.children])
-      : null;
-  }, []);
-
   return (
-    <nav
-      ref={ref}
-      className={`${prefix}--side-nav__navigation ${className}`}
-      {...accessibilityLabel}
-      onFocus={event => handleToggle(event, true)}
-      onBlur={event => handleToggle(event, false)}>
-      <SideNavItems>
-        <div className={headerNavClassName}>
-          {headerNavChildren !== null
-            ? headerNavChildren.map(i => {
-                if (
-                  i.classList.length === 0 ||
-                  i.classList[0] !== `${prefix}--header__submenu`
-                ) {
-                  const text = i.innerText;
-                  const url = i.children[0].attributes[0].nodeValue;
-                  return (
-                    <SideNavLink href={url} key={`${Math.random()}`}>
-                      {text}
-                    </SideNavLink>
-                  );
-                } else if (
-                  i.classList.length > 0 &&
-                  i.classList[0] === `${prefix}--header__submenu`
-                ) {
-                  const text = i.children[0].innerText;
-                  const menuItems = [...i.children[1].children];
-                  const menuItemComponents = menuItems.map(i => {
-                    const itemText = i.innerText;
-                    const itemUrl = i.children[0].attributes[0].nodeValue;
-                    return (
-                      <SideNavMenuItem href={itemUrl} key={`${Math.random()}`}>
-                        {itemText}
-                      </SideNavMenuItem>
-                    );
-                  });
-                  return (
-                    <SideNavMenu title={text}>{menuItemComponents}</SideNavMenu>
-                  );
-                }
-              })
-            : null}
-        </div>
+    <>
+      <div className={overlayClassName} />
+      <nav
+        ref={ref}
+        className={`${prefix}--side-nav__navigation ${className}`}
+        {...accessibilityLabel}
+        onFocus={event => handleToggle(event, true)}
+        onBlur={event => handleToggle(event, false)}>
         {children}
-      </SideNavItems>
-    </nav>
+      </nav>
+    </>
   );
 });
 
@@ -139,7 +93,6 @@ SideNav.defaultProps = {
   defaultExpanded: false,
   isChildOfHeader: true,
   isFixedNav: false,
-  hasHeaderItems: false,
   isPersistent: true,
 };
 
@@ -188,19 +141,9 @@ SideNav.propTypes = {
   isChildOfHeader: PropTypes.bool,
 
   /**
-   * Returns the ref for headerNavigation when used with SideNav
-   */
-  headerNavigationRef: PropTypes.object,
-
-  /**
    * Specify if sideNav is standalone
    */
   isFixedNav: PropTypes.bool,
-
-  /**
-   * Specify if sideNav will include responsive header navigation links
-   */
-  hasHeaderItems: PropTypes.bool,
 
   /**
    * Specify if the sideNav will be persistent above the lg breakpoint
