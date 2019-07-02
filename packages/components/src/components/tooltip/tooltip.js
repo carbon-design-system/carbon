@@ -84,6 +84,9 @@ class Tooltip extends mixin(
   eventedShowHideState,
   handles
 ) {
+  // Wanted to add the following to the JSDoc for the constructor but got linting errors
+  // Is there a perferred way to do with @extends as well?
+  // @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
   /**
    * Tooltip.
    * @extends CreateComponent
@@ -92,6 +95,10 @@ class Tooltip extends mixin(
    */
   constructor(element, options) {
     super(element, options);
+    const buttonTrigger = this.element.querySelector(
+      this.options.selectorTrigger
+    );
+    if (buttonTrigger) this.triggerNode = buttonTrigger;
     this._hookOn(element);
   }
 
@@ -151,7 +158,17 @@ class Tooltip extends mixin(
     this.tooltip.changeState(
       state,
       Object.assign(detail, { delegatorNode: this.element }),
-      callback
+      () => {
+        // @todo remove conditional once non-compliant code is deprecated
+        if (this.triggerNode) {
+          const isHidden = state === 'hidden';
+          this.tooltip.setAttribute('aria-hidden', (!isHidden).toString());
+          this.triggerNode.setAttribute('aria-expanded', isHidden.toString());
+        }
+
+        // Do I need to pass any parameters to callback?
+        if (typeof callback === 'function') callback();
+      }
     );
   }
 
@@ -224,6 +241,7 @@ class Tooltip extends mixin(
       selectorInit: '[data-tooltip-trigger]',
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
+      selectorTrigger: 'button[aria-haspopup]',
       objMenuOffset: getMenuOffset,
       initEventNames: ['focus'],
     };
