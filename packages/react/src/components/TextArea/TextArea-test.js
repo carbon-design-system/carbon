@@ -196,7 +196,9 @@ describe('TextArea', () => {
 
       it('should invoke onChange when textarea value is changed', () => {
         textarea.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toBeCalledWith(eventObject, {
+          value: eventObject.target.value,
+        });
       });
     });
   });
