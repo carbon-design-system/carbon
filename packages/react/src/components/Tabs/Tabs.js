@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { ChevronDownGlyph } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -107,7 +108,9 @@ export default class Tabs extends React.Component {
   }
 
   getTabs() {
-    return React.Children.map(this.props.children, tab => tab);
+    return React.Children.map(this.props.children, (tab, index) =>
+      React.cloneElement(tab, { index })
+    );
   }
 
   getTabAt = (index, useFresh) => {
@@ -146,25 +149,38 @@ export default class Tabs extends React.Component {
     };
   };
 
-  handleTabAnchorFocus = onSelectionChange => {
-    return index => {
-      const tabCount = React.Children.count(this.props.children) - 1;
-      let tabIndex = index;
-      if (index < 0) {
-        tabIndex = tabCount;
-      } else if (index > tabCount) {
-        tabIndex = 0;
+  handleTabAnchorFocus = onSelectionChange => (evt, { index }) => {
+    const newIndex = (() => {
+      const validTabs = this.getTabs().filter(tab => !tab.props.disabled);
+      const currentValidTabIndex = validTabs.findIndex(
+        tab => tab.props.index === index
+      ); // index of current tab in the array of valid tabs
+      if (matches(evt, [keys.ArrowLeft])) {
+        return currentValidTabIndex - 1 < 0
+          ? validTabs[validTabs.length - 1].props.index
+          : validTabs[currentValidTabIndex - 1].props.index;
       }
-
-      const tab = this.getTabAt(tabIndex);
-
-      if (tab) {
-        this.selectTabAt(tabIndex, onSelectionChange);
-        if (tab.tabAnchor) {
-          tab.tabAnchor.focus();
-        }
+      if (matches(evt, [keys.ArrowRight])) {
+        return currentValidTabIndex + 1 > validTabs.length - 1
+          ? validTabs[0].props.index
+          : validTabs[currentValidTabIndex + 1].props.index;
       }
-    };
+      if (matches(evt, [keys.End])) {
+        return validTabs[validTabs.length - 1].props.index;
+      }
+      if (matches(evt, [keys.Home])) {
+        return validTabs[0].props.index;
+      }
+      return null;
+    })();
+    const tab = this.getTabAt(newIndex);
+
+    if (tab) {
+      this.selectTabAt(newIndex, onSelectionChange);
+      if (tab.tabAnchor) {
+        tab.tabAnchor.focus();
+      }
+    }
   };
 
   handleDropdownClick = () => {
