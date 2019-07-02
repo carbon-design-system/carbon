@@ -150,7 +150,7 @@ class OverflowMenu extends mixin(
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
-    // @todo Can reference `trigger` only once non-compliant code is deprecated
+    // @todo Can reference `triggerNode` only once non-compliant code is deprecated
     const triggerElement = this.triggerNode ? 'triggerNode' : 'element';
     if (state === 'hidden') {
       this[triggerElement].setAttribute('aria-expanded', 'false');
@@ -197,7 +197,7 @@ class OverflowMenu extends mixin(
    * @private
    */
   _handleDocumentClick(event) {
-    const { element, optionMenu, wasOpenBeforeClick } = this;
+    const { element, optionMenu, wasOpenBeforeClick, triggerNode } = this;
     const isOfSelf = element.contains(event.target);
     const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
     const shouldBeOpen = isOfSelf && !wasOpenBeforeClick;
@@ -213,7 +213,8 @@ class OverflowMenu extends mixin(
     if (!isOfMenu || eventMatches(event, this.options.selectorItem)) {
       this.changeState(state, getLaunchingDetails(event), () => {
         if (state === 'hidden' && isOfMenu) {
-          element.focus();
+          // @todo Can reference `triggerNode` only once non-compliant code is deprecated
+          this[triggerNode ? 'triggerNode' : 'element'].focus();
         }
       });
     }
@@ -277,16 +278,18 @@ class OverflowMenu extends mixin(
    */
   _handleKeyPress(event) {
     const key = event.which;
-    const { element, optionMenu, options } = this;
+    const { element, optionMenu, options, triggerNode } = this;
     const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
     const isExpanded = this.element.classList.contains(this.options.classShown);
+    // @todo Can reference `triggerNode` only once non-compliant code is deprecated
+    const triggerElement = triggerNode ? 'triggerNode' : 'element';
 
     switch (key) {
       // Esc
       case 27:
         this.changeState('hidden', getLaunchingDetails(event), () => {
           if (isOfMenu) {
-            element.focus();
+            this[triggerElement].focus();
           }
         });
         break;
@@ -309,7 +312,7 @@ class OverflowMenu extends mixin(
           event.preventDefault(); // prevent scrolling
           this.changeState(state, getLaunchingDetails(event), () => {
             if (state === 'hidden' && isOfMenu) {
-              element.focus();
+              this[triggerElement].focus();
             }
           });
         }
