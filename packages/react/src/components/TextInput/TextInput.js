@@ -16,6 +16,25 @@ import Tooltip from '../Tooltip';
 import { textInputProps } from './util';
 
 const { prefix } = settings;
+const DefaultCharCounter = ({ disabled, count, maxLength }) => {
+  const charCounterClasses = classNames(
+    `${prefix}--text-input--character-counter`,
+    {
+      [`${prefix}--text-input--character-counter--disabled`]: disabled,
+    }
+  );
+  return (
+    <span className={charCounterClasses}>
+      <span className={`${prefix}--text-input--character-counter--length`}>
+        {count}
+      </span>
+      /
+      <span className={`${prefix}--text-input--character-counter--maxlength`}>
+        {maxLength}
+      </span>
+    </span>
+  );
+};
 const TextInput = React.forwardRef(function TextInput(
   {
     labelText,
@@ -32,7 +51,10 @@ const TextInput = React.forwardRef(function TextInput(
     light,
     readOnly,
     readOnlyIconLabel,
+    charCount,
+    renderCharCounter: CharCounter = DefaultCharCounter,
     defaultValue,
+    maxLength,
     ...other
   },
   ref
@@ -61,6 +83,7 @@ const TextInput = React.forwardRef(function TextInput(
     ref,
     className: textInputClasses,
     readOnly,
+    maxLength: maxLength || null,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -76,6 +99,18 @@ const TextInput = React.forwardRef(function TextInput(
         {labelText}
       </label>
     );
+    if (labelContent && charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {labelContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={isControlled ? other.value.length : inputVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
     return labelContent;
   })();
   const error = invalid ? (
@@ -102,6 +137,19 @@ const TextInput = React.forwardRef(function TextInput(
     const helperContent = helperText ? (
       <div className={helperTextClasses}>{helperText}</div>
     ) : null;
+    if (!labelText && charCount) {
+      return (
+        <div className={`${prefix}--text-input__character-counter-title`}>
+          {helperContent}
+          <CharCounter
+            disabled={other.disabled}
+            count={isControlled ? other.value.length : inputVal.length}
+            maxLength={maxLength}
+          />
+        </div>
+      );
+    }
+
     return helperContent;
   })();
 
@@ -219,6 +267,16 @@ TextInput.propTypes = {
    * The label for the read-only status icon
    */
   readOnlyIconLabel: PropTypes.string,
+
+  /**
+   * Specify whether the character counter is shown
+   */
+  charCount: PropTypes.bool,
+
+  /**
+   * The maximum allowed input value length
+   */
+  maxLength: PropTypes.number,
 };
 
 TextInput.defaultProps = {
