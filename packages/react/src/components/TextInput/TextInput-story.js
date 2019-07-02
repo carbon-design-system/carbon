@@ -8,7 +8,13 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  select,
+  text,
+  number,
+} from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 
@@ -19,26 +25,8 @@ const types = {
   'For password (password)': 'password',
 };
 
-function ControlledPasswordInputApp(props) {
-  const [type, setType] = useState('password');
-  const togglePasswordVisibility = () => {
-    setType(type === 'password' ? 'text' : 'password');
-  };
-  return (
-    <>
-      <TextInput.ControlledPasswordInput
-        type={type}
-        togglePasswordVisibility={togglePasswordVisibility}
-        {...props}
-      />
-      <button onClick={() => setType('text')}>Show password</button>
-      <button onClick={() => setType('password')}>Hide password</button>
-    </>
-  );
-}
-
 const props = {
-  TextInputProps: () => ({
+  textInput: () => ({
     className: 'some-class',
     id: 'test2',
     defaultValue: text(
@@ -60,11 +48,33 @@ const props = {
       'Read-only icon label (readOnlyIconLabel)',
       'This input field is read-only'
     ),
+    useCharCount: boolean('Add character counter (useCharCount)', false),
+    maxLength: number('Input length limit (maxLength)', 100),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
     onClick: action('onClick'),
     onChange: action('onChange'),
   }),
-  PasswordInputProps: () => ({
+  passwordInput: () => ({
+    className: 'some-class',
+    id: 'test2',
+    defaultValue: text(
+      'Default value (defaultValue)',
+      'This is not a default value'
+    ),
+    labelText: text('Label text (labelText)', 'Text Input label'),
+    placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
+    light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
+    hideLabel: boolean('No label (hideLabel)', false),
+    invalid: boolean('Show form validation UI (invalid)', false),
+    maxLength: number('Input length limit (maxLength)', 100),
+    invalidText: text(
+      'Form validation UI content (invalidText)',
+      'A valid value is required'
+    ),
+    helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    onClick: action('onClick'),
+    onChange: action('onChange'),
     tooltipPosition: select(
       'Tooltip position (tooltipPosition)',
       ['top', 'right', 'bottom', 'left'],
@@ -77,6 +87,40 @@ const props = {
     ),
   }),
 };
+function ControlledTextInput(controlledProps) {
+  const [value, setValue] = useState(controlledProps.defaultValue || '');
+  return (
+    <>
+      <TextInput
+        value={value}
+        {...controlledProps}
+        onChange={(evt, { value }) => setValue(value)}
+      />
+      <br />
+      <button onClick={() => setValue(controlledProps.defaultValue || '')}>
+        Reset
+      </button>
+      <button onClick={() => setValue(value + '1')}>Append 1</button>
+    </>
+  );
+}
+function ControlledPasswordInputApp(props) {
+  const [type, setType] = useState('password');
+  const togglePasswordVisibility = () => {
+    setType(type === 'password' ? 'text' : 'password');
+  };
+  return (
+    <>
+      <TextInput.ControlledPasswordInput
+        type={type}
+        togglePasswordVisibility={togglePasswordVisibility}
+        {...props}
+      />
+      <button onClick={() => setType('text')}>Show password</button>
+      <button onClick={() => setType('password')}>Hide password</button>
+    </>
+  );
+}
 
 storiesOf('TextInput', module)
   .addDecorator(withKnobs)
@@ -85,12 +129,8 @@ storiesOf('TextInput', module)
     () => (
       <TextInput
         type={select('Form control type (type)', types, 'text')}
-        {...props.TextInputProps()}
-        invalid={
-          props.TextInputProps().readOnly
-            ? false
-            : props.TextInputProps().invalid
-        }
+        {...props.textInput()}
+        invalid={props.textInput().readOnly ? false : props.textInput().invalid}
       />
     ),
     {
@@ -105,13 +145,19 @@ storiesOf('TextInput', module)
     }
   )
   .add(
+    'Fully controlled text input',
+    () => <ControlledTextInput {...props.textInput()} />,
+    {
+      info: {
+        text: `
+        Fully controlled text field.
+      `,
+      },
+    }
+  )
+  .add(
     'Toggle password visibility',
-    () => (
-      <TextInput.PasswordInput
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => <TextInput.PasswordInput {...props.passwordInput()} />,
     {
       info: {
         text: `
@@ -122,12 +168,7 @@ storiesOf('TextInput', module)
   )
   .add(
     'Fully controlled toggle password visibility',
-    () => (
-      <ControlledPasswordInputApp
-        {...props.TextInputProps()}
-        {...props.PasswordInputProps()}
-      />
-    ),
+    () => <ControlledPasswordInputApp {...props.passwordInput()} />,
     {
       info: {
         text: `
