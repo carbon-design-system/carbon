@@ -184,7 +184,7 @@ describe('TextInput', () => {
       const input = wrapper.find('input');
       const eventObject = {
         target: {
-          defaultValue: 'test',
+          value: 'test',
         },
       };
 
@@ -195,7 +195,9 @@ describe('TextInput', () => {
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toBeCalledWith(eventObject, {
+          value: eventObject.target.value,
+        });
       });
     });
   });

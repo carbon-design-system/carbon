@@ -20,6 +20,7 @@ describe('TextInput', () => {
         className="extra-class"
         labelText="testlabel"
         helperText="testHelper"
+        defaultValue="test"
         light
       />
     );
@@ -75,9 +76,26 @@ describe('TextInput', () => {
       });
 
       it('should set value as expected', () => {
-        expect(textInput().props().defaultValue).toEqual(undefined);
         wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput().props().defaultValue).toEqual('test');
+        expect(wrapper.find('input').props().value).toEqual('test');
+      });
+
+      it('should count length increases in text input value', () => {
+        const event = { target: { value: 'z' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textInput().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
+        ).toBe('1/10');
+      });
+
+      it('should count length decreases in text input value', () => {
+        const event = { target: { value: '' } };
+        wrapper.setProps({ charCount: true, maxLength: 10 });
+        textInput().simulate('input', event);
+        expect(
+          wrapper.find(`span.${prefix}--text-input--character-counter`).text()
+        ).toBe('0/10');
       });
 
       it('should set disabled as expected', () => {
@@ -120,14 +138,14 @@ describe('TextInput', () => {
         wrapper.setProps({
           helperText: (
             <span>
-              This helper text has <a href="#">a link</a>.
+              This helper text has <a href="/">a link</a>.
             </span>
           ),
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
           <span>
-            This helper text has <a href="#">a link</a>.
+            This helper text has <a href="/">a link</a>.
           </span>
         );
       });
@@ -184,7 +202,7 @@ describe('TextInput', () => {
       const input = wrapper.find('input');
       const eventObject = {
         target: {
-          defaultValue: 'test',
+          value: 'test',
         },
       };
 
@@ -195,7 +213,9 @@ describe('TextInput', () => {
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toBeCalledWith(eventObject, {
+          value: eventObject.target.value,
+        });
       });
     });
   });
