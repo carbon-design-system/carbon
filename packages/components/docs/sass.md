@@ -4065,7 +4065,7 @@ $carbon--theme--g90: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4140,7 +4140,7 @@ $carbon--theme--g100: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -9878,6 +9878,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
     width: $layout-04;
     height: 100%;
+    position: initial;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -12710,17 +12711,17 @@ Link styles
 
     &:hover {
       color: $link-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:focus {
-      box-shadow: 0 3px currentColor;
+      @include focus-outline;
     }
 
     &:not([href]) {
@@ -12728,10 +12729,6 @@ Link styles
       cursor: not-allowed;
       pointer-events: none;
       touch-action: none;
-
-      &:hover {
-        box-shadow: none;
-      }
     }
 
     &:visited {
