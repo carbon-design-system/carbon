@@ -38,7 +38,6 @@ import {
   SideNavMenuItem,
   Switcher,
   SwitcherItem,
-  SwitcherItemLink,
   SwitcherDivider,
 } from '../UIShell';
 
@@ -492,7 +491,7 @@ storiesOf('UI Shell', module)
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
-        <HeaderPanel expanded />
+        <HeaderPanel aria-label="Header Panel" expanded />
       </Header>
     ))
   )
@@ -521,39 +520,27 @@ storiesOf('UI Shell', module)
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
-        <HeaderPanel expanded>
-          <Switcher>
-            <SwitcherItem>
-              <SwitcherItemLink isSelected href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+        <HeaderPanel aria-label="Header Panel" expanded>
+          <Switcher role="menu" aria-label="Switcher Container">
+            <SwitcherItem isSelected aria-label="Link 1" href="#">
+              Link 1
             </SwitcherItem>
             <SwitcherDivider />
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 2">
+              Link 2
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 3">
+              Link 3
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 4">
+              Link 4
             </SwitcherItem>
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 5">
+              Link 5
             </SwitcherItem>
             <SwitcherDivider />
-            <SwitcherItem>
-              <SwitcherItemLink href="javascript:void(0)">
-                Link
-              </SwitcherItemLink>
+            <SwitcherItem href="#" aria-label="Link 6">
+              Link 6
             </SwitcherItem>
           </Switcher>
         </HeaderPanel>

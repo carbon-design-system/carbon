@@ -10,10 +10,18 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
+import { getNextIndex, matches, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
 export default class ContentSwitcher extends React.Component {
+  /**
+   * The DOM references of child `<Switch>`.
+   * @type {Array<Element>}
+   * @private
+   */
+  _switchRefs = [];
+
   state = {};
 
   static propTypes = {
@@ -53,27 +61,41 @@ export default class ContentSwitcher extends React.Component {
         };
   }
 
-  getChildren(children) {
-    return React.Children.map(children, (child, index) =>
-      React.cloneElement(child, {
-        index,
-        onClick: composeEventHandlers([
-          this.handleChildChange,
-          child.props.onClick,
-        ]),
-        onKeyDown: this.handleChildChange,
-        selected: index === this.state.selectedIndex,
-      })
-    );
-  }
+  handleItemRef = index => ref => {
+    this._switchRefs[index] = ref;
+  };
 
   handleChildChange = data => {
+    // the currently selected child index
     const { selectedIndex } = this.state;
+    // the newly selected child index
     const { index } = data;
+    const { key } = data;
 
-    if (selectedIndex !== index) {
-      this.setState({ selectedIndex: index });
-      this.props.onChange(data);
+    if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
+      const nextIndex = getNextIndex(
+        key,
+        selectedIndex,
+        this.props.children.length
+      );
+      this.setState(
+        {
+          selectedIndex: nextIndex,
+        },
+        () => {
+          const switchRef = this._switchRefs[nextIndex];
+          switchRef && switchRef.focus();
+          this.props.onChange(data);
+        }
+      );
+    } else {
+      if (selectedIndex !== index) {
+        this.setState({ selectedIndex: index }, () => {
+          const switchRef = this._switchRefs[index];
+          switchRef && switchRef.focus();
+          this.props.onChange(data);
+        });
+      }
     }
   };
 
@@ -89,7 +111,18 @@ export default class ContentSwitcher extends React.Component {
 
     return (
       <div {...other} className={classes}>
-        {this.getChildren(children)}
+        {React.Children.map(children, (child, index) =>
+          React.cloneElement(child, {
+            index,
+            onClick: composeEventHandlers([
+              this.handleChildChange,
+              child.props.onClick,
+            ]),
+            onKeyDown: this.handleChildChange,
+            selected: index === this.state.selectedIndex,
+            ref: this.handleItemRef(index),
+          })
+        )}
       </div>
     );
   }

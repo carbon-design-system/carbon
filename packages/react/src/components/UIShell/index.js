@@ -21,7 +21,6 @@ export HeaderSideNavItems from './HeaderSideNavItems';
 
 export Switcher from './Switcher';
 export SwitcherItem from './SwitcherItem';
-export SwitcherItemLink from './SwitcherItemLink';
 export SwitcherDivider from './SwitcherDivider';
 
 export SkipToContent from './SkipToContent';

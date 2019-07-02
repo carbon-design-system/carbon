@@ -20,7 +20,7 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
-import { keys, keyCodes, matches as keyDownMatch } from '../../tools/key';
+import { keys, matches as keyDownMatch } from '../../internal/keyboard';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 
 const { prefix } = settings;
@@ -281,19 +281,12 @@ class Tooltip extends Component {
   };
 
   handleKeyPress = event => {
-    if (keyDownMatch(event, [keys.ESC, keyCodes.ESC, keyCodes.IEESC])) {
+    if (keyDownMatch(event, [keys.Escape])) {
       event.stopPropagation();
       this.setState({ open: false });
     }
 
-    if (
-      keyDownMatch(event, [
-        keys.ENTER,
-        keyCodes.ENTER,
-        keys.SPACE,
-        keyCodes.SPACE,
-      ])
-    ) {
+    if (keyDownMatch(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
       this.setState({ open: !this.state.open });
     }
@@ -301,7 +294,7 @@ class Tooltip extends Component {
 
   handleEscKeyPress = event => {
     const { open } = this.state;
-    if (open && keyDownMatch(event, [keys.ESC, keyCodes.ESC, keyCodes.IEESC])) {
+    if (open && keyDownMatch(event, [keys.Escape])) {
       return this.setState({ open: false });
     }
   };
