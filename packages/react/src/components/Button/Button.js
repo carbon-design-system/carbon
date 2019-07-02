@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
 import warning from 'warning';
+import Loading from '../Loading';
 
 const { prefix } = settings;
 
@@ -30,6 +31,7 @@ const Button = React.forwardRef(function Button(
     type,
     renderIcon: ButtonImageElement,
     iconDescription,
+    performingAction,
     ...other
   },
   ref
@@ -45,6 +47,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
     [`${prefix}--btn--tertiary`]: kind === 'tertiary',
     [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--btn--loading`]: performingAction,
   });
 
   if (__DEV__) {
@@ -63,7 +66,9 @@ const Button = React.forwardRef(function Button(
     ref,
   };
 
-  const buttonImage = !ButtonImageElement ? null : (
+  const buttonImage = performingAction ? (
+    <Loading small withOverlay={false} />
+  ) : !ButtonImageElement ? null : (
     <ButtonImageElement
       aria-label={iconDescription}
       className={`${prefix}--btn__icon`}
@@ -137,6 +142,11 @@ Button.propTypes = {
   small: PropTypes.bool,
 
   /**
+   * Specify whether the Button should render a spinner
+   */
+  performingAction: PropTypes.bool,
+
+  /**
    * Specify the kind of Button you want to create
    */
   kind: ButtonTypes.buttonKind.isRequired,
@@ -187,6 +197,7 @@ Button.defaultProps = {
   disabled: false,
   small: false,
   kind: 'primary',
+  performingAction: true,
 };
 
 export default Button;
