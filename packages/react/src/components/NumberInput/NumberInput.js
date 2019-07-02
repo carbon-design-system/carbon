@@ -298,7 +298,7 @@ class NumberInput extends Component {
           ? value
           : this.state.value,
       readOnly,
-      ariaLabel,
+      'aria-label': ariaLabel,
     };
 
     const buttonProps = {
