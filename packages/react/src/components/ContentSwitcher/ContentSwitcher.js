@@ -27,26 +27,33 @@ function ContentSwitcher({
   selectedIndex: controlledSelectedIndex = 0,
   ...rest
 }) {
+  const savedOnChange = useRef(null);
   const switchRefs = [];
   const className = cx(`${prefix}--content-switcher`, customClassName);
   const [selectedIndex, setSelectedIndex] = useState(controlledSelectedIndex);
+  const [focusIndex, setFocusIndex] = useState(null);
 
   useEffect(() => {
-    setSelectedIndex(selectedIndex => {
-      if (selectedIndex !== controlledSelectedIndex) {
-        return controlledSelectedIndex;
-      }
-      return selectedIndex;
-    });
+    setSelectedIndex(controlledSelectedIndex);
   }, [controlledSelectedIndex]);
 
   useEffect(() => {
-    const ref = switchRefs[selectedIndex];
+    savedOnChange.current = onChange;
+  }, [onChange]);
+
+  useEffect(() => {
+    if (focusIndex === null) {
+      return;
+    }
+
+    const ref = switchRefs[focusIndex];
     if (ref && document.activeElement !== ref.current) {
       ref.focus && ref.focus();
-      onChange(selectedIndex);
+      if (savedOnChange.current) {
+        savedOnChange.current(focusIndex);
+      }
     }
-  }, [selectedIndex]);
+  }, [switchRefs, focusIndex]);
 
   function handleItemRef(index) {
     return ref => {
@@ -54,21 +61,27 @@ function ContentSwitcher({
     };
   }
 
-  function onClick(index) {
+  function setIndex(index) {
+    setSelectedIndex(index);
+    setFocusIndex(index);
+  }
+
+  function onClick(event, index) {
     if (selectedIndex !== index) {
-      setSelectedIndex(index);
+      setIndex(index);
     }
   }
 
-  function onKeyDown(event, index) {
-    if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
-      const nextIndex = getNextIndex(
-        event.key || event.which,
-        selectedIndex,
-        children.length
-      );
-      console.log(nextIndex);
-      setSelectedIndex(nextIndex);
+  function onKeyDown(event) {
+    if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
+      const nextIndex = getNextIndex(event, selectedIndex, children.length);
+      setIndex(nextIndex);
+    }
+  }
+
+  function onFocus(event, index) {
+    if (focusIndex !== index) {
+      setFocusIndex(index);
     }
   }
 
@@ -78,7 +91,8 @@ function ContentSwitcher({
         cloneElement(child, {
           index,
           onClick: composeEventHandlers([onClick, child.props.onClick]),
-          onKeyDown: onKeyDown,
+          onFocus: composeEventHandlers([onFocus, child.props.onFocus]),
+          onKeyDown: composeEventHandlers([onKeyDown, child.props.onKeyDown]),
           selected: index === selectedIndex,
           ref: handleItemRef(index),
         })

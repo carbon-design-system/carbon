@@ -17,6 +17,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     className: customClassName,
     index,
     onClick,
+    onFocus,
     onKeyDown,
     name,
     selected,
@@ -33,11 +34,11 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   function handleOnClick(event) {
     // TODO: do we still need this with `type="button"`?
     event.preventDefault();
-    onClick(index);
+    onClick(event, index);
   }
 
-  function handleOnKeyDown(event) {
-    onKeyDown(event, index);
+  function handleOnFocus(event) {
+    onFocus(event, index);
   }
 
   return (
@@ -47,7 +48,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       ref={tabRef}
       role="tab"
       onClick={handleOnClick}
-      onKeyDown={handleOnKeyDown}
+      onKeyDown={onKeyDown}
       tabIndex={selected ? '0' : '-1'}
       type="button"
       {...rest}>

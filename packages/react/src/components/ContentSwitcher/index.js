@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export { default as Switch } from './Switch';
 export default from './ContentSwitcher';
