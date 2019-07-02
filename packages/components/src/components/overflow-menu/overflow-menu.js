@@ -151,7 +151,7 @@ class OverflowMenu extends mixin(
    */
   changeState(state, detail, callback) {
     // @todo Can reference `trigger` only once non-compliant code is deprecated
-    const triggerElement = this.triggerNode ? 'trigger' : 'element';
+    const triggerElement = this.triggerNode ? 'triggerNode' : 'element';
     if (state === 'hidden') {
       this[triggerElement].setAttribute('aria-expanded', 'false');
     } else {
