@@ -12,7 +12,6 @@ import {
   blue50,
   blue60,
   blue80,
-  blue90,
 
   // Gray
   gray10,
@@ -112,7 +111,7 @@ export const disabled01 = gray90;
 export const disabled02 = gray80;
 export const disabled03 = gray60;
 
-export const highlight = blue90;
+export const highlight = blue80;
 
 export const skeleton01 = '#353535';
 export const skeleton02 = gray80;
