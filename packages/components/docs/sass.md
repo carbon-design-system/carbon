@@ -9878,6 +9878,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
     width: $layout-04;
     height: 100%;
+    position: initial;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
