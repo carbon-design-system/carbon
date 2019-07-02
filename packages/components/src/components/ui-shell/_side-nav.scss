@@ -600,6 +600,7 @@
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
     color: $shell-side-nav-text-01;
     white-space: nowrap;
+    justify-content: space-between;
 
     &[aria-expanded='true'] {
       background-color: transparent;
