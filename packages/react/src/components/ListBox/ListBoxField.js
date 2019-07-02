@@ -38,10 +38,21 @@ ListBoxField.propTypes = {
    * Provide the contents of your ListBoxField
    */
   children: childrenOf([ListBoxMenuIcon, ListBoxSelection, 'span', 'input']),
+
   /**
    * Specify a custom `id`
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Specify if the parent <ListBox> is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the tabIndex of the <ListBox> trigger button
+   */
+  tabIndex: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
 };
 
 export default ListBoxField;
