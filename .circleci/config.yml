@@ -20,23 +20,6 @@ jobs:
           name: Build packages
           command: yarn build
       - run:
-          name: Check for generated files that have not been committed
-          command: |
-            if [ -n "$(git status --porcelain)" ]; then
-              echo "Your git status is not clean. You may have forgotten to check-in the following files:";
-              echo "$(git status --porcelain)";
-              exit 1;
-            fi
-
-            yarn sync
-
-            if [ -n "$(git status --porcelain)" ]; then
-              echo "Your git status is not clean. You may have forgotten to sync the following package.json files:";
-              echo "$(git status --porcelain)";
-              echo 'You can fix this by running: `yarn sync`';
-              exit 1;
-            fi
-      - run:
           name: Run Continuous Integration checks
           command: |
             yarn ci-check
@@ -116,45 +99,42 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      # - run:
-          # name: Install yarn
-          # command: |
-            # curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
-            # # Reference:
-            # # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
-            # echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
-      # - run:
-          # name: Install dependencies
-          # command: yarn install --offline --frozen-lockfile
-      # - run:
-          # name: Build packages
-          # command: yarn build
-      # - run:
-          # name: Sync project dependency files
-          # command: yarn sync
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
+      - run:
+          name: Sync project dependency files
+          command: yarn sync
       - run:
           name: Push generated artifacts to GitHub
           command: |
-            # if [ -n "$(git status --porcelain)" ]; then
-              echo "testing artifacts task"
-              # echo "Our git status is not clean. Checking in the following files";
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Our git status is not clean. Checking in the following files:";
+              echo "$(git status --porcelain)";
 
-              # git config --global credential.helper 'cache --timeout=120'
-              # git config --global user.email "carbon@us.ibm.com"
-              # git config --global user.name "carbon-bot"
+              git config --global credential.helper 'cache --timeout=120'
+              git config --global user.email "carbon@us.ibm.com"
+              git config --global user.name "carbon-bot"
 
-              # echo "https://${GH_TOKEN}@github.com" > git credential fill > /dev/null 2>&1
+              git add -A
+              git commit -m "chore(project): sync generated files [skip ci]"
 
-              # TODO: Remove
-              # git commit --allow-empty -m 'chore(project): test automated commit setup'
-
-              # git add -A
-              # git commit -m "chore(project): sync generated files"
-              # git push origin master
-
-              # Clean-up default file storage for `git credential fill`
-              # rm ~/.git-credentials
-            # fi
+              # Pipe to /dev/null to prevent any token leaks in CI output
+              git push -q \
+                https://${GH_TOKEN}:@github.com/carbon-design-system/carbon.git \
+                master \
+                > /dev/null 2>&1
+            fi
 
 workflows:
   version: 2
@@ -164,10 +144,10 @@ workflows:
       - artifacts:
           requires:
             - system
-          # filters:
-            # branches:
-              # only:
-                # - master
+          filters:
+            branches:
+              only:
+                - master
       - release:
           requires:
             - system
