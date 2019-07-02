@@ -151,6 +151,7 @@ workflows:
       - release:
           requires:
             - system
+            - artifacts
           filters:
             branches:
               only:
@@ -158,6 +159,7 @@ workflows:
       - deploy:
           requires:
             - system
+            - artifacts
           filters:
             branches:
               ignore: /.*/
