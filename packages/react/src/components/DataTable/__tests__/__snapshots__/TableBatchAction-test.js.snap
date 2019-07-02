@@ -16,6 +16,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     disabled={false}
     iconDescription="Add"
     kind="primary"
+    performingAction={false}
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),

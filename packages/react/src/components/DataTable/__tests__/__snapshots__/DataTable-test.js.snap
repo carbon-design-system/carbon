@@ -1836,6 +1836,7 @@ exports[`DataTable should render 1`] = `
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
+                  performingAction={false}
                   small={true}
                   tabIndex={0}
                   type="button"
@@ -1978,6 +1979,7 @@ exports[`DataTable should render 1`] = `
                       iconDescription="Add"
                       kind="primary"
                       onClick={[MockFunction]}
+                      performingAction={false}
                       renderIcon={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
@@ -2052,6 +2054,7 @@ exports[`DataTable should render 1`] = `
                       iconDescription="Add"
                       kind="primary"
                       onClick={[MockFunction]}
+                      performingAction={false}
                       renderIcon={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
@@ -2126,6 +2129,7 @@ exports[`DataTable should render 1`] = `
                       iconDescription="Add"
                       kind="primary"
                       onClick={[MockFunction]}
+                      performingAction={false}
                       renderIcon={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
@@ -2190,6 +2194,7 @@ exports[`DataTable should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
+                    performingAction={false}
                     small={false}
                     tabIndex={0}
                     type="button"
@@ -2465,6 +2470,7 @@ exports[`DataTable should render 1`] = `
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
+                performingAction={false}
                 small={true}
                 tabIndex={0}
                 type="button"
