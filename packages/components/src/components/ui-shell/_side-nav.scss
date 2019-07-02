@@ -424,16 +424,12 @@
     display: block;
     visibility: hidden;
     max-height: 0;
-    transition: $transition--expansion max-height $carbon--ease-out,
-      $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     + .#{$prefix}--side-nav__menu[role='menu'] {
     max-height: rem(1500px);
     visibility: inherit;
-    transition: $transition--expansion max-height $carbon--ease-in,
-      $transition--expansion visibility $carbon--standard-easing;
   }
 
   .#{$prefix}--side-nav__menu[role='menu']
@@ -525,8 +521,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: mini-units(2);
-    height: mini-units(2);
     // Helpful in flex containers so the icon does not have less than the
     // expected width
     flex: 0 0 mini-units(2);
@@ -538,6 +532,8 @@
 
   .#{$prefix}--side-nav__icon > svg {
     fill: $shell-side-nav-icon-01;
+    width: mini-units(2);
+    height: mini-units(2);
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {

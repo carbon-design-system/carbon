@@ -25,24 +25,15 @@ async function sync(args, env) {
   }
 }
 
-function register(cli) {
-  cli.command(
-    'sync [target]',
-    'sync files across workspaces',
-    yargs => {
-      yargs.positional('target', {
-        describe: 'choose a target to sync',
-        choices: ['all', 'npm', 'package', 'readme'],
-        default: 'all',
-      });
-    },
-    workspace(sync)
-  );
-
-  return cli;
-}
-
 module.exports = {
-  sync,
-  register,
+  command: 'sync [target]',
+  desc: 'sync files across workspaces',
+  builder(yargs) {
+    yargs.positional('target', {
+      describe: 'choose a target to sync',
+      choices: ['all', 'npm', 'package', 'readme'],
+      default: 'all',
+    });
+  },
+  handler: workspace(sync),
 };

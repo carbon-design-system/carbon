@@ -43,6 +43,15 @@ class Toggle extends React.Component {
     toggled: PropTypes.bool,
 
     /**
+     * Provide the text that will be read by a screen reader when visiting this
+     * control
+     * `aria-label` is always required but will be null if `labelText` is also
+     * provided
+     */
+    labelText: PropTypes.string,
+    ['aria-label']: PropTypes.string.isRequired,
+
+    /**
      * Specify the label for the "off" position
      */
     labelA: PropTypes.string.isRequired,
@@ -55,7 +64,7 @@ class Toggle extends React.Component {
 
   static defaultProps = {
     defaultToggled: false,
-    label: '',
+    ['aria-label']: 'Toggle',
     labelA: 'Off',
     labelB: 'On',
     onToggle: () => {},
@@ -77,8 +86,7 @@ class Toggle extends React.Component {
     } = this.props;
 
     let input;
-    const wrapperClasses = classNames({
-      [`${prefix}--form-item`]: true,
+    const wrapperClasses = classNames(`${prefix}--form-item`, {
       [className]: className,
     });
 
@@ -90,54 +98,45 @@ class Toggle extends React.Component {
       checkedProps.defaultChecked = defaultToggled;
     }
 
-    const labelTextId = !labelText ? undefined : `${id}-label`;
-
     return (
-      <>
-        {labelText && (
-          <div id={labelTextId} className={`${prefix}--label`}>
-            {labelText}
-          </div>
-        )}
-        <div className={wrapperClasses}>
-          <input
-            {...other}
-            {...checkedProps}
-            type="checkbox"
-            id={id}
-            className={`${prefix}--toggle`}
-            aria-labelledby={labelTextId}
-            onChange={evt => {
-              onChange && onChange(evt);
+      <div className={wrapperClasses}>
+        <input
+          {...other}
+          {...checkedProps}
+          aria-label={null}
+          type="checkbox"
+          id={id}
+          className={`${prefix}--toggle-input`}
+          onChange={evt => {
+            onChange && onChange(evt);
+            onToggle(input.checked, id, evt);
+          }}
+          ref={el => {
+            input = el;
+          }}
+          onKeyUp={evt => {
+            if (match(evt, keys.ENTER)) {
+              input.checked = !input.checked;
+              onChange(evt);
               onToggle(input.checked, id, evt);
-            }}
-            ref={el => {
-              input = el;
-            }}
-            onKeyUp={evt => {
-              if (match(evt, keys.ENTER)) {
-                input.checked = !input.checked;
-                onChange(evt);
-                onToggle(input.checked, id, evt);
-              }
-            }}
-          />
-
-          <label className={`${prefix}--toggle__label`} htmlFor={id}>
-            <span
-              className={`${prefix}--toggle__text--left`}
-              aria-hidden="true">
+            }
+          }}
+        />
+        <label
+          className={`${prefix}--toggle-input__label`}
+          htmlFor={id}
+          aria-label={labelText ? null : this.props['aria-label']}>
+          {labelText}
+          <span className={`${prefix}--toggle__switch`}>
+            <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
               {labelA}
             </span>
-            <span className={`${prefix}--toggle__appearance`} />
-            <span
-              className={`${prefix}--toggle__text--right`}
-              aria-hidden="true">
+            <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
               {labelB}
             </span>
-          </label>
-        </div>
-      </>
+          </span>
+        </label>
+      </div>
     );
   }
 }
