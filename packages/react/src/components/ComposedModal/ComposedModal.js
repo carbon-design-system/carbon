@@ -11,7 +11,7 @@ import Button from '../Button';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
-import '../../tools/toggle-class';
+import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;
 
@@ -128,7 +128,8 @@ export default class ComposedModal extends Component {
     } else if (prevProps.open && !this.props.open) {
       this.beingOpen = false;
     }
-    document.body.classList.toggle(
+    toggleClass(
+      document.body,
       `${prefix}--body--with-modal-open`,
       this.props.open
     );
@@ -148,7 +149,8 @@ export default class ComposedModal extends Component {
   };
 
   componentDidMount() {
-    document.body.classList.toggle(
+    toggleClass(
+      document.body,
       `${prefix}--body--with-modal-open`,
       this.props.open
     );
