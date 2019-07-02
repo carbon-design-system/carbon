@@ -16,8 +16,7 @@ import React, {
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
-import { getNextIndex } from '../../tools/keyboard-navigation';
-import { matches, keyCodes } from '../../tools/key';
+import { getNextIndex, matches, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -62,7 +61,7 @@ function ContentSwitcher({
   }
 
   function onKeyDown(event, index) {
-    if (matches(event, [keyCodes.RIGHT, keyCodes.LEFT])) {
+    if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
       const nextIndex = getNextIndex(
         event.key || event.which,
         selectedIndex,
