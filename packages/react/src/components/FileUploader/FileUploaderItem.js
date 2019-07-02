@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import { Filename } from './FileUploader';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -28,7 +28,7 @@ export default function FileUploaderItem({
           iconDescription={iconDescription}
           status={status}
           onKeyDown={evt => {
-            if (matches(evt, [keys.ENTER, keys.SPACE])) {
+            if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
                 onDelete(evt, { uuid });
               }

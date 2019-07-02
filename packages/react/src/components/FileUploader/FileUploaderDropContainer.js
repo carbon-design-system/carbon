@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
@@ -69,7 +69,7 @@ export default function FileUploaderDropContainer(props) {
             role={role || 'button'}
             tabIndex={tabIndex || 0}
             onKeyDown={evt => {
-              if (matches(evt, [keys.ENTER, keys.SPACE])) {
+              if (matches(evt, [keys.Enter, keys.Space])) {
                 inputRef.current.click();
               }
             }}
