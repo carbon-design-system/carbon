@@ -12711,17 +12711,17 @@ Link styles
 
     &:hover {
       color: $link-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:focus {
-      box-shadow: 0 3px currentColor;
+      @include focus-outline;
     }
 
     &:not([href]) {
@@ -12729,10 +12729,6 @@ Link styles
       cursor: not-allowed;
       pointer-events: none;
       touch-action: none;
-
-      &:hover {
-        box-shadow: none;
-      }
     }
 
     &:visited {
