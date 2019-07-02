@@ -25,12 +25,14 @@ import {
   HeaderGlobalBar,
   HeaderGlobalAction,
   HeaderPanel,
+  HeaderSideNavItems,
   SkipToContent,
   SideNav,
   // Temporarily comment these out until they are needed again
   // SideNavHeader,
   // SideNavDetails,
   // SideNavSwitcher,
+  SideNavItems,
   SideNavLink,
   SideNavMenu,
   SideNavMenuItem,
@@ -109,7 +111,18 @@ const StoryContent = () => {
       </div>
     </div>
   );
-  return <Content id="main-content">{content}</Content>;
+  return (
+    <Content
+      id="main-content"
+      style={{
+        backgroundColor: '#f3f3f3',
+        margin: '0',
+        height: '100vh',
+        width: '100%',
+      }}>
+      {content}
+    </Content>
+  );
 };
 
 // Ideally, we'd have a <UIShell> component that could help make using these
@@ -131,7 +144,7 @@ storiesOf('UI Shell', module)
     'Header Base w/ Navigation',
     withReadme(readme, () => (
       <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand, headerNavRef }) => (
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
           <>
             <Header aria-label="IBM Platform Name">
               <SkipToContent />
@@ -143,9 +156,7 @@ storiesOf('UI Shell', module)
               <HeaderName href="#" prefix="IBM">
                 [Platform]
               </HeaderName>
-              <HeaderNavigation
-                aria-label="IBM [Platform]"
-                navRef={headerNavRef}>
+              <HeaderNavigation aria-label="IBM [Platform]">
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
@@ -158,10 +169,20 @@ storiesOf('UI Shell', module)
               <SideNav
                 aria-label="Side navigation"
                 expanded={isSideNavExpanded}
-                headerNavigationRef={headerNavRef}
-                hasHeaderItems={true}
-                isPersistent={false}
-              />
+                isPersistent={false}>
+                <SideNavItems>
+                  <HeaderSideNavItems>
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                </SideNavItems>
+              </SideNav>
             </Header>
           </>
         )}
@@ -199,7 +220,7 @@ storiesOf('UI Shell', module)
     'Header Base w/ Navigation and Actions',
     withReadme(readme, () => (
       <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand, headerNavRef }) => (
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
           <>
             <Header aria-label="IBM Platform Name">
               <SkipToContent />
@@ -211,9 +232,7 @@ storiesOf('UI Shell', module)
               <HeaderName href="#" prefix="IBM">
                 [Platform]
               </HeaderName>
-              <HeaderNavigation
-                aria-label="IBM [Platform]"
-                navRef={headerNavRef}>
+              <HeaderNavigation aria-label="IBM [Platform]">
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
@@ -243,10 +262,20 @@ storiesOf('UI Shell', module)
               <SideNav
                 aria-label="Side navigation"
                 expanded={isSideNavExpanded}
-                headerNavigationRef={headerNavRef}
-                hasHeaderItems={true}
-                isPersistent={false}
-              />
+                isPersistent={false}>
+                <SideNavItems>
+                  <HeaderSideNavItems>
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                </SideNavItems>
+              </SideNav>
             </Header>
           </>
         )}
@@ -257,7 +286,7 @@ storiesOf('UI Shell', module)
     'Header Base w/ Navigation, Actions and SideNav',
     withReadme(readme, () => (
       <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand, headerNavRef }) => (
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
           <>
             <Header aria-label="IBM Platform Name">
               <SkipToContent />
@@ -269,9 +298,7 @@ storiesOf('UI Shell', module)
               <HeaderName href="#" prefix="IBM">
                 [Platform]
               </HeaderName>
-              <HeaderNavigation
-                navRef={headerNavRef}
-                aria-label="IBM [Platform]">
+              <HeaderNavigation aria-label="IBM [Platform]">
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
@@ -300,54 +327,64 @@ storiesOf('UI Shell', module)
               </HeaderGlobalBar>
               <SideNav
                 aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-                headerNavigationRef={headerNavRef}
-                hasHeaderItems={true}>
-                <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
+                expanded={isSideNavExpanded}>
+                <SideNavItems>
+                  <HeaderSideNavItems hasDivider={true}>
+                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
                     Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)">
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
                     Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Link
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Link
-                </SideNavLink>
+                  </SideNavLink>
+                </SideNavItems>
               </SideNav>
             </Header>
             <StoryContent />
@@ -360,7 +397,7 @@ storiesOf('UI Shell', module)
     'Header Base w/ SideNav',
     withReadme(readme, () => (
       <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand, headerNavRef }) => (
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
           <>
             <Header aria-label="IBM Platform Name">
               <SkipToContent />
@@ -374,53 +411,54 @@ storiesOf('UI Shell', module)
               </HeaderName>
               <SideNav
                 aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-                headerNavigationRef={headerNavRef}>
-                <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
+                expanded={isSideNavExpanded}>
+                <SideNavItems>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem
+                      aria-current="page"
+                      href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
                     Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)">
+                  </SideNavLink>
+                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
                     Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Link
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Link
-                </SideNavLink>
+                  </SideNavLink>
+                </SideNavItems>
               </SideNav>
             </Header>
             <StoryContent />
@@ -531,41 +569,43 @@ storiesOf('UI Shell', module)
           expanded={true}
           isChildOfHeader={false}
           aria-label="Side navigation">
-          <SideNavMenu title="L0 menu">
-            <SideNavMenuItem href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-            <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-            <SideNavMenuItem href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavMenu title="L0 menu">
-            <SideNavMenuItem href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-            <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-            <SideNavMenuItem href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavMenu title="L0 menu">
-            <SideNavMenuItem href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-            <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-            <SideNavMenuItem href="javascript:void(0)">
-              L0 menu item
-            </SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
-          <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+          <SideNavItems>
+            <SideNavMenu title="L0 menu">
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu title="L0 menu">
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu title="L0 menu">
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+            <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+          </SideNavItems>
         </SideNav>
         <StoryContent />
       </>
@@ -580,33 +620,35 @@ storiesOf('UI Shell', module)
           expanded={true}
           isChildOfHeader={false}
           aria-label="Side navigation">
-          <SideNavMenu renderIcon={Fade16} title="Category title">
-            <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+          <SideNavItems>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
               Link
-            </SideNavMenuItem>
-            <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavMenu renderIcon={Fade16} title="Category title">
-            <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+            </SideNavLink>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
               Link
-            </SideNavMenuItem>
-            <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavMenu renderIcon={Fade16} title="Category title">
-            <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-              Link
-            </SideNavMenuItem>
-            <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-          </SideNavMenu>
-          <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-            Link
-          </SideNavLink>
-          <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-            Link
-          </SideNavLink>
+            </SideNavLink>
+          </SideNavItems>
         </SideNav>
         <StoryContent />
       </>
