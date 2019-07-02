@@ -177,6 +177,10 @@
     right: 1rem;
   }
 
+  .#{$prefix}--btn--loading .#{$prefix}--loading__stroke {
+    stroke: $disabled-03;
+  }
+
   .#{$prefix}--btn--icon-only--bottom {
     @include tooltip--placement('icon', 'bottom', 'center');
   }

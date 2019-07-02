@@ -46,7 +46,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--ghost`]: kind === 'ghost',
     [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
     [`${prefix}--btn--tertiary`]: kind === 'tertiary',
-    [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--btn--disabled`]: disabled || performingAction,
     [`${prefix}--btn--loading`]: performingAction,
   });
 
@@ -197,7 +197,7 @@ Button.defaultProps = {
   disabled: false,
   small: false,
   kind: 'primary',
-  performingAction: true,
+  performingAction: false,
 };
 
 export default Button;

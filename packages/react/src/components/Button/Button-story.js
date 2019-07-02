@@ -103,6 +103,10 @@ storiesOf('Buttons', module)
             Button
           </Button>
           &nbsp;
+          <Button {...regularProps} className="some-class" performingAction>
+            Peforming action
+          </Button>
+          &nbsp;
           <Button {...regularProps} href="#" className="some-class">
             Link
           </Button>
@@ -137,7 +141,7 @@ storiesOf('Buttons', module)
           Danger buttons should be used for a negative action (such as Delete) on the page.
 
           Modify the behavior of the button by changing its event properties.
-          
+
           Field buttons may be use directly next to an input element, to visually align their heights.
 
           Small buttons may be used when there is not enough space for a
