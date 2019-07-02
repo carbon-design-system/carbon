@@ -172,6 +172,11 @@
     @include tooltip--placement('icon', 'top', 'center');
   }
 
+  .#{$prefix}--btn--loading .#{$prefix}--loading--small {
+    position: absolute;
+    right: 1rem;
+  }
+
   .#{$prefix}--btn--icon-only--bottom {
     @include tooltip--placement('icon', 'bottom', 'center');
   }

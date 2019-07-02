@@ -8832,6 +8832,11 @@ Button styles
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
+  .#{$prefix}--btn--loading .#{$prefix}--loading--small {
+    position: absolute;
+    right: 1rem;
+  }
+
   .#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
