@@ -77,13 +77,21 @@ const props = {
   }),
   fileUploaderDropContainer: () => ({
     labelText: text('Label text (labelText)', 'click to upload'),
-    name: text('Form item name: (name)', ''),
+    name: text('Form item name (name)', ''),
     multiple: boolean('Supports multiple files (multiple)', true),
     accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
     disabled: boolean('Disabled (disabled)', false),
     role: text('ARIA role of the button (role)', ''),
     tabIndex: number('Tab index (tabIndex)', 0),
     onChange: action('onChange'),
+    errorSubject: text(
+      'Error message subject (errorSubject)',
+      'File size exceeds limit.'
+    ),
+    errorBody: text(
+      'Error message body (errorBody)',
+      '500 kb max file size. Select a new file and try again.'
+    ),
   }),
 };
 
@@ -134,7 +142,8 @@ storiesOf('FileUploader', module)
     'Drag and drop upload container',
     () =>
       require('./stories/drop-container').default(
-        props.fileUploaderDropContainer()
+        props.fileUploaderDropContainer(),
+        'test'
       ),
     {
       info: {

@@ -21,7 +21,7 @@ fetchMock.mock({
     ),
 });
 
-function ExampleDropContainerApp(props) {
+function ExampleDropContainerApp({ errorSubject, errorBody, ...props }) {
   const [files, setFiles] = useState([]);
   const uploadFile = async fileToUpload => {
     try {
@@ -105,14 +105,8 @@ function ExampleDropContainerApp(props) {
               iconDescription={iconDescription}
               invalid={invalid}
               onDelete={handleFileUploaderItemClick}
-              errorMessage={() => (
-                <div className={`${prefix}--form-requirement`}>
-                  File exceeds size limit
-                  <p className={`${prefix}--form-requirement__supplement`}>
-                    500 kb max file size. Select a new file and try again.
-                  </p>
-                </div>
-              )}
+              errorSubject={errorSubject}
+              errorBody={errorBody}
               {...rest}
             />
           )

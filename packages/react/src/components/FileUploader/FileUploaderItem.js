@@ -14,7 +14,8 @@ export default function FileUploaderItem({
   iconDescription,
   onDelete,
   invalid,
-  errorMessage: ErrorMessage,
+  errorSubject,
+  errorBody,
   ...other
 }) {
   const classes = classNames(`${prefix}--file__selected-file`, {
@@ -41,7 +42,14 @@ export default function FileUploaderItem({
           }}
         />
       </span>
-      {invalid && <ErrorMessage />}
+      {invalid && (
+        <div className={`${prefix}--form-requirement`}>
+          {errorSubject}
+          <p className={`${prefix}--form-requirement__supplement`}>
+            {errorBody}
+          </p>
+        </div>
+      )}
     </span>
   );
 }
@@ -77,6 +85,16 @@ FileUploaderItem.propTypes = {
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
   onDelete: PropTypes.func,
+
+  /**
+   * Error message subject for an invalid file upload
+   */
+  errorSubject: PropTypes.string,
+
+  /**
+   * Error message body for an invalid file upload
+   */
+  errorBody: PropTypes.string,
 };
 
 FileUploaderItem.defaultProps = {
