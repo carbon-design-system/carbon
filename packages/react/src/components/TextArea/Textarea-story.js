@@ -20,6 +20,12 @@ const TextAreaProps = () => ({
   hideLabel: boolean('No label (hideLabel)', false),
   labelText: text('Label text (labelText)', 'Text Area label'),
   invalid: boolean('Show form validation UI (invalid)', false),
+  charCount: boolean('Add character counter (charCount)', false),
+  maxLength: number('Input length limit (maxLength)', 100),
+  defaultValue: text(
+    'Default value (defaultValue)',
+    'This is not a default value'
+  ),
   invalidText: text(
     'Content of form validation UI (invalidText)',
     'A valid value is required'
