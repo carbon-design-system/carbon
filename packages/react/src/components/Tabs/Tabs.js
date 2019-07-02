@@ -107,11 +107,10 @@ export default class Tabs extends React.Component {
         };
   }
 
-  getTabs() {
-    return React.Children.map(this.props.children, (tab, index) =>
+  getTabs = () =>
+    React.Children.map(this.props.children, (tab, index) =>
       React.cloneElement(tab, { index })
     );
-  }
 
   getTabAt = (index, useFresh) => {
     return (
@@ -136,40 +135,41 @@ export default class Tabs extends React.Component {
     };
   };
 
-  handleTabKeyDown = onSelectionChange => {
-    return (index, evt) => {
-      const key = evt.key || evt.which;
-
-      if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
-        this.selectTabAt(index, onSelectionChange);
-        this.setState({
-          dropdownHidden: true,
-        });
-      }
-    };
+  handleTabKeyDown = onSelectionChange => (index, evt) => {
+    if (matches(evt, [keys.Enter, keys.Space])) {
+      this.selectTabAt(index, onSelectionChange);
+      this.setState({
+        dropdownHidden: true,
+      });
+    }
   };
 
   handleTabAnchorFocus = onSelectionChange => (evt, { index }) => {
     const newIndex = (() => {
-      const validTabs = this.getTabs().filter(tab => !tab.props.disabled);
-      const currentValidTabIndex = validTabs.findIndex(
-        tab => tab.props.index === index
-      ); // index of current tab in the array of valid tabs
+      const validTabIndices = this.getTabs().reduce(
+        (acc, curr) =>
+          !curr.props.disabled ? [...acc, curr.props.index] : acc,
+        []
+      );
+      // index of current tab in the array of valid tab indices
+      const currentValidTabIndex = validTabIndices.findIndex(
+        validIndex => validIndex === index
+      );
       if (matches(evt, [keys.ArrowLeft])) {
         return currentValidTabIndex - 1 < 0
-          ? validTabs[validTabs.length - 1].props.index
-          : validTabs[currentValidTabIndex - 1].props.index;
+          ? validTabIndices[validTabIndices.length - 1]
+          : validTabIndices[currentValidTabIndex - 1];
       }
       if (matches(evt, [keys.ArrowRight])) {
-        return currentValidTabIndex + 1 > validTabs.length - 1
-          ? validTabs[0].props.index
-          : validTabs[currentValidTabIndex + 1].props.index;
+        return currentValidTabIndex + 1 > validTabIndices.length - 1
+          ? validTabIndices[0]
+          : validTabIndices[currentValidTabIndex + 1];
       }
       if (matches(evt, [keys.End])) {
-        return validTabs[validTabs.length - 1].props.index;
+        return validTabIndices[validTabIndices.length - 1];
       }
       if (matches(evt, [keys.Home])) {
-        return validTabs[0].props.index;
+        return validTabIndices[0];
       }
       return null;
     })();
