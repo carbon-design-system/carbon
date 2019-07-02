@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { WarningFilled16, EditOff16 } from '@carbon/icons-react';
@@ -32,10 +32,13 @@ const TextInput = React.forwardRef(function TextInput(
     light,
     readOnly,
     readOnlyIconLabel,
+    defaultValue,
     ...other
   },
   ref
 ) {
+  const [inputVal, setInput] = useState(defaultValue);
+  const isControlled = useRef(other.value !== undefined).current;
   const errorId = id + '-error-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
@@ -45,7 +48,7 @@ const TextInput = React.forwardRef(function TextInput(
     id,
     onChange: evt => {
       if (!other.disabled) {
-        onChange(evt);
+        onChange && onChange(evt, { value: evt.target.value });
       }
     },
     onClick: evt => {
@@ -67,23 +70,30 @@ const TextInput = React.forwardRef(function TextInput(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
+  const label = (() => {
+    const labelContent = labelText && (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    );
+    return labelContent;
+  })();
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
   const inputField = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input
+      {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+      value={isControlled ? other.value : inputVal}
+      onInput={e => setInput(e.target.value)}
+    />
   );
   const input =
-    readOnly && (other.value || other.defaultValue) ? (
+    readOnly && (other.value || other.defaultValue || inputVal) ? (
       <Tooltip showIcon={false} triggerText={inputField}>
-        {other.value || other.defaultValue}
+        {other.value || other.defaultValue || inputVal}
       </Tooltip>
     ) : (
       inputField
