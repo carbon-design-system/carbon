@@ -9878,6 +9878,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
     width: $layout-04;
     height: 100%;
+    position: initial;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -13851,10 +13852,6 @@ Modal styles
     fill: $icon-01;
     height: rem(20px);
     width: rem(20px);
-  }
-
-  .#{$prefix}--body--with-modal-open {
-    overflow: hidden;
   }
 }
 ```
