@@ -92,7 +92,8 @@ function ExampleDropContainerApp(props) {
       <p className={`${prefix}--label-description`}>
         Only .jpg and .png files. 500kb max file size.
       </p>
-      <FileUploaderDropContainer {...props} onAddFiles={onAddFiles}>
+      <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
+      <div className="uploaded-files">
         {files.map(
           ({ uuid, name, size, status, iconDescription, invalid, ...rest }) => (
             <FileUploaderItem
@@ -116,7 +117,7 @@ function ExampleDropContainerApp(props) {
             />
           )
         )}
-      </FileUploaderDropContainer>
+      </div>
     </FormItem>
   );
 }
