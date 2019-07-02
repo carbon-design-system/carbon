@@ -159,6 +159,31 @@
   /// @group accordion
   $accordion-content-padding: 0 0 0 $carbon--spacing-05 !default !global;
 
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-heading-padding: carbon--rem(6px) 0 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-title-type-style: 'body-long-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-content-type-style: 'body-long-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-content-type-style: 'body-long-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-arrow-size: carbon--rem(16px) !default !global;
+
   // Checkbox
 
   /// @type Number

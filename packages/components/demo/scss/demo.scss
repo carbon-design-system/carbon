@@ -1,7 +1,17 @@
+@import '../../src/globals/scss/spacing';
+// @import '@carbon/elements/scss/layout/mini-unit';
+// @import '@carbon/elements/scss/layout/spacing';
+
 // Manual theme tests for development environment
 // 1) v9 and v10 - customize individual variables
 // $interactive-01: pink;
 // $brand-01: pink;
+
+// Accordion
+$accordion-heading-padding: $spacing-04 0;
+$accordion-title-type-style: 'body-long-02';
+$accordion-content-type-style: 'body-long-02';
+$accordion-arrow-size: carbon--rem(20px);
 
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
