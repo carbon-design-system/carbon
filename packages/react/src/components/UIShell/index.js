@@ -17,6 +17,7 @@ export HeaderMenuItem from './HeaderMenuItem';
 export HeaderName from './HeaderName';
 export HeaderNavigation from './HeaderNavigation';
 export HeaderPanel from './HeaderPanel';
+export HeaderSideNavItems from './HeaderSideNavItems';
 
 export Switcher from './Switcher';
 export SwitcherItem from './SwitcherItem';
