@@ -13850,6 +13850,10 @@ Modal styles
     height: rem(20px);
     width: rem(20px);
   }
+
+  .#{$prefix}--body--with-modal-open {
+    overflow: hidden;
+  }
 }
 ```
 

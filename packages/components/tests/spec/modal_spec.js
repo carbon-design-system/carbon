@@ -41,6 +41,7 @@ describe('Test modal', function() {
           '.flatpickr-calendar',
         ],
         classVisible: 'is-visible',
+        classBody: 'bx--body--with-modal-open',
         attribInitTarget: 'data-modal-target',
         initEventNames: ['click'],
         eventBeforeShown: 'modal-beingshown',
