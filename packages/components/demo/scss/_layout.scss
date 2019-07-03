@@ -6,7 +6,7 @@
 @import '../../src/globals/scss/functions';
 
 body {
-  @include type-style('body-short-01');
+  @include type-style($body-type-style);
   background-color: $carbon--white-0;
 
   hr {

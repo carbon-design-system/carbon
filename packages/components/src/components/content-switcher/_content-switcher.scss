@@ -87,7 +87,7 @@
   .#{$prefix}--content-switcher-btn:not(:first-of-type)::before {
     content: '';
     display: block;
-    height: rem(16px);
+    height: $content-switcher-divider-height;
     width: rem(1px);
     background-color: $content-switcher-divider;
     position: absolute;

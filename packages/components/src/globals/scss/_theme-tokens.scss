@@ -19,6 +19,11 @@
   /// @type Value
   /// @access public
   /// @group global
+  $body-type-style: 'body-short-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group global
   $input-border: 1px solid transparent !default !global;
 
   /// @type Number
@@ -218,6 +223,11 @@
   /// @group code-snippet
   $snippet-single-height: $carbon--spacing-08 !default !global;
 
+  /// @type Value
+  /// @access public
+  /// @group code-snippet
+  $snippet-single-button-size: $carbon--spacing-08 !default !global;
+
   // Content Switcher
 
   /// @type Number
@@ -249,6 +259,11 @@
   /// @access public
   /// @group content-switcher
   $content-switcher-spacing: $carbon--spacing-03 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-divider-height: $spacing-05 !default !global;
 
   // Data Table
 
@@ -292,7 +307,7 @@
   /// @type Value
   /// @access public
   /// @group date-picker
-  $date-input-height: carbon--rem(40px) !default !global;
+  $date-input-height: $spacing-08 !default !global;
 
   /// @type Value
   /// @access public

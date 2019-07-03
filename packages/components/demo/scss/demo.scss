@@ -7,6 +7,9 @@
 // $interactive-01: pink;
 // $brand-01: pink;
 
+//global
+$body-type-style: 'body-long-02';
+
 // Accordion
 $accordion-heading-padding: $carbon--spacing-04 0;
 $accordion-title-type-style: 'body-long-02';
@@ -21,17 +24,19 @@ $checkbox-label-type-style: 'body-short-02';
 // Code snippet
 $snippet-type-style: 'code-02';
 $snippet-single-height: $carbon--spacing-09;
+$snippet-single-button-size: $snippet-single-height;
 
 // Content switcher
 $content-switcher-type-style: 'body-short-02';
 $content-switcher-height: $carbon--spacing-09;
 $content-switcher-spacing: carbon--rem(13px);
+$content-switcher-divider-height: $carbon--spacing-06;
 
 // Datatable
 
 // Date picker
 $date-input-type-style: 'body-short-02';
-$date-input-height: carbon--rem(48px);
+$date-input-height: $spacing-09;
 $date-input-width: 7.6rem;
 $date-input-short-width: 6.1rem;
 $date-input-range-width: 9.8rem;
