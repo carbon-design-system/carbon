@@ -301,6 +301,7 @@ export default class ComboBox extends React.Component {
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field
               id={id}
+              disabled={disabled}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
