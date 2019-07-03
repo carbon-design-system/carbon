@@ -313,6 +313,7 @@ export default class MultiSelect extends React.Component {
                   <ListBox.Field
                     id={id}
                     tabIndex="0"
+                    disabled={disabled}
                     {...getButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
