@@ -42,14 +42,17 @@ export default function FileUploaderItem({
           }}
         />
       </span>
-      {invalid && (
-        <div className={`${prefix}--form-requirement`}>
-          {errorSubject}
-          <p className={`${prefix}--form-requirement__supplement`}>
-            {errorBody}
-          </p>
-        </div>
-      )}
+      {invalid &&
+        (errorSubject && (
+          <div className={`${prefix}--form-requirement`}>
+            {errorSubject}
+            {errorBody && (
+              <p className={`${prefix}--form-requirement__supplement`}>
+                {errorBody}
+              </p>
+            )}
+          </div>
+        ))}
     </span>
   );
 }
