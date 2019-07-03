@@ -57,13 +57,13 @@
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
     .#{$prefix}--date-picker__input {
-      width: rem(120px);
+      width: $date-input-width;
     }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
     .#{$prefix}--date-picker__input {
-      width: 5.7rem;
+      width: $date-input-short-width;
     }
   }
 
@@ -79,12 +79,12 @@
 
   .#{$prefix}--date-picker__input {
     @include reset;
-    @include type-style('code-02');
+    @include type-style($date-input-type-style);
     @include focus-outline('reset');
 
     display: block;
     position: relative;
-    height: rem(40px);
+    height: $date-input-height;
     max-width: rem(288px);
     padding: 0 $carbon--spacing-05;
     background-color: $field-01;
@@ -138,7 +138,7 @@
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
-    width: rem(143.5px);
+    width: $date-input-range-width;
   }
 
   .#{$prefix}--date-picker__calendar,

@@ -27,6 +27,15 @@ $content-switcher-type-style: 'body-short-02';
 $content-switcher-height: $carbon--spacing-09;
 $content-switcher-spacing: carbon--rem(13px);
 
+// Datatable
+
+// Date picker
+$date-input-type-style: 'body-short-02';
+$date-input-height: carbon--rem(48px);
+$date-input-width: 7.6rem;
+$date-input-short-width: 6.1rem;
+$date-input-range-width: 9.8rem;
+
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
 // $carbon--theme: $carbon--theme--g90;

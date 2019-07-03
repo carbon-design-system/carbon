@@ -284,6 +284,31 @@
   /// @group date-picker
   $date-picker-in-range-background-color: $ibm-color__blue-20 !default !global;
 
+  /// @type Value
+  /// @access public
+  /// @group date-picker
+  $date-input-type-style: 'code-02' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group date-picker
+  $date-input-height: carbon--rem(40px) !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group date-picker
+  $date-input-width: carbon--rem(120px) !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group ddate-picker
+  $date-input-short-width: 5.7rem !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group data-table
+  $date-input-range-width: carbon--rem(143.5px) !default !global;
+
   // Modal
 
   /// @type Color
