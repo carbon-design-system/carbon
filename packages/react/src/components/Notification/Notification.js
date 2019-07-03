@@ -16,6 +16,8 @@ import {
   WarningFilled20,
 } from '@carbon/icons-react';
 
+import Button from '../Button';
+
 const { prefix } = settings;
 
 export class NotificationButton extends Component {
@@ -354,6 +356,11 @@ export class ToastNotification extends Component {
 export class InlineNotification extends Component {
   static propTypes = {
     /**
+     * Action button label.
+     */
+    actionButtonLabel: PropTypes.string,
+
+    /**
      * Pass in the children that will be rendered within the InlineNotification
      */
     children: PropTypes.node,
@@ -390,6 +397,11 @@ export class InlineNotification extends Component {
     role: PropTypes.string.isRequired,
 
     /**
+     * Action handler.
+     */
+    onActionButtonClick: PropTypes.func,
+
+    /**
      * Provide a function that is called when menu is closed
      */
     onCloseButtonClick: PropTypes.func,
@@ -412,9 +424,11 @@ export class InlineNotification extends Component {
   };
 
   static defaultProps = {
+    actionButtonLabel: null,
     role: 'alert',
     notificationType: 'inline',
     iconDescription: 'closes notification',
+    onActionButtonClick: () => {},
     onCloseButtonClick: () => {},
     hideCloseButton: false,
   };
@@ -434,6 +448,7 @@ export class InlineNotification extends Component {
     }
 
     const {
+      actionButtonLabel,
       role,
       notificationType,
       onCloseButtonClick, // eslint-disable-line
@@ -444,6 +459,7 @@ export class InlineNotification extends Component {
       kind,
       lowContrast,
       hideCloseButton,
+      onActionButtonClick,
       ...other
     } = this.props;
 
@@ -471,6 +487,14 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
+        {onActionButtonClick && actionButtonLabel && (
+          <Button
+            className={`${prefix}--inline-notification__action`}
+            kind="ghost"
+            onClick={onActionButtonClick}>
+            {actionButtonLabel}
+          </Button>
+        )}
         {!hideCloseButton && (
           <NotificationButton
             iconDescription={iconDescription}

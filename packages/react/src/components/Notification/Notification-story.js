@@ -40,4 +40,10 @@ storiesOf('Notifications', module)
       style={{ minWidth: '30rem', marginBottom: '.5rem' }}
     />
   ))
-  .add('inline', () => <InlineNotification {...notificationProps()} />);
+  .add('inline', () => (
+    <InlineNotification
+      {...notificationProps()}
+      actionButtonLabel={text('Label (actionButtonLabel)', 'Undo')}
+      onActionButtonClick={action('onActionButtonClick')}
+    />
+  ));
