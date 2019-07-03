@@ -107,7 +107,7 @@ storiesOf('Buttons', module)
           </Button>
           &nbsp;
           <Button {...regularProps} className="some-class" performingAction>
-            Peforming action
+            Performing action
           </Button>
           &nbsp;
           <Button {...regularProps} href="#" className="some-class">
