@@ -243,6 +243,7 @@ export default class Dropdown extends React.Component {
               <ListBox.Field
                 id={id}
                 tabIndex="0"
+                disabled={disabled}
                 {...getButtonProps({ disabled })}>
                 <span
                   className={`${prefix}--list-box__label`}
