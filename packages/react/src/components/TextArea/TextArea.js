@@ -45,7 +45,7 @@ const TextArea = React.forwardRef(function TextArea(
     invalidText,
     helperText,
     light,
-    charCount,
+    useCharCount,
     maxLength,
     defaultValue,
     renderCharCounter: CharCounter = DefaultCharCounter,
@@ -82,7 +82,7 @@ const TextArea = React.forwardRef(function TextArea(
         {labelText}
       </label>
     ) : null;
-    if (labelContent && charCount) {
+    if (labelContent && useCharCount) {
       return (
         <div className={`${prefix}--text-area__character-counter-title`}>
           {labelContent}
@@ -105,7 +105,7 @@ const TextArea = React.forwardRef(function TextArea(
     const helperContent = helperText ? (
       <div className={helperTextClasses}>{helperText}</div>
     ) : null;
-    if (!labelText && charCount) {
+    if (!labelText && useCharCount) {
       return (
         <div className={`${prefix}--text-area__character-counter-title`}>
           {helperContent}
@@ -253,7 +253,7 @@ TextArea.propTypes = {
   /**
    * Specify whether the character counter is shown
    */
-  charCount: PropTypes.bool,
+  useCharCount: PropTypes.bool,
 
   /**
    * The maximum allowed input value length

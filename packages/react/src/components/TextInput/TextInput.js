@@ -51,7 +51,7 @@ const TextInput = React.forwardRef(function TextInput(
     light,
     readOnly,
     readOnlyIconLabel,
-    charCount,
+    useCharCount,
     renderCharCounter: CharCounter = DefaultCharCounter,
     defaultValue,
     maxLength,
@@ -99,7 +99,7 @@ const TextInput = React.forwardRef(function TextInput(
         {labelText}
       </label>
     );
-    if (labelContent && charCount) {
+    if (labelContent && useCharCount) {
       return (
         <div className={`${prefix}--text-input__character-counter-title`}>
           {labelContent}
@@ -137,7 +137,7 @@ const TextInput = React.forwardRef(function TextInput(
     const helperContent = helperText ? (
       <div className={helperTextClasses}>{helperText}</div>
     ) : null;
-    if (!labelText && charCount) {
+    if (!labelText && useCharCount) {
       return (
         <div className={`${prefix}--text-input__character-counter-title`}>
           {helperContent}
@@ -271,7 +271,7 @@ TextInput.propTypes = {
   /**
    * Specify whether the character counter is shown
    */
-  charCount: PropTypes.bool,
+  useCharCount: PropTypes.bool,
 
   /**
    * The maximum allowed input value length

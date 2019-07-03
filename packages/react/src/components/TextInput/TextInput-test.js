@@ -82,7 +82,7 @@ describe('TextInput', () => {
 
       it('should count length increases in text input value', () => {
         const event = { target: { value: 'z' } };
-        wrapper.setProps({ charCount: true, maxLength: 10 });
+        wrapper.setProps({ useCharCount: true, maxLength: 10 });
         textInput().simulate('input', event);
         expect(
           wrapper.find(`span.${prefix}--text-input--character-counter`).text()
@@ -91,7 +91,7 @@ describe('TextInput', () => {
 
       it('should count length decreases in text input value', () => {
         const event = { target: { value: '' } };
-        wrapper.setProps({ charCount: true, maxLength: 10 });
+        wrapper.setProps({ useCharCount: true, maxLength: 10 });
         textInput().simulate('input', event);
         expect(
           wrapper.find(`span.${prefix}--text-input--character-counter`).text()
