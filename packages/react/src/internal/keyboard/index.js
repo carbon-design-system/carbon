@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Alias for import paths for build tools that rely on this
-import { AccordionItem } from '../Accordion';
-export default AccordionItem;
+export * as keys from './keys';
+export { match, matches, getCharacterFor } from './match';
+export { getNextIndex } from './navigation';

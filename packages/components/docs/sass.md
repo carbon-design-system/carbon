@@ -2514,6 +2514,7 @@ $carbon--spacing-01: carbon--mini-units(0.25);
 - **Aliased**:
   - `spacing-01`
 - **Used by**:
+  - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅carbon--spacing-02 [variable]
@@ -4065,7 +4066,7 @@ $carbon--theme--g90: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4081,7 +4082,7 @@ $carbon--theme--g90: (
   disabled-01: #3d3d3d,
   disabled-02: #565656,
   disabled-03: #8c8c8c,
-  highlight: #061f80,
+  highlight: #054ada,
   skeleton-01: #353535,
   skeleton-02: #565656,
   brand-01: #0062ff,
@@ -4140,7 +4141,7 @@ $carbon--theme--g100: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4156,7 +4157,7 @@ $carbon--theme--g100: (
   disabled-01: #282828,
   disabled-02: #3d3d3d,
   disabled-03: #6f6f6f,
-  highlight: #061f80,
+  highlight: #0530ad,
   skeleton-01: #353535,
   skeleton-02: #3d3d3d,
   brand-01: #0062ff,
@@ -4383,7 +4384,6 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [accordion [mixin]](#accordion-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -5337,6 +5337,7 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [slider [mixin]](#slider-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5362,6 +5363,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
@@ -5392,6 +5394,7 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
 
 ### ✅highlight [variable]
 
@@ -9715,7 +9718,8 @@ Content switcher styles
     }
 
     &:disabled {
-      color: $ui-03;
+      color: $disabled-02;
+      background-color: $disabled-01;
       pointer-events: none;
 
       &:hover {
@@ -9783,9 +9787,9 @@ Content switcher styles
     color: $inverse-01;
     z-index: 3;
 
-    // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-color__gray-30;
+      background-color: $disabled-03;
+      color: $disabled-02;
     }
   }
 
@@ -9808,9 +9812,11 @@ Content switcher styles
   - [focus [variable]](#focus-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [ui-03 [variable]](#ui-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
 
 ## data-table
 
@@ -9873,6 +9879,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
     width: $layout-04;
     height: 100%;
+    position: initial;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -12705,17 +12712,17 @@ Link styles
 
     &:hover {
       color: $link-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:focus {
-      box-shadow: 0 3px currentColor;
+      @include focus-outline;
     }
 
     &:not([href]) {
@@ -12723,10 +12730,6 @@ Link styles
       cursor: not-allowed;
       pointer-events: none;
       touch-action: none;
-
-      &:hover {
-        box-shadow: none;
-      }
     }
 
     &:visited {
@@ -15852,37 +15855,8 @@ Search styles
   .#{$prefix}--search-close {
     @include button-reset(false);
     @include focus-outline('reset');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity $duration--fast-02 motion(standard, productive), background-color
-        $duration--fast-02 motion(standard, productive),
-      outline $duration--fast-02 motion(standard, productive), border
-        $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    visibility: visible;
-    opacity: 1;
     position: absolute;
-    height: rem(40px);
-    width: rem(40px);
     right: 0;
-    fill: $icon-01;
-    border: 1px solid transparent;
-    border-left: 0;
-
-    &:hover {
-      background-color: $hover-field;
-      border-bottom: 1px solid $ui-04;
-    }
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-
-    &:active {
-      @include focus-outline('outline');
-      background-color: $selected-ui;
-    }
 
     &::before {
       content: '';
@@ -15894,6 +15868,53 @@ Search styles
       width: 2px;
       background-color: $field-01;
       transition: background-color $duration--fast-02 motion(standard, productive);
+    }
+
+    &:hover {
+      border-bottom: 1px solid $ui-04;
+    }
+  }
+
+  .#{$prefix}--search-button {
+    flex-shrink: 0;
+    margin-left: $carbon--spacing-01;
+    background-color: $field-01;
+
+    svg {
+      vertical-align: middle;
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--search-close,
+  .#{$prefix}--search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity $duration--fast-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive),
+      outline $duration--fast-02 motion(standard, productive), border
+        $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+    height: rem(40px);
+    width: rem(40px);
+    fill: $icon-01;
+    border: 1px solid transparent;
+    border-left: 0;
+
+    &:hover {
+      background-color: $hover-field;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:active {
+      @include focus-outline('outline');
+      background-color: $selected-ui;
     }
   }
 
@@ -15914,18 +15935,20 @@ Search styles
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--search--sm .#{$prefix}--search-close {
-    height: rem(32px);
-    width: rem(32px);
+  .#{$prefix}--search--sm {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      height: rem(32px);
+      width: rem(32px);
+    }
   }
 
-  .#{$prefix}--search--xl .#{$prefix}--search-close {
-    height: rem(48px);
-    width: rem(48px);
-  }
-
-  .#{$prefix}--search-close:focus {
-    @include focus-outline('outline');
+  .#{$prefix}--search--xl {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      height: rem(48px);
+      width: rem(48px);
+    }
   }
 
   .#{$prefix}--search-close--hidden {
@@ -15957,6 +15980,7 @@ Search styles
   - [text-03 [variable]](#text-03-variable)
   - [field-02 [variable]](#field-02-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -17215,6 +17239,7 @@ Text input styles
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
