@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, EditOff16 } from '@carbon/icons-react';
+import Tooltip from '../Tooltip';
 
 const { prefix } = settings;
 
@@ -48,6 +49,8 @@ const TextArea = React.forwardRef(function TextArea(
     useCharCount,
     maxLength,
     defaultValue,
+    readOnly,
+    readOnlyIconLabel,
     renderCharCounter: CharCounter = DefaultCharCounter,
     ...other
   },
@@ -88,7 +91,7 @@ const TextArea = React.forwardRef(function TextArea(
           {labelContent}
           <CharCounter
             disabled={other.disabled}
-            count={textareaVal.length}
+            count={isControlled ? other.value.length : textareaVal.length}
             maxLength={maxLength}
           />
         </div>
@@ -111,7 +114,7 @@ const TextArea = React.forwardRef(function TextArea(
           {helperContent}
           <CharCounter
             disabled={other.disabled}
-            count={textareaVal.length}
+            count={isControlled ? other.value.length : textareaVal.length}
             maxLength={maxLength}
           />
         </div>
@@ -134,7 +137,7 @@ const TextArea = React.forwardRef(function TextArea(
     [`${prefix}--text-area--invalid`]: invalid,
   });
 
-  const input = (
+  const inputField = (
     <textarea
       {...other}
       {...textareaProps}
@@ -144,8 +147,18 @@ const TextArea = React.forwardRef(function TextArea(
       disabled={other.disabled}
       value={isControlled ? other.value : textareaVal}
       onInput={e => setInput(e.target.value)}
+      readOnly={readOnly || null}
     />
   );
+
+  const input =
+    readOnly && (other.value || other.defaultValue || textareaVal) ? (
+      <Tooltip showIcon={false} triggerText={inputField}>
+        {other.value || other.defaultValue || textareaVal}
+      </Tooltip>
+    ) : (
+      inputField
+    );
 
   return (
     <div className={`${prefix}--form-item`}>
@@ -156,6 +169,13 @@ const TextArea = React.forwardRef(function TextArea(
         data-invalid={invalid || null}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
+        )}
+        {readOnly && (
+          <div
+            className={`${prefix}--text-area__readonly-icon`}
+            aria-label={readOnlyIconLabel}>
+            <EditOff16 />
+          </div>
         )}
         {input}
       </div>
@@ -249,6 +269,16 @@ TextArea.propTypes = {
    * Specify whether you want the light version of this control
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify if the user should be able to edit the value of the input
+   */
+  readOnly: PropTypes.bool,
+
+  /**
+   * The label for the read-only status icon
+   */
+  readOnlyIconLabel: PropTypes.string,
 
   /**
    * Specify whether the character counter is shown

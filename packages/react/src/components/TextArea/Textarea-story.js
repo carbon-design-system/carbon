@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -20,7 +20,12 @@ const TextAreaProps = () => ({
   hideLabel: boolean('No label (hideLabel)', false),
   labelText: text('Label text (labelText)', 'Text Area label'),
   invalid: boolean('Show form validation UI (invalid)', false),
-  useCharCount: boolean('Add character counter (useCharCount)', false),
+  readOnly: boolean('Read only (readOnly)', false),
+  readOnlyIconLabel: text(
+    'Read-only icon label (readOnlyIconLabel)',
+    'This input field is read-only'
+  ),
+  useCharCount: boolean('Add character counter (useCharCount)', true),
   maxLength: number('Input length limit (maxLength)', 100),
   defaultValue: text(
     'Default value (defaultValue)',
@@ -39,6 +44,21 @@ const TextAreaProps = () => ({
   onClick: action('onClick'),
 });
 
+function ControlledTextArea(controlledProps) {
+  const [value, setValue] = useState('');
+  return (
+    <>
+      <TextArea
+        value={value}
+        {...controlledProps}
+        onChange={(evt, { value }) => setValue(value)}
+      />
+      <br />
+      <button onClick={() => setValue(value + '1')}>Append 1</button>
+    </>
+  );
+}
+
 storiesOf('TextArea', module)
   .addDecorator(withKnobs)
   .add('Default', () => <TextArea {...TextAreaProps()} />, {
@@ -49,6 +69,17 @@ storiesOf('TextArea', module)
           `,
     },
   })
+  .add(
+    'Fully controlled textarea',
+    () => <ControlledTextArea {...TextAreaProps()} />,
+    {
+      info: {
+        text: `
+        Fully controlled textarea.
+      `,
+      },
+    }
+  )
   .add('skeleton', () => <TextAreaSkeleton />, {
     info: {
       text: `
