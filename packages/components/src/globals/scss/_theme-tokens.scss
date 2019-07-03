@@ -216,7 +216,7 @@
   /// @type Value
   /// @access public
   /// @group code-snippet
-  $snippet-single-height: $spacing-08 !default !global;
+  $snippet-single-height: $carbon--spacing-08 !default !global;
 
   // Content Switcher
 
@@ -234,6 +234,21 @@
   /// @access public
   /// @group content-switcher
   $content-switcher-divider: $ui-03 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-type-style: 'body-short-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-height: $carbon--spacing-08 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group content-switcher
+  $content-switcher-spacing: $carbon--spacing-03 !default !global;
 
   // Data Table
 

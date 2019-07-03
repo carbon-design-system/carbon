@@ -8,7 +8,7 @@
 // $brand-01: pink;
 
 // Accordion
-$accordion-heading-padding: $spacing-04 0;
+$accordion-heading-padding: $carbon--spacing-04 0;
 $accordion-title-type-style: 'body-long-02';
 $accordion-content-type-style: 'body-long-02';
 $accordion-arrow-size: carbon--rem(20px);
@@ -20,7 +20,12 @@ $checkbox-label-type-style: 'body-short-02';
 
 // Code snippet
 $snippet-type-style: 'code-02';
-$snippet-single-height: $spacing-09;
+$snippet-single-height: $carbon--spacing-09;
+
+// Content switcher
+$content-switcher-type-style: 'body-short-02';
+$content-switcher-height: $carbon--spacing-09;
+$content-switcher-spacing: carbon--rem(13px);
 
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';

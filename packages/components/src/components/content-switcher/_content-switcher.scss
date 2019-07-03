@@ -28,15 +28,15 @@
 
   .#{$prefix}--content-switcher-btn {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style($content-switcher-type-style);
     @include focus-outline('reset');
 
     background-color: $ui-01;
     display: inline-flex;
     align-items: center;
     width: 100%;
-    height: rem(40px);
-    padding: $carbon--spacing-03 $carbon--spacing-05;
+    height: $content-switcher-height;
+    padding: $content-switcher-spacing $carbon--spacing-05;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
