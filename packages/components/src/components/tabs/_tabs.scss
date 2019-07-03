@@ -185,6 +185,11 @@
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
     cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    pointer-events: none;
   }
 
   //-----------------------------
@@ -237,8 +242,7 @@
       width: 100%;
       margin: 0;
       padding-left: 16px;
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
     }
 
     @include carbon--breakpoint(md) {

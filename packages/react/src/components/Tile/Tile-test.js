@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
+import { ChevronDown16 } from '@carbon/icons-react';
 import {
   Tile,
   ClickableTile,
@@ -66,21 +66,21 @@ describe('Tile', () => {
 
     it('toggles the clickable class on click', () => {
       expect(wrapper.hasClass(`${prefix}--tile--is-clicked`)).toEqual(false);
-      wrapper.simulate('click');
+      wrapper.simulate('click', { persist: () => {} });
       expect(wrapper.hasClass(`${prefix}--tile--is-clicked`)).toEqual(true);
     });
 
     it('toggles the clickable state on click', () => {
       expect(wrapper.state().clicked).toEqual(false);
-      wrapper.simulate('click');
+      wrapper.simulate('click', { persist: () => {} });
       expect(wrapper.state().clicked).toEqual(true);
     });
 
     it('toggles the clicked state when using enter or space', () => {
       expect(wrapper.state().clicked).toEqual(false);
-      wrapper.simulate('keydown', { which: 32 });
+      wrapper.simulate('keydown', { which: 32, persist: () => {} });
       expect(wrapper.state().clicked).toEqual(true);
-      wrapper.simulate('keydown', { which: 13 });
+      wrapper.simulate('keydown', { which: 13, persist: () => {} });
       expect(wrapper.state().clicked).toEqual(false);
     });
 

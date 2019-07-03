@@ -15,7 +15,7 @@ module.exports = {
   globals: {
     __DEV__: true,
   },
-  extends: ['carbon-base'],
+  extends: ['eslint-config-carbon/vanilla'],
   plugins: ['jsdoc'],
   rules: {
     'jsdoc/check-param-names': 2,

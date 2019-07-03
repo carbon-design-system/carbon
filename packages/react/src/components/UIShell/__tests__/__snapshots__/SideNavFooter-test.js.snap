@@ -18,32 +18,34 @@ exports[`SideNavFooter should render 1`] = `
       <div
         className="bx--side-nav__icon"
       >
-        <ChevronRight20
-          height={20}
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <svg
-            aria-hidden={true}
-            focusable="false"
+        <ForwardRef(ChevronRight20)>
+          <Icon
             height={20}
             preserveAspectRatio="xMidYMid meet"
-            style={
-              Object {
-                "willChange": "transform",
-              }
-            }
             viewBox="0 0 32 32"
             width={20}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
-            />
-          </svg>
-        </ChevronRight20>
+            <svg
+              aria-hidden={true}
+              focusable="false"
+              height={20}
+              preserveAspectRatio="xMidYMid meet"
+              style={
+                Object {
+                  "willChange": "transform",
+                }
+              }
+              viewBox="0 0 32 32"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(ChevronRight20)>
       </div>
       <span
         className="bx--assistive-text"
@@ -73,32 +75,34 @@ exports[`SideNavFooter should render 2`] = `
       <div
         className="bx--side-nav__icon"
       >
-        <ChevronRight20
-          height={20}
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <svg
-            aria-hidden={true}
-            focusable="false"
+        <ForwardRef(ChevronRight20)>
+          <Icon
             height={20}
             preserveAspectRatio="xMidYMid meet"
-            style={
-              Object {
-                "willChange": "transform",
-              }
-            }
             viewBox="0 0 32 32"
             width={20}
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
-            />
-          </svg>
-        </ChevronRight20>
+            <svg
+              aria-hidden={true}
+              focusable="false"
+              height={20}
+              preserveAspectRatio="xMidYMid meet"
+              style={
+                Object {
+                  "willChange": "transform",
+                }
+              }
+              viewBox="0 0 32 32"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(ChevronRight20)>
       </div>
       <span
         className="bx--assistive-text"

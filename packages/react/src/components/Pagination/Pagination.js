@@ -8,8 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import CaretRight24 from '@carbon/icons-react/lib/caret--right/24';
-import CaretLeft24 from '@carbon/icons-react/lib/caret--left/24';
+import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Select from '../Select';
 import SelectItem from '../SelectItem';

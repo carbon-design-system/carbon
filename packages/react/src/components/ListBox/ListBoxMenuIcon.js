@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -28,13 +28,12 @@ const defaultTranslations = {
  * state of the menu for a given `ListBox`
  */
 const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
-  const className = cx({
-    [`${prefix}--list-box__menu-icon`]: true,
+  const className = cx(`${prefix}--list-box__menu-icon`, {
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
   });
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
-    <div className={className} role="button">
+    <div className={className}>
       <ChevronDown16 name="chevron--down" aria-label={description}>
         <title>{description}</title>
       </ChevronDown16>

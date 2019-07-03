@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
@@ -109,10 +109,16 @@ describe('Modal', () => {
       const openClass = 'is-visible';
 
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).not.toEqual(true);
       wrapper.setState({ isOpen: true });
       expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
         true
       );
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).toEqual(true);
     });
 
     it('should set state to open when trigger button is clicked', () => {
@@ -147,7 +153,7 @@ describe('Modal', () => {
       const modal = wrapper.find(Modal);
       const div = modal.find(`.${prefix}--modal`);
       wrapper.setState({ isOpen: true });
-      div.simulate('click');
+      div.simulate('mousedown');
       expect(wrapper.state('isOpen')).toEqual(false);
     });
 

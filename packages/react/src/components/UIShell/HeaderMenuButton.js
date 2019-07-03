@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Close20 from '@carbon/icons-react/lib/close/20';
-import Menu20 from '@carbon/icons-react/lib//menu/20';
+import { Close20, Menu20 } from '@carbon/icons-react';
+
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
@@ -28,11 +28,13 @@ const HeaderMenuButton = ({
     [`${prefix}--header__action`]: true,
     [`${prefix}--header__menu-trigger`]: true,
     [`${prefix}--header__action--active`]: isActive,
+    [`${prefix}--header__menu-toggle`]: true,
   });
   const accessibilityLabel = {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
   };
+
   return (
     <button
       {...rest}
@@ -64,9 +66,6 @@ HeaderMenuButton.propTypes = {
    */
   onClick: PropTypes.func,
 
-  /**
-   * Specify whether the action is currently active
-   */
   isActive: PropTypes.bool,
 };
 

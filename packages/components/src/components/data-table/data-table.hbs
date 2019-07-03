@@ -6,7 +6,7 @@
 -->
 <!-- v10 Data Table -->
 {{#if hasToolbar}}
-  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table>
+  <div class="{{@root.prefix}}--data-table-container {{#if sticky}}{{@root.prefix}}--data-table--max-width{{/if}}" data-table{{#if hasExpandAll}} data-table-demo-expand-all-manager{{/if}}>
     <div class="{{@root.prefix}}--data-table-header">
       <h4 class="{{@root.prefix}}--data-table-header__title">{{title}}</h4>
       <p class="{{@root.prefix}}--data-table-header__description">{{optionalHelper}}</p>
@@ -17,42 +17,25 @@
       <!-- Batch actions -->
       <div class="{{@root.prefix}}--batch-actions" aria-label="Table Action Bar">
           <div class="{{@root.prefix}}--action-list">
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#if small}} {{@root.prefix}}--btn--sm{{/if}}" type="button">
               Delete
               {{ carbon-icon 'Delete16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#if small}} {{@root.prefix}}--btn--sm{{/if}}" type="button">
               Save
               {{ carbon-icon 'Save16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary" type="button">
+            <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary{{#if small}} {{@root.prefix}}--btn--sm{{/if}}" type="button">
               Download
               {{ carbon-icon 'Download16' class=(add @root.prefix '--btn__icon')}}
             </button>
-            <button data-event="action-bar-cancel" class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--batch-summary__cancel">{{cancelLabel}}</button>
+            <button data-event="action-bar-cancel" class="{{@root.prefix}}--btn {{@root.prefix}}--btn--primary {{@root.prefix}}--batch-summary__cancel{{#if small}} {{@root.prefix}}--btn--sm{{/if}}">{{cancelLabel}}</button>
           </div>
         <div class="{{@root.prefix}}--batch-summary">
           <p class="{{@root.prefix}}--batch-summary__para">{{{selectedItemsCounterLabel}}}</p>
         </div>
       </div>
       {{/if}}
-
-      {{#is state "compat"}}
-      <div class="{{@root.prefix}}--toolbar-search-container">
-        <div data-search class="{{@root.prefix}}--search {{@root.prefix}}--search--sm" role="search">
-          <div class="{{@root.prefix}}--search-magnifier" tabindex="0">
-            {{ carbon-icon 'Search16' class=(add @root.prefix '--toolbar-action__icon')}}
-          </div>
-          <label id="{{searchLabelId}}" class="{{@root.prefix}}--label" for="{{searchInputId}}">{{searchLabel}}</label>
-          <input class="{{@root.prefix}}--search-input" type="text" id="{{searchInputId}}" role="search"
-            placeholder="{{searchLabel}}" aria-labelledby="{{searchLabelId}}">
-          <button class="{{@root.prefix}}--search-close {{@root.prefix}}--search-close--hidden" title="{{clearSearchLabel}}"
-            aria-label="{{clearSearchLabel}}">
-            {{ carbon-icon 'Close16'}}
-          </button>
-        </div>
-      </div>
-      {{/is}}
 
       {{#if toolbarActions}}
      <div class="{{@root.prefix}}--toolbar-content">
@@ -107,16 +90,6 @@
             </div>
             {{/each}}
 
-            <!-- Legacy toolbar actions-->
-            {{#is state "compat"}}
-              {{#each toolbarActions as |toolbar|}}
-              <div class="{{@root.prefix}}--toolbar-action" role="button"
-                tabindex="0" aria-label="Overflow" aria-haspopup="true" aria-expanded="false">
-                {{{ toolbar.icon }}}
-              </div>
-              {{/each}}
-            {{/is}}
-
           <!--  Toolbar primary button -->
           <button class="{{@root.prefix}}--btn {{@root.prefix}}--btn--sm {{@root.prefix}}--btn--primary">
             {{#if small }} Primary {{else}} Primary Button {{/if}}
@@ -132,15 +105,19 @@
   <section class="{{@root.prefix}}--data-table_inner-container">
   {{/if}}
   <!-- Table -->
-  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}} {{#if sticky}}{{@root.prefix}}--data-table--sticky-header{{/if}} {{#if zebra}}{{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}} {{#if tall}}{{@root.prefix}}--data-table--tall {{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort {{/if}}" >
+  <table class="{{@root.prefix}}--data-table {{#if truncate}}{{@root.prefix}}--data-table--overflow-truncate{{/if}}{{#if sticky}} {{@root.prefix}}--data-table--sticky-header{{/if}}{{#if zebra}} {{@root.prefix}}--data-table--zebra{{/if}}{{#if small}} {{@root.prefix}}--data-table--compact{{/if}}{{#if tall}} {{@root.prefix}}--data-table--tall{{/if}}{{#if sort}} {{@root.prefix}}--data-table--sort{{/if}}{{#if displayOverflowMenus}} {{@root.prefix}}--data-table--visible-overflow-menu{{/if}} {{#if short}}{{@root.prefix}}--data-table--short{{/if}} {{#if static}}{{@root.prefix}}--data-table--static{{/if}}" >
     <thead>
       <tr>
         {{#each columns}}
-          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox" {{/if}}{{#if section}}class="{{@root.prefix}}--table-expand"{{/if}} {{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell" {{/if}}>
+          <th {{#if checkbox}} class="{{@root.prefix}}--table-column-checkbox"{{/if}}{{#if menu}} class="{{@root.prefix}}--table-column-menu"{{/if}}{{#if section}} class="{{@root.prefix}}--table-expand"{{/if}}{{#if numerical}} class="{{@root.prefix}}--data-table--numerical-cell"{{/if}}{{#if section}} data-event="expandAll"{{/if}}>
             <!-- checkbox th -->
             {{#if checkbox}}
               <input data-event="select-all" id="{{checkboxId}}" class="{{@root.prefix}}--checkbox" type="checkbox" value="{{checkboxValue}}" name="{{checkboxName}}">
               <label for="{{checkboxId}}" class="{{@root.prefix}}--checkbox-label" aria-label="{{title}}"></label>
+            {{else if (and section ../hasExpandAll)}}
+              <button class="{{@root.prefix}}--table-expand__button">
+                {{ carbon-icon 'ChevronRight16' class=(add @root.prefix '--table-expand__svg') }}
+              </button>
             {{else if (not menu)}}
             <!-- sortable th  -->
               {{#if sortable}}
@@ -265,6 +242,13 @@
                 <!-- default (non truncated) -->
                 {{else}}
                   {{data}}
+                  {{#if ../../../tall}}
+                    {{#if (and row.secondaryText column.secondary)}}
+                    <div class="{{@root.prefix}}--data-table--cell-secondary-text">
+                      {{row.secondaryText}}
+                    </div>
+                    {{/if}}
+                  {{/if}}
                 {{/if}}
               </td>
             {{/if}}
@@ -288,69 +272,69 @@
   </section>
   {{/if}}
 
- {{#if (not small)}}</div>{{/if}}
-<!-- Pagination -->
+  <!-- Pagination -->
   {{#if hasPager}}
- <div class="{{@root.prefix}}--pagination" data-pagination>
-   <div class="{{@root.prefix}}--pagination__left">
-     <label
-        id="select-id-pagination-count-label"
-        class="{{@root.prefix}}--pagination__text"
-        for="select-id-pagination-count"
-      >
-        Items per page:
-      </label>
-      <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline {{@root.prefix}}--select__item-count">
-        <select
-          class="{{@root.prefix}}--select-input"
-          id="select-id-pagination-count"
-          aria-label="select number of items per page"
-          tabindex="0"
-          data-items-per-page
-        >
-          <option class="{{@root.prefix}}--select-option" value="10" selected>10</option>
-          <option class="{{@root.prefix}}--select-option" value="20">20</option>
-          <option class="{{@root.prefix}}--select-option" value="30">30</option>
-          <option class="{{@root.prefix}}--select-option" value="40">40</option>
-          <option class="{{@root.prefix}}--select-option" value="50">50</option>
-        </select>
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
-     </div>
-     <span class="{{@root.prefix}}--pagination__text">
-        <span data-displayed-item-range>1-10</span> of
-        <span data-total-items>50</span> items
-     </span>
-   </div>
-   <div class="{{@root.prefix}}--pagination__right">
-      <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline {{@root.prefix}}--select__page-number">
-        <select
-          class="{{@root.prefix}}--select-input"
-          id="select-id-pagination-page"
-          aria-label="select page number to view"
-          tabindex="0"
-          data-page-number-input
-        >
-          <option class="{{@root.prefix}}--select-option" value="1" selected>1</option>
-          <option class="{{@root.prefix}}--select-option" value="2">2</option>
-          <option class="{{@root.prefix}}--select-option" value="3">3</option>
-          <option class="{{@root.prefix}}--select-option" value="4">4</option>
-          <option class="{{@root.prefix}}--select-option" value="5">5</option>
-        </select>
-        {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
-      </div>
+  <div class="{{@root.prefix}}--pagination" data-pagination>
+    <div class="{{@root.prefix}}--pagination__left">
       <label
-       id="select-id-pagination-page-label"
-       class="{{@root.prefix}}--pagination__text"
-       for="select-id-pagination-page"
-     >
-       of 5 pages
-     </label>
-     <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" tabindex="0" data-page-backward aria-label="Backward button">
-       {{ carbon-icon 'CaretLeft20' class=(add @root.prefix '--pagination__nav-arrow')}}
-     </button>
-     <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" tabindex="0" data-page-forward aria-label="Forward button">
-       {{ carbon-icon 'CaretRight20' class=(add @root.prefix '--pagination__nav-arrow')}}
-     </button>
-   </div>
- </div>
-{{/if}}
+         id="select-id-pagination-count-label"
+         class="{{@root.prefix}}--pagination__text"
+         for="select-id-pagination-count"
+       >
+         Items per page:
+       </label>
+       <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline {{@root.prefix}}--select__item-count">
+         <select
+           class="{{@root.prefix}}--select-input"
+           id="select-id-pagination-count"
+           aria-label="select number of items per page"
+           tabindex="0"
+           data-items-per-page
+         >
+           <option class="{{@root.prefix}}--select-option" value="10" selected>10</option>
+           <option class="{{@root.prefix}}--select-option" value="20">20</option>
+           <option class="{{@root.prefix}}--select-option" value="30">30</option>
+           <option class="{{@root.prefix}}--select-option" value="40">40</option>
+           <option class="{{@root.prefix}}--select-option" value="50">50</option>
+         </select>
+         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow') }}
+      </div>
+      <span class="{{@root.prefix}}--pagination__text">
+         <span data-displayed-item-range>1-10</span> of
+         <span data-total-items>50</span> items
+      </span>
+    </div>
+    <div class="{{@root.prefix}}--pagination__right">
+       <div class="{{@root.prefix}}--select {{@root.prefix}}--select--inline {{@root.prefix}}--select__page-number">
+         <select
+           class="{{@root.prefix}}--select-input"
+           id="select-id-pagination-page"
+           aria-label="select page number to view"
+           tabindex="0"
+           data-page-number-input
+         >
+           <option class="{{@root.prefix}}--select-option" value="1" selected>1</option>
+           <option class="{{@root.prefix}}--select-option" value="2">2</option>
+           <option class="{{@root.prefix}}--select-option" value="3">3</option>
+           <option class="{{@root.prefix}}--select-option" value="4">4</option>
+           <option class="{{@root.prefix}}--select-option" value="5">5</option>
+         </select>
+         {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--select__arrow')}}
+       </div>
+       <label
+        id="select-id-pagination-page-label"
+        class="{{@root.prefix}}--pagination__text"
+        for="select-id-pagination-page"
+      >
+        of 5 pages
+      </label>
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--backward" tabindex="0" data-page-backward aria-label="Backward button">
+        {{ carbon-icon 'CaretLeft20' class=(add @root.prefix '--pagination__nav-arrow')}}
+      </button>
+      <button class="{{@root.prefix}}--pagination__button {{@root.prefix}}--pagination__button--forward" tabindex="0" data-page-forward aria-label="Forward button">
+        {{ carbon-icon 'CaretRight20' class=(add @root.prefix '--pagination__nav-arrow')}}
+      </button>
+    </div>
+  </div>
+  {{/if}}
+{{#if (not small)}}</div>{{/if}}

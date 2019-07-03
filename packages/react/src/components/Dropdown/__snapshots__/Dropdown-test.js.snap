@@ -95,14 +95,13 @@ exports[`Dropdown should render 1`] = `
             type="button"
           >
             <div
-              aria-controls="test-dropdown__menu"
+              aria-controls={null}
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
-              aria-owns="test-dropdown__menu"
+              aria-owns={null}
               className="bx--list-box__field"
               data-toggle={true}
-              disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
@@ -122,41 +121,45 @@ exports[`Dropdown should render 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon"
-                  role="button"
                 >
-                  <ChevronDown16
+                  <ForwardRef(ChevronDown16)
                     aria-label="Open menu"
-                    height={16}
                     name="chevron--down"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
+                    <Icon
                       aria-label="Open menu"
-                      focusable="false"
                       height={16}
                       name="chevron--down"
                       preserveAspectRatio="xMidYMid meet"
-                      role="img"
-                      style={
-                        Object {
-                          "willChange": "transform",
-                        }
-                      }
                       viewBox="0 0 16 16"
                       width={16}
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <title>
-                        Open menu
-                      </title>
-                      <path
-                        d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
-                      />
-                    </svg>
-                  </ChevronDown16>
+                      <svg
+                        aria-label="Open menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+                        />
+                        <title>
+                          Open menu
+                        </title>
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
                 </div>
               </ListBoxMenuIcon>
             </div>
@@ -270,7 +273,6 @@ exports[`Dropdown should render custom item components 1`] = `
               aria-owns="test-dropdown__menu"
               className="bx--list-box__field"
               data-toggle={true}
-              disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
@@ -290,41 +292,45 @@ exports[`Dropdown should render custom item components 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
-                  role="button"
                 >
-                  <ChevronDown16
+                  <ForwardRef(ChevronDown16)
                     aria-label="Close menu"
-                    height={16}
                     name="chevron--down"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
+                    <Icon
                       aria-label="Close menu"
-                      focusable="false"
                       height={16}
                       name="chevron--down"
                       preserveAspectRatio="xMidYMid meet"
-                      role="img"
-                      style={
-                        Object {
-                          "willChange": "transform",
-                        }
-                      }
                       viewBox="0 0 16 16"
                       width={16}
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <title>
-                        Close menu
-                      </title>
-                      <path
-                        d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
-                      />
-                    </svg>
-                  </ChevronDown16>
+                      <svg
+                        aria-label="Close menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+                        />
+                        <title>
+                          Close menu
+                        </title>
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
                 </div>
               </ListBoxMenuIcon>
             </div>
@@ -595,7 +601,6 @@ exports[`Dropdown should render with strings as items 1`] = `
               aria-owns="test-dropdown__menu"
               className="bx--list-box__field"
               data-toggle={true}
-              disabled={false}
               onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
@@ -615,41 +620,45 @@ exports[`Dropdown should render with strings as items 1`] = `
               >
                 <div
                   className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
-                  role="button"
                 >
-                  <ChevronDown16
+                  <ForwardRef(ChevronDown16)
                     aria-label="Close menu"
-                    height={16}
                     name="chevron--down"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
+                    <Icon
                       aria-label="Close menu"
-                      focusable="false"
                       height={16}
                       name="chevron--down"
                       preserveAspectRatio="xMidYMid meet"
-                      role="img"
-                      style={
-                        Object {
-                          "willChange": "transform",
-                        }
-                      }
                       viewBox="0 0 16 16"
                       width={16}
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <title>
-                        Close menu
-                      </title>
-                      <path
-                        d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
-                      />
-                    </svg>
-                  </ChevronDown16>
+                      <svg
+                        aria-label="Close menu"
+                        focusable="false"
+                        height={16}
+                        name="chevron--down"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        style={
+                          Object {
+                            "willChange": "transform",
+                          }
+                        }
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"
+                        />
+                        <title>
+                          Close menu
+                        </title>
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
                 </div>
               </ListBoxMenuIcon>
             </div>

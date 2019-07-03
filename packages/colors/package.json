@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/colors",
-  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/colors",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -19,13 +19,15 @@
     "elements",
     "carbon",
     "carbon-elements",
-    "carbon-design-system"
+    "carbon-design-system",
+    "components",
+    "react"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js && bundler check 'scss/*.scss' && bundler sassdoc 'scss/*.scss'",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonColors && node tasks/build.js && bundler check \"scss/*.scss\" && bundler sassdoc \"scss/*.scss\"",
     "clean": "rimraf css es lib umd scss"
   },
   "devDependencies": {

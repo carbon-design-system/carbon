@@ -10,7 +10,7 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
-import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
+import { WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 
 const { prefix } = settings;
@@ -156,7 +156,7 @@ export default class ComboBox extends React.Component {
     /**
      * Additional props passed to Downshift
      */
-    downshiftProps: Downshift.propTypes,
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
   };
 
   static defaultProps = {
@@ -301,15 +301,11 @@ export default class ComboBox extends React.Component {
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field
               id={id}
+              disabled={disabled}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),
               })}>
-              {invalid && (
-                <WarningFilled16
-                  className={`${prefix}--list-box__invalid-icon`}
-                />
-              )}
               <input
                 className={`${prefix}--text-input`}
                 aria-label={ariaLabel}
@@ -324,6 +320,11 @@ export default class ComboBox extends React.Component {
                   onKeyDown: this.handleOnInputKeyDown,
                 })}
               />
+              {invalid && (
+                <WarningFilled16
+                  className={`${prefix}--list-box__invalid-icon`}
+                />
+              )}
               {inputValue && (
                 <ListBox.Selection
                   clearSelection={clearSelection}

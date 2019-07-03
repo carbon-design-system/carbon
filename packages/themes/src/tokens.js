@@ -44,6 +44,11 @@ const colors = [
   'support03',
   'support04',
 
+  'inverseSupport01',
+  'inverseSupport02',
+  'inverseSupport03',
+  'inverseSupport04',
+
   'overlay01',
 
   // Interactive states
@@ -78,6 +83,9 @@ const colors = [
 
   'highlight',
 
+  'skeleton01',
+  'skeleton02',
+
   // Deprecated
   'brand01',
   'brand02',
@@ -91,7 +99,7 @@ const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 /**
  * Format a given token into the format expected in CSS/SCSS-based projects.
  * @param {string} token
- * @return {string}
+ * @returns {string}
  */
 export function formatTokenName(token) {
   let string = '';

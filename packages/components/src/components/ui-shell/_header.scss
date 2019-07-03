@@ -68,15 +68,19 @@
     background-color: $shell-header-bg-04;
   }
 
-  .#{$prefix}--header__action--active,
-  .#{$prefix}--header__action--active:hover {
-    background-color: $shell-header-bg-03;
+  .#{$prefix}--header__action--active {
+    border-left: 1px solid $shell-header-border-01;
+    border-right: 1px solid $shell-header-border-01;
+    border-bottom: 1px solid $shell-header-bg-01;
   }
 
-  .#{$prefix}--header__action--active,
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
+  }
+
+  .#{$prefix}--header__action:active {
+    background-color: $shell-header-bg-03;
   }
 
   .#{$prefix}--header__action > svg {
@@ -93,6 +97,14 @@
 
   .#{$prefix}--header__menu-trigger:hover {
     fill: $shell-header-bg-02;
+  }
+
+  .#{$prefix}--header__menu-toggle {
+    display: none;
+
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+    }
   }
 
   //--------------------------------------------------------------------------
@@ -175,13 +187,13 @@
   }
 
   a.#{$prefix}--header__menu-item[role='menuitem']:hover {
-    background-color: $shell-header-bg-04;
+    background-color: $shell-header-bg-02;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item[role='menuitem']:active {
-    background-color: $shell-header-bg-05;
+    background-color: $shell-header-bg-03;
     color: $shell-header-text-01;
   }
 

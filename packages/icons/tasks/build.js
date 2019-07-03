@@ -8,10 +8,12 @@
 'use strict';
 
 const build = require('../src/build');
-const search = require('../src/search');
+const buildMetadata = require('./build-metadata');
 const { SVG_DIR } = require('../src/paths');
 
-build(SVG_DIR, { cwd: process.cwd() }).catch(error => {
-  // eslint-disable-next-line no-console
-  console.error(error);
-});
+build(SVG_DIR, { cwd: process.cwd() })
+  .then(buildMetadata)
+  .catch(error => {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  });

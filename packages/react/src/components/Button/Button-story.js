@@ -11,8 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import AddFilled16 from '@carbon/icons-react/lib/add--filled/16';
-import Search16 from '@carbon/icons-react/lib/search/16';
+import { AddFilled16, Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 
@@ -39,6 +38,12 @@ const kinds = {
   'Ghost button (ghost)': 'ghost',
 };
 
+const sizes = {
+  Default: 'default',
+  Field: 'field',
+  Small: 'small',
+};
+
 const props = {
   regular: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
@@ -46,7 +51,7 @@ const props = {
       className: 'some-class',
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
-      small: boolean('Small (small)', false),
+      size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
@@ -54,6 +59,7 @@ const props = {
       ),
       onClick: action('onClick'),
       onFocus: action('onFocus'),
+      small: boolean('Small (small) - Deprecated in favor of `size`', false),
     };
   },
   set: () => {
@@ -62,6 +68,7 @@ const props = {
       className: 'some-class',
       disabled: boolean('Disabled (disabled)', false),
       small: boolean('Small (small)', false),
+      size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
@@ -130,6 +137,8 @@ storiesOf('Buttons', module)
           Danger buttons should be used for a negative action (such as Delete) on the page.
 
           Modify the behavior of the button by changing its event properties.
+          
+          Field buttons may be use directly next to an input element, to visually align their heights.
 
           Small buttons may be used when there is not enough space for a
           regular sized button. This issue is most found in tables. Small button should have three words
@@ -172,7 +181,7 @@ storiesOf('Buttons', module)
         &nbsp;
         <ButtonSkeleton href="#" />
         &nbsp;
-        <ButtonSkeleton small />
+        <ButtonSkeleton size="small" />
       </div>
     ),
     {

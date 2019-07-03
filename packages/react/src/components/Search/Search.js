@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Search16 from '@carbon/icons-react/lib/search/16';
-import Close16 from '@carbon/icons-react/lib/close/16';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Search16, Close16, Close20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -41,6 +39,11 @@ export default class Search extends Component {
      * Provide an optional label text for the Search icon
      */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify light version or default version of this control
+     */
+    light: PropTypes.bool,
 
     /**
      * Specify a custom `id` for the input
@@ -122,6 +125,7 @@ export default class Search extends Component {
       labelText,
       closeButtonLabelText,
       small,
+      light,
       ...other
     } = this.props;
 
@@ -131,6 +135,7 @@ export default class Search extends Component {
       [`${prefix}--search`]: true,
       [`${prefix}--search--xl`]: !small,
       [`${prefix}--search--sm`]: small,
+      [`${prefix}--search--light`]: light,
       [className]: className,
     });
 

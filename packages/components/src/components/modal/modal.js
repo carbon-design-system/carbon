@@ -27,8 +27,9 @@ class Modal extends mixin(
    * @extends EventedShowHideState
    * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
+   * @param {object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.classBody] The CSS class for `<body>` with open modal.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
@@ -88,7 +89,7 @@ class Modal extends mixin(
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
-   * @param {Object} detail The detail data to be included in the event that will be fired.
+   * @param {object} detail The detail data to be included in the event that will be fired.
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
@@ -131,8 +132,16 @@ class Modal extends mixin(
 
     if (state === 'hidden') {
       this.element.classList.toggle(this.options.classVisible, false);
+      this.element.ownerDocument.body.classList.toggle(
+        this.options.classBody,
+        false
+      );
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
+      this.element.ownerDocument.body.classList.toggle(
+        this.options.classBody,
+        true
+      );
     }
     handleTransitionEnd = this.manage(
       on(this.element, 'transitionend', transitionEnd)
@@ -198,7 +207,7 @@ class Modal extends mixin(
    * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
    * @member Modal.options
-   * @type {Object}
+   * @type {object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
    * @property {string} [selectorModalClose] The selector to find elements that close the modal.
    * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
@@ -207,6 +216,7 @@ class Modal extends mixin(
    *   The CSS selectors of floating menus.
    *   Used for detecting if focus-wrap behavior should be disabled temporarily.
    * @property {string} [classVisible] The CSS class for the visible state.
+   * @property {string} [classBody] The CSS class for `<body>` with open modal.
    * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @property {string} [eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
@@ -233,6 +243,7 @@ class Modal extends mixin(
         '.flatpickr-calendar',
       ],
       classVisible: 'is-visible',
+      classBody: `${prefix}--body--with-modal-open`,
       attribInitTarget: 'data-modal-target',
       initEventNames: ['click'],
       eventBeforeShown: 'modal-beingshown',

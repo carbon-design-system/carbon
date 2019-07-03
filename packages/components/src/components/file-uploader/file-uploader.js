@@ -29,7 +29,7 @@ class FileUploader extends mixin(
    * @extends eventedState
    * @extends Handles
    * @param {HTMLElement} element The element working as a file uploader.
-   * @param {Object} [options] The component options. See static options.
+   * @param {object} [options] The component options. See static options.
    */
   constructor(element, options = {}) {
     super(element, options);

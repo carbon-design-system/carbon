@@ -9,10 +9,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import Close16 from '@carbon/icons-react/lib/close/16';
-import ErrorFilled20 from '@carbon/icons-react/lib/error--filled/20';
-import CheckmarkFilled20 from '@carbon/icons-react/lib/checkmark--filled/20';
-import WarningFilled20 from '@carbon/icons-react/lib/warning--filled/20';
+import {
+  Close16,
+  ErrorFilled20,
+  CheckmarkFilled20,
+  WarningFilled20,
+} from '@carbon/icons-react';
 
 const { prefix } = settings;
 
@@ -141,7 +143,6 @@ export class NotificationTextDetails extends Component {
 
   static defaultProps = {
     title: 'title',
-    subtitle: 'subtitle',
     caption: 'caption',
     notificationType: 'toast',
   };
@@ -214,6 +215,11 @@ export class ToastNotification extends Component {
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 
     /**
+     * Specify whether you are using the low contrast variant of the ToastNotification.
+     */
+    lowContrast: PropTypes.bool,
+
+    /**
      * Specify the title
      */
     title: PropTypes.string.isRequired,
@@ -221,7 +227,7 @@ export class ToastNotification extends Component {
     /**
      * Specify the sub-title
      */
-    subtitle: PropTypes.node.isRequired,
+    subtitle: PropTypes.node,
 
     /**
      * By default, this value is "alert". You can also provide an alternate
@@ -264,7 +270,6 @@ export class ToastNotification extends Component {
   static defaultProps = {
     kind: 'error',
     title: 'provide a title',
-    subtitle: 'provide a subtitle',
     caption: 'provide a caption',
     role: 'alert',
     notificationType: 'toast',
@@ -306,6 +311,7 @@ export class ToastNotification extends Component {
       subtitle,
       title,
       kind,
+      lowContrast,
       hideCloseButton,
       ...other
     } = this.props;
@@ -313,7 +319,8 @@ export class ToastNotification extends Component {
     const classes = classNames(
       `${prefix}--toast-notification`,
       {
-        [`${prefix}--toast-notification--${this.props.kind}`]: this.props.kind,
+        [`${prefix}--toast-notification--low-contrast`]: lowContrast,
+        [`${prefix}--toast-notification--${kind}`]: kind,
       },
       className
     );
@@ -362,6 +369,11 @@ export class InlineNotification extends Component {
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 
     /**
+     * Specify whether you are using the low contrast variant of the InlineNotification.
+     */
+    lowContrast: PropTypes.bool,
+
+    /**
      * Specify the title
      */
     title: PropTypes.string.isRequired,
@@ -369,7 +381,7 @@ export class InlineNotification extends Component {
     /**
      * Specify the sub-title
      */
-    subtitle: PropTypes.node.isRequired,
+    subtitle: PropTypes.node,
 
     /**
      * By default, this value is "alert". You can also provide an alternate
@@ -430,6 +442,7 @@ export class InlineNotification extends Component {
       subtitle,
       title,
       kind,
+      lowContrast,
       hideCloseButton,
       ...other
     } = this.props;
@@ -437,7 +450,8 @@ export class InlineNotification extends Component {
     const classes = classNames(
       `${prefix}--inline-notification`,
       {
-        [`${prefix}--inline-notification--${this.props.kind}`]: this.props.kind,
+        [`${prefix}--inline-notification--low-contrast`]: lowContrast,
+        [`${prefix}--inline-notification--${kind}`]: kind,
       },
       className
     );

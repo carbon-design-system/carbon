@@ -10,8 +10,9 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Button from '../Button';
 import { settings } from 'carbon-components';
-import Close20 from '@carbon/icons-react/lib/close/20';
+import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
+import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;
 
@@ -165,7 +166,7 @@ export default class Modal extends Component {
     }
   };
 
-  handleClick = evt => {
+  handleMousedown = evt => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
@@ -200,6 +201,11 @@ export default class Modal extends Component {
     } else if (prevProps.open && !this.props.open) {
       this.beingOpen = false;
     }
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
   }
 
   initialFocus = focusContainerElement => {
@@ -220,6 +226,11 @@ export default class Modal extends Component {
   };
 
   componentDidMount() {
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
     if (!this.props.open) {
       return;
     }
@@ -329,7 +340,7 @@ export default class Modal extends Component {
       <div
         {...other}
         onKeyDown={this.handleKeyDown}
-        onClick={this.handleClick}
+        onMouseDown={this.handleMousedown}
         onBlur={this.handleBlur}
         className={modalClasses}
         role="presentation"

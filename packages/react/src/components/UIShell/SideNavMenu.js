@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ChevronDown20 from '@carbon/icons-react/lib/chevron--down/20';
+import { ChevronDown20 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -79,6 +79,7 @@ export class SideNavMenu extends React.Component {
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]: isActive,
+      [`${prefix}--side-nav__item--icon`]: IconElement,
       [customClassName]: !!customClassName,
     });
     return (

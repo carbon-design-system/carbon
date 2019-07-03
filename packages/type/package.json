@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/type",
-  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/type",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -20,13 +20,15 @@
     "elements",
     "carbon",
     "carbon-elements",
-    "carbon-design-system"
+    "carbon-design-system",
+    "components",
+    "react"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc 'scss/**/*.scss' -i '**/{_inlined,vendor}**' && bundler inline && bundler check 'scss/*.scss'",
+    "build": "yarn clean && bundler bundle src/index.js --name CarbonType && bundler sassdoc \"scss/**/*.scss\" -i \"**/{_inlined,vendor}**\" && bundler inline && bundler check \"scss/*.scss\"",
     "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
   },
   "dependencies": {

@@ -45,7 +45,7 @@ our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) ! 👀
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ## 📝 License
 

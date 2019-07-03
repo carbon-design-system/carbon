@@ -41,6 +41,10 @@
   - [✅support-02 [variable]](#support-02-variable)
   - [✅support-03 [variable]](#support-03-variable)
   - [✅support-04 [variable]](#support-04-variable)
+  - [✅inverse-support-01 [variable]](#inverse-support-01-variable)
+  - [✅inverse-support-02 [variable]](#inverse-support-02-variable)
+  - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
+  - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
   - [✅focus [variable]](#focus-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
@@ -62,6 +66,8 @@
   - [✅disabled-02 [variable]](#disabled-02-variable)
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
+  - [✅skeleton-01 [variable]](#skeleton-01-variable)
+  - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
   - [✅⚠️brand-02 [variable]](#brand-02-variable)
   - [✅⚠️brand-03 [variable]](#brand-03-variable)
@@ -80,7 +86,7 @@ Define theme variables from a map of tokens
 <summary>Source code</summary>
 
 ```scss
-@mixin carbon--theme($theme: $carbon--theme) {
+@mixin carbon--theme($theme: $carbon--theme, $emit-custom-properties: false) {
   $interactive-01: map-get($theme, 'interactive-01') !global;
   $interactive-02: map-get($theme, 'interactive-02') !global;
   $interactive-03: map-get($theme, 'interactive-03') !global;
@@ -107,6 +113,10 @@ Define theme variables from a map of tokens
   $support-02: map-get($theme, 'support-02') !global;
   $support-03: map-get($theme, 'support-03') !global;
   $support-04: map-get($theme, 'support-04') !global;
+  $inverse-support-01: map-get($theme, 'inverse-support-01') !global;
+  $inverse-support-02: map-get($theme, 'inverse-support-02') !global;
+  $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
+  $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
   $focus: map-get($theme, 'focus') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
@@ -128,11 +138,74 @@ Define theme variables from a map of tokens
   $disabled-02: map-get($theme, 'disabled-02') !global;
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
+  $skeleton-01: map-get($theme, 'skeleton-01') !global;
+  $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
   $brand-02: map-get($theme, 'brand-02') !global;
   $brand-03: map-get($theme, 'brand-03') !global;
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
+
+  @if $emit-custom-properties == true {
+    --interactive-01: #{map-get($theme, 'interactive-01')};
+    --interactive-02: #{map-get($theme, 'interactive-02')};
+    --interactive-03: #{map-get($theme, 'interactive-03')};
+    --interactive-04: #{map-get($theme, 'interactive-04')};
+    --ui-background: #{map-get($theme, 'ui-background')};
+    --ui-01: #{map-get($theme, 'ui-01')};
+    --ui-02: #{map-get($theme, 'ui-02')};
+    --ui-03: #{map-get($theme, 'ui-03')};
+    --ui-04: #{map-get($theme, 'ui-04')};
+    --ui-05: #{map-get($theme, 'ui-05')};
+    --text-01: #{map-get($theme, 'text-01')};
+    --text-02: #{map-get($theme, 'text-02')};
+    --text-03: #{map-get($theme, 'text-03')};
+    --text-04: #{map-get($theme, 'text-04')};
+    --icon-01: #{map-get($theme, 'icon-01')};
+    --icon-02: #{map-get($theme, 'icon-02')};
+    --icon-03: #{map-get($theme, 'icon-03')};
+    --link-01: #{map-get($theme, 'link-01')};
+    --field-01: #{map-get($theme, 'field-01')};
+    --field-02: #{map-get($theme, 'field-02')};
+    --inverse-01: #{map-get($theme, 'inverse-01')};
+    --inverse-02: #{map-get($theme, 'inverse-02')};
+    --support-01: #{map-get($theme, 'support-01')};
+    --support-02: #{map-get($theme, 'support-02')};
+    --support-03: #{map-get($theme, 'support-03')};
+    --support-04: #{map-get($theme, 'support-04')};
+    --inverse-support-01: #{map-get($theme, 'inverse-support-01')};
+    --inverse-support-02: #{map-get($theme, 'inverse-support-02')};
+    --inverse-support-03: #{map-get($theme, 'inverse-support-03')};
+    --inverse-support-04: #{map-get($theme, 'inverse-support-04')};
+    --overlay-01: #{map-get($theme, 'overlay-01')};
+    --focus: #{map-get($theme, 'focus')};
+    --hover-primary: #{map-get($theme, 'hover-primary')};
+    --active-primary: #{map-get($theme, 'active-primary')};
+    --hover-primary-text: #{map-get($theme, 'hover-primary-text')};
+    --hover-secondary: #{map-get($theme, 'hover-secondary')};
+    --active-secondary: #{map-get($theme, 'active-secondary')};
+    --hover-tertiary: #{map-get($theme, 'hover-tertiary')};
+    --active-tertiary: #{map-get($theme, 'active-tertiary')};
+    --hover-ui: #{map-get($theme, 'hover-ui')};
+    --active-ui: #{map-get($theme, 'active-ui')};
+    --selected-ui: #{map-get($theme, 'selected-ui')};
+    --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --hover-danger: #{map-get($theme, 'hover-danger')};
+    --active-danger: #{map-get($theme, 'active-danger')};
+    --hover-row: #{map-get($theme, 'hover-row')};
+    --visited-link: #{map-get($theme, 'visited-link')};
+    --disabled-01: #{map-get($theme, 'disabled-01')};
+    --disabled-02: #{map-get($theme, 'disabled-02')};
+    --disabled-03: #{map-get($theme, 'disabled-03')};
+    --highlight: #{map-get($theme, 'highlight')};
+    --skeleton-01: #{map-get($theme, 'skeleton-01')};
+    --skeleton-02: #{map-get($theme, 'skeleton-02')};
+    --brand-01: #{map-get($theme, 'brand-01')};
+    --brand-02: #{map-get($theme, 'brand-02')};
+    --brand-03: #{map-get($theme, 'brand-03')};
+    --active-01: #{map-get($theme, 'active-01')};
+    --hover-field: #{map-get($theme, 'hover-field')};
+  }
 
   @content;
   // Reset to default theme after apply in content
@@ -146,9 +219,10 @@ Define theme variables from a map of tokens
 
 - **Parameters**:
 
-| Name     | Description         | Type  | Default value    |
-| -------- | ------------------- | ----- | ---------------- |
-| `$theme` | Map of theme tokens | `Map` | `$carbon--theme` |
+| Name                      | Description                                   | Type   | Default value    |
+| ------------------------- | --------------------------------------------- | ------ | ---------------- |
+| `$theme`                  | Map of theme tokens                           | `Map`  | `$carbon--theme` |
+| `$emit-custom-properties` | Output CSS Custom Properties for theme tokens | `Bool` | `false`          |
 
 **Example**:
 
@@ -204,6 +278,10 @@ Define theme variables from a map of tokens
   - [support-02 [variable]](#support-02-variable)
   - [support-03 [variable]](#support-03-variable)
   - [support-04 [variable]](#support-04-variable)
+  - [inverse-support-01 [variable]](#inverse-support-01-variable)
+  - [inverse-support-02 [variable]](#inverse-support-02-variable)
+  - [inverse-support-03 [variable]](#inverse-support-03-variable)
+  - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [focus [variable]](#focus-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -225,6 +303,8 @@ Define theme variables from a map of tokens
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
+  - [skeleton-01 [variable]](#skeleton-01-variable)
+  - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
   - [brand-02 [variable]](#brand-02-variable)
   - [brand-03 [variable]](#brand-03-variable)
@@ -267,6 +347,10 @@ $carbon--theme--white: (
   support-02: #24a148,
   support-03: #fdd13a,
   support-04: #054ada,
+  inverse-support-01: #fb4b53,
+  inverse-support-02: #3dbb61,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
   hover-primary: #0353e9,
@@ -288,6 +372,8 @@ $carbon--theme--white: (
   disabled-02: #bebebe,
   disabled-03: #8c8c8c,
   highlight: #c9deff,
+  skeleton-01: #e5e5e5,
+  skeleton-02: #bebebe,
   brand-01: #0062ff,
   brand-02: #171717,
   brand-03: #0062ff,
@@ -338,6 +424,10 @@ $carbon--theme--g10: (
   support-02: #24a148,
   support-03: #fdd13a,
   support-04: #054ada,
+  inverse-support-01: #fb4b53,
+  inverse-support-02: #3dbb61,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #408bfc,
   overlay-01: rgba(23, 23, 23, 0.5),
   focus: #0062ff,
   hover-primary: #0353e9,
@@ -359,6 +449,8 @@ $carbon--theme--g10: (
   disabled-02: #bebebe,
   disabled-03: #8c8c8c,
   highlight: #c9deff,
+  skeleton-01: #e5e5e5,
+  skeleton-02: #bebebe,
   brand-01: #0062ff,
   brand-02: #171717,
   brand-03: #0062ff,
@@ -407,16 +499,20 @@ $carbon--theme--g90: (
   support-02: #3dbb61,
   support-03: #fdd13a,
   support-04: #408bfc,
+  inverse-support-01: #da1e28,
+  inverse-support-02: #24a148,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
   active-tertiary: #bebebe,
-  hover-ui: #353535,
+  hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
   selected-ui: #565656,
   hover-selected-ui: #656565,
@@ -427,12 +523,14 @@ $carbon--theme--g90: (
   disabled-01: #3d3d3d,
   disabled-02: #565656,
   disabled-03: #8c8c8c,
-  highlight: #061f80,
+  highlight: #054ada,
+  skeleton-01: #353535,
+  skeleton-02: #565656,
   brand-01: #0062ff,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
   active-01: #6f6f6f,
-  hover-field: #353535,
+  hover-field: #4c4c4c,
 );
 ```
 
@@ -476,11 +574,15 @@ $carbon--theme--g100: (
   support-02: #3dbb61,
   support-03: #fdd13a,
   support-04: #408bfc,
+  inverse-support-01: #da1e28,
+  inverse-support-02: #24a148,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #0062ff,
   overlay-01: rgba(23, 23, 23, 0.7),
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -496,7 +598,9 @@ $carbon--theme--g100: (
   disabled-01: #282828,
   disabled-02: #3d3d3d,
   disabled-03: #6f6f6f,
-  highlight: #061f80,
+  highlight: #0530ad,
+  skeleton-01: #353535,
+  skeleton-02: #3d3d3d,
   brand-01: #0062ff,
   brand-02: #6f6f6f,
   brand-03: #ffffff,
@@ -1003,6 +1107,78 @@ $support-04: map-get($carbon--theme, 'support-04');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+### ✅inverse-support-01 [variable]
+
+Error on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-01: map-get($carbon--theme, 'inverse-support-01');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-02 [variable]
+
+Success on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-02: map-get($carbon--theme, 'inverse-support-02');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-03 [variable]
+
+Warning on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-03: map-get($carbon--theme, 'inverse-support-03');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-support-04 [variable]
+
+Information on high contrast backgrounds
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-support-04: map-get($carbon--theme, 'inverse-support-04');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅overlay-01 [variable]
 
 Background overlay
@@ -1377,6 +1553,42 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 
 ```scss
 $highlight: map-get($carbon--theme, 'highlight');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅skeleton-01 [variable]
+
+Skeleton state of graphics
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$skeleton-01: map-get($carbon--theme, 'skeleton-01');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅skeleton-02 [variable]
+
+Skeleton state of text
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$skeleton-02: map-get($carbon--theme, 'skeleton-02');
 ```
 
 </details>

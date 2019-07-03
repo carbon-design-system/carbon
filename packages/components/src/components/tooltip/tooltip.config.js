@@ -22,6 +22,23 @@ module.exports = {
         For more regular use case, e.g. giving the user more text information about something,
         use definition tooltip or icon tooltip.
       `,
+      context: {
+        noHeading: {
+          idSuffix: `example-${Math.random()
+            .toString(36)
+            .substr(2)}`,
+        },
+        heading: {
+          idSuffix: `example-${Math.random()
+            .toString(36)
+            .substr(2)}`,
+        },
+        label: {
+          idSuffix: `example-${Math.random()
+            .toString(36)
+            .substr(2)}`,
+        },
+      },
     },
     {
       name: 'definition',
@@ -35,7 +52,7 @@ module.exports = {
         If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
 
         For top positioning, replace bx--tooltip--definition__bottom class with bx--tooltip--definition__top.
-        For center/right alignment, add bx--tooltip--definition__align-center/bx--tooltip--definition__align-right class
+        For center/right alignment, add bx--tooltip--definition__align-center/bx--tooltip--definition__align-end class
         to the DOM element with bx--tooltip--definition__bottom/bx--tooltip--definition__top.
       `,
     },

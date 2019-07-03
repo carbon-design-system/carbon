@@ -9,7 +9,13 @@ const useExternalCss =
 const useStyleSourceMap =
   process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
 
+const useControlledStateWithEventListener =
+  process.env.CARBON_REACT_USE_CONTROLLED_STATE_WITH_EVENT_LISTENER === 'true';
 const useRtl = process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+
+const replaceTable = {
+  useControlledStateWithEventListener,
+};
 
 const styleLoaders = [
   {
@@ -24,7 +30,7 @@ const styleLoaders = [
     options: {
       plugins: () => {
         const autoPrefixer = require('autoprefixer')({
-          browsers: ['last 1 version', 'ie >= 11'],
+          overrideBrowserslist: ['last 1 version', 'ie >= 11'],
         });
         return !useRtl ? [autoPrefixer] : [autoPrefixer, rtlcss];
       },
@@ -64,10 +70,10 @@ class FeatureFlagProxyPlugin {
   }
 }
 
-module.exports = (baseConfig, env, defaultConfig) => {
-  defaultConfig.devtool = useStyleSourceMap ? 'source-map' : '';
-  defaultConfig.optimization = {
-    ...defaultConfig.optimization,
+module.exports = ({ config, mode }) => {
+  config.devtool = useStyleSourceMap ? 'source-map' : '';
+  config.optimization = {
+    ...config.optimization,
     minimizer: [
       new TerserPlugin({
         sourceMap: true,
@@ -78,7 +84,19 @@ module.exports = (baseConfig, env, defaultConfig) => {
     ],
   };
 
-  defaultConfig.module.rules.push({
+  config.module.rules.push({
+    test: /(\/|\\)FeatureFlags\.js$/,
+    loader: 'string-replace-loader',
+    options: {
+      multiple: Object.keys(replaceTable).map(key => ({
+        search: `export\\s+const\\s+${key}\\s*=\\s*false`,
+        replace: `export const ${key} = ${replaceTable[key]}`,
+        flags: 'i',
+      })),
+    },
+  });
+
+  config.module.rules.push({
     test: /-story\.jsx?$/,
     loaders: [
       {
@@ -98,7 +116,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
     enforce: 'pre',
   });
 
-  defaultConfig.module.rules.push({
+  config.module.rules.push({
     test: /\.scss$/,
     sideEffects: true,
     use: [
@@ -108,17 +126,17 @@ module.exports = (baseConfig, env, defaultConfig) => {
   });
 
   if (useExternalCss) {
-    defaultConfig.plugins.push(
+    config.plugins.push(
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css',
       })
     );
   }
 
-  defaultConfig.resolve = {
+  config.resolve = {
     modules: ['node_modules'],
     plugins: [new FeatureFlagProxyPlugin()],
   };
 
-  return defaultConfig;
+  return config;
 };

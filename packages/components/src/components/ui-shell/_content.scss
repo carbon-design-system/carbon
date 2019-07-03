@@ -14,6 +14,8 @@
 /// @group ui-shell
 @mixin carbon-content {
   .#{$prefix}--content {
+    background: $ui-02;
+    padding: 2rem;
     transform: translate3d(0, 0, 0);
     will-change: margin-left;
   }

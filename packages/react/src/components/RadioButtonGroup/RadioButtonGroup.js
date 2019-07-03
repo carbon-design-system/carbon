@@ -34,6 +34,16 @@ export default class RadioButtonGroup extends React.Component {
     defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
+     * Provide where radio buttons should be placed
+     */
+    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+    /**
+     * Provide where label text should be placed
+     */
+    labelPosition: PropTypes.oneOf(['left', 'right']),
+
+    /**
      * Specify the name of the underlying <input> nodes
      */
     name: PropTypes.string.isRequired,
@@ -56,6 +66,8 @@ export default class RadioButtonGroup extends React.Component {
   };
 
   static defaultProps = {
+    orientation: 'horizontal',
+    labelPosition: 'right',
     onChange: /* istanbul ignore next */ () => {},
   };
 
@@ -73,7 +85,7 @@ export default class RadioButtonGroup extends React.Component {
     const children = React.Children.map(this.props.children, radioButton => {
       const { value, ...other } = radioButton.props;
       /* istanbul ignore if */
-      if (radioButton.props.hasOwnProperty('checked')) {
+      if (typeof radioButton.props.checked !== 'undefined') {
         warning(
           false,
           `Instead of using the checked property on the RadioButton, set
@@ -104,11 +116,16 @@ export default class RadioButtonGroup extends React.Component {
   };
 
   render() {
-    const { disabled, className } = this.props;
+    const { disabled, className, orientation, labelPosition } = this.props;
 
     const wrapperClasses = classNames(
       `${prefix}--radio-button-group`,
-      className
+      className,
+      {
+        [`${prefix}--radio-button-group--${orientation}`]:
+          orientation === 'vertical',
+        [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+      }
     );
 
     return (
