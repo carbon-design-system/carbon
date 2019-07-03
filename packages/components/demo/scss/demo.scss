@@ -18,6 +18,10 @@ $accordion-arrow-size: carbon--rem(20px);
 // Checkbox
 $checkbox-label-type-style: 'body-short-02';
 
+// Code snippet
+$snippet-type-style: 'code-02';
+$snippet-single-height: $spacing-09;
+
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
 // $carbon--theme: $carbon--theme--g90;

@@ -208,6 +208,16 @@
   /// @group code-snippet
   $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
 
+  /// @type Value
+  /// @access public
+  /// @group code-snippet
+  $snippet-type-style: 'code-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group code-snippet
+  $snippet-single-height: $spacing-08 !default !global;
+
   // Content Switcher
 
   /// @type Number

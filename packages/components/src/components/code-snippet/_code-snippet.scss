@@ -21,7 +21,7 @@
   }
 
   .#{$prefix}--snippet code {
-    @include type-style('code-01');
+    @include type-style($snippet-type-style);
   }
 
   // Inline Code Snippet
@@ -30,7 +30,7 @@
     // Note: originally this inline snippet inherited font-size, we might need
     // a more flexible strategy than explicitly setting font-size with this
     // type style
-    @include type-style('code-01');
+    @include type-style($snippet-type-style);
 
     position: relative;
     display: inline;
@@ -73,7 +73,7 @@
     border: none;
     max-width: rem(760px);
     min-width: rem(320px);
-    height: $carbon--spacing-08;
+    height: $snippet-single-height;
     padding: 0 56px 0 $carbon--spacing-05;
   }
 
@@ -83,12 +83,12 @@
     overflow-x: auto;
     position: relative;
     padding: 0 0 $carbon--spacing-05 0;
-    height: rem(56px);
+    height: $snippet-single-height + $carbon--spacing-05;
   }
 
   .#{$prefix}--snippet--single pre {
     white-space: nowrap;
-    @include type-style('code-01');
+    @include type-style($snippet-type-style);
     padding-right: $spacing-xs;
   }
 

@@ -11,7 +11,7 @@
 /// @access private
 /// @group code-snippet
 @mixin bx--snippet {
-  @include type-style('code-01');
+  @include type-style($snippet-type-style);
   background: $snippet-background-color;
   border: 1px solid $snippet-border-color;
   position: relative;
