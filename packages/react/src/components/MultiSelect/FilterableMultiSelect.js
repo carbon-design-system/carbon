@@ -348,7 +348,10 @@ export default class FilterableMultiSelect extends React.Component {
                       className={`${prefix}--list-box__invalid-icon`}
                     />
                   )}
-                  <ListBox.Field id={id} {...getButtonProps({ disabled })}>
+                  <ListBox.Field
+                    id={id}
+                    disabled={disabled}
+                    {...getButtonProps({ disabled })}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={clearSelection}

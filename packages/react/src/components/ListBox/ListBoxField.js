@@ -19,7 +19,7 @@ const { prefix } = settings;
  * elements inside of a field. It also provides a11y-related attributes like
  * `role` to make sure a user can focus the given field.
  */
-const ListBoxField = ({ children, id, ...rest }) => (
+const ListBoxField = ({ children, id, disabled, tabIndex, ...rest }) => (
   <div
     role="combobox"
     aria-haspopup="listbox"
@@ -27,7 +27,7 @@ const ListBoxField = ({ children, id, ...rest }) => (
     aria-owns={(rest[`aria-expanded`] && `${id}__menu`) || null}
     aria-controls={(rest[`aria-expanded`] && `${id}__menu`) || null}
     className={`${prefix}--list-box__field`}
-    tabIndex={rest.tabIndex || -1}
+    tabIndex={(!disabled && tabIndex) || -1}
     {...rest}>
     {children}
   </div>
@@ -38,10 +38,21 @@ ListBoxField.propTypes = {
    * Provide the contents of your ListBoxField
    */
   children: childrenOf([ListBoxMenuIcon, ListBoxSelection, 'span', 'input']),
+
   /**
    * Specify a custom `id`
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Specify if the parent <ListBox> is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the tabIndex of the <ListBox> trigger button
+   */
+  tabIndex: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
 };
 
 export default ListBoxField;
