@@ -115,7 +115,6 @@ exports[`MultiSelect should render 1`] = `
                 aria-owns={null}
                 className="bx--list-box__field"
                 data-toggle={true}
-                disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
