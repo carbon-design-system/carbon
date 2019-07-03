@@ -14627,7 +14627,12 @@ Overflow menu styles
 
 ```scss
 @mixin overflow-menu() {
-  .#{$prefix}--overflow-menu {
+  .#{$prefix}--overflow-menu__trigger {
+    @include button-reset;
+  }
+
+  .#{$prefix}--overflow-menu,
+  .#{$prefix}--overflow-menu__trigger {
     @include reset;
     @include focus-outline('reset');
     position: relative;
@@ -14649,7 +14654,18 @@ Overflow menu styles
     }
   }
 
-  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+  // Overwrite Icon Tooltip focus styles
+  .#{$prefix}--overflow-menu__trigger.#{$prefix}--tooltip--a11y.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+
+    svg {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
     background-color: $ui-01;
     transition: none;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
