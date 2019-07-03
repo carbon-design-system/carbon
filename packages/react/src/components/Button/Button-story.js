@@ -99,7 +99,10 @@ storiesOf('Buttons', module)
             alignItems: 'center',
             flexWrap: 'wrap',
           }}>
-          <Button {...regularProps} className="some-class">
+          <Button
+            {...regularProps}
+            className="some-class"
+            renderIcon={AddFilled16}>
             Button
           </Button>
           &nbsp;
