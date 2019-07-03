@@ -145,9 +145,8 @@
     @include tooltip--placement('icon', 'bottom', 'end');
     z-index: z('floating') + 1;
     position: absolute;
-    top: 50%;
-    right: $carbon--spacing-07;
-    transform: translateY(-50%);
+    top: $carbon--spacing-04;
+    right: $carbon--spacing-06;
     cursor: default;
 
     &::after {
