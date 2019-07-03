@@ -7196,7 +7196,7 @@ categories:
           - link
           - list--bulleted
           - list--numbered
-          - list—checked
+          - list--checked
           - no-image
           - non-editable
           - opacity
@@ -7236,7 +7236,7 @@ categories:
         members:
           - add
           - add--alt
-          - switcher
+          - app-switcher
           - arrow--down
           - arrow--down-left
           - arrow--down-right
@@ -7265,6 +7265,8 @@ categories:
           - page--last
           - subtract
           - subtract--alt
+          - switcher
+          - up-to-top
           - zoom--in
           - zoom--out
       - name: Operations
@@ -7343,7 +7345,7 @@ categories:
           - checkbox--checked
           - checkbox--checked--filled
           - checkbox--undeterminate
-          - checkbox--undeterminate—filled
+          - checkbox--undeterminate--filled
           - column
           - favorite
           - favorite--filled
@@ -7390,6 +7392,7 @@ categories:
           - view--filled
           - view--mode-1
           - view--mode-2
+          - view--off
           - view--off--filled
   - name: Brand
     subcategories:
@@ -7397,9 +7400,10 @@ categories:
         members:
           - bee
           - carbon
-          - EDT-loop
+          - edt-loop
           - ibm-cloud
           - ibm-security
+          - watson
           - watson--machine-learning
       - name: Social
         members:
@@ -7420,7 +7424,7 @@ categories:
           - logo--twitter
           - logo--xing
           - logo--youtube
-          - logo—stumbleupon
+          - logo--stumbleupon
   - name: Enterprise
     subcategories:
       - name: Commerce
@@ -7435,16 +7439,17 @@ categories:
           - receipt
           - shopping--bag
           - shopping--cart
+          - shopping--catalog
           - store
           - wallet
           - wireless-checkout
       - name: Health
         members:
-          - 3D-cursor
+          - 3D-Cursor
           - 3D-curve--auto-colon
           - 3D-curve--auto-vessels
           - 3D-curve--manual
-          - 3D-MPR-toggle
+          - 3D-MPR-Toggle
           - 3rd-party-connected
           - 3D-software
           - angle
@@ -7458,13 +7463,13 @@ categories:
           - circle-measurement
           - cobb-angle
           - cross-reference
-          - dicom-6000
-          - dicom-overlay
+          - dicom--6000
+          - dicom--overlay
           - exam-mode
           - fusion-blender
           - hanging-protocol
           - health-cross
-          - ICA-3D
+          - iCA-3D
           - image--medical
           - launch-study--1
           - launch-study--2
@@ -7520,6 +7525,7 @@ categories:
           - S
           - S--alt
           - T
+          - T--alt
           - U1
           - U2
           - U3
@@ -7706,6 +7712,7 @@ categories:
           - WMV
           - workspace
           - XLS
+          - XML
           - ZIP
       - name: Status
         members:
@@ -7720,7 +7727,7 @@ categories:
           - misuse
           - warning
           - warning--alt
-          - warning--alt-filled
+          - warning--alt--filled
           - warning--filled
   - name: Person
     subcategories:
