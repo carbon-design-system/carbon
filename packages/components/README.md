@@ -30,7 +30,7 @@ yarn add carbon-components
 If you just want to try out `carbon-components`, you can also use
 [CodeSandbox](https://codesandbox.io).
 
-[![Edit carbon-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-systen/carbon/tree/master/packages/components/examples/codesandbox)
+[![Edit carbon-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/components/examples/codesandbox)
 
 (**Important note**: `src` directory in the package has been deprecated and
 subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
