@@ -29,6 +29,7 @@ class Modal extends mixin(
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.classBody] The CSS class for `<body>` with open modal.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
@@ -131,8 +132,16 @@ class Modal extends mixin(
 
     if (state === 'hidden') {
       this.element.classList.toggle(this.options.classVisible, false);
+      this.element.ownerDocument.body.classList.toggle(
+        this.options.classBody,
+        false
+      );
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
+      this.element.ownerDocument.body.classList.toggle(
+        this.options.classBody,
+        true
+      );
     }
     handleTransitionEnd = this.manage(
       on(this.element, 'transitionend', transitionEnd)
@@ -207,6 +216,7 @@ class Modal extends mixin(
    *   The CSS selectors of floating menus.
    *   Used for detecting if focus-wrap behavior should be disabled temporarily.
    * @property {string} [classVisible] The CSS class for the visible state.
+   * @property {string} [classBody] The CSS class for `<body>` with open modal.
    * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @property {string} [eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
@@ -233,6 +243,7 @@ class Modal extends mixin(
         '.flatpickr-calendar',
       ],
       classVisible: 'is-visible',
+      classBody: `${prefix}--body--with-modal-open`,
       attribInitTarget: 'data-modal-target',
       initEventNames: ['click'],
       eventBeforeShown: 'modal-beingshown',

@@ -12,7 +12,8 @@
     "lib",
     "scss",
     "svg",
-    "umd"
+    "umd",
+    "metadata.json"
   ],
   "keywords": [
     "ibm",
@@ -28,7 +29,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
-    "clean": "rimraf es lib svg umd meta.json",
+    "clean": "rimraf es lib svg umd build-info.json metadata.json",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {

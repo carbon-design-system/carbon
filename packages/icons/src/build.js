@@ -19,7 +19,7 @@ const optimize = require('./optimize');
 
 const SCALED_SIZES = [24, 20];
 const prettierOptions = {
-  parser: 'babylon',
+  parser: 'babel',
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'es5',
@@ -189,9 +189,13 @@ async function build(source, { cwd } = {}) {
     };
   });
 
-  await fs.writeJson(path.resolve(__dirname, '../meta.json'), formattedOutput, {
-    spaces: 2,
-  });
+  await fs.writeJson(
+    path.resolve(__dirname, '../build-info.json'),
+    formattedOutput,
+    {
+      spaces: 2,
+    }
+  );
 
   reporter.success('Done! 🎉');
 }

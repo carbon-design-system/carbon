@@ -21,7 +21,7 @@ async function check(args, env) {
     stdio: 'inherit',
   };
   const tasks = [
-    'yarn format:diff --loglevel=silent',
+    'yarn format:diff',
     'yarn lint --quiet',
     `yarn bundler check --ignore '**/@(node_modules|examples|components|react)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
@@ -39,6 +39,7 @@ async function check(args, env) {
   } catch (error) {
     console.log(error.stdout);
     console.log(error.stderr);
+    console.log(error);
     process.exit(1);
   }
 }
