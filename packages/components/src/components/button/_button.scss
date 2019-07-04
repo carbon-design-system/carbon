@@ -118,9 +118,9 @@
     @include button-theme(
       transparent,
       transparent,
-      $interactive-04,
+      $icon-01,
       $hover-ui,
-      $interactive-04,
+      $icon-01,
       $active-ui
     );
     padding: $button-padding-ghost;
@@ -132,10 +132,10 @@
 
     &:hover,
     &:active {
-      color: $interactive-04;
+      color: $icon-01;
 
       .#{$prefix}--btn__icon path {
-        fill: $interactive-04;
+        fill: $icon-01;
       }
     }
 
@@ -165,6 +165,10 @@
 
   .#{$prefix}--btn--icon-only {
     @include tooltip--trigger('icon', 'bottom');
+  }
+
+  .#{$prefix}--btn--icon-only:focus svg {
+    outline: none;
   }
 
   .#{$prefix}--btn--icon-only--top {
