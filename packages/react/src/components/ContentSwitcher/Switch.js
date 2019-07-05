@@ -32,8 +32,6 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   });
 
   function handleOnClick(event) {
-    // TODO: do we still need this with `type="button"`?
-    event.preventDefault();
     onClick(event, index);
   }
 
@@ -101,9 +99,6 @@ Switch.propTypes = {
 
 Switch.defaultProps = {
   selected: false,
-  text: 'Provide text',
-  onClick: () => {},
-  onKeyDown: () => {},
 };
 
 export default Switch;

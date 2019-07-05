@@ -20,6 +20,75 @@ import { getNextIndex, matches, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
+function useFocusableList(length, initialIndex = 0) {
+  const refs = Array.from({ length });
+
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
+  const [prevControlledIndex, setPrevControlledIndex] = useState(null);
+  const [focusIndex, setFocusIndex] = useState(null);
+
+  // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
+  if (initialIndex !== prevControlledIndex) {
+    setSelectedIndex(controlledSelectedIndex);
+    setPrevControlledIndex(controlledSelectedIndex);
+  }
+
+  useEffect(() => {
+    if (focusIndex === null) {
+      return;
+    }
+
+    const ref = switchRefs[focusIndex];
+    if (ref && document.activeElement !== ref.current) {
+      ref.focus && ref.focus();
+      if (savedOnChange.current) {
+        savedOnChange.current(focusIndex);
+      }
+    }
+  }, [refs, focusIndex]);
+
+  function setIndex(index) {
+    setSelectedIndex(index);
+    setFocusIndex(index);
+  }
+
+  function handleItemRef(index) {
+    return ref => {
+      switchRefs[index] = ref;
+    };
+  }
+
+  function setIndex(index) {
+    setSelectedIndex(index);
+    setFocusIndex(index);
+  }
+
+  function onClick(event, index) {
+    if (selectedIndex !== index) {
+      setIndex(index);
+    }
+  }
+
+  function onKeyDown(event) {
+    if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
+      setIndex(getNextIndex(event, selectedIndex, length));
+    }
+  }
+
+  function onFocus(event, index) {
+    if (focusIndex !== index) {
+      setFocusIndex(index);
+    }
+  }
+
+  return {
+    onClick,
+    onKeyDown,
+    onFocus,
+    ref: handleItemRef,
+  };
+}
+
 function ContentSwitcher({
   children,
   className: customClassName,
@@ -28,15 +97,21 @@ function ContentSwitcher({
   ...rest
 }) {
   const savedOnChange = useRef(null);
-  const switchRefs = [];
-  const className = cx(`${prefix}--content-switcher`, customClassName);
   const [selectedIndex, setSelectedIndex] = useState(controlledSelectedIndex);
+  const [prevControlledIndex, setPrevControlledIndex] = useState(null);
   const [focusIndex, setFocusIndex] = useState(null);
 
-  useEffect(() => {
-    setSelectedIndex(controlledSelectedIndex);
-  }, [controlledSelectedIndex]);
+  const switchRefs = [];
+  const className = cx(`${prefix}--content-switcher`, customClassName);
 
+  // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
+  if (controlledSelectedIndex !== prevControlledIndex) {
+    setSelectedIndex(controlledSelectedIndex);
+    setPrevControlledIndex(controlledSelectedIndex);
+  }
+
+  // Always keep track of the latest `onChange` prop to use in our focus effect
+  // handler
   useEffect(() => {
     savedOnChange.current = onChange;
   }, [onChange]);
@@ -74,8 +149,7 @@ function ContentSwitcher({
 
   function onKeyDown(event) {
     if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
-      const nextIndex = getNextIndex(event, selectedIndex, children.length);
-      setIndex(nextIndex);
+      setIndex(getNextIndex(event, selectedIndex, children.length));
     }
   }
 
