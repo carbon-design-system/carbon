@@ -63,6 +63,7 @@ modalInstance.show();
 | `selectorModalClose`   | '[data-modal-close]'         | The selector to find elements that close the modal                                                                                   |
 | `selectorPrimaryFocus` | '[data-modal-primary-focus]' | The CSS selector to determine the element to put focus when modal gets open                                                          |
 | `classVisible`         | 'is-visible'                 | Class to toggle visibility of modal                                                                                                  |
+| `classBody`            | 'bx--body--with-modal-open'  | Class on `<body>` that toggles when a modal opens/closes                                                                             |
 | `attribInitTarget`     | 'data-modal-target'          | The attribute on the launching element to target the modal                                                                           |
 | `initEventNames`       | '['click']'                  | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists |
 
