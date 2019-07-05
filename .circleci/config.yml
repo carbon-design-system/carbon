@@ -141,13 +141,13 @@ workflows:
   main:
     jobs:
       - system
-      - artifacts:
-          requires:
-            - system
-          filters:
-            branches:
-              only:
-                - master
+#       - artifacts:
+#           requires:
+#             - system
+#           filters:
+#             branches:
+#               only:
+#                 - master
       # - release:
       #     requires:
       #       - system
