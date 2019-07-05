@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AspectRatio should render 1`] = `
+<AspectRatio>
+  <div
+    className="bx--aspect-ratio bx--aspect-ratio--1x1"
+  >
+    <div
+      className="bx--aspect-ratio--object"
+    >
+      <div />
+    </div>
+  </div>
+</AspectRatio>
+`;
