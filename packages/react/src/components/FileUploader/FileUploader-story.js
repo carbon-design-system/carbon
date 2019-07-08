@@ -76,7 +76,10 @@ const props = {
     multiple: boolean('Supports multiple files (multiple)', true),
   }),
   fileUploaderDropContainer: () => ({
-    labelText: text('Label text (labelText)', 'click to upload'),
+    labelText: text(
+      'Label text (labelText)',
+      'Drag and drop files here or click to upload'
+    ),
     name: text('Form item name (name)', ''),
     multiple: boolean('Supports multiple files (multiple)', true),
     accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),

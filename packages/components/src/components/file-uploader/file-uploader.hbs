@@ -10,14 +10,14 @@
     photo</strong>
   <p class="{{prefix}}--label-description">Only .jpg and .png files. 500kb max file size.</p>
   <div class="{{prefix}}--file" data-file data-file-demo-state-manager>
-    <div data-file-drop-container class="{{prefix}}--file__drop-container">
-      <p class="{{prefix}}--file-filename">
+    <label for="{{id}}" class="{{prefix}}--file-browse-btn" role="button" tabindex="0">
+      <div data-file-drop-container class="{{prefix}}--file__drop-container">
         Drag and drop files here or
-        <label for="{{id}}" class="{{prefix}}--file-browse-btn" role="button" tabindex="0">upload</label>
-      </p>
-      <input type="file" class="{{prefix}}--file-input" id="{{id}}" data-file-uploader
-        data-target="[data-file-container]" multiple />
-    </div>
+        upload
+        <input type="file" class="{{prefix}}--file-input" id="{{id}}" data-file-uploader
+          data-target="[data-file-container]" multiple />
+      </div>
+    </label>
     <div data-file-container class="{{prefix}}--file-container">
       {{#if exampleUploadStates}}
       <div class="{{prefix}}--file__selected-file">

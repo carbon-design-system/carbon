@@ -60,39 +60,36 @@ export default function FileUploaderDropContainer(props) {
         setActive(false);
         handleChange(evt);
       }}>
-      <div className={classes}>
-        <p className={`${prefix}--file-filename`}>
-          Drag and drop files here or{' '}
-          <label
-            className={`${prefix}--file-browse-btn`}
-            htmlFor={id || uid}
-            role={role || 'button'}
-            tabIndex={tabIndex || 0}
-            onKeyDown={evt => {
-              if (matches(evt, [keys.Enter, keys.Space])) {
-                inputRef.current.click();
-              }
+      <label
+        className={`${prefix}--file-browse-btn`}
+        htmlFor={id || uid}
+        role={role || 'button'}
+        tabIndex={tabIndex || 0}
+        onKeyDown={evt => {
+          if (matches(evt, [keys.Enter, keys.Space])) {
+            inputRef.current.click();
+          }
+        }}
+        {...other}>
+        <div className={classes}>
+          {labelText}
+          <input
+            type="file"
+            id={id || uid}
+            className={`${prefix}--file-input`}
+            ref={inputRef}
+            tabIndex="-1"
+            disabled={disabled}
+            accept={accept}
+            name={name}
+            multiple={multiple}
+            onChange={handleChange}
+            onClick={evt => {
+              evt.target.value = null;
             }}
-            {...other}>
-            {labelText}
-          </label>
-        </p>
-        <input
-          type="file"
-          id={id || uid}
-          className={`${prefix}--file-input`}
-          ref={inputRef}
-          tabIndex="-1"
-          disabled={disabled}
-          accept={accept}
-          name={name}
-          multiple={multiple}
-          onChange={handleChange}
-          onClick={evt => {
-            evt.target.value = null;
-          }}
-        />
-      </div>
+          />
+        </div>
+      </label>
     </div>
   );
 }

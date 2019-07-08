@@ -50,6 +50,7 @@
   }
 
   .#{$prefix}--file-browse-btn {
+    margin-bottom: $carbon--spacing-03;
     display: inline-block;
     color: $link-01;
     outline: none;
@@ -157,15 +158,6 @@
     color: $text-01;
   }
 
-  .#{$prefix}--file-filename {
-    @include type-style('body-short-01');
-    @include text-overflow(auto);
-    color: $text-01;
-    /*rtl:ignore*/
-    direction: ltr;
-    justify-content: flex-start; /*rtl:{flex-end}*/
-  }
-
   .#{$prefix}--file__state-container {
     display: flex;
     align-items: center;
@@ -214,7 +206,6 @@
     justify-content: space-between;
     height: rem(96px);
     max-width: rem(320px);
-    margin-bottom: $carbon--spacing-03;
     padding: 16px;
     overflow: hidden;
     background: linear-gradient(90deg, $ui-04 66%, transparent 0%) top/6px 1px
