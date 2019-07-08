@@ -33,6 +33,7 @@ const notificationProps = () => ({
 
 const inlineNotificationActions = {
   primary: {
+    className: text('Class name (actions.primary.className)', 'some-class'),
     label: text('Label (actions.primary.label)', 'Undo'),
     onClick: action('actions.primary.onClick'),
   },

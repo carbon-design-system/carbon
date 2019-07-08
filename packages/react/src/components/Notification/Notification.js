@@ -482,7 +482,10 @@ export class InlineNotification extends Component {
         </div>
         {actions.primary.onClick && actions.primary.label && (
           <Button
-            className={`${prefix}--inline-notification__action-button`}
+            className={classNames(
+              actions.primary.className,
+              `${prefix}--inline-notification__action-button`
+            )}
             kind="ghost"
             onClick={actions.primary.onClick}>
             {actions.primary.label}
