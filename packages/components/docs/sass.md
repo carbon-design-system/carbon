@@ -4985,6 +4985,7 @@ $overlay-01: map-get($carbon--theme, 'overlay-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅focus [variable]
 
@@ -19060,6 +19061,11 @@ UI shell header
     height: 100%;
     padding-left: mini-units(2);
     position: relative;
+    display: block;
+
+    @include carbon--breakpoint-down('lg') {
+      display: none;
+    }
 
     &::before {
       content: '';
@@ -19790,9 +19796,35 @@ UI shell side nav
     }
   }
 
+  .#{$prefix}--side-nav--hidden {
+    width: 0;
+  }
+
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav__overlay {
+    position: absolute;
+    top: rem(48px);
+    height: 0;
+    width: 0;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity $transition--expansion $carbon--standard-easing, background-color
+        $transition--expansion $carbon--standard-easing;
+  }
+
+  .#{$prefix}--side-nav__overlay-active {
+    @include carbon--breakpoint-down('lg') {
+      height: 100vh;
+      width: 100%;
+      background-color: $overlay-01;
+      opacity: 1;
+      transition: opacity $transition--expansion $carbon--standard-easing, background-color
+          $transition--expansion $carbon--standard-easing;
+    }
   }
 
   // When used alongside the header, we update the `top` positioning so that we
@@ -19992,7 +20024,10 @@ UI shell side nav
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
+    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:hover,
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -20023,6 +20058,11 @@ UI shell side nav
     user-select: none;
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__submenu:hover {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
@@ -20122,7 +20162,11 @@ UI shell side nav
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
-  a.#{$prefix}--side-nav__link {
+  a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'],
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('heading-01');
     position: relative;
@@ -20135,7 +20179,10 @@ UI shell side nav
       outline $duration--fast-02;
   }
 
-  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text {
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item[role='menuitem']
+    .#{$prefix}--text-truncate-end {
     @include text-overflow();
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
@@ -20144,7 +20191,8 @@ UI shell side nav
     user-select: none;
   }
 
-  a.#{$prefix}--side-nav__link:focus {
+  a.#{$prefix}--side-nav__link:focus,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
     @include focus-outline('outline');
   }
 
@@ -20216,6 +20264,87 @@ UI shell side nav
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
   }
+
+  //----------------------------------------------------------------------------
+  // Variants - Header Nav Links in Side Nav
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav .#{$prefix}--header__nav {
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--side-nav__header-navigation {
+    display: none;
+
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+      position: relative;
+      margin-bottom: rem(32px);
+    }
+  }
+
+  .#{$prefix}--side-nav__header-divider::after {
+    content: '';
+    position: absolute;
+    height: rem(1px);
+    bottom: rem(-16px);
+    left: rem(16px);
+    width: calc(100% - 32px);
+    background: $ibm-color__gray-20;
+  }
+
+  //header menu items overrides
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
+    color: $shell-side-nav-text-01;
+    white-space: nowrap;
+    justify-content: space-between;
+
+    &[aria-expanded='true'] {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    bottom: inherit;
+    width: 100%;
+    box-shadow: none;
+    transform: none;
+    background-color: transparent;
+    padding: 0;
+
+    & li {
+      width: 100%;
+    }
+
+    & a.#{$prefix}--header__menu-item[role='menuitem'] {
+      padding-left: 4.25rem;
+      font-weight: 400;
+    }
+
+    & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+      background-color: $shell-side-nav-bg-04;
+      color: $ibm-color__gray-100;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu
+    a.#{$prefix}--header__menu-item[role='menuitem'] {
+    height: inherit;
+  }
+
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item[role='menuitem']:hover
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item[role='menuitem']:focus
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    fill: $shell-side-nav-text-01;
+  }
 }
 ```
 
@@ -20231,6 +20360,7 @@ UI shell side nav
   - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
   - [shell-side-nav-bg-01 [variable]](#shell-side-nav-bg-01-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
+  - [overlay-01 [variable]](#overlay-01-variable)
   - [shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
   - [shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
