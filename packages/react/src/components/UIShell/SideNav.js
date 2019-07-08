@@ -69,7 +69,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   return (
     <>
-      <div className={overlayClassName} />
+      {isFixedNav ? null : <div className={overlayClassName} />}
       <nav
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
