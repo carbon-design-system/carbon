@@ -10,7 +10,7 @@
 'use strict';
 
 const path = require('path');
-const meta = require('../../packages/icons/meta.json');
+const meta = require('../../packages/icons/build-info.json');
 
 describe('@carbon/icons-vue', () => {
   test.each(meta.map(icon => [icon.moduleName, icon]))(
