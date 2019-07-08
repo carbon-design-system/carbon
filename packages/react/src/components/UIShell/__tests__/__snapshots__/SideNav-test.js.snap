@@ -5,8 +5,13 @@ exports[`SideNav should render 1`] = `
   aria-label="Navigation"
   defaultExpanded={false}
   isChildOfHeader={true}
+  isFixedNav={false}
+  isPersistent={true}
   translateById={[Function]}
 >
+  <div
+    className="bx--side-nav__overlay"
+  />
   <nav
     aria-label="Navigation"
     className="bx--side-nav__navigation bx--side-nav bx--side-nav--ux"
@@ -16,60 +21,6 @@ exports[`SideNav should render 1`] = `
     <h2>
       Navigation
     </h2>
-    <SideNavFooter
-      assistiveText="Open"
-      expanded={false}
-      onToggle={[Function]}
-    >
-      <footer
-        className="bx--side-nav__footer"
-      >
-        <button
-          className="bx--side-nav__toggle"
-          onClick={[Function]}
-          title="Open"
-          type="button"
-        >
-          <div
-            className="bx--side-nav__icon"
-          >
-            <ForwardRef(ChevronRight20)>
-              <Icon
-                height={20}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 32 32"
-                width={20}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <svg
-                  aria-hidden={true}
-                  focusable="false"
-                  height={20}
-                  preserveAspectRatio="xMidYMid meet"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
-                  viewBox="0 0 32 32"
-                  width={20}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M22 16L12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"
-                  />
-                </svg>
-              </Icon>
-            </ForwardRef(ChevronRight20)>
-          </div>
-          <span
-            className="bx--assistive-text"
-          >
-            Open
-          </span>
-        </button>
-      </footer>
-    </SideNavFooter>
   </nav>
 </ForwardRef(SideNav)>
 `;
