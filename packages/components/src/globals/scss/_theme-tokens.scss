@@ -570,6 +570,16 @@
   /// @group structured-list
   $structured-list-text-transform: none !default !global;
 
+  /// @type Value
+  /// @access public
+  /// @group structured-list
+  $structured-list-heading-type-style: 'heading-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group structured-list
+  $structured-list-content-type-style: 'body-long-01' !default !global;
+
   // Tabs
 
   /// @type Value

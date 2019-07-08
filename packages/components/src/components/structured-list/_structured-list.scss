@@ -88,7 +88,7 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
-    @include type-style('heading-01');
+    @include type-style($structured-list-heading-type-style);
     display: table-cell;
     font-weight: 600;
     height: rem(40px);
@@ -104,9 +104,9 @@
 
   .#{$prefix}--structured-list-td {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style($structured-list-content-type-style);
     @include padding-td;
-    line-height: carbon--rem(21px);
+    // line-height: carbon--rem(21px);
     position: relative;
     display: table-cell;
     max-width: 36rem;

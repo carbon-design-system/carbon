@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -31,7 +31,7 @@
       {{#if ../selectable}}
           <input tabindex="-1" id="{{row.id}}" class="{{@root.prefix}}--structured-list-input" value="{{row.value}}" type="radio" name="{{../group}}" title="{{row.selectionLabel}}"{{#if row.selected}} checked{{/if}} />
           <div class="{{@root.prefix}}--structured-list-td">
-            {{ carbon-icon 'CheckmarkFilled16' class=(add @root.prefix '--structured-list-svg') }}
+            {{ carbon-icon 'CheckmarkFilled20' class=(add @root.prefix '--structured-list-svg') }}
           </div>
         </label>
       {{else}}
