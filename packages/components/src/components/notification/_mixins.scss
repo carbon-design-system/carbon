@@ -30,8 +30,9 @@
     color: $link-01;
   }
 
-  border-left: 1px solid $ui-01;
-  border-right: 1px solid $ui-01;
+  &:focus {
+    @include focus-outline('outline');
+  }
 }
 
 //----------------------------------------------

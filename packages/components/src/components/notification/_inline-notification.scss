@@ -151,6 +151,8 @@
 
   .#{$prefix}--inline-notification__action-button,
   .#{$prefix}--inline-notification__close-button {
+    height: rem(48px);
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -166,7 +168,6 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    height: rem(48px);
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
