@@ -4359,7 +4359,6 @@ $ui-02: map-get($carbon--theme, 'ui-02');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -9115,8 +9114,8 @@ Checkbox styles
     width: rem(7px);
     height: rem(3px);
     background: none;
-    border-left: 2px solid $ui-02;
-    border-bottom: 2px solid $ui-02;
+    border-left: 2px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right;
     margin-top: rem(-3px);
@@ -9210,9 +9209,8 @@ Checkbox styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [ui-02 [variable]](#ui-02-variable)
-  - [text-01 [variable]](#text-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
