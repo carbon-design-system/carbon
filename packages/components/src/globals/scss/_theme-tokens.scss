@@ -537,6 +537,18 @@
   /// @group pagination
   $pagination-type-style: 'body-short-01' !default !global;
 
+  // slider
+
+  /// @type Value
+  /// @access public
+  /// @group slider
+  $slider-type-style: 'code-02' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group slider
+  $slider-thumb-size: carbon--rem(14px) !default !global;
+
   // Progress Indicator
 
   /// @type Value
