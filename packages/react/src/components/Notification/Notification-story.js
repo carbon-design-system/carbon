@@ -31,6 +31,11 @@ const notificationProps = () => ({
   onCloseButtonClick: action('onCloseButtonClick'),
 });
 
+const inlineNotificationActions = {
+  actionButtonLabel: text('Label (actionButtonLabel)', 'Undo'),
+  onActionButtonClick: action('onActionButtonClick'),
+};
+
 storiesOf('Notifications', module)
   .addDecorator(withKnobs)
   .add('Toast', () => (
@@ -43,7 +48,6 @@ storiesOf('Notifications', module)
   .add('inline', () => (
     <InlineNotification
       {...notificationProps()}
-      actionButtonLabel={text('Label (actionButtonLabel)', 'Undo')}
-      onActionButtonClick={action('onActionButtonClick')}
+      actions={inlineNotificationActions}
     />
   ));

@@ -356,9 +356,9 @@ export class ToastNotification extends Component {
 export class InlineNotification extends Component {
   static propTypes = {
     /**
-     * Action button label.
+     * Actions.
      */
-    actionButtonLabel: PropTypes.string,
+    actions: PropTypes.node,
 
     /**
      * Pass in the children that will be rendered within the InlineNotification
@@ -397,11 +397,6 @@ export class InlineNotification extends Component {
     role: PropTypes.string.isRequired,
 
     /**
-     * Action handler.
-     */
-    onActionButtonClick: PropTypes.func,
-
-    /**
      * Provide a function that is called when menu is closed
      */
     onCloseButtonClick: PropTypes.func,
@@ -424,11 +419,10 @@ export class InlineNotification extends Component {
   };
 
   static defaultProps = {
-    actionButtonLabel: null,
+    actions: {},
     role: 'alert',
     notificationType: 'inline',
     iconDescription: 'closes notification',
-    onActionButtonClick: () => {},
     onCloseButtonClick: () => {},
     hideCloseButton: false,
   };
@@ -448,7 +442,7 @@ export class InlineNotification extends Component {
     }
 
     const {
-      actionButtonLabel,
+      actions,
       role,
       notificationType,
       onCloseButtonClick, // eslint-disable-line
@@ -459,7 +453,6 @@ export class InlineNotification extends Component {
       kind,
       lowContrast,
       hideCloseButton,
-      onActionButtonClick,
       ...other
     } = this.props;
 
@@ -487,12 +480,12 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
-        {onActionButtonClick && actionButtonLabel && (
+        {actions.onActionButtonClick && actions.actionButtonLabel && (
           <Button
             className={`${prefix}--inline-notification__action-button`}
             kind="ghost"
-            onClick={onActionButtonClick}>
-            {actionButtonLabel}
+            onClick={actions.onActionButtonClick}>
+            {actions.actionButtonLabel}
           </Button>
         )}
         {!hideCloseButton && (
