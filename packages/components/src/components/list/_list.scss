@@ -22,7 +22,7 @@
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style($list-type-style);
 
     counter-reset: listitem;
   }
