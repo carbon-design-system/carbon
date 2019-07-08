@@ -9,7 +9,7 @@
 
 'use strict';
 
-const meta = require('@carbon/icons/meta.json');
+const meta = require('@carbon/icons/build-info.json');
 const fs = require('fs');
 const path = require('path');
 const { rollup } = require('rollup');

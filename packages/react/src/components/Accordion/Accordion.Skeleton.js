@@ -7,24 +7,18 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import SkeletonText from '../SkeletonText';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import SkeletonText from '../SkeletonText';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-export default function AccordionSkeleton(props) {
-  const Item = () => (
-    <li className={`${prefix}--accordion__item`}>
-      <button type="button" className={`${prefix}--accordion__heading`}>
-        <ChevronRight16 className={`${prefix}--accordion__arrow`} />
-        <SkeletonText className={`${prefix}--accordion__title`} />
-      </button>
-    </li>
-  );
+function AccordionSkeleton(props) {
+  const numSkeletonItems = props.open ? props.count - 1 : props.count;
   return (
     <ul className={`${prefix}--accordion ${prefix}--skeleton`}>
-      {props.open ? (
+      {props.open && (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <button type="button" className={`${prefix}--accordion__heading`}>
@@ -37,15 +31,9 @@ export default function AccordionSkeleton(props) {
             <SkeletonText width="95%" />
           </div>
         </li>
-      ) : (
-        <Item />
       )}
-      {Array.from({
-        length: props.count
-          ? props.count - 1
-          : AccordionSkeleton.defaultProps.count,
-      }).map((v, i) => (
-        <Item key={`skeleton-accordion-item-${props.uid}-${i}`} />
+      {Array.from({ length: numSkeletonItems }).map((_, i) => (
+        <AccordionSkeletonItem key={i} />
       ))}
     </ul>
   );
@@ -65,11 +53,23 @@ AccordionSkeleton.propTypes = {
   /**
    * Set unique identifier to generate unique item keys
    */
-  uid: PropTypes.any,
+  uid: deprecate(PropTypes.any),
 };
 
 AccordionSkeleton.defaultProps = {
   open: true,
   count: 4,
-  uid: '',
 };
+
+function AccordionSkeletonItem() {
+  return (
+    <li className={`${prefix}--accordion__item`}>
+      <button type="button" className={`${prefix}--accordion__heading`}>
+        <ChevronRight16 className={`${prefix}--accordion__arrow`} />
+        <SkeletonText className={`${prefix}--accordion__title`} />
+      </button>
+    </li>
+  );
+}
+
+export default AccordionSkeleton;

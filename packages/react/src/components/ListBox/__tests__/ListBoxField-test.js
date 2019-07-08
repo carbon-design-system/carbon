@@ -28,6 +28,11 @@ describe('ListBoxField', () => {
     expect(wrapper.children().prop('tabIndex')).toBe('0');
   });
 
+  it('should not be focusable when ListBox is `disabled`', () => {
+    const wrapper = mount(<ListBox.Field id="test-listbox" disabled />);
+    expect(wrapper.children().prop('tabIndex')).toBe(-1);
+  });
+
   it('should set `aria-owns` based when expanded', () => {
     const wrapper = mount(
       <ListBox.Field id="test-listbox" aria-expanded>

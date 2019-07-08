@@ -109,10 +109,16 @@ describe('Modal', () => {
       const openClass = 'is-visible';
 
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).not.toEqual(true);
       wrapper.setState({ isOpen: true });
       expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
         true
       );
+      expect(
+        document.body.classList.contains('bx--body--with-modal-open')
+      ).toEqual(true);
     });
 
     it('should set state to open when trigger button is clicked', () => {
