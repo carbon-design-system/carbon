@@ -73,7 +73,7 @@
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style($pagination-type-style);
     line-height: 0;
   }
 
@@ -96,7 +96,7 @@
   }
 
   .#{$prefix}--pagination-nav__page {
-    @include type-style('body-short-01');
+    @include type-style($pagination-type-style);
     @include button-reset($width: false);
     border-radius: 0;
     color: $text-color;

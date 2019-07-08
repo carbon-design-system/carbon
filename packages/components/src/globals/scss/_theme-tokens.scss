@@ -530,6 +530,13 @@
   /// @group notification
   $notification-success-background-color: $ibm-color__green-10 !default !global;
 
+  // pagination
+
+  /// @type Value
+  /// @access public
+  /// @group pagination
+  $pagination-type-style: 'body-short-01' !default !global;
+
   // Progress Indicator
 
   /// @type Value

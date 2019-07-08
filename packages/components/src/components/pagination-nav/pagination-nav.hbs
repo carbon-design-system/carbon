@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright IBM Corp. 2016, 2018
 
   This source code is licensed under the Apache-2.0 license found in the
@@ -28,7 +28,7 @@
           >
         {{/unless}}
           <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Previous page </span>
-          {{ carbon-icon 'CaretLeftGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{ carbon-icon 'CaretLeft20' class=(add @root.prefix '--pagination-nav__icon') }}
         {{#unless elementAsAnchor }}
           </button>
         {{else}}
@@ -59,7 +59,7 @@
               {{/each}}
             </select>
             <div class="{{@root.prefix}}--pagination-nav__select-icon-wrapper">
-              {{ carbon-icon 'OverflowMenuHorizontal16' class=(add @root.prefix '--pagination-nav__select-icon') }}
+              {{ carbon-icon 'OverflowMenuHorizontal20' class=(add @root.prefix '--pagination-nav__select-icon') }}
             </div>
           </div>
         {{else}}
@@ -117,7 +117,7 @@
           >
         {{/unless}}
           <span class="{{@root.prefix}}--pagination-nav__accessibility-label">Next page </span>
-          {{ carbon-icon 'CaretRightGlyph' class=(add @root.prefix '--pagination-nav__icon') }}
+          {{ carbon-icon 'CaretRight20' class=(add @root.prefix '--pagination-nav__icon') }}
         {{#unless @root.elementAsAnchor}}
           </button>
         {{else}}

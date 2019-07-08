@@ -26,7 +26,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style($pagination-type-style);
     width: 100%;
     background-color: $ui-01;
     display: flex;
@@ -48,7 +48,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-short-01');
+    @include type-style($pagination-type-style);
     width: auto;
     min-width: auto;
     height: 100%;
