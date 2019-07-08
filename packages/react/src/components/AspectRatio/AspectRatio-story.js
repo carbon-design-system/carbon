@@ -47,4 +47,11 @@ storiesOf('AspectRatio', module)
         <DemoObject />
       </AspectRatio>
     </DemoContainer>
+  ))
+  .add('responsive', () => (
+    <DemoContainer>
+      <AspectRatio ratio={['1x1', null, '2x1', '4x3', '16x9']}>
+        <DemoObject />
+      </AspectRatio>
+    </DemoContainer>
   ));
