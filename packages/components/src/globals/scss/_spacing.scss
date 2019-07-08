@@ -146,3 +146,7 @@ $layout-xl: $spacing-baseline * 6 !default;
 /// @type Number
 /// @group global-spacing
 $layout-2xl: $spacing-baseline * 10 !default;
+
+@function btn-padding($val) {
+  @return calc(#{$val} - 3px) 60px calc(#{$val} - 3px) 12px;
+}

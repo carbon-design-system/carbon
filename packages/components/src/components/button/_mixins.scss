@@ -12,7 +12,6 @@
 /// @group button
 @mixin button-base {
   @include reset;
-  @include type-style('body-short-01');
 
   cursor: pointer;
   display: inline-flex;
@@ -42,8 +41,8 @@
     position: absolute;
     right: rem(16px);
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
+    width: $button-lg-icon-size;
+    height: $button-lg-icon-size;
     transition: all $duration--fast-01 motion(entrance, productive);
   }
 }

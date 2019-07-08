@@ -17,6 +17,11 @@ $accordion-content-type-style: 'body-long-02';
 $accordion-arrow-size: carbon--rem(20px);
 
 // Button
+$button-lg-type-style: 'body-short-02';
+$button-lg-icon-size: carbon--rem(20px);
+$button-field-height: $carbon--spacing-09;
+$button-padding: btn-padding(carbon--rem(13px));
+$button-padding-field: $button-padding;
 
 // Checkbox
 $checkbox-label-type-style: 'body-short-02';

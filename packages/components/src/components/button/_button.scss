@@ -36,6 +36,7 @@
 
   .#{$prefix}--btn {
     @include button-base;
+    @include type-style($button-lg-type-style);
 
     &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
     &:disabled > .#{$prefix}--btn__icon svg {
@@ -209,13 +210,19 @@
   }
 
   .#{$prefix}--btn--sm {
+    @include type-style($button-sm-type-style);
     min-height: rem(32px);
     padding: $button-padding-sm;
+
+    .#{$prefix}--btn__icon {
+      width: $button-sm-icon-size;
+      height: $button-sm-icon-size;
+    }
   }
 
   &.#{$prefix}--btn--field {
-    height: 40px;
-    min-height: 40px;
+    height: $button-field-height;
+    min-height: $button-field-height;
     padding: $button-padding-field;
   }
 
