@@ -9,7 +9,7 @@
 
 'use strict';
 
-const meta = require('../../packages/icons/meta.json');
+const meta = require('../../packages/icons/build-info.json');
 
 describe('@carbon/icons-react', () => {
   test('entrypoint is require-able', () => {
