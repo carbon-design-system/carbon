@@ -66,7 +66,6 @@
   $font-weight: 400,
   $item-padding: 0,
   $button-min-width: $carbon--spacing-09,
-  $button-padding: 1.0625rem $carbon--spacing-02,
   $button-direction-size: $carbon--spacing-09,
   $select-icon-top-position: $carbon--spacing-05,
   $select-icon-left-position: $carbon--spacing-05
@@ -105,7 +104,7 @@
     line-height: 1;
     min-width: $button-min-width;
     outline: 0;
-    padding: $button-padding;
+    padding: $pagination-nav-padding;
     position: relative;
     text-align: center;
     text-decoration: none;
@@ -152,6 +151,7 @@
     justify-content: center;
     line-height: 0;
     width: $button-direction-size;
+    padding: $pagination-nav-direction-padding;
   }
 
   .#{$prefix}--pagination-nav__select {

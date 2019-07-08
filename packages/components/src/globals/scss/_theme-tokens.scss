@@ -567,6 +567,16 @@
   /// @group pagination
   $pagination-type-style: 'body-short-01' !default !global;
 
+  /// @type Value
+  /// @access public
+  /// @group pagination
+  $pagination-nav-padding: 1.0625rem $carbon--spacing-02 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group pagination
+  $pagination-nav-direction-padding: $pagination-nav-padding !default !global;
+
   // slider
 
   /// @type Value
