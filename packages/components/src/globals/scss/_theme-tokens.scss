@@ -496,6 +496,16 @@
 
   // Notification
 
+  /// @type Value
+  /// @access public
+  /// @group notification
+  $notification-heading-type-style: 'heading-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group notification
+  $notification-subtitle-type-style: 'body-short-01' !default !global;
+
   /// @type Color
   /// @access public
   /// @group notification
