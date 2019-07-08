@@ -21,7 +21,7 @@ $accordion-arrow-size: carbon--rem(20px);
 // Checkbox
 $checkbox-label-type-style: 'body-short-02';
 
-// Checkbox
+// Radio
 $radio-label-type-style: 'body-short-02';
 
 // Code snippet
@@ -67,6 +67,9 @@ $time-picker-input-width: 5.1rem;
 // File uploader
 $file-heading-type-style: 'heading-02';
 $file-description-type-style: 'body-short-02';
+
+// Inline loading
+$inline-loading-type-style: 'body-short-02';
 
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';

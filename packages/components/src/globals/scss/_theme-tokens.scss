@@ -580,6 +580,13 @@
   /// @group tabs
   $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
 
+  // Inline Loading
+
+  /// @type Value
+  /// @access public
+  /// @group inline-loading
+  $inline-loading-type-style: 'body-short-01' !default !global;
+
   // Skeleton Loading
 
   /// @type Color
