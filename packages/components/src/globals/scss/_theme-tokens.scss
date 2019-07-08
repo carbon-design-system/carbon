@@ -121,6 +121,11 @@
 
   // Tooltip
 
+  /// @type Value
+  /// @access public
+  /// @group tooltip
+  $tooltip-trigger-type-style: 'label-01' !default !global;
+
   /// @type Color
   /// @access public
   /// @group tooltip
@@ -640,6 +645,16 @@
   /// @access public
   /// @group tabs
   $tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
+  $tab-type-style: 'body-short-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group tabs
+  $tab-selected-type-style: 'heading-01' !default !global;
 
   // Inline Loading
 

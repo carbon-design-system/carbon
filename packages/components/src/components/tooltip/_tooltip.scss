@@ -136,7 +136,7 @@
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
-      @include type-style('label-01');
+      @include type-style($tooltip-trigger-type-style);
       display: inline-flex;
       position: relative;
       border-bottom: 1px dotted $interactive-01;
@@ -309,7 +309,7 @@
 /// @group tooltip
 @mixin tooltip {
   .#{$prefix}--tooltip__label {
-    @include type-style('label-01');
+    @include type-style($tooltip-trigger-type-style);
     display: inline-flex;
     align-items: center;
     color: $text-02;
@@ -441,7 +441,7 @@
 
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
-    @include type-style('label-01');
+    @include type-style($tooltip-trigger-type-style);
     border-bottom: rem(1px) dotted $interactive-01;
   }
 

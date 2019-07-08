@@ -96,6 +96,13 @@ $pagination-type-style: 'body-short-02';
 $slider-type-style: 'body-short-02';
 $slider-thumb-size: $carbon--spacing-05;
 
+// tabs
+$tab-type-style: 'body-short-02';
+$tab-selected-type-style: 'heading-02';
+
+// tooltip
+$tooltip-trigger-type-style: 'body-short-02';
+
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
 // $carbon--theme: $carbon--theme--g90;
