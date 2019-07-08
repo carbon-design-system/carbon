@@ -32,8 +32,10 @@ const notificationProps = () => ({
 });
 
 const inlineNotificationActions = {
-  actionButtonLabel: text('Label (actionButtonLabel)', 'Undo'),
-  onActionButtonClick: action('onActionButtonClick'),
+  primary: {
+    label: text('Label (actions.primary.label)', 'Undo'),
+    onClick: action('actions.primary.onClick'),
+  },
 };
 
 storiesOf('Notifications', module)

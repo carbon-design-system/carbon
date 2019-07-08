@@ -480,12 +480,12 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
-        {actions.onActionButtonClick && actions.actionButtonLabel && (
+        {actions.primary.onClick && actions.primary.label && (
           <Button
             className={`${prefix}--inline-notification__action-button`}
             kind="ghost"
-            onClick={actions.onActionButtonClick}>
-            {actions.actionButtonLabel}
+            onClick={actions.primary.onClick}>
+            {actions.primary.label}
           </Button>
         )}
         {!hideCloseButton && (
