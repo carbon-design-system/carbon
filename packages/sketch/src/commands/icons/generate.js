@@ -14,7 +14,7 @@ import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
-const meta = require('@carbon/icons/meta.json');
+const meta = require('@carbon/icons/build-info.json');
 
 export function generate() {
   command('commands/icons/generate', () => {
