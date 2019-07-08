@@ -30,9 +30,9 @@ storiesOf('ContentSwitcher', module)
       const switchProps = props.switch();
       return (
         <ContentSwitcher {...props.contentSwitcher()}>
-          <Switch name="one" text="First section" {...switchProps} />
-          <Switch name="two" text="Second section" {...switchProps} />
-          <Switch name="three" text="Third section" {...switchProps} />
+          <Switch text="First section" {...switchProps} />
+          <Switch text="Second section" {...switchProps} />
+          <Switch text="Third section" {...switchProps} />
         </ContentSwitcher>
       );
     },
@@ -51,9 +51,9 @@ storiesOf('ContentSwitcher', module)
       const switchProps = props.switch();
       return (
         <ContentSwitcher {...props.contentSwitcher()} selectedIndex={1}>
-          <Switch name="one" text="First section" {...switchProps} />
-          <Switch name="two" text="Second section" {...switchProps} />
-          <Switch name="three" text="Third section" {...switchProps} />
+          <Switch text="First section" {...switchProps} />
+          <Switch text="Second section" {...switchProps} />
+          <Switch text="Third section" {...switchProps} />
         </ContentSwitcher>
       );
     },

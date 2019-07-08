@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Switch from '../ContentSwitcher/Switch';
+import { Switch } from '../ContentSwitcher';
 export default Switch;

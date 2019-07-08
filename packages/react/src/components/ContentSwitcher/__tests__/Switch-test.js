@@ -5,94 +5,71 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { mount } from 'enzyme';
 import React from 'react';
-import Switch from '../Switch';
-import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { Switch } from '../../ContentSwitcher';
 
 describe('Switch', () => {
-  describe('component rendering', () => {
-    const buttonWrapper = shallow(
-      <Switch kind="button" icon={<svg />} text="test" />
-    );
+  let mockProps;
 
-    it('should render a button when kind is button', () => {
-      expect(buttonWrapper.is('button')).toEqual(true);
-    });
-
-    it('should have the expected text', () => {
-      expect(buttonWrapper.text()).toEqual('test');
-    });
-
-    it('label should have the expected class', () => {
-      const className = `${prefix}--content-switcher__label`;
-      expect(buttonWrapper.find('span').hasClass(className)).toEqual(true);
-    });
-
-    it('should have the expected class', () => {
-      const cls = `${prefix}--content-switcher-btn`;
-
-      expect(buttonWrapper.hasClass(cls)).toEqual(true);
-    });
-
-    it('should not have selected class', () => {
-      const selectedClass = `${prefix}--content-switcher--selected`;
-
-      expect(buttonWrapper.hasClass(selectedClass)).toEqual(false);
-    });
-
-    it('should have a selected class when selected is set to true', () => {
-      const selected = true;
-
-      buttonWrapper.setProps({ selected });
-
-      expect(
-        buttonWrapper.hasClass(`${prefix}--content-switcher--selected`)
-      ).toEqual(true);
-    });
+  beforeEach(() => {
+    mockProps = {
+      className: 'custom-class',
+      index: 0,
+      onClick: jest.fn(),
+      onKeyDown: jest.fn(),
+      ref: jest.fn(),
+      selected: false,
+      text: 'mock-text',
+    };
   });
 
-  describe('events', () => {
-    const buttonOnClick = jest.fn();
-    const linkOnClick = jest.fn();
-    const buttonOnKey = jest.fn();
-    const linkOnKey = jest.fn();
-    const index = 1;
-    const name = 'first';
-    const text = 'test';
+  it('should render', () => {
+    const wrapper = mount(<Switch {...mockProps} />);
+    expect(wrapper).toMatchSnapshot();
 
-    const buttonWrapper = shallow(
-      <Switch
-        index={index}
-        name={name}
-        kind="button"
-        onClick={buttonOnClick}
-        onKeyDown={buttonOnKey}
-        text={text}
-      />
+    const selected = mount(<Switch {...mockProps} selected={true} />);
+    expect(selected).toMatchSnapshot();
+  });
+
+  it('should support a custom class name', () => {
+    const wrapper = mount(<Switch {...mockProps} />);
+    expect(wrapper.children().find(`.${mockProps.className}`).length).toBe(1);
+  });
+
+  it('should call `onClick` with the native event and given index', () => {
+    const wrapper = mount(<Switch {...mockProps} />);
+    wrapper.find('button').simulate('click');
+
+    expect(mockProps.onClick).toHaveBeenCalledTimes(1);
+    expect(mockProps.onClick).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(HTMLElement),
+      }),
+      mockProps.index
     );
+  });
 
-    const linkWrapper = shallow(
-      <Switch
-        index={index}
-        name={name}
-        kind="anchor"
-        onClick={linkOnClick}
-        onKeyDown={linkOnKey}
-        text={text}
-      />
+  it('should set `tabIndex` to 0 or -1 depending on if it is selected', () => {
+    const wrapper = mount(<Switch {...mockProps} />);
+    expect(wrapper.find('button').prop('tabIndex')).toBe('-1');
+    wrapper.setProps({ selected: true });
+    expect(wrapper.find('button').prop('tabIndex')).toBe('0');
+  });
+
+  it('should set `aria-selected` depending on if it is selected', () => {
+    const wrapper = mount(<Switch {...mockProps} />);
+    expect(wrapper.find('button').prop('aria-selected')).toBe(
+      mockProps.selected
     );
+    wrapper.setProps({ selected: true });
+    expect(wrapper.find('button').prop('aria-selected')).toBe(true);
+  });
 
-    it('should invoke button onClick handler', () => {
-      buttonWrapper.simulate('click', { preventDefault() {} });
-      expect(buttonOnClick).toBeCalledWith({ index, name, text });
-    });
-
-    it('should invoke link onClick handler', () => {
-      linkWrapper.simulate('click', { preventDefault() {} });
-      expect(buttonOnClick).toBeCalledWith({ index, name, text });
-    });
+  it('should set the forwarded ref to the button element', () => {
+    mount(<Switch {...mockProps} />);
+    // It seems like enzyme does not call the `ref` with the underlying
+    // HTMLElement, so we are asserting that it's being called as a rough test
+    expect(mockProps.ref).toHaveBeenCalledTimes(1);
   });
 });

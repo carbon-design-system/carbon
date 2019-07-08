@@ -9,22 +9,26 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-const Switch = React.forwardRef(function Switch(props, tabRef) {
-  const {
+const Switch = React.forwardRef(function Switch(
+  {
     className: customClassName,
     index,
     onClick,
-    onFocus,
-    onKeyDown,
+    // We no longer need the `name` prop as we instead use the `index` of the
+    // Switch. However, since we spread `...rest` onto the `button` node we need
+    // to handle it so folks don't see an error for an unrecognized DOM prop
+    // eslint-disable-next-line no-unused-vars
     name,
-    selected,
+    selected = false,
     text,
     ...rest
-  } = props;
-
+  },
+  ref
+) {
   const className = cx({
     [`${prefix}--content-switcher-btn`]: true,
     [`${prefix}--content-switcher--selected`]: selected,
@@ -35,18 +39,13 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     onClick(event, index);
   }
 
-  function handleOnFocus(event) {
-    onFocus(event, index);
-  }
-
   return (
     <button
       aria-selected={selected}
       className={className}
-      ref={tabRef}
+      ref={ref}
       role="tab"
       onClick={handleOnClick}
-      onKeyDown={onKeyDown}
       tabIndex={selected ? '0' : '-1'}
       type="button"
       {...rest}>
@@ -56,12 +55,16 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
 });
 
 Switch.displayName = 'Switch';
-
 Switch.propTypes = {
   /**
    * Specify an optional className to be added to your Switch
    */
   className: PropTypes.string,
+
+  /**
+   * Provide the name of your Switch that is used for event handlers
+   */
+  name: deprecate(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
 
   /**
    * The index of your Switch in your ContentSwitcher that is used for event handlers.
@@ -70,19 +73,12 @@ Switch.propTypes = {
   index: PropTypes.number,
 
   /**
-   * Provide the name of your Switch that is used for event handlers
-   */
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
    * A handler that is invoked when a user clicks on the control.
-   * Reserved for usage in ContentSwitcher
    */
   onClick: PropTypes.func,
 
   /**
    * A handler that is invoked on the key down event for the control.
-   * Reserved for usage in ContentSwitcher
    */
   onKeyDown: PropTypes.func,
 
@@ -95,10 +91,6 @@ Switch.propTypes = {
    * Provide the contents of your Switch
    */
   text: PropTypes.string.isRequired,
-};
-
-Switch.defaultProps = {
-  selected: false,
 };
 
 export default Switch;

@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   Children,
@@ -13,81 +15,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import cx from 'classnames';
-import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
-
-function useFocusableList(length, initialIndex = 0) {
-  const refs = Array.from({ length });
-
-  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
-  const [prevControlledIndex, setPrevControlledIndex] = useState(null);
-  const [focusIndex, setFocusIndex] = useState(null);
-
-  // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
-  if (initialIndex !== prevControlledIndex) {
-    setSelectedIndex(controlledSelectedIndex);
-    setPrevControlledIndex(controlledSelectedIndex);
-  }
-
-  useEffect(() => {
-    if (focusIndex === null) {
-      return;
-    }
-
-    const ref = switchRefs[focusIndex];
-    if (ref && document.activeElement !== ref.current) {
-      ref.focus && ref.focus();
-      if (savedOnChange.current) {
-        savedOnChange.current(focusIndex);
-      }
-    }
-  }, [refs, focusIndex]);
-
-  function setIndex(index) {
-    setSelectedIndex(index);
-    setFocusIndex(index);
-  }
-
-  function handleItemRef(index) {
-    return ref => {
-      switchRefs[index] = ref;
-    };
-  }
-
-  function setIndex(index) {
-    setSelectedIndex(index);
-    setFocusIndex(index);
-  }
-
-  function onClick(event, index) {
-    if (selectedIndex !== index) {
-      setIndex(index);
-    }
-  }
-
-  function onKeyDown(event) {
-    if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
-      setIndex(getNextIndex(event, selectedIndex, length));
-    }
-  }
-
-  function onFocus(event, index) {
-    if (focusIndex !== index) {
-      setFocusIndex(index);
-    }
-  }
-
-  return {
-    onClick,
-    onKeyDown,
-    onFocus,
-    ref: handleItemRef,
-  };
-}
 
 function ContentSwitcher({
   children,
@@ -96,15 +27,15 @@ function ContentSwitcher({
   selectedIndex: controlledSelectedIndex = 0,
   ...rest
 }) {
-  const savedOnChange = useRef(null);
-  const [selectedIndex, setSelectedIndex] = useState(controlledSelectedIndex);
-  const [prevControlledIndex, setPrevControlledIndex] = useState(null);
-  const [focusIndex, setFocusIndex] = useState(null);
-
   const switchRefs = [];
   const className = cx(`${prefix}--content-switcher`, customClassName);
+  const isMounted = useRef(false);
+  const savedOnChange = useRef(null);
+  const [selectedIndex, setSelectedIndex] = useState(controlledSelectedIndex);
+  const [prevControlledIndex, setPrevControlledIndex] = useState(
+    controlledSelectedIndex
+  );
 
-  // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
   if (controlledSelectedIndex !== prevControlledIndex) {
     setSelectedIndex(controlledSelectedIndex);
     setPrevControlledIndex(controlledSelectedIndex);
@@ -116,19 +47,27 @@ function ContentSwitcher({
     savedOnChange.current = onChange;
   }, [onChange]);
 
+  // Only fire this effect after the first render, otherwise we end up
+  // autofocusing the selected index when this component is rendered
   useEffect(() => {
-    if (focusIndex === null) {
+    if (!isMounted.current) {
       return;
     }
 
-    const ref = switchRefs[focusIndex];
+    const ref = switchRefs[selectedIndex];
     if (ref && document.activeElement !== ref.current) {
       ref.focus && ref.focus();
       if (savedOnChange.current) {
-        savedOnChange.current(focusIndex);
+        savedOnChange.current(selectedIndex);
       }
     }
-  }, [switchRefs, focusIndex]);
+  }, [switchRefs, selectedIndex]);
+
+  // Set our `isMounted` flag to true when our effects are run during the first
+  // render
+  useEffect(() => {
+    isMounted.current = true;
+  }, []);
 
   function handleItemRef(index) {
     return ref => {
@@ -136,26 +75,15 @@ function ContentSwitcher({
     };
   }
 
-  function setIndex(index) {
-    setSelectedIndex(index);
-    setFocusIndex(index);
-  }
-
   function onClick(event, index) {
     if (selectedIndex !== index) {
-      setIndex(index);
+      setSelectedIndex(index);
     }
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
-      setIndex(getNextIndex(event, selectedIndex, children.length));
-    }
-  }
-
-  function onFocus(event, index) {
-    if (focusIndex !== index) {
-      setFocusIndex(index);
+      setSelectedIndex(getNextIndex(event, selectedIndex, children.length));
     }
   }
 
@@ -165,7 +93,6 @@ function ContentSwitcher({
         cloneElement(child, {
           index,
           onClick: composeEventHandlers([onClick, child.props.onClick]),
-          onFocus: composeEventHandlers([onFocus, child.props.onFocus]),
           onKeyDown: composeEventHandlers([onKeyDown, child.props.onKeyDown]),
           selected: index === selectedIndex,
           ref: handleItemRef(index),
