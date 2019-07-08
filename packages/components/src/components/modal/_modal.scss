@@ -118,13 +118,13 @@
   }
 
   .#{$prefix}--modal-header__heading {
-    @include type-style('productive-heading-03');
+    @include type-style($modal-heading-type-style);
 
     color: $text-01;
   }
 
   .#{$prefix}--modal-content {
-    @include type-style('body-long-01');
+    @include type-style($modal-content-type-style);
 
     overflow-y: auto;
     margin-bottom: $carbon--spacing-09;
@@ -133,7 +133,7 @@
   }
 
   .#{$prefix}--modal-content > * {
-    @include type-style('body-long-01');
+    @include type-style($modal-content-type-style);
   }
 
   .#{$prefix}--modal-footer {

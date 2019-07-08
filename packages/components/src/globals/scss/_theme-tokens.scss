@@ -484,6 +484,16 @@
   /// @group modal
   $modal-footer-background-color: $ui-03 !default !global;
 
+  /// @type Value
+  /// @access public
+  /// @group modal
+  $modal-heading-type-style: 'productive-heading-03' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group modal
+  $modal-content-type-style: 'body-long-01' !default !global;
+
   // Notification
 
   /// @type Color
