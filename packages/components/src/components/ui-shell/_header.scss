@@ -146,6 +146,11 @@
     height: 100%;
     padding-left: mini-units(2);
     position: relative;
+    display: block;
+
+    @include carbon--breakpoint-down('lg') {
+      display: none;
+    }
 
     &::before {
       content: '';
