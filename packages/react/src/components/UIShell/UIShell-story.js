@@ -342,9 +342,7 @@ storiesOf('UI Shell', module)
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
+                    <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
                     <SideNavMenuItem href="javascript:void(0)">
@@ -355,16 +353,17 @@ storiesOf('UI Shell', module)
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
+                    <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
                   </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
+                  <SideNavMenu
+                    renderIcon={Fade16}
+                    title="Category title"
+                    isActive={true}>
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
@@ -416,6 +415,20 @@ storiesOf('UI Shell', module)
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
+                  </SideNavMenu>
+                  <SideNavMenu
+                    renderIcon={Fade16}
+                    title="Category title"
+                    isActive={true}>
+                    <SideNavMenuItem href="javascript:void(0)">
+                      Link
+                    </SideNavMenuItem>
                     <SideNavMenuItem
                       aria-current="page"
                       href="javascript:void(0)">
@@ -429,22 +442,7 @@ storiesOf('UI Shell', module)
                     <SideNavMenuItem href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
                     <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
                       Link
                     </SideNavMenuItem>
                     <SideNavMenuItem href="javascript:void(0)">
@@ -561,6 +559,17 @@ storiesOf('UI Shell', module)
               <SideNavMenuItem href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu title="L0 menu" isActive={true}>
+              <SideNavMenuItem href="javascript:void(0)">
+                L0 menu item
+              </SideNavMenuItem>
               <SideNavMenuItem aria-current="page" href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
@@ -572,18 +581,7 @@ storiesOf('UI Shell', module)
               <SideNavMenuItem href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu title="L0 menu">
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
                 L0 menu item
               </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">
@@ -610,6 +608,14 @@ storiesOf('UI Shell', module)
           <SideNavItems>
             <SideNavMenu renderIcon={Fade16} title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu
+              renderIcon={Fade16}
+              title="Category title"
+              isActive={true}>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
               <SideNavMenuItem aria-current="page" href="javascript:void(0)">
                 Link
               </SideNavMenuItem>
@@ -617,16 +623,7 @@ storiesOf('UI Shell', module)
             </SideNavMenu>
             <SideNavMenu renderIcon={Fade16} title="Category title">
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                Link
-              </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu renderIcon={Fade16} title="Category title">
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                Link
-              </SideNavMenuItem>
               <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
             </SideNavMenu>
             <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
