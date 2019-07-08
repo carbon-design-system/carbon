@@ -9847,9 +9847,12 @@ Data table action styles
     width: 100%;
     justify-content: flex-end;
     transform: translate3d(0, 0, 0);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
