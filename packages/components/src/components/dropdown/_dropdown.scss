@@ -27,7 +27,7 @@
     grid-gap: rem(4px);
 
     .#{$prefix}--label {
-      @include type-style('body-short-01');
+      @include type-style($dropdown-type-style);
     }
 
     .#{$prefix}--label,
@@ -51,7 +51,7 @@
     border: none;
     border-bottom: 1px solid $ui-04;
     width: 100%;
-    height: rem(40px);
+    height: $dropdown-height;
     cursor: pointer;
     color: $text-01;
     outline: 2px solid transparent;
@@ -123,7 +123,7 @@
   }
 
   .#{$prefix}--dropdown-text {
-    @include type-style('body-short-01');
+    @include type-style($dropdown-type-style);
     display: block;
     height: rem(40px);
     padding-top: $carbon--spacing-04;
@@ -138,13 +138,14 @@
   .#{$prefix}--dropdown-list {
     @include reset;
     @include layer('overlay');
-    @include type-style('body-short-01');
+    @include type-style($dropdown-type-style);
     background-color: $ui-01;
     display: flex;
     flex-direction: column;
     width: 100%;
     list-style: none;
     position: absolute;
+    top: $dropdown-height;
     z-index: z('dropdown');
     max-height: 0;
     transition: max-height $duration--fast-02 motion(standard, productive);
@@ -180,11 +181,11 @@
   .#{$prefix}--dropdown-link {
     @include focus-outline('reset');
     display: block;
-    height: rem(40px);
+    height: $dropdown-height;
     color: $text-02;
     text-decoration: none;
     font-weight: normal;
-    line-height: rem(16px);
+    // line-height: rem(16px);
     padding: rem(11px) 0;
     margin: 0 $carbon--spacing-05;
     border: 1px solid transparent;
@@ -274,7 +275,7 @@
     }
 
     .#{$prefix}--dropdown__arrow {
-      top: rem(8px);
+      top: $dropdown-inline-arrow-top;
       right: rem(8px);
     }
   }
@@ -285,7 +286,8 @@
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding: rem(7px) rem(32px) rem(7px) $carbon--spacing-04; // TODO: spacing token
+    padding: $dropdown-inline-spacing rem(32px) $dropdown-inline-spacing
+      $carbon--spacing-04; // TODO: spacing token
     height: rem(32px);
     overflow: visible;
     color: $text-01;

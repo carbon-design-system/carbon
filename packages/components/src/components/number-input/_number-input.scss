@@ -24,7 +24,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include type-style('body-short-01');
+    @include type-style($num-input-type-style);
     @include focus-outline('reset');
     font-family: carbon--font-family('mono');
     box-sizing: border-box;
@@ -34,7 +34,7 @@
     padding-left: $carbon--spacing-05;
     padding-right: $carbon--spacing-07;
     font-weight: 300;
-    height: rem(40px);
+    height: $num-input-height;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -175,8 +175,8 @@
     .#{$prefix}--number__control-btn,
     &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
       position: static;
-      width: rem(40px);
-      height: rem(40px);
+      width: $num-input-height;
+      height: $num-input-height;
       background-color: $ui-01;
 
       &:hover,

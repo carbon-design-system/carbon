@@ -21,10 +21,12 @@ $accordion-arrow-size: carbon--rem(20px);
 // Checkbox
 $checkbox-label-type-style: 'body-short-02';
 
+// Checkbox
+$radio-label-type-style: 'body-short-02';
+
 // Code snippet
 $snippet-type-style: 'code-02';
 $snippet-single-height: $carbon--spacing-09;
-$snippet-single-button-size: $snippet-single-height;
 
 // Content switcher
 $content-switcher-type-style: 'body-short-02';
@@ -34,12 +36,37 @@ $content-switcher-divider-height: $carbon--spacing-06;
 
 // Datatable
 
+// Input
+$input-type-style: 'body-short-02';
+$input-height: $carbon--spacing-09;
+
+// Text input
+$text-input-icon-size: carbon--rem(20px);
+
+// Text area
+$text-area-type-style: 'body-long-02';
+
+// Dropdown
+$dropdown-inline-spacing: carbon--rem(5px);
+$dropdown-inline-arrow-top: carbon--rem(6px);
+
+// Select
+$select-arrow-top: carbon--rem(14px);
+
 // Date picker
-$date-input-type-style: 'body-short-02';
-$date-input-height: $spacing-09;
+$date-input-type-style: $input-type-style;
 $date-input-width: 7.6rem;
 $date-input-short-width: 6.1rem;
 $date-input-range-width: 9.8rem;
+
+// Time picker
+$time-picker-type-style: $input-type-style;
+$time-picker-height: $carbon--spacing-09;
+$time-picker-input-width: 5.1rem;
+
+// File uploader
+$file-heading-type-style: 'heading-02';
+$file-description-type-style: 'body-short-02';
 
 // 2) new in v10 - customize many variables via alternate theme
 // @import '../../src/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';

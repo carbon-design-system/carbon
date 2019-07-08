@@ -30,7 +30,7 @@
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
-    @include type-style('heading-01');
+    @include type-style($file-heading-type-style);
 
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
@@ -48,7 +48,7 @@
 
   .#{$prefix}--label-description {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style($file-description-type-style);
 
     color: $text-02;
     margin-bottom: $carbon--spacing-05;
@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: rem(40px);
+    height: $file-input-height;
     max-width: rem(300px);
     margin-bottom: $carbon--spacing-03;
     padding: 0 $carbon--spacing-03 0 $carbon--spacing-05;
@@ -98,7 +98,7 @@
   }
 
   .#{$prefix}--file-filename {
-    @include type-style('body-short-01');
+    @include type-style($file-name-type-style);
     @include text-overflow(300px);
     display: inline-block;
     align-items: center;

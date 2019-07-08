@@ -38,9 +38,9 @@
   }
 
   .#{$prefix}--select-input {
-    @include type-style('body-short-01');
+    @include type-style($select-type-style);
     @include focus-outline('reset');
-    height: rem(40px);
+    height: $select-height;
     appearance: none;
     display: block;
     width: rem(224px);
@@ -208,6 +208,7 @@
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
     bottom: auto;
     top: 1.125rem;
+    top: $select-arrow-top;
     right: $carbon--spacing-03;
   }
 

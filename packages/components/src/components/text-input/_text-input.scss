@@ -22,11 +22,11 @@
 @mixin text-input {
   .#{$prefix}--text-input {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style($text-input-type-style);
     @include focus-outline('reset');
     background-color: $field-01;
     width: 100%;
-    height: rem(40px);
+    height: $text-input-height;
     padding: 0 $carbon--spacing-05;
     color: $text-01;
     border: none;
@@ -74,8 +74,8 @@
       @include tooltip--trigger('icon', 'bottom');
       @include tooltip--placement('icon', 'bottom', 'center');
       position: absolute;
-      height: rem(16px);
-      width: rem(16px);
+      height: $text-input-icon-size;
+      width: $text-input-icon-size;
       right: rem(16px);
       padding: 0;
       border: 0;

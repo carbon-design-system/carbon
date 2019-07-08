@@ -24,6 +24,16 @@
   /// @type Value
   /// @access public
   /// @group global
+  $input-type-style: 'body-short-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group global
+  $input-height: $carbon--spacing-08 !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group global
   $input-border: 1px solid transparent !default !global;
 
   /// @type Number
@@ -45,6 +55,52 @@
   /// @access public
   /// @group global
   $focus: $ibm-color__blue-60 !default !global;
+
+  // Text input
+
+  /// @type Value
+  /// @access public
+  /// @group text-input
+  $text-input-type-style: $input-type-style !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group text-input
+  $text-input-height: $input-height !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group text-input
+  $text-input-icon-size: $spacing-05 !default !global;
+
+  // Text area
+
+  /// @type Value
+  /// @access public
+  /// @group text-area
+  $text-area-type-style: 'body-long-01' !default !global;
+
+  // Dropdown
+
+  /// @type Value
+  /// @access public
+  /// @group dropdown
+  $dropdown-type-style: $input-type-style !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group dropdown
+  $dropdown-height: $input-height !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group dropdown
+  $dropdown-inline-spacing: carbon--rem(7px) !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group dropdown
+  $dropdown-inline-arrow-top: carbon--rem(8px) !default !global;
 
   // Link
 
@@ -226,7 +282,7 @@
   /// @type Value
   /// @access public
   /// @group code-snippet
-  $snippet-single-button-size: $carbon--spacing-08 !default !global;
+  $snippet-single-button-size: $snippet-single-height !default !global;
 
   // Content Switcher
 
@@ -307,7 +363,7 @@
   /// @type Value
   /// @access public
   /// @group date-picker
-  $date-input-height: $spacing-08 !default !global;
+  $date-input-height: $input-height !default !global;
 
   /// @type Value
   /// @access public
@@ -323,6 +379,93 @@
   /// @access public
   /// @group data-table
   $date-input-range-width: carbon--rem(143.5px) !default !global;
+
+  // Time picker
+
+  /// @type Value
+  /// @access public
+  /// @group time-picker
+  $time-picker-type-style: 'code-02' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group time-picker
+  $time-picker-input-width: 4.875rem !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group time-picker
+  $time-picker-height: $input-height !default !global;
+
+  // Select
+
+  /// @type Value
+  /// @access public
+  /// @group select
+  $select-type-style: $input-type-style !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group select
+  $select-height: $input-height !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group select
+  $select-arrow-top: 1.125rem !default !global;
+
+  // List-box
+
+  /// @type Value
+  /// @access public
+  /// @group list-box
+  $list-box-type-style: $input-type-style !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group list-box
+  $list-box-height: $input-height !default !global;
+
+  // Number input
+
+  /// @type Value
+  /// @access public
+  /// @group number-input
+  $num-input-type-style: $input-type-style !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group number-input
+  $num-input-height: $input-height !default !global;
+
+  // Number input
+
+  /// @type Value
+  /// @access public
+  /// @group file-uploader
+  $file-heading-type-style: 'heading-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group file-uploader
+  $file-description-type-style: 'body-short-01' !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group file-uploader
+  $file-name-type-style: $input-type-style !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group file-uploader
+  $file-input-height: $input-height !default !global;
+
+  // Form
+
+  // /// @type Value
+  // /// @access public
+  // /// @group form
+  // $form-label-type-style: $input-type-style !default !global;
 
   // Modal
 
@@ -397,6 +540,11 @@
   /// @access public
   /// @group radio-button
   $radio-border-width: 1px !default !global;
+
+  /// @type Value
+  /// @access public
+  /// @group radio-button
+  $radio-label-type-style: 'body-short-01' !default !global;
 
   // Structured List
 

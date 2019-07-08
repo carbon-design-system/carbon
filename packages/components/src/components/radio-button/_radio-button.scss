@@ -50,7 +50,7 @@
   }
 
   .#{$prefix}--radio-button__label {
-    @include type-style('body-short-01');
+    @include type-style($radio-label-type-style);
     display: flex;
     align-items: center;
     cursor: pointer;

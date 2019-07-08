@@ -22,7 +22,7 @@
 @mixin text-area {
   .#{$prefix}--text-area {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style($text-area-type-style);
     @include focus-outline('reset');
 
     background-color: $field-01;
@@ -63,7 +63,7 @@
 
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
-    @include type-style('body-long-01');
+    @include type-style($text-area-type-style);
     opacity: 1;
   }
 

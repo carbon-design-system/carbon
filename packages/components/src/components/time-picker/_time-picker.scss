@@ -51,11 +51,11 @@
   .#{$prefix}--time-picker__input-field {
     @include reset;
     @include focus-outline('reset');
-    @include type-style('code-02');
+    @include type-style($time-picker-type-style);
     display: flex;
     align-items: center;
-    width: 4.875rem;
-    height: rem(40px);
+    width: $time-picker-input-width;
+    height: $time-picker-height;
     transition: outline $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
   }
