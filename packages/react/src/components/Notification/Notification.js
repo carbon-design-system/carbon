@@ -480,7 +480,7 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
-        {actions.primary.onClick && actions.primary.label && (
+        {actions.primary && actions.primary.onClick && actions.primary.label && (
           <Button
             className={classNames(
               actions.primary.className,
