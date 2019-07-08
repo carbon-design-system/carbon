@@ -14061,7 +14061,6 @@ Inline notification styles
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-01');
     margin: 0 $carbon--spacing-02 0 0;
-    white-space: nowrap;
   }
 
   .#{$prefix}--inline-notification__subtitle {
