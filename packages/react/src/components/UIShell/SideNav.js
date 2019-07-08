@@ -10,7 +10,8 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import SideNavFooter from './SideNavFooter';
+// TO-DO: comment back in when footer is added for rails
+// import SideNavFooter from './SideNavFooter';
 
 const { prefix } = settings;
 
@@ -24,9 +25,11 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     children,
     onToggle,
     className: customClassName,
-    translateById: t,
+    // TO-DO: comment back in when footer is added for rails
+    // translateById: t,
     isFixedNav,
     isRail,
+    isPersistent,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -46,9 +49,10 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const assistiveText = expanded
-    ? t('carbon.sidenav.state.open')
-    : t('carbon.sidenav.state.closed');
+  // TO-DO: comment back in when footer is added for rails
+  // const assistiveText = expanded
+  //   ? t('carbon.sidenav.state.open')
+  //   : t('carbon.sidenav.state.closed');
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
@@ -57,26 +61,28 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
+    [`${prefix}--side-nav--hidden`]: !isPersistent,
+  });
+
+  const overlayClassName = cx({
+    [`${prefix}--side-nav__overlay`]: true,
+    [`${prefix}--side-nav__overlay-active`]: expanded,
   });
 
   return (
-    <nav
-      ref={ref}
-      className={`${prefix}--side-nav__navigation ${className}`}
-      {...accessibilityLabel}
-      onFocus={event => handleToggle(event, true)}
-      onBlur={event => handleToggle(event, false)}
-      onMouseEnter={() => handleToggle(true)}
-      onMouseLeave={() => handleToggle(false)}>
-      {children}
-      {isFixedNav ? null : (
-        <SideNavFooter
-          assistiveText={assistiveText}
-          expanded={expanded}
-          onToggle={handleToggle}
-        />
-      )}
-    </nav>
+    <>
+      {isFixedNav ? null : <div className={overlayClassName} />}
+      <nav
+        ref={ref}
+        className={`${prefix}--side-nav__navigation ${className}`}
+        {...accessibilityLabel}
+        onFocus={event => handleToggle(event, true)}
+        onBlur={event => handleToggle(event, false)}
+        onMouseEnter={() => handleToggle(true)}
+        onMouseLeave={() => handleToggle(false)}>
+        {children}
+      </nav>
+    </>
   );
 });
 
@@ -90,6 +96,8 @@ SideNav.defaultProps = {
   },
   defaultExpanded: false,
   isChildOfHeader: true,
+  isFixedNav: false,
+  isPersistent: true,
 };
 
 SideNav.propTypes = {
@@ -140,6 +148,16 @@ SideNav.propTypes = {
    * Optional prop to display the side nav rail.
    */
   isRail: PropTypes.bool,
+
+  /**
+   * Specify if sideNav is standalone
+   */
+  isFixedNav: PropTypes.bool,
+
+  /**
+   * Specify if the sideNav will be persistent above the lg breakpoint
+   */
+  isPersistent: PropTypes.bool,
 };
 
 export default SideNav;
