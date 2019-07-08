@@ -61,6 +61,7 @@ describe('Carbon Components React', () => {
         "HeaderName",
         "HeaderNavigation",
         "HeaderPanel",
+        "HeaderSideNavItems",
         "Icon",
         "IconSkeleton",
         "InlineLoading",
