@@ -76,9 +76,21 @@ export class SideNavMenu extends React.Component {
       title,
     } = this.props;
     const { isExpanded } = this.state;
+
+    let hasActiveChild;
+    if (children && typeof children === Object) {
+      hasActiveChild = children.some(child => {
+        if (child.props.isActive === true || child.props['aria-current']) {
+          return true;
+        }
+        return false;
+      });
+    }
+
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
-      [`${prefix}--side-nav__item--active`]: isActive,
+      [`${prefix}--side-nav__item--active`]:
+        isActive || (hasActiveChild && !isExpanded),
       [`${prefix}--side-nav__item--icon`]: IconElement,
       [customClassName]: !!customClassName,
     });
