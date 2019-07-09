@@ -18,43 +18,42 @@ import InlineLoading from '../InlineLoading';
 const { prefix } = settings;
 
 describe('Filename', () => {
-  describe('Renders as expected', () => {
-    const props = {
-      classNames: [
-        `${prefix}--loading`,
-        `${prefix}--file-close`,
-        `${prefix}--file-complete`,
-      ],
-      icons: [InlineLoading, Close16, CheckmarkFilled16],
-      statuses: ['uploading', 'edit', 'complete'],
-    };
-    props.statuses.forEach((status, i) => {
-      const shallowWrapper = shallow(
+  describe('renders as expected', () => {
+    const icons = [InlineLoading, Close16, CheckmarkFilled16];
+    const statuses = ['uploading', 'edit', 'complete'];
+    statuses.forEach((status, i) => {
+      const wrapper = mount(
         <Filename iconDescription="Upload complete" status={status} />
       );
 
       it('renders upload status icon as expected', () => {
-        expect(shallowWrapper.length).toBe(1);
-        expect(shallowWrapper.find(props.icons[i]).length).toBe(1);
+        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.find(icons[i]).length).toBe(1);
       });
     });
   });
 
   describe('Check that functions passed in as props are called', () => {
-    const onClick = jest.fn();
-    const onKeyDown = jest.fn();
-    const wrapper = mount(
-      <Filename onClick={onClick} onKeyDown={onKeyDown} status="complete" />
-    );
+    let wrapper;
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        onClick: jest.fn(),
+        onKeyDown: jest.fn(),
+        status: 'complete',
+      };
+      wrapper = mount(<Filename {...mockProps} />);
+    });
 
     it('should call onClick', () => {
       wrapper.simulate('click');
-      expect(onClick).toBeCalled();
+      expect(mockProps.onClick).toBeCalled();
     });
 
     it('should call onKeyDown', () => {
       wrapper.simulate('keydown');
-      expect(onKeyDown).toBeCalled();
+      expect(mockProps.onKeyDown).toBeCalled();
     });
   });
 
