@@ -64,7 +64,10 @@ storiesOf('InlineLoading', module)
             setDescription('Submitted!');
 
             // To make submittable again, we reset the state after a bit so the user gets completion feedback
-            setTimeout(() => setSuccess(false), 1500);
+            setTimeout(() => {
+              setSuccess(false);
+              setDescription('Submitting...');
+            }, 1500);
           }, 2000);
         };
 
