@@ -277,7 +277,7 @@ describe('DatePicker', () => {
     beforeEach(done => {
       const spy = {};
       spy.console = jest.spyOn(console, 'error').mockImplementation(e => {
-        done.fail(e);
+        done(e);
       });
       done();
     });
