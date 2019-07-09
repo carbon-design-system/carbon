@@ -77,6 +77,8 @@ exports[`ModalWrapper should render 1`] = `
           tabIndex={-1}
         >
           <div
+            aria-label={null}
+            aria-labelledby="bx--modal-header__label bx--modal-header__heading"
             aria-modal="true"
             className="bx--modal-container"
             role="dialog"
