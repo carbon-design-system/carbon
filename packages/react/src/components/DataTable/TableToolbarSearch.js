@@ -54,7 +54,7 @@ const TableToolbarSearch = ({
     [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-expandable`]:
-      !persistent || !persistant,
+      !persistent || (!persistent && !persistant),
     [`${prefix}--toolbar-search-container-persistent`]:
       persistent || persistant,
   });
@@ -65,7 +65,7 @@ const TableToolbarSearch = ({
   });
 
   const handleExpand = (event, value = !expanded) => {
-    if (!controlled && (!persistent || !persistant)) {
+    if (!controlled && (!persistent || (!persistent && !persistant))) {
       setExpandedState(value);
     }
     if (onExpand) {
