@@ -148,10 +148,10 @@ TableToolbarSearch.propTypes = {
    * Whether the search should be allowed to expand
    */
   persistent: PropTypes.bool,
-  persistant: deprecate({
-    propType: PropTypes.bool,
-    message: `\nThe prop \`persistant\` for TableToolbarSearch has been deprecated in favor of \`persistent\`. Please use \`persistent\` instead.`,
-  }),
+  persistant: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`persistant\` for TableToolbarSearch has been deprecated in favor of \`persistent\`. Please use \`persistent\` instead.`
+  ),
 };
 
 TableToolbarSearch.defaultProps = {
