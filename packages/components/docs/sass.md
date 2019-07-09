@@ -8870,7 +8870,7 @@ Button styles
     padding: $button-padding-sm;
   }
 
-  &.#{$prefix}--btn--field {
+  .#{$prefix}--btn--field {
     height: 40px;
     min-height: 40px;
     padding: $button-padding-field;
