@@ -1805,6 +1805,7 @@ exports[`DataTable should render 1`] = `
                   id="custom-id"
                   onChange={[Function]}
                   persistant={true}
+                  persistent={false}
                   translateWithId={[Function]}
                 />
                 <TableToolbarMenu
@@ -2227,10 +2228,11 @@ exports[`DataTable should render 1`] = `
                 id="custom-id"
                 onChange={[Function]}
                 persistant={true}
+                persistent={false}
                 translateWithId={[Function]}
               >
                 <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistant"
+                  className="bx--toolbar-action bx--toolbar-search-container-expandable"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -2243,6 +2245,7 @@ exports[`DataTable should render 1`] = `
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
+                    persistant={true}
                     placeHolderText="Search"
                     small={true}
                     type="text"
@@ -2302,6 +2305,7 @@ exports[`DataTable should render 1`] = `
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
+                        persistant={true}
                         placeholder="Search"
                         type="text"
                         value=""
