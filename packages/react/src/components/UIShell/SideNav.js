@@ -30,6 +30,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isFixedNav,
     isRail,
     isPersistent,
+    onClickSideNavExpand,
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -38,6 +39,10 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
+    } else {
+      if (onClickSideNavExpand) {
+        onClickSideNavExpand();
+      }
     }
     if (onToggle) {
       onToggle(event, value);
