@@ -6,6 +6,7 @@
 'use strict';
 
 const path = require('path');
+const { promisify } = require('util');
 const sass = require('node-sass');
 const glob = require('glob');
 
@@ -18,23 +19,24 @@ const files = glob.sync('**/*.scss', {
   ignore: ['**/vendor/@carbon/**'],
 });
 
+const render = promisify(sass.render);
+
 describe('styles', () => {
-  it.each(files)('%s should compile', (relativeFilePath, done) => {
+  it.each(files)('%s should compile', async relativeFilePath => {
     const filepath = path.join(cwd, relativeFilePath);
-    sass.render(
-      {
-        file: filepath,
-        ...defaultOptions,
-      },
-      (error, result) => {
-        if (error) {
-          const { column, line, message } = error;
-          done.fail(`${filepath}\n[${line}:${column}] ${message}`);
-          return;
-        }
-        expect(result.css).toBeDefined();
-        done();
+    try {
+      expect(
+        (await render({
+          file: filepath,
+          ...defaultOptions,
+        })).css
+      ).toBeDefined();
+    } catch (error) {
+      const { column, line, message } = error;
+      if (message) {
+        throw new Error(`${filepath}\n[${line}:${column}] ${message}`);
       }
-    );
+      throw error;
+    }
   });
 });
