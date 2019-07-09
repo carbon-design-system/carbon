@@ -10,12 +10,9 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonTypes } from '../../prop-types/types';
-import warning from 'warning';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
-
-let didWarnAboutDeprecation = false;
-
 const Button = React.forwardRef(function Button(
   {
     children,
@@ -46,16 +43,6 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--tertiary`]: kind === 'tertiary',
     [`${prefix}--btn--disabled`]: disabled,
   });
-
-  if (__DEV__) {
-    if (small && !didWarnAboutDeprecation) {
-      warning(
-        false,
-        `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="small"\` instead.`
-      );
-      didWarnAboutDeprecation = true;
-    }
-  }
 
   const commonProps = {
     tabIndex,
@@ -134,7 +121,10 @@ Button.propTypes = {
    * Deprecated in v10 in favor of `size`.
    * Specify whether the Button should be a small variant
    */
-  small: PropTypes.bool,
+  small: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="small"\` instead.`
+  ),
 
   /**
    * Specify the kind of Button you want to create
