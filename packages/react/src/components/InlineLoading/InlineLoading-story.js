@@ -56,6 +56,7 @@ storiesOf('InlineLoading', module)
         state = {
           submitting: false,
           success: false,
+          description: 'Submitting...',
         };
 
         handleSubmit() {
@@ -63,7 +64,11 @@ storiesOf('InlineLoading', module)
 
           // Instead of making a real request, we mock it with a timer
           setTimeout(() => {
-            this.setState({ submitting: false, success: true });
+            this.setState({
+              submitting: false,
+              success: true,
+              description: 'Submitted!',
+            });
 
             // To make submittable again, we reset the state after a bit so the user gets completion feedback
             setTimeout(() => this.setState({ success: false }), 1500);
@@ -72,21 +77,21 @@ storiesOf('InlineLoading', module)
 
         render() {
           const { children } = this.props;
-          const { submitting, success } = this.state;
-
+          const { submitting, success, description } = this.state;
           const handleSubmit = this.handleSubmit.bind(this);
 
           return children({
             handleSubmit,
             submitting,
             success,
+            description,
           });
         }
       }
 
       return (
         <MockSubmission>
-          {({ handleSubmit, submitting, success }) => (
+          {({ handleSubmit, submitting, success, description }) => (
             <div style={{ display: 'flex', width: '300px' }}>
               <Button kind="secondary" disabled={submitting || success}>
                 Cancel
@@ -94,7 +99,7 @@ storiesOf('InlineLoading', module)
               {submitting || success ? (
                 <InlineLoading
                   style={{ marginLeft: '1rem' }}
-                  description="Submitting..."
+                  description={description}
                   success={success}
                 />
               ) : (
