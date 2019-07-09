@@ -20,6 +20,23 @@ import Button from '../Button';
 
 const { prefix } = settings;
 
+export const NotificationActionButton = ({ actions }) => {
+  const actionButtonClasses = classNames(
+    actions.primary.className,
+    `${prefix}--inline-notification__action-button`
+  );
+
+  return (
+    <Button
+      className={actionButtonClasses}
+      kind="ghost"
+      onClick={actions.primary.onClick}
+      size="small">
+      {actions.primary.label}
+    </Button>
+  );
+};
+
 export class NotificationButton extends Component {
   static propTypes = {
     /**
@@ -356,7 +373,7 @@ export class ToastNotification extends Component {
 export class InlineNotification extends Component {
   static propTypes = {
     /**
-     * Actions.
+     * Object of information for an action button within the InlineNotification..
      */
     actions: PropTypes.node,
 
@@ -480,17 +497,11 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
-        {actions.primary && actions.primary.onClick && actions.primary.label && (
-          <Button
-            className={classNames(
-              actions.primary.className,
-              `${prefix}--inline-notification__action-button`
-            )}
-            kind="ghost"
-            onClick={actions.primary.onClick}>
-            {actions.primary.label}
-          </Button>
-        )}
+        {actions.primary &&
+          actions.primary.onClick &&
+          actions.primary.label && (
+            <NotificationActionButton actions={actions} />
+          )}
         {!hideCloseButton && (
           <NotificationButton
             iconDescription={iconDescription}

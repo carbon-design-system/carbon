@@ -29,10 +29,6 @@
   &:active {
     color: $link-01;
   }
-
-  &:focus {
-    @include focus-outline('outline');
-  }
 }
 
 //----------------------------------------------
