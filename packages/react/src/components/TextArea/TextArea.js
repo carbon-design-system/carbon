@@ -13,7 +13,7 @@ import { WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
-const TextArea = React.forwardRef(function  TextArea(
+const TextArea = React.forwardRef(function TextArea(
     {
       className,
       id,
@@ -104,6 +104,7 @@ const TextArea = React.forwardRef(function  TextArea(
   );
 });
 
+TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
