@@ -58,7 +58,7 @@ const TableToolbarSearch = ({
     [`${prefix}--toolbar-search-container-expandable`]:
       !persistent || !rest.persistant,
     [`${prefix}--toolbar-search-container-persistent`]:
-      persistent || rest.persistent,
+      persistent || rest.persistant,
   });
 
   const searchClasses = cx({
