@@ -69,6 +69,7 @@ export default class InlineLoading extends React.Component {
       if (success) {
         setTimeout(() => {
           if (onSuccess) {
+            other.active = 'assertive';
             onSuccess();
           }
         }, successDelay);
