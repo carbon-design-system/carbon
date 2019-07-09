@@ -17,7 +17,7 @@ module.exports = {
   version: TARGET_VERSION,
   from: [
     {
-      version: '>=10.x',
+      version: '>=10.0.0 <=10.3.0',
       async migrate(options) {
         const transformFile = require.resolve('./update-icon-import-path');
         const answers = await prompt([
