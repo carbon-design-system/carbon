@@ -152,11 +152,11 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-02;
+    color: $disabled-03;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-02;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -190,7 +190,7 @@ $list-box-menu-width: rem(300px);
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $field-02;
+    background-color: $ui-background;
     border-width: 0;
 
     &:hover {
