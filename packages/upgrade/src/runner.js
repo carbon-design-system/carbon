@@ -104,13 +104,14 @@ async function runInDirectory(options) {
   const questions = packageDependencies.map(dependency => {
     const { name, version } = dependency;
     const supportedVersions = supportedPackages.get(name);
+
     return {
       name,
       type: 'list',
       message: `Choose which version you would like to migrate to for ${name}`,
       choices: [...supportedVersions]
         .filter(supportedVersion => {
-          return semver.satisfies(supportedVersion.version, version);
+          return semver.gt(supportedVersion.version, version);
         })
         .map(supportedVersion => ({
           name: supportedVersion.version,

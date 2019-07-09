@@ -1,24 +1,36 @@
-# carbon-upgrade
+# @carbon/upgrade
 
-> \[Experimental] A tool for upgrading Carbon versions
+> A tool for upgrading Carbon versions
 
 ## Getting started
 
-To install `carbon-upgrade` in your project, you will need to run the following
+To install `@carbon/upgrade` in your project, you will need to run the following
 command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S carbon-upgrade
+npm install -S @carbon/upgrade
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add carbon-upgrade
+yarn add @carbon/upgrade
 ```
 
 ## Usage
+
+You can install `@carbon/upgrade` in your project, or use a tool like
+[`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)
+by running the following command in your project:
+
+```
+# Runs the command in "dry" mode, which means no files are altered.
+# To update the files, re-run the command without the `-d` flag.
+npx @carbon/upgrade -d
+```
+
+Below is a full output of the options and commands available:
 
 ```bash
 Usage: carbon-upgrade [options]
