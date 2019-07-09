@@ -31,22 +31,14 @@ const props = () => ({
 
 storiesOf('InlineLoading', module)
   .addDecorator(withKnobs)
-  .add(
-    'Inline loading',
-    () => (
-      <div>
-        <InlineLoading {...props()} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
+  .add('Inline loading', () => <InlineLoading {...props()} />, {
+    info: {
+      text: `
             Inline Loading spinners are used when creating, updating, or deleting an item.
             They help notify users that their change is underway, with different states for 'loading' and 'success'.
           `,
-      },
-    }
-  )
+    },
+  })
   .add(
     'UX example',
     () => {
@@ -54,8 +46,10 @@ storiesOf('InlineLoading', module)
         const [isSubmitting, setIsSubmitting] = useState(false);
         const [success, setSuccess] = useState(false);
         const [description, setDescription] = useState('Submitting...');
+        const [ariaLive, setAriaLive] = useState('off');
         const handleSubmit = () => {
           setIsSubmitting(true);
+          setAriaLive('assertive');
 
           // Instead of making a real request, we mock it with a timer
           setTimeout(() => {
@@ -67,6 +61,7 @@ storiesOf('InlineLoading', module)
             setTimeout(() => {
               setSuccess(false);
               setDescription('Submitting...');
+              setAriaLive('off');
             }, 1500);
           }, 2000);
         };
@@ -76,11 +71,12 @@ storiesOf('InlineLoading', module)
           isSubmitting,
           success,
           description,
+          ariaLive,
         });
       }
       return (
         <MockSubmission>
-          {({ handleSubmit, isSubmitting, success, description }) => (
+          {({ handleSubmit, isSubmitting, success, description, ariaLive }) => (
             <div style={{ display: 'flex', width: '300px' }}>
               <Button kind="secondary" disabled={isSubmitting || success}>
                 Cancel
@@ -90,6 +86,7 @@ storiesOf('InlineLoading', module)
                   style={{ marginLeft: '1rem' }}
                   description={description}
                   success={success}
+                  aria-live={ariaLive}
                 />
               ) : (
                 <Button onClick={handleSubmit}>Submit</Button>

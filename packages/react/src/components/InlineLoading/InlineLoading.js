@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import Loading from '../Loading';
@@ -27,7 +27,6 @@ export default function InlineLoading({
     if (success) {
       setTimeout(() => {
         if (onSuccess) {
-          other.active = 'assertive';
           onSuccess();
         }
       }, successDelay);
@@ -43,13 +42,23 @@ export default function InlineLoading({
         </svg>
       );
     }
-    return <Loading small description={iconDescription} withOverlay={false} />;
+    return (
+      <Loading
+        small
+        description={description || iconDescription}
+        withOverlay={false}
+        active
+      />
+    );
   };
   const loadingText = (
     <p className={`${prefix}--inline-loading__text`}>{description}</p>
   );
   return (
-    <div className={loadingClasses} {...other}>
+    <div
+      className={loadingClasses}
+      {...other}
+      aria-live={'assertive' || other['aria-live']}>
       <div className={`${prefix}--inline-loading__animation`}>
         {getLoading()}
       </div>
