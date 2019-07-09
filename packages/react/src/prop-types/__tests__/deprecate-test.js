@@ -16,15 +16,14 @@ describe('deprecate', () => {
     jest.mock('warning');
     warning = require('warning');
     deprecate = require('../deprecate').default;
-
-    mockPropType = jest.fn();
+    mockPropType = { propType: jest.fn() };
     mockArgs = [{ propName: true }, 'propName', 'ComponentName'];
   });
 
   it('should call warning and prop type checker if the prop type is called', () => {
     deprecate(mockPropType)(...mockArgs);
     expect(warning).toHaveBeenCalledTimes(1);
-    expect(mockPropType).toHaveBeenCalledTimes(1);
+    expect(mockPropType.propType).toHaveBeenCalledTimes(1);
   });
 
   it('should not call warning more than once for a component and prop name', () => {
@@ -33,11 +32,11 @@ describe('deprecate', () => {
     const checker = deprecate(mockPropType);
     checker(...mockArgs);
     expect(warning).toHaveBeenCalledTimes(1);
-    expect(mockPropType).toHaveBeenCalledTimes(1);
+    expect(mockPropType.propType).toHaveBeenCalledTimes(1);
 
     checker(...mockArgs);
     expect(warning).toHaveBeenCalledTimes(1);
-    expect(mockPropType).toHaveBeenCalledTimes(2);
+    expect(mockPropType.propType).toHaveBeenCalledTimes(2);
 
     // Update to a new set of mock args to show that warning should be called
     // again, but only once for this other variant
@@ -49,10 +48,10 @@ describe('deprecate', () => {
 
     checker(...otherMockArgs);
     expect(warning).toHaveBeenCalledTimes(2);
-    expect(mockPropType).toHaveBeenCalledTimes(3);
+    expect(mockPropType.propType).toHaveBeenCalledTimes(3);
 
     checker(...otherMockArgs);
     expect(warning).toHaveBeenCalledTimes(2);
-    expect(mockPropType).toHaveBeenCalledTimes(4);
+    expect(mockPropType.propType).toHaveBeenCalledTimes(4);
   });
 });
