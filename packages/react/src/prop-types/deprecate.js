@@ -9,7 +9,7 @@ import warning from 'warning';
 
 const didWarnAboutDeprecation = {};
 
-export default function deprecate(propType) {
+export default function deprecate(propType, message) {
   function checker(props, propName, componentName, ...rest) {
     if (props[propName] === undefined) {
       return;
@@ -26,9 +26,10 @@ export default function deprecate(propType) {
 
       warning(
         false,
-        `The prop \`${propName}\` has been deprecated for the ` +
-          `${componentName} component. It will be removed in the next major ` +
-          `release`
+        message ||
+          `The prop \`${propName}\` has been deprecated for the ` +
+            `${componentName} component. It will be removed in the next major ` +
+            `release`
       );
     }
 
