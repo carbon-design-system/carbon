@@ -13,19 +13,22 @@ import { WarningFilled16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
-const TextArea = ({
-  className,
-  id,
-  labelText,
-  hideLabel,
-  onChange,
-  onClick,
-  invalid,
-  invalidText,
-  helperText,
-  light,
-  ...other
-}) => {
+const TextArea = React.forwardRef(function TextArea(
+    {
+      className,
+      id,
+      labelText,
+      hideLabel,
+      onChange,
+      onClick,
+      invalid,
+      invalidText,
+      helperText,
+      light,
+      ...other
+    },
+    ref
+)  {
   const textareaProps = {
     id,
     onChange: evt => {
@@ -38,6 +41,7 @@ const TextArea = ({
         onClick(evt);
       }
     },
+    ref,
   };
 
   const labelClasses = classNames(`${prefix}--label`, {
@@ -98,8 +102,9 @@ const TextArea = ({
       {error}
     </div>
   );
-};
+});
 
+TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
