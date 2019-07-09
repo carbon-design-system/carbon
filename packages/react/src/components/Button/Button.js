@@ -27,6 +27,9 @@ const Button = React.forwardRef(function Button(
     type,
     renderIcon: ButtonImageElement,
     iconDescription,
+    hasIconOnly,
+    tooltipPosition,
+    tooltipAlignment,
     ...other
   },
   ref
@@ -42,6 +45,12 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--danger--primary`]: kind === 'danger--primary',
     [`${prefix}--btn--tertiary`]: kind === 'tertiary',
     [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--btn--icon-only`]: hasIconOnly,
+    [`${prefix}--tooltip__trigger`]: hasIconOnly,
+    [`${prefix}--tooltip--a11y`]: hasIconOnly,
+    [`${prefix}--tooltip--${tooltipPosition}`]: hasIconOnly && tooltipPosition,
+    [`${prefix}--tooltip--align-${tooltipPosition}`]:
+      hasIconOnly && tooltipAlignment,
   });
 
   const commonProps = {
@@ -67,6 +76,9 @@ const Button = React.forwardRef(function Button(
     role: 'button',
     href,
   };
+  const assistiveText = hasIconOnly ? (
+    <span className={`${prefix}--assistive-text`}>{iconDescription}</span>
+  ) : null;
   if (as) {
     component = as;
     otherProps = {
@@ -84,6 +96,7 @@ const Button = React.forwardRef(function Button(
       ...commonProps,
       ...otherProps,
     },
+    assistiveText,
     children,
     buttonImage
   );
@@ -169,6 +182,23 @@ Button.propTypes = {
     }
     return undefined;
   },
+
+  /**
+   * Specify if the button is an icon-only button
+   */
+  hasIconOnly: PropTypes.bool,
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 };
 
 Button.defaultProps = {
