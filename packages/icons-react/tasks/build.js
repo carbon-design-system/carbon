@@ -10,7 +10,7 @@
 'use strict';
 
 const meta = require('@carbon/icons/build-info.json');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
@@ -103,6 +103,38 @@ export { Icon };
       }
 
       return bundle.write(outputOptions);
+    })
+  );
+
+  // Create aliases for `@carbon/icons-react/<bundle-type>/<icon-name>/<size>`
+  await Promise.all(
+    meta.map(async info => {
+      const { moduleName, outputOptions } = info;
+      const pathToEntrypoint = Array.from({
+        // The length of this is determined by the number of directories from
+        // our `outputOptions` minus 1 for the bundle type (`es` for example)
+        // and minus 1 for the filename as it does not count as a directory jump
+        length: outputOptions.file.split('/').length - 2,
+      })
+        .fill('..')
+        .join('/');
+
+      await fs.ensureFile(outputOptions.file);
+      await fs.writeFile(
+        outputOptions.file,
+        `import { ${moduleName} } from '${pathToEntrypoint}';
+export default ${moduleName};
+`
+      );
+
+      const commonjsFilepath = outputOptions.file.replace(/es\//, 'lib/');
+      await fs.ensureFile(commonjsFilepath);
+      await fs.writeFile(
+        commonjsFilepath,
+        `const { ${moduleName} = require('${pathToEntrypoint}');
+module.exports = ${moduleName};
+`
+      );
     })
   );
 }
