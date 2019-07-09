@@ -149,14 +149,14 @@ const TextArea = React.forwardRef(function TextArea(
       disabled={other.disabled}
       value={isControlled ? other.value : textareaVal}
       onInput={e => setInput(e.target.value)}
-      readOnly={readOnly || null}
+      readOnly={readOnly}
     />
   );
 
   const input =
-    readOnly && (other.value || other.defaultValue || textareaVal) ? (
+    readOnly && (other.value || defaultValue || textareaVal) ? (
       <Tooltip showIcon={false} triggerText={inputField}>
-        {other.value || other.defaultValue || textareaVal}
+        {other.value || defaultValue || textareaVal}
       </Tooltip>
     ) : (
       inputField
