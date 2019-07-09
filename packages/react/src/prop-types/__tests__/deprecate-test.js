@@ -16,7 +16,6 @@ describe('deprecate', () => {
     jest.mock('warning');
     warning = require('warning');
     deprecate = require('../deprecate').default;
-
     mockPropType = jest.fn();
     mockArgs = [{ propName: true }, 'propName', 'ComponentName'];
   });
