@@ -4359,7 +4359,6 @@ $ui-02: map-get($carbon--theme, 'ui-02');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -8871,7 +8870,7 @@ Button styles
     padding: $button-padding-sm;
   }
 
-  &.#{$prefix}--btn--field {
+  .#{$prefix}--btn--field {
     height: 40px;
     min-height: 40px;
     padding: $button-padding-field;
@@ -9115,8 +9114,8 @@ Checkbox styles
     width: rem(7px);
     height: rem(3px);
     background: none;
-    border-left: 2px solid $ui-02;
-    border-bottom: 2px solid $ui-02;
+    border-left: 2px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right;
     margin-top: rem(-3px);
@@ -9210,9 +9209,8 @@ Checkbox styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [ui-02 [variable]](#ui-02-variable)
-  - [text-01 [variable]](#text-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -18664,6 +18662,17 @@ Tooltip styles
   /* begin legacy definition tooltip TODO: deprecate */
   @include tooltip--definition--legacy;
   /* end legacy definition tooltip */
+
+  .#{$prefix}--tooltip--definition.#{$prefix}--tooltip--a11y {
+    // Wrapping element set to inline since the tooltip isn't contained within the trigger (affects center and end alignments)
+    // Also allows for Definition Tooltip to be used within a paragraph of text as defined in the usage guidelines
+    display: inline-flex;
+  }
+
+  // default buttons in Safari are adding a small margin, affecting tooltip placement
+  .#{$prefix}--tooltip--definition button.#{$prefix}--tooltip--a11y {
+    margin: 0;
+  }
 
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
