@@ -53,7 +53,7 @@ AccordionSkeleton.propTypes = {
   /**
    * Set unique identifier to generate unique item keys
    */
-  uid: deprecate(PropTypes.any),
+  uid: deprecate({ propType: PropTypes.any }),
 };
 
 AccordionSkeleton.defaultProps = {
