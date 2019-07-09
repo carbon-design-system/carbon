@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import TabContent from '../TabContent';
+import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -109,14 +110,8 @@ export default class Tab extends React.Component {
   };
 
   setTabFocus(evt) {
-    const leftKey = 37;
-    const rightKey = 39;
-    if (evt.which === leftKey) {
-      this.props.handleTabAnchorFocus(this.props.index - 1);
-    } else if (evt.which === rightKey) {
-      this.props.handleTabAnchorFocus(this.props.index + 1);
-    } else {
-      return;
+    if (matches(evt, [keys.ArrowLeft, keys.ArrowRight, keys.End, keys.Home])) {
+      this.props.handleTabAnchorFocus(evt, { index: this.props.index });
     }
   }
 
