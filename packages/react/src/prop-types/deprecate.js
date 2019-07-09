@@ -7,7 +7,7 @@
 
 import warning from 'warning';
 
-let didWarnAboutDeprecation = false;
+const didWarnAboutDeprecation = {};
 
 export default function deprecate(propType) {
   function checker(props, propName, componentName, ...rest) {
@@ -15,8 +15,15 @@ export default function deprecate(propType) {
       return;
     }
 
-    if (!didWarnAboutDeprecation) {
-      didWarnAboutDeprecation = true;
+    if (
+      !didWarnAboutDeprecation[componentName] ||
+      !didWarnAboutDeprecation[componentName][propName]
+    ) {
+      didWarnAboutDeprecation[componentName] = {
+        ...didWarnAboutDeprecation[componentName],
+        [propName]: true,
+      };
+
       warning(
         false,
         `The prop \`${propName}\` has been deprecated for the ` +
