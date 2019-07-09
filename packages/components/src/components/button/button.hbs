@@ -29,8 +29,8 @@
 </button>
 {{#if hasIconOnly}}
 <button
-  class="{{@root.prefix}}--btn {{@root.prefix}}--btn--{{variant}} {{@root.prefix}}--btn--icon-only {{@root.prefix}}--btn--icon-only--bottom {{#if small}} {{@root.prefix}}--btn--sm{{/if}}{{#if field}} {{@root.prefix}}--btn--field{{/if}}"
-  aria-label="Add">
+  class="{{@root.prefix}}--btn {{@root.prefix}}--btn--{{variant}} {{@root.prefix}}--btn--icon-only {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center {{#if small}} {{@root.prefix}}--btn--sm{{/if}}{{#if field}} {{@root.prefix}}--btn--field{{/if}}">
+  <span class="{{@root.prefix}}--assistive-text">Add</span>
   {{ carbon-icon 'Add16' class=(add @root.prefix '--btn__icon') }}
 </button>
 {{/if}}
