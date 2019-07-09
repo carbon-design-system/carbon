@@ -34,9 +34,14 @@
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
-    &:focus:not([readonly]),
-    &:active:not([readonly]) {
+    &:focus,
+    &:active {
       @include focus-outline('outline');
+    }
+
+    &[readonly]:focus,
+    &[readonly]:active {
+      @include focus-outline('reset');
     }
 
     &-wrapper svg[hidden] {
