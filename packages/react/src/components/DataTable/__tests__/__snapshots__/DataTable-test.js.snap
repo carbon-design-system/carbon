@@ -2232,7 +2232,7 @@ exports[`DataTable should render 1`] = `
                 translateWithId={[Function]}
               >
                 <div
-                  className="bx--toolbar-action bx--toolbar-search-container-expandable"
+                  className="bx--toolbar-action bx--toolbar-search-container-expandable bx--toolbar-search-container-persistent"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
