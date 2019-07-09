@@ -31,7 +31,6 @@
   .#{$prefix}--file--label {
     @include reset;
     @include type-style('heading-01');
-
     color: $text-01;
     margin-bottom: $carbon--spacing-03;
   }
@@ -56,6 +55,12 @@
     outline: none;
     transition: $duration--fast-01 motion(standard, productive);
     cursor: pointer;
+
+    &:focus,
+    &:hover {
+      outline: 2px solid $interactive-03;
+      outline-offset: -2px;
+    }
   }
 
   .#{$prefix}--file-browse-btn:hover,
