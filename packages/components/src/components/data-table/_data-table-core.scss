@@ -98,7 +98,7 @@
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table th:first-of-type {
+  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand th) {
     padding-left: $spacing-05;
   }
 
