@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-
 import Button from '../Button';
 import InlineLoading from '../InlineLoading';
 
@@ -52,51 +50,39 @@ storiesOf('InlineLoading', module)
   .add(
     'UX example',
     () => {
-      class MockSubmission extends PureComponent {
-        state = {
-          submitting: false,
-          success: false,
-          description: 'Submitting...',
-        };
-
-        handleSubmit() {
-          this.setState({ submitting: true });
+      function MockSubmission({ children }) {
+        const [isSubmitting, setIsSubmitting] = useState(false);
+        const [success, setSuccess] = useState(false);
+        const [description, setDescription] = useState('Submitting...');
+        const handleSubmit = () => {
+          setIsSubmitting(true);
 
           // Instead of making a real request, we mock it with a timer
           setTimeout(() => {
-            this.setState({
-              submitting: false,
-              success: true,
-              description: 'Submitted!',
-            });
+            setIsSubmitting(false);
+            setSuccess(true);
+            setDescription('Submitted!');
 
             // To make submittable again, we reset the state after a bit so the user gets completion feedback
-            setTimeout(() => this.setState({ success: false }), 1500);
+            setTimeout(() => setSuccess(false), 1500);
           }, 2000);
-        }
+        };
 
-        render() {
-          const { children } = this.props;
-          const { submitting, success, description } = this.state;
-          const handleSubmit = this.handleSubmit.bind(this);
-
-          return children({
-            handleSubmit,
-            submitting,
-            success,
-            description,
-          });
-        }
+        return children({
+          handleSubmit,
+          isSubmitting,
+          success,
+          description,
+        });
       }
-
       return (
         <MockSubmission>
-          {({ handleSubmit, submitting, success, description }) => (
+          {({ handleSubmit, isSubmitting, success, description }) => (
             <div style={{ display: 'flex', width: '300px' }}>
-              <Button kind="secondary" disabled={submitting || success}>
+              <Button kind="secondary" disabled={isSubmitting || success}>
                 Cancel
               </Button>
-              {submitting || success ? (
+              {isSubmitting || success ? (
                 <InlineLoading
                   style={{ marginLeft: '1rem' }}
                   description={description}
