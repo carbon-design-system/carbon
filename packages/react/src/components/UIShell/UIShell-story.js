@@ -685,7 +685,6 @@ storiesOf('UI Shell', module)
               <SideNav
                 aria-label="Side navigation"
                 expanded={isSideNavExpanded}
-                onClickSideNavExpand={onClickSideNavExpand}
                 isRail>
                 <SideNavItems>
                   <SideNavMenu renderIcon={Fade16} title="Category title">
