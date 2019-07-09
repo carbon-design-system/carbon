@@ -11,19 +11,17 @@ import React, { useRef, useState, useEffect } from 'react';
 import { settings } from 'carbon-components';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
-
 const getInstanceId = setupGetInstanceId();
 const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Search',
 };
-
 const translateWithId = id => {
   return translationKeys[id];
 };
-
 const TableToolbarSearch = ({
   className,
   searchContainerClass,
@@ -35,13 +33,13 @@ const TableToolbarSearch = ({
   defaultExpanded,
   onExpand,
   persistent,
+  persistant,
   id = `data-table-search-${getInstanceId()}`,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
   const searchRef = useRef(null);
   const [value, setValue] = useState('');
 
@@ -56,9 +54,9 @@ const TableToolbarSearch = ({
     [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-expandable`]:
-      !persistent || !rest.persistant,
+      !persistent || !persistant,
     [`${prefix}--toolbar-search-container-persistent`]:
-      persistent || rest.persistant,
+      persistent || persistant,
   });
 
   const searchClasses = cx({
@@ -67,7 +65,7 @@ const TableToolbarSearch = ({
   });
 
   const handleExpand = (event, value = !expanded) => {
-    if (!controlled && (!persistent || !rest.persistant)) {
+    if (!controlled && (!persistent || !persistant)) {
       setExpandedState(value);
     }
     if (onExpand) {
@@ -150,6 +148,10 @@ TableToolbarSearch.propTypes = {
    * Whether the search should be allowed to expand
    */
   persistent: PropTypes.bool,
+  persistant: deprecate({
+    propType: PropTypes.bool,
+    message: `\nThe prop \`persistant\` for TableToolbarSearch has been deprecated in favor of \`persistent\`. Please use \`persistent\` instead.`,
+  }),
 };
 
 TableToolbarSearch.defaultProps = {
