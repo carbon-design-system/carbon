@@ -161,9 +161,9 @@
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
     width: 2.5rem;
     min-width: 2.5rem;
+    height: 3rem;
     vertical-align: top;
-    padding-top: rem(7px);
-    padding-bottom: 0;
+    padding: 0;
   }
 
   .#{$prefix}--table-expand[data-previous-value='collapsed']
@@ -177,8 +177,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: $layout-03;
-    width: $layout-01;
+    height: 100%;
+    width: 100%;
   }
 
   .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
