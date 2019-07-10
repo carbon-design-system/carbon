@@ -137,6 +137,10 @@
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: transparent;
     border: none;
     cursor: pointer;
