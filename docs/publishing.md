@@ -18,13 +18,16 @@
 
 ## Prerelease
 
-Often, are prereleases are when we switch between minor versions of the system. To do this, we'll need to follow the following steps:
+Often, our prereleases are when we switch between minor versions of the system.
+To do this, we'll need to follow the following steps:
 
 - Make sure you're on the `master` branch for your fork of Carbon
 - Pull the latest changes from master with `git pull upstream master`
-- Create a new branch following the format: `chore(release): vA.B.C-preid.D`, for example `chore(release): v10.4.0-rc.0`
+- Create a new branch following the format: `chore(release): vA.B.C-preid.D`,
+  for example `chore(release): v10.4.0-rc.0`
   - A `preid` can be one of `alpha`, `beta`, or `rc` (Release Candidate)
-- Next, run the `lerna version` command to correctly version changed packages. You can do this by running:
+- Next, run the `lerna version` command to correctly version changed packages.
+  You can do this by running:
 
 ```bash
 yarn lerna version preminor \
@@ -36,22 +39,26 @@ yarn lerna version preminor \
 ```
 
 - Now, you can commit the changes and create a Pull Request for the branch
-- After the Pull Request is merged, checkout `master` and pull the latest changes
+- After the Pull Request is merged, checkout `master` and pull the latest
+  changes
 - Make sure everything in your local fork is up-to-date by running:
   - `yarn clean && yarn install --offline && yarn build`
-- Use the `lerna publish` command with the `from-package` option to publish packages that have changed. You can do this by running:
+- Use the `lerna publish` command with the `from-package` option to publish
+  packages that have changed. You can do this by running:
 
 ```bash
 yarn lerna publish from-package --dist-tag next
 ```
 
-- Once the packages are published, create a `git tag` for the release by running:
+- Once the packages are published, create a `git tag` for the release by
+  running:
 
 ```bash
 git tag -a v10.4.0-rc.0 # Supply the version in the tag commit body
 ```
 
-- You can then push this tag upstream by running `git push upstream v10.4.0-rc.0`
+- You can then push this tag upstream by running
+  `git push upstream v10.4.0-rc.0`
 - After that, you're done! <span aria-label="Celebrate">🎉</span>
 
 ## Publishing older library versions
