@@ -17,6 +17,8 @@ exports[`SideNav should render 1`] = `
     className="bx--side-nav__navigation bx--side-nav bx--side-nav--ux"
     onBlur={[Function]}
     onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <h2>
       Navigation

@@ -14,21 +14,21 @@ import { WarningFilled16 } from '@carbon/icons-react';
 const { prefix } = settings;
 
 const TextArea = React.forwardRef(function TextArea(
-    {
-      className,
-      id,
-      labelText,
-      hideLabel,
-      onChange,
-      onClick,
-      invalid,
-      invalidText,
-      helperText,
-      light,
-      ...other
-    },
-    ref
-)  {
+  {
+    className,
+    id,
+    labelText,
+    hideLabel,
+    onChange,
+    onClick,
+    invalid,
+    invalidText,
+    helperText,
+    light,
+    ...other
+  },
+  ref
+) {
   const textareaProps = {
     id,
     onChange: evt => {
