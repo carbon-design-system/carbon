@@ -28,6 +28,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     // TO-DO: comment back in when footer is added for rails
     // translateById: t,
     isFixedNav,
+    isRail,
     isPersistent,
   } = props;
 
@@ -57,6 +58,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
+    [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
     [`${prefix}--side-nav--hidden`]: !isPersistent,
@@ -75,7 +77,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
         onFocus={event => handleToggle(event, true)}
-        onBlur={event => handleToggle(event, false)}>
+        onBlur={event => handleToggle(event, false)}
+        onMouseEnter={() => handleToggle(true)}
+        onMouseLeave={() => handleToggle(false)}>
         {children}
       </nav>
     </>
@@ -139,6 +143,11 @@ SideNav.propTypes = {
    * Optionally provide a custom class to apply to the underlying <li> node
    */
   isChildOfHeader: PropTypes.bool,
+
+  /**
+   * Optional prop to display the side nav rail.
+   */
+  isRail: PropTypes.bool,
 
   /**
    * Specify if sideNav is standalone
