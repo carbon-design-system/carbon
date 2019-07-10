@@ -82,11 +82,11 @@ const TextArea = React.forwardRef(function TextArea(
   });
 
   const label = (() => {
-    const labelContent = labelText ? (
+    const labelContent = labelText && (
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
-    ) : null;
+    );
     if (labelContent && useCharCount) {
       return (
         <div className={`${prefix}--text-area__character-counter-title`}>
