@@ -535,8 +535,8 @@ export default class DataTable extends React.Component {
    * @param {Event} event
    */
   handleOnInputValueChange = event => {
-    if (event.currentTarget) {
-      this.setState({ filterInputValue: event.currentTarget.value });
+    if (event.target) {
+      this.setState({ filterInputValue: event.target.value });
     }
   };
 
