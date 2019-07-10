@@ -9,7 +9,7 @@ import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -26,15 +26,17 @@ function AccordionItem({
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
+  const [prevIsOpen, setPrevIsOpen] = useState(open);
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
     [customClassName]: !!customClassName,
   });
 
-  useEffect(() => {
+  if (open !== prevIsOpen) {
     setIsOpen(open);
-  }, [open]);
+    setPrevIsOpen(open);
+  }
 
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
