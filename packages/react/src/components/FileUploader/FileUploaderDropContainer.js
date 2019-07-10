@@ -22,7 +22,7 @@ export default function FileUploaderDropContainer(props) {
     tabIndex,
     ...other
   } = props;
-  const uid = useRef(uniqueId()).current;
+  const uid = useRef(uniqueId());
   const [isActive, setActive] = useState(false);
   const classes = classNames(`${prefix}--file__drop-container`, {
     [`${prefix}--file__drop-container--drag-over`]: isActive,
@@ -62,7 +62,7 @@ export default function FileUploaderDropContainer(props) {
       }}>
       <label
         className={`${prefix}--file-browse-btn`}
-        htmlFor={id || uid}
+        htmlFor={id || uid.current}
         role={role || 'button'}
         tabIndex={tabIndex || 0}
         onKeyDown={evt => {
@@ -75,7 +75,7 @@ export default function FileUploaderDropContainer(props) {
           {labelText}
           <input
             type="file"
-            id={id || uid}
+            id={id || uid.current}
             className={`${prefix}--file-input`}
             ref={inputRef}
             tabIndex="-1"
@@ -109,7 +109,7 @@ FileUploaderDropContainer.propTypes = {
    * Provide the label text to be read by screen readers when interacting with
    * this control
    */
-  labelText: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
 
   /**
    * Specify if the component should accept multiple files to upload
