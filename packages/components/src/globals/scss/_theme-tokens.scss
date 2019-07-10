@@ -342,10 +342,7 @@
   /// @type Color
   /// @access public
   /// @group skeleton
-  $skeleton: rgba(
-    #3d70b2,
-    0.1
-  ) !default !global; //old $color__blue-51/$field-01 TODO: Define for experimental
+  $skeleton: $skeleton-01 !default !global; // TODO: Remove this in next major release
 }
 
 @include exports('theme') {
