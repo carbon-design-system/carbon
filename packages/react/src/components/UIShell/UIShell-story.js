@@ -24,8 +24,8 @@ import {
   HeaderMenuItem,
   HeaderGlobalBar,
   HeaderGlobalAction,
-  HeaderPanel,
-  HeaderSideNavItems,
+  // HeaderPanel,
+  // HeaderSideNavItems,
   SkipToContent,
   SideNav,
   // Temporarily comment these out until they are needed again
@@ -36,9 +36,9 @@ import {
   SideNavLink,
   SideNavMenu,
   SideNavMenuItem,
-  Switcher,
-  SwitcherItem,
-  SwitcherDivider,
+  // Switcher,
+  // SwitcherItem,
+  // SwitcherDivider,
 } from '../UIShell';
 
 const Fade16 = () => (
@@ -129,515 +129,515 @@ const StoryContent = () => {
 // components and try and piece them together to figure out what are standard
 // usage patterns for each to see what kind of component API we should expose
 storiesOf('UI Shell', module)
-  .add(
-    'Header Base',
-    withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-      </Header>
-    ))
-  )
-  .add(
-    'Header Base w/ Navigation',
-    withReadme(readme, () => (
-      <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <>
-            <Header aria-label="IBM Platform Name">
-              <SkipToContent />
-              <HeaderMenuButton
-                aria-label="Open menu"
-                onClick={onClickSideNavExpand}
-                isActive={isSideNavExpanded}
-              />
-              <HeaderName href="#" prefix="IBM">
-                [Platform]
-              </HeaderName>
-              <HeaderNavigation aria-label="IBM [Platform]">
-                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                </HeaderMenu>
-              </HeaderNavigation>
-              <SideNav
-                aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-                isPersistent={false}>
-                <SideNavItems>
-                  <HeaderSideNavItems>
-                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                    </HeaderMenu>
-                  </HeaderSideNavItems>
-                </SideNavItems>
-              </SideNav>
-            </Header>
-          </>
-        )}
-      />
-    ))
-  )
-  .add(
-    'Header Base w/ Actions',
-    withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            onClick={action('search click')}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Notifications"
-            onClick={action('notification click')}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
-      </Header>
-    ))
-  )
-  .add(
-    'Header Base w/ Navigation and Actions',
-    withReadme(readme, () => (
-      <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <>
-            <Header aria-label="IBM Platform Name">
-              <SkipToContent />
-              <HeaderMenuButton
-                aria-label="Open menu"
-                onClick={onClickSideNavExpand}
-                isActive={isSideNavExpanded}
-              />
-              <HeaderName href="#" prefix="IBM">
-                [Platform]
-              </HeaderName>
-              <HeaderNavigation aria-label="IBM [Platform]">
-                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                </HeaderMenu>
-              </HeaderNavigation>
-              <HeaderGlobalBar>
-                <HeaderGlobalAction
-                  aria-label="Search"
-                  onClick={action('search click')}>
-                  <Search20 />
-                </HeaderGlobalAction>
-                <HeaderGlobalAction
-                  aria-label="Notifications"
-                  onClick={action('notification click')}>
-                  <Notification20 />
-                </HeaderGlobalAction>
-                <HeaderGlobalAction
-                  aria-label="App Switcher"
-                  onClick={action('app-switcher click')}>
-                  <AppSwitcher20 />
-                </HeaderGlobalAction>
-              </HeaderGlobalBar>
-              <SideNav
-                aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-                isPersistent={false}>
-                <SideNavItems>
-                  <HeaderSideNavItems>
-                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                    </HeaderMenu>
-                  </HeaderSideNavItems>
-                </SideNavItems>
-              </SideNav>
-            </Header>
-          </>
-        )}
-      />
-    ))
-  )
-  .add(
-    'Header Base w/ Navigation, Actions and SideNav',
-    withReadme(readme, () => (
-      <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <>
-            <Header aria-label="IBM Platform Name">
-              <SkipToContent />
-              <HeaderMenuButton
-                aria-label="Open menu"
-                onClick={onClickSideNavExpand}
-                isActive={isSideNavExpanded}
-              />
-              <HeaderName href="#" prefix="IBM">
-                [Platform]
-              </HeaderName>
-              <HeaderNavigation aria-label="IBM [Platform]">
-                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                  <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
-                  <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
-                  <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
-                </HeaderMenu>
-              </HeaderNavigation>
-              <HeaderGlobalBar>
-                <HeaderGlobalAction
-                  aria-label="Search"
-                  onClick={action('search click')}>
-                  <Search20 />
-                </HeaderGlobalAction>
-                <HeaderGlobalAction
-                  aria-label="Notifications"
-                  onClick={action('notification click')}>
-                  <Notification20 />
-                </HeaderGlobalAction>
-                <HeaderGlobalAction
-                  aria-label="App Switcher"
-                  onClick={action('app-switcher click')}>
-                  <AppSwitcher20 />
-                </HeaderGlobalAction>
-              </HeaderGlobalBar>
-              <SideNav
-                aria-label="Side navigation"
-                expanded={isSideNavExpanded}>
-                <SideNavItems>
-                  <HeaderSideNavItems hasDivider={true}>
-                    <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                    <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                      <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                      <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                      <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                    </HeaderMenu>
-                  </HeaderSideNavItems>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu
-                    renderIcon={Fade16}
-                    title="Category title"
-                    isActive={true}>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                </SideNavItems>
-              </SideNav>
-            </Header>
-            <StoryContent />
-          </>
-        )}
-      />
-    ))
-  )
-  .add(
-    'Header Base w/ SideNav',
-    withReadme(readme, () => (
-      <HeaderContainer
-        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-          <>
-            <Header aria-label="IBM Platform Name">
-              <SkipToContent />
-              <HeaderMenuButton
-                aria-label="Open menu"
-                onClick={onClickSideNavExpand}
-                isActive={isSideNavExpanded}
-              />
-              <HeaderName href="#" prefix="IBM">
-                [Platform]
-              </HeaderName>
-              <SideNav
-                aria-label="Side navigation"
-                expanded={isSideNavExpanded}>
-                <SideNavItems>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu
-                    renderIcon={Fade16}
-                    title="Category title"
-                    isActive={true}>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem
-                      aria-current="page"
-                      href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavMenu renderIcon={Fade16} title="Category title">
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                    <SideNavMenuItem href="javascript:void(0)">
-                      Link
-                    </SideNavMenuItem>
-                  </SideNavMenu>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                  <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                    Link
-                  </SideNavLink>
-                </SideNavItems>
-              </SideNav>
-            </Header>
-            <StoryContent />
-          </>
-        )}
-      />
-    ))
-  )
-  .add(
-    'Header Base w/ Actions and Right Panel',
-    withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            onClick={action('search click')}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Notifications"
-            isActive
-            onClick={action('notification click')}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
-        <HeaderPanel aria-label="Header Panel" expanded />
-      </Header>
-    ))
-  )
-  .add(
-    'Header Base w/ Actions and Switcher',
-    withReadme(readme, () => (
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Search"
-            onClick={action('search click')}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Notifications"
-            onClick={action('notification click')}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="App Switcher"
-            isActive
-            onClick={action('app-switcher click')}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
-        <HeaderPanel aria-label="Header Panel" expanded>
-          <Switcher role="menu" aria-label="Switcher Container">
-            <SwitcherItem isSelected aria-label="Link 1" href="#">
-              Link 1
-            </SwitcherItem>
-            <SwitcherDivider />
-            <SwitcherItem href="#" aria-label="Link 2">
-              Link 2
-            </SwitcherItem>
-            <SwitcherItem href="#" aria-label="Link 3">
-              Link 3
-            </SwitcherItem>
-            <SwitcherItem href="#" aria-label="Link 4">
-              Link 4
-            </SwitcherItem>
-            <SwitcherItem href="#" aria-label="Link 5">
-              Link 5
-            </SwitcherItem>
-            <SwitcherDivider />
-            <SwitcherItem href="#" aria-label="Link 6">
-              Link 6
-            </SwitcherItem>
-          </Switcher>
-        </HeaderPanel>
-      </Header>
-    ))
-  )
-  .add(
-    'Fixed SideNav',
-    withReadme(readme, () => (
-      <>
-        <SideNav
-          isFixedNav
-          expanded={true}
-          isChildOfHeader={false}
-          aria-label="Side navigation">
-          <SideNavItems>
-            <SideNavMenu title="L0 menu">
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu title="L0 menu" isActive={true}>
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu title="L0 menu">
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">
-                L0 menu item
-              </SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
-            <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
-          </SideNavItems>
-        </SideNav>
-        <StoryContent />
-      </>
-    ))
-  )
-  .add(
-    'Fixed SideNav w/ Icons',
-    withReadme(readme, () => (
-      <>
-        <SideNav
-          isFixedNav
-          expanded={true}
-          isChildOfHeader={false}
-          aria-label="Side navigation">
-          <SideNavItems>
-            <SideNavMenu renderIcon={Fade16} title="Category title">
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu
-              renderIcon={Fade16}
-              title="Category title"
-              isActive={true}>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem aria-current="page" href="javascript:void(0)">
-                Link
-              </SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavMenu renderIcon={Fade16} title="Category title">
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
-            </SideNavMenu>
-            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-              Link
-            </SideNavLink>
-            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-              Link
-            </SideNavLink>
-          </SideNavItems>
-        </SideNav>
-        <StoryContent />
-      </>
-    ))
-  )
+  // .add(
+  //   'Header Base',
+  //   withReadme(readme, () => (
+  //     <Header aria-label="IBM Platform Name">
+  //       <HeaderName href="#" prefix="IBM">
+  //         [Platform]
+  //       </HeaderName>
+  //     </Header>
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ Navigation',
+  //   withReadme(readme, () => (
+  //     <HeaderContainer
+  //       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+  //         <>
+  //           <Header aria-label="IBM Platform Name">
+  //             <SkipToContent />
+  //             <HeaderMenuButton
+  //               aria-label="Open menu"
+  //               onClick={onClickSideNavExpand}
+  //               isActive={isSideNavExpanded}
+  //             />
+  //             <HeaderName href="#" prefix="IBM">
+  //               [Platform]
+  //             </HeaderName>
+  //             <HeaderNavigation aria-label="IBM [Platform]">
+  //               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+  //               <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+  //               <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+  //               <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+  //                 <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+  //                 <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+  //                 <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+  //               </HeaderMenu>
+  //             </HeaderNavigation>
+  //             <SideNav
+  //               aria-label="Side navigation"
+  //               expanded={isSideNavExpanded}
+  //               isPersistent={false}>
+  //               <SideNavItems>
+  //                 <HeaderSideNavItems>
+  //                   <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+  //                   <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+  //                   <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+  //                   <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+  //                     <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+  //                     <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+  //                     <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+  //                   </HeaderMenu>
+  //                 </HeaderSideNavItems>
+  //               </SideNavItems>
+  //             </SideNav>
+  //           </Header>
+  //         </>
+  //       )}
+  //     />
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ Actions',
+  //   withReadme(readme, () => (
+  //     <Header aria-label="IBM Platform Name">
+  //       <HeaderName href="#" prefix="IBM">
+  //         [Platform]
+  //       </HeaderName>
+  //       <HeaderGlobalBar>
+  //         <HeaderGlobalAction
+  //           aria-label="Search"
+  //           onClick={action('search click')}>
+  //           <Search20 />
+  //         </HeaderGlobalAction>
+  //         <HeaderGlobalAction
+  //           aria-label="Notifications"
+  //           onClick={action('notification click')}>
+  //           <Notification20 />
+  //         </HeaderGlobalAction>
+  //         <HeaderGlobalAction
+  //           aria-label="App Switcher"
+  //           onClick={action('app-switcher click')}>
+  //           <AppSwitcher20 />
+  //         </HeaderGlobalAction>
+  //       </HeaderGlobalBar>
+  //     </Header>
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ Navigation and Actions',
+  //   withReadme(readme, () => (
+  //     <HeaderContainer
+  //       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+  //         <>
+  //           <Header aria-label="IBM Platform Name">
+  //             <SkipToContent />
+  //             <HeaderMenuButton
+  //               aria-label="Open menu"
+  //               onClick={onClickSideNavExpand}
+  //               isActive={isSideNavExpanded}
+  //             />
+  //             <HeaderName href="#" prefix="IBM">
+  //               [Platform]
+  //             </HeaderName>
+  //             <HeaderNavigation aria-label="IBM [Platform]">
+  //               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+  //               <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+  //               <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+  //               <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+  //                 <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+  //                 <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+  //                 <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+  //               </HeaderMenu>
+  //             </HeaderNavigation>
+  //             <HeaderGlobalBar>
+  //               <HeaderGlobalAction
+  //                 aria-label="Search"
+  //                 onClick={action('search click')}>
+  //                 <Search20 />
+  //               </HeaderGlobalAction>
+  //               <HeaderGlobalAction
+  //                 aria-label="Notifications"
+  //                 onClick={action('notification click')}>
+  //                 <Notification20 />
+  //               </HeaderGlobalAction>
+  //               <HeaderGlobalAction
+  //                 aria-label="App Switcher"
+  //                 onClick={action('app-switcher click')}>
+  //                 <AppSwitcher20 />
+  //               </HeaderGlobalAction>
+  //             </HeaderGlobalBar>
+  //             <SideNav
+  //               aria-label="Side navigation"
+  //               expanded={isSideNavExpanded}
+  //               isPersistent={false}>
+  //               <SideNavItems>
+  //                 <HeaderSideNavItems>
+  //                   <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+  //                   <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+  //                   <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+  //                   <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+  //                     <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+  //                     <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+  //                     <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+  //                   </HeaderMenu>
+  //                 </HeaderSideNavItems>
+  //               </SideNavItems>
+  //             </SideNav>
+  //           </Header>
+  //         </>
+  //       )}
+  //     />
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ Navigation, Actions and SideNav',
+  //   withReadme(readme, () => (
+  //     <HeaderContainer
+  //       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+  //         <>
+  //           <Header aria-label="IBM Platform Name">
+  //             <SkipToContent />
+  //             <HeaderMenuButton
+  //               aria-label="Open menu"
+  //               onClick={onClickSideNavExpand}
+  //               isActive={isSideNavExpanded}
+  //             />
+  //             <HeaderName href="#" prefix="IBM">
+  //               [Platform]
+  //             </HeaderName>
+  //             <HeaderNavigation aria-label="IBM [Platform]">
+  //               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+  //               <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+  //               <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+  //               <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+  //                 <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
+  //                 <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
+  //                 <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
+  //               </HeaderMenu>
+  //             </HeaderNavigation>
+  //             <HeaderGlobalBar>
+  //               <HeaderGlobalAction
+  //                 aria-label="Search"
+  //                 onClick={action('search click')}>
+  //                 <Search20 />
+  //               </HeaderGlobalAction>
+  //               <HeaderGlobalAction
+  //                 aria-label="Notifications"
+  //                 onClick={action('notification click')}>
+  //                 <Notification20 />
+  //               </HeaderGlobalAction>
+  //               <HeaderGlobalAction
+  //                 aria-label="App Switcher"
+  //                 onClick={action('app-switcher click')}>
+  //                 <AppSwitcher20 />
+  //               </HeaderGlobalAction>
+  //             </HeaderGlobalBar>
+  //             <SideNav
+  //               aria-label="Side navigation"
+  //               expanded={isSideNavExpanded}>
+  //               <SideNavItems>
+  //                 <HeaderSideNavItems hasDivider={true}>
+  //                   <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+  //                   <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+  //                   <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+  //                   <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
+  //                     <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+  //                     <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+  //                     <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+  //                   </HeaderMenu>
+  //                 </HeaderSideNavItems>
+  //                 <SideNavMenu renderIcon={Fade16} title="Category title">
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                 </SideNavMenu>
+  //                 <SideNavMenu renderIcon={Fade16} title="Category title">
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                 </SideNavMenu>
+  //                 <SideNavMenu
+  //                   renderIcon={Fade16}
+  //                   title="Category title"
+  //                   isActive={true}>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem
+  //                     aria-current="page"
+  //                     href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                 </SideNavMenu>
+  //                 <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+  //                   Link
+  //                 </SideNavLink>
+  //                 <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+  //                   Link
+  //                 </SideNavLink>
+  //               </SideNavItems>
+  //             </SideNav>
+  //           </Header>
+  //           <StoryContent />
+  //         </>
+  //       )}
+  //     />
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ SideNav',
+  //   withReadme(readme, () => (
+  //     <HeaderContainer
+  //       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+  //         <>
+  //           <Header aria-label="IBM Platform Name">
+  //             <SkipToContent />
+  //             <HeaderMenuButton
+  //               aria-label="Open menu"
+  //               onClick={onClickSideNavExpand}
+  //               isActive={isSideNavExpanded}
+  //             />
+  //             <HeaderName href="#" prefix="IBM">
+  //               [Platform]
+  //             </HeaderName>
+  //             <SideNav
+  //               aria-label="Side navigation"
+  //               expanded={isSideNavExpanded}>
+  //               <SideNavItems>
+  //                 <SideNavMenu renderIcon={Fade16} title="Category title">
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                 </SideNavMenu>
+  //                 <SideNavMenu
+  //                   renderIcon={Fade16}
+  //                   title="Category title"
+  //                   isActive={true}>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem
+  //                     aria-current="page"
+  //                     href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                 </SideNavMenu>
+  //                 <SideNavMenu renderIcon={Fade16} title="Category title">
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                   <SideNavMenuItem href="javascript:void(0)">
+  //                     Link
+  //                   </SideNavMenuItem>
+  //                 </SideNavMenu>
+  //                 <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+  //                   Link
+  //                 </SideNavLink>
+  //                 <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+  //                   Link
+  //                 </SideNavLink>
+  //               </SideNavItems>
+  //             </SideNav>
+  //           </Header>
+  //           <StoryContent />
+  //         </>
+  //       )}
+  //     />
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ Actions and Right Panel',
+  //   withReadme(readme, () => (
+  //     <Header aria-label="IBM Platform Name">
+  //       <HeaderName href="#" prefix="IBM">
+  //         [Platform]
+  //       </HeaderName>
+  //       <HeaderGlobalBar>
+  //         <HeaderGlobalAction
+  //           aria-label="Search"
+  //           onClick={action('search click')}>
+  //           <Search20 />
+  //         </HeaderGlobalAction>
+  //         <HeaderGlobalAction
+  //           aria-label="Notifications"
+  //           isActive
+  //           onClick={action('notification click')}>
+  //           <Notification20 />
+  //         </HeaderGlobalAction>
+  //         <HeaderGlobalAction
+  //           aria-label="App Switcher"
+  //           onClick={action('app-switcher click')}>
+  //           <AppSwitcher20 />
+  //         </HeaderGlobalAction>
+  //       </HeaderGlobalBar>
+  //       <HeaderPanel aria-label="Header Panel" expanded />
+  //     </Header>
+  //   ))
+  // )
+  // .add(
+  //   'Header Base w/ Actions and Switcher',
+  //   withReadme(readme, () => (
+  //     <Header aria-label="IBM Platform Name">
+  //       <HeaderName href="#" prefix="IBM">
+  //         [Platform]
+  //       </HeaderName>
+  //       <HeaderGlobalBar>
+  //         <HeaderGlobalAction
+  //           aria-label="Search"
+  //           onClick={action('search click')}>
+  //           <Search20 />
+  //         </HeaderGlobalAction>
+  //         <HeaderGlobalAction
+  //           aria-label="Notifications"
+  //           onClick={action('notification click')}>
+  //           <Notification20 />
+  //         </HeaderGlobalAction>
+  //         <HeaderGlobalAction
+  //           aria-label="App Switcher"
+  //           isActive
+  //           onClick={action('app-switcher click')}>
+  //           <AppSwitcher20 />
+  //         </HeaderGlobalAction>
+  //       </HeaderGlobalBar>
+  //       <HeaderPanel aria-label="Header Panel" expanded>
+  //         <Switcher role="menu" aria-label="Switcher Container">
+  //           <SwitcherItem isSelected aria-label="Link 1" href="#">
+  //             Link 1
+  //           </SwitcherItem>
+  //           <SwitcherDivider />
+  //           <SwitcherItem href="#" aria-label="Link 2">
+  //             Link 2
+  //           </SwitcherItem>
+  //           <SwitcherItem href="#" aria-label="Link 3">
+  //             Link 3
+  //           </SwitcherItem>
+  //           <SwitcherItem href="#" aria-label="Link 4">
+  //             Link 4
+  //           </SwitcherItem>
+  //           <SwitcherItem href="#" aria-label="Link 5">
+  //             Link 5
+  //           </SwitcherItem>
+  //           <SwitcherDivider />
+  //           <SwitcherItem href="#" aria-label="Link 6">
+  //             Link 6
+  //           </SwitcherItem>
+  //         </Switcher>
+  //       </HeaderPanel>
+  //     </Header>
+  //   ))
+  // )
+  // .add(
+  //   'Fixed SideNav',
+  //   withReadme(readme, () => (
+  //     <>
+  //       <SideNav
+  //         isFixedNav
+  //         expanded={true}
+  //         isChildOfHeader={false}
+  //         aria-label="Side navigation">
+  //         <SideNavItems>
+  //           <SideNavMenu title="L0 menu">
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //           </SideNavMenu>
+  //           <SideNavMenu title="L0 menu" isActive={true}>
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //           </SideNavMenu>
+  //           <SideNavMenu title="L0 menu">
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">
+  //               L0 menu item
+  //             </SideNavMenuItem>
+  //           </SideNavMenu>
+  //           <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+  //           <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+  //         </SideNavItems>
+  //       </SideNav>
+  //       <StoryContent />
+  //     </>
+  //   ))
+  // )
+  // .add(
+  //   'Fixed SideNav w/ Icons',
+  //   withReadme(readme, () => (
+  //     <>
+  //       <SideNav
+  //         isFixedNav
+  //         expanded={true}
+  //         isChildOfHeader={false}
+  //         aria-label="Side navigation">
+  //         <SideNavItems>
+  //           <SideNavMenu renderIcon={Fade16} title="Category title">
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //           </SideNavMenu>
+  //           <SideNavMenu
+  //             renderIcon={Fade16}
+  //             title="Category title"
+  //             isActive={true}>
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //             <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+  //               Link
+  //             </SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //           </SideNavMenu>
+  //           <SideNavMenu renderIcon={Fade16} title="Category title">
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //             <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+  //           </SideNavMenu>
+  //           <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+  //             Link
+  //           </SideNavLink>
+  //           <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+  //             Link
+  //           </SideNavLink>
+  //         </SideNavItems>
+  //       </SideNav>
+  //       <StoryContent />
+  //     </>
+  //   ))
+  // )
   .add(
     'SideNav Rail w/Header',
     withReadme(readme, () => (

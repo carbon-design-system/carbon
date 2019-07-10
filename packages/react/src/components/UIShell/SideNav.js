@@ -38,6 +38,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     setIsSideNavExpanded,
     isSideNavPinned,
   } = useContext(UIShellContext);
+
   const handleToggle = (e, { value }) => {
     if (onToggleProp) {
       onToggleProp(e, { value });
