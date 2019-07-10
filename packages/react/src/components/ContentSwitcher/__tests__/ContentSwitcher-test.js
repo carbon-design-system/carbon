@@ -93,6 +93,33 @@ describe('ContentSwitcher', () => {
     }
   });
 
+  it('should not update focus if `selectedIndex` is updated', () => {
+    const wrapper = mount(
+      <ContentSwitcher {...mockProps}>
+        <Switch text="A" />
+        <Switch text="B" />
+        <Switch text="C" />
+      </ContentSwitcher>
+    );
+
+    const firstSwitchTrigger = wrapper
+      .find(Switch)
+      .at(0)
+      .find('button');
+    firstSwitchTrigger.simulate('click');
+
+    // expect(document.activeElement === firstSwitchTrigger.getDOMNode()).toBe(
+    // true
+    // );
+
+    wrapper.setProps({ selectedIndex: 1 });
+
+    // console.log(document.activeElement);
+    // expect(document.activeElement === firstSwitchTrigger.getDOMNode()).toBe(
+    // true
+    // );
+  });
+
   it('should call `onChange` when the selected index changes', () => {
     const children = 3;
     const wrapper = mount(

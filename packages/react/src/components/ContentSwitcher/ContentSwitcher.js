@@ -29,16 +29,21 @@ function ContentSwitcher({
 }) {
   const switchRefs = [];
   const className = cx(`${prefix}--content-switcher`, customClassName);
-  const isMounted = useRef(false);
   const savedOnChange = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(controlledSelectedIndex);
   const [prevControlledIndex, setPrevControlledIndex] = useState(
     controlledSelectedIndex
   );
+  const focus = useRef(false);
+  // const [shouldFocus, setShouldFocus] = useState(false);
+  // const [isFocusLocked, setIsFocusLocked] = useState(true);
 
   if (controlledSelectedIndex !== prevControlledIndex) {
     setSelectedIndex(controlledSelectedIndex);
     setPrevControlledIndex(controlledSelectedIndex);
+    focus.current = false;
+    // setShouldFocus(false);
+    // setIsFocusLocked(true);
   }
 
   // Always keep track of the latest `onChange` prop to use in our focus effect
@@ -47,27 +52,29 @@ function ContentSwitcher({
     savedOnChange.current = onChange;
   }, [onChange]);
 
-  // Only fire this effect after the first render, otherwise we end up
-  // autofocusing the selected index when this component is rendered
   useEffect(() => {
-    if (!isMounted.current) {
+    if (savedOnChange.current) {
+      savedOnChange.current(selectedIndex);
+    }
+  }, [selectedIndex]);
+
+  // 1) Don't focus if "first render"
+  // 2) Don't focus if selected index has changed because of props
+  // 3) Do focus if triggered by click or key down
+  useEffect(() => {
+    if (!focus.current) {
       return;
     }
 
     const ref = switchRefs[selectedIndex];
-    if (ref && document.activeElement !== ref.current) {
+    if (ref && document.activeElement !== ref) {
       ref.focus && ref.focus();
-      if (savedOnChange.current) {
-        savedOnChange.current(selectedIndex);
-      }
     }
   }, [switchRefs, selectedIndex]);
 
-  // Set our `isMounted` flag to true when our effects are run during the first
-  // render
   useEffect(() => {
-    isMounted.current = true;
-  }, []);
+    focus.current = true;
+  }, [controlledSelectedIndex]);
 
   function handleItemRef(index) {
     return ref => {
@@ -78,12 +85,14 @@ function ContentSwitcher({
   function onClick(event, index) {
     if (selectedIndex !== index) {
       setSelectedIndex(index);
+      // setIsFocusLocked(false);
     }
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.ArrowRight, keys.ArrowLeft])) {
       setSelectedIndex(getNextIndex(event, selectedIndex, children.length));
+      // setIsFocusLocked(false);
     }
   }
 
