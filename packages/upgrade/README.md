@@ -24,11 +24,9 @@ You can install `@carbon/upgrade` in your project, or use a tool like
 [`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)
 by running the following command in your project:
 
-```
-# Runs the command in "dry" mode, which means no files are altered.
-# To update the files, re-run the command without the `-d` flag.
-npx @carbon/upgrade -d
-```
+    # Runs the command in "dry" mode, which means no files are altered.
+    # To update the files, re-run the command without the `-d` flag.
+    npx @carbon/upgrade -d
 
 Below is a full output of the options and commands available:
 
