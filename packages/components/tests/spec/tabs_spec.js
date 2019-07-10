@@ -246,6 +246,38 @@ describe('Test tabs', function() {
       ).toBe(true);
     });
 
+    it('Should update active tab on end key', function() {
+      const defaultPrevented = element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 35 })
+      );
+      expect(defaultPrevented).toBe(true);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
+    });
+
+    it('Should update active tab on home key', function() {
+      const defaultPrevented = element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown'), { which: 36 })
+      );
+      expect(defaultPrevented).toBe(true);
+      expect(
+        buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(true);
+      expect(
+        buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+      expect(
+        buttonNodes[2].classList.contains('bx--tabs__nav-item--selected')
+      ).toBe(false);
+    });
+
     it('Should focus on the new active tab upon keyboard navigation', function() {
       const link = document.createElement('a');
       spyOn(link, 'focus');

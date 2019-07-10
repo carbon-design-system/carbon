@@ -4306,6 +4306,8 @@ $ui-background: map-get($carbon--theme, 'ui-background');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -5364,7 +5366,6 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5395,6 +5396,8 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅highlight [variable]
 
@@ -8875,7 +8878,7 @@ Button styles
     padding: $button-padding-sm;
   }
 
-  &.#{$prefix}--btn--field {
+  .#{$prefix}--btn--field {
     height: 40px;
     min-height: 40px;
     padding: $button-padding-field;
@@ -12215,11 +12218,11 @@ Dropdown styles
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-02;
+      color: $disabled-03;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-02;
+      fill: $disabled-03;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -12238,7 +12241,7 @@ Dropdown styles
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $field-02;
+    background-color: $ui-background;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -12246,7 +12249,7 @@ Dropdown styles
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $field-02;
+      background-color: $ui-background;
     }
 
     .#{$prefix}--dropdown__arrow {
@@ -12269,7 +12272,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-02;
+    color: $disabled-03;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
@@ -12329,7 +12332,8 @@ Dropdown styles
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
+  - [ui-background [variable]](#ui-background-variable)
 
 ## file-uploader
 
@@ -13060,11 +13064,11 @@ List box styles
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-02;
+    color: $disabled-03;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-02;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -13098,7 +13102,7 @@ List box styles
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $field-02;
+    background-color: $ui-background;
     border-width: 0;
 
     &:hover {
@@ -13478,8 +13482,10 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
