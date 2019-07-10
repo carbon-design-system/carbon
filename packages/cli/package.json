@@ -1,6 +1,6 @@
 {
   "name": "@carbon/cli",
-  "private": true,
+  "description": "Task automation for working with the Carbon Design System",
   "version": "10.3.0",
   "license": "Apache-2.0",
   "bin": {
