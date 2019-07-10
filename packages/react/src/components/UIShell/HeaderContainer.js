@@ -5,36 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useState, useCallback } from 'react';
+// import PropTypes from 'prop-types';
+import React from 'react';
+import { UIShellContextProvider } from './Context';
 
-const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
-  //state for expandable sidenav
-  const [isSideNavExpandedState, setIsSideNavExpandedState] = useState(
-    isSideNavExpanded
-  );
-
-  const handleHeaderMenuButtonClick = useCallback(() => {
-    setIsSideNavExpandedState(!isSideNavExpandedState);
-  }, [isSideNavExpandedState, setIsSideNavExpandedState]);
-
-  return (
-    <Children
-      isSideNavExpanded={isSideNavExpandedState}
-      onClickSideNavExpand={handleHeaderMenuButtonClick}
-    />
-  );
-};
-
-HeaderContainer.propTypes = {
-  /**
-   * Optionally provide a custom class name that is applied to the underlying <header>
-   */
-  isSideNavExpanded: PropTypes.bool,
-};
-
-HeaderContainer.defaultProps = {
-  isSideNavExpanded: false,
+const HeaderContainer = props => {
+  return <UIShellContextProvider {...props} />;
 };
 
 export default HeaderContainer;

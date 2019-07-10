@@ -9,21 +9,31 @@ import { Close20, Menu20 } from '@carbon/icons-react';
 
 import { settings } from 'carbon-components';
 import cx from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
+import { UIShellContext } from './Context';
 const { prefix } = settings;
 
 const HeaderMenuButton = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   className: customClassName,
-  onClick,
-  isActive,
+  onClick: onClickProp,
+  isActive: isActiveProp,
   isCollapsible,
   ...rest
 }) => {
+  const { setIsSideNavPinned, isSideNavExpanded } = useContext(UIShellContext);
+
+  const onClick = onClickProp
+    ? onClickProp
+    : () => {
+        setIsSideNavPinned(!isSideNavExpanded);
+      };
+
+  const isActive = isActiveProp || isSideNavExpanded;
+
   const className = cx({
     [customClassName]: !!customClassName,
     [`${prefix}--header__action`]: true,
@@ -32,6 +42,7 @@ const HeaderMenuButton = ({
     [`${prefix}--header__menu-toggle`]: true,
     [`${prefix}--header__menu-toggle__hidden`]: !isCollapsible,
   });
+
   const accessibilityLabel = {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
