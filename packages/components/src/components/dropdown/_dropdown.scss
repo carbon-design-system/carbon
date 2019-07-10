@@ -239,11 +239,11 @@
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-02;
+      color: $disabled-03;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-02;
+      fill: $disabled-03;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -262,7 +262,7 @@
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $field-02;
+    background-color: $ui-background;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -270,7 +270,7 @@
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $field-02;
+      background-color: $ui-background;
     }
 
     .#{$prefix}--dropdown__arrow {
@@ -293,7 +293,7 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-02;
+    color: $disabled-03;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
