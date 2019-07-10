@@ -16,74 +16,50 @@
 
 > Steps for publishing the monorepo
 
-1. Make sure your local branch is up-to-date by running
-   `git pull upstream master`
-2. Run `yarn sync` to make sure all packages are synced
-3. Make sure your git status is clean (will also be checked in our publish
-   task), if not commit and push changes, then go to Step 1
-4. Make sure dependencies are up-to-date by doing `yarn clean` && `yarn install`
-5. Run `yarn build` to build all package assets
-6. Run `yarn lerna version` with the appropriate flags (see release steps below)
+## Prerelease
 
-## Pre-release
+Often, our prereleases are when we switch between minor versions of the system.
+To do this, we'll need to follow the following steps:
 
-6. Run the following command using `lerna` to version packages
-
-```bash
-yarn lerna version \
-  <bump>           \    # See `lerna version --help` for all options
-  --exact          \    # Updates package.json if direct dependency
-  --preid <id>     \    # Specify suffix in version, only alpha, beta, and rc
-  --no-push        \    # Don't push to the git origin
-  --no-git-tag-version  # Don't create a git tag
-```
-
-7. Confirm package changes
-8. Add changes with `git add -A`
-9. Create a commit message with the following format:
-   `git commit -m 'chore(release): vX.Y.Z`
-10. Generate the release changelog with the following command:
+- Make sure you're on the `master` branch for your fork of Carbon
+- Pull the latest changes from master with `git pull upstream master`
+- Create a new branch following the format: `chore(release): vA.B.C-preid.D`,
+  for example `chore(release): v10.4.0-rc.0`
+  - A `preid` can be one of `alpha`, `beta`, or `rc` (Release Candidate)
+- Next, run the `lerna version` command to correctly version changed packages.
+  You can do this by running:
 
 ```bash
-npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 1
+yarn lerna version preminor \
+  --exact \
+  --preid rc \
+  --no-push \
+  --no-git-tag-version \
+  -m 'chore(release): update package versions'
 ```
 
-10. Make a PR with the proposed changes
-11. After the PR is approved and merged, it's time to publish using the
-    following commands:
+- Now, you can commit the changes and create a Pull Request for the branch
+- After the Pull Request is merged, checkout `master` and pull the latest
+  changes
+- Make sure everything in your local fork is up-to-date by running:
+  - `yarn clean && yarn install --offline && yarn build`
+- Use the `lerna publish` command with the `from-package` option to publish
+  packages that have changed. You can do this by running:
 
 ```bash
-# Get latest changes from upstream master branch
-git checkout master
-git pull upstream master
-
-# Clean up local project and build from scratch
-# Note: there should be no staged files, can verify by running
-# `git status --porcelain`
-yarn clean && yarn install --offline --frozen-lockfile && yarn build
-
-# Publish from package with specific dist tag, can be:
-# alpha, beta, rc
-yarn lerna publish from-package --dist-tag <tag>
+yarn lerna publish from-package --dist-tag next
 ```
 
-12. After the packages are published, you can tag and push the tag upstream:
+- Once the packages are published, create a `git tag` for the release by
+  running:
 
 ```bash
-# Tag after publish
-git tag -a vX.Y.Z
-
-# Push tag upstream
-git push upstream vX.Y.Z
+git tag -a v10.4.0-rc.0 # Supply the version in the tag commit body
 ```
 
-## Release
-
-6. Set `GH_TOKEN` in your terminal ENV, the specific value will be for the
-   `carbon-bot` functional ID and can be received from another team member.
-7. Export value above by writing `export GH_TOKEN=XYZ`
-8. Run
-   `./tasks/publish.sh ---exact --conventional-commits --github-release --git-remote upstream`
+- You can then push this tag upstream by running
+  `git push upstream v10.4.0-rc.0`
+- After that, you're done! <span aria-label="Celebrate">🎉</span>
 
 ## Publishing older library versions
 
