@@ -9,7 +9,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { ToastNotification, InlineNotification } from '../Notification';
+import {
+  ToastNotification,
+  InlineNotification,
+  NotificationActionButton,
+} from '../Notification';
 
 const kinds = {
   'Error (error)': 'error',
@@ -31,14 +35,6 @@ const notificationProps = () => ({
   onCloseButtonClick: action('onCloseButtonClick'),
 });
 
-const inlineNotificationActions = {
-  primary: {
-    className: text('Class name (actions.primary.className)', 'some-class'),
-    label: text('Label (actions.primary.label)', 'Undo'),
-    onClick: action('actions.primary.onClick'),
-  },
-};
-
 storiesOf('Notifications', module)
   .addDecorator(withKnobs)
   .add('Toast', () => (
@@ -51,6 +47,11 @@ storiesOf('Notifications', module)
   .add('inline', () => (
     <InlineNotification
       {...notificationProps()}
-      actions={inlineNotificationActions}
+      actions={
+        <NotificationActionButton
+          onClick={action('NotificationActionButton onClick')}>
+          {text('Action (NotificationActionButton > children)', 'Action')}
+        </NotificationActionButton>
+      }
     />
   ));

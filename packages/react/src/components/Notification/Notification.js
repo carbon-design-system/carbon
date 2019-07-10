@@ -20,22 +20,44 @@ import Button from '../Button';
 
 const { prefix } = settings;
 
-export const NotificationActionButton = ({ actions }) => {
-  const actionButtonClasses = classNames(
-    actions.primary.className,
-    `${prefix}--inline-notification__action-button`
-  );
+export class NotificationActionButton extends Component {
+  static propTypes = {
+    /**
+     * Specify an optional className to be applied to the notification action button
+     */
+    className: PropTypes.string,
 
-  return (
-    <Button
-      className={actionButtonClasses}
-      kind="ghost"
-      onClick={actions.primary.onClick}
-      size="small">
-      {actions.primary.label}
-    </Button>
-  );
-};
+    /**
+     * Specify the content of the notification action button.
+     */
+    children: PropTypes.node,
+
+    /**
+     * Optionally specify a click handler for the notification action button.
+     */
+    onClick: PropTypes.func,
+  };
+
+  render() {
+    const { children, className, onClick, ...other } = this.props;
+
+    const actionButtonClasses = classNames(
+      className,
+      `${prefix}--inline-notification__action-button`
+    );
+
+    return (
+      <Button
+        className={actionButtonClasses}
+        kind="ghost"
+        onClick={onClick}
+        size="small"
+        {...other}>
+        {children}
+      </Button>
+    );
+  }
+}
 
 export class NotificationButton extends Component {
   static propTypes = {
@@ -373,7 +395,7 @@ export class ToastNotification extends Component {
 export class InlineNotification extends Component {
   static propTypes = {
     /**
-     * Object of information for an action button within the InlineNotification..
+     * Pass in the action nodes that will be rendered within the InlineNotification
      */
     actions: PropTypes.node,
 
@@ -497,11 +519,7 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
-        {actions.primary &&
-          actions.primary.onClick &&
-          actions.primary.label && (
-            <NotificationActionButton actions={actions} />
-          )}
+        {actions}
         {!hideCloseButton && (
           <NotificationButton
             iconDescription={iconDescription}
