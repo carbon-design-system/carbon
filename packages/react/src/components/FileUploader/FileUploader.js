@@ -229,8 +229,7 @@ Filename.propTypes = {
   iconDescription: PropTypes.string,
 
   /**
-   * Provide an optional `onKeyDown` hook that is called if Space or Return is
-   * pressed while the component is focused
+   * Status of the file upload
    */
   status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
 
@@ -242,7 +241,6 @@ Filename.propTypes = {
 
 Filename.defaultProps = {
   iconDescription: 'Uploading file',
-  onKeyDown: () => {},
   status: 'uploading',
   tabIndex: '0',
 };
