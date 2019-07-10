@@ -1,6 +1,6 @@
 # @carbon/cli
 
-> Task automation when working with the Carbon Design System
+> Task automation for working with the Carbon Design System
 
 ## Getting started
 
