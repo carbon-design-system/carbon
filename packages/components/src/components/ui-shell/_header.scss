@@ -100,10 +100,12 @@
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: none;
+    display: block;
+  }
 
-    @include carbon--breakpoint-down('lg') {
-      display: block;
+  .#{$prefix}--header__menu-toggle__hidden {
+    @include carbon--breakpoint('lg') {
+      display: none;
     }
   }
 
