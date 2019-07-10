@@ -458,7 +458,6 @@ export class InlineNotification extends Component {
   };
 
   static defaultProps = {
-    actions: {},
     role: 'alert',
     notificationType: 'inline',
     iconDescription: 'closes notification',
