@@ -3201,7 +3201,6 @@ $layout-01: $carbon--layout-01;
 - **Alias**: `carbon--layout-01`
 - **Used by**:
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
 
 ### ✅layout-02 [variable]
@@ -3233,8 +3232,6 @@ $layout-03: $carbon--layout-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--layout-03`
-- **Used by**:
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
 
 ### ✅layout-04 [variable]
 
@@ -10500,7 +10497,7 @@ Data table core styles
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table th:first-of-type {
+  .#{$prefix}--data-table th:first-of-type:not(.#{$prefix}--table-expand th) {
     padding-left: $spacing-05;
   }
 
@@ -11099,9 +11096,9 @@ Data table expandable styles
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
     width: 2.5rem;
     min-width: 2.5rem;
+    height: 3rem;
     vertical-align: top;
-    padding-top: rem(7px);
-    padding-bottom: 0;
+    padding: 0;
   }
 
   .#{$prefix}--table-expand[data-previous-value='collapsed']
@@ -11115,8 +11112,8 @@ Data table expandable styles
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: $layout-03;
-    width: $layout-01;
+    height: 100%;
+    width: 100%;
   }
 
   .#{$prefix}--data-table--short .#{$prefix}--table-expand__button {
@@ -11270,8 +11267,6 @@ Data table expandable styles
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [layout-03 [variable]](#layout-03-variable)
-  - [layout-01 [variable]](#layout-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
