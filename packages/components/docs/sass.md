@@ -14065,6 +14065,7 @@ Inline notification styles
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-01');
     margin: 0 $carbon--spacing-02 0 0;
+    line-height: rem(24px);
   }
 
   .#{$prefix}--inline-notification__subtitle {
@@ -14074,6 +14075,10 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: transparent;
     border: none;
     cursor: pointer;
