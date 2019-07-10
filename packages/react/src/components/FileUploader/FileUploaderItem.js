@@ -4,6 +4,7 @@ import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import { Filename } from './FileUploader';
 import { keys, matches } from '../../internal/keyboard';
+import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
@@ -101,7 +102,7 @@ FileUploaderItem.propTypes = {
 };
 
 FileUploaderItem.defaultProps = {
-  uuid: `${Math.random()}`,
+  uuid: uid(),
   status: 'uploading',
   onDelete: () => {},
 };
