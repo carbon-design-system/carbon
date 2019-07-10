@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import { UIShellContext } from './Context';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -23,7 +24,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     children,
-    onToggle,
+    onToggle: onToggleProp,
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
     // translateById: t,
@@ -32,17 +33,26 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isPersistent,
   } = props;
 
-  const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
-  const expanded = controlled ? expandedProp : expandedState;
-  const handleToggle = (event, value = !expanded) => {
-    if (!controlled) {
-      setExpandedState(value);
+  const {
+    isSideNavExpanded,
+    setIsSideNavExpanded,
+    isSideNavPinned,
+  } = useContext(UIShellContext);
+  const handleToggle = (e, { value }) => {
+    if (onToggleProp) {
+      onToggleProp(e, { value });
     }
-    if (onToggle) {
-      onToggle(event, value);
-    }
+    setIsSideNavExpanded(value);
   };
+
+  const isExpanded = expandedProp ? expandedProp : isSideNavExpanded;
+  const onToggle = onToggleProp ? onToggleProp : handleToggle;
+
+  useLayoutEffect(() => {
+    if (defaultExpanded) {
+      setIsSideNavExpanded(true);
+    }
+  }, [defaultExpanded, setIsSideNavExpanded]);
 
   const accessibilityLabel = {
     'aria-label': ariaLabel,
@@ -56,8 +66,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded,
-    [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
+    [`${prefix}--side-nav--expanded`]: isExpanded,
+    [`${prefix}--side-nav--collapsed`]: !isExpanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
@@ -66,20 +76,22 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const overlayClassName = cx({
     [`${prefix}--side-nav__overlay`]: true,
-    [`${prefix}--side-nav__overlay-active`]: expanded,
+    [`${prefix}--side-nav__overlay-active`]: isExpanded,
   });
 
   return (
     <>
-      {isFixedNav ? null : <div className={overlayClassName} />}
+      {isFixedNav || isSideNavPinned ? null : (
+        <div className={overlayClassName} />
+      )}
       <nav
         ref={ref}
+        onMouseEnter={e => onToggle(e, { value: true })}
+        onMouseLeave={e => onToggle(e, { value: false })}
+        onFocus={e => onToggle(e, { value: true })}
+        onBlur={e => onToggle(e, { value: false })}
         className={`${prefix}--side-nav__navigation ${className}`}
-        {...accessibilityLabel}
-        onFocus={event => handleToggle(event, true)}
-        onBlur={event => handleToggle(event, false)}
-        onMouseEnter={() => handleToggle(true)}
-        onMouseLeave={() => handleToggle(false)}>
+        {...accessibilityLabel}>
         {children}
       </nav>
     </>

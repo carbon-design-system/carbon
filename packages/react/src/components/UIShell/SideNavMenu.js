@@ -11,10 +11,12 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
+import { UIShellContext } from './Context';
 
 const { prefix } = settings;
 
 export class SideNavMenu extends React.Component {
+  static contextType = UIShellContext;
   static propTypes = {
     /**
      * Provide an optional class to be applied to the containing node
@@ -75,8 +77,8 @@ export class SideNavMenu extends React.Component {
       isActive,
       title,
     } = this.props;
-    const { isExpanded } = this.state;
 
+    const isExpanded = this.context.isSideNavExpanded && this.state.isExpanded;
     let hasActiveChild;
     if (children && typeof children === Object) {
       hasActiveChild = children.some(child => {
