@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-carbon",
   "private": true,
-  "version": "10.3.0",
+  "version": "10.4.0-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/eslint-config-carbon",
@@ -31,6 +31,5 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-restricted-globals": "^0.2.0"
-  },
-  "devDependencies": {}
+  }
 }
