@@ -7,11 +7,19 @@
 
 import React from 'react';
 import { ChevronDownGlyph } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
-import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import {
+  ArrowLeft,
+  ArrowRight,
+  End,
+  Enter,
+  Home,
+  Space,
+} from '../../internal/keyboard/keys';
 
 const { prefix } = settings;
 
@@ -197,33 +205,40 @@ describe('Tabs', () => {
 
       const firstTab = wrapper.find('.firstTab').last();
       const lastTab = wrapper.find('.lastTab').last();
-      const leftKey = 37;
-      const rightKey = 39;
-      const spaceKey = 32;
-      const enterKey = 13;
 
       describe('state: selected', () => {
         it('updates selected state when pressing arrow keys', () => {
-          firstTab.simulate('keydown', { which: rightKey });
+          firstTab.simulate('keydown', { ...ArrowRight });
           expect(wrapper.state().selected).toEqual(1);
-          lastTab.simulate('keydown', { which: leftKey });
+          lastTab.simulate('keydown', { ...ArrowLeft });
           expect(wrapper.state().selected).toEqual(0);
         });
 
         it('loops focus and selected state from lastTab to firstTab', () => {
-          lastTab.simulate('keydown', { which: rightKey });
+          lastTab.simulate('keydown', { ...ArrowRight });
           expect(wrapper.state().selected).toEqual(0);
         });
 
         it('loops focus and selected state from firstTab to lastTab', () => {
-          firstTab.simulate('keydown', { which: leftKey });
+          firstTab.simulate('keydown', { ...ArrowLeft });
           expect(wrapper.state().selected).toEqual(1);
         });
 
-        it('updates selected state when pressing space or enter key', () => {
-          firstTab.simulate('keydown', { which: spaceKey });
+        it('updates selected state when pressing the End key', () => {
+          firstTab.simulate('keydown', { ...End });
+          expect(wrapper.state().selected).toEqual(1);
+        });
+
+        it('updates selected state when pressing the Home key', () => {
+          wrapper.setState({ selected: 1 });
+          lastTab.simulate('keydown', { ...Home });
           expect(wrapper.state().selected).toEqual(0);
-          lastTab.simulate('keydown', { which: enterKey });
+        });
+
+        it('updates selected state when pressing space or enter key', () => {
+          firstTab.simulate('keydown', { ...Space });
+          expect(wrapper.state().selected).toEqual(0);
+          lastTab.simulate('keydown', { ...Enter });
           expect(wrapper.state().selected).toEqual(1);
         });
       });
