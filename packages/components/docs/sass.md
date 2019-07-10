@@ -2116,6 +2116,7 @@ Generate a media query for the maximum width of the given styles
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [accordion [mixin]](#accordion-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -2514,6 +2515,7 @@ $carbon--spacing-01: carbon--mini-units(0.25);
 - **Aliased**:
   - `spacing-01`
 - **Used by**:
+  - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅carbon--spacing-02 [variable]
@@ -4062,7 +4064,7 @@ $carbon--theme--g90: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4078,7 +4080,7 @@ $carbon--theme--g90: (
   disabled-01: #3d3d3d,
   disabled-02: #565656,
   disabled-03: #8c8c8c,
-  highlight: #061f80,
+  highlight: #054ada,
   skeleton-01: #353535,
   skeleton-02: #565656,
   brand-01: #0062ff,
@@ -4137,7 +4139,7 @@ $carbon--theme--g100: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4153,7 +4155,7 @@ $carbon--theme--g100: (
   disabled-01: #282828,
   disabled-02: #3d3d3d,
   disabled-03: #6f6f6f,
-  highlight: #061f80,
+  highlight: #0530ad,
   skeleton-01: #353535,
   skeleton-02: #3d3d3d,
   brand-01: #0062ff,
@@ -4302,6 +4304,8 @@ $ui-background: map-get($carbon--theme, 'ui-background');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅ui-01 [variable]
 
@@ -4355,7 +4359,6 @@ $ui-02: map-get($carbon--theme, 'ui-02');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [loading [mixin]](#loading-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
@@ -4380,7 +4383,6 @@ $ui-03: map-get($carbon--theme, 'ui-03');
   - [accordion [mixin]](#accordion-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -4982,6 +4984,7 @@ $overlay-01: map-get($carbon--theme, 'overlay-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅focus [variable]
 
@@ -5334,6 +5337,7 @@ $disabled-01: map-get($carbon--theme, 'disabled-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [slider [mixin]](#slider-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -5359,7 +5363,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5389,6 +5393,9 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅highlight [variable]
 
@@ -8864,7 +8871,7 @@ Button styles
     padding: $button-padding-sm;
   }
 
-  &.#{$prefix}--btn--field {
+  .#{$prefix}--btn--field {
     height: 40px;
     min-height: 40px;
     padding: $button-padding-field;
@@ -9108,8 +9115,8 @@ Checkbox styles
     width: rem(7px);
     height: rem(3px);
     background: none;
-    border-left: 2px solid $ui-02;
-    border-bottom: 2px solid $ui-02;
+    border-left: 2px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right;
     margin-top: rem(-3px);
@@ -9203,9 +9210,8 @@ Checkbox styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [ui-02 [variable]](#ui-02-variable)
-  - [text-01 [variable]](#text-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -9712,7 +9718,8 @@ Content switcher styles
     }
 
     &:disabled {
-      color: $ui-03;
+      color: $disabled-02;
+      background-color: $disabled-01;
       pointer-events: none;
 
       &:hover {
@@ -9780,9 +9787,9 @@ Content switcher styles
     color: $inverse-01;
     z-index: 3;
 
-    // TODO: replace with new disabled color token when finalized
     &:disabled {
-      background-color: $ibm-color__gray-30;
+      background-color: $disabled-03;
+      color: $disabled-02;
     }
   }
 
@@ -9805,9 +9812,11 @@ Content switcher styles
   - [focus [variable]](#focus-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [ui-03 [variable]](#ui-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
 
 ## data-table
 
@@ -9837,9 +9846,12 @@ Data table action styles
     width: 100%;
     justify-content: flex-end;
     transform: translate3d(0, 0, 0);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
@@ -9870,6 +9882,7 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
     width: $layout-04;
     height: 100%;
+    position: initial;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -12196,11 +12209,11 @@ Dropdown styles
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-02;
+      color: $disabled-03;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-02;
+      fill: $disabled-03;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -12219,7 +12232,7 @@ Dropdown styles
     border-bottom-color: transparent;
     width: auto;
     height: rem(32px);
-    background-color: $field-02;
+    background-color: $ui-background;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -12227,7 +12240,7 @@ Dropdown styles
     }
 
     &.#{$prefix}--dropdown--disabled {
-      background-color: $field-02;
+      background-color: $ui-background;
     }
 
     .#{$prefix}--dropdown__arrow {
@@ -12250,7 +12263,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-02;
+    color: $disabled-03;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
@@ -12310,7 +12323,8 @@ Dropdown styles
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
+  - [ui-background [variable]](#ui-background-variable)
 
 ## file-uploader
 
@@ -12700,17 +12714,17 @@ Link styles
 
     &:hover {
       color: $link-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:active,
     &:active:visited {
       color: $text-01;
-      box-shadow: 0 1px currentColor;
+      text-decoration: underline;
     }
 
     &:focus {
-      box-shadow: 0 3px currentColor;
+      @include focus-outline;
     }
 
     &:not([href]) {
@@ -12718,10 +12732,6 @@ Link styles
       cursor: not-allowed;
       pointer-events: none;
       touch-action: none;
-
-      &:hover {
-        box-shadow: none;
-      }
     }
 
     &:visited {
@@ -13045,11 +13055,11 @@ List box styles
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-02;
+    color: $disabled-03;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-02;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -13083,7 +13093,7 @@ List box styles
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: $field-02;
+    background-color: $ui-background;
     border-width: 0;
 
     &:hover {
@@ -13463,8 +13473,10 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
@@ -13842,6 +13854,10 @@ Modal styles
     height: rem(20px);
     width: rem(20px);
   }
+
+  .#{$prefix}--body--with-modal-open {
+    overflow: hidden;
+  }
 }
 ```
 
@@ -14049,7 +14065,6 @@ Inline notification styles
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-01');
     margin: 0 $carbon--spacing-02 0 0;
-    white-space: nowrap;
   }
 
   .#{$prefix}--inline-notification__subtitle {
@@ -14615,7 +14630,12 @@ Overflow menu styles
 
 ```scss
 @mixin overflow-menu() {
-  .#{$prefix}--overflow-menu {
+  .#{$prefix}--overflow-menu__trigger {
+    @include button-reset;
+  }
+
+  .#{$prefix}--overflow-menu,
+  .#{$prefix}--overflow-menu__trigger {
     @include reset;
     @include focus-outline('reset');
     position: relative;
@@ -14637,7 +14657,18 @@ Overflow menu styles
     }
   }
 
-  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+  // Overwrite Icon Tooltip focus styles
+  .#{$prefix}--overflow-menu__trigger.#{$prefix}--tooltip--a11y.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+
+    svg {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
     background-color: $ui-01;
     transition: none;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
@@ -15847,37 +15878,8 @@ Search styles
   .#{$prefix}--search-close {
     @include button-reset(false);
     @include focus-outline('reset');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity $duration--fast-02 motion(standard, productive), background-color
-        $duration--fast-02 motion(standard, productive),
-      outline $duration--fast-02 motion(standard, productive), border
-        $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    visibility: visible;
-    opacity: 1;
     position: absolute;
-    height: rem(40px);
-    width: rem(40px);
     right: 0;
-    fill: $icon-01;
-    border: 1px solid transparent;
-    border-left: 0;
-
-    &:hover {
-      background-color: $hover-field;
-      border-bottom: 1px solid $ui-04;
-    }
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-
-    &:active {
-      @include focus-outline('outline');
-      background-color: $selected-ui;
-    }
 
     &::before {
       content: '';
@@ -15889,6 +15891,53 @@ Search styles
       width: 2px;
       background-color: $field-01;
       transition: background-color $duration--fast-02 motion(standard, productive);
+    }
+
+    &:hover {
+      border-bottom: 1px solid $ui-04;
+    }
+  }
+
+  .#{$prefix}--search-button {
+    flex-shrink: 0;
+    margin-left: $carbon--spacing-01;
+    background-color: $field-01;
+
+    svg {
+      vertical-align: middle;
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--search-close,
+  .#{$prefix}--search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity $duration--fast-02 motion(standard, productive), background-color
+        $duration--fast-02 motion(standard, productive),
+      outline $duration--fast-02 motion(standard, productive), border
+        $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+    height: rem(40px);
+    width: rem(40px);
+    fill: $icon-01;
+    border: 1px solid transparent;
+    border-left: 0;
+
+    &:hover {
+      background-color: $hover-field;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:active {
+      @include focus-outline('outline');
+      background-color: $selected-ui;
     }
   }
 
@@ -15909,18 +15958,20 @@ Search styles
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--search--sm .#{$prefix}--search-close {
-    height: rem(32px);
-    width: rem(32px);
+  .#{$prefix}--search--sm {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      height: rem(32px);
+      width: rem(32px);
+    }
   }
 
-  .#{$prefix}--search--xl .#{$prefix}--search-close {
-    height: rem(48px);
-    width: rem(48px);
-  }
-
-  .#{$prefix}--search-close:focus {
-    @include focus-outline('outline');
+  .#{$prefix}--search--xl {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      height: rem(48px);
+      width: rem(48px);
+    }
   }
 
   .#{$prefix}--search-close--hidden {
@@ -15952,6 +16003,7 @@ Search styles
   - [text-03 [variable]](#text-03-variable)
   - [field-02 [variable]](#field-02-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -17210,6 +17262,7 @@ Text input styles
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
@@ -18612,6 +18665,17 @@ Tooltip styles
   @include tooltip--definition--legacy;
   /* end legacy definition tooltip */
 
+  .#{$prefix}--tooltip--definition.#{$prefix}--tooltip--a11y {
+    // Wrapping element set to inline since the tooltip isn't contained within the trigger (affects center and end alignments)
+    // Also allows for Definition Tooltip to be used within a paragraph of text as defined in the usage guidelines
+    display: inline-flex;
+  }
+
+  // default buttons in Safari are adding a small margin, affecting tooltip placement
+  .#{$prefix}--tooltip--definition button.#{$prefix}--tooltip--a11y {
+    margin: 0;
+  }
+
   // Definition CSS only tooltip
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
@@ -19013,6 +19077,11 @@ UI shell header
     height: 100%;
     padding-left: mini-units(2);
     position: relative;
+    display: block;
+
+    @include carbon--breakpoint-down('lg') {
+      display: none;
+    }
 
     &::before {
       content: '';
@@ -19192,6 +19261,7 @@ UI shell header
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
@@ -19751,9 +19821,33 @@ UI shell side nav
     width: mini-units(6);
   }
 
+  .#{$prefix}--side-nav--hidden {
+    width: 0;
+  }
+
   .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav__overlay {
+    position: absolute;
+    top: rem(48px);
+    height: 0;
+    width: 0;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity $transition--expansion $carbon--standard-easing, background-color
+        $transition--expansion $carbon--standard-easing;
+  }
+
+  .#{$prefix}--side-nav__overlay-active {
+    height: 100vh;
+    width: 100%;
+    background-color: $overlay-01;
+    opacity: 1;
+    transition: opacity $transition--expansion $carbon--standard-easing, background-color
+        $transition--expansion $carbon--standard-easing;
   }
 
   // When used alongside the header, we update the `top` positioning so that we
@@ -19948,7 +20042,10 @@ UI shell side nav
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu[role='menu']
-    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
+    a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:hover,
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']:hover {
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
     color: $ibm-color__gray-100;
@@ -19979,6 +20076,11 @@ UI shell side nav
     user-select: none;
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
+  }
+
+  .#{$prefix}--side-nav__submenu:hover {
+    background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
@@ -20078,7 +20180,11 @@ UI shell side nav
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
-  a.#{$prefix}--side-nav__link {
+  a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'],
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu {
     @include focus-outline('reset');
     @include type-style('heading-01');
     position: relative;
@@ -20091,7 +20197,10 @@ UI shell side nav
       outline $duration--fast-02;
   }
 
-  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text {
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item[role='menuitem']
+    .#{$prefix}--text-truncate-end {
     @include text-overflow();
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
@@ -20100,7 +20209,8 @@ UI shell side nav
     user-select: none;
   }
 
-  a.#{$prefix}--side-nav__link:focus {
+  a.#{$prefix}--side-nav__link:focus,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
     @include focus-outline('outline');
   }
 
@@ -20172,6 +20282,87 @@ UI shell side nav
     a.#{$prefix}--side-nav__link {
     padding-left: mini-units(4);
   }
+
+  //----------------------------------------------------------------------------
+  // Variants - Header Nav Links in Side Nav
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav .#{$prefix}--header__nav {
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--side-nav__header-navigation {
+    display: none;
+
+    @include carbon--breakpoint-down('lg') {
+      display: block;
+      position: relative;
+      margin-bottom: rem(32px);
+    }
+  }
+
+  .#{$prefix}--side-nav__header-divider::after {
+    content: '';
+    position: absolute;
+    height: rem(1px);
+    bottom: rem(-16px);
+    left: rem(16px);
+    width: calc(100% - 32px);
+    background: $ibm-color__gray-20;
+  }
+
+  //header menu items overrides
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem'] {
+    color: $shell-side-nav-text-01;
+    white-space: nowrap;
+    justify-content: space-between;
+
+    &[aria-expanded='true'] {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[role='menuitem'][aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    bottom: inherit;
+    width: 100%;
+    box-shadow: none;
+    transform: none;
+    background-color: transparent;
+    padding: 0;
+
+    & li {
+      width: 100%;
+    }
+
+    & a.#{$prefix}--header__menu-item[role='menuitem'] {
+      padding-left: 4.25rem;
+      font-weight: 400;
+    }
+
+    & a.#{$prefix}--header__menu-item[role='menuitem']:hover {
+      background-color: $shell-side-nav-bg-04;
+      color: $ibm-color__gray-100;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu
+    a.#{$prefix}--header__menu-item[role='menuitem'] {
+    height: inherit;
+  }
+
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item[role='menuitem']:hover
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item[role='menuitem']:focus
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    fill: $shell-side-nav-text-01;
+  }
 }
 ```
 
@@ -20187,6 +20378,7 @@ UI shell side nav
   - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
   - [shell-side-nav-bg-01 [variable]](#shell-side-nav-bg-01-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
+  - [overlay-01 [variable]](#overlay-01-variable)
   - [shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
   - [shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
