@@ -10,6 +10,7 @@
 'use strict';
 
 const meta = require('@carbon/icons/build-info.json');
+const { camel } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
@@ -183,7 +184,10 @@ function convertToJSX(node) {
  */
 function formatAttributes(attrs) {
   return Object.keys(attrs).reduce((acc, key, index) => {
-    const attribute = `${key}="${attrs[key]}"`;
+    const attribute = key.startsWith('data-')
+      ? `${key}="${attrs[key]}"`
+      : `${camel(key)}="${attrs[key]}"`;
+
     if (index === 0) {
       return attribute;
     }
