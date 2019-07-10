@@ -3,7 +3,6 @@
 exports[`Filename renders as expected renders upload status icon as expected 1`] = `
 <Filename
   iconDescription="Upload complete"
-  onKeyDown={[Function]}
   status="uploading"
   tabIndex="0"
 >
@@ -60,21 +59,18 @@ exports[`Filename renders as expected renders upload status icon as expected 1`]
 exports[`Filename renders as expected renders upload status icon as expected 2`] = `
 <Filename
   iconDescription="Upload complete"
-  onKeyDown={[Function]}
   status="edit"
   tabIndex="0"
 >
   <ForwardRef(Close16)
     aria-label="Upload complete"
     className="bx--file-close"
-    onKeyDown={[Function]}
     tabIndex="0"
   >
     <Icon
       aria-label="Upload complete"
       className="bx--file-close"
       height={16}
-      onKeyDown={[Function]}
       preserveAspectRatio="xMidYMid meet"
       tabIndex="0"
       viewBox="0 0 16 16"
@@ -86,7 +82,6 @@ exports[`Filename renders as expected renders upload status icon as expected 2`]
         className="bx--file-close"
         focusable="true"
         height={16}
-        onKeyDown={[Function]}
         preserveAspectRatio="xMidYMid meet"
         role="img"
         style={
@@ -114,21 +109,18 @@ exports[`Filename renders as expected renders upload status icon as expected 2`]
 exports[`Filename renders as expected renders upload status icon as expected 3`] = `
 <Filename
   iconDescription="Upload complete"
-  onKeyDown={[Function]}
   status="complete"
   tabIndex="0"
 >
   <ForwardRef(CheckmarkFilled16)
     aria-label="Upload complete"
     className="bx--file-complete"
-    onKeyDown={[Function]}
     tabIndex="0"
   >
     <Icon
       aria-label="Upload complete"
       className="bx--file-complete"
       height={16}
-      onKeyDown={[Function]}
       preserveAspectRatio="xMidYMid meet"
       tabIndex="0"
       viewBox="0 0 16 16"
@@ -140,7 +132,6 @@ exports[`Filename renders as expected renders upload status icon as expected 3`]
         className="bx--file-complete"
         focusable="true"
         height={16}
-        onKeyDown={[Function]}
         preserveAspectRatio="xMidYMid meet"
         role="img"
         style={
