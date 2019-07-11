@@ -43,12 +43,7 @@ export default function InlineLoading({
       );
     }
     return (
-      <Loading
-        small
-        description={description || iconDescription}
-        withOverlay={false}
-        active
-      />
+      <Loading small description={iconDescription} withOverlay={false} active />
     );
   };
   const loadingText = (
