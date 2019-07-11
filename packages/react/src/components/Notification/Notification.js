@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import {
-  Close16,
+  Close20,
   ErrorFilled20,
   CheckmarkFilled20,
   WarningFilled20,
@@ -63,7 +63,7 @@ export class NotificationButton extends Component {
     notificationType: 'toast',
     type: 'button',
     iconDescription: 'close icon',
-    renderIcon: Close16,
+    renderIcon: Close20,
   };
 
   render() {
