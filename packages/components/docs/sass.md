@@ -2241,6 +2241,7 @@ Generate a media query for a given breakpoint
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅carbon--base-font-size [variable]
 
@@ -14064,6 +14065,7 @@ Inline notification styles
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-01');
     margin: 0 $carbon--spacing-02 0 0;
+    line-height: rem(24px);
   }
 
   .#{$prefix}--inline-notification__subtitle {
@@ -14073,6 +14075,10 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -19028,10 +19034,12 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: none;
+    display: block;
+  }
 
-    @include carbon--breakpoint-down('lg') {
-      display: block;
+  .#{$prefix}--header__menu-toggle__hidden {
+    @include carbon--breakpoint('lg') {
+      display: none;
     }
   }
 
@@ -19257,6 +19265,7 @@ UI shell header
 
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
@@ -19778,11 +19787,7 @@ UI shell side nav
 @mixin carbon-side-nav() {
   //----------------------------------------------------------------------------
   // Side-nav > Panel
-  //----------------------------------------------------------------------------
-  // Used for rendering the actual side rail. There are two states that we have
-  // to style for, namely for when the rail is collapsed and expanded. When
-  // collapsed, the rail is intended to expand on hover. When expanded, it
-  // should have the same dimensions as when expanded on hover.
+  //----------------------------------------------------------------------------.
   .#{$prefix}--side-nav {
     position: fixed;
     top: 0;
@@ -19809,6 +19814,18 @@ UI shell side nav
     }
   }
 
+  //----------------------------------------------------------------------------
+  // Rail
+  //---------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on mouse over. When expanded, it
+  // should have the same dimensions as when expanded on mouse over
+
+  .#{$prefix}--side-nav--rail {
+    width: mini-units(6);
+  }
+
   .#{$prefix}--side-nav--hidden {
     width: 0;
   }
@@ -19830,14 +19847,12 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__overlay-active {
-    @include carbon--breakpoint-down('lg') {
-      height: 100vh;
-      width: 100%;
-      background-color: $overlay-01;
-      opacity: 1;
-      transition: opacity $transition--expansion $carbon--standard-easing, background-color
-          $transition--expansion $carbon--standard-easing;
-    }
+    height: 100vh;
+    width: 100%;
+    background-color: $overlay-01;
+    opacity: 1;
+    transition: opacity $transition--expansion $carbon--standard-easing, background-color
+        $transition--expansion $carbon--standard-easing;
   }
 
   // When used alongside the header, we update the `top` positioning so that we
@@ -19849,11 +19864,6 @@ UI shell side nav
 
   .#{$prefix}--side-nav--fixed {
     width: mini-units(32);
-  }
-
-  .#{$prefix}--side-nav--collapsed {
-    width: mini-units(32);
-    transform: translateX(mini-units(-32));
   }
 
   .#{$prefix}--side-nav--collapsed {
