@@ -55,7 +55,7 @@
       transparent,
       $text-04,
       $hover-primary,
-      $text-04,
+      currentColor,
       $active-primary
     );
 
@@ -70,7 +70,7 @@
       transparent,
       $text-04,
       $hover-secondary,
-      $text-04,
+      currentColor,
       $active-secondary
     );
 
@@ -86,7 +86,7 @@
       $interactive-03,
       $interactive-03,
       $hover-tertiary,
-      $interactive-03,
+      currentColor,
       $active-tertiary,
       1px
     );
@@ -120,7 +120,7 @@
       transparent,
       $link-01,
       $hover-ui,
-      $link-01,
+      currentColor,
       $active-ui
     );
     padding: $button-padding-ghost;
