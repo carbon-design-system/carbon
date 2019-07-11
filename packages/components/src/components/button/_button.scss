@@ -37,9 +37,9 @@
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
-    &:disabled > .#{$prefix}--btn__icon svg {
-      fill: $ui-04;
+    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
+    &:disabled > svg.#{$prefix}--btn__icon {
+      fill: $disabled-03;
     }
   }
 
@@ -120,7 +120,7 @@
       transparent,
       $link-01,
       $hover-ui,
-      $icon-01,
+      $link-01,
       $active-ui
     );
     padding: $button-padding-ghost;
