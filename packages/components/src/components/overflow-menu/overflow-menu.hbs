@@ -6,13 +6,14 @@
 -->
 <div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
   <button
-    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--right {{@root.prefix}}--tooltip--align-start"
+    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--right {{@root.prefix}}--tooltip--align-start"
     aria-haspopup="true" aria-expanded="false" id="{{idSuffix.default}}-trigger" aria-controls="{{idSuffix.default}}">
     <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
-  <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu" aria-labelledby="{{idSuffix.default}}-trigger"
-    data-floating-menu-direction="{{direction}}" id="{{idSuffix.default}}">
+  <ul class="{{@root.prefix}}--overflow-menu-options" tabindex="-1" role="menu"
+    aria-labelledby="{{idSuffix.default}}-trigger" data-floating-menu-direction="{{direction}}"
+    id="{{idSuffix.default}}">
     {{#each items}}
     <li
       class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}">
@@ -29,13 +30,14 @@
 
 <div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
   <button
-    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start"
+    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start"
     aria-haspopup="true" aria-expanded="false" id="{{idSuffix.flip}}-trigger" aria-controls="{{idSuffix.flip}}">
     <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
   <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
-    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.flip}}-trigger"  id="{{idSuffix.flip}}">
+    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.flip}}-trigger"
+    id="{{idSuffix.flip}}">
     {{#each items}}
     <li
       class="{{@root.prefix}}--overflow-menu-options__option {{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled {{/if}} {{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger {{/if}}">
@@ -52,13 +54,14 @@
 
 <div data-overflow-menu class="{{@root.prefix}}--overflow-menu">
   <button
-    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip__trigger--icon {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start"
+    class="{{@root.prefix}}--overflow-menu__trigger {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--left {{@root.prefix}}--tooltip--align-start"
     aria-haspopup="true" aria-expanded="false" id="{{idSuffix.link}}-trigger" aria-controls="{{idSuffix.link}}">
     <span class="{{@root.prefix}}--assistive-text">Overflow</span>
     {{ carbon-icon 'OverflowMenuVertical16' class=(add @root.prefix '--overflow-menu__icon') }}
   </button>
   <ul class="{{@root.prefix}}--overflow-menu-options {{@root.prefix}}--overflow-menu--flip" tabindex="-1"
-    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.link}}-trigger"  id="{{idSuffix.link}}">
+    data-floating-menu-direction="{{direction}}" role="menu" aria-labelledby="{{idSuffix.link}}-trigger"
+    id="{{idSuffix.link}}">
     {{#each items}}
     <li
       class="{{@root.prefix}}--overflow-menu-options__option{{#if disabled}} {{@root.prefix}}--overflow-menu-options__option--disabled{{/if}}{{#if danger}} {{@root.prefix}}--overflow-menu-options__option--danger{{/if}}">
