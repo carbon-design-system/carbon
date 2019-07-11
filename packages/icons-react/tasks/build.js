@@ -10,6 +10,7 @@
 'use strict';
 
 const meta = require('@carbon/icons/build-info.json');
+const { camel } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
@@ -176,6 +177,18 @@ function convertToJSX(node) {
   return `<${elem} ${formatAttributes(attrs)} />`;
 }
 
+const attributeDenylist = ['data', 'aria'];
+
+/**
+ * Determine if the given attribute should be transformed when being converted
+ * to a React prop or if we should pass it through as-is
+ * @param {string} attribute
+ * @returns {boolean}
+ */
+function shouldTransformAttribute(attribute) {
+  return attributeDenylist.every(prefix => !attribute.startsWith(prefix));
+}
+
 /**
  * Serialize a given object of key, value pairs to an JSX-compatible string
  * @param {object} attrs
@@ -183,7 +196,10 @@ function convertToJSX(node) {
  */
 function formatAttributes(attrs) {
   return Object.keys(attrs).reduce((acc, key, index) => {
-    const attribute = `${key}="${attrs[key]}"`;
+    const attribute = shouldTransformAttribute(key)
+      ? `${camel(key)}="${attrs[key]}"`
+      : `${key}="${attrs[key]}"`;
+
     if (index === 0) {
       return attribute;
     }
