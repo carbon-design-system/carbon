@@ -16,7 +16,48 @@ import {
   WarningFilled20,
 } from '@carbon/icons-react';
 
+import Button from '../Button';
+
 const { prefix } = settings;
+
+export class NotificationActionButton extends Component {
+  static propTypes = {
+    /**
+     * Specify an optional className to be applied to the notification action button
+     */
+    className: PropTypes.string,
+
+    /**
+     * Specify the content of the notification action button.
+     */
+    children: PropTypes.node,
+
+    /**
+     * Optionally specify a click handler for the notification action button.
+     */
+    onClick: PropTypes.func,
+  };
+
+  render() {
+    const { children, className, onClick, ...other } = this.props;
+
+    const actionButtonClasses = classNames(
+      className,
+      `${prefix}--inline-notification__action-button`
+    );
+
+    return (
+      <Button
+        className={actionButtonClasses}
+        kind="ghost"
+        onClick={onClick}
+        size="small"
+        {...other}>
+        {children}
+      </Button>
+    );
+  }
+}
 
 export class NotificationButton extends Component {
   static propTypes = {
@@ -354,6 +395,11 @@ export class ToastNotification extends Component {
 export class InlineNotification extends Component {
   static propTypes = {
     /**
+     * Pass in the action nodes that will be rendered within the InlineNotification
+     */
+    actions: PropTypes.node,
+
+    /**
      * Pass in the children that will be rendered within the InlineNotification
      */
     children: PropTypes.node,
@@ -434,6 +480,7 @@ export class InlineNotification extends Component {
     }
 
     const {
+      actions,
       role,
       notificationType,
       onCloseButtonClick, // eslint-disable-line
@@ -471,6 +518,7 @@ export class InlineNotification extends Component {
             {this.props.children}
           </NotificationTextDetails>
         </div>
+        {actions}
         {!hideCloseButton && (
           <NotificationButton
             iconDescription={iconDescription}

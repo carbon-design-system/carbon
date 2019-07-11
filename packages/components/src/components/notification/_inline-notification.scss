@@ -136,6 +136,31 @@
     word-break: break-word;
   }
 
+  .#{$prefix}--inline-notification__action-button {
+    height: rem(32px);
+    margin: $carbon--spacing-03 0;
+
+    @if $carbon--theme == $carbon--theme--white {
+      @include carbon--theme($carbon--theme--g100) {
+        @include inline-notification--button-color;
+
+        &:hover {
+          background-color: $hover-secondary;
+        }
+      }
+    } @else if $carbon--theme == $carbon--theme--g10 {
+      @include carbon--theme($carbon--theme--g100) {
+        @include inline-notification--button-color;
+
+        &:hover {
+          background-color: $hover-secondary;
+        }
+      }
+    } @else {
+      @include inline-notification--button-color;
+    }
+  }
+
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
     display: flex;
@@ -153,10 +178,6 @@
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
 
-    &:focus {
-      @include focus-outline('outline');
-    }
-
     .#{$prefix}--inline-notification__close-icon {
       height: 1rem;
       width: 1rem;
@@ -164,10 +185,24 @@
     }
   }
 
-  .#{$prefix}--inline-notification--low-contrast
+  .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
-    .#{$prefix}--inline-notification__close-icon {
-    fill: $ui-05;
+      .#{$prefix}--inline-notification__close-icon {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--inline-notification__action-button {
+      color: $link-01;
+
+      &:active {
+        color: $carbon--blue-80;
+      }
+
+      &:active,
+      &:hover {
+        background-color: $carbon--white-0;
+      }
+    }
   }
 }
 

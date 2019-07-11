@@ -20,6 +20,17 @@
   }
 }
 
+/// @access private
+/// @group notification
+@mixin inline-notification--button-color {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    color: $link-01;
+  }
+}
+
 //----------------------------------------------
 // Toast Notification
 // ---------------------------------------------
