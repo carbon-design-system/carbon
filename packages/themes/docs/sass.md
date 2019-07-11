@@ -33,6 +33,7 @@
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -105,6 +106,7 @@ Define theme variables from a map of tokens
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -165,6 +167,7 @@ Define theme variables from a map of tokens
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
     --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
     --field-01: #{map-get($theme, 'field-01')};
     --field-02: #{map-get($theme, 'field-02')};
     --inverse-01: #{map-get($theme, 'inverse-01')};
@@ -270,6 +273,7 @@ Define theme variables from a map of tokens
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -958,6 +962,22 @@ Primary links; Ghost button
 
 ```scss
 $link-01: map-get($carbon--theme, 'link-01');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: map-get($carbon--theme, 'inverse-link');
 ```
 
 </details>
