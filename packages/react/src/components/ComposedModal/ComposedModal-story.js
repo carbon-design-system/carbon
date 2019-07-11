@@ -98,7 +98,7 @@ storiesOf('ComposedModal', module)
           </p>
         </ModalBody>
         <ModalFooter>
-          <Button kind={'secondary'}>Cancel</Button>
+          <Button kind="secondary">Cancel</Button>
           <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
             Save
           </Button>
