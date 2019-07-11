@@ -9,7 +9,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { ToastNotification, InlineNotification } from '../Notification';
+import {
+  ToastNotification,
+  InlineNotification,
+  NotificationActionButton,
+} from '../Notification';
 
 const kinds = {
   'Error (error)': 'error',
@@ -40,4 +44,14 @@ storiesOf('Notifications', module)
       style={{ minWidth: '30rem', marginBottom: '.5rem' }}
     />
   ))
-  .add('inline', () => <InlineNotification {...notificationProps()} />);
+  .add('inline', () => (
+    <InlineNotification
+      {...notificationProps()}
+      actions={
+        <NotificationActionButton
+          onClick={action('NotificationActionButton onClick')}>
+          {text('Action (NotificationActionButton > children)', 'Action')}
+        </NotificationActionButton>
+      }
+    />
+  ));
