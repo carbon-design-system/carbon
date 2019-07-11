@@ -149,7 +149,7 @@ describe('<ModalFooter />', () => {
     it('renders secondary button if secondary text && danger', () => {
       const buttonComponent = secondaryWrapper.find(Button);
       expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.props().kind).toBe('secondary');
+      expect(buttonComponent.prop('kind')).toBe('secondary');
     });
   });
 });
