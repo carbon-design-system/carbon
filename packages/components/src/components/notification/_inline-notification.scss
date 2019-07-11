@@ -136,10 +136,9 @@
     word-break: break-word;
   }
 
-  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--sm {
+  .#{$prefix}--inline-notification__action-button {
     height: rem(32px);
     margin: $carbon--spacing-03 0;
-    padding: rem(3px) $carbon--spacing-05;
 
     @if $carbon--theme == $carbon--theme--white {
       @include carbon--theme($carbon--theme--g100) {
