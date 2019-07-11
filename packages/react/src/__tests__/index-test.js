@@ -75,6 +75,7 @@ describe('Carbon Components React', () => {
         "ModalHeader",
         "ModalWrapper",
         "MultiSelect",
+        "NotificationActionButton",
         "NotificationButton",
         "NotificationTextDetails",
         "NumberInput",
