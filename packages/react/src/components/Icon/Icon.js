@@ -221,7 +221,7 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
   fillRule: 'evenodd',
-  role: 'image',
+  role: 'img',
 };
 
 export { icons };
