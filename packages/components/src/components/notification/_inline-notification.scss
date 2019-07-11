@@ -194,8 +194,13 @@
     .#{$prefix}--inline-notification__action-button {
       color: $link-01;
 
+      &:active {
+        color: $carbon--blue-80;
+      }
+
+      &:active,
       &:hover {
-        background-color: $ui-background;
+        background-color: $carbon--white-0;
       }
     }
   }
