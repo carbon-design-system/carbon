@@ -35,7 +35,7 @@ describe('Icon', () => {
     });
 
     it('should have a default role prop', () => {
-      expect(wrapper.props().role).toEqual('img');
+      expect(wrapper.props().role).toEqual('image');
     });
 
     it('should have expected viewBox on <svg>', () => {
