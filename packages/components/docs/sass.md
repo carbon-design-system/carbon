@@ -288,6 +288,7 @@
 - [notification](#notification)
   - [❌inline-notifications [mixin]](#inline-notifications-mixin)
   - [❌inline-notification--color [mixin]](#inline-notification--color-mixin)
+  - [❌inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [❌notification--color [mixin]](#notification--color-mixin)
   - [❌notification--experimental [mixin]](#notification--experimental-mixin)
   - [❌toast-notifications [mixin]](#toast-notifications-mixin)
@@ -2574,6 +2575,7 @@ $carbon--spacing-03: carbon--mini-units(1);
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
@@ -3868,6 +3870,8 @@ Define theme variables from a map of tokens
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--white [variable]
 
@@ -3945,6 +3949,8 @@ $carbon--theme--white: (
 - **Type**: `Map`
 - **Aliased**:
   - `carbon--theme`
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -4020,6 +4026,8 @@ $carbon--theme--g10: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g90 [variable]
 
@@ -4170,6 +4178,8 @@ $carbon--theme--g100: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme [variable]
 
@@ -4189,6 +4199,7 @@ $carbon--theme: $carbon--theme--white;
 - **Alias**: `carbon--theme--white`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -4676,6 +4687,8 @@ $link-01: map-get($carbon--theme, 'link-01');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [link [mixin]](#link-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅field-01 [variable]
@@ -5089,6 +5102,7 @@ $hover-secondary: map-get($carbon--theme, 'hover-secondary');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
@@ -5171,6 +5185,7 @@ $hover-ui: map-get($carbon--theme, 'hover-ui');
   - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -9924,6 +9939,12 @@ Data table action styles
     .#{$prefix}--search-close {
     height: $layout-04;
     width: $layout-04;
+
+    &:before {
+      top: 2px;
+      height: calc(100% - 4px);
+      background-color: $hover-ui;
+    }
   }
 
   //-------------------------------------------------
@@ -10017,7 +10038,6 @@ Data table action styles
     cursor: pointer;
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
@@ -10397,6 +10417,7 @@ Data table action styles
   - [ui-01 [variable]](#ui-01-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [layout-01 [variable]](#layout-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
@@ -14073,6 +14094,31 @@ Inline notification styles
     word-break: break-word;
   }
 
+  .#{$prefix}--inline-notification__action-button {
+    height: rem(32px);
+    margin: $carbon--spacing-03 0;
+
+    @if $carbon--theme == $carbon--theme--white {
+      @include carbon--theme($carbon--theme--g100) {
+        @include inline-notification--button-color;
+
+        &:hover {
+          background-color: $hover-secondary;
+        }
+      }
+    } @else if $carbon--theme == $carbon--theme--g10 {
+      @include carbon--theme($carbon--theme--g100) {
+        @include inline-notification--button-color;
+
+        &:hover {
+          background-color: $hover-secondary;
+        }
+      }
+    } @else {
+      @include inline-notification--button-color;
+    }
+  }
+
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
     display: flex;
@@ -14090,10 +14136,6 @@ Inline notification styles
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
 
-    &:focus {
-      @include focus-outline('outline');
-    }
-
     .#{$prefix}--inline-notification__close-icon {
       height: 1rem;
       width: 1rem;
@@ -14101,10 +14143,24 @@ Inline notification styles
     }
   }
 
-  .#{$prefix}--inline-notification--low-contrast
+  .#{$prefix}--inline-notification--low-contrast {
     .#{$prefix}--inline-notification__close-button
-    .#{$prefix}--inline-notification__close-icon {
-    fill: $ui-05;
+      .#{$prefix}--inline-notification__close-icon {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--inline-notification__action-button {
+      color: $link-01;
+
+      &:active {
+        color: $carbon--blue-80;
+      }
+
+      &:active,
+      &:hover {
+        background-color: $carbon--white-0;
+      }
+    }
   }
 }
 ```
@@ -14115,6 +14171,8 @@ Inline notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14130,7 +14188,14 @@ Inline notification styles
   - [support-03 [variable]](#support-03-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--theme [variable]](#carbon--theme-variable)
+  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
+  - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [hover-secondary [variable]](#hover-secondary-variable)
+  - [carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [link-01 [variable]](#link-01-variable)
 
 ### ❌inline-notification--color [mixin]
 
@@ -14153,6 +14218,30 @@ Inline notification styles
 - **Group**: [notification](#notification)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+
+### ❌inline-notification--button-color [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin inline-notification--button-color() {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    color: $link-01;
+  }
+}
+```
+
+</details>
+
+- **Group**: [notification](#notification)
+- **Requires**:
+  - [link-01 [variable]](#link-01-variable)
+- **Used by**:
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ❌notification--color [mixin]
 
