@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { AddFilled16, Search16 } from '@carbon/icons-react';
+import { Add16, Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 
@@ -19,15 +19,14 @@ const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  'Add with filled circle (AddFilled16 from `@carbon/icons-react`)':
-    'AddFilled16',
+  'Add with filled circle (Add16 from `@carbon/icons-react`)': 'Add16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
 };
 
 const iconMap = {
   iconAddSolid,
   iconSearch,
-  AddFilled16,
+  Add16,
   Search16,
 };
 
@@ -60,6 +59,32 @@ const props = {
       onClick: action('onClick'),
       onFocus: action('onFocus'),
       small: boolean('Small (small) - Deprecated in favor of `size`', false),
+    };
+  },
+  iconOnly: () => {
+    const iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    return {
+      className: 'some-class',
+      kind: select('Button kind (kind)', kinds, 'primary'),
+      disabled: boolean('Disabled (disabled)', false),
+      size: select('Button size (size)', sizes, 'default'),
+      renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
+      iconDescription: text(
+        'Icon description (iconDescription)',
+        'Button icon'
+      ),
+      tooltipPosition: select(
+        'Tooltip position (tooltipPosition)',
+        ['top', 'right', 'bottom', 'left'],
+        'bottom'
+      ),
+      tooltipAlignment: select(
+        'Tooltip alignment (tooltipAlignment)',
+        ['start', 'center', 'end'],
+        'center'
+      ),
+      onClick: action('onClick'),
+      onFocus: action('onFocus'),
     };
   },
   set: () => {
@@ -137,7 +162,7 @@ storiesOf('Buttons', module)
           Danger buttons should be used for a negative action (such as Delete) on the page.
 
           Modify the behavior of the button by changing its event properties.
-          
+
           Field buttons may be use directly next to an input element, to visually align their heights.
 
           Small buttons may be used when there is not enough space for a
@@ -150,6 +175,7 @@ storiesOf('Buttons', module)
       },
     }
   )
+  .add('Icon-only buttons', () => <Button {...props.iconOnly()} hasIconOnly />)
   .add(
     'Sets of Buttons',
     () => {
