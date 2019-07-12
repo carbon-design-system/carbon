@@ -130,12 +130,6 @@ describe('ContentSwitcher', () => {
       </ContentSwitcher>
     );
 
-    // Simulate prop change
-    for (let i = children - 1; i >= 0; i--) {
-      wrapper.setProps({ selectedIndex: i });
-      expect(mockProps.onChange).toHaveBeenLastCalledWith(i);
-    }
-
     // Simulate click to change selected index
     for (let i = children - 1; i >= 0; i--) {
       wrapper
