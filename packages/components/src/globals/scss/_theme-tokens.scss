@@ -110,7 +110,7 @@
   /// @type Number
   /// @access public
   /// @group button
-  $button-padding-ghost-sm: 0.375rem 1rem !default !global;
+  $button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default !global;
 
   /// @type Number
   /// @access public
