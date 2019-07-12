@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "10.4.0-rc.1",
+  "version": "10.4.0-rc.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,14 +29,14 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "10.3.0-rc.1"
+    "@carbon/icon-helpers": "10.3.0-rc.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
-    "@carbon/cli-reporter": "10.3.0-rc.1",
-    "@carbon/icons": "10.4.0-rc.1",
-    "browserslist-config-carbon": "10.4.0-rc.1",
+    "@carbon/cli-reporter": "10.3.0-rc.2",
+    "@carbon/icons": "10.4.0-rc.2",
+    "browserslist-config-carbon": "10.4.0-rc.2",
     "change-case": "^3.1.0",
     "core-js": "^3.1.3",
     "fs-extra": "^7.0.0",
