@@ -36,7 +36,7 @@ const props = () => {
     },
     icon: iconMap[selectedIcon],
     name: iconMap[selectedIcon] ? undefined : selectedIcon,
-    role: text('ARIA role (role)', ''),
+    role: text('ARIA role (role)', 'img'),
     fill: text('The SVG `fill` attribute (fill)', 'grey'),
     fillRule: text('The SVG `fillRule` attribute (fillRule)', ''),
     width: text('The SVG `width` attribute (width)', ''),

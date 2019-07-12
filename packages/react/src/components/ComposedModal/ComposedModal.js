@@ -493,7 +493,7 @@ export class ModalFooter extends Component {
           <Button
             className={secondaryClass}
             onClick={this.handleRequestClose}
-            kind={danger ? 'tertiary' : 'secondary'}>
+            kind="secondary">
             {secondaryButtonText}
           </Button>
         )}
