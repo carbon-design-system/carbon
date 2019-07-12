@@ -19942,12 +19942,14 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__overlay-active {
-    height: 100vh;
-    width: 100%;
-    background-color: $overlay-01;
-    opacity: 1;
-    transition: opacity $transition--expansion $carbon--standard-easing, background-color
-        $transition--expansion $carbon--standard-easing;
+    @include carbon--breakpoint-down('lg') {
+      height: 100vh;
+      width: 100%;
+      background-color: $overlay-01;
+      opacity: 1;
+      transition: opacity $transition--expansion $carbon--standard-easing, background-color
+          $transition--expansion $carbon--standard-easing;
+    }
   }
 
   // When used alongside the header, we update the `top` positioning so that we
