@@ -33,9 +33,9 @@
   &:disabled,
   &.#{$prefix}--btn--disabled {
     cursor: not-allowed;
-    color: $ui-04;
-    background: $ibm-color__gray-30;
-    border-color: $ibm-color__gray-30;
+    color: $disabled-03;
+    background: $disabled-02;
+    border-color: $disabled-02;
   }
 
   .#{$prefix}--btn__icon {
