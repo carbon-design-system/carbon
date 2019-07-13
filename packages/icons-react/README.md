@@ -73,16 +73,18 @@ Certain icons in the library support two distinct fill colors. You can target
 the inner path by using the `[data-icon-path="inner-path"]` attribute selector.
 For example:
 
-```css
+```scss
 // CSS custom class name to set the fill of the icon to `yellow`
 svg.outer-icon-fill {
   fill: yellow;
 }
 
 // Use the `data-icon-path` attribute selector to target the inner path
-// where we want to set the fill to `black`
+// where we want to set the fill to `black`. We also set `opacity` to `1` so
+// that this inner-path is visible.
 svg.outer-icon-fill [data-icon-path='inner-path'] {
   fill: black;
+  opacity: 1;
 }
 ```
 
