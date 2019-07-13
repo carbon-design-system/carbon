@@ -90,11 +90,7 @@ svg.outer-icon-fill [data-icon-path='inner-path'] {
 import { WarningFilled16 } from '@carbon/icons-react';
 
 function MyComponent() {
-  return (
-    <button>
-      <WarningFilled16 aria-label="Add" className="my-custom-class" />
-    </button>
-  );
+  return <WarningFilled16 aria-label="Add" className="my-custom-class" />;
 }
 ```
 
