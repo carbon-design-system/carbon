@@ -6,5 +6,6 @@ import React from 'react';
 
 storiesOf('Icon', module)
   .add('default', () => <CheckmarkFilled32 />)
+  .add('with fill', () => <CheckmarkFilled32 style={{ fill: 'rebeccapurple' }} />)
   .add('with aria-label', () => <CheckmarkFilled32 aria-label="Label" />)
   .add('with focus', () => <CheckmarkFilled32 aria-label="Label" tabIndex="0" />);
