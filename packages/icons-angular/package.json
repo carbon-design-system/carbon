@@ -4,8 +4,8 @@
   "version": "10.3.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-angular",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icons-angular",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "lib",
     "umd"
