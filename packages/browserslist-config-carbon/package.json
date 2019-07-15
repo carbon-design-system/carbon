@@ -1,5 +1,6 @@
 {
   "name": "browserslist-config-carbon",
+  "private": true,
   "description": "Browserslist config for the Carbon Design System",
   "version": "10.3.0",
   "license": "Apache-2.0",
@@ -17,6 +18,6 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   }
 }

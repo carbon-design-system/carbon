@@ -1,5 +1,6 @@
 {
   "name": "@carbon/import-once",
+  "private": true,
   "description": "Sass helper for importing files only once. Used in the Carbon Design System",
   "version": "10.2.0",
   "license": "Apache-2.0",
@@ -16,7 +17,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "scripts": {
     "build": "bundler sassdoc \"scss/*.scss\""

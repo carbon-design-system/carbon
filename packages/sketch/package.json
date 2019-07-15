@@ -14,7 +14,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production skpm-build",

@@ -1,5 +1,6 @@
 {
   "name": "carbon-upgrade",
+  "private": true,
   "description": "[Experimental] A tool for upgrading Carbon versions",
   "version": "0.0.8",
   "license": "Apache-2.0",
@@ -23,7 +24,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "scripts": {},
   "dependencies": {

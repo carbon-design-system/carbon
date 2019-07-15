@@ -1,5 +1,6 @@
 {
   "name": "@carbon/test-utils",
+  "private": true,
   "version": "10.2.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/test-utils",

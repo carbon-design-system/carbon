@@ -17,7 +17,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "peerDependencies": {
     "stylelint": "^9.10.1"
