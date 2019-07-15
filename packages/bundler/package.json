@@ -1,5 +1,6 @@
 {
   "name": "@carbon/bundler",
+  "private": true,
   "description": "Bundler used for libraries in the Carbon Design System",
   "version": "10.2.0",
   "license": "Apache-2.0",
@@ -18,7 +19,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "dependencies": {
     "@babel/core": "^7.1.6",

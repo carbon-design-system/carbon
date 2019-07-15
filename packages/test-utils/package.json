@@ -15,7 +15,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "peerDependencies": {
     "node-sass": "^4.11.0"
