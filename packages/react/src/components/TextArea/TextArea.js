@@ -12,7 +12,6 @@ import { settings } from 'carbon-components';
 import { WarningFilled16, EditOff16 } from '@carbon/icons-react';
 import Tooltip from '../Tooltip';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
-import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 
@@ -224,9 +223,7 @@ TextArea.propTypes = {
    * Optionally provide an `onChange` handler that is called whenever <textarea>
    * is updated
    */
-  onChange: !useControlledStateWithValue
-    ? PropTypes.func
-    : requiredIfValueExists(PropTypes.func),
+  onChange: requiredIfValueExists(PropTypes.func),
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the

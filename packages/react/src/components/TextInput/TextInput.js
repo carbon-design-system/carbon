@@ -15,7 +15,6 @@ import ControlledPasswordInput from './ControlledPasswordInput';
 import Tooltip from '../Tooltip';
 import { textInputProps } from './util';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
-import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 
 const { prefix } = settings;
 const DefaultCharCounter = ({ disabled, count, maxLength }) => {
@@ -212,9 +211,7 @@ TextInput.propTypes = {
    * Optionally provide an `onChange` handler that is called whenever <input>
    * is updated
    */
-  onChange: !useControlledStateWithValue
-    ? PropTypes.func
-    : requiredIfValueExists(PropTypes.func),
+  onChange: requiredIfValueExists(PropTypes.func),
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the
