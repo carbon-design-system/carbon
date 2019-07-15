@@ -8,7 +8,7 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const meta = require('@carbon/icons/build-info.json');
+const meta = require('@rocketsoftware/icons/build-info.json');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
@@ -44,7 +44,7 @@ async function build({ cwd }) {
         BUNDLE_FORMATS.map(async ({ format, directory }) => {
           const bundle = await rollup({
             input: jsFilepath,
-            external: ['@carbon/icon-helpers'],
+            external: ['@rocketsoftware/icon-helpers'],
           });
           const outputOptions = {
             format,
@@ -53,7 +53,7 @@ async function build({ cwd }) {
           if (format === 'umd') {
             outputOptions.name = info.moduleName;
             outputOptions.globals = {
-              '@carbon/icon-helpers': 'CarbonIconHelpers',
+              '@rocketsoftware/icon-helpers': 'CarbonIconHelpers',
             };
           }
           await bundle.write(outputOptions);
