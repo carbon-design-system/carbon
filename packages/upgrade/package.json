@@ -23,7 +23,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "scripts": {},
   "dependencies": {

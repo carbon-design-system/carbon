@@ -7,12 +7,12 @@
 
 'use strict';
 
-const CarbonIcons = require('@carbon/icons');
+const CarbonIcons = require('@rocketsoftware/icons');
 const {
   formatAttributes,
   getAttributes,
   toString,
-} = require('@carbon/icon-helpers');
+} = require('@rocketsoftware/icon-helpers');
 const { SafeString } = require('handlebars');
 
 function iconHelper(name, attributes = {}, options = {}) {

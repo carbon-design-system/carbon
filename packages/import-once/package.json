@@ -16,7 +16,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "scripts": {
     "build": "bundler sassdoc \"scss/*.scss\""

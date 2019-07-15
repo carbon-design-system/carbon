@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getAttributes } from '@carbon/icon-helpers';
+import { getAttributes } from '@rocketsoftware/icon-helpers';
 import PropTypes from 'prop-types';
 import React from 'react';
 

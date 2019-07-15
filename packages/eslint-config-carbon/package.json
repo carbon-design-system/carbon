@@ -14,7 +14,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "peerDependencies": {
     "eslint": "^6.0.0"

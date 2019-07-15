@@ -17,7 +17,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",

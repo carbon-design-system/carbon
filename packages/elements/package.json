@@ -1,12 +1,12 @@
 {
-  "name": "@carbon/elements",
+  "name": "@rocketsoftware/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
   "version": "10.3.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/elements",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/elements",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -31,14 +31,14 @@
     "clean": "rimraf es lib umd && node tasks/clean.js"
   },
   "dependencies": {
-    "@carbon/colors": "10.2.0",
-    "@carbon/grid": "10.3.0",
-    "@carbon/icons": "10.3.0",
+    "@rocketsoftware/colors": "10.2.0",
+    "@rocketsoftware/grid": "10.3.0",
+    "@rocketsoftware/icons": "10.3.0",
     "@carbon/import-once": "10.2.0",
-    "@carbon/layout": "10.2.0",
-    "@carbon/motion": "10.2.0",
-    "@carbon/themes": "^10.3.1",
-    "@carbon/type": "10.2.0"
+    "@rocketsoftware/layout": "10.2.0",
+    "@rocketsoftware/motion": "10.2.0",
+    "@rocketsoftware/themes": "^10.3.1",
+    "@rocketsoftware/type": "10.2.0"
   },
   "devDependencies": {
     "@carbon/bundler": "10.2.0",

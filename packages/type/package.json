@@ -1,12 +1,12 @@
 {
-  "name": "@carbon/type",
+  "name": "@rocketsoftware/type",
   "description": "Typography for digital and software products using the Carbon Design System",
   "version": "10.2.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/type",
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/type",
+  "bugs": "https://github.com/RocketSoftware/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@carbon/import-once": "10.2.0",
-    "@carbon/layout": "10.2.0"
+    "@rocketsoftware/layout": "10.2.0"
   },
   "devDependencies": {
     "@carbon/bundler": "10.2.0",
@@ -41,7 +41,7 @@
   },
   "eyeglass": {
     "exports": false,
-    "name": "@carbon/type",
+    "name": "@rocketsoftware/type",
     "sassDir": "scss",
     "needs": "^1.3.0"
   }

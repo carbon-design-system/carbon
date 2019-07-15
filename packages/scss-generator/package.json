@@ -16,7 +16,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "dependencies": {
     "prettier": "^1.17.0"
