@@ -18,7 +18,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "dependencies": {
     "@babel/core": "^7.1.6",

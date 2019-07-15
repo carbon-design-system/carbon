@@ -17,6 +17,6 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   }
 }

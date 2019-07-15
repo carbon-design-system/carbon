@@ -16,7 +16,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "private"
   },
   "dependencies": {
     "chalk": "^2.4.1"
