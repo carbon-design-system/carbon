@@ -37,9 +37,9 @@
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
-    &:disabled > .#{$prefix}--btn__icon svg {
-      fill: $ui-04;
+    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
+    &:disabled > svg.#{$prefix}--btn__icon {
+      fill: $disabled-03;
     }
   }
 
@@ -55,7 +55,7 @@
       transparent,
       $text-04,
       $hover-primary,
-      $text-04,
+      currentColor,
       $active-primary
     );
 
@@ -70,7 +70,7 @@
       transparent,
       $text-04,
       $hover-secondary,
-      $text-04,
+      currentColor,
       $active-secondary
     );
 
@@ -86,7 +86,7 @@
       $interactive-03,
       $interactive-03,
       $hover-tertiary,
-      $interactive-03,
+      currentColor,
       $active-tertiary,
       1px
     );
@@ -118,9 +118,9 @@
     @include button-theme(
       transparent,
       transparent,
-      $interactive-04,
+      $link-01,
       $hover-ui,
-      $interactive-04,
+      currentColor,
       $active-ui
     );
     padding: $button-padding-ghost;
@@ -132,10 +132,10 @@
 
     &:hover,
     &:active {
-      color: $interactive-04;
+      color: $icon-01;
 
       .#{$prefix}--btn__icon path {
-        fill: $interactive-04;
+        fill: $icon-01;
       }
     }
 
@@ -165,6 +165,10 @@
 
   .#{$prefix}--btn--icon-only {
     @include tooltip--trigger('icon', 'bottom');
+  }
+
+  .#{$prefix}--btn--icon-only:focus svg {
+    outline: none;
   }
 
   .#{$prefix}--btn--icon-only--top {
