@@ -38,11 +38,9 @@ const ListBoxField = ({
   ...rest
 }) => (
   <div
-    role="combobox"
-    aria-haspopup="listbox"
-    aria-expanded={rest[`aria-expanded`]}
-    aria-owns={(rest[`aria-expanded`] && `${id}__menu`) || null}
-    aria-controls={(rest[`aria-expanded`] && `${id}__menu`) || null}
+    role={rest['aria-expanded'] ? 'combobox' : rest.role || 'combobox'}
+    aria-owns={(rest['aria-expanded'] && `${id}__menu`) || null}
+    aria-controls={(rest['aria-expanded'] && `${id}__menu`) || null}
     className={`${prefix}--list-box__field`}
     tabIndex={(!disabled && tabIndex) || -1}
     {...rest}

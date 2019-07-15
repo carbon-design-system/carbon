@@ -7,7 +7,6 @@ exports[`ListBoxField should render 1`] = `
 >
   <div
     aria-controls={null}
-    aria-haspopup="listbox"
     aria-label="Open menu"
     aria-owns={null}
     className="bx--list-box__field"
@@ -73,7 +72,6 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
   <div
     aria-controls="test-listbox__menu"
     aria-expanded={true}
-    aria-haspopup="listbox"
     aria-label="Close menu"
     aria-owns="test-listbox__menu"
     className="bx--list-box__field"
