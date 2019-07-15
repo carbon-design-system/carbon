@@ -147,10 +147,7 @@ export default class Search extends Component {
     const CloseIconX = !small ? Close20 : Close16;
 
     return (
-      <div
-        className={searchClasses}
-        role="search"
-        aria-labelledby={`${id}-label`}>
+      <div className={searchClasses} role="search">
         <Search16
           className={`${prefix}--search-magnifier`}
           aria-label={labelText}
