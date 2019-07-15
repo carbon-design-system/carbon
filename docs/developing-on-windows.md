@@ -1,14 +1,16 @@
 ## Development on Windows 10
 
 This is a brief guide to getting a Windows environment set up for Carbon
-development. We'll be using the Windows Subsystem for Linux with an Ubuntu
-install 👐🏽.
+development. We'll be using the
+[Windows Subsystem](https://docs.microsoft.com/en-us/windows/wsl/about) for
+Linux with an Ubuntu install 👐🏽.
 
-Note: if you have Windows native versions of Yarn, NVM/Node, Python and the like
-Windows automatically imports your paths into your WSL by default (running
-`echo $PATH` can confirm this), there's nothing wrong with this, but it can be a
-source of weird bugs when WSL is attempting to run Windows versions of -- for
-example Python -- instead of your WSL version. 🤦🏽‍♂️
+Note: if you have native Windows versions of Yarn, NVM/Node, Python and the like
+[Windows automatically imports your paths into your WSL by default](https://github.com/Microsoft/WSL/issues/1890)
+(running `echo $PATH` can confirm this), this can be a source of weird bugs when
+WSL is attempting to run Windows versions of -- for example Python -- instead of
+your WSL version. 🤦🏽‍♂️ That interop is fine (using Windows executables via WSL),
+but can be unexpected.
 
 1. Install Ubuntu 18.04 LTS via the Microsoft Store
 2. Run the Ubuntu application -- which should look like a familiar bash terminal
