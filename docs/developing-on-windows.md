@@ -1,0 +1,39 @@
+## Development on Windows 10
+
+This is a brief guide to getting a Windows environment set up for Carbon
+development. We'll be using the Windows Subsystem for Linux with an Ubuntu
+install 👐🏽.
+
+Note: if you have Windows native versions of Yarn, NVM/Node, Python and the like
+Windows automatically imports your paths into your WSL by default, there's
+nothing wrong with this, but it can be a source of weird bugs when WSL is
+attempting to run Windows versions of -- for example Python -- instead of your
+WSL version. 🤦🏽‍♂️
+
+1. Install Ubuntu 18.04 LTS via the Microsoft Store
+2. Run the Ubuntu application -- which should look like a familiar bash terminal
+   (the remainder of the guide will happen here 👍🏽)
+3. Setup a user name and password when prompted
+4. Update your Ubuntu repositories `sudo apt-get update`
+5. Install the build-essential package `sudo apt install build-essential`
+6. Install nvm via
+   `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
+7. Source your newly NVMed .bashrc `source ~/.bashrc`
+8. Install Node 10 `nvm install 10`
+9. Install Python 2 `sudo apt install python-minimal`
+10. Install Yarn by running:
+    - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
+    - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
+    - `sudo apt-get update && sudo apt-get install yarn`
+11. Enable `chmod`/`chown` functionality (allowing you to `git clone...` from
+    WSL)
+    - `sudo umount /mnt/c`
+    - `sudo mount -t drvfs C: /mnt/c -o metadata`
+12. Change directories into your projects folder
+    `cd /mnt/c/Users/{username}/projects` (Just an example, use whatever you'd
+    like)
+13. Clone our repo
+    `git clone https://github.com/carbon-design-system/carbon.git`
+14. In the root folder of your freshly cloned repo install and build
+    - `yarn install`
+    - `yarn build`
