@@ -404,7 +404,7 @@ describe('File Uploader', function() {
         writable: false,
         value: { types: ['Files'] },
       });
-      document.dispatchEvent(dragover);
+      instance.dropContainer.dispatchEvent(dragover);
       expect(
         instance.dropContainer.classList.contains(
           instance.options.classDragOver
@@ -445,7 +445,7 @@ describe('File Uploader', function() {
         writable: false,
         value: { types: ['Files'] },
       });
-      document.dispatchEvent(drop);
+      instance.dropContainer.dispatchEvent(drop);
       expect(instance._displayFilenames).toHaveBeenCalled();
       expect(
         instance.dropContainer.classList.contains(

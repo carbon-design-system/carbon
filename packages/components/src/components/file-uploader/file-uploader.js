@@ -51,9 +51,10 @@ class FileUploader extends mixin(
     this.manage(on(this.input, 'change', () => this._displayFilenames()));
     this.manage(on(this.container, 'click', this._handleDeleteButton));
     this.manage(
-      on(this.element.ownerDocument, 'dragover', this._handleDragDrop)
+      on(this.element.ownerDocument, 'dragleave', this._handleDragDrop)
     );
-    this.manage(on(this.element.ownerDocument, 'drop', this._handleDragDrop));
+    this.manage(on(this.dropContainer, 'dragover', this._handleDragDrop));
+    this.manage(on(this.dropContainer, 'drop', this._handleDragDrop));
   }
 
   _filenamesHTML(name, id) {
