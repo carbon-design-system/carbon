@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "10.4.0",
+  "version": "10.4.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
