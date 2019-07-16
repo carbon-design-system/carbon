@@ -102,22 +102,21 @@ describe('ContentSwitcher', () => {
       </ContentSwitcher>
     );
 
-    const firstSwitchTrigger = wrapper
+    const secondSwitchTrigger = wrapper
       .find(Switch)
-      .at(0)
+      .at(1)
       .find('button');
-    firstSwitchTrigger.simulate('click');
+    secondSwitchTrigger.simulate('click');
 
-    // expect(document.activeElement === firstSwitchTrigger.getDOMNode()).toBe(
-    // true
-    // );
+    expect(document.activeElement === secondSwitchTrigger.getDOMNode()).toBe(
+      true
+    );
 
     wrapper.setProps({ selectedIndex: 1 });
 
-    // console.log(document.activeElement);
-    // expect(document.activeElement === firstSwitchTrigger.getDOMNode()).toBe(
-    // true
-    // );
+    expect(document.activeElement === secondSwitchTrigger.getDOMNode()).toBe(
+      true
+    );
   });
 
   it('should call `onChange` when the selected index changes', () => {
