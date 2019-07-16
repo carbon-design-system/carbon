@@ -4295,7 +4295,6 @@ $interactive-04: map-get($carbon--theme, 'interactive-04');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [loading [mixin]](#loading-mixin)
 
 ### ✅ui-background [variable]
@@ -4427,8 +4426,6 @@ $ui-04: map-get($carbon--theme, 'ui-04');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
-  - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -4686,6 +4683,7 @@ $link-01: map-get($carbon--theme, 'link-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
@@ -5082,6 +5080,7 @@ $hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
 
 ### ✅hover-secondary [variable]
 
@@ -5375,6 +5374,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
@@ -5408,6 +5408,7 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -8710,9 +8711,9 @@ Button styles
   .#{$prefix}--btn {
     @include button-base;
 
-    &.#{$prefix}--btn--disabled > .#{$prefix}--btn__icon svg,
-    &:disabled > .#{$prefix}--btn__icon svg {
-      fill: $ui-04;
+    &.#{$prefix}--btn--disabled > svg.#{$prefix}--btn__icon,
+    &:disabled > svg.#{$prefix}--btn__icon {
+      fill: $disabled-03;
     }
   }
 
@@ -8728,7 +8729,7 @@ Button styles
       transparent,
       $text-04,
       $hover-primary,
-      $text-04,
+      currentColor,
       $active-primary
     );
 
@@ -8743,7 +8744,7 @@ Button styles
       transparent,
       $text-04,
       $hover-secondary,
-      $text-04,
+      currentColor,
       $active-secondary
     );
 
@@ -8759,7 +8760,7 @@ Button styles
       $interactive-03,
       $interactive-03,
       $hover-tertiary,
-      $interactive-03,
+      currentColor,
       $active-tertiary,
       1px
     );
@@ -8791,9 +8792,9 @@ Button styles
     @include button-theme(
       transparent,
       transparent,
-      $interactive-04,
+      $link-01,
       $hover-ui,
-      $interactive-04,
+      currentColor,
       $active-ui
     );
     padding: $button-padding-ghost;
@@ -8805,10 +8806,10 @@ Button styles
 
     &:hover,
     &:active {
-      color: $interactive-04;
+      color: $hover-primary-text;
 
       .#{$prefix}--btn__icon path {
-        fill: $interactive-04;
+        fill: $hover-primary-text;
       }
     }
 
@@ -8838,6 +8839,10 @@ Button styles
 
   .#{$prefix}--btn--icon-only {
     @include tooltip--trigger('icon', 'bottom');
+  }
+
+  .#{$prefix}--btn--icon-only:focus svg {
+    outline: none;
   }
 
   .#{$prefix}--btn--icon-only--top {
@@ -8908,7 +8913,6 @@ Button styles
   - [button-theme [mixin]](#button-theme-mixin)
   - [prefix [variable]](#prefix-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
-  - [ui-04 [variable]](#ui-04-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -8920,10 +8924,11 @@ Button styles
   - [hover-tertiary [variable]](#hover-tertiary-variable)
   - [active-tertiary [variable]](#active-tertiary-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [interactive-04 [variable]](#interactive-04-variable)
+  - [link-01 [variable]](#link-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -8960,9 +8965,9 @@ Button base styles
   &:disabled,
   &.#{$prefix}--btn--disabled {
     cursor: not-allowed;
-    color: $ui-04;
-    background: $ibm-color__gray-30;
-    border-color: $ibm-color__gray-30;
+    color: $disabled-03;
+    background: $disabled-02;
+    border-color: $disabled-02;
   }
 
   .#{$prefix}--btn__icon {
@@ -8981,7 +8986,8 @@ Button base styles
 - **Group**: [button](#button)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -19936,12 +19942,14 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__overlay-active {
-    height: 100vh;
-    width: 100%;
-    background-color: $overlay-01;
-    opacity: 1;
-    transition: opacity $transition--expansion $carbon--standard-easing, background-color
-        $transition--expansion $carbon--standard-easing;
+    @include carbon--breakpoint-down('lg') {
+      height: 100vh;
+      width: 100%;
+      background-color: $overlay-01;
+      opacity: 1;
+      transition: opacity $transition--expansion $carbon--standard-easing, background-color
+          $transition--expansion $carbon--standard-easing;
+    }
   }
 
   // When used alongside the header, we update the `top` positioning so that we
