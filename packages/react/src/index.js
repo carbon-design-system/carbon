@@ -67,6 +67,7 @@ export MultiSelect from './components/MultiSelect';
 export {
   ToastNotification,
   InlineNotification,
+  NotificationActionButton,
   NotificationButton,
   NotificationTextDetails,
 } from './components/Notification';

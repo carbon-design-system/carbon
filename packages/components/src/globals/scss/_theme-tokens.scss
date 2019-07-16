@@ -110,7 +110,7 @@
   /// @type Number
   /// @access public
   /// @group button
-  $button-padding-ghost-sm: 0.375rem 1rem !default !global;
+  $button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default !global;
 
   /// @type Number
   /// @access public
@@ -342,10 +342,7 @@
   /// @type Color
   /// @access public
   /// @group skeleton
-  $skeleton: rgba(
-    #3d70b2,
-    0.1
-  ) !default !global; //old $color__blue-51/$field-01 TODO: Define for experimental
+  $skeleton: $skeleton-01 !default !global; // TODO: Remove this in next major release
 }
 
 @include exports('theme') {

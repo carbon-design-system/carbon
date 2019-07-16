@@ -30,9 +30,12 @@
     width: 100%;
     justify-content: flex-end;
     transform: translate3d(0, 0, 0);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     transition: transform $duration--fast-02 motion(standard, productive),
       clip-path $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
@@ -105,6 +108,12 @@
     .#{$prefix}--search-close {
     height: $layout-04;
     width: $layout-04;
+
+    &:before {
+      top: 2px;
+      height: calc(100% - 4px);
+      background-color: $hover-ui;
+    }
   }
 
   //-------------------------------------------------
@@ -198,7 +207,6 @@
     cursor: pointer;
     height: $layout-04;
     width: $layout-04;
-    padding: $spacing-md;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
