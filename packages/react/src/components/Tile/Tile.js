@@ -287,6 +287,7 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
+          readOnly
           type="checkbox"
           name={name}
           title={title}
