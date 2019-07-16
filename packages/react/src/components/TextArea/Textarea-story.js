@@ -45,7 +45,7 @@ const TextAreaProps = () => ({
 });
 
 function ControlledTextArea(controlledProps) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(controlledProps.defaultValue || '');
   return (
     <>
       <TextArea
@@ -54,6 +54,9 @@ function ControlledTextArea(controlledProps) {
         onChange={(evt, { value }) => setValue(value)}
       />
       <br />
+      <button onClick={() => setValue(controlledProps.defaultValue || '')}>
+        Reset
+      </button>
       <button onClick={() => setValue(value + '1')}>Append 1</button>
     </>
   );
