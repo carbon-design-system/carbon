@@ -18,8 +18,8 @@ but can be unexpected.
 3. Setup a user name and password when prompted
 4. Update your Ubuntu repositories `sudo apt-get update`
 5. Install the build-essential package `sudo apt install build-essential`
-6. Install nvm via
-   `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
+6. Install nvm via their install and update script
+   [found here](https://github.com/nvm-sh/nvm#install--update-script)
 7. Source your newly NVMed .bashrc `source ~/.bashrc`
 8. Install Node 10 `nvm install 10`
 9. Install Python 2 `sudo apt install python-minimal`
