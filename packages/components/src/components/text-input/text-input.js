@@ -40,9 +40,6 @@ export default class TextInput extends mixin(
     );
     this.manage(
       on(this.element, 'input', event => {
-        if (event.target.maxLength < 0) {
-          return;
-        }
         this._handleInput({ element, length: event.target.value.length });
       })
     );

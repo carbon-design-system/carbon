@@ -28,9 +28,6 @@ export default class TextArea extends mixin(
     super(element, options);
     this.manage(
       on(this.element, 'input', event => {
-        if (event.target.maxLength < 0) {
-          return;
-        }
         this._handleInput({ element, length: event.target.value.length });
       })
     );
