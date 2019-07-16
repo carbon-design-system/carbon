@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch should render 1`] = `
+<Switch
+  className="custom-class"
+  index={0}
+  onClick={[MockFunction]}
+  onKeyDown={[MockFunction]}
+  selected={false}
+  text="mock-text"
+>
+  <button
+    aria-selected={false}
+    className="bx--content-switcher-btn custom-class"
+    onClick={[Function]}
+    onKeyDown={[MockFunction]}
+    role="tab"
+    tabIndex="-1"
+    type="button"
+  >
+    <span
+      className="bx--content-switcher__label"
+    >
+      mock-text
+    </span>
+  </button>
+</Switch>
+`;
+
+exports[`Switch should render 2`] = `
+<Switch
+  className="custom-class"
+  index={0}
+  onClick={[MockFunction]}
+  onKeyDown={[MockFunction]}
+  selected={true}
+  text="mock-text"
+>
+  <button
+    aria-selected={true}
+    className="bx--content-switcher-btn bx--content-switcher--selected custom-class"
+    onClick={[Function]}
+    onKeyDown={[MockFunction]}
+    role="tab"
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="bx--content-switcher__label"
+    >
+      mock-text
+    </span>
+  </button>
+</Switch>
+`;
