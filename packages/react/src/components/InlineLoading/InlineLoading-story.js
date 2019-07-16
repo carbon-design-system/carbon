@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-
 import Button from '../Button';
 import InlineLoading from '../InlineLoading';
 
@@ -33,69 +31,62 @@ const props = () => ({
 
 storiesOf('InlineLoading', module)
   .addDecorator(withKnobs)
-  .add(
-    'Inline loading',
-    () => (
-      <div>
-        <InlineLoading {...props()} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
+  .add('Inline loading', () => <InlineLoading {...props()} />, {
+    info: {
+      text: `
             Inline Loading spinners are used when creating, updating, or deleting an item.
             They help notify users that their change is underway, with different states for 'loading' and 'success'.
           `,
-      },
-    }
-  )
+    },
+  })
   .add(
     'UX example',
     () => {
-      class MockSubmission extends PureComponent {
-        state = {
-          submitting: false,
-          success: false,
-        };
-
-        handleSubmit() {
-          this.setState({ submitting: true });
+      function MockSubmission({ children }) {
+        const [isSubmitting, setIsSubmitting] = useState(false);
+        const [success, setSuccess] = useState(false);
+        const [description, setDescription] = useState('Submitting...');
+        const [ariaLive, setAriaLive] = useState('off');
+        const handleSubmit = () => {
+          setIsSubmitting(true);
+          setAriaLive('assertive');
 
           // Instead of making a real request, we mock it with a timer
           setTimeout(() => {
-            this.setState({ submitting: false, success: true });
+            setIsSubmitting(false);
+            setSuccess(true);
+            setDescription('Submitted!');
 
             // To make submittable again, we reset the state after a bit so the user gets completion feedback
-            setTimeout(() => this.setState({ success: false }), 1500);
+            setTimeout(() => {
+              setSuccess(false);
+              setDescription('Submitting...');
+              setAriaLive('off');
+            }, 1500);
           }, 2000);
-        }
+        };
 
-        render() {
-          const { children } = this.props;
-          const { submitting, success } = this.state;
-
-          const handleSubmit = this.handleSubmit.bind(this);
-
-          return children({
-            handleSubmit,
-            submitting,
-            success,
-          });
-        }
+        return children({
+          handleSubmit,
+          isSubmitting,
+          success,
+          description,
+          ariaLive,
+        });
       }
-
       return (
         <MockSubmission>
-          {({ handleSubmit, submitting, success }) => (
+          {({ handleSubmit, isSubmitting, success, description, ariaLive }) => (
             <div style={{ display: 'flex', width: '300px' }}>
-              <Button kind="secondary" disabled={submitting || success}>
+              <Button kind="secondary" disabled={isSubmitting || success}>
                 Cancel
               </Button>
-              {submitting || success ? (
+              {isSubmitting || success ? (
                 <InlineLoading
                   style={{ marginLeft: '1rem' }}
-                  description="Submitting..."
+                  description={description}
                   success={success}
+                  aria-live={ariaLive}
                 />
               ) : (
                 <Button onClick={handleSubmit}>Submit</Button>
