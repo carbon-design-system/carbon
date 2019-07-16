@@ -8,7 +8,7 @@
 import React from 'react';
 import SelectItemGroup from '../SelectItemGroup';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 describe('SelectItemGroup', () => {

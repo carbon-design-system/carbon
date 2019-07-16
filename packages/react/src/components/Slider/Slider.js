@@ -8,7 +8,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

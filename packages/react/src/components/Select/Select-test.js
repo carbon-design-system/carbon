@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDownGlyph } from '@rocketsoftware/icons-react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectSkeleton from '../Select/Select.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 describe('Select', () => {

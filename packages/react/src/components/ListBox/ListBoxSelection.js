@@ -8,8 +8,8 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Close16 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

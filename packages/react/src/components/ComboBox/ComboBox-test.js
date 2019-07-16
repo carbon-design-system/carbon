@@ -16,7 +16,7 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { ChevronDownGlyph, WarningFilled16 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { ChevronDownGlyph, WarningFilled16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

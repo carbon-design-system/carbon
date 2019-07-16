@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
+import { CaretRight24, CaretLeft24 } from '@rocketsoftware/icons-react';
 import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

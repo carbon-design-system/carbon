@@ -8,12 +8,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   WarningFilled16,
   CaretDownGlyph,
   CaretUpGlyph,
-} from '@carbon/icons-react';
+} from '@rocketsoftware/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';

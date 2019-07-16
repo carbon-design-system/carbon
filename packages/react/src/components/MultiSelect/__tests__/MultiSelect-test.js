@@ -13,7 +13,7 @@ import {
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

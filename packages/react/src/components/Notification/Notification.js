@@ -8,13 +8,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   Close16,
   ErrorFilled20,
   CheckmarkFilled20,
   WarningFilled20,
-} from '@carbon/icons-react';
+} from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

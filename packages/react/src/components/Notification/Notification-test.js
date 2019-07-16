@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Close16, ErrorFilled20, CheckmarkFilled20 } from '@carbon/icons-react';
+import { Close16, ErrorFilled20, CheckmarkFilled20 } from '@rocketsoftware/icons-react';
 import {
   NotificationButton,
   NotificationTextDetails,
@@ -14,7 +14,7 @@ import {
   InlineNotification,
 } from '../Notification';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

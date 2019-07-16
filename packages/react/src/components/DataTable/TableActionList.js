@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import wrapComponent from '../../tools/wrapComponent';
 
 const { prefix } = settings;

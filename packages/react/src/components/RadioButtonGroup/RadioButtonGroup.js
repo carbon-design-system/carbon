@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import RadioButton from '../RadioButton';
 import warning from 'warning';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

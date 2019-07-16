@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
 import classNames from 'classnames';
-import { Information16 as Information } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Information16 as Information } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import FloatingMenu, {
   DIRECTION_LEFT,
   DIRECTION_TOP,

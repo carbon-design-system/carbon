@@ -8,8 +8,8 @@
 import React from 'react';
 import PrimaryButton from '../PrimaryButton';
 import { shallow, mount } from 'enzyme';
-import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Search16 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

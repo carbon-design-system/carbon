@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;

@@ -7,9 +7,9 @@
 
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical16 } from '@rocketsoftware/icons-react';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

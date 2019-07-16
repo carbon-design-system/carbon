@@ -7,12 +7,12 @@
 
 import React from 'react';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { AddFilled16, Search16 } from '@carbon/icons-react';
+import { AddFilled16, Search16 } from '@rocketsoftware/icons-react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import ModalWrapper from '../ModalWrapper';
 import TextInput from '../TextInput';
 import Select from '../Select';

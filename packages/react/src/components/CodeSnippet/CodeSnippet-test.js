@@ -11,7 +11,7 @@ import CodeSnippetSkeleton from '../CodeSnippet/CodeSnippet.Skeleton';
 import Copy from '../Copy';
 import CopyButton from '../CopyButton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

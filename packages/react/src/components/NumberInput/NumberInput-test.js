@@ -7,10 +7,10 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { CaretDownGlyph, CaretUpGlyph } from '@carbon/icons-react';
+import { CaretDownGlyph, CaretUpGlyph } from '@rocketsoftware/icons-react';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 describe('NumberInput', () => {

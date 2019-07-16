@@ -9,11 +9,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   CheckmarkFilled16 as CheckmarkFilled,
   ChevronDown16,
-} from '@carbon/icons-react';
+} from '@rocketsoftware/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 

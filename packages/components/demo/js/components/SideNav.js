@@ -4,7 +4,7 @@ import {
   SideNav as UIShellSideNav,
   SideNavItems,
   SideNavLink,
-} from 'carbon-components-react/es/components/UIShell';
+} from '@rocketsoftware/carbon-components-react/es/components/UIShell';
 
 /**
  * The side nav.

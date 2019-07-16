@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { formatTokenName } from '@carbon/themes';
-import { styles } from '@carbon/type';
+import { formatTokenName } from '@rocketsoftware/themes';
+import { styles } from '@rocketsoftware/type';
 import { SharedStyle } from 'sketch/dom';
 import { syncSharedStyle } from '../tools/sharedStyles';
 

@@ -9,7 +9,7 @@ import React from 'react';
 import Tag from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

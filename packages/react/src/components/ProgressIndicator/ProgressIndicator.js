@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-import { CheckmarkOutline16, Warning16 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { CheckmarkOutline16, Warning16 } from '@rocketsoftware/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;

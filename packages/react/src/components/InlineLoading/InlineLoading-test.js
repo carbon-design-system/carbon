@@ -9,7 +9,7 @@ import React from 'react';
 import InlineLoading from '../InlineLoading';
 import Loading from '../Loading';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

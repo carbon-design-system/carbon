@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
+import { Search20, Notification20, AppSwitcher20 } from '@rocketsoftware/icons-react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';

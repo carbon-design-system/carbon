@@ -8,12 +8,12 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import ListBoxField from './ListBoxField';
 import ListBoxMenu from './ListBoxMenu';
 import { ListBoxType } from './ListBoxPropTypes';
 import childrenOf from '../../prop-types/childrenOf';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

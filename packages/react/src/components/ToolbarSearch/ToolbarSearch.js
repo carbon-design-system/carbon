@@ -8,8 +8,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Search16 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import ClickListener from '../../internal/ClickListener';
 
 const { prefix } = settings;

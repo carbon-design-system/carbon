@@ -10,7 +10,7 @@ import {
   Delete16 as Delete,
   Save16 as Save,
   Download16 as Download,
-} from '@carbon/icons-react';
+} from '@rocketsoftware/icons-react';
 
 import DataTable, {
   Table,

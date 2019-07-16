@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import { CloseFilled16 } from '@carbon/icons-react';
+import { CloseFilled16 } from '@rocketsoftware/icons-react';
 import FileUploader, { FileUploaderButton, Filename } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

@@ -8,7 +8,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import TextArea from '../TextArea';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

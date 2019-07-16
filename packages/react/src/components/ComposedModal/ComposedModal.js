@@ -9,8 +9,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { Close20 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { Close20 } from '@rocketsoftware/icons-react';
 import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;

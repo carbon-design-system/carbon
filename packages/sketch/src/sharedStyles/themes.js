@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white, g10, g90, g100, formatTokenName } from '@carbon/themes';
+import { white, g10, g90, g100, formatTokenName } from '@rocketsoftware/themes';
 import color from 'color-string';
 import { Style } from 'sketch/dom';
 import { syncSharedStyle } from '../tools/sharedStyles';

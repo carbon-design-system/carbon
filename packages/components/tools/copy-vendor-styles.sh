@@ -23,8 +23,8 @@ echo "Cleaning vendor directory..."
 VENDOR_DIR="$PWD/src/globals/scss/vendor"
 rm -rf $VENDOR_DIR
 
-for package in node_modules/@carbon/*; do
-  PKG_NAME="@carbon/$(basename $package)"
+for package in node_modules/@rocketsoftware/*; do
+  PKG_NAME="@rocketsoftware/$(basename $package)"
   TARGET_DIR="$VENDOR_DIR/$PKG_NAME"
   SCSS_FILES="$package/scss"
 
@@ -35,10 +35,10 @@ for package in node_modules/@carbon/*; do
   fi
 done
 
-for symlink in $(find ../../node_modules/@carbon -type l -maxdepth 1); do
+for symlink in $(find ../../node_modules/@rocketsoftware -type l -maxdepth 1); do
   package=$(readlink $symlink)
 
-  PKG_NAME="@carbon/$(basename $package)"
+  PKG_NAME="@rocketsoftware/$(basename $package)"
   TARGET_DIR="$VENDOR_DIR/$PKG_NAME"
   SCSS_FILES="$package/scss"
 

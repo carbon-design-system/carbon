@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { Search16 } from '@carbon/icons-react';
+import { Search16 } from '@rocketsoftware/icons-react';
 import Button from '../Button';
 import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

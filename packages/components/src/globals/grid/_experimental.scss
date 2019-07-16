@@ -6,7 +6,7 @@
 //
 
 @import '../scss/functions';
-@import '../scss/vendor/@carbon/elements/scss/grid/mixins';
+@import '../scss/vendor/@rocketsoftware/elements/scss/grid/mixins';
 
 @mixin grid--x {
   @if feature-flag-enabled('grid-columns-16') {

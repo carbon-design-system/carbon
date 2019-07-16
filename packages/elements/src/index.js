@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from '@carbon/colors';
-export * from '@carbon/themes';
-export * from '@carbon/layout';
-export * from '@carbon/motion';
-export * from '@carbon/type';
+export * from '@rocketsoftware/colors';
+export * from '@rocketsoftware/themes';
+export * from '@rocketsoftware/layout';
+export * from '@rocketsoftware/motion';
+export * from '@rocketsoftware/type';

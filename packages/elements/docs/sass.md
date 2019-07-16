@@ -12,7 +12,6 @@
   - [✅⚠️ibm--colors [mixin]](#ibm--colors-mixin)
   - [✅carbon--colors [mixin]](#carbon--colors-mixin)
 - [@carbon/grid](#carbongrid)
-  - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
   - [❌carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
   - [❌carbon--make-col [mixin]](#carbon--make-col-mixin)
   - [❌carbon--make-col-offset [mixin]](#carbon--make-col-offset-mixin)
@@ -26,7 +25,6 @@
   - [❌carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [❌carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
   - [✅carbon--grid [mixin]](#carbon--grid-mixin)
-  - [✅prefix [variable]](#prefix-variable)
 - [@carbon/icons](#carbonicons)
   - [✅carbon--icons [mixin]](#carbon--icons-mixin)
 - [@carbon/import-once](#carbonimport-once)
@@ -231,6 +229,9 @@
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
+- [@rocketsoftware/grid](#rocketsoftwaregrid)
+  - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
+  - [✅prefix [variable]](#prefix-variable)
 
 <!-- tocstop -->
 
@@ -899,45 +900,6 @@ Define color variables
 
 ## @carbon/grid
 
-### ✅carbon--12-column-grid [variable]
-
-Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the
-default 16
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--12-column-grid: map-merge(
-  $carbon--grid-breakpoints,
-  (
-    lg: map-merge(
-        map-get($carbon--grid-breakpoints, lg),
-        (
-          columns: 12,
-        )
-      ),
-    xlg: map-merge(
-        map-get($carbon--grid-breakpoints, xlg),
-        (
-          columns: 12,
-        )
-      ),
-    max: map-merge(
-        map-get($carbon--grid-breakpoints, max),
-        (
-          columns: 12,
-        )
-      ),
-  )
-);
-```
-
-</details>
-
-- **Group**: [@carbon/grid](#carbongrid)
-- **Type**: `Map`
-
 ### ❌carbon--make-col-ready [mixin]
 
 Used to initialize the default properties for a column class, most notably for
@@ -1473,30 +1435,6 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--hang [mixin]](#carbon--hang-mixin)
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
-
-### ✅prefix [variable]
-
-Namespace prefix
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$prefix: 'bx';
-```
-
-</details>
-
-- **Group**: [@carbon/grid](#carbongrid)
-- **Type**: `String`
-- **Used by**:
-  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
-  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
-  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
-  - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
-  - [carbon--grid [mixin]](#carbon--grid-mixin)
-  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
 
 ## @carbon/icons
 
@@ -5550,6 +5488,14 @@ $prefix: 'bx';
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `String`
+- **Used by**:
+  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
+  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
+  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
+  - [carbon--hang [mixin]](#carbon--hang-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
+  - [carbon--grid [mixin]](#carbon--grid-mixin)
+  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
 
 ### ✅carbon--type-reset [mixin]
 
@@ -7757,3 +7703,60 @@ fixed contexts.
   - [tokens [variable]](#tokens-variable)
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+
+## @rocketsoftware/grid
+
+### ✅carbon--12-column-grid [variable]
+
+Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the
+default 16
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--12-column-grid: map-merge(
+  $carbon--grid-breakpoints,
+  (
+    lg: map-merge(
+        map-get($carbon--grid-breakpoints, lg),
+        (
+          columns: 12,
+        )
+      ),
+    xlg: map-merge(
+        map-get($carbon--grid-breakpoints, xlg),
+        (
+          columns: 12,
+        )
+      ),
+    max: map-merge(
+        map-get($carbon--grid-breakpoints, max),
+        (
+          columns: 12,
+        )
+      ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@rocketsoftware/grid](#rocketsoftwaregrid)
+- **Type**: `Map`
+
+### ✅prefix [variable]
+
+Namespace prefix
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$prefix: 'bx';
+```
+
+</details>
+
+- **Group**: [@rocketsoftware/grid](#rocketsoftwaregrid)
+- **Type**: `String`

@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { CaretRight24, CaretLeft24 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';

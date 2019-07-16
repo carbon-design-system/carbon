@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const icons = require('@carbon/icons/build-info.json');
-const { toString } = require('@carbon/icon-helpers');
+const icons = require('@rocketsoftware/icons/build-info.json');
+const { toString } = require('@rocketsoftware/icon-helpers');
 const { reporter } = require('@carbon/cli-reporter');
 const fs = require('fs-extra');
 const { dirname } = require('path');
@@ -49,7 +49,7 @@ async function buildUMD() {
     const jsSource = icon.outputOptions.file.replace('es', 'lib');
     const iconbundle = await rollup({
       input: jsSource,
-      external: ['@angular/core', '@carbon/icon-helpers'],
+      external: ['@angular/core', '@rocketsoftware/icon-helpers'],
       cache: false,
       onwarn(warning, warn) {
         if (warning.code === 'THIS_IS_UNDEFINED') return;
@@ -63,7 +63,7 @@ async function buildUMD() {
       format: 'umd',
       file: jsOutput,
       globals: {
-        '@carbon/icon-helpers': 'CarbonIconHelpers',
+        '@rocketsoftware/icon-helpers': 'CarbonIconHelpers',
         '@angular/core': 'ng.Core',
       },
     });

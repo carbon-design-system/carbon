@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import TableCell from './TableCell';
 
 const { prefix } = settings;

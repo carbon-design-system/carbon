@@ -10,7 +10,7 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

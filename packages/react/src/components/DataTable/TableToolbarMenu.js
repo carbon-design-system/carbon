@@ -8,9 +8,9 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import OverflowMenu from '../OverflowMenu';
-import { Settings16 } from '@carbon/icons-react';
+import { Settings16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

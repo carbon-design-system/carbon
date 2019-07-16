@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "10.3.1",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,7 +24,7 @@
     "build": "yarn clean && bundler bundle src/index.js --name CarbonThemes && node tasks/build.js && bundler check \"scss/*.scss\" && bundler sassdoc \"scss/*.scss\""
   },
   "dependencies": {
-    "@carbon/colors": "10.2.0"
+    "@rocketsoftware/colors": "0.0.1"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.2.0",

@@ -7,11 +7,11 @@
 
 $font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
-@import './vendor/@carbon/elements/scss/import-once/import-once';
+@import './vendor/@rocketsoftware/elements/scss/import-once/import-once';
 @import 'deprecate';
 @import 'helper-mixins';
-@import './vendor/@carbon/elements/scss/type/font-face/mono';
-@import './vendor/@carbon/elements/scss/type/font-face/sans';
+@import './vendor/@rocketsoftware/elements/scss/type/font-face/mono';
+@import './vendor/@rocketsoftware/elements/scss/type/font-face/sans';
 
 /// @deprecated (For v10) Superseded by `@include carbon--font-face-sans()`, `@include carbon--font-face-mono()`, etc.
 /// @access private

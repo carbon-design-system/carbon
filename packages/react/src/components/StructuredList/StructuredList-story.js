@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { CheckmarkFilled16 } from '@carbon/icons-react';
+import { CheckmarkFilled16 } from '@rocketsoftware/icons-react';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -17,7 +17,7 @@ import {
   StructuredListCell,
 } from '../StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

@@ -37,7 +37,7 @@ import {
 
   // Tools
   rgba,
-} from '@carbon/colors';
+} from '@rocketsoftware/colors';
 
 export const interactive01 = blue60;
 export const interactive02 = gray100;

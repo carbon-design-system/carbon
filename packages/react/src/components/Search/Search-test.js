@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import { Search16, Close20 } from '@carbon/icons-react';
+import { Search16, Close20 } from '@rocketsoftware/icons-react';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

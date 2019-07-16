@@ -9,14 +9,14 @@ import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import ClickListener from '../../internal/ClickListener';
 import FloatingMenu, {
   DIRECTION_TOP,
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical16 } from '@rocketsoftware/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 

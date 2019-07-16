@@ -9,7 +9,7 @@ import React from 'react';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

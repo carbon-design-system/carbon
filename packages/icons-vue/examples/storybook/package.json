@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.1.5",
-    "@carbon/icon-helpers": "^0.0.1-alpha.20",
+    "@rocketsoftware/icon-helpers": "^0.0.1-alpha.20",
     "@storybook/vue": "^4.0.4",
     "babel-loader": "^8.0.4",
     "babel-preset-vue": "^2.0.2",

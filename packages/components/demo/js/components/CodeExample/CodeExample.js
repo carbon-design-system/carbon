@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import classnames from 'classnames';
-import { Icon } from 'carbon-components-react';
+import { Icon } from '@rocketsoftware/carbon-components-react';
 import ReactGA from 'react-ga';
 
 class CodeExample extends Component {

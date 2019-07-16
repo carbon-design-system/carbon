@@ -7,12 +7,12 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 import { withKnobs, select, text, number } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
 
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 const directions = {

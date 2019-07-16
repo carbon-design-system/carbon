@@ -8,8 +8,8 @@
 import React from 'react';
 import SearchFilterButton from '../SearchFilterButton';
 import { mount } from 'enzyme';
-import { Filter16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Filter16 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

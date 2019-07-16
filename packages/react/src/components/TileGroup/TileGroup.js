@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import RadioTile from '../RadioTile';
 import warning from 'warning';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

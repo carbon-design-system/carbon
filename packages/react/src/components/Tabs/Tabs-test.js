@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDownGlyph } from '@rocketsoftware/icons-react';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

@@ -66,7 +66,7 @@ async function build() {
         // @carbon/packagename
         // @carbon/package-name
         // Where the package name is the captured group in `match`
-        from: /@carbon\/(\w+[-\w]*)\/scss/g,
+        from: /@rocketsoftware\/(\w+[-\w]*)\/scss/g,
         to(_, match) {
           return `${relativeImportPath}/${match}`;
         },

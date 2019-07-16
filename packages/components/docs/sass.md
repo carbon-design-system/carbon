@@ -12,7 +12,6 @@
   - [✅⚠️ibm--colors [mixin]](#ibm--colors-mixin)
   - [✅carbon--colors [mixin]](#carbon--colors-mixin)
 - [@carbon/grid](#carbongrid)
-  - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
   - [❌carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
   - [❌carbon--make-col [mixin]](#carbon--make-col-mixin)
   - [❌carbon--make-col-offset [mixin]](#carbon--make-col-offset-mixin)
@@ -26,7 +25,6 @@
   - [❌carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [❌carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
   - [✅carbon--grid [mixin]](#carbon--grid-mixin)
-  - [✅prefix [variable]](#prefix-variable)
 - [@carbon/icons](#carbonicons)
   - [✅carbon--icons [mixin]](#carbon--icons-mixin)
 - [@carbon/import-once](#carbonimport-once)
@@ -231,6 +229,9 @@
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
+- [@rocketsoftware/grid](#rocketsoftwaregrid)
+  - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
+  - [✅prefix [variable]](#prefix-variable)
 - [accordion](#accordion)
   - [❌accordion [mixin]](#accordion-mixin)
 - [breadcrumb](#breadcrumb)
@@ -1055,45 +1056,6 @@ Define color variables
 
 ## @carbon/grid
 
-### ✅carbon--12-column-grid [variable]
-
-Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the
-default 16
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$carbon--12-column-grid: map-merge(
-  $carbon--grid-breakpoints,
-  (
-    lg: map-merge(
-        map-get($carbon--grid-breakpoints, lg),
-        (
-          columns: 12,
-        )
-      ),
-    xlg: map-merge(
-        map-get($carbon--grid-breakpoints, xlg),
-        (
-          columns: 12,
-        )
-      ),
-    max: map-merge(
-        map-get($carbon--grid-breakpoints, max),
-        (
-          columns: 12,
-        )
-      ),
-  )
-);
-```
-
-</details>
-
-- **Group**: [@carbon/grid](#carbongrid)
-- **Type**: `Map`
-
 ### ❌carbon--make-col-ready [mixin]
 
 Used to initialize the default properties for a column class, most notably for
@@ -1629,88 +1591,6 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--hang [mixin]](#carbon--hang-mixin)
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
-
-### ✅prefix [variable]
-
-Namespace prefix
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$prefix: 'bx';
-```
-
-</details>
-
-- **Group**: [@carbon/grid](#carbongrid)
-- **Type**: `String`
-- **Used by**:
-  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
-  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
-  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
-  - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
-  - [carbon--grid [mixin]](#carbon--grid-mixin)
-  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [accordion [mixin]](#accordion-mixin)
-  - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [button [mixin]](#button-mixin)
-  - [button-base [mixin]](#button-base-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
-  - [form [mixin]](#form-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
-  - [link [mixin]](#link-mixin)
-  - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
-  - [loading [mixin]](#loading-mixin)
-  - [modal--color [mixin]](#modal--color-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
-  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
-  - [pagination-nav [mixin]](#pagination-nav-mixin)
-  - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [slider [mixin]](#slider-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
-  - [tile [mixin]](#tile-mixin)
-  - [time-picker [mixin]](#time-picker-mixin)
-  - [toggle [mixin]](#toggle-mixin)
-  - [toolbar [mixin]](#toolbar-mixin)
-  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-  - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-  - [carbon-content [mixin]](#carbon-content-mixin)
-  - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
-  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
-  - [product-switcher [mixin]](#product-switcher-mixin)
-  - [expanded [mixin]](#expanded-mixin)
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ## @carbon/icons
 
@@ -6205,6 +6085,72 @@ $prefix: 'bx';
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `String`
+- **Used by**:
+  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
+  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
+  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
+  - [carbon--hang [mixin]](#carbon--hang-mixin)
+  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
+  - [carbon--grid [mixin]](#carbon--grid-mixin)
+  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [button [mixin]](#button-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [link [mixin]](#link-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [loading [mixin]](#loading-mixin)
+  - [modal--color [mixin]](#modal--color-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [inline-notification--color [mixin]](#inline-notification--color-mixin)
+  - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [carbon-content [mixin]](#carbon-content-mixin)
+  - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
+  - [product-switcher [mixin]](#product-switcher-mixin)
+  - [expanded [mixin]](#expanded-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
+  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅carbon--type-reset [mixin]
 
@@ -8413,6 +8359,63 @@ fixed contexts.
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
+
+## @rocketsoftware/grid
+
+### ✅carbon--12-column-grid [variable]
+
+Overrides `$carbon--grid-breakpoints` to use a 12 column grid instead of the
+default 16
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--12-column-grid: map-merge(
+  $carbon--grid-breakpoints,
+  (
+    lg: map-merge(
+        map-get($carbon--grid-breakpoints, lg),
+        (
+          columns: 12,
+        )
+      ),
+    xlg: map-merge(
+        map-get($carbon--grid-breakpoints, xlg),
+        (
+          columns: 12,
+        )
+      ),
+    max: map-merge(
+        map-get($carbon--grid-breakpoints, max),
+        (
+          columns: 12,
+        )
+      ),
+  )
+);
+```
+
+</details>
+
+- **Group**: [@rocketsoftware/grid](#rocketsoftwaregrid)
+- **Type**: `Map`
+
+### ✅prefix [variable]
+
+Namespace prefix
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$prefix: 'bx';
+```
+
+</details>
+
+- **Group**: [@rocketsoftware/grid](#rocketsoftwaregrid)
+- **Type**: `String`
 
 ## accordion
 

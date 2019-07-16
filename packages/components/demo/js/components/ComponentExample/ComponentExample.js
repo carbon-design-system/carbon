@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'carbon-components-react';
+import { Link } from '@rocketsoftware/carbon-components-react';
 import classnames from 'classnames';
 
 import * as components from '../../../components';

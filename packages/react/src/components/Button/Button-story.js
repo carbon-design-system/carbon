@@ -9,9 +9,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { AddFilled16, Search16 } from '@carbon/icons-react';
+import { AddFilled16, Search16 } from '@rocketsoftware/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 
@@ -19,9 +19,9 @@ const { prefix } = settings;
 
 const icons = {
   None: 'None',
-  'Add with filled circle (AddFilled16 from `@carbon/icons-react`)':
+  'Add with filled circle (AddFilled16 from `@rocketsoftware/icons-react`)':
     'AddFilled16',
-  'Search (Search16 from `@carbon/icons-react`)': 'Search16',
+  'Search (Search16 from `@rocketsoftware/icons-react`)': 'Search16',
 };
 
 const iconMap = {

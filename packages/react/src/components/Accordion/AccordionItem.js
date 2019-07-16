@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ChevronRight16 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';

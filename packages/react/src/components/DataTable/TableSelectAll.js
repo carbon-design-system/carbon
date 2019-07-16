@@ -10,7 +10,7 @@ import React from 'react';
 import InlineCheckbox from '../InlineCheckbox';
 import cx from 'classnames';
 
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

@@ -7,8 +7,8 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
-import { ListBulleted16, Grid16 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { ListBulleted16, Grid16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

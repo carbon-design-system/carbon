@@ -9,7 +9,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

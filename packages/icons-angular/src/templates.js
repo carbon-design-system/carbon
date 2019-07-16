@@ -17,7 +17,7 @@ import {
   Input,
   AfterViewInit
 } from "@angular/core";
-import { getAttributes } from "@carbon/icon-helpers";
+import { getAttributes } from "@rocketsoftware/icon-helpers";
 
 @Component({
 	selector: "ibm-icon-${iconName}",

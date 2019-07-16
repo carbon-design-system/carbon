@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { Close20 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { Close20 } from '@rocketsoftware/icons-react';
 import FocusTrap from 'focus-trap-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';

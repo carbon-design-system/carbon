@@ -14,8 +14,8 @@ import {
   Information16 as Information,
   Add16 as Add,
   OverflowMenuVertical16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+} from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

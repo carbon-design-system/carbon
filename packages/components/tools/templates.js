@@ -8,7 +8,7 @@ const Module = require('module');
 const expressHandlebars = require('express-handlebars');
 const helpers = require('handlebars-helpers');
 const Fractal = require('@frctl/fractal');
-const iconHelper = require('@carbon/icons-handlebars');
+const iconHelper = require('@rocketsoftware/icons-handlebars');
 
 const origResolveFilename = Module._resolveFilename;
 Module._resolveFilename = function resolveModule(

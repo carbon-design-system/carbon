@@ -8,7 +8,7 @@
 import React from 'react';
 import TimePicker from '../TimePicker';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

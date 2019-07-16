@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import uid from '../../tools/uniqueId';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { CheckmarkFilled16 as CheckmarkFilled } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { CheckmarkFilled16 as CheckmarkFilled } from '@rocketsoftware/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;

@@ -9,10 +9,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import uid from '../../tools/uniqueId';
 import { ButtonTypes } from '../../prop-types/types';
-import { CloseFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
+import { CloseFilled16, CheckmarkFilled16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

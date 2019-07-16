@@ -24,11 +24,11 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@carbon/colors": "10.2.0",
-    "@carbon/icon-helpers": "10.2.0",
-    "@carbon/icons": "10.3.0",
-    "@carbon/themes": "^10.3.1",
-    "@carbon/type": "10.2.0",
+    "@rocketsoftware/colors": "0.0.1",
+    "@rocketsoftware/icon-helpers": "0.0.1",
+    "@rocketsoftware/icons": "0.0.1",
+    "@rocketsoftware/themes": "^0.0.1",
+    "@rocketsoftware/type": "0.0.1",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
     "skpm": "^1.2.0"

@@ -9,7 +9,7 @@ import React from 'react';
 import UnorderedList from '../UnorderedList';
 import ListItem from '../ListItem';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 describe('UnorderedList', () => {

@@ -7,14 +7,14 @@
 
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
-import { toString } from '@carbon/icon-helpers';
+import { toString } from '@rocketsoftware/icon-helpers';
 import { Document, Rectangle, Shape, SymbolMaster } from 'sketch/dom';
 import { command } from '../command';
 import { syncColorStyles } from '../../sharedStyles/colors';
 import { groupByKey } from '../../tools/grouping';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
-const meta = require('@carbon/icons/build-info.json');
+const meta = require('@rocketsoftware/icons/build-info.json');
 
 export function generate() {
   command('commands/icons/generate', () => {

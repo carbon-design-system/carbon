@@ -9,7 +9,7 @@ import React from 'react';
 import ToggleSmall from '../ToggleSmall';
 import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 describe('ToggleSmall', () => {

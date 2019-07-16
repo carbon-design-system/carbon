@@ -8,11 +8,11 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   ArrowUp20 as Arrow,
   ArrowsVertical20 as Arrows,
-} from '@carbon/icons-react';
+} from '@rocketsoftware/icons-react';
 import { sortStates } from './state/sorting';
 
 const { prefix } = settings;

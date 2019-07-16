@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ChevronDown16 } from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import Copy from '../Copy';
 import CopyButton from '../CopyButton';
 import uid from '../../tools/uniqueId';

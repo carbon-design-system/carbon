@@ -18,7 +18,7 @@ const prettierOptions = {
 };
 
 const MODULE_IMPORTS = `
-import { getAttributes } from '@carbon/icon-helpers';
+import { getAttributes } from '@rocketsoftware/icon-helpers';
 `;
 
 function createEntrypointFromMeta(meta) {

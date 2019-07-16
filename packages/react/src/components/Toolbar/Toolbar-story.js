@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter16 } from '@rocketsoftware/icons-react';
 import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
