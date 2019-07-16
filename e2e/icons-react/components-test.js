@@ -18,7 +18,11 @@ describe('@carbon/icons-react', () => {
     }).not.toThrow();
   });
 
-  test.each(meta.map(icon => [icon.moduleName]))('%s is require-able', name => {
-    expect(require('@carbon/icons-react')[name]).toBeDefined();
-  });
+  test.each(meta.map(icon => [icon.moduleName, icon.outputOptions.file]))(
+    '%s is require-able',
+    (name, file) => {
+      expect(require('@carbon/icons-react')[name]).toBeDefined();
+      expect(require(`@carbon/icons-react/${file}`)).toBeDefined();
+    }
+  );
 });
