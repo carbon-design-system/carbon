@@ -132,7 +132,7 @@ export default ${moduleName};
       await fs.ensureFile(commonjsFilepath);
       await fs.writeFile(
         commonjsFilepath,
-        `const { ${moduleName} = require('${pathToEntrypoint}');
+        `const { ${moduleName} } = require('${pathToEntrypoint}');
 module.exports = ${moduleName};
 `
       );
