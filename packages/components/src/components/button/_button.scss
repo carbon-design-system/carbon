@@ -132,10 +132,10 @@
 
     &:hover,
     &:active {
-      color: $icon-01;
+      color: $hover-primary-text;
 
       .#{$prefix}--btn__icon path {
-        fill: $icon-01;
+        fill: $hover-primary-text;
       }
     }
 
