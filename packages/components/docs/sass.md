@@ -8859,6 +8859,10 @@ Button styles
     &.#{$prefix}--btn--sm {
       padding: $button-padding-ghost-sm;
     }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
+    }
   }
 
   .#{$prefix}--btn--icon-only {
