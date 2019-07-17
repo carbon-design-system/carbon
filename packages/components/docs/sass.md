@@ -1725,7 +1725,7 @@ Makes SVGs accessible in high contrast mode
 
 ```scss
 @mixin carbon--icons() {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
@@ -8858,6 +8858,10 @@ Button styles
 
     &.#{$prefix}--btn--sm {
       padding: $button-padding-ghost-sm;
+    }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
     }
   }
 
