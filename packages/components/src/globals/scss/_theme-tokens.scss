@@ -50,6 +50,7 @@
 
   /// @type Color
   /// @access public
+  /// @deprecated Use theme token `$inverse-link` instead.
   /// @group link
   $link-inverse-color: #6ea6ff !default !global;
 
