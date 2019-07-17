@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'vars';
+@import 'typography';
+@import 'css--reset';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Body styles
+/// @access private
+/// @group global-body
+@mixin css-body {
+  body {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    background-color: $ui-background;
+    line-height: 1;
+  }
+}
+
+@include exports('css--body') {
+  @if variable-exists('css--body') == false or $css--body == true {
+    @include css-body;
+  }
+}

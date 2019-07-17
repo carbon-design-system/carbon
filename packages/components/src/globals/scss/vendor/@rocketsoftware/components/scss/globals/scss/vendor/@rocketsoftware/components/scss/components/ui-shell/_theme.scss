@@ -1,0 +1,211 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/colors';
+
+//----------------------------------------------------------------------------
+// Header tokens
+//----------------------------------------------------------------------------
+/// Header bar background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-01: $carbon--gray-100;
+
+/// Header menu trigger hover, Header nav link hover
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
+
+/// Header action active background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-03: $carbon--gray-80;
+
+/// Header submenu link hover
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-04: #353535; //TODO needs color var gray-90-hover
+
+/// Header nav link active and focus background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-05: $carbon--gray-70;
+
+/// Header nav link submenu
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-bg-06: $carbon--gray-90;
+
+/// Header border bottom
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-border-01: $carbon--gray-80;
+
+/// Header focus
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-focus: $carbon--white-0;
+
+/// Primary text in header, Title text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-text-01: $carbon--gray-10;
+
+/// Secondary text in header, Menu item nav text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-text-02: $carbon--gray-30;
+
+/// Header menu trigger
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-icon-01: $carbon--gray-10;
+
+/// Header bar icons
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-icon-02: $carbon--white-0;
+
+/// Header bar icons
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-icon-03: $carbon--gray-30;
+
+/// Item link
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-header-link: $carbon--blue-60;
+
+//----------------------------------------------------------------------------
+// Header Panel tokens
+//----------------------------------------------------------------------------
+
+/// Header-panel background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-01: $carbon--gray-100;
+
+/// Panel item hover background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
+
+/// Panel item focus and active background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-03: $carbon--gray-80;
+
+/// Panel item link selected background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-bg-04: $carbon--gray-90;
+
+/// Panel border
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-border: $carbon--gray-80;
+
+/// Header panel text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-text-01: $carbon--gray-30;
+
+/// Header panel secondary text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-text-02: $carbon--gray-10;
+
+/// Header panel focus border
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-panel-focus: $carbon--white-0;
+
+//----------------------------------------------------------------------------
+// Side nav tokens
+//----------------------------------------------------------------------------
+/// Side-nav panel background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-01: $carbon--white-0;
+
+/// Selected category background
+/// Select L2 flatted item background
+/// Item active background
+/// Footer-bar background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-02: $carbon--gray-80; //TODO waiting for updated color
+
+/// Selected L2 nested item
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-03: $ibm-color__gray-70; //TODO waiting for updated color
+
+/// Side nav item hover background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-04: #e5e5e5; //TODO needs color var gray-90-hover
+
+/// Side nav menu item hover background
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-bg-05: #dcdcdc; //TODO needs color var gray-80-hover
+
+/// Primary text in side-nav
+/// L2 Flatten item text
+/// L2 Nested item text
+/// L1 title text
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-text-01: $ibm-color__gray-70; //TODO waiting for updated color
+
+/// Secondary text in side nav
+/// L2 Category label
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-text-02: $ibm-color__gray-30;
+
+/// Side-nav icon color
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-icon-01: $ibm-color__gray-70;
+
+/// Item highlight bar
+/// @type Color
+/// @access private
+/// @group ui-shell
+$shell-side-nav-accent-01: $ibm-color__blue-60;

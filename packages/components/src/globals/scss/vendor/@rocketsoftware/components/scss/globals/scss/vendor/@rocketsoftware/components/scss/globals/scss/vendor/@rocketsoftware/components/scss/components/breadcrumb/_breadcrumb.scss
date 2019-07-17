@@ -1,0 +1,70 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/layout';
+@import '../link/link';
+
+/// Breadcrumb styles
+/// @access private
+/// @group breadcrumb
+@mixin breadcrumb {
+  .#{$prefix}--breadcrumb {
+    @include type-style('body-short-01');
+    display: inline;
+    @include carbon--breakpoint(md) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb-item::after {
+    content: '/';
+    color: $text-01;
+    margin-left: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb--no-trailing-slash
+    .#{$prefix}--breadcrumb-item:last-child::after {
+    content: '';
+  }
+
+  .#{$prefix}--breadcrumb-item:last-child,
+  .#{$prefix}--breadcrumb-item:last-child::after {
+    margin-right: 0;
+  }
+
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--breadcrumb-item [aria-current='page'],
+  .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
+    .#{$prefix}--link {
+    color: $text-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
+    @include skeleton;
+    width: rem(100px);
+    height: 1rem;
+  }
+}
+
+@include exports('breadcrumb') {
+  @include breadcrumb;
+}

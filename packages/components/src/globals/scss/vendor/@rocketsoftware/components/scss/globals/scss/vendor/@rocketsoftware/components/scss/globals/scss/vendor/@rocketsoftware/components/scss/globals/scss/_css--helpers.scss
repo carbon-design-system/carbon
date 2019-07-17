@@ -1,0 +1,44 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'vars';
+@import 'css--reset';
+@import 'typography';
+@import './vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Include styles for screen reader/assistive text
+/// @access public
+/// @group global-helpers
+@mixin css-helpers {
+  .#{$prefix}--assistive-text,
+  .#{$prefix}--visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    visibility: visible;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--body {
+    @include reset;
+    @include type-style('body-short-01');
+    color: $text-01;
+    background-color: $ui-background;
+    line-height: 1;
+  }
+}
+
+@include exports('css--helpers') {
+  @if variable-exists('css--helpers') == false or $css--helpers == true {
+    @include css-helpers;
+  }
+}

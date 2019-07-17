@@ -1,0 +1,126 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Form styles
+/// @access private
+/// @group form
+@mixin form {
+  .#{$prefix}--fieldset {
+    @include reset;
+    margin-bottom: $carbon--spacing-07;
+  }
+
+  .#{$prefix}--form-item {
+    @include type-style('body-short-01');
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .#{$prefix}--label {
+    @include reset;
+    @include type-style('label-01');
+
+    color: $text-02;
+    font-weight: $input-label-weight;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: $carbon--spacing-03;
+    line-height: rem(16px);
+    pointer-events: none;
+  }
+
+  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
+    // When tooltip trigger is put in form label the trigger button should fit in the size of label
+    // https://github.com/IBM/carbon-components-react/issues/115
+    @include type-style('label-01');
+  }
+
+  // Skeleton State
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+
+  input[type='number'] {
+    font-family: carbon--font-family('mono');
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid,
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
+    @include focus-outline('invalid');
+  }
+
+  input[data-invalid],
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+    }
+  }
+
+  // Fix for red ring when input is marked required in Firefox, refs #744
+  input:not(output):not([data-invalid]):-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--form-requirement {
+    @include reset;
+    @include type-style('caption-01');
+    margin: $carbon--spacing-02 0 0;
+    max-height: 0;
+    overflow: hidden;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .#{$prefix}--label + .#{$prefix}--form__helper-text {
+    margin-top: rem(-6px); // when both helper text and label are rendered
+  }
+
+  .#{$prefix}--form__helper-text {
+    @include type-style('helper-text-01');
+    font-style: italic;
+    color: $text-02;
+    z-index: 0;
+    opacity: 1;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--label--disabled,
+  .#{$prefix}--form__helper-text--disabled {
+    color: $disabled-02;
+  }
+
+  @media (min-width: breakpoint('sm')) {
+    .#{$prefix}--form__helper-text {
+      max-width: 75%;
+    }
+  }
+}
+
+@include exports('form') {
+  @include form;
+}

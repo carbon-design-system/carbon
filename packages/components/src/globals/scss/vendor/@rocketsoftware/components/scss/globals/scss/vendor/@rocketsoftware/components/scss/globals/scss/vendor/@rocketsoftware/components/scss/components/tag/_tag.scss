@@ -1,0 +1,129 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import 'mixins';
+
+/// Tag styles
+/// @access private
+/// @group tag
+@mixin tags {
+  .#{$prefix}--tag {
+    @include type-style('label-01');
+    display: inline-flex;
+    align-items: center;
+    padding: 0 $carbon--spacing-03;
+    height: 1.5rem;
+    margin: $carbon--spacing-02;
+    border-radius: rem(15px);
+
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+
+    &.#{$prefix}--skeleton {
+      @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
+    }
+  }
+
+  .#{$prefix}--tag--red {
+    @include tag-theme($ibm-color__red-20, $ibm-color__red-70);
+  }
+
+  .#{$prefix}--tag--magenta {
+    @include tag-theme($ibm-color__magenta-20, $ibm-color__magenta-70);
+  }
+
+  .#{$prefix}--tag--purple {
+    @include tag-theme($ibm-color__purple-20, $ibm-color__purple-70);
+  }
+
+  .#{$prefix}--tag--blue {
+    @include tag-theme($ibm-color__blue-20, $ibm-color__blue-70);
+  }
+
+  .#{$prefix}--tag--cyan {
+    @include tag-theme($ibm-color__cyan-20, $ibm-color__cyan-70);
+  }
+
+  .#{$prefix}--tag--teal {
+    @include tag-theme($ibm-color__teal-20, $ibm-color__teal-70);
+  }
+
+  .#{$prefix}--tag--green {
+    @include tag-theme($ibm-color__green-20, $ibm-color__green-70);
+  }
+
+  .#{$prefix}--tag--gray {
+    @include tag-theme($ibm-color__gray-20, $ibm-color__gray-100);
+  }
+
+  .#{$prefix}--tag--cool-gray {
+    @include tag-theme($ibm-color__cool-gray-20, $ibm-color__cool-gray-100);
+  }
+
+  .#{$prefix}--tag--warm-gray {
+    @include tag-theme($ibm-color__warm-gray-20, $ibm-color__warm-gray-100);
+  }
+
+  .#{$prefix}--tag--disabled {
+    @include tag-theme($ibm-color__gray-10, $ibm-color__gray-30);
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    @include tag-theme($interactive-02, $inverse-01);
+    cursor: pointer;
+    padding-right: rem(2px); // Align with hover circle of X button
+  }
+
+  .#{$prefix}--tag--filter > svg {
+    fill: $inverse-01;
+    margin-left: rem(4px);
+    padding: rem(2px);
+    width: rem(20px);
+    height: rem(20px);
+  }
+
+  .#{$prefix}--tag--filter > svg:hover {
+    border-radius: 50%;
+    background-color: $hover-secondary;
+  }
+
+  .#{$prefix}--tag--filter:focus,
+  .#{$prefix}--tag--filter:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--tag--filter:focus > svg {
+    border: 2px solid $inverse-01;
+    border-radius: 50%;
+  }
+
+  // Skeleton state
+  .#{$prefix}--tag.#{$prefix}--skeleton {
+    width: rem(60px);
+
+    &:after {
+      @include skeleton;
+      content: '';
+      height: rem(6px);
+      width: 100%;
+    }
+  }
+}
+
+@include exports('tags') {
+  @include tags;
+}

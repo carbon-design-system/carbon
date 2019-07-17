@@ -1,0 +1,75 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Link
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+
+/// Link styles
+/// @access private
+/// @group link
+@mixin link {
+  .#{$prefix}--link {
+    @include reset;
+    @include type-style('body-long-01');
+    color: $link-01;
+    text-decoration: none;
+    outline: none;
+    transition: $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      color: $link-01;
+      text-decoration: underline;
+    }
+
+    &:active,
+    &:active:visited {
+      color: $text-01;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:not([href]) {
+      color: $disabled-02;
+      cursor: not-allowed;
+      pointer-events: none;
+      touch-action: none;
+    }
+
+    &:visited {
+      color: $link-01;
+    }
+  }
+
+  .#{$prefix}--link--visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link--disabled {
+    @include reset;
+    @include type-style('body-long-01');
+    display: inline;
+    color: $disabled-02;
+    font-weight: 400;
+    cursor: not-allowed;
+  }
+}
+
+@include exports('link') {
+  @include link;
+}

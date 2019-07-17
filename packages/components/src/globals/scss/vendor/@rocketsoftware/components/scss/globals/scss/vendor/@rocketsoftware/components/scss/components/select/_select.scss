@@ -1,0 +1,256 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Select
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../form/form';
+
+/// Select styles
+/// @access private
+/// @group select
+@mixin select {
+  .#{$prefix}--select {
+    @include reset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--select-input__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:hover .#{$prefix}--select-input {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--select-input {
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    height: rem(40px);
+    appearance: none;
+    display: block;
+    width: rem(224px);
+    min-width: rem(128px);
+    max-width: rem(448px);
+    padding: 0 rem(42px) 0 $carbon--spacing-05; // 1.5rem + chevron width
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    // Select text renders a little high on Firefox
+    @-moz-document url-prefix() {
+      padding-top: rem(4px);
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled-02;
+      border-bottom-color: $disabled-background-color;
+    }
+  }
+
+  .#{$prefix}--select--disabled .#{$prefix}--label,
+  .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
+    padding-right: rem(64px); // 1rem + chevron width + invalid icon width
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:focus {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form-requirement {
+    display: block;
+    color: $support-01;
+    font-weight: 400;
+    overflow: visible;
+  }
+
+  .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $ui-01;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      cursor: not-allowed;
+      background-color: $disabled-background-color;
+      color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--select__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    position: absolute;
+    right: rem(34px); // 1.5rem + chevron width
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    fill: $support-01;
+  }
+
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Override some Firefox user-agent styles
+  @-moz-document url-prefix() {
+    .#{$prefix}--select-option {
+      background-color: $ui-01;
+      color: $text-01;
+    }
+
+    .#{$prefix}--select-optgroup {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--form__helper-text {
+    margin-top: rem(13px);
+    align-self: flex-start;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-bottom: 0;
+    margin-left: rem(8px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--label {
+    white-space: nowrap;
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input {
+    background-color: transparent;
+    color: $text-01;
+    border-bottom: none;
+    padding-left: $carbon--spacing-03;
+    padding-right: rem(26px);
+
+    @-moz-document url-prefix() {
+      padding-top: 0;
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select__arrow {
+    bottom: auto;
+    top: 1.125rem;
+    right: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input {
+    padding-right: rem(50px);
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    right: rem(24px);
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    color: $disabled;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    ~ * {
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    cursor: not-allowed;
+  }
+
+  //Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+}
+
+@include exports('select') {
+  @include select;
+}

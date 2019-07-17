@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vars';
+@import 'functions';
+@import 'theme';
+
+/// UI shell side nav
+/// @access private
+/// @group ui-shell
+@mixin carbon-header-panel {
+  //----------------------------------------------------------------------------
+  // Header Panel
+  //----------------------------------------------------------------------------
+  .#{$prefix}--header-panel {
+    @include carbon--motion(exit, productive);
+    position: fixed;
+    top: carbon--mini-units(6);
+    bottom: 0;
+    right: 0;
+    width: 0;
+    background-color: $shell-panel-bg-01;
+    border: none;
+    will-change: width;
+    transition: width 0.11s;
+    overflow: hidden;
+    z-index: z('header');
+    color: $shell-panel-text-01;
+  }
+
+  .#{$prefix}--header-panel--expanded {
+    width: carbon--mini-units(32);
+    border-left: 1px solid $shell-panel-border;
+    border-right: 1px solid $shell-panel-border;
+  }
+}
+
+@include exports('carbon-header-panel') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-header-panel;
+  }
+}

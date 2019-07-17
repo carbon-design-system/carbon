@@ -1,0 +1,233 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../form/form';
+
+/// Number input styles
+/// @access private
+/// @group number-input
+@mixin number-input {
+  .#{$prefix}--number {
+    @include reset;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .#{$prefix}--number input[type='number'] {
+    @include type-style('body-short-01');
+    @include focus-outline('reset');
+    font-family: carbon--font-family('mono');
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    min-width: 9.375rem;
+    padding-left: $carbon--spacing-05;
+    padding-right: $carbon--spacing-07;
+    font-weight: 300;
+    height: rem(40px);
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid $ui-04;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &:disabled ~ .#{$prefix}--number__controls svg {
+      fill: $disabled;
+    }
+
+    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+
+    &::-ms-clear {
+      display: none; // IE: Hide "clear-field" `x` button on input field
+    }
+
+    &::-webkit-inner-spin-button {
+      appearance: none; // Safari: Hide number spinner
+    }
+  }
+
+  .#{$prefix}--number input[type='number']:disabled,
+  .#{$prefix}--number--readonly input[type='number'] {
+    cursor: not-allowed;
+    background-color: $disabled-background-color;
+    color: $disabled;
+  }
+
+  .#{$prefix}--number__input-wrapper {
+    display: flex;
+    align-items: center;
+
+    ~ .#{$prefix}--form-requirement {
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--number__controls {
+    @include reset;
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include button-reset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(32px);
+    height: rem(20px);
+    color: $icon-01;
+
+    svg {
+      fill: currentColor;
+      position: relative;
+    }
+
+    &.up-icon svg {
+      top: rem(5px);
+    }
+
+    &.down-icon svg {
+      top: rem(-5px);
+    }
+
+    &:focus {
+      @include focus-outline;
+      color: $icon-01;
+      outline-width: 2px;
+      outline-offset: -2px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: $icon-01;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $disabled;
+    }
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
+    display: none;
+  }
+
+  .#{$prefix}--number[data-invalid] {
+    .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+    }
+
+    input[type='number'] {
+      @include focus-outline('invalid');
+    }
+  }
+
+  .#{$prefix}--number__invalid {
+    position: absolute;
+    right: 2rem;
+    fill: $support-01;
+  }
+
+  .#{$prefix}--number--light input[type='number'] {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--number--mobile {
+    min-width: rem(144px);
+    width: auto;
+
+    .#{$prefix}--number__control-btn,
+    &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
+      position: static;
+      width: rem(40px);
+      height: rem(40px);
+      background-color: $ui-01;
+
+      &:hover,
+      &:focus {
+        background-color: $hover-ui;
+      }
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+      }
+
+      svg {
+        position: static;
+      }
+    }
+
+    input[type='number'] {
+      min-width: rem(64px);
+      width: auto;
+      margin: 0;
+      border-right: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
+      padding: 0;
+      text-align: center;
+      background-color: $field-01;
+    }
+
+    &.#{$prefix}--number--light {
+      input[type='number'] {
+        background-color: $field-02;
+      }
+
+      .#{$prefix}--number__control-btn {
+        background-color: $ui-02;
+      }
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--number.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+
+    input[type='number'] {
+      display: none;
+    }
+  }
+}
+
+@include exports('number-input') {
+  @include number-input;
+}

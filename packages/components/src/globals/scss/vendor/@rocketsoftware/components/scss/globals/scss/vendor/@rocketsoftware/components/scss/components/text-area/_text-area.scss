@@ -1,0 +1,117 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Text area
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../form/form';
+
+/// Text area styles
+/// @access private
+/// @group text-area
+@mixin text-area {
+  .#{$prefix}--text-area {
+    @include reset;
+    @include type-style('body-long-01');
+    @include focus-outline('reset');
+
+    background-color: $field-01;
+    width: 100%;
+    min-width: 10rem;
+    min-height: rem(40px);
+    padding: rem(11px) $carbon--spacing-05;
+    color: $text-01;
+    order: 3;
+    resize: vertical;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+
+    & ~ .#{$prefix}--form__helper-text {
+      margin-top: 0;
+      order: 2;
+      font-style: italic;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 4;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $carbon--spacing-02;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-area::placeholder {
+    @include placeholder-colors;
+    @include type-style('body-long-01');
+    opacity: 1;
+  }
+
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-area--invalid {
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--text-area__wrapper {
+    position: relative;
+    display: flex;
+  }
+
+  .#{$prefix}--text-area__invalid-icon {
+    position: absolute;
+    right: $carbon--spacing-05;
+    top: $carbon--spacing-04;
+    fill: $support-01;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-area:disabled {
+    cursor: not-allowed;
+    outline: none;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--text-area:disabled::placeholder {
+    color: $disabled-02;
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+@include exports('text-area') {
+  @include text-area;
+}

@@ -1,0 +1,191 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/functions';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import 'theme';
+@import 'functions';
+
+/// UI shell product switcher
+/// @access private
+/// @group ui-shell
+@mixin product-switcher {
+  //--------------------------------------------------------------------------
+  // Global Panel
+  //--------------------------------------------------------------------------
+  .#{$prefix}--panel--overlay {
+    position: fixed;
+    top: mini-units(6);
+    right: 0;
+    bottom: 0;
+    width: mini-units(32);
+    will-change: transform;
+    transform: translate3d(100%, 0, 0);
+    padding: 1rem 0;
+    overflow-y: auto;
+    z-index: 1000;
+    background-color: $shell-panel-bg-01;
+    height: 100%;
+    overflow-x: hidden;
+    transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+
+  .#{$prefix}--panel--expanded {
+    box-shadow: 0 8px 16px 0 rgba($carbon--black-100, 0.25);
+    transform: translate3d(0, 0, 0);
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Search
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-switcher__search {
+    padding: 0 mini-units(2);
+    margin-bottom: mini-units(3);
+  }
+
+  .#{$prefix}--search--shell input {
+    background-color: $carbon--gray-20;
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Buttons
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-switcher__subheader,
+  .#{$prefix}--product-switcher__all-btn {
+    @include type-style('body-short-01');
+    padding: mini-units(1);
+    color: $shell-panel-text-01;
+  }
+
+  .#{$prefix}--product-switcher__subheader {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--product-switcher__all-btn {
+    padding-left: mini-units(7);
+  }
+
+  .#{$prefix}--product-switcher__all-btn,
+  .#{$prefix}--product-switcher__back-btn {
+    display: inline-block;
+    background: transparent;
+    width: 100%;
+    border: none;
+    color: $shell-header-link;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .#{$prefix}--product-switcher__all-btn:hover,
+  .#{$prefix}--product-switcher__back-btn:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--product-switcher__all-btn:focus,
+  .#{$prefix}--product-switcher__back-btn:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__back-btn {
+    display: flex;
+    align-items: center;
+    @include type-style('body-short-01');
+    padding: mini-units(1) mini-units(2);
+  }
+
+  .#{$prefix}--product-switcher__back-arrow {
+    fill: $shell-header-link;
+    margin-right: mini-units(2);
+  }
+
+  //--------------------------------------------------------------------------
+  // Switcher - Product List
+  //--------------------------------------------------------------------------
+  .#{$prefix}--product-list__item {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .#{$prefix}--product-list__item:hover {
+    background: $carbon--gray-20;
+  }
+
+  .#{$prefix}--product-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: mini-units(1) mini-units(2);
+    text-decoration: none;
+  }
+
+  .#{$prefix}--product-link:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__icon {
+    margin-right: mini-units(2);
+  }
+
+  .#{$prefix}--product-link__name {
+    @include type-style('body-short-01');
+    margin-left: 0.25rem;
+    font-weight: 400;
+    color: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: mini-units(5);
+
+    &.#{$prefix}--overflow-menu--open {
+      display: flex;
+    }
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu > svg {
+    fill: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:hover {
+    background: $carbon--gray-30;
+  }
+
+  .#{$prefix}--product-switcher__product-list
+    .#{$prefix}--overflow-menu:hover
+    > svg {
+    fill: $shell-header-text-02;
+  }
+
+  .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:focus {
+    display: flex;
+    outline: none;
+    box-shadow: inset 0 0 0 3px $shell-header-link;
+  }
+
+  .#{$prefix}--product-switcher__product-list
+    .#{$prefix}--overflow-menu-options__option:hover {
+    background: $carbon--white-0;
+  }
+
+  .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
+    display: flex;
+  }
+}
+
+@include exports('product-switcher') {
+  @if feature-flag-enabled('ui-shell') {
+    @include product-switcher;
+  }
+}

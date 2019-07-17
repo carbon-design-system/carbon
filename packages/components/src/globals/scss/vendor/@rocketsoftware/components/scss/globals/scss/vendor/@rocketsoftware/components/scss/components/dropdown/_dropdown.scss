@@ -1,0 +1,339 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Dropdown
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/layout';
+
+/// Dropdown styles
+/// @access private
+/// @group dropdown
+@mixin dropdown {
+  .#{$prefix}--dropdown__wrapper--inline {
+    display: inline-grid;
+    align-items: center;
+    grid-template: auto auto / auto min-content;
+    grid-gap: rem(4px);
+
+    .#{$prefix}--label {
+      @include type-style('body-short-01');
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 2;
+    }
+  }
+
+  .#{$prefix}--dropdown {
+    @include reset;
+    @include focus-outline('reset');
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
+    width: 100%;
+    height: rem(40px);
+    cursor: pointer;
+    color: $text-01;
+    outline: 2px solid transparent;
+    transition: background-color $duration--fast-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+
+  .#{$prefix}--dropdown--open {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--dropdown--invalid {
+    @include focus-outline('invalid');
+
+    .#{$prefix}--dropdown-text {
+      padding-right: rem(56px); // TODO: spacing token
+    }
+
+    + .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--dropdown__invalid-icon {
+    position: absolute;
+    top: 50%;
+    right: rem(40px); // TODO: spacing token
+    fill: $support-01;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--dropdown--open:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--dropdown--open:focus {
+    outline: 1px solid transparent;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    @include layer('overlay');
+  }
+
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
+    bottom: 2rem;
+  }
+
+  .#{$prefix}--dropdown__arrow {
+    fill: $ui-05;
+    position: absolute;
+    right: 1rem;
+    top: rem(13px);
+    pointer-events: none;
+    transition: transform $duration--fast-02 motion(standard, productive);
+    transform-origin: 50% 45%;
+  }
+
+  .#{$prefix}--dropdown-text {
+    @include type-style('body-short-01');
+    display: block;
+    height: rem(40px);
+    padding-top: $carbon--spacing-04;
+    padding-bottom: $carbon--spacing-04;
+    padding-left: $carbon--spacing-05;
+    padding-right: rem(42px); // 2rem + SVG width
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--dropdown-list {
+    @include reset;
+    @include layer('overlay');
+    @include type-style('body-short-01');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    position: absolute;
+    z-index: z('dropdown');
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
+    overflow: hidden auto;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: opacity $duration--fast-01 motion(standard, productive),
+      background-color $duration--fast-01 motion(standard, productive);
+    opacity: 0;
+
+    &:hover {
+      background-color: $hover-ui;
+
+      + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
+        border-color: transparent;
+      }
+    }
+
+    &:active {
+      background-color: $selected-ui;
+    }
+
+    &:first-of-type .#{$prefix}--dropdown-link {
+      border-top-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--dropdown-link {
+    @include focus-outline('reset');
+    display: block;
+    height: rem(40px);
+    color: $text-02;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: rem(16px);
+    padding: rem(11px) 0;
+    margin: 0 $carbon--spacing-05;
+    border: 1px solid transparent;
+    border-top-color: $ui-03;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:focus {
+      @include focus-outline('outline');
+      margin: 0;
+      padding: rem(11px) rem(16px);
+    }
+
+    &:hover {
+      color: $text-01;
+      border-color: transparent;
+    }
+  }
+
+  .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
+    border-bottom-color: $hover-ui;
+  }
+
+  .#{$prefix}--dropdown--selected {
+    display: none;
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
+    transform: rotate(-180deg);
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    max-height: 15rem;
+    transition: max-height $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
+    opacity: 1;
+  }
+
+  .#{$prefix}--dropdown--disabled {
+    border-bottom-color: transparent;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $field-01;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    .#{$prefix}--dropdown-text {
+      color: $disabled-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      fill: $disabled-02;
+    }
+
+    &.#{$prefix}--dropdown--light:hover {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$prefix}--dropdown--auto-width {
+    width: auto;
+    max-width: rem(400px);
+  }
+
+  .#{$prefix}--dropdown--inline {
+    justify-self: start;
+    display: inline-block;
+    border-bottom-color: transparent;
+    width: auto;
+    height: rem(32px);
+    background-color: $field-02;
+    transition: background $duration--fast-01 motion(entrance, productive);
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+
+    &.#{$prefix}--dropdown--disabled {
+      background-color: $field-02;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      top: rem(8px);
+      right: rem(8px);
+    }
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
+    display: inline-block;
+    padding: rem(7px) rem(32px) rem(7px) $carbon--spacing-04; // TODO: spacing token
+    height: rem(32px);
+    overflow: visible;
+    color: $text-01;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
+    .#{$prefix}--dropdown-text {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
+    .#{$prefix}--dropdown-text {
+    outline: 0;
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown__invalid-icon {
+    right: rem(32px);
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
+    .#{$prefix}--dropdown-text {
+    padding-right: rem(56px);
+  }
+
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
+    .#{$prefix}--dropdown-list {
+    @include layer('overlay');
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-link {
+    font-weight: normal;
+    margin-right: $carbon--spacing-04;
+    margin-left: rem(10px);
+
+    &:focus {
+      margin: 0;
+      padding-left: rem(10px);
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
+    @include skeleton;
+  }
+}
+
+@include exports('dropdown') {
+  @include dropdown;
+}

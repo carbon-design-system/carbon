@@ -1,0 +1,84 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vars';
+@import 'functions';
+@import 'theme';
+
+/// UI shell side nav
+/// @access private
+/// @group ui-shell
+@mixin carbon-switcher {
+  //----------------------------------------------------------------------------
+  // Header Switcher
+  //----------------------------------------------------------------------------
+  .#{$prefix}--switcher {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $shell-panel-text-01;
+  }
+
+  .#{$prefix}--switcher__item {
+    width: 100%;
+    height: $spacing-07;
+  }
+
+  .#{$prefix}--switcher__item:nth-child(1) {
+    margin-top: $spacing-05;
+  }
+
+  .#{$prefix}--switcher__item--divider {
+    display: block;
+    width: rem(224px);
+    height: 1px;
+    margin: $spacing-03 $spacing-05;
+    background: $shell-panel-border;
+    border: none;
+  }
+
+  .#{$prefix}--switcher__item-link {
+    @include carbon--type-style('heading-01');
+    display: block;
+    height: $spacing-07;
+    text-decoration: none;
+    padding: rem(6px) $spacing-05;
+    color: $shell-panel-text-01;
+
+    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
+      background: $shell-panel-bg-02;
+      color: $shell-panel-text-02;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 2px solid $shell-panel-focus;
+      outline-offset: -2px;
+    }
+
+    &:active {
+      background: $shell-panel-bg-03;
+      color: $shell-panel-text-02;
+    }
+  }
+
+  .#{$prefix}--switcher__item-link--selected {
+    background: $shell-panel-bg-04;
+    color: $shell-panel-text-02;
+  }
+}
+
+@include exports('carbon-header-switcher') {
+  @if feature-flag-enabled('ui-shell') {
+    @include carbon-switcher;
+  }
+}

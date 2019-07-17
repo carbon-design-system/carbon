@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/vars';
+
+@include exports('data-table-v2-skeleton') {
+  .#{$prefix}--data-table.#{$prefix}--skeleton {
+    th {
+      border-bottom: 1px solid $brand-01;
+      vertical-align: middle;
+
+      &:nth-child(3n + 1) {
+        width: 10%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    th span,
+    td span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+
+    tr:hover {
+      td {
+        border-color: $ui-03;
+        background: transparent;
+
+        &:first-of-type,
+        &:last-of-type {
+          border-color: $ui-03;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--data-table-v2.#{$prefix}--skeleton .#{$prefix}--table-sort-v2 {
+    pointer-events: none;
+  }
+}

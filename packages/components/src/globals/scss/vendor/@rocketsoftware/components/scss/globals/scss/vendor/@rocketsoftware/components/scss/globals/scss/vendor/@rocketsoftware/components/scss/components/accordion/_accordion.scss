@@ -1,0 +1,172 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+
+/// Accordion styles
+/// @access private
+/// @group accordion
+@mixin accordion {
+  .#{$prefix}--accordion {
+    @include reset;
+
+    list-style: none;
+    width: 100%;
+  }
+
+  .#{$prefix}--accordion__item {
+    transition: all $duration--fast-02 motion(standard, productive);
+    border-top: 1px solid $ui-03;
+    overflow: visible;
+
+    &:last-child {
+      border-bottom: 1px solid $ui-03;
+    }
+  }
+
+  .#{$prefix}--accordion__heading {
+    @include button-reset;
+    color: $text-01;
+    display: flex;
+    align-items: center;
+    justify-content: $accordion-justify-content;
+    cursor: pointer;
+    padding: rem(6px) 0;
+    flex-direction: $accordion-flex-direction;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    transition: background-color motion(standard, productive) $duration--fast-02;
+
+    &:hover:before,
+    &:focus:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: calc(100% + 2px);
+    }
+
+    &:hover:before {
+      background-color: $hover-ui;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus:before {
+      @include focus-outline('outline-compat');
+    }
+  }
+
+  .#{$prefix}--accordion__arrow {
+    @include focus-outline('reset');
+    // Without flex basis and flex shrink being set here, our icon width can go
+    // <16px and cause the icon to render in the incorrect artboard size
+    flex: 0 0 1rem;
+    width: 1rem;
+    height: 1rem;
+    margin: $accordion-arrow-margin;
+    fill: $ui-05;
+    // TODO: RTL rotate(180deg);
+    transform: rotate(90deg);
+    transition: all $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--accordion__title {
+    @include type-style('body-long-01');
+
+    margin: $accordion-title-margin;
+    width: 100%;
+    text-align: left;
+    z-index: 0;
+  }
+
+  .#{$prefix}--accordion__content {
+    // Transition property for when the accordion closes
+    transition: height motion(standard, productive) $duration--fast-02,
+      padding motion(standard, productive) $duration--fast-02;
+    padding-left: $carbon--spacing-05;
+
+    padding-right: 25%;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+
+    @include carbon--breakpoint-down('md') {
+      padding-right: $carbon--spacing-09;
+    }
+
+    p {
+      @include type-style('body-long-01');
+    }
+  }
+
+  .#{$prefix}--accordion__item--active {
+    overflow: visible;
+
+    .#{$prefix}--accordion__content {
+      padding-bottom: $carbon--spacing-06;
+      padding-top: $spacing-xs;
+      height: auto;
+      visibility: visible;
+      opacity: 1;
+      // Transition property for when the accordion opens
+      transition: height motion(entrance, productive) $duration--fast-02,
+        padding-top motion(entrance, productive) $duration--fast-02,
+        padding-bottom motion(entrance, productive) $duration--fast-02;
+    }
+
+    .#{$prefix}--accordion__arrow {
+      /*rtl:ignore*/
+      transform: rotate(-90deg);
+      fill: $ui-05;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    pointer-events: none;
+    fill: $ui-05;
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:focus
+    .#{$prefix}--accordion__arrow {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
+    margin-bottom: 0;
+  }
+}
+
+@include exports('accordion') {
+  @include accordion;
+}

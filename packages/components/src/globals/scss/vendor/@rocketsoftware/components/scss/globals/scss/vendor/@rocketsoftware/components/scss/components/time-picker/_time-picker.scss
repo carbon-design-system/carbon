@@ -1,0 +1,66 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Time Picker
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Time picker styles
+/// @access private
+/// @group time-picker
+@mixin time-picker {
+  .#{$prefix}--time-picker {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--time-picker__select {
+    justify-content: center;
+
+    &:not(:last-of-type) {
+      margin: 0 $carbon--spacing-01;
+    }
+  }
+
+  .#{$prefix}--time-picker__input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
+    min-width: auto;
+    width: auto;
+    padding-right: rem(48px);
+    line-height: 1;
+  }
+
+  .#{$prefix}--time-picker__input-field {
+    @include reset;
+    @include focus-outline('reset');
+    @include type-style('code-02');
+    display: flex;
+    align-items: center;
+    width: 4.875rem;
+    height: rem(40px);
+    transition: outline $duration--fast-01 motion(standard, productive),
+      background-color $duration--fast-01 motion(standard, productive);
+  }
+}
+
+@include exports('time-picker') {
+  @include time-picker;
+}

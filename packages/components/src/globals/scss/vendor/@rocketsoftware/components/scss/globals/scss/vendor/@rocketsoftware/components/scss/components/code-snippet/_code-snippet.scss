@@ -1,0 +1,364 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/css--reset';
+@import 'mixins';
+
+/// Code snippet styles
+/// @access private
+/// @group code-snippet
+@mixin snippet {
+  .#{$prefix}--snippet {
+    @include reset;
+  }
+
+  .#{$prefix}--snippet code {
+    @include type-style('code-01');
+  }
+
+  // Inline Code Snippet
+  .#{$prefix}--snippet--inline {
+    @include reset;
+    // Note: originally this inline snippet inherited font-size, we might need
+    // a more flexible strategy than explicitly setting font-size with this
+    // type style
+    @include type-style('code-01');
+
+    position: relative;
+    display: inline;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background-color: $ui-01;
+    color: $text-01;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $ui-03;
+    }
+
+    &:active {
+      background-color: $copy-active;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid $interactive-01;
+    }
+  }
+
+  .#{$prefix}--snippet--inline code {
+    padding: 0 $spacing-xs;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: rgba($interactive-02, 0.1);
+    }
+  }
+
+  // Single Line Snippet
+  .#{$prefix}--snippet--single {
+    @include bx--snippet;
+    border: none;
+    max-width: rem(760px);
+    min-width: rem(320px);
+    height: $carbon--spacing-08;
+    padding: 0 56px 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    position: relative;
+    padding: 0 0 $carbon--spacing-05 0;
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet--single pre {
+    white-space: nowrap;
+    @include type-style('code-01');
+    padding-right: $spacing-xs;
+  }
+
+  .#{$prefix}--snippet--single::after {
+    width: rem(16px);
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: rem(56px);
+    background-image: linear-gradient(to right, transparent, $ui-01);
+  }
+
+  // Multi Line Snippet
+  .#{$prefix}--snippet--multi {
+    @include bx--snippet;
+    border: none;
+    padding: $carbon--spacing-05;
+    min-width: rem(320px);
+    max-width: 100%;
+  }
+
+  //closed snippet container
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    overflow: hidden;
+    position: relative;
+    max-height: rem(238px);
+    min-height: rem(56px);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+  }
+
+  // expanded snippet container
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+  }
+
+  // closed pre
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
+    overflow: hidden;
+    padding-bottom: rem(24px);
+  }
+
+  // expanded pre
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container
+    pre {
+    overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+    width: rem(16px);
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(to right, transparent, $ui-01);
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
+    overflow: hidden;
+  }
+
+  //Copy Button
+  .#{$prefix}--snippet__icon {
+    fill: $icon-01;
+    height: rem(16px);
+    width: rem(16px);
+    transition: all $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--snippet-button {
+    @include reset;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: $ui-01;
+    outline: none;
+    padding: 0;
+    height: $carbon--spacing-08;
+    width: $carbon--spacing-08;
+    overflow: visible;
+
+    &:focus {
+      @include focus-outline('outline');
+      outline-color: $focus;
+    }
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
+    height: $carbon--spacing-07;
+    width: $carbon--spacing-07;
+    top: $spacing-xs;
+    right: $spacing-xs;
+  }
+
+  .#{$prefix}--snippet-button:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--snippet-button:active {
+    background-color: $copy-active;
+  }
+
+  .#{$prefix}--btn--copy__feedback {
+    @include type-style('body-short-01');
+    z-index: z('overlay');
+    font-weight: 400;
+    left: inherit;
+    top: 0.75rem;
+    right: 1.25rem;
+  }
+
+  .#{$prefix}--btn--copy__feedback:before,
+  .#{$prefix}--btn--copy__feedback:after {
+    background: $copy-btn-feedback;
+  }
+
+  .#{$prefix}--btn--copy__feedback:after {
+    border: none;
+  }
+
+  // Show more / less button
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    right: $spacing-xs;
+    bottom: $spacing-xs;
+    padding: $spacing-xs;
+    padding-left: $carbon--spacing-05;
+    color: $text-01;
+    background-color: $field-01;
+  }
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
+    .#{$prefix}--snippet-btn--text {
+    position: relative;
+    top: rem(-1px);
+  }
+
+  .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
+    display: none;
+  }
+
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    fill: $text-01;
+    margin-left: $spacing-xs;
+    margin-bottom: rem(1px);
+    transform: rotate(0deg);
+    transition: $duration--moderate-01 motion(standard, productive);
+  }
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+    background: $hover-ui;
+    color: $text-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand:active {
+    background-color: $copy-active;
+  }
+
+  .#{$prefix}--snippet-btn--expand:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    transform: rotate(180deg);
+    transition: transform $transition--expansion;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+
+  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
+    top: rem(25px);
+    left: 1rem;
+    right: auto;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+    left: 50%;
+  }
+
+  #{$prefix}--snippet--multi.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton span {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:nth-child(2) {
+      width: 85%;
+    }
+
+    &:nth-child(3) {
+      width: 95%;
+    }
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton
+    .#{$prefix}--snippet-container {
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+  }
+}
+
+@include exports('snippet') {
+  @include snippet;
+}

@@ -1,0 +1,213 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Slider
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../form/form';
+@import '../text-input/text-input';
+
+/// Slider styles
+/// @access private
+/// @group slider
+@mixin slider {
+  .#{$prefix}--slider-container {
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  .#{$prefix}--slider {
+    position: relative;
+    width: 100%;
+    margin: 0 $carbon--spacing-05;
+    max-width: rem(640px);
+    min-width: rem(200px);
+  }
+
+  .#{$prefix}--slider__range-label {
+    @include type-style('code-02');
+    color: $text-01;
+
+    &:last-of-type {
+      margin-right: $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--slider__track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $ui-03;
+    cursor: pointer;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__track:before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    height: rem(4px);
+    width: rem(2px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: rem(-5px);
+    background: $ui-03;
+  }
+
+  .#{$prefix}--slider__filled-track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $ui-05;
+    transform-origin: left;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+    transition: background $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--slider__thumb {
+    position: absolute;
+    height: rem(14px);
+    width: rem(14px);
+    background: $ui-05;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: transform $duration--fast-02 motion(standard, productive),
+      background $duration--fast-02 motion(standard, productive),
+      box-shadow $duration--fast-02 motion(standard, productive);
+    cursor: pointer;
+    outline: none;
+    z-index: 3;
+
+    &:hover {
+      // 20px / 14px = 1.4285714286
+      transform: translate(-50%, -50%) scale(1.4285714286);
+    }
+
+    &:focus {
+      // 20px / 14px = 1.4285714286
+      transform: translate(-50%, -50%) scale(1.4285714286);
+      box-shadow: inset 0 0 0 2px $interactive-01, inset 0 0 0 3px $ui-01;
+      background-color: $interactive-01;
+    }
+
+    &:active {
+      transform: translate(-50%, -50%) scale(1.4285714286);
+      box-shadow: inset 0 0 0 2px $interactive-01;
+    }
+  }
+
+  .#{$prefix}--slider__input {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
+    width: rem(64px);
+    height: rem(40px);
+    padding: 0;
+    text-align: center;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+    background-color: $interactive-01;
+  }
+
+  // Disabled state
+  .#{$prefix}--label--disabled
+    ~ .#{$prefix}--slider-container
+    > .#{$prefix}--slider__range-label {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    background-color: $ui-03;
+
+    &:hover {
+      transform: translate(-50%, -50%);
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      background-color: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+
+    &:active {
+      background: $ui-03;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider--disabled
+    .#{$prefix}--slider__thumb:focus
+    ~ .#{$prefix}--slider__filled-track {
+    background-color: $ui-03;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--slider--disabled
+    ~ .#{$prefix}--form-item
+    .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    background-color: $disabled-01;
+    color: $disabled-02;
+    transition: none;
+    cursor: not-allowed;
+
+    &:active,
+    &:focus,
+    &:hover {
+      outline: none;
+      color: $disabled-02;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__thumb {
+    left: 50%;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+@include exports('slider') {
+  @include slider;
+}

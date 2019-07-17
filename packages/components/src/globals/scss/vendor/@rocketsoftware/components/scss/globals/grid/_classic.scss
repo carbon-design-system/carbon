@@ -1,0 +1,145 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../scss/vars';
+
+$max-width: 1600px;
+$columns: 12;
+
+$grid-breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+);
+$gutter-breakpoints: (
+  xs: 5px,
+  sm: 10px,
+);
+$grid-gutter-breakpoints: (
+  xs: 3%,
+  sm: 5%,
+);
+
+@mixin grid {
+  .#{$prefix}--grid {
+    margin-left: grid-gutter('xs');
+    margin-right: grid-gutter('xs');
+    padding-left: gutter('xs');
+    padding-right: gutter('xs');
+
+    @media (min-width: breakpoint('sm')) {
+      margin-left: grid-gutter('sm');
+      margin-right: grid-gutter('sm');
+      padding-left: gutter('sm');
+      padding-right: gutter('sm');
+    }
+
+    @media (min-width: breakpoint('xxl')) {
+      margin: 0 auto;
+    }
+
+    &.max {
+      max-width: $max-width;
+    }
+  }
+
+  .#{$prefix}--row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 gutter('xs') * -1;
+
+    @media (min-width: breakpoint('sm')) {
+      margin: 0 gutter('sm') * -1;
+    }
+  }
+
+  [class*='#{$prefix}--col'] {
+    position: relative;
+    width: 100%;
+    padding: 0 gutter('xs');
+
+    @media (min-width: breakpoint('sm')) {
+      padding: 0 gutter('sm');
+    }
+  }
+
+  @for $i from 1 through $columns {
+    .#{$prefix}--col-xs-#{$i} {
+      flex: 0 0 (100% * $i / $columns);
+      max-width: (100% * $i / $columns);
+    }
+
+    .#{$prefix}--offset-xs-#{$i} {
+      margin-left: (100% * $i / $columns);
+    }
+  }
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @media (min-width: breakpoint($breakpoint)) {
+      .#{$prefix}--col-#{$breakpoint}-auto {
+        flex: 0 0 auto;
+        width: auto;
+      }
+
+      @for $i from 1 through $columns {
+        .#{$prefix}--col-#{$breakpoint}-#{$i} {
+          flex: 0 0 (100% * $i / $columns);
+          max-width: (100% * $i / $columns);
+        }
+
+        .#{$prefix}--offset-#{$breakpoint}-#{$i} {
+          margin-left: (100% * $i / $columns);
+        }
+      }
+    }
+  }
+
+  // deprecated
+  $gutter-size: 10px;
+
+  .#{$prefix}--col-xs,
+  .#{$prefix}--col-sm,
+  .#{$prefix}--col-md,
+  .#{$prefix}--col-lg {
+    flex-basis: 0;
+    flex: 1;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+}
+
+// map functions
+@function breakpoint($breakpoint) {
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    @return map-get($grid-breakpoints, $breakpoint);
+  } @else {
+    @warn 'breakpoint: could not find #{$breakpoint} in $grid-breakpoints map. Please make sure it is defined';
+  }
+}
+
+@function gutter($breakpoint) {
+  @if map-has-key($gutter-breakpoints, $breakpoint) {
+    @return map-get($gutter-breakpoints, $breakpoint);
+  } @else {
+    @warn 'gutter: could not find #{$breakpoint} in $gutter-breakpoints map. Please make sure it is defined';
+  }
+}
+
+@function grid-gutter($breakpoint) {
+  @if map-has-key($grid-gutter-breakpoints, $breakpoint) {
+    @return map-get($grid-gutter-breakpoints, $breakpoint);
+  } @else {
+    @warn 'grid-gutter: could not find #{$breakpoint} in $grid-breakpoints map. Please make sure it is defined';
+  }
+}
+
+@mixin column-size($col-num) {
+  flex: 0 0 (100% * $col-num / $columns);
+  max-width: (100% * $col-num / $columns);
+}
