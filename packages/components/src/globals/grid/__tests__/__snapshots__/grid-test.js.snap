@@ -53,6 +53,14 @@ exports[`_grid.scss should generate grid code when the grid feature flag is on 1
       padding-left: 2rem;
       padding-right: 2rem; } }
 
+.bx--grid--no-margin {
+  padding-left: 1rem;
+  padding-right: 1rem; }
+  @media (min-width: 42rem) {
+    .bx--grid--no-margin {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
 @media (min-width: 99rem) {
   .bx--grid--full-width {
     max-width: 100%; } }
