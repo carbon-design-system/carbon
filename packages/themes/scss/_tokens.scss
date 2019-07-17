@@ -96,6 +96,10 @@ $icon-03: map-get($carbon--theme, 'icon-03') !default;
 /// @access public
 /// @group @carbon/themes
 $link-01: map-get($carbon--theme, 'link-01') !default;
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$inverse-link: map-get($carbon--theme, 'inverse-link') !default;
 /// Default input fields; Field color on $ui-backgrounds
 /// @type Color
 /// @access public
