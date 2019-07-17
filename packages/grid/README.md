@@ -1,21 +1,21 @@
-# @carbon/grid
+# @rocketsoftware/grid
 
 > Grid for digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/grid` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/grid` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/grid
+npm install -S @rocketsoftware/grid
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/grid
+yarn add @rocketsoftware/grid
 ```
 
 ## Usage
@@ -69,7 +69,7 @@ layout will still take up a percentage of the overall width.
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/grid` API documentation, check out:
+If you're looking for `@rocketsoftware/grid` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

@@ -1,12 +1,12 @@
 {
   "name": "@rocketsoftware/carbon-components",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "main": "umd/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/components",
-  "bugs": "https://github.com/RocketSoftware/carbon/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/components",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "homepage": "https://www.carbondesignsystem.com/",
   "engines": {
     "node": ">=6.x"

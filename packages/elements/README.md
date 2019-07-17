@@ -1,21 +1,21 @@
-# @carbon/elements
+# @rocketsoftware/elements
 
 > A collection of design elements in code for the IBM Design Language
 
 ## Getting started
 
-To install `@carbon/elements` in your project, you will need to run the
+To install `@rocketsoftware/elements` in your project, you will need to run the
 following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/elements
+npm install -S @rocketsoftware/elements
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/elements
+yarn add @rocketsoftware/elements
 ```
 
 ## Usage
@@ -73,7 +73,7 @@ import { colors } from '@carbon/elements';
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/elements` API documentation, check out:
+If you're looking for `@rocketsoftware/elements` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

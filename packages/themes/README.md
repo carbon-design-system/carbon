@@ -1,21 +1,21 @@
-# @carbon/themes
+# @rocketsoftware/themes
 
 > Themes for applying color in the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/themes` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/themes` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/themes
+npm install -S @rocketsoftware/themes
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/themes
+yarn add @rocketsoftware/themes
 ```
 
 ## Usage
@@ -110,7 +110,7 @@ import {
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/themes` API documentation, check out:
+If you're looking for `@rocketsoftware/themes` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

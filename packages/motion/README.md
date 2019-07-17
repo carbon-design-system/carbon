@@ -1,22 +1,22 @@
-# @carbon/motion
+# @rocketsoftware/motion
 
 > Motion helpers for digital and software products using the Carbon Design
 > System
 
 ## Getting started
 
-To install `@carbon/motion` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/motion` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/motion
+npm install -S @rocketsoftware/motion
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/motion
+yarn add @rocketsoftware/motion
 ```
 
 ## Usage
@@ -71,7 +71,7 @@ motion('standard', 'productive'); // Returns a string `cubic-bezier()` function
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/motion` API documentation, check out:
+If you're looking for `@rocketsoftware/motion` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

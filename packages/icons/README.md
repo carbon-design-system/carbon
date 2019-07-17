@@ -1,21 +1,21 @@
-# @carbon/icons
+# @rocketsoftware/icons
 
 > Icons for digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/icons` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/icons` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/icons
+npm install -S @rocketsoftware/icons
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/icons
+yarn add @rocketsoftware/icons
 ```
 
 ## Usage
@@ -103,7 +103,7 @@ useful for finding the path information in order to import an icon.
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/icons` API documentation, check out:
+If you're looking for `@rocketsoftware/icons` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

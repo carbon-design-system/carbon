@@ -1,22 +1,22 @@
-# @carbon/icon-helpers
+# @rocketsoftware/icon-helpers
 
 > Helpers used alongside icons for digital and software products using the
 > Carbon Design System
 
 ## Getting started
 
-To install `@carbon/icon-helpers` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/icon-helpers` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/icon-helpers
+npm install -S @rocketsoftware/icon-helpers
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/icon-helpers
+yarn add @rocketsoftware/icon-helpers
 ```
 
 ## Usage

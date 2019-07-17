@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/type",
-  "bugs": "https://github.com/RocketSoftware/carbon/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/type",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@carbon/import-once": "10.2.0",
-    "@rocketsoftware/layout": "10.2.0"
+    "@rocketsoftware/layout": "0.0.1"
   },
   "devDependencies": {
     "@carbon/bundler": "10.2.0",

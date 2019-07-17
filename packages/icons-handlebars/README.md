@@ -1,22 +1,22 @@
-# @carbon/icons-handlebars
+# @rocketsoftware/icons-handlebars
 
 > Handlebars helpers for IBM Design Language icons in digital and software
 > products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/icons-handlebars` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/icons-handlebars` in your project, you will need to
+run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/icons-handlebars
+npm install -S @rocketsoftware/icons-handlebars
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/icons-handlebars
+yarn add @rocketsoftware/icons-handlebars
 ```
 
 ## Usage

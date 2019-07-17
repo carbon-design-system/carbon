@@ -1,22 +1,22 @@
-# @carbon/layout
+# @rocketsoftware/layout
 
 > Layout helpers for digital and software products using the Carbon Design
 > System
 
 ## Getting started
 
-To install `@carbon/layout` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/layout` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/layout
+npm install -S @rocketsoftware/layout
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/layout
+yarn add @rocketsoftware/layout
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ proposing the new addition!
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/layout` API documentation, check out:
+If you're looking for `@rocketsoftware/layout` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

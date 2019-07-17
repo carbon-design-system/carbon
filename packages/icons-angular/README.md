@@ -1,22 +1,22 @@
-# @carbon/icons-angular
+# @rocketsoftware/icons-angular
 
 > Angular components for icons in digital and software products using the Carbon
 > Design System
 
 ## Getting started
 
-To install `@carbon/icons-angular` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/icons-angular` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/icons-angular
+npm install -S @rocketsoftware/icons-angular
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/icons-angular
+yarn add @rocketsoftware/icons-angular
 ```
 
 ## Usage

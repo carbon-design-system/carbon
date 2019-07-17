@@ -1,21 +1,21 @@
-# @carbon/type
+# @rocketsoftware/type
 
 > Typography for digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/type` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/type` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/type
+npm install -S @rocketsoftware/type
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/type
+yarn add @rocketsoftware/type
 ```
 
 ## Usage
@@ -251,14 +251,14 @@ There is also a `type-scale` mixin that will set `font-size` for your directly:
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/type` API documentation, check out:
+If you're looking for `@rocketsoftware/type` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 
 ## 📚 Examples
 
-If you're looking for more examples on how to use `@carbon/type`, we have some
-examples that you can check out:
+If you're looking for more examples on how to use `@rocketsoftware/type`, we
+have some examples that you can check out:
 
 - [styled-components](./examples/styled-components)
 

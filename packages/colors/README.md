@@ -1,21 +1,21 @@
-# @carbon/colors
+# @rocketsoftware/colors
 
 > Colors for digital and software products using the Carbon Design System
 
 ## Getting started
 
-To install `@carbon/colors` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/colors` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/colors
+npm install -S @rocketsoftware/colors
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/colors
+yarn add @rocketsoftware/colors
 ```
 
 ## Usage
@@ -139,7 +139,7 @@ warmGray100; // Using the `warmGray100` variable.
 
 ## 📖 API Documentation
 
-If you're looking for `@carbon/colors` API documentation, check out:
+If you're looking for `@rocketsoftware/colors` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 

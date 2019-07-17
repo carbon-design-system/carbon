@@ -2389,10 +2389,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@rocketsoftware/icon-helpers@0.0.1":
+"@rocketsoftware/icon-helpers@10.2.0":
   version "0.0.1"
 
-"@rocketsoftware/icons@0.0.1":
+"@rocketsoftware/icons@10.3.0":
   version "0.0.1"
 
 "@rocketsoftware/layout@0.0.1":

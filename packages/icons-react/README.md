@@ -1,22 +1,22 @@
-# @carbon/icons-react
+# @rocketsoftware/icons-react
 
 > React components for icons in digital and software products using the Carbon
 > Design System
 
 ## Getting started
 
-To install `@carbon/icons-react` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@rocketsoftware/icons-react` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/icons-react
+npm install -S @rocketsoftware/icons-react
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/icons-react
+yarn add @rocketsoftware/icons-react
 ```
 
 ## Usage

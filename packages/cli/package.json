@@ -16,7 +16,7 @@
     "react"
   ],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "dependencies": {
     "@carbon/cli-reporter": "10.2.0",
