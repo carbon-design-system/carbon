@@ -19,6 +19,7 @@ export function sync() {
       symbol => symbol.name === 'test-symbol'
     );
 
+    // Keep sharedStyleId in sync
     console.log(symbol.layers[1]);
     // syncSymbol(document, 'test-symbol', {
     // layers: [
