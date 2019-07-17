@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from '@rocketsoftware/carbon-components';
-import { View16, ViewOff16, WarningFilled16 } from '@rocketsoftware/icons-react';
+import {
+  View16,
+  ViewOff16,
+  WarningFilled16,
+} from '@rocketsoftware/icons-react';
 import { textInputProps } from './util';
 
 const { prefix } = settings;

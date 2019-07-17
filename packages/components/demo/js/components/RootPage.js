@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import { Dropdown, DropdownItem, ToggleSmall } from '@rocketsoftware/carbon-components-react';
+import {
+  Dropdown,
+  DropdownItem,
+  ToggleSmall,
+} from '@rocketsoftware/carbon-components-react';
 import eventMatches from '../../../src/globals/js/misc/event-matches';
 import on from '../../../src/globals/js/misc/on';
 import CodePage from './CodePage/CodePage';
