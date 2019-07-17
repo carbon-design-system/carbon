@@ -14,7 +14,8 @@ import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 
 const toggleProps = () => ({
   className: 'some-class',
-  labelText: text('Label for toggle button input', ''),
+  labelText: text('Label for toggle button input (labelText)', ''),
+  ['aria-label']: text('ARIA label of the toggle (aria-label)', ''),
   labelA: text('Label for untoggled state (labelA)', 'Off'),
   labelB: text('Label for toggled state (labelB)', 'On'),
   disabled: boolean('Disabled (disabled)', false),

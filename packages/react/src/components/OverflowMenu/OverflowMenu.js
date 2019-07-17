@@ -17,7 +17,7 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
-import { keys, matches as keyCodeMatches } from '../../tools/key';
+import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
@@ -312,7 +312,7 @@ class OverflowMenu extends Component {
   };
 
   handleKeyDown = evt => {
-    if (keyCodeMatches(evt, [keys.DOWN])) {
+    if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
@@ -321,13 +321,13 @@ class OverflowMenu extends Component {
   handleKeyPress = evt => {
     // only respond to key events when the menu is closed, so that menu items still respond to key events
     if (!this.state.open) {
-      if (keyCodeMatches(evt, [keys.ENTER, keys.SPACE])) {
+      if (keyCodeMatches(evt, [keys.Enter, keys.Space])) {
         this.setState({ open: true });
       }
     }
 
     // Close the overflow menu on escape
-    if (keyCodeMatches(evt, [keys.ESC])) {
+    if (keyCodeMatches(evt, [keys.Escape])) {
       this.closeMenu();
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();

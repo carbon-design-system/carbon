@@ -7,12 +7,12 @@
 
 import {
   // Blue
+  blue30,
   blue40,
   blue50,
   blue60,
   blue70,
   blue80,
-  blue90,
 
   // Gray
   gray10,
@@ -64,6 +64,8 @@ export const icon03 = white;
 
 export const link01 = blue40;
 
+export const inverseLink = blue60;
+
 export const field01 = gray80;
 export const field02 = gray70;
 
@@ -88,7 +90,7 @@ export const focus = white;
 export const hoverPrimary = '#0353e9';
 export const activePrimary = blue80;
 
-export const hoverPrimaryText = blue70;
+export const hoverPrimaryText = blue30;
 
 export const hoverSecondary = '#606060';
 export const activeSecondary = gray80;
@@ -113,7 +115,7 @@ export const disabled01 = gray80;
 export const disabled02 = gray70;
 export const disabled03 = gray50;
 
-export const highlight = blue90;
+export const highlight = blue70;
 
 export const skeleton01 = '#353535';
 export const skeleton02 = gray70;

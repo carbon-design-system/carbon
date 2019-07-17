@@ -8,7 +8,7 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const meta = require('@carbon/icons/meta.json');
+const meta = require('@carbon/icons/build-info.json');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');

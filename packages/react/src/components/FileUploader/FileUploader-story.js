@@ -54,7 +54,7 @@ const props = {
         'Prevent the label from being replaced with file selected file (disableLabelChanges)',
         false
       ),
-      role: text('ARIA role of the button (role)', ''),
+      role: text('ARIA role of the button (role)', 'button'),
       tabIndex: number('Tab index (tabIndex)', 0),
       onChange: action('onChange'),
     };

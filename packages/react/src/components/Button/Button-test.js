@@ -283,6 +283,37 @@ describe('TertiaryButton', () => {
   });
 });
 
+describe('Icon-only button', () => {
+  describe('Renders as expected', () => {
+    const wrapper = mount(<Button hasIconOnly />);
+
+    it('has the expected classes', () => {
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--btn--icon-only`)
+      ).toEqual(true);
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--tooltip__trigger`)
+      ).toEqual(true);
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--tooltip--a11y`)
+      ).toEqual(true);
+    });
+
+    it('should only set tooltip position and alignment if passed via props', () => {
+      wrapper.setProps({ tooltipPosition: 'bottom' });
+      expect(wrapper.props().tooltipPosition).toEqual('bottom');
+      wrapper.setProps({ tooltipAlignment: 'center' });
+      expect(wrapper.props().tooltipAlignment).toEqual('center');
+    });
+
+    it('should contain assistive text', () => {
+      wrapper.setProps({ tooltipPosition: 'bottom' });
+      wrapper.setProps({ tooltipAlignment: 'center' });
+      expect(wrapper.find(`.${prefix}--assistive-text`).length).toEqual(1);
+    });
+  });
+});
+
 describe('ButtonSkeleton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<ButtonSkeleton />);

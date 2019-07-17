@@ -8,6 +8,7 @@
 import {
   // Blue
   blue20,
+  blue40,
   blue60,
   blue70,
   blue80,
@@ -62,6 +63,8 @@ export const icon02 = gray70;
 export const icon03 = white;
 
 export const link01 = blue60;
+
+export const inverseLink = blue40;
 
 export const field01 = gray10;
 export const field02 = white;

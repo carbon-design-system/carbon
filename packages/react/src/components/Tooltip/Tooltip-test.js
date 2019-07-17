@@ -164,10 +164,10 @@ describe('Tooltip', () => {
     it('Enter key press changes state when clickToOpen is set', () => {
       const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
       const icon = wrapper.find(Information);
-      icon.simulate('keyDown', { which: 'Enter' });
+      icon.simulate('keyDown', { key: 'Enter', which: 13 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
-      icon.simulate('keyDown', { key: 13 });
+      icon.simulate('keyDown', { which: 13 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
@@ -183,10 +183,10 @@ describe('Tooltip', () => {
         />
       );
       const icon = wrapper.find('.custom-icon');
-      icon.simulate('keyDown', { which: 'Enter' });
+      icon.simulate('keyDown', { key: 'Enter', which: 13 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
-      icon.simulate('keyDown', { key: 13 });
+      icon.simulate('keyDown', { which: 13 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
@@ -194,10 +194,10 @@ describe('Tooltip', () => {
     it('Space key press changes state when clickToOpen is set', () => {
       const wrapper = mount(<Tooltip clickToOpen triggerText="Tooltip" />);
       const icon = wrapper.find(Information);
-      icon.simulate('keyDown', { which: ' ' });
+      icon.simulate('keyDown', { key: ' ', which: 32 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
-      icon.simulate('keyDown', { key: 32 });
+      icon.simulate('keyDown', { which: 32 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
@@ -213,10 +213,10 @@ describe('Tooltip', () => {
         />
       );
       const icon = wrapper.find('.custom-icon');
-      icon.simulate('keyDown', { which: ' ' });
+      icon.simulate('keyDown', { key: ' ', which: 32 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(true);
-      icon.simulate('keyDown', { key: 32 });
+      icon.simulate('keyDown', { which: 32 });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(wrapper.find('Tooltip').instance().state.open).toEqual(false);
     });

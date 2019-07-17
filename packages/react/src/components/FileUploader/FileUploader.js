@@ -106,6 +106,7 @@ export class FileUploaderButton extends Component {
     onClick: () => {},
     accept: [],
     disabled: false,
+    role: 'button',
   };
 
   static getDerivedStateFromProps({ labelText }, state) {
@@ -159,7 +160,6 @@ export class FileUploaderButton extends Component {
     return (
       <>
         <label
-          role="button"
           tabIndex={tabIndex || 0}
           className={classes}
           onKeyDown={evt => {
