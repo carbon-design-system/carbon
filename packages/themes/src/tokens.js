@@ -33,6 +33,8 @@ const colors = [
 
   'link01',
 
+  'inverseLink',
+
   'field01',
   'field02',
 
