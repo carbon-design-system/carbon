@@ -54,7 +54,7 @@ const styleLoaders = [
 class FeatureFlagProxyPlugin {
   /**
    * A WebPack resolver plugin that proxies module request
-   * for `carbon-components/es/globals/js/settings` to `./settings`.
+   * for `@rocketsoftware/carbon-components/es/globals/js/settings` to `./settings`.
    */
   constructor() {
     this.source = 'before-described-relative';

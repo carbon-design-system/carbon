@@ -8,7 +8,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { TableBatchActions } from '../';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 
