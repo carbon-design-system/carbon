@@ -23,6 +23,7 @@
   - [✅carbon--aspect-ratios [variable]](#carbon--aspect-ratios-variable)
   - [❌carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [❌carbon--make-container [mixin]](#carbon--make-container-mixin)
+  - [❌carbon--set-margins [mixin]](#carbon--set-margins-mixin)
   - [❌carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [❌carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
   - [✅carbon--grid [mixin]](#carbon--grid-mixin)
@@ -1311,14 +1312,49 @@ max-width properties are added with `make-container-max-widths`
   margin-left: auto;
 
   @include carbon--set-largest-breakpoint();
+  @include carbon--set-margins($breakpoints);
+}
+```
 
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type  | Default value               |
+| -------------- | ---------------------------------------------- | ----- | --------------------------- |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map` | `$carbon--grid-breakpoints` |
+
+- **Group**: [@carbon/grid](#carbongrid)
+- **Requires**:
+  - [carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
+  - [carbon--set-margins [mixin]](#carbon--set-margins-mixin)
+- **Used by**:
+  - [carbon--grid [mixin]](#carbon--grid-mixin)
+
+### ❌carbon--set-margins [mixin]
+
+Sets the grid margin for every breakpoint
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--set-margins(
+  $breakpoints: $carbon--grid-breakpoints,
+  $margin-override: null
+) {
   @each $name, $value in $breakpoints {
     $prev-breakpoint: map-get($breakpoints, carbon--breakpoint-prev($name));
-    $margin: map-get($value, margin);
+    $breakpoint-margin: map-get($value, margin);
+    $margin: $breakpoint-margin;
+
+    @if $margin-override {
+      $margin: $margin-override;
+    }
 
     @if $prev-breakpoint {
       $prev-margin: map-get($prev-breakpoint, margin);
-      @if $prev-margin != $margin {
+      @if $prev-margin != $breakpoint-margin {
         @include carbon--breakpoint($name) {
           padding-left: #{($carbon--grid-gutter / 2) + $margin};
           padding-right: #{($carbon--grid-gutter / 2) + $margin};
@@ -1338,17 +1374,18 @@ max-width properties are added with `make-container-max-widths`
 
 - **Parameters**:
 
-| Name           | Description                                    | Type  | Default value               |
-| -------------- | ---------------------------------------------- | ----- | --------------------------- |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map` | `$carbon--grid-breakpoints` |
+| Name               | Description                                        | Type     | Default value               |
+| ------------------ | -------------------------------------------------- | -------- | --------------------------- |
+| `$breakpoints`     | A map of breakpoints where the key is the name     | `Map`    | `$carbon--grid-breakpoints` |
+| `$margin-override` | Margin to apply instead of the breakpoint's margin | `Number` | `null`                      |
 
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
-  - [carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--breakpoint-prev [function]](#carbon--breakpoint-prev-function)
   - [carbon--grid-gutter [variable]](#carbon--grid-gutter-variable)
 - **Used by**:
+  - [carbon--make-container [mixin]](#carbon--make-container-mixin)
   - [carbon--grid [mixin]](#carbon--grid-mixin)
 
 ### ❌carbon--set-largest-breakpoint [mixin]
@@ -1428,6 +1465,10 @@ Generate the CSS for a grid for the given breakpoints and gutters
     @include carbon--make-container($breakpoints);
   }
 
+  .#{$prefix}--grid--no-margin {
+    @include carbon--set-margins($breakpoints, 0);
+  }
+
   @include carbon--largest-breakpoint($breakpoints) {
     .#{$prefix}--grid--full-width {
       max-width: 100%;
@@ -1466,6 +1507,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
 - **Group**: [@carbon/grid](#carbongrid)
 - **Requires**:
   - [carbon--make-container [mixin]](#carbon--make-container-mixin)
+  - [carbon--set-margins [mixin]](#carbon--set-margins-mixin)
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [carbon--make-row [mixin]](#carbon--make-row-mixin)
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
@@ -1594,7 +1636,7 @@ $carbon--grid-gutter: carbon--rem(32px);
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Used by**:
-  - [carbon--make-container [mixin]](#carbon--make-container-mixin)
+  - [carbon--set-margins [mixin]](#carbon--set-margins-mixin)
 
 ### ✅carbon--grid-gutter--condensed [variable]
 
@@ -1722,7 +1764,7 @@ Get the value of the previous breakpoint, or null for the first breakpoint
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Returns**: `String`
 - **Used by**:
-  - [carbon--make-container [mixin]](#carbon--make-container-mixin)
+  - [carbon--set-margins [mixin]](#carbon--set-margins-mixin)
 
 ### ✅carbon--is-smallest-breakpoint [function]
 
@@ -2014,7 +2056,7 @@ Generate a media query for a given breakpoint
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
 - **Used by**:
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
-  - [carbon--make-container [mixin]](#carbon--make-container-mixin)
+  - [carbon--set-margins [mixin]](#carbon--set-margins-mixin)
   - [carbon--make-container-max-widths [mixin]](#carbon--make-container-max-widths-mixin)
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
   - [fluid-type [mixin]](#fluid-type-mixin)

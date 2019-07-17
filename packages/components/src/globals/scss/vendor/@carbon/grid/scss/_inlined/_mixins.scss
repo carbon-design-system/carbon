@@ -249,14 +249,30 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
   margin-left: auto;
 
   @include carbon--set-largest-breakpoint();
+  @include carbon--set-margins($breakpoints);
+}
 
+/// Sets the grid margin for every breakpoint
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @param {Number} $margin-override [null] - Margin to apply instead of the breakpoint's margin
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--set-margins(
+  $breakpoints: $carbon--grid-breakpoints,
+  $margin-override: null
+) {
   @each $name, $value in $breakpoints {
     $prev-breakpoint: map-get($breakpoints, carbon--breakpoint-prev($name));
-    $margin: map-get($value, margin);
+    $breakpoint-margin: map-get($value, margin);
+    $margin: $breakpoint-margin;
+
+    @if $margin-override {
+      $margin: $margin-override;
+    }
 
     @if $prev-breakpoint {
       $prev-margin: map-get($prev-breakpoint, margin);
-      @if $prev-margin != $margin {
+      @if $prev-margin != $breakpoint-margin {
         @include carbon--breakpoint($name) {
           padding-left: #{($carbon--grid-gutter / 2) + $margin};
           padding-right: #{($carbon--grid-gutter / 2) + $margin};
@@ -308,6 +324,10 @@ $carbon--aspect-ratios: ((16, 9), (2, 1), (4, 3), (1, 1), (1, 2));
 ) {
   .#{$prefix}--grid {
     @include carbon--make-container($breakpoints);
+  }
+
+  .#{$prefix}--grid--no-margin {
+    @include carbon--set-margins($breakpoints, 0);
   }
 
   @include carbon--largest-breakpoint($breakpoints) {

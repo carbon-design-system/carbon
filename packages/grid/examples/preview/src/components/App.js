@@ -320,6 +320,47 @@ const sections = [
     ],
   },
   {
+    id: 'no-margin',
+    name: 'No margin',
+    description: (
+      <React.Fragment>
+        Margins are at the outer edge of the grid. By default, the grid has no margin at the small breakpoint and then a margin is applied at the medium and larger breakpoints. Sometimes it is useful to have no margin on a grid at all viewport widths, particularly when the grid is nested in another grid. When nesting, you might also want to use <code>.bx--grid--full-width</code>.
+      </React.Fragment>
+    ),
+    examples: [
+      {
+        name: 'No margin',
+        description: 'Grid usage of bx--grid--no-margin',
+        content: () => (
+          <div className="bx--grid bx--grid--no-margin">
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
     id: 'no-gutters',
     name: 'No gutters',
     desription:
