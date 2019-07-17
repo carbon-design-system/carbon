@@ -18696,8 +18696,7 @@ Tooltip styles
     }
 
     .#{$prefix}--link {
-      // Need to add new link / UI color -- IBM Color Blue 40
-      color: $link-inverse-color;
+      color: $inverse-link;
       font-size: rem(14px);
 
       &:active {
@@ -18705,7 +18704,7 @@ Tooltip styles
       }
 
       &:visited {
-        color: $link-inverse-color;
+        color: $inverse-link;
       }
     }
 
