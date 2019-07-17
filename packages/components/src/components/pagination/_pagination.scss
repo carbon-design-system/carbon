@@ -55,7 +55,7 @@ $css--helpers: true;
     padding: 0 2.5rem 0 $spacing-md;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {
-      padding: 0 carbon--mini-units(3.5) 0 $carbon--spacing-03;
+      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
@@ -67,6 +67,9 @@ $css--helpers: true;
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
     top: auto;
     bottom: auto;
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination
