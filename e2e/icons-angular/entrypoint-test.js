@@ -15,7 +15,7 @@
 
 const timeout = 60 * 1000;
 
-describe.skip('@carbon/icons-angular CommonJS', () => {
+describe.skip('@rocketsoftware/icons-angular CommonJS', () => {
   it(
     'should build an entrypoint that is require-able',
     async () => {

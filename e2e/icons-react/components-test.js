@@ -11,7 +11,7 @@
 
 const meta = require('../../packages/icons/build-info.json');
 
-describe('@carbon/icons-react', () => {
+describe('@rocketsoftware/icons-react', () => {
   test('entrypoint is require-able', () => {
     expect(() => {
       require('@carbon/icons-react');
