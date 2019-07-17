@@ -52,7 +52,7 @@ ListBoxField.propTypes = {
   /**
    * Optional prop to specify the tabIndex of the <ListBox> trigger button
    */
-  tabIndex: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default ListBoxField;

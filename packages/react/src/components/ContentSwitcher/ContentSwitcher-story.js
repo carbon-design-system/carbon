@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 
@@ -29,10 +29,12 @@ storiesOf('ContentSwitcher', module)
     () => {
       const switchProps = props.switch();
       return (
-        <ContentSwitcher {...props.contentSwitcher()}>
-          <Switch name="one" text="First section" {...switchProps} />
-          <Switch name="two" text="Second section" {...switchProps} />
-          <Switch name="three" text="Third section" {...switchProps} />
+        <ContentSwitcher
+          {...props.contentSwitcher()}
+          selectedIndex={number('Selected Index (selectedIndex)', 0)}>
+          <Switch text="First section" {...switchProps} />
+          <Switch text="Second section" {...switchProps} />
+          <Switch text="Third section" {...switchProps} />
         </ContentSwitcher>
       );
     },
@@ -51,9 +53,9 @@ storiesOf('ContentSwitcher', module)
       const switchProps = props.switch();
       return (
         <ContentSwitcher {...props.contentSwitcher()} selectedIndex={1}>
-          <Switch name="one" text="First section" {...switchProps} />
-          <Switch name="two" text="Second section" {...switchProps} />
-          <Switch name="three" text="Third section" {...switchProps} />
+          <Switch text="First section" {...switchProps} />
+          <Switch text="Second section" {...switchProps} />
+          <Switch text="Third section" {...switchProps} />
         </ContentSwitcher>
       );
     },
