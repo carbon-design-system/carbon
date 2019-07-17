@@ -2389,11 +2389,15 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@rocketsoftware/icon-helpers@10.2.0":
+"@rocketsoftware/carbon-components@0.0.1":
   version "0.0.1"
-
-"@rocketsoftware/icons@10.3.0":
-  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/carbon-components/-/carbon-components-0.0.1.tgz#b4c9133243eb34e6ad14c6c69af90da52875a50e"
+  integrity sha512-GtxivC/6Dt3dvctIuyQkoePYJ2zK/a/aKmmcgHJuKm5EljU8+ARLy6GgVTZPp59KmFFzlE8gqZ1B1Ulx3TnM/g==
+  dependencies:
+    carbon-icons "^7.0.7"
+    flatpickr "4.6.1"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
 
 "@rocketsoftware/layout@0.0.1":
   version "0.0.1"

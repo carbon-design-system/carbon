@@ -24,7 +24,7 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "10.2.0"
+    "@rocketsoftware/icon-helpers": "0.0.1"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "10.2.0",
