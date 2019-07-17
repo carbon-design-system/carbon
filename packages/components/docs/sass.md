@@ -135,6 +135,7 @@
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -288,7 +289,6 @@
 - [notification](#notification)
   - [❌inline-notifications [mixin]](#inline-notifications-mixin)
   - [❌inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [❌inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [❌notification--color [mixin]](#notification--color-mixin)
   - [❌notification--experimental [mixin]](#notification--experimental-mixin)
   - [❌toast-notifications [mixin]](#toast-notifications-mixin)
@@ -3664,6 +3664,7 @@ Define theme variables from a map of tokens
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -3724,6 +3725,7 @@ Define theme variables from a map of tokens
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
     --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
     --field-01: #{map-get($theme, 'field-01')};
     --field-02: #{map-get($theme, 'field-02')};
     --inverse-01: #{map-get($theme, 'inverse-01')};
@@ -3829,6 +3831,7 @@ Define theme variables from a map of tokens
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -3900,6 +3903,7 @@ $carbon--theme--white: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #f3f3f3,
   field-02: #ffffff,
   inverse-01: #ffffff,
@@ -3979,6 +3983,7 @@ $carbon--theme--g10: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #ffffff,
   field-02: #f3f3f3,
   inverse-01: #ffffff,
@@ -4056,6 +4061,7 @@ $carbon--theme--g90: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #3d3d3d,
   field-02: #565656,
   inverse-01: #171717,
@@ -4131,6 +4137,7 @@ $carbon--theme--g100: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #282828,
   field-02: #3d3d3d,
   inverse-01: #171717,
@@ -4686,8 +4693,25 @@ $link-01: map-get($carbon--theme, 'link-01');
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: map-get($carbon--theme, 'inverse-link');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
 
@@ -14104,24 +14128,25 @@ Inline notification styles
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $inverse-link;
+    }
+
     @if $carbon--theme == $carbon--theme--white {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
     } @else if $carbon--theme == $carbon--theme--g10 {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
-    } @else {
-      @include inline-notification--button-color;
     }
   }
 
@@ -14178,7 +14203,6 @@ Inline notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14195,6 +14219,7 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
   - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -14224,30 +14249,6 @@ Inline notification styles
 - **Group**: [notification](#notification)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-
-### ❌inline-notification--button-color [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin inline-notification--button-color() {
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    color: $link-01;
-  }
-}
-```
-
-</details>
-
-- **Group**: [notification](#notification)
-- **Requires**:
-  - [link-01 [variable]](#link-01-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ❌notification--color [mixin]
 
@@ -18916,6 +18917,7 @@ Tooltip styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
