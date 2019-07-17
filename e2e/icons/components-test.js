@@ -12,7 +12,7 @@
 const path = require('path');
 const meta = require('../../packages/icons/build-info.json');
 
-describe('@carbon/icons', () => {
+describe('@rocketsoftware/icons', () => {
   test.each(meta.map(icon => [icon.moduleName, icon]))(
     '%s is require-able',
     (name, icon) => {

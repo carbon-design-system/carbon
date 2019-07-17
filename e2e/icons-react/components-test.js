@@ -14,11 +14,11 @@ const meta = require('../../packages/icons/build-info.json');
 describe('@rocketsoftware/icons-react', () => {
   test('entrypoint is require-able', () => {
     expect(() => {
-      require('@carbon/icons-react');
+      require('@rocketsoftware/icons-react');
     }).not.toThrow();
   });
 
   test.each(meta.map(icon => [icon.moduleName]))('%s is require-able', name => {
-    expect(require('@carbon/icons-react')[name]).toBeDefined();
+    expect(require('@rocketsoftware/icons-react')[name]).toBeDefined();
   });
 });
