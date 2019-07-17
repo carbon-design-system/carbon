@@ -135,6 +135,7 @@
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -3664,6 +3665,7 @@ Define theme variables from a map of tokens
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -3724,6 +3726,7 @@ Define theme variables from a map of tokens
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
     --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
     --field-01: #{map-get($theme, 'field-01')};
     --field-02: #{map-get($theme, 'field-02')};
     --inverse-01: #{map-get($theme, 'inverse-01')};
@@ -3829,6 +3832,7 @@ Define theme variables from a map of tokens
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -3900,6 +3904,7 @@ $carbon--theme--white: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #f3f3f3,
   field-02: #ffffff,
   inverse-01: #ffffff,
@@ -3979,6 +3984,7 @@ $carbon--theme--g10: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #ffffff,
   field-02: #f3f3f3,
   inverse-01: #ffffff,
@@ -4056,6 +4062,7 @@ $carbon--theme--g90: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #3d3d3d,
   field-02: #565656,
   inverse-01: #171717,
@@ -4072,7 +4079,7 @@ $carbon--theme--g90: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4131,6 +4138,7 @@ $carbon--theme--g100: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #282828,
   field-02: #3d3d3d,
   inverse-01: #171717,
@@ -4147,7 +4155,7 @@ $carbon--theme--g100: (
   focus: #ffffff,
   hover-primary: #0353e9,
   active-primary: #0530ad,
-  hover-primary-text: #054ada,
+  hover-primary-text: #97c1ff,
   hover-secondary: #606060,
   active-secondary: #3d3d3d,
   hover-tertiary: #f3f3f3,
@@ -4688,6 +4696,22 @@ $link-01: map-get($carbon--theme, 'link-01');
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: map-get($carbon--theme, 'inverse-link');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅field-01 [variable]
 
