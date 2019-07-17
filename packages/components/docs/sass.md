@@ -4224,7 +4224,6 @@ $interactive-01: map-get($carbon--theme, 'interactive-01');
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -4295,6 +4294,7 @@ $interactive-04: map-get($carbon--theme, 'interactive-04');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
 
 ### ✅ui-background [variable]
@@ -4612,7 +4612,6 @@ $icon-01: map-get($carbon--theme, 'icon-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -5081,6 +5080,7 @@ $hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
 
 ### ✅hover-secondary [variable]
 
@@ -8806,10 +8806,10 @@ Button styles
 
     &:hover,
     &:active {
-      color: $icon-01;
+      color: $hover-primary-text;
 
       .#{$prefix}--btn__icon path {
-        fill: $icon-01;
+        fill: $hover-primary-text;
       }
     }
 
@@ -8928,7 +8928,7 @@ Button styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [icon-01 [variable]](#icon-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -12682,7 +12682,7 @@ Inline loading styles
 
   .#{$prefix}--inline-loading__checkmark {
     fill: none;
-    stroke: $interactive-01;
+    stroke: $interactive-04;
     transform-origin: 50% 50%;
     stroke-width: 1.8;
     stroke-dasharray: 12;
@@ -12693,7 +12693,7 @@ Inline loading styles
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $interactive-01;
+    stroke: $interactive-04;
   }
   /* If IE11 Don't show check animation */
   @media screen and (-ms-high-contrast: active),
@@ -12718,7 +12718,7 @@ Inline loading styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
 
 ## link
 
