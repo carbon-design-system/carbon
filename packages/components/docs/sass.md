@@ -16716,7 +16716,7 @@ Tabs styles
     position: relative;
     @include carbon--breakpoint(md) {
       background: none;
-      min-height: rem(48px);
+      min-height: rem(40px);
     }
   }
 
