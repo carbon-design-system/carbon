@@ -60,7 +60,10 @@
     color: $visited-link;
   }
 
-  .#{$prefix}--link--disabled {
+  .#{$prefix}--link.#{$prefix}--link--disabled,
+  .#{$prefix}--link.#{$prefix}--link--disabled:hover,
+  .#{$prefix}--link.#{$prefix}--link--disabled:active,
+  .#{$prefix}--link.#{$prefix}--link--disabled:visited {
     @include reset;
     @include type-style('body-long-01');
     display: inline;
