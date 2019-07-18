@@ -47,10 +47,12 @@ const ListBox = ({
   const className = cx({
     [containerClassName]: !!containerClassName,
     [`${prefix}--list-box`]: true,
+    [`${prefix}--dropdown`]: true,
     [`${prefix}--list-box--inline`]: type === 'inline',
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
     [`${prefix}--list-box--expanded`]: isOpen,
+    [`${prefix}--dropdown--open`]: isOpen,
   });
   return (
     <>

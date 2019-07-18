@@ -174,7 +174,7 @@ export default class Dropdown extends React.Component {
     const className = ({ isOpen }) =>
       cx(`${prefix}--dropdown`, containerClassName, {
         [`${prefix}--dropdown--invalid`]: invalid,
-        [`${prefix}--dropdown--open`]: isOpen,
+        // [`${prefix}--dropdown--open`]: isOpen, // TODO: can remove if added to ListBox
         [`${prefix}--dropdown--inline`]: inline,
         [`${prefix}--dropdown--disabled`]: disabled,
         [`${prefix}--dropdown--light`]: light,
@@ -255,25 +255,23 @@ export default class Dropdown extends React.Component {
                   translateWithId={translateWithId}
                 />
               </ListBox.Field>
-              {isOpen && (
-                <ListBox.Menu aria-label={ariaLabel} id={id}>
-                  {items.map((item, index) => (
-                    <ListBox.MenuItem
-                      key={itemToString(item)}
-                      isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index || selectedItem === item
-                      }
-                      {...getItemProps({ item, index })}>
-                      {itemToElement ? (
-                        <ItemToElement key={itemToString(item)} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                    </ListBox.MenuItem>
-                  ))}
-                </ListBox.Menu>
-              )}
+              <ListBox.Menu aria-label={ariaLabel} id={id}>
+                {items.map((item, index) => (
+                  <ListBox.MenuItem
+                    key={itemToString(item)}
+                    isActive={selectedItem === item}
+                    isHighlighted={
+                      highlightedIndex === index || selectedItem === item
+                    }
+                    {...getItemProps({ item, index })}>
+                    {itemToElement ? (
+                      <ItemToElement key={itemToString(item)} {...item} />
+                    ) : (
+                      itemToString(item)
+                    )}
+                  </ListBox.MenuItem>
+                ))}
+              </ListBox.Menu>
             </ListBox>
           )}
         </Downshift>
