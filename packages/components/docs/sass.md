@@ -135,6 +135,7 @@
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -288,7 +289,6 @@
 - [notification](#notification)
   - [❌inline-notifications [mixin]](#inline-notifications-mixin)
   - [❌inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [❌inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [❌notification--color [mixin]](#notification--color-mixin)
   - [❌notification--experimental [mixin]](#notification--experimental-mixin)
   - [❌toast-notifications [mixin]](#toast-notifications-mixin)
@@ -1724,7 +1724,7 @@ Makes SVGs accessible in high contrast mode
 
 ```scss
 @mixin carbon--icons() {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
@@ -2495,6 +2495,7 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
@@ -3664,6 +3665,7 @@ Define theme variables from a map of tokens
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -3724,6 +3726,7 @@ Define theme variables from a map of tokens
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
     --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
     --field-01: #{map-get($theme, 'field-01')};
     --field-02: #{map-get($theme, 'field-02')};
     --inverse-01: #{map-get($theme, 'inverse-01')};
@@ -3829,6 +3832,7 @@ Define theme variables from a map of tokens
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -3900,6 +3904,7 @@ $carbon--theme--white: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #f3f3f3,
   field-02: #ffffff,
   inverse-01: #ffffff,
@@ -3979,6 +3984,7 @@ $carbon--theme--g10: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #ffffff,
   field-02: #f3f3f3,
   inverse-01: #ffffff,
@@ -4056,6 +4062,7 @@ $carbon--theme--g90: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #3d3d3d,
   field-02: #565656,
   inverse-01: #171717,
@@ -4131,6 +4138,7 @@ $carbon--theme--g100: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #282828,
   field-02: #3d3d3d,
   inverse-01: #171717,
@@ -4224,7 +4232,6 @@ $interactive-01: map-get($carbon--theme, 'interactive-01');
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -4295,6 +4302,7 @@ $interactive-04: map-get($carbon--theme, 'interactive-04');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
   - [loading [mixin]](#loading-mixin)
 
 ### ✅ui-background [variable]
@@ -4510,7 +4518,6 @@ $text-01: map-get($carbon--theme, 'text-01');
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -4549,6 +4556,7 @@ $text-02: map-get($carbon--theme, 'text-02');
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -4612,7 +4620,6 @@ $icon-01: map-get($carbon--theme, 'icon-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -4687,8 +4694,25 @@ $link-01: map-get($carbon--theme, 'link-01');
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: map-get($carbon--theme, 'inverse-link');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
 
@@ -5081,6 +5105,7 @@ $hover-primary-text: map-get($carbon--theme, 'hover-primary-text');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
 
 ### ✅hover-secondary [variable]
 
@@ -8806,10 +8831,10 @@ Button styles
 
     &:hover,
     &:active {
-      color: $icon-01;
+      color: $hover-primary-text;
 
       .#{$prefix}--btn__icon path {
-        fill: $icon-01;
+        fill: $hover-primary-text;
       }
     }
 
@@ -8834,6 +8859,10 @@ Button styles
 
     &.#{$prefix}--btn--sm {
       padding: $button-padding-ghost-sm;
+    }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
     }
   }
 
@@ -8928,7 +8957,7 @@ Button styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [icon-01 [variable]](#icon-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [icon-03 [variable]](#icon-03-variable)
@@ -12682,7 +12711,7 @@ Inline loading styles
 
   .#{$prefix}--inline-loading__checkmark {
     fill: none;
-    stroke: $interactive-01;
+    stroke: $interactive-04;
     transform-origin: 50% 50%;
     stroke-width: 1.8;
     stroke-dasharray: 12;
@@ -12693,7 +12722,7 @@ Inline loading styles
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $interactive-01;
+    stroke: $interactive-04;
   }
   /* If IE11 Don't show check animation */
   @media screen and (-ms-high-contrast: active),
@@ -12718,7 +12747,7 @@ Inline loading styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
+  - [interactive-04 [variable]](#interactive-04-variable)
 
 ## link
 
@@ -14104,24 +14133,25 @@ Inline notification styles
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $inverse-link;
+    }
+
     @if $carbon--theme == $carbon--theme--white {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
     } @else if $carbon--theme == $carbon--theme--g10 {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
-    } @else {
-      @include inline-notification--button-color;
     }
   }
 
@@ -14178,7 +14208,6 @@ Inline notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14195,6 +14224,7 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
   - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -14224,30 +14254,6 @@ Inline notification styles
 - **Group**: [notification](#notification)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-
-### ❌inline-notification--button-color [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin inline-notification--button-color() {
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    color: $link-01;
-  }
-}
-```
-
-</details>
-
-- **Group**: [notification](#notification)
-- **Requires**:
-  - [link-01 [variable]](#link-01-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ❌notification--color [mixin]
 
@@ -15032,7 +15038,7 @@ Pagination styles
     padding: 0 2.5rem 0 $spacing-md;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {
-      padding: 0 1.5rem 0 0.5rem;
+      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
@@ -15042,38 +15048,23 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    position: relative;
     top: auto;
-    right: 1.1rem;
     bottom: auto;
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
     border-right: $spacing-4xs solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-right: 2rem;
-      margin-right: -0.65rem;
-    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__page-number
     .#{$prefix}--select-input {
     border-left: 1px solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-left: 1rem;
-      padding-right: 2rem;
-    }
-  }
-
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select__arrow {
-    @include carbon--breakpoint('md') {
-      right: 1.8rem;
-    }
   }
 
   .#{$prefix}--pagination__left,
@@ -15113,11 +15104,7 @@ Pagination styles
 
   span.#{$prefix}--pagination__text {
     margin-left: $carbon--spacing-05;
-    color: $text-01;
-  }
-
-  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
-    margin-left: -0.5rem;
+    color: $text-02;
   }
 
   .#{$prefix}--pagination__button {
@@ -15195,12 +15182,13 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -16716,7 +16704,7 @@ Tabs styles
     position: relative;
     @include carbon--breakpoint(md) {
       background: none;
-      min-height: rem(48px);
+      min-height: rem(40px);
     }
   }
 
@@ -18696,8 +18684,7 @@ Tooltip styles
     }
 
     .#{$prefix}--link {
-      // Need to add new link / UI color -- IBM Color Blue 40
-      color: $link-inverse-color;
+      color: $inverse-link;
       font-size: rem(14px);
 
       &:active {
@@ -18705,7 +18692,7 @@ Tooltip styles
       }
 
       &:visited {
-        color: $link-inverse-color;
+        color: $inverse-link;
       }
     }
 
@@ -18917,6 +18904,7 @@ Tooltip styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
