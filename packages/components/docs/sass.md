@@ -14096,7 +14096,7 @@ Inline notification styles
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 
@@ -14378,7 +14378,7 @@ Toast notification styles
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 
