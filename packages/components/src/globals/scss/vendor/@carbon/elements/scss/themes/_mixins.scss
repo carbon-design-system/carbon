@@ -48,6 +48,7 @@
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -108,6 +109,7 @@
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
     --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
     --field-01: #{map-get($theme, 'field-01')};
     --field-02: #{map-get($theme, 'field-02')};
     --inverse-01: #{map-get($theme, 'inverse-01')};

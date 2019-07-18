@@ -92,13 +92,14 @@ exports[`Dropdown should render 1`] = `
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
+            translateWithId={[Function]}
             type="button"
           >
             <div
               aria-controls={null}
               aria-expanded={false}
               aria-haspopup={true}
-              aria-label="open menu"
+              aria-label="Open menu"
               aria-owns={null}
               className="bx--list-box__field"
               data-toggle={true}
@@ -263,13 +264,14 @@ exports[`Dropdown should render custom item components 1`] = `
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
+            translateWithId={[Function]}
             type="button"
           >
             <div
               aria-controls="test-dropdown__menu"
               aria-expanded={true}
               aria-haspopup={true}
-              aria-label="close menu"
+              aria-label="Close menu"
               aria-owns="test-dropdown__menu"
               className="bx--list-box__field"
               data-toggle={true}
@@ -591,13 +593,14 @@ exports[`Dropdown should render with strings as items 1`] = `
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
+            translateWithId={[Function]}
             type="button"
           >
             <div
               aria-controls="test-dropdown__menu"
               aria-expanded={true}
               aria-haspopup={true}
-              aria-label="close menu"
+              aria-label="Close menu"
               aria-owns="test-dropdown__menu"
               className="bx--list-box__field"
               data-toggle={true}

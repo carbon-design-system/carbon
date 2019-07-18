@@ -1804,7 +1804,7 @@ exports[`DataTable should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
-                  persistant={true}
+                  persistent={true}
                   translateWithId={[Function]}
                 />
                 <TableToolbarMenu
@@ -1984,7 +1984,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2058,7 +2057,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2132,7 +2130,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2190,7 +2187,6 @@ exports[`DataTable should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
-                    small={false}
                     tabIndex={0}
                     type="button"
                   >
@@ -2226,11 +2222,11 @@ exports[`DataTable should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
-                persistant={true}
+                persistent={true}
                 translateWithId={[Function]}
               >
                 <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistant"
+                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}

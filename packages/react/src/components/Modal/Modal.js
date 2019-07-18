@@ -8,10 +8,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Button from '../Button';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import FocusTrap from 'focus-trap-react';
+import toggleClass from '../../tools/toggleClass';
+import Button from '../Button';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
@@ -79,6 +81,9 @@ export default class Modal extends Component {
      */
     onRequestSubmit: PropTypes.func,
 
+    /**
+     * Specify a handler for keypresses.
+     */
     onKeyDown: PropTypes.func,
 
     /**
@@ -124,6 +129,11 @@ export default class Modal extends Component {
      * NOTE: by default this is true.
      */
     focusTrap: PropTypes.bool,
+
+    /**
+     * Required props for the accessibility label of the header
+     */
+    ...AriaLabelPropType,
   };
 
   static defaultProps = {
@@ -200,6 +210,11 @@ export default class Modal extends Component {
     } else if (prevProps.open && !this.props.open) {
       this.beingOpen = false;
     }
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
   }
 
   initialFocus = focusContainerElement => {
@@ -220,6 +235,11 @@ export default class Modal extends Component {
   };
 
   componentDidMount() {
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      this.props.open
+    );
     if (!this.props.open) {
       return;
     }
@@ -292,12 +312,28 @@ export default class Modal extends Component {
       </button>
     );
 
+    const getAriaLabelledBy = (() => {
+      const ariaLabelledBy = [];
+      if (modalLabel) {
+        ariaLabelledBy.push(
+          `${prefix}--modal-header__label`,
+          `${prefix}--modal-header__heading`
+        );
+      }
+      return ariaLabelledBy.length ? ariaLabelledBy.join(' ') : null;
+    })();
+
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
         className={`${prefix}--modal-container`}
-        aria-label={modalAriaLabel}
+        aria-label={
+          modalLabel
+            ? null
+            : this.props['aria-label'] || modalAriaLabel || modalHeading
+        }
+        aria-labelledby={getAriaLabelledBy}
         aria-modal="true">
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
