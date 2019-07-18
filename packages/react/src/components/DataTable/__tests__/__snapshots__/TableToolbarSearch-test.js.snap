@@ -19,6 +19,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     <Search
       aria-hidden={true}
       className="className bx--search-maginfier"
+      closeButtonLabelText="Clear search input"
       id="custom-id"
       labelText="Filter table"
       onChange={[Function]}
@@ -86,14 +87,17 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           value=""
         />
         <button
+          aria-label="Clear search input"
           className="bx--search-close bx--search-close--hidden"
           onClick={[Function]}
           type="button"
         >
           <ForwardRef(Close16)
+            aria-label="Clear search input"
             role="img"
           >
             <Icon
+              aria-label="Clear search input"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               role="img"
@@ -102,7 +106,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <svg
-                aria-hidden={true}
+                aria-label="Clear search input"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
