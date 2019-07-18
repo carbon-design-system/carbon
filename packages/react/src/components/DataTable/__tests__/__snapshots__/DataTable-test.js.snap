@@ -1984,7 +1984,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2058,7 +2057,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2132,7 +2130,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2190,7 +2187,6 @@ exports[`DataTable should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
-                    small={false}
                     tabIndex={0}
                     type="button"
                   >
