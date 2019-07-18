@@ -140,24 +140,25 @@
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $inverse-link;
+    }
+
     @if $carbon--theme == $carbon--theme--white {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
     } @else if $carbon--theme == $carbon--theme--g10 {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
-    } @else {
-      @include inline-notification--button-color;
     }
   }
 
