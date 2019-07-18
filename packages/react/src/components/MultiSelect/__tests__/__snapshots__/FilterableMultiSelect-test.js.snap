@@ -87,7 +87,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
           type="default"
         >
           <div
-            className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
+            className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box bx--dropdown"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="listbox"
