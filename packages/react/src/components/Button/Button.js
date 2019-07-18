@@ -205,7 +205,6 @@ Button.defaultProps = {
   tabIndex: 0,
   type: 'button',
   disabled: false,
-  small: false,
   kind: 'primary',
 };
 
