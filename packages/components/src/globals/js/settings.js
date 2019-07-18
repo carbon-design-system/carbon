@@ -22,4 +22,23 @@
 const settings = {
   prefix: 'bx',
 };
+
+/**
+ * A selector selecting tabbable nodes.
+ * Borrowed from `carbon-angular`. tabbable === focusable.
+ */
+settings.selectorTabbable = `
+  a[href], area[href], input:not([disabled]):not([tabindex='-1']),
+  button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']),
+  textarea:not([disabled]):not([tabindex='-1']),
+  iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true],
+  ${settings.prefix}-btn,
+  ${settings.prefix}-dropdown,
+  ${settings.prefix}-modal,
+  ${settings.prefix}-modal-close-button,
+  ${settings.prefix}-overflow-menu,
+  ${settings.prefix}-structured-list,
+  ${settings.prefix}-tooltip
+`;
+
 module.exports = settings;

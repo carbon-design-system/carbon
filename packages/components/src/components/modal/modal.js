@@ -105,7 +105,7 @@ class Modal extends mixin(
       ) {
         (
           this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element
+          this.element.querySelector(settings.selectorTabbable)
         ).focus();
       }
       callback();
@@ -136,6 +136,9 @@ class Modal extends mixin(
         this.options.classBody,
         false
       );
+      // Trying to add in the ability to move the focus back to the trigger or a dev-defined element but I don't know
+      // (1) if Carbon has the trigger element (the window finds it some where to init the creation of the component)
+      // (2) Carbon's policy of using window/document to find an element outside of the modal.
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
       this.element.ownerDocument.body.classList.toggle(
@@ -191,7 +194,7 @@ class Modal extends mixin(
         selector => !eventMatches(evt, selector)
       )
     ) {
-      this.element.focus();
+      this.element.querySelector(settings.selectorTabbable).focus();
     }
   };
 
