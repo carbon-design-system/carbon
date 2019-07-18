@@ -2495,6 +2495,7 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
@@ -4517,7 +4518,6 @@ $text-01: map-get($carbon--theme, 'text-01');
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -4556,6 +4556,7 @@ $text-02: map-get($carbon--theme, 'text-02');
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -15037,7 +15038,7 @@ Pagination styles
     padding: 0 2.5rem 0 $spacing-md;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {
-      padding: 0 1.5rem 0 0.5rem;
+      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
@@ -15047,38 +15048,23 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    position: relative;
     top: auto;
-    right: 1.1rem;
     bottom: auto;
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
     border-right: $spacing-4xs solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-right: 2rem;
-      margin-right: -0.65rem;
-    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__page-number
     .#{$prefix}--select-input {
     border-left: 1px solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-left: 1rem;
-      padding-right: 2rem;
-    }
-  }
-
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select__arrow {
-    @include carbon--breakpoint('md') {
-      right: 1.8rem;
-    }
   }
 
   .#{$prefix}--pagination__left,
@@ -15118,11 +15104,7 @@ Pagination styles
 
   span.#{$prefix}--pagination__text {
     margin-left: $carbon--spacing-05;
-    color: $text-01;
-  }
-
-  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
-    margin-left: -0.5rem;
+    color: $text-02;
   }
 
   .#{$prefix}--pagination__button {
@@ -15200,12 +15182,13 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
