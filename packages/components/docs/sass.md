@@ -15764,6 +15764,12 @@ Radio button styles
       height: 0.5rem;
       border-radius: 50%;
       background-color: $ui-05;
+
+      // Allow the selected button to be seen in Windows HCM for IE/Edge
+      @media screen and (-ms-high-contrast: active) {
+        // Utilize a system color variable to accomodate any user HCM theme
+        background-color: windowText;
+      }
     }
   }
 
