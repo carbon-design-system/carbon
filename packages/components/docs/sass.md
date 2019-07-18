@@ -289,7 +289,6 @@
 - [notification](#notification)
   - [❌inline-notifications [mixin]](#inline-notifications-mixin)
   - [❌inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [❌inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [❌notification--color [mixin]](#notification--color-mixin)
   - [❌notification--experimental [mixin]](#notification--experimental-mixin)
   - [❌toast-notifications [mixin]](#toast-notifications-mixin)
@@ -1725,7 +1724,7 @@ Makes SVGs accessible in high contrast mode
 
 ```scss
 @mixin carbon--icons() {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
@@ -4694,7 +4693,6 @@ $link-01: map-get($carbon--theme, 'link-01');
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅inverse-link [variable]
@@ -4712,6 +4710,8 @@ $inverse-link: map-get($carbon--theme, 'inverse-link');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
 
@@ -8858,6 +8858,10 @@ Button styles
 
     &.#{$prefix}--btn--sm {
       padding: $button-padding-ghost-sm;
+    }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
     }
   }
 
@@ -14128,24 +14132,25 @@ Inline notification styles
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $inverse-link;
+    }
+
     @if $carbon--theme == $carbon--theme--white {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
     } @else if $carbon--theme == $carbon--theme--g10 {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
-    } @else {
-      @include inline-notification--button-color;
     }
   }
 
@@ -14202,7 +14207,6 @@ Inline notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14219,6 +14223,7 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
   - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -14248,30 +14253,6 @@ Inline notification styles
 - **Group**: [notification](#notification)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-
-### ❌inline-notification--button-color [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin inline-notification--button-color() {
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    color: $link-01;
-  }
-}
-```
-
-</details>
-
-- **Group**: [notification](#notification)
-- **Requires**:
-  - [link-01 [variable]](#link-01-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ❌notification--color [mixin]
 
@@ -18720,8 +18701,7 @@ Tooltip styles
     }
 
     .#{$prefix}--link {
-      // Need to add new link / UI color -- IBM Color Blue 40
-      color: $link-inverse-color;
+      color: $inverse-link;
       font-size: rem(14px);
 
       &:active {
@@ -18729,7 +18709,7 @@ Tooltip styles
       }
 
       &:visited {
-        color: $link-inverse-color;
+        color: $inverse-link;
       }
     }
 
@@ -18941,6 +18921,7 @@ Tooltip styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
