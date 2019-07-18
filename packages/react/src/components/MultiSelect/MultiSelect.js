@@ -329,45 +329,42 @@ export default class MultiSelect extends React.Component {
                       translateWithId={translateWithId}
                     />
                   </ListBox.Field>
-                  {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={id}>
-                      {sortItems(items, {
-                        selectedItems: {
-                          top: selectedItems,
-                          fixed: [],
-                          'top-after-reopen': this.state.topItems,
-                        }[this.props.selectionFeedback],
-                        itemToString,
-                        compareItems,
-                        locale: 'en',
-                      }).map((item, index) => {
-                        const itemProps = getItemProps({ item });
-                        const itemText = itemToString(item);
-                        const isChecked =
-                          selectedItem.filter(selected =>
-                            isEqual(selected, item)
-                          ).length > 0;
-                        return (
-                          <ListBox.MenuItem
-                            key={itemProps.id}
-                            isActive={isChecked}
-                            isHighlighted={highlightedIndex === index}
-                            {...itemProps}>
-                            <Checkbox
-                              id={`${itemProps.id}__checkbox`}
-                              title={useTitleInItem ? itemText : null}
-                              name={itemText}
-                              checked={isChecked}
-                              disabled={disabled}
-                              readOnly={true}
-                              tabIndex="-1"
-                              labelText={itemText}
-                            />
-                          </ListBox.MenuItem>
-                        );
-                      })}
-                    </ListBox.Menu>
-                  )}
+                  <ListBox.Menu aria-label={ariaLabel} id={id}>
+                    {sortItems(items, {
+                      selectedItems: {
+                        top: selectedItems,
+                        fixed: [],
+                        'top-after-reopen': this.state.topItems,
+                      }[this.props.selectionFeedback],
+                      itemToString,
+                      compareItems,
+                      locale: 'en',
+                    }).map((item, index) => {
+                      const itemProps = getItemProps({ item });
+                      const itemText = itemToString(item);
+                      const isChecked =
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={isChecked}
+                          isHighlighted={highlightedIndex === index}
+                          {...itemProps}>
+                          <Checkbox
+                            id={`${itemProps.id}__checkbox`}
+                            title={useTitleInItem ? itemText : null}
+                            name={itemText}
+                            checked={isChecked}
+                            disabled={disabled}
+                            readOnly={true}
+                            tabIndex="-1"
+                            labelText={itemText}
+                          />
+                        </ListBox.MenuItem>
+                      );
+                    })}
+                  </ListBox.Menu>
                 </ListBox>
               );
             }}
