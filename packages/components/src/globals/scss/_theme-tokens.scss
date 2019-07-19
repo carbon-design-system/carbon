@@ -302,9 +302,8 @@
 
   /// @type Color
   /// @access public
-  /// @deprecated Use theme token `$inverse-02` instead.
   /// @group copy-button
-  $copy-btn-feedback: $ibm-color__gray-80 !default !global;
+  $copy-btn-feedback: $inverse-02 !default !global;
 
   // Radio Button
 
