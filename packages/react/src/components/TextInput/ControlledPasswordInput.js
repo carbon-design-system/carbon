@@ -88,6 +88,7 @@ const ControlledPasswordInput = React.forwardRef(
           data-toggle-password-visibility={type === 'password'}
         />
         <button
+          type="button"
           className={`${prefix}--text-input--password__visibility`}
           aria-label={
             alt ||
