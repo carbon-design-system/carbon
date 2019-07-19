@@ -5,15 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
  
-import {
-  blue60,
-  gray100,
-  gray20,
-  gray30,
-  red80,
-  white,
-  yellow,
-} from '@carbon/colors';
+import { white } from '@carbon/colors';
 
 export const interactive01 = "#3d70b2";
 export const interactive02 = "#5a6872";
