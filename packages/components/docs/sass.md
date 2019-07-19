@@ -14096,7 +14096,7 @@ Inline notification styles
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 
@@ -14378,7 +14378,7 @@ Toast notification styles
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 
@@ -15764,6 +15764,12 @@ Radio button styles
       height: 0.5rem;
       border-radius: 50%;
       background-color: $ui-05;
+
+      // Allow the selected button to be seen in Windows HCM for IE/Edge
+      @media screen and (-ms-high-contrast: active) {
+        // Utilize a system color variable to accomodate any user HCM theme
+        background-color: windowText;
+      }
     }
   }
 
