@@ -100,8 +100,8 @@ storiesOf('StructuredList', module)
         <StructuredListWrapper selection border>
           <StructuredListHead>
             <StructuredListRow head>
-              <StructuredListCell head>ColumnA</StructuredListCell>,
-              <StructuredListCell head>ColumnB</StructuredListCell>,
+              <StructuredListCell head>ColumnA</StructuredListCell>
+              <StructuredListCell head>ColumnB</StructuredListCell>
               <StructuredListCell head>ColumnC</StructuredListCell>
               <StructuredListCell head>{''}</StructuredListCell>
             </StructuredListRow>
