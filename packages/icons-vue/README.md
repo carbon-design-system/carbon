@@ -1,22 +1,22 @@
-# @rocketsoftware/icons-vue
+# @carbon/icons-vue
 
 > Vue components for icons in digital and software products using the Carbon
 > Design System
 
 ## Getting started
 
-To install `@rocketsoftware/icons-vue` in your project, you will need to run the
+To install `@carbon/icons-vue` in your project, you will need to run the
 following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @rocketsoftware/icons-vue
+npm install -S @carbon/icons-vue
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @rocketsoftware/icons-vue
+yarn add @carbon/icons-vue
 ```
 
 ## Usage
@@ -24,12 +24,12 @@ yarn add @rocketsoftware/icons-vue
 Icons in this package support the following sizes: `16`, `20`, `24`, and `32`
 pixels. These sizes refer to the width and height of the icon.
 
-You can install these components from `@rocketsoftware/icons-vue` through two ways. The
+You can install these components from `@carbon/icons-vue` through two ways. The
 first is to install them when you're initializing your Vue app. For example:
 
 ```js
-import { CarbonIconsVue } from '@rocketsoftware/icons-vue';
-import Bee32 from '@rocketsoftware/icons-vue/es/bee/32';
+import { CarbonIconsVue } from '@carbon/icons-vue';
+import Bee32 from '@carbon/icons-vue/es/bee/32';
 import Vue from 'vue';
 import App from './App.vue';
 
@@ -60,7 +60,7 @@ If you would rather not register icons globally, you can also import them into
 individual components.
 
 ```js
-import Bee32 from '@rocketsoftware/icons-vue/es/bee/32';
+import Bee32 from '@carbon/icons-vue/es/bee/32';
 
 export default {
   name: 'MyComponent',
@@ -81,7 +81,7 @@ labels, custom classes, event handlers, and more. For example:
 
 ## 📚 Examples
 
-If you're looking for more examples on how to use `@rocketsoftware/icons-vue`, we have
+If you're looking for more examples on how to use `@carbon/icons-vue`, we have
 some examples that you can check out:
 
 - [vue-cli](./examples/vue-cli)

@@ -20,7 +20,7 @@ const Vue = require('vue/dist/vue');
 
 async function getModuleFromString(
   string,
-  { external = ['@rocketsoftware/icon-helpers'], name = '<MockIconModule>' } = {}
+  { external = ['@carbon/icon-helpers'], name = '<MockIconModule>' } = {}
 ) {
   const bundle = await rollup({
     input: '__entrypoint__',
