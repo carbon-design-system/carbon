@@ -4820,6 +4820,7 @@ $inverse-02: map-get($carbon--theme, 'inverse-02');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -9468,7 +9469,7 @@ Code snippet styles
 
   .#{$prefix}--btn--copy__feedback:before,
   .#{$prefix}--btn--copy__feedback:after {
-    background: $copy-btn-feedback;
+    background: $inverse-02;
   }
 
   .#{$prefix}--btn--copy__feedback:after {
@@ -9638,6 +9639,7 @@ Code snippet styles
   - [focus [variable]](#focus-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
   - [field-01 [variable]](#field-01-variable)
 
 ### ❌bx--snippet [mixin]
