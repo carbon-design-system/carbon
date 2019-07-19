@@ -103,6 +103,7 @@ class Modal extends mixin(
         this.element.offsetWidth > 0 &&
         this.element.offsetHeight > 0
       ) {
+        this.previouslyFocusedNode = this.element.ownerDocument.activeElement;
         (
           this.element.querySelector(this.options.selectorPrimaryFocus) ||
           this.element.querySelector(settings.selectorTabbable)
@@ -136,9 +137,12 @@ class Modal extends mixin(
         this.options.classBody,
         false
       );
-      // Trying to add in the ability to move the focus back to the trigger or a dev-defined element but I don't know
-      // (1) if Carbon has the trigger element (the window finds it some where to init the creation of the component)
-      // (2) Carbon's policy of using window/document to find an element outside of the modal.
+      if (this.options.selectorFocusOnClose || this.previouslyFocusedNode)
+        (
+          this.element.ownerDocument.querySelector(
+            this.options.selectorFocusOnClose
+          ) || this.previouslyFocusedNode
+        ).focus();
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
       this.element.ownerDocument.body.classList.toggle(
@@ -214,6 +218,8 @@ class Modal extends mixin(
    * @property {string} selectorInit The CSS class to find modal dialogs.
    * @property {string} [selectorModalClose] The selector to find elements that close the modal.
    * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
+   * @property {string} [selectorFocusOnClose] The CSS selector to determine the element to put focus when modal closes.
+   *   If undefined, focus returns to the previously focused element prior to the modal opening.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
    * @property {string[]} [selectorsFloatingMenu]
    *   The CSS selectors of floating menus.
