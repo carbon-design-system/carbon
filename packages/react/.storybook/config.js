@@ -1,7 +1,6 @@
 import React from 'react';
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { withOptions } from '@storybook/addon-options';
 import { configureActions } from '@storybook/addon-actions';
 // import { checkA11y } from 'storybook-addon-a11y';
 import Container from './Container';
@@ -12,12 +11,14 @@ addDecorator(
   })
 );
 
-addDecorator(
-  withOptions({
-    name: `carbon components react`,
-    url: 'https://github.com/IBM/carbon-components-react',
-  })
-);
+addParameters({
+  options: {
+    theme: {
+      brandTitle: 'carbon components react',
+      brandUrl: 'https://github.com/IBM/carbon-components-react',
+    },
+  },
+});
 
 configureActions({
   depth: 100,
