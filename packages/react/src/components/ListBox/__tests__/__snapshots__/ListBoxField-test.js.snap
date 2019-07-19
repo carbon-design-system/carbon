@@ -3,10 +3,11 @@
 exports[`ListBoxField should render 1`] = `
 <ListBoxField
   id="test-listbox"
+  translateWithId={[Function]}
 >
   <div
     aria-controls={null}
-    aria-haspopup="listbox"
+    aria-label="Open menu"
     aria-owns={null}
     className="bx--list-box__field"
     role="combobox"
@@ -66,11 +67,12 @@ exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
 <ListBoxField
   aria-expanded={true}
   id="test-listbox"
+  translateWithId={[Function]}
 >
   <div
     aria-controls="test-listbox__menu"
     aria-expanded={true}
-    aria-haspopup="listbox"
+    aria-label="Close menu"
     aria-owns="test-listbox__menu"
     className="bx--list-box__field"
     role="combobox"

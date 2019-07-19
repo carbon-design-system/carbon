@@ -14,21 +14,37 @@ import childrenOf from '../../prop-types/childrenOf';
 
 const { prefix } = settings;
 
+export const translationIds = {
+  'close.menu': 'close.menu',
+  'open.menu': 'open.menu',
+};
+
+const defaultTranslations = {
+  [translationIds['close.menu']]: 'Close menu',
+  [translationIds['open.menu']]: 'Open menu',
+};
+
 /**
  * `ListBoxField` is responsible for creating the containing node for valid
  * elements inside of a field. It also provides a11y-related attributes like
  * `role` to make sure a user can focus the given field.
  */
-const ListBoxField = ({ children, id, disabled, tabIndex, ...rest }) => (
+const ListBoxField = ({
+  children,
+  id,
+  disabled,
+  tabIndex,
+  translateWithId: t,
+  ...rest
+}) => (
   <div
-    role="combobox"
-    aria-haspopup="listbox"
-    aria-expanded={rest[`aria-expanded`]}
-    aria-owns={(rest[`aria-expanded`] && `${id}__menu`) || null}
-    aria-controls={(rest[`aria-expanded`] && `${id}__menu`) || null}
+    role={rest['aria-expanded'] ? 'combobox' : rest.role || 'combobox'}
+    aria-owns={(rest['aria-expanded'] && `${id}__menu`) || null}
+    aria-controls={(rest['aria-expanded'] && `${id}__menu`) || null}
     className={`${prefix}--list-box__field`}
     tabIndex={(!disabled && tabIndex) || -1}
-    {...rest}>
+    {...rest}
+    aria-label={rest['aria-expanded'] ? t('close.menu') : t('open.menu')}>
     {children}
   </div>
 );
@@ -53,6 +69,17 @@ ListBoxField.propTypes = {
    * Optional prop to specify the tabIndex of the <ListBox> trigger button
    */
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
+   * i18n hook used to provide the appropriate description for the given menu
+   * icon. This function takes in an id defined in `translationIds` and should
+   * return a string message for that given message id.
+   */
+  translateWithId: PropTypes.func.isRequired,
+};
+
+ListBoxField.defaultProps = {
+  translateWithId: id => defaultTranslations[id],
 };
 
 export default ListBoxField;
