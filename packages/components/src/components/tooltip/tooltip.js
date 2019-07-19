@@ -19,6 +19,7 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
 } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
+import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
 /**
@@ -84,9 +85,6 @@ class Tooltip extends mixin(
   eventedShowHideState,
   handles
 ) {
-  // Wanted to add the following to the JSDoc for the constructor but got linting errors
-  // Is there a perferred way to do with @extends as well?
-  // @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
   /**
    * Tooltip.
    * @extends CreateComponent
@@ -95,11 +93,8 @@ class Tooltip extends mixin(
    */
   constructor(element, options) {
     super(element, options);
-    const buttonTrigger = this.element.querySelector(
-      this.options.selectorTrigger
-    );
-    if (buttonTrigger) this.triggerNode = buttonTrigger;
     this._hookOn(element);
+    this._hookCloseActions(element);
   }
 
   /**
@@ -107,6 +102,30 @@ class Tooltip extends mixin(
    * @type {boolean}
    */
   _hasContextMenu = false;
+
+  /**
+   * The handle for `focus` event listener.
+   * Used for "focus-navigation" feature.
+   * @type {Handle}
+   * @private
+   */
+  _handleFocusinListener;
+
+  /**
+   * The handle for `keydown` event listener.
+   * Used for "close-on-escape-key" feature.
+   * @type {Handle}
+   * @private
+   */
+  _handleKeydownListener;
+
+  /**
+   * The handle for `click` event listener.
+   * Used for "click-outside-tooltip" feature.
+   * @type {Handle}
+   * @private
+   */
+  _handleClickListener;
 
   /**
    * The debounced version of the event handler.
@@ -123,7 +142,7 @@ class Tooltip extends mixin(
     const { relatedTarget, type } = event;
     this._debouncedHandleClick({
       relatedTarget,
-      type: type === 'focusin' ? 'focus' : type,
+      type,
       details: getLaunchingDetails(event),
     });
   }
@@ -133,7 +152,7 @@ class Tooltip extends mixin(
    * @param {string} state The new state.
    * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
-   // */
+   */
   changeState(state, detail, callback) {
     if (!this.tooltip) {
       const tooltip = this.element.ownerDocument.querySelector(
@@ -159,79 +178,181 @@ class Tooltip extends mixin(
       state,
       Object.assign(detail, { delegatorNode: this.element }),
       () => {
-        // @todo remove conditional once non-compliant code is deprecated
-        if (this.triggerNode) {
-          const isHidden = state === 'hidden';
-          this.tooltip.setAttribute('aria-hidden', (!isHidden).toString());
-          this.triggerNode.setAttribute('aria-expanded', isHidden.toString());
+        // @questions
+        // -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
+        // -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
+        // -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
+        //      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
+        //      for keyboard users do we still want the debounce?
+        this.isHidden = state !== 'shown';
+        this.tooltip.element.setAttribute(
+          'aria-hidden',
+          this.isHidden.toString()
+        );
+        this.element.setAttribute('aria-expanded', (!this.isHidden).toString());
+
+        if (this._handleFocusinListener) {
+          this._handleFocusinListener = this.unmanage(
+            this._handleFocusinListener
+          ).release();
         }
 
-        // Do I need to pass any parameters to callback?
+        if (this._handleClickListener) {
+          this._handleClickListener = this.unmanage(
+            this._handleClickListener
+          ).release();
+        }
+
+        if (this._handleKeydownListener) {
+          this._handleKeydownListener = this.unmanage(
+            this._handleKeydownListener
+          ).release();
+        }
+
+        if (state === 'shown') {
+          this._hookCloseActions(this.element);
+          const focusableNode = this.tooltip.element.querySelector(
+            settings.selectorTabbable
+          );
+          if (focusableNode) {
+            focusableNode.focus();
+          } else {
+            this.tooltip.element.setAttribute('tabindex', '0');
+            this.tooltip.element.focus();
+          }
+
+          const hasFocusin =
+            'onfocusin' in this.element.ownerDocument.defaultView;
+          const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+          this._handleFocusinListener = this.manage(
+            on(
+              this.element.ownerDocument,
+              focusinEventName,
+              this._handleFocusin,
+              !hasFocusin
+            )
+          );
+        } else {
+          this.element.focus();
+        }
+
+        // @question Do I need to pass any parameters to callback?
         if (typeof callback === 'function') callback();
       }
     );
   }
 
   /**
-   * Attaches event handlers to show/hide the tooltip.
+   * Attaches event handlers to show the tooltip.
    * @param {Element} element The element to attach the events to.
    * @private
    */
   _hookOn(element) {
-    const hasFocusin = 'onfocusin' in window;
-    const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-    [focusinEventName, 'blur', 'touchleave', 'touchcancel'].forEach(name => {
+    this.manage(
+      on(
+        element,
+        'click',
+        event => {
+          const { relatedTarget, type } = event;
+          const hadContextMenu = this._hasContextMenu;
+          this._hasContextMenu = type === 'contextmenu';
+          this._debouncedHandleClick({
+            relatedTarget,
+            type,
+            hadContextMenu,
+            details: getLaunchingDetails(event),
+          });
+        },
+        false
+      )
+    );
+
+    if (this.element.tagName.toLowerCase() !== 'button') {
       this.manage(
         on(
-          element,
-          name,
+          this.element,
+          // Does Carbon prefer keydown or keyup?
+          'keydown',
           event => {
-            const { relatedTarget, type } = event;
-            const hadContextMenu = this._hasContextMenu;
-            this._hasContextMenu = type === 'contextmenu';
-            this._debouncedHandleClick({
-              relatedTarget,
-              type: type === 'focusin' ? 'focus' : type,
-              hadContextMenu,
-              details: getLaunchingDetails(event),
-            });
+            const { relatedTarget, type, which } = event;
+            // Allow user to use `space` or `enter` to open tooltip
+            if (which === 32 || which === 13) {
+              const hadContextMenu = this._hasContextMenu;
+              this._hasContextMenu = type === 'contextmenu';
+              this._debouncedHandleClick({
+                relatedTarget,
+                type,
+                hadContextMenu,
+                details: getLaunchingDetails(event),
+              });
+            }
           },
-          name === focusinEventName && !hasFocusin
+          false
         )
       );
-    });
+    }
+  }
+
+  /**
+   * Attaches event handlers to hide the tooltip.
+   * @param {Element} element The element to attach the events to.
+   * @private
+   */
+  _hookCloseActions(element) {
+    this._handleClickListener = this.manage(
+      on(element.ownerDocument, 'click', evt => {
+        if (
+          !eventMatches(
+            evt,
+            element.getAttribute(this.options.attribTooltipTarget)
+          )
+        ) {
+          this.changeState('hidden', evt);
+        }
+      })
+    );
+
+    this._handleKeydownListener = this.manage(
+      on(element.ownerDocument, 'keydown', evt => {
+        if (evt.which === 27 && !this.isHidden) {
+          evt.stopPropagation();
+          this.changeState('hidden', evt);
+        }
+      })
+    );
   }
 
   /**
    * Handles click/focus events.
    * @param {object} params The parameters.
-   * @param {Element} params.relatedTarget The element that focus went to. (For `blur` event)
    * @param {string} params.type The event type triggering this method.
-   * @param {boolean} params.hadContextMenu
    * @param {object} params.details The event details.
    * @private
    */
-  _handleClick({ relatedTarget, type, hadContextMenu, details }) {
+  _handleClick({ type, details }) {
     const state = {
-      focus: 'shown',
-      blur: 'hidden',
-      touchleave: 'hidden',
-      touchcancel: 'hidden',
+      click: 'shown',
+      keydown: 'shown',
     }[type];
 
-    let shouldPreventClose;
-    if (type === 'blur') {
-      // Note: SVGElement in IE11 does not have `.contains()`
-      const wentToSelf =
-        (relatedTarget &&
-          (this.element.contains && this.element.contains(relatedTarget))) ||
-        (this.tooltip && this.tooltip.element.contains(relatedTarget));
-      shouldPreventClose = hadContextMenu || wentToSelf;
-    }
-    if (!shouldPreventClose) {
-      this.changeState(state, details);
-    }
+    this.changeState(state, details);
   }
+
+  /**
+   * Handles `focus` event to navigate sequentially in the DOM.
+   * @param {Event} evt The event.
+   * @private
+   */
+  _handleFocusin = evt => {
+    if (
+      this.tooltip.element.classList.contains(this.options.classShown) &&
+      !this.tooltip.element.contains(evt.target)
+    ) {
+      // @question It's never getting in this function but the tooltip is hiding when it's suppose to
+      //  The issue is that since it's not calling Tooltip.changeState the attributes are not getting updated properly
+      this.changeState('hidden', evt);
+    }
+  };
 
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
@@ -241,9 +362,10 @@ class Tooltip extends mixin(
       selectorInit: '[data-tooltip-trigger]',
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
-      selectorTrigger: 'button[aria-haspopup]',
       objMenuOffset: getMenuOffset,
-      initEventNames: ['focus'],
+      // @question I want to init the component on keydown IF it's not a button element as the trigger
+      //    and the user pressed only enter or space
+      initEventNames: ['click'],
     };
   }
 }
