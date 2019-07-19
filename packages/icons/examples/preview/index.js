@@ -4,7 +4,7 @@ import { getAttributes } from '@carbon/icon-helpers';
 import Prism from 'prismjs';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import meta from '../../meta.json';
+import meta from '../../build-info.json';
 
 const GITHUB_ICON_URL =
   'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';

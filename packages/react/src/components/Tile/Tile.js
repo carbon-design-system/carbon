@@ -14,7 +14,7 @@ import {
   CheckmarkFilled16 as CheckmarkFilled,
   ChevronDown16,
 } from '@carbon/icons-react';
-import { keys, matches } from '../../tools/key';
+import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
@@ -88,7 +88,7 @@ export class ClickableTile extends Component {
 
   handleKeyDown = evt => {
     evt.persist();
-    if (matches(evt, [keys.ENTER, keys.SPACE])) {
+    if (matches(evt, [keys.Enter, keys.Space])) {
       this.setState(
         {
           clicked: !this.state.clicked,
@@ -124,6 +124,7 @@ export class ClickableTile extends Component {
     } = this.props;
 
     const classes = classNames(
+      `${prefix}--link`,
       `${prefix}--tile`,
       `${prefix}--tile--clickable`,
       {
@@ -187,6 +188,11 @@ export class SelectableTile extends Component {
     title: PropTypes.string,
 
     /**
+     * The empty handler of the `<input>`.
+     */
+    onChange: PropTypes.func,
+
+    /**
      * The description of the checkmark icon.
      */
     iconDescription: PropTypes.string,
@@ -204,6 +210,7 @@ export class SelectableTile extends Component {
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
+    onChange: () => {},
     tabIndex: 0,
   };
 
@@ -227,7 +234,7 @@ export class SelectableTile extends Component {
 
   handleKeyDown = evt => {
     evt.persist();
-    if (matches(evt, [keys.ENTER, keys.SPACE])) {
+    if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       this.setState(
         {
@@ -264,6 +271,7 @@ export class SelectableTile extends Component {
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      onChange,
       ...other
     } = this.props;
 
@@ -286,6 +294,7 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
+          onChange={onChange}
           type="checkbox"
           name={name}
           title={title}

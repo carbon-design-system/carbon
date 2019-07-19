@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentSwitcher should render 1`] = `
+<ContentSwitcher
+  className="custom-class"
+  onChange={[MockFunction]}
+  selectedIndex={0}
+>
+  <div
+    className="bx--content-switcher custom-class"
+  >
+    <Switch
+      index={0}
+      key=".0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      selected={true}
+      text="A"
+    >
+      <button
+        aria-selected={true}
+        className="bx--content-switcher-btn bx--content-switcher--selected"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="tab"
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="bx--content-switcher__label"
+        >
+          A
+        </span>
+      </button>
+    </Switch>
+    <Switch
+      index={1}
+      key=".1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      selected={false}
+      text="B"
+    >
+      <button
+        aria-selected={false}
+        className="bx--content-switcher-btn"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="tab"
+        tabIndex="-1"
+        type="button"
+      >
+        <span
+          className="bx--content-switcher__label"
+        >
+          B
+        </span>
+      </button>
+    </Switch>
+    <Switch
+      index={2}
+      key=".2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      selected={false}
+      text="C"
+    >
+      <button
+        aria-selected={false}
+        className="bx--content-switcher-btn"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="tab"
+        tabIndex="-1"
+        type="button"
+      >
+        <span
+          className="bx--content-switcher__label"
+        >
+          C
+        </span>
+      </button>
+    </Switch>
+  </div>
+</ContentSwitcher>
+`;

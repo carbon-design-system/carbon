@@ -1,7 +1,7 @@
 # carbon-components
 
 [![Carbon Components is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![Build Status](https://travis-ci.org/IBM/carbon-components.svg?branch=master)](https://travis-ci.org/IBM/carbon-components)
+[![Build Status](https://circleci.com/gh/carbon-design-system/carbon.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./.github/CONTRIBUTING.md)
 
 The Carbon Design System is a series of individual styles and components, that
@@ -30,7 +30,7 @@ yarn add carbon-components
 If you just want to try out `carbon-components`, you can also use
 [CodeSandbox](https://codesandbox.io).
 
-[![Edit carbon-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-systen/carbon/tree/master/packages/components/examples/codesandbox)
+[![Edit carbon-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/components/examples/codesandbox)
 
 (**Important note**: `src` directory in the package has been deprecated and
 subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
@@ -60,8 +60,8 @@ subject to breaking changes. Please use `es`/`umd`/`scss` directories instead)
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks goes to these wonderful people
-([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+Thanks goes to these
+[wonderful people :key:](https://github.com/kentcdodds/all-contributors#emoji-key):
 
 This project follows the
 [all-contributors](https://github.com/kentcdodds/all-contributors)

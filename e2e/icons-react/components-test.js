@@ -9,7 +9,7 @@
 
 'use strict';
 
-const meta = require('../../packages/icons/meta.json');
+const meta = require('../../packages/icons/build-info.json');
 
 describe('@carbon/icons-react', () => {
   test('entrypoint is require-able', () => {
@@ -18,7 +18,11 @@ describe('@carbon/icons-react', () => {
     }).not.toThrow();
   });
 
-  test.each(meta.map(icon => [icon.moduleName]))('%s is require-able', name => {
-    expect(require('@carbon/icons-react')[name]).toBeDefined();
-  });
+  test.each(meta.map(icon => [icon.moduleName, icon.outputOptions.file]))(
+    '%s is require-able',
+    (name, file) => {
+      expect(require('@carbon/icons-react')[name]).toBeDefined();
+      expect(require(`@carbon/icons-react/${file}`)).toBeDefined();
+    }
+  );
 });

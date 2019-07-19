@@ -382,6 +382,7 @@ $skeleton: rgba(
 
   /// @type Color
   /// @access public
+  /// @deprecated Use theme token `$inverse-link` instead.
   /// @group link
   $link-inverse-color: #6ea6ff !default !global;
 
@@ -437,12 +438,20 @@ $skeleton: rgba(
   /// @type Number
   /// @access public
   /// @group button
-  $button-padding-ghost: 11px 13px !default !global;
+  /// Uses the same padding-y as normal buttons, but removes extra padding-right
+  $button-padding-ghost: calc(0.875rem - 3px) 12px !default !global;
 
   /// @type Number
   /// @access public
   /// @group button
-  $button-padding-ghost-sm: 0.375rem 1rem !default !global;
+  /// Uses the same padding-y as field buttons, but removes extra padding-right
+  $button-padding-ghost-field: calc(0.675rem - 3px) 12px !default !global;
+
+  /// @type Number
+  /// @access public
+  /// @group button
+  /// Uses the same padding-y as small buttons, but removes extra padding-right
+  $button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default !global;
 
   /// @type Number
   /// @access public
@@ -674,10 +683,7 @@ $skeleton: rgba(
   /// @type Color
   /// @access public
   /// @group skeleton
-  $skeleton: rgba(
-    #3d70b2,
-    0.1
-  ) !default !global; //old $color__blue-51/$field-01 TODO: Define for experimental
+  $skeleton: $skeleton-01 !default !global; // TODO: Remove this in next major release
 }
 
 @include exports('theme') {
