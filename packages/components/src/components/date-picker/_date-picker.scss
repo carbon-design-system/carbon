@@ -8,8 +8,8 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
-@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/layer';
 @import '../form/form';
 @import 'flatpickr.scss';
@@ -168,6 +168,27 @@
     }
   }
 
+  :root.demo--theme--g100 .#{$prefix}--date-picker__calendar.open,
+  :root.demo--theme--g100 .startRange,
+  :root.demo--theme--g100 .endRange,
+  :root.demo--theme--g100 .inRange {
+    @include carbon--theme--custom-properties($carbon--theme--g100);
+  }
+
+  :root.demo--theme--g90 .#{$prefix}--date-picker__calendar.open,
+  :root.demo--theme--g90 .startRange,
+  :root.demo--theme--g90 .endRange,
+  :root.demo--theme--g90 .inRange {
+    @include carbon--theme--custom-properties($carbon--theme--g90);
+  }
+
+  :root.demo--theme--g10 .#{$prefix}--date-picker__calendar.open,
+  :root.demo--theme--g10 .startRange,
+  :root.demo--theme--g10 .endRange,
+  :root.demo--theme--g10 .inRange {
+    @include carbon--theme--custom-properties($carbon--theme--g10);
+  }
+
   .#{$prefix}--date-picker__month,
   .flatpickr-month {
     display: flex;
@@ -297,7 +318,8 @@
     }
 
     &:focus {
-      @include focus-outline('outline');
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
     }
   }
 
@@ -350,13 +372,13 @@
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $date-picker-in-range-background-color;
+    background: $highlight;
     color: $text-01;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
-    color: $inverse-01;
+    color: $text-04;
     background: $interactive-01;
   }
 
@@ -369,7 +391,8 @@
   .#{$prefix}--date-picker__day.endRange,
   .flatpickr-day.endRange {
     &:hover {
-      @include focus-outline('outline');
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
       background: $ui-01;
       color: $text-01;
     }
@@ -377,7 +400,8 @@
 
   .#{$prefix}--date-picker__day.endRange.inRange,
   .flatpickr-day.endRange.inRange {
-    @include focus-outline('outline');
+    outline: 2px solid $interactive-01;
+    outline-offset: -2px;
     background: $ui-01;
     z-index: 3;
   }
@@ -390,7 +414,8 @@
 
   .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
   .flatpickr-day.startRange.inRange:not(.selected) {
-    @include focus-outline('outline');
+    outline: 2px solid $interactive-01;
+    outline-offset: -2px;
     background: $ui-01;
     z-index: 3;
   }

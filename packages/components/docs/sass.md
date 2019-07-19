@@ -4033,6 +4033,7 @@ $carbon--theme--g10: (
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
 - **Used by**:
+  - [date-picker [mixin]](#date-picker-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g90 [variable]
@@ -4110,6 +4111,8 @@ $carbon--theme--g90: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
+- **Used by**:
+  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅carbon--theme--g100 [variable]
 
@@ -4187,6 +4190,7 @@ $carbon--theme--g100: (
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
 - **Used by**:
+  - [date-picker [mixin]](#date-picker-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme [variable]
@@ -4601,6 +4605,7 @@ $text-04: map-get($carbon--theme, 'text-04');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅icon-01 [variable]
@@ -5455,6 +5460,7 @@ $highlight: map-get($carbon--theme, 'highlight');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -11706,6 +11712,38 @@ Date picker styles
     }
   }
 
+  // .#{$prefix}--date-picker__calendar .component-example__live,
+  // .component-example__live--rendered .flatpickr-calendar.open {
+  //   background-color: $ui-01;
+  // }
+
+  :root.demo--theme--g100 .component-example__live,
+  :root.demo--theme--g100 .#{$prefix}--date-picker__day,
+  :root.demo--theme--g100 .#{$prefix}--date-picker__calendar.open,
+  :root.demo--theme--g100 .startRange,
+  :root.demo--theme--g100 .endRange,
+  :root.demo--theme--g100 .inRange,
+  :root.demo--theme--g100 .selected,
+  :root.demo--theme--g100 .flatpickr-day.endRange {
+    @include carbon--theme--custom-properties($carbon--theme--g100);
+  }
+
+  :root.demo--theme--g90 .component-example__live,
+  :root.demo--theme--g90 .#{$prefix}--date-picker__calendar.open,
+  :root.demo--theme--g90 .startRange,
+  :root.demo--theme--g90 .endRange,
+  :root.demo--theme--g90 .inRange {
+    @include carbon--theme--custom-properties($carbon--theme--g90);
+  }
+
+  // :root.demo--theme--g10 .component-example__live,
+  // :root.demo--theme--g10 .#{$prefix}--date-picker__calendar.open,
+  // :root.demo--theme--g10 .startRange,
+  // :root.demo--theme--g10 .endRange,
+  // :root.demo--theme--g10 .inRange {
+  //   @include carbon--theme--custom-properties($carbon--theme--g10);
+  // }
+
   .#{$prefix}--date-picker__month,
   .flatpickr-month {
     display: flex;
@@ -11835,7 +11873,8 @@ Date picker styles
     }
 
     &:focus {
-      @include focus-outline('outline');
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
     }
   }
 
@@ -11888,13 +11927,13 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $date-picker-in-range-background-color;
+    background: $highlight;
     color: $text-01;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
-    color: $inverse-01;
+    color: $text-04;
     background: $interactive-01;
   }
 
@@ -11907,7 +11946,8 @@ Date picker styles
   .#{$prefix}--date-picker__day.endRange,
   .flatpickr-day.endRange {
     &:hover {
-      @include focus-outline('outline');
+      outline: 2px solid $interactive-01;
+      outline-offset: -2px;
       background: $ui-01;
       color: $text-01;
     }
@@ -11915,7 +11955,8 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.endRange.inRange,
   .flatpickr-day.endRange.inRange {
-    @include focus-outline('outline');
+    outline: 2px solid $interactive-01;
+    outline-offset: -2px;
     background: $ui-01;
     z-index: 3;
   }
@@ -11928,7 +11969,8 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
   .flatpickr-day.startRange.inRange:not(.selected) {
-    @include focus-outline('outline');
+    outline: 2px solid $interactive-01;
+    outline-offset: -2px;
     background: $ui-01;
     z-index: 3;
   }
@@ -12030,9 +12072,14 @@ Date picker styles
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
+  - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
+  - [carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
+  - [highlight [variable]](#highlight-variable)
+  - [text-04 [variable]](#text-04-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
 
 ## dropdown
