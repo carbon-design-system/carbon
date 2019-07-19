@@ -82,8 +82,8 @@ export const disabled03 = "#cdd1d4";
 
 export const highlight = "#f4f7fb";
 
-export const skeleton01 = "rgba(61, 112, 178, .1)”;
-export const skeleton02 = "rgba(61, 112, 178, .1)”;
+export const skeleton01 = "rgba(61, 112, 178, .1)";
+export const skeleton02 = "rgba(61, 112, 178, .1)";
 
 // Deprecated ☠️
 export const brand01 = interactive01;
