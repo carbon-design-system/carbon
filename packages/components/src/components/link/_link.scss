@@ -60,7 +60,13 @@
     color: $visited-link;
   }
 
+  #{$prefix}--link--disabled,
+  #{$prefix}--link--disabled:focus,
+  #{$prefix}--link--disabled:hover,
+  #{$prefix}--link--disabled:active,
+  #{$prefix}--link--disabled:visited,
   .#{$prefix}--link.#{$prefix}--link--disabled,
+  .#{$prefix}--link.#{$prefix}--link--disabled:focus,
   .#{$prefix}--link.#{$prefix}--link--disabled:hover,
   .#{$prefix}--link.#{$prefix}--link--disabled:active,
   .#{$prefix}--link.#{$prefix}--link--disabled:visited {
