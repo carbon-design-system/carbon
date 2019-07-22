@@ -1,0 +1,108 @@
+/**
+ * Copyright IBM Corp. 2018, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* eslint-disable no-console */
+
+'use strict';
+
+const fs = require('fs-extra');
+const path = require('path');
+const yaml = require('js-yaml');
+const search = require('../src/search');
+
+const METADATA_PATH = path.resolve(__dirname, '../metadata.yml');
+const ICONS_DIRECTORY = path.resolve(__dirname, '../src/svg');
+
+// Checks:
+// 1) That all icons are present in metadata
+// 2) That all icons have a category
+async function check() {
+  const { categories, icons: metadata } = yaml.safeLoad(
+    await fs.readFile(METADATA_PATH, 'utf8')
+  );
+  const icons = await search(ICONS_DIRECTORY);
+
+  const fileValidationErrors = [];
+  const missingIconsFromMetadata = [];
+  const missingVariantFromMetadata = [];
+
+  for (const icon of icons) {
+    const [sharedName, ...variants] = icon.basename.split('--');
+    const entry = metadata.find(entry => {
+      return entry.name === sharedName;
+    });
+
+    if (entry === undefined) {
+      missingIconsFromMetadata.push(icon.basename);
+      continue;
+    }
+
+    if (variants.length > 0) {
+      if (!Array.isArray(entry.variants)) {
+        fileValidationErrors.push(
+          `Expected entry with name: ${entry.name} to have an array for ` +
+            `field \`variants\``
+        );
+        continue;
+      }
+
+      const variant = entry.variants.find(variant => {
+        return icon.basename === variant.name;
+      });
+
+      if (!variant) {
+        missingVariantFromMetadata.push(icon.basename);
+      }
+    }
+  }
+
+  if (missingIconsFromMetadata.length > 0) {
+    throw new Error(
+      `The following icons are missing or an error has occurred:\n` +
+        JSON.stringify(missingIconsFromMetadata, null, 2)
+    );
+  }
+
+  if (missingVariantFromMetadata.length > 0) {
+    throw new Error(
+      `The following icon variants are missing or an error has occurred:\n` +
+        JSON.stringify(missingVariantFromMetadata, null, 2)
+    );
+  }
+
+  if (fileValidationErrors.length > 0) {
+    throw new Error(
+      `The validator expected a different metadata file format than what ` +
+        `was given. Expected:\n` +
+        JSON.stringify(fileValidationErrors, null, 2)
+    );
+  }
+
+  const index = icons.map(icon => icon.basename);
+  const miscategorizedOrMissingIcons = [];
+
+  for (const category of categories) {
+    for (const subcategory of category.subcategories) {
+      for (const member of subcategory.members) {
+        if (index.indexOf(member) === -1) {
+          miscategorizedOrMissingIcons.push(member);
+        }
+      }
+    }
+  }
+
+  if (miscategorizedOrMissingIcons.length > 0) {
+    throw new Error(
+      `The following icons are missing or have been miscategorized:\n` +
+        JSON.stringify(miscategorizedOrMissingIcons, null, 2)
+    );
+  }
+}
+
+check().catch(error => {
+  console.log(error);
+});

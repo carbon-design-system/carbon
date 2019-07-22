@@ -7198,7 +7198,6 @@ categories:
           - list--numbered
           - list--checked
           - no-image
-          - non-editable
           - opacity
           - paint-brush
           - quotes
@@ -7223,7 +7222,6 @@ categories:
           - text--scale
           - text--selection
           - text--small-caps
-          - text--spell-check
           - text--strikethrough
           - text--subscript
           - text--superscript
