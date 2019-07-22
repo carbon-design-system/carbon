@@ -4027,7 +4027,6 @@ $carbon--theme--g10: (
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
 - **Used by**:
-  - [date-picker [mixin]](#date-picker-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g90 [variable]
@@ -4104,8 +4103,6 @@ $carbon--theme--g90: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅carbon--theme--g100 [variable]
 
@@ -4182,7 +4179,6 @@ $carbon--theme--g100: (
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
 - **Used by**:
-  - [date-picker [mixin]](#date-picker-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme [variable]
@@ -11686,27 +11682,6 @@ Date picker styles
     }
   }
 
-  :root.demo--theme--g100 .#{$prefix}--date-picker__calendar.open,
-  :root.demo--theme--g100 .startRange,
-  :root.demo--theme--g100 .endRange,
-  :root.demo--theme--g100 .inRange {
-    @include carbon--theme--custom-properties($carbon--theme--g100);
-  }
-
-  :root.demo--theme--g90 .#{$prefix}--date-picker__calendar.open,
-  :root.demo--theme--g90 .startRange,
-  :root.demo--theme--g90 .endRange,
-  :root.demo--theme--g90 .inRange {
-    @include carbon--theme--custom-properties($carbon--theme--g90);
-  }
-
-  :root.demo--theme--g10 .#{$prefix}--date-picker__calendar.open,
-  :root.demo--theme--g10 .startRange,
-  :root.demo--theme--g10 .endRange,
-  :root.demo--theme--g10 .inRange {
-    @include carbon--theme--custom-properties($carbon--theme--g10);
-  }
-
   .#{$prefix}--date-picker__month,
   .flatpickr-month {
     display: flex;
@@ -12035,9 +12010,6 @@ Date picker styles
   - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
-  - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
-  - [carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
-  - [carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)

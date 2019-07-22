@@ -8,8 +8,8 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
-@import '../../globals/scss/theme';
 @import '../../globals/scss/layer';
 @import '../form/form';
 @import 'flatpickr.scss';
@@ -166,27 +166,6 @@
     &:focus {
       outline: 1px solid $interactive-01;
     }
-  }
-
-  :root.demo--theme--g100 .#{$prefix}--date-picker__calendar.open,
-  :root.demo--theme--g100 .startRange,
-  :root.demo--theme--g100 .endRange,
-  :root.demo--theme--g100 .inRange {
-    @include carbon--theme--custom-properties($carbon--theme--g100);
-  }
-
-  :root.demo--theme--g90 .#{$prefix}--date-picker__calendar.open,
-  :root.demo--theme--g90 .startRange,
-  :root.demo--theme--g90 .endRange,
-  :root.demo--theme--g90 .inRange {
-    @include carbon--theme--custom-properties($carbon--theme--g90);
-  }
-
-  :root.demo--theme--g10 .#{$prefix}--date-picker__calendar.open,
-  :root.demo--theme--g10 .startRange,
-  :root.demo--theme--g10 .endRange,
-  :root.demo--theme--g10 .inRange {
-    @include carbon--theme--custom-properties($carbon--theme--g10);
   }
 
   .#{$prefix}--date-picker__month,
