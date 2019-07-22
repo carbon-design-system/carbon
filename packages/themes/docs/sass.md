@@ -650,6 +650,7 @@ $carbon--theme--v9: (
   icon-02: #5a6872,
   icon-03: #ffffff,
   link-01: #3d70b2,
+  inverse-link: #5596e6,
   field-01: #ffffff,
   field-02: #f4f7fb,
   inverse-01: #ffffff,
