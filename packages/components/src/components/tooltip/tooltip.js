@@ -135,16 +135,26 @@ class Tooltip extends mixin(
   _debouncedHandleClick = debounce(this._handleClick, 200);
 
   /**
+   * Key codes for allowed keys that will trigger opening a tooltip
+   * @type {Integer[]}
+   * @private
+   */
+  _allowedOpenKeys = [32, 13];
+
+  /**
    * A method called when this widget is created upon events.
    * @param {Event} event The event triggering the creation.
    */
   createdByEvent(event) {
-    const { relatedTarget, type } = event;
-    this._debouncedHandleClick({
-      relatedTarget,
-      type,
-      details: getLaunchingDetails(event),
-    });
+    const { relatedTarget, type, which } = event;
+
+    if (type === 'click' || this._allowedOpenKeys.includes(which)) {
+      this._debouncedHandleClick({
+        relatedTarget,
+        type,
+        details: getLaunchingDetails(event),
+      });
+    }
   }
 
   /**
@@ -184,12 +194,9 @@ class Tooltip extends mixin(
         // -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
         //      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
         //      for keyboard users do we still want the debounce?
-        this.isHidden = state !== 'shown';
-        this.tooltip.element.setAttribute(
-          'aria-hidden',
-          this.isHidden.toString()
-        );
-        this.element.setAttribute('aria-expanded', (!this.isHidden).toString());
+        const isHidden = state !== 'shown';
+        this.tooltip.element.setAttribute('aria-hidden', isHidden.toString());
+        this.element.setAttribute('aria-expanded', (!isHidden).toString());
 
         if (this._handleFocusinListener) {
           this._handleFocusinListener = this.unmanage(
@@ -248,44 +255,37 @@ class Tooltip extends mixin(
    * @private
    */
   _hookOn(element) {
-    this.manage(
-      on(
-        element,
-        'click',
-        event => {
-          const { relatedTarget, type } = event;
-          const hadContextMenu = this._hasContextMenu;
-          this._hasContextMenu = type === 'contextmenu';
-          this._debouncedHandleClick({
-            relatedTarget,
-            type,
-            hadContextMenu,
-            details: getLaunchingDetails(event),
-          });
-        },
-        false
-      )
-    );
+    /**
+     * Setup the _debouncedHandleClick function for displaying a tooltip
+     * @param {Event} evt - user initiated event
+     * @param {Integer[]} [allowedKeys] - allowed key codes the user may press to open the tooltip
+     * @private
+     */
+    const setupDebounceClick = (evt, allowedKeys) => {
+      const { relatedTarget, type, which } = evt;
+      // Allow user to use `space` or `enter` to open tooltip
+      if (typeof allowedKeys === 'undefined' || allowedKeys.includes(which)) {
+        const hadContextMenu = this._hasContextMenu;
+        this._hasContextMenu = type === 'contextmenu';
+        this._debouncedHandleClick({
+          relatedTarget,
+          type,
+          hadContextMenu,
+          details: getLaunchingDetails(evt),
+        });
+      }
+    };
 
-    if (this.element.tagName.toLowerCase() !== 'button') {
+    this.manage(on(element, 'click', setupDebounceClick, false));
+
+    if (this.element.tagName !== 'BUTTON') {
       this.manage(
         on(
           this.element,
           // Does Carbon prefer keydown or keyup?
           'keydown',
           event => {
-            const { relatedTarget, type, which } = event;
-            // Allow user to use `space` or `enter` to open tooltip
-            if (which === 32 || which === 13) {
-              const hadContextMenu = this._hasContextMenu;
-              this._hasContextMenu = type === 'contextmenu';
-              this._debouncedHandleClick({
-                relatedTarget,
-                type,
-                hadContextMenu,
-                details: getLaunchingDetails(event),
-              });
-            }
+            setupDebounceClick(event, this._allowedOpenKeys);
           },
           false
         )
@@ -314,7 +314,10 @@ class Tooltip extends mixin(
 
     this._handleKeydownListener = this.manage(
       on(element.ownerDocument, 'keydown', evt => {
-        if (evt.which === 27 && !this.isHidden) {
+        if (
+          evt.which === 27 &&
+          this.tooltip.element.classList.contains(this.options.classShown)
+        ) {
           evt.stopPropagation();
           this.changeState('hidden', evt);
         }
@@ -363,9 +366,8 @@ class Tooltip extends mixin(
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
-      // @question I want to init the component on keydown IF it's not a button element as the trigger
-      //    and the user pressed only enter or space
-      initEventNames: ['click'],
+      // @question Does Carbon prefer `keydown` or `keyup`?
+      initEventNames: ['click', 'keydown'],
     };
   }
 }
