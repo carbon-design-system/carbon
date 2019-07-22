@@ -67,6 +67,7 @@ export default class Search extends Component {
   };
 
   static defaultProps = {
+    closeButtonLabelText: 'Clear search query',
     type: 'text',
     small: false,
     placeHolderText: '',
