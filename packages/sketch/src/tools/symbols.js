@@ -19,8 +19,48 @@ export function syncSymbol(document, name, config) {
   }
 
   Object.keys(config).forEach(key => {
-    symbol[key] = config[key];
+    if (key === 'layers') {
+      syncSymbolLayers(document, symbol, config);
+    } else {
+      symbol[key] = config[key];
+    }
   });
 
   return symbol;
+}
+
+function syncSymbolLayers(document, original, changed) {
+  original.layers = changed.layers.map(changedLayer => {
+    const { name } = changedLayer;
+    const originalLayer = original.layers.find(layer => {
+      return layer.name === name;
+    });
+
+    if (originalLayer) {
+      merge(originalLayer, changedLayer);
+
+      if (originalLayer.sharedStyleId) {
+        const sharedStyle = document.sharedLayerStyles.find(sharedStyle => {
+          return originalLayer.sharedStyleId === sharedStyle.id;
+        });
+
+        if (sharedStyle) {
+          originalLayer.style.syncWithSharedStyle(sharedStyle);
+        }
+      }
+
+      return originalLayer;
+    }
+
+    return changedLayer;
+  });
+}
+
+const defaultPropertyList = new Set(['frame', 'points', 'style']);
+function merge(source, target, propertyList = defaultPropertyList) {
+  for (let key in target) {
+    if (propertyList.has(key)) {
+      source[key] = target[key];
+    }
+  }
 }

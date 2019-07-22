@@ -20,16 +20,16 @@ export function sync() {
     );
 
     // Keep sharedStyleId in sync
-    console.log(symbol.layers[1]);
-    // syncSymbol(document, 'test-symbol', {
-    // layers: [
-    // new ShapePath({
-    // name: 'Inner',
-    // shapeType: ShapePath.ShapeType.Oval,
-    // frame: new Rectangle(32, 32, 37, 37),
-    // }),
-    // ],
-    // });
+    // console.log(symbol.layers[1]);
+    syncSymbol(document, 'test-symbol', {
+      layers: [
+        new ShapePath({
+          name: 'Inner',
+          shapeType: ShapePath.ShapeType.Oval,
+          frame: new Rectangle(0, 0, 37, 37),
+        }),
+      ],
+    });
 
     // syncColorStyles(document);
   });
