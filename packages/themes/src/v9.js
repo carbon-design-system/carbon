@@ -31,6 +31,8 @@ export const icon03 = white;
 
 export const link01 = '#3d70b2';
 
+export const inverseLink = '#5596e6';
+
 export const field01 = white;
 export const field02 = '#f4f7fb';
 
