@@ -11,13 +11,15 @@ import * as g10 from './g10';
 import * as g100 from './g100';
 import * as white from './white';
 import * as g90 from './g90';
+import * as v9 from './v9';
 import { tokens, formatTokenName } from './tokens';
 
-export { g10, g90, g100, white };
+export { g10, g90, g100, white, v9 };
 export { tokens, formatTokenName };
 export const themes = {
   white,
   g10,
   g90,
   g100,
+  v9,
 };
