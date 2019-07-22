@@ -116,6 +116,7 @@
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -3819,6 +3820,82 @@ $carbon--theme--g100: (
   brand-03: #ffffff,
   active-01: #565656,
   hover-field: #353535,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
+### ✅carbon--theme--v9 [variable]
+
+Carbon's v9 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--v9: (
+  interactive-01: #3d70b2,
+  interactive-02: #5a6872,
+  interactive-03: #5a6872,
+  interactive-04: #3d70b2,
+  ui-background: #f4f7fb,
+  ui-01: #ffffff,
+  ui-02: #f4f7fb,
+  ui-03: #dfe3e6,
+  ui-04: #8897a2,
+  ui-05: #5a6872,
+  text-01: #152935,
+  text-02: #5a6872,
+  text-03: #cdd1d4,
+  text-04: #ffffff,
+  icon-01: #3d70b2,
+  icon-02: #5a6872,
+  icon-03: #ffffff,
+  link-01: #3d70b2,
+  inverse-link: #5596e6,
+  field-01: #ffffff,
+  field-02: #f4f7fb,
+  inverse-01: #ffffff,
+  inverse-02: #272d33,
+  support-01: #e0182d,
+  support-02: #5aa700,
+  support-03: #efc100,
+  support-04: #5aaafa,
+  inverse-support-01: #ff5050,
+  inverse-support-02: #8cd211,
+  inverse-support-03: #fdd600,
+  inverse-support-04: #5aaafa,
+  overlay-01: rgba(223, 227, 230, 0.5),
+  focus: #3d70b2,
+  hover-primary: #30588c,
+  active-primary: #30588c,
+  hover-primary-text: #294c86,
+  hover-secondary: #4d5b65,
+  active-secondary: #414f59,
+  hover-tertiary: #5a6872,
+  active-tertiary: #414f59,
+  hover-ui: #eef4fc,
+  active-ui: #dfeafa,
+  selected-ui: #eef4fc,
+  hover-selected-ui: #dfeafa,
+  hover-danger: #c70014,
+  active-danger: #ad1625,
+  hover-row: #eef4fc,
+  visited-link: #294c86,
+  disabled-01: #fafbfd,
+  disabled-02: #dfe3e6,
+  disabled-03: #cdd1d4,
+  highlight: #f4f7fb,
+  skeleton-01: rgba(61, 112, 178, 0.1),
+  skeleton-02: rgba(61, 112, 178, 0.1),
+  brand-01: #3d70b2,
+  brand-02: #5a6872,
+  brand-03: #5a6872,
+  active-01: #dfeafa,
+  hover-field: #eef4fc,
 );
 ```
 
