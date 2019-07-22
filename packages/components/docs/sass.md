@@ -116,6 +116,7 @@
   - [✅carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
   - [✅carbon--theme--g90 [variable]](#carbon--theme--g90-variable)
   - [✅carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
+  - [✅carbon--theme--v9 [variable]](#carbon--theme--v9-variable)
   - [✅carbon--theme [variable]](#carbon--theme-variable)
   - [✅interactive-01 [variable]](#interactive-01-variable)
   - [✅interactive-02 [variable]](#interactive-02-variable)
@@ -289,7 +290,6 @@
 - [notification](#notification)
   - [❌inline-notifications [mixin]](#inline-notifications-mixin)
   - [❌inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [❌inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [❌notification--color [mixin]](#notification--color-mixin)
   - [❌notification--experimental [mixin]](#notification--experimental-mixin)
   - [❌toast-notifications [mixin]](#toast-notifications-mixin)
@@ -1725,7 +1725,7 @@ Makes SVGs accessible in high contrast mode
 
 ```scss
 @mixin carbon--icons() {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
@@ -2496,6 +2496,7 @@ Get the value of the corresponding number of units
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
   - [multiselect [mixin]](#multiselect-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
 
@@ -4189,6 +4190,82 @@ $carbon--theme--g100: (
 - **Used by**:
   - [inline-notifications [mixin]](#inline-notifications-mixin)
 
+### ✅carbon--theme--v9 [variable]
+
+Carbon's v9 color theme
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--theme--v9: (
+  interactive-01: #3d70b2,
+  interactive-02: #5a6872,
+  interactive-03: #5a6872,
+  interactive-04: #3d70b2,
+  ui-background: #f4f7fb,
+  ui-01: #ffffff,
+  ui-02: #f4f7fb,
+  ui-03: #dfe3e6,
+  ui-04: #8897a2,
+  ui-05: #5a6872,
+  text-01: #152935,
+  text-02: #5a6872,
+  text-03: #cdd1d4,
+  text-04: #ffffff,
+  icon-01: #3d70b2,
+  icon-02: #5a6872,
+  icon-03: #ffffff,
+  link-01: #3d70b2,
+  inverse-link: #5596e6,
+  field-01: #ffffff,
+  field-02: #f4f7fb,
+  inverse-01: #ffffff,
+  inverse-02: #272d33,
+  support-01: #e0182d,
+  support-02: #5aa700,
+  support-03: #efc100,
+  support-04: #5aaafa,
+  inverse-support-01: #ff5050,
+  inverse-support-02: #8cd211,
+  inverse-support-03: #fdd600,
+  inverse-support-04: #5aaafa,
+  overlay-01: rgba(223, 227, 230, 0.5),
+  focus: #3d70b2,
+  hover-primary: #30588c,
+  active-primary: #30588c,
+  hover-primary-text: #294c86,
+  hover-secondary: #4d5b65,
+  active-secondary: #414f59,
+  hover-tertiary: #5a6872,
+  active-tertiary: #414f59,
+  hover-ui: #eef4fc,
+  active-ui: #dfeafa,
+  selected-ui: #eef4fc,
+  hover-selected-ui: #dfeafa,
+  hover-danger: #c70014,
+  active-danger: #ad1625,
+  hover-row: #eef4fc,
+  visited-link: #294c86,
+  disabled-01: #fafbfd,
+  disabled-02: #dfe3e6,
+  disabled-03: #cdd1d4,
+  highlight: #f4f7fb,
+  skeleton-01: rgba(61, 112, 178, 0.1),
+  skeleton-02: rgba(61, 112, 178, 0.1),
+  brand-01: #3d70b2,
+  brand-02: #5a6872,
+  brand-03: #5a6872,
+  active-01: #dfeafa,
+  hover-field: #eef4fc,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Map`
+
 ### ✅carbon--theme [variable]
 
 Carbon's default theme
@@ -4518,7 +4595,6 @@ $text-01: map-get($carbon--theme, 'text-01');
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -4557,6 +4633,7 @@ $text-02: map-get($carbon--theme, 'text-02');
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [toggle [mixin]](#toggle-mixin)
@@ -4694,7 +4771,6 @@ $link-01: map-get($carbon--theme, 'link-01');
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅inverse-link [variable]
@@ -4712,6 +4788,8 @@ $inverse-link: map-get($carbon--theme, 'inverse-link');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
 
@@ -8858,6 +8936,10 @@ Button styles
 
     &.#{$prefix}--btn--sm {
       padding: $button-padding-ghost-sm;
+    }
+
+    &.#{$prefix}--btn--field {
+      padding: $button-padding-ghost-field;
     }
   }
 
@@ -14091,7 +14173,7 @@ Inline notification styles
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 
@@ -14128,24 +14210,25 @@ Inline notification styles
     height: rem(32px);
     margin: $carbon--spacing-03 0;
 
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $inverse-link;
+    }
+
     @if $carbon--theme == $carbon--theme--white {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
     } @else if $carbon--theme == $carbon--theme--g10 {
       @include carbon--theme($carbon--theme--g100) {
-        @include inline-notification--button-color;
-
         &:hover {
           background-color: $hover-secondary;
         }
       }
-    } @else {
-      @include inline-notification--button-color;
     }
   }
 
@@ -14202,7 +14285,6 @@ Inline notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notification--button-color [mixin]](#inline-notification--button-color-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14219,6 +14301,7 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
   - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -14248,30 +14331,6 @@ Inline notification styles
 - **Group**: [notification](#notification)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-
-### ❌inline-notification--button-color [mixin]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin inline-notification--button-color() {
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    color: $link-01;
-  }
-}
-```
-
-</details>
-
-- **Group**: [notification](#notification)
-- **Requires**:
-  - [link-01 [variable]](#link-01-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ❌notification--color [mixin]
 
@@ -14396,7 +14455,7 @@ Toast notification styles
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    fill: $text-01;
+    fill: $carbon__black-100;
     opacity: 1;
   }
 
@@ -15056,7 +15115,7 @@ Pagination styles
     padding: 0 2.5rem 0 $spacing-md;
     margin-right: -0.65rem;
     @include carbon--breakpoint('md') {
-      padding: 0 1.5rem 0 0.5rem;
+      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
     }
   }
@@ -15066,38 +15125,23 @@ Pagination styles
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    position: relative;
     top: auto;
-    right: 1.1rem;
     bottom: auto;
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
     border-right: $spacing-4xs solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-right: 2rem;
-      margin-right: -0.65rem;
-    }
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__page-number
     .#{$prefix}--select-input {
     border-left: 1px solid $ui-03;
-    @include carbon--breakpoint('md') {
-      padding-left: 1rem;
-      padding-right: 2rem;
-    }
-  }
-
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select__arrow {
-    @include carbon--breakpoint('md') {
-      right: 1.8rem;
-    }
   }
 
   .#{$prefix}--pagination__left,
@@ -15137,11 +15181,7 @@ Pagination styles
 
   span.#{$prefix}--pagination__text {
     margin-left: $carbon--spacing-05;
-    color: $text-01;
-  }
-
-  .#{$prefix}--pagination__right span.#{$prefix}--pagination__text {
-    margin-left: -0.5rem;
+    color: $text-02;
   }
 
   .#{$prefix}--pagination__button {
@@ -15219,12 +15259,13 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -15800,6 +15841,12 @@ Radio button styles
       height: 0.5rem;
       border-radius: 50%;
       background-color: $ui-05;
+
+      // Allow the selected button to be seen in Windows HCM for IE/Edge
+      @media screen and (-ms-high-contrast: active) {
+        // Utilize a system color variable to accomodate any user HCM theme
+        background-color: windowText;
+      }
     }
   }
 
@@ -18720,8 +18767,7 @@ Tooltip styles
     }
 
     .#{$prefix}--link {
-      // Need to add new link / UI color -- IBM Color Blue 40
-      color: $link-inverse-color;
+      color: $inverse-link;
       font-size: rem(14px);
 
       &:active {
@@ -18729,7 +18775,7 @@ Tooltip styles
       }
 
       &:visited {
-        color: $link-inverse-color;
+        color: $inverse-link;
       }
     }
 
@@ -18941,6 +18987,7 @@ Tooltip styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
