@@ -2631,15 +2631,6 @@
     prop-types "^15.7.2"
     qs "^6.6.0"
 
-"@storybook/addon-options@^5.1.3":
-  version "5.1.9"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-options/-/addon-options-5.1.9.tgz#dc326b94c52a7ee27bf948fb7ca63a6ea3c9736d"
-  integrity sha512-wQIUw5Uc/5iREtI9eh2wPMlNG0O7jxaTaxGS8Bs6zDzkwiLHcLJCrfk1lPXU6O8ExEzWHpaCmxth8GyfKj8Qtw==
-  dependencies:
-    "@storybook/addons" "5.1.9"
-    core-js "^3.0.1"
-    util-deprecate "^1.0.2"
-
 "@storybook/addon-storysource@^5.1.3":
   version "5.1.9"
   resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-5.1.9.tgz#c3a7a8b65080b6bb71c43c30dfab639aba10d271"
