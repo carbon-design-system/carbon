@@ -26,7 +26,7 @@ export function sync() {
         new ShapePath({
           name: 'Inner',
           shapeType: ShapePath.ShapeType.Oval,
-          frame: new Rectangle(0, 0, 37, 37),
+          frame: new Rectangle(0, 0, 16, 16),
         }),
       ],
     });
