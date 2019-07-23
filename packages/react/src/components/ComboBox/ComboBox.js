@@ -302,6 +302,7 @@ export default class ComboBox extends React.Component {
             <ListBox.Field
               id={id}
               disabled={disabled}
+              translateWithId={translateWithId}
               {...getButtonProps({
                 disabled,
                 onClick: this.onToggleClick(isOpen),

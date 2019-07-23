@@ -82,6 +82,7 @@ export default function PasswordInput({
         data-toggle-password-visibility={inputType === 'password'}
       />
       <button
+        type="button"
         className={`${prefix}--text-input--password__visibility`}
         aria-label={alt || `${passwordIsVisible ? 'Hide' : 'Show'} password`}
         onClick={togglePasswordVisibility}>

@@ -17,7 +17,7 @@ export ComposedModal, {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
-export ContentSwitcher from './components/ContentSwitcher';
+export ContentSwitcher, { Switch } from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -89,7 +89,6 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
-export Switch from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,
