@@ -54,23 +54,17 @@ export default class TextInput extends mixin(
     iconVisibilityOn,
     iconVisibilityOff,
     passwordIsVisible,
-    selectorPasswordVisibilityButton,
+    selectorPasswordVisibilityTooltip,
   }) => {
     if (passwordIsVisible) {
       iconVisibilityOn.setAttribute('hidden', true);
       iconVisibilityOff.removeAttribute('hidden');
-      selectorPasswordVisibilityButton.setAttribute(
-        'aria-label',
-        'Hide password'
-      );
+      selectorPasswordVisibilityTooltip.textContent = 'Hide password';
       return;
     }
     iconVisibilityOn.removeAttribute('hidden');
     iconVisibilityOff.setAttribute('hidden', true);
-    selectorPasswordVisibilityButton.setAttribute(
-      'aria-label',
-      'Show password'
-    );
+    selectorPasswordVisibilityTooltip.textContent = 'Show password';
   };
 
   /**
@@ -93,14 +87,14 @@ export default class TextInput extends mixin(
       this.options.svgIconVisibilityOff
     );
     const input = element.querySelector(this.options.selectorPasswordField);
-    const selectorPasswordVisibilityButton = element.querySelector(
-      this.options.selectorPasswordVisibilityButton
+    const selectorPasswordVisibilityTooltip = element.querySelector(
+      this.options.selectorPasswordVisibilityTooltip
     );
     this._setIconVisibility({
       iconVisibilityOn,
       iconVisibilityOff,
       passwordIsVisible,
-      selectorPasswordVisibilityButton,
+      selectorPasswordVisibilityTooltip,
     });
     input.type = passwordIsVisible ? 'text' : 'password';
   };
@@ -120,7 +114,8 @@ export default class TextInput extends mixin(
     return {
       selectorInit: '[data-text-input]',
       selectorPasswordField: `.${prefix}--text-input[data-toggle-password-visibility]`,
-      selectorPasswordVisibilityButton: `.${prefix}--text-input--password__visibility`,
+      selectorPasswordVisibilityButton: `.${prefix}--text-input--password__visibility__toggle`,
+      selectorPasswordVisibilityTooltip: `.${prefix}--text-input--password__visibility__toggle > .${prefix}--assistive-text`,
       passwordIsVisible: `${prefix}--text-input--password-visible`,
       svgIconVisibilityOn: `svg.${prefix}--icon--visibility-on`,
       svgIconVisibilityOff: `svg.${prefix}--icon--visibility-off`,
