@@ -7,6 +7,7 @@
 
 /**
  * icons-angular disabled until memory issue resolved (circleci failing)
+ * see https://github.com/carbon-design-system/carbon/issues/3522
  */
 // const build = require('../src/build');
 // const { reporter } = require('@carbon/cli-reporter');
