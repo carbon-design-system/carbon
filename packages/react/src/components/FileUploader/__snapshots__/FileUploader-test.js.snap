@@ -12,6 +12,7 @@ exports[`Filename renders as expected renders upload status icon as expected 1`]
     successDelay={1500}
   >
     <div
+      aria-live="assertive"
       className="bx--inline-loading"
     >
       <div
