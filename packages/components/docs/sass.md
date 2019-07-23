@@ -136,6 +136,7 @@
   - [✅icon-02 [variable]](#icon-02-variable)
   - [✅icon-03 [variable]](#icon-03-variable)
   - [✅link-01 [variable]](#link-01-variable)
+  - [✅inverse-link [variable]](#inverse-link-variable)
   - [✅field-01 [variable]](#field-01-variable)
   - [✅field-02 [variable]](#field-02-variable)
   - [✅inverse-01 [variable]](#inverse-01-variable)
@@ -1724,7 +1725,7 @@ Makes SVGs accessible in high contrast mode
 
 ```scss
 @mixin carbon--icons() {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
@@ -3665,6 +3666,7 @@ Define theme variables from a map of tokens
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
   $inverse-01: map-get($theme, 'inverse-01') !global;
@@ -3725,6 +3727,7 @@ Define theme variables from a map of tokens
     --icon-02: #{map-get($theme, 'icon-02')};
     --icon-03: #{map-get($theme, 'icon-03')};
     --link-01: #{map-get($theme, 'link-01')};
+    --inverse-link: #{map-get($theme, 'inverse-link')};
     --field-01: #{map-get($theme, 'field-01')};
     --field-02: #{map-get($theme, 'field-02')};
     --inverse-01: #{map-get($theme, 'inverse-01')};
@@ -3830,6 +3833,7 @@ Define theme variables from a map of tokens
   - [icon-02 [variable]](#icon-02-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [field-01 [variable]](#field-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -3901,6 +3905,7 @@ $carbon--theme--white: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #f3f3f3,
   field-02: #ffffff,
   inverse-01: #ffffff,
@@ -3980,6 +3985,7 @@ $carbon--theme--g10: (
   icon-02: #565656,
   icon-03: #ffffff,
   link-01: #0062ff,
+  inverse-link: #6ea6ff,
   field-01: #ffffff,
   field-02: #f3f3f3,
   inverse-01: #ffffff,
@@ -4057,6 +4063,7 @@ $carbon--theme--g90: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #3d3d3d,
   field-02: #565656,
   inverse-01: #171717,
@@ -4132,6 +4139,7 @@ $carbon--theme--g100: (
   icon-02: #bebebe,
   icon-03: #ffffff,
   link-01: #6ea6ff,
+  inverse-link: #0062ff,
   field-01: #282828,
   field-02: #3d3d3d,
   inverse-01: #171717,
@@ -4765,6 +4773,24 @@ $link-01: map-get($carbon--theme, 'link-01');
   - [link [mixin]](#link-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
+
+### ✅inverse-link [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-link: map-get($carbon--theme, 'inverse-link');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅field-01 [variable]
 
@@ -11888,8 +11914,8 @@ Date picker styles
     }
 
     &:focus {
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
+      outline-color: $interactive-01;
     }
   }
 
@@ -11961,8 +11987,8 @@ Date picker styles
   .#{$prefix}--date-picker__day.endRange,
   .flatpickr-day.endRange {
     &:hover {
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
+      outline-color: $interactive-01;
       background: $ui-01;
       color: $text-01;
     }
@@ -11970,8 +11996,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.endRange.inRange,
   .flatpickr-day.endRange.inRange {
-    outline: 2px solid $interactive-01;
-    outline-offset: -2px;
+    @include focus-outline('outline');
     background: $ui-01;
     z-index: 3;
   }
@@ -11984,8 +12009,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
   .flatpickr-day.startRange.inRange:not(.selected) {
-    outline: 2px solid $interactive-01;
-    outline-offset: -2px;
+    @include focus-outline('outline');
     background: $ui-01;
     z-index: 3;
   }
@@ -14283,6 +14307,7 @@ Inline notification styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
   - [carbon--theme--white [variable]](#carbon--theme--white-variable)
   - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
@@ -18968,6 +18993,7 @@ Tooltip styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [inverse-link [variable]](#inverse-link-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell

@@ -297,8 +297,8 @@
     }
 
     &:focus {
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
+      outline-color: $interactive-01;
     }
   }
 
@@ -370,8 +370,8 @@
   .#{$prefix}--date-picker__day.endRange,
   .flatpickr-day.endRange {
     &:hover {
-      outline: 2px solid $interactive-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
+      outline-color: $interactive-01;
       background: $ui-01;
       color: $text-01;
     }
@@ -379,8 +379,7 @@
 
   .#{$prefix}--date-picker__day.endRange.inRange,
   .flatpickr-day.endRange.inRange {
-    outline: 2px solid $interactive-01;
-    outline-offset: -2px;
+    @include focus-outline('outline');
     background: $ui-01;
     z-index: 3;
   }
@@ -393,8 +392,7 @@
 
   .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
   .flatpickr-day.startRange.inRange:not(.selected) {
-    outline: 2px solid $interactive-01;
-    outline-offset: -2px;
+    @include focus-outline('outline');
     background: $ui-01;
     z-index: 3;
   }
