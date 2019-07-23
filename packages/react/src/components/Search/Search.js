@@ -31,7 +31,9 @@ export default class Search extends Component {
     small: PropTypes.bool,
 
     /**
-     * Provide an optional placeholder text for the Search
+     * Provide an optional placeholder text for the Search.
+     * Note: if the label and placeholder differ,
+     * VoiceOver on Mac will read both
      */
     placeHolderText: PropTypes.string,
 
