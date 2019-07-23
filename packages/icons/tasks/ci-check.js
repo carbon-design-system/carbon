@@ -30,20 +30,24 @@ async function check() {
   const metadataConfig = yaml.safeLoad(
     await fs.readFile(METADATA_PATH, 'utf8')
   );
-  const { error, value } = Joi.validate(metadataConfig, metadataSchema);
+  const { error, value: iconMetadata } = Joi.validate(
+    metadataConfig,
+    metadataSchema
+  );
   if (error) {
     throw error;
   }
 
-  const { error: categoriesValidationError, value: categories } = Joi.validate(
-    categoriesConfig,
-    categoriesSchema
-  );
+  const {
+    error: categoriesValidationError,
+    value: categoriesMetadata,
+  } = Joi.validate(categoriesConfig, categoriesSchema);
   if (error) {
     throw categoriesValidationError;
   }
 
-  const { icons: metadata } = value;
+  const { icons: metadata } = iconMetadata;
+  const { categories } = categoriesMetadata;
   const icons = await search(ICONS_DIRECTORY);
 
   const missingIconsFromMetadata = [];
