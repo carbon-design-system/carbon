@@ -12203,10 +12203,6 @@ Dropdown styles
     outline: 1px solid transparent;
   }
 
-  .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
-    @include layer('overlay');
-  }
-
   .#{$prefix}--dropdown--light {
     background-color: $field-02;
   }
@@ -12321,6 +12317,7 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    @include layer('overlay');
     max-height: 15rem;
     transition: max-height $duration--fast-02 motion(entrance, productive);
   }
