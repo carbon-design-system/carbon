@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icons-vue",
   "description": "Vue components for icons in digital and software products using the Carbon Design System",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,11 +24,11 @@
     "clean": "rimraf es lib umd"
   },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.0.2"
+    "@rocketsoftware/icon-helpers": "^0.0.3"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "^10.2.0",
-    "@rocketsoftware/icons": "^0.0.2",
+    "@rocketsoftware/icons": "^0.0.3",
     "fs-extra": "^7.0.1",
     "prettier": "^1.17.0",
     "rimraf": "^2.6.2",

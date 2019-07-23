@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -44,7 +44,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@rocketsoftware/icons-react": "^0.0.2",
+    "@rocketsoftware/icons-react": "^0.0.3",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.6.1",
