@@ -74,6 +74,44 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 }
 ```
 
+### Variable naming
+
+Sass variables should be named according to the
+`$component-state-property-variant` format for consistency. Examples:
+
+```scss
+// component: button
+// property: font-weight
+$button-font-weight: 400;
+
+// component: button
+// property: padding
+// variant: ghost
+$button-padding-ghost: calc(0.875rem - 3px) 12px;
+
+// component: data-table-column
+// state: hover
+// property: background
+$data-table-column-hover-background: $hover-selected-ui;
+```
+
+For properties like `padding`, `margin`, `border-width`, etc. that have
+shorthand syntaxes, qualify the property with a suffix if the variable is meant
+for just the x-axis `-x` or y-axis `-y`, or top `-t`, right `-r`, bottom `-b`,
+or left `-l` directionality.
+
+For example, if an element's left and right padding is supposed to match, and
+the top and bottom padding is intended to have a different value, you could:
+
+```scss
+$button-padding-x: 1rem;
+$button-padding-y: 0.5rem;
+
+.button {
+  padding: $button-padding-y $button-padding-x;
+}
+```
+
 ### Sass documentation
 
 [SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
