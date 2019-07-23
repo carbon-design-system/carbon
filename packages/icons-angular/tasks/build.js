@@ -5,9 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const build = require('../src/build');
-const { reporter } = require('@carbon/cli-reporter');
+/**
+ * icons-angular disabled until memory issue resolved (circleci failing)
+ */
+// const build = require('../src/build');
+// const { reporter } = require('@carbon/cli-reporter');
 
-build().catch(error => {
-  reporter.error(error);
-});
+// build().catch(error => {
+//   reporter.error(error);
+// });
