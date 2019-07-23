@@ -46,9 +46,9 @@ async function check() {
   const { icons: metadata } = value;
   const icons = await search(ICONS_DIRECTORY);
 
-  const fileValidationErrors = [];
   const missingIconsFromMetadata = [];
   const missingVariantFromMetadata = [];
+  const missingSizesFromMetadata = [];
 
   for (const icon of icons) {
     const [sharedName, ...variants] = icon.basename.split('--');
@@ -61,12 +61,17 @@ async function check() {
       continue;
     }
 
+    // If we're dealing with an icon at the root level
+    if (variants.length === 0) {
+      if (!Array.isArray(entry.sizes) || !entry.sizes.includes(icon.size)) {
+        missingSizesFromMetadata.push(icon.basename);
+        continue;
+      }
+    }
+
     if (variants.length > 0) {
       if (!Array.isArray(entry.variants)) {
-        fileValidationErrors.push(
-          `Expected entry with name: ${entry.name} to have an array for ` +
-            `field \`variants\``
-        );
+        missingVariantFromMetadata.push(icon.basename);
         continue;
       }
 
@@ -94,11 +99,10 @@ async function check() {
     );
   }
 
-  if (fileValidationErrors.length > 0) {
+  if (missingSizesFromMetadata.length > 0) {
     throw new Error(
-      `The validator expected a different metadata file format than what ` +
-        `was given. Expected:\n` +
-        JSON.stringify(fileValidationErrors, null, 2)
+      `The following icon sizes are missing or an error has occurred:\n` +
+        JSON.stringify(missingSizesFromMetadata, null, 2)
     );
   }
 
