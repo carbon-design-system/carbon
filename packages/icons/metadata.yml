@@ -56,6 +56,8 @@ icons:
     aliases:
       - direction
       - point
+    sizes:
+      - 16
     variants:
       - name: arrow--down
         friendly_name: Arrow down
@@ -7120,7 +7122,7 @@ icons:
       - depth
       - 3D
       - dimension
-      - 3
+      - '3'
     sizes:
       - 32
 

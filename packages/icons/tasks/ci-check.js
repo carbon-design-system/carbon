@@ -11,16 +11,72 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const Joi = require('joi');
 const yaml = require('js-yaml');
 const search = require('../src/search');
 
 const METADATA_PATH = path.resolve(__dirname, '../metadata.yml');
 const ICONS_DIRECTORY = path.resolve(__dirname, '../src/svg');
 
+const baseIconSchema = Joi.object().keys({
+  name: Joi.string().required(),
+  friendly_name: Joi.string().required(),
+  usage: Joi.string().required(),
+  sizes: Joi.array().items(
+    Joi.number().only(16, 20, 24, 32),
+    Joi.string().only('glyph')
+  ),
+});
+
+const categorySchema = Joi.array().items(
+  Joi.object().keys({
+    name: Joi.string().required(),
+    subcategory: Joi.string().required(),
+  })
+);
+
+const iconSchema = baseIconSchema.keys({
+  categories: categorySchema.required(),
+  aliases: Joi.array()
+    .items(Joi.string())
+    .required(),
+  variants: Joi.array().items(baseIconSchema),
+});
+
+const categoriesSchema = Joi.array().items(
+  Joi.object().keys({
+    name: Joi.string().required(),
+    subcategories: Joi.array().items(
+      Joi.object()
+        .keys({
+          name: Joi.string().required(),
+          members: Joi.array().items(Joi.string()),
+        })
+        .required()
+    ),
+  })
+);
+
+const metadataSchema = Joi.object().keys({
+  icons: Joi.array()
+    .items(iconSchema)
+    .required(),
+  categories: categoriesSchema.required(),
+});
+
 // Checks:
 // 1) That all icons are present in metadata
 // 2) That all icons have a category
+// 3) If an icon has a size in source, make sure it exists in metadata
 async function check() {
+  const config = yaml.safeLoad(await fs.readFile(METADATA_PATH, 'utf8'));
+  const { error, value } = Joi.validate(config, metadataSchema);
+  if (error) {
+    // console.log(error);
+    console.log(JSON.stringify(error.details, null, 2));
+  }
+  return;
+
   const { categories, icons: metadata } = yaml.safeLoad(
     await fs.readFile(METADATA_PATH, 'utf8')
   );
@@ -105,4 +161,5 @@ async function check() {
 
 check().catch(error => {
   console.log(error);
+  process.exit(1);
 });
