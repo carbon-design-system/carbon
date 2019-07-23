@@ -19,40 +19,52 @@
   }
   .#{$prefix}--data-table--small {
     tbody tr.#{$prefix}--parent-row {
-      border-top: 1px solid $ui-01;
-      border-bottom: 1px solid $ui-03;
-    }
-    tbody tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
+      border-top: 1px solid $ui-03;
       border-bottom: none;
     }
-    tbody
-      tr.#{$prefix}--parent-row:not(.bx--expandable-row):first-of-type:hover
-      td {
-      border: none;
-    }
     tbody tr.#{$prefix}--parent-row td.td-small {
-      border: none;
       display: block;
-      box-shadow: none;
     }
+    tbody tr:hover > td,
+    tbody tr.#{$prefix}--parent-row td.td-small,
+    tbody tr.#{$prefix}--parent-row:hover td,
+    tbody tr.#{$prefix}--expandable-row:hover td,
+    tbody tr.#{$prefix}--expandable-row--hover td,
+    tbody tr.#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
+    tbody
+      tr.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hidden:hover
+      > td,
+    tbody
+      tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
+      td,
+    tbody
+      tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
+      + tr[data-child-row]
+      td,
+    tbody tr.#{$prefix}--parent-row:first-of-type td,
+    tbody tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td,
+    tbody
+      tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
+      td,
     tbody
       tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
       td,
-    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-      td:first-of-type,
-    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
-      td,
-    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
-      td:first-of-type {
-      border: none;
-    }
     tbody
-      tr.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hidden
-      > td {
-      border-bottom: 1px solid $ui-03;
-    }
-    tbody tr.#{$prefix}--expandable-row--hidden:hover td {
-      transition: background $duration--fast-02 motion(standard, productive);
+      tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td:first-of-type,
+    tbody
+      tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+      td,
+    tbody
+      tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+      td:first-of-type,
+    tbody
+      tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
+      + tr[data-child-row]
+      td {
+      border: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
     }
   }
 }
