@@ -22,7 +22,6 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         "render": [Function],
       }
     }
-    small={false}
     tabIndex={0}
     type="button"
   >

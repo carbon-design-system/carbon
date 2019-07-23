@@ -114,40 +114,21 @@ class Tab extends ContentSwitcher {
   _handleKeyDown(event) {
     const triggerNode = eventMatches(event, this.options.selectorTrigger);
     if (triggerNode) {
-      // enter
       if (event.which === 13) {
         this._updateMenuState();
       }
       return;
     }
 
-    const buttons = toArray(
-      this.element.querySelectorAll(this.options.selectorButtonEnabled)
-    );
-
-    // End or Home key handler
-    if (event.which === 35 || event.which === 36) {
-      event.preventDefault();
-      const activeIndex = {
-        35: buttons.length - 1,
-        36: 0,
-      }[event.which];
-      this.setActive(buttons[activeIndex], (error, item) => {
-        if (item) {
-          const link = item.querySelector(this.options.selectorLink);
-          if (link) {
-            link.focus();
-          }
-        }
-      });
-    }
-
     const direction = {
-      37: this.constructor.NAVIGATE.BACKWARD, // left arrow
-      39: this.constructor.NAVIGATE.FORWARD, // right arrow
+      37: this.constructor.NAVIGATE.BACKWARD,
+      39: this.constructor.NAVIGATE.FORWARD,
     }[event.which];
 
     if (direction) {
+      const buttons = toArray(
+        this.element.querySelectorAll(this.options.selectorButtonEnabled)
+      );
       const button = this.element.querySelector(
         this.options.selectorButtonSelected
       );

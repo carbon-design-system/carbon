@@ -92,22 +92,32 @@ REASON: #{$reason}';
 .demo--container,
 :root.demo--theme--white .demo--container,
 .component-example__live,
-:root.demo--theme--white .component-example__live {
+:root.demo--theme--white .component-example__live,
+.bx--tooltip,
+:root.demo--theme--white .bx--tooltip,
+.bx--overflow-menu-options,
+:root.demo--theme--white .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--white);
 }
 
 :root.demo--theme--g10 .demo--container,
-:root.demo--theme--g10 .component-example__live {
+:root.demo--theme--g10 .component-example__live,
+:root.demo--theme--g10 .bx--tooltip,
+:root.demo--theme--g10 .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--g10);
 }
 
 :root.demo--theme--g90 .demo--container,
-:root.demo--theme--g90 .component-example__live {
+:root.demo--theme--g90 .component-example__live,
+:root.demo--theme--g90 .bx--tooltip,
+:root.demo--theme--g90 .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--g90);
 }
 
 :root.demo--theme--g100 .demo--container,
-:root.demo--theme--g100 .component-example__live {
+:root.demo--theme--g100 .component-example__live,
+:root.demo--theme--g100 .bx--tooltip,
+:root.demo--theme--g100 .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--g100);
 }
 

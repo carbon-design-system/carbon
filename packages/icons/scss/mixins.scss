@@ -10,7 +10,7 @@
 /// @access public
 /// @group @carbon/icons
 @mixin carbon--icons {
-  @media screen and (-ms-high-contract: active) {
+  @media screen and (-ms-high-contrast: active) {
     svg {
       fill: ButtonText;
     }
