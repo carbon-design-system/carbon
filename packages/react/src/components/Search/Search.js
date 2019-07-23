@@ -70,6 +70,7 @@ export default class Search extends Component {
     type: 'text',
     small: false,
     placeHolderText: '',
+    closeButtonLabelText: 'Clear search input',
     onChange: () => {},
   };
 
