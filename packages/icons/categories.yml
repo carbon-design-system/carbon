@@ -110,6 +110,7 @@ categories:
         members:
           - add
           - add--alt
+          - add--filled
           - app-switcher
           - arrow--down
           - arrow--down-left
@@ -119,6 +120,7 @@ categories:
           - arrow--up
           - arrow--up-left
           - arrow--up-right
+          - back-to-top
           - caret--down
           - caret--left
           - caret--right
@@ -128,6 +130,8 @@ categories:
           - chevron--right
           - chevron--up
           - close
+          - close--filled
+          - close--outline
           - down-to-bottom
           - draggable
           - home
@@ -146,16 +150,23 @@ categories:
       - name: Operations
         members:
           - add-comment
+          - arrows
           - arrows--horizontal
           - arrows--vertical
           - bookmark
           - branch
           - caret--sort
+          - caret--sort--down
+          - caret--sort--up
           - chat
+          - chevron--mini
           - chevron--sort
+          - chevron--sort--down
+          - chevron--sort--up
           - circle-dash
           - compare
           - connect
+          - delete
           - deploy-rules
           - drag--horizontal
           - drag--vertical
@@ -213,6 +224,7 @@ categories:
         members:
           - asleep
           - asleep--filled
+          - awake
           - carousel--horizontal
           - carousel--vertical
           - checkbox
@@ -594,11 +606,13 @@ categories:
           - checkmark--filled
           - error
           - error--filled
+          - error--outline
           - help
           - help--filled
           - information
           - information--filled
           - misuse
+          - misuse--outline
           - warning
           - warning--alt
           - warning--alt--filled
