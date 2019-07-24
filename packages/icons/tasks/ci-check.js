@@ -132,6 +132,8 @@ async function check() {
   }
 }
 
+const aliasesSchema = Joi.array().items(Joi.string());
+
 const baseIconSchema = Joi.object().keys({
   name: Joi.string().required(),
   friendly_name: Joi.string().required(),
@@ -140,6 +142,7 @@ const baseIconSchema = Joi.object().keys({
     Joi.number().only(16, 20, 24, 32),
     Joi.string().only('glyph')
   ),
+  aliases: aliasesSchema,
 });
 
 const categorySchema = Joi.array().items(

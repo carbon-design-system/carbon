@@ -105,6 +105,15 @@ icons:
         usage: This is a description for usage
         sizes:
           - 32
+      - name: arrow--annotation
+        friendly_name: Arrow annotation
+        usage: This is a description for usage
+        sizes:
+          - 32
+        aliases:
+          - cursor
+          - text
+          - expansion
   - name: arrows
     friendly_name: Arrows
     usage: This is a description for usage
@@ -941,9 +950,7 @@ icons:
   - name: overflow-menu
     friendly_name: Overflow menu
     usage: This is a description for usage
-    categories:
-      - name: Actions
-        subcategory: Navigation
+    categories: []
     aliases:
       - show more
       - options
@@ -3203,7 +3210,9 @@ icons:
   - name: connection-signal
     friendly_name: Connection signal
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Tools
+        subcategory: Technology
     aliases:
       - signal
       - tower
@@ -5458,7 +5467,9 @@ icons:
   - name: plane
     friendly_name: Plane
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Planning
+        subcategory: Travel
     aliases:
       - airplane
       - flight
@@ -6205,7 +6216,9 @@ icons:
   - name: spell-check
     friendly_name: Spell check
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Actions
+        subcategory: Formatting
     aliases:
       - check
       - correction
@@ -6700,7 +6713,9 @@ icons:
   - name: tool-box
     friendly_name: Tool box
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Tools
+        subcategory: Instruments
     aliases:
       - kit
       - container
@@ -7106,16 +7121,6 @@ icons:
       - annotate
       - diagram
       - comment
-    sizes:
-      - 32
-  - name: arrow-annotation
-    friendly_name: Arrow annotation
-    usage: This is a description for usage
-    categories: []
-    aliases:
-      - cursor
-      - text
-      - expansion
     sizes:
       - 32
   - name: auto-scroll
