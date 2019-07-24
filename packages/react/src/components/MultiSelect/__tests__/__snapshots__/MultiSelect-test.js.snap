@@ -86,7 +86,7 @@ exports[`MultiSelect should render 1`] = `
           type="default"
         >
           <div
-            className="bx--multi-select bx--list-box bx--dropdown"
+            className="bx--multi-select bx--list-box"
             id="test-multiselect"
             onClick={[Function]}
             onKeyDown={[Function]}

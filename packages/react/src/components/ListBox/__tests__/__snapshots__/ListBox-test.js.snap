@@ -10,7 +10,7 @@ exports[`ListBox should render 1`] = `
       "calls": Array [
         Array [
           <div
-            class="bx--list-box__container bx--list-box bx--dropdown"
+            class="bx--list-box__container bx--list-box"
             id="test-listbox"
             role="listbox"
             tabindex="-1"
@@ -35,7 +35,7 @@ exports[`ListBox should render 1`] = `
   type="default"
 >
   <div
-    className="bx--list-box__container bx--list-box bx--dropdown"
+    className="bx--list-box__container bx--list-box"
     id="test-listbox"
     onClick={[Function]}
     onKeyDown={[Function]}

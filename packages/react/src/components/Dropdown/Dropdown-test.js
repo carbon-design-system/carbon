@@ -66,8 +66,14 @@ describe('Dropdown', () => {
   });
 
   describe('title', () => {
-    const wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-    const renderedLabel = wrapper.find('label');
+    let renderedLabel;
+
+    beforeEach(() => {
+      const wrapper = mount(
+        <Dropdown titleText="Email Input" {...mockProps} />
+      );
+      renderedLabel = wrapper.find('label');
+    });
 
     it('renders a title', () => {
       expect(renderedLabel.length).toBe(1);
@@ -176,9 +182,8 @@ describe('Dropdown', () => {
 
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<DropdownSkeleton inline />);
-
     it('Has the expected classes', () => {
+      const wrapper = shallow(<DropdownSkeleton inline />);
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--list-box--inline`)).toEqual(true);

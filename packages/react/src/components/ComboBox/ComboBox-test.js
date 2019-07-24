@@ -36,6 +36,7 @@ describe('ComboBox', () => {
       onChange: jest.fn(),
       placeholder: 'Filter...',
       type: 'default',
+      id: 'test-id',
     };
   });
 
@@ -135,7 +136,16 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
       openMenu(wrapper);
-      expect(findMenuNode(wrapper).length).toBe(0);
+      // expect(findMenuNode(wrapper).length).toBe(0);o
+      // expect(findMenuNode(wrapper).prop('className')).toBe('')
+      // expect(findMenuNode(wrapper).prop('className')).not.toEqual(
+      //   expect.stringContaining('is-open')
+      // );
+      expect(
+        findMenuNode(wrapper)
+          .prop('className')
+          .includes('expanded')
+      ).toBe(false);
     });
   });
 
