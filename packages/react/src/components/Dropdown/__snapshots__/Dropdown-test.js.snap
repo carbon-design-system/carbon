@@ -169,7 +169,7 @@ exports[`Dropdown should render 1`] = `
             id="test-dropdown"
           >
             <div
-              className="bx--list-box__menu bx--dropdown-list"
+              className="bx--list-box__menu"
               id="test-dropdown__menu"
               role="listbox"
             >
@@ -466,7 +466,7 @@ exports[`Dropdown should render custom item components 1`] = `
             id="test-dropdown"
           >
             <div
-              className="bx--list-box__menu bx--dropdown-list"
+              className="bx--list-box__menu"
               id="test-dropdown__menu"
               role="listbox"
             >
@@ -795,7 +795,7 @@ exports[`Dropdown should render with strings as items 1`] = `
             id="test-dropdown"
           >
             <div
-              className="bx--list-box__menu bx--dropdown-list"
+              className="bx--list-box__menu"
               id="test-dropdown__menu"
               role="listbox"
             >
