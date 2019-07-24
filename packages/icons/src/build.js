@@ -17,7 +17,7 @@ const { flatMapAsync } = require('./tools');
 const { parse } = require('./svgo');
 const optimize = require('./optimize');
 
-const SCALED_SIZES = [24, 20];
+const SCALED_SIZES = [24, 20, 16];
 const prettierOptions = {
   parser: 'babel',
   printWidth: 80,
