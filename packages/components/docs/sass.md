@@ -4871,7 +4871,6 @@ $inverse-01: map-get($carbon--theme, 'inverse-01');
   - [button [mixin]](#button-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -5533,7 +5532,6 @@ $highlight: map-get($carbon--theme, 'highlight');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -11968,7 +11966,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $highlight;
+    background: $date-picker-in-range-background-color;
     color: $text-01;
   }
 
@@ -11988,7 +11986,6 @@ Date picker styles
   .flatpickr-day.endRange {
     &:hover {
       @include focus-outline('outline');
-      outline-color: $interactive-01;
       background: $ui-01;
       color: $text-01;
     }
@@ -12003,7 +12000,7 @@ Date picker styles
 
   .#{$prefix}--date-picker__day.endRange.inRange.selected,
   .flatpickr-day.endRange.inRange.selected {
-    color: $inverse-01;
+    color: $text-04;
     background: $interactive-01;
   }
 
@@ -12114,9 +12111,7 @@ Date picker styles
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
-  - [highlight [variable]](#highlight-variable)
   - [text-04 [variable]](#text-04-variable)
-  - [inverse-01 [variable]](#inverse-01-variable)
 
 ## dropdown
 
