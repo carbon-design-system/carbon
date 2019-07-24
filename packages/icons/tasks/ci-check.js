@@ -125,7 +125,8 @@ async function check() {
 
   if (miscategorizedOrMissingIcons.length > 0) {
     throw new Error(
-      `The following icons are missing or have been miscategorized:\n` +
+      `The following icons are included in categories but do not exist in ` +
+        `the icon source folder:\n` +
         JSON.stringify(miscategorizedOrMissingIcons, null, 2)
     );
   }
