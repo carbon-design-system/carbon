@@ -17,8 +17,8 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
       placeholder="Placeholder text" data-toggle-password-visibility>
     <button type="button"
-      class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
-      aria-label="Show password">
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
       {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
       {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
     </button>
@@ -40,8 +40,8 @@
       class="{{prefix}}--text-input {{prefix}}--text-input--invalid{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
       placeholder="Placeholder text" data-toggle-password-visibility>
     <button type="button"
-      class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
-      aria-label="Show password">
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
       {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
       {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
     </button>
@@ -67,8 +67,8 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
       placeholder="Placeholder text" data-toggle-password-visibility>
     <button type="button"
-      class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
-      aria-label="Show password">
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
       {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
       {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
     </button>
@@ -92,8 +92,8 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
       placeholder="Placeholder text" data-toggle-password-visibility>
     <button type="button"
-      class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
-      aria-label="Show password">
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
       {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
       {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
     </button>
@@ -117,10 +117,11 @@
       class="{{prefix}}--text-input{{#if light}} {{prefix}}--text-input--light{{/if}}{{#if password}} {{prefix}}--password-input{{/if}}"
       placeholder="Placeholder text" data-toggle-password-visibility disabled>
     <button type="button"
-      class="{{prefix}}--text-input--password__visibility {{prefix}}--tooltip__trigger {{prefix}}--tooltip--icon__bottom"
-      aria-label="Show password">
+      class="{{prefix}}--text-input--password__visibility__toggle {{@root.prefix}}--tooltip__trigger {{@root.prefix}}--tooltip--a11y {{@root.prefix}}--tooltip--bottom {{@root.prefix}}--tooltip--align-center">
+      <span class="{{@root.prefix}}--assistive-text">Show password</span>
       {{ carbon-icon 'ViewOff16' class=(add prefix '--icon--visibility-off') hidden="true" }}
       {{ carbon-icon 'View16' class=(add prefix '--icon--visibility-on') }}
+    </button>
     </button>
     {{/unless}}
   </div>
