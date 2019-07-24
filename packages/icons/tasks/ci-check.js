@@ -110,14 +110,14 @@ async function check() {
     );
   }
 
-  const index = icons.map(icon => icon.basename);
+  const index = new Set(icons.map(icon => icon.basename));
   const miscategorizedOrMissingIcons = [];
 
   const members = [];
   for (const category of categories) {
     for (const subcategory of category.subcategories) {
       for (const member of subcategory.members) {
-        if (index.indexOf(member) === -1) {
+        if (!index.has(member)) {
           miscategorizedOrMissingIcons.push(member);
         }
         members.push(member);
