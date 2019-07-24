@@ -57,8 +57,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @if (length($deprecations--reasons) > 0) {
   $deprecations--message: '';
   @each $reason in $deprecations--reasons {
-    $deprecations--message: '#{$deprecations--message}
-REASON: #{$reason}';
+    $deprecations--message: '#{$deprecations--message} REASON: #{$reason}';
   }
 
   @warn $deprecations--message;
@@ -102,6 +101,7 @@ REASON: #{$reason}';
 
 :root.demo--theme--g10 .demo--container,
 :root.demo--theme--g10 .component-example__live,
+:root.demo--theme--g10 .bx--date-picker__calendar.open,
 :root.demo--theme--g10 .bx--tooltip,
 :root.demo--theme--g10 .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--g10);
@@ -109,6 +109,7 @@ REASON: #{$reason}';
 
 :root.demo--theme--g90 .demo--container,
 :root.demo--theme--g90 .component-example__live,
+:root.demo--theme--g90 .bx--date-picker__calendar.open,
 :root.demo--theme--g90 .bx--tooltip,
 :root.demo--theme--g90 .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--g90);
@@ -116,6 +117,7 @@ REASON: #{$reason}';
 
 :root.demo--theme--g100 .demo--container,
 :root.demo--theme--g100 .component-example__live,
+:root.demo--theme--g100 .bx--date-picker__calendar.open,
 :root.demo--theme--g100 .bx--tooltip,
 :root.demo--theme--g100 .bx--overflow-menu-options {
   @include carbon--theme--custom-properties($carbon--theme--g100);
