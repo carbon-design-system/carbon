@@ -21,7 +21,7 @@ const { prefix } = settings;
 const ListBoxMenu = ({ children, id, ...rest }) => (
   <div
     id={`${id}__menu`}
-    className={`${prefix}--list-box__menu ${prefix}--dropdown-list`}
+    className={`${prefix}--list-box__menu`}
     role="listbox"
     {...rest}>
     {children}

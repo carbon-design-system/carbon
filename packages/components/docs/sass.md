@@ -13438,9 +13438,17 @@ List box styles
     right: 0;
     width: $list-box-width;
     background-color: $ui-01;
-    max-height: rem(140px);
-    overflow-y: auto;
+    // max-height: rem(140px);
+    max-height: 0;
+    overflow: hidden auto;
     z-index: z('dropdown');
+  }
+
+  // expanded state of the menu
+  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    @include layer('overlay');
+    max-height: 15rem;
+    transition: max-height $duration--fast-02 motion(entrance, productive);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
