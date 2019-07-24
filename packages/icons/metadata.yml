@@ -25,6 +25,7 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
   - name: app-switcher
     friendly_name: App switcher
     usage: This is a description for usage
@@ -51,6 +52,7 @@ icons:
       - 9 square
     sizes:
       - 16
+      - 32
   - name: arrow
     friendly_name: Arrow
     usage: This is a description for usage
@@ -110,27 +112,27 @@ icons:
         usage: This is a description for usage
         sizes:
           - 32
-        aliases:
-          - cursor
-          - text
-          - expansion
   - name: arrows
     friendly_name: Arrows
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Actions
+        subcategory: Operations
     aliases:
       - direction
       - point
     sizes:
       - 16
+      - 32
     variants:
-      - name: arrows--horizontal
-        friendly_name: Arrows horizontal
-        usage: This is a description for usage
-        sizes:
-          - 32
       - name: arrows--vertical
         friendly_name: Arrows vertical
+        usage: This is a description for usage
+        sizes:
+          - 16
+          - 32
+      - name: arrows--horizontal
+        friendly_name: Arrows horizontal
         usage: This is a description for usage
         sizes:
           - 32
@@ -173,7 +175,9 @@ icons:
   - name: awake
     friendly_name: Awake
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Actions
+        subcategory: Toggle
     aliases:
       - sun
       - active
@@ -181,15 +185,19 @@ icons:
       - bright
     sizes:
       - 16
+      - 32
   - name: back-to-top
     friendly_name: Back to top
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Actions
+        subcategory: Navigation
     aliases:
       - up
       - scroll up
     sizes:
       - 16
+      - 32
   - name: calendar
     friendly_name: Calendar
     usage: This is a description for usage
@@ -243,11 +251,13 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: caret--sort--up
         friendly_name: Caret sort up
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: caret--sort
         friendly_name: Caret sort
         usage: This is a description for usage
@@ -336,6 +346,7 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: chevron--right
         friendly_name: Chevron right
         usage: This is a description for usage
@@ -348,11 +359,13 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: chevron--sort--up
         friendly_name: Chevron sort up
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: chevron--sort
         friendly_name: Chevron sort
         usage: This is a description for usage
@@ -387,11 +400,13 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: close--outline
         friendly_name: Close outline
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
   - name: code
     friendly_name: Code
     usage: This is a description for usage
@@ -431,7 +446,9 @@ icons:
   - name: delete
     friendly_name: Delete
     usage: This is a description for usage
-    categories: []
+    categories:
+      - name: Actions
+        subcategory: Operations
     aliases:
       - trash can
       - remove
@@ -439,6 +456,7 @@ icons:
       - edit
     sizes:
       - 16
+      - 32
   - name: document
     friendly_name: Document
     usage: This is a description for usage
@@ -576,6 +594,7 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
   - name: export
     friendly_name: Export
     usage: This is a description for usage
@@ -765,6 +784,29 @@ icons:
     sizes:
       - 16
       - 32
+  - name: light
+    friendly_name: Light
+    usage: This is a description for usage
+    categories:
+      - name: Actions
+        subcategory: Toggle
+    aliases:
+      - bright
+      - sun
+      - sunny
+      - lightbulb
+      - glow
+      - luminous
+      - lamp
+    sizes:
+      - 16
+      - 32
+    variants:
+      - name: light--filled
+        friendly_name: Light filled
+        usage: This is a description for usage
+        sizes:
+          - 32
   - name: list
     friendly_name: List
     usage: This is a description for usage
@@ -889,6 +931,7 @@ icons:
         usage: This is a description for usage
         sizes:
           - 16
+          - 32
       - name: misuse--alt
         friendly_name: Misuse alt
         usage: This is a description for usage
@@ -4523,28 +4566,6 @@ icons:
           - 32
       - name: letter--Zz
         friendly_name: Letter zz
-        usage: This is a description for usage
-        sizes:
-          - 32
-  - name: light
-    friendly_name: Light
-    usage: This is a description for usage
-    categories:
-      - name: Actions
-        subcategory: Toggle
-    aliases:
-      - bright
-      - sun
-      - sunny
-      - lightbulb
-      - glow
-      - luminous
-      - lamp
-    sizes:
-      - 32
-    variants:
-      - name: light--filled
-        friendly_name: Light filled
         usage: This is a description for usage
         sizes:
           - 32
