@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import warning from 'warning';
 import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
@@ -224,8 +225,16 @@ class Tooltip extends mixin(
           if (focusableNode) {
             focusableNode.focus();
           } else {
-            this.tooltip.element.setAttribute('tabindex', '0');
             this.tooltip.element.focus();
+            const tooltipTabindex = this.tooltip.element.getAttribute(
+              'tabindex'
+            );
+            if (__DEV__ && [null, '-1'].includes(tooltipTabindex)) {
+              warning(
+                tooltipTabindex,
+                'Tooltips without interactive elements must include tabindex="0" on the tooltip element.'
+              );
+            }
           }
 
           const hasFocusin =
