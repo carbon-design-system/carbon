@@ -63,6 +63,7 @@ categories:
           - cut
           - draw
           - edit
+          - edit--off
           - erase
           - eyedropper
           - image
@@ -72,11 +73,11 @@ categories:
           - list--numbered
           - list--checked
           - no-image
-          - non-editable
           - opacity
           - paint-brush
           - quotes
           - save
+          - spell-check
           - spray-paint
           - text--align--center
           - text--align--left
@@ -97,7 +98,6 @@ categories:
           - text--scale
           - text--selection
           - text--small-caps
-          - text--spell-check
           - text--strikethrough
           - text--subscript
           - text--superscript
@@ -137,7 +137,6 @@ categories:
           - draggable
           - home
           - menu
-          - overflow-menu
           - overflow-menu--horizontal
           - overflow-menu--vertical
           - page--first
@@ -238,8 +237,8 @@ categories:
           - favorite--filled
           - flash
           - flash--filled
-          - flash--filled--off
           - flash--off
+          - flash--off--filled
           - grid
           - light
           - light--filled
@@ -551,7 +550,6 @@ categories:
           - document--subtract
           - document--tasks
           - download
-          - dropdown-list
           - DVR
           - export
           - folder
@@ -568,6 +566,7 @@ categories:
           - ISO--outline
           - JPG
           - JSON
+          - list--dropdown
           - model
           - model--reference
           - MOV
@@ -585,7 +584,6 @@ categories:
           - popup
           - RAW
           - scale
-          - SML
           - SQL
           - SVG
           - table-of-contents
@@ -706,13 +704,13 @@ categories:
           - hotel
           - location
           - map
+          - plane
           - restaurant
           - restaurant--fine
           - service-desk
           - shuttle
           - taxi
           - train
-          - travel
           - van
       - name: Weather
         members:
@@ -754,7 +752,7 @@ categories:
           - cloud--download
           - cloud--upload
           - code
-          - connection--signal
+          - connection-signal
           - debug
           - development
           - devices
@@ -803,5 +801,5 @@ categories:
           - ruler
           - ruler--alt
           - scalpel
-          - toolbox
+          - tool-box
           - tools
