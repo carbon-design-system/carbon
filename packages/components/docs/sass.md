@@ -17442,9 +17442,15 @@ Text input styles
       fill: $support-01;
     }
 
+    // TODO: deprecate this style block
     .#{$prefix}--text-input--password__visibility {
       @include tooltip--trigger('icon', 'bottom');
       @include tooltip--placement('icon', 'bottom', 'center');
+    }
+
+    .#{$prefix}--text-input--password__visibility,
+    // TODO: remove selector above
+    .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
       position: absolute;
       height: rem(16px);
       width: rem(16px);
@@ -17472,13 +17478,20 @@ Text input styles
     }
 
     .#{$prefix}--text-input--invalid
-      + .#{$prefix}--text-input--password__visibility {
+      + .#{$prefix}--text-input--password__visibility,
+    // TODO: remove selector above
+    .#{$prefix}--text-input--invalid
+      + .#{$prefix}--text-input--password__visibility__toggle {
       right: rem(40px);
     }
   }
 
   .#{$prefix}--text-input:disabled
     + .#{$prefix}--text-input--password__visibility
+    svg,
+  // TODO: remove selector above
+  .#{$prefix}--text-input:disabled
+    + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     opacity: 0.5;
     cursor: not-allowed;
@@ -17511,7 +17524,9 @@ Text input styles
     @include focus-outline('invalid');
     box-shadow: none;
 
-    .#{$prefix}--text-input--password__visibility {
+    .#{$prefix}--text-input--password__visibility,
+    // TODO: remove selector above
+    .#{$prefix}--text-input--password__visibility__toggle {
       right: rem(40px);
     }
   }
