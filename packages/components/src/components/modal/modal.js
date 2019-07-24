@@ -145,12 +145,13 @@ class Modal extends mixin(
         this.options.classBody,
         false
       );
-      if (this.options.selectorFocusOnClose || this.previouslyFocusedNode)
+      if (this.options.selectorFocusOnClose || this.previouslyFocusedNode) {
         (
           this.element.ownerDocument.querySelector(
             this.options.selectorFocusOnClose
           ) || this.previouslyFocusedNode
         ).focus();
+      }
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
       this.element.ownerDocument.body.classList.toggle(
