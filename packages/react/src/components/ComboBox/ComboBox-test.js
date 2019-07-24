@@ -51,6 +51,9 @@ describe('ComboBox', () => {
   it('should display the menu of items when a user clicks on the input', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     findInputNode(wrapper).simulate('click');
+    expect(wrapper.find(`.${prefix}--list-box`).prop('className')).toEqual(
+      expect.stringContaining(`${prefix}--list-box--expanded`)
+    );
 
     assertMenuOpen(wrapper, mockProps);
   });
@@ -136,11 +139,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
       openMenu(wrapper);
-      // expect(findMenuNode(wrapper).length).toBe(0);o
-      // expect(findMenuNode(wrapper).prop('className')).toBe('')
-      // expect(findMenuNode(wrapper).prop('className')).not.toEqual(
-      //   expect.stringContaining('is-open')
-      // );
+      expect(
+        wrapper.find(`.${prefix}--list-box`).prop('className')
+      ).not.toEqual(expect.stringContaining(`${prefix}--list-box--expanded`));
       expect(
         findMenuNode(wrapper)
           .prop('className')
