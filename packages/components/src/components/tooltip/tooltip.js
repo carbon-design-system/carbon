@@ -179,6 +179,7 @@ class Tooltip extends mixin(
         classShown: this.options.classShown,
         offset: this.options.objMenuOffset,
       });
+      this.tooltip.handleBlur = this._handleBlur;
       this._hookOn(tooltip);
       this.children.push(this.tooltip);
     }
@@ -252,7 +253,6 @@ class Tooltip extends mixin(
           this.element.focus();
         }
 
-        // @question Do I need to pass any parameters to callback?
         if (typeof callback === 'function') callback();
       }
     );
@@ -351,19 +351,12 @@ class Tooltip extends mixin(
   }
 
   /**
-   * Handles `focus` event to navigate sequentially in the DOM.
+   * Handles `blur` from tooltip
    * @param {Event} evt The event.
    * @private
    */
-  _handleFocusin = evt => {
-    if (
-      this.tooltip.element.classList.contains(this.options.classShown) &&
-      !this.tooltip.element.contains(evt.target)
-    ) {
-      // @question It's never getting in this function but the tooltip is hiding when it's suppose to
-      //  The issue is that since it's not calling Tooltip.changeState the attributes are not getting updated properly
-      this.changeState('hidden', evt);
-    }
+  _handleBlur = evt => {
+    this.changeState('hidden', evt);
   };
 
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
