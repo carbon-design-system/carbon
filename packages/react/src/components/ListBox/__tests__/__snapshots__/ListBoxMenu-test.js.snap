@@ -5,7 +5,7 @@ exports[`ListBoxMenu should render 1`] = `
   id="test-listbox"
 >
   <div
-    className="bx--list-box__menu bx--dropdown-list"
+    className="bx--list-box__menu"
     id="test-listbox__menu"
     role="listbox"
   >
