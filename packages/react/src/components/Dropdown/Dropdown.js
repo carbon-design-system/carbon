@@ -171,13 +171,12 @@ export default class Dropdown extends React.Component {
       downshiftProps,
     } = this.props;
     const inline = type === 'inline';
-    const className = () =>
-      cx(containerClassName, {
-        [`${prefix}--dropdown--invalid`]: invalid,
-        [`${prefix}--dropdown--inline`]: inline,
-        [`${prefix}--dropdown--disabled`]: disabled,
-        [`${prefix}--dropdown--light`]: light,
-      });
+    const className = cx(containerClassName, {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+    });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
@@ -228,7 +227,7 @@ export default class Dropdown extends React.Component {
             <ListBox
               id={id}
               type={type}
-              className={className()}
+              className={className}
               disabled={disabled}
               isOpen={isOpen}
               invalid={invalid}
