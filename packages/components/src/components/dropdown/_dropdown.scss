@@ -153,13 +153,15 @@
 
   .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
     .#{$prefix}--dropdown-item {
-    @include hidden;
+    visibility: hidden;
   }
 
   .#{$prefix}--dropdown-item {
-    transition: opacity $duration--fast-01 motion(standard, productive),
+    transition: visibility $duration--fast-01 motion(standard, productive),
+      opacity $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
+    visibility: inherit;
 
     &:hover {
       background-color: $hover-ui;
