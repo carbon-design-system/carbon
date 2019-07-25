@@ -22,6 +22,23 @@ module.exports = {
         For more regular use case, e.g. giving the user more text information about something,
         use definition tooltip or icon tooltip.
       `,
+      context: {
+        noHeading: {
+          idSuffix: `example-${Math.random()
+            .toString(36)
+            .substr(2)}`,
+        },
+        heading: {
+          idSuffix: `example-${Math.random()
+            .toString(36)
+            .substr(2)}`,
+        },
+        label: {
+          idSuffix: `example-${Math.random()
+            .toString(36)
+            .substr(2)}`,
+        },
+      },
     },
     {
       name: 'definition',

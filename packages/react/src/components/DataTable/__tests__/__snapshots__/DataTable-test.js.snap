@@ -1804,7 +1804,7 @@ exports[`DataTable should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
-                  persistant={true}
+                  persistent={true}
                   translateWithId={[Function]}
                 />
                 <TableToolbarMenu
@@ -1984,7 +1984,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2029,7 +2028,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
                               />
                             </svg>
                           </Icon>
@@ -2058,7 +2057,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2103,7 +2101,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
                               />
                             </svg>
                           </Icon>
@@ -2132,7 +2130,6 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      small={false}
                       tabIndex={0}
                       type="button"
                     >
@@ -2177,7 +2174,7 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm3 7.5H8.5V11h-1V8.5H5v-1h2.5V5h1v2.5H11v1z"
+                                d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.2 7-7-3.2-7-7-7zm4 8H9v3H7V9H4V7h3V4h2v3h3v2z"
                               />
                             </svg>
                           </Icon>
@@ -2190,7 +2187,6 @@ exports[`DataTable should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
-                    small={false}
                     tabIndex={0}
                     type="button"
                   >
@@ -2226,11 +2222,11 @@ exports[`DataTable should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
-                persistant={true}
+                persistent={true}
                 translateWithId={[Function]}
               >
                 <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistant"
+                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -2240,6 +2236,7 @@ exports[`DataTable should render 1`] = `
                   <Search
                     aria-hidden={true}
                     className="bx--search-maginfier"
+                    closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
@@ -2307,14 +2304,17 @@ exports[`DataTable should render 1`] = `
                         value=""
                       />
                       <button
+                        aria-label="Clear search input"
                         className="bx--search-close bx--search-close--hidden"
                         onClick={[Function]}
                         type="button"
                       >
                         <ForwardRef(Close16)
+                          aria-label="Clear search input"
                           role="img"
                         >
                           <Icon
+                            aria-label="Clear search input"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             role="img"
@@ -2323,7 +2323,7 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-label="Clear search input"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"

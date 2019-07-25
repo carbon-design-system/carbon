@@ -23,18 +23,17 @@ const ListBoxSelection = ({
   selectionCount,
   translateWithId: t,
 }) => {
-  const className = cx(
-    `${prefix}--tag--filter`,
-    `${prefix}--list-box__selection`,
-    {
-      [`${prefix}--list-box__selection--multi`]: selectionCount,
-    }
-  );
+  const className = cx(`${prefix}--list-box__selection`, {
+    [`${prefix}--tag--filter`]: selectionCount,
+    [`${prefix}--list-box__selection--multi`]: selectionCount,
+  });
   const handleOnClick = event => {
     event.stopPropagation();
     clearSelection(event);
   };
   const handleOnKeyDown = event => {
+    event.stopPropagation();
+
     // When a user hits ENTER, we'll clear the selection
     if (event.keyCode === 13) {
       clearSelection(event);

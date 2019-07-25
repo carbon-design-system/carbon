@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectSkeleton from '../Select/Select.Skeleton';
@@ -39,7 +39,7 @@ describe('Select', () => {
       });
 
       it('renders the down arrow icon', () => {
-        expect(selectContainer.find(ChevronDownGlyph).length).toEqual(1);
+        expect(selectContainer.find(ChevronDown16).length).toEqual(1);
       });
 
       it('has the expected classes', () => {
@@ -62,9 +62,7 @@ describe('Select', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const description = wrapper.find(ChevronDownGlyph).props()[
-          'aria-label'
-        ];
+        const description = wrapper.find(ChevronDown16).props()['aria-label'];
         const matches = wrapper.props().iconDescription === description;
         expect(matches).toEqual(true);
       });

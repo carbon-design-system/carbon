@@ -63,6 +63,7 @@ categories:
           - cut
           - draw
           - edit
+          - edit--off
           - erase
           - eyedropper
           - image
@@ -70,13 +71,13 @@ categories:
           - link
           - list--bulleted
           - list--numbered
-          - list—checked
+          - list--checked
           - no-image
-          - non-editable
           - opacity
           - paint-brush
           - quotes
           - save
+          - spell-check
           - spray-paint
           - text--align--center
           - text--align--left
@@ -97,7 +98,6 @@ categories:
           - text--scale
           - text--selection
           - text--small-caps
-          - text--spell-check
           - text--strikethrough
           - text--subscript
           - text--superscript
@@ -110,7 +110,9 @@ categories:
         members:
           - add
           - add--alt
-          - switcher
+          - add--filled
+          - apps
+          - app-switcher
           - arrow--down
           - arrow--down-left
           - arrow--down-right
@@ -119,6 +121,7 @@ categories:
           - arrow--up
           - arrow--up-left
           - arrow--up-right
+          - back-to-top
           - caret--down
           - caret--left
           - caret--right
@@ -128,35 +131,46 @@ categories:
           - chevron--right
           - chevron--up
           - close
+          - close--filled
+          - close--outline
           - down-to-bottom
           - draggable
           - home
           - menu
-          - overflow-menu
           - overflow-menu--horizontal
           - overflow-menu--vertical
           - page--first
           - page--last
           - subtract
           - subtract--alt
+          - switcher
+          - up-to-top
           - zoom--in
           - zoom--out
       - name: Operations
         members:
           - add-comment
+          - arrows
           - arrows--horizontal
           - arrows--vertical
           - bookmark
           - branch
           - caret--sort
+          - caret--sort--down
+          - caret--sort--up
           - chat
+          - chevron--mini
           - chevron--sort
+          - chevron--sort--down
+          - chevron--sort--up
           - circle-dash
           - compare
           - connect
+          - delete
           - deploy-rules
           - drag--horizontal
           - drag--vertical
+          - edit-filter
           - fade
           - filter
           - filter--edit
@@ -172,6 +186,7 @@ categories:
           - mac--shift
           - maximize
           - migrate
+          - migrate--alt
           - minimize
           - move
           - new-tab
@@ -211,20 +226,21 @@ categories:
         members:
           - asleep
           - asleep--filled
+          - awake
           - carousel--horizontal
           - carousel--vertical
           - checkbox
           - checkbox--checked
           - checkbox--checked--filled
           - checkbox--undeterminate
-          - checkbox--undeterminate—filled
+          - checkbox--undeterminate--filled
           - column
           - favorite
           - favorite--filled
           - flash
           - flash--filled
-          - flash--filled--off
           - flash--off
+          - flash--off--filled
           - grid
           - light
           - light--filled
@@ -264,6 +280,7 @@ categories:
           - view--filled
           - view--mode-1
           - view--mode-2
+          - view--off
           - view--off--filled
   - name: Brand
     subcategories:
@@ -271,9 +288,10 @@ categories:
         members:
           - bee
           - carbon
-          - EDT-loop
+          - edt-loop
           - ibm-cloud
           - ibm-security
+          - watson
           - watson--machine-learning
       - name: Social
         members:
@@ -294,7 +312,7 @@ categories:
           - logo--twitter
           - logo--xing
           - logo--youtube
-          - logo—stumbleupon
+          - logo--stumbleupon
   - name: Enterprise
     subcategories:
       - name: Commerce
@@ -309,16 +327,17 @@ categories:
           - receipt
           - shopping--bag
           - shopping--cart
+          - shopping--catalog
           - store
           - wallet
           - wireless-checkout
       - name: Health
         members:
-          - 3D-cursor
+          - 3D-Cursor
           - 3D-curve--auto-colon
           - 3D-curve--auto-vessels
           - 3D-curve--manual
-          - 3D-MPR-toggle
+          - 3D-MPR-Toggle
           - 3rd-party-connected
           - 3D-software
           - angle
@@ -332,13 +351,13 @@ categories:
           - circle-measurement
           - cobb-angle
           - cross-reference
-          - dicom-6000
-          - dicom-overlay
+          - dicom--6000
+          - dicom--overlay
           - exam-mode
           - fusion-blender
           - hanging-protocol
           - health-cross
-          - ICA-3D
+          - iCA-3D
           - image--medical
           - launch-study--1
           - launch-study--2
@@ -391,9 +410,13 @@ categories:
           - operation
           - operation--gauge
           - operation--if
+          - research--bloch-sphere
+          - research--hinton-plot
+          - research--matrix
           - S
           - S--alt
           - T
+          - T--alt
           - U1
           - U2
           - U3
@@ -484,6 +507,10 @@ categories:
           - flow
           - flow--data
           - flow--stream
+          - network--1
+          - network--2
+          - network--3
+          - network--4
           - parent-child
           - presentation-file
           - query-queue
@@ -532,7 +559,6 @@ categories:
           - document--subtract
           - document--tasks
           - download
-          - dropdown-list
           - DVR
           - export
           - folder
@@ -549,6 +575,7 @@ categories:
           - ISO--outline
           - JPG
           - JSON
+          - list--dropdown
           - model
           - model--reference
           - MOV
@@ -566,7 +593,6 @@ categories:
           - popup
           - RAW
           - scale
-          - SML
           - SQL
           - SVG
           - table-of-contents
@@ -580,22 +606,35 @@ categories:
           - WMV
           - workspace
           - XLS
+          - XML
           - ZIP
       - name: Status
         members:
           - checkmark
           - checkmark--filled
+          - checkmark--outline
           - error
           - error--filled
+          - error--outline
           - help
           - help--filled
           - information
           - information--filled
           - misuse
+          - misuse--alt
+          - misuse--outline
+          - undefined
+          - undefined--filled
+          - unknown
+          - unknown--filled
           - warning
           - warning--alt
-          - warning--alt-filled
+          - warning--alt--filled
+          - warning--alt-inverted
+          - warning--alt-inverted--filled
           - warning--filled
+          - warning-square
+          - warning-square--filled
   - name: Person
     subcategories:
       - name: Senses
@@ -684,13 +723,13 @@ categories:
           - hotel
           - location
           - map
+          - plane
           - restaurant
           - restaurant--fine
           - service-desk
           - shuttle
           - taxi
           - train
-          - travel
           - van
       - name: Weather
         members:
@@ -713,6 +752,7 @@ categories:
           - asset
           - at
           - audio-console
+          - augmented-reality
           - battery--charging
           - battery--empty
           - battery--full
@@ -726,13 +766,14 @@ categories:
           - building--insights-2
           - building--insights-3
           - calculator
+          - calculator--check
           - camera
           - camera--action
           - chip
           - cloud--download
           - cloud--upload
           - code
-          - connection--signal
+          - connection-signal
           - debug
           - development
           - devices
@@ -781,5 +822,5 @@ categories:
           - ruler
           - ruler--alt
           - scalpel
-          - toolbox
+          - tool-box
           - tools

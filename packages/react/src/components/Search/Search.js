@@ -41,6 +41,11 @@ export default class Search extends Component {
     labelText: PropTypes.node.isRequired,
 
     /**
+     * Specify light version or default version of this control
+     */
+    light: PropTypes.bool,
+
+    /**
      * Specify a custom `id` for the input
      */
     id: PropTypes.string,
@@ -65,6 +70,7 @@ export default class Search extends Component {
     type: 'text',
     small: false,
     placeHolderText: '',
+    closeButtonLabelText: 'Clear search input',
     onChange: () => {},
   };
 
@@ -120,6 +126,7 @@ export default class Search extends Component {
       labelText,
       closeButtonLabelText,
       small,
+      light,
       ...other
     } = this.props;
 
@@ -129,6 +136,7 @@ export default class Search extends Component {
       [`${prefix}--search`]: true,
       [`${prefix}--search--xl`]: !small,
       [`${prefix}--search--sm`]: small,
+      [`${prefix}--search--light`]: light,
       [className]: className,
     });
 
