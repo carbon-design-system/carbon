@@ -12255,6 +12255,11 @@ Dropdown styles
     overflow: hidden auto;
   }
 
+  .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
+    .#{$prefix}--dropdown-item {
+    @include hidden;
+  }
+
   .#{$prefix}--dropdown-item {
     transition: opacity $duration--fast-01 motion(standard, productive), background-color
         $duration--fast-01 motion(standard, productive);
@@ -15507,7 +15512,6 @@ Progress indicator styles
     position: relative;
     display: inline-flex;
     flex-direction: row;
-    flex: 1;
     min-width: 7rem;
     width: rem(128px);
     overflow: visible;
