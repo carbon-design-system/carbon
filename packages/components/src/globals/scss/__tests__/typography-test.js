@@ -19,7 +19,7 @@ const tests = useDartSass => {
   const { createSassRenderer, convert } = sassUtil;
   const variables = ['base-font-size'];
 
-  const render = createSassRenderer(__dirname);
+  const render = createSassRenderer(__dirname).renderer;
 
   describe('_typography.scss', () => {
     describe.each(variables)('$%s', name => {

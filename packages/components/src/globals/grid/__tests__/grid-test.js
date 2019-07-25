@@ -28,7 +28,7 @@ $css--use-layer: false;
 $css--reset: false;
 $css--plex: false;
 `
-  );
+  ).renderer;
 
   describe('_grid.scss', () => {
     it('should generate grid code when the grid feature flag is on', async () => {

@@ -45,7 +45,7 @@ $css--plex: false;
         expect.stringContaining('@font-face')
       );
       expect(result.css.toString()).toEqual(
-        expect.stringContaining(`font-family: 'IBM Helvetica'`)
+        expect.stringMatching(/font-family: ["']IBM Helvetica["']/)
       );
     });
 
@@ -63,10 +63,10 @@ $css--plex: true;
           expect.stringContaining('@font-face')
         );
         expect(result.css.toString()).toEqual(
-          expect.stringContaining(`font-family: 'IBM Plex Mono'`)
+          expect.stringMatching(/font-family: ["']IBM Plex Mono["']/)
         );
         expect(result.css.toString()).toEqual(
-          expect.stringContaining(`font-family: 'IBM Plex Sans'`)
+          expect.stringMatching(/font-family: ["']IBM Plex Sans["']/)
         );
       });
     });

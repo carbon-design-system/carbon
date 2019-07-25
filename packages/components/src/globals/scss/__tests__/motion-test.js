@@ -26,7 +26,7 @@ const tests = useDartSass => {
     'transition--expansion',
   ];
 
-  const render = createSassRenderer(__dirname);
+  const render = createSassRenderer(__dirname).renderer;
 
   describe('motion', () => {
     describe.each(variables)('$%s', name => {

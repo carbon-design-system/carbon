@@ -117,7 +117,7 @@ const tests = useDartSass => {
     it('should allow custom overrides of tokens', async () => {
       const testColor = '#000000';
       const { calls } = await render(`
-$brand-01: ${testColor} !global;
+$brand-01: ${testColor};
 @import '../theme';
 $c: test($brand-01);
 `);
@@ -128,7 +128,7 @@ $c: test($brand-01);
     it('should allow custom overrides of tokens in v10', async () => {
       const testColor = '#000000';
       const { calls } = await render(`
-$interactive-01: ${testColor} !global;
+$interactive-01: ${testColor};
 @import '../theme';
 $c: test($interactive-01);
 `);
@@ -141,7 +141,7 @@ $c: test($interactive-01);
       const { calls } = await render(`
 $carbon--theme: (
   interactive-01: ${testColor},
-) !global;
+);
 
 @import '../theme';
 
@@ -157,7 +157,7 @@ $c: test(map-get($carbon--theme, interactive-01));
       const { calls } = await render(`
 $carbon--theme: (
   interactive-01: ${testColor},
-) !global;
+);
 $carbon--inline--theme: (
   interactive-01: ${inlineColor},
 );

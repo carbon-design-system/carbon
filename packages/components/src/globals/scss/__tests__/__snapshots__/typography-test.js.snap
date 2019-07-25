@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_typography.scss $base-font-size should match export value 1`] = `"16px"`;
+
+exports[`_typography.scss $base-font-size should match export value 2`] = `"16px"`;
