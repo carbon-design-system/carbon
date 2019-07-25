@@ -110,6 +110,8 @@ categories:
         members:
           - add
           - add--alt
+          - add--filled
+          - apps
           - app-switcher
           - arrow--down
           - arrow--down-left
@@ -119,6 +121,7 @@ categories:
           - arrow--up
           - arrow--up-left
           - arrow--up-right
+          - back-to-top
           - caret--down
           - caret--left
           - caret--right
@@ -128,6 +131,8 @@ categories:
           - chevron--right
           - chevron--up
           - close
+          - close--filled
+          - close--outline
           - down-to-bottom
           - draggable
           - home
@@ -145,19 +150,27 @@ categories:
       - name: Operations
         members:
           - add-comment
+          - arrows
           - arrows--horizontal
           - arrows--vertical
           - bookmark
           - branch
           - caret--sort
+          - caret--sort--down
+          - caret--sort--up
           - chat
+          - chevron--mini
           - chevron--sort
+          - chevron--sort--down
+          - chevron--sort--up
           - circle-dash
           - compare
           - connect
+          - delete
           - deploy-rules
           - drag--horizontal
           - drag--vertical
+          - edit-filter
           - fade
           - filter
           - filter--edit
@@ -173,6 +186,7 @@ categories:
           - mac--shift
           - maximize
           - migrate
+          - migrate--alt
           - minimize
           - move
           - new-tab
@@ -212,6 +226,7 @@ categories:
         members:
           - asleep
           - asleep--filled
+          - awake
           - carousel--horizontal
           - carousel--vertical
           - checkbox
@@ -395,6 +410,9 @@ categories:
           - operation
           - operation--gauge
           - operation--if
+          - research--bloch-sphere
+          - research--hinton-plot
+          - research--matrix
           - S
           - S--alt
           - T
@@ -489,6 +507,10 @@ categories:
           - flow
           - flow--data
           - flow--stream
+          - network--1
+          - network--2
+          - network--3
+          - network--4
           - parent-child
           - presentation-file
           - query-queue
@@ -590,17 +612,29 @@ categories:
         members:
           - checkmark
           - checkmark--filled
+          - checkmark--outline
           - error
           - error--filled
+          - error--outline
           - help
           - help--filled
           - information
           - information--filled
           - misuse
+          - misuse--alt
+          - misuse--outline
+          - undefined
+          - undefined--filled
+          - unknown
+          - unknown--filled
           - warning
           - warning--alt
           - warning--alt--filled
+          - warning--alt-inverted
+          - warning--alt-inverted--filled
           - warning--filled
+          - warning-square
+          - warning-square--filled
   - name: Person
     subcategories:
       - name: Senses
@@ -718,6 +752,7 @@ categories:
           - asset
           - at
           - audio-console
+          - augmented-reality
           - battery--charging
           - battery--empty
           - battery--full
@@ -731,6 +766,7 @@ categories:
           - building--insights-2
           - building--insights-3
           - calculator
+          - calculator--check
           - camera
           - camera--action
           - chip
