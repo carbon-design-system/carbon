@@ -8,19 +8,23 @@
 'use strict';
 
 const fs = require('fs');
-const { render, types } = require('node-sass');
+// TODO figure out how to use fibers with jest
+// const Fiber = require('fibers');
 const path = require('path');
 
-function sassAsync(options) {
-  return new Promise((resolve, reject) => {
-    render(options, (error, result) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(result);
+function createSassAsync(compiler) {
+  const { render } = compiler;
+  return function sassAsync(options) {
+    return new Promise((resolve, reject) => {
+      render(options, (error, result) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve(result);
+      });
     });
-  });
+  };
 }
 
 /**
@@ -57,65 +61,91 @@ function createImporter(cwd) {
   };
 }
 
-/**
- * Create a sass renderer for the given current working directory. Setting `cwd`
- * is useful so that we can resolve sass files relative to the test file.
- * @param {string} cwd
- * @param {string} initialData - optional string to prefix each render call
- * @returns {Function}
- */
-function createSassRenderer(cwd, initialData = '') {
-  const importer = createImporter(cwd);
-  return async data => {
-    const calls = [];
-    const warn = jest.fn(() => types.Null());
-    const mockError = jest.fn(() => types.Null());
-    const log = jest.fn(() => types.Null());
-    const debug = jest.fn(() => types.Null());
-    const output = {
-      debug,
-      error: mockError,
-      log,
-      warn,
-    };
-    let result;
-    let renderError;
+function createCreateSassRenderer(compiler) {
+  const { types } = compiler;
+  /**
+   * Create a sass renderer for the given current working directory. Setting `cwd`
+   * is useful so that we can resolve sass files relative to the test file.
+   * @param {string} cwd
+   * @param {string} initialData - optional string to prefix each render call
+   * @returns {Function}
+   */
+  return function createSassRenderer(cwd, initialData = '') {
+    const NULL = types.Null.NULL;
+    const importer = createImporter(cwd);
+    const renderer = async data => {
+      const calls = [];
+      const warn = jest.fn(() => NULL);
+      const mockError = jest.fn(() => NULL);
+      const log = jest.fn(() => NULL);
+      const debug = jest.fn(() => NULL);
+      const output = {
+        debug,
+        error: mockError,
+        log,
+        warn,
+      };
+      let result;
+      let renderError;
 
-    try {
-      result = await sassAsync({
+      const nodeSassFunctions = {
+        '@error': mockError,
+        '@debug': debug,
+        '@log': log,
+        '@warn': warn,
+      };
+
+      const compilerOptions = {
         data: [initialData, data].join('\n'),
         importer,
+        outputStyle: 'expanded',
         functions: {
-          '@error': mockError,
-          '@debug': debug,
-          '@log': log,
-          '@warn': warn,
-          test(...args) {
-            // Remove the `done()` argument at the end
-            calls.push(args.slice(0, -1));
-            return types.Null();
+          'test($args...)': args => {
+            let called = [];
+            for (let i = 0; i < args.getLength(); i++) {
+              called.push(args.getValue(i));
+            }
+            calls.push(called);
+            return NULL;
           },
         },
-      });
-    } catch (error) {
-      if (
-        !error.message.includes('Function breakpoint finished without @return')
-      ) {
-        throw error;
+      };
+
+      // check if we're running in dart sass and skip assigning to `@` functions
+      // the `@` function assignment is a undocumented feature in node-sass
+      if (!compiler.info.includes('dart')) {
+        Object.assign(compilerOptions.functions, nodeSassFunctions);
       }
-      renderError = error;
-    }
+
+      try {
+        result = await createSassAsync(compiler)(compilerOptions);
+      } catch (error) {
+        if (
+          !error.message.includes(
+            'Function breakpoint finished without @return'
+          )
+        ) {
+          throw error;
+        }
+        renderError = error;
+      }
+
+      return {
+        calls,
+        result,
+        error: renderError,
+        output,
+        getOutput(level = 'debug') {
+          return output[level].mock.calls
+            .map(call => createConvert(compiler)(call[0]))
+            .join('\n');
+        },
+      };
+    };
 
     return {
-      calls,
-      result,
-      error: renderError,
-      output,
-      getOutput(level = 'debug') {
-        return output[level].mock.calls
-          .map(call => convert(call[0]))
-          .join('\n');
-      },
+      renderer,
+      types,
     };
   };
 }
@@ -131,55 +161,71 @@ function toHexString(number) {
   return string;
 }
 
-function convert(value) {
-  if (value instanceof types.Boolean || value instanceof types.String) {
-    return value.getValue();
-  }
-
-  if (value instanceof types.Number) {
-    return `${value.getValue()}${value.getUnit()}`;
-  }
-
-  if (value instanceof types.Color) {
-    const hexcode = [value.getR(), value.getG(), value.getB()]
-      .map(toHexString)
-      .join('');
-    return `#${hexcode}`;
-  }
-
-  if (value instanceof types.List) {
-    const length = value.getLength();
-    const list = [];
-
-    for (let i = 0; i < length; i++) {
-      list.push(convert(value.getValue(i)));
+function createConvert(compiler) {
+  const { types } = compiler;
+  return function convert(value) {
+    if (value instanceof types.Boolean || value instanceof types.String) {
+      return value.getValue();
+    }
+    if (value instanceof types.Number) {
+      return `${value.getValue()}${value.getUnit()}`;
     }
 
-    return list;
-  }
-
-  if (value instanceof types.Map) {
-    const length = value.getLength();
-    const map = {};
-
-    for (let i = 0; i < length; i++) {
-      const key = value.getKey(i).getValue();
-      map[key] = convert(value.getValue(i));
+    if (value instanceof types.Color) {
+      const hexcode = [value.getR(), value.getG(), value.getB()]
+        .map(toHexString)
+        .join('');
+      return `#${hexcode}`;
     }
 
-    return map;
-  }
+    if (value instanceof types.List) {
+      const length = value.getLength();
+      const list = [];
 
-  if (value instanceof types.Null) {
-    return null;
-  }
+      for (let i = 0; i < length; i++) {
+        list.push(convert(value.getValue(i)));
+      }
 
-  throw new Error(`Unknown value type: ${value}`);
+      return list;
+    }
+
+    if (value instanceof types.Map) {
+      const length = value.getLength();
+      const map = {};
+
+      for (let i = 0; i < length; i++) {
+        const key = value.getKey(i).getValue();
+        map[key] = convert(value.getValue(i));
+      }
+
+      return map;
+    }
+
+    if (value instanceof types.Null) {
+      return null;
+    }
+
+    throw new Error(`Unknown value type: ${value}`);
+  };
+}
+
+/**
+ *
+ * @param compiler the sass compiler to create our test utils with
+ */
+function createSassUtil(compiler) {
+  return {
+    convert: createConvert(compiler),
+    createSassRenderer: createCreateSassRenderer(compiler),
+    sassAsync: createSassAsync(compiler),
+    createImporter,
+  };
 }
 
 module.exports = {
-  convert,
-  createSassRenderer,
+  createSassUtil,
+  createConvert,
+  createCreateSassRenderer,
+  createSassAsync,
   createImporter,
-  types,
 };

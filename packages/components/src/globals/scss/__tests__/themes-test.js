@@ -7,130 +7,138 @@
  * @jest-environment node
  */
 
-const { createSassRenderer, convert } = require('@carbon/test-utils/scss');
+const { createSassUtil } = require('@carbon/test-utils/scss');
 
-const classic = [
-  'brand-01',
-  'brand-02',
-  'brand-03',
+const tests = useDartSass => {
+  // eslint-disable-next-line global-require
+  let sassUtil = createSassUtil(require('node-sass'));
+  if (useDartSass) {
+    // eslint-disable-next-line global-require
+    sassUtil = createSassUtil(require('sass'));
+  }
+  const { createSassRenderer, convert } = sassUtil;
+  const classic = [
+    'brand-01',
+    'brand-02',
+    'brand-03',
 
-  'inverse-01',
-  'inverse-02',
+    'inverse-01',
+    'inverse-02',
 
-  'ui-01',
-  'ui-02',
-  'ui-03',
-  'ui-04',
-  'ui-05',
+    'ui-01',
+    'ui-02',
+    'ui-03',
+    'ui-04',
+    'ui-05',
 
-  'text-01',
-  'text-02',
-  'text-03',
+    'text-01',
+    'text-02',
+    'text-03',
 
-  'field-01',
-  'field-02',
+    'field-01',
+    'field-02',
 
-  'support-01',
-  'support-02',
-  'support-03',
-  'support-04',
+    'support-01',
+    'support-02',
+    'support-03',
+    'support-04',
 
-  'hover-primary',
-  'hover-primary-text',
-  'hover-danger',
-  'hover-secondary',
-  'hover-row',
+    'hover-primary',
+    'hover-primary-text',
+    'hover-danger',
+    'hover-secondary',
+    'hover-row',
 
-  // Global
-  'input-border',
-  'input-label-weight',
-  'focus',
+    // Global
+    'input-border',
+    'input-label-weight',
+    'focus',
 
-  // Button
-  'button-font-weight',
-  'button-font-size',
-  'button-border-radius',
-  'button-height',
-  'button-padding',
-  'button-padding-sm',
-  'button-border-width',
-  'button-outline-width',
+    // Button
+    'button-font-weight',
+    'button-font-size',
+    'button-border-radius',
+    'button-height',
+    'button-padding',
+    'button-padding-sm',
+    'button-border-width',
+    'button-outline-width',
 
-  // Accordion (Reverse)
-  'accordion-flex-direction',
-  'accordion-justify-content',
-  'accordion-arrow-margin',
-  'accordion-title-margin',
-  'accordion-content-padding',
+    // Accordion (Reverse)
+    'accordion-flex-direction',
+    'accordion-justify-content',
+    'accordion-arrow-margin',
+    'accordion-title-margin',
+    'accordion-content-padding',
 
-  // Checkbox
-  'checkbox-border-width',
+    // Checkbox
+    'checkbox-border-width',
 
-  // Code Snippet
-  'snippet-background-color',
-  'snippet-border-color',
+    // Code Snippet
+    'snippet-background-color',
+    'snippet-border-color',
 
-  // Content Switcher
-  'content-switcher-border-radius',
-  'content-switcher-option-border',
+    // Content Switcher
+    'content-switcher-border-radius',
+    'content-switcher-option-border',
 
-  // Data Table
-  'data-table-heading-transform',
-  'data-table-heading-border-bottom',
-  'data-table-row-height',
+    // Data Table
+    'data-table-heading-transform',
+    'data-table-heading-border-bottom',
+    'data-table-row-height',
 
-  // Modal
-  'modal-border-top',
-  'modal-footer-background-color',
+    // Modal
+    'modal-border-top',
+    'modal-footer-background-color',
 
-  // Progress Indicator
-  'progress-indicator-bar-width',
-  'progress-indicator-stroke-width',
-  'progress-indicator-line-offset',
+    // Progress Indicator
+    'progress-indicator-bar-width',
+    'progress-indicator-stroke-width',
+    'progress-indicator-line-offset',
 
-  // Radio Button
-  'radio-border-width',
+    // Radio Button
+    'radio-border-width',
 
-  // Structured Theme Variables
-  'structured-list-padding',
-  'structured-list-text-transform',
+    // Structured Theme Variables
+    'structured-list-padding',
+    'structured-list-text-transform',
 
-  // Skeleton Loading
-  'skeleton',
-];
+    // Skeleton Loading
+    'skeleton',
+  ];
 
-const render = createSassRenderer(__dirname);
+  const render = createSassRenderer(__dirname, '', useDartSass).renderer;
 
-describe('_theme.scss', () => {
-  it('should allow custom overrides of tokens', async () => {
-    const testColor = '#000000';
-    const { calls } = await render(`
+  let compiler = ' in node-sass';
+  if (useDartSass) {
+    compiler = ' in dart-sass';
+  }
+  describe(`_theme.scss in ${compiler}`, () => {
+    it('should allow custom overrides of tokens', async () => {
+      const testColor = '#000000';
+      const { calls } = await render(`
 $brand-01: ${testColor} !global;
-
 @import '../theme';
-
 $c: test($brand-01);
 `);
 
-    expect(convert(calls[0][0])).toEqual(testColor);
-  });
+      expect(convert(calls[0][0])).toEqual(testColor);
+    });
 
-  it('should allow custom overrides of tokens in v10', async () => {
-    const testColor = '#000000';
-    const { calls } = await render(`
+    it('should allow custom overrides of tokens in v10', async () => {
+      const testColor = '#000000';
+      const { calls } = await render(`
 $interactive-01: ${testColor} !global;
-
 @import '../theme';
-
 $c: test($interactive-01);
 `);
 
-    expect(convert(calls[0][0])).toEqual(testColor);
-  });
+      expect(convert(calls[0][0])).toEqual(testColor);
+    });
 
-  it('should allow custom theme overrides', async () => {
-    const testColor = '#000000';
-    const { calls } = await render(`
+    it('should allow custom theme overrides', async () => {
+      const testColor = '#000000';
+      const { calls } = await render(`
 $carbon--theme: (
   interactive-01: ${testColor},
 ) !global;
@@ -140,13 +148,13 @@ $carbon--theme: (
 $c: test(map-get($carbon--theme, interactive-01));
 `);
 
-    expect(convert(calls[0][0])).toBe(testColor);
-  });
+      expect(convert(calls[0][0])).toBe(testColor);
+    });
 
-  it('should allow inline theming', async () => {
-    const testColor = '#000000';
-    const inlineColor = '#ffffff';
-    const { calls } = await render(`
+    it('should allow inline theming', async () => {
+      const testColor = '#000000';
+      const inlineColor = '#ffffff';
+      const { calls } = await render(`
 $carbon--theme: (
   interactive-01: ${testColor},
 ) !global;
@@ -174,19 +182,23 @@ $c: test(map-get($carbon--theme, interactive-01));
 @include my-selector();
 `);
 
-    expect(convert(calls[0][0])).toBe(testColor);
-    expect(convert(calls[1][0])).toBe(testColor);
-    expect(convert(calls[2][0])).toBe(inlineColor);
-    expect(convert(calls[3][0])).toBe(testColor);
-  });
+      expect(convert(calls[0][0])).toBe(testColor);
+      expect(convert(calls[1][0])).toBe(testColor);
+      expect(convert(calls[2][0])).toBe(inlineColor);
+      expect(convert(calls[3][0])).toBe(testColor);
+    });
 
-  it.each(classic)('$%s should be exported', async name => {
-    const { calls } = await render(`
+    it.each(classic)('$%s should be exported', async name => {
+      const { calls } = await render(`
 @import '../theme';
 
 $c: test(global-variable-exists(${name}));
 `);
-    // Check that global-variable-exists returned true
-    expect(convert(calls[0][0])).toBe(true);
+      // Check that global-variable-exists returned true
+      expect(convert(calls[0][0])).toBe(true);
+    });
   });
-});
+};
+
+tests(false);
+tests(true);
