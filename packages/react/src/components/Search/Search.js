@@ -31,7 +31,9 @@ export default class Search extends Component {
     small: PropTypes.bool,
 
     /**
-     * Provide an optional placeholder text for the Search
+     * Provide an optional placeholder text for the Search.
+     * Note: if the label and placeholder differ,
+     * VoiceOver on Mac will read both
      */
     placeHolderText: PropTypes.string,
 
@@ -148,16 +150,9 @@ export default class Search extends Component {
     const CloseIconX = !small ? Close20 : Close16;
 
     return (
-      <div
-        className={searchClasses}
-        role="search"
-        aria-labelledby={`${id}-label`}>
-        <Search16
-          className={`${prefix}--search-magnifier`}
-          aria-label={labelText}
-          role="img"
-        />
-        <label id={`${id}-label`} htmlFor={id} className={`${prefix}--label`}>
+      <div className={searchClasses}>
+        <Search16 className={`${prefix}--search-magnifier`} role="img" />
+        <label htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
         <input
