@@ -80,6 +80,12 @@ const getMenuOffset = (menuBody, menuDirection) => {
   return undefined;
 };
 
+// @questions
+// -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
+// -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
+// -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
+//      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
+//      for keyboard users do we still want the debounce?
 class Tooltip extends mixin(
   createComponent,
   initComponentByEvent,
@@ -160,6 +166,73 @@ class Tooltip extends mixin(
 
   /**
    * Changes the shown/hidden state.
+   * @private
+   * @param {string} state The new state.
+   * @param {object} detail The detail data to be included in the event that will be fired.
+   * @param {Function} callback Callback called when change in state completes.
+   */
+  _changeState(state, detail, callback) {
+    const isHidden = state !== 'shown';
+    this.tooltip.element.setAttribute('aria-hidden', isHidden.toString());
+    this.element.setAttribute('aria-expanded', (!isHidden).toString());
+
+    if (this._handleFocusinListener) {
+      this._handleFocusinListener = this.unmanage(
+        this._handleFocusinListener
+      ).release();
+    }
+
+    if (this._handleClickListener) {
+      this._handleClickListener = this.unmanage(
+        this._handleClickListener
+      ).release();
+    }
+
+    if (this._handleKeydownListener) {
+      this._handleKeydownListener = this.unmanage(
+        this._handleKeydownListener
+      ).release();
+    }
+
+    if (state === 'shown') {
+      this._hookCloseActions(this.element);
+      const focusableNode = this.tooltip.element.querySelector(
+        settings.selectorTabbable
+      );
+      if (focusableNode) {
+        focusableNode.focus();
+      } else {
+        this.tooltip.element.focus();
+        const tooltipTabindex = this.tooltip.element.getAttribute('tabindex');
+        if (__DEV__) {
+          warning(
+            !tooltipTabindex || tooltipTabindex === '-1',
+            'Tooltips without interactive elements must include tabindex="0" on the tooltip element.'
+          );
+        }
+      }
+
+      const hasFocusin = 'onfocusin' in this.element.ownerDocument.defaultView;
+      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      this._handleFocusinListener = this.manage(
+        on(
+          this.element.ownerDocument,
+          focusinEventName,
+          this._handleFocusin,
+          !hasFocusin
+        )
+      );
+    } else {
+      this.element.focus();
+    }
+
+    if (typeof callback === 'function') {
+      callback();
+    }
+  }
+
+  /**
+   * Changes the shown/hidden state.
    * @param {string} state The new state.
    * @param {object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
@@ -189,72 +262,7 @@ class Tooltip extends mixin(
     this.tooltip.changeState(
       state,
       Object.assign(detail, { delegatorNode: this.element }),
-      () => {
-        // @questions
-        // -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
-        // -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
-        // -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
-        //      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
-        //      for keyboard users do we still want the debounce?
-        const isHidden = state !== 'shown';
-        this.tooltip.element.setAttribute('aria-hidden', isHidden.toString());
-        this.element.setAttribute('aria-expanded', (!isHidden).toString());
-
-        if (this._handleFocusinListener) {
-          this._handleFocusinListener = this.unmanage(
-            this._handleFocusinListener
-          ).release();
-        }
-
-        if (this._handleClickListener) {
-          this._handleClickListener = this.unmanage(
-            this._handleClickListener
-          ).release();
-        }
-
-        if (this._handleKeydownListener) {
-          this._handleKeydownListener = this.unmanage(
-            this._handleKeydownListener
-          ).release();
-        }
-
-        if (state === 'shown') {
-          this._hookCloseActions(this.element);
-          const focusableNode = this.tooltip.element.querySelector(
-            settings.selectorTabbable
-          );
-          if (focusableNode) {
-            focusableNode.focus();
-          } else {
-            this.tooltip.element.focus();
-            const tooltipTabindex = this.tooltip.element.getAttribute(
-              'tabindex'
-            );
-            if (__DEV__) {
-              warning(
-                !tooltipTabindex || tooltipTabindex === '-1',
-                'Tooltips without interactive elements must include tabindex="0" on the tooltip element.'
-              );
-            }
-          }
-
-          const hasFocusin =
-            'onfocusin' in this.element.ownerDocument.defaultView;
-          const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-          this._handleFocusinListener = this.manage(
-            on(
-              this.element.ownerDocument,
-              focusinEventName,
-              this._handleFocusin,
-              !hasFocusin
-            )
-          );
-        } else {
-          this.element.focus();
-        }
-
-        if (typeof callback === 'function') callback();
-      }
+      callback
     );
   }
 
