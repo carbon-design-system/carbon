@@ -26,16 +26,10 @@
   "scripts": {
     "build": "yarn clean && node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn test-ssr",
     "clean": "rimraf es lib umd storybook-static",
-    "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate",
     "prepublish": "yarn build",
-    "semantic-release": "semantic-release",
     "start": "yarn storybook",
-    "storybook": "start-storybook -p 9000",
-    "test": "jest",
-    "test-ssr": "yarn build && node ssr-tests/*.js"
+    "storybook": "start-storybook -p 9000"
   },
   "peerDependencies": {
     "carbon-components": "10.3.1",
