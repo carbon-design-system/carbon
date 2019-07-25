@@ -15507,7 +15507,6 @@ Progress indicator styles
     position: relative;
     display: inline-flex;
     flex-direction: row;
-    flex: 1;
     min-width: 7rem;
     width: rem(128px);
     overflow: visible;
