@@ -230,9 +230,9 @@ class Tooltip extends mixin(
             const tooltipTabindex = this.tooltip.element.getAttribute(
               'tabindex'
             );
-            if (__DEV__ && [null, '-1'].includes(tooltipTabindex)) {
+            if (__DEV__) {
               warning(
-                tooltipTabindex,
+                !tooltipTabindex || tooltipTabindex === '-1',
                 'Tooltips without interactive elements must include tabindex="0" on the tooltip element.'
               );
             }
