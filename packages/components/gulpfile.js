@@ -10,6 +10,12 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const deduper = require('postcss-discard-duplicates');
+// load dart-sass
+const dartSass = require('sass');
+// required for dart-sass - async builds are significantly slower without this package
+const Fiber = require('fibers');
+// require node-sass so we can explicitly set `gulp-sass`s `.compiler` property
+const nodeSass = require('node-sass');
 
 // Javascript deps
 const babel = require('gulp-babel');
@@ -98,6 +104,7 @@ const cloptions = commander
   )
   .option('-r, --rollup', 'Uses Rollup for dev env')
   .option('-s, --sass-source', 'Force building Sass source')
+  .option('-ds, --use-dart-sass', 'Uses dart-sass instead of node-sass')
   .parse(process.argv);
 
 // Axe A11y Test
@@ -139,8 +146,19 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-const { useBreakingChanges, useCustomProperties } = cloptions;
+const { useBreakingChanges, useCustomProperties, useDartSass } = cloptions;
 let { useExperimentalFeatures } = cloptions;
+
+let sassDefaultOptions = {};
+
+if (useDartSass) {
+  sass.compiler = dartSass;
+  sassDefaultOptions = {
+    fiber: Fiber,
+  };
+} else {
+  sass.compiler = nodeSass;
+}
 
 gulp.task('scripts:dev:feature-flags', () => {
   const replaceTable = {};
@@ -336,9 +354,11 @@ const buildStyles = prod => {
       .src('src/globals/scss/styles.scss')
       .pipe(sourcemaps.init())
       .pipe(
-        sass({
-          outputStyle: prod ? 'compressed' : 'expanded',
-        }).on('error', sass.logError)
+        sass(
+          Object.assign({}, sassDefaultOptions, {
+            outputStyle: prod ? 'compressed' : 'expanded',
+          })
+        ).on('error', sass.logError)
       )
       .pipe(
         postcss([
@@ -395,10 +415,12 @@ gulp.task('sass:dev', () => {
       `)
       )
       .pipe(
-        sass({
-          includePaths: ['node_modules'],
-          outputStyle: 'expanded',
-        }).on('error', sass.logError)
+        sass(
+          Object.assign({}, sassDefaultOptions, {
+            includePaths: ['node_modules'],
+            outputStyle: 'expanded',
+          })
+        ).on('error', sass.logError)
       );
   if (useCustomProperties) {
     return merge(createStream(), createStream('custom-properties'))

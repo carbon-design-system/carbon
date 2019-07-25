@@ -130,7 +130,8 @@
     ],
     "moduleFileExtensions": [
       "js",
-      "json"
+      "json",
+      "node"
     ],
     "reporters": [
       "default",
