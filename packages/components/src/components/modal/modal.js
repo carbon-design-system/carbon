@@ -111,9 +111,8 @@ class Modal extends mixin(
         if (__DEV__) {
           warning(
             focusableItem,
-            `Modals need to contain a focusable element by either using \`${
-              this.options.selectorPrimaryFocus
-            }\` or settings.selectorTabbable.`
+            `Modals need to contain a focusable element by either using ` +
+              `\`${this.options.selectorPrimaryFocus}\` or settings.selectorTabbable.`
           );
         }
       }
