@@ -36,7 +36,8 @@ describe('Test text input', () => {
       expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-text-input]',
         selectorPasswordField: `.bx--text-input[data-toggle-password-visibility]`,
-        selectorPasswordVisibilityButton: `.bx--text-input--password__visibility`,
+        selectorPasswordVisibilityButton: `.bx--text-input--password__visibility__toggle`,
+        selectorPasswordVisibilityTooltip: `.bx--text-input--password__visibility__toggle > .bx--assistive-text`,
         passwordIsVisible: `bx--text-input--password-visible`,
         svgIconVisibilityOn: 'svg.bx--icon--visibility-on',
         svgIconVisibilityOff: 'svg.bx--icon--visibility-off',
@@ -61,7 +62,7 @@ describe('Test text input', () => {
       new TextInput(document.querySelector('[data-text-input]'));
       textInput = document.querySelector('[data-text-input]');
       passwordVisibilityButton = document.querySelector(
-        '.bx--text-input--password__visibility'
+        '.bx--text-input--password__visibility__toggle'
       );
     });
 

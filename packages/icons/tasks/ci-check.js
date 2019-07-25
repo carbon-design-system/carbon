@@ -110,15 +110,17 @@ async function check() {
     );
   }
 
-  const index = icons.map(icon => icon.basename);
+  const index = new Set(icons.map(icon => icon.basename));
   const miscategorizedOrMissingIcons = [];
 
+  const members = [];
   for (const category of categories) {
     for (const subcategory of category.subcategories) {
       for (const member of subcategory.members) {
-        if (index.indexOf(member) === -1) {
+        if (!index.has(member)) {
           miscategorizedOrMissingIcons.push(member);
         }
+        members.push(member);
       }
     }
   }
@@ -128,6 +130,21 @@ async function check() {
       `The following icons are included in categories but do not exist in ` +
         `the icon source folder:\n` +
         JSON.stringify(miscategorizedOrMissingIcons, null, 2)
+    );
+  }
+
+  const iconsWithoutCategory = [];
+  for (const name of index) {
+    if (members.indexOf(name) === -1) {
+      iconsWithoutCategory.push(name);
+    }
+  }
+
+  if (iconsWithoutCategory.length > 0) {
+    throw new Error(
+      `The following icons are included in source but do not exist in ` +
+        `categories.yml:\n` +
+        JSON.stringify(iconsWithoutCategory, null, 2)
     );
   }
 }

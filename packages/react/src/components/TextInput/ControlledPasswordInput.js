@@ -10,7 +10,6 @@ const { prefix } = settings;
 const ControlledPasswordInput = React.forwardRef(
   function ControlledPasswordInput(
     {
-      alt,
       labelText,
       className,
       id,
@@ -24,8 +23,8 @@ const ControlledPasswordInput = React.forwardRef(
       light,
       type = 'password',
       togglePasswordVisibility,
-      hidePasswordText = 'Hide',
-      showPasswordText = 'Show',
+      tooltipPosition = 'bottom',
+      tooltipAlignment = 'center',
       ...other
     },
     ref
@@ -81,6 +80,16 @@ const ControlledPasswordInput = React.forwardRef(
     ) : (
       <View16 className={`${prefix}--icon-visibility-on`} />
     );
+    const passwordVisibilityToggleClasses = classNames(
+      `${prefix}--text-input--password__visibility__toggle`,
+      `${prefix}--btn--icon-only`,
+      `${prefix}--tooltip__trigger`,
+      `${prefix}--tooltip--a11y`,
+      {
+        [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
+        [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
+      }
+    );
     const input = (
       <>
         <input
@@ -89,14 +98,11 @@ const ControlledPasswordInput = React.forwardRef(
         />
         <button
           type="button"
-          className={`${prefix}--text-input--password__visibility`}
-          aria-label={
-            alt ||
-            `${
-              passwordIsVisible ? hidePasswordText : showPasswordText
-            } password`
-          }
+          className={passwordVisibilityToggleClasses}
           onClick={togglePasswordVisibility}>
+          <span className={`${prefix}--assistive-text`}>
+            {`${passwordIsVisible ? 'Hide' : 'Show'} password`}
+          </span>
           {passwordVisibilityIcon}
         </button>
       </>
@@ -127,11 +133,6 @@ const ControlledPasswordInput = React.forwardRef(
 );
 
 ControlledPasswordInput.propTypes = {
-  /**
-   * Provide custom alt text for the password visibility toggle button
-   */
-  alt: PropTypes.string,
-
   /**
    * Provide a custom className that is applied directly to the underlying
    * <input> node
@@ -205,10 +206,21 @@ ControlledPasswordInput.propTypes = {
    * Specify light version or default version of this control
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 };
 
 ControlledPasswordInput.defaultProps = {
-  alt: '',
   className: '${prefix}--text__input',
   disabled: false,
   onChange: () => {},
