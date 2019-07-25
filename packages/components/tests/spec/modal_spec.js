@@ -67,7 +67,7 @@ describe('Test modal', function() {
     beforeAll(function() {
       container = document.createElement('div');
       container.innerHTML = ModalHtml;
-      // Reset primary focus eleemnt for testing
+      // Reset primary focus element for testing
       delete container.querySelector(
         '[data-modal-primary-focus]'
       ).dataset.modalPrimaryFocus;
@@ -130,13 +130,14 @@ describe('Test modal', function() {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('Should focus on modal upon showning', function() {
-      spyOn(modal.element, 'focus');
+    it('Should focus on a child of modal upon showing', function() {
+      const firstTabbable = modal.element.querySelector('button');
+      spyOn(firstTabbable, 'focus');
       modal.show();
       modal.element.dispatchEvent(
         new CustomEvent('transitionend', { bubbles: true })
       );
-      expect(modal.element.focus).toHaveBeenCalledTimes(1);
+      expect(firstTabbable.focus).toHaveBeenCalledTimes(1);
     });
 
     it('Should support specifying the primary focus element', function() {
