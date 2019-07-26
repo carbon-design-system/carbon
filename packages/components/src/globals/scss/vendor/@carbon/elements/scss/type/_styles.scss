@@ -690,18 +690,3 @@ $carbon--type-icon-scale: (
 @function carbon--type-icon-size($font-size) {
   @return map-get($carbon--type-icon-scale, $font-size);
 }
-
-@mixin carbon--theme-type($foo: $tokens) {
-  $tokens: map-merge(
-    $foo,
-    (
-      'body-long-01': $body-long-02,
-    )
-  ) !global;
-
-  @content;
-  // Reset to default theme after apply in content
-  @if $foo != $carbon--theme {
-    @include carbon--theme();
-  }
-}
