@@ -39,6 +39,7 @@ class Dropdown extends mixin(
    */
   constructor(element, options) {
     super(element, options);
+    this.triggerNode = this.element.querySelector(this.options.selectorTrigger);
 
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
@@ -92,9 +93,16 @@ class Dropdown extends mixin(
     }
 
     if (
-      ([13, 32, 40].indexOf(event.which) >= 0 &&
+      // User presses down arrow
+      (event.which === 40 &&
         !event.target.matches(this.options.selectorItem)) ||
+      // User presses space or enter and the trigger is not a button
+      (!this.triggerNode &&
+        [13, 32].indexOf(event.which) >= 0 &&
+        !event.target.matches(this.options.selectorItem)) ||
+      // User presses esc
       event.which === 27 ||
+      // User clicks
       event.type === 'click'
     ) {
       const isOpen = this.element.classList.contains(this.options.classOpen);
@@ -256,6 +264,7 @@ class Dropdown extends mixin(
     const { prefix } = settings;
     return {
       selectorInit: '[data-dropdown]',
+      selectorTrigger: `button.${prefix}--dropdown-text`,
       selectorText: `.${prefix}--dropdown-text`,
       selectorTextInner: `.${prefix}--dropdown-text__inner`,
       selectorItem: `.${prefix}--dropdown-link`,
