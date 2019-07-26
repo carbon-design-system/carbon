@@ -5,12 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import warning from 'warning';
 import mixin from '../../globals/js/misc/mixin';
+import settings from '../../globals/js/settings';
 import createComponent from '../../globals/js/mixins/create-component';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import handles from '../../globals/js/mixins/handles';
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
+import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the position of floating menu.
@@ -94,7 +98,8 @@ export const getFloatingPosition = ({
 class FloatingMenu extends mixin(
   createComponent,
   eventedShowHideState,
-  trackBlur
+  trackBlur,
+  handles
 ) {
   /**
    * Floating menu.
@@ -135,6 +140,35 @@ class FloatingMenu extends mixin(
         this.options.attribDirection,
         this.options.direction
       );
+    }
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', event => {
+        this._handleKeyPress(event);
+      })
+    );
+  }
+
+  /**
+   * Handles key press on document.
+   * @param {Event} event The triggering event.
+   * @private
+   */
+  _handleKeyPress(event) {
+    const key = event.which;
+    const { triggerNode, refNode } = this.options;
+    const isOfDialog = this.element.contains(event.target);
+
+    switch (key) {
+      // Esc
+      case 27:
+        this.changeState('hidden', getLaunchingDetails(event), () => {
+          if (isOfDialog) {
+            (triggerNode || refNode).focus();
+          }
+        });
+        break;
+      default:
+        break;
     }
   }
 
@@ -177,7 +211,7 @@ class FloatingMenu extends mixin(
 
     if (!refNode) {
       throw new Error(
-        'Cannot find the refernce node for positioning floating menu.'
+        'Cannot find the reference node for positioning floating menu.'
       );
     }
 
@@ -259,12 +293,20 @@ class FloatingMenu extends mixin(
    */
   _changeState(state, detail, callback) {
     const shown = state === 'shown';
-    const { refNode, classShown, classRefShown } = this.options;
+    const { refNode, classShown, classRefShown, triggerNode } = this.options;
     if (!refNode) {
       throw new TypeError(
-        'Cannot find the refernce node for changing the style.'
+        'Cannot find the reference node for changing the style.'
       );
     }
+
+    const isHidden = state !== 'shown';
+    this.element.setAttribute('aria-hidden', isHidden.toString());
+    (triggerNode || refNode).setAttribute(
+      'aria-expanded',
+      (!isHidden).toString()
+    );
+
     this.element.classList.toggle(classShown, shown);
     if (classRefShown) {
       refNode.classList.toggle(classRefShown, shown);
@@ -279,10 +321,29 @@ class FloatingMenu extends mixin(
       this._place();
       // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
       if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
-        (
-          this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element
-        ).focus();
+        const primaryFocusNode = this.element.querySelector(
+          this.options.selectorPrimaryFocus
+        );
+        const focusableNode = this.element.querySelector(
+          settings.selectorTabbable
+        );
+
+        if (primaryFocusNode) {
+          primaryFocusNode.focus();
+        } else if (focusableNode) {
+          focusableNode.focus();
+        } else {
+          this.element.focus();
+          const elementTabindex = this.element.getAttribute('tabindex');
+          if (__DEV__) {
+            // @question the demo that doesn't have interactive elements is throwing this warning
+            //    despite that i have tabindex="0" and the statement in the first parameter is "false"
+            warning(
+              !elementTabindex || elementTabindex === '-1',
+              'Floating Menus without interactive elements must include tabindex="0" on the floating element.'
+            );
+          }
+        }
       }
     }
     if (state === 'hidden' && this.hResize) {
