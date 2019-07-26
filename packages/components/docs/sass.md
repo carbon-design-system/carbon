@@ -12255,10 +12255,17 @@ Dropdown styles
     overflow: hidden auto;
   }
 
+  .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
+    .#{$prefix}--dropdown-item {
+    visibility: hidden;
+  }
+
   .#{$prefix}--dropdown-item {
-    transition: opacity $duration--fast-01 motion(standard, productive), background-color
-        $duration--fast-01 motion(standard, productive);
+    transition: visibility $duration--fast-01 motion(standard, productive), opacity
+        $duration--fast-01 motion(standard, productive),
+      background-color $duration--fast-01 motion(standard, productive);
     opacity: 0;
+    visibility: inherit;
 
     &:hover {
       background-color: $hover-ui;
@@ -12641,7 +12648,6 @@ Form styles
     vertical-align: baseline;
     margin-bottom: $carbon--spacing-03;
     line-height: rem(16px);
-    pointer-events: none;
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {

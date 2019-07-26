@@ -34,4 +34,5 @@ const settings = {
     iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true]
   `,
 };
+
 module.exports = settings;
