@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 -0.0003 28.9998 -0.0003 28.9998 28.9997 0 28.9997"></polygon>
+        <polygon id="path-3" points="0 0 58 0 58 57.9995 0 57.9995"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7" transform="translate(131.000000, 131.000000)">
+            <g id="Group-3" transform="translate(0.000000, 29.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M10.7998,-0.0003 L-0.0002,-0.0003 C-0.0002,16.0167 12.9838,28.9997 28.9998,28.9997 L28.9998,18.1997 C18.9648,18.1997 10.7998,10.0347 10.7998,-0.0003" id="Fill-1" fill="#CACACA" mask="url(#mask-2)"></path>
+            </g>
+            <g id="Group-6">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-5"></g>
+                <path d="M29,10.7995 C39.036,10.7995 47.2,18.9645 47.2,28.9995 C47.2,39.0345 39.036,47.1995 29,47.1995 L29,57.9995 C45.016,57.9995 58,45.0165 58,28.9995 C58,12.9845 45.016,-0.0005 29,-0.0005 C12.984,-0.0005 0,12.9845 0,28.9995 L10.8,28.9995 C10.8,18.9645 18.964,10.7995 29,10.7995" id="Fill-4" fill="#0062FF" mask="url(#mask-4)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

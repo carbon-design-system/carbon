@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="12" height="12" rx="2"></rect>
+        <polygon id="path-3" points="2.5 5.25 0 2.77 0.795 1.985 2.5 3.675 6.205 0 7 0.79"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Checkbox" transform="translate(44.000000, 108.000000)">
+            <g id="Group-5">
+                <g id="Group-2-Copy">
+                    <rect id="Rectangle-8-Copy-20" fill="#FFFFFF" opacity="0" x="0" y="0" width="192" height="104"></rect>
+                    <g id="check--box--unchecked-copy-17" transform="translate(16.000000, 5.000000)">
+                        <g id="Icon" transform="translate(2.000000, 2.000000)" fill="#565656" fill-rule="nonzero">
+                            <path d="M11,0 L1,0 C0.44771525,0 0,0.44771525 0,1 L0,11 C0,11.5522847 0.44771525,12 1,12 L11,12 C11.5522847,12 12,11.5522847 12,11 L12,1 C12,0.44771525 11.5522847,0 11,0 Z M1,11 L1,1 L11,1 L11,11 L1,11 Z" id="Shape"></path>
+                        </g>
+                        <g id="Transparent_Rectangle">
+                            <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                        </g>
+                    </g>
+                    <g id="check--box--unchecked-copy-21" transform="translate(16.000000, 31.000000)">
+                        <g id="Icon" transform="translate(2.000000, 2.000000)" fill="#565656" fill-rule="nonzero">
+                            <path d="M11,0 L1,0 C0.44771525,0 0,0.44771525 0,1 L0,11 C0,11.5522847 0.44771525,12 1,12 L11,12 C11.5522847,12 12,11.5522847 12,11 L12,1 C12,0.44771525 11.5522847,0 11,0 Z M1,11 L1,1 L11,1 L11,11 L1,11 Z" id="Shape"></path>
+                        </g>
+                        <g id="Transparent_Rectangle">
+                            <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                        </g>
+                    </g>
+                    <g id="check--box--unchecked-copy-24" transform="translate(16.000000, 58.000000)">
+                        <g id="Icon" transform="translate(2.000000, 2.000000)" fill="#565656" fill-rule="nonzero">
+                            <path d="M11,0 L1,0 C0.44771525,0 0,0.44771525 0,1 L0,11 C0,11.5522847 0.44771525,12 1,12 L11,12 C11.5522847,12 12,11.5522847 12,11 L12,1 C12,0.44771525 11.5522847,0 11,0 Z M1,11 L1,1 L11,1 L11,11 L1,11 Z" id="Shape"></path>
+                        </g>
+                        <g id="Transparent_Rectangle">
+                            <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                        </g>
+                    </g>
+                    <g id="check--box--unchecked-copy-29" transform="translate(16.000000, 84.000000)">
+                        <g id="Icon" transform="translate(2.000000, 2.000000)" fill="#565656" fill-rule="nonzero">
+                            <path d="M11,0 L1,0 C0.44771525,0 0,0.44771525 0,1 L0,11 C0,11.5522847 0.44771525,12 1,12 L11,12 C11.5522847,12 12,11.5522847 12,11 L12,1 C12,0.44771525 11.5522847,0 11,0 Z M1,11 L1,1 L11,1 L11,11 L1,11 Z" id="Shape"></path>
+                        </g>
+                        <g id="Transparent_Rectangle">
+                            <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g id="Group" transform="translate(16.000000, 31.000000)">
+                <rect id="Rectangle-2" fill="#FFFFFF" x="3" y="3" width="10" height="10"></rect>
+                <g id="icon/toggle/check-box/checked/filled/16">
+                    <g id="Group">
+                        <g id="checkbox--checked--filled" transform="translate(2.000000, 2.000000)">
+                            <g id="icon-color-2">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                                <g id="color/black" mask="url(#mask-2)" fill="#000000">
+                                    <g transform="translate(-2.000000, -2.000000)">
+                                        <rect x="0" y="0" width="16" height="16"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                            <g id="icon-color-1" transform="translate(2.500000, 3.500000)">
+                                <mask id="mask-4" fill="white">
+                                    <use xlink:href="#path-3"></use>
+                                </mask>
+                                <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-3"></use>
+                                <g id="color/white" mask="url(#mask-4)" fill="#FFFFFF">
+                                    <g transform="translate(-4.500000, -5.500000)">
+                                        <rect x="0" y="0" width="16" height="16"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+            </g>
+            <rect id="Rectangle-3-Copy-14" fill="#CACACA" x="40" y="7" width="123" height="12"></rect>
+            <rect id="Rectangle-3-Copy-15" fill="#CACACA" x="40" y="33" width="173" height="12"></rect>
+            <rect id="Rectangle-3-Copy-16" fill="#CACACA" x="40" y="59" width="123" height="12"></rect>
+            <rect id="Rectangle-3-Copy-17" fill="#CACACA" x="40" y="85" width="173" height="12"></rect>
+        </g>
+    </g>
+</svg>

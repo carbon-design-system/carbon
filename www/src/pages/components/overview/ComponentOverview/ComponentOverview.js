@@ -15,9 +15,9 @@ class ComponentOverview extends React.Component {
 
     let componentImg;
     try {
-      componentImg = require(`../../content/components/overview/images/${component}.svg`);
+      componentImg = require(`./images/${component}.svg`);
     } catch (e) {
-      componentImg = require('../../content/components/overview/images/NoImage.svg');
+      componentImg = require('./images/NoImage.svg');
     }
 
     return (
@@ -39,7 +39,7 @@ class ComponentOverview extends React.Component {
   };
 
   render() {
-    const componentList = require('../../data/components.json'); // eslint-disable-line
+    const componentList = require('../../../../data/components.json'); // eslint-disable-line
     return (
       <div className="bx--row">
         <div className="bx--col-lg-12 bx--offset-lg-4 bx--no-gutter">

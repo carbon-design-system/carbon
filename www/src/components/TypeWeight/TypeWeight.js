@@ -8,9 +8,9 @@ export default class typeWeight extends React.Component {
 
   render() {
     const { type } = this.props;
-    const typeWeight = require('../../content/guidelines/typography/_type-weight.md');
-    const typeWeightItalic = require('../../content/guidelines/typography/_type-weight-italic.md');
-    const typeTypes = require('../../content/guidelines/typography/_type-types.md');
+    const typeWeight = require('../../pages/guidelines/typography/_type-weight.md');
+    const typeWeightItalic = require('../../pages/guidelines/typography/_type-weight-italic.md');
+    const typeTypes = require('../../pages/guidelines/typography/_type-types.md');
 
     if (type === 'types') {
       return (

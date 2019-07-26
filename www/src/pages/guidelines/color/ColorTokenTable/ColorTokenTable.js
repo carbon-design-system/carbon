@@ -7,7 +7,7 @@ import {
   OverflowMenuItem,
 } from 'carbon-components-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard/lib/Component';
-import colorTokens from '../../data/guidelines/color-tokens';
+import colorTokens from './color-tokens';
 
 export default class ColorTokenTable extends React.Component {
   static propTypes = {};

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search, Loading } from 'carbon-components-react';
-import ClickableTile from '../ClickableTile/ClickableTile';
-import githubIcon from '../../../src/content/resources/images/github-icon.png';
+import ClickableTile from './ClickableTile';
+import githubIcon from '../../images/github-icon.png';
 
 const sizes = ['16', '20', '24', '32'];
 

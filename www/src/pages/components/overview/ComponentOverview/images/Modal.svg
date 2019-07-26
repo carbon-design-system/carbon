@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="216" height="122"></rect>
+        <filter x="-4.6%" y="-6.6%" width="109.3%" height="116.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.862745106   0 0 0 0 0.862745106   0 0 0 0 0.862745106  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="3.8244375 3.25 6.5 0.5744375 5.9255625 0 3.25 2.6755625 0.5744375 0 0 0.5744375 2.6755625 3.25 0 5.9255625 0.5744375 6.5 3.25 3.8244375 5.9255625 6.5 6.5 5.9255625"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="modal" transform="translate(52.000000, 99.000000)">
+            <g id="Rectangle" fill="black" fill-opacity="1">
+                <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+            </g>
+            <g id="color/gray/10" fill="#F3F3F3">
+                <rect x="0" y="0" width="216" height="122"></rect>
+            </g>
+            <rect id="Rectangle-Copy-138" fill="#D8D8D8" x="9" y="28" width="149" height="8"></rect>
+            <rect id="Rectangle-Copy-141" fill="#BEBEBE" x="9" y="9" width="64" height="8"></rect>
+            <rect id="Rectangle-Copy-140" fill="#D8D8D8" x="9" y="52" width="149" height="8"></rect>
+            <rect id="Rectangle-Copy-139" fill="#D8D8D8" x="9" y="40" width="123" height="8"></rect>
+            <g id="color/blue/60" transform="translate(108.000000, 90.000000)" fill="#0F6DFF">
+                <rect x="0" y="0" width="108" height="32"></rect>
+            </g>
+            <g id="color/gray/80" transform="translate(0.000000, 90.000000)" fill="#3D3D3D">
+                <rect x="0" y="0" width="108" height="32"></rect>
+            </g>
+            <g id="icon/navigation/close/20" transform="translate(193.000000, 11.000000)">
+                <g id="Group">
+                    <g id="close" transform="translate(3.250000, 3.250000)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                        <g id="color/black" mask="url(#mask-4)" fill="#000000">
+                            <g transform="translate(-3.250000, -3.250000)">
+                                <rect x="0" y="0" width="26" height="26"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="13" height="13"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

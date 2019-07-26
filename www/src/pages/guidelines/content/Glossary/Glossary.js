@@ -4,7 +4,7 @@ import GlossaryNav from '../GlossaryNav/GlossaryNav';
 
 class Glossary extends Component {
   render() {
-    const glossary = require('../../data/guidelines/glossary.js'); // eslint-disable-line
+    const glossary = require('../../../../data/guidelines/glossary'); // eslint-disable-line
     return (
       <div className="glossary">
         <GlossaryNav />

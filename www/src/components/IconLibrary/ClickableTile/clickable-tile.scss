@@ -1,0 +1,238 @@
+// Tile Article
+
+a.tile--article {
+  display: flex;
+  text-decoration: none;
+  color: $text-01;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  background: $carbon__white-0;
+  margin-bottom: $spacing-05;
+  width: 100%;
+}
+
+a.tile--article.tile--dark {
+  background: $carbon--gray-90;
+  color: $carbon--white-0;
+}
+
+a.tile--article.tile--dark:hover {
+  background: $carbon--gray-80;
+}
+
+.tile--article .tile__img {
+  margin: 0;
+  overflow: hidden;
+  border-bottom: none;
+}
+
+.tile__img span {
+  height: 100%;
+}
+
+.tile--article .tile__img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.tile--article .tile__info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: $spacing-05;
+  padding-right: 25%;
+
+  @include carbon--breakpoint('lg') {
+    padding-right: $spacing-05;
+  }
+
+  @include carbon--breakpoint('xlg') {
+    padding-right: 30%;
+  }
+}
+
+.tile--article .tile__info h5 {
+  text-decoration: none;
+  color: $text-01;
+  @include carbon--type-style('body-short-02');
+}
+
+.tile--article.tile--dark .tile__info h5 {
+  color: $carbon--white-0;
+}
+
+.tile--article .tile__caption p {
+  @include carbon--type-style('caption-01');
+  padding: 0;
+  max-width: 75%;
+}
+
+// Tile Resource
+
+.tile--resource {
+  // full bleed for tiles on mobile
+  @include carbon--breakpoint('sm') {
+    width: 100%;
+  }
+
+  @include carbon--breakpoint('md') {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.tile--resource--no-margin .tile--resource {
+  margin-bottom: 0;
+}
+
+.tile--resource a.bx--tile {
+  text-decoration: none;
+  color: $text-01;
+  padding: $spacing-05;
+  position: relative;
+  background: $carbon--white-0;
+  height: 100%;
+
+  &:hover {
+    background: $hover-ui;
+  }
+}
+
+.tile--resource.tile--dark a.bx--tile {
+  background: $carbon--gray-90;
+  color: $carbon--white-0;
+}
+
+.tile--resource.tile--dark a.bx--tile:hover {
+  background: $carbon--gray-80;
+}
+
+.tile--resource .tile__info {
+  width: 100%;
+
+  @include carbon--breakpoint('lg') {
+    width: 75%;
+  }
+}
+
+.tile--resource .tile__info h5 {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: $text-01;
+  margin: 0 0 $spacing-03 0;
+  padding: 0 15% 0 0;
+  @include carbon--type-style('body-short-01');
+
+  @include carbon--breakpoint('md') {
+    padding-right: 0;
+  }
+}
+
+.tile--resource .tile__info .tile__info-title-large {
+  @include carbon--type-style('productive-heading-03');
+  display: block;
+}
+
+.tile--resource.tile--dark .tile__info h5 {
+  color: $carbon--white-0;
+}
+
+.tile--resource .tile__description {
+  padding-bottom: 0;
+  color: $text-01;
+}
+
+.tile--dark .tile__description {
+  color: $carbon--white-0;
+}
+
+.tile--resource .tile__img {
+  width: 32px;
+  height: 32px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: absolute;
+  left: $spacing-05;
+  bottom: $spacing-05;
+
+  img {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.tile--resource .tile__link-icon {
+  position: absolute;
+  right: $spacing-05;
+  bottom: $spacing-05;
+  width: 20px;
+  height: 20px;
+
+  svg {
+    fill: $carbon--black-100;
+  }
+}
+
+.tile--dark .tile__link-icon {
+  svg {
+    fill: $carbon--gray-10;
+  }
+}
+
+// Grouped tiles
+.tile--group > div .tile--resource {
+  @include carbon--breakpoint('sm') {
+    border-bottom: 1px solid $carbon--gray-20;
+
+    &.tile--dark {
+      border-bottom-color: $carbon--black-100;
+    }
+  }
+
+  @include carbon--breakpoint('md') {
+    border: 1px solid transparent;
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+.tile--group > div:nth-child(2n + 2) {
+  @include carbon--breakpoint('md') {
+    .tile--resource {
+      border-left: 1px solid $carbon--gray-20;
+
+      &.tile--dark {
+        border-left-color: $carbon--black-100;
+      }
+    }
+  }
+}
+
+.tile--group > div:nth-child(n + 3) {
+  @include carbon--breakpoint('md') {
+    .tile--resource {
+      border-top: 1px solid $carbon--gray-20;
+
+      &.tile--dark {
+        border-top-color: $carbon--black-100;
+      }
+    }
+  }
+}
+
+.tile--group {
+  a.tile--article.tile--dark {
+    border-color: $carbon--black-100;
+  }
+}
+
+a.tile--article .tile__caption p {
+  color: $text-02;
+}
+
+a.tile--article.tile--dark .tile__caption p {
+  color: $carbon--gray-30;
+}

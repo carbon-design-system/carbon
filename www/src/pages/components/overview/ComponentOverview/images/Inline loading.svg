@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 -8.27586207e-05 7.99994483 -8.27586207e-05 7.99994483 7.99991724 0 7.99991724"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Inline-Loading" transform="translate(52.000000, 144.000000)">
+            <g id="Inline_loading" fill-rule="nonzero">
+                <g id="Group-11" fill="#F3F3F3">
+                    <rect id="Rectangle-Copy-41" x="0.5" y="0.5" width="215" height="31"></rect>
+                </g>
+                <rect id="Rectangle-3-Copy-9" fill="#D8D8D8" x="10" y="10" width="96" height="12"></rect>
+            </g>
+            <g id="loading-2-copy" transform="translate(184.000000, 8.000000)">
+                <g id="loading">
+                    <g id="Group-3" transform="translate(0.000000, 8.000000)">
+                        <g id="Fill-1-Clipped">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="path-1"></g>
+                            <path d="M2.97925517,-8.27586207e-05 L-5.51724138e-05,-8.27586207e-05 C-5.51724138e-05,4.4184 3.58173793,7.99991724 7.99994483,7.99991724 L7.99994483,5.0206069 C5.23166897,5.0206069 2.97925517,2.7681931 2.97925517,-8.27586207e-05" id="Fill-1" fill="#CACACA" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                        </g>
+                    </g>
+                    <g id="Group-6" fill="#0062FF" fill-rule="nonzero">
+                        <path d="M8,2.97917241 C10.7685517,2.97917241 13.0206897,5.23158621 13.0206897,7.99986207 C13.0206897,10.7681379 10.7685517,13.0205517 8,13.0205517 L8,15.9998621 C12.4182069,15.9998621 16,12.4183448 16,7.99986207 C16,3.58193103 12.4182069,-0.000137931034 8,-0.000137931034 C3.5817931,-0.000137931034 0,3.58193103 0,7.99986207 L2.97931034,7.99986207 C2.97931034,5.23158621 5.23144828,2.97917241 8,2.97917241" id="Fill-4"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
