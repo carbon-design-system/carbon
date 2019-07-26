@@ -45,6 +45,6 @@ $base-font-size: 16px !default;
 /// @param {Bool} $fluid [false] - Specify whether to include fluid styles
 /// @example @include type-style('body-short-01');
 /// @group global-typography
-@mixin type-style($name, $fluid: false) {
-  @include carbon--type-style($name, $fluid);
+@mixin type-style($name, $tokenOverrides: $tokens) {
+  @include carbon--type-style($name, $tokenOverrides);
 }

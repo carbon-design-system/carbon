@@ -158,6 +158,12 @@
   /// @group accordion
   $accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default !global;
 
+  /// Computed accordion header height after the header has been built
+  /// @type Value
+  /// @access public
+  /// @group accordion
+  $accordion-heading-height: $carbon--spacing-07 !default !global;
+
   /// @type Value
   /// @access public
   /// @group accordion

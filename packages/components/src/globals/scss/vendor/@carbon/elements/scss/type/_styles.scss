@@ -652,14 +652,15 @@ $tokens: (
 /// @group @carbon/type
 @mixin carbon--type-style(
   $name,
+  $tokenOverrides: $tokens,
   $fluid: false,
-  $breakpoints: $carbon--grid-breakpoints
+  $breakpoints: $carbon--grid-breakpoints,
 ) {
-  @if not map-has-key($tokens, $name) {
+  @if not map-has-key($tokenOverrides, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }
 
-  $token: map-get($tokens, $name);
+  $token: map-get($tokenOverrides, $name);
 
   // If $fluid is set to true and the token has breakpoints defined for fluid
   // styles, delegate to the fluid-type helper for the given token
@@ -669,5 +670,38 @@ $tokens: (
     // Otherwise, we just include all the property declarations directly on the
     // selector
     @include properties(map-remove($token, 'breakpoints'));
+  }
+}
+
+/// Type scole that maps font size to icon size
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$carbon--type-icon-scale: (
+  0.875rem: rem(16px),
+  1rem: rem(20px),
+);
+
+/// Translate font size to icon size
+/// @param {Number} $font-size - Font size in rems
+/// @return {Number} Icon size in rems
+/// @access public
+/// @group @carbon/type
+@function carbon--type-icon-size($font-size) {
+  @return map-get($carbon--type-icon-scale, $font-size);
+}
+
+@mixin carbon--theme-type($foo: $tokens) {
+  $tokens: map-merge(
+    $foo,
+    (
+      'body-long-01': $body-long-02,
+    )
+  ) !global;
+
+  @content;
+  // Reset to default theme after apply in content
+  @if $foo != $carbon--theme {
+    @include carbon--theme();
   }
 }
