@@ -2,7 +2,7 @@ version: 2
 jobs:
   system:
     docker:
-      - image: circleci/node:10.15-browsers
+      - image: circleci/node:10.16-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -24,6 +24,33 @@ jobs:
           command: |
             yarn ci-check
             yarn lerna run ci-check
+
+  macos:
+    macos:
+      xcode: "10.3.0"
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install OS dependencies
+          command: |
+            brew update
+            brew cask install sketch
+            brew install node@10.16.0
+      - run:
+          name: Install yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+            # Reference:
+            # https://circleci.com/docs/2.0/env-vars/#example-configuration-of-environment-variables
+            echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: yarn install --offline --frozen-lockfile
+      - run:
+          name: Build packages
+          command: yarn build
+
 
   deploy:
     docker:
@@ -141,6 +168,7 @@ workflows:
   main:
     jobs:
       - system
+      - macos
       - artifacts:
           requires:
             - system
