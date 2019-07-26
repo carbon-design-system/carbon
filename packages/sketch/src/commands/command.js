@@ -17,8 +17,13 @@ export function command(name, fn) {
   const start = Date.now();
 
   sketch.UI.message('Hi 👋 We are still working on this! 🚧');
-  fn();
-  sketch.UI.message('Done! 🎉');
+  try {
+    fn();
+    sketch.UI.message('Done! 🎉');
+  } catch (error) {
+    console.log(error);
+    sketch.UI.message('An error occured, please check the development logs');
+  }
 
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line no-console
