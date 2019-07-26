@@ -15,13 +15,21 @@ const yaml = require('js-yaml');
 
 const METADATA_PATH = path.resolve(__dirname, '../metadata.yml');
 const METADATA_OUTPUT = path.resolve(__dirname, '../metadata.json');
+const CATEGORIES_DEFINITION_PATH = path.resolve(__dirname, '../categories.yml');
 
 async function build() {
   const metadata = yaml.safeLoad(await fs.readFile(METADATA_PATH, 'utf8'));
+  const categories = yaml.safeLoad(
+    await fs.readFile(CATEGORIES_DEFINITION_PATH, 'utf8')
+  );
 
-  await fs.writeJson(METADATA_OUTPUT, metadata, {
-    spaces: 2,
-  });
+  await fs.writeJson(
+    METADATA_OUTPUT,
+    { ...metadata, ...categories },
+    {
+      spaces: 2,
+    }
+  );
 }
 
 build().catch(error => {

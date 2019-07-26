@@ -49,7 +49,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
     [`${prefix}--tooltip--a11y`]: hasIconOnly,
     [`${prefix}--tooltip--${tooltipPosition}`]: hasIconOnly && tooltipPosition,
-    [`${prefix}--tooltip--align-${tooltipPosition}`]:
+    [`${prefix}--tooltip--align-${tooltipAlignment}`]:
       hasIconOnly && tooltipAlignment,
   });
 
