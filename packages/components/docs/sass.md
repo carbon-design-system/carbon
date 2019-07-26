@@ -2729,6 +2729,7 @@ $carbon--spacing-08: carbon--mini-units(5);
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--spacing-09 [variable]
@@ -4726,6 +4727,7 @@ $icon-02: map-get($carbon--theme, 'icon-02');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -5143,7 +5145,6 @@ $hover-primary: map-get($carbon--theme, 'hover-primary');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅active-primary [variable]
@@ -5585,7 +5586,6 @@ $brand-01: map-get($carbon--theme, 'brand-01');
 - **Alias**: `interactive-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -17421,7 +17421,7 @@ Text input styles
   }
 
   .#{$prefix}--password-input {
-    padding-right: rem(40px);
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -17443,7 +17443,7 @@ Text input styles
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
-      right: rem(16px);
+      right: $carbon--spacing-05;
       fill: $support-01;
     }
 
@@ -17459,23 +17459,19 @@ Text input styles
       position: absolute;
       height: rem(16px);
       width: rem(16px);
-      right: rem(16px);
+      right: $carbon--spacing-05;
       padding: 0;
       border: 0;
       background: none;
       cursor: pointer;
 
       svg {
-        fill: $brand-01;
-
-        &:hover {
-          fill: $hover-primary;
-        }
+        fill: $icon-02;
       }
     }
 
     .#{$prefix}--text-input--invalid {
-      padding-right: rem(40px);
+      padding-right: $carbon--spacing-08;
     }
 
     .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
@@ -17487,8 +17483,12 @@ Text input styles
     // TODO: remove selector above
     .#{$prefix}--text-input--invalid
       + .#{$prefix}--text-input--password__visibility__toggle {
-      right: rem(40px);
+      right: $carbon--spacing-05;
     }
+  }
+
+  .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
+    right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input:disabled
@@ -17532,7 +17532,7 @@ Text input styles
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
-      right: rem(40px);
+      right: $carbon--spacing-08;
     }
   }
 }
@@ -17547,10 +17547,10 @@ Text input styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [brand-01 [variable]](#brand-01-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
