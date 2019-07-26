@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="33px" viewBox="0 0 29 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>favicon-2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1440" transform="translate(-763.000000, -1422.000000)" fill-rule="nonzero">
+            <g id="favicon-2x" transform="translate(762.376349, 1422.000000)">
+                <g id="Group-10" transform="translate(0.898899, 0.861708)">
+                    <polygon id="Shape" fill="#EFC100" points="6 6.4 17 0 28 6.4 28 19.2 17 26 6 19.2"></polygon>
+                    <path d="M11,8.4 L20,14 L20,24 L11,29.6 L2,24 L2,14 L11,8.4 L11,8.4 Z M11,6 L0,12.8 L0,25.2 L11,32 L22,25.2 L22,12.8 L11,6 L11,6 Z" id="Shape" fill="#1D3649"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

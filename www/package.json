@@ -1,0 +1,17 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gatsby develop",
+    "dev:clean": "gatsby clean && gatsby develop",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^2.13.41",
+    "gatsby-theme-carbon": "^1.6.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}

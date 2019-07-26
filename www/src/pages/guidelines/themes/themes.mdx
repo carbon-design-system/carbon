@@ -1,0 +1,764 @@
+---
+label: Themes are used to customize component styles to fit the specific aesthetic of a brand or product.
+title: Themes
+---
+
+### Themes are used to customize component styles to fit the specific aesthetic of a brand or product.
+
+<AnchorLinks>
+
+<AnchorLink>Theming basics</AnchorLink>
+<AnchorLink>Customizing a theme</AnchorLink>
+<AnchorLink>Tokens</AnchorLink>
+<AnchorLink>Theming applied</AnchorLink>
+
+</AnchorLinks>
+
+## Resources
+
+<Row className="tile--group">
+{/* <Column offsetLg="4" colMd="4" colLg="4" noGutterSm>
+  <ResourceCard
+    title="Theming sandbox"
+    href="http://themes.carbondesignsystem.com/"
+    type="resource">
+
+![](images/sandbox-icon.png)
+
+  </ResourceCard>
+</Column> */}
+<Column offsetLg="4" colMd="4" colLg="4"  noGutterSm>
+  <ResourceCard
+    title="Carbon themes package"
+    href="https://github.com/carbon-design-system/carbon/tree/master/packages/themes"
+    type="resource">
+
+![](images/github-icon.png)
+
+  </ResourceCard>
+</Column>
+</Row>
+
+<br />
+<br />
+
+## Theming basics
+
+Themes are used to modify existing components to fit a specific visual style. By using Carbon's tokens, developers can easily customize all of their components by changing a set of universal variables, eliminating the need to modify individual components.
+
+### Theme terms
+
+| Term    | Definition                                                                                                  |     |
+| ------- | ----------------------------------------------------------------------------------------------------------- | --- |
+| _Theme_ | The set of unique values assigned to the tokens of a Carbon interface                                       |     |
+| _Token_ | The code identifier for a unique role or set of roles. Tokens are universal and never change across themes. |     |
+| _Role_  | The systematic usage(s) of a token. Roles cannot be changed between themes.                                 |     |
+| _Value_ | The actual style (i.e. hex code) assigned to a token                                                        |     |
+
+### Default theme
+
+Carbon provides four themes as shown in the [color usage](/guidelines/color/usage) page. When `carbon-components` is downloaded and installed, the components are preset to use the default (white) theme.
+
+To use the gray 10, gray 90, or gray 100 theme as your default instead of white, set the `$carbon--theme` variable to one of the available theme maps (`$carbon--theme--g10`, `$carbon--theme--g90`, `$carbon--theme--g100`) and then include your normal components in your Sass build.
+
+```scss
+@import '@carbon/themes/scss/themes';
+
+// Use the gray 10 theme
+@include carbon--theme($carbon--theme--g10);
+
+// Use the gray 90 theme
+@include carbon--theme($carbon--theme--g90);
+
+// Use the gray 100 theme
+@include carbon--theme($carbon--theme--g100);
+
+// import Carbon styles here
+```
+
+## Customizing a theme
+
+The default theme acts as a starting point; from there designers and developers can define how their own components and styles deviate from the default. Altering one, some, or all of the default token values will result in a new theme. The developer then packages those new values into a new theme SCSS stylesheet which will replace the values of the default theme.
+
+#### 1. Create a theme mixin that effectively mimics this structure, but changes up hex values as needed:
+
+<br />
+
+```scss
+$carbon--theme--white: (
+  interactive-01: #0062ff,
+  interactive-02: #171717,
+  interactive-03: #0062ff,
+  interactive-04: #0062ff,
+  ui-background: #ffffff,
+  ui-01: #f3f3f3,
+  ui-02: #ffffff,
+  ui-03: #dcdcdc,
+  ui-04: #8c8c8c,
+  ui-05: #171717,
+  text-01: #171717,
+  text-02: #565656,
+  text-03: #8c8c8c,
+  text-04: #ffffff,
+  icon-01: #171717,
+  icon-02: #565656,
+  icon-03: #ffffff,
+  link-01: #0062ff,
+  field-01: #f3f3f3,
+  field-02: #ffffff,
+  inverse-01: #ffffff,
+  inverse-02: #3d3d3d,
+  support-01: #da1e28,
+  support-02: #24a148,
+  support-03: #fdd13a,
+  support-04: #054ada,
+  inverse-support-01: #fb4b53,
+  inverse-support-02: #3dbb61,
+  inverse-support-03: #fdd13a,
+  inverse-support-04: #408bfc,
+  overlay-01: rgba(23, 23, 23, 0.5),
+  focus: #0062ff,
+  hover-primary: #0353e9,
+  active-primary: #0530ad,
+  hover-primary-text: #054ada,
+  hover-secondary: #4c4c4c,
+  active-secondary: #6f6f6f,
+  hover-tertiary: #0353e9,
+  active-tertiary: #0530ad,
+  hover-ui: #e5e5e5,
+  active-ui: #bebebe,
+  selected-ui: #dcdcdc,
+  hover-selected-ui: #cacaca,
+  hover-danger: #ba1b23,
+  active-danger: #750e13,
+  hover-row: #e5e5e5,
+  visited-link: #8a3ffc,
+  disabled-01: #f3f3f3,
+  disabled-02: #bebebe,
+  disabled-03: #8c8c8c,
+  highlight: #c9deff,
+  skeleton-01: #e5e5e5,
+  skeleton-02: #bebebe,
+  brand-01: #0062ff,
+  brand-02: #171717,
+  brand-03: #0062ff,
+  active-01: #bebebe,
+  hover-field: #e5e5e5,
+) !default;
+```
+
+#### 2. Name the mixin (i.e., `my-theme`)
+
+#### 3. Include this in your SCSS, before importing components, etc.:
+
+`@include my-theme();`
+
+Alternatively, for relatively minor changes to an existing theme, a developer can make changes on a per-token basis. For example, after importing an existing Carbon theme, she could just set something like `$interactive-01: hotpink;`.
+
+## Tokens
+
+With tokens, the code only needs to be changed in one place to see the effect system-wide. Tokens are used across all components and help keep global patterns and styles consistent.
+
+All tokens come pre-baked into the Carbon component source code. Tokens are denoted by the prefix `$` (e.g. `$ui-01`). Tokens can also be nested within other tokens. For example, `$interactive-01` calls the IBM Design Language color palette token `$ibm-color__blue--60` for its value in the default theme.
+
+There are several token categories:
+
+- Color
+- Spacing
+- Typography
+- Global
+
+### Color
+
+Each theme is assigned 52 universal color variables, which are determined by [common roles and usage](/guidelines/color/usage). This allows for uniform color application across themes while maintaining full styling flexibility.
+
+```scss
+//// _theme-tokens.scss
+// White theme tokens
+$interactive-01: #0062ff !default;
+$interactive-02: #171717 !default;
+$interactive-03: #0062ff !default;
+$interactive-04: #0062ff !default;
+$ui-background: #ffffff !default;
+$ui-01: #f3f3f3 !default;
+$ui-02: #ffffff !default;
+$ui-03: #dcdcdc !default;
+$ui-04: #8c8c8c !default;
+$ui-05: #171717 !default;
+$text-01: #171717 !default;
+$text-02: #565656 !default;
+$text-03: #8c8c8c !default;
+$text-04: #ffffff !default;
+$icon-01: #171717 !default;
+$icon-02: #565656 !default;
+$icon-03: #ffffff !default;
+$link-01: #0062ff !default;
+$field-01: #f3f3f3 !default;
+$field-02: #ffffff !default;
+$inverse-01: #ffffff !default;
+$inverse-02: #3d3d3d !default;
+$support-01: #da1e28 !default;
+$support-02: #24a148 !default;
+$support-03: #fdd13a !default;
+$support-04: #054ada !default;
+$overlay-01: rgba(23, 23, 23, 0.5) !default;
+$focus: #0062ff !default;
+$hover-primary: #0353e9 !default;
+$active-primary: #0530ad !default;
+$hover-primary-text: #054ada !default;
+$hover-secondary: #4c4c4c !default;
+$active-secondary: #6f6f6f !default;
+$hover-tertiary: #0353e9 !default;
+$active-tertiary: #0530ad !default;
+$hover-ui: #e5e5e5 !default;
+$active-ui: #bebebe !default;
+$selected-ui: #dcdcdc !default;
+$hover-selected-ui: #cacaca !default;
+$hover-danger: #ba1b23 !default;
+$active-danger: #750e13 !default;
+$hover-row: #e5e5e5 !default;
+$visited-link: #8a3ffc !default;
+$disabled-01: #f3f3f3 !default;
+$disabled-02: #bebebe !default;
+$disabled-03: #8c8c8c !default;
+$highlight: #c9deff !default;
+$brand-01: #0062ff !default;
+$brand-02: #171717 !default;
+$brand-03: #0062ff !default;
+$active-01: #bebebe !default;
+$hover-field: #e5e5e5 !default;
+```
+
+### Spacing
+
+Carbon has two spacing scales, one for general spacing within components and the other for layout spacing. Both are designed to complement the components and typography throughout the system. Each scale has its own [distinct purpose](/guidelines/spacing). The two scales have certain overlapping values that serve two different roles, so be mindful when choosing a spacing token.
+
+```scss
+//// _spacing.scss
+$spacing-baseline: 1rem !default;
+
+// Spacing scale
+$spacing-4xs: $spacing-baseline * 0.0625 !default;
+$spacing-3xs: $spacing-baseline * 0.125 !default;
+$spacing-2xs: $spacing-baseline * 0.25 !default;
+$spacing-xs: $spacing-baseline * 0.5 !default;
+$spacing-sm: $spacing-baseline * 0.75 !default;
+$spacing-md: $spacing-baseline !default;
+$spacing-lg: $spacing-baseline * 1.5 !default;
+$spacing-xl: $spacing-baseline * 2 !default;
+$spacing-2xl: $spacing-baseline * 2.5 !default;
+$spacing-3xl: $spacing-baseline * 3 !default;
+
+// Layout scale
+$layout-2xs: $spacing-baseline !default;
+$layout-xs: $spacing-baseline * 1.5 !default;
+$layout-sm: $spacing-baseline * 2 !default;
+$layout-md: $spacing-baseline * 3 !default;
+$layout-lg: $spacing-baseline * 4 !default;
+$layout-xl: $spacing-baseline * 6 !default;
+$layout-2xl: $spacing-baseline * 10 !default;
+```
+
+### Typography
+
+Typography has four categories of type styles (universal, productive, editorial, and additional) that can be customized through tokens. These tokens are used both within components and across layouts. Type tokens are determined by their [role](/guidelines/typography/productive) across the system.
+
+```scss
+// Universal
+$caption-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(1),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$label-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(1),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$helper-text-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(1),
+  font-style: italic,
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$body-short-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(18px),
+  letter-spacing: 0.16px,
+) !default;
+
+$body-long-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(20px),
+  letter-spacing: 0.16px,
+) !default;
+
+$body-short-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(3),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(22px),
+  letter-spacing: 0,
+) !default;
+
+$body-long-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(3),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(24px),
+  letter-spacing: 0,
+) !default;
+
+$code-01: (
+  font-family: carbon--font-family('mono'),
+  font-size: carbon--type-scale(1),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$code-02: (
+  font-family: carbon--font-family('mono'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(20px),
+  letter-spacing: 0.32px,
+) !default;
+
+$heading-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: carbon--rem(18px),
+  letter-spacing: 0.16px,
+) !default;
+
+$heading-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(3),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: carbon--rem(22px),
+  letter-spacing: 0,
+) !default;
+```
+
+```scss
+// Productive
+$productive-heading-03: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(5),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(26px),
+  letter-spacing: 0,
+) !default;
+
+$productive-heading-04: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(7),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(36px),
+  letter-spacing: 0,
+) !default;
+
+$productive-heading-05: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(40px),
+  letter-spacing: 0,
+) !default;
+```
+
+```scss
+// Expressive
+$expressive-heading-03: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(5),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 130%,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: carbon--type-scale(5),
+      line-height: 125%,
+    ),
+    max: (
+      font-size: carbon--type-scale(6),
+    ),
+  ),
+) !default;
+
+$expressive-heading-04: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(7),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 129%,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: carbon--type-scale(7),
+      line-height: 125%,
+    ),
+    max: (
+      font-size: carbon--type-scale(8),
+    ),
+  ),
+) !default;
+
+$expressive-heading-05: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 125%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(9),
+      line-height: 122%,
+    ),
+    lg: (
+      font-size: carbon--type-scale(10),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(11),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: carbon--type-scale(13),
+    ),
+  ),
+) !default;
+
+$expressive-heading-06: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: 125%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(9),
+      line-height: 122%,
+    ),
+    lg: (
+      font-size: carbon--type-scale(10),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(11),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: carbon--type-scale(13),
+    ),
+  ),
+) !default;
+
+$expressive-paragraph-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(6),
+  font-weight: carbon--font-weight('light'),
+  line-height: 125%,
+  letter-spacing: 0,
+  breakpoints: (
+    lg: (
+      font-size: carbon--type-scale(7),
+      line-height: 129%,
+    ),
+    max: (
+      font-size: carbon--type-scale(8),
+      line-height: 125%,
+    ),
+  ),
+);
+```
+
+```scss
+// Additional styles
+$quotation-01: (
+  font-family: carbon--font-family('serif'),
+  font-size: carbon--type-scale(5),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 130%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(5),
+    ),
+    lg: (
+      font-size: carbon--type-scale(6),
+      line-height: 125%,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(7),
+      line-height: 129%,
+    ),
+    max: (
+      font-size: carbon--type-scale(8),
+      line-height: 125%,
+    ),
+  ),
+) !default;
+
+$quotation-02: (
+  font-family: carbon--font-family('serif'),
+  font-size: carbon--type-scale(8),
+  font-weight: carbon--font-weight('light'),
+  line-height: 125%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(9),
+      line-height: 122%,
+    ),
+    lg: (
+      font-size: carbon--type-scale(10),
+      line-height: 119%,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(11),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: carbon--type-scale(13),
+    ),
+  ),
+) !default;
+
+$display-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(10),
+  font-weight: carbon--font-weight('light'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(10),
+    ),
+    lg: (
+      font-size: carbon--type-scale(12),
+    ),
+    xlg: (
+      font-size: carbon--type-scale(13),
+      line-height: 117%,
+    ),
+    max: (
+      font-size: carbon--type-scale(15),
+      line-height: 113%,
+    ),
+  ),
+) !default;
+
+$display-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(10),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(10),
+    ),
+    lg: (
+      font-size: carbon--type-scale(12),
+    ),
+    xlg: (
+      font-size: carbon--type-scale(13),
+      line-height: 116%,
+    ),
+    max: (
+      font-size: carbon--type-scale(15),
+      line-height: 113%,
+    ),
+  ),
+) !default;
+
+$display-03: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(10),
+  font-weight: carbon--font-weight('light'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(14),
+      line-height: 115%,
+    ),
+    lg: (
+      font-size: carbon--type-scale(17),
+      line-height: 111%,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(20),
+      line-height: 107%,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: carbon--type-scale(23),
+      line-height: 105%,
+      letter-spacing: -0.96px,
+    ),
+  ),
+) !default;
+
+$display-04: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(10),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: 119%,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: carbon--type-scale(14),
+      line-height: 115%,
+    ),
+    lg: (
+      font-size: carbon--type-scale(17),
+      line-height: 111%,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: carbon--type-scale(20),
+      line-height: 107%,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: carbon--type-scale(23),
+      line-height: 105%,
+      letter-spacing: -0.96px,
+    ),
+  ),
+) !default;
+```
+
+### Global
+
+The other categories are global and component-specific variables. These control more general styling of components, such as layer usage or border width.
+
+```scss
+// Global
+$input-border: 1px solid transparent !default !global;
+$input-label-weight: 400 !default !global;
+$disabled: $disabled-02 !default !global;
+$disabled-background-color: $disabled-01 !default !global;
+$focus: $ibm-color__blue-60 !default !global;
+
+// Link
+$link-visited: $ibm-color__purple-60 !default !global;
+$link-inverse-color: #6ea6ff !default !global;
+
+// Tooltip
+$tooltip-background-color: $inverse-02 !default !global;
+
+// Button Theme Variables
+$button-font-weight: 400 !default !global;
+$button-font-size: 0.875rem !default !global;
+$button-border-radius: 0 !default !global;
+$button-height: 48px !default !global;
+$button-padding: 0.875rem 15px !default !global;
+$button-padding-sm: 0.375rem 15px !default !global;
+$button-padding-lg: $carbon--spacing-04 !default !global;
+$button-border-width: 1px !default !global;
+$button-outline-width: 3px !default !global;
+$button-outline-offset: -5px !default !global;
+$button-outline: 1px solid $ibm-color__white-0 !default !global;
+
+// Accordion (Reverse)
+$accordion-flex-direction: row-reverse !default !global;
+$accordion-justify-content: flex-start !default !global;
+$accordion-arrow-margin: 0 $carbon--spacing-05 0 0 !default !global;
+$accordion-title-margin: 0 0 0 $carbon--spacing-05 !default !global;
+$accordion-content-padding: 0 0 0 $carbon--spacing-05 !default !global;
+
+// Card
+$card-text-align: center !default !global;
+$card-flex-align: center !default !global;
+
+// Checkbox
+$checkbox-border-width: 2px !default !global;
+
+// Code Snippet
+$snippet-background-color: $ui-01 !default !global;
+$snippet-border-color: $ui-03 !default !global;
+
+// Content Switcher
+$content-switcher-border-radius: 0px !default !global;
+$content-switcher-option-border: 1px solid $brand-01 !default !global;
+$content-switcher-divider: $ui-03 !default !global;
+
+// Data Table
+$data-table-heading-transform: uppercase !default !global;
+$data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
+$data-table-row-height: 2rem !default !global;
+$data-table-zebra-color: #fcfcfc !default !global;
+$data-table-column-hover: $hover-selected-ui !default !global;
+
+// Date Picker
+$date-picker-in-range-background-color: $ibm-color__blue-20 !default !global;
+
+// Modal
+$modal-border-top: $brand-01 4px solid !default !global;
+$modal-footer-background-color: $ui-03 !default !global;
+
+// Notification
+$notification-info-background-color: $ibm-color__blue-10 !default !global;
+$notification-error-background-color: $ibm-color__red-10 !default !global;
+$notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
+$notification-success-background-color: $ibm-color__green-10 !default !global;
+
+// Progress Indicator
+$progress-indicator-bar-width: 1px inset transparent !default !global;
+$progress-indicator-stroke-width: 5 !default !global;
+$progress-indicator-line-offset: 0.625rem !default !global;
+
+//Code Snippet
+$copy-active: $active-ui !default !global;
+$copy-btn-feedback: $ibm-color__gray-80 !default !global;
+
+// Radio Button
+$radio-border-width: 1px !default !global;
+
+// Structured Theme Variables
+$structured-list-padding: 2rem !default !global;
+$structured-list-text-transform: none !default !global;
+
+// Slider
+
+// Tab
+$tab-underline-color: 3px solid $ibm-color__gray-30 !default !global;
+$tab-underline-color-hover: 3px solid $ibm-color__gray-60 !default !global;
+$tab-text-disabled: $ibm-color__gray-30 !default !global;
+$tab-underline-disabled: 3px solid $ibm-color__gray-10 !default !global;
+
+// Skeleton Loading
+$skeleton: rgba($color__blue-51, 0.1) !default !global;
+```
+
+## Theming applied
+
+The following example demonstrates the relationship between the different themes. Each theme shares the same variables and roles, with only the value changing for each individual theme.
+
+![Default theme applied](images/themes-1.svg)
+
+| Key | Token       | Role                | White theme value    | Dark theme value    |
+| --- | ----------- | ------------------- | -------------------- | ------------------- |
+| 1   | `$text-02`  | Label color         | `#565656` / Gray 70  | `#bebebe` / Gray 30 |
+| 2   | `$text-01`  | Primary text color  | `#171717` / Gray 100 | `#f3f3f3` / Gray 10 |
+| 3   | `$ui-04`    | Border bottom color | `#8c8c8c` / Gray 50  | `#a4a4a4` / Gray 40 |
+| 4   | `$icon-01`  | Primary icon color  | `#171717` / Gray 100 | `#f3f3f3` / Gray 10 |
+| 5   | `$field-01` | Field color         | `#f3f3f3` / Gray 10  | `#3d3d3d` / Gray 80 |
+| 6   | `$ui-02`    | Page background     | `#ffffff` / White    | `#282828` / Gray 90 |

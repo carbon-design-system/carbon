@@ -1,0 +1,90 @@
+---
+
+title: Code snippet
+tabs: ['Code', 'Usage', 'Style']
+---
+
+## Color
+
+### Single & multi-line
+
+| Class                        | Property         | Color token  |
+| ---------------------------- | ---------------- | ------------ |
+| `.bx--snippet`               | background       | `$field-01`  |
+| `.bx--snippet__icon`         | color            | `$icon-01`   |
+| `.bx--snippet-button:hover`  | background-color | `$hover-ui ` |
+| `.bx--snippet--light`        | background-color | `$field-02`  |
+| `.bx--snippet--light:hover`  | background-color | `$hover-ui`  |
+
+### Inline snippet
+
+| Class                        | Property         | Color token  |
+| ---------------------------- | ---------------- | ----------   |
+| `.bx--snippet--inline`       | background-color | `$field-01`  |
+| `.bx--snippet--inline`       | color            | `$text-02 `  |
+| `.bx--snippet--inline:hover` | background-color | `$hover-ui`  |
+
+### Syntax colors
+
+Carbon has defined a set of accessible syntax colors. View an incontext [example](https://codepen.io/team/carbon/full/eKMBLw/) on CodePen.
+
+## Typography
+
+| Class                       | Font-size (px/rem)    | Font-weight   | Type token  |
+| --------------------------- | --------------------- | ------------- | ----------- |
+| `.bx--snippet.code`         | 12 / 0.75             | Regular / 400 | `$code-01 ` |
+| `.bx--snippet--inline.code` | 12 / 0.75             | Regular / 400 | `$code-01 ` |
+
+## Structure
+
+### Single line
+
+| Class                  | Property      | px / rem   | Spacing token |
+| ---------------------- | ------------- | ---------- | ------------- |
+| `.bx--snippet--single` | height        | 40 / 3     | –             |
+| `.bx--snippet--single` | max-width     | 768 / 48   | –             |
+| `.bx--snippet--single` | padding-right | 48 / 3     | `$spacing-09` |
+| `.bx--snippet--single` | padding-left  | 16 / 1     | `$spacing-05` |
+
+<!-- Not done with spacing but with positioning
+|| Spacing: icon & tooltip | 4 | 0.5| -->
+
+
+
+![](images/code-snippet-style-1.png)
+
+
+
+### Multi-line code snippet
+
+| Class                                        | Property                    | px / rem                          | Spacing token |
+| -------------------------------------------- | --------------------------- | --------------------------------- | ------------- |
+| `.bx--snippet--multi`                        | min-height                  | 288 / 18                          | –             |
+| `.bx--snippet--multi`                        | max-height                  | Varies based on content           | –             |
+| `.bx--snippet--multi`                        | max-width                   | 768 / 48                          | –             |
+| `.bx--snippet-container`                     | padding-top, padding-bottom | 16 / 1                            | `$spacing-05` |
+| `.bx--snippet-container`                     | padding-right               | 48 / 3                            | `$spacing-09` |
+| `.bx--snippet-container`                     | padding-left                | 16 / 1                            | `$spacing-05` |
+| `.bx--snippet__icon`                         | height, width               | 16px                              | –             |
+| `.bx--snippet-button`                        | height, width               | 32 / 2                            | –             |
+
+
+
+![Structure and spacing measurements for multi-line snippet](images/code-snippet-style-2.png)
+
+
+
+### Inline code snippet
+
+| Class                       | Property                    | px / rem                | Spacing token |
+| --------------------------- | --------------------------- | ----------------------- | ------------- |
+| `.bx--snippet--inline`      | height                      | 16 / 1                  | –             |
+| `.bx--snippet--inline`      | width                       | Varies based on content | –             |
+| `.bx--snippet--inline`      | border-radius               | 2                       | -             |
+| `.bx--snippet--inline code` | padding-right, padding-left | 8 / 0.5                 | $spacing-03   |
+
+
+
+![Structure and spacing measurements for inline snippet](images/code-snippet-style-3.png)
+
+

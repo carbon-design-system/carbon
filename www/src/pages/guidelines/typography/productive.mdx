@@ -1,0 +1,20 @@
+---
+label: When used properly, typography can help create clear hierarchies, organize information, and guide users through the product or experience.
+title: Typography
+tabs: ['Overview', 'Productive', 'Expressive']
+---
+
+import TypesetStyle from '@carbon/addons-website/src/components/TypesetStyle';
+
+## IBM Productive type set
+
+Productive type is reserved for use in web-based product design, where the user needs to focus on tasks. The Productive styles are curated to create a series of clear user expectations about hierarchy.
+
+The Productive styles below introduce the new IBM Design Language tokens. The difference between the Productive and Expressive styles is mainly evident in the Headings. Aside from the token names, which are specifically calibrated for product vs. editorial designers (e.g. `$label-01` vs. `$caption-01`) — the Supporting and Body styles have the same values in both the Productive and Expressive sets.
+
+Even though IBM Plex contains a wide range of scales, it’s important to use curated sets below for their specified purpose. For consistent, reliable performance across various screen sizes, do not use fluid type in components or in product UI.
+
+<TypesetStyle
+  breakpointControls={false}
+  typesets="supportingStyles,body,fixedHeadings"
+/>

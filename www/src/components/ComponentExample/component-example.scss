@@ -1,0 +1,143 @@
+.component-example {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  color: $carbon--white-0;
+  margin-bottom: $spacing-06;
+}
+
+// To override the padding from `.page-content > div > div:first-child p`
+.page-content > div > div:first-child .component-example__heading-label {
+  padding-bottom: 1.5rem;
+}
+
+.component-example__live {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: rem(200px);
+  position: relative;
+  padding: $spacing-07 $spacing-07 $spacing-08;
+  margin: 0;
+  background-color: $ui-02;
+  color: $text-01;
+  border: 1rem solid $ui-02;
+}
+
+.component-example__live.component-example__live--light {
+  background-color: $ui-01;
+}
+
+.component-example__live.component-example__live--rendered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.component-example__view-full-render {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: $text-02;
+  @include carbon--type-style('caption-01');
+  padding: $spacing-03 $spacing-05;
+  z-index: 9999;
+}
+
+.component-example__view-full-render--react {
+  z-index: z(dropdown) - 1;
+}
+
+// Component Toolbar
+
+.component-toolbar {
+  @include carbon--type-style('body-short-01');
+  display: flex;
+  align-items: center;
+  height: rem(48px);
+  background: $ui-05;
+  color: $inverse-01;
+  border-bottom: 1px solid $carbon--gray-80;
+}
+
+.component-toolbar__current {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-05;
+}
+
+.component-toolbar__links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 2;
+
+  a {
+    position: relative;
+    top: 1px;
+    margin-left: $spacing-05;
+    color: $carbon--blue-40;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom: 1px solid $carbon--blue-40;
+    }
+  }
+
+  svg {
+    fill: $carbon--blue-40;
+    position: relative;
+    top: 3px;
+    margin-top: -2px;
+    margin-left: $spacing-02;
+  }
+}
+
+.component-toolbar__switcher {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid $carbon--gray-80;
+  height: 100%;
+  padding-left: $spacing-05;
+  padding-right: $spacing-05;
+
+  .bx--form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  .bx--radio-button__label {
+    @include carbon--type-style('body-short-01');
+    color: $inverse-01;
+  }
+
+  .bx--radio-button-group {
+    margin-top: 0;
+  }
+
+  .radioButtonWrapper:last-child {
+    padding-left: $spacing-05;
+  }
+
+  .bx--radio-button__appearance {
+    background-color: transparent;
+    border-color: $carbon--white-0;
+  }
+
+  .bx--radio-button:checked
+    + .bx--radio-button__label
+    .bx--radio-button__appearance {
+    border-color: $carbon--white-0;
+  }
+
+  .bx--radio-button:checked
+    + .bx--radio-button__label
+    .bx--radio-button__appearance:before {
+    background-color: $carbon--white-0;
+  }
+}

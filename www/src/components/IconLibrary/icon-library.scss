@@ -1,0 +1,27 @@
+.icon-search--wrapper {
+  position: relative;
+}
+
+.icon-search {
+  margin-bottom: rem(32px);
+}
+
+.icon-search--status {
+  @include carbon--type-style('body-short-02');
+  position: absolute;
+  top: 3.6rem; // spaced relative to search component
+  padding-left: $spacing-05;
+}
+
+section.icon-size > header {
+  padding-left: 1rem;
+}
+
+.icon-search--message {
+  padding-bottom: $spacing-06;
+}
+
+.icon-search--message__no-results {
+  @include carbon--type-style('body-short-02');
+  max-width: 20rem;
+}

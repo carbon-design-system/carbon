@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1120px" height="618px" viewBox="0 0 1120 618" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>1120 copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8.3125,11.875 C10.2800144,11.875 11.875,10.2800144 11.875,8.3125 C11.875,6.34498558 10.2800144,4.75 8.3125,4.75 C6.34498558,4.75 4.75,6.34498558 4.75,8.3125 C4.75,10.2800144 6.34498558,11.875 8.3125,11.875 Z M8.3125,5.27355937e-16 C3.72163302,-2.63677968e-16 5.27355937e-16,3.72163302 0,8.3125 C-5.27355937e-16,12.903367 3.72163302,16.625 8.3125,16.625 C12.903367,16.625 16.625,12.903367 16.625,8.3125 C16.625,6.10788793 15.7492213,3.99357103 14.1903251,2.43467488 C12.631429,0.875778736 10.5171121,2.63677968e-16 8.3125,5.27355937e-16 Z M8.3125,15.4375 C4.37747116,15.4375 1.1875,12.2475288 1.1875,8.3125 C1.1875,4.37747116 4.37747116,1.1875 8.3125,1.1875 C12.2475288,1.1875 15.4375,4.37747116 15.4375,8.3125 C15.4375,10.2021675 14.6868325,12.0144391 13.3506358,13.3506358 C12.0144391,14.6868325 10.2021675,15.4375 8.3125,15.4375 Z" id="path-1"></path>
+        <path d="M8.3125,11.875 C10.2800144,11.875 11.875,10.2800144 11.875,8.3125 C11.875,6.34498558 10.2800144,4.75 8.3125,4.75 C6.34498558,4.75 4.75,6.34498558 4.75,8.3125 C4.75,10.2800144 6.34498558,11.875 8.3125,11.875 Z M8.3125,5.27355937e-16 C3.72163302,-2.63677968e-16 5.27355937e-16,3.72163302 0,8.3125 C-5.27355937e-16,12.903367 3.72163302,16.625 8.3125,16.625 C12.903367,16.625 16.625,12.903367 16.625,8.3125 C16.625,6.10788793 15.7492213,3.99357103 14.1903251,2.43467488 C12.631429,0.875778736 10.5171121,2.63677968e-16 8.3125,5.27355937e-16 Z M8.3125,15.4375 C4.37747116,15.4375 1.1875,12.2475288 1.1875,8.3125 C1.1875,4.37747116 4.37747116,1.1875 8.3125,1.1875 C12.2475288,1.1875 15.4375,4.37747116 15.4375,8.3125 C15.4375,10.2021675 14.6868325,12.0144391 13.3506358,13.3506358 C12.0144391,14.6868325 10.2021675,15.4375 8.3125,15.4375 Z" id="path-3"></path>
+        <rect id="path-5" x="0" y="0" width="14.25" height="14.25" rx="2"></rect>
+        <polygon id="path-7" points="2.96875 6.234375 0 3.289375 0.9440625 2.3571875 2.96875 4.3640625 7.3684375 0 8.3125 0.938125"></polygon>
+        <rect id="path-9" x="0" y="0" width="14.25" height="14.25" rx="2"></rect>
+        <polygon id="path-11" points="2.96875 6.234375 0 3.289375 0.9440625 2.3571875 2.96875 4.3640625 7.3684375 0 8.3125 0.938125"></polygon>
+        <path d="M8.3125,11.875 C10.2800144,11.875 11.875,10.2800144 11.875,8.3125 C11.875,6.34498558 10.2800144,4.75 8.3125,4.75 C6.34498558,4.75 4.75,6.34498558 4.75,8.3125 C4.75,10.2800144 6.34498558,11.875 8.3125,11.875 Z M8.3125,5.27355937e-16 C3.72163302,-2.63677968e-16 5.27355937e-16,3.72163302 0,8.3125 C-5.27355937e-16,12.903367 3.72163302,16.625 8.3125,16.625 C12.903367,16.625 16.625,12.903367 16.625,8.3125 C16.625,6.10788793 15.7492213,3.99357103 14.1903251,2.43467488 C12.631429,0.875778736 10.5171121,2.63677968e-16 8.3125,5.27355937e-16 Z M8.3125,15.4375 C4.37747116,15.4375 1.1875,12.2475288 1.1875,8.3125 C1.1875,4.37747116 4.37747116,1.1875 8.3125,1.1875 C12.2475288,1.1875 15.4375,4.37747116 15.4375,8.3125 C15.4375,10.2021675 14.6868325,12.0144391 13.3506358,13.3506358 C12.0144391,14.6868325 10.2021675,15.4375 8.3125,15.4375 Z" id="path-13"></path>
+        <rect id="path-15" x="0" y="0" width="14.25" height="14.25" rx="2"></rect>
+        <polygon id="path-17" points="2.96875 6.234375 0 3.289375 0.9440625 2.3571875 2.96875 4.3640625 7.3684375 0 8.3125 0.938125"></polygon>
+        <path d="M8.3125,11.875 C10.2800144,11.875 11.875,10.2800144 11.875,8.3125 C11.875,6.34498558 10.2800144,4.75 8.3125,4.75 C6.34498558,4.75 4.75,6.34498558 4.75,8.3125 C4.75,10.2800144 6.34498558,11.875 8.3125,11.875 Z M8.3125,5.27355937e-16 C3.72163302,-2.63677968e-16 5.27355937e-16,3.72163302 0,8.3125 C-5.27355937e-16,12.903367 3.72163302,16.625 8.3125,16.625 C12.903367,16.625 16.625,12.903367 16.625,8.3125 C16.625,6.10788793 15.7492213,3.99357103 14.1903251,2.43467488 C12.631429,0.875778736 10.5171121,2.63677968e-16 8.3125,5.27355937e-16 Z M8.3125,15.4375 C4.37747116,15.4375 1.1875,12.2475288 1.1875,8.3125 C1.1875,4.37747116 4.37747116,1.1875 8.3125,1.1875 C12.2475288,1.1875 15.4375,4.37747116 15.4375,8.3125 C15.4375,10.2021675 14.6868325,12.0144391 13.3506358,13.3506358 C12.0144391,14.6868325 10.2021675,15.4375 8.3125,15.4375 Z" id="path-19"></path>
+        <rect id="path-21" x="0" y="0" width="14.25" height="14.25" rx="2"></rect>
+        <polygon id="path-23" points="2.96875 6.234375 0 3.289375 0.9440625 2.3571875 2.96875 4.3640625 7.3684375 0 8.3125 0.938125"></polygon>
+        <path d="M16.5948276,14.8541114 L16.5948276,17.8249337 L1.50862069,17.8249337 L1.50862069,14.8541114 L0,14.8541114 L0,17.8249337 C0,18.6453036 0.675432489,19.3103448 1.50862069,19.3103448 L16.5948276,19.3103448 C17.4280158,19.3103448 18.1034483,18.6453036 18.1034483,17.8249337 L18.1034483,14.8541114 L16.5948276,14.8541114 Z M3.01724138,5.94164456 L4.08081897,6.98885942 L8.29741379,2.84456233 L8.29741379,14.8541114 L9.80603448,14.8541114 L9.80603448,2.84456233 L14.0226293,6.98885942 L15.0862069,5.94164456 L9.05172414,0 L3.01724138,5.94164456 Z" id="path-25"></path>
+        <path d="M21,19.9425 L15.3375,14.25 C18.1494972,10.8571203 17.7986123,5.85329772 14.5406226,2.88606596 C11.282633,-0.0811657917 6.26788865,0.0358808192 3.15188473,3.15188473 C0.0358808192,6.26788865 -0.0811657917,11.282633 2.88606596,14.5406226 C5.85329772,17.7986123 10.8571203,18.1494972 14.25,15.3375 L19.9425,21 L21,19.9425 Z M2.25,9 C2.25,5.27207794 5.27207794,2.25 9,2.25 C12.7279221,2.25 15.75,5.27207794 15.75,9 C15.75,12.7279221 12.7279221,15.75 9,15.75 C5.27207794,15.75 2.25,12.7279221 2.25,9 Z" id="path-27"></path>
+    </defs>
+    <g id="1120-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-38" transform="translate(89.000000, 441.000000)">
+            <rect id="Rectangle-5-Copy-47" fill="#0062FF" x="0" y="0" width="231.724138" height="64"></rect>
+            <text id="Primary-button-Copy-5" font-family="IBMPlexSans, IBM Plex Sans" font-size="16" font-weight="normal" line-spacing="20" letter-spacing="0.114285715" fill="#FFFFFF">
+                <tspan x="19" y="38">Primary button</tspan>
+            </text>
+        </g>
+        <g id="Group-37" transform="translate(331.000000, 441.000000)">
+            <rect id="Rectangle-5-Copy-48" fill="#3D3D3D" x="0" y="0" width="231.724138" height="64"></rect>
+            <text id="Secondary-button" font-family="IBMPlexSans, IBM Plex Sans" font-size="16" font-weight="normal" line-spacing="20" letter-spacing="0.114285715" fill="#FFFFFF">
+                <tspan x="19" y="38">Secondary button</tspan>
+            </text>
+        </g>
+        <g id="Group-34" transform="translate(348.000000, 253.000000)">
+            <text id="Radio-option-1-Copy-4" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.100000001" fill="#171717">
+                <tspan x="28.9655172" y="14.862069">Radio option 1</tspan>
+            </text>
+            <g id="icon/toggle/radio-button/checked/16" transform="translate(0.000000, 0.206897)">
+                <g id="radio--button--checked" stroke-width="1" fill-rule="evenodd" transform="translate(1.187500, 1.187500)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="color/gray/100" mask="url(#mask-2)" fill="#171717">
+                        <g transform="translate(-1.187500, -1.187500)">
+                            <rect x="0" y="0" width="48" height="48"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+            </g>
+        </g>
+        <g id="Group-34-Copy" transform="translate(348.000000, 278.000000)">
+            <text id="Radio-option-2" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.100000001" fill="#171717">
+                <tspan x="28.9655172" y="14.862069">Radio option 2</tspan>
+            </text>
+            <g id="icon/toggle/radio-button/checked/16" transform="translate(0.000000, 0.206897)">
+                <g id="radio--button--checked" stroke-width="1" fill-rule="evenodd" transform="translate(1.187500, 1.187500)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="color/gray/100" mask="url(#mask-4)" fill="#171717">
+                        <g transform="translate(-1.187500, -1.187500)">
+                            <rect x="0" y="0" width="48" height="48"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+            </g>
+        </g>
+        <g id="component-/-slider-/-group-/-02-hover" transform="translate(350.000000, 127.000000)">
+            <g id="Group" transform="translate(183.000000, 0.000000)">
+                <polygon id="Field-color" fill="#E5E5E5" points="42 0 106 0 106 40 42 40"></polygon>
+                <rect id="border-bottom" fill="#8C8C8C" x="42" y="39" width="64" height="1"></rect>
+                <text id="Slider-value" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.159999996" fill="#171717">
+                    <tspan x="65" y="25">18</tspan>
+                </text>
+                <text id="End-value" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.159999996" fill="#171717">
+                    <tspan x="0" y="25">100</tspan>
+                </text>
+            </g>
+            <text id="Start-value" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.159999996" fill="#171717">
+                <tspan x="0" y="25">0</tspan>
+            </text>
+            <g id="component-/-slider-/-pole-/-02-hover" transform="translate(17.000000, 10.000000)">
+                <rect id="unselected" fill="#8C8C8C" transform="translate(75.970175, 10.000000) scale(1, -1) translate(-75.970175, -10.000000) " x="1" y="9" width="149.940351" height="2" rx="1"></rect>
+                <g id="Selected">
+                    <rect id="selected" fill="#4C4C4C" x="1" y="9" width="37" height="2"></rect>
+                    <circle id="Oval-2" fill="#3D3D3D" cx="1" cy="10" r="1"></circle>
+                    <circle id="Handle" fill="#4C4C4C" cx="28" cy="10" r="10"></circle>
+                </g>
+            </g>
+        </g>
+        <g id="Group-41" transform="translate(109.000000, 252.000000)">
+            <text id="Check-option-1-Copy-3" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" fill="#171717">
+                <tspan x="28.9655172" y="14">Check option 1</tspan>
+            </text>
+            <g id="icon/toggle/check-box/checked/filled/16" transform="translate(0.000000, 0.620690)">
+                <g id="Group">
+                    <g id="checkbox--checked--filled" transform="translate(2.375000, 2.375000)">
+                        <g id="icon-color-2">
+                            <mask id="mask-6" fill="white">
+                                <use xlink:href="#path-5"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-5"></use>
+                            <g id="color/black" mask="url(#mask-6)" fill="#000000">
+                                <g transform="translate(-2.375000, -2.375000)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <g id="icon-color-1" transform="translate(2.968750, 4.156250)">
+                            <mask id="mask-8" fill="white">
+                                <use xlink:href="#path-7"></use>
+                            </mask>
+                            <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-7"></use>
+                            <g id="color/white" mask="url(#mask-8)" fill="#FFFFFF">
+                                <g transform="translate(-5.343750, -6.531250)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group-41-Copy" transform="translate(109.000000, 277.000000)">
+            <text id="Check-option-2" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" fill="#171717">
+                <tspan x="28.9655172" y="14">Check option 2</tspan>
+            </text>
+            <g id="icon/toggle/check-box/checked/filled/16" transform="translate(0.000000, 0.620690)">
+                <g id="Group">
+                    <g id="checkbox--checked--filled" transform="translate(2.375000, 2.375000)">
+                        <g id="icon-color-2">
+                            <mask id="mask-10" fill="white">
+                                <use xlink:href="#path-9"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-9"></use>
+                            <g id="color/black" mask="url(#mask-10)" fill="#000000">
+                                <g transform="translate(-2.375000, -2.375000)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <g id="icon-color-1" transform="translate(2.968750, 4.156250)">
+                            <mask id="mask-12" fill="white">
+                                <use xlink:href="#path-11"></use>
+                            </mask>
+                            <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-11"></use>
+                            <g id="color/white" mask="url(#mask-12)" fill="#FFFFFF">
+                                <g transform="translate(-5.343750, -6.531250)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group-34-Copy-2" transform="translate(348.000000, 303.000000)">
+            <text id="Radio-option-3" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.100000001" fill="#171717">
+                <tspan x="28.9655172" y="14.862069">Radio option 3</tspan>
+            </text>
+            <g id="icon/toggle/radio-button/checked/16" transform="translate(0.000000, 0.206897)">
+                <g id="radio--button--checked" stroke-width="1" fill-rule="evenodd" transform="translate(1.187500, 1.187500)">
+                    <mask id="mask-14" fill="white">
+                        <use xlink:href="#path-13"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-13"></use>
+                    <g id="color/gray/100" mask="url(#mask-14)" fill="#171717">
+                        <g transform="translate(-1.187500, -1.187500)">
+                            <rect x="0" y="0" width="48" height="48"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+            </g>
+        </g>
+        <g id="Group-41-Copy-2" transform="translate(109.000000, 302.000000)">
+            <text id="Check-option-3" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" fill="#171717">
+                <tspan x="28.9655172" y="14">Check option 3</tspan>
+            </text>
+            <g id="icon/toggle/check-box/checked/filled/16" transform="translate(0.000000, 0.620690)">
+                <g id="Group">
+                    <g id="checkbox--checked--filled" transform="translate(2.375000, 2.375000)">
+                        <g id="icon-color-2">
+                            <mask id="mask-16" fill="white">
+                                <use xlink:href="#path-15"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-15"></use>
+                            <g id="color/black" mask="url(#mask-16)" fill="#000000">
+                                <g transform="translate(-2.375000, -2.375000)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <g id="icon-color-1" transform="translate(2.968750, 4.156250)">
+                            <mask id="mask-18" fill="white">
+                                <use xlink:href="#path-17"></use>
+                            </mask>
+                            <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-17"></use>
+                            <g id="color/white" mask="url(#mask-18)" fill="#FFFFFF">
+                                <g transform="translate(-5.343750, -6.531250)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group-34-Copy-3" transform="translate(348.000000, 328.000000)">
+            <text id="Radio-option-4" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.100000001" fill="#171717">
+                <tspan x="28.9655172" y="14.862069">Radio option 4</tspan>
+            </text>
+            <g id="icon/toggle/radio-button/checked/16" transform="translate(0.000000, 0.206897)">
+                <g id="radio--button--checked" stroke-width="1" fill-rule="evenodd" transform="translate(1.187500, 1.187500)">
+                    <mask id="mask-20" fill="white">
+                        <use xlink:href="#path-19"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-19"></use>
+                    <g id="color/gray/100" mask="url(#mask-20)" fill="#171717">
+                        <g transform="translate(-1.187500, -1.187500)">
+                            <rect x="0" y="0" width="48" height="48"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+            </g>
+        </g>
+        <g id="Group-41-Copy-3" transform="translate(109.000000, 327.000000)">
+            <text id="Check-option-4" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" fill="#171717">
+                <tspan x="28.9655172" y="14">Check option 4</tspan>
+            </text>
+            <g id="icon/toggle/check-box/checked/filled/16" transform="translate(0.000000, 0.620690)">
+                <g id="Group">
+                    <g id="checkbox--checked--filled" transform="translate(2.375000, 2.375000)">
+                        <g id="icon-color-2">
+                            <mask id="mask-22" fill="white">
+                                <use xlink:href="#path-21"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-21"></use>
+                            <g id="color/black" mask="url(#mask-22)" fill="#000000">
+                                <g transform="translate(-2.375000, -2.375000)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <g id="icon-color-1" transform="translate(2.968750, 4.156250)">
+                            <mask id="mask-24" fill="white">
+                                <use xlink:href="#path-23"></use>
+                            </mask>
+                            <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-23"></use>
+                            <g id="color/white" mask="url(#mask-24)" fill="#FFFFFF">
+                                <g transform="translate(-5.343750, -6.531250)">
+                                    <rect x="0" y="0" width="19" height="19"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="19" height="19"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group-42" transform="translate(722.793103, 457.965517)">
+            <g id="Group-Copy-18" transform="translate(0.000000, 0.448276)">
+                <g id="icon/file/download/20" transform="translate(115.862069, 0.000000)">
+                    <g id="download" transform="translate(3.017241, 2.413793)">
+                        <mask id="mask-26" fill="white">
+                            <use xlink:href="#path-25"></use>
+                        </mask>
+                        <use id="Mask" fill="#565656" fill-rule="nonzero" xlink:href="#path-25"></use>
+                    </g>
+                    <polygon id="transparent-rectangle" points="0 0 24.137931 0 24.137931 24.137931 0 24.137931"></polygon>
+                </g>
+                <g id="folder">
+                    <g id="Icon" transform="translate(1.508621, 3.017241)" fill="#565656" fill-rule="nonzero">
+                        <path d="M6.91702586,1.50862116 L9.48922414,4.08081944 L9.93426724,4.52586254 L19.612069,4.52586254 L19.612069,16.5948281 L1.50862069,16.5948281 L1.50862069,1.50862116 L6.91702586,1.50862116 Z M6.91702586,4.7430675e-07 L1.50862069,4.7430675e-07 C0.675432489,4.7430675e-07 0,0.675432964 0,1.50862116 L0,16.5948281 C0,17.4280163 0.675432489,18.1034488 1.50862069,18.1034488 L19.612069,18.1034488 C20.4452572,18.1034488 21.1206897,17.4280163 21.1206897,16.5948281 L21.1206897,4.52586254 C21.1206897,3.69267434 20.4452572,3.01724185 19.612069,3.01724185 L10.5603448,3.01724185 L7.98814655,0.445043578 C7.70467945,0.159884549 7.31910691,-0.000318128363 6.91702586,4.7430675e-07 Z" id="Shape"></path>
+                    </g>
+                    <g id="Transparent_Rectangle">
+                        <rect id="Rectangle-path" x="0" y="0" width="24.137931" height="24.137931"></rect>
+                    </g>
+                </g>
+                <g id="settings" transform="translate(231.724138, 0.000000)">
+                    <g id="Icon" transform="translate(1.508621, 1.508621)" fill="#565656" fill-rule="nonzero">
+                        <path d="M18.5464187,11.1037288 C18.5464187,10.9151512 18.5464187,10.7265736 18.5464187,10.5304529 C18.5464187,10.3343322 18.5464187,10.1457546 18.5464187,9.94963392 L19.9946946,8.67484944 C20.5418389,8.1900074 20.6626257,7.3826433 20.2813325,6.75890116 L18.5011601,3.74165978 C18.1407339,3.12121674 17.393174,2.8404875 16.7134446,3.07032358 L14.8804704,3.68885806 C14.56465,3.4752912 14.2344855,3.28374537 13.8923239,3.1155822 L13.5151687,1.21472013 C13.3728025,0.497950643 12.7371852,-0.0137213063 12.006548,0.000280474177 L8.46883252,0.000280474177 C7.7381954,-0.0137213063 7.10257807,0.497950643 6.96021183,1.21472013 L6.58305666,3.1155822 C6.23594554,3.28069461 5.90072726,3.46972747 5.5798239,3.68131496 L3.78456528,3.03260806 C3.09571674,2.8092677 2.3453478,3.10688239 1.99684976,3.74165978 L0.216677346,6.75890116 C-0.142246121,7.38097449 -0.0128732811,8.16983327 0.525944587,8.64467703 L1.95159114,9.95717703 C1.95159114,10.1457546 1.95159114,10.3343322 1.95159114,10.5304529 C1.95159114,10.7265736 1.95159114,10.9151512 1.95159114,11.1112719 L0.525944587,12.3785132 C-0.0328102905,12.8582479 -0.163536096,13.6712986 0.216677346,14.3020046 L1.99684976,17.319246 C2.35727601,17.939689 3.10483589,18.2204183 3.78456528,17.9905822 L5.61753941,17.3720477 C5.93335989,17.5856146 6.26352441,17.7771604 6.60568597,17.9453236 L6.98284114,19.8461856 C7.12520738,20.5629551 7.76082471,21.0746271 8.49146183,21.0606253 L12.0518067,21.0606253 C12.7824438,21.0746271 13.4180611,20.5629551 13.5604273,19.8461856 L13.9375825,17.9453236 C14.2846936,17.7802112 14.6199119,17.5911783 14.9408153,17.3795908 L16.7662463,17.9981253 C17.4318925,18.198587 18.1483432,17.9182367 18.5011601,17.319246 L20.2813325,14.3020046 C20.640256,13.6799313 20.5108831,12.8910725 19.9720653,12.4162288 L18.5464187,11.1037288 Z M17.1962032,16.5649356 L14.6089187,15.6899356 C14.0014064,16.1984497 13.3095731,16.5967006 12.5647377,16.8666598 L12.0291773,19.582177 L8.46883252,19.582177 L7.93327217,16.9043753 C7.19387504,16.6291623 6.50745803,16.2285397 5.90417735,15.7201081 L3.30180666,16.5649356 L1.52163424,13.5476943 L3.58090148,11.7448925 C3.4419031,10.9640328 3.4419031,10.1647609 3.58090148,9.38390116 L1.52163424,7.51321151 L3.30180666,4.49597013 L5.88909114,5.37097013 C6.49660343,4.86245612 7.18843681,4.46420517 7.93327217,4.19424599 L8.46883252,1.47872875 L12.0291773,1.47872875 L12.5647377,4.15653047 C13.3041348,4.4317435 13.9905518,4.83236606 14.5938325,5.34079772 L17.1962032,4.49597013 L18.9763756,7.51321151 L16.9171084,9.32355634 C17.056265,10.104402 17.056265,10.903702 16.9171084,11.6845477 L18.9763756,13.5476943 L17.1962032,16.5649356 Z" id="Shape"></path>
+                        <path d="M10.5258621,15.0517241 C8.02629747,15.0517241 6,13.0254267 6,10.5258621 C6,8.02629747 8.02629747,6 10.5258621,6 C13.0254267,6 15.0517241,8.02629747 15.0517241,10.5258621 C15.0639488,11.7299013 14.5910449,12.8881885 13.7396167,13.7396167 C12.8881885,14.5910449 11.7299013,15.0639488 10.5258621,15.0517241 Z M10.5258621,7.50862069 C9.72003163,7.48984851 8.94162912,7.80170361 8.37166637,8.37166637 C7.80170361,8.94162912 7.48984851,9.72003163 7.50862069,10.5258621 C7.48984851,11.3316925 7.80170361,12.110095 8.37166637,12.6800578 C8.94162912,13.2500205 9.72003163,13.5618756 10.5258621,13.5431034 C11.3316925,13.5618756 12.110095,13.2500205 12.6800578,12.6800578 C13.2500205,12.110095 13.5618756,11.3316925 13.5431034,10.5258621 C13.5618756,9.72003163 13.2500205,8.94162912 12.6800578,8.37166637 C12.110095,7.80170361 11.3316925,7.48984851 10.5258621,7.50862069 Z" id="Shape"></path>
+                    </g>
+                    <g id="Transparent_Rectangle">
+                        <rect id="Rectangle-path" x="0" y="0" width="24.137931" height="24.137931"></rect>
+                    </g>
+                </g>
+                <g id="chat" transform="translate(173.793103, 0.000000)">
+                    <g id="Icon" transform="translate(1.508621, 3.017241)" fill="#565656" fill-rule="nonzero">
+                        <path d="M11.8728448,19.612069 L10.5603448,18.8577586 L13.5775862,13.5775862 L18.1034483,13.5775862 C18.9366365,13.5775862 19.612069,12.9021537 19.612069,12.0689655 L19.612069,3.01724138 C19.612069,2.18405318 18.9366365,1.50862069 18.1034483,1.50862069 L3.01724138,1.50862069 C2.18405318,1.50862069 1.50862069,2.18405318 1.50862069,3.01724138 L1.50862069,12.0689655 C1.50862069,12.9021537 2.18405318,13.5775862 3.01724138,13.5775862 L9.80603448,13.5775862 L9.80603448,15.0862069 L3.01724138,15.0862069 C1.35086498,15.0862069 3.34981085e-16,13.7353419 0,12.0689655 L0,3.01724138 C-1.67490543e-16,1.35086498 1.35086498,0 3.01724138,0 L18.1034483,0 C19.7698247,0 21.1206897,1.35086498 21.1206897,3.01724138 L21.1206897,12.0689655 C21.1206897,13.7353419 19.7698247,15.0862069 18.1034483,15.0862069 L14.4525862,15.0862069 L11.8728448,19.612069 Z" id="Shape"></path>
+                        <rect id="Rectangle-path" x="4" y="5" width="12.0689655" height="1.50862069"></rect>
+                        <polygon id="Rectangle-path" points="4 9 11.5431034 9 11.5431034 10.5086207 4 10.5086207"></polygon>
+                    </g>
+                    <g id="Transparent_Rectangle">
+                        <rect id="Rectangle-path" x="0" y="0" width="24.137931" height="24.137931"></rect>
+                    </g>
+                </g>
+            </g>
+            <g id="icon/image/search/20" transform="translate(58.000000, 0.000000)">
+                <g id="search" stroke-width="1" fill-rule="evenodd" transform="translate(1.500000, 1.500000)">
+                    <mask id="mask-28" fill="white">
+                        <use xlink:href="#path-27"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-27"></use>
+                    <g id="color/gray/100" mask="url(#mask-28)" fill="#171717">
+                        <g transform="translate(-1.500000, -1.500000)">
+                            <rect x="0" y="0" width="48" height="48"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+        <g id="Toggle-/-big-/-active" transform="translate(88.000000, 135.000000)">
+            <g id="component/Toggle/big/on">
+                <rect id="pill" fill="#198038" x="0" y="0" width="48" height="24" rx="12"></rect>
+                <circle id="handle" fill="#FFFFFF" cx="36" cy="12" r="9"></circle>
+            </g>
+            <text id="text" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.159999996" fill="#171717">
+                <tspan x="56" y="17">On</tspan>
+            </text>
+        </g>
+        <g id="Toggle-/-big-/-active-Copy" transform="translate(190.000000, 135.000000)">
+            <g id="component/Toggle/big/off">
+                <rect id="pill" fill="#BEBEBE" x="0" y="0" width="48" height="24" rx="12"></rect>
+                <circle id="handle" fill="#FFFFFF" cx="12" cy="12" r="9"></circle>
+            </g>
+            <text id="text" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.159999996" fill="#171717">
+                <tspan x="56" y="17">Off</tspan>
+            </text>
+        </g>
+        <g id="Group-2" transform="translate(723.000000, 138.000000)" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal">
+            <text id="Lists-are-used-to-pr-Copy-2" line-spacing="20" letter-spacing="0.1" fill="#171717">
+                <tspan x="0" y="14">Lists are used to present multiple items vertically </tspan>
+                <tspan x="0" y="34">as a single continuous element. They can be </tspan>
+                <tspan x="0" y="54">configured for many uses such as a contacts list, </tspan>
+                <tspan x="0" y="74">nested lists, etc.</tspan>
+            </text>
+            <text id="Tokyo,-Japan" line-spacing="18" fill="#252525">
+                <tspan x="17" y="110">Tokyo, Japan</tspan>
+            </text>
+            <text id="–" line-spacing="18" fill="#252525">
+                <tspan x="0" y="110">–</tspan>
+            </text>
+            <text id="–" line-spacing="18" fill="#252525">
+                <tspan x="0" y="132">–</tspan>
+            </text>
+            <text id="–" line-spacing="18" fill="#252525">
+                <tspan x="0" y="154">–</tspan>
+            </text>
+            <text id="–-copy" line-spacing="18" fill="#252525">
+                <tspan x="0" y="176">–</tspan>
+            </text>
+            <text id="Edinburgh,-UK" line-spacing="18" fill="#171717">
+                <tspan x="17" y="132">Edinburgh, UK</tspan>
+            </text>
+            <text id="Auckland,-NZ" line-spacing="18" fill="#171717">
+                <tspan x="17" y="154">Auckland, NZ</tspan>
+            </text>
+            <text id="St.-Petersburg,-Russ" line-spacing="18" fill="#171717">
+                <tspan x="17" y="176">St. Petersburg, Russia</tspan>
+            </text>
+        </g>
+        <path d="M796,445 L791.5,450 L787,445 L755,445 C753.895431,445 753,444.104569 753,443 L753,423 C753,421.895431 753.895431,421 755,421 L827,421 C828.104569,421 829,421.895431 829,423 L829,443 C829,444.104569 828.104569,445 827,445 L796,445 Z" id="Rectangle-24-Copy" fill="#3D3D3D"></path>
+        <text id="Search-Copy" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="18" letter-spacing="0.100000001" fill="#F3F3F3">
+            <tspan x="769.021" y="437">Search</tspan>
+        </text>
+        <path d="M442.5,145 L442.5,142" id="Path-8" stroke="#DCDCDC" stroke-width="1.5"></path>
+    </g>
+</svg>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1120px" height="630px" viewBox="0 0 1120 630" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>Layout_overview_Hybrid</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0.618601748,45.1822578 C0.618601748,69.7552167 20.5994382,89.7455805 45.1579276,89.7455805 C69.716417,89.7455805 89.6972534,69.7552167 89.6972534,45.1822578 C89.6972534,20.6105368 69.716417,0.618935038 45.1579276,0.618935038 C20.5994382,0.618935038 0.618601748,20.6105368 0.618601748,45.1822578 Z" id="path-1"></path>
+    </defs>
+    <g id="Hybrid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(65.000000, 77.000000)">
+            <g id="Group-8-Copy">
+                <g id="Group-15-Copy-2">
+                    <g id="Group-14">
+                        <path d="M0.632203496,24.0897246 L990.367797,24.0897246 L990.367797,477.122302 L0.632203496,477.122302 L0.632203496,24.0897246 Z" id="Rectangle-17-Copy-502" stroke="#BEBEBE" stroke-width="1.21" fill="#D8D8D8"></path>
+                        <path d="M3.0624,0 L987.9376,-4.4408921e-16 C989.628917,-6.38468052e-14 991,1.37108318 991,3.0624 L991,23.4599883 L0,23.4599883 L-4.4408921e-16,3.0624 C-6.51215783e-16,1.37108318 1.37108318,7.54779069e-16 3.0624,4.4408921e-16 Z" id="Rectangle-2-Copy-25" fill="#565656"></path>
+                        <ellipse id="Oval-5-Copy-18" fill="#FFFFFF" cx="17.3208489" cy="12.3473623" rx="3.71161049" ry="3.70420868"></ellipse>
+                        <ellipse id="Oval-5-Copy-19" fill="#FFFFFF" cx="32.1672909" cy="12.3473623" rx="3.71161049" ry="3.70420868"></ellipse>
+                    </g>
+                </g>
+                <rect id="Rectangle-26-Copy" fill="#565656" x="0" y="21.0437913" width="991" height="3.71361023"></rect>
+            </g>
+            <polygon id="Rectangle-27-Copy-7" fill="#FFFFFF" points="14.8464419 39.6118424 253.626717 39.6118424 253.626717 247.574015 14.8464419 247.574015"></polygon>
+            <polygon id="Rectangle-27-Copy-11" fill="#FFFFFF" points="14.8464419 248.811885 253.626717 248.811885 253.626717 476.579979 14.8464419 476.579979"></polygon>
+            <polygon id="Rectangle-27-Copy-12" fill="#FFFFFF" points="254.86392 39.6118424 493.644195 39.6118424 493.644195 247.574015 254.86392 247.574015"></polygon>
+            <polygon id="Rectangle-27-Copy-13" fill="#FFFFFF" points="254.86392 458.011928 493.644195 458.011928 493.644195 476.579979 254.86392 476.579979"></polygon>
+            <polygon id="Rectangle-27-Copy-14" fill="#FFFFFF" points="254.86392 248.811885 493.644195 248.811885 493.644195 456.774058 254.86392 456.774058"></polygon>
+            <polygon id="Rectangle-27-Copy-15" fill="#FFFFFF" points="494.881398 39.6118424 733.661673 39.6118424 733.661673 247.574015 494.881398 247.574015"></polygon>
+            <polygon id="Rectangle-27-Copy-16" fill="#FFFFFF" points="494.881398 458.011928 733.661673 458.011928 733.661673 476.579979 494.881398 476.579979"></polygon>
+            <rect id="Rectangle-27-Copy-17" fill="#FFFFFF" x="494.881398" y="248.811885" width="480.034956" height="207.962173"></rect>
+            <polygon id="Rectangle-27-Copy-18" fill="#FFFFFF" points="734.898876 39.6118424 974.916355 39.6118424 974.916355 247.574015 734.898876 247.574015"></polygon>
+            <polygon id="Rectangle-27-Copy-19" fill="#FFFFFF" points="734.898876 458.011928 974.916355 458.011928 974.916355 476.579979 734.898876 476.579979"></polygon>
+            <g id="Page-1-Copy-44" transform="translate(450.342072, 193.107732)">
+                <g id="Group-3">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

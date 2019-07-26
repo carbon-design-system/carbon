@@ -1,0 +1,19 @@
+.component-status .bx--tag {
+  white-space: nowrap;
+}
+
+.component-status .page-table td {
+  padding: $spacing-04 $spacing-05;
+}
+
+.component-status__key {
+  margin-top: rem(80px);
+}
+
+.component-status__key .page-h4 {
+  margin-bottom: $spacing-06;
+}
+
+.component-status--unavailable {
+  padding-left: $spacing-04;
+}

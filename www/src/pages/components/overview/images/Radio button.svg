@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Radiobox" transform="translate(44.000000, 108.000000)">
+            <g id="Group-3">
+                <rect id="Rectangle-8-Copy-24" fill="#FFFFFF" opacity="0" x="0" y="0" width="192" height="104"></rect>
+                <g id="Group-Copy-19" transform="translate(16.000000, 5.000000)">
+                    <path d="M8,1 C4.13400675,1 1,4.13400675 1,8 C1,11.8659932 4.13400675,15 8,15 C11.8659932,15 15,11.8659932 15,8 C15,6.14348457 14.2625021,4.36300718 12.9497475,3.05025253 C11.6369928,1.73749788 9.85651543,1 8,1 Z M8,14 C4.6862915,14 2,11.3137085 2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,9.59129894 13.367859,11.1174224 12.2426407,12.2426407 C11.1174224,13.367859 9.59129894,14 8,14 Z" id="Shape" fill="#252525" fill-rule="nonzero"></path>
+                    <g id="Transparent_Rectangle">
+                        <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+                <g id="Group-Copy-20" transform="translate(17.000000, 32.000000)" fill-rule="nonzero">
+                    <g id="Group-35">
+                        <path d="M7,5.77315973e-15 C3.13400675,5.10702591e-15 5.77315973e-15,3.13400675 5.32907052e-15,7 C4.88498131e-15,10.8659932 3.13400675,14 7,14 C10.8659932,14 14,10.8659932 14,7 C14,5.14348457 13.2625021,3.36300718 11.9497475,2.05025253 C10.6369928,0.737497883 8.85651543,5.55111512e-15 7,5.77315973e-15 Z M7,13 C3.6862915,13 1,10.3137085 1,7 C1,3.6862915 3.6862915,1 7,1 C10.3137085,1 13,3.6862915 13,7 C13,8.59129894 12.367859,10.1174224 11.2426407,11.2426407 C10.1174224,12.367859 8.59129894,13 7,13 Z" id="Shape" fill="#252525"></path>
+                        <circle id="Oval" fill="#171717" cx="7" cy="7" r="3"></circle>
+                    </g>
+                </g>
+                <g id="Group-Copy-21" transform="translate(16.000000, 57.000000)">
+                    <path d="M8,1 C4.13400675,1 1,4.13400675 1,8 C1,11.8659932 4.13400675,15 8,15 C11.8659932,15 15,11.8659932 15,8 C15,6.14348457 14.2625021,4.36300718 12.9497475,3.05025253 C11.6369928,1.73749788 9.85651543,1 8,1 Z M8,14 C4.6862915,14 2,11.3137085 2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,9.59129894 13.367859,11.1174224 12.2426407,12.2426407 C11.1174224,13.367859 9.59129894,14 8,14 Z" id="Shape" fill="#252525" fill-rule="nonzero"></path>
+                    <g id="Transparent_Rectangle">
+                        <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+                <g id="Group-Copy-22" transform="translate(16.000000, 83.000000)">
+                    <path d="M8,1 C4.13400675,1 1,4.13400675 1,8 C1,11.8659932 4.13400675,15 8,15 C11.8659932,15 15,11.8659932 15,8 C15,6.14348457 14.2625021,4.36300718 12.9497475,3.05025253 C11.6369928,1.73749788 9.85651543,1 8,1 Z M8,14 C4.6862915,14 2,11.3137085 2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,9.59129894 13.367859,11.1174224 12.2426407,12.2426407 C11.1174224,13.367859 9.59129894,14 8,14 Z" id="Shape" fill="#252525" fill-rule="nonzero"></path>
+                    <g id="Transparent_Rectangle">
+                        <rect id="Rectangle-path" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+            </g>
+            <rect id="Rectangle-3-Copy-14" fill="#CACACA" x="40" y="6" width="123" height="12"></rect>
+            <rect id="Rectangle-3-Copy-15" fill="#CACACA" x="40" y="32" width="173" height="12"></rect>
+            <rect id="Rectangle-3-Copy-16" fill="#CACACA" x="40" y="58" width="123" height="12"></rect>
+            <rect id="Rectangle-3-Copy-17" fill="#CACACA" x="40" y="84" width="173" height="12"></rect>
+        </g>
+    </g>
+</svg>

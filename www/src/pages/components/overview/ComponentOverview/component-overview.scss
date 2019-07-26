@@ -1,0 +1,130 @@
+// temporary until added to componnents
+$active-ui: #bebebe;
+$hover-ui: #e5e5e5;
+
+.component-overview {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.component-item {
+  width: 33%;
+  background: $carbon--white-0;
+  position: relative;
+  transition: $transition--base;
+
+  &:hover {
+    background: $hover-ui;
+  }
+
+  &:active {
+    background: $active-ui;
+  }
+
+  // Display one column, bottom border except last item
+  @include carbon--breakpoint('sm') {
+    width: 100%;
+    border-bottom: 1px solid $carbon--gray-20;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  // Display two colums
+  @include carbon--breakpoint('md') {
+    width: 50%;
+    border-right: 1px solid $carbon--gray-20;
+
+    // selects every 2nd item and removes right border
+    &:nth-child(2n + 2) {
+      border-right: none;
+    }
+
+    &:last-child,
+    &:nth-last-child(2) {
+      border-bottom: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // Display three columnns
+  @include carbon--breakpoint('lg') {
+    width: 33.33%;
+
+    &:nth-child(2n + 2) {
+      border-right: 1px solid $carbon--gray-20;
+    }
+
+    // selects every 3rd item and removes right border
+    &:nth-child(3n + 3) {
+      border-right: none;
+    }
+
+    &:last-child,
+    &:nth-last-child(2),
+    &:nth-last-child(3) {
+      border-bottom: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // Display four columnns
+  @include carbon--breakpoint('xlg') {
+    width: 25%;
+
+    &:nth-child(3n + 3) {
+      border-right: 1px solid $carbon--gray-20;
+    }
+
+    // selects every 4th item and removes right border
+    &:nth-child(4n + 4) {
+      border-right: none;
+    }
+
+    &:last-child,
+    &:nth-last-child(2),
+    &:nth-last-child(3),
+    &:nth-last-child(4) {
+      border-bottom: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.component-item__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.component-item__img {
+  margin: 0;
+  display: block;
+}
+
+.component-name {
+  @include carbon--type-style('caption-01');
+  color: $text-01;
+  text-decoration: none;
+  text-align: left;
+  display: flex;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}

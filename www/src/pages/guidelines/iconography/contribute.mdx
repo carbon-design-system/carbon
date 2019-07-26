@@ -1,0 +1,85 @@
+---
+label: Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
+title: Iconography
+tabs: ['Usage', 'Library', 'Contribute']
+---
+
+<AnchorLinks>
+
+<AnchorLink>Design and production guidelines</AnchorLink>
+<AnchorLink>Making an icon</AnchorLink>
+<AnchorLink>Exporting SVGs</AnchorLink>
+<AnchorLink>Contribution process</AnchorLink>
+
+</AnchorLinks>
+
+## Design and production guidelines
+
+Don't see the icon you need in the library? Make your own! Follow these guidelines to ensure visual consistency and proper formatting.
+
+- All icons should be unique and not redundant with any existing icons in the system. Search the [library](/guidelines/iconography/library) for the keyword(s) associated with your proposed new icon to ensure that it is not already represented.
+- All icons should adhere to the [IBM Design Language visual style](https://w3.ibm.com/design/language/elements/icons/).
+- All icons should comply with IBM [accessibility standards](/guidelines/accessibility/overview).
+- All icons should be usable across all supported platforms and devices.
+- All icons should be understandable by a global audience of users, regardless of nationality or language.
+
+## Making an icon
+
+- Create a 16 x 16 or 32 x 32 px artboard for each icon.
+- 16 px icons should have 1 px padding. 32 px icons should have 2 px padding.
+- Set your workspace up from the start to snap to pixels and round values to whole pixels to avoid correcting shapes later.
+- Never use center borders. Centering can cause half pixels.
+- Avoid using the line tool; use the rectangle tool instead. The line tool will place the vector on half pixels.
+- Be aware of automatic alignments which can place vectors on uneven or half pixels.
+- Ungroup icon layers completely. The icon should be on the top-most layer in your artboard.
+- Make sure to properly name layers and artboards _(these names will also be exported into the code)_.
+
+### Production-ready
+
+To be considered production-ready, all icon submissions must be delivered in SVG format at 16 x 16 px (for integration with Carbon components) or 32 x 32 (for service icons).
+
+- Icons should be at whole pixels. No decimals are allowed in x and y coordinates or width and height fields.
+- Each artboard and the artwork within it must be aligned to the pixel grid.
+- All strokes must be expanded and at full pixel values.
+- All possible shapes and paths should be combined.
+
+## Exporting SVGs
+
+### Export SVGs from Sketch
+
+1. Draw a 16 x 16 or 32 x 32 px artboard. 16 px icons should have 1 px padding. 32 px icons should have 2 px padding.
+2. Place the icon squarely on the artboard, making sure it's aligned to the pixel grid.
+3. Convert all strokes to outlines `(Shift + ⌘ + O)`
+4. Select any overlapping shapes and click the Union icon from the top navigation to merge all of the shapes together.
+5. Make sure the icon is at `#000000` and has no additional styling.
+6. Select the entire artboard (not just the icon).
+7. Click `Make Exportable` at the bottom of the right toolbar in Sketch.
+8. In the `Export` widget select "SVG" in the format dropdown.
+9. Click `Export 'Artboard-Name'`.
+10. Name icon with the `#name--modifier` convention _(i.e._ `copy.svg`, `copy--glyph.svg`, `add.svg`, `add--glyph.svg`).
+
+### Export SVGs from Adobe Illustrator
+
+1. Draw a 16 x 16 or 32 x 32 px artboard. 16 px icons should have 1 px padding. 32 px icons should have 2 px padding.
+2. Place the icon squarely on the artboard, making sure it's aligned to the pixel grid.
+3. Expand all strokes `Object` → `Expand`.
+4. Select all overlapping shapes and click the "Unite" icon in the Pathfinder panel to merge all of the shapes together.
+5. Make sure the icon is at `#000000` and has no additional styling.
+6. Select `File` → `Save a Copy...` from the top navigation.
+7. On the `Format` dropdown select "SVG."
+8. Below `Format` select `Use Artboard`, then select either all or a range of artboards, depending on your need.
+9. Click `Save`.
+10. The `SVG Options` dialog will then open.
+11. Make sure the preferences are the same as in the image below.
+
+
+
+![export an icon from illustrator](images/iconography-contribution-exportsvgfromai.png)
+
+
+
+## Contribution process
+
+Would your icon be useful for other products? If so, please consider contributing to the design system.
+
+To submit, open a pull request with your icon in the [carbon-icons](https://github.com/carbon-design-system/carbon-elements/tree/master/packages/icons) repository.

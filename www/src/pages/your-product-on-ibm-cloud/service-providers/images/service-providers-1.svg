@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="410px" height="110px" viewBox="0 0 410 110" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>multiple services</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="30" cy="30" r="30"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="62" height="62">
+            <rect x="-1" y="-1" width="62" height="62" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+        <circle id="path-3" cx="30" cy="30" r="30"></circle>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="62" height="62">
+            <rect x="-1" y="-1" width="62" height="62" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+        <circle id="path-5" cx="30" cy="30" r="30"></circle>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="62" height="62">
+            <rect x="-1" y="-1" width="62" height="62" fill="white"></rect>
+            <use xlink:href="#path-5" fill="black"></use>
+        </mask>
+        <circle id="path-7" cx="30" cy="30" r="30"></circle>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="62" height="62">
+            <rect x="-1" y="-1" width="62" height="62" fill="white"></rect>
+            <use xlink:href="#path-7" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="OLD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="multiple-services">
+            <rect id="Rectangle-5-Copy-5" fill="#f4f7fb" x="0" y="0" width="410" height="110"></rect>
+            <g id="Group" transform="translate(26.227069, 24.000000)">
+                <g id="Oval-47">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use stroke="#3D70B2" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+                </g>
+                <g id="Group-2" transform="translate(15.386694, 15.206396)">
+                    <polygon id="Polygon-4" fill="#D7AAFF" points="14.0143886 0 28.0287773 14.0143886 14.0143886 28.0287773 0 14.0143886"></polygon>
+                    <polygon id="Polygon-4" fill="#9855D4" points="14.0242585 0 28.0386471 14.0143886 14.0242585 28.0287773 13.971377 13.547332"></polygon>
+                    <polygon id="Polygon-4-Copy" fill="#9855D4" points="8.20765287 14.5203796 14.0115397 8.71649276 14.03344 14.7138054 14.0115397 20.3242665"></polygon>
+                    <polygon id="Polygon-4-Copy-2" fill="#D7AAFF" points="19.8090258 14.521803 14.0051389 20.3256899 13.9832387 14.3283773 14.0051389 8.71791616"></polygon>
+                </g>
+            </g>
+            <g id="Group-Copy" transform="translate(124.000000, 24.000000)">
+                <g id="Oval-47">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    <use stroke="#3D70B2" mask="url(#mask-4)" stroke-width="2" xlink:href="#path-3"></use>
+                </g>
+                <g id="Group-2" transform="translate(15.386694, 15.206396)">
+                    <polygon id="Polygon-4" fill="#6EEDD8" points="14.0143886 0 28.0287773 14.0143886 14.0143886 28.0287773 0 14.0143886"></polygon>
+                    <polygon id="Polygon-4" fill="#008571" points="14.0242585 0 28.0386471 14.0143886 14.0242585 28.0287773 13.971377 13.547332"></polygon>
+                    <polygon id="Polygon-4-Copy" fill="#008571" points="8.20765287 14.5203796 14.0115397 8.71649276 14.03344 14.7138054 14.0115397 20.3242665"></polygon>
+                    <polyline id="Polygon-4-Copy-2" fill="#6EEDD8" points="14.0051389 8.71791616 19.8090258 14.521803 14.0051389 20.3256899 13.9832387 14.3283773 14.0051389 8.71791616"></polyline>
+                </g>
+            </g>
+            <g id="Group-Copy-2" transform="translate(221.772931, 24.000000)">
+                <g id="Oval-47">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-5"></use>
+                    <use stroke="#3D70B2" mask="url(#mask-6)" stroke-width="2" xlink:href="#path-5"></use>
+                </g>
+                <g id="Group-2" transform="translate(15.386694, 15.206396)">
+                    <polygon id="Polygon-4" fill="#FFA573" points="14.0143886 0 28.0287773 14.0143886 14.0143886 28.0287773 0 14.0143886"></polygon>
+                    <polygon id="Polygon-4" fill="#D74108" points="14.0242585 0 28.0386471 14.0143886 14.0242585 28.0287773 13.971377 13.547332"></polygon>
+                    <polygon id="Polygon-4-Copy" fill="#D74108" points="8.20765287 14.5203796 14.0115397 8.71649276 14.03344 14.7138054 14.0115397 20.3242665"></polygon>
+                    <polyline id="Polygon-4-Copy-2" fill="#FFA573" points="14.0051389 8.71791616 19.8090258 14.521803 14.0051389 20.3256899 13.9832387 14.3283773 14.0051389 8.71791616"></polyline>
+                </g>
+            </g>
+            <g id="Group-Copy-3" transform="translate(319.105379, 24.000000)">
+                <g id="Oval-47">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-7"></use>
+                    <use stroke="#3D70B2" mask="url(#mask-8)" stroke-width="2" xlink:href="#path-7"></use>
+                </g>
+                <g id="Group-2" transform="translate(15.386694, 15.206396)">
+                    <polygon id="Polygon-4" fill="#FF9EEE" points="14.0143886 0 28.0287773 14.0143886 14.0143886 28.0287773 0 14.0143886"></polygon>
+                    <polygon id="Polygon-4" fill="#DB2780" points="14.0242585 0 28.0386471 14.0143886 14.0242585 28.0287773 13.971377 13.547332"></polygon>
+                    <polygon id="Polygon-4-Copy" fill="#DB2780" points="8.20765287 14.5203796 14.0115397 8.71649276 14.03344 14.7138054 14.0115397 20.3242665"></polygon>
+                    <polyline id="Polygon-4-Copy-2" fill="#FF9EEE" points="14.0051389 8.71791616 19.8090258 14.521803 14.0051389 20.3256899 13.9832387 14.3283773 14.0051389 8.71791616"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,5.34545455 C0,8.28545455 2.40545455,10.6909091 5.34545455,10.6909091 C8.28545455,10.6909091 10.6909091,8.28545455 10.6909091,5.34545455 C10.6909091,2.40545455 8.28545455,0 5.34545455,0 C2.40545455,0 0,2.40545455 0,5.34545455 Z M8.82,8.28545455 L2.40545455,1.87090909 C3.20727273,1.14545455 4.27636364,0.763636364 5.34545455,0.763636364 C7.86545455,0.763636364 9.92727273,2.82545455 9.92727273,5.34545455 C9.92727273,6.41454545 9.54545455,7.48363636 8.82,8.28545455 Z M2.36727273,8.85818182 C0.458181818,7.21636364 0.229090909,4.31454545 1.83272727,2.40545455 L8.28545455,8.85818182 C7.48363636,9.54545455 6.41454545,9.92727273 5.34545455,9.92727273 C4.27636364,9.92727273 3.20727273,9.54545455 2.36727273,8.85818182 Z" id="path-1"></path>
+        <path d="M9.81654545,7.36527273 L8.78181818,6.33436364 L8.78181818,4.58181818 C8.78184282,2.62093239 7.29651127,0.978815852 5.34545455,0.782727273 L5.34545455,0 L4.58181818,0 L4.58181818,0.782727273 C2.63076145,0.978815852 1.14542991,2.62093239 1.14545455,4.58181818 L1.14545455,6.33436364 L0.110727273,7.36527273 C0.0392560581,7.43732901 -0.000586762451,7.53487522 -3.26829458e-14,7.63636364 L-3.26829458e-14,8.78181818 C-3.26829458e-14,8.99269054 0.170945823,9.16363636 0.381818182,9.16363636 L3.05454545,9.16363636 C3.05454545,10.2179982 3.90927457,11.0727273 4.96363636,11.0727273 C6.01799816,11.0727273 6.87272727,10.2179982 6.87272727,9.16363636 L9.54545455,9.16363636 C9.7563269,9.16363636 9.92727273,8.99269054 9.92727273,8.78181818 L9.92727273,7.63636364 C9.92785949,7.53487522 9.88801667,7.43732901 9.81654545,7.36527273 Z M4.96363636,10.3090909 C4.33101929,10.3090909 3.81818182,9.79625344 3.81818182,9.16363636 L6.10909091,9.16363636 C6.10909091,9.79625344 5.59625344,10.3090909 4.96363636,10.3090909 Z M9.16363636,8.4 L0.763636364,8.4 L0.763636364,7.79290909 L1.79836364,6.75818182 C1.86890232,6.68706412 1.90866914,6.59107523 1.90909091,6.49090909 L1.90909091,4.58181818 C1.90909091,2.89483931 3.27665749,1.52727273 4.96363636,1.52727273 C6.65061524,1.52727273 8.01818182,2.89483931 8.01818182,4.58181818 L8.01818182,6.49090909 C8.01759506,6.5923975 8.05743788,6.68994372 8.12890909,6.762 L9.16363636,7.79290909 L9.16363636,8.4 Z" id="path-3"></path>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tabs" transform="translate(48.000000, 91.000000)">
+            <rect id="Rectangle-7-Copy-4" fill="#BEBEBE" x="0" y="0" width="224" height="138"></rect>
+            <rect id="Rectangle-7-Copy-4" fill="#F3F3F3" x="0" y="45" width="224" height="93"></rect>
+            <rect id="Rectangle-2-Copy-134" fill="#F3F3F3" x="0" y="0" width="111" height="45"></rect>
+            <rect id="Rectangle" fill="#0062FF" x="0" y="0" width="111" height="2"></rect>
+            <g id="icon/status/error/16" transform="translate(90.000000, 8.000000)">
+                <g id="Group-Copy-6">
+                    <g id="error" transform="translate(0.763636, 0.763636)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="color/black" mask="url(#mask-2)" fill="#000000">
+                            <g transform="translate(-0.763636, -0.763636)">
+                                <rect x="0" y="0" width="31" height="31"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="12.2181818" height="12.2181818"></rect>
+                </g>
+            </g>
+            <rect id="Rectangle-2-Copy-80" fill="#DCDCDC" x="112" y="0" width="112" height="44"></rect>
+            <g id="icon/toggle/notification/16" transform="translate(202.000000, 8.000000)">
+                <g id="Group">
+                    <g id="notification" transform="translate(1.145455, 0.381818)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                        <g id="color/black" mask="url(#mask-4)" fill="#000000">
+                            <g transform="translate(-1.145455, -0.381818)">
+                                <rect x="0" y="0" width="31" height="31"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="12.2181818" height="12.2181818"></rect>
+                </g>
+            </g>
+            <rect id="Rectangle-Copy-25" fill="#D8D8D8" x="12" y="65" width="116" height="8"></rect>
+            <rect id="Rectangle-Copy-27" fill="#D8D8D8" x="12" y="89" width="116" height="8"></rect>
+            <rect id="Rectangle-Copy-26" fill="#D8D8D8" x="12" y="77" width="156" height="8"></rect>
+            <rect id="Rectangle-Copy-30" fill="#D8D8D8" x="12" y="101" width="156" height="8"></rect>
+            <rect id="Rectangle-Copy-31" fill="#BEBEBE" x="12" y="10" width="64" height="8"></rect>
+            <rect id="Rectangle-Copy-33" fill="#BEBEBE" x="122" y="10" width="64" height="8"></rect>
+            <rect id="Rectangle-Copy-32" fill="#BEBEBE" x="12" y="22" width="32" height="8"></rect>
+            <rect id="Rectangle-Copy-34" fill="#BEBEBE" x="122" y="22" width="32" height="8"></rect>
+        </g>
+    </g>
+</svg>

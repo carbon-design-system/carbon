@@ -7,12 +7,9 @@
   "engines": {
     "node": "10.x"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": []
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",

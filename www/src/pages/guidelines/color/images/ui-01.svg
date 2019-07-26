@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="103px" height="210px" viewBox="0 0 103 210" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Color" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="ui-01" transform="translate(1.000000, 1.000000)">
+                <g id="Rectangle-96">
+                    <g id="path-1-link" fill="#FFFFFF">
+                        <rect id="path-1" x="0" y="0" width="100" height="208"></rect>
+                    </g>
+                    <rect id="Rectangle-path" stroke="#E0E5E7" x="0.5" y="0.5" width="99" height="207"></rect>
+                </g>
+                <g id="Group-3" transform="translate(20.000000, 114.000000)">
+                    <g id="a" transform="translate(7.000000, 0.000000)" font-size="18" font-family="IBMPlexSans, IBM Plex Sans" fill="#5A6872" font-weight="normal">
+                        <text>
+                            <tspan x="0" y="18">a</tspan>
+                        </text>
+                    </g>
+                    <circle id="Oval-8" stroke="#5A6872" stroke-width="2" cx="12.1201172" cy="13.1201172" r="12.1201172"></circle>
+                    <g id="A" transform="translate(41.000000, 1.000000)" font-size="18" font-family="IBMPlexSans-Text, IBM Plex Sans" fill="#5A6872" font-weight="500">
+                        <text>
+                            <tspan x="0" y="18">A</tspan>
+                        </text>
+                    </g>
+                    <circle id="Oval-8" stroke="#5A6872" stroke-width="2" cx="47.1201172" cy="13.1201172" r="12.1201172"></circle>
+                </g>
+                <g id="Group-13-Copy-2" transform="translate(20.000000, 161.000000)">
+                    <g id="a" transform="translate(7.000000, 0.000000)" font-size="18" font-family="IBMPlexSans, IBM Plex Sans" fill="#152935" font-weight="normal">
+                        <text>
+                            <tspan x="0" y="18">a</tspan>
+                        </text>
+                    </g>
+                    <circle id="Oval-8" stroke="#152935" stroke-width="2" cx="12.4648438" cy="13.9719238" r="12.1201172"></circle>
+                    <g id="A" transform="translate(41.000000, 2.000000)" font-size="18" font-family="IBMPlexSans-Text, IBM Plex Sans" fill="#152935" font-weight="500">
+                        <text>
+                            <tspan x="0" y="18">A</tspan>
+                        </text>
+                    </g>
+                    <circle id="Oval-8" stroke="#152935" stroke-width="2" cx="47.1201172" cy="14.1201172" r="12.1201172"></circle>
+                </g>
+                <g id="Group-13" transform="translate(20.000000, 67.000000)">
+                    <g id="a" transform="translate(7.000000, 0.000000)" font-size="18" font-family="IBMPlexSans, IBM Plex Sans" fill="#3D70B2" font-weight="normal">
+                        <text>
+                            <tspan x="0" y="18">a</tspan>
+                        </text>
+                    </g>
+                    <circle id="Oval-8" stroke="#3D70B2" stroke-width="2" cx="12.1201172" cy="13.1201172" r="12.1201172"></circle>
+                    <g id="A" transform="translate(41.000000, 1.000000)" font-size="18" font-family="IBMPlexSans-Text, IBM Plex Sans" fill="#3D70B2" font-weight="500">
+                        <text>
+                            <tspan x="0" y="18">A</tspan>
+                        </text>
+                    </g>
+                    <circle id="Oval-8" stroke="#3D70B2" stroke-width="2" cx="47.1201172" cy="13.1201172" r="12.1201172"></circle>
+                </g>
+                <g id="Group-2" transform="translate(52.000000, 20.000000)">
+                    <g id="Group-17">
+                        <text id="A" fill="#5596E6" font-family="IBMPlexSans-Text, IBM Plex Sans" font-size="18" font-weight="500">
+                            <tspan x="6.86523438" y="18.7873535">A</tspan>
+                        </text>
+                        <circle id="Oval-8" stroke="#5596E6" stroke-width="2" cx="12.9853516" cy="12.9074707" r="12.1201172"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

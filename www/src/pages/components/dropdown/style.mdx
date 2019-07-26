@@ -1,0 +1,150 @@
+---
+title: Dropdown
+tabs: ['Code', 'Usage', 'Style']
+---
+
+## Color
+
+Inputs come in two different colors. The default input color is `$field-01` and is used on `$ui-background` and `$ui-02` page backgrounds. The `--light` version input color is `$field-02` and is used on `$ui-01` page backgrounds.
+
+| Class                                                               | Property         | SCSS       |
+| ------------------------------------------------------------------- | ---------------- | ---------- |
+| `.bx--label`                                                        | text color       | `$text-02` |
+| `.bx--dropdown`                                                     | background-color | `$field-01`|
+| `.bx--dropdown`                                                     | border-bottom | `$ui-04 `    |
+| `.bx--dropdown--light`                                              | background-color | `$field-02`  |
+| `.bx--dropdown-list`                                                | background-color | `$ui-01`     |
+| `.bx--dropdown-text`                                                | text color       | `$text-01`   |
+| `:placeholder`                                                      | text color       | `$text-03 `  |
+| `.bx--dropdown-item`                                                | background-color | `$hover-ui`  |
+| `.bx--dropdown-item`                                                | text color       |` $text-02`   |
+| `.bx--dropdown__arrow`                                              | fill             | `$icon-01`   |
+| `.bx--list-box__selection--multi`                                   | background-color | `$ui-05`     |
+| `.bx--dropdown--open`                                               | box-shadow      | `0 4px 8px 0 rgba(0,0,0,0.10);` |
+
+
+
+![Normal and opened dropdowns](images/dropdown-style-1.png)
+
+
+
+### Interactive states
+
+| Class                                                          | Property   | SCSS        |
+| -------------------------------------------------------------- | ---------- | ----------- |
+| `:focus`                                                       | border     | `$focus`   |
+| `.bx--dropdown-item:hover`                                     | background-color | `$ui-hover` |
+| `.bx--dropdown-item:hover`                                     | text color | `$text-01` |
+| `.bx--form-requirement`                                        | text color | `$support-01` |
+| `[data-invalid]`                                               | border-bottom | `$support-01` |
+| `.bx--label:disabled`                                          | text color | `$disbaled-02` |
+| `.bx--dropdown:disabled`                                       | background-color | `$disbaled-01` |
+| `.bx--dropdown-text:disabled`                                  | text color | `$disbaled-02` |
+
+**Active:** Placeholder text should remain when the user clicks into the text input and gets a cursor. Once the user starts typing, the hint text is replaced with the user input text.
+
+**Help text:** Help text appears below the label when the input is active. Help text remains visible while the input is focused and disappears after focus away.
+
+**Error:** Error messages appear below the input field and are always present while invalid.
+
+**Disabled:** Disabled state should has a `.not-allowed` cursor on hover.
+
+## Typography
+
+All dropdown text should be set in sentence case, with only the first word in a phrase and any proper nouns capitalized. Dropdown options should not exceed three words.
+
+| Class                   | Font-size  | Font-weight     | Type style          |
+| ----------------------- | ---------- | --------------- | ------------------- |
+| `.bx--dropdown-text`    | 14 / 0.875 | Regular / 400   | `$body-short-01`    |
+| `.bx--dropdown-link`    | 14 / 0.875 | Regular / 400   | `$body-short-01`    |
+| `.bx--label`            | 14 / 0.875 | Regular / 400   | `$label-01`    |
+| `.bx--form-requirement` | 12 / 0.75  | Regular / 400   | `$label-01`    |
+
+## Structure
+
+Dropdowns have two states, open and closed. An open and closed dropdown should be the same width and appropriately fit the design, layout, and content. The height of a closed dropdown stays consistent while the height of an open dropdown will vary based on the amount of options it has. Please note the various color differences for closed and open dropdowns.
+
+| Class                 | Property                    | px / rem    | Spacing tokens |
+| --------------------- | --------------------------- | ----------- | -------------- |
+| `.bx--label`          | margin-bottom               | 8 / 0.5     | `$spacing-03`  |
+| `.bx--dropdown`       | height                      | 40 / 2.5    | –              |
+| `.bx--dropdown-text`  | padding-left                | 16 / 1      | `$spacing-05`  |
+| `.bx--dropdown__arrow`| padding-right, padding-left | 16 / 1      | `$spacing-05`  |
+| `.bx--dropdown`       | border-bottom               | 1px         | –              |
+| `.bx--dropdown-item`  | height                      | 40 / 2.5    | –              |
+
+
+
+![Structure and spacing for a closed dropdown](images/dropdown-style-2.png)
+
+
+
+
+## Multi-select dropdown
+
+| Class                             | Property                    | px / rem   | Spacing tokens |
+| --------------------------------- | --------------------------- | ---------- | -------------- |
+| `.bx--list-box`                   | height                      | 40 / 2.5   | –              |
+| `.bx--list-box__menu-item`        | height                      | 40 / 2.5   | –              |
+| `.bx--list-box__field`            | padding-left, padding-right | 16 / 1     | `$spacing-05`  |
+| `.bx--checkbox-label`             | padding-left                | 16 / 1     | `$spacing-05`  |
+| `.bx--list-box__menu-icon`        | padding-left, padding-right | 16 / 1     | `$spacing-05`  |
+| `.bx--list-box__selection--multi` | height                      | 24 / 1.5   | –              |
+| `.bx--list-box__selection--multi` | margin-right                | 16 / 1     | `$spacing-05`  |
+
+
+
+![Structure and spacing for a multi-select dropdown](images/dropdown-style-3.png)
+
+
+
+
+## Inline dropdown
+
+| Class                                | Property                    | px / rem   | Spacing token |
+| ------------------------------------ | --------------------------- | ---------- | ------------- |
+| `.bx--list-box.bx--list-box--inline` | height                      | 32 / 2     | -             |
+| `.bx--list-box__menu-item`           | height                      | 40 / 2.5   | -             |
+| `.bx--list-box__menu-item`           | padding-right, padding-left | 16 / 1     | `$spacing-05` |
+| `.bx--checkbox-label`                | padding-left                | 16 / 1     | `$spacing-05` |
+| `.bx--list-box__menu-icon`           | padding-left, padding-right | 16 / 1     | `$spacing-05` |
+
+
+
+![Structure and spacing for inline dropdown](images/dropdown-style-5.png)
+
+
+
+### Inline dropdown states
+
+Inline select has two different states; one for mouse hover and one for keyboard focus.
+
+
+
+![Hover and focus states for inline dropdown](images/dropdown-style-6.png)
+
+
+
+## Filtering
+
+Filtering can be used with dropdown and multi-select dropdown but not inline dropdown.
+
+| Class                             | Property                    | px / rem   | Spacing token |
+| --------------------------------- | --------------------------- | ---------- | ------------- |
+| `.bx--list-box__selection`        | height                      | 40 / 2.5   | –             |
+| `.bx--list-box__selection svg`    | height                      | 16 / 1     | –             |
+| `.bx--list-box__menu-icon`        | padding-left, padding-right | 16 / 1     | `$spacing-05` |
+| `.bx--list-box__selection`        | padding-left, padding-right | 16 / 1     | `$spacing-05` |
+| `.bx--list-box__selection--multi` | height                      | 24 / 1.5   | –             |
+
+
+
+![Spacing for multi-select dropdown with filtering](images/dropdown-style-7.png)
+
+
+
+
+
+![Interaction states for multi-select dropdown with filtering](images/dropdown-style-8.png)
+
+

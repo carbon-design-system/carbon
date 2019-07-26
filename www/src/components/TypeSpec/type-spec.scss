@@ -1,0 +1,44 @@
+.type-spec {
+  margin-bottom: $spacing-05;
+}
+
+// Example code
+.type-spec__example {
+  background: $carbon--white-0;
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-05;
+}
+
+.type-spec__example > div {
+  @include carbon--breakpoint('md') {
+    padding-right: 25%;
+  }
+}
+
+// Spec details
+.type-spec__details {
+  padding: $spacing-05;
+  background: $carbon--white-0;
+  border-left: 1px solid $carbon--gray-20;
+  @include carbon--type-style('caption-01');
+
+  h4 {
+    @include carbon--type-style('heading-01');
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// this should be using carbon component styles?
+.type-spec__details .bx--snippet--inline {
+  margin: $spacing-03 0 0 0;
+}
+
+.type-spec__details .bx--snippet {
+  background: $carbon--gray-20;
+}
+
+.type-spec__details .bx--snippet--inline code {
+  @include carbon--type-style('code-01');
+  color: $text-01;
+}

@@ -1,0 +1,133 @@
+.code-example {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 100%;
+  background: $ui-05;
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    background: $ui-05;
+    color: $inverse-01;
+  }
+
+  code[class*='language-'] {
+    @include carbon--type-style('code-02');
+  }
+
+  pre[class*='language-'] {
+    padding-top: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.code-example__copy-btn {
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: transparent;
+  background: $ui-05;
+  cursor: pointer;
+  z-index: 20;
+  background: $ui-05;
+  transition: background $transition--base;
+
+  &:hover {
+    background: #353535;
+  }
+
+  &:focus {
+    @include focus-outline;
+    background: $ui-05;
+  }
+
+  &:hover svg {
+    fill: $inverse-01;
+  }
+
+  svg {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    fill: $inverse-01;
+  }
+}
+
+.code-title {
+  @include carbon--type-style('code-02');
+  display: block;
+  margin-bottom: $spacing-05;
+}
+
+.code-example__raw-html {
+  background: $ui-05;
+  color: $inverse-01;
+  margin: 0 $spacing-05;
+  padding: $spacing-05 0;
+  max-height: 12rem;
+  min-height: 7rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: hidden;
+  transition: $transition--base;
+  border-bottom: 1px solid $carbon--gray-80;
+
+  &--expanded {
+    max-height: 100rem;
+  }
+}
+
+.code-example__expand-container {
+  display: flex;
+  justify-content: flex-end;
+  height: rem(48px);
+  width: 100%;
+  background-color: $ui-05;
+}
+
+.code-example__expand {
+  color: $inverse-01;
+  background-color: $ui-05;
+  border: none;
+  padding: $spacing-05;
+  padding-bottom: rem(18px);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:focus {
+    @include focus-outline;
+    outline-offset: -1px;
+  }
+
+  &:hover span {
+    border-bottom: 1px solid $inverse-01;
+  }
+
+  span {
+    @include carbon--type-style('body-short-01');
+    display: inline-block;
+    line-height: 1;
+    border-bottom: 1px solid transparent;
+    transition: border $transition--base;
+  }
+
+  &--icon {
+    margin-left: $spacing-03;
+    fill: $inverse-01;
+    transition: $transition--base;
+
+    &--rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--hidden {
+    display: none;
+  }
+}

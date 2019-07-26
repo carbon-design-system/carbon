@@ -1,0 +1,70 @@
+---
+title: Developers
+tabs: ['Vanilla', 'React', 'Angular', 'Vue', 'Other frameworks']
+---
+
+<AnchorLinks>
+
+<AnchorLink>Development options</AnchorLink>
+<AnchorLink>Other frameworks?</AnchorLink>
+
+</AnchorLinks>
+
+## Development options
+
+The Carbon Design System supports vanilla JS, React and Angular as core parts of the product. But you can still build components even if you're using a different framework.
+
+<AnchorLinks small>
+
+<AnchorLink>Using just the styles</AnchorLink>
+<AnchorLink>Wrapping a component with a JavaScript framework of your choice</AnchorLink>
+<AnchorLink>Examples</AnchorLink>
+<AnchorLink>Troubleshooting</AnchorLink>
+
+</AnchorLinks>
+
+### Using just the styles
+
+Developers wanting to build in different ways follow the instructions for the [Vanilla](/getting-started/developers/vanilla) library to access the styles and build out their own components.
+
+### Wrapping components with JavaScript frameworks
+
+Many JavaScript frameworks have a mechanism to dynamically create/destroy DOM elements, for example, upon change in array.
+This often makes it unclear when the DOM element to instantiate a Carbon component is available, which often depends on the JavaScript framework you use.
+
+Also when DOM elements that Carbon components have been instantiated on are being destroyed, the Carbon component instances should be released so that e.g. there are no zombie event handlers.
+
+The easiest way to hook on the creation/destruction of DOM elements is by defining a "wrapping component", with the JavaScript framework of your choice. Here's an example using Web Components' [Custom Elements v1 spec](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements), but the notion of components, along with the lifecycle callbacks, are commonly found in many other JavaScript frameworks.
+
+```javascript
+class BXLoading extends HTMLElement {
+  // Called when this custom element gets into render tree
+  connectedCallback() {
+    // "this" here is "<bx-loading>" element
+    this.innerHTML =
+      '(e.g. snippet from http://carbondesignsystem.com/components/loading/code)';
+    this.loading = CarbonComponents.Loading.create(
+      this.querySelector('[data-loading]')
+    );
+  }
+  // Called when this custom element gets out of render tree
+  disconnectedCallback() {
+    this.loading.release();
+  }
+}
+customElements.define('bx-loading', BXLoading);
+```
+
+### Examples
+
+[Angular 4 wrapper for Carbon](https://codepen.io/asudoh/pen/VryJBO?editors=1010) (We use this just as an example. [Angular](https://github.com/ibm/carbon-components-angular) is now supported by the Carbon Design System.)
+
+### Troubleshooting
+
+If you experience any issues while getting set up with Carbon Components, please head over to the [Carbon Components GitHub repo](https://github.com/ibm/carbon-components) for more guidelines and support. Please [create an issue](https://github.com/ibm/carbon-components/issues) if your issue does not already exist.
+
+## Other frameworks?
+
+We are open to the idea of providing core support for additional frameworks in future. We added Angular support in the summer of 2018 and Vue in early 2019.
+
+For the Carbon Design System to incorporate additional frameworks into our core offering, those frameworks need clear, guaranteed, ongoing resources to maintain and support that option. If a team built a product using a native web components implemenation of Carbon, for example, but had no plan to support that solution outside of their product, that couldn't become a core part of the Carbon Design System.

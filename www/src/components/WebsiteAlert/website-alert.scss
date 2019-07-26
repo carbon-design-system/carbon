@@ -1,0 +1,85 @@
+.website-alert {
+  height: rem(40px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 9999;
+  background: $brand-01;
+}
+
+.website-alert__icon {
+  margin-right: 1.375rem;
+  margin-left: 0.875rem;
+  fill: $inverse-01;
+
+  @include carbon--breakpoint('lg') {
+    margin: 0 1rem;
+  }
+}
+
+.website-alert__button {
+  justify-self: flex-end;
+  margin-left: auto;
+  height: 100%;
+  text-decoration: none;
+}
+
+.website-alert .bx--btn {
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem;
+  display: inline-flex;
+  align-items: center;
+
+  svg {
+    margin-left: rem(8px);
+    fill: $inverse-01;
+  }
+}
+
+.website-alert__text {
+  @include carbon--type-style('body-short-01');
+  color: $inverse-01;
+  padding: 0;
+}
+
+.website-alert__text span {
+  &:nth-of-type(1),
+  &:nth-of-type(2) {
+    font-weight: carbon--font-weight('semibold');
+  }
+
+  &:nth-of-type(2),
+  &:nth-of-type(3) {
+    display: none;
+
+    @include carbon--breakpoint('md') {
+      display: inline;
+    }
+  }
+}
+
+.website-alert + .bx--header {
+  top: rem(40px);
+}
+
+.website-alert + .bx--header ~ .bx--side-nav {
+  top: 5.5rem;
+}
+
+.website-alert + .bx--header ~ .bx--side-nav + div,
+.website-alert + .bx--header ~ .bx--side-nav + .container,
+.website-alert + .bx--header ~ .bx--website-switcher {
+  margin-top: 5.5rem;
+}
+
+.website-alert
+  + .bx--header
+  ~ .bx--side-nav
+  + div
+  .color-token-table__theme-switcher--sticky {
+  top: rem(104px);
+}

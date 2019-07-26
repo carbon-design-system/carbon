@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 32 88.2939453 32 88.2939453 0 120 0 120 32 120 160 0 160"></polygon>
+        <filter x="-8.3%" y="-5.0%" width="116.7%" height="112.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M1,2 C1.55228475,2 2,1.55228475 2,1 C2,0.44771525 1.55228475,0 1,0 C0.44771525,0 0,0.44771525 0,1 C0,1.55228475 0.44771525,2 1,2 Z M1,7 C1.55228475,7 2,6.55228475 2,6 C2,5.44771525 1.55228475,5 1,5 C0.44771525,5 0,5.44771525 0,6 C0,6.55228475 0.44771525,7 1,7 Z M1,12 C1.55228475,12 2,11.5522847 2,11 C2,10.4477153 1.55228475,10 1,10 C0.44771525,10 0,10.4477153 0,11 C0,11.5522847 0.44771525,12 1,12 Z" id="path-3"></path>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Overflow" transform="translate(100.000000, 80.000000)">
+            <g id="Group-47">
+                <g id="Group-46">
+                    <rect id="Rectangle-2-Copy-8" fill="#F3F3F3" x="0" y="32" width="120" height="32"></rect>
+                    <g id="Rectangle-2-Copy-17">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#F3F3F3" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <rect id="Rectangle-2-Copy-18" fill="#F3F3F3" x="88" y="0" width="32" height="32"></rect>
+                    <rect id="Rectangle-2-Copy-19" fill="#DCDCDC" opacity="0.6" x="0" y="64" width="120" height="32"></rect>
+                    <rect id="Rectangle-3-Copy-33" fill="#BEBEBE" x="16" y="74" width="48" height="12"></rect>
+                    <rect id="Rectangle-2-Copy-20" fill="#F3F3F3" x="0" y="96" width="120" height="32"></rect>
+                    <rect id="Rectangle-2-Copy-21" fill="#F3F3F3" x="0" y="128" width="120" height="32"></rect>
+                    <g id="icon/navigation/overflow-menu/16" transform="translate(96.000000, 8.000000)">
+                        <g id="overflow--menu" stroke-width="1" fill-rule="evenodd" transform="translate(7.000000, 2.000000)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                            <g id="color/gray/100" mask="url(#mask-4)" fill="#171717">
+                                <g transform="translate(-7.000000, -2.000000)">
+                                    <rect x="0" y="0" width="40" height="40"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                    <rect id="Rectangle-2-Copy-22" fill="#DCDCDC" x="0" y="127" width="120" height="1"></rect>
+                    <rect id="Rectangle-3-Copy-32" fill="#D8D8D8" x="16" y="43" width="72" height="12"></rect>
+                    <rect id="Rectangle-3-Copy-34" fill="#D8D8D8" x="16" y="106" width="72" height="12"></rect>
+                    <rect id="Rectangle-3-Copy-35" fill="#D8D8D8" x="16" y="137" width="48" height="12"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
