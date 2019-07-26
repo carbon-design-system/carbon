@@ -6,37 +6,30 @@
 -->
 
 <div class="{{@root.prefix}}--form-item">
-  <div class="{{@root.prefix}}--dropdown__wrapper {{#if inline}}{{@root.prefix}}--dropdown__wrapper--inline{{/if}}">
-    <label for="dropdown-id" class="{{@root.prefix}}--label">Dropdown label</label>
+  <div class="{{@root.prefix}}--dropdown__wrapper {{@root.prefix}}--dropdown--a11y {{#if inline}}{{@root.prefix}}--dropdown__wrapper--inline{{/if}}">
+    <span id="dropdown-label" class="{{@root.prefix}}--label">Dropdown label</span>
     {{#unless inline}}
     <div class="{{@root.prefix}}--form__helper-text">Optional helper text.</div>
     {{/unless}}
-    <ul data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="dropdown-id"
-      class="{{@root.prefix}}--dropdown {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}} {{#if inline}}{{@root.prefix}}--dropdown--inline{{/if}}"
-      tabindex="0">
-      <li class="{{@root.prefix}}--dropdown-text">
-        {{#unless inline}} Dropdown option {{else}}
-        <span class="{{@root.prefix}}--dropdown-text__inner">Inline Dropdown label</span>
-        {{/unless}}
-        {{#unless inline}}
-      </li>
-      <li class="{{@root.prefix}}--dropdown__arrow-container">
-        {{/unless}}
-        {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--dropdown__arrow') }}
-      </li>
-      <li>
-        <ul class="{{@root.prefix}}--dropdown-list">
-          {{#each items}}
-          <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
-            <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
-          </li>
-          {{/each}}
-        </ul>
-      </li>
-    </ul>
+    <div data-dropdown{{#if inline}} data-dropdown-type="inline" {{/if}} data-value id="dropdown-id"
+      class="{{@root.prefix}}--dropdown {{#if up}}{{@root.prefix}}--dropdown--up{{/if}} {{#if light}}{{@root.prefix}}--dropdown--light{{/if}} {{#if inline}}{{@root.prefix}}--dropdown--inline{{/if}}">
+      <button class="{{@root.prefix}}--dropdown-text" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-menu" aria-labelledby="dropdown-label dropdown-value" type="button">
+        <span class="{{@root.prefix}}--dropdown-text__inner" id="dropdown-value">Dropdown option</span>
+        <span class="{{@root.prefix}}--dropdown__arrow-container">
+          {{ carbon-icon 'ChevronDown16' class=(add @root.prefix '--dropdown__arrow') }}
+        </span>
+      </button>
+      <ul class="{{@root.prefix}}--dropdown-list" role="menu" tabindex="0" id="dropdown-menu" data-floating-menu-direction="bottom" aria-hidden="true" wh-menu-anchor="left" aria-labelledby="dropdown-label" aria-activedescendant="dropdown-item0">
+        {{#each items as |item index|}}
+        <li data-option data-value="{{value}}" class="{{@root.prefix}}--dropdown-item">
+          <a class="{{@root.prefix}}--dropdown-link" href="javascript:void(0)" tabindex="-1" role="menuitemradio" aria-checked="{{#if index}}false{{else}}true{{/if}}" id="dropdown-item{{@index}}">{{label}}</a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </div>
-
+{{!-- 
 {{#unless inline}}
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--dropdown__wrapper {{#if inline}}{{@root.prefix}}--dropdown__wrapper--inline{{/if}}">
@@ -150,4 +143,4 @@
     This is not a validation message
   </div>
   {{/unless}}
-</div>
+</div> --}}
