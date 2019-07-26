@@ -23,23 +23,19 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       id="custom-id"
       labelText="Filter table"
       onChange={[Function]}
-      placeHolderText="Search"
+      placeHolderText="Filter table"
       small={true}
       type="text"
       value=""
     >
       <div
-        aria-labelledby="custom-id-label"
         className="bx--search bx--search--sm className bx--search-maginfier"
-        role="search"
       >
         <ForwardRef(Search16)
-          aria-label="Filter table"
           className="bx--search-magnifier"
           role="img"
         >
           <Icon
-            aria-label="Filter table"
             className="bx--search-magnifier"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -49,7 +45,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             xmlns="http://www.w3.org/2000/svg"
           >
             <svg
-              aria-label="Filter table"
+              aria-hidden={true}
               className="bx--search-magnifier"
               focusable="false"
               height={16}
@@ -73,7 +69,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         <label
           className="bx--label"
           htmlFor="custom-id"
-          id="custom-id-label"
         >
           Filter table
         </label>
@@ -82,7 +77,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           className="bx--search-input"
           id="custom-id"
           onChange={[Function]}
-          placeholder="Search"
+          placeholder="Filter table"
           type="text"
           value=""
         />
