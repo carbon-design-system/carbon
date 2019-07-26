@@ -6,8 +6,6 @@
  */
 
 import { white, g10, g90, g100, formatTokenName } from '@carbon/themes';
-import color from 'color-string';
-import { Style } from 'sketch/dom';
 import { syncColorStyle } from '../tools/sharedStyles';
 
 /**
@@ -31,41 +29,4 @@ export function syncThemeColorStyles(document) {
   });
 
   return sharedStyles;
-}
-
-const keywords = ['ui'];
-
-/**
- * Transform a formatted token name back to its JavaScript value to look up the
- * expected value for a token from code
- * @param {string} token
- * @returns {string}
- */
-function formatSymbolName(token) {
-  const parts = token.split('-');
-  let result = '';
-
-  for (let i = 0; i < parts.length; i++) {
-    const part = parts[i];
-
-    if (i === 0) {
-      result = part;
-      continue;
-    }
-
-    if (keywords.indexOf(part) !== -1) {
-      result += part.toUpperCase();
-      continue;
-    }
-
-    if (isNaN(part)) {
-      result += part[0].toUpperCase();
-      result += part.slice(1);
-      continue;
-    }
-
-    result += part;
-  }
-
-  return result;
 }

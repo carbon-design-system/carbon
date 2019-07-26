@@ -7,7 +7,6 @@
 
 import { colors } from '@carbon/colors';
 import { formatTokenName } from '@carbon/themes';
-import { Style } from 'sketch/dom';
 import { syncColorStyle } from '../tools/sharedStyles';
 
 // We separate out certain colors that are not a part of the primary swatches
