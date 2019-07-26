@@ -5,32 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Document, Rectangle, ShapePath } from 'sketch/dom';
+import { Document } from 'sketch/dom';
 import { command } from '../command';
 import { syncColorStyles } from '../../sharedStyles/colors';
 
-import { syncSymbol } from '../../tools/symbols';
-
 export function sync() {
   command('commands/colors/sync', () => {
-    const document = Document.getSelectedDocument();
-    const symbols = document.getSymbols();
-    const symbol = Array.from(symbols).find(
-      symbol => symbol.name === 'test-symbol'
-    );
-
-    // Keep sharedStyleId in sync
-    // console.log(symbol.layers[1]);
-    syncSymbol(document, 'test-symbol', {
-      layers: [
-        new ShapePath({
-          name: 'Inner',
-          shapeType: ShapePath.ShapeType.Oval,
-          frame: new Rectangle(0, 0, 16, 16),
-        }),
-      ],
-    });
-
-    // syncColorStyles(document);
+    syncColorStyles(Document.getSelectedDocument());
   });
 }
