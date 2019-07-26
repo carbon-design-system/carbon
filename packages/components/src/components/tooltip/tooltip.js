@@ -4,8 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import warning from 'warning';
 import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
@@ -80,6 +78,12 @@ const getMenuOffset = (menuBody, menuDirection) => {
   return undefined;
 };
 
+// @questions
+// -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
+// -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
+// -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
+//      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
+//      for keyboard users do we still want the debounce?
 class Tooltip extends mixin(
   createComponent,
   initComponentByEvent,
@@ -103,22 +107,6 @@ class Tooltip extends mixin(
    * @type {boolean}
    */
   _hasContextMenu = false;
-
-  /**
-   * The handle for `focus` event listener.
-   * Used for "focus-navigation" feature.
-   * @type {Handle}
-   * @private
-   */
-  _handleFocusinListener;
-
-  /**
-   * The handle for `keydown` event listener.
-   * Used for "close-on-escape-key" feature.
-   * @type {Handle}
-   * @private
-   */
-  _handleKeydownListener;
 
   /**
    * The handle for `click` event listener.
@@ -179,7 +167,6 @@ class Tooltip extends mixin(
         classShown: this.options.classShown,
         offset: this.options.objMenuOffset,
       });
-      this.tooltip.handleBlur = this._handleBlur;
       this._hookOn(tooltip);
       this.children.push(this.tooltip);
     }
@@ -190,67 +177,14 @@ class Tooltip extends mixin(
       state,
       Object.assign(detail, { delegatorNode: this.element }),
       () => {
-        // @questions
-        // -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
-        // -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
-        // -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
-        //      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
-        //      for keyboard users do we still want the debounce?
-        const isHidden = state !== 'shown';
-        this.tooltip.element.setAttribute('aria-hidden', isHidden.toString());
-        this.element.setAttribute('aria-expanded', (!isHidden).toString());
-
-        if (this._handleFocusinListener) {
-          this._handleFocusinListener = this.unmanage(
-            this._handleFocusinListener
-          ).release();
-        }
-
         if (this._handleClickListener) {
           this._handleClickListener = this.unmanage(
             this._handleClickListener
           ).release();
         }
 
-        if (this._handleKeydownListener) {
-          this._handleKeydownListener = this.unmanage(
-            this._handleKeydownListener
-          ).release();
-        }
-
         if (state === 'shown') {
           this._hookCloseActions(this.element);
-          const focusableNode = this.tooltip.element.querySelector(
-            settings.selectorTabbable
-          );
-          if (focusableNode) {
-            focusableNode.focus();
-          } else {
-            this.tooltip.element.focus();
-            const tooltipTabindex = this.tooltip.element.getAttribute(
-              'tabindex'
-            );
-            if (__DEV__) {
-              warning(
-                !tooltipTabindex || tooltipTabindex === '-1',
-                'Tooltips without interactive elements must include tabindex="0" on the tooltip element.'
-              );
-            }
-          }
-
-          const hasFocusin =
-            'onfocusin' in this.element.ownerDocument.defaultView;
-          const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-          this._handleFocusinListener = this.manage(
-            on(
-              this.element.ownerDocument,
-              focusinEventName,
-              this._handleFocusin,
-              !hasFocusin
-            )
-          );
-        } else {
-          this.element.focus();
         }
 
         if (typeof callback === 'function') callback();
@@ -291,7 +225,6 @@ class Tooltip extends mixin(
       this.manage(
         on(
           this.element,
-          // Does Carbon prefer keydown or keyup?
           'keydown',
           event => {
             setupDebounceClick(event, this._allowedOpenKeys);
@@ -320,18 +253,6 @@ class Tooltip extends mixin(
         }
       })
     );
-
-    this._handleKeydownListener = this.manage(
-      on(element.ownerDocument, 'keydown', evt => {
-        if (
-          evt.which === 27 &&
-          this.tooltip.element.classList.contains(this.options.classShown)
-        ) {
-          evt.stopPropagation();
-          this.changeState('hidden', evt);
-        }
-      })
-    );
   }
 
   /**
@@ -350,15 +271,6 @@ class Tooltip extends mixin(
     this.changeState(state, details);
   }
 
-  /**
-   * Handles `blur` from tooltip
-   * @param {Event} evt The event.
-   * @private
-   */
-  _handleBlur = evt => {
-    this.changeState('hidden', evt);
-  };
-
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
   static get options() {
@@ -368,7 +280,6 @@ class Tooltip extends mixin(
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
-      // @question Does Carbon prefer `keydown` or `keyup`?
       initEventNames: ['click', 'keydown'],
     };
   }
