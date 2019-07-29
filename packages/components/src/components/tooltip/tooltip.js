@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -88,9 +87,6 @@ const allowedOpenKeys = [32, 13];
 // @questions
 // -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
 // -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
-// -- There is a "flash" where the next element (another trigger in the demo) is focused before focus is
-//      moved to the tooltip. I'm assuming this is due to the debounce. Now that it's triggered on "click"
-//      for keyboard users do we still want the debounce?
 class Tooltip extends mixin(
   createComponent,
   initComponentByEvent,
@@ -124,13 +120,6 @@ class Tooltip extends mixin(
   _handleClickListener;
 
   /**
-   * The debounced version of the event handler.
-   * @type {Function}
-   * @private
-   */
-  _debouncedHandleClick = debounce(this._handleClick, 200);
-
-  /**
    * A method called when this widget is created upon events.
    * @param {Event} event The event triggering the creation.
    */
@@ -138,7 +127,7 @@ class Tooltip extends mixin(
     const { relatedTarget, type, which } = event;
 
     if (type === 'click' || allowedOpenKeys.includes(which)) {
-      this._debouncedHandleClick({
+      this._handleClick({
         relatedTarget,
         type,
         details: getLaunchingDetails(event),
@@ -199,18 +188,18 @@ class Tooltip extends mixin(
    */
   _hookOn(element) {
     /**
-     * Setup the _debouncedHandleClick function for displaying a tooltip
+     * Setup the _handleClick function for displaying a tooltip
      * @param {Event} evt - user initiated event
      * @param {Integer[]} [allowedKeys] - allowed key codes the user may press to open the tooltip
      * @private
      */
-    const setupDebounceClick = (evt, allowedKeys) => {
+    const handleClickContextMenu = (evt, allowedKeys) => {
       const { relatedTarget, type, which } = evt;
       // Allow user to use `space` or `enter` to open tooltip
       if (typeof allowedKeys === 'undefined' || allowedKeys.includes(which)) {
         const hadContextMenu = this._hasContextMenu;
         this._hasContextMenu = type === 'contextmenu';
-        this._debouncedHandleClick({
+        this._handleClick({
           relatedTarget,
           type,
           hadContextMenu,
@@ -219,7 +208,7 @@ class Tooltip extends mixin(
       }
     };
 
-    this.manage(on(element, 'click', setupDebounceClick, false));
+    this.manage(on(element, 'click', handleClickContextMenu, false));
 
     if (this.element.tagName !== 'BUTTON') {
       this.manage(
@@ -227,7 +216,7 @@ class Tooltip extends mixin(
           this.element,
           'keydown',
           event => {
-            setupDebounceClick(event, allowedOpenKeys);
+            handleClickContextMenu(event, allowedOpenKeys);
           },
           false
         )
@@ -247,7 +236,8 @@ class Tooltip extends mixin(
           !eventMatches(
             evt,
             element.getAttribute(this.options.attribTooltipTarget)
-          )
+          ) &&
+          !(element.contains(evt.target) || evt.target === element)
         ) {
           this.changeState('hidden', evt);
         }
