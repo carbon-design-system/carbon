@@ -5482,6 +5482,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5513,8 +5514,6 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅highlight [variable]
 
@@ -12350,11 +12349,11 @@ Dropdown styles
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-03;
+      color: $disabled-02;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-03;
+      fill: $disabled-02;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -12404,7 +12403,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
@@ -12464,7 +12463,7 @@ Dropdown styles
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-background [variable]](#ui-background-variable)
 
 ## file-uploader
@@ -13195,11 +13194,11 @@ List box styles
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-03;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -13613,7 +13612,6 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-background [variable]](#ui-background-variable)
