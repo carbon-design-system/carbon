@@ -652,15 +652,14 @@ $tokens: (
 /// @group @carbon/type
 @mixin carbon--type-style(
   $name,
-  $tokenOverrides: $tokens,
   $fluid: false,
-  $breakpoints: $carbon--grid-breakpoints,
+  $breakpoints: $carbon--grid-breakpoints
 ) {
-  @if not map-has-key($tokenOverrides, $name) {
+  @if not map-has-key($tokens, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }
 
-  $token: map-get($tokenOverrides, $name);
+  $token: map-get($tokens, $name);
 
   // If $fluid is set to true and the token has breakpoints defined for fluid
   // styles, delegate to the fluid-type helper for the given token
@@ -674,12 +673,18 @@ $tokens: (
 }
 
 /// Type scole that maps font size to icon size
+/// 14px type -> 16px icon
+/// 16px type -> 20px icon
+/// 20px type -> 24px icon
+/// 24px type -> 32px icon
 /// @type Map
 /// @access public
 /// @group @carbon/type
 $carbon--type-icon-scale: (
   0.875rem: rem(16px),
   1rem: rem(20px),
+  1.25rem: rem(24px),
+  1.5rem: rem(32px),
 );
 
 /// Translate font size to icon size
@@ -688,5 +693,98 @@ $carbon--type-icon-scale: (
 /// @access public
 /// @group @carbon/type
 @function carbon--type-icon-size($font-size) {
-  @return map-get($carbon--type-icon-scale, $font-size);
+  @if map-has-key($carbon--type-icon-scale, $font-size) {
+    @return map-get($carbon--type-icon-scale, $font-size);
+  } @else {
+    @warn 'Font-size: `#{$font-size}` does not translate to an icon size. Using `#{$font-size}` for the icon size.';
+    @return $font-size;
+  }
+}
+
+/// Define type variables from a map of tokens
+/// @access public
+/// @param {Map} $themedTokens [$tokens] - Map of type tokens
+/// @content Pass in your custom declaration blocks to be used after the token maps set theming variables.
+/// @group @carbon/type
+@mixin carbon--type-theme($themedTokens: $tokens) {
+  $caption-01: map-get($themedTokens, 'caption-01') !global;
+  $label-01: map-get($themedTokens, 'label-01') !global;
+  $helper-text-01: map-get($themedTokens, 'helper-text-01') !global;
+  $body-short-01: map-get($themedTokens, 'body-short-01') !global;
+  $body-short-02: map-get($themedTokens, 'body-short-02') !global;
+  $body-long-01: map-get($themedTokens, 'body-long-01') !global;
+  $body-long-02: map-get($themedTokens, 'body-long-02') !global;
+  $code-01: map-get($themedTokens, 'code-01') !global;
+  $code-02: map-get($themedTokens, 'code-02') !global;
+  $heading-01: map-get($themedTokens, 'heading-01') !global;
+  $heading-02: map-get($themedTokens, 'heading-02') !global;
+  $productive-heading-01: map-get(
+    $themedTokens,
+    'productive-heading-01'
+  ) !global;
+  $productive-heading-02: map-get(
+    $themedTokens,
+    'productive-heading-02'
+  ) !global;
+  $productive-heading-03: map-get(
+    $themedTokens,
+    'productive-heading-03'
+  ) !global;
+  $productive-heading-04: map-get(
+    $themedTokens,
+    'productive-heading-04'
+  ) !global;
+  $productive-heading-05: map-get(
+    $themedTokens,
+    'productive-heading-05'
+  ) !global;
+  $productive-heading-06: map-get(
+    $themedTokens,
+    'productive-heading-06'
+  ) !global;
+  $productive-heading-07: map-get(
+    $themedTokens,
+    'productive-heading-07'
+  ) !global;
+  $expressive-paragraph-01: map-get(
+    $themedTokens,
+    'expressive-paragraph-01'
+  ) !global;
+  $expressive-heading-01: map-get(
+    $themedTokens,
+    'expressive-heading-01'
+  ) !global;
+  $expressive-heading-02: map-get(
+    $themedTokens,
+    'expressive-heading-02'
+  ) !global;
+  $expressive-heading-03: map-get(
+    $themedTokens,
+    'expressive-heading-03'
+  ) !global;
+  $expressive-heading-04: map-get(
+    $themedTokens,
+    'expressive-heading-04'
+  ) !global;
+  $expressive-heading-05: map-get(
+    $themedTokens,
+    'expressive-heading-05'
+  ) !global;
+  $expressive-heading-06: map-get(
+    $themedTokens,
+    'expressive-heading-06'
+  ) !global;
+  $quotation-01: map-get($themedTokens, 'quotation-01') !global;
+  $quotation-02: map-get($themedTokens, 'quotation-02') !global;
+  $display-01: map-get($themedTokens, 'display-01') !global;
+  $display-02: map-get($themedTokens, 'display-02') !global;
+  $display-03: map-get($themedTokens, 'display-03') !global;
+  $display-04: map-get($themedTokens, 'display-04') !global;
+
+  @content;
+
+  // Reset to default type tokens after apply in content
+  @if $themedTokens != $tokens {
+    @include carbon--type-theme();
+  }
 }

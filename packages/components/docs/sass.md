@@ -233,6 +233,9 @@
   - [✅fluid-type [mixin]](#fluid-type-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [✅carbon--type-icon-scale [variable]](#carbon--type-icon-scale-variable)
+  - [✅carbon--type-icon-size [function]](#carbon--type-icon-size-function)
+  - [✅carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 - [accordion](#accordion)
   - [❌accordion [mixin]](#accordion-mixin)
 - [breadcrumb](#breadcrumb)
@@ -384,6 +387,7 @@
   - [❌shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
   - [❌unit [variable]](#unit-variable)
 - [general](#general)
+  - [✅accordion-arrow-size [variable]](#accordion-arrow-size-variable)
   - [✅spacing--columns--first [variable]](#spacing--columns--first-variable)
   - [✅spacing--columns--before [variable]](#spacing--columns--before-variable)
   - [✅spacing--cell--activity [variable]](#spacing--cell--activity-variable)
@@ -7502,6 +7506,8 @@ $caption-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅label-01 [variable]
 
@@ -7521,6 +7527,8 @@ $label-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅helper-text-01 [variable]
 
@@ -7540,6 +7548,8 @@ $helper-text-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-short-01 [variable]
 
@@ -7559,6 +7569,8 @@ $body-short-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-long-01 [variable]
 
@@ -7578,6 +7590,8 @@ $body-long-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-short-02 [variable]
 
@@ -7597,6 +7611,8 @@ $body-short-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅body-long-02 [variable]
 
@@ -7616,6 +7632,8 @@ $body-long-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅code-01 [variable]
 
@@ -7635,6 +7653,8 @@ $code-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅code-02 [variable]
 
@@ -7654,6 +7674,8 @@ $code-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅heading-01 [variable]
 
@@ -7673,6 +7695,8 @@ $heading-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-01 [variable]
 
@@ -7687,6 +7711,8 @@ $productive-heading-01: $heading-01;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅heading-02 [variable]
 
@@ -7706,6 +7732,8 @@ $heading-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-02 [variable]
 
@@ -7720,6 +7748,8 @@ $productive-heading-02: $heading-02;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-03 [variable]
 
@@ -7739,6 +7769,8 @@ $productive-heading-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-04 [variable]
 
@@ -7758,6 +7790,8 @@ $productive-heading-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-05 [variable]
 
@@ -7777,6 +7811,8 @@ $productive-heading-05: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-06 [variable]
 
@@ -7796,6 +7832,8 @@ $productive-heading-06: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅productive-heading-07 [variable]
 
@@ -7815,6 +7853,8 @@ $productive-heading-07: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-01 [variable]
 
@@ -7829,6 +7869,8 @@ $expressive-heading-01: $heading-01;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-02 [variable]
 
@@ -7843,6 +7885,8 @@ $expressive-heading-02: $heading-02;
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-03 [variable]
 
@@ -7871,6 +7915,8 @@ $expressive-heading-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-04 [variable]
 
@@ -7899,6 +7945,8 @@ $expressive-heading-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-05 [variable]
 
@@ -7935,6 +7983,8 @@ $expressive-heading-05: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-heading-06 [variable]
 
@@ -7971,6 +8021,8 @@ $expressive-heading-06: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅expressive-paragraph-01 [variable]
 
@@ -8000,6 +8052,8 @@ $expressive-paragraph-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅quotation-01 [variable]
 
@@ -8036,6 +8090,8 @@ $quotation-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅quotation-02 [variable]
 
@@ -8072,6 +8128,8 @@ $quotation-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-01 [variable]
 
@@ -8107,6 +8165,8 @@ $display-01: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-02 [variable]
 
@@ -8142,6 +8202,8 @@ $display-02: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-03 [variable]
 
@@ -8182,6 +8244,8 @@ $display-03: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅display-04 [variable]
 
@@ -8222,6 +8286,8 @@ $display-04: (
 
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
+- **Used by**:
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
 
 ### ✅tokens [variable]
 
@@ -8271,6 +8337,8 @@ $tokens: (
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--type-theme [mixin]](#carbon--type-theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
 
 ### ✅properties [mixin]
 
@@ -8533,6 +8601,200 @@ fixed contexts.
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
+### ✅carbon--type-icon-scale [variable]
+
+Type scole that maps font size to icon size 14px type -> 16px icon 16px type ->
+20px icon 20px type -> 24px icon 24px type -> 32px icon
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$carbon--type-icon-scale: (
+  0.875rem: rem(16px),
+  1rem: rem(20px),
+  1.25rem: rem(24px),
+  1.5rem: rem(32px),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+- **Used by**:
+  - [carbon--type-icon-size [function]](#carbon--type-icon-size-function)
+
+### ✅carbon--type-icon-size [function]
+
+Translate font size to icon size
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function carbon--type-icon-size($font-size) {
+  @if map-has-key($carbon--type-icon-scale, $font-size) {
+    @return map-get($carbon--type-icon-scale, $font-size);
+  } @else {
+    @warn 'Font-size: `#{$font-size}` does not translate to an icon size. Using `#{$font-size}` for the icon size.';
+    @return $font-size;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name         | Description       | Type     | Default value |
+| ------------ | ----------------- | -------- | ------------- |
+| `$font-size` | Font size in rems | `Number` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `Number` Icon size in rems
+- **Requires**:
+  - [carbon--type-icon-scale [variable]](#carbon--type-icon-scale-variable)
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
+
+### ✅carbon--type-theme [mixin]
+
+Define type variables from a map of tokens
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin carbon--type-theme($themedTokens: $tokens) {
+  $caption-01: map-get($themedTokens, 'caption-01') !global;
+  $label-01: map-get($themedTokens, 'label-01') !global;
+  $helper-text-01: map-get($themedTokens, 'helper-text-01') !global;
+  $body-short-01: map-get($themedTokens, 'body-short-01') !global;
+  $body-short-02: map-get($themedTokens, 'body-short-02') !global;
+  $body-long-01: map-get($themedTokens, 'body-long-01') !global;
+  $body-long-02: map-get($themedTokens, 'body-long-02') !global;
+  $code-01: map-get($themedTokens, 'code-01') !global;
+  $code-02: map-get($themedTokens, 'code-02') !global;
+  $heading-01: map-get($themedTokens, 'heading-01') !global;
+  $heading-02: map-get($themedTokens, 'heading-02') !global;
+  $productive-heading-01: map-get(
+    $themedTokens,
+    'productive-heading-01'
+  ) !global;
+  $productive-heading-02: map-get(
+    $themedTokens,
+    'productive-heading-02'
+  ) !global;
+  $productive-heading-03: map-get(
+    $themedTokens,
+    'productive-heading-03'
+  ) !global;
+  $productive-heading-04: map-get(
+    $themedTokens,
+    'productive-heading-04'
+  ) !global;
+  $productive-heading-05: map-get(
+    $themedTokens,
+    'productive-heading-05'
+  ) !global;
+  $productive-heading-06: map-get(
+    $themedTokens,
+    'productive-heading-06'
+  ) !global;
+  $productive-heading-07: map-get(
+    $themedTokens,
+    'productive-heading-07'
+  ) !global;
+  $expressive-paragraph-01: map-get(
+    $themedTokens,
+    'expressive-paragraph-01'
+  ) !global;
+  $expressive-heading-01: map-get(
+    $themedTokens,
+    'expressive-heading-01'
+  ) !global;
+  $expressive-heading-02: map-get(
+    $themedTokens,
+    'expressive-heading-02'
+  ) !global;
+  $expressive-heading-03: map-get(
+    $themedTokens,
+    'expressive-heading-03'
+  ) !global;
+  $expressive-heading-04: map-get(
+    $themedTokens,
+    'expressive-heading-04'
+  ) !global;
+  $expressive-heading-05: map-get(
+    $themedTokens,
+    'expressive-heading-05'
+  ) !global;
+  $expressive-heading-06: map-get(
+    $themedTokens,
+    'expressive-heading-06'
+  ) !global;
+  $quotation-01: map-get($themedTokens, 'quotation-01') !global;
+  $quotation-02: map-get($themedTokens, 'quotation-02') !global;
+  $display-01: map-get($themedTokens, 'display-01') !global;
+  $display-02: map-get($themedTokens, 'display-02') !global;
+  $display-03: map-get($themedTokens, 'display-03') !global;
+  $display-04: map-get($themedTokens, 'display-04') !global;
+
+  @content;
+
+  // Reset to default type tokens after apply in content
+  @if $themedTokens != $tokens {
+    @include carbon--type-theme();
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name            | Description        | Type  | Default value |
+| --------------- | ------------------ | ----- | ------------- |
+| `$themedTokens` | Map of type tokens | `Map` | `$tokens`     |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Content**: Pass in your custom declaration blocks to be used after the token
+  maps set theming variables.
+- **Requires**:
+  - [caption-01 [variable]](#caption-01-variable)
+  - [label-01 [variable]](#label-01-variable)
+  - [helper-text-01 [variable]](#helper-text-01-variable)
+  - [body-short-01 [variable]](#body-short-01-variable)
+  - [body-short-02 [variable]](#body-short-02-variable)
+  - [body-long-01 [variable]](#body-long-01-variable)
+  - [body-long-02 [variable]](#body-long-02-variable)
+  - [code-01 [variable]](#code-01-variable)
+  - [code-02 [variable]](#code-02-variable)
+  - [heading-01 [variable]](#heading-01-variable)
+  - [heading-02 [variable]](#heading-02-variable)
+  - [productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [productive-heading-03 [variable]](#productive-heading-03-variable)
+  - [productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [productive-heading-05 [variable]](#productive-heading-05-variable)
+  - [productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [productive-heading-07 [variable]](#productive-heading-07-variable)
+  - [expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [expressive-heading-02 [variable]](#expressive-heading-02-variable)
+  - [expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [expressive-heading-04 [variable]](#expressive-heading-04-variable)
+  - [expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [expressive-heading-06 [variable]](#expressive-heading-06-variable)
+  - [quotation-01 [variable]](#quotation-01-variable)
+  - [quotation-02 [variable]](#quotation-02-variable)
+  - [display-01 [variable]](#display-01-variable)
+  - [display-02 [variable]](#display-02-variable)
+  - [display-03 [variable]](#display-03-variable)
+  - [display-04 [variable]](#display-04-variable)
+  - [tokens [variable]](#tokens-variable)
+
 ## accordion
 
 ### ❌accordion [mixin]
@@ -8544,6 +8806,13 @@ Accordion styles
 
 ```scss
 @mixin accordion() {
+  /// Accordion arrow size in rems
+  /// @access private
+  /// @group accordion
+  $accordion-arrow-size: carbon--type-icon-size(
+    map-get(map-get($tokens, 'body-long-01'), 'font-size')
+  );
+
   .#{$prefix}--accordion {
     @include reset;
 
@@ -8568,7 +8837,12 @@ Accordion styles
     align-items: center;
     justify-content: $accordion-justify-content;
     cursor: pointer;
-    padding: rem(6px) 0;
+    padding: (
+        (
+            $accordion-heading-height - map-get(map-get($tokens, 'body-long-01'), 'line-height')
+          ) / 2
+      )
+      0;
     flex-direction: $accordion-flex-direction;
     position: relative;
     width: 100%;
@@ -8602,9 +8876,9 @@ Accordion styles
     @include focus-outline('reset');
     // Without flex basis and flex shrink being set here, our icon width can go
     // <16px and cause the icon to render in the incorrect artboard size
-    flex: 0 0 1rem;
-    width: 1rem;
-    height: 1rem;
+    flex: 0 0 $accordion-arrow-size;
+    width: $accordion-arrow-size;
+    height: $accordion-arrow-size;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
     // TODO: RTL rotate(180deg);
@@ -8702,6 +8976,9 @@ Accordion styles
 - **Group**: [accordion](#accordion)
 - **Requires**:
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
+  - [carbon--type-icon-size [function]](#carbon--type-icon-size-function)
+  - [accordion-arrow-size [variable]](#accordion-arrow-size-variable)
+  - [tokens [variable]](#tokens-variable)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -21224,6 +21501,25 @@ $unit: 0.5rem;
   - [Link](https://github.com/IBM/carbon-components/pull/1032#discussion_r210418579)
 
 ## general
+
+### ✅accordion-arrow-size [variable]
+
+Accordion arrow size in rems @access private @group accordion
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$accordion-arrow-size: carbon--type-icon-size(
+  map-get(map-get($tokens, 'body-long-01'), 'font-size')
+);
+```
+
+</details>
+
+- **Group**: [general](#general)
+- **Used by**:
+  - [accordion [mixin]](#accordion-mixin)
 
 ### ✅spacing--columns--first [variable]
 

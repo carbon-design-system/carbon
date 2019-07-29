@@ -15,17 +15,11 @@
 /// @access private
 /// @group accordion
 @mixin accordion {
-  /// Accordion type tokens that can be overwritten
-  /// @type Map
-  /// @access public
-  /// @group accordion
-  $accordion-type-tokens: $tokens !default !global;
-
   /// Accordion arrow size in rems
   /// @access private
   /// @group accordion
   $accordion-arrow-size: carbon--type-icon-size(
-    map-get(map-get($accordion-type-tokens, 'body-long-01'), 'font-size')
+    map-get(map-get($tokens, 'body-long-01'), 'font-size')
   );
 
   .#{$prefix}--accordion {
@@ -55,10 +49,7 @@
     padding: (
         (
             $accordion-heading-height -
-              map-get(
-                map-get($accordion-type-tokens, 'body-long-01'),
-                'line-height'
-              )
+              map-get(map-get($tokens, 'body-long-01'), 'line-height')
           ) / 2
       )
       0;
@@ -106,7 +97,7 @@
   }
 
   .#{$prefix}--accordion__title {
-    @include type-style('body-long-01', $accordion-type-tokens);
+    @include type-style('body-long-01');
 
     margin: $accordion-title-margin;
     width: 100%;
@@ -130,7 +121,7 @@
     }
 
     p {
-      @include type-style('body-long-01', $accordion-type-tokens);
+      @include type-style('body-long-01');
     }
   }
 
