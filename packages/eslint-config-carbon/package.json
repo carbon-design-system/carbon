@@ -19,7 +19,7 @@
   "peerDependencies": {
     "eslint": "^6.0.0"
   },
-  "dependencies": {
+  "devDependencies": {
     "babel-eslint": "^10.0.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-airbnb-base": "^13.0.0",
