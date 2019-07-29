@@ -84,9 +84,6 @@ const getMenuOffset = (menuBody, menuDirection) => {
  */
 const allowedOpenKeys = [32, 13];
 
-// @questions
-// -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
-// -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
 class Tooltip extends mixin(
   createComponent,
   initComponentByEvent,
