@@ -299,7 +299,7 @@ describe('Test floating menu', function() {
           menu.show();
         }).toThrowError(
           TypeError,
-          'Cannot find the refernce node for changing the style.'
+          'Cannot find the reference node for changing the style.'
         );
       } finally {
         menu.options.refNode = refNode;
