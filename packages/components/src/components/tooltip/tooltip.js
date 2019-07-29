@@ -78,6 +78,13 @@ const getMenuOffset = (menuBody, menuDirection) => {
   return undefined;
 };
 
+/**
+ * Key codes for allowed keys that will trigger opening a tooltip
+ * @type {Integer[]}
+ * @private
+ */
+const allowedOpenKeys = [32, 13];
+
 // @questions
 // -- What is the expected behavior if the user clicks on the trigger when the tooltip is already open
 // -- What's the focus state look like when there is only rich text within a tooltip (no buttons/links/etc)
@@ -124,20 +131,13 @@ class Tooltip extends mixin(
   _debouncedHandleClick = debounce(this._handleClick, 200);
 
   /**
-   * Key codes for allowed keys that will trigger opening a tooltip
-   * @type {Integer[]}
-   * @private
-   */
-  _allowedOpenKeys = [32, 13];
-
-  /**
    * A method called when this widget is created upon events.
    * @param {Event} event The event triggering the creation.
    */
   createdByEvent(event) {
     const { relatedTarget, type, which } = event;
 
-    if (type === 'click' || this._allowedOpenKeys.includes(which)) {
+    if (type === 'click' || allowedOpenKeys.includes(which)) {
       this._debouncedHandleClick({
         relatedTarget,
         type,
@@ -227,7 +227,7 @@ class Tooltip extends mixin(
           this.element,
           'keydown',
           event => {
-            setupDebounceClick(event, this._allowedOpenKeys);
+            setupDebounceClick(event, allowedOpenKeys);
           },
           false
         )
