@@ -152,11 +152,11 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-03;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled,

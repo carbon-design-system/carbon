@@ -243,11 +243,11 @@
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-03;
+      color: $disabled-02;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-03;
+      fill: $disabled-02;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -297,7 +297,7 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
