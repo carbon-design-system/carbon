@@ -1,0 +1,594 @@
+---
+title: 1. Installing Carbon
+internal: false
+---
+
+### Starting with Create React App, let's install Carbon and begin using Carbon components. By the end you will have a React app that uses the UI Shell to navigate between pages.
+
+<AnchorLinks>
+
+<AnchorLink>Fork, clone and branch</AnchorLink>
+<AnchorLink>Build and start</AnchorLink>
+<AnchorLink>Install Carbon</AnchorLink>
+<AnchorLink>Install and build Sass</AnchorLink>
+<AnchorLink>Add UI Shell</AnchorLink>
+<AnchorLink>Create pages</AnchorLink>
+<AnchorLink>Add routing</AnchorLink>
+<AnchorLink>Submit pull request</AnchorLink>
+
+</AnchorLinks>
+
+## Preview
+
+A [preview](https://react-step-2--carbon-tutorial.netlify.com) of what you will build:
+
+<Row>
+  <Column offsetLg="4">
+    <iframe
+      height="200"
+      title="Carbon Tutorial Step 1"
+      src="https://react-step-2--carbon-tutorial.netlify.com"
+      frameborder="no"
+      allowtransparency="true"
+      allowfullscreen="true"
+      class="bx--iframe bx--iframe--border"
+    />
+  </Column>
+</Row>
+
+## Fork, clone and branch
+
+This tutorial has an accompanying GitHub repository called [carbon-tutorial](https://github.com/carbon-design-system/carbon-tutorial) that we'll use as a starting point for each step.
+
+### Fork
+
+To begin, fork [carbon-tutorial](https://github.com/carbon-design-system/carbon-tutorial) using your GitHub account.
+
+### Clone
+
+Go to your forked repository, copy the SSH or HTTPS URL and in your terminal run the two commands to get the repository in your local file system and enter that directory.
+
+```bash
+$ git clone [your fork SSH/HTTPS]
+$ cd carbon-tutorial
+```
+
+### Add upstream remote
+
+Add a remote called `upstream` so we can eventually submit a pull request once you have completed this tutorial step.
+
+```bash
+$ git remote add upstream git@github.com:carbon-design-system/carbon-tutorial.git
+```
+
+Or, if you prefer to use HTTPS instead of SSH with your remotes:
+
+```bash
+$ git remote add upstream https://github.com/carbon-design-system/carbon-tutorial.git
+```
+
+Verify that your forked repository remotes are correct:
+
+```bash
+$ git remote -v
+```
+
+Your terminal should output something like this:
+
+```bash
+origin	[your forked repo] (fetch)
+origin	[your forked repo] (push)
+upstream	git@github.com:carbon-design-system/carbon-tutorial.git (fetch)
+upstream	git@github.com:carbon-design-system/carbon-tutorial.git (push)
+```
+
+### Branch
+
+Now that we have our repository set up, let's check out the branch for this tutorial step's starting point. Run the two commands:
+
+```bash
+$ git fetch upstream
+$ git checkout -b react-step-1 upstream/react-step-1
+```
+
+## Build and start
+
+We have the repository forked to your GitHub account, cloned down to your machine, and the starting branch checked out. Next, install the React app's dependencies with:
+
+```bash
+$ yarn
+```
+
+After the dependencies are installed, you can start the app with:
+
+```bash
+$ yarn start
+```
+
+Your default browser should open up with an empty page that says: `Hello Carbon! Well, not quite yet. This is the starting point for the Carbon tutorial.`
+
+## Install Carbon
+
+Even though we installed existing dependencies, we've yet to install the Carbon packages.
+
+- `carbon-components` - component styles
+- `carbon-components-react` - React components
+- `@carbon/icons-react` - React icons
+
+Stop your development server with `CTRL-C` and install Carbon dependencies with:
+
+```bash
+$ yarn add carbon-components carbon-components-react @carbon/icons-react
+```
+
+## Install and build Sass
+
+We need to run a Sass build as the Carbon styles are authored in Sass, so run the following command to install `node-sass` as a dependency.
+
+```bash
+$ yarn add node-sass
+```
+
+To avoid having to add the `~` prefix when importing SCSS files from `node_modules`, create a `.env` file at the project root that contains:
+
+##### .env
+
+```bash
+SASS_PATH="node_modules"
+```
+
+For the Windows operating system, use:
+
+##### .env
+
+```bash
+SASS_PATH=./node_modules
+```
+
+Then, start the app again. If your app's currently running, you'll need to restart it for the new environment variable to be used.
+
+```bash
+$ yarn start
+```
+
+The app looks as it did before. Next, let's prepare our app for a Sass build.
+
+In the `src` directory, rename `index.css` as `index.scss`. Then in `index.js` update the `index.css` import to `index.scss`.
+
+### Import carbon-component styles
+
+In `index.scss`, import the Carbon styles by adding the following at the top of the file:
+
+##### src/index.scss
+
+```scss
+@import 'carbon-components/scss/globals/scss/styles.scss';
+```
+
+This will take a moment for the Sass to compile. Once compiled, you'll notice that the Carbon base styling is applied (IBM Plex Sans font family, font size, weight, colors, etc.)
+
+Because any change to `index.scss` will re-compile all of the Carbon Sass, create an `app.scss` file in the `src` directory and in `App.js`, import that new file.
+
+##### src/App.js
+
+```javascript
+import './app.scss';
+```
+
+_Note: To optimize our Sass compile time, we'll be adding app-specific styling to_ `app.scss` _and only modifying_ `index.scss` _when necessary._
+
+Next we'll import a `Button` from Carbon to test that our dependencies are working properly. At the top of `App.js`, import the `Button` by adding the following:
+
+##### src/App.js
+
+```javascript
+import { Button } from 'carbon-components-react';
+```
+
+In the `App` component return, you can now replace:
+
+##### src/App.js
+
+<!-- prettier-ignore-start -->
+```html
+<div>
+  Hello Carbon! Well, not quite yet. This is the starting point for the Carbon tutorial.
+</div>
+```
+<!-- prettier-ignore-end -->
+
+with:
+
+##### src/App.js
+
+<!-- prettier-ignore-start -->
+```html
+<Button>Button</Button>
+```
+<!-- prettier-ignore-end -->
+
+Congratulations, you've imported your first component! You should see a Carbon styled button on the page.
+
+## Add UI Shell
+
+_Note: The UI Shell has experimental status at the moment. We do not recommend using it for production until it is stable, but if doing so, know that there may be breaking changes in the future._
+
+Next we're going to create a React component called `TutorialHeader` to use with the UI Shell Carbon component. In the `src` directory, create a `components` directory and inside of that, a `TutorialHeader` directory. Create the following files inside `src/components/TutorialHeader`:
+
+```bash
+src/components/TutorialHeader
+├──_tutorial-header.scss
+├──index.js
+└──TutorialHeader.js
+```
+
+### Add UI Shell Sass
+
+In `index.scss` add the following feature-flag **above** the Carbon styles import like so:
+
+##### src/index.scss
+
+```scss
+$feature-flags: (
+  ui-shell: true,
+);
+```
+
+This is because our UI Shell is in experimental mode and the styles need to be manually imported.
+
+Next, in `app.scss`, we'll import our `TutorialHeader` styles. Your file should now look like this:
+
+##### src/app.scss
+
+```scss
+@import './components/TutorialHeader/tutorial-header.scss';
+```
+
+### Import and export the header
+
+In `src/components/TutorialHeader/index.js`, import and export our `TutorialHeader` component like so:
+
+##### src/components/TutorialHeader/index.js
+
+```javascript
+import TutorialHeader from './TutorialHeader';
+export default TutorialHeader;
+```
+
+Next we'll import our Carbon UI Shell components into `TutorialHeader.js`. Set up the file like so:
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```javascript
+import React from 'react';
+import {
+  Header,
+  HeaderName,
+  HeaderNavigation,
+  HeaderMenuItem,
+  HeaderGlobalBar,
+  HeaderGlobalAction,
+  SkipToContent,
+} from 'carbon-components-react/lib/components/UIShell';
+
+const TutorialHeader = () => (
+  <Header aria-label="Carbon Tutorial">
+    <SkipToContent />
+    <HeaderName href="/" prefix="IBM">
+      Carbon Tutorial
+    </HeaderName>
+    <HeaderNavigation aria-label="Carbon Tutorial">
+      <HeaderMenuItem href="/repos">Repositories</HeaderMenuItem>
+    </HeaderNavigation>
+    <HeaderGlobalBar />
+  </Header>
+);
+
+export default TutorialHeader;
+```
+
+_Note: you can find a description of the different components used UI Shell in our [carbon-components-react](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/UIShell) package._
+
+_Note: When creating navigation headers, it's important to have a_ `Skip to content` _link so keyboard users can skip the navigation items and go straight to the main content._
+
+_Note: It's important that the_ `TutorialHeader` _returns the Carbon_ `Header` _as it's containing element, as we'll later be rendering_ `TutorialHeader` _in_ `App.js` _as a preceeding sibling of_ `Content`_, another UI Shell component. Those components need to live one after another for the UI Shell to properly render._
+
+### Import icons
+
+Now let's import the icons from our `@carbon/icons-react` elements package. In the `TutorialHeader.js` file, we need to import each individual icon we will use.
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```javascript
+import Notification20 from '@carbon/icons-react/lib/notification/20';
+import UserAvatar20 from '@carbon/icons-react/lib/user--avatar/20';
+import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20';
+```
+
+Then we need to add the `HeaderGlobalAction` component inside of the `HeaderGlobalBar` where we will add our icons. These represent actions in the header a user can make. Replace:
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```html
+<HeaderGlobalBar />
+```
+
+With:
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```html
+<HeaderGlobalBar>
+  <HeaderGlobalAction aria-label="Notifications">
+    <Notification20 />
+  </HeaderGlobalAction>
+  <HeaderGlobalAction aria-label="User Avatar">
+    <UserAvatar20 />
+  </HeaderGlobalAction>
+  <HeaderGlobalAction aria-label="App Switcher">
+    <AppSwitcher20 />
+  </HeaderGlobalAction>
+</HeaderGlobalBar>
+```
+
+### Render the header
+
+Next we'll render our UI Shell by importing our `TutorialHeader` component and `Content` into `App.js`. Your imports should look like this:
+
+##### src/App.js
+
+```javascript
+import React, { Component } from 'react';
+import './app.scss';
+import { Button } from 'carbon-components-react';
+import { Content } from 'carbon-components-react/lib/components/UIShell';
+import TutorialHeader from './components/TutorialHeader';
+```
+
+Our `return` currently just contains a `Button`. Let's update that to include our imported components. This should look like the following:
+
+##### src/App.js
+
+```javascript
+class App extends Component {
+  render() {
+    return (
+      <>
+        <TutorialHeader />
+        <Content>
+          <Button>Button</Button>
+        </Content>
+      </>
+    );
+  }
+}
+```
+
+You should now see a styled UI Shell header and a button below it.
+
+## Create pages
+
+Next thing we need to do is create the files for our content. Start by creating a folder called `content` in `src`. This should be a sibling of `src/components`.
+
+Since our app will have two pages, we'll create two folders in `src/content`.
+
+```bash
+src/content
+├── LandingPage
+└── RepoPage
+```
+
+Next we'll set up these folders the same way we set up `src/components/TutorialHeader`.
+
+Create the following files in the `LandingPage` folder:
+
+```bash
+src/content/LandingPage
+├── _landing-page.scss
+├── index.js
+└── LandingPage.js
+```
+
+Create the following files in the `RepoPage` folder:
+
+```bash
+src/content/RepoPage
+├── _repo-page.scss
+├── index.js
+└── RepoPage.js
+```
+
+### Set up content Sass
+
+Next, we'll import our content Sass files in `app.scss`, like so:
+
+##### src/app.scss
+
+```scss
+@import './components/TutorialHeader/tutorial-header.scss';
+@import './content/LandingPage/landing-page.scss';
+@import './content/RepoPage/repo-page.scss';
+```
+
+### Import and export content pages
+
+Now that our stylesheets are set up, we need to create our pages' components. Starting with `LandingPage`, just like with our header, we need to export the component in `src/content/LandingPage/index.js` by adding:
+
+##### src/content/LandingPage/index.js
+
+```javascript
+import LandingPage from './LandingPage';
+export default LandingPage;
+```
+
+Next in `LandingPage.js` we'll create our component.
+
+##### src/content/LandingPage/LandingPage.js
+
+```javascript
+import React from 'react';
+
+const LandingPage = () => {
+  return <div>LANDING PAGE</div>;
+};
+
+export default LandingPage;
+```
+
+We'll repeat this process with `RepoPage`.
+
+In `src/content/RepoPage/index.js`, import and export the `RepoPage` component like so:
+
+##### src/content/RepoPage/index.js
+
+```javascript
+import RepoPage from './RepoPage';
+export default RepoPage;
+```
+
+Then in `RepoPage.js` create the component.
+
+##### src/content/RepoPage/RepoPage.js
+
+```javascript
+import React from 'react';
+
+const RepoPage = () => {
+  return <div>REPO PAGE</div>;
+};
+
+export default RepoPage;
+```
+
+Awesome! We've just created our content pages. Next thing we need to do is render them with our router.
+
+## Add routing
+
+We've updated our app to render our header, but now we need to add routing functionality. To do this we need to install `react-router-dom`. Go ahead and stop your development server (with `CTRL-C`) and then:
+
+```bash
+$ yarn add react-router-dom
+$ yarn start
+```
+
+First, we need to wrap our app in the `Router` component. In the root `index.js`, add the import:
+
+##### src/index.js
+
+```javascript
+import { HashRouter as Router } from 'react-router-dom';
+```
+
+_Note: We're using_ `HashRouter` _instead of_ `BrowserRouter` _to simplify deployments in upcoming tutorial steps. Learn more about the React Router [here](https://reacttraining.com/react-router/web/api/BrowserRouter)._
+
+Then, update the `render()` function to include the `Router`.
+
+##### src/index.js
+
+```javascript
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root')
+);
+```
+
+In order to render our content pages, we need to add the following imports in `App.js` below our existing imports.
+
+##### src/App.js
+
+```javascript
+import { Route, Switch } from 'react-router-dom';
+import LandingPage from './content/LandingPage';
+import RepoPage from './content/RepoPage';
+```
+
+This allows us to use our page content components and routing components from `react-router-dom`.
+
+Next thing we need to is update what we're returning in `App.js` . We currently just have a button in our content. In order to render our pages correctly, we need to delete the `Button` component within `Content` (and remove the Button import).
+
+Now inside `Content` we'll add the following:
+
+##### src/App.js
+
+<!-- prettier-ignore-start -->
+```html
+<Switch>
+  <Route exact path="/" component={LandingPage} />
+  <Route path="/repos" component={RepoPage} />
+</Switch>
+```
+<!-- prettier-ignore-end -->
+
+After that we need to do a couple quick fixes to the UI Shell to have it work with the React router.
+
+Add the `Link` import in `TutorialHeader.js`:
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```javascript
+import { Link } from 'react-router-dom';
+```
+
+We need to use the `Link` component instead of the default anchor elements to prevent full page reload when navigating to different pages with React Router. To use `Link`, update the `HeaderName` component to use the `element` prop and replace the `href` with `to`:
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```javascript
+<HeaderName element={Link} to="/" prefix="IBM">
+  Carbon Tutorial
+</HeaderName>
+```
+
+Do the same with the component that contains `href="/repos"`, updating to:
+
+##### src/components/TutorialHeader/TutorialHeader.js
+
+```javascript
+<HeaderMenuItem element={Link} to="/repos">
+  Repositories
+</HeaderMenuItem>
+```
+
+You should now have a working header that routes to different pages without full page reload!
+
+## Submit pull request
+
+We're going to submit a pull request to verify completion of this tutorial step and demonstrate a couple related concepts.
+
+### Continuous integration (CI) check
+
+We have a `ci-check` script defined in `package.json` that verifies file formatting for files that have been touched since the last Git commit with a tool called [Prettier](https://prettier.io). You'd typically also have that script run your test suite as part of your CI build. Go ahead and make sure everything looks good with:
+
+```bash
+$ yarn ci-check
+```
+
+_Note: If the_ `ci-check` _is giving an error, it's likely that some of your source files are not properly formatted. This could happen if your text editor isn't formatting with Prettier on save. To get_ `ci-check` _to pass, run_ `yarn format`_ then re-run_ `yarn ci-check`_._
+
+### Git commit and push
+
+Before we can create a pull request, stage and commit all of your changes:
+
+```bash
+$ git add --all && git commit -m "feat(tutorial): complete step 1"
+```
+
+_Note: You'll notice that your commit includes binaries in the _`.yarn-offline-mirror`_ folder. That's expected as the repository is configured to run [Yarn offline](https://yarnpkg.com/blog/2016/11/24/offline-mirror) for more reliable builds. Future tutorial steps that don't install new packages won't have _`.yarn-offline-mirror`_ commit changes._
+
+Then, push to your repository:
+
+```bash
+$ git push origin react-step-1
+```
+
+_Note: If your Git remote protocol is HTTPS instead of SSH, you may be prompted to authenticate with GitHub when you push changes. If your GitHub account has two-factor authentication enabled, we recommend that you follow these instructions to [create a personal access token for the command line](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). That lets you use your token instead of password when performing Git operations over HTTPS._
+
+_Note: If you receive a_ `non-fast-forward` _error, it's likely that your forked repository is behind the original repository and needs updated. This can happen if the tutorial was updated after you began working on it. To fix, run_ `git pull upstream react-step-1` _to merge the changes into your branch, then you can try pushing again. Or, you can [manually merge](https://help.github.com/en/articles/syncing-a-fork) in the upstream changes._
+
+### Pull request (PR)
+
+Finally, visit [carbon-tutorial](https://github.com/carbon-design-system/carbon-tutorial) to "Compare & pull request". In doing so, make sure that you are comparing to `react-step-1` into `base: react-step-1`. Take notice of the [Netlify](https://www.netlify.com) bot that deploys a preview of your PR every time that you push new commits. These previews can be shared and viewed by anybody to assist the PR review process.
+
+_Note: Expect your tutorial step PRs to be reviewed by the Carbon team but not merged. We'll close your PR so we can keep the repository's remote branches pristine and ready for the next person!_

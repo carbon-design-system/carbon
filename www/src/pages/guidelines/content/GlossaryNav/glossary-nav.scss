@@ -1,0 +1,49 @@
+.glossary-nav {
+  position: absolute;
+  right: $spacing-06;
+  padding: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding-top: rem(160px);
+
+  @include carbon--breakpoint('lg') {
+    display: flex;
+  }
+
+  &--fixed {
+    position: fixed;
+    top: 0;
+  }
+}
+
+.bx--list__item {
+  list-style-type: none !important;
+  padding: 0;
+  width: 100%;
+  transition: all $transition--base;
+  display: block;
+}
+
+.bx--list__item a {
+  @include carbon--type-style('body-short-02');
+  width: rem(24px);
+  height: rem(24px);
+  padding: rem(1px) 0 0 0;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: $text-02;
+}
+
+.bx--list__item:hover a {
+  color: $text-01;
+  background: $hover-ui;
+}
+
+.bx--list__item.glossary-nav__item--active a {
+  color: $text-01;
+  background: $ui-03;
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="410px" height="110px" viewBox="0 0 410 110" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #f4f7fb;">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>service-providers-3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M31,62 C48.1208272,62 62,48.1208272 62,31 C62,13.8791728 48.1208272,0 31,0 C28.649787,0 26.3606587,0.26153422 24.1601311,0.757086506 C10.3302589,3.87153266 0,16.2293857 0,31 C0,48.1208272 13.8791728,62 31,62 Z" id="path-1"></path>
+        <circle id="path-2" cx="131" cy="31" r="31"></circle>
+        <circle id="path-3" cx="231" cy="31" r="31"></circle>
+        <circle id="path-4" cx="331" cy="31" r="31"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="service-providers-3">
+            <g id="Group" transform="translate(24.000000, 24.000000)">
+                <g id="Oval">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <path stroke="#3D70B2" stroke-width="1" d="M31,61.5 C47.8446849,61.5 61.5,47.8446849 61.5,31 C61.5,14.1553151 47.8446849,0.5 31,0.5 C28.71419,0.5 26.4614099,0.751366975 24.2699786,1.24487079 C10.4682217,4.35298548 0.5,16.6652234 0.5,31 C0.5,47.8446849 14.1553151,61.5 31,61.5 Z"></path>
+                </g>
+                <g id="Oval-Copy">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-2"></use>
+                    <circle stroke="#3D70B2" stroke-width="1" cx="131" cy="31" r="30.5"></circle>
+                </g>
+                <g id="Oval-Copy-2">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    <circle stroke="#3D70B2" stroke-width="1" cx="231" cy="31" r="30.5"></circle>
+                </g>
+                <g id="Oval-Copy-3">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    <circle stroke="#3D70B2" stroke-width="1" cx="331" cy="31" r="30.5"></circle>
+                </g>
+            </g>
+            <g id="Group-2" transform="translate(41.000000, 41.000000)" fill-rule="nonzero">
+                <polygon id="Polygon-4" fill="#D7AAFF" points="14.0143886 0 28.0287773 14.0143886 14.0143886 28.0287773 0 14.0143886"></polygon>
+                <polygon id="Polygon-4" fill="#9855D4" points="14.0242585 0 28.0386471 14.0143886 14.0242585 28.0287773 13.971377 13.547332"></polygon>
+                <polygon id="Polygon-4-Copy" fill="#9855D4" points="8.20765287 14.5203796 14.0115397 8.71649276 14.03344 14.7138054 14.0115397 20.3242665"></polygon>
+                <polygon id="Polygon-4-Copy-2" fill="#D7AAFF" points="19.8090258 14.521803 14.0051389 20.3256899 13.9832387 14.3283773 14.0051389 8.71791616"></polygon>
+            </g>
+            <rect id="Rectangle-2" fill="#9855D4" x="146" y="45" width="20" height="20"></rect>
+            <rect id="Rectangle-2" fill="#D7AAFF" x="146" y="45" width="10" height="20"></rect>
+            <g id="Group-4" transform="translate(156.000000, 55.000000) rotate(-180.000000) translate(-156.000000, -55.000000) translate(152.000000, 51.000000)">
+                <rect id="Rectangle-2" fill="#9855D4" x="0" y="0" width="8" height="8"></rect>
+                <rect id="Rectangle-2" fill="#D7AAFF" x="0" y="0" width="4" height="8"></rect>
+            </g>
+            <g id="Group-3" transform="translate(256.000000, 55.000000) rotate(-90.000000) translate(-256.000000, -55.000000) translate(244.000000, 43.000000)">
+                <circle id="Oval-2" fill="#D7AAFF" cx="12" cy="12" r="12"></circle>
+                <path d="M0,12 C0,18.627417 5.372583,24 12,24 C18.627417,24 24,18.627417 24,12 L1.22124533e-15,12 Z" id="Combined-Shape" fill="#9855D4"></path>
+                <g id="Group-2" transform="translate(12.146973, 11.971680) rotate(-180.000000) translate(-12.146973, -11.971680) translate(6.646973, 6.471680)">
+                    <circle id="Oval-2" fill="#D7AAFF" cx="5.64697266" cy="5.47167969" r="5"></circle>
+                    <path d="M0.646972656,5.47167969 C0.646972656,8.23310344 2.88554891,10.4716797 5.64697266,10.4716797 C8.40839641,10.4716797 10.6469727,8.23310344 10.6469727,5.47167969 L0.646972656,5.47167969 Z" id="Combined-Shape" fill="#9855D4"></path>
+                </g>
+            </g>
+            <polygon id="Polygon" fill="#D7AAFF" points="355 43 365.392305 49 365.392305 61 355 67 344.607695 61 344.607695 49"></polygon>
+            <path d="M355,67 L365.392305,61 L365.392305,49 L355,43 L355,67 Z" id="Combined-Shape" fill="#9855D4"></path>
+            <g id="Group-5" transform="translate(355.000000, 55.000000) rotate(-180.000000) translate(-355.000000, -55.000000) translate(349.000000, 49.000000)">
+                <polygon id="Polygon" fill="#D7AAFF" points="6 0 11.1961524 3 11.1961524 9 6 12 0.803847577 9 0.803847577 3"></polygon>
+                <path d="M6,12 L11.1961524,9 L11.1961524,3 L6,0 L6,12 Z" id="Combined-Shape" fill="#9855D4"></path>
+            </g>
+        </g>
+    </g>
+</svg>

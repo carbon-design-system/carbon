@@ -1,0 +1,28 @@
+.type-weight {
+  background: $carbon--white-0;
+  padding: $spacing-05;
+  margin-bottom: $spacing-06;
+
+  p {
+    font-size: rem(48px);
+    padding: 0;
+    line-height: 1.25;
+    color: $text-01;
+  }
+
+  .bx--type-italic {
+    font-style: italic;
+  }
+
+  .bx--type-semibold {
+    font-weight: 600;
+  }
+
+  .bx--type-regular {
+    font-weight: 400;
+  }
+
+  .bx--type-light {
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,31 @@
+.color-block {
+  position: relative;
+  @include carbon--type-style('body-short-01');
+}
+
+.color-block__color {
+  position: relative;
+  display: block;
+  margin-top: $spacing-01;
+  height: rem(14px);
+  width: rem(14px);
+  border-radius: rem(14px);
+
+  // needed to fix anti-aliasing issue in firefox
+  &:before {
+    position: absolute;
+    content: '';
+    height: rem(14px);
+    width: rem(14px);
+    border-radius: rem(14px);
+    border: 1px solid $ui-03;
+    left: -1px;
+    top: -1px;
+  }
+}
+
+.color-block__color--with-label {
+  position: absolute;
+  top: 0;
+  left: 5rem;
+}

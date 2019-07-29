@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="5 6 0 1 0.707 0.293 5 4.586 9.293 0.293 10 1"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tile" transform="translate(52.000000, 98.000000)">
+            <g id="Component/Tile/Selectable/Active-Copy-5" fill="#F3F3F3">
+                <rect id="Active" x="0" y="0" width="216" height="124"></rect>
+            </g>
+            <g id="icon/navigation/chevron/down/16" transform="translate(184.000000, 96.000000)">
+                <g id="chevron--down" stroke-width="1" fill-rule="evenodd" transform="translate(3.000000, 5.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="color/gray/100" mask="url(#mask-2)" fill="#171717">
+                        <g transform="translate(-3.000000, -5.000000)">
+                            <rect x="0" y="0" width="40" height="40"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" transform="translate(17.000000, 8.000000) rotate(-90.000000) translate(-17.000000, -8.000000) " x="9" y="0" width="16" height="16"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

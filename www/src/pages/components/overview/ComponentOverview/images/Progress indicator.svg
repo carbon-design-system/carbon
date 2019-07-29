@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M10.5,5.2 L9.8,4.5 L6,8.3 L4.2,6.5 L3.5,7.2 L6,9.7 L10.5,5.2 Z M7,0 C3.15,0 0,3.15 0,7 C0,10.85 3.15,14 7,14 C10.85,14 14,10.85 14,7 C14,3.15 10.85,0 7,0 Z M7,13 C3.7,13 1,10.3 1,7 C1,3.7 3.7,1 7,1 C10.3,1 13,3.7 13,7 C13,10.3 10.3,13 7,13 Z" id="path-1"></path>
+        <path d="M7,4.4408921e-16 C3.13400675,-2.22044605e-16 4.4408921e-16,3.13400675 0,7 C-4.4408921e-16,10.8659932 3.13400675,14 7,14 C10.8659932,14 14,10.8659932 14,7 C14,5.14348457 13.2625021,3.36300718 11.9497475,2.05025253 C10.6369928,0.737497883 8.85651543,2.22044605e-16 7,4.4408921e-16 Z M7,13 C3.6862915,13 1,10.3137085 1,7 C1,3.6862915 3.6862915,1 7,1 C10.3137085,1 13,3.6862915 13,7 C13,8.59129894 12.367859,10.1174224 11.2426407,11.2426407 C10.1174224,12.367859 8.59129894,13 7,13 Z" id="path-3"></path>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="progress_indicator" transform="translate(52.000000, 147.000000)">
+            <g id="Group-31">
+                <g id="Group-30">
+                    <g id="Group-29" transform="translate(72.000000, 11.000000)">
+                        <g id="icon/status/checkmark/16">
+                            <g id="checkmark" transform="translate(1.000000, 1.000000)">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                                <g id="color/blue/60" mask="url(#mask-2)" fill="#0062FF">
+                                    <g transform="translate(-1.000000, -1.000000)">
+                                        <rect x="0" y="0" width="40" height="40"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="Rectangle-15-Copy-82" fill="#0062FF" x="0" y="0" width="72" height="2"></rect>
+                    <rect id="Rectangle-15-Copy-83" fill="#0062FF" x="72" y="0" width="72" height="2"></rect>
+                    <rect id="Rectangle-15-Copy-84" fill="#CACACA" x="144" y="0" width="72" height="2"></rect>
+                    <g id="Group-Copy-3" transform="translate(144.000000, 11.000000)">
+                        <g id="radio--button--unchecked" transform="translate(1.000000, 1.000000)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                            <g id="color/cool-gray/100" mask="url(#mask-4)" fill="#13171A">
+                                <g transform="translate(43.000000, -1.000000)">
+                                    <rect x="0" y="0" width="40" height="40"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                    <circle id="Oval-9" stroke="#0F6DFF" stroke-width="2.114048" fill="#0F6DFF" cx="8" cy="19" r="6"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

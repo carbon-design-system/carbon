@@ -1,0 +1,27 @@
+---
+label: When used properly, typography can help create clear hierarchies, organize information, and guide users through the product or experience.
+title: Typography
+tabs: ['Overview', 'Productive', 'Expressive']
+---
+
+import TypesetStyle from '@carbon/addons-website/src/components/TypesetStyle';
+
+## Expressive type sets
+
+Expressive type is reserved for use in editorial and digital marketing experiences which may require more dynamic typographic hierarchies and more variety in the Heading scale. The Expressive styles are curated to create a series of clear user expectations while still allowing for a more dramatic, graphic use of type.
+
+The Expressive styles below introduce the new IBM Design Language tokens. The difference between the Productive and Expressive styles is mainly evident in the Headings. Aside from the token names, which are specifically calibrated for product vs. editorial designers (e.g. `$label-01` vs. `$caption-01`) — the supporting and body styles have the same values in both the Productive and Expressive sets.
+
+<TypesetStyle
+  breakpointControls={false}
+  typesets="supportingStyle,body,fixedHeading"
+/>
+
+## Fluid type sets
+
+Fluid type is applied to large headline and display type styles. We set up fixed type scales at the breakpoints and are fluid in between. This helps us to maintain the quality of typography. Display styles are reserved only for graphic/visual elements. These should be used sparingly and thoughtfully within a user journey. It is not suitable for complex messaging, does not need to appear on every page.
+
+<TypesetStyle
+  breakpointControls={true}
+  typesets="fluidHeadings,FluidParagraphsAndQuotes,fluidDisplay"
+/>

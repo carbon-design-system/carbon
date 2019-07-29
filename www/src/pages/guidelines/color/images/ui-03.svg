@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="99px" height="208px" viewBox="0 0 99 208" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>color_Light-UI Copy 28</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="V7---Feb-2017" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="color_Light-UI-Copy-28" transform="translate(-848.000000, -3375.000000)">
+            <g id="Nav"></g>
+            <g id="Color-contrast" transform="translate(401.000000, 3042.000000)">
+                <g id="Table" transform="translate(0.000000, 271.000000)">
+                    <g id="Group-9" transform="translate(447.000000, 62.000000)">
+                        <rect id="Rectangle-96-Copy" fill="#F0F3F6" x="0" y="0" width="100" height="208"></rect>
+                        <g id="Group-3-Copy-2" transform="translate(20.000000, 115.000000)">
+                            <text id="a" font-family="IBMPlexSans, IBM Plex Sans" font-size="18" font-weight="normal" fill="#5A6872">
+                                <tspan x="7" y="17">a</tspan>
+                            </text>
+                            <circle id="Oval-8" stroke="#5A6872" stroke-width="2" cx="12.1201172" cy="12.1201172" r="12.1201172"></circle>
+                            <text id="A" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="18" font-weight="500" fill="#5A6872">
+                                <tspan x="41" y="18">A</tspan>
+                            </text>
+                            <circle id="Oval-8" stroke="#5A6872" stroke-width="2" cx="47.1201172" cy="12.1201172" r="12.1201172"></circle>
+                        </g>
+                        <g id="Group-13-Copy-2" transform="translate(20.000000, 161.000000)">
+                            <text id="a" font-family="IBMPlexSans, IBM Plex Sans" font-size="18" font-weight="normal" fill="#152935">
+                                <tspan x="7" y="18">a</tspan>
+                            </text>
+                            <circle id="Oval-8" stroke="#152935" stroke-width="2" cx="12.4648438" cy="13.9719238" r="12.1201172"></circle>
+                            <text id="A" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="18" font-weight="500" fill="#152935">
+                                <tspan x="41" y="20">A</tspan>
+                            </text>
+                            <circle id="Oval-8" stroke="#152935" stroke-width="2" cx="47.1201172" cy="14.1201172" r="12.1201172"></circle>
+                        </g>
+                        <g id="Group-12-Copy" transform="translate(20.000000, 66.000000)">
+                            <text id="a" font-family="IBMPlexSans, IBM Plex Sans" font-size="18" font-weight="normal" fill="#3D70B2">
+                                <tspan x="7.96484375" y="18.3181152">a</tspan>
+                            </text>
+                            <circle id="Oval-8" stroke="#3D70B2" stroke-width="2" cx="12.4648438" cy="14.1845703" r="12.1201172"></circle>
+                            <text id="A" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="18" font-weight="500" fill="#3D70B2">
+                                <tspan x="41.3154297" y="20">A</tspan>
+                            </text>
+                            <circle id="Oval-8" stroke="#3D70B2" stroke-width="2" cx="47.4355469" cy="14.1201172" r="12.1201172"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

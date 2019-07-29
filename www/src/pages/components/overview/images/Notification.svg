@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="4.707 4 8 0.707 7.293 0 4 3.293 0.707 0 0 0.707 3.293 4 0 7.293 0.707 8 4 4.707 7.293 8 8 7.293"></polygon>
+        <circle id="path-3" cx="7" cy="7" r="7"></circle>
+        <polygon id="path-5" points="3.4362085 -0.391035534 4.5612085 -0.391035534 4.5612085 8.38396447 3.4362085 8.38396447"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="notification" transform="translate(52.000000, 102.000000)">
+            <rect id="Rectangle-2-Copy-27" fill="#FFF0F1" x="0" y="0" width="216" height="116"></rect>
+            <rect id="Path-Copy-2" fill="#DA1E28" x="0" y="0" width="3" height="116"></rect>
+            <rect id="Rectangle-3-Copy-27" fill="#E5E5E5" style="mix-blend-mode: multiply;" x="45" y="17" width="88" height="12"></rect>
+            <rect id="Rectangle-3-Copy-28" fill="#E5E5E5" style="mix-blend-mode: multiply;" x="45" y="33" width="116" height="12"></rect>
+            <rect id="Rectangle-3-Copy-29" fill="#E5E5E5" style="mix-blend-mode: multiply;" x="45" y="49" width="88" height="12"></rect>
+            <rect id="Rectangle-3-Copy-30" fill="#E5E5E5" style="mix-blend-mode: multiply;" x="45" y="79" width="116" height="12"></rect>
+            <g id="icon/navigation/close/16" transform="translate(186.000000, 14.000000)">
+                <g id="Group">
+                    <g id="close" transform="translate(4.000000, 4.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="color/gray/gray-100" mask="url(#mask-2)" fill="#171717">
+                            <g transform="translate(-4.000000, -4.000000)" id="gray-100">
+                                <rect x="0" y="0" width="40" height="40"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+                </g>
+            </g>
+            <g id="icon/status/error/filled/20" transform="translate(22.000000, 22.000000) scale(-1, 1) translate(-22.000000, -22.000000) translate(14.000000, 14.000000)">
+                <g id="Group">
+                    <g id="error--filled" transform="translate(1.000000, 1.000000)">
+                        <g id="icon-2">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="icon-color" fill="#DA1E28" xlink:href="#path-3"></use>
+                        </g>
+                        <g id="icon-1" transform="translate(3.000000, 3.000000)">
+                            <mask id="mask-6" fill="white">
+                                <use xlink:href="#path-5"></use>
+                            </mask>
+                            <use id="icon-color" fill="#FFFFFF" transform="translate(3.998708, 3.996464) rotate(-45.000000) translate(-3.998708, -3.996464) " xlink:href="#path-5"></use>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

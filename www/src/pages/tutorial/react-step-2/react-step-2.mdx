@@ -1,0 +1,784 @@
+---
+title: 2. Building pages
+internal: false
+---
+
+### Now that we have a React app using the UI Shell, it's time to build a few static pages. In this step, we'll become comfortable with the Carbon grid and various Carbon components.
+
+<AnchorLinks>
+
+<AnchorLink>Fork, clone and branch</AnchorLink>
+<AnchorLink>Install grid</AnchorLink>
+<AnchorLink>Add landing page grid</AnchorLink>
+<AnchorLink>Build landing page</AnchorLink>
+<AnchorLink>Style landing page</AnchorLink>
+<AnchorLink>Add repo page grid</AnchorLink>
+<AnchorLink>Build repo page</AnchorLink>
+<AnchorLink>Style repo page</AnchorLink>
+<AnchorLink>Submit pull request</AnchorLink>
+
+</AnchorLinks>
+
+## Preview
+
+A [preview](https://react-step-3--carbon-tutorial.netlify.com) of what you'll build:
+
+<Row>
+  <Column offsetLg="4">
+    <iframe
+      height="400"
+      title="Carbon Tutorial Step 2"
+      src="https://react-step-3--carbon-tutorial.netlify.com"
+      frameborder="no"
+      allowtransparency="true"
+      allowfullscreen="true"
+      class="bx--iframe bx--iframe--border"
+    />
+  </Column>
+</Row>
+
+## Fork, clone and branch
+
+This tutorial has an accompanying GitHub repository called [carbon-tutorial](https://github.com/carbon-design-system/carbon-tutorial) that we'll use as a starting point for each step. If you haven't forked and cloned that repository yet, and haven't added the upstream remote, go ahead and do so by following the [step 1 instructions](/tutorial/react-step-1#fork-clone--branch).
+
+### Branch
+
+With your repository all set up, let's check out the branch for this tutorial step's starting point.
+
+```bash
+$ git fetch upstream
+$ git checkout -b react-step-2 upstream/react-step-2
+```
+
+_Note: This builds on top of step 1, but be sure to check out the upstream step 2 branch because it includes the static assets required to get through this step._
+
+### Build and start app
+
+Install the app's dependencies (in case you're starting fresh in your current directory and not continuing from the previous step):
+
+```bash
+$ yarn
+```
+
+Then, start the app:
+
+```bash
+$ yarn start
+```
+
+You should see something similar to where the [previous step](/tutorial/react-step-1) left off.
+
+### IE11 polyfills
+
+Before we get started with this step, we'll be adding some components that require IE11 polyfills. As shown in the [Carbon React documentation](https://github.com/carbon-design-system/carbon/blob/master/packages/react/.storybook/polyfills.js), go ahead and add these imports to the top of the root `index.js`. They aren't all needed, but we'll add them all to play it safe for the duration of the tutorial.
+
+##### src/index.js
+
+```javascript
+import 'core-js/modules/es7.array.includes';
+import 'core-js/modules/es6.array.fill';
+import 'core-js/modules/es6.string.includes';
+import 'core-js/modules/es6.string.trim';
+import 'core-js/modules/es7.object.values';
+```
+
+_Note: You may be wondering where_ `core-js`_came from because it's not a Carbon package and we haven't explicitly installed it. Run_ `yarn why core-js` _and you'll see there are a number of packages that have brought it in as a dependency._
+
+## Install grid
+
+In our last step we added our styles, component and icon packages. Now that we're building the pages with grid, we need to install one more Carbon package. Stop your development environment (`CTRL-C`) and:
+
+```bash
+$ yarn add @carbon/grid
+```
+
+In `index.scss`, we need to configure our grid to use 16 columns instead of the default 12 columns. We do this by adding `grid-columns-16: true` in our `$feature-flags`.
+
+##### src/index.scss
+
+```css
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true
+);
+```
+
+_Note: Like before, the feature flag still needs to come before the Carbon_ `styles.scss` _import._
+
+Run `yarn start` so we can begin building.
+
+## Add landing page grid
+
+Let's add our grid elements to `LandingPage.js`.
+
+In order to use the grid, we need to wrap everything in a `<div className="bx--grid">`. We can continue to make rows by adding a `<div className="bx--row">` inside the grid, as well as make columns within those rows by adding `<div className="bx--col-[breakpoint]-[size]">`.
+
+Our column sizes are specified by the number of columns they'll be spanning. If we use `bx--col-lg-4`, it means it'll span 4 of the 16 columns. If we use `bx--col-lg-8` it means it'll span 8 of the 16 columns, and so on.
+
+We've included the designs for this tutorial app in the `design.sketch` file found as a top-level file in the `carbon-tutorial` repository. But, if you don't have Sketch installed and available to inspect the design, we'll provide screenshots.
+
+
+
+![Landing page grid](/images/landing-layout.png)
+
+
+
+_Pro tip:_ `CTRL-L` _toggles the layout in Sketch._
+
+We'll break this down into three rows. The first row with the gray background doesn't appear to need any columns. The second row with the white background looks like it has two columns of different widths. The third row with the gray background looks like it has four columns of equal width.
+
+We'll make rows like so:
+
+##### src/content/LandingPage/LandingPage.js
+
+```javascript
+return (
+  <div className="bx--grid bx--grid--full-width landing-page">
+    <div className="bx--row landing-page__banner">
+      <div className="bx--col-lg-16">1</div>
+    </div>
+    <div className="bx--row landing-page__r2">
+      <div className="bx--col-md-4 bx--col-lg-7">7/16</div>
+      <div className="bx--col-md-4 bx--offset-lg-1 bx--col-lg-8">8/16</div>
+    </div>
+    <div className="bx--row landing-page__r3">
+      <div className="bx--col-md-4 bx--col-lg-4">1/4</div>
+      <div className="bx--col-md-4 bx--col-lg-4">1/4</div>
+      <div className="bx--col-md-4 bx--col-lg-4">1/4</div>
+      <div className="bx--col-md-4 bx--col-lg-4">1/4</div>
+    </div>
+  </div>
+);
+```
+
+We added a class of `bx--grid--full-width` to the grid container since our rows need to expand the whole page without any margins. We also added some custom classes like `landing-page`, `landing-page__banner`, `landing-page__r2`, etc., which we will use later.
+
+Also, take notice of the second row. The tab content only covers 7 columns at this large viewport to prevent overly-large line lengths, so we needed to add a 1 column offset `bx--offset-lg-1` to second column to fill the full 16 columns in the grid. Then, both of those columns have `bx--col-md-4` classes so they are of equal width at medium-sized viewports.
+
+## Build landing page
+
+We'll start adding HTML elements and components by row.
+
+### First row
+
+In our first row we'll need a `BreadCrumb` component. First, let's import the components we need. Because we'll be importing several components for this page, we'll import them directly from the `carbon-components-react` package instead of the direct path for each one.
+
+##### src/content/LandingPage/LandingPage.js
+
+```javascript
+import { Breadcrumb, BreadcrumbItem } from 'carbon-components-react';
+```
+
+We can now add our component to the first row, along with a header, like so:
+
+##### src/content/LandingPage/LandingPage.js
+
+```html
+<div className="bx--row landing-page__banner">
+  <div className="bx--col-lg-16">
+    <Breadcrumb noTrailingSlash>
+      <BreadcrumbItem>
+        <a href="/">Getting started</a>
+      </BreadcrumbItem>
+    </Breadcrumb>
+    <h1 className="landing-page__heading">
+      Design &amp; build with Carbon
+    </h1>
+  </div>
+</div>
+```
+
+You may notice that the styles look off. Don't worry, we'll fix these later.
+
+### Second row
+
+In our second row we'll need `Tabs` and `Button` components. We'll update the `carbon-components-react` import to:
+
+##### src/content/LandingPage/LandingPage.js
+
+```javascript
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  Tabs,
+  Tab,
+} from 'carbon-components-react';
+```
+
+Before we can render the tabs, we need to add some props for the component after the import. These example props came from the [React Tabs Story](http://react.carbondesignsystem.com/?selectedKind=Tabs) in Storybook.
+
+##### src/content/LandingPage/LandingPage.js
+
+```javascript
+const props = {
+  tabs: {
+    selected: 0,
+    triggerHref: '#',
+    role: 'navigation',
+  },
+  tab: {
+    href: '#',
+    role: 'presentation',
+    tabIndex: 0,
+  },
+};
+```
+
+Modify the second row to use the `Tab` component.
+
+##### src/content/LandingPage/LandingPage.js
+
+```html
+<div className="bx--row landing-page__r2">
+  <div className="bx--col bx--no-gutter">
+    <Tabs {...props.tabs}>
+      <Tab {...props.tab} label="About">
+        <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+          <div className="bx--row landing-page__tab-content">
+            <div className="bx--col-md-4 bx--col-lg-7">7/16</div>
+            <div className="bx--col-md-4 bx--offset-lg-1 bx--col-lg-8">
+              8/16
+            </div>
+          </div>
+        </div>
+      </Tab>
+      <Tab {...props.tab} label="Design">
+        <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+          <div className="bx--row landing-page__tab-content">
+            <div className="bx--col-lg-16">
+              Rapidly build beautiful and accessible experiences. The Carbon kit
+              contains all resources you need to get started.
+            </div>
+          </div>
+        </div>
+      </Tab>
+      <Tab {...props.tab} label="Develop">
+        <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+          <div className="bx--row landing-page__tab-content">
+            <div className="bx--col-lg-16">
+              Carbon provides styles and components in Vanilla, React, Angular,
+              and Vue for anyone building on the web.
+            </div>
+          </div>
+        </div>
+      </Tab>
+    </Tabs>
+  </div>
+</div>
+```
+
+_Note: We're using the grid for the page layout, but we also need to apply the grid within the tab content. When doing so, make sure the nested grid has the expected_ `grid` _>_ `row` _>_ `col` _DOM structure._
+
+Hold up! If you were to run [DAP](https://www.ibm.com/able/dynamic-assessment-plug-in.html) to check for accessibility violations, you'd see `Multiple navigation landmarks must have unique labels specified with aria-label or aria-labelledby` because both the `Breadcrumb` and `Tabs` components use `<nav>` elements. To fix, add `aria-label` to the `Breadcrumb` opening tag:
+
+<!-- prettier-ignore-start -->
+```html
+<Breadcrumb noTrailingSlash aria-label="Page navigation">
+```
+<!-- prettier-ignore-end -->
+
+Same goes for the `Tabs` opening tag:
+
+<!-- prettier-ignore-start -->
+```html
+<Tabs {...props.tabs} aria-label="Tab navigation">
+```
+<!-- prettier-ignore-end -->
+
+Next, we'll need to add a styling override to move the tabs to the right on large viewports. Create a file `_overrides.scss` in `src/content/LandingPage` with this declaration block.
+
+##### src/content/LandingPage/\_overrides.scss
+
+```scss
+.landing-page__r2 .bx--tabs__nav {
+  right: 0;
+}
+```
+
+Then in `_landing-page.scss` add this import at the top of the file.
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+@import './overrides.scss';
+```
+
+_Note: We don't have to include this in a separate file, but it's nice to keep overrides separate from your application's styling so when migrating to future Carbon versions and if there are breaking changes via different class names, you have a consolidated list of styling declaration blocks to review._
+
+We can now add our images and text for each column in the first `Tab` in `LandingPage.js`.
+
+##### src/content/LandingPage/LandingPage.js
+
+<!-- prettier-ignore-start -->
+```html
+<Tab {...props.tab} label="About">
+  <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+    <div className="bx--row landing-page__tab-content">
+      <div className="bx--col-md-4 bx--col-lg-7">
+        <h2 className="landing-page__subheading">
+          What is Carbon?
+        </h2>
+        <p className="landing-page__p">
+          Carbon is IBM’s open-source design system for digital
+          products and experiences. With the IBM Design Language
+          as its foundation, the system consists of working code,
+          design tools and resources, human interface guidelines,
+          and a vibrant community of contributors.
+        </p>
+        <Button>Learn more</Button>
+      </div>
+      <div className="bx--col-md-4 bx--offset-lg-1 bx--col-lg-8">
+        <img
+          className="landing-page__illo"
+          src={`${process.env.PUBLIC_URL}/tab-illo.png`}
+          alt="Carbon illustration"
+        />
+      </div>
+    </div>
+  </div>
+</Tab>
+```
+<!-- prettier-ignore-end -->
+
+Now let's set the image size in `_landing-page.scss`:
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__illo {
+  max-width: 100%;
+}
+```
+
+Assuming that the second and third tab would have a similar design, we would set them up in the same way. However, since our design specs don't show those tabs, we'll leave the code as is.
+
+### Third row
+
+The third row will be created in a later tutorial, so we'll just add the headers for now.
+
+##### src/content/LandingPage/LandingPage.js
+
+```html
+<div className="bx--row landing-page__r3">
+  <div className="bx--col-md-4 bx--col-lg-4">
+    <h3 className="landing-page__label">The Principles</h3>
+  </div>
+  <div className="bx--col-md-4 bx--col-lg-4">Carbon is Open</div>
+  <div className="bx--col-md-4 bx--col-lg-4">Carbon is Modular</div>
+  <div className="bx--col-md-4 bx--col-lg-4">Carbon is Consistent</div>
+</div>
+```
+
+## Style landing page
+
+We've added basic layout styles in `_landing-page.scss`, so now let's add type, color and spacing styles to match the design. We'll be using our [spacing tokens](https://www.carbondesignsystem.com/guidelines/spacing). In `app.scss`, add these imports at the **top** of the file so we can use Carbon breakpoints, tokens, and typography Sass mixins and functions:
+
+##### src/app.scss
+
+```scss
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/type/scss/font-family.scss';
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/layout/scss/breakpoint.scss';
+@import 'carbon-components/scss/globals/scss/typography.scss';
+@import 'carbon-components/scss/globals/scss/vars.scss';
+```
+
+### Banner
+
+
+
+![Banner vertical spacing](/images/landing-r1-spacing.png)
+
+
+
+_Pro tip:_ `CTRL-G` _toggles the grid in Sketch._
+
+Back to `_landing-page.scss`, we need to add space above the breadcrumb and below the heading. For that, add:
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__banner {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-07 * 4;
+}
+```
+
+Referencing the [spacing token table](https://www.carbondesignsystem.com/guidelines/spacing#spacing-scale), `16px` can be set with the `$spacing-05` token. The design calls for `128px` of space below the heading and that's not in the spacing scale, we can achieve that in Sass by multiplying 32px (`$spacing-07`) by 4. We could use `128px` or `8rem` directly in our styling, but using our tokens preserves consistency should the token values get updated in the future.
+
+Looking at the design, we need a wall-to-wall light gray background behind the banner and also behind the third row. This is a great opportunity to use a Sass mixin. We could put this at the top of `_landing-page.scss`, but it's best practice to place mixins in a dedicated file, so create a `_mixins.scss` file in `src/content/LandingPage`.
+
+Add the following in `_mixins.scss`. Per the design we need to use Gray 10 for our banner background color, which can be set with the `$ui-01` [color token](https://www.carbondesignsystem.com/guidelines/color/usage). Also, we want the background to extend into the grid's outermost gutters to go the full width of the viewport, so given the DOM structure, we can achieve that by setting the background in an absolutely positioned pseudo element.
+
+##### src/content/LandingPage/\_mixins.scss
+
+```scss
+@mixin landing-page-background() {
+  background-color: $ui-01;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -$spacing-05;
+    top: 0;
+    right: -$spacing-05;
+    bottom: 0;
+    background: $ui-01;
+    z-index: -1;
+  }
+}
+```
+
+After you have created `_mixins.scss`, import it at the **top** of `_landing-page.scss`. By now you should have two imports:
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+@import './mixins.scss';
+@import './overrides.scss';
+```
+
+Now to use the new mixin, update the `.landing-page__banner` declaration block to:
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__banner {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-07 * 4;
+  @include landing-page-background;
+}
+```
+
+Next, we can see that the `h1` is using the `heading-05` type token.
+
+
+
+![Banner heading type](/images/landing-r1-type.png)
+
+
+
+The Sketch symbol naming is consistent with the development Sass tokens to help translate design to development. So, looking up the [type token](https://www.carbondesignsystem.com/guidelines/typography/productive), we know to use `productive-heading-05`:
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__heading {
+  @include carbon--type-style('productive-heading-05');
+}
+```
+
+### Row two
+
+For our second row, we need to fix the tabs vertical positioning to match the design. By inspecting the tabs component, you can see that the tab height computes to `40px`. We can use that to create our negative top margin in rem units.
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__r2 {
+  margin-top: rem(-40px);
+}
+```
+
+We also need to adjust our vertical spacing and type treatment. Like before, it's a matter of using spacing and type tokens like so:
+
+
+
+![Row 2 vertical spacing](/images/landing-r2-spacing.png)
+
+
+
+_Note: You may be wondering why there are vertical gaps between the type and spacers. Each type token has a line height that's suited for its font size. The vertical spacers adjacently touch the line height boundaries and not the baseline, for consistency as well as development ease so_ `margins` _and_ `paddings` _don't need to offset line heights._
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__tab-content {
+  padding-top: $layout-05;
+  padding-bottom: $layout-05;
+}
+
+.landing-page__subheading {
+  @include carbon--type-style('productive-heading-03');
+  @include carbon--font-weight('semibold');
+}
+
+.landing-page__p {
+  @include carbon--type-style('productive-heading-03');
+  margin-top: $spacing-06;
+  margin-bottom: $spacing-08;
+
+  @include carbon--breakpoint-between((320px + 1), md) {
+    max-width: 75%;
+  }
+}
+```
+
+### Row three
+
+
+
+![Row 3 vertical spacing](/images/landing-r3-spacing.png)
+
+
+
+Let's also add some styles for the last row, even though that will get used later in the tutorial. You'll notice that we get to re-use the `landing-page-background` mixin that we just created.
+
+##### src/content/LandingPage/\_landing-page.scss
+
+```scss
+.landing-page__r3 {
+  padding-top: $spacing-09;
+  padding-bottom: $spacing-09;
+  @include landing-page-background;
+}
+
+.landing-page__label {
+  @include carbon--type-style('heading-01');
+}
+```
+
+Ta-da! You should see a finished landing page! Now we can move on to the repo page.
+
+## Add repo page grid
+
+Now in our `RepoPage.js` we'll add our grid containers in the `return` section.
+
+##### src/content/RepoPage/RepoPage.js
+
+```javascript
+return (
+  <div className="bx--grid bx--grid--full-width bx--grid--no-gutter repo-page">
+    <div className="bx--row repo-page__r1">
+      <div className="bx--col-lg-16">Data table will go here</div>
+    </div>
+  </div>
+);
+```
+
+## Build repo page
+
+We currently have `RepoPage.js` that just contains a grid and placeholder content for the time being. In the next tutorial step we're going to be querying an API to populate the `DataTable` component in this page. As a best practice to separate data fetching from the presentation components, go ahead and create a `RepoTable.js` as a sibling to `RepoPage.js` in `src/content/RepoPage`.
+
+### Build data table
+
+First, we'll add our data table by importing a few components in `RepoTable.js`:
+
+##### src/content/RepoPage/RepoTable.js
+
+```javascript
+import React from 'react';
+import {
+  DataTable,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableExpandHeader,
+  TableHeader,
+  TableBody,
+  TableExpandRow,
+  TableCell,
+  TableExpandedRow,
+} from 'carbon-components-react';
+```
+
+Then, let's create the `RepoTable` component and export it at the very bottom of the page.
+
+##### src/content/RepoPage/RepoTable.js
+
+<!-- prettier-ignore-start -->
+```javascript
+const RepoTable = ({ rows, headers }) => {
+  return (
+    <DataTable
+      rows={rows}
+      headers={headers}
+      render={({
+        rows,
+        headers,
+        getHeaderProps,
+        getRowProps,
+        getTableProps,
+      }) => (
+        <TableContainer
+          title="Carbon Repositories"
+          description="A collection of public Carbon repositories.">
+          <Table {...getTableProps()}>
+            <TableHead>
+              <TableRow>
+                <TableExpandHeader />
+                {headers.map(header => (
+                  <TableHeader {...getHeaderProps({ header })}>
+                    {header.header}
+                  </TableHeader>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => (
+                <React.Fragment key={row.id}>
+                  <TableExpandRow {...getRowProps({ row })}>
+                    {row.cells.map(cell => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableExpandRow>
+                  <TableExpandedRow colSpan={headers.length + 1}>
+                    <p>Row description</p>
+                  </TableExpandedRow>
+                </React.Fragment>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    />
+  );
+};
+
+export default RepoTable;
+```
+<!-- prettier-ignore-end -->
+
+This component uses two props, `rows` and `headers`, and returns a Carbon `DataTable`. As for where the various `Table*` components came from? The [DataTable story](http://react.carbondesignsystem.com/?selectedKind=DataTable&selectedStory=with%20expansion) in Storybook was used to put together the data table structure.
+
+_Note: The_ `getTableProps`_,_ `getHeaderProps`_, and_ `getRowProps` _functions each tell the_ `DataTable` _component to process and return the necessary props that are needed by the_ `Table`_,_ `Header` _and_ `Row` _components respectively. We take the return of that function (an object containing the props) and [spread it out](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) into the component._
+
+At this point, return to `RepoPage.js` because now we need to render a static `RepoTable`.
+
+### Render data table
+
+Import `RepoTable` in `RepoPage.js`.
+
+##### src/content/RepoPage/RepoPage.js
+
+```javascript
+import RepoTable from './RepoTable';
+```
+
+Then below the imports, include the following arrays to pass into the `RepoTable` component. We'll be setting the `rows` array from an API in the next tutorial step, but for now, static example rows will suffice.
+
+##### src/content/RepoPage/RepoPage.js
+
+```javascript
+const headers = [
+  {
+    key: 'name',
+    header: 'Name',
+  },
+  {
+    key: 'createdAt',
+    header: 'Created',
+  },
+  {
+    key: 'updatedAt',
+    header: 'Updated',
+  },
+  {
+    key: 'issueCount',
+    header: 'Open Issues',
+  },
+  {
+    key: 'stars',
+    header: 'Stars',
+  },
+  {
+    key: 'links',
+    header: 'Links',
+  },
+];
+
+const rows = [
+  {
+    id: '1',
+    name: 'Repo 1',
+    createdAt: 'Date',
+    updatedAt: 'Date',
+    issueCount: '123',
+    stars: '456',
+    links: 'Links',
+  },
+  {
+    id: '2',
+    name: 'Repo 2',
+    createdAt: 'Date',
+    updatedAt: 'Date',
+    issueCount: '123',
+    stars: '456',
+    links: 'Links',
+  },
+  {
+    id: '3',
+    name: 'Repo 3',
+    createdAt: 'Date',
+    updatedAt: 'Date',
+    issueCount: '123',
+    stars: '456',
+    links: 'Links',
+  },
+];
+```
+
+Lastly in `RepoPage.js`, we need to simply replace `Data table will go here` with:
+
+##### src/content/RepoPage/RepoPage.js
+
+<!-- prettier-ignore-start -->
+```html
+<RepoTable headers={headers} rows={rows} />
+```
+<!-- prettier-ignore-end -->
+
+## Style repo page
+
+Our styles for the repo page are mostly fine. We just need to update a few vertical spacing issues.
+
+In `_repo-page.scss`, add the following styles:
+
+##### src/content/RepoPage/\_repo-page.scss
+
+```scss
+.repo-page .bx--row {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-05;
+}
+```
+
+Congratulations! We've now created our static repo page!
+
+## Submit pull request
+
+We're going to submit a pull request to verify completion of this tutorial step.
+
+### Continuous integration (CI) check
+
+Run the CI check to make sure we're all set to submit a pull request.
+
+```bash
+$ yarn ci-check
+```
+
+_Note: Having issues running the CI check? [Step 1](</tutorial/react-step-1#continuous-integration-(ci)-check>) has troubleshooting notes that may help._
+
+### Git commit and push
+
+Before we can create a pull request, stage and commit all of your changes:
+
+```bash
+$ git add --all && git commit -m "feat(tutorial): complete step 2"
+```
+
+Then, push to your repository:
+
+```bash
+$ git push origin react-step-2
+```
+
+_Note: Having issues pushing your changes? [Step 1](/tutorial/react-step-1#git-commit-and-push) has troubleshooting notes that may help._
+
+### Pull request (PR)
+
+Finally, visit [carbon-tutorial](https://github.com/carbon-design-system/carbon-tutorial) to "Compare & pull request". In doing so, make sure that you are comparing to `react-step-2` into `base: react-step-2`.
+
+_Note: Expect your tutorial step PRs to be reviewed by the Carbon team but not merged. We'll close your PR so we can keep the repository's remote branches pristine and ready for the next person!_

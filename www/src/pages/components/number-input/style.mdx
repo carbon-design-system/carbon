@@ -1,0 +1,73 @@
+---
+
+title: Number input
+tabs: ['Code', 'Usage', 'Style']
+---
+
+## Color
+
+Inputs come in two different colors. The default input color is `$field-01` and is used on `$ui-background` and `$ui-02` page backgrounds. The `--light` version input color is `$field-02` and is used on `$ui-01` page backgrounds.
+
+| Class                              | Property         | Color token |
+| ---------------------------------- | ---------------- | ---------- |
+| `.bx--label`                       | text color       | `$text-02` |
+| `.bx--number input[type='number']` | text color       | `$text-01` |
+| `.bx--number`                      | background-color | `$field-01`|
+| `.bx--number--light`               | background-color | `$field-02`|
+| `.bx--number`                      | border-bottom    | `$ui-04`   |
+| `.bx--number__controls`            | svg color        | `$icon-01` |
+
+
+
+![Number input example](images/number-input-style-2.png)
+
+
+
+### Interactive states
+
+| Class                                                               | Property      | Color token |
+| ------------------------------------------------------------------- | ------------- | ----------- |
+| `.bx--number:focus`                                                 | border        | `$focus`      |
+| `.bx--number__controls:focus`                                       | border        | `$focus`      |
+| `[data-invalid]`                                                    | border        | `$support-01` |
+| `[data-invalid]:focus`                                              | color         | `$support-01` |
+| `.bx--form-requirement`                                             | text color    | `$support-01` |
+| `.bx--label:disabled`                                               | text color    | `$disabled-02` |
+| `.bx--number:disabled`                                              | background-color | `$disabled-01`|
+| `.bx--number input[type='number']:disabled`                         | text color       | `$disabled-03` |
+
+**Active:** Number input should have a default number to start. The input should never be empty.
+
+**Help text:** Help text appears below the label when the input is active. Help text remains visible while the input is focused and disappears after focus away.
+
+**Error:** Error messages appear below the input field and are always present while invalid.
+
+**Disabled:** Disabled state should have a `.not-allowed` cursor on hover.
+
+## Typography
+
+Number input labels should use sentence case, with only the first word in a phrase and any proper nouns capitalized.
+
+| Class                              | Font-size (px/rem) | Font-weight     | Type token          |
+| ---------------------------------- | ------------------ | --------------- | ------------------- |
+| `.bx--label`                       | 12 / 0.75          | Regular / 400   | `$label-01`         |
+| `.bx--number input[type='number']` | 14 / 0.875         | Regular / 400   | `$body-short-01`    |
+| `.bx--form-requirement`            | 12 / 0.75          | Regular / 400   | `$label-01`         |
+
+## Structure
+
+The height of a number input is always the same. The width however, varies based on content, layout and design. The caret icon can be found in the [iconography](/guidelines/iconography/library) library.
+
+| Class                                    | Property      | px / rem | Spacing token |
+| ---------------------------------------- | ------------- | -------- | ------------- |
+| `.bx--label`                             | margin-bottom | 8 / 0.5  | `$spacing-03` |
+| `.bx--number input`                      | height        | 40 / 2.5 | –             |
+| `.bx--number input[type='number']`       | padding-left  | 16 / 1   | `$spacing-05` |
+| `.bx--number__controls`                  | padding-left, padding-right | 16 / 1     | `$spacing-05` |
+| `.bx--number`                           | border-bottom  | 1px      | –             |
+
+
+
+![Structure and spacing for number input](images/number-input-style-1.png)
+
+

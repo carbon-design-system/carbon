@@ -1,0 +1,193 @@
+---
+label: Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
+title: Iconography
+tabs: ['Usage', 'Library', 'Contribute']
+---
+
+### Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
+
+## Resources
+
+<Row className="tile--group">
+<Column offsetLg="4" colLg="4" colMd="4" noGutterSm>
+  <ResourceCard
+    title="Elements package: Icons"
+    href="https://github.com/IBM/carbon-elements/tree/master/packages/icons"
+    type="resource">
+
+![](images/github-icon.png)
+
+  </ResourceCard>
+</Column>
+<Column colLg="4" colMd="4"  noGutterSm>
+  <ResourceCard
+    title="Elements package: Icons-React"
+    href="https://github.com/IBM/carbon-elements/tree/master/packages/icons-react"
+    type="resource">
+
+![](images/github-icon.png)
+
+ </ResourceCard>
+</Column>
+<Column offsetLg="4" colLg="4" colMd="4"  noGutterSm>
+  <ResourceCard
+    title="Get all icons via the IBM Design Language Kit"
+    href="sketch://add-library/cloud/75VZZ"
+    type="resource">
+
+![](images/sketch-icon.png)
+
+ </ResourceCard> 
+</Column>
+</Row>
+
+<br />
+<br />
+
+## Designing with icons
+
+### Sizing
+
+Carbon components typically use icons on 16px artboards. Icons on 20px, 24px, and 32px artboards can also be used within the UI. Be sure icon size is consistent throughout your product.
+
+
+
+![icon sizing](images/iconography_usage_sizing-alt.svg)
+
+
+
+
+
+![icon alignment](images/iconography-usage-sizing-2.svg)
+
+
+
+<Row>
+<Column offsetLg="4" colMd="4" colLg="4">
+  <DoDontExample
+    correct
+    label="Do use the correct icon size with IBM Plex.">
+
+![proper sizing](images/iconography-usage-sizing-3.svg)
+
+  </DoDontExample>
+</Column>
+<Column colMd="4" colLg="4" >
+  <DoDontExample label="Don’t alter the icon-text size ratio.">
+
+![improper sizing](images/iconography-usage-sizing-4.svg)
+
+  </DoDontExample>
+</Column>
+</Row>
+
+### Touch targets
+
+All touch targets for interactive icons need to be 44px or larger. Developers can add padding to a touch target with CSS to meet the 44px requirement.
+
+
+
+![touch target padding](images/iconography-usage-padding-6.svg)
+
+
+
+### Color
+
+Icons are always a solid, monochromatic color and need to pass the same color contrast ratio as typography (4.5:1). The color of the icon should reflect the importance of the icon’s action which should always be to help guide a user. For more information on color, see the [Color guidelines](/guidelines/color).
+
+It's also important to note that Carbon v10 icons themselves do not have interaction states, only their backgrounds do.
+
+<Row>
+<Column offsetLg="4" colMd="4" colLg="4">
+  <DoDontExample
+    correct
+    label="Do match your icon color with your text color when pairing them.">
+
+![proper alignment](images/iconography-color-01.png)
+
+  </DoDontExample>
+</Column>
+<Column colMd="4" colLg="4" >
+  <DoDontExample label="Don’t use different colors for text and icons.">
+
+![improper alignment](images/iconography-color-02.png)
+
+  </DoDontExample>
+</Column>
+</Row>
+
+### Alignment
+
+When used next to text, icons should be center-aligned.
+
+<Row>
+<Column offsetLg="4" colMd="4" colLg="4">
+  <DoDontExample
+    correct
+    label="Do center-align icons when they’re next to text.">
+
+![proper alignment](images/iconography-usage-sizing-5.svg)
+
+  </DoDontExample>
+</Column>
+<Column colMd="4" colLg="4" >
+  <DoDontExample label="Don’t baseline-align icons to the text.">
+
+![improper alignment](images/iconography-usage-sizing-6.svg)
+
+  </DoDontExample>
+</Column>
+</Row>
+
+## Developing with icons
+
+### SVG Icons
+
+#### Requirements:
+
+Install `carbon-icons`.
+
+Full installation details can be found in the Carbon icons [GitHub repo](https://github.com/carbon-design-system/carbon-icons).
+
+### Main files
+
+`carbon-icons` ships with two main SVG files:
+
+| Filename            | Description                                                                                             | Supported versions |
+| ------------------- | ------------------------------------------------------------------------------------------------------- | ------------------ |
+| _carbon-icons.svg_  | Contains current icons (consolidated subset of legacy icons used in IBM Bluemix)                        | `3.x` & newer      |
+| _carbon-icons.json_ | JSON file created from carbon-icons.svg, used in [Carbon](/guidelines/iconography/library)              | `3.x` & newer      |
+| _carbon-icons.js_   | JS module created from carbon-icons.svg, used in `Icon` React Component in [carbon-components-react](#) | `3.x` & newer      |
+| _icons.json_        | legacy JSON file created from sprite.svg                                                                | `1.x`,`2.x`&`3.x`  |
+| _legacy-icons.js_   | JS module created from sprite.svg                                                                       | `3.x` only         |
+
+### Accessibility
+
+For screen reader accessibility, provide a context-rich title for the SVG using `<title>` element.
+
+```html
+<svg>
+  <title>Add a new service</title>
+  <use xlink:href="/carbon-icons/dist/icon--add--glyph"></use>
+</svg>
+```
+
+If support for older browsers is needed, use the `aria-labelledby` attribute to reference the `<title>` element using an `id`.
+
+The `<title>` element will be read by the screen reader to the user, so it should describe its purpose.
+
+Make sure that you do not duplicate this `id`.
+
+```html
+<svg aria-labelledby="add">
+  <title id="add">Add a new service</title>
+  <use xlink:href="/carbon-icons/dist/icon--add"></use>
+</svg>
+```
+
+#### For more details on accessibility, see the following resources:
+
+<br />
+
+- "Accessible SVGs" via [CSS-Tricks](https://css-tricks.com/accessible-svgs/)
+- "5.4 The 'desc' and 'title' elements" via [W3C.org](https://www.w3.org/TR/SVG11/struct.html#DescriptionAndTitleElements)

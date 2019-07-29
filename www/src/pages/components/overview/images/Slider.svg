@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Slider" transform="translate(34.000000, 144.000000)">
+            <path d="M171.38806,18 L8.6119403,18 C8.273975,18 8,17.5522847 8,17 C8,16.4477153 8.273975,16 8.6119403,16 L171.38806,16 C171.726025,16 172,16.4477153 172,17 C172,17.5522847 171.726025,18 171.38806,18 Z" id="Combined-Shape-Copy-3" fill="#CACACA" transform="translate(90.000000, 17.000000) scale(1, -1) translate(-90.000000, -17.000000) "></path>
+            <path d="M1,18 C0.44771525,18 0,17.5522847 0,17 C0,16.4477153 0.44771525,16 1,16 L39,16 L39,18 L1,18 Z" id="Combined-Shape-Copy-4" fill="#3D3D3D"></path>
+            <circle id="Oval-Copy-61" fill="#3D3D3D" cx="39" cy="17" r="7"></circle>
+            <rect id="Rectangle-Copy-16" fill="#F3F3F3" x="188" y="0" width="64" height="32"></rect>
+            <rect id="Rectangle-Copy-15" fill="#D8D8D8" x="208" y="10" width="24" height="12"></rect>
+            <path d="M188,32 L252,32" id="Path-3-Copy" stroke="#8C8C8C"></path>
+        </g>
+        <rect id="Rectangle" fill="#CACACA" x="124" y="155" width="2" height="4"></rect>
+    </g>
+</svg>

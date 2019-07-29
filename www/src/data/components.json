@@ -1,0 +1,1330 @@
+{
+  "components": [
+    {
+      "component": "Accordion",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Breadcrumb",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Button",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Checkbox",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Code snippet",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Content switcher",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Data table",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": false,
+        "experimental": false,
+        "new": false,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": true,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": false,
+        "experimental": false,
+        "new": false,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": true,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Date picker",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Dropdown",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "File uploader",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Form",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Inline loading",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Link",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "List",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Loading",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Modal",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Multiselect",
+      "vanilla": {
+        "stable": false,
+        "experimental": false,
+        "new": false,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": true
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": false,
+        "experimental": false,
+        "new": false,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": true
+      }
+    },
+    {
+      "component": "Notification",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Number input",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Pagination",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Progress indicator",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Overflow menu",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Radio button",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Search",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Select",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Slider",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Structured list",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Tabs",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Tag",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Text input",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Tile",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Toggle",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "Tooltip",
+      "vanilla": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    },
+    {
+      "component": "UI shell",
+      "vanilla": {
+        "stable": false,
+        "experimental": true,
+        "new": false,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "react": {
+        "stable": true,
+        "experimental": false,
+        "new": false,
+        "updated": true,
+        "deprectated": false,
+        "underConstruction": true,
+        "notAvailable": false
+      },
+      "angular": {
+        "stable": false,
+        "experimental": true,
+        "new": false,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      },
+      "vue": {
+        "stable": false,
+        "experimental": true,
+        "new": true,
+        "updated": false,
+        "deprectated": false,
+        "underConstruction": false,
+        "notAvailable": false
+      }
+    }
+  ]
+}

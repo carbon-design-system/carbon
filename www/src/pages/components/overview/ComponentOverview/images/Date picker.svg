@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="23" width="182" height="160.22"></rect>
+        <filter x="-5.5%" y="-5.0%" width="111.0%" height="112.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="3.57267857 0 7.14535714 3.57267857 6.5856375 4.13239821 3.57267857 1.12340893 0.559719643 4.13239821 0 3.57267857"></polygon>
+        <polygon id="path-5" points="3.57267857 0 7.14535714 3.57267857 6.5856375 4.13239821 3.57267857 1.12340893 0.559719643 4.13239821 0 3.57267857"></polygon>
+        <path d="M6.27,0.57 L5.13,0.57 L5.13,0 L4.56,0 L4.56,0.57 L2.28,0.57 L2.28,0 L1.71,0 L1.71,0.57 L0.57,0.57 C0.255197693,0.57 0,0.825197693 0,1.14 L0,6.84 C0,7.15480231 0.255197693,7.41 0.57,7.41 L6.27,7.41 C6.58480231,7.41 6.84,7.15480231 6.84,6.84 L6.84,1.14 C6.84,0.825197693 6.58480231,0.57 6.27,0.57 Z M6.27,6.84 L0.57,6.84 L0.57,2.85 L6.27,2.85 L6.27,6.84 Z M6.27,2.28 L0.57,2.28 L0.57,1.14 L1.71,1.14 L1.71,1.71 L2.28,1.71 L2.28,1.14 L4.56,1.14 L4.56,1.71 L5.13,1.71 L5.13,1.14 L6.27,1.14 L6.27,2.28 Z" id="path-7"></path>
+        <path d="M6.27,0.57 L5.13,0.57 L5.13,0 L4.56,0 L4.56,0.57 L2.28,0.57 L2.28,0 L1.71,0 L1.71,0.57 L0.57,0.57 C0.255197693,0.57 0,0.825197693 0,1.14 L0,6.84 C0,7.15480231 0.255197693,7.41 0.57,7.41 L6.27,7.41 C6.58480231,7.41 6.84,7.15480231 6.84,6.84 L6.84,1.14 C6.84,0.825197693 6.58480231,0.57 6.27,0.57 Z M6.27,6.84 L0.57,6.84 L0.57,2.85 L6.27,2.85 L6.27,6.84 Z M6.27,2.28 L0.57,2.28 L0.57,1.14 L1.71,1.14 L1.71,1.71 L2.28,1.71 L2.28,1.14 L4.56,1.14 L4.56,1.71 L5.13,1.71 L5.13,1.14 L6.27,1.14 L6.27,2.28 Z" id="path-9"></path>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Date_Picker" transform="translate(69.000000, 68.000000)">
+            <g id="Rectangle-Copy-18">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <rect id="Rectangle-25-Copy-2" fill="#F3F3F3" x="0" y="22.7817259" width="182" height="160.218274"></rect>
+            <polygon id="Rectangle-2" fill="#C9DEFF" points="56.875 100.37868 79.625 100.37868 79.625 123.160406 56.875 123.160406"></polygon>
+            <polygon id="Rectangle-2-Copy-38" fill="#C9DEFF" points="79.625 100.37868 102.375 100.37868 102.375 123.160406 79.625 123.160406"></polygon>
+            <polygon id="Rectangle-2-Copy-39" fill="#C9DEFF" points="102.375 100.37868 125.125 100.37868 125.125 123.160406 102.375 123.160406"></polygon>
+            <polygon id="Rectangle-2-Copy-40" fill="#C9DEFF" points="125.125 100.37868 147.875 100.37868 147.875 123.160406 125.125 123.160406"></polygon>
+            <polygon id="Rectangle-2-Copy-41" fill="#006AFF" points="146.875 100.37868 170.625 100.37868 170.625 123.160406 146.875 123.160406"></polygon>
+            <g id="icon/navigation/chevron/up/16" transform="translate(159.644670, 39.635417) rotate(90.000000) translate(-159.644670, -39.635417) translate(153.009253, 32.990747)">
+                <g id="chevron--up" stroke-width="1" fill-rule="evenodd" transform="translate(2.778750, 3.969643)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="color/black" mask="url(#mask-4)" fill="#000000">
+                        <g transform="translate(-2.778750, -3.969643)">
+                            <rect x="0" y="0" width="13" height="13"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.351429, 6.351429) rotate(-90.000000) translate(-6.351429, -6.351429) " points="8.8817842e-16 -9.78592518e-33 12.7028571 -9.78592518e-33 12.7028571 12.7028571 8.8817842e-16 12.7028571"></polygon>
+            </g>
+            <polygon id="Rectangle-2" fill="#006AFF" points="33.125 100.37868 56.875 100.37868 56.875 123.160406 33.125 123.160406"></polygon>
+            <text id="8" font-family="IBMPlexSans, IBM Plex Sans" font-size="7.98" font-weight="normal" line-spacing="11.4" letter-spacing="0.0570000023" fill="#171717">
+                <tspan x="20.89625" y="114.504569">8</tspan>
+            </text>
+            <g id="icon/navigation/chevron/up/16" transform="translate(22.750000, 40.057868) scale(-1, 1) rotate(90.000000) translate(-22.750000, -40.057868) translate(16.114583, 33.413198)">
+                <g id="chevron--up" stroke-width="1" fill-rule="evenodd" transform="translate(2.778750, 3.969643)">
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-5"></use>
+                    <g id="color/black" mask="url(#mask-6)" fill="#000000">
+                        <g transform="translate(-2.778750, -3.969643)">
+                            <rect x="0" y="0" width="13" height="13"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.351429, 6.351429) rotate(-90.000000) translate(-6.351429, -6.351429) " points="8.8817842e-16 -9.78592518e-33 12.7028571 -9.78592518e-33 12.7028571 12.7028571 8.8817842e-16 12.7028571"></polygon>
+            </g>
+            <rect id="Rectangle-25-Copy-16" fill="#F3F3F3" x="91" y="1.27897692e-13" width="91" height="22.7817259"></rect>
+            <rect id="Rectangle-25-Copy-17" stroke="#006AFF" stroke-width="1.14" fill="#FFFFFF" x="0.57" y="0.57" width="89.86" height="21.6417259"></rect>
+            <g id="icon/image/calendar/16" transform="translate(72.800000, 6.834518)">
+                <g id="calendar" stroke-width="1" fill-rule="evenodd" transform="translate(1.140000, 0.570000)">
+                    <mask id="mask-8" fill="white">
+                        <use xlink:href="#path-7"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-7"></use>
+                    <g id="color/black" mask="url(#mask-8)" fill="#000000">
+                        <g transform="translate(-1.140000, -0.570000)">
+                            <rect x="0" y="0" width="23" height="23"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="9.12" height="9.12"></rect>
+            </g>
+            <g id="icon/image/calendar/16" transform="translate(163.800000, 6.834518)">
+                <g id="calendar" stroke-width="1" fill-rule="evenodd" transform="translate(1.140000, 0.570000)">
+                    <mask id="mask-10" fill="white">
+                        <use xlink:href="#path-9"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-9"></use>
+                    <g id="color/black" mask="url(#mask-10)" fill="#000000">
+                        <g transform="translate(-1.140000, -0.570000)">
+                            <rect x="0" y="0" width="23" height="23"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="9.12" height="9.12"></rect>
+            </g>
+            <rect id="Rectangle-4-Copy-3" fill="#D8D8D8" x="91" y="22.2121827" width="91" height="1"></rect>
+            <rect id="Rectangle-Copy-87" fill="#D8D8D8" x="9.1" y="7.26497462" width="48.9125" height="8"></rect>
+            <rect id="Rectangle-Copy-89" fill="#D8D8D8" x="100" y="7" width="48.9125" height="8"></rect>
+            <rect id="Rectangle-Copy-90" fill="#D8D8D8" x="67.68125" y="35.742132" width="48.9125" height="8"></rect>
+            <rect id="Rectangle-Copy-118" fill="#D8D8D8" x="17.63125" y="130.994924" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-117" fill="#D8D8D8" x="40.38125" y="130.994924" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-116" fill="#D8D8D8" x="63.13125" y="130.994924" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-115" fill="#D8D8D8" x="86" y="131" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-114" fill="#D8D8D8" x="108.63125" y="130.994924" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-113" fill="#D8D8D8" x="131.38125" y="130.994924" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-112" fill="#D8D8D8" x="154.13125" y="130.994924" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-125" fill="#D8D8D8" x="17.63125" y="154.346193" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-124" fill="#D8D8D8" x="40.38125" y="154.346193" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-123" fill="#D8D8D8" x="63.13125" y="154.346193" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-122" fill="#D8D8D8" x="86" y="154" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-121" fill="#D8D8D8" x="108.63125" y="154.346193" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-120" fill="#D8D8D8" x="131.38125" y="154.346193" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-119" fill="#D8D8D8" x="154.13125" y="154.346193" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-111" fill="#D8D8D8" x="17.63125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-110" fill="#FFFFFF" x="40.38125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-109" fill="#97C1FF" x="63.13125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-108" fill="#97C1FF" x="85.88125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-107" fill="#97C1FF" x="108.63125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-106" fill="#97C1FF" x="131.38125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-105" fill="#FFFFFF" x="154.13125" y="107.643655" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-98" fill="#D8D8D8" x="17.63125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-99" fill="#D8D8D8" x="40.38125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-100" fill="#D8D8D8" x="63.13125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-101" fill="#D8D8D8" x="85.88125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-102" fill="#D8D8D8" x="108.63125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-103" fill="#D8D8D8" x="131.38125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-104" fill="#D8D8D8" x="154.13125" y="83.7228426" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-91" fill="#D8D8D8" x="17.63125" y="59.8020305" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-92" fill="#D8D8D8" x="40.38125" y="59.8020305" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-93" fill="#D8D8D8" x="63.13125" y="59.8020305" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-94" fill="#D8D8D8" x="85.88125" y="59.8020305" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-95" fill="#D8D8D8" x="108.63125" y="59.8020305" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-96" fill="#D8D8D8" x="131.38125" y="59.8020305" width="9" height="9"></rect>
+            <rect id="Rectangle-Copy-97" fill="#D8D8D8" x="154.13125" y="59.8020305" width="9" height="9"></rect>
+        </g>
+    </g>
+</svg>

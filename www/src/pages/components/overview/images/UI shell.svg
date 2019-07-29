@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M4.8125,1.71875 L6.1875,1.71875 L6.1875,3.09375 L4.8125,3.09375 L4.8125,1.71875 Z M1.71875,1.71875 L3.09375,1.71875 L3.09375,3.09375 L1.71875,3.09375 L1.71875,1.71875 Z M7.90625,1.71875 L9.28125,1.71875 L9.28125,3.09375 L7.90625,3.09375 L7.90625,1.71875 Z M4.8125,4.8125 L6.1875,4.8125 L6.1875,6.1875 L4.8125,6.1875 L4.8125,4.8125 Z M1.71875,4.8125 L3.09375,4.8125 L3.09375,6.1875 L1.71875,6.1875 L1.71875,4.8125 Z M7.90625,4.8125 L9.28125,4.8125 L9.28125,6.1875 L7.90625,6.1875 L7.90625,4.8125 Z M4.8125,7.90625 L6.1875,7.90625 L6.1875,9.28125 L4.8125,9.28125 L4.8125,7.90625 Z M1.71875,7.90625 L3.09375,7.90625 L3.09375,9.28125 L1.71875,9.28125 L1.71875,7.90625 Z M7.90625,7.90625 L9.28125,7.90625 L9.28125,9.28125 L7.90625,9.28125 L7.90625,7.90625 Z" id="path-1"></path>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(69.000000, 95.000000)">
+            <rect id="Rectangle-25-Copy-2" fill="#F3F3F3" fill-rule="nonzero" x="0" y="0.7817259" width="182" height="129"></rect>
+            <rect id="Rectangle-25-Copy-16" fill="#3D3D3D" fill-rule="nonzero" x="0" y="1" width="182" height="22"></rect>
+            <rect id="Rectangle" fill="#3D3D3D" x="0" y="23" width="48" height="107"></rect>
+            <rect id="Rectangle" fill="#6F6F6F" x="0" y="23" width="48" height="1"></rect>
+            <g id="icon/navigation/app-switcher/16" transform="translate(164.000000, 7.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="icon-color" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <rect id="Rectangle" fill="#F3F3F3" x="9" y="9" width="21" height="6"></rect>
+        </g>
+    </g>
+</svg>

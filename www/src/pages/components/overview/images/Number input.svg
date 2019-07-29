@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="7 0 3.5 4 0 0"></polygon>
+        <polygon id="path-3" points="0 4 3.5 0 7 4"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="number_input" transform="translate(96.000000, 144.000000)">
+            <rect id="Rectangle-2-Copy-61" fill="#F3F3F3" x="0" y="0" width="128" height="32"></rect>
+            <g id="icon/navigation/caret/down/16" transform="translate(104.000000, 14.000000)">
+                <g id="caret--down" stroke-width="1" fill-rule="evenodd" transform="translate(4.500000, 6.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="color/gray/70" mask="url(#mask-2)" fill="#565656">
+                        <g transform="translate(-4.500000, -6.000000)">
+                            <rect x="0" y="0" width="40" height="40"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="icon/navigation/caret/up/16" transform="translate(104.000000, 2.000000)">
+                <g id="caret--up" stroke-width="1" fill-rule="evenodd" transform="translate(4.500000, 6.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="color/gray/70" mask="url(#mask-4)" fill="#565656">
+                        <g transform="translate(-4.500000, -6.000000)">
+                            <rect x="0" y="0" width="40" height="40"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <path d="M1.48828125,32 L127.441406,32" id="Path-4" stroke="#979797"></path>
+            <rect id="Rectangle" fill="#D8D8D8" x="16" y="10" width="40" height="12"></rect>
+        </g>
+    </g>
+</svg>

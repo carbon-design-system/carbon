@@ -1,0 +1,85 @@
+---
+title: Widget
+tabs: ['Usage', 'Style', 'Code', 'Approval']
+internal: true
+---
+
+## Widget approval
+
+
+Dashboard widgets have a <b>two-step review process</b>:
+
+
+### 1. Proposing a service widget 
+
+To propose a new service widget, go to the [Bluemix/core-dev repo] (https://github.ibm.com/Bluemix/core-dev/issues) and create a new issue using the widget proposal template. _To propose changes to an existing widget, or an idea for a new core widget, just submit a normal issue._
+
+
+### 2. Final widget review
+
+Once development and testing are complete, submit the widget for final review by going to the [Bluemix/core-dev repo] (https://github.ibm.com/Bluemix/core-dev/issues) and creating a new issue using the widget review template. 
+
+
+The dashboard team reserves the right to remove widgets with low usage analytics or negative user feedback.
+
+
+See [Service Framework](https://cloud.ibm.com/docs/service-framework?topic=service-framework-user-experience-ux-#ux015-dashboard-widgets) for more details. 
+
+## Final review checklist
+
+### Design
+
+
+- Widget is intuitive and easy to use
+- User value of widget is documented by concept validation and user testing
+- Widget meets style guidelines for all widget states
+- Illustrations match dashboard illustration style
+- Type size and color matches dashboard styles
+- Icons do not clash with visual style of dashboard
+- Widget tile description meets max character requirements
+
+
+
+
+### DevOps 
+
+
+- Widget meets relevant plugin requirements 
+- Automated unit testing with >70% code coverage
+- Analytics are instrumented for at least click through and loading actions
+- Widget uses content caching in local storage* 
+- Error, permission and loading states are supported*
+- File endpoint is supported for infinite caching with cache busting of js and css bundles
+- Shared libraries supported (minimize bundle size)
+- Dependencies already deployed to production
+- Github repo and contacts for issues provided
+
+*Use utilities provided in [developer guidelines](https://test.cloud.ibm.com/docs/developing/get-coding/console-sdk?topic=onboarding-console-slash-example#console-slash-example)
+
+
+## Additional Guidance
+
+### Do
+
+- Submit a new widget proposal before starting development
+- Focus on user value - if a widget isn't useful, users won't add it to their dashboard
+- Follow guidelines on the style tab of this page
+- Read the final review checklist before submitting a widget
+
+### Don't
+
+- Don't skip user research when building a widget - even if it's with internal users
+
+
+
+
+
+## Resources
+
+- [Widget Sticker Sheet](https://ibm.box.com/s/svdoa95p2p2l37x9jr25islcrv6t1or1)
+- [Sample Dashboard Illustrations](https://ibm.box.com/s/f2efq7ylbuwlfwnpwdqzk45c6mkz17bc)
+- [Service Framework](https://cloud.ibm.com/docs/service-framework?topic=service-framework-user-experience-ux-#ux015-dashboard-widgets)
+- [Developer Guidelines](https://test.cloud.ibm.com/docs/developing/get-coding/console-sdk?topic=onboarding-step1-build#step1-build)
+
+Questions? contact @Tessa (design) or @Arn (dev) or post to #pup-slashboard
+

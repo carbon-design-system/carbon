@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="5 0 10 5 9.293 5.707 5 1.414 0.707 5.707 0 5"></polygon>
+        <polygon id="path-3" points="5 0 10 5 9.293 5.707 5 1.414 0.707 5.707 0 5"></polygon>
+        <polygon id="path-5" points="5 0 10 5 9.293 5.707 5 1.414 0.707 5.707 0 5"></polygon>
+        <polygon id="path-7" points="5 0 10 5 9.293 5.707 5 1.414 0.707 5.707 0 5"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Accordion" transform="translate(68.000000, 110.000000)">
+            <g id="Group-7">
+                <rect id="Rectangle-6-Copy-8" fill="#CACACA" x="0" y="59" width="94" height="12"></rect>
+                <rect id="Rectangle-6-Copy-9" fill="#CACACA" x="0" y="88" width="133" height="12"></rect>
+                <g id="icon/navigation/chevron/up/16" transform="translate(176.000000, 66.000000) scale(1, -1) translate(-176.000000, -66.000000) translate(168.000000, 58.000000)">
+                    <g id="Group">
+                        <g id="chevron--up" transform="translate(3.000000, 5.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                            <g id="color/black" mask="url(#mask-2)" fill="#000000">
+                                <g transform="translate(-3.000000, -5.000000)">
+                                    <rect x="0" y="0" width="40" height="40"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" transform="translate(8.000000, 8.000000) rotate(-90.000000) translate(-8.000000, -8.000000) " x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+                <g id="icon/navigation/chevron/up/16" transform="translate(176.000000, 95.000000) scale(1, -1) translate(-176.000000, -95.000000) translate(168.000000, 87.000000)">
+                    <g id="Group">
+                        <g id="chevron--up" transform="translate(3.000000, 5.000000)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                            <g id="color/black" mask="url(#mask-4)" fill="#000000">
+                                <g transform="translate(-3.000000, -5.000000)">
+                                    <rect x="0" y="0" width="40" height="40"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" transform="translate(8.000000, 8.000000) rotate(-90.000000) translate(-8.000000, -8.000000) " x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+                <rect id="Rectangle-6-Copy-8" fill="#CACACA" x="0" y="1" width="94" height="12"></rect>
+                <rect id="Rectangle-6-Copy-9" fill="#CACACA" x="0" y="30" width="133" height="12"></rect>
+                <g id="icon/navigation/chevron/up/16" transform="translate(176.000000, 8.000000) scale(1, -1) translate(-176.000000, -8.000000) translate(168.000000, 0.000000)">
+                    <g id="Group">
+                        <g id="chevron--up" transform="translate(3.000000, 5.000000)">
+                            <mask id="mask-6" fill="white">
+                                <use xlink:href="#path-5"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-5"></use>
+                            <g id="color/black" mask="url(#mask-6)" fill="#000000">
+                                <g transform="translate(-3.000000, -5.000000)">
+                                    <rect x="0" y="0" width="40" height="40"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" transform="translate(8.000000, 8.000000) rotate(-90.000000) translate(-8.000000, -8.000000) " x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+                <g id="icon/navigation/chevron/up/16" transform="translate(176.000000, 37.000000) scale(1, -1) translate(-176.000000, -37.000000) translate(168.000000, 29.000000)">
+                    <g id="Group">
+                        <g id="chevron--up" transform="translate(3.000000, 5.000000)">
+                            <mask id="mask-8" fill="white">
+                                <use xlink:href="#path-7"></use>
+                            </mask>
+                            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-7"></use>
+                            <g id="color/black" mask="url(#mask-8)" fill="#000000">
+                                <g transform="translate(-3.000000, -5.000000)">
+                                    <rect x="0" y="0" width="40" height="40"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="transparent-rectangle" transform="translate(8.000000, 8.000000) rotate(-90.000000) translate(-8.000000, -8.000000) " x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <path d="M52,102.5 L268,102.5" id="Path-5" stroke="#CACACA"></path>
+        <path d="M52,160.5 L268,160.5" id="Path-5-Copy-2" stroke="#CACACA"></path>
+        <path d="M52,131.5 L268,131.5" id="Path-5-Copy" stroke="#CACACA"></path>
+        <path d="M52,189.5 L268,189.5" id="Path-5-Copy-3" stroke="#CACACA"></path>
+        <path d="M52,219 L268,219" id="Path-5-Copy-4" stroke="#CACACA"></path>
+    </g>
+</svg>

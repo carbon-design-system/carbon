@@ -1,0 +1,119 @@
+$type-scale: 0.75rem, 0.875rem, 1rem, 1.125rem, 1.25rem, 1.5rem, 1.75rem, 2rem,
+  2.25rem, 2.625rem, 3rem, 3.375rem, 3.75rem, 4.25rem, 4.75rem, 5.25rem, 5.75rem;
+
+.typography-table {
+  background: $ui-02;
+  border-bottom: rem(1px) solid $ui-03;
+
+  table tbody tr {
+    border: none;
+  }
+
+  table thead th {
+    @include carbon--type-style('caption-01');
+    border: none;
+    color: $text-03;
+    padding: $spacing-05 0;
+    text-align: left;
+  }
+
+  table tbody td {
+    white-space: nowrap;
+    border: none;
+    padding-bottom: auto;
+    color: $text-01;
+    vertical-align: top;
+  }
+
+  table tbody td:first-child {
+    font-size: 0.75rem;
+    padding: 0 $spacing-09 0 0;
+
+    @include carbon--breakpoint('md') {
+      padding-right: rem(112px);
+    }
+
+    @include carbon--breakpoint('lg') {
+      padding-right: $spacing-07;
+    }
+
+    @include carbon--breakpoint('xlg') {
+      padding-right: $spacing-09;
+    }
+  }
+
+  @for $i from 1 through length($type-scale) {
+    table tbody tr:nth-child(#{$i}) td:nth-child(2) {
+      font-size: nth($type-scale, $i);
+      white-space: nowrap;
+      width: 100%;
+      line-height: 70%;
+      padding-right: 0;
+    }
+  }
+
+  table tbody tr:nth-child(1) td:first-child {
+    padding-bottom: 0.36rem;
+  }
+
+  table tbody tr:nth-child(2) td:first-child {
+    padding-bottom: 0.38rem;
+  }
+
+  table tbody tr:nth-child(3) td:first-child {
+    padding-bottom: 0.6rem;
+  }
+
+  table tbody tr:nth-child(4) td:first-child {
+    padding-bottom: 0.74rem;
+  }
+
+  table tbody tr:nth-child(5) td:first-child {
+    padding-bottom: $spacing-05;
+  }
+
+  table tbody tr:nth-child(6) td:first-child {
+    padding-bottom: 1.4rem;
+  }
+
+  table tbody tr:nth-child(7) td:first-child {
+    padding-bottom: rem(26px);
+  }
+
+  table tbody tr:nth-child(8) td:first-child {
+    padding-bottom: $spacing-07;
+  }
+
+  table tbody tr:nth-child(9) td:first-child {
+    padding-bottom: $spacing-08;
+  }
+
+  table tbody tr:nth-child(10) td:first-child {
+    padding-bottom: $spacing-09;
+  }
+
+  table tbody tr:nth-child(11) td:first-child {
+    padding-bottom: rem(56px);
+  }
+
+  table tbody tr:nth-child(12) td:first-child,
+  table tbody tr:nth-child(13) td:first-child {
+    padding-bottom: rem(64px);
+  }
+
+  table tbody tr:nth-child(14) td:first-child {
+    padding-bottom: rem(72px);
+  }
+
+  table tbody tr:nth-child(15) td:first-child {
+    padding-bottom: rem(80px);
+  }
+
+  table tbody tr:nth-child(16) td:first-child {
+    padding-bottom: rem(88px);
+  }
+
+  table tbody tr:nth-child(17) td:nth-child(2) {
+    padding-bottom: $spacing-07;
+  }
+}

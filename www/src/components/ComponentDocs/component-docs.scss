@@ -1,0 +1,22 @@
+.component-docs > h2 + div > h3:first-child,
+.component-docs > h2 + div > h4:first-child {
+  padding-top: 0 !important;
+}
+
+//todo make this use the carbon code component. inject class somehow??
+body .component-docs pre {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  background: $ui-05;
+  padding: $spacing-03 $spacing-09 $spacing-03 $spacing-06 !important;
+  margin-bottom: $spacing-06 !important;
+  border-radius: 0;
+}
+
+body .component-docs code[class*='language-'] {
+  background: transparent;
+}
+
+.component-docs h1 {
+  display: none;
+}

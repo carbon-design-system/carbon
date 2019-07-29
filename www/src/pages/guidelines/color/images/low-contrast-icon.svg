@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>4.5:1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="4.5:1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M2,2 L2,22 L22,22 L22,2 L2,2 Z M0,0 L24,0 L24,24 L0,24 L0,0 Z" id="Rectangle-4" fill="#000000" fill-rule="nonzero"></path>
+        <rect id="Rectangle-5" fill="#000000" x="2" y="2" width="20" height="10"></rect>
+    </g>
+</svg>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="3.57267857 0 7.14535714 3.57267857 6.5856375 4.13239821 3.57267857 1.12340893 0.559719643 4.13239821 0 3.57267857"></polygon>
+        <polygon id="path-3" points="3.57267857 0 7.14535714 3.57267857 6.5856375 4.13239821 3.57267857 1.12340893 0.559719643 4.13239821 0 3.57267857"></polygon>
+        <polygon id="path-5" points="3.57267857 0 7.14535714 3.57267857 6.5856375 4.13239821 3.57267857 1.12340893 0.559719643 4.13239821 0 3.57267857"></polygon>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Form" transform="translate(78.000000, 70.000000)">
+            <rect id="Rectangle-25-Copy-3" fill="#F3F3F3" x="0" y="0" width="164" height="64"></rect>
+            <rect id="Rectangle-25-Copy-4" fill="#F3F3F3" x="0" y="70" width="164" height="109.218274"></rect>
+            <g id="color/gray/20" transform="translate(82.000000, 109.500000) scale(1, -1) translate(-82.000000, -109.500000) translate(0.000000, 109.000000)" fill="#DCDCDC">
+                <rect x="0" y="0" width="164" height="1"></rect>
+            </g>
+            <g id="color/gray/20" transform="translate(82.500000, 86.500000) scale(1, -1) translate(-82.500000, -86.500000) translate(0.000000, 86.000000)" fill="#DCDCDC">
+                <rect x="0" y="0" width="165" height="1"></rect>
+            </g>
+            <g id="color/gray/20" transform="translate(82.000000, 132.500000) scale(1, -1) translate(-82.000000, -132.500000) translate(0.000000, 132.000000)" fill="#DCDCDC">
+                <rect x="0" y="0" width="164" height="1"></rect>
+            </g>
+            <rect id="Rectangle-25-Copy-18" stroke="#006AFF" stroke-width="1.14" fill="#FFFFFF" x="0.57" y="63.57" width="162.86" height="22.641726"></rect>
+            <g id="icon/navigation/chevron/up/16" transform="translate(150.635417, 74.644670) rotate(180.000000) translate(-150.635417, -74.644670) translate(144.000000, 68.000000)">
+                <g id="chevron--up" stroke-width="1" fill-rule="evenodd" transform="translate(2.778750, 3.969643)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="color/black" mask="url(#mask-2)" fill="#000000">
+                        <g transform="translate(-2.778750, -3.969643)">
+                            <rect x="0" y="0" width="13" height="13"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.351429, 6.351429) rotate(-90.000000) translate(-6.351429, -6.351429) " points="8.8817842e-16 -9.78592518e-33 12.7028571 -9.78592518e-33 12.7028571 12.7028571 8.8817842e-16 12.7028571"></polygon>
+            </g>
+            <g id="icon/navigation/chevron/up/16" transform="translate(69.635417, 98.644670) rotate(180.000000) translate(-69.635417, -98.644670) translate(63.000000, 92.000000)">
+                <g id="chevron--up" stroke-width="1" fill-rule="evenodd" transform="translate(2.778750, 3.969643)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="color/black" mask="url(#mask-4)" fill="#000000">
+                        <g transform="translate(-2.778750, -3.969643)">
+                            <rect x="0" y="0" width="13" height="13"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.351429, 6.351429) rotate(-90.000000) translate(-6.351429, -6.351429) " points="8.8817842e-16 -9.78592518e-33 12.7028571 -9.78592518e-33 12.7028571 12.7028571 8.8817842e-16 12.7028571"></polygon>
+            </g>
+            <g id="icon/navigation/chevron/up/16" transform="translate(150.364583, 98.644670) rotate(180.000000) translate(-150.364583, -98.644670) translate(143.729167, 92.000000)">
+                <g id="chevron--up" stroke-width="1" fill-rule="evenodd" transform="translate(2.778750, 3.969643)">
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-5"></use>
+                    <g id="color/black" mask="url(#mask-6)" fill="#000000">
+                        <g transform="translate(-2.778750, -3.969643)">
+                            <rect x="0" y="0" width="13" height="13"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.351429, 6.351429) rotate(-90.000000) translate(-6.351429, -6.351429) " points="8.8817842e-16 -9.78592518e-33 12.7028571 -9.78592518e-33 12.7028571 12.7028571 8.8817842e-16 12.7028571"></polygon>
+            </g>
+            <rect id="Rectangle-Copy-126" fill="#D8D8D8" x="9" y="71" width="88" height="8"></rect>
+            <rect id="Rectangle-Copy-137" fill="#D8D8D8" x="9" y="140" width="88" height="8"></rect>
+            <rect id="Rectangle-Copy-128" fill="#D8D8D8" x="9" y="94" width="32" height="8"></rect>
+            <rect id="Rectangle-Copy-136" fill="#D8D8D8" x="90.7291667" y="94" width="32" height="8"></rect>
+            <path d="M82.5,87 L82.5,110.25" id="Path-2" stroke="#DCDCDC"></path>
+            <path d="M14,116 C11.2385763,116 9,118.238576 9,121 C9,123.761424 11.2385763,126 14,126 C16.7614237,126 19,123.761424 19,121 C19,119.673918 18.4732158,118.402148 17.5355339,117.464466 C16.597852,116.526784 15.3260824,116 14,116 Z M14,125.285714 C11.6330654,125.285714 9.71428571,123.366935 9.71428571,121 C9.71428571,118.633065 11.6330654,116.714286 14,116.714286 C16.3669346,116.714286 18.2857143,118.633065 18.2857143,121 C18.2857143,122.136642 17.834185,123.22673 17.0304576,124.030458 C16.2267303,124.834185 15.1366421,125.285714 14,125.285714 Z" id="Shape" fill="#252525" fill-rule="nonzero"></path>
+            <rect id="Rectangle-3-Copy-14" fill="#D8D8D8" x="25" y="117" width="24" height="8"></rect>
+            <rect id="Rectangle-3-Copy-31" fill="#D8D8D8" x="81" y="117" width="24" height="8"></rect>
+            <rect id="Rectangle-Copy-142" fill="#D8D8D8" x="7" y="20" width="89" height="8"></rect>
+            <rect id="Rectangle-Copy-144" fill="#D8D8D8" x="7" y="32" width="77" height="8"></rect>
+            <rect id="Rectangle-Copy-143" fill="#BEBEBE" x="7" y="8" width="64" height="8"></rect>
+            <g id="color/blue/60" transform="translate(82.000000, 155.000000)" fill="#0F6DFF">
+                <rect x="0" y="0" width="82" height="24"></rect>
+            </g>
+            <g id="color/gray/80" transform="translate(0.000000, 155.000000)" fill="#3D3D3D">
+                <rect x="0" y="0" width="82" height="24"></rect>
+            </g>
+            <path d="M70,116 C67.2385763,116 65,118.238576 65,121 C65,123.761424 67.2385763,126 70,126 C72.7614237,126 75,123.761424 75,121 C75,119.673918 74.4732158,118.402148 73.5355339,117.464466 C72.597852,116.526784 71.3260824,116 70,116 Z M70,125.285714 C67.6330654,125.285714 65.7142857,123.366935 65.7142857,121 C65.7142857,118.633065 67.6330654,116.714286 70,116.714286 C72.3669346,116.714286 74.2857143,118.633065 74.2857143,121 C74.2857143,122.136642 73.834185,123.22673 73.0304576,124.030458 C72.2267303,124.834185 71.1366421,125.285714 70,125.285714 Z" id="Shape" fill="#252525" fill-rule="nonzero"></path>
+            <circle id="Oval" fill="#171717" fill-rule="nonzero" cx="70" cy="121" r="2.14285714"></circle>
+        </g>
+    </g>
+</svg>

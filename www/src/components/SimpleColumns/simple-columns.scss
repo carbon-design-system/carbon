@@ -1,0 +1,22 @@
+$gutter-size: $spacing-06;
+
+.simple-columns--wrapper {
+  @include carbon--breakpoint('md') {
+    display: flex;
+  }
+}
+
+.simple-columns--wrapper > div {
+  flex: 1;
+}
+
+.simple-columns--wrapper.simple-columns--use-gutter > div {
+  margin-right: 0;
+  @include carbon--breakpoint('md') {
+    margin-right: $gutter-size;
+  }
+}
+
+.simple-columns--wrapper.simple-columns--use-gutter > div:last-of-type {
+  margin-right: 0;
+}

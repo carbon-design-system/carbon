@@ -9,9 +9,13 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "www"
     ],
-    "nohoist": []
+    "nohoist": [
+      "www",
+      "www/**"
+    ]
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",

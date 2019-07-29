@@ -1,0 +1,273 @@
+---
+title: Developers
+tabs: ['Vanilla', 'React', 'Angular', 'Vue', 'Other frameworks']
+---
+
+<AnchorLinks>
+
+<AnchorLink>Carbon Vanilla library</AnchorLink>
+<AnchorLink>Install</AnchorLink>
+<AnchorLink>Getting started</AnchorLink>
+<AnchorLink>Troubleshooting</AnchorLink>
+
+</AnchorLinks>
+
+## Carbon Vanilla library
+
+The library provides front-end developers & engineers a collection of reusable HTML and SCSS partials to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
+
+## Install
+
+#### Using npm:
+
+<br />
+
+```bash
+$ npm install --save carbon-components
+```
+
+#### If you prefer [Yarn](https://yarnpkg.com/en/):
+
+<br />
+
+```bash
+$ yarn add carbon-components
+```
+
+*NB: March 29, 2019 - Please use the @next tag to install Carbon v10 components. e.g. `npm i carbon-components@next`.*
+
+## Getting started
+
+<AnchorLinks small>
+
+<AnchorLink>What's included</AnchorLink>
+<AnchorLink>CDN</AnchorLink>
+<AnchorLink>CodePen</AnchorLink>
+<AnchorLink>SCSS</AnchorLink>
+<AnchorLink>JavaScript</AnchorLink>
+<AnchorLink>Polyfills for older browsers</AnchorLink>
+
+</AnchorLinks>
+
+### What's included
+
+```bash
+carbon-components/
+├── html
+├── css
+│   ├── carbon-components.css
+│   └── carbon-components.min.css
+├── scripts
+│   ├── carbon-components.js
+│   └── carbon-components.min.js
+├── scss
+│   └── components
+│       └── modal
+│           └── _modal.scss
+├── umd
+│   └── index.js
+├── es
+│   └── index.js
+└── src (Deprecated and subject to breaking changes, please use es/umd instead)
+```
+
+### CDN
+
+Use unpkg for easy access to our built static files. This is great for prototyping and trying `carbon-components` without installing anything. See all files from `carbon-components` available on [unpkg CDN](https://unpkg.com/carbon-components/).
+
+| Scripts | URL                                                                  |
+| ------- | -------------------------------------------------------------------- |
+| CSS     | https://unpkg.com/carbon-components/css/carbon-components.min.css    |
+| ES5     | https://unpkg.com/carbon-components/scripts/carbon-components.min.js |
+
+### CodePen
+
+We have individual [CodePens](https://codepen.io/collection/XqRbEz/) for all of our components which you can easily fork and play around with.
+
+### SCSS
+
+Using the Carbon Sass files infers usage of the SCSS pre-processor.
+All Sass files use the `*.scss` file extension.
+
+For transpiling Sass code, use `node-sass` based Sass compilers, for example, WebPack `sass-loader` or `gulp-sass`.
+
+If you're starting a new project without a boilerplate,
+you need to know about a few things to get started.
+
+#### Autoprefixer
+
+Make sure your build process uses [autoprefixer](https://github.com/postcss/autoprefixer) to ensure vendor prefixes are automatically added to your output CSS.
+
+#### Default body styles
+
+CSS is automatically applied to `<body>` element, which comes from [\_css--body.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/globals/scss/_css--body.scss). These styles are meant to cascade down to everything in `<body>` to set common styles shared across all components.
+
+```scss
+body {
+  @include reset;
+  @include type-style('body-short-01');
+  color: $text-01;
+  background-color: $ui-background;
+  line-height: 1;
+}
+```
+
+#### Icons
+
+A lot of components depend on SVG icons from [carbon-icons](https://github.com/carbon-design-system/carbon-icons). Read the [docs](https://github.com/carbon-design-system/carbon-icons/blob/master/docs/usage.md) for details on how to use them.
+
+#### Global SCSS variables
+
+These variables are used to configure which parts of the SCSS get compiled, where each variable controls a SCSS file of the same name. All variables are set to `true` by default.
+
+For example:
+
+- When you set `$css--reset: true`, then the contents of [\_css--reset.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/globals/scss/_css--reset.scss) will be part of your output CSS.
+- When you set `$css--reset: false`, then nothing gets included from that SCSS file.
+- When the variable is not declared at all, then nothing gets included from that SCSS file.
+
+The same rules apply to all the following variables:
+
+```scss
+// In styles.scss:
+// These are the default settings.
+$css--font-face: true !default;
+$css--helpers: true !default;
+$css--body: true !default;
+$css--use-layer: true !default;
+$css--reset: true !default;
+$css--typography: true !default;
+$css--plex: true !default;
+```
+
+These flags are set for you by default when you `@import` the `styles.scss` file.
+You can override these default settings by redeclaring the variables.
+
+#### Importing SCSS files
+
+To add a component style to your build, simply import the component directly. Importing a component this way will bring in any dependencies that component has as well. The import system removes duplicate dependencies, so shared dependencies between components will not create extra CSS.
+
+```js
+@import 'node_modules/carbon-components/scss/components/card/card';
+```
+
+#### Namespacing
+
+Carbon Components are built to be included individually and not clobber global styles - all `class` attributes are prefixed by the `bx--` moniker. You can specify your own prefix by changing the SCSS variable `$prefix`.
+
+### JavaScript
+
+Carbon Component has component JavaScript classes, each of which correspond to a component found in [our components page](../../components/overview). The first steps to work with component JavaScript classes are the following:
+
+#### 1. Getting component JavaScript class reference
+
+<br />
+
+**Using a module bundler:** We recommend using ECMAScript module along with your module bundler toolchain to do so. Using a module bundler will bring in only the component code your application needs, creating an optimized build for production. Carbon Components ships with a ECMAScript module build as well as UMD build for each component, for use with webpack or Rollup.
+
+After you've installed the components through `npm`, you can grab a component JavaScript class reference by something like this:
+
+```js
+import { Modal } from 'carbon-components';
+```
+
+**Using pre-built bundle:** Users can also opt to use the pre-built `carbon-components.js` file directly, like below. We recommend that most users do _not_ use this file, as it includes components your application may or may not actually be using.
+
+```html
+<html>
+  <body>
+    <!-- Put HTML snippets of components here... -->
+    <script src="node_modules/carbon-components/scripts/carbon-components.min.js"></script>
+  </body>
+</html>
+```
+
+Once you load `carbon-components.js` via `<script>` tag, you can grab a component JavaScript class reference by something like this:
+
+```js
+var Modal = CarbonComponents.Modal;
+```
+
+_Note: By default, pre-built bundle automatically instantiates all components on the page when_ `DOMContentLoaded` _event on the page fires. In case you don't want that behavior, you can set_ `CarbonComponents.settings.disableAutoInit = true` _right after_ `carbon-components.js` _is loaded._
+
+_Caveat: Don't use pre-built_ `carbon-components.js` _if you are importing components via ECMAScript module syntax. Doing so will cause Carbon code loaded twice, often competing each other._
+
+#### 2. Instantiating component class on DOM nodes
+
+Once you have a [component JavaScript class reference](#1-getting-component-javascript-class-reference), you can instantiate it on a DOM node with the `.create()` API.
+
+For example, if you have the following HTML for modal:
+
+```html
+<div data-modal id="modal-nofooter" class="bx--modal" tabindex="-1">
+  <div class="bx--modal-container">...</div>
+</div>
+```
+
+You can create and get the instance by:
+
+```js
+const modalElement = document.getElementById('modal-nofooter');
+const modalInstance = Modal.create(modalElement);
+```
+
+_Note: The DOM element to instantiate components on typically has a `data-componentname` attribute, e.g. `data-modal` for modal._
+
+Instantiating a component basically does two things:
+
+- Hooks several event handlers on some DOM elements inside (in above example, ones in `modalElement`, e.g. close button)
+- Allows you to access public methods (found in [our components page](../../components/overview), e.g. [here](/components/modal/code#public-methods) for modal) via the instance reference (`modalInstance.show()`, etc. in above example)
+
+#### Higher-level component instantiation API
+
+While `.create()` API gives you the full control of component instantiation, there is a higher-level API for instantiating components, which is, `.init(rootElement)`. It instantiates all components with `data-componentname` attribute (e.g. `data-modal` for modal) inside the given `rootElement`. If `rootElement` is omitted, `document` is used.
+
+_Note:_ `.init()` _API does not take care of DOM elements that hasn't been available at the time it's called.
+If the JavaScript framework you are using creates DOM elements dynamically,
+follow the instructions in the next section instead of using_ `.init()`.
+
+#### Wrapping a component with JavaScript framework of your choice
+
+Many JavaScript frameworks have a mechanism to dynamically create/destroy DOM elements, for example, upon change in array.
+This often makes it unclear when the DOM element to instantiate Carbon component on is available, which often depends on the JavaScript framework you use.
+
+Also when DOM elements that Carbon components have been instantiated on are being destroyed, the Carbon component instances should be released so that e.g. there are no zombie event handlers.
+
+The easiest way to hook on the creation/destroy of DOM elements is defining a "wrapping component", with the JavaScript framework of your choice. Here's an example using Web Components' [Custom Elements v1 spec](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements), but the notion of components, along with the lifecycle callbacks, are commonly found in many other JavaScript frameworks.
+
+```javascript
+class BXLoading extends HTMLElement {
+  // Called when this custom element gets into render tree
+  connectedCallback() {
+    // "this" here is "<bx-loading>" element
+    this.innerHTML =
+      '(e.g. snippet from http://carbondesignsystem.com/components/loading/code)';
+    this.loading = CarbonComponents.Loading.create(
+      this.querySelector('[data-loading]')
+    );
+  }
+  // Called when this custom element gets out of render tree
+  disconnectedCallback() {
+    this.loading.release();
+  }
+}
+customElements.define('bx-loading', BXLoading);
+```
+
+### Polyfills for older browsers
+
+carbon-components requires some polyfills for older browsers, in addition to carbon-components.js (or carbon-components.min.js).
+The latest list of polyfills is maintained in [carbon-components/blog/master/packages/components/demo/polyfills/index.js](https://github.com/carbon-design-system/carbon-components/blob/master/packages/components/demo/polyfills/index.js).
+You can easily find the polyfills in NPM, etc. The current list is below:
+
+- [Array.from()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
+- [Math.sign()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign)
+- [Object.assign()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+- [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
+- [Element#closest()](https://developer.mozilla.org/es/docs/Web/API/Element/closest)
+- [Element#matches()](https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
+- [2nd arg of Element.classList.toggle()](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList#Methods)
+
+## Troubleshooting
+
+If you experience any issues while getting set up with Carbon Components, please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-components) for more guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-components/issues) if your issue does not already exist.

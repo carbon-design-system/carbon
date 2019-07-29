@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="276px" height="97px" viewBox="0 0 276 97" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>sizing</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="9.89232962" y="8.81138671" width="64" height="64"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="64" height="64" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="100.399053" y="23" width="50" height="50"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="50" height="50" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="172.349768" y="41" width="32" height="32"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="32" height="32" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="226.748481" y="49" width="24" height="24"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="24" height="24" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+    </defs>
+    <g id="OLD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sizing">
+            <g id="Group-2-Copy" transform="translate(10.294151, 9.188613)">
+                <polygon id="Polygon-4" fill="#cdd1d4" points="31.6411252 -4.54747351e-13 63.2822503 31.6411252 31.6411252 63.2822503 0 31.6411252"></polygon>
+                <polygon id="Polygon-4" fill="#2D3F49" points="31.6634089 -4.54747351e-13 63.3045341 31.6411252 31.6634089 63.2822503 31.5440153 30.5866233"></polygon>
+                <polygon id="Polygon-4-Copy" fill="#2D3F49" points="18.5309098 32.7835314 31.634693 19.6797481 31.6841384 33.2202403 31.634693 45.8873146"></polygon>
+                <polyline id="Polygon-4-Copy-2" fill="#cdd1d4" points="31.6202415 19.6829618 44.7240248 32.7867451 31.6202415 45.8905283 31.5707961 32.3500361 31.6202415 19.6829618"></polyline>
+            </g>
+            <g id="Group-2-Copy-2" transform="translate(101.399878, 24.000000)">
+                <polygon id="Polygon-4" fill="#cdd1d4" points="24.1861013 0 48.3722027 24.1861013 24.1861013 48.3722027 0 24.1861013"></polygon>
+                <polygon id="Polygon-4" fill="#2D3F49" points="24.2031348 0 48.3892361 24.1861013 24.2031348 48.3722027 24.1118717 23.3800526"></polygon>
+                <polygon id="Polygon-4-Copy" fill="#2D3F49" points="14.164808 25.0593431 24.1811847 15.0429664 24.2189802 25.3931583 24.1811847 35.0757199"></polygon>
+                <polyline id="Polygon-4-Copy-2" fill="#cdd1d4" points="24.1701381 15.0454229 34.1865149 25.0617996 24.1701381 35.0781764 24.1323426 24.7279845 24.1701381 15.0454229"></polyline>
+            </g>
+            <g id="Group-2-Copy-3" transform="translate(172.751588, 41.622773)">
+                <polygon id="Polygon-4" fill="#cdd1d4" points="15.5200659 0 31.0401317 15.5200659 15.5200659 31.0401317 0 15.5200659"></polygon>
+                <polygon id="Polygon-4" fill="#2D3F49" points="15.5309961 0 31.051062 15.5200659 15.5309961 31.0401317 15.4724332 15.0028296"></polygon>
+                <polygon id="Polygon-4-Copy" fill="#2D3F49" points="9.08946629 16.0804195 15.5169109 9.6529749 15.541164 16.2946266 15.5169109 22.5078641"></polygon>
+                <polyline id="Polygon-4-Copy-2" fill="#cdd1d4" points="15.5098224 9.65455123 21.937267 16.0819958 15.5098224 22.5094404 15.4855693 15.8677888 15.5098224 9.65455123"></polyline>
+            </g>
+            <g id="Group-2-Copy-4" transform="translate(227.150302, 49.622773)">
+                <polygon id="Polygon-4" fill="#cdd1d4" points="11.4716542 0 22.9433085 11.4716542 11.4716542 22.9433085 0 11.4716542"></polygon>
+                <polygon id="Polygon-4" fill="#2D3F49" points="11.4797333 0 22.9513876 11.4716542 11.4797333 22.9433085 11.4364466 11.0893391"></polygon>
+                <polygon id="Polygon-4-Copy" fill="#2D3F49" points="6.71847758 11.8858396 11.4693223 7.13499488 11.4872489 12.0441707 11.4693223 16.6366842"></polygon>
+                <polyline id="Polygon-4-Copy-2" fill="#cdd1d4" points="11.4640828 7.13616002 16.2149274 11.8870047 11.4640828 16.6378494 11.4461561 11.7286736 11.4640828 7.13616002"></polyline>
+            </g>
+            <use id="Rectangle-192" stroke="#DFE6EB" mask="url(#mask-2)" stroke-width="0.5" xlink:href="#path-1"></use>
+            <use id="Rectangle-192-Copy" stroke="#DFE6EB" mask="url(#mask-4)" stroke-width="0.5" xlink:href="#path-3"></use>
+            <use id="Rectangle-192-Copy-2" stroke="#DFE6EB" mask="url(#mask-6)" stroke-width="0.5" xlink:href="#path-5"></use>
+            <use id="Rectangle-192-Copy-3" stroke="#DFE6EB" mask="url(#mask-8)" stroke-width="0.5" xlink:href="#path-7"></use>
+            <path d="M10.0441505,4 L10.0441505,7.15295762" id="Line" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M100.149053,17.8113867 L100.149053,20.9643443" id="Line-Copy-4" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M172.501588,35.8113867 L172.501588,38.9643443" id="Line-Copy-8" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M226.796931,44.3749354 L226.796931,47.527893" id="Line-Copy-12" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M73.6423296,74.1584291 L73.6423296,77.3113867" id="Line-Copy-2" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M150.149878,74.1584291 L150.149878,77.3113867" id="Line-Copy-5" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M204.548592,74.1584291 L204.548592,77.3113867" id="Line-Copy-9" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M250.935734,74.1584291 L250.935734,77.3113867" id="Line-Copy-13" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M4.85604913,8.81138671 L8.00604913,8.81138671" id="Line-Copy" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M94.9609516,22.6227734 L98.1109516,22.6227734" id="Line-Copy-6" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M167.313487,40.6227734 L170.463487,40.6227734" id="Line-Copy-10" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M221.608829,49.1863221 L224.758829,49.1863221" id="Line-Copy-14" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M74.8965175,72.8113867 L78.0465175,72.8113867" id="Line-Copy-3" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M151.404066,72.8113867 L154.554066,72.8113867" id="Line-Copy-7" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M205.80278,72.8113867 L208.95278,72.8113867" id="Line-Copy-11" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <path d="M252.189922,72.8113867 L255.339922,72.8113867" id="Line-Copy-15" stroke="#DFE6EB" stroke-width="0.25" stroke-linecap="square"></path>
+            <text id="4EM-(~64PX)" font-family="HelvNeueBoldforIBM, HelvNeue Bold for IBM" font-size="6" font-weight="bold" fill="#0F212E">
+                <tspan x="9.89232962" y="87.2006306">4EM (~64PX)</tspan>
+            </text>
+            <text id="3.125EM-(~50px)" font-family="HelvNeueBoldforIBM, HelvNeue Bold for IBM" font-size="6" font-weight="bold" fill="#0F212E">
+                <tspan x="100.399053" y="87.2006306">3.125EM (~50px)</tspan>
+            </text>
+            <text id="2EM-(~32PX)" font-family="HelvNeueBoldforIBM, HelvNeue Bold for IBM" font-size="6" font-weight="bold" fill="#0F212E">
+                <tspan x="172.751588" y="87.2006306">2EM (~32PX)</tspan>
+            </text>
+            <text id="1.5EM-(~24PX)" font-family="HelvNeueBoldforIBM, HelvNeue Bold for IBM" font-size="6" font-weight="bold" fill="#0F212E">
+                <tspan x="225.546931" y="87.2006306">1.5EM (~24PX)</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,85 @@
+---
+title: Migrate to v10
+tabs: ['Overview', 'Design', 'Develop']
+---
+
+<AnchorLinks>
+
+<AnchorLink>Repo architecture</AnchorLink>
+<AnchorLink>Carbon components</AnchorLink>
+<AnchorLink>Carbon elements</AnchorLink>
+<AnchorLink>Feedback</AnchorLink>
+
+</AnchorLinks>
+
+## Repo architecture
+
+[Carbon-themes](https://github.com/carbon-design-system/carbon-themes) has been deprecated in v10, as the [carbon](https://github.com/carbon-design-system/carbon) repository now contains the themes package [@carbon/themes](https://github.com/carbon-design-system/carbon/tree/master/packages/themes).
+
+[Carbon-icons](https://github.com/carbon-design-system/carbon-icons) has not yet been deprecated in favor of [@carbon/icons](https://github.com/carbon-design-system/carbon/tree/master/packages/icons). That is expected to happen in an upcoming dot release.
+
+## Carbon components
+
+Carbon components have been completely re-skinned for the new IBM Design Language. The redesign was conducted with maximum backwards-compatibility in mind. Users of v9 should be able to upgrade to v10 automatically with minimal breakage.
+
+#### carbon-components
+
+Detailed technical migration docs for Carbon vanilla components are available in the [carbon-components repo](https://github.com/carbon-design-system/carbon/blob/master/packages/components/docs/migration/migrate-to-10.x.md). Here you will find links to component-level migration information, as well as a list of those components that have been removed or are under development.
+
+There is also a dedicated [Sass migration guide](https://github.com/carbon-design-system/carbon/blob/master/packages/components/src/globals/scss/migrate-to-10.x.md) that covers changes to global styling.
+
+#### carbon-components-react
+
+React-specific technical migration docs are available [here](https://github.com/carbon-design-system/carbon/tree/master/packages/react/docs/migration).
+
+## Carbon Elements
+
+All technical migration docs for Carbon Elements are available in the [carbon repo's docs folder](https://github.com/carbon-design-system/carbon/tree/master/docs/migration).
+
+#### Icons
+
+Carbon icons underwent a major update for v10. The @carbon/icons package can be now be found in the [Carbon Elements repo](https://github.com/carbon-design-system/carbon/tree/master/packages/icons). This package will be publically available in an upcoming release, for now please continue to use the [`carbon-icons`](https://github.com/carbon-design-system/carbon-icons) repo.
+
+See the [icons migration table](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-icons.md) to view .
+
+The [Carbon Icons Demo](https://carbon-elements.netlify.com/icons/examples/preview/) contains a master table for all Carbon icons, including name, size, preview, download links, quick links for filing issues, module name, and relative path.
+
+#### Color
+
+The color token architecture for v10 is based on the v9 architecture, with some minor updates for the new design language. Carbon v9 users will see automatic, non-breaking color updates when they upgrade to v10.
+
+[Carbon v10 Color migration table](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-color.md)
+
+[Primary token-value mapping page](https://carbon-elements.netlify.com/colors/examples/preview/)
+
+[Themes token-value mapping table](https://carbon-elements.netlify.com/themes/examples/preview/)
+
+#### Type
+
+The type token architecture has been completely redesigned for better clarity and flexibility in v10, moving from a basic type scale model to a more robust token-based architecture.
+
+[Carbon v10 Type migration table](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-type.md)
+
+[Font faces/type scale/type styles sample doc](https://carbon-elements.netlify.com/type/examples/preview/)
+
+#### Layout, Grid, Spacing
+
+Spacing values will see no change from Carbon v9, though the token names have changed.
+
+[Migration table for grid](https://github.com/carbon-design-system/carbon/blob/master/packages/components/src/globals/grid/migrate-to-10.x.md)
+
+[Migration table for layout](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-layout.md)
+
+[Interactive grid examples](https://carbon-elements.netlify.com/grid/examples/preview/)
+
+#### Motion
+
+Motion standards have been revised to meet the new IBM Design Language standards. Motion updates should be coordinated with your product's design team if possible.
+
+[New IBM motion package](https://github.com/carbon-design-system/carbon/tree/master/packages/motion)
+
+[Motion migration table](https://github.com/carbon-design-system/carbon/blob/master/docs/migration/10.x-motion.md)
+
+## Feedback
+
+To leave feedback for the Carbon team about this documentation, make suggestions for improvements, or just ask a question, you can [open an issue](https://github.com/carbon-design-system/carbon-website/issues/new?template=feedback.md&labels=feedback&title=User+feedback+for+Migration+Developers+page) on GitHub.

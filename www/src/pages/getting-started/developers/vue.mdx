@@ -1,0 +1,151 @@
+---
+title: Developers
+tabs: ['Vanilla', 'React', 'Angular', 'Vue', 'Other frameworks']
+---
+
+<AnchorLinks>
+
+<AnchorLink>Carbon Vue library</AnchorLink>
+<AnchorLink>Install</AnchorLink>
+<AnchorLink>Development</AnchorLink>
+<AnchorLink>Troubleshooting</AnchorLink>
+
+</AnchorLinks>
+
+## Resources
+
+<Row>
+<Column offsetLg="4" colLg="4" noGutterSm>
+  <ResourceCard
+    title="Try Vue components with CodeSandbox."
+    href="https://codesandbox.io/s/5zk452o9jp"
+    type="resource">
+
+![](images/codesandbox.png)
+
+  </ResourceCard>
+</Column>
+</Row>
+
+## Carbon Vue library
+
+The [library](http://vue.carbondesignsystem.com/) provides front-end developers & engineers a collection of reusable Vue components to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
+
+## Install
+
+Assuming we're starting with a new Vue CLI project:
+
+```sh
+$ vue create my-project
+Vue CLI v3.5.2
+? Please pick a preset: default (babel, eslint)
+$ cd my-project
+```
+
+Using Yarn
+
+```sh
+$ yarn add @carbon/vue
+```
+
+Or npm
+
+```sh
+$ npm install @carbon/vue
+```
+
+In src/main.js add the following to include the carbon styles and components.
+
+```js
+import 'carbon-components/css/carbon-components.css';
+import CarbonComponentsVue from '@carbon/vue/src/index';
+Vue.use(CarbonComponentsVue);
+```
+
+Replace the contents of src/components/HelloWorld.vue with the following
+
+```html
+<template>
+  <div class="sample">
+    <h1>Example use of @carbon/vue</h1>
+    <cv-text-input
+      label="Who are you?"
+      v-model="yourName"
+      placeholder="your name"
+    />
+    <cv-button @click="onClick">Hello {{yourName}}</cv-button>
+    <cv-modal :visible="visible" @modal-hidden="modalClosed">
+      <template slot="title"
+        >Welcome to @carbon/vue {{yourName}}</template
+      >
+      <template slot="content">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </template>
+    </cv-modal>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'HelloWorld',
+    data() {
+      return {
+        yourName: '',
+        visible: false,
+      };
+    },
+    methods: {
+      onClick() {
+        this.visible = true;
+      },
+      modalClosed() {
+        this.visible = false;
+      },
+    },
+  };
+</script>
+
+<style>
+  .sample {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 5% auto;
+  }
+
+  .cv-text-input {
+    margin: 30px 0;
+  }
+</style>
+```
+
+That's it! Now start the server and start building.
+
+Using Yarn
+
+```sh
+$ yarn serve
+```
+
+Or npm
+
+```sh
+$ npm serve
+```
+
+_Note: This isn't the only way to bootstrap a_ `carbon-components-vue` _application, but the combination of_ `Vue CLI` _and the_ `carbon-components` _scss is our recommended setup._
+
+### List of available components
+
+View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is available in the notes provided with each story.
+
+## Troubleshooting
+
+If you experience any issues while getting set up with Carbon Components Vue, please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-components-vue) for more guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-components-vue/issues) if your issue does not already exist.
