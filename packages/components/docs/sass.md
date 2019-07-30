@@ -4553,7 +4553,6 @@ $ui-05: map-get($carbon--theme, 'ui-05');
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -4578,7 +4577,6 @@ $text-01: map-get($carbon--theme, 'text-01');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -4699,6 +4697,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -4706,6 +4705,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
 
 ### ✅icon-02 [variable]
@@ -5288,6 +5288,7 @@ $hover-ui: map-get($carbon--theme, 'hover-ui');
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5339,6 +5340,8 @@ $selected-ui: map-get($carbon--theme, 'selected-ui');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
@@ -5660,7 +5663,6 @@ $hover-field: map-get($carbon--theme, 'hover-field');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -9257,8 +9259,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $text-01;
-    border-color: $text-01;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -9337,7 +9339,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -10800,8 +10802,8 @@ Data table core styles
     td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
-    background-color: $ui-03;
-    border-top: 1px solid $ui-03;
+    background-color: $selected-ui;
+    border-top: 1px solid $selected-ui;
     border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
   }
 
@@ -10824,8 +10826,8 @@ Data table core styles
     tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
-    border-top: 1px solid $ui-03; // doesn't need separators
-    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $selected-ui; // doesn't need separators
+    border-bottom: 1px solid $selected-ui;
   }
 
   // zebra select - odd child
@@ -11070,6 +11072,7 @@ Data table core styles
   - [hover-field [variable]](#hover-field-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
 
 ### ❌data-table-expandable [mixin]
@@ -11112,7 +11115,7 @@ Data table expandable styles
     padding-top: 0;
     padding-bottom: 0;
     border: 0;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     transition: padding $duration--moderate-01 motion(standard, productive), background-color
         $duration--moderate-01 motion(standard, productive);
   }
@@ -11176,27 +11179,27 @@ Data table expandable styles
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
     border-bottom: 1px solid $ui-03;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     color: $text-01;
     border-bottom: 1px solid $ui-03;
   }
@@ -11208,19 +11211,19 @@ Data table expandable styles
 
   //hovering on expanded child row (class added to parent)
   tr.#{$prefix}--expandable-row--hover {
-    background-color: $hover-field;
+    background-color: $hover-ui;
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first parent td doesnt have visible bottom border
+    border-bottom: 1px solid $hover-ui; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
@@ -11295,7 +11298,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td.#{$prefix}--table-expand
     + td::after {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
@@ -11309,21 +11312,21 @@ Data table expandable styles
   //----------------------------------------------------------------------------
   // parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-top: 1px solid $active-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $ui-03;
+    background: $selected-ui;
     color: $text-01;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $ui-03;
   }
@@ -11343,7 +11346,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td:first-of-type {
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $ui-03; //no visible border when expanded
+    box-shadow: 0 1px $selected-ui; //no visible border when expanded
   }
 
   // parent expanded hover
@@ -11366,7 +11369,7 @@ Data table expandable styles
     + tr[data-child-row]
     td {
     color: $text-01;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
@@ -11386,7 +11389,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     + tr[data-child-row]
     td {
-    background: $ui-03;
+    background: $selected-ui;
   }
 }
 ```
@@ -11398,12 +11401,13 @@ Data table expandable styles
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
-  - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
 
@@ -15825,7 +15829,7 @@ Radio button styles
     @include reset;
     background-color: transparent;
     border-radius: 50%;
-    border: $radio-border-width solid $ui-05;
+    border: $radio-border-width solid $icon-01;
     flex-shrink: 0;
     height: rem(18px);
     width: rem(18px);
@@ -15838,7 +15842,7 @@ Radio button styles
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: $ui-05;
+    border-color: $icon-01;
 
     &:before {
       content: '';
@@ -15847,7 +15851,7 @@ Radio button styles
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background-color: $ui-05;
+      background-color: $icon-01;
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -15947,7 +15951,7 @@ Radio button styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
 
 ## search
