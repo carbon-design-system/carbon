@@ -11447,6 +11447,9 @@ Data table sort styles
   .#{$prefix}--data-table--sort
     th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
     padding: 0;
+  }
+
+  .#{$prefix}--data-table--sort th {
     height: $layout-04;
     border-top: none;
     border-bottom: none;
