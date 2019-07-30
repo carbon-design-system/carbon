@@ -9,7 +9,7 @@ import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
@@ -26,7 +26,9 @@ function AccordionItem({
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
+  const [lastEvent, setLastEvent] = useState(null);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
+  const savedOnHeadingClick = useRef(onHeadingClick);
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
@@ -38,16 +40,27 @@ function AccordionItem({
     setPrevIsOpen(open);
   }
 
+  useEffect(() => {
+    savedOnHeadingClick.current = onHeadingClick;
+  }, [onHeadingClick]);
+
+  useEffect(() => {
+    const { current: onHeadingClick } = savedOnHeadingClick;
+    // Only call `onHeadingClick` if we have an event triggered from a click
+    // handler
+    if (lastEvent && onHeadingClick) {
+      // TODO: normalize signature, potentially:
+      // onHeadingClick :: (event: Event, state: { isOpen: Boolean }) => any
+      onHeadingClick({ isOpen, event: lastEvent });
+    }
+  }, [isOpen, lastEvent]);
+
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
   function onClick(event) {
-    const nextValue = !isOpen;
-    setIsOpen(nextValue);
-    if (onHeadingClick) {
-      // TODO: normalize signature, potentially:
-      // onHeadingClick :: (event: Event, state: { isOpen: Boolean }) => any
-      onHeadingClick({ isOpen: nextValue, event });
-    }
+    event.persist();
+    setIsOpen(value => !value);
+    setLastEvent(event);
   }
 
   // If the AccordionItem is open, and the user hits the ESC key, then close it
