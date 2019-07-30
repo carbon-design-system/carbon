@@ -143,11 +143,22 @@ If everything looks good, you can enter in `y` for `Yes` and `lerna` will handle
 git commit -m 'chore(release): update package versions'
 ```
 
+Once that's done, you should create a Pull Request in Draft state and make sure **not** to merge it. Our goal with the Pull Request is to do a final sanity check for CI checks, verify preview links work as expected, and get final reviews from the endgame team for the release.
+
+Once everything is green and your Pull Request has been reviewed, you should **close** the draft Pull Request. On your machine, you should then follow the following steps to release:
+
+- Run the following steps to make sure [your environment is consistent with `upstream`](#making-sure-your-environment-is-consistent-with-upstream)
+- Run `yarn lerna publish from-package --dist-tag next` to publish all packages under the `next` tag
+- You should run the smoke tests that we have listed [here](#smoke-tests) with the published packages
+- If everything looks good to go, then you should go through each of the packages and add the `latest` tag using the command: `npm dist-tag add package-name@vX.Y.Z latest`
+
 ### Minor releases
 
 ### Major releases 
 
 ## Running the endgame
+
+## Smoke tests
 
 ## FAQ
 
