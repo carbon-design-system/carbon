@@ -15,9 +15,6 @@
 /// @access private
 /// @group accordion
 @mixin accordion {
-  /// Accordion arrow size in rems
-  /// @access private
-  /// @group accordion
   $accordion-arrow-size: carbon--type-icon-size(
     map-get(map-get($tokens, 'body-long-01'), 'font-size')
   );

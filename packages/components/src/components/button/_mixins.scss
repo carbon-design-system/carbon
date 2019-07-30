@@ -14,13 +14,32 @@
   @include reset;
   @include type-style('body-short-01');
 
+  $button-padding-y: (
+      $button-height - rem($button-border-width * 2) -
+        map-get(map-get($tokens, 'body-short-01'), 'line-height')
+    ) / 2;
+
+  $button-icon-size: carbon--type-icon-size(
+    map-get(map-get($tokens, 'body-short-01'), 'font-size')
+  );
+
+  $button-icon-margin-y: (
+      $button-height - rem($button-border-width * 2) - ($button-padding-y * 2) -
+        $button-icon-size
+    ) / 2;
+
+  $button-icon-margin-x: (
+      $button-height - rem($button-border-width * 2) -
+        (rem($button-padding-l) * 2) - $button-icon-size
+    ) / 2;
+
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  min-height: rem($button-height);
-  padding: $button-padding;
+  padding: $button-padding-y rem($button-padding-r) $button-padding-y
+    rem($button-padding-l);
   border-radius: $button-border-radius;
   text-align: left;
   text-decoration: none;
@@ -42,8 +61,9 @@
     position: absolute;
     right: rem(16px);
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
+    width: $button-icon-size;
+    height: $button-icon-size;
+    margin: $button-icon-margin-y $button-icon-margin-x;
     transition: all $duration--fast-01 motion(entrance, productive);
   }
 }
