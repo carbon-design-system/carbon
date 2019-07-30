@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { SharedStyle } from 'sketch/dom';
+import { SharedStyle, Style } from 'sketch/dom';
 
 /**
  * Sync a shared style within a document.
@@ -49,5 +49,27 @@ export function syncSharedStyle(
     }
   });
 
+  for (const layer of Array.from(sharedStyle.getAllInstancesLayers())) {
+    layer.style.syncWithSharedStyle(sharedStyle);
+  }
+
   return sharedStyle;
+}
+
+/**
+ * Sync the given color value as a shared style for the document
+ * @param {Document} document
+ * @param {string} name
+ * @param {string} value
+ * @returns {SharedStyle}
+ */
+export function syncColorStyle(document, name, value) {
+  return syncSharedStyle(document, name, {
+    fills: [
+      {
+        color: value,
+        fillType: Style.FillType.Color,
+      },
+    ],
+  });
 }

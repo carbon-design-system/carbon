@@ -2729,6 +2729,7 @@ $carbon--spacing-08: carbon--mini-units(5);
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--spacing-09 [variable]
@@ -4726,6 +4727,7 @@ $icon-02: map-get($carbon--theme, 'icon-02');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -5143,7 +5145,6 @@ $hover-primary: map-get($carbon--theme, 'hover-primary');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅active-primary [variable]
@@ -5481,6 +5482,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5512,8 +5514,6 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅highlight [variable]
 
@@ -5585,7 +5585,6 @@ $brand-01: map-get($carbon--theme, 'brand-01');
 - **Alias**: `interactive-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -11448,6 +11447,9 @@ Data table sort styles
   .#{$prefix}--data-table--sort
     th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
     padding: 0;
+  }
+
+  .#{$prefix}--data-table--sort th {
     height: $layout-04;
     border-top: none;
     border-bottom: none;
@@ -12350,11 +12352,11 @@ Dropdown styles
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-03;
+      color: $disabled-02;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-03;
+      fill: $disabled-02;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -12404,7 +12406,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
@@ -12464,7 +12466,7 @@ Dropdown styles
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-background [variable]](#ui-background-variable)
 
 ## file-uploader
@@ -13195,11 +13197,11 @@ List box styles
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-03;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -13613,7 +13615,6 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-background [variable]](#ui-background-variable)
@@ -17421,7 +17422,7 @@ Text input styles
   }
 
   .#{$prefix}--password-input {
-    padding-right: rem(40px);
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -17443,7 +17444,7 @@ Text input styles
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
-      right: rem(16px);
+      right: $carbon--spacing-05;
       fill: $support-01;
     }
 
@@ -17459,23 +17460,19 @@ Text input styles
       position: absolute;
       height: rem(16px);
       width: rem(16px);
-      right: rem(16px);
+      right: $carbon--spacing-05;
       padding: 0;
       border: 0;
       background: none;
       cursor: pointer;
 
       svg {
-        fill: $brand-01;
-
-        &:hover {
-          fill: $hover-primary;
-        }
+        fill: $icon-02;
       }
     }
 
     .#{$prefix}--text-input--invalid {
-      padding-right: rem(40px);
+      padding-right: $carbon--spacing-08;
     }
 
     .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
@@ -17487,8 +17484,12 @@ Text input styles
     // TODO: remove selector above
     .#{$prefix}--text-input--invalid
       + .#{$prefix}--text-input--password__visibility__toggle {
-      right: rem(40px);
+      right: $carbon--spacing-05;
     }
+  }
+
+  .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
+    right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input:disabled
@@ -17532,7 +17533,7 @@ Text input styles
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
-      right: rem(40px);
+      right: $carbon--spacing-08;
     }
   }
 }
@@ -17547,10 +17548,10 @@ Text input styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [brand-01 [variable]](#brand-01-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
