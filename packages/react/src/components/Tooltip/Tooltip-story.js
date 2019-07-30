@@ -106,11 +106,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -139,11 +135,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>
@@ -172,11 +164,7 @@ storiesOf('Tooltip', module)
             <a href="/" className={`${prefix}--link`}>
               Learn More
             </a>
-            <button
-              className={`${prefix}--btn ${prefix}--btn--primary`}
-              type="button">
-              Create
-            </button>
+            <Button size="small">Create</Button>
           </div>
         </Tooltip>
       </div>

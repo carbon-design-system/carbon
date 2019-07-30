@@ -21,8 +21,8 @@ addParameters({
 });
 
 configureActions({
-  depth: 100,
-  limit: 20,
+  depth: 3,
+  limit: 10,
 });
 
 addDecorator(story => <Container story={story} />);
