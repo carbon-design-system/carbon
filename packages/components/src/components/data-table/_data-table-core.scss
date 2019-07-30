@@ -268,8 +268,8 @@
     td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
-    background-color: $ui-03;
-    border-top: 1px solid $ui-03;
+    background-color: $selected-ui;
+    border-top: 1px solid $selected-ui;
     border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
   }
 
@@ -292,8 +292,8 @@
     tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
-    border-top: 1px solid $ui-03; // doesn't need separators
-    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $selected-ui; // doesn't need separators
+    border-bottom: 1px solid $selected-ui;
   }
 
   // zebra select - odd child
