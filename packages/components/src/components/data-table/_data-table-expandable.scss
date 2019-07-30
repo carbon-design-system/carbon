@@ -44,7 +44,7 @@
     padding-top: 0;
     padding-bottom: 0;
     border: 0;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     transition: padding $duration--moderate-01 motion(standard, productive),
       background-color $duration--moderate-01 motion(standard, productive);
   }
@@ -108,27 +108,27 @@
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
     border-bottom: 1px solid $ui-03;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     color: $text-01;
     border-bottom: 1px solid $ui-03;
   }
@@ -140,19 +140,19 @@
 
   //hovering on expanded child row (class added to parent)
   tr.#{$prefix}--expandable-row--hover {
-    background-color: $hover-field;
+    background-color: $hover-ui;
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first parent td doesnt have visible bottom border
+    border-bottom: 1px solid $hover-ui; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
@@ -227,7 +227,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td.#{$prefix}--table-expand
     + td::after {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
@@ -241,21 +241,21 @@
   //----------------------------------------------------------------------------
   // parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-top: 1px solid $active-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $ui-03;
+    background: $selected-ui;
     color: $text-01;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $ui-03;
   }
@@ -275,7 +275,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td:first-of-type {
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $ui-03; //no visible border when expanded
+    box-shadow: 0 1px $selected-ui; //no visible border when expanded
   }
 
   // parent expanded hover
@@ -298,7 +298,7 @@
     + tr[data-child-row]
     td {
     color: $text-01;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
@@ -318,7 +318,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     + tr[data-child-row]
     td {
-    background: $ui-03;
+    background: $selected-ui;
   }
 }
 
