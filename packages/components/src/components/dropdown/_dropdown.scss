@@ -126,6 +126,8 @@
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
+    width: 100%;
+    text-align: left;
 
     &:focus {
       @include focus-outline('outline');
