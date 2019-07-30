@@ -122,6 +122,16 @@
     transform-origin: 50% 45%;
   }
 
+  button.#{$prefix}--dropdown-text {
+    // button-reset mixin contradicts with bx--dropdown-text styles
+    background: none;
+    border: none;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
   .#{$prefix}--dropdown-text {
     @include type-style('body-short-01');
     display: block;
