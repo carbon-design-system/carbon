@@ -2729,6 +2729,7 @@ $carbon--spacing-08: carbon--mini-units(5);
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
   - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
 
 ### ✅carbon--spacing-09 [variable]
@@ -4552,7 +4553,6 @@ $ui-05: map-get($carbon--theme, 'ui-05');
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -4577,7 +4577,6 @@ $text-01: map-get($carbon--theme, 'text-01');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -4698,6 +4697,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -4705,6 +4705,7 @@ $icon-01: map-get($carbon--theme, 'icon-01');
   - [modal [mixin]](#modal-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
 
 ### ✅icon-02 [variable]
@@ -4726,6 +4727,7 @@ $icon-02: map-get($carbon--theme, 'icon-02');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -5143,7 +5145,6 @@ $hover-primary: map-get($carbon--theme, 'hover-primary');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅active-primary [variable]
@@ -5287,6 +5288,7 @@ $hover-ui: map-get($carbon--theme, 'hover-ui');
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5338,6 +5340,8 @@ $selected-ui: map-get($carbon--theme, 'selected-ui');
 - **Type**: `Color`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
@@ -5481,6 +5485,7 @@ $disabled-02: map-get($carbon--theme, 'disabled-02');
   - [checkbox [mixin]](#checkbox-mixin)
   - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
   - [form [mixin]](#form-mixin)
   - [link [mixin]](#link-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -5512,8 +5517,6 @@ $disabled-03: map-get($carbon--theme, 'disabled-03');
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅highlight [variable]
 
@@ -5585,7 +5588,6 @@ $brand-01: map-get($carbon--theme, 'brand-01');
 - **Alias**: `interactive-01`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -5661,7 +5663,6 @@ $hover-field: map-get($carbon--theme, 'hover-field');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
 
@@ -9258,8 +9259,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $text-01;
-    border-color: $text-01;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -9338,7 +9339,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
-  - [text-01 [variable]](#text-01-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -10801,8 +10802,8 @@ Data table core styles
     td,
   tr.#{$prefix}--data-table--selected td {
     color: $text-01;
-    background-color: $ui-03;
-    border-top: 1px solid $ui-03;
+    background-color: $selected-ui;
+    border-top: 1px solid $selected-ui;
     border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
   }
 
@@ -10825,8 +10826,8 @@ Data table core styles
     tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
-    border-top: 1px solid $ui-03; // doesn't need separators
-    border-bottom: 1px solid $ui-03;
+    border-top: 1px solid $selected-ui; // doesn't need separators
+    border-bottom: 1px solid $selected-ui;
   }
 
   // zebra select - odd child
@@ -11071,6 +11072,7 @@ Data table core styles
   - [hover-field [variable]](#hover-field-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
 
 ### ❌data-table-expandable [mixin]
@@ -11113,7 +11115,7 @@ Data table expandable styles
     padding-top: 0;
     padding-bottom: 0;
     border: 0;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     transition: padding $duration--moderate-01 motion(standard, productive), background-color
         $duration--moderate-01 motion(standard, productive);
   }
@@ -11177,27 +11179,27 @@ Data table expandable styles
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
     border-bottom: 1px solid $ui-03;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first td doesn't have a visible border
+    border-bottom: 1px solid $hover-ui; // first td doesn't have a visible border
   }
 
   // child row when hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     color: $text-01;
     border-bottom: 1px solid $ui-03;
   }
@@ -11209,19 +11211,19 @@ Data table expandable styles
 
   //hovering on expanded child row (class added to parent)
   tr.#{$prefix}--expandable-row--hover {
-    background-color: $hover-field;
+    background-color: $hover-ui;
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $hover-field;
+    border-top: 1px solid $hover-ui;
     color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-bottom: 1px solid $hover-field; // first parent td doesnt have visible bottom border
+    border-bottom: 1px solid $hover-ui; // first parent td doesnt have visible bottom border
   }
 
   //----------------------------------------------------------------------------
@@ -11296,7 +11298,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td.#{$prefix}--table-expand
     + td::after {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
@@ -11310,21 +11312,21 @@ Data table expandable styles
   //----------------------------------------------------------------------------
   // parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-top: 1px solid $active-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $ui-03;
+    background: $selected-ui;
     color: $text-01;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
-    background: $ui-03;
+    background: $selected-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $ui-03;
   }
@@ -11344,7 +11346,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td:first-of-type {
     border-bottom: 1px solid transparent;
-    box-shadow: 0 1px $ui-03; //no visible border when expanded
+    box-shadow: 0 1px $selected-ui; //no visible border when expanded
   }
 
   // parent expanded hover
@@ -11367,7 +11369,7 @@ Data table expandable styles
     + tr[data-child-row]
     td {
     color: $text-01;
-    background-color: $hover-field;
+    background-color: $hover-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
     border-top: 1px solid $active-ui;
@@ -11387,7 +11389,7 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     + tr[data-child-row]
     td {
-    background: $ui-03;
+    background: $selected-ui;
   }
 }
 ```
@@ -11399,12 +11401,13 @@ Data table expandable styles
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
-  - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-01 [variable]](#ui-01-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
 
@@ -11448,6 +11451,9 @@ Data table sort styles
   .#{$prefix}--data-table--sort
     th:first-of-type:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-expand) {
     padding: 0;
+  }
+
+  .#{$prefix}--data-table--sort th {
     height: $layout-04;
     border-top: none;
     border-bottom: none;
@@ -12350,11 +12356,11 @@ Dropdown styles
     }
 
     .#{$prefix}--dropdown-text {
-      color: $disabled-03;
+      color: $disabled-02;
     }
 
     .#{$prefix}--dropdown__arrow {
-      fill: $disabled-03;
+      fill: $disabled-02;
     }
 
     &.#{$prefix}--dropdown--light:hover {
@@ -12404,7 +12410,7 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
@@ -12464,7 +12470,7 @@ Dropdown styles
   - [ui-01 [variable]](#ui-01-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-background [variable]](#ui-background-variable)
 
 ## file-uploader
@@ -13195,11 +13201,11 @@ List box styles
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-03;
+    color: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
-    fill: $disabled-03;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -13613,7 +13619,6 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [ui-background [variable]](#ui-background-variable)
@@ -15824,7 +15829,7 @@ Radio button styles
     @include reset;
     background-color: transparent;
     border-radius: 50%;
-    border: $radio-border-width solid $ui-05;
+    border: $radio-border-width solid $icon-01;
     flex-shrink: 0;
     height: rem(18px);
     width: rem(18px);
@@ -15837,7 +15842,7 @@ Radio button styles
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: $ui-05;
+    border-color: $icon-01;
 
     &:before {
       content: '';
@@ -15846,7 +15851,7 @@ Radio button styles
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background-color: $ui-05;
+      background-color: $icon-01;
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -15946,7 +15951,7 @@ Radio button styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
 
 ## search
@@ -17421,7 +17426,7 @@ Text input styles
   }
 
   .#{$prefix}--password-input {
-    padding-right: rem(40px);
+    padding-right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
@@ -17443,7 +17448,7 @@ Text input styles
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
-      right: rem(16px);
+      right: $carbon--spacing-05;
       fill: $support-01;
     }
 
@@ -17459,23 +17464,19 @@ Text input styles
       position: absolute;
       height: rem(16px);
       width: rem(16px);
-      right: rem(16px);
+      right: $carbon--spacing-05;
       padding: 0;
       border: 0;
       background: none;
       cursor: pointer;
 
       svg {
-        fill: $brand-01;
-
-        &:hover {
-          fill: $hover-primary;
-        }
+        fill: $icon-02;
       }
     }
 
     .#{$prefix}--text-input--invalid {
-      padding-right: rem(40px);
+      padding-right: $carbon--spacing-08;
     }
 
     .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
@@ -17487,8 +17488,12 @@ Text input styles
     // TODO: remove selector above
     .#{$prefix}--text-input--invalid
       + .#{$prefix}--text-input--password__visibility__toggle {
-      right: rem(40px);
+      right: $carbon--spacing-05;
     }
+  }
+
+  .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
+    right: $carbon--spacing-08;
   }
 
   .#{$prefix}--text-input:disabled
@@ -17532,7 +17537,7 @@ Text input styles
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
-      right: rem(40px);
+      right: $carbon--spacing-08;
     }
   }
 }
@@ -17547,10 +17552,10 @@ Text input styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
-  - [brand-01 [variable]](#brand-01-variable)
-  - [hover-primary [variable]](#hover-primary-variable)
+  - [icon-02 [variable]](#icon-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 

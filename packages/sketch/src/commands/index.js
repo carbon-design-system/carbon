@@ -15,3 +15,7 @@ export { sync as syncColors, generate as generateColors } from './colors';
 export { generate as generateIcons } from './icons';
 export { sync as syncThemes, generate as generateThemes } from './themes';
 export { sync as syncType, generate as generateType } from './type';
+
+// Test commands
+export { testSyncSymbolId } from './test/sync-symbol-id';
+export { testSyncSharedStyles } from './test/sync-shared-styles';
