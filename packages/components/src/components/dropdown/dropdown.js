@@ -195,7 +195,7 @@ class Dropdown extends mixin(
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
         const selectorText =
-          this.element.dataset.dropdownType !== 'inline'
+          !this.triggerNode && this.element.dataset.dropdownType !== 'inline'
             ? this.options.selectorText
             : this.options.selectorTextInner;
         const text = this.element.querySelector(selectorText);
