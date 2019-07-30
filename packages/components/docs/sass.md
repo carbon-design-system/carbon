@@ -13874,7 +13874,12 @@ Modal styles
     }
 
     .#{$prefix}--text-input,
-    .#{$prefix}--select-input {
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'] {
       background-color: $field-02;
     }
   }
@@ -16250,6 +16255,14 @@ Select styles
     // Select text renders a little high on Firefox
     @-moz-document url-prefix() {
       padding-top: rem(4px);
+
+      // Removes dotted inner focus
+      &:-moz-focusring,
+      &::-moz-focus-inner {
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+        background-image: none;
+      }
     }
 
     &:focus {
