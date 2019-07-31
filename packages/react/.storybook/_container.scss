@@ -43,7 +43,7 @@ $button-type-tokens: map-merge(
     'body-short-01': $body-short-02,
   )
 );
-$button-field-height: 3rem;
+$button-field-height: carbon--mini-units(6);
 @import '~carbon-components/src/components/button/mixins';
 @include carbon--type-theme($button-type-tokens) {
   @include exports('button') {
@@ -59,7 +59,21 @@ $button-field-height: 3rem;
 @import '~carbon-components/src/components/toggle/toggle';
 @import '~carbon-components/src/components/search/search';
 @import '~carbon-components/src/components/select/select';
-@import '~carbon-components/src/components/text-input/text-input';
+
+$text-input-type-tokens: map-merge(
+  $tokens,
+  (
+    'body-short-01': $body-short-02,
+  )
+);
+$text-input-height: carbon--mini-units(6);
+@import '~carbon-components/src/components/text-input/mixins';
+@include carbon--type-theme($text-input-type-tokens) {
+  @include exports('text-input') {
+    @include text-input;
+  }
+}
+
 @import '~carbon-components/src/components/text-area/text-area';
 @import '~carbon-components/src/components/number-input/number-input';
 @import '~carbon-components/src/components/form/form';

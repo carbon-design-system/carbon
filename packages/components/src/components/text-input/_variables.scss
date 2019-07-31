@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
-@import './mixins';
+@import '../../globals/scss/spacing';
 
-@include exports('text-input') {
-  @include text-input;
-}
+/// @type Value
+/// @access public
+/// @group text-input
+$text-input-height: carbon--mini-units(5) !default;
