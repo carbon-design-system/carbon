@@ -9,31 +9,6 @@
 // 🌍 Global
 //-------------------------
 
-@import './vendor/@carbon/elements/scss/themes/mixins';
-
-// @import '../variables/index'; /// sets some of our non-theme variables
-
-// @import '../deprecate/index'; /// our deprecation warnings
-// @import '../namespace/index'; /// our namespace info
-
-/// ...
-
-/// Security theme.
-/// @type Map<String, Color>
-$security--theme: $carbon--theme--g90 !default;
-
-/// Carbon theme.
-/// @type Map<String, Color>
-$carbon--theme: $security--theme;
-
-/// Dark theme.
-/// @type String
-// $theme: dark !default;  /// OLD variable we use for deprecation purposes
-
-/// ...
-
-@include carbon--theme;
-
 /// If true, includes font face mixins in `_css--font-face.scss` depending on the `css--plex` feature flag
 /// @access public
 /// @type Bool
