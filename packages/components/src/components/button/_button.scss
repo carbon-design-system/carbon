@@ -182,11 +182,6 @@
     outline-offset: -4px;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:hover
-    svg {
-    fill: red;
-  }
-
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
     outline-color: $ui-02;
