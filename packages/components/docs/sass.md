@@ -162,6 +162,7 @@
   - [✅active-ui [variable]](#active-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
   - [✅hover-row [variable]](#hover-row-variable)
@@ -3693,6 +3694,7 @@ Define theme variables from a map of tokens
   $active-ui: map-get($theme, 'active-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
+  $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
   $hover-row: map-get($theme, 'hover-row') !global;
@@ -3754,6 +3756,7 @@ Define theme variables from a map of tokens
     --active-ui: #{map-get($theme, 'active-ui')};
     --selected-ui: #{map-get($theme, 'selected-ui')};
     --hover-selected-ui: #{map-get($theme, 'hover-selected-ui')};
+    --inverse-hover-ui: #{map-get($theme, 'inverse-hover-ui')};
     --hover-danger: #{map-get($theme, 'hover-danger')};
     --active-danger: #{map-get($theme, 'active-danger')};
     --hover-row: #{map-get($theme, 'hover-row')};
@@ -3860,6 +3863,7 @@ Define theme variables from a map of tokens
   - [active-ui [variable]](#active-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
   - [hover-row [variable]](#hover-row-variable)
@@ -3876,8 +3880,6 @@ Define theme variables from a map of tokens
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--theme [variable]](#carbon--theme-variable)
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--white [variable]
 
@@ -3931,6 +3933,7 @@ $carbon--theme--white: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -3956,8 +3959,6 @@ $carbon--theme--white: (
 - **Type**: `Map`
 - **Aliased**:
   - `carbon--theme`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g10 [variable]
 
@@ -4011,6 +4012,7 @@ $carbon--theme--g10: (
   hover-ui: #e5e5e5,
   active-ui: #bebebe,
   selected-ui: #dcdcdc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -4034,8 +4036,6 @@ $carbon--theme--g10: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--g90 [variable]
 
@@ -4089,6 +4089,7 @@ $carbon--theme--g90: (
   hover-ui: #4c4c4c,
   active-ui: #6f6f6f,
   selected-ui: #565656,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #656565,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -4165,6 +4166,7 @@ $carbon--theme--g100: (
   hover-ui: #353535,
   active-ui: #565656,
   selected-ui: #3d3d3d,
+  inverse-hover-ui: #e5e5e5,
   hover-selected-ui: #4c4c4c,
   hover-danger: #ba1b23,
   active-danger: #750e13,
@@ -4188,8 +4190,6 @@ $carbon--theme--g100: (
 
 - **Group**: [@carbon/themes](#carbonthemes)
 - **Type**: `Map`
-- **Used by**:
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅carbon--theme--v9 [variable]
 
@@ -4243,6 +4243,7 @@ $carbon--theme--v9: (
   hover-ui: #eef4fc,
   active-ui: #dfeafa,
   selected-ui: #eef4fc,
+  inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #dfeafa,
   hover-danger: #c70014,
   active-danger: #ad1625,
@@ -4285,7 +4286,6 @@ $carbon--theme: $carbon--theme--white;
 - **Alias**: `carbon--theme--white`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -5204,7 +5204,6 @@ $hover-secondary: map-get($carbon--theme, 'hover-secondary');
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ✅active-secondary [variable]
@@ -5364,6 +5363,23 @@ $hover-selected-ui: map-get($carbon--theme, 'hover-selected-ui');
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+
+### ✅inverse-hover-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$inverse-hover-ui: map-get($carbon--theme, 'inverse-hover-ui');
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `Color`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
 
 ### ✅hover-danger [variable]
 
@@ -14234,18 +14250,8 @@ Inline notification styles
       color: $inverse-link;
     }
 
-    @if $carbon--theme == $carbon--theme--white {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
-    } @else if $carbon--theme == $carbon--theme--g10 {
-      @include carbon--theme($carbon--theme--g100) {
-        &:hover {
-          background-color: $hover-secondary;
-        }
-      }
+    &:hover {
+      background-color: $inverse-hover-ui;
     }
   }
 
@@ -14301,7 +14307,6 @@ Inline notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [prefix [variable]](#prefix-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -14319,11 +14324,7 @@ Inline notification styles
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [inverse-link [variable]](#inverse-link-variable)
-  - [carbon--theme [variable]](#carbon--theme-variable)
-  - [carbon--theme--white [variable]](#carbon--theme--white-variable)
-  - [carbon--theme--g100 [variable]](#carbon--theme--g100-variable)
-  - [hover-secondary [variable]](#hover-secondary-variable)
-  - [carbon--theme--g10 [variable]](#carbon--theme--g10-variable)
+  - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [link-01 [variable]](#link-01-variable)
 
